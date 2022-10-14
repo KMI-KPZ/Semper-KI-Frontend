@@ -1,0 +1,44 @@
+@import "../../variables";
+
+.additive-headline {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: $textPrimary;
+  padding-bottom: 5px;
+}
+
+.additive-text-input {
+  background-color: $lightGrey;
+  border: 2px solid $darkGrey;
+  border-radius: $borderRadius;
+  height: 150px;
+  min-height: 100px;
+  color: $textPrimary;
+  padding: 10px;
+  font-size: 0.8em;
+  resize: vertical;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.additive-upload {
+  background-color: $lightGrey;
+  border: 2px solid $darkGrey;
+  border-radius: $borderRadius;
+  height: 80px;
+  color: $textPrimary;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .additive-upload-icon {
+    font-size: 3em;
+  }
+}

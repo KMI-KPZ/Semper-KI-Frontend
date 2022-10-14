@@ -1,0 +1,44 @@
+import "./ShoppingCart.scss";
+import {ShoppingCartItem} from "./ShoppingCartItem";
+import {ShoppingCartAddButton} from "./ShoppingCartAddButton";
+import {Process, ProcessState} from "../../Interface";
+import React from "react";
+import {useNavigate} from "react-router-dom";
+
+interface Props {
+    state:      ProcessState,
+    deleteProcess: (id:number)=>void,
+    addProcess: (process:Process)=>void,
+    selectProcess: (id:number)=>void,
+    setProgressState: (progressStateIndex:number)=>void
+}
+
+export const ShoppingCart = ({state,addProcess,deleteProcess,selectProcess,setProgressState}:Props) => {
+    const navigate = useNavigate();
+
+    const addShoppingCartItem = () => {
+        addProcess({id:state.nextID});
+        selectProcess(state.nextID);
+        setProgressState(0);
+        navigate("/Process/Model/Catalog");
+    }
+
+    const deleteShoppingCartItem = (index:number) => {
+       deleteProcess(index);
+    }
+
+    return(
+      <div className="ShoppingCart-Box" >
+        {state.processList.map((process:Process,index:number) => (
+        <ShoppingCartItem
+          setProgressState={setProgressState}
+          key={index}
+          deleteShoppingCartItem={deleteShoppingCartItem}
+          process={process}
+          isActiveProcess={process.id===state.activeProcess}
+          selectProcess={selectProcess}/>
+        ))}
+        <ShoppingCartAddButton addShoppingCartItem={addShoppingCartItem}/>
+      </div>
+    );
+}

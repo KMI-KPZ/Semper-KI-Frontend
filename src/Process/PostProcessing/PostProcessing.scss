@@ -1,0 +1,59 @@
+@import "../../variables";
+
+.post-processing-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: $containerGap;
+}
+
+.post-processing-option {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: $white;
+  border-radius: $borderRadius;
+  padding: 5px;
+  color:$textPrimary;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .post-processing-option-headline {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 5px;
+  }
+
+  .post-processing-option-checkbox {
+    height: 20px;
+    width: 20px;
+    margin: 5px;
+  }
+
+  .post-processing-option-select {
+    margin: 5px;
+    border: 2px solid $darkGrey;
+    border-radius: $borderRadius;
+    min-width: 25%;
+    padding: 5px 20px;
+    text-align: center;
+  }
+
+  .post-processing-option-number {
+    border: 2px solid $darkGrey;
+    width: 75px;
+    border-radius: $borderRadius;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+  }
+
+  .post-processing-option-text {
+    border: 2px solid $darkGrey;
+    width: 100%;
+    height: 72px;
+    border-radius: $borderRadius;
+    margin: 5px;
+    padding: 5px;
+    resize: vertical;
+  }
+}

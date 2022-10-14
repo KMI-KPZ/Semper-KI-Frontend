@@ -16,7 +16,7 @@ export const Overview = ({setProgressState,state}:Props) => {
         {state.processList.map((process:Process,index:number)=>(
             <OverviewCard process={process} key={index}/>
         ))}
-        <div className="overview-card"><AddIcon className="overview-add-button"/></div>
+        <div className="overview-card add-button"><AddIcon className="overview-add-button"/></div>
       </div>
     );
 }

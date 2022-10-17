@@ -14,12 +14,13 @@ interface Props {
 }
 
 interface State {
+  processExpanded:boolean,
   modelExpanded:boolean,
   manufacturerExpanded:boolean,
 }
 
 export const OverviewCard = ({processList,setProgressState,selectProcess}:Props) => {
-    const [state,setState] = useState<State>({modelExpanded:false,manufacturerExpanded:false});
+    const [state,setState] = useState<State>({modelExpanded:false,manufacturerExpanded:false,processExpanded:true});
 
     const getManufacturerCardBoxClassName =           ():string => (`overview-card-box ${state.manufacturerExpanded ? "expanded":""}`)
     const getManufacturerCardBoxExpandIconClassName = ():string => (`overview-card-box-icon ${state.manufacturerExpanded ? "expanded":""}`)
@@ -43,6 +44,11 @@ export const OverviewCard = ({processList,setProgressState,selectProcess}:Props)
       setProgressState(0);
     }
 
+    const onClickMinimize = (e: React.MouseEvent<SVGSVGElement, MouseEvent>):void => {
+      e.preventDefault();
+      setState(prevState => ({...prevState,processExpanded:!prevState.processExpanded}));
+    }
+
     return(
       <div className="overview-card">
         <div className="overview-card-header">
@@ -52,35 +58,38 @@ export const OverviewCard = ({processList,setProgressState,selectProcess}:Props)
             <div className="text">Status: in Bearbeitung</div>
           </div>
           <div className="overview-card-header right">
-            <MinimizeIcon  className="iconButton minimize" />
+            <MinimizeIcon  className="iconButton minimize" onClick={e=>onClickMinimize(e)}/>
             <DeleteForever className="iconButton close"  />
           </div>
         </div>
-        <div className={getModelCardBoxClassName()} >
-          <div className="overview-card-box-title">Modelle</div>
-          <div className="overview-model-cards" >
-          {processList.map((process:Process,index:number)=>(
-              <OverviewModelCard process={process} key={index} expanded={state.modelExpanded} onClick={onClickOverviewModelCard}/>
-          ))}
+        {state.processExpanded &&
+          <>
+          <div className={getModelCardBoxClassName()} >
+            <div className="overview-card-box-title">Modelle</div>
+            <div className="overview-model-cards" >
+            {processList.map((process:Process,index:number)=>(
+                <OverviewModelCard process={process} key={index} expanded={state.modelExpanded} onClick={onClickOverviewModelCard}/>
+            ))}
+            </div>
+            <div className="overview-card-box-icon-box" onClick={onClickModelCardExpandIcon}>
+              <ExpandMoreIcon className={getModelCardBoxExpandIconClassName()} />
+            </div>
           </div>
-          <div className="overview-card-box-icon-box" onClick={onClickModelCardExpandIcon}>
-            <ExpandMoreIcon className={getModelCardBoxExpandIconClassName()} />
+          <div className={getManufacturerCardBoxClassName()} >
+            <div className="overview-card-box-title">Hersteller</div>
+            <div className="overview-card-box-icon-box" onClick={onClickManufacturerCardExpandIcon}>
+              <ExpandMoreIcon className={getManufacturerCardBoxExpandIconClassName()} />
+            </div>
           </div>
-        </div>
-        <div className={getManufacturerCardBoxClassName()} >
-          <div className="overview-card-box-title">Hersteller</div>
-          <div className="overview-card-box-icon-box" onClick={onClickManufacturerCardExpandIcon}>
-            <ExpandMoreIcon className={getManufacturerCardBoxExpandIconClassName()} />
+          <div className="overview-card-row">
+            Rechnung:
           </div>
-        </div>
-        <div className="overview-card-row">
-          Rechnung:
-        </div>
-        <div className="overview-card-footer">
-          <div className="overview-card-footer-button">Bearbeiten</div>
-          <div className="overview-card-footer-button">Löschen</div>
-          <div className="overview-card-footer-button">Anfragen</div>
-        </div>
+          <div className="overview-card-footer">
+            <div className="overview-card-footer-button">Bearbeiten</div>
+            <div className="overview-card-footer-button">Löschen</div>
+            <div className="overview-card-footer-button">Anfragen</div>
+          </div>
+        </>}
       </div>
     );
 }

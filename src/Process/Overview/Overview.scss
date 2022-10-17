@@ -24,6 +24,18 @@
       border: 2px solid $darkGrey;
       border-radius: $borderRadius;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      &.expanded {
+
+      }
+
+      &:hover {
+        border: 2px solid $colorLight;
+      }
 
       .overview-card-box-title {
         padding: 5px;
@@ -34,13 +46,72 @@
         border: 2px solid $darkGrey;
         border-radius: $borderRadius;
       }
+
+      .overview-card-box-icon-box {
+        width: 100%;
+        padding: 5px;
+        border-radius: $borderRadius;
+        &:hover {
+          cursor: pointer;
+        }
+
+        .overview-card-box-icon {
+          height: 30px;
+          width: 30px;
+          &.expanded {
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+      .overview-model-cards {
+        margin-top: 30px;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: row;
+        column-gap: 1.25%;
+        row-gap: 20px;
+        width: 100%;
+        flex-wrap: wrap;
+
+        .overview-model-card {
+          width: 19%;
+          border: 2px solid $black;
+          display: flex;
+          border-radius: $borderRadius;
+          font-size: 0.8em;
+
+          &.expanded {
+            width: 100%;
+            flex-direction: row;
+            .model-card-img {
+              height: 100px;
+              border-radius:  $borderRadius 0 0 $borderRadius;
+              margin-right: 10px;
+            }
+          }
+          &.small {
+            width: 19%;
+            flex-direction: column;
+            .model-card-img {
+              width: 100%;
+              border-radius:  $borderRadius $borderRadius 0 0;
+            }
+          }
+
+          &:hover {
+            border: 2px solid $colorLight;
+            cursor:pointer;
+          }
+        }
+      }
     }
 
     .overview-card-row {
       margin: 10px 0;
       display: flex;
       flex-direction: row;
-      justify-content: start;
+      justify-content: flex-start;
       align-items: center;
     }
 

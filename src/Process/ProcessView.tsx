@@ -29,7 +29,7 @@ export const ProcessView = () => {
   const navigate = useNavigate();
 
   const setProgressState = (progressStateIndex:number):void => {
-    let link="/";
+    let link;
 
     switch (progressStateIndex) {
       case 0:   link="/Process/Model/Catalog";     break;
@@ -178,7 +178,7 @@ export const ProcessView = () => {
             </Route>
             <Route path="PostProcessing"  element={<PostProcessingView state={state} setProgressState={setProgressState} selectPostProcessing={selectPostProcessing}/> }/>
             <Route path="Additive"        element={<AdditiveView setProgressState={setProgressState} state={state} selectAdditive={selectAdditive}/>}/>
-            <Route path="Overview"        element={<Overview state={state} setProgressState={setProgressState}/>}/>
+            <Route path="Overview"        element={<Overview state={state} setProgressState={setProgressState} selectProcess={selectProcess}/>} />
             <Route path="*"               element={<Error/>}/>
           </Routes>
         </div>

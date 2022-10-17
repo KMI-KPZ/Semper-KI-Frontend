@@ -4,19 +4,50 @@ import {Process} from "../../Interface";
 import MinimizeIcon from "@mui/icons-material/Minimize";
 import {DeleteForever} from "@mui/icons-material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import React from "react";
+import React, {useState} from "react";
+import {OverviewModelCard} from "./OverviewModelCard";
 
 interface Props {
-  process:Process
+  processList:Process[],
+  setProgressState: (progressStateIndex:number)=>void,
+  selectProcess: (id:number)=>void
 }
 
-export const OverviewCard = ({process}:Props) => {
+interface State {
+  modelExpanded:boolean,
+  manufacturerExpanded:boolean,
+}
+
+export const OverviewCard = ({processList,setProgressState,selectProcess}:Props) => {
+    const [state,setState] = useState<State>({modelExpanded:false,manufacturerExpanded:false});
+
+    const getManufacturerCardBoxClassName =           ():string => (`overview-card-box ${state.manufacturerExpanded ? "expanded":""}`)
+    const getManufacturerCardBoxExpandIconClassName = ():string => (`overview-card-box-icon ${state.manufacturerExpanded ? "expanded":""}`)
+    const getModelCardBoxClassName =                  ():string => (`overview-card-box ${state.modelExpanded ? "expanded":""}` )
+    const getModelCardBoxExpandIconClassName =        ():string => (`overview-card-box-icon ${state.modelExpanded ? "expanded":""}`)
+
+
+    const onClickModelCardExpandIcon = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      e.preventDefault();
+      setState(prevState => ({...prevState,modelExpanded:!prevState.modelExpanded}));
+    }
+
+    const onClickManufacturerCardExpandIcon = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      e.preventDefault();
+      setState(prevState => ({...prevState,manufacturerExpanded:!prevState.manufacturerExpanded}));
+    }
+
+    const onClickOverviewModelCard = (e: React.MouseEvent<HTMLDivElement, MouseEvent>,id:number):void => {
+      e.preventDefault();
+      selectProcess(id);
+      setProgressState(0);
+    }
 
     return(
       <div className="overview-card">
         <div className="overview-card-header">
           <div className="overview-card-header left">
-            <div className="headline">Bestellung #{process.id}</div>
+            <div className="headline">Bestellung #0000000</div>
             <div className="text">Datum: DD.MM.YYYY</div>
             <div className="text">Status: in Bearbeitung</div>
           </div>
@@ -25,13 +56,22 @@ export const OverviewCard = ({process}:Props) => {
             <DeleteForever className="iconButton close"  />
           </div>
         </div>
-        <div className="overview-card-box">
+        <div className={getModelCardBoxClassName()} >
           <div className="overview-card-box-title">Modelle</div>
-          <ExpandMoreIcon/>
+          <div className="overview-model-cards" >
+          {processList.map((process:Process,index:number)=>(
+              <OverviewModelCard process={process} key={index} expanded={state.modelExpanded} onClick={onClickOverviewModelCard}/>
+          ))}
+          </div>
+          <div className="overview-card-box-icon-box" onClick={onClickModelCardExpandIcon}>
+            <ExpandMoreIcon className={getModelCardBoxExpandIconClassName()} />
+          </div>
         </div>
-        <div className="overview-card-box">
+        <div className={getManufacturerCardBoxClassName()} >
           <div className="overview-card-box-title">Hersteller</div>
-          <ExpandMoreIcon/>
+          <div className="overview-card-box-icon-box" onClick={onClickManufacturerCardExpandIcon}>
+            <ExpandMoreIcon className={getManufacturerCardBoxExpandIconClassName()} />
+          </div>
         </div>
         <div className="overview-card-row">
           Rechnung:

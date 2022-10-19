@@ -1,0 +1,15 @@
+{
+  "home": {
+    "header": "Etwas herstellen lassen",
+    "button": {
+      "search": "Suchen",
+      "search_placeholder": "Ich suche...",
+      "upload": "Hochladen"
+    }
+  },
+  "header": {
+    "about_us": "Über uns",
+    "login": "Anmelden"
+  },
+  "error": "Ups etwas ist schief gelaufen..."
+}

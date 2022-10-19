@@ -3,6 +3,7 @@ import React, {useRef} from "react";
 import "./Home.scss";
 import {UploadFile} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 
 export const Home = () => {
@@ -44,25 +45,27 @@ export const Home = () => {
       navigate("/Process/Model/Catalog");
     }
 
+    const {t} = useTranslation();
+
     return(
         <div className="container flex-container column">
             <div className="home-box">
-                <div className="home-header">Etwas herstellen lassen</div>
+                <div className="home-header">{t('home.header')}</div>
                 <div className="home-cards-container">
                   <div className="home-card light" onClick={handleClickSearch} onMouseDown={handleClickSearch} ref={searchCard}>
                     <input type="search"
-                           placeholder="Ich suche..."
+                           placeholder={t('home.button.search_placeholder')}
                            className="home-search"
                            ref={searchInput}
                            onFocus={e=>handleFocusSearch(e)}
                            onBlur={handleBlurSearch}
                            onChange={handleChangeSearch}
                     />
-                    <div className="home-card-text">Suchen</div>
+                    <div className="home-card-text">{t('home.button.search')}</div>
                   </div>
                   <div className="home-card dark" onClick={handleClickUpload}>
                     <UploadFile sx={{fontSize:"60px"}}/>
-                    <div className="home-card-text">Upload</div>
+                    <div className="home-card-text">{t('home.button.upload')}</div>
                   </div>
                 </div>
             </div>

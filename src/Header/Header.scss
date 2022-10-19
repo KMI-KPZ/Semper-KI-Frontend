@@ -38,10 +38,17 @@
         display: flex;
         align-items: center;
     }
+
+    .main-nav-select {
+        border-radius: $borderRadius;
+        border: 1px $white solid;
+        background-color: $darkGrey;
+        color: $textPrimaryInverted;
+    }
 }
 
 .main-nav a:hover,.brand-logo-name:hover {
-    color: #adadad;
+    color: $darkGrey;
 }
 
 header {

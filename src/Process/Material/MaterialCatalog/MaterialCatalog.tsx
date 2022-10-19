@@ -15,14 +15,14 @@ interface Props {
 
 export const MaterialCatalog = ({setProgressState,selectMaterial}:Props) => {
   const {data:materialList,isLoading:materialIsLoading,error:materialLoadingError} = useFetch<Material>({url:"http://localhost:3001/materialList"});
-  console.log(materialList,materialIsLoading,materialLoadingError);
   const [filter,setFilter] = useState<number>(0);
 
   const getFilterClassName = (index:number):string => {
     return `filter-text ${filter === index ? "active" : ""}`;
   }
 
-  const handleClickFilter = (index:number):void => {
+  const handleClickFilter = (e:React.MouseEvent<HTMLDivElement,MouseEvent>,index:number):void => {
+    e.preventDefault();
     setFilter(index);
   }
 
@@ -35,10 +35,10 @@ export const MaterialCatalog = ({setProgressState,selectMaterial}:Props) => {
           <div className="search button dark"><SearchIcon/></div>
         </div>
         <div className="filter">
-          <div className={getFilterClassName(0)} onClick={e=>handleClickFilter(0)}>Top Material</div>
-          <div className={getFilterClassName(1)} onClick={e=>handleClickFilter(1)}>Plastik</div>
-          <div className={getFilterClassName(2)} onClick={e=>handleClickFilter(2)}>Metall</div>
-          <div className={getFilterClassName(3)} onClick={e=>handleClickFilter(3)}>Keramik/Glaß</div>
+          <div className={getFilterClassName(0)} onClick={e=>handleClickFilter(e,0)}>Top Material</div>
+          <div className={getFilterClassName(1)} onClick={e=>handleClickFilter(e,1)}>Plastik</div>
+          <div className={getFilterClassName(2)} onClick={e=>handleClickFilter(e,2)}>Metall</div>
+          <div className={getFilterClassName(3)} onClick={e=>handleClickFilter(e,3)}>Keramik/Glaß</div>
         </div>
         {materialLoadingError &&
           <div>Fehler beim laden der Materialien

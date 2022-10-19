@@ -1,8 +1,10 @@
 import {useNavigate} from "react-router-dom";
 import "./variables.scss";
+import {useTranslation} from "react-i18next";
 
 export const Error = () => {
   const navigate = useNavigate();
+  const {t}=useTranslation();
 
   return (
     <div style={{
@@ -16,7 +18,7 @@ export const Error = () => {
       alignItems: "center",
       backgroundColor: "grey"
     }}>
-      <span>Ups da ist etwas schief gelaufen</span>
+      <span>{t('error')}</span>
       <a
         href="/"
         onClick={(e)=>{e.preventDefault();navigate("/");}}

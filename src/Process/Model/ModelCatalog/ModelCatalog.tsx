@@ -15,8 +15,6 @@ interface Props {
 export const ModelCatalog = ({selectModel,setProgressState}:Props) => {
   const {data:modelList,isLoading:modelIsLoading,error:modelLoadingError} = useFetch<Model>({url:"http://localhost:3001/modelList"});
 
-  console.log(modelList,modelIsLoading,modelLoadingError);
-
   return (
     <div className="process-content-container">
       <div className="catalog-container">

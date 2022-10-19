@@ -1,0 +1,17 @@
+{
+  "home": {
+    "header": "Have something made",
+    "button": {
+      "search": "Search",
+      "search_placeholder": "I'm looking for...",
+      "upload": "Upload"
+    }
+  },
+  "header": {
+    "about_us": "About Us",
+    "login": "Login"
+  },
+  "error": {
+    "message": "Ups something went wrong..."
+  }
+}

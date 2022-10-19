@@ -22,31 +22,31 @@ export const ShoppingCartItem = ({deleteShoppingCartItem,process,isActiveProcess
 
     const handleClickDelete = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
       e.stopPropagation();
-      deleteShoppingCartItem(process.id);
+      deleteShoppingCartItem(process.processId);
       setExpand(true);
     }
 
     const handleClickEdit = (e: React.MouseEvent<SVGSVGElement, MouseEvent>,progressStateIndex:number) => {
       e.stopPropagation();
-      selectProcess(process.id);
+      selectProcess(process.processId);
       setProgressState(progressStateIndex);
     }
 
     const handleClickProcess = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       e.stopPropagation();
-      selectProcess(process.id);
+      selectProcess(process.processId);
       setExpand(true);
     }
 
     const handleCLickProp = (e: React.MouseEvent<HTMLDivElement, MouseEvent>,progressStateIndex:number) => {
       e.stopPropagation();
-      selectProcess(process.id);
+      selectProcess(process.processId);
       setProgressState(progressStateIndex);
     }
 
     const handleClickNextAdd = (e: React.MouseEvent<HTMLDivElement, MouseEvent>,progressStateIndex:number) => {
       e.stopPropagation();
-      selectProcess(process.id);
+      selectProcess(process.processId);
       setProgressState(progressStateIndex);
       setExpand(true);
     }

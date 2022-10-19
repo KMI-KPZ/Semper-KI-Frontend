@@ -7,7 +7,7 @@ export interface ProcessState {
 }
 
 export interface Process {
-  id:number
+  processId:number
   model?:Model,
   material?:Material,
   manufacturer?:Manufacturer,
@@ -16,16 +16,19 @@ export interface Process {
 }
 
 export interface Model {
-  name?:string,
+  modelId?:number
+  name?:string
   file:File
 }
 
 export interface Material {
+  materialId?:number
   name:string
   propList?: string[]
 }
 
 export interface Manufacturer {
+  manufacturerId?:number
   name: string,
   propList?: string[]
   certificateList?:string[]
@@ -79,4 +82,20 @@ export interface Selection {
   value?:string,
   unit?:string,
   price?:number,
+}
+
+export interface Order {
+  orderId?: number
+  processList: Process[]
+  date: Date
+  orderState: string
+  bill?:  File
+}
+
+export interface User {
+  userId:number
+  name:string
+  username:string
+  email:string
+  password:string
 }

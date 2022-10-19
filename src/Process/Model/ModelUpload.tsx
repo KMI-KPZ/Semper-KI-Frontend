@@ -6,7 +6,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import React, { useRef, useState} from "react";
 import { Process, ProcessState} from "../../Interface";
-import {useNavigate} from "react-router-dom";
 import {getFileSizeAsString} from "../../utils";
 
 interface Props {
@@ -21,7 +20,6 @@ export const ModelUpload = ({state,addProcessList,setProgressState,selectProcess
     const [dragActive, setDragActive] = useState(false);
     const [fileList,setFileList] = useState<File[]>([]);
     const [error,setError] = useState<boolean>(false);
-    const navigate = useNavigate();
 
     const dataTypes:string[] = [
       ".STEP", ".STP", ".SLDPRT", ".STL", ".SAT", ".3DXML", ".3MF", ".PRT",
@@ -82,11 +80,11 @@ export const ModelUpload = ({state,addProcessList,setProgressState,selectProcess
     const handleClickNext = () => {
       let processList:Process[] = [];
       fileList.forEach((file:File,index:number)=>{
-        processList.push({id:(state.nextID+index),model:{file:file}});
+        processList.push({processId:(state.nextID+index),model:{file:file}});
       })
       if(processList.length>0){
         addProcessList(processList);
-        selectProcess(processList[0].id);
+        selectProcess(processList[0].processId);
         setProgressState(1);
       }else{
         showError();

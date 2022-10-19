@@ -17,7 +17,7 @@ export const ShoppingCart = ({state,addProcess,deleteProcess,selectProcess,setPr
     const navigate = useNavigate();
 
     const addShoppingCartItem = () => {
-        addProcess({id:state.nextID});
+        addProcess({processId:state.nextID});
         selectProcess(state.nextID);
         setProgressState(0);
         navigate("/Process/Model/Catalog");
@@ -35,7 +35,7 @@ export const ShoppingCart = ({state,addProcess,deleteProcess,selectProcess,setPr
           key={index}
           deleteShoppingCartItem={deleteShoppingCartItem}
           process={process}
-          isActiveProcess={process.id===state.activeProcess}
+          isActiveProcess={process.processId===state.activeProcess}
           selectProcess={selectProcess}/>
         ))}
         <ShoppingCartAddButton addShoppingCartItem={addShoppingCartItem}/>

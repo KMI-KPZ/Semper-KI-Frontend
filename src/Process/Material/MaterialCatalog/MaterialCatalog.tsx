@@ -6,14 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import React, {useState} from "react";
 import {Material} from "../../../Interface";
 import {MaterialCatalogCard} from "./MaterialCatalogCard";
-
-const testMaterialList:Material[] = [
-  {name:"Material 1",propList:["Eigenschaft 1","Eigenschaft 2"]},
-  {name:"Material 2",propList:["Eigenschaft 1","Eigenschaft 2"]},
-  {name:"Material 3",propList:["Eigenschaft 1","Eigenschaft 2"]},
-  {name:"Material 4",propList:["Eigenschaft 1","Eigenschaft 2"]},
-  {name:"Material 5",propList:["Eigenschaft 1","Eigenschaft 2"]}
-]
+import {useFetch} from "../../../Hooks/useFetch";
 
 interface Props {
   setProgressState: (progressStateIndex:number)=>void,
@@ -21,7 +14,8 @@ interface Props {
 }
 
 export const MaterialCatalog = ({setProgressState,selectMaterial}:Props) => {
-  const [materialList,setMaterialList] = useState<Material[]>(testMaterialList);
+  const {data:materialList,isLoading:materialIsLoading,error:materialLoadingError} = useFetch<Material>({url:"http://localhost:3001/materialList"});
+  console.log(materialList,materialIsLoading,materialLoadingError);
   const [filter,setFilter] = useState<number>(0);
 
   const getFilterClassName = (index:number):string => {
@@ -46,11 +40,17 @@ export const MaterialCatalog = ({setProgressState,selectMaterial}:Props) => {
           <div className={getFilterClassName(2)} onClick={e=>handleClickFilter(2)}>Metall</div>
           <div className={getFilterClassName(3)} onClick={e=>handleClickFilter(3)}>Keramik/Glaß</div>
         </div>
-        <div className="material-cards">
-          {materialList.map((material:Material,index:number)=>(
-            <MaterialCatalogCard setProgressState={setProgressState} selectMaterial={selectMaterial}  material={material} key={index}/>
-          ))}
-        </div>
+        {materialLoadingError &&
+          <div>Fehler beim laden der Materialien
+            <br/>Error: {materialLoadingError.message}
+          </div>}
+        {(materialIsLoading || !materialList) && !materialLoadingError && <div>Materialien laden...</div>}
+        {!materialIsLoading && materialList && !materialLoadingError &&
+          <div className="material-cards">
+            {materialList.slice(0,5).map((material:Material,index:number)=>(
+              <MaterialCatalogCard setProgressState={setProgressState} selectMaterial={selectMaterial}  material={material} key={index}/>
+            ))}
+          </div>}
       </div>
     </div>
   );

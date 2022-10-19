@@ -14,8 +14,25 @@ export const Header = () => {
       </a>
       <nav className="main-nav">
         <ul>
-          <li><a href="/about" onClick={(e)=>{e.preventDefault();navigate("/about");}}>About Us</a></li>
-          <li><a href="/login" onClick={(e)=>{e.preventDefault();navigate("/login");}}><PersonIcon className="icon" sx={{fontSize:40}}/>Login</a></li>
+          <li>
+            <a
+              href="/about"
+              onClick={(e)=>{e.preventDefault();navigate("/about");}}
+            >
+              About Us
+            </a>
+          </li>
+          <li>
+            <a
+              href="/login"
+              onClick={(e)=>{e.preventDefault();navigate("/login");}}
+            >
+              <PersonIcon
+                className="icon"
+                sx={{fontSize:40}}
+              />Login
+            </a>
+          </li>
         </ul>
       </nav>
     </header>

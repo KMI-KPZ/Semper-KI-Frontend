@@ -11,7 +11,7 @@ interface State {
 }
 
 function App() {
-  const [state,setState] = useState<State>({});
+  // const [state,setState] = useState<State>({});
 
   return (
     <div className="App">

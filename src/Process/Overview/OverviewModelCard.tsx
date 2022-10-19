@@ -14,7 +14,7 @@ export const OverviewModelCard = ({process,expanded,onClick}:Props) => {
   const getModelCardExpanded = ():JSX.Element => {
 
     return (
-      <div className="overview-model-card expanded" onClick={e=>onClick(e,process.id)}>
+      <div className="overview-model-card expanded" onClick={e=>onClick(e,process.processId)}>
         <img className="model-card-img" src={require("../../images/model_placeholder.png")} alt="Model"/>
         {process.model?process.model.file.name:"noch kein Model gewählt"}
       </div>
@@ -24,7 +24,7 @@ export const OverviewModelCard = ({process,expanded,onClick}:Props) => {
   const getModelCardSmall = ():JSX.Element => {
 
     return (
-      <div className="overview-model-card small" onClick={e=>onClick(e,process.id)}>
+      <div className="overview-model-card small" onClick={e=>onClick(e,process.processId)}>
         <img className="model-card-img" src={require("../../images/model_placeholder.png")} alt="Model"/>
         {process.model?process.model.file.name:"noch kein Model gewählt"}
       </div>

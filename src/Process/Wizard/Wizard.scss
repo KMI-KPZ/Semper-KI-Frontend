@@ -16,6 +16,7 @@
     background-color: $white;
     color: $textPrimary;
     border-radius: $borderRadius;
+    transition: filter 100ms;
 
     .wizard-card-line {
       height: 2px;
@@ -30,6 +31,7 @@
 
     &:hover {
       cursor: pointer;
+      filter: brightness(0.8);
     }
   }
 

@@ -7,14 +7,7 @@ import "../../../styles.scss";
 import "../../ProcessView.scss";
 import "../Manufacturer.scss";
 import {ManufacturerCatalogCard} from "./ManufacturerCatalogCard";
-
-const testManufacturerList:Manufacturer[] = [
-  {name:"Hersteller 1",propList:["Eigenschaft 1","Eigenschaft 2"],certificateList:["Zertifikat 1","Zertifikat 2"]},
-  {name:"Hersteller 2",propList:["Eigenschaft 1","Eigenschaft 2"],certificateList:["Zertifikat 1","Zertifikat 2"]},
-  {name:"Hersteller 3",propList:["Eigenschaft 1","Eigenschaft 2"],certificateList:["Zertifikat 1","Zertifikat 2"]},
-  {name:"Hersteller 4",propList:["Eigenschaft 1","Eigenschaft 2"],certificateList:["Zertifikat 1","Zertifikat 2"]},
-  {name:"Hersteller 5",propList:["Eigenschaft 1","Eigenschaft 2"],certificateList:["Zertifikat 1","Zertifikat 2"]}
-]
+import {useFetch} from "../../../Hooks/useFetch";
 
 interface Props {
   setProgressState: (progressStateIndex:number)=>void,
@@ -22,6 +15,7 @@ interface Props {
 }
 
 export const ManufacturerCatalog = ({setProgressState,selectManufacturer}:Props) => {
+  const {data:manufacturerList,isLoading:manufacturerIsLoading,error:manufacturerLoadingError} = useFetch<Manufacturer>({url:"http://localhost:3001/manufacturerList"});
   const [filter,setFilter] = useState<number>(0);
 
   const getFilterClassName = (index:number):string => {
@@ -46,11 +40,17 @@ export const ManufacturerCatalog = ({setProgressState,selectManufacturer}:Props)
           <div className={getFilterClassName(2)} onClick={e=>handleClickFilter(2)}>Geschwindigkeit</div>
           <div className={getFilterClassName(3)} onClick={e=>handleClickFilter(3)}>Preis</div>
         </div>
-        <div className="manufacturer-cards">
-          {testManufacturerList.map((manufacturer:Manufacturer,index:number)=>(
-            <ManufacturerCatalogCard key={index} manufacturer={manufacturer} setProgressState={setProgressState} selectManufacturer={selectManufacturer}/>
-          ))}
-        </div>
+        {manufacturerLoadingError &&
+          <div>Fehler beim laden der Hersteller
+            <br/>Error: {manufacturerLoadingError.message}
+          </div>}
+        {(manufacturerIsLoading || !manufacturerList) && !manufacturerLoadingError && <div>Hersteller laden...</div>}
+        {!manufacturerIsLoading && manufacturerList && !manufacturerLoadingError &&
+          <div className="manufacturer-cards">
+            {manufacturerList.map((manufacturer:Manufacturer,index:number)=>(
+              <ManufacturerCatalogCard key={index} manufacturer={manufacturer} setProgressState={setProgressState} selectManufacturer={selectManufacturer}/>
+            ))}
+          </div>}
       </div>
     </div>
   );

@@ -1,18 +1,11 @@
 import "../../../styles.scss";
 import "../../ProcessView.scss"
-import React, {useState} from "react";
+import React from "react";
 import SettingsIcon from '@mui/icons-material/Settings';
 import SearchIcon from '@mui/icons-material/Search';
 import {Model} from "../../../Interface";
 import {ModelCatalogCard} from "./ModelCatalogCard";
-
-const testModelList:Model[] = [
-  {file:new File([],"text0.stl")},
-  {file:new File([],"text1.stl")},
-  {file:new File([],"text2.stl")},
-  {file:new File([],"text3.stl")},
-  {file:new File([],"text4.stl")}
-]
+import {useFetch} from "../../../Hooks/useFetch";
 
 interface Props {
   selectModel: (model:Model)=>void,
@@ -20,7 +13,9 @@ interface Props {
 }
 
 export const ModelCatalog = ({selectModel,setProgressState}:Props) => {
-  const [modelList,setModelList] = useState<Model[]>(testModelList);
+  const {data:modelList,isLoading:modelIsLoading,error:modelLoadingError} = useFetch<Model>({url:"http://localhost:3001/modelList"});
+
+  console.log(modelList,modelIsLoading,modelLoadingError);
 
   return (
     <div className="process-content-container">
@@ -30,11 +25,18 @@ export const ModelCatalog = ({selectModel,setProgressState}:Props) => {
           <div className="settings button light"><SettingsIcon/></div>
           <div className="search button dark"><SearchIcon/></div>
         </div>
-        <div className="model-cards">
-          {modelList.map((model:Model,index:number)=>(
+        {modelLoadingError &&
+          <div>Fehler beim laden der Modelle
+            <br/>Error: {modelLoadingError.message}
+          </div>
+        }
+        {(modelIsLoading || !modelList) && !modelLoadingError && <div>Modelle laden...</div>}
+        {!modelIsLoading && modelList && !modelLoadingError &&
+          <div className="model-cards">
+          {modelList.slice(0,6).map((model:Model,index:number)=>(
             <ModelCatalogCard setProgressState={setProgressState} selectModel={selectModel} model={model} key={index}/>
           ))}
-        </div>
+        </div>}
       </div>
     </div>
   );

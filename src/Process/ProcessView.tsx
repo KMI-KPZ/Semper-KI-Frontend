@@ -14,7 +14,7 @@ import {
   Process,
   ProcessState,
   Manufacturer,
-  Additive
+  Additive,
 } from "../Interface";
 import {MaterialCatalog} from "./Material/MaterialCatalog/MaterialCatalog";
 import {PostProcessingView} from "./PostProcessing/PostProcessingView";
@@ -25,8 +25,13 @@ import {ManufacturerCatalog} from "./Manufacturer/ManufacturerCatalog/Manufactur
 import {Overview} from "./Overview/Overview";
 
 export const ProcessView = () => {
-  const [state,setState] = useState<ProcessState>({progressState:0,activeProcess:0,processList:[{id:0}],nextID:1});
+  const [state,setState] = useState<ProcessState>({progressState:0,activeProcess:0,processList:[{processId:0}],nextID:1});
   const navigate = useNavigate();
+
+  // const {data:user,isLoading:userIsLoading,error:userLoadingError} = useFetch<User>({url:"http://localhost:3001/userList"});
+  // const {data:order,isLoading:orderIsLoading,error:orderLoadingError} = useFetch<Order>({url:"http://localhost:3001/orderList"});
+
+
 
   const setProgressState = (progressStateIndex:number):void => {
     let link;
@@ -51,7 +56,7 @@ export const ProcessView = () => {
       ...prevState,
       processList:[...prevState.processList,process],
       nextID:(state.nextID+1),
-      activeProcess:(prevState.processList.length === 0)?(process.id):(prevState.activeProcess)
+      activeProcess:(prevState.processList.length === 0)?(process.processId):(prevState.activeProcess)
     }));
   }
 
@@ -61,7 +66,7 @@ export const ProcessView = () => {
       ...prevState,
       processList:[...prevState.processList,...processList],
       nextID:(state.nextID+processList.length),
-      activeProcess:(prevState.processList.length === 0)?(processList[0].id):(prevState.activeProcess),
+      activeProcess:(prevState.processList.length === 0)?(processList[0].processId):(prevState.activeProcess),
     }));
   }
 
@@ -70,14 +75,13 @@ export const ProcessView = () => {
     setState(prevState => ({
       ...prevState,
       activeProcess: prevState.activeProcess !== processId ? prevState.activeProcess :
-        (prevState.processList.filter((process:Process)=>(process.id!==processId)).length === 0 ? 0 : prevState.processList.filter((process:Process)=>(process.id!==processId))[0].id),
-      processList:prevState.processList.filter((process:Process)=>(process.id!==processId))
+        (prevState.processList.filter((process:Process)=>(process.processId!==processId)).length === 0 ? 0 : prevState.processList.filter((process:Process)=>(process.processId!==processId))[0].processId),
+      processList:prevState.processList.filter((process:Process)=>(process.processId!==processId))
     }));
   }
 
   const selectProcess = (processId:number):void => {
     console.log("select Process",processId);
-    console.log("select 2",state.processList);
     setState(prevState => ({
       ...prevState,
       activeProcess:processId
@@ -85,19 +89,19 @@ export const ProcessView = () => {
   }
 
   const getActiveProcess = ():Process|undefined => {
-    return state.processList.filter((process:Process)=>(process.id===state.activeProcess))[0];
+    return state.processList.filter((process:Process)=>(process.processId===state.activeProcess))[0];
   }
 
   const selectModel = (model:Model):void => {
     setState(prevState => ({
       ...prevState,
       processList: [
-        ...prevState.processList.filter((process:Process)=>(process.id<prevState.activeProcess)),
+        ...prevState.processList.filter((process:Process)=>(process.processId<prevState.activeProcess)),
         {
-          ...prevState.processList.filter((process:Process)=>(process.id===prevState.activeProcess))[0],
+          ...prevState.processList.filter((process:Process)=>(process.processId===prevState.activeProcess))[0],
           model:model
         },
-        ...prevState.processList.filter((process:Process)=>(process.id>prevState.activeProcess))
+        ...prevState.processList.filter((process:Process)=>(process.processId>prevState.activeProcess))
       ]
     }))
   }
@@ -106,12 +110,12 @@ export const ProcessView = () => {
     setState(prevState => ({
       ...prevState,
       processList: [
-        ...prevState.processList.filter((process:Process)=>(process.id<prevState.activeProcess)),
+        ...prevState.processList.filter((process:Process)=>(process.processId<prevState.activeProcess)),
         {
-          ...prevState.processList.filter((process:Process)=>(process.id===prevState.activeProcess))[0],
+          ...prevState.processList.filter((process:Process)=>(process.processId===prevState.activeProcess))[0],
           material:material
         },
-        ...prevState.processList.filter((process:Process)=>(process.id>prevState.activeProcess))
+        ...prevState.processList.filter((process:Process)=>(process.processId>prevState.activeProcess))
       ]
     }))
   }
@@ -120,12 +124,12 @@ export const ProcessView = () => {
     setState(prevState => ({
       ...prevState,
       processList: [
-        ...prevState.processList.filter((process:Process)=>(process.id<prevState.activeProcess)),
+        ...prevState.processList.filter((process:Process)=>(process.processId<prevState.activeProcess)),
         {
-          ...prevState.processList.filter((process:Process)=>(process.id===prevState.activeProcess))[0],
+          ...prevState.processList.filter((process:Process)=>(process.processId===prevState.activeProcess))[0],
           manufacturer:manufacturer
         },
-        ...prevState.processList.filter((process:Process)=>(process.id>prevState.activeProcess))
+        ...prevState.processList.filter((process:Process)=>(process.processId>prevState.activeProcess))
       ]
     }))
   }
@@ -134,12 +138,12 @@ export const ProcessView = () => {
     setState(prevState => ({
       ...prevState,
       processList: [
-        ...prevState.processList.filter((process:Process)=>(process.id<prevState.activeProcess)),
+        ...prevState.processList.filter((process:Process)=>(process.processId<prevState.activeProcess)),
         {
-          ...prevState.processList.filter((process:Process)=>(process.id===prevState.activeProcess))[0],
+          ...prevState.processList.filter((process:Process)=>(process.processId===prevState.activeProcess))[0],
           postProcessing:postProcessing
         },
-        ...prevState.processList.filter((process:Process)=>(process.id>prevState.activeProcess))
+        ...prevState.processList.filter((process:Process)=>(process.processId>prevState.activeProcess))
       ]
     }))
   }
@@ -148,12 +152,12 @@ export const ProcessView = () => {
     setState(prevState => ({
       ...prevState,
       processList: [
-        ...prevState.processList.filter((process:Process)=>(process.id<prevState.activeProcess)),
+        ...prevState.processList.filter((process:Process)=>(process.processId<prevState.activeProcess)),
         {
-          ...prevState.processList.filter((process:Process)=>(process.id===prevState.activeProcess))[0],
+          ...prevState.processList.filter((process:Process)=>(process.processId===prevState.activeProcess))[0],
           additive:additive
         },
-        ...prevState.processList.filter((process:Process)=>(process.id>prevState.activeProcess))
+        ...prevState.processList.filter((process:Process)=>(process.processId>prevState.activeProcess))
       ]
     }))
   }

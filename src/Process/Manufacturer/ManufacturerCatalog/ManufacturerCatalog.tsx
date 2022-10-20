@@ -8,6 +8,7 @@ import "../../ProcessView.scss";
 import "../Manufacturer.scss";
 import {ManufacturerCatalogCard} from "./ManufacturerCatalogCard";
 import {useFetch} from "../../../Hooks/useFetch";
+import {useTranslation} from "react-i18next";
 
 interface Props {
   setProgressState: (progressStateIndex:number)=>void,
@@ -15,6 +16,7 @@ interface Props {
 }
 
 export const ManufacturerCatalog = ({setProgressState,selectManufacturer}:Props) => {
+  const {t} = useTranslation();
   const {data:manufacturerList,isLoading:manufacturerIsLoading,error:manufacturerLoadingError} = useFetch<Manufacturer>({url:"http://localhost:3001/manufacturerList"});
   const [filter,setFilter] = useState<number>(0);
 
@@ -22,7 +24,8 @@ export const ManufacturerCatalog = ({setProgressState,selectManufacturer}:Props)
     return `filter-text ${filter === index ? "active" : ""}`;
   }
 
-  const handleClickFilter = (index:number):void => {
+  const handleClickFilter = (e:React.MouseEvent<HTMLDivElement,MouseEvent>,index:number):void => {
+    e.preventDefault();
     setFilter(index);
   }
 
@@ -30,21 +33,21 @@ export const ManufacturerCatalog = ({setProgressState,selectManufacturer}:Props)
     <div className="process-content-container">
       <div className="catalog-container">
         <div className="user-input">
-          <input type="text" className="input-field" placeholder="Herstellen lassen bei..."/>
+          <input type="text" className="input-field" placeholder={t('manufacturer.catalog.search-placeholder')}/>
           <div className="settings button light"><SettingsIcon/></div>
           <div className="search button dark"><SearchIcon/></div>
         </div>
         <div className="filter">
-          <div className={getFilterClassName(0)} onClick={e=>handleClickFilter(0)}>Top Hersteller</div>
-          <div className={getFilterClassName(1)} onClick={e=>handleClickFilter(1)}>Entfernung</div>
-          <div className={getFilterClassName(2)} onClick={e=>handleClickFilter(2)}>Geschwindigkeit</div>
-          <div className={getFilterClassName(3)} onClick={e=>handleClickFilter(3)}>Preis</div>
+          <div className={getFilterClassName(0)} onClick={e=>handleClickFilter(e,0)}>{t('manufacturer.catalog.filter.top-manufacturer')}</div>
+          <div className={getFilterClassName(1)} onClick={e=>handleClickFilter(e,1)}>{t('manufacturer.catalog.filter.distance')}</div>
+          <div className={getFilterClassName(2)} onClick={e=>handleClickFilter(e,2)}>{t('manufacturer.catalog.filter.time')}</div>
+          <div className={getFilterClassName(3)} onClick={e=>handleClickFilter(e,3)}>{t('manufacturer.catalog.filter.price')}</div>
         </div>
         {manufacturerLoadingError &&
-          <div>Fehler beim laden der Hersteller
-            <br/>Error: {manufacturerLoadingError.message}
+          <div>{t('manufacturer.catalog.loading-error')}
+            <br/>{t('manufacturer.catalog.error-name')}: {manufacturerLoadingError.message}
           </div>}
-        {(manufacturerIsLoading || !manufacturerList) && !manufacturerLoadingError && <div>Hersteller laden...</div>}
+        {(manufacturerIsLoading || !manufacturerList) && !manufacturerLoadingError && <div>{t('manufacturer.catalog.loading-manufacturer')}</div>}
         {!manufacturerIsLoading && manufacturerList && !manufacturerLoadingError &&
           <div className="manufacturer-cards">
             {manufacturerList.map((manufacturer:Manufacturer,index:number)=>(

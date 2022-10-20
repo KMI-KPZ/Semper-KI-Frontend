@@ -2,6 +2,7 @@ import "../ProcessView.scss";
 import "./Overview.scss";
 import {Process} from "../../Interface";
 import React from "react";
+import {useTranslation} from "react-i18next";
 
 interface Props {
   expanded:boolean
@@ -10,13 +11,14 @@ interface Props {
 }
 
 export const OverviewModelCard = ({process,expanded,onClick}:Props) => {
+  const {t} = useTranslation();
 
   const getModelCardExpanded = ():JSX.Element => {
 
     return (
       <div className="overview-model-card expanded" onClick={e=>onClick(e,process.processId)}>
         <img className="model-card-img" src={require("../../images/model_placeholder.png")} alt="Model"/>
-        {process.model?process.model.file.name:"noch kein Model gewählt"}
+        {process.model?process.model.file.name:t('overview.models.no-model')}
       </div>
     );
   }
@@ -26,7 +28,7 @@ export const OverviewModelCard = ({process,expanded,onClick}:Props) => {
     return (
       <div className="overview-model-card small" onClick={e=>onClick(e,process.processId)}>
         <img className="model-card-img" src={require("../../images/model_placeholder.png")} alt="Model"/>
-        {process.model?process.model.file.name:"noch kein Model gewählt"}
+        {process.model?process.model.file.name:t('overview.models.no-model')}
       </div>
     );
   }

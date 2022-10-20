@@ -2,6 +2,7 @@ import "../../ProcessView.scss"
 import "../Material.scss"
 import {Material} from "../../../Interface";
 import React from "react";
+import {useTranslation} from "react-i18next";
 
 interface Props {
   material:Material
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export const MaterialCatalogCard = ({material,setProgressState,selectMaterial}:Props) => {
+    const {t} = useTranslation();
 
     const handleAddClick = () => {
       selectMaterial(material);
@@ -28,9 +30,9 @@ export const MaterialCatalogCard = ({material,setProgressState,selectMaterial}:P
           ))}
         </div>
         <div className="material-card-column">
-          <div className="material-card-text">Preis: <b>$$$</b></div>
+          <div className="material-card-text">{t('material.catalog.card.price')}: <b>$$$</b></div>
         </div>
-        <div className="material-card-button dark" onClick={handleAddClick}>hinzufügen</div>
+        <div className="material-card-button dark" onClick={handleAddClick}>{t('material.catalog.card.add')}</div>
       </div>
     );
 }

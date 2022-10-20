@@ -3,15 +3,118 @@
     "header": "Have something made",
     "button": {
       "search": "Search",
-      "search_placeholder": "I'm looking for...",
+      "search-placeholder": "I'm looking for...",
       "upload": "Upload"
     }
   },
   "header": {
-    "about_us": "About Us",
+    "about-us": "About Us",
     "login": "Login"
   },
-  "error": {
-    "message": "Ups something went wrong..."
+  "error":  "Ups something went wrong...",
+  "wizard": {
+    "model": "Model",
+    "material-procedure": "Material | Procedure",
+    "manufacturer": "Manufacturer",
+    "post-processing": "Post Processing",
+    "additive": "Additive",
+    "overview": "Overview"
+  },
+  "shopping-cart": {
+    "item": {
+      "model": "Model",
+      "material-procedure": "Material | Procedure",
+      "manufacturer": "Manufacturer",
+      "post-processing": "Post Processing",
+      "additive": "Additive",
+      "add": "Add {{buttonName}}"
+    }
+  },
+  "model": {
+    "catalog": {
+      "search-placeholder": "I'm looking for...",
+      "loading-error": "Error loading models",
+      "error-name": "Error: ",
+      "loading-models": "Loading Models..."
+    },
+    "upload": {
+      "headline": "Upload Model",
+      "error": "Please upload one of the following file types .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF",
+      "card": {
+        "headline": "Upload model by drag & drop",
+        "text": "( .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF)"
+      },
+      "next": "Next"
+    }
+  },
+  "material": {
+    "catalog": {
+      "search-placeholder": "Manufacture from...",
+      "loading-error": "Error loading materials",
+      "error-name": "Error: ",
+      "loading-material": "Loading Materials...",
+      "filter": {
+        "top-materials": "Top-Materials",
+        "plastic": "Plastic",
+        "metal": "Metal",
+        "keramik-glass": "Ceramic/Glass"
+      },
+      "card": {
+        "price": "Price",
+        "add": "Add"
+      }
+    }
+  },
+  "manufacturer": {
+    "catalog": {
+      "search-placeholder": "Have it made at...",
+      "loading-error": "Error loading manufacturer",
+      "error-name": "Error: ",
+      "loading-manufacturer": "Loading manufacturer...",
+      "filter": {
+        "top-manufacturer": "Top-Manufacturer",
+        "distance": "Distance",
+        "time": "Time",
+        "price": "Price"
+      },
+      "card": {
+        "distance": "Distance",
+        "production-time": "Production-Time",
+        "deliver-time": "Deliver-Time",
+        "total-time": "Total Time",
+        "price": "Price",
+        "add": "Add"
+      }
+    }
+  },
+  "post-processing": {
+    "next": "Next",
+    "option": {
+      "text-area-placeholder": "Description to the "
+    }
+  },
+  "additive": {
+    "upload-headline": "Additional Files (technical Drawing, etc.)",
+    "additional-text": {
+      "headline": "Additional Comments",
+      "placeholder": "additional text..."
+    },
+    "next": "Next"
+  },
+  "overview": {
+    "order": "Order",
+    "date": "Date",
+    "state": "State",
+    "models": {
+      "headline": "Models",
+      "no-model": "no model selected yet"
+    },
+    "manufacturer": "Manufacturer",
+    "bill": "Bill",
+    "button": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "request": "Request"
+    }
   }
 }

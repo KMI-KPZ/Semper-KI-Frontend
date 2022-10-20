@@ -3,6 +3,7 @@ import "./PostProcessing.scss";
 import React from "react";
 import {PostProcessing, ProcessState, Option} from "../../Interface";
 import {PostProcessingOption} from "./PostProcessingOption";
+import {useTranslation} from "react-i18next";
 
 interface Props {
   state:ProcessState,
@@ -65,6 +66,7 @@ const testData:Option[] = [
 ]
 
 export const PostProcessingView = ({setProgressState,state,selectPostProcessing}:Props) => {
+  const {t} = useTranslation();
 
     const handleClickNext = () => {
       setProgressState(4);
@@ -76,7 +78,7 @@ export const PostProcessingView = ({setProgressState,state,selectPostProcessing}
           {testData.map((option:Option,index:number)=>(
             <PostProcessingOption option={option} key={index}/>
           ))}
-          <div className="next-button dark" onClick={handleClickNext}>Weiter</div>
+          <div className="next-button dark" onClick={handleClickNext}>{t('post-processing.next')}</div>
         </div>
       </div>
     );

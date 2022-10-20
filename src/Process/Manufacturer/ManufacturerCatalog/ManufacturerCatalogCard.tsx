@@ -2,6 +2,7 @@ import "../../ProcessView.scss"
 import "../Manufacturer.scss"
 import {Manufacturer} from "../../../Interface";
 import React from "react";
+import {useTranslation} from "react-i18next";
 
 interface Props {
   manufacturer:Manufacturer
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export const ManufacturerCatalogCard = ({manufacturer,setProgressState,selectManufacturer}:Props) => {
+  const {t} = useTranslation();
 
   const handleAddClick = () => {
     selectManufacturer(manufacturer);
@@ -33,19 +35,19 @@ export const ManufacturerCatalogCard = ({manufacturer,setProgressState,selectMan
         </div>
       </div>
       <div className="manufacturer-card-column">
-        <div className="manufacturer-card-text">Entfernung</div>
+        <div className="manufacturer-card-text">{t('manufacturer.catalog.card.distance')}</div>
         <div className="manufacturer-card-text-secondary">{manufacturer.distance?manufacturer.distance:"000"} KM</div>
-        <div className="manufacturer-card-text">Produktionszeit</div>
+        <div className="manufacturer-card-text">{t('manufacturer.catalog.card.production-time')}</div>
         <div className="manufacturer-card-text-secondary">{manufacturer.productionTime?manufacturer.productionTime:"000"} Tage</div>
-        <div className="manufacturer-card-text">Lieferzeit</div>
+        <div className="manufacturer-card-text">{t('manufacturer.catalog.card.deliver-time')}</div>
         <div className="manufacturer-card-text-secondary">{manufacturer.deliverTime?manufacturer.deliverTime:"000"} Tage</div>
-        <div className="manufacturer-card-text">Gesamtzeit</div>
+        <div className="manufacturer-card-text">{t('manufacturer.catalog.card.total-time')}</div>
         <div className="manufacturer-card-text-secondary">{(manufacturer.productionTime && manufacturer.deliverTime)?(manufacturer.productionTime + manufacturer.deliverTime):"000"} Tage</div>
       </div>
       <div className="manufacturer-card-column">
         <img className="firm-logo" src={require("../../../images/firm_logo_placeholder.png")} alt="Firm Logo"/>
-        <div className="manufacturer-card-text">Preis: <b>$$$</b></div>
-        <div className="manufacturer-card-button dark" onClick={handleAddClick}>hinzufügen</div>
+        <div className="manufacturer-card-text">{t('manufacturer.catalog.card.price')}: <b>$$$</b></div>
+        <div className="manufacturer-card-button dark" onClick={handleAddClick}>{t('manufacturer.catalog.card.add')}</div>
       </div>
     </div>
   );

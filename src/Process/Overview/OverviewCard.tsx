@@ -6,6 +6,7 @@ import {DeleteForever} from "@mui/icons-material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import React, {useState} from "react";
 import {OverviewModelCard} from "./OverviewModelCard";
+import {useTranslation} from "react-i18next";
 
 interface Props {
   processList:Process[],
@@ -20,6 +21,7 @@ interface State {
 }
 
 export const OverviewCard = ({processList,setProgressState,selectProcess}:Props) => {
+  const {t} = useTranslation();
     const [state,setState] = useState<State>({modelExpanded:false,manufacturerExpanded:false,processExpanded:true});
 
     const getManufacturerCardBoxClassName =           ():string => (`overview-card-box ${state.manufacturerExpanded ? "expanded":""}`)
@@ -53,9 +55,9 @@ export const OverviewCard = ({processList,setProgressState,selectProcess}:Props)
       <div className="overview-card">
         <div className="overview-card-header">
           <div className="overview-card-header left">
-            <div className="headline">Bestellung #0000000</div>
-            <div className="text">Datum: DD.MM.YYYY</div>
-            <div className="text">Status: in Bearbeitung</div>
+            <div className="headline">{t('overview.order')} #0000000</div>
+            <div className="text">{t('overview.date')}: DD.MM.YYYY</div>
+            <div className="text">{t('overview.state')}: in Bearbeitung</div>
           </div>
           <div className="overview-card-header right">
             <MinimizeIcon  className="iconButton minimize" onClick={e=>onClickMinimize(e)}/>
@@ -65,7 +67,7 @@ export const OverviewCard = ({processList,setProgressState,selectProcess}:Props)
         {state.processExpanded &&
           <>
           <div className={getModelCardBoxClassName()} >
-            <div className="overview-card-box-title">Modelle</div>
+            <div className="overview-card-box-title">{t('overview.models.headline')}</div>
             <div className="overview-model-cards" >
             {processList.map((process:Process,index:number)=>(
                 <OverviewModelCard process={process} key={index} expanded={state.modelExpanded} onClick={onClickOverviewModelCard}/>
@@ -76,18 +78,18 @@ export const OverviewCard = ({processList,setProgressState,selectProcess}:Props)
             </div>
           </div>
           <div className={getManufacturerCardBoxClassName()} >
-            <div className="overview-card-box-title">Hersteller</div>
+            <div className="overview-card-box-title">{t('overview.manufacturer')}</div>
             <div className="overview-card-box-icon-box" onClick={onClickManufacturerCardExpandIcon}>
               <ExpandMoreIcon className={getManufacturerCardBoxExpandIconClassName()} />
             </div>
           </div>
           <div className="overview-card-row">
-            Rechnung:
+            {t('overview.bill')}:
           </div>
           <div className="overview-card-footer">
-            <div className="overview-card-footer-button">Bearbeiten</div>
-            <div className="overview-card-footer-button">Löschen</div>
-            <div className="overview-card-footer-button">Anfragen</div>
+            <div className="overview-card-footer-button">{t('overview.button.edit')}</div>
+            <div className="overview-card-footer-button">{t('overview.button.delete')}</div>
+            <div className="overview-card-footer-button">{t('overview.button.request')}</div>
           </div>
         </>}
       </div>

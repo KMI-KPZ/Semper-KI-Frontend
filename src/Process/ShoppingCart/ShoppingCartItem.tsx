@@ -4,6 +4,7 @@ import {Process, Specification} from "../../Interface";
 import {DeleteForever} from "@mui/icons-material";
 import MinimizeIcon from '@mui/icons-material/Minimize';
 import EditIcon from '@mui/icons-material/Edit';
+import {useTranslation} from "react-i18next";
 
 interface Props {
   deleteShoppingCartItem: (index:number)=>void,
@@ -19,6 +20,7 @@ interface State {
 
 export const ShoppingCartItem = ({deleteShoppingCartItem,process,isActiveProcess,selectProcess,setProgressState}:Props) => {
     const [state,setState] = useState<State>({expanded:true});
+    const {t} = useTranslation();
 
     const handleClickDelete = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
       e.stopPropagation();
@@ -53,13 +55,13 @@ export const ShoppingCartItem = ({deleteShoppingCartItem,process,isActiveProcess
 
     const renderNextProcessAddButton = ():ReactNode => {
       let buttonName:string="",stateIndex:number=0;
-      if(!process.model)                {buttonName = "Modell";         stateIndex=0;}
-      else if(!process.material)        {buttonName = "Material";       stateIndex=1;}
-      else if(!process.manufacturer)    {buttonName = "Hersteller";     stateIndex=2;}
-      else if(!process.postProcessing)  {buttonName = "Nachbearbeitung";stateIndex=3;}
-      else if(!process.additive)        {buttonName = "Zusatz";         stateIndex=4;}
+      if(!process.model)                {buttonName = t('shopping-cart.item.model');         stateIndex=0;}
+      else if(!process.material)        {buttonName = t('shopping-cart.item.material-procedure');       stateIndex=1;}
+      else if(!process.manufacturer)    {buttonName = t('shopping-cart.item.manufacturer');     stateIndex=2;}
+      else if(!process.postProcessing)  {buttonName = t('shopping-cart.item.post-processing');stateIndex=3;}
+      else if(!process.additive)        {buttonName = t('shopping-cart.item.additive');         stateIndex=4;}
 
-      return <div className="addProgressButton" onClick={e=>handleClickNextAdd(e,stateIndex)}>{buttonName} Hinzufügen</div>
+      return <div className="addProgressButton" onClick={e=>handleClickNextAdd(e,stateIndex)}>{t('shopping-cart.item.add',{buttonName})}</div>
     }
 
     const handleHideClick = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
@@ -84,7 +86,7 @@ export const ShoppingCartItem = ({deleteShoppingCartItem,process,isActiveProcess
           <div className="Section">
             <div className="Header">
               <EditIcon className="iconButton" onClick={e=>handleClickEdit(e,0)}/>
-              Modell
+              {t('shopping-cart.item.model')}
             </div>
             <div className="Text" onClick={e=>handleCLickProp(e,0)}>{process.model.file.name}</div>
           </div>
@@ -94,7 +96,7 @@ export const ShoppingCartItem = ({deleteShoppingCartItem,process,isActiveProcess
             <div className="Divider"/>
             <div className="Header">
               <EditIcon className="iconButton" onClick={e=>handleClickEdit(e,1)}/>
-              Material/Verfahren
+              {t('shopping-cart.item.material-procedure')}
             </div>
             <div className="Text" onClick={e=>handleCLickProp(e,1)}>{process.material.name}</div>
           </div>
@@ -104,7 +106,7 @@ export const ShoppingCartItem = ({deleteShoppingCartItem,process,isActiveProcess
             <div className="Divider"/>
             <div className="Header">
               <EditIcon className="iconButton" onClick={e=>handleClickEdit(e,2)}/>
-              Hersteller
+              {t('shopping-cart.item.manufacturer')}
             </div>
             <div className="Text" onClick={e=>handleCLickProp(e,2)}>{process.manufacturer.name}</div>
           </div>
@@ -114,7 +116,7 @@ export const ShoppingCartItem = ({deleteShoppingCartItem,process,isActiveProcess
             <div className="Divider"/>
             <div className="Header">
               <EditIcon className="iconButton" onClick={e=>handleClickEdit(e,3)}/>
-              Nachbearbeitung
+              {t('shopping-cart.item.post-processing')}
             </div>
             {process.postProcessing && process.postProcessing.specificationList &&
               <div className="Text" onClick={e=>handleCLickProp(e,3)}>
@@ -130,7 +132,7 @@ export const ShoppingCartItem = ({deleteShoppingCartItem,process,isActiveProcess
             <div className="Divider"/>
             <div className="Header">
               <EditIcon className="iconButton" onClick={e=>handleClickEdit(e,4)}/>
-              Zusatz
+              {t('shopping-cart.item.additive')}
             </div>
             <div className="Text" onClick={e=>handleCLickProp(e,4)}>
               <div>{process.additive.file}</div>

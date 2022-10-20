@@ -18,6 +18,7 @@
 }
 
 .main-nav{
+    position: relative;
 
     ul {
         display: flex;
@@ -44,6 +45,24 @@
         border: 1px $white solid;
         background-color: $darkGrey;
         color: $textPrimaryInverted;
+    }
+
+    .main-nav-dropdown {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 50px;
+        left: -5px;
+        background-color: $grey;
+        border-radius: $borderRadius;
+        gap: 10px;
+        padding: 5px;
+
+        .main-nav-dropdown-item {
+            &:hover {
+                cursor: pointer;
+            }
+        }
     }
 }
 

@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import './Header.scss';
 import PersonIcon from '@mui/icons-material/Person';
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-
+import {ClickAwayListener} from "@mui/material";
 
 interface Language {
   code: string
@@ -27,11 +27,25 @@ const languages:Language[] = [
 export const Header = () => {
   const navigate = useNavigate();
   const {t,i18n} = useTranslation();
+  const [isMenuOpen,setIsMenuOpen] = useState<boolean>(false);
 
-  const onClickCountry = (e: React.MouseEvent<HTMLOptionElement, MouseEvent>,code:string) => {
-    console.log(code);
-    e.preventDefault();
+  const changeLanguage = (code:string)=> () => {
+    closeMenu();
     i18n.changeLanguage(code);
+  }
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  }
+
+  const openMenu = () => {
+    setIsMenuOpen(true);
+  }
+
+  const getFlagButtonClassName = ():string => {
+    let returnString:string="";
+    languages.forEach((language:Language)=>(language.code===i18n.language?returnString=language.country_code:null));
+    return returnString;
   }
 
   return (
@@ -43,19 +57,25 @@ export const Header = () => {
       <nav className="main-nav">
         <ul>
           <li>
-            <select className="main-nav-select">
-              {languages.map(({code,name,country_code}:Language)=>(
-                  <option value={code} key={country_code} onClick={e=>onClickCountry(e,code)}>{name}</option>
-                ))
-              }
-            </select>
+            <ClickAwayListener onClickAway={closeMenu}>
+              <div>
+                <div className={`fi fi-${getFlagButtonClassName()}`} onClick={openMenu}/>
+                {isMenuOpen &&
+                  <div className="main-nav-dropdown">
+                    {languages.map(({code,country_code}:Language)=> (
+                      <div className={`fi fi-${country_code} main-nav-dropdown-item`} key={country_code} onClick={changeLanguage(code)}/>
+                    ))}
+                  </div>
+                }
+              </div>
+            </ClickAwayListener>
           </li>
           <li>
             <a
               href="/about"
               onClick={(e)=>{e.preventDefault();navigate("/about");}}
             >
-              {t('header.about_us')}
+              {t('header.about-us')}
             </a>
           </li>
           <li>

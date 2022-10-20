@@ -54,7 +54,7 @@ export const Home = () => {
                 <div className="home-cards-container">
                   <div className="home-card light" onClick={handleClickSearch} onMouseDown={handleClickSearch} ref={searchCard}>
                     <input type="search"
-                           placeholder={t('home.button.search_placeholder')}
+                           placeholder={t('home.button.search-placeholder')}
                            className="home-search"
                            ref={searchInput}
                            onFocus={e=>handleFocusSearch(e)}

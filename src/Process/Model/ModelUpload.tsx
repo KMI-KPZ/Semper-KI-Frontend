@@ -7,6 +7,7 @@ import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import React, { useRef, useState} from "react";
 import { Process, ProcessState} from "../../Interface";
 import {getFileSizeAsString} from "../../utils";
+import {useTranslation} from "react-i18next";
 
 interface Props {
   state:ProcessState,
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export const ModelUpload = ({state,addProcessList,setProgressState,selectProcess}:Props) => {
+    const {t} = useTranslation();
     const hiddenFileInput = useRef<HTMLInputElement>(null);
     const [dragActive, setDragActive] = useState(false);
     const [fileList,setFileList] = useState<File[]>([]);
@@ -33,6 +35,7 @@ export const ModelUpload = ({state,addProcessList,setProgressState,selectProcess
     };
 
     const handleClick  = (e:  React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      e.preventDefault();
       if(hiddenFileInput.current) {
         hiddenFileInput.current.click();
       }
@@ -58,14 +61,14 @@ export const ModelUpload = ({state,addProcessList,setProgressState,selectProcess
       }
     };
 
-    const deleteFile = (index:number):void => {
+    const deleteFile = (e:React.MouseEvent<SVGSVGElement,MouseEvent>,index:number):void => {
       setFileList(prevState => (prevState.filter((file:File,fileIndex:number)=>(index!==fileIndex))));
     }
 
     const addFile = (inputFile:File|File[]):void => {
       let files:File[];
       files = (inputFile.constructor === Array) ? [...inputFile] : inputFile instanceof File ? [inputFile] : [];
-      files.forEach((file:File,index:number)=> {
+      files.forEach((file:File)=> {
         (new RegExp('(' + dataTypes.join('|').replace(/\./g, '\\.') + ')$')).test(file.name.toUpperCase())?setFileList(prevState => ([...prevState, file])):showError();
       })
     }
@@ -93,9 +96,8 @@ export const ModelUpload = ({state,addProcessList,setProgressState,selectProcess
 
     return(
       <div className="process-content-container">
-        <div className="headline dark">Modell hochladen</div>
-        {error && <div className="error">Bitte einen der folgenden Dateitypen hochladen .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,
-          .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF</div>}
+        <div className="headline dark">{t('model.upload.headline')}</div>
+        {error && <div className="error">{t('model.upload.error')}</div>}
         {fileList.map((file:File,index:number)=>(
           <div key={index} className="file normal">
             <div className="canvas">
@@ -104,7 +106,7 @@ export const ModelUpload = ({state,addProcessList,setProgressState,selectProcess
             {file.name}
             <br/>
             ( {getFileSizeAsString(file.size)} )
-            <DeleteIcon className="delete-button" onClick={e=>deleteFile(index)} sx={{fontSize:"40px"}}/>
+            <DeleteIcon className="delete-button" onClick={e=>deleteFile(e,index)} sx={{fontSize:"40px"}}/>
           </div>
         ))}
         <div className="upload normal" onClick={handleClick} onDragEnter={handleDrag} >
@@ -116,11 +118,10 @@ export const ModelUpload = ({state,addProcessList,setProgressState,selectProcess
           />
           { dragActive && <div className="drag-file-element" onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}></div> }
           <BackupIcon    sx={{ fontSize: 90 }}/>
-          <div className="header">Modell hochladen per Dran & Drop</div>
-          ( .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,
-            .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF)
+          <div className="header">{t('model.upload.card.headline')}</div>
+          {t('model.upload.card.text')}
         </div>
-        <div className="next-button dark" onClick={handleClickNext}>Weiter</div>
+        <div className="next-button dark" onClick={handleClickNext}>{t('model.upload.next')}</div>
       </div>
     );
 }

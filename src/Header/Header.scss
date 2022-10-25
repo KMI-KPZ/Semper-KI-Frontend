@@ -47,6 +47,12 @@
         color: $textPrimaryInverted;
     }
 
+    .main-nav-dropdown-icon {
+       &:hover {
+           cursor: pointer;
+       }
+    }
+
     .main-nav-dropdown {
         display: flex;
         flex-direction: column;
@@ -67,7 +73,7 @@
 }
 
 .main-nav a:hover,.brand-logo-name:hover {
-    color: $darkGrey;
+    filter: opacity(.8);
 }
 
 header {

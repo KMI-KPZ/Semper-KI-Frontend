@@ -57,9 +57,9 @@ export const Header = () => {
       <nav className="main-nav">
         <ul>
           <li>
-            <ClickAwayListener onClickAway={closeMenu}>
+            <ClickAwayListener  onClickAway={closeMenu}>
               <div>
-                <div className={`fi fi-${getFlagButtonClassName()}`} onClick={openMenu}/>
+                <div className={`fi fi-${getFlagButtonClassName()} main-nav-dropdown-icon`} onClick={openMenu}/>
                 {isMenuOpen &&
                   <div className="main-nav-dropdown">
                     {languages.map(({code,country_code}:Language)=> (

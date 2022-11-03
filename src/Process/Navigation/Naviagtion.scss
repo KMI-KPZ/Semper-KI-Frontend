@@ -1,4 +1,4 @@
-@import '../../variables';
+@import "../../variables";
 
 .navigation {
   display: flex;
@@ -18,7 +18,7 @@
   }
 
   .box:hover {
-    box-shadow: 0 0 2px 2px white
+    box-shadow: 0 0 2px 2px white;
     //box-shadow: 12px 0 15px -10px white, -12px 0 15px -10px white;
   }
 }

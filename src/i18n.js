@@ -1,7 +1,7 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import Backend from 'i18next-http-backend';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
+import Backend from "i18next-http-backend";
 
 i18n
   // i18next-http-backend
@@ -16,16 +16,16 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    supportedLngs: ['de','en'],
-    lng: 'de',
-    fallbackLng: 'de',
+    supportedLngs: ["de", "en"],
+    lng: "de",
+    fallbackLng: "de",
     detection: {
-      order: ['htmlTag', 'cookie', 'localStorage', 'path', 'subdomain'],
-      caches: ['cookie'],
+      order: ["htmlTag", "cookie", "localStorage", "path", "subdomain"],
+      caches: ["cookie"],
     },
     backend: {
-      loadPath: '/assets/locals/{{lng}}/translation.json',
-    }
+      loadPath: "/assets/locals/{{lng}}/translation.json",
+    },
   });
 
 export default i18n;

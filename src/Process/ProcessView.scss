@@ -60,7 +60,6 @@
       justify-content: space-between;
       align-items: center;
 
-
       .canvas {
         width: 100px;
         height: 100px;
@@ -108,7 +107,7 @@
         border-bottom: 5px solid $colorLight;
         margin-bottom: $containerGap;
 
-        .filter-text{
+        .filter-text {
           font-weight: 600;
           font-size: 15px;
           width: 21%;
@@ -117,12 +116,12 @@
           background-color: $lightGrey;
           color: $textPrimary;
 
-          &.active{
+          &.active {
             color: $textPrimaryInverted;
             background-color: $colorLight;
           }
 
-          &:hover{
+          &:hover {
             cursor: pointer;
             box-shadow: 0 0 0 2px $colorLight;
           }
@@ -202,7 +201,6 @@
           height: 35px;
           width: 35px;
           border: none;
-
         }
         .input-number {
           height: 35px;
@@ -254,10 +252,10 @@
     cursor: pointer;
     box-shadow: 0 0 0 2px $colorLight;
   }
-  &.close{
+  &.close {
     background-color: $colorLightComplementary;
   }
-  &.minimize{
+  &.minimize {
     background-color: $colorNormalComplementary;
   }
 }

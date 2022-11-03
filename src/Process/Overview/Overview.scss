@@ -30,7 +30,6 @@
       align-items: center;
 
       &.expanded {
-
       }
 
       &:hover {
@@ -40,8 +39,8 @@
       .overview-card-box-title {
         padding: 5px;
         position: absolute;
-        top:-20px;
-        left:30px;
+        top: -20px;
+        left: 30px;
         background-color: $lightGrey;
         border: 2px solid $darkGrey;
         border-radius: $borderRadius;
@@ -86,7 +85,7 @@
             flex-direction: row;
             .model-card-img {
               height: 100px;
-              border-radius:  $borderRadius 0 0 $borderRadius;
+              border-radius: $borderRadius 0 0 $borderRadius;
               margin-right: 10px;
             }
           }
@@ -95,13 +94,13 @@
             flex-direction: column;
             .model-card-img {
               width: 100%;
-              border-radius:  $borderRadius $borderRadius 0 0;
+              border-radius: $borderRadius $borderRadius 0 0;
             }
           }
 
           &:hover {
             border: 2px solid $colorLight;
-            cursor:pointer;
+            cursor: pointer;
           }
         }
       }
@@ -143,7 +142,6 @@
       &.left {
         width: 80%;
         justify-content: space-between;
-
       }
       &.right {
         justify-content: flex-end;
@@ -151,18 +149,14 @@
     }
 
     &.add-button {
-      .overview-add-button{
+      .overview-add-button {
         margin: 5px auto;
         font-size: 2em;
-
       }
       &:hover {
         cursor: pointer;
         box-shadow: 0 0 0 2px $colorLight;
       }
     }
-
   }
 }
-
-

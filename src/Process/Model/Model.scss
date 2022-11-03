@@ -18,8 +18,7 @@
   column-gap: 2%;
   row-gap: $containerGap;
 
-  .model-card{
-
+  .model-card {
     color: $textPrimary;
     width: 32%;
     display: flex;
@@ -65,11 +64,8 @@
           &.rotate {
             transform: rotate(180deg);
           }
-
         }
       }
     }
-
-
   }
 }

@@ -1,7 +1,7 @@
-@import '../variables';
+@import "../variables";
 
-.flex-container-card{
-  a{
+.flex-container-card {
+  a {
     height: 96px;
     color: inherit;
     margin-top: 20px;
@@ -32,18 +32,18 @@
 
 @media (max-width: 1300px) {
   .flex-container-card .card-text {
-      width: 100%;
-      font-size: 25px;
+    width: 100%;
+    font-size: 25px;
   }
 
   @media (max-width: 550px) {
-    .img-workflow,.flex-container-card .mui-icon {
+    .img-workflow,
+    .flex-container-card .mui-icon {
       display: none;
     }
 
     .flex-container-card .card-text {
       font-size: 20px;
     }
-
   }
 }

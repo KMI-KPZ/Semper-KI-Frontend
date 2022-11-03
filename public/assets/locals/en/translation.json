@@ -11,7 +11,7 @@
     "about-us": "About Us",
     "login": "Login"
   },
-  "error":  "Ups something went wrong...",
+  "error": "Ups something went wrong...",
   "wizard": {
     "model": "Model",
     "material-procedure": "Material | Procedure",

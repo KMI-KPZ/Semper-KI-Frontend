@@ -1,4 +1,4 @@
-@import '../variables';
+@import "../variables";
 
 .home-box {
   margin-top: 20px;
@@ -20,7 +20,6 @@
     width: 100%;
     justify-content: center;
 
-
     .home-card {
       margin: 20px;
       width: 100%;
@@ -32,14 +31,14 @@
 
       .home-search {
         $searchHeight: 35;
-        height: $searchHeight+px;
+        height: $searchHeight + px;
         width: 70%;
         padding-left: 10px;
-        border-radius: calc($searchHeight/2)+px;
+        border-radius: calc($searchHeight/2) + px;
         border: none;
 
         &:focus {
-          outline:none;
+          outline: none;
         }
       }
 

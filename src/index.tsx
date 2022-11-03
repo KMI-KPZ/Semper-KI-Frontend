@@ -1,13 +1,15 @@
-import React , {Suspense}from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import React, { Suspense } from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
 import "./index.scss";
-import {BrowserRouter} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import "./i18n";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 
-const root = ReactDOM.createRoot( document.getElementById('root') as HTMLElement );
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 
 root.render(
   <Suspense fallback="Loading...">
@@ -17,6 +19,4 @@ root.render(
       </BrowserRouter>
     </React.StrictMode>
   </Suspense>
-
 );
-

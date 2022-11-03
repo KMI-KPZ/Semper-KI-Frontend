@@ -1,70 +1,69 @@
-@import './variables.scss';
+@import "./variables.scss";
 .App {
-    padding-top: $heightHeader;
+  padding-top: $heightHeader;
 }
 
 .main-header {
-    background-color: $backgroundBodyBox;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 2;
-
+  background-color: $backgroundBodyBox;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
 }
 
-.flex-container{
-    display: flex;
+.flex-container {
+  display: flex;
 
-    &.column {
-        flex-direction: column;
-    }
-    &.row {
-        flex-direction: row;
-    }
+  &.column {
+    flex-direction: column;
+  }
+  &.row {
+    flex-direction: row;
+  }
 }
 
 .process-box {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    gap: $containerGap;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  gap: $containerGap;
 }
 
 .light {
-    background-color: $colorLight;
+  background-color: $colorLight;
 }
 .normal {
-    background-color: $colorNormal;
+  background-color: $colorNormal;
 }
 .dark {
-    background-color: $colorDark;
+  background-color: $colorDark;
 }
 .grey {
-    background-color: $grey;
+  background-color: $grey;
 }
 .button {
-    border-radius: $borderRadiusButton;
-    padding: 5px;
-    margin: 0 5px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  border-radius: $borderRadiusButton;
+  padding: 5px;
+  margin: 0 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 
-    &:hover {
-        cursor: pointer;
-        box-shadow: 0 0 0 2px $white;
-        width: 40%;
-    }
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 0 2px $white;
+    width: 40%;
+  }
 }
 
 .pointer:hover {
-    cursor: pointer;
+  cursor: pointer;
 }

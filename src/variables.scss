@@ -1,24 +1,28 @@
-$colorLight:  #43BBC2;
-$colorNormal: #2773BB;
-$colorDark:   #064EA1;
+$colorLight: #43bbc2;
+$colorNormal: #2773bb;
+$colorDark: #064ea1;
 
-$colorLightComplementary:  #BC443D;
-$colorNormalComplementary: #D88C44;
-$colorDarkComplementary:   #F9B15E;
+$colorLightComplementary: #bc443d;
+$colorNormalComplementary: #d88c44;
+$colorDarkComplementary: #f9b15e;
 
-$white:     #FFFFFF;
-$lightGrey: #DBDBDB;
-$grey:      #A3A3A3;
-$darkGrey:  #4D4D4D;//#626262;
-$black:     #000000;
+$white: #ffffff;
+$lightGrey: #dbdbdb;
+$grey: #a3a3a3;
+$darkGrey: #4d4d4d; //#626262;
+$black: #000000;
 
-$textPrimary:       $black;
-$textSecondary:     $darkGrey;
-$textPrimaryInverted:     $white;
-$textSecondaryInverted:   $lightGrey;
+$textPrimary: $black;
+$textSecondary: $darkGrey;
+$textPrimaryInverted: $white;
+$textSecondaryInverted: $lightGrey;
 
-$backgroundBody: linear-gradient(180deg, rgba(6, 78, 161, 0.65) 0%, rgba(249, 177, 94, 0.65) 100%);
-$backgroundBodyBox: #4D4D4D;
+$backgroundBody: linear-gradient(
+  180deg,
+  rgba(6, 78, 161, 0.65) 0%,
+  rgba(249, 177, 94, 0.65) 100%
+);
+$backgroundBodyBox: #4d4d4d;
 
 $heightHeader: 50px;
 $widthProcessContent: 75%;

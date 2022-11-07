@@ -9,6 +9,17 @@ import "../Manufacturer.scss";
 import { ManufacturerCatalogCard } from "./ManufacturerCatalogCard";
 import { useFetch } from "../../../Hooks/useFetch";
 import { useTranslation } from "react-i18next";
+import { isNumber } from "../../../utils";
+
+type ManufacturerAttribut =
+  | "manufacturerId"
+  | "name"
+  | "propList"
+  | "certificateList"
+  | "distance"
+  | "productionTime"
+  | "deliverTime"
+  | "location";
 
 interface Props {
   setProgressState: (progressStateIndex: number) => void;
@@ -37,6 +48,75 @@ export const ManufacturerCatalog = ({
   ): void => {
     e.preventDefault();
     setFilter(index);
+    console.log("handelClickFilter", index);
+  };
+
+  const sortManufacturers = (
+    manufacturerList: Manufacturer[],
+    attribut: ManufacturerAttribut
+  ): Manufacturer[] => {
+    return manufacturerList.sort((man1: Manufacturer, man2: Manufacturer) => {
+      if (!attribut || !man1 || !man2 || !man1[attribut] || !man2[attribut])
+        return 0;
+      if (
+        typeof man1[attribut] === "string" &&
+        typeof man1[attribut] === "string"
+      ) {
+        return man2[attribut]! > man1[attribut]! ? 1 : -1;
+      }
+      if (isNumber(man1[attribut]) && isNumber(man2[attribut])) {
+        return Number(man2[attribut]!) - Number(man1[attribut]!);
+      }
+      return 0;
+    });
+  };
+
+  const renderManufacturerList = () => {
+    let newManufacturerList: Manufacturer[] = manufacturerList.slice(0, 5);
+    switch (filter) {
+      case 0:
+        newManufacturerList = sortManufacturers(newManufacturerList, "name");
+        break;
+      case 1:
+        newManufacturerList = sortManufacturers(
+          newManufacturerList,
+          "deliverTime"
+        );
+        break;
+      case 2:
+        newManufacturerList = newManufacturerList.sort(
+          (man1: Manufacturer, man2: Manufacturer) => {
+            if (
+              man1.deliverTime !== undefined &&
+              man2.deliverTime !== undefined &&
+              man1.productionTime !== undefined &&
+              man2.productionTime !== undefined
+            ) {
+              return (
+                man1.deliverTime +
+                man1.productionTime -
+                (man2.deliverTime + man2.productionTime)
+              );
+            } else return 0;
+          }
+        );
+        break;
+      case 3:
+        break;
+      default:
+        break;
+    }
+
+    return newManufacturerList.map(
+      (manufacturer: Manufacturer, index: number) => (
+        <ManufacturerCatalogCard
+          key={index}
+          manufacturer={manufacturer}
+          setProgressState={setProgressState}
+          selectManufacturer={selectManufacturer}
+        />
+      )
+    );
   };
 
   return (
@@ -96,18 +176,7 @@ export const ManufacturerCatalog = ({
         {!manufacturerIsLoading &&
           manufacturerList &&
           !manufacturerLoadingError && (
-            <div className="manufacturer-cards">
-              {manufacturerList.map(
-                (manufacturer: Manufacturer, index: number) => (
-                  <ManufacturerCatalogCard
-                    key={index}
-                    manufacturer={manufacturer}
-                    setProgressState={setProgressState}
-                    selectManufacturer={selectManufacturer}
-                  />
-                )
-              )}
-            </div>
+            <div className="manufacturer-cards">{renderManufacturerList()}</div>
           )}
       </div>
     </div>

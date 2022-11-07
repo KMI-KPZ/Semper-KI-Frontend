@@ -1,12 +1,14 @@
 export interface ProcessState {
   progressState: number;
   activeProcess: number;
+  activeProcessList: number[];
   processList: Process[];
   nextID: number;
 }
 
 export interface Process {
   processId: number;
+  active: boolean;
   model?: Model;
   material?: Material;
   manufacturer?: Manufacturer;

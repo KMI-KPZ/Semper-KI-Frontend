@@ -1,5 +1,5 @@
 import "./ShoppingCart.scss";
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode } from "react";
 import { Process, Specification } from "../../Interface";
 import { DeleteForever } from "@mui/icons-material";
 import MinimizeIcon from "@mui/icons-material/Minimize";
@@ -7,25 +7,24 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useTranslation } from "react-i18next";
 
 interface Props {
+  expanded: boolean;
   deleteShoppingCartItem: (index: number) => void;
   process: Process;
   isActiveProcess: boolean;
   selectProcess: (id: number) => void;
   setProgressState: (progressStateIndex: number) => void;
-}
-
-interface State {
-  expanded: boolean;
+  setShoppingCardItemExpanded: (processId: number, expand: boolean) => void;
 }
 
 export const ShoppingCartItem = ({
+  expanded,
   deleteShoppingCartItem,
   process,
   isActiveProcess,
   selectProcess,
   setProgressState,
+  setShoppingCardItemExpanded,
 }: Props) => {
-  const [state, setState] = useState<State>({ expanded: true });
   const { t } = useTranslation();
 
   const handleClickDelete = (
@@ -33,7 +32,6 @@ export const ShoppingCartItem = ({
   ) => {
     e.stopPropagation();
     deleteShoppingCartItem(process.processId);
-    setExpand(true);
   };
 
   const handleClickEdit = (
@@ -50,7 +48,6 @@ export const ShoppingCartItem = ({
   ) => {
     e.stopPropagation();
     selectProcess(process.processId);
-    setExpand(true);
   };
 
   const handleCLickProp = (
@@ -69,7 +66,6 @@ export const ShoppingCartItem = ({
     e.stopPropagation();
     selectProcess(process.processId);
     setProgressState(progressStateIndex);
-    setExpand(true);
   };
 
   const renderNextProcessAddButton = (): ReactNode => {
@@ -104,11 +100,7 @@ export const ShoppingCartItem = ({
 
   const handleHideClick = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     e.stopPropagation();
-    setState((prevState) => ({ ...prevState, expanded: !prevState.expanded }));
-  };
-
-  const setExpand = (expand: boolean): void => {
-    setState((prevState) => ({ ...prevState, expanded: expand }));
+    setShoppingCardItemExpanded(process.processId, !expanded);
   };
 
   return (
@@ -117,7 +109,7 @@ export const ShoppingCartItem = ({
       onClick={handleClickProcess}
     >
       <div className="shoppingCardItemHeader">
-        {process.model && !state.expanded && (
+        {process.model && !expanded && (
           <div className="shoppingCardItem-text">{process.model.file.name}</div>
         )}
         <MinimizeIcon
@@ -129,7 +121,7 @@ export const ShoppingCartItem = ({
           onClick={handleClickDelete}
         />
       </div>
-      {process.model && state.expanded && (
+      {process.model && expanded && (
         <div className="Section">
           <div className="Header">
             <EditIcon
@@ -143,7 +135,7 @@ export const ShoppingCartItem = ({
           </div>
         </div>
       )}
-      {process.material && state.expanded && (
+      {process.material && expanded && (
         <div className="Section">
           <div className="Divider" />
           <div className="Header">
@@ -158,7 +150,7 @@ export const ShoppingCartItem = ({
           </div>
         </div>
       )}
-      {process.manufacturer && state.expanded && (
+      {process.manufacturer && expanded && (
         <div className="Section">
           <div className="Divider" />
           <div className="Header">
@@ -173,7 +165,7 @@ export const ShoppingCartItem = ({
           </div>
         </div>
       )}
-      {process.postProcessing && state.expanded && (
+      {process.postProcessing && expanded && (
         <div className="Section">
           <div className="Divider" />
           <div className="Header">
@@ -196,7 +188,7 @@ export const ShoppingCartItem = ({
           )}
         </div>
       )}
-      {process.additive && state.expanded && (
+      {process.additive && expanded && (
         <div className="Section">
           <div className="Divider" />
           <div className="Header">

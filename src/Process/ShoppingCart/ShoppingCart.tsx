@@ -11,6 +11,7 @@ interface Props {
   addProcess: (process: Process) => void;
   selectProcess: (id: number) => void;
   setProgressState: (progressStateIndex: number) => void;
+  setShoppingCardItemExpanded: (processId: number, expanded: boolean) => void;
 }
 
 export const ShoppingCart = ({
@@ -19,11 +20,12 @@ export const ShoppingCart = ({
   deleteProcess,
   selectProcess,
   setProgressState,
+  setShoppingCardItemExpanded,
 }: Props) => {
   const navigate = useNavigate();
 
   const addShoppingCartItem = () => {
-    addProcess({ processId: state.nextID });
+    addProcess({ processId: state.nextID, active: true });
     selectProcess(state.nextID);
     setProgressState(0);
     navigate("/Process/Model/Catalog");
@@ -37,6 +39,8 @@ export const ShoppingCart = ({
     <div className="ShoppingCart-Box">
       {state.processList.map((process: Process, index: number) => (
         <ShoppingCartItem
+          setShoppingCardItemExpanded={setShoppingCardItemExpanded}
+          expanded={state.activeProcessList.includes(process.processId)}
           setProgressState={setProgressState}
           key={index}
           deleteShoppingCartItem={deleteShoppingCartItem}

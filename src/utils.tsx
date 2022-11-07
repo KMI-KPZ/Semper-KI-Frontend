@@ -13,3 +13,7 @@ export const getFileSizeAsString = (size: number): string => {
   }
   return Math.round(newSize).toString() + unit;
 };
+
+export const isNumber = (element: any): element is number => {
+  return typeof element === "number";
+};

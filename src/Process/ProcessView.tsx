@@ -28,13 +28,12 @@ export const ProcessView = () => {
   const [state, setState] = useState<ProcessState>({
     progressState: 0,
     activeProcess: 0,
-    processList: [{ processId: 0 }],
+    activeProcessList: [0],
+    processList: [{ processId: 0, active: true }],
     nextID: 1,
   });
+  const maxExpandedShoppingCardItem = 2;
   const navigate = useNavigate();
-
-  // const {data:user,isLoading:userIsLoading,error:userLoadingError} = useFetch<User>({url:"http://localhost:3001/userList"});
-  // const {data:order,isLoading:orderIsLoading,error:orderLoadingError} = useFetch<Order>({url:"http://localhost:3001/orderList"});
 
   const setProgressState = (progressStateIndex: number): void => {
     let link;
@@ -116,11 +115,51 @@ export const ProcessView = () => {
     }));
   };
 
+  const calcActiveProcessList = (
+    processId: number,
+    expand: boolean
+  ): number[] => {
+    let activeProcessList = state.activeProcessList;
+    var index = activeProcessList.indexOf(processId);
+    if (expand) {
+      if (activeProcessList.length <= 1) {
+        activeProcessList.push(processId);
+      } else if (activeProcessList.length > 1) {
+        if (activeProcessList.includes(processId)) {
+          if (index !== -1) {
+            activeProcessList.splice(index, 1);
+          }
+        }
+        if (activeProcessList.length === maxExpandedShoppingCardItem)
+          activeProcessList.shift();
+        activeProcessList.push(processId);
+      }
+    } else {
+      if (index !== -1) {
+        activeProcessList.splice(index, 1);
+      }
+    }
+    return activeProcessList;
+  };
+
   const selectProcess = (processId: number): void => {
     console.log("select Process", processId);
+
     setState((prevState) => ({
       ...prevState,
       activeProcess: processId,
+      activeProcessList: calcActiveProcessList(processId, true),
+    }));
+  };
+
+  const setShoppingCardItemExpanded = (
+    processId: number,
+    expand: boolean
+  ): void => {
+    console.log("toggel Process Shoppingcart", processId);
+    setState((prevState) => ({
+      ...prevState,
+      activeProcessList: calcActiveProcessList(processId, expand),
     }));
   };
 
@@ -329,6 +368,7 @@ export const ProcessView = () => {
         </div>
         {state.progressState !== 5 && (
           <ShoppingCart
+            setShoppingCardItemExpanded={setShoppingCardItemExpanded}
             setProgressState={setProgressState}
             state={state}
             addProcess={addProcess}

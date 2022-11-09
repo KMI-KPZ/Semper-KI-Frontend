@@ -9,13 +9,13 @@ import { ProcessView } from "./Process/ProcessView";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" data-testid="app">
       <div className="main-header">
         <div className="container">
           <Header />
         </div>
       </div>
-      <Routes>
+      <Routes data-testid="routes">
         <Route index element={<Home />} />
         <Route path="Process/*" element={<ProcessView />} />
         <Route path="*" element={<Error />} />

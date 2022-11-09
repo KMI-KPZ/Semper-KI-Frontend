@@ -11,7 +11,10 @@
     "about-us": "Über uns",
     "login": "Anmelden"
   },
-  "error": "Ups etwas ist schief gelaufen...",
+  "error": {
+    "text":"Ups etwas ist schief gelaufen...",
+    "button":"Startseite"
+  },
   "wizard": {
     "model": "Modell",
     "material-procedure": "Material | Verfahren",

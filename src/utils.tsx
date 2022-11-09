@@ -1,14 +1,14 @@
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;
   let newSize: number;
-  if (size / 1000000 > 1) {
+  if (size / 1000000 >= 1) {
     newSize = size / 1000000;
     unit = "MB";
-  } else if (size / 1000 > 1) {
+  } else if (size / 1000 >= 1) {
     newSize = size / 1000;
     unit = "KB";
   } else {
-    newSize = size;
+    newSize = size >= 0 ? size : 0;
     unit = "B";
   }
   return Math.round(newSize).toString() + unit;

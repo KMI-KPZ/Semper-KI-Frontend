@@ -8,6 +8,7 @@ export const Error = () => {
 
   return (
     <div
+      data-testid="Error"
       style={{
         width: "75%",
         textAlign: "center",
@@ -20,8 +21,9 @@ export const Error = () => {
         backgroundColor: "grey",
       }}
     >
-      <span>{t("error")}</span>
+      <span data-testid="ErrorMessage">{t("error.text")}</span>
       <a
+        data-testid="HomeButton"
         href="/"
         onClick={(e) => {
           e.preventDefault();
@@ -38,7 +40,7 @@ export const Error = () => {
           padding: "20px",
         }}
       >
-        Home
+        {t("error.button")}
       </a>
     </div>
   );

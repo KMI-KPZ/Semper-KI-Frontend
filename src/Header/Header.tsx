@@ -31,7 +31,7 @@ export const Header = () => {
 
   const changeLanguage = (code: string) => () => {
     closeMenu();
-    i18n.changeLanguage(code);
+    if (i18n.language !== code) i18n.changeLanguage(code);
   };
 
   const closeMenu = () => {
@@ -53,7 +53,7 @@ export const Header = () => {
   };
 
   return (
-    <header>
+    <header data-testid="header">
       <a
         href="/"
         className="kiss-logo"
@@ -63,11 +63,14 @@ export const Header = () => {
         }}
       >
         <img
+          data-testid="logo"
           className="kiss-logo-img"
           src={require("../images/KISS_logo_transparent.png")}
           alt="Kiss Logo"
         />
-        <div className="kiss-logo-name">KISS</div>
+        <div className="kiss-logo-name" data-testid="logoName">
+          KISS
+        </div>
       </a>
       <nav className="main-nav">
         <ul>
@@ -75,14 +78,18 @@ export const Header = () => {
             <ClickAwayListener onClickAway={closeMenu}>
               <div>
                 <div
+                  data-testid="languageMenu"
                   className={`fi fi-${getFlagButtonClassName()} main-nav-dropdown-icon`}
                   onClick={openMenu}
                 />
                 {isMenuOpen && (
-                  <div className="main-nav-dropdown">
+                  <div className="main-nav-dropdown" data-testid="dropdown">
                     {languages.map(({ code, country_code }: Language) => (
                       <div
-                        className={`fi fi-${country_code} main-nav-dropdown-item`}
+                        data-testid={country_code}
+                        className={`fi fi-${country_code} main-nav-dropdown-item ${
+                          i18n.language === code ? "disabled" : ""
+                        }`}
                         key={country_code}
                         onClick={changeLanguage(code)}
                       />

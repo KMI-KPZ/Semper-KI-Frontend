@@ -1,5 +1,4 @@
 import { render, fireEvent, screen } from "@testing-library/react";
-import React from "react";
 import { Header } from "../Header/Header";
 
 const mockedUseNavigate = jest.fn((str: string): string => str);
@@ -67,13 +66,10 @@ describe("Test Header", () => {
     });
     it.skip("should close Menu onClick somewhere else", () => {
       const menu = screen.getByTestId("languageMenu");
-      const logo = screen.getByTestId("logo");
+      const mainNav = screen.getByTestId("mainNav");
       fireEvent.click(menu);
       const dropdown = screen.getByTestId("dropdown");
-      fireEvent.click(logo);
-
-      //   const closeMenu = jest.spyOn(screen, "closeMenu");
-
+      fireEvent.click(mainNav);
       expect(dropdown).not.toBeInTheDocument();
     });
   });

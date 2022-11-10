@@ -53,9 +53,11 @@ export const Home = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="container flex-container column">
+    <div className="container flex-container column" data-testid="home">
       <div className="home-box">
-        <div className="home-header">{t("home.header")}</div>
+        <div className="home-header" data-testid="header">
+          {t("home.header")}
+        </div>
         <div className="home-cards-container">
           <div
             className="home-card light"
@@ -77,6 +79,9 @@ export const Home = () => {
           <div className="home-card dark" onClick={handleClickUpload}>
             <UploadFile sx={{ fontSize: "60px" }} />
             <div className="home-card-text">{t("home.button.upload")}</div>
+          </div>
+          <div className="home-card normal" onClick={() => navigate("/test")}>
+            <div className="home-card-text normal">Test</div>
           </div>
         </div>
       </div>

@@ -72,7 +72,7 @@ export const Header = () => {
           KISS
         </div>
       </a>
-      <nav className="main-nav">
+      <nav className="main-nav" data-testid="mainNav">
         <ul>
           <li>
             <ClickAwayListener onClickAway={closeMenu}>

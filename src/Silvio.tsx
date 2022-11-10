@@ -113,7 +113,7 @@ export const Silvio = () => {
 
   const post = (url: string) => {
     console.log("Post on ", url);
-    safeLoading(false);
+    safeLoading(true);
     axios
       .post(url, {})
       .then((response) => {
@@ -127,7 +127,7 @@ export const Silvio = () => {
   };
   const get = (url: string) => {
     console.log("Get on ", url);
-    safeLoading(false);
+    safeLoading(true);
     axios
       .get(url)
       .then((response) => {
@@ -141,7 +141,7 @@ export const Silvio = () => {
   };
   const put = (url: string) => {
     console.log("Put on ", url);
-    safeLoading(false);
+    safeLoading(true);
     axios
       .put(url, { test: "test" })
       .then((response) => {
@@ -155,7 +155,7 @@ export const Silvio = () => {
   };
   const testDelete = (url: string) => {
     console.log("Delet on ", url);
-    safeLoading(false);
+    safeLoading(true);
     axios
       .delete(url)
       .then((response) => {

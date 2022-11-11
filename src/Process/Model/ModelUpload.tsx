@@ -116,7 +116,6 @@ export const ModelUpload = ({
     fileList.forEach((file: File, index: number) => {
       processList.push({
         processId: state.nextID + index,
-        active: false,
         model: { file: file },
       });
     });

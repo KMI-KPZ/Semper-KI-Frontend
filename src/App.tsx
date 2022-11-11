@@ -6,7 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import { Home } from "./Home/Home";
 import { Error } from "./Error";
 import { ProcessView } from "./Process/ProcessView";
-import { Silvio } from "./Silvio";
+import { RequestTest } from "./RequestTest/RequestTest";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
       <Routes data-testid="routes">
         <Route index element={<Home />} />
         <Route path="Process/*" element={<ProcessView />} />
-        <Route path="test" element={<Silvio />} />
+        <Route path="test" element={<RequestTest />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

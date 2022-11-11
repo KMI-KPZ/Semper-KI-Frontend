@@ -8,7 +8,6 @@ export interface ProcessState {
 
 export interface Process {
   processId: number;
-  active: boolean;
   model?: Model;
   material?: Material;
   manufacturer?: Manufacturer;

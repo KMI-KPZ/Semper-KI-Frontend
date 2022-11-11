@@ -15,7 +15,12 @@ export const ShoppingCartAddButton = ({ addShoppingCartItem }: Props) => {
   };
 
   return (
-    <a href="/" className="AddButton" onClick={(e) => handelClick(e)}>
+    <a
+      data-testid="addButton"
+      href="/"
+      className="AddButton"
+      onClick={(e) => handelClick(e)}
+    >
       <AddIcon sx={{ color: "black", fontSize: "2em" }} />
     </a>
   );

@@ -29,7 +29,7 @@ export const ProcessView = () => {
     progressState: 0,
     activeProcess: 0,
     activeProcessList: [0],
-    processList: [{ processId: 0, active: true }],
+    processList: [{ processId: 0 }],
     nextID: 1,
   });
   const maxExpandedShoppingCardItem = 2;

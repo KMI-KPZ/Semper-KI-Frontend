@@ -4,6 +4,7 @@ import "./Home.scss";
 import { UploadFile } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Fab } from "@mui/material";
 
 export const Home = () => {
   const searchInput = useRef<HTMLInputElement>(null);
@@ -80,9 +81,6 @@ export const Home = () => {
             <UploadFile sx={{ fontSize: "60px" }} />
             <div className="home-card-text">{t("home.button.upload")}</div>
           </div>
-          <div className="home-card normal" onClick={() => navigate("/test")}>
-            <div className="home-card-text normal">Test</div>
-          </div>
         </div>
       </div>
       <img
@@ -90,6 +88,22 @@ export const Home = () => {
         src={require("../images/workflow.png")}
         alt="3D-Print Work Flow"
       />
+      <Fab
+        sx={{
+          position: "absolute",
+          bottom: 50,
+          right: 50,
+          color: "blue",
+          backgroundColor: "yellow",
+          "&:hover": {
+            backgroundColor: "blue",
+            color: "yellow",
+          },
+        }}
+        onClick={() => navigate("/test")}
+      >
+        TEST
+      </Fab>
     </div>
   );
 };

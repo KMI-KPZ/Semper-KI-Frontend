@@ -1,10 +1,12 @@
 import {
+  Grid,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
   Paper,
   TextField,
+  Typography,
 } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { useState } from "react";
@@ -24,7 +26,7 @@ interface State {
   loading: boolean | null;
 }
 
-export const Silvio = () => {
+export const RequestTest = () => {
   const url = "http://localhost:";
   const port = "49163";
   const postFix = "/test/";
@@ -94,6 +96,8 @@ export const Silvio = () => {
   };
 
   const safeError = (data: any) => {
+    console.log(data);
+
     setState((prevState) => ({
       ...prevState,
       data: "",
@@ -173,84 +177,96 @@ export const Silvio = () => {
       <Paper
         sx={{
           padding: 1,
-          margin: "5px 0",
+          marginTop: 1,
           display: "flex",
           justifyContent: "center",
         }}
       >
         <TextField
-          sx={{ margin: "5px 0" }}
+          sx={{ margin: 1, width: "33%" }}
           name="url"
           label="url"
           value={state.url}
           onChange={(e) => safeInput(e)}
         />
         <TextField
-          sx={{ margin: "5px 0" }}
+          sx={{ margin: 1, width: "33%" }}
           name="port"
           label="port"
           value={state.port}
           onChange={(e) => safeInput(e)}
         />
         <TextField
-          sx={{ margin: "5px 0" }}
+          sx={{ margin: 1, width: "33%" }}
           name="postFix"
           label="postFix"
           value={state.postFix}
           onChange={(e) => safeInput(e)}
         />
       </Paper>
-      <Paper>
+      <Paper sx={{ marginTop: 1 }}>
         <List>
           <ListItem>
-            <ListItemText>Post</ListItemText>
+            <ListItemText sx={{ width: "20%" }}>Post</ListItemText>
             <TextField
               name="post"
-              sx={{ width: 500 }}
+              sx={{ width: "60%" }}
               label="post"
               value={state.post}
               onChange={(e) => safeInput(e)}
             ></TextField>
-            <ListItemButton onClick={() => post(state.post)}>
+            <ListItemButton
+              onClick={() => post(state.post)}
+              sx={{ width: "20%", justifyContent: "center" }}
+            >
               <SendIcon />
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemText>Get</ListItemText>
+            <ListItemText sx={{ width: "20%" }}>Get</ListItemText>
             <TextField
               name="get"
-              sx={{ width: 500 }}
+              sx={{ width: "60%" }}
               label="get"
               value={state.get}
               onChange={(e) => safeInput(e)}
             ></TextField>
-            <ListItemButton onClick={() => get(state.get)}>
+            <ListItemButton
+              onClick={() => get(state.get)}
+              sx={{ width: "20%", justifyContent: "center" }}
+            >
               <SendIcon />
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemText>Put</ListItemText>
+            <ListItemText sx={{ width: "20%" }}>Put</ListItemText>
             <TextField
               name="put"
-              sx={{ width: 500 }}
+              sx={{ width: "60%" }}
               label="put"
               value={state.put}
               onChange={(e) => safeInput(e)}
             ></TextField>
-            <ListItemButton onClick={() => put(state.put)}>
+            <ListItemButton
+              onClick={() => put(state.put)}
+              sx={{ width: "20%", justifyContent: "center" }}
+            >
               <SendIcon />
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemText>Delete</ListItemText>
+            <ListItemText sx={{ width: "20%" }}>Delete</ListItemText>
             <TextField
               name="delete"
-              sx={{ width: 500 }}
+              sx={{ width: "60%" }}
               label="delete"
               value={state.delete}
               onChange={(e) => safeInput(e)}
             ></TextField>
-            <ListItemButton onClick={() => testDelete(state.delete)}>
+            <ListItemButton
+              onClick={() => testDelete(state.delete)}
+              sx={{ width: "20%", justifyContent: "center" }}
+            >
               <SendIcon />
             </ListItemButton>
           </ListItem>
@@ -258,12 +274,12 @@ export const Silvio = () => {
       </Paper>
       {state.loading !== null && state.loading === true && (
         <Paper sx={{ marginTop: 1, padding: 1 }}>
-          <>Loading...</>
+          <Typography variant="h3">Loading...</Typography>
         </Paper>
       )}
       {state.data !== "" && (
         <Paper sx={{ marginTop: 1, padding: 1 }}>
-          Response:
+          <Typography variant="h3">Response</Typography>
           <br />
           {state.data}
         </Paper>
@@ -271,9 +287,66 @@ export const Silvio = () => {
       {state.error && (
         <Paper sx={{ marginTop: 1, padding: 1 }}>
           <>
-            Error:
+            <Typography variant="h3">Error</Typography>
             <br />
-            {JSON.stringify(state.error)}
+            <Grid container>
+              <Grid item xs={3}>
+                Code:
+              </Grid>
+              <Grid item xs={9}>
+                {state.error.code}
+              </Grid>
+              <Grid item xs={12}>
+                Config:
+              </Grid>
+              <Grid item xs={1} />
+              <Grid item xs={2}>
+                Headers:
+              </Grid>
+              <Grid item xs={9}>
+                {JSON.stringify(state.error.config?.headers)}
+              </Grid>
+              <Grid item xs={1} />
+              <Grid item xs={2}>
+                Data:
+              </Grid>
+              <Grid item xs={9}>
+                {state.error.config?.data}
+              </Grid>
+              <Grid item xs={1} />
+              <Grid item xs={2}>
+                URL:
+              </Grid>
+              <Grid item xs={9}>
+                {state.error.config?.url}
+              </Grid>
+              <Grid item xs={1} />
+              <Grid item xs={2}>
+                Method:
+              </Grid>
+              <Grid item xs={9}>
+                {state.error.config?.method}
+              </Grid>
+              <Grid item xs={3}>
+                Message:
+              </Grid>
+              <Grid item xs={9}>
+                {state.error.message}
+              </Grid>
+              <Grid item xs={3}>
+                Name:
+              </Grid>
+              <Grid item xs={9}>
+                {state.error.name}
+              </Grid>
+              <Grid item xs={3}>
+                Stack:
+              </Grid>
+              <Grid item xs={9}>
+                {state.error.stack}
+              </Grid>
+            </Grid>
+            {/* {JSON.stringify(state.error)} */}
           </>
         </Paper>
       )}

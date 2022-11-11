@@ -21,7 +21,7 @@ jest.mock("react-i18next", () => ({
   },
 }));
 
-describe("Error Page Test", () => {
+describe(Error, () => {
   it("should render Error", () => {
     render(<Error />);
 

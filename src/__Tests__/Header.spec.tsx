@@ -26,7 +26,7 @@ beforeEach(() => {
   render(<Header />);
 });
 
-describe("Test Header", () => {
+describe(Header, () => {
   it("should render Header", () => {
     expect(screen.getByTestId("header")).toBeInTheDocument();
   });
@@ -70,7 +70,7 @@ describe("Test Header", () => {
       fireEvent.click(menu);
       const dropdown = screen.getByTestId("dropdown");
       fireEvent.click(mainNav);
-      expect(dropdown).not.toBeInTheDocument();
+      expect(screen.findByTestId("dropdown")).not.toBeInTheDocument();
     });
   });
 });

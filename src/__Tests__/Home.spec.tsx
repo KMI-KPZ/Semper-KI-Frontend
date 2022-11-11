@@ -26,7 +26,7 @@ beforeEach(() => {
   render(<Home />);
 });
 
-describe("Test Home", () => {
+describe(Home, () => {
   it("should render Home", () => {
     expect(screen.getByTestId("home")).toBeInTheDocument;
   });

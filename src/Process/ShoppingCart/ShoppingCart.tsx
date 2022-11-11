@@ -25,7 +25,7 @@ export const ShoppingCart = ({
   const navigate = useNavigate();
 
   const addShoppingCartItem = () => {
-    addProcess({ processId: state.nextID, active: true });
+    addProcess({ processId: state.nextID });
     selectProcess(state.nextID);
     setProgressState(0);
     navigate("/Process/Model/Catalog");

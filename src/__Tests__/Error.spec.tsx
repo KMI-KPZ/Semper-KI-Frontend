@@ -1,5 +1,5 @@
 import { render, fireEvent, screen } from "@testing-library/react";
-import { Error } from "../Error";
+import { Error } from "../containers/Error";
 
 const mockedUseNavigate = jest.fn((str: string): string => str);
 const mockedT = jest.fn();

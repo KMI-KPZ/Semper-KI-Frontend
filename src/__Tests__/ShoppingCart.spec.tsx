@@ -6,7 +6,7 @@ import {
 } from "@testing-library/react";
 import { useNavigate } from "react-router-dom";
 import { Process, ProcessState } from "../Interface";
-import { ShoppingCart } from "../Process/ShoppingCart/ShoppingCart";
+import { ShoppingCart } from "../containers/Process/ShoppingCart/ShoppingCart";
 
 const mockedState: ProcessState = {
   activeProcess: 0,

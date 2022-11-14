@@ -1,0 +1,37 @@
+@import "../../../variables";
+
+.wizard {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: $containerGap;
+  display: flex;
+  gap: $containerGap;
+  background-color: $darkGrey;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .wizard-card {
+    padding: 5px 10px;
+    background-color: $white;
+    color: $textPrimary;
+    border-radius: $borderRadius;
+    transition: filter 100ms;
+
+    .wizard-card-line {
+      height: 2px;
+      background-color: $black;
+      visibility: hidden;
+      margin: 0;
+
+      &.active {
+        visibility: visible;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      filter: brightness(0.8);
+    }
+  }
+}

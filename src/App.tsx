@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.scss";
 import "./styles.scss";
-import { Header } from "./Header/Header";
+import { Header } from "./components/Header/Header";
 import { Route, Routes } from "react-router-dom";
-import { Home } from "./Home/Home";
-import { Error } from "./Error";
-import { ProcessView } from "./Process/ProcessView";
+import { Home } from "./containers/Home/Home";
+import { Error } from "./containers/Error";
+import { ProcessView } from "./containers/Process/ProcessView";
 import { RequestTest } from "./RequestTest/RequestTest";
 
 function App() {

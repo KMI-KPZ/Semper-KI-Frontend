@@ -1,0 +1,47 @@
+@import "../../../variables";
+
+.material-cards {
+  display: flex;
+  flex-direction: column;
+  row-gap: $containerGap;
+  color: $textPrimary;
+
+  .material-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    background-color: $white;
+    align-items: center;
+
+    .material-card-image {
+      width: 20%;
+    }
+
+    .material-card-column {
+      width: 20%;
+
+      .material-card-headline {
+        padding: 10px;
+        font-weight: 600;
+      }
+      .material-card-text {
+        font-size: 15px;
+        color: $textSecondary;
+      }
+    }
+
+    .material-card-button {
+      color: $textPrimaryInverted;
+      font-size: 15px;
+      width: 20%;
+      padding: 15px;
+      margin: 15px;
+
+      &:hover {
+        cursor: pointer;
+        box-shadow: 0 0 0 2px #43bbc2;
+        //transform: scale(1.05);
+      }
+    }
+  }
+}

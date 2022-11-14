@@ -1,5 +1,5 @@
 import { render, fireEvent, screen } from "@testing-library/react";
-import { Home } from "../Home/Home";
+import { Home } from "../containers/Home/Home";
 
 const mockedUseNavigate = jest.fn((str: string): string => str);
 jest.mock("react-router-dom", () => ({

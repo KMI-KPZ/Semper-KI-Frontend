@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Process } from "../Interface";
-import { ShoppingCartItem } from "../Process/ShoppingCart/ShoppingCartItem";
+import { ShoppingCartItem } from "../containers/Process/ShoppingCart/ShoppingCartItem";
 
 const mockedT = jest.fn();
 jest.mock("react-i18next", () => ({

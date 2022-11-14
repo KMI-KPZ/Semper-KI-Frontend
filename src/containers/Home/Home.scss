@@ -1,0 +1,68 @@
+@import "../../variables";
+
+.home-box {
+  margin-top: 20px;
+  background-color: $darkGrey;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .home-header {
+    margin: 40px 20px 20px;
+    font-weight: 500;
+    font-size: 30px;
+  }
+
+  .home-cards-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+
+    .home-card {
+      margin: 20px;
+      width: 100%;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+
+      .home-search {
+        $searchHeight: 35;
+        height: $searchHeight + px;
+        width: 70%;
+        padding-left: 10px;
+        border-radius: calc($searchHeight/2) + px;
+        border: none;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      &:hover {
+        cursor: pointer;
+        box-shadow: 0 0 0 2px white;
+      }
+
+      .home-card-text {
+        margin-bottom: 50px;
+        margin-top: 10px;
+      }
+
+      .light {
+        background-color: $colorLight;
+      }
+      .dark {
+        background-color: $colorDark;
+      }
+    }
+  }
+}
+
+.workflow-img {
+  margin-top: 20px;
+  scale: 0.7;
+}

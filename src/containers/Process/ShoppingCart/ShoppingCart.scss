@@ -1,0 +1,118 @@
+@import "../../../variables";
+
+.ShoppingCart-Box {
+  color: $textPrimary;
+  background-color: $darkGrey;
+  padding: $containerPadding;
+  width: 100% - $widthProcessContent;
+  height: 100%;
+
+  .AddButton {
+    display: flex;
+    justify-content: center;
+    border-radius: $borderRadius;
+    background-color: $white;
+    padding: 5px;
+    &:hover {
+      box-shadow: 0 0 0 3px $lightGrey;
+    }
+  }
+}
+
+.shoppingCartItem {
+  border-radius: $borderRadius;
+  background-color: $white;
+  padding: 5px;
+  margin-bottom: $containerGap;
+  display: flex;
+  flex-direction: column;
+
+  .addProgressButton {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 5px;
+    font-size: 16px;
+    align-self: center;
+    width: 85%;
+    color: $textPrimaryInverted;
+    background-color: $colorDark;
+    text-align: center;
+    border-radius: $borderRadius;
+    &:hover {
+      box-shadow: 0 0 0 2px $colorLight;
+    }
+  }
+
+  .shoppingCardItemHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    .shoppingCardItem-text {
+      margin-top: 5px;
+      margin-left: 15px;
+      margin-right: auto;
+    }
+  }
+
+  &.active {
+    box-shadow: 0 0 0 3px $colorLight;
+  }
+
+  .Section {
+    display: flex;
+    flex-direction: column;
+
+    .Text {
+      text-align: center;
+      font-size: 0.7em;
+      margin: 5px;
+      padding: 5px;
+      &:hover {
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 0 0 1px $textPrimary;
+        background-color: $textPrimaryInverted;
+      }
+    }
+    .Header {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+      .iconButton {
+        color: $white;
+        border-radius: $borderRadiusButton;
+        height: 20px;
+        width: 20px;
+        padding: 2px;
+        margin: 3px 7px 3px 3px;
+        background-color: $colorNormal;
+        &:hover {
+          cursor: pointer;
+          box-shadow: 0 0 0 2px $colorLight;
+        }
+      }
+
+      .deleteIcon {
+        border-radius: 10px;
+        height: 30px;
+        width: 30px;
+        padding: 5px;
+        margin: 5px 5px 5px auto;
+
+        &:hover {
+          cursor: pointer;
+          box-shadow: 0 0 0 1px $textPrimary;
+          background-color: $textPrimaryInverted;
+        }
+      }
+    }
+  }
+
+  .Divider {
+    border-top: 2px solid black;
+    margin: 5px 20px;
+  }
+}

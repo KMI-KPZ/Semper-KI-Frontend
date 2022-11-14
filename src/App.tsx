@@ -8,9 +8,13 @@ import { Error } from "./containers/Error";
 import { ProcessView } from "./containers/Process/ProcessView";
 import { RequestTest } from "./RequestTest/RequestTest";
 
+// import { Provider } from "react-redux";
+// import store from "./store";
+
 function App() {
   return (
     <div className="App" data-testid="app">
+      {/* <Provider store={store}> */}
       <div className="main-header">
         <div className="container">
           <Header />
@@ -22,6 +26,7 @@ function App() {
         <Route path="test" element={<RequestTest />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      {/* </Provider> */}
     </div>
   );
 }

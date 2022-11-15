@@ -23,7 +23,7 @@ export const MaterialCatalog = ({
     data: materialList,
     isLoading: materialIsLoading,
     error: materialLoadingError,
-  } = useFetch<Material>({ url: "http://localhost:3001/materialList" });
+  } = useFetch<Material>({ url: "http://localhost:3030/materialList" });
   const [filter, setFilter] = useState<number>(0);
 
   const getFilterClassName = (index: number): string => {

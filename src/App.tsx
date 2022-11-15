@@ -14,7 +14,6 @@ import { RequestTest } from "./RequestTest/RequestTest";
 function App() {
   return (
     <div className="App" data-testid="app">
-      {/* <Provider store={store}> */}
       <div className="main-header">
         <div className="container">
           <Header />
@@ -26,7 +25,6 @@ function App() {
         <Route path="test" element={<RequestTest />} />
         <Route path="*" element={<Error />} />
       </Routes>
-      {/* </Provider> */}
     </div>
   );
 }

@@ -35,7 +35,7 @@ export const ManufacturerCatalog = ({
     data: manufacturerList,
     isLoading: manufacturerIsLoading,
     error: manufacturerLoadingError,
-  } = useFetch<Manufacturer>({ url: "http://localhost:3001/manufacturerList" });
+  } = useFetch<Manufacturer>({ url: "http://localhost:3030/manufacturerList" });
   const [filter, setFilter] = useState<number>(0);
 
   const getFilterClassName = (index: number): string => {

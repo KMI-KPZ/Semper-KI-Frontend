@@ -12,6 +12,7 @@ import { Container } from "@mui/system";
 import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import axios, { AxiosError } from "axios";
+import CSRFToken from "../Hooks/CSRFToken";
 
 interface State {
   post: string;
@@ -174,6 +175,7 @@ export const RequestTest = () => {
 
   return (
     <Container>
+      <CSRFToken />
       <Paper
         sx={{
           padding: 1,

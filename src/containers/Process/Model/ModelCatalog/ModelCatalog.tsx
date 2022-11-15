@@ -19,7 +19,7 @@ export const ModelCatalog = ({ selectModel, setProgressState }: Props) => {
     data: modelList,
     isLoading: modelIsLoading,
     error: modelLoadingError,
-  } = useFetch<Model>({ url: "http://localhost:3001/modelList" });
+  } = useFetch<Model>({ url: "http://localhost:3030/modelList" });
 
   return (
     <div className="process-content-container">

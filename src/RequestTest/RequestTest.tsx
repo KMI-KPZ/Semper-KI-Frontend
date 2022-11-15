@@ -12,7 +12,7 @@ import { Container } from "@mui/system";
 import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import axios, { AxiosError } from "axios";
-import CSRFToken from "../Hooks/CSRFToken";
+import CRSFToken from "../Hooks/CSRFToken";
 
 interface State {
   post: string;
@@ -28,6 +28,10 @@ interface State {
 }
 
 export const RequestTest = () => {
+  const csrfToken = CRSFToken();
+  const headers = {
+    headers: { "X-CSRFToken": csrfToken },
+  };
   const url = "http://localhost:";
   const port = "49163";
   const postFix = "/test/";
@@ -117,7 +121,7 @@ export const RequestTest = () => {
   };
 
   const post = (url: string) => {
-    console.log("Post on ", url);
+    console.log("Post on ", url, headers);
     safeLoading(true);
     axios
       .post(url, {})
@@ -131,7 +135,7 @@ export const RequestTest = () => {
       });
   };
   const get = (url: string) => {
-    console.log("Get on ", url);
+    console.log("Get on ", url, headers);
     safeLoading(true);
     axios
       .get(url)
@@ -145,7 +149,7 @@ export const RequestTest = () => {
       });
   };
   const put = (url: string) => {
-    console.log("Put on ", url);
+    console.log("Put on ", url, headers);
     safeLoading(true);
     axios
       .put(url, { test: "test" })
@@ -159,7 +163,7 @@ export const RequestTest = () => {
       });
   };
   const testDelete = (url: string) => {
-    console.log("Delet on ", url);
+    console.log("Delet on ", url, headers);
     safeLoading(true);
     axios
       .delete(url)
@@ -175,7 +179,6 @@ export const RequestTest = () => {
 
   return (
     <Container>
-      <CSRFToken />
       <Paper
         sx={{
           padding: 1,

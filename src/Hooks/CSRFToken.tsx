@@ -7,20 +7,20 @@ const CRSFToken = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const getCookie = (name: string): string => {
-    let cookieValue = "";
-    if (document.cookie && document.cookie !== "") {
-      const cookies = document.cookie.split(";");
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.substring(0, name.length + 1) === name + "=") {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  };
+  // const getCookie = (name: string): string => {
+  //   let cookieValue = "";
+  //   if (document.cookie && document.cookie !== "") {
+  //     const cookies = document.cookie.split(";");
+  //     for (let i = 0; i < cookies.length; i++) {
+  //       const cookie = cookies[i].trim();
+  //       if (cookie.substring(0, name.length + 1) === name + "=") {
+  //         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+  //         break;
+  //       }
+  //     }
+  //   }
+  //   return cookieValue;
+  // };
 
   useEffect(() => {
     setIsLoading(true);
@@ -43,7 +43,8 @@ const CRSFToken = () => {
       });
   }, []);
 
-  return <input type={"hidden"} name="csrfmiddelwaretoken" value={csrfToken} />;
+  // return <input type={"hidden"} name="csrfmiddelwaretoken" value={csrfToken} />;
+  return csrfToken;
 };
 
 export default CRSFToken;

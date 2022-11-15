@@ -12,6 +12,6 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["yarn","start"]
+# CMD [ "yarn", "json-server", "-p", "3030", "-w", "generateData.js" ]
 
-# docker run     -it     --rm     -v ${PWD}:/app     -v /app/node_modules     -p 3001:3000     -e CHOKIDAR_USEPOLLING=true     sample:dev
+CMD ["yarn","start"]

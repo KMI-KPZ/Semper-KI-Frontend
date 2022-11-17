@@ -1,0 +1,13 @@
+version: "3.4"
+
+services:
+  fontend:
+    container_name: frontend
+    image: frontend
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 3000:3000

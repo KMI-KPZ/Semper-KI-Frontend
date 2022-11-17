@@ -33,7 +33,7 @@ export const RequestTest = () => {
     headers: { "X-CSRFToken": csrfToken },
   };
   const url = "http://localhost:";
-  const port = "49163";
+  const port = "8000";
   const postFix = "/test/";
   const [state, setState] = useState<State>({
     post: `${url}${port}${postFix}`,

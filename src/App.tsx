@@ -7,6 +7,7 @@ import { Home } from "./containers/Home/Home";
 import { Error } from "./containers/Error";
 import { ProcessView } from "./containers/Process/ProcessView";
 import { RequestTest } from "./RequestTest/RequestTest";
+import Login from "./containers/Login";
 
 // import { Provider } from "react-redux";
 // import store from "./store";
@@ -23,6 +24,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="Process/*" element={<ProcessView />} />
         <Route path="test" element={<RequestTest />} />
+        <Route path="login" element={<Login />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

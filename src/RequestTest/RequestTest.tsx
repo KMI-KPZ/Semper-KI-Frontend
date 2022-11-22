@@ -28,13 +28,20 @@ interface State {
 }
 
 export const RequestTest = () => {
-  const csrfToken = CRSFToken();
-  const headers = {
-    headers: { "X-CSRFToken": csrfToken },
+  const { csrfToken, isLoading, error } = CRSFToken();
+  // axios.defaults.headers.common["X-CSRF-TOKEN"] = csrfToken;
+
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-csrf-token": csrfToken,
+      // "Access-Control-Allow-Origin": "*",
+      // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
   };
   const url = "http://localhost:";
   const port = "8000";
-  const postFix = "/test/";
+  const postFix = "/test_csrf/";
   const [state, setState] = useState<State>({
     post: `${url}${port}${postFix}`,
     get: `${url}${port}${postFix}`,
@@ -101,7 +108,7 @@ export const RequestTest = () => {
   };
 
   const safeError = (data: any) => {
-    console.log(data);
+    // console.log(data);
 
     setState((prevState) => ({
       ...prevState,
@@ -121,10 +128,10 @@ export const RequestTest = () => {
   };
 
   const post = (url: string) => {
-    console.log("Post on ", url, headers);
+    console.log("Post on ", url, options);
     safeLoading(true);
     axios
-      .post(url, {})
+      .post(url, { test: "test" }, options)
       .then((response) => {
         console.log("Post Response", url, response.data);
         safeData(response.data);
@@ -135,7 +142,7 @@ export const RequestTest = () => {
       });
   };
   const get = (url: string) => {
-    console.log("Get on ", url, headers);
+    console.log("Get on ", url, options);
     safeLoading(true);
     axios
       .get(url)
@@ -149,10 +156,10 @@ export const RequestTest = () => {
       });
   };
   const put = (url: string) => {
-    console.log("Put on ", url, headers);
+    console.log("Put on ", url, options);
     safeLoading(true);
     axios
-      .put(url, { test: "test" })
+      .put(url, { test: "test" }, options)
       .then((response) => {
         console.log("Put Response", url, response.data);
         safeData(response.data);
@@ -163,10 +170,10 @@ export const RequestTest = () => {
       });
   };
   const testDelete = (url: string) => {
-    console.log("Delet on ", url, headers);
+    console.log("Delete on ", url, options);
     safeLoading(true);
     axios
-      .delete(url)
+      .delete(url, options)
       .then((response) => {
         console.log("Delete Respons", url, response.data);
         safeData(response.data);
@@ -190,7 +197,7 @@ export const RequestTest = () => {
         <TextField
           sx={{ margin: 1, width: "33%" }}
           name="url"
-          label="url"
+          label="urls"
           value={state.url}
           onChange={(e) => safeInput(e)}
         />

@@ -28,17 +28,8 @@ interface State {
 }
 
 export const RequestTest = () => {
-  const { csrfToken, isLoading, error } = CRSFToken();
   // axios.defaults.headers.common["X-CSRF-TOKEN"] = csrfToken;
 
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
-      "x-csrf-token": csrfToken,
-      // "Access-Control-Allow-Origin": "*",
-      // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    },
-  };
   const url = "http://localhost:";
   const port = "8000";
   const postFix = "/test_csrf/";
@@ -54,6 +45,15 @@ export const RequestTest = () => {
     error: null,
     loading: null,
   });
+  const { csrfToken, isLoading, error } = CRSFToken(state.port);
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-csrf-token": csrfToken,
+      // "Access-Control-Allow-Origin": "*",
+      // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
+  };
 
   const safeInput = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

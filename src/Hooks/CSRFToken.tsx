@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const CRSFToken = (port: string) => {
+const CRSFToken = ({ url }: { url: string }) => {
   const [csrfToken, setCsrfToken] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
-    if (isLoading) console.log("Is loading CSRF Token...");
+    // if (isLoading) console.log("Is loading CSRF Token...");
 
     axios
-      .get(`http://localhost:${port}/test_csrf/`)
+      .get(url)
       .then((response) => {
         // console.log("CSRF Token Loaded: ", response.data);
         const token = Cookies.get("csrftoken");
@@ -28,7 +28,7 @@ const CRSFToken = (port: string) => {
       });
   }, []);
 
-  return { csrfToken, isLoading, error };
+  return <input type="hidden" name="csrfmiddelwaretoken" value={csrfToken} />;
 };
 
 export default CRSFToken;

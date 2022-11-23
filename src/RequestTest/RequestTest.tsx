@@ -13,6 +13,7 @@ import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import axios, { AxiosError } from "axios";
 import CRSFToken from "../Hooks/CSRFToken";
+import Cookies from "js-cookie";
 
 interface State {
   post: string;
@@ -28,16 +29,14 @@ interface State {
 }
 
 export const RequestTest = () => {
-  // axios.defaults.headers.common["X-CSRF-TOKEN"] = csrfToken;
-
   const url = "http://localhost:";
   const port = "8000";
   const postFix = "/test_csrf/";
   const [state, setState] = useState<State>({
-    post: `${url}${port}${postFix}`,
-    get: `${url}${port}${postFix}`,
-    put: `${url}${port}${postFix}`,
-    delete: `${url}${port}${postFix}`,
+    post: "",
+    get: "",
+    put: "",
+    delete: "",
     data: "",
     port: port,
     url: url,
@@ -45,57 +44,14 @@ export const RequestTest = () => {
     error: null,
     loading: null,
   });
-  const { csrfToken, isLoading, error } = CRSFToken(state.port);
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
-      "x-csrf-token": csrfToken,
-      // "Access-Control-Allow-Origin": "*",
-      // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    },
-  };
 
   const safeInput = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    switch (e.target.name) {
-      case "url":
-        setState((prevState) => ({
-          ...prevState,
-          url: e.target.value,
-          post: `${e.target.value}${prevState.port}${prevState.postFix}`,
-          get: `${e.target.value}${prevState.port}${prevState.postFix}`,
-          put: `${e.target.value}${prevState.port}${prevState.postFix}`,
-          delete: `${e.target.value}${prevState.port}${prevState.postFix}`,
-        }));
-        break;
-      case "port":
-        setState((prevState) => ({
-          ...prevState,
-          port: e.target.value,
-          post: `${prevState.url}${e.target.value}${prevState.postFix}`,
-          get: `${prevState.url}${e.target.value}${prevState.postFix}`,
-          put: `${prevState.url}${e.target.value}${prevState.postFix}`,
-          delete: `${prevState.url}${e.target.value}${prevState.postFix}`,
-        }));
-        break;
-      case "postFix":
-        setState((prevState) => ({
-          ...prevState,
-          postFix: e.target.value,
-          post: `${prevState.url}${prevState.port}${e.target.value}`,
-          get: `${prevState.url}${prevState.port}${e.target.value}`,
-          put: `${prevState.url}${prevState.port}${e.target.value}`,
-          delete: `${prevState.url}${prevState.port}${e.target.value}`,
-        }));
-        break;
-      default:
-        setState((prevState) => ({
-          ...prevState,
-          [e.target.name]: e.target.value,
-        }));
-        break;
-    }
+    setState((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const safeData = (data: string) => {
@@ -127,11 +83,25 @@ export const RequestTest = () => {
     }));
   };
 
-  const post = (url: string) => {
-    console.log("Post on ", url, options);
+  const getURL = (): string => {
+    return `${state.url}${state.port}${state.postFix}`;
+  };
+
+  const token = Cookies.get("csrftoken");
+  const csrftoken = token !== undefined ? token : "";
+  const config = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "X-CSRFToken": csrftoken,
+    },
+  };
+  const data: string = JSON.stringify({ test: "test" });
+
+  const post = () => {
     safeLoading(true);
     axios
-      .post(url, { test: "test" }, options)
+      .post(getURL(), data, config)
       .then((response) => {
         console.log("Post Response", url, response.data);
         safeData(response.data);
@@ -141,11 +111,12 @@ export const RequestTest = () => {
         safeError(error);
       });
   };
-  const get = (url: string) => {
-    console.log("Get on ", url, options);
+
+  const get = () => {
+    console.log("Get on ", getURL());
     safeLoading(true);
     axios
-      .get(url)
+      .get(getURL())
       .then((response) => {
         console.log("Get Response", url, response.data);
         safeData(response.data);
@@ -155,33 +126,34 @@ export const RequestTest = () => {
         safeError(error);
       });
   };
-  const put = (url: string) => {
-    console.log("Put on ", url, options);
-    safeLoading(true);
-    axios
-      .put(url, { test: "test" }, options)
-      .then((response) => {
-        console.log("Put Response", url, response.data);
-        safeData(response.data);
-      })
-      .catch((error) => {
-        console.log("Put Error", error);
-        safeError(error);
-      });
+
+  const put = () => {
+    // console.log("Put on ", getURL(), options);
+    // safeLoading(true);
+    // axios
+    //   .put(getURL(), { test: "test" }, options)
+    //   .then((response) => {
+    //     console.log("Put Response", getURL(), response.data);
+    //     safeData(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log("Put Error", error);
+    //     safeError(error);
+    //   });
   };
-  const testDelete = (url: string) => {
-    console.log("Delete on ", url, options);
-    safeLoading(true);
-    axios
-      .delete(url, options)
-      .then((response) => {
-        console.log("Delete Respons", url, response.data);
-        safeData(response.data);
-      })
-      .catch((error) => {
-        console.log("Delete Error", error);
-        safeError(error);
-      });
+  const testDelete = () => {
+    // console.log("Delete on ", getURL(), options);
+    // safeLoading(true);
+    // axios
+    //   .delete(getURL(), options)
+    //   .then((response) => {
+    //     console.log("Delete Respons", getURL(), response.data);
+    //     safeData(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log("Delete Error", error);
+    //     safeError(error);
+    //   });
   };
 
   return (
@@ -219,16 +191,18 @@ export const RequestTest = () => {
       <Paper sx={{ marginTop: 1 }}>
         <List>
           <ListItem>
+            {/* <CRSFToken url={getURL()} /> */}
             <ListItemText sx={{ width: "20%" }}>Post</ListItemText>
             <TextField
               name="post"
-              sx={{ width: "60%" }}
+              sx={{ width: "30%" }}
               label="post"
               value={state.post}
               onChange={(e) => safeInput(e)}
             ></TextField>
+            <ListItem sx={{ width: "30%" }}>{getURL()}</ListItem>
             <ListItemButton
-              onClick={() => post(state.post)}
+              onClick={() => post()}
               sx={{ width: "20%", justifyContent: "center" }}
             >
               <SendIcon />
@@ -238,13 +212,14 @@ export const RequestTest = () => {
             <ListItemText sx={{ width: "20%" }}>Get</ListItemText>
             <TextField
               name="get"
-              sx={{ width: "60%" }}
+              sx={{ width: "30%" }}
               label="get"
               value={state.get}
               onChange={(e) => safeInput(e)}
             ></TextField>
+            <ListItem sx={{ width: "30%" }}>{getURL()}</ListItem>
             <ListItemButton
-              onClick={() => get(state.get)}
+              onClick={() => get()}
               sx={{ width: "20%", justifyContent: "center" }}
             >
               <SendIcon />
@@ -254,13 +229,14 @@ export const RequestTest = () => {
             <ListItemText sx={{ width: "20%" }}>Put</ListItemText>
             <TextField
               name="put"
-              sx={{ width: "60%" }}
+              sx={{ width: "30%" }}
               label="put"
               value={state.put}
               onChange={(e) => safeInput(e)}
             ></TextField>
+            <ListItem sx={{ width: "30%" }}>{getURL()}</ListItem>
             <ListItemButton
-              onClick={() => put(state.put)}
+              onClick={() => put()}
               sx={{ width: "20%", justifyContent: "center" }}
             >
               <SendIcon />
@@ -270,13 +246,14 @@ export const RequestTest = () => {
             <ListItemText sx={{ width: "20%" }}>Delete</ListItemText>
             <TextField
               name="delete"
-              sx={{ width: "60%" }}
+              sx={{ width: "30%" }}
               label="delete"
               value={state.delete}
               onChange={(e) => safeInput(e)}
             ></TextField>
+            <ListItem sx={{ width: "30%" }}>{getURL()}</ListItem>
             <ListItemButton
-              onClick={() => testDelete(state.delete)}
+              onClick={() => testDelete()}
               sx={{ width: "20%", justifyContent: "center" }}
             >
               <SendIcon />

@@ -12,8 +12,7 @@ import { Container } from "@mui/system";
 import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import axios, { AxiosError } from "axios";
-import CRSFToken from "../Hooks/CSRFToken";
-import Cookies from "js-cookie";
+import CRSFToken from "../hooks/CSRFToken";
 
 interface State {
   post: string;
@@ -95,7 +94,7 @@ export const RequestTest = () => {
   const post = () => {
     safeLoading(true);
     axios
-      .post(URL, JSON.stringify(state.post), config)
+      .post(URL, JSON.stringify({ post: state.post }), config)
       .then((response) => {
         console.log("Post Response", response.data);
         safeData(response.data);
@@ -123,7 +122,7 @@ export const RequestTest = () => {
   const put = () => {
     safeLoading(true);
     axios
-      .put(URL, JSON.stringify(state.put), config)
+      .put(URL, JSON.stringify({ put: state.put }), config)
       .then((response) => {
         console.log("Put Response", URL, response.data);
         safeData(response.data);

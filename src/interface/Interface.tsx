@@ -1,3 +1,5 @@
+import { UserType } from "./types";
+
 export interface ProcessState {
   progressState: number;
   activeProcess: number;
@@ -98,4 +100,5 @@ export interface User {
   username: string;
   email: string;
   password: string;
+  userType: UserType;
 }

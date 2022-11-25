@@ -22,8 +22,13 @@ jest.mock("react-i18next", () => ({
   },
 }));
 
+const mockedSetUserType = jest.fn();
+const mockedSetUser = jest.fn();
+
 beforeEach(() => {
-  render(<Header />);
+  render(
+    <Header setUserType={mockedSetUserType} user={null} userType="client" />
+  );
 });
 
 describe(Header, () => {

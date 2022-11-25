@@ -9,7 +9,16 @@
   },
   "header": {
     "about-us": "Über uns",
-    "login": "Anmelden"
+    "login": "Anmelden",
+    "contractor":"Für Auftragnehmer",
+    "client":"Für Auftraggeber",
+    "logout":"Abmelden",
+    "shoppingcart":"Warenkorb",
+    "overview":"Übersicht",
+    "account":"Konto",
+    "newOrder":"neu Bestellung",
+    "contracts":"Aufträge",
+    "messages":"Nachrichten"
   },
   "error": {
     "text":"Ups etwas ist schief gelaufen...",

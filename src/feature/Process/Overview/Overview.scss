@@ -21,7 +21,7 @@
       margin-top: 25px;
       min-height: 30px;
       width: 100%;
-      border: 2px solid $darkGrey;
+      border: 2px solid $black_pp;
       border-radius: $borderRadius;
       position: relative;
       display: flex;
@@ -41,8 +41,8 @@
         position: absolute;
         top: -20px;
         left: 30px;
-        background-color: $lightGrey;
-        border: 2px solid $darkGrey;
+        background-color: $white_mm;
+        border: 2px solid $black_pp;
         border-radius: $borderRadius;
       }
 
@@ -124,7 +124,7 @@
       .overview-card-footer-button {
         width: 30%;
         padding: 5px 10px;
-        background-color: $lightGrey;
+        background-color: $white_mm;
         border-radius: $borderRadius;
         &:hover {
           cursor: pointer;

@@ -11,12 +11,12 @@ body {
   margin: 0;
   font-family: Inter, sans-serif;
   font-size: 1.2rem;
-  color: $textPrimaryInverted;
+  color: $textPrimary;
   min-height: 100vh;
   background: $backgroundBody;
 }
 
 a {
-  color: $textPrimaryInverted;
+  color: $textSecondary;
   text-decoration: none;
 }

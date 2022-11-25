@@ -25,17 +25,23 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    gap: 10px;
   }
 
   li {
     align-items: center;
     align-self: center;
+    &.header-link{
+      border-radius: $borderRadiusButton;
+      border: 2px $grey solid;
+    }
   }
 
   a {
     color: inherit;
     text-decoration: none;
-    padding: 1rem;
+    padding: 5px 10px;
+    gap: 5px;
     display: flex;
     align-items: center;
   }
@@ -43,11 +49,12 @@
   .main-nav-select {
     border-radius: $borderRadius;
     border: 1px $white solid;
-    background-color: $darkGrey;
+    background-color: $black_pp;
     color: $textPrimaryInverted;
   }
 
   .main-nav-dropdown-icon {
+    margin-right: 10px;
     &:hover {
       cursor: pointer;
     }

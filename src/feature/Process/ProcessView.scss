@@ -2,7 +2,7 @@
 
 .process-content-box {
   color: $textPrimaryInverted;
-  background-color: $darkGrey;
+  background-color: $black_pp;
   padding: $containerPadding;
   width: $widthProcessContent;
   height: 100%;
@@ -113,7 +113,7 @@
           width: 21%;
           border-radius: $borderRadius $borderRadius 0 0;
           padding: 15px 0 10px 0;
-          background-color: $lightGrey;
+          background-color: $white_mm;
           color: $textPrimary;
 
           &.active {

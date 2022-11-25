@@ -2,7 +2,7 @@
 
 .ShoppingCart-Box {
   color: $textPrimary;
-  background-color: $darkGrey;
+  background-color: $black_pp;
   padding: $containerPadding;
   width: 100% - $widthProcessContent;
   height: 100%;
@@ -14,7 +14,7 @@
     background-color: $white;
     padding: 5px;
     &:hover {
-      box-shadow: 0 0 0 3px $lightGrey;
+      box-shadow: 0 0 0 3px $white_mm;
     }
   }
 }

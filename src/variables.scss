@@ -7,27 +7,27 @@ $colorNormalComplementary: #d88c44;
 $colorDarkComplementary: #f9b15e;
 
 $white: #ffffff;
-$lightGrey: #dbdbdb;
-$grey: #a3a3a3;
-$darkGrey: #4d4d4d; //#626262;
+$white_m: #DFDFDF;
+$white_mm: #C0C0C0;
+$grey_p: #A0A0A0;
+$grey: #7F7F7F;
+$grey_m: #606060; //#626262;
+$black_pp: #404040;
+$black_p: #202020;
 $black: #000000;
 
 $textPrimary: $black;
-$textSecondary: $darkGrey;
+$textSecondary: $black_pp;
 $textPrimaryInverted: $white;
-$textSecondaryInverted: $lightGrey;
+$textSecondaryInverted: $white_mm;
 
-$backgroundBody: linear-gradient(
-  180deg,
-  rgba(6, 78, 161, 0.65) 0%,
-  rgba(249, 177, 94, 0.65) 100%
-);
-$backgroundBodyBox: #4d4d4d;
+$backgroundBody: $white_m;
+$backgroundBox: $white;
 
 $heightHeader: 50px;
 $widthProcessContent: 75%;
 $borderRadius: 5px;
-$borderRadiusButton: 5px;
+$borderRadiusButton: 20px;
 $containerGap: 20px;
 $containerMargin: 20px;
 $containerPadding: 20px;

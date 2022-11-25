@@ -2,16 +2,18 @@
 
 .home-box {
   margin-top: 20px;
-  background-color: $white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   .home-header {
-    margin: 40px 20px 20px;
+    background-color: $white;
+    width: calc(100% - 40px);
+    padding: 20px 20px;
     font-weight: 500;
     font-size: 30px;
+    text-align: center;
   }
 
   .home-cards-container {
@@ -21,13 +23,15 @@
     justify-content: center;
 
     .home-card {
+      background-color: $white;
       margin: 20px;
       width: 100%;
       height: 200px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: center;
+      gap: 20px;
 
       .home-search {
         $searchHeight: 35;
@@ -35,7 +39,7 @@
         width: 70%;
         padding-left: 10px;
         border-radius: calc($searchHeight/2) + px;
-        border: none;
+        border: 2px solid $grey;
 
         &:focus {
           outline: none;

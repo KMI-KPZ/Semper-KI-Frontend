@@ -5,89 +5,97 @@ import { UploadFile } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Fab } from "@mui/material";
+import { HomeCard } from "./HomeCard";
+import { UserType } from "../../interface/types";
 
-export const Home = () => {
+const ModelIcon: React.ReactNode = (
+  <img
+    style={{ width: "5em", height: "5em" }}
+    // className="kiss_logo"
+    src={require("../../assets/images/3d_model.svg").default}
+    alt=""
+  />
+);
+
+const PrintIcon: React.ReactNode = (
+  <img
+    style={{ width: "5em", height: "5em" }}
+    // className="kiss_logo"
+    src={require("../../assets/images/3d_print.svg").default}
+    alt=""
+  />
+);
+
+interface Props {
+  userType: UserType;
+}
+
+export const Home = ({ userType }: Props) => {
   const searchInput = useRef<HTMLInputElement>(null);
   const searchCard = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
-  const handleClickSearch = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ): void => {
-    e.preventDefault();
-    navigate("/Process/Model/Catalog");
-
-    if (searchInput.current) {
-      searchInput.current.focus();
-    }
-  };
-
-  const handleClickUpload = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ): void => {
-    e.preventDefault();
-    navigate("/Process/Model/Upload");
-  };
-
-  const handleFocusSearch = (
-    e: React.FocusEvent<HTMLInputElement, Element>
-  ) => {
-    e.preventDefault();
-    if (searchCard.current) {
-      searchCard.current.style.boxShadow = "0 0 0 2px white";
-    }
-  };
-
-  const handleBlurSearch = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-    e.preventDefault();
-    if (searchCard.current) {
-      searchCard.current.style.boxShadow = "none";
-    }
-  };
-
-  const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    navigate("/Process/Model/Catalog");
-  };
-
   const { t } = useTranslation();
 
-  return (
-    <div className="container flex-container column" data-testid="home">
-      <div className="home-box">
-        <div className="home-header" data-testid="header">
-          {t("home.header")}
-        </div>
-        <div className="home-cards-container">
-          <div
-            className="home-card light"
-            onClick={handleClickSearch}
-            onMouseDown={handleClickSearch}
-            ref={searchCard}
-          >
+  const getHomeCards = () => {
+    const clientCards = (
+      <>
+        <HomeCard
+          className="home-card"
+          icon={
             <input
               type="search"
               placeholder={t("home.button.search-placeholder")}
               className="home-search"
               ref={searchInput}
-              onFocus={(e) => handleFocusSearch(e)}
-              onBlur={handleBlurSearch}
-              onChange={handleChangeSearch}
             />
-            <div className="home-card-text">{t("home.button.search")}</div>
-          </div>
-          <div className="home-card dark" onClick={handleClickUpload}>
-            <UploadFile sx={{ fontSize: "60px" }} />
-            <div className="home-card-text">{t("home.button.upload")}</div>
-          </div>
+          }
+          link="/Process/Model/Catalog"
+          text={t("home.button.search")}
+        />
+        <HomeCard
+          className="home-card"
+          icon={<UploadFile sx={{ fontSize: "60px" }} />}
+          link="/Process/Model/Upload"
+          text={t("home.button.upload")}
+        />
+      </>
+    );
+
+    const contractorCards = (
+      <>
+        <HomeCard
+          className="home-card"
+          icon={PrintIcon}
+          link=""
+          text={t("home.button.print")}
+        />
+        <HomeCard
+          className="home-card"
+          icon={ModelIcon}
+          link=""
+          text={t("home.button.design")}
+        />
+      </>
+    );
+    return userType === "client" ? clientCards : contractorCards;
+  };
+
+  return (
+    <div className="container flex-container column" data-testid="home">
+      <div className="home-box">
+        <div className="home-header" data-testid="header">
+          {t(`home.header.${userType === "client" ? "client" : "contractor"}`)}
         </div>
+        <div className="home-cards-container">{getHomeCards()}</div>
       </div>
-      <img
-        className="workflow-img"
-        src={require("../../assets/images/workflow.png")}
-        alt="3D-Print Work Flow"
-      />
+      {userType === "client" && (
+        <img
+          className="workflow-img"
+          src={require("../../assets/images/workflow.png")}
+          alt="3D-Print Work Flow"
+        />
+      )}
       <Fab
         sx={{
           position: "absolute",

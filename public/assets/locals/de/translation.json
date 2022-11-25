@@ -1,10 +1,15 @@
 {
   "home": {
-    "header": "Etwas herstellen lassen",
+    "header": {
+      "client" : "Etwas herstellen lassen",
+      "contractor": "Service anbieten"
+    },
     "button": {
       "search": "Suchen",
       "search-placeholder": "Ich suche...",
-      "upload": "Hochladen"
+      "upload": "Hochladen",
+      "print":"Modell herstellen",
+      "design":"Modell entwerfen"
     }
   },
   "header": {

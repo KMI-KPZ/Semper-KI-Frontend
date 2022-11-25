@@ -40,7 +40,7 @@ function App() {
         </div>
       </div>
       <Routes data-testid="routes">
-        <Route index element={<Home />} />
+        <Route index element={<Home userType={state.userType} />} />
         <Route path="Process/*" element={<ProcessView />} />
         <Route path="test" element={<RequestTest />} />
         <Route path="login" element={<Login setUser={setUser} />} />

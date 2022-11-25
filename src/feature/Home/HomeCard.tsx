@@ -13,13 +13,13 @@ interface Props {
 export const HomeCard = ({ link, className, icon, text }: Props) => {
   const navigate = useNavigate();
 
-  const changeStyle = (e: any) => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
     navigate(link);
   };
 
   return (
-    <a href="/" className={className} onClick={(e) => changeStyle(e)}>
+    <a href={link} className={className} onClick={handleClick}>
       {icon}
       <div className="card-text">{text}</div>
     </a>

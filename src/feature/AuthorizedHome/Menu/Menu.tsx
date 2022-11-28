@@ -1,12 +1,6 @@
-import PersonIcon from "@mui/icons-material/Person";
-import FactoryOutlinedIcon from "@mui/icons-material/FactoryOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import React, { ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { User } from "../../../interface/Interface";
 import MenuItem from "./MenuItem";
 import { getMenuItems, MenuItemType, SubMenuItemType } from "./MenuItems";
@@ -17,41 +11,39 @@ interface Props {
 
 interface State {
   menuItems: MenuItemType[];
+  selectedMenuItem?: ReactNode;
 }
 
 const Menu = ({ user }: Props) => {
   const [state, setState] = useState<State>({
     menuItems: getMenuItems(user.userType),
   });
+  const location = useLocation();
+  console.log("pathname", location.pathname);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const setExpandMenuItem = (menuItemId: number, expand: boolean) => {
-    let newMenuItem: MenuItemType | undefined = state.menuItems.find(
-      (menuItem: MenuItemType) => menuItem.id === menuItemId
-    );
-    const oldIndex: number = state.menuItems.indexOf(
-      newMenuItem !== undefined ? newMenuItem : state.menuItems[0]
-    );
-    if (newMenuItem !== undefined) newMenuItem.expanded = expand;
-    console.log(state.menuItems, oldIndex);
+    let newMenuItems: MenuItemType[] = [];
+    state.menuItems.forEach((menuItem: MenuItemType) => {
+      let newMenuItem = menuItem;
+      newMenuItem.expanded =
+        menuItem.id === menuItemId
+          ? expand
+          : menuItem.expanded === undefined
+          ? undefined
+          : false;
+      newMenuItems.push(newMenuItem);
+    });
     setState((prevState) => ({
       ...prevState,
-      menuItems:
-        newMenuItem !== undefined
-          ? [
-              ...prevState.menuItems.slice(0, oldIndex),
-              newMenuItem,
-              ...prevState.menuItems.slice(
-                oldIndex + 1,
-                prevState.menuItems.length
-              ),
-            ]
-          : prevState.menuItems,
+      menuItems: newMenuItems,
     }));
   };
 
-  console.log(state.menuItems);
+  const getActiveMenuItemClassname = (path: string): string => {
+    return path === location.pathname ? "active" : "";
+  };
 
   return (
     <div className="authorized-home-menu">
@@ -60,6 +52,7 @@ const Menu = ({ user }: Props) => {
         {state.menuItems.map((menuItem: MenuItemType, index: number) => (
           <React.Fragment key={`${menuItem.id}.${index}`}>
             <MenuItem
+              className={getActiveMenuItemClassname(menuItem.link)}
               menuItem={menuItem}
               setExpandMenuItem={setExpandMenuItem}
             />
@@ -68,7 +61,12 @@ const Menu = ({ user }: Props) => {
                 {menuItem.subMenu &&
                   menuItem.subMenu.map(
                     (subMenuItem: SubMenuItemType, subIndex: number) => (
-                      <li key={`${menuItem.id}.${index}.${subIndex}`}>
+                      <li
+                        key={`${menuItem.id}.${index}.${subIndex}`}
+                        className={getActiveMenuItemClassname(
+                          `${menuItem.link}/${subMenuItem.title}`
+                        )}
+                      >
                         <a
                           href={`/${menuItem.title}/${subMenuItem.title}`}
                           onClick={(e) => {

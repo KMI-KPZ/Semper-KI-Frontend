@@ -11,6 +11,7 @@ export interface MenuItemType {
   id: number;
   userTypes: UserType[];
   title: string;
+  link: string;
   icon: ReactNode;
   expanded?: boolean;
   subMenu?: SubMenuItemType[];
@@ -26,18 +27,21 @@ const MenuItems: MenuItemType[] = [
     id: 1,
     userTypes: ["client", "contractor"],
     title: "dashboard",
+    link: "/",
     icon: <DashboardIcon />,
   },
   {
     id: 2,
     userTypes: ["client"],
     title: "shoppingcart",
+    link: "/shoppingcart",
     icon: <ShoppingCartOutlinedIcon />,
   },
   {
     id: 3,
     userTypes: ["client"],
     title: "orders",
+    link: "/orders",
     icon: <DescriptionOutlinedIcon />,
     expanded: false,
     subMenu: [
@@ -50,6 +54,7 @@ const MenuItems: MenuItemType[] = [
     id: 4,
     userTypes: ["contractor"],
     title: "proceedings",
+    link: "/proceedings",
     icon: <FactoryOutlinedIcon />,
     expanded: false,
     subMenu: [
@@ -61,6 +66,7 @@ const MenuItems: MenuItemType[] = [
     id: 5,
     userTypes: ["contractor"],
     title: "assignments",
+    link: "/assignments",
     icon: <DescriptionOutlinedIcon />,
     expanded: false,
     subMenu: [
@@ -75,6 +81,7 @@ const MenuItems: MenuItemType[] = [
     id: 6,
     userTypes: ["client", "contractor"],
     title: "messages",
+    link: "/messages",
     icon: <EmailOutlinedIcon />,
     expanded: false,
     subMenu: [{ title: "new", selected: false }],
@@ -83,6 +90,7 @@ const MenuItems: MenuItemType[] = [
     id: 7,
     userTypes: ["client", "contractor"],
     title: "account",
+    link: "/account",
     icon: <PersonIcon />,
     expanded: false,
     subMenu: [

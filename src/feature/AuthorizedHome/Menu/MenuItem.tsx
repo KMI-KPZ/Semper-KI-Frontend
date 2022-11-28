@@ -7,11 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 
 interface Props {
+  className: string;
   menuItem: MenuItemType;
   setExpandMenuItem: (menuItemId: number, expand: boolean) => void;
 }
 
-const MenuItem = ({ menuItem, setExpandMenuItem }: Props) => {
+const MenuItem = ({ className, menuItem, setExpandMenuItem }: Props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -34,10 +35,10 @@ const MenuItem = ({ menuItem, setExpandMenuItem }: Props) => {
   };
 
   return (
-    <li>
+    <li className={className}>
       <a
-        href={`/${menuItem.title}`}
-        onClick={(e) => onClickMenuItem(e, menuItem.title)}
+        href={`${menuItem.link}`}
+        onClick={(e) => onClickMenuItem(e, menuItem.link)}
       >
         {menuItem.icon}
         {t(`menu.${menuItem.title}.title`)}

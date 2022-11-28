@@ -50,7 +50,10 @@
                     background-color: #fafafa;
                 }
             }
-
+            .active {
+                background-color: #efefef;
+            }
+            
             ul {
                 list-style: none;
                 display: flex;

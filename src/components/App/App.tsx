@@ -11,6 +11,7 @@ import { User } from "../../interface/Interface";
 import { UserType } from "../../interface/types";
 import Login from "../../feature/Login/Login";
 import Logout from "../../feature/Logout/Logout";
+import AuthorizedHome from "../../feature/AuthorizedHome/AuthorizedHome";
 
 interface State {
   user: User | null;
@@ -28,6 +29,20 @@ function App() {
     setState((prevState) => ({ ...prevState, user }));
   };
 
+  const authorizedRoutes = state.user !== null && (
+    <>
+      <Route path="logout" element={<Logout setUser={setUser} />} />
+      <Route path="*" element={<AuthorizedHome user={state.user} />} />
+    </>
+  );
+
+  const unAuthorizedRoutes = state.user === null && (
+    <>
+      <Route index element={<Home userType={state.userType} />} />
+      <Route path="login" element={<Login setUser={setUser} />} />
+    </>
+  );
+
   return (
     <div className="App" data-testid="app">
       <div className="main-header">
@@ -40,11 +55,10 @@ function App() {
         </div>
       </div>
       <Routes data-testid="routes">
-        <Route index element={<Home userType={state.userType} />} />
         <Route path="Process/*" element={<ProcessView />} />
         <Route path="test" element={<RequestTest />} />
-        <Route path="login" element={<Login setUser={setUser} />} />
-        <Route path="logout" element={<Logout setUser={setUser} />} />
+        {unAuthorizedRoutes}
+        {authorizedRoutes}
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

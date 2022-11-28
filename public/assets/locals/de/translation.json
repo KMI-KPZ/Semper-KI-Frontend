@@ -133,5 +133,39 @@
       "delete": "Löschen",
       "request": "Anfragen"
     }
+  },
+  "menu":{
+    "headline":"Menu",
+    "dashboard.title":"Dashboard",
+    "proceedings":{
+      "title":"Verfahren",
+      "overview":"Übersicht",
+      "create":"Hinzufügen"
+    },
+    "assignments":{
+      "title":"Aufträge",
+      "overview":"Übersicht",
+      "new":"Neu",
+      "in-progress":"In Bearbeitung",
+      "finished":"Abgeschlossen",
+      "canceled":"Abgelehnt"
+    },
+    "account":{
+      "title":"Konto",
+      "overview":"Übersicht",
+      "edit":"Bearbeiten",
+      "logout":"Abmelden"
+    },
+    "messages":{
+      "title":"Nachrichten",
+      "new":"Neu"
+    },
+    "shoppingcart.title":"Warenkorb",
+    "orders": {
+      "title":"Bestellungen",
+      "overview":"Übersicht",
+      "in-progress":"In Bearbeitung",
+      "finished":"Abgeschlossen"
+    }
   }
 }

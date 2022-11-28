@@ -1,0 +1,91 @@
+@import "../../variables";
+
+.authorized-home {
+    margin:20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+    .authorized-home-menu {
+        display: flex;
+        flex-direction: column;
+        background-color: $white;
+        width: 25%;
+        height: calc(100vh - $heightHeader - 2*20px);
+        overflow-x: scroll;
+        overflow-x: hidden;
+
+        .authorized-home-menu-headline{
+            font-size: 2em;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0 20px;
+            li{
+                height: 50px;
+                display: flex;
+                flex-direction: row;
+                a{
+                    display: flex;
+                    flex-direction: row;
+                    gap: 20px;
+                    justify-content: flex-start;
+                    align-items: center;
+                    width: 100%;
+                    img, svg {
+                        margin: 5px;
+                    }
+
+                    .expand-icon {
+                        margin-left: auto;
+                    }
+                }
+                &:hover {
+                    background-color: #fafafa;
+                }
+            }
+
+            ul {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                padding:  10px;
+                width: 100%;
+                li{
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                    a{
+                        display: flex;
+                        flex-direction: row;
+                        gap: 20px;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        img, svg {
+                            margin: 5px;
+                        }
+    
+                        .expand-icon {
+                            margin-left: auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .authorized-home-container{
+        background-color: $white;
+        width: 75%;
+        height: calc(100vh - $heightHeader - 2*20px);
+        overflow-x: scroll;
+        overflow-x: hidden;
+    }
+}

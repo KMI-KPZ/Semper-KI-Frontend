@@ -2,7 +2,11 @@ import { useNavigate } from "react-router-dom";
 import "../../variables.scss";
 import { useTranslation } from "react-i18next";
 
-export const Error = () => {
+interface Props {
+  text?: string;
+}
+
+export const Error = ({ text }: Props) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -21,6 +25,7 @@ export const Error = () => {
         backgroundColor: "grey",
       }}
     >
+      {text && <span data-testid="ErrorMessage">{text}</span>}
       <span data-testid="ErrorMessage">{t("error.text")}</span>
       <a
         data-testid="HomeButton"

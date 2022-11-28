@@ -122,7 +122,7 @@ export const Header = ({ user, userType, setUserType }: Props) => {
         <HeaderLink
           text={t("header.shoppingcart")}
           Icon={<ShoppingCartOutlinedIcon />}
-          link="/cart"
+          link="/shoppingcart"
         />
       </>
     );

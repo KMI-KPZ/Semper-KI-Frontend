@@ -1,3 +1,4 @@
+import { stat } from "fs";
 import React, { ReactNode, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -16,26 +17,17 @@ interface Props {
 interface State {
   open: boolean;
   navItems: NavigationItemType[];
-  activeNavItem?: string;
+  activeNavItem: string;
 }
 
 const Navigation = ({ user }: Props) => {
-  const { pathname } = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [state, setState] = useState<State>({
-    open: true,
+    open: false,
     navItems: getNavigationItems(user.userType),
-    activeNavItem: pathname,
+    activeNavItem: "dashboard",
   });
-
-  useEffect(() => {
-    setState((preyState) => ({
-      ...preyState,
-      activeNavItem: pathname,
-      open: preyState.activeNavItem !== pathname ? false : true,
-    }));
-  }, [pathname]);
 
   const setExpandNavigationItem = (navItemId: number, expand: boolean) => {
     let newNavigationItems: NavigationItemType[] = [];
@@ -55,6 +47,20 @@ const Navigation = ({ user }: Props) => {
     }));
   };
 
+  const handleMouseOnNavBox = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setTimeout(() => {
+      setState((prevState) => ({
+        ...prevState,
+        open: true,
+      }));
+    }, 250);
+  };
+
   const handleClickNavBox = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     open: boolean
@@ -64,27 +70,47 @@ const Navigation = ({ user }: Props) => {
     setState((prevState) => ({ ...prevState, open: open }));
   };
 
+  const navigateWithEffect = (link: string, title: string) => {
+    setState((prevState) => ({
+      ...prevState,
+      activeNavItem: title,
+      open: false,
+    }));
+    navigate(link);
+  };
+
+  const handleClickNavSubItem = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    link: string,
+    title: string
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigateWithEffect(link, title);
+  };
+
   return (
     <div
-      className={`authorized-nav-box-outside ${state.open ? "open" : "closed"}`}
+      className={`authorized-nav-box-outside ${state.open ? "open" : ""}`}
       onClick={(e) => handleClickNavBox(e, false)}
     >
       <div
         className="authorized-nav-box"
         onClick={(e) => handleClickNavBox(e, true)}
+        onMouseEnter={(e) => handleMouseOnNavBox(e)}
       >
         <div className="authorized-nav">
-          {state.open && (
-            <h1 className="authorized-nav-headline">{t("nav.headline")}</h1>
-          )}
           <ul>
             {state.navItems.map(
               (navItem: NavigationItemType, index: number) => (
                 <React.Fragment key={`${navItem.id}.${index}`}>
                   <NavigationItem
+                    navigate={navigateWithEffect}
                     open={state.open}
                     className={
-                      navItem.link === state.activeNavItem ? "active" : ""
+                      state.activeNavItem.includes(navItem.title)
+                        ? "active"
+                        : ""
                     }
                     navItem={navItem}
                     setExpandNavigationItem={setExpandNavigationItem}
@@ -99,23 +125,16 @@ const Navigation = ({ user }: Props) => {
                               subNavigationItem: SubNavigationItemType,
                               subIndex: number
                             ) => (
-                              <li
-                                key={`${navItem.id}.${index}.${subIndex}`}
-                                className={
-                                  `${navItem.link}/${subNavigationItem.title}` ===
-                                  state.activeNavItem
-                                    ? "active"
-                                    : ""
-                                }
-                              >
+                              <li key={`${navItem.id}.${index}.${subIndex}`}>
                                 <a
                                   href={`/${navItem.title}/${subNavigationItem.title}`}
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    navigate(
-                                      `/${navItem.title}/${subNavigationItem.title}`
-                                    );
-                                  }}
+                                  onClick={(e) =>
+                                    handleClickNavSubItem(
+                                      e,
+                                      `/${navItem.title}/${subNavigationItem.title}`,
+                                      navItem.title
+                                    )
+                                  }
                                 >
                                   {t(
                                     `nav.${navItem.title}.${subNavigationItem.title}`

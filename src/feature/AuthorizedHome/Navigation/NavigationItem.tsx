@@ -3,7 +3,6 @@ import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
 import { NavigationItemType } from "./NavigationItems";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 
 interface Props {
@@ -11,6 +10,7 @@ interface Props {
   className: string;
   navItem: NavigationItemType;
   setExpandNavigationItem: (navItemId: number, expand: boolean) => void;
+  navigate: (link: string, title: string) => void;
 }
 
 const NavigationItem = ({
@@ -18,9 +18,9 @@ const NavigationItem = ({
   className,
   navItem,
   setExpandNavigationItem,
+  navigate,
 }: Props) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const onClickNavigationItem = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -28,7 +28,7 @@ const NavigationItem = ({
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    navigate(link);
+    navigate(link, navItem.title);
   };
 
   const onClickNavigationItemIcon = (
@@ -48,27 +48,25 @@ const NavigationItem = ({
         onClick={(e) => onClickNavigationItem(e, navItem.link)}
       >
         {navItem.icon}
-        {open && (
-          <>
-            {t(`nav.${navItem.title}.title`)}
-            {navItem.expanded !== undefined && navItem.expanded === false && (
-              <IconButton
-                className="expand-icon"
-                onClick={(e) => onClickNavigationItemIcon(e, navItem.id, true)}
-              >
-                <ExpandMoreOutlinedIcon />
-              </IconButton>
-            )}
-            {navItem.expanded !== undefined && navItem.expanded === true && (
-              <IconButton
-                className="expand-icon"
-                onClick={(e) => onClickNavigationItemIcon(e, navItem.id, false)}
-              >
-                <ExpandLessOutlinedIcon />
-              </IconButton>
-            )}
-          </>
-        )}
+        <div className={`nav-box-closable ${open ? "open" : ""}`}>
+          {t(`nav.${navItem.title}.title`)}
+          {navItem.expanded !== undefined && navItem.expanded === false && (
+            <IconButton
+              className="expand-icon"
+              onClick={(e) => onClickNavigationItemIcon(e, navItem.id, true)}
+            >
+              <ExpandMoreOutlinedIcon />
+            </IconButton>
+          )}
+          {navItem.expanded !== undefined && navItem.expanded === true && (
+            <IconButton
+              className="expand-icon"
+              onClick={(e) => onClickNavigationItemIcon(e, navItem.id, false)}
+            >
+              <ExpandLessOutlinedIcon />
+            </IconButton>
+          )}
+        </div>
       </a>
     </li>
   );

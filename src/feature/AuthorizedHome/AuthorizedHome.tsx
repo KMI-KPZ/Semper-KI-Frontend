@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { User } from "../../interface/Interface";
-import Menu from "./Menu/Menu";
+import Menu from "./Navigation/Navigation";
 import "./AuthorizedHome.scss";
 import Dashboard from "./Dashboard/Dashboard";
 import { Error } from "../Error/Error";

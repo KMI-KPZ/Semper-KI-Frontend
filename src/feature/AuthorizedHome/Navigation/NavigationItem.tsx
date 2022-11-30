@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
-import { MenuItemType } from "./MenuItems";
+import { NavigationItemType } from "./NavigationItems";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
@@ -9,54 +9,60 @@ import { IconButton } from "@mui/material";
 interface Props {
   open: boolean;
   className: string;
-  menuItem: MenuItemType;
-  setExpandMenuItem: (menuItemId: number, expand: boolean) => void;
+  navItem: NavigationItemType;
+  setExpandNavigationItem: (navItemId: number, expand: boolean) => void;
 }
 
-const MenuItem = ({ open, className, menuItem, setExpandMenuItem }: Props) => {
+const NavigationItem = ({
+  open,
+  className,
+  navItem,
+  setExpandNavigationItem,
+}: Props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const onClickMenuItem = (
+  const onClickNavigationItem = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     link: string
   ) => {
     e.preventDefault();
+    e.stopPropagation();
     navigate(link);
   };
 
-  const onClickMenuItemIcon = (
+  const onClickNavigationItemIcon = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    menuItemId: number,
+    navItemId: number,
     expand: boolean
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    setExpandMenuItem(menuItemId, expand);
+    setExpandNavigationItem(navItemId, expand);
   };
 
   return (
     <li className={className}>
       <a
-        href={`${menuItem.link}`}
-        onClick={(e) => onClickMenuItem(e, menuItem.link)}
+        href={`${navItem.link}`}
+        onClick={(e) => onClickNavigationItem(e, navItem.link)}
       >
-        {menuItem.icon}
+        {navItem.icon}
         {open && (
           <>
-            {t(`menu.${menuItem.title}.title`)}
-            {menuItem.expanded !== undefined && menuItem.expanded === false && (
+            {t(`nav.${navItem.title}.title`)}
+            {navItem.expanded !== undefined && navItem.expanded === false && (
               <IconButton
                 className="expand-icon"
-                onClick={(e) => onClickMenuItemIcon(e, menuItem.id, true)}
+                onClick={(e) => onClickNavigationItemIcon(e, navItem.id, true)}
               >
                 <ExpandMoreOutlinedIcon />
               </IconButton>
             )}
-            {menuItem.expanded !== undefined && menuItem.expanded === true && (
+            {navItem.expanded !== undefined && navItem.expanded === true && (
               <IconButton
                 className="expand-icon"
-                onClick={(e) => onClickMenuItemIcon(e, menuItem.id, false)}
+                onClick={(e) => onClickNavigationItemIcon(e, navItem.id, false)}
               >
                 <ExpandLessOutlinedIcon />
               </IconButton>
@@ -68,4 +74,4 @@ const MenuItem = ({ open, className, menuItem, setExpandMenuItem }: Props) => {
   );
 };
 
-export default MenuItem;
+export default NavigationItem;

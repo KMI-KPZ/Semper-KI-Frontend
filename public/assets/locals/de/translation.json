@@ -134,7 +134,7 @@
       "request": "Anfragen"
     }
   },
-  "menu":{
+  "nav":{
     "headline":"Menu",
     "dashboard.title":"Dashboard",
     "proceedings":{

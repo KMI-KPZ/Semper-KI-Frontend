@@ -7,22 +7,22 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { ReactNode } from "react";
 import { UserType } from "../../../interface/types";
 
-export interface MenuItemType {
+export interface NavigationItemType {
   id: number;
   userTypes: UserType[];
   title: string;
   link: string;
   icon: ReactNode;
   expanded?: boolean;
-  subMenu?: SubMenuItemType[];
+  subNavigation?: SubNavigationItemType[];
 }
 
-export interface SubMenuItemType {
+export interface SubNavigationItemType {
   title: string;
   selected: boolean;
 }
 
-const MenuItems: MenuItemType[] = [
+const NavigationItems: NavigationItemType[] = [
   {
     id: 1,
     userTypes: ["client", "contractor"],
@@ -44,7 +44,7 @@ const MenuItems: MenuItemType[] = [
     link: "/orders",
     icon: <DescriptionOutlinedIcon />,
     expanded: false,
-    subMenu: [
+    subNavigation: [
       { title: "overview", selected: false },
       { title: "in-progress", selected: false },
       { title: "finished", selected: false },
@@ -57,7 +57,7 @@ const MenuItems: MenuItemType[] = [
     link: "/proceedings",
     icon: <FactoryOutlinedIcon />,
     expanded: false,
-    subMenu: [
+    subNavigation: [
       { title: "overview", selected: false },
       { title: "create", selected: false },
     ],
@@ -69,7 +69,7 @@ const MenuItems: MenuItemType[] = [
     link: "/assignments",
     icon: <DescriptionOutlinedIcon />,
     expanded: false,
-    subMenu: [
+    subNavigation: [
       { title: "overview", selected: false },
       { title: "new", selected: false },
       { title: "in-progress", selected: false },
@@ -84,7 +84,7 @@ const MenuItems: MenuItemType[] = [
     link: "/messages",
     icon: <EmailOutlinedIcon />,
     expanded: false,
-    subMenu: [{ title: "new", selected: false }],
+    subNavigation: [{ title: "new", selected: false }],
   },
   {
     id: 7,
@@ -93,7 +93,7 @@ const MenuItems: MenuItemType[] = [
     link: "/account",
     icon: <PersonIcon />,
     expanded: false,
-    subMenu: [
+    subNavigation: [
       { title: "overview", selected: false },
       { title: "edit", selected: false },
       { title: "logout", selected: false },
@@ -101,8 +101,10 @@ const MenuItems: MenuItemType[] = [
   },
 ];
 
-export const getMenuItems = (userType: UserType): MenuItemType[] => {
-  return MenuItems.filter((menuItem: MenuItemType) =>
-    menuItem.userTypes.includes(userType)
+export const getNavigationItems = (
+  userType: UserType
+): NavigationItemType[] => {
+  return NavigationItems.filter((navItem: NavigationItemType) =>
+    navItem.userTypes.includes(userType)
   );
 };

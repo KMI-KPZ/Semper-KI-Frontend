@@ -167,5 +167,10 @@
       "in-progress":"In Bearbeitung",
       "finished":"Abgeschlossen"
     }
+  },
+  "dashboard":{
+    "headline":"Übersicht",
+    "proceedings":"Verfahren",
+    "contracts":"Aufträge"
   }
 }

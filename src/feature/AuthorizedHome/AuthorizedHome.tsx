@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { User } from "../../interface/Interface";
 import Menu from "./Navigation/Navigation";
 import "./AuthorizedHome.scss";
@@ -14,6 +14,7 @@ interface Props {
 const AuthorizedHome = ({ user }: Props) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { pathname } = useLocation();
 
   return (
     <div className="authorized-home">

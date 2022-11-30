@@ -117,11 +117,37 @@
     }
 
     .authorized-home-container{
-        background-color: $white;
+        display: flex;
+        flex-direction: column;
+        gap: $containerGap;
         width: 80%;
         height: calc(100vh - $heightHeader - 2*20px);
         overflow-x: scroll;
         overflow-x: hidden;
         display: flex;
+
+        .authorized-home-headline {
+            text-align: center;
+            background-color: $white;
+            margin: 0;
+            padding: 10px 0;
+        }
+
+        .authorized-home-dashboard{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            height: 100%;
+            gap: $containerGap;
+
+            .dashboard-box{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: $white;
+                width: 100%;
+                height: 100%;
+            }
+        }
     }
 }

@@ -7,12 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 
 interface Props {
+  open: boolean;
   className: string;
   menuItem: MenuItemType;
   setExpandMenuItem: (menuItemId: number, expand: boolean) => void;
 }
 
-const MenuItem = ({ className, menuItem, setExpandMenuItem }: Props) => {
+const MenuItem = ({ open, className, menuItem, setExpandMenuItem }: Props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -41,22 +42,26 @@ const MenuItem = ({ className, menuItem, setExpandMenuItem }: Props) => {
         onClick={(e) => onClickMenuItem(e, menuItem.link)}
       >
         {menuItem.icon}
-        {t(`menu.${menuItem.title}.title`)}
-        {menuItem.expanded !== undefined && menuItem.expanded === false && (
-          <IconButton
-            className="expand-icon"
-            onClick={(e) => onClickMenuItemIcon(e, menuItem.id, true)}
-          >
-            <ExpandMoreOutlinedIcon />
-          </IconButton>
-        )}
-        {menuItem.expanded !== undefined && menuItem.expanded === true && (
-          <IconButton
-            className="expand-icon"
-            onClick={(e) => onClickMenuItemIcon(e, menuItem.id, false)}
-          >
-            <ExpandLessOutlinedIcon />
-          </IconButton>
+        {open && (
+          <>
+            {t(`menu.${menuItem.title}.title`)}
+            {menuItem.expanded !== undefined && menuItem.expanded === false && (
+              <IconButton
+                className="expand-icon"
+                onClick={(e) => onClickMenuItemIcon(e, menuItem.id, true)}
+              >
+                <ExpandMoreOutlinedIcon />
+              </IconButton>
+            )}
+            {menuItem.expanded !== undefined && menuItem.expanded === true && (
+              <IconButton
+                className="expand-icon"
+                onClick={(e) => onClickMenuItemIcon(e, menuItem.id, false)}
+              >
+                <ExpandLessOutlinedIcon />
+              </IconButton>
+            )}
+          </>
         )}
       </a>
     </li>

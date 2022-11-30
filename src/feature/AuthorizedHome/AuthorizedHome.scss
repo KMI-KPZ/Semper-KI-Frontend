@@ -6,77 +6,104 @@
     flex-direction: row;
     gap: 20px;
 
-    .authorized-home-menu {
+    .authorized-home-content-box{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         background-color: $white;
-        width: 25%;
         height: calc(100vh - $heightHeader - 2*20px);
         overflow-x: scroll;
         overflow-x: hidden;
 
-        .authorized-home-menu-headline{
-            font-size: 2em;
-            font-weight: 400;
-            text-align: center;
-        }
-
-        ul {
-            list-style: none;
+        .authorized-home-nav{
+            width: 20px;
             display: flex;
             flex-direction: column;
-            margin: 0;
-            padding: 0 20px;
-            li{
-                height: 50px;
-                display: flex;
-                flex-direction: row;
-                a{
-                    display: flex;
-                    flex-direction: row;
-                    gap: 20px;
-                    justify-content: flex-start;
-                    align-items: center;
-                    width: 100%;
-                    img, svg {
-                        margin: 5px;
-                    }
+            align-items: center;
+            justify-content: center;
 
-                    .expand-icon {
-                        margin-left: auto;
-                    }
+            .authorized-home-nav-icon{
+                &.open{
+                    transform: rotate(-90deg);
                 }
-                &:hover {
-                    background-color: #fafafa;
+                &.close{
+                    transform: rotate(90deg);
                 }
             }
-            .active {
-                background-color: #efefef;
+
+            &:hover {
+                background-color: #fafafa;
             }
-            
+        }
+
+        .authorized-home-menu {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .authorized-home-menu-headline{
+                font-size: 2em;
+                font-weight: 400;
+                text-align: center;
+                margin: 10px 0 0 0;
+            }
+
             ul {
                 list-style: none;
                 display: flex;
                 flex-direction: column;
-                padding:  10px;
-                width: 100%;
+                margin: 0;
+                padding: 10px 10px;
                 li{
+                    height: 50px;
                     display: flex;
                     flex-direction: row;
-                    width: 100%;
                     a{
                         display: flex;
                         flex-direction: row;
                         gap: 20px;
-                        justify-content: center;
+                        justify-content: flex-start;
                         align-items: center;
                         width: 100%;
                         img, svg {
                             margin: 5px;
                         }
-    
+
                         .expand-icon {
                             margin-left: auto;
+                        }
+                    }
+                    &:hover {
+                        background-color: #fafafa;
+                    }
+                }
+                .active {
+                    background-color: #efefef;
+                }
+                
+                ul {
+                    list-style: none;
+                    display: flex;
+                    flex-direction: column;
+                    padding:  10px;
+                    width: 100%;
+                    li{
+                        display: flex;
+                        flex-direction: row;
+                        width: 100%;
+                        a{
+                            display: flex;
+                            flex-direction: row;
+                            gap: 20px;
+                            justify-content: center;
+                            align-items: center;
+                            width: 100%;
+                            img, svg {
+                                margin: 5px;
+                            }
+        
+                            .expand-icon {
+                                margin-left: auto;
+                            }
                         }
                     }
                 }
@@ -90,5 +117,6 @@
         height: calc(100vh - $heightHeader - 2*20px);
         overflow-x: scroll;
         overflow-x: hidden;
+        display: flex;
     }
 }

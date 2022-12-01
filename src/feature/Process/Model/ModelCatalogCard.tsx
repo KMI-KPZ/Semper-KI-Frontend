@@ -1,6 +1,6 @@
-import "../../../../styles.scss";
-import "../../ProcessView.scss";
-import { Model } from "../../../../interface/Interface";
+import "../../../styles.scss";
+import "./../ProcessView.scss";
+import { Model } from "../../../interface/Interface";
 import React, { useState } from "react";
 
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -69,7 +69,7 @@ export const ModelCatalogCard = ({
         <div className="model-card-headline">{model.file.name}</div>
         <img
           className="model-card-img"
-          src={require("../../../../assets/images/model_placeholder.png")}
+          src={require("../../../assets/images/model_placeholder.png")}
           alt="Model"
         />
         <div className="model-card-description">Kurzbeschreibung</div>

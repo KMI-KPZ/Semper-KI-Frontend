@@ -4,7 +4,7 @@ import { useState } from "react";
 import "../../styles.scss";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ModelUpload } from "./Model/ModelUpload";
-import { ModelCatalog } from "./Model/ModelCatalog/ModelCatalog";
+import { ModelCatalog } from "./Model/ModelCatalog";
 import { Error } from "../Error/Error";
 import { ShoppingCart } from "../../components/Process/ProcessShoppingCart/ProcessShoppingCart";
 import {
@@ -16,12 +16,12 @@ import {
   Manufacturer,
   Additive,
 } from "../../interface/Interface";
-import { MaterialCatalog } from "./Material/MaterialCatalog/MaterialCatalog";
+import { MaterialCatalog } from "./Material/MaterialCatalog";
 import { PostProcessingView } from "./PostProcessing/PostProcessingView";
 import { AdditiveView } from "./Additive/AdditiveView";
 import { ModelView } from "./Model/ModelView";
 import { MaterialView } from "./Material/MaterialView";
-import { ManufacturerCatalog } from "./Manufacturer/ManufacturerCatalog/ManufacturerCatalog";
+import { ManufacturerCatalog } from "./Manufacturer/ManufacturerCatalog";
 import { Overview } from "./Overview/Overview";
 import Filter from "../../components/Process/Filter/Filter";
 

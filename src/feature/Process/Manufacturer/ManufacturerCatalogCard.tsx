@@ -1,6 +1,6 @@
-import "../../ProcessView.scss";
-import "../Manufacturer.scss";
-import { Manufacturer } from "../../../../interface/Interface";
+import "../ProcessView.scss";
+import "./Manufacturer.scss";
+import { Manufacturer } from "../../../interface/Interface";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -26,7 +26,7 @@ export const ManufacturerCatalogCard = ({
     <div className="manufacturer-card">
       <img
         className="manufacturer-card-map"
-        src={require("../../../../assets/images/map_placeholder.png")}
+        src={require("../../../assets/images/map_placeholder.png")}
         alt="Manufacturer"
       />
       <div className="manufacturer-card-column">
@@ -81,7 +81,7 @@ export const ManufacturerCatalogCard = ({
       <div className="manufacturer-card-column">
         <img
           className="firm-logo"
-          src={require("../../../../assets/images/firm_logo_placeholder.png")}
+          src={require("../../../assets/images/firm_logo_placeholder.png")}
           alt="Firm Logo"
         />
         <div className="manufacturer-card-text">

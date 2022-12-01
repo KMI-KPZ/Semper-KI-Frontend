@@ -1,6 +1,6 @@
-import "../../ProcessView.scss";
-import "../Material.scss";
-import { Material } from "../../../../interface/Interface";
+import "../ProcessView.scss";
+import "./Material.scss";
+import { Material } from "../../../interface/Interface";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -26,7 +26,7 @@ export const MaterialCatalogCard = ({
     <div className="material-card">
       <img
         className="material-card-image"
-        src={require("../../../../assets/images/material_placeholder.png")}
+        src={require("../../../assets/images/material_placeholder.png")}
         alt="Material"
       />
       <div className="material-card-column">

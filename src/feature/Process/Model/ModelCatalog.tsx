@@ -1,13 +1,11 @@
-import "../../../../styles.scss";
-import "../../ProcessView.scss";
+import "../../../styles.scss";
+import "./../ProcessView.scss";
 import React from "react";
-import SettingsIcon from "@mui/icons-material/Settings";
-import SearchIcon from "@mui/icons-material/Search";
-import { Model } from "../../../../interface/Interface";
-import { ModelCatalogCard } from "./ModelCatalogCard";
-import { useFetch } from "../../../../hooks/useFetch";
 import { useTranslation } from "react-i18next";
-import Search from "../../../../components/Process/Search/Search";
+import { Model } from "../../../interface/Interface";
+import { useFetch } from "../../../hooks/useFetch";
+import Search from "../../../components/Process/Search/Search";
+import { ModelCatalogCard } from "./ModelCatalogCard";
 
 interface Props {
   selectModel: (model: Model) => void;

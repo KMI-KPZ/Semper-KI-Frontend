@@ -1,14 +1,12 @@
-import "../../../../styles.scss";
-import "../../ProcessView.scss";
-import "../Material.scss";
-import SettingsIcon from "@mui/icons-material/Settings";
-import SearchIcon from "@mui/icons-material/Search";
+import "../../../styles.scss";
+import "../ProcessView.scss";
+import "./Material.scss";
 import React, { useState } from "react";
-import { Material } from "../../../../interface/Interface";
-import { MaterialCatalogCard } from "./MaterialCatalogCard";
-import { useFetch } from "../../../../hooks/useFetch";
 import { useTranslation } from "react-i18next";
-import Search from "../../../../components/Process/Search/Search";
+import { useFetch } from "../../../hooks/useFetch";
+import Search from "../../../components/Process/Search/Search";
+import { MaterialCatalogCard } from "./MaterialCatalogCard";
+import { Material } from "../../../interface/Interface";
 
 interface Props {
   setProgressState: (progressStateIndex: number) => void;

@@ -117,7 +117,7 @@ export const Header = ({ user, userType, setUserType }: Props) => {
         <HeaderLink
           text={t("header.newOrder")}
           Icon={<NoteAddOutlinedIcon />}
-          link="/newProcess"
+          link="/process/Model/Catalog"
         />
         <HeaderLink
           text={t("header.shoppingcart")}
@@ -131,26 +131,26 @@ export const Header = ({ user, userType, setUserType }: Props) => {
         <HeaderLink
           text={t("header.contracts")}
           Icon={<DescriptionOutlinedIcon />}
-          link="/menu/contracts"
+          link="/contracts"
         />
       </>
     );
     const authorizedLinks = (
       <>
-        <HeaderLink
+        {/* <HeaderLink
           text={t("header.overview")}
           Icon={<DashboardIcon />}
           link="/menu"
-        />
+        /> */}
         <HeaderLink
           text={t("header.messages")}
           Icon={<EmailOutlinedIcon />}
-          link="/menu/messages"
+          link="/messages"
         />
         <HeaderLink
           text={t("header.account")}
           Icon={<PersonIcon />}
-          link="/menu/account"
+          link="/account"
         />
         <HeaderLink
           text={t("header.logout")}
@@ -202,6 +202,7 @@ export const Header = ({ user, userType, setUserType }: Props) => {
       </a>
       <nav className="main-nav" data-testid="mainNav">
         <ul>
+          {getLinks()}
           <li>
             <ClickAwayListener onClickAway={closeMenu}>
               <div>
@@ -227,7 +228,6 @@ export const Header = ({ user, userType, setUserType }: Props) => {
               </div>
             </ClickAwayListener>
           </li>
-          {getLinks()}
         </ul>
       </nav>
     </header>

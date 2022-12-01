@@ -6,6 +6,8 @@ import Menu from "./Navigation/Navigation";
 import "./AuthorizedHome.scss";
 import Dashboard from "./Dashboard/Dashboard";
 import { Error } from "../Error/Error";
+import Orders from "./Orders/Orders";
+import { ProcessView } from "../Process/ProcessView";
 
 interface Props {
   user: User;
@@ -23,11 +25,12 @@ const AuthorizedHome = ({ user }: Props) => {
         <Routes>
           <Route index element={<Dashboard />} />
           <Route path="shoppingcart" element={<Error text="shoppingcart" />} />
-          <Route path="orders" element={<Error text="orders" />} />
+          <Route path="orders" element={<Orders />} />
           <Route path="proceedings" element={<Error text="proceedings" />} />
           <Route path="assignments" element={<Error text="assignments" />} />
           <Route path="messages" element={<Error text="messages" />} />
           <Route path="account" element={<Error text="account" />} />
+          <Route path="process/*" element={<ProcessView />} />
         </Routes>
       </section>
     </div>

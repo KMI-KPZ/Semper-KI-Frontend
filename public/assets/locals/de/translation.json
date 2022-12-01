@@ -172,5 +172,8 @@
     "headline":"Übersicht",
     "proceedings":"Verfahren",
     "contracts":"Aufträge"
+  },
+  "orders":{
+    "headline":"Bestellungen"
   }
 }

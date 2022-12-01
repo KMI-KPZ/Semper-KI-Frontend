@@ -9,11 +9,11 @@ const Dashboard = (props: Props) => {
   return (
     <>
       <h1 className="authorized-home-headline">{t("dashboard.headline")}</h1>
-      <div className="authorized-home-dashboard">
-        <div className="dashboard-box">
+      <div className="authorized-home-content horizontal">
+        <div className="authorized-home-content-box vertical full-height">
           <h2>{t("dashboard.proceedings")}</h2>
         </div>
-        <div className="dashboard-box">
+        <div className="authorized-home-content-box vertical full-height">
           <h2>{t("dashboard.contracts")}</h2>
         </div>
       </div>

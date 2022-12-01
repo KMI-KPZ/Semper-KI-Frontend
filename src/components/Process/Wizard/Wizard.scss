@@ -9,7 +9,7 @@
     transition: filter 100ms;
 
     .wizard-card-line {
-      height: 2px;
+      height: 3px;
       background-color: $black;
       visibility: hidden;
       margin: 0;
@@ -21,7 +21,7 @@
 
     &:hover {
       cursor: pointer;
-      filter: brightness(0.8);
+      filter: brightness(0.95);
     }
   }
 

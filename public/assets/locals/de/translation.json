@@ -50,6 +50,7 @@
   },
   "model": {
     "catalog": {
+      "headline":"Modelle",
       "search-placeholder": "Ich benötige...",
       "loading-error": "Fehler beim laden der Modelle",
       "error-name": "Error: ",
@@ -67,6 +68,7 @@
   },
   "material": {
     "catalog": {
+      "headline":"Materialien",
       "search-placeholder": "Herstellen aus...",
       "loading-error": "Fehler beim laden der Materialien",
       "error-name": "Error: ",
@@ -85,6 +87,7 @@
   },
   "manufacturer": {
     "catalog": {
+      "headline":"Hersteller",
       "search-placeholder": "Herstellen lassen bei...",
       "loading-error": "Fehler beim laden der Hersteller",
       "error-name": "Error: ",

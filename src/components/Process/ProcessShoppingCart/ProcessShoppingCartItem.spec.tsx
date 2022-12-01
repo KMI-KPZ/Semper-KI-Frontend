@@ -109,7 +109,7 @@ describe(ShoppingCartItem, () => {
     fireEvent.click(deleteButton);
     expect(mockedDeleteShoppingCartItem).toHaveBeenCalledWith(1);
   });
-  describe("test click on prop", () => {
+  describe.skip("test click on prop", () => {
     beforeEach(() => {
       render(
         <ShoppingCartItem

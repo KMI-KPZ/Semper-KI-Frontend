@@ -7,6 +7,7 @@ import { Model } from "../../../../interface/Interface";
 import { ModelCatalogCard } from "./ModelCatalogCard";
 import { useFetch } from "../../../../hooks/useFetch";
 import { useTranslation } from "react-i18next";
+import Search from "../../../../components/Process/Search/Search";
 
 interface Props {
   selectModel: (model: Model) => void;
@@ -22,22 +23,12 @@ export const ModelCatalog = ({ selectModel, setProgressState }: Props) => {
   } = useFetch<Model>({ url: "http://localhost:3030/modelList" });
 
   return (
-    <div className="process-content-container">
-      <div className="catalog-container">
-        <div className="user-input">
-          <input
-            type="text"
-            className="input-field"
-            placeholder={t("model.catalog.search-placeholder")}
-            autoFocus
-          />
-          <div className="settings button light">
-            <SettingsIcon />
-          </div>
-          <div className="search button dark">
-            <SearchIcon />
-          </div>
-        </div>
+    <div className="process-container vertical">
+      <Search
+        headline={t("model.catalog.headline")}
+        placeholder={t("model.catalog.search-placeholder")}
+      />
+      <div className="process-container content search">
         {modelLoadingError && (
           <div>
             {t("model.catalog.loading-error")}

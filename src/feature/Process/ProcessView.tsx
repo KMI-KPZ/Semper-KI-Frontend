@@ -1,4 +1,4 @@
-import { Wizard } from "./Wizard/Wizard";
+import { Wizard } from "../../components/Process/Wizard/Wizard";
 import { useState } from "react";
 
 import "../../styles.scss";
@@ -6,7 +6,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { ModelUpload } from "./Model/ModelUpload";
 import { ModelCatalog } from "./Model/ModelCatalog/ModelCatalog";
 import { Error } from "../Error/Error";
-import { ShoppingCart } from "./ProcessShoppingCart/ProcessShoppingCart";
+import { ShoppingCart } from "../../components/Process/ProcessShoppingCart/ProcessShoppingCart";
 import {
   Material,
   Model,
@@ -23,7 +23,7 @@ import { ModelView } from "./Model/ModelView";
 import { MaterialView } from "./Material/MaterialView";
 import { ManufacturerCatalog } from "./Manufacturer/ManufacturerCatalog/ManufacturerCatalog";
 import { Overview } from "./Overview/Overview";
-import Filter from "./Filter/Filter";
+import Filter from "../../components/Process/Filter/Filter";
 
 export const ProcessView = () => {
   const [state, setState] = useState<ProcessState>({

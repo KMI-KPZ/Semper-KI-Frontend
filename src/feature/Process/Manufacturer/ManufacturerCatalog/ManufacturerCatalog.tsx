@@ -10,6 +10,7 @@ import { ManufacturerCatalogCard } from "./ManufacturerCatalogCard";
 import { useFetch } from "../../../../hooks/useFetch";
 import { useTranslation } from "react-i18next";
 import { isNumber } from "../../../../services/utils";
+import Search from "../../../../components/Process/Search/Search";
 
 type ManufacturerAttribut =
   | "manufacturerId"
@@ -122,45 +123,10 @@ export const ManufacturerCatalog = ({
   return (
     <div className="process-content-container">
       <div className="catalog-container">
-        <div className="user-input">
-          <input
-            type="text"
-            className="input-field"
-            placeholder={t("manufacturer.catalog.search-placeholder")}
-          />
-          <div className="settings button light">
-            <SettingsIcon />
-          </div>
-          <div className="search button dark">
-            <SearchIcon />
-          </div>
-        </div>
-        <div className="filter">
-          <div
-            className={getFilterClassName(0)}
-            onClick={(e) => handleClickFilter(e, 0)}
-          >
-            {t("manufacturer.catalog.filter.top-manufacturer")}
-          </div>
-          <div
-            className={getFilterClassName(1)}
-            onClick={(e) => handleClickFilter(e, 1)}
-          >
-            {t("manufacturer.catalog.filter.distance")}
-          </div>
-          <div
-            className={getFilterClassName(2)}
-            onClick={(e) => handleClickFilter(e, 2)}
-          >
-            {t("manufacturer.catalog.filter.time")}
-          </div>
-          <div
-            className={getFilterClassName(3)}
-            onClick={(e) => handleClickFilter(e, 3)}
-          >
-            {t("manufacturer.catalog.filter.price")}
-          </div>
-        </div>
+        <Search
+          headline={t("manufacturer.catalog.headline")}
+          placeholder={t("manufacturer.catalog.search-placeholder")}
+        />
         {manufacturerLoadingError && (
           <div>
             {t("manufacturer.catalog.loading-error")}

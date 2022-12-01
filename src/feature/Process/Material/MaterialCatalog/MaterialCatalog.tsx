@@ -8,6 +8,7 @@ import { Material } from "../../../../interface/Interface";
 import { MaterialCatalogCard } from "./MaterialCatalogCard";
 import { useFetch } from "../../../../hooks/useFetch";
 import { useTranslation } from "react-i18next";
+import Search from "../../../../components/Process/Search/Search";
 
 interface Props {
   setProgressState: (progressStateIndex: number) => void;
@@ -41,45 +42,10 @@ export const MaterialCatalog = ({
   return (
     <div className="process-content-container">
       <div className="catalog-container">
-        <div className="user-input">
-          <input
-            type="text"
-            className="input-field"
-            placeholder={t("material.catalog.search-placeholder")}
-          />
-          <div className="settings button light">
-            <SettingsIcon />
-          </div>
-          <div className="search button dark">
-            <SearchIcon />
-          </div>
-        </div>
-        <div className="filter">
-          <div
-            className={getFilterClassName(0)}
-            onClick={(e) => handleClickFilter(e, 0)}
-          >
-            {t("material.catalog.filter.top-materials")}
-          </div>
-          <div
-            className={getFilterClassName(1)}
-            onClick={(e) => handleClickFilter(e, 1)}
-          >
-            {t("material.catalog.filter.plastic")}
-          </div>
-          <div
-            className={getFilterClassName(2)}
-            onClick={(e) => handleClickFilter(e, 2)}
-          >
-            {t("material.catalog.filter.metal")}
-          </div>
-          <div
-            className={getFilterClassName(3)}
-            onClick={(e) => handleClickFilter(e, 3)}
-          >
-            {t("material.catalog.filter.keramik-glass")}
-          </div>
-        </div>
+        <Search
+          headline={t("material.catalog.headline")}
+          placeholder={t("material.catalog.search-placeholder")}
+        />
         {materialLoadingError && (
           <div>
             {t("material.catalog.loading-error")}

@@ -1,6 +1,5 @@
-import "./ShoppingCart.scss";
-import { ShoppingCartItem } from "./ShoppingCartItem";
-import { ShoppingCartAddButton } from "./ShoppingCartAddButton";
+import { ShoppingCartItem } from "./ProcessShoppingCartItem";
+import { ShoppingCartAddButton } from "./ProcessShoppingCartAddButton";
 import { Process, ProcessState } from "../../../interface/Interface";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -36,20 +35,26 @@ export const ShoppingCart = ({
   };
 
   return (
-    <div className="ShoppingCart-Box">
+    <ul className="process-box vertical shoppingcart">
       {state.processList.map((process: Process, index: number) => (
-        <ShoppingCartItem
-          setShoppingCardItemExpanded={setShoppingCardItemExpanded}
-          expanded={state.activeProcessList.includes(process.processId)}
-          setProgressState={setProgressState}
-          key={index}
-          deleteShoppingCartItem={deleteShoppingCartItem}
-          process={process}
-          isActiveProcess={process.processId === state.activeProcess}
-          selectProcess={selectProcess}
-        />
+        <>
+          <ShoppingCartItem
+            setShoppingCardItemExpanded={setShoppingCardItemExpanded}
+            expanded={state.activeProcessList.includes(process.processId)}
+            setProgressState={setProgressState}
+            key={index}
+            deleteShoppingCartItem={deleteShoppingCartItem}
+            process={process}
+            isActiveProcess={process.processId === state.activeProcess}
+            selectProcess={selectProcess}
+          />
+          <li className="shoppingcart-item">
+            <hr className="divider large" />
+          </li>
+        </>
       ))}
+
       <ShoppingCartAddButton addShoppingCartItem={addShoppingCartItem} />
-    </div>
+    </ul>
   );
 };

@@ -1,5 +1,4 @@
 import AddIcon from "@mui/icons-material/Add";
-import "./ShoppingCart.scss";
 import React from "react";
 
 interface Props {

@@ -39,6 +39,7 @@
   },
   "shopping-cart": {
     "item": {
+      "headline":"Item",
       "model": "Modell",
       "material-procedure": "Material | Verfahren",
       "manufacturer": "Hersteller",

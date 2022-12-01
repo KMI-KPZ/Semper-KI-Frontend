@@ -6,7 +6,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { ModelUpload } from "./Model/ModelUpload";
 import { ModelCatalog } from "./Model/ModelCatalog/ModelCatalog";
 import { Error } from "../Error/Error";
-import { ShoppingCart } from "./ShoppingCart/ShoppingCart";
+import { ShoppingCart } from "./ProcessShoppingCart/ProcessShoppingCart";
 import {
   Material,
   Model,
@@ -23,6 +23,7 @@ import { ModelView } from "./Model/ModelView";
 import { MaterialView } from "./Material/MaterialView";
 import { ManufacturerCatalog } from "./Manufacturer/ManufacturerCatalog/ManufacturerCatalog";
 import { Overview } from "./Overview/Overview";
+import Filter from "./Filter/Filter";
 
 export const ProcessView = () => {
   const [state, setState] = useState<ProcessState>({
@@ -40,25 +41,25 @@ export const ProcessView = () => {
 
     switch (progressStateIndex) {
       case 0:
-        link = "/Process/Model/Catalog";
+        link = "/process/models";
         break;
       case 1:
-        link = "/Process/Material/Catalog";
+        link = "/process/materials";
         break;
       case 2:
-        link = "/Process/Manufacturer";
+        link = "/process/manufacturer";
         break;
       case 3:
-        link = "/Process/PostProcessing";
+        link = "/process/postprocessing";
         break;
       case 4:
-        link = "/Process/Additive";
+        link = "/process/additive";
         break;
       case 5:
-        link = "/Process/Overview";
+        link = "/shoppingcart";
         break;
       default:
-        link = "/Process/Overview";
+        link = "/shoppingcart";
         break;
     }
     console.log("set Progress State", link, progressStateIndex);
@@ -270,22 +271,24 @@ export const ProcessView = () => {
   };
 
   return (
-    <div className="container">
-      <Wizard state={state} setProgressState={setProgressState} />
-      <div className="process-box">
-        <div
-          className={`process-content-box  ${
-            state.progressState === 5 ? "full-width" : ""
-          }`}
-        >
+    <div className="process-container main horizontal">
+      <Filter />
+      <div className="process-container content vertical">
+        <Wizard state={state} setProgressState={setProgressState} />
+        <div className="process-container vertical">
           <Routes>
-            <Route path="Model">
+            <Route path="models">
               <Route
                 index
-                element={<ModelView model={getActiveProcess()?.model} />}
+                element={
+                  <ModelCatalog
+                    setProgressState={setProgressState}
+                    selectModel={selectModel}
+                  />
+                }
               />
               <Route
-                path="Upload"
+                path="upload"
                 element={
                   <ModelUpload
                     state={state}
@@ -295,25 +298,10 @@ export const ProcessView = () => {
                   />
                 }
               />
-              <Route
-                path="Catalog"
-                element={
-                  <ModelCatalog
-                    setProgressState={setProgressState}
-                    selectModel={selectModel}
-                  />
-                }
-              />
             </Route>
-            <Route path="Material">
+            <Route path="materials">
               <Route
                 index
-                element={
-                  <MaterialView material={getActiveProcess()?.material} />
-                }
-              />
-              <Route
-                path="Catalog"
                 element={
                   <MaterialCatalog
                     setProgressState={setProgressState}
@@ -322,7 +310,7 @@ export const ProcessView = () => {
                 }
               />
             </Route>
-            <Route path="Manufacturer">
+            <Route path="manufacturer">
               <Route
                 index
                 element={
@@ -334,7 +322,7 @@ export const ProcessView = () => {
               />
             </Route>
             <Route
-              path="PostProcessing"
+              path="postprocessing"
               element={
                 <PostProcessingView
                   state={state}
@@ -344,7 +332,7 @@ export const ProcessView = () => {
               }
             />
             <Route
-              path="Additive"
+              path="additive"
               element={
                 <AdditiveView
                   setProgressState={setProgressState}
@@ -354,7 +342,7 @@ export const ProcessView = () => {
               }
             />
             <Route
-              path="Overview"
+              path="overview"
               element={
                 <Overview
                   state={state}
@@ -366,17 +354,18 @@ export const ProcessView = () => {
             <Route path="*" element={<Error />} />
           </Routes>
         </div>
-        {state.progressState !== 5 && (
-          <ShoppingCart
-            setShoppingCardItemExpanded={setShoppingCardItemExpanded}
-            setProgressState={setProgressState}
-            state={state}
-            addProcess={addProcess}
-            deleteProcess={deleteProcess}
-            selectProcess={selectProcess}
-          />
-        )}
       </div>
+
+      {state.progressState !== 5 && (
+        <ShoppingCart
+          setShoppingCardItemExpanded={setShoppingCardItemExpanded}
+          setProgressState={setProgressState}
+          state={state}
+          addProcess={addProcess}
+          deleteProcess={deleteProcess}
+          selectProcess={selectProcess}
+        />
+      )}
     </div>
   );
 };

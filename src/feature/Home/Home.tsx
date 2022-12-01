@@ -50,13 +50,13 @@ export const Home = ({ userType }: Props) => {
               ref={searchInput}
             />
           }
-          link="/Process/Model/Catalog"
+          link="/process/models"
           text={t("home.button.search")}
         />
         <HomeCard
           className="home-card"
           icon={<UploadFile sx={{ fontSize: "60px" }} />}
-          link="/Process/Model/Upload"
+          link="/process/models/upload"
           text={t("home.button.upload")}
         />
       </>

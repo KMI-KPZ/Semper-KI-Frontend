@@ -1,5 +1,6 @@
 import "./Wizard.scss";
 import React, { ReactNode } from "react";
+import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined";
 
 import { useTranslation } from "react-i18next";
 import { ProcessState } from "../../../interface/Interface";
@@ -28,30 +29,30 @@ export const Wizard = ({ state, setProgressState }: Props) => {
   };
 
   return (
-    <div className="wizard">
+    <div className="process-box horizontal wizard">
       <div className="wizard-card" onClick={(e) => handleClick(e, 0)}>
         {t("wizard.model")}
         {getUnderline(0)}
       </div>
+      <ArrowRightAltOutlinedIcon />
       <div className="wizard-card" onClick={(e) => handleClick(e, 1)}>
         {t("wizard.material-procedure")}
         {getUnderline(1)}
       </div>
+      <ArrowRightAltOutlinedIcon />
       <div className="wizard-card" onClick={(e) => handleClick(e, 2)}>
         {t("wizard.manufacturer")}
         {getUnderline(2)}
       </div>
+      <ArrowRightAltOutlinedIcon />
       <div className="wizard-card" onClick={(e) => handleClick(e, 3)}>
         {t("wizard.post-processing")}
         {getUnderline(3)}
       </div>
+      <ArrowRightAltOutlinedIcon />
       <div className="wizard-card" onClick={(e) => handleClick(e, 4)}>
         {t("wizard.additive")}
         {getUnderline(4)}
-      </div>
-      <div className="wizard-card" onClick={(e) => handleClick(e, 5)}>
-        {t("wizard.overview")}
-        {getUnderline(5)}
       </div>
     </div>
   );

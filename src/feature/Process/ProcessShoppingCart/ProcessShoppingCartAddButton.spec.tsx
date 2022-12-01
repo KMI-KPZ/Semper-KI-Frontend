@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { ShoppingCartAddButton } from "./ShoppingCartAddButton";
+import { ShoppingCartAddButton } from "./ProcessShoppingCartAddButton";
 
 const mockedAddShoppingCartItem = jest.fn();
 

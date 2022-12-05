@@ -1,0 +1,55 @@
+@import "./../../../variables.scss";
+
+.filter{
+    display: flex;
+    flex-direction: column;
+    background-color: $white;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 18%;
+    height: calc(100vh - $heightHeader - 2*$containerGap);
+    padding: 20px;
+}
+
+.filter-headline{
+    margin: 0;
+}
+
+.filter-item{
+    display: flex;
+    flex-direction: column;
+
+}
+.filter-item-header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    h3{
+        margin: 0;
+    }
+
+}
+
+.filter-hr{
+    margin: 0;
+    padding: 0;
+    border:none;
+    &.large{
+        border-bottom: 2px solid $grey;
+    }
+    &.small {
+        border-bottom: 1px solid $grey_m;
+    }
+}
+
+.filter-item-option{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 10px 0;
+    gap: 10px;
+
+    h4{
+        margin: 0;
+    }
+}

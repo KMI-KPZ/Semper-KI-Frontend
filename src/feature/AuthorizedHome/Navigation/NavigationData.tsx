@@ -22,7 +22,7 @@ export interface SubNavigationItemType {
   selected: boolean;
 }
 
-const NavigationItems: NavigationItemType[] = [
+const NavigationData: NavigationItemType[] = [
   {
     id: 1,
     userTypes: ["client", "contractor"],
@@ -101,10 +101,8 @@ const NavigationItems: NavigationItemType[] = [
   },
 ];
 
-export const getNavigationItems = (
-  userType: UserType
-): NavigationItemType[] => {
-  return NavigationItems.filter((navItem: NavigationItemType) =>
+export const getNavigationData = (userType: UserType): NavigationItemType[] => {
+  return NavigationData.filter((navItem: NavigationItemType) =>
     navItem.userTypes.includes(userType)
   );
 };

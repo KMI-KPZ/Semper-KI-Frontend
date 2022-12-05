@@ -179,5 +179,26 @@
   },
   "orders":{
     "headline":"Bestellungen"
+  },
+  "filter":{
+    "headline":"Vorgaben",
+    "model":{
+      "headline":"Modell",
+      "category":{
+        "headline":"Kategorie"
+      },
+      "boxsize":"Boxmaß",
+      "surface":"Oberfläche",
+      "volume":"Volumen"
+    },
+    "material":{
+      "headline":"Material/Verfahren"
+    },
+    "manufacturer":{
+      "headline":"Hersteller"
+    },
+    "post-Processing":{
+      "headline":"Nachbearbeitung"
+    }
   }
 }

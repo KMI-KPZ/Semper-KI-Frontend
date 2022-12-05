@@ -37,7 +37,7 @@ export const ShoppingCart = ({
   return (
     <ul className="process-box vertical shoppingcart">
       {state.processList.map((process: Process, index: number) => (
-        <>
+        <React.Fragment key={index}>
           <ShoppingCartItem
             setShoppingCardItemExpanded={setShoppingCardItemExpanded}
             expanded={state.activeProcessList.includes(process.processId)}
@@ -51,7 +51,7 @@ export const ShoppingCart = ({
           <li className="shoppingcart-item">
             <hr className="divider large" />
           </li>
-        </>
+        </React.Fragment>
       ))}
 
       <ShoppingCartAddButton addShoppingCartItem={addShoppingCartItem} />

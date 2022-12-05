@@ -5,10 +5,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { User } from "../../../interface/Interface";
 import NavigationItem from "./NavigationItem";
 import {
-  getNavigationItems,
+  getNavigationData,
   NavigationItemType,
   SubNavigationItemType,
-} from "./NavigationItems";
+} from "./NavigationData";
 
 interface Props {
   user: User;
@@ -25,7 +25,7 @@ const Navigation = ({ user }: Props) => {
   const { t } = useTranslation();
   const [state, setState] = useState<State>({
     open: false,
-    navItems: getNavigationItems(user.userType),
+    navItems: getNavigationData(user.userType),
     activeNavItem: "dashboard",
   });
 

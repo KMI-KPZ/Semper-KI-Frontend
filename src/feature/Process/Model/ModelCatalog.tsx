@@ -25,7 +25,7 @@ export const ModelCatalog = ({ selectModel, setProgressState }: Props) => {
         headline={t("model.catalog.headline")}
         placeholder={t("model.catalog.search-placeholder")}
       />
-      <div className="process-container content search">
+      <div className="model-cards">
         <Loading
           isLoading={isLoading}
           data={data}

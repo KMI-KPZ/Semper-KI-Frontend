@@ -11,10 +11,7 @@ interface Props {
 const FilterItemOption = ({ setFilterOption, option, filter }: Props) => {
   const { t } = useTranslation();
 
-  const onClickCheckBox = (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>
-  ) => {
-    e.preventDefault();
+  const onChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilterOption(option.id, "checked", !option.checked);
   };
 
@@ -22,11 +19,8 @@ const FilterItemOption = ({ setFilterOption, option, filter }: Props) => {
     <div className="filter-item-option">
       <input
         type="checkbox"
-        onChange={(e) => {
-          e.preventDefault();
-        }}
-        onClick={onClickCheckBox}
-        defaultChecked={option.checked}
+        onChange={onChangeCheckBox}
+        checked={option.checked}
       />
       <h4>
         {t(

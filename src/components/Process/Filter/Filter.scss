@@ -6,9 +6,15 @@
     background-color: $white;
     justify-content: flex-start;
     gap: 10px;
-    width: 18%;
     height: calc(100vh - $heightHeader - 2*$containerGap);
     padding: 20px;
+    
+    &.closed{
+        width: auto;
+    }
+    &.open{
+        width: 18%;
+    }
 }
 
 .filter-headline{

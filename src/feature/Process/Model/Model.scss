@@ -12,60 +12,80 @@
 }
 
 .model-cards {
+  height: calc(100vh - $heightHeader - $heightWizard - $heightHeadlineSearch - 4*$containerGap);
+  overflow-x: scroll;
+  overflow-x: hidden;
   display: flex;
+  justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
-  column-gap: 2%;
-  row-gap: $containerGap;
+  gap:20px;
+}
+.model-card {
+  color: $textPrimary;
+  width: calc(50% - 10px);
+  display: flex;
+  flex-direction: row;
+}
 
-  .model-card {
-    color: $textPrimary;
-    width: 32%;
-    display: flex;
-    flex-direction: column;
+.model-card-img {
+  width: 35%;
+  height: 200px;
+  border: 5px solid $white;
+  border-right: none;
+}
 
-    .model-card-area {
-      background-color: $textPrimaryInverted;
+.model-card-content{
+  width: 65%;
+  background-color: $white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+  transition: height 2000ms ease-in-out;
 
-      .model-card-headline {
-        margin: 10px;
-      }
-
-      .model-card-img {
-        width: 100%;
-      }
-      .model-card-description {
-        margin: 5px;
-        color: $grey;
-        font-size: 15px;
-      }
-      .model-card-buttons {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-
-        .model-card-icon {
-          color: $white;
-          border-radius: $borderRadius;
-          height: 25px;
-          width: 25%;
-          margin: 5px;
-          padding: 2px;
-
-          &:hover {
-            cursor: pointer;
-            box-shadow: 0 0 0 2px $colorLight;
-          }
-
-          &.hide {
-            display: none;
-          }
-
-          &.rotate {
-            transform: rotate(180deg);
-          }
-        }
-      }
-    }
+  &.hidden{
+    height: 200px;
   }
+  
+  &.expanded{
+    height: auto;
+  }
+}
+  
+.model-card-text-content {
+  align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.model-card-headline {
+  margin: 2px 0;
+}
+
+.model-card-description {
+  margin: 1px 0;
+  transition: height 2000ms ease-in-out;
+
+  &.hidden{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    height: 60px;
+  }
+
+  &.expanded{
+    height: 100%;
+    overflow: visible;
+  }
+}
+
+.model-card-buttons {
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
 }

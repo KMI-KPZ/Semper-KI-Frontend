@@ -3,9 +3,12 @@ import "./../ProcessView.scss";
 import { Model } from "../../../interface/Interface";
 import React, { useState } from "react";
 
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { IconButton } from "@mui/material";
 
 interface Props {
   model: Model;
@@ -14,10 +17,8 @@ interface Props {
 }
 
 interface State {
-  addShoppingCartIcon: string;
-  addShoppingCartIconText: string;
-  expandMoreIcon: string;
-  expandMoreIconBoolean: boolean;
+  fav: boolean;
+  expanded: boolean;
 }
 
 export const ModelCatalogCard = ({
@@ -26,81 +27,83 @@ export const ModelCatalogCard = ({
   setProgressState,
 }: Props) => {
   const [state, setState] = useState<State>({
-    addShoppingCartIcon: "model-card-icon dark hide",
-    addShoppingCartIconText: "model-card-icon dark",
-    expandMoreIcon: "model-card-icon grey",
-    expandMoreIconBoolean: false,
+    fav: false,
+    expanded: false,
   });
 
-  const handleAddClick = () => {
+  const handleAddClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
     selectModel(model);
     setProgressState(1);
   };
 
-  const handleAddMouseEnter = () => {
+  const handleClickExpandIcon = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
     setState((prevState) => ({
       ...prevState,
-      addShoppingCartIcon: "model-card-icon dark",
-      addShoppingCartIconText: "model-card-icon dark hide",
+      expanded: !prevState.expanded,
     }));
   };
-
-  const handleAddMouseLeave = () => {
+  const handleClickFavIcon = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
     setState((prevState) => ({
       ...prevState,
-      addShoppingCartIcon: "model-card-icon dark hide",
-      addShoppingCartIconText: "model-card-icon dark",
-    }));
-  };
-
-  const handleExpandClick = () => {
-    setState((prevState) => ({
-      ...prevState,
-      expandMoreIcon: prevState.expandMoreIconBoolean
-        ? "model-card-icon grey"
-        : "model-card-icon grey rotate",
-      expandMoreIconBoolean: !prevState.expandMoreIconBoolean,
+      fav: !prevState.fav,
     }));
   };
 
   return (
     <div className="model-card">
-      <div className="model-card-area">
-        <div className="model-card-headline">{model.file.name}</div>
-        <img
-          className="model-card-img"
-          src={require("../../../assets/images/model_placeholder.png")}
-          alt="Model"
-        />
-        <div className="model-card-description">Kurzbeschreibung</div>
-        {state.expandMoreIconBoolean && (
-          <div className="model-card-description">
+      <img
+        className="model-card-img"
+        src={require("../../../assets/images/model_placeholder.png")}
+        alt="Model"
+      />
+      <div
+        className={`model-card-content ${
+          state.expanded ? "expanded" : "hidden"
+        }`}
+      >
+        <div className="model-card-text-content">
+          <h2 className="model-card-headline">{model.file.name}</h2>
+          <h3 className="model-card-description">Kurzbeschreibung</h3>
+
+          <span
+            className={`model-card-description ${
+              state.expanded ? "expanded" : "hidden"
+            }`}
+          >
             Langbeschreibung
             <br />
             Zertifikat 1
             <br />
             Zertifikat 2
             <br />
+            Zertifikat 3
+            <br />
+            Zertifikat 4
+            <br />
+            Zertifikat 5
+            <br />
             Maße 00x00x00cm
-          </div>
-        )}
+          </span>
+        </div>
         <div className="model-card-buttons">
-          <FavoriteBorderIcon className="model-card-icon light" />
-          <ExpandMoreIcon
-            className={state.expandMoreIcon}
-            onClick={handleExpandClick}
-          />
-          <AddShoppingCartIcon
-            className={state.addShoppingCartIcon}
-            onClick={handleAddClick}
-            onMouseLeave={handleAddMouseLeave}
-          />
-          <div
-            className={state.addShoppingCartIconText}
-            onMouseEnter={handleAddMouseEnter}
-          >
-            $$$
-          </div>
+          <IconButton onClick={handleClickFavIcon}>
+            {state.fav ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          </IconButton>
+          <IconButton onClick={handleClickExpandIcon}>
+            {state.expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </IconButton>
+          <IconButton onClick={handleAddClick}>
+            <AddShoppingCartIcon />
+          </IconButton>
         </div>
       </div>
     </div>

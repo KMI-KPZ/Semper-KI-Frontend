@@ -1,47 +1,61 @@
 @import "../../../variables";
 
 .material-cards {
+  height: calc(100vh - $heightHeader - $heightWizard - $heightHeadlineSearch - 4*$containerGap);
+  overflow-x: hidden;
   display: flex;
-  flex-direction: column;
-  row-gap: $containerGap;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
   color: $textPrimary;
+}
 
-  .material-card {
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    background-color: $white;
-    align-items: center;
+.material-card {
+  display: grid;
+  background-color: $white;
+  text-align: center;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
 
-    .material-card-image {
-      width: 20%;
-    }
-
-    .material-card-column {
-      width: 20%;
-
-      .material-card-headline {
-        padding: 10px;
-        font-weight: 600;
-      }
-      .material-card-text {
-        font-size: 15px;
-        color: $textSecondary;
-      }
-    }
-
-    .material-card-button {
-      color: $textPrimaryInverted;
-      font-size: 15px;
-      width: 20%;
-      padding: 15px;
-      margin: 15px;
-
-      &:hover {
-        cursor: pointer;
-        box-shadow: 0 0 0 2px #43bbc2;
-        //transform: scale(1.05);
-      }
-    }
+  &.list{
+    width: 100%;
+    grid-template-areas: 
+    "img header       header  header"
+    "img description  specs   buttons";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
   }
+
+  &.grid{
+    width: calc(25% - 15px);
+    grid-template-areas: 
+    "header"
+    "img"
+    "description"
+    "specs"
+    "buttons";
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 3fr 1fr 1fr 1fr;
+  }
+}
+
+.material-card-image {
+  grid-area: img;
+  width: 100%;
+}
+.material-card-header {
+  grid-area: header;
+
+}
+.material-card-description {
+  grid-area: description;
+}
+.material-card-specs {
+  grid-area: specs;
+}
+.material-card-buttons {
+  
+  grid-area: buttons;
 }

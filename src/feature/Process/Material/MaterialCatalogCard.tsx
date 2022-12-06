@@ -8,12 +8,14 @@ interface Props {
   material: Material;
   setProgressState: (progressStateIndex: number) => void;
   selectMaterial: (material: Material) => void;
+  grid: boolean;
 }
 
 export const MaterialCatalogCard = ({
   material,
   setProgressState,
   selectMaterial,
+  grid,
 }: Props) => {
   const { t } = useTranslation();
 
@@ -23,28 +25,24 @@ export const MaterialCatalogCard = ({
   };
 
   return (
-    <div className="material-card">
+    <div className={`material-card ${grid ? "grid" : "list"}`}>
       <img
         className="material-card-image"
         src={require("../../../assets/images/material_placeholder.png")}
         alt="Material"
       />
-      <div className="material-card-column">
-        <div className="material-card-headline">{material.name}</div>
-      </div>
-      <div className="material-card-column">
+      <div className="material-card-header">{material.name}</div>
+      <div className="material-card-description">
         {material.propList?.map((spec: string, index: number) => (
           <div className="material-card-text" key={index}>
             {spec}
           </div>
         ))}
       </div>
-      <div className="material-card-column">
-        <div className="material-card-text">
-          {t("material.catalog.card.price")}: <b>$$$</b>
-        </div>
+      <div className="material-card-specs">
+        {t("material.catalog.card.price")}: <b>$$$</b>
       </div>
-      <div className="material-card-button dark" onClick={handleAddClick}>
+      <div className="material-card-buttons" onClick={handleAddClick}>
         {t("material.catalog.card.add")}
       </div>
     </div>

@@ -13,7 +13,6 @@
 
 .model-cards {
   height: calc(100vh - $heightHeader - $heightWizard - $heightHeadlineSearch - 4*$containerGap);
-  overflow-x: scroll;
   overflow-x: hidden;
   display: flex;
   justify-content: space-between;
@@ -52,7 +51,7 @@
     height: auto;
   }
 }
-  
+
 .model-card-text-content {
   align-items: center;
   width: 100%;

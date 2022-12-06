@@ -1,6 +1,6 @@
 import "../../../styles.scss";
 import "./../ProcessView.scss";
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Model } from "../../../interface/Interface";
 import { useFetch } from "../../../hooks/useFetch";
@@ -13,15 +13,28 @@ interface Props {
   setProgressState: (progressStateIndex: number) => void;
 }
 
+interface State {
+  filter: string;
+  grid: boolean;
+}
+
 export const ModelCatalog = ({ selectModel, setProgressState }: Props) => {
   const { t } = useTranslation();
   const { data, isLoading, error } = useFetch<Model>({
     url: "http://localhost:3030/modelList",
   });
 
+  const [state, setState] = useState<State>({ filter: "", grid: true });
+
+  const handleClickGrid = (grid: boolean) => {
+    setState((prevState) => ({ ...prevState, grid: grid }));
+  };
+
   return (
     <div className="process-container vertical">
       <Search
+        grid={state.grid}
+        handleClickGrid={handleClickGrid}
         headline={t("model.catalog.headline")}
         placeholder={t("model.catalog.search-placeholder")}
       />

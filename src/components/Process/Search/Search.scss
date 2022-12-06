@@ -68,6 +68,9 @@
         cursor: pointer;
         background-color: #F1F1F1;
     }
+    &.active{
+        background-color: #ebebeb;
+    }
 }
 
 .search-icon-cards{

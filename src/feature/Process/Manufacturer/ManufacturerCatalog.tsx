@@ -27,6 +27,11 @@ interface Props {
   selectManufacturer: (manufacturer: Manufacturer) => void;
 }
 
+interface State {
+  filter: string;
+  grid: boolean;
+}
+
 export const ManufacturerCatalog = ({
   setProgressState,
   selectManufacturer,
@@ -38,6 +43,11 @@ export const ManufacturerCatalog = ({
     error: manufacturerLoadingError,
   } = useFetch<Manufacturer>({ url: "http://localhost:3030/manufacturerList" });
   const [filter, setFilter] = useState<number>(0);
+  const [state, setState] = useState<State>({ filter: "", grid: true });
+
+  const handleClickGrid = (grid: boolean) => {
+    setState((prevState) => ({ ...prevState, grid: grid }));
+  };
 
   const getFilterClassName = (index: number): string => {
     return `filter-text ${filter === index ? "active" : ""}`;
@@ -124,6 +134,8 @@ export const ManufacturerCatalog = ({
     <div className="process-content-container">
       <div className="catalog-container">
         <Search
+          grid={state.grid}
+          handleClickGrid={handleClickGrid}
           headline={t("manufacturer.catalog.headline")}
           placeholder={t("manufacturer.catalog.search-placeholder")}
         />

@@ -73,7 +73,7 @@ export const ModelCatalogCard = ({
         alt="Model"
       />
       <h3 className="model-card-description-short">Kurzbeschreibung</h3>
-      <span
+      <p
         className={`model-card-description-long ${
           state.expanded || !grid ? "expanded" : "hidden"
         }`}
@@ -91,7 +91,7 @@ export const ModelCatalogCard = ({
         Zertifikat 5
         <br />
         Maße 00x00x00cm
-      </span>
+      </p>
       <div className="model-card-buttons">
         <IconButton onClick={handleClickFavIcon}>
           {state.fav ? <FavoriteIcon /> : <FavoriteBorderIcon />}

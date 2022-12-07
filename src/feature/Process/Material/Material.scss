@@ -23,8 +23,8 @@
     width: 100%;
     grid-template-areas: 
     "img header       header  header"
-    "img description  specs   buttons";
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    "img specs  price   buttons";
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
   }
 
@@ -33,27 +33,35 @@
     grid-template-areas: 
     "header"
     "img"
-    "description"
     "specs"
+    "price"
     "buttons";
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 3fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 3fr 2fr 1fr 1fr;
   }
 }
 
 .material-card-image {
+  object-fit: cover;
   grid-area: img;
+  height: 100%;
   width: 100%;
 }
 .material-card-header {
   grid-area: header;
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.4rem;
 
-}
-.material-card-description {
-  grid-area: description;
 }
 .material-card-specs {
   grid-area: specs;
+}
+.material-card-price {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin: 0;
+  grid-area: price;
 }
 .material-card-buttons {
   

@@ -1,14 +1,24 @@
 import "../ProcessView.scss";
 import "./Material.scss";
 import { Material } from "../../../interface/Interface";
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
+import { IconButton } from "@mui/material";
 
 interface Props {
   material: Material;
   setProgressState: (progressStateIndex: number) => void;
   selectMaterial: (material: Material) => void;
   grid: boolean;
+}
+
+interface State {
+  fav: boolean;
 }
 
 export const MaterialCatalogCard = ({
@@ -18,10 +28,23 @@ export const MaterialCatalogCard = ({
   grid,
 }: Props) => {
   const { t } = useTranslation();
+  const [state, setState] = useState<State>({
+    fav: false,
+  });
 
   const handleAddClick = () => {
     selectMaterial(material);
     setProgressState(2);
+  };
+
+  const handleClickFavIcon = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    setState((prevState) => ({
+      ...prevState,
+      fav: !prevState.fav,
+    }));
   };
 
   return (
@@ -31,19 +54,24 @@ export const MaterialCatalogCard = ({
         src={require("../../../assets/images/material_placeholder.png")}
         alt="Material"
       />
-      <div className="material-card-header">{material.name}</div>
-      <div className="material-card-description">
+      <h2 className="material-card-header">{material.name}</h2>
+      <div className="material-card-specs">
         {material.propList?.map((spec: string, index: number) => (
-          <div className="material-card-text" key={index}>
+          <p className="material-card-text" key={index}>
             {spec}
-          </div>
+          </p>
         ))}
       </div>
-      <div className="material-card-specs">
+      <h2 className="material-card-price">
         {t("material.catalog.card.price")}: <b>$$$</b>
-      </div>
-      <div className="material-card-buttons" onClick={handleAddClick}>
-        {t("material.catalog.card.add")}
+      </h2>
+      <div className="material-card-buttons">
+        <IconButton onClick={handleClickFavIcon}>
+          {state.fav ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+        </IconButton>
+        <IconButton onClick={handleAddClick}>
+          <ArrowCircleRightOutlinedIcon />
+        </IconButton>
       </div>
     </div>
   );

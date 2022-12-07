@@ -12,6 +12,7 @@ import { UserType } from "../../interface/types";
 import Login from "../../feature/Login/Login";
 import Logout from "../../feature/Logout/Logout";
 import AuthorizedHome from "../../feature/AuthorizedHome/AuthorizedHome";
+import Guide from "../../feature/Process/Guide/Guide";
 
 interface State {
   user: User | null;
@@ -55,8 +56,9 @@ function App() {
         </div>
       </div>
       <Routes data-testid="routes">
-        <Route path="Process/*" element={<ProcessView />} />
+        <Route path="process/*" element={<ProcessView />} />
         <Route path="test" element={<RequestTest />} />
+        <Route path="guide" element={<Guide />} />
         {unAuthorizedRoutes}
         {authorizedRoutes}
         <Route path="*" element={<Error />} />

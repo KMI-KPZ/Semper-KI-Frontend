@@ -5,9 +5,10 @@
       "contractor": "Service anbieten"
     },
     "button": {
-      "search": "Suchen",
+      "search": "3D-Modell Suchen",
       "search-placeholder": "Ich suche...",
-      "upload": "Hochladen",
+      "upload": "3D-Modell Hochladen",
+      "guide":"Hersteller anhand von Spezifikationen finden",
       "print":"Modell herstellen",
       "design":"Modell entwerfen"
     }
@@ -200,5 +201,9 @@
     "post-Processing":{
       "headline":"Nachbearbeitung"
     }
+  },
+  "guide":{
+    "headline":"Guide"
   }
+  
 }

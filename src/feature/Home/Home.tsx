@@ -59,6 +59,16 @@ export const Home = ({ userType }: Props) => {
           link="/process/models/upload"
           text={t("home.button.upload")}
         />
+        <HomeCard
+          className="home-card"
+          icon={
+            <p style={{ fontSize: "3rem", fontWeight: "700", margin: "0" }}>
+              ?
+            </p>
+          }
+          link="/guide"
+          text={t("home.button.guide")}
+        />
       </>
     );
 

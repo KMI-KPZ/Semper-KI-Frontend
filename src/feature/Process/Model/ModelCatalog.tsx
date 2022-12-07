@@ -53,6 +53,7 @@ export const ModelCatalog = ({ selectModel, setProgressState }: Props) => {
               <div className="model-cards">
                 {data.slice(0, 6).map((model: Model, index: number) => (
                   <ModelCatalogCard
+                    grid={state.grid}
                     setProgressState={setProgressState}
                     selectModel={selectModel}
                     model={model}

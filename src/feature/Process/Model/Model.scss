@@ -15,64 +15,77 @@
   height: calc(100vh - $heightHeader - $heightWizard - $heightHeadlineSearch - 4*$containerGap);
   overflow-x: hidden;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
   gap:20px;
 }
 .model-card {
-  color: $textPrimary;
-  width: calc(50% - 10px);
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  background-color: $white;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  
+  &.list{
+    gap: 10px;
+    width: 100%;
+    grid-template-areas: 
+    "img header       header  header"
+    "img description_short  description_long   buttons";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 4fr;
+  }
+
+  &.grid{
+    height: -moz-fit-content;
+    height: -webkit-fit-content;
+    height: fit-content;
+    width: calc(25% - 15px);
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 3fr 1fr 1fr;
+    grid-template-areas: 
+    "header"
+    "img"
+    "description_short"
+    "buttons";
+    flex-shrink: 0;
+
+    &.expanded {
+      // height: auto;
+      grid-template-rows: 1fr 3fr 1fr 2fr 1fr;
+      grid-template-areas: 
+      "header"
+      "img"
+      "description_short"
+      "description_long"
+      "buttons";
+    }
+  }
 }
 
 .model-card-img {
-  width: 35%;
-  height: 200px;
-  border: 5px solid $white;
-  border-right: none;
-}
-
-.model-card-content{
-  width: 65%;
-  background-color: $white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: auto;
-  transition: height 2000ms ease-in-out;
-
-  &.hidden{
-    height: 200px;
-  }
-  
-  &.expanded{
-    height: auto;
-  }
-}
-
-.model-card-text-content {
-  align-items: center;
+  grid-area: img;
   width: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
 .model-card-headline {
+  grid-area: header;
   margin: 2px 0;
+  font-size: 1.5rem;
 }
 
-.model-card-description {
+.model-card-description-short{
+  grid-area:  description_short;
+}
+
+.model-card-description-long {
   margin: 1px 0;
   transition: height 2000ms ease-in-out;
+  grid-area: description_long;
 
   &.hidden{
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;  
-    overflow: hidden;
-    height: 60px;
+    display: none;
   }
 
   &.expanded{
@@ -82,6 +95,7 @@
 }
 
 .model-card-buttons {
+  grid-area: buttons;
   margin: 10px;
   display: flex;
   flex-direction: row;

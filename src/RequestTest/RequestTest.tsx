@@ -41,7 +41,7 @@ export const RequestTest = () => {
     loading: null,
   });
   const URL = `${state.url}${state.port}${state.postFix}`;
-  const csrfToken = CRSFToken(URL);
+  const csrfToken = CRSFToken();
   const config = {
     headers: {
       Accept: "application/json",

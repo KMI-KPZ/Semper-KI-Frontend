@@ -13,6 +13,8 @@ import Login from "../../feature/Login/Login";
 import Logout from "../../feature/Logout/Logout";
 import AuthorizedHome from "../../feature/AuthorizedHome/AuthorizedHome";
 import Guide from "../../feature/Process/Guide/Guide";
+import AccessToken from "../../hooks/AccessToken";
+import CRSFToken from "../../hooks/CSRFToken";
 
 interface State {
   user: User | null;
@@ -21,12 +23,15 @@ interface State {
 
 function App() {
   const [state, setState] = useState<State>({ user: null, userType: "client" });
+  const { token, refreshToken, login, logout } = AccessToken();
+  CRSFToken();
 
   const setUserType = (userType: UserType): void => {
     setState((prevState) => ({ ...prevState, userType }));
   };
 
   const setUser = (user: User | null): void => {
+    login(JSON.stringify(user));
     setState((prevState) => ({ ...prevState, user }));
   };
 

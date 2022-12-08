@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const CRSFToken = (url: string) => {
+const CRSFToken = () => {
+  const url: string = "http://localhost:8000/csrf_cookie/";
   const [csrfToken, setCsrfToken] = useState("");
   useEffect(() => {
     axios
@@ -10,12 +11,12 @@ const CRSFToken = (url: string) => {
       .then((response) => {
         const token = Cookies.get("csrftoken");
         setCsrfToken(token !== undefined ? token : "");
+        console.log("CSRFToken", token, url);
       })
       .catch((error) => {
         console.log("CSRF Token Error", error);
       });
-  }, [url]);
-
+  }, []);
   return csrfToken;
 };
 

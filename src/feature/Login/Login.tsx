@@ -1,6 +1,7 @@
 import { Button, Paper } from "@mui/material";
 import { Container } from "@mui/system";
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "../../interface/Interface";
 
@@ -10,6 +11,17 @@ interface Props {
 
 function Login({ setUser }: Props) {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/login")
+      .then((response) => {
+        console.log("get Login ", response);
+      })
+      .catch((error) => {
+        console.log("get Login error", error);
+      });
+  }, []);
 
   const handleOnClickClient = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>

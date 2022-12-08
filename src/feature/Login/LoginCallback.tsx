@@ -8,9 +8,9 @@ const LoginCallback = (data: any) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setTimeout(() => {
-      navigate("/");
-    }, 500);
+    // setTimeout(() => {
+    // navigate("/");
+    // }, 500);
   }, []);
 
   return (

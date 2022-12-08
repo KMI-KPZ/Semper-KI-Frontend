@@ -33,6 +33,9 @@ function App() {
       Accept: "application/json",
       "Content-Type": "application/json",
       "X-CSRFToken": csrfToken,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept",
     };
     axios.defaults.withCredentials = true;
     axios.defaults.xsrfCookieName = "csrftoken";

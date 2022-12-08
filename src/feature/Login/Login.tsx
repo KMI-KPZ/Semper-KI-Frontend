@@ -1,60 +1,20 @@
-import { Button, Paper } from "@mui/material";
 import { Container } from "@mui/system";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import CRSFToken from "../../hooks/CSRFToken";
-import { User } from "../../interface/Interface";
+import React, { useEffect } from "react";
+import "./Login.scss";
 
-interface Props {
-  setUser: (user: User | null) => void;
-}
-
-function Login({ setUser }: Props) {
-  const navigate = useNavigate();
-  const [state, setState] = useState("");
+const Login = () => {
   useEffect(() => {
     axios
       .get("http://localhost:8000/login")
       .then((response) => {
-        console.log("get Login ", response);
-        setState(JSON.stringify(response));
+        console.log("get Login ", response.data);
+        window.location.href = response.data;
       })
       .catch((error) => {
         console.log("get Login error", error);
-        setState(JSON.stringify(error));
       });
   }, []);
-
-  const handleOnClickClient = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    setUser({
-      email: "test@test.de",
-      name: "test",
-      password: "test",
-      userId: 0,
-      username: "test",
-      userType: "client",
-    });
-    navigate("/");
-  };
-
-  const handleOnClickContractor = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    setUser({
-      email: "test@test.de",
-      name: "test",
-      password: "test",
-      userId: 1,
-      username: "test",
-      userType: "contractor",
-    });
-    navigate("/");
-  };
 
   return (
     <Container
@@ -66,15 +26,11 @@ function Login({ setUser }: Props) {
         gap: 5,
       }}
     >
-      {/* <Button variant="contained" onClick={handleOnClickClient}>
-        Login Client
-      </Button>
-      <Button variant="contained" onClick={handleOnClickContractor}>
-        Login Contractor
-      </Button> */}
-      {state}
+      <div className="lds-circle">
+        <div></div>
+      </div>
     </Container>
   );
-}
+};
 
 export default Login;

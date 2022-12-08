@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../../feature/Error/Error";
 import { Home } from "../../feature/Home/Home";
 import { ProcessView } from "../../feature/Process/ProcessView";
@@ -16,6 +16,7 @@ import Guide from "../../feature/Process/Guide/Guide";
 import AccessToken from "../../hooks/AccessToken";
 import CRSFToken from "../../hooks/CSRFToken";
 import axios from "axios";
+import LoginCallback from "../../feature/Login/LoginCallback";
 
 interface State {
   user: User | null;
@@ -61,7 +62,8 @@ function App() {
   const unAuthorizedRoutes = state.user === null && (
     <>
       <Route index element={<Home userType={state.userType} />} />
-      <Route path="login" element={<Login setUser={setUser} />} />
+      <Route path="login" element={<Login />} />
+      <Route path="callback/*" element={<LoginCallback />} />
     </>
   );
 

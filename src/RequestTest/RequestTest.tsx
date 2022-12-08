@@ -41,17 +41,6 @@ export const RequestTest = () => {
     loading: null,
   });
   const URL = `${state.url}${state.port}${state.postFix}`;
-  const csrfToken = CRSFToken();
-  const config = {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "X-CSRFToken": csrfToken,
-    },
-    xsrfHeaderName: "X-CSRFToken",
-    xsrfCookieName: "csrftoken",
-    withCredentials: true,
-  };
 
   const safeInput = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -94,7 +83,7 @@ export const RequestTest = () => {
   const post = () => {
     safeLoading(true);
     axios
-      .post(URL, JSON.stringify({ post: state.post }), config)
+      .post(URL, JSON.stringify({ post: state.post }))
       .then((response) => {
         console.log("Post Response", response.data);
         safeData(response.data);
@@ -122,7 +111,7 @@ export const RequestTest = () => {
   const put = () => {
     safeLoading(true);
     axios
-      .put(URL, JSON.stringify({ put: state.put }), config)
+      .put(URL, JSON.stringify({ put: state.put }))
       .then((response) => {
         console.log("Put Response", URL, response.data);
         safeData(response.data);
@@ -135,7 +124,7 @@ export const RequestTest = () => {
   const testDelete = () => {
     safeLoading(true);
     axios
-      .delete(URL, config)
+      .delete(URL)
       .then((response) => {
         console.log("Delete Respons", URL, response.data);
         safeData(response.data);

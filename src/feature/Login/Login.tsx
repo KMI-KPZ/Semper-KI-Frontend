@@ -1,8 +1,9 @@
 import { Button, Paper } from "@mui/material";
 import { Container } from "@mui/system";
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CRSFToken from "../../hooks/CSRFToken";
 import { User } from "../../interface/Interface";
 
 interface Props {
@@ -11,15 +12,17 @@ interface Props {
 
 function Login({ setUser }: Props) {
   const navigate = useNavigate();
-
+  const [state, setState] = useState("");
   useEffect(() => {
     axios
       .get("http://localhost:8000/login")
       .then((response) => {
         console.log("get Login ", response);
+        setState(JSON.stringify(response));
       })
       .catch((error) => {
         console.log("get Login error", error);
+        setState(JSON.stringify(error));
       });
   }, []);
 
@@ -63,12 +66,13 @@ function Login({ setUser }: Props) {
         gap: 5,
       }}
     >
-      <Button variant="contained" onClick={handleOnClickClient}>
+      {/* <Button variant="contained" onClick={handleOnClickClient}>
         Login Client
       </Button>
       <Button variant="contained" onClick={handleOnClickContractor}>
         Login Contractor
-      </Button>
+      </Button> */}
+      {state}
     </Container>
   );
 }

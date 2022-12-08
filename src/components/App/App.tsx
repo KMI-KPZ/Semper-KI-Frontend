@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Error } from "../../feature/Error/Error";
 import { Home } from "../../feature/Home/Home";
@@ -15,6 +15,7 @@ import AuthorizedHome from "../../feature/AuthorizedHome/AuthorizedHome";
 import Guide from "../../feature/Process/Guide/Guide";
 import AccessToken from "../../hooks/AccessToken";
 import CRSFToken from "../../hooks/CSRFToken";
+import axios from "axios";
 
 interface State {
   user: User | null;
@@ -24,7 +25,19 @@ interface State {
 function App() {
   const [state, setState] = useState<State>({ user: null, userType: "client" });
   const { token, refreshToken, login, logout } = AccessToken();
-  CRSFToken();
+
+  const csrfToken: string = CRSFToken();
+
+  useEffect(() => {
+    axios.defaults.headers.common = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "X-CSRFToken": csrfToken,
+    };
+    axios.defaults.withCredentials = true;
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.xsrfHeaderName = "X-CSRFToken";
+  }, []);
 
   const setUserType = (userType: UserType): void => {
     setState((prevState) => ({ ...prevState, userType }));

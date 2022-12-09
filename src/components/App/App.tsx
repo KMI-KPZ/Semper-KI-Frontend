@@ -63,7 +63,7 @@ function App() {
     <>
       <Route index element={<Home userType={state.userType} />} />
       <Route path="login" element={<Login />} />
-      <Route path="callback/*" element={<LoginCallback />} />
+      <Route path="callback/:data" element={<LoginCallback />} />
     </>
   );
 

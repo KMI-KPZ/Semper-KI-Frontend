@@ -1,6 +1,7 @@
 import { Button, Paper } from "@mui/material";
 import { Container } from "@mui/system";
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "../../interface/Interface";
 
@@ -11,13 +12,17 @@ interface Props {
 function Logout({ setUser }: Props) {
   const navigate = useNavigate();
 
-  const handleOnClick = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    setUser(null);
-    navigate("/");
-  };
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/logout")
+      .then((response) => {
+        console.log("get Logout ", response.data);
+        window.location.href = response.data;
+      })
+      .catch((error) => {
+        console.log("get Logout error", error);
+      });
+  }, []);
 
   return (
     <Container
@@ -28,9 +33,7 @@ function Logout({ setUser }: Props) {
         height: "50vh",
       }}
     >
-      <Button variant="contained" onClick={handleOnClick}>
-        Logout
-      </Button>
+      Loggin out...
     </Container>
   );
 }

@@ -9,15 +9,9 @@ interface Props {
 
 const LoginCallback = ({ setUser }: Props) => {
   const navigate = useNavigate();
-  const [state, setState] = useState("authToken empty");
 
   useEffect(() => {
-    let u_cookie = Cookies.get("authToken");
-    let cookie = u_cookie ? u_cookie : "authToken empty";
-    cookie = cookie.replaceAll("\\054", ",").replaceAll("\\", "");
-    setState(cookie);
-    setUser(cookie);
-    console.log("JSON", JSON.parse(cookie));
+    setUser(null);
     setTimeout(() => {
       navigate("/");
     }, 1000);
@@ -25,8 +19,7 @@ const LoginCallback = ({ setUser }: Props) => {
 
   return (
     <Container>
-      <h1>Succesfully Log In</h1>
-      {state}
+      <h1>Succesfully Log Out</h1>
     </Container>
   );
 };

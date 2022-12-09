@@ -19,7 +19,7 @@ import axios from "axios";
 import LoginCallback from "../../feature/Login/LoginCallback";
 
 interface State {
-  user: User | null;
+  user: any; //User | null;
   userType: UserType;
 }
 
@@ -43,7 +43,7 @@ function App() {
     axios.defaults.xsrfHeaderName = "X-CSRFToken";
   }, []);
 
-  const setUserType = (userType: UserType): void => {
+  const setUserType = (userType: any): void => {
     setState((prevState) => ({ ...prevState, userType }));
   };
 
@@ -63,7 +63,10 @@ function App() {
     <>
       <Route index element={<Home userType={state.userType} />} />
       <Route path="login" element={<Login />} />
-      <Route path="callback/:data" element={<LoginCallback />} />
+      <Route
+        path="callback/login"
+        element={<LoginCallback setUser={setUser} />}
+      />
     </>
   );
 
@@ -82,6 +85,10 @@ function App() {
         <Route path="process/*" element={<ProcessView />} />
         <Route path="test" element={<RequestTest />} />
         <Route path="guide" element={<Guide />} />
+        <Route
+          path="callback/logout"
+          element={<LoginCallback setUser={setUser} />}
+        />
         {unAuthorizedRoutes}
         {authorizedRoutes}
         <Route path="*" element={<Error />} />

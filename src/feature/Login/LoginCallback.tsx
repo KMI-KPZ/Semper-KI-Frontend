@@ -16,7 +16,7 @@ const LoginCallback = ({ setUser }: Props) => {
     let cookie = u_cookie ? u_cookie : "authToken empty";
     cookie = cookie.replaceAll("\\054", ",").replaceAll("\\", "");
     setState(cookie);
-    setUser(cookie);
+    setUser(JSON.parse(cookie));
     console.log("JSON", JSON.parse(cookie));
     setTimeout(() => {
       navigate("/");

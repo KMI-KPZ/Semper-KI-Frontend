@@ -8,6 +8,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import { Error } from "../Error/Error";
 import Orders from "./Orders/Orders";
 import { ProcessView } from "../Process/ProcessView";
+import Navigation from "./Navigation/Navigation";
 
 interface Props {
   user: User;
@@ -20,7 +21,7 @@ const AuthorizedHome = ({ user }: Props) => {
 
   return (
     <div className="authorized-home">
-      <Menu user={user} />
+      <Navigation user={user} />
       <section className="authorized-home-container">
         <Routes>
           <Route index element={<Dashboard />} />

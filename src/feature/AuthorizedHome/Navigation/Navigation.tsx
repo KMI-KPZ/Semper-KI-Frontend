@@ -25,7 +25,7 @@ const Navigation = ({ user }: Props) => {
   const { t } = useTranslation();
   const [state, setState] = useState<State>({
     open: false,
-    navItems: getNavigationData(user.userType),
+    navItems: getNavigationData(user.userType ? user.userType : "client"),
     activeNavItem: "dashboard",
   });
 

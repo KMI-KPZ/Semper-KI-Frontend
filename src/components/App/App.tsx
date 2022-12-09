@@ -17,6 +17,7 @@ import AccessToken from "../../hooks/AccessToken";
 import CRSFToken from "../../hooks/CSRFToken";
 import axios from "axios";
 import LoginCallback from "../../feature/Login/LoginCallback";
+import LogoutCallback from "../../feature/Logout/LogoutCallback";
 
 interface State {
   user: any; //User | null;
@@ -43,18 +44,17 @@ function App() {
     axios.defaults.xsrfHeaderName = "X-CSRFToken";
   }, []);
 
-  const setUserType = (userType: any): void => {
+  const setUserType = (userType: UserType): void => {
     setState((prevState) => ({ ...prevState, userType }));
   };
 
-  const setUser = (user: User | null): void => {
+  const setUser = (user: any): void => {
     login(JSON.stringify(user));
     setState((prevState) => ({ ...prevState, user }));
   };
 
   const authorizedRoutes = state.user !== null && (
     <>
-      <Route path="logout" element={<Logout setUser={setUser} />} />
       <Route path="*" element={<AuthorizedHome user={state.user} />} />
     </>
   );
@@ -62,11 +62,6 @@ function App() {
   const unAuthorizedRoutes = state.user === null && (
     <>
       <Route index element={<Home userType={state.userType} />} />
-      <Route path="login" element={<Login />} />
-      <Route
-        path="callback/login"
-        element={<LoginCallback setUser={setUser} />}
-      />
     </>
   );
 
@@ -85,8 +80,14 @@ function App() {
         <Route path="process/*" element={<ProcessView />} />
         <Route path="test" element={<RequestTest />} />
         <Route path="guide" element={<Guide />} />
+        <Route path="logout" element={<Logout setUser={setUser} />} />
         <Route
           path="callback/logout"
+          element={<LogoutCallback setUser={setUser} />}
+        />
+        <Route path="login" element={<Login />} />
+        <Route
+          path="callback/login"
           element={<LoginCallback setUser={setUser} />}
         />
         {unAuthorizedRoutes}

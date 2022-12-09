@@ -7,7 +7,7 @@ interface Props {
   setUser(user: any): void;
 }
 
-const LoginCallback = ({ setUser }: Props) => {
+const LogoutCallback = ({ setUser }: Props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,4 +24,4 @@ const LoginCallback = ({ setUser }: Props) => {
   );
 };
 
-export default LoginCallback;
+export default LogoutCallback;

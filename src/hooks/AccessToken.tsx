@@ -12,7 +12,7 @@ const AccessToken = (): AccessTokenReturnProps => {
   const [refreshToken, setRefreshToken] = useState<string>("");
 
   const login = (token: string) => {
-    console.log("set Token in Local Storage", token);
+    // console.log("set Token in Local Storage", token);
 
     localStorage.setItem("token", token);
   };

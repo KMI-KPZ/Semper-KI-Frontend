@@ -1,0 +1,10 @@
+@import "../../../variables.scss";
+
+.account {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    align-items: left;
+    max-width: 1800px;    
+    background-color: $white;
+}

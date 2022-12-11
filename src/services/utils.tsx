@@ -17,3 +17,8 @@ export const getFileSizeAsString = (size: number): string => {
 export const isNumber = (element: any): element is number => {
   return typeof element === "number";
 };
+
+export const getCurrentTimeInSecons = (): number => {
+  const now = new Date();
+  return Math.round(now.getTime() / 1000);
+};

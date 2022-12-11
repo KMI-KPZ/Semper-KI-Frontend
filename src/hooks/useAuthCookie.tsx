@@ -16,7 +16,7 @@ const useAuthCookie = (): useAuthCookieReturnProps => {
     // console.log("oldAuthToken", oldAuthToken);
     if (oldAuthToken !== null) {
       const oldAuthTokenJSON = JSON.parse(oldAuthToken);
-      // console.log("oldAuthToken JSON ", oldAuthTokenJSON);
+      console.log("oldAuthToken JSON ", oldAuthTokenJSON);
       setAuthToken(oldAuthTokenJSON);
     }
   }, []);

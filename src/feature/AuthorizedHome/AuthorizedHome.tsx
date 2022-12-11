@@ -10,6 +10,7 @@ import { ProcessView } from "../Process/ProcessView";
 import Navigation from "./Navigation/Navigation";
 import { AuthTokenType } from "../../interface/Interface";
 import { UserType } from "../../interface/types";
+import Account from "./Account/Account";
 
 interface Props {
   authToken: AuthTokenType;
@@ -32,7 +33,7 @@ const AuthorizedHome = ({ authToken, userType }: Props) => {
           <Route path="proceedings" element={<Error text="proceedings" />} />
           <Route path="assignments" element={<Error text="assignments" />} />
           <Route path="messages" element={<Error text="messages" />} />
-          <Route path="account" element={<Error text="account" />} />
+          <Route path="account" element={<Account authToken={authToken} />} />
           <Route path="process/*" element={<ProcessView />} />
         </Routes>
       </section>

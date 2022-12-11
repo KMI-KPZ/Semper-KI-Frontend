@@ -1,20 +1,20 @@
+import { Logout } from "@mui/icons-material";
 import { Container } from "@mui/material";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import "../Login/Login.scss";
 
 interface Props {
-  setUser(user: any): void;
+  logout(): void;
 }
 
-const LogoutCallback = ({ setUser }: Props) => {
+const LogoutCallback = ({ logout }: Props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setUser(null);
-    setTimeout(() => {
-      navigate("/");
-    }, 1000);
+    logout();
+    navigate("/");
   }, []);
 
   return (

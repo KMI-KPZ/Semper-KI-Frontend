@@ -27,7 +27,11 @@ const mockedSetUser = jest.fn();
 
 beforeEach(() => {
   render(
-    <Header setUserType={mockedSetUserType} user={null} userType="client" />
+    <Header
+      setUserType={mockedSetUserType}
+      authToken={null}
+      userType="client"
+    />
   );
 });
 

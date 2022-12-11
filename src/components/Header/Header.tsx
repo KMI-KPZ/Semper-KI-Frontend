@@ -11,9 +11,9 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ClickAwayListener } from "@mui/material";
-import { User } from "../../interface/Interface";
 import { UserType } from "../../interface/types";
 import HeaderLink from "./HeaderLink";
+import { AuthTokenType } from "../../interface/Interface";
 
 const kissLogo: React.ReactNode = (
   <img
@@ -44,12 +44,12 @@ const languages: Language[] = [
 ];
 
 interface Props {
-  user: User | null;
+  authToken: AuthTokenType | null;
   userType: UserType;
   setUserType: (userType: UserType) => void;
 }
 
-export const Header = ({ user, userType, setUserType }: Props) => {
+export const Header = ({ authToken, userType, setUserType }: Props) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -161,7 +161,7 @@ export const Header = ({ user, userType, setUserType }: Props) => {
     );
     return (
       <>
-        {user === null ? (
+        {authToken === null ? (
           <>
             {userType === "client"
               ? unauthorizedClientLinks
@@ -170,7 +170,7 @@ export const Header = ({ user, userType, setUserType }: Props) => {
           </>
         ) : (
           <>
-            {user.userType === "client"
+            {userType === "client"
               ? authorizedClientLinks
               : authorizedContractorLinks}
             {authorizedLinks}

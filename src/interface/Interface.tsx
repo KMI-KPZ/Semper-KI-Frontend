@@ -94,11 +94,28 @@ export interface Order {
   bill?: File;
 }
 
-export interface User {
-  userId: number;
-  name: string;
-  username: string;
+export interface UserInfoType {
+  aud: string;
   email: string;
-  password: string;
-  userType: UserType;
+  email_verified: boolean;
+  exp: number;
+  iat: number;
+  iss: string;
+  name: string;
+  nickname: string;
+  nonce: string;
+  picture: string;
+  sid: string;
+  sub: string;
+  updated_at: string;
+}
+
+export interface AuthTokenType {
+  access_token: string;
+  expires_at: number;
+  expires_in: number;
+  id_token: string;
+  scope: string;
+  token_type: string;
+  userinfo: UserInfoType;
 }

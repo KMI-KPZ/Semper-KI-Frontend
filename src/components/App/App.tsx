@@ -7,26 +7,24 @@ import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
 import "./App.scss";
 import "./../../styles.scss";
-import { User } from "../../interface/Interface";
 import { UserType } from "../../interface/types";
 import Login from "../../feature/Login/Login";
 import Logout from "../../feature/Logout/Logout";
 import AuthorizedHome from "../../feature/AuthorizedHome/AuthorizedHome";
 import Guide from "../../feature/Process/Guide/Guide";
-import AccessToken from "../../hooks/AccessToken";
+import useAuthCookie from "../../hooks/useAuthCookie";
 import CRSFToken from "../../hooks/CSRFToken";
 import axios from "axios";
 import LoginCallback from "../../feature/Login/LoginCallback";
 import LogoutCallback from "../../feature/Logout/LogoutCallback";
 
 interface State {
-  user: any; //User | null;
   userType: UserType;
 }
 
 function App() {
-  const [state, setState] = useState<State>({ user: null, userType: "client" });
-  const { token, refreshToken, login, logout } = AccessToken();
+  const [state, setState] = useState<State>({ userType: "client" });
+  const { authToken, authLogin, authLogout } = useAuthCookie();
 
   const csrfToken: string = CRSFToken();
 
@@ -48,18 +46,26 @@ function App() {
     setState((prevState) => ({ ...prevState, userType }));
   };
 
-  const setUser = (user: any): void => {
-    login(JSON.stringify(user));
-    setState((prevState) => ({ ...prevState, user }));
+  const login = () => {
+    authLogin();
   };
 
-  const authorizedRoutes = state.user !== null && (
+  const logout = () => {
+    authLogout();
+  };
+
+  const authorizedRoutes = authToken !== null && (
     <>
-      <Route path="*" element={<AuthorizedHome user={state.user} />} />
+      <Route
+        path="*"
+        element={
+          <AuthorizedHome authToken={authToken} userType={state.userType} />
+        }
+      />
     </>
   );
 
-  const unAuthorizedRoutes = state.user === null && (
+  const unAuthorizedRoutes = authToken === null && (
     <>
       <Route index element={<Home userType={state.userType} />} />
     </>
@@ -70,7 +76,7 @@ function App() {
       <div className="main-header">
         <div className="container">
           <Header
-            user={state.user}
+            authToken={authToken}
             userType={state.userType}
             setUserType={setUserType}
           />
@@ -80,15 +86,15 @@ function App() {
         <Route path="process/*" element={<ProcessView />} />
         <Route path="test" element={<RequestTest />} />
         <Route path="guide" element={<Guide />} />
-        <Route path="logout" element={<Logout setUser={setUser} />} />
+        <Route path="logout" element={<Logout logout={logout} />} />
         <Route
           path="callback/logout"
-          element={<LogoutCallback setUser={setUser} />}
+          element={<LogoutCallback logout={logout} />}
         />
         <Route path="login" element={<Login />} />
         <Route
           path="callback/login"
-          element={<LoginCallback setUser={setUser} />}
+          element={<LoginCallback login={login} />}
         />
         {unAuthorizedRoutes}
         {authorizedRoutes}

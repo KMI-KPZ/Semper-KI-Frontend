@@ -1,15 +1,15 @@
 import { Button, Paper } from "@mui/material";
 import { Container } from "@mui/system";
 import axios from "axios";
+import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { User } from "../../interface/Interface";
 
 interface Props {
-  setUser: (user: User | null) => void;
+  logout(): void;
 }
 
-function Logout({ setUser }: Props) {
+const Logout = ({ logout }: Props) => {
   const navigate = useNavigate();
 
   const [state, setState] = useState("");
@@ -20,12 +20,12 @@ function Logout({ setUser }: Props) {
       .then((response) => {
         console.log("get Logout ", response.data);
         setState(response.data);
-        setUser(null);
-        // window.location.href = response.data;
+        logout();
+        window.location.href = response.data;
       })
       .catch((error) => {
         console.log("get Logout error", error);
-        setUser(null);
+        logout();
         navigate("/");
       });
   }, []);
@@ -39,9 +39,12 @@ function Logout({ setUser }: Props) {
         height: "50vh",
       }}
     >
-      <a href={state}>{state}</a>
+      Loggin out...
+      <div className="lds-circle">
+        <div></div>
+      </div>
     </Container>
   );
-}
+};
 
 export default Logout;

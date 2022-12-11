@@ -2,16 +2,16 @@ import { stat } from "fs";
 import React, { ReactNode, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { User } from "../../../interface/Interface";
 import NavigationItem from "./NavigationItem";
 import {
   getNavigationData,
   NavigationItemType,
   SubNavigationItemType,
 } from "./NavigationData";
+import { UserType } from "../../../interface/types";
 
 interface Props {
-  user: User;
+  userType: UserType;
 }
 
 interface State {
@@ -20,12 +20,12 @@ interface State {
   activeNavItem: string;
 }
 
-const Navigation = ({ user }: Props) => {
+const Navigation = ({ userType }: Props) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [state, setState] = useState<State>({
     open: false,
-    navItems: getNavigationData(user.userType ? user.userType : "client"),
+    navItems: getNavigationData(userType ? userType : "client"),
     activeNavItem: "dashboard",
   });
 

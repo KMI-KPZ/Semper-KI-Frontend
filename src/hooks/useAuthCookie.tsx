@@ -15,10 +15,16 @@ const useAuthCookie = (): useAuthCookieReturnProps => {
     const oldAuthToken = localStorage.getItem("authToken");
     // console.log("oldAuthToken", oldAuthToken);
     if (oldAuthToken !== null) {
-      const oldAuthTokenJSON = JSON.parse(oldAuthToken);
+      const oldAuthTokenJSON: AuthTokenType = JSON.parse(oldAuthToken);
       console.log("oldAuthToken JSON ", oldAuthTokenJSON);
-      setAuthToken(oldAuthTokenJSON);
-    }
+      const time = new Date().getTime() / 1000;
+      if (oldAuthTokenJSON.expires_at <= time) {
+        setAuthToken(null);
+        localStorage.removeItem("authToken");
+      } else {
+        setAuthToken(oldAuthTokenJSON);
+      }
+    } //exp:10 current:9
   }, []);
 
   const authLogin = (): void => {

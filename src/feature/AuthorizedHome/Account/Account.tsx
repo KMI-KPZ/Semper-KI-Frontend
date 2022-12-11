@@ -18,14 +18,18 @@ const Account = ({ authToken }: Props) => {
         {authToken.userinfo.exp < getCurrentTimeInSecons()
           ? "true"
           : "false"}{" "}
-        {authToken.userinfo.exp - getCurrentTimeInSecons()}
+      </span>
+      <span>
+        User Expires in:
+        {authToken.userinfo.exp - getCurrentTimeInSecons()}secs
       </span>
       <span>
         Token Expired:
-        {authToken.expires_at < getCurrentTimeInSecons()
-          ? "true"
-          : "false"}{" "}
-        {authToken.expires_at - getCurrentTimeInSecons()}
+        {authToken.expires_at < getCurrentTimeInSecons() ? "true" : "false"}
+      </span>
+      <span>
+        Token Exspires in:
+        {authToken.expires_at - getCurrentTimeInSecons()}secs
       </span>
       <h2>User</h2>
       <span>name: {authToken.userinfo.name}</span>

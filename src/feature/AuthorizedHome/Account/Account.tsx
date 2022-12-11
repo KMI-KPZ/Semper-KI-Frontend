@@ -1,6 +1,6 @@
 import React from "react";
 import { AuthTokenType } from "../../../interface/Interface";
-import { getCurrentTimeInSecons } from "../../../services/utils";
+import { getCurrentTimeInSecons, getTimeAsText } from "../../../services/utils";
 
 import "./Account.scss";
 
@@ -21,7 +21,7 @@ const Account = ({ authToken }: Props) => {
       </span>
       <span>
         User Expires in:
-        {authToken.userinfo.exp - getCurrentTimeInSecons()}secs
+        {getTimeAsText(authToken.userinfo.exp - getCurrentTimeInSecons())}
       </span>
       <span>
         Token Expired:
@@ -29,7 +29,7 @@ const Account = ({ authToken }: Props) => {
       </span>
       <span>
         Token Exspires in:
-        {authToken.expires_at - getCurrentTimeInSecons()}secs
+        {getTimeAsText(authToken.expires_at - getCurrentTimeInSecons())}
       </span>
       <h2>User</h2>
       <span>name: {authToken.userinfo.name}</span>

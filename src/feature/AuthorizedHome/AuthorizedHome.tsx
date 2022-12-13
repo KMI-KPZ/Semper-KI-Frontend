@@ -11,6 +11,7 @@ import Navigation from "./Navigation/Navigation";
 import { AuthTokenType } from "../../interface/Interface";
 import { UserType } from "../../interface/types";
 import Account from "./Account/Account";
+import { Fab } from "@mui/material";
 
 interface Props {
   authToken: AuthTokenType;
@@ -37,6 +38,22 @@ const AuthorizedHome = ({ authToken, userType }: Props) => {
           <Route path="process/*" element={<ProcessView />} />
         </Routes>
       </section>
+      <Fab
+        sx={{
+          position: "absolute",
+          bottom: 50,
+          right: 50,
+          color: "blue",
+          backgroundColor: "yellow",
+          "&:hover": {
+            backgroundColor: "blue",
+            color: "yellow",
+          },
+        }}
+        onClick={() => navigate("/test")}
+      >
+        TEST
+      </Fab>
     </div>
   );
 };

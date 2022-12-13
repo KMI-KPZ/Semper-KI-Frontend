@@ -3,6 +3,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import NavigationItem from "./NavigationItem";
+import DoubleArrowOutlinedIcon from "@mui/icons-material/DoubleArrowOutlined";
 import {
   getNavigationData,
   NavigationItemType,
@@ -47,20 +48,6 @@ const Navigation = ({ userType }: Props) => {
     }));
   };
 
-  const handleMouseOnNavBox = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    setTimeout(() => {
-      setState((prevState) => ({
-        ...prevState,
-        open: true,
-      }));
-    }, 250);
-  };
-
   const handleClickNavBox = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     open: boolean
@@ -94,11 +81,7 @@ const Navigation = ({ userType }: Props) => {
       className={`authorized-nav-box-outside ${state.open ? "open" : ""}`}
       onClick={(e) => handleClickNavBox(e, false)}
     >
-      <div
-        className="authorized-nav-box"
-        onClick={(e) => handleClickNavBox(e, true)}
-        onMouseEnter={(e) => handleMouseOnNavBox(e)}
-      >
+      <div className="authorized-nav-box">
         <div className="authorized-nav">
           <ul>
             {state.navItems.map(
@@ -149,6 +132,16 @@ const Navigation = ({ userType }: Props) => {
               )
             )}
           </ul>
+          <div
+            className="nav-button-expand"
+            onClick={(e) => handleClickNavBox(e, !state.open)}
+          >
+            {state.open ? (
+              <DoubleArrowOutlinedIcon className="nav-button-expand-icon open" />
+            ) : (
+              <DoubleArrowOutlinedIcon className="nav-button-expand-icon" />
+            )}
+          </div>
         </div>
       </div>
     </div>

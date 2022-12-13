@@ -37,13 +37,31 @@
             .authorized-nav {
                 display: flex;
                 flex-direction: column;
+                justify-content: space-between;
                 width: 100%;
+
+                .nav-button-expand{
+                    display: flex;
+                    justify-content: center;
+                    padding: 10px 10px;
+
+                    .nav-button-expand-icon {
+                        &.open{
+                            transform: rotate(180deg);
+                        }
+                    }
+                    &:hover {
+                        background-color: #fafafa;
+                    }
+                }
                 ul {
                     list-style: none;
                     display: flex;
                     flex-direction: column;
                     margin: 0;
                     padding: 10px 10px;
+
+
                     li{
                         height: 50px;
                         display: flex;

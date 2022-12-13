@@ -117,7 +117,7 @@ export const Header = ({ authToken, userType, setUserType }: Props) => {
         <HeaderLink
           text={t("header.newOrder")}
           Icon={<NoteAddOutlinedIcon />}
-          link="/process/Model/Catalog"
+          link="/process/models"
         />
         <HeaderLink
           text={t("header.shoppingcart")}

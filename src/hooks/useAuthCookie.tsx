@@ -1,3 +1,4 @@
+import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { AuthTokenType } from "../interface/Interface";
@@ -40,6 +41,9 @@ const useAuthCookie = (): useAuthCookieReturnProps => {
 
       // console.log("authToken JSON", tokenJSON);
       setAuthToken(tokenJSON);
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${tokenJSON.access_token}`;
 
       Cookies.remove("authToken");
       Cookies.remove("derp_cookie");
@@ -48,6 +52,7 @@ const useAuthCookie = (): useAuthCookieReturnProps => {
 
   const authLogout = (): void => {
     setAuthToken(null);
+    axios.defaults.headers.common["Authorization"] = "";
     localStorage.removeItem("authToken");
   };
 

@@ -1,4 +1,4 @@
-import { UserType } from "./types";
+import { TUserType } from "./types";
 
 export interface IProcessState {
   progressState: number;

@@ -9,12 +9,12 @@ import {
   NavigationItemType,
   SubNavigationItemType,
 } from "./NavigationData";
-import { UserType } from "../../interface/types";
+import { TUserType } from "../../interface/types";
 
 import "./Navigation.scss";
 
 interface Props {
-  userType: UserType;
+  userType: TUserType;
   open: boolean;
   setMenuOpen(menuOpen: boolean): void;
 }

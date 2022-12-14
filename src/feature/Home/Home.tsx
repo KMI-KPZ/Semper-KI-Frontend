@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Fab } from "@mui/material";
 import { HomeCard } from "./HomeCard";
-import { UserType } from "../../interface/types";
+import { TUserType } from "../../interface/types";
 
 const ModelIcon: React.ReactNode = (
   <img
@@ -27,7 +27,7 @@ const PrintIcon: React.ReactNode = (
 );
 
 interface Props {
-  userType: UserType;
+  userType: TUserType;
 }
 
 export const Home = ({ userType }: Props) => {

@@ -7,7 +7,7 @@ import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
 import "./App.scss";
 import "./../../styles.scss";
-import { UserType } from "../../interface/types";
+import { TUserType } from "../../interface/types";
 import Login from "../../feature/Login/Login";
 import Logout from "../../feature/Logout/Logout";
 import AuthorizedHome from "../../feature/AuthorizedHome/AuthorizedHome";
@@ -23,7 +23,7 @@ import { TestOrderList, TestProcessList } from "../../services/TestData";
 
 interface State {
   menuOpen: boolean;
-  userType: UserType;
+  userType: TUserType;
   processList: IProcess[];
   orderList: IOrder[];
   messages: string[];
@@ -59,7 +59,7 @@ function App() {
     setState((prevState) => ({ ...prevState, menuOpen }));
   };
 
-  const setUserType = (userType: UserType): void => {
+  const setUserType = (userType: TUserType): void => {
     setState((prevState) => ({ ...prevState, userType }));
   };
 

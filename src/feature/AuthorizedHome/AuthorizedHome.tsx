@@ -14,14 +14,14 @@ import {
   IProcess,
   IUserInfo,
 } from "../../interface/Interface";
-import { UserType } from "../../interface/types";
+import { TUserType } from "../../interface/types";
 import Account from "./Account/Account";
 import { Fab } from "@mui/material";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
 
 interface Props {
   authToken: IAuthToken;
-  userType: UserType;
+  userType: TUserType;
   processList: IProcess[];
   orderList: IOrder[];
   messages: string[];

@@ -12,7 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ClickAwayListener, IconButton } from "@mui/material";
-import { UserType } from "../../interface/types";
+import { TUserType } from "../../interface/types";
 import HeaderLink from "./HeaderLink";
 import { IAuthToken } from "../../interface/Interface";
 
@@ -46,8 +46,8 @@ const languages: Language[] = [
 
 interface Props {
   authToken: IAuthToken | null;
-  userType: UserType;
-  setUserType: (userType: UserType) => void;
+  userType: TUserType;
+  setUserType: (userType: TUserType) => void;
   setMenuOpen(menuOpen: boolean): void;
   isMenuOpen: boolean;
 }

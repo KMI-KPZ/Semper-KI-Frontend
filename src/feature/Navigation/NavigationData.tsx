@@ -5,11 +5,11 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { ReactNode } from "react";
-import { UserType } from "../../interface/types";
+import { TUserType } from "../../interface/types";
 
 export interface NavigationItemType {
   id: number;
-  userTypes: UserType[];
+  userTypes: TUserType[];
   title: string;
   link: string;
   icon: ReactNode;
@@ -101,7 +101,9 @@ const NavigationData: NavigationItemType[] = [
   },
 ];
 
-export const getNavigationData = (userType: UserType): NavigationItemType[] => {
+export const getNavigationData = (
+  userType: TUserType
+): NavigationItemType[] => {
   return NavigationData.filter((navItem: NavigationItemType) =>
     navItem.userTypes.includes(userType)
   );

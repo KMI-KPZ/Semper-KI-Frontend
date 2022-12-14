@@ -8,6 +8,7 @@ import NoteAddOutlinedIcon from "@mui/icons-material/NoteAddOutlined";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ClickAwayListener, IconButton } from "@mui/material";
@@ -196,7 +197,7 @@ export const Header = ({
             className="burger-icon"
             onClick={() => setMenuOpen(!isMenuOpen)}
           >
-            <MenuIcon />
+            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
         ) : null}
         <a

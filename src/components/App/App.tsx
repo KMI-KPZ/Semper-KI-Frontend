@@ -55,8 +55,6 @@ function App() {
   }, []);
 
   const setMenuOpen = (menuOpen: boolean) => {
-    console.log("setMenuOpen", menuOpen);
-
     setState((prevState) => ({ ...prevState, menuOpen }));
   };
 

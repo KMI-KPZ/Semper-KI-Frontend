@@ -66,7 +66,6 @@ export const ProcessView = ({ setProcessList, processList }: Props) => {
       nextID: 1,
     });
     if (setProcessList !== undefined) setProcessList([]);
-    navigate("/process/models");
   };
 
   const setProgressState = (progressStateIndex: number): void => {

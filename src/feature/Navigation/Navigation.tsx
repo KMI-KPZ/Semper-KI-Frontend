@@ -9,26 +9,30 @@ import {
   NavigationItemType,
   SubNavigationItemType,
 } from "./NavigationData";
-import { UserType } from "../../../interface/types";
+import { UserType } from "../../interface/types";
+
+import "./Navigation.scss";
 
 interface Props {
   userType: UserType;
+  open: boolean;
+  setMenuOpen(menuOpen: boolean): void;
 }
 
 interface State {
-  open: boolean;
   navItems: NavigationItemType[];
   activeNavItem: string;
+  expanded: boolean;
 }
 
-const Navigation = ({ userType }: Props) => {
+const Navigation = ({ userType, open, setMenuOpen }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
   const [state, setState] = useState<State>({
-    open: false,
     navItems: getNavigationData(userType ? userType : "client"),
     activeNavItem: "dashboard",
+    expanded: false,
   });
 
   useEffect(() => {
@@ -36,7 +40,11 @@ const Navigation = ({ userType }: Props) => {
     state.navItems.forEach((navItem: NavigationItemType) => {
       if (navItem.link === location.pathname) item = navItem.title;
     });
-    setState((prevState) => ({ ...prevState, activeNavItem: item }));
+    setState((prevState) => ({
+      ...prevState,
+      activeNavItem: item,
+      expanded: false,
+    }));
   }, [location.pathname]);
 
   const setExpandNavigationItem = (navItemId: number, expand: boolean) => {
@@ -59,11 +67,11 @@ const Navigation = ({ userType }: Props) => {
 
   const handleClickNavBox = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    open: boolean
+    expand: boolean
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    setState((prevState) => ({ ...prevState, open: open }));
+    setState((prevState) => ({ ...prevState, expanded: expand }));
   };
 
   const handleClickNavSubItem = (
@@ -78,7 +86,9 @@ const Navigation = ({ userType }: Props) => {
 
   return (
     <div
-      className={`authorized-nav-box-outside ${state.open ? "open" : ""}`}
+      className={`authorized-nav-box-outside ${
+        state.expanded ? "expanded" : ""
+      }`}
       onClick={(e) => handleClickNavBox(e, false)}
     >
       <div className="authorized-nav-box">
@@ -88,7 +98,7 @@ const Navigation = ({ userType }: Props) => {
               (navItem: NavigationItemType, index: number) => (
                 <React.Fragment key={`${navItem.id}.${index}`}>
                   <NavigationItem
-                    open={state.open}
+                    expanded={state.expanded}
                     className={
                       state.activeNavItem.includes(navItem.title)
                         ? "active"
@@ -99,7 +109,7 @@ const Navigation = ({ userType }: Props) => {
                   />
                   {navItem.expanded !== undefined &&
                     navItem.expanded === true &&
-                    state.open && (
+                    state.expanded && (
                       <ul>
                         {navItem.subNavigation &&
                           navItem.subNavigation.map(
@@ -133,10 +143,10 @@ const Navigation = ({ userType }: Props) => {
           </ul>
           <div
             className="nav-button-expand"
-            onClick={(e) => handleClickNavBox(e, !state.open)}
+            onClick={(e) => handleClickNavBox(e, !state.expanded)}
           >
-            {state.open ? (
-              <DoubleArrowOutlinedIcon className="nav-button-expand-icon open" />
+            {state.expanded ? (
+              <DoubleArrowOutlinedIcon className="nav-button-expand-icon expanded" />
             ) : (
               <DoubleArrowOutlinedIcon className="nav-button-expand-icon" />
             )}

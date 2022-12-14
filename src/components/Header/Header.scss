@@ -6,6 +6,7 @@
   font-size: $heightHeader - 5px;
   color: inherit;
   text-decoration: none;
+
 }
 
 .kiss-logo-name {
@@ -17,7 +18,13 @@
   max-height: $heightHeader - 10px;
 }
 
-.main-nav {
+.left-nav {
+  display: flex;
+  flex-direction: row;
+  gap:20px;
+}
+
+.right-nav {
   position: relative;
 
   ul {

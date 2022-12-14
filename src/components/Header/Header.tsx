@@ -5,13 +5,12 @@ import FactoryOutlinedIcon from "@mui/icons-material/FactoryOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import NoteAddOutlinedIcon from "@mui/icons-material/NoteAddOutlined";
-import DashboardIcon from "@mui/icons-material/Dashboard";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import PlayCircleIcon from "@mui/icons-material/PlayCircle";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ClickAwayListener } from "@mui/material";
+import { ClickAwayListener, IconButton } from "@mui/material";
 import { UserType } from "../../interface/types";
 import HeaderLink from "./HeaderLink";
 import { AuthTokenType } from "../../interface/Interface";
@@ -48,12 +47,20 @@ interface Props {
   authToken: AuthTokenType | null;
   userType: UserType;
   setUserType: (userType: UserType) => void;
+  setMenuOpen(menuOpen: boolean): void;
+  isMenuOpen: boolean;
 }
 
-export const Header = ({ authToken, userType, setUserType }: Props) => {
+export const Header = ({
+  authToken,
+  userType,
+  setUserType,
+  setMenuOpen,
+  isMenuOpen,
+}: Props) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isLanguageMenuOpen, setLanguageIsMenuOpen] = useState<boolean>(false);
 
   const changeLanguage = (code: string) => () => {
     closeMenu();
@@ -61,11 +68,11 @@ export const Header = ({ authToken, userType, setUserType }: Props) => {
   };
 
   const closeMenu = () => {
-    setIsMenuOpen(false);
+    setLanguageIsMenuOpen(false);
   };
 
   const openMenu = () => {
-    setIsMenuOpen(true);
+    setLanguageIsMenuOpen(true);
   };
 
   const getFlagButtonClassName = (): string => {
@@ -183,25 +190,35 @@ export const Header = ({ authToken, userType, setUserType }: Props) => {
 
   return (
     <header data-testid="header">
-      <a
-        href="/"
-        className="kiss-logo"
-        onClick={(e) => {
-          e.preventDefault();
-          navigate("/");
-        }}
-      >
-        <img
-          data-testid="logo"
-          className="kiss-logo-img"
-          src={require("../../assets/images/KISS_logo_transparent.png")}
-          alt="Kiss Logo"
-        />
-        <div className="kiss-logo-name" data-testid="logoName">
-          KISS
-        </div>
-      </a>
-      <nav className="main-nav" data-testid="mainNav">
+      <nav className="left-nav">
+        {authToken !== null ? (
+          <IconButton
+            className="burger-icon"
+            onClick={() => setMenuOpen(!isMenuOpen)}
+          >
+            <MenuIcon />
+          </IconButton>
+        ) : null}
+        <a
+          href="/"
+          className={`kiss-logo`}
+          onClick={(e) => {
+            e.preventDefault();
+            navigate("/");
+          }}
+        >
+          <img
+            data-testid="logo"
+            className="kiss-logo-img"
+            src={require("../../assets/images/KISS_logo_transparent.png")}
+            alt="Kiss Logo"
+          />
+          <div className="kiss-logo-name" data-testid="logoName">
+            KISS
+          </div>
+        </a>
+      </nav>
+      <nav className="right-nav" data-testid="mainNav">
         <ul>
           {getLinks()}
           <li>
@@ -212,7 +229,7 @@ export const Header = ({ authToken, userType, setUserType }: Props) => {
                   className={`fi fi-${getFlagButtonClassName()} main-nav-dropdown-icon`}
                   onClick={openMenu}
                 />
-                {isMenuOpen && (
+                {isLanguageMenuOpen && (
                   <div className="main-nav-dropdown" data-testid="dropdown">
                     {languages.map(({ code, country_code }: Language) => (
                       <div

@@ -5,7 +5,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { ReactNode } from "react";
-import { UserType } from "../../../interface/types";
+import { UserType } from "../../interface/types";
 
 export interface NavigationItemType {
   id: number;

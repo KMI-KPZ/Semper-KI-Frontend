@@ -22,12 +22,15 @@ jest.mock("react-i18next", () => ({
   },
 }));
 
+const mockedSetMenuOpen = jest.fn();
 const mockedSetUserType = jest.fn();
 const mockedSetUser = jest.fn();
 
 beforeEach(() => {
   render(
     <Header
+      isMenuOpen={false}
+      setMenuOpen={mockedSetMenuOpen}
       setUserType={mockedSetUserType}
       authToken={null}
       userType="client"

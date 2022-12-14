@@ -7,14 +7,14 @@ import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
-  open: boolean;
+  expanded: boolean;
   className: string;
   navItem: NavigationItemType;
   setExpandNavigationItem: (navItemId: number, expand: boolean) => void;
 }
 
 const NavigationItem = ({
-  open,
+  expanded,
   className,
   navItem,
   setExpandNavigationItem,
@@ -48,7 +48,7 @@ const NavigationItem = ({
         onClick={(e) => onClickNavigationItem(e, navItem.link)}
       >
         {navItem.icon}
-        <div className={`nav-box-closable ${open ? "open" : ""}`}>
+        <div className={`nav-box-closable ${expanded ? "expanded" : ""}`}>
           {t(`nav.${navItem.title}.title`)}
           {navItem.expanded !== undefined && navItem.expanded === false && (
             <IconButton

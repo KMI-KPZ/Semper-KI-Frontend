@@ -18,16 +18,23 @@ import axios from "axios";
 import LoginCallback from "../../feature/Login/LoginCallback";
 import LogoutCallback from "../../feature/Logout/LogoutCallback";
 import { Order, Process } from "../../interface/Interface";
+import Navigation from "../../feature/Navigation/Navigation";
 
 interface State {
+  menuOpen: boolean;
   userType: UserType;
   processList: Process[];
+  orderList: Order[];
+  messages: string[];
 }
 
 function App() {
   const [state, setState] = useState<State>({
+    menuOpen: false,
     userType: "client",
     processList: [],
+    orderList: [],
+    messages: [],
   });
   const { authToken, authLogin, authLogout } = useAuthCookie();
 
@@ -46,6 +53,12 @@ function App() {
     axios.defaults.xsrfCookieName = "csrftoken";
     axios.defaults.xsrfHeaderName = "X-CSRFToken";
   }, []);
+
+  const setMenuOpen = (menuOpen: boolean) => {
+    console.log("setMenuOpen", menuOpen);
+
+    setState((prevState) => ({ ...prevState, menuOpen }));
+  };
 
   const setUserType = (userType: UserType): void => {
     setState((prevState) => ({ ...prevState, userType }));
@@ -69,6 +82,8 @@ function App() {
         path="*"
         element={
           <AuthorizedHome
+            orderList={state.orderList}
+            messages={state.messages}
             processList={state.processList}
             setProcessList={setProcessList}
             authToken={authToken}
@@ -87,9 +102,18 @@ function App() {
 
   return (
     <div className="App" data-testid="app">
+      {authToken !== null && state.menuOpen ? (
+        <Navigation
+          userType={state.userType}
+          open={state.menuOpen}
+          setMenuOpen={setMenuOpen}
+        />
+      ) : null}
       <div className="main-header">
-        <div className="container">
+        <div className="header-container">
           <Header
+            isMenuOpen={state.menuOpen}
+            setMenuOpen={setMenuOpen}
             authToken={authToken}
             userType={state.userType}
             setUserType={setUserType}

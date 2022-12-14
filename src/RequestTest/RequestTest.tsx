@@ -13,6 +13,7 @@ import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import axios, { AxiosError } from "axios";
 import CRSFToken from "../hooks/CSRFToken";
+import useAuthCookie from "../hooks/useAuthCookie";
 
 interface State {
   post: string;
@@ -28,6 +29,7 @@ interface State {
 }
 
 export const RequestTest = () => {
+  const { authToken } = useAuthCookie();
   const [state, setState] = useState<State>({
     post: "",
     get: "",
@@ -83,7 +85,11 @@ export const RequestTest = () => {
   const post = () => {
     safeLoading(true);
     axios
-      .post(URL, JSON.stringify({ post: state.post }))
+      .post(URL, JSON.stringify({ post: state.post }), {
+        headers: {
+          Authorization: `${authToken?.token_type} ${authToken?.access_token}`,
+        },
+      })
       .then((response) => {
         console.log("Post Response", response.data);
         safeData(response.data);

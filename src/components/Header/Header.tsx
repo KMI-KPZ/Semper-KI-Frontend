@@ -8,6 +8,7 @@ import NoteAddOutlinedIcon from "@mui/icons-material/NoteAddOutlined";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ClickAwayListener } from "@mui/material";
@@ -117,7 +118,7 @@ export const Header = ({ authToken, userType, setUserType }: Props) => {
         <HeaderLink
           text={t("header.newOrder")}
           Icon={<NoteAddOutlinedIcon />}
-          link="/process/models"
+          link="/process/new"
         />
         <HeaderLink
           text={t("header.shoppingcart")}
@@ -138,9 +139,9 @@ export const Header = ({ authToken, userType, setUserType }: Props) => {
     const authorizedLinks = (
       <>
         {/* <HeaderLink
-          text={t("header.overview")}
-          Icon={<DashboardIcon />}
-          link="/menu"
+          text="Prozess"
+          Icon={<PlayCircleIcon />}
+          link="/process/models"
         /> */}
         <HeaderLink
           text={t("header.messages")}

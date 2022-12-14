@@ -1,9 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Order } from "../../../interface/Interface";
 
-interface Props {}
+interface Props {
+  orderList: Order[];
+}
 
-const Orders = (props: Props) => {
+const Orders = ({ orderList }: Props) => {
   const { t } = useTranslation();
 
   return (

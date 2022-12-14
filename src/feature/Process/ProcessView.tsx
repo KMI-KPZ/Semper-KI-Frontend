@@ -1,5 +1,5 @@
 import { Wizard } from "../../components/Process/Wizard/Wizard";
-import { useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 
 import "../../styles.scss";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -24,17 +24,50 @@ import { MaterialView } from "./Material/MaterialView";
 import { ManufacturerCatalog } from "./Manufacturer/ManufacturerCatalog";
 import { Overview } from "./Overview/Overview";
 import Filter from "../../components/Process/Filter/Filter";
+import NewProcess from "./NewProcess";
 
-export const ProcessView = () => {
+interface Props {
+  setProcessList?(processList: Process[]): void;
+  processList?: Process[];
+}
+
+const calcNextFreeId = (processList: Process[]): number => {
+  let nextFreeId: number = 0;
+  processList.forEach((process: Process) => {
+    if (process.processId > nextFreeId) nextFreeId = process.processId;
+  });
+  return nextFreeId + 1;
+};
+
+export const ProcessView = ({ setProcessList, processList }: Props) => {
   const [state, setState] = useState<ProcessState>({
     progressState: 0,
     activeProcess: 0,
     activeProcessList: [0],
-    processList: [{ processId: 0 }],
-    nextID: 1,
+    processList: processList ? processList : [{ processId: 0 }],
+    nextID: processList ? calcNextFreeId(processList) : 1,
   });
+
   const maxExpandedShoppingCardItem = 2;
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (setProcessList !== undefined) {
+      setProcessList(state.processList);
+    }
+  }, [state.processList]);
+
+  const startNewProcess = () => {
+    setState({
+      progressState: 0,
+      activeProcess: 0,
+      activeProcessList: [0],
+      processList: [{ processId: 0 }],
+      nextID: 1,
+    });
+    if (setProcessList !== undefined) setProcessList([]);
+    navigate("/process/models");
+  };
 
   const setProgressState = (progressStateIndex: number): void => {
     let link;
@@ -277,6 +310,10 @@ export const ProcessView = () => {
         <Wizard state={state} setProgressState={setProgressState} />
         <div className="process-container vertical">
           <Routes>
+            <Route
+              path="new"
+              element={<NewProcess startNewProcess={startNewProcess} />}
+            />
             <Route path="models">
               <Route
                 index

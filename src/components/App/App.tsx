@@ -17,13 +17,18 @@ import CRSFToken from "../../hooks/CSRFToken";
 import axios from "axios";
 import LoginCallback from "../../feature/Login/LoginCallback";
 import LogoutCallback from "../../feature/Logout/LogoutCallback";
+import { Order, Process } from "../../interface/Interface";
 
 interface State {
   userType: UserType;
+  processList: Process[];
 }
 
 function App() {
-  const [state, setState] = useState<State>({ userType: "client" });
+  const [state, setState] = useState<State>({
+    userType: "client",
+    processList: [],
+  });
   const { authToken, authLogin, authLogout } = useAuthCookie();
 
   const csrfToken: string = CRSFToken();
@@ -46,6 +51,10 @@ function App() {
     setState((prevState) => ({ ...prevState, userType }));
   };
 
+  const setProcessList = (processList: Process[]): void => {
+    setState((prevState) => ({ ...prevState, processList }));
+  };
+
   const login = () => {
     authLogin();
   };
@@ -59,7 +68,12 @@ function App() {
       <Route
         path="*"
         element={
-          <AuthorizedHome authToken={authToken} userType={state.userType} />
+          <AuthorizedHome
+            processList={state.processList}
+            setProcessList={setProcessList}
+            authToken={authToken}
+            userType={state.userType}
+          />
         }
       />
     </>
@@ -83,7 +97,19 @@ function App() {
         </div>
       </div>
       <Routes data-testid="routes">
-        <Route path="process/*" element={<ProcessView />} />
+        {unAuthorizedRoutes}
+        {authorizedRoutes}
+        <Route
+          path="process/*"
+          element={
+            <ProcessView
+              setProcessList={setProcessList}
+              processList={
+                state.processList.length > 0 ? state.processList : undefined
+              }
+            />
+          }
+        />
         <Route path="test" element={<RequestTest />} />
         <Route path="guide" element={<Guide />} />
         <Route path="logout" element={<Logout logout={logout} />} />
@@ -96,8 +122,6 @@ function App() {
           path="callback/login"
           element={<LoginCallback login={login} />}
         />
-        {unAuthorizedRoutes}
-        {authorizedRoutes}
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

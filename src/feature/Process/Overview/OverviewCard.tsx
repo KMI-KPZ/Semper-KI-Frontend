@@ -1,6 +1,6 @@
 import "../ProcessView.scss";
 import "./Overview.scss";
-import { Process } from "../../../interface/Interface";
+import { IProcess } from "../../../interface/Interface";
 import MinimizeIcon from "@mui/icons-material/Minimize";
 import { DeleteForever } from "@mui/icons-material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -9,7 +9,7 @@ import { OverviewModelCard } from "./OverviewModelCard";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  processList: Process[];
+  processList: IProcess[];
   setProgressState: (progressStateIndex: number) => void;
   selectProcess: (id: number) => void;
 }
@@ -103,7 +103,7 @@ export const OverviewCard = ({
               {t("overview.models.headline")}
             </div>
             <div className="overview-model-cards">
-              {processList.map((process: Process, index: number) => (
+              {processList.map((process: IProcess, index: number) => (
                 <OverviewModelCard
                   process={process}
                   key={index}

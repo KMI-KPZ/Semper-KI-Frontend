@@ -1,13 +1,13 @@
 import "../ProcessView.scss";
 import "./Manufacturer.scss";
-import { Manufacturer } from "../../../interface/Interface";
+import { IManufacturer } from "../../../interface/Interface";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  manufacturer: Manufacturer;
+  manufacturer: IManufacturer;
   setProgressState: (progressStateIndex: number) => void;
-  selectManufacturer: (manufacturer: Manufacturer) => void;
+  selectManufacturer: (manufacturer: IManufacturer) => void;
 }
 
 export const ManufacturerCatalogCard = ({

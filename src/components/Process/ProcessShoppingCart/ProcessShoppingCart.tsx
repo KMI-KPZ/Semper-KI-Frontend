@@ -1,13 +1,13 @@
 import { ShoppingCartItem } from "./ProcessShoppingCartItem";
 import { ShoppingCartAddButton } from "./ProcessShoppingCartAddButton";
-import { Process, ProcessState } from "../../../interface/Interface";
+import { IProcess, IProcessState } from "../../../interface/Interface";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
-  state: ProcessState;
+  state: IProcessState;
   deleteProcess: (id: number) => void;
-  addProcess: (process: Process) => void;
+  addProcess: (process: IProcess) => void;
   selectProcess: (id: number) => void;
   setProgressState: (progressStateIndex: number) => void;
   setShoppingCardItemExpanded: (processId: number, expanded: boolean) => void;
@@ -36,7 +36,7 @@ export const ShoppingCart = ({
 
   return (
     <ul className="process-box vertical shoppingcart">
-      {state.processList.map((process: Process, index: number) => (
+      {state.processList.map((process: IProcess, index: number) => (
         <React.Fragment key={index}>
           <ShoppingCartItem
             setShoppingCardItemExpanded={setShoppingCardItemExpanded}

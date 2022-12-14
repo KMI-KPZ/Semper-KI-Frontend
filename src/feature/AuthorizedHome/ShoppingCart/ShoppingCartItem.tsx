@@ -1,8 +1,8 @@
 import React from "react";
-import { Process } from "../../../interface/Interface";
+import { IProcess } from "../../../interface/Interface";
 
 interface Props {
-  process: Process;
+  process: IProcess;
 }
 
 const ShoppingCartItem = ({ process }: Props) => {

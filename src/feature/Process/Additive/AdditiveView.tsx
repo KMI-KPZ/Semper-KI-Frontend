@@ -2,13 +2,13 @@ import "../ProcessView.scss";
 import "./Additive.scss";
 import React, { useRef } from "react";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
-import { Additive, ProcessState } from "../../../interface/Interface";
+import { IAdditive, IProcessState } from "../../../interface/Interface";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  state: ProcessState;
+  state: IProcessState;
   setProgressState: (progressStateIndex: number) => void;
-  selectAdditive: (additive: Additive) => void;
+  selectAdditive: (additive: IAdditive) => void;
 }
 
 export const AdditiveView = ({

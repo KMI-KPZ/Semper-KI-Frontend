@@ -2,10 +2,10 @@ import "../ProcessView.scss";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import { Delete } from "@mui/icons-material";
 import React from "react";
-import { Material } from "../../../interface/Interface";
+import { IMaterial } from "../../../interface/Interface";
 
 interface Props {
-  material?: Material;
+  material?: IMaterial;
 }
 
 export const MaterialView = ({ material }: Props) => {

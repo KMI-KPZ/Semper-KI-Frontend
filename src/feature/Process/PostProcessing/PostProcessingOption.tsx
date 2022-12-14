@@ -1,10 +1,14 @@
-import { Option, Selection, SelectionMenu } from "../../../interface/Interface";
+import {
+  IOption,
+  ISelection,
+  ISelectionMenu,
+} from "../../../interface/Interface";
 
 import "./PostProcessing.scss";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  option: Option;
+  option: IOption;
 }
 
 export const PostProcessingOption = ({ option }: Props) => {
@@ -30,7 +34,7 @@ export const PostProcessingOption = ({ option }: Props) => {
       {option.selectionMenuList && (
         <>
           {option.selectionMenuList.map(
-            (selectionMenu: SelectionMenu, selectionMenuIndex: number) => {
+            (selectionMenu: ISelectionMenu, selectionMenuIndex: number) => {
               return (
                 <select
                   className="post-processing-option-select"
@@ -45,7 +49,7 @@ export const PostProcessingOption = ({ option }: Props) => {
                     {selectionMenu.name}
                   </option>
                   {selectionMenu.selectionList.map(
-                    (selection: Selection, selectionIndex: number) => (
+                    (selection: ISelection, selectionIndex: number) => (
                       <option
                         key={selectionIndex}
                         className="post-processing-option-select-option"

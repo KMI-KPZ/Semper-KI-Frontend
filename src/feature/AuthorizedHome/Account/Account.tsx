@@ -1,11 +1,11 @@
 import React from "react";
-import { AuthTokenType } from "../../../interface/Interface";
+import { IAuthToken } from "../../../interface/Interface";
 import { getCurrentTimeInSecons, getTimeAsText } from "../../../services/utils";
 
 import "./Account.scss";
 
 interface Props {
-  authToken: AuthTokenType;
+  authToken: IAuthToken;
 }
 
 const Account = ({ authToken }: Props) => {

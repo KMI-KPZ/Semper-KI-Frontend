@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { Process } from "../../../interface/Interface";
+import { IProcess } from "../../../interface/Interface";
 import { ShoppingCartItem } from "./ProcessShoppingCartItem";
 
 const mockedT = jest.fn();
@@ -24,7 +24,7 @@ const mockedSetProgressState = jest.fn(
 const mockedSetShoppingCardItemExpanded = jest.fn(
   (processId: number, expand: boolean): void => {}
 );
-const mockedProcess: Process = {
+const mockedProcess: IProcess = {
   processId: 0,
   model: {
     file: mockedFile,

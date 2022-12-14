@@ -1,22 +1,22 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import { AuthTokenType } from "../interface/Interface";
+import { IAuthToken } from "../interface/Interface";
 
 interface useAuthCookieReturnProps {
-  authToken: AuthTokenType | null;
+  authToken: IAuthToken | null;
   authLogin(): void;
   authLogout(): void;
 }
 
 const useAuthCookie = (): useAuthCookieReturnProps => {
-  const [authToken, setAuthToken] = useState<AuthTokenType | null>(null);
+  const [authToken, setAuthToken] = useState<IAuthToken | null>(null);
 
   useEffect(() => {
     const oldAuthToken = localStorage.getItem("authToken");
     // console.log("oldAuthToken", oldAuthToken);
     if (oldAuthToken !== null) {
-      const oldAuthTokenJSON: AuthTokenType = JSON.parse(oldAuthToken);
+      const oldAuthTokenJSON: IAuthToken = JSON.parse(oldAuthToken);
       console.log("oldAuthToken JSON ", oldAuthTokenJSON);
       const time = new Date().getTime() / 1000;
       if (oldAuthTokenJSON.expires_at <= time) {

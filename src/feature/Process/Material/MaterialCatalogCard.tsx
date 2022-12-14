@@ -1,6 +1,6 @@
 import "../ProcessView.scss";
 import "./Material.scss";
-import { Material } from "../../../interface/Interface";
+import { IMaterial } from "../../../interface/Interface";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -11,9 +11,9 @@ import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOu
 import { IconButton } from "@mui/material";
 
 interface Props {
-  material: Material;
+  material: IMaterial;
   setProgressState: (progressStateIndex: number) => void;
-  selectMaterial: (material: Material) => void;
+  selectMaterial: (material: IMaterial) => void;
   grid: boolean;
 }
 

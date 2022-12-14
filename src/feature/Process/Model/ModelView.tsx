@@ -2,11 +2,11 @@ import "../ProcessView.scss";
 import React from "react";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import { getFileSizeAsString } from "../../../services/utils";
-import { Model } from "../../../interface/Interface";
+import { IModel } from "../../../interface/Interface";
 import { Delete } from "@mui/icons-material";
 
 interface Props {
-  model?: Model;
+  model?: IModel;
 }
 
 export const ModelView = ({ model }: Props) => {

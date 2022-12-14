@@ -1,35 +1,35 @@
 import { UserType } from "./types";
 
-export interface ProcessState {
+export interface IProcessState {
   progressState: number;
   activeProcess: number;
   activeProcessList: number[];
-  processList: Process[];
+  processList: IProcess[];
   nextID: number;
 }
 
-export interface Process {
+export interface IProcess {
   processId: number;
-  model?: Model;
-  material?: Material;
-  manufacturer?: Manufacturer;
-  postProcessing?: PostProcessing;
-  additive?: Additive;
+  model?: IModel;
+  material?: IMaterial;
+  manufacturer?: IManufacturer;
+  postProcessing?: IPostProcessing;
+  additive?: IAdditive;
 }
 
-export interface Model {
+export interface IModel {
   modelId?: number;
   name?: string;
   file: File;
 }
 
-export interface Material {
+export interface IMaterial {
   materialId?: number;
   name: string;
   propList?: string[];
 }
 
-export interface Manufacturer {
+export interface IManufacturer {
   manufacturerId?: number;
   name: string;
   propList?: string[];
@@ -37,10 +37,10 @@ export interface Manufacturer {
   distance?: number;
   productionTime?: number;
   deliverTime?: number;
-  location?: Location;
+  location?: ILocation;
 }
 
-export interface Location {
+export interface ILocation {
   name: string;
   street: string;
   houseNumber: number;
@@ -48,53 +48,53 @@ export interface Location {
   city: string;
 }
 
-export interface PostProcessing {
-  specificationList?: Specification[];
+export interface IPostProcessing {
+  specificationList?: ISpecification[];
 }
 
-export interface Specification {
+export interface ISpecification {
   name: string;
   value?: string;
   unit?: string;
   price?: number;
 }
 
-export interface Additive {
+export interface IAdditive {
   file: string;
   text: string;
 }
 
-export interface Option {
+export interface IOption {
   name: string;
   numberInput?: boolean;
   stringInput?: boolean;
   checkInput?: boolean;
   price?: number;
-  selectionMenuList?: SelectionMenu[];
+  selectionMenuList?: ISelectionMenu[];
 }
 
-export interface SelectionMenu {
+export interface ISelectionMenu {
   name: string;
-  selectionList: Selection[];
-  followSelectionMenuList?: SelectionMenu[];
+  selectionList: ISelection[];
+  followSelectionMenuList?: ISelectionMenu[];
 }
 
-export interface Selection {
+export interface ISelection {
   name?: string;
   value?: string;
   unit?: string;
   price?: number;
 }
 
-export interface Order {
+export interface IOrder {
   orderId?: number;
-  processList: Process[];
+  processList: IProcess[];
   date: Date;
   orderState: string;
   bill?: File;
 }
 
-export interface UserInfoType {
+export interface IUserInfo {
   aud: string;
   email: string;
   email_verified: boolean;
@@ -110,12 +110,12 @@ export interface UserInfoType {
   updated_at: string;
 }
 
-export interface AuthTokenType {
+export interface IAuthToken {
   access_token: string;
   expires_at: number;
   expires_in: number;
   id_token: string;
   scope: string;
   token_type: string;
-  userinfo: UserInfoType;
+  userinfo: IUserInfo;
 }

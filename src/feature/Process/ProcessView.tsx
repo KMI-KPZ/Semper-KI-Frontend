@@ -8,13 +8,13 @@ import { ModelCatalog } from "./Model/ModelCatalog";
 import { Error } from "../Error/Error";
 import { ShoppingCart } from "../../components/Process/ProcessShoppingCart/ProcessShoppingCart";
 import {
-  Material,
-  Model,
-  PostProcessing,
-  Process,
-  ProcessState,
-  Manufacturer,
-  Additive,
+  IMaterial,
+  IModel,
+  IPostProcessing,
+  IProcess,
+  IProcessState,
+  IManufacturer,
+  IAdditive,
 } from "../../interface/Interface";
 import { MaterialCatalog } from "./Material/MaterialCatalog";
 import { PostProcessingView } from "./PostProcessing/PostProcessingView";
@@ -27,20 +27,20 @@ import Filter from "../../components/Process/Filter/Filter";
 import NewProcess from "./NewProcess";
 
 interface Props {
-  setProcessList?(processList: Process[]): void;
-  processList?: Process[];
+  setProcessList?(processList: IProcess[]): void;
+  processList?: IProcess[];
 }
 
-const calcNextFreeId = (processList: Process[]): number => {
+const calcNextFreeId = (processList: IProcess[]): number => {
   let nextFreeId: number = 0;
-  processList.forEach((process: Process) => {
+  processList.forEach((process: IProcess) => {
     if (process.processId > nextFreeId) nextFreeId = process.processId;
   });
   return nextFreeId + 1;
 };
 
 export const ProcessView = ({ setProcessList, processList }: Props) => {
-  const [state, setState] = useState<ProcessState>({
+  const [state, setState] = useState<IProcessState>({
     progressState: 0,
     activeProcess: 0,
     activeProcessList: [0],
@@ -102,7 +102,7 @@ export const ProcessView = ({ setProcessList, processList }: Props) => {
     }));
   };
 
-  const addProcess = (process: Process): void => {
+  const addProcess = (process: IProcess): void => {
     console.log("add Process", process);
     setState((prevState) => ({
       ...prevState,
@@ -115,7 +115,7 @@ export const ProcessView = ({ setProcessList, processList }: Props) => {
     }));
   };
 
-  const addProcessList = (processList: Process[]): void => {
+  const addProcessList = (processList: IProcess[]): void => {
     console.log("add Process List", processList);
     setState((prevState) => ({
       ...prevState,
@@ -136,14 +136,14 @@ export const ProcessView = ({ setProcessList, processList }: Props) => {
         prevState.activeProcess !== processId
           ? prevState.activeProcess
           : prevState.processList.filter(
-              (process: Process) => process.processId !== processId
+              (process: IProcess) => process.processId !== processId
             ).length === 0
           ? 0
           : prevState.processList.filter(
-              (process: Process) => process.processId !== processId
+              (process: IProcess) => process.processId !== processId
             )[0].processId,
       processList: prevState.processList.filter(
-        (process: Process) => process.processId !== processId
+        (process: IProcess) => process.processId !== processId
       ),
     }));
   };
@@ -196,107 +196,107 @@ export const ProcessView = ({ setProcessList, processList }: Props) => {
     }));
   };
 
-  const getActiveProcess = (): Process | undefined => {
+  const getActiveProcess = (): IProcess | undefined => {
     return state.processList.filter(
-      (process: Process) => process.processId === state.activeProcess
+      (process: IProcess) => process.processId === state.activeProcess
     )[0];
   };
 
-  const selectModel = (model: Model): void => {
+  const selectModel = (model: IModel): void => {
     setState((prevState) => ({
       ...prevState,
       processList: [
         ...prevState.processList.filter(
-          (process: Process) => process.processId < prevState.activeProcess
+          (process: IProcess) => process.processId < prevState.activeProcess
         ),
         {
           ...prevState.processList.filter(
-            (process: Process) => process.processId === prevState.activeProcess
+            (process: IProcess) => process.processId === prevState.activeProcess
           )[0],
           model: model,
         },
         ...prevState.processList.filter(
-          (process: Process) => process.processId > prevState.activeProcess
+          (process: IProcess) => process.processId > prevState.activeProcess
         ),
       ],
     }));
   };
 
-  const selectMaterial = (material: Material): void => {
+  const selectMaterial = (material: IMaterial): void => {
     setState((prevState) => ({
       ...prevState,
       processList: [
         ...prevState.processList.filter(
-          (process: Process) => process.processId < prevState.activeProcess
+          (process: IProcess) => process.processId < prevState.activeProcess
         ),
         {
           ...prevState.processList.filter(
-            (process: Process) => process.processId === prevState.activeProcess
+            (process: IProcess) => process.processId === prevState.activeProcess
           )[0],
           material: material,
         },
         ...prevState.processList.filter(
-          (process: Process) => process.processId > prevState.activeProcess
+          (process: IProcess) => process.processId > prevState.activeProcess
         ),
       ],
     }));
   };
 
-  const selectManufacturer = (manufacturer: Manufacturer): void => {
+  const selectManufacturer = (manufacturer: IManufacturer): void => {
     setState((prevState) => ({
       ...prevState,
       processList: [
         ...prevState.processList.filter(
-          (process: Process) => process.processId < prevState.activeProcess
+          (process: IProcess) => process.processId < prevState.activeProcess
         ),
         {
           ...prevState.processList.filter(
-            (process: Process) => process.processId === prevState.activeProcess
+            (process: IProcess) => process.processId === prevState.activeProcess
           )[0],
           manufacturer: manufacturer,
         },
         ...prevState.processList.filter(
-          (process: Process) => process.processId > prevState.activeProcess
+          (process: IProcess) => process.processId > prevState.activeProcess
         ),
       ],
     }));
   };
 
-  const selectPostProcessing = (postProcessing: PostProcessing): void => {
+  const selectPostProcessing = (postProcessing: IPostProcessing): void => {
     setState((prevState) => ({
       ...prevState,
       processList: [
         ...prevState.processList.filter(
-          (process: Process) => process.processId < prevState.activeProcess
+          (process: IProcess) => process.processId < prevState.activeProcess
         ),
         {
           ...prevState.processList.filter(
-            (process: Process) => process.processId === prevState.activeProcess
+            (process: IProcess) => process.processId === prevState.activeProcess
           )[0],
           postProcessing: postProcessing,
         },
         ...prevState.processList.filter(
-          (process: Process) => process.processId > prevState.activeProcess
+          (process: IProcess) => process.processId > prevState.activeProcess
         ),
       ],
     }));
   };
 
-  const selectAdditive = (additive: Additive): void => {
+  const selectAdditive = (additive: IAdditive): void => {
     setState((prevState) => ({
       ...prevState,
       processList: [
         ...prevState.processList.filter(
-          (process: Process) => process.processId < prevState.activeProcess
+          (process: IProcess) => process.processId < prevState.activeProcess
         ),
         {
           ...prevState.processList.filter(
-            (process: Process) => process.processId === prevState.activeProcess
+            (process: IProcess) => process.processId === prevState.activeProcess
           )[0],
           additive: additive,
         },
         ...prevState.processList.filter(
-          (process: Process) => process.processId > prevState.activeProcess
+          (process: IProcess) => process.processId > prevState.activeProcess
         ),
       ],
     }));

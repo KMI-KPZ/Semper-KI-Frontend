@@ -1,13 +1,13 @@
 import { Button } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Process } from "../../../interface/Interface";
+import { IProcess } from "../../../interface/Interface";
 import "./ShoppingCart.scss";
 import ShoppingCartItem from "./ShoppingCartItem";
 
 interface Props {
-  processList: Process[];
-  setProcessList(processList: Process[]): void;
+  processList: IProcess[];
+  setProcessList(processList: IProcess[]): void;
 }
 
 const ShoppingCart = ({ processList, setProcessList }: Props) => {
@@ -20,7 +20,7 @@ const ShoppingCart = ({ processList, setProcessList }: Props) => {
         {processList.length < 1 ? (
           <h2 className="shopping-cart-headline">keine aktiven Prozesse</h2>
         ) : (
-          processList.map((process: Process, index: number) => (
+          processList.map((process: IProcess, index: number) => (
             <ShoppingCartItem process={process} key={index} />
           ))
         )}

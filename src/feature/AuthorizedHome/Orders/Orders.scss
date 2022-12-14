@@ -1,0 +1,54 @@
+@import "./../../../variables.scss";
+
+.orders{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100vh - $heightHeader - 2*20px);
+    width: 100%;
+    gap: $containerGap;
+}
+
+h1.orders-headline {
+    background-color: $white;
+    width: 100%;
+    height: $heightHeadline;
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+}
+
+ul.order-list {
+    height: calc(100vh - $heightHeader - $heightHeadline  - 2*20px);
+    width: 100%;
+    overflow-x: scroll;
+    overflow-x: hidden;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li.order-list-item {
+    text-align: center;
+    width: 100%;
+    background-color: $white;
+    margin: 0;
+    padding: 10px;
+}
+
+ul.order{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    list-style: none;
+}
+
+li.order-item {
+    background-color: red;
+}

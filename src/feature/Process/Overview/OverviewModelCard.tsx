@@ -1,12 +1,12 @@
 import "../ProcessView.scss";
 import "./Overview.scss";
-import { Process } from "../../../interface/Interface";
+import { IProcess } from "../../../interface/Interface";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 interface Props {
   expanded: boolean;
-  process: Process;
+  process: IProcess;
   onClick: (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     id: number

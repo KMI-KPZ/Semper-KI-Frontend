@@ -2,14 +2,14 @@ import "../../../styles.scss";
 import "./../ProcessView.scss";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Model } from "../../../interface/Interface";
+import { IModel } from "../../../interface/Interface";
 import { useFetch } from "../../../hooks/useFetch";
 import Search from "../../../components/Process/Search/Search";
 import { ModelCatalogCard } from "./ModelCatalogCard";
 import Loading from "../../../components/Process/Loading/Loading";
 
 interface Props {
-  selectModel(model: Model): void;
+  selectModel(model: IModel): void;
   setProgressState: (progressStateIndex: number) => void;
 }
 
@@ -20,7 +20,7 @@ interface State {
 
 export const ModelCatalog = ({ selectModel, setProgressState }: Props) => {
   const { t } = useTranslation();
-  const { data, isLoading, error } = useFetch<Model>({
+  const { data, isLoading, error } = useFetch<IModel>({
     url: "http://localhost:3030/modelList",
   });
 
@@ -51,7 +51,7 @@ export const ModelCatalog = ({ selectModel, setProgressState }: Props) => {
             data &&
             !error && (
               <div className="model-cards">
-                {data.slice(0, 6).map((model: Model, index: number) => (
+                {data.slice(0, 6).map((model: IModel, index: number) => (
                   <ModelCatalogCard
                     grid={state.grid}
                     setProgressState={setProgressState}

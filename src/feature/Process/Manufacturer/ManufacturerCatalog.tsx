@@ -1,6 +1,6 @@
 import SettingsIcon from "@mui/icons-material/Settings";
 import SearchIcon from "@mui/icons-material/Search";
-import { Manufacturer } from "../../../interface/Interface";
+import { IManufacturer } from "../../../interface/Interface";
 import React, { useState } from "react";
 
 import "../../../styles.scss";
@@ -24,7 +24,7 @@ type ManufacturerAttribut =
 
 interface Props {
   setProgressState: (progressStateIndex: number) => void;
-  selectManufacturer: (manufacturer: Manufacturer) => void;
+  selectManufacturer: (manufacturer: IManufacturer) => void;
 }
 
 interface State {
@@ -41,7 +41,9 @@ export const ManufacturerCatalog = ({
     data: manufacturerList,
     isLoading: manufacturerIsLoading,
     error: manufacturerLoadingError,
-  } = useFetch<Manufacturer>({ url: "http://localhost:3030/manufacturerList" });
+  } = useFetch<IManufacturer>({
+    url: "http://localhost:3030/manufacturerList",
+  });
   const [filter, setFilter] = useState<number>(0);
   const [state, setState] = useState<State>({ filter: "", grid: true });
 
@@ -63,10 +65,10 @@ export const ManufacturerCatalog = ({
   };
 
   const sortManufacturers = (
-    manufacturerList: Manufacturer[],
+    manufacturerList: IManufacturer[],
     attribut: ManufacturerAttribut
-  ): Manufacturer[] => {
-    return manufacturerList.sort((man1: Manufacturer, man2: Manufacturer) => {
+  ): IManufacturer[] => {
+    return manufacturerList.sort((man1: IManufacturer, man2: IManufacturer) => {
       if (!attribut || !man1 || !man2 || !man1[attribut] || !man2[attribut])
         return 0;
       if (
@@ -83,7 +85,7 @@ export const ManufacturerCatalog = ({
   };
 
   const renderManufacturerList = () => {
-    let newManufacturerList: Manufacturer[] = manufacturerList.slice(0, 5);
+    let newManufacturerList: IManufacturer[] = manufacturerList.slice(0, 5);
     switch (filter) {
       case 0:
         newManufacturerList = sortManufacturers(newManufacturerList, "name");
@@ -96,7 +98,7 @@ export const ManufacturerCatalog = ({
         break;
       case 2:
         newManufacturerList = newManufacturerList.sort(
-          (man1: Manufacturer, man2: Manufacturer) => {
+          (man1: IManufacturer, man2: IManufacturer) => {
             if (
               man1.deliverTime !== undefined &&
               man2.deliverTime !== undefined &&
@@ -119,7 +121,7 @@ export const ManufacturerCatalog = ({
     }
 
     return newManufacturerList.map(
-      (manufacturer: Manufacturer, index: number) => (
+      (manufacturer: IManufacturer, index: number) => (
         <ManufacturerCatalogCard
           key={index}
           manufacturer={manufacturer}

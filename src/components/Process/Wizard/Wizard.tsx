@@ -3,10 +3,10 @@ import React, { ReactNode } from "react";
 import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined";
 
 import { useTranslation } from "react-i18next";
-import { ProcessState } from "../../../interface/Interface";
+import { IProcessState } from "../../../interface/Interface";
 
 interface Props {
-  state: ProcessState;
+  state: IProcessState;
   setProgressState: (id: number) => void;
 }
 

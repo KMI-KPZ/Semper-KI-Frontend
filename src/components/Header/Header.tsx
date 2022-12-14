@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import { ClickAwayListener, IconButton } from "@mui/material";
 import { UserType } from "../../interface/types";
 import HeaderLink from "./HeaderLink";
-import { AuthTokenType } from "../../interface/Interface";
+import { IAuthToken } from "../../interface/Interface";
 
 const kissLogo: React.ReactNode = (
   <img
@@ -45,7 +45,7 @@ const languages: Language[] = [
 ];
 
 interface Props {
-  authToken: AuthTokenType | null;
+  authToken: IAuthToken | null;
   userType: UserType;
   setUserType: (userType: UserType) => void;
   setMenuOpen(menuOpen: boolean): void;

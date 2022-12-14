@@ -5,10 +5,10 @@ import {
   screen,
 } from "@testing-library/react";
 import { useNavigate } from "react-router-dom";
-import { Process, ProcessState } from "../../../interface/Interface";
+import { IProcess, IProcessState } from "../../../interface/Interface";
 import { ShoppingCart } from "./ProcessShoppingCart";
 
-const mockedState: ProcessState = {
+const mockedState: IProcessState = {
   activeProcess: 0,
   nextID: 2,
   progressState: 0,
@@ -17,7 +17,7 @@ const mockedState: ProcessState = {
 };
 
 const mockedDeleteProcess = jest.fn((index: number): void => {});
-const mockedAddProcess = (process: Process): void => {};
+const mockedAddProcess = (process: IProcess): void => {};
 const mockedSelectProcess = jest.fn((id: number): void => {});
 const mockedSetProgressState = jest.fn(
   (progressStateIndex: number): void => {}

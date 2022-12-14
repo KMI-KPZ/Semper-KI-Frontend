@@ -9,10 +9,10 @@ import Orders from "./Orders/Orders";
 import { ProcessView } from "../Process/ProcessView";
 import Navigation from "../Navigation/Navigation";
 import {
-  AuthTokenType,
-  Order,
-  Process,
-  UserInfoType,
+  IAuthToken,
+  IOrder,
+  IProcess,
+  IUserInfo,
 } from "../../interface/Interface";
 import { UserType } from "../../interface/types";
 import Account from "./Account/Account";
@@ -20,12 +20,12 @@ import { Fab } from "@mui/material";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
 
 interface Props {
-  authToken: AuthTokenType;
+  authToken: IAuthToken;
   userType: UserType;
-  processList: Process[];
-  orderList: Order[];
+  processList: IProcess[];
+  orderList: IOrder[];
   messages: string[];
-  setProcessList(processList: Process[]): void;
+  setProcessList(processList: IProcess[]): void;
 }
 
 const AuthorizedHome = ({

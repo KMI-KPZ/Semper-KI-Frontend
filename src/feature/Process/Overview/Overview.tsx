@@ -1,11 +1,11 @@
 import "../ProcessView.scss";
 import "./Overview.scss";
-import { ProcessState } from "../../../interface/Interface";
+import { IProcessState } from "../../../interface/Interface";
 import { OverviewCard } from "./OverviewCard";
 import AddIcon from "@mui/icons-material/Add";
 
 interface Props {
-  state: ProcessState;
+  state: IProcessState;
   setProgressState: (progressStateIndex: number) => void;
   selectProcess: (id: number) => void;
 }

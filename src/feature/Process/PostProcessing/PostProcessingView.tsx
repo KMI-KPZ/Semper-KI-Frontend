@@ -2,20 +2,20 @@ import "../ProcessView.scss";
 import "./PostProcessing.scss";
 import React from "react";
 import {
-  PostProcessing,
-  ProcessState,
-  Option,
+  IPostProcessing,
+  IProcessState,
+  IOption,
 } from "../../../interface/Interface";
 import { PostProcessingOption } from "./PostProcessingOption";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  state: ProcessState;
+  state: IProcessState;
   setProgressState: (progressStateIndex: number) => void;
-  selectPostProcessing: (postProcessing: PostProcessing) => void;
+  selectPostProcessing: (postProcessing: IPostProcessing) => void;
 }
 
-const testData: Option[] = [
+const testData: IOption[] = [
   { name: "Bool-Option", checkInput: true },
   {
     name: "Bool-Auswahl-Folgeauswahl-Option",
@@ -96,7 +96,7 @@ export const PostProcessingView = ({
   return (
     <div className="process-content-container">
       <div className="post-processing-container">
-        {testData.map((option: Option, index: number) => (
+        {testData.map((option: IOption, index: number) => (
           <PostProcessingOption option={option} key={index} />
         ))}
         <div className="next-button dark" onClick={handleClickNext}>

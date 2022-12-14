@@ -4,12 +4,12 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EditIcon from "@mui/icons-material/Edit";
 import { useTranslation } from "react-i18next";
-import { Process, Specification } from "../../../interface/Interface";
+import { IProcess, ISpecification } from "../../../interface/Interface";
 
 interface Props {
   expanded: boolean;
   deleteShoppingCartItem: (index: number) => void;
-  process: Process;
+  process: IProcess;
   isActiveProcess: boolean;
   selectProcess: (id: number) => void;
   setProgressState: (progressStateIndex: number) => void;
@@ -176,7 +176,7 @@ export const ShoppingCartItem = ({
               process.postProcessing.specificationList && (
                 <div onClick={(e) => handleCLickProp(e, 3)}>
                   {process.postProcessing.specificationList.map(
-                    (spec: Specification, index: number) => (
+                    (spec: ISpecification, index: number) => (
                       <div key={index}>
                         {spec.name} {spec.value} {spec.unit} + {spec.price}
                       </div>

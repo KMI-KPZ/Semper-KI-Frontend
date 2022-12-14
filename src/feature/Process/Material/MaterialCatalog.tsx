@@ -6,12 +6,12 @@ import { useTranslation } from "react-i18next";
 import { useFetch } from "../../../hooks/useFetch";
 import Search from "../../../components/Process/Search/Search";
 import { MaterialCatalogCard } from "./MaterialCatalogCard";
-import { Material } from "../../../interface/Interface";
+import { IMaterial } from "../../../interface/Interface";
 import Loading from "../../../components/Process/Loading/Loading";
 
 interface Props {
   setProgressState: (progressStateIndex: number) => void;
-  selectMaterial: (material: Material) => void;
+  selectMaterial: (material: IMaterial) => void;
 }
 
 interface State {
@@ -24,7 +24,7 @@ export const MaterialCatalog = ({
   selectMaterial,
 }: Props) => {
   const { t } = useTranslation();
-  const { data, isLoading, error } = useFetch<Material>({
+  const { data, isLoading, error } = useFetch<IMaterial>({
     url: "http://localhost:3030/materialList",
   });
   const [state, setState] = useState<State>({ filter: "", grid: true });
@@ -54,7 +54,7 @@ export const MaterialCatalog = ({
             data &&
             !error && (
               <div className="material-cards">
-                {data.slice(0, 12).map((material: Material, index: number) => (
+                {data.slice(0, 12).map((material: IMaterial, index: number) => (
                   <MaterialCatalogCard
                     grid={state.grid}
                     setProgressState={setProgressState}

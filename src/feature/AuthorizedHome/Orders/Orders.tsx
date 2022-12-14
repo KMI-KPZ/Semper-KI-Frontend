@@ -1,19 +1,29 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Order } from "../../../interface/Interface";
+import { IOrder } from "../../../interface/Interface";
+import Order from "./Order";
+import "./Orders.scss";
 
 interface Props {
-  orderList: Order[];
+  orderList: IOrder[];
 }
 
 const Orders = ({ orderList }: Props) => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <h1 className="authorized-home-headline">{t("orders.headline")}</h1>
-      <div className="authorized-home-content vertical"></div>
-    </>
+    <div className="orders">
+      <h1 className="orders-headline">{t("orders.headline")}</h1>
+      <ul className="order-list">
+        {orderList.length > 0 ? (
+          orderList.map((order: IOrder, index: number) => (
+            <Order order={order} />
+          ))
+        ) : (
+          <li className="order-list-item">keine vorhandenen Bestellungen</li>
+        )}
+      </ul>
+    </div>
   );
 };
 

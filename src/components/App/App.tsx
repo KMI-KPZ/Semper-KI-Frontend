@@ -17,14 +17,15 @@ import CRSFToken from "../../hooks/CSRFToken";
 import axios from "axios";
 import LoginCallback from "../../feature/Login/LoginCallback";
 import LogoutCallback from "../../feature/Logout/LogoutCallback";
-import { Order, Process } from "../../interface/Interface";
+import { IOrder, IProcess } from "../../interface/Interface";
 import Navigation from "../../feature/Navigation/Navigation";
+import { TestOrderList, TestProcessList } from "../../services/TestData";
 
 interface State {
   menuOpen: boolean;
   userType: UserType;
-  processList: Process[];
-  orderList: Order[];
+  processList: IProcess[];
+  orderList: IOrder[];
   messages: string[];
 }
 
@@ -32,8 +33,8 @@ function App() {
   const [state, setState] = useState<State>({
     menuOpen: false,
     userType: "client",
-    processList: [],
-    orderList: [],
+    processList: TestProcessList,
+    orderList: TestOrderList,
     messages: [],
   });
   const { authToken, authLogin, authLogout } = useAuthCookie();
@@ -62,7 +63,7 @@ function App() {
     setState((prevState) => ({ ...prevState, userType }));
   };
 
-  const setProcessList = (processList: Process[]): void => {
+  const setProcessList = (processList: IProcess[]): void => {
     setState((prevState) => ({ ...prevState, processList }));
   };
 

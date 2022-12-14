@@ -20,7 +20,7 @@ const Orders = ({ orderList }: Props) => {
             <Order order={order} />
           ))
         ) : (
-          <li className="order-list-item">keine vorhandenen Bestellungen</li>
+          <li className="order empty">keine vorhandenen Bestellungen</li>
         )}
       </ul>
     </div>

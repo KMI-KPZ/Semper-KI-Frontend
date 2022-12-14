@@ -31,24 +31,34 @@ ul.order-list {
     padding: 0;
 }
 
-li.order-list-item {
-    text-align: center;
+li.order{
     width: 100%;
     background-color: $white;
     margin: 0;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    &.empty{
+        text-align: center;
+    }
 }
 
-ul.order{
+
+
+section.order-section{
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: flex-start;
     width: 100%;
     list-style: none;
-}
 
-li.order-item {
-    background-color: red;
+    h2{
+        margin:0;
+    }
+
+    &.header {
+        gap:10%;
+    }
 }

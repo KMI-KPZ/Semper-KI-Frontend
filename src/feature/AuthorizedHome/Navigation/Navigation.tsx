@@ -23,12 +23,21 @@ interface State {
 
 const Navigation = ({ userType }: Props) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
   const [state, setState] = useState<State>({
     open: false,
     navItems: getNavigationData(userType ? userType : "client"),
     activeNavItem: "dashboard",
   });
+
+  useEffect(() => {
+    let item: string = "";
+    state.navItems.forEach((navItem: NavigationItemType) => {
+      if (navItem.link === location.pathname) item = navItem.title;
+    });
+    setState((prevState) => ({ ...prevState, activeNavItem: item }));
+  }, [location.pathname]);
 
   const setExpandNavigationItem = (navItemId: number, expand: boolean) => {
     let newNavigationItems: NavigationItemType[] = [];
@@ -57,15 +66,6 @@ const Navigation = ({ userType }: Props) => {
     setState((prevState) => ({ ...prevState, open: open }));
   };
 
-  const navigateWithEffect = (link: string, title: string) => {
-    setState((prevState) => ({
-      ...prevState,
-      activeNavItem: title,
-      open: false,
-    }));
-    navigate(link);
-  };
-
   const handleClickNavSubItem = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     link: string,
@@ -73,7 +73,7 @@ const Navigation = ({ userType }: Props) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    navigateWithEffect(link, title);
+    navigate(link);
   };
 
   return (
@@ -88,7 +88,6 @@ const Navigation = ({ userType }: Props) => {
               (navItem: NavigationItemType, index: number) => (
                 <React.Fragment key={`${navItem.id}.${index}`}>
                   <NavigationItem
-                    navigate={navigateWithEffect}
                     open={state.open}
                     className={
                       state.activeNavItem.includes(navItem.title)

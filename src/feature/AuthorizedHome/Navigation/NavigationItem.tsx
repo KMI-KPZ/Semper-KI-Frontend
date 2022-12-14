@@ -4,13 +4,13 @@ import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
 import { NavigationItemType } from "./NavigationData";
 import { useTranslation } from "react-i18next";
 import { IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   open: boolean;
   className: string;
   navItem: NavigationItemType;
   setExpandNavigationItem: (navItemId: number, expand: boolean) => void;
-  navigate: (link: string, title: string) => void;
 }
 
 const NavigationItem = ({
@@ -18,9 +18,9 @@ const NavigationItem = ({
   className,
   navItem,
   setExpandNavigationItem,
-  navigate,
 }: Props) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const onClickNavigationItem = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -28,7 +28,7 @@ const NavigationItem = ({
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    navigate(link, navItem.title);
+    navigate(link);
   };
 
   const onClickNavigationItemIcon = (

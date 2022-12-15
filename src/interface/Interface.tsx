@@ -94,7 +94,7 @@ export interface IOrder {
   bill?: File;
 }
 
-export interface IUserInfo {
+export interface IUser {
   aud: string;
   email: string;
   email_verified: boolean;
@@ -117,7 +117,7 @@ export interface IAuthToken {
   id_token: string;
   scope: string;
   token_type: string;
-  userinfo: IUserInfo;
+  userinfo: IUser;
 }
 
 export interface IChat {

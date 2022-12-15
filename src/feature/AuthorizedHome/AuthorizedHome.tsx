@@ -8,12 +8,7 @@ import { Error } from "../Error/Error";
 import Orders from "./Orders/Orders";
 import { ProcessView } from "../Process/ProcessView";
 import Navigation from "../Navigation/Navigation";
-import {
-  IAuthToken,
-  IOrder,
-  IProcess,
-  IUserInfo,
-} from "../../interface/Interface";
+import { IAuthToken, IOrder, IProcess, IUser } from "../../interface/Interface";
 import { TUserType } from "../../interface/types";
 import Account from "./Account/Account";
 import { Fab } from "@mui/material";

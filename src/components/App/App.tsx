@@ -13,7 +13,7 @@ import Logout from "../../feature/Logout/Logout";
 import AuthorizedHome from "../../feature/AuthorizedHome/AuthorizedHome";
 import Guide from "../../feature/Process/Guide/Guide";
 import useAuthCookie from "../../hooks/useAuthCookie";
-import CRSFToken from "../../hooks/CSRFToken";
+import useCRSFToken from "../../hooks/useCSRFToken";
 import axios from "axios";
 import LoginCallback from "../../feature/Login/LoginCallback";
 import LogoutCallback from "../../feature/Logout/LogoutCallback";
@@ -39,21 +39,7 @@ function App() {
   });
   const { authToken, authLogin, authLogout } = useAuthCookie();
 
-  const csrfToken: string = CRSFToken();
-
-  useEffect(() => {
-    axios.defaults.headers.common = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "X-CSRFToken": csrfToken,
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers":
-        "Origin, X-Requested-With, Content-Type, Accept",
-    };
-    axios.defaults.withCredentials = true;
-    axios.defaults.xsrfCookieName = "csrftoken";
-    axios.defaults.xsrfHeaderName = "X-CSRFToken";
-  }, []);
+  useCRSFToken();
 
   const setMenuOpen = (menuOpen: boolean) => {
     setState((prevState) => ({ ...prevState, menuOpen }));

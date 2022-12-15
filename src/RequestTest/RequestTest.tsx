@@ -12,7 +12,7 @@ import { Container } from "@mui/system";
 import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import axios, { AxiosError } from "axios";
-import CRSFToken from "../hooks/CSRFToken";
+import useCRSFToken from "../hooks/useCSRFToken";
 import useAuthCookie from "../hooks/useAuthCookie";
 
 interface State {

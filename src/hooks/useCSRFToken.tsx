@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const CRSFToken = () => {
+const useCRSFToken = () => {
   const url: string = "http://localhost:8000/csrfCookie/";
   const [csrfToken, setCsrfToken] = useState("");
   useEffect(() => {
-    // if (csrfToken === "") {
     axios
       .get(url)
       .then((response) => {
@@ -17,9 +16,21 @@ const CRSFToken = () => {
       .catch((error) => {
         console.log("CSRF Token Error", error);
       });
-    // }
   }, []);
-  return csrfToken;
+
+  useEffect(() => {
+    axios.defaults.headers.common = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "X-CSRFToken": csrfToken,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept",
+    };
+    axios.defaults.withCredentials = true;
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.xsrfHeaderName = "X-CSRFToken";
+  }, [csrfToken]);
 };
 
-export default CRSFToken;
+export default useCRSFToken;

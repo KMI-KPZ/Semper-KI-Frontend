@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useUser from "../../hooks/useUser";
+import Account from "../AuthorizedHome/Account/Account";
 
 interface Props {
   login(): void;
@@ -28,7 +29,7 @@ const LoginCallback = ({ login }: Props) => {
       <Button variant="contained" onClick={() => handleOnClick()}>
         Get User
       </Button>
-      {response}
+      {response !== undefined ? <Account authToken={response} /> : null}
     </Container>
   );
 };

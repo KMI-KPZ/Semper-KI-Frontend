@@ -1,14 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { IUser } from "../interface/Interface";
+import { IAuthToken, IUser } from "../interface/Interface";
 
 interface ReturnProps {
-  response: string;
+  response: IAuthToken | undefined;
   sendRequest(): void;
 }
 
 const useUser = (): ReturnProps => {
-  const [response, setResponse] = useState<string>("");
+  const [response, setResponse] = useState<IAuthToken | undefined>();
 
   const sendRequest = () => {
     axios

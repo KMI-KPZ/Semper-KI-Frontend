@@ -6,18 +6,18 @@ const CRSFToken = () => {
   const url: string = "http://localhost:8000/csrfCookie/";
   const [csrfToken, setCsrfToken] = useState("");
   useEffect(() => {
-    if (csrfToken === "") {
-      axios
-        .get(url)
-        .then((response) => {
-          const token = Cookies.get("csrftoken");
-          setCsrfToken(token !== undefined ? token : "");
-          console.log("CSRFToken", token, url);
-        })
-        .catch((error) => {
-          console.log("CSRF Token Error", error);
-        });
-    }
+    // if (csrfToken === "") {
+    axios
+      .get(url)
+      .then((response) => {
+        const token = Cookies.get("csrftoken");
+        setCsrfToken(token !== undefined ? token : "");
+        console.log("CSRFToken", token, url);
+      })
+      .catch((error) => {
+        console.log("CSRF Token Error", error);
+      });
+    // }
   }, []);
   return csrfToken;
 };

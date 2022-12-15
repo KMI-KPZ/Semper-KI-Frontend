@@ -22,7 +22,7 @@ export const useFetch = <T extends unknown>({ url }: Props<T>): ReturnProps => {
     axios
       .get(url)
       .then((response) => {
-        console.log("Fetch Hook Loaded Data", url, response.data);
+        console.log("Fetch Hook Loaded Data", response.data.length, url);
         setData(response.data);
       })
       .catch((error) => {

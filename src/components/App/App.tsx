@@ -23,6 +23,7 @@ import { TestOrderList, TestProcessList } from "../../services/TestData";
 
 interface State {
   menuOpen: boolean;
+  isLoggedIn: boolean;
   userType: TUserType;
   processList: IProcess[];
   orderList: IOrder[];
@@ -32,6 +33,7 @@ interface State {
 function App() {
   const [state, setState] = useState<State>({
     menuOpen: false,
+    isLoggedIn: false,
     userType: "client",
     processList: TestProcessList,
     orderList: TestOrderList,
@@ -54,14 +56,16 @@ function App() {
   };
 
   const login = () => {
-    authLogin();
+    // authLogin();
+    setState((prevState) => ({ ...prevState, isLoggedIn: true }));
   };
 
   const logout = () => {
-    authLogout();
+    // authLogout();
+    setState((prevState) => ({ ...prevState, isLoggedIn: false }));
   };
 
-  const authorizedRoutes = authToken !== null && (
+  const authorizedRoutes = state.isLoggedIn && (
     <>
       <Route
         path="*"
@@ -70,7 +74,7 @@ function App() {
             orderList={state.orderList}
             processList={state.processList}
             setProcessList={setProcessList}
-            authToken={authToken}
+            // authToken={authToken}
             userType={state.userType}
           />
         }
@@ -78,7 +82,7 @@ function App() {
     </>
   );
 
-  const unAuthorizedRoutes = authToken === null && (
+  const unAuthorizedRoutes = !state.isLoggedIn && (
     <>
       <Route index element={<Home userType={state.userType} />} />
     </>
@@ -98,7 +102,8 @@ function App() {
           <Header
             isMenuOpen={state.menuOpen}
             setMenuOpen={setMenuOpen}
-            authToken={authToken}
+            // authToken={authToken}
+            isLoggedIn={state.isLoggedIn}
             userType={state.userType}
             setUserType={setUserType}
           />

@@ -15,7 +15,7 @@ import { Fab } from "@mui/material";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
 
 interface Props {
-  authToken: IAuthToken;
+  // authToken: IAuthToken;
   userType: TUserType;
   processList: IProcess[];
   orderList: IOrder[];
@@ -25,7 +25,7 @@ interface Props {
 const AuthorizedHome = ({
   processList,
   orderList,
-  authToken,
+  // authToken,
   userType,
   setProcessList,
 }: Props) => {
@@ -51,7 +51,7 @@ const AuthorizedHome = ({
           <Route path="proceedings" element={<Error text="proceedings" />} />
           <Route path="assignments" element={<Error text="assignments" />} />
           <Route path="messages" element={<Error text="messages" />} />
-          <Route path="account" element={<Account authToken={authToken} />} />
+          {/* <Route path="account" element={<Account authToken={authToken} />} /> */}
         </Routes>
       </section>
       <Fab

@@ -32,7 +32,7 @@ beforeEach(() => {
       isMenuOpen={false}
       setMenuOpen={mockedSetMenuOpen}
       setUserType={mockedSetUserType}
-      authToken={null}
+      isLoggedIn={false}
       userType="client"
     />
   );

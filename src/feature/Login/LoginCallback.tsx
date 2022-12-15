@@ -15,7 +15,7 @@ const LoginCallback = ({ login }: Props) => {
   const { response, sendRequest } = useUser();
 
   useEffect(() => {
-    // login();
+    login();
     // navigate("/");
   }, []);
 

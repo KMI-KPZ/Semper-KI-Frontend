@@ -45,7 +45,8 @@ const languages: Language[] = [
 ];
 
 interface Props {
-  authToken: IAuthToken | null;
+  // authToken: IAuthToken | null;
+  isLoggedIn: boolean;
   userType: TUserType;
   setUserType: (userType: TUserType) => void;
   setMenuOpen(menuOpen: boolean): void;
@@ -53,7 +54,8 @@ interface Props {
 }
 
 export const Header = ({
-  authToken,
+  // authToken,
+  isLoggedIn,
   userType,
   setUserType,
   setMenuOpen,
@@ -170,7 +172,7 @@ export const Header = ({
     );
     return (
       <>
-        {authToken === null ? (
+        {isLoggedIn === false ? (
           <>
             {userType === "client"
               ? unauthorizedClientLinks
@@ -192,7 +194,7 @@ export const Header = ({
   return (
     <header data-testid="header">
       <nav className="left-nav">
-        {authToken !== null ? (
+        {isLoggedIn === false ? (
           <IconButton
             className="burger-icon"
             onClick={() => setMenuOpen(!isMenuOpen)}

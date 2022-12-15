@@ -1,5 +1,10 @@
 @import "./../../../variables.scss";
 
+h1, h2, h3, hr{
+    margin: 0;
+    padding: 0;
+}
+
 .orders{
     display: flex;
     flex-direction: column;
@@ -7,22 +12,20 @@
     height: calc(100vh - $heightHeader - 2*20px);
     width: 100%;
     gap: $containerGap;
+    overflow-x: scroll;
+    overflow-x: hidden;
 }
 
 h1.orders-headline {
     background-color: $white;
     width: 100%;
     height: $heightHeadline;
-    margin: 0;
     padding: 10px 0;
     text-align: center;
 }
 
 ul.order-list {
-    height: calc(100vh - $heightHeader - $heightHeadline  - 2*20px);
     width: 100%;
-    overflow-x: scroll;
-    overflow-x: hidden;
     gap: 20px;
     display: flex;
     flex-direction: column;
@@ -35,7 +38,8 @@ li.order{
     width: 100%;
     background-color: $white;
     margin: 0;
-    padding: 10px;
+    padding: 20px;
+    gap:20px;
     display: flex;
     flex-direction: column;
     &.empty{
@@ -43,22 +47,69 @@ li.order{
     }
 }
 
-
-
 section.order-section{
     margin: 0;
     padding: 0;
+    gap:10px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     width: 100%;
     list-style: none;
 
-    h2{
-        margin:0;
-    }
-
     &.header {
         gap:10%;
+    }
+    &.models, &.manufacturer {
+        flex-direction: column;
+    }
+    &.buttons{
+        justify-content: center;
+    }
+
+    h2{
+        font-size:1.2em;
+    }
+}
+
+.order-process-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:20px;
+
+}
+
+.order-process-item {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    border: 1px solid $grey;
+    border-radius: 10px;
+    overflow: hidden;
+    align-items: center;
+    img.order-process-item-img{
+        width: 100%;
+    }
+}
+
+.order-manufacturer-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:20px;
+
+}
+
+.order-manufacturer-item {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    border: 1px solid $grey;
+    border-radius: 10px;
+    overflow: hidden;
+    align-items: center;
+    img.order-manufacturer-item-img{
+        width: 100%;
     }
 }

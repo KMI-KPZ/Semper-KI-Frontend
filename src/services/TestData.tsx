@@ -16,9 +16,21 @@ export const TestOrderList: IOrder[] = [
     processList: [
       {
         processId: 0,
-        model: { file: new File([], "test.stl") },
+        model: { file: new File([], "t4est.stl") },
         material: { name: "Material 1" },
         manufacturer: { name: "Hersteller 1" },
+      },
+      {
+        processId: 1,
+        model: { file: new File([], "tes2345t.stl") },
+        material: { name: "Material 1324" },
+        manufacturer: { name: "Hersteller 41" },
+      },
+      {
+        processId: 2,
+        model: { file: new File([], "tes33t.stl") },
+        material: { name: "Material 14" },
+        manufacturer: { name: "Hersteller 123" },
       },
     ],
   },

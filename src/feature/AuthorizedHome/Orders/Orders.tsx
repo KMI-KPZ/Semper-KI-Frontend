@@ -17,7 +17,7 @@ const Orders = ({ orderList }: Props) => {
       <ul className="order-list">
         {orderList.length > 0 ? (
           orderList.map((order: IOrder, index: number) => (
-            <Order order={order} />
+            <Order order={order} key={index} />
           ))
         ) : (
           <li className="order empty">keine vorhandenen Bestellungen</li>

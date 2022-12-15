@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React from "react";
 import { IManufacturer, IOrder, IProcess } from "../../../interface/Interface";
 
@@ -6,18 +7,18 @@ interface Props {
 }
 
 const Order = ({ order }: Props) => {
-  // const calcManufacturer = (): IManufacturer[] => {
-  //   let manufacturerList: IManufacturer[] = [];
-  //   order.processList.forEach((process: IProcess) => {
-  //     const manufacturer = process.manufacturer;
-  //     if (manufacturer !== undefined) {
-  //       if (manufacturerList.find(manufacturer) !== undefined) {
-  //         manufacturerList.push(manufacturer);
-  //       }
-  //     }
-  //   });
-  //   return manufacturerList;
-  // };
+  const calcManufacturer = (): IManufacturer[] => {
+    let manufacturerList: IManufacturer[] = [];
+    order.processList.forEach((process: IProcess) => {
+      const manufacturer = process.manufacturer;
+      if (manufacturer !== undefined) {
+        manufacturerList.push(manufacturer);
+      }
+    });
+    return manufacturerList;
+  };
+
+  const manufacturerList = calcManufacturer();
 
   return (
     <li className="order">
@@ -26,12 +27,49 @@ const Order = ({ order }: Props) => {
         <h2>Datum: {new Date().getDate()}</h2>
         <h2>Status: {order.orderState}</h2>
       </section>
-      <section>
+      <hr />
+      <section className="order-section models">
         <h2>Artikel : {order.processList.length}</h2>
-        <hr />
+        <div className="order-process-list">
+          {order.processList.map((process: IProcess, index: number) => (
+            <div key={index} className="order-process-item">
+              <img
+                className="order-process-item-img"
+                src={require("../../../assets/images/model_placeholder.png")}
+                alt="Model"
+              />
+              {process.model === undefined
+                ? process.processId
+                : process.model.name === undefined
+                ? process.model.file.name
+                : process.model.name}
+            </div>
+          ))}
+        </div>
       </section>
-      <section>
-        <h2>Hersteller: {}</h2>
+      <hr />
+      <section className="order-section manufacturer">
+        <h2>Hersteller: {manufacturerList.length}</h2>
+        <div className="order-manufacturer-list">
+          {manufacturerList.map(
+            (manufacturer: IManufacturer, index: number) => (
+              <div key={index} className="order-manufacturer-item">
+                <img
+                  className="order-manufacturer-item-img"
+                  src={require("../../../assets/images/firm_logo_placeholder.png")}
+                  alt="Model"
+                />
+                {manufacturer.name}
+              </div>
+            )
+          )}
+        </div>
+      </section>
+      <hr />
+      <section className="order-section buttons">
+        <Button variant="contained">Funktion 1</Button>
+        <Button variant="contained">Funktion 2</Button>
+        <Button variant="contained">Funktion 3</Button>
       </section>
     </li>
   );

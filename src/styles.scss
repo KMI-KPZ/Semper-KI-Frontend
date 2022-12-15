@@ -1,4 +1,10 @@
 @import "./variables.scss";
+
+h1, h2, h3, hr{
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   padding-top: $heightHeader;
 }

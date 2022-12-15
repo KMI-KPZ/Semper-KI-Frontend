@@ -5,6 +5,8 @@
     flex-direction: column;
     align-items: center;
     height: calc(100vh - $heightHeader - 2*20px);
+    overflow-x: scroll;
+    overflow-x: hidden;
     width: 100%;
     gap: $containerGap;
 }
@@ -19,10 +21,10 @@
 }
 
 .shopping-cart-items {
-    height: calc(100vh - $heightHeader - $heightHeadline - $heightBottomButtons - 3*20px);
+    // height: calc(100vh - $heightHeader - $heightHeadline - $heightBottomButtons - 3*20px);
+    // overflow-x: scroll;
+    // overflow-x: hidden;
     width: 100%;
-    overflow-x: scroll;
-    overflow-x: hidden;
     gap: 20px;
     display: flex;
     flex-direction: column;
@@ -58,6 +60,7 @@ ul.shopping-cart-item{
         
         h2.item-headline{
             margin: 5px 0;
+            font-size: 1.2em;
         }
 
         img.item-img{

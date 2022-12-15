@@ -16,7 +16,7 @@ const ShoppingCartItem = ({ process }: Props) => {
         />
       </li>
       <li className="item-column">
-        <h2 className="item-headine">
+        <h2 className="item-headline">
           {process.model ? process.model.name : "Model-Name"}
         </h2>
         <span>{process.model ? process.model.file.name : "---"}</span>
@@ -24,7 +24,7 @@ const ShoppingCartItem = ({ process }: Props) => {
         <span>---</span>
       </li>
       <li className="item-column">
-        <h2 className="item-headine">
+        <h2 className="item-headline">
           {process.material ? process.material.name : "Material-Name"}
         </h2>
         <span>---</span>
@@ -32,7 +32,7 @@ const ShoppingCartItem = ({ process }: Props) => {
         <span>---</span>
       </li>
       <li className="item-column">
-        <h2 className="item-headine">
+        <h2 className="item-headline">
           {process.manufacturer ? process.manufacturer.name : "Hersteller-Name"}
         </h2>
         <span>---</span>
@@ -40,19 +40,19 @@ const ShoppingCartItem = ({ process }: Props) => {
         <span>---</span>
       </li>
       <li className="item-column">
-        <h2 className="item-headine">Nachbearbeitung</h2>
+        <h2 className="item-headline">Nachbearbeitung</h2>
         <span>---</span>
         <span>---</span>
         <span>---</span>
       </li>
       <li className="item-column">
-        <h2 className="item-headine">Zusatz</h2>
+        <h2 className="item-headline">Zusatz</h2>
         <span>---</span>
         <span>---</span>
         <span>---</span>
       </li>
       <li className="item-column">
-        <h2 className="item-headine">Info</h2>
+        <h2 className="item-headline">Info</h2>
         <span>---</span>
         <span>---</span>
         <span>---</span>

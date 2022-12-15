@@ -17,7 +17,7 @@ import CRSFToken from "../../hooks/CSRFToken";
 import axios from "axios";
 import LoginCallback from "../../feature/Login/LoginCallback";
 import LogoutCallback from "../../feature/Logout/LogoutCallback";
-import { IOrder, IProcess } from "../../interface/Interface";
+import { IChat, IOrder, IProcess } from "../../interface/Interface";
 import Navigation from "../../feature/Navigation/Navigation";
 import { TestOrderList, TestProcessList } from "../../services/TestData";
 
@@ -26,7 +26,7 @@ interface State {
   userType: TUserType;
   processList: IProcess[];
   orderList: IOrder[];
-  messages: string[];
+  chats: IChat[];
 }
 
 function App() {
@@ -35,7 +35,7 @@ function App() {
     userType: "client",
     processList: TestProcessList,
     orderList: TestOrderList,
-    messages: [],
+    chats: [],
   });
   const { authToken, authLogin, authLogout } = useAuthCookie();
 
@@ -82,7 +82,6 @@ function App() {
         element={
           <AuthorizedHome
             orderList={state.orderList}
-            messages={state.messages}
             processList={state.processList}
             setProcessList={setProcessList}
             authToken={authToken}

@@ -119,3 +119,15 @@ export interface IAuthToken {
   token_type: string;
   userinfo: IUserInfo;
 }
+
+export interface IChat {
+  orderId: number;
+  userIds: number[];
+  messages: IMessage[];
+}
+
+export interface IMessage {
+  userId: number;
+  text: string;
+  date: number;
+}

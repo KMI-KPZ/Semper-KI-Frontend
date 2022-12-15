@@ -42,7 +42,7 @@ const NavigationItem = ({
   };
 
   return (
-    <li className={className}>
+    <li className={className} title={t(`nav.${navItem.title}.title`)}>
       <a
         href={`${navItem.link}`}
         onClick={(e) => onClickNavigationItem(e, navItem.link)}

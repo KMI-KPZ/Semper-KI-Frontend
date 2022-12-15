@@ -24,14 +24,12 @@ interface Props {
   userType: TUserType;
   processList: IProcess[];
   orderList: IOrder[];
-  messages: string[];
   setProcessList(processList: IProcess[]): void;
 }
 
 const AuthorizedHome = ({
   processList,
   orderList,
-  messages,
   authToken,
   userType,
   setProcessList,

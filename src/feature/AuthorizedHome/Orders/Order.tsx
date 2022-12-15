@@ -67,9 +67,9 @@ const Order = ({ order }: Props) => {
       </section>
       <hr />
       <section className="order-section buttons">
-        <Button variant="contained">Funktion 1</Button>
-        <Button variant="contained">Funktion 2</Button>
-        <Button variant="contained">Funktion 3</Button>
+        <Button variant="contained">Auftrag Stonieren</Button>
+        <Button variant="contained">Nachrichten</Button>
+        <Button variant="contained">Auftrag nochmal bestellen</Button>
       </section>
     </li>
   );

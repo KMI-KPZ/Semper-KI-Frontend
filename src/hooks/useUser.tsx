@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { IAuthToken, IUser } from "../interface/Interface";
 
@@ -27,6 +28,7 @@ const useUser = (): ReturnProps => {
 
   const logoutUser = () => {
     setAuthToken(undefined);
+    Cookies.remove("csrftoken");
   };
 
   return { authToken, user: authToken?.userinfo, getUser, logoutUser };

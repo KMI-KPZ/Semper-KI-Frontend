@@ -8,7 +8,6 @@ interface Props {
 }
 
 const Logout = ({ logout }: Props) => {
-  const [link, setLink] = useState<string>("/");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<AxiosError>();
 
@@ -18,7 +17,7 @@ const Logout = ({ logout }: Props) => {
       .get("http://localhost:8000/logout")
       .then((response) => {
         console.log("get Logout ", response.data);
-        setLink(response.data);
+        window.location.href = response.data;
       })
       .catch((error) => {
         console.log("get Logout error", error);
@@ -45,11 +44,9 @@ const Logout = ({ logout }: Props) => {
             <div></div>
           </div>
         </>
-      ) : error === undefined ? (
-        <Navigate replace to={link} />
-      ) : (
+      ) : error !== undefined ? (
         <h1>Es ist etwas schiefgelaufen : {error.message}</h1>
-      )}
+      ) : null}
     </Container>
   );
 };

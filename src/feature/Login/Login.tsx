@@ -1,11 +1,16 @@
 import { Container } from "@mui/system";
-import axios from "axios";
-import React, { useEffect } from "react";
-import { unstable_HistoryRouter } from "react-router-dom";
+import axios, { AxiosError } from "axios";
+import { stringify } from "querystring";
+import React, { useEffect, useState } from "react";
+import { Navigate, unstable_HistoryRouter } from "react-router-dom";
 import "./Login.scss";
 
 const Login = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<AxiosError>();
+
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get("http://localhost:8000/login")
       .then((response) => {
@@ -14,6 +19,10 @@ const Login = () => {
       })
       .catch((error) => {
         console.log("get Login error", error);
+        setError(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
@@ -24,12 +33,17 @@ const Login = () => {
         alignItems: "center",
         justifyContent: "center",
         height: "50vh",
-        gap: 5,
       }}
     >
-      <div className="lds-circle">
-        <div></div>
-      </div>
+      {isLoading ? (
+        <>
+          <div className="lds-circle">
+            <div></div>
+          </div>
+        </>
+      ) : error !== undefined ? (
+        <h1>Es ist etwas schiefgelaufen : {error.message}</h1>
+      ) : null}
     </Container>
   );
 };

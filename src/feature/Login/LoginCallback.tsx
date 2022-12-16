@@ -12,9 +12,6 @@ interface Props {
 }
 
 const LoginCallback = ({ login, authToken }: Props) => {
-  const navigate = useNavigate();
-  const [state, setState] = useState("authToken empty");
-
   useEffect(() => {
     login();
   }, []);

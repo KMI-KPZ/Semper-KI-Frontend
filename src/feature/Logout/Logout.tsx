@@ -25,7 +25,6 @@ const Logout = ({ logout }: Props) => {
       })
       .finally(() => {
         setIsLoading(false);
-        logout();
       });
   }, []);
 

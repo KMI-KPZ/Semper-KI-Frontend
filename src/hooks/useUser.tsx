@@ -16,6 +16,7 @@ const useUser = (): ReturnProps => {
     axios
       .get("http://localhost:8000/getUser/")
       .then((response) => {
+        console.log("getUser Data", response.data);
         setAuthToken(response.data);
       })
       .catch((error) => {

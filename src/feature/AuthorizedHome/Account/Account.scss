@@ -1,6 +1,7 @@
 @import "../../../variables.scss";
 
 .account {
+    overflow: scroll;
     display: flex;
     flex-direction: column;
     padding: 20px;

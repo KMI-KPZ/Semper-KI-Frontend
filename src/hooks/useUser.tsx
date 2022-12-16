@@ -3,25 +3,32 @@ import React, { useState } from "react";
 import { IAuthToken, IUser } from "../interface/Interface";
 
 interface ReturnProps {
-  response: IAuthToken | undefined;
-  sendRequest(): void;
+  authToken: IAuthToken | undefined;
+  user: IUser | undefined;
+  getUser(): void;
+  logoutUser(): void;
 }
 
 const useUser = (): ReturnProps => {
-  const [response, setResponse] = useState<IAuthToken | undefined>();
+  const [authToken, setAuthToken] = useState<IAuthToken | undefined>();
 
-  const sendRequest = () => {
+  const getUser = () => {
     axios
       .get("http://localhost:8000/getUser/")
       .then((response) => {
-        setResponse((prevState) => response.data);
+        setAuthToken(response.data);
       })
       .catch((error) => {
         console.log("getUser Error", error);
+        setAuthToken(undefined);
       });
   };
 
-  return { response, sendRequest };
+  const logoutUser = () => {
+    setAuthToken(undefined);
+  };
+
+  return { authToken, user: authToken?.userinfo, getUser, logoutUser };
 };
 
 export default useUser;

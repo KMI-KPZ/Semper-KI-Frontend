@@ -3,33 +3,26 @@ import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useUser from "../../hooks/useUser";
+import { IAuthToken, IUser } from "../../interface/Interface";
 import Account from "../AuthorizedHome/Account/Account";
 
 interface Props {
   login(): void;
+  authToken: IAuthToken | undefined;
 }
 
-const LoginCallback = ({ login }: Props) => {
+const LoginCallback = ({ login, authToken }: Props) => {
   const navigate = useNavigate();
   const [state, setState] = useState("authToken empty");
-  const { response, sendRequest } = useUser();
 
   useEffect(() => {
     login();
-    // navigate("/");
   }, []);
-
-  const handleOnClick = () => {
-    sendRequest();
-  };
 
   return (
     <Container>
       <h1>Succesfully Log In</h1>
-      <Button variant="contained" onClick={() => handleOnClick()}>
-        Get User
-      </Button>
-      {response !== undefined ? <Account authToken={response} /> : null}
+      {authToken !== undefined ? <Account authToken={authToken} /> : null}
     </Container>
   );
 };

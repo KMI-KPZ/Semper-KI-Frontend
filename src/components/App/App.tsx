@@ -12,7 +12,7 @@ import Login from "../../feature/Login/Login";
 import Logout from "../../feature/Logout/Logout";
 import AuthorizedHome from "../../feature/AuthorizedHome/AuthorizedHome";
 import Guide from "../../feature/Process/Guide/Guide";
-import useAuthCookie from "../../hooks/useAuthCookie";
+import useAuthCookie from "../../deprecated/useAuthCookie";
 import useCRSFToken from "../../hooks/useCSRFToken";
 import axios from "axios";
 import LoginCallback from "../../feature/Login/LoginCallback";
@@ -20,6 +20,7 @@ import LogoutCallback from "../../feature/Logout/LogoutCallback";
 import { IChat, IOrder, IProcess } from "../../interface/Interface";
 import Navigation from "../../feature/Navigation/Navigation";
 import { TestOrderList, TestProcessList } from "../../services/TestData";
+import useUser from "../../hooks/useUser";
 
 interface State {
   menuOpen: boolean;
@@ -39,9 +40,8 @@ function App() {
     orderList: TestOrderList,
     chats: [],
   });
-  const { authToken, authLogin, authLogout } = useAuthCookie();
-
   useCRSFToken();
+  const { authToken, user, getUser, logoutUser } = useUser();
 
   const setMenuOpen = (menuOpen: boolean) => {
     setState((prevState) => ({ ...prevState, menuOpen }));
@@ -56,31 +56,32 @@ function App() {
   };
 
   const login = () => {
-    // authLogin();
+    getUser();
     setState((prevState) => ({ ...prevState, isLoggedIn: true }));
   };
 
   const logout = () => {
-    // authLogout();
+    logoutUser();
     setState((prevState) => ({ ...prevState, isLoggedIn: false }));
   };
 
-  const authorizedRoutes = state.isLoggedIn && (
-    <>
-      <Route
-        path="*"
-        element={
-          <AuthorizedHome
-            orderList={state.orderList}
-            processList={state.processList}
-            setProcessList={setProcessList}
-            // authToken={authToken}
-            userType={state.userType}
-          />
-        }
-      />
-    </>
-  );
+  const authorizedRoutes =
+    state.isLoggedIn && authToken !== undefined ? (
+      <>
+        <Route
+          path="*"
+          element={
+            <AuthorizedHome
+              orderList={state.orderList}
+              processList={state.processList}
+              setProcessList={setProcessList}
+              authToken={authToken}
+              userType={state.userType}
+            />
+          }
+        />
+      </>
+    ) : null;
 
   const unAuthorizedRoutes = !state.isLoggedIn && (
     <>
@@ -133,7 +134,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route
           path="callback/login"
-          element={<LoginCallback login={login} />}
+          element={<LoginCallback login={login} authToken={authToken} />}
         />
         <Route path="*" element={<Error />} />
       </Routes>

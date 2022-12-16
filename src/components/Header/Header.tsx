@@ -194,7 +194,7 @@ export const Header = ({
   return (
     <header data-testid="header">
       <nav className="left-nav">
-        {isLoggedIn === false ? (
+        {isLoggedIn === true ? (
           <IconButton
             className="burger-icon"
             onClick={() => setMenuOpen(!isMenuOpen)}

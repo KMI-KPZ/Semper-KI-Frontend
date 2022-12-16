@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import Menu from "../Navigation/Navigation";
 import "./AuthorizedHome.scss";
 import Dashboard from "./Dashboard/Dashboard";
@@ -13,9 +19,10 @@ import { TUserType } from "../../interface/types";
 import Account from "./Account/Account";
 import { Fab } from "@mui/material";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
+import LogoutCallback from "../Logout/LogoutCallback";
 
 interface Props {
-  // authToken: IAuthToken;
+  authToken: IAuthToken;
   userType: TUserType;
   processList: IProcess[];
   orderList: IOrder[];
@@ -25,7 +32,7 @@ interface Props {
 const AuthorizedHome = ({
   processList,
   orderList,
-  // authToken,
+  authToken,
   userType,
   setProcessList,
 }: Props) => {
@@ -51,7 +58,11 @@ const AuthorizedHome = ({
           <Route path="proceedings" element={<Error text="proceedings" />} />
           <Route path="assignments" element={<Error text="assignments" />} />
           <Route path="messages" element={<Error text="messages" />} />
-          {/* <Route path="account" element={<Account authToken={authToken} />} /> */}
+          <Route
+            path="account/logout"
+            element={<Navigate replace to={"/logout"} />}
+          />
+          <Route path="account" element={<Account authToken={authToken} />} />
         </Routes>
       </section>
       <Fab

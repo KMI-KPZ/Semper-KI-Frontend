@@ -13,7 +13,7 @@ import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import axios, { AxiosError } from "axios";
 import useCRSFToken from "../hooks/useCSRFToken";
-import useAuthCookie from "../hooks/useAuthCookie";
+import useAuthCookie from "../deprecated/useAuthCookie";
 
 interface State {
   post: string;

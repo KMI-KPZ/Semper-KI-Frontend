@@ -17,7 +17,6 @@ const useCRSFToken = (): ReturnProps => {
     axios
       .get("http://localhost:8000/csrfCookie/")
       .then((response) => {
-        console.log("response", response);
         const token = Cookies.get("csrftoken");
         if (token !== undefined) {
           setAxiosHeader(token);

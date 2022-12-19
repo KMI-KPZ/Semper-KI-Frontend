@@ -2,18 +2,19 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { IAuthToken, IUser } from "../interface/Interface";
+import useCRSFToken from "./useCSRFToken";
 
 interface ReturnProps {
   authToken: IAuthToken | undefined;
   user: IUser | undefined;
-  getUser(): void;
+  loadUser(): void;
   logoutUser(): void;
 }
 
 const useUser = (): ReturnProps => {
   const [authToken, setAuthToken] = useState<IAuthToken | undefined>();
 
-  const getUser = () => {
+  const loadUser = () => {
     axios
       .get("http://localhost:8000/getUser/")
       .then((response) => {
@@ -31,7 +32,12 @@ const useUser = (): ReturnProps => {
     // Cookies.remove("csrftoken");
   };
 
-  return { authToken, user: authToken?.userinfo, getUser, logoutUser };
+  return {
+    authToken,
+    user: authToken?.userinfo,
+    loadUser,
+    logoutUser,
+  };
 };
 
 export default useUser;

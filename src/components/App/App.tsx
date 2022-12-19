@@ -40,8 +40,8 @@ function App() {
     orderList: TestOrderList,
     chats: [],
   });
-  useCRSFToken();
-  const { authToken, user, getUser, logoutUser } = useUser();
+  const { loadCSRFToken } = useCRSFToken();
+  const { authToken, user, loadUser, logoutUser } = useUser();
 
   const setMenuOpen = (menuOpen: boolean) => {
     setState((prevState) => ({ ...prevState, menuOpen }));
@@ -55,14 +55,26 @@ function App() {
     setState((prevState) => ({ ...prevState, processList }));
   };
 
+  useEffect(() => {
+    setState((prevState) => ({
+      ...prevState,
+      isLoggedIn: authToken === undefined ? false : true,
+    }));
+  }, [authToken]);
+
+  useEffect(() => {
+    loadCSRFToken();
+  }, []);
+
   const login = () => {
-    getUser();
-    setState((prevState) => ({ ...prevState, isLoggedIn: true }));
+    loadCSRFToken();
+    setTimeout(() => {
+      loadUser();
+    }, 100);
   };
 
   const logout = () => {
     logoutUser();
-    setState((prevState) => ({ ...prevState, isLoggedIn: false }));
   };
 
   const authorizedRoutes =

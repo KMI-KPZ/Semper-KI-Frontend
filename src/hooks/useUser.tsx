@@ -29,7 +29,7 @@ const useUser = (): ReturnProps => {
 
   const logoutUser = () => {
     setAuthToken(undefined);
-    // Cookies.remove("csrftoken");
+    Cookies.remove("sessionid");
   };
 
   return {

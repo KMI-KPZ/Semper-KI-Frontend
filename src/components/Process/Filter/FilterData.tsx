@@ -1,49 +1,64 @@
-import React from "react";
-
-interface Props {}
-
-export interface FilterItemType {
+export interface IFilterItemType {
   id: number;
   title: string;
   open: boolean;
-  options: FilterItemOptionType[];
+  options: IFilterItemOptionType[];
 }
 
-export interface FilterItemOptionType {
+export interface IFilterItemOptionType {
   id: number;
   title: string;
   checked: boolean;
   selection?: string[];
-  range?: RangeFilterType | Range3DFilterType;
+  range?: IRangeFilterType;
+  range3D?: IRangeFilterType;
 }
 
-export interface RangeFilterType {
-  type: string;
-  start?: number;
-  end?: number;
-  unit?: string[];
+export interface IRangeFilterType {
+  unit?: string | string[];
 }
 
-export interface Range3DFilterType {
-  type: string;
-  start_x?: number;
-  end_x?: number;
-  start_y?: number;
-  end_y?: number;
-  start_z?: number;
-  end_z?: number;
-  unit?: string[];
-}
-
-const FilterData: FilterItemType[] = [
+const FilterData: IFilterItemType[] = [
   {
     id: 0,
-    title: "model",
+    title: "general",
     open: true,
     options: [
       {
         id: 0,
-        title: "category",
+        title: "price",
+        checked: false,
+        range: {
+          unit: "€",
+        },
+      },
+      {
+        id: 1,
+        title: "deliverTime",
+        checked: false,
+        range: {
+          unit: ["Tage", "Wochen"],
+        },
+      },
+      {
+        id: 2,
+        title: "amount",
+        checked: false,
+        range: {
+          unit: "Stück",
+        },
+      },
+    ],
+  },
+
+  {
+    id: 1,
+    title: "model",
+    open: false,
+    options: [
+      {
+        id: 0,
+        title: "categorys",
         checked: false,
         selection: [
           "medicine",
@@ -59,19 +74,17 @@ const FilterData: FilterItemType[] = [
       },
       {
         id: 1,
-        title: "boxsize",
+        title: "boxSize",
         checked: false,
-        range: {
-          type: "range3D",
+        range3D: {
           unit: ["m", "cm", "mm"],
         },
       },
       {
         id: 2,
-        title: "surface",
+        title: "surfaceSize",
         checked: false,
         range: {
-          type: "range",
           unit: ["m²", "cm²", "mm²"],
         },
       },
@@ -80,14 +93,13 @@ const FilterData: FilterItemType[] = [
         title: "volume",
         checked: false,
         range: {
-          type: "range",
           unit: ["m³", "cm³", "mm³"],
         },
       },
     ],
   },
   {
-    id: 1,
+    id: 2,
     title: "material",
     open: false,
     options: [
@@ -106,7 +118,13 @@ const FilterData: FilterItemType[] = [
     ],
   },
   {
-    id: 2,
+    id: 3,
+    title: "proceeding",
+    open: false,
+    options: [],
+  },
+  {
+    id: 4,
     title: "manufacturer",
     open: false,
     options: [
@@ -119,14 +137,14 @@ const FilterData: FilterItemType[] = [
     ],
   },
   {
-    id: 3,
+    id: 5,
     title: "post-Processing",
     open: false,
     options: [],
   },
 ];
 
-const getFilterData = (): FilterItemType[] => {
+const getFilterData = (): IFilterItemType[] => {
   return FilterData;
 };
 

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FilterItemOptionType, FilterItemType } from "./FilterData";
+import { IFilterItemOptionType, IFilterItemType } from "./FilterData";
 
 interface Props {
   setFilterOption(id: number, name: string, value: any): void;
-  option: FilterItemOptionType;
-  filter: FilterItemType;
+  option: IFilterItemOptionType;
+  filter: IFilterItemType;
 }
 
 const FilterItemOption = ({ setFilterOption, option, filter }: Props) => {

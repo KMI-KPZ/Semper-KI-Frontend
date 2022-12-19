@@ -28,7 +28,7 @@ const useUser = (): ReturnProps => {
 
   const logoutUser = () => {
     setAuthToken(undefined);
-    Cookies.remove("csrftoken");
+    // Cookies.remove("csrftoken");
   };
 
   return { authToken, user: authToken?.userinfo, getUser, logoutUser };

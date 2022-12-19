@@ -1,7 +1,7 @@
 import { IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FilterItemOptionType, FilterItemType } from "./FilterData";
+import { IFilterItemOptionType, IFilterItemType } from "./FilterData";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import FilterItemOption from "./FilterItemOption";
@@ -9,7 +9,7 @@ import FilterItemOption from "./FilterItemOption";
 interface Props {
   setFilter(id: number, name: string, value: any): void;
   setFilterOption(filterId: number, id: number, name: string, value: any): void;
-  filter: FilterItemType;
+  filter: IFilterItemType;
 }
 
 const FilterItem = ({ setFilterOption, setFilter, filter }: Props) => {
@@ -41,14 +41,16 @@ const FilterItem = ({ setFilterOption, setFilter, filter }: Props) => {
       <hr className="filter-hr small" />
       {filter.open ? (
         <>
-          {filter.options.map((option: FilterItemOptionType, index: number) => (
-            <FilterItemOption
-              setFilterOption={setFilterOptionWarpped}
-              filter={filter}
-              option={option}
-              key={index}
-            />
-          ))}
+          {filter.options.map(
+            (option: IFilterItemOptionType, index: number) => (
+              <FilterItemOption
+                setFilterOption={setFilterOptionWarpped}
+                filter={filter}
+                option={option}
+                key={index}
+              />
+            )
+          )}
         </>
       ) : null}
     </div>

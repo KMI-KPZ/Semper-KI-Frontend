@@ -1,8 +1,6 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { IAuthToken, IUser } from "../interface/Interface";
-import useCRSFToken from "./useCSRFToken";
 
 interface ReturnProps {
   authToken: IAuthToken | undefined;

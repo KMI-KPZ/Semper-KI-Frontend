@@ -8,10 +8,17 @@ interface ReturnProps {
 }
 
 const useCRSFToken = (): ReturnProps => {
-  const { axiosUnauthorized } = useCustomAxios();
+  const setAxiosHeader = (token: string): void => {
+    axios.defaults.headers.common = {
+      "X-CSRFToken": token,
+    };
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.xsrfHeaderName = "X-CSRFToken";
+  };
+
   const loadCSRFToken = (): void => {
-    axiosUnauthorized
-      .get("/csrfCookie/")
+    axios
+      .get("http://localhost:8000/csrfCookie/")
       .then((response) => {
         const token = Cookies.get("csrftoken");
         if (token !== undefined) {

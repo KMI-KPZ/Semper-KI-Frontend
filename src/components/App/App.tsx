@@ -63,6 +63,15 @@ function App() {
   }, [authToken]);
 
   useEffect(() => {
+    axios.defaults.headers.common = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept",
+    };
+    axios.defaults.withCredentials = true;
+
     loadCSRFToken();
   }, []);
 

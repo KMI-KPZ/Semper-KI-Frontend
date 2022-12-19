@@ -71,8 +71,6 @@ function App() {
         "Origin, X-Requested-With, Content-Type, Accept",
     };
     axios.defaults.withCredentials = true;
-    axios.defaults.xsrfCookieName = "csrftoken";
-    axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
     loadCSRFToken();
   }, []);

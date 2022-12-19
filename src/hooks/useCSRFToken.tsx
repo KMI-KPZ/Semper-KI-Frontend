@@ -11,6 +11,9 @@ const useCRSFToken = (): ReturnProps => {
     axios.defaults.headers.common = {
       "X-CSRFToken": token,
     };
+
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.xsrfHeaderName = "X-CSRFToken";
   };
 
   const loadCSRFToken = (): void => {

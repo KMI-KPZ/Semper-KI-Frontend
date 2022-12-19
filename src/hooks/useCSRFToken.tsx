@@ -1,25 +1,20 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
   loadCSRFToken(): void;
 }
 
 const useCRSFToken = (): ReturnProps => {
-  const setAxiosHeader = (token: string): void => {
-    axios.defaults.headers.common = {
-      "X-CSRFToken": token,
-    };
-  };
-
+  const { axiosUnauthorized } = useCustomAxios();
   const loadCSRFToken = (): void => {
-    axios
-      .get("http://localhost:8000/csrfCookie/")
+    axiosUnauthorized
+      .get("/csrfCookie/")
       .then((response) => {
         const token = Cookies.get("csrftoken");
         if (token !== undefined) {
-          setAxiosHeader(token);
           console.log("CSRF Token", token);
         } else {
           console.log("CSRF Token is undefined");

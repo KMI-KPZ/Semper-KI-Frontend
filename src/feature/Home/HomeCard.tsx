@@ -5,12 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {
   link: string;
-  className: string;
   text: string;
-  icon: ReactNode;
 }
 
-export const HomeCard = ({ link, className, icon, text }: Props) => {
+export const HomeCard = ({ link, text }: Props) => {
   const navigate = useNavigate();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -19,9 +17,8 @@ export const HomeCard = ({ link, className, icon, text }: Props) => {
   };
 
   return (
-    <a href={link} className={className} onClick={handleClick}>
-      {icon}
-      <div className="card-text">{text}</div>
+    <a className="home-card" href={link} onClick={handleClick}>
+      {text}
     </a>
   );
 };

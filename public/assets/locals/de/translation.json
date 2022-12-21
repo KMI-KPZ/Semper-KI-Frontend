@@ -1,9 +1,6 @@
 {
   "home": {
-    "header": {
-      "client" : "Etwas herstellen lassen",
-      "contractor": "Service anbieten"
-    },
+    "headline": "Was möchten sie tun?",
     "button": {
       "search": "3D-Modell Suchen",
       "search-placeholder": "Ich suche...",
@@ -183,20 +180,29 @@
   },
   "filter":{
     "headline":"Vorgaben",
+    "general":{
+      "headline":"Allgemein",
+      "price":"Preis",
+      "deliverTime":"Lieferzeit",
+      "amount":"Anzahl"
+    },
     "model":{
       "headline":"Modell",
-      "category":{
+      "categorys":{
         "headline":"Kategorie"
       },
-      "boxsize":"Boxmaß",
-      "surface":"Oberfläche",
+      "boxSize":"Boxmaß",
+      "surfaceSize":"Oberfläche",
       "volume":"Volumen"
     },
     "material":{
-      "headline":"Material/Verfahren"
+      "headline":"Material"
     },
     "manufacturer":{
       "headline":"Hersteller"
+    },
+    "proceeding":{
+      "headline":"Verfahren"
     },
     "post-Processing":{
       "headline":"Nachbearbeitung"

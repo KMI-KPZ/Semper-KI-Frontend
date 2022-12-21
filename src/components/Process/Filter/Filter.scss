@@ -6,9 +6,11 @@
     background-color: $white;
     justify-content: flex-start;
     gap: 10px;
-    height: calc(100vh - $heightHeader - 2*$containerGap);
+    // height: calc(100vh - $heightHeader - 2*$containerGap);
     padding: 20px;
-    
+    // overflow-y:  scroll;
+    overflow-x:  hidden;
+
     &.closed{
         width: auto;
     }

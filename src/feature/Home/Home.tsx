@@ -34,78 +34,35 @@ export const Home = ({ userType }: Props) => {
   const searchInput = useRef<HTMLInputElement>(null);
   const searchCard = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-
   const { t } = useTranslation();
 
-  const getHomeCards = () => {
-    const clientCards = (
-      <>
-        <HomeCard
-          className="home-card"
-          icon={
-            <input
-              type="search"
-              placeholder={t("home.button.search-placeholder")}
-              className="home-search"
-              ref={searchInput}
-            />
-          }
-          link="/process/models"
-          text={t("home.button.search")}
-        />
-        <HomeCard
-          className="home-card"
-          icon={<UploadFile sx={{ fontSize: "60px" }} />}
-          link="/process/models/upload"
-          text={t("home.button.upload")}
-        />
-        <HomeCard
-          className="home-card"
-          icon={
-            <p style={{ fontSize: "3rem", fontWeight: "700", margin: "0" }}>
-              ?
-            </p>
-          }
-          link="/guide"
-          text={t("home.button.guide")}
-        />
-      </>
-    );
-
-    const contractorCards = (
-      <>
-        <HomeCard
-          className="home-card"
-          icon={PrintIcon}
-          link=""
-          text={t("home.button.print")}
-        />
-        <HomeCard
-          className="home-card"
-          icon={ModelIcon}
-          link=""
-          text={t("home.button.design")}
-        />
-      </>
-    );
-    return userType === "client" ? clientCards : contractorCards;
-  };
-
   return (
-    <div className="container flex-container column" data-testid="home">
+    <div className="home" data-testid="home">
+      <h1 className="home-headline">{t("home.headline")}</h1>
       <div className="home-box">
-        <div className="home-header" data-testid="header">
-          {t(`home.header.${userType === "client" ? "client" : "contractor"}`)}
+        <div className="home-container">
+          <h2>Als Kunden</h2>
+          <hr className="home-hr" />
+          <HomeCard
+            link="/guide/client-print"
+            text="Modell Herstellen lassen"
+          />
+          <HomeCard
+            link="/guide/client-design"
+            text="Modell entwickeln lassen"
+          />
         </div>
-        <div className="home-cards-container">{getHomeCards()}</div>
+        <div className="home-container">
+          <h2>Als Anbieter</h2>
+          <hr className="home-hr" />
+          <HomeCard link="/guide/contractor-print" text="Modelle produzieren" />
+          <HomeCard link="/guide/contractor-design" text="Modelle entwickeln" />
+          <HomeCard
+            link="/guide/contractor-service"
+            text="andere Services anbieten"
+          />
+        </div>
       </div>
-      {userType === "client" && (
-        <img
-          className="workflow-img"
-          src={require("../../assets/images/workflow.png")}
-          alt="3D-Print Work Flow"
-        />
-      )}
       <Fab
         sx={{
           position: "absolute",

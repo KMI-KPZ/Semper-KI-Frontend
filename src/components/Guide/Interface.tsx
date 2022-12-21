@@ -2,7 +2,7 @@ export interface IGuideQuestion {
   answer?: number;
   id: number;
   title: string;
-  unit: string;
+  unit: string | null;
   filter: string;
   options: IGuideQuestionOption[];
 }
@@ -21,5 +21,5 @@ export interface IGuideQuestionOptionValue {
 export interface IGuideAnswer {
   filter: string;
   value: string | IGuideQuestionOptionValue | null;
-  unit: string;
+  unit: string | null;
 }

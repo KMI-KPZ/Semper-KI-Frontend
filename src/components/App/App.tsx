@@ -146,7 +146,7 @@ function App() {
           path="process/*"
           element={
             <ProcessView
-              filter={state.guideFilter}
+              guideAnswers={state.guideFilter}
               setProcessList={setProcessList}
               processList={
                 state.processList.length > 0 ? state.processList : undefined

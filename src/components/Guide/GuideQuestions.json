@@ -3,6 +3,7 @@
     "id":0,
     "title":"Anzahl",
     "filter":"amount",
+    "unit":null,
     "options":[
       {
         "id":0,
@@ -138,6 +139,7 @@
     "id":3,
     "title":"Material",
     "filter":"materialCategory",
+    "unit":null,
     "options":[
       {
         "id":0,
@@ -170,6 +172,7 @@
     "id":4,
     "title":"Modell",
     "filter":"model",
+    "unit":null,
     "options":[
       {
         "id":0,

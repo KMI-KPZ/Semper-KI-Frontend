@@ -29,7 +29,7 @@ import { IGuideAnswer } from "../Guide/Interface";
 interface Props {
   setProcessList?(processList: IProcess[]): void;
   processList?: IProcess[];
-  filter: IGuideAnswer[];
+  guideAnswers: IGuideAnswer[];
 }
 
 const calcNextFreeId = (processList: IProcess[]): number => {
@@ -40,7 +40,18 @@ const calcNextFreeId = (processList: IProcess[]): number => {
   return nextFreeId + 1;
 };
 
-export const ProcessView = ({ setProcessList, processList, filter }: Props) => {
+const calcFilterWithGuideAnswers = (
+  guideAnswers: IGuideAnswer[]
+): IFilterItem[] => {
+  let filter: IFilterItem[] = [];
+  return filter;
+};
+
+export const ProcessView = ({
+  setProcessList,
+  processList,
+  guideAnswers,
+}: Props) => {
   const maxExpandedShoppingCardItem = 2;
   const navigate = useNavigate();
   const [state, setState] = useState<IProcessState>({
@@ -49,7 +60,7 @@ export const ProcessView = ({ setProcessList, processList, filter }: Props) => {
     activeProcessList: [0],
     processList: processList ? processList : [{ processId: 0 }],
     nextID: processList ? calcNextFreeId(processList) : 1,
-    filter: [],
+    filter: calcFilterWithGuideAnswers(guideAnswers),
   });
 
   useEffect(() => {

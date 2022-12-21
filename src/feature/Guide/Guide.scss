@@ -1,0 +1,25 @@
+@import "./../../variables.scss";
+
+.guide {
+    display: flex;
+    flex-direction: column;
+    max-width: 1800;
+    gap:20px;
+}
+
+.guide-headline{
+    width: 100%;
+    height: $heightHeadline;
+    background-color: $white;
+}
+
+.guide-card-box{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 20px;
+}
+
+.guide-card {
+    background-color: $white;
+}

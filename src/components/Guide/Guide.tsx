@@ -5,6 +5,8 @@ import _questions from "./GuideQuestions.json";
 import { IGuideQuestion, IGuideQuestionOption } from "./Interface";
 import { useParams } from "react-router-dom";
 import GuideQuestion from "./GuideQuestion";
+import { Fab } from "@mui/material";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 const questions = _questions as IGuideQuestion[];
 
@@ -47,6 +49,29 @@ const Guide = () => {
           activeQuestion={state.activeQuestion}
         />
       ))}
+      <Fab
+        className="guide-fab"
+        sx={{
+          position: "absolute",
+          bottom: 50,
+          right: 50,
+          color: "white",
+          backgroundColor:
+            state.answers.length === state.activeQuestion ? "green" : "blue",
+          "&:hover": {
+            color: "white",
+            backgroundColor:
+              state.answers.length === state.activeQuestion ? "green" : "blue",
+            filter: "opacity(0.5)",
+          },
+        }}
+      >
+        {state.answers.length === state.activeQuestion ? (
+          <NavigateNextIcon />
+        ) : (
+          `${state.activeQuestion}/${state.answers.length}`
+        )}
+      </Fab>
     </div>
   );
 };

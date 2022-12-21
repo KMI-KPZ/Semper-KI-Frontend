@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Error } from "../../feature/Error/Error";
-import { Home } from "../../feature/Home/Home";
-import { ProcessView } from "../../feature/Process/ProcessView";
 import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
 import "./App.scss";
 import "./../../styles.scss";
 import { TUserType } from "../../interface/types";
-import Login from "../../feature/Login/Login";
-import Logout from "../../feature/Logout/Logout";
-import AuthorizedHome from "../../feature/AuthorizedHome/AuthorizedHome";
-import Guide from "../../feature/Process/Guide/Guide";
 import useAuthCookie from "../../deprecated/useAuthCookie";
 import useCRSFToken from "../../hooks/useCSRFToken";
 import axios from "axios";
-import LoginCallback from "../../feature/Login/LoginCallback";
-import LogoutCallback from "../../feature/Logout/LogoutCallback";
 import { IChat, IOrder, IProcess } from "../../interface/Interface";
-import Navigation from "../../feature/Navigation/Navigation";
 import { TestOrderList, TestProcessList } from "../../services/TestData";
 import useUser from "../../hooks/useUser";
+import AuthorizedHome from "../AuthorizedHome/AuthorizedHome";
+import { Home } from "../Home/Home";
+import Navigation from "../Navigation/Navigation";
+import { ProcessView } from "../Process/ProcessView";
+import Guide from "../Guide/Guide";
+import Logout from "../Logout/Logout";
+import LogoutCallback from "../Logout/LogoutCallback";
+import Login from "../Login/Login";
+import LoginCallback from "../Login/LoginCallback";
+import { Error } from "../Error/Error";
 
 interface State {
   menuOpen: boolean;
@@ -146,7 +146,7 @@ function App() {
           }
         />
         <Route path="test" element={<RequestTest />} />
-        <Route path="guide" element={<Guide />} />
+        <Route path="guide/:path" element={<Guide />} />
         <Route path="logout" element={<Logout logout={logout} />} />
         <Route
           path="callback/logout"

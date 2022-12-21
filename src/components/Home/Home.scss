@@ -49,4 +49,8 @@
   padding: 10px;
   width: 50%;
   text-align: center;
+
+  &:hover {
+    background-color: $white_m;
+  }
 }

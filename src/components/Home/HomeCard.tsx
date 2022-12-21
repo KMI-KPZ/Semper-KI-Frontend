@@ -17,7 +17,7 @@ export const HomeCard = ({ link, text }: Props) => {
   };
 
   return (
-    <a className="home-card" href={link} onClick={handleClick}>
+    <a title={text} className="home-card" href={link} onClick={handleClick}>
       {text}
     </a>
   );

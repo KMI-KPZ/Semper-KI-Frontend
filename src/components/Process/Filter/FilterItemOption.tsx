@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { IFilterItemOptionType, IFilterItemType } from "./FilterData";
+import { IFilterItemOptionType, IFilterItemType } from "./Interface";
 
 interface Props {
   setFilterOption(id: number, name: string, value: any): void;

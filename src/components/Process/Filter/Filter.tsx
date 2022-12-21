@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import getFilterData, {
-  IFilterItemOptionType,
-  IFilterItemType,
-} from "./FilterData";
+import { IFilterItemOptionType, IFilterItemType } from "./Interface";
 import "./Filter.scss";
 import FilterItem from "./FilterItem";
 import { IconButton } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+
+import _filter from "./FilterQuestions.json";
+const filter = _filter as IFilterItemType[];
 
 interface Props {}
 
@@ -19,7 +19,7 @@ interface State {
 
 const Filter = (props: Props) => {
   const [state, setState] = useState<State>({
-    filter: getFilterData(),
+    filter,
     open: true,
   });
   const { t } = useTranslation();

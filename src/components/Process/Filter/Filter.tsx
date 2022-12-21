@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { IFilterItemOptionType, IFilterItemType } from "./Interface";
+import { IFilterItemOption, IFilterItem } from "./Interface";
 import "./Filter.scss";
 import FilterItem from "./FilterItem";
 import { IconButton } from "@mui/material";
@@ -8,18 +8,18 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 import _filter from "./FilterQuestions.json";
-const filter = _filter as IFilterItemType[];
+const filter = _filter as IFilterItem[];
 
 interface Props {}
 
 interface State {
-  filter: IFilterItemType[];
+  filter: IFilterItem[];
   open: boolean;
 }
 
 const Filter = (props: Props) => {
   const [state, setState] = useState<State>({
-    filter,
+    filter: filter,
     open: true,
   });
   const { t } = useTranslation();
@@ -30,14 +30,14 @@ const Filter = (props: Props) => {
     setState((prevState) => ({
       ...prevState,
       filter: [
-        ...prevState.filter.filter((filter: IFilterItemType) => filter.id < id),
+        ...prevState.filter.filter((filter: IFilterItem) => filter.id < id),
         {
           ...prevState.filter.filter(
-            (filter: IFilterItemType) => filter.id === id
+            (filter: IFilterItem) => filter.id === id
           )[0],
           [name]: value,
         },
-        ...prevState.filter.filter((filter: IFilterItemType) => filter.id > id),
+        ...prevState.filter.filter((filter: IFilterItem) => filter.id > id),
       ],
     }));
   };
@@ -54,35 +54,31 @@ const Filter = (props: Props) => {
       ...prevState,
       filter: [
         ...prevState.filter.filter(
-          (filter: IFilterItemType) => filter.id < filterId
+          (filter: IFilterItem) => filter.id < filterId
         ),
         {
           ...prevState.filter.filter(
-            (filter: IFilterItemType) => filter.id === filterId
+            (filter: IFilterItem) => filter.id === filterId
           )[0],
           options: [
             ...prevState.filter
-              .filter((filter: IFilterItemType) => filter.id === filterId)[0]
-              .options.filter(
-                (option: IFilterItemOptionType) => option.id < id
-              ),
+              .filter((filter: IFilterItem) => filter.id === filterId)[0]
+              .options.filter((option: IFilterItemOption) => option.id < id),
             {
               ...prevState.filter
-                .filter((filter: IFilterItemType) => filter.id === filterId)[0]
+                .filter((filter: IFilterItem) => filter.id === filterId)[0]
                 .options.filter(
-                  (option: IFilterItemOptionType) => option.id === id
+                  (option: IFilterItemOption) => option.id === id
                 )[0],
               [name]: value,
             },
             ...prevState.filter
-              .filter((filter: IFilterItemType) => filter.id === filterId)[0]
-              .options.filter(
-                (option: IFilterItemOptionType) => option.id > id
-              ),
+              .filter((filter: IFilterItem) => filter.id === filterId)[0]
+              .options.filter((option: IFilterItemOption) => option.id > id),
           ],
         },
         ...prevState.filter.filter(
-          (filter: IFilterItemType) => filter.id > filterId
+          (filter: IFilterItem) => filter.id > filterId
         ),
       ],
     }));
@@ -105,7 +101,7 @@ const Filter = (props: Props) => {
       </h2>
       {state.open ? <hr className="filter-hr large" /> : ""}
       {state.open
-        ? state.filter.map((filter: IFilterItemType, index: number) => (
+        ? state.filter.map((filter: IFilterItem, index: number) => (
             <FilterItem
               key={index}
               setFilter={setFilter}

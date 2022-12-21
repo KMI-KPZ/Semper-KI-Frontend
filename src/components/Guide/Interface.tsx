@@ -3,6 +3,7 @@ export interface IGuideQuestion {
   id: number;
   title: string;
   unit: string;
+  filter: string;
   options: IGuideQuestionOption[];
 }
 

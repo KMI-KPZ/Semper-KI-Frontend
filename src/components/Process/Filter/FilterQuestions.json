@@ -6,7 +6,7 @@
       "options": [
         {
           "id": 0,
-          "title": "price",
+          "title": "costs",
           "checked": false,
           "range": {
             "unit": "€"
@@ -98,7 +98,7 @@
       "open": false,
       "options": [
         {
-          "title": "material",
+          "title": "materialCategory",
           "id": 0,
           "checked": false,
           "selection": [

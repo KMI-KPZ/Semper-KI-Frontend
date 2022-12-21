@@ -14,6 +14,7 @@ const mockedState: IProcessState = {
   progressState: 0,
   activeProcessList: [0, 1],
   processList: [{ processId: 0 }, { processId: 1 }],
+  filter: [],
 };
 
 const mockedDeleteProcess = jest.fn((index: number): void => {});

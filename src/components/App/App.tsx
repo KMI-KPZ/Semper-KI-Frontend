@@ -21,7 +21,7 @@ import LogoutCallback from "../Logout/LogoutCallback";
 import Login from "../Login/Login";
 import LoginCallback from "../Login/LoginCallback";
 import { Error } from "../Error/Error";
-import { IFilterItemType } from "../Process/Filter/Interface";
+import { IFilterItem } from "../Process/Filter/Interface";
 
 interface State {
   menuOpen: boolean;
@@ -29,7 +29,7 @@ interface State {
   userType: TUserType;
   processList: IProcess[];
   orderList: IOrder[];
-  filter: IFilterItemType[];
+  filter: IFilterItem[];
   chats: IChat[];
 }
 
@@ -58,6 +58,11 @@ function App() {
     setState((prevState) => ({ ...prevState, processList }));
   };
 
+  const setFilter = (filter: IFilterItem[]): void => {
+    console.log("set Filter", filter);
+    setState((prevState) => ({ ...prevState, filter }));
+  };
+
   useEffect(() => {
     setState((prevState) => ({
       ...prevState,
@@ -74,7 +79,6 @@ function App() {
         "Origin, X-Requested-With, Content-Type, Accept",
     };
     axios.defaults.withCredentials = true;
-
     loadCSRFToken();
   }, []);
 
@@ -141,6 +145,7 @@ function App() {
           path="process/*"
           element={
             <ProcessView
+              filter={state.filter}
               setProcessList={setProcessList}
               processList={
                 state.processList.length > 0 ? state.processList : undefined
@@ -149,7 +154,7 @@ function App() {
           }
         />
         <Route path="test" element={<RequestTest />} />
-        <Route path="guide/:path" element={<Guide />} />
+        <Route path="guide/:path" element={<Guide setFilter={setFilter} />} />
         <Route path="logout" element={<Logout logout={logout} />} />
         <Route
           path="callback/logout"

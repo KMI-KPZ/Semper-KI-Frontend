@@ -7,15 +7,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import GuideQuestion from "./GuideQuestion";
 import { Fab } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { IFilterItem } from "../Process/Filter/Interface";
 
 const questions = _questions as IGuideQuestion[];
+
+interface Props {
+  setFilter(filter: IFilterItem[]): void;
+}
 
 interface State {
   activeQuestion: number;
   answers: number[];
 }
 
-const Guide = () => {
+const Guide = ({ setFilter }: Props) => {
   const path = useParams();
   const navigate = useNavigate();
   const [state, setState] = useState<State>({
@@ -24,7 +29,7 @@ const Guide = () => {
   });
 
   const selectOption = (questionId: number, optionId: number) => {
-    console.log("select Option", questionId, optionId);
+    // console.log("select Option", questionId, optionId);
     setState((prevState) => {
       let newAnswers = prevState.answers;
       newAnswers[questionId] = optionId;
@@ -43,8 +48,28 @@ const Guide = () => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    if (state.answers.length === state.activeQuestion)
+    if (state.answers.length === state.activeQuestion) {
+      setFilter(convertAnswerstoIFilterItemArray(state.answers));
       navigate("/process/models");
+    }
+  };
+
+  const convertAnswerstoIFilterItemArray = (
+    answers: number[]
+  ): IFilterItem[] => {
+    let filters: IFilterItem[] = [];
+
+    answers.forEach((answer: number, index: number) => {
+      let filter: IFilterItem = {
+        id: questions[index].options[answer].id,
+        open: true,
+        title: questions[index].filter,
+        options: [],
+      };
+      filters.push(filter);
+    });
+
+    return filters;
   };
 
   return (

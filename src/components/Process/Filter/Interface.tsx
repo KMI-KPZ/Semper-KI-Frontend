@@ -1,19 +1,19 @@
-export interface IFilterItemType {
+export interface IFilterItem {
   id: number;
   title: string;
   open: boolean;
-  options: IFilterItemOptionType[];
+  options: IFilterItemOption[];
 }
 
-export interface IFilterItemOptionType {
+export interface IFilterItemOption {
   id: number;
   title: string;
   checked: boolean;
   selection?: string[];
-  range?: IRangeFilterType;
-  range3D?: IRangeFilterType;
+  range?: IRangeFilter;
+  range3D?: IRangeFilter;
 }
 
-export interface IRangeFilterType {
+export interface IRangeFilter {
   unit?: string | string[];
 }

@@ -23,10 +23,12 @@ import { Overview } from "./Overview/Overview";
 import Filter from "../../components/Process/Filter/Filter";
 import NewProcess from "./NewProcess";
 import { Error } from "../Error/Error";
+import { IFilterItem } from "./Filter/Interface";
 
 interface Props {
   setProcessList?(processList: IProcess[]): void;
   processList?: IProcess[];
+  filter: IFilterItem[];
 }
 
 const calcNextFreeId = (processList: IProcess[]): number => {
@@ -37,17 +39,17 @@ const calcNextFreeId = (processList: IProcess[]): number => {
   return nextFreeId + 1;
 };
 
-export const ProcessView = ({ setProcessList, processList }: Props) => {
+export const ProcessView = ({ setProcessList, processList, filter }: Props) => {
+  const maxExpandedShoppingCardItem = 2;
+  const navigate = useNavigate();
   const [state, setState] = useState<IProcessState>({
     progressState: 0,
     activeProcess: 0,
     activeProcessList: [0],
     processList: processList ? processList : [{ processId: 0 }],
     nextID: processList ? calcNextFreeId(processList) : 1,
+    filter: filter,
   });
-
-  const maxExpandedShoppingCardItem = 2;
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (setProcessList !== undefined) {
@@ -62,6 +64,7 @@ export const ProcessView = ({ setProcessList, processList }: Props) => {
       activeProcessList: [0],
       processList: [{ processId: 0 }],
       nextID: 1,
+      filter: [],
     });
     if (setProcessList !== undefined) setProcessList([]);
   };

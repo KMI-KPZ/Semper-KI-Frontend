@@ -34,7 +34,9 @@ const GuideQuestion = ({
             key={index}
           >
             {option.text}
-            {option.value !== null ? question.unit : null}
+            {question.unit !== undefined && option.value !== null
+              ? ` ${question.unit}`
+              : null}
           </div>
         ))}
       </div>

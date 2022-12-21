@@ -7,19 +7,15 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import Menu from "../Navigation/Navigation";
 import "./AuthorizedHome.scss";
 import Dashboard from "./Dashboard/Dashboard";
-import { Error } from "../Error/Error";
 import Orders from "./Orders/Orders";
-import { ProcessView } from "../Process/ProcessView";
-import Navigation from "../Navigation/Navigation";
 import { IAuthToken, IOrder, IProcess, IUser } from "../../interface/Interface";
 import { TUserType } from "../../interface/types";
 import Account from "./Account/Account";
 import { Fab } from "@mui/material";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
-import LogoutCallback from "../Logout/LogoutCallback";
+import { Error } from "../Error/Error";
 
 interface Props {
   authToken: IAuthToken;

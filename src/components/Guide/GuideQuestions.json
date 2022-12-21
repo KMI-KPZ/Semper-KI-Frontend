@@ -1,8 +1,10 @@
 [
   {
+    "id":0,
     "title":"Anzahl",
     "options":[
       {
+        "id":0,
         "text":"1-5",
         "value": 
         {
@@ -11,6 +13,7 @@
         }
       },
       {
+        "id":1,
         "text":"5-50",
         "value": 
         {
@@ -19,6 +22,7 @@
         }
       },
       {
+        "id":2,
         "text":"50-500",
         "value": 
         {
@@ -27,6 +31,7 @@
         }
       },
       {
+        "id":3,
         "text":"500+",
         "value": 
         {
@@ -34,16 +39,19 @@
         }
       },
       {
+        "id":4,
         "text":"unbekannt",
         "value":null
       }
     ]
   },
   {
+    "id":1,
     "title":"Lieferzeit",
     "unit":"Wochen",
     "options":[
       {
+        "id":0,
         "text":"1-2",
         "value":{
           "min":1,
@@ -51,6 +59,7 @@
         }
       },
       {
+        "id":1,
         "text":"2-5",
         "value":{
           "min":2,
@@ -58,6 +67,7 @@
         }
       },
       {
+        "id":2,
         "text":"5-10",
         "value":{
           "min":5,
@@ -65,22 +75,26 @@
         }
       },
       {
+        "id":3,
         "text":"10+",
         "value":{
           "min":10
         }
       },
       {
+        "id":4,
         "text":"unbekannt",
         "value":null
       }
     ]
   },
   {
+    "id":2,
     "title":"Größe",
     "unit":"cm³",
     "options":[
       {
+        "id":0,
         "text":"1-10",
         "value":{
           "min":1,
@@ -88,6 +102,7 @@
         }
       },
       {
+        "id":1,
         "text":"10-100",
         "value":{
           "min":10,
@@ -95,6 +110,7 @@
         }
       },
       {
+        "id":2,
         "text":"100-1000",
         "value":{
           "min":100,
@@ -102,62 +118,76 @@
         }
       },
       {
+        "id":3,
         "text":"1000+",
         "value":{
           "min":1000
         }
       },
       {
+        "id":4,
         "text":"unbekannt",
         "value":null
       }
     ]
   },
   {
+    "id":3,
     "title":"Material",
     "options":[
       {
+        "id":0,
         "text":"Kunstoff",
         "value":"plastic"
       },
       {
+        "id":1,
         "text":"Metall",
         "value":"metal"
       },
       {
+        "id":2,
         "text":"Keramik",
         "value":"ceramic"
       },
       {
+        "id":3,
         "text":"Organisch",
         "value":"organic"
       },
       {
+        "id":4,
         "text":"unbekannt",
         "value":null
       }
     ]
   },
   {
+    "id":4,
     "title":"Modell",
     "options":[
       {
+        "id":0,
         "text":"vorhanden",
         "value":"present"
       },
       {
+        "id":1,
         "text":"fehlt",
         "value":"missing"
       },
       {
+        "id":2,
         "text":"auf der Suche",
         "value":"search"
       },
       {
+        "id":3,
         "text":"anfertigen lassen",
         "value":"design"
       },
       {
+        "id":4,
         "text":"unbekannt",
         "value":null
       }

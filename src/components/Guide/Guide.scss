@@ -3,23 +3,45 @@
 .guide {
     display: flex;
     flex-direction: column;
-    max-width: 1800;
-    gap:20px;
+    max-width: 1800px;
+    margin: 0 auto;
+    gap:$containerGap;
+    margin-top: $containerGap;
 }
 
-.guide-headline{
-    width: 100%;
-    height: $heightHeadline;
+.guide-question {
+    display: flex;
+    flex-direction: column;
+    gap:$containerGap / 2;
+
+    &.passiv {
+        filter: opacity(0.5)
+    }
+}
+
+
+.guide-question-headline {
     background-color: $white;
+    text-align: center;
+    padding: 10px;
 }
 
-.guide-card-box{
+.guide-question-options {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 20px;
+    justify-content: space-evenly;
+    gap: $containerGap;
+    background-color: $white;
+    padding: 10px;
 }
 
-.guide-card {
-    background-color: $white;
+.guide-question-option {
+    padding: 10px 50px;
+    &:hover {
+        background-color: $white_m;
+        cursor: pointer;
+    }
+    &.selected {
+        border: 1px solid $grey;
+    }
 }

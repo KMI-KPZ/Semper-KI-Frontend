@@ -1,11 +1,10 @@
 import { Wizard } from "../../components/Process/Wizard/Wizard";
-import React, { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import "../../styles.scss";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ModelUpload } from "./Model/ModelUpload";
 import { ModelCatalog } from "./Model/ModelCatalog";
-import { Error } from "../Error/Error";
 import { ShoppingCart } from "../../components/Process/ProcessShoppingCart/ProcessShoppingCart";
 import {
   IMaterial,
@@ -19,12 +18,11 @@ import {
 import { MaterialCatalog } from "./Material/MaterialCatalog";
 import { PostProcessingView } from "./PostProcessing/PostProcessingView";
 import { AdditiveView } from "./Additive/AdditiveView";
-import { ModelView } from "./Model/ModelView";
-import { MaterialView } from "./Material/MaterialView";
 import { ManufacturerCatalog } from "./Manufacturer/ManufacturerCatalog";
 import { Overview } from "./Overview/Overview";
 import Filter from "../../components/Process/Filter/Filter";
 import NewProcess from "./NewProcess";
+import { Error } from "../Error/Error";
 
 interface Props {
   setProcessList?(processList: IProcess[]): void;

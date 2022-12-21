@@ -2,7 +2,11 @@ import React, { useState } from "react";
 
 import "./Guide.scss";
 import _questions from "./GuideQuestions.json";
-import { IGuideQuestion, IGuideQuestionOption } from "./Interface";
+import {
+  IGuideAnswer,
+  IGuideQuestion,
+  IGuideQuestionOption,
+} from "./Interface";
 import { useNavigate, useParams } from "react-router-dom";
 import GuideQuestion from "./GuideQuestion";
 import { Fab } from "@mui/material";
@@ -12,7 +16,7 @@ import { IFilterItem } from "../Process/Filter/Interface";
 const questions = _questions as IGuideQuestion[];
 
 interface Props {
-  setFilter(filter: IFilterItem[]): void;
+  setFilter(filter: IGuideAnswer[]): void;
 }
 
 interface State {
@@ -49,22 +53,19 @@ const Guide = ({ setFilter }: Props) => {
   ) => {
     e.preventDefault();
     if (state.answers.length === state.activeQuestion) {
-      setFilter(convertAnswerstoIFilterItemArray(state.answers));
+      setFilter(convertToGuideAnswer(state.answers));
       navigate("/process/models");
     }
   };
 
-  const convertAnswerstoIFilterItemArray = (
-    answers: number[]
-  ): IFilterItem[] => {
-    let filters: IFilterItem[] = [];
+  const convertToGuideAnswer = (answers: number[]): IGuideAnswer[] => {
+    let filters: IGuideAnswer[] = [];
 
     answers.forEach((answer: number, index: number) => {
-      let filter: IFilterItem = {
-        id: questions[index].options[answer].id,
-        open: true,
-        title: questions[index].filter,
-        options: [],
+      let filter: IGuideAnswer = {
+        filter: questions[index].filter,
+        value: questions[index].options[answer].value,
+        unit: questions[index].unit,
       };
       filters.push(filter);
     });

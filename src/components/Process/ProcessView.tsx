@@ -24,11 +24,12 @@ import Filter from "../../components/Process/Filter/Filter";
 import NewProcess from "./NewProcess";
 import { Error } from "../Error/Error";
 import { IFilterItem } from "./Filter/Interface";
+import { IGuideAnswer } from "../Guide/Interface";
 
 interface Props {
   setProcessList?(processList: IProcess[]): void;
   processList?: IProcess[];
-  filter: IFilterItem[];
+  filter: IGuideAnswer[];
 }
 
 const calcNextFreeId = (processList: IProcess[]): number => {
@@ -48,7 +49,7 @@ export const ProcessView = ({ setProcessList, processList, filter }: Props) => {
     activeProcessList: [0],
     processList: processList ? processList : [{ processId: 0 }],
     nextID: processList ? calcNextFreeId(processList) : 1,
-    filter: filter,
+    filter: [],
   });
 
   useEffect(() => {

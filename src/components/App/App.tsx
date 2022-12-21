@@ -22,6 +22,7 @@ import Login from "../Login/Login";
 import LoginCallback from "../Login/LoginCallback";
 import { Error } from "../Error/Error";
 import { IFilterItem } from "../Process/Filter/Interface";
+import { IGuideAnswer } from "../Guide/Interface";
 
 interface State {
   menuOpen: boolean;
@@ -29,7 +30,7 @@ interface State {
   userType: TUserType;
   processList: IProcess[];
   orderList: IOrder[];
-  filter: IFilterItem[];
+  guideFilter: IGuideAnswer[];
   chats: IChat[];
 }
 
@@ -40,7 +41,7 @@ function App() {
     userType: "client",
     processList: TestProcessList,
     orderList: TestOrderList,
-    filter: [],
+    guideFilter: [],
     chats: [],
   });
   const { loadCSRFToken } = useCRSFToken();
@@ -58,9 +59,9 @@ function App() {
     setState((prevState) => ({ ...prevState, processList }));
   };
 
-  const setFilter = (filter: IFilterItem[]): void => {
+  const setFilter = (filter: IGuideAnswer[]): void => {
     console.log("set Filter", filter);
-    setState((prevState) => ({ ...prevState, filter }));
+    setState((prevState) => ({ ...prevState, guideFilter: filter }));
   };
 
   useEffect(() => {
@@ -145,7 +146,7 @@ function App() {
           path="process/*"
           element={
             <ProcessView
-              filter={state.filter}
+              filter={state.guideFilter}
               setProcessList={setProcessList}
               processList={
                 state.processList.length > 0 ? state.processList : undefined

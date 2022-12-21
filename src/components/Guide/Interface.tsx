@@ -17,3 +17,9 @@ export interface IGuideQuestionOptionValue {
   min?: number;
   max?: number;
 }
+
+export interface IGuideAnswer {
+  filter: string;
+  value: string | IGuideQuestionOptionValue | null;
+  unit: string;
+}

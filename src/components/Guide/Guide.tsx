@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./Guide.scss";
 import _questions from "./GuideQuestions.json";
 import { IGuideQuestion, IGuideQuestionOption } from "./Interface";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import GuideQuestion from "./GuideQuestion";
 import { Fab } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -17,6 +17,7 @@ interface State {
 
 const Guide = () => {
   const path = useParams();
+  const navigate = useNavigate();
   const [state, setState] = useState<State>({
     activeQuestion: 0,
     answers: Array<number>(questions.length),
@@ -38,6 +39,14 @@ const Guide = () => {
     });
   };
 
+  const handleOnClickFab = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    if (state.answers.length === state.activeQuestion)
+      navigate("/process/models");
+  };
+
   return (
     <div className="guide">
       {questions.map((question: IGuideQuestion) => (
@@ -50,7 +59,7 @@ const Guide = () => {
         />
       ))}
       <Fab
-        className="guide-fab"
+        onClick={handleOnClickFab}
         sx={{
           position: "absolute",
           bottom: 50,

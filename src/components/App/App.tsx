@@ -21,6 +21,7 @@ import LogoutCallback from "../Logout/LogoutCallback";
 import Login from "../Login/Login";
 import LoginCallback from "../Login/LoginCallback";
 import { Error } from "../Error/Error";
+import { IFilterItemType } from "../Process/Filter/Interface";
 
 interface State {
   menuOpen: boolean;
@@ -28,6 +29,7 @@ interface State {
   userType: TUserType;
   processList: IProcess[];
   orderList: IOrder[];
+  filter: IFilterItemType[];
   chats: IChat[];
 }
 
@@ -38,6 +40,7 @@ function App() {
     userType: "client",
     processList: TestProcessList,
     orderList: TestOrderList,
+    filter: [],
     chats: [],
   });
   const { loadCSRFToken } = useCRSFToken();

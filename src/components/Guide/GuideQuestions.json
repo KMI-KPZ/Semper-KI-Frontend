@@ -3,15 +3,16 @@
     "id":0,
     "title":"Anzahl",
     "filter":"amount",
-    "unit":null,
     "options":[
       {
         "id":0,
         "text":"1 - 5",
         "value": 
         {
-        "min":1,
-        "max":5
+          "range":{
+            "min":1,
+            "max":5
+          }
         }
       },
       {
@@ -19,8 +20,10 @@
         "text":"5 - 50",
         "value": 
         {
-        "min":5,
-        "max":50
+          "range":{
+            "min":5,
+            "max":50
+          }
         }
       },
       {
@@ -28,8 +31,10 @@
         "text":"50 - 500",
         "value": 
         {
-        "min":50,
-        "max":500
+          "range":{
+            "min":50,
+            "max":500
+          }
         }
       },
       {
@@ -37,7 +42,9 @@
         "text":"500+",
         "value": 
         {
-        "min":500
+          "range":{
+            "min":500
+          }
         }
       },
       {
@@ -51,37 +58,48 @@
     "id":1,
     "title":"Lieferzeit",
     "filter":"deliverTime",
-    "unit":"Wochen",
     "options":[
       {
         "id":0,
         "text":"1 - 2",
         "value":{
-          "min":1,
-          "max":2
+          "range":{
+            "min":1,
+            "max":2,
+            "unit":"Wochen"
+          }
         }
       },
       {
         "id":1,
         "text":"2 - 5",
         "value":{
-          "min":2,
-          "max":5
+          "range":{
+            "min":2,
+            "max":5,
+            "unit":"Wochen"
+          }
         }
       },
       {
         "id":2,
         "text":"5 - 10",
         "value":{
-          "min":5,
-          "max":10
+          "range":{
+            "min":5,
+            "max":10,
+            "unit":"Wochen"
+          }
         }
       },
       {
         "id":3,
         "text":"10+",
         "value":{
-          "min":10
+          "range":{
+            "min":10,
+            "unit":"Wochen"
+          }
         }
       },
       {
@@ -95,37 +113,48 @@
     "id":2,
     "title":"Größe des Produktes",
     "filter":"boxSize",
-    "unit":"cm³",
     "options":[
       {
         "id":0,
         "text":"1 - 10",
         "value":{
-          "min":1,
-          "max":10
+          "range":{
+            "min":1,
+            "max":10,
+            "unit":"cm³"
+          }
         }
       },
       {
         "id":1,
         "text":"10 - 100",
         "value":{
-          "min":10,
-          "max":100
+          "range":{
+            "min":10,
+            "max":100,
+            "unit":"cm³"
+          }
         }
       },
       {
         "id":2,
         "text":"100 - 1000",
         "value":{
-          "min":100,
-          "max":1000
+          "range":{
+            "min":100,
+            "max":1000,
+            "unit":"cm³"
+          }
         }
       },
       {
         "id":3,
         "text":"1000+",
         "value":{
-          "min":1000
+          "range":{
+            "min":1000,
+            "unit":"cm³"
+          }
         }
       },
       {
@@ -139,27 +168,34 @@
     "id":3,
     "title":"Material",
     "filter":"materialCategory",
-    "unit":null,
     "options":[
       {
         "id":0,
         "text":"Kunstoff",
-        "value":"plastic"
+        "value":{
+          "selecetion":["plastic"]
+        }
       },
       {
         "id":1,
         "text":"Metall",
-        "value":"metal"
+        "value":{
+          "selecetion":["metal"]
+        }
       },
       {
         "id":2,
         "text":"Keramik",
-        "value":"ceramic"
+        "value":{
+          "selecetion":["ceramic"]
+        }
       },
       {
         "id":3,
         "text":"Organisch",
-        "value":"organic"
+        "value":{
+          "selecetion":["organic"]
+        }
       },
       {
         "id":4,
@@ -172,27 +208,34 @@
     "id":4,
     "title":"Modell",
     "filter":"model",
-    "unit":null,
     "options":[
       {
         "id":0,
         "text":"vorhanden",
-        "value":"present"
+        "value":{
+          "selecetion":["present"]
+        }
       },
       {
         "id":1,
         "text":"fehlt",
-        "value":"missing"
+        "value":{
+          "selecetion":["missing"]
+        }
       },
       {
         "id":2,
         "text":"auf der Suche",
-        "value":"search"
+        "value":{
+          "selecetion":["search"]
+        }
       },
       {
         "id":3,
         "text":"anfertigen lassen",
-        "value":"design"
+        "value":{
+          "selecetion":["design"]
+        }
       },
       {
         "id":4,
@@ -205,14 +248,16 @@
     "id":5,
     "title":"Kosten pro Produkt",
     "filter":"costs",
-    "unit":"€",
     "options":[
       {
         "id":0,
         "text":"bis 50",
         "value": 
         {
-        "max":50
+          "range":{
+            "max":50,
+            "unit":"€"
+          }
         }
       },
       {
@@ -220,8 +265,11 @@
         "text":"50 - 500",
         "value": 
         {
-        "min":50,
-        "max":500
+          "range":{
+            "min":50,
+            "max":500,
+            "unit":"€"
+          }
         }
       },
       {
@@ -229,8 +277,11 @@
         "text":"500 - 1500",
         "value": 
         {
-        "min":500,
-        "max":1500
+          "range":{
+            "min":500,
+            "max":1500,
+            "unit":"€"
+          }
         }
       },
       {
@@ -238,7 +289,10 @@
         "text":"1500+",
         "value": 
         {
-        "min":1500
+          "range":{
+            "min":1500,
+            "unit":"€"
+          }
         }
       },
       {

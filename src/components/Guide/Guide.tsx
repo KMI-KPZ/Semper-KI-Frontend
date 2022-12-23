@@ -2,16 +2,11 @@ import React, { useState } from "react";
 
 import "./Guide.scss";
 import _questions from "./GuideQuestions.json";
-import {
-  IGuideAnswer,
-  IGuideQuestion,
-  IGuideQuestionOption,
-} from "./Interface";
+import { IGuideAnswer, IGuideQuestion } from "./Interface";
 import { useNavigate, useParams } from "react-router-dom";
 import GuideQuestion from "./GuideQuestion";
 import { Fab } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { IFilterItem } from "../Process/Filter/Interface";
 
 const questions = _questions as IGuideQuestion[];
 
@@ -65,11 +60,9 @@ const Guide = ({ setFilter }: Props) => {
       let filter: IGuideAnswer = {
         filter: questions[index].filter,
         value: questions[index].options[answer].value,
-        unit: questions[index].unit,
       };
       filters.push(filter);
     });
-
     return filters;
   };
 

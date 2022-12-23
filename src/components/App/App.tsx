@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
 import "./App.scss";
 import "./../../styles.scss";
 import { TUserType } from "../../interface/types";
-import useAuthCookie from "../../deprecated/useAuthCookie";
 import useCRSFToken from "../../hooks/useCSRFToken";
 import axios from "axios";
 import { IChat, IOrder, IProcess } from "../../interface/Interface";
@@ -21,7 +20,6 @@ import LogoutCallback from "../Logout/LogoutCallback";
 import Login from "../Login/Login";
 import LoginCallback from "../Login/LoginCallback";
 import { Error } from "../Error/Error";
-import { IFilterItem } from "../Process/Filter/Interface";
 import { IGuideAnswer } from "../Guide/Interface";
 
 interface State {
@@ -60,7 +58,6 @@ function App() {
   };
 
   const setFilter = (filter: IGuideAnswer[]): void => {
-    console.log("set Filter", filter);
     setState((prevState) => ({ ...prevState, guideFilter: filter }));
   };
 

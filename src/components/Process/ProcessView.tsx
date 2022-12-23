@@ -23,8 +23,15 @@ import { Overview } from "./Overview/Overview";
 import Filter from "../../components/Process/Filter/Filter";
 import NewProcess from "./NewProcess";
 import { Error } from "../Error/Error";
-import { IFilterItem } from "./Filter/Interface";
+import {
+  IFilterAnswer,
+  IFilterItem,
+  IFilterItemOption,
+} from "./Filter/Interface";
 import { IGuideAnswer } from "../Guide/Interface";
+
+import _filter from "./Filter/FilterQuestions.json";
+const filter = _filter as IFilterItem[];
 
 interface Props {
   setProcessList?(processList: IProcess[]): void;
@@ -40,11 +47,41 @@ const calcNextFreeId = (processList: IProcess[]): number => {
   return nextFreeId + 1;
 };
 
+const generateEmptyAnswers = (): IFilterAnswer[] => {
+  let answers: IFilterAnswer[] = [];
+  filter.forEach((filterItem: IFilterItem) => {
+    filterItem.options.forEach((filterOption: IFilterItemOption) => {
+      answers.push({
+        categoryId: filterItem.id,
+        filterId: filterOption.id,
+        title: filterOption.title,
+        value: { checked: false },
+      });
+    });
+  });
+
+  return answers;
+};
+
 const calcFilterWithGuideAnswers = (
   guideAnswers: IGuideAnswer[]
-): IFilterItem[] => {
-  let filter: IFilterItem[] = [];
-  return filter;
+): IFilterAnswer[] => {
+  let answers: IFilterAnswer[] = generateEmptyAnswers();
+
+  guideAnswers.forEach((answer: IGuideAnswer, index: number) => {
+    answers.forEach(
+      (filterAnswer: IFilterAnswer, filterAnswerIndex: number) => {
+        if (answer.filter === filterAnswer.title) {
+          console.log(answers[filterAnswerIndex].value, answer.value);
+          answers[filterAnswerIndex].value = answer.value;
+          answers[filterAnswerIndex].value.checked = true;
+          console.log(answers[filterAnswerIndex].value, answer.value);
+        }
+      }
+    );
+  });
+
+  return answers;
 };
 
 export const ProcessView = ({
@@ -60,8 +97,11 @@ export const ProcessView = ({
     activeProcessList: [0],
     processList: processList ? processList : [{ processId: 0 }],
     nextID: processList ? calcNextFreeId(processList) : 1,
-    filter: calcFilterWithGuideAnswers(guideAnswers),
+    filter: filter,
+    filterAnswers: calcFilterWithGuideAnswers(guideAnswers),
   });
+
+  console.log(guideAnswers);
 
   useEffect(() => {
     if (setProcessList !== undefined) {
@@ -70,15 +110,48 @@ export const ProcessView = ({
   }, [state.processList]);
 
   const startNewProcess = () => {
+    console.log("start new Process");
     setState({
       progressState: 0,
       activeProcess: 0,
       activeProcessList: [0],
       processList: [{ processId: 0 }],
       nextID: 1,
-      filter: [],
+      filter: filter,
+      filterAnswers: generateEmptyAnswers(),
     });
     if (setProcessList !== undefined) setProcessList([]);
+  };
+
+  const setFilterItems = (filter: IFilterItem[]) => {
+    setState((prevState) => ({ ...prevState, filter }));
+  };
+
+  const setFilterAnswers = (newfilterAnswer: IFilterAnswer) => {
+    setState((prevState) => ({
+      ...prevState,
+      filterAnswers: [
+        ...prevState.filterAnswers.filter(
+          (filterAnswer: IFilterAnswer) =>
+            filterAnswer.categoryId < newfilterAnswer.categoryId
+        ),
+        ...prevState.filterAnswers.filter(
+          (filterAnswer: IFilterAnswer) =>
+            filterAnswer.categoryId === newfilterAnswer.categoryId &&
+            filterAnswer.filterId < newfilterAnswer.filterId
+        ),
+        newfilterAnswer,
+        ...prevState.filterAnswers.filter(
+          (filterAnswer: IFilterAnswer) =>
+            filterAnswer.categoryId === newfilterAnswer.categoryId &&
+            filterAnswer.filterId > newfilterAnswer.filterId
+        ),
+        ...prevState.filterAnswers.filter(
+          (filterAnswer: IFilterAnswer) =>
+            filterAnswer.categoryId > newfilterAnswer.categoryId
+        ),
+      ],
+    }));
   };
 
   const setProgressState = (progressStateIndex: number): void => {
@@ -317,7 +390,12 @@ export const ProcessView = ({
 
   return (
     <div className="process-container main horizontal">
-      <Filter />
+      <Filter
+        filter={state.filter}
+        filterAnswers={state.filterAnswers}
+        setFilterAnswers={setFilterAnswers}
+        setFilterItems={setFilterItems}
+      />
       <div className="process-container content vertical">
         <Wizard state={state} setProgressState={setProgressState} />
         <div className="process-container vertical">

@@ -1,3 +1,5 @@
+import { IFilterValue } from "../Process/Filter/Interface";
+
 export interface IGuideQuestion {
   answer?: number;
   id: number;
@@ -10,16 +12,10 @@ export interface IGuideQuestion {
 export interface IGuideQuestionOption {
   id: number;
   text: string;
-  value: string | IGuideQuestionOptionValue | null;
-}
-
-export interface IGuideQuestionOptionValue {
-  min?: number;
-  max?: number;
+  value: IFilterValue;
 }
 
 export interface IGuideAnswer {
   filter: string;
-  value: string | IGuideQuestionOptionValue | null;
-  unit: string | null;
+  value: IFilterValue;
 }

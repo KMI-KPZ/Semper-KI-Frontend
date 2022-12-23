@@ -1,33 +1,42 @@
 import { IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { IFilterItemOption, IFilterItem } from "./Interface";
+import { IFilterItemOption, IFilterItem, IFilterAnswer } from "./Interface";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import FilterItemOption from "./FilterItemOption";
 
 interface Props {
-  setFilter(id: number, name: string, value: any): void;
-  setFilterOption(filterId: number, id: number, name: string, value: any): void;
   filter: IFilterItem;
+  filterAnswers: IFilterAnswer[];
+  setFilterOpen(filterItemId: number, open: boolean): void;
+  setFilterAnswers(filterAnswers: IFilterAnswer): void;
 }
 
-const FilterItem = ({ setFilterOption, setFilter, filter }: Props) => {
+const FilterItem = ({
+  filter,
+  filterAnswers,
+  setFilterOpen,
+  setFilterAnswers,
+}: Props) => {
   const { t } = useTranslation();
 
   const handleClickIconButtonHeader = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    setFilter(filter.id, "open", !filter.open);
+    setFilterOpen(filter.id, !filter.open);
   };
 
-  const setFilterOptionWarpped = (
-    id: number,
-    name: string,
-    value: any
-  ): void => {
-    setFilterOption(filter.id, id, name, value);
+  const calcFilterAnswers = (
+    filterOptionId: number,
+    option: IFilterItemOption
+  ): IFilterAnswer => {
+    return filterAnswers.filter(
+      (filterAnswer: IFilterAnswer) =>
+        filterAnswer.categoryId === filter.id &&
+        filterAnswer.filterId === option.id
+    )[0];
   };
 
   return (
@@ -43,10 +52,11 @@ const FilterItem = ({ setFilterOption, setFilter, filter }: Props) => {
         <>
           {filter.options.map((option: IFilterItemOption, index: number) => (
             <FilterItemOption
-              setFilterOption={setFilterOptionWarpped}
               filter={filter}
               option={option}
               key={index}
+              filterAnswer={calcFilterAnswers(option.id, option)}
+              setFilterAnswers={setFilterAnswers}
             />
           ))}
         </>

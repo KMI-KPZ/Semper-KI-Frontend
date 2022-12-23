@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { IFilterItemOption, IFilterItem } from "./Interface";
+import { IFilterItemOption, IFilterItem, IFilterAnswer } from "./Interface";
 
 interface Props {
-  setFilterOption(id: number, name: string, value: any): void;
+  filterAnswer: IFilterAnswer;
   option: IFilterItemOption;
   filter: IFilterItem;
+  setFilterAnswers(filterAnswers: IFilterAnswer): void;
 }
 
-const FilterItemOption = ({ setFilterOption, option, filter }: Props) => {
+const FilterItemOption = ({
+  option,
+  filter,
+  filterAnswer,
+  setFilterAnswers,
+}: Props) => {
   const { t } = useTranslation();
 
   const onChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilterOption(option.id, "checked", !option.checked);
+    let newfilterAnswer: IFilterAnswer = filterAnswer;
+    newfilterAnswer.value.checked = !newfilterAnswer.value.checked;
+
+    setFilterAnswers(newfilterAnswer);
   };
 
   return (
@@ -20,7 +29,15 @@ const FilterItemOption = ({ setFilterOption, option, filter }: Props) => {
       <input
         type="checkbox"
         onChange={onChangeCheckBox}
-        checked={option.checked}
+        checked={
+          filterAnswer !== undefined &&
+          filterAnswer.value !== undefined &&
+          filterAnswer.value !== null &&
+          filterAnswer.value.checked !== undefined &&
+          filterAnswer.value.checked
+            ? true
+            : false
+        }
       />
       <h4>
         {t(
@@ -29,12 +46,34 @@ const FilterItemOption = ({ setFilterOption, option, filter }: Props) => {
           }`
         )}
       </h4>
-      {option.range && option.checked ? (
+      {option.range &&
+      filterAnswer !== undefined &&
+      filterAnswer.value !== null &&
+      filterAnswer.value.checked !== undefined &&
+      filterAnswer.value.checked ? (
         <>
-          <input type="range" />
+          {/* <input
+            type="range"
+            value={
+              filterAnswer !== undefined &&
+              filterAnswer.value !== null &&
+              filterAnswer.value.range !== undefined
+                ? filterAnswer.value.range.min
+                : 0
+            }
+          /> */}
+          {filterAnswer !== undefined &&
+          filterAnswer.value !== null &&
+          filterAnswer.value.range !== undefined
+            ? filterAnswer.value.range.min
+            : 0}
         </>
       ) : null}
-      {option.selection && option.checked ? (
+      {option.selection &&
+      filterAnswer !== undefined &&
+      filterAnswer.value !== null &&
+      filterAnswer.value.checked !== undefined &&
+      filterAnswer.value.checked ? (
         <>
           <select>
             {option.selection.map((value: string, index: number) => (

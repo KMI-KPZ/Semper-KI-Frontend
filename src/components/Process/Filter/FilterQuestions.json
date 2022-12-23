@@ -7,7 +7,6 @@
         {
           "id": 0,
           "title": "costs",
-          "checked": false,
           "range": {
             "unit": "€"
           }
@@ -15,7 +14,6 @@
         {
           "id": 1,
           "title": "deliverTime",
-          "checked": false,
           "range": {
             "unit": [
               "Tage",
@@ -26,7 +24,6 @@
         {
           "id": 2,
           "title": "amount",
-          "checked": false,
           "range": {
             "unit": "Stück"
           }
@@ -41,7 +38,6 @@
         {
           "id": 0,
           "title": "categorys",
-          "checked": false,
           "selection": [
             "medicine",
             "fashion",
@@ -57,7 +53,6 @@
         {
           "id": 1,
           "title": "boxSize",
-          "checked": false,
           "range3D": {
             "unit": [
               "m",
@@ -69,7 +64,6 @@
         {
           "id": 2,
           "title": "surfaceSize",
-          "checked": false,
           "range": {
             "unit": [
               "m²",
@@ -81,7 +75,6 @@
         {
           "id": 3,
           "title": "volume",
-          "checked": false,
           "range": {
             "unit": [
               "m³",
@@ -100,7 +93,6 @@
         {
           "title": "materialCategory",
           "id": 0,
-          "checked": false,
           "selection": [
             "iron,copper,plastic"
           ]
@@ -108,7 +100,6 @@
         {
           "title": "proceeding",
           "id": 1,
-          "checked": false,
           "selection": [
             "3D-Print,Molding"
           ]
@@ -131,7 +122,6 @@
         {
           "id": 0,
           "title": "manufacturer",
-          "checked": false,
           "selection": [
             "Man 1,Man 2"
           ]

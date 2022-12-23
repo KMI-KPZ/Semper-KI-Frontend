@@ -1,4 +1,7 @@
-import { IFilterItem } from "../components/Process/Filter/Interface";
+import {
+  IFilterAnswer,
+  IFilterItem,
+} from "../components/Process/Filter/Interface";
 import { TUserType } from "./types";
 
 export interface IProcessState {
@@ -8,6 +11,7 @@ export interface IProcessState {
   processList: IProcess[];
   nextID: number;
   filter: IFilterItem[];
+  filterAnswers: IFilterAnswer[];
 }
 
 export interface IProcess {

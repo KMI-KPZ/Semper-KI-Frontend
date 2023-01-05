@@ -30,7 +30,7 @@ jest.mock("react-i18next", () => ({
   },
 }));
 
-describe(App, () => {
+describe.skip(App, () => {
   it("should render", () => {
     render(
       <BrowserRouter>

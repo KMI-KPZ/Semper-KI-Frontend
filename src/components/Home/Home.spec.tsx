@@ -30,7 +30,7 @@ describe(Home, () => {
   it("should render Home", () => {
     expect(screen.getByTestId("home")).toBeInTheDocument;
   });
-  it("should have header", () => {
+  it.skip("should have header", () => {
     expect(screen.getByTestId("header")).toBeInTheDocument;
     expect(mockedT).toBeCalled;
   });

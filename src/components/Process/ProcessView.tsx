@@ -72,10 +72,10 @@ const calcFilterWithGuideAnswers = (
     answers.forEach(
       (filterAnswer: IFilterAnswer, filterAnswerIndex: number) => {
         if (answer.filter === filterAnswer.title) {
-          console.log(answers[filterAnswerIndex].value, answer.value);
+          // console.log(answers[filterAnswerIndex].value, answer.value);
           answers[filterAnswerIndex].value = answer.value;
           answers[filterAnswerIndex].value.checked = true;
-          console.log(answers[filterAnswerIndex].value, answer.value);
+          // console.log(answers[filterAnswerIndex].value, answer.value);
         }
       }
     );
@@ -101,8 +101,6 @@ export const ProcessView = ({
     filterAnswers: calcFilterWithGuideAnswers(guideAnswers),
   });
 
-  console.log(guideAnswers);
-
   useEffect(() => {
     if (setProcessList !== undefined) {
       setProcessList(state.processList);
@@ -110,7 +108,6 @@ export const ProcessView = ({
   }, [state.processList]);
 
   const startNewProcess = () => {
-    console.log("start new Process");
     setState({
       progressState: 0,
       activeProcess: 0,

@@ -2,4 +2,4 @@ version: "3.4"
 
 services:
   fontend:
-    command: ["yarn","test"]
+    command: ["yarn","test:ci"]

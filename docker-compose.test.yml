@@ -4,10 +4,3 @@ services:
   fontend:
     command: ["yarn","test:ci"]
     coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-    artifacts:
-      paths:
-        - coverage/
-      when: always
-      reports:
-        junit:
-          - junit.xml

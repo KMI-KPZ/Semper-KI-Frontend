@@ -10,8 +10,6 @@ export interface IProcessState {
   activeProcessList: number[];
   processList: IProcess[];
   nextID: number;
-  filter: IFilterItem[];
-  filterAnswers: IFilterAnswer[];
 }
 
 export interface IProcess {

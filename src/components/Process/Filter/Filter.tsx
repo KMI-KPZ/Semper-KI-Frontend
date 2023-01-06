@@ -6,35 +6,93 @@ import FilterItem from "./FilterItem";
 import { Button, IconButton } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import { IGuideAnswer } from "../../Guide/Interface";
 
 import _filter from "./FilterQuestions.json";
 const filter = _filter as IFilterItem[];
 
 interface Props {
-  filter: IFilterItem[];
-  filterAnswers: IFilterAnswer[];
+  guideAnswers: IGuideAnswer[];
   applyFilters(): void;
-  setFilterItems(filterItems: IFilterItem[]): void;
-  setFilterAnswer(filterAnswers: IFilterAnswer): void;
-  setFilterAnswers(filterAnswers: IFilterAnswer[]): void;
 }
 
 interface State {
-  open: boolean;
+  filter: IFilterItem[];
+  filterAnswers: IFilterAnswer[];
 }
 
-const Filter: React.FC<Props> = ({
-  filter,
-  filterAnswers,
-  applyFilters,
-  setFilterItems,
-  setFilterAnswer,
-  setFilterAnswers,
-}) => {
+const generateEmptyAnswers = (): IFilterAnswer[] => {
+  let answers: IFilterAnswer[] = [];
+  filter.forEach((filterItem: IFilterItem) => {
+    filterItem.options.forEach((filterOption: IFilterItemOption) => {
+      answers.push({
+        categoryId: filterItem.id,
+        filterId: filterOption.id,
+        title: filterOption.title,
+        value: { checked: false },
+      });
+    });
+  });
+
+  return answers;
+};
+
+const calcFilterWithGuideAnswers = (
+  guideAnswers: IGuideAnswer[]
+): IFilterAnswer[] => {
+  let answers: IFilterAnswer[] = generateEmptyAnswers();
+
+  guideAnswers.forEach((answer: IGuideAnswer, index: number) => {
+    answers.forEach(
+      (filterAnswer: IFilterAnswer, filterAnswerIndex: number) => {
+        if (answer.filter === filterAnswer.title) {
+          answers[filterAnswerIndex].value = answer.value;
+          answers[filterAnswerIndex].value.checked = true;
+        }
+      }
+    );
+  });
+
+  return answers;
+};
+
+const Filter: React.FC<Props> = ({ applyFilters, guideAnswers }) => {
   const [state, setState] = useState<State>({
-    open: true,
+    filter: filter,
+    filterAnswers: calcFilterWithGuideAnswers(guideAnswers),
   });
   const { t } = useTranslation();
+
+  const setFilterItems = (filter: IFilterItem[]) => {
+    setState((prevState) => ({ ...prevState, filter }));
+  };
+
+  const setFilterAnswer = (newfilterAnswer: IFilterAnswer) => {
+    setState((prevState) => ({
+      ...prevState,
+      filterAnswers: [
+        ...prevState.filterAnswers.filter(
+          (filterAnswer: IFilterAnswer) =>
+            filterAnswer.categoryId < newfilterAnswer.categoryId
+        ),
+        ...prevState.filterAnswers.filter(
+          (filterAnswer: IFilterAnswer) =>
+            filterAnswer.categoryId === newfilterAnswer.categoryId &&
+            filterAnswer.filterId < newfilterAnswer.filterId
+        ),
+        newfilterAnswer,
+        ...prevState.filterAnswers.filter(
+          (filterAnswer: IFilterAnswer) =>
+            filterAnswer.categoryId === newfilterAnswer.categoryId &&
+            filterAnswer.filterId > newfilterAnswer.filterId
+        ),
+        ...prevState.filterAnswers.filter(
+          (filterAnswer: IFilterAnswer) =>
+            filterAnswer.categoryId > newfilterAnswer.categoryId
+        ),
+      ],
+    }));
+  };
 
   const setFilterOpen = (filterItemId: number, open: boolean): void => {
     const newFilter: IFilterItem[] = [
@@ -51,13 +109,9 @@ const Filter: React.FC<Props> = ({
     setFilterItems(newFilter);
   };
 
-  const handleClickIconButtonHeader = () => {
-    setState((prevState) => ({ ...prevState, open: !prevState.open }));
-  };
-
   const onClickReset = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    setFilterAnswers([]);
+    setState((prevState) => ({ ...prevState, filterAnswers: [] }));
   };
 
   const onClickApply = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -66,29 +120,20 @@ const Filter: React.FC<Props> = ({
   };
 
   return (
-    <div className={`filter ${state.open ? "open" : "closed"}`}>
-      <h2 className="filter-headline">
-        {state.open ? <>{t("filter.headline")}</> : ""}
-        <IconButton
-          sx={{ transform: "rotate(-90deg)" }}
-          onClick={handleClickIconButtonHeader}
-        >
-          {state.open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        </IconButton>
-      </h2>
-      {state.open ? <hr className="filter-hr large" /> : ""}
-      {state.open
-        ? filter.map((filter: IFilterItem, index: number) => (
-            <FilterItem
-              key={index}
-              filter={filter}
-              filterAnswers={filterAnswers}
-              setFilterOpen={setFilterOpen}
-              setFilterAnswer={setFilterAnswer}
-            />
-          ))
-        : ""}
-      {state.open ? (
+    <div className="filter">
+      <h2 className="filter-headline">{t("filter.headline")}</h2>
+      <hr className="filter-hr large" />
+
+      {filter.map((filter: IFilterItem, index: number) => (
+        <FilterItem
+          key={index}
+          filter={filter}
+          filterAnswers={state.filterAnswers}
+          setFilterOpen={setFilterOpen}
+          setFilterAnswer={setFilterAnswer}
+        />
+      ))}
+      {
         <div className="filter-buttons">
           <Button variant="contained" onClick={onClickReset}>
             Reset
@@ -97,9 +142,7 @@ const Filter: React.FC<Props> = ({
             Anwenden
           </Button>
         </div>
-      ) : (
-        ""
-      )}
+      }
     </div>
   );
 };

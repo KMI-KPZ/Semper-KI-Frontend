@@ -61,3 +61,10 @@
         margin: 0;
     }
 }
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    gap: 20px;
+}

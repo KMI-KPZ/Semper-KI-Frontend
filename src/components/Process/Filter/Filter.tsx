@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { IFilterItemOption, IFilterItem, IFilterAnswer } from "./Interface";
 import "./Filter.scss";
 import FilterItem from "./FilterItem";
-import { IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
@@ -12,31 +12,29 @@ const filter = _filter as IFilterItem[];
 
 interface Props {
   filter: IFilterItem[];
-  setFilterItems(filterItems: IFilterItem[]): void;
   filterAnswers: IFilterAnswer[];
-  setFilterAnswers(filterAnswers: IFilterAnswer): void;
+  applyFilters(): void;
+  setFilterItems(filterItems: IFilterItem[]): void;
+  setFilterAnswer(filterAnswers: IFilterAnswer): void;
+  setFilterAnswers(filterAnswers: IFilterAnswer[]): void;
 }
 
 interface State {
   open: boolean;
 }
 
-const Filter = ({
+const Filter: React.FC<Props> = ({
   filter,
   filterAnswers,
+  applyFilters,
   setFilterItems,
+  setFilterAnswer,
   setFilterAnswers,
-}: Props) => {
+}) => {
   const [state, setState] = useState<State>({
     open: true,
   });
   const { t } = useTranslation();
-
-  const calcFilterAnswers = (filterItemId: number): IFilterAnswer[] => {
-    return filterAnswers.filter(
-      (filterAnswer: IFilterAnswer) => filterAnswer.categoryId === filterItemId
-    );
-  };
 
   const setFilterOpen = (filterItemId: number, open: boolean): void => {
     const newFilter: IFilterItem[] = [
@@ -57,6 +55,16 @@ const Filter = ({
     setState((prevState) => ({ ...prevState, open: !prevState.open }));
   };
 
+  const onClickReset = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    setFilterAnswers([]);
+  };
+
+  const onClickApply = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    applyFilters();
+  };
+
   return (
     <div className={`filter ${state.open ? "open" : "closed"}`}>
       <h2 className="filter-headline">
@@ -74,12 +82,24 @@ const Filter = ({
             <FilterItem
               key={index}
               filter={filter}
-              filterAnswers={calcFilterAnswers(filter.id)}
+              filterAnswers={filterAnswers}
               setFilterOpen={setFilterOpen}
-              setFilterAnswers={setFilterAnswers}
+              setFilterAnswer={setFilterAnswer}
             />
           ))
         : ""}
+      {state.open ? (
+        <div className="filter-buttons">
+          <Button variant="contained" onClick={onClickReset}>
+            Reset
+          </Button>
+          <Button variant="contained" onClick={onClickApply}>
+            Anwenden
+          </Button>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

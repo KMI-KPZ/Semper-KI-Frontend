@@ -10,15 +10,15 @@ interface Props {
   filter: IFilterItem;
   filterAnswers: IFilterAnswer[];
   setFilterOpen(filterItemId: number, open: boolean): void;
-  setFilterAnswers(filterAnswers: IFilterAnswer): void;
+  setFilterAnswer(filterAnswers: IFilterAnswer): void;
 }
 
-const FilterItem = ({
+const FilterItem: React.FC<Props> = ({
   filter,
   filterAnswers,
   setFilterOpen,
-  setFilterAnswers,
-}: Props) => {
+  setFilterAnswer: setFilterAnswer,
+}) => {
   const { t } = useTranslation();
 
   const handleClickIconButtonHeader = (
@@ -56,7 +56,7 @@ const FilterItem = ({
               option={option}
               key={index}
               filterAnswer={calcFilterAnswers(option.id, option)}
-              setFilterAnswers={setFilterAnswers}
+              setFilterAnswer={setFilterAnswer}
             />
           ))}
         </>

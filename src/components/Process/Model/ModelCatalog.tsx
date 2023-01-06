@@ -9,6 +9,7 @@ import { ModelCatalogCard } from "./ModelCatalogCard";
 import Loading from "../../../components/Process/Loading/Loading";
 
 interface Props {
+  models: IModel[];
   selectModel(model: IModel): void;
   setProgressState: (progressStateIndex: number) => void;
 }
@@ -18,7 +19,11 @@ interface State {
   grid: boolean;
 }
 
-export const ModelCatalog = ({ selectModel, setProgressState }: Props) => {
+export const ModelCatalog: React.FC<Props> = ({
+  models,
+  selectModel,
+  setProgressState,
+}) => {
   const { t } = useTranslation();
   const { data, isLoading, error } = useFetch<IModel>({
     url: "http://localhost:3030/modelList",

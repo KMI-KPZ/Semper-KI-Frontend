@@ -31,6 +31,7 @@ import {
 import { IGuideAnswer } from "../Guide/Interface";
 
 import _filter from "./Filter/FilterQuestions.json";
+import useFilter from "../../hooks/useFilter";
 const filter = _filter as IFilterItem[];
 
 interface Props {
@@ -72,10 +73,8 @@ const calcFilterWithGuideAnswers = (
     answers.forEach(
       (filterAnswer: IFilterAnswer, filterAnswerIndex: number) => {
         if (answer.filter === filterAnswer.title) {
-          // console.log(answers[filterAnswerIndex].value, answer.value);
           answers[filterAnswerIndex].value = answer.value;
           answers[filterAnswerIndex].value.checked = true;
-          // console.log(answers[filterAnswerIndex].value, answer.value);
         }
       }
     );
@@ -89,6 +88,7 @@ export const ProcessView = ({
   processList,
   guideAnswers,
 }: Props) => {
+  const { getModels } = useFilter();
   const maxExpandedShoppingCardItem = 2;
   const navigate = useNavigate();
   const [state, setState] = useState<IProcessState>({
@@ -100,6 +100,7 @@ export const ProcessView = ({
     filter: filter,
     filterAnswers: calcFilterWithGuideAnswers(guideAnswers),
   });
+  const [models, setModels] = useState<IModel[]>([]);
 
   useEffect(() => {
     if (setProcessList !== undefined) {
@@ -124,7 +125,7 @@ export const ProcessView = ({
     setState((prevState) => ({ ...prevState, filter }));
   };
 
-  const setFilterAnswers = (newfilterAnswer: IFilterAnswer) => {
+  const setFilterAnswer = (newfilterAnswer: IFilterAnswer) => {
     setState((prevState) => ({
       ...prevState,
       filterAnswers: [
@@ -149,6 +150,14 @@ export const ProcessView = ({
         ),
       ],
     }));
+  };
+
+  const setFilterAnswers = (filterAnswers: IFilterAnswer[]) => {
+    setState((prevState) => ({ ...prevState, filterAnswers }));
+  };
+
+  const applyFilters = () => {
+    setModels(getModels(state.filterAnswers));
   };
 
   const setProgressState = (progressStateIndex: number): void => {
@@ -390,8 +399,10 @@ export const ProcessView = ({
       <Filter
         filter={state.filter}
         filterAnswers={state.filterAnswers}
-        setFilterAnswers={setFilterAnswers}
+        applyFilters={applyFilters}
+        setFilterAnswer={setFilterAnswer}
         setFilterItems={setFilterItems}
+        setFilterAnswers={setFilterAnswers}
       />
       <div className="process-container content vertical">
         <Wizard state={state} setProgressState={setProgressState} />
@@ -406,6 +417,7 @@ export const ProcessView = ({
                 index
                 element={
                   <ModelCatalog
+                    models={models}
                     setProgressState={setProgressState}
                     selectModel={selectModel}
                   />

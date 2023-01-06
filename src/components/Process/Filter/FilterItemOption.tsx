@@ -6,22 +6,22 @@ interface Props {
   filterAnswer: IFilterAnswer;
   option: IFilterItemOption;
   filter: IFilterItem;
-  setFilterAnswers(filterAnswers: IFilterAnswer): void;
+  setFilterAnswer(filterAnswers: IFilterAnswer): void;
 }
 
-const FilterItemOption = ({
+const FilterItemOption: React.FC<Props> = ({
   option,
   filter,
   filterAnswer,
-  setFilterAnswers,
-}: Props) => {
+  setFilterAnswer,
+}) => {
   const { t } = useTranslation();
 
   const onChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let newfilterAnswer: IFilterAnswer = filterAnswer;
-    newfilterAnswer.value.checked = !newfilterAnswer.value.checked;
-
-    setFilterAnswers(newfilterAnswer);
+    setFilterAnswer({
+      ...filterAnswer,
+      value: { ...filterAnswer.value, checked: !filterAnswer.value.checked },
+    });
   };
 
   return (
@@ -35,8 +35,6 @@ const FilterItemOption = ({
           filterAnswer.value !== null &&
           filterAnswer.value.checked !== undefined &&
           filterAnswer.value.checked
-            ? true
-            : false
         }
       />
       <h4>

@@ -23,17 +23,12 @@ import { Overview } from "./Overview/Overview";
 import Filter from "../../components/Process/Filter/Filter";
 import NewProcess from "./NewProcess";
 import { Error } from "../Error/Error";
-import {
-  IFilterAnswer,
-  IFilterItem,
-  IFilterItemOption,
-} from "./Filter/Interface";
-import { IGuideAnswer } from "../Guide/Interface";
+import { IFilterItem } from "./Filter/Interface";
 
 interface Props {
   setProcessList?(processList: IProcess[]): void;
   processList?: IProcess[];
-  guideAnswers: IGuideAnswer[];
+  guideAnswers: IFilterItem[];
 }
 
 const calcNextFreeId = (processList: IProcess[]): number => {
@@ -75,10 +70,6 @@ export const ProcessView = ({
       nextID: 1,
     });
     if (setProcessList !== undefined) setProcessList([]);
-  };
-
-  const setFilterAnswers = (filterAnswers: IFilterAnswer[]) => {
-    setState((prevState) => ({ ...prevState, filterAnswers }));
   };
 
   const applyFilters = () => {

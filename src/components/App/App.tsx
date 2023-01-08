@@ -20,7 +20,7 @@ import LogoutCallback from "../Logout/LogoutCallback";
 import Login from "../Login/Login";
 import LoginCallback from "../Login/LoginCallback";
 import { Error } from "../Error/Error";
-import { IGuideAnswer } from "../Guide/Interface";
+import { IFilterItem } from "../Process/Filter/Interface";
 
 interface State {
   menuOpen: boolean;
@@ -28,7 +28,7 @@ interface State {
   userType: TUserType;
   processList: IProcess[];
   orderList: IOrder[];
-  guideFilter: IGuideAnswer[];
+  guideFilter: IFilterItem[];
   chats: IChat[];
 }
 
@@ -57,8 +57,8 @@ function App() {
     setState((prevState) => ({ ...prevState, processList }));
   };
 
-  const setFilter = (filter: IGuideAnswer[]): void => {
-    setState((prevState) => ({ ...prevState, guideFilter: filter }));
+  const setFilter = (guideFilter: IFilterItem[]): void => {
+    setState((prevState) => ({ ...prevState, guideFilter }));
   };
 
   useEffect(() => {

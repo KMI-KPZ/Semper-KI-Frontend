@@ -1,17 +1,29 @@
 import React, { useState } from "react";
 
 import "./Guide.scss";
-import _questions from "./GuideQuestions.json";
-import { IGuideAnswer, IGuideQuestion } from "./Interface";
+import { IGuideOption, IGuideQuestion } from "./Interface";
 import { useNavigate, useParams } from "react-router-dom";
 import GuideQuestion from "./GuideQuestion";
 import { Fab } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import {
+  IFilterAnswer,
+  IFilterItem,
+  IFilterQuestion,
+} from "../Process/Filter/Interface";
+
+import _filter from "../Process/Filter/FilterQuestions.json";
+import _questions from "./GuideQuestions.json";
 
 const questions = _questions as IGuideQuestion[];
 
+const testFilter = _filter as IFilterItem[];
+const getQuestionByFilterId = (filterId: number): IFilterQuestion =>
+  testFilter.filter((filterItem: IFilterItem) => filterItem.id === filterId)[0]
+    .question;
+
 interface Props {
-  setFilter(filter: IGuideAnswer[]): void;
+  setFilter(filter: IFilterItem[]): void;
 }
 
 interface State {
@@ -53,22 +65,28 @@ const Guide = ({ setFilter }: Props) => {
     }
   };
 
-  const convertToGuideAnswer = (answers: number[]): IGuideAnswer[] => {
-    let filters: IGuideAnswer[] = [];
+  const convertToGuideAnswer = (answers: number[]): IFilterItem[] => {
+    let filterItemList: IFilterItem[] = [];
 
     answers.forEach((answer: number, index: number) => {
-      let filter: IGuideAnswer = {
-        filter: questions[index].filter,
-        value: questions[index].options[answer].value,
+      const filterId: number = questions[index].filterId;
+      const guideAnswer: IFilterAnswer =
+        questions[index].options[answer].answer;
+      const filterItem: IFilterItem = {
+        id: filterId,
+        isChecked: guideAnswer === null ? false : true,
+        isOpen: guideAnswer === null ? false : true,
+        question: getQuestionByFilterId(filterId),
+        answer: guideAnswer,
       };
-      filters.push(filter);
+      filterItemList.push(filterItem);
     });
-    return filters;
+    return filterItemList;
   };
 
   return (
     <div className="guide">
-      {questions.map((question: IGuideQuestion) => (
+      {questions.sort().map((question: IGuideQuestion) => (
         <GuideQuestion
           key={question.id}
           selected={state.answers[question.id]}

@@ -1,5 +1,5 @@
 import React from "react";
-import { IGuideQuestion, IGuideQuestionOption } from "./Interface";
+import { IGuideOption, IGuideQuestion } from "./Interface";
 
 interface Props {
   question: IGuideQuestion;
@@ -22,23 +22,24 @@ const GuideQuestion = ({
     >
       <h2 className="guide-question-headline">{question.title}</h2>
       <div className="guide-question-options">
-        {question.options.map((option: IGuideQuestionOption, index: number) => (
+        {question.options.map((option: IGuideOption, index: number) => (
           <div
-            onClick={() => selectOption(question.id, option.id)}
+            onClick={() => selectOption(question.id, index)}
             className={`guide-question-option ${
               activeQuestion === question.id ||
-              (selected !== undefined && selected === option.id)
+              (selected !== null && selected === index)
                 ? "selected"
                 : ""
             }`}
             key={index}
           >
-            {option.text}
-            {question.unit !== undefined &&
-            question.unit !== null &&
-            option.value !== null
-              ? ` ${question.unit}`
-              : null}
+            {`${option.title} ${
+              option.answer !== null &&
+              option.answer.unit !== null &&
+              option.answer.unit !== undefined
+                ? option.answer.unit
+                : ""
+            }`}
           </div>
         ))}
       </div>

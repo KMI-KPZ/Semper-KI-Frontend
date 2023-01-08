@@ -1,44 +1,21 @@
 export interface IFilterItem {
   id: number;
-  title: string;
-  open: boolean;
-  options: IFilterItemOption[];
+  isChecked: boolean;
+  isOpen: boolean;
+  question: IFilterQuestion;
+  answer: IFilterAnswer | null;
 }
 
-export interface IFilterItemOption {
-  id: number;
+export interface IFilterQuestion {
+  isSelectable: boolean;
   title: string;
-  selection?: string[];
-  range?: IRangeFilter;
-  range3D?: IRangeFilter;
-}
-
-export interface IRangeFilter {
-  unit?: string | string[];
+  category: string;
+  type: string;
+  values: string[] | null;
+  units: string[] | string | null;
 }
 
 export interface IFilterAnswer {
-  categoryId: number;
-  filterId: number;
-  title: string;
-  value: IFilterValue;
-}
-
-export interface IFilterValue {
-  checked: boolean;
-  selection?: string[];
-  range?: {
-    min?: number;
-    max?: number;
-    unit?: string;
-  };
-  range3D?: {
-    min_x?: number;
-    max_x?: number;
-    min_y?: number;
-    max_y?: number;
-    min_z?: number;
-    max_z?: number;
-    unit?: string;
-  };
+  unit: string | null;
+  value: string | number | { min?: number; max?: number };
 }

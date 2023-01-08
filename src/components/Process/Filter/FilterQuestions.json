@@ -1,139 +1,208 @@
 [
     {
       "id": 0,
-      "title": "general",
-      "open": true,
-      "options": [
-        {
-          "id": 0,
-          "title": "costs",
-          "range": {
-            "unit": "€"
-          }
-        },
-        {
-          "id": 1,
-          "title": "deliverTime",
-          "range": {
-            "unit": [
-              "Tage",
-              "Wochen"
-            ]
-          }
-        },
-        {
-          "id": 2,
-          "title": "amount",
-          "range": {
-            "unit": "Stück"
-          }
-        }
-      ]
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "costs",
+        "category": "general",
+        "type": "slider",
+        "values":null,
+        "units":"€"
+      },
+      "answer":null
     },
     {
       "id": 1,
-      "title": "model",
-      "open": false,
-      "options": [
-        {
-          "id": 0,
-          "title": "categorys",
-          "selection": [
-            "medicine",
-            "fashion",
-            "hobby",
-            "tools",
-            "models",
-            "toy",
-            "gadgets",
-            "art",
-            "learning"
-          ]
-        },
-        {
-          "id": 1,
-          "title": "boxSize",
-          "range3D": {
-            "unit": [
-              "m",
-              "cm",
-              "mm"
-            ]
-          }
-        },
-        {
-          "id": 2,
-          "title": "surfaceSize",
-          "range": {
-            "unit": [
-              "m²",
-              "cm²",
-              "mm²"
-            ]
-          }
-        },
-        {
-          "id": 3,
-          "title": "volume",
-          "range": {
-            "unit": [
-              "m³",
-              "cm³",
-              "mm³"
-            ]
-          }
-        }
-      ]
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "deliverTime",
+        "category": "general",
+        "type": "slider",
+        "values":null,
+        "units":[
+          "Tage",
+          "Wochen"
+        ]
+      },
+      "answer":null
     },
     {
       "id": 2,
-      "title": "material",
-      "open": false,
-      "options": [
-        {
-          "title": "materialCategory",
-          "id": 0,
-          "selection": [
-            "iron,copper,plastic"
-          ]
-        },
-        {
-          "title": "proceeding",
-          "id": 1,
-          "selection": [
-            "3D-Print,Molding"
-          ]
-        }
-      ]
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "amount",
+        "category": "general",
+        "type": "slider",
+        "values":null,
+        "units":"Stück"
+      },
+      "answer":null
     },
     {
       "id": 3,
-      "title": "proceeding",
-      "open": false,
-      "options": [
-  
-      ]
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "categorys",
+        "category": "model",
+        "type": "selection",
+        "values":[
+          "medicine",
+          "fashion",
+          "hobby",
+          "tools",
+          "models",
+          "toy",
+          "gadgets",
+          "art",
+          "learning"
+        ],
+        "units":null
+      },
+      "answer":null
     },
     {
       "id": 4,
-      "title": "manufacturer",
-      "open": false,
-      "options": [
-        {
-          "id": 0,
-          "title": "manufacturer",
-          "selection": [
-            "Man 1,Man 2"
-          ]
-        }
-      ]
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "boxSize",
+        "category": "model",
+        "type": "slider",
+        "values":null,
+        "units":[
+          "m",
+          "cm",
+          "mm"
+        ]
+      },
+      "answer":null
     },
     {
       "id": 5,
-      "title": "post-Processing",
-      "open": false,
-      "options": [
-  
-      ]
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "surfaceSize",
+        "category": "model",
+        "type": "slider",
+        "values":null,
+        "units":[
+          "m²",
+          "cm²",
+          "mm²"
+        ]
+      },
+      "answer":null
+    },
+    {
+      "id": 6,
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "volume",
+        "category": "model",
+        "type": "selection",
+        "values":null,
+        "units":[
+          "m³",
+          "cm³",
+          "mm³"
+        ]
+      },
+      "answer":null
+    },
+    {
+      "id": 7,
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "materialCategory",
+        "category": "material",
+        "type": "selection",
+        "values":[
+          "iron,copper,plastic"
+        ],
+        "units":null
+      },
+      "answer":null
+    },
+    {
+      "id": 8,
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "proceeding",
+        "category": "material",
+        "type": "selection",
+        "values":[
+          "3D-Print,Molding"
+        ],
+        "units":null
+      },
+      "answer":null
+    },
+    {
+      "id": 9,
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "proceeding",
+        "category": "proceeding",
+        "type": "selection",
+        "values":[
+          "3D-Print",
+          "Molding"
+        ],
+        "units":null
+      },
+      "answer":null
+    },
+    {
+      "id": 10,
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "manufacturer",
+        "category": "manufacturer",
+        "type": "selection",
+        "values":[
+          "Man 1",
+          "Man 2"
+        ],
+        "units":null
+      },
+      "answer":null
+    },
+    {
+      "id": 11,
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "post-Processing",
+        "category": "post-Processing",
+        "type": "selection",
+        "values":[
+          "Finish",
+          "Threds"
+        ],
+        "units":null
+      },
+      "answer":null
     }
   ]

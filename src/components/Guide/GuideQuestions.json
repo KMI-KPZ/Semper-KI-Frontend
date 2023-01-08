@@ -1,304 +1,286 @@
 [
   {
     "id":0,
+    "filterId":2,
     "title":"Anzahl",
-    "filter":"amount",
     "options":[
       {
-        "id":0,
-        "text":"1 - 5",
-        "value": 
+        "title":"1 - 5",
+        "answer": 
         {
-          "range":{
+          "unit":null,
+          "value":{
             "min":1,
             "max":5
           }
         }
       },
       {
-        "id":1,
-        "text":"5 - 50",
-        "value": 
+        "title":"5 - 50",
+        "answer": 
         {
-          "range":{
+          "unit":null,
+          "value":{
             "min":5,
             "max":50
           }
         }
       },
       {
-        "id":2,
-        "text":"50 - 500",
-        "value": 
+        "title":"50 - 500",
+        "answer": 
         {
-          "range":{
+          "unit":null,
+          "value":{
             "min":50,
             "max":500
           }
         }
       },
       {
-        "id":3,
-        "text":"500+",
-        "value": 
+        "title":"500+",
+        "answer": 
         {
-          "range":{
+          "unit":null,
+          "value":{
             "min":500
           }
         }
       },
       {
-        "id":4,
-        "text":"unbekannt",
-        "value":null
+        "title":"unbekannt",
+        "answer":null
       }
     ]
   },
   {
     "id":1,
+    "filterId":1,
     "title":"Lieferzeit",
-    "filter":"deliverTime",
     "options":[
       {
-        "id":0,
-        "text":"1 - 2",
-        "value":{
-          "range":{
+        "title":"1 - 2",
+        "answer":{
+          "unit":"Wochen",
+          "value":{
             "min":1,
-            "max":2,
-            "unit":"Wochen"
+            "max":2
           }
         }
       },
       {
-        "id":1,
-        "text":"2 - 5",
-        "value":{
-          "range":{
+        "title":"2 - 5",
+        "answer":{
+          "unit":"Wochen",
+          "value":{
             "min":2,
-            "max":5,
-            "unit":"Wochen"
+            "max":5
           }
         }
       },
       {
-        "id":2,
-        "text":"5 - 10",
-        "value":{
-          "range":{
+        "title":"5 - 10",
+        "answer":{
+          "unit":"Wochen",
+          "value":{
             "min":5,
-            "max":10,
-            "unit":"Wochen"
+            "max":10
           }
         }
       },
       {
-        "id":3,
-        "text":"10+",
-        "value":{
-          "range":{
-            "min":10,
-            "unit":"Wochen"
+        "title":"10+",
+        "answer":{
+          "unit":"Wochen",
+          "value":{
+            "min":10
           }
         }
       },
       {
-        "id":4,
-        "text":"unbekannt",
-        "value":null
+        "title":"unbekannt",
+        "answer":null
       }
     ]
   },
   {
     "id":2,
+    "filterId":4,
     "title":"Größe des Produktes",
-    "filter":"boxSize",
     "options":[
       {
-        "id":0,
-        "text":"1 - 10",
-        "value":{
-          "range":{
+        "title":"1 - 10",
+        "answer":{
+          "unit":"cm³",
+          "value":{
             "min":1,
-            "max":10,
-            "unit":"cm³"
+            "max":10
           }
         }
       },
       {
-        "id":1,
-        "text":"10 - 100",
-        "value":{
-          "range":{
+        "title":"10 - 100",
+        "answer":{
+          "unit":"cm³",
+          "value":{
             "min":10,
-            "max":100,
-            "unit":"cm³"
+            "max":100
           }
         }
       },
       {
-        "id":2,
-        "text":"100 - 1000",
-        "value":{
-          "range":{
+        "title":"100 - 1000",
+        "answer":{
+          "unit":"cm³",
+          "value":{
             "min":100,
-            "max":1000,
-            "unit":"cm³"
+            "max":1000
           }
         }
       },
       {
-        "id":3,
-        "text":"1000+",
-        "value":{
-          "range":{
-            "min":1000,
-            "unit":"cm³"
+        "title":"1000+",
+        "answer":{
+          "unit":"cm³",
+          "value":{
+            "min":1000
           }
         }
       },
       {
-        "id":4,
-        "text":"unbekannt",
-        "value":null
+        "title":"unbekannt",
+        "answer":null
       }
     ]
   },
   {
     "id":3,
+    "filterId":7,
     "title":"Material",
-    "filter":"materialCategory",
     "options":[
       {
-        "id":0,
-        "text":"Kunstoff",
-        "value":{
-          "selecetion":["plastic"]
+        "title":"Kunstoff",
+        "answer":{
+          "unit":null,
+          "value":"plastic"
         }
       },
       {
-        "id":1,
-        "text":"Metall",
-        "value":{
-          "selecetion":["metal"]
+        "title":"Metall",
+        "answer":{
+          "unit":null,
+          "value":"metal"
         }
       },
       {
-        "id":2,
-        "text":"Keramik",
-        "value":{
-          "selecetion":["ceramic"]
+        "title":"Keramik",
+        "answer":{
+          "unit":null,
+          "value":"ceramic"
         }
       },
       {
-        "id":3,
-        "text":"Organisch",
-        "value":{
-          "selecetion":["organic"]
+        "title":"Organisch",
+        "answer":{
+          "unit":null,
+          "value":"organic"
         }
       },
       {
-        "id":4,
-        "text":"unbekannt",
-        "value":null
+        "title":"unbekannt",
+        "answer":null
       }
     ]
   },
   {
     "id":4,
+    "filterId":3,
     "title":"Modell",
-    "filter":"model",
     "options":[
       {
-        "id":0,
-        "text":"vorhanden",
-        "value":{
-          "selecetion":["present"]
+        "title":"vorhanden",
+        "answer":{
+          "unit":null,
+          "value":"present"
         }
       },
       {
-        "id":1,
-        "text":"fehlt",
-        "value":{
-          "selecetion":["missing"]
+        "title":"fehlt",
+        "answer":{
+          "unit":null,
+          "value":"missing"
         }
       },
       {
-        "id":2,
-        "text":"auf der Suche",
-        "value":{
-          "selecetion":["search"]
+        "title":"auf der Suche",
+        "answer":{
+          "unit":null,
+          "value":"search"
         }
       },
       {
-        "id":3,
-        "text":"anfertigen lassen",
-        "value":{
-          "selecetion":["design"]
+        "title":"anfertigen lassen",
+        "answer":{
+          "unit":null,
+          "value":"design"
         }
       },
       {
-        "id":4,
-        "text":"unbekannt",
-        "value":null
+        "title":"unbekannt",
+        "answer":null
       }
     ]
   },
   {
     "id":5,
+    "filterId":0,
     "title":"Kosten pro Produkt",
-    "filter":"costs",
     "options":[
       {
-        "id":0,
-        "text":"bis 50",
-        "value": 
+        "title":"bis 50",
+        "answer": 
         {
-          "range":{
-            "max":50,
-            "unit":"€"
+          "unit":"€",
+          "value":{
+            "max":50
           }
         }
       },
       {
-        "id":1,
-        "text":"50 - 500",
-        "value": 
+        "title":"50 - 500",
+        "answer": 
         {
-          "range":{
+          "unit":"€",
+          "value":{
             "min":50,
-            "max":500,
-            "unit":"€"
+            "max":500
           }
         }
       },
       {
-        "id":2,
-        "text":"500 - 1500",
-        "value": 
+        "title":"500 - 1500",
+        "answer": 
         {
-          "range":{
+          "unit":"€",
+          "value":{
             "min":500,
-            "max":1500,
-            "unit":"€"
+            "max":1500
           }
         }
       },
       {
-        "id":3,
-        "text":"1500+",
-        "value": 
+        "title":"1500+",
+        "answer": 
         {
-          "range":{
-            "min":1500,
-            "unit":"€"
+          "unit":"€",
+          "value":{
+            "min":1500
           }
         }
       },
       {
-        "id":4,
-        "text":"unbekannt",
-        "value":null
+        "title":"unbekannt",
+        "answer":null
       }
     ]
   }

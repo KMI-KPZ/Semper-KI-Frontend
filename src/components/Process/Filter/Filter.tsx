@@ -1,65 +1,35 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { IFilterItemOption, IFilterItem, IFilterAnswer } from "./Interface";
+import { IFilterItem, IFilterAnswer } from "./Interface";
 import "./Filter.scss";
 import FilterItem from "./FilterItem";
 import { Button, IconButton } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { IGuideAnswer } from "../../Guide/Interface";
 
 import _filter from "./FilterQuestions.json";
-const filter = _filter as IFilterItem[];
+const testFilter = _filter as IFilterItem[];
 
 interface Props {
-  guideAnswers: IGuideAnswer[];
+  guideAnswers: IFilterItem[];
   applyFilters(): void;
 }
 
 interface State {
-  filter: IFilterItem[];
-  filterAnswers: IFilterAnswer[];
+  filterList: IFilterItem[];
 }
 
-const generateEmptyAnswers = (): IFilterAnswer[] => {
-  let answers: IFilterAnswer[] = [];
-  filter.forEach((filterItem: IFilterItem) => {
-    filterItem.options.forEach((filterOption: IFilterItemOption) => {
-      answers.push({
-        categoryId: filterItem.id,
-        filterId: filterOption.id,
-        title: filterOption.title,
-        value: { checked: false },
-      });
+const hydrateFilter = (guideAnswers: IFilterItem[]): IFilterItem[] => {
+  let filteritems: IFilterItem[] = testFilter;
+  filteritems.forEach((filterItem: IFilterItem, index: number) => {
+    guideAnswers.forEach((guideItem: IFilterItem) => {
+      if (filterItem.id === guideItem.id) filteritems[index] = guideItem;
     });
   });
-
-  return answers;
-};
-
-const calcFilterWithGuideAnswers = (
-  guideAnswers: IGuideAnswer[]
-): IFilterAnswer[] => {
-  let answers: IFilterAnswer[] = generateEmptyAnswers();
-
-  guideAnswers.forEach((answer: IGuideAnswer, index: number) => {
-    answers.forEach(
-      (filterAnswer: IFilterAnswer, filterAnswerIndex: number) => {
-        if (answer.filter === filterAnswer.title) {
-          answers[filterAnswerIndex].value = answer.value;
-          answers[filterAnswerIndex].value.checked = true;
-        }
-      }
-    );
-  });
-
-  return answers;
+  return filteritems;
 };
 
 const Filter: React.FC<Props> = ({ applyFilters, guideAnswers }) => {
   const [state, setState] = useState<State>({
-    filter: filter,
-    filterAnswers: calcFilterWithGuideAnswers(guideAnswers),
+    filterList: hydrateFilter(guideAnswers),
   });
   const { t } = useTranslation();
 
@@ -67,51 +37,33 @@ const Filter: React.FC<Props> = ({ applyFilters, guideAnswers }) => {
     setState((prevState) => ({ ...prevState, filter }));
   };
 
-  const setFilterAnswer = (newfilterAnswer: IFilterAnswer) => {
+  const setFilterItem = (newFilterItem: IFilterItem) => {
     setState((prevState) => ({
       ...prevState,
-      filterAnswers: [
-        ...prevState.filterAnswers.filter(
-          (filterAnswer: IFilterAnswer) =>
-            filterAnswer.categoryId < newfilterAnswer.categoryId
+      filterList: [
+        ...prevState.filterList.filter(
+          (filterItem: IFilterItem) => filterItem.id < newFilterItem.id
         ),
-        ...prevState.filterAnswers.filter(
-          (filterAnswer: IFilterAnswer) =>
-            filterAnswer.categoryId === newfilterAnswer.categoryId &&
-            filterAnswer.filterId < newfilterAnswer.filterId
-        ),
-        newfilterAnswer,
-        ...prevState.filterAnswers.filter(
-          (filterAnswer: IFilterAnswer) =>
-            filterAnswer.categoryId === newfilterAnswer.categoryId &&
-            filterAnswer.filterId > newfilterAnswer.filterId
-        ),
-        ...prevState.filterAnswers.filter(
-          (filterAnswer: IFilterAnswer) =>
-            filterAnswer.categoryId > newfilterAnswer.categoryId
+        newFilterItem,
+        ...prevState.filterList.filter(
+          (filterItem: IFilterItem) => filterItem.id > newFilterItem.id
         ),
       ],
     }));
   };
 
-  const setFilterOpen = (filterItemId: number, open: boolean): void => {
-    const newFilter: IFilterItem[] = [
-      ...filter.filter((filter: IFilterItem) => filter.id < filterItemId),
-      {
-        ...filter.filter(
-          (filter: IFilterItem) => filter.id === filterItemId
-        )[0],
-        open,
-      },
-      ...filter.filter((filter: IFilterItem) => filter.id > filterItemId),
-    ];
-
-    setFilterItems(newFilter);
-  };
-
   const onClickReset = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    setState((prevState) => ({ ...prevState, filterAnswers: [] }));
+    setState((prevState) => ({
+      ...prevState,
+      filterList: prevState.filterList.map((filterItem: IFilterItem) => {
+        let newFilterItem = filterItem;
+        newFilterItem.answer = null;
+        newFilterItem.isChecked = false;
+        newFilterItem.isOpen = false;
+        return newFilterItem;
+      }),
+    }));
   };
 
   const onClickApply = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -124,13 +76,11 @@ const Filter: React.FC<Props> = ({ applyFilters, guideAnswers }) => {
       <h2 className="filter-headline">{t("filter.headline")}</h2>
       <hr className="filter-hr large" />
 
-      {filter.map((filter: IFilterItem, index: number) => (
+      {state.filterList.map((filterItem: IFilterItem, index: number) => (
         <FilterItem
           key={index}
-          filter={filter}
-          filterAnswers={state.filterAnswers}
-          setFilterOpen={setFilterOpen}
-          setFilterAnswer={setFilterAnswer}
+          filterItem={filterItem}
+          setFilterItem={setFilterItem}
         />
       ))}
       {

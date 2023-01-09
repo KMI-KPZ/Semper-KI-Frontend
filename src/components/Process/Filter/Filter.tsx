@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IFilterItem, IFilterAnswer } from "./Interface";
 import "./Filter.scss";
@@ -21,7 +21,11 @@ const hydrateFilter = (guideAnswers: IFilterItem[]): IFilterItem[] => {
   let filteritems: IFilterItem[] = testFilter;
   filteritems.forEach((filterItem: IFilterItem, index: number) => {
     guideAnswers.forEach((guideItem: IFilterItem) => {
-      if (filterItem.id === guideItem.id) filteritems[index] = guideItem;
+      if (filterItem.id === guideItem.id) {
+        filteritems[index].answer = guideItem.answer;
+        filteritems[index].isChecked = guideItem.isChecked;
+        filteritems[index].isOpen = guideItem.isOpen;
+      }
     });
   });
   return filteritems;
@@ -68,7 +72,13 @@ const Filter: React.FC<Props> = ({ applyFilters, guideAnswers }) => {
 
   const onClickApply = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    applyFilters(state.filterList);
+    applyFilters(
+      state.filterList.map((filterItem: IFilterItem) => {
+        let newFilterItem: IFilterItem = filterItem;
+        if (newFilterItem.isChecked === false) newFilterItem.answer = null;
+        return newFilterItem;
+      })
+    );
   };
 
   return (

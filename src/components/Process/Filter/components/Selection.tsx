@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IFilterItem } from "../Interface";
 
 interface Props {
@@ -7,31 +7,34 @@ interface Props {
 }
 
 const Selection: React.FC<Props> = ({ filterItem, setFilterItem }) => {
-  const handleSelectOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    e.preventDefault();
-    console.log(e.target.value);
+  const [value, setValue] = useState<string>(
+    filterItem.answer !== null &&
+      typeof filterItem.answer.value === "string" &&
+      filterItem.question.values?.includes(filterItem.answer.value)
+      ? filterItem.answer.value
+      : filterItem.question.values !== null &&
+        filterItem.question.values.length > 0
+      ? filterItem.question.values[0]
+      : "default"
+  );
+
+  useEffect(() => {
     setFilterItem({
       ...filterItem,
       answer: {
-        unit:
-          typeof filterItem.question.units === "string"
-            ? filterItem.question.units
-            : null,
-        value: e.target.value,
+        unit: null,
+        value,
       },
     });
+  }, [value]);
+
+  const handleSelectOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    e.preventDefault();
+    setValue(e.target.value);
   };
 
   return (
-    <select
-      onChange={handleSelectOption}
-      value={
-        filterItem.answer !== null &&
-        typeof filterItem.answer.value === "string"
-          ? filterItem.answer.value
-          : "default"
-      }
-    >
+    <select onChange={handleSelectOption} value={value}>
       <option
         value="default"
         className="post-processing-option-select-option"

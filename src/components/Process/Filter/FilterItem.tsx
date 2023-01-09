@@ -2,6 +2,7 @@ import { IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import RangeSlider from "./components/RangeSlider";
+import RangeSliderUnit from "./components/RangeSliderUnit";
 import Selection from "./components/Selection";
 import { IFilterItem } from "./Interface";
 
@@ -20,6 +21,14 @@ const FilterItem: React.FC<Props> = ({ filterItem, setFilterItem }) => {
           <RangeSlider filterItem={filterItem} setFilterItem={setFilterItem} />
         );
         break;
+      case "sliderselection":
+        return (
+          <RangeSliderUnit
+            filterItem={filterItem}
+            setFilterItem={setFilterItem}
+          />
+        );
+        break;
       case "selection":
         return (
           <Selection filterItem={filterItem} setFilterItem={setFilterItem} />
@@ -32,7 +41,10 @@ const FilterItem: React.FC<Props> = ({ filterItem, setFilterItem }) => {
   };
 
   const handleChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilterItem({ ...filterItem, isChecked: !filterItem.isChecked });
+    setFilterItem({
+      ...filterItem,
+      isChecked: !filterItem.isChecked,
+    });
   };
 
   return (

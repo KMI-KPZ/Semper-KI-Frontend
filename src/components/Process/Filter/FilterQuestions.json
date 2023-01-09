@@ -8,7 +8,7 @@
         "title": "costs",
         "category": "general",
         "type": "slider",
-        "range":[0,999],
+        "range":[0,9999],
         "values":null,
         "units":"€"
       },
@@ -22,8 +22,8 @@
         "isSelectable":true,
         "title": "deliverTime",
         "category": "general",
-        "type": "slider",
-        "range":[0,999],
+        "type": "sliderselection",
+        "range":[0,99],
         "values":null,
         "units":[
           "Tage",
@@ -41,7 +41,7 @@
         "title": "amount",
         "category": "general",
         "type": "slider",
-        "range":[0,999],
+        "range":[0,99999],
         "values":null,
         "units":"Stück"
       },
@@ -80,8 +80,8 @@
         "isSelectable":true,
         "title": "boxSize",
         "category": "model",
-        "type": "slider",
-        "range":[0,999],
+        "type": "sliderselection",
+        "range":[0,9999],
         "values":null,
         "units":[
           "m",
@@ -99,8 +99,8 @@
         "isSelectable":true,
         "title": "surfaceSize",
         "category": "model",
-        "type": "slider",
-        "range":[0,999],
+        "type": "sliderselection",
+        "range":[0,9999],
         "values":null,
         "units":[
           "m²",
@@ -118,8 +118,8 @@
         "isSelectable":true,
         "title": "volume",
         "category": "model",
-        "type": "selection",
-        "range":null,
+        "type": "sliderselection",
+        "range":[0,9999],
         "values":null,
         "units":[
           "m³",
@@ -140,7 +140,10 @@
         "type": "selection",
         "range":null,
         "values":[
-          "iron,copper,plastic"
+          "plastic",
+          "metal",
+          "ceramic",
+          "organic"
         ],
         "units":null
       },

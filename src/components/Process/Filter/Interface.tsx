@@ -18,5 +18,10 @@ export interface IFilterQuestion {
 
 export interface IFilterAnswer {
   unit: string | null;
-  value: string | number | { min?: number; max?: number };
+  value: string | number | IRangeMinMax;
+}
+
+export interface IRangeMinMax {
+  min: number;
+  max: number;
 }

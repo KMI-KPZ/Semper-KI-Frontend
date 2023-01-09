@@ -10,7 +10,7 @@ const testFilter = _filter as IFilterItem[];
 
 interface Props {
   guideAnswers: IFilterItem[];
-  applyFilters(): void;
+  applyFilters(filterItemList: IFilterItem[]): void;
 }
 
 interface State {
@@ -68,7 +68,7 @@ const Filter: React.FC<Props> = ({ applyFilters, guideAnswers }) => {
 
   const onClickApply = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    applyFilters();
+    applyFilters(state.filterList);
   };
 
   return (

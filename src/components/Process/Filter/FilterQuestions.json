@@ -8,6 +8,7 @@
         "title": "costs",
         "category": "general",
         "type": "slider",
+        "range":[0,999],
         "values":null,
         "units":"€"
       },
@@ -22,6 +23,7 @@
         "title": "deliverTime",
         "category": "general",
         "type": "slider",
+        "range":[0,999],
         "values":null,
         "units":[
           "Tage",
@@ -39,6 +41,7 @@
         "title": "amount",
         "category": "general",
         "type": "slider",
+        "range":[0,999],
         "values":null,
         "units":"Stück"
       },
@@ -53,6 +56,7 @@
         "title": "categorys",
         "category": "model",
         "type": "selection",
+        "range":null,
         "values":[
           "medicine",
           "fashion",
@@ -77,6 +81,7 @@
         "title": "boxSize",
         "category": "model",
         "type": "slider",
+        "range":[0,999],
         "values":null,
         "units":[
           "m",
@@ -95,6 +100,7 @@
         "title": "surfaceSize",
         "category": "model",
         "type": "slider",
+        "range":[0,999],
         "values":null,
         "units":[
           "m²",
@@ -113,6 +119,7 @@
         "title": "volume",
         "category": "model",
         "type": "selection",
+        "range":null,
         "values":null,
         "units":[
           "m³",
@@ -131,6 +138,7 @@
         "title": "materialCategory",
         "category": "material",
         "type": "selection",
+        "range":null,
         "values":[
           "iron,copper,plastic"
         ],
@@ -147,6 +155,7 @@
         "title": "proceeding",
         "category": "material",
         "type": "selection",
+        "range":null,
         "values":[
           "3D-Print,Molding"
         ],
@@ -163,6 +172,7 @@
         "title": "proceeding",
         "category": "proceeding",
         "type": "selection",
+        "range":null,
         "values":[
           "3D-Print",
           "Molding"
@@ -180,6 +190,7 @@
         "title": "manufacturer",
         "category": "manufacturer",
         "type": "selection",
+        "range":null,
         "values":[
           "Man 1",
           "Man 2"
@@ -197,6 +208,7 @@
         "title": "post-Processing",
         "category": "post-Processing",
         "type": "selection",
+        "range":null,
         "values":[
           "Finish",
           "Threds"

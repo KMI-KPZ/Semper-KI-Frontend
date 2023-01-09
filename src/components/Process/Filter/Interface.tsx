@@ -12,6 +12,7 @@ export interface IFilterQuestion {
   category: string;
   type: string;
   values: string[] | null;
+  range: number[] | null;
   units: string[] | string | null;
 }
 

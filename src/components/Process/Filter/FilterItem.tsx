@@ -16,7 +16,9 @@ const FilterItem: React.FC<Props> = ({ filterItem, setFilterItem }) => {
   const displayInput = () => {
     switch (filterItem.question.type) {
       case "slider":
-        return <RangeSlider />;
+        return (
+          <RangeSlider filterItem={filterItem} setFilterItem={setFilterItem} />
+        );
         break;
       case "selection":
         return (

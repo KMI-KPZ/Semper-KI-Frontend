@@ -72,8 +72,9 @@ export const ProcessView = ({
     if (setProcessList !== undefined) setProcessList([]);
   };
 
-  const applyFilters = () => {
+  const applyFilters = (filterItemList: IFilterItem[]) => {
     // setModels(getModels(state.filterAnswers));
+    console.log("Apply Filters", filterItemList);
   };
 
   const setProgressState = (progressStateIndex: number): void => {

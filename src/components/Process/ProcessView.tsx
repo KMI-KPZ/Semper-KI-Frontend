@@ -24,6 +24,7 @@ import Filter from "../../components/Process/Filter/Filter";
 import NewProcess from "./NewProcess";
 import { Error } from "../Error/Error";
 import { IFilterItem } from "./Filter/Interface";
+import useFilter from "../../hooks/useFilter";
 
 interface Props {
   setProcessList?(processList: IProcess[]): void;
@@ -54,6 +55,7 @@ export const ProcessView = ({
     nextID: processList ? calcNextFreeId(processList) : 1,
   });
   const [models, setModels] = useState<IModel[]>([]);
+  const { getModels } = useFilter();
 
   useEffect(() => {
     if (setProcessList !== undefined) {
@@ -74,6 +76,7 @@ export const ProcessView = ({
 
   const applyFilters = (filterItemList: IFilterItem[]) => {
     // setModels(getModels(state.filterAnswers));
+    getModels(filterItemList);
     console.log("Apply Filters", filterItemList);
   };
 

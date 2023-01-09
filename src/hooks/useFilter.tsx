@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import { IFilterAnswer } from "../components/Process/Filter/Interface";
+import {
+  IFilterAnswer,
+  IFilterItem,
+} from "../components/Process/Filter/Interface";
 import { IModel } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
-  getModels(filters: IFilterAnswer[]): IModel[];
+  getModels(filters: IFilterItem[]): IModel[];
 }
 
 const useFilter = () => {
   const { axiosCustom } = useCustomAxios();
   const [models, setModels] = useState<IModel[]>([]);
 
-  const getModels = (filters: IFilterAnswer[]): IModel[] => {
+  const getModels = (filters: IFilterItem[]): IModel[] => {
     axiosCustom
-      .get("http://localhost:8000/getModels/", { params: { filters } })
+      .post("http://localhost:8000/getModels/", JSON.stringify(filters))
       .then((res) => {
         console.log("getModels", res);
         setModels(res.data);

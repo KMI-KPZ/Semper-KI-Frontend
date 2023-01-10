@@ -10,7 +10,7 @@ interface ReturnProps {
 
 const useCustomAxios = (): ReturnProps => {
   const axiosUnauthorized = axios.create({
-    baseURL: "http://localhost:8000/",
+    baseURL: `${process.env.REACT_APP_API_URL}/`,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -31,7 +31,7 @@ const useCustomAxios = (): ReturnProps => {
   };
 
   const axiosAuthorized = axios.create({
-    baseURL: "http://localhost:8000/",
+    baseURL: `${process.env.REACT_APP_API_URL}/`,
     headers: {
       Accept: "application/json",
       "X-CSRFToken": CSRFToken(),

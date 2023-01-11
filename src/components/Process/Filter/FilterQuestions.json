@@ -264,5 +264,20 @@
         "units":null
       },
       "answer":null
+    },
+    {
+      "id": 15,
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "color",
+        "category": "test",
+        "type": "color",
+        "range":null,
+        "values":null,
+        "units":null
+      },
+      "answer":null
     }
   ]

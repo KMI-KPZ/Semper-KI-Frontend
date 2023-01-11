@@ -6,7 +6,7 @@ services:
     image: frontend
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.dev
     volumes:
       - ./src:/app/src
       - ./public:/app/public

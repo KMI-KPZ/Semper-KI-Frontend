@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+
+  fontend:
+    container_name: fontend
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - '127.0.0.1:3000:80'

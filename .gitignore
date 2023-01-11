@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 junit.xml
+# /nginx
 
 # testing
 /coverage

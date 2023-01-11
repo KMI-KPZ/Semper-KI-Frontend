@@ -221,7 +221,7 @@
       "answer":null
     },
     {
-      "id": 11,
+      "id": 12,
       "isChecked":false,
       "isOpen":false,
       "question":{
@@ -229,6 +229,36 @@
         "title": "date",
         "category": "test",
         "type": "date",
+        "range":null,
+        "values":null,
+        "units":null
+      },
+      "answer":null
+    },
+    {
+      "id": 13,
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "text",
+        "category": "test",
+        "type": "text",
+        "range":null,
+        "values":null,
+        "units":null
+      },
+      "answer":null
+    },
+    {
+      "id": 14,
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "textarea",
+        "category": "test",
+        "type": "textarea",
         "range":null,
         "values":null,
         "units":null

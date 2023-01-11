@@ -5,6 +5,8 @@ import FSelection from "./components/FSelection";
 import FSliderSelection from "./components/FSliderSelection";
 import FSlider from "./components/FSlider";
 import FDate from "./components/FDate";
+import FText from "./components/FText";
+import FTextArea from "./components/FTextArea";
 
 interface Props {
   filterItem: IFilterItem;
@@ -36,6 +38,14 @@ const FilterItem: React.FC<Props> = ({ filterItem, setFilterItem }) => {
         break;
       case "date":
         return <FDate filterItem={filterItem} setFilterItem={setFilterItem} />;
+        break;
+      case "text":
+        return <FText filterItem={filterItem} setFilterItem={setFilterItem} />;
+        break;
+      case "textarea":
+        return (
+          <FTextArea filterItem={filterItem} setFilterItem={setFilterItem} />
+        );
         break;
       default:
         return <></>;

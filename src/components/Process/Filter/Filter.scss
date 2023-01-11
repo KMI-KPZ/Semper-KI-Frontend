@@ -6,7 +6,7 @@
     background-color: $white;
     justify-content: flex-start;
     gap: 10px;
-    // height: calc(100vh - $heightHeader - 2*$containerGap);
+    height: calc(100vh - $heightHeader - 2*$containerGap);
     padding: 20px;
     // overflow-y:  scroll;
     overflow-x:  hidden;
@@ -98,4 +98,16 @@ input.f-slider-input-number  {
 select.f-slider-input-select  {
     margin: 5px 0;
     padding:5px 2px;     
+}
+input.f-input-text {
+    margin: 5px 0;
+    padding:5px 2px; 
+    width: 100%;
+}
+textarea.f-input-textarea {
+    margin: 5px 0;
+    padding:5px 2px; 
+    resize: vertical;
+    width: 100%;
+    max-height: 500px;
 }

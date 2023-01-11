@@ -1,10 +1,10 @@
-import { IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import RangeSlider from "./components/RangeSlider";
-import RangeSliderUnit from "./components/RangeSliderUnit";
-import Selection from "./components/Selection";
 import { IFilterItem } from "./Interface";
+import FSelection from "./components/FSelection";
+import FSliderSelection from "./components/FSliderSelection";
+import FSlider from "./components/FSlider";
+import FDate from "./components/FDate";
 
 interface Props {
   filterItem: IFilterItem;
@@ -18,12 +18,12 @@ const FilterItem: React.FC<Props> = ({ filterItem, setFilterItem }) => {
     switch (filterItem.question.type) {
       case "slider":
         return (
-          <RangeSlider filterItem={filterItem} setFilterItem={setFilterItem} />
+          <FSlider filterItem={filterItem} setFilterItem={setFilterItem} />
         );
         break;
       case "sliderselection":
         return (
-          <RangeSliderUnit
+          <FSliderSelection
             filterItem={filterItem}
             setFilterItem={setFilterItem}
           />
@@ -31,8 +31,11 @@ const FilterItem: React.FC<Props> = ({ filterItem, setFilterItem }) => {
         break;
       case "selection":
         return (
-          <Selection filterItem={filterItem} setFilterItem={setFilterItem} />
+          <FSelection filterItem={filterItem} setFilterItem={setFilterItem} />
         );
+        break;
+      case "date":
+        return <FDate filterItem={filterItem} setFilterItem={setFilterItem} />;
         break;
       default:
         return <></>;
@@ -57,7 +60,9 @@ const FilterItem: React.FC<Props> = ({ filterItem, setFilterItem }) => {
         />
         <h3>{filterItem.question.title}</h3>
       </div>
-      <div>{filterItem.isChecked ? displayInput() : ""}</div>
+      <div className="filter-item-content">
+        {filterItem.isChecked ? displayInput() : ""}
+      </div>
     </div>
   );
 };

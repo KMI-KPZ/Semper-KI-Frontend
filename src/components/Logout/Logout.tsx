@@ -1,7 +1,6 @@
 import { Container } from "@mui/system";
 import axios, { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
 
 interface Props {
   logout(): void;

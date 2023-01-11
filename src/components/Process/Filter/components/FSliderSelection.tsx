@@ -17,7 +17,7 @@ function instanceOfIRangeMinMax(object: any): object is IRangeMinMax {
   return ("min" || "max") in object;
 }
 
-const RangeSlider: React.FC<Props> = ({ filterItem, setFilterItem }) => {
+const FSliderSelection: React.FC<Props> = ({ filterItem, setFilterItem }) => {
   const rangeMin: number =
     filterItem.question.range !== null &&
     Array.isArray(filterItem.question.range)
@@ -41,18 +41,22 @@ const RangeSlider: React.FC<Props> = ({ filterItem, setFilterItem }) => {
       : { min: rangeMin, max: rangeMax };
 
   const [value, setValue] = React.useState<number[]>([answer.min, answer.max]);
+  const [unit, setUnit] = React.useState<string>(
+    filterItem.answer !== null && filterItem.answer.unit !== null
+      ? filterItem.answer.unit
+      : filterItem.question.units !== null &&
+        Array.isArray(filterItem.question.units) &&
+        filterItem.question.units.length > 0
+      ? filterItem.question.units[0]
+      : "default"
+  );
 
   React.useEffect(() => {
-    // if (value[0] !== rangeMin || value[1] !== rangeMax) {
     setFilterItem({
       ...filterItem,
-      answer: {
-        unit: filterItem.answer !== null ? filterItem.answer.unit : null,
-        value: { min: value[0], max: value[1] },
-      },
+      answer: { unit, value: { min: value[0], max: value[1] } },
     });
-    // }
-  }, [value]);
+  }, [value, unit]);
 
   const handleChangeSlider = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
@@ -73,12 +77,18 @@ const RangeSlider: React.FC<Props> = ({ filterItem, setFilterItem }) => {
     setValue([v0 < v1 ? v0 : v1, v0 < v1 ? v1 : v0]);
   };
 
+  const handleSelectOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    e.preventDefault();
+    setUnit(e.target.value);
+  };
+
   return (
     <Stack
       direction="column"
       spacing={1}
       justifyContent="flex-start"
       alignItems="center"
+      width="100%"
     >
       <Slider
         sx={{ width: "80%" }}
@@ -93,12 +103,11 @@ const RangeSlider: React.FC<Props> = ({ filterItem, setFilterItem }) => {
       <Stack
         width="80%"
         direction="row"
-        spacing={2}
         justifyContent="space-between"
         alignItems="center"
       >
         <input
-          className="filter-number-input"
+          className="f-slider-input-number"
           type="number"
           value={value[0]}
           style={{
@@ -108,21 +117,36 @@ const RangeSlider: React.FC<Props> = ({ filterItem, setFilterItem }) => {
         />
         -
         <input
-          className="filter-number-input"
+          className="f-slider-input-number"
           type="number"
           value={value[1]}
           style={{ width: `${(value[1].toString().length + 3) * 8}px` }}
           onChange={(e) => handleChangeInput(e, 1)}
         />
-        {filterItem.answer !== null && filterItem.answer.unit !== null
-          ? filterItem.answer.unit
-          : filterItem.question.units !== null &&
-            typeof filterItem.question.units === "string"
-          ? filterItem.question.units
-          : null}
+        <select
+          onChange={handleSelectOption}
+          value={unit}
+          className="f-slider-input-select"
+        >
+          <option
+            value="default"
+            className="post-processing-option-select-option"
+            disabled
+          >
+            ---
+          </option>
+          {filterItem.question.units !== null &&
+          Array.isArray(filterItem.question.units)
+            ? filterItem.question.units.map((title: string, index: number) => (
+                <option key={index} value={title}>
+                  {title}
+                </option>
+              ))
+            : ""}
+        </select>
       </Stack>
     </Stack>
   );
 };
 
-export default RangeSlider;
+export default FSliderSelection;

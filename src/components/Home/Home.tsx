@@ -45,7 +45,11 @@ export const Home = ({ userType }: Props) => {
           <hr className="home-hr" />
           <HomeCard
             link="/guide/client-print"
-            text="Modell Herstellen lassen"
+            text="Bestellung mit Guide starten"
+          />
+          <HomeCard
+            link="/process/models"
+            text="Bestellung ohne guide starten"
           />
           <HomeCard
             link="/guide/client-design"

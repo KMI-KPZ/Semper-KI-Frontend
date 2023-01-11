@@ -6,7 +6,7 @@ interface Props {
   setFilterItem(filterItem: IFilterItem): void;
 }
 
-const Selection: React.FC<Props> = ({ filterItem, setFilterItem }) => {
+const FSelection: React.FC<Props> = ({ filterItem, setFilterItem }) => {
   const [value, setValue] = useState<string>(
     filterItem.answer !== null &&
       typeof filterItem.answer.value === "string" &&
@@ -34,17 +34,17 @@ const Selection: React.FC<Props> = ({ filterItem, setFilterItem }) => {
   };
 
   return (
-    <select onChange={handleSelectOption} value={value}>
-      <option
-        value="default"
-        className="post-processing-option-select-option"
-        disabled
-      >
+    <select
+      onChange={handleSelectOption}
+      value={value}
+      className="f-input-select"
+    >
+      <option value="default" className="f-input-select-option" disabled>
         ---
       </option>
       {filterItem.question.values !== null
         ? filterItem.question.values.map((title: string, index: number) => (
-            <option key={index} value={title}>
+            <option key={index} value={title} className="f-input-select-option">
               {title}
             </option>
           ))
@@ -53,4 +53,4 @@ const Selection: React.FC<Props> = ({ filterItem, setFilterItem }) => {
   );
 };
 
-export default Selection;
+export default FSelection;

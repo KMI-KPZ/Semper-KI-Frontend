@@ -13,7 +13,7 @@ const Logout = ({ logout }: Props) => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`${process.env.REACT_APP_API_URL}/logout/`)
+      .get(`${process.env.REACT_APP_API_URL}/public/logout/`)
       .then((response) => {
         console.log("get Logout ", response.data);
         window.location.href = response.data;

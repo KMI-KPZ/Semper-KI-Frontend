@@ -14,7 +14,7 @@ const useUser = (): ReturnProps => {
 
   const loadUser = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/getUser/`)
+      .get(`${process.env.REACT_APP_API_URL}/privat/getUser/`)
       .then((response) => {
         console.log("getUser Data", response.data);
         setAuthToken(response.data);

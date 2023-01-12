@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IFilterItem, IFilterAnswer } from "./Interface";
 import "./Filter.scss";
@@ -6,6 +6,7 @@ import FilterItem from "./FilterItem";
 import { Button, IconButton } from "@mui/material";
 
 import _filter from "./FilterQuestions.json";
+import FilterCard from "./FilterCard";
 const testFilter = _filter as IFilterItem[];
 
 interface Props {
@@ -15,7 +16,26 @@ interface Props {
 
 interface State {
   filterList: IFilterItem[];
+  categoryList: ICategory[];
 }
+
+export interface ICategory {
+  title: string;
+  open: boolean;
+}
+
+const generateCategoryList = (filterItemList: IFilterItem[]): ICategory[] => {
+  let stringList: string[] = [];
+  filterItemList.forEach((filterItem: IFilterItem) => {
+    if (!stringList.includes(filterItem.question.category))
+      stringList.push(filterItem.question.category);
+  });
+  let categoryList: ICategory[] = [];
+  stringList.forEach((category: string) => {
+    categoryList.push({ title: category, open: false });
+  });
+  return categoryList;
+};
 
 const hydrateFilter = (guideAnswers: IFilterItem[]): IFilterItem[] => {
   let filteritems: IFilterItem[] = testFilter;
@@ -32,8 +52,10 @@ const hydrateFilter = (guideAnswers: IFilterItem[]): IFilterItem[] => {
 };
 
 const Filter: React.FC<Props> = ({ applyFilters, guideAnswers }) => {
+  const hydratedFilterList: IFilterItem[] = hydrateFilter(guideAnswers);
   const [state, setState] = useState<State>({
-    filterList: hydrateFilter(guideAnswers),
+    filterList: hydratedFilterList,
+    categoryList: generateCategoryList(hydratedFilterList),
   });
   const { t } = useTranslation();
 
@@ -81,28 +103,47 @@ const Filter: React.FC<Props> = ({ applyFilters, guideAnswers }) => {
     );
   };
 
+  const handleOnClickMenuOpen = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    category: ICategory,
+    index: number
+  ) => {
+    e.preventDefault();
+    setState((prevState) => ({
+      ...prevState,
+      categoryList: [
+        ...prevState.categoryList.filter(
+          (category: ICategory, categoryIndex: number) => categoryIndex < index
+        ),
+        { title: category.title, open: !category.open },
+        ...prevState.categoryList.filter(
+          (category: ICategory, categoryIndex: number) => categoryIndex > index
+        ),
+      ],
+    }));
+  };
+
   return (
     <div className="filter">
       <h2 className="filter-headline">{t("filter.headline")}</h2>
-      <hr className="filter-hr large" />
-
-      {state.filterList.map((filterItem: IFilterItem, index: number) => (
-        <FilterItem
-          key={index}
-          filterItem={filterItem}
+      {state.categoryList.map((category: ICategory, categoryIndex: number) => (
+        <FilterCard
+          category={category}
+          categoryIndex={categoryIndex}
+          filterItemList={state.filterList}
+          handleOnClickMenuOpen={handleOnClickMenuOpen}
           setFilterItem={setFilterItem}
+          key={categoryIndex}
         />
       ))}
-      {
-        <div className="filter-buttons">
-          <Button variant="contained" onClick={onClickReset}>
-            Reset
-          </Button>
-          <Button variant="contained" onClick={onClickApply}>
-            Anwenden
-          </Button>
-        </div>
-      }
+      <div className="filter-buttons">
+        <Button variant="contained" onClick={onClickReset}>
+          Reset
+        </Button>
+        <Button variant="contained" onClick={onClickApply}>
+          Anwenden
+        </Button>
+      </div>
     </div>
   );
 };

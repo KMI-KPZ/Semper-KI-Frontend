@@ -12,7 +12,7 @@ const Login = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`${process.env.REACT_APP_API_URL}/login/`)
+      .get(`${process.env.REACT_APP_API_URL}/public/login/`)
       .then((response) => {
         console.log("get Login ", response.data);
         window.location.href = response.data;

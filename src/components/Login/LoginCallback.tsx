@@ -18,7 +18,7 @@ const LoginCallback = ({ login, authToken }: Props) => {
 
   return (
     <Container>
-      <h1>Succesfully Log In</h1>
+      <h1>{authToken !== undefined ? "Succesfully Log In" : "Login Failed"}</h1>
       {authToken !== undefined ? <Account authToken={authToken} /> : null}
     </Container>
   );

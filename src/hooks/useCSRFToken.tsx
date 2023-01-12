@@ -18,7 +18,7 @@ const useCRSFToken = (): ReturnProps => {
 
   const loadCSRFToken = (): void => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/csrfCookie/`)
+      .get(`${process.env.REACT_APP_API_URL}/public/csrfCookie/`)
       .then((response) => {
         const token = Cookies.get("csrftoken");
         if (token !== undefined) {

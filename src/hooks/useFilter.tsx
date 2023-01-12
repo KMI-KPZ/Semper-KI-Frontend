@@ -17,7 +17,7 @@ const useFilter = () => {
   const getModels = (filters: IFilterItem[]): IModel[] => {
     axiosCustom
       .post(
-        `${process.env.REACT_APP_API_URL}/getModels/`,
+        `${process.env.REACT_APP_API_URL}/private/getModels/`,
         JSON.stringify(filters)
       )
       .then((res) => {

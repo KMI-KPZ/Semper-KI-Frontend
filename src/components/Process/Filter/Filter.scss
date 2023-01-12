@@ -3,20 +3,33 @@
 .filter{
     display: flex;
     flex-direction: column;
-    background-color: $white;
+    background-color: #f5f5f5;
     justify-content: flex-start;
     gap: 10px;
     height: calc(100vh - $heightHeader - 2*$containerGap);
     padding: 20px;
     // overflow-y:  scroll;
     overflow-x:  hidden;
-
+    
     &.closed{
         width: auto;
     }
     &.open{
         width: 18%;
     }
+}
+
+.filter-category-card {
+    background-color: $white;
+    // border: 1px solid grey;
+    padding: 5px;
+    border-radius: $borderRadius;
+}
+
+.filter-category-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .filter-headline{
@@ -110,4 +123,9 @@ textarea.f-input-textarea {
     resize: vertical;
     width: 100%;
     max-height: 500px;
+}
+input.f-input-color {
+    margin: 5px 0;
+    padding:0; 
+    width: 100%;
 }

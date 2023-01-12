@@ -130,7 +130,10 @@ const Filter: React.FC<Props> = ({ applyFilters, guideAnswers }) => {
         <FilterCard
           category={category}
           categoryIndex={categoryIndex}
-          filterItemList={state.filterList}
+          filterItemList={state.filterList.filter(
+            (filterItem: IFilterItem) =>
+              filterItem.question.category === category.title
+          )}
           handleOnClickMenuOpen={handleOnClickMenuOpen}
           setFilterItem={setFilterItem}
           key={categoryIndex}

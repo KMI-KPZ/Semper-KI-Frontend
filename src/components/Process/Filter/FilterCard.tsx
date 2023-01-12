@@ -46,18 +46,13 @@ const FilterCard: React.FC<Props> = ({
         </IconButton>
       </div>
       {category.open
-        ? filterItemList
-            .filter(
-              (filterItem: IFilterItem) =>
-                filterItem.question.category === category.title
-            )
-            .map((filterItem: IFilterItem, index: number) => (
-              <FilterItem
-                key={index}
-                filterItem={filterItem}
-                setFilterItem={setFilterItem}
-              />
-            ))
+        ? filterItemList.map((filterItem: IFilterItem, index: number) => (
+            <FilterItem
+              key={index}
+              filterItem={filterItem}
+              setFilterItem={setFilterItem}
+            />
+          ))
         : null}
     </div>
   );

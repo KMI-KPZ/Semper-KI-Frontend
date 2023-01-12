@@ -37,7 +37,7 @@ export const RequestTest = () => {
     delete: "",
     data: "",
     port: "8000",
-    url: "http://localhost:",
+    url: "http://127.0.0.1:",
     postFix: "/test_csrf/",
     error: null,
     loading: null,

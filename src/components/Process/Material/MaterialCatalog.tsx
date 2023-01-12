@@ -25,7 +25,7 @@ export const MaterialCatalog = ({
 }: Props) => {
   const { t } = useTranslation();
   const { data, isLoading, error } = useFetch<IMaterial>({
-    url: "http://localhost:3030/materialList",
+    url: "http://127.0.0.1:3030/materialList",
   });
   const [state, setState] = useState<State>({ filter: "", grid: true });
 

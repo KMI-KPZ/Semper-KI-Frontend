@@ -26,7 +26,7 @@ export const ModelCatalog: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   // const { data, isLoading, error } = useFetch<IModel>({
-  //   url: "http://localhost:3030/modelList",
+  //   url: "http://127.0.0.1:3030/modelList",
   // });
 
   const [state, setState] = useState<State>({ filter: "", grid: true });

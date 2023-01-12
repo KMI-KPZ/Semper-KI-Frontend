@@ -42,7 +42,7 @@ export const ManufacturerCatalog = ({
     isLoading: manufacturerIsLoading,
     error: manufacturerLoadingError,
   } = useFetch<IManufacturer>({
-    url: "http://localhost:3030/manufacturerList",
+    url: "http://127.0.0.1:3030/manufacturerList",
   });
   const [filter, setFilter] = useState<number>(0);
   const [state, setState] = useState<State>({ filter: "", grid: true });

@@ -21,6 +21,7 @@ import Login from "../Login/Login";
 import LoginCallback from "../Login/LoginCallback";
 import { Error } from "../Error/Error";
 import { IFilterItem } from "../Process/Filter/Interface";
+import Redirect from "../Redirect/Redirect";
 
 interface State {
   menuOpen: boolean;
@@ -125,16 +126,14 @@ function App() {
         />
       ) : null}
       <div className="main-header">
-        <div className="header-container">
-          <Header
-            isMenuOpen={state.menuOpen}
-            setMenuOpen={setMenuOpen}
-            // authToken={authToken}
-            isLoggedIn={state.isLoggedIn}
-            userType={state.userType}
-            setUserType={setUserType}
-          />
-        </div>
+        <Header
+          isMenuOpen={state.menuOpen}
+          setMenuOpen={setMenuOpen}
+          // authToken={authToken}
+          isLoggedIn={state.isLoggedIn}
+          userType={state.userType}
+          setUserType={setUserType}
+        />
       </div>
       <Routes data-testid="routes">
         {unAuthorizedRoutes}
@@ -162,6 +161,10 @@ function App() {
         <Route
           path="callback/login"
           element={<LoginCallback login={login} authToken={authToken} />}
+        />
+        <Route
+          path="aboutus"
+          element={<Redirect link="https://semper-ki.org/" />}
         />
         <Route path="*" element={<Error />} />
       </Routes>

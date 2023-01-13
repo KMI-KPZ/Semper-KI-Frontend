@@ -8,6 +8,7 @@ import FDate from "./components/FDate";
 import FText from "./components/FText";
 import FTextArea from "./components/FTextArea";
 import FColor from "./components/FColor";
+import FNumber from "./components/FNumber";
 
 interface Props {
   filterItem: IFilterItem;
@@ -50,6 +51,11 @@ const FilterItem: React.FC<Props> = ({ filterItem, setFilterItem }) => {
         break;
       case "color":
         return <FColor filterItem={filterItem} setFilterItem={setFilterItem} />;
+        break;
+      case "number":
+        return (
+          <FNumber filterItem={filterItem} setFilterItem={setFilterItem} />
+        );
         break;
       default:
         return <></>;

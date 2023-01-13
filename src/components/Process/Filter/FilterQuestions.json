@@ -279,5 +279,20 @@
         "units":null
       },
       "answer":null
+    },
+    {
+      "id": 16,
+      "isChecked":false,
+      "isOpen":false,
+      "question":{
+        "isSelectable":true,
+        "title": "number",
+        "category": "test",
+        "type": "number",
+        "range":null,
+        "values":null,
+        "units":null
+      },
+      "answer":null
     }
   ]

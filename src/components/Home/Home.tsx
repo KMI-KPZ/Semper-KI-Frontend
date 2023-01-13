@@ -67,22 +67,6 @@ export const Home = ({ userType }: Props) => {
           />
         </div>
       </div>
-      <Fab
-        sx={{
-          position: "absolute",
-          bottom: 50,
-          right: 50,
-          color: "blue",
-          backgroundColor: "yellow",
-          "&:hover": {
-            backgroundColor: "blue",
-            color: "yellow",
-          },
-        }}
-        onClick={() => navigate("/test")}
-      >
-        TEST
-      </Fab>
     </div>
   );
 };

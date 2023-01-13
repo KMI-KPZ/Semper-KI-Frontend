@@ -1,28 +1,35 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
-  Icon: React.ReactNode;
+  icon?: React.ReactNode;
   text: string;
   link: string;
+  navigate(link: string): void;
   toggleUserType?: () => void;
+  className?: string;
 }
 
-const HeaderLink = ({ Icon, text, link, toggleUserType }: Props) => {
-  const navigate = useNavigate();
-
-  const handleOnClick = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    e.preventDefault();
+const HeaderLink = ({
+  icon,
+  text,
+  link,
+  toggleUserType,
+  navigate,
+  className,
+}: Props) => {
+  const handleOnClick = () => {
     if (toggleUserType !== undefined) toggleUserType();
     navigate(`${link}`);
   };
 
   return (
-    <li className="header-link">
-      <a href={`${link}`} onClick={handleOnClick}>
-        {Icon}
+    <li
+      className={`nav-list-item ${className}`}
+      onClick={handleOnClick}
+      title={text}
+    >
+      <a href={`${link}`} className="nav-list-item-link">
+        {icon}
         {text}
       </a>
     </li>

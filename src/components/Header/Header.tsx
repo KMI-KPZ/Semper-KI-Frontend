@@ -9,6 +9,7 @@ import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import BugReportIcon from "@mui/icons-material/BugReport";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ClickAwayListener, IconButton } from "@mui/material";
@@ -53,6 +54,11 @@ interface Props {
   isMenuOpen: boolean;
 }
 
+interface State {
+  languageMenu: boolean;
+  menu: boolean;
+}
+
 export const Header = ({
   // authToken,
   isLoggedIn,
@@ -63,19 +69,36 @@ export const Header = ({
 }: Props) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const [isLanguageMenuOpen, setLanguageIsMenuOpen] = useState<boolean>(false);
+  const [state, setState] = useState<State>({
+    menu: false,
+    languageMenu: false,
+  });
 
   const changeLanguage = (code: string) => () => {
-    closeMenu();
+    closeLanguageMenu();
     if (i18n.language !== code) i18n.changeLanguage(code);
   };
 
+  const closeLanguageMenu = () => {
+    setState((prevState) => ({ ...prevState, languageMenu: false }));
+  };
+
+  const openLanguageMenu = () => {
+    setState((prevState) => ({ ...prevState, languageMenu: true }));
+  };
+
   const closeMenu = () => {
-    setLanguageIsMenuOpen(false);
+    setState((prevState) => ({ ...prevState, menu: false }));
   };
 
   const openMenu = () => {
-    setLanguageIsMenuOpen(true);
+    setState((prevState) => ({ ...prevState, menu: true }));
+  };
+
+  const customNavigate = (link: string): void => {
+    closeLanguageMenu();
+    closeMenu();
+    navigate(link);
   };
 
   const getFlagButtonClassName = (): string => {
@@ -92,34 +115,28 @@ export const Header = ({
     setUserType(userType === "client" ? "contractor" : "client");
   };
 
-  const getLinks = (): JSX.Element => {
-    const unauthorizedClientLinks = (
+  const getLinksHeader = (): JSX.Element => {
+    return isLoggedIn === false ? (
       <HeaderLink
-        text={t("header.contractor")}
-        Icon={<FactoryOutlinedIcon />}
-        link="/"
-        toggleUserType={toggleUserType}
+        text={t("header.about-us")}
+        icon={kissLogo}
+        link="/aboutus"
+        navigate={customNavigate}
       />
+    ) : (
+      <></>
     );
-    const unauthorizedContractorLinks = (
-      <HeaderLink
-        text={t("header.client")}
-        Icon={<ShoppingCartOutlinedIcon />}
-        link="/"
-        toggleUserType={toggleUserType}
-      />
-    );
+  };
+
+  const getLinksMenu = (): JSX.Element => {
     const unauthorizedLinks = (
       <>
         <HeaderLink
-          text={t("header.about-us")}
-          Icon={kissLogo}
-          link="/aboutus"
-        />
-        <HeaderLink
           text={t("header.login")}
-          Icon={<PersonIcon />}
+          icon={<PersonIcon />}
           link="/login"
+          navigate={customNavigate}
+          className="menu-item"
         />
       </>
     );
@@ -127,13 +144,17 @@ export const Header = ({
       <>
         <HeaderLink
           text={t("header.newOrder")}
-          Icon={<NoteAddOutlinedIcon />}
+          icon={<NoteAddOutlinedIcon />}
           link="/process/new"
+          navigate={customNavigate}
+          className="menu-item"
         />
         <HeaderLink
           text={t("header.shoppingcart")}
-          Icon={<ShoppingCartOutlinedIcon />}
+          icon={<ShoppingCartOutlinedIcon />}
           link="/shoppingcart"
+          navigate={customNavigate}
+          className="menu-item"
         />
       </>
     );
@@ -141,44 +162,42 @@ export const Header = ({
       <>
         <HeaderLink
           text={t("header.contracts")}
-          Icon={<DescriptionOutlinedIcon />}
+          icon={<DescriptionOutlinedIcon />}
           link="/contracts"
+          navigate={customNavigate}
+          className="menu-item"
         />
       </>
     );
     const authorizedLinks = (
       <>
-        {/* <HeaderLink
-          text="Prozess"
-          Icon={<PlayCircleIcon />}
-          link="/process/models"
-        /> */}
         <HeaderLink
           text={t("header.messages")}
-          Icon={<EmailOutlinedIcon />}
+          icon={<EmailOutlinedIcon />}
           link="/messages"
+          navigate={customNavigate}
+          className="menu-item"
         />
         <HeaderLink
           text={t("header.account")}
-          Icon={<PersonIcon />}
+          icon={<PersonIcon />}
           link="/account"
+          navigate={customNavigate}
+          className="menu-item"
         />
         <HeaderLink
           text={t("header.logout")}
-          Icon={<LogoutIcon />}
+          icon={<LogoutIcon />}
           link="/logout"
+          navigate={customNavigate}
+          className="menu-item"
         />
       </>
     );
     return (
       <>
         {isLoggedIn === false ? (
-          <>
-            {userType === "client"
-              ? unauthorizedClientLinks
-              : unauthorizedContractorLinks}
-            {unauthorizedLinks}
-          </>
+          <>{unauthorizedLinks}</>
         ) : (
           <>
             {userType === "client"
@@ -192,19 +211,11 @@ export const Header = ({
   };
 
   return (
-    <header data-testid="header">
-      <nav className="left-nav">
-        {isLoggedIn === true ? (
-          <IconButton
-            className="burger-icon"
-            onClick={() => setMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
-          </IconButton>
-        ) : null}
+    <header data-testid="header" className="header">
+      <nav className="nav-left">
         <a
           href="/"
-          className={`kiss-logo`}
+          className="kiss-logo"
           onClick={(e) => {
             e.preventDefault();
             navigate("/");
@@ -221,19 +232,22 @@ export const Header = ({
           </div>
         </a>
       </nav>
-      <nav className="right-nav" data-testid="mainNav">
-        <ul>
-          {getLinks()}
-          <li>
-            <ClickAwayListener onClickAway={closeMenu}>
-              <div>
+      <nav className="nav" data-testid="mainNav">
+        <ul className="nav-list">
+          {getLinksHeader()}
+          <li className="nav-list-item">
+            <ClickAwayListener onClickAway={closeLanguageMenu}>
+              <div className="language-menu">
                 <div
                   data-testid="languageMenu"
-                  className={`fi fi-${getFlagButtonClassName()} main-nav-dropdown-icon`}
-                  onClick={openMenu}
+                  className={`fi fi-${getFlagButtonClassName()} language-menu-button`}
+                  onClick={openLanguageMenu}
                 />
-                {isLanguageMenuOpen && (
-                  <div className="main-nav-dropdown" data-testid="dropdown">
+                {state.languageMenu === true ? (
+                  <div
+                    className="language-menu-dropdown"
+                    data-testid="dropdown"
+                  >
                     {languages.map(({ code, country_code }: Language) => (
                       <div
                         data-testid={country_code}
@@ -245,12 +259,32 @@ export const Header = ({
                       />
                     ))}
                   </div>
-                )}
+                ) : null}
               </div>
             </ClickAwayListener>
           </li>
+          <li className="nav-list-item">
+            <div className="menu-button" onClick={openMenu}>
+              <MenuIcon />
+            </div>
+          </li>
         </ul>
       </nav>
+      {state.menu === true ? (
+        <>
+          <div className="menu-blank" onClick={closeMenu} />
+          <div className="menu-dropdown">
+            {getLinksMenu()}
+            <HeaderLink
+              text={"test"}
+              icon={<BugReportIcon />}
+              link="/test"
+              navigate={customNavigate}
+              className="menu-item"
+            />
+          </div>
+        </>
+      ) : null}
     </header>
   );
 };

@@ -13,7 +13,6 @@ import Orders from "./Orders/Orders";
 import { IAuthToken, IOrder, IProcess, IUser } from "../../interface/Interface";
 import { TUserType } from "../../interface/types";
 import Account from "./Account/Account";
-import { Fab } from "@mui/material";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
 import { Error } from "../Error/Error";
 
@@ -54,29 +53,9 @@ const AuthorizedHome = ({
           <Route path="proceedings" element={<Error text="proceedings" />} />
           <Route path="assignments" element={<Error text="assignments" />} />
           <Route path="messages" element={<Error text="messages" />} />
-          <Route
-            path="account/logout"
-            element={<Navigate replace to={"/logout"} />}
-          />
           <Route path="account" element={<Account authToken={authToken} />} />
         </Routes>
       </section>
-      <Fab
-        sx={{
-          position: "absolute",
-          bottom: 50,
-          right: 50,
-          color: "blue",
-          backgroundColor: "yellow",
-          "&:hover": {
-            backgroundColor: "blue",
-            color: "yellow",
-          },
-        }}
-        onClick={() => navigate("/test")}
-      >
-        TEST
-      </Fab>
     </div>
   );
 };

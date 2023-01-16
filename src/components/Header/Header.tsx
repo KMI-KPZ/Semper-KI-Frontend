@@ -16,6 +16,7 @@ import { ClickAwayListener, IconButton } from "@mui/material";
 import { TUserType } from "../../interface/types";
 import HeaderLink from "./HeaderLink";
 import { IAuthToken } from "../../interface/Interface";
+import ListAltIcon from "@mui/icons-material/ListAlt";
 
 const kissLogo: React.ReactNode = (
   <img
@@ -60,7 +61,6 @@ interface State {
 }
 
 export const Header = ({
-  // authToken,
   isLoggedIn,
   userType,
   setUserType,
@@ -95,10 +95,9 @@ export const Header = ({
     setState((prevState) => ({ ...prevState, menu: true }));
   };
 
-  const customNavigate = (link: string): void => {
+  const closeMenus = (): void => {
     closeLanguageMenu();
     closeMenu();
-    navigate(link);
   };
 
   const getFlagButtonClassName = (): string => {
@@ -111,50 +110,70 @@ export const Header = ({
     return returnString;
   };
 
-  const toggleUserType = () => {
-    setUserType(userType === "client" ? "contractor" : "client");
-  };
-
   const getLinksHeader = (): JSX.Element => {
     return isLoggedIn === false ? (
-      <HeaderLink
-        text={t("header.about-us")}
-        icon={kissLogo}
-        link="/aboutus"
-        navigate={customNavigate}
-      />
-    ) : (
-      <></>
-    );
-  };
-
-  const getLinksMenu = (): JSX.Element => {
-    const unauthorizedLinks = (
       <>
+        <HeaderLink
+          text={t("header.about-us")}
+          icon={kissLogo}
+          link="/aboutus"
+          closeMenus={closeMenus}
+        />
         <HeaderLink
           text={t("header.login")}
           icon={<PersonIcon />}
           link="/login"
-          navigate={customNavigate}
-          className="menu-item"
+          closeMenus={closeMenus}
+        />
+      </>
+    ) : (
+      <>
+        <HeaderLink
+          text={t("header.newOrder")}
+          icon={<NoteAddOutlinedIcon />}
+          link="/process/new"
+          closeMenus={closeMenus}
+        />
+        <HeaderLink
+          text={t("header.shoppingcart")}
+          icon={<ShoppingCartOutlinedIcon />}
+          link="/shoppingcart"
+          closeMenus={closeMenus}
+        />
+        <HeaderLink
+          text={t("header.logout")}
+          icon={<LogoutIcon />}
+          link="/logout"
+          closeMenus={closeMenus}
         />
       </>
     );
+  };
+
+  const getLinksMenu = (): JSX.Element => {
+    const unauthorizedLinks = <></>;
     const authorizedClientLinks = (
       <>
         <HeaderLink
           text={t("header.newOrder")}
           icon={<NoteAddOutlinedIcon />}
           link="/process/new"
-          navigate={customNavigate}
-          className="menu-item"
+          closeMenus={closeMenus}
+          menuItem
         />
         <HeaderLink
           text={t("header.shoppingcart")}
           icon={<ShoppingCartOutlinedIcon />}
           link="/shoppingcart"
-          navigate={customNavigate}
-          className="menu-item"
+          closeMenus={closeMenus}
+          menuItem
+        />
+        <HeaderLink
+          text={"Bestellungen"}
+          icon={<ListAltIcon />}
+          link="/orders"
+          closeMenus={closeMenus}
+          menuItem
         />
       </>
     );
@@ -164,8 +183,8 @@ export const Header = ({
           text={t("header.contracts")}
           icon={<DescriptionOutlinedIcon />}
           link="/contracts"
-          navigate={customNavigate}
-          className="menu-item"
+          closeMenus={closeMenus}
+          menuItem
         />
       </>
     );
@@ -175,22 +194,15 @@ export const Header = ({
           text={t("header.messages")}
           icon={<EmailOutlinedIcon />}
           link="/messages"
-          navigate={customNavigate}
-          className="menu-item"
+          closeMenus={closeMenus}
+          menuItem
         />
         <HeaderLink
           text={t("header.account")}
           icon={<PersonIcon />}
           link="/account"
-          navigate={customNavigate}
-          className="menu-item"
-        />
-        <HeaderLink
-          text={t("header.logout")}
-          icon={<LogoutIcon />}
-          link="/logout"
-          navigate={customNavigate}
-          className="menu-item"
+          closeMenus={closeMenus}
+          menuItem
         />
       </>
     );
@@ -218,6 +230,7 @@ export const Header = ({
           className="kiss-logo"
           onClick={(e) => {
             e.preventDefault();
+            closeMenus();
             navigate("/");
           }}
         >
@@ -279,8 +292,8 @@ export const Header = ({
               text={"test"}
               icon={<BugReportIcon />}
               link="/test"
-              navigate={customNavigate}
-              className="menu-item"
+              closeMenus={closeMenus}
+              menuItem
             />
           </div>
         </>

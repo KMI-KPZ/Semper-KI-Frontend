@@ -1,10 +1,7 @@
-import { Button, Container } from "@mui/material";
-import Cookies from "js-cookie";
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import useUser from "../../hooks/useUser";
-import { IAuthToken, IUser } from "../../interface/Interface";
-import Account from "../AuthorizedHome/Account/Account";
+import { Container } from "@mui/material";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { IAuthToken } from "../../interface/Interface";
 
 interface Props {
   login(): void;
@@ -12,14 +9,17 @@ interface Props {
 }
 
 const LoginCallback = ({ login, authToken }: Props) => {
+  const navigate = useNavigate();
   useEffect(() => {
     login();
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   }, []);
 
   return (
     <Container>
-      <h1>{authToken !== undefined ? "Succesfully Log In" : "Login Failed"}</h1>
-      {authToken !== undefined ? <Account authToken={authToken} /> : null}
+      <h1>{authToken !== undefined ? "Login Successful" : "Login Failed"}</h1>
     </Container>
   );
 };

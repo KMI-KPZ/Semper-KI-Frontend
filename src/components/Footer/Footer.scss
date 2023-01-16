@@ -1,0 +1,31 @@
+@import "./../../variables.scss";
+
+.footer {
+    // position: absolute;
+    // bottom: 0;
+    // left:0;
+    // right:0;
+
+
+    margin-top: 20px;
+    background-color: $white;
+}
+
+.footer-list {
+    margin: 0;
+    padding:0;
+    gap:20px;
+    display:flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: space-evenly;
+}
+
+.footer-list-item {
+    margin: 0;
+    padding:20px;
+}
+
+.footer-list-item-link {
+    padding: 20px 30px;
+}

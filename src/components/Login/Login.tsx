@@ -1,8 +1,6 @@
 import { Container } from "@mui/system";
 import axios, { AxiosError } from "axios";
-import { stringify } from "querystring";
 import React, { useEffect, useState } from "react";
-import { Navigate, unstable_HistoryRouter } from "react-router-dom";
 import "./Login.scss";
 
 const Login = () => {

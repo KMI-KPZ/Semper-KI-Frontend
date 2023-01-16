@@ -1,14 +1,41 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Redirect.scss";
 
-const Redirect: React.FC<{ link: string }> = ({ link }) => {
+interface Props {
+  link: string;
+  time?: number;
+  text?: string;
+  extern?: boolean;
+}
+
+const Redirect: React.FC<Props> = ({ link, time, text, extern }) => {
+  const navigate = useNavigate();
+
+  const openLink = () => {
+    if (extern !== undefined && extern === true) {
+      window.location.href = link;
+    } else {
+      navigate(link);
+    }
+  };
+
   useEffect(() => {
-    window.location.href = link;
+    if (time === undefined) {
+      openLink();
+    } else {
+      setTimeout(() => {
+        openLink();
+      }, time);
+    }
   }, []);
 
   return (
-    <div className="lds-circle">
-      <div></div>
+    <div className="redirect">
+      {text}
+      <div className="lds-circle">
+        <div></div>
+      </div>
     </div>
   );
 };

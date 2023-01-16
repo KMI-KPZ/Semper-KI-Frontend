@@ -22,6 +22,7 @@ import LoginCallback from "../Login/LoginCallback";
 import { Error } from "../Error/Error";
 import { IFilterItem } from "../Process/Filter/Interface";
 import Redirect from "../Redirect/Redirect";
+import Footer from "../Footer/Footer";
 
 interface State {
   menuOpen: boolean;
@@ -82,6 +83,7 @@ function App() {
   }, []);
 
   const login = () => {
+    console.log("Login");
     loadCSRFToken();
     setTimeout(() => {
       loadUser();
@@ -89,6 +91,7 @@ function App() {
   };
 
   const logout = () => {
+    console.log("Logout");
     logoutUser();
   };
 
@@ -164,10 +167,11 @@ function App() {
         />
         <Route
           path="aboutus"
-          element={<Redirect link="https://semper-ki.org/" />}
+          element={<Redirect link="https://semper-ki.org/" extern />}
         />
         <Route path="*" element={<Error />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

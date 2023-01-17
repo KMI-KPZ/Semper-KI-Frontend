@@ -15,7 +15,6 @@ import { useTranslation } from "react-i18next";
 import { ClickAwayListener, IconButton } from "@mui/material";
 import { TUserType } from "../../interface/types";
 import HeaderLink from "./HeaderLink";
-import { IAuthToken } from "../../interface/Interface";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 
 const kissLogo: React.ReactNode = (
@@ -116,8 +115,9 @@ export const Header = ({
         <HeaderLink
           text={t("header.about-us")}
           icon={kissLogo}
-          link="/aboutus"
+          link="https://semper-ki.org/"
           closeMenus={closeMenus}
+          extern
         />
         <HeaderLink
           text={t("header.login")}

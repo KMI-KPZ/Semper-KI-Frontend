@@ -1,4 +1,4 @@
-@import "../../../variables";
+@use '../../../scss/index' as *;
 
 .material-cards {
   height: calc(100vh - $heightHeader - $heightWizard - $heightHeadlineSearch - 4*$containerGap);

@@ -1,14 +1,14 @@
 import { Container } from "@mui/material";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { IAuthToken } from "../../interface/Interface";
+import { IUser } from "../../interface/Interface";
 
 interface Props {
   login(): void;
-  authToken: IAuthToken | undefined;
+  user: IUser | undefined;
 }
 
-const LoginCallback = ({ login, authToken }: Props) => {
+const LoginCallback = ({ login, user }: Props) => {
   const navigate = useNavigate();
   useEffect(() => {
     login();
@@ -19,7 +19,7 @@ const LoginCallback = ({ login, authToken }: Props) => {
 
   return (
     <Container>
-      <h1>{authToken !== undefined ? "Login Successful" : "Login Failed"}</h1>
+      <h1>{user !== undefined ? "Login Successful" : "Login Failed"}</h1>
     </Container>
   );
 };

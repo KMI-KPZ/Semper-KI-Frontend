@@ -1,4 +1,5 @@
-@import "../../../variables.scss";
+@use '../../../scss/index' as *;
+
 
 .account {
     overflow: scroll;

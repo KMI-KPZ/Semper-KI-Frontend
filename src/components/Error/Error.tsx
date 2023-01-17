@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import "../../variables.scss";
 import { useTranslation } from "react-i18next";
 
 interface Props {

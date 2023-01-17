@@ -10,15 +10,14 @@ import {
 import "./AuthorizedHome.scss";
 import Dashboard from "./Dashboard/Dashboard";
 import Orders from "./Orders/Orders";
-import { IAuthToken, IOrder, IProcess, IUser } from "../../interface/Interface";
+import { IOrder, IProcess, IUser } from "../../interface/Interface";
 import { TUserType } from "../../interface/types";
 import Account from "./Account/Account";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
 import { Error } from "../Error/Error";
 
 interface Props {
-  authToken: IAuthToken;
-  userType: TUserType;
+  user: IUser;
   processList: IProcess[];
   orderList: IOrder[];
   setProcessList(processList: IProcess[]): void;
@@ -27,8 +26,7 @@ interface Props {
 const AuthorizedHome = ({
   processList,
   orderList,
-  authToken,
-  userType,
+  user,
   setProcessList,
 }: Props) => {
   const navigate = useNavigate();
@@ -53,7 +51,7 @@ const AuthorizedHome = ({
           <Route path="proceedings" element={<Error text="proceedings" />} />
           <Route path="assignments" element={<Error text="assignments" />} />
           <Route path="messages" element={<Error text="messages" />} />
-          <Route path="account" element={<Account authToken={authToken} />} />
+          <Route path="account" element={<Account user={user} />} />
         </Routes>
       </section>
     </div>

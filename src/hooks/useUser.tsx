@@ -1,39 +1,55 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { IAuthToken, IUser } from "../interface/Interface";
+import { useNavigate } from "react-router-dom";
+import { IUser } from "../interface/Interface";
+import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
-  authToken: IAuthToken | undefined;
   user: IUser | undefined;
   loadUser(): void;
   logoutUser(): void;
+  deleteUser(): void;
 }
 
 const useUser = (): ReturnProps => {
-  const [authToken, setAuthToken] = useState<IAuthToken | undefined>();
+  const navigate = useNavigate();
+  const { axiosCustom } = useCustomAxios();
+  const [user, setUser] = useState<IUser | undefined>();
 
   const loadUser = () => {
-    axios
+    axiosCustom
       .get(`${process.env.REACT_APP_API_URL}/public/getUser/`)
       .then((response) => {
         console.log("getUser Data", response.data);
-        setAuthToken(response.data);
+        setUser(response.data);
       })
       .catch((error) => {
         console.log("getUser Error", error);
-        setAuthToken(undefined);
+        setUser(undefined);
+      });
+  };
+
+  const deleteUser = () => {
+    axiosCustom
+      .delete(`${process.env.REACT_APP_API_URL}/public/profileDeleteUser/`)
+      .then((response) => {
+        console.log("delete User", response.data);
+        navigate("/logout");
+      })
+      .catch((error) => {
+        console.log("delete User Error", error);
       });
   };
 
   const logoutUser = () => {
-    setAuthToken(undefined);
+    setUser(undefined);
   };
 
   return {
-    authToken,
-    user: authToken?.userinfo,
+    user: user,
     loadUser,
     logoutUser,
+    deleteUser,
   };
 };
 

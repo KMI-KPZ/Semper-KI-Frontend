@@ -23,6 +23,7 @@ import { Error } from "../Error/Error";
 import { IFilterItem } from "../Process/Filter/Interface";
 import Redirect from "../Redirect/Redirect";
 import Footer from "../Footer/Footer";
+import { URL_AboutUs } from "../../config/Constants";
 
 interface State {
   menuOpen: boolean;
@@ -45,7 +46,7 @@ function App() {
     chats: [],
   });
   const { loadCSRFToken } = useCRSFToken();
-  const { authToken, user, loadUser, logoutUser } = useUser();
+  const { user, loadUser, logoutUser } = useUser();
 
   const setMenuOpen = (menuOpen: boolean) => {
     setState((prevState) => ({ ...prevState, menuOpen }));
@@ -66,9 +67,9 @@ function App() {
   useEffect(() => {
     setState((prevState) => ({
       ...prevState,
-      isLoggedIn: authToken === undefined ? false : true,
+      isLoggedIn: user === undefined ? false : true,
     }));
-  }, [authToken]);
+  }, [user]);
 
   useEffect(() => {
     axios.defaults.headers.common = {
@@ -96,7 +97,7 @@ function App() {
   };
 
   const authorizedRoutes =
-    state.isLoggedIn && authToken !== undefined ? (
+    state.isLoggedIn && user !== undefined ? (
       <>
         <Route
           path="*"
@@ -105,8 +106,7 @@ function App() {
               orderList={state.orderList}
               processList={state.processList}
               setProcessList={setProcessList}
-              authToken={authToken}
-              userType={state.userType}
+              user={user}
             />
           }
         />
@@ -121,7 +121,7 @@ function App() {
 
   return (
     <div className="App" data-testid="app">
-      {authToken !== null && state.menuOpen ? (
+      {user !== null && state.menuOpen ? (
         <Navigation
           userType={state.userType}
           open={state.menuOpen}
@@ -132,7 +132,6 @@ function App() {
         <Header
           isMenuOpen={state.menuOpen}
           setMenuOpen={setMenuOpen}
-          // authToken={authToken}
           isLoggedIn={state.isLoggedIn}
           userType={state.userType}
           setUserType={setUserType}
@@ -163,11 +162,11 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route
           path="callback/login"
-          element={<LoginCallback login={login} authToken={authToken} />}
+          element={<LoginCallback login={login} user={user} />}
         />
         <Route
           path="aboutus"
-          element={<Redirect link="https://semper-ki.org/" extern />}
+          element={<Redirect link={URL_AboutUs} extern />}
         />
         <Route path="*" element={<Error />} />
       </Routes>

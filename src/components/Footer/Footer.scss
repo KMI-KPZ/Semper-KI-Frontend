@@ -1,13 +1,7 @@
-@import "./../../variables.scss";
+@use "./../../scss/index" as *;
 
 .footer {
-    // position: absolute;
-    // bottom: 0;
-    // left:0;
-    // right:0;
-
-
-    margin-top: 20px;
+    width: 100%;
     background-color: $white;
 }
 
@@ -24,6 +18,10 @@
 .footer-list-item {
     margin: 0;
     padding:20px;
+    a:hover{
+        color: $colorDark;
+    }
+
 }
 
 .footer-list-item-link {

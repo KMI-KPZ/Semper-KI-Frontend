@@ -5,20 +5,21 @@ interface Props {
   icon?: React.ReactNode;
   text: string;
   link: string;
-  closeMenus(): void;
-  toggleUserType?: () => void;
   className?: string;
   menuItem?: boolean;
+  extern?: boolean;
+  closeMenus(): void;
+  toggleUserType?: () => void;
 }
 
 const HeaderLink = ({
   icon,
   text,
   link,
+  menuItem,
+  extern,
   toggleUserType,
   closeMenus,
-  className,
-  menuItem,
 }: Props) => {
   const navigate = useNavigate();
 
@@ -27,10 +28,12 @@ const HeaderLink = ({
       | React.MouseEvent<HTMLAnchorElement, MouseEvent>
       | React.MouseEvent<HTMLLIElement, MouseEvent>
   ) => {
-    e.preventDefault();
-    if (toggleUserType !== undefined) toggleUserType();
-    closeMenus();
-    navigate(link);
+    if (extern === undefined) {
+      e.preventDefault();
+      if (toggleUserType !== undefined) toggleUserType();
+      closeMenus();
+      navigate(link);
+    }
   };
 
   return (
@@ -39,11 +42,7 @@ const HeaderLink = ({
       onClick={handleOnClick}
       title={text}
     >
-      <a
-        href={`${link}`}
-        className="nav-list-item-link"
-        onClick={handleOnClick}
-      >
+      <a href={link} className="nav-list-item-link" onClick={handleOnClick}>
         {icon}
         {text}
       </a>

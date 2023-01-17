@@ -1,7 +1,8 @@
-@import "../../variables";
+@use '../../scss/index' as *;
 
 .authorized-home {
     margin:20px;
+    width: 1600px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -14,7 +15,7 @@
         flex-direction: column;
         gap: $containerGap;
         width: 80%;
-        height: calc(100vh - $heightHeader - 2*20px);
+        // height: calc(100vh - $heightHeader - 2*20px);
         overflow-x: scroll;
         overflow-x: hidden;
         display: flex;

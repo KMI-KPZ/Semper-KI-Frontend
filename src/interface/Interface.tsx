@@ -1,9 +1,3 @@
-import {
-  IFilterAnswer,
-  IFilterItem,
-} from "../components/Process/Filter/Interface";
-import { TUserType } from "./types";
-
 export interface IProcessState {
   progressState: number;
   activeProcess: number;
@@ -99,29 +93,12 @@ export interface IOrder {
 }
 
 export interface IUser {
-  aud: string;
-  email: string;
-  email_verified: boolean;
-  exp: number;
-  iat: number;
-  iss: string;
   name: string;
-  nickname: string;
-  nonce: string;
-  picture: string;
-  sid: string;
-  sub: string;
-  updated_at: string;
-}
-
-export interface IAuthToken {
-  access_token: string;
-  expires_at: number;
-  expires_in: number;
-  id_token: string;
-  scope: string;
-  token_type: string;
-  userinfo: IUser;
+  email: string;
+  type: string;
+  created: string;
+  updated: string;
+  accessed: string;
 }
 
 export interface IChat {

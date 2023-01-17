@@ -13,9 +13,6 @@ junit.xml
 # production
 /build
 
-#deprecated
-/deprecated
-
 # .ignore
 .prettierignore
 .dockerignore

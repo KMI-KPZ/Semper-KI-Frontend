@@ -33,6 +33,8 @@ const AuthorizedHome = ({
   const { t } = useTranslation();
   const { pathname } = useLocation();
 
+  console.log("AuthorizedHome", user);
+
   return (
     <div className="authorized-home">
       <section className="authorized-home-container">

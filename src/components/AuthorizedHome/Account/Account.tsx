@@ -20,7 +20,7 @@ const Account: React.FC<Props> = ({ user }) => {
 
   return (
     <div className="account">
-      {/* <h1>Account</h1>
+      <h1>Account</h1>
       <span>name: {user.name}</span>
       <span>email: {user.email}</span>
       <span>type: {user.type}</span>
@@ -29,7 +29,7 @@ const Account: React.FC<Props> = ({ user }) => {
       <span>updated: {user.updated}</span>
       <Button variant="contained" onClick={handleOnClickButtonDelete}>
         Benutzer Löschen
-      </Button> */}
+      </Button>
     </div>
   );
 };

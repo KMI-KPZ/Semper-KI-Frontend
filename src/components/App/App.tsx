@@ -82,6 +82,7 @@ function App() {
     setTimeout(() => {
       loadUser();
     }, 100);
+    console.log("App", user);
   };
 
   const logout = () => {

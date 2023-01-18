@@ -12,8 +12,6 @@ interface Props {
 const Account: React.FC<Props> = ({ user }) => {
   const { deleteUser } = useUser();
 
-  console.log("Account", user);
-
   const handleOnClickButtonDelete = () => {
     deleteUser();
   };

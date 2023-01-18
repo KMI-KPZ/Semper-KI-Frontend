@@ -51,7 +51,7 @@ const useUser = (): ReturnProps => {
   };
 
   return {
-    user: user,
+    user,
     loadUser,
     logoutUser,
     deleteUser,

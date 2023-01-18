@@ -2,7 +2,6 @@ import { Button } from "@mui/material";
 import React from "react";
 import useUser from "../../../hooks/useUser";
 import { IUser } from "../../../interface/Interface";
-import { getCurrentTimeInSecons, getTimeAsText } from "../../../services/utils";
 
 import "./Account.scss";
 
@@ -10,13 +9,12 @@ interface Props {
   user: IUser;
 }
 
-const Account = ({ user }: Props) => {
+const Account: React.FC<Props> = ({ user }) => {
   const { deleteUser } = useUser();
 
-  const handleOnClickButtonDelete = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
+  console.log("Account", user);
+
+  const handleOnClickButtonDelete = () => {
     deleteUser();
   };
 

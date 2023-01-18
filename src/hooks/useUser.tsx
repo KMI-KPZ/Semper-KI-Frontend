@@ -20,8 +20,13 @@ const useUser = (): ReturnProps => {
     axiosCustom
       .get(`${process.env.REACT_APP_API_URL}/public/getUser/`)
       .then((response) => {
-        console.log("getUser Data", response.data);
-        setUser(response.data);
+        const userData = response.data;
+        console.log("getUser Data", userData);
+        setUser(
+          Object.keys(userData).length === 0 && userData.constructor === Object
+            ? undefined
+            : userData
+        );
       })
       .catch((error) => {
         console.log("getUser Error", error);

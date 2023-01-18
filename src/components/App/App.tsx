@@ -12,7 +12,6 @@ import { TestOrderList, TestProcessList } from "../../services/TestData";
 import useUser from "../../hooks/useUser";
 import AuthorizedHome from "../AuthorizedHome/AuthorizedHome";
 import { Home } from "../Home/Home";
-import Navigation from "../Navigation/Navigation";
 import { ProcessView } from "../Process/ProcessView";
 import Guide from "../Guide/Guide";
 import Logout from "../Logout/Logout";
@@ -26,7 +25,6 @@ import Footer from "../Footer/Footer";
 import { URL_AboutUs } from "../../config/Constants";
 
 interface State {
-  menuOpen: boolean;
   isLoggedIn: boolean;
   userType: TUserType;
   processList: IProcess[];
@@ -37,7 +35,6 @@ interface State {
 
 function App() {
   const [state, setState] = useState<State>({
-    menuOpen: false,
     isLoggedIn: false,
     userType: "client",
     processList: TestProcessList,
@@ -47,10 +44,6 @@ function App() {
   });
   const { loadCSRFToken } = useCRSFToken();
   const { user, loadUser, logoutUser } = useUser();
-
-  const setMenuOpen = (menuOpen: boolean) => {
-    setState((prevState) => ({ ...prevState, menuOpen }));
-  };
 
   const setUserType = (userType: TUserType): void => {
     setState((prevState) => ({ ...prevState, userType }));
@@ -121,21 +114,8 @@ function App() {
 
   return (
     <div className="App" data-testid="app">
-      {user !== null && state.menuOpen ? (
-        <Navigation
-          userType={state.userType}
-          open={state.menuOpen}
-          setMenuOpen={setMenuOpen}
-        />
-      ) : null}
       <div className="main-header">
-        <Header
-          isMenuOpen={state.menuOpen}
-          setMenuOpen={setMenuOpen}
-          isLoggedIn={state.isLoggedIn}
-          userType={state.userType}
-          setUserType={setUserType}
-        />
+        <Header isLoggedIn={state.isLoggedIn} userType={state.userType} />
       </div>
       <Routes data-testid="routes">
         {unAuthorizedRoutes}

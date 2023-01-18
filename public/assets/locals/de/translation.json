@@ -24,8 +24,8 @@
     "messages":"Nachrichten"
   },
   "error": {
-    "text":"Ups etwas ist schief gelaufen...",
-    "button":"Startseite"
+    "text":"404 Seite nicht gefunden oder etwas ist schiefgelaufen",
+    "button":"Zurück zur Startseite"
   },
   "wizard": {
     "model": "Modell",

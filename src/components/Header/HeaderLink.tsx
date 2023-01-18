@@ -5,11 +5,9 @@ interface Props {
   icon?: React.ReactNode;
   text: string;
   link: string;
-  className?: string;
   menuItem?: boolean;
   extern?: boolean;
   closeMenus(): void;
-  toggleUserType?: () => void;
 }
 
 const HeaderLink = ({
@@ -18,7 +16,6 @@ const HeaderLink = ({
   link,
   menuItem,
   extern,
-  toggleUserType,
   closeMenus,
 }: Props) => {
   const navigate = useNavigate();
@@ -30,7 +27,6 @@ const HeaderLink = ({
   ) => {
     if (extern === undefined) {
       e.preventDefault();
-      if (toggleUserType !== undefined) toggleUserType();
       closeMenus();
       navigate(link);
     }

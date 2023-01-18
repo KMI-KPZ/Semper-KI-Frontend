@@ -17,14 +17,19 @@
   text-decoration: none;
   gap:5px;
   border-radius: 5px;
+  padding: 0 10px;
   &:hover {
     cursor: pointer;
+    background-color: #ebebeb;;
   }
 }
 
 .kiss-logo-img {
-  font-size: $heightHeader - 15px;
-  max-height: $heightHeader - 10px;
+  max-height: $heightHeader - 18px;
+}
+
+.kiss-logo-name {
+  font-size: 0.9em;
 }
 
 .nav-list {
@@ -65,8 +70,6 @@
   flex-direction: column;
   align-items: center;
 }
-.language-menu-button {
-}
 
 .language-menu-dropdown {
   display: flex;
@@ -87,8 +90,6 @@
   align-items: center;
 }
 
-.menu-button {
-}
 
 .menu-blank {
   background-color: rgba(0, 0, 0, 0.5);

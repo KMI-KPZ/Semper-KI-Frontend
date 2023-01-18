@@ -46,12 +46,8 @@ const languages: Language[] = [
 ];
 
 interface Props {
-  // authToken: IAuthToken | null;
   isLoggedIn: boolean;
   userType: TUserType;
-  setUserType: (userType: TUserType) => void;
-  setMenuOpen(menuOpen: boolean): void;
-  isMenuOpen: boolean;
 }
 
 interface State {
@@ -59,13 +55,7 @@ interface State {
   menu: boolean;
 }
 
-export const Header = ({
-  isLoggedIn,
-  userType,
-  setUserType,
-  setMenuOpen,
-  isMenuOpen,
-}: Props) => {
+export const Header = ({ isLoggedIn, userType }: Props) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [state, setState] = useState<State>({
@@ -235,9 +225,9 @@ export const Header = ({
           }}
         >
           <img
-            data-testid="logo"
             className="kiss-logo-img"
-            src={require("../../assets/images/KISS_logo_transparent.png")}
+            data-testid="logo"
+            src={require("../../assets/images/logo192.png")}
             alt="Kiss Logo"
           />
           <div className="kiss-logo-name" data-testid="logoName">
@@ -253,7 +243,7 @@ export const Header = ({
               <div className="language-menu">
                 <div
                   data-testid="languageMenu"
-                  className={`fi fi-${getFlagButtonClassName()} language-menu-button`}
+                  className={`fi fi-${getFlagButtonClassName()}`}
                   onClick={openLanguageMenu}
                 />
                 {state.languageMenu === true ? (
@@ -276,10 +266,8 @@ export const Header = ({
               </div>
             </ClickAwayListener>
           </li>
-          <li className="nav-list-item">
-            <div className="menu-button" onClick={openMenu}>
-              <MenuIcon />
-            </div>
+          <li className="nav-list-item" onClick={openMenu}>
+            <MenuIcon />
           </li>
         </ul>
       </nav>

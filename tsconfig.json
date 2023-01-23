@@ -14,7 +14,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "@icons/*": ["assets/images/icons/*"],
+      "@images/*": ["assets/images/*"],
+      "@scss/*": ["scss/*"],
+      "@config/*": ["config/*"],
+  },
   },
   "include": ["src"]
 }

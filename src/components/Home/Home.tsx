@@ -1,30 +1,22 @@
-import React, { useRef } from "react";
+import React, { ReactNode, useRef } from "react";
 
 import "./Home.scss";
-import { UploadFile } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Fab } from "@mui/material";
 import { HomeCard } from "./HomeCard";
 import { TUserType } from "../../interface/types";
+import FactoryIcon from "@mui/icons-material/Factory";
 
-const ModelIcon: React.ReactNode = (
-  <img
-    style={{ width: "5em", height: "5em" }}
-    // className="kiss_logo"
-    src={require("../../assets/images/3d_model.svg").default}
-    alt=""
-  />
-);
-
-const PrintIcon: React.ReactNode = (
-  <img
-    style={{ width: "5em", height: "5em" }}
-    // className="kiss_logo"
-    src={require("../../assets/images/3d_print.svg").default}
-    alt=""
-  />
-);
+const Icon3DPrinter =
+  require("../../assets/images/icons/3dPrinter.svg").default;
+const IconModel = require("../../assets/images/icons/Model.svg").default;
+const IconSearchModel =
+  require("../../assets/images/icons/SearchModel.svg").default;
+const IconSearchPerson =
+  require("../../assets/images/icons/SearchPerson.svg").default;
+const IconFactory = require("../../assets/images/icons/Factory.svg").default;
+const IconSupplyChain =
+  require("../../assets/images/icons/SupplyChain.svg").default;
 
 interface Props {
   userType: TUserType;
@@ -40,30 +32,51 @@ export const Home = ({ userType }: Props) => {
     <div className="home" data-testid="home">
       <h1 className="home-headline">{t("home.headline")}</h1>
       <div className="home-box">
-        <div className="home-container">
-          <h2>Als Kunden</h2>
-          <hr className="home-hr" />
-          <HomeCard
-            link="/guide/client-print"
-            text="Bestellung mit Guide starten"
-          />
+        <div className="home-card-box">
+          <h2 className="home-card-box-header">Angebot</h2>
+          <div className="home-card-box-row">
+            <HomeCard
+              link="/process/models"
+              text="Herstellen lassen"
+              icon={Icon3DPrinter}
+            />
+            <HomeCard
+              link="/process/models"
+              text="Modell finden"
+              icon={IconSearchModel}
+            />
+          </div>
+          <div className="home-card-box-row">
+            <HomeCard
+              link="/process/models"
+              text="Hersteller finden"
+              icon={IconSearchPerson}
+            />
+            <HomeCard
+              link="/process/models"
+              text="Entwerfen lassen"
+              icon={IconModel}
+            />
+          </div>
+        </div>
+        <div className="home-card-box">
+          <h2 className="home-card-box-header">Service Anbieten</h2>
+          <div className="home-card-box-row">
+            <HomeCard
+              link="/process/models"
+              text="Produzieren"
+              icon={IconFactory}
+            />
+            <HomeCard
+              link="/process/models"
+              text="Entwerfen"
+              icon={IconModel}
+            />
+          </div>
           <HomeCard
             link="/process/models"
-            text="Bestellung ohne guide starten"
-          />
-          <HomeCard
-            link="/guide/client-design"
-            text="Modell entwickeln lassen"
-          />
-        </div>
-        <div className="home-container">
-          <h2>Als Anbieter</h2>
-          <hr className="home-hr" />
-          <HomeCard link="/guide/contractor-print" text="Modelle produzieren" />
-          <HomeCard link="/guide/contractor-design" text="Modelle entwickeln" />
-          <HomeCard
-            link="/guide/contractor-service"
-            text="andere Services anbieten"
+            text="Gesamtprozess begleiten"
+            icon={IconSupplyChain}
           />
         </div>
       </div>

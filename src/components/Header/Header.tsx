@@ -109,6 +109,7 @@ export const Header = ({ isLoggedIn, userType }: Props) => {
             headerItem.show === false && headerItem.userType.includes(userType)
         ).map((headerItem: IHeaderItem, index: number) => (
           <HeaderItem
+            isMenuItem
             key={index}
             closeMenus={closeMenus}
             headeritem={headerItem}

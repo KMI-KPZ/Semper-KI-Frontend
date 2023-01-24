@@ -61,6 +61,7 @@ function App() {
     setState((prevState) => ({
       ...prevState,
       isLoggedIn: user === undefined ? false : true,
+      userType: user === undefined ? 0 : 1,
     }));
   }, [user]);
 

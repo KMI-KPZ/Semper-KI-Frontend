@@ -4,11 +4,12 @@ import { getIconByName } from "../../config/Icons";
 import { IHeaderItem } from "../../interface/Interface";
 
 interface Props {
+  isMenuItem?: boolean;
   headeritem: IHeaderItem;
   closeMenus(): void;
 }
 
-const HeaderItem = ({ headeritem, closeMenus }: Props) => {
+const HeaderItem = ({ headeritem, closeMenus, isMenuItem }: Props) => {
   const navigate = useNavigate();
 
   const handleOnClick = (
@@ -25,7 +26,7 @@ const HeaderItem = ({ headeritem, closeMenus }: Props) => {
 
   return (
     <li
-      className={`nav-list-item menu-item`}
+      className={`nav-list-item ${isMenuItem === undefined ? "" : "menu-item"}`}
       onClick={handleOnClick}
       title={headeritem.title}
     >

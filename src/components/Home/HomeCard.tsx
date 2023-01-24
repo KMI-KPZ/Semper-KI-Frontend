@@ -1,24 +1,30 @@
-import React, { ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 
 interface Props {
-  link: string;
+  linkGuided: string;
+  linkUnGuided: string;
   text: string;
   icon: string;
+  openMenu(text: string, linkGuided: string, linkUnGuided: string): void;
 }
 
-export const HomeCard = ({ link, text, icon }: Props) => {
-  const navigate = useNavigate();
-
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+export const HomeCard = ({
+  linkGuided,
+  linkUnGuided,
+  text,
+  icon,
+  openMenu,
+}: Props) => {
+  const handleClickCard = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
-    navigate(link);
+    e.stopPropagation();
+    openMenu(text, linkGuided, linkUnGuided);
   };
 
   return (
-    <a title={text} className="home-card" href={link} onClick={handleClick}>
+    <div title={text} className="home-card" onClick={handleClickCard}>
       <img src={icon} />
       {text}
-    </a>
+    </div>
   );
 };

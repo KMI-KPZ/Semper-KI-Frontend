@@ -1,25 +1,29 @@
-import React, { ReactNode, useRef } from "react";
+import React, { ReactNode, useRef, useState } from "react";
 
 import "./Home.scss";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { HomeCard } from "./HomeCard";
-import { TUserType } from "../../interface/types";
-import FactoryIcon from "@mui/icons-material/Factory";
-
-const Icon3DPrinter =
-  require("../../assets/images/icons/3dPrinter.svg").default;
-const IconModel = require("../../assets/images/icons/Model.svg").default;
-const IconSearchModel =
-  require("../../assets/images/icons/SearchModel.svg").default;
-const IconSearchPerson =
-  require("../../assets/images/icons/SearchPerson.svg").default;
-const IconFactory = require("../../assets/images/icons/Factory.svg").default;
-const IconSupplyChain =
-  require("../../assets/images/icons/SupplyChain.svg").default;
+import HomePopup from "./HomePopup";
+import {
+  Icon3DPrinter,
+  IconFactory,
+  IconModel,
+  IconSearchModel,
+  IconSearchPerson,
+  IconSupplyChain,
+} from "../../config/Icons";
+import { EUserType } from "../../interface/enums";
 
 interface Props {
-  userType: TUserType;
+  userType: EUserType;
+}
+
+interface State {
+  isOpen: boolean;
+  text: string;
+  linkGuided: string;
+  linkUnGuided: string;
 }
 
 export const Home = ({ userType }: Props) => {
@@ -27,6 +31,34 @@ export const Home = ({ userType }: Props) => {
   const searchCard = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [state, setState] = useState<State>({
+    isOpen: false,
+    text: "",
+    linkGuided: "",
+    linkUnGuided: "",
+  });
+
+  const closeMenu = () => {
+    setState((prevState) => ({
+      ...prevState,
+      isOpen: false,
+      text: "",
+      linkGuided: "",
+      linkUnGuided: "",
+    }));
+  };
+
+  const openMenu = (text: string, linkGuided: string, linkUnGuided: string) => {
+    console.log();
+
+    setState((prevState) => ({
+      ...prevState,
+      isOpen: true,
+      text,
+      linkGuided,
+      linkUnGuided,
+    }));
+  };
 
   return (
     <div className="home" data-testid="home">
@@ -36,26 +68,34 @@ export const Home = ({ userType }: Props) => {
           <h2 className="home-card-box-header">Angebot</h2>
           <div className="home-card-box-row">
             <HomeCard
-              link="/process/models"
+              linkGuided="/guide/have-it-made"
+              linkUnGuided="/process/upload"
               text="Herstellen lassen"
               icon={Icon3DPrinter}
+              openMenu={openMenu}
             />
             <HomeCard
-              link="/process/models"
+              linkGuided="/guide/find-model"
+              linkUnGuided="/process/models"
               text="Modell finden"
               icon={IconSearchModel}
+              openMenu={openMenu}
             />
           </div>
           <div className="home-card-box-row">
             <HomeCard
-              link="/process/models"
+              linkGuided="/guide/finde-manufacturer"
+              linkUnGuided="/process/manufacturer"
               text="Hersteller finden"
               icon={IconSearchPerson}
+              openMenu={openMenu}
             />
             <HomeCard
-              link="/process/models"
+              linkGuided="/guide/let-design"
+              linkUnGuided="/service/let-design"
               text="Entwerfen lassen"
               icon={IconModel}
+              openMenu={openMenu}
             />
           </div>
         </div>
@@ -63,23 +103,37 @@ export const Home = ({ userType }: Props) => {
           <h2 className="home-card-box-header">Service Anbieten</h2>
           <div className="home-card-box-row">
             <HomeCard
-              link="/process/models"
+              linkGuided="/guide/produce"
+              linkUnGuided="/service/produce"
               text="Produzieren"
               icon={IconFactory}
+              openMenu={openMenu}
             />
             <HomeCard
-              link="/process/models"
+              linkGuided="/guide/design"
+              linkUnGuided="/service/design"
               text="Entwerfen"
               icon={IconModel}
+              openMenu={openMenu}
             />
           </div>
           <HomeCard
-            link="/process/models"
+            linkGuided="/guide/accompany"
+            linkUnGuided="/service/accompany"
             text="Gesamtprozess begleiten"
             icon={IconSupplyChain}
+            openMenu={openMenu}
           />
         </div>
       </div>
+      {state.isOpen === true ? (
+        <HomePopup
+          closeMenu={closeMenu}
+          text={state.text}
+          linkGuided={state.linkGuided}
+          linkUnGuided={state.linkUnGuided}
+        />
+      ) : null}
     </div>
   );
 };

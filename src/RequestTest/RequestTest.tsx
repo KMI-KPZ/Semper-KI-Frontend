@@ -35,7 +35,7 @@ export const RequestTest = () => {
     data: "",
     port: "8000",
     url: "http://127.0.0.1:",
-    postFix: "/test_csrf/",
+    postFix: "/test/",
     error: null,
     loading: null,
   });

@@ -4,7 +4,6 @@ import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
 import "./App.scss";
 import "./../../styles.scss";
-import { TUserType } from "../../interface/types";
 import useCRSFToken from "../../hooks/useCSRFToken";
 import axios from "axios";
 import { IChat, IOrder, IProcess } from "../../interface/Interface";
@@ -23,10 +22,11 @@ import { IFilterItem } from "../Process/Filter/Interface";
 import Redirect from "../Redirect/Redirect";
 import Footer from "../Footer/Footer";
 import { URL_AboutUs } from "../../config/Constants";
+import { EUserType } from "../../interface/enums";
 
 interface State {
   isLoggedIn: boolean;
-  userType: TUserType;
+  userType: EUserType;
   processList: IProcess[];
   orderList: IOrder[];
   guideFilter: IFilterItem[];
@@ -36,7 +36,7 @@ interface State {
 function App() {
   const [state, setState] = useState<State>({
     isLoggedIn: false,
-    userType: "client",
+    userType: 0,
     processList: TestProcessList,
     orderList: TestOrderList,
     guideFilter: [],
@@ -45,7 +45,7 @@ function App() {
   const { loadCSRFToken } = useCRSFToken();
   const { user, loadUser, logoutUser } = useUser();
 
-  const setUserType = (userType: TUserType): void => {
+  const setUserType = (userType: EUserType): void => {
     setState((prevState) => ({ ...prevState, userType }));
   };
 

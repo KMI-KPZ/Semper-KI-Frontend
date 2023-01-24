@@ -1,0 +1,155 @@
+[
+    {
+        "title": "Über uns",
+        "i18n":"about-us",
+        "link": "https://semper-ki.org/",
+        "icon": "IconLogo",
+        "extern": true,
+        "show":true,
+        "userType": [0]
+    },
+    {
+        "title": "Anmelden",
+        "i18n":"login",
+        "link": "/login",
+        "icon": "IconPerson",
+        "extern": false,
+        "show":true,
+        "userType": [0]
+    },
+    {
+        "title": "Neue Bestellung",
+        "i18n":"new-process",
+        "link": "/process/new",
+        "icon": "IconNewDocument",
+        "extern": false,
+        "show":true,
+        "userType": [1]
+    },
+    {
+        "title": "Warenkorb",
+        "i18n":"cart",
+        "link": "/shoppingcart",
+        "icon": "IconCart",
+        "extern": false,
+        "show":true,
+        "userType": [1]
+    },
+    {
+        "title": "Abmelden",
+        "i18n":"logout",
+        "link": "/logout",
+        "icon": "IconLogout",
+        "extern": false,
+        "show":true,
+        "userType": [1,2,3]
+    },
+    {
+        "title": "Herstellen lassen",
+        "i18n":"have-it-made",
+        "link": "/process/new",
+        "icon": "Icon3DPrinter",
+        "extern": false,
+        "show":false,
+        "userType": [0,1]
+    },
+    {
+        "title": "Model finden",
+        "i18n":"find-model",
+        "link": "/process/models",
+        "icon": "IconSearchModel",
+        "extern": false,
+        "show":false,
+        "userType": [0,1]
+    },
+    {
+        "title": "Hersteller finden",
+        "i18n":"find-manufacturer",
+        "link": "/process/manufacturer",
+        "icon": "IconSearchPerson",
+        "extern": false,
+        "show":false,
+        "userType": [0,1]
+    },
+    {
+        "title": "Entwerfen lassen",
+        "i18n":"let-design",
+        "link": "/service/let-design",
+        "icon": "IconModel",
+        "extern": false,
+        "show":false,
+        "userType": [0,1]
+    },
+    {
+        "title": "Produzieren",
+        "i18n":"produce",
+        "link": "/service/produce",
+        "icon": "IconFactory",
+        "extern": false,
+        "show":false,
+        "userType": [0,2]
+    },
+    {
+        "title": "Entwerfen",
+        "i18n":"design",
+        "link": "/service/design",
+        "icon": "IconModel",
+        "extern": false,
+        "show":false,
+        "userType": [0,2]
+    },
+    {
+        "title": "Gesamtprozess begleiten",
+        "i18n":"accompany",
+        "link": "/service/accompany",
+        "icon": "IconSupplyChain",
+        "extern": false,
+        "show":false,
+        "userType": [0,2]
+    },
+    {
+        "title": "Bestellungen",
+        "i18n":"orders",
+        "link": "/orders",
+        "icon": "IconDocument",
+        "extern": false,
+        "show":false,
+        "userType": [1]
+    },
+    {
+        "title": "Aufträge",
+        "i18n":"contracts",
+        "link": "/contracts",
+        "icon": "IconDocument",
+        "extern": false,
+        "show":false,
+        "userType": [2]
+    },
+    {
+        "title": "Nachrichten",
+        "i18n":"messages",
+        "link": "/messages",
+        "icon": "IconMail",
+        "extern": false,
+        "show":false,
+        "userType": [1,2,3]
+    },
+    {
+        "title": "Account",
+        "i18n":"account",
+        "link": "/account",
+        "icon": "IconPerson",
+        "extern": false,
+        "show":false,
+        "userType": [1,2,3]
+    },
+    {
+        "title": "Test",
+        "i18n":"test",
+        "link": "/test",
+        "icon": "IconBug",
+        "extern": false,
+        "show":false,
+        "userType": [0,1,2,3]
+    }
+]

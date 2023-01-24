@@ -23,7 +23,7 @@ jest.mock("react-i18next", () => ({
 }));
 
 beforeEach(() => {
-  render(<Home userType="client" />);
+  render(<Home userType={0} />);
 });
 
 describe(Home, () => {

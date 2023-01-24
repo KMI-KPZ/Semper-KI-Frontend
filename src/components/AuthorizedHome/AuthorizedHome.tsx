@@ -11,7 +11,6 @@ import "./AuthorizedHome.scss";
 import Dashboard from "./Dashboard/Dashboard";
 import Orders from "./Orders/Orders";
 import { IOrder, IProcess, IUser } from "../../interface/Interface";
-import { TUserType } from "../../interface/types";
 import Account from "./Account/Account";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
 import { Error } from "../Error/Error";

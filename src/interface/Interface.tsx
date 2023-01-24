@@ -1,3 +1,5 @@
+import { EUserType } from "./enums";
+
 export interface IProcessState {
   progressState: number;
   activeProcess: number;
@@ -111,4 +113,14 @@ export interface IMessage {
   userId: number;
   text: string;
   date: number;
+}
+
+export interface IHeaderItem {
+  title: string;
+  i18n: string;
+  link: string;
+  icon: string;
+  extern: boolean;
+  show: boolean;
+  userType: EUserType[];
 }

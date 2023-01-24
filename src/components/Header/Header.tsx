@@ -1,30 +1,15 @@
 import React, { useState } from "react";
 import "./Header.scss";
-import PersonIcon from "@mui/icons-material/Person";
-import FactoryOutlinedIcon from "@mui/icons-material/FactoryOutlined";
-import LogoutIcon from "@mui/icons-material/Logout";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import NoteAddOutlinedIcon from "@mui/icons-material/NoteAddOutlined";
-import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
-import BugReportIcon from "@mui/icons-material/BugReport";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ClickAwayListener, IconButton } from "@mui/material";
-import { TUserType } from "../../interface/types";
-import HeaderLink from "./HeaderLink";
-import ListAltIcon from "@mui/icons-material/ListAlt";
+import { ClickAwayListener } from "@mui/material";
+import { IHeaderItem } from "../../interface/Interface";
+import HeaderItem from "./HeaderItem";
 
-const kissLogo: React.ReactNode = (
-  <img
-    style={{ width: "1em", height: "1em" }}
-    className="kiss_logo"
-    src={require("../../assets/images/kiss_logo.svg").default}
-    alt=""
-  />
-);
+import _HeaderItems from "./HeaderItems.json";
+import { EUserType } from "../../interface/enums";
+const HeaderItems = _HeaderItems as IHeaderItem[];
 
 interface Language {
   code: string;
@@ -47,7 +32,7 @@ const languages: Language[] = [
 
 interface Props {
   isLoggedIn: boolean;
-  userType: TUserType;
+  userType: EUserType;
 }
 
 interface State {
@@ -99,115 +84,36 @@ export const Header = ({ isLoggedIn, userType }: Props) => {
     return returnString;
   };
 
-  const getLinksHeader = (): JSX.Element => {
-    return isLoggedIn === false ? (
+  const getHeaderItems = (): JSX.Element => {
+    return (
       <>
-        <HeaderLink
-          text={t("header.about-us")}
-          icon={kissLogo}
-          link="https://semper-ki.org/"
-          closeMenus={closeMenus}
-          extern
-        />
-        <HeaderLink
-          text={t("header.login")}
-          icon={<PersonIcon />}
-          link="/login"
-          closeMenus={closeMenus}
-        />
-      </>
-    ) : (
-      <>
-        <HeaderLink
-          text={t("header.newOrder")}
-          icon={<NoteAddOutlinedIcon />}
-          link="/process/new"
-          closeMenus={closeMenus}
-        />
-        <HeaderLink
-          text={t("header.shoppingcart")}
-          icon={<ShoppingCartOutlinedIcon />}
-          link="/shoppingcart"
-          closeMenus={closeMenus}
-        />
-        <HeaderLink
-          text={t("header.logout")}
-          icon={<LogoutIcon />}
-          link="/logout"
-          closeMenus={closeMenus}
-        />
+        {HeaderItems.filter(
+          (headerItem: IHeaderItem) =>
+            headerItem.show === true && headerItem.userType.includes(userType)
+        ).map((headerItem: IHeaderItem, index: number) => (
+          <HeaderItem
+            key={index}
+            closeMenus={closeMenus}
+            headeritem={headerItem}
+          />
+        ))}
       </>
     );
   };
 
-  const getLinksMenu = (): JSX.Element => {
-    const unauthorizedLinks = <></>;
-    const authorizedClientLinks = (
-      <>
-        <HeaderLink
-          text={t("header.newOrder")}
-          icon={<NoteAddOutlinedIcon />}
-          link="/process/new"
-          closeMenus={closeMenus}
-          menuItem
-        />
-        <HeaderLink
-          text={t("header.shoppingcart")}
-          icon={<ShoppingCartOutlinedIcon />}
-          link="/shoppingcart"
-          closeMenus={closeMenus}
-          menuItem
-        />
-        <HeaderLink
-          text={"Bestellungen"}
-          icon={<ListAltIcon />}
-          link="/orders"
-          closeMenus={closeMenus}
-          menuItem
-        />
-      </>
-    );
-    const authorizedContractorLinks = (
-      <>
-        <HeaderLink
-          text={t("header.contracts")}
-          icon={<DescriptionOutlinedIcon />}
-          link="/contracts"
-          closeMenus={closeMenus}
-          menuItem
-        />
-      </>
-    );
-    const authorizedLinks = (
-      <>
-        <HeaderLink
-          text={t("header.messages")}
-          icon={<EmailOutlinedIcon />}
-          link="/messages"
-          closeMenus={closeMenus}
-          menuItem
-        />
-        <HeaderLink
-          text={t("header.account")}
-          icon={<PersonIcon />}
-          link="/account"
-          closeMenus={closeMenus}
-          menuItem
-        />
-      </>
-    );
+  const getMenuItems = (): JSX.Element => {
     return (
       <>
-        {isLoggedIn === false ? (
-          <>{unauthorizedLinks}</>
-        ) : (
-          <>
-            {userType === "client"
-              ? authorizedClientLinks
-              : authorizedContractorLinks}
-            {authorizedLinks}
-          </>
-        )}
+        {HeaderItems.filter(
+          (headerItem: IHeaderItem) =>
+            headerItem.show === false && headerItem.userType.includes(userType)
+        ).map((headerItem: IHeaderItem, index: number) => (
+          <HeaderItem
+            key={index}
+            closeMenus={closeMenus}
+            headeritem={headerItem}
+          />
+        ))}
       </>
     );
   };
@@ -237,7 +143,7 @@ export const Header = ({ isLoggedIn, userType }: Props) => {
       </nav>
       <nav className="nav" data-testid="mainNav">
         <ul className="nav-list">
-          {getLinksHeader()}
+          {getHeaderItems()}
           <li className="nav-list-item">
             <ClickAwayListener onClickAway={closeLanguageMenu}>
               <div className="language-menu">
@@ -274,16 +180,7 @@ export const Header = ({ isLoggedIn, userType }: Props) => {
       {state.menu === true ? (
         <>
           <div className="menu-blank" onClick={closeMenu} />
-          <div className="menu-dropdown">
-            {getLinksMenu()}
-            <HeaderLink
-              text={"test"}
-              icon={<BugReportIcon />}
-              link="/test"
-              closeMenus={closeMenus}
-              menuItem
-            />
-          </div>
+          <div className="menu-dropdown">{getMenuItems()}</div>
         </>
       ) : null}
     </header>

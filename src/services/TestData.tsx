@@ -15,19 +15,16 @@ export const TestOrderList: IOrder[] = [
     bill: undefined,
     processList: [
       {
-        processId: 0,
         model: { file: new File([], "t4est.stl") },
         material: { name: "Material 1" },
         manufacturer: { name: "Hersteller 1" },
       },
       {
-        processId: 1,
         model: { file: new File([], "tes2345t.stl") },
         material: { name: "Material 1324" },
         manufacturer: { name: "Hersteller 41" },
       },
       {
-        processId: 2,
         model: { file: new File([], "tes33t.stl") },
         material: { name: "Material 14" },
         manufacturer: { name: "Hersteller 123" },
@@ -41,7 +38,6 @@ export const TestOrderList: IOrder[] = [
     bill: undefined,
     processList: [
       {
-        processId: 0,
         model: { file: new File([], "test.stl") },
         material: { name: "Material 1" },
         manufacturer: { name: "Hersteller 1" },
@@ -55,7 +51,6 @@ export const TestOrderList: IOrder[] = [
     bill: new File([], "Rechnung.pdf"),
     processList: [
       {
-        processId: 0,
         model: { file: new File([], "test.stl") },
         material: { name: "Material 1" },
         manufacturer: { name: "Hersteller 1" },
@@ -265,19 +260,16 @@ export const TestManufacturerList: IManufacturer[] = [
 
 export const TestProcessList: IProcess[] = [
   {
-    processId: 0,
     model: { file: new File([], "test0.stl") },
     material: { name: "Material 0" },
     manufacturer: { name: "Hersteller 0" },
   },
   {
-    processId: 1,
     model: { file: new File([], "test1.stl") },
     material: { name: "Material 1" },
     manufacturer: { name: "Hersteller 1" },
   },
   {
-    processId: 2,
     model: { file: new File([], "test2.stl") },
     material: { name: "Material 2" },
     manufacturer: { name: "Hersteller 2" },

@@ -11,7 +11,6 @@ import Loading from "../../../components/Process/Loading/Loading";
 interface Props {
   models: IModel[];
   selectModel(model: IModel): void;
-  setProgressState: (progressStateIndex: number) => void;
 }
 
 interface State {
@@ -19,11 +18,7 @@ interface State {
   grid: boolean;
 }
 
-export const ModelCatalog: React.FC<Props> = ({
-  models,
-  selectModel,
-  setProgressState,
-}) => {
+export const ModelCatalog: React.FC<Props> = ({ models, selectModel }) => {
   const { t } = useTranslation();
   // const { data, isLoading, error } = useFetch<IModel>({
   //   url: "http://127.0.0.1:3030/modelList",
@@ -31,18 +26,8 @@ export const ModelCatalog: React.FC<Props> = ({
 
   const [state, setState] = useState<State>({ filter: "", grid: true });
 
-  const handleClickGrid = (grid: boolean) => {
-    setState((prevState) => ({ ...prevState, grid: grid }));
-  };
-
   return (
     <div className="process-container vertical">
-      <Search
-        grid={state.grid}
-        handleClickGrid={handleClickGrid}
-        headline={t("model.catalog.headline")}
-        placeholder={t("model.catalog.search-placeholder")}
-      />
       <div className="model-cards">
         {/* <Loading
           isLoading={isLoading}
@@ -74,7 +59,6 @@ export const ModelCatalog: React.FC<Props> = ({
             {models.map((model: IModel, index: number) => (
               <ModelCatalogCard
                 grid={state.grid}
-                setProgressState={setProgressState}
                 selectModel={selectModel}
                 model={model}
                 key={index}

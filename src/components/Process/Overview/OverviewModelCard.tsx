@@ -18,10 +18,7 @@ export const OverviewModelCard = ({ process, expanded, onClick }: Props) => {
 
   const getModelCardExpanded = (): JSX.Element => {
     return (
-      <div
-        className="overview-model-card expanded"
-        onClick={(e) => onClick(e, process.processId)}
-      >
+      <div className="overview-model-card expanded">
         <img
           className="model-card-img"
           src={require("../../../assets/images/model_placeholder.png")}
@@ -36,10 +33,7 @@ export const OverviewModelCard = ({ process, expanded, onClick }: Props) => {
 
   const getModelCardSmall = (): JSX.Element => {
     return (
-      <div
-        className="overview-model-card small"
-        onClick={(e) => onClick(e, process.processId)}
-      >
+      <div className="overview-model-card small">
         <img
           className="model-card-img"
           src={require("../../../assets/images/model_placeholder.png")}

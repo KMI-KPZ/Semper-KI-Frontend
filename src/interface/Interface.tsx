@@ -1,15 +1,7 @@
 import { EUserType } from "./enums";
 
-export interface IProcessState {
-  progressState: number;
-  activeProcess: number;
-  activeProcessList: number[];
-  processList: IProcess[];
-  nextID: number;
-}
-
 export interface IProcess {
-  processId: number;
+  title?: string;
   model?: IModel;
   material?: IMaterial;
   manufacturer?: IManufacturer;

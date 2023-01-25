@@ -2,20 +2,15 @@ import "../ProcessView.scss";
 import "./Additive.scss";
 import React, { useRef } from "react";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
-import { IAdditive, IProcessState } from "../../../interface/Interface";
+import { IAdditive, IProcess } from "../../../interface/Interface";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  state: IProcessState;
-  setProgressState: (progressStateIndex: number) => void;
+  processList: IProcess[];
   selectAdditive: (additive: IAdditive) => void;
 }
 
-export const AdditiveView = ({
-  selectAdditive,
-  setProgressState,
-  state,
-}: Props) => {
+export const AdditiveView = ({ selectAdditive, processList }: Props) => {
   const { t } = useTranslation();
   const refUpload = useRef<HTMLInputElement>(null);
 
@@ -28,9 +23,7 @@ export const AdditiveView = ({
     }
   };
 
-  const handleClickNext = () => {
-    setProgressState(5);
-  };
+  const handleClickNext = () => {};
 
   return (
     <div className="process-content-container">

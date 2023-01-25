@@ -5,13 +5,11 @@ import "../../styles.scss";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ModelUpload } from "./Model/ModelUpload";
 import { ModelCatalog } from "./Model/ModelCatalog";
-import { ShoppingCart } from "../../components/Process/ProcessShoppingCart/ProcessShoppingCart";
 import {
   IMaterial,
   IModel,
   IPostProcessing,
   IProcess,
-  IProcessState,
   IManufacturer,
   IAdditive,
 } from "../../interface/Interface";
@@ -25,6 +23,7 @@ import NewProcess from "./NewProcess";
 import { Error } from "../Error/Error";
 import { IFilterItem } from "./Filter/Interface";
 import useFilter from "../../hooks/useFilter";
+import Header from "./Header/Header";
 
 interface Props {
   setProcessList?(processList: IProcess[]): void;
@@ -32,293 +31,53 @@ interface Props {
   guideAnswers: IFilterItem[];
 }
 
-const calcNextFreeId = (processList: IProcess[]): number => {
-  let nextFreeId: number = 0;
-  processList.forEach((process: IProcess) => {
-    if (process.processId > nextFreeId) nextFreeId = process.processId;
-  });
-  return nextFreeId + 1;
-};
+interface State {
+  processList: IProcess[];
+}
 
 export const ProcessView = ({
   setProcessList,
   processList,
   guideAnswers,
 }: Props) => {
-  const maxExpandedShoppingCardItem = 2;
   const navigate = useNavigate();
-  const [state, setState] = useState<IProcessState>({
-    progressState: 0,
-    activeProcess: 0,
-    activeProcessList: [0],
-    processList: processList ? processList : [{ processId: 0 }],
-    nextID: processList ? calcNextFreeId(processList) : 1,
+  const [state, setState] = useState<State>({
+    processList: [],
   });
   const [models, setModels] = useState<IModel[]>([]);
   const { getModels } = useFilter();
-
-  useEffect(() => {
-    if (setProcessList !== undefined) {
-      setProcessList(state.processList);
-    }
-  }, [state.processList]);
-
-  const startNewProcess = () => {
-    setState({
-      progressState: 0,
-      activeProcess: 0,
-      activeProcessList: [0],
-      processList: [{ processId: 0 }],
-      nextID: 1,
-    });
-    if (setProcessList !== undefined) setProcessList([]);
-  };
-
   const applyFilters = (filterItemList: IFilterItem[]) => {
-    // setModels(getModels(state.filterAnswers));
     getModels(filterItemList);
     console.log("Apply Filters", filterItemList);
   };
 
-  const setProgressState = (progressStateIndex: number): void => {
-    let link;
-
-    switch (progressStateIndex) {
-      case 0:
-        link = "/process/models";
-        break;
-      case 1:
-        link = "/process/materials";
-        break;
-      case 2:
-        link = "/process/manufacturer";
-        break;
-      case 3:
-        link = "/process/postprocessing";
-        break;
-      case 4:
-        link = "/process/additive";
-        break;
-      case 5:
-        link = "/shoppingcart";
-        break;
-      default:
-        link = "/shoppingcart";
-        break;
-    }
-    console.log("set Progress State", link, progressStateIndex);
-    navigate(link);
-    setState((prevState) => ({
-      ...prevState,
-      progressState: progressStateIndex,
-    }));
+  const startNewProcess = () => {
+    setState((prevState) => ({ ...prevState, processList: [] }));
   };
 
-  const addProcess = (process: IProcess): void => {
-    console.log("add Process", process);
-    setState((prevState) => ({
-      ...prevState,
-      processList: [...prevState.processList, process],
-      nextID: state.nextID + 1,
-      activeProcess:
-        prevState.processList.length === 0
-          ? process.processId
-          : prevState.activeProcess,
-    }));
-  };
+  const addProcess = (process: IProcess): void => {};
 
-  const addProcessList = (processList: IProcess[]): void => {
-    console.log("add Process List", processList);
-    setState((prevState) => ({
-      ...prevState,
-      processList: [...prevState.processList, ...processList],
-      nextID: state.nextID + processList.length,
-      activeProcess:
-        prevState.processList.length === 0
-          ? processList[0].processId
-          : prevState.activeProcess,
-    }));
-  };
+  const addProcessList = (processList: IProcess[]): void => {};
 
-  const deleteProcess = (processId: number): void => {
-    console.log("delete Process", processId);
-    setState((prevState) => ({
-      ...prevState,
-      activeProcess:
-        prevState.activeProcess !== processId
-          ? prevState.activeProcess
-          : prevState.processList.filter(
-              (process: IProcess) => process.processId !== processId
-            ).length === 0
-          ? 0
-          : prevState.processList.filter(
-              (process: IProcess) => process.processId !== processId
-            )[0].processId,
-      processList: prevState.processList.filter(
-        (process: IProcess) => process.processId !== processId
-      ),
-    }));
-  };
+  const deleteProcess = (processId: number): void => {};
 
-  const calcActiveProcessList = (
-    processId: number,
-    expand: boolean
-  ): number[] => {
-    let activeProcessList = state.activeProcessList;
-    var index = activeProcessList.indexOf(processId);
-    if (expand) {
-      if (activeProcessList.length <= 1) {
-        activeProcessList.push(processId);
-      } else if (activeProcessList.length > 1) {
-        if (activeProcessList.includes(processId)) {
-          if (index !== -1) {
-            activeProcessList.splice(index, 1);
-          }
-        }
-        if (activeProcessList.length === maxExpandedShoppingCardItem)
-          activeProcessList.shift();
-        activeProcessList.push(processId);
-      }
-    } else {
-      if (index !== -1) {
-        activeProcessList.splice(index, 1);
-      }
-    }
-    return activeProcessList;
-  };
+  const selectProcess = (processId: number): void => {};
 
-  const selectProcess = (processId: number): void => {
-    console.log("select Process", processId);
+  const selectModel = (model: IModel): void => {};
 
-    setState((prevState) => ({
-      ...prevState,
-      activeProcess: processId,
-      activeProcessList: calcActiveProcessList(processId, true),
-    }));
-  };
+  const selectMaterial = (material: IMaterial): void => {};
 
-  const setShoppingCardItemExpanded = (
-    processId: number,
-    expand: boolean
-  ): void => {
-    console.log("toggel Process Shoppingcart", processId);
-    setState((prevState) => ({
-      ...prevState,
-      activeProcessList: calcActiveProcessList(processId, expand),
-    }));
-  };
+  const selectManufacturer = (manufacturer: IManufacturer): void => {};
 
-  const getActiveProcess = (): IProcess | undefined => {
-    return state.processList.filter(
-      (process: IProcess) => process.processId === state.activeProcess
-    )[0];
-  };
+  const selectPostProcessing = (postProcessing: IPostProcessing): void => {};
 
-  const selectModel = (model: IModel): void => {
-    setState((prevState) => ({
-      ...prevState,
-      processList: [
-        ...prevState.processList.filter(
-          (process: IProcess) => process.processId < prevState.activeProcess
-        ),
-        {
-          ...prevState.processList.filter(
-            (process: IProcess) => process.processId === prevState.activeProcess
-          )[0],
-          model: model,
-        },
-        ...prevState.processList.filter(
-          (process: IProcess) => process.processId > prevState.activeProcess
-        ),
-      ],
-    }));
-  };
-
-  const selectMaterial = (material: IMaterial): void => {
-    setState((prevState) => ({
-      ...prevState,
-      processList: [
-        ...prevState.processList.filter(
-          (process: IProcess) => process.processId < prevState.activeProcess
-        ),
-        {
-          ...prevState.processList.filter(
-            (process: IProcess) => process.processId === prevState.activeProcess
-          )[0],
-          material: material,
-        },
-        ...prevState.processList.filter(
-          (process: IProcess) => process.processId > prevState.activeProcess
-        ),
-      ],
-    }));
-  };
-
-  const selectManufacturer = (manufacturer: IManufacturer): void => {
-    setState((prevState) => ({
-      ...prevState,
-      processList: [
-        ...prevState.processList.filter(
-          (process: IProcess) => process.processId < prevState.activeProcess
-        ),
-        {
-          ...prevState.processList.filter(
-            (process: IProcess) => process.processId === prevState.activeProcess
-          )[0],
-          manufacturer: manufacturer,
-        },
-        ...prevState.processList.filter(
-          (process: IProcess) => process.processId > prevState.activeProcess
-        ),
-      ],
-    }));
-  };
-
-  const selectPostProcessing = (postProcessing: IPostProcessing): void => {
-    setState((prevState) => ({
-      ...prevState,
-      processList: [
-        ...prevState.processList.filter(
-          (process: IProcess) => process.processId < prevState.activeProcess
-        ),
-        {
-          ...prevState.processList.filter(
-            (process: IProcess) => process.processId === prevState.activeProcess
-          )[0],
-          postProcessing: postProcessing,
-        },
-        ...prevState.processList.filter(
-          (process: IProcess) => process.processId > prevState.activeProcess
-        ),
-      ],
-    }));
-  };
-
-  const selectAdditive = (additive: IAdditive): void => {
-    setState((prevState) => ({
-      ...prevState,
-      processList: [
-        ...prevState.processList.filter(
-          (process: IProcess) => process.processId < prevState.activeProcess
-        ),
-        {
-          ...prevState.processList.filter(
-            (process: IProcess) => process.processId === prevState.activeProcess
-          )[0],
-          additive: additive,
-        },
-        ...prevState.processList.filter(
-          (process: IProcess) => process.processId > prevState.activeProcess
-        ),
-      ],
-    }));
-  };
+  const selectAdditive = (additive: IAdditive): void => {};
 
   return (
-    <div className="process-container main horizontal">
+    <div className="process">
       <Filter applyFilters={applyFilters} guideAnswers={guideAnswers} />
-      <div className="process-container content vertical">
-        <Wizard state={state} setProgressState={setProgressState} />
+      <div className="process-content">
+        <Header processList={state.processList} />
         <div className="process-container vertical">
           <Routes>
             <Route
@@ -329,20 +88,15 @@ export const ProcessView = ({
               <Route
                 index
                 element={
-                  <ModelCatalog
-                    models={models}
-                    setProgressState={setProgressState}
-                    selectModel={selectModel}
-                  />
+                  <ModelCatalog models={models} selectModel={selectModel} />
                 }
               />
               <Route
                 path="upload"
                 element={
                   <ModelUpload
-                    state={state}
+                    processList={state.processList}
                     addProcessList={addProcessList}
-                    setProgressState={setProgressState}
                     selectProcess={selectProcess}
                   />
                 }
@@ -351,12 +105,7 @@ export const ProcessView = ({
             <Route path="materials">
               <Route
                 index
-                element={
-                  <MaterialCatalog
-                    setProgressState={setProgressState}
-                    selectMaterial={selectMaterial}
-                  />
-                }
+                element={<MaterialCatalog selectMaterial={selectMaterial} />}
               />
             </Route>
             <Route path="manufacturer">
@@ -364,7 +113,6 @@ export const ProcessView = ({
                 index
                 element={
                   <ManufacturerCatalog
-                    setProgressState={setProgressState}
                     selectManufacturer={selectManufacturer}
                   />
                 }
@@ -374,8 +122,7 @@ export const ProcessView = ({
               path="postprocessing"
               element={
                 <PostProcessingView
-                  state={state}
-                  setProgressState={setProgressState}
+                  processList={state.processList}
                   selectPostProcessing={selectPostProcessing}
                 />
               }
@@ -384,8 +131,7 @@ export const ProcessView = ({
               path="additive"
               element={
                 <AdditiveView
-                  setProgressState={setProgressState}
-                  state={state}
+                  processList={state.processList}
                   selectAdditive={selectAdditive}
                 />
               }
@@ -394,8 +140,7 @@ export const ProcessView = ({
               path="overview"
               element={
                 <Overview
-                  state={state}
-                  setProgressState={setProgressState}
+                  processList={state.processList}
                   selectProcess={selectProcess}
                 />
               }
@@ -404,17 +149,6 @@ export const ProcessView = ({
           </Routes>
         </div>
       </div>
-
-      {state.progressState !== 5 && (
-        <ShoppingCart
-          setShoppingCardItemExpanded={setShoppingCardItemExpanded}
-          setProgressState={setProgressState}
-          state={state}
-          addProcess={addProcess}
-          deleteProcess={deleteProcess}
-          selectProcess={selectProcess}
-        />
-      )}
     </div>
   );
 };

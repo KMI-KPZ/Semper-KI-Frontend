@@ -5,21 +5,19 @@ import BackupIcon from "@mui/icons-material/Backup";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import React, { useRef, useState } from "react";
-import { IProcess, IProcessState } from "../../../interface/Interface";
+import { IProcess } from "../../../interface/Interface";
 import { getFileSizeAsString } from "../../../services/utils";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  state: IProcessState;
+  processList: IProcess[];
   addProcessList: (process: IProcess[]) => void;
-  setProgressState: (progressStateIndex: number) => void;
   selectProcess: (id: number) => void;
 }
 
 export const ModelUpload = ({
-  state,
+  processList,
   addProcessList,
-  setProgressState,
   selectProcess,
 }: Props) => {
   const { t } = useTranslation();
@@ -111,22 +109,7 @@ export const ModelUpload = ({
     }, 5000);
   };
 
-  const handleClickNext = () => {
-    let processList: IProcess[] = [];
-    fileList.forEach((file: File, index: number) => {
-      processList.push({
-        processId: state.nextID + index,
-        model: { file: file },
-      });
-    });
-    if (processList.length > 0) {
-      addProcessList(processList);
-      selectProcess(processList[0].processId);
-      setProgressState(1);
-    } else {
-      showError();
-    }
-  };
+  const handleClickNext = () => {};
 
   return (
     <div className="process-content-container">

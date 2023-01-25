@@ -1,23 +1,18 @@
 import "../ProcessView.scss";
 import "./Overview.scss";
-import { IProcessState } from "../../../interface/Interface";
 import { OverviewCard } from "./OverviewCard";
 import AddIcon from "@mui/icons-material/Add";
+import { IProcess } from "../../../interface/Interface";
 
 interface Props {
-  state: IProcessState;
-  setProgressState: (progressStateIndex: number) => void;
+  processList: IProcess[];
   selectProcess: (id: number) => void;
 }
 
-export const Overview = ({ setProgressState, state, selectProcess }: Props) => {
+export const Overview = ({ processList, selectProcess }: Props) => {
   return (
     <div className="overview-card-container">
-      <OverviewCard
-        processList={state.processList}
-        setProgressState={setProgressState}
-        selectProcess={selectProcess}
-      />
+      <OverviewCard processList={processList} selectProcess={selectProcess} />
       <div className="overview-card add-button">
         <AddIcon className="overview-add-button" />
       </div>

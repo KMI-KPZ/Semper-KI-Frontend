@@ -6,20 +6,17 @@ import { useTranslation } from "react-i18next";
 
 interface Props {
   manufacturer: IManufacturer;
-  setProgressState: (progressStateIndex: number) => void;
   selectManufacturer: (manufacturer: IManufacturer) => void;
 }
 
 export const ManufacturerCatalogCard = ({
   manufacturer,
-  setProgressState,
   selectManufacturer,
 }: Props) => {
   const { t } = useTranslation();
 
   const handleAddClick = () => {
     selectManufacturer(manufacturer);
-    setProgressState(3);
   };
 
   return (

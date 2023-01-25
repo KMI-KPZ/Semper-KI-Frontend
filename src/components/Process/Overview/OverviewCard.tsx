@@ -10,7 +10,6 @@ import { useTranslation } from "react-i18next";
 
 interface Props {
   processList: IProcess[];
-  setProgressState: (progressStateIndex: number) => void;
   selectProcess: (id: number) => void;
 }
 
@@ -20,11 +19,7 @@ interface State {
   manufacturerExpanded: boolean;
 }
 
-export const OverviewCard = ({
-  processList,
-  setProgressState,
-  selectProcess,
-}: Props) => {
+export const OverviewCard = ({ processList, selectProcess }: Props) => {
   const { t } = useTranslation();
   const [state, setState] = useState<State>({
     modelExpanded: false,
@@ -67,7 +62,6 @@ export const OverviewCard = ({
   ): void => {
     e.preventDefault();
     selectProcess(id);
-    setProgressState(0);
   };
 
   const onClickMinimize = (

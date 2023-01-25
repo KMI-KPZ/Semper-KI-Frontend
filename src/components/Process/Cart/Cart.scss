@@ -1,0 +1,30 @@
+@use '../../../scss/index' as *;
+
+.process-cart {
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+}
+
+.process-cart-item {
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap:20px;
+    background-color: $white;
+    border-radius: 5px;
+    height: 50px;
+
+    &.active {
+        padding-bottom: 20px;
+        height: 70px;
+        border-radius: 5px 5px 0 0 ;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: $white_hover;
+    }
+}

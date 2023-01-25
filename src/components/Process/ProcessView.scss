@@ -1,130 +1,14 @@
 @use '../../scss/index' as *;
 
-.process-container {
-  display: flex;
-  gap: $containerGap;
-
-  &.main {
-    padding: 20px 20px;
-  }
-  &.content{
-    width: 64%;
-  }
-
-  &.horizontal {
-    flex-direction: row;
-  }
-  &.vertical {
-    flex-direction: column;
-  }
-  
-
+.process {
+  display:flex;
+  flex-direction: row;
+  gap:20px;
 }
-.process-box {
+
+.process-content {
   display: flex;
-  align-items: center;
-  background-color: $white;
-  margin: 0;
-  padding: 0;
+  flex-direction: column;
+  gap:20px;
+}
 
-  &.horizontal {
-    flex-direction: row;
-  }
-  &.vertical {
-    flex-direction: column;
-  }
-  &.filter {
-    width: 18%;
-    height: calc(100vh - $heightHeader - 2*$containerGap);
-  }
-  &.headline{
-    height: $heightHeadline;
-  }
-  &.headline-search{
-    height: $heightHeadlineSearch;
-    gap: 10px;
-    justify-content: flex-start;
-
-    h1{
-      margin: 0;
-      padding: 0;
-    }
-  }
-  &.content{
-    height: calc(100vh - $heightHeader - $heightWizard - $heightHeadline - 3*$containerGap);
-    overflow-x: scroll;
-    overflow-x: hidden;
-
-    &.search{
-      height: calc(100vh - $heightHeader - $heightWizard - $heightHeadlineSearch - 4*$containerGap);
-    }
-  }
-  &.wizard {
-    padding: 5px 20px;
-    height: $heightWizard;
-  }
-  &.shoppingcart {
-    width: 18%;
-    height: calc(100vh - $heightHeader - 2*$containerGap);
-    justify-content: flex-start;
-    gap: $containerGap;
-    padding: 20px;
-
-    .shoppingcart-item{
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-
-      .divider{
-        margin: 0 auto;
-        padding: 0;
-        &.large{
-          width: 90%;
-          border-top: 2px solid $black;
-        }
-        &.small{
-          margin: 5px auto;
-          width: 70%;
-          border-top: 1px solid $grey;
-        }
-      }
-
-      .shoppingcard-item-list{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        gap: 10px;
-
-        .shoppingcard-item-list-item {
-          width: 100%;
-          align-items: center;
-          justify-content: center;
-          margin: 0;
-          padding: 0;
-
-          
-          
-          &.header{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-        
-            .shoppingcard-item-header-text {
-              width: 100%;
-              font-weight: 500;
-              text-align: center;
-            }
-            .shoppingcard-item-header-icons {
-              display: flex;
-              flex-direction: row;
-            }
-          }
-        }
-      }
-
-    }
-  }
-} 

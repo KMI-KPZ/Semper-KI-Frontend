@@ -3,15 +3,14 @@ import "./PostProcessing.scss";
 import React from "react";
 import {
   IPostProcessing,
-  IProcessState,
   IOption,
+  IProcess,
 } from "../../../interface/Interface";
 import { PostProcessingOption } from "./PostProcessingOption";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  state: IProcessState;
-  setProgressState: (progressStateIndex: number) => void;
+  processList: IProcess[];
   selectPostProcessing: (postProcessing: IPostProcessing) => void;
 }
 
@@ -82,16 +81,10 @@ const testData: IOption[] = [
   { name: "Bool-Texteingabe-Option", stringInput: true },
 ];
 
-export const PostProcessingView = ({
-  setProgressState,
-  state,
-  selectPostProcessing,
-}: Props) => {
+export const PostProcessingView = ({ processList }: Props) => {
   const { t } = useTranslation();
 
-  const handleClickNext = () => {
-    setProgressState(4);
-  };
+  const handleClickNext = () => {};
 
   return (
     <div className="process-content-container">

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
-import "./App.scss";
 import "./../../styles.scss";
 import useCRSFToken from "../../hooks/useCSRFToken";
 import axios from "axios";
@@ -114,7 +113,7 @@ function App() {
   );
 
   return (
-    <div className="App" data-testid="app">
+    <div className="app" data-testid="app">
       <div className="main-header">
         <Header isLoggedIn={state.isLoggedIn} userType={state.userType} />
       </div>

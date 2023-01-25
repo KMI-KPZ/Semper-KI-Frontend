@@ -12,7 +12,6 @@ import { IconButton } from "@mui/material";
 
 interface Props {
   material: IMaterial;
-  setProgressState: (progressStateIndex: number) => void;
   selectMaterial: (material: IMaterial) => void;
   grid: boolean;
 }
@@ -23,7 +22,6 @@ interface State {
 
 export const MaterialCatalogCard = ({
   material,
-  setProgressState,
   selectMaterial,
   grid,
 }: Props) => {
@@ -34,7 +32,6 @@ export const MaterialCatalogCard = ({
 
   const handleAddClick = () => {
     selectMaterial(material);
-    setProgressState(2);
   };
 
   const handleClickFavIcon = (

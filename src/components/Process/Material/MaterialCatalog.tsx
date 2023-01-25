@@ -10,7 +10,6 @@ import { IMaterial } from "../../../interface/Interface";
 import Loading from "../../../components/Process/Loading/Loading";
 
 interface Props {
-  setProgressState: (progressStateIndex: number) => void;
   selectMaterial: (material: IMaterial) => void;
 }
 
@@ -19,28 +18,15 @@ interface State {
   grid: boolean;
 }
 
-export const MaterialCatalog = ({
-  setProgressState,
-  selectMaterial,
-}: Props) => {
+export const MaterialCatalog = ({ selectMaterial }: Props) => {
   const { t } = useTranslation();
   const { data, isLoading, error } = useFetch<IMaterial>({
     url: "http://127.0.0.1:3030/materialList",
   });
   const [state, setState] = useState<State>({ filter: "", grid: true });
 
-  const handleClickGrid = (grid: boolean) => {
-    setState((prevState) => ({ ...prevState, grid: grid }));
-  };
-
   return (
     <div className="process-container vertical">
-      <Search
-        grid={state.grid}
-        handleClickGrid={handleClickGrid}
-        headline={t("material.catalog.headline")}
-        placeholder={t("material.catalog.search-placeholder")}
-      />
       <div className="material-cards">
         <Loading
           isLoading={isLoading}
@@ -57,7 +43,6 @@ export const MaterialCatalog = ({
                 {data.slice(0, 12).map((material: IMaterial, index: number) => (
                   <MaterialCatalogCard
                     grid={state.grid}
-                    setProgressState={setProgressState}
                     selectMaterial={selectMaterial}
                     material={material}
                     key={index}

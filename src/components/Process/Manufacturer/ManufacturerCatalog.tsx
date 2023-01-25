@@ -23,7 +23,6 @@ type ManufacturerAttribut =
   | "location";
 
 interface Props {
-  setProgressState: (progressStateIndex: number) => void;
   selectManufacturer: (manufacturer: IManufacturer) => void;
 }
 
@@ -32,10 +31,7 @@ interface State {
   grid: boolean;
 }
 
-export const ManufacturerCatalog = ({
-  setProgressState,
-  selectManufacturer,
-}: Props) => {
+export const ManufacturerCatalog = ({ selectManufacturer }: Props) => {
   const { t } = useTranslation();
   const {
     data: manufacturerList,
@@ -46,10 +42,6 @@ export const ManufacturerCatalog = ({
   });
   const [filter, setFilter] = useState<number>(0);
   const [state, setState] = useState<State>({ filter: "", grid: true });
-
-  const handleClickGrid = (grid: boolean) => {
-    setState((prevState) => ({ ...prevState, grid: grid }));
-  };
 
   const getFilterClassName = (index: number): string => {
     return `filter-text ${filter === index ? "active" : ""}`;
@@ -125,7 +117,6 @@ export const ManufacturerCatalog = ({
         <ManufacturerCatalogCard
           key={index}
           manufacturer={manufacturer}
-          setProgressState={setProgressState}
           selectManufacturer={selectManufacturer}
         />
       )
@@ -135,12 +126,6 @@ export const ManufacturerCatalog = ({
   return (
     <div className="process-content-container">
       <div className="catalog-container">
-        <Search
-          grid={state.grid}
-          handleClickGrid={handleClickGrid}
-          headline={t("manufacturer.catalog.headline")}
-          placeholder={t("manufacturer.catalog.search-placeholder")}
-        />
         {manufacturerLoadingError && (
           <div>
             {t("manufacturer.catalog.loading-error")}

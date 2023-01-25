@@ -137,9 +137,9 @@ export const Header = ({ isLoggedIn, userType }: Props) => {
             src={require("../../assets/images/logo192.png")}
             alt="Kiss Logo"
           />
-          <div className="kiss-logo-name" data-testid="logoName">
-            KISS
-          </div>
+          <h3 className="kiss-logo-name" data-testid="logoName">
+            SEMPER-KI
+          </h3>
         </a>
       </nav>
       <nav className="nav" data-testid="mainNav">

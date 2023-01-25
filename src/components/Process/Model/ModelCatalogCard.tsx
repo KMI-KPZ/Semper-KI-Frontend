@@ -13,7 +13,6 @@ import { IconButton } from "@mui/material";
 interface Props {
   model: IModel;
   selectModel: (model: IModel) => void;
-  setProgressState: (progressStateIndex: number) => void;
   grid: boolean;
 }
 
@@ -22,12 +21,7 @@ interface State {
   expanded: boolean;
 }
 
-export const ModelCatalogCard = ({
-  model,
-  selectModel,
-  setProgressState,
-  grid,
-}: Props) => {
+export const ModelCatalogCard = ({ model, selectModel, grid }: Props) => {
   const [state, setState] = useState<State>({
     fav: false,
     expanded: false,
@@ -38,7 +32,6 @@ export const ModelCatalogCard = ({
   ) => {
     e.preventDefault();
     selectModel(model);
-    setProgressState(1);
   };
 
   const handleClickExpandIcon = (

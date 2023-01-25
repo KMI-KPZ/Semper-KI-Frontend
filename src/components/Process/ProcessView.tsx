@@ -17,7 +17,6 @@ import { MaterialCatalog } from "./Material/MaterialCatalog";
 import { PostProcessingView } from "./PostProcessing/PostProcessingView";
 import { AdditiveView } from "./Additive/AdditiveView";
 import { ManufacturerCatalog } from "./Manufacturer/ManufacturerCatalog";
-import { Overview } from "./Overview/Overview";
 import Filter from "../../components/Process/Filter/Filter";
 import NewProcess from "./NewProcess";
 import { Error } from "../Error/Error";
@@ -133,15 +132,6 @@ export const ProcessView = ({
                 <AdditiveView
                   processList={state.processList}
                   selectAdditive={selectAdditive}
-                />
-              }
-            />
-            <Route
-              path="overview"
-              element={
-                <Overview
-                  processList={state.processList}
-                  selectProcess={selectProcess}
                 />
               }
             />

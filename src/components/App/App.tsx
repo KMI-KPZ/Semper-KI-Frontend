@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
@@ -23,7 +23,7 @@ import Footer from "../Footer/Footer";
 import { URL_AboutUs } from "../../config/Constants";
 import { EUserType } from "../../interface/enums";
 
-interface State {
+export interface IAppState {
   isLoggedIn: boolean;
   userType: EUserType;
   processList: IProcess[];
@@ -32,11 +32,27 @@ interface State {
   chats: IChat[];
 }
 
-function App() {
-  const [state, setState] = useState<State>({
+export interface IAppContext {
+  state: IAppState;
+  setState: React.Dispatch<React.SetStateAction<IAppState>>;
+}
+export const AppContext = createContext<IAppContext>({
+  state: {
     isLoggedIn: false,
     userType: 0,
-    processList: TestProcessList,
+    processList: [{}],
+    orderList: TestOrderList,
+    guideFilter: [],
+    chats: [],
+  },
+  setState: () => {},
+});
+
+function App() {
+  const [state, setState] = useState<IAppState>({
+    isLoggedIn: false,
+    userType: 0,
+    processList: [{}],
     orderList: TestOrderList,
     guideFilter: [],
     chats: [],
@@ -113,45 +129,39 @@ function App() {
   );
 
   return (
-    <div className="app" data-testid="app">
-      <div className="main-header">
-        <Header isLoggedIn={state.isLoggedIn} userType={state.userType} />
+    <AppContext.Provider value={{ state, setState }}>
+      <div className="app" data-testid="app">
+        <div className="main-header">
+          <Header isLoggedIn={state.isLoggedIn} userType={state.userType} />
+        </div>
+        <Routes data-testid="routes">
+          {unAuthorizedRoutes}
+          {authorizedRoutes}
+          <Route
+            path="process/*"
+            element={<ProcessView guideAnswers={state.guideFilter} />}
+          />
+          <Route path="test" element={<RequestTest />} />
+          <Route path="guide/:path" element={<Guide setFilter={setFilter} />} />
+          <Route path="logout" element={<Logout logout={logout} />} />
+          <Route
+            path="callback/logout"
+            element={<LogoutCallback logout={logout} />}
+          />
+          <Route path="login" element={<Login />} />
+          <Route
+            path="callback/login"
+            element={<LoginCallback login={login} user={user} />}
+          />
+          <Route
+            path="aboutus"
+            element={<Redirect link={URL_AboutUs} extern />}
+          />
+          <Route path="*" element={<Error />} />
+        </Routes>
+        <Footer />
       </div>
-      <Routes data-testid="routes">
-        {unAuthorizedRoutes}
-        {authorizedRoutes}
-        <Route
-          path="process/*"
-          element={
-            <ProcessView
-              guideAnswers={state.guideFilter}
-              setProcessList={setProcessList}
-              processList={
-                state.processList.length > 0 ? state.processList : undefined
-              }
-            />
-          }
-        />
-        <Route path="test" element={<RequestTest />} />
-        <Route path="guide/:path" element={<Guide setFilter={setFilter} />} />
-        <Route path="logout" element={<Logout logout={logout} />} />
-        <Route
-          path="callback/logout"
-          element={<LogoutCallback logout={logout} />}
-        />
-        <Route path="login" element={<Login />} />
-        <Route
-          path="callback/login"
-          element={<LoginCallback login={login} user={user} />}
-        />
-        <Route
-          path="aboutus"
-          element={<Redirect link={URL_AboutUs} extern />}
-        />
-        <Route path="*" element={<Error />} />
-      </Routes>
-      <Footer />
-    </div>
+    </AppContext.Provider>
   );
 }
 

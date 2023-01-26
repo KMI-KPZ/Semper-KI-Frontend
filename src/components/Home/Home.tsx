@@ -19,7 +19,7 @@ interface Props {
   userType: EUserType;
 }
 
-interface State {
+export interface State {
   isOpen: boolean;
   text: string;
   linkGuided: string;

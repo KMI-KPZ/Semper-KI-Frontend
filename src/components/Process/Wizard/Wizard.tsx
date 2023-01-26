@@ -5,11 +5,9 @@ import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined
 import { useTranslation } from "react-i18next";
 import { IProcess } from "../../../interface/Interface";
 
-interface Props {
-  processList: IProcess[];
-}
+interface Props {}
 
-export const Wizard: React.FC<Props> = ({ processList }) => {
+export const Wizard: React.FC<Props> = ({}) => {
   const { t } = useTranslation();
 
   const handleClick = (e: any, index: number) => {

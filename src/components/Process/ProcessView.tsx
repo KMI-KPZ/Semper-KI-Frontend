@@ -1,8 +1,6 @@
-import { Wizard } from "../../components/Process/Wizard/Wizard";
-import { createContext, useEffect, useState } from "react";
-
+import { createContext, useState } from "react";
 import "../../styles.scss";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import { ModelUpload } from "./Model/ModelUpload";
 import { ModelCatalog } from "./Model/ModelCatalog";
 import {
@@ -12,6 +10,7 @@ import {
   IProcess,
   IManufacturer,
   IAdditive,
+  IProgress,
 } from "../../interface/Interface";
 import { MaterialCatalog } from "./Material/MaterialCatalog";
 import { PostProcessingView } from "./PostProcessing/PostProcessingView";
@@ -23,34 +22,34 @@ import { Error } from "../Error/Error";
 import { IFilterItem } from "./Filter/Interface";
 import useFilter from "../../hooks/useFilter";
 import Header from "./Header/Header";
-import { IAppState } from "../App/App";
 import { removeItem } from "../../services/utils";
+import Procedure from "./Procedure/Procedure";
 
 interface Props {
   guideAnswers: IFilterItem[];
-  // setProcessList(processList: IProcess[]): void;
-  // processList: IProcess[];
-  // setAppState: React.Dispatch<React.SetStateAction<IAppState>>;
 }
-
 export interface IProcessState {
   processList: IProcess[];
   activeProcessList: number[];
+  grid: boolean;
+  progress: IProgress;
 }
-
 export interface IProcessContext {
   processState: IProcessState;
   createEmptryProcess(): void;
   addProcessList(processList: IProcess[]): void;
   deleteProcess(processId: number): void;
   selectProcess(index: number): void;
+  setProgress(path: string): void;
 }
-
+const initialProcessState: IProcessState = {
+  processList: [{ title: "Item 1" }],
+  activeProcessList: [0],
+  grid: true,
+  progress: { title: "Modell finden", type: 0 },
+};
 export const ProcessContext = createContext<IProcessContext>({
-  processState: {
-    processList: [{}],
-    activeProcessList: [0],
-  },
+  processState: initialProcessState,
   createEmptryProcess: () => {
     console.log("Error ProcessContext createEmptryProcess");
   },
@@ -63,14 +62,16 @@ export const ProcessContext = createContext<IProcessContext>({
   selectProcess: () => {
     console.log("Error ProcessContext selectProcess");
   },
+  setProgress: () => {
+    console.log("Error ProcessContext setProgress");
+  },
 });
 
 export const ProcessView = ({ guideAnswers }: Props) => {
+  const { path } = useParams<string>();
   const navigate = useNavigate();
-  const [state, setState] = useState<IProcessState>({
-    processList: [{ title: "Item 1" }],
-    activeProcessList: [0],
-  });
+  const [state, setState] = useState<IProcessState>(initialProcessState);
+
   const [models, setModels] = useState<IModel[]>([]);
   const { getModels } = useFilter();
   const applyFilters = (filterItemList: IFilterItem[]) => {
@@ -137,12 +138,51 @@ export const ProcessView = ({ guideAnswers }: Props) => {
     setState((prevState) => ({
       ...prevState,
       activeProcessList,
+      progress: index === -1 ? getProgressByPath("upload") : prevState.progress,
     }));
     if (index === -1) {
       navigate("/process/upload");
     } else {
-      navigate("/process/models");
+      navigate("/process/model");
     }
+  };
+
+  const getProgressByPath = (path: string): IProgress => {
+    let progress: IProgress = { title: "Modell finden", type: 0 };
+    switch (path) {
+      case "model":
+        progress = { title: "Modell finden", type: 0 };
+        break;
+      case "upload":
+        progress = { title: "Modell/e hochladen", type: 1 };
+        break;
+      case "material":
+        progress = { title: "Material finden", type: 0 };
+        break;
+      case "procedure":
+        progress = { title: "Verfahren finden", type: 0 };
+        break;
+      case "manufacturer":
+        progress = { title: "Hersteller finden", type: 0 };
+        break;
+      case "postprocessing":
+        progress = { title: "Nachbearbeitung hinzufügen", type: 1 };
+        break;
+      case "additive":
+        progress = { title: "Zusatz hinzufügen", type: 1 };
+        break;
+      default:
+        progress = { title: "Modell/e hochladen", type: 1 };
+        break;
+    }
+    return progress;
+  };
+  const setProgress = (path: string) => {
+    setState((prevState) => ({
+      ...prevState,
+      progress: getProgressByPath(path),
+      activeProcessList: path === "upload" ? [-1] : prevState.activeProcessList,
+    }));
   };
 
   const selectModel = (model: IModel): void => {};
@@ -159,58 +199,69 @@ export const ProcessView = ({ guideAnswers }: Props) => {
         createEmptryProcess,
         deleteProcess,
         selectProcess,
+        setProgress,
       }}
     >
       <div className="process">
         <Filter applyFilters={applyFilters} guideAnswers={guideAnswers} />
         <div className="process-content">
-          <Header processState={state} setProcessState={setState} />
+          <Header />
           <div className="process-container vertical">
             <Routes>
               <Route
                 path="new"
                 element={<NewProcess startNewProcess={startNewProcess} />}
               />
-              <Route path="models">
-                <Route
-                  index
-                  element={
-                    <ModelCatalog models={models} selectModel={selectModel} />
-                  }
-                />
-                <Route
-                  path="upload"
-                  element={
-                    <ModelUpload
-                      processList={state.processList}
-                      addProcessList={addProcessList}
-                      selectProcess={selectProcess}
-                    />
-                  }
-                />
-              </Route>
-              <Route path="materials">
-                <Route
-                  index
-                  element={<MaterialCatalog selectMaterial={selectMaterial} />}
-                />
-              </Route>
-              <Route path="manufacturer">
-                <Route
-                  index
-                  element={
-                    <ManufacturerCatalog
-                      selectManufacturer={selectManufacturer}
-                    />
-                  }
-                />
-              </Route>
+              <Route
+                path="model"
+                element={
+                  <ModelCatalog
+                    models={models}
+                    selectModel={selectModel}
+                    setProgress={setProgress}
+                  />
+                }
+              />
+              <Route
+                path="upload"
+                element={
+                  <ModelUpload
+                    addProcessList={addProcessList}
+                    setProgress={setProgress}
+                  />
+                }
+              />
+              <Route
+                path="material"
+                element={
+                  <MaterialCatalog
+                    selectMaterial={selectMaterial}
+                    setProgress={setProgress}
+                  />
+                }
+              />
+              <Route
+                path="procedure"
+                element={<Procedure setProgress={setProgress} />}
+              />
+
+              <Route
+                path="manufacturer"
+                element={
+                  <ManufacturerCatalog
+                    selectManufacturer={selectManufacturer}
+                    setProgress={setProgress}
+                  />
+                }
+              />
+
               <Route
                 path="postprocessing"
                 element={
                   <PostProcessingView
                     processList={state.processList}
                     selectPostProcessing={selectPostProcessing}
+                    setProgress={setProgress}
                   />
                 }
               />
@@ -220,6 +271,7 @@ export const ProcessView = ({ guideAnswers }: Props) => {
                   <AdditiveView
                     processList={state.processList}
                     selectAdditive={selectAdditive}
+                    setProgress={setProgress}
                   />
                 }
               />

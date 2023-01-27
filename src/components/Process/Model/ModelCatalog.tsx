@@ -1,16 +1,18 @@
 import "../../../styles.scss";
 import "./../ProcessView.scss";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IModel } from "../../../interface/Interface";
 import { useFetch } from "../../../hooks/useFetch";
-import Search from "../../../components/Process/Search/Search";
+import Search from "../Header/Search/Search";
 import { ModelCatalogCard } from "./ModelCatalogCard";
 import Loading from "../../../components/Process/Loading/Loading";
+import { ProcessContext } from "../ProcessView";
 
 interface Props {
   models: IModel[];
   selectModel(model: IModel): void;
+  setProgress(path: string): void;
 }
 
 interface State {
@@ -18,14 +20,20 @@ interface State {
   grid: boolean;
 }
 
-export const ModelCatalog: React.FC<Props> = ({ models, selectModel }) => {
+export const ModelCatalog: React.FC<Props> = ({
+  models,
+  selectModel,
+  setProgress,
+}) => {
   const { t } = useTranslation();
   // const { data, isLoading, error } = useFetch<IModel>({
   //   url: "http://127.0.0.1:3030/modelList",
   // });
 
   const [state, setState] = useState<State>({ filter: "", grid: true });
-
+  useEffect(() => {
+    setProgress("model");
+  }, []);
   return (
     <div className="process-container vertical">
       <div className="model-cards">

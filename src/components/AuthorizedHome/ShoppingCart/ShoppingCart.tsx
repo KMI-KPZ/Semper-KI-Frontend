@@ -26,7 +26,7 @@ const ShoppingCart = ({ processList, setProcessList }: Props) => {
         )}
       </section>
       <section className="shopping-cart-buttons">
-        <Button variant="contained" onClick={() => navigate("/process/models")}>
+        <Button variant="contained" onClick={() => navigate("/process/model")}>
           Bearbeiten
         </Button>
         <Button variant="contained">Auftrag Anfragen</Button>

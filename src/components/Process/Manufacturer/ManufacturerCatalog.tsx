@@ -1,16 +1,17 @@
 import SettingsIcon from "@mui/icons-material/Settings";
 import SearchIcon from "@mui/icons-material/Search";
 import { IManufacturer } from "../../../interface/Interface";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import "../../../styles.scss";
 import "../ProcessView.scss";
 import "./Manufacturer.scss";
 import { useTranslation } from "react-i18next";
 import { useFetch } from "../../../hooks/useFetch";
-import Search from "../../../components/Process/Search/Search";
+import Search from "../Header/Search/Search";
 import { isNumber } from "../../../services/utils";
 import { ManufacturerCatalogCard } from "./ManufacturerCatalogCard";
+import { ProcessContext } from "../ProcessView";
 
 type ManufacturerAttribut =
   | "manufacturerId"
@@ -24,6 +25,7 @@ type ManufacturerAttribut =
 
 interface Props {
   selectManufacturer: (manufacturer: IManufacturer) => void;
+  setProgress(path: string): void;
 }
 
 interface State {
@@ -31,7 +33,10 @@ interface State {
   grid: boolean;
 }
 
-export const ManufacturerCatalog = ({ selectManufacturer }: Props) => {
+export const ManufacturerCatalog = ({
+  selectManufacturer,
+  setProgress,
+}: Props) => {
   const { t } = useTranslation();
   const {
     data: manufacturerList,
@@ -41,7 +46,9 @@ export const ManufacturerCatalog = ({ selectManufacturer }: Props) => {
     url: "http://127.0.0.1:3030/manufacturerList",
   });
   const [filter, setFilter] = useState<number>(0);
-  const [state, setState] = useState<State>({ filter: "", grid: true });
+  useEffect(() => {
+    setProgress("manufacturer");
+  }, []);
 
   const getFilterClassName = (index: number): string => {
     return `filter-text ${filter === index ? "active" : ""}`;

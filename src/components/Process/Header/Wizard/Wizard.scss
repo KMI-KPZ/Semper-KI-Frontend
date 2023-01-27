@@ -1,12 +1,10 @@
-@use '../../../scss/index' as *;
+@use '../../../../scss/index' as *;
 
 .wizard {
-  padding: 10px 5px 0 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background-color: $white;
 }
 
 .wizard-card {

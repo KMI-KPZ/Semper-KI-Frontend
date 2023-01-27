@@ -61,7 +61,7 @@ const Guide = ({ setFilter }: Props) => {
     e.preventDefault();
     if (state.answers.length === state.activeQuestion) {
       setFilter(convertToGuideAnswer(state.answers));
-      navigate("/process/models");
+      navigate("/process/model");
     }
   };
 

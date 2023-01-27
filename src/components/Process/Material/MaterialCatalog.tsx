@@ -1,16 +1,18 @@
 import "../../../styles.scss";
 import "../ProcessView.scss";
 import "./Material.scss";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useFetch } from "../../../hooks/useFetch";
-import Search from "../../../components/Process/Search/Search";
+import Search from "../Header/Search/Search";
 import { MaterialCatalogCard } from "./MaterialCatalogCard";
 import { IMaterial } from "../../../interface/Interface";
 import Loading from "../../../components/Process/Loading/Loading";
+import { ProcessContext } from "../ProcessView";
 
 interface Props {
   selectMaterial: (material: IMaterial) => void;
+  setProgress(path: string): void;
 }
 
 interface State {
@@ -18,12 +20,15 @@ interface State {
   grid: boolean;
 }
 
-export const MaterialCatalog = ({ selectMaterial }: Props) => {
+export const MaterialCatalog = ({ selectMaterial, setProgress }: Props) => {
   const { t } = useTranslation();
   const { data, isLoading, error } = useFetch<IMaterial>({
     url: "http://127.0.0.1:3030/materialList",
   });
   const [state, setState] = useState<State>({ filter: "", grid: true });
+  useEffect(() => {
+    setProgress("material");
+  }, []);
 
   return (
     <div className="process-container vertical">

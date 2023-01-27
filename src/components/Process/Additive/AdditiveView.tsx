@@ -1,18 +1,28 @@
 import "../ProcessView.scss";
 import "./Additive.scss";
-import React, { useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import { IAdditive, IProcess } from "../../../interface/Interface";
 import { useTranslation } from "react-i18next";
+import { ProcessContext } from "../ProcessView";
 
 interface Props {
   processList: IProcess[];
   selectAdditive: (additive: IAdditive) => void;
+  setProgress(path: string): void;
 }
 
-export const AdditiveView = ({ selectAdditive, processList }: Props) => {
+export const AdditiveView = ({
+  selectAdditive,
+  processList,
+  setProgress,
+}: Props) => {
   const { t } = useTranslation();
   const refUpload = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setProgress("additive");
+  }, []);
 
   const handleUploadClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>

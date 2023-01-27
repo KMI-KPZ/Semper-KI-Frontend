@@ -1,4 +1,4 @@
-import { EUserType } from "./enums";
+import { EProgressType, EUserType } from "./enums";
 
 export interface IProcess {
   title?: string;
@@ -7,6 +7,11 @@ export interface IProcess {
   manufacturer?: IManufacturer;
   postProcessing?: IPostProcessing;
   additive?: IAdditive;
+}
+
+export interface IProgress {
+  title: string;
+  type: EProgressType;
 }
 
 export interface IModel {

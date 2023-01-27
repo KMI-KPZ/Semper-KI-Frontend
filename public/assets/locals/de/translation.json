@@ -29,7 +29,8 @@
   },
   "wizard": {
     "model": "Modell",
-    "material-procedure": "Material | Verfahren",
+    "material":"Material",
+    "procedure": "Verfahren",
     "manufacturer": "Hersteller",
     "post-processing": "Nachbearbeitung",
     "additive": "Zusatz",

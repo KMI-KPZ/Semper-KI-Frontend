@@ -56,7 +56,7 @@
     {
         "title": "Model finden",
         "i18n":"find-model",
-        "link": "/process/models",
+        "link": "/process/model",
         "icon": "IconSearchModel",
         "extern": false,
         "show":false,

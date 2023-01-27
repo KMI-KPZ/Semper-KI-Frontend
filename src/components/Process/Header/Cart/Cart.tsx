@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import CartItem from "./CartItem";
 import "./Cart.scss";
-import { IconUpload, IconPlus, IconModel } from "../../../config/Icons";
 import { useNavigate } from "react-router-dom";
-import { IProcess } from "../../../interface/Interface";
-import { IProcessContext, ProcessContext } from "../ProcessView";
+import { ProcessContext } from "../../ProcessView";
+import { IconModel, IconPlus, IconUpload } from "../../../../config/Icons";
+import { IProcess } from "../../../../interface/Interface";
 
 interface Props {}
 

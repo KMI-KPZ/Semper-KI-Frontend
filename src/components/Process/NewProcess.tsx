@@ -9,7 +9,7 @@ const NewProcess = ({ startNewProcess }: Props) => {
   const navigate = useNavigate();
   useEffect(() => {
     startNewProcess();
-    navigate("/process/models");
+    navigate("/process/model");
   }, []);
   return <div>start new Process</div>;
 };

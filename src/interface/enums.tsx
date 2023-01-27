@@ -4,3 +4,8 @@ export enum EUserType {
   "Contractor",
   "Admin",
 }
+
+export enum EProgressType {
+  "title",
+  "search",
+}

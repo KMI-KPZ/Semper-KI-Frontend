@@ -76,7 +76,7 @@ export const Home = ({ userType }: Props) => {
             />
             <HomeCard
               linkGuided="/guide/find-model"
-              linkUnGuided="/process/models"
+              linkUnGuided="/process/model"
               text="Modell finden"
               icon={IconSearchModel}
               openMenu={openMenu}

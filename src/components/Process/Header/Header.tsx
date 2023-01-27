@@ -1,29 +1,21 @@
-import React, { Dispatch, SetStateAction } from "react";
-import { IProcess } from "../../../interface/Interface";
-import Cart from "../Cart/Cart";
-import { IProcessState } from "../ProcessView";
-import Search from "../Search/Search";
-import { Wizard } from "../Wizard/Wizard";
+import React, { useContext } from "react";
+import { ProcessContext } from "../ProcessView";
+import Search from "./Search/Search";
 import "./Header.scss";
+import Cart from "./Cart/Cart";
+import { Wizard } from "./Wizard/Wizard";
 
-interface Props {
-  processState: IProcessState;
-  setProcessState: Dispatch<SetStateAction<IProcessState>>;
-}
-
-const Header: React.FC<Props> = ({ processState, setProcessState }) => {
-  const handleClickGrid = () => {};
+const Header: React.FC = () => {
+  const { processState } = useContext(ProcessContext);
 
   return (
     <div className="process-header">
       <Cart />
-      <Wizard />
-      <Search
-        grid={true}
-        handleClickGrid={handleClickGrid}
-        headline={"Title"}
-        placeholder={"ich benötige"}
-      />
+      <div className="process-header-box">
+        <Wizard />
+        <h1 className="process-headline">{processState.progress.title}</h1>
+        {processState.progress.type === 0 ? <Search /> : null}
+      </div>
     </div>
   );
 };

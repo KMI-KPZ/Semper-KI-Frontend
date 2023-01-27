@@ -1,30 +1,30 @@
 import "../../../styles.scss";
 import "./Model.scss";
 import "../ProcessView.scss";
-import BackupIcon from "@mui/icons-material/Backup";
-import DeleteIcon from "@mui/icons-material/Delete";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IProcess } from "../../../interface/Interface";
 import { getFileSizeAsString } from "../../../services/utils";
 import { useTranslation } from "react-i18next";
+import { Button } from "@mui/material";
+import { IconDelete, IconUpload } from "../../../config/Icons";
+import { Navigate, useNavigate } from "react-router-dom";
 
 interface Props {
-  processList: IProcess[];
   addProcessList: (process: IProcess[]) => void;
-  selectProcess: (id: number) => void;
+  setProgress(path: string): void;
 }
 
-export const ModelUpload = ({
-  processList,
-  addProcessList,
-  selectProcess,
-}: Props) => {
+export const ModelUpload = ({ addProcessList, setProgress }: Props) => {
   const { t } = useTranslation();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
   const [fileList, setFileList] = useState<File[]>([]);
   const [error, setError] = useState<boolean>(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    setProgress("upload");
+  }, []);
 
   const dataTypes: string[] = [
     ".STEP",
@@ -43,20 +43,23 @@ export const ModelUpload = ({
     ".DXF",
   ];
 
-  const handleChange = (e: any) => {
+  const handleChangeHiddenInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       addFile(e.target.files[0]);
     }
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.preventDefault();
-    if (hiddenFileInput.current) {
+  const handleClickUploadCard = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    console.log("Click Card", hiddenFileInput.current);
+
+    if (hiddenFileInput.current !== null) {
       hiddenFileInput.current.click();
     }
   };
 
-  const handleDrag = function (e: React.DragEvent<HTMLDivElement>) {
+  const handleDragOnUploadCard = function (e: React.DragEvent<HTMLDivElement>) {
     e.preventDefault();
     e.stopPropagation();
     if (e.type === "dragenter" || e.type === "dragover") {
@@ -66,7 +69,7 @@ export const ModelUpload = ({
     }
   };
 
-  const handleDrop = function (e: React.DragEvent<HTMLDivElement>) {
+  const handleDropOnUploadCard = function (e: React.DragEvent<HTMLDivElement>) {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
@@ -77,7 +80,7 @@ export const ModelUpload = ({
   };
 
   const deleteFile = (
-    e: React.MouseEvent<SVGSVGElement, MouseEvent>,
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
     index: number
   ): void => {
     setFileList((prevState) =>
@@ -109,53 +112,71 @@ export const ModelUpload = ({
     }, 5000);
   };
 
-  const handleClickNext = () => {};
+  const handleClickNext = () => {
+    addProcessList(
+      fileList.map((file: File) => ({
+        title: file.name,
+        model: { file, name: file.name },
+      }))
+    );
+    navigate("/process/model");
+  };
 
   return (
-    <div className="process-content-container">
-      <div className="headline dark">{t("model.upload.headline")}</div>
+    <div className="model-upload">
       {error && <div className="error">{t("model.upload.error")}</div>}
-      {fileList.map((file: File, index: number) => (
-        <div key={index} className="file normal">
-          <div className="canvas">
-            <ViewInArIcon sx={{ fontSize: "90px", margin: "auto" }} />
+      <div className="model-upload-files">
+        {fileList.map((file: File, index: number) => (
+          <div key={index} className="model-upload-file">
+            <div className="canvas">
+              <ViewInArIcon sx={{ fontSize: "90px", margin: "auto" }} />
+            </div>
+            {file.name}
+            <div className="model-upload-file-row">
+              {getFileSizeAsString(file.size)}
+              <img
+                src={IconDelete}
+                className="model-delete-icon"
+                onClick={(e) => deleteFile(e, index)}
+              />
+            </div>
           </div>
-          {file.name}
-          <br />( {getFileSizeAsString(file.size)} )
-          <DeleteIcon
-            className="delete-button"
-            onClick={(e) => deleteFile(e, index)}
-            sx={{ fontSize: "40px" }}
-          />
-        </div>
-      ))}
+        ))}
+      </div>
       <div
-        className="upload normal"
-        onClick={handleClick}
-        onDragEnter={handleDrag}
+        className="model-upload-card"
+        onClick={handleClickUploadCard}
+        onDragEnter={handleDragOnUploadCard}
+        onDragLeave={handleDragOnUploadCard}
+        onDragOver={handleDragOnUploadCard}
+        onDrop={handleDropOnUploadCard}
       >
         <input
           type="file"
           ref={hiddenFileInput}
-          onChange={handleChange}
+          onChange={handleChangeHiddenInput}
           style={{ display: "none" }}
         />
-        {dragActive && (
+        {/* {dragActive && (
           <div
             className="drag-file-element"
-            onDragEnter={handleDrag}
-            onDragLeave={handleDrag}
-            onDragOver={handleDrag}
-            onDrop={handleDrop}
+            onDragEnter={handleDragOnUploadCard}
+            onDragLeave={handleDragOnUploadCard}
+            onDragOver={handleDragOnUploadCard}
+            onDrop={handleDropOnUploadCard}
           ></div>
-        )}
-        <BackupIcon sx={{ fontSize: 90 }} />
-        <div className="header">{t("model.upload.card.headline")}</div>
+        )} */}
+        <img src={IconUpload} className="model-upload-icon" />
+        <h2>{t("model.upload.card.headline")}</h2>
         {t("model.upload.card.text")}
       </div>
-      <div className="next-button dark" onClick={handleClickNext}>
+      <Button
+        variant="contained"
+        className="model-upload-button"
+        onClick={handleClickNext}
+      >
         {t("model.upload.next")}
-      </div>
+      </Button>
     </div>
   );
 };

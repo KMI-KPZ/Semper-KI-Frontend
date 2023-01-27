@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
-import { IconDelete } from "../../../config/Icons";
-import { IProcess } from "../../../interface/Interface";
-import { ProcessContext } from "../ProcessView";
+import { IconDelete } from "../../../../config/Icons";
+import { ProcessContext } from "../../ProcessView";
 
 interface Props {
   index?: number;

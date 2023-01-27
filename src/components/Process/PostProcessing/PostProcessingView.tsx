@@ -1,6 +1,6 @@
 import "../ProcessView.scss";
 import "./PostProcessing.scss";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   IPostProcessing,
   IOption,
@@ -8,10 +8,12 @@ import {
 } from "../../../interface/Interface";
 import { PostProcessingOption } from "./PostProcessingOption";
 import { useTranslation } from "react-i18next";
+import { ProcessContext } from "../ProcessView";
 
 interface Props {
   processList: IProcess[];
   selectPostProcessing: (postProcessing: IPostProcessing) => void;
+  setProgress(path: string): void;
 }
 
 const testData: IOption[] = [
@@ -81,8 +83,11 @@ const testData: IOption[] = [
   { name: "Bool-Texteingabe-Option", stringInput: true },
 ];
 
-export const PostProcessingView = ({ processList }: Props) => {
+export const PostProcessingView = ({ processList, setProgress }: Props) => {
   const { t } = useTranslation();
+  useEffect(() => {
+    setProgress("postprocessing");
+  }, []);
 
   const handleClickNext = () => {};
 

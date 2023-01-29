@@ -46,7 +46,7 @@ const initialProcessState: IProcessState = {
   processList: [{ title: "Item 1" }],
   activeProcessList: [0],
   grid: true,
-  progress: { title: "Modell finden", type: 0 },
+  progress: { title: "Modell finden", link: "/process/model", type: 0 },
 };
 export const ProcessContext = createContext<IProcessContext>({
   processState: initialProcessState,
@@ -148,31 +148,63 @@ export const ProcessView = ({ guideAnswers }: Props) => {
   };
 
   const getProgressByPath = (path: string): IProgress => {
-    let progress: IProgress = { title: "Modell finden", type: 0 };
+    let progress: IProgress = {
+      title: "Modell finden",
+      link: "/process/model",
+      type: 0,
+    };
     switch (path) {
       case "model":
-        progress = { title: "Modell finden", type: 0 };
+        progress = { title: "Modell finden", link: "/process/model", type: 0 };
         break;
       case "upload":
-        progress = { title: "Modell/e hochladen", type: 1 };
+        progress = {
+          title: "Modell/e hochladen",
+          link: "/process/upload",
+          type: 1,
+        };
         break;
       case "material":
-        progress = { title: "Material finden", type: 0 };
+        progress = {
+          title: "Material finden",
+          link: "/process/material",
+          type: 0,
+        };
         break;
       case "procedure":
-        progress = { title: "Verfahren finden", type: 0 };
+        progress = {
+          title: "Verfahren finden",
+          link: "/process/procedure",
+          type: 0,
+        };
         break;
       case "manufacturer":
-        progress = { title: "Hersteller finden", type: 0 };
+        progress = {
+          title: "Hersteller finden",
+          link: "/process/manufacturer",
+          type: 0,
+        };
         break;
       case "postprocessing":
-        progress = { title: "Nachbearbeitung hinzufügen", type: 1 };
+        progress = {
+          title: "Nachbearbeitung hinzufügen",
+          link: "/process/postprocessing",
+          type: 1,
+        };
         break;
       case "additive":
-        progress = { title: "Zusatz hinzufügen", type: 1 };
+        progress = {
+          title: "Zusatz hinzufügen",
+          link: "/process/additive",
+          type: 1,
+        };
         break;
       default:
-        progress = { title: "Modell/e hochladen", type: 1 };
+        progress = {
+          title: "Modell/e hochladen",
+          link: "/process/model",
+          type: 1,
+        };
         break;
     }
     return progress;

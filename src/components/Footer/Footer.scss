@@ -3,6 +3,7 @@
 .footer {
     width: 100%;
     background-color: $white;
+    height: $heightFooter;
 }
 
 .footer-list {
@@ -17,7 +18,7 @@
 
 .footer-list-item {
     margin: 0;
-    padding:20px;
+    padding:10px;
     a:hover{
         color: $colorDark;
     }

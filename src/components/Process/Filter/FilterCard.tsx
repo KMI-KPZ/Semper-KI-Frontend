@@ -5,6 +5,7 @@ import { IFilterItem } from "./Interface";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import FilterItem from "./FilterItem";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   category: ICategory;
@@ -25,6 +26,7 @@ const FilterCard: React.FC<Props> = ({
   setFilterItem,
   handleOnClickMenuOpen,
 }) => {
+  const { t } = useTranslation();
   const getCountOfChecktItems = (): string => {
     const count = filterItemList.filter(
       (filterItem: IFilterItem) => filterItem.isChecked
@@ -36,7 +38,7 @@ const FilterCard: React.FC<Props> = ({
     <div className="filter-category-card">
       <div className="filter-category-header">
         <h3>
-          {category.title}
+          {t(`filter.category.${category.title}`)}
           {getCountOfChecktItems()}
         </h3>
         <IconButton

@@ -11,6 +11,7 @@ export interface IProcess {
 
 export interface IProgress {
   title: string;
+  link: string;
   type: EProgressType;
 }
 

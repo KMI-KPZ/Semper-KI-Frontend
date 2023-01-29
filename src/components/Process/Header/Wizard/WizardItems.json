@@ -1,0 +1,26 @@
+[
+    {
+        "title": "wizard.model",
+        "links": ["/process/model","/process/upload"]
+    },
+    {
+        "title":"wizard.material",
+        "links":["/process/material"]
+    },
+    {
+        "title":"wizard.procedure",
+        "links":["/process/procedure"]
+    },
+    {
+        "title":"wizard.manufacturer",
+        "links": ["/process/manufacturer"]
+    },
+    {
+        "title":"wizard.post-processing",
+        "links":["/process/postprocessing"]
+    },
+    {
+        "title":"wizard.additive",
+        "links":["/process/additive"]
+    }   
+]

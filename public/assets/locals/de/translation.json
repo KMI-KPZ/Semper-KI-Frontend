@@ -181,32 +181,15 @@
   },
   "filter":{
     "headline":"Vorgaben",
-    "general":{
-      "headline":"Allgemein",
-      "price":"Preis",
-      "deliverTime":"Lieferzeit",
-      "amount":"Anzahl"
-    },
-    "model":{
-      "headline":"Modell",
-      "categorys":{
-        "headline":"Kategorie"
-      },
-      "boxSize":"Boxmaß",
-      "surfaceSize":"Oberfläche",
-      "volume":"Volumen"
-    },
-    "material":{
-      "headline":"Material"
-    },
-    "manufacturer":{
-      "headline":"Hersteller"
-    },
-    "proceeding":{
-      "headline":"Verfahren"
-    },
-    "post-Processing":{
-      "headline":"Nachbearbeitung"
+    "category":{
+      "general":"Allgemein",
+      "model":"Modell",
+      "material":"Material",
+      "proceeding":"Verfahren",
+      "manufacturer":"Hersteller",
+      "post-Processing":"Nachbearbeitung",
+      "additive":"Zusatz",
+      "test":"Test"
     }
   },
   "guide":{

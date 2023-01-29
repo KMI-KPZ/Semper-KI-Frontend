@@ -6,9 +6,10 @@ import { ProcessContext } from "../../ProcessView";
 interface Props {
   title: string;
   path: string;
+  active: boolean;
 }
 
-const WizardCard: React.FC<Props> = ({ title, path }) => {
+const WizardCard: React.FC<Props> = ({ title, path, active }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -22,6 +23,7 @@ const WizardCard: React.FC<Props> = ({ title, path }) => {
   return (
     <div className="wizard-card" onClick={handleOnClickCard}>
       {t(title)}
+      {active === true ? <hr className="wizard-card-hr" /> : null}
     </div>
   );
 };

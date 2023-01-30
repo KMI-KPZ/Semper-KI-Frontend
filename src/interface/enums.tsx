@@ -9,3 +9,9 @@ export enum EProgressType {
   "title",
   "search",
 }
+
+export enum EModelStatusType {
+  "ok",
+  "error",
+  "missing",
+}

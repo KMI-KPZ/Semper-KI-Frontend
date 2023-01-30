@@ -113,13 +113,15 @@ export const ProcessView = ({ guideAnswers }: Props) => {
       processList,
       activeProcessList: [-1],
     }));
+    navigate("/process/upload");
   };
   const selectProcess = (index: number): void => {
     console.log("Process| select Process " + index);
     let activeProcessList: number[] = state.activeProcessList;
+    let upload: boolean = false;
     if (index === -1) {
       //Upload
-      activeProcessList = [-1];
+      upload = true;
     } else if (activeProcessList.includes(-1) && index !== -1) {
       //no longer Upload
       activeProcessList = [index];
@@ -133,14 +135,15 @@ export const ProcessView = ({ guideAnswers }: Props) => {
 
     if (state.processList.length === 0 || activeProcessList.length === 0)
       //select upload when no items are slected or available
-      activeProcessList = [-1];
+      upload = true;
 
     setState((prevState) => ({
       ...prevState,
-      activeProcessList,
+      activeProcessList: upload === true ? [-1] : activeProcessList,
       progress: index === -1 ? getProgressByPath("upload") : prevState.progress,
     }));
-    if (index === -1) {
+
+    if (upload) {
       navigate("/process/upload");
     } else {
       navigate("/process/model");

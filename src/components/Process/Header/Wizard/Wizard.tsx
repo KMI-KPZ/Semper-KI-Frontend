@@ -20,6 +20,7 @@ export const Wizard: React.FC<Props> = ({ progress }) => {
     <div className="wizard">
       {wizardItems.map((wizardItem: IWizardItem, index: number) => (
         <WizardCard
+          statusType={index % 3}
           key={index}
           title={wizardItem.title}
           path={wizardItem.links[0]}

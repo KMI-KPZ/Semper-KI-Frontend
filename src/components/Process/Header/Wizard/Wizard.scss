@@ -8,12 +8,48 @@
 }
 
 .wizard-card {
+  display: flex;
+  flex-direction: row;
+  gap:10px;
   padding: 5px 10px;
   color: $textPrimary;
   &:hover {
     background-color: $white_hover;
     cursor: pointer;
   }
+}
+
+.wizard-card-text{
+  display: flex;
+  flex-direction: column;
+}
+
+.wizard-cart-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  
+  &.ok {
+    border: 2px solid $black;
+    background-color: green;
+  }
+  &.error {
+    border: 2px solid $black;
+    background-color: red;
+  }
+  &.missing {
+    border: 2px solid $black;
+    background-color: yellow;
+  }
+}
+
+.wizzard-cart-img{
+  width: 10px;
+  height: 10px;
 }
 
 .wizard-card-hr {

@@ -15,3 +15,12 @@ export enum EProcessStatusType {
   "error",
   "missing",
 }
+
+export enum EOrderState {
+  "requested",
+  "rejected",
+  "confirmed",
+  "consult",
+  "production",
+  "delivery",
+}

@@ -1,4 +1,4 @@
-import { EProgressType, EUserType } from "./enums";
+import { EOrderState, EProgressType, EUserType } from "./enums";
 
 export interface IProcess {
   title?: string;
@@ -93,7 +93,7 @@ export interface IOrder {
   orderId?: number;
   processList: IProcess[];
   date: Date;
-  orderState: string;
+  orderState: EOrderState;
   bill?: File;
 }
 

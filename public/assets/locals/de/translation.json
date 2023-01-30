@@ -176,8 +176,16 @@
     "proceedings":"Verfahren",
     "contracts":"Aufträge"
   },
-  "orders":{
-    "headline":"Bestellungen"
+  "order":{
+    "headline":"Bestellungen",
+    "state":{
+      "requested":"Angefragt",
+      "rejected":"Abgelehnt",
+      "confirmed":"Bestätigt",
+      "consult":"Rückfragen",
+      "production":"In Produktion",
+      "delivery":"Unterwegs"
+    }
   },
   "filter":{
     "headline":"Vorgaben",
@@ -195,5 +203,4 @@
   "guide":{
     "headline":"Guide"
   }
-  
 }

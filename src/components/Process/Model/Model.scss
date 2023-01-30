@@ -84,7 +84,6 @@
 }
 
 .model-cards {
-  height: calc(100vh - $heightHeader - $heightWizard - $heightHeadlineSearch - 4*$containerGap);
   overflow-x: hidden;
   display: flex;
   justify-content: flex-start;

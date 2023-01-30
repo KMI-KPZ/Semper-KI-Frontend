@@ -10,7 +10,7 @@ import {
 export const TestOrderList: IOrder[] = [
   {
     date: new Date(),
-    orderState: "Angefragt",
+    orderState: 0,
     orderId: 0,
     bill: undefined,
     processList: [
@@ -33,7 +33,7 @@ export const TestOrderList: IOrder[] = [
   },
   {
     date: new Date(),
-    orderState: "In Bearbeitung",
+    orderState: 0,
     orderId: 1,
     bill: undefined,
     processList: [
@@ -46,7 +46,7 @@ export const TestOrderList: IOrder[] = [
   },
   {
     date: new Date(),
-    orderState: "Abgeschlossen",
+    orderState: 5,
     orderId: 2,
     bill: new File([], "Rechnung.pdf"),
     processList: [

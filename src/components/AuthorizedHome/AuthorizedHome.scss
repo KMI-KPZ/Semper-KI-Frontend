@@ -1,60 +1,6 @@
 @use '../../scss/index' as *;
 
 .authorized-home {
-    margin:20px;
-    width: 1600px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 20px;
-
-   
-
-    .authorized-home-container{
-        display: flex;
-        flex-direction: column;
-        gap: $containerGap;
-        width: 80%;
-        // height: calc(100vh - $heightHeader - 2*20px);
-        overflow-x: scroll;
-        overflow-x: hidden;
-        display: flex;
-
-        .authorized-home-headline {
-            text-align: center;
-            background-color: $white;
-            margin: 0;
-            padding: 10px 0;
-        }
-
-        .authorized-home-content{
-            display: flex;
-            justify-content: center;
-            height: 100%;
-            gap: $containerGap;
-            &.horizontal {
-                flex-direction: row;
-            }
-            &.vertical {
-                flex-direction: column;
-            }
-
-
-            .authorized-home-content-box{
-                display: flex;
-                align-items: center;
-                background-color: $white;
-                width: 100%;
-                &.full-height {
-                    height: 100%;
-                }
-                &.horizontal {
-                    flex-direction: row;
-                }
-                &.vertical {
-                    flex-direction: column;
-                }
-            }
-        }
-    }
 }
+
+

@@ -29,7 +29,7 @@
     {
         "title": "Warenkorb",
         "i18n":"cart",
-        "link": "/shoppingcart",
+        "link": "/cart",
         "icon": "IconCart",
         "extern": false,
         "show":true,

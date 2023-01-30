@@ -125,20 +125,24 @@ const Filter: React.FC<Props> = ({ applyFilters, guideAnswers }) => {
 
   return (
     <div className="filter">
-      <h2 className="filter-headline">{t("filter.headline")}</h2>
-      {state.categoryList.map((category: ICategory, categoryIndex: number) => (
-        <FilterCard
-          category={category}
-          categoryIndex={categoryIndex}
-          filterItemList={state.filterList.filter(
-            (filterItem: IFilterItem) =>
-              filterItem.question.category === category.title
-          )}
-          handleOnClickMenuOpen={handleOnClickMenuOpen}
-          setFilterItem={setFilterItem}
-          key={categoryIndex}
-        />
-      ))}
+      <div className="filter-content">
+        <h2 className="filter-headline">{t("filter.headline")}</h2>
+        {state.categoryList.map(
+          (category: ICategory, categoryIndex: number) => (
+            <FilterCard
+              category={category}
+              categoryIndex={categoryIndex}
+              filterItemList={state.filterList.filter(
+                (filterItem: IFilterItem) =>
+                  filterItem.question.category === category.title
+              )}
+              handleOnClickMenuOpen={handleOnClickMenuOpen}
+              setFilterItem={setFilterItem}
+              key={categoryIndex}
+            />
+          )
+        )}
+      </div>
       <div className="filter-buttons">
         <Button variant="contained" onClick={onClickReset}>
           Reset

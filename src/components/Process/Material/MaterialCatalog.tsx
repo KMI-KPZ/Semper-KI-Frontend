@@ -31,33 +31,31 @@ export const MaterialCatalog = ({ selectMaterial, setProgress }: Props) => {
   }, []);
 
   return (
-    <div className="process-container vertical">
-      <div className="material-cards">
-        <Loading
-          isLoading={isLoading}
-          data={data}
-          error={error}
-          errorText={t("model.catalog.error-name")}
-          loadingErrorText={t("model.catalog.loading-error")}
-          loadingText={t("model.catalog.loading-models")}
-          component={
-            !isLoading &&
-            data &&
-            !error && (
-              <div className="material-cards">
-                {data.slice(0, 12).map((material: IMaterial, index: number) => (
-                  <MaterialCatalogCard
-                    grid={state.grid}
-                    selectMaterial={selectMaterial}
-                    material={material}
-                    key={index}
-                  />
-                ))}
-              </div>
-            )
-          }
-        />
-      </div>
+    <div className="material-cards">
+      <Loading
+        isLoading={isLoading}
+        data={data}
+        error={error}
+        errorText={t("model.catalog.error-name")}
+        loadingErrorText={t("model.catalog.loading-error")}
+        loadingText={t("model.catalog.loading-models")}
+        component={
+          !isLoading &&
+          data &&
+          !error && (
+            <div className="material-cards">
+              {data.slice(0, 12).map((material: IMaterial, index: number) => (
+                <MaterialCatalogCard
+                  grid={state.grid}
+                  selectMaterial={selectMaterial}
+                  material={material}
+                  key={index}
+                />
+              ))}
+            </div>
+          )
+        }
+      />
     </div>
   );
 };

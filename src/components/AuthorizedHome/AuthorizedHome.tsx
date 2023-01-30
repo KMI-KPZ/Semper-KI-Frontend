@@ -34,25 +34,23 @@ const AuthorizedHome = ({
 
   return (
     <div className="authorized-home">
-      <section className="authorized-home-container">
-        <Routes>
-          <Route index element={<Dashboard />} />
-          <Route
-            path="shoppingcart"
-            element={
-              <ShoppingCart
-                processList={processList}
-                setProcessList={setProcessList}
-              />
-            }
-          />
-          <Route path="orders" element={<Orders orderList={orderList} />} />
-          <Route path="proceedings" element={<Error text="proceedings" />} />
-          <Route path="assignments" element={<Error text="assignments" />} />
-          <Route path="messages" element={<Error text="messages" />} />
-          <Route path="account" element={<Account user={user} />} />
-        </Routes>
-      </section>
+      <Routes>
+        <Route index element={<Dashboard />} />
+        <Route
+          path="cart"
+          element={
+            <ShoppingCart
+              processList={processList}
+              setProcessList={setProcessList}
+            />
+          }
+        />
+        <Route path="orders" element={<Orders orderList={orderList} />} />
+        <Route path="proceedings" element={<Error text="proceedings" />} />
+        <Route path="assignments" element={<Error text="assignments" />} />
+        <Route path="messages" element={<Error text="messages" />} />
+        <Route path="account" element={<Account user={user} />} />
+      </Routes>
     </div>
   );
 };

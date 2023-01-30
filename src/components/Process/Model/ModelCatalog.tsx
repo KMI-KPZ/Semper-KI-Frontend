@@ -35,9 +35,8 @@ export const ModelCatalog: React.FC<Props> = ({
     setProgress("model");
   }, []);
   return (
-    <div className="process-container vertical">
-      <div className="model-cards">
-        {/* <Loading
+    <div className="model-cards">
+      {/* <Loading
           isLoading={isLoading}
           data={data}
           error={error}
@@ -62,21 +61,20 @@ export const ModelCatalog: React.FC<Props> = ({
             )
           }
         /> */}
-        {models.length < 0 ? (
-          <div className="model-cards">
-            {models.map((model: IModel, index: number) => (
-              <ModelCatalogCard
-                grid={state.grid}
-                selectModel={selectModel}
-                model={model}
-                key={index}
-              />
-            ))}
-          </div>
-        ) : (
-          t("model.catalog.loading-error")
-        )}
-      </div>
+      {models.length < 0 ? (
+        <div className="model-cards">
+          {models.map((model: IModel, index: number) => (
+            <ModelCatalogCard
+              grid={state.grid}
+              selectModel={selectModel}
+              model={model}
+              key={index}
+            />
+          ))}
+        </div>
+      ) : (
+        t("model.catalog.loading-error")
+      )}
     </div>
   );
 };

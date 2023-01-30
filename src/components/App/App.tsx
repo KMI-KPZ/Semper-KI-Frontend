@@ -22,6 +22,7 @@ import Redirect from "../Redirect/Redirect";
 import Footer from "../Footer/Footer";
 import { URL_AboutUs } from "../../config/Constants";
 import { EUserType } from "../../interface/enums";
+import Service from "../Service/Service";
 
 export interface IAppState {
   isLoggedIn: boolean;
@@ -134,31 +135,37 @@ function App() {
         <div className="main-header">
           <Header isLoggedIn={state.isLoggedIn} userType={state.userType} />
         </div>
-        <Routes data-testid="routes">
-          {unAuthorizedRoutes}
-          {authorizedRoutes}
-          <Route
-            path="process/*"
-            element={<ProcessView guideAnswers={state.guideFilter} />}
-          />
-          <Route path="test" element={<RequestTest />} />
-          <Route path="guide/:path" element={<Guide setFilter={setFilter} />} />
-          <Route path="logout" element={<Logout logout={logout} />} />
-          <Route
-            path="callback/logout"
-            element={<LogoutCallback logout={logout} />}
-          />
-          <Route path="login" element={<Login />} />
-          <Route
-            path="callback/login"
-            element={<LoginCallback login={login} user={user} />}
-          />
-          <Route
-            path="aboutus"
-            element={<Redirect link={URL_AboutUs} extern />}
-          />
-          <Route path="*" element={<Error />} />
-        </Routes>
+        <div className="main-content">
+          <Routes data-testid="routes">
+            {unAuthorizedRoutes}
+            {authorizedRoutes}
+            <Route
+              path="process/*"
+              element={<ProcessView guideAnswers={state.guideFilter} />}
+            />
+            <Route path="test" element={<RequestTest />} />
+            <Route
+              path="guide/:path"
+              element={<Guide setFilter={setFilter} />}
+            />
+            <Route path="logout" element={<Logout logout={logout} />} />
+            <Route
+              path="callback/logout"
+              element={<LogoutCallback logout={logout} />}
+            />
+            <Route path="login" element={<Login />} />
+            <Route
+              path="callback/login"
+              element={<LoginCallback login={login} user={user} />}
+            />
+            <Route
+              path="aboutus"
+              element={<Redirect link={URL_AboutUs} extern />}
+            />
+            <Route path="service/*" element={<Service />} />
+            <Route path="*" element={<Error />} />
+          </Routes>
+        </div>
         <Footer />
       </div>
     </AppContext.Provider>

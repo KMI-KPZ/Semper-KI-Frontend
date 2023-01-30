@@ -10,7 +10,7 @@ export enum EProgressType {
   "search",
 }
 
-export enum EModelStatusType {
+export enum EProcessStatusType {
   "ok",
   "error",
   "missing",

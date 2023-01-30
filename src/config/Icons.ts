@@ -34,6 +34,7 @@ export const IconPackage = require("../assets/images/icons/Package.svg").default
 export const IconPerson = require("../assets/images/icons/Person.svg").default;
 export const IconPlastic = require("../assets/images/icons/Plastic.svg").default;
 export const IconPlus = require("../assets/images/icons/Plus.svg").default;
+export const IconQuestionMark = require("../assets/images/icons/QuestionMark.svg").default;
 export const IconSearch = require("../assets/images/icons/Search.svg").default;
 export const IconSearchModel = require("../assets/images/icons/SearchModel.svg").default;
 export const IconSearchPerson = require("../assets/images/icons/SearchPerson.svg").default;
@@ -80,6 +81,7 @@ export const IconX = require("../assets/images/icons/X.svg").default;
       case "IconPerson": return IconPerson;
       case "IconPlastic": return IconPlastic;
       case "IconPlus": return IconPlus;
+      case "IconQuestionMark": return IconQuestionMark;
       case "IconSearch": return IconSearch;
       case "IconSearchModel": return IconSearchModel;
       case "IconSearchPerson": return IconSearchPerson;

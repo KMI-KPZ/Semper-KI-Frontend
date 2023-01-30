@@ -4,6 +4,7 @@ export interface IProcess {
   title?: string;
   model?: IModel;
   material?: IMaterial;
+  procedure?: IProcedure;
   manufacturer?: IManufacturer;
   postProcessing?: IPostProcessing;
   additive?: IAdditive;
@@ -25,6 +26,10 @@ export interface IMaterial {
   materialId?: number;
   name: string;
   propList?: string[];
+}
+
+export interface IProcedure {
+  title: string;
 }
 
 export interface IManufacturer {

@@ -1,8 +1,11 @@
 import React, { useContext } from "react";
 import { IconDelete } from "../../../../config/Icons";
+import { IProcess } from "../../../../interface/Interface";
 import { ProcessContext } from "../../ProcessView";
+import StatusIcon from "../StatusIcon.tsx/StatusIcon";
 
 interface Props {
+  process?: IProcess;
   index?: number;
   active: boolean;
   title: string;
@@ -18,6 +21,7 @@ const CartItem: React.FC<Props> = ({
   icon,
   onClickCard,
   isItem,
+  process,
 }) => {
   const { deleteProcess } = useContext(ProcessContext);
 
@@ -63,6 +67,7 @@ const CartItem: React.FC<Props> = ({
       ) : null}
       <img src={icon} />
       {title}
+      {process === undefined ? null : <StatusIcon process={process} />}
     </div>
   );
 };

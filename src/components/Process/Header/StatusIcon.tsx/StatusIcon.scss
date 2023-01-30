@@ -1,0 +1,29 @@
+@import "../../../../scss/index";
+
+.status-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    
+    &.ok {
+      border: 2px solid $black;
+      background-color: green;
+    }
+    &.error {
+      border: 2px solid $black;
+      background-color: red;
+    }
+    &.missing {
+      border: 2px solid $black;
+      background-color: yellow;
+    }
+  }
+  
+  .status-icon-img{
+    width: 10px;
+    height: 10px;
+  }

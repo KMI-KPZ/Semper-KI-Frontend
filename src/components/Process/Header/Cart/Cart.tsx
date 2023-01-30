@@ -37,6 +37,7 @@ const Cart: React.FC<Props> = ({}) => {
       {processState.processList.map((process: IProcess, index: number) => (
         <CartItem
           key={index}
+          process={process}
           index={index}
           active={processState.activeProcessList.includes(index)}
           icon={IconModel}

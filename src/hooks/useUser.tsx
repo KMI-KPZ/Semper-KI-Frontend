@@ -42,11 +42,11 @@ const useUser = (): ReturnProps => {
     axiosCustom
       .get(`${process.env.REACT_APP_API_URL}/public/isLoggedIn/`)
       .then((response) => {
-        console.log("is logged in true | response: ", response);
-        setLoggedIn(true);
+        console.log("islogged", response);
+        setLoggedIn(response.data === "Successful" ? true : false);
       })
       .catch((error) => {
-        console.log("is logged in false | error: ", error);
+        console.log("loadLoggedIn error:", error);
         setLoggedIn(false);
       });
   };

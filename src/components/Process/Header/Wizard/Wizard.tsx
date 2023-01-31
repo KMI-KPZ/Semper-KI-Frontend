@@ -37,11 +37,7 @@ export const Wizard: React.FC<Props> = ({ progress, processState }) => {
       case 2:
         return activeProcess.procedure === undefined ? 2 : 0;
       case 3:
-        return activeProcess.manufacturer === undefined ? 2 : 0;
-      case 4:
         return activeProcess.postProcessing === undefined ? 2 : 0;
-      case 5:
-        return activeProcess.additive === undefined ? 2 : 0;
       default:
         return 2;
     }

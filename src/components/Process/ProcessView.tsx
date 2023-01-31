@@ -71,12 +71,11 @@ export const ProcessView = ({ guideAnswers }: Props) => {
   const { path } = useParams<string>();
   const navigate = useNavigate();
   const [state, setState] = useState<IProcessState>(initialProcessState);
+  const { loadData, data } = useFilter();
 
-  const [models, setModels] = useState<IModel[]>([]);
-  const { getModels } = useFilter();
   const applyFilters = (filterItemList: IFilterItem[]) => {
-    getModels(filterItemList);
-    console.log("Apply Filters", filterItemList);
+    loadData(filterItemList);
+    console.log("Apply Filters", filterItemList, data);
   };
 
   const startNewProcess = () => {
@@ -251,7 +250,7 @@ export const ProcessView = ({ guideAnswers }: Props) => {
                 path="model"
                 element={
                   <ModelCatalog
-                    models={models}
+                    models={data.models}
                     selectModel={selectModel}
                     setProgress={setProgress}
                   />

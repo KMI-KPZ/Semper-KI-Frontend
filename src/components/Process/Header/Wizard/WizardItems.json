@@ -12,15 +12,7 @@
         "links":["/process/procedure"]
     },
     {
-        "title":"wizard.manufacturer",
-        "links": ["/process/manufacturer"]
-    },
-    {
         "title":"wizard.post-processing",
         "links":["/process/postprocessing"]
-    },
-    {
-        "title":"wizard.additive",
-        "links":["/process/additive"]
-    }   
+    }
 ]

@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes, useParams } from "react-router-dom";
 import "./Service.scss";
+
+interface State {
+  useService: boolean;
+}
 
 interface Props {}
 
 const Service: React.FC<Props> = ({}) => {
+  const [state, setState] = useState<State>({ useService: true });
+
   return (
     <div className="service">
       <h1>Service</h1>
       <Routes>
-        <Route index element={<h2>index</h2>} />
+        <Route index element={<></>} />
         <Route path="accompany" element={<h2>Gesamtprozess begleiten</h2>} />
         <Route path="let-design" element={<h2>Herstellen lassen</h2>} />
         <Route path="produce" element={<h2>Herstellen</h2>} />

@@ -3,34 +3,45 @@ import {
   IFilterAnswer,
   IFilterItem,
 } from "../components/Process/Filter/Interface";
-import { IModel } from "../interface/Interface";
+import { IMaterial, IModel } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
-  getModels(filters: IFilterItem[]): IModel[];
+  loadData(filters: IFilterItem[]): any;
+  data: IProcessResponse;
+}
+
+export interface IProcessResponse {
+  filters: IFilterItem[];
+  models: IModel[];
+  materials: IMaterial[];
 }
 
 const useFilter = () => {
   const { axiosCustom } = useCustomAxios();
-  const [models, setModels] = useState<IModel[]>([]);
+  const [data, setData] = useState<IProcessResponse>({
+    filters: [],
+    models: [],
+    materials: [],
+  });
 
-  const getModels = (filters: IFilterItem[]): IModel[] => {
+  const loadData = (filters: IFilterItem[]): IProcessResponse => {
+    console.log("Load Data", filters);
     axiosCustom
-      .post(
-        `${process.env.REACT_APP_API_URL}/public/getModels/`,
-        JSON.stringify(filters)
-      )
+      .post(`${process.env.REACT_APP_API_URL}/public/getData/`, {
+        filters: filters,
+      })
       .then((res) => {
-        console.log("getModels", res);
-        setModels(res.data);
+        console.log("get Data", res);
+        setData(res.data);
       })
       .catch((error) => {
-        console.log("getModels error", error);
+        console.log("get Data error", error);
       });
-    return models;
+    return data;
   };
 
-  return { getModels };
+  return { loadData, data };
 };
 
 export default useFilter;

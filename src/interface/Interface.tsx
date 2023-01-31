@@ -5,8 +5,8 @@ export interface IProcess {
   model?: IModel;
   material?: IMaterial;
   procedure?: IProcedure;
-  manufacturer?: IManufacturer;
   postProcessing?: IPostProcessing;
+  manufacturer?: IManufacturer;
   additive?: IAdditive;
 }
 

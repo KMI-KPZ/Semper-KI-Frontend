@@ -6,6 +6,8 @@ import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
   user: IUser | undefined;
+  isLoggedIn: boolean;
+  loadLoggedIn(): void;
   loadUser(): void;
   logoutUser(): void;
   deleteUser(): void;
@@ -15,6 +17,7 @@ const useUser = (): ReturnProps => {
   const navigate = useNavigate();
   const { axiosCustom } = useCustomAxios();
   const [user, setUser] = useState<IUser | undefined>();
+  const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
 
   const loadUser = () => {
     axiosCustom
@@ -27,10 +30,24 @@ const useUser = (): ReturnProps => {
             ? undefined
             : userData
         );
+        setLoggedIn(true);
       })
       .catch((error) => {
         console.log("getUser Error", error);
         setUser(undefined);
+      });
+  };
+
+  const loadLoggedIn = () => {
+    axiosCustom
+      .get(`${process.env.REACT_APP_API_URL}/public/isLoggedIn/`)
+      .then((response) => {
+        console.log("is logged in true | response: ", response);
+        setLoggedIn(true);
+      })
+      .catch((error) => {
+        console.log("is logged in false | error: ", error);
+        setLoggedIn(false);
       });
   };
 
@@ -48,13 +65,16 @@ const useUser = (): ReturnProps => {
 
   const logoutUser = () => {
     setUser(undefined);
+    setLoggedIn(false);
   };
 
   return {
     user,
+    isLoggedIn,
     loadUser,
     logoutUser,
     deleteUser,
+    loadLoggedIn,
   };
 };
 

@@ -26,7 +26,8 @@ const useFilter = () => {
   });
 
   const loadData = (filters: IFilterItem[]): IProcessResponse => {
-    console.log("Load Data", filters);
+    console.log("Load Data");
+    console.table(filters);
     axiosCustom
       .post(`${process.env.REACT_APP_API_URL}/public/getData/`, {
         filters: filters,

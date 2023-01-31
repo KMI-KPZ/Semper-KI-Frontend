@@ -59,7 +59,7 @@ function App() {
     chats: [],
   });
   const { loadCSRFToken } = useCRSFToken();
-  const { user, loadUser, logoutUser } = useUser();
+  const { user, loadLoggedIn, isLoggedIn, loadUser, logoutUser } = useUser();
 
   const setUserType = (userType: EUserType): void => {
     setState((prevState) => ({ ...prevState, userType }));
@@ -91,7 +91,12 @@ function App() {
     };
     axios.defaults.withCredentials = true;
     loadCSRFToken();
+    loadLoggedIn();
   }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) loadUser();
+  }, [isLoggedIn]);
 
   const login = () => {
     console.log("Login");

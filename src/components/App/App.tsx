@@ -25,7 +25,6 @@ import { EUserType } from "../../interface/enums";
 import Service from "../Service/Service";
 
 export interface IAppState {
-  isLoggedIn: boolean;
   userType: EUserType;
   processList: IProcess[];
   orderList: IOrder[];
@@ -39,7 +38,6 @@ export interface IAppContext {
 }
 export const AppContext = createContext<IAppContext>({
   state: {
-    isLoggedIn: false,
     userType: 0,
     processList: [{}],
     orderList: TestOrderList,
@@ -51,15 +49,14 @@ export const AppContext = createContext<IAppContext>({
 
 function App() {
   const [state, setState] = useState<IAppState>({
-    isLoggedIn: false,
     userType: 0,
     processList: [{}],
     orderList: TestOrderList,
     guideFilter: [],
     chats: [],
   });
-  const { loadCSRFToken } = useCRSFToken();
-  const { user, loadLoggedIn, isLoggedIn, loadUser, logoutUser } = useUser();
+  const { CSRFToken, loadCSRFToken } = useCRSFToken();
+  const { isLoggedIn, user, loadLoggedIn, loadUser, logoutUser } = useUser();
 
   const setUserType = (userType: EUserType): void => {
     setState((prevState) => ({ ...prevState, userType }));
@@ -74,14 +71,6 @@ function App() {
   };
 
   useEffect(() => {
-    setState((prevState) => ({
-      ...prevState,
-      isLoggedIn: user === undefined ? false : true,
-      userType: user === undefined ? 0 : 1,
-    }));
-  }, [user]);
-
-  useEffect(() => {
     axios.defaults.headers.common = {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -91,12 +80,24 @@ function App() {
     };
     axios.defaults.withCredentials = true;
     loadCSRFToken();
-    loadLoggedIn();
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn) loadUser();
+    if (CSRFToken !== "") loadLoggedIn();
+  }, [CSRFToken]);
+
+  useEffect(() => {
+    if (isLoggedIn === true) loadUser();
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (user !== undefined) {
+      setState((prevState) => ({
+        ...prevState,
+        userType: user === undefined ? 0 : 1,
+      }));
+    }
+  }, [user]);
 
   const login = () => {
     console.log("Login");
@@ -112,7 +113,7 @@ function App() {
   };
 
   const authorizedRoutes =
-    state.isLoggedIn && user !== undefined ? (
+    isLoggedIn && user !== undefined ? (
       <>
         <Route
           path="*"
@@ -128,7 +129,7 @@ function App() {
       </>
     ) : null;
 
-  const unAuthorizedRoutes = !state.isLoggedIn && (
+  const unAuthorizedRoutes = !isLoggedIn && (
     <>
       <Route index element={<Home userType={state.userType} />} />
     </>
@@ -138,7 +139,7 @@ function App() {
     <AppContext.Provider value={{ state, setState }}>
       <div className="app" data-testid="app">
         <div className="main-header">
-          <Header isLoggedIn={state.isLoggedIn} userType={state.userType} />
+          <Header isLoggedIn={isLoggedIn} userType={state.userType} />
         </div>
         <div className="main-content">
           <Routes data-testid="routes">

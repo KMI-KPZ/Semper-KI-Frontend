@@ -26,41 +26,12 @@ export const ModelCatalog: React.FC<Props> = ({
   setProgress,
 }) => {
   const { t } = useTranslation();
-  // const { data, isLoading, error } = useFetch<IModel>({
-  //   url: "http://127.0.0.1:3030/modelList",
-  // });
-
   const [state, setState] = useState<State>({ filter: "", grid: true });
   useEffect(() => {
     setProgress("model");
   }, []);
   return (
     <div className="model-cards">
-      {/* <Loading
-          isLoading={isLoading}
-          data={data}
-          error={error}
-          errorText={t("model.catalog.error-name")}
-          loadingErrorText={t("model.catalog.loading-error")}
-          loadingText={t("model.catalog.loading-models")}
-          component={
-            !isLoading &&
-            data &&
-            !error && (
-              <div className="model-cards">
-                {data.slice(0, 6).map((model: IModel, index: number) => (
-                  <ModelCatalogCard
-                    grid={state.grid}
-                    setProgressState={setProgressState}
-                    selectModel={selectModel}
-                    model={model}
-                    key={index}
-                  />
-                ))}
-              </div>
-            )
-          }
-        /> */}
       {models.length < 0 ? (
         <div className="model-cards">
           {models.map((model: IModel, index: number) => (

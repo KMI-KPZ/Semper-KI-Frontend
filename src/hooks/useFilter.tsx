@@ -33,8 +33,8 @@ const useFilter = () => {
         filters: filters,
       })
       .then((res) => {
-        console.log("get Data", res);
-        setData(res.data);
+        console.log("get Data", res.data);
+        // setData(res.data);
       })
       .catch((error) => {
         console.log("get Data error", error);

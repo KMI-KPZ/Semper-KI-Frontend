@@ -26,18 +26,16 @@ const useFilter = () => {
   });
 
   const loadData = (filters: IFilterItem[]): IProcessResponse => {
-    console.log("Load Data");
-    console.table(filters);
     axiosCustom
       .post(`${process.env.REACT_APP_API_URL}/public/getData/`, {
         filters: filters,
       })
       .then((res) => {
-        console.log("get Data", res.data);
+        console.log("loadData Successful", res.data);
         // setData(res.data);
       })
       .catch((error) => {
-        console.log("get Data error", error);
+        console.log("loadData error", error);
       });
     return data;
   };

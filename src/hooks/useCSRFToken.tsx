@@ -10,13 +10,6 @@ interface ReturnProps {
 
 const useCRSFToken = (): ReturnProps => {
   const [CSRFToken, setCSRFToken] = useState<string>("");
-  // const setAxiosHeader = (token: string): void => {
-  //   axios.defaults.headers.common = {
-  //     "X-CSRFToken": token,
-  //   };
-  //   axios.defaults.xsrfCookieName = "csrftoken";
-  //   axios.defaults.xsrfHeaderName = "X-CSRFToken";
-  // };
 
   const loadCSRFToken = (): void => {
     axios
@@ -24,15 +17,15 @@ const useCRSFToken = (): ReturnProps => {
       .then((response) => {
         const token = Cookies.get("csrftoken");
         if (token !== undefined) {
-          console.log("CSRFToken", token);
+          console.log("loadCSRFToken Successful");
           setCSRFToken(token);
         } else {
-          console.log("CSRFToken is undefined");
+          console.log("loadCSRFToken Failed");
           setCSRFToken("");
         }
       })
       .catch((error) => {
-        console.log("CSRFToken Error", error);
+        console.log("loadCSRFToken Error", error);
         setCSRFToken("");
       });
   };

@@ -75,7 +75,6 @@ export const ProcessView = ({ guideAnswers }: Props) => {
 
   const applyFilters = (filterItemList: IFilterItem[]) => {
     loadData(filterItemList);
-    console.log("Apply Filters", filterItemList, data);
   };
 
   const startNewProcess = () => {

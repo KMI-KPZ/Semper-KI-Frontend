@@ -2,11 +2,9 @@ import { Container } from "@mui/system";
 import axios, { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
 
-interface Props {
-  logout(): void;
-}
+interface Props {}
 
-const Logout = ({ logout }: Props) => {
+const Logout = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<AxiosError>();
 

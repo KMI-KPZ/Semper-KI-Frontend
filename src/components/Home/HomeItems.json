@@ -2,21 +2,21 @@
     {
         "title":"try-out",
         "link":"/process/model",
-        "icon":"Icon"
+        "icon":"IconModel"
     },
     {
-        "title":"",
-        "link":"",
-        "icon":""
+        "title":"guide",
+        "link":"/guide",
+        "icon":"IconChecklist"
     },
     {
-        "title":"",
-        "link":"",
-        "icon":""
+        "title":"use-service",
+        "link":"/service",
+        "icon":"IconPerson"
     },
     {
-        "title":"",
-        "link":"",
-        "icon":""
+        "title":"provide-service",
+        "link":"/service",
+        "icon":"IconFactory"
     }
 ]

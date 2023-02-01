@@ -13,9 +13,7 @@ import { Home } from "../Home/Home";
 import { ProcessView } from "../Process/ProcessView";
 import Guide from "../Guide/Guide";
 import Logout from "../Logout/Logout";
-import LogoutCallback from "../Logout/LogoutCallback";
 import Login from "../Login/Login";
-import LoginCallback from "../Login/LoginCallback";
 import { Error } from "../Error/Error";
 import { IFilterItem } from "../Process/Filter/Interface";
 import Redirect from "../Redirect/Redirect";
@@ -83,11 +81,15 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (CSRFToken !== "") loadLoggedIn();
+    if (CSRFToken !== "") {
+      loadLoggedIn();
+    }
   }, [CSRFToken]);
 
   useEffect(() => {
-    if (isLoggedIn === true) loadUser();
+    if (isLoggedIn === true) {
+      loadUser();
+    }
   }, [isLoggedIn]);
 
   useEffect(() => {
@@ -98,19 +100,6 @@ function App() {
       }));
     }
   }, [user]);
-
-  const login = () => {
-    console.log("Login");
-    loadCSRFToken();
-    setTimeout(() => {
-      loadUser();
-    }, 100);
-  };
-
-  const logout = () => {
-    console.log("Logout");
-    logoutUser();
-  };
 
   const authorizedRoutes =
     isLoggedIn && user !== undefined ? (
@@ -154,16 +143,8 @@ function App() {
               path="guide/:path"
               element={<Guide setFilter={setFilter} />}
             />
-            <Route path="logout" element={<Logout logout={logout} />} />
-            <Route
-              path="callback/logout"
-              element={<LogoutCallback logout={logout} />}
-            />
+            <Route path="logout" element={<Logout />} />
             <Route path="login" element={<Login />} />
-            <Route
-              path="callback/login"
-              element={<LoginCallback login={login} user={user} />}
-            />
             <Route
               path="aboutus"
               element={<Redirect link={URL_AboutUs} extern />}

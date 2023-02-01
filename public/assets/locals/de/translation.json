@@ -1,13 +1,11 @@
 {
   "home": {
     "headline": "Willkommen!",
-    "button": {
-      "search": "3D-Modell Suchen",
-      "search-placeholder": "Ich suche...",
-      "upload": "3D-Modell Hochladen",
-      "guide":"Hersteller anhand von Spezifikationen finden",
-      "print":"Modell herstellen",
-      "design":"Modell entwerfen"
+    "card": {
+      "try-out":"Ausprobieren",
+      "guide":"Hilfe",
+      "use-service":"Service Nutzen",
+      "provide-service":"Service Anbieten"
     }
   },
   "header": {

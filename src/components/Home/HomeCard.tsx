@@ -1,30 +1,30 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { getIconByName } from "../../config/Icons";
 
-interface Props {
-  linkGuided: string;
-  linkUnGuided: string;
-  text: string;
+export interface IHomeCard {
+  title: string;
+  link: string;
   icon: string;
-  openMenu(text: string, linkGuided: string, linkUnGuided: string): void;
 }
 
-export const HomeCard = ({
-  linkGuided,
-  linkUnGuided,
-  text,
-  icon,
-  openMenu,
-}: Props) => {
+interface Props {
+  homeCard: IHomeCard;
+}
+
+export const HomeCard: React.FC<Props> = ({ homeCard }) => {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   const handleClickCard = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     e.stopPropagation();
-    openMenu(text, linkGuided, linkUnGuided);
+    navigate(homeCard.link);
   };
-
   return (
-    <div title={text} className="home-card" onClick={handleClickCard}>
-      <img src={icon} />
-      {text}
+    <div title={homeCard.title} className="home-card" onClick={handleClickCard}>
+      <img src={getIconByName(homeCard.icon)} />
+      {t(`home.card.${homeCard.title}`)}
     </div>
   );
 };

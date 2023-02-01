@@ -1,6 +1,7 @@
 import { Container } from "@mui/system";
 import axios, { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 
 interface Props {}
 
@@ -35,11 +36,7 @@ const Logout = () => {
       }}
     >
       {isLoading ? (
-        <>
-          <div className="lds-circle">
-            <div></div>
-          </div>
-        </>
+        <LoadingAnimation />
       ) : error !== undefined ? (
         <h1>Es ist etwas schiefgelaufen : {error.message}</h1>
       ) : null}

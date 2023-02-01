@@ -8,6 +8,7 @@ import Search from "../Header/Search/Search";
 import { ModelCatalogCard } from "./ModelCatalogCard";
 import Loading from "../../../components/Process/Loading/Loading";
 import { ProcessContext } from "../ProcessView";
+import LoadingAnimation from "../../LoadingAnimation/LoadingAnimation";
 
 interface Props {
   models: IModel[];
@@ -32,7 +33,7 @@ export const ModelCatalog: React.FC<Props> = ({
   }, []);
   return (
     <div className="model-cards">
-      {models.length < 0 ? (
+      {models.length > 0 ? (
         <div className="model-cards">
           {models.map((model: IModel, index: number) => (
             <ModelCatalogCard
@@ -44,7 +45,10 @@ export const ModelCatalog: React.FC<Props> = ({
           ))}
         </div>
       ) : (
-        t("model.catalog.loading-error")
+        <div>
+          <LoadingAnimation type={0} />
+          {t("model.catalog.loading-error")}
+        </div>
       )}
     </div>
   );

@@ -59,12 +59,8 @@ export const ModelCatalogCard = ({ model, selectModel, grid }: Props) => {
         state.expanded ? "expanded" : ""
       }`}
     >
-      <h2 className="model-card-headline">{model.file.name}</h2>
-      <img
-        className="model-card-img"
-        src={require("../../../assets/images/model_placeholder.png")}
-        alt="Model"
-      />
+      <h2 className="model-card-headline">{model.name}</h2>
+      <img className="model-card-img" src={model.URI} alt="Model" />
       <h3 className="model-card-description-short">Kurzbeschreibung</h3>
       <p
         className={`model-card-description-long ${

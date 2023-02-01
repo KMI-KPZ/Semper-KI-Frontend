@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
 import "./../../styles.scss";
@@ -21,6 +21,7 @@ import Footer from "../Footer/Footer";
 import { URL_AboutUs } from "../../config/Constants";
 import { EUserType } from "../../interface/enums";
 import Service from "../Service/Service";
+import Breadcrumb from "../Breadcrumb/Breadcrumb";
 
 export interface IAppState {
   userType: EUserType;
@@ -130,6 +131,7 @@ function App() {
         <div className="main-header">
           <Header isLoggedIn={isLoggedIn} userType={state.userType} />
         </div>
+        <Breadcrumb />
         <div className="main-content">
           <Routes data-testid="routes">
             {unAuthorizedRoutes}

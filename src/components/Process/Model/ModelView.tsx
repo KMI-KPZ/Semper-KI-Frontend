@@ -17,8 +17,8 @@ export const ModelView = ({ model }: Props) => {
         <div className="content-container row box">
           <ViewInArIcon sx={{ fontSize: "200px", margin: "20px" }} />
           <div>
-            {model.file.name}
-            <br />( {getFileSizeAsString(model.file.size)} )
+            {model.name}
+            {/* <br />( {getFileSizeAsString(model.file.size)} ) */}
           </div>
           <Delete sx={{ fontSize: "50px", margin: "20px" }} />
         </div>

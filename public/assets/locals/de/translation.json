@@ -49,7 +49,7 @@
     "catalog": {
       "headline":"Modelle",
       "search-placeholder": "Ich benötige...",
-      "loading-error": "Fehler beim laden der Modelle",
+      "loading-error": "keine passende Modell mit den ausgewählten Filter gefunden",
       "error-name": "Error: ",
       "loading-models": "Modelle laden.."
     },
@@ -67,7 +67,7 @@
     "catalog": {
       "headline":"Materialien",
       "search-placeholder": "Herstellen aus...",
-      "loading-error": "Fehler beim laden der Materialien",
+      "loading-error": "keine passende Materialien mit den ausgewählten Filter gefunden",
       "error-name": "Error: ",
       "loading-material": "Materialien laden..",
       "filter": {

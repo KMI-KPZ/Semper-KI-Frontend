@@ -41,7 +41,7 @@ const Order = ({ order }: Props) => {
               {process.model === undefined
                 ? index
                 : process.model.name === undefined
-                ? process.model.file.name
+                ? "process.model.name"
                 : process.model.name}
             </div>
           ))}

@@ -19,7 +19,7 @@ const ShoppingCartItem = ({ process }: Props) => {
         <h2 className="item-headline">
           {process.model ? process.model.name : "Model-Name"}
         </h2>
-        <span>{process.model ? process.model.file.name : "---"}</span>
+        {/* <span>{process.model ? process.model.file.name : "---"}</span> */}
         <span>---</span>
         <span>---</span>
       </li>

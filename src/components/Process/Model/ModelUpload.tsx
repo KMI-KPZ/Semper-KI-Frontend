@@ -116,7 +116,14 @@ export const ModelUpload = ({ addProcessList, setProgress }: Props) => {
     addProcessList(
       fileList.map((file: File) => ({
         title: file.name,
-        model: { file, name: file.name },
+        model: {
+          name: file.name,
+          certificate: "",
+          date: "",
+          license: "",
+          tags: [],
+          URI: "",
+        },
       }))
     );
     navigate("/process/model");

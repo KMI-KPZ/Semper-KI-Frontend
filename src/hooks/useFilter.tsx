@@ -14,7 +14,7 @@ interface ReturnProps {
 export interface IProcessResponse {
   filters: IFilterItem[];
   models: IModel[];
-  materials: IMaterial[];
+  // materials: IMaterial[];
 }
 
 const useFilter = () => {
@@ -22,7 +22,7 @@ const useFilter = () => {
   const [data, setData] = useState<IProcessResponse>({
     filters: [],
     models: [],
-    materials: [],
+    // materials: [],
   });
 
   const loadData = (filters: IFilterItem[]): IProcessResponse => {
@@ -32,7 +32,7 @@ const useFilter = () => {
       })
       .then((res) => {
         console.log("loadData Successful", res.data);
-        // setData(res.data);
+        setData(res.data);
       })
       .catch((error) => {
         console.log("loadData error", error);

@@ -17,9 +17,12 @@ export interface IProgress {
 }
 
 export interface IModel {
-  modelId?: number;
-  name?: string;
-  file: File;
+  name: string;
+  tags: string[];
+  date: string;
+  license: string;
+  certificate: string;
+  URI: string;
 }
 
 export interface IMaterial {

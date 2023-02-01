@@ -1,7 +1,7 @@
 import { Container } from "@mui/system";
 import axios, { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
-import "./Login.scss";
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -34,11 +34,7 @@ const Login = () => {
       }}
     >
       {isLoading ? (
-        <>
-          <div className="lds-circle">
-            <div></div>
-          </div>
-        </>
+        <LoadingAnimation />
       ) : error !== undefined ? (
         <h1>Es ist etwas schiefgelaufen : {error.message}</h1>
       ) : null}

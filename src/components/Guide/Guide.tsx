@@ -86,6 +86,7 @@ const Guide = ({ setFilter }: Props) => {
 
   return (
     <div className="guide">
+      <h1>Guide</h1>
       {questions.sort().map((question: IGuideQuestion) => (
         <GuideQuestion
           key={question.id}

@@ -1,6 +1,12 @@
 import { createContext, useState } from "react";
 import "../../styles.scss";
-import { Route, Routes, useNavigate, useParams } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { ModelUpload } from "./Model/ModelUpload";
 import { ModelCatalog } from "./Model/ModelCatalog";
 import {
@@ -24,6 +30,7 @@ import useFilter from "../../hooks/useFilter";
 import Header from "./Header/Header";
 import { removeItem } from "../../services/utils";
 import Procedure from "./Procedure/Procedure";
+import { TestModelList } from "../../services/TestData";
 
 interface Props {
   guideAnswers: IFilterItem[];
@@ -74,6 +81,8 @@ export const ProcessView = ({ guideAnswers }: Props) => {
   const { loadData, data } = useFilter();
 
   const applyFilters = (filterItemList: IFilterItem[]) => {
+    console.log("Apply Filter", filterItemList);
+
     loadData(filterItemList);
   };
 
@@ -241,6 +250,7 @@ export const ProcessView = ({ guideAnswers }: Props) => {
           <Header />
           <div className="process-container vertical">
             <Routes>
+              <Route index element={<Navigate to="/process/model" />} />
               <Route
                 path="new"
                 element={<NewProcess startNewProcess={startNewProcess} />}

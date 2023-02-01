@@ -67,7 +67,7 @@ const Dashboard = (props: Props) => {
             link="/process/new"
           />
           <DashboardCard title="Warenkorb" icon={IconCart} link="/cart" />
-          <DashboardCard title="Guides" icon={IconChecklist} link="/guides" />
+          <DashboardCard title="Guides" icon={IconChecklist} link="/guide" />
           <DashboardCard title="Account" icon={IconPerson} link="/account" />
         </div>
         <div className="dashboard-content-column">

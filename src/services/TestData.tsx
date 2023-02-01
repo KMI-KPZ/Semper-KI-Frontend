@@ -15,17 +15,38 @@ export const TestOrderList: IOrder[] = [
     bill: undefined,
     processList: [
       {
-        model: { file: new File([], "t4est.stl") },
+        model: {
+          name: "test",
+          certificate: "certificate",
+          date: "01.01.2023",
+          license: "licens",
+          tags: ["tag1", "tag2"],
+          URI: "url",
+        },
         material: { name: "Material 1" },
         manufacturer: { name: "Hersteller 1" },
       },
       {
-        model: { file: new File([], "tes2345t.stl") },
+        model: {
+          name: "test",
+          certificate: "certificate",
+          date: "01.01.2023",
+          license: "licens",
+          tags: ["tag1", "tag2"],
+          URI: "url",
+        },
         material: { name: "Material 1324" },
         manufacturer: { name: "Hersteller 41" },
       },
       {
-        model: { file: new File([], "tes33t.stl") },
+        model: {
+          name: "test",
+          certificate: "certificate",
+          date: "01.01.2023",
+          license: "licens",
+          tags: ["tag1", "tag2"],
+          URI: "url",
+        },
         material: { name: "Material 14" },
         manufacturer: { name: "Hersteller 123" },
       },
@@ -38,7 +59,14 @@ export const TestOrderList: IOrder[] = [
     bill: undefined,
     processList: [
       {
-        model: { file: new File([], "test.stl") },
+        model: {
+          name: "test",
+          certificate: "certificate",
+          date: "01.01.2023",
+          license: "licens",
+          tags: ["tag1", "tag2"],
+          URI: "url",
+        },
         material: { name: "Material 1" },
         manufacturer: { name: "Hersteller 1" },
       },
@@ -51,7 +79,14 @@ export const TestOrderList: IOrder[] = [
     bill: new File([], "Rechnung.pdf"),
     processList: [
       {
-        model: { file: new File([], "test.stl") },
+        model: {
+          name: "test",
+          certificate: "certificate",
+          date: "01.01.2023",
+          license: "licens",
+          tags: ["tag1", "tag2"],
+          URI: "url",
+        },
         material: { name: "Material 1" },
         manufacturer: { name: "Hersteller 1" },
       },
@@ -61,54 +96,36 @@ export const TestOrderList: IOrder[] = [
 
 export const TestModelList: IModel[] = [
   {
-    modelId: 0,
-    name: "Modell 0",
-    file: new File([], "Model0.stl"),
+    name: "test",
+    certificate: "certificate",
+    date: "01.01.2023",
+    license: "licens",
+    tags: ["tag1", "tag2"],
+    URI: "url",
   },
   {
-    modelId: 1,
-    name: "Modell 1",
-    file: new File([], "Model1.stl"),
+    name: "test",
+    certificate: "certificate",
+    date: "01.01.2023",
+    license: "licens",
+    tags: ["tag1", "tag2"],
+    URI: "url",
   },
   {
-    modelId: 2,
-    name: "Modell 2",
-    file: new File([], "Model2.stl"),
+    name: "test",
+    certificate: "certificate",
+    date: "01.01.2023",
+    license: "licens",
+    tags: ["tag1", "tag2"],
+    URI: "url",
   },
   {
-    modelId: 3,
-    name: "Modell 3",
-    file: new File([], "Model3.stl"),
-  },
-  {
-    modelId: 4,
-    name: "Modell 4",
-    file: new File([], "Model4.stl"),
-  },
-  {
-    modelId: 5,
-    name: "Modell 5",
-    file: new File([], "Model5.stl"),
-  },
-  {
-    modelId: 6,
-    name: "Modell 6",
-    file: new File([], "Model6.stl"),
-  },
-  {
-    modelId: 7,
-    name: "Modell 7",
-    file: new File([], "Model7.stl"),
-  },
-  {
-    modelId: 8,
-    name: "Modell 8",
-    file: new File([], "Model8.stl"),
-  },
-  {
-    modelId: 9,
-    name: "Modell 9",
-    file: new File([], "Model9.stl"),
+    name: "test",
+    certificate: "certificate",
+    date: "01.01.2023",
+    license: "licens",
+    tags: ["tag1", "tag2"],
+    URI: "url",
   },
 ];
 
@@ -260,17 +277,38 @@ export const TestManufacturerList: IManufacturer[] = [
 
 export const TestProcessList: IProcess[] = [
   {
-    model: { file: new File([], "test0.stl") },
+    model: {
+      name: "test",
+      certificate: "certificate",
+      date: "01.01.2023",
+      license: "licens",
+      tags: ["tag1", "tag2"],
+      URI: "url",
+    },
     material: { name: "Material 0" },
     manufacturer: { name: "Hersteller 0" },
   },
   {
-    model: { file: new File([], "test1.stl") },
+    model: {
+      name: "test",
+      certificate: "certificate",
+      date: "01.01.2023",
+      license: "licens",
+      tags: ["tag1", "tag2"],
+      URI: "url",
+    },
     material: { name: "Material 1" },
     manufacturer: { name: "Hersteller 1" },
   },
   {
-    model: { file: new File([], "test2.stl") },
+    model: {
+      name: "test",
+      certificate: "certificate",
+      date: "01.01.2023",
+      license: "licens",
+      tags: ["tag1", "tag2"],
+      URI: "url",
+    },
     material: { name: "Material 2" },
     manufacturer: { name: "Hersteller 2" },
   },

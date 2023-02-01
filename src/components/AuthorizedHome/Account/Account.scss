@@ -2,10 +2,10 @@
 
 
 .account {
-    overflow: scroll;
     display: flex;
+    gap:10px;
     flex-direction: column;
-    padding: 20px;
+    padding: 50px;
     align-items: left;
     max-width: 1800px;    
     background-color: $white;

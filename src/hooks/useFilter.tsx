@@ -7,14 +7,14 @@ import { IMaterial, IModel } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
-  loadData(filters: IFilterItem[]): any;
+  loadData(filters: IFilterItem[], dataType: string): any;
   data: IProcessResponse;
 }
 
 export interface IProcessResponse {
   filters: IFilterItem[];
   models: IModel[];
-  // materials: IMaterial[];
+  materials: IMaterial[];
 }
 
 const useFilter = () => {
@@ -22,20 +22,24 @@ const useFilter = () => {
   const [data, setData] = useState<IProcessResponse>({
     filters: [],
     models: [],
-    // materials: [],
+    materials: [],
   });
 
-  const loadData = (filters: IFilterItem[]): IProcessResponse => {
+  const loadData = (
+    filters: IFilterItem[],
+    dataType: string
+  ): IProcessResponse => {
     axiosCustom
       .post(`${process.env.REACT_APP_API_URL}/public/getData/`, {
-        filters: filters,
+        filters,
+        dataType,
       })
       .then((res) => {
-        console.log("loadData Successful", res.data);
-        setData(res.data);
+        console.log("useFilter| loadData Successful", res.data);
+        setData((prevState) => ({ ...prevState, ...res.data }));
       })
       .catch((error) => {
-        console.log("loadData error", error);
+        console.log("useFilter| loadData error", error);
       });
     return data;
   };

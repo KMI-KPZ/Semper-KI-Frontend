@@ -21,7 +21,7 @@ export interface IModel {
   tags: string[];
   date: string;
   license: string;
-  certificate: string;
+  certificate: string[];
   URI: string;
 }
 

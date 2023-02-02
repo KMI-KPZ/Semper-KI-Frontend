@@ -118,7 +118,7 @@ export const ModelUpload = ({ addProcessList, setProgress }: Props) => {
         title: file.name,
         model: {
           name: file.name,
-          certificate: "",
+          certificate: [""],
           date: "",
           license: "",
           tags: [],

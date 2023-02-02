@@ -3,9 +3,11 @@ import "./../ProcessView.scss";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IModel } from "../../../interface/Interface";
-import { ModelCatalogCard } from "./ModelCatalogCard";
 import LoadingAnimation from "../../LoadingAnimation/LoadingAnimation";
 import { IProcessState } from "../ProcessView";
+import { ModelCard } from "./ModelCard";
+import PopUp from "../../PopUp/PopUp";
+import { ModelView } from "./ModelView";
 
 interface Props {
   models: IModel[];
@@ -14,34 +16,53 @@ interface Props {
   setProgress(path: string): void;
 }
 
+interface State {
+  popUp: boolean;
+  model: IModel | undefined;
+}
+
 export const ModelCatalog: React.FC<Props> = ({
   models,
   processState,
   selectModel,
   setProgress,
 }) => {
+  const [state, setState] = useState<State>({ popUp: false, model: undefined });
   const { t } = useTranslation();
   useEffect(() => {
     setProgress("model");
   }, []);
+  const openModelView = (model: IModel) => {
+    setState((prevState) => ({ ...prevState, popUp: true, model }));
+  };
+  const closeModelView = () => {
+    setState((prevState) => ({ ...prevState, popUp: false, model: undefined }));
+  };
+  const classNameList: string = processState.grid === true ? "" : "list";
   return (
-    <div className="model-cards">
+    <div className={`model-catalog ${classNameList}`}>
       {models.length > 0 ? (
-        <div className="model-cards">
+        <>
           {models.map((model: IModel, index: number) => (
-            <ModelCatalogCard
+            <ModelCard
               grid={processState.grid}
               selectModel={selectModel}
               model={model}
               key={index}
+              openModelView={openModelView}
             />
           ))}
-        </div>
+          <PopUp
+            open={state.popUp === true && state.model !== undefined}
+            onOutsideClick={closeModelView}
+          >
+            {state.model !== undefined ? (
+              <ModelView model={state.model} selectModel={selectModel} />
+            ) : null}
+          </PopUp>
+        </>
       ) : (
-        <div>
-          <LoadingAnimation type={0} />
-          {t("model.catalog.loading-error")}
-        </div>
+        "keine Modelle gefunden"
       )}
     </div>
   );

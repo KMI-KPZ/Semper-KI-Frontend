@@ -7,9 +7,11 @@ import { Button, IconButton } from "@mui/material";
 
 import _filter from "./FilterQuestions.json";
 import FilterCard from "./FilterCard";
+import { IProgress } from "../../../interface/Interface";
 const testFilter = _filter as IFilterItem[];
 
 interface Props {
+  progress: IProgress;
   guideAnswers: IFilterItem[];
   applyFilters(filterItemList: IFilterItem[]): void;
 }
@@ -51,7 +53,7 @@ const hydrateFilter = (guideAnswers: IFilterItem[]): IFilterItem[] => {
   return filteritems;
 };
 
-const Filter: React.FC<Props> = ({ applyFilters, guideAnswers }) => {
+const Filter: React.FC<Props> = ({ applyFilters, guideAnswers, progress }) => {
   const hydratedFilterList: IFilterItem[] = hydrateFilter(guideAnswers);
   const [state, setState] = useState<State>({
     filterList: hydratedFilterList,
@@ -71,7 +73,7 @@ const Filter: React.FC<Props> = ({ applyFilters, guideAnswers }) => {
 
   useEffect(() => {
     callApplyFilters();
-  }, []);
+  }, [progress]);
 
   const setFilterItems = (filter: IFilterItem[]) => {
     setState((prevState) => ({ ...prevState, filter }));

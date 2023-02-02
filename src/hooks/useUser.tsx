@@ -24,7 +24,7 @@ const useUser = (): ReturnProps => {
       .get(`${process.env.REACT_APP_API_URL}/public/getUser/`)
       .then((response) => {
         const userData = response.data;
-        console.log("loadUser Successful", userData);
+        console.log("useUser| loadUser Successful", userData);
         setUser(
           Object.keys(userData).length === 0 && userData.constructor === Object
             ? undefined
@@ -33,7 +33,7 @@ const useUser = (): ReturnProps => {
         setLoggedIn(true);
       })
       .catch((error) => {
-        console.log("loadUser Error", error);
+        console.log("useUser| loadUser Error", error);
         setUser(undefined);
       });
   };
@@ -42,11 +42,11 @@ const useUser = (): ReturnProps => {
     axiosCustom
       .get(`${process.env.REACT_APP_API_URL}/public/isLoggedIn/`)
       .then((response) => {
-        console.log("loadLoggedIn", response.data);
+        console.log("useUser| loadLoggedIn", response.data);
         setLoggedIn(response.data === "Successful" ? true : false);
       })
       .catch((error) => {
-        console.log("loadLoggedIn error", error);
+        console.log("useUser| loadLoggedIn error", error);
         setLoggedIn(false);
       });
   };
@@ -55,11 +55,11 @@ const useUser = (): ReturnProps => {
     axiosCustom
       .delete(`${process.env.REACT_APP_API_URL}/public/profileDeleteUser/`)
       .then((response) => {
-        console.log("deleteUser Successful");
+        console.log("useUser| deleteUser Successful");
         navigate("/logout");
       })
       .catch((error) => {
-        console.log("deleteUser Error", error);
+        console.log("useUser| deleteUser Error", error);
       });
   };
 

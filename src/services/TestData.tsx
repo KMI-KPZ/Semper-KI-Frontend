@@ -17,7 +17,7 @@ export const TestOrderList: IOrder[] = [
       {
         model: {
           name: "test",
-          certificate: "certificate",
+          certificate: ["certificate"],
           date: "01.01.2023",
           license: "licens",
           tags: ["tag1", "tag2"],
@@ -29,7 +29,7 @@ export const TestOrderList: IOrder[] = [
       {
         model: {
           name: "test",
-          certificate: "certificate",
+          certificate: ["certificate"],
           date: "01.01.2023",
           license: "licens",
           tags: ["tag1", "tag2"],
@@ -41,7 +41,7 @@ export const TestOrderList: IOrder[] = [
       {
         model: {
           name: "test",
-          certificate: "certificate",
+          certificate: ["certificate"],
           date: "01.01.2023",
           license: "licens",
           tags: ["tag1", "tag2"],
@@ -61,7 +61,7 @@ export const TestOrderList: IOrder[] = [
       {
         model: {
           name: "test",
-          certificate: "certificate",
+          certificate: ["certificate"],
           date: "01.01.2023",
           license: "licens",
           tags: ["tag1", "tag2"],
@@ -81,7 +81,7 @@ export const TestOrderList: IOrder[] = [
       {
         model: {
           name: "test",
-          certificate: "certificate",
+          certificate: ["certificate"],
           date: "01.01.2023",
           license: "licens",
           tags: ["tag1", "tag2"],
@@ -97,7 +97,7 @@ export const TestOrderList: IOrder[] = [
 export const TestModelList: IModel[] = [
   {
     name: "test",
-    certificate: "certificate",
+    certificate: ["certificate"],
     date: "01.01.2023",
     license: "licens",
     tags: ["tag1", "tag2"],
@@ -105,7 +105,7 @@ export const TestModelList: IModel[] = [
   },
   {
     name: "test",
-    certificate: "certificate",
+    certificate: ["certificate"],
     date: "01.01.2023",
     license: "licens",
     tags: ["tag1", "tag2"],
@@ -113,7 +113,7 @@ export const TestModelList: IModel[] = [
   },
   {
     name: "test",
-    certificate: "certificate",
+    certificate: ["certificate"],
     date: "01.01.2023",
     license: "licens",
     tags: ["tag1", "tag2"],
@@ -121,7 +121,7 @@ export const TestModelList: IModel[] = [
   },
   {
     name: "test",
-    certificate: "certificate",
+    certificate: ["certificate"],
     date: "01.01.2023",
     license: "licens",
     tags: ["tag1", "tag2"],
@@ -279,7 +279,7 @@ export const TestProcessList: IProcess[] = [
   {
     model: {
       name: "test",
-      certificate: "certificate",
+      certificate: ["certificate"],
       date: "01.01.2023",
       license: "licens",
       tags: ["tag1", "tag2"],
@@ -291,7 +291,7 @@ export const TestProcessList: IProcess[] = [
   {
     model: {
       name: "test",
-      certificate: "certificate",
+      certificate: ["certificate"],
       date: "01.01.2023",
       license: "licens",
       tags: ["tag1", "tag2"],
@@ -303,7 +303,7 @@ export const TestProcessList: IProcess[] = [
   {
     model: {
       name: "test",
-      certificate: "certificate",
+      certificate: ["certificate"],
       date: "01.01.2023",
       license: "licens",
       tags: ["tag1", "tag2"],

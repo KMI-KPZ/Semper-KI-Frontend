@@ -5,17 +5,13 @@
         position: fixed;
         top: 0;
         left:0;
-        height: 100vh;
-        width: 100vw;
+        right: 0;
+        bottom: 0;
         background-color: rgba(0, 0, 0, 0.5);
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-    }
-    &.closed {
-        height: fit-content;
-        width: fit-content;
     }
 }
 .popup-children {
@@ -26,10 +22,4 @@
     background-color: $white;
     padding:40px;
     border-radius: 20px;
-}
-.popup-button {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }

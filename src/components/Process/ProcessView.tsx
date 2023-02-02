@@ -86,8 +86,8 @@ export const ProcessView = ({ guideAnswers }: Props) => {
   const { loadData, data } = useFilter();
 
   const applyFilters = (filterItemList: IFilterItem[]) => {
-    console.log("Apply Filter", filterItemList);
-    loadData(filterItemList);
+    console.log("Process| Apply Filter", filterItemList);
+    loadData(filterItemList, state.progress.link.split("/").splice(-1, 1)[0]);
   };
 
   const startNewProcess = () => {
@@ -235,7 +235,19 @@ export const ProcessView = ({ guideAnswers }: Props) => {
     }));
   };
 
-  const selectModel = (model: IModel): void => {};
+  const selectModel = (model: IModel): void => {
+    console.log("Process| selectModel", model);
+
+    let processList: IProcess[] = state.processList;
+    state.activeProcessList.forEach((processIndex: number, index: number) => {
+      processList[processIndex] = { ...processList[processIndex], model };
+    });
+    setState((prevState) => ({
+      ...prevState,
+      processList,
+    }));
+    navigate("/process/material");
+  };
   const selectMaterial = (material: IMaterial): void => {};
   const selectManufacturer = (manufacturer: IManufacturer): void => {};
   const selectPostProcessing = (postProcessing: IPostProcessing): void => {};
@@ -254,83 +266,87 @@ export const ProcessView = ({ guideAnswers }: Props) => {
       }}
     >
       <div className="process">
-        <Filter applyFilters={applyFilters} guideAnswers={guideAnswers} />
+        <Filter
+          applyFilters={applyFilters}
+          guideAnswers={guideAnswers}
+          progress={state.progress}
+        />
         <div className="process-content">
           <Header />
-          <div className="process-container vertical">
-            <Routes>
-              <Route index element={<Navigate to="/process/model" />} />
-              <Route
-                path="new"
-                element={<NewProcess startNewProcess={startNewProcess} />}
-              />
-              <Route
-                path="model"
-                element={
-                  <ModelCatalog
-                    processState={state}
-                    models={data.models}
-                    selectModel={selectModel}
-                    setProgress={setProgress}
-                  />
-                }
-              />
-              <Route
-                path="upload"
-                element={
-                  <ModelUpload
-                    addProcessList={addProcessList}
-                    setProgress={setProgress}
-                  />
-                }
-              />
-              <Route
-                path="material"
-                element={
-                  <MaterialCatalog
-                    selectMaterial={selectMaterial}
-                    setProgress={setProgress}
-                  />
-                }
-              />
-              <Route
-                path="procedure"
-                element={<Procedure setProgress={setProgress} />}
-              />
+          <Routes>
+            <Route index element={<Navigate to="/process/model" />} />
+            <Route
+              path="new"
+              element={<NewProcess startNewProcess={startNewProcess} />}
+            />
+            <Route
+              path="model"
+              element={
+                <ModelCatalog
+                  processState={state}
+                  models={data.models}
+                  selectModel={selectModel}
+                  setProgress={setProgress}
+                />
+              }
+            />
+            <Route
+              path="upload"
+              element={
+                <ModelUpload
+                  addProcessList={addProcessList}
+                  setProgress={setProgress}
+                />
+              }
+            />
+            <Route
+              path="material"
+              element={
+                <MaterialCatalog
+                  grid={state.grid}
+                  materials={data.materials}
+                  selectMaterial={selectMaterial}
+                  setProgress={setProgress}
+                />
+              }
+            />
+            <Route
+              path="procedure"
+              element={<Procedure setProgress={setProgress} />}
+            />
 
-              <Route
-                path="manufacturer"
-                element={
-                  <ManufacturerCatalog
-                    selectManufacturer={selectManufacturer}
-                    setProgress={setProgress}
-                  />
-                }
-              />
+            <Route
+              path="manufacturer"
+              element={
+                <ManufacturerCatalog
+                  selectManufacturer={selectManufacturer}
+                  setProgress={setProgress}
+                />
+              }
+            />
 
-              <Route
-                path="postprocessing"
-                element={
-                  <PostProcessingView
-                    processList={state.processList}
-                    selectPostProcessing={selectPostProcessing}
-                    setProgress={setProgress}
-                  />
-                }
-              />
-              <Route
-                path="additive"
-                element={
-                  <AdditiveView
-                    processList={state.processList}
-                    selectAdditive={selectAdditive}
-                    setProgress={setProgress}
-                  />
-                }
-              />
-              <Route path="*" element={<Error />} />
-            </Routes>
-          </div>
+            <Route
+              path="postprocessing"
+              element={
+                <PostProcessingView
+                  processList={state.processList}
+                  selectPostProcessing={selectPostProcessing}
+                  setProgress={setProgress}
+                />
+              }
+            />
+            <Route
+              path="additive"
+              element={
+                <AdditiveView
+                  processList={state.processList}
+                  selectAdditive={selectAdditive}
+                  setProgress={setProgress}
+                />
+              }
+            />
+            <Route path="*" element={<Error />} />
+          </Routes>
         </div>
       </div>
     </ProcessContext.Provider>

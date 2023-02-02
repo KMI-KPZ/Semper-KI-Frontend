@@ -1,51 +1,39 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode } from "react";
 import "./PopUp.scss";
 
 interface Props {
-  button: ReactNode;
+  open: boolean;
+  onOutsideClick(): void;
   children: ReactNode;
 }
 
-interface State {
-  open: boolean;
-}
-
-const PopUp: React.FC<Props> = ({ children, button }) => {
-  const [state, setState] = useState<State>({ open: false });
-  const handleOnClickButton = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setState((prevState) => ({ ...prevState, open: true }));
-  };
+const PopUp: React.FC<Props> = ({ children, open, onOutsideClick }) => {
   const handleOnClickBackground = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    setState((prevState) => ({ ...prevState, open: false }));
+    onOutsideClick();
   };
+
   const handleOnClickChildren = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.preventDefault();
     e.stopPropagation();
   };
+
   return (
     <div
-      className={`popup ${state.open ? "open" : "closed"}`}
+      className={`popup ${open ? "open" : ""}`}
       onClick={handleOnClickBackground}
+      onMouseDown={(e) => handleOnClickBackground}
     >
-      {state.open === true ? (
+      {open === true ? (
         <div className="popup-children" onClick={handleOnClickChildren}>
           {children}
         </div>
-      ) : (
-        <div className="popup-button" onClick={handleOnClickButton}>
-          {button}
-        </div>
-      )}
+      ) : null}
     </div>
   );
 };

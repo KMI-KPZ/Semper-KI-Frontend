@@ -59,6 +59,20 @@ const Filter: React.FC<Props> = ({ applyFilters, guideAnswers }) => {
   });
   const { t } = useTranslation();
 
+  const callApplyFilters = () => {
+    applyFilters(
+      state.filterList.map((filterItem: IFilterItem) => {
+        let newFilterItem: IFilterItem = filterItem;
+        if (newFilterItem.isChecked === false) newFilterItem.answer = null;
+        return newFilterItem;
+      })
+    );
+  };
+
+  useEffect(() => {
+    callApplyFilters();
+  }, []);
+
   const setFilterItems = (filter: IFilterItem[]) => {
     setState((prevState) => ({ ...prevState, filter }));
   };
@@ -94,13 +108,7 @@ const Filter: React.FC<Props> = ({ applyFilters, guideAnswers }) => {
 
   const onClickApply = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    applyFilters(
-      state.filterList.map((filterItem: IFilterItem) => {
-        let newFilterItem: IFilterItem = filterItem;
-        if (newFilterItem.isChecked === false) newFilterItem.answer = null;
-        return newFilterItem;
-      })
-    );
+    callApplyFilters();
   };
 
   const handleOnClickMenuOpen = (

@@ -9,11 +9,14 @@ const Breadcrumb: React.FC<Props> = ({}) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const splittet: string[] = pathname.split("/");
-  if (splittet[0] === "") splittet.splice(0, 1);
+  if (splittet[0] === "" && splittet[1] === "") {
+    splittet.splice(0, 1);
+  }
+  splittet[0] = "home";
 
   const generateLink = (index: number): string => {
     let link: string = "";
-    for (let i = 0; i <= index; i++) {
+    for (let i = 1; i <= index; i++) {
       link = link.concat("/");
       link = link.concat(splittet[i]);
     }
@@ -30,17 +33,19 @@ const Breadcrumb: React.FC<Props> = ({}) => {
 
   return (
     <div className="breadcrumb">
-      {splittet.map((name: string, index: number) => (
-        <React.Fragment key={index}>
-          <a
-            href={generateLink(index)}
-            onClick={(e) => handleOnClick(e, index)}
-          >
-            {name}
-          </a>
-          {index + 1 < splittet.length ? " > " : null}
-        </React.Fragment>
-      ))}
+      {splittet.length > 1
+        ? splittet.map((name: string, index: number) => (
+            <React.Fragment key={index}>
+              <a
+                href={generateLink(index)}
+                onClick={(e) => handleOnClick(e, index)}
+              >
+                {name}
+              </a>
+              {index + 1 < splittet.length ? " > " : null}
+            </React.Fragment>
+          ))
+        : null}
     </div>
   );
 };

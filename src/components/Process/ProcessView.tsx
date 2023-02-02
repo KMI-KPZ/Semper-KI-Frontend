@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import "../../styles.scss";
 import {
   Navigate,
@@ -30,17 +30,18 @@ import useFilter from "../../hooks/useFilter";
 import Header from "./Header/Header";
 import { removeItem } from "../../services/utils";
 import Procedure from "./Procedure/Procedure";
-import { TestModelList } from "../../services/TestData";
 
 interface Props {
   guideAnswers: IFilterItem[];
 }
+
 export interface IProcessState {
   processList: IProcess[];
   activeProcessList: number[];
   grid: boolean;
   progress: IProgress;
 }
+
 export interface IProcessContext {
   processState: IProcessState;
   createEmptryProcess(): void;
@@ -48,6 +49,7 @@ export interface IProcessContext {
   deleteProcess(processId: number): void;
   selectProcess(index: number): void;
   setProgress(path: string): void;
+  setGridState(grid: boolean): void;
 }
 const initialProcessState: IProcessState = {
   processList: [{ title: "Item 1" }],
@@ -72,6 +74,9 @@ export const ProcessContext = createContext<IProcessContext>({
   setProgress: () => {
     console.log("Error ProcessContext setProgress");
   },
+  setGridState: () => {
+    console.log("Error ProcessContext setGridBoolean");
+  },
 });
 
 export const ProcessView = ({ guideAnswers }: Props) => {
@@ -82,7 +87,6 @@ export const ProcessView = ({ guideAnswers }: Props) => {
 
   const applyFilters = (filterItemList: IFilterItem[]) => {
     console.log("Apply Filter", filterItemList);
-
     loadData(filterItemList);
   };
 
@@ -155,6 +159,10 @@ export const ProcessView = ({ guideAnswers }: Props) => {
     } else {
       navigate("/process/model");
     }
+  };
+
+  const setGridState = (grid: boolean) => {
+    setState((prevState) => ({ ...prevState, grid }));
   };
 
   const getProgressByPath = (path: string): IProgress => {
@@ -242,6 +250,7 @@ export const ProcessView = ({ guideAnswers }: Props) => {
         deleteProcess,
         selectProcess,
         setProgress,
+        setGridState,
       }}
     >
       <div className="process">
@@ -259,6 +268,7 @@ export const ProcessView = ({ guideAnswers }: Props) => {
                 path="model"
                 element={
                   <ModelCatalog
+                    processState={state}
                     models={data.models}
                     selectModel={selectModel}
                     setProgress={setProgress}

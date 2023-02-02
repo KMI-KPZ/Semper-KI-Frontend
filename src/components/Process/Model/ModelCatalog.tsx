@@ -1,33 +1,26 @@
 import "../../../styles.scss";
 import "./../ProcessView.scss";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IModel } from "../../../interface/Interface";
-import { useFetch } from "../../../hooks/useFetch";
-import Search from "../Header/Search/Search";
 import { ModelCatalogCard } from "./ModelCatalogCard";
-import Loading from "../../../components/Process/Loading/Loading";
-import { ProcessContext } from "../ProcessView";
 import LoadingAnimation from "../../LoadingAnimation/LoadingAnimation";
+import { IProcessState } from "../ProcessView";
 
 interface Props {
   models: IModel[];
+  processState: IProcessState;
   selectModel(model: IModel): void;
   setProgress(path: string): void;
 }
 
-interface State {
-  filter: string;
-  grid: boolean;
-}
-
 export const ModelCatalog: React.FC<Props> = ({
   models,
+  processState,
   selectModel,
   setProgress,
 }) => {
   const { t } = useTranslation();
-  const [state, setState] = useState<State>({ filter: "", grid: true });
   useEffect(() => {
     setProgress("model");
   }, []);
@@ -37,7 +30,7 @@ export const ModelCatalog: React.FC<Props> = ({
         <div className="model-cards">
           {models.map((model: IModel, index: number) => (
             <ModelCatalogCard
-              grid={state.grid}
+              grid={processState.grid}
               selectModel={selectModel}
               model={model}
               key={index}

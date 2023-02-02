@@ -7,13 +7,14 @@ import "./Search.scss";
 import { ProcessContext } from "../../ProcessView";
 
 const Search = () => {
-  const { processState } = useContext(ProcessContext);
+  const { processState, setGridState } = useContext(ProcessContext);
+
   const handleClickButton = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     grid: boolean
   ) => {
     e.preventDefault();
-    // handleClickGrid(processState.grid);
+    setGridState(grid);
   };
 
   return (

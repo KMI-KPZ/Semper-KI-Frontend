@@ -121,7 +121,7 @@ function App() {
 
   const unAuthorizedRoutes = !isLoggedIn && (
     <>
-      <Route index element={<Home userType={state.userType} />} />
+      <Route index element={<Home />} />
     </>
   );
 

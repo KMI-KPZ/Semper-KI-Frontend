@@ -2,29 +2,32 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { getIconByName } from "../../config/Icons";
-
-export interface IHomeCard {
-  title: string;
-  link: string;
-  icon: string;
-}
+import { ICardItem } from "./CardView";
 
 interface Props {
-  homeCard: IHomeCard;
+  carditem: ICardItem;
 }
 
-export const HomeCard: React.FC<Props> = ({ homeCard }) => {
+const Card: React.FC<Props> = ({ carditem }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const handleClickCard = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     e.stopPropagation();
-    navigate(homeCard.link);
+    navigate(carditem.link);
   };
   return (
-    <div title={homeCard.title} className="home-card" onClick={handleClickCard}>
-      <img src={getIconByName(homeCard.icon)} />
-      {t(`home.card.${homeCard.title}`)}
+    <div
+      title={t(`card-view.${carditem.title}`)}
+      className="card"
+      onClick={handleClickCard}
+    >
+      {carditem.icon !== undefined ? (
+        <img src={getIconByName(carditem.icon)} />
+      ) : null}
+      {t(`card-view.${carditem.title}`)}
     </div>
   );
 };
+
+export default Card;

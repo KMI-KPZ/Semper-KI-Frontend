@@ -4,13 +4,15 @@
   display:flex;
   flex-direction: row;
   gap:20px;
-  min-height: calc(100vh - $heightHeader - $heightFooter - 2 * $mainGap);
+  min-height: $heightProcess;
 }
 
 .process-content {
   display: flex;
   flex-direction: column;
   gap:20px;
-  min-width: 900px;
+  // min-width: 900px;
+  // max-width: 1200px;
+  width: 1200px;
 }
 

@@ -113,20 +113,24 @@ export const ModelUpload = ({ addProcessList, setProgress }: Props) => {
   };
 
   const handleClickNext = () => {
-    addProcessList(
-      fileList.map((file: File) => ({
-        title: file.name,
-        model: {
-          name: file.name,
-          certificate: [""],
-          date: "",
-          license: "",
-          tags: [],
-          URI: "",
-        },
-      }))
-    );
-    navigate("/process/model");
+    if (fileList.length > 0) {
+      addProcessList(
+        fileList.map((file: File) => ({
+          title: file.name,
+          model: {
+            name: file.name,
+            certificate: [""],
+            date: "",
+            license: "",
+            tags: [],
+            URI: "",
+          },
+        }))
+      );
+      navigate("/process/material");
+    } else {
+      setError(true);
+    }
   };
 
   return (

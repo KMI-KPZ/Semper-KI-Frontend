@@ -1,9 +1,11 @@
 $heightHeader: 50px;
-$heightFooter: 50px;
+$heightBreadcrumb: 25px;
 $heightWizard: 50px;
 $heightHeadline: 50px;
 $heightHeadlineSearch: 100px;
 $heightBottomButtons:50px;
+$heightFooter: 50px;
+
 
 $widthProcessContent: 75%;
 
@@ -17,3 +19,6 @@ $mainGap:20px;
 
 $modelCatalogRowCount: 4;
 $modelCatalogGap:$containerGap;
+
+
+$heightProcess: calc(100vh - $heightHeader - $heightBreadcrumb - $heightFooter - (3 * $mainGap));

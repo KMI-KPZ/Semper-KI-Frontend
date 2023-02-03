@@ -1,11 +1,27 @@
 {
-  "home": {
-    "headline": "Willkommen!",
-    "card": {
+  "card-view":{
+    "home":{
+      "title": "Willkommen!",
       "try-out":"Ausprobieren",
       "guide":"Hilfe",
       "use-service":"Service Nutzen",
       "provide-service":"Service Anbieten"
+      
+    },
+    "service":{
+      "title":"Service",
+      "use":{
+        "title":"Nutzen",
+        "produce":"Herstellen lassen",
+        "design":"Entwerfen lassen",
+        "accompany":"Gesamtprozess begleiten lassen"
+      },
+      "provide":{
+        "title":"Anbieten",
+        "produce":"Herstellen",
+        "design":"Entwerfen",
+        "accompany":"Gesamtprozess begleiten"
+      }
     }
   },
   "header": {

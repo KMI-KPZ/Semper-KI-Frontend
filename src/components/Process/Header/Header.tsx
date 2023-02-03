@@ -12,7 +12,12 @@ const Header: React.FC = () => {
     <div className="process-header">
       <Cart />
       <div className="process-header-box">
-        <Wizard progress={processState.progress} processState={processState} />
+        {processState.progress.link !== "/process/upload" ? (
+          <Wizard
+            progress={processState.progress}
+            processState={processState}
+          />
+        ) : null}
         <h1 className="process-headline">{processState.progress.title}</h1>
         {processState.progress.type === 0 ? <Search /> : null}
       </div>

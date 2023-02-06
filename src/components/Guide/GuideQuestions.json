@@ -1,10 +1,10 @@
 [
   {
-    "id":0,
     "filterId":2,
     "title":"Anzahl",
     "options":[
       {
+        "checked":false,
         "title":"1 - 5",
         "answer": 
         {
@@ -16,6 +16,7 @@
         }
       },
       {
+        "checked":false,
         "title":"5 - 50",
         "answer": 
         {
@@ -27,6 +28,7 @@
         }
       },
       {
+        "checked":false,
         "title":"50 - 500",
         "answer": 
         {
@@ -38,6 +40,7 @@
         }
       },
       {
+        "checked":false,
         "title":"500+",
         "answer": 
         {
@@ -49,17 +52,18 @@
         }
       },
       {
+        "checked":false,
         "title":"unbekannt",
         "answer":null
       }
     ]
   },
   {
-    "id":1,
     "filterId":1,
     "title":"Lieferzeit",
     "options":[
       {
+        "checked":false,
         "title":"1 - 2",
         "answer":{
           "unit":"Wochen",
@@ -70,6 +74,7 @@
         }
       },
       {
+        "checked":false,
         "title":"2 - 5",
         "answer":{
           "unit":"Wochen",
@@ -80,6 +85,7 @@
         }
       },
       {
+        "checked":false,
         "title":"5 - 10",
         "answer":{
           "unit":"Wochen",
@@ -90,6 +96,7 @@
         }
       },
       {
+        "checked":false,
         "title":"10+",
         "answer":{
           "unit":"Wochen",
@@ -100,17 +107,18 @@
         }
       },
       {
+        "checked":false,
         "title":"unbekannt",
         "answer":null
       }
     ]
   },
   {
-    "id":2,
     "filterId":4,
     "title":"Größe des Produktes",
     "options":[
       {
+        "checked":false,
         "title":"1 - 10",
         "answer":{
           "unit":"cm³",
@@ -121,6 +129,7 @@
         }
       },
       {
+        "checked":false,
         "title":"10 - 100",
         "answer":{
           "unit":"cm³",
@@ -131,6 +140,7 @@
         }
       },
       {
+        "checked":false,
         "title":"100 - 1000",
         "answer":{
           "unit":"cm³",
@@ -141,6 +151,7 @@
         }
       },
       {
+        "checked":false,
         "title":"1000+",
         "answer":{
           "unit":"cm³",
@@ -151,17 +162,18 @@
         }
       },
       {
+        "checked":false,
         "title":"unbekannt",
         "answer":null
       }
     ]
   },
   {
-    "id":3,
     "filterId":7,
     "title":"Material",
     "options":[
       {
+        "checked":false,
         "title":"Kunstoff",
         "answer":{
           "unit":null,
@@ -169,6 +181,7 @@
         }
       },
       {
+        "checked":false,
         "title":"Metall",
         "answer":{
           "unit":null,
@@ -176,6 +189,7 @@
         }
       },
       {
+        "checked":false,
         "title":"Keramik",
         "answer":{
           "unit":null,
@@ -183,6 +197,7 @@
         }
       },
       {
+        "checked":false,
         "title":"Organisch",
         "answer":{
           "unit":null,
@@ -190,17 +205,18 @@
         }
       },
       {
+        "checked":false,
         "title":"unbekannt",
         "answer":null
       }
     ]
   },
   {
-    "id":4,
     "filterId":3,
     "title":"Modell",
     "options":[
       {
+        "checked":false,
         "title":"vorhanden",
         "answer":{
           "unit":null,
@@ -208,6 +224,7 @@
         }
       },
       {
+        "checked":false,
         "title":"fehlt",
         "answer":{
           "unit":null,
@@ -215,6 +232,7 @@
         }
       },
       {
+        "checked":false,
         "title":"auf der Suche",
         "answer":{
           "unit":null,
@@ -222,6 +240,7 @@
         }
       },
       {
+        "checked":false,
         "title":"anfertigen lassen",
         "answer":{
           "unit":null,
@@ -229,17 +248,18 @@
         }
       },
       {
+        "checked":false,
         "title":"unbekannt",
         "answer":null
       }
     ]
   },
   {
-    "id":5,
     "filterId":0,
     "title":"Kosten pro Produkt",
     "options":[
       {
+        "checked":false,
         "title":"bis 50",
         "answer": 
         {
@@ -250,6 +270,7 @@
         }
       },
       {
+        "checked":false,
         "title":"50 - 500",
         "answer": 
         {
@@ -261,6 +282,7 @@
         }
       },
       {
+        "checked":false,
         "title":"500 - 1500",
         "answer": 
         {
@@ -272,6 +294,7 @@
         }
       },
       {
+        "checked":false,
         "title":"1500+",
         "answer": 
         {
@@ -283,6 +306,7 @@
         }
       },
       {
+        "checked":false,
         "title":"unbekannt",
         "answer":null
       }

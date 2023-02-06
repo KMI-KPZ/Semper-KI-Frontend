@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
 import "./../../styles.scss";
@@ -142,10 +142,14 @@ function App() {
               element={<ProcessView guideAnswers={state.guideFilter} />}
             />
             <Route path="test" element={<RequestTest />} />
-            <Route
-              path="guide/*"
-              element={<GuideView setFilter={setFilter} />}
-            />
+            <Route path="guide">
+              <Route index element={<GuideView setFilter={setFilter} />} />
+              <Route
+                path=":path"
+                element={<GuideView setFilter={setFilter} />}
+              />
+              <Route path="*" element={<Navigate to="/guide" />} />
+            </Route>
             <Route path="logout" element={<Logout />} />
             <Route path="login" element={<Login />} />
             <Route

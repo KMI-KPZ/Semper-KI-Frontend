@@ -7,19 +7,26 @@ import { ICardItem } from "./CardView";
 interface Props {
   prefix: string[];
   carditem: ICardItem;
+  onClickCard?(link: string): void;
 }
 
-const Card: React.FC<Props> = ({ carditem, prefix }) => {
+const Card: React.FC<Props> = ({ carditem, prefix, onClickCard }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const handleClickCard = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleClickCard = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
     e.preventDefault();
     e.stopPropagation();
-    navigate(carditem.link);
+    if (onClickCard !== undefined) {
+      onClickCard(carditem.link);
+    } else {
+      navigate(carditem.link);
+    }
   };
 
   return (
-    <div
+    <a
       title={t(
         `card-view.${prefix.map((title: string) => `${title}.`).join("")}${
           carditem.title
@@ -27,6 +34,7 @@ const Card: React.FC<Props> = ({ carditem, prefix }) => {
       )}
       className="card"
       onClick={handleClickCard}
+      href={carditem.link}
     >
       {carditem.icon !== undefined ? (
         <img src={getIconByName(carditem.icon)} />
@@ -36,7 +44,7 @@ const Card: React.FC<Props> = ({ carditem, prefix }) => {
           carditem.title
         }`
       )}
-    </div>
+    </a>
   );
 };
 

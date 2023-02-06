@@ -1,17 +1,43 @@
 [
     {
-        "title":"produce",
-        "link":"produce",
-        "icon":"IconFactory"
-    },
-    {
-        "title":"design",
-        "link":"design",
-        "icon":"IconModel"
-    },
-    {
-        "title":"accompany",
-        "link":"accompany",
-        "icon":"IconSupplyChain"
+        "path": "use",
+        "cards": [
+            {
+                "title":"produce",
+                "link":"/guide/use-produce",
+                "icon":"IconFactory"
+            },
+            {
+                "title":"design",
+                "link":"/guide/use-design",
+                "icon":"IconModel"
+            },
+            {
+                "title":"accompany",
+                "link":"/guide/use-accompany",
+                "icon":"IconSupplyChain"
+            }
+        ]
+      },
+      {
+        "path": "provide",
+        "cards": [
+            {
+                "title":"produce",
+                "link":"/guide/provide-produce",
+                "icon":"IconFactory"
+            },
+            {
+                "title":"design",
+                "link":"/guide/provide-design",
+                "icon":"IconModel"
+            },
+            {
+                "title":"accompany",
+                "link":"/guide/provide-accompany",
+                "icon":"IconSupplyChain"
+            }
+        ]
     }
 ]
+    

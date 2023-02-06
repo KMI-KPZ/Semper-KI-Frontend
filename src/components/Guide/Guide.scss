@@ -1,23 +1,44 @@
 @use '../../scss/index' as *;
 
+$cardWidth : 400px;
+$gap:50px;  
+$cardsGap:20px;
+@mixin content($cardsPerRow) {
+    width: calc(($cardsPerRow * $cardWidth) + ($cardsGap * ($cardsPerRow - 1)) );
+  }
+
 .guide {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     max-width: 1800px;
     margin: 0 auto;
     gap:$containerGap;
     margin-top: $containerGap;
 }
 
+.guide-answers {
+    display: flex;
+    flex-direction: column;
+    background-color: $white;
+    background-color: $white;
+    padding:40px;
+    border-radius: 20px;
+    gap:20px;
+    max-height: 750px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
 
 .guide-question {
     display: flex;
     flex-direction: column;
-    gap:$containerGap / 2;
-
-    &.passiv {
-        filter: opacity(0.5)
-    }
+    align-items: center;
+    justify-content: center;
+    background-color: $white;
+    background-color: $white;
+    padding:40px;
+    border-radius: 20px;
+    gap:20px;
 }
 
 
@@ -27,22 +48,41 @@
     padding: 10px;
 }
 
-.guide-question-options {
+.guide-question-cards {
+    @include content(2);
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    gap: $containerGap;
-    background-color: $white;
-    padding: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    gap: $cardsGap;
+  
+    &.row-1{
+      @include content(1);
+    }
+    &.row-2{
+      @include content(2);
+    }
+    &.row-3{
+      @include content(3);
+    }
 }
 
-.guide-question-option {
-    padding: 10px 50px;
+.guide-question-card {
+    width: $cardWidth ;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;  
+    background: $white;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+  
     &:hover {
-        background-color: $white_m;
-        cursor: pointer;
-    }
-    &.selected {
-        border: 1px solid $grey;
+      cursor: pointer;
+      background-color: $white_m;
     }
 }

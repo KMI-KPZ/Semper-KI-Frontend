@@ -5,6 +5,7 @@ import "./CardView.scss";
 
 interface Props {
   path: string;
+  onClickCard?(link: string): void;
   cardGroups?: ICardGroup[];
   cards?: ICardItem[];
 }
@@ -20,7 +21,12 @@ export interface ICardItem {
   icon?: string;
 }
 
-const CardView: React.FC<Props> = ({ path, cards, cardGroups }) => {
+const CardView: React.FC<Props> = ({
+  path,
+  cards,
+  cardGroups,
+  onClickCard,
+}) => {
   const { t } = useTranslation();
 
   const calcRowCount = (): string => {
@@ -40,6 +46,7 @@ const CardView: React.FC<Props> = ({ path, cards, cardGroups }) => {
                 {cardgroup.cards.map(
                   (carditem: ICardItem, cardIndex: number) => (
                     <Card
+                      onClickCard={onClickCard}
                       carditem={carditem}
                       key={cardIndex}
                       prefix={[path, cardgroup.path]}
@@ -54,7 +61,12 @@ const CardView: React.FC<Props> = ({ path, cards, cardGroups }) => {
       {cards !== undefined ? (
         <div className={`card-view-group ${calcRowCount()}`}>
           {cards.map((carditem: ICardItem, cardIndex: number) => (
-            <Card carditem={carditem} key={cardIndex} prefix={[path]} />
+            <Card
+              carditem={carditem}
+              key={cardIndex}
+              prefix={[path]}
+              onClickCard={onClickCard}
+            />
           ))}
         </div>
       ) : null}

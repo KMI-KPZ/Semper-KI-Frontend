@@ -1,0 +1,17 @@
+[
+    {
+        "title":"produce",
+        "link":"produce",
+        "icon":"IconFactory"
+    },
+    {
+        "title":"design",
+        "link":"design",
+        "icon":"IconModel"
+    },
+    {
+        "title":"accompany",
+        "link":"accompany",
+        "icon":"IconSupplyChain"
+    }
+]

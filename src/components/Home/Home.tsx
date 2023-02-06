@@ -5,5 +5,5 @@ import CardView, { ICardItem } from "../Cards/CardView";
 const homeItems = _homeItems as ICardItem[];
 
 export const Home: React.FC = ({}) => {
-  return <CardView title="home" cards={homeItems} />;
+  return <CardView path="home" cards={homeItems} />;
 };

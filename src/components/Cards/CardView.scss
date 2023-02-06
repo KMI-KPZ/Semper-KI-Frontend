@@ -1,7 +1,12 @@
 @use "../../scss/index" as * ;
-$cardWidth : 250px;
+$cardWidth : 400px;
 $gap:50px;  
 $cardsGap:20px;
+// $cardsPerRow: 2;
+
+@mixin content($cardsPerRow) {
+  width: calc(($cardsPerRow * $cardWidth) + ($cardsGap * ($cardsPerRow - 1)) );
+}
 
 .card-view {
   display: flex;
@@ -9,6 +14,15 @@ $cardsGap:20px;
   justify-content: flex-start;
   align-items: center;
   gap: $containerGap;
+  &.row-1 {
+    $cardsPerRow: 1;
+  }
+  &.row-2 {
+    $cardsPerRow: 2;
+  }
+  &.row-3 {
+    $cardsPerRow: 3;
+  }
 }
   
 @media only screen and (max-width: 1500px) {
@@ -34,7 +48,8 @@ $cardsGap:20px;
 }
 
 .card-view-group {
-  width: calc((2 * $cardWidth) + $cardsGap );
+  // width: calc(($cardsPerRow * $cardWidth) + ($cardsGap * ($cardsPerRow - 1)) );
+  @include content(2);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -42,6 +57,16 @@ $cardsGap:20px;
   justify-content: center;
   padding: 0px;
   gap: $cardsGap;
+
+  &.row-1{
+    @include content(1);
+  }
+  &.row-2{
+    @include content(2);
+  }
+  &.row-3{
+    @include content(3);
+  }
 }
 
 .card {

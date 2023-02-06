@@ -1,12 +1,12 @@
 import React, { createContext, useEffect, useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
 import "./../../styles.scss";
 import useCRSFToken from "../../hooks/useCSRFToken";
 import axios from "axios";
 import { IChat, IOrder, IProcess } from "../../interface/Interface";
-import { TestOrderList, TestProcessList } from "../../services/TestData";
+import { TestOrderList } from "../../services/TestData";
 import useUser from "../../hooks/useUser";
 import AuthorizedHome from "../AuthorizedHome/AuthorizedHome";
 import { Home } from "../Home/Home";
@@ -22,6 +22,7 @@ import { URL_AboutUs } from "../../config/Constants";
 import { EUserType } from "../../interface/enums";
 import Service from "../Service/Service";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
+import GuideView from "../Guide/GuideView";
 
 export interface IAppState {
   userType: EUserType;
@@ -142,8 +143,8 @@ function App() {
             />
             <Route path="test" element={<RequestTest />} />
             <Route
-              path="guide/:path"
-              element={<Guide setFilter={setFilter} />}
+              path="guide/*"
+              element={<GuideView setFilter={setFilter} />}
             />
             <Route path="logout" element={<Logout />} />
             <Route path="login" element={<Login />} />

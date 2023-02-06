@@ -4,52 +4,42 @@ import CardView, { ICardGroup, ICardItem } from "../Cards/CardView";
 import "./Service.scss";
 
 import _ServiceCards from "./ServiceCards.json";
-import { useTranslation } from "react-i18next";
 const ServiceCards = _ServiceCards as ICardItem[];
+const cardsUse: ICardItem[] = [
+  ...ServiceCards.map((card: ICardItem) => ({
+    icon: card.icon,
+    link: `/service/use/${card.link}`,
+    title: card.title,
+  })),
+];
+const cardsProvide: ICardItem[] = [
+  ...ServiceCards.map((card: ICardItem) => ({
+    icon: card.icon,
+    link: `/service/provide/${card.link}`,
+    title: card.title,
+  })),
+];
+const cardGoupsIndex: ICardGroup[] = [
+  {
+    path: "use",
+    cards: cardsUse,
+  },
+  {
+    path: "provide",
+    cards: cardsProvide,
+  },
+];
 
 const Service: React.FC = ({}) => {
-  const { t } = useTranslation();
-  const cardGoupsIndex: ICardGroup[] = [
-    {
-      title: "Nutzen",
-      cards: ServiceCards.map((card: ICardItem) => ({
-        icon: card.icon,
-        link: `/service/use/${card.link}`,
-        title: t(`service.use.${card.title}`),
-      })),
-    },
-    {
-      title: "Anbieten",
-      cards: ServiceCards.map((card: ICardItem) => ({
-        icon: card.icon,
-        link: `/service/provide/${card.link}`,
-        title: t(`service.provide.${card.title}`),
-      })),
-    },
-  ];
-  const cardsUse: ICardItem[] = [
-    ...ServiceCards.map((card: ICardItem) => ({
-      icon: card.icon,
-      link: `/service/use/${card.link}`,
-      title: t(`service.use.${card.title}`),
-    })),
-  ];
-  const cardsProvide: ICardItem[] = [
-    ...ServiceCards.map((card: ICardItem) => ({
-      icon: card.icon,
-      link: `/service/provide/${card.link}`,
-      title: t(`service.provide.${card.title}`),
-    })),
-  ];
   return (
     <Routes>
       <Route
         index
-        element={<CardView title="service" cardGroups={cardGoupsIndex} />}
+        element={<CardView path="service" cardGroups={cardGoupsIndex} />}
       />
       <Route
         path="use"
-        element={<CardView title="service" cards={cardsUse} />}
+        element={<CardView path="service.use" cards={cardsUse} />}
       />
       <Route path="use/produce" element={<Navigate to="/process/model" />} />
       <Route path="use/design" element={<h2>Entwerfen lassen</h2>} />
@@ -59,7 +49,7 @@ const Service: React.FC = ({}) => {
       />
       <Route
         path="provide"
-        element={<CardView title="service" cards={cardsProvide} />}
+        element={<CardView path="service.provide" cards={cardsProvide} />}
       />
       <Route path="provide/produce" element={<h2>Herstellen</h2>} />
       <Route path="provide/design" element={<h2>Entwerfen</h2>} />

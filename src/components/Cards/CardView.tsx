@@ -4,13 +4,13 @@ import Card from "./Card";
 import "./CardView.scss";
 
 interface Props {
-  title: string;
+  path: string;
   cardGroups?: ICardGroup[];
   cards?: ICardItem[];
 }
 
 export interface ICardGroup {
-  title: string;
+  path: string;
   cards: ICardItem[];
 }
 
@@ -20,20 +20,30 @@ export interface ICardItem {
   icon?: string;
 }
 
-const CardView: React.FC<Props> = ({ title, cards, cardGroups }) => {
+const CardView: React.FC<Props> = ({ path, cards, cardGroups }) => {
   const { t } = useTranslation();
+
+  const calcRowCount = (): string => {
+    let rowCount = 2;
+    return `row-${rowCount}`;
+  };
+
   return (
-    <div className="card-view">
-      <h1>{t(`card-view.${title}.title`)}</h1>
+    <div className="card-view row-1">
+      <h1>{t(`card-view.${path}.title`)}</h1>
       {cardGroups !== undefined ? (
         <div className="card-view-row">
           {cardGroups.map((cardgroup: ICardGroup, index: number) => (
             <div className="card-view-column" key={index}>
-              <h2>{cardgroup.title}</h2>
-              <div className="card-view-group">
+              <h2>{t(`card-view.${path}.${cardgroup.path}.title`)}</h2>
+              <div className={`card-view-group ${calcRowCount()}`}>
                 {cardgroup.cards.map(
                   (carditem: ICardItem, cardIndex: number) => (
-                    <Card carditem={carditem} key={cardIndex} />
+                    <Card
+                      carditem={carditem}
+                      key={cardIndex}
+                      prefix={[path, cardgroup.path]}
+                    />
                   )
                 )}
               </div>
@@ -42,9 +52,9 @@ const CardView: React.FC<Props> = ({ title, cards, cardGroups }) => {
         </div>
       ) : null}
       {cards !== undefined ? (
-        <div className="card-view-group">
+        <div className={`card-view-group ${calcRowCount()}`}>
           {cards.map((carditem: ICardItem, cardIndex: number) => (
-            <Card carditem={carditem} key={cardIndex} />
+            <Card carditem={carditem} key={cardIndex} prefix={[path]} />
           ))}
         </div>
       ) : null}

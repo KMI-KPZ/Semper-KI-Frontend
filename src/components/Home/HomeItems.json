@@ -1,21 +1,21 @@
 [
     {
-        "title":"home.try-out",
+        "title":"try-out",
         "link":"/process/model",
         "icon":"IconModel"
     },
     {
-        "title":"home.guide",
+        "title":"guide",
         "link":"/guide",
         "icon":"IconChecklist"
     },
     {
-        "title":"home.use-service",
+        "title":"use-service",
         "link":"/service/use",
         "icon":"IconPerson"
     },
     {
-        "title":"home.provide-service",
+        "title":"provide-service",
         "link":"/service/provide",
         "icon":"IconFactory"
     }

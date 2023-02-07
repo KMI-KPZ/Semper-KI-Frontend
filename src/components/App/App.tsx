@@ -20,9 +20,9 @@ import Redirect from "../Redirect/Redirect";
 import Footer from "../Footer/Footer";
 import { URL_AboutUs } from "../../config/Constants";
 import { EUserType } from "../../interface/enums";
-import Service from "../Service/Service";
+import ServiceRoutes from "../Service/ServiceRoutes";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import GuideView from "../Guide/GuideView";
+import GuideRoutes from "../Guide/GuideRoutes";
 
 export interface IAppState {
   userType: EUserType;
@@ -143,10 +143,10 @@ function App() {
             />
             <Route path="test" element={<RequestTest />} />
             <Route path="guide">
-              <Route index element={<GuideView setFilter={setFilter} />} />
+              <Route index element={<GuideRoutes setFilter={setFilter} />} />
               <Route
                 path=":path"
-                element={<GuideView setFilter={setFilter} />}
+                element={<GuideRoutes setFilter={setFilter} />}
               />
               <Route path="*" element={<Navigate to="/guide" />} />
             </Route>
@@ -156,7 +156,7 @@ function App() {
               path="aboutus"
               element={<Redirect link={URL_AboutUs} extern />}
             />
-            <Route path="service/*" element={<Service />} />
+            <Route path="service/*" element={<ServiceRoutes />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </div>

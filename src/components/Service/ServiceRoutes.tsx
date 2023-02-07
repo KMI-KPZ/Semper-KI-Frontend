@@ -30,7 +30,7 @@ const cardGoupsIndex: ICardGroup[] = [
   },
 ];
 
-const Service: React.FC = ({}) => {
+const ServiceRoutes: React.FC = ({}) => {
   return (
     <Routes>
       <Route
@@ -61,4 +61,4 @@ const Service: React.FC = ({}) => {
   );
 };
 
-export default Service;
+export default ServiceRoutes;

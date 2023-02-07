@@ -16,7 +16,7 @@ interface State {
   menuOpen: boolean;
 }
 
-const GuideView: React.FC<Props> = ({ setFilter }) => {
+const GuideRoutes: React.FC<Props> = ({ setFilter }) => {
   const [state, setState] = useState<State>({ menuOpen: false });
   const navigate = useNavigate();
   const { path } = useParams();
@@ -41,4 +41,4 @@ const GuideView: React.FC<Props> = ({ setFilter }) => {
   );
 };
 
-export default GuideView;
+export default GuideRoutes;

@@ -25,18 +25,19 @@ $cardsGap:20px;
   }
 }
   
-@media only screen and (max-width: 1500px) {
-  .home-box {
-    flex-direction: column;
-    width: 100%;
-  }
-}
-  
+
 .card-view-row {
   display: flex;
   flex-direction: row;
   gap:$gap;
   width: 100%;
+}
+
+@media only screen and (max-width: 1700px) {
+  .card-view-row {
+    flex-direction: column;
+    width: 100%;
+  }
 }
 
 .card-view-column {
@@ -78,7 +79,7 @@ $cardsGap:20px;
   gap: 20px;  
   background: $white;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
+  border-radius: $borderRadius;
 
   &:hover {
     cursor: pointer;

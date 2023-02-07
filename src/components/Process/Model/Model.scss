@@ -19,7 +19,7 @@
   justify-content: center;
   gap:10px;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: $borderRadius;
   &:hover {
     cursor: pointer;
     background-color: $white_m;
@@ -36,7 +36,7 @@
 }
 
 .model-upload-file{
-  border-radius: 20px;
+  border-radius: $borderRadius;
   padding:20px;
   display: flex;
   flex-direction: column;
@@ -56,7 +56,7 @@
 .model-delete-icon {
   width: 25px;
   height: 25px;
-  border-radius: 5px;
+  border-radius: $borderRadius;
   &:hover {
     cursor: pointer;
     background-color: red;
@@ -104,7 +104,7 @@
   align-items: center;
   background-color: $white;
   gap:8px;
-  border-radius: 20px;
+  border-radius: $borderRadius;
   padding: 0 0 10px 0;
   overflow: hidden;
   &:hover {
@@ -146,7 +146,7 @@
 }
 
 .model-card-tag {
-  border-radius: 20px;
+  border-radius: $borderRadius;
   background-color: $white_hover;
   border: 1px solid $grey;
   padding: 4px 12px;
@@ -159,7 +159,7 @@
   align-items: center;
   background-color: $white;
   padding:40px;
-  border-radius: 20px;
+  border-radius: $borderRadius;
 }
 
 .model-view-img {
@@ -174,7 +174,7 @@
 }
 
 .model-view-tag {
-  border-radius: 20px;
+  border-radius: $borderRadius;
   background-color: $white_hover;
   border: 1px solid $grey;
   padding: 4px 12px;

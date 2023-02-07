@@ -31,7 +31,7 @@
 .dashboard-card {
     min-width: 500px;
     background-color: $white;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     display: flex;
     gap:20px;
     padding: 40px 60px;
@@ -47,7 +47,7 @@
 .dashboard-order-card {
     min-width: 500px;
     background-color: $white;
-    border-radius: 20px;
+    border-radius: $borderRadius;
     display: flex;
     gap:20px;
     padding: 10px 20px;

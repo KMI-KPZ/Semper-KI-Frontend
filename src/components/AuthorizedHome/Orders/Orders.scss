@@ -80,7 +80,7 @@ section.order-section{
     flex-direction: column;
     width: 150px;
     border: 1px solid $grey;
-    border-radius: 10px;
+    border-radius: $borderRadius;
     overflow: hidden;
     align-items: center;
     img.order-process-item-img{
@@ -101,7 +101,7 @@ section.order-section{
     flex-direction: column;
     width: 150px;
     border: 1px solid $grey;
-    border-radius: 10px;
+    border-radius: $borderRadius;
     overflow: hidden;
     align-items: center;
     img.order-manufacturer-item-img{

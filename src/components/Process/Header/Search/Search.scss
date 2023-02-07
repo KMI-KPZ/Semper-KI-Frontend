@@ -16,7 +16,7 @@
 .search-input{
     border: none;
     padding-left: 20px;
-    border-radius:  20px 0 0 20px;
+    border-radius:  $borderRadius;
     width: 85%;
     background-color: $white_m;
 }
@@ -29,7 +29,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius:  0 20px 20px 0;
+    border-radius:  $borderRadius;
     background-color: $white_mm;
     width: 15%;
     &:hover{
@@ -39,7 +39,7 @@
 }
 
 .search-button{
-    border-radius: 20px;
+    border-radius: $borderRadius;
     display: flex;
     align-items: center;
     justify-content: center;

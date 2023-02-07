@@ -1,19 +1,83 @@
 import { Button } from "@mui/material";
-import React from "react";
+import { log } from "console";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IGuideOption, IGuideQuestion } from "./Interface";
 
 interface Props {
   question: IGuideQuestion;
-  toggelOption(filterId: number, optionIndex: number): void;
+  setOptions(filterId: number, options: IGuideOption[]): void;
   selectQuestion(): void;
 }
 
-const GuideQuestion = ({ question, toggelOption, selectQuestion }: Props) => {
+interface State {
+  options: IGuideOption[];
+  error: boolean;
+}
+
+const GuideQuestion: React.FC<Props> = ({
+  question,
+  selectQuestion,
+  setOptions: setParentOptions,
+}) => {
   const { t } = useTranslation();
+  const [state, setState] = useState<State>({
+    options: question.options,
+    error: false,
+  });
+
+  useEffect(() => {
+    setState((prevState) => ({ ...prevState, options: question.options }));
+  }, [question]);
+
+  const isOptionChecked = (): boolean => {
+    let checked: boolean = false;
+    state.options.forEach((option: IGuideOption) => {
+      if (option.checked === true) {
+        checked = true;
+      }
+    });
+    return checked;
+  };
+
+  const confirmOptions = () => {
+    if (isOptionChecked()) {
+      setState((prevState) => ({ ...prevState, error: false }));
+      setParentOptions(question.filterId, state.options);
+      selectQuestion();
+    } else {
+      setState((prevState) => ({ ...prevState, error: true }));
+      setTimeout(() => {
+        setState((prevState) => ({ ...prevState, error: false }));
+      }, 2000);
+    }
+  };
+
+  const skipQuestion = () => {
+    setState((prevState) => ({ ...prevState, error: false }));
+    selectQuestion();
+  };
 
   const selectOption = (index: number) => {
-    toggelOption(question.filterId, index);
+    setState((prevState) => ({
+      ...prevState,
+      options: [
+        ...prevState.options.filter(
+          (option: IGuideOption, optionIndex: number) => optionIndex < index
+        ),
+        {
+          ...prevState.options.filter(
+            (option: IGuideOption, optionIndex: number) => optionIndex === index
+          )[0],
+          checked: !prevState.options.filter(
+            (option: IGuideOption, optionIndex: number) => optionIndex === index
+          )[0].checked,
+        },
+        ...prevState.options.filter(
+          (option: IGuideOption, optionIndex: number) => optionIndex > index
+        ),
+      ],
+    }));
   };
 
   const handleOnClickCard = (
@@ -35,8 +99,13 @@ const GuideQuestion = ({ question, toggelOption, selectQuestion }: Props) => {
   return (
     <div className="guide-question">
       <h1>{t(question.title)}</h1>
+      {state.error === true ? (
+        <h2 className="guide-question-error">
+          Bitte mindestens eine Option auswählen
+        </h2>
+      ) : null}
       <div className="guide-question-cards">
-        {question.options.map((option: IGuideOption, index: number) => (
+        {state.options.map((option: IGuideOption, index: number) => (
           <div
             className="guide-question-card"
             key={index}
@@ -52,9 +121,22 @@ const GuideQuestion = ({ question, toggelOption, selectQuestion }: Props) => {
           </div>
         ))}
       </div>
-      <Button variant="contained" onClick={(e) => selectQuestion()}>
-        Anwenden
-      </Button>
+      <div className="guide-question-buttons">
+        <Button
+          variant="contained"
+          color="error"
+          onClick={(e) => skipQuestion()}
+        >
+          Überspringen
+        </Button>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={(e) => confirmOptions()}
+        >
+          Weiter
+        </Button>
+      </div>
     </div>
   );
 };

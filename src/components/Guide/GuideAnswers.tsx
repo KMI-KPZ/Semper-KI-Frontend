@@ -19,9 +19,14 @@ const GuideAnswers: React.FC<Props> = ({
     toggelOption(filterId, optionIndex);
   };
 
+  const getProcessProgress = () => {
+    const countProcesses = questions.length;
+    return `${activeQuestionId + 1}/${countProcesses}`;
+  };
+
   return (
     <div className="guide-answers">
-      <h2>Vorgaben</h2>
+      <h2>Vorgaben {getProcessProgress()}</h2>
       {questions
         .filter(
           (question: IGuideQuestion) => question.filterId <= activeQuestionId

@@ -50,11 +50,6 @@
             "max":999999999
           }
         }
-      },
-      {
-        "checked":false,
-        "title":"unbekannt",
-        "answer":null
       }
     ]
   },
@@ -105,11 +100,6 @@
             "max":999999999
           }
         }
-      },
-      {
-        "checked":false,
-        "title":"unbekannt",
-        "answer":null
       }
     ]
   },
@@ -160,11 +150,6 @@
             "max":999999999
           }
         }
-      },
-      {
-        "checked":false,
-        "title":"unbekannt",
-        "answer":null
       }
     ]
   },
@@ -203,11 +188,6 @@
           "unit":null,
           "value":"organic"
         }
-      },
-      {
-        "checked":false,
-        "title":"unbekannt",
-        "answer":null
       }
     ]
   },
@@ -246,11 +226,6 @@
           "unit":null,
           "value":"design"
         }
-      },
-      {
-        "checked":false,
-        "title":"unbekannt",
-        "answer":null
       }
     ]
   },
@@ -304,11 +279,6 @@
             "max":999999999
           }
         }
-      },
-      {
-        "checked":false,
-        "title":"unbekannt",
-        "answer":null
       }
     ]
   }

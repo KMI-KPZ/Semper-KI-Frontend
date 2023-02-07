@@ -13,14 +13,12 @@ $cardsGap:20px;
     max-width: 1800px;
     margin: 0 auto;
     gap:$containerGap;
-    margin-top: $containerGap;
 }
 
 .guide-answers {
     display: flex;
     flex-direction: column;
-    background-color: $white;
-    background-color: $white;
+    background-color: $white_hover;
     padding:40px;
     border-radius: $borderRadius;;
     gap:20px;
@@ -34,13 +32,44 @@ $cardsGap:20px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: $white;
-    background-color: $white;
+    background-color: $white_hover;
     padding:40px;
     border-radius: $borderRadius;
     gap:20px;
 }
 
+.guide-overview{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $white_hover;
+  padding: 40px ;
+  border-radius: $borderRadius;
+  gap:20px;
+}
+
+.guide-overview-question {
+  padding:10px;
+  background-color: $white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  &:hover {
+    cursor: pointer;
+    background-color: $white_m;
+  }
+}
+
+.guide-overview-options {
+  width: 100%;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  gap:$gap;
+}
 
 .guide-question-headline {
     background-color: $white;
@@ -85,4 +114,16 @@ $cardsGap:20px;
       cursor: pointer;
       background-color: $white_m;
     }
+}
+
+.guide-question-error {
+  color: red;
+}
+
+.guide-question-buttons {
+  display:flex;
+  flex-direction: row;
+  gap:$gap;
+  justify-content: center;
+  align-items: center;
 }

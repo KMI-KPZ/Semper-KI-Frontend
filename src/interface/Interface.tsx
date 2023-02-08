@@ -103,7 +103,7 @@ export interface IOrder {
 export interface IUser {
   name: string;
   email: string;
-  type: string;
+  type: EUserType;
   created: string;
   updated: string;
   accessed: string;

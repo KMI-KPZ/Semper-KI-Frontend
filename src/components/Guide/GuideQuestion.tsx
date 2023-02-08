@@ -124,16 +124,12 @@ const GuideQuestion: React.FC<Props> = ({
       <div className="guide-question-buttons">
         <Button
           variant="contained"
-          color="error"
+          sx={{ background: "grey", "&:hover": { background: "grey" } }}
           onClick={(e) => skipQuestion()}
         >
           Überspringen
         </Button>
-        <Button
-          variant="contained"
-          color="success"
-          onClick={(e) => confirmOptions()}
-        >
+        <Button variant="contained" onClick={(e) => confirmOptions()}>
           Weiter
         </Button>
       </div>

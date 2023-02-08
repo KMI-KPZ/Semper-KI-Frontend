@@ -23,6 +23,7 @@ import { EUserType } from "../../interface/enums";
 import ServiceRoutes from "../Service/ServiceRoutes";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import GuideRoutes from "../Guide/GuideRoutes";
+import { getUserType } from "../../services/utils";
 
 export interface IAppState {
   userType: EUserType;
@@ -36,6 +37,7 @@ export interface IAppContext {
   state: IAppState;
   setState: React.Dispatch<React.SetStateAction<IAppState>>;
 }
+
 export const AppContext = createContext<IAppContext>({
   state: {
     userType: 0,
@@ -98,7 +100,7 @@ function App() {
     if (user !== undefined) {
       setState((prevState) => ({
         ...prevState,
-        userType: user === undefined ? 0 : 1,
+        userType: user !== undefined ? user.type : 0,
       }));
     }
   }, [user]);
@@ -151,7 +153,7 @@ function App() {
               <Route path="*" element={<Navigate to="/guide" />} />
             </Route>
             <Route path="logout" element={<Logout />} />
-            <Route path="login" element={<Login />} />
+            <Route path="login" element={<Login userType={state.userType} />} />
             <Route
               path="aboutus"
               element={<Redirect link={URL_AboutUs} extern />}

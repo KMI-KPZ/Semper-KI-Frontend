@@ -1,8 +1,8 @@
 export enum EUserType {
-  "none",
-  "Client",
-  "Contractor",
-  "Admin",
+  "indefinite",
+  "client",
+  "contractor",
+  "admin",
 }
 
 export enum EProgressType {

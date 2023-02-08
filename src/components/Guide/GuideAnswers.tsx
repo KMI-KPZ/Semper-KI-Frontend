@@ -29,7 +29,7 @@ const GuideAnswers: React.FC<Props> = ({
       <h2>Vorgaben {getProcessProgress()}</h2>
       {questions
         .filter(
-          (question: IGuideQuestion) => question.filterId <= activeQuestionId
+          (question: IGuideQuestion, index: number) => index <= activeQuestionId
         )
         .map((question: IGuideQuestion, questionIndex: number) => (
           <div className="guide-answer-card" key={questionIndex}>

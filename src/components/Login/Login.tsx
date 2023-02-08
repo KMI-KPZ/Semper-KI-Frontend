@@ -1,16 +1,25 @@
 import { Container } from "@mui/system";
 import axios, { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
+import { EUserType } from "../../interface/enums";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 
-const Login = () => {
+interface Props {
+  userType: EUserType;
+}
+
+const Login: React.FC<Props> = ({ userType }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<AxiosError>();
 
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`${process.env.REACT_APP_API_URL}/public/login/`)
+      .get(`${process.env.REACT_APP_API_URL}/public/login/`, {
+        headers: {
+          Usertype: EUserType[userType],
+        },
+      })
       .then((response) => {
         console.log("get Login ", response.data);
         window.location.href = response.data;

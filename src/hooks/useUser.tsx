@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../interface/Interface";
+import { getUserType } from "../services/utils";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
@@ -28,7 +29,7 @@ const useUser = (): ReturnProps => {
         setUser(
           Object.keys(userData).length === 0 && userData.constructor === Object
             ? undefined
-            : userData
+            : { ...userData, type: getUserType(userData.type) }
         );
         setLoggedIn(true);
       })

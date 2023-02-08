@@ -1,3 +1,5 @@
+import { EUserType } from "../interface/enums";
+
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;
   let newSize: number;
@@ -48,4 +50,23 @@ export const removeItem = <T,>(arr: Array<T>, value: T): Array<T> => {
     arr.splice(index, 1);
   }
   return arr;
+};
+
+export const getUserType = (name: string): EUserType => {
+  let type: EUserType = EUserType.indefinite;
+  switch (name.toLocaleLowerCase()) {
+    case "client":
+      type = EUserType.client;
+      break;
+    case "contractor":
+      type = EUserType.contractor;
+      break;
+    case "admin":
+      type = EUserType.admin;
+      break;
+    default:
+      type = EUserType.indefinite;
+      break;
+  }
+  return type;
 };

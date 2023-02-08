@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 import useUser from "../../../hooks/useUser";
+import { EUserType } from "../../../interface/enums";
 import { IUser } from "../../../interface/Interface";
 
 import "./Account.scss";
@@ -21,7 +22,7 @@ const Account: React.FC<Props> = ({ user }) => {
       <h1>Account</h1>
       <span>name: {user.name}</span>
       <span>email: {user.email}</span>
-      <span>type: {user.type}</span>
+      <span>type: {EUserType[user.type]}</span>
       <span>created: {user.created}</span>
       <span>accessed: {user.accessed}</span>
       <span>updated: {user.updated}</span>

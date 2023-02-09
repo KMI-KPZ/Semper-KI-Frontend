@@ -1,0 +1,32 @@
+[
+    {
+        "title":"user",
+        "link":"/user",
+        "icon":"IconPerson"
+    },
+    {
+        "title":"model",
+        "link":"/model",
+        "icon":"IconModel"
+    },
+    {
+        "title":"material",
+        "link":"/material",
+        "icon":"IconMetal"
+    },
+    {
+        "title":"procedure",
+        "link":"/procedure",
+        "icon":"IconSupplyChain"
+    },
+    {
+        "title":"printer",
+        "link":"/printer",
+        "icon":"Icon3DPrinter"
+    },
+    {
+        "title":"order",
+        "link":"/order",
+        "icon":"IconDocument"
+    }
+]

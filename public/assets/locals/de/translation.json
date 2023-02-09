@@ -37,7 +37,7 @@
         "design":"Entwerfen",
         "accompany":"Gesamtprozess begleiten"
       }
-    }
+    }    
   },
   "header": {
     "about-us": "Über uns",
@@ -201,9 +201,21 @@
     }
   },
   "dashboard":{
-    "headline":"Übersicht",
-    "proceedings":"Verfahren",
-    "contracts":"Aufträge"
+    "title":"Übersicht",
+    "new-contract":"neuer Auftrag",
+    "cart":"Einkaufswagen",
+    "guide":"Hilfe",
+    "account":"Konto",
+    "order":"Bestellung",
+    "admin":{
+      "title":"Admin-Bereich",
+      "user":"Benutzer",
+      "model":"Modelle",
+      "material":"Materialien",
+      "procedure":"Verfahren",
+      "printer":"Drucker",
+      "order":"Bestellungen"
+    }
   },
   "order":{
     "headline":"Bestellungen",

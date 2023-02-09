@@ -155,7 +155,12 @@ export const RequestTest = () => {
     }));
   };
   const handleOnChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("File Uploaded");
+    console.log(
+      "File Uploaded",
+      e.currentTarget.files !== null && e.currentTarget.files.length > 0
+        ? e.currentTarget.files[0]
+        : null
+    );
 
     setFileState((prevState) => ({
       ...prevState,
@@ -170,10 +175,12 @@ export const RequestTest = () => {
     const formData = new FormData();
     formData.append(
       "File",
-      fileState.file !== undefined ? fileState.file : "missing"
+      fileState.file === undefined ? "missing" : fileState.file
     );
     axiosCustom
-      .post(fileState.fileURL, formData)
+      .post(fileState.fileURL, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
       .then((response) => {
         console.log("Success:", response);
         setFileState((prevState) => ({

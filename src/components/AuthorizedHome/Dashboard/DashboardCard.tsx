@@ -1,25 +1,34 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { getIconByName } from "../../../config/Icons";
+import { ICardItem } from "../../Cards/CardView";
 
 interface Props {
-  title: string;
-  icon: string;
-  link: string;
+  prefix: string;
+  cardItem: ICardItem;
 }
 
-const DashboardCard: React.FC<Props> = ({ title, icon, link }) => {
+const DashboardCard: React.FC<Props> = ({ prefix, cardItem }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const handleOnClickCard = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
-    navigate(link);
+    navigate(cardItem.link);
   };
 
   return (
-    <a className="dashboard-card" onClick={handleOnClickCard} href={link}>
-      <img src={icon} />
-      <h2>{title}</h2>
+    <a
+      className="dashboard-card"
+      onClick={handleOnClickCard}
+      href={cardItem.link}
+    >
+      {cardItem.icon === undefined ? null : (
+        <img src={getIconByName(cardItem.icon)} />
+      )}
+      <h2>{t(`${prefix}.${cardItem.title}`)}</h2>
     </a>
   );
 };

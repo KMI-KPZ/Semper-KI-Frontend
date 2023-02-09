@@ -14,6 +14,8 @@ import { IOrder, IProcess, IUser } from "../../interface/Interface";
 import Account from "./Account/Account";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
 import { Error } from "../Error/Error";
+import { EUserType } from "../../interface/enums";
+import { ICardItem } from "../Cards/CardView";
 
 interface Props {
   user: IUser;
@@ -32,10 +34,20 @@ const AuthorizedHome = ({
   const { t } = useTranslation();
   const { pathname } = useLocation();
 
+  const adminRoutes = (
+    <>
+      <Route path="user" element={<h1>illegale geheime User daten</h1>} />
+      <Route path="model" element={<h1>illegale geheime User daten</h1>} />
+      <Route path="material" element={<h1>illegale geheime User daten</h1>} />
+      <Route path="printer" element={<h1>illegale geheime User daten</h1>} />
+    </>
+  );
+
   return (
     <div className="authorized-home">
       <Routes>
-        <Route index element={<Dashboard />} />
+        <Route index element={<Dashboard userType={user.type} />} />
+        {user.type === EUserType.admin ? adminRoutes : null}
         <Route
           path="cart"
           element={

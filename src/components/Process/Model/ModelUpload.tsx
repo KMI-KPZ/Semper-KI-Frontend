@@ -163,6 +163,7 @@ export const ModelUpload = ({ addProcessList, setProgress }: Props) => {
         onDrop={handleDropOnUploadCard}
       >
         <input
+          accept={dataTypes.map((type: string) => type).join(",")}
           type="file"
           ref={hiddenFileInput}
           onChange={handleChangeHiddenInput}

@@ -1,4 +1,10 @@
 @use '../../../scss/index' as *;
+$cardWidth : 400px;
+$gap:50px;  
+$cardsGap:20px;
+$cardsPerRow:2;
+ 
+
 
 .dashboard {
     display: flex;
@@ -13,10 +19,12 @@
     padding:0;
 }
 
-.dashboard-content {
+.dashboard-cards {
+    width: calc(($cardsPerRow * $cardWidth) + ($cardsGap * ($cardsPerRow - 1)) );
     display: flex;
     flex-direction: row;
-    gap:50px;
+    flex-wrap: wrap;
+    gap:$cardsGap;
     justify-content: center;
 }
 
@@ -29,11 +37,11 @@
 }
 
 .dashboard-card {
-    min-width: 500px;
+    width: $cardWidth;
     background-color: $white;
     border-radius: $borderRadius;
     display: flex;
-    gap:20px;
+    gap:$gap;
     padding: 40px 60px;
     justify-content: center;
     align-items: center;

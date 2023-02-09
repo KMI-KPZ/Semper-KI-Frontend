@@ -7,10 +7,17 @@ import {
   IconNewDocument,
   IconPerson,
 } from "../../../config/Icons";
+import { EUserType } from "../../../interface/enums";
 import { IOrder } from "../../../interface/Interface";
 import "./Dashboard.scss";
 import DashboardCard from "./DashboardCard";
 import DashboardOrderCard from "./DashboardOrderCard";
+import { ICardItem } from "../../Cards/CardView";
+
+import _AdminCards from "./AdminCards.json";
+import _UserCards from "./UserCards.json";
+const AdminCards = _AdminCards as ICardItem[];
+const UserCards = _UserCards as ICardItem[];
 
 const testOrder: IOrder[] = [
   {
@@ -51,35 +58,25 @@ const testOrder: IOrder[] = [
   },
 ];
 
-interface Props {}
+interface Props {
+  userType: EUserType;
+}
 
-const Dashboard = (props: Props) => {
+const Dashboard: React.FC<Props> = ({ userType }) => {
   const { t } = useTranslation();
+
+  const prefix: string =
+    userType === EUserType.admin ? "dashboard.admin" : "dashboard";
 
   return (
     <div className="dashboard">
-      <h1 className="dashboard-headline">{t("dashboard.headline")}</h1>
-      <div className="dashboard-content">
-        <div className="dashboard-content-column">
-          <DashboardCard
-            title="neuer Auftrag"
-            icon={IconNewDocument}
-            link="/process/new"
-          />
-          <DashboardCard title="Warenkorb" icon={IconCart} link="/cart" />
-          <DashboardCard title="Guides" icon={IconChecklist} link="/guide" />
-          <DashboardCard title="Account" icon={IconPerson} link="/account" />
-        </div>
-        <div className="dashboard-content-column">
-          <DashboardCard
-            title="Alle Aufträge"
-            icon={IconDocument}
-            link="/orders"
-          />
-          {testOrder.map((order: IOrder, index: number) => (
-            <DashboardOrderCard order={order} key={index} />
-          ))}
-        </div>
+      <h1 className="dashboard-headline">{t(`${prefix}.title`)}</h1>
+      <div className="dashboard-cards">
+        {(userType === EUserType.admin ? AdminCards : UserCards).map(
+          (cardItem: ICardItem, index: number) => (
+            <DashboardCard prefix={prefix} cardItem={cardItem} key={index} />
+          )
+        )}
       </div>
     </div>
   );

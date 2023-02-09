@@ -1,0 +1,27 @@
+[
+    {
+        "title":"new-contract",
+        "link":"/process/new",
+        "icon":"IconNewDocument"
+    },
+    {
+        "title":"cart",
+        "link":"/cart",
+        "icon":"IconCart"
+    },
+    {
+        "title":"guide",
+        "link":"/guide",
+        "icon":"IconChecklist"
+    },
+    {
+        "title":"account",
+        "link":"/account",
+        "icon":"IconPerson"
+    },
+    {
+        "title":"order",
+        "link":"/order",
+        "icon":"IconChecklist"
+    }
+]

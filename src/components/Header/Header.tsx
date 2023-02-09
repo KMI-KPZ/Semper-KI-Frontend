@@ -89,7 +89,11 @@ export const Header = ({ isLoggedIn, userType }: Props) => {
       <>
         {HeaderItems.filter(
           (headerItem: IHeaderItem) =>
-            headerItem.show === true && headerItem.userType.includes(userType)
+            headerItem.preferred === "header" &&
+            headerItem.userType.includes(userType) &&
+            (headerItem.loggedIn === undefined ||
+              (headerItem.loggedIn !== undefined &&
+                headerItem.loggedIn === isLoggedIn))
         ).map((headerItem: IHeaderItem, index: number) => (
           <HeaderItem
             key={index}
@@ -106,7 +110,11 @@ export const Header = ({ isLoggedIn, userType }: Props) => {
       <>
         {HeaderItems.filter(
           (headerItem: IHeaderItem) =>
-            headerItem.show === false && headerItem.userType.includes(userType)
+            headerItem.preferred === "menu" &&
+            headerItem.userType.includes(userType) &&
+            (headerItem.loggedIn === undefined ||
+              (headerItem.loggedIn !== undefined &&
+                headerItem.loggedIn === isLoggedIn))
         ).map((headerItem: IHeaderItem, index: number) => (
           <HeaderItem
             isMenuItem

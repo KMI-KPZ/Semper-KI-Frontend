@@ -11,10 +11,13 @@ interface Props {
 }
 
 const Account: React.FC<Props> = ({ user }) => {
-  const { deleteUser } = useUser();
+  const { deleteUser, updateUser } = useUser();
 
   const handleOnClickButtonDelete = () => {
     deleteUser();
+  };
+  const handleOnClickButtonUpdate = () => {
+    updateUser();
   };
 
   return (
@@ -26,8 +29,19 @@ const Account: React.FC<Props> = ({ user }) => {
       <span>created: {user.created}</span>
       <span>accessed: {user.accessed}</span>
       <span>updated: {user.updated}</span>
-      <Button variant="contained" onClick={handleOnClickButtonDelete}>
+      <Button
+        variant="contained"
+        color="error"
+        onClick={handleOnClickButtonDelete}
+      >
         Benutzer Löschen
+      </Button>
+      <Button
+        variant="contained"
+        color="success"
+        onClick={handleOnClickButtonUpdate}
+      >
+        Benutzer Updaten
       </Button>
     </div>
   );

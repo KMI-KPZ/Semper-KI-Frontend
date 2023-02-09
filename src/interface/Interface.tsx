@@ -127,6 +127,7 @@ export interface IHeaderItem {
   link: string;
   icon: string;
   extern: boolean;
-  show: boolean;
+  preferred: string;
   userType: EUserType[];
+  loggedIn?: boolean;
 }

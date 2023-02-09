@@ -1,4 +1,5 @@
 import {
+  Button,
   Grid,
   List,
   ListItem,
@@ -12,6 +13,8 @@ import { Container } from "@mui/system";
 import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import axios, { AxiosError } from "axios";
+import useCustomAxios from "../hooks/useCustomAxios";
+import { log } from "console";
 
 interface State {
   post: string;
@@ -26,7 +29,14 @@ interface State {
   loading: boolean | null;
 }
 
+interface FileState {
+  fileURL: string;
+  file?: File;
+  response: string;
+}
+
 export const RequestTest = () => {
+  const { axiosCustom } = useCustomAxios();
   const [state, setState] = useState<State>({
     post: "",
     get: "",
@@ -38,6 +48,10 @@ export const RequestTest = () => {
     postFix: "/test/",
     error: null,
     loading: null,
+  });
+  const [fileState, setFileState] = useState<FileState>({
+    fileURL: `${process.env.REACT_APP_API_URL}`,
+    response: "",
   });
   const URL = `${state.url}${state.port}${state.postFix}`;
 
@@ -81,7 +95,7 @@ export const RequestTest = () => {
 
   const post = () => {
     safeLoading(true);
-    axios
+    axiosCustom
       .post(URL, JSON.stringify({ post: state.post }))
       .then((response) => {
         console.log("Post Response", response.data);
@@ -95,7 +109,7 @@ export const RequestTest = () => {
 
   const get = () => {
     safeLoading(true);
-    axios
+    axiosCustom
       .get(URL)
       .then((response) => {
         console.log("Get Response", response.data);
@@ -109,7 +123,7 @@ export const RequestTest = () => {
 
   const put = () => {
     safeLoading(true);
-    axios
+    axiosCustom
       .put(URL, JSON.stringify({ put: state.put }))
       .then((response) => {
         console.log("Put Response", URL, response.data);
@@ -122,7 +136,7 @@ export const RequestTest = () => {
   };
   const testDelete = () => {
     safeLoading(true);
-    axios
+    axiosCustom
       .delete(URL)
       .then((response) => {
         console.log("Delete Respons", URL, response.data);
@@ -134,16 +148,47 @@ export const RequestTest = () => {
       });
   };
 
+  const handleOnChangeFileURL = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFileState((prevState) => ({
+      ...prevState,
+      fileURL: e.target.value,
+    }));
+  };
+  const handleOnChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("File Uploaded");
+
+    setFileState((prevState) => ({
+      ...prevState,
+      file:
+        e.currentTarget.files !== null && e.currentTarget.files.length > 0
+          ? e.currentTarget.files[0]
+          : undefined,
+    }));
+  };
+
+  const fileUpload = () => {
+    const formData = new FormData();
+    formData.append(
+      "File",
+      fileState.file !== undefined ? fileState.file : "missing"
+    );
+    axiosCustom
+      .post(fileState.fileURL, formData)
+      .then((response) => {
+        console.log("Success:", response);
+        setFileState((prevState) => ({
+          ...prevState,
+          response: response.data,
+        }));
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   return (
-    <Container>
-      <Paper
-        sx={{
-          padding: 1,
-          marginTop: 1,
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
+    <Container sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+      <Paper sx={{ display: "flex", flexDirection: "row", gap: "20px" }}>
         <TextField
           sx={{ margin: 1, width: "33%" }}
           name="url"
@@ -166,7 +211,7 @@ export const RequestTest = () => {
           onChange={(e) => safeInput(e)}
         />
       </Paper>
-      <Paper sx={{ marginTop: 1 }}>
+      <Paper>
         <List>
           <ListItem>
             <ListItemText sx={{ width: "20%" }}>Post</ListItemText>
@@ -238,6 +283,39 @@ export const RequestTest = () => {
           </ListItem>
         </List>
       </Paper>
+      <Paper
+        sx={{
+          padding: "20px",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "20px",
+        }}
+      >
+        <input
+          type="file"
+          style={{ padding: "10px" }}
+          onChange={handleOnChangeFile}
+        />
+        <TextField
+          name="fileURL"
+          sx={{ width: "30%" }}
+          label="File URL"
+          value={fileState.fileURL}
+          onChange={handleOnChangeFileURL}
+        ></TextField>
+        <Button variant="contained" onClick={fileUpload}>
+          Abschicken
+        </Button>
+      </Paper>
+      {/* {fileState.response !== "" ? (
+        <Paper
+          children={
+            <div dangerouslySetInnerHTML={{ __html: fileState.response }} />
+          }
+        />
+      ) : null} */}
       {state.loading !== null && state.loading === true && (
         <Paper sx={{ marginTop: 1, padding: 1 }}>
           <Typography variant="h3">Loading...</Typography>

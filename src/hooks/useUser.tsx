@@ -12,6 +12,7 @@ interface ReturnProps {
   loadUser(): void;
   logoutUser(): void;
   deleteUser(): void;
+  updateUser(): void;
 }
 
 const useUser = (): ReturnProps => {
@@ -64,6 +65,17 @@ const useUser = (): ReturnProps => {
       });
   };
 
+  const updateUser = () => {
+    axiosCustom
+      .delete(`${process.env.REACT_APP_API_URL}/public/updateUser/`)
+      .then((response) => {
+        console.log("useUser| updateUser Successful", response);
+      })
+      .catch((error) => {
+        console.log("useUser| updateUser Error", error);
+      });
+  };
+
   const logoutUser = () => {
     setUser(undefined);
     setLoggedIn(false);
@@ -76,6 +88,7 @@ const useUser = (): ReturnProps => {
     logoutUser,
     deleteUser,
     loadLoggedIn,
+    updateUser,
   };
 };
 

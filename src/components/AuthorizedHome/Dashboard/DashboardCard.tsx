@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { getIconByName } from "../../../config/Icons";
-import { ICardItem } from "../../Cards/CardView";
+import { ICardItem } from "../../CardView/CardView";
 
 interface Props {
   prefix: string;

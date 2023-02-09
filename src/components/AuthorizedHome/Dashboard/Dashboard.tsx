@@ -12,7 +12,7 @@ import { IOrder } from "../../../interface/Interface";
 import "./Dashboard.scss";
 import DashboardCard from "./DashboardCard";
 import DashboardOrderCard from "./DashboardOrderCard";
-import { ICardItem } from "../../Cards/CardView";
+import { ICardItem } from "../../CardView/CardView";
 
 import _AdminCards from "./AdminCards.json";
 import _UserCards from "./UserCards.json";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, Navigate, Route, Routes } from "react-router-dom";
-import CardView, { ICardGroup, ICardItem } from "../Cards/CardView";
+import CardView, { ICardGroup, ICardItem } from "../CardView/CardView";
 import "./Service.scss";
 
 import _ServiceCards from "./ServiceCards.json";

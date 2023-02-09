@@ -15,7 +15,8 @@ import Account from "./Account/Account";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
 import { Error } from "../Error/Error";
 import { EUserType } from "../../interface/enums";
-import { ICardItem } from "../Cards/CardView";
+import { ICardItem } from "../CardView/CardView";
+import ListView from "../ListView/ListView";
 
 interface Props {
   user: IUser;
@@ -36,7 +37,7 @@ const AuthorizedHome = ({
 
   const adminRoutes = (
     <>
-      <Route path="user" element={<h1>illegale geheime User daten</h1>} />
+      <Route path="user" element={<ListView list={[{}, {}, {}]} />} />
       <Route path="model" element={<h1>illegale geheime User daten</h1>} />
       <Route path="material" element={<h1>illegale geheime User daten</h1>} />
       <Route path="printer" element={<h1>illegale geheime User daten</h1>} />

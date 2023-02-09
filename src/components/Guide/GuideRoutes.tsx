@@ -1,7 +1,7 @@
 import { log } from "console";
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate, useParams } from "react-router-dom";
-import CardView, { ICardGroup, ICardItem } from "../Cards/CardView";
+import CardView, { ICardGroup, ICardItem } from "../CardView/CardView";
 import PopUp from "../PopUp/PopUp";
 import { IFilterItem } from "../Process/Filter/Interface";
 import Guide from "./Guide";

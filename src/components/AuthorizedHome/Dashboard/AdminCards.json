@@ -28,5 +28,10 @@
         "title":"order",
         "link":"/order",
         "icon":"IconDocument"
+    },
+    {
+        "title":"account",
+        "link":"/account",
+        "icon":"IconPerson"
     }
 ]

@@ -19,6 +19,7 @@ import useCustomAxios from "./useCustomAxios";
 interface ReturnProps {
   data: IAdminData;
   loadData(): void;
+  clearData(): void;
 }
 
 export interface IAdminData {
@@ -55,7 +56,18 @@ const useAdmin = (userType: EUserType): ReturnProps => {
     }
   };
 
-  return { data, loadData };
+  const clearData = () => {
+    setData({
+      users: TestUser,
+      models: [],
+      materials: [],
+      orders: [],
+      printers: [],
+      procedures: [],
+    });
+  };
+
+  return { data, loadData, clearData };
 };
 
 export default useAdmin;

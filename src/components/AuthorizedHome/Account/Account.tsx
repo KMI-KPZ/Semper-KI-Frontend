@@ -1,5 +1,5 @@
-import { Button } from "@mui/material";
-import React from "react";
+import { Button, Switch } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import useUser from "../../../hooks/useUser";
 import { EUserType } from "../../../interface/enums";
 import { IUser } from "../../../interface/Interface";
@@ -12,12 +12,19 @@ interface Props {
 
 const Account: React.FC<Props> = ({ user }) => {
   const { deleteUser, updateUser } = useUser();
+  const [userType, setUserType] = useState<EUserType>(user.type);
 
   const handleOnClickButtonDelete = () => {
     deleteUser();
   };
-  const handleOnClickButtonUpdate = () => {
-    updateUser();
+  const handleOnChangeSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log(e.currentTarget.checked);
+    setUserType(
+      e.currentTarget.checked === true ? EUserType.contractor : EUserType.client
+    );
+    updateUser(
+      e.currentTarget.checked === true ? EUserType.contractor : EUserType.client
+    );
   };
 
   return (
@@ -25,23 +32,28 @@ const Account: React.FC<Props> = ({ user }) => {
       <h1>Account</h1>
       <span>name: {user.name}</span>
       <span>email: {user.email}</span>
-      <span>type: {EUserType[user.type]}</span>
+      <span>type: {EUserType[userType]}</span>
+      <span>
+        {userType === EUserType.client ? <b>client</b> : "client"}
+        <Switch
+          color="default"
+          checked={userType === EUserType.contractor ? true : false}
+          onChange={handleOnChangeSwitch}
+        />
+        {userType === EUserType.contractor ? <b>contractor</b> : "contractor"}
+      </span>
       <span>created: {user.created}</span>
       <span>accessed: {user.accessed}</span>
       <span>updated: {user.updated}</span>
       <Button
+        sx={{
+          backgroundColor: "grey",
+          "&:hover": { backgroundColor: "#888888" },
+        }}
         variant="contained"
-        color="error"
         onClick={handleOnClickButtonDelete}
       >
         Benutzer Löschen
-      </Button>
-      <Button
-        variant="contained"
-        color="success"
-        onClick={handleOnClickButtonUpdate}
-      >
-        Benutzer Updaten
       </Button>
     </div>
   );

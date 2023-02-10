@@ -57,7 +57,11 @@ export const Header = ({ isLoggedIn, userType }: Props) => {
     setState((prevState) => ({ ...prevState, languageMenu: false }));
   };
 
-  const openLanguageMenu = () => {
+  const openLanguageMenu = (
+    e?: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e?.preventDefault();
+    e?.stopPropagation();
     setState((prevState) => ({ ...prevState, languageMenu: true }));
   };
 
@@ -65,7 +69,13 @@ export const Header = ({ isLoggedIn, userType }: Props) => {
     setState((prevState) => ({ ...prevState, menu: false }));
   };
 
-  const openMenu = () => {
+  const openMenu = (
+    e?:
+      | React.MouseEvent<HTMLAnchorElement, MouseEvent>
+      | React.MouseEvent<HTMLLIElement, MouseEvent>
+  ) => {
+    e?.preventDefault();
+    e?.stopPropagation();
     setState((prevState) => ({ ...prevState, menu: true }));
   };
 
@@ -153,11 +163,11 @@ export const Header = ({ isLoggedIn, userType }: Props) => {
       <nav className="nav" data-testid="mainNav">
         <ul className="nav-list">
           {getHeaderItems()}
-          <li className="nav-list-item">
+          <li className="nav-list-item" title="Sprachmenu">
             <ClickAwayListener onClickAway={closeLanguageMenu}>
               <div className="language-menu">
-                <div
-                  data-testid="languageMenu"
+                <a
+                  href={"/languageMenu"}
                   className={`fi fi-${getFlagButtonClassName()}`}
                   onClick={openLanguageMenu}
                 />
@@ -181,8 +191,10 @@ export const Header = ({ isLoggedIn, userType }: Props) => {
               </div>
             </ClickAwayListener>
           </li>
-          <li className="nav-list-item" onClick={openMenu}>
-            <MenuIcon />
+          <li className="nav-list-item" onClick={openMenu} title="Menu">
+            <a href={"/menu"} className="nav-list-item-link" onClick={openMenu}>
+              <MenuIcon />
+            </a>
           </li>
         </ul>
       </nav>

@@ -208,6 +208,7 @@
     "account":"Konto",
     "order":"Bestellung",
     "admin":{
+      "account":"Konto",
       "title":"Admin-Bereich",
       "user":"Benutzer",
       "model":"Modelle",

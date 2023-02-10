@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Navigate,
@@ -38,7 +38,15 @@ const AuthorizedHome = ({
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  const { data, loadData } = useAdmin(user.type);
+  const { data, loadData, clearData } = useAdmin(user.type);
+
+  useEffect(() => {
+    if (user.type === EUserType.admin) {
+      loadData();
+    } else {
+      clearData();
+    }
+  }, []);
 
   const adminRoutes = (
     <>

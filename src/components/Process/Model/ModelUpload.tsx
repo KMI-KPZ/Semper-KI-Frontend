@@ -44,16 +44,16 @@ export const ModelUpload = ({ addProcessList, setProgress }: Props) => {
   ];
 
   const handleChangeHiddenInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      addFile(e.target.files[0]);
+    if (e.target.files && e.target.files.length > 0) {
+      for (let index = 0; index < e.target.files.length; index++) {
+        addFile(e.target.files[index]);
+      }
     }
   };
 
   const handleClickUploadCard = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
-    console.log("Click Card", hiddenFileInput.current);
-
     if (hiddenFileInput.current !== null) {
       hiddenFileInput.current.click();
     }
@@ -165,6 +165,7 @@ export const ModelUpload = ({ addProcessList, setProgress }: Props) => {
         <input
           accept={dataTypes.map((type: string) => type).join(",")}
           type="file"
+          multiple
           ref={hiddenFileInput}
           onChange={handleChangeHiddenInput}
           style={{ display: "none" }}

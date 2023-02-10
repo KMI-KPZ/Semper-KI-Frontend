@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { EUserType } from "../interface/enums";
 import { IUser } from "../interface/Interface";
 import { getUserType } from "../services/utils";
 import useCustomAxios from "./useCustomAxios";
@@ -12,7 +13,7 @@ interface ReturnProps {
   loadUser(): void;
   logoutUser(): void;
   deleteUser(): void;
-  updateUser(): void;
+  updateUser(userType: EUserType): void;
 }
 
 const useUser = (): ReturnProps => {
@@ -65,9 +66,11 @@ const useUser = (): ReturnProps => {
       });
   };
 
-  const updateUser = () => {
+  const updateUser = (userType: EUserType) => {
     axiosCustom
-      .delete(`${process.env.REACT_APP_API_URL}/public/updateUser/`)
+      .post(`${process.env.REACT_APP_API_URL}/public/updateUser/`, {
+        userType: EUserType[userType],
+      })
       .then((response) => {
         console.log("useUser| updateUser Successful", response);
       })

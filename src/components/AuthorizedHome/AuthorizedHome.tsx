@@ -15,8 +15,12 @@ import Account from "./Account/Account";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
 import { Error } from "../Error/Error";
 import { EUserType } from "../../interface/enums";
-import { ICardItem } from "../CardView/CardView";
-import ListView from "../ListView/ListView";
+import AdminUserView from "./Admin/AdminUserView";
+import AdminModelView from "./Admin/AdminModelView";
+import useAdmin from "../../hooks/useAdmin";
+import useFilter from "../../hooks/useFilter";
+import AdminMaterialView from "./Admin/AdminMaterialView";
+import AdminOrderView from "./Admin/AdminOrderView";
 
 interface Props {
   user: IUser;
@@ -34,13 +38,25 @@ const AuthorizedHome = ({
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { pathname } = useLocation();
+  const { data, loadData } = useAdmin(user.type);
 
   const adminRoutes = (
     <>
-      <Route path="user" element={<ListView list={[{}, {}, {}]} />} />
-      <Route path="model" element={<h1>illegale geheime User daten</h1>} />
-      <Route path="material" element={<h1>illegale geheime User daten</h1>} />
-      <Route path="printer" element={<h1>illegale geheime User daten</h1>} />
+      <Route path="user" element={<AdminUserView userList={data.users} />} />
+      <Route
+        path="model"
+        element={<AdminModelView modelList={data.models} />}
+      />
+      <Route
+        path="material"
+        element={<AdminMaterialView materialList={data.materials} />}
+      />
+      <Route path="procedure" element={<h1>Procedure</h1>} />
+      <Route path="printer" element={<h1>Printer</h1>} />
+      <Route
+        path="order"
+        element={<AdminOrderView orderList={data.orders} />}
+      />
     </>
   );
 

@@ -5,6 +5,7 @@ import {
   IModel,
   IOrder,
   IProcess,
+  IUser,
 } from "../interface/Interface";
 
 export const TestOrderList: IOrder[] = [
@@ -54,7 +55,7 @@ export const TestOrderList: IOrder[] = [
   },
   {
     date: new Date(),
-    orderState: 0,
+    orderState: 1,
     orderId: 1,
     bill: undefined,
     processList: [
@@ -74,8 +75,68 @@ export const TestOrderList: IOrder[] = [
   },
   {
     date: new Date(),
-    orderState: 5,
+    orderState: 2,
     orderId: 2,
+    bill: new File([], "Rechnung.pdf"),
+    processList: [
+      {
+        model: {
+          name: "test",
+          certificate: ["certificate"],
+          date: "01.01.2023",
+          license: "licens",
+          tags: ["tag1", "tag2"],
+          URI: "url",
+        },
+        material: { name: "Material 1" },
+        manufacturer: { name: "Hersteller 1" },
+      },
+    ],
+  },
+  {
+    date: new Date(),
+    orderState: 3,
+    orderId: 3,
+    bill: new File([], "Rechnung.pdf"),
+    processList: [
+      {
+        model: {
+          name: "test",
+          certificate: ["certificate"],
+          date: "01.01.2023",
+          license: "licens",
+          tags: ["tag1", "tag2"],
+          URI: "url",
+        },
+        material: { name: "Material 1" },
+        manufacturer: { name: "Hersteller 1" },
+      },
+    ],
+  },
+  {
+    date: new Date(),
+    orderState: 4,
+    orderId: 4,
+    bill: new File([], "Rechnung.pdf"),
+    processList: [
+      {
+        model: {
+          name: "test",
+          certificate: ["certificate"],
+          date: "01.01.2023",
+          license: "licens",
+          tags: ["tag1", "tag2"],
+          URI: "url",
+        },
+        material: { name: "Material 1" },
+        manufacturer: { name: "Hersteller 1" },
+      },
+    ],
+  },
+  {
+    date: new Date(),
+    orderState: 5,
+    orderId: 5,
     bill: new File([], "Rechnung.pdf"),
     processList: [
       {
@@ -311,5 +372,40 @@ export const TestProcessList: IProcess[] = [
     },
     material: { name: "Material 2" },
     manufacturer: { name: "Hersteller 2" },
+  },
+];
+
+export const TestUser: IUser[] = [
+  {
+    name: "test_indefinit",
+    email: "test@test.test",
+    type: 0,
+    created: "01.01.2023",
+    accessed: "02.01.2023",
+    updated: "03.01.2023",
+  },
+  {
+    name: "test_client",
+    email: "test@test.test",
+    type: 1,
+    created: "01.01.2023",
+    accessed: "02.01.2023",
+    updated: "03.01.2023",
+  },
+  {
+    name: "test_contractor",
+    email: "test@test.test",
+    type: 2,
+    created: "01.01.2023",
+    accessed: "02.01.2023",
+    updated: "03.01.2023",
+  },
+  {
+    name: "test_admin",
+    email: "test@test.test",
+    type: 3,
+    created: "01.01.2023",
+    accessed: "02.01.2023",
+    updated: "03.01.2023",
   },
 ];

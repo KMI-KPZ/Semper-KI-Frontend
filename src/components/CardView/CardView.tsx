@@ -8,6 +8,7 @@ interface Props {
   onClickCard?(link: string): void;
   cardGroups?: ICardGroup[];
   cards?: ICardItem[];
+  children?: JSX.Element;
 }
 
 export interface ICardGroup {
@@ -22,7 +23,7 @@ export interface ICardItem {
 }
 
 const CardView: React.FC<Props> = (props) => {
-  const { path, cards, cardGroups, onClickCard } = props;
+  const { path, cards, cardGroups, onClickCard, children } = props;
   const { t } = useTranslation();
 
   const calcRowCount = (): string => {
@@ -33,6 +34,7 @@ const CardView: React.FC<Props> = (props) => {
   return (
     <div className="card-view row-1">
       <h1>{t(`card-view.${path}.title`)}</h1>
+      {children}
       {cardGroups !== undefined ? (
         <div className="card-view-row">
           {cardGroups.map((cardgroup: ICardGroup, index: number) => (

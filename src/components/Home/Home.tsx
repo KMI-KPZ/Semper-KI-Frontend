@@ -10,6 +10,7 @@ import "./Home.scss";
 import _HomeCards from "./HomeCards.json";
 import _AdminCards from "./AdminCards.json";
 import _UserCards from "./UserCards.json";
+import useStatistics from "../../hooks/useStatistics";
 const HomeCards = _HomeCards as ICardItem[];
 const AdminCards = _AdminCards as ICardItem[];
 const UserCards = _UserCards as ICardItem[];
@@ -22,14 +23,23 @@ interface Props {
 export const Home: React.FC<Props> = (props) => {
   const { userType, isLoggedIn } = props;
   const { t } = useTranslation();
+  const { statistics } = useStatistics();
+  const { active, loggedIn } = statistics;
   const prefix: string =
     userType === EUserType.admin ? "dashboard.admin" : "dashboard";
 
   return isLoggedIn === false ? (
-    <CardView path="home" cards={HomeCards} />
+    <CardView path="home" cards={HomeCards}>
+      <>
+        <h2>Aktive Benutzer {active}</h2>
+        <h2>Angemeldete Benutzer {loggedIn}</h2>
+      </>
+    </CardView>
   ) : (
     <div className="dashboard">
       <h1 className="dashboard-headline">{t(`${prefix}.title`)}</h1>
+      <h2>Aktive Benutzer {active}</h2>
+      <h2>Angemeldete Benutzer {loggedIn}</h2>
       <div className="dashboard-cards">
         {(userType === EUserType.admin ? AdminCards : UserCards).map(
           (cardItem: ICardItem, index: number) => (

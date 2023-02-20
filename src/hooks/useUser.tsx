@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { EUserType } from "../interface/enums";
 import { IUser } from "../interface/Interface";
@@ -7,10 +7,10 @@ import { getUserType } from "../services/utils";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
+  userType: EUserType;
   user: IUser | undefined;
   isLoggedIn: boolean;
   loadLoggedIn(): void;
-  loadUser(): void;
   logoutUser(): void;
   deleteUser(): void;
   updateUser(userType: EUserType): void;
@@ -19,8 +19,21 @@ interface ReturnProps {
 const useUser = (): ReturnProps => {
   const navigate = useNavigate();
   const { axiosCustom } = useCustomAxios();
+  const [userType, setUserType] = useState<EUserType>(EUserType.indefinite);
   const [user, setUser] = useState<IUser | undefined>();
   const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isLoggedIn === true) {
+      loadUser();
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (user !== undefined) {
+      setUserType(user.type);
+    }
+  }, [user]);
 
   const loadUser = () => {
     axiosCustom
@@ -85,9 +98,9 @@ const useUser = (): ReturnProps => {
   };
 
   return {
+    userType,
     user,
     isLoggedIn,
-    loadUser,
     logoutUser,
     deleteUser,
     loadLoggedIn,

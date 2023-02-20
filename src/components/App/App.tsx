@@ -35,7 +35,6 @@ import AdminMaterialView from "../Admin/AdminMaterialView";
 import AdminOrderView from "../Admin/AdminOrderView";
 
 export interface IAppState {
-  userType: EUserType;
   processList: IProcess[];
   orderList: IOrder[];
   guideFilter: IFilterItem[];
@@ -49,7 +48,6 @@ export interface IAppContext {
 
 export const AppContext = createContext<IAppContext>({
   state: {
-    userType: 0,
     processList: [{}],
     orderList: TestOrderList,
     guideFilter: [],
@@ -59,7 +57,6 @@ export const AppContext = createContext<IAppContext>({
 });
 
 const initialState: IAppState = {
-  userType: 0,
   processList: [{}],
   orderList: TestOrderList,
   guideFilter: [],
@@ -68,9 +65,9 @@ const initialState: IAppState = {
 
 const App: React.FC = () => {
   const [state, setState] = useState<IAppState>(initialState);
-  const { userType, chats, guideFilter, orderList, processList } = state;
-  const { CSRFToken, loadCSRFToken } = useCRSFToken();
-  const { isLoggedIn, user, loadLoggedIn, loadUser, logoutUser } = useUser();
+  const { chats, guideFilter, orderList, processList } = state;
+  const { CSRFToken } = useCRSFToken();
+  const { isLoggedIn, userType, user, loadLoggedIn, logoutUser } = useUser();
   const { data, loadData, clearData } = useAdmin();
 
   const setUserType = (userType: EUserType): void => {
@@ -86,37 +83,10 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    axios.defaults.headers.common = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers":
-        "Origin, X-Requested-With, Content-Type, Accept",
-    };
-    axios.defaults.withCredentials = true;
-    loadCSRFToken();
-  }, []);
-
-  useEffect(() => {
     if (CSRFToken !== "") {
       loadLoggedIn();
     }
   }, [CSRFToken]);
-
-  useEffect(() => {
-    if (isLoggedIn === true) {
-      loadUser();
-    }
-  }, [isLoggedIn]);
-
-  useEffect(() => {
-    if (user !== undefined) {
-      setState((prevState) => ({
-        ...prevState,
-        userType: user !== undefined ? userType : 0,
-      }));
-    }
-  }, [user]);
 
   useEffect(() => {
     if (userType === EUserType.admin) {

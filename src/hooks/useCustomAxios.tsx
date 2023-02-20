@@ -1,6 +1,5 @@
 import axios, { AxiosInstance } from "axios";
 import Cookies from "js-cookie";
-import React from "react";
 
 interface ReturnProps {
   axiosUnauthorized: AxiosInstance;

@@ -19,7 +19,8 @@ interface Props {
   statusType: EProcessStatusType;
 }
 
-const WizardCard: React.FC<Props> = ({ title, path, active, statusType }) => {
+const WizardCard: React.FC<Props> = (props) => {
+  const { title, path, active, statusType } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
 

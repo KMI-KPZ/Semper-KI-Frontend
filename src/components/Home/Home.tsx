@@ -1,9 +1,42 @@
 import React from "react";
 
-import _homeItems from "./HomeItems.json";
 import CardView, { ICardItem } from "../CardView/CardView";
-const homeItems = _homeItems as ICardItem[];
+import { EUserType } from "../../interface/enums";
+import { useTranslation } from "react-i18next";
+import DashboardCard from "./DashboardCard";
 
-export const Home: React.FC = ({}) => {
-  return <CardView path="home" cards={homeItems} />;
+import "./Home.scss";
+
+import _HomeCards from "./HomeCards.json";
+import _AdminCards from "./AdminCards.json";
+import _UserCards from "./UserCards.json";
+const HomeCards = _HomeCards as ICardItem[];
+const AdminCards = _AdminCards as ICardItem[];
+const UserCards = _UserCards as ICardItem[];
+
+interface Props {
+  isLoggedIn: boolean;
+  userType: EUserType;
+}
+
+export const Home: React.FC<Props> = (props) => {
+  const { userType, isLoggedIn } = props;
+  const { t } = useTranslation();
+  const prefix: string =
+    userType === EUserType.admin ? "dashboard.admin" : "dashboard";
+
+  return isLoggedIn === false ? (
+    <CardView path="home" cards={HomeCards} />
+  ) : (
+    <div className="dashboard">
+      <h1 className="dashboard-headline">{t(`${prefix}.title`)}</h1>
+      <div className="dashboard-cards">
+        {(userType === EUserType.admin ? AdminCards : UserCards).map(
+          (cardItem: ICardItem, index: number) => (
+            <DashboardCard prefix={prefix} cardItem={cardItem} key={index} />
+          )
+        )}
+      </div>
+    </div>
+  );
 };

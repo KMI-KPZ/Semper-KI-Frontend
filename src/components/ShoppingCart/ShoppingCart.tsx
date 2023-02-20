@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { IProcess } from "../../../interface/Interface";
+import { IProcess } from "../../interface/Interface";
 import "./ShoppingCart.scss";
 import ShoppingCartItem from "./ShoppingCartItem";
 
@@ -10,7 +10,8 @@ interface Props {
   setProcessList(processList: IProcess[]): void;
 }
 
-const ShoppingCart = ({ processList, setProcessList }: Props) => {
+const ShoppingCart: React.FC<Props> = (props) => {
+  const { processList, setProcessList } = props;
   const navigate = useNavigate();
 
   return (

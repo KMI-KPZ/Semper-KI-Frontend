@@ -6,7 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import "./Search.scss";
 import { ProcessContext } from "../../ProcessView";
 
-const Search = () => {
+const Search: React.FC = () => {
   const { processState, setGridState } = useContext(ProcessContext);
 
   const handleClickButton = (

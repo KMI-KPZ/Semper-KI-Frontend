@@ -33,10 +33,8 @@ interface State {
   grid: boolean;
 }
 
-export const ManufacturerCatalog = ({
-  selectManufacturer,
-  setProgress,
-}: Props) => {
+export const ManufacturerCatalog: React.FC<Props> = (props) => {
+  const { selectManufacturer, setProgress } = props;
   const { t } = useTranslation();
   const {
     data: manufacturerList,

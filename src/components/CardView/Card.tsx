@@ -10,7 +10,8 @@ interface Props {
   onClickCard?(link: string): void;
 }
 
-const Card: React.FC<Props> = ({ carditem, prefix, onClickCard }) => {
+const Card: React.FC<Props> = (props) => {
+  const { carditem, prefix, onClickCard } = props;
   const navigate = useNavigate();
   const { t } = useTranslation();
   const handleClickCard = (

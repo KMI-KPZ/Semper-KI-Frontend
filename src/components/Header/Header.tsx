@@ -40,7 +40,8 @@ interface State {
   menu: boolean;
 }
 
-export const Header = ({ isLoggedIn, userType }: Props) => {
+export const Header: React.FC<Props> = (props) => {
+  const { isLoggedIn, userType } = props;
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [state, setState] = useState<State>({

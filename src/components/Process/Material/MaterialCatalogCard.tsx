@@ -20,11 +20,8 @@ interface State {
   fav: boolean;
 }
 
-export const MaterialCatalogCard = ({
-  material,
-  selectMaterial,
-  grid,
-}: Props) => {
+export const MaterialCatalogCard: React.FC<Props> = (props) => {
+  const { material, selectMaterial, grid } = props;
   const { t } = useTranslation();
   const [state, setState] = useState<State>({
     fav: false,

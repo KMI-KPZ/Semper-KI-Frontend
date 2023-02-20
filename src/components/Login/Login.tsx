@@ -8,7 +8,8 @@ interface Props {
   userType: EUserType;
 }
 
-const Login: React.FC<Props> = ({ userType }) => {
+const Login: React.FC<Props> = (props) => {
+  const { userType } = props;
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<AxiosError>();
 

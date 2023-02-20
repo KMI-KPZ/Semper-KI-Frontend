@@ -20,7 +20,8 @@ const getTodayDate = (): { dd: string; mm: string; yyyy: string } => {
   return { dd, mm, yyyy };
 };
 
-const FDate: React.FC<Props> = ({ filterItem, setFilterItem }) => {
+const FDate: React.FC<Props> = (props) => {
+  const { filterItem, setFilterItem } = props;
   const [state, setState] = useState<State>(getTodayDate());
 
   useEffect(() => {

@@ -8,14 +8,15 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
-import { EUserType } from "../../../interface/enums";
-import { IUser } from "../../../interface/Interface";
+import { EUserType } from "../../interface/enums";
+import { IUser } from "../../interface/Interface";
 
 interface Props {
   userList: IUser[];
 }
 
-const AdminUserView: React.FC<Props> = ({ userList }) => {
+const AdminUserView: React.FC<Props> = (props) => {
+  const { userList } = props;
   return (
     <div className="admin-view">
       <h1>Benutzer</h1>

@@ -31,7 +31,7 @@ export interface IAdminData {
   orders: IOrder[];
 }
 
-const useAdmin = (userType: EUserType): ReturnProps => {
+const useAdmin = (): ReturnProps => {
   const [data, setData] = useState<IAdminData>({
     users: TestUser,
     models: TestModelList,
@@ -43,17 +43,15 @@ const useAdmin = (userType: EUserType): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
 
   const loadData = () => {
-    if (userType === EUserType.admin) {
-      axiosCustom
-        .get(`${process.env.REACT_APP_API_URL}/admin/getData/`)
-        .then((res) => {
-          console.log("useAdmin| loadData Successful", res.data);
-          setData(res.data);
-        })
-        .catch((error) => {
-          console.log("useAdmin| loadData error", error);
-        });
-    }
+    axiosCustom
+      .get(`${process.env.REACT_APP_API_URL}/admin/getData/`)
+      .then((res) => {
+        console.log("useAdmin| loadData Successful", res.data);
+        setData(res.data);
+      })
+      .catch((error) => {
+        console.log("useAdmin| loadData error", error);
+      });
   };
 
   const clearData = () => {

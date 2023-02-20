@@ -7,7 +7,8 @@ interface Props {
   children: ReactNode;
 }
 
-const PopUp: React.FC<Props> = ({ children, open, onOutsideClick }) => {
+const PopUp: React.FC<Props> = (props) => {
+  const { children, open, onOutsideClick } = props;
   const handleOnClickBackground = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {

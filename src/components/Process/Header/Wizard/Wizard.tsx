@@ -18,7 +18,8 @@ interface Props {
   processState: IProcessState;
 }
 
-export const Wizard: React.FC<Props> = ({ progress, processState }) => {
+export const Wizard: React.FC<Props> = (props) => {
+  const { progress, processState } = props;
   const activeProcessIndex: number =
     processState.activeProcessList.length > 0
       ? processState.activeProcessList[0]

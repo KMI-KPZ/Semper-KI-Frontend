@@ -11,7 +11,8 @@ interface Props {
   option: IOption;
 }
 
-export const PostProcessingOption = ({ option }: Props) => {
+export const PostProcessingOption: React.FC<Props> = (props) => {
+  const { option } = props;
   const { t } = useTranslation();
 
   return (

@@ -1,12 +1,13 @@
 import { Button } from "@mui/material";
 import React from "react";
-import { IManufacturer, IOrder, IProcess } from "../../../interface/Interface";
+import { IManufacturer, IOrder, IProcess } from "../../interface/Interface";
 
 interface Props {
   order: IOrder;
 }
 
-const Order = ({ order }: Props) => {
+const Order: React.FC<Props> = (props) => {
+  const { order } = props;
   const calcManufacturer = (): IManufacturer[] => {
     let manufacturerList: IManufacturer[] = [];
     order.processList.forEach((process: IProcess) => {
@@ -35,7 +36,7 @@ const Order = ({ order }: Props) => {
             <div key={index} className="order-process-item">
               <img
                 className="order-process-item-img"
-                src={require("../../../assets/images/model_placeholder.png")}
+                src={require("../../assets/images/model_placeholder.png")}
                 alt="Model"
               />
               {process.model === undefined
@@ -56,7 +57,7 @@ const Order = ({ order }: Props) => {
               <div key={index} className="order-manufacturer-item">
                 <img
                   className="order-manufacturer-item-img"
-                  src={require("../../../assets/images/firm_logo_placeholder.png")}
+                  src={require("../../assets/images/firm_logo_placeholder.png")}
                   alt="Model"
                 />
                 {manufacturer.name}

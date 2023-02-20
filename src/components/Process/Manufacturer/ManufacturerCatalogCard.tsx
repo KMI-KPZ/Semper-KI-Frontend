@@ -9,10 +9,8 @@ interface Props {
   selectManufacturer: (manufacturer: IManufacturer) => void;
 }
 
-export const ManufacturerCatalogCard = ({
-  manufacturer,
-  selectManufacturer,
-}: Props) => {
+export const ManufacturerCatalogCard: React.FC<Props> = (props) => {
+  const { manufacturer, selectManufacturer } = props;
   const { t } = useTranslation();
 
   const handleAddClick = () => {

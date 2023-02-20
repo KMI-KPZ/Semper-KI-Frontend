@@ -19,13 +19,14 @@ interface Props {
   ): void;
 }
 
-const FilterCard: React.FC<Props> = ({
-  category,
-  categoryIndex,
-  filterItemList,
-  setFilterItem,
-  handleOnClickMenuOpen,
-}) => {
+const FilterCard: React.FC<Props> = (props) => {
+  const {
+    category,
+    categoryIndex,
+    filterItemList,
+    setFilterItem,
+    handleOnClickMenuOpen,
+  } = props;
   const { t } = useTranslation();
   const getCountOfChecktItems = (): string => {
     const count = filterItemList.filter(

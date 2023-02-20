@@ -14,15 +14,8 @@ interface Props {
   isItem: boolean;
 }
 
-const CartItem: React.FC<Props> = ({
-  index,
-  active,
-  title,
-  icon,
-  onClickCard,
-  isItem,
-  process,
-}) => {
+const CartItem: React.FC<Props> = (props) => {
+  const { index, active, title, icon, onClickCard, isItem, process } = props;
   const { deleteProcess } = useContext(ProcessContext);
 
   const handleOnClickCard = (

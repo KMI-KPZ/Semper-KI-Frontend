@@ -1,17 +1,18 @@
 import React from "react";
-import { IProcess } from "../../../interface/Interface";
+import { IProcess } from "../../interface/Interface";
 
 interface Props {
   process: IProcess;
 }
 
-const ShoppingCartItem = ({ process }: Props) => {
+const ShoppingCartItem: React.FC<Props> = (props) => {
+  const { process } = props;
   return (
     <ul className="shopping-cart-item">
       <li className="item-column">
         <img
           className="item-img"
-          src={require("../../../assets/images/model_placeholder.png")}
+          src={require("../../assets/images/model_placeholder.png")}
           alt="Model"
         />
       </li>

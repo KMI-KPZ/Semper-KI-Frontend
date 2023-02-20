@@ -21,12 +21,8 @@ export interface ICardItem {
   icon?: string;
 }
 
-const CardView: React.FC<Props> = ({
-  path,
-  cards,
-  cardGroups,
-  onClickCard,
-}) => {
+const CardView: React.FC<Props> = (props) => {
+  const { path, cards, cardGroups, onClickCard } = props;
   const { t } = useTranslation();
 
   const calcRowCount = (): string => {

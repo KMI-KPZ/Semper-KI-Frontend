@@ -10,15 +10,16 @@ interface Props {
   component: React.ReactNode;
 }
 
-const Loading = ({
-  isLoading,
-  error,
-  data,
-  loadingText,
-  loadingErrorText,
-  errorText,
-  component,
-}: Props) => {
+const Loading: React.FC<Props> = (props) => {
+  const {
+    isLoading,
+    error,
+    data,
+    loadingText,
+    loadingErrorText,
+    errorText,
+    component,
+  } = props;
   return (
     <>
       {error && (

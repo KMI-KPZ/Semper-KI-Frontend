@@ -19,12 +19,8 @@ interface Props {
   openModelView(model: IModel): void;
 }
 
-export const ModelCard = ({
-  model,
-  selectModel,
-  grid,
-  openModelView,
-}: Props) => {
+export const ModelCard: React.FC<Props> = (props) => {
+  const { model, selectModel, grid, openModelView } = props;
   const handleOnClickSelect = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {

@@ -12,11 +12,8 @@ interface Props {
   setProgress(path: string): void;
 }
 
-export const AdditiveView = ({
-  selectAdditive,
-  processList,
-  setProgress,
-}: Props) => {
+export const AdditiveView: React.FC<Props> = (props) => {
+  const { selectAdditive, processList, setProgress } = props;
   const { t } = useTranslation();
   const refUpload = useRef<HTMLInputElement>(null);
 

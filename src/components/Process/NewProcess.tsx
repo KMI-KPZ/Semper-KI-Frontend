@@ -5,7 +5,8 @@ interface Props {
   startNewProcess(): void;
 }
 
-const NewProcess = ({ startNewProcess }: Props) => {
+const NewProcess: React.FC<Props> = (props) => {
+  const { startNewProcess } = props;
   const navigate = useNavigate();
   useEffect(() => {
     startNewProcess();

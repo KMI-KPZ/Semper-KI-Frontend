@@ -9,7 +9,8 @@ interface Props {
   extern?: boolean;
 }
 
-const Redirect: React.FC<Props> = ({ link, time, text, extern }) => {
+const Redirect: React.FC<Props> = (props) => {
+  const { link, time, text, extern } = props;
   const navigate = useNavigate();
 
   const openLink = () => {

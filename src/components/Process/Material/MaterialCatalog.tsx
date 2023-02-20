@@ -17,12 +17,8 @@ interface Props {
   setProgress(path: string): void;
 }
 
-export const MaterialCatalog = ({
-  selectMaterial,
-  setProgress,
-  materials,
-  grid,
-}: Props) => {
+export const MaterialCatalog: React.FC<Props> = (props) => {
+  const { selectMaterial, setProgress, materials, grid } = props;
   const { t } = useTranslation();
   useEffect(() => {
     setProgress("material");

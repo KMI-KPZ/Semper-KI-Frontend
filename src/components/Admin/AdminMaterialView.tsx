@@ -8,13 +8,14 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
-import { IMaterial } from "../../../interface/Interface";
+import { IMaterial } from "../../interface/Interface";
 
 interface Props {
   materialList: IMaterial[];
 }
 
-const AdminMaterialView: React.FC<Props> = ({ materialList }) => {
+const AdminMaterialView: React.FC<Props> = (props) => {
+  const { materialList } = props;
   return (
     <div className="admin-view">
       <h1>Benutzer</h1>

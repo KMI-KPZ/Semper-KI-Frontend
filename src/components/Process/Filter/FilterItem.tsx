@@ -15,7 +15,8 @@ interface Props {
   setFilterItem(filterItem: IFilterItem): void;
 }
 
-const FilterItem: React.FC<Props> = ({ filterItem, setFilterItem }) => {
+const FilterItem: React.FC<Props> = (props) => {
+  const { filterItem, setFilterItem } = props;
   const { t } = useTranslation();
 
   const displayInput = () => {

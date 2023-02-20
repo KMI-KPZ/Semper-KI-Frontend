@@ -9,7 +9,8 @@ interface Props {
   closeMenus(): void;
 }
 
-const HeaderItem = ({ headeritem, closeMenus, isMenuItem }: Props) => {
+const HeaderItem: React.FC<Props> = (props) => {
+  const { headeritem, closeMenus, isMenuItem } = props;
   const navigate = useNavigate();
 
   const handleOnClick = (

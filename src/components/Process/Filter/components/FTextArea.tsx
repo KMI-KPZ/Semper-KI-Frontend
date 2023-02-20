@@ -10,7 +10,8 @@ interface State {
   text: string;
 }
 
-const FTextArea: React.FC<Props> = ({ filterItem, setFilterItem }) => {
+const FTextArea: React.FC<Props> = (props) => {
+  const { filterItem, setFilterItem } = props;
   const [state, setState] = useState<State>({ text: "" });
 
   useEffect(() => {

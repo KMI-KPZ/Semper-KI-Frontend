@@ -11,7 +11,8 @@ interface Props {
   selectModel: (model: IModel) => void;
 }
 
-export const ModelView = ({ model, selectModel }: Props) => {
+export const ModelView: React.FC<Props> = (props) => {
+  const { model, selectModel } = props;
   const getDate = (): string => {
     let date: Date = new Date(model.date);
     return date.toLocaleDateString("uk-Uk");

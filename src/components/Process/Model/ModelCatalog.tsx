@@ -21,12 +21,8 @@ interface State {
   model: IModel | undefined;
 }
 
-export const ModelCatalog: React.FC<Props> = ({
-  models,
-  processState,
-  selectModel,
-  setProgress,
-}) => {
+export const ModelCatalog: React.FC<Props> = (props) => {
+  const { models, processState, selectModel, setProgress } = props;
   const [state, setState] = useState<State>({ popUp: false, model: undefined });
   const { t } = useTranslation();
   useEffect(() => {

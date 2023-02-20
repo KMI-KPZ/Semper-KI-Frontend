@@ -79,7 +79,8 @@ export const ProcessContext = createContext<IProcessContext>({
   },
 });
 
-export const ProcessView = ({ guideAnswers }: Props) => {
+export const ProcessView: React.FC<Props> = (props) => {
+  const { guideAnswers } = props;
   const { path } = useParams<string>();
   const navigate = useNavigate();
   const [state, setState] = useState<IProcessState>(initialProcessState);

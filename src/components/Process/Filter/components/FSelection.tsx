@@ -6,7 +6,8 @@ interface Props {
   setFilterItem(filterItem: IFilterItem): void;
 }
 
-const FSelection: React.FC<Props> = ({ filterItem, setFilterItem }) => {
+const FSelection: React.FC<Props> = (props) => {
+  const { filterItem, setFilterItem } = props;
   const [value, setValue] = useState<string>(
     filterItem.answer !== null &&
       typeof filterItem.answer.value === "string" &&

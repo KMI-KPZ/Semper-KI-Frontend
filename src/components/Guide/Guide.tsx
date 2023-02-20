@@ -14,8 +14,6 @@ import _filter from "../Process/Filter/FilterQuestions.json";
 import _questions from "./GuideQuestions.json";
 import GuideAnswers from "./GuideAnswers";
 import GuideOverview from "./GuideOverview";
-import { IOption } from "../../interface/Interface";
-import { log } from "console";
 
 const questions = _questions.sort(
   (q1, q2) => q1.filterId - q2.filterId
@@ -57,7 +55,8 @@ const convertToGuideAnswer = (questions: IGuideQuestion[]): IFilterItem[] => {
   return filterItemList;
 };
 
-const Guide = ({ setFilter }: Props) => {
+const Guide: React.FC<Props> = (props) => {
+  const { setFilter } = props;
   const path = useParams();
   const navigate = useNavigate();
   const [state, setState] = useState<State>({

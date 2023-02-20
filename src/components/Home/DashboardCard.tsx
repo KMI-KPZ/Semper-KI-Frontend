@@ -1,15 +1,16 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { getIconByName } from "../../../config/Icons";
-import { ICardItem } from "../../CardView/CardView";
+import { getIconByName } from "../../config/Icons";
+import { ICardItem } from "../CardView/CardView";
 
 interface Props {
   prefix: string;
   cardItem: ICardItem;
 }
 
-const DashboardCard: React.FC<Props> = ({ prefix, cardItem }) => {
+const DashboardCard: React.FC<Props> = (props) => {
+  const { prefix, cardItem } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const handleOnClickCard = (

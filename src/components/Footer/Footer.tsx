@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { URL_Datenschutz, URL_Impressum } from "../../config/Constants";
 import "./Footer.scss";
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <nav className="footer">
       <ul className="footer-list">

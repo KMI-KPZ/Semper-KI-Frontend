@@ -19,7 +19,8 @@ const CoinAnimation: ReactNode = (
   </div>
 );
 
-const LoadingAnimation: React.FC<Props> = ({ type }) => {
+const LoadingAnimation: React.FC<Props> = (props) => {
+  const { type } = props;
   if (type !== undefined) {
     switch (type) {
       case 0:

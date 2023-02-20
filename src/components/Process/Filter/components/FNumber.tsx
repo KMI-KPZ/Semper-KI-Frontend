@@ -10,7 +10,8 @@ interface State {
   value: string;
 }
 
-const FNumber: React.FC<Props> = ({ filterItem, setFilterItem }) => {
+const FNumber: React.FC<Props> = (props) => {
+  const { filterItem, setFilterItem } = props;
   const [state, setState] = useState<State>({ value: "" });
 
   useEffect(() => {

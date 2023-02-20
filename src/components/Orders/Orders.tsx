@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { IOrder } from "../../../interface/Interface";
+import { IOrder } from "../../interface/Interface";
 import Order from "./Order";
 import "./Orders.scss";
 
@@ -8,7 +8,8 @@ interface Props {
   orderList: IOrder[];
 }
 
-const Orders = ({ orderList }: Props) => {
+const Orders: React.FC<Props> = (props) => {
+  const { orderList } = props;
   const { t } = useTranslation();
 
   return (

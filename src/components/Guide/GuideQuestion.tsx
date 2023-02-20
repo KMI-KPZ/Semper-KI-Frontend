@@ -1,5 +1,4 @@
 import { Button } from "@mui/material";
-import { log } from "console";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IGuideOption, IGuideQuestion } from "./Interface";
@@ -15,11 +14,8 @@ interface State {
   error: boolean;
 }
 
-const GuideQuestion: React.FC<Props> = ({
-  question,
-  selectQuestion,
-  setOptions: setParentOptions,
-}) => {
+const GuideQuestion: React.FC<Props> = (props) => {
+  const { question, selectQuestion, setOptions: setParentOptions } = props;
   const { t } = useTranslation();
   const [state, setState] = useState<State>({
     options: question.options,

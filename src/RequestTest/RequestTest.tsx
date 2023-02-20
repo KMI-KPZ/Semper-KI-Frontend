@@ -35,7 +35,7 @@ interface FileState {
   response: string;
 }
 
-export const RequestTest = () => {
+export const RequestTest: React.FC = () => {
   const { axiosCustom } = useCustomAxios();
   const [state, setState] = useState<State>({
     post: "",

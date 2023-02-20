@@ -83,7 +83,8 @@ const testData: IOption[] = [
   { name: "Bool-Texteingabe-Option", stringInput: true },
 ];
 
-export const PostProcessingView = ({ processList, setProgress }: Props) => {
+export const PostProcessingView: React.FC<Props> = (props) => {
+  const { processList, setProgress } = props;
   const { t } = useTranslation();
   useEffect(() => {
     setProgress("postprocessing");

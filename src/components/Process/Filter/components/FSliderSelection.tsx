@@ -17,7 +17,8 @@ function instanceOfIRangeMinMax(object: any): object is IRangeMinMax {
   return ("min" || "max") in object;
 }
 
-const FSliderSelection: React.FC<Props> = ({ filterItem, setFilterItem }) => {
+const FSliderSelection: React.FC<Props> = (props) => {
+  const { filterItem, setFilterItem } = props;
   const rangeMin: number =
     filterItem.question.range !== null &&
     Array.isArray(filterItem.question.range)

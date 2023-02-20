@@ -8,7 +8,8 @@ interface Props {
   material?: IMaterial;
 }
 
-export const MaterialView = ({ material }: Props) => {
+export const MaterialView: React.FC<Props> = (props) => {
+  const { material } = props;
   return (
     <div className="process-content-container">
       <div className="headline dark">Material/Verfahren</div>

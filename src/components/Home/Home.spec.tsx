@@ -1,4 +1,5 @@
 import { render, fireEvent, screen } from "@testing-library/react";
+import { EUserType } from "../../interface/enums";
 import { Home } from "./Home";
 
 const mockedUseNavigate = jest.fn((str: string): string => str);
@@ -23,7 +24,7 @@ jest.mock("react-i18next", () => ({
 }));
 
 beforeEach(() => {
-  render(<Home />);
+  render(<Home isLoggedIn={false} userType={EUserType.indefinite} />);
 });
 
 describe.skip(Home, () => {

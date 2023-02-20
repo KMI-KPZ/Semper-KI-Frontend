@@ -8,15 +8,16 @@ import {
   IconFast,
   IconQuestionMark,
   IconX,
-} from "../../../config/Icons";
-import { EOrderState } from "../../../interface/enums";
-import { IOrder } from "../../../interface/Interface";
+} from "../../config/Icons";
+import { EOrderState } from "../../interface/enums";
+import { IOrder } from "../../interface/Interface";
 
 interface Props {
   order: IOrder;
 }
 
-const DashboardOrderCard: React.FC<Props> = ({ order }) => {
+const DashboardOrderCard: React.FC<Props> = (props) => {
+  const { order } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const handleOnClickCard = (

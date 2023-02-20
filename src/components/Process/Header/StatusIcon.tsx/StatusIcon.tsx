@@ -9,7 +9,8 @@ interface Props {
   statusType?: EProcessStatusType;
 }
 
-const StatusIcon: React.FC<Props> = ({ statusType, process }) => {
+const StatusIcon: React.FC<Props> = (props) => {
+  const { statusType, process } = props;
   let status: number = 0;
 
   if (process === undefined) status = statusType === undefined ? 0 : statusType;

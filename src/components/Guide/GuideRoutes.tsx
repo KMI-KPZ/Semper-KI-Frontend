@@ -16,7 +16,8 @@ interface State {
   menuOpen: boolean;
 }
 
-const GuideRoutes: React.FC<Props> = ({ setFilter }) => {
+const GuideRoutes: React.FC<Props> = (props) => {
+  const { setFilter } = props;
   const [state, setState] = useState<State>({ menuOpen: false });
   const navigate = useNavigate();
   const { path } = useParams();

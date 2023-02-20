@@ -8,11 +8,8 @@ interface Props {
   applyFilter(): void;
 }
 
-const GuideOverview: React.FC<Props> = ({
-  questions,
-  selectQuestion,
-  applyFilter,
-}) => {
+const GuideOverview: React.FC<Props> = (props) => {
+  const { questions, selectQuestion, applyFilter } = props;
   const handleOnClickCard = (filterId: number) => {
     selectQuestion(filterId);
   };

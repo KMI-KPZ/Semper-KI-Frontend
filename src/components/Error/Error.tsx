@@ -5,7 +5,8 @@ interface Props {
   text?: string;
 }
 
-export const Error = ({ text }: Props) => {
+export const Error: React.FC<Props> = (props) => {
+  const { text } = props;
   const navigate = useNavigate();
   const { t } = useTranslation();
 

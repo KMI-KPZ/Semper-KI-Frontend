@@ -53,7 +53,8 @@ const hydrateFilter = (guideAnswers: IFilterItem[]): IFilterItem[] => {
   return filteritems;
 };
 
-const Filter: React.FC<Props> = ({ applyFilters, guideAnswers, progress }) => {
+const Filter: React.FC<Props> = (props) => {
+  const { applyFilters, guideAnswers, progress } = props;
   const hydratedFilterList: IFilterItem[] = hydrateFilter(guideAnswers);
   const [state, setState] = useState<State>({
     filterList: hydratedFilterList,

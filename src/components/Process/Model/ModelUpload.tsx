@@ -15,7 +15,8 @@ interface Props {
   setProgress(path: string): void;
 }
 
-export const ModelUpload = ({ addProcessList, setProgress }: Props) => {
+export const ModelUpload: React.FC<Props> = (props) => {
+  const { addProcessList, setProgress } = props;
   const { t } = useTranslation();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);

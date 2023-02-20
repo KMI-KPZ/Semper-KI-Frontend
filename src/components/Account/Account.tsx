@@ -1,8 +1,8 @@
 import { Button, Switch } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import useUser from "../../../hooks/useUser";
-import { EUserType } from "../../../interface/enums";
-import { IUser } from "../../../interface/Interface";
+import useUser from "../../hooks/useUser";
+import { EUserType } from "../../interface/enums";
+import { IUser } from "../../interface/Interface";
 
 import "./Account.scss";
 
@@ -10,7 +10,8 @@ interface Props {
   user: IUser;
 }
 
-const Account: React.FC<Props> = ({ user }) => {
+const Account: React.FC<Props> = (props) => {
+  const { user } = props;
   const { deleteUser, updateUser } = useUser();
   const [userType, setUserType] = useState<EUserType>(user.type);
 

@@ -8,54 +8,49 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
-import { IModel } from "../../../interface/Interface";
+import { EOrderState } from "../../interface/enums";
+import { IMaterial, IOrder } from "../../interface/Interface";
 
 interface Props {
-  modelList: IModel[];
+  orderList: IOrder[];
 }
 
-const AdminModelView: React.FC<Props> = ({ modelList }) => {
-  console.log(modelList);
-
+const AdminOrderView: React.FC<Props> = (props) => {
+  const { orderList } = props;
   return (
     <div className="admin-view">
-      <h1>Modelle</h1>
+      <h1>Benutzer</h1>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 800 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
+              <TableCell>OrderId</TableCell>
               <TableCell>Date</TableCell>
-              <TableCell>Lizens</TableCell>
-              <TableCell>Tags</TableCell>
-              <TableCell>Zertifikat</TableCell>
-              <TableCell>URI</TableCell>
+              <TableCell>OrderState</TableCell>
+              <TableCell>ProcessList</TableCell>
+              <TableCell>Bill</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {modelList.map((model: IModel, index: number) => (
+            {orderList.map((order: IOrder, index: number) => (
               <TableRow
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {model.name}
+                  {order.orderId}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {model.date}
+                  {order.date.toLocaleDateString()}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {model.license}
+                  {EOrderState[order.orderState]}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {model.certificate.join(", ")}
+                  {order.processList.length}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {model.tags.join(", ")}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {/* <img src={model.URI} /> */}
-                  {model.URI}
+                  {order.bill?.name}
                 </TableCell>
               </TableRow>
             ))}
@@ -66,4 +61,4 @@ const AdminModelView: React.FC<Props> = ({ modelList }) => {
   );
 };
 
-export default AdminModelView;
+export default AdminOrderView;

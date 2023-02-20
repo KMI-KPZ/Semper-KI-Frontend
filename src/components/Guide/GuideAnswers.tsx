@@ -9,12 +9,8 @@ interface Props {
   selectQuestion(): void;
 }
 
-const GuideAnswers: React.FC<Props> = ({
-  questions,
-  activeQuestionId,
-  selectQuestion,
-  toggelOption,
-}) => {
+const GuideAnswers: React.FC<Props> = (props) => {
+  const { questions, activeQuestionId, selectQuestion, toggelOption } = props;
   const handleOnChangeCkeckbox = (filterId: number, optionIndex: number) => {
     toggelOption(filterId, optionIndex);
   };

@@ -14,7 +14,6 @@ import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import axios, { AxiosError } from "axios";
 import useCustomAxios from "../hooks/useCustomAxios";
-import { log } from "console";
 
 interface State {
   post: string;
@@ -32,7 +31,8 @@ interface State {
 interface FileState {
   fileURL: string;
   file?: File;
-  response: string;
+  response: any;
+  loadedFile?: File;
 }
 
 export const RequestTest: React.FC = () => {
@@ -50,7 +50,7 @@ export const RequestTest: React.FC = () => {
     loading: null,
   });
   const [fileState, setFileState] = useState<FileState>({
-    fileURL: `${process.env.REACT_APP_API_URL}`,
+    fileURL: `${process.env.REACT_APP_API_URL}/public/uploadFiles/`,
     response: "",
   });
   const URL = `${state.url}${state.port}${state.postFix}`;
@@ -189,7 +189,22 @@ export const RequestTest: React.FC = () => {
         }));
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.error("fileUpload Error:", error);
+      });
+  };
+
+  const loadFile = () => {
+    axiosCustom
+      .get(`${process.env.REACT_APP_API_URL}/private/retrieveFiles/`)
+      .then((response) => {
+        console.log("laodFile", response);
+        setFileState((prevState) => ({
+          ...prevState,
+          loadedFile: response.data,
+        }));
+      })
+      .catch((error) => {
+        console.error("loadFile Error:", error);
       });
   };
 
@@ -315,14 +330,27 @@ export const RequestTest: React.FC = () => {
         <Button variant="contained" onClick={fileUpload}>
           Abschicken
         </Button>
+        {fileState.response !== undefined ? (
+          <div> {fileState.response}</div>
+        ) : null}
       </Paper>
-      {/* {fileState.response !== "" ? (
-        <Paper
-          children={
-            <div dangerouslySetInnerHTML={{ __html: fileState.response }} />
-          }
-        />
-      ) : null} */}
+      <Paper
+        sx={{
+          padding: "20px",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "20px",
+        }}
+      >
+        {fileState.loadedFile !== undefined ? (
+          <div>{fileState.loadedFile.name}</div>
+        ) : null}
+        <Button variant="contained" onClick={(e) => loadFile()}>
+          LoadFile
+        </Button>
+      </Paper>
       {state.loading !== null && state.loading === true && (
         <Paper sx={{ marginTop: 1, padding: 1 }}>
           <Typography variant="h3">Loading...</Typography>

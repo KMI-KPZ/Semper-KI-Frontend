@@ -1,6 +1,6 @@
 import { log } from "console";
 import React from "react";
-import { IGuideOption, IGuideQuestion } from "./Interface";
+import { IGuideOption, IGuideQuestion } from "../Interface";
 
 interface Props {
   activeQuestionId: number;

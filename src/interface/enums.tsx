@@ -24,3 +24,8 @@ export enum EOrderState {
   "production",
   "delivery",
 }
+
+export enum EGuideQuestionType {
+  "selection",
+  "range",
+}

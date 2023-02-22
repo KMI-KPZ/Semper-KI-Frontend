@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React from "react";
-import { IGuideOption, IGuideQuestion } from "./Interface";
+import { IGuideOption, IGuideQuestion } from "../Interface";
 
 interface Props {
   questions: IGuideQuestion[];

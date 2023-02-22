@@ -4,7 +4,14 @@ $gap:50px;
 $cardsGap:20px;
 $cardsPerRow:2;
  
-
+.info-card {
+    background-color: $white;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    column-gap: 10px;
+    justify-items: center;
+}
 
 .dashboard {
     display: flex;

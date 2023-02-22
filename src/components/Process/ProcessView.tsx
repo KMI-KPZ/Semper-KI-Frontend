@@ -84,11 +84,13 @@ export const ProcessView: React.FC<Props> = (props) => {
   const { path } = useParams<string>();
   const navigate = useNavigate();
   const [state, setState] = useState<IProcessState>(initialProcessState);
+  const { activeProcessList, grid, processList, progress } = state;
   const { loadData, data } = useFilter();
+  const { filters, materials, models } = data;
 
   const applyFilters = (filterItemList: IFilterItem[]) => {
     console.log("Process| Apply Filter", filterItemList);
-    loadData(filterItemList, state.progress.link.split("/").splice(-1, 1)[0]);
+    loadData(filterItemList, progress.link.split("/").splice(-1, 1)[0]);
   };
 
   const startNewProcess = () => {
@@ -145,7 +147,7 @@ export const ProcessView: React.FC<Props> = (props) => {
       activeProcessList.push(index);
     }
 
-    if (state.processList.length === 0 || activeProcessList.length === 0)
+    if (processList.length === 0 || activeProcessList.length === 0)
       //select upload when no items are slected or available
       upload = true;
 
@@ -270,7 +272,7 @@ export const ProcessView: React.FC<Props> = (props) => {
         <Filter
           applyFilters={applyFilters}
           guideAnswers={guideAnswers}
-          progress={state.progress}
+          progress={progress}
         />
         <div className="process-content">
           <Header />
@@ -285,7 +287,7 @@ export const ProcessView: React.FC<Props> = (props) => {
               element={
                 <ModelCatalog
                   processState={state}
-                  models={data.models}
+                  models={models}
                   selectModel={selectModel}
                   setProgress={setProgress}
                 />
@@ -304,8 +306,8 @@ export const ProcessView: React.FC<Props> = (props) => {
               path="material"
               element={
                 <MaterialCatalog
-                  grid={state.grid}
-                  materials={data.materials}
+                  grid={grid}
+                  materials={materials}
                   selectMaterial={selectMaterial}
                   setProgress={setProgress}
                 />
@@ -330,7 +332,7 @@ export const ProcessView: React.FC<Props> = (props) => {
               path="postprocessing"
               element={
                 <PostProcessingView
-                  processList={state.processList}
+                  processList={processList}
                   selectPostProcessing={selectPostProcessing}
                   setProgress={setProgress}
                 />
@@ -340,7 +342,7 @@ export const ProcessView: React.FC<Props> = (props) => {
               path="additive"
               element={
                 <AdditiveView
-                  processList={state.processList}
+                  processList={processList}
                   selectAdditive={selectAdditive}
                   setProgress={setProgress}
                 />

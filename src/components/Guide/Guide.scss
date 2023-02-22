@@ -1,6 +1,6 @@
 @use '../../scss/index' as *;
 
-$cardWidth : 400px;
+$cardWidth : 250px;
 $gap:50px;  
 $cardsGap:20px;
 @mixin content($cardsPerRow) {

@@ -21,7 +21,10 @@ const useStatistics = (): ReturnProps => {
     axiosCustom
       .get(`${process.env.REACT_APP_API_URL}/public/getStatistics/`)
       .then((response) => {
-        console.log("useStatistics| loadStatistics Successful", response.data);
+        console.log(
+          "useStatistics| loadStatistics Successful",
+          JSON.stringify(response.data)
+        );
         setStatistics(response.data);
       })
       .catch((error) => {

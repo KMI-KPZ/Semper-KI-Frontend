@@ -1,13 +1,23 @@
 import axios, { AxiosInstance } from "axios";
 import Cookies from "js-cookie";
+import { useEffect } from "react";
 
 interface ReturnProps {
-  axiosUnauthorized: AxiosInstance;
-  axiosAuthorized: AxiosInstance;
   axiosCustom: AxiosInstance;
 }
 
 const useCustomAxios = (): ReturnProps => {
+  useEffect(() => {
+    axios.defaults.headers.common = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept",
+    };
+    axios.defaults.withCredentials = true;
+  }, []);
+
   const axiosUnauthorized = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/`,
     headers: {
@@ -46,7 +56,7 @@ const useCustomAxios = (): ReturnProps => {
 
   const axiosCustom = CSRFToken() === "" ? axiosUnauthorized : axiosAuthorized;
 
-  return { axiosAuthorized, axiosUnauthorized, axiosCustom };
+  return { axiosCustom };
 };
 
 export default useCustomAxios;

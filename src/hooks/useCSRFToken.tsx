@@ -4,42 +4,35 @@ import Cookies from "js-cookie";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
-  CSRFToken: string;
+  CSRFToken: boolean;
 }
 
 const useCRSFToken = (): ReturnProps => {
-  const [CSRFToken, setCSRFToken] = useState<string>("");
+  const { axiosCustom } = useCustomAxios();
+  const [CSRFToken, setCSRFToken] = useState<boolean>(false);
+
+  useEffect(() => {
+    loadCSRFToken();
+  }, []);
 
   const loadCSRFToken = (): void => {
-    axios
+    axiosCustom
       .get(`${process.env.REACT_APP_API_URL}/public/csrfCookie/`)
       .then((response) => {
         const token = Cookies.get("csrftoken");
         if (token !== undefined) {
           console.log("useCRSFToken| loadCSRFToken Successful");
-          setCSRFToken(token);
+          setCSRFToken(true);
         } else {
           console.log("useCRSFToken| loadCSRFToken Failed");
-          setCSRFToken("");
+          setCSRFToken(false);
         }
       })
       .catch((error) => {
         console.log("useCRSFToken| loadCSRFToken Error", error);
-        setCSRFToken("");
+        setCSRFToken(false);
       });
   };
-
-  useEffect(() => {
-    axios.defaults.headers.common = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers":
-        "Origin, X-Requested-With, Content-Type, Accept",
-    };
-    axios.defaults.withCredentials = true;
-    loadCSRFToken();
-  }, []);
 
   return { CSRFToken };
 };

@@ -3,7 +3,6 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
 import useCRSFToken from "../../hooks/useCSRFToken";
-import axios from "axios";
 import { IChat, IOrder, IProcess } from "../../interface/Interface";
 import { TestOrderList } from "../../services/TestData";
 import useUser from "../../hooks/useUser";
@@ -70,10 +69,6 @@ const App: React.FC = () => {
   const { isLoggedIn, userType, user, loadLoggedIn, logoutUser } = useUser();
   const { data, loadData, clearData } = useAdmin();
 
-  const setUserType = (userType: EUserType): void => {
-    setState((prevState) => ({ ...prevState, userType }));
-  };
-
   const setProcessList = (processList: IProcess[]): void => {
     setState((prevState) => ({ ...prevState, processList }));
   };
@@ -83,7 +78,7 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    if (CSRFToken !== "") {
+    if (CSRFToken === true) {
       loadLoggedIn();
     }
   }, [CSRFToken]);
@@ -174,7 +169,6 @@ const App: React.FC = () => {
               element={<Redirect link={URL_AboutUs} extern />}
             />
             <Route path="service/*" element={<ServiceRoutes />} />
-
             <Route path="*" element={<Error />} />
             {privateRoutes}
           </Routes>

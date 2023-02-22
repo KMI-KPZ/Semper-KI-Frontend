@@ -28,18 +28,23 @@ export const Home: React.FC<Props> = (props) => {
   const prefix: string =
     userType === EUserType.admin ? "dashboard.admin" : "dashboard";
 
+  const infoCard = (
+    <div className="info-card unselectable">
+      <h2>Aktive Benutzer:</h2>
+      <h2>{active}</h2>
+      <h2>Angemeldete Benutzer:</h2>
+      <h2>{loggedIn}</h2>
+    </div>
+  );
+
   return isLoggedIn === false ? (
     <CardView path="home" cards={HomeCards}>
-      <>
-        <h2>Aktive Benutzer {active}</h2>
-        <h2>Angemeldete Benutzer {loggedIn}</h2>
-      </>
+      {infoCard}
     </CardView>
   ) : (
     <div className="dashboard">
       <h1 className="dashboard-headline">{t(`${prefix}.title`)}</h1>
-      <h2>Aktive Benutzer {active}</h2>
-      <h2>Angemeldete Benutzer {loggedIn}</h2>
+      {infoCard}
       <div className="dashboard-cards">
         {(userType === EUserType.admin ? AdminCards : UserCards).map(
           (cardItem: ICardItem, index: number) => (

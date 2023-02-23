@@ -29,16 +29,16 @@ interface Props {
 }
 
 interface State {
-  activeQuestionId: number;
+  activeQuestionIndex: number;
   questions: IGuideQuestion[];
   overview: boolean;
 }
 
-function isIRangeMinMax(value: any): value is IRangeMinMax {
+export const isIRangeMinMax = (value: any): value is IRangeMinMax => {
   return !(
     (value as any).min === undefined && (value as any).max === undefined
   );
-}
+};
 
 const createFilterItem = (
   questionType: EGuideQuestionType,
@@ -96,7 +96,7 @@ const convertToGuideAnswer = (questions: IGuideQuestion[]): IFilterItem[] => {
 };
 
 const initialState: State = {
-  activeQuestionId: 0,
+  activeQuestionIndex: 0,
   questions: [],
   overview: false,
 };
@@ -109,7 +109,7 @@ const Guide: React.FC<Props> = (props) => {
   const { guideQuestions, loadGuideQuestions } = useGuide();
 
   const [state, setState] = useState<State>(initialState);
-  const { activeQuestionId, overview, questions } = state;
+  const { activeQuestionIndex, overview, questions } = state;
 
   useEffect(() => {
     if (path !== undefined) loadGuideQuestions(path);
@@ -120,70 +120,16 @@ const Guide: React.FC<Props> = (props) => {
       setState((prevState) => ({
         ...prevState,
         questions: guideQuestions.sort((q1, q2) => q1.filterId - q2.filterId),
-        activeQuestionId: guideQuestions[0].filterId,
+        activeQuestionIndex: guideQuestions[0].filterId,
       }));
   }, [guideQuestions]);
 
   const getNextQuestionId = () => {
-    return state.activeQuestionId + 1;
-  };
-
-  const toggelOption = (filterId: number, optionIndex: number) => {
-    // console.log("Guide | ToggelOption");
-    setState((prevState) => ({
-      ...prevState,
-      questions: [
-        ...prevState.questions.filter(
-          (question: IGuideQuestion) => question.filterId < filterId
-        ),
-        {
-          ...prevState.questions.filter(
-            (question: IGuideQuestion) => question.filterId === filterId
-          )[0],
-          options: [
-            ...prevState.questions
-              .filter(
-                (question: IGuideQuestion) => question.filterId === filterId
-              )[0]
-              .options.filter(
-                (option: IGuideOption, index_: number) => index_ < optionIndex
-              ),
-            {
-              ...prevState.questions
-                .filter(
-                  (question: IGuideQuestion) => question.filterId === filterId
-                )[0]
-                .options.filter(
-                  (option: IGuideOption, index_: number) =>
-                    index_ === optionIndex
-                )[0],
-              checked: !prevState.questions
-                .filter(
-                  (question: IGuideQuestion) => question.filterId === filterId
-                )[0]
-                .options.filter(
-                  (option: IGuideOption, index_: number) =>
-                    index_ === optionIndex
-                )[0].checked,
-            },
-            ...prevState.questions
-              .filter(
-                (question: IGuideQuestion) => question.filterId === filterId
-              )[0]
-              .options.filter(
-                (option: IGuideOption, index_: number) => index_ > optionIndex
-              ),
-          ],
-        },
-        ...prevState.questions.filter(
-          (question: IGuideQuestion) => question.filterId > filterId
-        ),
-      ],
-    }));
+    return state.activeQuestionIndex + 1;
   };
 
   const setOptions = (filterId: number, options: IGuideOption[]) => {
-    // console.log("Guide | setOptions", options);
+    console.log("Guide | setOptions", options);
     setState((prevState) => ({
       ...prevState,
       questions: [
@@ -204,17 +150,17 @@ const Guide: React.FC<Props> = (props) => {
   };
 
   const selectQuestion = (questionId?: number) => {
-    // console.log("Guide | selectQuestion", questionId);
+    // console.log("Guide | selectQuestion", questionId, getNextQuestionId());
     if (
       questionId === undefined &&
-      getNextQuestionId() >= state.questions.length
+      getNextQuestionId() === state.questions.length
     ) {
       setState((prevState) => ({ ...prevState, overview: true }));
     } else {
       setState((prevState) => ({
         ...prevState,
         overview: false,
-        activeQuestionId:
+        activeQuestionIndex:
           questionId === undefined ? getNextQuestionId() : questionId,
       }));
     }
@@ -234,17 +180,19 @@ const Guide: React.FC<Props> = (props) => {
           questions={questions}
           selectQuestion={selectQuestion}
           applyFilter={applyFilter}
+          setOptions={setOptions}
         />
       ) : questions.length > 0 ? (
         <>
           <GuideAnswers
             questions={questions}
-            activeQuestionId={activeQuestionId}
-            toggelOption={toggelOption}
+            activeQuestionIndex={activeQuestionIndex}
+            setOptions={setOptions}
             selectQuestion={selectQuestion}
           />
           <GuideQuestion
-            question={questions[activeQuestionId]}
+            question={questions[activeQuestionIndex]}
+            activeQuestionIndex={activeQuestionIndex}
             setOptions={setOptions}
             selectQuestion={selectQuestion}
           />

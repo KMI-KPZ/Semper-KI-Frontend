@@ -7,7 +7,9 @@ import "./Search.scss";
 import { ProcessContext } from "../../ProcessView";
 
 const Search: React.FC = () => {
-  const { processState, setGridState } = useContext(ProcessContext);
+  const { processState, setGridState, searchModels } =
+    useContext(ProcessContext);
+  const [search, setSearch] = useState<string>("");
 
   const handleClickButton = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -15,6 +17,18 @@ const Search: React.FC = () => {
   ) => {
     e.preventDefault();
     setGridState(grid);
+  };
+
+  const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setSearch(e.currentTarget.value);
+  };
+
+  const handleOnClickSearchButton = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    searchModels(search);
   };
 
   return (
@@ -25,8 +39,13 @@ const Search: React.FC = () => {
           className="search-input"
           placeholder={"Suche ..."}
           autoFocus
+          value={search}
+          onChange={handleOnChangeInput}
         />
-        <div className="search-input-icon-box">
+        <div
+          className="search-input-icon-box"
+          onClick={handleOnClickSearchButton}
+        >
           <SearchIcon className="search-input-icon" />
         </div>
       </div>

@@ -27,5 +27,11 @@ export enum EOrderState {
 
 export enum EGuideQuestionType {
   "selection",
+  "multiSelection",
   "range",
+}
+export enum EGuideQuestionState {
+  "question",
+  "answer",
+  "overview",
 }

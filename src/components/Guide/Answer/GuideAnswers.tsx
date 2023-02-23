@@ -1,53 +1,49 @@
-import { log } from "console";
 import React from "react";
+import { EGuideQuestionState } from "../../../interface/enums";
 import { IGuideOption, IGuideQuestion } from "../Interface";
+import GuideAnswer from "./GuideAnswer";
 
 interface Props {
-  activeQuestionId: number;
+  activeQuestionIndex: number;
   questions: IGuideQuestion[];
-  toggelOption(filterId: number, optionIndex: number): void;
+  setOptions(filterId: number, options: IGuideOption[]): void;
   selectQuestion(): void;
 }
 
 const GuideAnswers: React.FC<Props> = (props) => {
-  const { questions, activeQuestionId, selectQuestion, toggelOption } = props;
-  const handleOnChangeCkeckbox = (filterId: number, optionIndex: number) => {
-    toggelOption(filterId, optionIndex);
-  };
+  const { questions, activeQuestionIndex, selectQuestion, setOptions } = props;
 
   const getProcessProgress = () => {
     const countProcesses = questions.length;
-    return `${activeQuestionId + 1}/${countProcesses}`;
+    return `${activeQuestionIndex + 1}/${countProcesses}`;
   };
+
+  const confirmOptions = (filterId: number) => {
+    // setOptions(filterId, options);
+  };
+
+  console.log();
 
   return (
     <div className="guide-answers">
       <h2>Vorgaben {getProcessProgress()}</h2>
       {questions
         .filter(
-          (question: IGuideQuestion, index: number) => index <= activeQuestionId
+          (question: IGuideQuestion, index: number) =>
+            index <= activeQuestionIndex
         )
         .map((question: IGuideQuestion, questionIndex: number) => (
-          <div className="guide-answer-card" key={questionIndex}>
-            <h3>{question.title}</h3>
-            {question.filterId === activeQuestionId
-              ? "---"
-              : question.options.map(
-                  (option: IGuideOption, optionIndex: number) => (
-                    <div className="guide-answer-card-option" key={optionIndex}>
-                      <input
-                        type="checkbox"
-                        checked={option.checked}
-                        onChange={(e) =>
-                          handleOnChangeCkeckbox(question.filterId, optionIndex)
-                        }
-                        onClick={(e) => e.stopPropagation()}
-                      />
-                      {option.title}
-                    </div>
-                  )
-                )}
-          </div>
+          <GuideAnswer
+            questionState={EGuideQuestionState.answer}
+            active={questionIndex === activeQuestionIndex}
+            options={question.options}
+            title={question.title}
+            type={question.type}
+            key={questionIndex}
+            filterId={question.filterId}
+            confirmOptions={confirmOptions}
+            setOptions={setOptions}
+          />
         ))}
     </div>
   );

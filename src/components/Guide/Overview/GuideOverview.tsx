@@ -1,15 +1,18 @@
 import { Button } from "@mui/material";
 import React from "react";
+import { EGuideQuestionState } from "../../../interface/enums";
+import GOptions from "../Components/GOptions";
 import { IGuideOption, IGuideQuestion } from "../Interface";
 
 interface Props {
   questions: IGuideQuestion[];
   selectQuestion(filterId: number): void;
   applyFilter(): void;
+  setOptions(filterId: number, options: IGuideOption[]): void;
 }
 
 const GuideOverview: React.FC<Props> = (props) => {
-  const { questions, selectQuestion, applyFilter } = props;
+  const { questions, selectQuestion, applyFilter, setOptions } = props;
   const handleOnClickCard = (filterId: number) => {
     selectQuestion(filterId);
   };
@@ -17,6 +20,7 @@ const GuideOverview: React.FC<Props> = (props) => {
   const handleOnClickButton = () => {
     applyFilter();
   };
+
   return (
     <div className="guide-overview">
       <h1>Überblick</h1>
@@ -24,24 +28,17 @@ const GuideOverview: React.FC<Props> = (props) => {
         <div
           className="guide-overview-question"
           key={index}
-          onClick={(e) => handleOnClickCard(question.filterId)}
+          // onClick={(e) => handleOnClickCard(question.filterId)}
         >
           <h2>{question.title}</h2>
-          <div className="guide-overview-options">
-            {question.options.map(
-              (option: IGuideOption, optionIndex: number) => (
-                <div className="guide-overview-option" key={optionIndex}>
-                  <input
-                    type="checkbox"
-                    checked={option.checked}
-                    onChange={(e) => {}}
-                    onClick={(e) => {}}
-                  />
-                  {option.title}
-                </div>
-              )
-            )}
-          </div>
+          <GOptions
+            key={index}
+            type={question.type}
+            options={question.options}
+            filterId={question.filterId}
+            setOptions={setOptions}
+            questionState={EGuideQuestionState.overview}
+          />
         </div>
       ))}
       <Button variant="contained" onClick={(e) => handleOnClickButton()}>

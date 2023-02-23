@@ -30,6 +30,7 @@ import useFilter from "../../hooks/useFilter";
 import Header from "./Header/Header";
 import { removeItem } from "../../services/utils";
 import Procedure from "./Procedure/Procedure";
+import useYeggi from "../../hooks/useYeggi";
 
 interface Props {
   guideAnswers: IFilterItem[];
@@ -50,6 +51,7 @@ export interface IProcessContext {
   selectProcess(index: number): void;
   setProgress(path: string): void;
   setGridState(grid: boolean): void;
+  searchModels(name: string): void;
 }
 const initialProcessState: IProcessState = {
   processList: [{ title: "Item 1" }],
@@ -57,6 +59,7 @@ const initialProcessState: IProcessState = {
   grid: true,
   progress: { title: "Modell finden", link: "/process/model", type: 0 },
 };
+
 export const ProcessContext = createContext<IProcessContext>({
   processState: initialProcessState,
   createEmptryProcess: () => {
@@ -77,6 +80,9 @@ export const ProcessContext = createContext<IProcessContext>({
   setGridState: () => {
     console.log("Error ProcessContext setGridBoolean");
   },
+  searchModels: () => {
+    console.log("Error ProcessContext searchModels");
+  },
 });
 
 export const ProcessView: React.FC<Props> = (props) => {
@@ -87,6 +93,15 @@ export const ProcessView: React.FC<Props> = (props) => {
   const { activeProcessList, grid, processList, progress } = state;
   const { loadData, data } = useFilter();
   const { filters, materials, models } = data;
+  const { models: yeggiModels, searchModels: yeggiSearchModels } = useYeggi();
+
+  useEffect(() => {
+    console.log(yeggiModels);
+  }, [yeggiModels]);
+
+  const searchModels = (name: string) => {
+    yeggiSearchModels(name);
+  };
 
   const applyFilters = (filterItemList: IFilterItem[]) => {
     console.log("Process| Apply Filter", filterItemList);
@@ -96,6 +111,7 @@ export const ProcessView: React.FC<Props> = (props) => {
   const startNewProcess = () => {
     setState((prevState) => ({ ...prevState, processList: [{}] }));
   };
+
   const createEmptryProcess = (): void => {
     console.log("Process| create Emptry Process");
     setState((prevState) => ({
@@ -266,6 +282,7 @@ export const ProcessView: React.FC<Props> = (props) => {
         selectProcess,
         setProgress,
         setGridState,
+        searchModels,
       }}
     >
       <div className="process">

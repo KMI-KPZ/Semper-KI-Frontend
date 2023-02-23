@@ -1,30 +1,34 @@
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { EGuideQuestionType } from "../../../interface/enums";
+import {
+  EGuideQuestionState,
+  EGuideQuestionType,
+} from "../../../interface/enums";
 import { IOption } from "../../../interface/Interface";
 import { IGuideOption, IGuideQuestion } from "../Interface";
-import GRangeSlider from "./Components/GRangeSlider";
-import GSelection from "./Components/GSelection";
+import GRangeSlider from "../Components/GRangeSlider";
+import GMultiSelection from "../Components/GMultiSelection";
+import GOptions from "../Components/GOptions";
 
 interface Props {
   question: IGuideQuestion;
   setOptions(filterId: number, options: IGuideOption[]): void;
-  selectQuestion(): void;
+  selectQuestion(activeQuestionIndex?: number): void;
+  activeQuestionIndex: number;
 }
 
 interface State {
   error: boolean;
 }
 
-export interface IGuideQuestionItem {
-  options: IGuideOption[];
-  confirmOptions(options: IGuideOption[]): void;
-  skipQuestion(): void;
-}
-
 const GuideQuestion: React.FC<Props> = (props) => {
-  const { question, selectQuestion, setOptions: setParentOptions } = props;
+  const {
+    question,
+    selectQuestion,
+    setOptions: setParentOptions,
+    activeQuestionIndex,
+  } = props;
   const { filterId, options, title, type } = question;
   const { t } = useTranslation();
   const [state, setState] = useState<State>({
@@ -46,13 +50,17 @@ const GuideQuestion: React.FC<Props> = (props) => {
     return checked;
   };
 
-  const confirmOptions = (options: IGuideOption[]) => {
+  const confirmOptions = (filterId: number) => {
     if (isAnyOptionChecked(options)) {
       setState((prevState) => ({ ...prevState, error: false }));
       setParentOptions(filterId, options);
       selectQuestion();
     } else {
       setState((prevState) => ({ ...prevState, error: true }));
+      setParentOptions(
+        filterId,
+        options.map((option) => ({ ...option, checked: false }))
+      );
       setTimeout(() => {
         setState((prevState) => ({ ...prevState, error: false }));
       }, 2000);
@@ -61,31 +69,34 @@ const GuideQuestion: React.FC<Props> = (props) => {
 
   const skipQuestion = () => {
     setState((prevState) => ({ ...prevState, error: false }));
+    switch (type) {
+      case 0:
+        setParentOptions(
+          filterId,
+          options.map((option) => ({ ...option, checked: false }))
+        );
+        break;
+      case 1:
+        setParentOptions(
+          filterId,
+          options.map((option) => ({ ...option, checked: false }))
+        );
+        break;
+      case 2:
+        setParentOptions(
+          filterId,
+          options.map((option) => ({ ...option, checked: true }))
+        );
+        break;
+
+      default:
+        break;
+    }
     selectQuestion();
   };
 
-  const getGuideQuestionCards = (): JSX.Element => {
-    switch (question.type) {
-      case EGuideQuestionType.selection:
-        return (
-          <GSelection
-            options={options}
-            confirmOptions={confirmOptions}
-            skipQuestion={skipQuestion}
-          />
-        );
-      case EGuideQuestionType.range:
-        return (
-          <GRangeSlider
-            options={options}
-            confirmOptions={confirmOptions}
-            skipQuestion={skipQuestion}
-          />
-        );
-
-      default:
-        return <>Error missing Question Type</>;
-    }
+  const goBackQuestion = () => {
+    selectQuestion(activeQuestionIndex - 1);
   };
 
   return (
@@ -96,7 +107,18 @@ const GuideQuestion: React.FC<Props> = (props) => {
           Bitte mindestens eine Option auswählen
         </h2>
       ) : null}
-      <div className="guide-question-content">{getGuideQuestionCards()}</div>
+      <div className="guide-question-content">
+        <GOptions
+          type={question.type}
+          options={options}
+          confirmOptions={confirmOptions}
+          skipQuestion={skipQuestion}
+          questionState={EGuideQuestionState.question}
+          filterId={filterId}
+          setOptions={setParentOptions}
+          goBackQuestion={activeQuestionIndex > 0 ? goBackQuestion : undefined}
+        />
+      </div>
     </div>
   );
 };

@@ -71,7 +71,7 @@
             }
           },
           {
-            "checked":false,
+            "checked":true,
             "title":"standard",
             "answer":{
               "value":"standard"
@@ -155,15 +155,7 @@
             }
           },
           {
-            "checked":false,
-            "title":"fehlt",
-            "answer":{
-              "unit":null,
-              "value":"missing"
-            }
-          },
-          {
-            "checked":false,
+            "checked":true,
             "title":"auf der Suche",
             "answer":{
               "unit":null,
@@ -237,7 +229,7 @@
         "title":"Material",
         "options":[
           {
-            "checked":false,
+            "checked":true,
             "title":"Kunstoff",
             "answer":{
               "unit":null,
@@ -245,7 +237,7 @@
             }
           },
           {
-            "checked":false,
+            "checked":true,
             "title":"Metall",
             "answer":{
               "unit":null,
@@ -253,7 +245,7 @@
             }
           },
           {
-            "checked":false,
+            "checked":true,
             "title":"Keramik",
             "answer":{
               "unit":null,
@@ -261,7 +253,7 @@
             }
           },
           {
-            "checked":false,
+            "checked":true,
             "title":"Organisch",
             "answer":{
               "unit":null,

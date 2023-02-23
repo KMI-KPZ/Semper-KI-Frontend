@@ -71,15 +71,12 @@ const GuideQuestion: React.FC<Props> = (props) => {
     setState((prevState) => ({ ...prevState, error: false }));
     switch (type) {
       case 0:
-        setParentOptions(
-          filterId,
-          options.map((option) => ({ ...option, checked: false }))
-        );
+        setParentOptions(filterId, options);
         break;
       case 1:
         setParentOptions(
           filterId,
-          options.map((option) => ({ ...option, checked: false }))
+          options.map((option) => ({ ...option, checked: true }))
         );
         break;
       case 2:

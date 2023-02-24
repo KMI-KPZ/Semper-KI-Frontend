@@ -7,19 +7,17 @@ import { Wizard } from "./Wizard/Wizard";
 
 const Header: React.FC = () => {
   const { processState } = useContext(ProcessContext);
+  const { progress } = processState;
 
   return (
     <div className="process-header">
       <Cart />
       <div className="process-header-box">
-        {processState.progress.link !== "/process/upload" ? (
-          <Wizard
-            progress={processState.progress}
-            processState={processState}
-          />
+        {progress.link !== "/process/upload" ? (
+          <Wizard processState={processState} />
         ) : null}
-        <h1 className="process-headline">{processState.progress.title}</h1>
-        {processState.progress.type === 0 ? <Search /> : null}
+        <h1 className="process-headline">{progress.title}</h1>
+        {progress.type === 0 ? <Search /> : null}
       </div>
     </div>
   );

@@ -14,19 +14,17 @@ interface IWizardItem {
 }
 
 interface Props {
-  progress: IProgress;
   processState: IProcessState;
 }
 
 export const Wizard: React.FC<Props> = (props) => {
-  const { progress, processState } = props;
+  const { processState } = props;
+  const { activeProcessList, processList, progress } = processState;
   const activeProcessIndex: number =
-    processState.activeProcessList.length > 0
-      ? processState.activeProcessList[0]
-      : -1;
+    activeProcessList.length > 0 ? activeProcessList[0] : -1;
   const activeProcess: IProcess =
-    processState.processList.length > 0 && activeProcessIndex !== -1
-      ? processState.processList[activeProcessIndex]
+    processList.length > 0 && activeProcessIndex !== -1
+      ? processList[activeProcessIndex]
       : {};
 
   const getStatusByIndex = (index: number): EProcessStatusType => {

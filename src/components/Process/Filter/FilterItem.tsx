@@ -9,6 +9,7 @@ import FText from "./components/FText";
 import FTextArea from "./components/FTextArea";
 import FColor from "./components/FColor";
 import FNumber from "./components/FNumber";
+import FMultiSelection from "./components/FMultiSelection";
 
 interface Props {
   filterItem: IFilterItem;
@@ -25,7 +26,6 @@ const FilterItem: React.FC<Props> = (props) => {
         return (
           <FSlider filterItem={filterItem} setFilterItem={setFilterItem} />
         );
-        break;
       case "sliderselection":
         return (
           <FSliderSelection
@@ -33,34 +33,33 @@ const FilterItem: React.FC<Props> = (props) => {
             setFilterItem={setFilterItem}
           />
         );
-        break;
       case "selection":
         return (
           <FSelection filterItem={filterItem} setFilterItem={setFilterItem} />
         );
-        break;
+      case "multiselection":
+        return (
+          <FMultiSelection
+            filterItem={filterItem}
+            setFilterItem={setFilterItem}
+          />
+        );
       case "date":
         return <FDate filterItem={filterItem} setFilterItem={setFilterItem} />;
-        break;
       case "text":
         return <FText filterItem={filterItem} setFilterItem={setFilterItem} />;
-        break;
       case "textarea":
         return (
           <FTextArea filterItem={filterItem} setFilterItem={setFilterItem} />
         );
-        break;
       case "color":
         return <FColor filterItem={filterItem} setFilterItem={setFilterItem} />;
-        break;
       case "number":
         return (
           <FNumber filterItem={filterItem} setFilterItem={setFilterItem} />
         );
-        break;
       default:
         return <></>;
-        break;
     }
   };
 

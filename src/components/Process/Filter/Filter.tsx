@@ -1,17 +1,15 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { IFilterItem, IFilterAnswer } from "./Interface";
+import { IFilterItem } from "./Interface";
 import "./Filter.scss";
-import FilterItem from "./FilterItem";
-import { Button, IconButton } from "@mui/material";
+import { Button } from "@mui/material";
 
-import _filter from "./FilterQuestions.json";
 import FilterCard from "./FilterCard";
 import { IProgress } from "../../../interface/Interface";
-const testFilter = _filter as IFilterItem[];
 
 interface Props {
   progress: IProgress;
+  filters: IFilterItem[];
   guideAnswers: IFilterItem[];
   applyFilters(filterItemList: IFilterItem[]): void;
 }
@@ -39,8 +37,11 @@ const generateCategoryList = (filterItemList: IFilterItem[]): ICategory[] => {
   return categoryList;
 };
 
-const hydrateFilter = (guideAnswers: IFilterItem[]): IFilterItem[] => {
-  let filteritems: IFilterItem[] = testFilter;
+const hydrateFilter = (
+  filter: IFilterItem[],
+  guideAnswers: IFilterItem[]
+): IFilterItem[] => {
+  let filteritems: IFilterItem[] = filter;
   filteritems.forEach((filterItem: IFilterItem, index: number) => {
     guideAnswers.forEach((guideItem: IFilterItem) => {
       if (filterItem.id === guideItem.id) {
@@ -54,17 +55,21 @@ const hydrateFilter = (guideAnswers: IFilterItem[]): IFilterItem[] => {
 };
 
 const Filter: React.FC<Props> = (props) => {
-  const { applyFilters, guideAnswers, progress } = props;
-  const hydratedFilterList: IFilterItem[] = hydrateFilter(guideAnswers);
+  const { applyFilters, filters, guideAnswers, progress } = props;
+  const hydratedFilterList: IFilterItem[] = hydrateFilter(
+    filters,
+    guideAnswers
+  );
   const [state, setState] = useState<State>({
     filterList: hydratedFilterList,
     categoryList: generateCategoryList(hydratedFilterList),
   });
+  const { categoryList, filterList } = state;
   const { t } = useTranslation();
 
   const callApplyFilters = () => {
     applyFilters(
-      state.filterList.map((filterItem: IFilterItem) => {
+      filterList.map((filterItem: IFilterItem) => {
         let newFilterItem: IFilterItem = filterItem;
         if (newFilterItem.isChecked === false) newFilterItem.answer = null;
         return newFilterItem;
@@ -138,21 +143,19 @@ const Filter: React.FC<Props> = (props) => {
     <div className="filter">
       <div className="filter-content">
         <h2 className="filter-headline">{t("filter.headline")}</h2>
-        {state.categoryList.map(
-          (category: ICategory, categoryIndex: number) => (
-            <FilterCard
-              category={category}
-              categoryIndex={categoryIndex}
-              filterItemList={state.filterList.filter(
-                (filterItem: IFilterItem) =>
-                  filterItem.question.category === category.title
-              )}
-              handleOnClickMenuOpen={handleOnClickMenuOpen}
-              setFilterItem={setFilterItem}
-              key={categoryIndex}
-            />
-          )
-        )}
+        {categoryList.map((category: ICategory, categoryIndex: number) => (
+          <FilterCard
+            category={category}
+            categoryIndex={categoryIndex}
+            filterItemList={filterList.filter(
+              (filterItem: IFilterItem) =>
+                filterItem.question.category === category.title
+            )}
+            handleOnClickMenuOpen={handleOnClickMenuOpen}
+            setFilterItem={setFilterItem}
+            key={categoryIndex}
+          />
+        ))}
       </div>
       <div className="filter-buttons">
         <Button variant="contained" onClick={onClickReset}>

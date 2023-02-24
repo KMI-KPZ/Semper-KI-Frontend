@@ -31,6 +31,7 @@ import Header from "./Header/Header";
 import { removeItem } from "../../services/utils";
 import Procedure from "./Procedure/Procedure";
 import useYeggi from "../../hooks/useYeggi";
+import useProcessData from "../../hooks/useProcessData";
 
 interface Props {
   guideAnswers: IFilterItem[];
@@ -91,21 +92,20 @@ export const ProcessView: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const [state, setState] = useState<IProcessState>(initialProcessState);
   const { activeProcessList, grid, processList, progress } = state;
-  const { loadData, data } = useFilter();
-  const { filters, materials, models } = data;
-  const { models: yeggiModels, searchModels: yeggiSearchModels } = useYeggi();
-
-  useEffect(() => {
-    console.log(yeggiModels);
-  }, [yeggiModels]);
+  const { loadFilters, filters: filtersEmpty } = useFilter();
+  const { data, loadData } = useProcessData();
+  const { filters: filtersData, materials, models } = data;
+  const filters: IFilterItem[] =
+    filtersData.length === 0 ? filtersEmpty : filtersData;
 
   const searchModels = (name: string) => {
-    yeggiSearchModels(name);
+    console.log("Process| searchModels", name);
+    // yeggiSearchModels(name);
   };
 
   const applyFilters = (filterItemList: IFilterItem[]) => {
     console.log("Process| Apply Filter", filterItemList);
-    loadData(filterItemList, progress.link.split("/").splice(-1, 1)[0]);
+    loadData(filterItemList);
   };
 
   const startNewProcess = () => {
@@ -152,7 +152,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     if (index === -1) {
       //Upload
       upload = true;
-    } else if (activeProcessList.includes(-1) && index !== -1) {
+    } else if (activeProcessList.includes(-1)) {
       //no longer Upload
       activeProcessList = [index];
     } else if (activeProcessList.includes(index)) {
@@ -287,6 +287,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     >
       <div className="process">
         <Filter
+          filters={filters}
           applyFilters={applyFilters}
           guideAnswers={guideAnswers}
           progress={progress}

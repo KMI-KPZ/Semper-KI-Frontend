@@ -1,50 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IFilterAnswer,
   IFilterItem,
 } from "../components/Process/Filter/Interface";
-import { IMaterial, IModel } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
+import _FilterItems from "./Data/FilterQuestions.json";
+const FilterItems = _FilterItems as IFilterItem[];
 
 interface ReturnProps {
-  loadData(filters: IFilterItem[], dataType: string): any;
-  data: IProcessResponse;
-}
-
-export interface IProcessResponse {
   filters: IFilterItem[];
-  models: IModel[];
-  materials: IMaterial[];
+  loadFilters(): void;
 }
 
-const useFilter = () => {
+const useFilter = (): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
-  const [data, setData] = useState<IProcessResponse>({
-    filters: [],
-    models: [],
-    materials: [],
-  });
+  const [filters, setFilters] = useState<IFilterItem[]>(FilterItems);
 
-  const loadData = (
-    filters: IFilterItem[],
-    dataType: string
-  ): IProcessResponse => {
+  const loadFilters = () => {
     axiosCustom
-      .post(`${process.env.REACT_APP_API_URL}/public/getData/`, {
-        filters,
-        dataType,
-      })
+      .get(`${process.env.REACT_APP_API_URL}/public/getFilters/`)
       .then((res) => {
-        console.log("useFilter| loadData Successful", res.data);
-        setData((prevState) => ({ ...prevState, ...res.data }));
+        console.log("useFilter| loadFilters Successful", res.data);
+        setFilters(res.data);
       })
       .catch((error) => {
-        console.log("useFilter| loadData error", error);
+        console.log("useFilter| loadFilters error", error);
       });
-    return data;
   };
 
-  return { loadData, data };
+  return { loadFilters, filters };
 };
 
 export default useFilter;

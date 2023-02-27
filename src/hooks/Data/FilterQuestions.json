@@ -305,7 +305,17 @@
         "category": "test",
         "type": "multiselection",
         "range":null,
-        "values":null,
+        "values":[          
+          "medicine",
+          "fashion",
+          "hobby",
+          "tools",
+          "models",
+          "toy",
+          "gadgets",
+          "art",
+          "learning"
+        ],
         "units":null
       },
       "answer":null

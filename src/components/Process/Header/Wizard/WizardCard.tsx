@@ -1,15 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import {
-  IconCheck,
-  IconMinus,
-  IconO,
-  IconQuestionMark,
-  IconX,
-} from "../../../../config/Icons";
 import { EProcessStatusType } from "../../../../interface/enums";
-import { ProcessContext } from "../../ProcessView";
 import StatusIcon from "../StatusIcon.tsx/StatusIcon";
 
 interface Props {

@@ -38,7 +38,7 @@ const Card: React.FC<Props> = (props) => {
       href={carditem.link}
     >
       {carditem.icon !== undefined ? (
-        <img src={getIconByName(carditem.icon)} />
+        <img src={getIconByName(carditem.icon)} alt={carditem.icon} />
       ) : null}
       {t(
         `card-view.${prefix.map((title: string) => `${title}.`).join("")}${

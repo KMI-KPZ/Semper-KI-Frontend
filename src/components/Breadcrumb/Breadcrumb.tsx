@@ -1,11 +1,10 @@
-import { stringify } from "querystring";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Breadcrumb.scss";
 
 interface Props {}
 
-const Breadcrumb: React.FC<Props> = ({}) => {
+const Breadcrumb: React.FC<Props> = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const splittet: string[] = pathname.split("/");

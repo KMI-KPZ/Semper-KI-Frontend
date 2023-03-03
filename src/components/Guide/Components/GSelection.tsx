@@ -1,19 +1,11 @@
-import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { getIconByName } from "../../../config/Icons";
-import {
-  EGuideQuestionState,
-  EGuideQuestionType,
-} from "../../../interface/enums";
+import { EGuideQuestionState } from "../../../interface/enums";
 import { IGuideOption } from "../Interface";
 import GButtons from "./GButtons";
 import { IGuideOptionProps } from "./GOptions";
 
 interface Props extends IGuideOptionProps {}
-
-interface State {
-  options: IGuideOption[];
-}
 
 const GSelection: React.FC<Props> = (props) => {
   const {
@@ -91,7 +83,7 @@ const GSelection: React.FC<Props> = (props) => {
           />
           {option.title}
           {option.icon === undefined ? null : (
-            <img src={getIconByName(option.icon)} />
+            <img src={getIconByName(option.icon)} alt="" />
           )}
         </div>
       ))}

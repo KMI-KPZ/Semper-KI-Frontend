@@ -1,17 +1,13 @@
-import SettingsIcon from "@mui/icons-material/Settings";
-import SearchIcon from "@mui/icons-material/Search";
 import { IManufacturer } from "../../../interface/Interface";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "../../../styles.scss";
 import "../ProcessView.scss";
 import "./Manufacturer.scss";
 import { useTranslation } from "react-i18next";
 import { useFetch } from "../../../hooks/useFetch";
-import Search from "../Header/Search/Search";
 import { isNumber } from "../../../services/utils";
 import { ManufacturerCatalogCard } from "./ManufacturerCatalogCard";
-import { ProcessContext } from "../ProcessView";
 
 type ManufacturerAttribut =
   | "manufacturerId"

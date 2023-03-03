@@ -1,16 +1,8 @@
 import "../../../styles.scss";
 import "./../ProcessView.scss";
 import { IModel } from "../../../interface/Interface";
-import React, { useState } from "react";
-
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
-import { Button, IconButton } from "@mui/material";
-import PopUp from "../../PopUp/PopUp";
-import { ModelView } from "./ModelView";
+import React from "react";
+import { Button } from "@mui/material";
 
 interface Props {
   model: IModel;

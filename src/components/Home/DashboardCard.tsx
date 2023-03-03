@@ -27,7 +27,10 @@ const DashboardCard: React.FC<Props> = (props) => {
       href={cardItem.link}
     >
       {cardItem.icon === undefined ? null : (
-        <img src={getIconByName(cardItem.icon)} />
+        <img
+          src={getIconByName(cardItem.icon)}
+          alt={`link to ${cardItem.link}`}
+        />
       )}
       <h2>{t(`${prefix}.${cardItem.title}`)}</h2>
     </a>

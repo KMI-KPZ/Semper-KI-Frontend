@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useService from "../../hooks/useService";
-import {
-  EServiceQuestionType,
-  IServiceChapter,
-  IServiceQuestion,
-} from "./Interface";
+import { IServiceChapter, IServiceQuestion } from "./Interface";
 import ServiceQuestion from "./ServiceQuestion/ServiceQuestion";
 
 interface Props {
@@ -25,7 +21,7 @@ const ServiceView: React.FC<Props> = (props) => {
     chapters: [],
     questions: [],
   });
-  const { activeChapter, chapters, questions } = state;
+  const { questions } = state;
 
   useEffect(() => {
     loadService(title);

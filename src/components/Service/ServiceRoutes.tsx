@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, Navigate, Route, Routes } from "react-router-dom";
+import React from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import CardView, { ICardGroup, ICardItem } from "../CardView/CardView";
 import "./Service.scss";
 
@@ -31,7 +31,7 @@ const cardGoupsIndex: ICardGroup[] = [
   },
 ];
 
-const ServiceRoutes: React.FC = ({}) => {
+const ServiceRoutes: React.FC = () => {
   return (
     <Routes>
       <Route

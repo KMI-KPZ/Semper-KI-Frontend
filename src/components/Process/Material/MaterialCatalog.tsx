@@ -1,14 +1,9 @@
 import "../../../styles.scss";
 import "../ProcessView.scss";
 import "./Material.scss";
-import React, { useContext, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useFetch } from "../../../hooks/useFetch";
-import Search from "../Header/Search/Search";
+import React, { useEffect } from "react";
 import { MaterialCatalogCard } from "./MaterialCatalogCard";
 import { IMaterial } from "../../../interface/Interface";
-import Loading from "../../../components/Process/Loading/Loading";
-import { ProcessContext } from "../ProcessView";
 
 interface Props {
   materials: IMaterial[];
@@ -19,7 +14,6 @@ interface Props {
 
 export const MaterialCatalog: React.FC<Props> = (props) => {
   const { selectMaterial, setProgress, materials, grid } = props;
-  const { t } = useTranslation();
   useEffect(() => {
     setProgress("material");
   }, []);

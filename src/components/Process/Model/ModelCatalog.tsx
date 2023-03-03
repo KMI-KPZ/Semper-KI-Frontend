@@ -1,9 +1,7 @@
 import "../../../styles.scss";
 import "./../ProcessView.scss";
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { IModel } from "../../../interface/Interface";
-import LoadingAnimation from "../../LoadingAnimation/LoadingAnimation";
 import { IProcessState } from "../ProcessView";
 import { ModelCard } from "./ModelCard";
 import PopUp from "../../PopUp/PopUp";
@@ -24,7 +22,6 @@ interface State {
 export const ModelCatalog: React.FC<Props> = (props) => {
   const { models, processState, selectModel, setProgress } = props;
   const [state, setState] = useState<State>({ popUp: false, model: undefined });
-  const { t } = useTranslation();
   useEffect(() => {
     setProgress("model");
   }, []);

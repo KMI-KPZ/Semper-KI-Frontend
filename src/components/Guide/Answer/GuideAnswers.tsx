@@ -11,7 +11,7 @@ interface Props {
 }
 
 const GuideAnswers: React.FC<Props> = (props) => {
-  const { questions, activeQuestionIndex, selectQuestion, setOptions } = props;
+  const { questions, activeQuestionIndex, setOptions } = props;
 
   const getProcessProgress = () => {
     const countProcesses = questions.length;

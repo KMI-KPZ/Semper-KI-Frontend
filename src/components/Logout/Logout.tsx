@@ -1,9 +1,7 @@
 import { Container } from "@mui/system";
 import axios, { AxiosError } from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
-
-interface Props {}
 
 const Logout = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

@@ -15,6 +15,7 @@ const GButtons: React.FC<Props> = (props) => {
       {handleOnClickBack !== undefined ? (
         <Button variant="contained" onClick={handleOnClickBack} title="Zurück">
           <img
+            alt="go back"
             src={getIconByName("IconArrowR")}
             style={{ transform: "rotate(180deg)", width: "30px" }}
           />
@@ -26,10 +27,18 @@ const GButtons: React.FC<Props> = (props) => {
         onClick={handleOnClickSkip}
         title="Überspringen"
       >
-        <img src={getIconByName("IconSkip")} style={{ width: "30px" }} />
+        <img
+          alt="skip question"
+          src={getIconByName("IconSkip")}
+          style={{ width: "30px" }}
+        />
       </Button>
       <Button variant="contained" onClick={handleOnClickNext} title="Weiter">
-        <img src={getIconByName("IconArrowR")} style={{ width: "30px" }} />
+        <img
+          alt="next question"
+          src={getIconByName("IconArrowR")}
+          style={{ width: "30px" }}
+        />
       </Button>
     </div>
   );

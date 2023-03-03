@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { URL_Datenschutz, URL_Impressum } from "../../config/Constants";
 import "./Footer.scss";
 

@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
 import useCRSFToken from "../../hooks/useCSRFToken";
-import { IChat, IOrder, IProcess } from "../../interface/Interface";
+import { IOrder, IProcess } from "../../interface/Interface";
 import { TestOrderList } from "../../services/TestData";
 import useUser from "../../hooks/useUser";
 import { Home } from "../Home/Home";
@@ -38,7 +38,6 @@ export interface IAppState {
   processList: IProcess[];
   orderList: IOrder[];
   guideFilter: IFilterItem[];
-  chats: IChat[];
 }
 
 export interface IAppContext {
@@ -51,7 +50,6 @@ export const AppContext = createContext<IAppContext>({
     processList: [{}],
     orderList: TestOrderList,
     guideFilter: [],
-    chats: [],
   },
   setState: () => {},
 });
@@ -60,14 +58,13 @@ const initialState: IAppState = {
   processList: [{}],
   orderList: TestOrderList,
   guideFilter: [],
-  chats: [],
 };
 
 const App: React.FC = () => {
   const [state, setState] = useState<IAppState>(initialState);
-  const { chats, guideFilter, orderList, processList } = state;
+  const { guideFilter, orderList, processList } = state;
   const { CSRFToken } = useCRSFToken();
-  const { isLoggedIn, userType, user, loadLoggedIn, logoutUser } = useUser();
+  const { isLoggedIn, userType, user, loadLoggedIn } = useUser();
   const { data, loadData, clearData } = useAdmin();
 
   const setProcessList = (processList: IProcess[]): void => {

@@ -1,15 +1,13 @@
 import React, { useContext } from "react";
 import CartItem from "./CartItem";
 import "./Cart.scss";
-import { useNavigate } from "react-router-dom";
 import { ProcessContext } from "../../ProcessView";
 import { IconModel, IconPlus, IconUpload } from "../../../../config/Icons";
 import { IProcess } from "../../../../interface/Interface";
 
 interface Props {}
 
-const Cart: React.FC<Props> = ({}) => {
-  const navigate = useNavigate();
+const Cart: React.FC<Props> = () => {
   const { processState, createEmptryProcess, selectProcess } =
     useContext(ProcessContext);
 

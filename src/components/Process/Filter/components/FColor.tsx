@@ -12,7 +12,7 @@ interface State {
 
 const FColor: React.FC<Props> = (props) => {
   const { filterItem, setFilterItem } = props;
-  const [state, setState] = useState<State>({ text: "" });
+  const [state, setState] = useState<State>({ text: "#000000" });
 
   useEffect(() => {
     setFilterItem({

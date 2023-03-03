@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { IGuide, IGuideQuestion } from "../components/Guide/Interface";
 import _GuideQuestions from "./Data/GuideQuestions.json";
 const GuideQuestions = _GuideQuestions as IGuide[];

@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { IFilterItem } from "./Interface";
 import FSelection from "./components/FSelection";
 import FSliderSelection from "./components/FSliderSelection";
@@ -18,7 +16,6 @@ interface Props {
 
 const FilterItem: React.FC<Props> = (props) => {
   const { filterItem, setFilterItem } = props;
-  const { t } = useTranslation();
 
   const displayInput = () => {
     switch (filterItem.question.type) {

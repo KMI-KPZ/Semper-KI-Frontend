@@ -1,11 +1,9 @@
 import "../ProcessView.scss";
 import "./Additive.scss";
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import { IAdditive, IProcess } from "../../../interface/Interface";
 import { useTranslation } from "react-i18next";
-import { ProcessContext } from "../ProcessView";
-
 interface Props {
   processList: IProcess[];
   selectAdditive: (additive: IAdditive) => void;
@@ -13,7 +11,7 @@ interface Props {
 }
 
 export const AdditiveView: React.FC<Props> = (props) => {
-  const { selectAdditive, processList, setProgress } = props;
+  const { setProgress } = props;
   const { t } = useTranslation();
   const refUpload = useRef<HTMLInputElement>(null);
 

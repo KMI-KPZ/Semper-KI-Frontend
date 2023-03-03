@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getIconByName, IconExpand, IconX } from "../../../../config/Icons";
+import { getIconByName, IconX } from "../../../../config/Icons";
 import { IFilterItem } from "../Interface";
 
 interface Props {
@@ -117,7 +117,7 @@ const FMultiSelection: React.FC<Props> = (props) => {
               }`}
               onClick={() => toggleDropdown()}
             >
-              <img src={getIconByName("IconExpand")} />
+              <img src={getIconByName("IconExpand")} alt="button expand" />
             </div>
           </div>
         ) : null}
@@ -131,6 +131,7 @@ const FMultiSelection: React.FC<Props> = (props) => {
           >
             {value}
             <img
+              alt="button delete Tag"
               src={getIconByName(IconX)}
               className="f-input-multiselect-tag-img"
             />

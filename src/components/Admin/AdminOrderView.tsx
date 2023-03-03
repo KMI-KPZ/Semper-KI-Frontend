@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { EOrderState } from "../../interface/enums";
-import { IMaterial, IOrder } from "../../interface/Interface";
+import { IOrder } from "../../interface/Interface";
 
 interface Props {
   orderList: IOrder[];

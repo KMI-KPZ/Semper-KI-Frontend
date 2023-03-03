@@ -1,12 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import "../../styles.scss";
-import {
-  Navigate,
-  Route,
-  Routes,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { ModelUpload } from "./Model/ModelUpload";
 import { ModelCatalog } from "./Model/ModelCatalog";
 import {
@@ -30,7 +24,6 @@ import useFilter from "../../hooks/useFilter";
 import Header from "./Header/Header";
 import { removeItem } from "../../services/utils";
 import Procedure from "./Procedure/Procedure";
-import useYeggi from "../../hooks/useYeggi";
 import useProcessData from "../../hooks/useProcessData";
 
 interface Props {
@@ -88,11 +81,10 @@ export const ProcessContext = createContext<IProcessContext>({
 
 export const ProcessView: React.FC<Props> = (props) => {
   const { guideAnswers } = props;
-  const { path } = useParams<string>();
   const navigate = useNavigate();
   const [state, setState] = useState<IProcessState>(initialProcessState);
-  const { activeProcessList, grid, processList, progress } = state;
-  const { loadFilters, filters: filtersEmpty } = useFilter();
+  const { grid, processList, progress } = state;
+  const { filters: filtersEmpty } = useFilter();
   const { data, loadData } = useProcessData();
   const { filters: filtersData, materials, models } = data;
   const filters: IFilterItem[] =

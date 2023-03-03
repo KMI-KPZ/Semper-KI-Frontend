@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { IService, IServiceChapter } from "../components/Service/Interface";
 import _Services from "./Data/Services.json";
 const Services = _Services as IService[];

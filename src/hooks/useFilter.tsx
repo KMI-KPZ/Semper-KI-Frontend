@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  IFilterAnswer,
-  IFilterItem,
-} from "../components/Process/Filter/Interface";
+import { useState } from "react";
+import { IFilterItem } from "../components/Process/Filter/Interface";
 import useCustomAxios from "./useCustomAxios";
 import _FilterItems from "./Data/FilterQuestions.json";
 const FilterItems = _FilterItems as IFilterItem[];

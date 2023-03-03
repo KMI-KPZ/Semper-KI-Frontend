@@ -43,7 +43,7 @@ interface State {
 export const Header: React.FC<Props> = (props) => {
   const { isLoggedIn, userType } = props;
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [state, setState] = useState<State>({
     menu: false,
     languageMenu: false,
@@ -171,7 +171,9 @@ export const Header: React.FC<Props> = (props) => {
                   href={"/languageMenu"}
                   className={`fi fi-${getFlagButtonClassName()}`}
                   onClick={openLanguageMenu}
-                />
+                >
+                  {" "}
+                </a>
                 {state.languageMenu === true ? (
                   <div
                     className="language-menu-dropdown"

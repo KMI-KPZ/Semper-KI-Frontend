@@ -1,14 +1,7 @@
-import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  EGuideQuestionState,
-  EGuideQuestionType,
-} from "../../../interface/enums";
-import { IOption } from "../../../interface/Interface";
+import { EGuideQuestionState } from "../../../interface/enums";
 import { IGuideOption, IGuideQuestion } from "../Interface";
-import GRangeSlider from "../Components/GRangeSlider";
-import GMultiSelection from "../Components/GMultiSelection";
 import GOptions from "../Components/GOptions";
 
 interface Props {

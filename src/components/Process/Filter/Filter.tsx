@@ -81,10 +81,6 @@ const Filter: React.FC<Props> = (props) => {
     callApplyFilters();
   }, [progress]);
 
-  const setFilterItems = (filter: IFilterItem[]) => {
-    setState((prevState) => ({ ...prevState, filter }));
-  };
-
   const setFilterItem = (newFilterItem: IFilterItem) => {
     setState((prevState) => ({
       ...prevState,

@@ -1,7 +1,6 @@
 import React from "react";
 import { EGuideQuestionType } from "../../../interface/enums";
 import GOptions, { IGuideOptionProps } from "../Components/GOptions";
-import { IGuideOption } from "../Interface";
 
 interface Props extends IGuideOptionProps {
   title: string;

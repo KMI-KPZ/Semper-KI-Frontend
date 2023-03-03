@@ -8,7 +8,7 @@ import { getFileSizeAsString } from "../../../services/utils";
 import { useTranslation } from "react-i18next";
 import { Button } from "@mui/material";
 import { IconDelete, IconUpload } from "../../../config/Icons";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   addProcessList: (process: IProcess[]) => void;
@@ -147,6 +147,7 @@ export const ModelUpload: React.FC<Props> = (props) => {
             <div className="model-upload-file-row">
               {getFileSizeAsString(file.size)}
               <img
+                alt="button delete model"
                 src={IconDelete}
                 className="model-delete-icon"
                 onClick={(e) => deleteFile(e, index)}
@@ -180,7 +181,7 @@ export const ModelUpload: React.FC<Props> = (props) => {
             onDrop={handleDropOnUploadCard}
           ></div>
         )} */}
-        <img src={IconUpload} className="model-upload-icon" />
+        <img src={IconUpload} className="model-upload-icon" alt="" />
         <h2>{t("model.upload.card.headline")}</h2>
         {t("model.upload.card.text")}
       </div>

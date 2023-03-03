@@ -1,7 +1,7 @@
 import "./Wizard.scss";
 import React from "react";
 import WizardCard from "./WizardCard";
-import { IProcess, IProgress } from "../../../../interface/Interface";
+import { IProcess } from "../../../../interface/Interface";
 
 import _wizardItems from "./WizardItems.json";
 import { IProcessState } from "../../ProcessView";

@@ -1,9 +1,6 @@
 import "../ProcessView.scss";
 import React from "react";
-import ViewInArIcon from "@mui/icons-material/ViewInAr";
-import { getFileSizeAsString } from "../../../services/utils";
 import { IModel } from "../../../interface/Interface";
-import { Delete } from "@mui/icons-material";
 import { Button } from "@mui/material";
 
 interface Props {

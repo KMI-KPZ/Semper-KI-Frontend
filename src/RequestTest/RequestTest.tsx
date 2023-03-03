@@ -12,7 +12,7 @@ import {
 import { Container } from "@mui/system";
 import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import useCustomAxios from "../hooks/useCustomAxios";
 
 interface State {

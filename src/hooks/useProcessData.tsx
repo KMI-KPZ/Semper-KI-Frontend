@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { IFilterItem } from "../components/Process/Filter/Interface";
 import { IMaterial, IModel } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
@@ -28,11 +28,11 @@ const useProcessData = (): ReturnProps => {
         filters,
       })
       .then((res) => {
-        console.log("useData| loadData Successful", res.data);
+        console.log("useProcessData| loadData Successful", res.data);
         setData((prevState) => ({ ...prevState, ...res.data }));
       })
       .catch((error) => {
-        console.log("useData| loadData error", error);
+        console.log("useProcessData| loadData error", error);
       });
     return data;
   };

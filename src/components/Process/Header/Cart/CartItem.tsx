@@ -52,13 +52,14 @@ const CartItem: React.FC<Props> = (props) => {
             onChange={handleOnChangeCheckbox}
           />
           <img
+            alt="button delete item"
             src={IconDelete}
             className="process-cart-icon"
             onClick={handleOnClickDeleteIcon}
           />
         </div>
       ) : null}
-      <img src={icon} />
+      <img src={icon} alt="icon" />
       {title}
       {process === undefined ? null : <StatusIcon process={process} />}
     </div>

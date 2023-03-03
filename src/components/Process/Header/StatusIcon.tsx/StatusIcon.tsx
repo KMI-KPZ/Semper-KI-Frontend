@@ -44,7 +44,7 @@ const StatusIcon: React.FC<Props> = (props) => {
 
   return (
     <div className={`status-icon ${className}`} title={className}>
-      <img className="status-icon-img" src={img} />
+      <img className="status-icon-img" src={img} alt={`status ${className}`} />
     </div>
   );
 };

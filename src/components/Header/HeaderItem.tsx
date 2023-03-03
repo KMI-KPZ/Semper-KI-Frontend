@@ -36,7 +36,11 @@ const HeaderItem: React.FC<Props> = (props) => {
         className="nav-list-item-link"
         onClick={handleOnClick}
       >
-        <img className="menu-img" src={getIconByName(headeritem.icon)} />
+        <img
+          className="menu-img"
+          src={getIconByName(headeritem.icon)}
+          alt={`link to ${headeritem.link}`}
+        />
         {headeritem.title}
       </a>
     </li>

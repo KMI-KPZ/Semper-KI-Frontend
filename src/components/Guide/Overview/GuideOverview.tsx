@@ -12,10 +12,10 @@ interface Props {
 }
 
 const GuideOverview: React.FC<Props> = (props) => {
-  const { questions, selectQuestion, applyFilter, setOptions } = props;
-  const handleOnClickCard = (filterId: number) => {
-    selectQuestion(filterId);
-  };
+  const { questions, applyFilter, setOptions } = props;
+  // const handleOnClickCard = (filterId: number) => {
+  //   selectQuestion(filterId);
+  // };
 
   const handleOnClickButton = () => {
     applyFilter();

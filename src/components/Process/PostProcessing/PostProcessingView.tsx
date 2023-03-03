@@ -1,6 +1,6 @@
 import "../ProcessView.scss";
 import "./PostProcessing.scss";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   IPostProcessing,
   IOption,
@@ -8,7 +8,6 @@ import {
 } from "../../../interface/Interface";
 import { PostProcessingOption } from "./PostProcessingOption";
 import { useTranslation } from "react-i18next";
-import { ProcessContext } from "../ProcessView";
 
 interface Props {
   processList: IProcess[];
@@ -84,7 +83,7 @@ const testData: IOption[] = [
 ];
 
 export const PostProcessingView: React.FC<Props> = (props) => {
-  const { processList, setProgress } = props;
+  const { setProgress } = props;
   const { t } = useTranslation();
   useEffect(() => {
     setProgress("postprocessing");

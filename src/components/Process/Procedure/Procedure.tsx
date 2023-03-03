@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from "react";
-import { ProcessContext } from "../ProcessView";
+import React, { useEffect } from "react";
 
 interface Props {
   setProgress(path: string): void;

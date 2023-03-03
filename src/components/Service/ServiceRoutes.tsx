@@ -4,6 +4,7 @@ import CardView, { ICardGroup, ICardItem } from "../CardView/CardView";
 import "./Service.scss";
 
 import _ServiceCards from "./ServiceCards.json";
+import ServiceView from "./ServiceView";
 const ServiceCards = _ServiceCards as ICardItem[];
 const cardsUse: ICardItem[] = [
   ...ServiceCards.map((card: ICardItem) => ({
@@ -51,7 +52,10 @@ const ServiceRoutes: React.FC = ({}) => {
         path="provide"
         element={<CardView path="service.provide" cards={cardsProvide} />}
       />
-      <Route path="provide/produce" element={<h2>Herstellen</h2>} />
+      <Route
+        path="provide/produce"
+        element={<ServiceView title="provide-produce" />}
+      />
       <Route path="provide/design" element={<h2>Entwerfen</h2>} />
       <Route
         path="provide/accompany"

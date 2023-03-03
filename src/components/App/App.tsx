@@ -32,6 +32,7 @@ import AdminUserView from "../Admin/AdminUserView";
 import AdminModelView from "../Admin/AdminModelView";
 import AdminMaterialView from "../Admin/AdminMaterialView";
 import AdminOrderView from "../Admin/AdminOrderView";
+import Background from "../Background/Background";
 
 export interface IAppState {
   processList: IProcess[];
@@ -174,6 +175,7 @@ const App: React.FC = () => {
           </Routes>
         </div>
         <Footer />
+        <Background />
       </div>
     </AppContext.Provider>
   );

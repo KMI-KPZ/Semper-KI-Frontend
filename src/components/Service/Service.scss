@@ -7,3 +7,23 @@
     align-items: center;
     gap: $containerGap;
 }
+
+.service-view {
+    display: flex;
+    flex-direction: column;
+    background-color: $white;
+    padding:20px;
+    min-height: 70vh;
+    min-width: 70vw;
+}
+
+.service-view-headline {
+    text-align: center;
+}
+
+.service-question {
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+    align-items: center;
+}

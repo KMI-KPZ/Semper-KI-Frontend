@@ -32,9 +32,9 @@ const useStatistics = (): ReturnProps => {
       });
   };
 
-  useEffect(() => {
-    loadStatistics();
-  }, []);
+  // useEffect(() => {
+  //   loadStatistics();
+  // }, []);
 
   return { statistics };
 };

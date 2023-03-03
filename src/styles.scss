@@ -1,9 +1,5 @@
 @use "./scss/index" as *;
 
-h1, h2, h3,h4,h5,h6 hr{
-  margin: 0;
-  padding: 0;
-}
 
 .app {
   display: flex;
@@ -12,7 +8,10 @@ h1, h2, h3,h4,h5,h6 hr{
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  // background: url("./assets/images/Bubbles1_4.png") no-repeat center center fixed;
 }
+
+
 
 .main-header {
   background-color: $white;

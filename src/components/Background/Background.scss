@@ -1,0 +1,35 @@
+@use "../../scss/index" as *;
+
+.app-background {
+    position: absolute;
+    filter: brightness(1.2) opacity(0.2) grayscale(1);
+    z-index: -1;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    // top:50%;
+    // left:50%;
+    // height: 80vh;
+    // transform: translate(-50%, -50%);
+  }
+
+  .background-bubbles-Top-Left {
+    position: absolute;
+    height: 80vh;
+    top:-10%;
+    left:-10%;
+  }
+  .background-bubbles-Bottom-Middel {
+    position: absolute;
+    height: 50vh;
+    bottom:-20%;
+    right:30%;
+  }
+  .background-bubbles-Top-Right {
+    position: absolute;
+    height: 70vh;
+    top:-10%;
+    right:-10%;
+  }

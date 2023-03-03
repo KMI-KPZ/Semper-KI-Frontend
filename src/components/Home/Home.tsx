@@ -38,13 +38,11 @@ export const Home: React.FC<Props> = (props) => {
   );
 
   return isLoggedIn === false ? (
-    <CardView path="home" cards={HomeCards}>
-      {infoCard}
-    </CardView>
+    <CardView path="home" cards={HomeCards} />
   ) : (
     <div className="dashboard">
       <h1 className="dashboard-headline">{t(`${prefix}.title`)}</h1>
-      {infoCard}
+      {/* {infoCard} */}
       <div className="dashboard-cards">
         {(userType === EUserType.admin ? AdminCards : UserCards).map(
           (cardItem: ICardItem, index: number) => (

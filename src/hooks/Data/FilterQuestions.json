@@ -54,8 +54,8 @@
       "question":{
         "isSelectable":true,
         "title": "categorys",
-        "category": "model",
-        "type": "selection",
+        "category": "general",
+        "type": "multiselection",
         "range":null,
         "values":[
           "medicine",
@@ -79,7 +79,7 @@
       "question":{
         "isSelectable":true,
         "title": "boxSize",
-        "category": "model",
+        "category": "general",
         "type": "sliderselection",
         "range":[0,9999],
         "values":null,
@@ -97,16 +97,12 @@
       "isOpen":false,
       "question":{
         "isSelectable":true,
-        "title": "surfaceSize",
-        "category": "model",
-        "type": "sliderselection",
+        "title": "materialcategory",
+        "category": "general",
+        "type": "multiselection",
         "range":[0,9999],
-        "values":null,
-        "units":[
-          "m²",
-          "cm²",
-          "mm²"
-        ]
+        "values":["Metall","Plastic","Ceramic","Organic"],
+        "units":null
       },
       "answer":null
     },

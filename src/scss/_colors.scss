@@ -1,26 +1,40 @@
+//Eigene Farben
 $colorLight: #43bbc2;
 $colorNormal: #2773bb;
 $colorDark: #064ea1;
-
 $colorLightComplementary: #bc443d;
 $colorNormalComplementary: #d88c44;
 $colorDarkComplementary: #f9b15e;
 
+//CD Farben
+$kissTürkis:#7DBCBC;
+$kissBlau: #556db0;
+$kissBlau2: #44568a;
+$kissViolett: #39287F;
+$kissOrange: #dd9458;
+$kissHellBlau: #bfd4ef;
+$kissHellBlau2: #d9e1eb;
+$kissSchrift: #060021;
+
+//SW Scale
 $white: #ffffff;
 $white_hover: #ebebeb;
 $white_m: #DFDFDF;
 $white_mm: #C0C0C0;
 $grey_p: #A0A0A0;
 $grey: #7F7F7F;
-$grey_m: #606060; //#626262;
+$grey_m: #606060;
 $black_pp: #404040;
 $black_p: #202020;
 $black: #000000;
 
+//Text
+$textHeadline: $black;
 $textPrimary: $black;
-$textSecondary: $black_pp;
+$textSecondary: $black;
 $textPrimaryInverted: $white;
 $textSecondaryInverted: $white_mm;
 
+//Backgrounds
 $backgroundBody: $white_m;
-$backgroundBox: $white;
+$backgroundCard: $white;

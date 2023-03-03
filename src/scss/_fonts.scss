@@ -1,0 +1,42 @@
+@use "../scss/colors" as *;
+
+h1,h2,h3,h4,b,i{
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: $textHeadline;
+}
+h2 {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: $textHeadline;
+}
+h3 {
+    font-size: 1.2em;    
+    font-weight: bold;
+    color: $textHeadline;
+}
+h4 {
+    font-size: 1.2em;    
+    font-weight: normal;
+    color: $textHeadline;
+}
+b {
+    font-weight: bold;
+}
+i{
+    font-weight: normal;
+    font-style: italic;
+}
+.marginalia {
+    font-size: 0.8em;    
+    font-style: italic;
+}
+.caption {
+    font-size: 0.8em;    
+    font-style: italic;
+}

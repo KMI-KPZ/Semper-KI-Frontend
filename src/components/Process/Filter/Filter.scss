@@ -172,7 +172,7 @@ input.f-input-number {
     align-items: center;
     gap:5px;
     &:hover {
-        cursor:  pointer;
+        cursor: url(‘../../../../../assets/images/icons/Delete.svg), pointer;
         border: 1px solid lightcoral;
     }
 }

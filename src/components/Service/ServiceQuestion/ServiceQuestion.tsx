@@ -1,17 +1,22 @@
 import React from "react";
 import { EServiceQuestionType, IServiceQuestion } from "../Interface";
 
-interface Props extends IServiceQuestion {}
+interface Props extends IServiceQuestion {
+  index: number;
+  setQuestionAnswer(value: string | number, index: number): void;
+}
 
 const ServiceQuestion: React.FC<Props> = (props) => {
-  const { title, answer, options, type } = props;
+  const { title, answer, options, type, index, setQuestionAnswer } = props;
 
   const handleOnChangeInput = (
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
       | React.ChangeEvent<HTMLSelectElement>
-  ) => {};
+  ) => {
+    setQuestionAnswer(e.currentTarget.value, index);
+  };
 
   const renderInput = (type: EServiceQuestionType) => {
     switch (type) {
@@ -31,7 +36,7 @@ const ServiceQuestion: React.FC<Props> = (props) => {
       case 2:
         return options !== undefined ? (
           <select
-            value={answer !== undefined ? options[0] : "default"}
+            value={answer !== undefined ? answer : "default"}
             onChange={handleOnChangeInput}
           >
             <option value="default" disabled>

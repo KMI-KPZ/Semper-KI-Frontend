@@ -23,6 +23,23 @@ const ServiceView: React.FC<Props> = (props) => {
   });
   const { questions } = state;
 
+  const setQuestionAnswer = (value: string | number, _index: number) => {
+    // console.log("ServiceView | setQuestionAnswer ", value, _index);
+    setState((prevState) => ({
+      ...prevState,
+      questions: [
+        ...prevState.questions.filter((question, index) => index < _index),
+        {
+          ...prevState.questions.filter(
+            (question, index) => index === _index
+          )[0],
+          answer: value,
+        },
+        ...prevState.questions.filter((question, index) => index > _index),
+      ],
+    }));
+  };
+
   useEffect(() => {
     loadService(title);
   }, [title]);
@@ -39,7 +56,12 @@ const ServiceView: React.FC<Props> = (props) => {
     <div className="service-view">
       <h1 className="service-view-headline">Service Anbieten : {title}</h1>
       {questions.map((question, index) => (
-        <ServiceQuestion {...question} key={index} />
+        <ServiceQuestion
+          {...question}
+          key={index}
+          index={index}
+          setQuestionAnswer={setQuestionAnswer}
+        />
       ))}
     </div>
   );

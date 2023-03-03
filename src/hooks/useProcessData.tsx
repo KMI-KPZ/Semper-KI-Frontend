@@ -24,7 +24,7 @@ const useProcessData = (): ReturnProps => {
 
   const loadData = (filters: IFilterItem[]) => {
     axiosCustom
-      .post(`${process.env.REACT_APP_API_URL}/public/getData/`, {
+      .post(`${process.env.REACT_APP_API_URL}/public/getProcessData/`, {
         filters,
       })
       .then((res) => {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useService from "../../hooks/useService";
 import { IServiceChapter, IServiceQuestion } from "./Interface";
 import ServiceQuestion from "./ServiceQuestion/ServiceQuestion";
+import ServiceWizard from "./ServiceWizard";
 
 interface Props {
   title: string;
@@ -21,7 +22,7 @@ const ServiceView: React.FC<Props> = (props) => {
     chapters: [],
     questions: [],
   });
-  const { questions } = state;
+  const { activeChapter, chapters, questions } = state;
 
   const setQuestionAnswer = (value: string | number, _index: number) => {
     // console.log("ServiceView | setQuestionAnswer ", value, _index);
@@ -36,6 +37,30 @@ const ServiceView: React.FC<Props> = (props) => {
           answer: value,
         },
         ...prevState.questions.filter((question, index) => index > _index),
+      ],
+    }));
+  };
+
+  const setActiveChapter = (index: number) => {
+    console.log("ServiceView | setActiveChapter ", state);
+
+    setState((prevState) => ({
+      ...prevState,
+      activeChapter: index,
+      questions: prevState.chapters[index].questions,
+      chapters: [
+        ...prevState.chapters.filter(
+          (chapter, _index) => _index < prevState.activeChapter
+        ),
+        {
+          ...prevState.chapters.filter(
+            (chapter, _index) => _index === prevState.activeChapter
+          )[0],
+          questions: prevState.questions,
+        },
+        ...prevState.chapters.filter(
+          (chapter, _index) => _index > prevState.activeChapter
+        ),
       ],
     }));
   };
@@ -55,6 +80,11 @@ const ServiceView: React.FC<Props> = (props) => {
   return (
     <div className="service-view">
       <h1 className="service-view-headline">Service Anbieten : {title}</h1>
+      <ServiceWizard
+        chapters={chapters}
+        activeChapter={activeChapter}
+        setActiveChapter={setActiveChapter}
+      />
       {questions.map((question, index) => (
         <ServiceQuestion
           {...question}

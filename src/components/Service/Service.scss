@@ -27,3 +27,36 @@
     gap:20px;
     align-items: center;
 }
+
+.service-wizard {
+    display:flex;
+    flex-direction: row;
+    gap:20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-wizard-item {
+    border-radius: 30px;
+    background-color: $white_m;
+    padding: 20px;
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+    justify-content: center;
+    align-items: center;
+
+    &.active {
+        background-color: $kissHellBlau;
+    
+        &:hover {
+            cursor: pointer;
+            background-color: $kissHellBlau2;
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: $white_hover;
+    }
+}

@@ -30,7 +30,7 @@ const Breadcrumb: React.FC<Props> = () => {
   };
 
   return (
-    <div className="text-left w-full hidden md:block ml-14">
+    <nav className="text-left w-full hidden md:block pl-14">
       {splittet.length > 1
         ? splittet.map((name: string, index: number) => (
             <React.Fragment key={index}>
@@ -44,7 +44,7 @@ const Breadcrumb: React.FC<Props> = () => {
             </React.Fragment>
           ))
         : null}
-    </div>
+    </nav>
   );
 };
 

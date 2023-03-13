@@ -137,11 +137,9 @@ const App: React.FC = () => {
   return (
     <AppContext.Provider value={{ state, setState }}>
       <div className="app font-ptsans" data-testid="app">
-        <div className="main-header">
-          <Header isLoggedIn={isLoggedIn} userType={userType} />
-        </div>
+        <Header isLoggedIn={isLoggedIn} userType={userType} />
         <Breadcrumb />
-        <div className="main-content">
+        <main className="main-content">
           <Routes data-testid="routes">
             <Route
               index
@@ -170,7 +168,7 @@ const App: React.FC = () => {
             <Route path="*" element={<Error />} />
             {privateRoutes}
           </Routes>
-        </div>
+        </main>
         <Footer />
         <Background />
       </div>

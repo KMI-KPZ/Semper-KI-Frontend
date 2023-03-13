@@ -238,7 +238,7 @@ export const Header: React.FC<Props> = (props) => {
   return (
     <header
       data-testid="header"
-      className="flex justify-between items-center flex-row relative shadow-lg"
+      className="flex justify-between items-center flex-row relative shadow-lg bg-white w-full"
     >
       <nav className="m-3">{renderHomeButton()}</nav>
       <nav className="m-3 flex flex-row gap-4">

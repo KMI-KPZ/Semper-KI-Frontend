@@ -11,13 +11,13 @@
     "service":{
       "title":"Service",
       "use":{
-        "title":"Nutzen",
+        "title":"Service Nutzen",
         "produce":"Herstellen lassen",
         "design":"Entwerfen lassen",
         "accompany":"Gesamtprozess begleiten lassen"
       },
       "provide":{
-        "title":"Anbieten",
+        "title":"Service Anbieten",
         "produce":"Herstellen",
         "design":"Entwerfen",
         "accompany":"Gesamtprozess begleiten"
@@ -26,13 +26,13 @@
     "guide":{
       "title":"Hilfe zu den Folgenden Services",
       "use":{
-        "title":"Nutzen",
+        "title":"Service Nutzen",
         "produce":"Herstellen lassen",
         "design":"Entwerfen lassen",
         "accompany":"Gesamtprozess begleiten lassen"
       },
       "provide":{
-        "title":"Anbieten",
+        "title":"Service Anbieten",
         "produce":"Herstellen",
         "design":"Entwerfen",
         "accompany":"Gesamtprozess begleiten"

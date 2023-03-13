@@ -1,6 +1,5 @@
 @use './scss/index' as *;
 
-
 *,
 *::before,
 *::after {
@@ -8,9 +7,10 @@
 }
 
 body {
+  
   padding: 0;
   margin: 0;
-  font-family:  "PTSans",sans-serif;
+  // font-family:  "PT Sans";
   font-size: 1.5em;
   color: $textPrimary;
   min-height: 100vh;

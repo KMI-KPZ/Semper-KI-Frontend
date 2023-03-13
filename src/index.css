@@ -1,0 +1,28 @@
+/* @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap'); */
+
+@layer base {
+    @font-face {
+        font-family: PTSans;
+        src: url(/public/assets/fonts/PTSans-Regular.ttf) format("truetype");
+    }
+    @font-face {
+        font-family: PTSans;
+        font-style: italic;
+        src: url(/public/assets/fonts/PTSans-Italic.ttf) format("truetype");
+    }
+    @font-face {
+        font-family: PTSans;
+        font-weight: 700;
+        src: url(/public/assets/fonts/PTSans-Bold.ttf) format("truetype");
+    }
+    @font-face {
+        font-family: PTSans;
+        font-weight: 700;
+        font-style: italic;
+        src: url(/public/assets/fonts/PTSans-BoldItalic.ttf) format("truetype");
+    }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

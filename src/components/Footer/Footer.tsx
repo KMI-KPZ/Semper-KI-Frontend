@@ -1,23 +1,28 @@
 import React from "react";
 import { URL_Datenschutz, URL_Impressum } from "../../config/Constants";
-import "./Footer.scss";
 
 const Footer: React.FC = () => {
   return (
-    <nav className="footer">
-      <ul className="footer-list">
-        <li className="footer-list-item">
-          <a className="footer-list-item-link" href={URL_Impressum}>
+    <footer className="w-full bg-white shadow-inner ">
+      <ul className="flex flex-col md:flex-row md:justify-around items-center">
+        <li className="p-2">
+          <a
+            className="text-gray-500 hover:text-gray-600 p-2"
+            href={URL_Impressum}
+          >
             Impressum
           </a>
         </li>
-        <li className="footer-list-item">
-          <a className="footer-list-item-link" href={URL_Datenschutz}>
+        <li className="p-2">
+          <a
+            className="text-gray-500 hover:text-gray-600 p-2"
+            href={URL_Datenschutz}
+          >
             Datenschutzerklärung
           </a>
         </li>
       </ul>
-    </nav>
+    </footer>
   );
 };
 

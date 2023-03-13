@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./Header.scss";
+import React, { useEffect, useRef, useState } from "react";
+// import "./Header.scss";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -9,6 +9,7 @@ import HeaderItem from "./HeaderItem";
 
 import _HeaderItems from "./HeaderItems.json";
 import { EUserType } from "../../interface/enums";
+import { IconArrowR } from "../../config/Icons";
 const HeaderItems = _HeaderItems as IHeaderItem[];
 
 interface Language {
@@ -36,8 +37,8 @@ interface Props {
 }
 
 interface State {
-  languageMenu: boolean;
-  menu: boolean;
+  languageMenuOpen: boolean;
+  menuOpen: boolean;
 }
 
 export const Header: React.FC<Props> = (props) => {
@@ -45,17 +46,17 @@ export const Header: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const { i18n } = useTranslation();
   const [state, setState] = useState<State>({
-    menu: false,
-    languageMenu: false,
+    menuOpen: false,
+    languageMenuOpen: false,
   });
-
+  const { menuOpen, languageMenuOpen } = state;
   const changeLanguage = (code: string) => () => {
     closeLanguageMenu();
     if (i18n.language !== code) i18n.changeLanguage(code);
   };
 
   const closeLanguageMenu = () => {
-    setState((prevState) => ({ ...prevState, languageMenu: false }));
+    setState((prevState) => ({ ...prevState, languageMenuOpen: false }));
   };
 
   const openLanguageMenu = (
@@ -63,11 +64,11 @@ export const Header: React.FC<Props> = (props) => {
   ) => {
     e?.preventDefault();
     e?.stopPropagation();
-    setState((prevState) => ({ ...prevState, languageMenu: true }));
+    setState((prevState) => ({ ...prevState, languageMenuOpen: true }));
   };
 
   const closeMenu = () => {
-    setState((prevState) => ({ ...prevState, menu: false }));
+    setState((prevState) => ({ ...prevState, menuOpen: false }));
   };
 
   const openMenu = (
@@ -77,7 +78,7 @@ export const Header: React.FC<Props> = (props) => {
   ) => {
     e?.preventDefault();
     e?.stopPropagation();
-    setState((prevState) => ({ ...prevState, menu: true }));
+    setState((prevState) => ({ ...prevState, menuOpen: true }));
   };
 
   const closeMenus = (): void => {
@@ -94,10 +95,9 @@ export const Header: React.FC<Props> = (props) => {
     );
     return returnString;
   };
-
-  const getHeaderItems = (): JSX.Element => {
+  const renderHeaderItems = (): JSX.Element => {
     return (
-      <>
+      <ul className="hidden md:flex flex-row gap-4">
         {HeaderItems.filter(
           (headerItem: IHeaderItem) =>
             headerItem.preferred === "header" &&
@@ -112,11 +112,11 @@ export const Header: React.FC<Props> = (props) => {
             headeritem={headerItem}
           />
         ))}
-      </>
+        {renderLanguageMenu()}
+      </ul>
     );
   };
-
-  const getMenuItems = (): JSX.Element => {
+  const renderMenuItems = (mobile: boolean): JSX.Element => {
     return (
       <>
         {HeaderItems.filter(
@@ -137,76 +137,115 @@ export const Header: React.FC<Props> = (props) => {
       </>
     );
   };
+  const renderHomeButton = (): JSX.Element => (
+    <a
+      href="/"
+      className="flex flex-row items-center gap-2 hover:bg-gray-300 hover:cursor-pointer p-2"
+      onClick={(e) => {
+        e.preventDefault();
+        closeMenus();
+        navigate("/");
+      }}
+      title="Startseite"
+    >
+      <img
+        className="h-6 xl:h-8"
+        data-testid="logo"
+        src={require("../../assets/images/logo192.png")}
+        alt="Kiss Logo"
+      />
+      <h3 className="font-bold" data-testid="logoName">
+        SEMPER-KI
+      </h3>
+    </a>
+  );
+  const renderLanguageMenu = (): JSX.Element => (
+    <li className="flex items-center justify-center" title="Sprachmenu">
+      <ClickAwayListener onClickAway={closeLanguageMenu}>
+        <div className="relative w-full h-full flex items-center justify-center">
+          <a
+            href={"/languageMenu"}
+            className="hover:bg-gray-300 hover:cursor-pointer p-2"
+            onClick={openLanguageMenu}
+          >
+            <div
+              className={`fi fi-${getFlagButtonClassName()} scale-80 xl:scale-100`}
+            />
+          </a>
+          {state.languageMenuOpen === true ? (
+            <div
+              className="flex flex-col absolute translate-y-20 bg-white"
+              data-testid="dropdown"
+            >
+              {languages.map(({ code, country_code }: Language) => (
+                <a
+                  key={country_code}
+                  onClick={changeLanguage(code)}
+                  className="hover:bg-gray-300 hover:cursor-pointer p-2"
+                >
+                  <div
+                    data-testid={country_code}
+                    className={`fi fi-${country_code} ${
+                      i18n.language === code ? "disabled" : ""
+                    }`}
+                  />
+                </a>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </ClickAwayListener>
+    </li>
+  );
+  const renderMenuButton = (): JSX.Element => (
+    <li
+      className="flex items-center justify-center hover:bg-gray-300 hover:cursor-pointer p-2"
+      onClick={openMenu}
+      title="Menu"
+    >
+      <a
+        href={"/menu"}
+        onClick={openMenu}
+        className="flex items-center justify-center"
+      >
+        <MenuIcon className="h-6 xl:h-10" />
+      </a>
+    </li>
+  );
+  const renderMenu = (): JSX.Element => (
+    <>
+      <div
+        className="absolute top-0 right-0 h-screen w-screen bg-gray-900 opacity-60 "
+        onClick={closeMenu}
+      />
+      <div className="flex justify-between flex-col absolute min-h-fit md:h-screen w-screen md:w-fit top-0 right-0 bg-white p-3">
+        <ul className="hidden md:flex flex-col gap-3">
+          {renderMenuItems(false)}
+        </ul>
+        <ul className="md:hidden flex flex-col gap-3">
+          {renderMenuItems(true)}
+        </ul>
+        <div
+          className="hover:bg-gray-300 hover:cursor-pointer w-full p-3 flex justify-center items-center"
+          onClick={closeMenu}
+        >
+          <img className="h-8 rotate-[270deg] md:rotate-0" src={IconArrowR} />
+        </div>
+      </div>
+    </>
+  );
 
   return (
-    <header data-testid="header" className="header">
-      <nav className="nav-left">
-        <a
-          href="/"
-          className="kiss-logo"
-          onClick={(e) => {
-            e.preventDefault();
-            closeMenus();
-            navigate("/");
-          }}
-        >
-          <img
-            className="kiss-logo-img"
-            data-testid="logo"
-            src={require("../../assets/images/logo192.png")}
-            alt="Kiss Logo"
-          />
-          <h3 className="kiss-logo-name" data-testid="logoName">
-            SEMPER-KI
-          </h3>
-        </a>
+    <header
+      data-testid="header"
+      className="flex justify-between items-center flex-row relative shadow-lg"
+    >
+      <nav className="m-3">{renderHomeButton()}</nav>
+      <nav className="m-3 flex flex-row gap-4">
+        {renderHeaderItems()}
+        {renderMenuButton()}
       </nav>
-      <nav className="nav" data-testid="mainNav">
-        <ul className="nav-list">
-          {getHeaderItems()}
-          <li className="nav-list-item" title="Sprachmenu">
-            <ClickAwayListener onClickAway={closeLanguageMenu}>
-              <div className="language-menu">
-                <a
-                  href={"/languageMenu"}
-                  className={`fi fi-${getFlagButtonClassName()}`}
-                  onClick={openLanguageMenu}
-                >
-                  {" "}
-                </a>
-                {state.languageMenu === true ? (
-                  <div
-                    className="language-menu-dropdown"
-                    data-testid="dropdown"
-                  >
-                    {languages.map(({ code, country_code }: Language) => (
-                      <div
-                        data-testid={country_code}
-                        className={`fi fi-${country_code} main-nav-dropdown-item ${
-                          i18n.language === code ? "disabled" : ""
-                        }`}
-                        key={country_code}
-                        onClick={changeLanguage(code)}
-                      />
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-            </ClickAwayListener>
-          </li>
-          <li className="nav-list-item" onClick={openMenu} title="Menu">
-            <a href={"/menu"} className="nav-list-item-link" onClick={openMenu}>
-              <MenuIcon />
-            </a>
-          </li>
-        </ul>
-      </nav>
-      {state.menu === true ? (
-        <>
-          <div className="menu-blank" onClick={closeMenu} />
-          <div className="menu-dropdown">{getMenuItems()}</div>
-        </>
-      ) : null}
+      {menuOpen ? renderMenu() : null}
     </header>
   );
 };

@@ -136,7 +136,7 @@ const App: React.FC = () => {
 
   return (
     <AppContext.Provider value={{ state, setState }}>
-      <div className="app" data-testid="app">
+      <div className="app font-ptsans" data-testid="app">
         <div className="main-header">
           <Header isLoggedIn={isLoggedIn} userType={userType} />
         </div>

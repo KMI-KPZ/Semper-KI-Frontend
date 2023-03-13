@@ -27,17 +27,17 @@ const HeaderItem: React.FC<Props> = (props) => {
 
   return (
     <li
-      className={`nav-list-item ${isMenuItem === undefined ? "" : "menu-item"}`}
+      className="hover:bg-gray-300 hover:cursor-pointer p-2"
       onClick={handleOnClick}
       title={headeritem.title}
     >
       <a
         href={headeritem.link}
-        className="nav-list-item-link"
+        className="flex flex-row items-center gap-2"
         onClick={handleOnClick}
       >
         <img
-          className="menu-img"
+          className="h-6 xl:h-8"
           src={getIconByName(headeritem.icon)}
           alt={`link to ${headeritem.link}`}
         />

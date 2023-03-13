@@ -33,18 +33,24 @@ const Card: React.FC<Props> = (props) => {
           carditem.title
         }`
       )}
-      className="card"
+      className="flex flex-col w-full md:w-5/12 justify-center items-center gap-1 bg-white p-2 md:p-3 hover:bg-gray-300 shadow-md md:min-w-[300px]"
       onClick={handleClickCard}
       href={carditem.link}
     >
       {carditem.icon !== undefined ? (
-        <img src={getIconByName(carditem.icon)} alt={carditem.icon} />
+        <img
+          src={getIconByName(carditem.icon)}
+          alt={carditem.icon}
+          className="w-6"
+        />
       ) : null}
-      {t(
-        `card-view.${prefix.map((title: string) => `${title}.`).join("")}${
-          carditem.title
-        }`
-      )}
+      <h3 className="text-center">
+        {t(
+          `card-view.${prefix.map((title: string) => `${title}.`).join("")}${
+            carditem.title
+          }`
+        )}
+      </h3>
     </a>
   );
 };

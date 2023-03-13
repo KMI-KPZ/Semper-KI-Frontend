@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./Breadcrumb.scss";
 
 interface Props {}
 
@@ -31,7 +30,7 @@ const Breadcrumb: React.FC<Props> = () => {
   };
 
   return (
-    <div className="breadcrumb">
+    <div className="text-left w-full hidden md:block ml-14">
       {splittet.length > 1
         ? splittet.map((name: string, index: number) => (
             <React.Fragment key={index}>

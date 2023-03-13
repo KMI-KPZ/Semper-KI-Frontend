@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Card from "./Card";
-import "./CardView.scss";
+// import "./CardView.scss";
 
 interface Props {
   path: string;
@@ -26,48 +26,39 @@ const CardView: React.FC<Props> = (props) => {
   const { path, cards, cardGroups, onClickCard, children } = props;
   const { t } = useTranslation();
 
-  const calcRowCount = (): string => {
-    let rowCount = 2;
-    return `row-${rowCount}`;
-  };
+  const renderCards = (cards: ICardItem[], prefix: string[]): JSX.Element => (
+    <div className="flex flex-col md:flex-row md:flex-wrap items-center justify-center gap-5 w-full">
+      {cards.map((carditem: ICardItem, cardIndex: number) => (
+        <Card
+          onClickCard={onClickCard}
+          carditem={carditem}
+          key={cardIndex}
+          prefix={prefix}
+        />
+      ))}
+    </div>
+  );
 
   return (
-    <div className="card-view row-1">
-      <h1>{t(`card-view.${path}.title`)}</h1>
+    <div className="flex flex-col gap-5 justify-center items-center w-full max-w-7xl">
+      <h1 className="text-center">{t(`card-view.${path}.title`)}</h1>
       {children}
       {cardGroups !== undefined ? (
-        <div className="card-view-row">
+        <div className="flex flex-col gap-5 justify-center items-center w-full">
           {cardGroups.map((cardgroup: ICardGroup, index: number) => (
-            <div className="card-view-column" key={index}>
-              <h2>{t(`card-view.${path}.${cardgroup.path}.title`)}</h2>
-              <div className={`card-view-group ${calcRowCount()}`}>
-                {cardgroup.cards.map(
-                  (carditem: ICardItem, cardIndex: number) => (
-                    <Card
-                      onClickCard={onClickCard}
-                      carditem={carditem}
-                      key={cardIndex}
-                      prefix={[path, cardgroup.path]}
-                    />
-                  )
-                )}
-              </div>
+            <div
+              className="flex flex-col gap-5 justify-center items-center w-full"
+              key={index}
+            >
+              <h2 className="text-center">
+                {t(`card-view.${path}.${cardgroup.path}.title`)}
+              </h2>
+              {renderCards(cardgroup.cards, [path, cardgroup.path])}
             </div>
           ))}
         </div>
       ) : null}
-      {cards !== undefined ? (
-        <div className={`card-view-group ${calcRowCount()}`}>
-          {cards.map((carditem: ICardItem, cardIndex: number) => (
-            <Card
-              carditem={carditem}
-              key={cardIndex}
-              prefix={[path]}
-              onClickCard={onClickCard}
-            />
-          ))}
-        </div>
-      ) : null}
+      {cards !== undefined ? renderCards(cards, [path]) : null}
     </div>
   );
 };

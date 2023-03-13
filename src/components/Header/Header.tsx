@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 // import "./Header.scss";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,8 @@ import HeaderItem from "./HeaderItem";
 
 import _HeaderItems from "./HeaderItems.json";
 import { EUserType } from "../../interface/enums";
-import { IconArrowR } from "../../config/Icons";
+import { getIconByName, IconArrowR, IconX } from "../../config/Icons";
+import { AppContext } from "../App/App";
 const HeaderItems = _HeaderItems as IHeaderItem[];
 
 interface Language {
@@ -43,6 +44,7 @@ interface State {
 
 export const Header: React.FC<Props> = (props) => {
   const { isLoggedIn, userType } = props;
+  const { state: AppState, setState: setAppState } = useContext(AppContext);
   const navigate = useNavigate();
   const { i18n } = useTranslation();
   const [state, setState] = useState<State>({
@@ -69,6 +71,7 @@ export const Header: React.FC<Props> = (props) => {
 
   const closeMenu = () => {
     setState((prevState) => ({ ...prevState, menuOpen: false }));
+    setAppState((prevState) => ({ ...prevState, stopScroll: false }));
   };
 
   const openMenu = (
@@ -79,6 +82,7 @@ export const Header: React.FC<Props> = (props) => {
     e?.preventDefault();
     e?.stopPropagation();
     setState((prevState) => ({ ...prevState, menuOpen: true }));
+    setAppState((prevState) => ({ ...prevState, stopScroll: true }));
   };
 
   const closeMenus = (): void => {
@@ -119,6 +123,42 @@ export const Header: React.FC<Props> = (props) => {
   const renderMenuItems = (mobile: boolean): JSX.Element => {
     return (
       <>
+        {mobile === true ? (
+          <>
+            <div className="flex flex-row-reverse gap-4">
+              <div
+                className="hover:bg-gray-300 hover:cursor-pointer p-2 flex justify-center"
+                onClick={closeMenu}
+              >
+                <img alt="close Menu" src={IconX} className="w-6" />
+              </div>
+              {renderLanguageMenu()}
+            </div>
+            {HeaderItems.filter(
+              (headerItem: IHeaderItem) =>
+                headerItem.preferred === "header" &&
+                headerItem.userType.includes(userType) &&
+                (headerItem.loggedIn === undefined ||
+                  (headerItem.loggedIn !== undefined &&
+                    headerItem.loggedIn === isLoggedIn))
+            ).map((headerItem: IHeaderItem, index: number) => (
+              <HeaderItem
+                key={index}
+                closeMenus={closeMenus}
+                headeritem={headerItem}
+              />
+            ))}
+          </>
+        ) : (
+          <div className="flex flex-row-reverse gap-4">
+            <div
+              className="hover:bg-gray-300 hover:cursor-pointer p-2 flex justify-center"
+              onClick={closeMenu}
+            >
+              <img alt="close Menu" src={IconX} className="w-6" />
+            </div>
+          </div>
+        )}
         {HeaderItems.filter(
           (headerItem: IHeaderItem) =>
             headerItem.preferred === "menu" &&
@@ -215,10 +255,18 @@ export const Header: React.FC<Props> = (props) => {
   const renderMenu = (): JSX.Element => (
     <>
       <div
-        className="absolute top-0 right-0 h-screen w-screen bg-gray-900 opacity-60 "
+        className="hidden md:block absolute top-0 right-0 h-screen w-screen bg-gray-900 opacity-60"
         onClick={closeMenu}
       />
-      <div className="flex justify-between flex-col absolute min-h-fit md:h-screen w-screen md:w-fit top-0 right-0 bg-white p-3">
+      <div
+        className="
+        flex flex-col justify-between absolute
+        w-screen h-screen top-0 right-0 
+        overflow-y-scroll overflow-x-hidden
+        md:w-fit md:shadow-none 
+       bg-white p-3 shadow-xl
+       "
+      >
         <ul className="hidden md:flex flex-col gap-3">
           {renderMenuItems(false)}
         </ul>

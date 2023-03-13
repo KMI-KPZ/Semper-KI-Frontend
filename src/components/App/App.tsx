@@ -35,6 +35,7 @@ import AdminOrderView from "../Admin/AdminOrderView";
 import Background from "../Background/Background";
 
 export interface IAppState {
+  stopScroll: boolean;
   processList: IProcess[];
   orderList: IOrder[];
   guideFilter: IFilterItem[];
@@ -47,6 +48,7 @@ export interface IAppContext {
 
 export const AppContext = createContext<IAppContext>({
   state: {
+    stopScroll: false,
     processList: [{}],
     orderList: TestOrderList,
     guideFilter: [],
@@ -55,6 +57,7 @@ export const AppContext = createContext<IAppContext>({
 });
 
 const initialState: IAppState = {
+  stopScroll: false,
   processList: [{}],
   orderList: TestOrderList,
   guideFilter: [],
@@ -62,7 +65,7 @@ const initialState: IAppState = {
 
 const App: React.FC = () => {
   const [state, setState] = useState<IAppState>(initialState);
-  const { guideFilter, orderList, processList } = state;
+  const { stopScroll, guideFilter, orderList, processList } = state;
   const { CSRFToken } = useCRSFToken();
   const { isLoggedIn, userType, user, loadLoggedIn } = useUser();
   const { data, loadData, clearData } = useAdmin();
@@ -136,7 +139,12 @@ const App: React.FC = () => {
 
   return (
     <AppContext.Provider value={{ state, setState }}>
-      <div className="app font-ptsans" data-testid="app">
+      <div
+        className={`app font-ptsans  ${
+          stopScroll === true ? "overflow-hidden h-screen w-screen" : ""
+        }`}
+        data-testid="app"
+      >
         <Header isLoggedIn={isLoggedIn} userType={userType} />
         <Breadcrumb />
         <main className="main-content">

@@ -29,23 +29,24 @@ const Breadcrumb: React.FC<Props> = () => {
     navigate(generateLink(index));
   };
 
+  // splittet.length > 1 ? (
   return (
     <nav className="text-left w-full hidden md:block pl-14">
-      {splittet.length > 1
-        ? splittet.map((name: string, index: number) => (
-            <React.Fragment key={index}>
-              <a
-                href={generateLink(index)}
-                onClick={(e) => handleOnClick(e, index)}
-              >
-                {name}
-              </a>
-              {index + 1 < splittet.length ? " > " : null}
-            </React.Fragment>
-          ))
-        : null}
+      {splittet.map((name: string, index: number) => (
+        <React.Fragment key={index}>
+          <a
+            className="p-2 hover:bg-white"
+            href={generateLink(index)}
+            onClick={(e) => handleOnClick(e, index)}
+          >
+            {name}
+          </a>
+          {index + 1 < splittet.length ? " > " : null}
+        </React.Fragment>
+      ))}
     </nav>
   );
+  // ) : null;
 };
 
 export default Breadcrumb;

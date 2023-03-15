@@ -22,7 +22,7 @@ const DashboardCard: React.FC<Props> = (props) => {
 
   return (
     <a
-      className="dashboard-card"
+      className="flex flex-col w-full md:w-5/12 justify-center items-center gap-1 bg-white p-2 md:p-3 hover:bg-gray-300 shadow-md md:min-w-[300px]"
       onClick={handleOnClickCard}
       href={cardItem.link}
     >

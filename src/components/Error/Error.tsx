@@ -13,37 +13,17 @@ export const Error: React.FC<Props> = (props) => {
   return (
     <div
       data-testid="Error"
-      style={{
-        width: "75%",
-        textAlign: "center",
-        fontSize: "2em",
-        margin: "1em auto 1em auto",
-        padding: "20px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundColor: "white",
-        border: "2px solid grey",
-      }}
+      className="flex flex-col items-center text-center bg-white p-5 gap-5"
     >
       {text && <span data-testid="ErrorMessage">{text}</span>}
       <span data-testid="ErrorMessage">{t("error.text")}</span>
       <a
+        className="flex justify-center items-center p-3 shadow-lg hover:bg-gray-300 border"
         data-testid="HomeButton"
         href="/"
         onClick={(e) => {
           e.preventDefault();
           navigate("/");
-        }}
-        style={{
-          textDecoration: "none",
-          fontSize: "1em",
-          color: "inherit",
-          border: "1px solid black",
-          borderRadius: "5px",
-          maxWidth: "350px",
-          marginTop: "20px",
-          padding: "20px",
         }}
       >
         {t("error.button")}

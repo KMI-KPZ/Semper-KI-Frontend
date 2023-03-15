@@ -40,7 +40,7 @@ const CardView: React.FC<Props> = (props) => {
   );
 
   return (
-    <div className="flex flex-col gap-5 justify-center items-center w-full max-w-7xl">
+    <div className="flex flex-col gap-5 justify-center items-center w-full p-4 md:p-0 max-w-7xl">
       <h1 className="text-center">{t(`card-view.${path}.title`)}</h1>
       {children}
       {cardGroups !== undefined ? (

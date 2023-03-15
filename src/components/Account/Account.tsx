@@ -4,8 +4,6 @@ import useUser from "../../hooks/useUser";
 import { EUserType } from "../../interface/enums";
 import { IUser } from "../../interface/Interface";
 
-import "./Account.scss";
-
 interface Props {
   user: IUser;
 }
@@ -29,7 +27,7 @@ const Account: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="account">
+    <div className="flex flex-col gap-2 p-10 bg-white">
       <h1>Account</h1>
       <span>name: {user.name}</span>
       <span>email: {user.email}</span>

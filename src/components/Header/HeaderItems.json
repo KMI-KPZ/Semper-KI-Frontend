@@ -45,7 +45,7 @@
         "link": "/logout",
         "icon": "IconLogout",
         "extern": false,
-        "preferred":"header",
+        "preferred":"menu",
         "userType": [0,1,2,3],
         "loggedIn":true
     },

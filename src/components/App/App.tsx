@@ -140,14 +140,13 @@ const App: React.FC = () => {
   return (
     <AppContext.Provider value={{ state, setState }}>
       <div
-        className={`app font-ptsans  ${
-          stopScroll === true ? "overflow-hidden h-screen w-screen" : ""
-        }`}
+        className={`flex flex-col gap-5 justify-between min-h-screen font-ptsans  
+        ${stopScroll === true ? "overflow-hidden h-screen w-screen" : ""}`}
         data-testid="app"
       >
         <Header isLoggedIn={isLoggedIn} userType={userType} />
         <Breadcrumb />
-        <main className="main-content">
+        <main className="w-full flex flex-col justify-start items-center flex-grow">
           <Routes data-testid="routes">
             <Route
               index

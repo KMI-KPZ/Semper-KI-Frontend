@@ -5,8 +5,6 @@ import { EUserType } from "../../interface/enums";
 import { useTranslation } from "react-i18next";
 import DashboardCard from "./DashboardCard";
 
-import "./Home.scss";
-
 import _HomeCards from "./HomeCards.json";
 import _AdminCards from "./AdminCards.json";
 import _UserCards from "./UserCards.json";
@@ -40,10 +38,10 @@ export const Home: React.FC<Props> = (props) => {
   return isLoggedIn === false ? (
     <CardView path="home" cards={HomeCards} />
   ) : (
-    <div className="dashboard">
-      <h1 className="dashboard-headline">{t(`${prefix}.title`)}</h1>
+    <div className="flex flex-col gap-12 justify-start items-center">
+      <h1 className="">{t(`${prefix}.title`)}</h1>
       {/* {infoCard} */}
-      <div className="dashboard-cards">
+      <div className="flex flex-row flex-wrap justify-center gap-5 p-4 md:p-0 items-center">
         {(userType === EUserType.admin ? AdminCards : UserCards).map(
           (cardItem: ICardItem, index: number) => (
             <DashboardCard prefix={prefix} cardItem={cardItem} key={index} />

@@ -56,11 +56,9 @@ export const Header: React.FC<Props> = (props) => {
     closeLanguageMenu();
     if (i18n.language !== code) i18n.changeLanguage(code);
   };
-
   const closeLanguageMenu = () => {
     setState((prevState) => ({ ...prevState, languageMenuOpen: false }));
   };
-
   const openLanguageMenu = (
     e?: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
@@ -68,12 +66,10 @@ export const Header: React.FC<Props> = (props) => {
     e?.stopPropagation();
     setState((prevState) => ({ ...prevState, languageMenuOpen: true }));
   };
-
   const closeMenu = () => {
     setState((prevState) => ({ ...prevState, menuOpen: false }));
     setAppState((prevState) => ({ ...prevState, stopScroll: false }));
   };
-
   const openMenu = (
     e?:
       | React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -84,12 +80,10 @@ export const Header: React.FC<Props> = (props) => {
     setState((prevState) => ({ ...prevState, menuOpen: true }));
     setAppState((prevState) => ({ ...prevState, stopScroll: true }));
   };
-
   const closeMenus = (): void => {
     closeLanguageMenu();
     closeMenu();
   };
-
   const getFlagButtonClassName = (): string => {
     let returnString: string = "";
     languages.forEach((language: Language) =>
@@ -99,9 +93,10 @@ export const Header: React.FC<Props> = (props) => {
     );
     return returnString;
   };
+
   const renderHeaderItems = (): JSX.Element => {
     return (
-      <ul className="hidden md:flex flex-row gap-4">
+      <ul className="hidden md:flex flex-row gap-4 justify-center items-center">
         {HeaderItems.filter(
           (headerItem: IHeaderItem) =>
             headerItem.preferred === "header" &&
@@ -214,7 +209,7 @@ export const Header: React.FC<Props> = (props) => {
           </a>
           {state.languageMenuOpen === true ? (
             <div
-              className="flex flex-col absolute translate-y-20 bg-white"
+              className="flex flex-col absolute translate-y-20 bg-gray-200"
               data-testid="dropdown"
             >
               {languages.map(({ code, country_code }: Language) => (
@@ -289,7 +284,7 @@ export const Header: React.FC<Props> = (props) => {
       className="flex justify-between items-center flex-row relative shadow-lg bg-white w-full"
     >
       <nav className="m-3">{renderHomeButton()}</nav>
-      <nav className="m-3 flex flex-row gap-4">
+      <nav className="m-3 flex flex-row justify-center items-center gap-4">
         {renderHeaderItems()}
         {renderMenuButton()}
       </nav>

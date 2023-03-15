@@ -1,4 +1,3 @@
-import { Container } from "@mui/system";
 import axios, { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
 import { EUserType } from "../../interface/enums";
@@ -35,20 +34,13 @@ const Login: React.FC<Props> = (props) => {
   }, []);
 
   return (
-    <Container
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "50vh",
-      }}
-    >
+    <div className="flex justify-center items-center min-h-[50vh]">
       {isLoading ? (
         <LoadingAnimation />
       ) : error !== undefined ? (
         <h1>Es ist etwas schiefgelaufen : {error.message}</h1>
       ) : null}
-    </Container>
+    </div>
   );
 };
 

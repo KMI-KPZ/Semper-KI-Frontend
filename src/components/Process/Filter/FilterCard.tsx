@@ -36,8 +36,8 @@ const FilterCard: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="filter-category-card">
-      <div className="filter-category-header">
+    <div className="bg-gray-100 p-3">
+      <div className="flex flex-row justify-between items-center">
         <h3>
           {t(`filter.category.${category.title}`)}
           {getCountOfChecktItems()}

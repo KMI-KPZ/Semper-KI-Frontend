@@ -1,4 +1,3 @@
-import "../ProcessView.scss";
 import "./Material.scss";
 import { IMaterial } from "../../../interface/Interface";
 import React, { useState } from "react";
@@ -41,11 +40,7 @@ export const MaterialCatalogCard: React.FC<Props> = (props) => {
 
   return (
     <div className={`material-card ${grid ? "grid" : "list"}`}>
-      <img
-        className="material-card-image"
-        src={require("../../../assets/images/material_placeholder.png")}
-        alt="Material"
-      />
+      <img className="material-card-image" src={material.URI} alt="Material" />
       <h2 className="material-card-header">{material.title}</h2>
       <div className="material-card-specs">
         {material.propList?.map((spec: string, index: number) => (

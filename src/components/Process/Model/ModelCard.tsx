@@ -1,5 +1,5 @@
 import "../../../styles.scss";
-import "./../ProcessView.scss";
+
 import { IModel } from "../../../interface/Interface";
 import React from "react";
 import { Button } from "@mui/material";

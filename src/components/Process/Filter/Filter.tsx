@@ -96,7 +96,7 @@ const Filter: React.FC<Props> = (props) => {
     }));
   };
 
-  const onClickReset = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onClickReset = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     setState((prevState) => ({
       ...prevState,
@@ -110,7 +110,7 @@ const Filter: React.FC<Props> = (props) => {
     }));
   };
 
-  const onClickApply = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onClickApply = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     callApplyFilters();
   };
@@ -136,9 +136,9 @@ const Filter: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="filter">
-      <div className="filter-content">
-        <h2 className="filter-headline">{t("filter.headline")}</h2>
+    <div className="hidden xl:flex flex-col h-fit bg-white justify-between p-5 gap-10">
+      <div className="flex flex-col justify-start gap-2 overflow-x-hidden">
+        <h2 className="">{t("filter.headline")}</h2>
         {categoryList.map((category: ICategory, categoryIndex: number) => (
           <FilterCard
             category={category}
@@ -153,13 +153,19 @@ const Filter: React.FC<Props> = (props) => {
           />
         ))}
       </div>
-      <div className="filter-buttons">
-        <Button variant="contained" onClick={onClickReset}>
+      <div className="flex justify-center gap-2 flex-col xl:flex-row text-white">
+        <div
+          className="flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer"
+          onClick={onClickReset}
+        >
           Reset
-        </Button>
-        <Button variant="contained" onClick={onClickApply}>
+        </div>
+        <div
+          className="flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer"
+          onClick={onClickApply}
+        >
           Anwenden
-        </Button>
+        </div>
       </div>
     </div>
   );

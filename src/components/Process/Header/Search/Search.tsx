@@ -3,7 +3,6 @@ import RectangleIcon from "@mui/icons-material/Rectangle";
 import SortIcon from "@mui/icons-material/Sort";
 import SearchIcon from "@mui/icons-material/Search";
 
-import "./Search.scss";
 import { ProcessContext } from "../../ProcessView";
 
 const Search: React.FC = () => {
@@ -32,44 +31,48 @@ const Search: React.FC = () => {
   };
 
   return (
-    <div className="search-box">
-      <div className="search-input-container">
+    <div className="flex flex-row w-full justify-between">
+      <div className="flex flex-row w-[70%]">
         <input
           type="text"
-          className="search-input"
+          className="border-none pl-5 w-[85%] bg-gray-200"
           placeholder={"Suche ..."}
           autoFocus
           value={search}
           onChange={handleOnChangeInput}
         />
         <div
-          className="search-input-icon-box"
+          className="flex flex-row w-[15%] justify-center items-center bg-gray-300"
           onClick={handleOnClickSearchButton}
         >
-          <SearchIcon className="search-input-icon" />
+          <SearchIcon className="text-white scale-150" />
         </div>
       </div>
-      <div className="search-button">
+      <div className="flex flex-row items-center justify-center bg-gray-200 p-2 w-20">
         <SortIcon className="search-icon-sort" />
       </div>
       <div
-        className={`search-button ${processState.grid ? "active" : ""}`}
+        className={`flex flex-row items-center justify-center bg-gray-200 p-2 w-20 ${
+          processState.grid ? "bg-gray-500" : ""
+        }`}
         onClick={(e) => handleClickButton(e, true)}
       >
-        <div className="search-icon-cards">
-          <RectangleIcon className="search-icon-card" />
-          <RectangleIcon className="search-icon-card" />
-          <RectangleIcon className="search-icon-card" />
-          <RectangleIcon className="search-icon-card" />
+        <div className="grid grid-cols-2 gap-0">
+          <RectangleIcon className="" />
+          <RectangleIcon className="" />
+          <RectangleIcon className="" />
+          <RectangleIcon className="" />
         </div>
       </div>
       <div
-        className={`search-button ${processState.grid ? "" : "active"}`}
+        className={`flex flex-row items-center justify-center bg-gray-200 p-2 w-20 ${
+          processState.grid ? "" : "bg-gray-500"
+        }`}
         onClick={(e) => handleClickButton(e, false)}
       >
-        <div className="search-icon-lists">
-          <RectangleIcon className="search-icon-list" />
-          <RectangleIcon className="search-icon-list" />
+        <div className="flex flex-col justify-between scale-x-[300%]">
+          <RectangleIcon />
+          <RectangleIcon />
         </div>
       </div>
     </div>

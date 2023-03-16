@@ -2,7 +2,7 @@ import { IManufacturer } from "../../../interface/Interface";
 import React, { useEffect, useState } from "react";
 
 import "../../../styles.scss";
-import "../ProcessView.scss";
+
 import "./Manufacturer.scss";
 import { useTranslation } from "react-i18next";
 import { useFetch } from "../../../hooks/useFetch";

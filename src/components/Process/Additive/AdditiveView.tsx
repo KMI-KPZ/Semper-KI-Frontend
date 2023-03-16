@@ -1,4 +1,3 @@
-import "../ProcessView.scss";
 import "./Additive.scss";
 import React, { useEffect, useRef } from "react";
 import UploadFileIcon from "@mui/icons-material/UploadFile";

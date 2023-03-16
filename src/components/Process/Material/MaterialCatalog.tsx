@@ -1,5 +1,5 @@
 import "../../../styles.scss";
-import "../ProcessView.scss";
+
 import "./Material.scss";
 import React, { useEffect } from "react";
 import { MaterialCatalogCard } from "./MaterialCatalogCard";

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IFilterItem } from "../components/Process/Filter/Interface";
-import { IMaterial, IModel } from "../interface/Interface";
+import { IMaterial, IModel, IPostProcessing } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
@@ -12,6 +12,7 @@ export interface IProcessData {
   filters: IFilterItem[];
   models: IModel[];
   materials: IMaterial[];
+  postProcessing: IPostProcessing[];
 }
 
 const useProcessData = (): ReturnProps => {
@@ -20,6 +21,7 @@ const useProcessData = (): ReturnProps => {
     filters: [],
     models: [],
     materials: [],
+    postProcessing: [],
   });
 
   const loadData = (filters: IFilterItem[]) => {

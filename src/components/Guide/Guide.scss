@@ -9,14 +9,6 @@ $cardsAnswerGap:4px;
     width: calc(($cardsPerRow * $cardWidth) + ($cardsGap * ($cardsPerRow - 1)) );
 }
 
-.guide {
-    display: flex;
-    flex-direction: row;
-    max-width: 1800px;
-    margin: 0 auto;
-    gap:$containerGap;
-}
-
 .guide-answers {
     display: flex;
     flex-direction: column;

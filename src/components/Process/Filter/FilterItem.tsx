@@ -68,8 +68,8 @@ const FilterItem: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="filter-item">
-      <div className="filter-item-header">
+    <div className="flex flex-col">
+      <div className="flex flex-row items-center justify-start gap-2 pl-2">
         <input
           type="checkbox"
           checked={filterItem.isChecked}
@@ -77,7 +77,7 @@ const FilterItem: React.FC<Props> = (props) => {
         />
         <h3>{filterItem.question.title}</h3>
       </div>
-      <div className="filter-item-content">
+      <div className="flex justify-center">
         {filterItem.isChecked ? displayInput() : ""}
       </div>
     </div>

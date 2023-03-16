@@ -65,6 +65,7 @@ export interface IPostProcessing {
   value: string;
   valueList: string[];
   type: EPostProcessingOption;
+  URI: string;
 }
 
 export interface ISpecification {

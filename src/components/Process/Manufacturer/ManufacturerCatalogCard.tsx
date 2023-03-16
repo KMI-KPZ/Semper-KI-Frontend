@@ -1,4 +1,3 @@
-import "../ProcessView.scss";
 import "./Manufacturer.scss";
 import { IManufacturer } from "../../../interface/Interface";
 import React from "react";

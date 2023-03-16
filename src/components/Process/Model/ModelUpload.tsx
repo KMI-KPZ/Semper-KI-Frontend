@@ -1,6 +1,6 @@
 import "../../../styles.scss";
 import "./Model.scss";
-import "../ProcessView.scss";
+
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import React, { useEffect, useRef, useState } from "react";
 import { IProcess } from "../../../interface/Interface";

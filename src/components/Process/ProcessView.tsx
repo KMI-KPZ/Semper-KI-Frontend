@@ -86,7 +86,7 @@ export const ProcessView: React.FC<Props> = (props) => {
   const { grid, processList, progress } = state;
   const { filters: filtersEmpty } = useFilter();
   const { data, loadData } = useProcessData();
-  const { filters: filtersData, materials, models } = data;
+  const { filters: filtersData, materials, models, postProcessing } = data;
   const filters: IFilterItem[] =
     filtersData.length === 0 ? filtersEmpty : filtersData;
 
@@ -277,14 +277,14 @@ export const ProcessView: React.FC<Props> = (props) => {
         searchModels,
       }}
     >
-      <div className="process">
+      <div className="flex flex-col xl:flex-row gap-10 p-5">
         <Filter
           filters={filters}
           applyFilters={applyFilters}
           guideAnswers={guideAnswers}
           progress={progress}
         />
-        <div className="process-content">
+        <div className="flex flex-col gap-10 max-w-6xl">
           <Header />
           <Routes>
             <Route index element={<Navigate to="/process/model" />} />

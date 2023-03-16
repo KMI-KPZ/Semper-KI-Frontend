@@ -1,4 +1,3 @@
-import "../ProcessView.scss";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import { Delete } from "@mui/icons-material";
 import React from "react";

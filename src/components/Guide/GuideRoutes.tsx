@@ -32,7 +32,7 @@ const GuideRoutes: React.FC<Props> = (props) => {
   }, [path]);
 
   return (
-    <div className="guide-view">
+    <div className="">
       <CardView path="guide" cardGroups={GuideCards} />
       <PopUp open={state.menuOpen} onOutsideClick={handleOutsideClick}>
         <Guide setFilter={setFilter} />

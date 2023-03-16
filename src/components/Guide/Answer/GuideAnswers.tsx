@@ -25,7 +25,7 @@ const GuideAnswers: React.FC<Props> = (props) => {
   console.log();
 
   return (
-    <div className="guide-answers">
+    <div className="flex flex-col justify-start bg-white p-10 gap-5 h-80 xl:h-full overflow-x-hidden overflow-y-scroll w-full">
       <h2>Vorgaben {getProcessProgress()}</h2>
       {questions
         .filter(

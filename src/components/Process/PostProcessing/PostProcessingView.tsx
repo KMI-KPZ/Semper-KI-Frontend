@@ -1,4 +1,3 @@
-import "../ProcessView.scss";
 import "./PostProcessing.scss";
 import React, { useEffect } from "react";
 import {

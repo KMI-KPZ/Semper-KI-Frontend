@@ -108,9 +108,9 @@ const Order: React.FC<Props> = (props) => {
                 <div>
                   {process.model === undefined
                     ? index
-                    : process.model.name === undefined
+                    : process.model.title === undefined
                     ? "process.model.name"
-                    : process.model.name}
+                    : process.model.title}
                 </div>
                 <div>Bli Bla Blub</div>
               </div>

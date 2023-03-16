@@ -40,7 +40,7 @@ const AdminModelView: React.FC<Props> = (props) => {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {model.name}
+                  {model.title}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {model.date}

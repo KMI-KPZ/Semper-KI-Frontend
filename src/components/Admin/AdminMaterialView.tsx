@@ -35,10 +35,7 @@ const AdminMaterialView: React.FC<Props> = (props) => {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {material.materialId}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {material.name}
+                  {material.title}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {material.propList?.join(", ")}

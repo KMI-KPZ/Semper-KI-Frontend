@@ -44,7 +44,7 @@ interface State {
 
 export const Header: React.FC<Props> = (props) => {
   const { isLoggedIn, userType } = props;
-  const { state: AppState, setState: setAppState } = useContext(AppContext);
+  const { setAppState } = useContext(AppContext);
   const navigate = useNavigate();
   const { i18n } = useTranslation();
   const [state, setState] = useState<State>({

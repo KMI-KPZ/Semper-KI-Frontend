@@ -1,4 +1,9 @@
-import { EOrderState, EProgressType, EUserType } from "./enums";
+import {
+  EOrderState,
+  EPostProcessingOption,
+  EProgressType,
+  EUserType,
+} from "./enums";
 
 export interface IProcess {
   title?: string;
@@ -17,7 +22,7 @@ export interface IProgress {
 }
 
 export interface IModel {
-  name: string;
+  title: string;
   tags: string[];
   date: string;
   license: string;
@@ -26,9 +31,9 @@ export interface IModel {
 }
 
 export interface IMaterial {
-  materialId?: number;
-  name: string;
-  propList?: string[];
+  title: string;
+  propList: string[];
+  URI: string;
 }
 
 export interface IProcedure {
@@ -55,7 +60,11 @@ export interface ILocation {
 }
 
 export interface IPostProcessing {
-  specificationList?: ISpecification[];
+  title: string;
+  checked: boolean;
+  value: string;
+  valueList: string[];
+  type: EPostProcessingOption;
 }
 
 export interface ISpecification {

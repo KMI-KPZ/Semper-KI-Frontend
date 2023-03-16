@@ -46,7 +46,7 @@ export const MaterialCatalogCard: React.FC<Props> = (props) => {
         src={require("../../../assets/images/material_placeholder.png")}
         alt="Material"
       />
-      <h2 className="material-card-header">{material.name}</h2>
+      <h2 className="material-card-header">{material.title}</h2>
       <div className="material-card-specs">
         {material.propList?.map((spec: string, index: number) => (
           <p className="material-card-text" key={index}>

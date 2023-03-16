@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Redirect.scss";
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 
 interface Props {
   link: string;
@@ -32,11 +32,9 @@ const Redirect: React.FC<Props> = (props) => {
   }, []);
 
   return (
-    <div className="redirect">
+    <div className="flex flex-col gap-5 justify-center items-center">
       {text}
-      <div className="lds-circle">
-        <div></div>
-      </div>
+      <LoadingAnimation />
     </div>
   );
 };

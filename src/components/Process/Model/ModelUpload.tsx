@@ -119,7 +119,7 @@ export const ModelUpload: React.FC<Props> = (props) => {
         fileList.map((file: File) => ({
           title: file.name,
           model: {
-            name: file.name,
+            title: file.name,
             certificate: [""],
             date: "",
             license: "",

@@ -4,7 +4,6 @@ import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
 import useCRSFToken from "../../hooks/useCSRFToken";
 import { IOrder, IProcess } from "../../interface/Interface";
-import { TestOrderList } from "../../services/TestData";
 import useUser from "../../hooks/useUser";
 import { Home } from "../Home/Home";
 import { ProcessView } from "../Process/ProcessView";
@@ -42,24 +41,24 @@ export interface IAppState {
 }
 
 export interface IAppContext {
-  state: IAppState;
-  setState: React.Dispatch<React.SetStateAction<IAppState>>;
+  appState: IAppState;
+  setAppState: React.Dispatch<React.SetStateAction<IAppState>>;
 }
 
 export const AppContext = createContext<IAppContext>({
-  state: {
+  appState: {
     stopScroll: false,
     processList: [{}],
-    orderList: TestOrderList,
+    orderList: [],
     guideFilter: [],
   },
-  setState: () => {},
+  setAppState: () => {},
 });
 
 const initialState: IAppState = {
   stopScroll: false,
   processList: [{}],
-  orderList: TestOrderList,
+  orderList: [],
   guideFilter: [],
 };
 
@@ -138,15 +137,15 @@ const App: React.FC = () => {
   );
 
   return (
-    <AppContext.Provider value={{ state, setState }}>
+    <AppContext.Provider value={{ appState: state, setAppState: setState }}>
       <div
-        className={`flex flex-col gap-5 justify-between min-h-screen font-ptsans  
+        className={`flex flex-col gap-5 justify-between min-h-screen font-ptsans items-center
         ${stopScroll === true ? "overflow-hidden h-screen w-screen" : ""}`}
         data-testid="app"
       >
         <Header isLoggedIn={isLoggedIn} userType={userType} />
         <Breadcrumb />
-        <main className="w-full flex flex-col justify-start items-center flex-grow">
+        <main className="w-full max-w-[1600px] flex flex-col justify-start items-center flex-grow">
           <Routes data-testid="routes">
             <Route
               index

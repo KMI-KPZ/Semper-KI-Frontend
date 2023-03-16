@@ -6,12 +6,6 @@ import {
   IProcedure,
   IUser,
 } from "../interface/Interface";
-import {
-  TestMaterialList,
-  TestModelList,
-  TestOrderList,
-  TestUser,
-} from "../services/TestData";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
@@ -31,10 +25,10 @@ export interface IAdminData {
 
 const useAdmin = (): ReturnProps => {
   const [data, setData] = useState<IAdminData>({
-    users: TestUser,
-    models: TestModelList,
-    materials: TestMaterialList,
-    orders: TestOrderList,
+    users: [],
+    models: [],
+    materials: [],
+    orders: [],
     printers: [],
     procedures: [],
   });
@@ -54,7 +48,7 @@ const useAdmin = (): ReturnProps => {
 
   const clearData = () => {
     setData({
-      users: TestUser,
+      users: [],
       models: [],
       materials: [],
       orders: [],

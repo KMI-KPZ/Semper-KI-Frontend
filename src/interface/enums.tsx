@@ -35,3 +35,9 @@ export enum EGuideQuestionState {
   "answer",
   "overview",
 }
+
+export enum EPostProcessingOption {
+  "selection",
+  "number",
+  "text",
+}

@@ -17,7 +17,7 @@ export const ModelView: React.FC<Props> = (props) => {
 
   return (
     <div className="model-view">
-      <h2 className="model-view-headline">{model.name}</h2>
+      <h2 className="model-view-headline">{model.title}</h2>
       <img className="model-view-img" src={model.URI} alt="Model" />
       <div className="model-view-tags">
         {model.tags.map((title: string, index: number) => (

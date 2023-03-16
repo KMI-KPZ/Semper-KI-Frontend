@@ -37,7 +37,7 @@ export const ModelCard: React.FC<Props> = (props) => {
         src={model.URI}
         alt="Model"
       />
-      <h2 className="model-card-headline">{model.name}</h2>
+      <h2 className="model-card-headline">{model.title}</h2>
       <div className={`model-card-tags ${classNameList}`}>
         {model.tags.map((title: string, index: number) => (
           <div key={index} className="model-card-tag">

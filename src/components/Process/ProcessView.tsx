@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import "../../styles.scss";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { ModelUpload } from "./Model/ModelUpload";
@@ -35,6 +35,7 @@ export interface IProcessState {
   activeProcessList: number[];
   grid: boolean;
   progress: IProgress;
+  filterOpen: boolean;
 }
 
 export interface IProcessContext {
@@ -45,6 +46,7 @@ export interface IProcessContext {
   selectProcess(index: number): void;
   setProgress(path: string): void;
   setGridState(grid: boolean): void;
+  setFilterOpen(open: boolean): void;
   searchModels(name: string): void;
 }
 const initialProcessState: IProcessState = {
@@ -52,6 +54,7 @@ const initialProcessState: IProcessState = {
   activeProcessList: [0],
   grid: true,
   progress: { title: "Modell finden", link: "/process/model", type: 0 },
+  filterOpen: false,
 };
 
 export const ProcessContext = createContext<IProcessContext>({
@@ -74,6 +77,9 @@ export const ProcessContext = createContext<IProcessContext>({
   setGridState: () => {
     console.log("Error ProcessContext setGridBoolean");
   },
+  setFilterOpen: () => {
+    console.log("Error ProcessContext setFilterOpen");
+  },
   searchModels: () => {
     console.log("Error ProcessContext searchModels");
   },
@@ -83,27 +89,30 @@ export const ProcessView: React.FC<Props> = (props) => {
   const { guideAnswers } = props;
   const navigate = useNavigate();
   const [state, setState] = useState<IProcessState>(initialProcessState);
-  const { grid, processList, progress } = state;
+  const { grid, processList, progress, activeProcessList, filterOpen } = state;
+
   const { filters: filtersEmpty } = useFilter();
-  const { data, loadData } = useProcessData();
+  const { data, loadAllData, loadMaterialData, loadModelData, uploadModels } =
+    useProcessData();
   const { filters: filtersData, materials, models, postProcessing } = data;
   const filters: IFilterItem[] =
     filtersData.length === 0 ? filtersEmpty : filtersData;
 
+  useEffect(() => {
+    loadAllData(filtersEmpty);
+  }, []);
+
   const searchModels = (name: string) => {
-    console.log("Process| searchModels", name);
+    console.log("Process| searchModels | passiv", name);
     // yeggiSearchModels(name);
   };
-
   const applyFilters = (filterItemList: IFilterItem[]) => {
     console.log("Process| Apply Filter", filterItemList);
-    loadData(filterItemList);
+    loadAllData(filterItemList);
   };
-
   const startNewProcess = () => {
     setState((prevState) => ({ ...prevState, processList: [{}] }));
   };
-
   const createEmptryProcess = (): void => {
     console.log("Process| create Emptry Process");
     setState((prevState) => ({
@@ -171,11 +180,9 @@ export const ProcessView: React.FC<Props> = (props) => {
       navigate("/process/model");
     }
   };
-
   const setGridState = (grid: boolean) => {
     setState((prevState) => ({ ...prevState, grid }));
   };
-
   const getProgressByPath = (path: string): IProgress => {
     let progress: IProgress = {
       title: "Modell finden",
@@ -244,8 +251,8 @@ export const ProcessView: React.FC<Props> = (props) => {
       progress: getProgressByPath(path),
       activeProcessList: path === "upload" ? [-1] : prevState.activeProcessList,
     }));
+    if (path === "model") loadModelData(filters);
   };
-
   const selectModel = (model: IModel): void => {
     console.log("Process| selectModel", model);
 
@@ -263,6 +270,9 @@ export const ProcessView: React.FC<Props> = (props) => {
   const selectManufacturer = (manufacturer: IManufacturer): void => {};
   const selectPostProcessing = (postProcessing: IPostProcessing): void => {};
   const selectAdditive = (additive: IAdditive): void => {};
+  const setFilterOpen = (open: boolean): void => {
+    setState((prevState) => ({ ...prevState, filterOpen: open }));
+  };
 
   return (
     <ProcessContext.Provider
@@ -274,11 +284,14 @@ export const ProcessView: React.FC<Props> = (props) => {
         selectProcess,
         setProgress,
         setGridState,
+        setFilterOpen,
         searchModels,
       }}
     >
-      <div className="flex flex-col xl:flex-row gap-10 p-5">
+      <div className="relativ flex flex-col xl:flex-row gap-10 p-5">
         <Filter
+          setFilterOpen={setFilterOpen}
+          filterOpen={filterOpen}
           filters={filters}
           applyFilters={applyFilters}
           guideAnswers={guideAnswers}
@@ -307,6 +320,7 @@ export const ProcessView: React.FC<Props> = (props) => {
               path="upload"
               element={
                 <ModelUpload
+                  uploadModels={uploadModels}
                   addProcessList={addProcessList}
                   setProgress={setProgress}
                 />

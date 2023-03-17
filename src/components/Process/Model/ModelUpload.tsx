@@ -13,10 +13,11 @@ import { useNavigate } from "react-router-dom";
 interface Props {
   addProcessList: (process: IProcess[]) => void;
   setProgress(path: string): void;
+  uploadModels(files: File[]): void;
 }
 
 export const ModelUpload: React.FC<Props> = (props) => {
-  const { addProcessList, setProgress } = props;
+  const { addProcessList, setProgress, uploadModels } = props;
   const { t } = useTranslation();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
@@ -128,6 +129,7 @@ export const ModelUpload: React.FC<Props> = (props) => {
           },
         }))
       );
+      uploadModels(fileList);
       navigate("/process/material");
     } else {
       setError(true);

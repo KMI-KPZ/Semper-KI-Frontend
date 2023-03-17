@@ -4,18 +4,25 @@ import SortIcon from "@mui/icons-material/Sort";
 import SearchIcon from "@mui/icons-material/Search";
 
 import { ProcessContext } from "../../ProcessView";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
 const Search: React.FC = () => {
-  const { processState, setGridState, searchModels } =
+  const { processState, setGridState, searchModels, setFilterOpen } =
     useContext(ProcessContext);
   const [search, setSearch] = useState<string>("");
 
-  const handleClickButton = (
+  const handleOnClickGridButton = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     grid: boolean
   ) => {
     e.preventDefault();
     setGridState(grid);
+  };
+  const handleOnClickFilterButton = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    setFilterOpen(true);
   };
 
   const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,8 +38,8 @@ const Search: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-row w-full justify-between">
-      <div className="flex flex-row w-[70%]">
+    <div className="flex flex-row flex-wrap gap-3 xl: xl:flex-nowrap w-full justify-between">
+      <div className="flex flex-row w-full xl:w-[70%]">
         <input
           type="text"
           className="border-none pl-5 w-[85%] bg-gray-200"
@@ -42,35 +49,39 @@ const Search: React.FC = () => {
           onChange={handleOnChangeInput}
         />
         <div
-          className="flex flex-row w-[15%] justify-center items-center bg-gray-300"
+          className="flex flex-row w-[15%] justify-center items-center bg-gray-300 text-white"
           onClick={handleOnClickSearchButton}
         >
-          <SearchIcon className="text-white scale-150" />
+          <SearchIcon fontSize="large" />
         </div>
       </div>
-      <div className="flex flex-row items-center justify-center bg-gray-200 p-2 w-20">
-        <SortIcon className="search-icon-sort" />
+      <div className="flex flex-row items-center justify-center bg-gray-200 p-2 w-20 hover:cursor-pointer hover:bg-gray-300">
+        <SortIcon fontSize="large" />
       </div>
       <div
-        className={`flex flex-row items-center justify-center bg-gray-200 p-2 w-20 ${
-          processState.grid ? "bg-gray-500" : ""
-        }`}
-        onClick={(e) => handleClickButton(e, true)}
+        onClick={handleOnClickFilterButton}
+        className="xl:hidden flex flex-row items-center justify-center bg-gray-200 p-2 w-20 hover:cursor-pointer hover:bg-gray-300"
       >
-        <div className="grid grid-cols-2 gap-0">
-          <RectangleIcon className="" />
-          <RectangleIcon className="" />
-          <RectangleIcon className="" />
-          <RectangleIcon className="" />
+        <FilterAltIcon fontSize="large" />
+      </div>
+      <div
+        className={`flex flex-row items-center justify-center bg-gray-200 p-2 w-20 hover:cursor-pointer hover:bg-gray-300 ${
+          processState.grid ? "bg-gray-400" : ""
+        }`}
+        onClick={(e) => handleOnClickGridButton(e, true)}
+      >
+        <div className="flex flex-row justify-between">
+          <RectangleIcon />
+          <RectangleIcon />
         </div>
       </div>
       <div
-        className={`flex flex-row items-center justify-center bg-gray-200 p-2 w-20 ${
-          processState.grid ? "" : "bg-gray-500"
+        className={`flex flex-row items-center justify-center bg-gray-200 p-2 w-20 hover:cursor-pointer hover:bg-gray-300 ${
+          processState.grid ? "" : "bg-gray-400"
         }`}
-        onClick={(e) => handleClickButton(e, false)}
+        onClick={(e) => handleOnClickGridButton(e, false)}
       >
-        <div className="flex flex-col justify-between scale-x-[300%]">
+        <div className="flex flex-col justify-between">
           <RectangleIcon />
           <RectangleIcon />
         </div>

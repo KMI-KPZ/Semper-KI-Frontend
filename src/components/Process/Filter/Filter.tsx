@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IFilterItem } from "./Interface";
+import CloseIcon from "@mui/icons-material/Close";
 import "./Filter.scss";
 import { Button } from "@mui/material";
 
 import FilterCard from "./FilterCard";
 import { IProgress } from "../../../interface/Interface";
+import { use } from "i18next";
+import { AppContext } from "../../App/App";
 
 interface Props {
+  filterOpen: boolean;
+  setFilterOpen(open: boolean): void;
   progress: IProgress;
   filters: IFilterItem[];
   guideAnswers: IFilterItem[];
@@ -55,7 +60,15 @@ const hydrateFilter = (
 };
 
 const Filter: React.FC<Props> = (props) => {
-  const { applyFilters, filters, guideAnswers, progress } = props;
+  const { setAppState } = useContext(AppContext);
+  const {
+    applyFilters,
+    filters,
+    guideAnswers,
+    progress,
+    filterOpen,
+    setFilterOpen,
+  } = props;
   const hydratedFilterList: IFilterItem[] = hydrateFilter(
     filters,
     guideAnswers
@@ -66,7 +79,6 @@ const Filter: React.FC<Props> = (props) => {
   });
   const { categoryList, filterList } = state;
   const { t } = useTranslation();
-
   const callApplyFilters = () => {
     applyFilters(
       filterList.map((filterItem: IFilterItem) => {
@@ -76,11 +88,6 @@ const Filter: React.FC<Props> = (props) => {
       })
     );
   };
-
-  useEffect(() => {
-    callApplyFilters();
-  }, [progress]);
-
   const setFilterItem = (newFilterItem: IFilterItem) => {
     setState((prevState) => ({
       ...prevState,
@@ -95,8 +102,9 @@ const Filter: React.FC<Props> = (props) => {
       ],
     }));
   };
-
-  const onClickReset = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleOnClickResetButton = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
     e.preventDefault();
     setState((prevState) => ({
       ...prevState,
@@ -108,13 +116,15 @@ const Filter: React.FC<Props> = (props) => {
         return newFilterItem;
       }),
     }));
+    setFilterOpen(false);
   };
-
-  const onClickApply = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleOnClickApplyButton = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
     e.preventDefault();
     callApplyFilters();
+    setFilterOpen(false);
   };
-
   const handleOnClickMenuOpen = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     category: ICategory,
@@ -134,10 +144,43 @@ const Filter: React.FC<Props> = (props) => {
       ],
     }));
   };
+  const handleOnClickCloseButton = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    setFilterOpen(false);
+  };
+
+  useEffect(() => {
+    setAppState((prevState) => ({ ...prevState, stopScroll: filterOpen }));
+  }, [filterOpen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1280) setFilterOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
-    <div className="hidden xl:flex flex-col h-fit bg-white justify-between p-5 gap-10">
+    <div
+      className={`xl:flex flex-col h-fit bg-white justify-between p-5 gap-10 ${
+        filterOpen === true
+          ? "flex flex-col bg-white justify-between p-5 gap-10 absolute top-0 left-0 right-0 overflow-x-hidden overflow-y-scroll w-screen h-fit"
+          : "hidden"
+      }`}
+    >
       <div className="flex flex-col justify-start gap-2 overflow-x-hidden">
+        <div className="xl:hidden flex flex-row-reverse w-full">
+          <div
+            className="hover:bg-gray-300 hover:cursor-pointer p-3"
+            onClick={handleOnClickCloseButton}
+          >
+            <CloseIcon fontSize="large" />
+          </div>
+        </div>
         <h2 className="">{t("filter.headline")}</h2>
         {categoryList.map((category: ICategory, categoryIndex: number) => (
           <FilterCard
@@ -156,13 +199,13 @@ const Filter: React.FC<Props> = (props) => {
       <div className="flex justify-center gap-2 flex-col xl:flex-row text-white">
         <div
           className="flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer"
-          onClick={onClickReset}
+          onClick={handleOnClickResetButton}
         >
           Reset
         </div>
         <div
           className="flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer"
-          onClick={onClickApply}
+          onClick={handleOnClickApplyButton}
         >
           Anwenden
         </div>

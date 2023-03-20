@@ -25,6 +25,7 @@ import Header from "./Header/Header";
 import { removeItem } from "../../services/utils";
 import Procedure from "./Procedure/Procedure";
 import useProcessData from "../../hooks/useProcessData";
+import { arrayBuffer } from "stream/consumers";
 
 interface Props {
   guideAnswers: IFilterItem[];
@@ -266,7 +267,19 @@ export const ProcessView: React.FC<Props> = (props) => {
     }));
     navigate("/process/material");
   };
-  const selectMaterial = (material: IMaterial): void => {};
+  const selectMaterial = (material: IMaterial): void => {
+    console.log("Process| selectMaterial", material);
+
+    let processList: IProcess[] = state.processList;
+    state.activeProcessList.forEach((processIndex: number, index: number) => {
+      processList[processIndex] = { ...processList[processIndex], material };
+    });
+    setState((prevState) => ({
+      ...prevState,
+      processList,
+    }));
+    navigate("/process/postprocessing");
+  };
   const selectManufacturer = (manufacturer: IManufacturer): void => {};
   const selectPostProcessing = (postProcessing: IPostProcessing): void => {};
   const selectAdditive = (additive: IAdditive): void => {};
@@ -297,7 +310,7 @@ export const ProcessView: React.FC<Props> = (props) => {
           guideAnswers={guideAnswers}
           progress={progress}
         />
-        <div className="flex flex-col gap-10 max-w-6xl">
+        <div className="flex flex-col gap-10 max-w-6xl w-full">
           <Header />
           <Routes>
             <Route index element={<Navigate to="/process/model" />} />

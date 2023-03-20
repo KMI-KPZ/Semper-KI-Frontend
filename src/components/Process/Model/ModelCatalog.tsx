@@ -20,6 +20,7 @@ interface State {
 
 export const ModelCatalog: React.FC<Props> = (props) => {
   const { models, processState, selectModel, setProgress } = props;
+  const { grid } = processState;
   const [state, setState] = useState<State>({ popUp: false, model: undefined });
   useEffect(() => {
     setProgress("model");
@@ -30,9 +31,14 @@ export const ModelCatalog: React.FC<Props> = (props) => {
   const closeModelView = () => {
     setState((prevState) => ({ ...prevState, popUp: false, model: undefined }));
   };
-  const classNameList: string = processState.grid === true ? "" : "list";
   return (
-    <div className={`model-catalog ${classNameList}`}>
+    <div
+      className={`flex gap-y-5 ${
+        grid === true
+          ? "flex-row flex-wrap justify-between"
+          : "flex-col flex-nowrap "
+      }`}
+    >
       {models.length > 0 ? (
         <>
           {models.map((model: IModel, index: number) => (
@@ -49,7 +55,11 @@ export const ModelCatalog: React.FC<Props> = (props) => {
             onOutsideClick={closeModelView}
           >
             {state.model !== undefined ? (
-              <ModelView model={state.model} selectModel={selectModel} />
+              <ModelView
+                model={state.model}
+                selectModel={selectModel}
+                closeModelView={closeModelView}
+              />
             ) : null}
           </PopUp>
         </>

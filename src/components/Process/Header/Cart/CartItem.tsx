@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { IconDelete } from "../../../../config/Icons";
 import { IProcess } from "../../../../interface/Interface";
 import { ProcessContext } from "../../ProcessView";
-import StatusIcon from "../StatusIcon.tsx/StatusIcon";
+import StatusIcon from "../StatusIcon/StatusIcon";
 
 interface Props {
   process?: IProcess;
@@ -40,28 +40,30 @@ const CartItem: React.FC<Props> = (props) => {
 
   return (
     <div
-      className={`process-cart-item ${active ? "active" : ""}`}
+      className={`flex flex-row justify-start items-center gap-8 bg-white h-12 px-3 py-2 hover:bg-gray-300 hover:cursor-pointer 
+      `}
+      // ${active === true ? "pb-5 h-16" : ""}
       onClick={handleOnClickCard}
     >
       {isItem === true ? (
-        <div className="process-cart-icons">
+        <div className="flex flex-col gap-2 items-center justify-center">
           <input
             checked={active}
             type="checkbox"
-            className="process-cart-icon"
+            className="h-4"
             onChange={handleOnChangeCheckbox}
           />
           <img
             alt="button delete item"
             src={IconDelete}
-            className="process-cart-icon"
+            className="h-4"
             onClick={handleOnClickDeleteIcon}
           />
         </div>
       ) : null}
-      <img src={icon} alt="icon" />
-      {title}
-      {process === undefined ? null : <StatusIcon process={process} />}
+      <img src={icon} alt="icon" className="h-8" />
+      <h3 className="whitespace-nowrap">{title}</h3>
+      {/* {process === undefined ? null : <StatusIcon process={process} />} */}
     </div>
   );
 };

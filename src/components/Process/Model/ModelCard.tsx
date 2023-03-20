@@ -28,34 +28,60 @@ export const ModelCard: React.FC<Props> = (props) => {
     openModelView(model);
   };
 
-  const classNameList: string = grid === true ? "" : "list";
-
   return (
-    <div className={`model-card ${classNameList}`} onClick={handleOnClickCard}>
+    <div
+      className={`flex justify-start items-center bg-white overflow-hidden hover:cursor-pointer hover:bg-gray-300 ${
+        grid === true
+          ? "flex-col basis-[48%] sm:basis-[32%] md:basis-[23.5%]"
+          : "w-full flex-row"
+      }`}
+      onClick={handleOnClickCard}
+    >
       <img
-        className={`model-card-img ${classNameList}`}
+        className={`object-cover ${
+          grid === true
+            ? "min-w-full max-w-[200%] h-44"
+            : "w-44 max-h-44 min-h-full "
+        }`}
         src={model.URI}
         alt="Model"
       />
-      <h2 className="model-card-headline">{model.title}</h2>
-      <div className={`model-card-tags ${classNameList}`}>
-        {model.tags.map((title: string, index: number) => (
-          <div key={index} className="model-card-tag">
-            {title}
-          </div>
-        ))}
-      </div>
-      {grid === false ? (
-        <div className="model-card-specs">
-          <div>Lizens: {model.license}</div>
-          <div>Zertifikate:</div>
-          {model.certificate.map((title: string, index: number) => (
-            <div key={index}>{title}</div>
+      <div
+        className={`flex justify-around md:justify-between items-center p-3 gap-2  h-full ${
+          grid === true ? "flex-col " : "w-full flex-row gap-5"
+        }`}
+      >
+        <h2 className="model-card-headline">{model.title}</h2>
+        <div
+          className={`hidden md:flex  flex-wrap gap-2 items-center justify-center ${
+            grid === true ? "flex-row" : "flex-col"
+          }`}
+        >
+          {model.tags.map((title: string, index: number) => (
+            <div key={index} className="rounded-lg bg-gray-200 px-2 py-1">
+              {title}
+            </div>
           ))}
         </div>
-      ) : null}
-      <div className="model-card-button" onClick={handleOnClickSelect}>
-        <Button variant="contained">Auswählen</Button>
+        {grid === false ? (
+          <div className="hidden md:flex flex-col gap-2 items-center justify-center">
+            <div>Lizens: {model.license}</div>
+            <div>Zertifikate:</div>
+            {model.certificate.map((title: string, index: number) => (
+              <div key={index}>{title}</div>
+            ))}
+          </div>
+        ) : null}
+        <div
+          className={`flex  flex-wrap gap-2 ${
+            grid === true ? "flex-row" : "flex-col"
+          }`}
+          onClick={handleOnClickSelect}
+        >
+          <div className="text-white flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer">
+            Auswählen
+          </div>
+        </div>
       </div>
     </div>
   );

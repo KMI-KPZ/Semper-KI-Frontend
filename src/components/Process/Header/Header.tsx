@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { ProcessContext } from "../ProcessView";
 import Search from "./Search/Search";
-import "./Header.scss";
 import Cart from "./Cart/Cart";
 import { Wizard } from "./Wizard/Wizard";
 
@@ -10,13 +9,13 @@ const Header: React.FC = () => {
   const { progress } = processState;
 
   return (
-    <div className="process-header">
+    <div className="flex flex-col">
       <Cart />
-      <div className="process-header-box">
+      <div className="flex flex-col p-2 gap-2 bg-white">
         {progress.link !== "/process/upload" ? (
           <Wizard processState={processState} />
         ) : null}
-        <h1 className="process-headline">{progress.title}</h1>
+        <h1 className="text-center text-3xl">{progress.title}</h1>
         {progress.type === 0 ? <Search /> : null}
       </div>
     </div>

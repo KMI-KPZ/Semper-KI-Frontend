@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import CartItem from "./CartItem";
-import "./Cart.scss";
 import { ProcessContext } from "../../ProcessView";
 import { IconModel, IconPlus, IconUpload } from "../../../../config/Icons";
 import { IProcess } from "../../../../interface/Interface";
@@ -24,7 +23,7 @@ const Cart: React.FC<Props> = () => {
   };
 
   return (
-    <div className="process-cart">
+    <div className="flex flex-row flex-wrap gap-5 max-w-full mb-5">
       <CartItem
         active={processState.activeProcessList.includes(-1)}
         icon={IconUpload}

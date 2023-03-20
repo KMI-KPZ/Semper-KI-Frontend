@@ -8,10 +8,6 @@
         "links":["/process/material"]
     },
     {
-        "title":"wizard.procedure",
-        "links":["/process/procedure"]
-    },
-    {
         "title":"wizard.post-processing",
         "links":["/process/postprocessing"]
     }

@@ -201,7 +201,7 @@ const Filter: React.FC<Props> = (props) => {
           className="flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer"
           onClick={handleOnClickResetButton}
         >
-          Reset
+          Zurücksetzen
         </div>
         <div
           className="flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer"

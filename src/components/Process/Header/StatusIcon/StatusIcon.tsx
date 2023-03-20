@@ -2,7 +2,6 @@ import React from "react";
 import { IconCheck, IconQuestionMark, IconX } from "../../../../config/Icons";
 import { EProcessStatusType } from "../../../../interface/enums";
 import { IProcess } from "../../../../interface/Interface";
-import "./StatusIcon.scss";
 
 interface Props {
   process?: IProcess;
@@ -29,22 +28,25 @@ const StatusIcon: React.FC<Props> = (props) => {
   let img = IconCheck;
   switch (status) {
     case 0:
-      className = "ok";
+      className = "bg-green-300";
       img = IconCheck;
       break;
     case 1:
-      className = "error";
+      className = "bg-red-300";
       img = IconX;
       break;
     case 2:
-      className = "missing";
+      className = "bg-amber-300";
       img = IconQuestionMark;
       break;
   }
 
   return (
-    <div className={`status-icon ${className}`} title={className}>
-      <img className="status-icon-img" src={img} alt={`status ${className}`} />
+    <div
+      className={`flex flex-row justify-center items-center rounded-full h-4 w-4  ${className}`}
+      title={className}
+    >
+      <img className="w-2 h-2" src={img} alt={`status ${className}`} />
     </div>
   );
 };

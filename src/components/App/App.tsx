@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
 import useCRSFToken from "../../hooks/useCSRFToken";
@@ -32,9 +32,11 @@ import AdminModelView from "../Admin/AdminModelView";
 import AdminMaterialView from "../Admin/AdminMaterialView";
 import AdminOrderView from "../Admin/AdminOrderView";
 import Background from "../Background/Background";
+import Blog from "../Blog/Blog";
 
 export interface IAppState {
   stopScroll: boolean;
+  blogOpen: boolean;
   processList: IProcess[];
   orderList: IOrder[];
   guideFilter: IFilterItem[];
@@ -48,6 +50,7 @@ export interface IAppContext {
 export const AppContext = createContext<IAppContext>({
   appState: {
     stopScroll: false,
+    blogOpen: false,
     processList: [{}],
     orderList: [],
     guideFilter: [],
@@ -57,6 +60,7 @@ export const AppContext = createContext<IAppContext>({
 
 const initialState: IAppState = {
   stopScroll: false,
+  blogOpen: false,
   processList: [{}],
   orderList: [],
   guideFilter: [],
@@ -64,10 +68,11 @@ const initialState: IAppState = {
 
 const App: React.FC = () => {
   const [state, setState] = useState<IAppState>(initialState);
-  const { stopScroll, guideFilter, orderList, processList } = state;
+  const { stopScroll, blogOpen, guideFilter, orderList, processList } = state;
   const { CSRFToken } = useCRSFToken();
   const { isLoggedIn, userType, user, loadLoggedIn } = useUser();
   const { data, loadData, clearData } = useAdmin();
+  const { pathname } = useLocation();
 
   const setProcessList = (processList: IProcess[]): void => {
     setState((prevState) => ({ ...prevState, processList }));
@@ -75,6 +80,22 @@ const App: React.FC = () => {
 
   const setFilter = (guideFilter: IFilterItem[]): void => {
     setState((prevState) => ({ ...prevState, guideFilter }));
+  };
+
+  const openBlog = () => {
+    setState((prevState) => ({
+      ...prevState,
+      blogOpen: true,
+      stopScroll: true,
+    }));
+  };
+
+  const closeBlog = () => {
+    setState((prevState) => ({
+      ...prevState,
+      blogOpen: false,
+      stopScroll: false,
+    }));
   };
 
   useEffect(() => {
@@ -90,6 +111,10 @@ const App: React.FC = () => {
       clearData();
     }
   }, [userType]);
+
+  useEffect(() => {
+    if (blogOpen === true && pathname === "/blog") closeBlog();
+  }, [pathname]);
 
   const adminRoutes = (
     <Route element={<PrivateAdminRoutes userType={userType} />}>
@@ -139,18 +164,24 @@ const App: React.FC = () => {
   return (
     <AppContext.Provider value={{ appState: state, setAppState: setState }}>
       <div
-        className={`flex flex-col gap-5 justify-between min-h-screen font-ptsans items-center
-        ${stopScroll === true ? "overflow-hidden h-screen w-screen" : ""}`}
+        className={`flex flex-col justify-between min-h-screen font-ptsans items-center
+        ${stopScroll === true ? "overflow-hidden h-screen w-screen" : ""}
+        ${blogOpen === true ? "" : "gap-5"}`}
         data-testid="app"
       >
-        <Header isLoggedIn={isLoggedIn} userType={userType} />
-        <Breadcrumb />
+        <Header
+          isLoggedIn={isLoggedIn}
+          userType={userType}
+          closeBlog={closeBlog}
+        />
+        {blogOpen === false ? <Breadcrumb /> : null}
         <main className="w-full max-w-[1600px] flex flex-col justify-start items-center flex-grow">
           <Routes data-testid="routes">
             <Route
               index
               element={<Home isLoggedIn={isLoggedIn} userType={userType} />}
             />
+            <Route path="blog" element={<Blog openBlog={openBlog} />} />
             <Route
               path="process/*"
               element={<ProcessView guideAnswers={guideFilter} />}

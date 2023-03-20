@@ -1,4 +1,3 @@
-import "./Wizard.scss";
 import React from "react";
 import WizardCard from "./WizardCard";
 import { IProcess } from "../../../../interface/Interface";
@@ -43,7 +42,7 @@ export const Wizard: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="wizard">
+    <div className="flex flex-row justify-around items-center">
       {wizardItems.map((wizardItem: IWizardItem, index: number) => (
         <WizardCard
           statusType={getStatusByIndex(index)}

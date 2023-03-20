@@ -2,28 +2,40 @@ import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import { Delete } from "@mui/icons-material";
 import React from "react";
 import { IMaterial } from "../../../interface/Interface";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface Props {
-  material?: IMaterial;
+  material: IMaterial;
+  selectMaterial: (material: IMaterial) => void;
+  closeMaterialView(): void;
 }
 
 export const MaterialView: React.FC<Props> = (props) => {
-  const { material } = props;
+  const { closeMaterialView, material, selectMaterial } = props;
   return (
-    <div className="process-content-container">
-      <div className="headline dark">Material/Verfahren</div>
-      {material && (
-        <div className="content-container row box">
-          <ViewInArIcon sx={{ fontSize: "200px", margin: "20px" }} />
-          <div>{material.title}</div>
-          <Delete sx={{ fontSize: "50px", margin: "20px" }} />
+    <div className="flex flex-col gap-5 items-center justify-start bg-white h-screen w-screen xl:w-fit xl:max-h-[90vh] overflow-x-hidden overflow-y-scroll">
+      <div className="xl:hidden flex flex-row-reverse w-full">
+        <div
+          className="hover:bg-gray-300 hover:cursor-pointer p-3"
+          onClick={closeMaterialView}
+        >
+          <CloseIcon fontSize="large" />
         </div>
-      )}
-      {!material && (
-        <div className="content-container box column">
-          Noch Kein Material/Verfahren gewählt!
+      </div>
+      <h2 className="">{material.title}</h2>
+      <img className="w-full xl:max-w-xl" src={material.URI} alt="Model" />
+      <div className="model-view-tags">
+        {material.propList.map((title: string, index: number) => (
+          <div key={index} className="model-view-tag">
+            {title}
+          </div>
+        ))}
+      </div>
+      <div className="pb-2" onClick={(e) => selectMaterial(material)}>
+        <div className=" text-white flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer">
+          Auswählen
         </div>
-      )}
+      </div>
     </div>
   );
 };

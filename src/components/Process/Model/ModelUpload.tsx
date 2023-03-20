@@ -1,5 +1,4 @@
 import "../../../styles.scss";
-import "./Model.scss";
 
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import React, { useEffect, useRef, useState } from "react";
@@ -137,21 +136,24 @@ export const ModelUpload: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="model-upload">
+    <div className="flex flex-col p-5 gap-5 bg-white justify-center items-center">
       {error && <div className="error">{t("model.upload.error")}</div>}
-      <div className="model-upload-files">
+      <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
         {fileList.map((file: File, index: number) => (
-          <div key={index} className="model-upload-file">
+          <div
+            key={index}
+            className="flex flex-col justify-center items-center gap-2 bg-gray-100 p-2"
+          >
             <div className="canvas">
               <ViewInArIcon sx={{ fontSize: "90px", margin: "auto" }} />
             </div>
             {file.name}
-            <div className="model-upload-file-row">
+            <div className="flex flex-row gap-2 items-center justify-center">
               {getFileSizeAsString(file.size)}
               <img
                 alt="button delete model"
                 src={IconDelete}
-                className="model-delete-icon"
+                className="w-6 h-6 hover:cursor-pointer hover:bg-gray-300"
                 onClick={(e) => deleteFile(e, index)}
               />
             </div>
@@ -159,7 +161,7 @@ export const ModelUpload: React.FC<Props> = (props) => {
         ))}
       </div>
       <div
-        className="model-upload-card"
+        className="max-w-2xl bg-gray-100 flex flex-col items-center justify-center gap-2 p-2 hover:cursor-pointer hover:bg-gray-300"
         onClick={handleClickUploadCard}
         onDragEnter={handleDragOnUploadCard}
         onDragLeave={handleDragOnUploadCard}
@@ -172,28 +174,18 @@ export const ModelUpload: React.FC<Props> = (props) => {
           multiple
           ref={hiddenFileInput}
           onChange={handleChangeHiddenInput}
-          style={{ display: "none" }}
+          className="hidden"
         />
-        {/* {dragActive && (
-          <div
-            className="drag-file-element"
-            onDragEnter={handleDragOnUploadCard}
-            onDragLeave={handleDragOnUploadCard}
-            onDragOver={handleDragOnUploadCard}
-            onDrop={handleDropOnUploadCard}
-          ></div>
-        )} */}
-        <img src={IconUpload} className="model-upload-icon" alt="" />
+        <img src={IconUpload} className="h-40 w-40" alt="" />
         <h2>{t("model.upload.card.headline")}</h2>
         {t("model.upload.card.text")}
       </div>
-      <Button
-        variant="contained"
-        className="model-upload-button"
+      <div
+        className="max-w-[150px] text-white flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer"
         onClick={handleClickNext}
       >
         {t("model.upload.next")}
-      </Button>
+      </div>
     </div>
   );
 };

@@ -87,8 +87,14 @@ export const ProcessView: React.FC<Props> = (props) => {
   const { grid, processList, progress, activeProcessList, filterOpen } = state;
 
   const { filters: filtersEmpty } = useFilter();
-  const { data, loadAllData, loadMaterialData, loadModelData, uploadModels } =
-    useProcessData();
+  const {
+    data,
+    loadAllData,
+    loadMaterialData,
+    loadModelData,
+    loadPostProcessingData,
+    uploadModels,
+  } = useProcessData();
   const { filters: filtersData, materials, models, postProcessing } = data;
   const filters: IFilterItem[] =
     filtersData.length === 0 ? filtersEmpty : filtersData;
@@ -96,7 +102,24 @@ export const ProcessView: React.FC<Props> = (props) => {
   useEffect(() => {
     loadAllData(filtersEmpty);
   }, []);
+  const loadData = (title?: string) => {
+    console.log("Process| loadData", title);
+    switch (title?.toLocaleLowerCase()) {
+      case "model":
+        loadModelData(filters);
+        break;
+      case "material":
+        loadMaterialData(filters);
+        break;
+      case "postprocessing":
+        loadPostProcessingData(filters);
+        break;
 
+      default:
+        loadAllData(filters);
+        break;
+    }
+  };
   const searchModels = (name: string): void => {
     console.log("Process| searchModels | passiv", name);
     // yeggiSearchModels(name);
@@ -246,7 +269,7 @@ export const ProcessView: React.FC<Props> = (props) => {
       progress: getProgressByPath(path),
       activeProcessList: path === "upload" ? [-1] : prevState.activeProcessList,
     }));
-    if (path === "model") loadModelData(filters);
+    loadData(path);
   };
   const selectModel = (model: IModel): void => {
     console.log("Process| selectModel", model);
@@ -362,7 +385,7 @@ export const ProcessView: React.FC<Props> = (props) => {
               element={
                 <PostProcessingView
                   grid={grid}
-                  processList={processList}
+                  postprocessings={postProcessing}
                   selectPostProcessing={selectPostProcessing}
                   setProgress={setProgress}
                 />

@@ -1,6 +1,4 @@
 import "../../../styles.scss";
-
-import "./Material.scss";
 import React, { useEffect, useState } from "react";
 import { MaterialCatalogCard } from "./MaterialCatalogCard";
 import { IMaterial } from "../../../interface/Interface";

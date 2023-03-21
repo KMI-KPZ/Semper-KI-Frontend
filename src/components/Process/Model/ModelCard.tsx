@@ -1,8 +1,5 @@
-import "../../../styles.scss";
-
 import { IModel } from "../../../interface/Interface";
 import React from "react";
-import { Button } from "@mui/material";
 
 interface Props {
   model: IModel;

@@ -1,31 +1,31 @@
-import { IMaterial } from "../../../interface/Interface";
 import React from "react";
-import { useTranslation } from "react-i18next";
-interface Props {
-  material: IMaterial;
+import { IPostProcessing } from "../../../interface/Interface";
+
+interface Props<Item> {
+  item: Item;
   grid: boolean;
-  selectMaterial: (material: IMaterial) => void;
-  openMaterialView(material: IMaterial): void;
+  selectItem(item: Item): void;
+  openItemView(item: Item): void;
 }
 
-export const MaterialCatalogCard: React.FC<Props> = (props) => {
-  const { material, selectMaterial, openMaterialView, grid } = props;
-  const { t } = useTranslation();
+const ItemCard = <Item extends IPostProcessing>(props: Props<Item>) => {
+  const { grid, item, openItemView, selectItem } = props;
 
   const handleOnClickSelect = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    selectMaterial(material);
+    selectItem(item);
   };
 
   const handleOnClickCard = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.preventDefault();
-    openMaterialView(material);
+    openItemView(item);
   };
+
   return (
     <div
       className={`flex justify-start items-center bg-white overflow-hidden hover:cursor-pointer hover:bg-gray-300 ${
@@ -41,31 +41,26 @@ export const MaterialCatalogCard: React.FC<Props> = (props) => {
             ? "min-w-full max-w-[200%] h-44"
             : "w-44 max-h-44 min-h-full "
         }`}
-        src={material.URI}
-        alt="Material"
+        src={item.URI}
+        alt="Model"
       />
       <div
         className={`flex justify-around md:justify-between items-center p-3 gap-2  h-full ${
           grid === true ? "flex-col " : "w-full flex-row gap-5"
         }`}
       >
-        <h2 className="text-center">{material.title}</h2>
-        <div className="hidden 2xl:flex flex-col gap-2 items-center justify-center">
-          {material.propList.map((title: string, index: number) => (
-            <div key={index}>{title}</div>
-          ))}
-        </div>
+        <h2 className="text-2xl font-bold">{item.title}</h2>
         <div
-          className={`flex  flex-wrap gap-2 ${
-            grid === true ? "flex-row" : "flex-col"
+          className={`text-white flex flex-row justify-center items-center  p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer ${
+            grid === true ? "w-full" : "w-fit"
           }`}
           onClick={handleOnClickSelect}
         >
-          <div className="text-white flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer">
-            Auswählen
-          </div>
+          Auswählen
         </div>
       </div>
     </div>
   );
 };
+
+export default ItemCard;

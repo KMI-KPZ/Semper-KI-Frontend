@@ -33,8 +33,6 @@ export const Wizard: React.FC<Props> = (props) => {
       case 1:
         return activeProcess.material === undefined ? 2 : 0;
       case 2:
-        return activeProcess.procedure === undefined ? 2 : 0;
-      case 3:
         return activeProcess.postProcessing === undefined ? 2 : 0;
       default:
         return 2;

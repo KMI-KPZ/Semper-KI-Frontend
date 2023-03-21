@@ -16,7 +16,7 @@ const Header: React.FC = () => {
           <Wizard processState={processState} />
         ) : null}
         <h1 className="text-center text-3xl">{progress.title}</h1>
-        {progress.type === 0 ? <Search /> : null}
+        <Search />
       </div>
     </div>
   );

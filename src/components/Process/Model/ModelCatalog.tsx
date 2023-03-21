@@ -1,4 +1,3 @@
-import "../../../styles.scss";
 import React, { useEffect, useState } from "react";
 import { IModel } from "../../../interface/Interface";
 import { IProcessState } from "../ProcessView";

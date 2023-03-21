@@ -8,14 +8,10 @@ import {
   IModel,
   IPostProcessing,
   IProcess,
-  IManufacturer,
-  IAdditive,
   IProgress,
 } from "../../interface/Interface";
 import { MaterialCatalog } from "./Material/MaterialCatalog";
 import { PostProcessingView } from "./PostProcessing/PostProcessingView";
-import { AdditiveView } from "./Additive/AdditiveView";
-import { ManufacturerCatalog } from "./Manufacturer/ManufacturerCatalog";
 import Filter from "../../components/Process/Filter/Filter";
 import NewProcess from "./NewProcess";
 import { Error } from "../Error/Error";
@@ -23,9 +19,7 @@ import { IFilterItem } from "./Filter/Interface";
 import useFilter from "../../hooks/useFilter";
 import Header from "./Header/Header";
 import { removeItem } from "../../services/utils";
-import Procedure from "./Procedure/Procedure";
 import useProcessData from "../../hooks/useProcessData";
-import { arrayBuffer } from "stream/consumers";
 
 interface Props {
   guideAnswers: IFilterItem[];
@@ -103,15 +97,15 @@ export const ProcessView: React.FC<Props> = (props) => {
     loadAllData(filtersEmpty);
   }, []);
 
-  const searchModels = (name: string) => {
+  const searchModels = (name: string): void => {
     console.log("Process| searchModels | passiv", name);
     // yeggiSearchModels(name);
   };
-  const applyFilters = (filterItemList: IFilterItem[]) => {
+  const applyFilters = (filterItemList: IFilterItem[]): void => {
     console.log("Process| Apply Filter", filterItemList);
     loadAllData(filterItemList);
   };
-  const startNewProcess = () => {
+  const startNewProcess = (): void => {
     setState((prevState) => ({ ...prevState, processList: [{}] }));
   };
   const createEmptryProcess = (): void => {
@@ -181,7 +175,7 @@ export const ProcessView: React.FC<Props> = (props) => {
       navigate("/process/model");
     }
   };
-  const setGridState = (grid: boolean) => {
+  const setGridState = (grid: boolean): void => {
     setState((prevState) => ({ ...prevState, grid }));
   };
   const getProgressByPath = (path: string): IProgress => {
@@ -246,7 +240,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     }
     return progress;
   };
-  const setProgress = (path: string) => {
+  const setProgress = (path: string): void => {
     setState((prevState) => ({
       ...prevState,
       progress: getProgressByPath(path),
@@ -280,9 +274,22 @@ export const ProcessView: React.FC<Props> = (props) => {
     }));
     navigate("/process/postprocessing");
   };
-  const selectManufacturer = (manufacturer: IManufacturer): void => {};
-  const selectPostProcessing = (postProcessing: IPostProcessing): void => {};
-  const selectAdditive = (additive: IAdditive): void => {};
+  const selectPostProcessing = (postProcessing: IPostProcessing): void => {
+    console.log("Process| selectPostProcessing", postProcessing);
+
+    let processList: IProcess[] = state.processList;
+    state.activeProcessList.forEach((processIndex: number, index: number) => {
+      processList[processIndex] = {
+        ...processList[processIndex],
+        postProcessing,
+      };
+    });
+    setState((prevState) => ({
+      ...prevState,
+      processList,
+    }));
+    navigate("/cart");
+  };
   const setFilterOpen = (open: boolean): void => {
     setState((prevState) => ({ ...prevState, filterOpen: open }));
   };
@@ -351,36 +358,12 @@ export const ProcessView: React.FC<Props> = (props) => {
               }
             />
             <Route
-              path="procedure"
-              element={<Procedure setProgress={setProgress} />}
-            />
-
-            <Route
-              path="manufacturer"
-              element={
-                <ManufacturerCatalog
-                  selectManufacturer={selectManufacturer}
-                  setProgress={setProgress}
-                />
-              }
-            />
-
-            <Route
               path="postprocessing"
               element={
                 <PostProcessingView
+                  grid={grid}
                   processList={processList}
                   selectPostProcessing={selectPostProcessing}
-                  setProgress={setProgress}
-                />
-              }
-            />
-            <Route
-              path="additive"
-              element={
-                <AdditiveView
-                  processList={processList}
-                  selectAdditive={selectAdditive}
                   setProgress={setProgress}
                 />
               }

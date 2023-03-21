@@ -1,11 +1,8 @@
-import "../../../styles.scss";
-
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import React, { useEffect, useRef, useState } from "react";
 import { IProcess } from "../../../interface/Interface";
 import { getFileSizeAsString } from "../../../services/utils";
 import { useTranslation } from "react-i18next";
-import { Button } from "@mui/material";
 import { IconDelete, IconUpload } from "../../../config/Icons";
 import { useNavigate } from "react-router-dom";
 

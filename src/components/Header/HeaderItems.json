@@ -37,7 +37,7 @@
         "extern": false,
         "preferred":"header",
         "userType": [0,1],
-        "loggedIn":true
+        "loggedIn":false
     },
     {
         "title": "Abmelden",

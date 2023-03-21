@@ -1,8 +1,7 @@
-import ViewInArIcon from "@mui/icons-material/ViewInAr";
-import { Delete } from "@mui/icons-material";
 import React from "react";
 import { IMaterial } from "../../../interface/Interface";
 import CloseIcon from "@mui/icons-material/Close";
+import Button from "../../Button/Button";
 
 interface Props {
   material: IMaterial;
@@ -32,9 +31,7 @@ export const MaterialView: React.FC<Props> = (props) => {
         ))}
       </div>
       <div className="pb-2" onClick={(e) => selectMaterial(material)}>
-        <div className=" text-white flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer">
-          Auswählen
-        </div>
+        <Button title="Auswählen" />
       </div>
     </div>
   );

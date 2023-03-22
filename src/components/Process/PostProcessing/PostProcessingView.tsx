@@ -2,16 +2,19 @@ import React, { useEffect } from "react";
 import { IPostProcessing } from "../../../interface/Interface";
 import { useTranslation } from "react-i18next";
 import Catalog from "./Catalog";
+import { IProcessState } from "../ProcessView";
 
 interface Props {
-  grid: boolean;
+  processState: IProcessState;
   postprocessings: IPostProcessing[];
   selectPostProcessing: (postProcessing: IPostProcessing) => void;
   setProgress(path: string): void;
 }
 
 export const PostProcessingView: React.FC<Props> = (props) => {
-  const { setProgress, grid, postprocessings, selectPostProcessing } = props;
+  const { setProgress, processState, postprocessings, selectPostProcessing } =
+    props;
+  const { grid, searchText } = processState;
   const { t } = useTranslation();
   useEffect(() => {
     setProgress("postprocessing");
@@ -21,6 +24,7 @@ export const PostProcessingView: React.FC<Props> = (props) => {
     <div className="flex flex-col gap-y-5">
       <Catalog
         grid={grid}
+        searchText={searchText}
         items={postprocessings}
         selectItem={selectPostProcessing}
       />

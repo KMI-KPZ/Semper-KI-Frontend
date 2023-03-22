@@ -32,6 +32,7 @@ export interface IProcessState {
   processList: IProcess[];
   activeProcessList: number[];
   grid: boolean;
+  searchText: string;
   progress: IProgress;
   filterOpen: boolean;
 }
@@ -51,6 +52,7 @@ const initialProcessState = (cart?: IProcess[]): IProcessState => ({
   processList:
     cart !== undefined && cart.length > 0 ? cart : [{ title: "Item 1" }],
   activeProcessList: [0],
+  searchText: "",
   grid: true,
   progress: { title: "Modell finden", link: "/process/model", type: 0 },
   filterOpen: false,
@@ -131,8 +133,8 @@ export const ProcessView: React.FC<Props> = (props) => {
     }
   };
   const searchModels = (name: string): void => {
-    console.log("Process| searchModels | passiv", name);
-    // yeggiSearchModels(name);
+    console.log("Process| searchModels ", name);
+    setState((prevState) => ({ ...prevState, searchText: name }));
   };
   const applyFilters = (filterItemList: IFilterItem[]): void => {
     console.log("Process| Apply Filter", filterItemList);
@@ -341,7 +343,7 @@ export const ProcessView: React.FC<Props> = (props) => {
         searchModels,
       }}
     >
-      <div className="relativ flex flex-col xl:flex-row gap-10 p-5">
+      <div className="relativ flex flex-col xl:flex-row gap-10">
         <Filter
           setFilterOpen={setFilterOpen}
           filterOpen={filterOpen}
@@ -350,7 +352,7 @@ export const ProcessView: React.FC<Props> = (props) => {
           guideAnswers={guideAnswers}
           progress={progress}
         />
-        <div className="flex flex-col gap-10 max-w-6xl w-full">
+        <div className="flex flex-col gap-10 max-w-6xl p-5 w-full xl:w-[1152px]">
           <Header />
           <Routes>
             <Route index element={<Navigate to="/process/model" />} />
@@ -383,7 +385,7 @@ export const ProcessView: React.FC<Props> = (props) => {
               path="material"
               element={
                 <MaterialCatalog
-                  grid={grid}
+                  processState={state}
                   materials={materials}
                   selectMaterial={selectMaterial}
                   setProgress={setProgress}
@@ -394,7 +396,7 @@ export const ProcessView: React.FC<Props> = (props) => {
               path="postprocessing"
               element={
                 <PostProcessingView
-                  grid={grid}
+                  processState={state}
                   postprocessings={postProcessing}
                   selectPostProcessing={selectPostProcessing}
                   setProgress={setProgress}

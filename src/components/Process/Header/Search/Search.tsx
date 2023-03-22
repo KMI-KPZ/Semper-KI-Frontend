@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import RectangleIcon from "@mui/icons-material/Rectangle";
 import SortIcon from "@mui/icons-material/Sort";
 import SearchIcon from "@mui/icons-material/Search";
@@ -25,6 +25,10 @@ const Search: React.FC = () => {
     setFilterOpen(true);
   };
 
+  useEffect(() => {
+    searchModels(search.toLocaleLowerCase());
+  }, [search]);
+
   const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setSearch(e.currentTarget.value);
@@ -38,8 +42,8 @@ const Search: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-row flex-wrap gap-3 xl: xl:flex-nowrap w-full justify-between">
-      <div className="flex flex-row w-full xl:w-[70%]">
+    <div className="flex flex-row flex-wrap gap-3 2xl:flex-nowrap w-full justify-between">
+      <div className="flex flex-row w-full 2xl:w-[70%]">
         <input
           type="text"
           className="border-none pl-5 w-[85%] bg-gray-200"
@@ -60,7 +64,7 @@ const Search: React.FC = () => {
       </div>
       <div
         onClick={handleOnClickFilterButton}
-        className="xl:hidden flex flex-row items-center justify-center bg-gray-200 p-2 w-20 hover:cursor-pointer hover:bg-gray-300"
+        className="2xl:hidden flex flex-row items-center justify-center bg-gray-200 p-2 w-20 hover:cursor-pointer hover:bg-gray-300"
       >
         <FilterAltIcon fontSize="large" />
       </div>

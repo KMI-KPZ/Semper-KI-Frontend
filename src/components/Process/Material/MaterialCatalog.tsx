@@ -4,10 +4,11 @@ import { MaterialCatalogCard } from "./MaterialCatalogCard";
 import { IMaterial } from "../../../interface/Interface";
 import PopUp from "../../PopUp/PopUp";
 import { MaterialView } from "./MaterialView";
+import { IProcessState } from "../ProcessView";
 
 interface Props {
   materials: IMaterial[];
-  grid: boolean;
+  processState: IProcessState;
   selectMaterial: (material: IMaterial) => void;
   setProgress(path: string): void;
 }
@@ -18,7 +19,8 @@ interface State {
 }
 
 export const MaterialCatalog: React.FC<Props> = (props) => {
-  const { selectMaterial, setProgress, materials, grid } = props;
+  const { selectMaterial, setProgress, materials, processState } = props;
+  const { grid, searchText } = processState;
   const [state, setState] = useState<State>({
     popUp: false,
     material: undefined,
@@ -36,6 +38,20 @@ export const MaterialCatalog: React.FC<Props> = (props) => {
       material: undefined,
     }));
   };
+  const filterBySearch = (material: IMaterial): boolean => {
+    if (searchText === "") {
+      return true;
+    }
+    if (
+      material.title.toLocaleLowerCase().includes(searchText) ||
+      material.propList.filter((prop) =>
+        prop.toLocaleLowerCase().includes(searchText)
+      ).length > 0
+    )
+      return true;
+    return false;
+  };
+
   return (
     <div
       className={`flex gap-y-5 ${
@@ -46,15 +62,17 @@ export const MaterialCatalog: React.FC<Props> = (props) => {
     >
       {materials.length > 0 ? (
         <>
-          {materials.slice(0, 12).map((material: IMaterial, index: number) => (
-            <MaterialCatalogCard
-              grid={grid}
-              selectMaterial={selectMaterial}
-              openMaterialView={openMaterialView}
-              material={material}
-              key={index}
-            />
-          ))}
+          {materials
+            .filter((material) => filterBySearch(material))
+            .map((material: IMaterial, index: number) => (
+              <MaterialCatalogCard
+                grid={grid}
+                selectMaterial={selectMaterial}
+                openMaterialView={openMaterialView}
+                material={material}
+                key={index}
+              />
+            ))}
           <PopUp
             open={state.popUp === true && state.material !== undefined}
             onOutsideClick={closeMaterialView}

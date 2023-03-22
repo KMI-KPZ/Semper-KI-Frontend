@@ -156,7 +156,7 @@ const Filter: React.FC<Props> = (props) => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 1280) setFilterOpen(false);
+      if (window.innerWidth > 1536) setFilterOpen(false);
     };
     window.addEventListener("resize", handleResize);
     return () => {
@@ -166,7 +166,7 @@ const Filter: React.FC<Props> = (props) => {
 
   return (
     <div
-      className={`xl:flex flex-col h-fit bg-white justify-between p-5 gap-10 ${
+      className={`2xl:flex flex-col h-fit bg-white justify-between p-5 gap-10 ${
         filterOpen === true
           ? "flex flex-col bg-white justify-between p-5 gap-10 absolute top-0 left-0 right-0 overflow-x-hidden overflow-y-scroll w-screen h-fit"
           : "hidden"

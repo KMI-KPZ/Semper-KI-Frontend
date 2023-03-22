@@ -8,6 +8,7 @@ interface Props<Item> {
   grid: boolean;
   items: Item[];
   selectItem(item: Item): void;
+  searchText: string;
 }
 
 interface State<Item> {
@@ -16,7 +17,7 @@ interface State<Item> {
 }
 
 const Catalog = <Item extends IPostProcessing>(props: Props<Item>) => {
-  const { items, selectItem, grid } = props;
+  const { items, selectItem, grid, searchText } = props;
   const [state, setState] = useState<State<Item>>({
     popUp: false,
     itemOpen: undefined,
@@ -33,6 +34,23 @@ const Catalog = <Item extends IPostProcessing>(props: Props<Item>) => {
     }));
   };
 
+  const filterBySearch = (item: Item): boolean => {
+    if (searchText === "") {
+      return true;
+    }
+    if (
+      item.title.toLocaleLowerCase().includes(searchText) ||
+      (item.valueList !== undefined &&
+        item.valueList.filter((value) =>
+          value.toLocaleLowerCase().includes(searchText)
+        ).length > 0) ||
+      (item.value !== undefined &&
+        item.value.toLocaleLowerCase().includes(searchText))
+    )
+      return true;
+    return false;
+  };
+
   return (
     <div
       className={`flex gap-y-5 ${
@@ -43,15 +61,17 @@ const Catalog = <Item extends IPostProcessing>(props: Props<Item>) => {
     >
       {items.length > 0 ? (
         <>
-          {items.map((item: Item, index: number) => (
-            <ItemCard
-              grid={grid}
-              item={item}
-              openItemView={openItemView}
-              selectItem={selectItem}
-              key={index}
-            />
-          ))}
+          {items
+            .filter((item) => filterBySearch(item))
+            .map((item: Item, index: number) => (
+              <ItemCard
+                grid={grid}
+                item={item}
+                openItemView={openItemView}
+                selectItem={selectItem}
+                key={index}
+              />
+            ))}
           <PopUp
             open={popUp === true && itemOpen !== undefined}
             onOutsideClick={closeItemView}

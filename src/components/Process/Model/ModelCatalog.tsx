@@ -19,7 +19,7 @@ interface State {
 
 export const ModelCatalog: React.FC<Props> = (props) => {
   const { models, processState, selectModel, setProgress } = props;
-  const { grid } = processState;
+  const { grid, searchText } = processState;
   const [state, setState] = useState<State>({ popUp: false, model: undefined });
   useEffect(() => {
     setProgress("model");
@@ -30,6 +30,23 @@ export const ModelCatalog: React.FC<Props> = (props) => {
   const closeModelView = () => {
     setState((prevState) => ({ ...prevState, popUp: false, model: undefined }));
   };
+  const filterBySearch = (model: IModel): boolean => {
+    if (searchText === "") {
+      return true;
+    }
+    if (
+      model.title.toLocaleLowerCase().includes(searchText) ||
+      model.tags.filter((tag) => tag.toLocaleLowerCase().includes(searchText))
+        .length > 0 ||
+      model.certificate.filter((certificate) =>
+        certificate.toLocaleLowerCase().includes(searchText)
+      ).length > 0 ||
+      model.license.toLocaleLowerCase().includes(searchText)
+    )
+      return true;
+    return false;
+  };
+
   return (
     <div
       className={`flex gap-y-5 ${
@@ -40,15 +57,17 @@ export const ModelCatalog: React.FC<Props> = (props) => {
     >
       {models.length > 0 ? (
         <>
-          {models.map((model: IModel, index: number) => (
-            <ModelCard
-              grid={processState.grid}
-              selectModel={selectModel}
-              model={model}
-              key={index}
-              openModelView={openModelView}
-            />
-          ))}
+          {models
+            .filter((model, index) => filterBySearch(model))
+            .map((model: IModel, index: number) => (
+              <ModelCard
+                grid={processState.grid}
+                selectModel={selectModel}
+                model={model}
+                key={index}
+                openModelView={openModelView}
+              />
+            ))}
           <PopUp
             open={state.popUp === true && state.model !== undefined}
             onOutsideClick={closeModelView}

@@ -138,15 +138,6 @@ const App: React.FC = () => {
 
   const privateRoutes = (
     <Route element={<PrivateRoutes user={user} />}>
-      <Route
-        path="cart"
-        element={
-          <ShoppingCart
-            processList={processList}
-            setProcessList={setProcessList}
-          />
-        }
-      />
       <Route path="orders" element={<Orders orderList={orderList} />} />
       <Route path="proceedings" element={<Error text="proceedings" />} />
       <Route path="assignments" element={<Error text="assignments" />} />
@@ -180,6 +171,15 @@ const App: React.FC = () => {
             <Route
               index
               element={<Home isLoggedIn={isLoggedIn} userType={userType} />}
+            />
+            <Route
+              path="cart"
+              element={
+                <ShoppingCart
+                  processList={processList}
+                  setProcessList={setProcessList}
+                />
+              }
             />
             <Route path="blog" element={<Blog openBlog={openBlog} />} />
             <Route

@@ -20,9 +20,12 @@ import useFilter from "../../hooks/useFilter";
 import Header from "./Header/Header";
 import { removeItem } from "../../services/utils";
 import useProcessData from "../../hooks/useProcessData";
+import useCart from "../../hooks/useCart";
 
 interface Props {
   guideAnswers: IFilterItem[];
+  // processList?: IProcess[];
+  // setProcessList(processList: IProcess[]): void;
 }
 
 export interface IProcessState {
@@ -44,16 +47,17 @@ export interface IProcessContext {
   setFilterOpen(open: boolean): void;
   searchModels(name: string): void;
 }
-const initialProcessState: IProcessState = {
-  processList: [{ title: "Item 1" }],
+const initialProcessState = (cart?: IProcess[]): IProcessState => ({
+  processList:
+    cart !== undefined && cart.length > 0 ? cart : [{ title: "Item 1" }],
   activeProcessList: [0],
   grid: true,
   progress: { title: "Modell finden", link: "/process/model", type: 0 },
   filterOpen: false,
-};
+});
 
 export const ProcessContext = createContext<IProcessContext>({
-  processState: initialProcessState,
+  processState: initialProcessState(),
   createEmptryProcess: () => {
     console.log("Error ProcessContext createEmptryProcess");
   },
@@ -83,7 +87,8 @@ export const ProcessContext = createContext<IProcessContext>({
 export const ProcessView: React.FC<Props> = (props) => {
   const { guideAnswers } = props;
   const navigate = useNavigate();
-  const [state, setState] = useState<IProcessState>(initialProcessState);
+  const { cart, loadCart, updateCart } = useCart();
+  const [state, setState] = useState<IProcessState>(initialProcessState(cart));
   const { grid, processList, progress, activeProcessList, filterOpen } = state;
 
   const { filters: filtersEmpty } = useFilter();
@@ -100,8 +105,13 @@ export const ProcessView: React.FC<Props> = (props) => {
     filtersData.length === 0 ? filtersEmpty : filtersData;
 
   useEffect(() => {
+    loadCart();
     loadAllData(filtersEmpty);
   }, []);
+  useEffect(() => {
+    updateCart(processList);
+  }, [processList]);
+
   const loadData = (title?: string) => {
     console.log("Process| loadData", title);
     switch (title?.toLocaleLowerCase()) {

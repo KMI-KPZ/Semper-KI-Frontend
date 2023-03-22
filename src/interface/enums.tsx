@@ -36,7 +36,7 @@ export enum EGuideQuestionState {
   "overview",
 }
 
-export enum EPostProcessingOption {
+export enum EPostProcessingOptionType {
   "selection",
   "number",
   "text",

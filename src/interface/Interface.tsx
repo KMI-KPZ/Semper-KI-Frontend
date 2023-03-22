@@ -1,6 +1,6 @@
 import {
   EOrderState,
-  EPostProcessingOption,
+  EPostProcessingOptionType,
   EProgressType,
   EUserType,
 } from "./enums";
@@ -64,7 +64,7 @@ export interface IPostProcessing {
   checked: boolean;
   value: string;
   valueList: string[];
-  type: EPostProcessingOption;
+  type: EPostProcessingOptionType;
   URI: string;
 }
 

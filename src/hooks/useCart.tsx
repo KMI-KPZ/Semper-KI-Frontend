@@ -17,7 +17,7 @@ const useCart = (): ReturnProps => {
       .get(`${process.env.REACT_APP_API_URL}/public/getCart/`)
       .then((res) => {
         console.log("useCart| loadCart Successful", res.data);
-        setCart(res.data);
+        setCart(res.data.cart);
       })
       .catch((error) => {
         console.log("useCart| loadCart error", error);

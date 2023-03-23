@@ -1,29 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IProcessItem } from "../../interface/Interface";
 import ShoppingCartItem from "./ShoppingCartItem";
 
 interface Props {
+  loadCart(): void;
   processList: IProcessItem[];
   setProcessList(processList: IProcessItem[]): void;
 }
 
 const ShoppingCart: React.FC<Props> = (props) => {
-  const { processList, setProcessList } = props;
+  const { processList, setProcessList, loadCart } = props;
   const navigate = useNavigate();
+
+  useEffect(() => {
+    loadCart();
+  }, []);
+
+  console.log("Shoppingcart", processList);
 
   return (
     <div className="flex flex-col items-center gap-5 w-full p-5">
       <h1 className="text-center p-2 bg-white w-full">Einkaufswagen</h1>
       <section className="flex flex-col gap-5 items-center justify-start w-full">
-        {processList.length < 1 ? (
-          <h2 className="text-center p-2 bg-white w-full">
-            keine aktiven Prozesse
-          </h2>
-        ) : (
+        {processList.length > 0 ? (
           processList.map((process: IProcessItem, index: number) => (
             <ShoppingCartItem process={process} key={index} />
           ))
+        ) : (
+          <h2 className="text-center p-2 bg-white w-full">
+            keine aktiven Prozesse
+          </h2>
         )}
       </section>
       <section className="text-white flex flex-col gap-5 md:flex-row justify-start items-center md:justify-center">

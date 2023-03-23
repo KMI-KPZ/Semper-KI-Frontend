@@ -188,7 +188,8 @@ const App: React.FC = () => {
               path="cart"
               element={
                 <ShoppingCart
-                  processList={processList}
+                  loadCart={loadCart}
+                  processList={cart}
                   setProcessList={setProcessList}
                 />
               }

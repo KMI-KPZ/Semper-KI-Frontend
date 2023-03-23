@@ -7,7 +7,7 @@ import ItemView from "./ItemView";
 interface Props<Item> {
   grid: boolean;
   items: Item[];
-  selectItem(item: Item): void;
+  checkItem(item: Item): void;
   searchText: string;
 }
 
@@ -17,7 +17,7 @@ interface State<Item> {
 }
 
 const Catalog = <Item extends IPostProcessing>(props: Props<Item>) => {
-  const { items, selectItem, grid, searchText } = props;
+  const { items, checkItem, grid, searchText } = props;
   const [state, setState] = useState<State<Item>>({
     popUp: false,
     itemOpen: undefined,
@@ -68,7 +68,7 @@ const Catalog = <Item extends IPostProcessing>(props: Props<Item>) => {
                 grid={grid}
                 item={item}
                 openItemView={openItemView}
-                selectItem={selectItem}
+                checkItem={checkItem}
                 key={index}
               />
             ))}
@@ -80,7 +80,7 @@ const Catalog = <Item extends IPostProcessing>(props: Props<Item>) => {
               <ItemView
                 closeItemView={closeItemView}
                 item={itemOpen}
-                selectItem={selectItem}
+                checkItem={checkItem}
               />
             ) : null}
           </PopUp>

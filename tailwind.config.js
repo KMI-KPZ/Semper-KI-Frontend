@@ -6,8 +6,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#7DBCBC',
-        secondary: '#dd9458'
+        türkis: '#7DBCBC',
+        blau: '#556DB0',
+        violett:"#39287F",
+        orange:"#DD9458",
+        grau:{
+          100:"#D7E2FC",
+          200:"#AEB8D1",
+          300:"#545e75",
+          400:"#060021",
+        }
+
       },
       fontFamily:{
         ptsans: ['PTSans']

@@ -3,7 +3,7 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
 import useCRSFToken from "../../hooks/useCSRFToken";
-import { IOrder, IProcess } from "../../interface/Interface";
+import { IOrder, IProcessItem } from "../../interface/Interface";
 import useUser from "../../hooks/useUser";
 import { Home } from "../Home/Home";
 import { ProcessView } from "../Process/ProcessView";
@@ -33,11 +33,13 @@ import AdminMaterialView from "../Admin/AdminMaterialView";
 import AdminOrderView from "../Admin/AdminOrderView";
 import Background from "../Background/Background";
 import Blog from "../Blog/Blog";
+import useCart from "../../hooks/useCart";
 
 export interface IAppState {
+  cart: IProcessItem[];
   stopScroll: boolean;
   blogOpen: boolean;
-  processList: IProcess[];
+  processList: IProcessItem[];
   orderList: IOrder[];
   guideFilter: IFilterItem[];
 }
@@ -51,6 +53,7 @@ export const AppContext = createContext<IAppContext>({
   appState: {
     stopScroll: false,
     blogOpen: false,
+    cart: [],
     processList: [{}],
     orderList: [],
     guideFilter: [],
@@ -61,6 +64,7 @@ export const AppContext = createContext<IAppContext>({
 const initialState: IAppState = {
   stopScroll: false,
   blogOpen: false,
+  cart: [],
   processList: [{}],
   orderList: [],
   guideFilter: [],
@@ -70,11 +74,13 @@ const App: React.FC = () => {
   const [state, setState] = useState<IAppState>(initialState);
   const { stopScroll, blogOpen, guideFilter, orderList, processList } = state;
   const { CSRFToken } = useCRSFToken();
-  const { isLoggedIn, userType, user, loadLoggedIn } = useUser();
+  const { isLoggedIn, userType, user, loadLoggedIn, isLoggedInResponse } =
+    useUser();
   const { data, loadData, clearData } = useAdmin();
   const { pathname } = useLocation();
+  const { cart, loadCart } = useCart();
 
-  const setProcessList = (processList: IProcess[]): void => {
+  const setProcessList = (processList: IProcessItem[]): void => {
     setState((prevState) => ({ ...prevState, processList }));
   };
 
@@ -103,6 +109,12 @@ const App: React.FC = () => {
       loadLoggedIn();
     }
   }, [CSRFToken]);
+
+  useEffect(() => {
+    if (isLoggedInResponse === true) {
+      loadCart();
+    }
+  }, [isLoggedInResponse]);
 
   useEffect(() => {
     if (userType === EUserType.admin) {
@@ -184,7 +196,7 @@ const App: React.FC = () => {
             <Route path="blog" element={<Blog openBlog={openBlog} />} />
             <Route
               path="process/*"
-              element={<ProcessView guideAnswers={guideFilter} />}
+              element={<ProcessView cart={cart} guideAnswers={guideFilter} />}
             />
             <Route path="test" element={<RequestTest />} />
             <Route path="guide">

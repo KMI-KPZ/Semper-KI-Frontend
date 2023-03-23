@@ -1,10 +1,10 @@
 import React from "react";
 import { IconCheck, IconQuestionMark, IconX } from "../../../../config/Icons";
 import { EProcessStatusType } from "../../../../interface/enums";
-import { IProcess } from "../../../../interface/Interface";
+import { IProcessItem } from "../../../../interface/Interface";
 
 interface Props {
-  process?: IProcess;
+  process?: IProcessItem;
   statusType?: EProcessStatusType;
 }
 
@@ -18,7 +18,7 @@ const StatusIcon: React.FC<Props> = (props) => {
     process.material === undefined ||
     process.procedure === undefined ||
     process.manufacturer === undefined ||
-    process.postProcessing === undefined ||
+    process.postProcessings === undefined ||
     process.additive === undefined
   )
     status = 2;

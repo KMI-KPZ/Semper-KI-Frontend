@@ -10,6 +10,7 @@ const Search: React.FC = () => {
   const { processState, setGridState, searchModels, setFilterOpen } =
     useContext(ProcessContext);
   const [search, setSearch] = useState<string>("");
+  const [touched, setTouched] = useState<boolean>(false);
 
   const handleOnClickGridButton = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -26,11 +27,12 @@ const Search: React.FC = () => {
   };
 
   useEffect(() => {
-    searchModels(search.toLocaleLowerCase());
+    if (touched === true) searchModels(search.toLocaleLowerCase());
   }, [search]);
 
   const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+    if (touched === false) setTouched(true);
     setSearch(e.currentTarget.value);
   };
 

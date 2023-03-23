@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { getIconByName, IconExpand } from "../../config/Icons";
-import { IManufacturer, IOrder, IProcess } from "../../interface/Interface";
+import { IManufacturer, IOrder, IProcessItem } from "../../interface/Interface";
 
 interface Props {
   order: IOrder;
@@ -24,7 +24,7 @@ const Order: React.FC<Props> = (props) => {
 
   const calcManufacturer = (): IManufacturer[] => {
     let manufacturerList: IManufacturer[] = [];
-    order.processList.forEach((process: IProcess) => {
+    order.processList.forEach((process: IProcessItem) => {
       const manufacturer = process.manufacturer;
       if (manufacturer !== undefined) {
         manufacturerList.push(manufacturer);
@@ -90,7 +90,7 @@ const Order: React.FC<Props> = (props) => {
             ${processOpen === true ? "" : "max-h-96 overflow-hidden"}
             `}
           >
-            {order.processList.map((process: IProcess, index: number) => (
+            {order.processList.map((process: IProcessItem, index: number) => (
               <div
                 key={index}
                 className="

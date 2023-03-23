@@ -2,36 +2,18 @@ import React, { ReactNode } from "react";
 import "./LoadingAnimation.scss";
 
 interface Props {
-  type?: number;
+  className?: string;
 }
 
-const WaveAnimation: ReactNode = (
-  <div className="loader">
-    <div className="wave wave-1"></div>
-    <div className="wave wave-2"></div>
-    <div className="wave wave-3"></div>
-  </div>
-);
-
-const CoinAnimation: ReactNode = (
-  <div className="lds-circle">
-    <div></div>
-  </div>
-);
-
 const LoadingAnimation: React.FC<Props> = (props) => {
-  const { type } = props;
-  if (type !== undefined) {
-    switch (type) {
-      case 0:
-        return CoinAnimation;
-      case 1:
-        return WaveAnimation;
-      default:
-        return CoinAnimation;
-    }
-  }
-  return CoinAnimation;
+  const { className } = props;
+  return (
+    <div className="lds-circle inline-block">
+      <div
+        className={`${className} bg-white inline-block w-16 h-16 m-2 rounded-full`}
+      ></div>
+    </div>
+  );
 };
 
 export default LoadingAnimation;

@@ -5,12 +5,12 @@ import {
   EUserType,
 } from "./enums";
 
-export interface IProcess {
+export interface IProcessItem {
   title?: string;
   model?: IModel;
   material?: IMaterial;
   procedure?: IProcedure;
-  postProcessing?: IPostProcessing;
+  postProcessings?: IPostProcessing[];
   manufacturer?: IManufacturer;
   additive?: IAdditive;
 }
@@ -22,6 +22,7 @@ export interface IProgress {
 }
 
 export interface IModel {
+  id: string;
   title: string;
   tags: string[];
   date: string;
@@ -31,6 +32,7 @@ export interface IModel {
 }
 
 export interface IMaterial {
+  id: string;
   title: string;
   propList: string[];
   URI: string;
@@ -60,6 +62,7 @@ export interface ILocation {
 }
 
 export interface IPostProcessing {
+  id: string;
   title: string;
   checked: boolean;
   value: string;
@@ -104,7 +107,7 @@ export interface ISelection {
 
 export interface IOrder {
   orderId?: number;
-  processList: IProcess[];
+  processList: IProcessItem[];
   date: Date;
   orderState: EOrderState;
   bill?: File;

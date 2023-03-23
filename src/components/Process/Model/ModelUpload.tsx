@@ -1,24 +1,32 @@
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import React, { useEffect, useRef, useState } from "react";
-import { IProcess } from "../../../interface/Interface";
 import { getFileSizeAsString } from "../../../services/utils";
 import { useTranslation } from "react-i18next";
 import { IconDelete, IconUpload } from "../../../config/Icons";
 import { useNavigate } from "react-router-dom";
+import useModelUpload from "../../../hooks/useModelUpload";
+import { IModel } from "../../../interface/Interface";
+import LoadingAnimation from "../../LoadingAnimation/LoadingAnimation";
 
 interface Props {
-  addProcessList: (process: IProcess[]) => void;
   setProgress(path: string): void;
-  uploadModels(files: File[]): void;
+  createProcessItem(model?: IModel): void;
 }
 
 export const ModelUpload: React.FC<Props> = (props) => {
-  const { addProcessList, setProgress, uploadModels } = props;
+  const { setProgress, createProcessItem } = props;
   const { t } = useTranslation();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
   const [fileList, setFileList] = useState<File[]>([]);
   const [error, setError] = useState<boolean>(false);
+
+  const {
+    models,
+    error: responseError,
+    loading,
+    uploadModels,
+  } = useModelUpload();
   const navigate = useNavigate();
   useEffect(() => {
     setProgress("upload");
@@ -105,36 +113,39 @@ export const ModelUpload: React.FC<Props> = (props) => {
 
   const showError = () => {
     setError(true);
-    setTimeout(() => {
-      setError(false);
-    }, 5000);
   };
 
   const handleClickNext = () => {
     if (fileList.length > 0) {
-      addProcessList(
-        fileList.map((file: File) => ({
-          title: file.name,
-          model: {
-            title: file.name,
-            certificate: [""],
-            date: "",
-            license: "",
-            tags: [],
-            URI: "",
-          },
-        }))
-      );
       uploadModels(fileList);
-      navigate("/process/material");
     } else {
-      setError(true);
+      showError();
     }
   };
+
+  useEffect(() => {
+    if (error === true)
+      setTimeout(() => {
+        setError(false);
+      }, 5000);
+  }, [error]);
+
+  useEffect(() => {
+    if (models.length > 0) {
+      models.forEach((model) => createProcessItem(model));
+      navigate("process/model");
+    }
+  }, [models]);
 
   return (
     <div className="flex flex-col p-5 gap-5 bg-white justify-center items-center">
       {error && <div className="error">{t("model.upload.error")}</div>}
+      {responseError && (
+        <div className="error">
+          Beim Upload der Datei ist ein Fehler aufgetreten
+        </div>
+      )}
+      {loading === true ? <LoadingAnimation className="bg-black" /> : null}
       <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
         {fileList.map((file: File, index: number) => (
           <div

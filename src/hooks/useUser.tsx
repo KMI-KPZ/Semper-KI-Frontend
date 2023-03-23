@@ -9,6 +9,7 @@ interface ReturnProps {
   userType: EUserType;
   user: IUser | undefined;
   isLoggedIn: boolean;
+  isLoggedInResponse: boolean;
   loadLoggedIn(): void;
   logoutUser(): void;
   deleteUser(): void;
@@ -21,6 +22,7 @@ const useUser = (): ReturnProps => {
   const [userType, setUserType] = useState<EUserType>(EUserType.indefinite);
   const [user, setUser] = useState<IUser | undefined>();
   const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
+  const [isLoggedInResponse, setIsLoggedInResponse] = useState<boolean>(false);
 
   useEffect(() => {
     if (isLoggedIn === true) {
@@ -59,6 +61,7 @@ const useUser = (): ReturnProps => {
       .then((response) => {
         console.log("useUser| loadLoggedIn", response.data);
         setLoggedIn(response.data === "Successful" ? true : false);
+        setIsLoggedInResponse(true);
       })
       .catch((error) => {
         console.log("useUser| loadLoggedIn error", error);
@@ -100,6 +103,7 @@ const useUser = (): ReturnProps => {
     userType,
     user,
     isLoggedIn,
+    isLoggedInResponse,
     logoutUser,
     deleteUser,
     loadLoggedIn,

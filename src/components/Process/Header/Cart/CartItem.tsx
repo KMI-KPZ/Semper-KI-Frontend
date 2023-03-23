@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { IconDelete } from "../../../../config/Icons";
-import { IProcess } from "../../../../interface/Interface";
+import { IProcessItem } from "../../../../interface/Interface";
 import { ProcessContext } from "../../ProcessView";
 import StatusIcon from "../StatusIcon/StatusIcon";
 
 interface Props {
-  process?: IProcess;
+  process?: IProcessItem;
   index?: number;
   active: boolean;
   title: string;
@@ -16,7 +16,7 @@ interface Props {
 
 const CartItem: React.FC<Props> = (props) => {
   const { index, active, title, icon, onClickCard, isItem, process } = props;
-  const { deleteProcess } = useContext(ProcessContext);
+  const { deleteProcessItem: deleteProcess } = useContext(ProcessContext);
 
   const handleOnClickCard = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>

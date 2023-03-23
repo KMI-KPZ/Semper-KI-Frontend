@@ -6,12 +6,12 @@ import ItemCard from "./ItemCard";
 
 interface Props<Item> {
   item: Item;
-  selectItem: (item: Item) => void;
+  checkItem(item: Item): void;
   closeItemView(): void;
 }
 
 const ItemView = <Item extends IPostProcessing>(props: Props<Item>) => {
-  const { closeItemView, item, selectItem } = props;
+  const { closeItemView, item, checkItem } = props;
 
   const renderNumberInput = () => (
     <input className="border" type="number" min="0" />
@@ -60,7 +60,7 @@ const ItemView = <Item extends IPostProcessing>(props: Props<Item>) => {
       <div className="flex flex-row items-center justify-center">
         {renderInput(item.type)}
       </div>
-      <div className="pb-2" onClick={(e) => selectItem(item)}>
+      <div className="pb-2" onClick={(e) => checkItem(item)}>
         <div className=" text-white flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer">
           Auswählen
         </div>

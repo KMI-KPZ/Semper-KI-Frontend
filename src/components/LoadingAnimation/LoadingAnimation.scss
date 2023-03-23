@@ -1,57 +1,7 @@
-.loader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100px;
-    height: 100px;
-  }
-  
-  .wave {
-    position: absolute;
-    top: 25%;
-    left: 25%;
-    width: 50%;
-    height: 50%;
-    border-radius: 50% 50% 0 50%;
-    animation: wave 1.5s ease-in-out infinite;
-  }
-  
-  .wave-1 {
-    background-color: #ff9a9e;
-    animation-delay: -0.32s;
-  }
-  
-  .wave-2 {
-    background-color: #ffc1c1;
-    animation-delay: -0.16s;
-  }
-  
-  .wave-3 {
-    background-color: #ffe3e3;
-    animation-delay: 0s;
-  }
-  
-  @keyframes wave {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
 .lds-circle {
-  display: inline-block;
   transform: translateZ(1px);
 }
 .lds-circle > div {
-  display: inline-block;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border-radius: 50%;
-  background: #fff;
   animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
 @keyframes lds-circle {

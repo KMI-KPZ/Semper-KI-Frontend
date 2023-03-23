@@ -10,7 +10,10 @@ const Blog: React.FC<Props> = (props) => {
     openBlog();
   }, []);
   return (
-    <iframe className="h-screen w-screen" src="https://infai.4imedia.com/" />
+    <iframe
+      className="absolute top-0 left-0 h-screen w-screen"
+      src="https://infai.4imedia.com/"
+    />
   );
 };
 

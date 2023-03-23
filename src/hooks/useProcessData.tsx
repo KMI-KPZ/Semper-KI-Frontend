@@ -9,7 +9,6 @@ interface ReturnProps {
   loadModelData(filters: IFilterItem[]): void;
   loadMaterialData(filters: IFilterItem[]): void;
   loadPostProcessingData(filters: IFilterItem[]): void;
-  uploadModels(files: File[]): void;
 }
 
 export interface IProcessData {
@@ -91,30 +90,12 @@ const useProcessData = (): ReturnProps => {
     return data;
   };
 
-  const uploadModels = (files: File[]) => {
-    const formData = new FormData();
-    files.forEach((file) => {
-      formData.append(file.name, file);
-    });
-    axiosCustom
-      .post(`${process.env.REACT_APP_API_URL}/public/uploadFiles/`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then((response) => {
-        console.log("useProcessData| uploadData Successful", response);
-      })
-      .catch((error) => {
-        console.log("useProcessData| uploadData error", error);
-      });
-  };
-
   return {
     data,
     loadAllData,
     loadMaterialData,
     loadModelData,
     loadPostProcessingData,
-    uploadModels,
   };
 };
 

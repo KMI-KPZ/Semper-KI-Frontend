@@ -1,6 +1,6 @@
 import React from "react";
 import WizardCard from "./WizardCard";
-import { IProcess } from "../../../../interface/Interface";
+import { IProcessItem } from "../../../../interface/Interface";
 
 import _wizardItems from "./WizardItems.json";
 import { IProcessState } from "../../ProcessView";
@@ -18,12 +18,14 @@ interface Props {
 
 export const Wizard: React.FC<Props> = (props) => {
   const { processState } = props;
-  const { activeProcessList, processList, progress } = processState;
-  const activeProcessIndex: number =
-    activeProcessList.length > 0 ? activeProcessList[0] : -1;
-  const activeProcess: IProcess =
-    processList.length > 0 && activeProcessIndex !== -1
-      ? processList[activeProcessIndex]
+  const {
+    activeItemIndex: activeItemIndex,
+    items: processList,
+    progress,
+  } = processState;
+  const activeProcess: IProcessItem =
+    processList.length > 0 && activeItemIndex !== -1
+      ? processList[activeItemIndex]
       : {};
 
   const getStatusByIndex = (index: number): EProcessStatusType => {
@@ -33,7 +35,7 @@ export const Wizard: React.FC<Props> = (props) => {
       case 1:
         return activeProcess.material === undefined ? 2 : 0;
       case 2:
-        return activeProcess.postProcessing === undefined ? 2 : 0;
+        return activeProcess.postProcessings === undefined ? 2 : 0;
       default:
         return 2;
     }

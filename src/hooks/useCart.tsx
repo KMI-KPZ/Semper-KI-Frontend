@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { IProcess } from "../interface/Interface";
+import { IProcessItem } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
-  cart: IProcess[];
+  cart: IProcessItem[];
   loadCart(): void;
-  updateCart(cart: IProcess[]): void;
+  updateCart(cart: IProcessItem[]): void;
 }
 
 const useCart = (): ReturnProps => {
-  const [cart, setCart] = useState<IProcess[]>([]);
+  const [cart, setCart] = useState<IProcessItem[]>([]);
   const { axiosCustom } = useCustomAxios();
 
   const loadCart = () => {
@@ -23,7 +23,7 @@ const useCart = (): ReturnProps => {
         console.log("useCart| loadCart error", error);
       });
   };
-  const updateCart = (cart: IProcess[]) => {
+  const updateCart = (cart: IProcessItem[]) => {
     axiosCustom
       .post(`${process.env.REACT_APP_API_URL}/public/updateCart/`, { cart })
       .then((res) => {

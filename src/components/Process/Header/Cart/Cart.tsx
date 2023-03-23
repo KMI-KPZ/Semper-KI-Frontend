@@ -2,16 +2,19 @@ import React, { useContext } from "react";
 import CartItem from "./CartItem";
 import { ProcessContext } from "../../ProcessView";
 import { IconModel, IconPlus, IconUpload } from "../../../../config/Icons";
-import { IProcess } from "../../../../interface/Interface";
+import { IProcessItem } from "../../../../interface/Interface";
 
 interface Props {}
 
 const Cart: React.FC<Props> = () => {
-  const { processState, createEmptryProcess, selectProcess } =
-    useContext(ProcessContext);
+  const {
+    processState,
+    createProcessItem,
+    selectProcessItem: selectProcess,
+  } = useContext(ProcessContext);
 
   const addNewItem = () => {
-    createEmptryProcess();
+    createProcessItem();
   };
 
   const navigateToUpload = () => {
@@ -25,21 +28,23 @@ const Cart: React.FC<Props> = () => {
   return (
     <div className="flex flex-row flex-wrap gap-5 max-w-full mb-5">
       <CartItem
-        active={processState.activeProcessList.includes(-1)}
+        active={processState.activeItemIndex === -1}
         icon={IconUpload}
         title="Upload"
         onClickCard={navigateToUpload}
         isItem={false}
       />
-      {processState.processList.map((process: IProcess, index: number) => (
+      {processState.items.map((processItem: IProcessItem, index: number) => (
         <CartItem
           key={index}
-          process={process}
+          process={processItem}
           index={index}
-          active={processState.activeProcessList.includes(index)}
+          active={processState.activeItemIndex === index}
           icon={IconModel}
           title={
-            process.title === undefined ? `Item ${index + 1}` : process.title
+            processItem.title === undefined
+              ? `Item ${index + 1}`
+              : processItem.title
           }
           onClickCard={selectItem}
           isItem

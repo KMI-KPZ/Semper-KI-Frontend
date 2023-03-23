@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { IProcess } from "../../interface/Interface";
+import { IProcessItem } from "../../interface/Interface";
 import ShoppingCartItem from "./ShoppingCartItem";
 
 interface Props {
-  processList: IProcess[];
-  setProcessList(processList: IProcess[]): void;
+  processList: IProcessItem[];
+  setProcessList(processList: IProcessItem[]): void;
 }
 
 const ShoppingCart: React.FC<Props> = (props) => {
@@ -21,7 +21,7 @@ const ShoppingCart: React.FC<Props> = (props) => {
             keine aktiven Prozesse
           </h2>
         ) : (
-          processList.map((process: IProcess, index: number) => (
+          processList.map((process: IProcessItem, index: number) => (
             <ShoppingCartItem process={process} key={index} />
           ))
         )}

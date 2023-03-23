@@ -179,7 +179,7 @@ export const Header: React.FC<Props> = (props) => {
   const renderHomeButton = (): JSX.Element => (
     <a
       href="/"
-      className="flex flex-row items-center gap-2 hover:bg-gray-300 hover:cursor-pointer p-2"
+      className="flex flex-row items-center gap-3 hover:bg-gray-300 hover:cursor-pointer p-2"
       onClick={(e) => {
         e.preventDefault();
         closeMenus();
@@ -193,9 +193,12 @@ export const Header: React.FC<Props> = (props) => {
         src={require("../../assets/images/logo192.png")}
         alt="Kiss Logo"
       />
-      <h3 className="font-bold" data-testid="logoName">
-        SEMPER-KI
-      </h3>
+      <div className="flex flex-col justify-start items-end gap-0">
+        <h3 className="font-bold" data-testid="logoName">
+          SEMPER-KI
+        </h3>
+        {/* <h4 className="text-türkis text-sm">Blog</h4> */}
+      </div>
     </a>
   );
   const renderLanguageMenu = (): JSX.Element => (

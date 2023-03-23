@@ -27,7 +27,7 @@ const useModelUpload = (): ReturnProps => {
       })
       .then((res) => {
         console.log("useModelUpload| uploadModels Successful", res.data);
-        setModels(res.data);
+        setModels(res.data.models);
         setLoading(false);
       })
       .catch((error) => {

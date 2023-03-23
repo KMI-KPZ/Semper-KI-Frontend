@@ -109,10 +109,17 @@ export const ProcessView: React.FC<Props> = (props) => {
 
   useEffect(() => {
     console.log("ProcessView| useEffect ", items);
-    updateCart(items);
+    if (
+      items.length > 1 ||
+      (items.length === 1 &&
+        (items[0].model !== undefined ||
+          items[0].material !== undefined ||
+          items[0].postProcessings !== undefined))
+    )
+      updateCart(items);
   }, [items]);
   const loadData = (title?: string) => {
-    console.log("Process| loadData", title);
+    // console.log("Process| loadData", title);
     switch (title?.toLocaleLowerCase()) {
       case "model":
         loadModelData(filters);
@@ -252,7 +259,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     return progress;
   };
   const setProgress = (path: string): void => {
-    console.log("Process| setProgress", path);
+    // console.log("Process| setProgress", path);
     setState((prevState) => ({
       ...prevState,
       progress: getProgressByPath(path),

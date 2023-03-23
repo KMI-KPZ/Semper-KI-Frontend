@@ -133,7 +133,7 @@ export const ModelUpload: React.FC<Props> = (props) => {
   useEffect(() => {
     if (models.length > 0) {
       models.forEach((model) => createProcessItem(model));
-      navigate("process/model");
+      navigate("/process/model");
     }
   }, [models]);
 
@@ -145,7 +145,7 @@ export const ModelUpload: React.FC<Props> = (props) => {
           Beim Upload der Datei ist ein Fehler aufgetreten
         </div>
       )}
-      {loading === true ? <LoadingAnimation className="bg-black" /> : null}
+      {loading === true ? <LoadingAnimation color="black" /> : null}
       <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
         {fileList.map((file: File, index: number) => (
           <div

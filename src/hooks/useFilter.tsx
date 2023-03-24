@@ -17,11 +17,11 @@ const useFilter = (): ReturnProps => {
     axiosCustom
       .get(`${process.env.REACT_APP_API_URL}/public/getFilters/`)
       .then((res) => {
-        console.log("useFilter| loadFilters Successful", res.data);
+        console.log("useFilter | loadFilters ✅ |", res.data);
         setFilters(res.data);
       })
       .catch((error) => {
-        console.log("useFilter| loadFilters error", error);
+        console.log("useFilter | loadFilters ❌ |", error);
       });
   };
 

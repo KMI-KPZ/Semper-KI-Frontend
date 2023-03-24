@@ -26,12 +26,12 @@ const useModelUpload = (): ReturnProps => {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
-        console.log("useModelUpload| uploadModels Successful", res.data);
+        console.log("useModelUpload | uploadModels ✅ |", res.data);
         setModels(res.data.models);
         setLoading(false);
       })
       .catch((error) => {
-        console.log("useModelUpload| uploadModels error", error);
+        console.log("useModelUpload | uploadModels ❌ |", error);
         setLoading(false);
         setError(true);
         setTimeout(() => {

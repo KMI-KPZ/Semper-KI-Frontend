@@ -41,7 +41,7 @@ const useUser = (): ReturnProps => {
       .get(`${process.env.REACT_APP_API_URL}/public/getUser/`)
       .then((response) => {
         const userData = response.data;
-        console.log("useUser| loadUser Successful", userData);
+        console.log("useUser | loadUser ✅ |", userData);
         setUser(
           Object.keys(userData).length === 0 && userData.constructor === Object
             ? undefined
@@ -50,7 +50,7 @@ const useUser = (): ReturnProps => {
         setLoggedIn(true);
       })
       .catch((error) => {
-        console.log("useUser| loadUser Error", error);
+        console.log("useUser | loadUser ❌ |", error);
         setUser(undefined);
       });
   };
@@ -59,12 +59,12 @@ const useUser = (): ReturnProps => {
     axiosCustom
       .get(`${process.env.REACT_APP_API_URL}/public/isLoggedIn/`)
       .then((response) => {
-        console.log("useUser| loadLoggedIn", response.data);
+        console.log("useUser | loadLoggedIn ✅ |", response.data);
         setLoggedIn(response.data === "Successful" ? true : false);
         setIsLoggedInResponse(true);
       })
       .catch((error) => {
-        console.log("useUser| loadLoggedIn error", error);
+        console.log("useUser | loadLoggedIn ❌ |", error);
         setLoggedIn(false);
       });
   };
@@ -73,11 +73,11 @@ const useUser = (): ReturnProps => {
     axiosCustom
       .delete(`${process.env.REACT_APP_API_URL}/public/profileDeleteUser/`)
       .then((response) => {
-        console.log("useUser| deleteUser Successful");
+        console.log("useUser | deleteUser ✅ |");
         navigate("/logout");
       })
       .catch((error) => {
-        console.log("useUser| deleteUser Error", error);
+        console.log("useUser | deleteUser ❌ |", error);
       });
   };
 
@@ -87,10 +87,10 @@ const useUser = (): ReturnProps => {
         userType: EUserType[userType],
       })
       .then((response) => {
-        console.log("useUser| updateUser Successful", response);
+        console.log("useUser | updateUser ✅ |", response);
       })
       .catch((error) => {
-        console.log("useUser| updateUser Error", error);
+        console.log("useUser | updateUser ❌ |", error);
       });
   };
 

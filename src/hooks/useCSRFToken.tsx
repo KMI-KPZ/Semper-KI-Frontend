@@ -20,15 +20,15 @@ const useCRSFToken = (): ReturnProps => {
       .then((response) => {
         const token = Cookies.get("csrftoken");
         if (token !== undefined) {
-          console.log("useCRSFToken| loadCSRFToken Successful");
+          console.log("useCRSFToken | loadCSRFToken ✅ |");
           setCSRFToken(true);
         } else {
-          console.log("useCRSFToken| loadCSRFToken Failed");
+          console.log("useCRSFToken | loadCSRFToken ❌ |");
           setCSRFToken(false);
         }
       })
       .catch((error) => {
-        console.log("useCRSFToken| loadCSRFToken Error", error);
+        console.log("useCRSFToken | loadCSRFToken ❌ |", error);
         setCSRFToken(false);
       });
   };

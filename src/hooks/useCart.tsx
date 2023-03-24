@@ -16,21 +16,22 @@ const useCart = (): ReturnProps => {
     axiosCustom
       .get(`${process.env.REACT_APP_API_URL}/public/getCart/`)
       .then((res) => {
-        console.log("useCart| loadCart Successful", res.data);
+        console.log("useCart | loadCart ✅ |", res.data);
         setCart(res.data.cart);
       })
       .catch((error) => {
-        console.log("useCart| loadCart error", error);
+        console.log("useCart | loadCart ❌ |", error);
       });
   };
+
   const updateCart = (cart: IProcessItem[]) => {
     axiosCustom
       .post(`${process.env.REACT_APP_API_URL}/public/updateCart/`, { cart })
       .then((res) => {
-        console.log("useCart| updateCart Successful", res.data);
+        console.log("useCart | updateCart ✅ |", res.data);
       })
       .catch((error) => {
-        console.log("useCart| updateCart error", error);
+        console.log("useCart | updateCart ❌ |", error);
       });
   };
 

@@ -38,11 +38,11 @@ const useAdmin = (): ReturnProps => {
     axiosCustom
       .get(`${process.env.REACT_APP_API_URL}/admin/getData/`)
       .then((res) => {
-        console.log("useAdmin| loadData Successful", res.data);
+        console.log("useAdmin | loadData ✅ |", res.data);
         setData(res.data);
       })
       .catch((error) => {
-        console.log("useAdmin| loadData error", error);
+        console.log("useAdmin | loadData ❌ |", error);
       });
   };
 

@@ -33,7 +33,6 @@ import AdminMaterialView from "../Admin/AdminMaterialView";
 import AdminOrderView from "../Admin/AdminOrderView";
 import Background from "../Background/Background";
 import Blog from "../Blog/Blog";
-import useCart from "../../hooks/useCart";
 
 export interface IAppState {
   cart: IProcessItem[];
@@ -78,7 +77,6 @@ const App: React.FC = () => {
     useUser();
   const { data, loadData, clearData } = useAdmin();
   const { pathname } = useLocation();
-  const { cart, loadCart } = useCart();
 
   const setProcessList = (processList: IProcessItem[]): void => {
     setState((prevState) => ({ ...prevState, processList }));
@@ -109,12 +107,6 @@ const App: React.FC = () => {
       loadLoggedIn();
     }
   }, [CSRFToken]);
-
-  useEffect(() => {
-    if (isLoggedInResponse === true) {
-      loadCart();
-    }
-  }, [isLoggedInResponse]);
 
   useEffect(() => {
     if (userType === EUserType.admin) {
@@ -184,20 +176,16 @@ const App: React.FC = () => {
               index
               element={<Home isLoggedIn={isLoggedIn} userType={userType} />}
             />
-            <Route
-              path="cart"
-              element={
-                <ShoppingCart
-                  loadCart={loadCart}
-                  processList={cart}
-                  setProcessList={setProcessList}
-                />
-              }
-            />
+            <Route path="cart" element={<ShoppingCart />} />
             <Route path="blog" element={<Blog openBlog={openBlog} />} />
             <Route
               path="process/*"
-              element={<ProcessView cart={cart} guideAnswers={guideFilter} />}
+              element={
+                <ProcessView
+                  isLoggedInResponse={isLoggedInResponse}
+                  guideAnswers={guideFilter}
+                />
+              }
             />
             <Route path="test" element={<RequestTest />} />
             <Route path="guide">

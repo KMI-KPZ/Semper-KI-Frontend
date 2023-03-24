@@ -33,11 +33,11 @@ const useProcessData = (): ReturnProps => {
         filters,
       })
       .then((res) => {
-        console.log("useProcessData| loadAllData Successful", res.data);
+        console.log("useProcessData | loadAllData ✅ |", res.data);
         setData((prevState) => ({ ...prevState, ...res.data }));
       })
       .catch((error) => {
-        console.log("useProcessData| loadAllData error", error);
+        console.log("useProcessData | loadAllData ❌ |", error);
       });
     return data;
   };
@@ -48,11 +48,11 @@ const useProcessData = (): ReturnProps => {
         filters,
       })
       .then((res) => {
-        console.log("useProcessData| loadModelData Successful", res.data);
+        console.log("useProcessData | loadModelData ✅ |", res.data);
         setData((prevState) => ({ ...prevState, ...res.data }));
       })
       .catch((error) => {
-        console.log("useProcessData| loadModelData error", error);
+        console.log("useProcessData | loadModelData ❌ |", error);
       });
     return data;
   };
@@ -63,11 +63,11 @@ const useProcessData = (): ReturnProps => {
         filters,
       })
       .then((res) => {
-        console.log("useProcessData| loadMaterialData Successful", res.data);
+        console.log("useProcessData | loadMaterialData ✅ |", res.data);
         setData((prevState) => ({ ...prevState, ...res.data }));
       })
       .catch((error) => {
-        console.log("useProcessData| loadMaterialData error", error);
+        console.log("useProcessData | loadMaterialData ❌ |", error);
       });
     return data;
   };
@@ -78,14 +78,11 @@ const useProcessData = (): ReturnProps => {
         filters,
       })
       .then((res) => {
-        console.log(
-          "useProcessData| loadPostProcessingData Successful",
-          res.data
-        );
+        console.log("useProcessData | loadPostProcessingData ✅ |", res.data);
         setData((prevState) => ({ ...prevState, ...res.data }));
       })
       .catch((error) => {
-        console.log("useProcessData| loadPostProcessingData error", error);
+        console.log("useProcessData | loadPostProcessingData ❌ |", error);
       });
     return data;
   };

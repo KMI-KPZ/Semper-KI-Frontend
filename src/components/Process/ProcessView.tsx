@@ -23,7 +23,7 @@ import useCart from "../../hooks/useCart";
 
 interface Props {
   guideAnswers: IFilterItem[];
-  cart: IProcessItem[];
+  isLoggedInResponse: boolean;
 }
 
 export interface IProcessState {
@@ -80,11 +80,11 @@ export const ProcessContext = createContext<IProcessContext>({
 });
 
 export const ProcessView: React.FC<Props> = (props) => {
-  const { guideAnswers, cart } = props;
+  const { guideAnswers, isLoggedInResponse } = props;
   const navigate = useNavigate();
+  const { cart, loadCart, updateCart } = useCart();
   const [state, setState] = useState<IProcessState>(initialProcessState(cart));
   const { grid, items, progress, activeItemIndex, filterOpen } = state;
-  const { updateCart } = useCart();
 
   const { filters: filtersEmpty } = useFilter();
   const {
@@ -103,21 +103,31 @@ export const ProcessView: React.FC<Props> = (props) => {
   }, []);
 
   useEffect(() => {
-    if (cart.length > 0)
+    if (isLoggedInResponse === true) {
+      loadCart();
+    }
+  }, [isLoggedInResponse]);
+
+  useEffect(() => {
+    if (
+      cart.length > 0 &&
+      (cart[0].model !== undefined ||
+        cart[0].material !== undefined ||
+        cart[0].postProcessings !== undefined)
+    )
       setState((prevState) => ({ ...prevState, items: cart }));
   }, [cart]);
 
   useEffect(() => {
-    console.log("ProcessView| useEffect ", items);
     if (
-      items.length > 1 ||
-      (items.length === 1 &&
-        (items[0].model !== undefined ||
-          items[0].material !== undefined ||
-          items[0].postProcessings !== undefined))
+      items.length > 0 &&
+      (items[0].model !== undefined ||
+        items[0].material !== undefined ||
+        items[0].postProcessings !== undefined)
     )
       updateCart(items);
   }, [items]);
+
   const loadData = (title?: string) => {
     // console.log("Process| loadData", title);
     switch (title?.toLocaleLowerCase()) {
@@ -269,42 +279,39 @@ export const ProcessView: React.FC<Props> = (props) => {
   };
   const selectModel = (model: IModel): void => {
     console.log("Process| selectModel", model);
-
-    let processList: IProcessItem[] = items;
-    processList[activeItemIndex] = { ...processList[activeItemIndex], model };
-
     setState((prevState) => ({
       ...prevState,
-      items: processList,
+      items: [
+        ...prevState.items.filter((item, index) => index < activeItemIndex),
+        { ...prevState.items[activeItemIndex], model },
+        ...prevState.items.filter((item, index) => index > activeItemIndex),
+      ],
     }));
     navigate("/process/material");
   };
   const selectMaterial = (material: IMaterial): void => {
     console.log("Process| selectMaterial", material);
 
-    let processList: IProcessItem[] = items;
-    processList[activeItemIndex] = {
-      ...processList[activeItemIndex],
-      material,
-    };
-
     setState((prevState) => ({
       ...prevState,
-      items: processList,
+      items: [
+        ...prevState.items.filter((item, index) => index < activeItemIndex),
+        { ...prevState.items[activeItemIndex], material },
+        ...prevState.items.filter((item, index) => index > activeItemIndex),
+      ],
     }));
     navigate("/process/postprocessing");
   };
   const selectPostProcessings = (postProcessings: IPostProcessing[]): void => {
     console.log("Process| selectPostProcessing", postProcessings);
 
-    let processList: IProcessItem[] = state.items;
-    processList[activeItemIndex] = {
-      ...processList[activeItemIndex],
-      postProcessings,
-    };
     setState((prevState) => ({
       ...prevState,
-      items: processList,
+      items: [
+        ...prevState.items.filter((item, index) => index < activeItemIndex),
+        { ...prevState.items[activeItemIndex], postProcessings },
+        ...prevState.items.filter((item, index) => index > activeItemIndex),
+      ],
     }));
     // navigate("/cart");
   };

@@ -3,25 +3,23 @@ import { IProcessItem } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
-  printable: boolean | undefined;
-  price: number | undefined;
-  logistics: boolean | undefined;
-  checkPrintability(cart: IProcessItem[]): void;
-  checkPrices(cart: IProcessItem[]): void;
-  checkLogistics(cart: IProcessItem[]): void;
+  printable: any | undefined;
+  price: any | undefined;
+  logistics: any | undefined;
+  checkPrintability(): void;
+  checkPrices(): void;
+  checkLogistics(): void;
 }
 
 const useCheckout = (): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
-  const [printable, setPrintable] = useState<boolean>();
-  const [price, setPrice] = useState<number>();
-  const [logistics, setLogistics] = useState<boolean>();
+  const [printable, setPrintable] = useState<any>();
+  const [price, setPrice] = useState<any>();
+  const [logistics, setLogistics] = useState<any>();
 
-  const checkPrintability = (cart: IProcessItem[]) => {
+  const checkPrintability = () => {
     axiosCustom
-      .post(`${process.env.REACT_APP_API_URL}/public/checkPrintability/`, {
-        cart,
-      })
+      .get(`${process.env.REACT_APP_API_URL}/public/checkPrintability/`)
       .then((res) => {
         console.log("useCheckout | checkPrintability ✅ |", res.data);
         setPrintable(res.data);
@@ -30,9 +28,9 @@ const useCheckout = (): ReturnProps => {
         console.log("useCheckout | checkPrintability ❌ |", error);
       });
   };
-  const checkPrices = (cart: IProcessItem[]) => {
+  const checkPrices = () => {
     axiosCustom
-      .post(`${process.env.REACT_APP_API_URL}/public/checkPrices/`, { cart })
+      .get(`${process.env.REACT_APP_API_URL}/public/checkPrices/`)
       .then((res) => {
         console.log("useCheckout | checkPrices ✅ |", res.data);
         setPrice(res.data);
@@ -41,9 +39,9 @@ const useCheckout = (): ReturnProps => {
         console.log("useCheckout | checkPrices ❌ |", error);
       });
   };
-  const checkLogistics = (cart: IProcessItem[]) => {
+  const checkLogistics = () => {
     axiosCustom
-      .post(`${process.env.REACT_APP_API_URL}/public/checkLogistics/`, { cart })
+      .get(`${process.env.REACT_APP_API_URL}/public/checkLogistics/`)
       .then((res) => {
         console.log("useCheckout | checkLogistics ✅ |", res.data);
         setLogistics(res.data);

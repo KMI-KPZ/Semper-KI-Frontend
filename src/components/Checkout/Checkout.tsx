@@ -32,7 +32,7 @@ const Checkout: React.FC<Props> = (props) => {
         <h2>Druckbarkeit : {printable}</h2>
         <div
           className="w-full md:w-fit flex flex-row justify-center px-3 py-2 text-white bg-blue-600 rounded hover:bg-blue-400 hover:cursor-pointer"
-          onClick={() => checkPrintability(cart)}
+          onClick={() => checkPrintability()}
         >
           Druckbarkeit prüfen
         </div>
@@ -41,7 +41,7 @@ const Checkout: React.FC<Props> = (props) => {
         <h2>Lieferung : {logistics}</h2>
         <div
           className="w-full md:w-fit flex flex-row justify-center px-3 py-2 text-white bg-blue-600 rounded hover:bg-blue-400 hover:cursor-pointer"
-          onClick={() => checkLogistics(cart)}
+          onClick={() => checkLogistics()}
         >
           Lieferung prüfen
         </div>
@@ -50,7 +50,7 @@ const Checkout: React.FC<Props> = (props) => {
         <h2>Preis : {price}</h2>
         <div
           className="w-full md:w-fit flex flex-row justify-center px-3 py-2 text-white bg-blue-600 rounded hover:bg-blue-400 hover:cursor-pointer"
-          onClick={() => checkPrices(cart)}
+          onClick={() => checkPrices()}
         >
           Preis prüfen
         </div>

@@ -19,7 +19,7 @@ const ShoppingCart: React.FC<Props> = (props) => {
     navigate("/process/model");
   };
   const handleOnClickSendRequest = () => {
-    navigate("/process/overview");
+    navigate("/checkout");
   };
   const handleOnClickClear = () => {
     updateCart([]);

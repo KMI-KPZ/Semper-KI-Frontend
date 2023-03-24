@@ -33,6 +33,7 @@ import AdminMaterialView from "../Admin/AdminMaterialView";
 import AdminOrderView from "../Admin/AdminOrderView";
 import Background from "../Background/Background";
 import Blog from "../Blog/Blog";
+import Checkout from "../Checkout/Checkout";
 
 export interface IAppState {
   cart: IProcessItem[];
@@ -177,6 +178,7 @@ const App: React.FC = () => {
               element={<Home isLoggedIn={isLoggedIn} userType={userType} />}
             />
             <Route path="cart" element={<ShoppingCart />} />
+            <Route path="checkout" element={<Checkout />} />
             <Route path="blog" element={<Blog openBlog={openBlog} />} />
             <Route
               path="process/*"

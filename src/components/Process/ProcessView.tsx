@@ -20,6 +20,7 @@ import useFilter from "../../hooks/useFilter";
 import Header from "./Header/Header";
 import useProcessData from "../../hooks/useProcessData";
 import useCart from "../../hooks/useCart";
+import ModelView from "./Model/ModelView";
 
 interface Props {
   guideAnswers: IFilterItem[];
@@ -124,8 +125,9 @@ export const ProcessView: React.FC<Props> = (props) => {
       (items[0].model !== undefined ||
         items[0].material !== undefined ||
         items[0].postProcessings !== undefined)
-    )
+    ) {
       updateCart(items);
+    }
   }, [items]);
 
   const loadData = (title?: string) => {
@@ -147,18 +149,18 @@ export const ProcessView: React.FC<Props> = (props) => {
     }
   };
   const searchModels = (name: string): void => {
-    console.log("Process| searchModels ", name);
+    console.log("Process | searchModels |", name);
     setState((prevState) => ({ ...prevState, searchText: name }));
   };
   const applyFilters = (filterItemList: IFilterItem[]): void => {
-    console.log("Process| Apply Filter", filterItemList);
+    console.log("Process | applyFilters |", filterItemList);
     loadAllData(filterItemList);
   };
   const startNewProcess = (): void => {
     setState((prevState) => ({ ...prevState, items: [{}] }));
   };
   const createProcessItem = (model?: IModel): void => {
-    console.log("Process| create Emptry Process");
+    console.log("Process | createProcessItem |", model);
 
     setState((prevState) => ({
       ...prevState,
@@ -175,7 +177,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     }));
   };
   const deleteProcessItem = (index: number): void => {
-    console.log("Process| delete Process " + index);
+    console.log("Process | deleteProcessItem |", index);
 
     let processList: IProcessItem[] = items;
     if (processList.length === 1 && index === 0) processList = [];
@@ -189,7 +191,10 @@ export const ProcessView: React.FC<Props> = (props) => {
     navigate("/process/upload");
   };
   const selectProcessItem = (index: number): void => {
-    console.log("Process| select Process " + index);
+    console.log(
+      "Process | selectProcessItem |",
+      index === -1 ? "Upload" : index
+    );
 
     setState((prevState) => ({
       ...prevState,
@@ -278,7 +283,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     if (filters.length > 0) loadData(path);
   };
   const selectModel = (model: IModel): void => {
-    console.log("Process| selectModel", model);
+    console.log("Process | selectModel |", model);
     setState((prevState) => ({
       ...prevState,
       items: [
@@ -290,7 +295,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     navigate("/process/material");
   };
   const selectMaterial = (material: IMaterial): void => {
-    console.log("Process| selectMaterial", material);
+    console.log("Process | selectMaterial |", material);
 
     setState((prevState) => ({
       ...prevState,
@@ -303,7 +308,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     navigate("/process/postprocessing");
   };
   const selectPostProcessings = (postProcessings: IPostProcessing[]): void => {
-    console.log("Process| selectPostProcessing", postProcessings);
+    console.log("Process | selectPostProcessing |", postProcessings);
 
     setState((prevState) => ({
       ...prevState,
@@ -317,6 +322,28 @@ export const ProcessView: React.FC<Props> = (props) => {
   };
   const setFilterOpen = (open: boolean): void => {
     setState((prevState) => ({ ...prevState, filterOpen: open }));
+  };
+  const deselectModel = () => {
+    console.log("Process | removeModel |");
+    setState((prevState) => ({
+      ...prevState,
+      items: [
+        ...prevState.items.filter((item, index) => index < activeItemIndex),
+        { ...prevState.items[activeItemIndex], model: undefined },
+        ...prevState.items.filter((item, index) => index > activeItemIndex),
+      ],
+    }));
+  };
+  const deselectMaterial = () => {
+    console.log("Process | deselectMaterial |");
+    setState((prevState) => ({
+      ...prevState,
+      items: [
+        ...prevState.items.filter((item, index) => index < activeItemIndex),
+        { ...prevState.items[activeItemIndex], material: undefined },
+        ...prevState.items.filter((item, index) => index > activeItemIndex),
+      ],
+    }));
   };
 
   return (
@@ -355,7 +382,9 @@ export const ProcessView: React.FC<Props> = (props) => {
                 <ModelCatalog
                   processState={state}
                   models={models}
+                  selectedModel={items[activeItemIndex].model}
                   selectModel={selectModel}
+                  deselectModel={deselectModel}
                   setProgress={setProgress}
                 />
               }
@@ -373,6 +402,8 @@ export const ProcessView: React.FC<Props> = (props) => {
               path="material"
               element={
                 <MaterialCatalog
+                  deselectMaterial={deselectMaterial}
+                  selectedMaterial={items[activeItemIndex].material}
                   processState={state}
                   materials={materials}
                   selectMaterial={selectMaterial}

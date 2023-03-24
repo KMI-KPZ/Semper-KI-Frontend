@@ -5,11 +5,14 @@ import { IMaterial } from "../../../interface/Interface";
 import PopUp from "../../PopUp/PopUp";
 import { MaterialView } from "./MaterialView";
 import { IProcessState } from "../ProcessView";
+import { MaterialPreView } from "./MaterialPreView";
 
 interface Props {
-  materials: IMaterial[];
   processState: IProcessState;
-  selectMaterial: (material: IMaterial) => void;
+  selectedMaterial: IMaterial | undefined;
+  materials: IMaterial[];
+  selectMaterial(material: IMaterial): void;
+  deselectMaterial(): void;
   setProgress(path: string): void;
 }
 
@@ -19,7 +22,14 @@ interface State {
 }
 
 export const MaterialCatalog: React.FC<Props> = (props) => {
-  const { selectMaterial, setProgress, materials, processState } = props;
+  const {
+    selectMaterial,
+    setProgress,
+    materials,
+    processState,
+    deselectMaterial,
+    selectedMaterial,
+  } = props;
   const { grid, searchText } = processState;
   const [state, setState] = useState<State>({
     popUp: false,
@@ -52,7 +62,7 @@ export const MaterialCatalog: React.FC<Props> = (props) => {
     return false;
   };
 
-  return (
+  return selectedMaterial === undefined ? (
     <div
       className={`flex gap-y-5 ${
         grid === true
@@ -78,7 +88,7 @@ export const MaterialCatalog: React.FC<Props> = (props) => {
             onOutsideClick={closeMaterialView}
           >
             {state.material !== undefined ? (
-              <MaterialView
+              <MaterialPreView
                 material={state.material}
                 closeMaterialView={closeMaterialView}
                 selectMaterial={selectMaterial}
@@ -90,5 +100,10 @@ export const MaterialCatalog: React.FC<Props> = (props) => {
         "keine Materialien gefunden"
       )}
     </div>
+  ) : (
+    <MaterialView
+      deselectMaterial={deselectMaterial}
+      material={selectedMaterial}
+    />
   );
 };

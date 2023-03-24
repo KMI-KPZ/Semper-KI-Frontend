@@ -10,8 +10,8 @@ const LoadingAnimation: React.FC<Props> = (props) => {
   return (
     <div className="lds-circle inline-block">
       <div
-        className={` bg-${
-          color !== undefined ? color : "white"
+        className={`${
+          color !== undefined ? "bg-".concat(color) : "bg-white"
         } inline-block w-16 h-16 m-2 rounded-full `}
       ></div>
     </div>

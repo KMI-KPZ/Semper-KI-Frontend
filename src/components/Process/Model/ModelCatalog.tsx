@@ -3,12 +3,15 @@ import { IModel } from "../../../interface/Interface";
 import { IProcessState } from "../ProcessView";
 import { ModelCard } from "./ModelCard";
 import PopUp from "../../PopUp/PopUp";
-import { ModelView } from "./ModelView";
+import { ModelPreView } from "./ModelPreView";
+import ModelView from "./ModelView";
 
 interface Props {
-  models: IModel[];
   processState: IProcessState;
+  models: IModel[];
+  selectedModel: IModel | undefined;
   selectModel(model: IModel): void;
+  deselectModel(): void;
   setProgress(path: string): void;
 }
 
@@ -18,7 +21,14 @@ interface State {
 }
 
 export const ModelCatalog: React.FC<Props> = (props) => {
-  const { models, processState, selectModel, setProgress } = props;
+  const {
+    models,
+    processState,
+    selectModel,
+    setProgress,
+    selectedModel,
+    deselectModel,
+  } = props;
   const { grid, searchText } = processState;
   const [state, setState] = useState<State>({ popUp: false, model: undefined });
   useEffect(() => {
@@ -47,7 +57,7 @@ export const ModelCatalog: React.FC<Props> = (props) => {
     return false;
   };
 
-  return (
+  return selectedModel === undefined ? (
     <div
       className={`flex gap-y-5 ${
         grid === true
@@ -73,7 +83,7 @@ export const ModelCatalog: React.FC<Props> = (props) => {
             onOutsideClick={closeModelView}
           >
             {state.model !== undefined ? (
-              <ModelView
+              <ModelPreView
                 model={state.model}
                 selectModel={selectModel}
                 closeModelView={closeModelView}
@@ -85,5 +95,7 @@ export const ModelCatalog: React.FC<Props> = (props) => {
         "keine Modelle gefunden"
       )}
     </div>
+  ) : (
+    <ModelView model={selectedModel} deselectModel={deselectModel} />
   );
 };

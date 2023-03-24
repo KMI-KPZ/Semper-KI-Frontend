@@ -12,7 +12,7 @@ export const MaterialView: React.FC<Props> = (props) => {
   return (
     <div className="flex flex-col gap-5 items-center justify-start bg-white h-fit w-full">
       <h2 className="">{material.title}</h2>
-      <img className="w-full xl:max-w-xl" src={material.URI} alt="Model" />
+      <img className="w-full max-w-xs" src={material.URI} alt="Model" />
       <div className="model-view-tags">
         {material.propList.map((title: string, index: number) => (
           <div key={index} className="model-view-tag">

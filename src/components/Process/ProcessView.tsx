@@ -21,6 +21,7 @@ import Header from "./Header/Header";
 import useProcessData from "../../hooks/useProcessData";
 import useCart from "../../hooks/useCart";
 import ModelView from "./Model/ModelView";
+import { removeItem, removeItemByIndex } from "../../services/utils";
 
 interface Props {
   guideAnswers: IFilterItem[];
@@ -173,19 +174,16 @@ export const ProcessView: React.FC<Props> = (props) => {
               : model.title,
         },
       ],
+      progress: getProgressByPath("model"),
       activeItemIndex: prevState.items.length,
     }));
   };
   const deleteProcessItem = (index: number): void => {
     console.log("Process | deleteProcessItem |", index);
 
-    let processList: IProcessItem[] = items;
-    if (processList.length === 1 && index === 0) processList = [];
-    else processList.splice(index, 1);
-
     setState((prevState) => ({
       ...prevState,
-      items: processList,
+      items: [...prevState.items.filter((item, _index) => _index !== index)],
       activeItemIndex: -1,
     }));
     navigate("/process/upload");
@@ -382,7 +380,12 @@ export const ProcessView: React.FC<Props> = (props) => {
                 <ModelCatalog
                   processState={state}
                   models={models}
-                  selectedModel={items[activeItemIndex].model}
+                  selectedModel={
+                    items[activeItemIndex] !== undefined &&
+                    items[activeItemIndex].model !== undefined
+                      ? items[activeItemIndex].model
+                      : undefined
+                  }
                   selectModel={selectModel}
                   deselectModel={deselectModel}
                   setProgress={setProgress}
@@ -403,7 +406,12 @@ export const ProcessView: React.FC<Props> = (props) => {
               element={
                 <MaterialCatalog
                   deselectMaterial={deselectMaterial}
-                  selectedMaterial={items[activeItemIndex].material}
+                  selectedMaterial={
+                    items[activeItemIndex] !== undefined &&
+                    items[activeItemIndex].material !== undefined
+                      ? items[activeItemIndex].material
+                      : undefined
+                  }
                   processState={state}
                   materials={materials}
                   selectMaterial={selectMaterial}

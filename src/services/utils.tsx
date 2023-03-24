@@ -52,6 +52,17 @@ export const removeItem = <T,>(arr: Array<T>, value: T): Array<T> => {
   return arr;
 };
 
+export const removeItemByIndex = <T,>(
+  arr: Array<T>,
+  index: number
+): Array<T> => {
+  let newArr = arr;
+  if (index > -1) {
+    newArr.splice(index, 1);
+  }
+  return newArr;
+};
+
 export const getUserType = (name: string): EUserType => {
   let type: EUserType = EUserType.indefinite;
   switch (name.toLocaleLowerCase()) {

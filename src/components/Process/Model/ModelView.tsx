@@ -17,7 +17,7 @@ const ModelView: React.FC<Props> = (props) => {
   return (
     <div className="flex flex-col gap-5 items-center justify-start bg-white h-fit w-full">
       <h2 className="">{model.title}</h2>
-      <img className="w-full xl:max-w-xl" src={model.URI} alt="Model" />
+      <img className="w-full max-w-xs" src={model.URI} alt="Model" />
       <div className="model-view-tags">
         {model.tags.map((title: string, index: number) => (
           <div key={index} className="model-view-tag">

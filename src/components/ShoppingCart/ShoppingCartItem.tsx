@@ -43,7 +43,7 @@ const ShoppingCartItem: React.FC<Props> = (props) => {
             {material !== undefined ? (
               <>
                 <h2>{material.title}</h2>
-                <span>{material.propList}</span>
+                <span>{material.propList.join(", ")}</span>
               </>
             ) : (
               <>

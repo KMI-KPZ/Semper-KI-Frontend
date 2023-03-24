@@ -23,7 +23,9 @@ const ShoppingCart: React.FC<Props> = (props) => {
   };
   const handleOnClickClear = () => {
     updateCart([]);
-    loadCart();
+    setTimeout(() => {
+      loadCart();
+    }, 200);
   };
 
   return (

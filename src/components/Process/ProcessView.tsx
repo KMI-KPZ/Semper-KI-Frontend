@@ -21,7 +21,11 @@ import Header from "./Header/Header";
 import useProcessData from "../../hooks/useProcessData";
 import useCart from "../../hooks/useCart";
 import ModelView from "./Model/ModelView";
-import { removeItem, removeItemByIndex } from "../../services/utils";
+import {
+  checkForSelectedData,
+  removeItem,
+  removeItemByIndex,
+} from "../../services/utils";
 
 interface Props {
   guideAnswers: IFilterItem[];
@@ -112,23 +116,14 @@ export const ProcessView: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (
-      cart.length > 0 &&
-      (cart[0].model !== undefined ||
-        cart[0].material !== undefined ||
-        cart[0].postProcessings !== undefined)
+      cart !== undefined &&
+      (cart.length > 1 || (cart.length > 0 && checkForSelectedData(cart)))
     )
       setState((prevState) => ({ ...prevState, items: cart }));
   }, [cart]);
 
   useEffect(() => {
-    if (
-      items.length > 0 &&
-      (items[0].model !== undefined ||
-        items[0].material !== undefined ||
-        items[0].postProcessings !== undefined)
-    ) {
-      updateCart(items);
-    }
+    updateCart(items);
   }, [items]);
 
   const loadData = (title?: string) => {
@@ -172,6 +167,7 @@ export const ProcessView: React.FC<Props> = (props) => {
             model === undefined
               ? "Item " + (prevState.items.length + 1)
               : model.title,
+          model: model,
         },
       ],
       progress: getProgressByPath("model"),

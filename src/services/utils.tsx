@@ -1,4 +1,5 @@
 import { EUserType } from "../interface/enums";
+import { IModel, IProcessItem } from "../interface/Interface";
 
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;
@@ -80,4 +81,28 @@ export const getUserType = (name: string): EUserType => {
       break;
   }
   return type;
+};
+
+export const getModelURI = (model: IModel): string => {
+  const convertStringForImage = (input: string): string => {
+    let base64 = input;
+    base64 = base64.slice(2);
+    base64 = base64.slice(0, -1);
+    return base64;
+  };
+
+  console.log("utils | getModelURI", model);
+
+  return model.CreatedBy === "kiss"
+    ? model.URI
+    : `data:image/jpeg;base64,${convertStringForImage(model.URI)}`;
+};
+
+export const checkForSelectedData = (items: IProcessItem[]): boolean => {
+  let contains: boolean = false;
+  items.forEach((item) => {
+    if (item.model !== undefined || item.material !== undefined)
+      contains = true;
+  });
+  return contains;
 };

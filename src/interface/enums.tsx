@@ -41,3 +41,8 @@ export enum EPostProcessingOptionType {
   "number",
   "text",
 }
+
+export enum EModelType {
+  "kiss",
+  "user",
+}

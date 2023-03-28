@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useCart from "../../hooks/useCart";
 import { IProcessItem } from "../../interface/Interface";
@@ -6,9 +6,14 @@ import ShoppingCartItem from "./ShoppingCartItem";
 
 interface Props {}
 
+interface State {
+  error: boolean;
+}
+
 const ShoppingCart: React.FC<Props> = (props) => {
   const {} = props;
   const navigate = useNavigate();
+  // const [state,setState] useState();
   const { cart, loadCart, updateCart } = useCart();
 
   useEffect(() => {
@@ -32,7 +37,7 @@ const ShoppingCart: React.FC<Props> = (props) => {
     <div className="flex flex-col items-center gap-5 w-full p-5">
       <h1 className="text-center p-2 bg-white w-full">Einkaufswagen</h1>
       <section className="flex flex-col gap-5 items-center justify-start w-full">
-        {cart.length > 0 ? (
+        {cart !== undefined && cart.length > 0 ? (
           cart.map((process: IProcessItem, index: number) => (
             <ShoppingCartItem process={process} key={index} />
           ))

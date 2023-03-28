@@ -1,5 +1,6 @@
 import React from "react";
 import { IProcessItem } from "../../interface/Interface";
+import { getModelURI } from "../../services/utils";
 
 interface Props {
   process: IProcessItem;
@@ -16,7 +17,7 @@ const ShoppingCartItem: React.FC<Props> = (props) => {
           src={
             model === undefined
               ? require("../../assets/images/model_placeholder.png")
-              : model.URI
+              : getModelURI(model)
           }
           alt="Model"
         />

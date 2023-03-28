@@ -40,7 +40,7 @@ const CartItem: React.FC<Props> = (props) => {
 
   return (
     <div
-      className={`flex flex-row justify-start items-center gap-8 bg-white h-12 px-3 py-2 hover:bg-gray-300 hover:cursor-pointer 
+      className={`flex flex-row justify-start items-center gap-6 bg-white h-12 px-3 py-2 hover:bg-gray-300 hover:cursor-pointer
       `}
       // ${active === true ? "pb-5 h-16" : ""}
       onClick={handleOnClickCard}

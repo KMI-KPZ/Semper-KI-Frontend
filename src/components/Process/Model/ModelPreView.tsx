@@ -1,6 +1,7 @@
 import React from "react";
 import { IModel } from "../../../interface/Interface";
 import CloseIcon from "@mui/icons-material/Close";
+import { getModelURI } from "../../../services/utils";
 
 interface Props {
   model: IModel;
@@ -26,7 +27,11 @@ export const ModelPreView: React.FC<Props> = (props) => {
         </div>
       </div>
       <h2 className="">{model.title}</h2>
-      <img className="w-full xl:max-w-xl" src={model.URI} alt="Model" />
+      <img
+        className="w-full xl:max-w-xl"
+        src={getModelURI(model)}
+        alt="Model"
+      />
       <div className="model-view-tags">
         {model.tags.map((title: string, index: number) => (
           <div key={index} className="model-view-tag">

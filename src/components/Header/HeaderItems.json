@@ -30,10 +30,10 @@
         "loggedIn":true
     },
     {
-        "title": "Warenkorb",
+        "title": "Auftrag",
         "i18n":"cart",
         "link": "/cart",
-        "icon": "IconCart",
+        "icon": "IconDocument",
         "extern": false,
         "preferred":"header",
         "userType": [0,1],

@@ -29,7 +29,7 @@ export interface IModel {
   license: string;
   certificate: string[];
   URI: string;
-  CreatedBy: string;
+  createdBy: string;
 }
 
 export interface IMaterial {

@@ -3,52 +3,142 @@ import { IProcessItem } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
-  printable: any | undefined;
-  price: any | undefined;
-  logistics: any | undefined;
-  checkPrintability(): void;
-  checkPrices(): void;
-  checkLogistics(): void;
+  printable: ICheckout[];
+  price: ICheckout[];
+  logistics: ICheckout[];
+  checkPrintability(processList: IProcessItem[]): void;
+  checkPrices(processList: IProcessItem[]): void;
+  checkLogistics(processList: IProcessItem[]): void;
+}
+
+export interface ICheckout {
+  loading: boolean;
+  error: boolean;
+  data: string;
 }
 
 const useCheckout = (): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
-  const [printable, setPrintable] = useState<any>();
-  const [price, setPrice] = useState<any>();
-  const [logistics, setLogistics] = useState<any>();
+  const [printable, setPrintable] = useState<ICheckout[]>([]);
+  const [price, setPrice] = useState<ICheckout[]>([]);
+  const [logistics, setLogistics] = useState<ICheckout[]>([]);
 
-  const checkPrintability = () => {
-    axiosCustom
-      .get(`${process.env.REACT_APP_API_URL}/public/checkPrintability/`)
-      .then((res) => {
-        console.log("useCheckout | checkPrintability ✅ |", res.data);
-        setPrintable(res.data);
-      })
-      .catch((error) => {
-        console.log("useCheckout | checkPrintability ❌ |", error);
-      });
+  const checkPrintability = (processList: IProcessItem[]) => {
+    processList.forEach((_item, _index) => {
+      setPrintable((prevState) => [
+        ...prevState.filter((item, index: number) => index < _index),
+        {
+          loading: true,
+          error: false,
+          data: "",
+        },
+        ...prevState.filter((item, index: number) => index > _index),
+      ]);
+      axiosCustom
+        .get(`${process.env.REACT_APP_API_URL}/public/checkPrintability/`)
+        .then((res) => {
+          console.log("useCheckout | checkPrintability ✅ |", res.data);
+          setPrintable((prevState) => [
+            ...prevState.filter((item, index: number) => index < _index),
+            {
+              loading: false,
+              error: false,
+              data: res.data,
+            },
+            ...prevState.filter((item, index: number) => index > _index),
+          ]);
+        })
+        .catch((error) => {
+          console.log("useCheckout | checkPrintability ❌ |", error);
+          setPrintable((prevState) => [
+            ...prevState.filter((item, index: number) => index < _index),
+            {
+              loading: false,
+              error: true,
+              data: "",
+            },
+            ...prevState.filter((item, index: number) => index > _index),
+          ]);
+        });
+    });
   };
-  const checkPrices = () => {
-    axiosCustom
-      .get(`${process.env.REACT_APP_API_URL}/public/checkPrices/`)
-      .then((res) => {
-        console.log("useCheckout | checkPrices ✅ |", res.data);
-        setPrice(res.data);
-      })
-      .catch((error) => {
-        console.log("useCheckout | checkPrices ❌ |", error);
-      });
+  const checkPrices = (processList: IProcessItem[]) => {
+    processList.forEach((_item, _index) => {
+      setPrice((prevState) => [
+        ...prevState.filter((item, index: number) => index < _index),
+        {
+          loading: true,
+          error: false,
+          data: "",
+        },
+        ...prevState.filter((item, index: number) => index > _index),
+      ]);
+      axiosCustom
+        .get(`${process.env.REACT_APP_API_URL}/public/checkPrices/`)
+        .then((res) => {
+          console.log("useCheckout | checkPrices ✅ |", res.data);
+          setPrice((prevState) => [
+            ...prevState.filter((item, index: number) => index < _index),
+            {
+              loading: false,
+              error: false,
+              data: res.data,
+            },
+            ...prevState.filter((item, index: number) => index > _index),
+          ]);
+        })
+        .catch((error) => {
+          console.log("useCheckout | checkPrices ❌ |", error);
+          setPrice((prevState) => [
+            ...prevState.filter((item, index: number) => index < _index),
+            {
+              loading: false,
+              error: true,
+              data: "",
+            },
+            ...prevState.filter((item, index: number) => index > _index),
+          ]);
+        });
+    });
   };
-  const checkLogistics = () => {
-    axiosCustom
-      .get(`${process.env.REACT_APP_API_URL}/public/checkLogistics/`)
-      .then((res) => {
-        console.log("useCheckout | checkLogistics ✅ |", res.data);
-        setLogistics(res.data);
-      })
-      .catch((error) => {
-        console.log("useCheckout | checkLogistics ❌ |", error);
-      });
+  const checkLogistics = (processList: IProcessItem[]) => {
+    processList.forEach((_item, _index) => {
+      setLogistics((prevState) => [
+        ...prevState.filter((item, index: number) => index < _index),
+        {
+          loading: true,
+          error: false,
+          data: "",
+        },
+        ...prevState.filter((item, index: number) => index > _index),
+      ]);
+      axiosCustom
+        .get(`${process.env.REACT_APP_API_URL}/public/checkLogistics/`)
+        .then((res) => {
+          console.log("useCheckout | checkLogistics ✅ |", res.data);
+          setLogistics((prevState) => [
+            ...prevState.filter((item, index: number) => index < _index),
+            {
+              loading: false,
+              error: false,
+              data: res.data,
+            },
+            ...prevState.filter((item, index: number) => index > _index),
+          ]);
+        })
+        .catch((error) => {
+          console.log("useCheckout | checkLogistics ❌ |", error);
+          setLogistics((prevState) => [
+            ...prevState.filter((item, index: number) => index < _index),
+            {
+              loading: false,
+              error: true,
+              data: "",
+            },
+            ...prevState.filter((item, index: number) => index > _index),
+          ]);
+        });
+    });
   };
 
   return {

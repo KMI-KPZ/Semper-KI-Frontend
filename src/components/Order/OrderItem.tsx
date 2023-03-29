@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { IProcessItem } from "../../interface/Interface";
 import { getModelURI } from "../../services/utils";
+import { AppContext } from "../App/App";
 
 interface Props {
   process: IProcessItem;
+  index: number;
 }
 
 const OrderItem: React.FC<Props> = (props) => {
-  const { process } = props;
+  const { setAppState } = useContext(AppContext);
+  const { process, index } = props;
+  const navigate = useNavigate();
   const { model, material, postProcessings } = process;
+
+  const selectProgressItem = (progress: string) => {
+    setAppState((prevState) => ({
+      ...prevState,
+      selectedProgressItem: { index, progress },
+    }));
+  };
+
+  const handleOnClickModel = () => {
+    navigate("/process/model");
+    selectProgressItem("model");
+  };
+  const handleOnClickMaterial = () => {
+    navigate("/process/material");
+    selectProgressItem("material");
+  };
+  const handleOnClickPostprocessing = () => {
+    navigate("/process/postprocessing");
+    selectProgressItem("postprocessing");
+  };
+
   return (
     <ul className="flex flex-col bg-white md:gap-4 md:flex-row w-full md:flex-wrap justify-between">
       <li className="flex flex-col w-full md:max-w-[250px]">
@@ -25,9 +51,9 @@ const OrderItem: React.FC<Props> = (props) => {
       <li className="flex flex-col w-4/5 p-2">
         <ul className="flex flex-col bg-white md:gap-4 md:flex-row w-full md:h-full md:flex-wrap md:justify-around justify-center">
           <li
-            className={`flex flex-col w-full md:w-fit py-3 px-5 ${
-              model === undefined ? "bg-red-100" : ""
-            }`}
+            onClick={handleOnClickModel}
+            className={`flex flex-col w-full md:w-fit py-3 px-5 hover:bg-slate-200 hover:cursor-pointer
+             ${model === undefined ? "bg-red-100" : ""}`}
           >
             {model !== undefined ? (
               <>
@@ -45,7 +71,8 @@ const OrderItem: React.FC<Props> = (props) => {
             )}
           </li>
           <li
-            className={`flex flex-col w-full md:w-fit py-3 px-5 ${
+            onClick={handleOnClickMaterial}
+            className={`flex flex-col w-full md:w-fit py-3 px-5 hover:bg-slate-200 hover:cursor-pointer ${
               material === undefined ? "bg-red-100" : ""
             }`}
           >
@@ -62,7 +89,8 @@ const OrderItem: React.FC<Props> = (props) => {
             )}
           </li>
           <li
-            className={`flex flex-col w-full md:w-fit py-3 px-5 ${
+            onClick={handleOnClickPostprocessing}
+            className={`flex flex-col w-full md:w-fit py-3 px-5 hover:bg-slate-200 hover:cursor-pointer ${
               postProcessings === undefined ? "bg-red-100" : ""
             }`}
           >

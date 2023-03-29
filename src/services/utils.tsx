@@ -90,7 +90,7 @@ export const getModelURI = (model: IModel): string => {
     base64 = base64.slice(0, -1);
     return base64;
   };
-  return model.CreatedBy === "kiss"
+  return model.createdBy === "kiss"
     ? model.URI
     : `data:image/jpeg;base64,${convertStringForImage(model.URI)}`;
 };
@@ -98,7 +98,11 @@ export const getModelURI = (model: IModel): string => {
 export const checkForSelectedData = (items: IProcessItem[]): boolean => {
   let contains: boolean = false;
   items.forEach((item) => {
-    if (item.model !== undefined || item.material !== undefined)
+    if (
+      item.model !== undefined ||
+      item.material !== undefined ||
+      item.postProcessings !== undefined
+    )
       contains = true;
   });
   return contains;

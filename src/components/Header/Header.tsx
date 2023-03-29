@@ -35,7 +35,6 @@ const languages: Language[] = [
 interface Props {
   isLoggedIn: boolean;
   userType: EUserType;
-  closeBlog(): void;
 }
 
 interface State {
@@ -44,7 +43,7 @@ interface State {
 }
 
 export const Header: React.FC<Props> = (props) => {
-  const { isLoggedIn, userType, closeBlog } = props;
+  const { isLoggedIn, userType } = props;
   const { setAppState, appState } = useContext(AppContext);
   const navigate = useNavigate();
   const { i18n } = useTranslation();
@@ -81,9 +80,7 @@ export const Header: React.FC<Props> = (props) => {
     setState((prevState) => ({ ...prevState, menuOpen: true }));
     setAppState((prevState) => ({ ...prevState, stopScroll: true }));
   };
-  const handleOnClickHeader = () => {
-    if (appState.blogOpen === true) closeBlog();
-  };
+
   const closeMenus = (): void => {
     closeLanguageMenu();
     closeMenu();
@@ -264,7 +261,7 @@ export const Header: React.FC<Props> = (props) => {
         className="
         flex flex-col justify-between absolute
         w-screen h-screen top-0 right-0 
-        overflow-y-scroll overflow-x-hidden
+        overflow-x-hidden
         md:w-fit md:shadow-none 
        bg-white p-3 shadow-xl
        "
@@ -289,7 +286,6 @@ export const Header: React.FC<Props> = (props) => {
     <header
       data-testid="header"
       className="flex justify-between items-center flex-row relative shadow-lg bg-white w-full"
-      onClick={handleOnClickHeader}
     >
       <nav className="m-3">{renderHomeButton()}</nav>
       <nav className="m-3 flex flex-row justify-center items-center gap-4">

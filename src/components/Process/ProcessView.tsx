@@ -23,6 +23,7 @@ import useCart from "../../hooks/useCart";
 import { checkForSelectedData } from "../../services/utils";
 
 interface Props {
+  selectedProgressItem?: { index: number; progress: string };
   guideAnswers: IFilterItem[];
   isLoggedInResponse: boolean;
 }
@@ -81,7 +82,7 @@ export const ProcessContext = createContext<IProcessContext>({
 });
 
 export const ProcessView: React.FC<Props> = (props) => {
-  const { guideAnswers, isLoggedInResponse } = props;
+  const { guideAnswers, isLoggedInResponse, selectedProgressItem } = props;
   const navigate = useNavigate();
   const { cart, loadCart, updateCart } = useCart();
   const [state, setState] = useState<IProcessState>(initialProcessState(cart));
@@ -114,7 +115,18 @@ export const ProcessView: React.FC<Props> = (props) => {
       cart !== undefined &&
       (cart.length > 1 || (cart.length > 0 && checkForSelectedData(cart)))
     )
-      setState((prevState) => ({ ...prevState, items: cart }));
+      setState((prevState) => ({
+        ...prevState,
+        items: cart,
+        activeItemIndex:
+          selectedProgressItem === undefined
+            ? prevState.activeItemIndex
+            : selectedProgressItem.index,
+        progress:
+          selectedProgressItem === undefined
+            ? prevState.progress
+            : getProgressByPath(selectedProgressItem.progress),
+      }));
   }, [cart]);
 
   useEffect(() => {

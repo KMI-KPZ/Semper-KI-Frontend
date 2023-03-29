@@ -27,7 +27,7 @@ const mockedSetUserType = jest.fn();
 const mockedSetUser = jest.fn();
 
 beforeEach(() => {
-  render(<Header isLoggedIn={false} userType={0} closeBlog={() => {}} />);
+  render(<Header isLoggedIn={false} userType={0} />);
 });
 
 describe(Header, () => {

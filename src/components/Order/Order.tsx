@@ -67,7 +67,7 @@ const Order: React.FC<Props> = (props) => {
       <section className="flex flex-col gap-5 items-center justify-start w-full">
         {cart !== undefined && cart.length > 0 ? (
           cart.map((process: IProcessItem, index: number) => (
-            <OrderItem process={process} key={index} />
+            <OrderItem process={process} key={index} index={index} />
           ))
         ) : (
           <h2 className="text-center p-2 bg-white w-full">keine Produkte</h2>

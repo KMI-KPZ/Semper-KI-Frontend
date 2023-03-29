@@ -74,7 +74,7 @@ const Cart: React.FC<Props> = () => {
           icon={IconDocument}
           title="Übersicht"
           onClickCard={() => {
-            navigate("/cart");
+            navigate("/order");
           }}
           isItem={false}
         />

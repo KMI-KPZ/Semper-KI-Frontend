@@ -6,7 +6,7 @@ interface Props {
   process: IProcessItem;
 }
 
-const ShoppingCartItem: React.FC<Props> = (props) => {
+const OrderItem: React.FC<Props> = (props) => {
   const { process } = props;
   const { model, material, postProcessings } = process;
   return (
@@ -24,7 +24,11 @@ const ShoppingCartItem: React.FC<Props> = (props) => {
       </li>
       <li className="flex flex-col w-4/5 p-2">
         <ul className="flex flex-col bg-white md:gap-4 md:flex-row w-full md:h-full md:flex-wrap md:justify-around justify-center">
-          <li className="flex flex-col w-full md:w-fit p-2">
+          <li
+            className={`flex flex-col w-full md:w-fit py-3 px-5 ${
+              model === undefined ? "bg-red-100" : ""
+            }`}
+          >
             {model !== undefined ? (
               <>
                 <h2>{model.title}</h2>
@@ -40,7 +44,11 @@ const ShoppingCartItem: React.FC<Props> = (props) => {
               </>
             )}
           </li>
-          <li className="flex flex-col w-full md:w-fit p-2">
+          <li
+            className={`flex flex-col w-full md:w-fit py-3 px-5 ${
+              material === undefined ? "bg-red-100" : ""
+            }`}
+          >
             {material !== undefined ? (
               <>
                 <h2>{material.title}</h2>
@@ -53,7 +61,11 @@ const ShoppingCartItem: React.FC<Props> = (props) => {
               </>
             )}
           </li>
-          <li className="flex flex-col w-full md:w-fit p-2">
+          <li
+            className={`flex flex-col w-full md:w-fit py-3 px-5 ${
+              postProcessings === undefined ? "bg-red-100" : ""
+            }`}
+          >
             {postProcessings !== undefined ? (
               <>
                 <h2>Nachbearbeitungen</h2>
@@ -76,4 +88,4 @@ const ShoppingCartItem: React.FC<Props> = (props) => {
   );
 };
 
-export default ShoppingCartItem;
+export default OrderItem;

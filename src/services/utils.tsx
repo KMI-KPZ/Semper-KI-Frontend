@@ -90,9 +90,6 @@ export const getModelURI = (model: IModel): string => {
     base64 = base64.slice(0, -1);
     return base64;
   };
-
-  console.log("utils | getModelURI", model);
-
   return model.CreatedBy === "kiss"
     ? model.URI
     : `data:image/jpeg;base64,${convertStringForImage(model.URI)}`;

@@ -12,7 +12,7 @@ interface State {
   manufacturerOpen: boolean;
 }
 
-const Order: React.FC<Props> = (props) => {
+const OrderItem: React.FC<Props> = (props) => {
   const { order } = props;
   const processBox = useRef<HTMLDivElement>(null);
   const manufacturerBox = useRef<HTMLDivElement>(null);
@@ -197,4 +197,4 @@ const Order: React.FC<Props> = (props) => {
   );
 };
 
-export default Order;
+export default OrderItem;

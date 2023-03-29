@@ -1,13 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { IOrder } from "../../interface/Interface";
-import Order from "./Order";
+import OrderItem from "./OrderItem";
 
 interface Props {
   orderList: IOrder[];
 }
 
-const Orders: React.FC<Props> = (props) => {
+const OrderOverview: React.FC<Props> = (props) => {
   const { orderList } = props;
   const { t } = useTranslation();
 
@@ -19,7 +19,7 @@ const Orders: React.FC<Props> = (props) => {
       <ul className="w-full gap-5 flex flex-col">
         {orderList.length > 0 ? (
           orderList.map((order: IOrder, index: number) => (
-            <Order order={order} key={index} />
+            <OrderItem order={order} key={index} />
           ))
         ) : (
           <li className="w-full text-center p-3">
@@ -31,4 +31,4 @@ const Orders: React.FC<Props> = (props) => {
   );
 };
 
-export default Orders;
+export default OrderOverview;

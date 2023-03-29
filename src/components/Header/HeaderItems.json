@@ -32,7 +32,7 @@
     {
         "title": "Auftrag",
         "i18n":"cart",
-        "link": "/cart",
+        "link": "/order",
         "icon": "IconDocument",
         "extern": false,
         "preferred":"header",

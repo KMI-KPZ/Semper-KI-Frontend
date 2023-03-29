@@ -20,12 +20,7 @@ import useFilter from "../../hooks/useFilter";
 import Header from "./Header/Header";
 import useProcessData from "../../hooks/useProcessData";
 import useCart from "../../hooks/useCart";
-import ModelView from "./Model/ModelView";
-import {
-  checkForSelectedData,
-  removeItem,
-  removeItemByIndex,
-} from "../../services/utils";
+import { checkForSelectedData } from "../../services/utils";
 
 interface Props {
   guideAnswers: IFilterItem[];
@@ -366,6 +361,7 @@ export const ProcessView: React.FC<Props> = (props) => {
           <Header />
           <Routes>
             <Route index element={<Navigate to="/process/model" />} />
+
             <Route
               path="new"
               element={<NewProcess startNewProcess={startNewProcess} />}

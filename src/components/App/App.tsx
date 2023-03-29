@@ -24,8 +24,7 @@ import {
 } from "../PrivateRoutes/PrivateRoutes";
 import Account from "../Account/Account";
 import useAdmin from "../../hooks/useAdmin";
-import ShoppingCart from "../ShoppingCart/ShoppingCart";
-import Orders from "../Orders/Orders";
+import OrderOverview from "../OrderOverview/OrderOverview";
 import "./../../styles.scss";
 import AdminUserView from "../Admin/AdminUserView";
 import AdminModelView from "../Admin/AdminModelView";
@@ -34,6 +33,7 @@ import AdminOrderView from "../Admin/AdminOrderView";
 import Background from "../Background/Background";
 import Blog from "../Blog/Blog";
 import Checkout from "../Checkout/Checkout";
+import Order from "../Order/Order";
 
 export interface IAppState {
   cart: IProcessItem[];
@@ -143,7 +143,7 @@ const App: React.FC = () => {
 
   const privateRoutes = (
     <Route element={<PrivateRoutes user={user} />}>
-      <Route path="orders" element={<Orders orderList={orderList} />} />
+      <Route path="orders" element={<OrderOverview orderList={orderList} />} />
       <Route path="proceedings" element={<Error text="proceedings" />} />
       <Route path="assignments" element={<Error text="assignments" />} />
       <Route path="messages" element={<Error text="messages" />} />
@@ -177,7 +177,7 @@ const App: React.FC = () => {
               index
               element={<Home isLoggedIn={isLoggedIn} userType={userType} />}
             />
-            <Route path="cart" element={<ShoppingCart />} />
+            <Route path="order" element={<Order />} />
             <Route path="checkout" element={<Checkout />} />
             <Route path="blog" element={<Blog openBlog={openBlog} />} />
             <Route

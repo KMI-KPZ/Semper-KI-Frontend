@@ -24,7 +24,6 @@ const CheckoutItem: React.FC<Props> = (props) => {
       />
       <div className="flex flex-row w-full justify-between items-center px-5">
         <h3>Druckbar:</h3>
-        {/* <img src={IconX} /> */}
         {printable.loading === true ? <LoadingAnimation /> : null}
         {printable.loading === false &&
         printable.error === false &&
@@ -40,7 +39,6 @@ const CheckoutItem: React.FC<Props> = (props) => {
       </div>
       <div className="flex flex-row w-full justify-between items-center px-5">
         <h3>Preis:</h3>
-        {/* <img src={IconX} /> */}
         {logistics.loading === true ? <LoadingAnimation /> : null}
         {logistics.loading === false &&
         logistics.error === false &&
@@ -56,7 +54,6 @@ const CheckoutItem: React.FC<Props> = (props) => {
       </div>
       <div className="flex flex-row w-full justify-between items-center px-5">
         <h3>Lieferzeit:</h3>
-        {/* <img src={IconX} /> */}
         {price.loading === true ? <LoadingAnimation /> : null}
         {price.loading === false &&
         price.error === false &&

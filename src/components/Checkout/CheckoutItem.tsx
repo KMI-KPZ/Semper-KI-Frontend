@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { IconX } from "../../config/Icons";
-import useCheckout, { ICheckout } from "../../hooks/useCheckout";
+import useCheckout, { IRequestState } from "../../hooks/useCheckout";
 import { IProcessItem } from "../../interface/Interface";
 import { getModelURI } from "../../services/utils";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 
 type Props = {
   process: IProcessItem;
-  printable: ICheckout;
-  price: ICheckout;
-  logistics: ICheckout;
+  printable: IRequestState;
+  price: IRequestState;
+  logistics: IRequestState;
 };
 
 const CheckoutItem: React.FC<Props> = (props) => {

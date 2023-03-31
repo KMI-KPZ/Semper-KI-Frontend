@@ -1,33 +1,71 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IProcessItem } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
-  printable: ICheckout[];
-  price: ICheckout[];
-  logistics: ICheckout[];
+  order: IRequestState;
+  printable: IRequestState;
+  price: IRequestState;
+  logistics: IRequestState;
+  printableList: IRequestState[];
+  priceList: IRequestState[];
+  logisticsList: IRequestState[];
   checkPrintability(processList: IProcessItem[]): void;
   checkPrices(processList: IProcessItem[]): void;
   checkLogistics(processList: IProcessItem[]): void;
+  sendOrder(): void;
 }
 
-export interface ICheckout {
+export interface IRequestState {
   loading: boolean;
   error: boolean;
   data: string;
 }
 
 const useCheckout = (): ReturnProps => {
+  const emptyRequestState: IRequestState = {
+    data: "",
+    error: false,
+    loading: false,
+  };
   const { axiosCustom } = useCustomAxios();
-  const [printable, setPrintable] = useState<ICheckout[]>([]);
-  const [price, setPrice] = useState<ICheckout[]>([]);
-  const [logistics, setLogistics] = useState<ICheckout[]>([]);
+  const [printable, setPrintable] = useState<IRequestState>(emptyRequestState);
+  const [printableList, setPrintableList] = useState<IRequestState[]>([]);
+  const [price, setPrice] = useState<IRequestState>(emptyRequestState);
+  const [priceList, setPriceList] = useState<IRequestState[]>([]);
+  const [logistics, setLogistics] = useState<IRequestState>(emptyRequestState);
+  const [logisticsList, setLogisticsList] = useState<IRequestState[]>([]);
+  const [order, setOrder] = useState<IRequestState>(emptyRequestState);
+
+  const updateRequestState = (
+    list: IRequestState[],
+    setState: React.Dispatch<React.SetStateAction<IRequestState>>
+  ) => {
+    let conclusion: IRequestState = emptyRequestState;
+    list.forEach((item) => {
+      if (item.data !== emptyRequestState.data) conclusion.data = item.data;
+      if (item.error !== emptyRequestState.error) conclusion.error = item.error;
+      if (item.loading !== emptyRequestState.loading)
+        conclusion.loading = item.loading;
+    });
+    setState(conclusion);
+  };
+
+  useEffect(() => {
+    updateRequestState(printableList, setPrintable);
+  }, [printableList]);
+  useEffect(() => {
+    updateRequestState(priceList, setPrice);
+  }, [priceList]);
+  useEffect(() => {
+    updateRequestState(logisticsList, setLogistics);
+  }, [logisticsList]);
 
   const checkPrintability = (processList: IProcessItem[]) => {
     Promise.all(
       processList.map((_item, _index) => {
-        setPrintable((prevState) => [
+        setPrintableList((prevState) => [
           ...prevState.filter((item, index: number) => index < _index),
           {
             loading: true,
@@ -40,7 +78,7 @@ const useCheckout = (): ReturnProps => {
           .get(`${process.env.REACT_APP_API_URL}/public/checkPrintability/`)
           .then((res) => {
             console.log("useCheckout | checkPrintability ✅ |", res.data);
-            setPrintable((prevState) => [
+            setPrintableList((prevState) => [
               ...prevState.filter((item, index: number) => index < _index),
               {
                 loading: false,
@@ -52,7 +90,7 @@ const useCheckout = (): ReturnProps => {
           })
           .catch((error) => {
             console.log("useCheckout | checkPrintability ❌ |", error);
-            setPrintable((prevState) => [
+            setPrintableList((prevState) => [
               ...prevState.filter((item, index: number) => index < _index),
               {
                 loading: false,
@@ -69,7 +107,7 @@ const useCheckout = (): ReturnProps => {
   const checkPrices = (processList: IProcessItem[]) => {
     Promise.all(
       processList.map((_item, _index) => {
-        setPrice((prevState) => [
+        setPriceList((prevState) => [
           ...prevState.filter((item, index: number) => index < _index),
           {
             loading: true,
@@ -82,7 +120,7 @@ const useCheckout = (): ReturnProps => {
           .get(`${process.env.REACT_APP_API_URL}/public/checkPrices/`)
           .then((res) => {
             console.log("useCheckout | checkPrices ✅ |", res.data);
-            setPrice((prevState) => [
+            setPriceList((prevState) => [
               ...prevState.filter((item, index: number) => index < _index),
               {
                 loading: false,
@@ -94,7 +132,7 @@ const useCheckout = (): ReturnProps => {
           })
           .catch((error) => {
             console.log("useCheckout | checkPrices ❌ |", error);
-            setPrice((prevState) => [
+            setPriceList((prevState) => [
               ...prevState.filter((item, index: number) => index < _index),
               {
                 loading: false,
@@ -111,7 +149,7 @@ const useCheckout = (): ReturnProps => {
   const checkLogistics = (processList: IProcessItem[]) => {
     Promise.all(
       processList.map((_item, _index) => {
-        setLogistics((prevState) => [
+        setLogisticsList((prevState) => [
           ...prevState.filter((item, index: number) => index < _index),
           {
             loading: true,
@@ -124,7 +162,7 @@ const useCheckout = (): ReturnProps => {
           .get(`${process.env.REACT_APP_API_URL}/public/checkLogistics/`)
           .then((res) => {
             console.log("useCheckout | checkLogistics ✅ |", res.data);
-            setLogistics((prevState) => [
+            setLogisticsList((prevState) => [
               ...prevState.filter((item, index: number) => index < _index),
               {
                 loading: false,
@@ -136,7 +174,7 @@ const useCheckout = (): ReturnProps => {
           })
           .catch((error) => {
             console.log("useCheckout | checkLogistics ❌ |", error);
-            setLogistics((prevState) => [
+            setLogisticsList((prevState) => [
               ...prevState.filter((item, index: number) => index < _index),
               {
                 loading: false,
@@ -150,13 +188,44 @@ const useCheckout = (): ReturnProps => {
     );
   };
 
+  const sendOrder = () => {
+    setOrder({
+      loading: true,
+      error: false,
+      data: "",
+    });
+    axiosCustom
+      .get(`${process.env.REACT_APP_API_URL}/public/sendOrder/`)
+      .then((res) => {
+        console.log("useCheckout | sendOrder ✅ |", res.data);
+        setOrder({
+          loading: false,
+          error: false,
+          data: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log("useCheckout | sendOrder ❌ |", error);
+        setOrder({
+          loading: false,
+          error: true,
+          data: "",
+        });
+      });
+  };
+
   return {
     checkLogistics,
     checkPrices,
     checkPrintability,
+    sendOrder,
+    order,
     logistics,
     price,
     printable,
+    logisticsList,
+    priceList,
+    printableList,
   };
 };
 

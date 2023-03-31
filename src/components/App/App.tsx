@@ -105,6 +105,7 @@ const App: React.FC = () => {
 
   const privateRoutes = (
     <Route element={<PrivateRoutes user={user} />}>
+      <Route path="checkout" element={<Checkout />} />
       <Route path="orders" element={<OrderOverview orderList={[]} />} />
       <Route path="proceedings" element={<Error text="proceedings" />} />
       <Route path="assignments" element={<Error text="assignments" />} />
@@ -135,7 +136,6 @@ const App: React.FC = () => {
               element={<Home isLoggedIn={isLoggedIn} userType={userType} />}
             />
             <Route path="order" element={<Order />} />
-            <Route path="checkout" element={<Checkout />} />
             <Route
               path="process/*"
               element={

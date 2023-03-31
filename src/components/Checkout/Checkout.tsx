@@ -15,6 +15,7 @@ interface State {
   loadingAll: boolean;
   errorAll: boolean;
   showError: boolean;
+  orderSendSuccesfull: boolean;
 }
 
 const Checkout: React.FC<Props> = (props) => {
@@ -27,6 +28,7 @@ const Checkout: React.FC<Props> = (props) => {
     loadingAll: false,
     errorAll: false,
     showError: false,
+    orderSendSuccesfull: false,
   });
   const {
     checkLogisticsCalled,
@@ -35,6 +37,7 @@ const Checkout: React.FC<Props> = (props) => {
     errorAll,
     loadingAll,
     showError,
+    orderSendSuccesfull,
   } = state;
   const { cart, loadCart } = useCart();
   const {
@@ -54,6 +57,16 @@ const Checkout: React.FC<Props> = (props) => {
     error: false,
     loading: false,
     data: "",
+  };
+
+  const showErrorOnTime = (time?: number) => {
+    setState((prevState) => ({ ...prevState, showError: true }));
+    setTimeout(
+      () => {
+        setState((prevState) => ({ ...prevState, showError: false }));
+      },
+      time === undefined ? 3000 : time
+    );
   };
 
   useEffect(() => {
@@ -84,8 +97,19 @@ const Checkout: React.FC<Props> = (props) => {
   }, [logistics, price, printable]);
 
   useEffect(() => {
-    if (order.loading === false && order.error === false && order.data !== "")
-      navigate("/");
+    if (
+      order.loading === false &&
+      order.error === false &&
+      order.data === "Successful"
+    ) {
+      setState((prevState) => ({ ...prevState, orderSendSuccesfull: true }));
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    }
+    if (order.error === true) {
+      showErrorOnTime();
+    }
   }, [order]);
 
   const checkAll: boolean =
@@ -97,13 +121,9 @@ const Checkout: React.FC<Props> = (props) => {
 
   const handleOnClickSend = () => {
     if (checkAll === true) {
-      setState((prevState) => ({ ...prevState, showError: false }));
       sendOrder();
     } else {
-      setState((prevState) => ({ ...prevState, showError: true }));
-      setTimeout(() => {
-        setState((prevState) => ({ ...prevState, showError: false }));
-      }, 3000);
+      showErrorOnTime();
     }
   };
   const handleOnClickPrintable = () => {
@@ -141,15 +161,32 @@ const Checkout: React.FC<Props> = (props) => {
       </div>
     </div>
   );
-
   const renderLoadingAnimation = () => (
-    <div className="bg-white w-full p-5 flex flex-col gap-5 justify-center items-center">
+    <div className="flex flex-col justify-center items-center bg-white w-full h-full min-h-[500px]">
       <LoadingAnimation color="black" />
     </div>
   );
   const renderError = () => {
     let errorList: string[] = [];
-    if (errorAll === true) errorList.push("!!! ERROR !!!");
+    if (logistics.error === true)
+      errorList.push("Fehler beim laden der Logistik");
+    if (logistics.loading === true)
+      errorList.push("Die Logistik Daten sind noch nicht fertig geladen");
+    if (price.error === true) errorList.push("Fehler beim laden des Preise");
+    if (price.loading === true)
+      errorList.push("Die Preise sind noch nicht fertig geladen");
+    if (printable.error === true)
+      errorList.push("Fehler beim laden der Druckbarkeit");
+    if (printable.loading === true)
+      errorList.push("Die Druckbakeits Daten sind noch nicht fertig geladen");
+    if (order.error === true)
+      errorList.push("Fehler beim absenden der Berstellung");
+    if (
+      checkLogisticsCalled === false ||
+      checkPricesCalled === false ||
+      checkPrintabilityCalled === false
+    )
+      errorList.push("Bitte alle berechnungen durchführen!");
 
     return errorList.length > 0 ? (
       <div className="bg-white w-full p-5 flex flex-col gap-5 justify-center items-center">
@@ -158,6 +195,14 @@ const Checkout: React.FC<Props> = (props) => {
         ))}
       </div>
     ) : null;
+  };
+  const renderOrderSendSuccesfull = () => {
+    return (
+      <div className="bg-white w-full p-5 flex flex-col gap-5 justify-center items-center">
+        <h2>Der Auftrag wurde Erfolgreich übermittelt!</h2>
+        <h3>Sie werden nun zu Startseite weitergeleitet</h3>
+      </div>
+    );
   };
 
   return (
@@ -178,35 +223,42 @@ const Checkout: React.FC<Props> = (props) => {
         </div>
       </div>
       {showError === true ? renderError() : null}
+      {order.loading === false && orderSendSuccesfull === true
+        ? renderOrderSendSuccesfull()
+        : null}
       {order.loading === true ? renderLoadingAnimation() : null}
-      <div
-        className="flex flex-col gap-y-3 justify-center items-center
+      {order.loading === false && orderSendSuccesfull === false ? (
+        <div
+          className="flex flex-col gap-y-3 justify-center items-center
       sm:flex-row sm:flex-wrap sm:justify-between sm:items-start w-full"
-      >
-        {cart.length > 0 ? (
-          cart.map((item, index) => (
-            <CheckoutItem
-              key={index}
-              process={item}
-              logistics={
-                logisticsList[index] === undefined
-                  ? loadingDummy
-                  : logisticsList[index]
-              }
-              price={
-                priceList[index] === undefined ? loadingDummy : priceList[index]
-              }
-              printable={
-                printableList[index] === undefined
-                  ? loadingDummy
-                  : printableList[index]
-              }
-            />
-          ))
-        ) : (
-          <h2>keine Items vorhanden</h2>
-        )}
-      </div>
+        >
+          {cart.length > 0 ? (
+            cart.map((item, index) => (
+              <CheckoutItem
+                key={index}
+                process={item}
+                logistics={
+                  logisticsList[index] === undefined
+                    ? loadingDummy
+                    : logisticsList[index]
+                }
+                price={
+                  priceList[index] === undefined
+                    ? loadingDummy
+                    : priceList[index]
+                }
+                printable={
+                  printableList[index] === undefined
+                    ? loadingDummy
+                    : printableList[index]
+                }
+              />
+            ))
+          ) : (
+            <h2>keine Items vorhanden</h2>
+          )}
+        </div>
+      ) : null}
     </div>
   );
 };

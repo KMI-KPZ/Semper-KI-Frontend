@@ -203,10 +203,10 @@
   "dashboard":{
     "title":"Übersicht",
     "new-contract":"neuer Auftrag",
-    "cart":"Einkaufswagen",
+    "order":"Auftrag",
     "guide":"Hilfe",
     "account":"Konto",
-    "order":"Bestellung",
+    "orders":"Bestellungen",
     "admin":{
       "account":"Konto",
       "title":"Admin-Bereich",

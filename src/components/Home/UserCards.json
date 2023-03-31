@@ -5,9 +5,9 @@
         "icon":"IconNewDocument"
     },
     {
-        "title":"cart",
-        "link":"/cart",
-        "icon":"IconCart"
+        "title":"order",
+        "link":"/order",
+        "icon":"IconDocument"
     },
     {
         "title":"guide",

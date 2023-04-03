@@ -190,8 +190,10 @@ const Checkout: React.FC<Props> = (props) => {
 
     return errorList.length > 0 ? (
       <div className="bg-white w-full p-5 flex flex-col gap-5 justify-center items-center">
-        {errorList.map((error) => (
-          <h2 className="text-red-400 text-center">{error}</h2>
+        {errorList.map((error, index) => (
+          <h2 key={index} className="text-red-400 text-center">
+            {error}
+          </h2>
         ))}
       </div>
     ) : null;

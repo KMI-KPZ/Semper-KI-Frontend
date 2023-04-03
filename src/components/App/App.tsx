@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
 import useCRSFToken from "../../hooks/useCSRFToken";
@@ -13,7 +13,7 @@ import { IFilterItem } from "../Process/Filter/Interface";
 import Redirect from "../Redirect/Redirect";
 import Footer from "../Footer/Footer";
 import { URL_AboutUs } from "../../config/Constants";
-import { EUserType } from "../../interface/enums";
+import { EOrderState, EUserType } from "../../interface/enums";
 import ServiceRoutes from "../Service/ServiceRoutes";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import GuideRoutes from "../Guide/GuideRoutes";
@@ -32,6 +32,7 @@ import AdminOrderView from "../Admin/AdminOrderView";
 import Background from "../Background/Background";
 import Checkout from "../Checkout/Checkout";
 import Order from "../Order/Order";
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 
 export interface IAppState {
   selectedProgressItem?: { index: number; progress: string };
@@ -60,7 +61,7 @@ const initialState: IAppState = {
 const App: React.FC = () => {
   const [state, setState] = useState<IAppState>(initialState);
   const { stopScroll, guideFilter, selectedProgressItem } = state;
-  const { CSRFToken } = useCRSFToken();
+  const { CSRFToken, CSRFTokenError, CSRFTokenIsLoading } = useCRSFToken();
   const { isLoggedIn, userType, user, loadLoggedIn, isLoggedInResponse } =
     useUser();
   const { data, loadData, clearData } = useAdmin();
@@ -106,7 +107,7 @@ const App: React.FC = () => {
   const privateRoutes = (
     <Route element={<PrivateRoutes user={user} />}>
       <Route path="checkout" element={<Checkout />} />
-      <Route path="orders" element={<OrderOverview orderList={[]} />} />
+      <Route path="orders" element={<OrderOverview />} />
       <Route path="proceedings" element={<Error text="proceedings" />} />
       <Route path="assignments" element={<Error text="assignments" />} />
       <Route path="messages" element={<Error text="messages" />} />
@@ -119,6 +120,17 @@ const App: React.FC = () => {
       {adminRoutes}
     </Route>
   );
+
+  if (
+    CSRFTokenIsLoading === true ||
+    isLoggedInResponse === false ||
+    (isLoggedIn === true && user === undefined)
+  )
+    return (
+      <div className="flex flex-row items-center justify-center bg-white w-screen h-screen">
+        <LoadingAnimation />
+      </div>
+    );
 
   return (
     <AppContext.Provider value={{ appState: state, setAppState: setState }}>

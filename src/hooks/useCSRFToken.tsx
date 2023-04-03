@@ -16,7 +16,7 @@ const useCRSFToken = (): ReturnProps => {
     async () => {
       const apiUrl = `${process.env.REACT_APP_API_URL}/public/csrfCookie/`;
       return axiosCustom.get(apiUrl).then((response) => {
-        console.log("useCRSFToken | loadCSRFToken ✅ |");
+        console.log("useCRSFToken | ✅ |");
         return response.data;
       });
     }
@@ -30,31 +30,6 @@ const useCRSFToken = (): ReturnProps => {
     CSRFTokenError: error,
     CSRFTokenIsLoading: isLoading,
   };
-
-  // const [CSRFToken, setCSRFToken] = useState<boolean>(false);
-  // useEffect(() => {
-  //   loadCSRFToken();
-  // }, []);
-
-  // const loadCSRFToken = (): void => {
-  //   axiosCustom
-  //     .get(`${process.env.REACT_APP_API_URL}/public/csrfCookie/`)
-  //     .then((response) => {
-  //       const token = Cookies.get("csrftoken");
-  //       if (token !== undefined) {
-  //         console.log("useCRSFToken | loadCSRFToken ✅ |");
-  //         setCSRFToken(true);
-  //       } else {
-  //         console.log("useCRSFToken | loadCSRFToken ❌ |");
-  //         setCSRFToken(false);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log("useCRSFToken | loadCSRFToken ❌ |", error);
-  //       setCSRFToken(false);
-  //     });
-  // };
-  // return { CSRFToken};
 };
 
 export default useCRSFToken;

@@ -10,6 +10,9 @@ export const useOrders = () => {
   const { axiosCustom } = useCustomAxios();
   return useQuery<OrdersResponse, Error>(["orders"], async () => {
     const apiUrl = `${process.env.REACT_APP_API_URL}/public/getOrders/`;
-    return axiosCustom.get(apiUrl).then((response) => response.data);
+    return axiosCustom.get(apiUrl).then((response) => {
+      console.log("useOrders | ✅ |", response.data);
+      return response.data;
+    });
   });
 };

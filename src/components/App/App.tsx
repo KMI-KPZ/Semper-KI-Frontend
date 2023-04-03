@@ -127,7 +127,16 @@ const App: React.FC = () => {
     (isLoggedIn === true && user === undefined)
   )
     return (
-      <div className="flex flex-row items-center justify-center bg-white w-screen h-screen">
+      <div className="flex flex-col items-center justify-center bg-white w-screen h-screen gap-5">
+        <div className="flex flex-row gap-10 justify-center items-center">
+          <img
+            className="h-40"
+            data-testid="logo"
+            src={require("../../assets/images/logo192.png")}
+            alt="Kiss Logo"
+          />
+          <h1 className="text-9xl">Semper-KI</h1>
+        </div>
         <LoadingAnimation />
       </div>
     );

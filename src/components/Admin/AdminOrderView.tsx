@@ -50,7 +50,7 @@ const AdminOrderView: React.FC<Props> = (props) => {
                   {order.processList.length}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {order.bill?.name}
+                  {/* {order.bills.name} */}
                 </TableCell>
               </TableRow>
             ))}

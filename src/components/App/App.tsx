@@ -128,14 +128,14 @@ const App: React.FC = () => {
   )
     return (
       <div className="flex flex-col items-center justify-center bg-white w-screen h-screen gap-5">
-        <div className="flex flex-row gap-10 justify-center items-center">
+        <div className="flex flex-col md:flex-row gap-10 justify-center items-center">
           <img
-            className="h-40"
+            className="h-20 md:h-30 xl:h-40"
             data-testid="logo"
             src={require("../../assets/images/logo192.png")}
             alt="Kiss Logo"
           />
-          <h1 className="text-9xl">Semper-KI</h1>
+          <h1 className="md:text-4xl xl:text-9xl">Semper-KI</h1>
         </div>
         <LoadingAnimation />
       </div>

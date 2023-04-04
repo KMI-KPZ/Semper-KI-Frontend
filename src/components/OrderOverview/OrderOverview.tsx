@@ -14,8 +14,8 @@ const testOrders: IOrder[] = [
     date: new Date(),
     orderState: EOrderState.requested,
     processList: [],
-    bill: undefined,
-    orderId: 0,
+    files: [],
+    orderId: "rgehtgefwehterher",
   },
 ];
 

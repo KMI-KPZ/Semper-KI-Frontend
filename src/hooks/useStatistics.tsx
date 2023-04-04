@@ -23,7 +23,7 @@ const useStatistics = (): ReturnProps => {
   //     .get(`${process.env.REACT_APP_API_URL}/public/getStatistics/`)
   //     .then((response) => {
   //       console.log(
-  //         "useStatistics| loadStatistics Successful",
+  //         "useStatistics| loadStatistics Success",
   //         JSON.stringify(response.data)
   //       );
   //       setStatistics(response.data);

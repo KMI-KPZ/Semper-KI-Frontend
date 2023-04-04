@@ -100,7 +100,7 @@ const Checkout: React.FC<Props> = (props) => {
     if (
       order.loading === false &&
       order.error === false &&
-      order.data === "Successful"
+      order.data === "Success"
     ) {
       setState((prevState) => ({ ...prevState, orderSendSuccesfull: true }));
       setTimeout(() => {

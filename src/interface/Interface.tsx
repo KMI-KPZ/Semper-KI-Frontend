@@ -107,11 +107,11 @@ export interface ISelection {
 }
 
 export interface IOrder {
-  orderId?: number;
+  orderId: string;
   processList: IProcessItem[];
   date: Date;
   orderState: EOrderState;
-  bill?: File;
+  files: File[];
 }
 
 export interface IUser {

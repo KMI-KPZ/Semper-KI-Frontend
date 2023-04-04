@@ -48,8 +48,8 @@ const OrderItem: React.FC<Props> = (props) => {
           alt="Model"
         />
       </li>
-      <li className="flex flex-col w-4/5 p-2">
-        <ul className="flex flex-col bg-white md:gap-4 md:flex-row w-full md:h-full md:flex-wrap md:justify-around justify-center">
+      <li className="flex flex-col w-full md:w-4/5 p-2">
+        <ul className="flex flex-col bg-white gap-2 md:flex-row w-full md:h-full md:flex-wrap md:justify-around justify-center">
           <li
             onClick={handleOnClickModel}
             className={`flex flex-col w-full md:w-fit py-3 px-5 hover:bg-slate-200 hover:cursor-pointer

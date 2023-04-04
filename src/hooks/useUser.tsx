@@ -60,7 +60,7 @@ const useUser = (): ReturnProps => {
       .get(`${process.env.REACT_APP_API_URL}/public/isLoggedIn/`)
       .then((response) => {
         console.log("useUser | loadLoggedIn ✅ |", response.data);
-        setLoggedIn(response.data === "Successful" ? true : false);
+        setLoggedIn(response.data === "Success" ? true : false);
         setIsLoggedInResponse(true);
       })
       .catch((error) => {

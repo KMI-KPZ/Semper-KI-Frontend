@@ -23,7 +23,7 @@ const Order: React.FC<Props> = (props) => {
   }, []);
 
   useEffect(() => {
-    if (cart.length > 0) {
+    if (cart !== undefined && cart.length > 0) {
       setState((prevState) => ({
         ...prevState,
         error: checkProcessForError(cart),

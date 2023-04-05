@@ -21,7 +21,7 @@ interface State {
 
 const Checkout: React.FC<Props> = (props) => {
   const {} = props;
-  const { socket, state: wsState } = useCheckoutWebSocket();
+
   const navigate = useNavigate();
   const [state, setState] = useState<State>({
     checkLogisticsCalled: false,

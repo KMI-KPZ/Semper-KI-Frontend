@@ -14,6 +14,7 @@ import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import { AxiosError } from "axios";
 import useCustomAxios from "../hooks/useCustomAxios";
+import { useCheckoutWebSocket } from "../hooks/useCheckoutWebSocket";
 
 interface State {
   post: string;
@@ -54,7 +55,6 @@ export const RequestTest: React.FC = () => {
     response: "",
   });
   const URL = `${state.url}${state.port}${state.postFix}`;
-
   const safeInput = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -63,7 +63,6 @@ export const RequestTest: React.FC = () => {
       [e.target.name]: e.target.value,
     }));
   };
-
   const safeData = (data: string) => {
     setState((prevState) => ({
       ...prevState,
@@ -72,7 +71,6 @@ export const RequestTest: React.FC = () => {
       loading: false,
     }));
   };
-
   const safeError = (data: any) => {
     // console.log(data);
 
@@ -83,7 +81,6 @@ export const RequestTest: React.FC = () => {
       loading: false,
     }));
   };
-
   const safeLoading = (data: boolean) => {
     setState((prevState) => ({
       ...prevState,
@@ -92,7 +89,6 @@ export const RequestTest: React.FC = () => {
       loading: data,
     }));
   };
-
   const post = () => {
     safeLoading(true);
     axiosCustom
@@ -106,7 +102,6 @@ export const RequestTest: React.FC = () => {
         safeError(error);
       });
   };
-
   const get = () => {
     safeLoading(true);
     axiosCustom
@@ -120,7 +115,6 @@ export const RequestTest: React.FC = () => {
         safeError(error);
       });
   };
-
   const put = () => {
     safeLoading(true);
     axiosCustom
@@ -147,7 +141,6 @@ export const RequestTest: React.FC = () => {
         safeError(error);
       });
   };
-
   const handleOnChangeFileURL = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFileState((prevState) => ({
       ...prevState,
@@ -170,7 +163,6 @@ export const RequestTest: React.FC = () => {
           : undefined,
     }));
   };
-
   const fileUpload = () => {
     const formData = new FormData();
     formData.append(
@@ -192,7 +184,6 @@ export const RequestTest: React.FC = () => {
         console.error("fileUpload Error:", error);
       });
   };
-
   const loadFile = () => {
     axiosCustom
       .get(`${process.env.REACT_APP_HTTP_API_URL}/private/retrieveFiles/`)
@@ -206,6 +197,21 @@ export const RequestTest: React.FC = () => {
       .catch((error) => {
         console.error("loadFile Error:", error);
       });
+  };
+
+  const [socketValue, setSocketValue] = useState("");
+  const [messageValue, setMessageValue] = useState<string>("");
+  const handleOnMessageWS = (event: MessageEvent) => {
+    setState(event.data);
+  };
+  const { socket, state: wsState } = useCheckoutWebSocket(handleOnMessageWS);
+
+  const handleOnChangeMessage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMessageValue(e.currentTarget.value);
+  };
+  const handleOnClickSendMessage = () => {
+    socket?.send(messageValue);
+    setMessageValue("");
   };
 
   return (
@@ -349,6 +355,27 @@ export const RequestTest: React.FC = () => {
         ) : null}
         <Button variant="contained" onClick={(e) => loadFile()}>
           LoadFile
+        </Button>
+      </Paper>
+      <Paper
+        sx={{
+          padding: "20px",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "20px",
+        }}
+      >
+        <h3>{wsState}</h3>
+        <h3>{socketValue}</h3>
+        <input
+          type="text"
+          className="border-2"
+          onChange={(e) => handleOnChangeMessage}
+        />
+        <Button variant="contained" onClick={handleOnClickSendMessage}>
+          Send Message To WebSocket
         </Button>
       </Paper>
       {state.loading !== null && state.loading === true && (

@@ -17,7 +17,7 @@ export interface IOrderTest {
   orderStatus: string;
   userCommunication: any[];
   files: any[];
-  dates: any[];
+  dates: { created: string; updated: string };
 }
 
 enum EOrderDataTypes {
@@ -53,7 +53,7 @@ const OrderOverview: React.FC<Props> = (props) => {
         if (orders.filter((order) => order.orderId === orderId).length === 0)
           orders.push({
             orderId: orderId,
-            dates: [],
+            dates: { created: "", updated: "" },
             files: [],
             orderStatus: "",
             userCommunication: [],

@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
       <ul className="flex flex-col md:flex-row md:justify-around items-center">
         <li className="p-2">
           <a
-            className="text-gray-500 hover:text-gray-600 p-2"
+            className="text-gray-500 hover:text-gray-600 p-2 break-words"
             href={URL_Impressum}
           >
             Impressum
@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
         </li>
         <li className="p-2">
           <a
-            className="text-gray-500 hover:text-gray-600 p-2"
+            className="text-gray-500 hover:text-gray-600 p-2 break-words"
             href={URL_Datenschutz}
           >
             Datenschutzerklärung

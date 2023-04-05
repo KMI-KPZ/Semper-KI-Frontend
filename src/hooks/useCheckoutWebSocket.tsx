@@ -7,7 +7,9 @@ interface ReturnProps {
 
 type WebSocketState = "connecting" | "connected" | "disconnected" | "error";
 
-export const useCheckoutWebSocket = (): ReturnProps => {
+export const useCheckoutWebSocket = (
+  onMessage: (event: MessageEvent) => void
+): ReturnProps => {
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [state, setState] = useState<WebSocketState>("disconnected");
 
@@ -20,6 +22,7 @@ export const useCheckoutWebSocket = (): ReturnProps => {
     ws.onopen = () => setState("connected");
     ws.onerror = () => setState("error");
     ws.onclose = () => setState("disconnected");
+    ws.onmessage = onMessage;
 
     setSocket(ws);
 

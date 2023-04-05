@@ -70,8 +70,8 @@ const OrderItem: React.FC<Props> = (props) => {
   return (
     <li className="w-full bg-white p-5 gap-5 flex flex-col">
       <section className="flex flex-col md:flex-row justify-between md:justify-start md:gap-[10%] p-2 gap-2">
-        <h2>Bestellung: {order.orderId}</h2>
-        <h2>Datum: {new Date().getDate()}</h2>
+        <h2 className="break-words">Bestellung: {order.orderId}</h2>
+        <h2>Datum: {new Date(order.dates.created).toLocaleDateString()}</h2>
         {/* <h2>Status: {order.orderState}</h2> */}
       </section>
       <hr />
@@ -87,7 +87,7 @@ const OrderItem: React.FC<Props> = (props) => {
             ref={processBox}
             className={`
             flex flex-col items-center justify-start gap-5 w-full
-            md:flex-row md:overflow-x-scroll 
+            md:flex-row md:overflow-x-auto 
             ${processOpen === true ? "" : "max-h-96 overflow-hidden"}
             `}
           >
@@ -146,7 +146,7 @@ const OrderItem: React.FC<Props> = (props) => {
             ref={manufacturerBox}
             className={`
             flex flex-col items-center justify-start gap-5 w-full
-            md:flex-row md:overflow-x-scroll 
+            md:flex-row md:overflow-x-auto 
             ${manufacturerOpen === true ? "" : "max-h-96 overflow-hidden"}
             `}
           >

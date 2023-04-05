@@ -6,6 +6,7 @@ import CheckoutItem from "./CheckoutItem";
 import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
+import { useCheckoutWebSocket } from "../../hooks/useCheckoutWebSocket";
 
 interface Props {}
 interface State {
@@ -20,6 +21,7 @@ interface State {
 
 const Checkout: React.FC<Props> = (props) => {
   const {} = props;
+  const { socket, state: wsState } = useCheckoutWebSocket();
   const navigate = useNavigate();
   const [state, setState] = useState<State>({
     checkLogisticsCalled: false,

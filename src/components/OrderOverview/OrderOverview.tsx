@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { IOrder } from "../../interface/Interface";
-import OrderItem from "./OrderItem";
 import { EOrderState } from "../../interface/enums";
-import { useOrders } from "../../hooks/useOrders";
+import { IOrdersResponse, useOrders } from "../../hooks/useOrders";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 import { IconX } from "../../config/Icons";
+import { isKey } from "../../services/utils";
+import { IProcessItem } from "../../interface/Interface";
+import { log } from "console";
 
 interface Props {}
+
+interface IOrderCalc {
+  orderId: string;
+  userOrders: IProcessItem[];
+  orderStatus: string;
+  userCommunication: any[];
+  files: any[];
+  dates: any[];
+}
+
+enum EOrderDataTypes {
+  "userOrders",
+  "orderStatus",
+  "userCommunication",
+  "files",
+  "dates",
+}
 
 const testOrders: IOrder[] = [
   {
@@ -22,6 +41,46 @@ const testOrders: IOrder[] = [
 const OrderOverview: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { data, isLoading, error } = useOrders();
+
+  const getOrderDataKey = (dataTypeIndex: number) => {
+    return EOrderDataTypes[dataTypeIndex].toString();
+  };
+
+  const generateOrders = (data: IOrdersResponse) => {
+    let orders: IOrderCalc[] = [];
+    data.forEach((dataObject: object, dataTypeIndex) => {
+      Object.keys(dataObject).forEach((orderId) => {
+        if (orders.filter((order) => order.orderId === orderId).length === 0)
+          orders.push({
+            orderId: orderId,
+            dates: [],
+            files: [],
+            orderStatus: "",
+            userCommunication: [],
+            userOrders: [],
+          });
+        if (isKey(dataObject, orderId)) {
+          {
+            let mutateOrder: IOrderCalc = orders.filter(
+              (order) => order.orderId === orderId
+            )[0];
+            console.log(EOrderDataTypes[dataTypeIndex], dataObject[orderId]);
+            const orderKey = EOrderDataTypes[dataTypeIndex];
+            if (isKey(mutateOrder, orderKey)) {
+              mutateOrder[orderKey] = dataObject[orderId];
+            }
+            orders = [
+              ...orders.filter((_order) => _order.orderId !== orderId),
+              mutateOrder,
+            ];
+          }
+        }
+      });
+    });
+    console.log(orders);
+
+    // return orders;
+  };
 
   return (
     <div className="flex flex-col items-center w-full gap-5 overflow-x-auto overflow-y-hidden p-3">
@@ -41,13 +100,15 @@ const OrderOverview: React.FC<Props> = (props) => {
           <img src={IconX} />
         </div>
       ) : null}
-      {!isLoading && !error && data ? (
+      {!isLoading && !error && data.length > 0 ? (
         <ul className="w-full gap-5 flex flex-col">
-          {testOrders.length > 0 ? (
-            testOrders.map((order: IOrder, index: number) => (
-              <OrderItem order={order} key={index} />
-            ))
+          {data.length > 0 ? (
+            <>{generateOrders(data)}</>
           ) : (
+            // generateOrders(data).map((order: IOrder, index: number) => (
+            //   // <OrderItem order={order} key={index} />
+            //   <></>
+            // ))
             <li className="w-full text-center p-3">
               keine vorhandenen Bestellungen
             </li>

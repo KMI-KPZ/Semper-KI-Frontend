@@ -24,12 +24,12 @@ const OrderItem: React.FC<Props> = (props) => {
 
   const calcManufacturer = (): IManufacturer[] => {
     let manufacturerList: IManufacturer[] = [];
-    order.processList.forEach((process: IProcessItem) => {
-      const manufacturer = process.manufacturer;
-      if (manufacturer !== undefined) {
-        manufacturerList.push(manufacturer);
-      }
-    });
+    // order.processList.forEach((process: IProcessItem) => {
+    //   const manufacturer = process.manufacturer;
+    //   if (manufacturer !== undefined) {
+    //     manufacturerList.push(manufacturer);
+    //   }
+    // });
     return manufacturerList;
   };
 
@@ -75,7 +75,7 @@ const OrderItem: React.FC<Props> = (props) => {
       </section>
       <hr />
       <section className="flex flex-col gap-5">
-        <h2>Artikel : {order.processList.length}</h2>
+        <h2>Artikel</h2>
         <div
           className="
           relative

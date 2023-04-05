@@ -38,7 +38,7 @@ const useUser = (): ReturnProps => {
 
   const loadUser = () => {
     axiosCustom
-      .get(`${process.env.REACT_APP_API_URL}/public/getUser/`)
+      .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getUser/`)
       .then((response) => {
         const userData = response.data;
         console.log("useUser | loadUser ✅ |", userData);
@@ -57,7 +57,7 @@ const useUser = (): ReturnProps => {
 
   const loadLoggedIn = () => {
     axiosCustom
-      .get(`${process.env.REACT_APP_API_URL}/public/isLoggedIn/`)
+      .get(`${process.env.REACT_APP_HTTP_API_URL}/public/isLoggedIn/`)
       .then((response) => {
         console.log("useUser | loadLoggedIn ✅ |", response.data);
         setLoggedIn(response.data === "Success" ? true : false);
@@ -71,7 +71,7 @@ const useUser = (): ReturnProps => {
 
   const deleteUser = () => {
     axiosCustom
-      .delete(`${process.env.REACT_APP_API_URL}/public/profileDeleteUser/`)
+      .delete(`${process.env.REACT_APP_HTTP_API_URL}/public/profileDeleteUser/`)
       .then((response) => {
         console.log("useUser | deleteUser ✅ |");
         navigate("/logout");
@@ -83,7 +83,7 @@ const useUser = (): ReturnProps => {
 
   const updateUser = (userType: EUserType) => {
     axiosCustom
-      .post(`${process.env.REACT_APP_API_URL}/public/updateUser/`, {
+      .post(`${process.env.REACT_APP_HTTP_API_URL}/public/updateUser/`, {
         userType: EUserType[userType],
       })
       .then((response) => {

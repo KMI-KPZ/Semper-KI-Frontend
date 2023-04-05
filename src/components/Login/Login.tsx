@@ -15,7 +15,7 @@ const Login: React.FC<Props> = (props) => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`${process.env.REACT_APP_API_URL}/public/login/`, {
+      .get(`${process.env.REACT_APP_HTTP_API_URL}/public/login/`, {
         headers: {
           Usertype: EUserType[userType],
         },

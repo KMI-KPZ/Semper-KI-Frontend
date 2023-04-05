@@ -9,7 +9,7 @@ export const useOrders = () => {
   return useQuery<IOrdersResponse, Error>(
     ["orders"],
     async () => {
-      const apiUrl = `${process.env.REACT_APP_API_URL}/public/getOrders/`;
+      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/getOrders/`;
       return axiosCustom.get(apiUrl).then((response) => {
         console.log("useOrders | ✅ |", response.data);
         return response.data;

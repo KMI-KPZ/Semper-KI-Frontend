@@ -15,7 +15,7 @@ const useFilter = (): ReturnProps => {
 
   const loadFilters = () => {
     axiosCustom
-      .get(`${process.env.REACT_APP_API_URL}/public/getFilters/`)
+      .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getFilters/`)
       .then((res) => {
         console.log("useFilter | loadFilters ✅ |", res.data);
         setFilters(res.data);

@@ -50,7 +50,7 @@ export const RequestTest: React.FC = () => {
     loading: null,
   });
   const [fileState, setFileState] = useState<FileState>({
-    fileURL: `${process.env.REACT_APP_API_URL}/public/uploadFiles/`,
+    fileURL: `${process.env.REACT_APP_HTTP_API_URL}/public/uploadFiles/`,
     response: "",
   });
   const URL = `${state.url}${state.port}${state.postFix}`;
@@ -195,7 +195,7 @@ export const RequestTest: React.FC = () => {
 
   const loadFile = () => {
     axiosCustom
-      .get(`${process.env.REACT_APP_API_URL}/private/retrieveFiles/`)
+      .get(`${process.env.REACT_APP_HTTP_API_URL}/private/retrieveFiles/`)
       .then((response) => {
         console.log("laodFile", response);
         setFileState((prevState) => ({

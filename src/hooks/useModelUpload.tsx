@@ -22,9 +22,13 @@ const useModelUpload = (): ReturnProps => {
     });
     setLoading(true);
     axiosCustom
-      .post(`${process.env.REACT_APP_API_URL}/public/uploadModels/`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
+      .post(
+        `${process.env.REACT_APP_HTTP_API_URL}/public/uploadModels/`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      )
       .then((res) => {
         console.log("useModelUpload | uploadModels ✅ |", res.data);
         setModels(res.data.models);

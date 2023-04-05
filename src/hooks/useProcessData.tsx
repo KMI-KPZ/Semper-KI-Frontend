@@ -29,7 +29,7 @@ const useProcessData = (): ReturnProps => {
 
   const loadAllData = (filters: IFilterItem[]) => {
     axiosCustom
-      .post(`${process.env.REACT_APP_API_URL}/public/getProcessData/`, {
+      .post(`${process.env.REACT_APP_HTTP_API_URL}/public/getProcessData/`, {
         filters,
       })
       .then((res) => {
@@ -44,7 +44,7 @@ const useProcessData = (): ReturnProps => {
 
   const loadModelData = (filters: IFilterItem[]) => {
     axiosCustom
-      .post(`${process.env.REACT_APP_API_URL}/public/getModels/`, {
+      .post(`${process.env.REACT_APP_HTTP_API_URL}/public/getModels/`, {
         filters,
       })
       .then((res) => {
@@ -59,7 +59,7 @@ const useProcessData = (): ReturnProps => {
 
   const loadMaterialData = (filters: IFilterItem[]) => {
     axiosCustom
-      .post(`${process.env.REACT_APP_API_URL}/public/getMaterials/`, {
+      .post(`${process.env.REACT_APP_HTTP_API_URL}/public/getMaterials/`, {
         filters,
       })
       .then((res) => {
@@ -74,7 +74,7 @@ const useProcessData = (): ReturnProps => {
 
   const loadPostProcessingData = (filters: IFilterItem[]) => {
     axiosCustom
-      .post(`${process.env.REACT_APP_API_URL}/public/getPostProcessing/`, {
+      .post(`${process.env.REACT_APP_HTTP_API_URL}/public/getPostProcessing/`, {
         filters,
       })
       .then((res) => {

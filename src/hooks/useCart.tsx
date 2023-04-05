@@ -14,7 +14,7 @@ const useCart = (): ReturnProps => {
 
   const loadCart = () => {
     axiosCustom
-      .get(`${process.env.REACT_APP_API_URL}/public/getCart/`)
+      .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getCart/`)
       .then((res) => {
         console.log("useCart | loadCart ✅ |", res.data);
         setCart(res.data.cart);
@@ -26,7 +26,9 @@ const useCart = (): ReturnProps => {
 
   const updateCart = (cart: IProcessItem[]) => {
     axiosCustom
-      .post(`${process.env.REACT_APP_API_URL}/public/updateCart/`, { cart })
+      .post(`${process.env.REACT_APP_HTTP_API_URL}/public/updateCart/`, {
+        cart,
+      })
       .then((res) => {
         console.log("useCart | updateCart ✅ |", res.data);
       })

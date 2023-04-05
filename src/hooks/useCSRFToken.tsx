@@ -14,7 +14,7 @@ const useCRSFToken = (): ReturnProps => {
   const { data, isLoading, error } = useQuery<string, Error>(
     ["csrf"],
     async () => {
-      const apiUrl = `${process.env.REACT_APP_API_URL}/public/csrfCookie/`;
+      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/csrfCookie/`;
       return axiosCustom.get(apiUrl).then((response) => {
         console.log("useCRSFToken | ✅ |");
         return response.data;

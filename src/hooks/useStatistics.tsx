@@ -20,7 +20,7 @@ const useStatistics = (): ReturnProps => {
 
   // const loadStatistics = () => {
   //   axiosCustom
-  //     .get(`${process.env.REACT_APP_API_URL}/public/getStatistics/`)
+  //     .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getStatistics/`)
   //     .then((response) => {
   //       console.log(
   //         "useStatistics| loadStatistics Success",

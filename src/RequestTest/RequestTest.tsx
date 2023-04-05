@@ -208,6 +208,7 @@ export const RequestTest: React.FC = () => {
 
   const handleOnChangeMessage = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessageValue(e.currentTarget.value);
+    console.log(e.currentTarget.value);
   };
   const handleOnClickSendMessage = () => {
     socket?.send(messageValue);
@@ -370,9 +371,10 @@ export const RequestTest: React.FC = () => {
         <h3>{wsState}</h3>
         <h3>{socketValue}</h3>
         <input
+          value={messageValue}
           type="text"
           className="border-2"
-          onChange={(e) => handleOnChangeMessage}
+          onChange={handleOnChangeMessage}
         />
         <Button variant="contained" onClick={handleOnClickSendMessage}>
           Send Message To WebSocket

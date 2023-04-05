@@ -2,9 +2,10 @@ import { Button } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { getIconByName, IconExpand } from "../../config/Icons";
 import { IManufacturer, IOrder, IProcessItem } from "../../interface/Interface";
+import { IOrderTest } from "./OrderOverview";
 
 interface Props {
-  order: IOrder;
+  order: IOrderTest;
 }
 
 interface State {
@@ -71,7 +72,7 @@ const OrderItem: React.FC<Props> = (props) => {
       <section className="flex flex-col md:flex-row justify-between md:justify-start md:gap-[10%] p-2 gap-2">
         <h2>Bestellung: {order.orderId}</h2>
         <h2>Datum: {new Date().getDate()}</h2>
-        <h2>Status: {order.orderState}</h2>
+        {/* <h2>Status: {order.orderState}</h2> */}
       </section>
       <hr />
       <section className="flex flex-col gap-5">
@@ -90,31 +91,33 @@ const OrderItem: React.FC<Props> = (props) => {
             ${processOpen === true ? "" : "max-h-96 overflow-hidden"}
             `}
           >
-            {order.processList.map((process: IProcessItem, index: number) => (
-              <div
-                key={index}
-                className="
+            {order.userOrders.cart.map(
+              (process: IProcessItem, index: number) => (
+                <div
+                  key={index}
+                  className="
                 flex flex-row items-center justify-between 
                 w-full bg-gray-100
                 md:flex-col md:w-fit
               hover:bg-gray-300 hover:cursor-pointer
                 "
-              >
-                <img
-                  className="max-w-[100px] md:max-w-[150px]"
-                  src={require("../../assets/images/model_placeholder.png")}
-                  alt="Model"
-                />
-                <div>
-                  {process.model === undefined
-                    ? index
-                    : process.model.title === undefined
-                    ? "process.model.name"
-                    : process.model.title}
+                >
+                  <img
+                    className="max-w-[100px] md:max-w-[150px]"
+                    src={require("../../assets/images/model_placeholder.png")}
+                    alt="Model"
+                  />
+                  <div>
+                    {process.model === undefined
+                      ? index
+                      : process.model.title === undefined
+                      ? "process.model.name"
+                      : process.model.title}
+                  </div>
+                  <div>Bli Bla Blub</div>
                 </div>
-                <div>Bli Bla Blub</div>
-              </div>
-            ))}
+              )
+            )}
           </div>
           {isElementBiggerThanPx(processBox, 384) === true ? (
             <div

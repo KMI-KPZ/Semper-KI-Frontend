@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Button from "../components/General/Button";
-import useChatGPTWebSocket from "../hooks/useChatGPT";
 import { useCheckoutWebSocket } from "../hooks/useCheckoutWebSocket";
 
 export const RequestTest: React.FC = () => {

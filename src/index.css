@@ -1,4 +1,7 @@
 /* @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap'); */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
     @font-face {
@@ -21,8 +24,18 @@
         font-style: italic;
         src: url(/public/assets/fonts/PTSans-BoldItalic.ttf) format("truetype");
     }
+    .link {
+        @apply transition duration-500 ease-in-out hover:text-türkis text-grau-400 font-bold;
+        transition-timing-function: cubic-bezier(.645,.045,.355,1);
+    }
+    .bezier {
+        transition-timing-function: cubic-bezier(.645,.045,.355,1);
+    }
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@layer components {
+
+}
+
+@layer utilities {
+}

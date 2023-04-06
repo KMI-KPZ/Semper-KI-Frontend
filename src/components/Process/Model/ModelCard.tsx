@@ -1,5 +1,6 @@
 import { IModel } from "../../../interface/Interface";
 import React from "react";
+import Button from "../../General/Button";
 
 interface Props {
   model: IModel;
@@ -73,11 +74,8 @@ export const ModelCard: React.FC<Props> = (props) => {
           className={`flex  flex-wrap gap-2 ${
             grid === true ? "flex-row" : "flex-col"
           }`}
-          onClick={handleOnClickSelect}
         >
-          <div className="text-white flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer">
-            Auswählen
-          </div>
+          <Button onClick={handleOnClickSelect}>Auswählen</Button>
         </div>
       </div>
     </div>

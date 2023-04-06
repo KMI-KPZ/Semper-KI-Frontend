@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import useModelUpload from "../../../hooks/useModelUpload";
 import { IModel } from "../../../interface/Interface";
 import LoadingAnimation from "../../LoadingAnimation/LoadingAnimation";
+import Button from "../../General/Button";
 
 interface Props {
   setProgress(path: string): void;
@@ -188,12 +189,7 @@ export const ModelUpload: React.FC<Props> = (props) => {
         <h2>{t("model.upload.card.headline")}</h2>
         {t("model.upload.card.text")}
       </div>
-      <div
-        className="max-w-[150px] text-white flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer"
-        onClick={handleClickNext}
-      >
-        {t("model.upload.next")}
-      </div>
+      <Button onClick={handleClickNext}>{t("model.upload.next")}</Button>
     </div>
   );
 };

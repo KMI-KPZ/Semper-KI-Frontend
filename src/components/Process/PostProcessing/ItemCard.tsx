@@ -60,7 +60,7 @@ const ItemCard = <Item extends IPostProcessing>(props: Props<Item>) => {
         <h2 className="text-2xl font-bold">{item.title}</h2>
         <input
           type="checkbox"
-          className="h-10 w-10"
+          className="h-10 w-10 checked:accent-türkis"
           checked={item.checked}
           onClick={handleOnClickCheckbox}
           onChange={handleOnChangeCheckbox}

@@ -7,6 +7,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 import { useCheckoutWebSocket } from "../../hooks/useCheckoutWebSocket";
+import Button from "../General/Button";
 
 interface Props {}
 interface State {
@@ -143,24 +144,23 @@ const Checkout: React.FC<Props> = (props) => {
 
   const renderCheckButtons = () => (
     <div className="flex flex-col gap-3 md:flex-row w-full">
-      <div
+      <Button
         onClick={handleOnClickPrintable}
-        className="text-white flex flex-row justify-center text-center items-center whitespace-nowrap w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer"
+        size="full"
+        active={!printable.loading}
       >
         Druckbarkeit prüfen
-      </div>
-      <div
+      </Button>
+      <Button
         onClick={handleOnClickLogistics}
-        className="text-white flex flex-row justify-center text-center items-center whitespace-nowrap w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer"
+        size="full"
+        active={!logistics.loading}
       >
         Lieferzeit berechnen
-      </div>
-      <div
-        onClick={handleOnClickPrice}
-        className="text-white flex flex-row justify-center text-center items-center whitespace-nowrap w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer"
-      >
+      </Button>
+      <Button onClick={handleOnClickPrice} size="full" active={!price.loading}>
         Preis berechnen
-      </div>
+      </Button>
     </div>
   );
   const renderLoadingAnimation = () => (
@@ -214,17 +214,14 @@ const Checkout: React.FC<Props> = (props) => {
       <div className="bg-white w-full p-5 flex flex-col gap-5 justify-start items-center">
         <h1 className="text-center p-2 w-full">Auftrag Anfragen</h1>
         {renderCheckButtons()}
-        <div
-          className={`text-white flex flex-row gap-5 justify-center text-center items-center whitespace-nowrap w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer ${
-            checkAll === true
-              ? "bg-blue-600 hover:bg-blue-400 hover:cursor-pointer"
-              : "bg-slate-600 hover:bg-slate-400 hover:cursor-not-allowed"
-          }`}
+        <Button
+          active={checkAll === true}
           onClick={handleOnClickSend}
+          icon={<SendIcon fontSize="large" />}
+          iconPos="back"
         >
           <h2 className="text-white">Anfragen</h2>
-          <SendIcon fontSize="large" />
-        </div>
+        </Button>
       </div>
       {showError === true ? renderError() : null}
       {order.loading === false && orderSendSuccesfull === true

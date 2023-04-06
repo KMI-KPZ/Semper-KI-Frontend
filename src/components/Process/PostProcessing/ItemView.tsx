@@ -3,6 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { IPostProcessing } from "../../../interface/Interface";
 import { EPostProcessingOptionType } from "../../../interface/enums";
 import ItemCard from "./ItemCard";
+import Button from "../../General/Button";
 
 interface Props<Item> {
   item: Item;
@@ -39,6 +40,11 @@ const ItemView = <Item extends IPostProcessing>(props: Props<Item>) => {
     }
   };
 
+  const handleOnClickButton = () => {
+    checkItem(item);
+    closeItemView();
+  };
+
   return (
     <div className="flex flex-col gap-5 items-center justify-start bg-white h-screen w-screen xl:w-fit xl:max-h-[90vh] overflow-x-hidden+">
       <div className="xl:hidden flex flex-row-reverse w-full">
@@ -60,11 +66,12 @@ const ItemView = <Item extends IPostProcessing>(props: Props<Item>) => {
       <div className="flex flex-row items-center justify-center">
         {renderInput(item.type)}
       </div>
-      <div className="pb-2" onClick={(e) => checkItem(item)}>
-        <div className=" text-white flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer">
-          Auswählen
-        </div>
-      </div>
+      <Button
+        onClick={handleOnClickButton}
+        style={item.checked ? "secondary" : "primary"}
+      >
+        {item.checked ? "Entfernen" : "Auswählen"}
+      </Button>
     </div>
   );
 };

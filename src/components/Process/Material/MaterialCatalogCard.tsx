@@ -1,6 +1,7 @@
 import { IMaterial } from "../../../interface/Interface";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import Button from "../../General/Button";
 interface Props {
   material: IMaterial;
   grid: boolean;
@@ -55,16 +56,7 @@ export const MaterialCatalogCard: React.FC<Props> = (props) => {
             <div key={index}>{title}</div>
           ))}
         </div>
-        <div
-          className={`flex  flex-wrap gap-2 ${
-            grid === true ? "flex-row" : "flex-col"
-          }`}
-          onClick={handleOnClickSelect}
-        >
-          <div className="text-white flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer">
-            Auswählen
-          </div>
-        </div>
+        <Button onClick={handleOnClickSelect}>Auswählen</Button>
       </div>
     </div>
   );

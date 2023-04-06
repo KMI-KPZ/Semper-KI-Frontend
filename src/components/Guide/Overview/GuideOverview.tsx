@@ -22,7 +22,7 @@ const GuideOverview: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex flex-col gap-5 max-h-[80vh] bg-white overflow-y-scroll p-5">
+    <div className="flex flex-col gap-5 max-h-[80vh] bg-white overflow-y-auto p-5">
       <h1>Überblick</h1>
       {questions.map((question: IGuideQuestion, index: number) => (
         <div

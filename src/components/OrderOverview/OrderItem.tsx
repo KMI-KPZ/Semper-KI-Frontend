@@ -1,8 +1,8 @@
-import { Button } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { getIconByName, IconExpand } from "../../config/Icons";
 import { IManufacturer, IOrder, IProcessItem } from "../../interface/Interface";
 import { IOrderTest } from "./OrderOverview";
+import Button from "../General/Button";
 
 interface Props {
   order: IOrderTest;
@@ -15,8 +15,6 @@ interface State {
 
 const OrderItem: React.FC<Props> = (props) => {
   const { order } = props;
-  const processBox = useRef<HTMLDivElement>(null);
-  const manufacturerBox = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<State>({
     processOpen: false,
     manufacturerOpen: false,
@@ -84,7 +82,6 @@ const OrderItem: React.FC<Props> = (props) => {
           "
         >
           <div
-            ref={processBox}
             className={`
             flex flex-col items-center justify-start gap-5 w-full
             md:flex-row md:overflow-x-auto 
@@ -119,18 +116,6 @@ const OrderItem: React.FC<Props> = (props) => {
               )
             )}
           </div>
-          {isElementBiggerThanPx(processBox, 384) === true ? (
-            <div
-              className="absolute bottom-0 md:hidden border-b-2 border-gray-700 w-full flex flex-row justify-center"
-              onClick={handleOnClickProcessExpand}
-            >
-              <img
-                src={IconExpand}
-                className={`rounded-full border-2 border-gray-700 p-2 h-12 translate-y-6 bg-white hover:bg-gray-300 hover:cursor-pointer 
-              ${processOpen === true ? "rotate-180" : ""}`}
-              />
-            </div>
-          ) : null}
         </div>
       </section>
       <hr />
@@ -143,7 +128,6 @@ const OrderItem: React.FC<Props> = (props) => {
           "
         >
           <div
-            ref={manufacturerBox}
             className={`
             flex flex-col items-center justify-start gap-5 w-full
             md:flex-row md:overflow-x-auto 
@@ -170,31 +154,13 @@ const OrderItem: React.FC<Props> = (props) => {
               )
             )}
           </div>
-          {isElementBiggerThanPx(manufacturerBox, 384) === true ? (
-            <div
-              className="absolute bottom-0 md:hidden border-b-2 border-gray-700 w-full flex flex-row justify-center"
-              onClick={handleOnClickManufacturerExpand}
-            >
-              <img
-                src={IconExpand}
-                className={`rounded-full border-2 border-gray-700 p-2 h-12 translate-y-6 bg-white hover:bg-gray-300 hover:cursor-pointer 
-              ${manufacturerOpen === true ? "rotate-180" : ""}`}
-              />
-            </div>
-          ) : null}
         </div>
       </section>
       <hr />
       <section className="flex flex-col md:flex-row gap-3 md:gap-5 justify-center items-center text-white">
-        <div className="w-full md:w-fit flex flex-row justify-center px-3 py-2 bg-blue-600 rounded hover:bg-blue-400 hover:cursor-pointer">
-          Auftrag Stonieren
-        </div>
-        <div className="w-full md:w-fit flex flex-row justify-center px-3 py-2 bg-blue-600 rounded hover:bg-blue-400 hover:cursor-pointer">
-          Nachrichten
-        </div>
-        <div className="w-full md:w-fit flex flex-row justify-center px-3 py-2 bg-blue-600 rounded hover:bg-blue-400 hover:cursor-pointer">
-          Auftrag nochmal bestellen
-        </div>
+        <Button>Auftrag Stonieren</Button>
+        <Button>Nachrichten</Button>
+        <Button>Auftrag nochmal bestellen</Button>
       </section>
     </li>
   );

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useCart from "../../hooks/useCart";
 import { IProcessItem } from "../../interface/Interface";
 import OrderItem from "./OrderItem";
+import Button from "../General/Button";
 
 interface Props {}
 
@@ -78,29 +79,12 @@ const Order: React.FC<Props> = (props) => {
           Bitte die makierten Produkte vervollständigen
         </h2>
       ) : null}
-      <section className="text-white flex flex-col gap-5 md:flex-row justify-start items-center md:justify-center">
-        <div
-          className="w-full md:w-fit flex flex-row justify-center px-3 py-2 bg-blue-600 rounded hover:bg-blue-400 hover:cursor-pointer"
-          onClick={handleOnClickEdit}
-        >
-          Bearbeiten
-        </div>
-        <div
-          className={`w-full md:w-fit flex flex-row justify-center px-3 py-2 rounded  ${
-            error === true
-              ? "bg-gray-600 hover:bg-gray-400 hover:cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-400 hover:cursor-pointer"
-          }`}
-          onClick={handleOnClickSendRequest}
-        >
+      <section className="w-full text-white flex flex-col gap-5 md:flex-row justify-start items-center md:justify-center">
+        <Button onClick={handleOnClickEdit}>Bearbeiten</Button>
+        <Button active={!error} onClick={handleOnClickSendRequest}>
           Auftrag Anfragen
-        </div>
-        <div
-          className="w-full md:w-fit flex flex-row justify-center px-3 py-2 bg-blue-600 rounded hover:bg-blue-400 hover:cursor-pointer"
-          onClick={handleOnClickClear}
-        >
-          Auftrag leeren
-        </div>
+        </Button>
+        <Button onClick={handleOnClickClear}>Auftrag leeren</Button>
       </section>
     </div>
   );

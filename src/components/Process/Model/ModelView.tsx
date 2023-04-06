@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { IModel } from "../../../interface/Interface";
 import { getModelURI } from "../../../services/utils";
+import Button from "../../General/Button";
 
 interface Props {
   model: IModel;
@@ -23,7 +24,7 @@ const ModelView: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex flex-col gap-5 items-center justify-start bg-white h-fit w-full">
+    <div className="flex flex-col gap-5 items-center justify-start bg-white h-fit w-full p-5">
       <h2 className="">{model.title}</h2>
       <img className="w-full max-w-xs" src={getModelURI(model)} alt="Model" />
       <div className="model-view-tags">
@@ -45,11 +46,7 @@ const ModelView: React.FC<Props> = (props) => {
             ))
           : "keine"}
       </div>
-      <div className="pb-2" onClick={deselectModel}>
-        <div className=" text-white flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer">
-          Ändern
-        </div>
-      </div>
+      <Button onClick={deselectModel}>Ändern</Button>
     </div>
   );
 };

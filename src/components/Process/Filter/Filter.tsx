@@ -3,12 +3,11 @@ import { useTranslation } from "react-i18next";
 import { IFilterItem } from "./Interface";
 import CloseIcon from "@mui/icons-material/Close";
 import "./Filter.scss";
-import { Button } from "@mui/material";
 
 import FilterCard from "./FilterCard";
 import { IProgress } from "../../../interface/Interface";
-import { use } from "i18next";
 import { AppContext } from "../../App/App";
+import Button from "../../General/Button";
 
 interface Props {
   filterOpen: boolean;
@@ -103,7 +102,7 @@ const Filter: React.FC<Props> = (props) => {
     }));
   };
   const handleOnClickResetButton = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
     setState((prevState) => ({
@@ -119,7 +118,7 @@ const Filter: React.FC<Props> = (props) => {
     setFilterOpen(false);
   };
   const handleOnClickApplyButton = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
     callApplyFilters();
@@ -197,18 +196,8 @@ const Filter: React.FC<Props> = (props) => {
         ))}
       </div>
       <div className="flex justify-center gap-2 flex-col xl:flex-row text-white">
-        <div
-          className="flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer"
-          onClick={handleOnClickResetButton}
-        >
-          Zurücksetzen
-        </div>
-        <div
-          className="flex flex-row justify-center items-center w-full p-2 rounded bg-blue-600 hover:bg-blue-400 hover:cursor-pointer"
-          onClick={handleOnClickApplyButton}
-        >
-          Anwenden
-        </div>
+        <Button onClick={handleOnClickResetButton}>Zurücksetzen</Button>
+        <Button onClick={handleOnClickApplyButton}>Anwenden</Button>
       </div>
     </div>
   );

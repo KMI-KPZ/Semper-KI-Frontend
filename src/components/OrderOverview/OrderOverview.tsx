@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IOrder } from "../../interface/Interface";
 import { EOrderState } from "../../interface/enums";
@@ -41,17 +41,13 @@ const testOrders: IOrder[] = [
 const OrderOverview: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { data, isLoading, error } = useOrders();
-
-  const getOrderDataKey = (dataTypeIndex: number) => {
-    return EOrderDataTypes[dataTypeIndex].toString();
-  };
-
+  const [orders, setOrders] = useState<IOrderTest[]>([]);
   const generateOrders = (data: IOrdersResponse) => {
-    let orders: IOrderTest[] = [];
+    let newOrders: IOrderTest[] = [];
     data.forEach((dataObject: object, dataTypeIndex) => {
       Object.keys(dataObject).forEach((orderId) => {
-        if (orders.filter((order) => order.orderId === orderId).length === 0)
-          orders.push({
+        if (newOrders.filter((order) => order.orderId === orderId).length === 0)
+          newOrders.push({
             orderId: orderId,
             dates: { created: "", updated: "" },
             files: [],
@@ -61,17 +57,16 @@ const OrderOverview: React.FC<Props> = (props) => {
           });
         if (isKey(dataObject, orderId)) {
           {
-            let mutateOrder: IOrderTest | undefined = orders
+            let mutateOrder: IOrderTest | undefined = newOrders
               .filter((order) => order.orderId === orderId)
               .pop();
             if (mutateOrder !== undefined) {
-              console.log(EOrderDataTypes[dataTypeIndex], dataObject[orderId]);
               const orderKey = EOrderDataTypes[dataTypeIndex];
               if (isKey(mutateOrder, orderKey)) {
                 mutateOrder[orderKey] = dataObject[orderId];
               }
-              orders = [
-                ...orders.filter((_order) => _order.orderId !== orderId),
+              newOrders = [
+                ...newOrders.filter((_order) => _order.orderId !== orderId),
                 mutateOrder,
               ];
             }
@@ -79,8 +74,14 @@ const OrderOverview: React.FC<Props> = (props) => {
         }
       });
     });
-    return orders;
+    console.log("generateOrders", newOrders);
+
+    setOrders(newOrders);
   };
+
+  useEffect(() => {
+    generateOrders(data);
+  }, [data]);
 
   return (
     <div className="flex flex-col items-center w-full gap-5 overflow-x-auto overflow-y-hidden p-3">
@@ -100,10 +101,10 @@ const OrderOverview: React.FC<Props> = (props) => {
           <img src={IconX} />
         </div>
       ) : null}
-      {!isLoading && !error && data.length > 0 ? (
+      {!isLoading && !error ? (
         <ul className="w-full gap-5 flex flex-col">
-          {data.length > 0 ? (
-            generateOrders(data).map((order: IOrderTest, index: number) => (
+          {orders.length > 0 ? (
+            orders.map((order: IOrderTest, index: number) => (
               <OrderItem order={order} key={index} />
             ))
           ) : (

@@ -199,20 +199,22 @@ export const RequestTest: React.FC = () => {
       });
   };
 
-  const [socketValue, setSocketValue] = useState("");
-  const [messageValue, setMessageValue] = useState<string>("");
+  const [chat, setChat] = useState<{ send: boolean; title: string }[]>([]);
+  const [inputMessage, setInputMessage] = useState<string>("");
   const handleOnMessageWS = (event: MessageEvent) => {
-    setState(event.data);
+    setChat((prevState) => [...prevState, { title: event.data, send: false }]);
   };
   const { socket, state: wsState } = useCheckoutWebSocket(handleOnMessageWS);
 
-  const handleOnChangeMessage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMessageValue(e.currentTarget.value);
-    console.log(e.currentTarget.value);
+  const handleOnChangeMessageInput = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputMessage(e.currentTarget.value);
   };
   const handleOnClickSendMessage = () => {
-    socket?.send(messageValue);
-    setMessageValue("");
+    socket?.send(inputMessage);
+    setChat((prevState) => [...prevState, { title: inputMessage, send: true }]);
+    setInputMessage("");
   };
 
   return (
@@ -358,28 +360,36 @@ export const RequestTest: React.FC = () => {
           LoadFile
         </Button>
       </Paper>
-      <Paper
-        sx={{
-          padding: "20px",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "20px",
-        }}
-      >
-        <h3>{wsState}</h3>
-        <h3>{socketValue}</h3>
-        <input
-          value={messageValue}
-          type="text"
-          className="border-2"
-          onChange={handleOnChangeMessage}
-        />
-        <Button variant="contained" onClick={handleOnClickSendMessage}>
-          Send Message To WebSocket
-        </Button>
-      </Paper>
+      <div className="w-full bg-white p-5 gap-5 flex flex-col justify-center items-center">
+        {chat.length > 0 ? (
+          <div className="flex flex-col gap-1 items-center justify-center bg-slate-300 w-2/3 p-5">
+            <h2>Chat:</h2>
+            {chat.map(({ send, title }, index) => (
+              <div
+                key={index}
+                className={`flex flex-row w-full items-center ${
+                  send ? "justify-end" : "justify-start"
+                }`}
+              >
+                <h3>{title}</h3>
+              </div>
+            ))}
+          </div>
+        ) : null}
+        <div className="flex flex-row gap-5 justify-around items-center">
+          <h3>{wsState}</h3>
+
+          <input
+            value={inputMessage}
+            type="text"
+            className="border-2"
+            onChange={handleOnChangeMessageInput}
+          />
+          <Button variant="contained" onClick={handleOnClickSendMessage}>
+            Send Message To WebSocket
+          </Button>
+        </div>
+      </div>
       {state.loading !== null && state.loading === true && (
         <Paper sx={{ marginTop: 1, padding: 1 }}>
           <Typography variant="h3">Loading...</Typography>

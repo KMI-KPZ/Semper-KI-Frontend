@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 interface ReturnProps {
+  sendMessage(message: string): void;
   socket: WebSocket | null;
   state: WebSocketState;
 }
@@ -33,5 +34,16 @@ export const useCheckoutWebSocket = (
     };
   }, []);
 
-  return { socket, state };
+  const sendMessage = (message: string) => {
+    if (state === "connected") {
+      socket?.send(
+        JSON.stringify({
+          type: "text",
+          data: message,
+        })
+      );
+    }
+  };
+
+  return { sendMessage, socket, state };
 };

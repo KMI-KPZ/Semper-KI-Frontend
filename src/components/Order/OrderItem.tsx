@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { IProcessItem } from "../../interface/Interface";
 import { getModelURI } from "../../services/utils";
 import { AppContext } from "../App/App";
+import Button from "../General/Button";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ErrorIcon from "@mui/icons-material/Error";
 
 interface Props {
   process: IProcessItem;
@@ -34,6 +38,15 @@ const OrderItem: React.FC<Props> = (props) => {
     navigate("/process/postprocessing");
     selectProgressItem("postprocessing");
   };
+  const handleOnClickEdit = () => {
+    navigate("/process/model");
+    selectProgressItem("model");
+  };
+  const handleOnClickDelete = () => {
+    if (window.confirm("Item wirklich löschen?")) {
+    } else {
+    }
+  };
 
   return (
     <ul className="flex flex-col bg-white md:gap-4 md:flex-row w-full md:flex-wrap justify-between">
@@ -48,12 +61,13 @@ const OrderItem: React.FC<Props> = (props) => {
           alt="Model"
         />
       </li>
-      <li className="flex flex-col w-full md:w-4/5 p-2">
+      <li className="flex flex-col w-full md:w-4/5 p-5">
         <ul className="flex flex-col bg-white gap-2 md:flex-row w-full md:h-full md:flex-wrap md:justify-around justify-center">
           <li
             onClick={handleOnClickModel}
-            className={`flex flex-col w-full md:w-fit py-3 px-5 hover:bg-slate-200 hover:cursor-pointer
-             ${model === undefined ? "bg-red-100" : ""}`}
+            className="flex flex-col w-full md:w-fit py-2 px-4 
+            hover:cursor-pointer hover:bg-slate-50 hover:shadow-inner 
+            shadow-md transition-all ease-in-out duration-300 "
           >
             {model !== undefined ? (
               <>
@@ -65,16 +79,19 @@ const OrderItem: React.FC<Props> = (props) => {
               </>
             ) : (
               <>
-                <h2>Model-Name</h2>
+                <h2>
+                  Model{" "}
+                  {model === undefined ? <ErrorIcon color="error" /> : null}
+                </h2>
                 <span>---</span>
               </>
             )}
           </li>
           <li
             onClick={handleOnClickMaterial}
-            className={`flex flex-col w-full md:w-fit py-3 px-5 hover:bg-slate-200 hover:cursor-pointer ${
-              material === undefined ? "bg-red-100" : ""
-            }`}
+            className="flex flex-col w-full md:w-fit py-2 px-4 
+            hover:cursor-pointer hover:bg-slate-50 hover:shadow-inner 
+            shadow-md transition-all ease-in-out duration-300 "
           >
             {material !== undefined ? (
               <>
@@ -83,16 +100,19 @@ const OrderItem: React.FC<Props> = (props) => {
               </>
             ) : (
               <>
-                <h2>Material-Name</h2>
+                <h2>
+                  Material{" "}
+                  {material === undefined ? <ErrorIcon color="error" /> : null}
+                </h2>
                 <span>---</span>
               </>
             )}
           </li>
           <li
             onClick={handleOnClickPostprocessing}
-            className={`flex flex-col w-full md:w-fit py-3 px-5 hover:bg-slate-200 hover:cursor-pointer ${
-              postProcessings === undefined ? "bg-red-100" : ""
-            }`}
+            className="flex flex-col w-full md:w-fit py-2 px-4 
+            hover:cursor-pointer hover:bg-slate-50 hover:shadow-inner 
+            shadow-md transition-all ease-in-out duration-300 "
           >
             {postProcessings !== undefined ? (
               <>
@@ -105,10 +125,21 @@ const OrderItem: React.FC<Props> = (props) => {
               </>
             ) : (
               <>
-                <h2>Nachbearbeitungen</h2>
+                <h2>
+                  Nachbearbeitungen{" "}
+                  {postProcessings === undefined ? (
+                    <ErrorIcon color="error" />
+                  ) : null}
+                </h2>
                 <span>---</span>
               </>
             )}
+          </li>
+          <li className="flex flex-col items-center justify-end w-full md:w-fit py-3 px-5 gap-5">
+            <div className="flex flex-row gap-3 justify-center items-center">
+              <Button onClick={handleOnClickEdit} icon={<EditIcon />} />
+              <Button onClick={handleOnClickDelete} icon={<DeleteIcon />} />
+            </div>
           </li>
         </ul>
       </li>

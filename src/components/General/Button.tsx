@@ -90,7 +90,7 @@ const Button: React.FC<Props> = (props) => {
       onClick={handleOnClickButton}
     >
       {iconPos === "front" ? icon : null}
-      <span>{children}</span>
+      {children ? <span>{children}</span> : null}
       {iconPos === "back" ? icon : null}
     </a>
   );

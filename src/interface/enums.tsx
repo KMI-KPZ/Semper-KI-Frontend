@@ -46,3 +46,13 @@ export enum EModelType {
   "kiss",
   "user",
 }
+
+export enum EHeaderItemPreferred {
+  "header",
+  "menu",
+}
+export enum EHeaderItemLoggedIn {
+  "true",
+  "false",
+  "both",
+}

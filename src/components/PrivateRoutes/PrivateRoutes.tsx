@@ -13,12 +13,10 @@ interface AdminProps {
 
 export const PrivateRoutes: React.FC<Props> = (props) => {
   const { user } = props;
-
-  return user !== undefined ? <Outlet /> : <Navigate to="/login" />;
+  return user !== undefined ? <Outlet /> : <Navigate to="/login-client" />;
 };
 
 export const PrivateAdminRoutes: React.FC<AdminProps> = (props) => {
   const { userType } = props;
-
   return userType === EUserType.admin ? <Outlet /> : <Navigate to="/" />;
 };

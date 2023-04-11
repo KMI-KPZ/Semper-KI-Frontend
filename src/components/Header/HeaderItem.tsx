@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { getIconByName } from "../../constants/Icons";
 import { IHeaderItem } from "../../interface/Interface";
@@ -11,6 +12,7 @@ interface Props {
 
 const HeaderItem: React.FC<Props> = (props) => {
   const { headeritem, closeMenus, isMenuItem } = props;
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleOnClick = (
@@ -41,7 +43,7 @@ const HeaderItem: React.FC<Props> = (props) => {
           src={getIconByName(headeritem.icon)}
           alt={`link to ${headeritem.link}`}
         />
-        {headeritem.title}
+        {t(`header.${headeritem.title}`)}
       </a>
     </li>
   );

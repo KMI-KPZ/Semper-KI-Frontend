@@ -9,8 +9,8 @@ import HeaderItem from "./HeaderItem";
 import _HeaderItems from "./HeaderItems.json";
 import { AppContext } from "../App/App";
 import { IHeaderItem } from "@/interface/Interface";
-import { EUserType } from "@/interface/enums";
 import { IconArrowR, IconX } from "src/constants/Icons";
+import { EHeaderItemPreferred, EUserType } from "../../interface/enums";
 const HeaderItems = _HeaderItems as IHeaderItem[];
 
 interface Language {
@@ -44,7 +44,8 @@ interface State {
 
 export const Header: React.FC<Props> = (props) => {
   const { isLoggedIn, userType } = props;
-  const { setAppState, appState } = useContext(AppContext);
+
+  const { setAppState } = useContext(AppContext);
   const navigate = useNavigate();
   const { i18n } = useTranslation();
   const [state, setState] = useState<State>({
@@ -100,11 +101,9 @@ export const Header: React.FC<Props> = (props) => {
       <ul className="hidden md:flex flex-row gap-4 justify-center items-center">
         {HeaderItems.filter(
           (headerItem: IHeaderItem) =>
-            headerItem.preferred === "header" &&
+            headerItem.preferred === EHeaderItemPreferred.header &&
             headerItem.userType.includes(userType) &&
-            (headerItem.loggedIn === undefined ||
-              (headerItem.loggedIn !== undefined &&
-                headerItem.loggedIn === isLoggedIn))
+            headerItem.loggedIn.includes(isLoggedIn)
         ).map((headerItem: IHeaderItem, index: number) => (
           <HeaderItem
             key={index}
@@ -132,11 +131,9 @@ export const Header: React.FC<Props> = (props) => {
             </div>
             {HeaderItems.filter(
               (headerItem: IHeaderItem) =>
-                headerItem.preferred === "header" &&
+                headerItem.preferred === EHeaderItemPreferred.header &&
                 headerItem.userType.includes(userType) &&
-                (headerItem.loggedIn === undefined ||
-                  (headerItem.loggedIn !== undefined &&
-                    headerItem.loggedIn === isLoggedIn))
+                headerItem.loggedIn.includes(isLoggedIn)
             ).map((headerItem: IHeaderItem, index: number) => (
               <HeaderItem
                 key={index}
@@ -157,11 +154,9 @@ export const Header: React.FC<Props> = (props) => {
         )}
         {HeaderItems.filter(
           (headerItem: IHeaderItem) =>
-            headerItem.preferred === "menu" &&
+            headerItem.preferred === EHeaderItemPreferred.menu &&
             headerItem.userType.includes(userType) &&
-            (headerItem.loggedIn === undefined ||
-              (headerItem.loggedIn !== undefined &&
-                headerItem.loggedIn === isLoggedIn))
+            headerItem.loggedIn.includes(isLoggedIn)
         ).map((headerItem: IHeaderItem, index: number) => (
           <HeaderItem
             isMenuItem

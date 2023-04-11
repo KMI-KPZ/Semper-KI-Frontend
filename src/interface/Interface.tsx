@@ -1,4 +1,6 @@
 import {
+  EHeaderItemLoggedIn,
+  EHeaderItemPreferred,
   EOrderState,
   EPostProcessingOptionType,
   EProgressType,
@@ -137,11 +139,10 @@ export interface IMessage {
 
 export interface IHeaderItem {
   title: string;
-  i18n: string;
   link: string;
   icon: string;
   extern: boolean;
-  preferred: string;
+  preferred: EHeaderItemPreferred;
   userType: EUserType[];
-  loggedIn?: boolean;
+  loggedIn: boolean[];
 }

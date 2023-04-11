@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { getIconByName } from "../../config/Icons";
+import { getIconByName } from "../../constants/Icons";
 import { IHeaderItem } from "../../interface/Interface";
 
 interface Props {

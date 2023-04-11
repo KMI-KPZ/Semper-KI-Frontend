@@ -1,5 +1,5 @@
 import React from "react";
-import { getIconByName } from "../../../config/Icons";
+import { getIconByName } from "../../../constants/Icons";
 import { EGuideQuestionState } from "../../../interface/enums";
 import { IGuideOption } from "../Interface";
 import GButtons from "./GButtons";

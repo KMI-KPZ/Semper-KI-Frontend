@@ -12,8 +12,6 @@ import { Error } from "../Error/Error";
 import { IFilterItem } from "../Process/Filter/Interface";
 import Redirect from "../Redirect/Redirect";
 import Footer from "../Footer/Footer";
-import { URL_AboutUs } from "../../config/Constants";
-import { EOrderState, EUserType } from "../../interface/enums";
 import ServiceRoutes from "../Service/ServiceRoutes";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import GuideRoutes from "../Guide/GuideRoutes";
@@ -33,6 +31,8 @@ import Background from "../Background/Background";
 import Checkout from "../Checkout/Checkout";
 import Order from "../Order/Order";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
+import { EUserType } from "../../interface/enums";
+import { URL_AboutUs } from "../../constants/Constants";
 
 export interface IAppState {
   selectedProgressItem?: { index: number; progress: string };
@@ -177,7 +177,14 @@ const App: React.FC = () => {
               <Route path="*" element={<Navigate to="/guide" />} />
             </Route>
             <Route path="logout" element={<Logout />} />
-            <Route path="login" element={<Login userType={userType} />} />
+            <Route
+              path="login-client"
+              element={<Login userType={EUserType.client} />}
+            />
+            <Route
+              path="login-contractor"
+              element={<Login userType={EUserType.contractor} />}
+            />
             <Route
               path="aboutus"
               element={<Redirect link={URL_AboutUs} extern />}

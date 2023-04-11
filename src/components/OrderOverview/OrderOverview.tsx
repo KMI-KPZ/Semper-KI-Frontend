@@ -4,7 +4,7 @@ import { IOrder } from "../../interface/Interface";
 import { EOrderState } from "../../interface/enums";
 import { IOrdersResponse, useOrders } from "../../hooks/useOrders";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
-import { IconX } from "../../config/Icons";
+import { IconX } from "../../constants/Icons";
 import { isKey } from "../../services/utils";
 import { IProcessItem } from "../../interface/Interface";
 import OrderItem from "./OrderItem";

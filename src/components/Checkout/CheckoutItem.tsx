@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { IconX } from "../../config/Icons";
+import { IconX } from "../../constants/Icons";
 import useCheckout, { IRequestState } from "../../hooks/useCheckout";
 import { IProcessItem } from "../../interface/Interface";
 import { getModelURI } from "../../services/utils";

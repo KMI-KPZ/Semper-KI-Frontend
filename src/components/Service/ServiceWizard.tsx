@@ -1,5 +1,5 @@
 import React from "react";
-import { getIconByName } from "../../config/Icons";
+import { getIconByName } from "../../constants/Icons";
 import { IServiceChapter } from "./Interface";
 
 interface Props {

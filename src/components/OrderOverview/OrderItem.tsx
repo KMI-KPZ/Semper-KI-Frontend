@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { getIconByName, IconExpand } from "../../config/Icons";
+import { getIconByName, IconExpand } from "../../constants/Icons";
 import { IManufacturer, IOrder, IProcessItem } from "../../interface/Interface";
 import { IOrderTest } from "./OrderOverview";
 import Button from "../General/Button";
@@ -158,9 +158,9 @@ const OrderItem: React.FC<Props> = (props) => {
       </section>
       <hr />
       <section className="flex flex-col md:flex-row gap-3 md:gap-5 justify-center items-center text-white">
-        <Button>Auftrag Stonieren</Button>
+        <Button>Stonieren</Button>
         <Button>Nachrichten</Button>
-        <Button>Auftrag nochmal bestellen</Button>
+        <Button>nochmal bestellen</Button>
       </section>
     </li>
   );

@@ -2,7 +2,7 @@ import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import React, { useEffect, useRef, useState } from "react";
 import { getFileSizeAsString } from "../../../services/utils";
 import { useTranslation } from "react-i18next";
-import { IconDelete, IconUpload } from "../../../config/Icons";
+import { IconDelete, IconUpload } from "../../../constants/Icons";
 import { useNavigate } from "react-router-dom";
 import useModelUpload from "../../../hooks/useModelUpload";
 import { IModel } from "../../../interface/Interface";

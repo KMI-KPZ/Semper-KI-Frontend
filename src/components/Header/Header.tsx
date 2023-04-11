@@ -4,13 +4,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ClickAwayListener } from "@mui/material";
-import { IHeaderItem } from "../../interface/Interface";
 import HeaderItem from "./HeaderItem";
 
 import _HeaderItems from "./HeaderItems.json";
-import { EUserType } from "../../interface/enums";
-import { IconArrowR, IconX } from "../../config/Icons";
 import { AppContext } from "../App/App";
+import { IHeaderItem } from "@/interface/Interface";
+import { EUserType } from "@/interface/enums";
+import { IconArrowR, IconX } from "src/constants/Icons";
 const HeaderItems = _HeaderItems as IHeaderItem[];
 
 interface Language {

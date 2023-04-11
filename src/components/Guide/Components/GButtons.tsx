@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React from "react";
-import { getIconByName } from "../../../config/Icons";
+import { getIconByName } from "../../../constants/Icons";
 
 interface Props {
   handleOnClickBack?(): void;

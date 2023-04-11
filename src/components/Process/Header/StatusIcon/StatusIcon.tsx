@@ -1,5 +1,9 @@
 import React from "react";
-import { IconCheck, IconQuestionMark, IconX } from "../../../../config/Icons";
+import {
+  IconCheck,
+  IconQuestionMark,
+  IconX,
+} from "../../../../constants/Icons";
 import { EProcessStatusType } from "../../../../interface/enums";
 import { IProcessItem } from "../../../../interface/Interface";
 

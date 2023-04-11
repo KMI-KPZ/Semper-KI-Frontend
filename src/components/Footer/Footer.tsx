@@ -1,5 +1,5 @@
 import React from "react";
-import { URL_Datenschutz, URL_Impressum } from "../../config/Constants";
+import { URL_Datenschutz, URL_Impressum } from "../../constants/Constants";
 
 const Footer: React.FC = () => {
   return (

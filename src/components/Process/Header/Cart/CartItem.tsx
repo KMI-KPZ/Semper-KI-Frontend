@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { IconDelete } from "../../../../config/Icons";
+import { IconDelete } from "../../../../constants/Icons";
 import { IProcessItem } from "../../../../interface/Interface";
 import { ProcessContext } from "../../ProcessView";
 import StatusIcon from "../StatusIcon/StatusIcon";

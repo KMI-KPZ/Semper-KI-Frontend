@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { getIconByName } from "../../config/Icons";
+import { getIconByName } from "../../constants/Icons";
 import { ICardItem } from "./CardView";
 
 interface Props {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getIconByName, IconX } from "../../../../config/Icons";
+import { getIconByName, IconX } from "../../../../constants/Icons";
 import { IFilterItem } from "../Interface";
 
 interface Props {

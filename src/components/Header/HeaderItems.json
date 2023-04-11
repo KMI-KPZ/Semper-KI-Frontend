@@ -10,10 +10,20 @@
         "loggedIn":false
     },
     {
-        "title": "Anmelden",
-        "i18n":"login",
-        "link": "/login",
+        "title": "Kunde",
+        "i18n":"login-client",
+        "link": "/login-client",
         "icon": "IconPerson",
+        "extern": false,
+        "preferred":"header",
+        "userType": [0,1,2,3],
+        "loggedIn":false
+    },
+    {
+        "title": "Hersteller",
+        "i18n":"login-contractor",
+        "link": "/login-contractor",
+        "icon": "Icon3DPrinter",
         "extern": false,
         "preferred":"header",
         "userType": [0,1,2,3],

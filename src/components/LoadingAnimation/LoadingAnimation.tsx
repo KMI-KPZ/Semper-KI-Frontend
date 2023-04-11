@@ -1,15 +1,18 @@
 import React, { ReactNode } from "react";
-import "./LoadingAnimation.scss";
+import { Icon3DPrinter } from "../../constants/Icons";
+// import "./LoadingAnimation.scss";
 
 interface Props {
   color?: string;
 }
 
 const LoadingAnimation: React.FC<Props> = (props) => {
-  const { color } = props;
+  const {} = props;
   return (
-    <div className="lds-circle inline-block">
-      <div className="bg-black inline-block w-16 h-16 m-2 rounded-full"></div>
+    <div className="">
+      <div className="h-24 w-24 animate-bounce">
+        <img src={require("../../assets/images/logo192.png")} alt="" />
+      </div>
     </div>
   );
 };

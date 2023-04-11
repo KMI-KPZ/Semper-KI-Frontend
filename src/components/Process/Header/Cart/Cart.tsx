@@ -7,7 +7,7 @@ import {
   IconUpload,
   IconDashboard,
   IconDocument,
-} from "../../../../config/Icons";
+} from "../../../../constants/Icons";
 import { IProcessItem } from "../../../../interface/Interface";
 import { useNavigate } from "react-router-dom";
 

@@ -8,7 +8,7 @@ import {
   IconFast,
   IconQuestionMark,
   IconX,
-} from "../../config/Icons";
+} from "../../constants/Icons";
 import { EOrderState } from "../../interface/enums";
 import { IOrder } from "../../interface/Interface";
 

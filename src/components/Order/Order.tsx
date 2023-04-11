@@ -82,9 +82,9 @@ const Order: React.FC<Props> = (props) => {
       <section className="w-full text-white flex flex-col gap-5 md:flex-row justify-start items-center md:justify-center">
         <Button onClick={handleOnClickEdit}>Bearbeiten</Button>
         <Button active={!error} onClick={handleOnClickSendRequest}>
-          Auftrag Anfragen
+          Anfragen
         </Button>
-        <Button onClick={handleOnClickClear}>Auftrag leeren</Button>
+        <Button onClick={handleOnClickClear}>Leeren</Button>
       </section>
     </div>
   );

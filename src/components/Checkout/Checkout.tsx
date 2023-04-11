@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IconArrowR } from "../../config/Icons";
+import { IconArrowR } from "../../constants/Icons";
 import useCart from "../../hooks/useCart";
 import useCheckout, { IRequestState } from "../../hooks/useCheckout";
 import CheckoutItem from "./CheckoutItem";

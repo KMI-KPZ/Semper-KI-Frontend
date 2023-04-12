@@ -28,11 +28,12 @@ import AdminModelView from "../Admin/AdminModelView";
 import AdminMaterialView from "../Admin/AdminMaterialView";
 import AdminOrderView from "../Admin/AdminOrderView";
 import Background from "../Background/Background";
-import Checkout from "../Checkout/Checkout";
-import Order from "../Order/Order";
+import Checkout from "../AfterProcess/Checkout/Checkout";
+import Order from "../AfterProcess/Order/Order";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 import { EUserType } from "../../interface/enums";
 import { URL_AboutUs } from "../../constants/Constants";
+import ManufacturerView from "../AfterProcess/Manufacturer/ManufacturerView";
 
 export interface IAppState {
   selectedProgressItem?: { index: number; progress: string };
@@ -106,6 +107,7 @@ const App: React.FC = () => {
 
   const privateRoutes = (
     <Route element={<PrivateRoutes user={user} />}>
+      <Route path="manufacturer" element={<ManufacturerView />} />
       <Route path="checkout" element={<Checkout />} />
       <Route path="orders" element={<OrderOverview />} />
       <Route path="proceedings" element={<Error text="proceedings" />} />

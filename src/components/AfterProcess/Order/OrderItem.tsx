@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { IProcessItem } from "../../interface/Interface";
-import { getModelURI } from "../../services/utils";
-import { AppContext } from "../App/App";
-import Button from "../General/Button";
+import { IProcessItem } from "../../../interface/Interface";
+import { getModelURI } from "../../../services/utils";
+import { AppContext } from "../../App/App";
+import Button from "../../General/Button";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ErrorIcon from "@mui/icons-material/Error";
@@ -11,11 +11,12 @@ import ErrorIcon from "@mui/icons-material/Error";
 interface Props {
   process: IProcessItem;
   index: number;
+  deleteItem(index: number): void;
 }
 
 const OrderItem: React.FC<Props> = (props) => {
   const { setAppState } = useContext(AppContext);
-  const { process, index } = props;
+  const { process, index, deleteItem } = props;
   const navigate = useNavigate();
   const { model, material, postProcessings } = process;
 
@@ -44,7 +45,7 @@ const OrderItem: React.FC<Props> = (props) => {
   };
   const handleOnClickDelete = () => {
     if (window.confirm("Item wirklich löschen?")) {
-    } else {
+      deleteItem(index);
     }
   };
 
@@ -55,7 +56,7 @@ const OrderItem: React.FC<Props> = (props) => {
           className="h-30 md:h-full max-h-[250px] w-full object-cover"
           src={
             model === undefined
-              ? require("../../assets/images/model_placeholder.png")
+              ? require("../../../assets/images/model_placeholder.png")
               : getModelURI(model)
           }
           alt="Model"

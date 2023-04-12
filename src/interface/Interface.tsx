@@ -46,14 +46,14 @@ export interface IProcedure {
 }
 
 export interface IManufacturer {
-  manufacturerId?: number;
-  name: string;
-  propList?: string[];
-  certificateList?: string[];
-  distance?: number;
-  productionTime?: number;
-  deliverTime?: number;
-  location?: ILocation;
+  // manufacturerId?: number;
+  // name: string;
+  // propList?: string[];
+  // certificateList?: string[];
+  // distance?: number;
+  // productionTime?: number;
+  // deliverTime?: number;
+  // location?: ILocation;
 }
 
 export interface ILocation {

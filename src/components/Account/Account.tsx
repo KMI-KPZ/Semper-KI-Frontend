@@ -32,15 +32,6 @@ const Account: React.FC<Props> = (props) => {
       <span>name: {user.name}</span>
       <span>email: {user.email}</span>
       <span>type: {EUserType[userType]}</span>
-      <span>
-        {userType === EUserType.client ? <b>client</b> : "client"}
-        <Switch
-          color="default"
-          checked={userType === EUserType.contractor ? true : false}
-          onChange={handleOnChangeSwitch}
-        />
-        {userType === EUserType.contractor ? <b>contractor</b> : "contractor"}
-      </span>
       <span>created: {user.created}</span>
       <span>accessed: {user.accessed}</span>
       <span>updated: {user.updated}</span>

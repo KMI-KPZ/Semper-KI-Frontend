@@ -149,7 +149,8 @@ const OrderItem: React.FC<Props> = (props) => {
                     src={require("../../assets/images/firm_logo_placeholder.png")}
                     alt="Model"
                   />
-                  {manufacturer.name}
+                  {/* {manufacturer.name} */}
+                  Test-Hersteller
                 </div>
               )
             )}

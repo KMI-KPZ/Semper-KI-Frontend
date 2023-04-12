@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { IconArrowR } from "../../constants/Icons";
-import useCart from "../../hooks/useCart";
-import useCheckout, { IRequestState } from "../../hooks/useCheckout";
+import { IconArrowR } from "../../../constants/Icons";
+import useCart from "../../../hooks/useCart";
+import useCheckout, { IRequestState } from "../../../hooks/useCheckout";
 import CheckoutItem from "./CheckoutItem";
 import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
-import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
-import { useCheckoutWebSocket } from "../../hooks/useCheckoutWebSocket";
-import Button from "../General/Button";
+import LoadingAnimation from "../../LoadingAnimation/LoadingAnimation";
+import { useCheckoutWebSocket } from "../../../hooks/useCheckoutWebSocket";
+import Button from "../../General/Button";
 
 interface Props {}
 interface State {
@@ -42,7 +42,7 @@ const Checkout: React.FC<Props> = (props) => {
     showError,
     orderSendSuccesfull,
   } = state;
-  const { cart, loadCart } = useCart();
+  const { cart, error, status } = useCart();
   const {
     order,
     sendOrder,
@@ -71,10 +71,6 @@ const Checkout: React.FC<Props> = (props) => {
       time === undefined ? 3000 : time
     );
   };
-
-  useEffect(() => {
-    loadCart();
-  }, []);
 
   useEffect(() => {
     if (
@@ -131,7 +127,10 @@ const Checkout: React.FC<Props> = (props) => {
   };
   const handleOnClickPrintable = () => {
     checkPrintability(cart);
-    setState((prevState) => ({ ...prevState, checkPrintabilityCalled: true }));
+    setState((prevState) => ({
+      ...prevState,
+      checkPrintabilityCalled: true,
+    }));
   };
   const handleOnClickPrice = () => {
     checkPrices(cart);
@@ -208,6 +207,21 @@ const Checkout: React.FC<Props> = (props) => {
       </div>
     );
   };
+
+  if (status === "loading")
+    return (
+      <div className="flex flex-col items-center justify-center w-full h-full">
+        <h1 className="text-center p-2 bg-white w-full">Laden...</h1>
+      </div>
+    );
+  if (status === "error" && error !== null)
+    return (
+      <div className="flex flex-col items-center justify-center w-full h-full">
+        <h1 className="text-center p-2 bg-white w-full">
+          Error: {error.message}
+        </h1>
+      </div>
+    );
 
   return (
     <div className="flex flex-col items-center gap-5 w-full p-5">

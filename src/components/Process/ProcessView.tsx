@@ -35,6 +35,7 @@ export interface IProcessState {
   searchText: string;
   progress: IProgress;
   filterOpen: boolean;
+  hasChanged: boolean;
 }
 
 export interface IProcessContext {
@@ -47,13 +48,14 @@ export interface IProcessContext {
   setFilterOpen(open: boolean): void;
   searchModels(name: string): void;
 }
-const initialProcessState = (cart?: IProcessItem[]): IProcessState => ({
-  items: cart !== undefined && cart.length > 0 ? cart : [{ title: "Item 1" }],
+const initialProcessState = (): IProcessState => ({
+  items: [{ title: "Item 1" }],
   activeItemIndex: 0,
   searchText: "",
   grid: true,
   progress: { title: "Modell finden", link: "/process/model", type: 0 },
   filterOpen: false,
+  hasChanged: false,
 });
 
 export const ProcessContext = createContext<IProcessContext>({
@@ -84,10 +86,13 @@ export const ProcessContext = createContext<IProcessContext>({
 export const ProcessView: React.FC<Props> = (props) => {
   const { guideAnswers, isLoggedInResponse, selectedProgressItem } = props;
   const navigate = useNavigate();
-  const { cart, loadCart, updateCart } = useCart();
-  const [state, setState] = useState<IProcessState>(initialProcessState(cart));
-  const { grid, items, progress, activeItemIndex, filterOpen } = state;
-
+  const [state, setState] = useState<IProcessState>(initialProcessState());
+  const setChangesFalse = () => {
+    setState((prevState) => ({ ...prevState, hasChanged: false }));
+  };
+  const { cart, error, status, uploadCart } = useCart();
+  const { hasChanged, grid, items, progress, activeItemIndex, filterOpen } =
+    state;
   const { filters: filtersEmpty } = useFilter();
   const {
     data,
@@ -101,20 +106,11 @@ export const ProcessView: React.FC<Props> = (props) => {
     filtersData.length === 0 ? filtersEmpty : filtersData;
 
   useEffect(() => {
-    loadAllData(filtersEmpty);
-  }, []);
-
-  useEffect(() => {
-    if (isLoggedInResponse === true) {
-      loadCart();
-    }
-  }, [isLoggedInResponse]);
-
-  useEffect(() => {
     if (
       cart !== undefined &&
+      error === null &&
       (cart.length > 1 || (cart.length > 0 && checkForSelectedData(cart)))
-    )
+    ) {
       setState((prevState) => ({
         ...prevState,
         items: cart,
@@ -127,11 +123,17 @@ export const ProcessView: React.FC<Props> = (props) => {
             ? prevState.progress
             : getProgressByPath(selectedProgressItem.progress),
       }));
+    }
   }, [cart]);
 
   useEffect(() => {
-    updateCart(items);
-  }, [items]);
+    if (hasChanged === true)
+      uploadCart.mutate(items, {
+        onSuccess(data, variables, context) {
+          setChangesFalse();
+        },
+      });
+  }, [items, hasChanged]);
 
   const loadData = (title?: string) => {
     // console.log("Process| loadData", title);
@@ -152,18 +154,18 @@ export const ProcessView: React.FC<Props> = (props) => {
     }
   };
   const searchModels = (name: string): void => {
-    console.log("Process | searchModels |", name);
+    // console.log("Process | searchModels |", name);
     setState((prevState) => ({ ...prevState, searchText: name }));
   };
   const applyFilters = (filterItemList: IFilterItem[]): void => {
-    console.log("Process | applyFilters |", filterItemList);
+    // console.log("Process | applyFilters |", filterItemList);
     loadAllData(filterItemList);
   };
   const startNewProcess = (): void => {
     setState((prevState) => ({ ...prevState, items: [{}] }));
   };
   const createProcessItem = (model?: IModel): void => {
-    console.log("Process | createProcessItem |", model);
+    // console.log("Process | createProcessItem |", model);
 
     setState((prevState) => ({
       ...prevState,
@@ -179,23 +181,25 @@ export const ProcessView: React.FC<Props> = (props) => {
       ],
       progress: getProgressByPath("model"),
       activeItemIndex: prevState.items.length,
+      hasChanged: true,
     }));
   };
   const deleteProcessItem = (index: number): void => {
-    console.log("Process | deleteProcessItem |", index);
+    // console.log("Process | deleteProcessItem |", index);
 
     setState((prevState) => ({
       ...prevState,
       items: [...prevState.items.filter((item, _index) => _index !== index)],
       activeItemIndex: -1,
+      hasChanged: true,
     }));
     navigate("/process/upload");
   };
   const selectProcessItem = (index: number): void => {
-    console.log(
-      "Process | selectProcessItem |",
-      index === -1 ? "Upload" : index
-    );
+    // console.log(
+    //   "Process | selectProcessItem |",
+    //   index === -1 ? "Upload" : index
+    // );
 
     setState((prevState) => ({
       ...prevState,
@@ -284,7 +288,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     if (filters.length > 0) loadData(path);
   };
   const selectModel = (model: IModel): void => {
-    console.log("Process | selectModel |", model);
+    // console.log("Process | selectModel |", model);
     setState((prevState) => ({
       ...prevState,
       items: [
@@ -292,11 +296,12 @@ export const ProcessView: React.FC<Props> = (props) => {
         { ...prevState.items[activeItemIndex], model },
         ...prevState.items.filter((item, index) => index > activeItemIndex),
       ],
+      hasChanged: true,
     }));
     navigate("/process/material");
   };
   const selectMaterial = (material: IMaterial): void => {
-    console.log("Process | selectMaterial |", material);
+    // console.log("Process | selectMaterial |", material);
 
     setState((prevState) => ({
       ...prevState,
@@ -305,11 +310,12 @@ export const ProcessView: React.FC<Props> = (props) => {
         { ...prevState.items[activeItemIndex], material },
         ...prevState.items.filter((item, index) => index > activeItemIndex),
       ],
+      hasChanged: true,
     }));
     navigate("/process/postprocessing");
   };
   const selectPostProcessings = (postProcessings: IPostProcessing[]): void => {
-    console.log("Process | selectPostProcessing |", postProcessings);
+    // console.log("Process | selectPostProcessing |", postProcessings);
 
     setState((prevState) => ({
       ...prevState,
@@ -318,6 +324,7 @@ export const ProcessView: React.FC<Props> = (props) => {
         { ...prevState.items[activeItemIndex], postProcessings },
         ...prevState.items.filter((item, index) => index > activeItemIndex),
       ],
+      hasChanged: true,
     }));
     // navigate("/cart");
   };
@@ -325,7 +332,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     setState((prevState) => ({ ...prevState, filterOpen: open }));
   };
   const deselectModel = () => {
-    console.log("Process | removeModel |");
+    // console.log("Process | removeModel |");
     setState((prevState) => ({
       ...prevState,
       items: [
@@ -333,10 +340,11 @@ export const ProcessView: React.FC<Props> = (props) => {
         { ...prevState.items[activeItemIndex], model: undefined },
         ...prevState.items.filter((item, index) => index > activeItemIndex),
       ],
+      hasChanged: true,
     }));
   };
   const deselectMaterial = () => {
-    console.log("Process | deselectMaterial |");
+    // console.log("Process | deselectMaterial |");
     setState((prevState) => ({
       ...prevState,
       items: [
@@ -344,8 +352,24 @@ export const ProcessView: React.FC<Props> = (props) => {
         { ...prevState.items[activeItemIndex], material: undefined },
         ...prevState.items.filter((item, index) => index > activeItemIndex),
       ],
+      hasChanged: true,
     }));
   };
+
+  if (status === "loading")
+    return (
+      <div className="flex flex-col items-center justify-center w-full h-full">
+        <h1 className="text-center p-2 bg-white w-full">Laden...</h1>
+      </div>
+    );
+  if (status === "error" && error !== null)
+    return (
+      <div className="flex flex-col items-center justify-center w-full h-full">
+        <h1 className="text-center p-2 bg-white w-full">
+          Error: {error.message}
+        </h1>
+      </div>
+    );
 
   return (
     <ProcessContext.Provider

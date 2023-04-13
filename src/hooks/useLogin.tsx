@@ -23,7 +23,7 @@ export const useLogin = (
       return axiosCustom.get(apiUrl, {
         headers: {
           Usertype: EUserType[fetchLoginUsertype],
-          Path: path === undefined ? "" : path,
+          Path: path === undefined ? "/" : path,
         },
       });
     },

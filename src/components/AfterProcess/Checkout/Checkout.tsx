@@ -42,7 +42,7 @@ const Checkout: React.FC<Props> = (props) => {
     showError,
     orderSendSuccesfull,
   } = state;
-  const { cart, error, status } = useCart();
+  const { cart, error, status, uploadCart } = useCart();
   const {
     order,
     sendOrder,
@@ -121,6 +121,7 @@ const Checkout: React.FC<Props> = (props) => {
   const handleOnClickSend = () => {
     if (checkAll === true) {
       sendOrder();
+      uploadCart.mutate([]);
     } else {
       showErrorOnTime();
     }

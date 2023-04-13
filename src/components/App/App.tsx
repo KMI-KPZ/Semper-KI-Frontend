@@ -17,7 +17,8 @@ import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import GuideRoutes from "../Guide/GuideRoutes";
 import {
   PrivateAdminRoutes,
-  PrivateRoutes,
+  PrivateClientRoutes,
+  PrivateContractorRoutes,
 } from "../PrivateRoutes/PrivateRoutes";
 import Account from "../Account/Account";
 import useAdmin from "../../hooks/useAdmin";
@@ -85,6 +86,18 @@ const App: React.FC = () => {
     }
   }, [userType]);
 
+  const privateRoutes = (
+    <Route>
+      <Route path="messages" element={<Error text="messages" />} />
+      <Route
+        path="account"
+        element={
+          user === undefined ? <Navigate to="/" /> : <Account user={user} />
+        }
+      />
+    </Route>
+  );
+
   const adminRoutes = (
     <Route element={<PrivateAdminRoutes userType={userType} />}>
       <Route path="user" element={<AdminUserView userList={data.users} />} />
@@ -102,24 +115,24 @@ const App: React.FC = () => {
         path="order"
         element={<AdminOrderView orderList={data.orders} />}
       />
+      {privateRoutes}
     </Route>
   );
 
-  const privateRoutes = (
-    <Route element={<PrivateRoutes user={user} />}>
+  const clientRoutes = (
+    <Route element={<PrivateClientRoutes user={user} />}>
       <Route path="manufacturer" element={<ManufacturerView />} />
       <Route path="checkout" element={<Checkout />} />
       <Route path="orders" element={<OrderOverview />} />
       <Route path="proceedings" element={<Error text="proceedings" />} />
       <Route path="assignments" element={<Error text="assignments" />} />
-      <Route path="messages" element={<Error text="messages" />} />
-      <Route
-        path="account"
-        element={
-          user === undefined ? <Navigate to="/" /> : <Account user={user} />
-        }
-      />
-      {adminRoutes}
+      {privateRoutes}
+    </Route>
+  );
+
+  const contractorRoutes = (
+    <Route element={<PrivateContractorRoutes user={user} />}>
+      {privateRoutes}
     </Route>
   );
 
@@ -185,7 +198,9 @@ const App: React.FC = () => {
             />
             <Route path="service/*" element={<ServiceRoutes />} />
             <Route path="*" element={<Error />} />
-            {privateRoutes}
+            {clientRoutes}
+            {contractorRoutes}
+            {adminRoutes}
           </Routes>
         </main>
         <Footer />

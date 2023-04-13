@@ -1,24 +1,21 @@
 import React from "react";
 import { EUserType } from "@/interface/enums";
-import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 import { useLogin } from "../../hooks/useLogin";
+import Loading from "../Loading/Loading";
 
 interface Props {
   userType: EUserType;
+  path?: string;
 }
 
 const Login: React.FC<Props> = (props) => {
-  const { userType } = props;
-  const { error, isLoading, data } = useLogin(userType);
+  const { userType, path } = props;
+  const { error, status, data } = useLogin(userType, path);
 
   return (
-    <div className="flex justify-center items-center min-h-[50vh]">
-      {isLoading || data !== undefined ? (
-        <LoadingAnimation />
-      ) : error !== undefined && error !== null ? (
-        <h1>Es ist etwas schiefgelaufen {error?.message}</h1>
-      ) : null}
-    </div>
+    <Loading error={error} status={status} animation>
+      <h1>Weiterleiten zur Anmeldung</h1>
+    </Loading>
   );
 };
 

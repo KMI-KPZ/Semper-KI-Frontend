@@ -3,22 +3,27 @@ import useCustomAxios from "./useCustomAxios";
 import { EUserType } from "../interface/enums";
 import { useEffect } from "react";
 import { AxiosResponse } from "axios";
+import { TRequestStatus } from "@/interface/types";
 
 interface ReturnProps {
   data: AxiosResponse | undefined;
-  isLoading: boolean;
+  status: TRequestStatus;
   error: Error | null | undefined;
 }
 
-export const useLogin = (fetchLoginUsertype: EUserType): ReturnProps => {
+export const useLogin = (
+  fetchLoginUsertype: EUserType,
+  path?: string
+): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
-  const { data, isLoading, error } = useQuery<AxiosResponse, Error>({
+  const { data, status, error } = useQuery<AxiosResponse, Error>({
     queryKey: ["login", EUserType[fetchLoginUsertype]],
     queryFn: async () => {
       const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/login/`;
       return axiosCustom.get(apiUrl, {
         headers: {
           Usertype: EUserType[fetchLoginUsertype],
+          Path: path === undefined ? "" : path,
         },
       });
     },
@@ -27,19 +32,19 @@ export const useLogin = (fetchLoginUsertype: EUserType): ReturnProps => {
       fetchLoginUsertype === EUserType.contractor,
   });
   useEffect(() => {
-    if (data !== undefined && isLoading === false)
+    if (data !== undefined && status === "success")
       window.location.href = data.data;
   }, [data]);
   return {
     data,
     error,
-    isLoading,
+    status,
   };
 };
 
 export const useLogout = (): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
-  const { data, isLoading, error } = useQuery<AxiosResponse, Error>({
+  const { data, status, error } = useQuery<AxiosResponse, Error>({
     queryKey: ["logout"],
     queryFn: async () => {
       const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/logout/`;
@@ -47,12 +52,12 @@ export const useLogout = (): ReturnProps => {
     },
   });
   useEffect(() => {
-    if (data !== undefined && isLoading === false)
+    if (data !== undefined && status === "success")
       window.location.href = data.data;
   }, [data]);
   return {
     data,
     error,
-    isLoading,
+    status,
   };
 };

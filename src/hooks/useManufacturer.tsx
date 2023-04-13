@@ -1,10 +1,11 @@
 import { IManufacturer } from "@/interface/Interface";
+import { TRequestStatus } from "@/interface/types";
 import { useQuery } from "@tanstack/react-query";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
-  data: IManufacturer[];
-  status: "error" | "success" | "loading";
+  data: IManufacturer[] | undefined;
+  status: TRequestStatus;
   error: Error | null;
 }
 
@@ -20,7 +21,6 @@ const useManufacturer = (): ReturnProps => {
           console.log("useManufacturer | loadManufacturer ✅ |", res.data);
           return res.data;
         }),
-    initialData: [],
   });
 
   return { data, status, error };

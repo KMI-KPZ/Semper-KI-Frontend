@@ -3,7 +3,7 @@ import { IconX } from "../../../constants/Icons";
 import useCheckout, { IRequestState } from "../../../hooks/useCheckout";
 import { IProcessItem } from "../../../interface/Interface";
 import { getModelURI } from "../../../services/utils";
-import LoadingAnimation from "../../LoadingAnimation/LoadingAnimation";
+import LoadingAnimation from "../../Loading/LoadingAnimation";
 
 type Props = {
   process: IProcessItem;

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
+import LoadingAnimation from "../Loading/LoadingAnimation";
 
 interface Props {
   link: string;

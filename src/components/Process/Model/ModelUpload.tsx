@@ -6,7 +6,7 @@ import { IconDelete, IconUpload } from "../../../constants/Icons";
 import { useNavigate } from "react-router-dom";
 import useModelUpload from "../../../hooks/useModelUpload";
 import { IModel } from "../../../interface/Interface";
-import LoadingAnimation from "../../LoadingAnimation/LoadingAnimation";
+import LoadingAnimation from "../../Loading/LoadingAnimation";
 import Button from "../../General/Button";
 
 interface Props {

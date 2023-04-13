@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useLogout } from "src/hooks/useLogin";
 import Loading from "../Loading/Loading";
-import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
+import LoadingAnimation from "../Loading/LoadingAnimation";
 
 const Logout = () => {
   const { data, error, status } = useLogout();

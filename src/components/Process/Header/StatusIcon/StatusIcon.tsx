@@ -21,7 +21,7 @@ const StatusIcon: React.FC<Props> = (props) => {
     process.model === undefined ||
     process.material === undefined ||
     process.procedure === undefined ||
-    process.manufacturer === undefined ||
+    process.manufacturerID === undefined ||
     process.postProcessings === undefined ||
     process.additive === undefined
   )

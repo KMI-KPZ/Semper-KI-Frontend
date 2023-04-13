@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { IOrder } from "../../interface/Interface";
 import { EOrderState } from "../../interface/enums";
 import { IOrdersResponse, useOrders } from "../../hooks/useOrders";
-import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
+import LoadingAnimation from "../Loading/LoadingAnimation";
 import { IconX } from "../../constants/Icons";
 import { isKey } from "../../services/utils";
 import { IProcessItem } from "../../interface/Interface";

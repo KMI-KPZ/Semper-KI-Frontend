@@ -1,6 +1,6 @@
 import { TRequestStatus } from "@/interface/types";
 import React, { ReactNode } from "react";
-import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
+import LoadingAnimation from "./LoadingAnimation";
 
 interface Props {
   children?: ReactNode;

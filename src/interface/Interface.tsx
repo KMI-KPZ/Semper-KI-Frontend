@@ -13,7 +13,7 @@ export interface IProcessItem {
   material?: IMaterial;
   procedure?: IProcedure;
   postProcessings?: IPostProcessing[];
-  manufacturer?: IManufacturer;
+  manufacturerID?: string;
   additive?: IAdditive;
 }
 
@@ -54,6 +54,8 @@ export interface IManufacturer {
   // productionTime?: number;
   // deliverTime?: number;
   // location?: ILocation;
+  name: string;
+  id: string;
 }
 
 export interface ILocation {

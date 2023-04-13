@@ -31,7 +31,7 @@ import AdminOrderView from "../Admin/AdminOrderView";
 import Background from "../Background/Background";
 import Checkout from "../AfterProcess/Checkout/Checkout";
 import Order from "../AfterProcess/Order/Order";
-import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
+import LoadingAnimation from "../Loading/LoadingAnimation";
 import { EUserType } from "../../interface/enums";
 import { URL_AboutUs } from "../../constants/Constants";
 import ManufacturerView from "../AfterProcess/Manufacturer/ManufacturerView";

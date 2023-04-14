@@ -6,7 +6,7 @@ import SendIcon from "@mui/icons-material/Send";
 
 interface Props {
   chat: IChatMessage[];
-  user: IUser;
+  user?: IUser;
 }
 
 interface State {

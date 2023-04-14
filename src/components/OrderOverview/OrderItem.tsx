@@ -28,6 +28,9 @@ const OrderItem: React.FC<Props> = (props) => {
     setState((prevState) => ({ ...prevState, chatOpen: true }));
   };
   const handleOnOutsideClickChat = () => {
+    closeMenu();
+  };
+  const closeMenu = () => {
     setState((prevState) => ({
       ...prevState,
       chatOpen: false,
@@ -38,10 +41,10 @@ const OrderItem: React.FC<Props> = (props) => {
     <div className="flex flex-col justify-start items-start gap-3 border-2 w-full p-3">
       <h3>Bestellung: {order.id}</h3>
       <Button icon={<MailIcon />} onClick={handleOnClickButtonChat}>
-        Nachrichten
+        Chat
       </Button>
       <PopUp open={chatOpen} onOutsideClick={handleOnOutsideClickChat}>
-        <ChatView chat={order.chat} user={user} />
+        <ChatView chat={order.chat} user={user} closeMenu={closeMenu} />
       </PopUp>
     </div>
   );

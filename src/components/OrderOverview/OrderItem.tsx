@@ -1,169 +1,137 @@
-import React, { useEffect, useRef, useState } from "react";
-import { getIconByName, IconExpand } from "../../constants/Icons";
-import { IManufacturer, IOrder, IProcessItem } from "../../interface/Interface";
-import { IOrderTest } from "./OrderOverview";
+import { ChangeEvent, useContext, useState } from "react";
+import { IChatMessage, IOrder } from "../../interface/Interface";
 import Button from "../General/Button";
+import MailIcon from "@mui/icons-material/Mail";
+import PopUp from "../PopUp/PopUp";
+import { AppContext } from "../App/App";
+import SendIcon from "@mui/icons-material/Send";
+import useChat from "../../hooks/useChat";
 
 interface Props {
-  order: IOrderTest;
+  order: IOrder;
 }
 
 interface State {
-  processOpen: boolean;
-  manufacturerOpen: boolean;
+  chat: IChatMessage[];
+  chatOpen: boolean;
+  height?: number;
+  messageText?: string;
 }
 
 const OrderItem: React.FC<Props> = (props) => {
   const { order } = props;
   const [state, setState] = useState<State>({
-    processOpen: false,
-    manufacturerOpen: false,
+    chatOpen: false,
+    chat: order.chat,
   });
-  const { processOpen, manufacturerOpen } = state;
+  const { chatOpen, height, messageText } = state;
+  const { user } = useContext(AppContext);
+  const { uploadChatMessage } = useChat();
 
-  const calcManufacturer = (): IManufacturer[] => {
-    let manufacturerList: IManufacturer[] = [];
-    // order.processList.forEach((process: IProcessItem) => {
-    //   const manufacturer = process.manufacturer;
-    //   if (manufacturer !== undefined) {
-    //     manufacturerList.push(manufacturer);
-    //   }
-    // });
-    return manufacturerList;
+  const handleOnClickButtonChat = () => {
+    setState((prevState) => ({ ...prevState, chatOpen: true }));
   };
-
-  const isElementBiggerThanPx = (
-    element: React.RefObject<HTMLDivElement>,
-    maxHeight: number
-  ): boolean => {
-    if (
-      element.current !== null &&
-      element.current.offsetHeight !== undefined &&
-      element.current.offsetHeight >= maxHeight
-    ) {
-      return true;
-    }
-    return false;
-  };
-
-  const manufacturerList = calcManufacturer();
-
-  const handleOnClickProcessExpand = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
+  const handleOnOutsideClickChat = () => {
     setState((prevState) => ({
       ...prevState,
-      processOpen: !prevState.processOpen,
+      chatOpen: false,
+      height: undefined,
     }));
   };
-  const handleOnClickManufacturerExpand = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
+
+  const handleOnChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    console.log(e.target.scrollHeight);
     setState((prevState) => ({
       ...prevState,
-      manufacturerOpen: !prevState.manufacturerOpen,
+      height: e.target.scrollHeight,
+      messageText: e.target.value,
     }));
+  };
+
+  const handleOnClickButtonSend = () => {
+    if (messageText !== undefined && messageText !== "")
+      uploadChatMessage.mutate(
+        {
+          date: new Date().toString(),
+          text: messageText,
+          userId: user!.name,
+          userName: user!.name,
+        },
+        {
+          onSuccess(data, variables, context) {
+            setState((prevState) => ({
+              ...prevState,
+              chat: [...prevState.chat, variables],
+              messageText: undefined,
+              height: undefined,
+            }));
+          },
+        }
+      );
+  };
+
+  const renderChat = () => {
+    return (
+      <div className="flex flex-col w-screen md:max-w-2xl h-screen md:max-h-[80vh] justify-start items-center gap-5">
+        <div className="flex flex-col w-full h-full bg-white justify-start items-center p-5 gap-5 overflow-auto">
+          <h1>Nachrichten</h1>
+          {order.chat.map((chatMessage: IChatMessage, index: number) => (
+            <div
+              key={index}
+              className={`flex flex-col gap-3 w-full ${
+                chatMessage.userId === "agsdhnfjhzhtgefwegrhdtjzf"
+                  ? "items-end"
+                  : "items-start"
+              }`}
+            >
+              <span>{chatMessage.userName}:</span>
+              <div
+                className={`flex justify-start w-full p-3 gap-3 items-end rounded-full bg-slate-100 ${
+                  chatMessage.userId === "agsdhnfjhzhtgefwegrhdtjzf"
+                    ? "flex-row-reverse"
+                    : "flex-row"
+                }`}
+              >
+                <span>{chatMessage.text}</span>
+                <span className="text-xs">{chatMessage.date}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-row w-full h-fit bg-white justify-start items-center p-3 gap-5">
+          <textarea
+            // type="text"
+            className={`w-full border-2 px-4 rounded-md resize-none ${
+              height !== undefined && height > 72 ? "" : "h-fit"
+            }`}
+            style={
+              height !== undefined && height > 72
+                ? { height: `${height + 4}px` }
+                : {}
+            }
+            placeholder="Nachricht"
+            onChange={handleOnChangeTextArea}
+          />
+          <Button
+            link="sendOrders"
+            icon={<SendIcon />}
+            onClick={handleOnClickButtonSend}
+          />
+        </div>
+      </div>
+    );
   };
 
   return (
-    <li className="w-full bg-white p-5 gap-5 flex flex-col">
-      <section className="flex flex-col md:flex-row justify-between md:justify-start md:gap-[10%] p-2 gap-2">
-        <h2 className="break-words">Bestellung: {order.orderId}</h2>
-        <h2>Datum: {new Date(order.dates.created).toLocaleDateString()}</h2>
-        {/* <h2>Status: {order.orderState}</h2> */}
-      </section>
-      <hr />
-      <section className="flex flex-col gap-5">
-        <h2>Artikel</h2>
-        <div
-          className="
-          relative
-          flex flex-col items-center justify-start mb-6 md:m-0
-          "
-        >
-          <div
-            className={`
-            flex flex-col items-center justify-start gap-5 w-full
-            md:flex-row md:overflow-x-auto 
-            ${processOpen === true ? "" : "max-h-96 overflow-hidden"}
-            `}
-          >
-            {order.userOrders.cart.map(
-              (process: IProcessItem, index: number) => (
-                <div
-                  key={index}
-                  className="
-                flex flex-row items-center justify-between 
-                w-full bg-gray-100
-                md:flex-col md:w-fit
-              hover:bg-gray-300 hover:cursor-pointer
-                "
-                >
-                  <img
-                    className="max-w-[100px] md:max-w-[150px]"
-                    src={require("../../assets/images/model_placeholder.png")}
-                    alt="Model"
-                  />
-                  <div>
-                    {process.model === undefined
-                      ? index
-                      : process.model.title === undefined
-                      ? "process.model.name"
-                      : process.model.title}
-                  </div>
-                  <div>Bli Bla Blub</div>
-                </div>
-              )
-            )}
-          </div>
-        </div>
-      </section>
-      <hr />
-      <section className="flex flex-col gap-5">
-        <h2>Hersteller: {manufacturerList.length}</h2>
-        <div
-          className="
-          relative
-          flex flex-col items-center justify-start mb-6 md:m-0
-          "
-        >
-          <div
-            className={`
-            flex flex-col items-center justify-start gap-5 w-full
-            md:flex-row md:overflow-x-auto 
-            ${manufacturerOpen === true ? "" : "max-h-96 overflow-hidden"}
-            `}
-          >
-            {manufacturerList.map(
-              (manufacturer: IManufacturer, index: number) => (
-                <div
-                  key={index}
-                  className="       
-                flex flex-row items-center justify-between 
-                w-full bg-gray-100
-                md:flex-col md:w-fit
-                hover:bg-gray-300 hover:cursor-pointer"
-                >
-                  <img
-                    className="max-w-[200px] md:max-w-[300px]"
-                    src={require("../../assets/images/firm_logo_placeholder.png")}
-                    alt="Model"
-                  />
-                  {/* {manufacturer.name} */}
-                  Test-Hersteller
-                </div>
-              )
-            )}
-          </div>
-        </div>
-      </section>
-      <hr />
-      <section className="flex flex-col md:flex-row gap-3 md:gap-5 justify-center items-center text-white">
-        <Button>Stonieren</Button>
-        <Button>Nachrichten</Button>
-        <Button>nochmal bestellen</Button>
-      </section>
-    </li>
+    <div className="flex flex-col justify-start items-start gap-3 border-2 w-full p-3">
+      <h3>Bestellung: {order.id}</h3>
+      <PopUp open={chatOpen} onOutsideClick={handleOnOutsideClickChat}>
+        {renderChat()}
+      </PopUp>
+      <Button icon={<MailIcon />} onClick={handleOnClickButtonChat}>
+        Nachrichten
+      </Button>
+    </div>
   );
 };
 

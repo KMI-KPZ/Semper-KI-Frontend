@@ -29,7 +29,7 @@ export const useLogin = (
     },
     enabled:
       fetchLoginUsertype === EUserType.client ||
-      fetchLoginUsertype === EUserType.contractor,
+      fetchLoginUsertype === EUserType.manufacturer,
   });
   useEffect(() => {
     if (data !== undefined && status === "success")

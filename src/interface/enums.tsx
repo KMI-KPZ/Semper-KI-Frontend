@@ -1,7 +1,7 @@
 export enum EUserType {
   "indefinite",
   "client",
-  "contractor",
+  "manufacturer",
   "admin",
 }
 
@@ -18,9 +18,9 @@ export enum EProcessStatusType {
 
 export enum EOrderState {
   "requested",
+  "verify",
   "rejected",
   "confirmed",
-  "consult",
   "production",
   "delivery",
 }

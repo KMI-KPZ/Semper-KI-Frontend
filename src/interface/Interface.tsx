@@ -46,24 +46,8 @@ export interface IProcedure {
 }
 
 export interface IManufacturer {
-  // manufacturerId?: number;
-  // name: string;
-  // propList?: string[];
-  // certificateList?: string[];
-  // distance?: number;
-  // productionTime?: number;
-  // deliverTime?: number;
-  // location?: ILocation;
   name: string;
   id: string;
-}
-
-export interface ILocation {
-  name: string;
-  street: string;
-  houseNumber: number;
-  postalCode: string;
-  city: string;
 }
 
 export interface IPostProcessing {
@@ -110,14 +94,6 @@ export interface ISelection {
   price?: number;
 }
 
-export interface IOrder {
-  orderId: string;
-  processList: IProcessItem[];
-  date: Date;
-  orderState: EOrderState;
-  files: File[];
-}
-
 export interface IUser {
   name: string;
   email: string;
@@ -127,16 +103,25 @@ export interface IUser {
   accessed: string;
 }
 
-export interface IChat {
-  orderId: number;
-  userIds: number[];
-  messages: IMessage[];
+export interface IOrderCollection {
+  id: string;
+  date: string;
+  state: EOrderState;
+  orders: IOrder[];
 }
 
-export interface IMessage {
-  userId: number;
+export interface IOrder {
+  id: string;
+  processList: IProcessItem[];
+  orderState: EOrderState;
+  chat: IChatMessage[];
+}
+
+export interface IChatMessage {
+  userId: string;
+  userName: string;
+  date: string;
   text: string;
-  date: number;
 }
 
 export interface IHeaderItem {

@@ -19,10 +19,14 @@ const Account: React.FC<Props> = (props) => {
   const handleOnChangeSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
     // console.log(e.currentTarget.checked);
     setUserType(
-      e.currentTarget.checked === true ? EUserType.contractor : EUserType.client
+      e.currentTarget.checked === true
+        ? EUserType.manufacturer
+        : EUserType.client
     );
     updateUser(
-      e.currentTarget.checked === true ? EUserType.contractor : EUserType.client
+      e.currentTarget.checked === true
+        ? EUserType.manufacturer
+        : EUserType.client
     );
   };
 

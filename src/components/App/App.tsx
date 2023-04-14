@@ -31,10 +31,10 @@ import AdminOrderView from "../Admin/AdminOrderView";
 import Background from "../Background/Background";
 import Checkout from "../AfterProcess/Checkout/Checkout";
 import Order from "../AfterProcess/Order/Order";
-import LoadingAnimation from "../Loading/LoadingAnimation";
 import { EUserType } from "../../interface/enums";
 import { URL_AboutUs } from "../../constants/Constants";
 import ManufacturerView from "../AfterProcess/Manufacturer/ManufacturerView";
+import { IUser } from "../../interface/Interface";
 
 export interface IAppState {
   selectedProgressItem?: { index: number; progress: string };
@@ -43,22 +43,21 @@ export interface IAppState {
 }
 
 export interface IAppContext {
+  user: IUser | undefined;
   appState: IAppState;
   setAppState: React.Dispatch<React.SetStateAction<IAppState>>;
 }
-
-export const AppContext = createContext<IAppContext>({
-  appState: {
-    stopScroll: false,
-    guideFilter: [],
-  },
-  setAppState: () => {},
-});
 
 const initialState: IAppState = {
   stopScroll: false,
   guideFilter: [],
 };
+
+export const AppContext = createContext<IAppContext>({
+  user: undefined,
+  appState: initialState,
+  setAppState: () => {},
+});
 
 const App: React.FC = () => {
   const [state, setState] = useState<IAppState>(initialState);
@@ -149,7 +148,9 @@ const App: React.FC = () => {
     );
 
   return (
-    <AppContext.Provider value={{ appState: state, setAppState: setState }}>
+    <AppContext.Provider
+      value={{ appState: state, setAppState: setState, user }}
+    >
       <div
         className={`flex flex-col justify-between min-h-screen font-ptsans items-center gap-3
         ${stopScroll === true ? "overflow-hidden h-screen w-screen" : ""}`}
@@ -190,7 +191,7 @@ const App: React.FC = () => {
             />
             <Route
               path="login-contractor"
-              element={<Login userType={EUserType.contractor} />}
+              element={<Login userType={EUserType.manufacturer} />}
             />
             <Route
               path="aboutus"

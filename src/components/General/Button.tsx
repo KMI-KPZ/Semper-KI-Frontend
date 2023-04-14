@@ -14,6 +14,7 @@ interface Props {
   children?: ReactNode;
   size?: Size;
   style?: Style;
+  link?: string;
 }
 
 type Icon = "front" | "back";
@@ -30,11 +31,14 @@ const Button: React.FC<Props> = (props) => {
     children,
     size = "medium",
     style = "primary",
+    link = "",
   } = props;
 
   const handleOnClickButton = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (onClick !== undefined) onClick(e);
   };
 
@@ -84,10 +88,10 @@ const Button: React.FC<Props> = (props) => {
       flex flex-row justify-center items-center
       gap-3
       py-3 px-5
-      
       transition duration-300 bezier
       ${getClassName()}`}
       onClick={handleOnClickButton}
+      href={link}
     >
       {iconPos === "front" ? icon : null}
       {children ? <span>{children}</span> : null}

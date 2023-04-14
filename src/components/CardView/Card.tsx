@@ -33,7 +33,11 @@ const Card: React.FC<Props> = (props) => {
           carditem.title
         }`
       )}
-      className="flex flex-col w-full md:w-5/12 justify-center items-center gap-1 bg-white p-2 md:p-3 hover:bg-gray-300 shadow-md md:min-w-[300px]"
+      className="
+            md:w-5/12 justify-center items-center gap-1 bg-white p-2 md:p-3 md:min-w-[300px]
+            flex flex-col w-full  py-2 px-4 
+            hover:cursor-pointer hover:bg-slate-50 hover:shadow-inner 
+            shadow-md transition-all ease-in-out duration-300 "
       onClick={handleClickCard}
       href={carditem.link}
     >

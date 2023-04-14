@@ -39,7 +39,7 @@
     {
         "title":"order",
         "link": "/order",
-        "icon": "IconDocument",
+        "icon": "IconChecklist",
         "extern": false,
         "preferred":0,
         "userType": [0,1],

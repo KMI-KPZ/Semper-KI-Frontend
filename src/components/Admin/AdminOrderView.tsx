@@ -38,10 +38,10 @@ const AdminOrderView: React.FC<Props> = (props) => {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {order.orderId}
+                  {/* {order.orderId} */}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {order.date.toLocaleDateString()}
+                  {/* {order.date.toLocaleDateString()} */}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {EOrderState[order.orderState]}

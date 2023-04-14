@@ -1,13 +1,13 @@
 [
     {
+        "title":"continue-contract",
+        "link":"/process",
+        "icon":"IconArrowR"
+    },
+    {
         "title":"new-contract",
         "link":"/process/new",
         "icon":"IconNewDocument"
-    },
-    {
-        "title":"order",
-        "link":"/order",
-        "icon":"IconDocument"
     },
     {
         "title":"guide",
@@ -20,8 +20,8 @@
         "icon":"IconPerson"
     },
     {
-        "title":"order",
+        "title":"orders",
         "link":"/orders",
-        "icon":"IconChecklist"
+        "icon":"IconDocument"
     }
 ]

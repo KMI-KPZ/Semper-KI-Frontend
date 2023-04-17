@@ -70,7 +70,7 @@ const StatusView: React.FC<Props> = (props) => {
       <React.Fragment key={index}>
         {index !== 0 ? (
           <div
-            className={`border-t-2 w-5  ${
+            className={`border-l-2 h-2 md:border-t-2 md:w-5  ${
               status >= statusData.key
                 ? "border-orange-200"
                 : "border-slate-100"
@@ -87,7 +87,7 @@ const StatusView: React.FC<Props> = (props) => {
           }`}
         >
           {statusData.icon}
-          <span>{t(statusData.text)}</span>
+          <span className="text-center">{t(statusData.text)}</span>
         </div>
       </React.Fragment>
     );

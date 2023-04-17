@@ -2,7 +2,7 @@ import React from "react";
 import { EOrderState } from "../../interface/enums";
 import { IOrderCollection } from "../../interface/Interface";
 import Button from "../General/Button";
-import OrderItem from "./OrderItem";
+import OrderView from "./OrderView";
 
 interface Props {
   orderCollection: IOrderCollection;
@@ -19,7 +19,7 @@ const OrderCollection: React.FC<Props> = (props) => {
         <h2>Datum: {orderCollection.date}</h2>
       </div>
       {orderCollection.orders.map((order, index) => (
-        <OrderItem key={index} order={order} />
+        <OrderView key={index} order={order} />
       ))}
       <div className="flex flex-col md:flex-row items-center justify-center w-full gap-5">
         <Button active={false}>Stonieren</Button>

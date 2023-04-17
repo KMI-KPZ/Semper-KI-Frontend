@@ -104,13 +104,13 @@ export const useOrders = (): ReturnProps => {
         },
         {
           id: "ijanbih5847nztajpfjghnkbj9vl3acrjmifwkgrehntv",
-          orderState: EOrderState.confirmed,
+          orderState: EOrderState.rejected,
           chat: [],
           processList: [],
         },
         {
           id: "ijanbih5847nztajpfjghnkbj9vl3acrjmifwkgrehntv",
-          orderState: EOrderState.rejected,
+          orderState: EOrderState.confirmed,
           chat: [],
           processList: [],
         },

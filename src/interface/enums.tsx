@@ -1,5 +1,4 @@
 export enum EUserType {
-  "indefinite",
   "client",
   "manufacturer",
   "admin",

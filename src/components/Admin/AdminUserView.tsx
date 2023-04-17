@@ -48,13 +48,13 @@ const AdminUserView: React.FC<Props> = (props) => {
                   {EUserType[user.type]}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {user.created}
+                  {/* {user.created} */}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {user.accessed}
+                  {/* {user.accessed} */}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {user.updated}
+                  {/* {user.updated} */}
                 </TableCell>
               </TableRow>
             ))}

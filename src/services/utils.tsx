@@ -1,5 +1,5 @@
 import { EUserType } from "../interface/enums";
-import { IModel, IProcessItem } from "../interface/Interface";
+import { IAddress, IModel, IProcessItem } from "../interface/Interface";
 
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;
@@ -65,7 +65,7 @@ export const removeItemByIndex = <T,>(
 };
 
 export const getUserType = (name: string): EUserType => {
-  let type: EUserType = EUserType.indefinite;
+  let type: EUserType = EUserType.client;
   switch (name.toLocaleLowerCase()) {
     case "client":
       type = EUserType.client;
@@ -77,10 +77,22 @@ export const getUserType = (name: string): EUserType => {
       type = EUserType.admin;
       break;
     default:
-      type = EUserType.indefinite;
+      type = EUserType.client;
       break;
   }
   return type;
+};
+
+export const parseAddress = (unparsedAddress: string): IAddress => {
+  const parseAddress = JSON.parse(unparsedAddress);
+  let newAddress: IAddress = {
+    street: parseAddress.street,
+    houseNumber: parseAddress.number,
+    city: parseAddress.city,
+    country: parseAddress.country,
+    zipcode: parseAddress.zipcode,
+  };
+  return newAddress;
 };
 
 export const getModelURI = (model: IModel): string => {

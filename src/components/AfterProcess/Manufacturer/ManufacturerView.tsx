@@ -43,7 +43,7 @@ const ManufacturerView: React.FC<Props> = (props) => {
   const checkAllItems = (): boolean => {
     return (
       manufacturerIDs.filter((manufacturerIndex) => manufacturerIndex !== "")
-        .length === manufacturerIDs.length
+        .length === manufacturerIDs.length && cart.length > 0
     );
   };
 
@@ -67,6 +67,10 @@ const ManufacturerView: React.FC<Props> = (props) => {
     }
   };
 
+  const handleOnClickReturn = () => {
+    navigate("/process/model");
+  };
+
   return (
     <div className="flex flex-col items-center gap-5 w-full p-5">
       <div className="bg-white w-full p-5 flex flex-col gap-5 justify-start items-center">
@@ -81,20 +85,27 @@ const ManufacturerView: React.FC<Props> = (props) => {
       ) : null}
       <div className="bg-white w-full p-5 flex flex-col gap-5 justify-start items-center">
         {cart !== undefined ? (
-          cart.map((processItem, index) => (
-            <ManufacturerItem
-              processItem={processItem}
-              key={index}
-              itemIndex={index}
-              manufacturerID={manufacturerIDs[index]}
-              setManufacturerIndex={toggelManufacturerByIndex}
-            />
-          ))
+          cart.length > 0 ? (
+            cart.map((processItem, index) => (
+              <ManufacturerItem
+                processItem={processItem}
+                key={index}
+                itemIndex={index}
+                manufacturerID={manufacturerIDs[index]}
+                setManufacturerIndex={toggelManufacturerByIndex}
+              />
+            ))
+          ) : (
+            <h2>Keine Items in der Bestellung</h2>
+          )
         ) : (
           <h2>ein Fehler ist aufgetreten</h2>
         )}
       </div>
-      <Button onClick={handleOnCLickCheck}>Überprüfen</Button>
+      <div className="flex flex-col gap-5 md:flex-row">
+        <Button onClick={handleOnClickReturn}>Items Hinzufügen</Button>
+        <Button onClick={handleOnCLickCheck}>Überprüfen</Button>
+      </div>
     </div>
   );
 };

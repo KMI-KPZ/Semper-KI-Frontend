@@ -36,6 +36,8 @@ const OrderItem: React.FC<Props> = (props) => {
     }));
   };
 
+  console.log("OrderItem", user);
+
   return (
     <div className="flex flex-col justify-start items-start gap-3 border-2 w-full p-3">
       <h3>Bestellung: {order.id}</h3>

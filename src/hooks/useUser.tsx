@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { EUserType } from "../interface/enums";
 import { IUser } from "../interface/Interface";
-import { getUserType } from "../services/utils";
+import { getUserType, parseAddress } from "../services/utils";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
@@ -19,7 +19,7 @@ interface ReturnProps {
 const useUser = (): ReturnProps => {
   const navigate = useNavigate();
   const { axiosCustom } = useCustomAxios();
-  const [userType, setUserType] = useState<EUserType>(EUserType.indefinite);
+  const [userType, setUserType] = useState<EUserType>(EUserType.client);
   const [user, setUser] = useState<IUser | undefined>();
   const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
   const [isLoggedInResponse, setIsLoggedInResponse] = useState<boolean>(false);
@@ -45,7 +45,14 @@ const useUser = (): ReturnProps => {
         setUser(
           Object.keys(userData).length === 0 && userData.constructor === Object
             ? undefined
-            : { ...userData, type: getUserType(userData.type) }
+            : {
+                ...userData,
+                type: getUserType(userData.type),
+                address: parseAddress(userData.address),
+                accessed: new Date(userData.accessed),
+                created: new Date(userData.created),
+                updated: new Date(userData.updated),
+              }
         );
         setLoggedIn(true);
       })

@@ -16,6 +16,7 @@ interface AdminProps {
 export const PrivateClientRoutes: React.FC<Props> = (props) => {
   const { user } = props;
   const { pathname } = useLocation();
+
   return user !== undefined && user.type === EUserType.client ? (
     <Outlet />
   ) : (

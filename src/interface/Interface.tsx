@@ -95,12 +95,23 @@ export interface ISelection {
 }
 
 export interface IUser {
-  name: string;
+  address: IAddress;
   email: string;
+  hashedID: string;
+  name: string;
+  organization: string;
   type: EUserType;
-  created: string;
-  updated: string;
-  accessed: string;
+  created: Date;
+  accessed: Date;
+  updated: Date;
+}
+
+export interface IAddress {
+  city: string;
+  houseNumber: string;
+  street: string;
+  country: string;
+  zipcode: string;
 }
 
 export interface IOrderCollection {

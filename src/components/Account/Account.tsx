@@ -36,9 +36,20 @@ const Account: React.FC<Props> = (props) => {
       <span>name: {user.name}</span>
       <span>email: {user.email}</span>
       <span>type: {EUserType[userType]}</span>
-      <span>created: {user.created}</span>
-      <span>accessed: {user.accessed}</span>
-      <span>updated: {user.updated}</span>
+      <span>Organisation: {user.organization}</span>
+      <div className="flex flex-col gap-2 bg-slate-200 p-2">
+        <h2>Adresse</h2>
+        <span>
+          Straße: {user.address.street} {user.address.houseNumber}
+        </span>
+        <span>
+          Stadt: {user.address.zipcode} {user.address.city}
+        </span>
+        <span>Land: {user.address.country}</span>
+      </div>
+      <span>created: {user.created.toLocaleString()}</span>
+      <span>accessed: {user.accessed.toLocaleString()}</span>
+      <span>updated: {user.updated.toLocaleString()}</span>
       <Button
         sx={{
           backgroundColor: "grey",

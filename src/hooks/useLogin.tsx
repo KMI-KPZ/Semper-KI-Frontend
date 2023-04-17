@@ -3,7 +3,7 @@ import useCustomAxios from "./useCustomAxios";
 import { EUserType } from "../interface/enums";
 import { useEffect } from "react";
 import { AxiosResponse } from "axios";
-import { TRequestStatus } from "@/interface/types";
+import { TRequestStatus } from "../interface/types";
 
 interface ReturnProps {
   data: AxiosResponse | undefined;

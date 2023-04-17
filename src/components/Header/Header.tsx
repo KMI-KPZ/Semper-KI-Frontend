@@ -8,9 +8,9 @@ import HeaderItem from "./HeaderItem";
 
 import _HeaderItems from "./HeaderItems.json";
 import { AppContext } from "../App/App";
-import { IHeaderItem } from "@/interface/Interface";
-import { IconArrowR, IconX } from "src/constants/Icons";
 import { EHeaderItemPreferred, EUserType } from "../../interface/enums";
+import { IHeaderItem } from "../../interface/Interface";
+import { IconArrowR, IconX } from "../../constants/Icons";
 const HeaderItems = _HeaderItems as IHeaderItem[];
 
 interface Language {

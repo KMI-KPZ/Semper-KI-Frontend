@@ -1,8 +1,8 @@
-import { IProcessItem } from "@/interface/Interface";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "src/components/General/Button";
-import useCart from "src/hooks/useCart";
+import useCart from "../../../hooks/useCart";
+import { IProcessItem } from "../../../interface/Interface";
+import Button from "../../General/Button";
 import ManufacturerItem from "./ManufacturerItem";
 
 interface Props {}

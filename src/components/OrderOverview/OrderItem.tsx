@@ -1,12 +1,11 @@
-import { ChangeEvent, useContext, useState } from "react";
-import { IChatMessage, IOrder } from "../../interface/Interface";
+import { useContext, useState } from "react";
+import { IOrder } from "../../interface/Interface";
 import Button from "../General/Button";
 import MailIcon from "@mui/icons-material/Mail";
 import PopUp from "../PopUp/PopUp";
 import { AppContext } from "../App/App";
-import SendIcon from "@mui/icons-material/Send";
-import useChat from "../../hooks/useChat";
 import ChatView from "./ChatView";
+import StatusView from "./StatusView";
 
 interface Props {
   order: IOrder;
@@ -40,6 +39,7 @@ const OrderItem: React.FC<Props> = (props) => {
   return (
     <div className="flex flex-col justify-start items-start gap-3 border-2 w-full p-3">
       <h3>Bestellung: {order.id}</h3>
+      <StatusView status={order.orderState} />
       <Button icon={<MailIcon />} onClick={handleOnClickButtonChat}>
         Chat
       </Button>

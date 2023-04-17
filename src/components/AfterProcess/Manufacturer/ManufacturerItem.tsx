@@ -1,8 +1,7 @@
-import { IProcessItem } from "@/interface/Interface";
-import React, { useState } from "react";
-import Loading from "src/components/Loading/Loading";
-import { IconArrowR } from "src/constants/Icons";
-import useManufacturer from "src/hooks/useManufacturer";
+import React from "react";
+import useManufacturer from "../../../hooks/useManufacturer";
+import { IProcessItem } from "../../../interface/Interface";
+import Loading from "../../Loading/Loading";
 
 interface Props {
   itemIndex: number;

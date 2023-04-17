@@ -1,6 +1,6 @@
 import React from "react";
-import { EUserType } from "@/interface/enums";
 import { useLogin } from "../../hooks/useLogin";
+import { EUserType } from "../../interface/enums";
 import Loading from "../Loading/Loading";
 
 interface Props {

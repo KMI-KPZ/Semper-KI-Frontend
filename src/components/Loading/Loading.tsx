@@ -1,5 +1,5 @@
-import { TRequestStatus } from "@/interface/types";
 import React, { ReactNode } from "react";
+import { TRequestStatus } from "../../interface/types";
 import LoadingAnimation from "./LoadingAnimation";
 
 interface Props {

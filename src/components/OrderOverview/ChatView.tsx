@@ -27,7 +27,6 @@ const ChatView: React.FC<Props> = (props) => {
   const { uploadChatMessage } = useChat();
 
   const handleOnChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e.target.scrollHeight);
     setState((prevState) => ({
       ...prevState,
       height: e.target.scrollHeight,

@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { IconArrowR } from "../../../constants/Icons";
 import useCart from "../../../hooks/useCart";
 import useCheckout, { IRequestState } from "../../../hooks/useCheckout";
 import CheckoutItem from "./CheckoutItem";
 import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 import LoadingAnimation from "../../Loading/LoadingAnimation";
-import { useCheckoutWebSocket } from "../../../hooks/useCheckoutWebSocket";
 import Button from "../../General/Button";
 
 interface Props {}

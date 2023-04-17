@@ -1,6 +1,6 @@
-import { IManufacturer } from "@/interface/Interface";
-import { TRequestStatus } from "@/interface/types";
 import { useQuery } from "@tanstack/react-query";
+import { IManufacturer } from "../interface/Interface";
+import { TRequestStatus } from "../interface/types";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {

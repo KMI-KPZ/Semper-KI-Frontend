@@ -98,7 +98,31 @@ export const useOrders = (): ReturnProps => {
         },
         {
           id: "ijanbih5847nztajpfjghnkbj9vl3acrjmifwkgrehntv",
-          orderState: EOrderState.requested,
+          orderState: EOrderState.verify,
+          chat: [],
+          processList: [],
+        },
+        {
+          id: "ijanbih5847nztajpfjghnkbj9vl3acrjmifwkgrehntv",
+          orderState: EOrderState.confirmed,
+          chat: [],
+          processList: [],
+        },
+        {
+          id: "ijanbih5847nztajpfjghnkbj9vl3acrjmifwkgrehntv",
+          orderState: EOrderState.rejected,
+          chat: [],
+          processList: [],
+        },
+        {
+          id: "ijanbih5847nztajpfjghnkbj9vl3acrjmifwkgrehntv",
+          orderState: EOrderState.production,
+          chat: [],
+          processList: [],
+        },
+        {
+          id: "ijanbih5847nztajpfjghnkbj9vl3acrjmifwkgrehntv",
+          orderState: EOrderState.delivery,
           chat: [],
           processList: [],
         },

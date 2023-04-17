@@ -230,9 +230,9 @@
     "headline":"Bestellungen",
     "state":{
       "requested":"Angefragt",
+      "verify":"Rückfragen",
       "rejected":"Abgelehnt",
       "confirmed":"Bestätigt",
-      "consult":"Rückfragen",
       "production":"In Produktion",
       "delivery":"Unterwegs"
     }

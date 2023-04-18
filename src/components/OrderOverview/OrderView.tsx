@@ -76,7 +76,7 @@ const OrderView: React.FC<Props> = (props) => {
                 icon={<CancelIcon />}
                 onClick={handleOnClickButtonCancel}
               >
-                Stonieren
+                Stornieren
               </Button>
               <Button
                 size="small"

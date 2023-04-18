@@ -39,7 +39,7 @@ const OrderCollection: React.FC<Props> = (props) => {
           icon={<CancelIcon />}
           onClick={handleOnClickButtonCancel}
         >
-          Gesamten Auftrag Stonieren
+          Gesamten Auftrag Stornieren
         </Button>
         <Button
           size="small"

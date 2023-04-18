@@ -19,6 +19,7 @@ import {
   PrivateAdminRoutes,
   PrivateClientRoutes,
   PrivateContractorRoutes,
+  PrivateRoutes,
 } from "../PrivateRoutes/PrivateRoutes";
 import Account from "../Account/Account";
 import useAdmin from "../../hooks/useAdmin";
@@ -35,6 +36,7 @@ import { EUserType } from "../../interface/enums";
 import { URL_AboutUs } from "../../constants/Constants";
 import ManufacturerView from "../AfterProcess/Manufacturer/ManufacturerView";
 import { IUser } from "../../interface/Interface";
+import LoginView from "../Login/LoginView";
 
 export interface IAppState {
   selectedProgressItem?: { index: number; progress: string };
@@ -85,18 +87,6 @@ const App: React.FC = () => {
     }
   }, [userType]);
 
-  const privateRoutes = (
-    <Route>
-      <Route path="messages" element={<Error text="messages" />} />
-      <Route
-        path="account"
-        element={
-          user === undefined ? <Navigate to="/" /> : <Account user={user} />
-        }
-      />
-    </Route>
-  );
-
   const adminRoutes = (
     <Route element={<PrivateAdminRoutes userType={userType} />}>
       <Route path="user" element={<AdminUserView userList={data.users} />} />
@@ -114,7 +104,6 @@ const App: React.FC = () => {
         path="order"
         element={<AdminOrderView orderList={data.orders} />}
       />
-      {privateRoutes}
     </Route>
   );
 
@@ -125,13 +114,16 @@ const App: React.FC = () => {
       <Route path="orders" element={<OrderOverview />} />
       <Route path="proceedings" element={<Error text="proceedings" />} />
       <Route path="assignments" element={<Error text="assignments" />} />
-      {privateRoutes}
     </Route>
   );
 
   const contractorRoutes = (
-    <Route element={<PrivateContractorRoutes user={user} />}>
-      {privateRoutes}
+    <Route element={<PrivateContractorRoutes user={user} />}></Route>
+  );
+
+  const privateRoutes = (
+    <Route element={<PrivateRoutes user={user} />}>
+      <Route path="account" element={<Account user={user!} />} />
     </Route>
   );
 
@@ -185,14 +177,8 @@ const App: React.FC = () => {
               <Route path="*" element={<Navigate to="/guide" />} />
             </Route>
             <Route path="logout" element={<Logout />} />
-            <Route
-              path="login-client"
-              element={<Login userType={EUserType.client} />}
-            />
-            <Route
-              path="login-contractor"
-              element={<Login userType={EUserType.manufacturer} />}
-            />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<LoginView />} />
             <Route
               path="aboutus"
               element={<Redirect link={URL_AboutUs} extern />}
@@ -201,6 +187,7 @@ const App: React.FC = () => {
             <Route path="*" element={<Error />} />
             {clientRoutes}
             {contractorRoutes}
+            {privateRoutes}
             {adminRoutes}
           </Routes>
         </main>

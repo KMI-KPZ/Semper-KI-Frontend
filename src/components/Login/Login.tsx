@@ -4,7 +4,7 @@ import { EUserType } from "../../interface/enums";
 import Loading from "../Loading/Loading";
 
 interface Props {
-  userType: EUserType;
+  userType?: EUserType;
   path?: string;
 }
 

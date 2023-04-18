@@ -41,8 +41,8 @@
   },
   "header": {
     "about-us": "Über uns",
-    "login-client": "Als Kunde anmelden",
-    "login-contractor": "Als Hersteller anmelden",
+    "login": "Anmelden",
+    "register": "Registrieren",
     "logout":"Abmelden",
     "order":"Bestellung",
     "overview":"Übersicht",

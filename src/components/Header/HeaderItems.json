@@ -10,8 +10,8 @@
     },
     
     {
-        "title":"login-client",
-        "link": "/login-client",
+        "title":"login",
+        "link": "/login",
         "icon": "IconPerson",
         "extern": false,
         "preferred":0,
@@ -19,9 +19,9 @@
         "loggedIn":[false]
     },
     {
-        "title":"login-contractor",
-        "link": "/login-contractor",
-        "icon": "Icon3DPrinter",
+        "title":"register",
+        "link": "/register",
+        "icon": "IconPerson",
         "extern": false,
         "preferred":0,
         "userType": [0,1,2, 3],

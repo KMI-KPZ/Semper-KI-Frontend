@@ -12,24 +12,24 @@ interface ReturnProps {
 }
 
 export const useLogin = (
-  fetchLoginUsertype: EUserType,
+  fetchLoginUsertype?: EUserType,
   path?: string
 ): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
   const { data, status, error } = useQuery<AxiosResponse, Error>({
-    queryKey: ["login", EUserType[fetchLoginUsertype]],
+    queryKey: ["login"],
     queryFn: async () => {
       const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/login/`;
       return axiosCustom.get(apiUrl, {
         headers: {
-          Usertype: EUserType[fetchLoginUsertype],
+          Usertype:
+            fetchLoginUsertype === undefined
+              ? ""
+              : EUserType[fetchLoginUsertype],
           Path: path === undefined ? "/" : path,
         },
       });
     },
-    enabled:
-      fetchLoginUsertype === EUserType.client ||
-      fetchLoginUsertype === EUserType.manufacturer,
   });
   useEffect(() => {
     if (data !== undefined && status === "success")

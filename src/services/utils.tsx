@@ -70,7 +70,7 @@ export const getUserType = (name: string): EUserType => {
     case "client":
       type = EUserType.client;
       break;
-    case "contractor":
+    case "manufacturer":
       type = EUserType.manufacturer;
       break;
     case "admin":

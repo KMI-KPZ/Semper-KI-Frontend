@@ -13,7 +13,6 @@ interface Props {
 
 interface State {
   chat: IChatMessage[];
-
   height?: number;
   messageText?: string;
 }

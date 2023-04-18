@@ -100,15 +100,19 @@ const OrderView: React.FC<Props> = (props) => {
         </div>
       </div>
       <StatusView status={order.orderState} />
-      <div className="flex flex-col md:flex-row gap-5 w-full items-center justify-center flex-wrap">
-        <div className="flex flex-row md:flex-col gap-3 w-full md:w-1/4 lg:w-1/6 items-center justify-start md:justify-center border-2 rounded-xl overflow-clip">
-          <img
-            src={order.item.model?.URI}
-            className="object-fit w-20 md:w-full "
-          />
-          <div className="flex flex-col items-center justify-center p-3 w-full">
-            <h3>{order.item.title}</h3>
-          </div>
+      <div className="flex flex-col md:flex-row gap-5 w-full items-start justify-center md:justify-around p-5">
+        <img src={order.item.model?.URI} className="object-fit w-40 h-40" />
+        <div className="flex flex-col items-center justify-start p-3">
+          <h3>{order.item.model?.title}</h3>
+        </div>
+        <div className="flex flex-col items-center justify-start p-3">
+          <h3>{order.item.material?.title}</h3>
+        </div>
+        <div className="flex flex-col items-center justify-start p-3">
+          <h3>Nachbearbeitungen</h3>
+          {order.item.postProcessings?.map((postProcessing, index) => (
+            <span key={index}>{postProcessing.title}</span>
+          ))}
         </div>
       </div>
       <PopUp open={chatOpen} onOutsideClick={handleOnOutsideClickChat}>

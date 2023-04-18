@@ -9,6 +9,7 @@ import StatusView from "./StatusView";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import { getModelURI } from "../../services/utils";
 
 interface Props {
   order: IOrder;
@@ -101,14 +102,17 @@ const OrderView: React.FC<Props> = (props) => {
       </div>
       <StatusView status={order.orderState} />
       <div className="flex flex-col md:flex-row gap-5 w-full items-start justify-center md:justify-around p-5">
-        <img src={order.item.model?.URI} className="object-fit w-40 h-40" />
-        <div className="flex flex-col items-center justify-start p-3">
+        <img
+          src={getModelURI(order.item.model!)}
+          className="object-fit w-2/12"
+        />
+        <div className="flex flex-col items-center justify-start p-3 w-1/4">
           <h3>{order.item.model?.title}</h3>
         </div>
-        <div className="flex flex-col items-center justify-start p-3">
+        <div className="flex flex-col items-center justify-start p-3 w-1/4">
           <h3>{order.item.material?.title}</h3>
         </div>
-        <div className="flex flex-col items-center justify-start p-3">
+        <div className="flex flex-col items-center justify-start p-3 w-1/4">
           <h3>Nachbearbeitungen</h3>
           {order.item.postProcessings?.map((postProcessing, index) => (
             <span key={index}>{postProcessing.title}</span>

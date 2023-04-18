@@ -123,7 +123,7 @@ export interface IOrderCollection {
 
 export interface IOrder {
   id: string;
-  processList: IProcessItem[];
+  item: IProcessItem;
   orderState: EOrderState;
   chat: IChatMessage[];
 }

@@ -6,11 +6,12 @@ import Loading from "../Loading/Loading";
 interface Props {
   userType?: EUserType;
   path?: string;
+  register?: boolean;
 }
 
 const Login: React.FC<Props> = (props) => {
-  const { userType, path } = props;
-  const { error, status, data } = useLogin(userType, path);
+  const { userType, path, register } = props;
+  const { error, status, data } = useLogin(userType, path, register);
 
   return (
     <Loading error={error} status={status} animation>

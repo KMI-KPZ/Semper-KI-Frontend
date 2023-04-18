@@ -47,7 +47,7 @@ const AdminOrderView: React.FC<Props> = (props) => {
                   {EOrderState[order.orderState]}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {order.processList.length}
+                  {/* {order.processList.length} */}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {/* {order.bills.name} */}

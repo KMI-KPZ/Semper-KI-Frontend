@@ -47,10 +47,14 @@ const Button: React.FC<Props> = (props) => {
 
   const getClassName = (): string => {
     let className: string = "";
-    if (size === "small") className = addString(className, "w-full md:w-fit");
-    if (size === "xsmall") className = addString(className, "w-full md:w-fit");
-    if (size === "medium") className = addString(className, "w-full md:w-fit");
-    if (size === "large") className = addString(className, "w-full md:w-fit");
+    if (size === "small")
+      className = addString(className, "w-full md:w-fit md:py-1 md:px-2");
+    if (size === "xsmall")
+      className = addString(className, "w-full md:w-fit md:py-2 md:px-3");
+    if (size === "medium")
+      className = addString(className, "w-full md:w-fit md:py-2 md:px-4");
+    if (size === "large")
+      className = addString(className, "w-full md:w-fit md:py-3 md:px-5");
     if (size === "full") className = addString(className, "w-full");
     if (style === "primary" && active === true)
       className = addString(

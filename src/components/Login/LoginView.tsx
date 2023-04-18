@@ -5,10 +5,11 @@ import Login from "./Login";
 
 interface Props {
   path?: string;
+  register?: boolean;
 }
 
 const LoginView: React.FC<Props> = (props) => {
-  const { path } = props;
+  const { path, register } = props;
   const [userType, setUserType] = useState<EUserType>();
 
   const handleOnClickButtonClient = () => {
@@ -19,7 +20,13 @@ const LoginView: React.FC<Props> = (props) => {
   };
 
   if (userType !== undefined)
-    return <Login userType={EUserType.manufacturer} path={path} />;
+    return (
+      <Login
+        userType={EUserType.manufacturer}
+        path={path}
+        register={register}
+      />
+    );
   return (
     <div className="flex flex-col w-fit p-5 items-center justify-center gap-5 bg-white">
       <h1>

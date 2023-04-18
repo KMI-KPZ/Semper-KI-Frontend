@@ -178,7 +178,7 @@ const App: React.FC = () => {
             </Route>
             <Route path="logout" element={<Logout />} />
             <Route path="login" element={<Login />} />
-            <Route path="register" element={<LoginView />} />
+            <Route path="register" element={<LoginView register={true} />} />
             <Route
               path="aboutus"
               element={<Redirect link={URL_AboutUs} extern />}

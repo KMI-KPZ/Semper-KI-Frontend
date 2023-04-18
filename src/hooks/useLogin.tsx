@@ -13,7 +13,8 @@ interface ReturnProps {
 
 export const useLogin = (
   fetchLoginUsertype?: EUserType,
-  path?: string
+  path?: string,
+  register?: boolean
 ): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
   const { data, status, error } = useQuery<AxiosResponse, Error>({
@@ -24,9 +25,10 @@ export const useLogin = (
         headers: {
           Usertype:
             fetchLoginUsertype === undefined
-              ? ""
+              ? null
               : EUserType[fetchLoginUsertype],
           Path: path === undefined ? "/" : path,
+          Register: register !== undefined && register === true ? true : false,
         },
       });
     },

@@ -17,7 +17,6 @@ interface AdminProps {
 export const PrivateClientRoutes: React.FC<Props> = (props) => {
   const { user } = props;
   const { pathname } = useLocation();
-  console.log("PrivateClientRoutes");
 
   if (user !== undefined && user.type !== EUserType.client)
     return (
@@ -33,7 +32,6 @@ export const PrivateClientRoutes: React.FC<Props> = (props) => {
 export const PrivateContractorRoutes: React.FC<Props> = (props) => {
   const { user } = props;
   const { pathname } = useLocation();
-  console.log("PrivateContractorRoutes");
 
   if (user !== undefined && user.type !== EUserType.manufacturer)
     return (

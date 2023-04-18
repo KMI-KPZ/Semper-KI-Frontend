@@ -52,9 +52,9 @@ const statusData: StatusData[] = [
 ];
 
 const StatusView: React.FC<Props> = (props) => {
-  const { status } = props;
+  const { status: _status } = props;
+  const status: number = Number(EOrderState[_status]);
   const { t } = useTranslation();
-
   const renderStatusItem = (statusData: StatusData, index: number) => {
     if (
       (status === EOrderState.rejected &&
@@ -70,7 +70,7 @@ const StatusView: React.FC<Props> = (props) => {
       <React.Fragment key={index}>
         {index !== 0 ? (
           <div
-            className={`border-l-2 h-2 md:border-t-2 md:w-5  ${
+            className={`border-l-2 h-2 md:h-0 md:border-t-2 md:w-5  ${
               status >= statusData.key
                 ? "border-orange-200"
                 : "border-slate-100"

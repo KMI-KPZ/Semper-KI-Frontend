@@ -18,7 +18,7 @@ import GuideRoutes from "../Guide/GuideRoutes";
 import {
   PrivateAdminRoutes,
   PrivateClientRoutes,
-  PrivateContractorRoutes,
+  PrivateManufacturerRoutes,
   PrivateRoutes,
 } from "../PrivateRoutes/PrivateRoutes";
 import Account from "../Account/Account";
@@ -111,14 +111,22 @@ const App: React.FC = () => {
     <Route element={<PrivateClientRoutes user={user} />}>
       <Route path="manufacturer" element={<ManufacturerView />} />
       <Route path="checkout" element={<Checkout />} />
-      <Route path="orders" element={<OrderOverview />} />
+      <Route
+        path="orders"
+        element={<OrderOverview userType={EUserType.client} />}
+      />
       <Route path="proceedings" element={<Error text="proceedings" />} />
       <Route path="assignments" element={<Error text="assignments" />} />
     </Route>
   );
 
-  const contractorRoutes = (
-    <Route element={<PrivateContractorRoutes user={user} />}></Route>
+  const manufacturerRoutes = (
+    <Route element={<PrivateManufacturerRoutes user={user} />}>
+      <Route
+        path="contracts"
+        element={<OrderOverview userType={EUserType.manufacturer} />}
+      />
+    </Route>
   );
 
   const privateRoutes = (
@@ -186,7 +194,7 @@ const App: React.FC = () => {
             <Route path="service/*" element={<ServiceRoutes />} />
             <Route path="*" element={<Error />} />
             {clientRoutes}
-            {contractorRoutes}
+            {manufacturerRoutes}
             {privateRoutes}
             {adminRoutes}
           </Routes>

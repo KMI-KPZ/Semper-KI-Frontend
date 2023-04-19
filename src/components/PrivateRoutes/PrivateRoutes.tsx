@@ -29,7 +29,7 @@ export const PrivateClientRoutes: React.FC<Props> = (props) => {
   );
 };
 
-export const PrivateContractorRoutes: React.FC<Props> = (props) => {
+export const PrivateManufacturerRoutes: React.FC<Props> = (props) => {
   const { user } = props;
   const { pathname } = useLocation();
 

@@ -1,0 +1,17 @@
+[
+    {
+        "title":"contracts",
+        "link":"/contracts",
+        "icon":"IconDocument"
+    },
+    {
+        "title":"proceedings",
+        "link":"/proceedings",
+        "icon":"Icon3DPrinter"
+    },
+    {
+        "title":"account",
+        "link":"/account",
+        "icon":"IconPerson"
+    }
+]

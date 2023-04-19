@@ -5,23 +5,102 @@ import OrderView from "./OrderView";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { useOrders } from "../../hooks/useOrders";
+import { EOrderState, EUserType } from "../../interface/enums";
+import { useTranslation } from "react-i18next";
+import CheckIcon from "@mui/icons-material/Check";
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 
 interface Props {
   orderCollection: IOrderCollection;
+  userType: EUserType;
 }
 
 const OrderCollection: React.FC<Props> = (props) => {
-  const { orderCollection } = props;
-  const { deleteOrderCollection } = useOrders();
+  const { orderCollection, userType } = props;
+  const { t } = useTranslation();
+  const { deleteOrderCollection, updateOrder } = useOrders();
+
   const handleOnClickButtonCancel = () => {
-    if (window.confirm("Gesamten Auftrag wirklich stonieren?")) {
+    if (window.confirm(t("orderCollection.button.cancel") + "?")) {
       deleteOrderCollection.mutate(orderCollection.id);
     }
   };
   const handleOnClickButtonReOrder = () => {
-    if (window.confirm("Gesamten Auftrag wirklich erneut Bestellen?")) {
+    if (window.confirm(t("orderCollection.button.re-order") + "?")) {
       console.log("//TODO ReOrder");
     }
+  };
+  const handleOnClickButtonReject = () => {
+    if (window.confirm(t("orderCollection.button.reject") + "?")) {
+      updateOrder.mutate({
+        orderCollectionID: orderCollection.id,
+        state: EOrderState.rejected,
+      });
+    }
+  };
+  const handleOnClickButtonConfirm = () => {
+    if (window.confirm(t("orderCollection.button.confirm") + "?")) {
+      updateOrder.mutate({
+        orderCollectionID: orderCollection.id,
+        state: EOrderState.confirmed,
+      });
+    }
+  };
+  const handleOnClickButtonVerify = () => {
+    if (window.confirm(t("orderCollection.button.verify") + "?")) {
+      updateOrder.mutate({
+        orderCollectionID: orderCollection.id,
+        state: EOrderState.verify,
+      });
+    }
+  };
+
+  const renderButtons = () => {
+    if (userType === EUserType.client)
+      return (
+        <div className="flex flex-col md:flex-row items-center justify-center w-full gap-5">
+          <Button
+            size="small"
+            icon={<CancelIcon />}
+            onClick={handleOnClickButtonCancel}
+          >
+            {t("orderCollection.button.cancel")}
+          </Button>
+          <Button
+            size="small"
+            icon={<ReplayIcon />}
+            onClick={handleOnClickButtonReOrder}
+          >
+            {t("orderCollection.button.re-order")}
+          </Button>
+        </div>
+      );
+    if (userType === EUserType.manufacturer)
+      return (
+        <div className="flex flex-col md:flex-row items-center justify-center w-full gap-5">
+          <Button
+            size="small"
+            icon={<CancelIcon />}
+            onClick={handleOnClickButtonReject}
+          >
+            {t("orderCollection.button.reject")}
+          </Button>
+          <Button
+            size="small"
+            icon={<QuestionMarkIcon />}
+            onClick={handleOnClickButtonVerify}
+          >
+            {t("orderCollection.button.verify")}
+          </Button>
+          <Button
+            size="small"
+            icon={<CheckIcon />}
+            onClick={handleOnClickButtonConfirm}
+          >
+            {t("orderCollection.button.confirm")}
+          </Button>
+        </div>
+      );
   };
 
   return (
@@ -38,22 +117,7 @@ const OrderCollection: React.FC<Props> = (props) => {
           orderCollectionID={orderCollection.id}
         />
       ))}
-      <div className="flex flex-col md:flex-row items-center justify-center w-full gap-5">
-        <Button
-          size="small"
-          icon={<CancelIcon />}
-          onClick={handleOnClickButtonCancel}
-        >
-          Gesamten Auftrag Stornieren
-        </Button>
-        <Button
-          size="small"
-          icon={<ReplayIcon />}
-          onClick={handleOnClickButtonReOrder}
-        >
-          Gesamten Auftrag erneut Bestellen
-        </Button>
-      </div>
+      {renderButtons()}
     </div>
   );
 };

@@ -25,7 +25,7 @@ interface ReturnProps {
 
 export interface IUpdateOrderData {
   orderCollectionID: string;
-  orderID: string;
+  orderID?: string;
   chat?: IChatMessage;
   state?: EOrderState;
   files?: File[];
@@ -77,7 +77,7 @@ export const useOrders = (): ReturnProps => {
   const updateOrder = useMutation<AxiosResponse, Error, IUpdateOrderData>({
     mutationFn: async (props: IUpdateOrderData) => {
       return axiosCustom
-        .post(`${process.env.REACT_APP_HTTP_API_URL}/public/uploadOrder/`, {
+        .put(`${process.env.REACT_APP_HTTP_API_URL}/public/updateOrder/`, {
           props,
         })
         .then((res) => {

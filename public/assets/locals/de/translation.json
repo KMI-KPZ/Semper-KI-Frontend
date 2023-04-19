@@ -215,6 +215,8 @@
     "guide":"Hilfe",
     "account":"Konto",
     "orders":"Bestellungen",
+    "proceedings":"Verfahren",
+    "contracts":"Aufträge",
     "admin":{
       "account":"Konto",
       "title":"Admin-Bereich",
@@ -227,7 +229,10 @@
     }
   },
   "orderview":{
-    "headline":"Bestellungen",
+    "headline":{
+      "client":"Bestellungen",
+      "manufacturer":"Aufträge"
+    },
     "state":{
       "requested":"Angefragt",
       "verify":"Rückfragen",
@@ -252,5 +257,14 @@
   },
   "guide":{
     "headline":"Guide"
+  },
+  "orderCollection":{
+    "button":{
+      "cancel":"Gesamten Auftrag Stornieren",
+      "re-order":"Gesamten Auftrag erneut Bestellen",
+      "reject":"Gesamten Auftrag Ablehnen",
+      "confirm":"Gesamten Auftrag Bestätigen",
+      "verify":"Gesamten Auftrag Überprüfen"
+    }
   }
 }

@@ -4,10 +4,14 @@ import { IOrderCollection } from "../../interface/Interface";
 import { useOrders } from "../../hooks/useOrders";
 import Loading from "../Loading/Loading";
 import OrderCollection from "./OrderCollection";
+import { EUserType } from "../../interface/enums";
 
-interface Props {}
+interface Props {
+  userType: EUserType;
+}
 
 const OrderOverview: React.FC<Props> = (props) => {
+  const { userType } = props;
   const { t } = useTranslation();
   const { data, status, error } = useOrders();
 
@@ -15,7 +19,11 @@ const OrderOverview: React.FC<Props> = (props) => {
     <Loading error={error} status={status}>
       <div className="flex flex-col items-center w-full gap-5 overflow-x-auto overflow-y-hidden p-3">
         <h1 className="bg-white w-full py-3 text-center">
-          {t("orderview.headline")}
+          {t(
+            userType === EUserType.client
+              ? "orderview.headline.client"
+              : "orderview.headline.manufacturer"
+          )}
         </h1>
         {data !== undefined ? (
           <ul className="w-full gap-5 flex flex-col">
@@ -23,6 +31,7 @@ const OrderOverview: React.FC<Props> = (props) => {
               data.map((orderCollection: IOrderCollection, index: number) => (
                 <OrderCollection
                   orderCollection={orderCollection}
+                  userType={userType}
                   key={index}
                 />
               ))

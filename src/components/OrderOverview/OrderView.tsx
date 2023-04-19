@@ -11,6 +11,10 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { getModelURI } from "../../services/utils";
 import { useOrders } from "../../hooks/useOrders";
+import { EOrderState, EUserType } from "../../interface/enums";
+import { useTranslation } from "react-i18next";
+import CheckIcon from "@mui/icons-material/Check";
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 
 interface Props {
   order: IOrder;
@@ -30,7 +34,8 @@ const OrderView: React.FC<Props> = (props) => {
   });
   const { chatOpen, menuOpen } = state;
   const { user } = useContext(AppContext);
-  const { deleteOrder } = useOrders();
+  const { deleteOrder, updateOrder } = useOrders();
+  const { t } = useTranslation();
 
   const handleOnClickButtonChat = () => {
     setState((prevState) => ({ ...prevState, chatOpen: true }));
@@ -55,11 +60,84 @@ const OrderView: React.FC<Props> = (props) => {
       console.log("//TODO ReOrder");
     }
   };
-
+  const handleOnClickButtonReject = () => {
+    if (window.confirm(t("orderView.button.reject") + "?")) {
+      updateOrder.mutate({
+        orderCollectionID: orderCollectionID,
+        orderID: order.id,
+        state: EOrderState.rejected,
+      });
+    }
+  };
+  const handleOnClickButtonConfirm = () => {
+    if (window.confirm(t("orderView.button.confirm") + "?")) {
+      updateOrder.mutate({
+        orderCollectionID: orderCollectionID,
+        orderID: order.id,
+        state: EOrderState.confirmed,
+      });
+    }
+  };
+  const handleOnClickButtonVerify = () => {
+    if (window.confirm(t("orderView.button.verify") + "?")) {
+      updateOrder.mutate({
+        orderCollectionID: orderCollectionID,
+        orderID: order.id,
+        state: EOrderState.verify,
+      });
+    }
+  };
   const handleOnClickButtonExpand = () => {
     setState((prevState) => ({ ...prevState, menuOpen: !prevState.menuOpen }));
   };
 
+  const renderButtons = () => {
+    if (user!.type === EUserType.client)
+      return (
+        <div className="flex flex-col md:flex-row gap-3 items-center justify-center">
+          <Button
+            size="small"
+            icon={<CancelIcon />}
+            onClick={handleOnClickButtonCancel}
+          >
+            {t("orderView.button.cancel")}
+          </Button>
+          <Button
+            size="small"
+            icon={<ReplayIcon />}
+            onClick={handleOnClickButtonReOrder}
+          >
+            {t("orderView.button.re-order")}
+          </Button>
+        </div>
+      );
+    if (user!.type === EUserType.manufacturer)
+      return (
+        <div className="flex flex-col md:flex-row gap-3 items-center justify-center">
+          <Button
+            size="small"
+            icon={<CancelIcon />}
+            onClick={handleOnClickButtonReject}
+          >
+            {t("orderView.button.reject")}
+          </Button>
+          <Button
+            size="small"
+            icon={<QuestionMarkIcon />}
+            onClick={handleOnClickButtonVerify}
+          >
+            {t("orderView.button.verify")}
+          </Button>
+          <Button
+            size="small"
+            icon={<CheckIcon />}
+            onClick={handleOnClickButtonConfirm}
+          >
+            {t("orderView.button.confirm")}
+          </Button>
+        </div>
+      );
+  };
   return (
     <div className="flex flex-col justify-start items-start gap-3 border-2 w-full p-3">
       <div className="flex flex-col md:flex-row justify-between w-full">
@@ -72,24 +150,7 @@ const OrderView: React.FC<Props> = (props) => {
           >
             Chat
           </Button>
-          {menuOpen ? (
-            <div className="flex flex-col md:flex-row gap-3 items-center justify-center">
-              <Button
-                size="small"
-                icon={<CancelIcon />}
-                onClick={handleOnClickButtonCancel}
-              >
-                Stornieren
-              </Button>
-              <Button
-                size="small"
-                icon={<ReplayIcon />}
-                onClick={handleOnClickButtonReOrder}
-              >
-                Erneut Bestellen
-              </Button>
-            </div>
-          ) : null}
+          {menuOpen ? renderButtons() : null}
           <div
             className={`flex items-center justify-center ${
               menuOpen ? "rotate-90" : "-rotate-90"

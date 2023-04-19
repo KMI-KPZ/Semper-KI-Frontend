@@ -266,5 +266,14 @@
       "confirm":"Gesamten Auftrag Bestätigen",
       "verify":"Gesamten Auftrag Überprüfen"
     }
+  },
+  "orderView":{
+    "button":{
+      "cancel":"Stornieren",
+      "re-order":"erneut Bestellen",
+      "reject":"Ablehnen",
+      "confirm":"Bestätigen",
+      "verify":"Überprüfen"
+    }
   }
 }

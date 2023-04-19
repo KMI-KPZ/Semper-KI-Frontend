@@ -70,32 +70,35 @@ const ChatView: React.FC<Props> = (props) => {
       <div className="absolute top-1 right-1 md:hidden">
         <Button icon={<CloseIcon />} onClick={handleOnClickButtonClose} />
       </div>
-      <div className="flex flex-col w-full h-full bg-white justify-start items-center p-5 gap-5 overflow-auto">
-        <h1>Nachrichten</h1>
-        {chat.map((chatMessage: IChatMessage, index: number) => (
-          <div
-            key={index}
-            className={`flex flex-col gap-3 w-full ${
-              chatMessage.userID === user?.hashedID
-                ? "items-end"
-                : "items-start"
-            }`}
-          >
-            <span>{chatMessage.userName}:</span>
+      <div className="flex flex-col-reverse w-full h-full bg-white justify-start items-center p-5 gap-5 overflow-auto">
+        {chat
+          .slice(0)
+          .reverse()
+          .map((chatMessage: IChatMessage, index: number) => (
             <div
-              className={`flex justify-start w-full p-3 gap-3 items-end rounded-full bg-slate-100 ${
+              key={index}
+              className={`flex flex-col gap-3 w-full ${
                 chatMessage.userID === user?.hashedID
-                  ? "flex-row-reverse"
-                  : "flex-row"
+                  ? "items-end"
+                  : "items-start"
               }`}
             >
-              <span>{chatMessage.text}</span>
-              <span className="text-xs">
-                {new Date(chatMessage.date).toLocaleString()}
-              </span>
+              <span>{chatMessage.userName}:</span>
+              <div
+                className={`flex justify-start w-full p-3 gap-3 items-end rounded-full bg-slate-100 ${
+                  chatMessage.userID === user?.hashedID
+                    ? "flex-row-reverse"
+                    : "flex-row"
+                }`}
+              >
+                <span>{chatMessage.text}</span>
+                <span className="text-xs">
+                  {new Date(chatMessage.date).toLocaleString()}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        <h1>Nachrichten</h1>
       </div>
       <div className="flex flex-col md:flex-row w-full h-fit bg-white justify-start items-center p-3 gap-5">
         <textarea

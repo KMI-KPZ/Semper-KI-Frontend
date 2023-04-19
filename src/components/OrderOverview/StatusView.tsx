@@ -54,13 +54,14 @@ const statusData: StatusData[] = [
 ];
 
 const StatusView: React.FC<Props> = (props) => {
-  const { status: _status, userType, updateStatus: setStatus } = props;
-  const status: number = Number(EOrderState[_status]);
+  const { status, userType, updateStatus: setStatus } = props;
   const { t } = useTranslation();
 
-  const handleOnClickStatus = (status: EOrderState) => {
-    if (userType === EUserType.manufacturer) {
-      setStatus(status);
+  const handleOnClickStatus = (_status: EOrderState) => {
+    if (
+      userType === EUserType.manufacturer //&& _status > status
+    ) {
+      setStatus(_status);
     }
   };
 
@@ -97,7 +98,7 @@ const StatusView: React.FC<Props> = (props) => {
               : "bg-slate-100"
           } ${
             userType === EUserType.manufacturer &&
-            status + 1 === statusData.orderState
+            status + 1 == statusData.orderState
               ? "hover:cursor-pointer hover:bg-orange-300"
               : ""
           }

@@ -74,14 +74,14 @@ const OrderView: React.FC<Props> = (props) => {
     }
   };
   const handleOnClickButtonConfirm = () => {
-    if (window.confirm(t("orderView.button.confirm") + "?")) {
-      updateStatus(EOrderState.confirmed);
-    }
+    // if (window.confirm(t("orderView.button.confirm") + "?")) {
+    updateStatus(EOrderState.confirmed);
+    // }
   };
   const handleOnClickButtonVerify = () => {
-    if (window.confirm(t("orderView.button.verify") + "?")) {
-      updateStatus(EOrderState.verify);
-    }
+    // if (window.confirm(t("orderView.button.verify") + "?")) {
+    updateStatus(EOrderState.verify);
+    // }
   };
   const handleOnClickButtonExpand = () => {
     setState((prevState) => ({ ...prevState, menuOpen: !prevState.menuOpen }));

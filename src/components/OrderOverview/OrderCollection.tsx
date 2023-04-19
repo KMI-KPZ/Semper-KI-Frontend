@@ -107,7 +107,7 @@ const OrderCollection: React.FC<Props> = (props) => {
     <div className="flex flex-col justify-start items-start bg-white w-full gap-5 p-5">
       <div className="flex flex-col md:flex-row w-full gap-5 items-start md:items-center justify-start md:justify-between">
         <h2 className="break-words">Id: {orderCollection.id}</h2>
-        <h2>Status: {orderCollection.state}</h2>
+        <h2>Status: {EOrderState[orderCollection.state]}</h2>
         <h2>Datum: {new Date(orderCollection.date).toLocaleString()}</h2>
       </div>
       {orderCollection.orders.map((order, index) => (

@@ -53,7 +53,7 @@ const ChatView: React.FC<Props> = (props) => {
             setState((prevState) => ({
               ...prevState,
               chat: [...prevState.chat, variables.chat!],
-              messageText: undefined,
+              messageText: "",
               height: undefined,
             }));
           },
@@ -90,7 +90,9 @@ const ChatView: React.FC<Props> = (props) => {
               }`}
             >
               <span>{chatMessage.text}</span>
-              <span className="text-xs">{chatMessage.date}</span>
+              <span className="text-xs">
+                {new Date(chatMessage.date).toLocaleString()}
+              </span>
             </div>
           </div>
         ))}
@@ -106,6 +108,7 @@ const ChatView: React.FC<Props> = (props) => {
               ? { height: `${height + 4}px` }
               : {}
           }
+          value={messageText}
           placeholder="Nachricht"
           onChange={handleOnChangeTextArea}
         />

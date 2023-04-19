@@ -115,13 +115,13 @@ const App: React.FC = () => {
         path="orders"
         element={<OrderOverview userType={EUserType.client} />}
       />
-      <Route path="proceedings" element={<Error text="proceedings" />} />
       <Route path="assignments" element={<Error text="assignments" />} />
     </Route>
   );
 
   const manufacturerRoutes = (
     <Route element={<PrivateManufacturerRoutes user={user} />}>
+      <Route path="proceedings" element={<Error text="proceedings" />} />
       <Route
         path="contracts"
         element={<OrderOverview userType={EUserType.manufacturer} />}

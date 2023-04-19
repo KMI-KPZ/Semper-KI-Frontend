@@ -19,6 +19,7 @@ import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 interface Props {
   order: IOrder;
   orderCollectionID: string;
+  userType: EUserType;
 }
 
 interface State {
@@ -27,7 +28,7 @@ interface State {
 }
 
 const OrderView: React.FC<Props> = (props) => {
-  const { order, orderCollectionID } = props;
+  const { order, orderCollectionID, userType } = props;
   const [state, setState] = useState<State>({
     chatOpen: false,
     menuOpen: false,
@@ -49,6 +50,13 @@ const OrderView: React.FC<Props> = (props) => {
       chatOpen: false,
     }));
   };
+  const updateStatus = (status: EOrderState) => {
+    updateOrder.mutate({
+      orderCollectionID: orderCollectionID,
+      orderID: order.id,
+      state: status,
+    });
+  };
 
   const handleOnClickButtonCancel = () => {
     if (window.confirm("Auftrag wirklich stonieren?")) {
@@ -62,29 +70,17 @@ const OrderView: React.FC<Props> = (props) => {
   };
   const handleOnClickButtonReject = () => {
     if (window.confirm(t("orderView.button.reject") + "?")) {
-      updateOrder.mutate({
-        orderCollectionID: orderCollectionID,
-        orderID: order.id,
-        state: EOrderState.rejected,
-      });
+      updateStatus(EOrderState.rejected);
     }
   };
   const handleOnClickButtonConfirm = () => {
     if (window.confirm(t("orderView.button.confirm") + "?")) {
-      updateOrder.mutate({
-        orderCollectionID: orderCollectionID,
-        orderID: order.id,
-        state: EOrderState.confirmed,
-      });
+      updateStatus(EOrderState.confirmed);
     }
   };
   const handleOnClickButtonVerify = () => {
     if (window.confirm(t("orderView.button.verify") + "?")) {
-      updateOrder.mutate({
-        orderCollectionID: orderCollectionID,
-        orderID: order.id,
-        state: EOrderState.verify,
-      });
+      updateStatus(EOrderState.verify);
     }
   };
   const handleOnClickButtonExpand = () => {
@@ -92,7 +88,7 @@ const OrderView: React.FC<Props> = (props) => {
   };
 
   const renderButtons = () => {
-    if (user!.type === EUserType.client)
+    if (userType === EUserType.client)
       return (
         <div className="flex flex-col md:flex-row gap-3 items-center justify-center">
           <Button
@@ -111,7 +107,7 @@ const OrderView: React.FC<Props> = (props) => {
           </Button>
         </div>
       );
-    if (user!.type === EUserType.manufacturer)
+    if (userType === EUserType.manufacturer)
       return (
         <div className="flex flex-col md:flex-row gap-3 items-center justify-center">
           <Button
@@ -164,7 +160,11 @@ const OrderView: React.FC<Props> = (props) => {
           </div>
         </div>
       </div>
-      <StatusView status={order.orderState} />
+      <StatusView
+        status={order.orderState}
+        updateStatus={updateStatus}
+        userType={userType}
+      />
       <div className="flex flex-col md:flex-row gap-5 w-full items-start justify-center md:justify-around p-5">
         <img
           src={getModelURI(order.item.model!)}

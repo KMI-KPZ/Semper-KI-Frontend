@@ -115,6 +115,7 @@ const OrderCollection: React.FC<Props> = (props) => {
           key={index}
           order={order}
           orderCollectionID={orderCollection.id}
+          userType={userType}
         />
       ))}
       {renderButtons()}

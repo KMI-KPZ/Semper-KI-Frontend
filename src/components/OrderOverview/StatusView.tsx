@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { EOrderState } from "../../interface/enums";
+import { EOrderState, EUserType } from "../../interface/enums";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
@@ -10,60 +10,69 @@ import { useTranslation } from "react-i18next";
 
 interface Props {
   status: EOrderState;
+  userType: EUserType;
+  updateStatus(status: EOrderState): void;
 }
 
 interface StatusData {
-  key: EOrderState;
+  orderState: EOrderState;
   icon: ReactNode;
   text: string;
 }
 
 const statusData: StatusData[] = [
   {
-    key: EOrderState.requested,
+    orderState: EOrderState.requested,
     icon: <EmailIcon />,
     text: "orderview.state.requested",
   },
   {
-    key: EOrderState.verify,
+    orderState: EOrderState.verify,
     icon: <QuestionMarkIcon />,
     text: "orderview.state.verify",
   },
   {
-    key: EOrderState.rejected,
+    orderState: EOrderState.rejected,
     icon: <CloseIcon />,
     text: "orderview.state.rejected",
   },
   {
-    key: EOrderState.confirmed,
+    orderState: EOrderState.confirmed,
     icon: <CheckIcon />,
     text: "orderview.state.confirmed",
   },
   {
-    key: EOrderState.production,
+    orderState: EOrderState.production,
     icon: <FactoryIcon />,
     text: "orderview.state.production",
   },
   {
-    key: EOrderState.delivery,
+    orderState: EOrderState.delivery,
     icon: <LocalShippingIcon />,
     text: "orderview.state.delivery",
   },
 ];
 
 const StatusView: React.FC<Props> = (props) => {
-  const { status: _status } = props;
+  const { status: _status, userType, updateStatus: setStatus } = props;
   const status: number = Number(EOrderState[_status]);
   const { t } = useTranslation();
+
+  const handleOnClickStatus = (status: EOrderState) => {
+    if (userType === EUserType.manufacturer) {
+      setStatus(status);
+    }
+  };
+
   const renderStatusItem = (statusData: StatusData, index: number) => {
     if (
       (status === EOrderState.rejected &&
-        statusData.key === EOrderState.confirmed) ||
+        statusData.orderState === EOrderState.confirmed) ||
       (status === EOrderState.confirmed &&
-        statusData.key === EOrderState.rejected) ||
+        statusData.orderState === EOrderState.rejected) ||
       (status !== EOrderState.rejected &&
         status !== EOrderState.confirmed &&
-        statusData.key === EOrderState.rejected)
+        statusData.orderState === EOrderState.rejected)
     )
       return;
     return (
@@ -71,24 +80,32 @@ const StatusView: React.FC<Props> = (props) => {
         {index !== 0 ? (
           <div
             className={`border-l-2 h-2 md:h-0 md:border-t-2 md:w-5  ${
-              status >= statusData.key
+              status >= statusData.orderState
                 ? "border-orange-200"
                 : "border-slate-100"
             } `}
           />
         ) : null}
-        <div
-          className={`flex flex-col items-center justify-center p-3 rounded-xl ${
-            status === statusData.key
+        <a
+          onClick={() => handleOnClickStatus(statusData.orderState)}
+          className={`flex flex-col items-center justify-center p-3 rounded-xl 
+          ${
+            status === statusData.orderState
               ? "bg-orange text-white"
-              : status > statusData.key
+              : status > statusData.orderState
               ? "bg-orange-200"
               : "bg-slate-100"
-          }`}
+          } ${
+            userType === EUserType.manufacturer &&
+            status + 1 === statusData.orderState
+              ? "hover:cursor-pointer hover:bg-orange-300"
+              : ""
+          }
+          `}
         >
           {statusData.icon}
           <span className="text-center">{t(statusData.text)}</span>
-        </div>
+        </a>
       </React.Fragment>
     );
   };

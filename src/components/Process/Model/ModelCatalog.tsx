@@ -5,6 +5,9 @@ import { ModelCard } from "./ModelCard";
 import PopUp from "../../PopUp/PopUp";
 import { ModelPreView } from "./ModelPreView";
 import ModelView from "./ModelView";
+import { IconUpload } from "../../../constants/Icons";
+import Button from "../../General/Button";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   processState: IProcessState;
@@ -30,6 +33,7 @@ export const ModelCatalog: React.FC<Props> = (props) => {
     deselectModel,
   } = props;
   const { grid, searchText } = processState;
+  const navigate = useNavigate();
   const [state, setState] = useState<State>({ popUp: false, model: undefined });
   useEffect(() => {
     setProgress("model");
@@ -57,6 +61,35 @@ export const ModelCatalog: React.FC<Props> = (props) => {
     return false;
   };
 
+  const handleOnClickCardUpload = () => {
+    navigate("/process/upload");
+  };
+
+  const renderUplaodCart = () => (
+    <div
+      className={`flex justify-between items-center bg-white overflow-hidden hover:cursor-pointer hover:bg-gray-300 ${
+        grid === true
+          ? "flex-col basis-[48%] sm:basis-[32%] md:basis-[23.5%]"
+          : "w-full flex-row"
+      }`}
+      onClick={handleOnClickCardUpload}
+    >
+      <img
+        className={`p-5 ${
+          grid === true
+            ? "min-w-full max-w-[200%] h-44"
+            : "pl-10 w-44 max-h-44 min-h-full "
+        }`}
+        src={IconUpload}
+        alt="Button Uplaod"
+      />
+      <h2 className="">Modell hochladen</h2>
+      <div className={`flex justify-center items-center p-3 gap-2`}>
+        <Button onClick={handleOnClickCardUpload}>Auswählen</Button>
+      </div>
+    </div>
+  );
+
   return selectedModel === undefined ? (
     <div
       className={`flex gap-y-5 ${
@@ -67,6 +100,7 @@ export const ModelCatalog: React.FC<Props> = (props) => {
     >
       {models.length > 0 ? (
         <>
+          {renderUplaodCart()}
           {models
             .filter((model, index) => filterBySearch(model))
             .map((model: IModel, index: number) => (

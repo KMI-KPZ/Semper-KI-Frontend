@@ -49,7 +49,7 @@ export const ModelCard: React.FC<Props> = (props) => {
           grid === true ? "flex-col " : "w-full flex-row gap-5"
         }`}
       >
-        <h2 className="model-card-headline">{model.title}</h2>
+        <h2 className="">{model.title}</h2>
         <div
           className={`hidden md:flex  flex-wrap gap-2 items-center justify-center ${
             grid === true ? "flex-row" : "flex-col"

@@ -16,7 +16,10 @@ export const ModelPreView: React.FC<Props> = (props) => {
     let date: Date = new Date(model.date);
     return date.toLocaleDateString("uk-Uk");
   };
-
+  const handleOnClickButtonSelect = () => {
+    closeModelView();
+    selectModel(model);
+  };
   return (
     <div className="flex flex-col gap-5 items-center justify-start bg-white h-screen w-screen xl:w-fit xl:max-h-[90vh] overflow-x-hidden overflow-y-auto xl:min-w-[700px]">
       <div className="xl:hidden flex flex-row-reverse w-full">
@@ -52,7 +55,7 @@ export const ModelPreView: React.FC<Props> = (props) => {
             ))
           : "keine"}
       </div>
-      <Button onClick={(e) => selectModel(model)}>Auswählen</Button>
+      <Button onClick={handleOnClickButtonSelect}>Auswählen</Button>
     </div>
   );
 };

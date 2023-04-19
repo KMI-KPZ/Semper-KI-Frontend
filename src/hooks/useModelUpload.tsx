@@ -24,7 +24,6 @@ const useModelUpload = (): ReturnProps => {
           return response.data.models;
         });
     },
-    retry: 3,
   });
 
   return { uploadModels };

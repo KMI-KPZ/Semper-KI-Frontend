@@ -129,7 +129,7 @@ export interface IOrder {
 }
 
 export interface IChatMessage {
-  userId: string;
+  userID: string;
   userName: string;
   date: string;
   text: string;

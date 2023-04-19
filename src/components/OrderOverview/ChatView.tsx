@@ -39,7 +39,7 @@ const ChatView: React.FC<Props> = (props) => {
         {
           date: new Date().toString(),
           text: messageText,
-          userId: user!.hashedID,
+          userID: user!.hashedID,
           userName: user!.name,
         },
         {
@@ -70,7 +70,7 @@ const ChatView: React.FC<Props> = (props) => {
           <div
             key={index}
             className={`flex flex-col gap-3 w-full ${
-              chatMessage.userId === user?.hashedID
+              chatMessage.userID === user?.hashedID
                 ? "items-end"
                 : "items-start"
             }`}
@@ -78,7 +78,7 @@ const ChatView: React.FC<Props> = (props) => {
             <span>{chatMessage.userName}:</span>
             <div
               className={`flex justify-start w-full p-3 gap-3 items-end rounded-full bg-slate-100 ${
-                chatMessage.userId === user?.hashedID
+                chatMessage.userID === user?.hashedID
                   ? "flex-row-reverse"
                   : "flex-row"
               }`}

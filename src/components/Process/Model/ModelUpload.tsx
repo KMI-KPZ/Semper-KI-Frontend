@@ -8,6 +8,7 @@ import useModelUpload from "../../../hooks/useModelUpload";
 import { IModel } from "../../../interface/Interface";
 import LoadingAnimation from "../../Loading/LoadingAnimation";
 import Button from "../../General/Button";
+import Loading from "../../Loading/Loading";
 
 interface Props {
   setProgress(path: string): void;
@@ -22,12 +23,8 @@ export const ModelUpload: React.FC<Props> = (props) => {
   const [fileList, setFileList] = useState<File[]>([]);
   const [error, setError] = useState<boolean>(false);
 
-  const {
-    models,
-    error: responseError,
-    loading,
-    uploadModels,
-  } = useModelUpload();
+  const { uploadModels } = useModelUpload();
+  const { status, error: uploadError } = uploadModels;
   const navigate = useNavigate();
   useEffect(() => {
     setProgress("upload");
@@ -116,9 +113,20 @@ export const ModelUpload: React.FC<Props> = (props) => {
     setError(true);
   };
 
+  const createProcessItems = (modelList: IModel[]) => {
+    if (modelList !== undefined && modelList.length > 0) {
+      modelList.forEach((model) => createProcessItem(model));
+    }
+  };
+
   const handleClickNext = () => {
     if (fileList.length > 0) {
-      uploadModels(fileList);
+      uploadModels.mutate(fileList, {
+        onSuccess(data) {
+          createProcessItems(data);
+          navigate("/process/model");
+        },
+      });
     } else {
       showError();
     }
@@ -131,65 +139,60 @@ export const ModelUpload: React.FC<Props> = (props) => {
       }, 5000);
   }, [error]);
 
-  useEffect(() => {
-    if (models.length > 0) {
-      models.forEach((model) => createProcessItem(model));
-      navigate("/process/model");
-    }
-  }, [models]);
-
   return (
     <div className="flex flex-col p-5 gap-5 bg-white justify-center items-center">
       {error && <div className="error">{t("model.upload.error")}</div>}
-      {responseError && (
-        <div className="error">
-          Beim Upload der Datei ist ein Fehler aufgetreten
-        </div>
-      )}
-      {loading === true ? <LoadingAnimation color="black" /> : null}
-      <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
-        {fileList.map((file: File, index: number) => (
-          <div
-            key={index}
-            className="flex flex-col justify-center items-center gap-2 bg-gray-100 p-2"
-          >
-            <div className="canvas">
-              <ViewInArIcon sx={{ fontSize: "90px", margin: "auto" }} />
-            </div>
-            {file.name}
-            <div className="flex flex-row gap-2 items-center justify-center">
-              {getFileSizeAsString(file.size)}
-              <img
-                alt="button delete model"
-                src={IconDelete}
-                className="w-6 h-6 hover:cursor-pointer hover:bg-gray-300"
-                onClick={(e) => deleteFile(e, index)}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-      <div
-        className="max-w-2xl bg-gray-100 flex flex-col items-center justify-center gap-2 p-2 hover:cursor-pointer hover:bg-gray-300"
-        onClick={handleClickUploadCard}
-        onDragEnter={handleDragOnUploadCard}
-        onDragLeave={handleDragOnUploadCard}
-        onDragOver={handleDragOnUploadCard}
-        onDrop={handleDropOnUploadCard}
+      <Loading
+        error={uploadError}
+        status={status}
+        animation
+        text
+        loadingText="Upload..."
       >
-        <input
-          accept={dataTypes.map((type: string) => type).join(",")}
-          type="file"
-          multiple
-          ref={hiddenFileInput}
-          onChange={handleChangeHiddenInput}
-          className="hidden"
-        />
-        <img src={IconUpload} className="h-40 w-40" alt="" />
-        <h2>{t("model.upload.card.headline")}</h2>
-        {t("model.upload.card.text")}
-      </div>
-      <Button onClick={handleClickNext}>{t("model.upload.next")}</Button>
+        <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
+          {fileList.map((file: File, index: number) => (
+            <div
+              key={index}
+              className="flex flex-col justify-center items-center gap-2 bg-gray-100 p-2"
+            >
+              <div className="canvas">
+                <ViewInArIcon sx={{ fontSize: "90px", margin: "auto" }} />
+              </div>
+              {file.name}
+              <div className="flex flex-row gap-2 items-center justify-center">
+                {getFileSizeAsString(file.size)}
+                <img
+                  alt="button delete model"
+                  src={IconDelete}
+                  className="w-6 h-6 hover:cursor-pointer hover:bg-gray-300"
+                  onClick={(e) => deleteFile(e, index)}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+        <div
+          className="max-w-2xl bg-gray-100 flex flex-col items-center justify-center gap-2 p-2 hover:cursor-pointer hover:bg-gray-300"
+          onClick={handleClickUploadCard}
+          onDragEnter={handleDragOnUploadCard}
+          onDragLeave={handleDragOnUploadCard}
+          onDragOver={handleDragOnUploadCard}
+          onDrop={handleDropOnUploadCard}
+        >
+          <input
+            accept={dataTypes.map((type: string) => type).join(",")}
+            type="file"
+            multiple
+            ref={hiddenFileInput}
+            onChange={handleChangeHiddenInput}
+            className="hidden"
+          />
+          <img src={IconUpload} className="h-40 w-40" alt="" />
+          <h2>{t("model.upload.card.headline")}</h2>
+          {t("model.upload.card.text")}
+        </div>
+        <Button onClick={handleClickNext}>{t("model.upload.next")}</Button>
+      </Loading>
     </div>
   );
 };

@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { IManufacturer } from "../interface/Interface";
-import { TRequestStatus } from "../interface/types";
+import { TUseQueryStatus } from "../interface/types";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
   data: IManufacturer[] | undefined;
-  status: TRequestStatus;
+  status: TUseQueryStatus;
   error: Error | null;
 }
 

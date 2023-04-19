@@ -1,1 +1,2 @@
-export type TRequestStatus = "error" | "success" | "loading";
+export type TUseQueryStatus = "error" | "success" | "loading";
+export type TUseMutationStatus = "error" | "idle" | "loading" | "success";

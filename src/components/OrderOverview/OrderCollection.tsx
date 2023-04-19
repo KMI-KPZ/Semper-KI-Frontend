@@ -4,6 +4,7 @@ import Button from "../General/Button";
 import OrderView from "./OrderView";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
+import { useOrders } from "../../hooks/useOrders";
 
 interface Props {
   orderCollection: IOrderCollection;
@@ -11,10 +12,10 @@ interface Props {
 
 const OrderCollection: React.FC<Props> = (props) => {
   const { orderCollection } = props;
-
+  const { deleteOrderCollection } = useOrders();
   const handleOnClickButtonCancel = () => {
     if (window.confirm("Gesamten Auftrag wirklich stonieren?")) {
-      console.log("//TODO Delete");
+      deleteOrderCollection.mutate(orderCollection.id);
     }
   };
   const handleOnClickButtonReOrder = () => {

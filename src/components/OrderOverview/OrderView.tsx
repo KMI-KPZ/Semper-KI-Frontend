@@ -10,6 +10,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { getModelURI } from "../../services/utils";
+import { useOrders } from "../../hooks/useOrders";
 
 interface Props {
   order: IOrder;
@@ -28,6 +29,7 @@ const OrderView: React.FC<Props> = (props) => {
   });
   const { chatOpen, menuOpen } = state;
   const { user } = useContext(AppContext);
+  const { deleteOrder } = useOrders();
 
   const handleOnClickButtonChat = () => {
     setState((prevState) => ({ ...prevState, chatOpen: true }));
@@ -44,7 +46,7 @@ const OrderView: React.FC<Props> = (props) => {
 
   const handleOnClickButtonCancel = () => {
     if (window.confirm("Auftrag wirklich stonieren?")) {
-      console.log("//TODO Delete");
+      deleteOrder.mutate(order.id);
     }
   };
   const handleOnClickButtonReOrder = () => {

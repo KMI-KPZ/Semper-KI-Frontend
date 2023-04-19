@@ -4,7 +4,9 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { IOrderCollection } from "../interface/Interface";
+import { AxiosResponse } from "axios";
+import { EOrderState } from "../interface/enums";
+import { IChatMessage, IOrderCollection } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
@@ -13,6 +15,20 @@ interface ReturnProps {
   error: Error | null;
   deleteOrder: UseMutationResult<any, unknown, string, unknown>;
   deleteOrderCollection: UseMutationResult<any, unknown, string, unknown>;
+  updateOrder: UseMutationResult<
+    AxiosResponse<any, any>,
+    Error,
+    IUpdateOrderData,
+    unknown
+  >;
+}
+
+export interface IUpdateOrderData {
+  orderCollectionID: string;
+  orderID: string;
+  chat?: IChatMessage;
+  state?: EOrderState;
+  files?: File[];
 }
 
 export const useOrders = (): ReturnProps => {
@@ -29,7 +45,7 @@ export const useOrders = (): ReturnProps => {
     }
   );
 
-  const deleteOrder = useMutation({
+  const deleteOrder = useMutation<any, Error, string>({
     mutationFn: async (orderID: string) => {
       const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/deleteOrder/`;
       return axiosCustom
@@ -39,11 +55,11 @@ export const useOrders = (): ReturnProps => {
           return response.data;
         });
     },
-    onSuccess(data, variables, context) {
+    onSuccess() {
       queryClient.invalidateQueries(["orders"]);
     },
   });
-  const deleteOrderCollection = useMutation({
+  const deleteOrderCollection = useMutation<any, Error, string>({
     mutationFn: async (orderCollectionID: string) => {
       const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/deleteOrderCollection/`;
       return axiosCustom
@@ -53,10 +69,33 @@ export const useOrders = (): ReturnProps => {
           return response.data;
         });
     },
-    onSuccess(data, variables, context) {
+    onSuccess() {
       queryClient.invalidateQueries(["orders"]);
     },
   });
 
-  return { data, status, error, deleteOrder, deleteOrderCollection };
+  const updateOrder = useMutation<AxiosResponse, Error, IUpdateOrderData>({
+    mutationFn: async (props: IUpdateOrderData) => {
+      return axiosCustom
+        .post(`${process.env.REACT_APP_HTTP_API_URL}/public/uploadOrder/`, {
+          props,
+        })
+        .then((res) => {
+          console.log("useOrders | updateOrder ✅ |", res.data);
+          return res;
+        });
+    },
+    onSuccess() {
+      queryClient.invalidateQueries(["orders"]);
+    },
+  });
+
+  return {
+    data,
+    status,
+    error,
+    deleteOrder,
+    deleteOrderCollection,
+    updateOrder,
+  };
 };

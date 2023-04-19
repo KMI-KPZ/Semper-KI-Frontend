@@ -1,14 +1,16 @@
 import React, { ChangeEvent, useState } from "react";
-import useChat from "../../hooks/useChat";
 import { IChatMessage, IUser } from "../../interface/Interface";
 import Button from "../General/Button";
 import SendIcon from "@mui/icons-material/Send";
 import CloseIcon from "@mui/icons-material/Close";
+import { useOrders } from "../../hooks/useOrders";
 
 interface Props {
   closeMenu(): void;
   chat: IChatMessage[];
   user?: IUser;
+  orderCollectionID: string;
+  orderID: string;
 }
 
 interface State {
@@ -18,12 +20,12 @@ interface State {
 }
 
 const ChatView: React.FC<Props> = (props) => {
-  const { chat: _chat, user, closeMenu } = props;
+  const { chat: _chat, user, closeMenu, orderCollectionID, orderID } = props;
   const [state, setState] = useState<State>({
     chat: _chat,
   });
   const { height, messageText, chat } = state;
-  const { uploadChatMessage } = useChat();
+  const { updateOrder } = useOrders();
 
   const handleOnChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setState((prevState) => ({
@@ -35,18 +37,22 @@ const ChatView: React.FC<Props> = (props) => {
 
   const handleOnClickButtonSend = () => {
     if (messageText !== undefined && messageText !== "")
-      uploadChatMessage.mutate(
+      updateOrder.mutate(
         {
-          date: new Date().toString(),
-          text: messageText,
-          userID: user!.hashedID,
-          userName: user!.name,
+          orderCollectionID: orderCollectionID,
+          orderID: orderID,
+          chat: {
+            date: new Date().toString(),
+            text: messageText,
+            userID: user!.hashedID,
+            userName: user!.name,
+          },
         },
         {
           onSuccess(data, variables, context) {
             setState((prevState) => ({
               ...prevState,
-              chat: [...prevState.chat, variables],
+              chat: [...prevState.chat, variables.chat!],
               messageText: undefined,
               height: undefined,
             }));

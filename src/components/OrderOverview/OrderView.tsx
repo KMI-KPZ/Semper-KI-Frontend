@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { IOrder } from "../../interface/Interface";
+import { IOrder, IOrderCollection } from "../../interface/Interface";
 import Button from "../General/Button";
 import MailIcon from "@mui/icons-material/Mail";
 import PopUp from "../PopUp/PopUp";
@@ -14,6 +14,7 @@ import { useOrders } from "../../hooks/useOrders";
 
 interface Props {
   order: IOrder;
+  orderCollectionID: string;
 }
 
 interface State {
@@ -22,7 +23,7 @@ interface State {
 }
 
 const OrderView: React.FC<Props> = (props) => {
-  const { order } = props;
+  const { order, orderCollectionID } = props;
   const [state, setState] = useState<State>({
     chatOpen: false,
     menuOpen: false,
@@ -122,7 +123,13 @@ const OrderView: React.FC<Props> = (props) => {
         </div>
       </div>
       <PopUp open={chatOpen} onOutsideClick={handleOnOutsideClickChat}>
-        <ChatView chat={order.chat} user={user} closeMenu={closeMenu} />
+        <ChatView
+          chat={order.chat.messages}
+          user={user}
+          closeMenu={closeMenu}
+          orderCollectionID={orderCollectionID}
+          orderID={order.id}
+        />
       </PopUp>
     </div>
   );

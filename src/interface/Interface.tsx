@@ -125,7 +125,7 @@ export interface IOrder {
   id: string;
   item: IProcessItem;
   orderState: EOrderState;
-  chat: IChatMessage[];
+  chat: { messages: IChatMessage[] };
 }
 
 export interface IChatMessage {

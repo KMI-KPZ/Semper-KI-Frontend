@@ -32,7 +32,11 @@ const OrderCollection: React.FC<Props> = (props) => {
         <h2>Datum: {new Date(orderCollection.date).toLocaleString()}</h2>
       </div>
       {orderCollection.orders.map((order, index) => (
-        <OrderView key={index} order={order} />
+        <OrderView
+          key={index}
+          order={order}
+          orderCollectionID={orderCollection.id}
+        />
       ))}
       <div className="flex flex-col md:flex-row items-center justify-center w-full gap-5">
         <Button

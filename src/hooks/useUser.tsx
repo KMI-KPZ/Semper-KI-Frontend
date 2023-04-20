@@ -6,7 +6,7 @@ import { getUserType, parseAddress } from "../services/utils";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
-  userType: EUserType;
+  userType: EUserType | undefined;
   user: IUser | undefined;
   isLoggedIn: boolean;
   isLoggedInResponse: boolean;
@@ -19,7 +19,7 @@ interface ReturnProps {
 const useUser = (): ReturnProps => {
   const navigate = useNavigate();
   const { axiosCustom } = useCustomAxios();
-  const [userType, setUserType] = useState<EUserType>(EUserType.client);
+  const [userType, setUserType] = useState<EUserType>();
   const [user, setUser] = useState<IUser | undefined>();
   const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
   const [isLoggedInResponse, setIsLoggedInResponse] = useState<boolean>(false);

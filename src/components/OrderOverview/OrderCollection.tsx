@@ -5,7 +5,11 @@ import OrderView from "./OrderView";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { useOrders } from "../../hooks/useOrders";
-import { EOrderState, EUserType } from "../../interface/enums";
+import {
+  EOrderCollectionState,
+  EOrderState,
+  EUserType,
+} from "../../interface/enums";
 import { useTranslation } from "react-i18next";
 import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
@@ -119,7 +123,11 @@ const OrderCollection: React.FC<Props> = (props) => {
         <h2 className="break-words">Id: {orderCollection.id}</h2>
         <h2>
           Status:{" "}
-          {t(`orderCollection.state.${EOrderState[orderCollection.state]}`)}
+          {t(
+            `orderCollection.state.${
+              EOrderCollectionState[orderCollection.state]
+            }`
+          )}
         </h2>
         <h2>Datum: {new Date(orderCollection.date).toLocaleString()}</h2>
       </div>

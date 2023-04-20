@@ -2,16 +2,18 @@ import React, { ReactNode } from "react";
 
 interface Props {
   count: number;
-  icon: ReactNode;
+  children: ReactNode;
 }
 
 const Badge: React.FC<Props> = (props) => {
-  const { count, icon } = props;
+  const { count, children } = props;
 
   return (
-    <div className="relativ w-fit h-fit">
-      {icon}
-      <div className="absolut top-0 right-0">{count}</div>
+    <div className="relative w-fit h-fit">
+      <div className="absolute -top-2 -right-3 bg-türkis rounded-full p-0 h-6 w-fit min-w-[1.5rem] flex items-center justify-center text-base font-bold">
+        {count}
+      </div>
+      {children}
     </div>
   );
 };

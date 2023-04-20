@@ -240,13 +240,7 @@ const App: React.FC = () => {
           <Routes data-testid="routes">
             <Route
               index
-              element={
-                <Home
-                  events={missedEvents}
-                  isLoggedIn={isLoggedIn}
-                  userType={userType}
-                />
-              }
+              element={<Home events={missedEvents} userType={userType} />}
             />
             <Route path="order" element={<Order />} />
             <Route

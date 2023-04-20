@@ -34,7 +34,7 @@ const languages: Language[] = [
 
 interface Props {
   isLoggedIn: boolean;
-  userType: EUserType;
+  userType: EUserType | undefined;
 }
 
 interface State {
@@ -102,7 +102,9 @@ export const Header: React.FC<Props> = (props) => {
         {HeaderItems.filter(
           (headerItem: IHeaderItem) =>
             headerItem.preferred === EHeaderItemPreferred.header &&
-            headerItem.userType.includes(userType) &&
+            headerItem.userType.includes(
+              userType === undefined ? EUserType.client : userType
+            ) &&
             headerItem.loggedIn.includes(isLoggedIn)
         ).map((headerItem: IHeaderItem, index: number) => (
           <HeaderItem
@@ -132,7 +134,9 @@ export const Header: React.FC<Props> = (props) => {
             {HeaderItems.filter(
               (headerItem: IHeaderItem) =>
                 headerItem.preferred === EHeaderItemPreferred.header &&
-                headerItem.userType.includes(userType) &&
+                headerItem.userType.includes(
+                  userType === undefined ? EUserType.client : userType
+                ) &&
                 headerItem.loggedIn.includes(isLoggedIn)
             ).map((headerItem: IHeaderItem, index: number) => (
               <HeaderItem
@@ -155,7 +159,9 @@ export const Header: React.FC<Props> = (props) => {
         {HeaderItems.filter(
           (headerItem: IHeaderItem) =>
             headerItem.preferred === EHeaderItemPreferred.menu &&
-            headerItem.userType.includes(userType) &&
+            headerItem.userType.includes(
+              userType === undefined ? EUserType.client : userType
+            ) &&
             headerItem.loggedIn.includes(isLoggedIn)
         ).map((headerItem: IHeaderItem, index: number) => (
           <HeaderItem

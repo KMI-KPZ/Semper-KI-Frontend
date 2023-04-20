@@ -24,7 +24,7 @@ jest.mock("react-i18next", () => ({
 }));
 
 beforeEach(() => {
-  render(<Home events={[]} isLoggedIn={false} userType={EUserType.client} />);
+  render(<Home events={[]} userType={EUserType.client} />);
 });
 
 describe.skip(Home, () => {

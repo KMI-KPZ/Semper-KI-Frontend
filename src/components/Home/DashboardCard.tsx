@@ -3,14 +3,16 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { getIconByName } from "../../constants/Icons";
 import { ICardItem } from "../CardView/CardView";
+import Badge from "../General/Badge";
 
 interface Props {
   prefix: string;
   cardItem: ICardItem;
+  badge?: number;
 }
 
 const DashboardCard: React.FC<Props> = (props) => {
-  const { prefix, cardItem } = props;
+  const { prefix, cardItem, badge } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const handleOnClickCard = (
@@ -26,7 +28,14 @@ const DashboardCard: React.FC<Props> = (props) => {
       onClick={handleOnClickCard}
       href={cardItem.link}
     >
-      {cardItem.icon === undefined ? null : (
+      {cardItem.icon === undefined ? null : badge !== undefined ? (
+        <Badge count={badge}>
+          <img
+            src={getIconByName(cardItem.icon)}
+            alt={`link to ${cardItem.link}`}
+          />
+        </Badge>
+      ) : (
         <img
           src={getIconByName(cardItem.icon)}
           alt={`link to ${cardItem.link}`}

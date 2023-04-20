@@ -11,7 +11,7 @@ interface Props {
 }
 
 interface AdminProps {
-  userType: EUserType;
+  userType: EUserType | undefined;
 }
 
 export const PrivateClientRoutes: React.FC<Props> = (props) => {

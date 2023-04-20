@@ -1,6 +1,7 @@
 import {
   EHeaderItemLoggedIn,
   EHeaderItemPreferred,
+  EOrderCollectionState,
   EOrderState,
   EPostProcessingOptionType,
   EProgressType,
@@ -117,7 +118,7 @@ export interface IAddress {
 export interface IOrderCollection {
   id: string;
   date: string;
-  state: EOrderState;
+  state: EOrderCollectionState;
   orders: IOrder[];
 }
 

@@ -25,6 +25,12 @@ export enum EOrderState {
   "finished",
 }
 
+export enum EOrderCollectionState {
+  "requested",
+  "progress",
+  "finished",
+}
+
 export enum EGuideQuestionType {
   "selection",
   "multiSelection",

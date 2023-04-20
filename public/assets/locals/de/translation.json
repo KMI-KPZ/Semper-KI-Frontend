@@ -266,6 +266,11 @@
       "reject":"Gesamten Auftrag Ablehnen",
       "confirm":"Gesamten Auftrag Bestätigen",
       "verify":"Gesamten Auftrag Überprüfen"
+    },
+    "state":{
+      "requested":"Angefragt",
+      "progress":"In Bearbeitung",
+      "finished":"Abgeschlossen"
     }
   },
   "orderView":{

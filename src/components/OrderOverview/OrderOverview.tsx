@@ -25,7 +25,8 @@ const OrderOverview: React.FC<Props> = (props) => {
   };
 
   useEffect(() => {
-    if (data !== undefined) setState(data.map(() => false));
+    if (data !== undefined && state.length === 0)
+      setState(data.map(() => false));
   }, [data]);
 
   return (
@@ -41,16 +42,19 @@ const OrderOverview: React.FC<Props> = (props) => {
         {data !== undefined ? (
           <ul className="w-full gap-5 flex flex-col">
             {data.length > 0 ? (
-              data.map((orderCollection: IOrderCollection, index: number) => (
-                <OrderCollection
-                  index={index}
-                  orderCollection={orderCollection}
-                  userType={userType}
-                  isOpen={state[index]}
-                  toggleOpen={toggleOpen}
-                  key={index}
-                />
-              ))
+              data
+                .slice(0)
+                .reverse()
+                .map((orderCollection: IOrderCollection, index: number) => (
+                  <OrderCollection
+                    index={index}
+                    orderCollection={orderCollection}
+                    userType={userType}
+                    isOpen={state[index]}
+                    toggleOpen={toggleOpen}
+                    key={index}
+                  />
+                ))
             ) : (
               <li className="w-full text-center p-3">
                 keine vorhandenen Bestellungen

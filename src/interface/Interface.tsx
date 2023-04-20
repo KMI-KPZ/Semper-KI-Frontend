@@ -145,3 +145,13 @@ export interface IHeaderItem {
   userType: EUserType[];
   loggedIn: boolean[];
 }
+
+export interface IOrderCollectionEvent {
+  orderCollectionID: string;
+  orders: IOrderEvent[];
+}
+export interface IOrderEvent {
+  orderID: string;
+  status?: number;
+  messages?: number;
+}

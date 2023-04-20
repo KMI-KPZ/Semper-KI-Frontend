@@ -35,39 +35,112 @@ import Order from "../AfterProcess/Order/Order";
 import { EUserType } from "../../interface/enums";
 import { URL_AboutUs } from "../../constants/Constants";
 import ManufacturerView from "../AfterProcess/Manufacturer/ManufacturerView";
-import { IUser } from "../../interface/Interface";
+import {
+  IOrderCollectionEvent,
+  IOrderEvent,
+  IUser,
+} from "../../interface/Interface";
 import LoginView from "../Login/LoginView";
+import useMissedEvent from "../../hooks/useMissedEvent";
+import { useWebsocket } from "../../hooks/useWebsocket";
 
 export interface IAppState {
   selectedProgressItem?: { index: number; progress: string };
   stopScroll: boolean;
   guideFilter: IFilterItem[];
+  missedEvents: IOrderCollectionEvent[];
 }
 
 export interface IAppContext {
   user: IUser | undefined;
   appState: IAppState;
   setAppState: React.Dispatch<React.SetStateAction<IAppState>>;
+  deleteEvent(
+    orderCollectionID: string,
+    orderID: string,
+    type: "message" | "status"
+  ): void;
 }
 
 const initialState: IAppState = {
   stopScroll: false,
   guideFilter: [],
+  missedEvents: [],
 };
 
 export const AppContext = createContext<IAppContext>({
   user: undefined,
   appState: initialState,
   setAppState: () => {},
+  deleteEvent: () => {},
 });
 
 const App: React.FC = () => {
   const [state, setState] = useState<IAppState>(initialState);
-  const { stopScroll, guideFilter, selectedProgressItem } = state;
+  const { stopScroll, guideFilter, selectedProgressItem, missedEvents } = state;
   const { CSRFToken, CSRFTokenError, CSRFTokenIsLoading } = useCRSFToken();
   const { isLoggedIn, userType, user, loadLoggedIn, isLoggedInResponse } =
     useUser();
   const { data, loadData, clearData } = useAdmin();
+  const { data: _missedEvents, error, status } = useMissedEvent({ isLoggedIn });
+  useEffect(() => {
+    if (_missedEvents.length > 0)
+      setState((prevState) => ({
+        ...prevState,
+        missedEvents: _missedEvents,
+      }));
+  }, [_missedEvents]);
+
+  const deleteEvent = (
+    orderCollectionID: string,
+    orderID: string,
+    type: "message" | "status"
+  ) => {
+    setState((prevState) => {
+      let newOrderCollectionEvent: IOrderCollectionEvent =
+        prevState.missedEvents.filter(
+          (event) => event.orderCollectionID === orderCollectionID
+        )[0];
+      const newOrderEvents: IOrderEvent[] = newOrderCollectionEvent.orders.map(
+        (orderEvent) => ({
+          ...orderEvent,
+          messages:
+            orderEvent.orderID === orderID && type === "message"
+              ? undefined
+              : orderEvent.messages,
+          status:
+            orderEvent.orderID === orderID && type === "status"
+              ? undefined
+              : orderEvent.status,
+        })
+      );
+      newOrderCollectionEvent.orders = newOrderEvents.filter(
+        (orderEvent) =>
+          orderEvent.messages !== undefined || orderEvent.status !== undefined
+      );
+      return {
+        ...prevState,
+        missedEvents: [
+          ...prevState.missedEvents.filter(
+            (orderCollectionEvent) =>
+              orderCollectionEvent.orderCollectionID < orderCollectionID
+          ),
+          newOrderCollectionEvent,
+          ...prevState.missedEvents.filter(
+            (orderCollectionEvent) =>
+              orderCollectionEvent.orderCollectionID > orderCollectionID
+          ),
+        ],
+      };
+    });
+  };
+
+  const onWebsocktEvent = (event: MessageEvent<any>) => {};
+  const {
+    sendMessage,
+    socket: websocket,
+    state: webSocketState,
+  } = useWebsocket(onWebsocktEvent);
 
   const setFilter = (guideFilter: IFilterItem[]): void => {
     setState((prevState) => ({ ...prevState, guideFilter }));
@@ -149,7 +222,12 @@ const App: React.FC = () => {
 
   return (
     <AppContext.Provider
-      value={{ appState: state, setAppState: setState, user }}
+      value={{
+        appState: state,
+        setAppState: setState,
+        user,
+        deleteEvent,
+      }}
     >
       <div
         className={`flex flex-col justify-between min-h-screen font-ptsans items-center gap-3
@@ -162,7 +240,13 @@ const App: React.FC = () => {
           <Routes data-testid="routes">
             <Route
               index
-              element={<Home isLoggedIn={isLoggedIn} userType={userType} />}
+              element={
+                <Home
+                  events={missedEvents}
+                  isLoggedIn={isLoggedIn}
+                  userType={userType}
+                />
+              }
             />
             <Route path="order" element={<Order />} />
             <Route

@@ -239,7 +239,8 @@
       "rejected":"Abgelehnt",
       "confirmed":"Bestätigt",
       "production":"In Produktion",
-      "delivery":"Unterwegs"
+      "delivery":"Unterwegs",
+      "finished":"Abgeschlossen"
     }
   },
   "filter":{
@@ -275,5 +276,38 @@
       "confirm":"Bestätigen",
       "verify":"Überprüfen"
     }
+  },
+  "loadingAnimation":{
+    "text":"Laden"
+  },
+  "checkout": {
+    "title":"Bestellung überprüfen",
+    "button":{
+      "request":"Anfragen",
+      "printable":"Druckbarkeit überprüfen",
+      "logistics":"Lieferzeit berechnen",
+      "price":"Preis berechnen"
+    },
+    "error":{
+      "no-items":"keine Items vorhanden"
+    },
+    "success":{
+      "send":"Der Auftrag wurde Erfolgreich übermittelt!",
+      "redirect":"Sie werden nun zu Startseite weitergeleitet"
+    }
+  },
+  "checkoutItem":{
+    "printable":"Druckbarkeit",
+    "logistics":"Lieferzeit",
+    "price":"Preis"
+  },
+  "orderPreView":{
+    "requested":"Angefragt",
+    "verify":"Rückfragen",
+    "rejected":"Abgelehnt",
+    "confirmed":"Bestätigt",
+    "production":"In Produktion",
+    "delivery":"Unterwegs",
+    "finished":"Abgeschlossen"
   }
 }

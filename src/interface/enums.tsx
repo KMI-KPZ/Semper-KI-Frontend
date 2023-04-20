@@ -22,6 +22,7 @@ export enum EOrderState {
   "confirmed",
   "production",
   "delivery",
+  "finished",
 }
 
 export enum EGuideQuestionType {

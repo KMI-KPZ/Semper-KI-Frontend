@@ -5,6 +5,11 @@
         "icon":"IconArrowR"
     },
     {
+        "title":"order",
+        "link":"/order",
+        "icon":"IconDocument"
+    },
+    {
         "title":"new-contract",
         "link":"/process/new",
         "icon":"IconNewDocument"

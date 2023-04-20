@@ -68,6 +68,10 @@ const ManufacturerView: React.FC<Props> = (props) => {
   };
 
   const handleOnClickReturn = () => {
+    navigate("/order");
+  };
+
+  const handleOnClickAdd = () => {
     navigate("/process/model");
   };
 
@@ -83,7 +87,7 @@ const ManufacturerView: React.FC<Props> = (props) => {
           </h2>
         </div>
       ) : null}
-      <div className="bg-white w-full p-5 flex flex-col gap-5 justify-start items-center">
+      <div className="w-full flex flex-col gap-5 justify-start items-center">
         {cart !== undefined ? (
           cart.length > 0 ? (
             cart.map((processItem, index) => (
@@ -103,8 +107,8 @@ const ManufacturerView: React.FC<Props> = (props) => {
         )}
       </div>
       <div className="flex flex-col gap-5 md:flex-row">
-        <Button onClick={handleOnClickReturn}>Items Hinzufügen</Button>
-        <Button onClick={handleOnCLickCheck}>Überprüfen</Button>
+        <Button onClick={handleOnClickReturn}>Zurück</Button>
+        <Button onClick={handleOnCLickCheck}>Bestellung prüfen</Button>
       </div>
     </div>
   );

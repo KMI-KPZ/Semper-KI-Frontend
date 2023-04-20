@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IOrderCollection } from "../../interface/Interface";
 import { useOrders } from "../../hooks/useOrders";
@@ -14,6 +14,19 @@ const OrderOverview: React.FC<Props> = (props) => {
   const { userType } = props;
   const { t } = useTranslation();
   const { data, status, error } = useOrders();
+  const [state, setState] = useState<boolean[]>([]);
+
+  const toggleOpen = (index: number) => {
+    setState((prevState) => [
+      ...prevState.filter((open, _index) => _index < index),
+      !prevState[index],
+      ...prevState.filter((open, _index) => _index > index),
+    ]);
+  };
+
+  useEffect(() => {
+    if (data !== undefined) setState(data.map(() => false));
+  }, [data]);
 
   return (
     <Loading error={error} status={status}>
@@ -30,8 +43,11 @@ const OrderOverview: React.FC<Props> = (props) => {
             {data.length > 0 ? (
               data.map((orderCollection: IOrderCollection, index: number) => (
                 <OrderCollection
+                  index={index}
                   orderCollection={orderCollection}
                   userType={userType}
+                  isOpen={state[index]}
+                  toggleOpen={toggleOpen}
                   key={index}
                 />
               ))

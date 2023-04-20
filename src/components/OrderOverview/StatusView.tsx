@@ -6,6 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import FactoryIcon from "@mui/icons-material/Factory";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import EmailIcon from "@mui/icons-material/Email";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
 import { useTranslation } from "react-i18next";
 
 interface Props {
@@ -50,6 +51,11 @@ const statusData: StatusData[] = [
     orderState: EOrderState.delivery,
     icon: <LocalShippingIcon />,
     text: "orderview.state.delivery",
+  },
+  {
+    orderState: EOrderState.finished,
+    icon: <DoneAllIcon />,
+    text: "orderview.state.finished",
   },
 ];
 

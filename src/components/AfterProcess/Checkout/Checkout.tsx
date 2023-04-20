@@ -6,6 +6,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 import LoadingAnimation from "../../Loading/LoadingAnimation";
 import Button from "../../General/Button";
+import { useTranslation } from "react-i18next";
 
 interface Props {}
 interface State {
@@ -20,6 +21,7 @@ interface State {
 
 const Checkout: React.FC<Props> = (props) => {
   const {} = props;
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
   const [state, setState] = useState<State>({
@@ -147,17 +149,17 @@ const Checkout: React.FC<Props> = (props) => {
         size="full"
         active={!printable.loading}
       >
-        Druckbarkeit prüfen
+        {t("checkout.button.printable")}
       </Button>
       <Button
         onClick={handleOnClickLogistics}
         size="full"
         active={!logistics.loading}
       >
-        Lieferzeit berechnen
+        {t("checkout.button.logistics")}
       </Button>
       <Button onClick={handleOnClickPrice} size="full" active={!price.loading}>
-        Preis berechnen
+        {t("checkout.button.price")}
       </Button>
     </div>
   );
@@ -201,8 +203,8 @@ const Checkout: React.FC<Props> = (props) => {
   const renderOrderSendSuccesfull = () => {
     return (
       <div className="bg-white w-full p-5 flex flex-col gap-5 justify-center items-center">
-        <h2>Der Auftrag wurde Erfolgreich übermittelt!</h2>
-        <h3>Sie werden nun zu Startseite weitergeleitet</h3>
+        <h2>{t("checkout.success.send")}</h2>
+        <h3>{t("checkout.success.redirect")}</h3>
       </div>
     );
   };
@@ -225,7 +227,7 @@ const Checkout: React.FC<Props> = (props) => {
   return (
     <div className="flex flex-col items-center gap-5 w-full p-5">
       <div className="bg-white w-full p-5 flex flex-col gap-5 justify-start items-center">
-        <h1 className="text-center p-2 w-full">Auftrag Anfragen</h1>
+        <h1 className="text-center p-2 w-full">{t("checkout.title")}</h1>
         {renderCheckButtons()}
         <Button
           active={checkAll === true}
@@ -233,7 +235,7 @@ const Checkout: React.FC<Props> = (props) => {
           icon={<SendIcon fontSize="large" />}
           iconPos="back"
         >
-          <h2 className="text-white">Anfragen</h2>
+          <h2 className="text-white">{t("checkout.button.request")}</h2>
         </Button>
       </div>
       {showError === true ? renderError() : null}
@@ -269,7 +271,7 @@ const Checkout: React.FC<Props> = (props) => {
               />
             ))
           ) : (
-            <h2>keine Items vorhanden</h2>
+            <h2>{t("checkout.error.no-items")}</h2>
           )}
         </div>
       ) : null}

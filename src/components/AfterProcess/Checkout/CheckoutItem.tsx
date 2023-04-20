@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { IRequestState } from "../../../hooks/useCheckout";
 import { IProcessItem } from "../../../interface/Interface";
 import { getModelURI } from "../../../services/utils";
@@ -13,6 +14,7 @@ type Props = {
 
 const CheckoutItem: React.FC<Props> = (props) => {
   const { process, logistics, price, printable } = props;
+  const { t } = useTranslation();
 
   return (
     <div className="flex flex-col bg-white gap-2 p-2 w-full sm:basis-[48%] md:basis-[32%] justify-center items-center">
@@ -22,8 +24,8 @@ const CheckoutItem: React.FC<Props> = (props) => {
         className="w-full max-h-40 object-cover max-w-[200px] md:max-h-80 md:max-w-xs"
       />
       <div className="flex flex-row w-full justify-between items-center px-5">
-        <h3>Druckbar:</h3>
-        {printable.loading === true ? <LoadingAnimation /> : null}
+        <h3>{t("checkoutItem.printable")}:</h3>
+        {printable.loading === true ? <LoadingAnimation text /> : null}
         {printable.loading === false &&
         printable.error === false &&
         printable.data !== "" ? (
@@ -37,8 +39,8 @@ const CheckoutItem: React.FC<Props> = (props) => {
           : null}
       </div>
       <div className="flex flex-row w-full justify-between items-center px-5">
-        <h3>Preis:</h3>
-        {logistics.loading === true ? <LoadingAnimation /> : null}
+        <h3>{t("checkoutItem.logistics")}:</h3>
+        {logistics.loading === true ? <LoadingAnimation text /> : null}
         {logistics.loading === false &&
         logistics.error === false &&
         logistics.data !== "" ? (
@@ -52,8 +54,8 @@ const CheckoutItem: React.FC<Props> = (props) => {
           : null}
       </div>
       <div className="flex flex-row w-full justify-between items-center px-5">
-        <h3>Lieferzeit:</h3>
-        {price.loading === true ? <LoadingAnimation /> : null}
+        <h3>{t("checkoutItem.price")}:</h3>
+        {price.loading === true ? <LoadingAnimation text /> : null}
         {price.loading === false &&
         price.error === false &&
         price.data !== "" ? (

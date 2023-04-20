@@ -9,14 +9,20 @@ import { EOrderState, EUserType } from "../../interface/enums";
 import { useTranslation } from "react-i18next";
 import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import OrderPreView from "./OrderPreView";
 
 interface Props {
+  index: number;
   orderCollection: IOrderCollection;
   userType: EUserType;
+  isOpen: boolean;
+  toggleOpen(index: number): void;
 }
 
 const OrderCollection: React.FC<Props> = (props) => {
-  const { orderCollection, userType } = props;
+  const { orderCollection, userType, isOpen, toggleOpen, index } = props;
   const { t } = useTranslation();
   const { deleteOrderCollection, updateOrder } = useOrders();
 
@@ -103,6 +109,10 @@ const OrderCollection: React.FC<Props> = (props) => {
       );
   };
 
+  const handleOnClickButton = () => {
+    toggleOpen(index);
+  };
+
   return (
     <div className="flex flex-col justify-start items-start bg-white w-full gap-5 p-5">
       <div className="flex flex-col md:flex-row w-full gap-5 items-start md:items-center justify-start md:justify-between">
@@ -110,15 +120,31 @@ const OrderCollection: React.FC<Props> = (props) => {
         <h2>Status: {EOrderState[orderCollection.state]}</h2>
         <h2>Datum: {new Date(orderCollection.date).toLocaleString()}</h2>
       </div>
-      {orderCollection.orders.map((order, index) => (
-        <OrderView
-          key={index}
-          order={order}
-          orderCollectionID={orderCollection.id}
-          userType={userType}
+      {isOpen === true ? (
+        <>
+          {orderCollection.orders.map((order, index) => (
+            <OrderView
+              key={index}
+              order={order}
+              orderCollectionID={orderCollection.id}
+              userType={userType}
+            />
+          ))}
+          {renderButtons()}
+        </>
+      ) : (
+        <div className="flex flex-col md:flex-row gap-5 justify-start items-start">
+          {orderCollection.orders.map((order, index) => (
+            <OrderPreView key={index} order={order} />
+          ))}
+        </div>
+      )}
+      <div className="flex items-center justify-center w-full">
+        <Button
+          onClick={handleOnClickButton}
+          icon={isOpen === true ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         />
-      ))}
-      {renderButtons()}
+      </div>
     </div>
   );
 };

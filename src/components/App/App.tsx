@@ -23,7 +23,7 @@ import {
 } from "../PrivateRoutes/PrivateRoutes";
 import Account from "../Account/Account";
 import useAdmin from "../../hooks/useAdmin";
-import OrderOverview from "../OrderOverview/OrderOverview";
+import OrderCollectionOverview from "../OrderOverview/OrderCollectionOverview";
 import "./../../styles.scss";
 import AdminUserView from "../Admin/AdminUserView";
 import AdminModelView from "../Admin/AdminModelView";
@@ -140,7 +140,7 @@ const App: React.FC = () => {
     sendMessage,
     socket: websocket,
     state: webSocketState,
-  } = useWebsocket(onWebsocktEvent);
+  } = useWebsocket(onWebsocktEvent, user !== undefined);
 
   const setFilter = (guideFilter: IFilterItem[]): void => {
     setState((prevState) => ({ ...prevState, guideFilter }));
@@ -186,7 +186,7 @@ const App: React.FC = () => {
       <Route path="checkout" element={<Checkout />} />
       <Route
         path="orders"
-        element={<OrderOverview userType={EUserType.client} />}
+        element={<OrderCollectionOverview userType={EUserType.client} />}
       />
       <Route path="assignments" element={<Error text="assignments" />} />
     </Route>
@@ -197,7 +197,7 @@ const App: React.FC = () => {
       <Route path="proceedings" element={<Error text="proceedings" />} />
       <Route
         path="contracts"
-        element={<OrderOverview userType={EUserType.manufacturer} />}
+        element={<OrderCollectionOverview userType={EUserType.manufacturer} />}
       />
     </Route>
   );

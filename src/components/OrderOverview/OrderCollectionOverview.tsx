@@ -14,7 +14,7 @@ interface Props {
   userType: EUserType;
 }
 
-const OrderOverview: React.FC<Props> = (props) => {
+const OrderCollectionOverview: React.FC<Props> = (props) => {
   const { userType } = props;
   const { t } = useTranslation();
   const { data, status, error } = useOrders();
@@ -82,4 +82,4 @@ const OrderOverview: React.FC<Props> = (props) => {
   );
 };
 
-export default OrderOverview;
+export default OrderCollectionOverview;

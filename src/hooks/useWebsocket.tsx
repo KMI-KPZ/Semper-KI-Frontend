@@ -9,30 +9,33 @@ interface ReturnProps {
 type WebSocketState = "connecting" | "connected" | "disconnected" | "error";
 
 export const useWebsocket = (
-  onMessage: (event: MessageEvent) => void
+  onMessage: (event: MessageEvent) => void,
+  user: boolean
 ): ReturnProps => {
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [state, setState] = useState<WebSocketState>("disconnected");
 
   useEffect(() => {
-    setState("connecting");
-    const ws = new WebSocket(
-      `${process.env.REACT_APP_WS_API_URL}/ws/generalWebsocket/`
-    );
+    if (user === true) {
+      setState("connecting");
+      const ws = new WebSocket(
+        `${process.env.REACT_APP_WS_API_URL}/ws/generalWebsocket/`
+      );
 
-    ws.onopen = () => setState("connected");
-    ws.onerror = () => setState("error");
-    ws.onclose = () => setState("disconnected");
-    ws.onmessage = onMessage;
+      ws.onopen = () => setState("connected");
+      ws.onerror = () => setState("error");
+      ws.onclose = () => setState("disconnected");
+      ws.onmessage = onMessage;
 
-    setSocket(ws);
+      setSocket(ws);
 
-    return () => {
-      ws.close();
-      setSocket(null);
-      setState("disconnected");
-    };
-  }, []);
+      return () => {
+        ws.close();
+        setSocket(null);
+        setState("disconnected");
+      };
+    }
+  }, [user]);
 
   const sendMessage = (message: string) => {
     if (state === "connected") {

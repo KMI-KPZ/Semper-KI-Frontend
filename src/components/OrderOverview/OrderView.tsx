@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   IOrder,
   IOrderCollection,
@@ -40,11 +40,16 @@ const OrderView: React.FC<Props> = (props) => {
     menuOpen: false,
   });
   const { chatOpen, menuOpen } = state;
-  const { user } = useContext(AppContext);
+  const { user, deleteEvent } = useContext(AppContext);
   const { deleteOrder, updateOrder } = useOrders();
   const { t } = useTranslation();
 
+  useEffect(() => {
+    deleteEvent(orderCollectionID, order.id, "status");
+  }, []);
+
   const handleOnClickButtonChat = () => {
+    deleteEvent(orderCollectionID, order.id, "message");
     setState((prevState) => ({ ...prevState, chatOpen: true }));
   };
   const handleOnOutsideClickChat = () => {
@@ -63,7 +68,6 @@ const OrderView: React.FC<Props> = (props) => {
       state: status,
     });
   };
-
   const handleOnClickButtonCancel = () => {
     if (window.confirm("Auftrag wirklich stonieren?")) {
       deleteOrder.mutate(order.id);

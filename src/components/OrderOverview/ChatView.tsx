@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useContext, useState } from "react";
 import { IChatMessage, IUser } from "../../interface/Interface";
 import Button from "../General/Button";
 import SendIcon from "@mui/icons-material/Send";

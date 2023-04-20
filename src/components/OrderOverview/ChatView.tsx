@@ -42,7 +42,7 @@ const ChatView: React.FC<Props> = (props) => {
           orderCollectionID: orderCollectionID,
           orderID: orderID,
           chat: {
-            date: new Date().toString(),
+            date: new Date().toISOString(),
             text: messageText,
             userID: user!.hashedID,
             userName: user!.name,

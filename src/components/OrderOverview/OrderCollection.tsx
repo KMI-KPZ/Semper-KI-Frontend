@@ -1,5 +1,9 @@
 import React from "react";
-import { IOrderCollection } from "../../interface/Interface";
+import {
+  IOrderCollection,
+  IOrderCollectionEvent,
+  IOrderEvent,
+} from "../../interface/Interface";
 import Button from "../General/Button";
 import OrderView from "./OrderView";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -23,10 +27,18 @@ interface Props {
   userType: EUserType;
   isOpen: boolean;
   toggleOpen(index: number): void;
+  orderCollectionEvent?: IOrderCollectionEvent;
 }
 
 const OrderCollection: React.FC<Props> = (props) => {
-  const { orderCollection, userType, isOpen, toggleOpen, index } = props;
+  const {
+    orderCollection,
+    userType,
+    isOpen,
+    toggleOpen,
+    index,
+    orderCollectionEvent,
+  } = props;
   const { t } = useTranslation();
   const { deleteOrderCollection, updateOrder } = useOrders();
 
@@ -117,6 +129,12 @@ const OrderCollection: React.FC<Props> = (props) => {
     toggleOpen(index);
   };
 
+  const getEventByID = (orderID: string): IOrderEvent | undefined => {
+    return orderCollectionEvent?.orders.filter(
+      (orderEvent) => orderEvent.orderID === orderID
+    )[0];
+  };
+
   return (
     <div className="flex flex-col justify-start items-start bg-white w-full gap-5 p-5">
       <div className="flex flex-col md:flex-row w-full gap-5 items-start md:items-center justify-start md:justify-between">
@@ -139,6 +157,7 @@ const OrderCollection: React.FC<Props> = (props) => {
               order={order}
               orderCollectionID={orderCollection.id}
               userType={userType}
+              orderEvent={getEventByID(order.id)}
             />
           ))}
           {renderButtons()}
@@ -146,7 +165,11 @@ const OrderCollection: React.FC<Props> = (props) => {
       ) : (
         <div className="flex flex-col md:flex-row gap-5 justify-start items-start">
           {orderCollection.orders.map((order, index) => (
-            <OrderPreView key={index} order={order} />
+            <OrderPreView
+              key={index}
+              order={order}
+              orderEvent={getEventByID(order.id)}
+            />
           ))}
         </div>
       )}

@@ -1,5 +1,9 @@
 import { useContext, useState } from "react";
-import { IOrder, IOrderCollection } from "../../interface/Interface";
+import {
+  IOrder,
+  IOrderCollection,
+  IOrderEvent,
+} from "../../interface/Interface";
 import Button from "../General/Button";
 import MailIcon from "@mui/icons-material/Mail";
 import PopUp from "../PopUp/PopUp";
@@ -15,11 +19,13 @@ import { EOrderState, EUserType } from "../../interface/enums";
 import { useTranslation } from "react-i18next";
 import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import Badge from "../General/Badge";
 
 interface Props {
   order: IOrder;
   orderCollectionID: string;
   userType: EUserType;
+  orderEvent?: IOrderEvent;
 }
 
 interface State {
@@ -28,7 +34,7 @@ interface State {
 }
 
 const OrderView: React.FC<Props> = (props) => {
-  const { order, orderCollectionID, userType } = props;
+  const { order, orderCollectionID, userType, orderEvent } = props;
   const [state, setState] = useState<State>({
     chatOpen: false,
     menuOpen: false,
@@ -139,13 +145,27 @@ const OrderView: React.FC<Props> = (props) => {
       <div className="flex flex-col md:flex-row justify-between w-full">
         <h3 className="break-words">Bestellung: {order.id}</h3>
         <div className=" flex flex-col md:flex-row gap-3 items-center justify-center">
-          <Button
-            size="small"
-            icon={<MailIcon />}
-            onClick={handleOnClickButtonChat}
-          >
-            Chat
-          </Button>
+          {orderEvent !== undefined &&
+          orderEvent.messages !== undefined &&
+          orderEvent.messages > 0 ? (
+            <Badge count={orderEvent.messages}>
+              <Button
+                size="small"
+                icon={<MailIcon />}
+                onClick={handleOnClickButtonChat}
+              >
+                Chat
+              </Button>
+            </Badge>
+          ) : (
+            <Button
+              size="small"
+              icon={<MailIcon />}
+              onClick={handleOnClickButtonChat}
+            >
+              Chat
+            </Button>
+          )}
           {menuOpen ? renderButtons() : null}
           <div
             className={`flex items-center justify-center ${

@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { IOrderCollection } from "../../interface/Interface";
+import {
+  IOrderCollection,
+  IOrderCollectionEvent,
+} from "../../interface/Interface";
 import { useOrders } from "../../hooks/useOrders";
 import Loading from "../Loading/Loading";
 import OrderCollection from "./OrderCollection";
 import { EUserType } from "../../interface/enums";
+import { AppContext } from "../App/App";
 
 interface Props {
   userType: EUserType;
@@ -15,6 +19,8 @@ const OrderOverview: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { data, status, error } = useOrders();
   const [state, setState] = useState<boolean[]>([]);
+  const { appState } = useContext(AppContext);
+  const { missedEvents } = appState;
 
   const toggleOpen = (index: number) => {
     setState((prevState) => [
@@ -28,6 +34,14 @@ const OrderOverview: React.FC<Props> = (props) => {
     if (data !== undefined && state.length === 0)
       setState(data.map(() => false));
   }, [data]);
+
+  const getEventByID = (
+    orderCollectionID: string
+  ): IOrderCollectionEvent | undefined => {
+    return missedEvents.filter(
+      (orderEvent) => orderEvent.orderCollectionID === orderCollectionID
+    )[0];
+  };
 
   return (
     <Loading error={error} status={status}>
@@ -52,6 +66,7 @@ const OrderOverview: React.FC<Props> = (props) => {
                     userType={userType}
                     isOpen={state[index]}
                     toggleOpen={toggleOpen}
+                    orderCollectionEvent={getEventByID(orderCollection.id)}
                     key={index}
                   />
                 ))

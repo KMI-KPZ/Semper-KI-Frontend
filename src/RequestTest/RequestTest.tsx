@@ -2,8 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../components/App/App";
 import Button from "../components/General/Button";
 import { useWebsocket } from "../hooks/useWebsocket";
+import { IUser } from "../interface/Interface";
 
-export const RequestTest: React.FC = () => {
+interface Props {
+  user: IUser | undefined;
+}
+export const RequestTest: React.FC<Props> = (props) => {
+  const { user } = props;
   const [chat, setChat] = useState<{ send: boolean; title: string }[]>([]);
   const [inputMessage, setInputMessage] = useState<string>("");
   const [load, setLoad] = useState<boolean>(false);
@@ -20,7 +25,7 @@ export const RequestTest: React.FC = () => {
 
   const { sendMessage, socket, state } = useWebsocket(
     handleOnEventMessage,
-    load
+    user !== undefined && load
   );
 
   const handleOnChangeMessageInput = (

@@ -79,17 +79,17 @@ const OrderView: React.FC<Props> = (props) => {
     }
   };
   const handleOnClickButtonReject = () => {
-    if (window.confirm(t("orderView.button.reject") + "?")) {
+    if (window.confirm(t("OrderView.button.reject") + "?")) {
       updateStatus(EOrderState.rejected);
     }
   };
   const handleOnClickButtonConfirm = () => {
-    // if (window.confirm(t("orderView.button.confirm") + "?")) {
+    // if (window.confirm(t("OrderView.button.confirm") + "?")) {
     updateStatus(EOrderState.confirmed);
     // }
   };
   const handleOnClickButtonVerify = () => {
-    // if (window.confirm(t("orderView.button.verify") + "?")) {
+    // if (window.confirm(t("OrderView.button.verify") + "?")) {
     updateStatus(EOrderState.verify);
     // }
   };
@@ -106,14 +106,14 @@ const OrderView: React.FC<Props> = (props) => {
             icon={<CancelIcon />}
             onClick={handleOnClickButtonCancel}
           >
-            {t("orderView.button.cancel")}
+            {t("OrderView.button.cancel")}
           </Button>
           <Button
             size="small"
             icon={<ReplayIcon />}
             onClick={handleOnClickButtonReOrder}
           >
-            {t("orderView.button.re-order")}
+            {t("OrderView.button.re-order")}
           </Button>
         </div>
       );
@@ -125,21 +125,21 @@ const OrderView: React.FC<Props> = (props) => {
             icon={<CancelIcon />}
             onClick={handleOnClickButtonReject}
           >
-            {t("orderView.button.reject")}
+            {t("OrderView.button.reject")}
           </Button>
           <Button
             size="small"
             icon={<QuestionMarkIcon />}
             onClick={handleOnClickButtonVerify}
           >
-            {t("orderView.button.verify")}
+            {t("OrderView.button.verify")}
           </Button>
           <Button
             size="small"
             icon={<CheckIcon />}
             onClick={handleOnClickButtonConfirm}
           >
-            {t("orderView.button.confirm")}
+            {t("OrderView.button.confirm")}
           </Button>
         </div>
       );

@@ -10,6 +10,11 @@
         "icon":"Icon3DPrinter"
     },
     {
+        "title":"company",
+        "link":"/company",
+        "icon":"IconFactory"
+    },
+    {
         "title":"account",
         "link":"/account",
         "icon":"IconPerson"

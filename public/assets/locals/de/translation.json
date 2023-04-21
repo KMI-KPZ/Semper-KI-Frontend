@@ -217,6 +217,7 @@
     "orders":"Bestellungen",
     "proceedings":"Verfahren",
     "contracts":"Aufträge",
+    "company":"Firma",
     "admin":{
       "account":"Konto",
       "title":"Admin-Bereich",
@@ -228,21 +229,7 @@
       "order":"Bestellungen"
     }
   },
-  "orderview":{
-    "headline":{
-      "client":"Bestellungen",
-      "manufacturer":"Aufträge"
-    },
-    "state":{
-      "requested":"Angefragt",
-      "verify":"Rückfragen",
-      "rejected":"Abgelehnt",
-      "confirmed":"Bestätigt",
-      "production":"In Produktion",
-      "delivery":"Unterwegs",
-      "finished":"Abgeschlossen"
-    }
-  },
+  
   "filter":{
     "headline":"Vorgaben",
     "category":{
@@ -259,7 +246,13 @@
   "guide":{
     "headline":"Guide"
   },
-  "orderCollection":{
+  "OrderCollectionOverview":{
+    "headline":{
+      "client":"Bestellungen",
+      "manufacturer":"Aufträge"
+    }    
+  },
+  "OrderCollection":{
     "button":{
       "cancel":"Gesamten Auftrag Stornieren",
       "re-order":"Gesamten Auftrag erneut Bestellen",
@@ -273,7 +266,7 @@
       "finished":"Abgeschlossen"
     }
   },
-  "orderView":{
+  "OrderView":{
     "button":{
       "cancel":"Stornieren",
       "re-order":"erneut Bestellen",
@@ -282,10 +275,10 @@
       "verify":"Überprüfen"
     }
   },
-  "loadingAnimation":{
+  "LoadingAnimation":{
     "text":"Laden"
   },
-  "checkout": {
+  "Checkout": {
     "title":"Bestellung überprüfen",
     "button":{
       "request":"Anfragen",
@@ -301,12 +294,12 @@
       "redirect":"Sie werden nun zu Startseite weitergeleitet"
     }
   },
-  "checkoutItem":{
+  "CheckoutItem":{
     "printable":"Druckbarkeit",
     "logistics":"Lieferzeit",
     "price":"Preis"
   },
-  "orderPreView":{
+  "OrderPreView":{
     "requested":"Angefragt",
     "verify":"Rückfragen",
     "rejected":"Abgelehnt",
@@ -314,5 +307,16 @@
     "production":"In Produktion",
     "delivery":"Unterwegs",
     "finished":"Abgeschlossen"
+  },
+  "StatusView":{
+    "state":{
+      "requested":"Angefragt",
+      "verify":"Rückfragen",
+      "rejected":"Abgelehnt",
+      "confirmed":"Bestätigt",
+      "production":"In Produktion",
+      "delivery":"Unterwegs",
+      "finished":"Abgeschlossen"
+    }
   }
 }

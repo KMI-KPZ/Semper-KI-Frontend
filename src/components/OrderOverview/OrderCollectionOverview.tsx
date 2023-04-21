@@ -50,8 +50,8 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
         <h1 className="bg-white w-full py-3 text-center">
           {t(
             userType === EUserType.client
-              ? "orderview.headline.client"
-              : "orderview.headline.manufacturer"
+              ? "OrderCollectionOverview.headline.client"
+              : "OrderCollectionOverview.headline.manufacturer"
           )}
         </h1>
         {data !== undefined ? (

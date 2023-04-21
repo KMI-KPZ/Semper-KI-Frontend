@@ -1,10 +1,9 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 import CardView, { ICardItem } from "../CardView/CardView";
 import { EUserType } from "../../interface/enums";
 import { useTranslation } from "react-i18next";
 import DashboardCard from "./DashboardCard";
-import Badge from "../General/Badge";
 
 import _HomeCards from "./HomeCards.json";
 import _AdminCards from "./AdminCards.json";
@@ -16,9 +15,16 @@ const HomeCards = _HomeCards as ICardItem[];
 const AdminCards = _AdminCards as ICardItem[];
 const ClientCards = _ClientCards as ICardItem[];
 const ManufacturerCards = _ManufacturerCards as ICardItem[];
+
 interface Props {
   userType?: EUserType;
   events?: IOrderCollectionEvent[];
+}
+
+interface IHomeCard {
+  title: string;
+  link: string;
+  icon: ReactNode;
 }
 
 export const Home: React.FC<Props> = (props) => {
@@ -41,6 +47,20 @@ export const Home: React.FC<Props> = (props) => {
     return count;
   };
   const count = getChangeCount();
+
+  const renderClientView = (
+    <div className="flex flex-col gap-12 justify-start items-center">
+      <h1 className="">{t(`Home.title.client`)}</h1>
+      <div className="flex flex-row flex-wrap justify-center gap-5 p-4 md:p-0 items-center">
+        <DashboardCard prefix={prefix} cardItem={ClientCards[0]} />
+        <DashboardCard prefix={prefix} cardItem={ClientCards[1]} />
+        <DashboardCard prefix={prefix} cardItem={ClientCards[2]} />
+        <DashboardCard prefix={prefix} cardItem={ClientCards[3]} />
+        <DashboardCard prefix={prefix} cardItem={ClientCards[4]} />
+        <DashboardCard prefix={prefix} cardItem={ClientCards[5]} />
+      </div>
+    </div>
+  );
 
   if (userType === EUserType.client)
     return (

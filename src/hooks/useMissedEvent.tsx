@@ -26,6 +26,7 @@ const useMissedEvent = (props: Props): ReturnProps => {
           return res.data;
         }),
     enabled: isLoggedIn === true,
+    refetchOnWindowFocus: false,
     initialData: [],
   });
 

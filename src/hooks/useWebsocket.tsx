@@ -10,13 +10,13 @@ type WebSocketState = "connecting" | "connected" | "disconnected" | "error";
 
 export const useWebsocket = (
   onMessage: (event: MessageEvent) => void,
-  user: boolean
+  load: boolean
 ): ReturnProps => {
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [state, setState] = useState<WebSocketState>("disconnected");
 
   useEffect(() => {
-    if (user === true && state !== "connected") {
+    if (load === true && state !== "connected") {
       // console.log("useWebsocket | connecting");
 
       setState("connecting");
@@ -49,7 +49,7 @@ export const useWebsocket = (
         setState("disconnected");
       };
     }
-  }, [user]);
+  }, [load]);
 
   const sendMessage = (message: string) => {
     if (state === "connected") {

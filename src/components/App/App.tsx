@@ -224,7 +224,6 @@ const App: React.FC = () => {
   const privateRoutes = (
     <Route element={<PrivateRoutes user={user} />}>
       <Route path="account" element={<Account user={user!} />} />{" "}
-      <Route path="test" element={<RequestTest />} />
     </Route>
   );
 
@@ -262,6 +261,7 @@ const App: React.FC = () => {
               index
               element={<Home events={missedEvents} userType={userType} />}
             />
+            <Route path="test" element={<RequestTest />} />
             <Route path="order" element={<Order />} />
             <Route
               path="process/*"

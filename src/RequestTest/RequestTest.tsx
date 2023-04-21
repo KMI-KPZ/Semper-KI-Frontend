@@ -1,18 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../components/App/App";
 import Button from "../components/General/Button";
-import { useCheckoutWebSocket } from "../hooks/useCheckoutWebSocket";
+import { useWebsocket } from "../hooks/useWebsocket";
 
 export const RequestTest: React.FC = () => {
+  const { user } = useContext(AppContext);
   const [chat, setChat] = useState<{ send: boolean; title: string }[]>([]);
   const [inputMessage, setInputMessage] = useState<string>("");
   const handleOnEventMessage = (event: MessageEvent) => {
     setChat((prevState) => [...prevState, { title: event.data, send: false }]);
   };
-  const {
-    sendMessage,
-    socket,
-    state: wsState,
-  } = useCheckoutWebSocket(handleOnEventMessage);
+  const { sendMessage, socket, state } = useWebsocket(
+    handleOnEventMessage,
+    user !== undefined
+  );
   const handleOnChangeMessageInput = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -46,7 +47,7 @@ export const RequestTest: React.FC = () => {
           </div>
         ) : null}
         <div className="flex flex-row gap-5 justify-around items-center">
-          <h3>{wsState}</h3>
+          <h3>{state}</h3>
           <input
             value={inputMessage}
             type="text"

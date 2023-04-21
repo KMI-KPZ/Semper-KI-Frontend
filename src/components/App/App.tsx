@@ -155,11 +155,11 @@ const App: React.FC = () => {
     }
   };
 
-  const {
-    sendMessage,
-    socket: websocket,
-    state: webSocketState,
-  } = useWebsocket(onWebsocktEvent, user !== undefined);
+  // const {
+  //   sendMessage,
+  //   socket: websocket,
+  //   state: webSocketState,
+  // } = useWebsocket(onWebsocktEvent, user !== undefined);
 
   const setFilter = (guideFilter: IFilterItem[]): void => {
     setState((prevState) => ({ ...prevState, guideFilter }));

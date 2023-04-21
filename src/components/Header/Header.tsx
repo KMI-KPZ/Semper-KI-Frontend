@@ -255,7 +255,7 @@ export const Header: React.FC<Props> = (props) => {
   const renderMenu = (): JSX.Element => (
     <>
       <div
-        className="hidden md:block absolute top-0 right-0 h-screen w-screen bg-gray-900 opacity-60"
+        className="hidden md:block absolute top-0 right-0 h-screen w-screen bg-gray-900 opacity-60 z-30"
         onClick={closeMenu}
       />
       <div
@@ -265,6 +265,7 @@ export const Header: React.FC<Props> = (props) => {
         overflow-x-hidden
         md:w-fit md:shadow-none 
        bg-white p-3 shadow-xl
+        z-40
        "
       >
         <ul className="hidden md:flex flex-col gap-3">

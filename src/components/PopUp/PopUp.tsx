@@ -34,7 +34,7 @@ const PopUp: React.FC<Props> = (props) => {
     <div
       className={`${
         open === true
-          ? "fixed top-0 left-0 bottom-0 right-0 bg-black/50 flex flex-col justify-center items-center overflow-hidden"
+          ? "fixed top-0 left-0 bottom-0 right-0 bg-black/50 flex flex-col justify-center items-center overflow-hidden z-50"
           : "hidden"
       }`}
       onClick={handleOnClickBackground}

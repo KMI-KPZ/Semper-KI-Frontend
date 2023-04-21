@@ -223,7 +223,8 @@ const App: React.FC = () => {
 
   const privateRoutes = (
     <Route element={<PrivateRoutes user={user} />}>
-      <Route path="account" element={<Account user={user!} />} />
+      <Route path="account" element={<Account user={user!} />} />{" "}
+      <Route path="test" element={<RequestTest />} />
     </Route>
   );
 
@@ -272,7 +273,7 @@ const App: React.FC = () => {
                 />
               }
             />
-            <Route path="test" element={<RequestTest />} />
+
             <Route path="guide">
               <Route index element={<GuideRoutes setFilter={setFilter} />} />
               <Route

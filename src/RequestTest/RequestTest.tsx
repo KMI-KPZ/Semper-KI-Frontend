@@ -5,20 +5,25 @@ import { useWebsocket } from "../hooks/useWebsocket";
 
 export const RequestTest: React.FC = () => {
   const { user } = useContext(AppContext);
+
   const [chat, setChat] = useState<{ send: boolean; title: string }[]>([]);
   const [inputMessage, setInputMessage] = useState<string>("");
+
   const handleOnEventMessage = (event: MessageEvent) => {
     setChat((prevState) => [...prevState, { title: event.data, send: false }]);
   };
+
   const { sendMessage, socket, state } = useWebsocket(
     handleOnEventMessage,
     user !== undefined
   );
+
   const handleOnChangeMessageInput = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setInputMessage(e.currentTarget.value);
   };
+
   const handleOnClickSendMessage = () => {
     sendMessage(inputMessage);
     setChat((prevState) => [

@@ -16,16 +16,30 @@ export const useWebsocket = (
   const [state, setState] = useState<WebSocketState>("disconnected");
 
   useEffect(() => {
-    if (user === true) {
+    if (user === true && state !== "connected") {
+      // console.log("useWebsocket | connecting");
+
       setState("connecting");
       const ws = new WebSocket(
         `${process.env.REACT_APP_WS_API_URL}/ws/generalWebsocket/`
       );
 
-      ws.onopen = () => setState("connected");
-      ws.onerror = () => setState("error");
-      ws.onclose = () => setState("disconnected");
-      ws.onmessage = onMessage;
+      ws.onopen = () => {
+        setState("connected");
+        // console.log("useWebsocket | connected");
+      };
+      ws.onerror = () => {
+        setState("error");
+        // console.log("useWebsocket | error");
+      };
+      ws.onclose = () => {
+        setState("disconnected");
+        // console.log("useWebsocket | disconnected");
+      };
+      ws.onmessage = (event: MessageEvent) => {
+        onMessage(event);
+        // console.log("useWebsocket | onmessage | ", event);
+      };
 
       setSocket(ws);
 

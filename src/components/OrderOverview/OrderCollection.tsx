@@ -130,10 +130,15 @@ const OrderCollection: React.FC<Props> = (props) => {
     toggleOpen(index);
   };
 
-  const getEventByID = (orderID: string): IOrderEvent | undefined => {
-    return orderCollectionEvent?.orders.filter(
+  const getOrderEventByID = (orderID: string): IOrderEvent | undefined => {
+    if (
+      orderCollectionEvent === undefined ||
+      orderCollectionEvent.orders.length < 1
+    )
+      return undefined;
+    return orderCollectionEvent.orders.find(
       (orderEvent) => orderEvent.orderID === orderID
-    )[0];
+    );
   };
 
   return (
@@ -158,7 +163,7 @@ const OrderCollection: React.FC<Props> = (props) => {
               order={order}
               orderCollectionID={orderCollection.id}
               userType={userType}
-              orderEvent={getEventByID(order.id)}
+              orderEvent={getOrderEventByID(order.id)}
             />
           ))}
           {renderButtons()}
@@ -169,7 +174,7 @@ const OrderCollection: React.FC<Props> = (props) => {
             <OrderPreView
               key={index}
               order={order}
-              orderEvent={getEventByID(order.id)}
+              orderEvent={getOrderEventByID(order.id)}
             />
           ))}
         </div>

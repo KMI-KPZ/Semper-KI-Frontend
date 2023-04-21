@@ -35,12 +35,13 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
       setState(data.map(() => false));
   }, [data]);
 
-  const getEventByID = (
+  const getOrderCollectionEventByID = (
     orderCollectionID: string
   ): IOrderCollectionEvent | undefined => {
-    return missedEvents.filter(
+    if (missedEvents === undefined || missedEvents.length < 1) return undefined;
+    return missedEvents.find(
       (orderEvent) => orderEvent.orderCollectionID === orderCollectionID
-    )[0];
+    );
   };
 
   return (
@@ -66,7 +67,9 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
                     userType={userType}
                     isOpen={state[index]}
                     toggleOpen={toggleOpen}
-                    orderCollectionEvent={getEventByID(orderCollection.id)}
+                    orderCollectionEvent={getOrderCollectionEventByID(
+                      orderCollection.id
+                    )}
                     key={index}
                   />
                 ))

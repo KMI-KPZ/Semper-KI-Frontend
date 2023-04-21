@@ -39,10 +39,12 @@ import {
   IOrderCollectionEvent,
   IOrderEvent,
   IUser,
+  IWebsocketEvent,
 } from "../../interface/Interface";
 import LoginView from "../Login/LoginView";
 import useMissedEvent from "../../hooks/useMissedEvent";
 import { useWebsocket } from "../../hooks/useWebsocket";
+import { useQueryClient } from "@tanstack/react-query";
 
 export interface IAppState {
   selectedProgressItem?: { index: number; progress: string };
@@ -77,6 +79,7 @@ export const AppContext = createContext<IAppContext>({
 
 const App: React.FC = () => {
   const [state, setState] = useState<IAppState>(initialState);
+  const queryClient = useQueryClient();
   const { stopScroll, guideFilter, selectedProgressItem, missedEvents } = state;
   const { CSRFToken, CSRFTokenError, CSRFTokenIsLoading } = useCRSFToken();
   const { isLoggedIn, userType, user, loadLoggedIn, isLoggedInResponse } =
@@ -97,45 +100,61 @@ const App: React.FC = () => {
     type: "message" | "status"
   ) => {
     setState((prevState) => {
-      let newOrderCollectionEvent: IOrderCollectionEvent =
-        prevState.missedEvents.filter(
+      let newOrderCollectionEvent: IOrderCollectionEvent | undefined =
+        prevState.missedEvents.find(
           (event) => event.orderCollectionID === orderCollectionID
-        )[0];
-      const newOrderEvents: IOrderEvent[] = newOrderCollectionEvent.orders.map(
-        (orderEvent) => ({
-          ...orderEvent,
-          messages:
-            orderEvent.orderID === orderID && type === "message"
-              ? undefined
-              : orderEvent.messages,
-          status:
-            orderEvent.orderID === orderID && type === "status"
-              ? undefined
-              : orderEvent.status,
-        })
-      );
-      newOrderCollectionEvent.orders = newOrderEvents.filter(
-        (orderEvent) =>
-          orderEvent.messages !== undefined || orderEvent.status !== undefined
-      );
-      return {
-        ...prevState,
-        missedEvents: [
-          ...prevState.missedEvents.filter(
-            (orderCollectionEvent) =>
-              orderCollectionEvent.orderCollectionID < orderCollectionID
-          ),
-          newOrderCollectionEvent,
-          ...prevState.missedEvents.filter(
-            (orderCollectionEvent) =>
-              orderCollectionEvent.orderCollectionID > orderCollectionID
-          ),
-        ],
-      };
+        );
+      if (newOrderCollectionEvent !== undefined) {
+        const newOrderEvents: IOrderEvent[] | undefined =
+          newOrderCollectionEvent.orders.map((orderEvent) => ({
+            ...orderEvent,
+            messages:
+              orderEvent.orderID === orderID && type === "message"
+                ? undefined
+                : orderEvent.messages,
+            status:
+              orderEvent.orderID === orderID && type === "status"
+                ? undefined
+                : orderEvent.status,
+          }));
+        newOrderCollectionEvent.orders = newOrderEvents.filter(
+          (orderEvent) =>
+            orderEvent.messages !== undefined || orderEvent.status !== undefined
+        );
+        return {
+          ...prevState,
+          missedEvents: [
+            ...prevState.missedEvents.filter(
+              (orderCollectionEvent) =>
+                orderCollectionEvent.orderCollectionID !== orderCollectionID
+            ),
+            newOrderCollectionEvent,
+          ],
+        };
+      } else {
+        return {
+          ...prevState,
+          missedEvents: [
+            ...prevState.missedEvents.filter(
+              (orderCollectionEvent) =>
+                orderCollectionEvent.orderCollectionID !== orderCollectionID
+            ),
+          ],
+        };
+      }
     });
   };
 
-  const onWebsocktEvent = (event: MessageEvent<any>) => {};
+  const onWebsocktEvent = (event: MessageEvent<IWebsocketEvent>) => {
+    if (event.data.events.length > 0) {
+      setState((prevState) => ({
+        ...prevState,
+        missedEvents: [...prevState.missedEvents, ...event.data.events],
+      }));
+      queryClient.invalidateQueries(event.data.queries);
+    }
+  };
+
   const {
     sendMessage,
     socket: websocket,

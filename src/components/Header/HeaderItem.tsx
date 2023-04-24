@@ -38,12 +38,16 @@ const HeaderItem: React.FC<Props> = (props) => {
         className="flex flex-row items-center gap-2"
         onClick={handleOnClick}
       >
-        <img
-          className="h-6 xl:h-8"
-          src={getIconByName(headeritem.icon)}
-          alt={`link to ${headeritem.link}`}
-        />
-        {t(`header.${headeritem.title}`)}
+        {typeof headeritem.icon === "string" ? (
+          <img
+            className="h-6 xl:h-8"
+            src={getIconByName(headeritem.icon)}
+            alt={`link to ${headeritem.link}`}
+          />
+        ) : (
+          headeritem.icon
+        )}
+        {t(headeritem.title)}
       </a>
     </li>
   );

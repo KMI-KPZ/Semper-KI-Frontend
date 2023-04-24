@@ -7,7 +7,7 @@ interface Props {
 }
 
 interface ReturnProps {
-  data: IOrderCollectionEvent[];
+  initialMissedEvents: IOrderCollectionEvent[];
   status: "error" | "success" | "loading";
   error: Error | null;
 }
@@ -30,7 +30,7 @@ const useMissedEvent = (props: Props): ReturnProps => {
     initialData: [],
   });
 
-  return { data, status, error };
+  return { initialMissedEvents: data, status, error };
 };
 
 export default useMissedEvent;

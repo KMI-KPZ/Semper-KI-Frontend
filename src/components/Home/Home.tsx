@@ -44,12 +44,24 @@ export const Home: React.FC<Props> = (props) => {
     );
   };
 
+  const showBadge = (title: string) => {
+    return (
+      count !== undefined &&
+      count > 0 &&
+      (title === "HomeData.contracts" || title === "HomeData.orders")
+    );
+  };
+
   return (
     <div className="flex flex-col gap-12 justify-start items-center">
       <h1 className="">{t(`${prefix}.title`)}</h1>
       <div className="flex flex-row flex-wrap justify-center gap-5 p-4 md:p-0 items-center">
         {getHomeItems(userType).map((homeItem, index) => (
-          <HomeItem key={index} homeItem={homeItem} />
+          <HomeItem
+            key={index}
+            homeItem={homeItem}
+            badge={showBadge(homeItem.title) ? getChangeCount() : undefined}
+          />
         ))}
       </div>
     </div>

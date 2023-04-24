@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import useCustomAxios from "./useCustomAxios";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { TUseQueryStatus } from "../interface/types";
 
 interface ReturnProps {
   isCSRFTokenLoaded: boolean;

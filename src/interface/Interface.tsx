@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import {
   EHeaderItemLoggedIn,
   EHeaderItemPreferred,
@@ -139,7 +140,7 @@ export interface IChatMessage {
 export interface IHeaderItem {
   title: string;
   link: string;
-  icon: string;
+  icon: string | ReactNode;
   extern: boolean;
   preferred: EHeaderItemPreferred;
   userType: EUserType[];

@@ -337,5 +337,18 @@
     "procedure": "Verfahren",
     "printer": "Drucker",
     "account": "Konto"
+  },
+  "HeaderData":{
+    "about-us": "Über uns",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "continue": "Fortfahren",
+    "order": "Bestellung",
+    "logout": "Abmelden",
+    "orders": "Bestellungen",
+    "contracts": "Verträge",
+    "account": "Konto",
+    "test": "Test",
+    "guide": "Guide"
   }
 }

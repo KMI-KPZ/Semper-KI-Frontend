@@ -82,14 +82,17 @@ const App: React.FC = () => {
   const queryClient = useQueryClient();
   const { stopScroll, guideFilter, selectedProgressItem, missedEvents } = state;
   const { isLoggedIn, userType, user, isLoggedInResponse } = useUser();
-  const { data: _missedEvents, error, status } = useMissedEvent({ isLoggedIn });
+  const { initialMissedEvents } = useMissedEvent({
+    isLoggedIn,
+  });
+
   useEffect(() => {
-    if (_missedEvents.length > 0)
+    if (initialMissedEvents.length > 0)
       setState((prevState) => ({
         ...prevState,
-        missedEvents: _missedEvents,
+        missedEvents: initialMissedEvents,
       }));
-  }, [_missedEvents]);
+  }, [initialMissedEvents]);
 
   const deleteEvent = (
     orderCollectionID: string,

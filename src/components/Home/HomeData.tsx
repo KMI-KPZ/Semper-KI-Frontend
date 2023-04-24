@@ -5,7 +5,6 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import DescriptionIcon from "@mui/icons-material/Description";
-import ExtensionIcon from "@mui/icons-material/Extension";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import FactoryIcon from "@mui/icons-material/Factory";
 import GavelIcon from "@mui/icons-material/Gavel";
@@ -18,6 +17,18 @@ import MapIcon from "@mui/icons-material/Map";
 import HardwareIcon from "@mui/icons-material/Hardware";
 
 export const HomeItemsData: IHomeItem[] = [
+  {
+    users: [0],
+    title: "HomeData.continue",
+    link: "/process",
+    icon: <KeyboardDoubleArrowRightIcon fontSize="large" />,
+  },
+  {
+    users: [0],
+    title: "HomeData.new-contract",
+    link: "/process/new",
+    icon: <AddShoppingCartIcon fontSize="large" />,
+  },
   {
     users: [3],
     title: "HomeData.explore",
@@ -41,18 +52,6 @@ export const HomeItemsData: IHomeItem[] = [
     title: "HomeData.provide-service",
     link: "/service/provide",
     icon: <PrecisionManufacturingIcon fontSize="large" />,
-  },
-  {
-    users: [0],
-    title: "HomeData.continue",
-    link: "/process",
-    icon: <KeyboardDoubleArrowRightIcon fontSize="large" />,
-  },
-  {
-    users: [0],
-    title: "HomeData.new-contract",
-    link: "/process/new",
-    icon: <AddShoppingCartIcon fontSize="large" />,
   },
   {
     users: [1],

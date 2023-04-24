@@ -11,12 +11,10 @@ import React from "react";
 import { EOrderState } from "../../interface/enums";
 import { IOrder } from "../../interface/Interface";
 
-interface Props {
-  orderList: IOrder[];
-}
+interface Props {}
 
 const AdminOrderView: React.FC<Props> = (props) => {
-  const { orderList } = props;
+  const {} = props;
   return (
     <div className="admin-view">
       <h1>Benutzer</h1>
@@ -32,7 +30,7 @@ const AdminOrderView: React.FC<Props> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {orderList.map((order: IOrder, index: number) => (
+            {[].map((order: IOrder, index: number) => (
               <TableRow
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

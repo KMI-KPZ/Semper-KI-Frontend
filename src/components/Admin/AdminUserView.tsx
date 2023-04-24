@@ -11,12 +11,10 @@ import React from "react";
 import { EUserType } from "../../interface/enums";
 import { IUser } from "../../interface/Interface";
 
-interface Props {
-  userList: IUser[];
-}
+interface Props {}
 
 const AdminUserView: React.FC<Props> = (props) => {
-  const { userList } = props;
+  const {} = props;
   return (
     <div className="admin-view">
       <h1>Benutzer</h1>
@@ -33,7 +31,7 @@ const AdminUserView: React.FC<Props> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {userList.map((user: IUser, index: number) => (
+            {[].map((user: IUser, index: number) => (
               <TableRow
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

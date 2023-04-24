@@ -318,5 +318,24 @@
       "delivery":"Unterwegs",
       "finished":"Abgeschlossen"
     }
+  },
+  "HomeData":{
+    "explore": "Ausprobieren",
+    "use-service": "Service nutzen",
+    "provide-service": "Service bereitstellen",
+    "continue": "Fortsetzen",
+    "new-contract": "neuer Auftrag",
+    "proceedings": "Verfahren",
+    "company": "Unternehmen",
+    "guide": "Guide",
+    "order": "Bestellung",
+    "orders": "Bestellungen",
+    "contracts": "Aufträge",
+    "user": "Benutzer",
+    "model": "Modelle",
+    "material": "Materialien",
+    "procedure": "Verfahren",
+    "printer": "Drucker",
+    "account": "Konto"
   }
 }

@@ -10,13 +10,10 @@ import {
 import React from "react";
 import { IModel } from "../../interface/Interface";
 
-interface Props {
-  modelList: IModel[];
-}
+interface Props {}
 
 const AdminModelView: React.FC<Props> = (props) => {
-  const { modelList } = props;
-  console.log(modelList);
+  const {} = props;
 
   return (
     <div className="admin-view">
@@ -34,7 +31,7 @@ const AdminModelView: React.FC<Props> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {modelList.map((model: IModel, index: number) => (
+            {[].map((model: IModel, index: number) => (
               <TableRow
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

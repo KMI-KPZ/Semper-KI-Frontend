@@ -10,12 +10,10 @@ import {
 import React from "react";
 import { IMaterial } from "../../interface/Interface";
 
-interface Props {
-  materialList: IMaterial[];
-}
+interface Props {}
 
 const AdminMaterialView: React.FC<Props> = (props) => {
-  const { materialList } = props;
+  const {} = props;
   return (
     <div className="admin-view">
       <h1>Benutzer</h1>
@@ -29,7 +27,7 @@ const AdminMaterialView: React.FC<Props> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {materialList.map((material: IMaterial, index: number) => (
+            {[].map((material: IMaterial, index: number) => (
               <TableRow
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

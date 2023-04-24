@@ -1,80 +1,62 @@
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { EUserType } from "../interface/enums";
 import { IUser } from "../interface/Interface";
 import { getUserType, parseAddress } from "../services/utils";
+import useCRSFToken from "./useCSRFToken";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
-  userType: EUserType | undefined;
+  userType: EUserType;
   user: IUser | undefined;
   isLoggedIn: boolean;
   isLoggedInResponse: boolean;
-  loadLoggedIn(): void;
-  logoutUser(): void;
+  loadIsLoggedInQuery: UseQueryResult<boolean, Error>;
+  loadUserQuery: UseQueryResult<IUser, Error>;
   deleteUser(): void;
   updateUser(userType: EUserType): void;
 }
 
 const useUser = (): ReturnProps => {
   const navigate = useNavigate();
+  const { isCSRFTokenLoaded } = useCRSFToken();
   const { axiosCustom } = useCustomAxios();
-  const [userType, setUserType] = useState<EUserType>();
-  const [user, setUser] = useState<IUser | undefined>();
-  const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
-  const [isLoggedInResponse, setIsLoggedInResponse] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (isLoggedIn === true) {
-      loadUser();
-    }
-  }, [isLoggedIn]);
+  const loadIsLoggedInQuery = useQuery<boolean, Error>({
+    queryKey: ["isLoggedIn"],
+    queryFn: async () =>
+      axiosCustom
+        .get(`${process.env.REACT_APP_HTTP_API_URL}/public/isLoggedIn/`)
+        .then((response) => {
+          console.log("useUser | loadLoggedIn ✅ |", response.data);
+          return response.data === "Success" ? true : false;
+        }),
+    enabled: isCSRFTokenLoaded === true,
+  });
 
-  useEffect(() => {
-    if (user !== undefined) {
-      setUserType(user.type);
-    }
-  }, [user]);
-
-  const loadUser = () => {
-    axiosCustom
-      .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getUser/`)
-      .then((response) => {
-        const userData = response.data;
-        console.log("useUser | loadUser ✅ |", userData);
-        setUser(
-          Object.keys(userData).length === 0 && userData.constructor === Object
-            ? undefined
-            : {
-                ...userData,
-                type: getUserType(userData.type),
-                address: parseAddress(userData.address),
-                accessed: new Date(userData.accessed),
-                created: new Date(userData.created),
-                updated: new Date(userData.updated),
-              }
-        );
-        setLoggedIn(true);
-      })
-      .catch((error) => {
-        console.log("useUser | loadUser ❌ |", error);
-        setUser(undefined);
-      });
-  };
-
-  const loadLoggedIn = () => {
-    axiosCustom
-      .get(`${process.env.REACT_APP_HTTP_API_URL}/public/isLoggedIn/`)
-      .then((response) => {
-        console.log("useUser | loadLoggedIn ✅ |", response.data);
-        setLoggedIn(response.data === "Success" ? true : false);
-        setIsLoggedInResponse(true);
-      })
-      .catch((error) => {
-        console.log("useUser | loadLoggedIn ❌ |", error);
-        setLoggedIn(false);
-      });
-  };
+  const loadUserQuery = useQuery<IUser, Error>({
+    queryKey: ["user"],
+    queryFn: async () =>
+      axiosCustom
+        .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getUser/`)
+        .then((response) => {
+          const userData = response.data;
+          console.log("useUser | loadUser ✅ |", userData);
+          return {
+            ...userData,
+            type: getUserType(userData.type),
+            address: parseAddress(userData.address),
+            accessed: new Date(userData.accessed),
+            created: new Date(userData.created),
+            updated: new Date(userData.updated),
+          };
+        }),
+    enabled:
+      loadIsLoggedInQuery.isFetched &&
+      loadIsLoggedInQuery.data !== undefined &&
+      loadIsLoggedInQuery.data === true,
+  });
 
   const deleteUser = () => {
     axiosCustom
@@ -101,19 +83,24 @@ const useUser = (): ReturnProps => {
       });
   };
 
-  const logoutUser = () => {
-    setUser(undefined);
-    setLoggedIn(false);
-  };
+  const user: IUser | undefined =
+    loadUserQuery.data !== undefined && loadUserQuery.isFetched
+      ? loadUserQuery.data
+      : undefined;
+  const userType: EUserType = user === undefined ? EUserType.anonym : user.type;
+  const isLoggedInResponse: boolean =
+    loadIsLoggedInQuery.data !== undefined && loadIsLoggedInQuery.isFetched;
+  const isLoggedIn: boolean =
+    isLoggedInResponse && loadIsLoggedInQuery.data === true;
 
   return {
+    loadIsLoggedInQuery,
+    loadUserQuery,
     userType,
     user,
     isLoggedIn,
     isLoggedInResponse,
-    logoutUser,
     deleteUser,
-    loadLoggedIn,
     updateUser,
   };
 };

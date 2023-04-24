@@ -23,6 +23,7 @@ const Order: React.FC<Props> = (props) => {
 
   const checkProcessOK = (processList: IProcessItem[]): boolean => {
     return (
+      processList.length > 0 &&
       processList.filter(
         (item: IProcessItem) =>
           item.model !== undefined &&

@@ -2,6 +2,7 @@ export enum EUserType {
   "client",
   "manufacturer",
   "admin",
+  "anonym",
 }
 
 export enum EProgressType {

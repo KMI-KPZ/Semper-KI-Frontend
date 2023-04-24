@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import useCustomAxios from "./useCustomAxios";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { TUseQueryStatus } from "../interface/types";
 
 interface ReturnProps {
-  CSRFToken: boolean;
-  CSRFTokenIsLoading: boolean;
-  CSRFTokenError: Error | null;
+  isCSRFTokenLoaded: boolean;
+  CSRFTokenQuery: UseQueryResult<string, Error>;
 }
 
 const useCRSFToken = (): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
-  const { data, isLoading, error } = useQuery<string, Error>({
+  const CSRFTokenQuery = useQuery<string, Error>({
     queryKey: ["csrf"],
     queryFn: async () => {
       const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/csrfCookie/`;
@@ -23,13 +23,14 @@ const useCRSFToken = (): ReturnProps => {
     staleTime: 1000 * 60 * 24,
   });
   const checkCSRFTokenLoaded = (): boolean => {
-    return data !== "" && Cookies.get("csrftoken") !== undefined ? true : false;
+    return CSRFTokenQuery.data !== "" && Cookies.get("csrftoken") !== undefined
+      ? true
+      : false;
   };
 
   return {
-    CSRFToken: checkCSRFTokenLoaded(),
-    CSRFTokenError: error,
-    CSRFTokenIsLoading: isLoading,
+    isCSRFTokenLoaded: checkCSRFTokenLoaded(),
+    CSRFTokenQuery,
   };
 };
 

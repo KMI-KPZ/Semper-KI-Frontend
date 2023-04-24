@@ -1,27 +1,17 @@
 import React, { ReactNode } from "react";
-
-import CardView, { ICardItem } from "../CardView/CardView";
 import { EUserType } from "../../interface/enums";
 import { useTranslation } from "react-i18next";
-import DashboardCard from "./DashboardCard";
-
-import _HomeCards from "./HomeCards.json";
-import _AdminCards from "./AdminCards.json";
-import _ClientCards from "./ClientCards.json";
-import _ManufacturerCards from "./ManufacturerCards.json";
 import { IOrderCollectionEvent } from "../../interface/Interface";
-
-const HomeCards = _HomeCards as ICardItem[];
-const AdminCards = _AdminCards as ICardItem[];
-const ClientCards = _ClientCards as ICardItem[];
-const ManufacturerCards = _ManufacturerCards as ICardItem[];
+import HomeItem from "./HomeItem";
+import { HomeItemsData } from "./HomeData";
 
 interface Props {
-  userType?: EUserType;
+  userType: EUserType;
   events?: IOrderCollectionEvent[];
 }
 
-interface IHomeCard {
+export interface IHomeItem {
+  users: EUserType[];
   title: string;
   link: string;
   icon: ReactNode;
@@ -48,73 +38,20 @@ export const Home: React.FC<Props> = (props) => {
   };
   const count = getChangeCount();
 
-  const renderClientView = (
+  const getHomeItems = (userType: EUserType): IHomeItem[] => {
+    return HomeItemsData.filter((homeItem) =>
+      homeItem.users.includes(userType)
+    );
+  };
+
+  return (
     <div className="flex flex-col gap-12 justify-start items-center">
-      <h1 className="">{t(`Home.title.client`)}</h1>
+      <h1 className="">{t(`${prefix}.title`)}</h1>
       <div className="flex flex-row flex-wrap justify-center gap-5 p-4 md:p-0 items-center">
-        <DashboardCard prefix={prefix} cardItem={ClientCards[0]} />
-        <DashboardCard prefix={prefix} cardItem={ClientCards[1]} />
-        <DashboardCard prefix={prefix} cardItem={ClientCards[2]} />
-        <DashboardCard prefix={prefix} cardItem={ClientCards[3]} />
-        <DashboardCard prefix={prefix} cardItem={ClientCards[4]} />
-        <DashboardCard prefix={prefix} cardItem={ClientCards[5]} />
+        {getHomeItems(userType).map((homeItem, index) => (
+          <HomeItem key={index} homeItem={homeItem} />
+        ))}
       </div>
     </div>
   );
-
-  if (userType === EUserType.client)
-    return (
-      <div className="flex flex-col gap-12 justify-start items-center">
-        <h1 className="">{t(`${prefix}.title`)}</h1>
-        <div className="flex flex-row flex-wrap justify-center gap-5 p-4 md:p-0 items-center">
-          {ClientCards.map((cardItem: ICardItem, index: number) => (
-            <DashboardCard
-              prefix={prefix}
-              cardItem={cardItem}
-              key={index}
-              badge={
-                cardItem.title === "orders" && count !== undefined && count > 0
-                  ? count
-                  : undefined
-              }
-            />
-          ))}
-        </div>
-      </div>
-    );
-  if (userType === EUserType.manufacturer)
-    return (
-      <div className="flex flex-col gap-12 justify-start items-center">
-        <h1 className="">{t(`${prefix}.title`)}</h1>
-        <div className="flex flex-row flex-wrap justify-center gap-5 p-4 md:p-0 items-center">
-          {ManufacturerCards.map((cardItem: ICardItem, index: number) => (
-            <DashboardCard
-              prefix={prefix}
-              cardItem={cardItem}
-              key={index}
-              badge={
-                cardItem.title === "contracts" &&
-                count !== undefined &&
-                count > 0
-                  ? count
-                  : undefined
-              }
-            />
-          ))}
-        </div>
-      </div>
-    );
-  if (userType === EUserType.admin)
-    return (
-      <div className="flex flex-col gap-12 justify-start items-center">
-        <h1 className="">{t(`${prefix}.title`)}</h1>
-        <div className="flex flex-row flex-wrap justify-center gap-5 p-4 md:p-0 items-center">
-          {AdminCards.map((cardItem: ICardItem, index: number) => (
-            <DashboardCard prefix={prefix} cardItem={cardItem} key={index} />
-          ))}
-        </div>
-      </div>
-    );
-
-  return <CardView path="home" cards={HomeCards} />;
 };

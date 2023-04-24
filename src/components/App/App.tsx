@@ -81,10 +81,7 @@ const App: React.FC = () => {
   const [state, setState] = useState<IAppState>(initialState);
   const queryClient = useQueryClient();
   const { stopScroll, guideFilter, selectedProgressItem, missedEvents } = state;
-  const { CSRFToken, CSRFTokenError, CSRFTokenIsLoading } = useCRSFToken();
-  const { isLoggedIn, userType, user, loadLoggedIn, isLoggedInResponse } =
-    useUser();
-  const { data, loadData, clearData } = useAdmin();
+  const { isLoggedIn, userType, user, isLoggedInResponse } = useUser();
   const { data: _missedEvents, error, status } = useMissedEvent({ isLoggedIn });
   useEffect(() => {
     if (_missedEvents.length > 0)
@@ -165,37 +162,14 @@ const App: React.FC = () => {
     setState((prevState) => ({ ...prevState, guideFilter }));
   };
 
-  useEffect(() => {
-    if (CSRFToken === true) {
-      loadLoggedIn();
-    }
-  }, [CSRFToken]);
-
-  useEffect(() => {
-    if (userType === EUserType.admin) {
-      loadData();
-    } else {
-      clearData();
-    }
-  }, [userType]);
-
   const adminRoutes = (
     <Route element={<PrivateAdminRoutes userType={userType} />}>
-      <Route path="user" element={<AdminUserView userList={data.users} />} />
-      <Route
-        path="model"
-        element={<AdminModelView modelList={data.models} />}
-      />
-      <Route
-        path="material"
-        element={<AdminMaterialView materialList={data.materials} />}
-      />
+      <Route path="user" element={<AdminUserView />} />
+      <Route path="model" element={<AdminModelView />} />
+      <Route path="material" element={<AdminMaterialView />} />
       <Route path="procedure" element={<h1>Procedure</h1>} />
       <Route path="printer" element={<h1>Printer</h1>} />
-      <Route
-        path="order"
-        element={<AdminOrderView orderList={data.orders} />}
-      />
+      <Route path="order" element={<AdminOrderView />} />
     </Route>
   );
 
@@ -229,7 +203,6 @@ const App: React.FC = () => {
   );
 
   if (
-    CSRFTokenIsLoading === true ||
     isLoggedInResponse === false ||
     (isLoggedIn === true && user === undefined)
   )

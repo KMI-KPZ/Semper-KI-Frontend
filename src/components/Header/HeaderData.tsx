@@ -11,6 +11,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import MapIcon from "@mui/icons-material/Map";
+import Logo from "../../assets/images/icons/Logo";
 
 export const HeaderItemsData: IHeaderItem[] = [
   {
@@ -27,7 +28,24 @@ export const HeaderItemsData: IHeaderItem[] = [
     ],
     loggedIn: [false],
   },
-
+  {
+    title: "HeaderData.continue",
+    link: "/process/model",
+    icon: <KeyboardDoubleArrowRightIcon fontSize="large" />,
+    extern: false,
+    preferred: EHeaderItemPreferred.header,
+    userType: [EUserType.anonym, EUserType.client],
+    loggedIn: [true, false],
+  },
+  {
+    title: "HeaderData.order",
+    link: "/order",
+    icon: <ShoppingCartIcon fontSize="large" />,
+    extern: false,
+    preferred: EHeaderItemPreferred.header,
+    userType: [EUserType.anonym, EUserType.client],
+    loggedIn: [true, false],
+  },
   {
     title: "HeaderData.login",
     link: "/login",
@@ -55,24 +73,6 @@ export const HeaderItemsData: IHeaderItem[] = [
       EUserType.admin,
     ],
     loggedIn: [false],
-  },
-  {
-    title: "HeaderData.continue",
-    link: "/process/model",
-    icon: <KeyboardDoubleArrowRightIcon fontSize="large" />,
-    extern: false,
-    preferred: EHeaderItemPreferred.header,
-    userType: [EUserType.anonym, EUserType.client],
-    loggedIn: [true, false],
-  },
-  {
-    title: "HeaderData.order",
-    link: "/order",
-    icon: <ShoppingCartIcon fontSize="large" />,
-    extern: false,
-    preferred: EHeaderItemPreferred.header,
-    userType: [EUserType.anonym, EUserType.client],
-    loggedIn: [true, false],
   },
   {
     title: "HeaderData.logout",

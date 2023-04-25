@@ -29,21 +29,28 @@ const HeaderItem: React.FC<Props> = (props) => {
 
   return (
     <li
-      className="hover:bg-gray-300 hover:cursor-pointer p-2"
+      className="group hover:text-türkis hover:cursor-pointer p-1  duration-300 "
       onClick={handleOnClick}
       title={headeritem.title}
     >
       <a
         href={headeritem.link}
-        className="flex flex-row items-center gap-2"
+        className="flex flex-row items-center gap-2 text-inherit "
         onClick={handleOnClick}
       >
         {typeof headeritem.icon === "string" ? (
-          <img
-            className="h-6 xl:h-8"
-            src={getIconByName(headeritem.icon)}
-            alt={`link to ${headeritem.link}`}
-          />
+          <div className="relative w-6 h-6 xl:h-8 xl:w-8">
+            <img
+              className="absolute h-6 xl:h-8 opacity-100 group-hover:opacity-0 duration-300 ease-in-out"
+              src={getIconByName("IconLogo")}
+              alt={`link to ${headeritem.link}`}
+            />
+            <img
+              className="absolute h-6 xl:h-8 opacity-0 group-hover:opacity-100 duration-300 ease-in-out"
+              src={getIconByName("IconLogoColor")}
+              alt={`link to ${headeritem.link}`}
+            />
+          </div>
         ) : (
           headeritem.icon
         )}

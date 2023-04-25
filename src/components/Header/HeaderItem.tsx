@@ -29,7 +29,7 @@ const HeaderItem: React.FC<Props> = (props) => {
 
   return (
     <li
-      className="group hover:text-türkis hover:cursor-pointer p-1  duration-300 "
+      className="group hover:text-türkis hover:cursor-pointer duration-300 p-1"
       onClick={handleOnClick}
       title={headeritem.title}
     >

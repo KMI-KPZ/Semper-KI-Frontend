@@ -11,6 +11,8 @@ import { EHeaderItemPreferred, EUserType } from "../../interface/enums";
 import { IHeaderItem } from "../../interface/Interface";
 import { IconArrowR, IconX } from "../../constants/Icons";
 import { HeaderItemsData } from "./HeaderData";
+import CloseIcon from "@mui/icons-material/Close";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 interface Language {
   code: string;
@@ -159,10 +161,10 @@ export const Header: React.FC<Props> = (props) => {
           <>
             <div className="flex flex-row-reverse gap-4">
               <div
-                className="hover:bg-gray-300 hover:cursor-pointer p-2 flex justify-center"
+                className="hover:text-türkis hover:cursor-pointer duration-300 p-2 flex justify-center"
                 onClick={closeMenu}
               >
-                <img alt="close Menu" src={IconX} className="w-6" />
+                <CloseIcon fontSize="large" />
               </div>
               {renderLanguageMenu}
             </div>
@@ -184,10 +186,10 @@ export const Header: React.FC<Props> = (props) => {
         ) : (
           <div className="flex flex-row-reverse gap-4">
             <div
-              className="hover:bg-gray-300 hover:cursor-pointer p-2 flex justify-center"
+              className="hover:text-türkis hover:cursor-pointer duration-300  flex justify-center"
               onClick={closeMenu}
             >
-              <img alt="close Menu" src={IconX} className="w-6" />
+              <CloseIcon fontSize="large" />
             </div>
           </div>
         )}
@@ -274,10 +276,11 @@ export const Header: React.FC<Props> = (props) => {
           {renderMenuItems(true)}
         </ul>
         <div
-          className="hover:bg-gray-300 hover:cursor-pointer w-full p-3 flex justify-center items-center"
+          className="hover:text-türkis hover:cursor-pointer duration-300 
+          w-full flex flex-row justify-center items-center"
           onClick={closeMenu}
         >
-          <img className="h-8 rotate-[270deg] md:rotate-0" src={IconArrowR} />
+          <ExpandLessIcon fontSize="large" className="md:rotate-90" />
         </div>
       </div>
     </>

@@ -100,28 +100,29 @@ export const Header: React.FC<Props> = (props) => {
         <div className="relative w-full h-full flex items-center justify-center">
           <a
             href={"/languageMenu"}
-            className="hover:bg-gray-300 hover:cursor-pointer p-2"
+            className="group hover:cursor-pointer  p-2"
             onClick={openLanguageMenu}
           >
             <div
-              className={`fi fi-${getFlagButtonClassName()} scale-80 xl:scale-100`}
+              className={`fi fi-${getFlagButtonClassName()} scale-80 xl:scale-100 group-hover:shadow-türkis group-hover:shadow-border duration-300`}
             />
           </a>
           {state.languageMenuOpen === true ? (
             <div
-              className="flex flex-col absolute translate-y-20 bg-gray-200"
+              className="flex flex-col absolute translate-y-20 bg-slate-50"
               data-testid="dropdown"
             >
               {languages.map(({ code, country_code }: Language) => (
                 <a
                   key={country_code}
                   onClick={changeLanguage(code)}
-                  className="hover:bg-gray-300 hover:cursor-pointer p-2"
+                  className="group hover:cursor-pointer p-2"
                 >
                   <div
                     data-testid={country_code}
-                    className={`fi fi-${country_code} ${
-                      i18n.language === code ? "disabled" : ""
+                    className={`group-hover:shadow-türkis group-hover:shadow-border duration-300 
+                    fi fi-${country_code} ${
+                      i18n.language === code ? "grayscale" : ""
                     }`}
                   />
                 </a>
@@ -211,7 +212,7 @@ export const Header: React.FC<Props> = (props) => {
   const renderHomeButton: JSX.Element = (
     <a
       href="/"
-      className="flex flex-row items-center gap-3 hover:bg-gray-300 hover:cursor-pointer p-2"
+      className="group hover:text-türkis hover:cursor-pointer duration-300 flex flex-row items-center gap-3 p-2 "
       onClick={(e) => {
         e.preventDefault();
         closeMenus();
@@ -220,13 +221,13 @@ export const Header: React.FC<Props> = (props) => {
       title="Startseite"
     >
       <img
-        className="h-6 xl:h-8"
+        className="h-6 xl:h-8 group-hover:scale-110 duration-300"
         data-testid="logo"
         src={require("../../assets/images/logo192.png")}
         alt="Kiss Logo"
       />
-      <div className="flex flex-col justify-start items-end gap-0">
-        <h3 className="font-bold" data-testid="logoName">
+      <div className="flex flex-col justify-start items-end gap-0 text-inherit">
+        <h3 className="font-bold text-inherit" data-testid="logoName">
           SEMPER-KI
         </h3>
         {/* <h4 className="text-türkis text-sm">Blog</h4> */}
@@ -236,14 +237,14 @@ export const Header: React.FC<Props> = (props) => {
 
   const renderMenuButton: JSX.Element = (
     <li
-      className="flex items-center justify-center hover:bg-gray-300 hover:cursor-pointer p-2"
+      className="group hover:text-türkis hover:cursor-pointer duration-300 flex items-center justify-center p-2"
       onClick={openMenu}
       title="Menu"
     >
       <a
         href={"/menu"}
         onClick={openMenu}
-        className="flex items-center justify-center"
+        className="flex items-center justify-center text-inherit"
       >
         <MenuIcon className="h-6 xl:h-10" />
       </a>

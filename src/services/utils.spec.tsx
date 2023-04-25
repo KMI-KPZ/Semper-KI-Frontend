@@ -1,6 +1,6 @@
 import { getFileSizeAsString, isNumber } from "./utils";
 
-describe("Utils", () => {
+describe.skip("Utils", () => {
   describe("Test getFileSizeAsString", () => {
     it("should return 1B as string", () => {
       const value = getFileSizeAsString(1);

@@ -8,6 +8,7 @@ import { HomeItemsData } from "./HomeData";
 interface Props {
   userType: EUserType;
   events?: IOrderCollectionEvent[];
+  cartCount: number;
 }
 
 export interface IHomeItem {
@@ -18,7 +19,7 @@ export interface IHomeItem {
 }
 
 export const Home: React.FC<Props> = (props) => {
-  const { userType, events } = props;
+  const { userType, events, cartCount } = props;
   const { t } = useTranslation();
   const prefix: string =
     userType === EUserType.admin ? "dashboard.admin" : "dashboard";
@@ -44,12 +45,15 @@ export const Home: React.FC<Props> = (props) => {
     );
   };
 
-  const showBadge = (title: string) => {
-    return (
+  const calcBadge = (title: string): number | undefined => {
+    if (
       count !== undefined &&
       count > 0 &&
       (title === "HomeData.contracts" || title === "HomeData.orders")
-    );
+    )
+      return getChangeCount();
+    if (cartCount > 0 && title === "HomeData.order") return cartCount;
+    return undefined;
   };
 
   return (
@@ -60,7 +64,7 @@ export const Home: React.FC<Props> = (props) => {
           <HomeItem
             key={index}
             homeItem={homeItem}
-            badge={showBadge(homeItem.title) ? getChangeCount() : undefined}
+            badge={calcBadge(homeItem.title)}
           />
         ))}
       </div>

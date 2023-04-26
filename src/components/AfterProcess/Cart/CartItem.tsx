@@ -14,7 +14,7 @@ interface Props {
   deleteItem(index: number): void;
 }
 
-const OrderItem: React.FC<Props> = (props) => {
+const CartItem: React.FC<Props> = (props) => {
   const { setAppState } = useContext(AppContext);
   const { process, index, deleteItem } = props;
   const navigate = useNavigate();
@@ -148,4 +148,4 @@ const OrderItem: React.FC<Props> = (props) => {
   );
 };
 
-export default OrderItem;
+export default CartItem;

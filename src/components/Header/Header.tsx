@@ -9,7 +9,6 @@ import HeaderItem from "./HeaderItem";
 import { AppContext } from "../App/App";
 import { EHeaderItemPreferred, EUserType } from "../../interface/enums";
 import { IHeaderItem } from "../../interface/Interface";
-import { IconArrowR, IconX } from "../../constants/Icons";
 import { HeaderItemsData } from "./HeaderData";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -37,6 +36,7 @@ const languages: Language[] = [
 interface Props {
   isLoggedIn: boolean;
   userType: EUserType | undefined;
+  cartCount: number;
 }
 
 interface State {
@@ -45,9 +45,8 @@ interface State {
 }
 
 export const Header: React.FC<Props> = (props) => {
-  const { isLoggedIn, userType } = props;
+  const { isLoggedIn, userType, cartCount } = props;
   const { setAppState } = useContext(AppContext);
-  const { cart } = useCart();
   const navigate = useNavigate();
   const { i18n } = useTranslation();
   const [state, setState] = useState<State>({
@@ -152,7 +151,7 @@ export const Header: React.FC<Props> = (props) => {
           closeMenus={closeMenus}
           headeritem={headerItem}
           badge={
-            headerItem.title === "HeaderData.order" ? cart.length : undefined
+            headerItem.title === "HeaderData.order" ? cartCount : undefined
           }
         />
       ))}

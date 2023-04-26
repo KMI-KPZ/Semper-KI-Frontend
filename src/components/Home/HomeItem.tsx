@@ -27,7 +27,9 @@ const HomeItem: React.FC<Props> = (props) => {
       href={homeItem.link}
     >
       {homeItem.icon === undefined ? null : badge !== undefined ? (
-        <Badge count={badge}>{homeItem.icon}</Badge>
+        <Badge count={badge} position="small">
+          {homeItem.icon}
+        </Badge>
       ) : (
         homeItem.icon
       )}

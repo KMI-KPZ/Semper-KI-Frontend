@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useCart from "../../../hooks/useCart";
 import { IProcessItem } from "../../../interface/Interface";
-import OrderItem from "./OrderItem";
 import Button from "../../General/Button";
 import { useQueryClient } from "@tanstack/react-query";
+import CartItem from "./CartItem";
 
 interface Props {}
 
@@ -79,7 +79,7 @@ const Order: React.FC<Props> = (props) => {
       <section className="flex flex-col gap-5 items-center justify-start w-full">
         {cart.length > 0 ? (
           cart.map((process: IProcessItem, index: number) => (
-            <OrderItem
+            <CartItem
               process={process}
               key={index}
               index={index}

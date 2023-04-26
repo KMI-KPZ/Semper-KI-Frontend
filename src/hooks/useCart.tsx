@@ -10,7 +10,7 @@ import { AxiosResponse } from "axios";
 import { IProcessItem } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
 
-interface ReturnProps {
+export interface ICartHook {
   cart: IProcessItem[];
   status: "error" | "success" | "loading";
   error: Error | null;
@@ -26,7 +26,7 @@ export interface ICartResponse {
   cart: IProcessItem[];
 }
 
-const useCart = (): ReturnProps => {
+const useCart = (): ICartHook => {
   const { axiosCustom } = useCustomAxios();
   const queryClient = useQueryClient();
 

@@ -2,7 +2,6 @@ import React, { createContext, useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { RequestTest } from "../../RequestTest/RequestTest";
 import { Header } from "../Header/Header";
-import useCRSFToken from "../../hooks/useCSRFToken";
 import useUser from "../../hooks/useUser";
 import { Home } from "../Home/Home";
 import { ProcessView } from "../Process/ProcessView";
@@ -31,13 +30,14 @@ import AdminMaterialView from "../Admin/AdminMaterialView";
 import AdminOrderView from "../Admin/AdminOrderView";
 import Background from "../Background/Background";
 import Checkout from "../AfterProcess/Checkout/Checkout";
-import Order from "../AfterProcess/Order/Order";
+import Cart from "../AfterProcess/Cart/Cart";
 import { EUserType } from "../../interface/enums";
 import { URL_AboutUs } from "../../constants/Constants";
 import ManufacturerView from "../AfterProcess/Manufacturer/ManufacturerView";
 import {
   IOrderCollectionEvent,
   IOrderEvent,
+  IProcessItem,
   IUser,
   IWebsocketEvent,
 } from "../../interface/Interface";
@@ -45,6 +45,7 @@ import LoginView from "../Login/LoginView";
 import useMissedEvent from "../../hooks/useMissedEvent";
 import { useWebsocket } from "../../hooks/useWebsocket";
 import { useQueryClient } from "@tanstack/react-query";
+import useCart from "../../hooks/useCart";
 
 export interface IAppState {
   selectedProgressItem?: { index: number; progress: string };
@@ -55,6 +56,7 @@ export interface IAppState {
 
 export interface IAppContext {
   user: IUser | undefined;
+  cart: IProcessItem[];
   appState: IAppState;
   setAppState: React.Dispatch<React.SetStateAction<IAppState>>;
   deleteEvent(
@@ -72,6 +74,7 @@ const initialState: IAppState = {
 
 export const AppContext = createContext<IAppContext>({
   user: undefined,
+  cart: [],
   appState: initialState,
   setAppState: () => {},
   deleteEvent: () => {},
@@ -85,6 +88,7 @@ const App: React.FC = () => {
   const { initialMissedEvents } = useMissedEvent({
     isLoggedIn,
   });
+  const { cart } = useCart();
 
   useEffect(() => {
     if (initialMissedEvents.length > 0)
@@ -221,6 +225,7 @@ const App: React.FC = () => {
       value={{
         appState: state,
         setAppState: setState,
+        cart,
         user,
         deleteEvent,
       }}
@@ -231,16 +236,26 @@ const App: React.FC = () => {
         ${stopScroll === true ? "overflow-hidden h-screen w-screen" : ""}`}
         data-testid="app"
       >
-        <Header isLoggedIn={isLoggedIn} userType={userType} />
+        <Header
+          isLoggedIn={isLoggedIn}
+          userType={userType}
+          cartCount={cart.length}
+        />
         <main className="w-full md:w-5/6 flex flex-col justify-start items-center p-2 flex-grow bg-opacity-80 bg-slate-200 ">
           <Breadcrumb />
           <Routes data-testid="routes">
             <Route
               index
-              element={<Home events={missedEvents} userType={userType} />}
+              element={
+                <Home
+                  events={missedEvents}
+                  userType={userType}
+                  cartCount={cart.length}
+                />
+              }
             />
 
-            <Route path="order" element={<Order />} />
+            <Route path="cart" element={<Cart />} />
             <Route
               path="process/*"
               element={

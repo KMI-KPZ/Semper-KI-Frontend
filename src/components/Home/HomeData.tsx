@@ -68,8 +68,8 @@ export const HomeItemsData: IHomeItem[] = [
 
   {
     users: [0, 3],
-    title: "HomeData.order",
-    link: "/order",
+    title: "HomeData.cart",
+    link: "/cart",
     icon: <ShoppingCartIcon fontSize="large" />,
   },
   {

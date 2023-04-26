@@ -28,8 +28,8 @@ export const HeaderItemsData: IHeaderItem[] = [
     loggedIn: [false],
   },
   {
-    title: "HeaderData.order",
-    link: "/order",
+    title: "HeaderData.cart",
+    link: "/cart",
     icon: <ShoppingCartIcon fontSize="large" />,
     extern: false,
     preferred: EHeaderItemPreferred.header,

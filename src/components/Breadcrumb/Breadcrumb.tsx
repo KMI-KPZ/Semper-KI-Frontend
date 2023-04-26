@@ -31,17 +31,17 @@ const Breadcrumb: React.FC<Props> = () => {
 
   // splittet.length > 1 ? (
   return (
-    <nav className="text-left w-full hidden md:block pl-14">
+    <nav className="text-left w-full hidden md:block p-3 text-lg font-bold">
       {splittet.map((name: string, index: number) => (
         <React.Fragment key={index}>
           <a
-            className="p-2 hover:bg-white"
+            className="p-1 hover:text-türkis hover:cursor-pointer duration-300 "
             href={generateLink(index)}
             onClick={(e) => handleOnClick(e, index)}
           >
             {name}
           </a>
-          {index + 1 < splittet.length ? " > " : null}
+          <span className="">{index + 1 < splittet.length ? " > " : null}</span>
         </React.Fragment>
       ))}
     </nav>

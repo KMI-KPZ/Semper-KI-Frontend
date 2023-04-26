@@ -22,11 +22,11 @@ const cardsProvide: ICardItem[] = [
 ];
 const cardGoupsIndex: ICardGroup[] = [
   {
-    path: "use",
+    title: "use",
     cards: cardsUse,
   },
   {
-    path: "provide",
+    title: "provide",
     cards: cardsProvide,
   },
 ];
@@ -36,11 +36,15 @@ const ServiceRoutes: React.FC = () => {
     <Routes>
       <Route
         index
-        element={<CardView path="service" cardGroups={cardGoupsIndex} />}
+        element={
+          <CardView title="ServiceRoutes.title" cardGroups={cardGoupsIndex} />
+        }
       />
       <Route
         path="use"
-        element={<CardView path="service.use" cards={cardsUse} />}
+        element={
+          <CardView title="service.use" cardGroups={[{ cards: cardsUse }]} />
+        }
       />
       <Route path="use/produce" element={<Navigate to="/process/model" />} />
       <Route path="use/design" element={<h2>Entwerfen lassen</h2>} />
@@ -50,7 +54,12 @@ const ServiceRoutes: React.FC = () => {
       />
       <Route
         path="provide"
-        element={<CardView path="service.provide" cards={cardsProvide} />}
+        element={
+          <CardView
+            title="service.provide"
+            cardGroups={[{ cards: cardsProvide }]}
+          />
+        }
       />
       <Route
         path="provide/produce"

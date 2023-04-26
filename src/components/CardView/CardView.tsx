@@ -1,39 +1,36 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Card from "./Card";
-// import "./CardView.scss";
 
 interface Props {
-  path: string;
-  onClickCard?(link: string): void;
-  cardGroups?: ICardGroup[];
-  cards?: ICardItem[];
-  children?: JSX.Element;
+  cardGroups: ICardGroup[];
+  title: string;
+  subtitle?: string;
 }
 
 export interface ICardGroup {
-  path: string;
+  title?: string;
   cards: ICardItem[];
 }
 
 export interface ICardItem {
   title: string;
   link: string;
-  icon?: string;
+  icon?: React.ReactNode;
+  onClick?(): void;
 }
 
 const CardView: React.FC<Props> = (props) => {
-  const { path, cards, cardGroups, onClickCard, children } = props;
+  const { cardGroups, subtitle, title } = props;
   const { t } = useTranslation();
 
-  const renderCards = (cards: ICardItem[], prefix: string[]): JSX.Element => (
+  const renderCards = (cards: ICardItem[]): JSX.Element => (
     <div className="flex flex-col md:flex-row md:flex-wrap items-center justify-center gap-5 w-full">
       {cards.map((carditem: ICardItem, cardIndex: number) => (
         <Card
-          onClickCard={onClickCard}
+          onClickCard={carditem.onClick}
           carditem={carditem}
           key={cardIndex}
-          prefix={prefix}
         />
       ))}
     </div>
@@ -41,24 +38,23 @@ const CardView: React.FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col gap-5 justify-center items-center w-full p-4 md:p-0 max-w-7xl">
-      <h1 className="text-center">{t(`card-view.${path}.title`)}</h1>
-      {children}
-      {cardGroups !== undefined ? (
-        <div className="flex flex-col gap-5 justify-center items-center w-full">
-          {cardGroups.map((cardgroup: ICardGroup, index: number) => (
-            <div
-              className="flex flex-col gap-5 justify-center items-center w-full"
-              key={index}
-            >
-              <h2 className="text-center">
-                {t(`card-view.${path}.${cardgroup.path}.title`)}
-              </h2>
-              {renderCards(cardgroup.cards, [path, cardgroup.path])}
-            </div>
-          ))}
-        </div>
+      <h1 className="text-center">{t(title)}</h1>
+      {subtitle !== undefined ? (
+        <h2 className="text-center">{t(subtitle)}</h2>
       ) : null}
-      {cards !== undefined ? renderCards(cards, [path]) : null}
+      <div className="flex flex-col gap-5 justify-center items-center w-full">
+        {cardGroups.map((cardgroup: ICardGroup, index: number) => (
+          <div
+            className="flex flex-col gap-5 justify-center items-center w-full"
+            key={index}
+          >
+            {cardgroup.title !== undefined ? (
+              <h3 className="text-center">{t(cardgroup.title)}</h3>
+            ) : null}
+            {renderCards(cardgroup.cards)}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -56,6 +56,9 @@ const useCart = (): ReturnProps => {
           console.log("useCart | updateCart ✅ |", res.data, cart);
           return res;
         }),
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries(["cart"]);
+    },
   });
 
   return { cart, status, error, uploadCart };

@@ -10,7 +10,7 @@ const Badge: React.FC<Props> = (props) => {
 
   return (
     <div className="relative w-fit h-fit">
-      <div className="absolute -top-2 -right-3 bg-orange text-white rounded-full p-0 h-6 w-fit min-w-[1.5rem] flex items-center justify-center text-base font-bold">
+      <div className="absolute -top-2 -right-2 bg-orange text-white rounded-full p-0 px-1 h-6 w-fit min-w-[1.5rem] flex items-center justify-center text-base font-bold">
         {count}
       </div>
       {children}

@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { getIconByName } from "../../constants/Icons";
 import Badge from "../General/Badge";
 import { IHomeItem } from "./Home";
 
@@ -23,7 +22,7 @@ const HomeItem: React.FC<Props> = (props) => {
 
   return (
     <a
-      className="flex flex-col w-full md:w-5/12 justify-center items-center gap-1 bg-white p-2 md:p-3 hover:bg-gray-300 shadow-md md:min-w-[300px]"
+      className="flex flex-col w-full md:w-5/12 justify-center items-center gap-1 bg-white p-2 md:p-3 hover:bg-gray-300 shadow-md md:min-w-[300px] text-lg"
       onClick={handleOnClickCard}
       href={homeItem.link}
     >

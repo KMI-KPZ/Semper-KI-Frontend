@@ -226,13 +226,14 @@ const App: React.FC = () => {
       }}
     >
       <div
-        className={`flex flex-col justify-between min-h-screen font-ptsans items-center gap-3
+        className={`flex flex-col justify-between min-h-screen font-ptsans items-center gap-5 p-5
+         text-base
         ${stopScroll === true ? "overflow-hidden h-screen w-screen" : ""}`}
         data-testid="app"
       >
         <Header isLoggedIn={isLoggedIn} userType={userType} />
-        <Breadcrumb />
-        <main className="w-full max-w-[1600px] flex flex-col justify-start items-center flex-grow">
+        <main className="w-full md:w-5/6 flex flex-col justify-start items-center p-2 flex-grow bg-opacity-80 bg-slate-200 ">
+          <Breadcrumb />
           <Routes data-testid="routes">
             <Route
               index
@@ -275,8 +276,8 @@ const App: React.FC = () => {
           </Routes>
         </main>
         <Footer />
-        <Background />
       </div>
+      <Background />
     </AppContext.Provider>
   );
 };

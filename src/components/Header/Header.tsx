@@ -13,6 +13,7 @@ import { IconArrowR, IconX } from "../../constants/Icons";
 import { HeaderItemsData } from "./HeaderData";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import useCart from "../../hooks/useCart";
 
 interface Language {
   code: string;
@@ -46,6 +47,7 @@ interface State {
 export const Header: React.FC<Props> = (props) => {
   const { isLoggedIn, userType } = props;
   const { setAppState } = useContext(AppContext);
+  const { cart } = useCart();
   const navigate = useNavigate();
   const { i18n } = useTranslation();
   const [state, setState] = useState<State>({
@@ -149,9 +151,11 @@ export const Header: React.FC<Props> = (props) => {
           key={index}
           closeMenus={closeMenus}
           headeritem={headerItem}
+          badge={
+            headerItem.title === "HeaderData.order" ? cart.length : undefined
+          }
         />
       ))}
-      {renderLanguageMenu}
     </ul>
   );
   const renderMenuItems = (mobile: boolean): JSX.Element => {
@@ -191,6 +195,7 @@ export const Header: React.FC<Props> = (props) => {
             >
               <CloseIcon fontSize="large" />
             </div>
+            {renderLanguageMenu}
           </div>
         )}
         {HeaderItemsData.filter(
@@ -229,14 +234,13 @@ export const Header: React.FC<Props> = (props) => {
         alt="Kiss Logo"
       />
       <div className="flex flex-col justify-start items-end gap-0 text-inherit">
-        <h3 className="font-bold text-inherit" data-testid="logoName">
+        <h3 className="font-bold text-3xl" data-testid="logoName">
           SEMPER-KI
         </h3>
         {/* <h4 className="text-türkis text-sm">Blog</h4> */}
       </div>
     </a>
   );
-
   const renderMenuButton: JSX.Element = (
     <li
       className="group hover:text-türkis hover:cursor-pointer duration-300 flex items-center justify-center p-2"
@@ -252,7 +256,6 @@ export const Header: React.FC<Props> = (props) => {
       </a>
     </li>
   );
-
   const renderMenu: JSX.Element = (
     <>
       <div
@@ -289,7 +292,7 @@ export const Header: React.FC<Props> = (props) => {
   return (
     <header
       data-testid="header"
-      className="flex justify-between items-center flex-row relative shadow-lg bg-white w-full"
+      className="flex justify-between items-center flex-row shadow-lg bg-white w-full"
     >
       <nav className="m-3">{renderHomeButton}</nav>
       <nav className="m-3 flex flex-row justify-center items-center gap-4">

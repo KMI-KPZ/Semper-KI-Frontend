@@ -1,6 +1,7 @@
 import { IModel } from "../../../interface/Interface";
 import React from "react";
 import Button from "../../General/Button";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   model: IModel;
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export const ModelCard: React.FC<Props> = (props) => {
+  const { t } = useTranslation();
   const { model, selectModel, grid, openModelView } = props;
   const handleOnClickSelect = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -63,8 +65,10 @@ export const ModelCard: React.FC<Props> = (props) => {
         </div>
         {grid === false ? (
           <div className="hidden md:flex flex-col gap-2 items-center justify-center">
-            <div>Lizens: {model.license}</div>
-            <div>Zertifikate:</div>
+            <div>
+              {t("Process.Model.ModelCard.license")}: {model.license}
+            </div>
+            <div>{t("Process.Model.ModelCard.certificates")}:</div>
             {model.certificate.map((title: string, index: number) => (
               <div key={index}>{title}</div>
             ))}
@@ -75,7 +79,9 @@ export const ModelCard: React.FC<Props> = (props) => {
             grid === true ? "flex-row" : "flex-col"
           }`}
         >
-          <Button onClick={handleOnClickSelect}>Auswählen</Button>
+          <Button onClick={handleOnClickSelect}>
+            {t("Process.Model.ModelCard.button.select")}
+          </Button>
         </div>
       </div>
     </div>

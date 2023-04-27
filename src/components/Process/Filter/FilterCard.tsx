@@ -39,7 +39,7 @@ const FilterCard: React.FC<Props> = (props) => {
     <div className="bg-gray-100 p-3">
       <div className="flex flex-row justify-between items-center">
         <h3>
-          {t(`FilterCard.category.${category.title}`)}
+          {t(`Process.Filter.FilterCard.category.${category.title}`)}
           {getCountOfChecktItems()}
         </h3>
         <IconButton

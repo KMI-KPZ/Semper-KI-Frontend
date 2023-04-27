@@ -21,6 +21,8 @@ import Header from "./Header/Header";
 import useProcessData from "../../hooks/useProcessData";
 import useCart from "../../hooks/useCart";
 import { checkForSelectedData } from "../../services/utils";
+import { useTranslation } from "react-i18next";
+import LoadingSuspense from "../General/LoadingSuspense";
 
 interface Props {
   selectedProgressItem?: { index: number; progress: string };
@@ -85,6 +87,7 @@ export const ProcessContext = createContext<IProcessContext>({
 
 export const ProcessView: React.FC<Props> = (props) => {
   const { guideAnswers, isLoggedInResponse, selectedProgressItem } = props;
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [state, setState] = useState<IProcessState>(initialProcessState());
   const setChangesFalse = () => {
@@ -224,53 +227,36 @@ export const ProcessView: React.FC<Props> = (props) => {
     };
     switch (path) {
       case "model":
-        progress = { title: "Modell finden", link: "/process/model", type: 0 };
+        progress = {
+          title: t("Process.ProcessView.path.model"),
+          link: "/process/model",
+          type: 0,
+        };
         break;
       case "upload":
         progress = {
-          title: "Modell/e hochladen",
+          title: t("Process.ProcessView.path.upload"),
           link: "/process/upload",
           type: 1,
         };
         break;
       case "material":
         progress = {
-          title: "Material finden",
+          title: t("Process.ProcessView.path.material"),
           link: "/process/material",
-          type: 0,
-        };
-        break;
-      case "procedure":
-        progress = {
-          title: "Verfahren finden",
-          link: "/process/procedure",
-          type: 0,
-        };
-        break;
-      case "manufacturer":
-        progress = {
-          title: "Hersteller finden",
-          link: "/process/manufacturer",
           type: 0,
         };
         break;
       case "postprocessing":
         progress = {
-          title: "Nachbearbeitung hinzufügen",
+          title: t("Process.ProcessView.path.postprocessing"),
           link: "/process/postprocessing",
-          type: 1,
-        };
-        break;
-      case "additive":
-        progress = {
-          title: "Zusatz hinzufügen",
-          link: "/process/additive",
           type: 1,
         };
         break;
       default:
         progress = {
-          title: "Modell/e hochladen",
+          title: t("Process.ProcessView.path.model"),
           link: "/process/model",
           type: 1,
         };
@@ -356,21 +342,6 @@ export const ProcessView: React.FC<Props> = (props) => {
     }));
   };
 
-  if (status === "loading")
-    return (
-      <div className="flex flex-col items-center justify-center w-full h-full">
-        <h1 className="text-center p-2 bg-white w-full">Laden...</h1>
-      </div>
-    );
-  if (status === "error" && error !== null)
-    return (
-      <div className="flex flex-col items-center justify-center w-full h-full">
-        <h1 className="text-center p-2 bg-white w-full">
-          Error: {error.message}
-        </h1>
-      </div>
-    );
-
   return (
     <ProcessContext.Provider
       value={{
@@ -384,84 +355,85 @@ export const ProcessView: React.FC<Props> = (props) => {
         searchModels,
       }}
     >
-      <div className="relativ flex flex-col xl:flex-row gap-10">
-        <Filter
-          setFilterOpen={setFilterOpen}
-          filterOpen={filterOpen}
-          filters={filters}
-          applyFilters={applyFilters}
-          guideAnswers={guideAnswers}
-          progress={progress}
-        />
-        <div className="flex flex-col gap-10 max-w-6xl p-5 w-full xl:w-[1152px]">
-          <Header />
-          <Routes>
-            <Route index element={<Navigate to="/process/model" />} />
-
-            <Route
-              path="new"
-              element={<NewProcess startNewProcess={startNewProcess} />}
-            />
-            <Route
-              path="model"
-              element={
-                <ModelCatalog
-                  processState={state}
-                  models={models}
-                  selectedModel={
-                    items[activeItemIndex] !== undefined &&
-                    items[activeItemIndex].model !== undefined
-                      ? items[activeItemIndex].model
-                      : undefined
-                  }
-                  selectModel={selectModel}
-                  deselectModel={deselectModel}
-                  setProgress={setProgress}
-                />
-              }
-            />
-            <Route
-              path="upload"
-              element={
-                <ModelUpload
-                  createProcessItem={createProcessItem}
-                  setProgress={setProgress}
-                />
-              }
-            />
-            <Route
-              path="material"
-              element={
-                <MaterialCatalog
-                  deselectMaterial={deselectMaterial}
-                  selectedMaterial={
-                    items[activeItemIndex] !== undefined &&
-                    items[activeItemIndex].material !== undefined
-                      ? items[activeItemIndex].material
-                      : undefined
-                  }
-                  processState={state}
-                  materials={materials}
-                  selectMaterial={selectMaterial}
-                  setProgress={setProgress}
-                />
-              }
-            />
-            <Route
-              path="postprocessing"
-              element={
-                <PostProcessingView
-                  processState={state}
-                  postprocessings={postProcessing}
-                  selectPostProcessings={selectPostProcessings}
-                  setProgress={setProgress}
-                />
-              }
-            />
-            <Route path="*" element={<Error />} />
-          </Routes>
+      <LoadingSuspense status={status} error={error}>
+        <div className="relativ flex flex-col xl:flex-row gap-10">
+          <Filter
+            setFilterOpen={setFilterOpen}
+            filterOpen={filterOpen}
+            filters={filters}
+            applyFilters={applyFilters}
+            guideAnswers={guideAnswers}
+            progress={progress}
+          />
+          <div className="flex flex-col gap-10 max-w-6xl p-5 w-full xl:w-[1152px]">
+            <Header />
+            <Routes>
+              <Route index element={<Navigate to="/process/model" />} />
+              <Route
+                path="new"
+                element={<NewProcess startNewProcess={startNewProcess} />}
+              />
+              <Route
+                path="model"
+                element={
+                  <ModelCatalog
+                    processState={state}
+                    models={models}
+                    selectedModel={
+                      items[activeItemIndex] !== undefined &&
+                      items[activeItemIndex].model !== undefined
+                        ? items[activeItemIndex].model
+                        : undefined
+                    }
+                    selectModel={selectModel}
+                    deselectModel={deselectModel}
+                    setProgress={setProgress}
+                  />
+                }
+              />
+              <Route
+                path="upload"
+                element={
+                  <ModelUpload
+                    createProcessItem={createProcessItem}
+                    setProgress={setProgress}
+                  />
+                }
+              />
+              <Route
+                path="material"
+                element={
+                  <MaterialCatalog
+                    deselectMaterial={deselectMaterial}
+                    selectedMaterial={
+                      items[activeItemIndex] !== undefined &&
+                      items[activeItemIndex].material !== undefined
+                        ? items[activeItemIndex].material
+                        : undefined
+                    }
+                    processState={state}
+                    materials={materials}
+                    selectMaterial={selectMaterial}
+                    setProgress={setProgress}
+                  />
+                }
+              />
+              <Route
+                path="postprocessing"
+                element={
+                  <PostProcessingView
+                    processState={state}
+                    postprocessings={postProcessing}
+                    selectPostProcessings={selectPostProcessings}
+                    setProgress={setProgress}
+                  />
+                }
+              />
+              <Route path="*" element={<Error />} />
+            </Routes>
+          </div>
         </div>
-      </div>
+      </LoadingSuspense>
     </ProcessContext.Provider>
   );
 };

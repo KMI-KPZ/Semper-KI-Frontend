@@ -3,6 +3,7 @@ import { IModel } from "../../../interface/Interface";
 import CloseIcon from "@mui/icons-material/Close";
 import { getModelURI } from "../../../services/utils";
 import Button from "../../General/Button";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   model: IModel;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export const ModelPreView: React.FC<Props> = (props) => {
+  const { t } = useTranslation();
   const { model, selectModel, closeModelView } = props;
   const getDate = (): string => {
     let date: Date = new Date(model.date);
@@ -43,19 +45,25 @@ export const ModelPreView: React.FC<Props> = (props) => {
           </div>
         ))}
       </div>
-      <div className="model-view-date">Erstellt am: {getDate()}</div>
-      <div className="model-view-licens">Lizenz: {model.license}</div>
+      <div className="model-view-date">
+        {t("Process.Model.ModelPreView.created")}: {getDate()}
+      </div>
+      <div className="model-view-licens">
+        {t("Process.Model.ModelPreView.license")}: {model.license}
+      </div>
       <div className="model-view-certificates">
-        Zertifikate:{" "}
+        {t("Process.Model.ModelPreView.certificates")}:
         {model.certificate.length > 0
           ? model.certificate.map((title: string, index: number) => (
               <div className="model-view-certificate" key={index}>
                 {title}
               </div>
             ))
-          : "keine"}
+          : t("Process.Model.ModelPreView.noCertificates")}
       </div>
-      <Button onClick={handleOnClickButtonSelect}>Auswählen</Button>
+      <Button onClick={handleOnClickButtonSelect}>
+        {t("Process.Model.ModelPreView.button.select")}
+      </Button>
     </div>
   );
 };

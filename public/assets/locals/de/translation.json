@@ -317,7 +317,13 @@
         "FText":{},
         "FTextArea":{}
       },
-      "Filter":{},
+      "Filter":{
+        "header":"Vorgaben",
+        "button":{
+          "reset":"Zurücksetzen",
+          "apply":"Anwenden"
+        }
+      },
       "FilterCard":{
         "category":{
           "general":"Allgemein",
@@ -335,9 +341,15 @@
     "Header":{
       "Cart":{
         "Cart":{},
-        "CartItem":{}
+        "CartItem":{
+          "item":"Artikel",
+          "upload":"Modell Hochladen",
+          "new":"Artikel erstellen"
+        }
       },
-      "Search":{},
+      "Search":{
+        "placeholder":"Suche ..."
+      },
       "StatusIcon":{},
       "Wizard": {
         "Wizard":{
@@ -350,34 +362,92 @@
       "Header":{}
     },
     "Material":{
-      "MaterialCatalog":{},
-      "MaterialCatalogCard":{},
+      "MaterialCatalog":{
+        "empty":"keine Materialien gefunden"
+      },
+      "MaterialCatalogCard":{
+        "button":{
+          "select":"Auswählen"
+        }
+      },
       "MaterialPreView":{},
-      "MaterialView":{}
+      "MaterialView":{
+        "button":{
+          "change":"Ändern"
+        }
+      }
     },
     "Model":{
-      "ModelCard":{},
-      "ModelCatalog":{},
-      "ModelPreView":{},
+      "ModelCard":{
+        "license":"Lizenz",
+        "certificates":"Zertifikate",
+        "button":{
+          "select":"Auswählen"
+        }
+      },
+      "ModelCatalog":{
+        "upload":"Modell Hochladen",
+        "button":{
+          "upload":"Link Modell Hochladen",
+          "select":"Auswählen"
+        },
+        "empty":"keine Modelle gefunden"
+      },
+      "ModelPreView":{
+        "created":"Erstellt am",
+        "license":"Lizenz",
+        "certificates":"Zertifikate",
+        "noCertificates":"keine",
+        "button":{
+          "select":"Auswählen"
+        }
+      },
       "ModelUpload": {
-        "headline": "Modell hochladen",
+        "header": "Modell hochladen",
+        "loading":"Hochladen...",
         "error": "Bitte einen der folgenden Dateitypen hochladen .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF",
         "card": {
-          "headline": "Modell hochladen per Dran & Drop",
+          "header": "Modell hochladen per Dran & Drop",
           "text": "( .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF)"
         },
-        "next": "Weiter"
+        "button":{
+          "upload": "Hochladen"
+        }
       },
-      "ModelView":{}
+      "ModelView":{
+        "created":"Erstellt am",
+        "license":"Lizenz",
+        "certificates":"Zertifikate",
+        "empty":"keine",
+        "button":{
+          "change":"Ändern"
+        }
+      }
     },
     "PostProcessing":{
-      "Catalog":{},
-      "ItemCard":{},
+      "Catalog":{
+        "empty":"keine Nachbearbeitungen gefunden"
+      },
+      "ItemCard":{
+        "button":{
+          "select":"Auswählen",
+          "deselect":"Entfernen"
+        }
+      },
       "ItemView":{},
       "PostProcessingView":{}
     },
-    "NewProcess":{},
-    "ProcessView":{}
+    "NewProcess":{
+      "header":"neue Bestellung Starten"
+    },
+    "ProcessView":{
+      "path":{
+        "model":"Modell finden",
+        "upload":"Modell/e hochladen",
+        "material":"Material finden",
+        "postprocessing":"Nachbearbeitung hinzufügen"
+      }
+    }
   },
   "Profil":{
     "header": "Profil",

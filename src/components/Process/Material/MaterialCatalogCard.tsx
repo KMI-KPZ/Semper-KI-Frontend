@@ -56,7 +56,9 @@ export const MaterialCatalogCard: React.FC<Props> = (props) => {
             <div key={index}>{title}</div>
           ))}
         </div>
-        <Button onClick={handleOnClickSelect}>Auswählen</Button>
+        <Button onClick={handleOnClickSelect}>
+          {t("Process.Material.MaterialCatalogCard.button.select")}
+        </Button>
       </div>
     </div>
   );

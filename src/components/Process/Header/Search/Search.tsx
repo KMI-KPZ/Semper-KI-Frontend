@@ -5,12 +5,14 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import { ProcessContext } from "../../ProcessView";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import { useTranslation } from "react-i18next";
 
 const Search: React.FC = () => {
   const { processState, setGridState, searchModels, setFilterOpen } =
     useContext(ProcessContext);
   const [search, setSearch] = useState<string>("");
   const [touched, setTouched] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   const handleOnClickGridButton = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -49,7 +51,7 @@ const Search: React.FC = () => {
         <input
           type="text"
           className="border-none pl-5 w-[85%] bg-gray-200"
-          placeholder={"Suche ..."}
+          placeholder={t("Process.Header.Search.placeholder")}
           autoFocus
           value={search}
           onChange={handleOnChangeInput}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { IPostProcessing } from "../../../interface/Interface";
 import PopUp from "../../PopUp/PopUp";
 import ItemCard from "./ItemCard";
@@ -17,6 +18,7 @@ interface State<Item> {
 }
 
 const Catalog = <Item extends IPostProcessing>(props: Props<Item>) => {
+  const { t } = useTranslation();
   const { items, checkItem, grid, searchText } = props;
   const [state, setState] = useState<State<Item>>({
     popUp: false,
@@ -86,7 +88,7 @@ const Catalog = <Item extends IPostProcessing>(props: Props<Item>) => {
           </PopUp>
         </>
       ) : (
-        "nichts gefunden"
+        t("Process.PostProcessing.Catalog.empty")
       )}
     </div>
   );

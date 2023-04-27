@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { IModel } from "../../../interface/Interface";
 import { getModelURI } from "../../../services/utils";
 import Button from "../../General/Button";
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const ModelView: React.FC<Props> = (props) => {
+  const { t } = useTranslation();
   const { model, deselectModel } = props;
 
   const getDate = (): string => {
@@ -34,19 +36,25 @@ const ModelView: React.FC<Props> = (props) => {
           </div>
         ))}
       </div>
-      <div className="model-view-date">Erstellt am: {getDate()}</div>
-      <div className="model-view-licens">Lizenz: {model.license}</div>
+      <div className="model-view-date">
+        {t("Process.Model.ModelView.created")}: {getDate()}
+      </div>
+      <div className="model-view-licens">
+        {t("Process.Model.ModelView.license")}: {model.license}
+      </div>
       <div className="model-view-certificates">
-        Zertifikate:{" "}
+        {t("Process.Model.ModelView.certificates")}:
         {model.certificate.length > 0
           ? model.certificate.map((title: string, index: number) => (
               <div className="model-view-certificate" key={index}>
                 {title}
               </div>
             ))
-          : "keine"}
+          : t("Process.Model.ModelView.empty")}
       </div>
-      <Button onClick={deselectModel}>Ändern</Button>
+      <Button onClick={deselectModel}>
+        {t("Process.Model.ModelView.button.change")}
+      </Button>
     </div>
   );
 };

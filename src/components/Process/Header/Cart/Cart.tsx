@@ -10,10 +10,12 @@ import {
 } from "../../../../constants/Icons";
 import { IProcessItem } from "../../../../interface/Interface";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface Props {}
 
 const Cart: React.FC<Props> = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const {
     processState,
@@ -40,7 +42,7 @@ const Cart: React.FC<Props> = () => {
         <CartItem
           active={processState.activeItemIndex === -1}
           icon={IconUpload}
-          title="Upload"
+          title={t("Process.Header.Cart.CartItem.upload")}
           onClickCard={navigateToUpload}
           isItem={false}
         />
@@ -53,7 +55,7 @@ const Cart: React.FC<Props> = () => {
             icon={IconModel}
             title={
               processItem.title === undefined
-                ? `Item ${index + 1}`
+                ? `${t("Process.Header.Cart.CartItem.item")} ${index + 1}`
                 : processItem.title
             }
             onClickCard={selectItem}
@@ -63,7 +65,7 @@ const Cart: React.FC<Props> = () => {
         <CartItem
           active={false}
           icon={IconPlus}
-          title="Neu"
+          title={t("Process.Header.Cart.CartItem.new")}
           onClickCard={addNewItem}
           isItem={false}
         />

@@ -6,6 +6,7 @@ import PopUp from "../../PopUp/PopUp";
 import { MaterialView } from "./MaterialView";
 import { IProcessState } from "../ProcessView";
 import { MaterialPreView } from "./MaterialPreView";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   processState: IProcessState;
@@ -22,6 +23,7 @@ interface State {
 }
 
 export const MaterialCatalog: React.FC<Props> = (props) => {
+  const { t } = useTranslation();
   const {
     selectMaterial,
     setProgress,
@@ -97,7 +99,7 @@ export const MaterialCatalog: React.FC<Props> = (props) => {
           </PopUp>
         </>
       ) : (
-        "keine Materialien gefunden"
+        t("Process.Material.MaterialCatalog.empty")
       )}
     </div>
   ) : (

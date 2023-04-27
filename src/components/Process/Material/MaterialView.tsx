@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { IMaterial } from "../../../interface/Interface";
 import Button from "../../General/Button";
 
@@ -9,6 +10,7 @@ interface Props {
 
 export const MaterialView: React.FC<Props> = (props) => {
   const { deselectMaterial, material } = props;
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-5 items-center justify-start bg-white h-fit w-full p-5">
       <h2 className="">{material.title}</h2>
@@ -20,7 +22,9 @@ export const MaterialView: React.FC<Props> = (props) => {
           </div>
         ))}
       </div>
-      <Button onClick={deselectMaterial}>Ändern</Button>
+      <Button onClick={deselectMaterial}>
+        {t("Process.Material.MaterialView.button.change")}
+      </Button>
     </div>
   );
 };

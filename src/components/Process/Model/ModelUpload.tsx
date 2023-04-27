@@ -6,9 +6,9 @@ import { IconDelete, IconUpload } from "../../../constants/Icons";
 import { useNavigate } from "react-router-dom";
 import useModelUpload from "../../../hooks/useModelUpload";
 import { IModel } from "../../../interface/Interface";
-import LoadingAnimation from "../../Loading/LoadingAnimation";
 import Button from "../../General/Button";
 import LoadingSuspense from "../../General/LoadingSuspense";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 
 interface Props {
   setProgress(path: string): void;
@@ -141,13 +141,15 @@ export const ModelUpload: React.FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col p-5 gap-5 bg-white justify-center items-center">
-      {error && <div className="error">{t("ModelUpload.upload.error")}</div>}
+      {error && (
+        <div className="error">{t("Process.Model.ModelUpload.error")}</div>
+      )}
       <LoadingSuspense
         error={uploadError}
         status={status}
         animation
         text
-        loadingText="Upload..."
+        loadingText={t("Process.Model.ModelUpload.loading")}
       >
         <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
           {fileList.map((file: File, index: number) => (
@@ -188,11 +190,11 @@ export const ModelUpload: React.FC<Props> = (props) => {
             className="hidden"
           />
           <img src={IconUpload} className="h-40 w-40" alt="" />
-          <h2>{t("ModelUpload.upload.card.headline")}</h2>
-          {t("ModelUpload.card.text")}
+          <h2>{t("Process.Model.ModelUpload.card.header")}</h2>
+          {t("Process.Model.ModelUpload.card.text")}
         </div>
-        <Button onClick={handleClickNext}>
-          {t("ModelUpload.upload.next")}
+        <Button onClick={handleClickNext} icon={<FileUploadIcon />}>
+          {t("Process.Model.ModelUpload.button.upload")}
         </Button>
       </LoadingSuspense>
     </div>

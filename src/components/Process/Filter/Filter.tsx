@@ -180,7 +180,7 @@ const Filter: React.FC<Props> = (props) => {
             <CloseIcon fontSize="large" />
           </div>
         </div>
-        <h2 className="">{t("Filter.headline")}</h2>
+        <h2 className="">{t("Process.Filter.Filter.header")}</h2>
         {categoryList.map((category: ICategory, categoryIndex: number) => (
           <FilterCard
             category={category}
@@ -196,8 +196,12 @@ const Filter: React.FC<Props> = (props) => {
         ))}
       </div>
       <div className="flex justify-center gap-2 flex-col xl:flex-row text-white">
-        <Button onClick={handleOnClickResetButton}>Zurücksetzen</Button>
-        <Button onClick={handleOnClickApplyButton}>Anwenden</Button>
+        <Button onClick={handleOnClickResetButton}>
+          {t("Process.Filter.Filter.button.reset")}
+        </Button>
+        <Button onClick={handleOnClickApplyButton}>
+          {t("Process.Filter.Filter.button.apply")}
+        </Button>
       </div>
     </div>
   );

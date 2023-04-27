@@ -4,6 +4,7 @@ import { IPostProcessing } from "../../../interface/Interface";
 import { EPostProcessingOptionType } from "../../../interface/enums";
 import ItemCard from "./ItemCard";
 import Button from "../../General/Button";
+import { useTranslation } from "react-i18next";
 
 interface Props<Item> {
   item: Item;
@@ -13,6 +14,7 @@ interface Props<Item> {
 
 const ItemView = <Item extends IPostProcessing>(props: Props<Item>) => {
   const { closeItemView, item, checkItem } = props;
+  const { t } = useTranslation();
 
   const renderNumberInput = () => (
     <input className="border" type="number" min="0" />
@@ -70,7 +72,9 @@ const ItemView = <Item extends IPostProcessing>(props: Props<Item>) => {
         onClick={handleOnClickButton}
         style={item.checked ? "secondary" : "primary"}
       >
-        {item.checked ? "Entfernen" : "Auswählen"}
+        {item.checked
+          ? t("Process.PostProcessing.ItemCard.button.deselect")
+          : t("Process.PostProcessing.ItemCard.button.select")}
       </Button>
     </div>
   );

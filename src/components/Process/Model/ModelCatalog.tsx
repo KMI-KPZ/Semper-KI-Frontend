@@ -8,6 +8,7 @@ import ModelView from "./ModelView";
 import { IconUpload } from "../../../constants/Icons";
 import Button from "../../General/Button";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   processState: IProcessState;
@@ -24,6 +25,7 @@ interface State {
 }
 
 export const ModelCatalog: React.FC<Props> = (props) => {
+  const { t } = useTranslation();
   const {
     models,
     processState,
@@ -81,11 +83,13 @@ export const ModelCatalog: React.FC<Props> = (props) => {
             : "pl-10 w-44 max-h-44 min-h-full "
         }`}
         src={IconUpload}
-        alt="Button Uplaod"
+        alt={t("Process.Model.ModelCatalog.button.upload")}
       />
-      <h2 className="">Modell hochladen</h2>
+      <h2 className="">{t("Process.Model.ModelCatalog.upload")}</h2>
       <div className={`flex justify-center items-center p-3 gap-2`}>
-        <Button onClick={handleOnClickCardUpload}>Auswählen</Button>
+        <Button onClick={handleOnClickCardUpload}>
+          {t("Process.Model.ModelCatalog.button.select")}
+        </Button>
       </div>
     </div>
   );
@@ -126,7 +130,7 @@ export const ModelCatalog: React.FC<Props> = (props) => {
           </PopUp>
         </>
       ) : (
-        "keine Modelle gefunden"
+        t("Process.Model.ModelCatalog.empty")
       )}
     </div>
   ) : (

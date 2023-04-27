@@ -3,6 +3,7 @@ import useManufacturer from "../../../hooks/useManufacturer";
 import { IProcessItem } from "../../../interface/Interface";
 import Loading from "../../Loading/Loading";
 import { getModelURI } from "../../../services/utils";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   itemIndex: number;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const ManufacturerItem: React.FC<Props> = (props) => {
+  const { t } = useTranslation();
   const { itemIndex, processItem, manufacturerID, setManufacturerIndex } =
     props;
   const { data, error, status } = useManufacturer();
@@ -33,7 +35,7 @@ const ManufacturerItem: React.FC<Props> = (props) => {
             className="h-full max-w-xs"
           />
           <div className="flex flex-row md:flex-col gap-5 items-center justify-start">
-            <h3>Verfügbare Hersteller:</h3>
+            <h3>{t("AfterProcess.Manufacturer.ManufacturerItem.header")}</h3>
             {data !== undefined &&
               data.map((manufacturer, manufacturerIndex) => (
                 <div

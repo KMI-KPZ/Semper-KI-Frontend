@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { EGuideQuestionState } from "../../../interface/enums";
 import GOptions from "../Components/GOptions";
 import { IGuideOption, IGuideQuestion } from "../Interface";
@@ -12,10 +13,8 @@ interface Props {
 }
 
 const GuideOverview: React.FC<Props> = (props) => {
+  const { t } = useTranslation();
   const { questions, applyFilter, setOptions } = props;
-  // const handleOnClickCard = (filterId: number) => {
-  //   selectQuestion(filterId);
-  // };
 
   const handleOnClickButton = () => {
     applyFilter();
@@ -23,7 +22,7 @@ const GuideOverview: React.FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col gap-5 max-h-[80vh] bg-white overflow-y-auto p-5">
-      <h1>Überblick</h1>
+      <h1>{t("Guide.Overview.GuideOverview.header")}</h1>
       {questions.map((question: IGuideQuestion, index: number) => (
         <div
           className="guide-overview-question"
@@ -42,7 +41,7 @@ const GuideOverview: React.FC<Props> = (props) => {
         </div>
       ))}
       <Button variant="contained" onClick={(e) => handleOnClickButton()}>
-        Suchen
+        {t("Guide.Overview.GuideOverview.button.search")}
       </Button>
     </div>
   );

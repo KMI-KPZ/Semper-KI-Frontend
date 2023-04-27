@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useTransition } from "react";
+import { useTranslation } from "react-i18next";
 import { EGuideQuestionState } from "../../../interface/enums";
 import { IGuideOption, IGuideQuestion } from "../Interface";
 import GuideAnswer from "./GuideAnswer";
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const GuideAnswers: React.FC<Props> = (props) => {
+  const { t } = useTranslation();
   const { questions, activeQuestionIndex, setOptions } = props;
 
   const getProcessProgress = () => {
@@ -26,7 +28,9 @@ const GuideAnswers: React.FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col justify-start bg-white p-10 gap-5 h-80 xl:h-full overflow-x-hidden overflow-y-auto w-full">
-      <h2>Vorgaben {getProcessProgress()}</h2>
+      <h2>
+        {t("Guide.Answer.GuideAnswers.header")} {getProcessProgress()}
+      </h2>
       {questions
         .filter(
           (question: IGuideQuestion, index: number) =>

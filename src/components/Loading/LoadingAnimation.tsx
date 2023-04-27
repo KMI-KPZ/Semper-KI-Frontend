@@ -1,7 +1,5 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Icon3DPrinter } from "../../constants/Icons";
-// import "./LoadingAnimation.scss";
 
 interface Props {
   color?: string;
@@ -26,7 +24,7 @@ const LoadingAnimation: React.FC<Props> = (props) => {
   if (text)
     return (
       <div className="flex flex-row">
-        {t("loadingAnimation.text")}
+        {text}
         <div className={` ${state > 0 ? "" : "invisible"}`}>.</div>
         <div className={` ${state > 1 ? "" : "invisible"}`}>.</div>
         <div className={` ${state > 2 ? "" : "invisible"}`}>.</div>

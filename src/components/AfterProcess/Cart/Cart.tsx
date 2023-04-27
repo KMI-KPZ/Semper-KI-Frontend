@@ -8,6 +8,9 @@ import CartItem from "./CartItem";
 import { useTranslation } from "react-i18next";
 import { TError } from "../../../interface/types";
 import ErrorView from "../../General/ErrorView";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface Props {}
 
@@ -115,14 +118,19 @@ const Order: React.FC<Props> = (props) => {
         />
       ) : null}
       <section className="w-full text-white flex flex-col gap-5 md:flex-row justify-start items-center md:justify-center">
-        <Button onClick={handleOnClickEdit}>
+        <Button onClick={handleOnClickEdit} icon={<EditIcon />}>
           {t("AfterProcess.Cart.Cart.edit")}
         </Button>
-        <Button active={errors.length === 0} onClick={handleOnClickSendRequest}>
-          {t("AfterProcess.Cart.Cart.request")}
+        <Button onClick={handleOnClickClear} icon={<DeleteIcon />}>
+          {t("AfterProcess.Cart.Cart.deleteCart")}
         </Button>
-        <Button onClick={handleOnClickClear}>
-          {t("AfterProcess.Cart.Cart.deleteCart ")}
+        <Button
+          active={errors.length === 0}
+          onClick={handleOnClickSendRequest}
+          icon={<ArrowForwardIcon />}
+          iconPos="back"
+        >
+          {t("AfterProcess.Cart.Cart.request")}
         </Button>
       </section>
     </div>

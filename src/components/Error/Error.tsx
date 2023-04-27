@@ -17,6 +17,7 @@ export const Error: React.FC<Props> = (props) => {
     >
       {text && <span data-testid="ErrorMessage">{text}</span>}
       <span data-testid="ErrorMessage">{t("Error.text")}</span>
+      <span data-testid="ErrorMessage">{t("Error.text2")}</span>
       <a
         className="flex justify-center items-center p-3 shadow-lg hover:bg-gray-300 border"
         data-testid="HomeButton"

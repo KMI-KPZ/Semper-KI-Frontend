@@ -21,7 +21,6 @@ import {
   PrivateRoutes,
 } from "../PrivateRoutes/PrivateRoutes";
 import Profil from "../Profil/Profil";
-import useAdmin from "../../hooks/useAdmin";
 import OrderCollectionOverview from "../Orders/OrderCollectionOverview";
 import "./../../styles.scss";
 import AdminUserView from "../Admin/AdminUserView";
@@ -46,6 +45,7 @@ import useMissedEvent from "../../hooks/useMissedEvent";
 import { useWebsocket } from "../../hooks/useWebsocket";
 import { useQueryClient } from "@tanstack/react-query";
 import useCart from "../../hooks/useCart";
+import { useTranslation } from "react-i18next";
 
 export interface IAppState {
   selectedProgressItem?: { index: number; progress: string };
@@ -82,13 +82,14 @@ export const AppContext = createContext<IAppContext>({
 
 const App: React.FC = () => {
   const [state, setState] = useState<IAppState>(initialState);
-  const queryClient = useQueryClient();
   const { stopScroll, guideFilter, selectedProgressItem, missedEvents } = state;
   const { isLoggedIn, userType, user, isLoggedInResponse } = useUser();
   const { initialMissedEvents } = useMissedEvent({
     isLoggedIn,
   });
   const { cart } = useCart();
+  const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (initialMissedEvents.length > 0)
@@ -215,8 +216,8 @@ const App: React.FC = () => {
   )
     return (
       <div className="flex flex-col items-center justify-center bg-white w-screen h-screen gap-5">
-        <h1 className="md:text-4xl xl:text-9xl">Semper-KI</h1>
-        <h2>Laden...</h2>
+        <h1 className="md:text-4xl xl:text-9xl">{t("App.title")}</h1>
+        <h2>{t("General.request.loading")}</h2>
       </div>
     );
 

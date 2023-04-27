@@ -48,7 +48,7 @@ export const Header: React.FC<Props> = (props) => {
   const { isLoggedIn, userType, cartCount } = props;
   const { setAppState } = useContext(AppContext);
   const navigate = useNavigate();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [state, setState] = useState<State>({
     menuOpen: false,
     languageMenuOpen: false,
@@ -234,7 +234,7 @@ export const Header: React.FC<Props> = (props) => {
       />
       <div className="flex flex-col justify-start items-end gap-0 text-inherit">
         <h3 className="font-bold text-3xl" data-testid="logoName">
-          SEMPER-KI
+          {t("Header.Header.title")}
         </h3>
         {/* <h4 className="text-türkis text-sm">Blog</h4> */}
       </div>

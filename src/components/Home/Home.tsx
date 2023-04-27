@@ -21,8 +21,6 @@ export interface IHomeItem {
 export const Home: React.FC<Props> = (props) => {
   const { userType, events, cartCount } = props;
   const { t } = useTranslation();
-  const prefix: string =
-    userType === EUserType.admin ? "dashboard.admin" : "dashboard";
 
   const getChangeCount = (): number | undefined => {
     if (events === undefined) return undefined;
@@ -58,7 +56,7 @@ export const Home: React.FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col gap-12 justify-start items-center">
-      <h1 className="">{t(`${prefix}.title`)}</h1>
+      <h1 className="">{t("Home.Home.header")}</h1>
       <div className="flex flex-row flex-wrap justify-center gap-5 p-4 md:p-0 items-center">
         {getHomeItems(userType).map((homeItem, index) => (
           <HomeItem

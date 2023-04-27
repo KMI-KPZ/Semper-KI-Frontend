@@ -7,6 +7,8 @@ import Button from "../../General/Button";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ErrorIcon from "@mui/icons-material/Error";
+import { useTranslation } from "react-i18next";
+import { count } from "console";
 
 interface Props {
   process: IProcessItem;
@@ -19,6 +21,7 @@ const CartItem: React.FC<Props> = (props) => {
   const { process, index, deleteItem } = props;
   const navigate = useNavigate();
   const { model, material, postProcessings } = process;
+  const { t } = useTranslation();
 
   const selectProgressItem = (progress: string) => {
     setAppState((prevState) => ({
@@ -81,7 +84,7 @@ const CartItem: React.FC<Props> = (props) => {
             ) : (
               <>
                 <h2>
-                  Model{" "}
+                  {t("AfterProcess.Cart.CartItem.model")}{" "}
                   {model === undefined ? <ErrorIcon color="error" /> : null}
                 </h2>
                 <span>---</span>
@@ -102,7 +105,7 @@ const CartItem: React.FC<Props> = (props) => {
             ) : (
               <>
                 <h2>
-                  Material{" "}
+                  {t("AfterProcess.Cart.CartItem.material")}{" "}
                   {material === undefined ? <ErrorIcon color="error" /> : null}
                 </h2>
                 <span>---</span>
@@ -117,7 +120,11 @@ const CartItem: React.FC<Props> = (props) => {
           >
             {postProcessings !== undefined ? (
               <>
-                <h2>Nachbearbeitungen</h2>
+                <h2>
+                  {t("AfterProcess.Cart.CartItem.postProcessing", {
+                    count: postProcessings.length,
+                  })}
+                </h2>
                 {postProcessings.map((postProcessing, index) => (
                   <span key={index}>
                     {postProcessing.title} {postProcessing.value}
@@ -127,7 +134,7 @@ const CartItem: React.FC<Props> = (props) => {
             ) : (
               <>
                 <h2>
-                  Nachbearbeitungen{" "}
+                  {t("AfterProcess.Cart.CartItem.postProcessing", { count: 2 })}{" "}
                   {postProcessings === undefined ? (
                     <ErrorIcon color="error" />
                   ) : null}

@@ -44,24 +44,29 @@
         "request":"Anfragen",
         "deleteCart":"Warenkorb löschen"
       },
-      "CartItem":{}
+      "CartItem":{
+        "model":"Modell",
+        "material":"Material",
+        "postProcessing_one":"Nachbearbeitung",
+        "postProcessing_other":"Nachbearbeitungen"
+      }
     },
     "Checkout":{
-       "Checkout": {
-      "title":"Bestellung überprüfen",
-      "button":{
-        "request":"Anfragen",
-        "printable":"Druckbarkeit überprüfen",
-        "logistics":"Lieferzeit berechnen",
-        "price":"Preis berechnen"
-      },
-      "error":{
-        "no-items":"keine Items vorhanden"
-      },
-      "success":{
-        "send":"Der Auftrag wurde Erfolgreich übermittelt!",
-        "redirect":"Sie werden nun zu Startseite weitergeleitet"
-      }
+      "Checkout": {
+        "title":"Bestellung überprüfen",
+        "button":{
+          "request":"Anfragen",
+          "printable":"Druckbarkeit überprüfen",
+          "logistics":"Lieferzeit berechnen",
+          "price":"Preis berechnen"
+        },
+        "error":{
+          "no-items":"keine Items vorhanden"
+        },
+        "success":{
+          "send":"Der Auftrag wurde Erfolgreich übermittelt!",
+          "redirect":"Sie werden nun zu Startseite weitergeleitet"
+        }
       },
       "CheckoutItem":{
         "printable":"Druckbarkeit",
@@ -70,12 +75,23 @@
       }
     },
     "Manufacturer":{
-      "ManufacturerItem":{},
-      "ManufacturerView":{}
+      "ManufacturerItem":{
+        "header":"Verfügbare Hersteller:"
+      },
+      "ManufacturerView":{
+        "header":"Hersteller auswählen",
+        "noManufacturerSelected":"Bitte bei jedem Item einen Hersteller auswählen!",
+        "button":{
+          "cart":"Warenkorb",
+          "checkOrder":"Bestellung überprüfen"
+        }
+      }
     }
    
   },
-  "App":{},
+  "App":{
+    "title":"Semper-KI"
+  },
   "Background":{},
   "Breadcrumb":{
     "home":"Startseite",
@@ -94,7 +110,8 @@
     "CardView":{}
   },
   "Error": {
-    "text":"404 Seite nicht gefunden oder etwas ist schiefgelaufen",
+    "text":"Seite nicht gefunden oder etwas ist schiefgelaufen",
+    "text2":"Falls sie diese Seite erreichen wollten laden sie Erneut oder kontaktieren sie unseren Support",
     "button":"Zurück zur Startseite"
   },
   "Footer":{
@@ -116,7 +133,9 @@
   "Guide":{
     "Answer":{
       "GuideAnswer":{},
-      "GuideAnsers":{}
+      "GuideAnswers":{
+        "header":"Vorgaben"
+      }
     },
     "Components":{
       "GButton":{},
@@ -126,16 +145,27 @@
       "GSelection":{}
     },
     "Overview":{
-      "GuideOverview":{}
+      "GuideOverview":{
+        "header":"Überblick",
+        "button":{
+          "search":"Suchen"
+        }
+      }
     },
     "Question":{
-      "GuideQuestion":{}
+      "GuideQuestion":{
+        "error":{
+          "missing":"Bitte mindestens eine Option auswählen"
+        }
+      }
     },
     "Guide":{},
     "GuideRoutes":{}
   },
   "Header":{
-    "Header":{},
+    "Header":{
+      "title":"Semper-KI"
+    },
     "HeaderData":{
       "about-us": "Über uns",
       "login": "Anmelden",
@@ -152,7 +182,9 @@
     "HeaderItem":{}
   },
   "Home":{
-    "Home":{},
+    "Home":{
+      "header":"Übersicht"
+    },
     "HomeData":{
       "explore": "Ausprobieren",
       "use-service": "Service in Anspruch nehmen",
@@ -174,7 +206,6 @@
     },
     "HomeItem":{}
   },
-  "ListView":{},
   "Loading":{
     "Loading":{},
     "LoadingAnimation":{

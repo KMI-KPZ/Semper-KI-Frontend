@@ -6,7 +6,7 @@ interface Props {}
 
 const Breadcrumb: React.FC<Props> = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { pathname } = useLocation();
   const splittet: string[] = pathname.split("/");
   if (splittet[0] === "" && splittet[1] === "") {
@@ -41,7 +41,7 @@ const Breadcrumb: React.FC<Props> = () => {
             href={generateLink(index)}
             onClick={(e) => handleOnClick(e, index)}
           >
-            {t(`Breadcrumb.${name}`)}
+            {i18n.exists(`Breadcrumb.${name}`) ? t(`Breadcrumb.${name}`) : name}
           </a>
         </React.Fragment>
       ))}

@@ -14,7 +14,7 @@ import MapIcon from "@mui/icons-material/Map";
 
 export const HeaderItemsData: IHeaderItem[] = [
   {
-    title: "HeaderData.about-us",
+    title: "Header.HeaderData.about-us",
     link: "https://semper-ki.org/",
     icon: "IconLogo",
     extern: true,
@@ -28,7 +28,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     loggedIn: [false],
   },
   {
-    title: "HeaderData.cart",
+    title: "Header.HeaderData.cart",
     link: "/cart",
     icon: <ShoppingCartIcon fontSize="large" />,
     extern: false,
@@ -37,7 +37,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     loggedIn: [true, false],
   },
   {
-    title: "HeaderData.login",
+    title: "Header.HeaderData.login",
     link: "/login",
     icon: <LoginIcon fontSize="large" />,
     extern: false,
@@ -51,7 +51,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     loggedIn: [false],
   },
   {
-    title: "HeaderData.logout",
+    title: "Header.HeaderData.logout",
     link: "/logout",
     icon: <LogoutIcon fontSize="large" />,
     extern: false,
@@ -65,7 +65,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     loggedIn: [true],
   },
   {
-    title: "HeaderData.guide",
+    title: "Header.HeaderData.guide",
     link: "/guide",
     icon: <MapIcon fontSize="large" />,
     extern: false,
@@ -74,7 +74,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     loggedIn: [true, false],
   },
   {
-    title: "HeaderData.orders",
+    title: "Header.HeaderData.orders",
     link: "/orders",
     icon: <DescriptionIcon fontSize="large" />,
     extern: false,
@@ -83,7 +83,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     loggedIn: [true],
   },
   {
-    title: "HeaderData.contracts",
+    title: "Header.HeaderData.contracts",
     link: "/contracts",
     icon: <DescriptionIcon fontSize="large" />,
     extern: false,
@@ -92,7 +92,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     loggedIn: [true],
   },
   {
-    title: "HeaderData.account",
+    title: "Header.HeaderData.account",
     link: "/account",
     icon: <PersonIcon fontSize="large" />,
     extern: false,
@@ -101,7 +101,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     loggedIn: [true],
   },
   {
-    title: "HeaderData.test",
+    title: "Header.HeaderData.test",
     link: "/test",
     icon: <BugReportIcon fontSize="large" />,
     extern: false,

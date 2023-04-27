@@ -8,22 +8,24 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { IMaterial } from "../../interface/Interface";
 
 interface Props {}
 
 const AdminMaterialView: React.FC<Props> = (props) => {
+  const { t } = useTranslation();
   const {} = props;
   return (
     <div className="admin-view">
-      <h1>Benutzer</h1>
+      <h1>{t("Admin.AdminMaterialView.header")}</h1>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 800 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>MaterialId</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>PropList</TableCell>
+              <TableCell>{t("Admin.AdminMaterialView.material-id")}</TableCell>
+              <TableCell>{t("Admin.AdminMaterialView.name")}</TableCell>
+              <TableCell>{t("Admin.AdminMaterialView.propList")}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

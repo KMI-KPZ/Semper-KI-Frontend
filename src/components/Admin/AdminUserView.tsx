@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { EUserType } from "../../interface/enums";
 import { IUser } from "../../interface/Interface";
 
@@ -15,19 +16,20 @@ interface Props {}
 
 const AdminUserView: React.FC<Props> = (props) => {
   const {} = props;
+  const { t } = useTranslation();
   return (
     <div className="admin-view">
-      <h1>Benutzer</h1>
+      <h1>{t("Admin.AdminUserView.header")}</h1>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 800 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Type</TableCell>
-              <TableCell>Erstellt</TableCell>
-              <TableCell>Zugegriffen</TableCell>
-              <TableCell>Aktualisiert</TableCell>
+              <TableCell>{t("Admin.AdminUserView.name")}</TableCell>
+              <TableCell>{t("Admin.AdminUserView.email")}</TableCell>
+              <TableCell>{t("Admin.AdminUserView.type")}</TableCell>
+              <TableCell>{t("Admin.AdminUserView.created")}</TableCell>
+              <TableCell>{t("Admin.AdminUserView.accessed")}</TableCell>
+              <TableCell>{t("Admin.AdminUserView.updated")}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

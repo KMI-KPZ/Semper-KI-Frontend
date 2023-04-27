@@ -1,5 +1,5 @@
 import React from "react";
-import { EServiceQuestionType, IServiceQuestion } from "../Interface";
+import { EServiceQuestionType, IServiceQuestion } from "./Interface";
 
 interface Props extends IServiceQuestion {
   index: number;

@@ -1,10 +1,12 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 
 interface Props {}
 
 const Breadcrumb: React.FC<Props> = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { pathname } = useLocation();
   const splittet: string[] = pathname.split("/");
   if (splittet[0] === "" && splittet[1] === "") {
@@ -29,19 +31,18 @@ const Breadcrumb: React.FC<Props> = () => {
     navigate(generateLink(index));
   };
 
-  // splittet.length > 1 ? (
   return (
     <nav className="text-left w-full hidden md:block p-3 text-lg font-bold">
       {splittet.map((name: string, index: number) => (
         <React.Fragment key={index}>
+          <span>{" > "}</span>
           <a
             className="p-1 hover:text-türkis hover:cursor-pointer duration-300 "
             href={generateLink(index)}
             onClick={(e) => handleOnClick(e, index)}
           >
-            {name}
+            {t(`Breadcrumb.${name}`)}
           </a>
-          <span className="">{index + 1 < splittet.length ? " > " : null}</span>
         </React.Fragment>
       ))}
     </nav>

@@ -141,7 +141,7 @@ export const ModelUpload: React.FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col p-5 gap-5 bg-white justify-center items-center">
-      {error && <div className="error">{t("model.upload.error")}</div>}
+      {error && <div className="error">{t("ModelUpload.upload.error")}</div>}
       <Loading
         error={uploadError}
         status={status}
@@ -188,10 +188,12 @@ export const ModelUpload: React.FC<Props> = (props) => {
             className="hidden"
           />
           <img src={IconUpload} className="h-40 w-40" alt="" />
-          <h2>{t("model.upload.card.headline")}</h2>
-          {t("model.upload.card.text")}
+          <h2>{t("ModelUpload.upload.card.headline")}</h2>
+          {t("ModelUpload.card.text")}
         </div>
-        <Button onClick={handleClickNext}>{t("model.upload.next")}</Button>
+        <Button onClick={handleClickNext}>
+          {t("ModelUpload.upload.next")}
+        </Button>
       </Loading>
     </div>
   );

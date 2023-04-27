@@ -180,7 +180,7 @@ const Filter: React.FC<Props> = (props) => {
             <CloseIcon fontSize="large" />
           </div>
         </div>
-        <h2 className="">{t("filter.headline")}</h2>
+        <h2 className="">{t("Filter.headline")}</h2>
         {categoryList.map((category: ICategory, categoryIndex: number) => (
           <FilterCard
             category={category}

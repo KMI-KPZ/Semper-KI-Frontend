@@ -16,7 +16,7 @@ export const Error: React.FC<Props> = (props) => {
       className="flex flex-col items-center text-center bg-white p-5 gap-5"
     >
       {text && <span data-testid="ErrorMessage">{text}</span>}
-      <span data-testid="ErrorMessage">{t("error.text")}</span>
+      <span data-testid="ErrorMessage">{t("Error.text")}</span>
       <a
         className="flex justify-center items-center p-3 shadow-lg hover:bg-gray-300 border"
         data-testid="HomeButton"
@@ -26,7 +26,7 @@ export const Error: React.FC<Props> = (props) => {
           navigate("/");
         }}
       >
-        {t("error.button")}
+        {t("Error.button")}
       </a>
     </div>
   );

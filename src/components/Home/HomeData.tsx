@@ -15,6 +15,7 @@ import PrintIcon from "@mui/icons-material/Print";
 import ExploreIcon from "@mui/icons-material/Explore";
 import MapIcon from "@mui/icons-material/Map";
 import HardwareIcon from "@mui/icons-material/Hardware";
+import ScienceIcon from "@mui/icons-material/Science";
 
 export const HomeItemsData: IHomeItem[] = [
   {
@@ -33,13 +34,13 @@ export const HomeItemsData: IHomeItem[] = [
     users: [3],
     title: "HomeData.explore",
     link: "/process/model",
-    icon: <ExploreIcon fontSize="large" />,
+    icon: <ScienceIcon fontSize="large" />,
   },
   {
     users: [0, 1, 3],
     title: "HomeData.guide",
     link: "/guide",
-    icon: <MapIcon fontSize="large" />,
+    icon: <ExploreIcon fontSize="large" />,
   },
   {
     users: [3],

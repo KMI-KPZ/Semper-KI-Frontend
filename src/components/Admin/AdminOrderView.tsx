@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { EOrderState } from "../../interface/enums";
 import { IOrder } from "../../interface/Interface";
 
@@ -15,18 +16,19 @@ interface Props {}
 
 const AdminOrderView: React.FC<Props> = (props) => {
   const {} = props;
+  const { t } = useTranslation();
   return (
     <div className="admin-view">
-      <h1>Benutzer</h1>
+      <h1>{t("Admin.AdminOrderView.header")}</h1>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 800 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>OrderId</TableCell>
-              <TableCell>Date</TableCell>
-              <TableCell>OrderState</TableCell>
-              <TableCell>ProcessList</TableCell>
-              <TableCell>Bill</TableCell>
+              <TableCell>{t("Admin.AdminOrderView.order-id")}</TableCell>
+              <TableCell>{t("Admin.AdminOrderView.date")}</TableCell>
+              <TableCell>{t("Admin.AdminOrderView.status")}</TableCell>
+              <TableCell>{t("Admin.AdminOrderView.cart")}</TableCell>
+              <TableCell>{t("Admin.AdminOrderView.bill")}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

@@ -5,44 +5,56 @@ import { IProcessItem } from "../../../interface/Interface";
 import Button from "../../General/Button";
 import { useQueryClient } from "@tanstack/react-query";
 import CartItem from "./CartItem";
+import { useTranslation } from "react-i18next";
+import { TError } from "../../../interface/types";
+import ErrorView from "../../General/ErrorView";
 
 interface Props {}
 
 interface State {
-  error: boolean;
   showError: boolean;
 }
 
 const Order: React.FC<Props> = (props) => {
   const {} = props;
+  const { t } = useTranslation();
   const navigate = useNavigate();
-  const [state, setState] = useState<State>({ error: false, showError: false });
-  const { error, showError } = state;
+  const [state, setState] = useState<State>({
+    showError: false,
+  });
+  const { showError } = state;
   const { cart, error: cartError, status, uploadCart } = useCart();
   const queryClient = useQueryClient();
 
-  const checkProcessOK = (processList: IProcessItem[]): boolean => {
-    return (
-      processList.length > 0 &&
-      processList.filter(
-        (item: IProcessItem) =>
-          item.model !== undefined &&
-          item.material !== undefined &&
-          item.postProcessings !== undefined
-      ).length > 0
-    );
+  const checkCart = (): { errors: TError[]; errorCount: number } => {
+    const errorCount = cart.filter(
+      (item: IProcessItem) =>
+        item.model === undefined ||
+        item.material === undefined ||
+        item.postProcessings === undefined
+    ).length;
+    let errors: TError[] = [];
+    if (cart.length === 0) errors.push("empty");
+    if (errorCount > 0 && cart.length > 0) errors.push("incomplete");
+    return { errors, errorCount };
   };
-
+  const { errors, errorCount } = checkCart();
   const handleOnClickEdit = () => {
     navigate("/process/model");
   };
 
   const handleOnClickSendRequest = () => {
-    if (checkProcessOK(cart)) navigate("/manufacturer");
+    if (errors.length === 0) navigate("/manufacturer");
     else {
-      setState((prevState) => ({ ...prevState, showError: true }));
+      setState((prevState) => ({
+        ...prevState,
+        showError: true,
+      }));
       setTimeout(() => {
-        setState((prevState) => ({ ...prevState, showError: false }));
+        setState((prevState) => ({
+          ...prevState,
+          showError: false,
+        }));
       }, 3000);
     }
   };
@@ -61,21 +73,25 @@ const Order: React.FC<Props> = (props) => {
   if (status === "loading")
     return (
       <div className="flex flex-col items-center justify-center w-full h-full">
-        <h1 className="text-center p-2 bg-white w-full">Laden...</h1>
+        <h1 className="text-center p-2 bg-white w-full">
+          {t("General.request.loading")}
+        </h1>
       </div>
     );
   if (status === "error" && cartError !== null)
     return (
       <div className="flex flex-col items-center justify-center w-full h-full">
         <h1 className="text-center p-2 bg-white w-full">
-          Error: {cartError.message}
+          {t("General.request.error")}: {cartError.message}
         </h1>
       </div>
     );
 
   return (
     <div className="flex flex-col items-center gap-5 w-full p-5">
-      <h1 className="text-center p-2 bg-white w-full">Auftrag</h1>
+      <h1 className="text-center p-2 bg-white w-full">
+        {t("AfterProcess.Cart.Cart.header")}
+      </h1>
       <section className="flex flex-col gap-5 items-center justify-start w-full">
         {cart.length > 0 ? (
           cart.map((process: IProcessItem, index: number) => (
@@ -87,20 +103,27 @@ const Order: React.FC<Props> = (props) => {
             />
           ))
         ) : (
-          <h2 className="text-center p-2 bg-white w-full">keine Produkte</h2>
+          <h2 className="text-center p-2 bg-white w-full">
+            {t("AfterProcess.Cart.Cart.noItems")}
+          </h2>
         )}
       </section>
       {showError === true ? (
-        <h2 className="text-red-500 text-bold">
-          Bitte die makierten Produkte vervollständigen
-        </h2>
+        <ErrorView
+          errors={errors}
+          itemName={t("AfterProcess.Cart.Cart.item", { count: errorCount })}
+        />
       ) : null}
       <section className="w-full text-white flex flex-col gap-5 md:flex-row justify-start items-center md:justify-center">
-        <Button onClick={handleOnClickEdit}>Bearbeiten</Button>
-        <Button active={!error} onClick={handleOnClickSendRequest}>
-          Anfragen
+        <Button onClick={handleOnClickEdit}>
+          {t("AfterProcess.Cart.Cart.edit")}
         </Button>
-        <Button onClick={handleOnClickClear}>Leeren</Button>
+        <Button active={errors.length === 0} onClick={handleOnClickSendRequest}>
+          {t("AfterProcess.Cart.Cart.request")}
+        </Button>
+        <Button onClick={handleOnClickClear}>
+          {t("AfterProcess.Cart.Cart.deleteCart ")}
+        </Button>
       </section>
     </div>
   );

@@ -20,9 +20,9 @@ import {
   PrivateManufacturerRoutes,
   PrivateRoutes,
 } from "../PrivateRoutes/PrivateRoutes";
-import Account from "../Account/Account";
+import Profil from "../Profil/Profil";
 import useAdmin from "../../hooks/useAdmin";
-import OrderCollectionOverview from "../OrderOverview/OrderCollectionOverview";
+import OrderCollectionOverview from "../Orders/OrderCollectionOverview";
 import "./../../styles.scss";
 import AdminUserView from "../Admin/AdminUserView";
 import AdminModelView from "../Admin/AdminModelView";
@@ -204,7 +204,7 @@ const App: React.FC = () => {
 
   const privateRoutes = (
     <Route element={<PrivateRoutes user={user} />}>
-      <Route path="account" element={<Account user={user!} />} />
+      <Route path="account" element={<Profil user={user!} />} />
       <Route path="test" element={<RequestTest user={user} />} />
     </Route>
   );

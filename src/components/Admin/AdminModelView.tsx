@@ -8,26 +8,27 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { IModel } from "../../interface/Interface";
 
 interface Props {}
 
 const AdminModelView: React.FC<Props> = (props) => {
   const {} = props;
-
+  const { t } = useTranslation();
   return (
     <div className="admin-view">
-      <h1>Modelle</h1>
+      <h1>{t("Admin.AdminModelView.header")}</h1>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 800 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Date</TableCell>
-              <TableCell>Lizens</TableCell>
-              <TableCell>Tags</TableCell>
-              <TableCell>Zertifikat</TableCell>
-              <TableCell>URI</TableCell>
+              <TableCell>{t("Admin.AdminModelView.name")}</TableCell>
+              <TableCell>{t("Admin.AdminModelView.date")}</TableCell>
+              <TableCell>{t("Admin.AdminModelView.license")}</TableCell>
+              <TableCell>{t("Admin.AdminModelView.tags")}</TableCell>
+              <TableCell>{t("Admin.AdminModelView.certificates")}</TableCell>
+              <TableCell>{t("Admin.AdminModelView.URI")}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

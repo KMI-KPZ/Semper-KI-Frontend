@@ -1,13 +1,13 @@
 import { IFilterItem } from "./Interface";
-import FSelection from "./components/FSelection";
-import FSliderSelection from "./components/FSliderSelection";
-import FSlider from "./components/FSlider";
-import FDate from "./components/FDate";
-import FText from "./components/FText";
-import FTextArea from "./components/FTextArea";
-import FColor from "./components/FColor";
-import FNumber from "./components/FNumber";
-import FMultiSelection from "./components/FMultiSelection";
+import FSelection from "./Components/FSelection";
+import FSliderSelection from "./Components/FSliderSelection";
+import FSlider from "./Components/FSlider";
+import FDate from "./Components/FDate";
+import FText from "./Components/FText";
+import FTextArea from "./Components/FTextArea";
+import FColor from "./Components/FColor";
+import FNumber from "./Components/FNumber";
+import FMultiSelection from "./Components/FMultiSelection";
 
 interface Props {
   filterItem: IFilterItem;

@@ -1,14 +1,14 @@
 [
     {
-        "title": "wizard.model",
+        "title": "Wizard.model",
         "links": ["/process/model","/process/upload"]
     },
     {
-        "title":"wizard.material",
+        "title":"Wizard.material",
         "links":["/process/material"]
     },
     {
-        "title":"wizard.post-processing",
+        "title":"Wizard.post-processing",
         "links":["/process/postprocessing"]
     }
 ]

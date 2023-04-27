@@ -1,315 +1,215 @@
 {
-  "card-view":{
-    "home":{
-      "title": "Willkommen bei Semper-KI!",
-      "try-out":"Ausprobieren",
-      "guide":"Hilfe",
-      "use-service":"Service Nutzen",
-      "provide-service":"Service Anbieten"
-      
+  "Admin":{
+    "AdminMaterialView":{
+      "header": "Materialien",
+      "material-id": "Material-ID",
+      "name": "Name",
+      "propList": "Eigenschaftenliste"
     },
-    "service":{
-      "title":"Service",
-      "use":{
-        "title":"Service Nutzen",
-        "produce":"Herstellen lassen",
-        "design":"Entwerfen lassen",
-        "accompany":"Gesamtprozess begleiten lassen"
+    "AdminModelView": {
+      "header": "Modelle",
+      "name": "Name",
+      "date": "Datum",
+      "license": "Lizenz",
+      "tags": "Tags",
+      "certificates": "Zertifikate",
+      "URI": "URI"
+    },
+    "AdminOrderView":{
+      "header": "Bestellungen",
+      "order-id": "Bestellnummer",
+      "date": "Datum",
+      "status": "Status",
+      "cart": "Warenkorb",
+      "bill": "Rechnung"
+    },
+    "AdminUserView":{
+      "header": "Benutzer",
+      "name": "Name",
+      "email": "Email",
+      "type": "Type",
+      "created": "Created",
+      "accessed": "Accessed",
+      "updated": "Updated"
+    }
+  },
+  "AfterProcess":{
+    "Cart":{
+      "Cart":{
+        "header":"Warenkorb",
+        "item_one":"das Produkt",
+        "item_other":"die Produkte",
+        "noItems":"keine Produkte",
+        "edit":"Bearbeiten",
+        "request":"Anfragen",
+        "deleteCart":"Warenkorb löschen"
       },
-      "provide":{
-        "title":"Service Anbieten",
-        "produce":"Herstellen",
-        "design":"Entwerfen",
-        "accompany":"Gesamtprozess begleiten"
+      "CartItem":{}
+    },
+    "Checkout":{
+       "Checkout": {
+      "title":"Bestellung überprüfen",
+      "button":{
+        "request":"Anfragen",
+        "printable":"Druckbarkeit überprüfen",
+        "logistics":"Lieferzeit berechnen",
+        "price":"Preis berechnen"
+      },
+      "error":{
+        "no-items":"keine Items vorhanden"
+      },
+      "success":{
+        "send":"Der Auftrag wurde Erfolgreich übermittelt!",
+        "redirect":"Sie werden nun zu Startseite weitergeleitet"
+      }
+      },
+      "CheckoutItem":{
+        "printable":"Druckbarkeit",
+        "logistics":"Lieferzeit",
+        "price":"Preis"
       }
     },
-    "guide":{
-      "title":"Hilfe zu den Folgenden Services",
-      "use":{
-        "title":"Service Nutzen",
-        "produce":"Herstellen lassen",
-        "design":"Entwerfen lassen",
-        "accompany":"Gesamtprozess begleiten lassen"
-      },
-      "provide":{
-        "title":"Service Anbieten",
-        "produce":"Herstellen",
-        "design":"Entwerfen",
-        "accompany":"Gesamtprozess begleiten"
-      }
-    }    
+    "Manufacturer":{
+      "ManufacturerItem":{},
+      "ManufacturerView":{}
+    }
+   
   },
-  "header": {
-    "about-us": "Über uns",
-    "login": "Anmelden",
-    "register": "Registrieren",
-    "logout":"Abmelden",
-    "order":"Bestellung",
-    "overview":"Übersicht",
-    "account":"Konto",
-    "new-process":"neu",
-    "contracts":"Aufträge",
-    "messages":"Nachrichten",
-    "have-it-made":"Herstellen lassen",
-    "find-model":"Modell finden",
-    "find-manufacturer":"Hersteller finden",
-    "let-design":"Modell entwerfen lassen",
-    "produce":"Herstellen",
-    "design":"Entwerfen",
-    "accompany":"Gesamtprozess begleiten",
-    "test":"Test"
+  "App":{},
+  "Background":{},
+  "Breadcrumb":{
+    "home":"Startseite",
+    "process":"Bestellung",
+    "model":"Modell",
+    "upload":"Modell Hochladen",
+    "material":"Material",
+    "postprocessing":"Nachbearbeitung",
+    "cart":"Warenkorb",
+    "manufacturer":"Hersteller",
+    "checkout":"Kasse",
+    "guide":"Wegweiser"
   },
-  "error": {
+  "CardView":{
+    "Card":{},
+    "CardView":{}
+  },
+  "Error": {
     "text":"404 Seite nicht gefunden oder etwas ist schiefgelaufen",
     "button":"Zurück zur Startseite"
   },
-  "wizard": {
-    "model": "Modell",
-    "material":"Material",
-    "procedure": "Verfahren",
-    "manufacturer": "Hersteller",
-    "post-processing": "Nachbearbeitung",
-    "additive": "Zusatz",
-    "overview": "Übersicht"
+  "Footer":{
+    "imprint":"Impressum",
+    "data-protection":"Datenschutzerklärung"
   },
-  "shopping-cart": {
-    "item": {
-      "headline":"Item",
-      "model": "Modell",
-      "material-procedure": "Material | Verfahren",
-      "manufacturer": "Hersteller",
-      "post-processing": "Nachbearbeitung",
-      "additive": "Zusatz",
-      "add": "{{buttonName}} Hinzufügen"
-    }
-  },
-  "model": {
-    "catalog": {
-      "headline":"Modelle",
-      "search-placeholder": "Ich benötige...",
-      "loading-error": "keine passende Modell mit den ausgewählten Filter gefunden",
-      "error-name": "Error: ",
-      "loading-models": "Modelle laden.."
-    },
-    "upload": {
-      "headline": "Modell hochladen",
-      "error": "Bitte einen der folgenden Dateitypen hochladen .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF",
-      "card": {
-        "headline": "Modell hochladen per Dran & Drop",
-        "text": "( .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF)"
-      },
-      "next": "Weiter"
-    }
-  },
-  "material": {
-    "catalog": {
-      "headline":"Materialien",
-      "search-placeholder": "Herstellen aus...",
-      "loading-error": "keine passende Materialien mit den ausgewählten Filter gefunden",
-      "error-name": "Error: ",
-      "loading-material": "Materialien laden..",
-      "filter": {
-        "top-materials": "Top-Materialien",
-        "plastic": "Plastik",
-        "metal": "Metall",
-        "keramik-glass": "Keramik/Glas"
-      },
-      "card": {
-        "price": "Preis",
-        "add": "Hinzufügen"
-      }
-    }
-  },
-  "manufacturer": {
-    "catalog": {
-      "headline":"Hersteller",
-      "search-placeholder": "Herstellen lassen bei...",
-      "loading-error": "Fehler beim laden der Hersteller",
-      "error-name": "Error: ",
-      "loading-manufacturer": "Hersteller laden...",
-      "filter": {
-        "top-manufacturer": "Top-Hersteller",
-        "distance": "Entfernung",
-        "time": "Geschwindigkeit",
-        "price": "Preis"
-      },
-      "card": {
-        "distance": "Entfernung",
-        "production-time": "Produktionszeit",
-        "deliver-time": "Lieferzeit",
-        "total-time": "Gesamtzeit",
-        "price": "Preis",
-        "add": "Hinzufügen"
-      }
-    }
-  },
-  "post-processing": {
-    "next": "Weiter",
-    "option": {
-      "text-area-placeholder": "Beschreibung zu den/dem "
-    }
-  },
-  "additive": {
-    "upload-headline": "Zusätzliche Dateien (technische Zeichnung usw.)",
-    "additional-text": {
-      "headline": "Zusätzliche Anmerkungen",
-      "placeholder": "Zusatztext..."
-    },
-    "next": "Weiter"
-  },
-  "overview": {
-    "order": "Bestellung",
-    "date": "Datum",
-    "state": "Status",
-    "models": {
-      "headline": "Modelle",
-      "no-model": "noch kein Model gewählt"
-    },
-    "manufacturer": "Hersteller",
-    "bill": "Rechnung",
-    "button": {
-      "edit": "Bearbeiten",
-      "delete": "Löschen",
-      "request": "Anfragen"
-    }
-  },
-  "nav":{
-    "headline":"Menu",
-    "dashboard.title":"Dashboard",
-    "proceedings":{
-      "title":"Verfahren",
-      "overview":"Übersicht",
-      "create":"Hinzufügen"
-    },
-    "assignments":{
-      "title":"Aufträge",
-      "overview":"Übersicht",
-      "new":"Neu",
-      "in-progress":"In Bearbeitung",
-      "finished":"Abgeschlossen",
-      "canceled":"Abgelehnt"
-    },
-    "account":{
-      "title":"Konto",
-      "overview":"Übersicht",
-      "edit":"Bearbeiten",
-      "logout":"Abmelden"
-    },
-    "messages":{
-      "title":"Nachrichten",
-      "new":"Neu"
-    },
-    "shoppingcart.title":"Warenkorb",
-    "orders": {
-      "title":"Bestellungen",
-      "overview":"Übersicht",
-      "in-progress":"In Bearbeitung",
-      "finished":"Abgeschlossen"
-    }
-  },
-  "dashboard":{
-    "title":"Übersicht",
-    "new-contract":"neuer Auftrag",
-    "continue-contract":"Auftrag fortsetzen",
-    "order":"Auftrag",
-    "guide":"Hilfe",
-    "account":"Konto",
-    "orders":"Bestellungen",
-    "proceedings":"Verfahren",
-    "contracts":"Aufträge",
-    "company":"Firma",
-    "admin":{
-      "account":"Konto",
-      "title":"Admin-Bereich",
-      "user":"Benutzer",
-      "model":"Modelle",
-      "material":"Materialien",
-      "procedure":"Verfahren",
-      "printer":"Drucker",
-      "order":"Bestellungen"
-    }
-  },
-  
-  "filter":{
-    "headline":"Vorgaben",
-    "category":{
-      "general":"Allgemein",
-      "model":"Modell",
-      "material":"Material",
-      "proceeding":"Verfahren",
-      "manufacturer":"Hersteller",
-      "post-Processing":"Nachbearbeitung",
-      "additive":"Zusatz",
-      "test":"Test"
-    }
-  },
-  "guide":{
-    "headline":"Guide"
-  },
-  "OrderCollectionOverview":{
-    "headline":{
-      "client":"Bestellungen",
-      "manufacturer":"Aufträge"
-    }    
-  },
-  "OrderCollection":{
-    "button":{
-      "cancel":"Gesamten Auftrag Stornieren",
-      "re-order":"Gesamten Auftrag erneut Bestellen",
-      "reject":"Gesamten Auftrag Ablehnen",
-      "confirm":"Gesamten Auftrag Bestätigen",
-      "verify":"Gesamten Auftrag Überprüfen"
-    },
-    "state":{
-      "requested":"Angefragt",
-      "progress":"In Bearbeitung",
-      "finished":"Abgeschlossen"
-    }
-  },
-  "OrderView":{
-    "button":{
-      "cancel":"Stornieren",
-      "re-order":"erneut Bestellen",
-      "reject":"Ablehnen",
-      "confirm":"Bestätigen",
-      "verify":"Überprüfen"
-    }
-  },
-  "LoadingAnimation":{
-    "text":"Laden"
-  },
-  "Checkout": {
-    "title":"Bestellung überprüfen",
-    "button":{
-      "request":"Anfragen",
-      "printable":"Druckbarkeit überprüfen",
-      "logistics":"Lieferzeit berechnen",
-      "price":"Preis berechnen"
+  "General":{
+    "Badege":{},
+    "Button":{},
+    "request":{
+      "loading":"Laden...",
+      "error":"Error:"
     },
     "error":{
-      "no-items":"keine Items vorhanden"
-    },
-    "success":{
-      "send":"Der Auftrag wurde Erfolgreich übermittelt!",
-      "redirect":"Sie werden nun zu Startseite weitergeleitet"
+      "incomplete":"Bitte {{name}} vervollständigen.",
+      "empty":"Keine {{name}} vorhanden"
     }
   },
-  "CheckoutItem":{
-    "printable":"Druckbarkeit",
-    "logistics":"Lieferzeit",
-    "price":"Preis"
+  "Guide":{
+    "Answer":{
+      "GuideAnswer":{},
+      "GuideAnsers":{}
+    },
+    "Components":{
+      "GButton":{},
+      "GMultiSelection":{},
+      "GOption":{},
+      "GRangeSlider":{},
+      "GSelection":{}
+    },
+    "Overview":{
+      "GuideOverview":{}
+    },
+    "Question":{
+      "GuideQuestion":{}
+    },
+    "Guide":{},
+    "GuideRoutes":{}
   },
-  "OrderPreView":{
-    "requested":"Angefragt",
-    "verify":"Rückfragen",
-    "rejected":"Abgelehnt",
-    "confirmed":"Bestätigt",
-    "production":"In Produktion",
-    "delivery":"Unterwegs",
-    "finished":"Abgeschlossen"
+  "Header":{
+    "Header":{},
+    "HeaderData":{
+      "about-us": "Über uns",
+      "login": "Anmelden",
+      "register": "Registrieren",
+      "continue": "Fortfahren",
+      "cart": "Warenkorb",
+      "logout": "Abmelden",
+      "orders": "Bestellungen",
+      "contracts": "Verträge",
+      "account": "Konto",
+      "test": "Test",
+      "guide": "Wegweiser"
+    },
+    "HeaderItem":{}
   },
-  "StatusView":{
-    "state":{
+  "Home":{
+    "Home":{},
+    "HomeData":{
+      "explore": "Ausprobieren",
+      "use-service": "Service in Anspruch nehmen",
+      "provide-service": "Service bereitstellen",
+      "continue": "Bestellung Fortsetzen",
+      "new-contract": "neue Bestellung",
+      "proceedings": "Verfahren",
+      "company": "Unternehmen",
+      "guide": "Wegweiser",
+      "cart": "Warenkorb",
+      "orders": "Meine Bestellungen",
+      "contracts": "Meine Aufträge",
+      "user": "Benutzer",
+      "model": "Modelle",
+      "material": "Materialien",
+      "procedure": "Verfahren",
+      "printer": "Drucker",
+      "account": "Konto"
+    },
+    "HomeItem":{}
+  },
+  "ListView":{},
+  "Loading":{
+    "Loading":{},
+    "LoadingAnimation":{
+      "text":"Laden"
+    }
+  },
+  "Login":{
+    "Login":{},
+    "LoginView":{}
+  },
+  "Logout":{
+  },
+  "Orders":{
+    "ChatView":{},
+    "OrderCollection":{
+      "button":{
+        "cancel":"Gesamten Auftrag Stornieren",
+        "re-order":"Gesamten Auftrag erneut Bestellen",
+        "reject":"Gesamten Auftrag Ablehnen",
+        "confirm":"Gesamten Auftrag Bestätigen",
+        "verify":"Gesamten Auftrag Überprüfen"
+      },
+      "state":{
+        "requested":"Angefragt",
+        "progress":"In Bearbeitung",
+        "finished":"Abgeschlossen"
+      }
+    },
+    "OrderCollectionOverview":{
+      "headline":{
+        "client":"Bestellungen",
+        "manufacturer":"Aufträge"
+      }    
+    },
+    "OrderPreView":{
       "requested":"Angefragt",
       "verify":"Rückfragen",
       "rejected":"Abgelehnt",
@@ -317,38 +217,129 @@
       "production":"In Produktion",
       "delivery":"Unterwegs",
       "finished":"Abgeschlossen"
+    },
+    "OrderView":{
+      "button":{
+        "cancel":"Stornieren",
+        "re-order":"erneut Bestellen",
+        "reject":"Ablehnen",
+        "confirm":"Bestätigen",
+        "verify":"Überprüfen"
+      }
+    },
+    "StatusView":{
+      "state":{
+        "requested":"Angefragt",
+        "verify":"Rückfragen",
+        "rejected":"Abgelehnt",
+        "confirmed":"Bestätigt",
+        "production":"In Produktion",
+        "delivery":"Unterwegs",
+        "finished":"Abgeschlossen"
+      }
+    } 
+  },
+  "PopUp":{},
+  "PrivateRoutes":{},
+  "Process":{
+    "Filter":{
+      "Components":{
+        "FColor":{},
+        "FDate":{},
+        "FMultiSelection":{},
+        "FNumber":{},
+        "FSelection":{},
+        "FSlider":{},
+        "FSliderSelection":{},
+        "FText":{},
+        "FTextArea":{}
+      },
+      "Filter":{},
+      "FilterCard":{
+        "category":{
+          "general":"Allgemein",
+          "model":"Modell",
+          "material":"Material",
+          "proceeding":"Verfahren",
+          "manufacturer":"Hersteller",
+          "post-Processing":"Nachbearbeitung",
+          "additive":"Zusatz",
+          "test":"Test"
+        }
+      },
+      "FilterItem":{}
+    },
+    "Header":{
+      "Cart":{
+        "Cart":{},
+        "CartItem":{}
+      },
+      "Search":{},
+      "StatusIcon":{},
+      "Wizard": {
+        "Wizard":{
+          "model": "Modell",
+          "material":"Material",
+          "post-processing": "Nachbearbeitung"
+        },
+        "WizardCard":{}
+      },
+      "Header":{}
+    },
+    "Material":{
+      "MaterialCatalog":{},
+      "MaterialCatalogCard":{},
+      "MaterialPreView":{},
+      "MaterialView":{}
+    },
+    "Model":{
+      "ModelCard":{},
+      "ModelCatalog":{},
+      "ModelPreView":{},
+      "ModelUpload": {
+        "headline": "Modell hochladen",
+        "error": "Bitte einen der folgenden Dateitypen hochladen .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF",
+        "card": {
+          "headline": "Modell hochladen per Dran & Drop",
+          "text": "( .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF)"
+        },
+        "next": "Weiter"
+      },
+      "ModelView":{}
+    },
+    "PostProcessing":{
+      "Catalog":{},
+      "ItemCard":{},
+      "ItemView":{},
+      "PostProcessingView":{}
+    },
+    "NewProcess":{},
+    "ProcessView":{}
+  },
+  "Profil":{
+    "header": "Profil",
+    "name": "Name",
+    "email": "E-Mail",
+    "type": "Benutzertyp",
+    "company": "Organisation",
+    "address":{
+      "header": "Adresse",
+      "street": "Straße",
+      "houseNumber": "Hausnummer",
+      "city": "Stadt",
+      "zipcode": "Postleitzahl",
+      "country": "Land",
+      "created": "Erstellt am",
+      "accessed": "letzter Zugegriff am",
+      "updated": "Aktualisiert am",
+      "delete": "Löschen"
     }
   },
-  "HomeData":{
-    "explore": "Ausprobieren",
-    "use-service": "Service nutzen",
-    "provide-service": "Service bereitstellen",
-    "continue": "Fortsetzen",
-    "new-contract": "neuer Auftrag",
-    "proceedings": "Verfahren",
-    "company": "Unternehmen",
-    "guide": "Guide",
-    "cart": "Warenkorb",
-    "orders": "Bestellungen",
-    "contracts": "Aufträge",
-    "user": "Benutzer",
-    "model": "Modelle",
-    "material": "Materialien",
-    "procedure": "Verfahren",
-    "printer": "Drucker",
-    "account": "Konto"
-  },
-  "HeaderData":{
-    "about-us": "Über uns",
-    "login": "Anmelden",
-    "register": "Registrieren",
-    "continue": "Fortfahren",
-    "cart": "Warenkorb",
-    "logout": "Abmelden",
-    "orders": "Bestellungen",
-    "contracts": "Verträge",
-    "account": "Konto",
-    "test": "Test",
-    "guide": "Guide"
+  "Redirect":{},
+  "Service":{
+    "ServiceQuestion":{},
+    "ServiceRoutes":{},
+    "ServiceView":{},
+    "ServiceWizard":{}
   }
 }

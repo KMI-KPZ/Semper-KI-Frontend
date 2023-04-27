@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useService from "../../hooks/useService";
 import { IServiceChapter, IServiceQuestion } from "./Interface";
-import ServiceQuestion from "./ServiceQuestion/ServiceQuestion";
+import ServiceQuestion from "./ServiceQuestion";
 import ServiceWizard from "./ServiceWizard";
 
 interface Props {

@@ -151,7 +151,9 @@ export const Header: React.FC<Props> = (props) => {
           closeMenus={closeMenus}
           headeritem={headerItem}
           badge={
-            headerItem.title === "HeaderData.order" ? cartCount : undefined
+            headerItem.title === "Header.HeaderData.cart"
+              ? cartCount
+              : undefined
           }
         />
       ))}

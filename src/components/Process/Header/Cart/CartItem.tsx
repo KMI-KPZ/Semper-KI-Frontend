@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { ReactNode, useContext } from "react";
 import { IconDelete } from "../../../../constants/Icons";
 import { IProcessItem } from "../../../../interface/Interface";
 import { ProcessContext } from "../../ProcessView";
@@ -9,7 +9,7 @@ interface Props {
   index?: number;
   active: boolean;
   title: string;
-  icon: string;
+  icon: string | ReactNode;
   onClickCard(id?: number): void;
   isItem: boolean;
 }
@@ -61,7 +61,11 @@ const CartItem: React.FC<Props> = (props) => {
           />
         </div>
       ) : null}
-      <img src={icon} alt="icon" className="h-8" />
+      {typeof icon === "string" ? (
+        <img src={icon} alt="icon" className="h-8" />
+      ) : (
+        icon
+      )}
       <h3 className="whitespace-nowrap">{title}</h3>
       {/* {process === undefined ? null : <StatusIcon process={process} />} */}
     </div>

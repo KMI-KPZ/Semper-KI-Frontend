@@ -242,7 +242,7 @@ const App: React.FC = () => {
           userType={userType}
           cartCount={cart.length}
         />
-        <main className="w-full md:w-5/6 flex flex-col justify-start items-center p-2 flex-grow bg-opacity-80 bg-slate-200 ">
+        <main className="w-full xl:w-5/6 flex flex-col justify-start items-center p-2 flex-grow bg-opacity-80 bg-slate-200 ">
           <Breadcrumb />
           <Routes data-testid="routes">
             <Route

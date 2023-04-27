@@ -47,10 +47,10 @@ export const Home: React.FC<Props> = (props) => {
     if (
       count !== undefined &&
       count > 0 &&
-      (title === "HomeData.contracts" || title === "HomeData.orders")
+      (title === "Home.HomeData.contracts" || title === "Home.HomeData.orders")
     )
       return getChangeCount();
-    if (cartCount > 0 && title === "HomeData.order") return cartCount;
+    if (cartCount > 0 && title === "Home.HomeData.cart") return cartCount;
     return undefined;
   };
 

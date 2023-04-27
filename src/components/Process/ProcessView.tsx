@@ -165,7 +165,10 @@ export const ProcessView: React.FC<Props> = (props) => {
     loadAllData(filterItemList);
   };
   const startNewProcess = (): void => {
-    setState((prevState) => ({ ...prevState, items: [{}] }));
+    setState((prevState) => ({
+      ...prevState,
+      items: [{ title: `${t("Process.ProcessView.item")} 1` }],
+    }));
   };
   const createProcessItem = (model?: IModel): void => {
     // console.log("Process | createProcessItem |", model);
@@ -177,7 +180,7 @@ export const ProcessView: React.FC<Props> = (props) => {
         {
           title:
             model === undefined
-              ? "Item " + (prevState.items.length + 1)
+              ? `${t("Process.ProcessView.item")} ${prevState.items.length + 1}`
               : model.title,
           model: model,
         },
@@ -279,7 +282,7 @@ export const ProcessView: React.FC<Props> = (props) => {
       ...prevState,
       items: [
         ...prevState.items.filter((item, index) => index < activeItemIndex),
-        { ...prevState.items[activeItemIndex], model },
+        { ...prevState.items[activeItemIndex], model, title: model.title },
         ...prevState.items.filter((item, index) => index > activeItemIndex),
       ],
       hasChanged: true,
@@ -323,7 +326,11 @@ export const ProcessView: React.FC<Props> = (props) => {
       ...prevState,
       items: [
         ...prevState.items.filter((item, index) => index < activeItemIndex),
-        { ...prevState.items[activeItemIndex], model: undefined },
+        {
+          ...prevState.items[activeItemIndex],
+          model: undefined,
+          title: `${t("Process.ProcessView.item")} ${activeItemIndex + 1}`,
+        },
         ...prevState.items.filter((item, index) => index > activeItemIndex),
       ],
       hasChanged: true,
@@ -356,7 +363,7 @@ export const ProcessView: React.FC<Props> = (props) => {
       }}
     >
       <LoadingSuspense status={status} error={error}>
-        <div className="relativ flex flex-col xl:flex-row gap-10">
+        <div className="relativ flex flex-col xl:flex-row gap-5 w-full p-5">
           <Filter
             setFilterOpen={setFilterOpen}
             filterOpen={filterOpen}
@@ -365,7 +372,7 @@ export const ProcessView: React.FC<Props> = (props) => {
             guideAnswers={guideAnswers}
             progress={progress}
           />
-          <div className="flex flex-col gap-10 max-w-6xl p-5 w-full xl:w-[1152px]">
+          <div className="flex flex-col gap-5 w-full ">
             <Header />
             <Routes>
               <Route index element={<Navigate to="/process/model" />} />

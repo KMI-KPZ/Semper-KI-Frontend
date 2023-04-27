@@ -42,7 +42,7 @@ export const Wizard: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex flex-row justify-around items-center">
+    <div className="flex flex-col sm:flex-row gap-3 sm:gap-0 justify-around items-center">
       {wizardItems.map((wizardItem: IWizardItem, index: number) => (
         <WizardCard
           statusType={getStatusByIndex(index)}

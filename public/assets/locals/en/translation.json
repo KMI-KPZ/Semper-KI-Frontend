@@ -393,7 +393,8 @@
            "CartItem":{
               "item":"Item",
               "upload":"Upload Model",
-              "new":"Create Item"
+              "new":"Create Item",
+              "cart":"Cart"
            }
         },
         "Search":{

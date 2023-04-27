@@ -20,7 +20,7 @@ i18n
     lng: "de",
     fallbackLng: "de",
     detection: {
-      order: ["htmlTag", "cookie", "localStorage", "path", "subdomain"],
+      order: ["cookie", "htmlTag", "localStorage", "path", "subdomain"],
       caches: ["cookie"],
     },
     backend: {

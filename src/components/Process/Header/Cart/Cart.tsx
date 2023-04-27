@@ -11,6 +11,9 @@ import {
 import { IProcessItem } from "../../../../interface/Interface";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import AddIcon from "@mui/icons-material/Add";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 interface Props {}
 
@@ -37,11 +40,11 @@ const Cart: React.FC<Props> = () => {
   };
 
   return (
-    <div className="flex flex-col 2xl:flex-row w-full justify-between 2xl:gap-5 gap-10 2xl:mb-5 mb-10">
+    <div className="flex flex-row w-full justify-between gap-5 mb-5">
       <div className="flex flex-row flex-wrap gap-5 2xl:w-4/5 w-full">
         <CartItem
           active={processState.activeItemIndex === -1}
-          icon={IconUpload}
+          icon={<CloudUploadIcon fontSize="large" />}
           title={t("Process.Header.Cart.CartItem.upload")}
           onClickCard={navigateToUpload}
           isItem={false}
@@ -64,17 +67,17 @@ const Cart: React.FC<Props> = () => {
         ))}
         <CartItem
           active={false}
-          icon={IconPlus}
+          icon={<AddIcon fontSize="large" />}
           title={t("Process.Header.Cart.CartItem.new")}
           onClickCard={addNewItem}
           isItem={false}
         />
       </div>
-      <div className="flex flex-col justify-start items-center 2xl:w-1/5 w-full">
+      <div className="hidden md:flex flex-row items-start justify-end w-fit">
         <CartItem
           active={false}
-          icon={IconDocument}
-          title="Übersicht"
+          icon={<ShoppingCartIcon fontSize="large" />}
+          title={t("Process.Header.Cart.CartItem.cart")}
           onClickCard={() => {
             navigate("/cart");
           }}

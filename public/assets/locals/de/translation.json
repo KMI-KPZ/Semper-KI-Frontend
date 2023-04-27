@@ -49,6 +49,7 @@
         "material":"Material",
         "postProcessing_one":"Nachbearbeitung",
         "postProcessing_other":"Nachbearbeitungen"
+       
       }
     },
     "Checkout":{
@@ -344,7 +345,8 @@
         "CartItem":{
           "item":"Artikel",
           "upload":"Modell Hochladen",
-          "new":"Artikel erstellen"
+          "new":"Artikel erstellen",
+          "cart":"Warenkorb"
         }
       },
       "Search":{
@@ -441,6 +443,7 @@
       "header":"neue Bestellung Starten"
     },
     "ProcessView":{
+      "item":"Artikel",
       "path":{
         "model":"Modell finden",
         "upload":"Modell/e hochladen",

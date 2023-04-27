@@ -8,7 +8,7 @@ import useModelUpload from "../../../hooks/useModelUpload";
 import { IModel } from "../../../interface/Interface";
 import LoadingAnimation from "../../Loading/LoadingAnimation";
 import Button from "../../General/Button";
-import Loading from "../../Loading/Loading";
+import LoadingSuspense from "../../General/LoadingSuspense";
 
 interface Props {
   setProgress(path: string): void;
@@ -142,7 +142,7 @@ export const ModelUpload: React.FC<Props> = (props) => {
   return (
     <div className="flex flex-col p-5 gap-5 bg-white justify-center items-center">
       {error && <div className="error">{t("ModelUpload.upload.error")}</div>}
-      <Loading
+      <LoadingSuspense
         error={uploadError}
         status={status}
         animation
@@ -194,7 +194,7 @@ export const ModelUpload: React.FC<Props> = (props) => {
         <Button onClick={handleClickNext}>
           {t("ModelUpload.upload.next")}
         </Button>
-      </Loading>
+      </LoadingSuspense>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import {
   IOrderCollectionEvent,
 } from "../../interface/Interface";
 import { useOrders } from "../../hooks/useOrders";
-import Loading from "../Loading/Loading";
+import LoadingSuspense from "../General/LoadingSuspense";
 import OrderCollection from "./OrderCollection";
 import { EUserType } from "../../interface/enums";
 import { AppContext } from "../App/App";
@@ -45,13 +45,13 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
   };
 
   return (
-    <Loading error={error} status={status}>
+    <LoadingSuspense error={error} status={status}>
       <div className="flex flex-col items-center w-full gap-5 overflow-x-auto overflow-y-hidden p-3">
         <h1 className="bg-white w-full py-3 text-center">
           {t(
             userType === EUserType.client
-              ? "OrderCollectionOverview.headline.client"
-              : "OrderCollectionOverview.headline.manufacturer"
+              ? "Orders.OrderCollectionOverview.headline.client"
+              : "Orders.OrderCollectionOverview.headline.manufacturer"
           )}
         </h1>
         {data !== undefined ? (
@@ -75,13 +75,13 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
                 ))
             ) : (
               <li className="w-full text-center p-3">
-                keine vorhandenen Bestellungen
+                {t("Orders.OrderCollectionOverview.empty")}
               </li>
             )}
           </ul>
         ) : null}
       </div>
-    </Loading>
+    </LoadingSuspense>
   );
 };
 

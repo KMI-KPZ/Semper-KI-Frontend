@@ -1,7 +1,7 @@
 import React from "react";
 import useManufacturer from "../../../hooks/useManufacturer";
 import { IProcessItem } from "../../../interface/Interface";
-import Loading from "../../Loading/Loading";
+import LoadingSuspense from "../../General/LoadingSuspense";
 import { getModelURI } from "../../../services/utils";
 import { useTranslation } from "react-i18next";
 
@@ -26,7 +26,7 @@ const ManufacturerItem: React.FC<Props> = (props) => {
   };
 
   return (
-    <Loading error={error} status={status}>
+    <LoadingSuspense error={error} status={status}>
       <div className="flex flex-col items-center gap-5 w-full p-2 justify-between bg-white">
         <h2>{processItem.model?.title}</h2>
         <div className="flex flex-col md:flex-row justify-around items-start w-full">
@@ -60,7 +60,7 @@ const ManufacturerItem: React.FC<Props> = (props) => {
           </div>
         </div>
       </div>
-    </Loading>
+    </LoadingSuspense>
   );
 };
 

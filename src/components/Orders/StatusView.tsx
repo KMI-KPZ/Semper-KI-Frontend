@@ -25,37 +25,37 @@ const statusData: StatusData[] = [
   {
     orderState: EOrderState.requested,
     icon: <EmailIcon />,
-    text: "StatusView.state.requested",
+    text: "Orders.StatusView.state.requested",
   },
   {
     orderState: EOrderState.verify,
     icon: <QuestionMarkIcon />,
-    text: "StatusView.state.verify",
+    text: "Orders.StatusView.state.verify",
   },
   {
     orderState: EOrderState.rejected,
     icon: <CloseIcon />,
-    text: "StatusView.state.rejected",
+    text: "Orders.StatusView.state.rejected",
   },
   {
     orderState: EOrderState.confirmed,
     icon: <CheckIcon />,
-    text: "StatusView.state.confirmed",
+    text: "Orders.StatusView.state.confirmed",
   },
   {
     orderState: EOrderState.production,
     icon: <FactoryIcon />,
-    text: "StatusView.state.production",
+    text: "Orders.StatusView.state.production",
   },
   {
     orderState: EOrderState.delivery,
     icon: <LocalShippingIcon />,
-    text: "StatusView.state.delivery",
+    text: "Orders.StatusView.state.delivery",
   },
   {
     orderState: EOrderState.finished,
     icon: <DoneAllIcon />,
-    text: "StatusView.state.finished",
+    text: "Orders.StatusView.state.finished",
   },
 ];
 

@@ -13,9 +13,9 @@ import {
 import GuideAnswers from "./Answer/GuideAnswers";
 import GuideOverview from "./Overview/GuideOverview";
 import useGuide from "../../hooks/useGuide";
-import LoadingAnimation from "../Loading/LoadingAnimation";
 import { EGuideQuestionType } from "../../interface/enums";
 import useFilter from "../../hooks/useFilter";
+import LoadingAnimation from "../General/LoadingAnimation";
 
 const getQuestionByFilterId = (
   filterId: number,

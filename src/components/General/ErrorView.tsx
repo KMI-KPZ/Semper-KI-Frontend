@@ -15,7 +15,7 @@ const ErrorView: React.FC<Props> = (props) => {
     <div className="flex felx-col gap-3">
       {errors.map((error, index) => (
         <h2 className="text-red-500 text-bold" key={index}>
-          {t(`General.error.${error}`, {
+          {t(`General.ErrorView.${error}`, {
             itemName,
           })}
         </h2>

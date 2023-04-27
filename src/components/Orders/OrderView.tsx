@@ -69,17 +69,17 @@ const OrderView: React.FC<Props> = (props) => {
     });
   };
   const handleOnClickButtonCancel = () => {
-    if (window.confirm("Auftrag wirklich stonieren?")) {
+    if (window.confirm(t("Orders.OrderView.confirm.cancel"))) {
       deleteOrder.mutate(order.id);
     }
   };
   const handleOnClickButtonReOrder = () => {
-    if (window.confirm("Auftrag wirklich erneut Bestellen?")) {
+    if (window.confirm(t("Orders.OrderView.confirm.reOrder"))) {
       console.log("//TODO ReOrder");
     }
   };
   const handleOnClickButtonReject = () => {
-    if (window.confirm(t("OrderView.button.reject") + "?")) {
+    if (window.confirm(t("Orders.OrderView.confirm.reject"))) {
       updateStatus(EOrderState.rejected);
     }
   };
@@ -106,14 +106,14 @@ const OrderView: React.FC<Props> = (props) => {
             icon={<CancelIcon />}
             onClick={handleOnClickButtonCancel}
           >
-            {t("OrderView.button.cancel")}
+            {t("Orders.OrderView.button.cancel")}
           </Button>
           <Button
             size="small"
             icon={<ReplayIcon />}
             onClick={handleOnClickButtonReOrder}
           >
-            {t("OrderView.button.re-order")}
+            {t("Orders.OrderView.button.reOrder")}
           </Button>
         </div>
       );
@@ -125,21 +125,21 @@ const OrderView: React.FC<Props> = (props) => {
             icon={<CancelIcon />}
             onClick={handleOnClickButtonReject}
           >
-            {t("OrderView.button.reject")}
+            {t("Orders.OrderView.button.reject")}
           </Button>
           <Button
             size="small"
             icon={<QuestionMarkIcon />}
             onClick={handleOnClickButtonVerify}
           >
-            {t("OrderView.button.verify")}
+            {t("Orders.OrderView.button.verify")}
           </Button>
           <Button
             size="small"
             icon={<CheckIcon />}
             onClick={handleOnClickButtonConfirm}
           >
-            {t("OrderView.button.confirm")}
+            {t("Orders.OrderView.button.confirm")}
           </Button>
         </div>
       );
@@ -147,7 +147,9 @@ const OrderView: React.FC<Props> = (props) => {
   return (
     <div className="flex flex-col justify-start items-start gap-3 border-2 w-full p-3">
       <div className="flex flex-col md:flex-row justify-between w-full">
-        <h3 className="break-words">Bestellung: {order.id}</h3>
+        <h3 className="break-words">
+          {t("Orders.OrderView.header")} {order.id}
+        </h3>
         <div className=" flex flex-col md:flex-row gap-3 items-center justify-center">
           {orderEvent !== undefined &&
           orderEvent.messages !== undefined &&
@@ -158,7 +160,7 @@ const OrderView: React.FC<Props> = (props) => {
                 icon={<MailIcon />}
                 onClick={handleOnClickButtonChat}
               >
-                Chat
+                {t("Orders.OrderView.button.chat")}
               </Button>
             </Badge>
           ) : (
@@ -167,7 +169,7 @@ const OrderView: React.FC<Props> = (props) => {
               icon={<MailIcon />}
               onClick={handleOnClickButtonChat}
             >
-              Chat
+              {t("Orders.OrderView.button.chat")}
             </Button>
           )}
           {menuOpen ? renderButtons() : null}
@@ -201,7 +203,7 @@ const OrderView: React.FC<Props> = (props) => {
           <h3>{order.item.material?.title}</h3>
         </div>
         <div className="flex flex-col items-center justify-start p-3 w-1/4">
-          <h3>Nachbearbeitungen</h3>
+          <h3>{t("Orders.OrderView.postProcessing")}</h3>
           {order.item.postProcessings?.map((postProcessing, index) => (
             <span key={index}>{postProcessing.title}</span>
           ))}

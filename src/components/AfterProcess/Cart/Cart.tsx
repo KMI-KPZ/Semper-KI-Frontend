@@ -11,6 +11,7 @@ import ErrorView from "../../General/ErrorView";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import LoadingSuspense from "../../General/LoadingSuspense";
 
 interface Props {}
 
@@ -73,67 +74,52 @@ const Order: React.FC<Props> = (props) => {
     uploadCart.mutate(cart.filter((item, _index) => _index !== index));
   };
 
-  if (status === "loading")
-    return (
-      <div className="flex flex-col items-center justify-center w-full h-full">
-        <h1 className="text-center p-2 bg-white w-full">
-          {t("General.request.loading")}
-        </h1>
-      </div>
-    );
-  if (status === "error" && cartError !== null)
-    return (
-      <div className="flex flex-col items-center justify-center w-full h-full">
-        <h1 className="text-center p-2 bg-white w-full">
-          {t("General.request.error")}: {cartError.message}
-        </h1>
-      </div>
-    );
-
   return (
-    <div className="flex flex-col items-center gap-5 w-full p-5">
-      <h1 className="text-center p-2 bg-white w-full">
-        {t("AfterProcess.Cart.Cart.header")}
-      </h1>
-      <section className="flex flex-col gap-5 items-center justify-start w-full">
-        {cart.length > 0 ? (
-          cart.map((process: IProcessItem, index: number) => (
-            <CartItem
-              process={process}
-              key={index}
-              index={index}
-              deleteItem={deleteItem}
-            />
-          ))
-        ) : (
-          <h2 className="text-center p-2 bg-white w-full">
-            {t("AfterProcess.Cart.Cart.noItems")}
-          </h2>
-        )}
-      </section>
-      {showError === true ? (
-        <ErrorView
-          errors={errors}
-          itemName={t("AfterProcess.Cart.Cart.item", { count: errorCount })}
-        />
-      ) : null}
-      <section className="w-full text-white flex flex-col gap-5 md:flex-row justify-start items-center md:justify-center">
-        <Button onClick={handleOnClickEdit} icon={<EditIcon />}>
-          {t("AfterProcess.Cart.Cart.edit")}
-        </Button>
-        <Button onClick={handleOnClickClear} icon={<DeleteIcon />}>
-          {t("AfterProcess.Cart.Cart.deleteCart")}
-        </Button>
-        <Button
-          active={errors.length === 0}
-          onClick={handleOnClickSendRequest}
-          icon={<ArrowForwardIcon />}
-          iconPos="back"
-        >
-          {t("AfterProcess.Cart.Cart.request")}
-        </Button>
-      </section>
-    </div>
+    <LoadingSuspense error={cartError} status={status}>
+      <div className="flex flex-col items-center gap-5 w-full p-5">
+        <h1 className="text-center p-2 bg-white w-full">
+          {t("AfterProcess.Cart.Cart.header")}
+        </h1>
+        <section className="flex flex-col gap-5 items-center justify-start w-full">
+          {cart.length > 0 ? (
+            cart.map((process: IProcessItem, index: number) => (
+              <CartItem
+                process={process}
+                key={index}
+                index={index}
+                deleteItem={deleteItem}
+              />
+            ))
+          ) : (
+            <h2 className="text-center p-2 bg-white w-full">
+              {t("AfterProcess.Cart.Cart.noItems")}
+            </h2>
+          )}
+        </section>
+        {showError === true ? (
+          <ErrorView
+            errors={errors}
+            itemName={t("AfterProcess.Cart.Cart.item", { count: errorCount })}
+          />
+        ) : null}
+        <section className="w-full text-white flex flex-col gap-5 md:flex-row justify-start items-center md:justify-center">
+          <Button onClick={handleOnClickEdit} icon={<EditIcon />}>
+            {t("AfterProcess.Cart.Cart.edit")}
+          </Button>
+          <Button onClick={handleOnClickClear} icon={<DeleteIcon />}>
+            {t("AfterProcess.Cart.Cart.deleteCart")}
+          </Button>
+          <Button
+            active={errors.length === 0}
+            onClick={handleOnClickSendRequest}
+            icon={<ArrowForwardIcon />}
+            iconPos="back"
+          >
+            {t("AfterProcess.Cart.Cart.request")}
+          </Button>
+        </section>
+      </div>
+    </LoadingSuspense>
   );
 };
 

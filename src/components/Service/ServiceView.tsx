@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useTransition } from "react";
+import { useTranslation } from "react-i18next";
 import useService from "../../hooks/useService";
 import { IServiceChapter, IServiceQuestion } from "./Interface";
 import ServiceQuestion from "./ServiceQuestion";
@@ -23,6 +24,7 @@ const ServiceView: React.FC<Props> = (props) => {
     questions: [],
   });
   const { activeChapter, chapters, questions } = state;
+  const { t } = useTranslation();
 
   const setQuestionAnswer = (value: string | number, _index: number) => {
     // console.log("ServiceView | setQuestionAnswer ", value, _index);
@@ -79,7 +81,9 @@ const ServiceView: React.FC<Props> = (props) => {
 
   return (
     <div className="service-view">
-      <h1 className="service-view-headline">Service Anbieten : {title}</h1>
+      <h1 className="service-view-headline">
+        {t("Service.ServiceView.header")} : {title}
+      </h1>
       <ServiceWizard
         chapters={chapters}
         activeChapter={activeChapter}

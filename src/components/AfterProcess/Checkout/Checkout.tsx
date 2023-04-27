@@ -4,9 +4,10 @@ import useCheckout, { IRequestState } from "../../../hooks/useCheckout";
 import CheckoutItem from "./CheckoutItem";
 import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
-import LoadingAnimation from "../../Loading/LoadingAnimation";
 import Button from "../../General/Button";
 import { useTranslation } from "react-i18next";
+import LoadingSuspense from "../../General/LoadingSuspense";
+import LoadingAnimation from "../../General/LoadingAnimation";
 
 interface Props {}
 interface State {
@@ -209,79 +210,64 @@ const Checkout: React.FC<Props> = (props) => {
     );
   };
 
-  if (status === "loading")
-    return (
-      <div className="flex flex-col items-center justify-center w-full h-full">
-        <h1 className="text-center p-2 bg-white w-full">
-          {t("General.request.loading")}
-        </h1>
-      </div>
-    );
-  if (status === "error" && error !== null)
-    return (
-      <div className="flex flex-col items-center justify-center w-full h-full">
-        <h1 className="text-center p-2 bg-white w-full">
-          {t("General.request.error")}: {error.message}
-        </h1>
-      </div>
-    );
-
   return (
-    <div className="flex flex-col items-center gap-5 w-full p-5">
-      <div className="bg-white w-full p-5 flex flex-col gap-5 justify-start items-center">
-        <h1 className="text-center p-2 w-full">
-          {t("AfterProcess.Checkout.Checkout.title")}
-        </h1>
-        {renderCheckButtons()}
-        <Button
-          active={checkAll === true}
-          onClick={handleOnClickSend}
-          icon={<SendIcon fontSize="large" />}
-          iconPos="back"
-        >
-          <h2 className="text-white">
-            {t("AfterProcess.Checkout.Checkout.button.request")}
-          </h2>
-        </Button>
-      </div>
-      {showError === true ? renderError() : null}
-      {order.loading === false && orderSendSuccesfull === true
-        ? renderOrderSendSuccesfull()
-        : null}
-      {order.loading === true ? renderLoadingAnimation() : null}
-      {order.loading === false && orderSendSuccesfull === false ? (
-        <div
-          className="flex flex-col gap-y-3 justify-center items-center
-      sm:flex-row sm:flex-wrap sm:justify-between sm:items-start w-full"
-        >
-          {cart.length > 0 ? (
-            cart.map((item, index) => (
-              <CheckoutItem
-                key={index}
-                process={item}
-                logistics={
-                  logisticsList[index] === undefined
-                    ? loadingDummy
-                    : logisticsList[index]
-                }
-                price={
-                  priceList[index] === undefined
-                    ? loadingDummy
-                    : priceList[index]
-                }
-                printable={
-                  printableList[index] === undefined
-                    ? loadingDummy
-                    : printableList[index]
-                }
-              />
-            ))
-          ) : (
-            <h2>{t("AfterProcess.Checkout.Checkout.error.no-items")}</h2>
-          )}
+    <LoadingSuspense status={status} error={error}>
+      <div className="flex flex-col items-center gap-5 w-full p-5">
+        <div className="bg-white w-full p-5 flex flex-col gap-5 justify-start items-center">
+          <h1 className="text-center p-2 w-full">
+            {t("AfterProcess.Checkout.Checkout.title")}
+          </h1>
+          {renderCheckButtons()}
+          <Button
+            active={checkAll === true}
+            onClick={handleOnClickSend}
+            icon={<SendIcon fontSize="large" />}
+            iconPos="back"
+          >
+            <h2 className="text-white">
+              {t("AfterProcess.Checkout.Checkout.button.request")}
+            </h2>
+          </Button>
         </div>
-      ) : null}
-    </div>
+        {showError === true ? renderError() : null}
+        {order.loading === false && orderSendSuccesfull === true
+          ? renderOrderSendSuccesfull()
+          : null}
+        {order.loading === true ? renderLoadingAnimation() : null}
+        {order.loading === false && orderSendSuccesfull === false ? (
+          <div
+            className="flex flex-col gap-y-3 justify-center items-center
+      sm:flex-row sm:flex-wrap sm:justify-between sm:items-start w-full"
+          >
+            {cart.length > 0 ? (
+              cart.map((item, index) => (
+                <CheckoutItem
+                  key={index}
+                  process={item}
+                  logistics={
+                    logisticsList[index] === undefined
+                      ? loadingDummy
+                      : logisticsList[index]
+                  }
+                  price={
+                    priceList[index] === undefined
+                      ? loadingDummy
+                      : priceList[index]
+                  }
+                  printable={
+                    printableList[index] === undefined
+                      ? loadingDummy
+                      : printableList[index]
+                  }
+                />
+              ))
+            ) : (
+              <h2>{t("AfterProcess.Checkout.Checkout.error.no-items")}</h2>
+            )}
+          </div>
+        ) : null}
+      </div>
+    </LoadingSuspense>
   );
 };
 

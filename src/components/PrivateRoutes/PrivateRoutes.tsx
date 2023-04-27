@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { EUserType } from "../../interface/enums";
 import { IUser } from "../../interface/Interface";
@@ -17,11 +18,10 @@ interface AdminProps {
 export const PrivateClientRoutes: React.FC<Props> = (props) => {
   const { user } = props;
   const { pathname } = useLocation();
+  const { t } = useTranslation();
 
   if (user !== undefined && user.type !== EUserType.client)
-    return (
-      <Error text="Sie Müssen als Kunde angemeldet Sein um diese Seite zu sehen" />
-    );
+    return <Error text={t("PrivateRoutes.error.client")} />;
   return user !== undefined && user.type === EUserType.client ? (
     <Outlet />
   ) : (
@@ -32,11 +32,10 @@ export const PrivateClientRoutes: React.FC<Props> = (props) => {
 export const PrivateManufacturerRoutes: React.FC<Props> = (props) => {
   const { user } = props;
   const { pathname } = useLocation();
+  const { t } = useTranslation();
 
   if (user !== undefined && user.type !== EUserType.manufacturer)
-    return (
-      <Error text="Sie Müssen als Hersteller angemeldet Sein um diese Seite zu sehen" />
-    );
+    return <Error text={t("PrivateRoutes.error.manufacturer")} />;
   return user !== undefined && user.type === EUserType.manufacturer ? (
     <Outlet />
   ) : (

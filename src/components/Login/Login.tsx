@@ -1,7 +1,8 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useLogin } from "../../hooks/useLogin";
 import { EUserType } from "../../interface/enums";
-import Loading from "../Loading/Loading";
+import LoadingSuspense from "../General/LoadingSuspense";
 
 interface Props {
   userType?: EUserType;
@@ -10,13 +11,14 @@ interface Props {
 }
 
 const Login: React.FC<Props> = (props) => {
+  const { t } = useTranslation();
   const { userType, path, register } = props;
   const { error, status, data } = useLogin(userType, path, register);
 
   return (
-    <Loading error={error} status={status} animation>
-      <h1>Weiterleiten zur Anmeldung</h1>
-    </Loading>
+    <LoadingSuspense error={error} status={status} animation>
+      <h1>{t("Login.Login.redirect")}</h1>
+    </LoadingSuspense>
   );
 };
 

@@ -33,7 +33,7 @@ const OrderPreView: React.FC<Props> = (props) => {
       ) : null}
       <img src={getModelURI(order.item.model!)} />
       <h3 className="break-words">{order.item.title}</h3>
-      <span>{t(`OrderPreView.${EOrderState[order.orderState]}`)}</span>
+      <span>{t(`Orders.OrderPreView.${EOrderState[order.orderState]}`)}</span>
     </div>
   );
 };

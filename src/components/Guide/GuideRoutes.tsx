@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import CardView, { ICardGroup } from "../CardView/CardView";
 import PopUp from "../PopUp/PopUp";
@@ -24,6 +25,7 @@ const GuideRoutes: React.FC<Props> = (props) => {
     setState((prevState) => ({ ...prevState, menuOpen: false }));
     navigate("/guide");
   };
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (path !== undefined) {
@@ -33,7 +35,7 @@ const GuideRoutes: React.FC<Props> = (props) => {
 
   return (
     <div className="">
-      <CardView title="GuideRoutes.title" cardGroups={GuideCards} />
+      <CardView title={t("Guide.GuideRoutes.header")} cardGroups={GuideCards} />
       <PopUp open={state.menuOpen} onOutsideClick={handleOutsideClick}>
         <Guide setFilter={setFilter} />
       </PopUp>

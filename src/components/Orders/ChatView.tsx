@@ -4,6 +4,7 @@ import Button from "../General/Button";
 import SendIcon from "@mui/icons-material/Send";
 import CloseIcon from "@mui/icons-material/Close";
 import { useOrders } from "../../hooks/useOrders";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   closeMenu(): void;
@@ -20,6 +21,7 @@ interface State {
 }
 
 const ChatView: React.FC<Props> = (props) => {
+  const { t } = useTranslation();
   const { chat: _chat, user, closeMenu, orderCollectionID, orderID } = props;
   const [state, setState] = useState<State>({
     chat: _chat,
@@ -98,7 +100,7 @@ const ChatView: React.FC<Props> = (props) => {
               </div>
             </div>
           ))}
-        <h1>Nachrichten</h1>
+        <h1>{t("Orders.ChatView.header")}</h1>
       </div>
       <div className="flex flex-col md:flex-row w-full h-fit bg-white justify-start items-center p-3 gap-5">
         <textarea
@@ -112,7 +114,7 @@ const ChatView: React.FC<Props> = (props) => {
               : {}
           }
           value={messageText}
-          placeholder="Nachricht"
+          placeholder={t("Orders.ChatView.placeholder")}
           onChange={handleOnChangeTextArea}
         />
         <Button

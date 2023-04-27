@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import CardView, { ICardGroup, ICardItem } from "../CardView/CardView";
 import "./Service.scss";
@@ -32,6 +33,8 @@ const cardGoupsIndex: ICardGroup[] = [
 ];
 
 const ServiceRoutes: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <Routes>
       <Route
@@ -43,32 +46,51 @@ const ServiceRoutes: React.FC = () => {
       <Route
         path="use"
         element={
-          <CardView title="service.use" cardGroups={[{ cards: cardsUse }]} />
+          <CardView
+            title={t("Service.ServiceRoutes.use")}
+            cardGroups={[{ cards: cardsUse }]}
+          />
         }
       />
       <Route path="use/produce" element={<Navigate to="/process/model" />} />
-      <Route path="use/design" element={<h2>Entwerfen lassen</h2>} />
+      <Route
+        path="use/design"
+        element={
+          <h2>
+            {t("Service.ServiceRoutes.design")}
+            {t("Service.ServiceRoutes.let")}
+          </h2>
+        }
+      />
       <Route
         path="use/accompany"
-        element={<h2>Gesamtprozess begleiten lasssen</h2>}
+        element={
+          <h2>
+            {t("Service.ServiceRoutes.accompany")}
+            {t("Service.ServiceRoutes.let")}
+          </h2>
+        }
       />
       <Route
         path="provide"
         element={
           <CardView
-            title="service.provide"
+            title={t("Service.ServiceRoutes.provide")}
             cardGroups={[{ cards: cardsProvide }]}
           />
         }
       />
       <Route
         path="provide/produce"
-        element={<ServiceView title="provide-produce" />}
+        element={<ServiceView title={t("Service.ServiceRoutes.produce")} />}
       />
-      <Route path="provide/design" element={<h2>Entwerfen</h2>} />
+      <Route
+        path="provide/design"
+        element={<h2>{t("Service.ServiceRoutes.design")}</h2>}
+      />
       <Route
         path="provide/accompany"
-        element={<h2>Gesamtprozess begleiten</h2>}
+        element={<h2>{t("Service.ServiceRoutes.accompany")}</h2>}
       />
     </Routes>
   );

@@ -44,17 +44,17 @@ const OrderCollection: React.FC<Props> = (props) => {
   const { deleteOrderCollection, updateOrder } = useOrders();
 
   const handleOnClickButtonCancel = () => {
-    if (window.confirm(t("orderCollection.button.cancel") + "?")) {
+    if (window.confirm(t("Orders.OrderCollection.button.cancel") + "?")) {
       deleteOrderCollection.mutate(orderCollection.id);
     }
   };
   const handleOnClickButtonReOrder = () => {
-    if (window.confirm(t("orderCollection.button.re-order") + "?")) {
+    if (window.confirm(t("Orders.OrderCollection.button.re-order") + "?")) {
       console.log("//TODO ReOrder");
     }
   };
   const handleOnClickButtonReject = () => {
-    if (window.confirm(t("orderCollection.button.reject") + "?")) {
+    if (window.confirm(t("Orders.OrderCollection.button.reject") + "?")) {
       updateOrder.mutate({
         orderCollectionID: orderCollection.id,
         state: EOrderState.rejected,
@@ -62,7 +62,7 @@ const OrderCollection: React.FC<Props> = (props) => {
     }
   };
   const handleOnClickButtonConfirm = () => {
-    if (window.confirm(t("orderCollection.button.confirm") + "?")) {
+    if (window.confirm(t("Orders.OrderCollection.button.confirm") + "?")) {
       updateOrder.mutate({
         orderCollectionID: orderCollection.id,
         state: EOrderState.confirmed,
@@ -70,7 +70,7 @@ const OrderCollection: React.FC<Props> = (props) => {
     }
   };
   const handleOnClickButtonVerify = () => {
-    if (window.confirm(t("orderCollection.button.verify") + "?")) {
+    if (window.confirm(t("Orders.OrderCollection.button.verify") + "?")) {
       updateOrder.mutate({
         orderCollectionID: orderCollection.id,
         state: EOrderState.verify,
@@ -87,14 +87,14 @@ const OrderCollection: React.FC<Props> = (props) => {
             icon={<CancelIcon />}
             onClick={handleOnClickButtonCancel}
           >
-            {t("orderCollection.button.cancel")}
+            {t("Orders.OrderCollection.button.cancel")}
           </Button>
           <Button
             size="small"
             icon={<ReplayIcon />}
             onClick={handleOnClickButtonReOrder}
           >
-            {t("orderCollection.button.re-order")}
+            {t("Orders.OrderCollection.button.reOrder")}
           </Button>
         </div>
       );
@@ -106,21 +106,21 @@ const OrderCollection: React.FC<Props> = (props) => {
             icon={<CancelIcon />}
             onClick={handleOnClickButtonReject}
           >
-            {t("orderCollection.button.reject")}
+            {t("Orders.OrderCollection.button.reject")}
           </Button>
           <Button
             size="small"
             icon={<QuestionMarkIcon />}
             onClick={handleOnClickButtonVerify}
           >
-            {t("orderCollection.button.verify")}
+            {t("Orders.OrderCollection.button.verify")}
           </Button>
           <Button
             size="small"
             icon={<CheckIcon />}
             onClick={handleOnClickButtonConfirm}
           >
-            {t("orderCollection.button.confirm")}
+            {t("Orders.OrderCollection.button.confirm")}
           </Button>
         </div>
       );
@@ -144,16 +144,21 @@ const OrderCollection: React.FC<Props> = (props) => {
   return (
     <div className="flex flex-col justify-start items-start bg-white w-full gap-5 p-5">
       <div className="flex flex-col md:flex-row w-full gap-5 items-start md:items-center justify-start md:justify-between">
-        <h2 className="break-words">Id: {orderCollection.id}</h2>
+        <h2 className="break-words">
+          {t("Orders.OrderCollection.id")}: {orderCollection.id}
+        </h2>
         <h2>
-          Status:{" "}
+          {t("Orders.OrderCollection.state.header")}:{" "}
           {t(
-            `OrderCollection.state.${
+            `Orders.OrderCollection.state.${
               EOrderCollectionState[orderCollection.state]
             }`
           )}
         </h2>
-        <h2>Datum: {new Date(orderCollection.date).toLocaleString()}</h2>
+        <h2>
+          {t("Orders.OrderCollection.date")}:{" "}
+          {new Date(orderCollection.date).toLocaleString()}
+        </h2>
       </div>
       {isOpen === true ? (
         <>

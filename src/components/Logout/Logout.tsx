@@ -1,12 +1,14 @@
+import { useTranslation } from "react-i18next";
 import { useLogout } from "../../hooks/useLogin";
-import Loading from "../Loading/Loading";
+import LoadingSuspense from "../General/LoadingSuspense";
 
 const Logout = () => {
+  const { t } = useTranslation();
   const { data, error, status } = useLogout();
   return (
-    <Loading error={error} status={status} animation>
-      <h1>Weiterleiten zur Abmeldung</h1>
-    </Loading>
+    <LoadingSuspense error={error} status={status} animation>
+      <h1>{t("Logout.redirect")}</h1>
+    </LoadingSuspense>
   );
 };
 

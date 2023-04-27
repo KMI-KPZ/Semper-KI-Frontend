@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { TUseMutationStatus, TUseQueryStatus } from "../../interface/types";
 import LoadingAnimation from "./LoadingAnimation";
 
@@ -11,13 +12,14 @@ interface Props {
   loadingText?: string;
 }
 
-const Loading: React.FC<Props> = (props) => {
+const LoadingSuspense: React.FC<Props> = (props) => {
+  const { t } = useTranslation();
   const {
     children,
     status,
     error,
     animation = false,
-    loadingText = "Loading...",
+    loadingText = t("General.LoadingSuspense.loading"),
     text = true,
   } = props;
   if (status === "loading")
@@ -32,10 +34,12 @@ const Loading: React.FC<Props> = (props) => {
   if (status === "error" && error !== null && error !== undefined)
     return (
       <div className="flex felx-row items-center justify-center">
-        <h1>Error : {error?.message}</h1>
+        <h1>
+          {t("General.LoadingSuspense.error")} : {error.message}
+        </h1>
       </div>
     );
   return <>{children}</>;
 };
 
-export default Loading;
+export default LoadingSuspense;

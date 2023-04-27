@@ -217,7 +217,7 @@ const App: React.FC = () => {
     return (
       <div className="flex flex-col items-center justify-center bg-white w-screen h-screen gap-5">
         <h1 className="md:text-4xl xl:text-9xl">{t("App.title")}</h1>
-        <h2>{t("General.request.loading")}</h2>
+        <h2>{t("App.loading")}</h2>
       </div>
     );
 

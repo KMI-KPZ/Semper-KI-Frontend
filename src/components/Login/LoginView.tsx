@@ -1,4 +1,5 @@
 import React, { ReactNode, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { EUserType } from "../../interface/enums";
 import Button from "../General/Button";
 import Login from "./Login";
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const LoginView: React.FC<Props> = (props) => {
+  const { t } = useTranslation();
   const { path, register } = props;
   const [userType, setUserType] = useState<EUserType>();
 
@@ -31,17 +33,19 @@ const LoginView: React.FC<Props> = (props) => {
     <div className="flex flex-col w-fit p-5 items-center justify-center gap-5 bg-white">
       <h1>
         {path === undefined
-          ? "Anmelden"
-          : "Für die gewünschte Seite müssen sie sich anmelden"}
+          ? t("Login.LoginView.header")
+          : t("Login.LoginView.headerPath")}
       </h1>
       <div className="flex flex-col md:flex-row items-center justify-center gap-5">
         <Button onClick={handleOnClickButtonClient}>
-          {path === undefined ? "Für Kunde" : "Als Kunde Anmelden/Registieren"}
+          {path === undefined
+            ? t("Login.LoginView.button.client")
+            : t("Login.LoginView.button.clientPath")}
         </Button>
         <Button onClick={handleOnClickButtonManufacturer}>
           {path === undefined
-            ? "Für Hersteller"
-            : "Als Hersteller Anmelden/Registieren"}
+            ? t("Login.LoginView.button.manufacturer")
+            : t("Login.LoginView.button.manufacturerPath")}
         </Button>
       </div>
     </div>

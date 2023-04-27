@@ -90,7 +90,8 @@
    
   },
   "App":{
-    "title":"Semper-KI"
+    "title":"Semper-KI",
+    "loading":"Laden..."
   },
   "Background":{},
   "Breadcrumb":{
@@ -121,13 +122,16 @@
   "General":{
     "Badege":{},
     "Button":{},
-    "request":{
+    "ErrorView":{
+      "incomplete":"Bitte {{name}} vervollständigen.",
+      "empty":"Keine {{name}} vorhanden"
+    },
+    "LoadingSuspense":{     
       "loading":"Laden...",
       "error":"Error:"
     },
-    "error":{
-      "incomplete":"Bitte {{name}} vervollständigen.",
-      "empty":"Keine {{name}} vorhanden"
+    "LoadingAnimation":{
+      "text":"Laden"
     }
   },
   "Guide":{
@@ -160,7 +164,9 @@
       }
     },
     "Guide":{},
-    "GuideRoutes":{}
+    "GuideRoutes":{
+      "header":"Wegweiser"
+    }
   },
   "Header":{
     "Header":{
@@ -206,29 +212,41 @@
     },
     "HomeItem":{}
   },
-  "Loading":{
-    "Loading":{},
-    "LoadingAnimation":{
-      "text":"Laden"
+  "Login":{
+    "Login":{
+      "redirect":"Weiterleiten zur Anmeldung"
+    },
+    "LoginView":{
+      "header":"Anmelden",
+      "headerPath":"Für die gewünschte Seite müssen sie sich anmelden",
+      "button":{
+        "client":"Für Kunden",
+        "clientPath":"Als Kunde Anmelden/Registieren",
+        "manufacturer":"Für Hersteller",
+        "manufacturerPath":"Als Hersteller Anmelden/Registieren"
+      }
     }
   },
-  "Login":{
-    "Login":{},
-    "LoginView":{}
-  },
   "Logout":{
+    "redirect":"Weiterleiten zur Abmeldung"
   },
   "Orders":{
-    "ChatView":{},
+    "ChatView":{
+      "header":"Nachrichten",
+      "placeholder":"Nachricht..."
+    },
     "OrderCollection":{
+      "id":"ID",
+      "date":"Datum",
       "button":{
         "cancel":"Gesamten Auftrag Stornieren",
-        "re-order":"Gesamten Auftrag erneut Bestellen",
+        "reOrder":"Gesamten Auftrag erneut Bestellen",
         "reject":"Gesamten Auftrag Ablehnen",
         "confirm":"Gesamten Auftrag Bestätigen",
         "verify":"Gesamten Auftrag Überprüfen"
       },
       "state":{
+        "header":"Status",
         "requested":"Angefragt",
         "progress":"In Bearbeitung",
         "finished":"Abgeschlossen"
@@ -238,7 +256,8 @@
       "headline":{
         "client":"Bestellungen",
         "manufacturer":"Aufträge"
-      }    
+      },
+      "empty":"keine vorhandenen Bestellungen"    
     },
     "OrderPreView":{
       "requested":"Angefragt",
@@ -250,12 +269,20 @@
       "finished":"Abgeschlossen"
     },
     "OrderView":{
+      "header":"Bestellung:",
+      "postProcessing":"Nachbearbeitung",
       "button":{
         "cancel":"Stornieren",
-        "re-order":"erneut Bestellen",
+        "reOrder":"erneut Bestellen",
         "reject":"Ablehnen",
         "confirm":"Bestätigen",
-        "verify":"Überprüfen"
+        "verify":"Überprüfen",
+        "chat":"Nachrichten"
+      },
+      "confirm":{
+        "cancel":"Auftrag wirklich stonieren?",
+        "reOrder":"Auftrag wirklich erneut Bestellen?",
+        "reject":"Auftrag wirklich Ablehnen?"
       }
     },
     "StatusView":{
@@ -271,7 +298,12 @@
     } 
   },
   "PopUp":{},
-  "PrivateRoutes":{},
+  "PrivateRoutes":{
+    "error":{
+      "client":"Sie Müssen als Kunde angemeldet Sein um diese Seite zu sehen",
+      "manufacturer":"Sie Müssen als Hersteller angemeldet Sein um diese Seite zu sehen"
+    }
+  },
   "Process":{
     "Filter":{
       "Components":{
@@ -369,8 +401,17 @@
   "Redirect":{},
   "Service":{
     "ServiceQuestion":{},
-    "ServiceRoutes":{},
-    "ServiceView":{},
+    "ServiceRoutes":{
+      "let":"lassen",
+      "use":"Service in Anspruch nehmen",
+      "provide":"Service Anbieten",
+      "produce":"Produzieren",
+      "design":"Entwerfen",
+      "accompany":"Gesamtprozess begleiten"
+    },
+    "ServiceView":{
+      "header":"Service Anbieten"
+    },
     "ServiceWizard":{}
   }
 }

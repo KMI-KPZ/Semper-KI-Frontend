@@ -1,123 +1,556 @@
 {
-  "home": {
-    "header": "Have something made",
-    "button": {
-      "search": "Search",
-      "search-placeholder": "I'm looking for...",
-      "upload": "Upload"
-    }
+  "Admin":{
+     "AdminMaterialView":{
+        "header":"Materials",
+        "material-id":"Material ID",
+        "name":"Name",
+        "propList":"Properties List"
+     },
+     "AdminModelView":{
+        "header":"Models",
+        "name":"Name",
+        "date":"Date",
+        "license":"License",
+        "tags":"Tags",
+        "certificates":"Certificates",
+        "URI":"URI"
+     },
+     "AdminOrderView":{
+        "header":"Orders",
+        "order-id":"Order ID",
+        "date":"Date",
+        "status":"Status",
+        "cart":"Cart",
+        "bill":"Bill"
+     },
+     "AdminUserView":{
+        "header":"Users",
+        "name":"Name",
+        "email":"Email",
+        "type":"Type",
+        "created":"Created",
+        "accessed":"Accessed",
+        "updated":"Updated"
+     }
   },
-  "header": {
-    "about-us": "About Us",
-    "login": "Login"
+  "AfterProcess":{
+     "Cart":{
+        "Cart":{
+           "header":"Cart",
+           "item_one":"the item",
+           "item_other":"items",
+           "noItems":"No items",
+           "edit":"Edit",
+           "request":"Request",
+           "deleteCart":"Delete cart"
+        },
+        "CartItem":{
+           "model":"Model",
+           "material":"Material",
+           "postProcessing_one":"Post-processing",
+           "postProcessing_other":"Post-processings"
+        }
+     },
+     "Checkout":{
+        "Checkout":{
+           "title":"Review Order",
+           "button":{
+              "request":"Request",
+              "printable":"Check Printability",
+              "logistics":"Calculate Delivery Time",
+              "price":"Calculate Price"
+           },
+           "error":{
+              "no-items":"No items available"
+           },
+           "success":{
+              "send":"Order successfully submitted!",
+              "redirect":"You will now be redirected to the homepage"
+           }
+        },
+        "CheckoutItem":{
+           "printable":"Printability",
+           "logistics":"Delivery Time",
+           "price":"Price"
+        }
+     },
+     "Manufacturer":{
+        "ManufacturerItem":{
+           "header":"Available Manufacturers:"
+        },
+        "ManufacturerView":{
+           "header":"Select Manufacturer",
+           "noManufacturerSelected":"Please select a manufacturer for each item!",
+           "button":{
+              "cart":"Cart",
+              "checkOrder":"Review Order"
+           }
+        }
+     }
   },
-  "error": {
-    "text":"Ups something went wrong...",
-    "button":"Home"
+  "App":{
+     "title":"Semper-KI",
+     "loading":"Loading..."
   },
-  "wizard": {
-    "model": "Model",
-    "material-procedure": "Material | Procedure",
-    "manufacturer": "Manufacturer",
-    "post-processing": "Post Processing",
-    "additive": "Additive",
-    "overview": "Overview"
+  "Background":{},
+  "Breadcrumb":{
+     "home":"Home",
+     "process":"Order",
+     "model":"Model",
+     "upload":"Upload Model",
+     "material":"Material",
+     "postprocessing":"Post-processing",
+     "cart":"Cart",
+     "manufacturer":"Manufacturer",
+     "checkout":"Checkout",
+     "guide":"Guide"
   },
-  "shopping-cart": {
-    "item": {
-      "model": "Model",
-      "material-procedure": "Material | Procedure",
-      "manufacturer": "Manufacturer",
-      "post-processing": "Post Processing",
-      "additive": "Additive",
-      "add": "Add {{buttonName}}"
-    }
+  "CardView":{
+     "Card":{
+        
+     },
+     "CardView":{
+        
+     }
   },
-  "model": {
-    "catalog": {
-      "search-placeholder": "I'm looking for...",
-      "loading-error": "Error loading models",
-      "error-name": "Error: ",
-      "loading-models": "Loading Models..."
-    },
-    "upload": {
-      "headline": "Upload Model",
-      "error": "Please upload one of the following file types .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF",
-      "card": {
-        "headline": "Upload model by drag & drop",
-        "text": "( .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF)"
+  "Error":{
+     "text":"Page not found or something went wrong",
+     "text2":"If you were trying to reach this page, please reload or contact our support",
+     "button":"Back to homepage"
+  },
+  "Footer":{
+     "imprint":"Imprint",
+     "data-protection":"Data Protection"
+  },
+  "General":{
+     "Badege":{
+        
+     },
+     "Button":{
+        
+     },
+     "ErrorView":{
+        "incomplete":"Please complete {{name}}.",
+        "empty":"No {{name}} available."
+     },
+     "LoadingSuspense":{
+        "loading":"Loading...",
+        "error":"Error:"
+     },
+     "LoadingAnimation":{
+        "text":"Loading"
+     }
+  },
+  "Guide":{
+     "Answer":{
+        "GuideAnswer":{
+           
+        },
+        "GuideAnswers":{
+           "header":"Guidelines"
+        }
+     },
+     "Components":{
+        "GButton":{
+           
+        },
+        "GMultiSelection":{
+           
+        },
+        "GOption":{
+           
+        },
+        "GRangeSlider":{
+           
+        },
+        "GSelection":{
+           
+        }
+     },
+     "Overview":{
+        "GuideOverview":{
+           "header":"Overview",
+           "button":{
+              "search":"Search"
+           }
+        }
+     },
+     "Question":{
+        "GuideQuestion":{
+           "error":{
+              "missing":"Please select at least one option."
+           }
+        }
+     },
+     "Guide":{
+        
+     },
+     "GuideRoutes":{
+        "header":"Guide"
+     }
+  },
+  "Header":{
+     "Header":{
+        "title":"Semper-KI"
+     },
+     "HeaderData":{
+        "about-us":"About Us",
+        "login":"Log In",
+        "register":"Register",
+        "continue":"Continue",
+        "cart":"Cart",
+        "logout":"Log Out",
+        "orders":"Orders",
+        "contracts":"Contracts",
+        "account":"Account",
+        "test":"Test",
+        "guide":"Guide"
+     },
+     "HeaderItem":{
+        
+     }
+  },
+  "Home":{
+     "Home":{
+        "header":"Overview"
+     },
+     "HomeData":{
+        "explore":"Explore",
+        "use-service":"Use Service",
+        "provide-service":"Provide Service",
+        "continue":"Continue Order",
+        "new-contract":"New Order",
+        "proceedings":"Proceedings",
+        "company":"Company",
+        "guide":"Guide",
+        "cart":"Cart",
+        "orders":"My Orders",
+        "contracts":"My Contracts",
+        "user":"User",
+        "model":"Models",
+        "material":"Materials",
+        "procedure":"Procedures",
+        "printer":"Printers",
+        "account":"Account"
+     },
+     "HomeItem":{
+        
+     }
+  },
+  "Login":{
+     "Login":{
+        "redirect":"Redirecting to login"
+     },
+     "LoginView":{
+        "header":"Log In",
+        "headerPath":"Please log in to access the desired page.",
+        "button":{
+           "client":"For Clients",
+           "clientPath":"Log In/Register as Client",
+           "manufacturer":"For Manufacturers",
+           "manufacturerPath":"Log In/Register as Manufacturer"
+        }
+     }
+  },
+  "Logout":{
+     "redirect":"Redirecting to log out"
+  },
+  "Orders":{
+     "ChatView":{
+        "header":"Messages",
+        "placeholder":"Message..."
+     },
+     "OrderCollection":{
+        "id":"ID",
+        "date":"Date",
+        "button":{
+           "cancel":"Cancel Entire Order",
+           "reOrder":"Reorder Entire Order",
+           "reject":"Reject Entire Order",
+           "confirm":"Confirm Entire Order",
+           "verify":"Verify Entire Order"
+        },
+        "state":{
+           "header":"Status",
+           "requested":"Requested",
+           "progress":"In Progress",
+           "finished":"Finished"
+        }
+     },
+     "OrderCollectionOverview":{
+        "headline":{
+           "client":"Orders",
+           "manufacturer":"Requests"
+        },
+        "empty":"no orders available"
+     },
+     "OrderPreView":{
+        "requested":"Requested",
+        "verify":"Verify",
+        "rejected":"Rejected",
+        "confirmed":"Confirmed",
+        "production":"In Production",
+        "delivery":"On Delivery",
+        "finished":"Finished"
+     },
+     "OrderView":{
+        "header":"Order:",
+        "postProcessing":"Post Processing",
+        "button":{
+           "cancel":"Cancel",
+           "reOrder":"Reorder",
+           "reject":"Reject",
+           "confirm":"Confirm",
+           "verify":"Verify",
+           "chat":"Messages"
+        },
+        "confirm":{
+           "cancel":"Do you really want to cancel the order?",
+           "reOrder":"Do you really want to reorder the order?",
+           "reject":"Do you really want to reject the order?"
+        }
+     },
+     "StatusView":{
+        "state":{
+           "requested":"Requested",
+           "verify":"Verify",
+           "rejected":"Rejected",
+           "confirmed":"Confirmed",
+           "production":"In Production",
+           "delivery":"On Delivery",
+           "finished":"Finished"
+        }
+     }
+  },
+  "PopUp":{
+     
+  },
+  "PrivateRoutes":{
+     "error":{
+        "client":"You need to be logged in as a client to access this page",
+        "manufacturer":"You need to be logged in as a manufacturer to access this page"
+     }
+  },
+  "Process":{
+     "Filter":{
+        "Components":{
+           "FColor":{
+              
+           },
+           "FDate":{
+              
+           },
+           "FMultiSelection":{
+              
+           },
+           "FNumber":{
+              
+           },
+           "FSelection":{
+              
+           },
+           "FSlider":{
+              
+           },
+           "FSliderSelection":{
+              
+           },
+           "FText":{
+              
+           },
+           "FTextArea":{
+              
+           }
+        },
+        "Filter":{
+           "header":"Settings",
+           "button":{
+              "reset":"Reset",
+              "apply":"Apply"
+           }
+        },
+        "FilterCard":{
+           "category":{
+              "general":"General",
+              "model":"Model",
+              "material":"Material",
+              "proceeding":"Process",
+              "manufacturer":"Manufacturer",
+              "post-Processing":"Post-Processing",
+              "additive":"Additive",
+              "test":"Test"
+           }
+        },
+        "FilterItem":{
+           
+        }
+     },
+     "Header":{
+        "Cart":{
+           "Cart":{
+              
+           },
+           "CartItem":{
+              "item":"Item",
+              "upload":"Upload Model",
+              "new":"Create Item"
+           }
+        },
+        "Search":{
+           "placeholder":"Search ..."
+        },
+        "StatusIcon":{
+           
+        },
+        "Wizard":{
+           "Wizard":{
+              "model":"Model",
+              "material":"Material",
+              "post-processing":"Post-Processing"
+           },
+           "WizardCard":{
+              
+           }
+        },
+        "Header":{
+           
+        }
+     },
+     "Material":{
+        "MaterialCatalog":{
+           "empty":"no materials found"
+        },
+        "MaterialCatalogCard":{
+           "button":{
+              "select":"Select"
+           }
+        },
+        "MaterialPreView":{
+           
+        },
+        "MaterialView":{
+           "button":{
+              "change":"Change"
+           }
+        }
+     },
+     "Model":{
+        "ModelCard":{
+           "license":"License",
+           "certificates":"Certificates",
+           "button":{
+              "select":"Select"
+           }
+        },
+        "ModelCatalog":{
+           "upload":"Upload Model",
+           "button":{
+              "upload":"Upload Model Link",
+              "select":"Select"
+           },
+           "empty":"no models found"
+        },
+        "ModelPreView":{
+           "created":"Created at",
+           "license":"License",
+           "certificates":"Certificates",
+           "noCertificates":"none",
+           "button":{
+              "select":"Select"
+           }
+        },
+        "ModelUpload":{
+           "header":"Upload Model",
+           "loading":"Uploading...",
+           "error":"Please upload one of the following file types: .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF",
+           "card":{
+              "header":"Upload Model by Drag & Drop",
+              "text":"( .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF)"
+           },
+           "button":{
+              "upload":"Upload"
+           }
+        },
+        "ModelView":{
+           "created":"Created at",
+           "license":"License",
+           "certificates":"Certificates",
+           "empty":"none",
+           "button":{
+              "change":"Change"
+           }
+        }
+     },
+     "PostProcessing":{
+        "Catalog":{
+           "empty":"No post-processing found"
+        },
+        "ItemCard":{
+           "button":{
+              "select":"Select",
+              "deselect":"Remove"
+           }
+        },
+        "ItemView":{
+           
+        },
+        "PostProcessingView":{
+           
+        }
+     },
+     "NewProcess":{
+        "header":"Start new order"
+     },
+     "ProcessView":{
+        "path":{
+           "model":"Find model",
+           "upload":"Upload model/s",
+           "material":"Find material",
+           "postprocessing":"Add post-processing"
+        }
+     }
+  },
+  "Profil":{
+    "header":"Profile",
+    "name":"Name",
+    "email":"E-mail",
+    "type":"User type",
+    "company":"Organization",
+    "address":{
+       "header":"Address",
+       "street":"Street",
+       "houseNumber":"House number",
+       "city":"City",
+       "zipcode":"Zip code",
+       "country":"Country",
+       "created":"Created on",
+       "accessed":"Last accessed on",
+       "updated":"Updated on"
       },
-      "next": "Next"
-    }
-  },
-  "material": {
-    "catalog": {
-      "search-placeholder": "Manufacture from...",
-      "loading-error": "Error loading materials",
-      "error-name": "Error: ",
-      "loading-material": "Loading Materials...",
-      "filter": {
-        "top-materials": "Top-Materials",
-        "plastic": "Plastic",
-        "metal": "Metal",
-        "keramik-glass": "Ceramic/Glass"
-      },
-      "card": {
-        "price": "Price",
-        "add": "Add"
+      "button":{
+         "delete":"Delete Account"
       }
-    }
   },
-  "manufacturer": {
-    "catalog": {
-      "search-placeholder": "Have it made at...",
-      "loading-error": "Error loading manufacturer",
-      "error-name": "Error: ",
-      "loading-manufacturer": "Loading manufacturer...",
-      "filter": {
-        "top-manufacturer": "Top-Manufacturer",
-        "distance": "Distance",
-        "time": "Time",
-        "price": "Price"
+  "Redirect":{
+      
+  },
+  "Service":{
+      "ServiceQuestion":{
+        
       },
-      "card": {
-        "distance": "Distance",
-        "production-time": "Production-Time",
-        "deliver-time": "Deliver-Time",
-        "total-time": "Total Time",
-        "price": "Price",
-        "add": "Add"
+      "ServiceRoutes":{
+        "let":"let",
+        "use":"use Service",
+        "provide":"provide Service",
+        "produce":"produce",
+        "design":"design",
+        "accompany":"accompany Process"
+      },
+      "ServiceView":{
+        "header":"provide Service"
+      },
+      "ServiceWizard":{
+        
       }
-    }
-  },
-  "post-processing": {
-    "next": "Next",
-    "option": {
-      "text-area-placeholder": "Description to the "
-    }
-  },
-  "additive": {
-    "upload-headline": "Additional Files (technical Drawing, etc.)",
-    "additional-text": {
-      "headline": "Additional Comments",
-      "placeholder": "additional text..."
-    },
-    "next": "Next"
-  },
-  "overview": {
-    "order": "Order",
-    "date": "Date",
-    "state": "State",
-    "models": {
-      "headline": "Models",
-      "no-model": "no model selected yet"
-    },
-    "manufacturer": "Manufacturer",
-    "bill": "Bill",
-    "button": {
-      "edit": "Edit",
-      "delete": "Delete",
-      "request": "Request"
-    }
   }
 }

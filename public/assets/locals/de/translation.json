@@ -464,9 +464,11 @@
       "country": "Land",
       "created": "Erstellt am",
       "accessed": "letzter Zugegriff am",
-      "updated": "Aktualisiert am",
-      "delete": "Löschen"
-    }
+      "updated": "Aktualisiert am"
+    },
+    "button":{
+      "delete":"Account Löschen"
+   }
   },
   "Redirect":{},
   "Service":{

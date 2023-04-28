@@ -13,10 +13,10 @@ interface Props {
 const Login: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { userType, path, register } = props;
-  const { error, status, data } = useLogin(userType, path, register);
+  const { loginQuery } = useLogin(userType, path, register);
 
   return (
-    <LoadingSuspense error={error} status={status} animation>
+    <LoadingSuspense query={loginQuery} animation>
       <h1>{t("Login.Login.redirect")}</h1>
     </LoadingSuspense>
   );

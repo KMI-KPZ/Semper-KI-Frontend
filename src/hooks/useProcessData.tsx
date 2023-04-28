@@ -1,15 +1,7 @@
-import { useState } from "react";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { IFilterItem } from "../components/Process/Filter/Interface";
 import { IMaterial, IModel, IPostProcessing } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
-
-interface ReturnProps {
-  data: IProcessData;
-  loadAllData(filters: IFilterItem[]): void;
-  loadModelData(filters: IFilterItem[]): void;
-  loadMaterialData(filters: IFilterItem[]): void;
-  loadPostProcessingData(filters: IFilterItem[]): void;
-}
 
 export interface IProcessData {
   filters: IFilterItem[];
@@ -18,82 +10,93 @@ export interface IProcessData {
   postProcessing: IPostProcessing[];
 }
 
-const useProcessData = (): ReturnProps => {
+const useProcessData = (
+  filters: IFilterItem[]
+): { processDataQuery: UseQueryResult<IProcessData, Error> } => {
   const { axiosCustom } = useCustomAxios();
-  const [data, setData] = useState<IProcessData>({
-    filters: [],
-    models: [],
-    materials: [],
-    postProcessing: [],
+
+  const processDataQuery = useQuery<IProcessData, Error>({
+    queryKey: ["processData", "models", "materials", "postProcessings"],
+    queryFn: async () => {
+      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/getProcessData/`;
+      return axiosCustom
+        .post(apiUrl, {
+          filters,
+        })
+        .then((response) => {
+          console.log("useProcessData | allQuery ✅ |", response.data);
+          return response.data;
+        });
+    },
+    enabled: false,
   });
-
-  const loadAllData = (filters: IFilterItem[]) => {
-    axiosCustom
-      .post(`${process.env.REACT_APP_HTTP_API_URL}/public/getProcessData/`, {
-        filters,
-      })
-      .then((res) => {
-        console.log("useProcessData | loadAllData ✅ |", res.data);
-        setData((prevState) => ({ ...prevState, ...res.data }));
-      })
-      .catch((error) => {
-        console.log("useProcessData | loadAllData ❌ |", error);
-      });
-    return data;
-  };
-
-  const loadModelData = (filters: IFilterItem[]) => {
-    axiosCustom
-      .post(`${process.env.REACT_APP_HTTP_API_URL}/public/getModels/`, {
-        filters,
-      })
-      .then((res) => {
-        console.log("useProcessData | loadModelData ✅ |", res.data);
-        setData((prevState) => ({ ...prevState, ...res.data }));
-      })
-      .catch((error) => {
-        console.log("useProcessData | loadModelData ❌ |", error);
-      });
-    return data;
-  };
-
-  const loadMaterialData = (filters: IFilterItem[]) => {
-    axiosCustom
-      .post(`${process.env.REACT_APP_HTTP_API_URL}/public/getMaterials/`, {
-        filters,
-      })
-      .then((res) => {
-        console.log("useProcessData | loadMaterialData ✅ |", res.data);
-        setData((prevState) => ({ ...prevState, ...res.data }));
-      })
-      .catch((error) => {
-        console.log("useProcessData | loadMaterialData ❌ |", error);
-      });
-    return data;
-  };
-
-  const loadPostProcessingData = (filters: IFilterItem[]) => {
-    axiosCustom
-      .post(`${process.env.REACT_APP_HTTP_API_URL}/public/getPostProcessing/`, {
-        filters,
-      })
-      .then((res) => {
-        console.log("useProcessData | loadPostProcessingData ✅ |", res.data);
-        setData((prevState) => ({ ...prevState, ...res.data }));
-      })
-      .catch((error) => {
-        console.log("useProcessData | loadPostProcessingData ❌ |", error);
-      });
-    return data;
-  };
-
-  return {
-    data,
-    loadAllData,
-    loadMaterialData,
-    loadModelData,
-    loadPostProcessingData,
-  };
+  return { processDataQuery };
 };
 
-export default useProcessData;
+export const useModelData = (
+  filters: IFilterItem[]
+): { modelsQuery: UseQueryResult<IModel[], Error> } => {
+  const { axiosCustom } = useCustomAxios();
+  const modelsQuery = useQuery<IModel[], Error>({
+    queryKey: ["models"],
+    queryFn: async () => {
+      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/getModels/`;
+      return axiosCustom
+        .post(apiUrl, {
+          filters,
+        })
+        .then((response) => {
+          console.log("useProcessData | modelQuery ✅ |", response.data);
+          return response.data;
+        });
+    },
+    enabled: false,
+  });
+  return { modelsQuery };
+};
+export const useMaterialData = (
+  filters: IFilterItem[]
+): { materialsQuery: UseQueryResult<IMaterial[], Error> } => {
+  const { axiosCustom } = useCustomAxios();
+  const materialsQuery = useQuery<IMaterial[], Error>({
+    queryKey: ["materials"],
+    queryFn: async () => {
+      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/getMaterials/`;
+      return axiosCustom
+        .post(apiUrl, {
+          filters,
+        })
+        .then((response) => {
+          console.log("useProcessData | materialQuery ✅ |", response.data);
+          return response.data;
+        });
+    },
+    enabled: false,
+  });
+  return { materialsQuery };
+};
+
+export const usePostProcessing = (
+  filters: IFilterItem[]
+): { postProcessingQuery: UseQueryResult<IPostProcessing[], Error> } => {
+  const { axiosCustom } = useCustomAxios();
+  const postProcessingQuery = useQuery<IPostProcessing[], Error>({
+    queryKey: ["postProcessings"],
+    queryFn: async () => {
+      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/getPostProcessing/`;
+      return axiosCustom
+        .post(apiUrl, {
+          filters,
+        })
+        .then((response) => {
+          console.log(
+            "useProcessData | postProcessingQuery ✅ |",
+            response.data
+          );
+          return response.data;
+        });
+    },
+    enabled: false,
+  });
+  return { postProcessingQuery };
+};

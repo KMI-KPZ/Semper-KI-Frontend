@@ -1,18 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { IManufacturer } from "../interface/Interface";
 import { TUseQueryStatus } from "../interface/types";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
-  data: IManufacturer[] | undefined;
-  status: TUseQueryStatus;
-  error: Error | null;
+  manufacturerQuery: UseQueryResult<IManufacturer[], Error>;
 }
 
 const useManufacturer = (): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
 
-  const { data, status, error } = useQuery<IManufacturer[], Error>({
+  const manufacturerQuery = useQuery<IManufacturer[], Error>({
     queryKey: ["manufacturer"],
     queryFn: async () =>
       axiosCustom
@@ -23,7 +21,7 @@ const useManufacturer = (): ReturnProps => {
         }),
   });
 
-  return { data, status, error };
+  return { manufacturerQuery };
 };
 
 export default useManufacturer;

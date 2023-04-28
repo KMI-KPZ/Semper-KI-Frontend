@@ -7,11 +7,14 @@ import { MaterialView } from "./MaterialView";
 import { IProcessState } from "../ProcessView";
 import { MaterialPreView } from "./MaterialPreView";
 import { useTranslation } from "react-i18next";
+import { IFilterItem } from "../Filter/Interface";
+import { useMaterialData } from "../../../hooks/useProcessData";
+import LoadingSuspense from "../../General/LoadingSuspense";
 
 interface Props {
   processState: IProcessState;
   selectedMaterial: IMaterial | undefined;
-  materials: IMaterial[];
+  filters: IFilterItem[];
   selectMaterial(material: IMaterial): void;
   deselectMaterial(): void;
   setProgress(path: string): void;
@@ -27,7 +30,7 @@ export const MaterialCatalog: React.FC<Props> = (props) => {
   const {
     selectMaterial,
     setProgress,
-    materials,
+    filters,
     processState,
     deselectMaterial,
     selectedMaterial,
@@ -37,6 +40,7 @@ export const MaterialCatalog: React.FC<Props> = (props) => {
     popUp: false,
     material: undefined,
   });
+  const { materialsQuery } = useMaterialData(filters);
   useEffect(() => {
     setProgress("material");
   }, []);
@@ -65,43 +69,45 @@ export const MaterialCatalog: React.FC<Props> = (props) => {
   };
 
   return selectedMaterial === undefined ? (
-    <div
-      className={`flex gap-y-5 ${
-        grid === true
-          ? "flex-row flex-wrap justify-between"
-          : "flex-col flex-nowrap "
-      }`}
-    >
-      {materials.length > 0 ? (
-        <>
-          {materials
-            .filter((material) => filterBySearch(material))
-            .map((material: IMaterial, index: number) => (
-              <MaterialCatalogCard
-                grid={grid}
-                selectMaterial={selectMaterial}
-                openMaterialView={openMaterialView}
-                material={material}
-                key={index}
-              />
-            ))}
-          <PopUp
-            open={state.popUp === true && state.material !== undefined}
-            onOutsideClick={closeMaterialView}
-          >
-            {state.material !== undefined ? (
-              <MaterialPreView
-                material={state.material}
-                closeMaterialView={closeMaterialView}
-                selectMaterial={selectMaterial}
-              />
-            ) : null}
-          </PopUp>
-        </>
-      ) : (
-        t("Process.Material.MaterialCatalog.empty")
-      )}
-    </div>
+    <LoadingSuspense query={materialsQuery}>
+      <div
+        className={`flex gap-y-5 ${
+          grid === true
+            ? "flex-row flex-wrap justify-between"
+            : "flex-col flex-nowrap "
+        }`}
+      >
+        {materialsQuery.data !== undefined && materialsQuery.data.length > 0 ? (
+          <>
+            {materialsQuery.data
+              .filter((material) => filterBySearch(material))
+              .map((material: IMaterial, index: number) => (
+                <MaterialCatalogCard
+                  grid={grid}
+                  selectMaterial={selectMaterial}
+                  openMaterialView={openMaterialView}
+                  material={material}
+                  key={index}
+                />
+              ))}
+            <PopUp
+              open={state.popUp === true && state.material !== undefined}
+              onOutsideClick={closeMaterialView}
+            >
+              {state.material !== undefined ? (
+                <MaterialPreView
+                  material={state.material}
+                  closeMaterialView={closeMaterialView}
+                  selectMaterial={selectMaterial}
+                />
+              ) : null}
+            </PopUp>
+          </>
+        ) : (
+          t("Process.Material.MaterialCatalog.empty")
+        )}
+      </div>
+    </LoadingSuspense>
   ) : (
     <MaterialView
       deselectMaterial={deselectMaterial}

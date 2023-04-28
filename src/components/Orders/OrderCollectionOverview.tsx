@@ -17,7 +17,7 @@ interface Props {
 const OrderCollectionOverview: React.FC<Props> = (props) => {
   const { userType } = props;
   const { t } = useTranslation();
-  const { data, status, error } = useOrders();
+  const { ordersQuery } = useOrders();
   const [state, setState] = useState<boolean[]>([]);
   const { appState } = useContext(AppContext);
   const { missedEvents } = appState;
@@ -31,9 +31,9 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
   };
 
   useEffect(() => {
-    if (data !== undefined && state.length === 0)
-      setState(data.map(() => false));
-  }, [data]);
+    if (ordersQuery.data !== undefined && state.length === 0)
+      setState(ordersQuery.data.map(() => false));
+  }, [ordersQuery.data]);
 
   const getOrderCollectionEventByID = (
     orderCollectionID: string
@@ -45,7 +45,7 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
   };
 
   return (
-    <LoadingSuspense error={error} status={status}>
+    <LoadingSuspense query={ordersQuery}>
       <div className="flex flex-col items-center w-full gap-5 overflow-x-auto overflow-y-hidden p-3">
         <h1 className="bg-white w-full py-3 text-center">
           {t(
@@ -54,10 +54,10 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
               : "Orders.OrderCollectionOverview.headline.manufacturer"
           )}
         </h1>
-        {data !== undefined ? (
+        {ordersQuery.data !== undefined ? (
           <ul className="w-full gap-5 flex flex-col">
-            {data.length > 0 ? (
-              data
+            {ordersQuery.data.length > 0 ? (
+              ordersQuery.data
                 .slice(0)
                 .reverse()
                 .map((orderCollection: IOrderCollection, index: number) => (

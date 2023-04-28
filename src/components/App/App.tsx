@@ -87,7 +87,7 @@ const App: React.FC = () => {
   const { initialMissedEvents } = useMissedEvent({
     isLoggedIn,
   });
-  const { cart } = useCart();
+  const { cartQuery } = useCart();
   const queryClient = useQueryClient();
   const { t } = useTranslation();
 
@@ -226,7 +226,7 @@ const App: React.FC = () => {
       value={{
         appState: state,
         setAppState: setState,
-        cart,
+        cart: cartQuery.data,
         user,
         deleteEvent,
       }}
@@ -240,7 +240,7 @@ const App: React.FC = () => {
         <Header
           isLoggedIn={isLoggedIn}
           userType={userType}
-          cartCount={cart.length}
+          cartCount={cartQuery.data.length}
         />
         <main className="w-full xl:w-5/6 flex flex-col justify-start items-center p-2 flex-grow bg-opacity-80 bg-slate-200 ">
           <Breadcrumb />
@@ -251,7 +251,7 @@ const App: React.FC = () => {
                 <Home
                   events={missedEvents}
                   userType={userType}
-                  cartCount={cart.length}
+                  cartCount={cartQuery.data.length}
                 />
               }
             />

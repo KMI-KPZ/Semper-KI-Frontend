@@ -43,7 +43,8 @@ const Checkout: React.FC<Props> = (props) => {
     showError,
     orderSendSuccesfull,
   } = state;
-  const { cart, error, status, uploadCart } = useCart();
+  const { cartQuery, updateCart } = useCart();
+  const { data: cart } = cartQuery;
   const {
     order,
     sendOrder,
@@ -122,7 +123,7 @@ const Checkout: React.FC<Props> = (props) => {
   const handleOnClickSend = () => {
     if (checkAll === true) {
       sendOrder();
-      uploadCart.mutate([]);
+      updateCart.mutate([]);
     } else {
       showErrorOnTime();
     }
@@ -211,7 +212,7 @@ const Checkout: React.FC<Props> = (props) => {
   };
 
   return (
-    <LoadingSuspense status={status} error={error}>
+    <LoadingSuspense query={cartQuery}>
       <div className="flex flex-col items-center gap-5 w-full p-5">
         <div className="bg-white w-full p-5 flex flex-col gap-5 justify-start items-center">
           <h1 className="text-center p-2 w-full">

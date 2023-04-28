@@ -9,6 +9,7 @@ import { IModel } from "../../../interface/Interface";
 import Button from "../../General/Button";
 import LoadingSuspense from "../../General/LoadingSuspense";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
+import LoadingAnimation from "../../General/LoadingAnimation";
 
 interface Props {
   setProgress(path: string): void;
@@ -144,35 +145,35 @@ export const ModelUpload: React.FC<Props> = (props) => {
       {error && (
         <div className="error">{t("Process.Model.ModelUpload.error")}</div>
       )}
-      <LoadingSuspense
-        error={uploadError}
-        status={status}
-        animation
-        text
-        loadingText={t("Process.Model.ModelUpload.loading")}
-      >
-        <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
-          {fileList.map((file: File, index: number) => (
-            <div
-              key={index}
-              className="flex flex-col justify-center items-center gap-2 bg-gray-100 p-2"
-            >
-              <div className="canvas">
-                <ViewInArIcon sx={{ fontSize: "90px", margin: "auto" }} />
-              </div>
-              {file.name}
-              <div className="flex flex-row gap-2 items-center justify-center">
-                {getFileSizeAsString(file.size)}
-                <img
-                  alt="button delete model"
-                  src={IconDelete}
-                  className="w-6 h-6 hover:cursor-pointer hover:bg-gray-300"
-                  onClick={(e) => deleteFile(e, index)}
-                />
-              </div>
+
+      <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
+        {fileList.map((file: File, index: number) => (
+          <div
+            key={index}
+            className="flex flex-col justify-center items-center gap-2 bg-gray-100 p-2"
+          >
+            <div className="canvas">
+              <ViewInArIcon sx={{ fontSize: "90px", margin: "auto" }} />
             </div>
-          ))}
+            {file.name}
+            <div className="flex flex-row gap-2 items-center justify-center">
+              {getFileSizeAsString(file.size)}
+              <img
+                alt="button delete model"
+                src={IconDelete}
+                className="w-6 h-6 hover:cursor-pointer hover:bg-gray-300"
+                onClick={(e) => deleteFile(e, index)}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+      {status === "loading" ? (
+        <div className="pt-5">
+          <LoadingAnimation />
+          <span>{t("Process.Model.ModelUpload.loading")}</span>
         </div>
+      ) : (
         <div
           className="max-w-2xl bg-gray-100 flex flex-col items-center justify-center gap-2 p-2 hover:cursor-pointer hover:bg-gray-300"
           onClick={handleClickUploadCard}
@@ -193,10 +194,11 @@ export const ModelUpload: React.FC<Props> = (props) => {
           <h2>{t("Process.Model.ModelUpload.card.header")}</h2>
           {t("Process.Model.ModelUpload.card.text")}
         </div>
-        <Button onClick={handleClickNext} icon={<FileUploadIcon />}>
-          {t("Process.Model.ModelUpload.button.upload")}
-        </Button>
-      </LoadingSuspense>
+      )}
+
+      <Button onClick={handleClickNext} icon={<FileUploadIcon />}>
+        {t("Process.Model.ModelUpload.button.upload")}
+      </Button>
     </div>
   );
 };

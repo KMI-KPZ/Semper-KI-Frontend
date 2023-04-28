@@ -51,7 +51,7 @@ const Guide: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const { path } = useParams();
   const { guideQuestions, loadGuideQuestions } = useGuide();
-  const { filters } = useFilter();
+  const { filtersQuery } = useFilter();
   const [state, setState] = useState<State>(initialState);
   const { activeQuestionIndex, overview, questions } = state;
 
@@ -105,7 +105,7 @@ const Guide: React.FC<Props> = (props) => {
       id: filterId,
       isChecked: true,
       isOpen: false,
-      question: getQuestionByFilterId(filterId, filters),
+      question: getQuestionByFilterId(filterId, filtersQuery.data),
       answer: guideAnswer(),
     };
   };

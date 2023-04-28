@@ -18,7 +18,6 @@ import { Error } from "../Error/Error";
 import { IFilterItem } from "./Filter/Interface";
 import useFilter from "../../hooks/useFilter";
 import Header from "./Header/Header";
-import useProcessData from "../../hooks/useProcessData";
 import useCart from "../../hooks/useCart";
 import { checkForSelectedData } from "../../services/utils";
 import { useTranslation } from "react-i18next";
@@ -93,21 +92,11 @@ export const ProcessView: React.FC<Props> = (props) => {
   const setChangesFalse = () => {
     setState((prevState) => ({ ...prevState, hasChanged: false }));
   };
-  const { cart, error, status, uploadCart } = useCart();
+  const { cartQuery, updateCart } = useCart();
+  const { data: cart, error } = cartQuery;
   const { hasChanged, grid, items, progress, activeItemIndex, filterOpen } =
     state;
-  const { filters: filtersEmpty } = useFilter();
-  const {
-    data,
-    loadAllData,
-    loadMaterialData,
-    loadModelData,
-    loadPostProcessingData,
-  } = useProcessData();
-  const { filters: filtersData, materials, models, postProcessing } = data;
-  const filters: IFilterItem[] =
-    filtersData.length === 0 ? filtersEmpty : filtersData;
-
+  const { filtersQuery, updateFilters: filtersMutate } = useFilter();
   useEffect(() => {
     if (
       cart !== undefined &&
@@ -131,38 +120,20 @@ export const ProcessView: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (hasChanged === true)
-      uploadCart.mutate(items, {
+      updateCart.mutate(items, {
         onSuccess(data, variables, context) {
           setChangesFalse();
         },
       });
   }, [items, hasChanged]);
 
-  const loadData = (title?: string) => {
-    // console.log("Process| loadData", title);
-    switch (title?.toLocaleLowerCase()) {
-      case "model":
-        loadModelData(filters);
-        break;
-      case "material":
-        loadMaterialData(filters);
-        break;
-      case "postprocessing":
-        loadPostProcessingData(filters);
-        break;
-
-      default:
-        loadAllData(filters);
-        break;
-    }
-  };
   const searchModels = (name: string): void => {
     // console.log("Process | searchModels |", name);
     setState((prevState) => ({ ...prevState, searchText: name }));
   };
   const applyFilters = (filterItemList: IFilterItem[]): void => {
     // console.log("Process | applyFilters |", filterItemList);
-    loadAllData(filterItemList);
+    filtersMutate.mutate(filterItemList);
   };
   const startNewProcess = (): void => {
     setState((prevState) => ({
@@ -274,7 +245,7 @@ export const ProcessView: React.FC<Props> = (props) => {
       progress: getProgressByPath(path),
       activeItemIndex: path === "upload" ? -1 : prevState.activeItemIndex,
     }));
-    if (filters.length > 0) loadData(path);
+    // if (filtersQuery.data.length > 0) loadData(path);
   };
   const selectModel = (model: IModel): void => {
     // console.log("Process | selectModel |", model);
@@ -362,12 +333,12 @@ export const ProcessView: React.FC<Props> = (props) => {
         searchModels,
       }}
     >
-      <LoadingSuspense status={status} error={error}>
+      <LoadingSuspense query={filtersQuery}>
         <div className="relativ flex flex-col xl:flex-row gap-5 w-full p-5">
           <Filter
             setFilterOpen={setFilterOpen}
             filterOpen={filterOpen}
-            filters={filters}
+            filters={filtersQuery.data}
             applyFilters={applyFilters}
             guideAnswers={guideAnswers}
             progress={progress}
@@ -385,7 +356,7 @@ export const ProcessView: React.FC<Props> = (props) => {
                 element={
                   <ModelCatalog
                     processState={state}
-                    models={models}
+                    filters={filtersQuery.data}
                     selectedModel={
                       items[activeItemIndex] !== undefined &&
                       items[activeItemIndex].model !== undefined
@@ -419,7 +390,7 @@ export const ProcessView: React.FC<Props> = (props) => {
                         : undefined
                     }
                     processState={state}
-                    materials={materials}
+                    filters={filtersQuery.data}
                     selectMaterial={selectMaterial}
                     setProgress={setProgress}
                   />
@@ -430,7 +401,7 @@ export const ProcessView: React.FC<Props> = (props) => {
                 element={
                   <PostProcessingView
                     processState={state}
-                    postprocessings={postProcessing}
+                    filters={filtersQuery.data}
                     selectPostProcessings={selectPostProcessings}
                     setProgress={setProgress}
                   />

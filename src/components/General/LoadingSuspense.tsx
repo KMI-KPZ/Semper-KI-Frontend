@@ -1,28 +1,26 @@
+import { DefinedUseQueryResult, UseQueryResult } from "@tanstack/react-query";
 import React, { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { TUseMutationStatus, TUseQueryStatus } from "../../interface/types";
 import LoadingAnimation from "./LoadingAnimation";
 
-interface Props {
+interface Props<T> {
   children?: ReactNode;
-  status: TUseQueryStatus | TUseMutationStatus;
-  error: Error | null | undefined;
+  query: UseQueryResult<T, Error> | DefinedUseQueryResult<T, Error>;
   animation?: boolean;
   text?: boolean;
   loadingText?: string;
 }
 
-const LoadingSuspense: React.FC<Props> = (props) => {
+const LoadingSuspense = <T,>(props: Props<T>) => {
   const { t } = useTranslation();
   const {
     children,
-    status,
-    error,
+    query,
     animation = false,
     loadingText = t("General.LoadingSuspense.loading"),
     text = true,
   } = props;
-  if (status === "loading")
+  if (query.status === "loading")
     return (
       <div className="flex flex-col items-center justify-center pt-5">
         {animation !== undefined && animation === true ? (
@@ -31,11 +29,15 @@ const LoadingSuspense: React.FC<Props> = (props) => {
         {text === true ? <h1>{loadingText}</h1> : null}
       </div>
     );
-  if (status === "error" && error !== null && error !== undefined)
+  if (
+    query.status === "error" &&
+    query.error !== null &&
+    query.error !== undefined
+  )
     return (
       <div className="flex felx-row items-center justify-center">
         <h1>
-          {t("General.LoadingSuspense.error")} : {error.message}
+          {t("General.LoadingSuspense.error")} : {query.error.message}
         </h1>
       </div>
     );

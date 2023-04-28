@@ -3,21 +3,16 @@ import useCustomAxios from "./useCustomAxios";
 import { EUserType } from "../interface/enums";
 import { useEffect } from "react";
 import { AxiosResponse } from "axios";
-import { TUseQueryStatus } from "../interface/types";
-
-interface ReturnProps {
-  data: AxiosResponse | undefined;
-  status: TUseQueryStatus;
-  error: Error | null | undefined;
-}
 
 export const useLogin = (
   fetchLoginUsertype?: EUserType,
   path?: string,
   register?: boolean
-): ReturnProps => {
+): {
+  loginQuery: UseQueryResult<AxiosResponse<any, any>, Error>;
+} => {
   const { axiosCustom } = useCustomAxios();
-  const { data, status, error } = useQuery<AxiosResponse, Error>({
+  const loginQuery = useQuery<AxiosResponse, Error>({
     queryKey: ["login"],
     queryFn: async () => {
       const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/login/`;
@@ -34,19 +29,19 @@ export const useLogin = (
     },
   });
   useEffect(() => {
-    if (data !== undefined && status === "success")
-      window.location.href = data.data;
-  }, [data]);
+    if (loginQuery.data !== undefined && loginQuery.status === "success")
+      window.location.href = loginQuery.data.data;
+  }, [loginQuery.data]);
   return {
-    data,
-    error,
-    status,
+    loginQuery,
   };
 };
 
-export const useLogout = (): ReturnProps => {
+export const useLogout = (): {
+  logoutQuery: UseQueryResult<AxiosResponse<any, any>, Error>;
+} => {
   const { axiosCustom } = useCustomAxios();
-  const { data, status, error } = useQuery<AxiosResponse, Error>({
+  const logoutQuery = useQuery<AxiosResponse, Error>({
     queryKey: ["logout"],
     queryFn: async () => {
       const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/logout/`;
@@ -54,12 +49,10 @@ export const useLogout = (): ReturnProps => {
     },
   });
   useEffect(() => {
-    if (data !== undefined && status === "success")
-      window.location.href = data.data;
-  }, [data]);
+    if (logoutQuery.data !== undefined && logoutQuery.status === "success")
+      window.location.href = logoutQuery.data.data;
+  }, [logoutQuery.data]);
   return {
-    data,
-    error,
-    status,
+    logoutQuery,
   };
 };

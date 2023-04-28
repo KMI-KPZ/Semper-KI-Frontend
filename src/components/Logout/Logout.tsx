@@ -4,9 +4,9 @@ import LoadingSuspense from "../General/LoadingSuspense";
 
 const Logout = () => {
   const { t } = useTranslation();
-  const { data, error, status } = useLogout();
+  const { logoutQuery } = useLogout();
   return (
-    <LoadingSuspense error={error} status={status} animation>
+    <LoadingSuspense query={logoutQuery} animation>
       <h1>{t("Logout.redirect")}</h1>
     </LoadingSuspense>
   );

@@ -9,10 +9,13 @@ import { IconUpload } from "../../../constants/Icons";
 import Button from "../../General/Button";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useModelData } from "../../../hooks/useProcessData";
+import { IFilterItem } from "../Filter/Interface";
+import LoadingSuspense from "../../General/LoadingSuspense";
 
 interface Props {
+  filters: IFilterItem[];
   processState: IProcessState;
-  models: IModel[];
   selectedModel: IModel | undefined;
   selectModel(model: IModel): void;
   deselectModel(): void;
@@ -27,7 +30,7 @@ interface State {
 export const ModelCatalog: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const {
-    models,
+    filters,
     processState,
     selectModel,
     setProgress,
@@ -37,6 +40,7 @@ export const ModelCatalog: React.FC<Props> = (props) => {
   const { grid, searchText } = processState;
   const navigate = useNavigate();
   const [state, setState] = useState<State>({ popUp: false, model: undefined });
+  const { modelsQuery } = useModelData(filters);
   useEffect(() => {
     setProgress("model");
   }, []);
@@ -95,44 +99,46 @@ export const ModelCatalog: React.FC<Props> = (props) => {
   );
 
   return selectedModel === undefined ? (
-    <div
-      className={`flex gap-y-5 ${
-        grid === true
-          ? "flex-row flex-wrap justify-between"
-          : "flex-col flex-nowrap "
-      }`}
-    >
-      {models.length > 0 ? (
-        <>
-          {renderUplaodCart()}
-          {models
-            .filter((model, index) => filterBySearch(model))
-            .map((model: IModel, index: number) => (
-              <ModelCard
-                grid={processState.grid}
-                selectModel={selectModel}
-                model={model}
-                key={index}
-                openModelView={openModelView}
-              />
-            ))}
-          <PopUp
-            open={state.popUp === true && state.model !== undefined}
-            onOutsideClick={closeModelView}
-          >
-            {state.model !== undefined ? (
-              <ModelPreView
-                model={state.model}
-                selectModel={selectModel}
-                closeModelView={closeModelView}
-              />
-            ) : null}
-          </PopUp>
-        </>
-      ) : (
-        t("Process.Model.ModelCatalog.empty")
-      )}
-    </div>
+    <LoadingSuspense query={modelsQuery}>
+      <div
+        className={`flex gap-y-5 ${
+          grid === true
+            ? "flex-row flex-wrap justify-between"
+            : "flex-col flex-nowrap "
+        }`}
+      >
+        {modelsQuery.data !== undefined && modelsQuery.data.length > 0 ? (
+          <>
+            {renderUplaodCart()}
+            {modelsQuery.data
+              .filter((model, index) => filterBySearch(model))
+              .map((model: IModel, index: number) => (
+                <ModelCard
+                  grid={processState.grid}
+                  selectModel={selectModel}
+                  model={model}
+                  key={index}
+                  openModelView={openModelView}
+                />
+              ))}
+            <PopUp
+              open={state.popUp === true && state.model !== undefined}
+              onOutsideClick={closeModelView}
+            >
+              {state.model !== undefined ? (
+                <ModelPreView
+                  model={state.model}
+                  selectModel={selectModel}
+                  closeModelView={closeModelView}
+                />
+              ) : null}
+            </PopUp>
+          </>
+        ) : (
+          t("Process.Model.ModelCatalog.empty")
+        )}
+      </div>
+    </LoadingSuspense>
   ) : (
     <ModelView model={selectedModel} deselectModel={deselectModel} />
   );

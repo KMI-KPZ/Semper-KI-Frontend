@@ -1,31 +1,59 @@
-import { useState } from "react";
-import { IFilterItem } from "../components/Process/Filter/Interface";
 import useCustomAxios from "./useCustomAxios";
 import _FilterItems from "./Data/FilterQuestions.json";
+import { IFilterItem } from "../components/Process/Filter/Interface";
+import {
+  DefinedUseQueryResult,
+  useMutation,
+  UseMutationResult,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
 const FilterItems = _FilterItems as IFilterItem[];
 
 interface ReturnProps {
-  filters: IFilterItem[];
-  loadFilters(): void;
+  filtersQuery: DefinedUseQueryResult<IFilterItem[], Error>;
+  updateFilters: UseMutationResult<
+    AxiosResponse<any, any>,
+    Error,
+    IFilterItem[],
+    unknown
+  >;
 }
 
 const useFilter = (): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
-  const [filters, setFilters] = useState<IFilterItem[]>(FilterItems);
+  const queryClient = useQueryClient();
 
-  const loadFilters = () => {
-    axiosCustom
-      .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getFilters/`)
-      .then((res) => {
-        console.log("useFilter | loadFilters ✅ |", res.data);
-        setFilters(res.data);
-      })
-      .catch((error) => {
-        console.log("useFilter | loadFilters ❌ |", error);
+  const filtersQuery = useQuery<IFilterItem[], Error>({
+    queryKey: ["filters"],
+    queryFn: async () => {
+      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/getFilters/`;
+      return axiosCustom.get(apiUrl).then((response) => {
+        console.log("useFilter | filtersQuery ✅ |", response.data);
+        return response.data;
       });
-  };
+    },
+    initialData: FilterItems,
+    enabled: false,
+  });
 
-  return { loadFilters, filters };
+  const updateFilters = useMutation<AxiosResponse, Error, IFilterItem[]>({
+    mutationFn: async (filters: IFilterItem[]) =>
+      axiosCustom
+        .post(`${process.env.REACT_APP_HTTP_API_URL}/public/updateFilters/`, {
+          filters,
+        })
+        .then((res) => {
+          console.log("useFilter | updateFilters ✅ |", res.data, filters);
+          return res;
+        }),
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries(["filters"]);
+    },
+  });
+
+  return { filtersQuery, updateFilters };
 };
 
 export default useFilter;

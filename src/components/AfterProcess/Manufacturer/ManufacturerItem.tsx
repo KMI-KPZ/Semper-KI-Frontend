@@ -16,7 +16,7 @@ const ManufacturerItem: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { itemIndex, processItem, manufacturerID, setManufacturerIndex } =
     props;
-  const { data, error, status } = useManufacturer();
+  const { manufacturerQuery } = useManufacturer();
 
   const handleOnClickManufacturer = (manufacturerID: string) => {
     setManufacturerIndex(itemIndex, manufacturerID);
@@ -26,7 +26,7 @@ const ManufacturerItem: React.FC<Props> = (props) => {
   };
 
   return (
-    <LoadingSuspense error={error} status={status}>
+    <LoadingSuspense query={manufacturerQuery}>
       <div className="flex flex-col items-center gap-5 w-full p-2 justify-between bg-white">
         <h2>{processItem.model?.title}</h2>
         <div className="flex flex-col md:flex-row justify-around items-start w-full">
@@ -36,8 +36,8 @@ const ManufacturerItem: React.FC<Props> = (props) => {
           />
           <div className="flex flex-row md:flex-col gap-5 items-center justify-start">
             <h3>{t("AfterProcess.Manufacturer.ManufacturerItem.header")}</h3>
-            {data !== undefined &&
-              data.map((manufacturer, manufacturerIndex) => (
+            {manufacturerQuery.data !== undefined &&
+              manufacturerQuery.data.map((manufacturer, manufacturerIndex) => (
                 <div
                   className={`flex flex-col sm:flex-row w-full md:w-fit p-5 gap-5
             hover:cursor-pointer transition-all ease-in-out duration-300

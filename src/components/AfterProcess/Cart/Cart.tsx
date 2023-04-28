@@ -27,7 +27,8 @@ const Order: React.FC<Props> = (props) => {
     showError: false,
   });
   const { showError } = state;
-  const { cart, error: cartError, status, uploadCart } = useCart();
+  const { cartQuery, updateCart } = useCart();
+  const { data: cart } = cartQuery;
   const queryClient = useQueryClient();
 
   const checkCart = (): { errors: TError[]; errorCount: number } => {
@@ -63,7 +64,7 @@ const Order: React.FC<Props> = (props) => {
     }
   };
   const handleOnClickClear = () => {
-    uploadCart.mutate([], {
+    updateCart.mutate([], {
       onSuccess(data, variables, context) {
         queryClient.invalidateQueries(["cart"]);
       },
@@ -71,11 +72,11 @@ const Order: React.FC<Props> = (props) => {
   };
 
   const deleteItem = (index: number) => {
-    uploadCart.mutate(cart.filter((item, _index) => _index !== index));
+    updateCart.mutate(cart.filter((item, _index) => _index !== index));
   };
 
   return (
-    <LoadingSuspense error={cartError} status={status}>
+    <LoadingSuspense query={cartQuery}>
       <div className="flex flex-col items-center gap-5 w-full p-5">
         <h1 className="text-center p-2 bg-white w-full">
           {t("AfterProcess.Cart.Cart.header")}

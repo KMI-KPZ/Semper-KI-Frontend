@@ -3,6 +3,7 @@ import {
   UseMutationResult,
   useQuery,
   useQueryClient,
+  UseQueryResult,
 } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import { EOrderState } from "../interface/enums";
@@ -10,9 +11,7 @@ import { IChatMessage, IOrderCollection } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
-  data: IOrderCollection[] | undefined;
-  status: "error" | "success" | "loading";
-  error: Error | null;
+  ordersQuery: UseQueryResult<IOrderCollection[], Error>;
   deleteOrder: UseMutationResult<any, unknown, string, unknown>;
   deleteOrderCollection: UseMutationResult<any, unknown, string, unknown>;
   updateOrder: UseMutationResult<
@@ -34,7 +33,7 @@ export interface IUpdateOrderData {
 export const useOrders = (): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
   const queryClient = useQueryClient();
-  const { data, status, error } = useQuery<IOrderCollection[], Error>(
+  const ordersQuery = useQuery<IOrderCollection[], Error>(
     ["orders"],
     async () => {
       const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/getOrders/`;
@@ -91,9 +90,7 @@ export const useOrders = (): ReturnProps => {
   });
 
   return {
-    data,
-    status,
-    error,
+    ordersQuery,
     deleteOrder,
     deleteOrderCollection,
     updateOrder,

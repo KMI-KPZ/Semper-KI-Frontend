@@ -2,18 +2,23 @@ import React, { useEffect, useState } from "react";
 import { IPostProcessing } from "../../../interface/Interface";
 import Catalog from "./Catalog";
 import { IProcessState } from "../ProcessView";
+import { IFilterItem } from "../Filter/Interface";
+import { usePostProcessing } from "../../../hooks/useProcessData";
+import LoadingSuspense from "../../General/LoadingSuspense";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   processState: IProcessState;
-  postprocessings: IPostProcessing[];
+  filters: IFilterItem[];
   selectPostProcessings: (postProcessings: IPostProcessing[]) => void;
   setProgress(path: string): void;
 }
 
 export const PostProcessingView: React.FC<Props> = (props) => {
-  const { setProgress, processState, postprocessings, selectPostProcessings } =
-    props;
+  const { t } = useTranslation();
+  const { setProgress, processState, filters, selectPostProcessings } = props;
   const { grid, searchText, activeItemIndex, items } = processState;
+  const { postProcessingQuery } = usePostProcessing(filters);
   const _checkedPostprocessings: IPostProcessing[] | undefined =
     items[activeItemIndex].postProcessings;
   const checkedPostprocessings: IPostProcessing[] =
@@ -55,13 +60,22 @@ export const PostProcessingView: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex flex-col gap-y-5">
-      <Catalog
-        grid={grid}
-        searchText={searchText}
-        items={hydratePostProcessings(postprocessings, checkedPostprocessings)}
-        checkItem={checkPostProcessing}
-      />
-    </div>
+    <LoadingSuspense query={postProcessingQuery}>
+      {postProcessingQuery.data !== undefined ? (
+        <div className="flex flex-col gap-y-5">
+          <Catalog
+            grid={grid}
+            searchText={searchText}
+            items={hydratePostProcessings(
+              postProcessingQuery.data,
+              checkedPostprocessings
+            )}
+            checkItem={checkPostProcessing}
+          />
+        </div>
+      ) : (
+        t("Process.PostProcessing.PostProcessingView.empty")
+      )}
+    </LoadingSuspense>
   );
 };

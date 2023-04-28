@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import {
   EHeaderItemLoggedIn,
-  EHeaderItemPreferred,
+  ENavigationItemPreferred,
   EOrderCollectionState,
   EOrderState,
   EPostProcessingOptionType,
@@ -142,7 +142,7 @@ export interface IHeaderItem {
   link: string;
   icon: string | ReactNode;
   extern: boolean;
-  preferred: EHeaderItemPreferred;
+  preferred: ENavigationItemPreferred;
   userType: EUserType[];
   loggedIn: boolean[];
 }

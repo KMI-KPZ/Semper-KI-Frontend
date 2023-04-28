@@ -7,7 +7,7 @@ import { ClickAwayListener } from "@mui/material";
 import HeaderItem from "./HeaderItem";
 
 import { AppContext } from "../App/App";
-import { EHeaderItemPreferred, EUserType } from "../../interface/enums";
+import { ENavigationItemPreferred, EUserType } from "../../interface/enums";
 import { IHeaderItem } from "../../interface/Interface";
 import { HeaderItemsData } from "./HeaderData";
 import CloseIcon from "@mui/icons-material/Close";
@@ -140,7 +140,7 @@ export const Header: React.FC<Props> = (props) => {
     <ul className="hidden md:flex flex-row gap-4 justify-center items-center">
       {HeaderItemsData.filter(
         (headerItem: IHeaderItem) =>
-          headerItem.preferred === EHeaderItemPreferred.header &&
+          headerItem.preferred === ENavigationItemPreferred.header &&
           headerItem.userType.includes(
             userType === undefined ? EUserType.client : userType
           ) &&
@@ -163,7 +163,7 @@ export const Header: React.FC<Props> = (props) => {
     <ul className="flex md:hidden flex-row gap-4 justify-center items-center">
       {HeaderItemsData.filter(
         (headerItem: IHeaderItem) =>
-          headerItem.preferred === EHeaderItemPreferred.header &&
+          headerItem.preferred === ENavigationItemPreferred.header &&
           headerItem.userType.includes(
             userType === undefined ? EUserType.client : userType
           ) &&
@@ -197,7 +197,7 @@ export const Header: React.FC<Props> = (props) => {
 
       {HeaderItemsData.filter(
         (headerItem: IHeaderItem) =>
-          headerItem.preferred === EHeaderItemPreferred.menu &&
+          headerItem.preferred === ENavigationItemPreferred.menu &&
           headerItem.userType.includes(
             userType === undefined ? EUserType.client : userType
           ) &&
@@ -225,7 +225,7 @@ export const Header: React.FC<Props> = (props) => {
       </div>
       {HeaderItemsData.filter(
         (headerItem: IHeaderItem) =>
-          headerItem.preferred === EHeaderItemPreferred.header &&
+          headerItem.preferred === ENavigationItemPreferred.header &&
           headerItem.userType.includes(
             userType === undefined ? EUserType.client : userType
           ) &&

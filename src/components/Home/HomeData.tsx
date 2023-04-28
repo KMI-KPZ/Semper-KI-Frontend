@@ -13,110 +13,110 @@ import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturi
 import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import PrintIcon from "@mui/icons-material/Print";
 import ExploreIcon from "@mui/icons-material/Explore";
-import MapIcon from "@mui/icons-material/Map";
 import HardwareIcon from "@mui/icons-material/Hardware";
 import ScienceIcon from "@mui/icons-material/Science";
+import { EUserType } from "../../interface/enums";
 
 export const HomeItemsData: IHomeItem[] = [
   {
-    users: [0],
+    userTypes: [EUserType.client],
     title: "Home.HomeData.continue",
     link: "/process",
     icon: <KeyboardDoubleArrowRightIcon fontSize="large" />,
   },
   {
-    users: [0],
+    userTypes: [EUserType.client],
     title: "Home.HomeData.new-contract",
     link: "/process/new",
     icon: <AddShoppingCartIcon fontSize="large" />,
   },
   {
-    users: [3],
+    userTypes: [EUserType.anonym],
     title: "Home.HomeData.explore",
     link: "/process/model",
     icon: <ScienceIcon fontSize="large" />,
   },
   {
-    users: [0, 1, 3],
+    userTypes: [EUserType.client, EUserType.manufacturer, EUserType.anonym],
     title: "Home.HomeData.guide",
     link: "/guide",
     icon: <ExploreIcon fontSize="large" />,
   },
   {
-    users: [3],
+    userTypes: [EUserType.anonym],
     title: "Home.HomeData.use-service",
     link: "/service/use",
     icon: <HardwareIcon fontSize="large" />,
   },
   {
-    users: [3],
+    userTypes: [EUserType.anonym],
     title: "Home.HomeData.provide-service",
     link: "/service/provide",
     icon: <PrecisionManufacturingIcon fontSize="large" />,
   },
   {
-    users: [1],
+    userTypes: [EUserType.manufacturer],
     title: "Home.HomeData.proceedings",
     link: "/proceedings",
     icon: <GavelIcon fontSize="large" />,
   },
   {
-    users: [1],
+    userTypes: [EUserType.manufacturer],
     title: "Home.HomeData.company",
     link: "/company",
     icon: <FactoryIcon fontSize="large" />,
   },
 
   {
-    users: [0, 3],
+    userTypes: [EUserType.client, EUserType.anonym],
     title: "Home.HomeData.cart",
     link: "/cart",
     icon: <ShoppingCartIcon fontSize="large" />,
   },
   {
-    users: [0],
+    userTypes: [EUserType.client],
     title: "Home.HomeData.orders",
     link: "/orders",
     icon: <DescriptionIcon fontSize="large" />,
   },
   {
-    users: [1],
+    userTypes: [EUserType.manufacturer],
     title: "Home.HomeData.contracts",
     link: "/contracts",
     icon: <DescriptionIcon fontSize="large" />,
   },
   {
-    users: [2],
+    userTypes: [EUserType.admin],
     title: "Home.HomeData.user",
     link: "/user",
     icon: <PersonIcon fontSize="large" />,
   },
   {
-    users: [2],
+    userTypes: [EUserType.admin],
     title: "Home.HomeData.model",
     link: "/model",
     icon: <ViewInArIcon fontSize="large" />,
   },
   {
-    users: [2],
+    userTypes: [EUserType.admin],
     title: "Home.HomeData.material",
     link: "/material",
     icon: <HomeRepairServiceIcon fontSize="large" />,
   },
   {
-    users: [2],
+    userTypes: [EUserType.admin],
     title: "Home.HomeData.procedure",
     link: "/procedure",
     icon: <SyncAltIcon fontSize="large" />,
   },
   {
-    users: [2],
+    userTypes: [EUserType.admin],
     title: "Home.HomeData.printer",
     link: "/printer",
     icon: <PrintIcon fontSize="large" />,
   },
   {
-    users: [0, 1, 2],
+    userTypes: [EUserType.client, EUserType.manufacturer, EUserType.admin],
     title: "Home.HomeData.account",
     link: "/account",
     icon: <PersonIcon fontSize="large" />,

@@ -54,9 +54,10 @@ export enum EModelType {
   "user",
 }
 
-export enum EHeaderItemPreferred {
+export enum ENavigationItemPreferred {
   "header",
   "menu",
+  "home",
 }
 export enum EHeaderItemLoggedIn {
   "true",

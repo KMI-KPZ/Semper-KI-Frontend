@@ -1,24 +1,22 @@
-import { EHeaderItemPreferred, EUserType } from "../../interface/enums";
+import { ENavigationItemPreferred, EUserType } from "../../interface/enums";
 import { IHeaderItem } from "../../interface/Interface";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import DescriptionIcon from "@mui/icons-material/Description";
 import LoginIcon from "@mui/icons-material/Login";
-import CreateIcon from "@mui/icons-material/Create";
 import LogoutIcon from "@mui/icons-material/Logout";
 import BugReportIcon from "@mui/icons-material/BugReport";
-import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import MapIcon from "@mui/icons-material/Map";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 export const HeaderItemsData: IHeaderItem[] = [
   {
     title: "Header.HeaderData.about-us",
     link: "https://semper-ki.org/",
-    icon: "IconLogo",
+    icon: <InfoOutlinedIcon fontSize="large" />, //"IconLogo"
     extern: true,
-    preferred: EHeaderItemPreferred.header,
+    preferred: ENavigationItemPreferred.header,
     userType: [
       EUserType.anonym,
       EUserType.client,
@@ -32,7 +30,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     link: "/cart",
     icon: <ShoppingCartIcon fontSize="large" />,
     extern: false,
-    preferred: EHeaderItemPreferred.header,
+    preferred: ENavigationItemPreferred.header,
     userType: [EUserType.anonym, EUserType.client],
     loggedIn: [true, false],
   },
@@ -41,7 +39,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     link: "/login",
     icon: <LoginIcon fontSize="large" />,
     extern: false,
-    preferred: EHeaderItemPreferred.header,
+    preferred: ENavigationItemPreferred.header,
     userType: [
       EUserType.anonym,
       EUserType.client,
@@ -55,7 +53,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     link: "/logout",
     icon: <LogoutIcon fontSize="large" />,
     extern: false,
-    preferred: EHeaderItemPreferred.menu,
+    preferred: ENavigationItemPreferred.menu,
     userType: [
       EUserType.anonym,
       EUserType.client,
@@ -69,7 +67,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     link: "/guide",
     icon: <MapIcon fontSize="large" />,
     extern: false,
-    preferred: EHeaderItemPreferred.menu,
+    preferred: ENavigationItemPreferred.menu,
     userType: [EUserType.anonym, EUserType.client, EUserType.manufacturer],
     loggedIn: [true, false],
   },
@@ -78,7 +76,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     link: "/orders",
     icon: <DescriptionIcon fontSize="large" />,
     extern: false,
-    preferred: EHeaderItemPreferred.header,
+    preferred: ENavigationItemPreferred.header,
     userType: [EUserType.client],
     loggedIn: [true],
   },
@@ -87,7 +85,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     link: "/contracts",
     icon: <DescriptionIcon fontSize="large" />,
     extern: false,
-    preferred: EHeaderItemPreferred.menu,
+    preferred: ENavigationItemPreferred.menu,
     userType: [EUserType.manufacturer],
     loggedIn: [true],
   },
@@ -96,7 +94,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     link: "/account",
     icon: <PersonIcon fontSize="large" />,
     extern: false,
-    preferred: EHeaderItemPreferred.menu,
+    preferred: ENavigationItemPreferred.menu,
     userType: [EUserType.client, EUserType.manufacturer, EUserType.admin],
     loggedIn: [true],
   },
@@ -105,7 +103,7 @@ export const HeaderItemsData: IHeaderItem[] = [
     link: "/test",
     icon: <BugReportIcon fontSize="large" />,
     extern: false,
-    preferred: EHeaderItemPreferred.menu,
+    preferred: ENavigationItemPreferred.menu,
     userType: [
       EUserType.anonym,
       EUserType.client,

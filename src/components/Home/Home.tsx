@@ -12,7 +12,7 @@ interface Props {
 }
 
 export interface IHomeItem {
-  users: EUserType[];
+  userTypes: EUserType[];
   title: string;
   link: string;
   icon: ReactNode;
@@ -39,7 +39,7 @@ export const Home: React.FC<Props> = (props) => {
 
   const getHomeItems = (userType: EUserType): IHomeItem[] => {
     return HomeItemsData.filter((homeItem) =>
-      homeItem.users.includes(userType)
+      homeItem.userTypes.includes(userType)
     );
   };
 

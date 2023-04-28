@@ -159,64 +159,114 @@ export const Header: React.FC<Props> = (props) => {
       ))}
     </ul>
   );
-  const renderMenuItems = (mobile: boolean): JSX.Element => {
-    return (
-      <>
-        {mobile === true ? (
-          <>
-            <div className="flex flex-row-reverse gap-4">
-              <div
-                className="hover:text-türkis hover:cursor-pointer duration-300 p-2 flex justify-center"
-                onClick={closeMenu}
-              >
-                <CloseIcon fontSize="large" />
-              </div>
-              {renderLanguageMenu}
-            </div>
-            {HeaderItemsData.filter(
-              (headerItem: IHeaderItem) =>
-                headerItem.preferred === EHeaderItemPreferred.header &&
-                headerItem.userType.includes(
-                  userType === undefined ? EUserType.client : userType
-                ) &&
-                headerItem.loggedIn.includes(isLoggedIn)
-            ).map((headerItem: IHeaderItem, index: number) => (
-              <HeaderItem
-                key={index}
-                closeMenus={closeMenus}
-                headeritem={headerItem}
-              />
-            ))}
-          </>
-        ) : (
-          <div className="flex flex-row-reverse gap-4">
-            <div
-              className="hover:text-türkis hover:cursor-pointer duration-300  flex justify-center"
-              onClick={closeMenu}
-            >
-              <CloseIcon fontSize="large" />
-            </div>
-            {renderLanguageMenu}
-          </div>
-        )}
-        {HeaderItemsData.filter(
-          (headerItem: IHeaderItem) =>
-            headerItem.preferred === EHeaderItemPreferred.menu &&
-            headerItem.userType.includes(
-              userType === undefined ? EUserType.client : userType
-            ) &&
-            headerItem.loggedIn.includes(isLoggedIn)
-        ).map((headerItem: IHeaderItem, index: number) => (
-          <HeaderItem
-            isMenuItem
-            key={index}
-            closeMenus={closeMenus}
-            headeritem={headerItem}
-          />
-        ))}
-      </>
-    );
-  };
+  const renderMobileHeaderItems: JSX.Element = (
+    <ul className="flex md:hidden flex-row gap-4 justify-center items-center">
+      {HeaderItemsData.filter(
+        (headerItem: IHeaderItem) =>
+          headerItem.preferred === EHeaderItemPreferred.header &&
+          headerItem.userType.includes(
+            userType === undefined ? EUserType.client : userType
+          ) &&
+          headerItem.loggedIn.includes(isLoggedIn)
+      ).map((headerItem: IHeaderItem, index: number) => (
+        <HeaderItem
+          key={index}
+          onlyIcon
+          closeMenus={closeMenus}
+          headeritem={headerItem}
+          badge={
+            headerItem.title === "Header.HeaderData.cart"
+              ? cartCount
+              : undefined
+          }
+        />
+      ))}
+    </ul>
+  );
+  const renderMenuItems: JSX.Element = (
+    <ul className="hidden md:flex flex-col gap-3">
+      <div className="flex flex-row-reverse gap-4">
+        <div
+          className="hover:text-türkis hover:cursor-pointer duration-300  flex justify-center"
+          onClick={closeMenu}
+        >
+          <CloseIcon fontSize="large" />
+        </div>
+        {renderLanguageMenu}
+      </div>
+
+      {HeaderItemsData.filter(
+        (headerItem: IHeaderItem) =>
+          headerItem.preferred === EHeaderItemPreferred.menu &&
+          headerItem.userType.includes(
+            userType === undefined ? EUserType.client : userType
+          ) &&
+          headerItem.loggedIn.includes(isLoggedIn)
+      ).map((headerItem: IHeaderItem, index: number) => (
+        <HeaderItem
+          isMenuItem
+          key={index}
+          closeMenus={closeMenus}
+          headeritem={headerItem}
+        />
+      ))}
+    </ul>
+  );
+  const renderMobileMenuItems = (
+    <ul className="md:hidden flex flex-col gap-3">
+      <div className="flex flex-row-reverse gap-4">
+        <div
+          className="hover:text-türkis hover:cursor-pointer duration-300 p-2 flex justify-center"
+          onClick={closeMenu}
+        >
+          <CloseIcon fontSize="large" />
+        </div>
+        {renderLanguageMenu}
+      </div>
+      {HeaderItemsData.filter(
+        (headerItem: IHeaderItem) =>
+          headerItem.preferred === EHeaderItemPreferred.header &&
+          headerItem.userType.includes(
+            userType === undefined ? EUserType.client : userType
+          ) &&
+          headerItem.loggedIn.includes(isLoggedIn)
+      ).map((headerItem: IHeaderItem, index: number) => (
+        <HeaderItem
+          key={index}
+          closeMenus={closeMenus}
+          headeritem={headerItem}
+        />
+      ))}
+    </ul>
+  );
+  const renderMenu: JSX.Element = (
+    <>
+      <div
+        className="hidden md:block absolute top-0 right-0 h-screen w-screen bg-gray-900 opacity-60 z-30"
+        onClick={closeMenu}
+      />
+      <div
+        className="
+        flex flex-col justify-between absolute
+        w-screen h-screen top-0 right-0 
+        overflow-x-hidden
+        md:w-fit md:shadow-none 
+       bg-white p-3 shadow-xl
+        z-40
+       "
+      >
+        {renderMenuItems}
+        {renderMobileMenuItems}
+        <div
+          className="hover:text-türkis hover:cursor-pointer duration-300 
+          w-full flex flex-row justify-center items-center"
+          onClick={closeMenu}
+        >
+          <ExpandLessIcon fontSize="large" className="md:rotate-90" />
+        </div>
+      </div>
+    </>
+  );
   const renderHomeButton: JSX.Element = (
     <a
       href="/"
@@ -257,39 +307,6 @@ export const Header: React.FC<Props> = (props) => {
       </a>
     </li>
   );
-  const renderMenu: JSX.Element = (
-    <>
-      <div
-        className="hidden md:block absolute top-0 right-0 h-screen w-screen bg-gray-900 opacity-60 z-30"
-        onClick={closeMenu}
-      />
-      <div
-        className="
-        flex flex-col justify-between absolute
-        w-screen h-screen top-0 right-0 
-        overflow-x-hidden
-        md:w-fit md:shadow-none 
-       bg-white p-3 shadow-xl
-        z-40
-       "
-      >
-        <ul className="hidden md:flex flex-col gap-3">
-          {renderMenuItems(false)}
-        </ul>
-        <ul className="md:hidden flex flex-col gap-3">
-          {renderMenuItems(true)}
-        </ul>
-        <div
-          className="hover:text-türkis hover:cursor-pointer duration-300 
-          w-full flex flex-row justify-center items-center"
-          onClick={closeMenu}
-        >
-          <ExpandLessIcon fontSize="large" className="md:rotate-90" />
-        </div>
-      </div>
-    </>
-  );
-
   return (
     <header
       data-testid="header"
@@ -298,9 +315,10 @@ export const Header: React.FC<Props> = (props) => {
       <nav className="m-3">{renderHomeButton}</nav>
       <nav className="m-3 flex flex-row justify-center items-center gap-4">
         {renderHeaderItems}
+        {renderMobileHeaderItems}
         {renderMenuButton}
       </nav>
-      {menuOpen ? renderMenu : null}
+      {menuOpen ? <>{renderMenu}</> : null}
     </header>
   );
 };

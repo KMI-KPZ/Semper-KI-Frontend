@@ -8,12 +8,13 @@ import Badge from "../General/Badge";
 interface Props {
   isMenuItem?: boolean;
   headeritem: IHeaderItem;
+  onlyIcon?: boolean;
   closeMenus(): void;
   badge?: number;
 }
 
 const HeaderItem: React.FC<Props> = (props) => {
-  const { headeritem, closeMenus, isMenuItem, badge } = props;
+  const { headeritem, closeMenus, isMenuItem, badge, onlyIcon } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -65,7 +66,9 @@ const HeaderItem: React.FC<Props> = (props) => {
         ) : (
           renderIcon
         )}
-        <span className="text-xl">{t(headeritem.title)}</span>
+        {onlyIcon !== undefined && onlyIcon === true ? null : (
+          <span className="text-xl">{t(headeritem.title)}</span>
+        )}
       </a>
     </li>
   );

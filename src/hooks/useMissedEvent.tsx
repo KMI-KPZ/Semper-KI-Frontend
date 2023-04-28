@@ -22,7 +22,7 @@ const useMissedEvent = (props: Props): ReturnProps => {
       axiosCustom
         .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getMissedEvents/`)
         .then((res) => {
-          console.log("useMissedEvent | loadMissedEvents ✅ |", res.data);
+          console.log("useMissedEvent | getMissedEvents ✅ |", res.data);
           return res.data;
         }),
     enabled: isLoggedIn === true,

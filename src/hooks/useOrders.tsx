@@ -38,7 +38,7 @@ export const useOrders = (): ReturnProps => {
     async () => {
       const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/getOrders/`;
       return axiosCustom.get(apiUrl).then((response) => {
-        console.log("useOrders | loadOrders ✅ |", response.data);
+        console.log("useOrders | getOrders ✅ |", response.data);
         return response.data;
       });
     }

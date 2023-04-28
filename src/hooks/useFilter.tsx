@@ -30,7 +30,7 @@ const useFilter = (): ReturnProps => {
     queryFn: async () => {
       const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/getFilters/`;
       return axiosCustom.get(apiUrl).then((response) => {
-        console.log("useFilter | filtersQuery ✅ |", response.data);
+        console.log("useFilter | getFilters ✅ |", response.data);
         return response.data;
       });
     },

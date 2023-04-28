@@ -29,7 +29,7 @@ const useUser = (): ReturnProps => {
       axiosCustom
         .get(`${process.env.REACT_APP_HTTP_API_URL}/public/isLoggedIn/`)
         .then((response) => {
-          console.log("useUser | loadLoggedIn ✅ |", response.data);
+          console.log("useUser | isLoggedIn ✅ |", response.data);
           return response.data === "Success" ? true : false;
         }),
     enabled: isCSRFTokenLoaded === true,
@@ -42,7 +42,7 @@ const useUser = (): ReturnProps => {
         .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getUser/`)
         .then((response) => {
           const userData = response.data;
-          console.log("useUser | loadUser ✅ |", userData);
+          console.log("useUser | getUser ✅ |", userData);
           return {
             ...userData,
             type: getUserType(userData.type),
@@ -62,7 +62,7 @@ const useUser = (): ReturnProps => {
     axiosCustom
       .delete(`${process.env.REACT_APP_HTTP_API_URL}/public/profileDeleteUser/`)
       .then((response) => {
-        console.log("useUser | deleteUser ✅ |");
+        console.log("useUser | profileDeleteUser ✅ |");
         navigate("/logout");
       })
       .catch((error) => {

@@ -33,7 +33,7 @@ const useCart = (): ICartHook => {
       axiosCustom
         .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getCart/`)
         .then((res) => {
-          console.log("useCart | loadCart ✅ |", res.data);
+          console.log("useCart | getCart ✅ |", res.data);
           return res.data.cart !== undefined ? res.data.cart : res.data;
         }),
     initialData: [],

@@ -16,7 +16,7 @@ const useManufacturer = (): ReturnProps => {
       axiosCustom
         .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getManufacturers/`)
         .then((res) => {
-          console.log("useManufacturer | loadManufacturer ✅ |", res.data);
+          console.log("useManufacturer | getManufacturers ✅ |", res.data);
           return res.data;
         }),
   });

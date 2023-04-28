@@ -24,7 +24,7 @@ const useProcessData = (
           filters,
         })
         .then((response) => {
-          console.log("useProcessData | allQuery ✅ |", response.data);
+          console.log("useProcessData | getProcessData ✅ |", response.data);
           return response.data;
         });
     },
@@ -46,11 +46,10 @@ export const useModelData = (
           filters,
         })
         .then((response) => {
-          console.log("useProcessData | modelQuery ✅ |", response.data);
-          return response.data;
+          console.log("useModelData | getModels ✅ |", response.data);
+          return response.data.models;
         });
     },
-    enabled: false,
   });
   return { modelsQuery };
 };
@@ -67,11 +66,10 @@ export const useMaterialData = (
           filters,
         })
         .then((response) => {
-          console.log("useProcessData | materialQuery ✅ |", response.data);
-          return response.data;
+          console.log("useMaterialData | getMaterials ✅ |", response.data);
+          return response.data.materials;
         });
     },
-    enabled: false,
   });
   return { materialsQuery };
 };
@@ -90,13 +88,12 @@ export const usePostProcessing = (
         })
         .then((response) => {
           console.log(
-            "useProcessData | postProcessingQuery ✅ |",
+            "usePostProcessing | getPostProcessing ✅ |",
             response.data
           );
-          return response.data;
+          return response.data.postProcessing;
         });
     },
-    enabled: false,
   });
   return { postProcessingQuery };
 };

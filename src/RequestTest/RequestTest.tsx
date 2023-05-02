@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../components/App/App";
+import { useEffect, useState } from "react";
 import Button from "../components/General/Button";
 import { useWebsocket } from "../hooks/useWebsocket";
 import { IUser } from "../interface/Interface";
@@ -9,7 +8,7 @@ interface Props {
 }
 export const RequestTest: React.FC<Props> = (props) => {
   const { user } = props;
-  const [chat, setChat] = useState<{ send: boolean; title: string }[]>([]);
+  const [chat, setChat] = useState<{ send: boolean; data: any }[]>([]);
   const [inputMessage, setInputMessage] = useState<string>("");
   const [load, setLoad] = useState<boolean>(false);
 
@@ -20,7 +19,7 @@ export const RequestTest: React.FC<Props> = (props) => {
   }, []);
 
   const handleOnEventMessage = (event: MessageEvent) => {
-    setChat((prevState) => [...prevState, { title: event.data, send: false }]);
+    setChat((prevState) => [...prevState, { data: event.data, send: false }]);
   };
 
   const { sendMessage, socket, state } = useWebsocket(
@@ -38,7 +37,7 @@ export const RequestTest: React.FC<Props> = (props) => {
     sendMessage(inputMessage);
     setChat((prevState) => [
       ...prevState,
-      { title: inputMessage === "" ? "---" : inputMessage, send: true },
+      { data: inputMessage === "" ? "---" : inputMessage, send: true },
     ]);
     setInputMessage("");
   };
@@ -49,14 +48,14 @@ export const RequestTest: React.FC<Props> = (props) => {
         {chat.length > 0 ? (
           <div className="flex flex-col gap-1 items-center justify-center bg-slate-300 w-2/3 p-5">
             <h2>Chat:</h2>
-            {chat.map(({ send, title }, index) => (
+            {chat.map(({ send, data }, index) => (
               <div
                 key={index}
                 className={`flex flex-row w-full items-center ${
                   send ? "justify-end" : "justify-start"
                 }`}
               >
-                <h3>{title}</h3>
+                <h3>{JSON.stringify(data)}</h3>
               </div>
             ))}
           </div>

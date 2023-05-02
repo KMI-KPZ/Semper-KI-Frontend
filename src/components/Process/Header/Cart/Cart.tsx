@@ -1,19 +1,13 @@
 import React, { useContext } from "react";
 import CartItem from "./CartItem";
 import { ProcessContext } from "../../ProcessView";
-import {
-  IconModel,
-  IconPlus,
-  IconUpload,
-  IconDashboard,
-  IconDocument,
-} from "../../../../constants/Icons";
+import { IconModel } from "../../../../constants/Icons";
 import { IProcessItem } from "../../../../interface/Interface";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddIcon from "@mui/icons-material/Add";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { getModelURI } from "../../../../services/utils";
 
 interface Props {}
 
@@ -31,9 +25,9 @@ const Cart: React.FC<Props> = () => {
     navigate("/process/model");
   };
 
-  const navigateToUpload = () => {
-    selectProcess(-1);
-  };
+  // const navigateToUpload = () => {
+  //   selectProcess(-1);
+  // };
 
   const selectItem = (index: number) => {
     selectProcess(index);
@@ -55,7 +49,20 @@ const Cart: React.FC<Props> = () => {
             process={processItem}
             index={index}
             active={processState.activeItemIndex === index}
-            icon={IconModel}
+            icon={
+              processItem.model !== undefined ? (
+                <img
+                  className="h-8 w-8 object-cover"
+                  src={getModelURI(processItem.model)}
+                />
+              ) : (
+                <img
+                  src={IconModel}
+                  alt="icon"
+                  className="h-8 w-8 object-cover"
+                />
+              )
+            }
             title={
               processItem.title === undefined
                 ? `${t("Process.Header.Cart.CartItem.item")} ${index + 1}`

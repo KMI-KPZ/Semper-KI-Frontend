@@ -55,7 +55,7 @@ export const RequestTest: React.FC<Props> = (props) => {
                   send ? "justify-end" : "justify-start"
                 }`}
               >
-                <h3>{JSON.stringify(data)}</h3>
+                <h3>{JSON.stringify(JSON.parse(data))}</h3>
               </div>
             ))}
           </div>

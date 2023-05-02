@@ -13,11 +13,12 @@ import LoadingAnimation from "../../General/LoadingAnimation";
 
 interface Props {
   setProgress(path: string): void;
-  createProcessItem(model?: IModel): void;
+  createProcessItemFromModels(models: IModel[], index: number): void;
+  activeItemIndex: number;
 }
 
 export const ModelUpload: React.FC<Props> = (props) => {
-  const { setProgress, createProcessItem } = props;
+  const { setProgress, createProcessItemFromModels, activeItemIndex } = props;
   const { t } = useTranslation();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
@@ -115,9 +116,9 @@ export const ModelUpload: React.FC<Props> = (props) => {
   };
 
   const createProcessItems = (modelList: IModel[]) => {
-    if (modelList !== undefined && modelList.length > 0) {
-      modelList.forEach((model) => createProcessItem(model));
-    }
+    console.log(fileList, modelList);
+
+    createProcessItemFromModels(modelList, activeItemIndex);
   };
 
   const handleClickNext = () => {

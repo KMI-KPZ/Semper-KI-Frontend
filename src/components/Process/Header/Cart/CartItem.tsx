@@ -19,7 +19,6 @@ interface Props {
 const CartItem: React.FC<Props> = (props) => {
   const { index, active, title, icon, onClickCard, isItem, process } = props;
   const { deleteProcessItem: deleteProcess } = useContext(ProcessContext);
-  console.log(process);
 
   const handleOnClickCard = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>

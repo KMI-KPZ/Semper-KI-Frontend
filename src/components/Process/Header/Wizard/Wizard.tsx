@@ -18,15 +18,8 @@ interface Props {
 
 export const Wizard: React.FC<Props> = (props) => {
   const { processState } = props;
-  const {
-    activeItemIndex: activeItemIndex,
-    items: processList,
-    progress,
-  } = processState;
-  const activeProcess: IProcessItem =
-    processList.length > 0 && activeItemIndex !== -1
-      ? processList[activeItemIndex]
-      : {};
+  const { activeItemIndex, items, progress } = processState;
+  const activeProcess: IProcessItem = items[activeItemIndex];
 
   const getStatusByIndex = (index: number): EProcessStatusType => {
     switch (index) {

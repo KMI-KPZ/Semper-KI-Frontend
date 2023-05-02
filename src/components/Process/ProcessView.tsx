@@ -41,7 +41,7 @@ export interface IProcessState {
 
 export interface IProcessContext {
   processState: IProcessState;
-  createProcessItem(model?: IModel): void;
+  createEmpytProcessItem(): void;
   deleteProcessItem(processId: number): void;
   selectProcessItem(index: number): void;
   setProgress(path: string): void;
@@ -61,7 +61,7 @@ const initialProcessState = (): IProcessState => ({
 
 export const ProcessContext = createContext<IProcessContext>({
   processState: initialProcessState(),
-  createProcessItem: () => {
+  createEmpytProcessItem: () => {
     console.log("Error ProcessContext createProcessItem");
   },
   deleteProcessItem: () => {
@@ -141,19 +141,16 @@ export const ProcessView: React.FC<Props> = (props) => {
       items: [{ title: `${t("Process.ProcessView.item")} 1` }],
     }));
   };
-  const createProcessItem = (model?: IModel): void => {
-    // console.log("Process | createProcessItem |", model);
-
+  const createEmpytProcessItem = (): void => {
+    // console.log("Process | createEmpytProcessItem |", model);
     setState((prevState) => ({
       ...prevState,
       items: [
         ...prevState.items,
         {
-          title:
-            model === undefined
-              ? `${t("Process.ProcessView.item")} ${prevState.items.length + 1}`
-              : model.title,
-          model: model,
+          title: `${t("Process.ProcessView.item")} ${
+            prevState.items.length + 1
+          }`,
         },
       ],
       progress: getProgressByPath("model"),
@@ -161,23 +158,54 @@ export const ProcessView: React.FC<Props> = (props) => {
       hasChanged: true,
     }));
   };
+  const createProcessItemFromModels = (
+    models: IModel[],
+    index: number
+  ): void => {
+    // console.log("Process | createProcessItemFromModel |", model);
+    const createItems = (): IProcessItem[] => {
+      return models
+        .filter((item, index) => index > 0)
+        .map((model) => ({ title: model.title, model: model }));
+    };
+    setState((prevState) => {
+      return {
+        ...prevState,
+        items: [
+          ...prevState.items.filter((item, _index) => _index < index),
+          {
+            ...prevState.items[index],
+            model: models[0],
+            title: models[0].title,
+          },
+          ...prevState.items.filter((item, _index) => _index > index),
+          ...createItems(),
+        ],
+        progress: getProgressByPath("model"),
+        activeItemIndex: index,
+        hasChanged: true,
+      };
+    });
+  };
   const deleteProcessItem = (index: number): void => {
     // console.log("Process | deleteProcessItem |", index);
 
-    setState((prevState) => ({
-      ...prevState,
-      items: [...prevState.items.filter((item, _index) => _index !== index)],
-      activeItemIndex: -1,
-      hasChanged: true,
-    }));
-    navigate("/process/upload");
+    setState((prevState) => {
+      let items = [
+        ...prevState.items.filter((item, _index) => _index !== index),
+      ];
+      if (items.length === 0)
+        items.push({ title: `${t("Process.ProcessView.item")} 1` });
+      return {
+        ...prevState,
+        items,
+        activeItemIndex: 0,
+        hasChanged: true,
+      };
+    });
+    navigate("/process/model");
   };
   const selectProcessItem = (index: number): void => {
-    // console.log(
-    //   "Process | selectProcessItem |",
-    //   index === -1 ? "Upload" : index
-    // );
-
     setState((prevState) => ({
       ...prevState,
       activeItemIndex: index,
@@ -243,7 +271,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     setState((prevState) => ({
       ...prevState,
       progress: getProgressByPath(path),
-      activeItemIndex: path === "upload" ? -1 : prevState.activeItemIndex,
+      activeItemIndex: prevState.activeItemIndex,
     }));
     // if (filtersQuery.data.length > 0) loadData(path);
   };
@@ -324,7 +352,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     <ProcessContext.Provider
       value={{
         processState: state,
-        createProcessItem,
+        createEmpytProcessItem,
         deleteProcessItem,
         selectProcessItem,
         setProgress,
@@ -373,7 +401,8 @@ export const ProcessView: React.FC<Props> = (props) => {
                 path="upload"
                 element={
                   <ModelUpload
-                    createProcessItem={createProcessItem}
+                    activeItemIndex={activeItemIndex}
+                    createProcessItemFromModels={createProcessItemFromModels}
                     setProgress={setProgress}
                   />
                 }

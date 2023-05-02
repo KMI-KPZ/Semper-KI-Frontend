@@ -12,9 +12,7 @@ const Header: React.FC = () => {
     <div className="flex flex-col">
       <Cart />
       <div className="flex flex-col p-2 gap-2 bg-white">
-        {progress.link !== "/process/upload" ? (
-          <Wizard processState={processState} />
-        ) : null}
+        <Wizard processState={processState} />
         <h1 className="text-center text-3xl">{progress.title}</h1>
         <Search />
       </div>

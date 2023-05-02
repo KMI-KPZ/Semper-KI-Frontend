@@ -22,12 +22,12 @@ const Cart: React.FC<Props> = () => {
   const navigate = useNavigate();
   const {
     processState,
-    createProcessItem,
+    createEmpytProcessItem,
     selectProcessItem: selectProcess,
   } = useContext(ProcessContext);
 
   const addNewItem = () => {
-    createProcessItem();
+    createEmpytProcessItem();
     navigate("/process/model");
   };
 
@@ -42,13 +42,13 @@ const Cart: React.FC<Props> = () => {
   return (
     <div className="flex flex-row w-full justify-between gap-5 mb-5">
       <div className="flex flex-row flex-wrap gap-5 2xl:w-4/5 w-full">
-        <CartItem
+        {/* <CartItem
           active={processState.activeItemIndex === -1}
           icon={<CloudUploadIcon fontSize="large" />}
           title={t("Process.Header.Cart.CartItem.upload")}
           onClickCard={navigateToUpload}
           isItem={false}
-        />
+        /> */}
         {processState.items.map((processItem: IProcessItem, index: number) => (
           <CartItem
             key={index}

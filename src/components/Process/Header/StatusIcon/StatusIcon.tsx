@@ -20,10 +20,7 @@ const StatusIcon: React.FC<Props> = (props) => {
   else if (
     process.model === undefined ||
     process.material === undefined ||
-    process.procedure === undefined ||
-    process.manufacturerID === undefined ||
-    process.postProcessings === undefined ||
-    process.additive === undefined
+    process.postProcessings === undefined
   )
     status = 2;
   else status = 0;

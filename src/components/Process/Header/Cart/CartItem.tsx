@@ -1,6 +1,8 @@
 import React, { ReactNode, useContext } from "react";
 import { IconDelete } from "../../../../constants/Icons";
 import { IProcessItem } from "../../../../interface/Interface";
+import Badge from "../../../General/Badge";
+import IconBadge from "../../../General/IconBagde";
 import { ProcessContext } from "../../ProcessView";
 import StatusIcon from "../StatusIcon/StatusIcon";
 
@@ -17,6 +19,7 @@ interface Props {
 const CartItem: React.FC<Props> = (props) => {
   const { index, active, title, icon, onClickCard, isItem, process } = props;
   const { deleteProcessItem: deleteProcess } = useContext(ProcessContext);
+  console.log(process);
 
   const handleOnClickCard = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -61,13 +64,14 @@ const CartItem: React.FC<Props> = (props) => {
           />
         </div>
       ) : null}
-      {typeof icon === "string" ? (
-        <img src={icon} alt="icon" className="h-8" />
+      {isItem && typeof icon === "string" ? (
+        <IconBadge position="small" icon={<StatusIcon process={process} />}>
+          <img src={icon} alt="icon" className="h-8" />
+        </IconBadge>
       ) : (
         icon
       )}
       <h3 className="whitespace-nowrap">{title}</h3>
-      {/* {process === undefined ? null : <StatusIcon process={process} />} */}
     </div>
   );
 };

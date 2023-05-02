@@ -1,4 +1,4 @@
-import { EUserType } from "../interface/enums";
+import { EProcessStatusType, EUserType } from "../interface/enums";
 import { IAddress, IModel, IProcessItem } from "../interface/Interface";
 
 export const getFileSizeAsString = (size: number): string => {
@@ -122,4 +122,11 @@ export const checkForSelectedData = (items: IProcessItem[]): boolean => {
 
 export const isKey = <T extends object>(x: T, k: PropertyKey): k is keyof T => {
   return k in x;
+};
+
+export const getStatusByIndex = (process: IProcessItem): EProcessStatusType => {
+  if (process.model === undefined) return EProcessStatusType.missing;
+  if (process.material === undefined) return EProcessStatusType.missing;
+  if (process.postProcessings === undefined) return EProcessStatusType.missing;
+  return EProcessStatusType.ok;
 };

@@ -45,7 +45,12 @@ export const Home: React.FC<Props> = (props) => {
         title === "data.NavigationItem.orders")
     )
       return getChangeCount();
-    if (cartCount > 0 && title === "data.NavigationItem.cart") return cartCount;
+    if (
+      cartCount > 0 &&
+      (title === "data.NavigationItem.cart" ||
+        title === "data.NavigationItem.continue")
+    )
+      return cartCount;
     return undefined;
   };
 
@@ -57,9 +62,20 @@ export const Home: React.FC<Props> = (props) => {
           (item) =>
             item.userTypes.includes(userType) &&
             item.preferred.includes(ENavigationItemPreferred.home)
-        ).map((item, index) => (
-          <HomeItem key={index} homeItem={item} badge={calcBadge(item.title)} />
-        ))}
+        )
+          .filter(
+            (item) =>
+              (item.title === "data.NavigationItem.continue" &&
+                cartCount > 0) ||
+              item.title !== "data.NavigationItem.continue"
+          )
+          .map((item, index) => (
+            <HomeItem
+              key={index}
+              homeItem={item}
+              badge={calcBadge(item.title)}
+            />
+          ))}
       </div>
     </div>
   );

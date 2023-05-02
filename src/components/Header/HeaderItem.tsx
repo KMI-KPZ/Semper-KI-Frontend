@@ -2,12 +2,13 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { getIconByName } from "../../constants/Icons";
+import { INavigationItem } from "../../data/NavigationItems";
 import { IHeaderItem } from "../../interface/Interface";
 import Badge from "../General/Badge";
 
 interface Props {
   isMenuItem?: boolean;
-  headeritem: IHeaderItem;
+  headeritem: INavigationItem;
   onlyIcon?: boolean;
   closeMenus(): void;
   badge?: number;

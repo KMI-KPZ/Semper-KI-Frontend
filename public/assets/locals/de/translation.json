@@ -1,4 +1,30 @@
 {
+  "data":{
+    "NavigationItem":{
+      "explore": "Ausprobieren",
+      "use-service": "Service in Anspruch nehmen",
+      "provide-service": "Service bereitstellen",
+      "continue": "Bestellung Fortsetzen",
+      "new-contract": "neue Bestellung",
+      "proceedings": "Verfahren",
+      "company": "Unternehmen",
+      "guide": "Wegweiser",
+      "cart": "Warenkorb",
+      "orders": "Meine Bestellungen",
+      "contracts": "Meine Aufträge",
+      "user": "Benutzer",
+      "model": "Modelle",
+      "material": "Materialien",
+      "procedure": "Verfahren",
+      "printer": "Drucker",
+      "about-us": "Magazin",
+      "login": "Anmelden",
+      "register": "Registrieren",
+      "logout": "Abmelden",
+      "account": "Konto",
+      "test": "Test"
+    }
+  },
   "Admin":{
     "AdminMaterialView":{
       "header": "Materialien",

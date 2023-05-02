@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 // import "./Header.scss";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
@@ -8,11 +8,10 @@ import HeaderItem from "./HeaderItem";
 
 import { AppContext } from "../App/App";
 import { ENavigationItemPreferred, EUserType } from "../../interface/enums";
-import { IHeaderItem } from "../../interface/Interface";
-import { HeaderItemsData } from "./HeaderData";
+import { IHeaderItem, IOrderCollectionEvent } from "../../interface/Interface";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import useCart from "../../hooks/useCart";
+import { NavigationItems } from "../../data/NavigationItems";
 
 interface Language {
   code: string;
@@ -35,7 +34,8 @@ const languages: Language[] = [
 
 interface Props {
   isLoggedIn: boolean;
-  userType: EUserType | undefined;
+  userType: EUserType;
+  events?: IOrderCollectionEvent[];
   cartCount: number;
 }
 
@@ -45,7 +45,7 @@ interface State {
 }
 
 export const Header: React.FC<Props> = (props) => {
-  const { isLoggedIn, userType, cartCount } = props;
+  const { isLoggedIn, userType, cartCount, events } = props;
   const { setAppState } = useContext(AppContext);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
@@ -97,6 +97,32 @@ export const Header: React.FC<Props> = (props) => {
     return returnString;
   };
 
+  const getChangeCount = (): number | undefined => {
+    if (events === undefined) return undefined;
+    let count = 0;
+    events.forEach((orderCollectionEvent) => {
+      orderCollectionEvent.orders.forEach((orderEvent) => {
+        if (orderEvent.messages !== undefined && orderEvent.messages > 0)
+          count += orderEvent.messages;
+        if (orderEvent.status !== undefined && orderEvent.status > 0)
+          count += orderEvent.status;
+      });
+    });
+    return count;
+  };
+  const count = getChangeCount();
+  const calcBadge = (title: string): number | undefined => {
+    if (
+      count !== undefined &&
+      count > 0 &&
+      (title === "data.NavigationItem.contracts" ||
+        title === "data.NavigationItem.orders")
+    )
+      return getChangeCount();
+    if (cartCount > 0 && title === "data.NavigationItem.cart") return cartCount;
+    return undefined;
+  };
+
   const renderLanguageMenu: JSX.Element = (
     <li className="flex items-center justify-center" title="Sprachmenu">
       <ClickAwayListener onClickAway={closeLanguageMenu}>
@@ -138,47 +164,33 @@ export const Header: React.FC<Props> = (props) => {
   );
   const renderHeaderItems: JSX.Element = (
     <ul className="hidden md:flex flex-row gap-4 justify-center items-center">
-      {HeaderItemsData.filter(
-        (headerItem: IHeaderItem) =>
-          headerItem.preferred === ENavigationItemPreferred.header &&
-          headerItem.userType.includes(
-            userType === undefined ? EUserType.client : userType
-          ) &&
-          headerItem.loggedIn.includes(isLoggedIn)
-      ).map((headerItem: IHeaderItem, index: number) => (
+      {NavigationItems.filter(
+        (item) =>
+          item.preferred.includes(ENavigationItemPreferred.header) &&
+          item.userTypes.includes(userType)
+      ).map((item, index: number) => (
         <HeaderItem
           key={index}
           closeMenus={closeMenus}
-          headeritem={headerItem}
-          badge={
-            headerItem.title === "Header.HeaderData.cart"
-              ? cartCount
-              : undefined
-          }
+          headeritem={item}
+          badge={calcBadge(item.title)}
         />
       ))}
     </ul>
   );
   const renderMobileHeaderItems: JSX.Element = (
     <ul className="flex md:hidden flex-row gap-4 justify-center items-center">
-      {HeaderItemsData.filter(
-        (headerItem: IHeaderItem) =>
-          headerItem.preferred === ENavigationItemPreferred.header &&
-          headerItem.userType.includes(
-            userType === undefined ? EUserType.client : userType
-          ) &&
-          headerItem.loggedIn.includes(isLoggedIn)
-      ).map((headerItem: IHeaderItem, index: number) => (
+      {NavigationItems.filter(
+        (item) =>
+          item.preferred.includes(ENavigationItemPreferred.header) &&
+          item.userTypes.includes(userType)
+      ).map((item, index: number) => (
         <HeaderItem
           key={index}
           onlyIcon
           closeMenus={closeMenus}
-          headeritem={headerItem}
-          badge={
-            headerItem.title === "Header.HeaderData.cart"
-              ? cartCount
-              : undefined
-          }
+          headeritem={item}
+          badge={calcBadge(item.title)}
         />
       ))}
     </ul>
@@ -195,19 +207,16 @@ export const Header: React.FC<Props> = (props) => {
         {renderLanguageMenu}
       </div>
 
-      {HeaderItemsData.filter(
-        (headerItem: IHeaderItem) =>
-          headerItem.preferred === ENavigationItemPreferred.menu &&
-          headerItem.userType.includes(
-            userType === undefined ? EUserType.client : userType
-          ) &&
-          headerItem.loggedIn.includes(isLoggedIn)
-      ).map((headerItem: IHeaderItem, index: number) => (
+      {NavigationItems.filter(
+        (item) =>
+          item.preferred.includes(ENavigationItemPreferred.menu) &&
+          item.userTypes.includes(userType)
+      ).map((item, index: number) => (
         <HeaderItem
-          isMenuItem
           key={index}
           closeMenus={closeMenus}
-          headeritem={headerItem}
+          headeritem={item}
+          badge={calcBadge(item.title)}
         />
       ))}
     </ul>
@@ -223,18 +232,16 @@ export const Header: React.FC<Props> = (props) => {
         </div>
         {renderLanguageMenu}
       </div>
-      {HeaderItemsData.filter(
-        (headerItem: IHeaderItem) =>
-          headerItem.preferred === ENavigationItemPreferred.header &&
-          headerItem.userType.includes(
-            userType === undefined ? EUserType.client : userType
-          ) &&
-          headerItem.loggedIn.includes(isLoggedIn)
-      ).map((headerItem: IHeaderItem, index: number) => (
+      {NavigationItems.filter(
+        (item) =>
+          item.preferred.includes(ENavigationItemPreferred.header) &&
+          item.userTypes.includes(userType)
+      ).map((item, index: number) => (
         <HeaderItem
           key={index}
           closeMenus={closeMenus}
-          headeritem={headerItem}
+          headeritem={item}
+          badge={calcBadge(item.title)}
         />
       ))}
     </ul>

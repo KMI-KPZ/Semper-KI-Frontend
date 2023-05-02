@@ -1,4 +1,30 @@
 {
+   "data":{
+      "NavigationItem":{
+         "explore":"Explore",
+         "use-service":"Use Service",
+         "provide-service":"Provide Service",
+         "continue":"Continue Order",
+         "new-contract":"New Order",
+         "proceedings":"Proceedings",
+         "company":"Company",
+         "guide":"Guide",
+         "cart":"Cart",
+         "orders":"My Orders",
+         "contracts":"My Contracts",
+         "user":"User",
+         "model":"Models",
+         "material":"Materials",
+         "procedure":"Procedures",
+         "printer":"Printers",
+         "account":"Account",
+         "about-us":"Magazine",
+         "login":"Log In",
+         "register":"Register",
+         "logout":"Log Out",
+         "test":"Test"
+      }
+   },
   "Admin":{
      "AdminMaterialView":{
         "header":"Materials",

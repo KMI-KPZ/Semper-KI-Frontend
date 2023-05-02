@@ -32,7 +32,7 @@ const Breadcrumb: React.FC<Props> = () => {
   };
 
   return (
-    <nav className="text-left w-full hidden md:block p-3 text-lg font-bold">
+    <nav className="text-left w-full hidden md:block  text-lg font-bold">
       {splittet.map((name: string, index: number) => (
         <React.Fragment key={index}>
           <span>{" > "}</span>

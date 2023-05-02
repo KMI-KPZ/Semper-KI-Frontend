@@ -34,7 +34,7 @@ const useCart = (): ICartHook => {
         .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getCart/`)
         .then((res) => {
           console.log("useCart | getCart ✅ |", res.data);
-          return res.data.cart !== undefined ? res.data.cart : res.data;
+          return res.data.cart !== undefined ? res.data.cart : [];
         }),
     initialData: [],
   });

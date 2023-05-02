@@ -232,7 +232,7 @@ const App: React.FC = () => {
       }}
     >
       <div
-        className={`flex flex-col justify-between min-h-screen font-ptsans items-center gap-5 p-5
+        className={`flex flex-col justify-between min-h-screen font-ptsans items-center gap-5 p-3
          text-base
         ${stopScroll === true ? "overflow-hidden h-screen w-screen" : ""}`}
         data-testid="app"
@@ -241,8 +241,9 @@ const App: React.FC = () => {
           isLoggedIn={isLoggedIn}
           userType={userType}
           cartCount={cartQuery.data.length}
+          events={missedEvents}
         />
-        <main className="w-full xl:w-5/6 flex flex-col justify-start items-center p-2 flex-grow bg-opacity-80 bg-slate-200 ">
+        <main className="w-full xl:w-5/6 flex flex-col justify-start items-center p-5 flex-grow bg-opacity-80 bg-slate-200 ">
           <Breadcrumb />
           <Routes data-testid="routes">
             <Route

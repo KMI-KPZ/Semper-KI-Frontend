@@ -18,7 +18,6 @@ import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import PrintIcon from "@mui/icons-material/Print";
-import ExploreIcon from "@mui/icons-material/Explore";
 import HardwareIcon from "@mui/icons-material/Hardware";
 import ScienceIcon from "@mui/icons-material/Science";
 
@@ -29,7 +28,6 @@ export interface INavigationItem {
   extern: boolean;
   preferred: ENavigationItemPreferred[];
   userTypes: EUserType[];
-  loggedIn: boolean[];
 }
 
 export const NavigationItems: INavigationItem[] = [
@@ -45,30 +43,30 @@ export const NavigationItems: INavigationItem[] = [
       EUserType.manufacturer,
       EUserType.admin,
     ],
-    loggedIn: [false],
   },
   {
-    title: "data.NavigationItem.cart",
-    link: "/cart",
-    icon: <ShoppingCartIcon fontSize="large" />,
+    userTypes: [EUserType.anonym],
+    title: "data.NavigationItem.explore",
+    link: "/process/model",
+    icon: <ScienceIcon fontSize="large" />,
+    preferred: [ENavigationItemPreferred.home],
     extern: false,
-    preferred: [ENavigationItemPreferred.header, ENavigationItemPreferred.home],
-    userTypes: [EUserType.anonym, EUserType.client],
-    loggedIn: [true, false],
   },
   {
-    title: "data.NavigationItem.login",
-    link: "/login",
-    icon: <LoginIcon fontSize="large" />,
+    userTypes: [EUserType.client],
+    title: "data.NavigationItem.continue",
+    link: "/process",
+    icon: <KeyboardDoubleArrowRightIcon fontSize="large" />,
+    preferred: [ENavigationItemPreferred.home],
     extern: false,
-    preferred: [ENavigationItemPreferred.header],
-    userTypes: [
-      EUserType.anonym,
-      EUserType.client,
-      EUserType.manufacturer,
-      EUserType.admin,
-    ],
-    loggedIn: [false],
+  },
+  {
+    userTypes: [EUserType.client],
+    title: "data.NavigationItem.new-contract",
+    link: "/process/new",
+    icon: <AddShoppingCartIcon fontSize="large" />,
+    preferred: [ENavigationItemPreferred.home],
+    extern: false,
   },
   {
     title: "data.NavigationItem.logout",
@@ -76,13 +74,7 @@ export const NavigationItems: INavigationItem[] = [
     icon: <LogoutIcon fontSize="large" />,
     extern: false,
     preferred: [ENavigationItemPreferred.menu],
-    userTypes: [
-      EUserType.anonym,
-      EUserType.client,
-      EUserType.manufacturer,
-      EUserType.admin,
-    ],
-    loggedIn: [true],
+    userTypes: [EUserType.client, EUserType.manufacturer, EUserType.admin],
   },
   {
     title: "data.NavigationItem.guide",
@@ -91,8 +83,24 @@ export const NavigationItems: INavigationItem[] = [
     extern: false,
     preferred: [ENavigationItemPreferred.menu, ENavigationItemPreferred.home],
     userTypes: [EUserType.anonym, EUserType.client, EUserType.manufacturer],
-    loggedIn: [true, false],
   },
+  {
+    title: "data.NavigationItem.cart",
+    link: "/cart",
+    icon: <ShoppingCartIcon fontSize="large" />,
+    extern: false,
+    preferred: [ENavigationItemPreferred.header],
+    userTypes: [EUserType.anonym, EUserType.client],
+  },
+  {
+    title: "data.NavigationItem.login",
+    link: "/login",
+    icon: <LoginIcon fontSize="large" />,
+    extern: false,
+    preferred: [ENavigationItemPreferred.header],
+    userTypes: [EUserType.anonym],
+  },
+
   {
     title: "data.NavigationItem.orders",
     link: "/orders",
@@ -100,16 +108,14 @@ export const NavigationItems: INavigationItem[] = [
     extern: false,
     preferred: [ENavigationItemPreferred.header, ENavigationItemPreferred.home],
     userTypes: [EUserType.client],
-    loggedIn: [true],
   },
   {
     title: "data.NavigationItem.contracts",
     link: "/contracts",
     icon: <DescriptionIcon fontSize="large" />,
     extern: false,
-    preferred: [ENavigationItemPreferred.menu, ENavigationItemPreferred.home],
+    preferred: [ENavigationItemPreferred.header, ENavigationItemPreferred.home],
     userTypes: [EUserType.manufacturer],
-    loggedIn: [true],
   },
   {
     title: "data.NavigationItem.account",
@@ -118,8 +124,8 @@ export const NavigationItems: INavigationItem[] = [
     extern: false,
     preferred: [ENavigationItemPreferred.menu, ENavigationItemPreferred.home],
     userTypes: [EUserType.client, EUserType.manufacturer, EUserType.admin],
-    loggedIn: [true],
   },
+
   {
     title: "data.NavigationItem.test",
     link: "/test",
@@ -132,34 +138,6 @@ export const NavigationItems: INavigationItem[] = [
       EUserType.manufacturer,
       EUserType.admin,
     ],
-    loggedIn: [true],
-  },
-  {
-    userTypes: [EUserType.client],
-    title: "data.NavigationItem.continue",
-    link: "/process",
-    icon: <KeyboardDoubleArrowRightIcon fontSize="large" />,
-    preferred: [ENavigationItemPreferred.home],
-    extern: false,
-    loggedIn: [false, true],
-  },
-  {
-    userTypes: [EUserType.client],
-    title: "data.NavigationItem.new-contract",
-    link: "/process/new",
-    icon: <AddShoppingCartIcon fontSize="large" />,
-    preferred: [ENavigationItemPreferred.home],
-    extern: false,
-    loggedIn: [false, true],
-  },
-  {
-    userTypes: [EUserType.anonym],
-    title: "data.NavigationItem.explore",
-    link: "/process/model",
-    icon: <ScienceIcon fontSize="large" />,
-    preferred: [ENavigationItemPreferred.home],
-    extern: false,
-    loggedIn: [false],
   },
   {
     userTypes: [EUserType.anonym],
@@ -168,7 +146,6 @@ export const NavigationItems: INavigationItem[] = [
     icon: <HardwareIcon fontSize="large" />,
     preferred: [ENavigationItemPreferred.home],
     extern: false,
-    loggedIn: [false, true],
   },
   {
     userTypes: [EUserType.anonym],
@@ -177,7 +154,6 @@ export const NavigationItems: INavigationItem[] = [
     icon: <PrecisionManufacturingIcon fontSize="large" />,
     preferred: [ENavigationItemPreferred.home],
     extern: false,
-    loggedIn: [false, true],
   },
   {
     userTypes: [EUserType.manufacturer],
@@ -186,7 +162,6 @@ export const NavigationItems: INavigationItem[] = [
     icon: <GavelIcon fontSize="large" />,
     preferred: [ENavigationItemPreferred.home],
     extern: false,
-    loggedIn: [true],
   },
   {
     userTypes: [EUserType.manufacturer],
@@ -195,7 +170,6 @@ export const NavigationItems: INavigationItem[] = [
     icon: <FactoryIcon fontSize="large" />,
     preferred: [ENavigationItemPreferred.home],
     extern: false,
-    loggedIn: [false],
   },
   {
     userTypes: [EUserType.admin],
@@ -204,7 +178,6 @@ export const NavigationItems: INavigationItem[] = [
     icon: <PersonIcon fontSize="large" />,
     preferred: [ENavigationItemPreferred.home],
     extern: false,
-    loggedIn: [true],
   },
   {
     userTypes: [EUserType.admin],
@@ -213,7 +186,6 @@ export const NavigationItems: INavigationItem[] = [
     icon: <ViewInArIcon fontSize="large" />,
     preferred: [ENavigationItemPreferred.home],
     extern: false,
-    loggedIn: [true],
   },
   {
     userTypes: [EUserType.admin],
@@ -222,7 +194,6 @@ export const NavigationItems: INavigationItem[] = [
     icon: <HomeRepairServiceIcon fontSize="large" />,
     preferred: [ENavigationItemPreferred.home],
     extern: false,
-    loggedIn: [true],
   },
   {
     userTypes: [EUserType.admin],
@@ -231,7 +202,6 @@ export const NavigationItems: INavigationItem[] = [
     icon: <SyncAltIcon fontSize="large" />,
     preferred: [ENavigationItemPreferred.home],
     extern: false,
-    loggedIn: [true],
   },
   {
     userTypes: [EUserType.admin],
@@ -240,6 +210,5 @@ export const NavigationItems: INavigationItem[] = [
     icon: <PrintIcon fontSize="large" />,
     preferred: [ENavigationItemPreferred.home],
     extern: false,
-    loggedIn: [true],
   },
 ];

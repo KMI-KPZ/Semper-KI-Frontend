@@ -1,9 +1,9 @@
 import React, { ReactNode } from "react";
-import { EUserType } from "../../interface/enums";
+import { ENavigationItemPreferred, EUserType } from "../../interface/enums";
 import { useTranslation } from "react-i18next";
 import { IOrderCollectionEvent } from "../../interface/Interface";
 import HomeItem from "./HomeItem";
-import { HomeItemsData } from "./HomeData";
+import { NavigationItems } from "../../data/NavigationItems";
 
 interface Props {
   userType: EUserType;
@@ -37,20 +37,15 @@ export const Home: React.FC<Props> = (props) => {
   };
   const count = getChangeCount();
 
-  const getHomeItems = (userType: EUserType): IHomeItem[] => {
-    return HomeItemsData.filter((homeItem) =>
-      homeItem.userTypes.includes(userType)
-    );
-  };
-
   const calcBadge = (title: string): number | undefined => {
     if (
       count !== undefined &&
       count > 0 &&
-      (title === "Home.HomeData.contracts" || title === "Home.HomeData.orders")
+      (title === "data.NavigationItem.contracts" ||
+        title === "data.NavigationItem.orders")
     )
       return getChangeCount();
-    if (cartCount > 0 && title === "Home.HomeData.cart") return cartCount;
+    if (cartCount > 0 && title === "data.NavigationItem.cart") return cartCount;
     return undefined;
   };
 
@@ -58,12 +53,12 @@ export const Home: React.FC<Props> = (props) => {
     <div className="flex flex-col gap-12 justify-start items-center">
       <h1 className="">{t("Home.Home.header")}</h1>
       <div className="flex flex-row flex-wrap justify-center gap-5 p-4 md:p-0 items-center">
-        {getHomeItems(userType).map((homeItem, index) => (
-          <HomeItem
-            key={index}
-            homeItem={homeItem}
-            badge={calcBadge(homeItem.title)}
-          />
+        {NavigationItems.filter(
+          (item) =>
+            item.userTypes.includes(userType) &&
+            item.preferred.includes(ENavigationItemPreferred.home)
+        ).map((item, index) => (
+          <HomeItem key={index} homeItem={item} badge={calcBadge(item.title)} />
         ))}
       </div>
     </div>

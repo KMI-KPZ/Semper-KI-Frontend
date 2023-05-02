@@ -19,7 +19,7 @@ interface State {
   showError: boolean;
 }
 
-const Order: React.FC<Props> = (props) => {
+const Cart: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -38,6 +38,7 @@ const Order: React.FC<Props> = (props) => {
         item.material === undefined ||
         item.postProcessings === undefined
     ).length;
+
     let errors: TError[] = [];
     if (cart.length === 0) errors.push("empty");
     if (errorCount > 0 && cart.length > 0) errors.push("incomplete");
@@ -124,4 +125,4 @@ const Order: React.FC<Props> = (props) => {
   );
 };
 
-export default Order;
+export default Cart;

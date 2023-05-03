@@ -104,48 +104,62 @@ const App: React.FC = () => {
     orderID: string,
     type: "message" | "status"
   ) => {
-    console.log("deleteEvent", orderCollectionID, orderID, type);
+    // console.log("deleteEvent", orderCollectionID, orderID, type);
     setState((prevState) => {
-      let newOrderCollectionEvent: IOrderCollectionEvent | undefined =
+      const existingOrderCollectionEvent: IOrderCollectionEvent | undefined =
         prevState.missedEvents.find(
           (event) => event.orderCollectionID === orderCollectionID
         );
-      if (newOrderCollectionEvent !== undefined) {
-        const newOrderEvents: IOrderEvent[] | undefined =
-          newOrderCollectionEvent.orders.map((orderEvent) => ({
-            ...orderEvent,
-            messages:
-              orderEvent.orderID === orderID && type === "message"
-                ? undefined
-                : orderEvent.messages,
-            status:
-              orderEvent.orderID === orderID && type === "status"
-                ? undefined
-                : orderEvent.status,
-          }));
-        newOrderCollectionEvent.orders = newOrderEvents.filter(
-          (orderEvent) =>
-            orderEvent.messages !== undefined || orderEvent.status !== undefined
+
+      if (
+        existingOrderCollectionEvent !== undefined &&
+        existingOrderCollectionEvent.orders.length > 0
+      ) {
+        const existingOrderEvents: IOrderEvent[] =
+          existingOrderCollectionEvent.orders;
+        const editedOrderEvents = existingOrderEvents.map(
+          (orderEvent): IOrderEvent => {
+            return {
+              orderID: orderEvent.orderID,
+              messages:
+                orderEvent.orderID === orderID && type === "message"
+                  ? undefined
+                  : orderEvent.messages,
+              status:
+                orderEvent.orderID === orderID && type === "status"
+                  ? undefined
+                  : orderEvent.status,
+            };
+          }
+        );
+        const editedOrderCollectionEvent: IOrderCollectionEvent = {
+          orderCollectionID: existingOrderCollectionEvent.orderCollectionID,
+          orders: editedOrderEvents.filter(
+            (orderEvent) =>
+              orderEvent.messages !== undefined ||
+              orderEvent.status !== undefined
+          ),
+        };
+        const missedEventsWithout = prevState.missedEvents.filter(
+          (orderCollectionEvent) =>
+            orderCollectionEvent.orderCollectionID !== orderCollectionID
+        );
+        const missedEventsWith =
+          missedEventsWithout.length > 0
+            ? [...missedEventsWithout, editedOrderCollectionEvent]
+            : [editedOrderCollectionEvent];
+        return {
+          ...prevState,
+          missedEvents: missedEventsWith,
+        };
+      } else {
+        const newMissedEvents = prevState.missedEvents.filter(
+          (orderCollectionEvent) =>
+            orderCollectionEvent.orderCollectionID !== orderCollectionID
         );
         return {
           ...prevState,
-          missedEvents: [
-            ...prevState.missedEvents.filter(
-              (orderCollectionEvent) =>
-                orderCollectionEvent.orderCollectionID !== orderCollectionID
-            ),
-            newOrderCollectionEvent,
-          ],
-        };
-      } else {
-        return {
-          ...prevState,
-          missedEvents: [
-            ...prevState.missedEvents.filter(
-              (orderCollectionEvent) =>
-                orderCollectionEvent.orderCollectionID !== orderCollectionID
-            ),
-          ],
+          missedEvents: newMissedEvents.length > 0 ? newMissedEvents : [],
         };
       }
     });
@@ -157,32 +171,78 @@ const App: React.FC = () => {
         event.data
       );
       const newOrderEvent = newOrderCollectionEvent.orders[0];
-      const getNumberUndefined = (
-        oldEvent: IOrderEvent,
-        newEvent: IOrderEvent,
-        type: keyof IOrderEvent
+      const getNumberMessages = (
+        oldEvent: IOrderEvent | undefined,
+        newEvent: IOrderEvent | undefined
       ): number | undefined => {
-        if (type === "orderID") return undefined;
-        if (oldEvent[type] === undefined && newEvent[type] === undefined)
-          return undefined;
-        if (oldEvent[type] !== undefined && newEvent[type] === undefined)
-          return oldEvent[type];
-        if (oldEvent[type] === undefined && newEvent[type] !== undefined)
-          return newEvent[type];
-        if (oldEvent[type] !== undefined && newEvent[type] !== undefined)
-          return oldEvent[type]! + newEvent[type]!;
+        if (oldEvent === undefined && newEvent === undefined) return undefined;
+        if (
+          oldEvent === undefined &&
+          newEvent !== undefined &&
+          newEvent.messages !== undefined
+        )
+          return newEvent.messages > 0 ? newEvent.messages : undefined;
+        if (
+          newEvent === undefined &&
+          oldEvent !== undefined &&
+          oldEvent.messages !== undefined
+        )
+          return oldEvent.messages > 0 ? oldEvent.messages : undefined;
+        if (
+          oldEvent !== undefined &&
+          newEvent !== undefined &&
+          oldEvent.messages !== undefined &&
+          newEvent.messages !== undefined
+        )
+          return oldEvent.messages + newEvent.messages > 0
+            ? oldEvent.messages + newEvent.messages
+            : undefined;
+
+        return undefined;
+      };
+      const getNumberStatus = (
+        oldEvent: IOrderEvent | undefined,
+        newEvent: IOrderEvent | undefined
+      ): number | undefined => {
+        if (oldEvent === undefined && newEvent === undefined) return undefined;
+        if (
+          oldEvent === undefined &&
+          newEvent !== undefined &&
+          newEvent.status !== undefined
+        )
+          return newEvent.status > 0 ? newEvent.status : undefined;
+        if (
+          newEvent === undefined &&
+          oldEvent !== undefined &&
+          oldEvent.status !== undefined
+        )
+          return oldEvent.status > 0 ? oldEvent.status : undefined;
+        if (
+          oldEvent !== undefined &&
+          newEvent !== undefined &&
+          oldEvent.status !== undefined &&
+          newEvent.status !== undefined
+        )
+          return oldEvent.status + newEvent.status > 0
+            ? oldEvent.status + newEvent.status
+            : undefined;
+
         return undefined;
       };
       const hydrateEvents = (
         missedEvents: IOrderCollectionEvent[]
       ): IOrderCollectionEvent[] => {
-        const existingOrderCollecetionIDs: string[] = missedEvents.map(
-          (orderCollectionEvent) => orderCollectionEvent.orderCollectionID
-        );
-        const existingOrderIDs: string[] = missedEvents.flatMap(
-          (orderCollectionEvent) =>
-            orderCollectionEvent.orders.map((orderEvent) => orderEvent.orderID)
-        );
+        const existingOrderCollecetionIDs: string[] = [];
+        const existingOrderIDs: string[] = [];
+        missedEvents.forEach((orderCollectionEvent) => {
+          existingOrderCollecetionIDs.push(
+            orderCollectionEvent.orderCollectionID
+          );
+          orderCollectionEvent.orders.forEach((orderEvent) => {
+            existingOrderIDs.push(orderEvent.orderID);
+          });
+        });
+
         let hydratedMissedEvents = missedEvents;
         if (
           existingOrderCollecetionIDs.includes(
@@ -190,39 +250,36 @@ const App: React.FC = () => {
           ) &&
           existingOrderIDs.includes(newOrderEvent.orderID)
         ) {
-          const existingOrderCollectionEvent = hydratedMissedEvents.filter(
-            (orderCollectionEvent) =>
-              orderCollectionEvent.orderCollectionID ===
-              newOrderCollectionEvent.orderCollectionID
-          )[0];
-          const existingOrderEvent = existingOrderCollectionEvent.orders.filter(
-            (orderEvent) => orderEvent.orderID === newOrderEvent.orderID
-          )[0];
-          hydratedMissedEvents = [
-            ...hydratedMissedEvents.filter(
+          const existingOrderCollectionEventsWithoutNew =
+            hydratedMissedEvents.filter(
               (orderCollectionEvent) =>
                 orderCollectionEvent.orderCollectionID !==
                 newOrderCollectionEvent.orderCollectionID
-            ),
+            );
+          const existingOrderCollectionEventNew = hydratedMissedEvents.find(
+            (orderCollectionEvent) =>
+              orderCollectionEvent.orderCollectionID ===
+              newOrderCollectionEvent.orderCollectionID
+          )!;
+          const existingOrderEventNew =
+            existingOrderCollectionEventNew.orders.find(
+              (orderEvent) => orderEvent.orderID !== newOrderEvent.orderID
+            )!;
+          hydratedMissedEvents = [
+            ...existingOrderCollectionEventsWithoutNew,
             {
-              ...existingOrderCollectionEvent,
+              orderCollectionID: newOrderCollectionEvent.orderCollectionID,
               orders: [
-                ...existingOrderCollectionEvent.orders.filter(
-                  (orderEvent) =>
-                    orderEvent.orderID !== existingOrderEvent.orderID
+                ...existingOrderCollectionEventNew.orders.filter(
+                  (orderEvent) => orderEvent.orderID !== newOrderEvent.orderID
                 ),
                 {
-                  ...existingOrderEvent,
-                  messages: getNumberUndefined(
-                    existingOrderEvent,
-                    newOrderEvent,
-                    "messages"
+                  orderID: newOrderEvent.orderID,
+                  messages: getNumberMessages(
+                    existingOrderEventNew,
+                    newOrderEvent
                   ),
-                  status: getNumberUndefined(
-                    existingOrderEvent,
-                    newOrderEvent,
-                    "status"
-                  ),
+                  status: getNumberStatus(existingOrderEventNew, newOrderEvent),
                 },
               ],
             },

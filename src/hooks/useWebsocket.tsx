@@ -38,7 +38,7 @@ export const useWebsocket = (
       };
       ws.onmessage = (event: MessageEvent) => {
         onMessage(event);
-        console.log("useWebsocket | onmessage | ", event);
+        // console.log("useWebsocket | onmessage | ", event);
       };
 
       setSocket(ws);

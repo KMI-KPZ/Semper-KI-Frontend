@@ -286,6 +286,13 @@
       },
       "empty":"keine vorhandenen Bestellungen"    
     },
+    "OrderFileView":{
+      "header":"Dateien",
+      "empty":"keine Dateien gefunden",
+      "button":{
+        "download":"Herunterladen"
+      }
+    },
     "OrderPreView":{
       "requested":"Angefragt",
       "verify":"Rückfragen",

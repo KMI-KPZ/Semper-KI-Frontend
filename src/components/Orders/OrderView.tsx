@@ -20,6 +20,7 @@ import { useTranslation } from "react-i18next";
 import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import Badge from "../General/Badge";
+import OrderFileView from "./OrderFileView";
 
 interface Props {
   order: IOrder;
@@ -210,6 +211,7 @@ const OrderView: React.FC<Props> = (props) => {
           ))}
         </div>
       </div>
+      <OrderFileView order={order} orderCollectionID={orderCollectionID} />
       <PopUp open={chatOpen} onOutsideClick={handleOnOutsideClickChat}>
         <ChatView
           chat={order.chat.messages}

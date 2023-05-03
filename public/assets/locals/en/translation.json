@@ -310,6 +310,13 @@
         },
         "empty":"no orders available"
      },
+     "OrderFileView":{
+      "header":"Files",
+      "empty":"no Files available",
+      "button":{
+        "download":"Download"
+      }
+    },
      "OrderPreView":{
         "requested":"Requested",
         "verify":"Verify",

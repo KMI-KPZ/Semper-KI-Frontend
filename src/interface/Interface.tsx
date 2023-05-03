@@ -156,8 +156,3 @@ export interface IOrderEvent {
   status?: number;
   messages?: number;
 }
-
-export interface IWebsocketEvent {
-  queries: string[];
-  events: IOrderCollectionEvent[];
-}

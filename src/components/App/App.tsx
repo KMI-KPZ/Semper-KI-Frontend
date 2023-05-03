@@ -38,7 +38,6 @@ import {
   IOrderEvent,
   IProcessItem,
   IUser,
-  IWebsocketEvent,
 } from "../../interface/Interface";
 import LoginView from "../Login/LoginView";
 import useMissedEvent from "../../hooks/useMissedEvent";
@@ -46,6 +45,7 @@ import { useWebsocket } from "../../hooks/useWebsocket";
 import { useQueryClient } from "@tanstack/react-query";
 import useCart from "../../hooks/useCart";
 import { useTranslation } from "react-i18next";
+import { exec } from "child_process";
 
 export interface IAppState {
   selectedProgressItem?: { index: number; progress: string };
@@ -104,6 +104,7 @@ const App: React.FC = () => {
     orderID: string,
     type: "message" | "status"
   ) => {
+    console.log("deleteEvent", orderCollectionID, orderID, type);
     setState((prevState) => {
       let newOrderCollectionEvent: IOrderCollectionEvent | undefined =
         prevState.missedEvents.find(
@@ -150,21 +151,103 @@ const App: React.FC = () => {
     });
   };
 
-  const onWebsocktEvent = (event: MessageEvent<IWebsocketEvent>) => {
-    if (event.data.events.length > 0) {
-      setState((prevState) => ({
-        ...prevState,
-        missedEvents: [...prevState.missedEvents, ...event.data.events],
-      }));
-      queryClient.invalidateQueries(event.data.queries);
+  const onWebsocktEvent = (event: MessageEvent) => {
+    if (event.data !== undefined) {
+      const newOrderCollectionEvent: IOrderCollectionEvent = JSON.parse(
+        event.data
+      );
+      const newOrderEvent = newOrderCollectionEvent.orders[0];
+      const getNumberUndefined = (
+        oldEvent: IOrderEvent,
+        newEvent: IOrderEvent,
+        type: keyof IOrderEvent
+      ): number | undefined => {
+        if (type === "orderID") return undefined;
+        if (oldEvent[type] === undefined && newEvent[type] === undefined)
+          return undefined;
+        if (oldEvent[type] !== undefined && newEvent[type] === undefined)
+          return oldEvent[type];
+        if (oldEvent[type] === undefined && newEvent[type] !== undefined)
+          return newEvent[type];
+        if (oldEvent[type] !== undefined && newEvent[type] !== undefined)
+          return oldEvent[type]! + newEvent[type]!;
+        return undefined;
+      };
+      const hydrateEvents = (
+        missedEvents: IOrderCollectionEvent[]
+      ): IOrderCollectionEvent[] => {
+        const existingOrderCollecetionIDs: string[] = missedEvents.map(
+          (orderCollectionEvent) => orderCollectionEvent.orderCollectionID
+        );
+        const existingOrderIDs: string[] = missedEvents.flatMap(
+          (orderCollectionEvent) =>
+            orderCollectionEvent.orders.map((orderEvent) => orderEvent.orderID)
+        );
+        let hydratedMissedEvents = missedEvents;
+        if (
+          existingOrderCollecetionIDs.includes(
+            newOrderCollectionEvent.orderCollectionID
+          ) &&
+          existingOrderIDs.includes(newOrderEvent.orderID)
+        ) {
+          const existingOrderCollectionEvent = hydratedMissedEvents.filter(
+            (orderCollectionEvent) =>
+              orderCollectionEvent.orderCollectionID ===
+              newOrderCollectionEvent.orderCollectionID
+          )[0];
+          const existingOrderEvent = existingOrderCollectionEvent.orders.filter(
+            (orderEvent) => orderEvent.orderID === newOrderEvent.orderID
+          )[0];
+          hydratedMissedEvents = [
+            ...hydratedMissedEvents.filter(
+              (orderCollectionEvent) =>
+                orderCollectionEvent.orderCollectionID !==
+                newOrderCollectionEvent.orderCollectionID
+            ),
+            {
+              ...existingOrderCollectionEvent,
+              orders: [
+                ...existingOrderCollectionEvent.orders.filter(
+                  (orderEvent) =>
+                    orderEvent.orderID !== existingOrderEvent.orderID
+                ),
+                {
+                  ...existingOrderEvent,
+                  messages: getNumberUndefined(
+                    existingOrderEvent,
+                    newOrderEvent,
+                    "messages"
+                  ),
+                  status: getNumberUndefined(
+                    existingOrderEvent,
+                    newOrderEvent,
+                    "status"
+                  ),
+                },
+              ],
+            },
+          ];
+        } else {
+          hydratedMissedEvents.push(newOrderCollectionEvent);
+        }
+        return hydratedMissedEvents;
+      };
+
+      if (newOrderCollectionEvent) {
+        setState((prevState) => ({
+          ...prevState,
+          missedEvents: hydrateEvents(prevState.missedEvents),
+        }));
+        queryClient.invalidateQueries(["orders"]);
+      }
     }
   };
 
-  // const {
-  //   sendMessage,
-  //   socket: websocket,
-  //   state: webSocketState,
-  // } = useWebsocket(onWebsocktEvent, isLoggedInResponse);
+  const {
+    sendMessage,
+    socket: websocket,
+    state: webSocketState,
+  } = useWebsocket(onWebsocktEvent, isLoggedIn);
 
   const setFilter = (guideFilter: IFilterItem[]): void => {
     setState((prevState) => ({ ...prevState, guideFilter }));

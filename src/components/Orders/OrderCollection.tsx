@@ -148,7 +148,7 @@ const OrderCollection: React.FC<Props> = (props) => {
           {t("Orders.OrderCollection.id")}: {orderCollection.id}
         </h2>
         <h2>
-          {t("Orders.OrderCollection.state.header")}:{" "}
+          {t("Orders.OrderCollection.state.header")}
           {t(
             `Orders.OrderCollection.state.${
               EOrderCollectionState[orderCollection.state]

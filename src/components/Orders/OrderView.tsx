@@ -46,7 +46,8 @@ const OrderView: React.FC<Props> = (props) => {
 
   useEffect(() => {
     deleteEvent(orderCollectionID, order.id, "status");
-  }, []);
+    if (chatOpen) deleteEvent(orderCollectionID, order.id, "message");
+  }, [order]);
 
   const handleOnClickButtonChat = () => {
     deleteEvent(orderCollectionID, order.id, "message");

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import { IChatMessage, IUser } from "../../interface/Interface";
 import Button from "../General/Button";
 import SendIcon from "@mui/icons-material/Send";
@@ -15,18 +15,15 @@ interface Props {
 }
 
 interface State {
-  chat: IChatMessage[];
   height?: number;
   messageText?: string;
 }
 
 const ChatView: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { chat: _chat, user, closeMenu, orderCollectionID, orderID } = props;
-  const [state, setState] = useState<State>({
-    chat: _chat,
-  });
-  const { height, messageText, chat } = state;
+  const { chat, user, closeMenu, orderCollectionID, orderID } = props;
+  const [state, setState] = useState<State>({});
+  const { height, messageText } = state;
   const { updateOrder } = useOrders();
 
   const handleOnChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -54,7 +51,6 @@ const ChatView: React.FC<Props> = (props) => {
           onSuccess(data, variables, context) {
             setState((prevState) => ({
               ...prevState,
-              chat: [...prevState.chat, variables.chat!],
               messageText: "",
               height: undefined,
             }));

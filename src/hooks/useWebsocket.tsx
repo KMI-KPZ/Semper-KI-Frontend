@@ -26,19 +26,19 @@ export const useWebsocket = (
 
       ws.onopen = () => {
         setState("connected");
-        // console.log("useWebsocket | connected");
+        console.log("useWebsocket | connected");
       };
       ws.onerror = () => {
         setState("error");
-        // console.log("useWebsocket | error");
+        console.log("useWebsocket | error");
       };
       ws.onclose = () => {
         setState("disconnected");
-        // console.log("useWebsocket | disconnected");
+        console.log("useWebsocket | disconnected");
       };
       ws.onmessage = (event: MessageEvent) => {
         onMessage(event);
-        // console.log("useWebsocket | onmessage | ", event);
+        console.log("useWebsocket | onmessage | ", event);
       };
 
       setSocket(ws);

@@ -193,10 +193,10 @@ const App: React.FC = () => {
           newEvent !== undefined &&
           oldEvent.messages !== undefined &&
           newEvent.messages !== undefined
-        )
-          return oldEvent.messages + newEvent.messages > 0
-            ? oldEvent.messages + newEvent.messages
-            : undefined;
+        ) {
+          const result = oldEvent.messages + newEvent.messages;
+          return result > 0 ? result : undefined;
+        }
 
         return undefined;
       };
@@ -222,10 +222,10 @@ const App: React.FC = () => {
           newEvent !== undefined &&
           oldEvent.status !== undefined &&
           newEvent.status !== undefined
-        )
-          return oldEvent.status + newEvent.status > 0
-            ? oldEvent.status + newEvent.status
-            : undefined;
+        ) {
+          const result = oldEvent.status + newEvent.status;
+          return result > 0 ? result : undefined;
+        }
 
         return undefined;
       };
@@ -263,7 +263,7 @@ const App: React.FC = () => {
           )!;
           const existingOrderEventNew =
             existingOrderCollectionEventNew.orders.find(
-              (orderEvent) => orderEvent.orderID !== newOrderEvent.orderID
+              (orderEvent) => orderEvent.orderID === newOrderEvent.orderID
             )!;
           hydratedMissedEvents = [
             ...existingOrderCollectionEventsWithoutNew,

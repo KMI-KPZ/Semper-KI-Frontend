@@ -129,7 +129,13 @@
      "cart":"Cart",
      "manufacturer":"Manufacturer",
      "checkout":"Checkout",
-     "guide":"Guide"
+     "guide":"Guide",
+     "orders":"My Orders",
+     "account":"Account",
+     "test":"Test",
+     "service":"Service",
+     "use":"Use",
+     "provide":"Provide"
   },
   "CardView":{
      "Card":{

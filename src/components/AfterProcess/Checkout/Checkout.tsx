@@ -214,26 +214,27 @@ const Checkout: React.FC<Props> = (props) => {
   return (
     <LoadingSuspense query={cartQuery}>
       <div className="flex flex-col items-center gap-5 w-full p-5">
-        <div className="bg-white w-full p-5 flex flex-col gap-5 justify-start items-center">
-          <h1 className="text-center p-2 w-full">
-            {t("AfterProcess.Checkout.Checkout.title")}
-          </h1>
-          {renderCheckButtons()}
-          <Button
-            active={checkAll === true}
-            onClick={handleOnClickSend}
-            icon={<SendIcon fontSize="large" />}
-            iconPos="back"
-          >
-            <h2 className="text-white">
-              {t("AfterProcess.Checkout.Checkout.button.request")}
-            </h2>
-          </Button>
-        </div>
+        {order.loading === false && orderSendSuccesfull === true ? (
+          renderOrderSendSuccesfull()
+        ) : (
+          <div className="bg-white w-full p-5 flex flex-col gap-5 justify-start items-center">
+            <h1 className="text-center p-2 w-full">
+              {t("AfterProcess.Checkout.Checkout.title")}
+            </h1>
+            {renderCheckButtons()}
+            <Button
+              active={checkAll === true}
+              onClick={handleOnClickSend}
+              icon={<SendIcon fontSize="large" />}
+              iconPos="back"
+            >
+              <h2 className="text-white">
+                {t("AfterProcess.Checkout.Checkout.button.request")}
+              </h2>
+            </Button>
+          </div>
+        )}
         {showError === true ? renderError() : null}
-        {order.loading === false && orderSendSuccesfull === true
-          ? renderOrderSendSuccesfull()
-          : null}
         {order.loading === true ? renderLoadingAnimation() : null}
         {order.loading === false && orderSendSuccesfull === false ? (
           <div

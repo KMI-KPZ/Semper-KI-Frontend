@@ -131,7 +131,13 @@
     "cart":"Warenkorb",
     "manufacturer":"Hersteller",
     "checkout":"Kasse",
-    "guide":"Wegweiser"
+    "guide":"Wegweiser",
+    "orders":"Meine Bestellungen",
+    "account":"Konto",
+    "test":"Test",
+    "service":"Service",
+    "use":"In Anspruch nehmen",
+    "provide":"Service Anbieten"
   },
   "CardView":{
     "Card":{},

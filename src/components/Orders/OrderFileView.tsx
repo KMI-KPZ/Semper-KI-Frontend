@@ -47,15 +47,16 @@ const OrderFileView: React.FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col w-full justify-center items-center gap-5">
-      <h3>{t("Orders.OrderFileView.header")}</h3>
+      <h3 className="">{t("Orders.OrderFileView.header")}</h3>
+      <div className="w-full border-b-2" />
       <div className="flex flex-col md:flex-row gap-5 w-full items-center justify-center">
         {order.files.length > 0
           ? order.files.map((_fileName, index) => (
               <div
                 key={index}
-                className="flex flex-col justify-center items-center gap-3 bg-slate-100"
+                className="flex flex-col justify-center items-center bg-slate-100 p-2"
               >
-                <span>{_fileName}</span>
+                <span className="p-2">{_fileName}</span>
                 <Button
                   onClick={() => handleOnClickButton(_fileName)}
                   icon={<DownloadIcon />}

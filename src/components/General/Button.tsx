@@ -2,6 +2,7 @@ import { DefinedUseQueryResult, UseQueryResult } from "@tanstack/react-query";
 import React, { ReactNode } from "react";
 import LoadingAnimation from "./LoadingAnimation";
 import LoopIcon from "@mui/icons-material/Loop";
+import { t } from "i18next";
 
 interface Props<T> {
   title?: string;
@@ -112,6 +113,9 @@ const Button = <T,>(props: Props<T>) => {
         <div className="animate-spin">
           <LoopIcon />
         </div>
+      ) : null}
+      {query !== undefined && query.status === "error" ? (
+        <span>{query.error.message}</span>
       ) : null}
     </a>
   );

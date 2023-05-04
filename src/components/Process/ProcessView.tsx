@@ -50,8 +50,8 @@ export interface IProcessContext {
   searchModels(name: string): void;
   setProcessItemTitle(title: string, index: number): void;
 }
-const initialProcessState = (): IProcessState => ({
-  items: [{ title: "Item 1" }],
+const initialProcessState = (itemTitle?: string): IProcessState => ({
+  items: [{ title: itemTitle === undefined ? "Item 1" : itemTitle }],
   activeItemIndex: 0,
   searchText: "",
   grid: true,
@@ -92,7 +92,9 @@ export const ProcessView: React.FC<Props> = (props) => {
   const { guideAnswers, isLoggedInResponse, selectedProgressItem } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [state, setState] = useState<IProcessState>(initialProcessState());
+  const [state, setState] = useState<IProcessState>(
+    initialProcessState(`${t("Process.ProcessView.item")} 1`)
+  );
   const setChangesFalse = () => {
     setState((prevState) => ({ ...prevState, hasChanged: false }));
   };
@@ -351,14 +353,14 @@ export const ProcessView: React.FC<Props> = (props) => {
       hasChanged: true,
     }));
   };
-  const setProcessItemTitle = (title: string, index: number) => {
+  const setProcessItemTitle = (title: string, _index: number) => {
     // console.log("Process | setItemTitle |");
     setState((prevState) => ({
       ...prevState,
       items: [
-        ...prevState.items.filter((item, index) => index < activeItemIndex),
-        { ...prevState.items[index], title: title },
-        ...prevState.items.filter((item, index) => index > activeItemIndex),
+        ...prevState.items.filter((item, index) => index < _index),
+        { ...prevState.items[_index], title: title },
+        ...prevState.items.filter((item, index) => index > _index),
       ],
       hasChanged: true,
     }));

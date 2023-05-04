@@ -17,8 +17,10 @@ const OrderFileView: React.FC<Props> = (props) => {
   const { orderFileQuery } = useOrderFile({ orderID: order.id, fileName });
   const handleOnClickButton = (fileName: string) => {
     setFileName(fileName);
-    orderFileQuery.refetch();
   };
+  useEffect(() => {
+    orderFileQuery.refetch();
+  }, [fileName]);
   useEffect(() => {
     if (orderFileQuery.data !== undefined) {
       const url = window.URL.createObjectURL(new Blob([orderFileQuery.data]));

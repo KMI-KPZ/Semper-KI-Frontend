@@ -19,21 +19,10 @@ interface ReturnProps {
 
 const useOrderFile = (props: Props): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
-  const [state, setState] = useState<State>({ ...props, load: true });
-  const { fileName, orderID, load } = state;
-  useEffect(() => {
-    if (state.orderID !== orderID && state.fileName !== fileName) {
-      setState((prevState) => ({
-        ...prevState,
-        fileName,
-        orderID,
-        load: fileName !== "" && orderID !== "" ? true : false,
-      }));
-    }
-  }, [orderID, fileName]);
+  const { fileName, orderID } = props;
 
   const orderFileQuery = useQuery<File, Error>({
-    queryKey: ["order", "file"],
+    queryKey: ["order", "file", orderID, fileName],
     queryFn: async () =>
       axiosCustom
         .post(
@@ -42,10 +31,9 @@ const useOrderFile = (props: Props): ReturnProps => {
         )
         .then((res) => {
           console.log("useOrderFiles | orderFileQuery ✅ |", res.data);
-          setState((prevState) => ({ ...prevState, load: false }));
           return res.data;
         }),
-    enabled: load,
+    enabled: false,
   });
 
   return { orderFileQuery };

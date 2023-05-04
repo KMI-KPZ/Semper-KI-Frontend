@@ -152,6 +152,7 @@ const OrderView: React.FC<Props> = (props) => {
         <h3 className="break-words">
           {t("Orders.OrderView.header")} {order.id}
         </h3>
+        <h3 className="break-words">{order.item.title}</h3>
         <div className="flex flex-col md:flex-row  gap-3 items-center justify-center">
           {orderEvent !== undefined &&
           orderEvent.messages !== undefined &&

@@ -32,7 +32,9 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (ordersQuery.data !== undefined && state.length === 0)
-      setState(ordersQuery.data.map(() => false));
+      setState(
+        ordersQuery.data.map((open, index) => (index === 0 ? true : false))
+      );
   }, [ordersQuery.data]);
 
   const getOrderCollectionEventByID = (

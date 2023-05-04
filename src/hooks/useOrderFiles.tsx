@@ -14,24 +14,25 @@ interface State {
 }
 
 interface ReturnProps {
-  orderFileQuery: UseQueryResult<File, Error>;
+  orderFileQuery: UseQueryResult<any, Error>;
 }
 
 const useOrderFile = (props: Props): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
   const { fileName, orderID } = props;
 
-  const orderFileQuery = useQuery<File, Error>({
+  const orderFileQuery = useQuery<any, Error>({
     queryKey: ["order", "file", orderID, fileName],
     queryFn: async () =>
       axiosCustom
         .post(
           `${process.env.REACT_APP_HTTP_API_URL}/public/getFileFromOrder/`,
-          { id: orderID, filename: fileName }
+          { id: orderID, filename: fileName },
+          { responseType: "blob" }
         )
-        .then((res) => {
-          console.log("useOrderFiles | orderFileQuery ✅ |", res.data);
-          return res.data;
+        .then((response) => {
+          console.log("useOrderFiles | orderFileQuery ✅ |");
+          return response.data;
         }),
     enabled: false,
   });

@@ -1,7 +1,9 @@
-import { StringifyOptions } from "querystring";
+import { DefinedUseQueryResult, UseQueryResult } from "@tanstack/react-query";
 import React, { ReactNode } from "react";
+import LoadingAnimation from "./LoadingAnimation";
+import LoopIcon from "@mui/icons-material/Loop";
 
-interface Props {
+interface Props<T> {
   title?: string;
   onClick?(
     e?:
@@ -15,13 +17,14 @@ interface Props {
   size?: Size;
   style?: Style;
   link?: string;
+  query?: UseQueryResult<T, Error> | DefinedUseQueryResult<T, Error>;
 }
 
 type Icon = "front" | "back";
 type Size = "large" | "medium" | "small" | "xsmall" | "full";
 type Style = "primary" | "secondary";
 
-const Button: React.FC<Props> = (props) => {
+const Button = <T,>(props: Props<T>) => {
   const {
     active = true,
     icon,
@@ -32,8 +35,8 @@ const Button: React.FC<Props> = (props) => {
     size = "medium",
     style = "primary",
     link = "",
+    query,
   } = props;
-
   const handleOnClickButton = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
@@ -97,9 +100,19 @@ const Button: React.FC<Props> = (props) => {
       onClick={handleOnClickButton}
       href={link}
     >
-      {iconPos === "front" ? icon : null}
-      {children ? <span>{children}</span> : null}
-      {iconPos === "back" ? icon : null}
+      {(query !== undefined && query.status === "success") ||
+      query === undefined ? (
+        <>
+          {iconPos === "front" ? icon : null}
+          {children ? <span>{children}</span> : null}
+          {iconPos === "back" ? icon : null}
+        </>
+      ) : null}
+      {query !== undefined && query.status === "loading" ? (
+        <div className="animate-spin">
+          <LoopIcon />
+        </div>
+      ) : null}
     </a>
   );
 };

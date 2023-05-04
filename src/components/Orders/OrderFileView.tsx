@@ -21,7 +21,6 @@ const OrderFileView: React.FC<Props> = (props) => {
   useEffect(() => {
     if (fileName !== "") {
       orderFileQuery.refetch();
-      setFileName("");
     }
   }, [fileName]);
   useEffect(() => {
@@ -30,6 +29,8 @@ const OrderFileView: React.FC<Props> = (props) => {
       const link = document.createElement("a");
       link.href = url;
       link.setAttribute("download", fileName);
+
+      setFileName("");
 
       // Append to html link element page
       document.body.appendChild(link);
@@ -42,20 +43,23 @@ const OrderFileView: React.FC<Props> = (props) => {
     }
   }, [orderFileQuery.data]);
 
+  const buttonQuery = fileName !== "" ? orderFileQuery : undefined;
+
   return (
     <div className="flex flex-col w-full justify-center items-center gap-5">
       <h3>{t("Orders.OrderFileView.header")}</h3>
       <div className="flex flex-col md:flex-row gap-5 w-full items-center justify-center">
         {order.files.length > 0
-          ? order.files.map((fileName, index) => (
+          ? order.files.map((_fileName, index) => (
               <div
                 key={index}
                 className="flex flex-col justify-center items-center gap-3 bg-slate-100"
               >
-                <span>{fileName}</span>
+                <span>{_fileName}</span>
                 <Button
-                  onClick={() => handleOnClickButton(fileName)}
+                  onClick={() => handleOnClickButton(_fileName)}
                   icon={<DownloadIcon />}
+                  query={_fileName === fileName ? buttonQuery : undefined}
                 >
                   {t("Orders.OrderFileView.button.download")}
                 </Button>

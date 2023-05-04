@@ -31,7 +31,7 @@ const useOrderFile = (props: Props): ReturnProps => {
           { responseType: "blob" }
         )
         .then((response) => {
-          console.log("useOrderFiles | orderFileQuery ✅ |");
+          console.log("useOrderFiles | orderFileQuery ✅ | ", fileName);
           return response.data;
         }),
     enabled: false,

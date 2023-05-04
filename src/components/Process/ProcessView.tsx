@@ -48,6 +48,7 @@ export interface IProcessContext {
   setGridState(grid: boolean): void;
   setFilterOpen(open: boolean): void;
   searchModels(name: string): void;
+  setProcessItemTitle(title: string): void;
 }
 const initialProcessState = (): IProcessState => ({
   items: [{ title: "Item 1" }],
@@ -81,6 +82,9 @@ export const ProcessContext = createContext<IProcessContext>({
   },
   searchModels: () => {
     console.log("Error ProcessContext searchModels");
+  },
+  setProcessItemTitle: () => {
+    console.log("Error ProcessContext setProcessItemTitle");
   },
 });
 
@@ -347,6 +351,18 @@ export const ProcessView: React.FC<Props> = (props) => {
       hasChanged: true,
     }));
   };
+  const setProcessItemTitle = (title: string) => {
+    // console.log("Process | setItemTitle |");
+    setState((prevState) => ({
+      ...prevState,
+      items: [
+        ...prevState.items.filter((item, index) => index < activeItemIndex),
+        { ...prevState.items[activeItemIndex], title: title },
+        ...prevState.items.filter((item, index) => index > activeItemIndex),
+      ],
+      hasChanged: true,
+    }));
+  };
 
   return (
     <ProcessContext.Provider
@@ -359,6 +375,7 @@ export const ProcessView: React.FC<Props> = (props) => {
         setGridState,
         setFilterOpen,
         searchModels,
+        setProcessItemTitle,
       }}
     >
       <LoadingSuspense query={filtersQuery}>

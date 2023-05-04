@@ -128,7 +128,7 @@ export interface IOrder {
   item: IProcessItem;
   orderState: EOrderState;
   chat: { messages: IChatMessage[] };
-  files: File[];
+  files: string[];
   updatedWhen: string;
 }
 

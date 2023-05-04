@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext, useState } from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { IconDelete } from "../../../../constants/Icons";
 import { IProcessItem } from "../../../../interface/Interface";
 import Badge from "../../../General/Badge";
@@ -26,9 +26,13 @@ interface State {
 
 const CartItem: React.FC<Props> = (props) => {
   const { index, active, title, icon, onClickCard, isItem, process } = props;
-  const { deleteProcessItem: deleteProcess } = useContext(ProcessContext);
+  const { deleteProcessItem, setProcessItemTitle } = useContext(ProcessContext);
   const [state, setState] = useState<State>({ edit: false, titleText: title });
   const { edit, titleText } = state;
+
+  useEffect(() => {
+    setState((prevState) => ({ ...prevState, titleText: title }));
+  }, [title]);
 
   const handleOnClickCard = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -43,10 +47,10 @@ const CartItem: React.FC<Props> = (props) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    if (index !== undefined) deleteProcess(index);
+    if (index !== undefined) deleteProcessItem(index);
   };
 
-  const handleOnClickEditIcon = (
+  const handleOnClickEditCheckButton = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
@@ -90,7 +94,7 @@ const CartItem: React.FC<Props> = (props) => {
       {isItem === true ? (
         <div className="flex flex-col gap-1 items-center justify-center">
           <a
-            onClick={handleOnClickEditIcon}
+            onClick={handleOnClickEditCheckButton}
             href="/editItem"
             className="flex justify-center items-center hover:text-white duration-300"
           >

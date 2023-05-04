@@ -102,7 +102,7 @@ const OrderView: React.FC<Props> = (props) => {
   const renderButtons = () => {
     if (userType === EUserType.client)
       return (
-        <div className="flex flex-col md:flex-row gap-3 items-center justify-center">
+        <div className="flex flex-col md:flex-row gap-3 w-full md:w-fit items-center justify-center">
           <Button
             size="small"
             icon={<CancelIcon />}
@@ -121,7 +121,7 @@ const OrderView: React.FC<Props> = (props) => {
       );
     if (userType === EUserType.manufacturer)
       return (
-        <div className="flex flex-col md:flex-row gap-3 items-center justify-center">
+        <div className="flex flex-col md:flex-row gap-3 w-full md:w-fit items-center justify-center">
           <Button
             size="small"
             icon={<CancelIcon />}
@@ -147,12 +147,12 @@ const OrderView: React.FC<Props> = (props) => {
       );
   };
   return (
-    <div className="flex flex-col justify-start items-start gap-3 border-2 w-full p-3">
+    <div className="flex flex-col justify-start items-center md:items-start gap-3 border-2 w-full p-3">
       <div className="flex flex-col md:flex-row justify-between w-full">
         <h3 className="break-words">
           {t("Orders.OrderView.header")} {order.id}
         </h3>
-        <div className=" flex flex-col md:flex-row gap-3 items-center justify-center">
+        <div className="flex flex-col md:flex-row  gap-3 items-center justify-center">
           {orderEvent !== undefined &&
           orderEvent.messages !== undefined &&
           orderEvent.messages > 0 ? (
@@ -175,14 +175,16 @@ const OrderView: React.FC<Props> = (props) => {
             </Button>
           )}
           {menuOpen ? renderButtons() : null}
-          <div
-            className={`flex items-center justify-center ${
-              menuOpen ? "rotate-90" : "-rotate-90"
-            }`}
-          >
+          <div className={`flex items-center justify-center `}>
             <Button
               size="small"
-              icon={<ExpandLessIcon />}
+              icon={
+                <ExpandLessIcon
+                  className={` ${
+                    menuOpen ? "md:rotate-90" : "md:-rotate-90 rotate-180"
+                  }`}
+                />
+              }
               onClick={handleOnClickButtonExpand}
             />
           </div>
@@ -193,7 +195,7 @@ const OrderView: React.FC<Props> = (props) => {
         updateStatus={updateStatus}
         userType={userType}
       />
-      <div className="flex flex-col md:flex-row gap-5 w-full items-start justify-center md:justify-around p-5">
+      <div className="flex flex-col md:flex-row gap-5 w-full items-center md:items-start justify-center md:justify-around p-5">
         <img
           src={getModelURI(order.item.model!)}
           className="object-fit w-2/12"

@@ -48,7 +48,7 @@ export interface IProcessContext {
   setGridState(grid: boolean): void;
   setFilterOpen(open: boolean): void;
   searchModels(name: string): void;
-  setProcessItemTitle(title: string): void;
+  setProcessItemTitle(title: string, index: number): void;
 }
 const initialProcessState = (): IProcessState => ({
   items: [{ title: "Item 1" }],
@@ -351,13 +351,13 @@ export const ProcessView: React.FC<Props> = (props) => {
       hasChanged: true,
     }));
   };
-  const setProcessItemTitle = (title: string) => {
+  const setProcessItemTitle = (title: string, index: number) => {
     // console.log("Process | setItemTitle |");
     setState((prevState) => ({
       ...prevState,
       items: [
         ...prevState.items.filter((item, index) => index < activeItemIndex),
-        { ...prevState.items[activeItemIndex], title: title },
+        { ...prevState.items[index], title: title },
         ...prevState.items.filter((item, index) => index > activeItemIndex),
       ],
       hasChanged: true,

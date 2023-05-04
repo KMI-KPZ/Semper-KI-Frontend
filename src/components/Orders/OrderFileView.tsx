@@ -19,14 +19,14 @@ const OrderFileView: React.FC<Props> = (props) => {
     setFileName(fileName);
   };
   useEffect(() => {
-    orderFileQuery.refetch();
+    if (fileName !== "") orderFileQuery.refetch();
   }, [fileName]);
   useEffect(() => {
     if (orderFileQuery.data !== undefined) {
       const url = window.URL.createObjectURL(new Blob([orderFileQuery.data]));
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", `FileName.pdf`);
+      link.setAttribute("download", `${orderFileQuery.data.name}`);
 
       // Append to html link element page
       document.body.appendChild(link);

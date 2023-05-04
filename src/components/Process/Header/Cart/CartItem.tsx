@@ -56,7 +56,7 @@ const CartItem: React.FC<Props> = (props) => {
     e.preventDefault();
     e.stopPropagation();
     setState((prevState) => ({ ...prevState, edit: !prevState.edit }));
-    setProcessItemTitle(titleText);
+    if (index !== undefined) setProcessItemTitle(titleText, index);
   };
 
   const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {

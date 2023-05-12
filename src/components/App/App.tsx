@@ -46,6 +46,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import useCart from "../../hooks/useCart";
 import { useTranslation } from "react-i18next";
 import { exec } from "child_process";
+import Contact from "../Contact/Contact";
 
 export interface IAppState {
   selectedProgressItem?: { index: number; progress: string };
@@ -90,6 +91,10 @@ const App: React.FC = () => {
   const { cartQuery } = useCart();
   const queryClient = useQueryClient();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    document.body.style.overflowY = stopScroll === true ? "hidden" : "scroll";
+  }, [stopScroll]);
 
   useEffect(() => {
     if (initialMissedEvents.length > 0)
@@ -372,9 +377,7 @@ const App: React.FC = () => {
       }}
     >
       <div
-        className={`flex flex-col justify-between min-h-screen font-ptsans items-center gap-5 p-3
-         text-base
-        ${stopScroll === true ? "overflow-hidden h-screen w-screen" : ""}`}
+        className={`flex flex-col justify-between min-h-screen font-ptsans items-center gap-5 p-3 text-base overflow-x-auto`}
         data-testid="app"
       >
         <Header
@@ -420,6 +423,7 @@ const App: React.FC = () => {
             <Route path="logout" element={<Logout />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<LoginView register={true} />} />
+            <Route path="contact" element={<Contact />} />
             <Route
               path="aboutus"
               element={<Redirect link={URL_AboutUs} extern />}

@@ -143,14 +143,35 @@
     "Card":{},
     "CardView":{}
   },
+  "Contact":{
+    "Contact":{
+      "header":"Kontakt",
+      "title":{
+        "name":"Name",
+        "email":"E-Mail",
+        "message":"Nachricht"
+      },
+      "input":{
+        "name":"Name...",
+        "email":"E-Mail...",
+        "message":"Nachricht..."
+      },
+      "button":{
+        "send":"Nachricht Senden"
+      }
+    }
+  },
   "Error": {
     "text":"Seite nicht gefunden oder etwas ist schiefgelaufen",
     "text2":"Falls sie diese Seite erreichen wollten laden sie Erneut oder kontaktieren sie unseren Support",
     "button":"Zurück zur Startseite"
   },
   "Footer":{
-    "imprint":"Impressum",
-    "data-protection":"Datenschutzerklärung"
+    "Footer":{
+      "imprint":"Impressum",
+      "data-protection":"Datenschutzerklärung",
+      "contact":"Kontakt"
+    }
   },
   "General":{
     "Badege":{},

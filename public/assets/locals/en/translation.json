@@ -145,14 +145,35 @@
         
      }
   },
+  "Contact":{
+   "Contact":{
+     "header":"Contact",
+     "title":{
+       "name":"Name",
+       "email":"E-Mail",
+       "message":"Message"
+     },
+     "input":{
+       "name":"Name...",
+       "email":"E-Mail...",
+       "message":"Message..."
+     },
+     "button":{
+       "send":"Send Message"
+     }
+   }
+ },
   "Error":{
      "text":"Page not found or something went wrong",
      "text2":"If you were trying to reach this page, please reload or contact our support",
      "button":"Back to homepage"
   },
   "Footer":{
-     "imprint":"Imprint",
-     "data-protection":"Data Protection"
+   "Footer":{
+      "imprint":"Imprint",
+      "data-protection":"Data Protection",
+      "contact":"Contact"
+   }
   },
   "General":{
      "Badege":{

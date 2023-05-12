@@ -60,7 +60,7 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
           <ul className="w-full gap-5 flex flex-col">
             {ordersQuery.data.length > 0 ? (
               ordersQuery.data
-                .slice(0)
+                .slice(0) // to create a copy for reverse
                 .reverse()
                 .map((orderCollection: IOrderCollection, index: number) => (
                   <OrderCollection

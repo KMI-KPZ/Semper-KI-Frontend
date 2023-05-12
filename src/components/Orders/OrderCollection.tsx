@@ -163,15 +163,17 @@ const OrderCollection: React.FC<Props> = (props) => {
       </div>
       {isOpen === true ? (
         <>
-          {orderCollection.orders.map((order, index) => (
-            <OrderView
-              key={index}
-              order={order}
-              orderCollectionID={orderCollection.id}
-              userType={userType}
-              orderEvent={getOrderEventByID(order.id)}
-            />
-          ))}
+          {orderCollection.orders
+            .sort((orderA, orderB) => (orderA.id < orderB.id ? -1 : 1))
+            .map((order, index) => (
+              <OrderView
+                key={index}
+                order={order}
+                orderCollectionID={orderCollection.id}
+                userType={userType}
+                orderEvent={getOrderEventByID(order.id)}
+              />
+            ))}
           {renderButtons()}
         </>
       ) : (

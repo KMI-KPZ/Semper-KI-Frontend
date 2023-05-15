@@ -28,6 +28,7 @@ const Contact: React.FC<Props> = (props) => {
         className="resize-y w-full max-w-lg p-2 max-h-96 min-h-[5rem] h-60"
         placeholder={t("Contact.Contact.input.message")}
       />
+
       <Button>{t("Contact.Contact.button.send")}</Button>
     </div>
   );

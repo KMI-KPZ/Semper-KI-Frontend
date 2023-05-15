@@ -1,17 +1,17 @@
 import { DefinedUseQueryResult, UseQueryResult } from "@tanstack/react-query";
-import React, { ReactNode } from "react";
+import React, { FC, PropsWithChildren, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import LoadingAnimation from "./LoadingAnimation";
 
 interface Props<T> {
-  children?: ReactNode;
+  // children?: ReactNode;
   query: UseQueryResult<T, Error> | DefinedUseQueryResult<T, Error>;
   animation?: boolean;
   text?: boolean;
   loadingText?: string;
 }
 
-const LoadingSuspense = <T,>(props: Props<T>) => {
+const LoadingSuspense = <T,>(props: PropsWithChildren<Props<T>>) => {
   const { t } = useTranslation();
   const {
     children,

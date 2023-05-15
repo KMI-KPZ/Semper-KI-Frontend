@@ -22,7 +22,6 @@ import {
 } from "../PrivateRoutes/PrivateRoutes";
 import Profil from "../Profil/Profil";
 import OrderCollectionOverview from "../Orders/OrderCollectionOverview";
-import "./../../styles.scss";
 import AdminUserView from "../Admin/AdminUserView";
 import AdminModelView from "../Admin/AdminModelView";
 import AdminMaterialView from "../Admin/AdminMaterialView";
@@ -45,7 +44,6 @@ import { useWebsocket } from "../../hooks/useWebsocket";
 import { useQueryClient } from "@tanstack/react-query";
 import useCart from "../../hooks/useCart";
 import { useTranslation } from "react-i18next";
-import { exec } from "child_process";
 import Contact from "../Contact/Contact";
 
 export interface IAppState {

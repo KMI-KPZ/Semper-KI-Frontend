@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import "../../styles.scss";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { ModelUpload } from "./Model/ModelUpload";
 import { ModelCatalog } from "./Model/ModelCatalog";
@@ -124,14 +123,17 @@ export const ProcessView: React.FC<Props> = (props) => {
     }
   }, [cart]);
 
-  useEffect(() => {
-    if (hasChanged === true)
-      updateCart.mutate(items, {
-        onSuccess(data, variables, context) {
-          setChangesFalse();
-        },
-      });
-  }, [items, hasChanged]);
+  useEffect(
+    function sycsChangedData() {
+      if (hasChanged === true)
+        updateCart.mutate(items, {
+          onSuccess(data, variables, context) {
+            setChangesFalse();
+          },
+        });
+    },
+    [items, hasChanged]
+  );
 
   const searchModels = (name: string): void => {
     // console.log("Process | searchModels |", name);

@@ -2,31 +2,30 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import Card from "./Card";
 
-interface Props {
-  cardGroups: ICardGroup[];
-  title: string;
-  subtitle?: string;
-}
-
-export interface ICardGroup {
+type Props = {
   title?: string;
-  cards: ICardItem[];
-}
+  cardGroups: CardGroupData[];
+};
 
-export interface ICardItem {
+export type CardGroupData = {
+  title?: string;
+  cards: CardItemData[];
+};
+
+export type CardItemData = {
   title: string;
   link: string;
   icon?: React.ReactNode;
   onClick?(): void;
-}
+};
 
 const CardView: React.FC<Props> = (props) => {
-  const { cardGroups, subtitle, title } = props;
+  const { cardGroups, title } = props;
   const { t } = useTranslation();
 
-  const renderCards = (cards: ICardItem[]): JSX.Element => (
+  const renderCards = (cards: CardItemData[]): JSX.Element => (
     <div className="flex flex-col md:flex-row md:flex-wrap items-center justify-center gap-5 w-full">
-      {cards.map((carditem: ICardItem, cardIndex: number) => (
+      {cards.map((carditem: CardItemData, cardIndex: number) => (
         <Card
           onClickCard={carditem.onClick}
           carditem={carditem}
@@ -38,12 +37,9 @@ const CardView: React.FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col gap-5 justify-center items-center w-full p-4 md:p-0 max-w-7xl">
-      <h1 className="text-center">{t(title)}</h1>
-      {subtitle !== undefined ? (
-        <h2 className="text-center">{t(subtitle)}</h2>
-      ) : null}
+      {title !== undefined ? <h1 className="text-center">{t(title)}</h1> : null}
       <div className="flex flex-col gap-5 justify-center items-center w-full">
-        {cardGroups.map((cardgroup: ICardGroup, index: number) => (
+        {cardGroups.map((cardgroup: CardGroupData, index: number) => (
           <div
             className="flex flex-col gap-5 justify-center items-center w-full"
             key={index}

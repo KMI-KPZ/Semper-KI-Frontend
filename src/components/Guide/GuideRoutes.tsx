@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
-import CardView, { ICardGroup } from "../CardView/CardView";
+import CardView, { CardGroupData } from "../CardView/CardView";
 import PopUp from "../PopUp/PopUp";
 import { IFilterItem } from "../Process/Filter/Interface";
 import Guide from "./Guide";
-import _GuideCards from "./GuideCards.json";
-const GuideCards = _GuideCards as ICardGroup[];
+import { GuideItems } from "../../data/GuideItems";
 
 interface Props {
   setFilter(filter: IFilterItem[]): void;
@@ -35,7 +34,15 @@ const GuideRoutes: React.FC<Props> = (props) => {
 
   return (
     <div className="">
-      <CardView title={t("Guide.GuideRoutes.header")} cardGroups={GuideCards} />
+      <CardView
+        title={t("Guide.GuideRoutes.header")}
+        cardGroups={GuideItems.map(
+          (guideItem): CardGroupData => ({
+            title: "",
+            cards: [],
+          })
+        )}
+      />
       <PopUp open={state.menuOpen} onOutsideClick={handleOutsideClick}>
         <Guide setFilter={setFilter} />
       </PopUp>

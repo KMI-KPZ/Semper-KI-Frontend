@@ -1,9 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    screens: {
+      'xs': '475px',
+      ...defaultTheme.screens,
+    },
     extend: {
       colors: {
         'türkis': {
@@ -88,7 +93,8 @@ module.exports = {
         'spin-super-slow': 'spin 30s linear infinite',
       },
       boxShadow:{
-        'border':'0px 0px 0px 3px rgba(0, 0, 0, 1)'
+        'border':'0px 0px 0px 3px rgba(0, 0, 0, 1)',
+        'inner-border':'inset 0px 0px 0px 3px rgba(0, 0, 0, 1)'
       }
     },
   },

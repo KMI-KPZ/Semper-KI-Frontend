@@ -2,10 +2,10 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { getIconByName } from "../../constants/Icons";
-import { ICardItem } from "./CardView";
+import { CardItemData } from "./CardView";
 
 interface Props {
-  carditem: ICardItem;
+  carditem: CardItemData;
   onClickCard?(): void;
 }
 

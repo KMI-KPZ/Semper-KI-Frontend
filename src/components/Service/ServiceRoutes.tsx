@@ -1,27 +1,27 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
-import CardView, { ICardGroup, ICardItem } from "../CardView/CardView";
+import CardView, { CardGroupData, CardItemData } from "../CardView/CardView";
 import "./Service.scss";
 
 import _ServiceCards from "./ServiceCards.json";
 import ServiceView from "./ServiceView";
-const ServiceCards = _ServiceCards as ICardItem[];
-const cardsUse: ICardItem[] = [
-  ...ServiceCards.map((card: ICardItem) => ({
+const ServiceCards = _ServiceCards as CardItemData[];
+const cardsUse: CardItemData[] = [
+  ...ServiceCards.map((card: CardItemData) => ({
     icon: card.icon,
     link: `/service/use/${card.link}`,
     title: card.title,
   })),
 ];
-const cardsProvide: ICardItem[] = [
-  ...ServiceCards.map((card: ICardItem) => ({
+const cardsProvide: CardItemData[] = [
+  ...ServiceCards.map((card: CardItemData) => ({
     icon: card.icon,
     link: `/service/provide/${card.link}`,
     title: card.title,
   })),
 ];
-const cardGoupsIndex: ICardGroup[] = [
+const cardGoupsIndex: CardGroupData[] = [
   {
     title: "use",
     cards: cardsUse,

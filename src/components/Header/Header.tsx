@@ -163,7 +163,7 @@ export const Header: React.FC<Props> = (props) => {
     </li>
   );
   const renderHeaderItems: JSX.Element = (
-    <ul className="hidden md:flex flex-row gap-4 justify-center items-center">
+    <ul className="hidden md:flex flex-row gap-2 md:gap-4 justify-center items-center">
       {NavigationItems.filter(
         (item) =>
           item.preferred.includes(ENavigationItemPreferred.header) &&
@@ -179,7 +179,7 @@ export const Header: React.FC<Props> = (props) => {
     </ul>
   );
   const renderMobileHeaderItems: JSX.Element = (
-    <ul className="flex md:hidden flex-row gap-4 justify-center items-center">
+    <ul className="hidden xs:flex md:hidden flex-row gap-2 md:gap-4 justify-center items-center">
       {NavigationItems.filter(
         (item) =>
           item.preferred.includes(ENavigationItemPreferred.header) &&

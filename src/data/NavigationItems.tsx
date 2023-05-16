@@ -36,7 +36,7 @@ export const NavigationItems: INavigationItem[] = [
     link: "https://semper-ki.org/",
     icon: <InfoOutlinedIcon fontSize="large" />,
     extern: true,
-    preferred: [ENavigationItemPreferred.header],
+    preferred: [],
     userTypes: [
       EUserType.anonym,
       EUserType.client,

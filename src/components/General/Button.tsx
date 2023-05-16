@@ -3,6 +3,7 @@ import React, { ReactNode } from "react";
 import LoadingAnimation from "./LoadingAnimation";
 import LoopIcon from "@mui/icons-material/Loop";
 import { t } from "i18next";
+import { useNavigate } from "react-router-dom";
 
 interface Props<T> {
   title?: string;
@@ -17,7 +18,8 @@ interface Props<T> {
   children?: ReactNode;
   size?: Size;
   style?: Style;
-  link?: string;
+  hrefText?: string;
+  to?: string;
   query?: UseQueryResult<T, Error> | DefinedUseQueryResult<T, Error>;
 }
 
@@ -35,15 +37,22 @@ const Button = <T,>(props: Props<T>) => {
     children,
     size = "medium",
     style = "primary",
-    link = "",
+    hrefText = "",
+    to,
     query,
   } = props;
+  const navigate = useNavigate();
   const handleOnClickButton = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    if (onClick !== undefined) onClick(e);
+    if (onClick !== undefined) {
+      onClick(e);
+    }
+    if (to !== undefined) {
+      navigate(to);
+    }
   };
 
   const addString = (oldString: string, newString: string): string =>
@@ -99,7 +108,7 @@ const Button = <T,>(props: Props<T>) => {
       transition duration-300 bezier
       ${getClassName()}`}
       onClick={handleOnClickButton}
-      href={link}
+      href={hrefText}
     >
       {(query !== undefined && query.status === "success") ||
       query === undefined ? (

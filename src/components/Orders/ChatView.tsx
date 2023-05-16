@@ -114,7 +114,7 @@ const ChatView: React.FC<Props> = (props) => {
           onChange={handleOnChangeTextArea}
         />
         <Button
-          link="sendOrders"
+          hrefText="sendOrders"
           icon={<SendIcon />}
           onClick={handleOnClickButtonSend}
         />

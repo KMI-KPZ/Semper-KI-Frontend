@@ -23,6 +23,16 @@
       "logout": "Abmelden",
       "account": "Konto",
       "test": "Test"
+    },
+    "PortfolioItems":{
+      "use-produce":{
+        "header":"Bauteil Herstellen lassen",
+        "text":"Willkommen bei unserem Unternehmen! Wir sind stolz darauf, unseren Kunden eine breite Palette an Fachkompetenzen anzubieten. Unsere Expertise liegt insbesondere darin, Ihnen die Möglichkeit zu bieten, sich mit Herstellern in Verbindung zu setzen, die in der Lage sind, hochwertige Teile zu produzieren. In einer zunehmend globalisierten Welt ist es von entscheidender Bedeutung, effiziente und zuverlässige Verbindungen zu Herstellern herzustellen. Unsere Erfahrung und unsere umfangreichen Netzwerke ermöglichen es uns, Ihnen den Zugang zu erstklassigen Herstellern zu erleichtern, die in der Lage sind, spezifische Teile nach Ihren Anforderungen zu produzieren. Unser Team besteht aus Experten, die über langjährige Erfahrung in der Industrie verfügen und fundiertes Wissen über verschiedene Produktionsverfahren und -technologien besitzen. Wir verstehen die Bedeutung von Präzision, Qualität und termingerechter Lieferung und sind bestrebt, Ihre Anforderungen zu erfüllen. Unser Prozess beginnt mit einer detaillierten Analyse Ihrer spezifischen Anforderungen. Wir berücksichtigen Faktoren wie Materialien, Maßtoleranzen, Stückzahlen und Lieferzeiten. Basierend auf diesen Informationen identifizieren wir geeignete Hersteller, die über die erforderlichen Fähigkeiten und Ressourcen verfügen, um Ihre Anforderungen zu erfüllen. Wir handeln stets transparent und legen großen Wert auf klare Kommunikation. Unsere Beziehungen zu den Herstellern sind geprägt von Vertrauen und einer partnerschaftlichen Zusammenarbeit. Wir vermitteln Ihnen nicht nur Kontakte zu den Herstellern, sondern unterstützen Sie auch während des gesamten Prozesses, um sicherzustellen, dass die Produktion reibungslos verläuft. Unser Ziel ist es, Ihnen dabei zu helfen, die besten Hersteller zu finden, um Ihre Teile zu produzieren. Wir setzen auf Qualität, Effizienz und Kundenzufriedenheit. Wenn Sie auf der Suche nach zuverlässigen Herstellern sind, die Ihre Anforderungen erfüllen können, sind Sie bei uns an der richtigen Adresse. Zögern Sie nicht, uns zu kontaktieren, um mehr über unsere Fachkompetenz und die Möglichkeiten der Verbindung zu Herstellern für die Produktion von Teilen zu erfahren. Wir freuen uns darauf, Ihnen weiterzuhelfen und gemeinsam Lösungen zu finden, die Ihren Bedürfnissen entsprechen."
+      },
+      "use-design":{
+        "header":"Model entwerfen lassen",
+        "text":"Willkommen bei unserem Unternehmen! Wir sind stolz darauf, unseren Kunden eine breite Palette an Fachkompetenzen anzubieten. Unsere Expertise liegt insbesondere darin, Ihnen die Möglichkeit zu bieten, sich mit Herstellern in Verbindung zu setzen, die in der Lage sind, hochwertige Teile zu produzieren. In einer zunehmend globalisierten Welt ist es von entscheidender Bedeutung, effiziente und zuverlässige Verbindungen zu Herstellern herzustellen. Unsere Erfahrung und unsere umfangreichen Netzwerke ermöglichen es uns, Ihnen den Zugang zu erstklassigen Herstellern zu erleichtern, die in der Lage sind, spezifische Teile nach Ihren Anforderungen zu produzieren. Unser Team besteht aus Experten, die über langjährige Erfahrung in der Industrie verfügen und fundiertes Wissen über verschiedene Produktionsverfahren und -technologien besitzen. Wir verstehen die Bedeutung von Präzision, Qualität und termingerechter Lieferung und sind bestrebt, Ihre Anforderungen zu erfüllen. Unser Prozess beginnt mit einer detaillierten Analyse Ihrer spezifischen Anforderungen. Wir berücksichtigen Faktoren wie Materialien, Maßtoleranzen, Stückzahlen und Lieferzeiten. Basierend auf diesen Informationen identifizieren wir geeignete Hersteller, die über die erforderlichen Fähigkeiten und Ressourcen verfügen, um Ihre Anforderungen zu erfüllen. Wir handeln stets transparent und legen großen Wert auf klare Kommunikation. Unsere Beziehungen zu den Herstellern sind geprägt von Vertrauen und einer partnerschaftlichen Zusammenarbeit. Wir vermitteln Ihnen nicht nur Kontakte zu den Herstellern, sondern unterstützen Sie auch während des gesamten Prozesses, um sicherzustellen, dass die Produktion reibungslos verläuft. Unser Ziel ist es, Ihnen dabei zu helfen, die besten Hersteller zu finden, um Ihre Teile zu produzieren. Wir setzen auf Qualität, Effizienz und Kundenzufriedenheit. Wenn Sie auf der Suche nach zuverlässigen Herstellern sind, die Ihre Anforderungen erfüllen können, sind Sie bei uns an der richtigen Adresse. Zögern Sie nicht, uns zu kontaktieren, um mehr über unsere Fachkompetenz und die Möglichkeiten der Verbindung zu Herstellern für die Produktion von Teilen zu erfahren. Wir freuen uns darauf, Ihnen weiterzuhelfen und gemeinsam Lösungen zu finden, die Ihren Bedürfnissen entsprechen."
+      }
     }
   },
   "Admin":{
@@ -281,7 +291,51 @@
       "printer": "Drucker",
       "account": "Konto"
     },
-    "HomeItem":{}
+    "HomeItem":{},
+    "HomeOrderCard":{
+      "header":"Aufträge",
+      "order":{
+        "header":"Aktuell",
+        "new":"neuer Auftrag",
+        "continue":"Auftrag fortsetzen",
+        "cart":"Warenkorb",
+        "delete":"Warenkorb löschen"
+      },
+      "orders":{
+        "header":"Meine Bestellungen",
+        "date":"Datum",
+        "article":"Anzahl Artikel",
+        "status":"Status"
+      },
+      "contracts":{
+        "header":"Meine Aufträge",
+        "date":"Datum",
+        "article":"Anzahl Artikel",
+        "status":"Status"
+      },
+      "button":{
+        "all-orders":"Alle Bestellungen"
+      }
+    },
+    "HomeGuideCard":{
+      "header":"Angeleiteter Einstieg",
+      "information":{
+        "header":"zu Informationen",
+        "beginner":"Anfänger",
+        "advanced":"Fortgeschritten",
+        "expert":"Experte"
+      },
+      "service":{
+        "header":"zu Services",
+        "use-produce":"Bauteil Herstellen lassen",
+        "use-design":"Modell entwerfen lassen",
+        "use-accompany":"Gesamtprozess begleiten lassen",
+        "provide-produce":"Bauteile Herstellen",
+        "provide-design":"Modelle entwerfen",
+        "provide-accompany":"Gesamtprozesse begleiten"
+      },
+      "button":{"all":"Zu allen Angeleiteten Einstiegen"}
+    }
   },
   "Login":{
     "Login":{
@@ -376,6 +430,12 @@
     } 
   },
   "PopUp":{},
+  "Portfolio":{
+    "Portfolio":{
+      "header":"Unser Portfolio",
+      "back":"Nach Oben"
+    }
+  },
   "PrivateRoutes":{
     "error":{
       "client":"Sie Müssen als Kunde angemeldet Sein um diese Seite zu sehen",

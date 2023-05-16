@@ -40,59 +40,50 @@ export const Home: React.FC<Props> = (props) => {
           count += orderEvent.status;
       });
     });
-    return count;
+    return count > 0 ? count : undefined;
   };
   const count = getChangeCount();
 
-  const calcBadge = (title: string): number | undefined => {
-    if (
-      count !== undefined &&
-      count > 0 &&
-      (title === "data.NavigationItem.contracts" ||
-        title === "data.NavigationItem.orders")
-    )
-      return getChangeCount();
-    if (
-      cartCount > 0 &&
-      (title === "data.NavigationItem.cart" ||
-        title === "data.NavigationItem.continue")
-    )
-      return cartCount;
-    return undefined;
-  };
-
-  if (userType !== EUserType.anonym)
-    return (
-      <div className="flex flex-col gap-12 justify-start items-center">
-        <h1 className="">{t("Home.Home.header")}</h1>
-        <div className="flex flex-row flex-wrap justify-center gap-5 p-4 md:p-0 items-center">
-          {NavigationItems.filter(
-            (item) =>
-              item.userTypes.includes(userType) &&
-              item.preferred.includes(ENavigationItemPreferred.home)
-          )
-            .filter(
-              (item) =>
-                (item.title === "data.NavigationItem.continue" &&
-                  cartCount > 0) ||
-                item.title !== "data.NavigationItem.continue"
-            )
-            .map((item, index) => (
-              <HomeItem
-                key={index}
-                homeItem={item}
-                badge={calcBadge(item.title)}
-              />
-            ))}
-        </div>
-      </div>
-    );
+  // if (userType !== EUserType.anonym)
+  //   return (
+  //     <div className="flex flex-col gap-12 justify-start items-center">
+  //       <h1 className="">{t("Home.Home.header")}</h1>
+  //       <div className="flex flex-row flex-wrap justify-center gap-5 p-4 md:p-0 items-center">
+  //         {NavigationItems.filter(
+  //           (item) =>
+  //             item.userTypes.includes(userType) &&
+  //             item.preferred.includes(ENavigationItemPreferred.home)
+  //         )
+  //           .filter(
+  //             (item) =>
+  //               (item.title === "data.NavigationItem.continue" &&
+  //                 cartCount > 0) ||
+  //               item.title !== "data.NavigationItem.continue"
+  //           )
+  //           .map((item, index) => (
+  //             <HomeItem
+  //               key={index}
+  //               homeItem={item}
+  //               badge={calcBadge(item.title)}
+  //             />
+  //           ))}
+  //       </div>
+  //     </div>
+  //   );
 
   return (
     <div className="flex flex-col flex-grow gap-5 justify-start items-center md:grid md:grid-cols-3 w-full h-full">
       <HomeSearchCard className="md:order-2 md:col-span-2 bg-white md:h-full w-full" />
-      <HomeOrderCard className="md:order-1 md:row-span-2 bg-white md:h-full w-full" />
-      <HomeGuideCard className="md:order-5 md:col-span-2 bg-white md:h-full w-full" />
+      <HomeOrderCard
+        userType={userType}
+        className="md:order-1 md:row-span-2 bg-white md:h-full w-full"
+        cartCount={cartCount > 0 ? cartCount : undefined}
+        ordersCount={count}
+      />
+      <HomeGuideCard
+        userType={userType}
+        className="md:order-5 md:col-span-2 bg-white md:h-full w-full"
+      />
       <HomePortfolioCard className="md:order-4 md:row-span-2 bg-white md:h-full w-full" />
       <HomeMagazinCard className="md:order-3 md:h-full w-full" />
     </div>

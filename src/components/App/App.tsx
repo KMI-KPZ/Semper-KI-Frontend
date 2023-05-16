@@ -45,6 +45,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import useCart from "../../hooks/useCart";
 import { useTranslation } from "react-i18next";
 import Contact from "../Contact/Contact";
+import Portfolio from "../Portfolio/Portfolio";
 
 export interface IAppState {
   selectedProgressItem?: { index: number; progress: string };
@@ -419,6 +420,7 @@ const App: React.FC = () => {
               <Route path="*" element={<Navigate to="/guide" />} />
             </Route>
             <Route path="logout" element={<Logout />} />
+            <Route path="portfolio" element={<Portfolio />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<LoginView register={true} />} />
             <Route path="contact" element={<Contact />} />

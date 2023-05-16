@@ -36,19 +36,19 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
               user === "client" ? "left-0" : "-left-[200%]"
             }`}
           >
-            <Link to="/guide">{`>`} Informieren über 3D-Druck</Link>
-            <Link to="/process/model">{`>`} Teil herstellen lasssen</Link>
-            <Link to="/guide">{`>`} Modell entwerfen lasssen</Link>
-            <Link to="/guide">{`>`} Gesamtprozess begleiten lasssen</Link>
+            <Link to="/portfolio">{`>`} Informieren über 3D-Druck</Link>
+            <Link to="/portfolio">{`>`} Teil herstellen lasssen</Link>
+            <Link to="/portfolio">{`>`} Modell entwerfen lasssen</Link>
+            <Link to="/portfolio">{`>`} Gesamtprozess begleiten lasssen</Link>
           </div>
           <div
             className={`absolute flex flex-col w-full overflow-clip gap-3 duration-300 ${
               user === "client" ? "left-[200%]" : "left-0"
             }`}
           >
-            <Link to="/process/model">{`>`} Teile herstellen</Link>
-            <Link to="/guide">{`>`} Modelle entwerfen</Link>
-            <Link to="/guide">{`>`} Gesamtprozesse begleiten</Link>
+            <Link to="/portfolio">{`>`} Teile herstellen</Link>
+            <Link to="/portfolio">{`>`} Modelle entwerfen</Link>
+            <Link to="/portfolio">{`>`} Gesamtprozesse begleiten</Link>
           </div>
         </div>
       </div>

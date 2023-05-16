@@ -213,7 +213,7 @@ const Checkout: React.FC<Props> = (props) => {
 
   return (
     <LoadingSuspense query={cartQuery}>
-      <div className="flex flex-col items-center gap-5 w-full p-5">
+      <div className="flex flex-col items-center gap-5 w-full">
         {order.loading === false && orderSendSuccesfull === true ? (
           renderOrderSendSuccesfull()
         ) : (

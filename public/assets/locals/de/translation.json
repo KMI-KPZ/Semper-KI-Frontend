@@ -219,7 +219,24 @@
     },
     "Guide":{},
     "GuideRoutes":{
-      "header":"Wegweiser"
+      "header":"Angeleitete Einstiege",
+      "information":{
+        "header":"zu Informationen",
+        "explanation":"Informationen zum Thema 3D-Druck",
+        "beginner":"Anfänger",
+        "advanced":"Fortgeschritten",
+        "expert":"Experte"
+      },
+      "service":{
+        "header":"um Service Nutzen",
+        "explanation":"Einstieg in unsere Services",
+        "use-produce":"Bauteil Herstellen lassen",
+        "use-design":"Modell entwerfen lassen",
+        "use-accompany":"Gesamtprozess begleiten lassen",
+        "provide-produce":"Bauteile Herstellen",
+        "provide-design":"Modelle entwerfen",
+        "provide-accompany":"Gesamtprozesse begleiten"
+      }
     }
   },
   "Header":{

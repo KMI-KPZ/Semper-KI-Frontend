@@ -78,7 +78,7 @@ const Cart: React.FC<Props> = (props) => {
 
   return (
     <LoadingSuspense query={cartQuery}>
-      <div className="flex flex-col items-center gap-5 w-full p-5">
+      <div className="flex flex-col items-center gap-5 w-full">
         <h1 className="text-center p-2 bg-white w-full">
           {t("AfterProcess.Cart.Cart.header")}
         </h1>

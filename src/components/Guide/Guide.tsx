@@ -172,7 +172,7 @@ const Guide: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="Guide flex flex-col xl:flex-row justify-center items-center gap-5 max-w-[80vw] max-h-[80vh] p-5">
+    <div className="Guide flex flex-col xl:flex-row justify-center items-center gap-5 max-w-[80vw] max-h-[80vh]">
       {overview === true ? (
         <GuideOverview
           questions={questions}

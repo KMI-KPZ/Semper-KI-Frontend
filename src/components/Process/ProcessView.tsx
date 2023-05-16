@@ -383,7 +383,7 @@ export const ProcessView: React.FC<Props> = (props) => {
       }}
     >
       <LoadingSuspense query={filtersQuery}>
-        <div className="relativ flex flex-col xl:flex-row gap-5 w-full p-5">
+        <div className="relativ flex flex-col xl:flex-row gap-5 w-full">
           <Filter
             setFilterOpen={setFilterOpen}
             filterOpen={filterOpen}

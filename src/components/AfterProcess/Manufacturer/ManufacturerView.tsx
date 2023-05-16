@@ -82,7 +82,7 @@ const ManufacturerView: React.FC<Props> = (props) => {
 
   return (
     <LoadingSuspense query={cartQuery}>
-      <div className="flex flex-col items-center gap-5 w-full p-5">
+      <div className="flex flex-col items-center gap-5 w-full">
         <div className="bg-white w-full p-5 flex flex-col gap-5 justify-start items-center">
           <h1 className="text-center p-2 w-full">
             {t("AfterProcess.Manufacturer.ManufacturerView.header")}

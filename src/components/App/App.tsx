@@ -384,7 +384,7 @@ const App: React.FC = () => {
           cartCount={cartQuery.data.length}
           events={missedEvents}
         />
-        <main className="w-full xl:w-5/6 flex flex-col justify-start items-center p-5 flex-grow bg-opacity-80 bg-slate-200 ">
+        <main className="w-full xl:w-5/6 flex flex-col justify-start items-center p-5 flex-grow bg-opacity-80 bg-slate-200 gap-5">
           <Breadcrumb />
           <Routes data-testid="routes">
             <Route

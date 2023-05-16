@@ -223,7 +223,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
       className={`${additionalClassNames} p-3 flex flex-col justify-center items-center gap-3 hover:bg-türkis-300 duration-300`}
     >
       <LocalShippingIcon fontSize="large" />
-      <h2>Auftrag beginnen</h2>
+      <h2>{t("Home.HomeOrderCard.button.start-order")}</h2>
     </Link>
   );
 };

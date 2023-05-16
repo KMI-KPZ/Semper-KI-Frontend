@@ -264,31 +264,101 @@
      }
   },
   "Home":{
-     "Home":{
-        "header":"Overview"
-     },
-     "HomeData":{
-        "explore":"Explore",
-        "use-service":"Use Service",
-        "provide-service":"Provide Service",
-        "continue":"Continue Order",
-        "new-contract":"New Order",
-        "proceedings":"Proceedings",
-        "company":"Company",
-        "guide":"Guide",
-        "cart":"Cart",
-        "orders":"My Orders",
-        "contracts":"My Contracts",
-        "user":"User",
-        "model":"Models",
-        "material":"Materials",
-        "procedure":"Procedures",
-        "printer":"Printers",
-        "account":"Account"
-     },
-     "HomeItem":{
-        
-     }
+   
+      "Home": {
+      "header": "Overview"
+      },
+      "HomeGuideCard": {
+      "header": "Guided Entry",
+      "information": {
+      "header": "Information",
+      "beginner": "Beginner",
+      "advanced": "Advanced",
+      "expert": "Expert"
+      },
+      "service": {
+      "header": "Services",
+      "use-produce": "Get Parts Produced",
+      "use-design": "Get Model Designed",
+      "use-accompany": "Get Entire Process Accompanied",
+      "provide-produce": "Provide Part Production",
+      "provide-design": "Provide Model Design",
+      "provide-accompany": "Provide Process Accompaniment"
+      },
+      "button": {
+      "all": "All Guided Entries"
+      }
+      },
+      "HomeItem": {},
+      "HomeMagazinCard": {
+      "header": "MAGAZINE"
+      },
+      "HomeOrderCard": {
+      "header": "Orders",
+      "order": {
+      "header": "Current",
+      "new": "New Order",
+      "continue": "Continue Order",
+      "cart": "Shopping Cart",
+      "delete": "Delete Cart"
+      },
+      "orders": {
+      "header": "My Orders",
+      "date": "Date",
+      "article": "Number of Articles",
+      "status": "Status"
+      },
+      "contracts": {
+      "header": "My Contracts",
+      "date": "Date",
+      "article": "Number of Articles",
+      "status": "Status"
+      },
+      "button": {
+      "all-orders": "All Orders",
+      "start-order": "Start Order"
+      }
+      },
+      "HomePortfolioCard": {
+      "header": "Our Portfolio",
+      "client": {
+      "information": "Inform about 3D Printing",
+      "produce": "Get Part Produced",
+      "design": "Get Model Designed",
+      "accompany": "Get Entire Process Accompanied"
+      },
+      "contractor": {
+      "produce": "Provide Part Production",
+      "design": "Provide Model Design",
+      "accompany": "Provide Process Accompaniment"
+      },
+      "button": {
+      "client": "For Clients",
+      "contractor": "For Providers"
+      }
+      },
+      "HomeSearchCard": {
+      "placeholder": "Search..."
+      },
+      "HomeData": {
+      "explore": "Explore",
+      "use-service": "Use Service",
+      "provide-service": "Provide Service",
+      "continue": "Continue Order",
+      "new-contract": "New Order",
+      "proceedings": "Proceedings",
+      "company": "Company",
+      "guide": "Guide",
+      "cart": "Shopping Cart",
+      "orders": "My Orders",
+      "contracts": "My Contracts",
+      "user": "User",
+      "model": "Models",
+      "material": "Materials",
+      "procedure": "Procedures",
+      "printer": "Printer",
+      "account": "Account"
+      }
   },
   "Login":{
      "Login":{

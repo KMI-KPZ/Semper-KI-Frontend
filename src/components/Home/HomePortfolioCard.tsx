@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 interface Props {
@@ -14,6 +15,7 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
   const additionalClassNames = className ?? "";
   const [state, setState] = useState<State>({ user: "client" });
   const { user } = state;
+  const { t } = useTranslation();
 
   const handleOnClickSwitch = () => {
     setState((prevState) => ({
@@ -27,7 +29,7 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
       className={`${additionalClassNames}  p-3 flex flex-col justify-between items-center gap-5`}
     >
       <div className="flex flex-col gap-3 w-full items-center overflow-clip">
-        <h2>Unser Portfolio</h2>
+        <h2>{t("Home.HomePortfolioCard.header")}</h2>
         <div
           className={`relative flex flex-row gap-5 overflow-clip w-full h-60`}
         >
@@ -36,19 +38,33 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
               user === "client" ? "left-0" : "-left-[200%]"
             }`}
           >
-            <Link to="/portfolio">{`>`} Informieren über 3D-Druck</Link>
-            <Link to="/portfolio">{`>`} Teil herstellen lasssen</Link>
-            <Link to="/portfolio">{`>`} Modell entwerfen lasssen</Link>
-            <Link to="/portfolio">{`>`} Gesamtprozess begleiten lasssen</Link>
+            <Link to="/portfolio">
+              {`>`} {t("Home.HomePortfolioCard.client.information")}
+            </Link>
+            <Link to="/portfolio">
+              {`>`} {t("Home.HomePortfolioCard.client.produce")}
+            </Link>
+            <Link to="/portfolio">
+              {`>`} {t("Home.HomePortfolioCard.client.design")}
+            </Link>
+            <Link to="/portfolio">
+              {`>`} {t("Home.HomePortfolioCard.client.accompany")}
+            </Link>
           </div>
           <div
             className={`absolute flex flex-col w-full overflow-clip gap-3 duration-300 ${
               user === "client" ? "left-[200%]" : "left-0"
             }`}
           >
-            <Link to="/portfolio">{`>`} Teile herstellen</Link>
-            <Link to="/portfolio">{`>`} Modelle entwerfen</Link>
-            <Link to="/portfolio">{`>`} Gesamtprozesse begleiten</Link>
+            <Link to="/portfolio">
+              {`>`} {t("Home.HomePortfolioCard.contractor.produce")}
+            </Link>
+            <Link to="/portfolio">
+              {`>`} {t("Home.HomePortfolioCard.contractor.design")}
+            </Link>
+            <Link to="/portfolio">
+              {`>`} {t("Home.HomePortfolioCard.contractor.accompany")}
+            </Link>
           </div>
         </div>
       </div>
@@ -62,7 +78,7 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
             className={`py-1 px-3 duration-300 rounded-2xl
         ${user === "client" ? "bg-türkis-300" : "bg-türkis-800 text-white"}`}
           >
-            Für Autraggeber
+            {t("Home.HomePortfolioCard.button.client")}
           </span>
           <div
             className={`absolute ${user === "client" ? "left-0" : "right-0"}`}
@@ -71,7 +87,7 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
             className={`py-1 px-3 duration-300 rounded-2xl
         ${user === "client" ? "bg-türkis-800 text-white" : "bg-türkis-300"}`}
           >
-            Für Anbieter
+            {t("Home.HomePortfolioCard.button.contractor")}
           </span>
         </div>
       </div>

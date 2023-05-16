@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 const HomeMagazinCard: React.FC<Props> = (props) => {
   const { className } = props;
   const additionalClassNames = className ?? "";
+  const { t } = useTranslation();
 
   return (
     <Link
@@ -19,7 +21,7 @@ const HomeMagazinCard: React.FC<Props> = (props) => {
       to="https://infai.4imedia.com/"
     >
       <h2 className="font-bold text-5xl tracking-wider text-white z-10">
-        MAGAZIN
+        {t("Home.HomeMagazinCard.header")}
       </h2>
       <img
         className="absolute felx w-full h-full object-cover duration-500 opacity-0 group-hover:opacity-50"

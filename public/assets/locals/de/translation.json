@@ -272,26 +272,29 @@
     "Home":{
       "header":"Übersicht"
     },
-    "HomeData":{
-      "explore": "Ausprobieren",
-      "use-service": "Service in Anspruch nehmen",
-      "provide-service": "Service bereitstellen",
-      "continue": "Bestellung Fortsetzen",
-      "new-contract": "neue Bestellung",
-      "proceedings": "Verfahren",
-      "company": "Unternehmen",
-      "guide": "Wegweiser",
-      "cart": "Warenkorb",
-      "orders": "Meine Bestellungen",
-      "contracts": "Meine Aufträge",
-      "user": "Benutzer",
-      "model": "Modelle",
-      "material": "Materialien",
-      "procedure": "Verfahren",
-      "printer": "Drucker",
-      "account": "Konto"
+    "HomeGuideCard":{
+      "header":"Angeleiteter Einstieg",
+      "information":{
+        "header":"zu Informationen",
+        "beginner":"Anfänger",
+        "advanced":"Fortgeschritten",
+        "expert":"Experte"
+      },
+      "service":{
+        "header":"zu Services",
+        "use-produce":"Bauteil Herstellen lassen",
+        "use-design":"Modell entwerfen lassen",
+        "use-accompany":"Gesamtprozess begleiten lassen",
+        "provide-produce":"Bauteile Herstellen",
+        "provide-design":"Modelle entwerfen",
+        "provide-accompany":"Gesamtprozesse begleiten"
+      },
+      "button":{"all":"Zu allen Angeleiteten Einstiegen"}
     },
     "HomeItem":{},
+    "HomeMagazinCard":{
+      "header":"MAGAZIN"
+    },
     "HomeOrderCard":{
       "header":"Aufträge",
       "order":{
@@ -314,27 +317,49 @@
         "status":"Status"
       },
       "button":{
-        "all-orders":"Alle Bestellungen"
+        "all-orders":"Alle Bestellungen",
+        "start-order":"Auftrag beginnen"
       }
     },
-    "HomeGuideCard":{
-      "header":"Angeleiteter Einstieg",
-      "information":{
-        "header":"zu Informationen",
-        "beginner":"Anfänger",
-        "advanced":"Fortgeschritten",
-        "expert":"Experte"
+    "HomePortfolioCard":{
+      "header":"Unser Portfolio",
+      "client":{
+        "information":"Informieren über 3D-Druck",
+        "produce":"Teil herstellen lassen",
+        "design":"Modell entwerfen lassen",
+        "accompany":"Gesamtprozess begleiten lassen"
       },
-      "service":{
-        "header":"zu Services",
-        "use-produce":"Bauteil Herstellen lassen",
-        "use-design":"Modell entwerfen lassen",
-        "use-accompany":"Gesamtprozess begleiten lassen",
-        "provide-produce":"Bauteile Herstellen",
-        "provide-design":"Modelle entwerfen",
-        "provide-accompany":"Gesamtprozesse begleiten"
+      "contractor":{
+        "produce":"Teile herstellen",
+        "design":"Modelle entwerfen",
+        "accompany":"Gesamtprozesse begleiten"
       },
-      "button":{"all":"Zu allen Angeleiteten Einstiegen"}
+      "button":{
+        "client":"Für Autraggeber",
+        "contractor":"Für Anbieter"
+      }
+    },
+    "HomeSearchCard":{
+      "placeholder":"Suche ..."
+    },
+    "HomeData":{
+      "explore": "Ausprobieren",
+      "use-service": "Service in Anspruch nehmen",
+      "provide-service": "Service bereitstellen",
+      "continue": "Bestellung Fortsetzen",
+      "new-contract": "neue Bestellung",
+      "proceedings": "Verfahren",
+      "company": "Unternehmen",
+      "guide": "Wegweiser",
+      "cart": "Warenkorb",
+      "orders": "Meine Bestellungen",
+      "contracts": "Meine Aufträge",
+      "user": "Benutzer",
+      "model": "Modelle",
+      "material": "Materialien",
+      "procedure": "Verfahren",
+      "printer": "Drucker",
+      "account": "Konto"
     }
   },
   "Login":{

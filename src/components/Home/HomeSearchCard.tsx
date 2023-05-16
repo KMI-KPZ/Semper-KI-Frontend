@@ -1,6 +1,7 @@
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "../General/Button";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   className?: string;
@@ -9,6 +10,7 @@ interface Props {
 const HomeSearchCard: React.FC<Props> = (props) => {
   const { className } = props;
   const additionalClassNames = className ?? "";
+  const { t } = useTranslation();
 
   return (
     <div
@@ -18,7 +20,7 @@ const HomeSearchCard: React.FC<Props> = (props) => {
         <input
           type="text"
           className="p-3 border-2 w-full"
-          placeholder="Suche..."
+          placeholder={t("Home.HomeSearchCard.placeholder")}
         />
       </div>
       <div className="w-1/5 md:w-fit flex items-center justify-center">

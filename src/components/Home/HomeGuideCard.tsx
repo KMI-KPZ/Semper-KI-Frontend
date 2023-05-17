@@ -18,29 +18,31 @@ const HomeGuideCard: React.FC<Props> = (props) => {
   if (userType === EUserType.manufacturer)
     return (
       <div
-        className={`${additionalClassNames}  p-3 flex flex-col justify-center items-center gap-3 duration-300`}
+        className={`${additionalClassNames}  p-3 flex flex-col justify-between items-center gap-3`}
       >
-        <h2>{t("Home.HomeGuideCard.header")}</h2>
-        <div className="border-t-2 w-full" />
-        <div className="flex flex-col gap-1 items-start justify-center w-full md:w-1/2">
-          <Link
-            to="/guide"
-            className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
-          >
-            {`>`} {t("Home.HomeGuideCard.service.provide-produce")}
-          </Link>
-          <Link
-            to="/guide"
-            className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
-          >
-            {`>`} {t("Home.HomeGuideCard.service.provide-design")}
-          </Link>
-          <Link
-            to="/guide"
-            className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
-          >
-            {`>`} {t("Home.HomeGuideCard.service.provide-accompany")}
-          </Link>
+        <div className="flex flex-col justify-start items-center gap-3 w-full">
+          <h2>{t("Home.HomeGuideCard.header")}</h2>
+          <div className="border-t-2 w-full" />
+          <div className="flex flex-col gap-1 items-start justify-center w-full  ">
+            <Link
+              to="/guide"
+              className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+            >
+              {`>`} {t("Home.HomeGuideCard.service.provide-produce")}
+            </Link>
+            <Link
+              to="/guide"
+              className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+            >
+              {`>`} {t("Home.HomeGuideCard.service.provide-design")}
+            </Link>
+            <Link
+              to="/guide"
+              className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+            >
+              {`>`} {t("Home.HomeGuideCard.service.provide-accompany")}
+            </Link>
+          </div>
         </div>
         <Button>{t("Home.HomeGuideCard.button.all")}</Button>
       </div>
@@ -49,57 +51,58 @@ const HomeGuideCard: React.FC<Props> = (props) => {
   if (userType === EUserType.client)
     return (
       <div
-        className={`${additionalClassNames}  p-3 flex flex-col justify-center items-center gap-3 duration-300`}
+        className={`${additionalClassNames}  p-3 flex flex-col justify-between items-center gap-3`}
       >
-        <h2>{t("Home.HomeGuideCard.header")}</h2>
-        <div className="border-t-2 w-full" />
-        <div className="flex flex-col md:flex-row items-start justify-around gap-5 w-full">
-          <div className="flex flex-col items-center justify-start gap-2 w-full">
-            <h3>{t("Home.HomeGuideCard.information.header")}</h3>
-            <div className="flex flex-col gap-1 items-start justify-center w-full">
-              <Link
-                to="/guide"
-                className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
-              >
-                {`>`} {t("Home.HomeGuideCard.information.beginner")}
-              </Link>
-              <Link
-                to="/guide"
-                className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
-              >
-                {`>`} {t("Home.HomeGuideCard.information.advanced")}
-              </Link>
-              <Link
-                to="/guide"
-                className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
-              >
-                {`>`} {t("Home.HomeGuideCard.information.expert")}
-              </Link>
+        <div className="flex flex-col justify-start items-center gap-3 w-full">
+          <h2>{t("Home.HomeGuideCard.header")}</h2>
+          <div className="border-t-2 w-full" />
+          <div className="flex flex-col items-start justify-around gap-5 w-full">
+            <div className="flex flex-col items-center justify-start gap-2 w-full">
+              <h3>{t("Home.HomeGuideCard.information.header")}</h3>
+              <div className="flex flex-col gap-1 items-start justify-center w-full">
+                <Link
+                  to="/guide"
+                  className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+                >
+                  {`>`} {t("Home.HomeGuideCard.information.beginner")}
+                </Link>
+                <Link
+                  to="/guide"
+                  className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+                >
+                  {`>`} {t("Home.HomeGuideCard.information.advanced")}
+                </Link>
+                <Link
+                  to="/guide"
+                  className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+                >
+                  {`>`} {t("Home.HomeGuideCard.information.expert")}
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className="h-full border-l-2 hidden md:block" />
-          <div className="w-full border-t-2 md:hidden" />
-          <div className="flex flex-col items-center justify-start gap-2 w-full">
-            <h3>{t("Home.HomeGuideCard.service.header")}</h3>
-            <div className="flex flex-col gap-1 items-start justify-center w-full">
-              <Link
-                to="/guide"
-                className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
-              >
-                {`>`} {t("Home.HomeGuideCard.service.use-produce")}
-              </Link>
-              <Link
-                to="/guide"
-                className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
-              >
-                {`>`} {t("Home.HomeGuideCard.service.use-design")}
-              </Link>
-              <Link
-                to="/guide"
-                className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
-              >
-                {`>`} {t("Home.HomeGuideCard.service.use-accompany")}
-              </Link>
+            <div className="w-full border-t-2 " />
+            <div className="flex flex-col items-center justify-start gap-2 w-full">
+              <h3>{t("Home.HomeGuideCard.service.header")}</h3>
+              <div className="flex flex-col gap-1 items-start justify-center w-full">
+                <Link
+                  to="/guide"
+                  className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+                >
+                  {`>`} {t("Home.HomeGuideCard.service.use-produce")}
+                </Link>
+                <Link
+                  to="/guide"
+                  className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+                >
+                  {`>`} {t("Home.HomeGuideCard.service.use-design")}
+                </Link>
+                <Link
+                  to="/guide"
+                  className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+                >
+                  {`>`} {t("Home.HomeGuideCard.service.use-accompany")}
+                </Link>
+              </div>
             </div>
           </div>
         </div>

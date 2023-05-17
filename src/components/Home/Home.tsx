@@ -1,16 +1,14 @@
-import React, { ReactNode, useRef, useState } from "react";
-import { ENavigationItemPreferred, EUserType } from "../../interface/enums";
+import React, { ReactNode } from "react";
+import { EUserType } from "../../interface/enums";
 import { useTranslation } from "react-i18next";
 import { IOrderCollectionEvent } from "../../interface/Interface";
-import HomeItem from "./HomeItem";
-import { NavigationItems } from "../../data/NavigationItems";
-import { Link } from "react-router-dom";
-import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
 import HomePortfolioCard from "./HomePortfolioCard";
 import HomeOrderCard from "./HomeOrderCard";
 import HomeMagazinCard from "./HomeMagazinCard";
 import HomeSearchCard from "./HomeSearchCard";
 import HomeGuideCard from "./HomeGuideCard";
+import HomeBMWKImgCard from "./HomeBMWKImgCard";
+import HomeNewsCard from "./HomeNewsCard";
 
 interface Props {
   userType: EUserType;
@@ -76,16 +74,18 @@ export const Home: React.FC<Props> = (props) => {
       <HomeSearchCard className="md:order-2 md:col-span-2 bg-white md:h-full w-full" />
       <HomeOrderCard
         userType={userType}
-        className="md:order-1 md:row-span-2 bg-white md:h-full w-full"
+        className="md:order-1 md:row-span-3 bg-white md:h-full w-full"
         cartCount={cartCount > 0 ? cartCount : undefined}
         ordersCount={count}
       />
       <HomeGuideCard
         userType={userType}
-        className="md:order-5 md:col-span-2 bg-white md:h-full w-full"
+        className="md:order-5 md:row-span-2 bg-white md:h-full w-full"
       />
       <HomePortfolioCard className="md:order-4 md:row-span-2 bg-white md:h-full w-full" />
       <HomeMagazinCard className="md:order-3 md:h-full w-full" />
+      <HomeNewsCard className="md:order-5  md:h-full w-full bg-white" />
+      <HomeBMWKImgCard className="md:order-6  md:h-full w-full" />
     </div>
   );
 };

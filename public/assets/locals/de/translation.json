@@ -295,6 +295,13 @@
     "HomeMagazinCard":{
       "header":"MAGAZIN"
     },
+    "HomeNewsCard":{
+      "header":"Neuigkeiten",
+      "no-items":"keine Neuigkeiten"
+    },
+    "HomeNewsCardItem":{
+      "more":"Mehr lesen..."
+    },
     "HomeOrderCard":{
       "header":"Aufträge",
       "order":{

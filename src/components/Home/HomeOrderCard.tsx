@@ -33,47 +33,49 @@ const HomeOrderCard: React.FC<Props> = (props) => {
   if (userType === EUserType.manufacturer)
     return (
       <div
-        className={`${additionalClassNames}  p-3 flex flex-col justify-start items-center gap-5`}
+        className={`${additionalClassNames}  p-3 flex flex-col justify-between items-center gap-5`}
       >
-        <h2>{t("Home.HomeOrderCard.header")}</h2>
-        <div className="border-t-2 w-full" />
-        <h3>{t("Home.HomeOrderCard.contracts.header")}</h3>
-        <LoadingSuspense query={ordersQuery}>
-          <ul className="flex flex-col gap-2 w-full">
-            <li className="flex flex-row justify-between w-full">
-              <span className="text-left">
-                {t("Home.HomeOrderCard.contracts.date")}
-              </span>
-              <span className="text-left">
-                {t("Home.HomeOrderCard.contracts.article")}
-              </span>
-              <span className="text-left">
-                {t("Home.HomeOrderCard.contracts.status")}
-              </span>
-            </li>
-            {ordersQuery.data !== undefined ? (
-              ordersQuery.data
-                .slice(
-                  0,
-                  ordersQuery.data.length < orderShowCountManufacturer
-                    ? ordersQuery.data.length
-                    : orderShowCountManufacturer
-                )
-                .map((order, index) => (
-                  <li
-                    key={index}
-                    className="flex flex-row justify-between w-full"
-                  >
-                    <span>{new Date(order.date).toLocaleDateString()}</span>
-                    <span>{order.orders.length}</span>
-                    <span>{EOrderState[order.state]}</span>
-                  </li>
-                ))
-            ) : (
-              <></>
-            )}
-          </ul>
-        </LoadingSuspense>
+        <div className="flex flex-col justify-start items-center gap-5 w-full h-full">
+          <h2>{t("Home.HomeOrderCard.header")}</h2>
+          <div className="border-t-2 w-full" />
+          <h3>{t("Home.HomeOrderCard.contracts.header")}</h3>
+          <LoadingSuspense query={ordersQuery}>
+            <ul className="flex flex-col gap-2 w-full">
+              <li className="flex flex-row justify-between w-full">
+                <span className="text-left">
+                  {t("Home.HomeOrderCard.contracts.date")}
+                </span>
+                <span className="text-left">
+                  {t("Home.HomeOrderCard.contracts.article")}
+                </span>
+                <span className="text-left">
+                  {t("Home.HomeOrderCard.contracts.status")}
+                </span>
+              </li>
+              {ordersQuery.data !== undefined ? (
+                ordersQuery.data
+                  .slice(
+                    0,
+                    ordersQuery.data.length < orderShowCountManufacturer
+                      ? ordersQuery.data.length
+                      : orderShowCountManufacturer
+                  )
+                  .map((order, index) => (
+                    <li
+                      key={index}
+                      className="flex flex-row justify-between w-full"
+                    >
+                      <span>{new Date(order.date).toLocaleDateString()}</span>
+                      <span>{order.orders.length}</span>
+                      <span>{EOrderState[order.state]}</span>
+                    </li>
+                  ))
+              ) : (
+                <></>
+              )}
+            </ul>
+          </LoadingSuspense>
+        </div>
         <Button
           to="/contracts"
           title={t("Home.HomeOrderCard.button.all-orders")}
@@ -93,74 +95,76 @@ const HomeOrderCard: React.FC<Props> = (props) => {
   if (userType === EUserType.client)
     return (
       <div
-        className={`${additionalClassNames}  p-3 flex flex-col justify-start items-center gap-3`}
+        className={`${additionalClassNames}  p-3 flex flex-col justify-between items-center gap-3`}
       >
-        <h2>{t("Home.HomeOrderCard.header")}</h2>
-        <div className="border-t-2 w-full" />
-        <h3>{t("Home.HomeOrderCard.order.header")}</h3>
-        <div className="flex flex-col md:flex-row gap-3 w-full items-center justify-center">
-          <Button
-            to="/process/new"
-            title={t("Home.HomeOrderCard.order.new")}
-            icon={<AddIcon />}
-          />
-          <Button
-            to="/process/model"
-            title={t("Home.HomeOrderCard.order.continue")}
-            icon={<PlayArrowIcon />}
-          />
-          <Button
-            to="/cart"
-            title={t("Home.HomeOrderCard.order.cart")}
-            icon={
-              cartCount !== undefined ? (
-                <Badge count={cartCount}>
+        <div className="flex flex-col justify-start items-center gap-5 w-full h-full">
+          <h2>{t("Home.HomeOrderCard.header")}</h2>
+          <div className="border-t-2 w-full" />
+          <h3>{t("Home.HomeOrderCard.order.header")}</h3>
+          <div className="flex flex-col md:flex-row gap-3 w-full items-center justify-center">
+            <Button
+              to="/process/new"
+              title={t("Home.HomeOrderCard.order.new")}
+              icon={<AddIcon />}
+            />
+            <Button
+              to="/process/model"
+              title={t("Home.HomeOrderCard.order.continue")}
+              icon={<PlayArrowIcon />}
+            />
+            <Button
+              to="/cart"
+              title={t("Home.HomeOrderCard.order.cart")}
+              icon={
+                cartCount !== undefined ? (
+                  <Badge count={cartCount}>
+                    <ShoppingCartIcon />
+                  </Badge>
+                ) : (
                   <ShoppingCartIcon />
-                </Badge>
-              ) : (
-                <ShoppingCartIcon />
-              )
-            }
-          />
-        </div>
-        <div className="border-t-2 w-full" />
-        <h3>{t("Home.HomeOrderCard.orders.header")}</h3>
-        <LoadingSuspense query={ordersQuery}>
-          <ul className="flex flex-col gap-2 w-full">
-            <li className="flex flex-row justify-between w-full">
-              <span className="text-left">
-                {t("Home.HomeOrderCard.orders.date")}
-              </span>
-              <span className="text-left">
-                {t("Home.HomeOrderCard.orders.article")}
-              </span>
-              <span className="text-left">
-                {t("Home.HomeOrderCard.orders.status")}
-              </span>
-            </li>
-            {ordersQuery.data !== undefined ? (
-              ordersQuery.data
-                .slice(
-                  0,
-                  ordersQuery.data.length < orderShowCountClient
-                    ? ordersQuery.data.length
-                    : orderShowCountClient
                 )
-                .map((order, index) => (
-                  <li
-                    key={index}
-                    className="flex flex-row justify-between w-full"
-                  >
-                    <span>{new Date(order.date).toLocaleDateString()}</span>
-                    <span>{order.orders.length}</span>
-                    <span>{EOrderState[order.state]}</span>
-                  </li>
-                ))
-            ) : (
-              <></>
-            )}
-          </ul>
-        </LoadingSuspense>
+              }
+            />
+          </div>
+          <div className="border-t-2 w-full" />
+          <h3>{t("Home.HomeOrderCard.orders.header")}</h3>
+          <LoadingSuspense query={ordersQuery}>
+            <ul className="flex flex-col gap-2 w-full">
+              <li className="flex flex-row justify-between w-full">
+                <span className="text-left">
+                  {t("Home.HomeOrderCard.orders.date")}
+                </span>
+                <span className="text-left">
+                  {t("Home.HomeOrderCard.orders.article")}
+                </span>
+                <span className="text-left">
+                  {t("Home.HomeOrderCard.orders.status")}
+                </span>
+              </li>
+              {ordersQuery.data !== undefined ? (
+                ordersQuery.data
+                  .slice(
+                    0,
+                    ordersQuery.data.length < orderShowCountClient
+                      ? ordersQuery.data.length
+                      : orderShowCountClient
+                  )
+                  .map((order, index) => (
+                    <li
+                      key={index}
+                      className="flex flex-row justify-between w-full"
+                    >
+                      <span>{new Date(order.date).toLocaleDateString()}</span>
+                      <span>{order.orders.length}</span>
+                      <span>{EOrderState[order.state]}</span>
+                    </li>
+                  ))
+              ) : (
+                <></>
+              )}
+            </ul>
+          </LoadingSuspense>
+        </div>
         <Button
           to="/orders"
           title={t("Home.HomeOrderCard.button.all-orders")}

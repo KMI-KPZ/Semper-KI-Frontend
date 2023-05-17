@@ -42,7 +42,13 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
         return response.data;
       });
     },
-    { enabled: shouldLoad !== undefined && shouldLoad === true ? true : false }
+    {
+      enabled:
+        (shouldLoad !== undefined && shouldLoad === true) ||
+        shouldLoad === undefined
+          ? true
+          : false,
+    }
   );
 
   const deleteOrder = useMutation<any, Error, string>({

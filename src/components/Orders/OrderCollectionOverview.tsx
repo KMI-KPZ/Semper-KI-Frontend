@@ -59,10 +59,8 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
         {ordersQuery.data !== undefined ? (
           <ul className="w-full gap-5 flex flex-col">
             {ordersQuery.data.length > 0 ? (
-              ordersQuery.data
-                .slice(0) // to create a copy for reverse
-                .reverse()
-                .map((orderCollection: IOrderCollection, index: number) => (
+              ordersQuery.data.map(
+                (orderCollection: IOrderCollection, index: number) => (
                   <OrderCollection
                     index={index}
                     orderCollection={orderCollection}
@@ -74,7 +72,8 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
                     )}
                     key={index}
                   />
-                ))
+                )
+              )
             ) : (
               <li className="w-full text-center p-3">
                 {t("Orders.OrderCollectionOverview.empty")}

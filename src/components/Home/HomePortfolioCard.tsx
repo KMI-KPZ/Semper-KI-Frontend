@@ -30,6 +30,7 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
     >
       <div className="flex flex-col gap-3 w-full items-center overflow-clip">
         <h2>{t("Home.HomePortfolioCard.header")}</h2>
+        <div className="border-t-2 w-full" />
         <div
           className={`relative flex flex-row gap-5 overflow-clip w-full h-60`}
         >
@@ -92,11 +93,11 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
       <div className="flex flex-col w-full items-center gap-2">
         <div className="border-t-2 w-full" />
         <div
-          className="relative flex flex-row justify-between items-center bg-türkis-300 hover:cursor-pointer rounded-2xl overflow-clip select-none p-1"
+          className="relative flex flex-row justify-between items-center bg-türkis-300 hover:cursor-pointer overflow-clip select-none p-1"
           onClick={handleOnClickSwitch}
         >
           <span
-            className={`py-1 px-3 duration-300 rounded-2xl
+            className={`py-1 px-3 duration-300
         ${user === "client" ? "bg-türkis-300" : "bg-türkis-800 text-white"}`}
           >
             {t("Home.HomePortfolioCard.button.client")}
@@ -105,7 +106,7 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
             className={`absolute ${user === "client" ? "left-0" : "right-0"}`}
           />
           <span
-            className={`py-1 px-3 duration-300 rounded-2xl
+            className={`py-1 px-3 duration-300
         ${user === "client" ? "bg-türkis-800 text-white" : "bg-türkis-300"}`}
           >
             {t("Home.HomePortfolioCard.button.contractor")}

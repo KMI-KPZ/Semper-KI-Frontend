@@ -238,9 +238,26 @@
      "Guide":{
         
      },
-     "GuideRoutes":{
-        "header":"Guide"
-     }
+     "GuideRoutes": {
+      "header": "Guided Entries",
+      "information": {
+         "header": "Information",
+         "explanation": "Information about 3D printing",
+         "beginner": "Beginner",
+         "advanced": "Advanced",
+         "expert": "Expert"
+      },
+      "service": {
+         "header": "Use Service",
+         "explanation": "Introduction to our services",
+         "use-produce": "Get Parts Produced",
+         "use-design": "Get Model Designed",
+         "use-accompany": "Get Entire Process Accompanied",
+         "provide-produce": "Provide Part Production",
+         "provide-design": "Provide Model Design",
+         "provide-accompany": "Provide Process Accompaniment"
+         }
+      }
   },
   "Header":{
      "Header":{

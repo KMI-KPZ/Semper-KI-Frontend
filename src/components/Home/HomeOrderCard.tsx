@@ -73,7 +73,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
           </ul>
         </LoadingSuspense>
         <Button
-          to="/orders"
+          to="/contracts"
           title={t("Home.HomeOrderCard.button.all-orders")}
           icon={
             ordersCount !== undefined ? (
@@ -96,7 +96,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
         <h2>{t("Home.HomeOrderCard.header")}</h2>
         <div className="border-t-2 w-full" />
         <h3>{t("Home.HomeOrderCard.order.header")}</h3>
-        <div className="flex flex-row gap-3">
+        <div className="flex flex-col md:flex-row gap-3 w-full items-center justify-center">
           <Button
             to="/process/new"
             title={t("Home.HomeOrderCard.order.new")}
@@ -107,11 +107,6 @@ const HomeOrderCard: React.FC<Props> = (props) => {
             title={t("Home.HomeOrderCard.order.continue")}
             icon={<PlayArrowIcon />}
           />
-          {/* <Button
-          to="/cart"
-            title={t("Home.HomeOrderCard.order.delete")}
-            icon={<DeleteIcon />}
-          /> */}
           <Button
             to="/cart"
             title={t("Home.HomeOrderCard.order.cart")}

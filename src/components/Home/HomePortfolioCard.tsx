@@ -34,35 +34,56 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
           className={`relative flex flex-row gap-5 overflow-clip w-full h-60`}
         >
           <div
-            className={`absolute flex flex-col w-full overflow-clip gap-3 duration-300 ${
+            className={`absolute flex flex-col w-full overflow-clip gap-1 duration-300 ${
               user === "client" ? "left-0" : "-left-[200%]"
             }`}
           >
-            <Link to="/portfolio">
+            <Link
+              to="/portfolio"
+              className={`py-1 px-3 hover:bg-türkis-300 duration-300`}
+            >
               {`>`} {t("Home.HomePortfolioCard.client.information")}
             </Link>
-            <Link to="/portfolio">
+            <Link
+              to="/portfolio"
+              className={`py-1 px-3 hover:bg-türkis-300 duration-300 `}
+            >
               {`>`} {t("Home.HomePortfolioCard.client.produce")}
             </Link>
-            <Link to="/portfolio">
+            <Link
+              to="/portfolio"
+              className={`py-1 px-3 hover:bg-türkis-300 duration-300 `}
+            >
               {`>`} {t("Home.HomePortfolioCard.client.design")}
             </Link>
-            <Link to="/portfolio">
+            <Link
+              to="/portfolio"
+              className={`py-1 px-3 hover:bg-türkis-300 duration-300 `}
+            >
               {`>`} {t("Home.HomePortfolioCard.client.accompany")}
             </Link>
           </div>
           <div
-            className={`absolute flex flex-col w-full overflow-clip gap-3 duration-300 ${
+            className={`absolute flex flex-col w-full overflow-clip gap-2 duration-300 ${
               user === "client" ? "left-[200%]" : "left-0"
             }`}
           >
-            <Link to="/portfolio">
+            <Link
+              to="/portfolio"
+              className={`py-1 px-3 hover:bg-türkis-300 duration-300 `}
+            >
               {`>`} {t("Home.HomePortfolioCard.contractor.produce")}
             </Link>
-            <Link to="/portfolio">
+            <Link
+              to="/portfolio"
+              className={`py-1 px-3 hover:bg-türkis-300 duration-300 `}
+            >
               {`>`} {t("Home.HomePortfolioCard.contractor.design")}
             </Link>
-            <Link to="/portfolio">
+            <Link
+              to="/portfolio"
+              className={`py-1 px-3 hover:bg-türkis-300 duration-300 `}
+            >
               {`>`} {t("Home.HomePortfolioCard.contractor.accompany")}
             </Link>
           </div>

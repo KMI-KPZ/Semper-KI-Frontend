@@ -10,10 +10,10 @@ const Background: React.FC<Props> = (props) => {
      top-0 left-0 h-full w-full overflow-hidden min-h-[200px]
      "
     >
-      <div className="hidden opacity-10 grayscale-[40%] w-full h-full ">
+      <div className="hidden opacity-10 grayscale-[40%] w-full h-full">
         <img
           alt=""
-          className="absolute h-1/6 md:h-2/6 lg:h-3/6 xl:h-4/5 -top-[10%] -left-[10%]"
+          className="absolute h-1/6 md:h-2/6 lg:h-3/6 xl:h-4/5 -top-[10%] -left-[10%] "
           src={require("../../assets/images/Bubbles3_Trans.png")}
         />
         <img

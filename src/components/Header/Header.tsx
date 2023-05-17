@@ -286,15 +286,16 @@ export const Header: React.FC<Props> = (props) => {
       title="Startseite"
     >
       <img
-        className="h-6 xl:h-8 group-hover:scale-110 duration-300"
+        className="h-8 md:h-10 group-hover:scale-110 duration-300"
         data-testid="logo"
         src={require("../../assets/images/logo192.png")}
         alt="Kiss Logo"
       />
-      <div className="flex flex-col justify-start items-end gap-0 text-inherit">
-        <h3 className="font-bold text-3xl" data-testid="logoName">
+      <div className="hidden xs:flex flex-col justify-start items-end text-inherit">
+        <h3 className="font-bold text-3xl p-0" data-testid="logoName">
           {t("Header.Header.title")}
         </h3>
+        <h4 className="text-xs font-bold hidden md:block">smart</h4>
         {/* <h4 className="text-türkis text-sm">Blog</h4> */}
       </div>
     </a>

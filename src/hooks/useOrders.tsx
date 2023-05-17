@@ -30,7 +30,7 @@ export interface IUpdateOrderData {
   files?: File[];
 }
 
-export const useOrders = (): ReturnProps => {
+export const useOrders = (shouldLoad?: boolean): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
   const queryClient = useQueryClient();
   const ordersQuery = useQuery<IOrderCollection[], Error>(
@@ -41,7 +41,8 @@ export const useOrders = (): ReturnProps => {
         console.log("useOrders | getOrders ✅ |", response.data);
         return response.data;
       });
-    }
+    },
+    { enabled: shouldLoad !== undefined && shouldLoad === true ? true : false }
   );
 
   const deleteOrder = useMutation<any, Error, string>({

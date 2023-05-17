@@ -22,10 +22,12 @@ interface Props {
 
 const HomeOrderCard: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { ordersQuery } = useOrders();
   const orderShowCountClient = 3;
   const orderShowCountManufacturer = 6;
   const { className, userType, cartCount, ordersCount } = props;
+  const { ordersQuery } = useOrders(
+    userType === EUserType.client || userType === EUserType.manufacturer
+  );
   const additionalClassNames = className ?? "";
 
   if (userType === EUserType.manufacturer)

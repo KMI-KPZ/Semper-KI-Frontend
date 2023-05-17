@@ -1,7 +1,7 @@
 version: "3.4"
 
 services:
-  fontend:
+  frontend:
     container_name: frontend
     image: frontend
     build:

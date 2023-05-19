@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { IPostProcessing } from "../../../interface/Interface";
 import PopUp from "../../PopUp/PopUp";
 import ItemCard from "./ItemCard";
 import ItemView from "./ItemView";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 interface Props<Item> {
   grid: boolean;
@@ -19,6 +21,7 @@ interface State<Item> {
 
 const Catalog = <Item extends IPostProcessing>(props: Props<Item>) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { items, checkItem, grid, searchText } = props;
   const [state, setState] = useState<State<Item>>({
     popUp: false,
@@ -53,6 +56,10 @@ const Catalog = <Item extends IPostProcessing>(props: Props<Item>) => {
     return false;
   };
 
+  const handleOnClickCard = () => {
+    navigate("/cart");
+  };
+
   return (
     <div
       className={`flex gap-y-5 ${
@@ -74,6 +81,17 @@ const Catalog = <Item extends IPostProcessing>(props: Props<Item>) => {
                 key={index}
               />
             ))}
+          <div
+            className={`bezier flex flex-row items-center justify-center self-center overflow-hidden bg-türkis p-5 text-white transition  duration-300 hover:cursor-pointer hover:bg-grau-400 ${
+              grid === true
+                ? "h-fit basis-[48%] sm:basis-[32%] md:basis-[23.5%]"
+                : "w-full "
+            }`}
+            onClick={handleOnClickCard}
+          >
+            {t("Process.PostProcessing.Catalog.button")}
+            <NavigateNextIcon fontSize="large" />
+          </div>
           <PopUp
             open={popUp === true && itemOpen !== undefined}
             onOutsideClick={closeItemView}

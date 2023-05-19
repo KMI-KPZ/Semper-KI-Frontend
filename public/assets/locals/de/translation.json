@@ -597,7 +597,8 @@
     },
     "PostProcessing":{
       "Catalog":{
-        "empty":"keine Nachbearbeitungen gefunden"
+        "empty":"keine Nachbearbeitungen gefunden",
+        "button":"Weiter"
       },
       "ItemCard":{
         "button":{

@@ -363,7 +363,7 @@ const App: React.FC = () => {
       rootElement.style.overflow = "hidden";
     }
     return (
-      <div className="flex flex-col items-center justify-center bg-white w-screen h-screen gap-5 overflow-clip">
+      <div className="flex h-screen w-screen flex-col items-center justify-center gap-5 overflow-clip bg-white">
         <h1 className="md:text-4xl xl:text-9xl">{t("App.title")}</h1>
         <h2>{t("App.loading")}</h2>
       </div>
@@ -381,7 +381,7 @@ const App: React.FC = () => {
       }}
     >
       <div
-        className={`flex flex-col justify-between min-h-screen font-ptsans items-center gap-5 p-3 text-base overflow-x-auto`}
+        className={`flex min-h-screen flex-col items-center justify-between gap-5 overflow-x-auto p-3 font-ptsans text-base`}
         data-testid="app"
       >
         <Header
@@ -390,7 +390,7 @@ const App: React.FC = () => {
           cartCount={cartQuery.data.length}
           events={missedEvents}
         />
-        <main className="w-full xl:w-5/6 flex flex-col justify-start items-center p-5 flex-grow bg-opacity-80 bg-slate-200 gap-5">
+        <main className="flex w-full flex-grow flex-col items-center justify-start gap-5 bg-slate-200 bg-opacity-80 p-5 xl:w-5/6">
           <Breadcrumb />
           <Routes data-testid="routes">
             <Route

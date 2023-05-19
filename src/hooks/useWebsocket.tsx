@@ -21,7 +21,7 @@ export const useWebsocket = (
 
       setState("connecting");
       const ws = new WebSocket(
-        `${process.env.REACT_APP_WS_API_URL}/ws/generalWebsocket/`
+        `${process.env.REACT_APP_WSS_API_URL}/ws/generalWebsocket/`
       );
 
       ws.onopen = () => {

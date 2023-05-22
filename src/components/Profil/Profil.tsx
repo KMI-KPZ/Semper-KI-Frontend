@@ -1,9 +1,9 @@
-import { Button } from "@mui/material";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import useUser from "../../hooks/useUser";
 import { EUserType } from "../../interface/enums";
 import { IUser } from "../../interface/Interface";
+import Button from "../General/Button";
 
 interface Props {
   user: IUser;
@@ -33,22 +33,38 @@ const Profil: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex flex-col gap-2 p-10 bg-white">
+    <div className="flex flex-col gap-5 bg-white p-5">
       <h1>{t("Profil.header")}</h1>
-      <span>
-        {t("Profil.name")}: {user.name}
-      </span>
-      <span>
-        {t("Profil.email")}: {user.email}
-      </span>
-      <span>
-        {t("Profil.type")}: {EUserType[userType]}
-      </span>
-      <span>
-        {t("Profil.company")}: {user.organization}
-      </span>
-      <div className="flex flex-col gap-2 bg-slate-200 p-2">
+      <div className="w-full border-t-4" />
+      <div className="flex flex-col gap-2 p-5">
+        <h2>{t("Profil.general.header")}</h2>
+        <div className="w-full border-t-2" />
+        <span>
+          {t("Profil.general.name")}: {user.name}
+        </span>
+        <span>
+          {t("Profil.general.email")}: {user.email}
+        </span>
+        <span>
+          {t("Profil.general.type")}:{" "}
+          {t(`enum.EUserType.${EUserType[userType]}`)}
+        </span>
+      </div>
+      {userType === EUserType.manufacturer ? (
+        <div className="flex flex-col gap-2 p-5">
+          <h2>{t("Profil.company.header")}</h2>
+          <div className="w-full border-t-2" />
+          <span>
+            {t("Profil.company.name")}: {user.organization}
+          </span>
+          {user.organization === "None" ? (
+            <Button size="full"> {t("Profil.button.selectChange")}</Button>
+          ) : null}
+        </div>
+      ) : null}
+      <div className="flex flex-col gap-2 p-5">
         <h2>{t("Profil.address.header")}</h2>
+        <div className="w-full border-t-2" />
         <span>
           {t("Profil.address.street")}: {user.address.street}{" "}
           {user.address.houseNumber}
@@ -59,24 +75,21 @@ const Profil: React.FC<Props> = (props) => {
         <span>
           {t("Profil.address.country")}: {user.address.country}
         </span>
+      </div>{" "}
+      <div className="flex flex-col gap-2 p-5">
+        <h2>{t("Profil.time.header")}</h2>
+        <div className="w-full border-t-2" />
+        <span>
+          {t("Profil.time.created")}: {user.created.toLocaleString()}
+        </span>
+        <span>
+          {t("Profil.time.accessed")}: {user.accessed.toLocaleString()}
+        </span>
+        <span>
+          {t("Profil.time.updated")}: {user.updated.toLocaleString()}
+        </span>
       </div>
-      <span>
-        {t("Profil.address.created")}: {user.created.toLocaleString()}
-      </span>
-      <span>
-        {t("Profil.address.accessed")}: {user.accessed.toLocaleString()}
-      </span>
-      <span>
-        {t("Profil.address.updated")}: {user.updated.toLocaleString()}
-      </span>
-      <Button
-        sx={{
-          backgroundColor: "grey",
-          "&:hover": { backgroundColor: "#888888" },
-        }}
-        variant="contained"
-        onClick={handleOnClickButtonDelete}
-      >
+      <Button size="full" onClick={handleOnClickButtonDelete}>
         {t("Profil.button.delete")}
       </Button>
     </div>

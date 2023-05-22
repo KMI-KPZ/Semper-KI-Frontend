@@ -25,6 +25,14 @@
       "test": "Test"
     }
   },
+  "enum":{
+    "EUserType":{
+      "client":"Auftraggeber",
+      "manufacturer":"Hersteller",
+      "admin":"Admin",
+      "anonym":"Anonym"
+    }
+  },
   "Admin":{
     "AdminMaterialView":{
       "header": "Materialien",
@@ -646,23 +654,33 @@
     }
   },
   "Profil":{
-    "header": "Profil",
-    "name": "Name",
-    "email": "E-Mail",
-    "type": "Benutzertyp",
-    "company": "Organisation",
+    "header": "Account",
+    "general":{
+      "header":"Allgemein",
+      "name": "Name",
+      "email": "E-Mail",
+      "type": "Benutzertyp"
+    },
+    "company": {
+      "header":"Organisation",
+      "name":"Name"
+    },
     "address":{
       "header": "Adresse",
       "street": "Straße",
       "houseNumber": "Hausnummer",
       "city": "Stadt",
       "zipcode": "Postleitzahl",
-      "country": "Land",
+      "country": "Land"
+    },
+    "time":{
+      "header":"Zugriffe",
       "created": "Erstellt am",
       "accessed": "letzter Zugegriff am",
       "updated": "Aktualisiert am"
     },
     "button":{
+      "selectChange":"Organisation wählen",
       "delete":"Account Löschen"
    }
   },

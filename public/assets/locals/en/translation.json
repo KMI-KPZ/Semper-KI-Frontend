@@ -469,6 +469,42 @@
         }
      }
   },
+  "Portfolio":{
+   "Portfolio":{
+     "header":"our Portfolio",
+     "back":"to Top"
+   },
+   "PortfolioItem":{
+     "use-information":{
+       "header":"Learn about 3D printing",
+       "text":"This service allows clients to access valuable information and data relevant to their needs. Whether it's market research, industry trends, or specific insights, we provide comprehensive information resources to help you make informed decisions."
+     },
+     "use-produce":{
+       "header":"Have component manufactured",
+       "text":"By opting for this service, clients can leverage our expertise and resources to efficiently produce high-quality outcomes. We assist with everything from manufacturing products to developing content, ensuring a seamless and professional production process."
+     },
+     "use-design":{
+       "header":"Have the model designed",
+       "text":"With our use-design service, clients can tap into our creative prowess to bring their vision to life. We offer professional design solutions tailored to your requirements, whether it's creating captivating graphics, crafting user-friendly interfaces, or developing stunning visual identities."
+     },
+     "use-accompany":{
+       "header":"Be accompanied throughout the process",
+       "text":"This service is designed to offer clients ongoing support and guidance throughout their journey. We accompany you every step of the way, providing expert advice, personalized consultations, and a dedicated support system to ensure your success."
+     },
+     "provide-produce":{
+       "header":"Manufacture components",
+       "text":"Contractors who choose to provide-produce services bring their expertise to the table to fulfill the production needs of clients. From manufacturing products to delivering content creation services, our skilled contractors ensure efficient and top-notch results."
+     },
+     "provide-design":{
+       "header":"Design models",
+       "text":"Contractors who provide-design services excel in creative problem-solving. They bring their artistic abilities and industry knowledge to deliver outstanding design solutions for clients. Whether it's logo design, web development, or brand identity creation, our contractors offer professional expertise."
+     },
+     "provide-accompany":{
+       "header":"Accompany overall processes",
+       "text":"Contractors offering provide-accompany services act as reliable partners throughout the client's journey. They provide guidance, support, and hands-on assistance to ensure clients receive the necessary expertise and resources needed for a successful outcome."
+     }
+   }
+ },
   "PopUp":{
      
   },

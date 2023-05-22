@@ -33,15 +33,15 @@ const HomeOrderCard: React.FC<Props> = (props) => {
   if (userType === EUserType.manufacturer)
     return (
       <div
-        className={`${additionalClassNames}  p-3 flex flex-col justify-between items-center gap-5`}
+        className={`${additionalClassNames}  flex flex-col items-center justify-between gap-5 p-3`}
       >
-        <div className="flex flex-col justify-start items-center gap-5 w-full h-full">
+        <div className="flex h-full w-full flex-col items-center justify-start gap-5">
           <h2>{t("Home.HomeOrderCard.header")}</h2>
-          <div className="border-t-2 w-full" />
+          <div className="w-full border-t-2" />
           <h3>{t("Home.HomeOrderCard.contracts.header")}</h3>
           <LoadingSuspense query={ordersQuery}>
-            <ul className="flex flex-col gap-2 w-full">
-              <li className="flex flex-row justify-between w-full">
+            <ul className="flex w-full flex-col gap-2">
+              <li className="flex w-full flex-row justify-between">
                 <span className="text-left">
                   {t("Home.HomeOrderCard.contracts.date")}
                 </span>
@@ -63,7 +63,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
                   .map((order, index) => (
                     <li
                       key={index}
-                      className="flex flex-row justify-between w-full"
+                      className="flex w-full flex-row justify-between"
                     >
                       <span>{new Date(order.date).toLocaleDateString()}</span>
                       <span>{order.orders.length}</span>
@@ -95,13 +95,13 @@ const HomeOrderCard: React.FC<Props> = (props) => {
   if (userType === EUserType.client)
     return (
       <div
-        className={`${additionalClassNames}  p-3 flex flex-col justify-between items-center gap-3`}
+        className={`${additionalClassNames}  flex flex-col items-center justify-between gap-3 p-3`}
       >
-        <div className="flex flex-col justify-start items-center gap-5 w-full h-full">
+        <div className="flex h-full w-full flex-col items-center justify-start gap-5">
           <h2>{t("Home.HomeOrderCard.header")}</h2>
-          <div className="border-t-2 w-full" />
+          <div className="w-full border-t-2" />
           <h3>{t("Home.HomeOrderCard.order.header")}</h3>
-          <div className="flex flex-col md:flex-row gap-3 w-full items-center justify-center">
+          <div className="flex w-full flex-col items-center justify-center gap-3 md:flex-row">
             <Button
               to="/process/new"
               title={t("Home.HomeOrderCard.order.new")}
@@ -126,11 +126,11 @@ const HomeOrderCard: React.FC<Props> = (props) => {
               }
             />
           </div>
-          <div className="border-t-2 w-full" />
+          <div className="w-full border-t-2" />
           <h3>{t("Home.HomeOrderCard.orders.header")}</h3>
           <LoadingSuspense query={ordersQuery}>
-            <ul className="flex flex-col gap-2 w-full">
-              <li className="flex flex-row justify-between w-full">
+            <ul className="flex w-full flex-col gap-2">
+              <li className="flex w-full flex-row justify-between">
                 <span className="text-left">
                   {t("Home.HomeOrderCard.orders.date")}
                 </span>
@@ -152,7 +152,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
                   .map((order, index) => (
                     <li
                       key={index}
-                      className="flex flex-row justify-between w-full"
+                      className="flex w-full flex-row justify-between"
                     >
                       <span>{new Date(order.date).toLocaleDateString()}</span>
                       <span>{order.orders.length}</span>
@@ -184,12 +184,12 @@ const HomeOrderCard: React.FC<Props> = (props) => {
   if (userType === EUserType.anonym && cartCount !== undefined && cartCount > 0)
     return (
       <div
-        className={`${additionalClassNames} p-3 flex flex-col justify-center items-center gap-3 duration-300`}
+        className={`${additionalClassNames} flex flex-col items-center justify-center gap-3 p-3`}
       >
         <Link
           to="/process/new"
           title={t("Home.HomeOrderCard.order.new")}
-          className="flex flex-row hover:bg-türkis-300 gap-5 p-5 justify-between"
+          className="flex flex-row justify-between gap-5 p-5 duration-300 hover:bg-türkis-300"
         >
           <AddIcon />
           {t("Home.HomeOrderCard.order.new")}
@@ -197,7 +197,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
         <Link
           to="/process/model"
           title={t("Home.HomeOrderCard.order.continue")}
-          className="flex flex-row hover:bg-türkis-300 gap-5 p-5 justify-between"
+          className="flex flex-row justify-between gap-5 p-5 duration-300 hover:bg-türkis-300"
         >
           <PlayArrowIcon />
           {t("Home.HomeOrderCard.order.continue")}
@@ -205,7 +205,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
         <Link
           to="/cart"
           title={t("Home.HomeOrderCard.order.cart")}
-          className="flex flex-row hover:bg-türkis-300 gap-5 p-5 justify-between"
+          className="flex flex-row justify-between gap-5 p-5 duration-300 hover:bg-türkis-300"
         >
           {cartCount !== undefined ? (
             <Badge count={cartCount}>
@@ -221,7 +221,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
   return (
     <Link
       to="/process/model"
-      className={`${additionalClassNames} p-3 flex flex-col justify-center items-center gap-3 hover:bg-türkis-300 duration-300`}
+      className={`${additionalClassNames} flex flex-col items-center justify-center gap-3 p-3 duration-300 hover:bg-türkis-300`}
     >
       <LocalShippingIcon fontSize="large" />
       <h2>{t("Home.HomeOrderCard.button.start-order")}</h2>

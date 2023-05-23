@@ -2,7 +2,8 @@ import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import React, { useEffect, useRef, useState } from "react";
 import { getFileSizeAsString } from "../../../services/utils";
 import { useTranslation } from "react-i18next";
-import { IconDelete, IconUpload } from "../../../constants/Icons";
+import { ReactComponent as UploadIcon } from "../../../assets/images/icons/Upload.svg";
+import { ReactComponent as DeleteIcon } from "../../../assets/images/icons/Delete.svg";
 import { useNavigate } from "react-router-dom";
 import useModelUpload from "../../../hooks/useModelUpload";
 import { IModel } from "../../../interface/Interface";
@@ -86,7 +87,7 @@ export const ModelUpload: React.FC<Props> = (props) => {
   };
 
   const deleteFile = (
-    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+    e: React.MouseEvent<SVGSVGElement, MouseEvent>,
     index: number
   ): void => {
     setFileList((prevState) =>
@@ -142,27 +143,25 @@ export const ModelUpload: React.FC<Props> = (props) => {
   }, [error]);
 
   return (
-    <div className="flex flex-col p-5 gap-5 bg-white justify-center items-center">
+    <div className="flex flex-col items-center justify-center gap-5 bg-white p-5">
       {error && (
         <div className="error">{t("Process.Model.ModelUpload.error")}</div>
       )}
 
-      <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
+      <div className="flex flex-row flex-wrap items-center justify-center gap-5">
         {fileList.map((file: File, index: number) => (
           <div
             key={index}
-            className="flex flex-col justify-center items-center gap-2 bg-gray-100 p-2"
+            className="flex flex-col items-center justify-center gap-2 bg-gray-100 p-2"
           >
             <div className="canvas">
               <ViewInArIcon sx={{ fontSize: "90px", margin: "auto" }} />
             </div>
             {file.name}
-            <div className="flex flex-row gap-2 items-center justify-center">
+            <div className="flex flex-row items-center justify-center gap-2">
               {getFileSizeAsString(file.size)}
-              <img
-                alt="button delete model"
-                src={IconDelete}
-                className="w-6 h-6 hover:cursor-pointer hover:bg-gray-300"
+              <DeleteIcon
+                className="h-6 w-6 hover:cursor-pointer hover:bg-gray-300"
                 onClick={(e) => deleteFile(e, index)}
               />
             </div>
@@ -176,7 +175,7 @@ export const ModelUpload: React.FC<Props> = (props) => {
         </div>
       ) : (
         <div
-          className="max-w-2xl bg-gray-100 flex flex-col items-center justify-center gap-2 p-2 hover:cursor-pointer hover:bg-gray-300"
+          className="flex max-w-2xl flex-col items-center justify-center gap-2 bg-gray-100 p-2 hover:cursor-pointer hover:bg-gray-300"
           onClick={handleClickUploadCard}
           onDragEnter={handleDragOnUploadCard}
           onDragLeave={handleDragOnUploadCard}
@@ -191,7 +190,7 @@ export const ModelUpload: React.FC<Props> = (props) => {
             onChange={handleChangeHiddenInput}
             className="hidden"
           />
-          <img src={IconUpload} className="h-40 w-40" alt="" />
+          <UploadIcon className="h-40 w-40" />
           <h2>{t("Process.Model.ModelUpload.card.header")}</h2>
           {t("Process.Model.ModelUpload.card.text")}
         </div>

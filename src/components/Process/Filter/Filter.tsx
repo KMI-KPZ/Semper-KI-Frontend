@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IFilterItem } from "./Interface";
 import CloseIcon from "@mui/icons-material/Close";
-import "./Filter.scss";
 
 import FilterCard from "./FilterCard";
 import { IProgress } from "../../../interface/Interface";
@@ -165,16 +164,16 @@ const Filter: React.FC<Props> = (props) => {
 
   return (
     <div
-      className={`2xl:flex flex-col h-fit bg-white justify-between p-5 gap-10 ${
+      className={`h-fit flex-col justify-between gap-10 bg-white p-5 2xl:flex ${
         filterOpen === true
-          ? "flex flex-col bg-white justify-between p-5 gap-10 absolute top-0 left-0 right-0 overflow-x-hidden overflow-y-scroll w-screen h-fit"
+          ? "absolute top-0 left-0 right-0 flex h-fit w-screen flex-col justify-between gap-10 overflow-x-hidden overflow-y-scroll bg-white p-5"
           : "hidden"
       }`}
     >
       <div className="flex flex-col justify-start gap-2 overflow-x-hidden">
-        <div className="xl:hidden flex flex-row-reverse w-full">
+        <div className="flex w-full flex-row-reverse xl:hidden">
           <div
-            className="hover:bg-gray-300 hover:cursor-pointer p-3"
+            className="p-3 hover:cursor-pointer hover:bg-gray-300"
             onClick={handleOnClickCloseButton}
           >
             <CloseIcon fontSize="large" />
@@ -195,7 +194,7 @@ const Filter: React.FC<Props> = (props) => {
           />
         ))}
       </div>
-      <div className="flex justify-center gap-2 flex-col xl:flex-row text-white">
+      <div className="flex flex-col justify-center gap-2 text-white xl:flex-row">
         <Button onClick={handleOnClickResetButton}>
           {t("Process.Filter.Filter.button.reset")}
         </Button>

@@ -28,7 +28,7 @@ const useFilter = (): ReturnProps => {
   const filtersQuery = useQuery<IFilterItem[], Error>({
     queryKey: ["filters"],
     queryFn: async () => {
-      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/getFilters/`;
+      const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/getFilters/`;
       return axiosCustom.get(apiUrl).then((response) => {
         console.log("useFilter | getFilters ✅ |", response.data);
         return response.data;
@@ -41,7 +41,7 @@ const useFilter = (): ReturnProps => {
   const updateFilters = useMutation<AxiosResponse, Error, IFilterItem[]>({
     mutationFn: async (filters: IFilterItem[]) =>
       axiosCustom
-        .post(`${process.env.REACT_APP_HTTP_API_URL}/public/updateFilters/`, {
+        .post(`${import.meta.env.VITE_HTTP_API_URL}/public/updateFilters/`, {
           filters,
         })
         .then((res) => {

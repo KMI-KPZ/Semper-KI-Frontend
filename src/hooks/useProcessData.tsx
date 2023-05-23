@@ -18,7 +18,9 @@ const useProcessData = (
   const processDataQuery = useQuery<IProcessData, Error>({
     queryKey: ["processData", "models", "materials", "postProcessings"],
     queryFn: async () => {
-      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/getProcessData/`;
+      const apiUrl = `${
+        import.meta.env.VITE_HTTP_API_URL
+      }/public/getProcessData/`;
       return axiosCustom
         .post(apiUrl, {
           filters,
@@ -40,7 +42,7 @@ export const useModelData = (
   const modelsQuery = useQuery<IModel[], Error>({
     queryKey: ["models"],
     queryFn: async () => {
-      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/getModels/`;
+      const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/getModels/`;
       return axiosCustom
         .post(apiUrl, {
           filters,
@@ -60,7 +62,9 @@ export const useMaterialData = (
   const materialsQuery = useQuery<IMaterial[], Error>({
     queryKey: ["materials"],
     queryFn: async () => {
-      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/getMaterials/`;
+      const apiUrl = `${
+        import.meta.env.VITE_HTTP_API_URL
+      }/public/getMaterials/`;
       return axiosCustom
         .post(apiUrl, {
           filters,
@@ -81,7 +85,9 @@ export const usePostProcessing = (
   const postProcessingQuery = useQuery<IPostProcessing[], Error>({
     queryKey: ["postProcessings"],
     queryFn: async () => {
-      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/getPostProcessing/`;
+      const apiUrl = `${
+        import.meta.env.VITE_HTTP_API_URL
+      }/public/getPostProcessing/`;
       return axiosCustom
         .post(apiUrl, {
           filters,

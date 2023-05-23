@@ -36,7 +36,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
   const ordersQuery = useQuery<IOrderCollection[], Error>(
     ["orders"],
     async () => {
-      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/getOrders/`;
+      const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/getOrders/`;
       return axiosCustom.get(apiUrl).then((response) => {
         console.log("useOrders | getOrders ✅ |", response.data);
         return response.data;
@@ -53,7 +53,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
 
   const deleteOrder = useMutation<any, Error, string>({
     mutationFn: async (orderID: string) => {
-      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/deleteOrder/`;
+      const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/deleteOrder/`;
       return axiosCustom
         .delete(apiUrl, { data: { id: orderID } })
         .then((response) => {
@@ -67,7 +67,9 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
   });
   const deleteOrderCollection = useMutation<any, Error, string>({
     mutationFn: async (orderCollectionID: string) => {
-      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/deleteOrderCollection/`;
+      const apiUrl = `${
+        import.meta.env.VITE_HTTP_API_URL
+      }/public/deleteOrderCollection/`;
       return axiosCustom
         .delete(apiUrl, { data: { id: orderCollectionID } })
         .then((response) => {
@@ -83,7 +85,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
   const updateOrder = useMutation<AxiosResponse, Error, IUpdateOrderData>({
     mutationFn: async (props: IUpdateOrderData) => {
       return axiosCustom
-        .put(`${process.env.REACT_APP_HTTP_API_URL}/public/updateOrder/`, {
+        .put(`${import.meta.env.VITE_HTTP_API_URL}/public/updateOrder/`, {
           props,
         })
         .then((res) => {

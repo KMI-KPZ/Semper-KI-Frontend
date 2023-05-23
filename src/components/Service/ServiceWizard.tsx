@@ -1,5 +1,4 @@
 import React from "react";
-import { getIconByName } from "../../constants/Icons";
 import { IServiceChapter } from "./Interface";
 
 interface Props {
@@ -26,7 +25,7 @@ const ServiceWizard: React.FC<Props> = (props) => {
             key={index}
             onClick={() => handleOnClickItem(index)}
           >
-            <img src={getIconByName(chapter.icon)} alt={chapter.icon} />
+            {/* <img src={getIconByName(chapter.icon)} alt={chapter.icon} /> */}
             {chapter.title}
           </div>
           {index !== chapters.length - 1 ? "->" : null}

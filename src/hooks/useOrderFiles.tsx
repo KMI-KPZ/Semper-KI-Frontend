@@ -26,7 +26,7 @@ const useOrderFile = (props: Props): ReturnProps => {
     queryFn: async () =>
       axiosCustom
         .post(
-          `${process.env.REACT_APP_HTTP_API_URL}/public/getFileFromOrder/`,
+          `${import.meta.env.VITE_HTTP_API_URL}/public/getFileFromOrder/`,
           { id: orderID, filename: fileName },
           { responseType: "blob" }
         )

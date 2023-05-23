@@ -14,7 +14,9 @@ const useModelUpload = (): ReturnProps => {
       files.forEach((file) => {
         formData.append(file.name, file);
       });
-      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/uploadModels/`;
+      const apiUrl = `${
+        import.meta.env.VITE_HTTP_API_URL
+      }/public/uploadModels/`;
       return axiosCustom
         .post(apiUrl, formData, {
           headers: { "Content-Type": "multipart/form-data" },

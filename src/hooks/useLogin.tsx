@@ -16,7 +16,7 @@ export const useLogin = (
   const loginQuery = useQuery<AxiosResponse, Error>({
     queryKey: ["login"],
     queryFn: async () => {
-      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/login/`;
+      const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/login/`;
       return axiosCustom.get(apiUrl, {
         headers: {
           Usertype: userType === undefined ? null : EUserType[userType],
@@ -43,7 +43,7 @@ export const useLogout = (): {
   const logoutQuery = useQuery<AxiosResponse, Error>({
     queryKey: ["logout"],
     queryFn: async () => {
-      const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/logout/`;
+      const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/logout/`;
       return axiosCustom.get(apiUrl);
     },
   });

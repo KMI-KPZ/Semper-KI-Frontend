@@ -20,7 +20,7 @@ const useMissedEvent = (props: Props): ReturnProps => {
     queryKey: ["missedEvents"],
     queryFn: async () =>
       axiosCustom
-        .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getMissedEvents/`)
+        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getMissedEvents/`)
         .then((res) => {
           console.log("useMissedEvent | getMissedEvents ✅ |", res.data);
           return res.data;

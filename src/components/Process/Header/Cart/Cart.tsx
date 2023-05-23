@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import CartItem from "./CartItem";
 import { ProcessContext } from "../../ProcessView";
-import { IconModel } from "../../../../constants/Icons";
 import { IProcessItem } from "../../../../interface/Interface";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -34,8 +33,8 @@ const Cart: React.FC<Props> = () => {
   };
 
   return (
-    <div className="flex flex-row w-full justify-between gap-5 mb-5">
-      <div className="flex flex-row flex-wrap gap-5 2xl:w-4/5 w-full">
+    <div className="mb-5 flex w-full flex-row justify-between gap-5">
+      <div className="flex w-full flex-row flex-wrap gap-5 2xl:w-4/5">
         {/* <CartItem
           active={processState.activeItemIndex === -1}
           icon={<CloudUploadIcon fontSize="large" />}
@@ -57,7 +56,8 @@ const Cart: React.FC<Props> = () => {
                 />
               ) : (
                 <img
-                  src={IconModel}
+                  //TODO
+                  // src={IconModel}
                   alt="icon"
                   className="h-8 w-8 object-cover"
                 />
@@ -80,7 +80,7 @@ const Cart: React.FC<Props> = () => {
           isItem={false}
         />
       </div>
-      <div className="hidden md:flex flex-row items-start justify-end w-fit">
+      <div className="hidden w-fit flex-row items-start justify-end md:flex">
         <CartItem
           active={false}
           icon={<ShoppingCartIcon fontSize="large" />}

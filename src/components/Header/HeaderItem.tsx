@@ -1,10 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { getIconByName } from "../../constants/Icons";
 import { INavigationItem } from "../../data/NavigationItems";
-import { IHeaderItem } from "../../interface/Interface";
 import Badge from "../General/Badge";
+import { ReactComponent as LogoIcon } from "../../assets/images/icons/Logo.svg";
 
 interface Props {
   isMenuItem?: boolean;
@@ -33,17 +32,9 @@ const HeaderItem: React.FC<Props> = (props) => {
 
   const renderIcon =
     typeof headeritem.icon === "string" ? (
-      <div className="relative w-6 h-6 xl:h-8 xl:w-8">
-        <img
-          className="absolute h-6 xl:h-8 opacity-100 group-hover:opacity-0 duration-300 ease-in-out"
-          src={getIconByName("IconLogo")}
-          alt={`link to ${headeritem.link}`}
-        />
-        <img
-          className="absolute h-6 xl:h-8 opacity-0 group-hover:opacity-100 duration-300 ease-in-out"
-          src={getIconByName("IconLogoColor")}
-          alt={`link to ${headeritem.link}`}
-        />
+      <div className="relative h-6 w-6 xl:h-8 xl:w-8">
+        <LogoIcon className="absolute h-6 opacity-100 duration-300 ease-in-out group-hover:opacity-0 xl:h-8" />
+        <LogoIcon className="absolute h-6 opacity-0 duration-300 ease-in-out group-hover:opacity-100 xl:h-8" />
       </div>
     ) : (
       headeritem.icon
@@ -51,7 +42,7 @@ const HeaderItem: React.FC<Props> = (props) => {
 
   return (
     <li
-      className="group hover:text-türkis hover:cursor-pointer duration-300 p-1"
+      className="group p-1 duration-300 hover:cursor-pointer hover:text-türkis"
       onClick={handleOnClick}
       title={headeritem.title}
     >

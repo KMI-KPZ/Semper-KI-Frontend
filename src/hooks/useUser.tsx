@@ -23,11 +23,13 @@ const useUser = (): ReturnProps => {
   const { isCSRFTokenLoaded } = useCRSFToken();
   const { axiosCustom } = useCustomAxios();
 
+  console.log(isCSRFTokenLoaded);
+
   const loadIsLoggedInQuery = useQuery<boolean, Error>({
     queryKey: ["isLoggedIn"],
     queryFn: async () =>
       axiosCustom
-        .get(`${process.env.REACT_APP_HTTP_API_URL}/public/isLoggedIn/`)
+        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/isLoggedIn/`)
         .then((response) => {
           console.log("useUser | isLoggedIn ✅ |", response.data);
           return response.data === "Success" ? true : false;
@@ -39,7 +41,7 @@ const useUser = (): ReturnProps => {
     queryKey: ["user"],
     queryFn: async () =>
       axiosCustom
-        .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getUser/`)
+        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getUser/`)
         .then((response) => {
           const userData = response.data;
           console.log("useUser | getUser ✅ |", userData);
@@ -60,7 +62,7 @@ const useUser = (): ReturnProps => {
 
   const deleteUser = () => {
     axiosCustom
-      .delete(`${process.env.REACT_APP_HTTP_API_URL}/public/profileDeleteUser/`)
+      .delete(`${import.meta.env.VITE_HTTP_API_URL}/public/profileDeleteUser/`)
       .then((response) => {
         console.log("useUser | profileDeleteUser ✅ |");
         navigate("/logout");
@@ -72,7 +74,7 @@ const useUser = (): ReturnProps => {
 
   const updateUser = (userType: EUserType) => {
     axiosCustom
-      .post(`${process.env.REACT_APP_HTTP_API_URL}/public/updateUser/`, {
+      .post(`${import.meta.env.VITE_HTTP_API_URL}/public/updateUser/`, {
         userType: EUserType[userType],
       })
       .then((response) => {

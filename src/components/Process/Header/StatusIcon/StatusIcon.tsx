@@ -1,9 +1,7 @@
 import React from "react";
-import {
-  IconCheck,
-  IconQuestionMark,
-  IconX,
-} from "../../../../constants/Icons";
+import { ReactComponent as CheckIcon } from "../../../../assets/images/icons/Check.svg";
+import { ReactComponent as QuestionMarkIcon } from "../../../../assets/images/icons/QuestionMark.svg";
+import { ReactComponent as CloseIcon } from "../../../../assets/images/icons/X.svg";
 import { EProcessStatusType } from "../../../../interface/enums";
 import { IProcessItem } from "../../../../interface/Interface";
 
@@ -26,28 +24,28 @@ const StatusIcon: React.FC<Props> = (props) => {
   else status = 0;
 
   let className = "ok";
-  let img = IconCheck;
+  let img = <CheckIcon />;
   switch (status) {
     case 0:
       className = "bg-green-300";
-      img = IconCheck;
+      img = <CheckIcon />;
       break;
     case 1:
       className = "bg-red-300";
-      img = IconX;
+      img = <CloseIcon />;
       break;
     case 2:
       className = "bg-amber-300";
-      img = IconQuestionMark;
+      img = <QuestionMarkIcon />;
       break;
   }
 
   return (
     <div
-      className={`flex flex-row justify-center items-center rounded-full h-4 w-4  ${className}`}
+      className={`flex h-4 w-4 flex-row items-center justify-center rounded-full  ${className}`}
       title={className}
     >
-      <img className="w-2 h-2" src={img} alt={`status ${className}`} />
+      {img}
     </div>
   );
 };

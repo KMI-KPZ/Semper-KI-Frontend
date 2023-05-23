@@ -2,7 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import CardView, { CardGroupData, CardItemData } from "../CardView/CardView";
-import "./Service.scss";
 
 import _ServiceCards from "./ServiceCards.json";
 import ServiceView from "./ServiceView";

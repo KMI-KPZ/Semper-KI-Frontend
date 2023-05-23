@@ -75,9 +75,7 @@ const useCheckout = (): ReturnProps => {
           ...prevState.filter((item, index: number) => index > _index),
         ]);
         axiosCustom
-          .get(
-            `${process.env.REACT_APP_HTTP_API_URL}/public/checkPrintability/`
-          )
+          .get(`${import.meta.env.VITE_HTTP_API_URL}/public/checkPrintability/`)
           .then((res) => {
             console.log("useCheckout | checkPrintability ✅ |", res.data);
             setPrintableList((prevState) => [
@@ -119,7 +117,7 @@ const useCheckout = (): ReturnProps => {
           ...prevState.filter((item, index: number) => index > _index),
         ]);
         axiosCustom
-          .get(`${process.env.REACT_APP_HTTP_API_URL}/public/checkPrices/`)
+          .get(`${import.meta.env.VITE_HTTP_API_URL}/public/checkPrices/`)
           .then((res) => {
             console.log("useCheckout | checkPrices ✅ |", res.data);
             setPriceList((prevState) => [
@@ -161,7 +159,7 @@ const useCheckout = (): ReturnProps => {
           ...prevState.filter((item, index: number) => index > _index),
         ]);
         axiosCustom
-          .get(`${process.env.REACT_APP_HTTP_API_URL}/public/checkLogistics/`)
+          .get(`${import.meta.env.VITE_HTTP_API_URL}/public/checkLogistics/`)
           .then((res) => {
             console.log("useCheckout | checkLogistics ✅ |", res.data);
             setLogisticsList((prevState) => [
@@ -197,7 +195,7 @@ const useCheckout = (): ReturnProps => {
       data: "",
     });
     axiosCustom
-      .get(`${process.env.REACT_APP_HTTP_API_URL}/public/sendOrder/`)
+      .get(`${import.meta.env.VITE_HTTP_API_URL}/public/sendOrder/`)
       .then((res) => {
         console.log("useCheckout | sendOrder ✅ |", res.data);
         setOrder({

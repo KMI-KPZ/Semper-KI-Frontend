@@ -36,7 +36,7 @@ const useAdmin = (): ReturnProps => {
 
   const loadData = () => {
     axiosCustom
-      .get(`${process.env.REACT_APP_HTTP_API_URL}/admin/getData/`)
+      .get(`${import.meta.env.VITE_HTTP_API_URL}/admin/getData/`)
       .then((res) => {
         console.log("useAdmin | loadData ✅ |", res.data);
         setData(res.data);

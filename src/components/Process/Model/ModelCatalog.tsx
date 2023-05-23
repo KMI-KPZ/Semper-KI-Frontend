@@ -5,7 +5,6 @@ import { ModelCard } from "./ModelCard";
 import PopUp from "../../PopUp/PopUp";
 import { ModelPreView } from "./ModelPreView";
 import ModelView from "./ModelView";
-import { IconUpload } from "../../../constants/Icons";
 import Button from "../../General/Button";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -73,9 +72,9 @@ export const ModelCatalog: React.FC<Props> = (props) => {
 
   const renderUplaodCart = () => (
     <div
-      className={`flex justify-between items-center bg-white overflow-hidden hover:cursor-pointer hover:bg-gray-300 ${
+      className={`flex items-center justify-between overflow-hidden bg-white hover:cursor-pointer hover:bg-gray-300 ${
         grid === true
-          ? "flex-col basis-[48%] sm:basis-[32%] md:basis-[23.5%]"
+          ? "basis-[48%] flex-col sm:basis-[32%] md:basis-[23.5%]"
           : "w-full flex-row"
       }`}
       onClick={handleOnClickCardUpload}
@@ -83,14 +82,15 @@ export const ModelCatalog: React.FC<Props> = (props) => {
       <img
         className={`p-5 ${
           grid === true
-            ? "min-w-full max-w-[200%] h-44"
-            : "pl-10 w-44 max-h-44 min-h-full "
+            ? "h-44 min-w-full max-w-[200%]"
+            : "max-h-44 min-h-full w-44 pl-10 "
         }`}
-        src={IconUpload}
+        //TODO
+        // src={IconUpload}
         alt={t("Process.Model.ModelCatalog.button.upload")}
       />
       <h2 className="">{t("Process.Model.ModelCatalog.upload")}</h2>
-      <div className={`flex justify-center items-center p-3 gap-2`}>
+      <div className={`flex items-center justify-center gap-2 p-3`}>
         <Button onClick={handleOnClickCardUpload}>
           {t("Process.Model.ModelCatalog.button.select")}
         </Button>

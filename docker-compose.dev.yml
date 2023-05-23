@@ -1,9 +1,9 @@
 version: "3.4"
 
 services:
-  frontend:
-    container_name: frontend
-    image: frontend
+  frontend-dev:
+    container_name: frontend-dev
+    image: frontend-dev
     build:
       context: .
       dockerfile: ./Dockerfile.dev

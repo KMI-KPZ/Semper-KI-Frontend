@@ -1,5 +1,5 @@
 version: "3.4"
 
 services:
-  frontend:
+  frontend_test:
     command: ["yarn","test:ci"]

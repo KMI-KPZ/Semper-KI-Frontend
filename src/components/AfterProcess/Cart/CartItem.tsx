@@ -8,7 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ErrorIcon from "@mui/icons-material/Error";
 import { useTranslation } from "react-i18next";
-import { count } from "console";
+import ModelPlaceholderUrl from "../../../assets/images/model_placeholder.png";
 
 interface Props {
   process: IProcessItem;
@@ -53,25 +53,21 @@ const CartItem: React.FC<Props> = (props) => {
   };
 
   return (
-    <ul className="flex flex-col bg-white md:gap-4 md:flex-row w-full md:flex-wrap justify-between">
-      <li className="flex flex-col w-full md:max-w-[250px]">
+    <ul className="flex w-full flex-col justify-between bg-white md:flex-row md:flex-wrap md:gap-4">
+      <li className="flex w-full flex-col md:max-w-[250px]">
         <img
-          className="h-30 md:h-full max-h-[250px] w-full object-cover"
-          src={
-            model === undefined
-              ? require("../../../assets/images/model_placeholder.png")
-              : getModelURI(model)
-          }
+          className="h-30 max-h-[250px] w-full object-cover md:h-full"
+          src={model === undefined ? ModelPlaceholderUrl : getModelURI(model)}
           alt="Model"
         />
       </li>
-      <li className="flex flex-col w-full md:w-4/5 p-5">
-        <ul className="flex flex-col bg-white gap-2 md:flex-row w-full md:h-full md:flex-wrap md:justify-around justify-center">
+      <li className="flex w-full flex-col p-5 md:w-4/5">
+        <ul className="flex w-full flex-col justify-center gap-2 bg-white md:h-full md:flex-row md:flex-wrap md:justify-around">
           <li
             onClick={handleOnClickModel}
-            className="flex flex-col w-full md:w-fit py-2 px-4 
-            hover:cursor-pointer hover:bg-slate-50 hover:shadow-inner 
-            shadow-md transition-all ease-in-out duration-300 "
+            className="flex w-full flex-col px-4 py-2 shadow-md 
+            transition-all duration-300 ease-in-out 
+            hover:cursor-pointer hover:bg-slate-50 hover:shadow-inner md:w-fit "
           >
             {model !== undefined ? (
               <>
@@ -93,9 +89,9 @@ const CartItem: React.FC<Props> = (props) => {
           </li>
           <li
             onClick={handleOnClickMaterial}
-            className="flex flex-col w-full md:w-fit py-2 px-4 
-            hover:cursor-pointer hover:bg-slate-50 hover:shadow-inner 
-            shadow-md transition-all ease-in-out duration-300 "
+            className="flex w-full flex-col px-4 py-2 shadow-md 
+            transition-all duration-300 ease-in-out 
+            hover:cursor-pointer hover:bg-slate-50 hover:shadow-inner md:w-fit "
           >
             {material !== undefined ? (
               <>
@@ -114,9 +110,9 @@ const CartItem: React.FC<Props> = (props) => {
           </li>
           <li
             onClick={handleOnClickPostprocessing}
-            className="flex flex-col w-full md:w-fit py-2 px-4 
-            hover:cursor-pointer hover:bg-slate-50 hover:shadow-inner 
-            shadow-md transition-all ease-in-out duration-300 "
+            className="flex w-full flex-col px-4 py-2 shadow-md 
+            transition-all duration-300 ease-in-out 
+            hover:cursor-pointer hover:bg-slate-50 hover:shadow-inner md:w-fit "
           >
             {postProcessings !== undefined ? (
               <>
@@ -143,8 +139,8 @@ const CartItem: React.FC<Props> = (props) => {
               </>
             )}
           </li>
-          <li className="flex flex-col items-center justify-end w-full md:w-fit py-3 px-5 gap-5">
-            <div className="flex flex-row gap-3 justify-center items-center">
+          <li className="flex w-full flex-col items-center justify-end gap-5 px-5 py-3 md:w-fit">
+            <div className="flex flex-row items-center justify-center gap-3">
               <Button onClick={handleOnClickEdit} icon={<EditIcon />} />
               <Button onClick={handleOnClickDelete} icon={<DeleteIcon />} />
             </div>

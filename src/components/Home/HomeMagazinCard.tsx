@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import BubblesSnipURL from "@images/Bubbles_snip.png";
 
 interface Props {
   className?: string;
@@ -13,19 +14,19 @@ const HomeMagazinCard: React.FC<Props> = (props) => {
   return (
     <Link
       className={` ${additionalClassNames}
-        bg-türkis-800 hover:bg-türkis-700 
-        duration-500 p-3
-        flex justify-center items-center select-none 
-        group relative
+        group relative 
+        flex select-none
+        items-center justify-center bg-türkis-800 p-3 
+        duration-500 hover:bg-türkis-700
     `}
       to="https://infai.4imedia.com/"
     >
-      <h2 className="font-bold text-5xl tracking-wider text-white z-10">
+      <h2 className="z-10 text-5xl font-bold tracking-wider text-white">
         {t("Home.HomeMagazinCard.header")}
       </h2>
       <img
-        className="absolute felx w-full h-full object-cover duration-500 opacity-0 group-hover:opacity-50"
-        src={require("../../assets/images/Bubbles_snip.PNG")}
+        className="felx absolute h-full w-full object-cover opacity-0 duration-500 group-hover:opacity-50"
+        src={BubblesSnipURL}
       />
     </Link>
   );

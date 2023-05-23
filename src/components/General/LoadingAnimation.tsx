@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import LogoURL from "@images/logo192.png";
 
 interface Props {
   color?: string;
@@ -33,7 +34,7 @@ const LoadingAnimation: React.FC<Props> = (props) => {
   return (
     <div className="">
       <div className="h-24 w-24 animate-bounce">
-        <img src={require("../../assets/images/logo192.png")} alt="" />
+        <img src={LogoURL} alt="" />
       </div>
     </div>
   );

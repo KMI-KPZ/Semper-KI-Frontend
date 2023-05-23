@@ -1,11 +1,14 @@
 import React from "react";
+import Bubbles1TransURL from "../../assets/images/Bubbles1_Trans.png";
+import Bubbles2TransURL from "../../assets/images/Bubbles2_Trans.png";
+import Bubbles3TransURL from "../../assets/images/Bubbles3_Trans.png";
 
 interface Props {}
 
 const Background: React.FC<Props> = (props) => {
   return (
     <div
-      className="fixed top-0 left-0 -z-10
+      className="fixed left-0 top-0 -z-10
      h-full min-h-[200px] w-full
      overflow-hidden bg-gradient-to-tr from-türkis-800 to-blau-800 brightness-125 grayscale-[30%]
      "
@@ -13,18 +16,18 @@ const Background: React.FC<Props> = (props) => {
       <div className="hidden h-full w-full opacity-10 grayscale-[40%]">
         <img
           alt=""
-          className="absolute -top-[10%] -left-[10%] h-1/6 md:h-2/6 lg:h-3/6 xl:h-4/5 "
-          src={require("../../assets/images/Bubbles3_Trans.png")}
+          className="absolute -left-[10%] -top-[10%] h-1/6 md:h-2/6 lg:h-3/6 xl:h-4/5 "
+          src={Bubbles3TransURL}
         />
         <img
           alt=""
-          className="absolute top-20 -right-[10%] h-1/6 md:h-2/6 lg:h-3/6 xl:-top-[10%] xl:h-4/6"
-          src={require("../../assets/images/Bubbles1_Trans.png")}
+          className="absolute -right-[10%] top-20 h-1/6 md:h-2/6 lg:h-3/6 xl:-top-[10%] xl:h-4/6"
+          src={Bubbles1TransURL}
         />
         <img
           alt=""
           className="absolute -bottom-[20%] right-[30%] hidden h-1/2 xl:block"
-          src={require("../../assets/images/Bubbles2_Trans.png")}
+          src={Bubbles2TransURL}
         />
       </div>
       <svg

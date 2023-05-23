@@ -23,8 +23,6 @@ const useUser = (): ReturnProps => {
   const { isCSRFTokenLoaded } = useCRSFToken();
   const { axiosCustom } = useCustomAxios();
 
-  console.log(isCSRFTokenLoaded);
-
   const loadIsLoggedInQuery = useQuery<boolean, Error>({
     queryKey: ["isLoggedIn"],
     queryFn: async () =>

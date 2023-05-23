@@ -1,5 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import BMWKdeURL from "@images/BMWK_de.png";
+import BMWKenURL from "@images/BMWE_en.png";
 
 interface Props {
   className?: string;
@@ -45,9 +47,7 @@ const HomeBMWKImgCard: React.FC<Props> = (props) => {
       >
         <img
           className="h-full w-full object-contain duration-300 hover:scale-105"
-          src={require(i18n.language === "de"
-            ? "../../assets/images/BMWK_de.png"
-            : "../../assets/images/BMWE_en.png")}
+          src={i18n.language === "de" ? BMWKdeURL : BMWKenURL}
         />
       </a>
     </div>

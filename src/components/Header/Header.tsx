@@ -12,6 +12,7 @@ import { IHeaderItem, IOrderCollectionEvent } from "../../interface/Interface";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { NavigationItems } from "../../data/NavigationItems";
+import LogoURL from "@images/logo192.png";
 
 interface Language {
   code: string;
@@ -249,12 +250,12 @@ export const Header: React.FC<Props> = (props) => {
   const renderMenu: JSX.Element = (
     <>
       <div
-        className="absolute top-0 right-0 z-30 hidden h-screen w-screen bg-gray-900 opacity-60 md:block"
+        className="absolute right-0 top-0 z-30 hidden h-screen w-screen bg-gray-900 opacity-60 md:block"
         onClick={closeMenu}
       />
       <div
         className="
-        absolute top-0 right-0 z-40
+        absolute right-0 top-0 z-40
         flex h-screen w-screen flex-col 
         justify-between
         overflow-x-hidden bg-white 
@@ -288,7 +289,7 @@ export const Header: React.FC<Props> = (props) => {
       <img
         className="h-8 duration-300 group-hover:scale-110 md:h-10"
         data-testid="logo"
-        src={require("../../assets/images/logo192.png")}
+        src={LogoURL}
         alt="Kiss Logo"
       />
       <div className="hidden flex-col items-end justify-start text-inherit xs:flex">

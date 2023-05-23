@@ -350,21 +350,21 @@ const App: React.FC = () => {
     </Route>
   );
 
-  if (
-    isLoggedInResponse === false ||
-    (isLoggedIn === true && user === undefined)
-  ) {
-    const rootElement = document.getElementById("root");
-    if (rootElement) {
-      rootElement.style.overflow = "hidden";
-    }
-    return (
-      <div className="flex h-screen w-screen flex-col items-center justify-center gap-5 overflow-clip bg-white">
-        <h1 className="md:text-4xl xl:text-9xl">{t("App.title")}</h1>
-        <h2>{t("App.loading")}</h2>
-      </div>
-    );
-  }
+  // if (
+  //   isLoggedInResponse === false ||
+  //   (isLoggedIn === true && user === undefined)
+  // ) {
+  //   const rootElement = document.getElementById("root");
+  //   if (rootElement) {
+  //     rootElement.style.overflow = "hidden";
+  //   }
+  //   return (
+  //     <div className="flex h-screen w-screen flex-col items-center justify-center gap-5 overflow-clip bg-white">
+  //       <h1 className="md:text-4xl xl:text-9xl">{t("App.title")}</h1>
+  //       <h2>{t("App.loading")}</h2>
+  //     </div>
+  //   );
+  // }
 
   return (
     <AppContext.Provider

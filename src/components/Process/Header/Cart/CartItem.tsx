@@ -1,5 +1,4 @@
 import React, { ReactNode, useContext, useEffect, useState } from "react";
-import { IconDelete } from "../../../../constants/Icons";
 import { IProcessItem } from "../../../../interface/Interface";
 import Badge from "../../../General/Badge";
 import IconBadge from "../../../General/IconBagde";
@@ -70,7 +69,7 @@ const CartItem: React.FC<Props> = (props) => {
 
   return (
     <div
-      className={`flex flex-row justify-start items-center gap-3 bg-white h-12 px-3 py-2 hover:bg-slate-200 hover:cursor-pointer duration-300
+      className={`flex h-12 flex-row items-center justify-start gap-3 bg-white px-3 py-2 duration-300 hover:cursor-pointer hover:bg-slate-200
       ${active === true ? "shadow-border shadow-gray-500" : ""}
       `}
       onClick={handleOnClickCard}
@@ -93,11 +92,11 @@ const CartItem: React.FC<Props> = (props) => {
         <h3 className="whitespace-nowrap">{titleText}</h3>
       )}
       {isItem === true ? (
-        <div className="flex flex-col gap-1 items-center justify-center">
+        <div className="flex flex-col items-center justify-center gap-1">
           <a
             onClick={handleOnClickEditCheckButton}
             href="/editItem"
-            className="flex justify-center items-center hover:text-white duration-300"
+            className="flex items-center justify-center duration-300 hover:text-white"
           >
             {edit ? (
               <CheckIcon fontSize="small" />
@@ -108,7 +107,7 @@ const CartItem: React.FC<Props> = (props) => {
           <a
             onClick={handleOnClickDeleteIcon}
             href="/deleteItem"
-            className="flex justify-center items-center hover:text-white duration-300"
+            className="flex items-center justify-center duration-300 hover:text-white"
           >
             <DeleteForeverOutlinedIcon fontSize="small" />
           </a>

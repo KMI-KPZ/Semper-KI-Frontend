@@ -1,5 +1,4 @@
 import React from "react";
-import { getIconByName } from "../../../constants/Icons";
 import { EGuideQuestionState } from "../../../interface/enums";
 import { IGuideOption } from "../Interface";
 import GButtons from "./GButtons";
@@ -82,9 +81,6 @@ const GSelection: React.FC<Props> = (props) => {
             onClick={(e) => e.stopPropagation()}
           />
           {option.title}
-          {option.icon === undefined ? null : (
-            <img src={getIconByName(option.icon)} alt="" />
-          )}
         </div>
       ))}
       {questionState === EGuideQuestionState.question ? (

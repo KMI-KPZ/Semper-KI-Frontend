@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
-import { getIconByName } from "../../../constants/Icons";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import RedoIcon from "@mui/icons-material/Redo";
 
 interface Props {
   handleOnClickBack?(): void;
@@ -14,11 +15,7 @@ const GButtons: React.FC<Props> = (props) => {
     <div className="guide-question-buttons">
       {handleOnClickBack !== undefined ? (
         <Button variant="contained" onClick={handleOnClickBack} title="Zurück">
-          <img
-            alt="go back"
-            src={getIconByName("IconArrowR")}
-            style={{ transform: "rotate(180deg)", width: "30px" }}
-          />
+          <ArrowForwardIosIcon />
         </Button>
       ) : null}
       <Button
@@ -27,18 +24,10 @@ const GButtons: React.FC<Props> = (props) => {
         onClick={handleOnClickSkip}
         title="Überspringen"
       >
-        <img
-          alt="skip question"
-          src={getIconByName("IconSkip")}
-          style={{ width: "30px" }}
-        />
+        <RedoIcon />
       </Button>
       <Button variant="contained" onClick={handleOnClickNext} title="Weiter">
-        <img
-          alt="next question"
-          src={getIconByName("IconArrowR")}
-          style={{ width: "30px" }}
-        />
+        <ArrowForwardIosIcon />
       </Button>
     </div>
   );

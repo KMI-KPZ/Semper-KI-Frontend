@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { getIconByName } from "../../constants/Icons";
 import { CardItemData } from "./CardView";
 
 interface Props {
@@ -30,10 +29,10 @@ const Card: React.FC<Props> = (props) => {
     <a
       title={t(carditem.title)}
       className="
-            md:w-5/12 justify-center items-center gap-1 bg-white p-2 md:p-3 md:min-w-[300px]
-            flex flex-col w-full  py-2 px-4 
-            hover:cursor-pointer hover:bg-slate-50 hover:shadow-inner 
-            shadow-md transition-all ease-in-out duration-300 "
+            flex w-full flex-col items-center justify-center gap-1 bg-white p-2
+            px-4 py-2 shadow-md  transition-all duration-300 
+            ease-in-out hover:cursor-pointer hover:bg-slate-50 
+            hover:shadow-inner md:w-5/12 md:min-w-[300px] md:p-3 "
       onClick={handleOnClickCard}
       href={carditem.link}
     >

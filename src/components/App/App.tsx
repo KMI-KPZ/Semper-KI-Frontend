@@ -6,7 +6,6 @@ import useUser from "../../hooks/useUser";
 import { Home } from "../Home/Home";
 import { ProcessView } from "../Process/ProcessView";
 import Logout from "../Logout/Logout";
-import Login from "../Login/Login";
 import { Error } from "../Error/Error";
 import { IFilterItem } from "../Process/Filter/Interface";
 import Redirect from "../Redirect/Redirect";
@@ -324,7 +323,6 @@ const App: React.FC = () => {
       <Route path="order" element={<AdminOrderView />} />
     </Route>
   );
-
   const clientRoutes = (
     <Route element={<PrivateClientRoutes user={user} />}>
       <Route path="manufacturer" element={<ManufacturerView />} />
@@ -336,7 +334,6 @@ const App: React.FC = () => {
       <Route path="assignments" element={<Error text="assignments" />} />
     </Route>
   );
-
   const manufacturerRoutes = (
     <Route element={<PrivateManufacturerRoutes user={user} />}>
       <Route path="proceedings" element={<Error text="proceedings" />} />
@@ -346,7 +343,6 @@ const App: React.FC = () => {
       />
     </Route>
   );
-
   const privateRoutes = (
     <Route element={<PrivateRoutes user={user} />}>
       <Route path="account" element={<Profil user={user!} />} />
@@ -426,8 +422,8 @@ const App: React.FC = () => {
             </Route>
             <Route path="logout" element={<Logout />} />
             <Route path="portfolio" element={<Portfolio />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<LoginView register={true} />} />
+            <Route path="login" element={<LoginView />} />
+            <Route path="register" element={<LoginView />} />
             <Route path="contact" element={<Contact />} />
             <Route
               path="aboutus"

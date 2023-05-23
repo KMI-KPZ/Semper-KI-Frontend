@@ -1,27 +1,21 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { EUserType } from "../../interface/enums";
+import UserSwitch from "../General/UserSwitch";
 
 interface Props {
   className?: string;
 }
 
-type State = {
-  user: "client" | "contractor";
-};
-
 const HomePortfolioCard: React.FC<Props> = (props) => {
   const { className } = props;
   const additionalClassNames = className ?? "";
-  const [state, setState] = useState<State>({ user: "client" });
-  const { user } = state;
+  const [userType, setUserType] = useState<EUserType>(EUserType.client);
   const { t } = useTranslation();
 
-  const handleOnClickSwitch = () => {
-    setState((prevState) => ({
-      ...prevState,
-      user: prevState.user === "client" ? "contractor" : "client",
-    }));
+  const handleOnClickSwitch = (userType: EUserType) => {
+    setUserType(userType);
   };
 
   return (
@@ -36,7 +30,7 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
         >
           <div
             className={`absolute flex w-full flex-col gap-1 overflow-clip duration-300 ${
-              user === "client" ? "-left-[200%]" : "left-0"
+              userType === EUserType.client ? "-left-[200%]" : "left-0"
             }`}
           >
             <Link
@@ -66,7 +60,7 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
           </div>
           <div
             className={`absolute flex w-full flex-col gap-2 overflow-clip duration-300 ${
-              user === "client" ? "left-0" : "left-[200%]"
+              userType === EUserType.client ? "left-0" : "left-[200%]"
             }`}
           >
             <Link
@@ -92,26 +86,7 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
       </div>
       <div className="flex w-full flex-col items-center gap-2">
         <div className="w-full border-t-2" />
-        <div
-          className="relative flex select-none flex-row items-center justify-between overflow-clip bg-türkis-300 p-1 hover:cursor-pointer"
-          onClick={handleOnClickSwitch}
-        >
-          <span
-            className={`py-1 px-3 duration-300
-        ${user === "client" ? "bg-türkis-300" : "bg-türkis-800 text-white"}`}
-          >
-            {t("Home.HomePortfolioCard.button.client")}
-          </span>
-          <div
-            className={`absolute ${user === "client" ? "left-0" : "right-0"}`}
-          />
-          <span
-            className={`py-1 px-3 duration-300
-        ${user === "client" ? "bg-türkis-800 text-white" : "bg-türkis-300"}`}
-          >
-            {t("Home.HomePortfolioCard.button.contractor")}
-          </span>
-        </div>
+        <UserSwitch onClick={handleOnClickSwitch} />
       </div>
     </div>
   );

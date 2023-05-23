@@ -200,7 +200,13 @@
      },
      "LoadingAnimation":{
         "text":"Loading"
-     }
+     },
+     "UserSwitch":{
+      "button":{
+         "client": "For Clients",
+         "contractor": "For Providers"
+      }
+    }
   },
   "Guide":{
      "Answer":{
@@ -519,7 +525,8 @@
   "PrivateRoutes":{
      "error":{
         "client":"You need to be logged in as a client to access this page",
-        "manufacturer":"You need to be logged in as a manufacturer to access this page"
+        "manufacturer":"You need to be logged in as a manufacturer to access this page",
+        "admin":"404 - Page not found"
      }
   },
   "Process":{

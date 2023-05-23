@@ -11,8 +11,10 @@ const HomeBMWKImgCard: React.FC<Props> = (props) => {
   const { i18n } = useTranslation();
 
   return (
-    <div className={`${additionalClassNames} flex flex-row flex-wrap bg-white`}>
-      <a
+    <div
+      className={`${additionalClassNames} flex flex-row flex-wrap justify-center bg-white`}
+    >
+      {/* <a
         href="https://kmi-leipzig.de/"
         className="h-1/2 w-1/2 select-none p-5"
         title="KMI Leipzig"
@@ -35,7 +37,7 @@ const HomeBMWKImgCard: React.FC<Props> = (props) => {
             "https://infai.org/wp-content/uploads/2019/02/InfAI-Logo-mobile-sm.png"
           }
         />
-      </a>
+      </a> */}
       <a
         href="https://www.bmwk.de/"
         className="h-1/2 w-1/2 select-none object-contain p-5 "

@@ -195,6 +195,12 @@
     },
     "LoadingAnimation":{
       "text":"Laden"
+    },
+    "UserSwitch":{
+      "button":{
+        "client":"Für Autraggeber",
+        "contractor":"Für Auftragnehmer"
+      }
     }
   },
   "Guide":{
@@ -373,14 +379,14 @@
       "redirect":"Weiterleiten zur Anmeldung"
     },
     "LoginView":{
-      "header":"Anmelden",
-      "headerPath":"Für die gewünschte Seite müssen sie sich anmelden",
-      "button":{
-        "client":"Für Kunden",
-        "clientPath":"Als Kunde Anmelden/Registieren",
-        "manufacturer":"Für Hersteller",
-        "manufacturerPath":"Als Hersteller Anmelden/Registieren"
-      }
+      "header":"Anmeldung",
+      "login":{
+        "header":"Anmelden"
+      },
+      "register":{
+        "header":"Registieren"
+      },
+      "headerPath":"Für die gewünschte Seite müssen sie sich anmelden"
     }
   },
   "Logout":{
@@ -500,7 +506,8 @@
   "PrivateRoutes":{
     "error":{
       "client":"Sie Müssen als Kunde angemeldet Sein um diese Seite zu sehen",
-      "manufacturer":"Sie Müssen als Hersteller angemeldet Sein um diese Seite zu sehen"
+      "manufacturer":"Sie Müssen als Hersteller angemeldet Sein um diese Seite zu sehen",
+      "admin":"404 - Seite nicht gefunden"
     }
   },
   "Process":{

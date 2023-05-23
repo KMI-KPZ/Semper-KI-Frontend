@@ -1,51 +1,75 @@
-import React, { ReactNode, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLogin } from "../../hooks/useLogin";
 import { EUserType } from "../../interface/enums";
 import Button from "../General/Button";
-import Login from "./Login";
+import UserSwitch from "../General/UserSwitch";
+import LoginIcon from "@mui/icons-material/Login";
+import CreateIcon from "@mui/icons-material/Create";
 
 interface Props {
   path?: string;
-  register?: boolean;
+  userType?: EUserType;
 }
+type State = {
+  userType: EUserType;
+  load: boolean;
+  register: boolean;
+};
 
 const LoginView: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { path, register } = props;
-  const [userType, setUserType] = useState<EUserType>();
+  const { path, userType: initialUserType } = props;
+  const [state, setState] = useState<State>({
+    load: false,
+    userType:
+      initialUserType === undefined ? EUserType.client : initialUserType,
+    register: false,
+  });
+  const { userType, load, register } = state;
+  const { loginQuery } = useLogin(load, userType, register);
 
-  const handleOnClickButtonClient = () => {
-    setUserType(EUserType.client);
+  const handleOnClickButtonLogin = () => {
+    setState((prevState) => ({ ...prevState, load: true, register: false }));
   };
-  const handleOnClickButtonManufacturer = () => {
-    setUserType(EUserType.manufacturer);
+  const handleOnClickButtonRegister = () => {
+    setState((prevState) => ({ ...prevState, load: true, register: true }));
   };
 
-  if (userType !== undefined)
-    return (
-      <Login
-        userType={EUserType.manufacturer}
-        path={path}
-        register={register}
-      />
-    );
+  const handleOnClickUserSwitch = () => {
+    setState((prevState) => ({
+      ...prevState,
+      userType:
+        prevState.userType === EUserType.client
+          ? EUserType.manufacturer
+          : EUserType.client,
+    }));
+  };
+
   return (
-    <div className="flex flex-col w-fit p-5 items-center justify-center gap-5 bg-white">
+    <div className="flex w-fit flex-col items-center justify-center gap-5 bg-white p-5">
       <h1>
         {path === undefined
           ? t("Login.LoginView.header")
           : t("Login.LoginView.headerPath")}
       </h1>
-      <div className="flex flex-col md:flex-row items-center justify-center gap-5">
-        <Button onClick={handleOnClickButtonClient}>
-          {path === undefined
-            ? t("Login.LoginView.button.client")
-            : t("Login.LoginView.button.clientPath")}
+      <UserSwitch onClick={handleOnClickUserSwitch} userType={userType} />
+      <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
+        <Button
+          onClick={handleOnClickButtonLogin}
+          title={t("Login.LoginView.login.header")}
+          hrefText={t("Login.LoginView.login.header")}
+          icon={<LoginIcon />}
+        >
+          {t("Login.LoginView.login.header")}
         </Button>
-        <Button onClick={handleOnClickButtonManufacturer}>
-          {path === undefined
-            ? t("Login.LoginView.button.manufacturer")
-            : t("Login.LoginView.button.manufacturerPath")}
+        <Button
+          onClick={handleOnClickButtonRegister}
+          title={t("Login.LoginView.register.header")}
+          hrefText={t("Login.LoginView.register.header")}
+          icon={<CreateIcon />}
+        >
+          {t("Login.LoginView.register.header")}
         </Button>
       </div>
     </div>

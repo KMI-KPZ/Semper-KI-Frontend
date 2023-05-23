@@ -4,7 +4,6 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { EUserType } from "../../interface/enums";
 import { IUser } from "../../interface/Interface";
 import { Error } from "../Error/Error";
-import Login from "../Login/Login";
 import LoginView from "../Login/LoginView";
 
 interface Props {
@@ -25,7 +24,7 @@ export const PrivateClientRoutes: React.FC<Props> = (props) => {
   return user !== undefined && user.type === EUserType.client ? (
     <Outlet />
   ) : (
-    <Login userType={EUserType.client} path={pathname} />
+    <LoginView path={pathname} userType={EUserType.client} />
   );
 };
 
@@ -39,7 +38,7 @@ export const PrivateManufacturerRoutes: React.FC<Props> = (props) => {
   return user !== undefined && user.type === EUserType.manufacturer ? (
     <Outlet />
   ) : (
-    <Login userType={EUserType.manufacturer} path={pathname} />
+    <LoginView path={pathname} userType={EUserType.manufacturer} />
   );
 };
 
@@ -50,5 +49,6 @@ export const PrivateRoutes: React.FC<{ user?: IUser }> = ({ user }) => {
 
 export const PrivateAdminRoutes: React.FC<AdminProps> = (props) => {
   const { userType } = props;
-  return userType === EUserType.admin ? <Outlet /> : <Navigate to="/" />;
+  const { t } = useTranslation();
+  return userType === EUserType.admin ? <Outlet /> : <Error />;
 };

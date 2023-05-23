@@ -5,9 +5,10 @@ import { useEffect } from "react";
 import { AxiosResponse } from "axios";
 
 export const useLogin = (
-  fetchLoginUsertype?: EUserType,
-  path?: string,
-  register?: boolean
+  load: boolean,
+  userType: EUserType,
+  register: boolean,
+  path?: string
 ): {
   loginQuery: UseQueryResult<AxiosResponse<any, any>, Error>;
 } => {
@@ -18,15 +19,13 @@ export const useLogin = (
       const apiUrl = `${process.env.REACT_APP_HTTP_API_URL}/public/login/`;
       return axiosCustom.get(apiUrl, {
         headers: {
-          Usertype:
-            fetchLoginUsertype === undefined
-              ? null
-              : EUserType[fetchLoginUsertype],
+          Usertype: userType === undefined ? null : EUserType[userType],
           Path: path === undefined ? "/" : path,
           Register: register !== undefined && register === true ? true : false,
         },
       });
     },
+    enabled: userType !== undefined && load === true,
   });
   useEffect(() => {
     if (loginQuery.data !== undefined && loginQuery.status === "success")

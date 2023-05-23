@@ -1,15 +1,9 @@
-export type PortfolioItemType = {
-  title: string;
-  text: string;
-};
-
-export const PortfolioItems: PortfolioItemType[] = [
-  {
-    title: "data.PortfolioItems.use-produce.header",
-    text: "data.PortfolioItems.use-produce.text",
-  },
-  {
-    title: "data.PortfolioItems.use-design.header",
-    text: "data.PortfolioItems.use-design.text",
-  },
+export const PortfolioItems: string[] = [
+  "use-information",
+  "use-produce",
+  "use-design",
+  "use-accompany",
+  "provide-produce",
+  "provide-design",
+  "provide-accompany",
 ];

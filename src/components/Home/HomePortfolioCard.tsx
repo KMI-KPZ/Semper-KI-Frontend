@@ -86,7 +86,7 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
       </div>
       <div className="flex w-full flex-col items-center gap-2">
         <div className="w-full border-t-2" />
-        <UserSwitch onClick={handleOnClickSwitch} />
+        <UserSwitch onClick={handleOnClickSwitch} userType={userType} />
       </div>
     </div>
   );

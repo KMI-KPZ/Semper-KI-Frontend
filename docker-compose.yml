@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  frontend-prod:
+  frontend:
     container_name: frontend-prod
     image: frontend-prod
     build:

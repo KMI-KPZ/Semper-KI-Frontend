@@ -1,9 +1,9 @@
 import React from "react";
 import useManufacturer from "../../../hooks/useManufacturer";
 import { IProcessItem } from "../../../interface/Interface";
-import { LoadingSuspense } from "../../General/LoadingSuspense";
 import { getModelURI } from "../../../services/utils";
 import { useTranslation } from "react-i18next";
+import { LoadingSuspense } from "@component-library/Loading";
 
 interface Props {
   itemIndex: number;

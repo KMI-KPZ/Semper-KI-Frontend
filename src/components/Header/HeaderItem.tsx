@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { INavigationItem } from "../../data/NavigationItems";
 import { Badge } from "@component-library/Badge";
-import { ReactComponent as LogoIcon } from "../../assets/images/icons/Logo.svg";
+import { ReactComponent as LogoIcon } from "@icons/Logo.svg";
 
 interface Props {
   isMenuItem?: boolean;

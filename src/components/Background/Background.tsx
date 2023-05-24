@@ -1,7 +1,7 @@
 import React from "react";
-import Bubbles1TransURL from "../../assets/images/Bubbles1_Trans.png";
-import Bubbles2TransURL from "../../assets/images/Bubbles2_Trans.png";
-import Bubbles3TransURL from "../../assets/images/Bubbles3_Trans.png";
+import Bubbles1TransURL from "@images/Bubbles1_Trans.png";
+import Bubbles2TransURL from "@images/Bubbles2_Trans.png";
+import Bubbles3TransURL from "@images/Bubbles3_Trans.png";
 
 interface Props {}
 

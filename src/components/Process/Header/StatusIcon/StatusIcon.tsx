@@ -1,7 +1,7 @@
 import React from "react";
-import { ReactComponent as CheckIcon } from "../../../../assets/images/icons/Check.svg";
-import { ReactComponent as QuestionMarkIcon } from "../../../../assets/images/icons/QuestionMark.svg";
-import { ReactComponent as CloseIcon } from "../../../../assets/images/icons/X.svg";
+import { ReactComponent as CheckIcon } from "@icons/Check.svg";
+import { ReactComponent as QuestionMarkIcon } from "@icons/QuestionMark.svg";
+import { ReactComponent as CloseIcon } from "@icons/X.svg";
 import { EProcessStatusType } from "../../../../interface/enums";
 import { IProcessItem } from "../../../../interface/Interface";
 

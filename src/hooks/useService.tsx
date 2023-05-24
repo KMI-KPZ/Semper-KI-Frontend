@@ -1,5 +1,5 @@
+import { IService, IServiceChapter } from "@/pages/Service";
 import { useState } from "react";
-import { IService, IServiceChapter } from "../components/Service/Interface";
 import _Services from "./Data/Services.json";
 const Services = _Services as IService[];
 

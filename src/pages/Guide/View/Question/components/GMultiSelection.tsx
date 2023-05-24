@@ -1,6 +1,5 @@
-import React from "react";
-import { EGuideQuestionState } from "../../../interface/enums";
-import { IGuideOption } from "../Interface";
+import { EGuideQuestionState } from "@/interface/enums";
+import { IGuideOption } from "@/pages/Guide";
 import GButtons from "./GButtons";
 import { IGuideOptionProps } from "./GOptions";
 

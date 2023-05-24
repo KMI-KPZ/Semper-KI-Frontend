@@ -4,7 +4,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { EUserType } from "../../../interface/enums";
 import { IUser } from "../../../interface/Interface";
 import { Error } from "../../Error";
-import LoginView from "../../Login/LoginView";
+import LoginView from "../../Login";
 
 interface Props {
   user: IUser | undefined;

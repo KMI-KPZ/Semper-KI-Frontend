@@ -1,6 +1,5 @@
 import useCustomAxios from "./useCustomAxios";
 import _FilterItems from "./Data/FilterQuestions.json";
-import { IFilterItem } from "../components/Process/Filter/Interface";
 import {
   DefinedUseQueryResult,
   useMutation,
@@ -9,6 +8,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
+import { IFilterItem } from "@/pages/Process/Filter";
 const FilterItems = _FilterItems as IFilterItem[];
 
 interface ReturnProps {

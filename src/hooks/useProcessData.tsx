@@ -1,5 +1,5 @@
+import { IFilterItem } from "@/pages/Process/Filter";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { IFilterItem } from "../components/Process/Filter/Interface";
 import { IMaterial, IModel, IPostProcessing } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
 

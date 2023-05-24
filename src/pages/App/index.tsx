@@ -1,22 +1,21 @@
 import React, { createContext, useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { RequestTest } from "../../RequestTest/RequestTest";
+import { RequestTest } from "../RequestTest";
 import useUser from "../../hooks/useUser";
 import { Home } from "../Home";
-import { ProcessView } from "../Process/ProcessView";
-import Logout from "../Logout/Logout";
+import { ProcessView } from "../Process";
+import Logout from "../Logout";
 import { Error } from "../Error";
-import { IFilterItem } from "../Process/Filter/Interface";
-import Redirect from "../Redirect/Redirect";
-import ServiceRoutes from "../Service/ServiceRoutes";
+import Redirect from "../Redirect";
+import ServiceRoutes from "../Service";
 import GuideRoutes from "../Guide";
-import Profil from "../Profil/Profil";
-import OrderCollectionOverview from "../Orders/OrderCollectionOverview";
+import Profil from "../Profil";
+import OrderCollectionOverview from "../Orders";
 import AdminUsers from "../Admin/Users";
 import AdminModels from "../Admin/Models";
 import AdminMaterials from "../Admin/Materials";
 import AdminOrders from "../Admin/Orders";
-import Cart from "../Process/Cart/Cart";
+import Cart from "../Process/Cart";
 import { EUserType } from "../../interface/enums";
 import { URL_AboutUs } from "../../constants/Constants";
 import {
@@ -25,25 +24,26 @@ import {
   IProcessItem,
   IUser,
 } from "../../interface/Interface";
-import LoginView from "../Login/LoginView";
+import LoginView from "../Login";
 import useMissedEvent from "../../hooks/useMissedEvent";
 import { useWebsocket } from "../../hooks/useWebsocket";
 import { useQueryClient } from "@tanstack/react-query";
 import useCart from "../../hooks/useCart";
 import { useTranslation } from "react-i18next";
-import Portfolio from "../Portfolio/Portfolio";
+import Portfolio from "../Portfolio";
 import {
   PrivateAdminRoutes,
   PrivateClientRoutes,
   PrivateManufacturerRoutes,
   PrivateRoutes,
 } from "./components/PrivateRoutes";
-import ManufacturerView from "../Process/Manufacturer/ManufacturerView";
-import Checkout from "../Process/Checkout/Checkout";
+import ManufacturerView from "../Process/Manufacturer";
+import Checkout from "../Process/Checkout";
 import Background from "@/components/Background";
 import { Header } from "@/components/Header";
 import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
+import { IFilterItem } from "../Process/Filter";
 
 export interface IAppState {
   selectedProgressItem?: { index: number; progress: string };

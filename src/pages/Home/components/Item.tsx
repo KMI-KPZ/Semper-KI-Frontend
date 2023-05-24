@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Badge } from "@component-library/Badge";
-import { IHomeItem } from ".";
+import { IHomeItem } from "..";
 
 interface Props {
   homeItem: IHomeItem;

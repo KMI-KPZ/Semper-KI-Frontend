@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  IFilterAnswer,
-  IFilterItem,
-  IFilterQuestion,
-  IRangeMinMax,
-} from "../../Process/Filter/Interface";
 import useGuide from "../../../hooks/useGuide";
 import { EGuideQuestionType } from "../../../interface/enums";
 import useFilter from "../../../hooks/useFilter";
@@ -14,6 +8,12 @@ import { IGuideOption, IGuideQuestion } from "..";
 import GuideOverview from "./Overview";
 import GuideAnswers from "./Answer";
 import GuideQuestion from "./Question";
+import {
+  IFilterAnswer,
+  IFilterItem,
+  IFilterQuestion,
+  IRangeMinMax,
+} from "@/pages/Process/Filter";
 
 const getQuestionByFilterId = (
   filterId: number,

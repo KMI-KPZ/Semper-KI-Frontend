@@ -2,7 +2,7 @@ import { EGuideQuestionType } from "@/interface/enums";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
-import { IFilterAnswer, IFilterItem } from "../Process/Filter/Interface";
+import { IFilterAnswer, IFilterItem } from "../Process/Filter";
 
 export interface IGuide {
   title: string;

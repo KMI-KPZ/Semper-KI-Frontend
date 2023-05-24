@@ -1,7 +1,7 @@
+import { EGuideQuestionState } from "@/interface/enums";
+import { IGuideOption } from "@/pages/Guide";
 import { Slider } from "@mui/material";
 import React from "react";
-import { EGuideQuestionState } from "../../../interface/enums";
-import { IGuideOption } from "../Interface";
 import GButtons from "./GButtons";
 import { IGuideOptionProps } from "./GOptions";
 

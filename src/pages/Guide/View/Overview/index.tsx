@@ -1,9 +1,9 @@
+import { EGuideQuestionState } from "@/interface/enums";
 import { Button } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { EGuideQuestionState } from "../../../interface/enums";
+import { IGuideOption, IGuideQuestion } from "../..";
 import GOptions from "../Question/components/GOptions";
-import { IGuideOption, IGuideQuestion } from "../Interface";
 
 interface Props {
   questions: IGuideQuestion[];

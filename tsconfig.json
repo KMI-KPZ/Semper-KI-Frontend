@@ -20,7 +20,8 @@
     "paths": {
         "@images/*": ["assets/images/*"],
         "@icons/*": ["assets/icons/*"],
-        "@component-library/*":["component-library/*"]
+        "@component-library/*":["component-library/*"],
+        "@/*": ["./src/*"],
     },
   },
   "include": ["src", "assets", "component-library"]

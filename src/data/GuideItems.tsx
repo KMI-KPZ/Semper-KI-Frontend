@@ -3,7 +3,7 @@ import { EUserType } from "../interface/enums";
 import HardwareIcon from "@mui/icons-material/Hardware";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import HelpIcon from "@mui/icons-material/Help";
-import { CardItemData } from "../components/CardView/CardView";
+import { CardItemData } from "../components/CardView";
 
 export type TGuideItem = {
   userTypes: EUserType[];

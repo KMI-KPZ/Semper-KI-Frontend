@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import Button from "../General/Button";
+import { Button } from "@component-library/Button";
 import { useTranslation } from "react-i18next";
 
 interface Props {
@@ -45,7 +45,7 @@ const HomeSearchCard: React.FC<Props> = (props) => {
 
   return (
     <div
-      className={`${additionalClassNames}  p-3 flex flex-col justify-center items-center gap-5 `}
+      className={`${additionalClassNames}  flex flex-col items-center justify-center gap-5 p-3 `}
     >
       {/* {searchTexts.length > 0 ? (
         <div className="flex flex-col-reverse justify-center gap-5 w-full px-10 max-h-80 overflow-y-auto">
@@ -64,18 +64,18 @@ const HomeSearchCard: React.FC<Props> = (props) => {
             ))}
         </div>
       ) : null} */}
-      <div className="flex flex-row justify-center items-center gap-5 w-full">
-        <div className="w-4/5 flex items-center justify-center">
+      <div className="flex w-full flex-row items-center justify-center gap-5">
+        <div className="flex w-4/5 items-center justify-center">
           <input
             value={text}
             type="text"
-            className="p-3 border-2 w-full"
+            className="w-full border-2 p-3"
             placeholder={t("Home.HomeSearchCard.placeholder")}
             onChange={handleOnChange}
             onKeyDown={handleOnKeyDown}
           />
         </div>
-        <div className="w-1/5 md:w-fit flex items-center justify-center">
+        <div className="flex w-1/5 items-center justify-center md:w-fit">
           <Button icon={<SearchIcon />} onClick={sendText}></Button>
         </div>
       </div>

@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useCart from "../../../hooks/useCart";
 import { IProcessItem } from "../../../interface/Interface";
-import Button from "../../General/Button";
 import { useQueryClient } from "@tanstack/react-query";
 import CartItem from "./CartItem";
 import { useTranslation } from "react-i18next";
 import { TError } from "../../../interface/types";
-import ErrorView from "../../General/ErrorView";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import LoadingSuspense from "../../General/LoadingSuspense";
+import { LoadingSuspense } from "@component-library/Loading";
+import { ErrorView } from "@component-library/Error";
+import { Button } from "@component-library/Button";
 
 interface Props {}
 
@@ -78,11 +78,11 @@ const Cart: React.FC<Props> = (props) => {
 
   return (
     <LoadingSuspense query={cartQuery}>
-      <div className="flex flex-col items-center gap-5 w-full">
-        <h1 className="text-center p-2 bg-white w-full">
+      <div className="flex w-full flex-col items-center gap-5">
+        <h1 className="w-full bg-white p-2 text-center">
           {t("AfterProcess.Cart.Cart.header")}
         </h1>
-        <section className="flex flex-col gap-5 items-center justify-start w-full">
+        <section className="flex w-full flex-col items-center justify-start gap-5">
           {cart.length > 0 ? (
             cart.map((process: IProcessItem, index: number) => (
               <CartItem
@@ -93,7 +93,7 @@ const Cart: React.FC<Props> = (props) => {
               />
             ))
           ) : (
-            <h2 className="text-center p-2 bg-white w-full">
+            <h2 className="w-full bg-white p-2 text-center">
               {t("AfterProcess.Cart.Cart.noItems")}
             </h2>
           )}
@@ -104,7 +104,7 @@ const Cart: React.FC<Props> = (props) => {
             itemName={t("AfterProcess.Cart.Cart.item", { count: errorCount })}
           />
         ) : null}
-        <section className="w-full text-white flex flex-col gap-5 md:flex-row justify-start items-center md:justify-center">
+        <section className="flex w-full flex-col items-center justify-start gap-5 text-white md:flex-row md:justify-center">
           <Button onClick={handleOnClickEdit} icon={<EditIcon />}>
             {t("AfterProcess.Cart.Cart.edit")}
           </Button>

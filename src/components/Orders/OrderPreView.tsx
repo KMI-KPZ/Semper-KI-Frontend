@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { EOrderState } from "../../interface/enums";
 import { IOrder, IOrderEvent } from "../../interface/Interface";
 import { getModelURI } from "../../services/utils";
-import Badge from "../General/Badge";
+import { Badge } from "@component-library/Badge";
 import EmailIcon from "@mui/icons-material/Email";
 import FactoryIcon from "@mui/icons-material/Factory";
 interface Props {
@@ -16,7 +16,7 @@ const OrderPreView: React.FC<Props> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <div className="relative flex flex-col w-60 gap-2 rounded-lg border-2 items-center overflow-clip">
+    <div className="relative flex w-60 flex-col items-center gap-2 overflow-clip rounded-lg border-2">
       {orderEvent !== undefined ? (
         <div className="absolute right-4 top-3 flex flex-row justify-end gap-3">
           {orderEvent.messages !== undefined && orderEvent.messages > 0 ? (

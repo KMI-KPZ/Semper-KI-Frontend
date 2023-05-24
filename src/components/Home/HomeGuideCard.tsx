@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
 import { EUserType } from "../../interface/enums";
 import { useTranslation } from "react-i18next";
-import Button from "../General/Button";
+import { Button } from "../../../component-library";
 
 interface Props {
   className?: string;
@@ -18,27 +18,27 @@ const HomeGuideCard: React.FC<Props> = (props) => {
   if (userType === EUserType.manufacturer)
     return (
       <div
-        className={`${additionalClassNames}  p-3 flex flex-col justify-between items-center gap-3`}
+        className={`${additionalClassNames}  flex flex-col items-center justify-between gap-3 p-3`}
       >
-        <div className="flex flex-col justify-start items-center gap-3 w-full">
+        <div className="flex w-full flex-col items-center justify-start gap-3">
           <h2>{t("Home.HomeGuideCard.header")}</h2>
-          <div className="border-t-2 w-full" />
-          <div className="flex flex-col gap-1 items-start justify-center w-full  ">
+          <div className="w-full border-t-2" />
+          <div className="flex w-full flex-col items-start justify-center gap-1  ">
             <Link
               to="/guide"
-              className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+              className={`w-full px-3 py-1 duration-300 hover:bg-türkis-300 md:px-3 md:py-2`}
             >
               {`>`} {t("Home.HomeGuideCard.service.provide-produce")}
             </Link>
             <Link
               to="/guide"
-              className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+              className={`w-full px-3 py-1 duration-300 hover:bg-türkis-300 md:px-3 md:py-2`}
             >
               {`>`} {t("Home.HomeGuideCard.service.provide-design")}
             </Link>
             <Link
               to="/guide"
-              className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+              className={`w-full px-3 py-1 duration-300 hover:bg-türkis-300 md:px-3 md:py-2`}
             >
               {`>`} {t("Home.HomeGuideCard.service.provide-accompany")}
             </Link>
@@ -51,54 +51,54 @@ const HomeGuideCard: React.FC<Props> = (props) => {
   if (userType === EUserType.client)
     return (
       <div
-        className={`${additionalClassNames}  p-3 flex flex-col justify-between items-center gap-3`}
+        className={`${additionalClassNames}  flex flex-col items-center justify-between gap-3 p-3`}
       >
-        <div className="flex flex-col justify-start items-center gap-3 w-full">
+        <div className="flex w-full flex-col items-center justify-start gap-3">
           <h2>{t("Home.HomeGuideCard.header")}</h2>
-          <div className="border-t-2 w-full" />
-          <div className="flex flex-col items-start justify-around gap-5 w-full">
-            <div className="flex flex-col items-center justify-start gap-2 w-full">
+          <div className="w-full border-t-2" />
+          <div className="flex w-full flex-col items-start justify-around gap-5">
+            <div className="flex w-full flex-col items-center justify-start gap-2">
               <h3>{t("Home.HomeGuideCard.information.header")}</h3>
-              <div className="flex flex-col gap-1 items-start justify-center w-full">
+              <div className="flex w-full flex-col items-start justify-center gap-1">
                 <Link
                   to="/guide"
-                  className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+                  className={`w-full px-3 py-1 duration-300 hover:bg-türkis-300 md:px-3 md:py-2`}
                 >
                   {`>`} {t("Home.HomeGuideCard.information.beginner")}
                 </Link>
                 <Link
                   to="/guide"
-                  className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+                  className={`w-full px-3 py-1 duration-300 hover:bg-türkis-300 md:px-3 md:py-2`}
                 >
                   {`>`} {t("Home.HomeGuideCard.information.advanced")}
                 </Link>
                 <Link
                   to="/guide"
-                  className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+                  className={`w-full px-3 py-1 duration-300 hover:bg-türkis-300 md:px-3 md:py-2`}
                 >
                   {`>`} {t("Home.HomeGuideCard.information.expert")}
                 </Link>
               </div>
             </div>
             <div className="w-full border-t-2 " />
-            <div className="flex flex-col items-center justify-start gap-2 w-full">
+            <div className="flex w-full flex-col items-center justify-start gap-2">
               <h3>{t("Home.HomeGuideCard.service.header")}</h3>
-              <div className="flex flex-col gap-1 items-start justify-center w-full">
+              <div className="flex w-full flex-col items-start justify-center gap-1">
                 <Link
                   to="/guide"
-                  className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+                  className={`w-full px-3 py-1 duration-300 hover:bg-türkis-300 md:px-3 md:py-2`}
                 >
                   {`>`} {t("Home.HomeGuideCard.service.use-produce")}
                 </Link>
                 <Link
                   to="/guide"
-                  className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+                  className={`w-full px-3 py-1 duration-300 hover:bg-türkis-300 md:px-3 md:py-2`}
                 >
                   {`>`} {t("Home.HomeGuideCard.service.use-design")}
                 </Link>
                 <Link
                   to="/guide"
-                  className={`py-1 px-3 md:py-2 md:px-3 hover:bg-türkis-300 duration-300 w-full`}
+                  className={`w-full px-3 py-1 duration-300 hover:bg-türkis-300 md:px-3 md:py-2`}
                 >
                   {`>`} {t("Home.HomeGuideCard.service.use-accompany")}
                 </Link>
@@ -113,7 +113,7 @@ const HomeGuideCard: React.FC<Props> = (props) => {
   return (
     <Link
       to="/guide"
-      className={`${additionalClassNames}  p-3 flex flex-col justify-center items-center gap-3 hover:bg-türkis-300 duration-300`}
+      className={`${additionalClassNames}  flex flex-col items-center justify-center gap-3 p-3 duration-300 hover:bg-türkis-300`}
     >
       <PsychologyAltIcon fontSize="large" />
       <h2>{t("Home.HomeGuideCard.header")}</h2>

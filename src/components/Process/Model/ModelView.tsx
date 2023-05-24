@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { IModel } from "../../../interface/Interface";
 import { getModelURI } from "../../../services/utils";
-import Button from "../../General/Button";
+import { Button } from "@component-library/Button";
 
 interface Props {
   model: IModel;
@@ -26,7 +26,7 @@ const ModelView: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex flex-col gap-5 items-center justify-start bg-white h-fit w-full p-5">
+    <div className="flex h-fit w-full flex-col items-center justify-start gap-5 bg-white p-5">
       <h2 className="">{model.title}</h2>
       <img className="w-full max-w-xs" src={getModelURI(model)} alt="Model" />
       <div className="model-view-tags">

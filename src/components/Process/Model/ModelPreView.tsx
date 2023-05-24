@@ -2,7 +2,7 @@ import React from "react";
 import { IModel } from "../../../interface/Interface";
 import CloseIcon from "@mui/icons-material/Close";
 import { getModelURI } from "../../../services/utils";
-import Button from "../../General/Button";
+import { Button } from "@component-library/Button";
 import { useTranslation } from "react-i18next";
 
 interface Props {
@@ -23,10 +23,10 @@ export const ModelPreView: React.FC<Props> = (props) => {
     selectModel(model);
   };
   return (
-    <div className="flex flex-col gap-5 items-center justify-start bg-white h-screen w-screen xl:w-fit xl:max-h-[90vh] overflow-x-hidden overflow-y-auto xl:min-w-[700px]">
-      <div className="xl:hidden flex flex-row-reverse w-full">
+    <div className="flex h-screen w-screen flex-col items-center justify-start gap-5 overflow-y-auto overflow-x-hidden bg-white xl:max-h-[90vh] xl:w-fit xl:min-w-[700px]">
+      <div className="flex w-full flex-row-reverse xl:hidden">
         <div
-          className="hover:bg-gray-300 hover:cursor-pointer p-3"
+          className="p-3 hover:cursor-pointer hover:bg-gray-300"
           onClick={closeModelView}
         >
           <CloseIcon fontSize="large" />

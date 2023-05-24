@@ -4,10 +4,9 @@ import useCheckout, { IRequestState } from "../../../hooks/useCheckout";
 import CheckoutItem from "./CheckoutItem";
 import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
-import Button from "../../General/Button";
 import { useTranslation } from "react-i18next";
-import LoadingSuspense from "../../General/LoadingSuspense";
-import LoadingAnimation from "../../General/LoadingAnimation";
+import { Button } from "@component-library/Button";
+import { LoadingAnimation, LoadingSuspense } from "@component-library/Loading";
 
 interface Props {}
 interface State {
@@ -145,7 +144,7 @@ const Checkout: React.FC<Props> = (props) => {
   };
 
   const renderCheckButtons = () => (
-    <div className="flex flex-col gap-3 md:flex-row w-full">
+    <div className="flex w-full flex-col gap-3 md:flex-row">
       <Button
         onClick={handleOnClickPrintable}
         size="full"
@@ -166,7 +165,7 @@ const Checkout: React.FC<Props> = (props) => {
     </div>
   );
   const renderLoadingAnimation = () => (
-    <div className="flex flex-col justify-center items-center bg-white w-full h-full min-h-[500px]">
+    <div className="flex h-full min-h-[500px] w-full flex-col items-center justify-center bg-white">
       <LoadingAnimation color="black" />
     </div>
   );
@@ -193,9 +192,9 @@ const Checkout: React.FC<Props> = (props) => {
       errorList.push("Bitte alle berechnungen durchführen!");
 
     return errorList.length > 0 ? (
-      <div className="bg-white w-full p-5 flex flex-col gap-5 justify-center items-center">
+      <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
         {errorList.map((error, index) => (
-          <h2 key={index} className="text-red-400 text-center">
+          <h2 key={index} className="text-center text-red-400">
             {error}
           </h2>
         ))}
@@ -204,7 +203,7 @@ const Checkout: React.FC<Props> = (props) => {
   };
   const renderOrderSendSuccesfull = () => {
     return (
-      <div className="bg-white w-full p-5 flex flex-col gap-5 justify-center items-center">
+      <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
         <h2>{t("AfterProcess.Checkout.Checkout.success.send")}</h2>
         <h3>{t("AfterProcess.Checkout.Checkout.success.redirect")}</h3>
       </div>
@@ -213,12 +212,12 @@ const Checkout: React.FC<Props> = (props) => {
 
   return (
     <LoadingSuspense query={cartQuery}>
-      <div className="flex flex-col items-center gap-5 w-full">
+      <div className="flex w-full flex-col items-center gap-5">
         {order.loading === false && orderSendSuccesfull === true ? (
           renderOrderSendSuccesfull()
         ) : (
-          <div className="bg-white w-full p-5 flex flex-col gap-5 justify-start items-center">
-            <h1 className="text-center p-2 w-full">
+          <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
+            <h1 className="w-full p-2 text-center">
               {t("AfterProcess.Checkout.Checkout.title")}
             </h1>
             {renderCheckButtons()}
@@ -238,8 +237,8 @@ const Checkout: React.FC<Props> = (props) => {
         {order.loading === true ? renderLoadingAnimation() : null}
         {order.loading === false && orderSendSuccesfull === false ? (
           <div
-            className="flex flex-col gap-y-3 justify-center items-center
-      sm:flex-row sm:flex-wrap sm:justify-between sm:items-start w-full"
+            className="flex w-full flex-col items-center justify-center
+      gap-y-3 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between"
           >
             {cart.length > 0 ? (
               cart.map((item, index) => (

@@ -4,7 +4,7 @@ import {
   IOrderCollectionEvent,
   IOrderEvent,
 } from "../../interface/Interface";
-import Button from "../General/Button";
+import { Button } from "@component-library/Button";
 import OrderView from "./OrderView";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
@@ -81,7 +81,7 @@ const OrderCollection: React.FC<Props> = (props) => {
   const renderButtons = () => {
     if (userType === EUserType.client)
       return (
-        <div className="flex flex-col md:flex-row items-center justify-center w-full gap-5">
+        <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Button
             size="small"
             icon={<CancelIcon />}
@@ -100,7 +100,7 @@ const OrderCollection: React.FC<Props> = (props) => {
       );
     if (userType === EUserType.manufacturer)
       return (
-        <div className="flex flex-col md:flex-row items-center justify-center w-full gap-5">
+        <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Button
             size="small"
             icon={<CancelIcon />}
@@ -142,8 +142,8 @@ const OrderCollection: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex flex-col justify-start items-start bg-white w-full gap-5 p-5">
-      <div className="flex flex-col md:flex-row w-full gap-5 items-start md:items-center justify-start md:justify-between">
+    <div className="flex w-full flex-col items-start justify-start gap-5 bg-white p-5">
+      <div className="flex w-full flex-col items-start justify-start gap-5 md:flex-row md:items-center md:justify-between">
         <h2 className="break-words">
           {t("Orders.OrderCollection.id")}: {orderCollection.id}
         </h2>
@@ -177,7 +177,7 @@ const OrderCollection: React.FC<Props> = (props) => {
           {renderButtons()}
         </>
       ) : (
-        <div className="flex flex-col md:flex-row gap-5 justify-start items-start">
+        <div className="flex flex-col items-start justify-start gap-5 md:flex-row">
           {orderCollection.orders.map((order, index) => (
             <OrderPreView
               key={index}
@@ -187,7 +187,7 @@ const OrderCollection: React.FC<Props> = (props) => {
           ))}
         </div>
       )}
-      <div className="flex items-center justify-center w-full">
+      <div className="flex w-full items-center justify-center">
         <Button
           onClick={handleOnClickButton}
           icon={isOpen === true ? <ExpandLessIcon /> : <ExpandMoreIcon />}

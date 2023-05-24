@@ -4,8 +4,8 @@ import Catalog from "./Catalog";
 import { IProcessState } from "../ProcessView";
 import { IFilterItem } from "../Filter/Interface";
 import { usePostProcessing } from "../../../hooks/useProcessData";
-import LoadingSuspense from "../../General/LoadingSuspense";
 import { useTranslation } from "react-i18next";
+import { LoadingSuspense } from "@component-library/Loading";
 
 interface Props {
   processState: IProcessState;

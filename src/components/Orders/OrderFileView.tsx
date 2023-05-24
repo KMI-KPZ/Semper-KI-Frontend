@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IOrder } from "../../interface/Interface";
-import Button from "../General/Button";
+import { Button } from "@component-library/Button";
 import DownloadIcon from "@mui/icons-material/Download";
 import useOrderFile from "../../hooks/useOrderFiles";
 
@@ -46,15 +46,15 @@ const OrderFileView: React.FC<Props> = (props) => {
   const buttonQuery = fileName !== "" ? orderFileQuery : undefined;
 
   return (
-    <div className="flex flex-col w-full justify-center items-center gap-5">
+    <div className="flex w-full flex-col items-center justify-center gap-5">
       <h3 className="">{t("Orders.OrderFileView.header")}</h3>
       <div className="w-full border-b-2" />
-      <div className="flex flex-col md:flex-row gap-5 w-full items-center justify-center">
+      <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
         {order.files.length > 0
           ? order.files.map((_fileName, index) => (
               <div
                 key={index}
-                className="flex flex-col justify-center items-center bg-slate-100 p-2"
+                className="flex flex-col items-center justify-center bg-slate-100 p-2"
               >
                 <span className="p-2">{_fileName}</span>
                 <Button

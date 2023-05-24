@@ -15,7 +15,7 @@ import GuideOverview from "./Overview/GuideOverview";
 import useGuide from "../../hooks/useGuide";
 import { EGuideQuestionType } from "../../interface/enums";
 import useFilter from "../../hooks/useFilter";
-import LoadingAnimation from "../General/LoadingAnimation";
+import { LoadingAnimation } from "@component-library/Loading";
 
 const getQuestionByFilterId = (
   filterId: number,
@@ -172,7 +172,7 @@ const Guide: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="Guide flex flex-col xl:flex-row justify-center items-center gap-5 max-w-[80vw] max-h-[80vh]">
+    <div className="Guide flex max-h-[80vh] max-w-[80vw] flex-col items-center justify-center gap-5 xl:flex-row">
       {overview === true ? (
         <GuideOverview
           questions={questions}

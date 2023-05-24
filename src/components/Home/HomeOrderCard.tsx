@@ -2,16 +2,15 @@ import React, { useTransition } from "react";
 import { Link } from "react-router-dom";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import { EOrderState, EUserType } from "../../interface/enums";
-import Button from "../General/Button";
+import { Button } from "@component-library/Button";
 import { useTranslation } from "react-i18next";
 import AddIcon from "@mui/icons-material/Add";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import DeleteIcon from "@mui/icons-material/Delete";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import { useOrders } from "../../hooks/useOrders";
-import LoadingSuspense from "../General/LoadingSuspense";
-import Badge from "../General/Badge";
+import { Badge } from "@component-library/Badge";
+import { LoadingSuspense } from "@component-library/Loading";
 
 interface Props {
   className?: string;

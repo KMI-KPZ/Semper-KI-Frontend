@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { EUserType } from "../../interface/enums";
-import UserSwitch from "../General/UserSwitch";
+import { UserSwitch } from "@component-library/Input";
 
 interface Props {
   className?: string;
@@ -35,25 +35,25 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
           >
             <Link
               to="/portfolio?name=use-information"
-              className={`py-1 px-3 duration-300 hover:bg-türkis-300`}
+              className={`px-3 py-1 duration-300 hover:bg-türkis-300`}
             >
               {`>`} {t("Home.HomePortfolioCard.client.information")}
             </Link>
             <Link
               to="/portfolio?name=use-produce"
-              className={`py-1 px-3 duration-300 hover:bg-türkis-300 `}
+              className={`px-3 py-1 duration-300 hover:bg-türkis-300 `}
             >
               {`>`} {t("Home.HomePortfolioCard.client.produce")}
             </Link>
             <Link
               to="/portfolio?name=use-design"
-              className={`py-1 px-3 duration-300 hover:bg-türkis-300 `}
+              className={`px-3 py-1 duration-300 hover:bg-türkis-300 `}
             >
               {`>`} {t("Home.HomePortfolioCard.client.design")}
             </Link>
             <Link
               to="/portfolio?name=use-accompany"
-              className={`py-1 px-3 duration-300 hover:bg-türkis-300 `}
+              className={`px-3 py-1 duration-300 hover:bg-türkis-300 `}
             >
               {`>`} {t("Home.HomePortfolioCard.client.accompany")}
             </Link>
@@ -65,19 +65,19 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
           >
             <Link
               to="/portfolio?name=provide-produce"
-              className={`py-1 px-3 duration-300 hover:bg-türkis-300 `}
+              className={`px-3 py-1 duration-300 hover:bg-türkis-300 `}
             >
               {`>`} {t("Home.HomePortfolioCard.contractor.produce")}
             </Link>
             <Link
               to="/portfolio?name=provide-design"
-              className={`py-1 px-3 duration-300 hover:bg-türkis-300 `}
+              className={`px-3 py-1 duration-300 hover:bg-türkis-300 `}
             >
               {`>`} {t("Home.HomePortfolioCard.contractor.design")}
             </Link>
             <Link
               to="/portfolio?name=provide-accompany"
-              className={`py-1 px-3 duration-300 hover:bg-türkis-300 `}
+              className={`px-3 py-1 duration-300 hover:bg-türkis-300 `}
             >
               {`>`} {t("Home.HomePortfolioCard.contractor.accompany")}
             </Link>

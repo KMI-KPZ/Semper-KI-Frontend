@@ -5,10 +5,10 @@ import {
   IOrderCollectionEvent,
 } from "../../interface/Interface";
 import { useOrders } from "../../hooks/useOrders";
-import LoadingSuspense from "../General/LoadingSuspense";
 import OrderCollection from "./OrderCollection";
 import { EUserType } from "../../interface/enums";
 import { AppContext } from "../App/App";
+import { LoadingSuspense } from "@component-library/Loading";
 
 interface Props {
   userType: EUserType;
@@ -48,8 +48,8 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
 
   return (
     <LoadingSuspense query={ordersQuery}>
-      <div className="flex flex-col items-center w-full gap-5 overflow-x-auto overflow-y-hidden p-3">
-        <h1 className="bg-white w-full py-3 text-center">
+      <div className="flex w-full flex-col items-center gap-5 overflow-x-auto overflow-y-hidden p-3">
+        <h1 className="w-full bg-white py-3 text-center">
           {t(
             userType === EUserType.client
               ? "Orders.OrderCollectionOverview.headline.client"
@@ -57,7 +57,7 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
           )}
         </h1>
         {ordersQuery.data !== undefined ? (
-          <ul className="w-full gap-5 flex flex-col">
+          <ul className="flex w-full flex-col gap-5">
             {ordersQuery.data.length > 0 ? (
               ordersQuery.data.map(
                 (orderCollection: IOrderCollection, index: number) => (
@@ -75,7 +75,7 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
                 )
               )
             ) : (
-              <li className="w-full text-center p-3">
+              <li className="w-full p-3 text-center">
                 {t("Orders.OrderCollectionOverview.empty")}
               </li>
             )}

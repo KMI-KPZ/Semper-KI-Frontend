@@ -3,7 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { IPostProcessing } from "../../../interface/Interface";
 import { EPostProcessingOptionType } from "../../../interface/enums";
 import ItemCard from "./ItemCard";
-import Button from "../../General/Button";
+import { Button } from "@component-library/Button";
 import { useTranslation } from "react-i18next";
 
 interface Props<Item> {
@@ -48,10 +48,10 @@ const ItemView = <Item extends IPostProcessing>(props: Props<Item>) => {
   };
 
   return (
-    <div className="flex flex-col gap-5 items-center justify-start bg-white h-screen w-screen xl:w-fit xl:max-h-[90vh] overflow-x-hidden+">
-      <div className="xl:hidden flex flex-row-reverse w-full">
+    <div className="overflow-x-hidden+ flex h-screen w-screen flex-col items-center justify-start gap-5 bg-white xl:max-h-[90vh] xl:w-fit">
+      <div className="flex w-full flex-row-reverse xl:hidden">
         <div
-          className="hover:bg-gray-300 hover:cursor-pointer p-3"
+          className="p-3 hover:cursor-pointer hover:bg-gray-300"
           onClick={closeItemView}
         >
           <CloseIcon fontSize="large" />

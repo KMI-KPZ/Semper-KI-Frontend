@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { IProcessItem } from "../../../interface/Interface";
 import { getModelURI } from "../../../services/utils";
 import { AppContext } from "../../App/App";
-import Button from "../../General/Button";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ErrorIcon from "@mui/icons-material/Error";
 import { useTranslation } from "react-i18next";
 import ModelPlaceholderUrl from "../../../assets/images/model_placeholder.png";
+import { Button } from "@component-library/Button";
 
 interface Props {
   process: IProcessItem;

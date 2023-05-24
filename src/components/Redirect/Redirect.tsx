@@ -1,6 +1,6 @@
+import { LoadingAnimation } from "@component-library/Loading";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import LoadingAnimation from "../General/LoadingAnimation";
 
 interface Props {
   link: string;
@@ -32,7 +32,7 @@ const Redirect: React.FC<Props> = (props) => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-5 justify-center items-center">
+    <div className="flex flex-col items-center justify-center gap-5">
       {text}
       <LoadingAnimation />
     </div>

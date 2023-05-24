@@ -8,7 +8,7 @@ import { MaterialPreView } from "./MaterialPreView";
 import { useTranslation } from "react-i18next";
 import { IFilterItem } from "../Filter/Interface";
 import { useMaterialData } from "../../../hooks/useProcessData";
-import LoadingSuspense from "../../General/LoadingSuspense";
+import { LoadingSuspense } from "@component-library/Loading";
 
 interface Props {
   processState: IProcessState;

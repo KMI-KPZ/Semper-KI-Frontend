@@ -1,7 +1,7 @@
 import React from "react";
 import { IMaterial } from "../../../interface/Interface";
 import CloseIcon from "@mui/icons-material/Close";
-import Button from "../../General/Button";
+import { Button } from "@component-library/Button";
 
 interface Props {
   material: IMaterial;
@@ -12,10 +12,10 @@ interface Props {
 export const MaterialPreView: React.FC<Props> = (props) => {
   const { closeMaterialView, material, selectMaterial } = props;
   return (
-    <div className="flex flex-col gap-5 items-center justify-start bg-white h-screen w-screen xl:w-fit xl:max-h-[90vh] overflow-x-hidden overflow-y-auto xl:min-w-[700px]">
-      <div className="xl:hidden flex flex-row-reverse w-full">
+    <div className="flex h-screen w-screen flex-col items-center justify-start gap-5 overflow-y-auto overflow-x-hidden bg-white xl:max-h-[90vh] xl:w-fit xl:min-w-[700px]">
+      <div className="flex w-full flex-row-reverse xl:hidden">
         <div
-          className="hover:bg-gray-300 hover:cursor-pointer p-3"
+          className="p-3 hover:cursor-pointer hover:bg-gray-300"
           onClick={closeMaterialView}
         >
           <CloseIcon fontSize="large" />

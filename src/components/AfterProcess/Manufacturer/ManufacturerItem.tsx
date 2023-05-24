@@ -1,7 +1,7 @@
 import React from "react";
 import useManufacturer from "../../../hooks/useManufacturer";
 import { IProcessItem } from "../../../interface/Interface";
-import LoadingSuspense from "../../General/LoadingSuspense";
+import { LoadingSuspense } from "../../General/LoadingSuspense";
 import { getModelURI } from "../../../services/utils";
 import { useTranslation } from "react-i18next";
 
@@ -27,23 +27,23 @@ const ManufacturerItem: React.FC<Props> = (props) => {
 
   return (
     <LoadingSuspense query={manufacturerQuery}>
-      <div className="flex flex-col items-center gap-5 w-full p-2 justify-between bg-white">
+      <div className="flex w-full flex-col items-center justify-between gap-5 bg-white p-2">
         <h2>{processItem.model?.title}</h2>
-        <div className="flex flex-col md:flex-row justify-around items-start w-full">
+        <div className="flex w-full flex-col items-start justify-around md:flex-row">
           <img
             src={getModelURI(processItem.model!)}
             className="h-full max-w-xs"
           />
-          <div className="flex flex-row md:flex-col gap-5 items-center justify-start">
+          <div className="flex flex-row items-center justify-start gap-5 md:flex-col">
             <h3>{t("AfterProcess.Manufacturer.ManufacturerItem.header")}</h3>
             {manufacturerQuery.data !== undefined &&
               manufacturerQuery.data.map((manufacturer, manufacturerIndex) => (
                 <div
-                  className={`flex flex-col sm:flex-row w-full md:w-fit p-5 gap-5
-            hover:cursor-pointer transition-all ease-in-out duration-300
+                  className={`flex w-full flex-col gap-5 p-5 transition-all duration-300
+            ease-in-out hover:cursor-pointer sm:flex-row md:w-fit
             ${
               manufacturer.id === manufacturerID
-                ? "shadow-inner bg-slate-50"
+                ? "bg-slate-50 shadow-inner"
                 : "shadow-md hover:bg-slate-50 hover:shadow-inner"
             } `}
                   key={manufacturerIndex}

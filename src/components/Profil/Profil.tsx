@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import useUser from "../../hooks/useUser";
 import { EUserType } from "../../interface/enums";
 import { IUser } from "../../interface/Interface";
-import Button from "../General/Button";
+import { Button } from "@component-library/Button";
 
 interface Props {
   user: IUser;

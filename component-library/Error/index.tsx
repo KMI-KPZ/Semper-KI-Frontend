@@ -1,20 +1,20 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { TError } from "../../interface/types";
+import { TError } from "../../src/interface/types";
 
 interface Props {
   errors: TError[];
   itemName: string;
 }
 
-const ErrorView: React.FC<Props> = (props) => {
+export const ErrorView: React.FC<Props> = (props) => {
   const { errors, itemName } = props;
   const { t } = useTranslation();
 
   return (
-    <div className="flex felx-col gap-3">
+    <div className="felx-col flex gap-3">
       {errors.map((error, index) => (
-        <h2 className="text-red-500 text-bold" key={index}>
+        <h2 className="text-bold text-red-500" key={index}>
           {t(`General.ErrorView.${error}`, {
             itemName,
           })}
@@ -23,5 +23,3 @@ const ErrorView: React.FC<Props> = (props) => {
     </div>
   );
 };
-
-export default ErrorView;

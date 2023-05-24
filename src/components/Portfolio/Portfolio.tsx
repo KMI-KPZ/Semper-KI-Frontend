@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import Button from "../General/Button";
+import { Button } from "@component-library/Button";
 import PortfolioItem from "./PortfolioItem";
 import { PortfolioItems } from "../../data/PortfolioItems";
 import { useSearchParams } from "react-router-dom";

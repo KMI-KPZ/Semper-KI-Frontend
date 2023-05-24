@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Button from "../General/Button";
+import { Button } from "@component-library/Button";
 
 interface Props {}
 
@@ -9,7 +9,7 @@ const Contact: React.FC<Props> = (props) => {
   const {} = props;
 
   return (
-    <div className="flex flex-col w-full gap-5 items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center gap-5">
       <h1>{t("Contact.Contact.header")}</h1>
       <h2>{t("Contact.Contact.title.name")}</h2>
       <input
@@ -25,7 +25,7 @@ const Contact: React.FC<Props> = (props) => {
       />
       <h2>{t("Contact.Contact.title.message")}</h2>
       <textarea
-        className="resize-y w-full max-w-lg p-2 max-h-96 min-h-[5rem] h-60"
+        className="h-60 max-h-96 min-h-[5rem] w-full max-w-lg resize-y p-2"
         placeholder={t("Contact.Contact.input.message")}
       />
 

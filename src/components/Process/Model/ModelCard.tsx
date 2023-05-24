@@ -1,6 +1,6 @@
 import { IModel } from "../../../interface/Interface";
 import React from "react";
-import Button from "../../General/Button";
+import { Button } from "@component-library/Button";
 import { useTranslation } from "react-i18next";
 
 interface Props {
@@ -30,9 +30,9 @@ export const ModelCard: React.FC<Props> = (props) => {
 
   return (
     <div
-      className={`flex justify-start items-center bg-white overflow-hidden hover:cursor-pointer hover:bg-gray-300 ${
+      className={`flex items-center justify-start overflow-hidden bg-white hover:cursor-pointer hover:bg-gray-300 ${
         grid === true
-          ? "flex-col basis-[48%] sm:basis-[32%] md:basis-[23.5%]"
+          ? "basis-[48%] flex-col sm:basis-[32%] md:basis-[23.5%]"
           : "w-full flex-row"
       }`}
       onClick={handleOnClickCard}
@@ -40,20 +40,20 @@ export const ModelCard: React.FC<Props> = (props) => {
       <img
         className={`object-cover ${
           grid === true
-            ? "min-w-full max-w-[200%] h-44"
-            : "w-44 max-h-44 min-h-full "
+            ? "h-44 min-w-full max-w-[200%]"
+            : "max-h-44 min-h-full w-44 "
         }`}
         src={model.URI}
         alt="Model"
       />
       <div
-        className={`flex justify-around md:justify-between items-center p-3 gap-2  h-full ${
+        className={`flex h-full items-center justify-around gap-2 p-3  md:justify-between ${
           grid === true ? "flex-col " : "w-full flex-row gap-5"
         }`}
       >
         <h2 className="">{model.title}</h2>
         <div
-          className={`hidden md:flex  flex-wrap gap-2 items-center justify-center ${
+          className={`hidden flex-wrap  items-center justify-center gap-2 md:flex ${
             grid === true ? "flex-row" : "flex-col"
           }`}
         >
@@ -64,7 +64,7 @@ export const ModelCard: React.FC<Props> = (props) => {
           ))}
         </div>
         {grid === false ? (
-          <div className="hidden md:flex flex-col gap-2 items-center justify-center">
+          <div className="hidden flex-col items-center justify-center gap-2 md:flex">
             <div>
               {t("Process.Model.ModelCard.license")}: {model.license}
             </div>

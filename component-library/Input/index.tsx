@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { EUserType } from "../../interface/enums";
+import { EUserType } from "../../src/interface/enums";
 import PersonIcon from "@mui/icons-material/Person";
 import FactoryIcon from "@mui/icons-material/Factory";
 
@@ -9,7 +9,7 @@ interface Props {
   onClick(userType: EUserType): void;
 }
 
-const UserSwitch: React.FC<Props> = (props) => {
+export const UserSwitch: React.FC<Props> = (props) => {
   const { onClick, userType } = props;
   const { t } = useTranslation();
 
@@ -25,7 +25,7 @@ const UserSwitch: React.FC<Props> = (props) => {
       onClick={handleOnClickSwitch}
     >
       <span
-        className={`flex flex-row items-center justify-center gap-2 py-1 px-3 duration-300
+        className={`flex flex-row items-center justify-center gap-2 px-3 py-1 duration-300
   ${
     userType === EUserType.client ? "bg-türkis-800 text-white" : "bg-türkis-300"
   }`}
@@ -39,7 +39,7 @@ const UserSwitch: React.FC<Props> = (props) => {
         }`}
       />
       <span
-        className={`flex flex-row items-center justify-center gap-2 py-1 px-3 duration-300
+        className={`flex flex-row items-center justify-center gap-2 px-3 py-1 duration-300
   ${
     userType === EUserType.client ? "bg-türkis-300" : "bg-türkis-800 text-white"
   }`}
@@ -50,5 +50,3 @@ const UserSwitch: React.FC<Props> = (props) => {
     </div>
   );
 };
-
-export default UserSwitch;

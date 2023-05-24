@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { INavigationItem } from "../../data/NavigationItems";
-import Badge from "../General/Badge";
+import { Badge } from "@component-library/Badge";
 import { ReactComponent as LogoIcon } from "../../assets/images/icons/Logo.svg";
 
 interface Props {

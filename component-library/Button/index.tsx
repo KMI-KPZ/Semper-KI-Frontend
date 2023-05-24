@@ -1,6 +1,5 @@
 import { DefinedUseQueryResult, UseQueryResult } from "@tanstack/react-query";
 import React, { ReactNode } from "react";
-import LoadingAnimation from "./LoadingAnimation";
 import LoopIcon from "@mui/icons-material/Loop";
 import { t } from "i18next";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +26,7 @@ type Icon = "front" | "back";
 type Size = "large" | "medium" | "small" | "xsmall" | "full";
 type Style = "primary" | "secondary";
 
-const Button = <T,>(props: Props<T>) => {
+export const Button = <T,>(props: Props<T>) => {
   const {
     active = true,
     icon,
@@ -102,10 +101,10 @@ const Button = <T,>(props: Props<T>) => {
     <a
       title={getTitle()}
       className={`
-      flex flex-row justify-center items-center
-      gap-3
-      py-3 px-5
-      transition duration-300 bezier
+      bezier flex flex-row items-center
+      justify-center
+      gap-3 px-5
+      py-3 transition duration-300
       ${getClassName()}`}
       onClick={handleOnClickButton}
       href={hrefText}
@@ -129,5 +128,3 @@ const Button = <T,>(props: Props<T>) => {
     </a>
   );
 };
-
-export default Button;

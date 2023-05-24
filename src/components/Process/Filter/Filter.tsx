@@ -6,7 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import FilterCard from "./FilterCard";
 import { IProgress } from "../../../interface/Interface";
 import { AppContext } from "../../App/App";
-import Button from "../../General/Button";
+import { Button } from "@component-library/Button";
 
 interface Props {
   filterOpen: boolean;
@@ -166,7 +166,7 @@ const Filter: React.FC<Props> = (props) => {
     <div
       className={`h-fit flex-col justify-between gap-10 bg-white p-5 2xl:flex ${
         filterOpen === true
-          ? "absolute top-0 left-0 right-0 flex h-fit w-screen flex-col justify-between gap-10 overflow-x-hidden overflow-y-scroll bg-white p-5"
+          ? "absolute left-0 right-0 top-0 flex h-fit w-screen flex-col justify-between gap-10 overflow-x-hidden overflow-y-scroll bg-white p-5"
           : "hidden"
       }`}
     >

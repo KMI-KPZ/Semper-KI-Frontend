@@ -5,12 +5,12 @@ import { ModelCard } from "./ModelCard";
 import PopUp from "../../PopUp/PopUp";
 import { ModelPreView } from "./ModelPreView";
 import ModelView from "./ModelView";
-import Button from "../../General/Button";
+import { Button } from "@component-library/Button";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useModelData } from "../../../hooks/useProcessData";
 import { IFilterItem } from "../Filter/Interface";
-import LoadingSuspense from "../../General/LoadingSuspense";
+import { LoadingSuspense } from "@component-library/Loading";
 
 interface Props {
   filters: IFilterItem[];

@@ -16,11 +16,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
         "@images/*": ["assets/images/*"],
-        "@icons/*": ["assets/images/icons/*"],
+        "@icons/*": ["assets/icons/*"],
+        "@component-library/*":["component-library/*"]
     },
   },
-  "include": ["src"]
+  "include": ["src", "assets", "component-library"]
 }

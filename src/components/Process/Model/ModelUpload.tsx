@@ -7,10 +7,9 @@ import { ReactComponent as DeleteIcon } from "../../../assets/images/icons/Delet
 import { useNavigate } from "react-router-dom";
 import useModelUpload from "../../../hooks/useModelUpload";
 import { IModel } from "../../../interface/Interface";
-import Button from "../../General/Button";
-import LoadingSuspense from "../../General/LoadingSuspense";
+import { Button } from "@component-library/Button";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-import LoadingAnimation from "../../General/LoadingAnimation";
+import { LoadingAnimation } from "@component-library/Loading";
 
 interface Props {
   setProgress(path: string): void;

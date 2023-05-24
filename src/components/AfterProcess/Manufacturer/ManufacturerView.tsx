@@ -3,11 +3,11 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import useCart from "../../../hooks/useCart";
 import { IProcessItem } from "../../../interface/Interface";
-import Button from "../../General/Button";
+import { Button } from "@component-library/Button";
 import ManufacturerItem from "./ManufacturerItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import LoadingSuspense from "../../General/LoadingSuspense";
+import { LoadingSuspense } from "@component-library/Loading";
 
 interface Props {}
 
@@ -82,14 +82,14 @@ const ManufacturerView: React.FC<Props> = (props) => {
 
   return (
     <LoadingSuspense query={cartQuery}>
-      <div className="flex flex-col items-center gap-5 w-full">
-        <div className="bg-white w-full p-5 flex flex-col gap-5 justify-start items-center">
-          <h1 className="text-center p-2 w-full">
+      <div className="flex w-full flex-col items-center gap-5">
+        <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
+          <h1 className="w-full p-2 text-center">
             {t("AfterProcess.Manufacturer.ManufacturerView.header")}
           </h1>
         </div>
         {checkError === true ? (
-          <div className="bg-white w-full p-5 flex flex-col gap-5 justify-start items-center">
+          <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
             <h2 className="text-red-500">
               {t(
                 "AfterProcess.Manufacturer.ManufacturerView.noManufacturerSelected"
@@ -97,7 +97,7 @@ const ManufacturerView: React.FC<Props> = (props) => {
             </h2>
           </div>
         ) : null}
-        <div className="w-full flex flex-col gap-5 justify-start items-center">
+        <div className="flex w-full flex-col items-center justify-start gap-5">
           {cart.length > 0 ? (
             cart.map((processItem, index) => (
               <ManufacturerItem

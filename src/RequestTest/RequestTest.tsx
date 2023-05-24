@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Button from "../components/General/Button";
+import { Button } from "@component-library/Button";
 import { useWebsocket } from "../hooks/useWebsocket";
 import { IUser } from "../interface/Interface";
 
@@ -43,15 +43,15 @@ export const RequestTest: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-5 justify-start items-center">
-      <div className="w-full bg-white p-5 gap-5 flex flex-col justify-center items-center">
+    <div className="flex w-full flex-col items-center justify-start gap-5">
+      <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
         {chat.length > 0 ? (
-          <div className="flex flex-col gap-1 items-center justify-center bg-slate-300 w-2/3 p-5">
+          <div className="flex w-2/3 flex-col items-center justify-center gap-1 bg-slate-300 p-5">
             <h2>Chat:</h2>
             {chat.map(({ send, data }, index) => (
               <div
                 key={index}
-                className={`flex flex-row w-full items-center ${
+                className={`flex w-full flex-row items-center ${
                   send ? "justify-end" : "justify-start"
                 }`}
               >
@@ -60,7 +60,7 @@ export const RequestTest: React.FC<Props> = (props) => {
             ))}
           </div>
         ) : null}
-        <div className="flex flex-row gap-5 justify-around items-center">
+        <div className="flex flex-row items-center justify-around gap-5">
           <h3>{state}</h3>
           <input
             value={inputMessage}

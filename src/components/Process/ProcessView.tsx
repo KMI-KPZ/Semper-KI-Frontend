@@ -20,7 +20,7 @@ import Header from "./Header/Header";
 import useCart from "../../hooks/useCart";
 import { checkForSelectedData } from "../../services/utils";
 import { useTranslation } from "react-i18next";
-import LoadingSuspense from "../General/LoadingSuspense";
+import { LoadingSuspense } from "@component-library/Loading";
 
 interface Props {
   selectedProgressItem?: { index: number; progress: string };
@@ -383,7 +383,7 @@ export const ProcessView: React.FC<Props> = (props) => {
       }}
     >
       <LoadingSuspense query={filtersQuery}>
-        <div className="relativ flex flex-col xl:flex-row gap-5 w-full">
+        <div className="relativ flex w-full flex-col gap-5 xl:flex-row">
           <Filter
             setFilterOpen={setFilterOpen}
             filterOpen={filterOpen}
@@ -392,7 +392,7 @@ export const ProcessView: React.FC<Props> = (props) => {
             guideAnswers={guideAnswers}
             progress={progress}
           />
-          <div className="flex flex-col gap-5 w-full ">
+          <div className="flex w-full flex-col gap-5 ">
             <Header />
             <Routes>
               <Route index element={<Navigate to="/process/model" />} />

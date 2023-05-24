@@ -4,7 +4,7 @@ import {
   IOrderCollection,
   IOrderEvent,
 } from "../../interface/Interface";
-import Button from "../General/Button";
+import { Button } from "@component-library/Button";
 import MailIcon from "@mui/icons-material/Mail";
 import PopUp from "../PopUp/PopUp";
 import { AppContext } from "../App/App";
@@ -19,7 +19,7 @@ import { EOrderState, EUserType } from "../../interface/enums";
 import { useTranslation } from "react-i18next";
 import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import Badge from "../General/Badge";
+import { Badge } from "@component-library/Badge";
 import OrderFileView from "./OrderFileView";
 
 interface Props {
@@ -102,7 +102,7 @@ const OrderView: React.FC<Props> = (props) => {
   const renderButtons = () => {
     if (userType === EUserType.client)
       return (
-        <div className="flex flex-col md:flex-row gap-3 w-full md:w-fit items-center justify-center">
+        <div className="flex w-full flex-col items-center justify-center gap-3 md:w-fit md:flex-row">
           <Button
             size="small"
             icon={<CancelIcon />}
@@ -121,7 +121,7 @@ const OrderView: React.FC<Props> = (props) => {
       );
     if (userType === EUserType.manufacturer)
       return (
-        <div className="flex flex-col md:flex-row gap-3 w-full md:w-fit items-center justify-center">
+        <div className="flex w-full flex-col items-center justify-center gap-3 md:w-fit md:flex-row">
           <Button
             size="small"
             icon={<CancelIcon />}
@@ -147,13 +147,13 @@ const OrderView: React.FC<Props> = (props) => {
       );
   };
   return (
-    <div className="flex flex-col justify-start items-center md:items-start gap-3 border-2 w-full p-3">
-      <div className="flex flex-col md:flex-row justify-between w-full">
+    <div className="flex w-full flex-col items-center justify-start gap-3 border-2 p-3 md:items-start">
+      <div className="flex w-full flex-col justify-between md:flex-row">
         <h3 className="break-words">
           {t("Orders.OrderView.header")} {order.id}
         </h3>
         <h3 className="break-words">{order.item.title}</h3>
-        <div className="flex flex-col md:flex-row  gap-3 items-center justify-center">
+        <div className="flex flex-col items-center  justify-center gap-3 md:flex-row">
           {orderEvent !== undefined &&
           orderEvent.messages !== undefined &&
           orderEvent.messages > 0 ? (
@@ -182,7 +182,7 @@ const OrderView: React.FC<Props> = (props) => {
               icon={
                 <ExpandLessIcon
                   className={` ${
-                    menuOpen ? "md:rotate-90" : "md:-rotate-90 rotate-180"
+                    menuOpen ? "md:rotate-90" : "rotate-180 md:-rotate-90"
                   }`}
                 />
               }
@@ -196,18 +196,18 @@ const OrderView: React.FC<Props> = (props) => {
         updateStatus={updateStatus}
         userType={userType}
       />
-      <div className="flex flex-col md:flex-row gap-5 w-full items-center md:items-start justify-center md:justify-around p-5">
+      <div className="flex w-full flex-col items-center justify-center gap-5 p-5 md:flex-row md:items-start md:justify-around">
         <img
           src={getModelURI(order.item.model!)}
           className="object-fit w-2/12"
         />
-        <div className="flex flex-col items-center justify-start p-3 w-1/4">
+        <div className="flex w-1/4 flex-col items-center justify-start p-3">
           <h3>{order.item.model?.title}</h3>
         </div>
-        <div className="flex flex-col items-center justify-start p-3 w-1/4">
+        <div className="flex w-1/4 flex-col items-center justify-start p-3">
           <h3>{order.item.material?.title}</h3>
         </div>
-        <div className="flex flex-col items-center justify-start p-3 w-1/4">
+        <div className="flex w-1/4 flex-col items-center justify-start p-3">
           <h3>{t("Orders.OrderView.postProcessing")}</h3>
           {order.item.postProcessings?.map((postProcessing, index) => (
             <span key={index}>{postProcessing.title}</span>

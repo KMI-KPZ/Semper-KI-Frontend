@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@component-library/Button";
 import { useTranslation } from "react-i18next";
-import { IModel } from "@/interface/Interface";
+import { IModel } from "..";
 
 interface Props {
   model: IModel;

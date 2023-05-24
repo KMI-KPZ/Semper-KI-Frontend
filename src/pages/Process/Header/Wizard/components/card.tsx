@@ -1,8 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { EProcessStatusType } from "../../../../../interface/enums";
-import StatusIcon from "../../StatusIcon";
+import { EProcessStatusType } from "../..";
+import StatusIcon from "../../components/statusIcon";
 
 interface Props {
   title: string;

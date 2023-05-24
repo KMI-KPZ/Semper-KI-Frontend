@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { IOrderCollectionEvent } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
+import { OrderCollectionEvent } from "./useUser";
 
 interface Props {
   isLoggedIn: boolean;
 }
 
 interface ReturnProps {
-  initialMissedEvents: IOrderCollectionEvent[];
+  initialMissedEvents: OrderCollectionEvent[];
   status: "error" | "success" | "loading";
   error: Error | null;
 }
@@ -16,7 +16,7 @@ const useMissedEvent = (props: Props): ReturnProps => {
   const { isLoggedIn } = props;
   const { axiosCustom } = useCustomAxios();
 
-  const { data, status, error } = useQuery<IOrderCollectionEvent[], Error>({
+  const { data, status, error } = useQuery<OrderCollectionEvent[], Error>({
     queryKey: ["missedEvents"],
     queryFn: async () =>
       axiosCustom

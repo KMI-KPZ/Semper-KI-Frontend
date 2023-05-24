@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { IModel } from "../../../interface/Interface";
 import { IProcessState } from "..";
 import { ModelCard } from "./components/card";
 import { Button } from "@component-library/Button";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useModelData } from "../../../hooks/useProcessData";
+import { useModelData } from "../hooks/useProcessData";
 import { LoadingSuspense } from "@component-library/Loading";
 import PopUp from "@/components/PopUp";
 import { IFilterItem } from "../Filter";
@@ -24,6 +23,22 @@ interface Props {
 interface State {
   popUp: boolean;
   model: IModel | undefined;
+}
+
+export interface IModel {
+  id: string;
+  title: string;
+  tags: string[];
+  date: string;
+  license: string;
+  certificate: string[];
+  URI: string;
+  createdBy: string;
+}
+
+export enum EModelType {
+  "kiss",
+  "user",
 }
 
 export const ModelCatalog: React.FC<Props> = (props) => {

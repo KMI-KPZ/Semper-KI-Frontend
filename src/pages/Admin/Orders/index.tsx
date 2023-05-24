@@ -1,3 +1,5 @@
+import { OrderState } from "@/pages/Orders";
+import { IOrder } from "@/pages/Orders/hooks/useOrders";
 import {
   Paper,
   Table,
@@ -9,8 +11,6 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { EOrderState } from "../../../interface/enums";
-import { IOrder } from "../../../interface/Interface";
 
 interface Props {}
 
@@ -44,7 +44,7 @@ const AdminOrders: React.FC<Props> = (props) => {
                   {/* {order.date.toLocaleDateString()} */}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {EOrderState[order.orderState]}
+                  {OrderState[order.orderState]}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {/* {order.processList.length} */}

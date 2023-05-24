@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { IProcessItem } from "../../../../interface/Interface";
-import { getModelURI } from "../../../../services/utils";
-import { AppContext } from "../../../App";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ErrorIcon from "@mui/icons-material/Error";
 import { useTranslation } from "react-i18next";
 import ModelPlaceholderUrl from "@images/model_placeholder.png";
 import { Button } from "@component-library/Button";
+import { IProcessItem } from "../..";
+import { AppContext } from "@/pages/App";
+import { getModelURI } from "@/services/utils";
 
 interface Props {
   process: IProcessItem;

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { EUserType } from "../../src/interface/enums";
 import PersonIcon from "@mui/icons-material/Person";
 import FactoryIcon from "@mui/icons-material/Factory";
+import { UserType } from "@/hooks/useUser";
 
 interface Props {
-  userType: EUserType;
-  onClick(userType: EUserType): void;
+  userType: UserType;
+  onClick(userType: UserType): void;
 }
 
 export const UserSwitch: React.FC<Props> = (props) => {
@@ -15,7 +15,7 @@ export const UserSwitch: React.FC<Props> = (props) => {
 
   const handleOnClickSwitch = () => {
     onClick(
-      userType === EUserType.client ? EUserType.manufacturer : EUserType.client
+      userType === UserType.client ? UserType.manufacturer : UserType.client
     );
   };
 
@@ -27,7 +27,7 @@ export const UserSwitch: React.FC<Props> = (props) => {
       <span
         className={`flex flex-row items-center justify-center gap-2 px-3 py-1 duration-300
   ${
-    userType === EUserType.client ? "bg-türkis-800 text-white" : "bg-türkis-300"
+    userType === UserType.client ? "bg-türkis-800 text-white" : "bg-türkis-300"
   }`}
       >
         <PersonIcon />
@@ -35,13 +35,13 @@ export const UserSwitch: React.FC<Props> = (props) => {
       </span>
       <div
         className={`absolute ${
-          userType === EUserType.client ? "left-0" : "right-0"
+          userType === UserType.client ? "left-0" : "right-0"
         }`}
       />
       <span
         className={`flex flex-row items-center justify-center gap-2 px-3 py-1 duration-300
   ${
-    userType === EUserType.client ? "bg-türkis-300" : "bg-türkis-800 text-white"
+    userType === UserType.client ? "bg-türkis-300" : "bg-türkis-800 text-white"
   }`}
       >
         <FactoryIcon />

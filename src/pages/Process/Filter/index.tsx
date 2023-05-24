@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { IProgress } from "../../../interface/Interface";
-import { AppContext } from "../../App";
 import { Button } from "@component-library/Button";
 import FilterCard from "./components/card";
+import { IProgress } from "..";
+import { AppContext } from "@/pages/App";
 
 interface Props {
   filterOpen: boolean;

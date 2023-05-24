@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "@component-library/Button";
-import { useWebsocket } from "../../hooks/useWebsocket";
-import { IUser } from "../../interface/Interface";
+import { useWebsocket } from "@/hooks/useWebsocket";
+import { User } from "@/hooks/useUser";
 
 interface Props {
-  user: IUser | undefined;
+  user: User | undefined;
 }
 export const RequestTest: React.FC<Props> = (props) => {
   const { user } = props;

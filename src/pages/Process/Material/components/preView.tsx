@@ -1,7 +1,7 @@
 import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { Button } from "@component-library/Button";
-import { IMaterial } from "@/interface/Interface";
+import { IMaterial } from "..";
 
 interface Props {
   material: IMaterial;

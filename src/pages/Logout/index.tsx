@@ -1,6 +1,6 @@
 import { LoadingSuspense } from "@component-library/Loading";
 import { useTranslation } from "react-i18next";
-import { useLogout } from "../../hooks/useLogin";
+import { useLogout } from "../Login/hooks/useLogin";
 
 const Logout = () => {
   const { t } = useTranslation();

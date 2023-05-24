@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import useCart from "../../../hooks/useCart";
-import { IProcessItem } from "../../../interface/Interface";
 import { Button } from "@component-library/Button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { LoadingSuspense } from "@component-library/Loading";
 import ManufacturerItem from "./components/item";
+import { IProcessItem } from "..";
+import useCart from "@/hooks/useCart";
 
 interface Props {}
 
 interface State {
   manufacturerIDs: string[];
   error: boolean;
+}
+
+export interface IManufacturer {
+  name: string;
+  id: string;
 }
 
 const ManufacturerView: React.FC<Props> = (props) => {

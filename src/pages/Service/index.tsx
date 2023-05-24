@@ -1,26 +1,26 @@
-import CardView, { CardGroupData, CardItemData } from "@/components/CardView";
+import CardView, { CardGroupType, CardItemType } from "@/components/CardView";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import ServiceView from "./components/view";
 
 import _ServiceCards from "./data/items.json";
-const ServiceCards = _ServiceCards as CardItemData[];
-const cardsUse: CardItemData[] = [
-  ...ServiceCards.map((card: CardItemData) => ({
+const ServiceCards = _ServiceCards as CardItemType[];
+const cardsUse: CardItemType[] = [
+  ...ServiceCards.map((card: CardItemType) => ({
     icon: card.icon,
     link: `/service/use/${card.link}`,
     title: card.title,
   })),
 ];
-const cardsProvide: CardItemData[] = [
-  ...ServiceCards.map((card: CardItemData) => ({
+const cardsProvide: CardItemType[] = [
+  ...ServiceCards.map((card: CardItemType) => ({
     icon: card.icon,
     link: `/service/provide/${card.link}`,
     title: card.title,
   })),
 ];
-const cardGoupsIndex: CardGroupData[] = [
+const cardGoupsIndex: CardGroupType[] = [
   {
     title: "use",
     cards: cardsUse,

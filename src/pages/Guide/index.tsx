@@ -1,4 +1,3 @@
-import { EGuideQuestionType } from "@/interface/enums";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
@@ -16,11 +15,23 @@ export interface IGuideQuestion {
   options: IGuideOption[];
 }
 
+export enum EGuideQuestionType {
+  "selection",
+  "multiSelection",
+  "range",
+}
+
 export interface IGuideOption {
   checked: boolean;
   title?: string;
   icon?: string;
   answer: IFilterAnswer;
+}
+
+export enum EGuideQuestionState {
+  "question",
+  "answer",
+  "overview",
 }
 
 interface Props {

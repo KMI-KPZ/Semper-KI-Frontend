@@ -1,3 +1,4 @@
+import { IProcessItem } from "@/pages/Process";
 import {
   DefinedUseQueryResult,
   useMutation,
@@ -6,7 +7,6 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
-import { IProcessItem } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
 
 export interface ICartHook {

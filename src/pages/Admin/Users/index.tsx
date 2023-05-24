@@ -1,3 +1,4 @@
+import { User, UserType } from "@/hooks/useUser";
 import {
   Paper,
   Table,
@@ -9,9 +10,6 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { EUserType } from "../../../interface/enums";
-import { IUser } from "../../../interface/Interface";
-
 interface Props {}
 
 const AdminUsers: React.FC<Props> = (props) => {
@@ -33,7 +31,7 @@ const AdminUsers: React.FC<Props> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {[].map((user: IUser, index: number) => (
+            {[].map((user: User, index: number) => (
               <TableRow
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -45,7 +43,7 @@ const AdminUsers: React.FC<Props> = (props) => {
                   {user.email}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {EUserType[user.type]}
+                  {UserType[user.type]}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {/* {user.created} */}

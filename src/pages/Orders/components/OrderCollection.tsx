@@ -1,34 +1,25 @@
 import React, { useContext } from "react";
-import {
-  IOrderCollection,
-  IOrderCollectionEvent,
-  IOrderEvent,
-} from "../../../interface/Interface";
 import { Button } from "@component-library/Button";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
-import { useOrders } from "../../../hooks/useOrders";
-import {
-  EOrderCollectionState,
-  EOrderState,
-  EUserType,
-} from "../../../interface/enums";
 import { useTranslation } from "react-i18next";
 import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OrderPreView from "./OrderPreView";
-import { AppContext } from "../../App";
 import OrderView from "./Order";
+import { IOrderCollection, useOrders } from "../hooks/useOrders";
+import { OrderCollectionEvent, OrderEvent, UserType } from "@/hooks/useUser";
+import { OrderCollectionState, OrderState } from "..";
 
 interface Props {
   index: number;
   orderCollection: IOrderCollection;
-  userType: EUserType;
+  userType: UserType;
   isOpen: boolean;
   toggleOpen(index: number): void;
-  orderCollectionEvent?: IOrderCollectionEvent;
+  orderCollectionEvent?: OrderCollectionEvent;
 }
 
 const OrderCollection: React.FC<Props> = (props) => {
@@ -57,7 +48,7 @@ const OrderCollection: React.FC<Props> = (props) => {
     if (window.confirm(t("Orders.OrderCollection.button.reject") + "?")) {
       updateOrder.mutate({
         orderCollectionID: orderCollection.id,
-        state: EOrderState.rejected,
+        state: OrderState.rejected,
       });
     }
   };
@@ -65,7 +56,7 @@ const OrderCollection: React.FC<Props> = (props) => {
     if (window.confirm(t("Orders.OrderCollection.button.confirm") + "?")) {
       updateOrder.mutate({
         orderCollectionID: orderCollection.id,
-        state: EOrderState.confirmed,
+        state: OrderState.confirmed,
       });
     }
   };
@@ -73,13 +64,13 @@ const OrderCollection: React.FC<Props> = (props) => {
     if (window.confirm(t("Orders.OrderCollection.button.verify") + "?")) {
       updateOrder.mutate({
         orderCollectionID: orderCollection.id,
-        state: EOrderState.verify,
+        state: OrderState.verify,
       });
     }
   };
 
   const renderButtons = () => {
-    if (userType === EUserType.client)
+    if (userType === UserType.client)
       return (
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Button
@@ -98,7 +89,7 @@ const OrderCollection: React.FC<Props> = (props) => {
           </Button>
         </div>
       );
-    if (userType === EUserType.manufacturer)
+    if (userType === UserType.manufacturer)
       return (
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Button
@@ -130,7 +121,7 @@ const OrderCollection: React.FC<Props> = (props) => {
     toggleOpen(index);
   };
 
-  const getOrderEventByID = (orderID: string): IOrderEvent | undefined => {
+  const getOrderEventByID = (orderID: string): OrderEvent | undefined => {
     if (
       orderCollectionEvent === undefined ||
       orderCollectionEvent.orders.length < 1
@@ -152,7 +143,7 @@ const OrderCollection: React.FC<Props> = (props) => {
           {": "}
           {t(
             `Orders.OrderCollection.state.${
-              EOrderCollectionState[orderCollection.state]
+              OrderCollectionState[orderCollection.state]
             }`
           )}
         </h2>

@@ -1,22 +1,42 @@
-import React, { useContext, useState } from "react";
-// import "./Header.scss";
+import React, { ReactNode, useContext, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ClickAwayListener } from "@mui/material";
 import HeaderItem from "./components/Item";
-import { ENavigationItemPreferred, EUserType } from "../../interface/enums";
-import { IOrderCollectionEvent } from "../../interface/Interface";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { NavigationItems } from "../../data/NavigationItems";
+import { NavigationItems } from "../../data/navigation";
 import LogoURL from "@images/logo192.png";
 import { AppContext } from "@/pages/App";
+import { OrderCollectionEvent, UserType } from "@/hooks/useUser";
 
 interface Language {
   code: string;
   name: string;
   country_code: string;
+}
+
+export type HeaderItem = {
+  title: string;
+  link: string;
+  icon: string | ReactNode;
+  extern: boolean;
+  preferred: NavigationItemPreferredEnum;
+  userType: UserType[];
+  loggedIn: boolean[];
+};
+
+export enum HeaderItemLoggedInEnum {
+  "true",
+  "false",
+  "both",
+}
+
+export enum NavigationItemPreferredEnum {
+  "header",
+  "menu",
+  "home",
 }
 
 const languages: Language[] = [
@@ -34,8 +54,8 @@ const languages: Language[] = [
 
 interface Props {
   isLoggedIn: boolean;
-  userType: EUserType;
-  events?: IOrderCollectionEvent[];
+  userType: UserType;
+  events?: OrderCollectionEvent[];
   cartCount: number;
 }
 
@@ -166,7 +186,7 @@ export const Header: React.FC<Props> = (props) => {
     <ul className="hidden flex-row items-center justify-center gap-2 md:flex md:gap-4">
       {NavigationItems.filter(
         (item) =>
-          item.preferred.includes(ENavigationItemPreferred.header) &&
+          item.preferred.includes(NavigationItemPreferredEnum.header) &&
           item.userTypes.includes(userType)
       ).map((item, index: number) => (
         <HeaderItem
@@ -182,7 +202,7 @@ export const Header: React.FC<Props> = (props) => {
     <ul className="hidden flex-row items-center justify-center gap-2 xs:flex md:hidden md:gap-4">
       {NavigationItems.filter(
         (item) =>
-          item.preferred.includes(ENavigationItemPreferred.header) &&
+          item.preferred.includes(NavigationItemPreferredEnum.header) &&
           item.userTypes.includes(userType)
       ).map((item, index: number) => (
         <HeaderItem
@@ -209,7 +229,7 @@ export const Header: React.FC<Props> = (props) => {
 
       {NavigationItems.filter(
         (item) =>
-          item.preferred.includes(ENavigationItemPreferred.menu) &&
+          item.preferred.includes(NavigationItemPreferredEnum.menu) &&
           item.userTypes.includes(userType)
       ).map((item, index: number) => (
         <HeaderItem
@@ -234,7 +254,7 @@ export const Header: React.FC<Props> = (props) => {
       </div>
       {NavigationItems.filter(
         (item) =>
-          item.preferred.includes(ENavigationItemPreferred.header) &&
+          item.preferred.includes(NavigationItemPreferredEnum.header) &&
           item.userTypes.includes(userType)
       ).map((item, index: number) => (
         <HeaderItem

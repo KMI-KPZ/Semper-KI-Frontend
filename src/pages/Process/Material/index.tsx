@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { MaterialCatalogCard } from "./components/card";
-import { IMaterial } from "../../../interface/Interface";
 import { IProcessState } from "..";
 import { useTranslation } from "react-i18next";
-import { useMaterialData } from "../../../hooks/useProcessData";
+import { useMaterialData } from "../hooks/useProcessData";
 import { LoadingSuspense } from "@component-library/Loading";
 import PopUp from "@/components/PopUp";
 import { MaterialPreView } from "./components/preView";
@@ -22,6 +21,13 @@ interface Props {
 interface State {
   popUp: boolean;
   material: IMaterial | undefined;
+}
+
+export interface IMaterial {
+  id: string;
+  title: string;
+  propList: string[];
+  URI: string;
 }
 
 export const MaterialCatalog: React.FC<Props> = (props) => {

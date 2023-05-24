@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import useUser from "../../hooks/useUser";
-import { EUserType } from "../../interface/enums";
-import { IUser } from "../../interface/Interface";
 import { Button } from "@component-library/Button";
+import useUser, { User, UserType } from "@/hooks/useUser";
 
 interface Props {
-  user: IUser;
+  user: User;
 }
 
 const Profil: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { user } = props;
   const { deleteUser, updateUser } = useUser();
-  const [userType, setUserType] = useState<EUserType>(user.type);
+  const [userType, setUserType] = useState<UserType>(user.type);
 
   const handleOnClickButtonDelete = () => {
     deleteUser();
@@ -21,14 +19,10 @@ const Profil: React.FC<Props> = (props) => {
   const handleOnChangeSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
     // console.log(e.currentTarget.checked);
     setUserType(
-      e.currentTarget.checked === true
-        ? EUserType.manufacturer
-        : EUserType.client
+      e.currentTarget.checked === true ? UserType.manufacturer : UserType.client
     );
     updateUser(
-      e.currentTarget.checked === true
-        ? EUserType.manufacturer
-        : EUserType.client
+      e.currentTarget.checked === true ? UserType.manufacturer : UserType.client
     );
   };
 
@@ -46,11 +40,10 @@ const Profil: React.FC<Props> = (props) => {
           {t("Profil.general.email")}: {user.email}
         </span>
         <span>
-          {t("Profil.general.type")}:{" "}
-          {t(`enum.EUserType.${EUserType[userType]}`)}
+          {t("Profil.general.type")}: {t(`enum.UserType.${UserType[userType]}`)}
         </span>
       </div>
-      {userType === EUserType.manufacturer ? (
+      {userType === UserType.manufacturer ? (
         <div className="flex flex-col gap-2 p-5">
           <h2>{t("Profil.company.header")}</h2>
           <div className="w-full border-t-2" />

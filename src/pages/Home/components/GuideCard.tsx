@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
 import { useTranslation } from "react-i18next";
-import { EUserType } from "@/interface/enums";
 import { Button } from "@component-library/Button";
+import { UserType } from "@/hooks/useUser";
 
 interface Props {
   className?: string;
-  userType: EUserType;
+  userType: UserType;
 }
 
 const HomeGuideCard: React.FC<Props> = (props) => {
@@ -15,7 +15,7 @@ const HomeGuideCard: React.FC<Props> = (props) => {
   const additionalClassNames = className ?? "";
   const { t } = useTranslation();
 
-  if (userType === EUserType.manufacturer)
+  if (userType === UserType.manufacturer)
     return (
       <div
         className={`${additionalClassNames}  flex flex-col items-center justify-between gap-3 p-3`}
@@ -48,7 +48,7 @@ const HomeGuideCard: React.FC<Props> = (props) => {
       </div>
     );
 
-  if (userType === EUserType.client)
+  if (userType === UserType.client)
     return (
       <div
         className={`${additionalClassNames}  flex flex-col items-center justify-between gap-3 p-3`}

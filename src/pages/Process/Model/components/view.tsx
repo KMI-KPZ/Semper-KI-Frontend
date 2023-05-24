@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
-import { IModel } from "@/interface/Interface";
 import { getModelURI } from "@/services/utils";
+import { IModel } from "..";
 
 interface Props {
   model: IModel;

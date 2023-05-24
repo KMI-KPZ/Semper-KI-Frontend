@@ -1,14 +1,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { EOrderState } from "../../../interface/enums";
-import { IOrder, IOrderEvent } from "../../../interface/Interface";
-import { getModelURI } from "../../../services/utils";
 import { Badge } from "@component-library/Badge";
 import EmailIcon from "@mui/icons-material/Email";
 import FactoryIcon from "@mui/icons-material/Factory";
+import { IOrder } from "../hooks/useOrders";
+import { OrderEvent } from "@/hooks/useUser";
+import { getModelURI } from "@/services/utils";
+import { OrderState } from "..";
 interface Props {
   order: IOrder;
-  orderEvent?: IOrderEvent;
+  orderEvent?: OrderEvent;
 }
 
 const OrderPreView: React.FC<Props> = (props) => {
@@ -33,7 +34,7 @@ const OrderPreView: React.FC<Props> = (props) => {
       ) : null}
       <img src={getModelURI(order.item.model!)} />
       <h3 className="break-words">{order.item.title}</h3>
-      <span>{t(`Orders.OrderPreView.${EOrderState[order.orderState]}`)}</span>
+      <span>{t(`Orders.OrderPreView.${OrderState[order.orderState]}`)}</span>
     </div>
   );
 };

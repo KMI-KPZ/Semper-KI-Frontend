@@ -1,10 +1,8 @@
 import React from "react";
 import WizardCard from "./components/card";
-import { IProcessItem } from "../../../../interface/Interface";
-
 import _wizardItems from "./data/items.json";
-import { IProcessState } from "../..";
-import { EProcessStatusType } from "../../../../interface/enums";
+import { IProcessItem, IProcessState } from "../..";
+import { EProcessStatusType } from "..";
 const wizardItems: IWizardItem[] = _wizardItems;
 
 interface IWizardItem {

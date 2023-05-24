@@ -7,14 +7,15 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import { LoadingSuspense } from "@component-library/Loading";
-import { useOrders } from "@/hooks/useOrders";
-import { EOrderState, EUserType } from "@/interface/enums";
 import { Button } from "@component-library/Button";
 import { Badge } from "@component-library/Badge";
+import { UserType } from "@/hooks/useUser";
+import { OrderState } from "@/pages/Orders";
+import { useOrders } from "@/pages/Orders/hooks/useOrders";
 
 interface Props {
   className?: string;
-  userType: EUserType;
+  userType: UserType;
   cartCount?: number;
   ordersCount?: number;
 }
@@ -25,11 +26,11 @@ const HomeOrderCard: React.FC<Props> = (props) => {
   const orderShowCountManufacturer = 6;
   const { className, userType, cartCount, ordersCount } = props;
   const { ordersQuery } = useOrders(
-    userType === EUserType.client || userType === EUserType.manufacturer
+    userType === UserType.client || userType === UserType.manufacturer
   );
   const additionalClassNames = className ?? "";
 
-  if (userType === EUserType.manufacturer)
+  if (userType === UserType.manufacturer)
     return (
       <div
         className={`${additionalClassNames}  flex flex-col items-center justify-between gap-5 p-3`}
@@ -66,7 +67,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
                     >
                       <span>{new Date(order.date).toLocaleDateString()}</span>
                       <span>{order.orders.length}</span>
-                      <span>{EOrderState[order.state]}</span>
+                      <span>{OrderState[order.state]}</span>
                     </li>
                   ))
               ) : (
@@ -91,7 +92,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
         />
       </div>
     );
-  if (userType === EUserType.client)
+  if (userType === UserType.client)
     return (
       <div
         className={`${additionalClassNames}  flex flex-col items-center justify-between gap-3 p-3`}
@@ -155,7 +156,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
                     >
                       <span>{new Date(order.date).toLocaleDateString()}</span>
                       <span>{order.orders.length}</span>
-                      <span>{EOrderState[order.state]}</span>
+                      <span>{OrderState[order.state]}</span>
                     </li>
                   ))
               ) : (
@@ -180,7 +181,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
         />
       </div>
     );
-  if (userType === EUserType.anonym && cartCount !== undefined && cartCount > 0)
+  if (userType === UserType.anonym && cartCount !== undefined && cartCount > 0)
     return (
       <div
         className={`${additionalClassNames} flex flex-col items-center justify-center gap-3 p-3`}

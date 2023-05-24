@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useCart from "../../../hooks/useCart";
-import { IProcessItem } from "../../../interface/Interface";
 import { useQueryClient } from "@tanstack/react-query";
 import CartItem from "./components/item";
 import { useTranslation } from "react-i18next";
-import { TError } from "../../../interface/types";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { LoadingSuspense } from "@component-library/Loading";
 import { ErrorView } from "@component-library/Error";
 import { Button } from "@component-library/Button";
+import useCart from "@/hooks/useCart";
+import { IProcessItem } from "..";
+import { TError } from "@/interface/types";
 
 interface Props {}
 

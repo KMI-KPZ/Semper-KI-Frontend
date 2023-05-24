@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useGuide from "../../../hooks/useGuide";
-import { EGuideQuestionType } from "../../../interface/enums";
-import useFilter from "../../../hooks/useFilter";
+import useGuide from "../hooks/useGuide";
+import useFilter from "../../Process/Filter/hooks/useFilter";
 import { LoadingAnimation } from "@component-library/Loading";
-import { IGuideOption, IGuideQuestion } from "..";
-import GuideOverview from "./Overview";
-import GuideAnswers from "./Answer";
-import GuideQuestion from "./Question";
+import { EGuideQuestionType, IGuideOption, IGuideQuestion } from "..";
 import {
   IFilterAnswer,
   IFilterItem,
   IFilterQuestion,
   IRangeMinMax,
 } from "@/pages/Process/Filter";
+import GuideOverview from "./components/overview";
+import GuideAnswers from "./components/answer";
+import GuideQuestion from "./components/question";
 
 const getQuestionByFilterId = (
   filterId: number,

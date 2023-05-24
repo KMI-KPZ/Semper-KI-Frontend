@@ -4,14 +4,29 @@ import { IProcessState } from "..";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import { IFilterItem } from "../Filter";
-import { usePostProcessing } from "@/hooks/useProcessData";
-import { IPostProcessing } from "@/interface/Interface";
+import { usePostProcessing } from "@/pages/Process/hooks/useProcessData";
 
 interface Props {
   processState: IProcessState;
   filters: IFilterItem[];
   selectPostProcessings: (postProcessings: IPostProcessing[]) => void;
   setProgress(path: string): void;
+}
+
+export interface IPostProcessing {
+  id: string;
+  title: string;
+  checked: boolean;
+  value: string;
+  valueList: string[];
+  type: EPostProcessingOptionType;
+  URI: string;
+}
+
+export enum EPostProcessingOptionType {
+  "selection",
+  "number",
+  "text",
 }
 
 export const PostProcessingView: React.FC<Props> = (props) => {

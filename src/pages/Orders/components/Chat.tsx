@@ -1,15 +1,15 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from "react";
-import { IChatMessage, IUser } from "../../../interface/Interface";
 import { Button } from "@component-library/Button";
 import SendIcon from "@mui/icons-material/Send";
 import CloseIcon from "@mui/icons-material/Close";
-import { useOrders } from "../../../hooks/useOrders";
 import { useTranslation } from "react-i18next";
+import { IChatMessage, useOrders } from "../hooks/useOrders";
+import { User } from "@/hooks/useUser";
 
 interface Props {
   closeMenu(): void;
   chat: IChatMessage[];
-  user?: IUser;
+  user?: User;
   orderCollectionID: string;
   orderID: string;
 }

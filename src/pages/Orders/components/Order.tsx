@@ -1,9 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import {
-  IOrder,
-  IOrderCollection,
-  IOrderEvent,
-} from "../../../interface/Interface";
 import { Button } from "@component-library/Button";
 import MailIcon from "@mui/icons-material/Mail";
 import { AppContext } from "../../App";
@@ -13,20 +8,21 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { getModelURI } from "../../../services/utils";
-import { useOrders } from "../../../hooks/useOrders";
-import { EOrderState, EUserType } from "../../../interface/enums";
 import { useTranslation } from "react-i18next";
 import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import { Badge } from "@component-library/Badge";
 import OrderFileView from "./FileView";
 import PopUp from "@/components/PopUp";
+import { IOrder, useOrders } from "../hooks/useOrders";
+import { OrderEvent, UserType } from "@/hooks/useUser";
+import { OrderState } from "..";
 
 interface Props {
   order: IOrder;
   orderCollectionID: string;
-  userType: EUserType;
-  orderEvent?: IOrderEvent;
+  userType: UserType;
+  orderEvent?: OrderEvent;
 }
 
 interface State {
@@ -63,7 +59,7 @@ const OrderView: React.FC<Props> = (props) => {
       chatOpen: false,
     }));
   };
-  const updateStatus = (status: EOrderState) => {
+  const updateStatus = (status: OrderState) => {
     updateOrder.mutate({
       orderCollectionID: orderCollectionID,
       orderID: order.id,
@@ -82,17 +78,17 @@ const OrderView: React.FC<Props> = (props) => {
   };
   const handleOnClickButtonReject = () => {
     if (window.confirm(t("Orders.OrderView.confirm.reject"))) {
-      updateStatus(EOrderState.rejected);
+      updateStatus(OrderState.rejected);
     }
   };
   const handleOnClickButtonConfirm = () => {
     // if (window.confirm(t("OrderView.button.confirm") + "?")) {
-    updateStatus(EOrderState.confirmed);
+    updateStatus(OrderState.confirmed);
     // }
   };
   const handleOnClickButtonVerify = () => {
     // if (window.confirm(t("OrderView.button.verify") + "?")) {
-    updateStatus(EOrderState.verify);
+    updateStatus(OrderState.verify);
     // }
   };
   const handleOnClickButtonExpand = () => {
@@ -100,7 +96,7 @@ const OrderView: React.FC<Props> = (props) => {
   };
 
   const renderButtons = () => {
-    if (userType === EUserType.client)
+    if (userType === UserType.client)
       return (
         <div className="flex w-full flex-col items-center justify-center gap-3 md:w-fit md:flex-row">
           <Button
@@ -119,7 +115,7 @@ const OrderView: React.FC<Props> = (props) => {
           </Button>
         </div>
       );
-    if (userType === EUserType.manufacturer)
+    if (userType === UserType.manufacturer)
       return (
         <div className="flex w-full flex-col items-center justify-center gap-3 md:w-fit md:flex-row">
           <Button

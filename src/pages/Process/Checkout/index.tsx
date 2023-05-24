@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import useCart from "../../../hooks/useCart";
-import useCheckout, { IRequestState } from "../../../hooks/useCheckout";
+import useCheckout, { IRequestState } from "./hooks/useCheckout";
 import CheckoutItem from "./components/item";
 import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import { LoadingAnimation, LoadingSuspense } from "@component-library/Loading";
+import useCart from "@/hooks/useCart";
 
 interface Props {}
 interface State {

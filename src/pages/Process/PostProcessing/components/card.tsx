@@ -1,5 +1,4 @@
-import { IPostProcessing } from "@/interface/Interface";
-import React, { useState } from "react";
+import { IPostProcessing } from "..";
 
 interface Props<Item> {
   item: Item;

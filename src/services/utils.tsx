@@ -1,5 +1,7 @@
-import { EProcessStatusType, EUserType } from "../interface/enums";
-import { IAddress, IModel, IProcessItem } from "../interface/Interface";
+import { Address, UserType } from "@/hooks/useUser";
+import { IProcessItem } from "@/pages/Process";
+import { EProcessStatusType } from "@/pages/Process/Header";
+import { IModel } from "@/pages/Process/Model";
 
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;
@@ -64,28 +66,28 @@ export const removeItemByIndex = <T,>(
   return newArr;
 };
 
-export const getUserType = (name: string): EUserType => {
-  let type: EUserType = EUserType.client;
+export const getUserType = (name: string): UserType => {
+  let type: UserType = UserType.client;
   switch (name.toLocaleLowerCase()) {
     case "client":
-      type = EUserType.client;
+      type = UserType.client;
       break;
     case "manufacturer":
-      type = EUserType.manufacturer;
+      type = UserType.manufacturer;
       break;
     case "admin":
-      type = EUserType.admin;
+      type = UserType.admin;
       break;
     default:
-      type = EUserType.client;
+      type = UserType.client;
       break;
   }
   return type;
 };
 
-export const parseAddress = (unparsedAddress: string): IAddress => {
+export const parseAddress = (unparsedAddress: string): Address => {
   const parseAddress = JSON.parse(unparsedAddress);
-  let newAddress: IAddress = {
+  let newAddress: Address = {
     street: parseAddress.street,
     houseNumber: parseAddress.number,
     city: parseAddress.city,

@@ -1,7 +1,3 @@
-import React, { ReactNode } from "react";
-import { EUserType } from "../../interface/enums";
-import { useTranslation } from "react-i18next";
-import { IOrderCollectionEvent } from "../../interface/Interface";
 import HomeSearchCard from "./components/SearchCard";
 import HomeOrderCard from "./components/OrderCard";
 import HomeGuideCard from "./components/GuideCard";
@@ -9,15 +5,18 @@ import HomePortfolioCard from "./components/PortfolioCard";
 import HomeMagazinCard from "./components/MagazinCard";
 import HomeNewsCard from "./components/NewsCard";
 import HomeBMWKImgCard from "./components/BMWKImgCard";
+import { OrderCollectionEvent, UserType } from "@/hooks/useUser";
+import { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
-  userType: EUserType;
-  events?: IOrderCollectionEvent[];
+  userType: UserType;
+  events?: OrderCollectionEvent[];
   cartCount: number;
 }
 
 export interface IHomeItem {
-  userTypes: EUserType[];
+  userTypes: UserType[];
   title: string;
   link: string;
   icon: ReactNode;
@@ -42,7 +41,7 @@ export const Home: React.FC<Props> = (props) => {
   };
   const count = getChangeCount();
 
-  // if (userType !== EUserType.anonym)
+  // if (userType !== UserType.anonym)
   //   return (
   //     <div className="flex flex-col gap-12 justify-start items-center">
   //       <h1 className="">{t("Home.Home.header")}</h1>

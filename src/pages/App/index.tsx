@@ -1,9 +1,14 @@
 import React, { createContext, useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { RequestTest } from "../RequestTest";
-import useUser from "../../hooks/useUser";
+import useUser, {
+  OrderCollectionEvent,
+  OrderEvent,
+  User,
+  UserType,
+} from "../../hooks/useUser";
 import { Home } from "../Home";
-import { ProcessView } from "../Process";
+import { IProcessItem, ProcessView } from "../Process";
 import Logout from "../Logout";
 import { Error } from "../Error";
 import Redirect from "../Redirect";
@@ -16,14 +21,7 @@ import AdminModels from "../Admin/Models";
 import AdminMaterials from "../Admin/Materials";
 import AdminOrders from "../Admin/Orders";
 import Cart from "../Process/Cart";
-import { EUserType } from "../../interface/enums";
 import { URL_AboutUs } from "../../constants/Constants";
-import {
-  IOrderCollectionEvent,
-  IOrderEvent,
-  IProcessItem,
-  IUser,
-} from "../../interface/Interface";
 import LoginView from "../Login";
 import useMissedEvent from "../../hooks/useMissedEvent";
 import { useWebsocket } from "../../hooks/useWebsocket";
@@ -49,11 +47,11 @@ export interface IAppState {
   selectedProgressItem?: { index: number; progress: string };
   stopScroll: boolean;
   guideFilter: IFilterItem[];
-  missedEvents: IOrderCollectionEvent[];
+  missedEvents: OrderCollectionEvent[];
 }
 
 export interface IAppContext {
-  user: IUser | undefined;
+  user: User | undefined;
   cart: IProcessItem[];
   appState: IAppState;
   setAppState: React.Dispatch<React.SetStateAction<IAppState>>;
@@ -108,7 +106,7 @@ const App: React.FC = () => {
   ) => {
     // console.log("deleteEvent", orderCollectionID, orderID, type);
     setState((prevState) => {
-      const existingOrderCollectionEvent: IOrderCollectionEvent | undefined =
+      const existingOrderCollectionEvent: OrderCollectionEvent | undefined =
         prevState.missedEvents.find(
           (event) => event.orderCollectionID === orderCollectionID
         );
@@ -117,10 +115,10 @@ const App: React.FC = () => {
         existingOrderCollectionEvent !== undefined &&
         existingOrderCollectionEvent.orders.length > 0
       ) {
-        const existingOrderEvents: IOrderEvent[] =
+        const existingOrderEvents: OrderEvent[] =
           existingOrderCollectionEvent.orders;
         const editedOrderEvents = existingOrderEvents.map(
-          (orderEvent): IOrderEvent => {
+          (orderEvent): OrderEvent => {
             return {
               orderID: orderEvent.orderID,
               messages:
@@ -134,7 +132,7 @@ const App: React.FC = () => {
             };
           }
         );
-        const editedOrderCollectionEvent: IOrderCollectionEvent = {
+        const editedOrderCollectionEvent: OrderCollectionEvent = {
           orderCollectionID: existingOrderCollectionEvent.orderCollectionID,
           orders: editedOrderEvents.filter(
             (orderEvent) =>
@@ -169,13 +167,13 @@ const App: React.FC = () => {
 
   const onWebsocktEvent = (event: MessageEvent) => {
     if (event.data !== undefined) {
-      const newOrderCollectionEvent: IOrderCollectionEvent = JSON.parse(
+      const newOrderCollectionEvent: OrderCollectionEvent = JSON.parse(
         event.data
       );
       const newOrderEvent = newOrderCollectionEvent.orders[0];
       const getNumberMessages = (
-        oldEvent: IOrderEvent | undefined,
-        newEvent: IOrderEvent | undefined
+        oldEvent: OrderEvent | undefined,
+        newEvent: OrderEvent | undefined
       ): number | undefined => {
         if (oldEvent === undefined && newEvent === undefined) return undefined;
         if (
@@ -203,8 +201,8 @@ const App: React.FC = () => {
         return undefined;
       };
       const getNumberStatus = (
-        oldEvent: IOrderEvent | undefined,
-        newEvent: IOrderEvent | undefined
+        oldEvent: OrderEvent | undefined,
+        newEvent: OrderEvent | undefined
       ): number | undefined => {
         if (oldEvent === undefined && newEvent === undefined) return undefined;
         if (
@@ -232,8 +230,8 @@ const App: React.FC = () => {
         return undefined;
       };
       const hydrateEvents = (
-        missedEvents: IOrderCollectionEvent[]
-      ): IOrderCollectionEvent[] => {
+        missedEvents: OrderCollectionEvent[]
+      ): OrderCollectionEvent[] => {
         const existingOrderCollecetionIDs: string[] = [];
         const existingOrderIDs: string[] = [];
         missedEvents.forEach((orderCollectionEvent) => {
@@ -328,7 +326,7 @@ const App: React.FC = () => {
       <Route path="checkout" element={<Checkout />} />
       <Route
         path="orders"
-        element={<OrderCollectionOverview userType={EUserType.client} />}
+        element={<OrderCollectionOverview userType={UserType.client} />}
       />
       <Route path="assignments" element={<Error text="assignments" />} />
     </Route>
@@ -338,7 +336,7 @@ const App: React.FC = () => {
       <Route path="proceedings" element={<Error text="proceedings" />} />
       <Route
         path="contracts"
-        element={<OrderCollectionOverview userType={EUserType.manufacturer} />}
+        element={<OrderCollectionOverview userType={UserType.manufacturer} />}
       />
     </Route>
   );

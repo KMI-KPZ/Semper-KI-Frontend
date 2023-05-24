@@ -1,7 +1,6 @@
 import { DefinedUseQueryResult, UseQueryResult } from "@tanstack/react-query";
 import React, { ReactNode } from "react";
 import LoopIcon from "@mui/icons-material/Loop";
-import { t } from "i18next";
 import { useNavigate } from "react-router-dom";
 
 interface Props<T> {

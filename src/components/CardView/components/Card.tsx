@@ -1,10 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { CardItemData } from "..";
+import { CardItemType } from "..";
 
 interface Props {
-  carditem: CardItemData;
+  carditem: CardItemType;
   onClickCard?(): void;
 }
 

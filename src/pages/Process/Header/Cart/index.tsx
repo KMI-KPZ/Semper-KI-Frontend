@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
-import { ProcessContext } from "../..";
-import { IProcessItem } from "../../../../interface/Interface";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddIcon from "@mui/icons-material/Add";
-import { getModelURI } from "../../../../services/utils";
 import CartItem from "./components/item";
+import { IProcessItem, ProcessContext } from "../..";
+import { getModelURI } from "@/services/utils";
 
 interface Props {}
 

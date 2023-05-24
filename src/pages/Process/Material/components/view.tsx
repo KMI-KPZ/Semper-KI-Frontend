@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
-import { IMaterial } from "@/interface/Interface";
+import { IMaterial } from "..";
 
 interface Props {
   material: IMaterial;

@@ -5,7 +5,7 @@ import ItemView from "./view";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ItemCard from "./card";
 import PopUp from "@/components/PopUp";
-import { IPostProcessing } from "@/interface/Interface";
+import { IPostProcessing } from "..";
 
 interface Props<Item> {
   grid: boolean;

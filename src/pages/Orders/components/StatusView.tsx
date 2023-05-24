@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-import { EOrderState, EUserType } from "../../../interface/enums";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
@@ -8,52 +7,54 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import EmailIcon from "@mui/icons-material/Email";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import { useTranslation } from "react-i18next";
+import { OrderState } from "..";
+import { UserType } from "@/hooks/useUser";
 
 interface Props {
-  status: EOrderState;
-  userType: EUserType;
-  updateStatus(status: EOrderState): void;
+  status: OrderState;
+  userType: UserType;
+  updateStatus(status: OrderState): void;
 }
 
-interface StatusData {
-  orderState: EOrderState;
+export type StatusData = {
+  orderState: OrderState;
   icon: ReactNode;
   text: string;
-}
+};
 
 const statusData: StatusData[] = [
   {
-    orderState: EOrderState.requested,
+    orderState: OrderState.requested,
     icon: <EmailIcon />,
     text: "Orders.StatusView.state.requested",
   },
   {
-    orderState: EOrderState.verify,
+    orderState: OrderState.verify,
     icon: <QuestionMarkIcon />,
     text: "Orders.StatusView.state.verify",
   },
   {
-    orderState: EOrderState.rejected,
+    orderState: OrderState.rejected,
     icon: <CloseIcon />,
     text: "Orders.StatusView.state.rejected",
   },
   {
-    orderState: EOrderState.confirmed,
+    orderState: OrderState.confirmed,
     icon: <CheckIcon />,
     text: "Orders.StatusView.state.confirmed",
   },
   {
-    orderState: EOrderState.production,
+    orderState: OrderState.production,
     icon: <FactoryIcon />,
     text: "Orders.StatusView.state.production",
   },
   {
-    orderState: EOrderState.delivery,
+    orderState: OrderState.delivery,
     icon: <LocalShippingIcon />,
     text: "Orders.StatusView.state.delivery",
   },
   {
-    orderState: EOrderState.finished,
+    orderState: OrderState.finished,
     icon: <DoneAllIcon />,
     text: "Orders.StatusView.state.finished",
   },
@@ -63,23 +64,25 @@ const StatusView: React.FC<Props> = (props) => {
   const { status, userType, updateStatus: setStatus } = props;
   const { t } = useTranslation();
 
-  const handleOnClickStatus = (_status: EOrderState) => {
+  const handleOnClickStatus = (_status: OrderState) => {
     if (
-      userType === EUserType.manufacturer //&& _status > status
+      userType === UserType.manufacturer //&& _status > status
     ) {
       setStatus(_status);
     }
   };
 
   const renderStatusItem = (statusData: StatusData, index: number) => {
+    console.log("Warum was los?");
+
     if (
-      (status === EOrderState.rejected &&
-        statusData.orderState === EOrderState.confirmed) ||
-      (status === EOrderState.confirmed &&
-        statusData.orderState === EOrderState.rejected) ||
-      (status !== EOrderState.rejected &&
-        status !== EOrderState.confirmed &&
-        statusData.orderState === EOrderState.rejected)
+      (status === OrderState.rejected &&
+        statusData.orderState === OrderState.confirmed) ||
+      (status === OrderState.confirmed &&
+        statusData.orderState === OrderState.rejected) ||
+      (status !== OrderState.rejected &&
+        status !== OrderState.confirmed &&
+        statusData.orderState === OrderState.rejected)
     )
       return;
     return (
@@ -103,7 +106,7 @@ const StatusView: React.FC<Props> = (props) => {
               ? "bg-orange-200"
               : "bg-slate-100"
           } ${
-            userType === EUserType.manufacturer &&
+            userType === UserType.manufacturer &&
             status + 1 == statusData.orderState
               ? "hover:cursor-pointer hover:bg-orange-300"
               : ""

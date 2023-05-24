@@ -1,30 +1,42 @@
 import { createContext, useEffect, useState } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import { ModelCatalog } from "./Model";
-import {
-  IMaterial,
-  IModel,
-  IPostProcessing,
-  IProcessItem,
-  IProgress,
-} from "../../interface/Interface";
-import { MaterialCatalog } from "./Material";
-import { PostProcessingView } from "./PostProcessing";
-import NewProcess from "./NewProcess";
+import { IModel, ModelCatalog } from "./Model";
+import { IMaterial, MaterialCatalog } from "./Material";
+import { IPostProcessing, PostProcessingView } from "./PostProcessing";
+import NewProcess from "./New";
 import { Error } from "../Error";
-import useFilter from "../../hooks/useFilter";
+import useFilter from "./Filter/hooks/useFilter";
 import Header from "./Header";
-import useCart from "../../hooks/useCart";
-import { checkForSelectedData } from "../../services/utils";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import Filter, { IFilterItem } from "./Filter";
 import { ModelUpload } from "./Model/components/upload";
+import useCart from "@/hooks/useCart";
+import { checkForSelectedData } from "@/services/utils";
 
 interface Props {
   selectedProgressItem?: { index: number; progress: string };
   guideAnswers: IFilterItem[];
   isLoggedInResponse: boolean;
+}
+
+export interface IProcessItem {
+  title?: string;
+  model?: IModel;
+  material?: IMaterial;
+  postProcessings?: IPostProcessing[];
+  manufacturerID?: string;
+}
+
+export interface IProgress {
+  title: string;
+  link: string;
+  type: EProgressType;
+}
+
+export enum EProgressType {
+  "title",
+  "search",
 }
 
 export interface IProcessState {

@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLogin } from "../../hooks/useLogin";
-import { EUserType } from "../../interface/enums";
+import { useLogin } from "./hooks/useLogin";
 import { Button } from "@component-library/Button";
 import { UserSwitch } from "@component-library/Input";
 import LoginIcon from "@mui/icons-material/Login";
 import CreateIcon from "@mui/icons-material/Create";
+import { UserType } from "@/hooks/useUser";
 
 interface Props {
   path?: string;
-  userType?: EUserType;
+  userType?: UserType;
 }
 type State = {
-  userType: EUserType;
+  userType: UserType;
   load: boolean;
   register: boolean;
 };
@@ -22,8 +22,7 @@ const LoginView: React.FC<Props> = (props) => {
   const { path, userType: initialUserType } = props;
   const [state, setState] = useState<State>({
     load: false,
-    userType:
-      initialUserType === undefined ? EUserType.client : initialUserType,
+    userType: initialUserType === undefined ? UserType.client : initialUserType,
     register: false,
   });
   const { userType, load, register } = state;
@@ -40,9 +39,9 @@ const LoginView: React.FC<Props> = (props) => {
     setState((prevState) => ({
       ...prevState,
       userType:
-        prevState.userType === EUserType.client
-          ? EUserType.manufacturer
-          : EUserType.client,
+        prevState.userType === UserType.client
+          ? UserType.manufacturer
+          : UserType.client,
     }));
   };
 

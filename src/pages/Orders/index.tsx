@@ -1,17 +1,29 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  IOrderCollection,
-  IOrderCollectionEvent,
-} from "../../interface/Interface";
-import { useOrders } from "../../hooks/useOrders";
-import OrderCollection from "./components/OrderCollection";
-import { EUserType } from "../../interface/enums";
 import { AppContext } from "../App";
 import { LoadingSuspense } from "@component-library/Loading";
+import { IOrderCollection, useOrders } from "./hooks/useOrders";
+import { OrderCollectionEvent, UserType } from "@/hooks/useUser";
+import OrderCollection from "./components/OrderCollection";
+
+export enum OrderState {
+  "requested" = 0,
+  "verify" = 1,
+  "rejected" = 2,
+  "confirmed" = 3,
+  "production" = 4,
+  "delivery" = 5,
+  "finished" = 6,
+}
+
+export enum OrderCollectionState {
+  "requested",
+  "progress",
+  "finished",
+}
 
 interface Props {
-  userType: EUserType;
+  userType: UserType;
 }
 
 const OrderCollectionOverview: React.FC<Props> = (props) => {
@@ -39,7 +51,7 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
 
   const getOrderCollectionEventByID = (
     orderCollectionID: string
-  ): IOrderCollectionEvent | undefined => {
+  ): OrderCollectionEvent | undefined => {
     if (missedEvents === undefined || missedEvents.length < 1) return undefined;
     return missedEvents.find(
       (orderEvent) => orderEvent.orderCollectionID === orderCollectionID
@@ -51,7 +63,7 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
       <div className="flex w-full flex-col items-center gap-5 overflow-x-auto overflow-y-hidden p-3">
         <h1 className="w-full bg-white py-3 text-center">
           {t(
-            userType === EUserType.client
+            userType === UserType.client
               ? "Orders.OrderCollectionOverview.headline.client"
               : "Orders.OrderCollectionOverview.headline.manufacturer"
           )}

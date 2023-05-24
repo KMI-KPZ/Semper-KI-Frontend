@@ -4,6 +4,12 @@ import Search from "./Search";
 import Cart from "./Cart";
 import { Wizard } from "./Wizard";
 
+export enum EProcessStatusType {
+  "ok",
+  "error",
+  "missing",
+}
+
 const Header: React.FC = () => {
   const { processState } = useContext(ProcessContext);
   const { progress } = processState;

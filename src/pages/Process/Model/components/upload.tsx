@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@component-library/Button";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { LoadingAnimation } from "@component-library/Loading";
-import useModelUpload from "@/hooks/useModelUpload";
-import { IModel } from "@/interface/Interface";
+import useModelUpload from "@/pages/Process/Model/hooks/useModelUpload";
 import { getFileSizeAsString } from "@/services/utils";
+import { IModel } from "..";
 
 interface Props {
   setProgress(path: string): void;

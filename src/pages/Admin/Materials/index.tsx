@@ -1,3 +1,4 @@
+import { IMaterial } from "@/pages/Process/Material";
 import {
   Paper,
   Table,
@@ -9,7 +10,6 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { IMaterial } from "../../../interface/Interface";
 
 interface Props {}
 

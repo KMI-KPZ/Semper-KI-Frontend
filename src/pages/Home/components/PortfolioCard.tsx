@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { UserSwitch } from "@component-library/Input";
-import { EUserType } from "@/interface/enums";
+import { UserType } from "@/hooks/useUser";
 
 interface Props {
   className?: string;
@@ -11,10 +11,10 @@ interface Props {
 const HomePortfolioCard: React.FC<Props> = (props) => {
   const { className } = props;
   const additionalClassNames = className ?? "";
-  const [userType, setUserType] = useState<EUserType>(EUserType.client);
+  const [userType, setUserType] = useState<UserType>(UserType.client);
   const { t } = useTranslation();
 
-  const handleOnClickSwitch = (userType: EUserType) => {
+  const handleOnClickSwitch = (userType: UserType) => {
     setUserType(userType);
   };
 
@@ -30,7 +30,7 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
         >
           <div
             className={`absolute flex w-full flex-col gap-1 overflow-clip duration-300 ${
-              userType === EUserType.client ? "-left-[200%]" : "left-0"
+              userType === UserType.client ? "-left-[200%]" : "left-0"
             }`}
           >
             <Link
@@ -60,7 +60,7 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
           </div>
           <div
             className={`absolute flex w-full flex-col gap-2 overflow-clip duration-300 ${
-              userType === EUserType.client ? "left-0" : "left-[200%]"
+              userType === UserType.client ? "left-0" : "left-[200%]"
             }`}
           >
             <Link

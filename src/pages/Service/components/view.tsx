@@ -1,4 +1,4 @@
-import useService from "@/hooks/useService";
+import useService from "@/pages/Service/hooks/useService";
 import React, { useEffect, useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
 import { IServiceChapter, IServiceQuestion } from "..";

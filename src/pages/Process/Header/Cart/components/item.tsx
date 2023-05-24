@@ -1,11 +1,10 @@
-import React, { ReactNode, useContext, useEffect, useState } from "react";
-import { IProcessItem } from "../../../../../interface/Interface";
-import { ProcessContext } from "../../..";
-import StatusIcon from "../../StatusIcon";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import { IconBadge } from "@component-library/Badge";
+import { IProcessItem, ProcessContext } from "@/pages/Process";
+import { ReactNode, useContext, useEffect, useState } from "react";
+import StatusIcon from "../../components/statusIcon";
 
 interface Props {
   process?: IProcessItem;

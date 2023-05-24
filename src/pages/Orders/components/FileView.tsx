@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { IOrder } from "../../../interface/Interface";
 import { Button } from "@component-library/Button";
 import DownloadIcon from "@mui/icons-material/Download";
-import useOrderFile from "../../../hooks/useOrderFiles";
+import useOrderFile from "../hooks/useOrderFiles";
+import { IOrder } from "../hooks/useOrders";
 
 interface Props {
   order: IOrder;

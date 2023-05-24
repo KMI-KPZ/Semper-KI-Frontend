@@ -1,17 +1,16 @@
+import { User, UserType } from "@/hooks/useUser";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { EUserType } from "../../../interface/enums";
-import { IUser } from "../../../interface/Interface";
 import { Error } from "../../Error";
 import LoginView from "../../Login";
 
 interface Props {
-  user: IUser | undefined;
+  user: User | undefined;
 }
 
 interface AdminProps {
-  userType: EUserType | undefined;
+  userType: UserType | undefined;
 }
 
 export const PrivateClientRoutes: React.FC<Props> = (props) => {
@@ -19,12 +18,12 @@ export const PrivateClientRoutes: React.FC<Props> = (props) => {
   const { pathname } = useLocation();
   const { t } = useTranslation();
 
-  if (user !== undefined && user.type !== EUserType.client)
+  if (user !== undefined && user.type !== UserType.client)
     return <Error text={t("PrivateRoutes.error.client")} />;
-  return user !== undefined && user.type === EUserType.client ? (
+  return user !== undefined && user.type === UserType.client ? (
     <Outlet />
   ) : (
-    <LoginView path={pathname} userType={EUserType.client} />
+    <LoginView path={pathname} userType={UserType.client} />
   );
 };
 
@@ -33,16 +32,16 @@ export const PrivateManufacturerRoutes: React.FC<Props> = (props) => {
   const { pathname } = useLocation();
   const { t } = useTranslation();
 
-  if (user !== undefined && user.type !== EUserType.manufacturer)
+  if (user !== undefined && user.type !== UserType.manufacturer)
     return <Error text={t("PrivateRoutes.error.manufacturer")} />;
-  return user !== undefined && user.type === EUserType.manufacturer ? (
+  return user !== undefined && user.type === UserType.manufacturer ? (
     <Outlet />
   ) : (
-    <LoginView path={pathname} userType={EUserType.manufacturer} />
+    <LoginView path={pathname} userType={UserType.manufacturer} />
   );
 };
 
-export const PrivateRoutes: React.FC<{ user?: IUser }> = ({ user }) => {
+export const PrivateRoutes: React.FC<{ user?: User }> = ({ user }) => {
   const { pathname } = useLocation();
   return user !== undefined ? <Outlet /> : <LoginView path={pathname} />;
 };
@@ -50,5 +49,5 @@ export const PrivateRoutes: React.FC<{ user?: IUser }> = ({ user }) => {
 export const PrivateAdminRoutes: React.FC<AdminProps> = (props) => {
   const { userType } = props;
   const { t } = useTranslation();
-  return userType === EUserType.admin ? <Outlet /> : <Error />;
+  return userType === UserType.admin ? <Outlet /> : <Error />;
 };

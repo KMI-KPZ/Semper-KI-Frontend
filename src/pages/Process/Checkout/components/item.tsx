@@ -1,9 +1,9 @@
+import { getModelURI } from "@/services/utils";
 import { LoadingAnimation } from "@component-library/Loading";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { IRequestState } from "../../../../hooks/useCheckout";
-import { IProcessItem } from "../../../../interface/Interface";
-import { getModelURI } from "../../../../services/utils";
+import { IProcessItem } from "../..";
+import { IRequestState } from "../hooks/useCheckout";
 
 type Props = {
   process: IProcessItem;

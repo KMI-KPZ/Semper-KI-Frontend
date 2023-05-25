@@ -10,8 +10,7 @@ import { LoadingSuspense } from "@component-library/Loading";
 import { Button } from "@component-library/Button";
 import { Badge } from "@component-library/Badge";
 import { UserType } from "@/hooks/useUser";
-import { OrderState } from "@/pages/Orders";
-import { useOrders } from "@/pages/Orders/hooks/useOrders";
+import { OrderState, useOrders } from "@/pages/Orders/hooks/useOrders";
 
 interface Props {
   className?: string;

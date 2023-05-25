@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 import { Badge } from "@component-library/Badge";
 import EmailIcon from "@mui/icons-material/Email";
 import FactoryIcon from "@mui/icons-material/Factory";
-import { IOrder } from "../hooks/useOrders";
+import { IOrder, OrderState } from "../hooks/useOrders";
 import { OrderEvent } from "@/hooks/useUser";
 import { getModelURI } from "@/services/utils";
-import { OrderState } from "..";
+
 interface Props {
   order: IOrder;
   orderEvent?: OrderEvent;

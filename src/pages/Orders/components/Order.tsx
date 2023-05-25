@@ -14,9 +14,8 @@ import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import { Badge } from "@component-library/Badge";
 import OrderFileView from "./FileView";
 import PopUp from "@/components/PopUp";
-import { IOrder, useOrders } from "../hooks/useOrders";
+import { IOrder, OrderState, useOrders } from "../hooks/useOrders";
 import { OrderEvent, UserType } from "@/hooks/useUser";
-import { OrderState } from "..";
 
 interface Props {
   order: IOrder;

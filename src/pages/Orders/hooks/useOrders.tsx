@@ -8,7 +8,6 @@ import {
   UseQueryResult,
 } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
-import { OrderCollectionState, OrderState } from "..";
 
 interface ReturnProps {
   ordersQuery: UseQueryResult<IOrderCollection[], Error>;
@@ -51,6 +50,22 @@ export interface IUpdateOrderData {
   chat?: IChatMessage;
   state?: OrderState;
   files?: File[];
+}
+
+export enum OrderState {
+  "requested" = 0,
+  "verify" = 1,
+  "rejected" = 2,
+  "confirmed" = 3,
+  "production" = 4,
+  "delivery" = 5,
+  "finished" = 6,
+}
+
+export enum OrderCollectionState {
+  "requested",
+  "progress",
+  "finished",
 }
 
 export const useOrders = (shouldLoad?: boolean): ReturnProps => {

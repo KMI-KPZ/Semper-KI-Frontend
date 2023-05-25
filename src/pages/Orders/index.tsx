@@ -6,22 +6,6 @@ import { IOrderCollection, useOrders } from "./hooks/useOrders";
 import { OrderCollectionEvent, UserType } from "@/hooks/useUser";
 import OrderCollection from "./components/OrderCollection";
 
-export enum OrderState {
-  "requested" = 0,
-  "verify" = 1,
-  "rejected" = 2,
-  "confirmed" = 3,
-  "production" = 4,
-  "delivery" = 5,
-  "finished" = 6,
-}
-
-export enum OrderCollectionState {
-  "requested",
-  "progress",
-  "finished",
-}
-
 interface Props {
   userType: UserType;
 }

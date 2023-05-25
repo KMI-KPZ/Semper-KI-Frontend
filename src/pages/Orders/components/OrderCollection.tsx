@@ -9,9 +9,13 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OrderPreView from "./OrderPreView";
 import OrderView from "./Order";
-import { IOrderCollection, useOrders } from "../hooks/useOrders";
+import {
+  IOrderCollection,
+  OrderCollectionState,
+  OrderState,
+  useOrders,
+} from "../hooks/useOrders";
 import { OrderCollectionEvent, OrderEvent, UserType } from "@/hooks/useUser";
-import { OrderCollectionState, OrderState } from "..";
 
 interface Props {
   index: number;

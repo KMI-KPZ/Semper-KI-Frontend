@@ -1,5 +1,4 @@
-import { OrderState } from "@/pages/Orders";
-import { IOrder } from "@/pages/Orders/hooks/useOrders";
+import { IOrder, OrderState } from "@/pages/Orders/hooks/useOrders";
 import {
   Paper,
   Table,

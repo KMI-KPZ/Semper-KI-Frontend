@@ -1,4 +1,4 @@
-import { EGuideQuestionState, IGuideOption } from "@/pages/Guide";
+import { EGuideQuestionState, IGuideOption } from "../..";
 import GuideButtons from "./buttons";
 import { IGuideOptionProps } from "./options";
 

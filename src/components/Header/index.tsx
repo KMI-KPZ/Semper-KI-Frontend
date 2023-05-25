@@ -6,7 +6,7 @@ import { ClickAwayListener } from "@mui/material";
 import HeaderItem from "./components/Item";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { NavigationItems } from "../../data/navigation";
+import { NavigationItemData } from "@/data/navigation";
 import LogoURL from "@images/logo192.png";
 import { AppContext } from "@/pages/App";
 import { OrderCollectionEvent, UserType } from "@/hooks/useUser";
@@ -175,7 +175,7 @@ export const Header: React.FC<Props> = (props) => {
   );
   const renderHeaderItems: JSX.Element = (
     <ul className="hidden flex-row items-center justify-center gap-2 md:flex md:gap-4">
-      {NavigationItems.filter(
+      {NavigationItemData.filter(
         (item) =>
           item.preferred.includes("header") && item.userTypes.includes(userType)
       ).map((item, index: number) => (
@@ -190,7 +190,7 @@ export const Header: React.FC<Props> = (props) => {
   );
   const renderMobileHeaderItems: JSX.Element = (
     <ul className="hidden flex-row items-center justify-center gap-2 xs:flex md:hidden md:gap-4">
-      {NavigationItems.filter(
+      {NavigationItemData.filter(
         (item) =>
           item.preferred.includes("header") && item.userTypes.includes(userType)
       ).map((item, index: number) => (
@@ -216,7 +216,7 @@ export const Header: React.FC<Props> = (props) => {
         {renderLanguageMenu}
       </div>
 
-      {NavigationItems.filter(
+      {NavigationItemData.filter(
         (item) =>
           item.preferred.includes("menu") && item.userTypes.includes(userType)
       ).map((item, index: number) => (
@@ -240,7 +240,7 @@ export const Header: React.FC<Props> = (props) => {
         </div>
         {renderLanguageMenu}
       </div>
-      {NavigationItems.filter(
+      {NavigationItemData.filter(
         (item) =>
           item.preferred.includes("header") && item.userTypes.includes(userType)
       ).map((item, index: number) => (

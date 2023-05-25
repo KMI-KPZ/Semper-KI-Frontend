@@ -73,8 +73,6 @@ const StatusView: React.FC<Props> = (props) => {
   };
 
   const renderStatusItem = (statusData: StatusData, index: number) => {
-    console.log("Warum was los?");
-
     if (
       (status === OrderState.rejected &&
         statusData.orderState === OrderState.confirmed) ||

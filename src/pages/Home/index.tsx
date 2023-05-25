@@ -41,33 +41,6 @@ export const Home: React.FC<Props> = (props) => {
   };
   const count = getChangeCount();
 
-  // if (userType !== UserType.anonym)
-  //   return (
-  //     <div className="flex flex-col gap-12 justify-start items-center">
-  //       <h1 className="">{t("Home.Home.header")}</h1>
-  //       <div className="flex flex-row flex-wrap justify-center gap-5 p-4 md:p-0 items-center">
-  //         {NavigationItems.filter(
-  //           (item) =>
-  //             item.userTypes.includes(userType) &&
-  //             item.preferred.includes(ENavigationItemPreferred.home)
-  //         )
-  //           .filter(
-  //             (item) =>
-  //               (item.title === "data.NavigationItem.continue" &&
-  //                 cartCount > 0) ||
-  //               item.title !== "data.NavigationItem.continue"
-  //           )
-  //           .map((item, index) => (
-  //             <HomeItem
-  //               key={index}
-  //               homeItem={item}
-  //               badge={calcBadge(item.title)}
-  //             />
-  //           ))}
-  //       </div>
-  //     </div>
-  //   );
-
   return (
     <div className="flex h-full w-full flex-grow flex-col items-center justify-start gap-5 md:grid md:grid-cols-3">
       <HomeSearchCard className="w-full bg-white md:order-2 md:col-span-2 md:h-full" />

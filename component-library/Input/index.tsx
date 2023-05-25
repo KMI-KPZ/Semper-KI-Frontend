@@ -21,7 +21,7 @@ export const UserSwitch: React.FC<Props> = (props) => {
 
   return (
     <div
-      className="relative flex select-none flex-row items-center justify-between gap-2 overflow-clip bg-türkis-300 p-1 hover:cursor-pointer"
+      className="relative flex select-none flex-col items-center justify-between gap-2 overflow-clip bg-türkis-300 p-1 hover:cursor-pointer md:flex-row"
       onClick={handleOnClickSwitch}
     >
       <span

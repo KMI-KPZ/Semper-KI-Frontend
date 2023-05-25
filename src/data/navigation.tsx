@@ -21,7 +21,7 @@ import ScienceIcon from "@mui/icons-material/Science";
 import { UserType } from "@/hooks/useUser";
 import { NavigationItemPreferredType } from "@/components/Header";
 
-export interface INavigationItem {
+interface INavigationItem {
   title: string;
   link: string;
   icon: ReactNode;
@@ -30,7 +30,7 @@ export interface INavigationItem {
   userTypes: UserType[];
 }
 
-export const NavigationItems: INavigationItem[] = [
+export const NavigationItemData: INavigationItem[] = [
   {
     title: "data.NavigationItem.about-us",
     link: "https://semper-ki.org/",

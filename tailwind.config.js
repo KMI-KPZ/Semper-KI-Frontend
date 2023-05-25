@@ -4,6 +4,7 @@ module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "./component-library/*",
   ],
   theme: {
     screens: {

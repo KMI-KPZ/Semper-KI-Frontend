@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLogin } from "./hooks/useLogin";
 import { Button } from "@component-library/Button";
-import { UserSwitch } from "@component-library/Input";
+import { UserSwitch } from "@/components/UserSwitch";
 import LoginIcon from "@mui/icons-material/Login";
 import CreateIcon from "@mui/icons-material/Create";
 import { UserType } from "@/hooks/useUser";

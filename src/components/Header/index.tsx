@@ -22,22 +22,13 @@ export type HeaderItem = {
   link: string;
   icon: string | ReactNode;
   extern: boolean;
-  preferred: NavigationItemPreferredEnum;
+  preferred: NavigationItemPreferredType;
   userType: UserType[];
   loggedIn: boolean[];
 };
 
-export enum HeaderItemLoggedInEnum {
-  "true",
-  "false",
-  "both",
-}
-
-export enum NavigationItemPreferredEnum {
-  "header",
-  "menu",
-  "home",
-}
+export type HeaderItemLoggedInType = true | false | "both";
+export type NavigationItemPreferredType = "header" | "menu" | "home";
 
 const languages: Language[] = [
   {
@@ -186,8 +177,7 @@ export const Header: React.FC<Props> = (props) => {
     <ul className="hidden flex-row items-center justify-center gap-2 md:flex md:gap-4">
       {NavigationItems.filter(
         (item) =>
-          item.preferred.includes(NavigationItemPreferredEnum.header) &&
-          item.userTypes.includes(userType)
+          item.preferred.includes("header") && item.userTypes.includes(userType)
       ).map((item, index: number) => (
         <HeaderItem
           key={index}
@@ -202,8 +192,7 @@ export const Header: React.FC<Props> = (props) => {
     <ul className="hidden flex-row items-center justify-center gap-2 xs:flex md:hidden md:gap-4">
       {NavigationItems.filter(
         (item) =>
-          item.preferred.includes(NavigationItemPreferredEnum.header) &&
-          item.userTypes.includes(userType)
+          item.preferred.includes("header") && item.userTypes.includes(userType)
       ).map((item, index: number) => (
         <HeaderItem
           key={index}
@@ -229,8 +218,7 @@ export const Header: React.FC<Props> = (props) => {
 
       {NavigationItems.filter(
         (item) =>
-          item.preferred.includes(NavigationItemPreferredEnum.menu) &&
-          item.userTypes.includes(userType)
+          item.preferred.includes("menu") && item.userTypes.includes(userType)
       ).map((item, index: number) => (
         <HeaderItem
           key={index}
@@ -254,8 +242,7 @@ export const Header: React.FC<Props> = (props) => {
       </div>
       {NavigationItems.filter(
         (item) =>
-          item.preferred.includes(NavigationItemPreferredEnum.header) &&
-          item.userTypes.includes(userType)
+          item.preferred.includes("header") && item.userTypes.includes(userType)
       ).map((item, index: number) => (
         <HeaderItem
           key={index}

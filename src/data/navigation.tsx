@@ -18,15 +18,15 @@ import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import PrintIcon from "@mui/icons-material/Print";
 import HardwareIcon from "@mui/icons-material/Hardware";
 import ScienceIcon from "@mui/icons-material/Science";
-import { NavigationItemPreferredEnum } from "@/components/Header";
 import { UserType } from "@/hooks/useUser";
+import { NavigationItemPreferredType } from "@/components/Header";
 
 export interface INavigationItem {
   title: string;
   link: string;
   icon: ReactNode;
   extern: boolean;
-  preferred: NavigationItemPreferredEnum[];
+  preferred: NavigationItemPreferredType[];
   userTypes: UserType[];
 }
 
@@ -49,7 +49,7 @@ export const NavigationItems: INavigationItem[] = [
     title: "data.NavigationItem.explore",
     link: "/process/model",
     icon: <ScienceIcon fontSize="large" />,
-    preferred: [NavigationItemPreferredEnum.home],
+    preferred: ["home"],
     extern: false,
   },
   {
@@ -57,7 +57,7 @@ export const NavigationItems: INavigationItem[] = [
     title: "data.NavigationItem.continue",
     link: "/process",
     icon: <KeyboardDoubleArrowRightIcon fontSize="large" />,
-    preferred: [NavigationItemPreferredEnum.home],
+    preferred: ["home"],
     extern: false,
   },
   {
@@ -65,7 +65,7 @@ export const NavigationItems: INavigationItem[] = [
     title: "data.NavigationItem.new-contract",
     link: "/process/new",
     icon: <AddShoppingCartIcon fontSize="large" />,
-    preferred: [NavigationItemPreferredEnum.home],
+    preferred: ["home"],
     extern: false,
   },
   {
@@ -73,7 +73,7 @@ export const NavigationItems: INavigationItem[] = [
     link: "/logout",
     icon: <LogoutIcon fontSize="large" />,
     extern: false,
-    preferred: [NavigationItemPreferredEnum.menu],
+    preferred: ["menu"],
     userTypes: [UserType.client, UserType.manufacturer, UserType.admin],
   },
   {
@@ -81,10 +81,7 @@ export const NavigationItems: INavigationItem[] = [
     link: "/guide",
     icon: <MapIcon fontSize="large" />,
     extern: false,
-    preferred: [
-      NavigationItemPreferredEnum.menu,
-      NavigationItemPreferredEnum.home,
-    ],
+    preferred: ["menu", "home"],
     userTypes: [UserType.anonym, UserType.client, UserType.manufacturer],
   },
   {
@@ -92,7 +89,7 @@ export const NavigationItems: INavigationItem[] = [
     link: "/cart",
     icon: <ShoppingCartIcon fontSize="large" />,
     extern: false,
-    preferred: [NavigationItemPreferredEnum.header],
+    preferred: ["header"],
     userTypes: [UserType.anonym, UserType.client],
   },
   {
@@ -100,7 +97,7 @@ export const NavigationItems: INavigationItem[] = [
     link: "/login",
     icon: <LoginIcon fontSize="large" />,
     extern: false,
-    preferred: [NavigationItemPreferredEnum.header],
+    preferred: ["header"],
     userTypes: [UserType.anonym],
   },
 
@@ -109,10 +106,7 @@ export const NavigationItems: INavigationItem[] = [
     link: "/orders",
     icon: <DescriptionIcon fontSize="large" />,
     extern: false,
-    preferred: [
-      NavigationItemPreferredEnum.header,
-      NavigationItemPreferredEnum.home,
-    ],
+    preferred: ["header", "home"],
     userTypes: [UserType.client],
   },
   {
@@ -120,10 +114,7 @@ export const NavigationItems: INavigationItem[] = [
     link: "/contracts",
     icon: <DescriptionIcon fontSize="large" />,
     extern: false,
-    preferred: [
-      NavigationItemPreferredEnum.header,
-      NavigationItemPreferredEnum.home,
-    ],
+    preferred: ["header", "home"],
     userTypes: [UserType.manufacturer],
   },
   {
@@ -131,10 +122,7 @@ export const NavigationItems: INavigationItem[] = [
     link: "/account",
     icon: <PersonIcon fontSize="large" />,
     extern: false,
-    preferred: [
-      NavigationItemPreferredEnum.menu,
-      NavigationItemPreferredEnum.home,
-    ],
+    preferred: ["menu", "home"],
     userTypes: [UserType.client, UserType.manufacturer, UserType.admin],
   },
 
@@ -143,7 +131,7 @@ export const NavigationItems: INavigationItem[] = [
     link: "/test",
     icon: <BugReportIcon fontSize="large" />,
     extern: false,
-    preferred: [NavigationItemPreferredEnum.menu],
+    preferred: ["menu"],
     userTypes: [
       UserType.anonym,
       UserType.client,
@@ -156,7 +144,7 @@ export const NavigationItems: INavigationItem[] = [
     title: "data.NavigationItem.use-service",
     link: "/service/use",
     icon: <HardwareIcon fontSize="large" />,
-    preferred: [NavigationItemPreferredEnum.home],
+    preferred: ["home"],
     extern: false,
   },
   {
@@ -164,7 +152,7 @@ export const NavigationItems: INavigationItem[] = [
     title: "data.NavigationItem.provide-service",
     link: "/service/provide",
     icon: <PrecisionManufacturingIcon fontSize="large" />,
-    preferred: [NavigationItemPreferredEnum.home],
+    preferred: ["home"],
     extern: false,
   },
   {
@@ -172,7 +160,7 @@ export const NavigationItems: INavigationItem[] = [
     title: "data.NavigationItem.proceedings",
     link: "/proceedings",
     icon: <GavelIcon fontSize="large" />,
-    preferred: [NavigationItemPreferredEnum.home],
+    preferred: ["home"],
     extern: false,
   },
   {
@@ -180,7 +168,7 @@ export const NavigationItems: INavigationItem[] = [
     title: "data.NavigationItem.company",
     link: "/company",
     icon: <FactoryIcon fontSize="large" />,
-    preferred: [NavigationItemPreferredEnum.home],
+    preferred: ["home"],
     extern: false,
   },
   {
@@ -188,7 +176,7 @@ export const NavigationItems: INavigationItem[] = [
     title: "data.NavigationItem.user",
     link: "/user",
     icon: <PersonIcon fontSize="large" />,
-    preferred: [NavigationItemPreferredEnum.home],
+    preferred: ["home"],
     extern: false,
   },
   {
@@ -196,7 +184,7 @@ export const NavigationItems: INavigationItem[] = [
     title: "data.NavigationItem.model",
     link: "/model",
     icon: <ViewInArIcon fontSize="large" />,
-    preferred: [NavigationItemPreferredEnum.home],
+    preferred: ["home"],
     extern: false,
   },
   {
@@ -204,7 +192,7 @@ export const NavigationItems: INavigationItem[] = [
     title: "data.NavigationItem.material",
     link: "/material",
     icon: <HomeRepairServiceIcon fontSize="large" />,
-    preferred: [NavigationItemPreferredEnum.home],
+    preferred: ["home"],
     extern: false,
   },
   {
@@ -212,7 +200,7 @@ export const NavigationItems: INavigationItem[] = [
     title: "data.NavigationItem.procedure",
     link: "/procedure",
     icon: <SyncAltIcon fontSize="large" />,
-    preferred: [NavigationItemPreferredEnum.home],
+    preferred: ["home"],
     extern: false,
   },
   {
@@ -220,7 +208,7 @@ export const NavigationItems: INavigationItem[] = [
     title: "data.NavigationItem.printer",
     link: "/printer",
     icon: <PrintIcon fontSize="large" />,
-    preferred: [NavigationItemPreferredEnum.home],
+    preferred: ["home"],
     extern: false,
   },
 ];

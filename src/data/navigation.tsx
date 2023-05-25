@@ -21,14 +21,14 @@ import ScienceIcon from "@mui/icons-material/Science";
 import { UserType } from "@/hooks/useUser";
 import { NavigationItemPreferredType } from "@/components/Header";
 
-interface INavigationItem {
+export type INavigationItem = {
   title: string;
   link: string;
   icon: ReactNode;
   extern: boolean;
   preferred: NavigationItemPreferredType[];
   userTypes: UserType[];
-}
+};
 
 export const NavigationItemData: INavigationItem[] = [
   {

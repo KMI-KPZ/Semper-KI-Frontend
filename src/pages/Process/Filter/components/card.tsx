@@ -1,11 +1,10 @@
 import { IconButton } from "@mui/material";
 import React from "react";
-import { ICategory } from "..";
-import { IFilterItem } from "..";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import FilterItem from "./item";
 import { useTranslation } from "react-i18next";
+import FilterItem from "./item";
+import { ICategory, IFilterItem } from "..";
 
 interface Props {
   category: ICategory;

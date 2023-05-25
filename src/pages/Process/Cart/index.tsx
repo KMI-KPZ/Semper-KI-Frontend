@@ -11,7 +11,7 @@ import { ErrorView } from "@component-library/Error";
 import { Button } from "@component-library/Button";
 import useCart from "@/hooks/useCart";
 import { IProcessItem } from "..";
-import { TError } from "@/interface/types";
+import { ErrorType } from "@/types/general";
 
 interface Props {}
 
@@ -31,7 +31,7 @@ const Cart: React.FC<Props> = (props) => {
   const { data: cart } = cartQuery;
   const queryClient = useQueryClient();
 
-  const checkCart = (): { errors: TError[]; errorCount: number } => {
+  const checkCart = (): { errors: ErrorType[]; errorCount: number } => {
     const errorCount = cart.filter(
       (item: IProcessItem) =>
         item.model === undefined ||
@@ -39,7 +39,7 @@ const Cart: React.FC<Props> = (props) => {
         item.postProcessings === undefined
     ).length;
 
-    let errors: TError[] = [];
+    let errors: ErrorType[] = [];
     if (cart.length === 0) errors.push("empty");
     if (errorCount > 0 && cart.length > 0) errors.push("incomplete");
     return { errors, errorCount };

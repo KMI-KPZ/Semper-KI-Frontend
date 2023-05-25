@@ -21,7 +21,7 @@ import AdminModels from "../Admin/Models";
 import AdminMaterials from "../Admin/Materials";
 import AdminOrders from "../Admin/Orders";
 import Cart from "../Process/Cart";
-import { URL_AboutUs } from "../../constants/Constants";
+import { URL_AboutUs } from "../../config/constants";
 import LoginView from "../Login";
 import useMissedEvent from "../../hooks/useMissedEvent";
 import { useWebsocket } from "../../hooks/useWebsocket";
@@ -43,41 +43,41 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
 import { IFilterItem } from "../Process/Filter";
 
-export interface IAppState {
+export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
   stopScroll: boolean;
   guideFilter: IFilterItem[];
   missedEvents: OrderCollectionEvent[];
-}
+};
 
-export interface IAppContext {
+export type AppContext = {
   user: User | undefined;
   cart: IProcessItem[];
-  appState: IAppState;
-  setAppState: React.Dispatch<React.SetStateAction<IAppState>>;
+  appState: AppState;
+  setAppState: React.Dispatch<React.SetStateAction<AppState>>;
   deleteEvent(
     orderCollectionID: string,
     orderID: string,
     type: "message" | "status"
   ): void;
-}
+};
 
-const initialState: IAppState = {
+const initialAppState: AppState = {
   stopScroll: false,
   guideFilter: [],
   missedEvents: [],
 };
 
-export const AppContext = createContext<IAppContext>({
+export const AppContext = createContext<AppContext>({
   user: undefined,
   cart: [],
-  appState: initialState,
+  appState: initialAppState,
   setAppState: () => {},
   deleteEvent: () => {},
 });
 
 const App: React.FC = () => {
-  const [state, setState] = useState<IAppState>(initialState);
+  const [state, setState] = useState<AppState>(initialAppState);
   const { stopScroll, guideFilter, selectedProgressItem, missedEvents } = state;
   const { isLoggedIn, userType, user, isLoggedInResponse } = useUser();
   const { initialMissedEvents } = useMissedEvent({

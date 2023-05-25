@@ -1,9 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { INavigationItem } from "../../../data/navigation";
 import { Badge } from "@component-library/Badge";
 import { ReactComponent as LogoIcon } from "@icons/Logo.svg";
+import { INavigationItem } from "@/data/navigation";
 
 interface Props {
   isMenuItem?: boolean;

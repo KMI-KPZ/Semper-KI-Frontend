@@ -1,9 +1,9 @@
+import { ErrorType } from "@/types/general";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { TError } from "../../src/interface/types";
 
 interface Props {
-  errors: TError[];
+  errors: ErrorType[];
   itemName: string;
 }
 

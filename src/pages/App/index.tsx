@@ -26,6 +26,7 @@ import { Home } from "../Home";
 import LoginView from "../Login";
 import Logout from "../Logout";
 import OrderCollectionOverview from "../Orders";
+import OrganizationView from "../Organization";
 import Portfolio from "../Portfolio";
 import { IProcessItem, ProcessView } from "../Process";
 import Cart from "../Process/Cart";
@@ -338,6 +339,7 @@ const App: React.FC = () => {
         path="contracts"
         element={<OrderCollectionOverview userType={UserType.manufacturer} />}
       />
+      <Route path="organization" element={<OrganizationView user={user} />} />
     </Route>
   );
   const privateRoutes = (

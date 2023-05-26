@@ -22,7 +22,8 @@
       "register": "Registrieren",
       "logout": "Abmelden",
       "account": "Konto",
-      "test": "Test"
+      "test": "Test",
+      "organization":"Organisation"
     }
   },
   "enum":{
@@ -706,5 +707,28 @@
       "header":"Service Anbieten"
     },
     "ServiceWizard":{}
+  },
+  "Organization":{
+    "index":{
+      "header":"Organisationsübersicht"
+    },
+    "components":{
+      "tabel":{
+        "name":"Benutzername",
+        "email":"E-Mail",
+        "role":"Rolle",
+        "created":"Erstellt am",
+        "accessed":"letzter Zugegriff am",
+        "actions":"Aktionen"
+      },
+      "invitation":{
+        "header":"Benutzer einladen",
+        "placeholder":"Email...",
+        "button":{
+          "invite":"Einladen",
+          "link":"Einladungslink kopieren"
+        }
+      }
+    }
   }
 }

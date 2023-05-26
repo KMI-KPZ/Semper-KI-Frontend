@@ -18,6 +18,7 @@ import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import PrintIcon from "@mui/icons-material/Print";
 import HardwareIcon from "@mui/icons-material/Hardware";
 import ScienceIcon from "@mui/icons-material/Science";
+import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import { UserType } from "@/hooks/useUser";
 import { NavigationItemPreferredType } from "@/components/Header";
 
@@ -113,6 +114,14 @@ export const NavigationItemData: INavigationItem[] = [
     title: "data.NavigationItem.contracts",
     link: "/contracts",
     icon: <DescriptionIcon fontSize="large" />,
+    extern: false,
+    preferred: ["header", "home"],
+    userTypes: [UserType.manufacturer],
+  },
+  {
+    title: "data.NavigationItem.organization",
+    link: "/organization",
+    icon: <CorporateFareIcon fontSize="large" />,
     extern: false,
     preferred: ["header", "home"],
     userTypes: [UserType.manufacturer],

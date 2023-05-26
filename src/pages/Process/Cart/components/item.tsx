@@ -6,9 +6,9 @@ import ErrorIcon from "@mui/icons-material/Error";
 import { useTranslation } from "react-i18next";
 import ModelPlaceholderUrl from "@images/model_placeholder.png";
 import { Button } from "@component-library/Button";
-import { IProcessItem } from "../..";
 import { AppContext } from "@/pages/App";
 import { getModelURI } from "@/services/utils";
+import { IProcessItem } from "../..";
 
 interface Props {
   process: IProcessItem;

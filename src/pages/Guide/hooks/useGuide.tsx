@@ -1,6 +1,6 @@
 import { IGuide, IGuideQuestion } from "@/pages/Guide";
 import { useState } from "react";
-import _GuideQuestions from "../../../hooks/Data/GuideQuestions.json";
+import _GuideQuestions from "@/hooks/Data/GuideQuestions.json";
 const GuideQuestions = _GuideQuestions as IGuide[];
 
 interface ReturnProps {

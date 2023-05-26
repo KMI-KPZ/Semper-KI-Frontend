@@ -1,5 +1,5 @@
-import useCustomAxios from "../../../../hooks/useCustomAxios";
-import _FilterItems from "../../../../hooks/Data/FilterQuestions.json";
+import useCustomAxios from "@/hooks/useCustomAxios";
+import _FilterItems from "@/hooks/Data/FilterQuestions.json";
 import {
   DefinedUseQueryResult,
   useMutation,

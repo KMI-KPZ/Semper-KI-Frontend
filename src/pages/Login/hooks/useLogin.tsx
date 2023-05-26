@@ -1,8 +1,8 @@
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
-import useCustomAxios from "../../../hooks/useCustomAxios";
 import { useEffect } from "react";
 import { AxiosResponse } from "axios";
 import { UserType } from "@/hooks/useUser";
+import useCustomAxios from "@/hooks/useCustomAxios";
 
 export const useLogin = (
   load: boolean,

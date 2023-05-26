@@ -1,5 +1,5 @@
+import useCustomAxios from "@/hooks/useCustomAxios";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import useCustomAxios from "../../../hooks/useCustomAxios";
 
 interface Props {
   orderID: string;

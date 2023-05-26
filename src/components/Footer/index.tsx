@@ -1,8 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { URL_Datenschutz, URL_Impressum } from "../../config/constants";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import { URL_Datenschutz, URL_Impressum } from "@/config/constants";
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();

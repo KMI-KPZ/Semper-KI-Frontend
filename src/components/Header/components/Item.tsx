@@ -52,7 +52,7 @@ const HeaderItem: React.FC<Props> = (props) => {
         onClick={handleOnClick}
       >
         {badge !== undefined && badge > 0 ? (
-          <Badge count={badge} position="small">
+          <Badge count={badge} position="large">
             {renderIcon}
           </Badge>
         ) : (

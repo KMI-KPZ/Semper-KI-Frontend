@@ -1,10 +1,9 @@
+import useCustomAxios from "@/hooks/useCustomAxios";
 import { User } from "@/hooks/useUser";
 import { IOrder } from "@/pages/Orders/hooks/useOrders";
 import { IMaterial } from "@/pages/Process/Material";
 import { IModel } from "@/pages/Process/Model";
 import { useState } from "react";
-
-import useCustomAxios from "../../../hooks/useCustomAxios";
 
 interface ReturnProps {
   data: IAdminData;

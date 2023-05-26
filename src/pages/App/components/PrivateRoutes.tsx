@@ -1,9 +1,9 @@
 import { User, UserType } from "@/hooks/useUser";
+import { Error } from "@/pages/Error";
+import LoginView from "@/pages/Login";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { Error } from "../../Error";
-import LoginView from "../../Login";
+import { Outlet, useLocation } from "react-router-dom";
 
 interface Props {
   user: User | undefined;

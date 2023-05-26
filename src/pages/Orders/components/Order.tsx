@@ -1,13 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { Button } from "@component-library/Button";
 import MailIcon from "@mui/icons-material/Mail";
-import { AppContext } from "../../App";
 import ChatView from "./Chat";
 import StatusView from "./StatusView";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { getModelURI } from "../../../services/utils";
 import { useTranslation } from "react-i18next";
 import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
@@ -16,6 +14,7 @@ import OrderFileView from "./FileView";
 import PopUp from "@/components/PopUp";
 import { IOrder, OrderState, useOrders } from "../hooks/useOrders";
 import { OrderEvent, UserType } from "@/hooks/useUser";
+import { AppContext } from "@/pages/App";
 
 interface Props {
   order: IOrder;

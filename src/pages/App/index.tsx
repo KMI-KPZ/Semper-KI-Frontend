@@ -1,47 +1,47 @@
-import React, { createContext, useEffect, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { RequestTest } from "../RequestTest";
+import Background from "@/components/Background";
+import Breadcrumb from "@/components/Breadcrumb";
+import Footer from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { URL_AboutUs } from "@/config/constants";
+import useCart from "@/hooks/useCart";
+import useMissedEvent from "@/hooks/useMissedEvent";
 import useUser, {
   OrderCollectionEvent,
   OrderEvent,
   User,
   UserType,
-} from "../../hooks/useUser";
-import { Home } from "../Home";
-import { IProcessItem, ProcessView } from "../Process";
-import Logout from "../Logout";
-import { Error } from "../Error";
-import Redirect from "../Redirect";
-import ServiceRoutes from "../Service";
-import GuideRoutes from "../Guide";
-import Profil from "../Profil";
-import OrderCollectionOverview from "../Orders";
-import AdminUsers from "../Admin/Users";
-import AdminModels from "../Admin/Models";
-import AdminMaterials from "../Admin/Materials";
-import AdminOrders from "../Admin/Orders";
-import Cart from "../Process/Cart";
-import { URL_AboutUs } from "../../config/constants";
-import LoginView from "../Login";
-import useMissedEvent from "../../hooks/useMissedEvent";
-import { useWebsocket } from "../../hooks/useWebsocket";
+} from "@/hooks/useUser";
+import { useWebsocket } from "@/hooks/useWebsocket";
 import { useQueryClient } from "@tanstack/react-query";
-import useCart from "../../hooks/useCart";
+import { createContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Navigate, Route, Routes } from "react-router-dom";
+import AdminMaterials from "../Admin/Materials";
+import AdminModels from "../Admin/Models";
+import AdminOrders from "../Admin/Orders";
+import AdminUsers from "../Admin/Users";
+import { Error } from "../Error";
+import GuideRoutes from "../Guide";
+import { Home } from "../Home";
+import LoginView from "../Login";
+import Logout from "../Logout";
+import OrderCollectionOverview from "../Orders";
 import Portfolio from "../Portfolio";
+import { IProcessItem, ProcessView } from "../Process";
+import Cart from "../Process/Cart";
+import Checkout from "../Process/Checkout";
+import { IFilterItem } from "../Process/Filter";
+import ManufacturerView from "../Process/Manufacturer";
+import Profil from "../Profil";
+import Redirect from "../Redirect";
+import { RequestTest } from "../RequestTest";
+import ServiceRoutes from "../Service";
 import {
   PrivateAdminRoutes,
   PrivateClientRoutes,
   PrivateManufacturerRoutes,
   PrivateRoutes,
 } from "./components/PrivateRoutes";
-import ManufacturerView from "../Process/Manufacturer";
-import Checkout from "../Process/Checkout";
-import Background from "@/components/Background";
-import { Header } from "@/components/Header";
-import Breadcrumb from "@/components/Breadcrumb";
-import Footer from "@/components/Footer";
-import { IFilterItem } from "../Process/Filter";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };

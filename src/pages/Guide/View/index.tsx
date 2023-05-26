@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useGuide from "../hooks/useGuide";
-import useFilter from "../../Process/Filter/hooks/useFilter";
 import { LoadingAnimation } from "@component-library/Loading";
 import { EGuideQuestionType, IGuideOption, IGuideQuestion } from "..";
 import {
@@ -13,6 +12,7 @@ import {
 import GuideOverview from "./components/overview";
 import GuideAnswers from "./components/answer";
 import GuideQuestion from "./components/question";
+import useFilter from "@/pages/Process/Filter/hooks/useFilter";
 
 const getQuestionByFilterId = (
   filterId: number,

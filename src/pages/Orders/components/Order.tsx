@@ -15,6 +15,7 @@ import PopUp from "@/components/PopUp";
 import { IOrder, OrderState, useOrders } from "../hooks/useOrders";
 import { OrderEvent, UserType } from "@/hooks/useUser";
 import { AppContext } from "@/pages/App";
+import { getModelURI } from "@/services/utils";
 
 interface Props {
   order: IOrder;

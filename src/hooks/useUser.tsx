@@ -1,21 +1,55 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { EUserType } from "../interface/enums";
-import { IUser } from "../interface/Interface";
 import { getUserType, parseAddress } from "../services/utils";
 import useCRSFToken from "./useCSRFToken";
 import useCustomAxios from "./useCustomAxios";
 
 interface ReturnProps {
-  userType: EUserType;
-  user: IUser | undefined;
+  userType: UserType;
+  user: User | undefined;
   isLoggedIn: boolean;
   isLoggedInResponse: boolean;
   loadIsLoggedInQuery: UseQueryResult<boolean, Error>;
-  loadUserQuery: UseQueryResult<IUser, Error>;
+  loadUserQuery: UseQueryResult<User, Error>;
   deleteUser(): void;
-  updateUser(userType: EUserType): void;
+  updateUser(userType: UserType): void;
+}
+
+export type User = {
+  address: Address;
+  email: string;
+  hashedID: string;
+  name: string;
+  organization: string;
+  type: UserType;
+  created: Date;
+  accessed: Date;
+  updated: Date;
+};
+export enum UserType {
+  "client",
+  "manufacturer",
+  "admin",
+  "anonym",
+}
+
+export interface Address {
+  city: string;
+  houseNumber: string;
+  street: string;
+  country: string;
+  zipcode: string;
+}
+
+export interface OrderCollectionEvent {
+  orderCollectionID: string;
+  orders: OrderEvent[];
+}
+
+export interface OrderEvent {
+  orderID: string;
+  status?: number;
+  messages?: number;
 }
 
 const useUser = (): ReturnProps => {
@@ -27,7 +61,7 @@ const useUser = (): ReturnProps => {
     queryKey: ["isLoggedIn"],
     queryFn: async () =>
       axiosCustom
-        .get(`${process.env.REACT_APP_HTTP_API_URL}/public/isLoggedIn/`)
+        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/isLoggedIn/`)
         .then((response) => {
           console.log("useUser | isLoggedIn ✅ |", response.data);
           return response.data === "Success" ? true : false;
@@ -35,11 +69,11 @@ const useUser = (): ReturnProps => {
     enabled: isCSRFTokenLoaded === true,
   });
 
-  const loadUserQuery = useQuery<IUser, Error>({
+  const loadUserQuery = useQuery<User, Error>({
     queryKey: ["user"],
     queryFn: async () =>
       axiosCustom
-        .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getUser/`)
+        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getUser/`)
         .then((response) => {
           const userData = response.data;
           console.log("useUser | getUser ✅ |", userData);
@@ -60,7 +94,7 @@ const useUser = (): ReturnProps => {
 
   const deleteUser = () => {
     axiosCustom
-      .delete(`${process.env.REACT_APP_HTTP_API_URL}/public/profileDeleteUser/`)
+      .delete(`${import.meta.env.VITE_HTTP_API_URL}/public/profileDeleteUser/`)
       .then((response) => {
         console.log("useUser | profileDeleteUser ✅ |");
         navigate("/logout");
@@ -70,10 +104,10 @@ const useUser = (): ReturnProps => {
       });
   };
 
-  const updateUser = (userType: EUserType) => {
+  const updateUser = (userType: UserType) => {
     axiosCustom
-      .post(`${process.env.REACT_APP_HTTP_API_URL}/public/updateUser/`, {
-        userType: EUserType[userType],
+      .post(`${import.meta.env.VITE_HTTP_API_URL}/public/updateUser/`, {
+        userType: UserType[userType],
       })
       .then((response) => {
         console.log("useUser | updateUser ✅ |", response);
@@ -83,11 +117,11 @@ const useUser = (): ReturnProps => {
       });
   };
 
-  const user: IUser | undefined =
+  const user: User | undefined =
     loadUserQuery.data !== undefined && loadUserQuery.isFetched
       ? loadUserQuery.data
       : undefined;
-  const userType: EUserType = user === undefined ? EUserType.anonym : user.type;
+  const userType: UserType = user === undefined ? UserType.anonym : user.type;
   const isLoggedInResponse: boolean =
     loadIsLoggedInQuery.data !== undefined && loadIsLoggedInQuery.isFetched;
   const isLoggedIn: boolean =

@@ -17,7 +17,7 @@ export const useCheckoutWebSocket = (
   useEffect(() => {
     setState("connecting");
     const ws = new WebSocket(
-      `${process.env.REACT_APP_WS_API_URL}/ws/testWebsocket/`
+      `${import.meta.env.VITE_WS_API_URL}/ws/testWebsocket/`
     );
 
     ws.onopen = () => setState("connected");

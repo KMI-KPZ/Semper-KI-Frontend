@@ -1,3 +1,4 @@
+import { IProcessItem } from "@/pages/Process";
 import {
   DefinedUseQueryResult,
   useMutation,
@@ -6,7 +7,6 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
-import { IProcessItem } from "../interface/Interface";
 import useCustomAxios from "./useCustomAxios";
 
 export interface ICartHook {
@@ -31,7 +31,7 @@ const useCart = (): ICartHook => {
     queryKey: ["cart", "load"],
     queryFn: async () =>
       axiosCustom
-        .get(`${process.env.REACT_APP_HTTP_API_URL}/public/getCart/`)
+        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getCart/`)
         .then((res) => {
           console.log("useCart | getCart ✅ |", res.data);
           return res.data.cart !== undefined ? res.data.cart : [];
@@ -42,7 +42,7 @@ const useCart = (): ICartHook => {
   const updateCart = useMutation<AxiosResponse, Error, IProcessItem[]>({
     mutationFn: async (cart: IProcessItem[]) =>
       axiosCustom
-        .post(`${process.env.REACT_APP_HTTP_API_URL}/public/updateCart/`, {
+        .post(`${import.meta.env.VITE_HTTP_API_URL}/public/updateCart/`, {
           cart,
         })
         .then((res) => {

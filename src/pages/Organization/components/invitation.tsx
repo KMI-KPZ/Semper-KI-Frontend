@@ -3,8 +3,13 @@ import { LoadingSuspense } from "@component-library/Loading";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useOrganizations from "../hooks/useOrganizations";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 interface InvitationProps {}
+
+type Inputs = {
+  email: string;
+};
 
 const Invitation: React.FC<InvitationProps> = (props) => {
   const {} = props;
@@ -13,6 +18,16 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   const [showLoadedIn, setshowLoadedIn] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const { inviteLinkQuery, inviteUserMutation } = useOrganizations();
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  console.log(watch("email"));
+
   const handleOnClickLink = (
     e: React.MouseEvent<HTMLInputElement, MouseEvent>
   ) => {
@@ -47,7 +62,15 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
       <h2>{t("Organization.components.invitation.header")}</h2>
-      <div className="relative flex w-full flex-col items-center justify-between gap-5 md:w-1/2 md:flex-row">
+      <div
+        className="relative flex w-full flex-col items-center justify-between gap-5 md:w-1/2 md:flex-row"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        {/* <input
+          className="w-full bg-slate-100 px-5 py-2"
+          defaultValue="test"
+          {...register("email")}
+        /> */}
         <input
           type="email"
           className="w-full bg-slate-100 px-5 py-2"
@@ -61,6 +84,7 @@ const Invitation: React.FC<InvitationProps> = (props) => {
         {showLoadedIn ? (
           <div className="absolute -right-28 w-fit p-5">
             {t("Organization.components.invitation.button.send")}
+            {errors.email && <span>This field is required</span>}
           </div>
         ) : null}
       </div>

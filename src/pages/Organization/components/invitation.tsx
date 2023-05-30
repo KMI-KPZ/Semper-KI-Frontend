@@ -11,27 +11,37 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   const { t } = useTranslation();
   const [showCopy, setShowCopy] = useState<boolean>(false);
   const [showLoadedIn, setshowLoadedIn] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
   const { inviteLinkQuery, inviteUserMutation } = useOrganizations();
-  const link: string =
-    "https://auth0.com/docs/authenticate/login/auth0-universal-login/configure-default-login-routes";
   const handleOnClickLink = (
     e: React.MouseEvent<HTMLInputElement, MouseEvent>
   ) => {
     e.currentTarget.select();
   };
 
+  const handleOnChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
   const handleOnClickCopy = () => {
-    navigator.clipboard.writeText(link);
-    setShowCopy(true);
-    setTimeout(() => {
-      setShowCopy(false);
-    }, 2000);
+    if (inviteLinkQuery.isSuccess && inviteLinkQuery.data !== undefined) {
+      navigator.clipboard.writeText(inviteLinkQuery.data);
+      setShowCopy(true);
+      setTimeout(() => {
+        setShowCopy(false);
+      }, 2000);
+    }
   };
   const handleOnClickInvite = () => {
-    setshowLoadedIn(true);
-    setTimeout(() => {
-      setshowLoadedIn(false);
-    }, 2000);
+    inviteUserMutation.mutate(email, {
+      onSuccess(data, variables, context) {
+        setshowLoadedIn(true);
+        setTimeout(() => {
+          setshowLoadedIn(false);
+        }, 2000);
+        setEmail("");
+      },
+    });
   };
 
   return (
@@ -42,6 +52,8 @@ const Invitation: React.FC<InvitationProps> = (props) => {
           type="email"
           className="w-full bg-slate-100 px-5 py-2"
           placeholder={t("Organization.components.invitation.placeholder")}
+          value={email}
+          onChange={handleOnChangeEmail}
         />
         <Button onClick={handleOnClickInvite}>
           {t("Organization.components.invitation.button.invite")}
@@ -59,7 +71,7 @@ const Invitation: React.FC<InvitationProps> = (props) => {
             className="w-full select-all px-5 py-2 hover:underline"
             type="text"
             onClick={handleOnClickLink}
-            value={link}
+            value={inviteLinkQuery.data}
           />
           <Button onClick={handleOnClickCopy}>
             {t("Organization.components.invitation.button.link")}

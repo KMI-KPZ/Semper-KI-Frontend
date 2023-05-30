@@ -727,7 +727,7 @@
         "button":{
           "invite":"Einladen",
           "send":"Gesendet!",
-          "link":"Einladungslink kopieren",
+          "link":"Kopieren",
           "copy":"Kopiert!"
         }
       }

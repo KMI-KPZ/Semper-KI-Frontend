@@ -1,17 +1,16 @@
 import {
   useMutation,
+  UseMutationResult,
   useQuery,
   useQueryClient,
   UseQueryResult,
 } from "@tanstack/react-query";
 import useCustomAxios from "@/hooks/useCustomAxios";
 
-interface useOrganizationsProps {
-  loadInviteLink: boolean;
-}
-
 interface useOrganizationsReturnProps {
-  organizationsQuery: UseQueryResult<string, Error>;
+  organizationUserQuery: UseQueryResult<string, Error>;
+  inviteLinkQuery: UseQueryResult<string, Error>;
+  inviteUserMutation: UseMutationResult<any, Error, string, unknown>;
 }
 
 type OrganizationsIntent =
@@ -24,21 +23,19 @@ type OrganizationsIntent =
   | "createRole"
   | "editRole";
 
-const useOrganizations = (
-  props: useOrganizationsProps
-): useOrganizationsReturnProps => {
+const useOrganizations = (loadUser?: boolean): useOrganizationsReturnProps => {
   const { axiosCustom } = useCustomAxios();
-  const { loadInviteLink } = props;
   const queryClient = useQueryClient();
-  const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/Organizations/`;
+  const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/organizations/`;
 
-  const organizationsQuery = useQuery<string, Error>({
-    queryKey: ["organizations"],
+  const organizationUserQuery = useQuery<string, Error>({
+    queryKey: ["organizations", "user"],
     queryFn: async () =>
       axiosCustom.post(apiUrl, { data: { intent: "getUsers" } }).then((res) => {
         console.log("useOrganizations | loadOrganizations ✅ |", res.data);
         return res.data;
       }),
+    enabled: loadUser === true,
   });
 
   const inviteLinkQuery = useQuery<string, Error>({
@@ -50,7 +47,6 @@ const useOrganizations = (
           console.log("useOrganizations | loadInviteLink ✅ |", res.data);
           return res.data;
         }),
-    enabled: loadInviteLink === true,
   });
 
   const inviteUserMutation = useMutation<any, Error, string>({
@@ -69,7 +65,7 @@ const useOrganizations = (
     },
   });
 
-  return { organizationsQuery };
+  return { organizationUserQuery, inviteLinkQuery, inviteUserMutation };
 };
 
 export default useOrganizations;

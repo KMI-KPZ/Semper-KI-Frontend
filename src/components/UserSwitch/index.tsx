@@ -21,11 +21,11 @@ export const UserSwitch: React.FC<Props> = (props) => {
 
   return (
     <div
-      className="relative flex select-none flex-col items-center justify-between gap-2 overflow-clip bg-türkis-300 p-1 hover:cursor-pointer md:flex-row"
+      className="relative flex select-none flex-col items-center justify-between gap-2 overflow-clip bg-türkis-300 p-1 hover:cursor-pointer xl:flex-row"
       onClick={handleOnClickSwitch}
     >
       <span
-        className={`flex w-full flex-row items-center justify-center gap-2 px-3 py-1 duration-300 md:w-fit
+        className={`flex w-full flex-row items-center justify-center gap-2 px-3 py-1 duration-300 xl:w-fit
   ${
     userType === UserType.client ? "bg-türkis-800 text-white" : "bg-türkis-300"
   }`}
@@ -39,7 +39,7 @@ export const UserSwitch: React.FC<Props> = (props) => {
         }`}
       />
       <span
-        className={`flex w-full flex-row items-center justify-center gap-2 px-3 py-1 duration-300 md:w-fit
+        className={`flex w-full flex-row items-center justify-center gap-2 px-3 py-1 duration-300 xl:w-fit
   ${
     userType === UserType.client ? "bg-türkis-300" : "bg-türkis-800 text-white"
   }`}

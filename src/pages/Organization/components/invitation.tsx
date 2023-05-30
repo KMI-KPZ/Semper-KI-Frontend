@@ -1,6 +1,8 @@
 import { Button } from "@component-library/Button";
+import { LoadingSuspense } from "@component-library/Loading";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import useOrganizations from "../hooks/useOrganizations";
 
 interface InvitationProps {}
 
@@ -9,11 +11,13 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   const { t } = useTranslation();
   const [showCopy, setShowCopy] = useState<boolean>(false);
   const [showLoadedIn, setshowLoadedIn] = useState<boolean>(false);
+  const { inviteLinkQuery, inviteUserMutation } = useOrganizations();
   const link: string =
     "https://auth0.com/docs/authenticate/login/auth0-universal-login/configure-default-login-routes";
-  const linkElement = useRef<HTMLInputElement>(null);
-  const handleOnClickLink = () => {
-    linkElement.current?.focus();
+  const handleOnClickLink = (
+    e: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    e.currentTarget.select();
   };
 
   const handleOnClickCopy = () => {
@@ -48,23 +52,25 @@ const Invitation: React.FC<InvitationProps> = (props) => {
           </div>
         ) : null}
       </div>
-      <div className="relative flex w-full flex-col items-center justify-between gap-5 text-center md:w-1/2 md:flex-row">
-        <input
-          ref={linkElement}
-          className="w-full p-3 hover:underline"
-          type="text"
-          onClick={handleOnClickLink}
-          value={link}
-        />
-        <Button onClick={handleOnClickCopy}>
-          {t("Organization.components.invitation.button.link")}
-        </Button>
-        {showCopy ? (
-          <div className="absolute -right-28 w-fit p-5">
-            {t("Organization.components.invitation.button.copy")}
-          </div>
-        ) : null}
-      </div>
+      <LoadingSuspense query={inviteLinkQuery}>
+        <div className="relative flex w-full flex-col items-center justify-between gap-5 text-center md:w-1/2 md:flex-row">
+          <input
+            readOnly
+            className="w-full select-all px-5 py-2 hover:underline"
+            type="text"
+            onClick={handleOnClickLink}
+            value={link}
+          />
+          <Button onClick={handleOnClickCopy}>
+            {t("Organization.components.invitation.button.link")}
+          </Button>
+          {showCopy ? (
+            <div className="absolute -right-28 w-fit p-5">
+              {t("Organization.components.invitation.button.copy")}
+            </div>
+          ) : null}
+        </div>
+      </LoadingSuspense>
     </div>
   );
 };

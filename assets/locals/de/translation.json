@@ -726,7 +726,9 @@
         "placeholder":"Email...",
         "button":{
           "invite":"Einladen",
-          "link":"Einladungslink kopieren"
+          "send":"Gesendet!",
+          "link":"Einladungslink kopieren",
+          "copy":"Kopiert!"
         }
       }
     }

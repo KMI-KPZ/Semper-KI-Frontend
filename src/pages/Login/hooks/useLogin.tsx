@@ -13,6 +13,7 @@ export const useLogin = (
   loginQuery: UseQueryResult<AxiosResponse<any, any>, Error>;
 } => {
   const { axiosCustom } = useCustomAxios();
+
   const loginQuery = useQuery<AxiosResponse, Error>({
     queryKey: ["login"],
     queryFn: async () => {
@@ -27,10 +28,12 @@ export const useLogin = (
     },
     enabled: userType !== undefined && load === true,
   });
+
   useEffect(() => {
     if (loginQuery.data !== undefined && loginQuery.status === "success")
       window.location.href = loginQuery.data.data;
   }, [loginQuery.data]);
+
   return {
     loginQuery,
   };

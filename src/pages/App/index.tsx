@@ -24,6 +24,7 @@ import { Error } from "../Error";
 import GuideRoutes from "../Guide";
 import { Home } from "../Home";
 import LoginView from "../Login";
+import RedirectLogin from "../Login/Redirect";
 import Logout from "../Logout";
 import OrderCollectionOverview from "../Orders";
 import OrganizationView from "../Organization";
@@ -422,6 +423,7 @@ const App: React.FC = () => {
             <Route path="logout" element={<Logout />} />
             <Route path="portfolio" element={<Portfolio />} />
             <Route path="login" element={<LoginView />} />
+            <Route path="login/redirect" element={<RedirectLogin />} />
             <Route path="register" element={<LoginView />} />
             <Route
               path="aboutus"

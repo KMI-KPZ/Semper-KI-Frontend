@@ -25,7 +25,7 @@ export const UserSwitch: React.FC<Props> = (props) => {
       onClick={handleOnClickSwitch}
     >
       <span
-        className={`flex flex-row items-center justify-center gap-2 px-3 py-1 duration-300
+        className={`flex w-full flex-row items-center justify-center gap-2 px-3 py-1 duration-300 md:w-fit
   ${
     userType === UserType.client ? "bg-türkis-800 text-white" : "bg-türkis-300"
   }`}
@@ -39,7 +39,7 @@ export const UserSwitch: React.FC<Props> = (props) => {
         }`}
       />
       <span
-        className={`flex flex-row items-center justify-center gap-2 px-3 py-1 duration-300
+        className={`flex w-full flex-row items-center justify-center gap-2 px-3 py-1 duration-300 md:w-fit
   ${
     userType === UserType.client ? "bg-türkis-300" : "bg-türkis-800 text-white"
   }`}

@@ -57,14 +57,24 @@ const Invitation: React.FC<InvitationProps> = (props) => {
     setShowLoadedIn(true);
     inviteLinkMutation.mutate(data.email, {
       onSuccess(data, variables, context) {
-        // setLinks((prevState) => [
-        //   ...prevState,
-        //   { email: data.invitee.email, link: data.invitation_url },
-        // ]);
+        setLinks((prevState) => [
+          ...prevState,
+          { email: variables, link: data },
+        ]);
         setShowLoadedIn(false);
         reset();
       },
     });
+  };
+
+  const handleOnClickInput = (
+    e: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    e.currentTarget.select();
+  };
+
+  const handleOnClickButton = (index: number) => {
+    navigator.clipboard.writeText(links[index].link);
   };
 
   return (
@@ -96,7 +106,23 @@ const Invitation: React.FC<InvitationProps> = (props) => {
           </div>
         ) : null}
       </form>
-      {}
+      {links.length > 0
+        ? links.map((inviteLink, index) => (
+            <div className="relative flex w-full flex-col items-center justify-center gap-5 md:w-4/6 md:flex-row">
+              <span className="">{inviteLink.email}</span>
+              <input
+                readOnly
+                onClick={handleOnClickInput}
+                type="text"
+                value={inviteLink.link}
+                className="w-full select-all bg-slate-100 px-5 py-2 md:w-4/6"
+              />
+              <Button onClick={() => handleOnClickButton(index)}>
+                {t("Organization.components.invitation.button.copy")}
+              </Button>
+            </div>
+          ))
+        : null}
     </div>
   );
 };

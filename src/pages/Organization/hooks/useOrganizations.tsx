@@ -6,12 +6,15 @@ import {
   UseQueryResult,
 } from "@tanstack/react-query";
 import useCustomAxios from "@/hooks/useCustomAxios";
+import { string } from "yup";
 
 interface useOrganizationsReturnProps {
   organizationUserQuery: UseQueryResult<OrganizationsUser[], Error>;
   organizationRolesQuery: UseQueryResult<OrganizationRoleProps[], Error>;
-  inviteLinkMutation: UseMutationResult<any, Error, string, unknown>;
+  inviteLinkMutation: UseMutationResult<string, Error, string, unknown>;
   inviteUserMutation: UseMutationResult<any, Error, string, unknown>;
+  createRoleMutation: UseMutationResult<any, Error, CreateRoleProps, unknown>;
+  deleteRoleMutation: UseMutationResult<any, Error, string, unknown>;
 }
 
 export type OrganizationsUser = {
@@ -21,7 +24,12 @@ export type OrganizationsUser = {
 };
 
 export type OrganizationRoleProps = {
+  id: string;
+} & CreateRoleProps;
+
+export type CreateRoleProps = {
   name: string;
+  description: string;
 };
 
 const useOrganizations = (): useOrganizationsReturnProps => {
@@ -49,7 +57,7 @@ const useOrganizations = (): useOrganizationsReturnProps => {
       }),
   });
 
-  const inviteLinkMutation = useMutation<any, Error, string>({
+  const inviteLinkMutation = useMutation<string, Error, string>({
     mutationFn: async (email: string) => {
       return axiosCustom
         .post(apiUrl, {
@@ -61,7 +69,7 @@ const useOrganizations = (): useOrganizationsReturnProps => {
         });
     },
     onSuccess() {
-      queryClient.invalidateQueries(["organizations"]);
+      queryClient.invalidateQueries(["organizations", "users"]);
     },
   });
 
@@ -77,7 +85,46 @@ const useOrganizations = (): useOrganizationsReturnProps => {
         });
     },
     onSuccess() {
-      queryClient.invalidateQueries(["organizations"]);
+      queryClient.invalidateQueries(["organizations", "users"]);
+    },
+  });
+
+  const createRoleMutation = useMutation<any, Error, CreateRoleProps>({
+    mutationFn: async (props) => {
+      const { description, name } = props;
+      return axiosCustom
+        .post(apiUrl, {
+          data: {
+            intent: "createRole",
+            content: { roleName: name, roleDescription: description },
+          },
+        })
+        .then((response) => {
+          console.log("useOrganizations | createRole ✅ |", response.data);
+          return response.data;
+        });
+    },
+    onSuccess() {
+      queryClient.invalidateQueries(["organizations", "roles"]);
+    },
+  });
+
+  const deleteRoleMutation = useMutation<any, Error, string>({
+    mutationFn: async (id: string) => {
+      return axiosCustom
+        .post(apiUrl, {
+          data: {
+            intent: "deleteRole",
+            content: { roleID: id },
+          },
+        })
+        .then((response) => {
+          console.log("useOrganizations | deleteRole ✅ |", response.data);
+          return response.data;
+        });
+    },
+    onSuccess() {
+      queryClient.invalidateQueries(["organizations", "roles"]);
     },
   });
 
@@ -86,6 +133,8 @@ const useOrganizations = (): useOrganizationsReturnProps => {
     organizationUserQuery,
     inviteLinkMutation,
     inviteUserMutation,
+    createRoleMutation,
+    deleteRoleMutation,
   };
 };
 

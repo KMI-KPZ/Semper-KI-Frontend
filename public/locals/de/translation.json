@@ -720,9 +720,19 @@
     },
     "components":{
       "roles":{
-        "header":"Rollen/Rechte"
+        "header":"Rollen/Rechte",
+        "name":"Name",
+        "description":"Beschreibung",
+        "button":{
+          "create":"Erstellen",
+          "delete":"Löschen"
+        },
+        "error":{
+          "empty":"keine Rollen angelegt"
+        }
       },
-      "tabel":{
+      "table":{
+        "header":"Benutzer",
         "name":"Benutzername",
         "picture":"Profilbild",
         "email":"E-Mail",
@@ -741,7 +751,7 @@
           "invite":"Einladen",
           "send":"Gesendet!",
           "link":"Einladungslink erstellen",
-          "copy":"Kopiert!"
+          "copy":"Kopieren"
         }
       }
     }

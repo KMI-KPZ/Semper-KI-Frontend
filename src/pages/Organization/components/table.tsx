@@ -6,9 +6,9 @@ import { Button } from "@component-library/Button";
 import useOrganizations, { OrganizationsUser } from "../hooks/useOrganizations";
 import { LoadingSuspense } from "@component-library/Loading";
 
-interface OrganizationTabelProps {}
+interface OrganizationtableProps {}
 
-const OrganizationTabel: React.FC<OrganizationTabelProps> = (props) => {
+const Organizationtable: React.FC<OrganizationtableProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { organizationUserQuery } = useOrganizations();
@@ -16,23 +16,24 @@ const OrganizationTabel: React.FC<OrganizationTabelProps> = (props) => {
   return (
     <LoadingSuspense
       query={organizationUserQuery}
-      errorText={t("Organization.components.tabel.error.empty")}
+      errorText={t("Organization.components.table.error.empty")}
     >
+      <h2>{t("Organization.components.table.header")}</h2>
       <table className="w-full table-auto">
         <thead>
           <tr className="">
-            <th>{t("Organization.components.tabel.picture")}</th>
-            <th>{t("Organization.components.tabel.name")}</th>
-            <th>{t("Organization.components.tabel.email")}</th>
-            <th>{t("Organization.components.tabel.role")}</th>
-            <th>{t("Organization.components.tabel.actions")}</th>
+            <th>{t("Organization.components.table.picture")}</th>
+            <th>{t("Organization.components.table.name")}</th>
+            <th>{t("Organization.components.table.email")}</th>
+            <th>{t("Organization.components.table.role")}</th>
+            <th>{t("Organization.components.table.actions")}</th>
           </tr>
         </thead>
         <tbody className="">
           {organizationUserQuery.data !== undefined &&
           organizationUserQuery.data.length > 0
             ? organizationUserQuery.data.map((data, index) => (
-                <OrganizationTabelRow key={index} {...data} />
+                <OrganizationtableRow key={index} {...data} />
               ))
             : null}
         </tbody>
@@ -41,7 +42,7 @@ const OrganizationTabel: React.FC<OrganizationTabelProps> = (props) => {
   );
 };
 
-const OrganizationTabelRow: React.FC<OrganizationsUser> = (props) => {
+const OrganizationtableRow: React.FC<OrganizationsUser> = (props) => {
   const { email, name, picture } = props;
   const { t } = useTranslation();
   return (
@@ -60,4 +61,4 @@ const OrganizationTabelRow: React.FC<OrganizationsUser> = (props) => {
   );
 };
 
-export default OrganizationTabel;
+export default Organizationtable;

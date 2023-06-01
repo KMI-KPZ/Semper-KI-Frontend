@@ -1,4 +1,10 @@
 {
+  "yup":{
+    "required":"{{name}} wird benötigt",
+    "string":"Bitte Zeichenfolge eingeben",
+    "number":"Bitte Zahl eingeben",
+    "email":"Bitte gültige Email angeben"
+  },
   "data":{
     "NavigationItem":{
       "explore": "Ausprobieren",
@@ -713,13 +719,20 @@
       "header":"Organisationsübersicht"
     },
     "components":{
+      "roles":{
+        "header":"Rollen/Rechte"
+      },
       "tabel":{
         "name":"Benutzername",
+        "picture":"Profilbild",
         "email":"E-Mail",
         "role":"Rolle",
         "created":"Erstellt am",
         "accessed":"letzter Zugegriff am",
-        "actions":"Aktionen"
+        "actions":"Aktionen",
+        "error":{
+          "empty":"keine Benutzer gefunden"
+        }
       },
       "invitation":{
         "header":"Benutzer einladen",
@@ -727,7 +740,7 @@
         "button":{
           "invite":"Einladen",
           "send":"Gesendet!",
-          "link":"Kopieren",
+          "link":"Einladungslink erstellen",
           "copy":"Kopiert!"
         }
       }

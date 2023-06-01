@@ -1,79 +1,60 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button } from "@component-library/Button";
+import useOrganizations, { OrganizationsUser } from "../hooks/useOrganizations";
+import { LoadingSuspense } from "@component-library/Loading";
 
 interface OrganizationTabelProps {}
-
-const TestUserData: OrganizationTabelRowProps[] = [
-  {
-    name: "Max Musterman",
-    accessed: new Date(),
-    created: new Date(),
-    email: "Max.Musterman@test.de",
-    role: "Admin",
-  },
-  {
-    name: "Maxi Musterfrau",
-    accessed: new Date(),
-    created: new Date(),
-    email: "Maxi.Musterfrau@test.de",
-    role: "Lappen",
-  },
-  {
-    name: "Heinz Kunz",
-    accessed: new Date(),
-    created: new Date(),
-    email: "Heinz.Kunz@test.de",
-    role: "Lappen",
-  },
-];
 
 const OrganizationTabel: React.FC<OrganizationTabelProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
+  const { organizationUserQuery } = useOrganizations();
 
   return (
-    <table className="w-full table-auto">
-      <thead>
-        <tr className="gap-5">
-          <th>{t("Organization.components.tabel.name")}</th>
-          <th>{t("Organization.components.tabel.email")}</th>
-          <th>{t("Organization.components.tabel.role")}</th>
-          <th>{t("Organization.components.tabel.created")}</th>
-          <th>{t("Organization.components.tabel.accessed")}</th>
-          <th>{t("Organization.components.tabel.actions")}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {TestUserData.map((data, index) => (
-          <OrganizationTabelRow key={index} {...data} />
-        ))}
-      </tbody>
-    </table>
+    <LoadingSuspense
+      query={organizationUserQuery}
+      errorText={t("Organization.components.tabel.error.empty")}
+    >
+      <table className="w-full table-auto">
+        <thead>
+          <tr className="">
+            <th>{t("Organization.components.tabel.picture")}</th>
+            <th>{t("Organization.components.tabel.name")}</th>
+            <th>{t("Organization.components.tabel.email")}</th>
+            <th>{t("Organization.components.tabel.role")}</th>
+            <th>{t("Organization.components.tabel.actions")}</th>
+          </tr>
+        </thead>
+        <tbody className="">
+          {organizationUserQuery.data !== undefined &&
+          organizationUserQuery.data.length > 0
+            ? organizationUserQuery.data.map((data, index) => (
+                <OrganizationTabelRow key={index} {...data} />
+              ))
+            : null}
+        </tbody>
+      </table>
+    </LoadingSuspense>
   );
 };
 
-export interface OrganizationTabelRowProps {
-  name: string;
-  email: string;
-  role: string;
-  created: Date;
-  accessed: Date;
-}
-
-const OrganizationTabelRow: React.FC<OrganizationTabelRowProps> = (props) => {
-  const { accessed, created, email, name, role } = props;
+const OrganizationTabelRow: React.FC<OrganizationsUser> = (props) => {
+  const { email, name, picture } = props;
   const { t } = useTranslation();
   return (
-    <tr>
+    <tr className="">
+      <td className="flex items-center justify-center">
+        <img src={picture} className="h-8 w-8 object-contain" />
+      </td>
       <td className="text-center">{name}</td>
       <td className="text-center">{email}</td>
-      <td className="text-center">{role}</td>
-      <td className="text-center">{created.toLocaleDateString()}</td>
-      <td className="text-center">{accessed.toLocaleDateString()}</td>
-      <td className="text-center">
+      <td className="text-center">{"none"}</td>
+      <td className="flex flex-row items-center justify-center gap-3 p-3">
         <Button icon={<EditIcon />} />
+        <Button icon={<DeleteForeverIcon />} />
       </td>
     </tr>
   );

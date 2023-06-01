@@ -1,3 +1,4 @@
+export * from './Divider'
 export * from './Badge'
 export * from "./Button"
 export * from "./Error"

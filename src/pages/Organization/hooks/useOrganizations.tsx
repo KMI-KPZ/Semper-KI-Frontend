@@ -8,55 +8,55 @@ import {
 import useCustomAxios from "@/hooks/useCustomAxios";
 
 interface useOrganizationsReturnProps {
-  organizationUserQuery: UseQueryResult<string, Error>;
-  inviteLinkQuery: UseQueryResult<string, Error>;
+  organizationUserQuery: UseQueryResult<OrganizationsUser[], Error>;
+  organizationRolesQuery: UseQueryResult<OrganizationRoleProps[], Error>;
+  inviteLinkMutation: UseMutationResult<any, Error, string, unknown>;
   inviteUserMutation: UseMutationResult<any, Error, string, unknown>;
 }
 
-type OrganizationsIntent =
-  | "getUsers"
-  | "inviteUser"
-  | "editUser"
-  | "assignRole"
-  | "deleteUser"
-  | "getInviteLink"
-  | "createRole"
-  | "editRole";
+export type OrganizationsUser = {
+  email: string;
+  name: string;
+  picture: string;
+};
 
-const useOrganizations = (loadUser?: boolean): useOrganizationsReturnProps => {
+export type OrganizationRoleProps = {
+  name: string;
+};
+
+const useOrganizations = (): useOrganizationsReturnProps => {
   const { axiosCustom } = useCustomAxios();
   const queryClient = useQueryClient();
   const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/organizations/`;
 
-  const organizationUserQuery = useQuery<string, Error>({
-    queryKey: ["organizations", "user"],
-    queryFn: async () =>
-      axiosCustom.post(apiUrl, { data: { intent: "getUsers" } }).then((res) => {
-        console.log("useOrganizations | loadOrganizations ✅ |", res.data);
-        return res.data;
-      }),
-    enabled: loadUser === true,
-  });
-
-  const inviteLinkQuery = useQuery<string, Error>({
-    queryKey: ["organizations", "invitationLink"],
+  const organizationUserQuery = useQuery<OrganizationsUser[], Error>({
+    queryKey: ["organizations", "users"],
     queryFn: async () =>
       axiosCustom
-        .post(apiUrl, { data: { intent: "getInviteLink" } })
+        .post(apiUrl, { data: { intent: "fetchUsers" } })
         .then((res) => {
-          console.log("useOrganizations | loadInviteLink ✅ |", res.data);
+          console.log("useOrganizations | fetchUsers ✅ |", res.data);
           return res.data;
         }),
   });
 
-  const inviteUserMutation = useMutation<any, Error, string>({
+  const organizationRolesQuery = useQuery<OrganizationRoleProps[], Error>({
+    queryKey: ["organizations", "roles"],
+    queryFn: async () =>
+      axiosCustom.post(apiUrl, { data: { intent: "getRoles" } }).then((res) => {
+        console.log("useOrganizations | getRoles ✅ |", res.data);
+        return res.data;
+      }),
+  });
+
+  const inviteLinkMutation = useMutation<any, Error, string>({
     mutationFn: async (email: string) => {
       return axiosCustom
         .post(apiUrl, {
-          data: { intent: "inviteUser", content: { email: email } },
+          data: { intent: "getInviteLink", content: { email: email } },
         })
         .then((response) => {
-          console.log("useOrganizations | inviteUser ✅ |", response.data);
+          console.log("useOrganizations | getInviteLink ✅ |", response.data);
           return response.data;
         });
     },
@@ -65,7 +65,28 @@ const useOrganizations = (loadUser?: boolean): useOrganizationsReturnProps => {
     },
   });
 
-  return { organizationUserQuery, inviteLinkQuery, inviteUserMutation };
+  const inviteUserMutation = useMutation<any, Error, string>({
+    mutationFn: async (email: string) => {
+      return axiosCustom
+        .post(apiUrl, {
+          data: { intent: "addUser", content: { email: email } },
+        })
+        .then((response) => {
+          console.log("useOrganizations | addUser ✅ |", response.data);
+          return response.data;
+        });
+    },
+    onSuccess() {
+      queryClient.invalidateQueries(["organizations"]);
+    },
+  });
+
+  return {
+    organizationRolesQuery,
+    organizationUserQuery,
+    inviteLinkMutation,
+    inviteUserMutation,
+  };
 };
 
 export default useOrganizations;

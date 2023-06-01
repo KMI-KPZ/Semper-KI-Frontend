@@ -47,6 +47,7 @@ interface LoadingSuspenseProps<T> {
   animation?: boolean;
   text?: boolean;
   loadingText?: string;
+  errorText?: string;
 }
 
 export const LoadingSuspense = <T,>(
@@ -59,6 +60,7 @@ export const LoadingSuspense = <T,>(
     animation = false,
     loadingText = t("General.LoadingSuspense.loading"),
     text = true,
+    errorText,
   } = props;
   if (query.status === "loading")
     return (
@@ -77,7 +79,9 @@ export const LoadingSuspense = <T,>(
     return (
       <div className="felx-row flex items-center justify-center">
         <h1>
-          {t("General.LoadingSuspense.error")} : {query.error.message}
+          {errorText === undefined
+            ? `${t("General.LoadingSuspense.error")} : ${query.error.message}`
+            : errorText}
         </h1>
       </div>
     );

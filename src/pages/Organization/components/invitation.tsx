@@ -7,84 +7,64 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-const schema = yup
-  .object({
-    email: yup.string().required().email(),
-  })
-  .required();
-type FormData = yup.InferType<typeof schema>;
-
 interface InvitationProps {}
 
 type Inputs = {
   email: string;
 };
 
+type InviteLink = {
+  email: string;
+  link: string;
+};
+
 const Invitation: React.FC<InvitationProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const [showCopy, setShowCopy] = useState<boolean>(false);
-  const [showLoadedIn, setshowLoadedIn] = useState<boolean>(false);
-  // const [email, setEmail] = useState<string>("");
-  const { inviteLinkQuery, inviteUserMutation } = useOrganizations();
+  const [links, setLinks] = useState<InviteLink[]>([]);
+  const [showLoadedIn, setShowLoadedIn] = useState<boolean>(false);
+  const { inviteLinkMutation, inviteUserMutation } = useOrganizations();
+
+  const schema = yup
+    .object({
+      email: yup
+        .string()
+        .required(t("yup.required", { name: "Email" }))
+        .email(t("yup.email")),
+    })
+    .required();
+  type FormData = yup.InferType<typeof schema>;
 
   const {
     reset,
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(schema) });
-  const onSubmit = (data: FormData) => {
-    console.log("Submit", data);
+  const onSubmitInvite = (data: FormData) => {
+    console.log("onSubmitInvite", data);
+    setShowLoadedIn(true);
     inviteUserMutation.mutate(data.email, {
       onSuccess(data, variables, context) {
-        setshowLoadedIn(true);
-        setTimeout(() => {
-          setshowLoadedIn(false);
-        }, 2000);
+        setShowLoadedIn(false);
         reset();
       },
-      // onError(error, variables, context) {
-      //   setshowLoadedIn(true);
-      //   setTimeout(() => {
-      //     setshowLoadedIn(false);
-      //   }, 2000);
-      //   reset();
-      // },
     });
   };
-  // console.log(watch("email"));
 
-  const handleOnClickLink = (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>
-  ) => {
-    e.currentTarget.select();
-  };
-
-  const handleOnChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // setEmail(e.target.value);
-  };
-
-  const handleOnClickCopy = () => {
-    if (inviteLinkQuery.isSuccess && inviteLinkQuery.data !== undefined) {
-      navigator.clipboard.writeText(inviteLinkQuery.data);
-      setShowCopy(true);
-      setTimeout(() => {
-        setShowCopy(false);
-      }, 2000);
-    }
-  };
-  const handleOnClickInvite = () => {
-    // inviteUserMutation.mutate(email, {
-    //   onSuccess(data, variables, context) {
-    //     setshowLoadedIn(true);
-    //     setTimeout(() => {
-    //       setshowLoadedIn(false);
-    //     }, 2000);
-    //     setEmail("");
-    //   },
-    // });
+  const onSubmitLink = (data: FormData) => {
+    console.log("onSubmitLink", data);
+    setShowLoadedIn(true);
+    inviteLinkMutation.mutate(data.email, {
+      onSuccess(data, variables, context) {
+        // setLinks((prevState) => [
+        //   ...prevState,
+        //   { email: data.invitee.email, link: data.invitation_url },
+        // ]);
+        setShowLoadedIn(false);
+        reset();
+      },
+    });
   };
 
   return (
@@ -92,28 +72,19 @@ const Invitation: React.FC<InvitationProps> = (props) => {
       <h2>{t("Organization.components.invitation.header")}</h2>
       <form
         className="relative flex w-full flex-col items-center justify-between gap-5 md:w-1/2 md:flex-row"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmitInvite)}
       >
         <input
-          className="w-full bg-slate-100 px-5 py-2"
+          className="w-full bg-slate-100 px-5 py-2 md:w-4/6"
           placeholder={t("Organization.components.invitation.placeholder")}
           {...register("email")}
         />
-        {/* <input
-          type="email"
-          className="w-full bg-slate-100 px-5 py-2"
-          placeholder={t("Organization.components.invitation.placeholder")}
-          value={email}
-          onChange={handleOnChangeEmail}
-        /> 
-        <Button onClick={handleOnClickInvite}>
+        <Button onClick={handleSubmit(onSubmitInvite)}>
           {t("Organization.components.invitation.button.invite")}
         </Button>
-        */}
-        <input
-          type="submit"
-          className="bezier flex w-full flex-row   items-center justify-center  gap-3 bg-türkis px-5 py-3 text-white transition duration-300 hover:cursor-pointer hover:bg-grau-400 md:w-fit md:px-4 md:py-2"
-        />
+        <Button onClick={handleSubmit(onSubmitLink)}>
+          {t("Organization.components.invitation.button.link")}
+        </Button>
         {showLoadedIn ? (
           <div className="absolute -right-28 w-fit p-5">
             {t("Organization.components.invitation.button.send")}
@@ -125,25 +96,7 @@ const Invitation: React.FC<InvitationProps> = (props) => {
           </div>
         ) : null}
       </form>
-      <LoadingSuspense query={inviteLinkQuery}>
-        <div className="relative flex w-full flex-col items-center justify-between gap-5 text-center md:w-1/2 md:flex-row">
-          <input
-            readOnly
-            className="w-full select-all px-5 py-2 hover:underline"
-            type="text"
-            onClick={handleOnClickLink}
-            value={inviteLinkQuery.data}
-          />
-          <Button onClick={handleOnClickCopy}>
-            {t("Organization.components.invitation.button.link")}
-          </Button>
-          {showCopy ? (
-            <div className="absolute -right-28 w-fit p-5">
-              {t("Organization.components.invitation.button.copy")}
-            </div>
-          ) : null}
-        </div>
-      </LoadingSuspense>
+      {}
     </div>
   );
 };

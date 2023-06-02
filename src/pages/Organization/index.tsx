@@ -3,7 +3,7 @@ import { Divider } from "@component-library/Divider";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Invitation from "./components/invitation";
-import OrganizationRoles from "./components/roles";
+import OrganizationRoles from "./Roles";
 import OrganizationTabel from "./components/table";
 
 interface OrganizationViewProps {

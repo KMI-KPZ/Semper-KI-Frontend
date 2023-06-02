@@ -718,19 +718,40 @@
     "index":{
       "header":"Organisationsübersicht"
     },
-    "components":{
-      "roles":{
+    "Roles":{
+      "index":{
         "header":"Rollen/Rechte",
         "name":"Name",
         "description":"Beschreibung",
-        "button":{
-          "create":"Erstellen",
-          "delete":"Löschen"
-        },
         "error":{
           "empty":"keine Rollen angelegt"
+        },
+        "button":{
+          "create":"Erstellen"
         }
       },
+      "components":{
+        "table":{
+          "name":"Name",
+          "description":"Beschreibung",
+          "actions":"Aktionen",
+          "order":"Aufträge",
+          "resources":"Ressourcen",
+          "see":"Sehen",
+          "edit":"Bearbeiten",
+          "add":"hinzufügen",
+          "status":"Status bearbeiten",
+          "chat":"Nachrichten schreiben",
+          "empty":"keine Rollen angelegt"
+        },
+        "tag":{
+          "button":{
+            "delete":"Löschen"
+          }
+        }
+      }
+    },
+    "components":{
       "table":{
         "header":"Benutzer",
         "name":"Benutzername",

@@ -11,7 +11,7 @@ interface OrganizationtableProps {}
 const Organizationtable: React.FC<OrganizationtableProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { organizationUserQuery } = useOrganizations();
+  const { userQuery: organizationUserQuery } = useOrganizations();
 
   return (
     <LoadingSuspense

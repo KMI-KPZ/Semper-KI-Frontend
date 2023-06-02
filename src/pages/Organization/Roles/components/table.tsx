@@ -32,15 +32,19 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
               </tr>
             </thead>
             <tbody className="">
-              {roles !== undefined && roles.length > 0
-                ? roles.map((role, index) => (
-                    <OrganizationTableRow
-                      role={role}
-                      key={index}
-                      allPermissions={permissionsQuery.data}
-                    />
-                  ))
-                : t("Organization.Roles.components.table.empty")}
+              {roles !== undefined && roles.length > 0 ? (
+                roles.map((role, index) => (
+                  <OrganizationTableRow
+                    role={role}
+                    key={index}
+                    allPermissions={permissionsQuery.data}
+                  />
+                ))
+              ) : (
+                <tr>
+                  <td>{t("Organization.Roles.components.table.empty")}</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

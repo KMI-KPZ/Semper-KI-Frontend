@@ -22,12 +22,15 @@ interface useOrganizationsReturnProps {
     SetPermissionProps,
     unknown
   >;
+  assignRoleMutation: UseMutationResult<any, Error, AssignRoleProps, unknown>;
+  deleteUserMutation: UseMutationResult<any, Error, string, unknown>;
 }
 
 export type OrganizationsUser = {
   email: string;
   name: string;
   picture: string;
+  roles: RoleProps[];
 };
 
 export type RoleProps = {
@@ -53,6 +56,11 @@ export type Permission = {
 export type SetPermissionProps = {
   roleID: string;
   permissionIDs: string[];
+};
+
+export type AssignRoleProps = {
+  email: string;
+  roleID: string;
 };
 
 const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
@@ -205,6 +213,44 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     },
   });
 
+  const assignRoleMutation = useMutation<any, Error, AssignRoleProps>({
+    mutationFn: async (props) => {
+      const { email, roleID } = props;
+      return axiosCustom
+        .post(apiUrl, {
+          data: {
+            intent: "assignRole",
+            content: { email, roleID },
+          },
+        })
+        .then((response) => {
+          console.log("useOrganizations | assignRole ✅ |", response.data);
+          return response.data;
+        });
+    },
+    onSuccess() {
+      queryClient.invalidateQueries(["organizations", "users"]);
+    },
+  });
+  const deleteUserMutation = useMutation<any, Error, string>({
+    mutationFn: async (email) => {
+      return axiosCustom
+        .post(apiUrl, {
+          data: {
+            intent: "deleteUser",
+            content: { email },
+          },
+        })
+        .then((response) => {
+          console.log("useOrganizations | deleteUser ✅ |", response.data);
+          return response.data;
+        });
+    },
+    onSuccess() {
+      queryClient.invalidateQueries(["organizations", "users"]);
+    },
+  });
+
   return {
     permissionsQuery,
     rolesQuery,
@@ -215,6 +261,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     createRoleMutation,
     deleteRoleMutation,
     setPermissionMutation,
+    assignRoleMutation,
+    deleteUserMutation,
   };
 };
 

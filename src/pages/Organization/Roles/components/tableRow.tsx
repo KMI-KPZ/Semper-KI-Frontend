@@ -61,13 +61,6 @@ const OrganizationTableRow: React.FC<OrganizationTableRowProps> = (props) => {
     );
   };
 
-  const isIncludedChecked = (permission_name: string): boolean => {
-    const isChecked = checkedPermissions.includes(permission_name);
-    console.log("isChecked", isChecked, checkedPermissions, permission_name);
-
-    return isChecked;
-  };
-
   return (
     <tr>
       <td>{name}</td>
@@ -79,10 +72,10 @@ const OrganizationTableRow: React.FC<OrganizationTableRowProps> = (props) => {
               {edit === true ? (
                 <input
                   type="checkbox"
-                  checked={isIncludedChecked(permission.value)}
+                  checked={checkedPermissions.includes(permission.value)}
                   onChange={(e) => handleOnChangeCheckbox(e, permission.value)}
                 />
-              ) : isIncludedChecked(permission.value) ? (
+              ) : checkedPermissions.includes(permission.value) ? (
                 <CheckIcon fontSize="small" />
               ) : (
                 <ClearIcon fontSize="small" />

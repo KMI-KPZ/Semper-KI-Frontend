@@ -25,10 +25,10 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
               <tr className="">
                 <th>{t("Organization.Roles.components.table.name")}</th>
                 <th>{t("Organization.Roles.components.table.description")}</th>
-                <th>{t("Organization.Roles.components.table.actions")}</th>
                 {permissionsQuery.data.map((permission, index) => (
                   <th key={index}>{permission.value}</th>
                 ))}
+                <th>{t("Organization.Roles.components.table.actions")}</th>
               </tr>
             </thead>
             <tbody className="">

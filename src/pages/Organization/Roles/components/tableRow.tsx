@@ -65,6 +65,24 @@ const OrganizationTableRow: React.FC<OrganizationTableRowProps> = (props) => {
       <tr>
         <td>{name}</td>
         <td>{description}</td>
+
+        {allPermissions.map((permission, index) => (
+          <td key={index}>
+            <div className="flex items-center justify-center">
+              {edit === true ? (
+                <input
+                  type="checkbox"
+                  checked={checkedPermissions.includes(permission.value)}
+                  onChange={(e) => handleOnChangeCheckbox(e, permission.value)}
+                />
+              ) : checkedPermissions.includes(permission.value) ? (
+                <CheckIcon fontSize="small" />
+              ) : (
+                <ClearIcon fontSize="small" />
+              )}
+            </div>
+          </td>
+        ))}
         <td className="flex flex-row items-center justify-center gap-2">
           <div
             title={t("Organization.Roles.components.tag.button.delete")}
@@ -85,23 +103,6 @@ const OrganizationTableRow: React.FC<OrganizationTableRowProps> = (props) => {
             <DeleteForeverIcon fontSize="small" />
           </div>
         </td>
-        {allPermissions.map((permission, index) => (
-          <td key={index}>
-            <div className="flex items-center justify-center">
-              {edit === true ? (
-                <input
-                  type="checkbox"
-                  checked={checkedPermissions.includes(permission.value)}
-                  onChange={(e) => handleOnChangeCheckbox(e, permission.value)}
-                />
-              ) : checkedPermissions.includes(permission.value) ? (
-                <CheckIcon fontSize="small" />
-              ) : (
-                <ClearIcon fontSize="small" />
-              )}
-            </div>
-          </td>
-        ))}
       </tr>
     </LoadingSuspense>
   );

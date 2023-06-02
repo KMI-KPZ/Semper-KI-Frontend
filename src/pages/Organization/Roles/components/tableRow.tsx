@@ -31,9 +31,10 @@ const OrganizationTableRow: React.FC<OrganizationTableRowProps> = (props) => {
       rolePermissionsQuery.data !== undefined &&
       rolePermissionsQuery.data.length > 0
     ) {
-      setCheckedPermissions(
-        rolePermissionsQuery.data.map((permission) => permission.value)
+      const newChecked = rolePermissionsQuery.data.map(
+        (permission) => permission.permission_name
       );
+      setCheckedPermissions(newChecked);
     }
   }, [rolePermissionsQuery.data]);
 
@@ -60,51 +61,57 @@ const OrganizationTableRow: React.FC<OrganizationTableRowProps> = (props) => {
     );
   };
 
-  return (
-    <LoadingSuspense query={rolePermissionsQuery}>
-      <tr>
-        <td>{name}</td>
-        <td>{description}</td>
+  const isIncludedChecked = (permission_name: string): boolean => {
+    const isChecked = checkedPermissions.includes(permission_name);
+    console.log("isChecked", isChecked, checkedPermissions, permission_name);
 
-        {allPermissions.map((permission, index) => (
-          <td key={index}>
-            <div className="flex items-center justify-center">
+    return isChecked;
+  };
+
+  return (
+    <tr>
+      <td>{name}</td>
+      <td>{description}</td>
+      {allPermissions.map((permission, index) => (
+        <td key={index}>
+          <div className="flex items-center justify-center">
+            <LoadingSuspense query={rolePermissionsQuery} loadingText="...">
               {edit === true ? (
                 <input
                   type="checkbox"
-                  checked={checkedPermissions.includes(permission.value)}
+                  checked={isIncludedChecked(permission.value)}
                   onChange={(e) => handleOnChangeCheckbox(e, permission.value)}
                 />
-              ) : checkedPermissions.includes(permission.value) ? (
+              ) : isIncludedChecked(permission.value) ? (
                 <CheckIcon fontSize="small" />
               ) : (
                 <ClearIcon fontSize="small" />
               )}
-            </div>
-          </td>
-        ))}
-        <td className="flex flex-row items-center justify-center gap-2">
-          <div
-            title={t("Organization.Roles.components.tag.button.delete")}
-            onClick={handleOnClickEdit}
-            className="flex items-center justify-center rounded-full p-1 hover:cursor-pointer hover:bg-orange"
-          >
-            {edit === true ? (
-              <CheckIcon fontSize="small" />
-            ) : (
-              <EditIcon fontSize="small" />
-            )}
-          </div>
-          <div
-            title={t("Organization.Roles.components.tag.button.delete")}
-            className="flex items-center justify-center rounded-full p-1 hover:cursor-pointer hover:bg-red-300"
-            onClick={handleOnClickDelete}
-          >
-            <DeleteForeverIcon fontSize="small" />
+            </LoadingSuspense>
           </div>
         </td>
-      </tr>
-    </LoadingSuspense>
+      ))}
+      <td className="flex flex-row items-center justify-center gap-2">
+        <div
+          title={t("Organization.Roles.components.tag.button.delete")}
+          onClick={handleOnClickEdit}
+          className="flex items-center justify-center rounded-full p-1 hover:cursor-pointer hover:bg-orange"
+        >
+          {edit === true ? (
+            <CheckIcon fontSize="small" />
+          ) : (
+            <EditIcon fontSize="small" />
+          )}
+        </div>
+        <div
+          title={t("Organization.Roles.components.tag.button.delete")}
+          className="flex items-center justify-center rounded-full p-1 hover:cursor-pointer hover:bg-red-300"
+          onClick={handleOnClickDelete}
+        >
+          <DeleteForeverIcon fontSize="small" />
+        </div>
+      </td>
+    </tr>
   );
 };
 

@@ -11,7 +11,7 @@ interface useOrganizationsReturnProps {
   userQuery: UseQueryResult<OrganizationsUser[], Error>;
   rolesQuery: UseQueryResult<RoleProps[], Error>;
   permissionsQuery: UseQueryResult<Permission[], Error>;
-  rolePermissionsQuery: UseQueryResult<Permission[], Error>;
+  rolePermissionsQuery: UseQueryResult<RolePermission[], Error>;
   inviteLinkMutation: UseMutationResult<string, Error, string, unknown>;
   inviteUserMutation: UseMutationResult<any, Error, string, unknown>;
   createRoleMutation: UseMutationResult<any, Error, CreateRoleProps, unknown>;
@@ -39,6 +39,12 @@ export type CreateRoleProps = {
   description: string;
 };
 
+export type RolePermission = {
+  permission_name: string;
+  description: string;
+  resource_server_name: string;
+  resource_server_identifier: string;
+};
 export type Permission = {
   value: string;
   description: string;
@@ -85,7 +91,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
         }),
   });
 
-  const rolePermissionsQuery = useQuery<Permission[], Error>({
+  const rolePermissionsQuery = useQuery<RolePermission[], Error>({
     queryKey: ["organizations", "roles", roleID, "permissions"],
     queryFn: async () =>
       axiosCustom

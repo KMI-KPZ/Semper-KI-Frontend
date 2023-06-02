@@ -26,40 +26,19 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
                 <th>{t("Organization.Roles.components.table.name")}</th>
                 <th>{t("Organization.Roles.components.table.description")}</th>
                 <th>{t("Organization.Roles.components.table.actions")}</th>
-                <th>
-                  {t("Organization.Roles.components.table.order")}{" "}
-                  {t("Organization.Roles.components.table.see")}
-                </th>
-                <th>
-                  {t("Organization.Roles.components.table.order")}{" "}
-                  {t("Organization.Roles.components.table.edit")}
-                </th>
-                <th>
-                  {t("Organization.Roles.components.table.order")}{" "}
-                  {t("Organization.Roles.components.table.status")}
-                </th>
-                <th>
-                  {t("Organization.Roles.components.table.order")}{" "}
-                  {t("Organization.Roles.components.table.chat")}
-                </th>
-                <th>
-                  {t("Organization.Roles.components.table.resources")}{" "}
-                  {t("Organization.Roles.components.table.see")}
-                </th>
-                <th>
-                  {t("Organization.Roles.components.table.resources")}{" "}
-                  {t("Organization.Roles.components.table.edit")}
-                </th>
-                <th>
-                  {t("Organization.Roles.components.table.resources")}{" "}
-                  {t("Organization.Roles.components.table.add")}
-                </th>
+                {permissionsQuery.data.map((permission, index) => (
+                  <th key={index}>{permission.value}</th>
+                ))}
               </tr>
             </thead>
             <tbody className="">
               {roles !== undefined && roles.length > 0
                 ? roles.map((role, index) => (
-                    <OrganizationTableRow role={role} key={index} />
+                    <OrganizationTableRow
+                      role={role}
+                      key={index}
+                      allPermissions={permissionsQuery.data}
+                    />
                   ))
                 : t("Organization.Roles.components.table.empty")}
             </tbody>

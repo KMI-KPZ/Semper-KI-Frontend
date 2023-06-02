@@ -40,7 +40,8 @@ export type CreateRoleProps = {
 };
 
 export type Permission = {
-  id: string;
+  value: string;
+  description: string;
 };
 
 export type SetPermissionProps = {
@@ -85,11 +86,14 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   });
 
   const rolePermissionsQuery = useQuery<Permission[], Error>({
-    queryKey: ["organizations", "role", roleID, "permissions"],
+    queryKey: ["organizations", "roles", roleID, "permissions"],
     queryFn: async () =>
       axiosCustom
         .post(apiUrl, {
-          data: { intent: "getPermissionsForRole", content: { roleID } },
+          data: {
+            intent: "getPermissionsForRole",
+            content: { roleID: roleID },
+          },
         })
         .then((res) => {
           console.log(

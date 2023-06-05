@@ -73,7 +73,7 @@ const Search: React.FC = () => {
         <FilterAltIcon fontSize="large" />
       </div>
       <div
-        className={`flex w-20 flex-row items-center justify-center bg-gray-200 p-2 hover:cursor-pointer hover:bg-gray-300 ${
+        className={`hidden w-20 flex-row items-center justify-center bg-gray-200 p-2 hover:cursor-pointer hover:bg-gray-300 xs:flex ${
           processState.grid ? "bg-gray-400" : ""
         }`}
         onClick={(e) => handleOnClickGridButton(e, true)}
@@ -84,7 +84,7 @@ const Search: React.FC = () => {
         </div>
       </div>
       <div
-        className={`flex w-20 flex-row items-center justify-center bg-gray-200 p-2 hover:cursor-pointer hover:bg-gray-300 ${
+        className={`hidden w-20 flex-row items-center justify-center bg-gray-200 p-2 hover:cursor-pointer hover:bg-gray-300 xs:flex ${
           processState.grid ? "" : "bg-gray-400"
         }`}
         onClick={(e) => handleOnClickGridButton(e, false)}

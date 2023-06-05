@@ -3,6 +3,7 @@ import { ProcessContext } from "..";
 import Search from "./Search";
 import Cart from "./Cart";
 import { Wizard } from "./Wizard";
+import { Heading } from "@component-library/Typography";
 
 export enum EProcessStatusType {
   "ok",
@@ -19,7 +20,9 @@ const Header: React.FC = () => {
       <Cart />
       <div className="flex flex-col gap-2 bg-white p-2">
         <Wizard processState={processState} />
-        <h1 className="text-center text-3xl">{progress.title}</h1>
+        <Heading variant="h1" className="text-center">
+          {progress.title}
+        </Heading>
         <Search />
       </div>
     </div>

@@ -105,7 +105,7 @@ const Checkout: React.FC<Props> = (props) => {
       setState((prevState) => ({ ...prevState, orderSendSuccesfull: true }));
       setTimeout(() => {
         navigate("/");
-      }, 3000);
+      }, 1500);
     }
     if (order.error === true) {
       showErrorOnTime();

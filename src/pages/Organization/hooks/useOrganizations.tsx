@@ -6,6 +6,7 @@ import {
   UseQueryResult,
 } from "@tanstack/react-query";
 import useCustomAxios from "@/hooks/useCustomAxios";
+import { useState } from "react";
 
 interface useOrganizationsReturnProps {
   userQuery: UseQueryResult<OrganizationsUser[], Error>;
@@ -70,22 +71,14 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
 
   const userQuery = useQuery<OrganizationsUser[], Error>({
     queryKey: ["organizations", "users"],
-    queryFn: async () =>
-      axiosCustom
+    queryFn: async () => {
+      return axiosCustom
         .post(apiUrl, { data: { intent: "fetchUsers" } })
         .then((res) => {
           console.log("useOrganizations | fetchUsers ✅ |", res.data);
           return res.data;
-        }),
-  });
-
-  const rolesQuery = useQuery<RoleProps[], Error>({
-    queryKey: ["organizations", "roles"],
-    queryFn: async () =>
-      axiosCustom.post(apiUrl, { data: { intent: "getRoles" } }).then((res) => {
-        console.log("useOrganizations | getRoles ✅ |", res.data);
-        return res.data;
-      }),
+        });
+    },
   });
 
   const permissionsQuery = useQuery<Permission[], Error>({
@@ -97,6 +90,18 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           console.log("useOrganizations | getPermissions ✅ |", res.data);
           return res.data;
         }),
+  });
+
+  const rolesQuery = useQuery<RoleProps[], Error>({
+    queryKey: ["organizations", "roles"],
+    queryFn: async () => {
+      return axiosCustom
+        .post(apiUrl, { data: { intent: "getRoles" } })
+        .then((res) => {
+          console.log("useOrganizations | getRoles ✅ |", res.data);
+          return res.data;
+        });
+    },
   });
 
   const rolePermissionsQuery = useQuery<RolePermission[], Error>({

@@ -64,7 +64,7 @@ const OrganizationTableRow: React.FC<OrganizationTableRowProps> = (props) => {
   return (
     <tr>
       <td>{name}</td>
-      <td>{description}</td>
+      <td className="text-center">{description}</td>
       {allPermissions.map((permission, index) => (
         <td key={index}>
           <div className="flex items-center justify-center">
@@ -84,24 +84,26 @@ const OrganizationTableRow: React.FC<OrganizationTableRowProps> = (props) => {
           </div>
         </td>
       ))}
-      <td className="flex flex-row items-center justify-center gap-2">
-        <div
-          title={t("Organization.Roles.components.tag.button.delete")}
-          onClick={handleOnClickEdit}
-          className="flex items-center justify-center rounded-full p-1 hover:cursor-pointer hover:bg-orange"
-        >
-          {edit === true ? (
-            <CheckIcon fontSize="small" />
-          ) : (
-            <EditIcon fontSize="small" />
-          )}
-        </div>
-        <div
-          title={t("Organization.Roles.components.tag.button.delete")}
-          className="flex items-center justify-center rounded-full p-1 hover:cursor-pointer hover:bg-red-300"
-          onClick={handleOnClickDelete}
-        >
-          <DeleteForeverIcon fontSize="small" />
+      <td>
+        <div className="flex flex-row items-center justify-center gap-2">
+          <div
+            title={t("Organization.Roles.components.tag.button.delete")}
+            onClick={handleOnClickEdit}
+            className="flex items-center justify-center rounded-full p-1 hover:cursor-pointer hover:bg-orange"
+          >
+            {edit === true ? (
+              <CheckIcon fontSize="small" />
+            ) : (
+              <EditIcon fontSize="small" />
+            )}
+          </div>
+          <div
+            title={t("Organization.Roles.components.tag.button.delete")}
+            className="flex items-center justify-center rounded-full p-1 hover:cursor-pointer hover:bg-red-300"
+            onClick={handleOnClickDelete}
+          >
+            <DeleteForeverIcon fontSize="small" />
+          </div>
         </div>
       </td>
     </tr>

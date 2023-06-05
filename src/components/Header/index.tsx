@@ -189,7 +189,7 @@ export const Header: React.FC<Props> = (props) => {
     </ul>
   );
   const renderMobileHeaderItems: JSX.Element = (
-    <ul className="hidden flex-row items-center justify-center gap-2 xs:flex md:hidden md:gap-4">
+    <ul className="flex flex-row items-center justify-center gap-2 md:hidden md:gap-4">
       {NavigationItemData.filter(
         (item) =>
           item.preferred.includes("header") && item.userTypes.includes(userType)
@@ -242,7 +242,9 @@ export const Header: React.FC<Props> = (props) => {
       </div>
       {NavigationItemData.filter(
         (item) =>
-          item.preferred.includes("header") && item.userTypes.includes(userType)
+          (item.preferred.includes("menu") ||
+            item.preferred.includes("header")) &&
+          item.userTypes.includes(userType)
       ).map((item, index: number) => (
         <HeaderItem
           key={index}

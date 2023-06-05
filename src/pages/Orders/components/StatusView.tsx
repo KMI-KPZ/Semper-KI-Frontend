@@ -96,7 +96,7 @@ const StatusView: React.FC<Props> = (props) => {
         ) : null}
         <a
           onClick={() => handleOnClickStatus(statusData.orderState)}
-          className={`flex flex-col items-center justify-center rounded-xl p-3 
+          className={`flex w-full flex-col items-center justify-center rounded-xl p-3 md:w-fit 
           ${
             status === statusData.orderState
               ? "bg-orange text-white"

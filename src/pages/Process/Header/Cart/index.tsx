@@ -6,6 +6,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CartItem from "./components/item";
 import { IProcessItem, ProcessContext } from "../..";
 import { getModelURI } from "@/services/utils";
+import IconModel from "@icons/Model.svg";
 
 interface Props {}
 
@@ -55,8 +56,7 @@ const Cart: React.FC<Props> = () => {
                 />
               ) : (
                 <img
-                  //TODO
-                  // src={IconModel}
+                  src={IconModel}
                   alt="icon"
                   className="h-8 w-8 object-cover"
                 />

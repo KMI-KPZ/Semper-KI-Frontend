@@ -15,18 +15,25 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
   const { t } = useTranslation();
   const { permissionsQuery } = useOrganizations();
 
+  const generateTitle = (name: string): string => {
+    const names: string[] = name.split(":");
+    return `${t(`Organization.Roles.components.table.${names[0]}`)} ${t(
+      `Organization.Roles.components.table.${names[1]}`
+    )}`;
+  };
+
   return (
     <LoadingSuspense query={permissionsQuery}>
       {permissionsQuery.data !== undefined &&
       permissionsQuery.data.length > 0 ? (
-        <div className="w-full">
+        <div className="w-full overflow-auto">
           <table className="w-full table-auto">
             <thead>
               <tr className="">
                 <th>{t("Organization.Roles.components.table.name")}</th>
                 <th>{t("Organization.Roles.components.table.description")}</th>
                 {permissionsQuery.data.map((permission, index) => (
-                  <th key={index}>{permission.value}</th>
+                  <th key={index}>{generateTitle(permission.value)}</th>
                 ))}
                 <th>{t("Organization.Roles.components.table.actions")}</th>
               </tr>

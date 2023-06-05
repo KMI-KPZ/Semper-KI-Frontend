@@ -32,16 +32,18 @@ const Breadcrumb: React.FC<Props> = () => {
   };
 
   return (
-    <nav className="text-left w-full hidden md:block  text-lg font-bold">
+    <nav className="hidden w-full text-left text-lg  font-bold md:block">
       {splittet.map((name: string, index: number) => (
         <React.Fragment key={index}>
           <span>{" > "}</span>
           <a
-            className="p-1 hover:text-türkis hover:cursor-pointer duration-300 "
+            className="p-1 duration-300 hover:cursor-pointer hover:text-türkis "
             href={generateLink(index)}
             onClick={(e) => handleOnClick(e, index)}
           >
-            {i18n.exists(`Breadcrumb.${name}`) ? t(`Breadcrumb.${name}`) : name}
+            {i18n.exists(`data.NavigationItem.${name}`)
+              ? t(`data.NavigationItem.${name}`)
+              : name}
           </a>
         </React.Fragment>
       ))}

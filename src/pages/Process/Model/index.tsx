@@ -10,6 +10,7 @@ import PopUp from "@/components/PopUp";
 import { IFilterItem } from "../Filter";
 import { ModelPreView } from "./components/preView";
 import ModelView from "./components/view";
+import IconUpload from "@icons/Upload.svg";
 
 interface Props {
   filters: IFilterItem[];
@@ -87,7 +88,7 @@ export const ModelCatalog: React.FC<Props> = (props) => {
 
   const renderUplaodCart = () => (
     <div
-      className={`flex items-center justify-between overflow-hidden bg-white hover:cursor-pointer hover:bg-gray-300 ${
+      className={`flex  items-center justify-between overflow-hidden bg-white hover:cursor-pointer hover:bg-gray-300 ${
         grid === true
           ? "basis-[48%] flex-col sm:basis-[32%] md:basis-[23.5%]"
           : "w-full flex-row"
@@ -100,8 +101,7 @@ export const ModelCatalog: React.FC<Props> = (props) => {
             ? "h-44 min-w-full max-w-[200%]"
             : "max-h-44 min-h-full w-44 pl-10 "
         }`}
-        //TODO
-        // src={IconUpload}
+        src={IconUpload}
         alt={t("Process.Model.ModelCatalog.button.upload")}
       />
       <h2 className="">{t("Process.Model.ModelCatalog.upload")}</h2>

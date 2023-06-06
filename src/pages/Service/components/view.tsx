@@ -1,4 +1,5 @@
 import useService from "@/pages/Service/hooks/useService";
+import { Heading } from "@component-library/Typography";
 import React, { useEffect, useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
 import { IServiceChapter, IServiceQuestion } from "..";
@@ -81,9 +82,9 @@ const ServiceView: React.FC<Props> = (props) => {
 
   return (
     <div className="service-view">
-      <h1 className="service-view-headline">
+      <Heading variant="h1">
         {t("Service.ServiceView.header")} : {title}
-      </h1>
+      </Heading>
       <ServiceWizard
         chapters={chapters}
         activeChapter={activeChapter}

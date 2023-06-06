@@ -1,3 +1,4 @@
+import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Card from "./components/Card";
@@ -37,7 +38,7 @@ const CardView: React.FC<Props> = (props) => {
 
   return (
     <div className="flex w-full max-w-7xl flex-col items-center justify-center gap-5 p-4 md:p-0">
-      {title !== undefined ? <h1 className="text-center">{t(title)}</h1> : null}
+      {title !== undefined ? <Heading variant="h1">{t(title)}</Heading> : null}
       <div className="flex w-full flex-col items-center justify-center gap-5">
         {cardGroups.map((cardgroup: CardGroupType, index: number) => (
           <div

@@ -8,6 +8,7 @@ import { LoadingSuspense } from "@component-library/Loading";
 import ManufacturerItem from "./components/item";
 import { IProcessItem } from "..";
 import useCart from "@/hooks/useCart";
+import { Heading } from "@component-library/Typography";
 
 interface Props {}
 
@@ -89,9 +90,9 @@ const ManufacturerView: React.FC<Props> = (props) => {
     <LoadingSuspense query={cartQuery}>
       <div className="flex w-full flex-col items-center gap-5">
         <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
-          <h1 className="w-full p-2 text-center">
+          <Heading variant="h1">
             {t("AfterProcess.Manufacturer.ManufacturerView.header")}
-          </h1>
+          </Heading>
         </div>
         {checkError === true ? (
           <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">

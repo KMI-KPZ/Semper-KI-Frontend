@@ -5,6 +5,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "react-i18next";
 import { IChatMessage, useOrders } from "../hooks/useOrders";
 import { User } from "@/hooks/useUser";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   closeMenu(): void;
@@ -96,7 +97,7 @@ const ChatView: React.FC<Props> = (props) => {
               </div>
             </div>
           ))}
-        <h1>{t("Orders.ChatView.header")}</h1>
+        <Heading variant="h1">{t("Orders.ChatView.header")}</Heading>
       </div>
       <div className="flex h-fit w-full flex-col items-center justify-start gap-5 bg-white p-3 md:flex-row">
         <textarea

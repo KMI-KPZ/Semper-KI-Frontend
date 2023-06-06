@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import { LoadingAnimation, LoadingSuspense } from "@component-library/Loading";
 import useCart from "@/hooks/useCart";
+import { Heading } from "@component-library/Typography";
 
 interface Props {}
 interface State {
@@ -217,9 +218,9 @@ const Checkout: React.FC<Props> = (props) => {
           renderOrderSendSuccesfull()
         ) : (
           <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
-            <h1 className="w-full p-2 text-center">
+            <Heading variant="h1">
               {t("AfterProcess.Checkout.Checkout.title")}
-            </h1>
+            </Heading>
             {renderCheckButtons()}
             <Button
               active={checkAll === true}

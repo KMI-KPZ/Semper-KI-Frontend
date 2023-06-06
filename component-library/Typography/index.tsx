@@ -16,7 +16,7 @@ const Heading: React.FC<PropsWithChildren<HeadingProps>> = ({
     case "h1":
       return (
         <h1
-          className={`font-ptsans text-2xl md:text-3xl font-normal ${additionalClassNames}`}
+          className={`font-ptsans text-2xl font-normal md:text-3xl ${additionalClassNames}`}
           {...props}
         >
           {children}
@@ -25,7 +25,7 @@ const Heading: React.FC<PropsWithChildren<HeadingProps>> = ({
     case "h2":
       return (
         <h2
-          className={`font-ptsans text-xl md:text-2xl font-normal ${additionalClassNames}`}
+          className={`font-ptsans text-xl font-normal md:text-2xl ${additionalClassNames}`}
           {...props}
         >
           {children}

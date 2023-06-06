@@ -1,3 +1,4 @@
+import { Heading } from "@component-library/Typography";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
@@ -61,9 +62,7 @@ const GuideRoutes: React.FC<Props> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5">
-      <h1 className="w-full bg-white p-5 text-center">
-        {t("Guide.GuideRoutes.header")}
-      </h1>
+      <Heading variant="h1">{t("Guide.GuideRoutes.header")}</Heading>
       <div className="flex w-full flex-col items-start justify-center gap-5 md:flex-row">
         <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
           <h2>{t("Guide.GuideRoutes.information.header")}</h2>

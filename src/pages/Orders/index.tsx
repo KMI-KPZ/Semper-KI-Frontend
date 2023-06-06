@@ -5,6 +5,7 @@ import { LoadingSuspense } from "@component-library/Loading";
 import { IOrderCollection, useOrders } from "./hooks/useOrders";
 import { OrderCollectionEvent, UserType } from "@/hooks/useUser";
 import OrderCollection from "./components/OrderCollection";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   userType: UserType;
@@ -45,13 +46,13 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
   return (
     <LoadingSuspense query={ordersQuery}>
       <div className="flex w-full flex-col items-center gap-5 overflow-x-auto overflow-y-hidden p-3">
-        <h1 className="w-full bg-white py-3 text-center">
+        <Heading variant="h1">
           {t(
             userType === UserType.client
               ? "Orders.OrderCollectionOverview.headline.client"
               : "Orders.OrderCollectionOverview.headline.manufacturer"
           )}
-        </h1>
+        </Heading>
         {ordersQuery.data !== undefined ? (
           <ul className="flex w-full flex-col gap-5">
             {ordersQuery.data.length > 0 ? (

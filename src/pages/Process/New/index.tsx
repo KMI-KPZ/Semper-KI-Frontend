@@ -1,3 +1,4 @@
+import { Heading } from "@component-library/Typography";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +15,7 @@ const NewProcess: React.FC<Props> = (props) => {
     startNewProcess();
     navigate("/process/model");
   }, []);
-  return <h1>{t("Process.NewProcess.header")}</h1>;
+  return <Heading variant="h1">{t("Process.NewProcess.header")}</Heading>;
 };
 
 export default NewProcess;

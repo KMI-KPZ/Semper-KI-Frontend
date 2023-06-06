@@ -1,4 +1,5 @@
 import { User, UserType } from "@/hooks/useUser";
+import { Heading } from "@component-library/Typography";
 import {
   Paper,
   Table,
@@ -17,7 +18,7 @@ const AdminUsers: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   return (
     <div className="admin-view">
-      <h1>{t("Admin.AdminUserView.header")}</h1>
+      <Heading variant="h1">{t("Admin.AdminUserView.header")}</Heading>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 800 }} aria-label="simple table">
           <TableHead>

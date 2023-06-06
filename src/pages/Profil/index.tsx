@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import useUser, { User, UserType } from "@/hooks/useUser";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   user: User;
@@ -28,7 +29,7 @@ const Profil: React.FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col gap-5 bg-white p-5">
-      <h1>{t("Profil.header")}</h1>
+      <Heading variant="h1">{t("Profil.header")}</Heading>
       <div className="w-full border-t-4" />
       <div className="flex flex-col gap-2 p-5">
         <h2>{t("Profil.general.header")}</h2>

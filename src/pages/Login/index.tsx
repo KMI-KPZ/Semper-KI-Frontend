@@ -6,6 +6,7 @@ import { UserSwitch } from "@/components/UserSwitch";
 import LoginIcon from "@mui/icons-material/Login";
 import CreateIcon from "@mui/icons-material/Create";
 import { UserType } from "@/hooks/useUser";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   path?: string;
@@ -47,11 +48,11 @@ const LoginView: React.FC<Props> = (props) => {
 
   return (
     <div className="flex w-fit flex-col items-center justify-center gap-5 bg-white p-5">
-      <h1>
+      <Heading variant="h1">
         {path === undefined
           ? t("Login.LoginView.header")
           : t("Login.LoginView.headerPath")}
-      </h1>
+      </Heading>
       <UserSwitch onClick={handleOnClickUserSwitch} userType={userType} />
       <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
         <Button

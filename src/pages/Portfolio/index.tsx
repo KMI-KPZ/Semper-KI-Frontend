@@ -4,6 +4,7 @@ import { Button } from "@component-library/Button";
 import { useSearchParams } from "react-router-dom";
 import PortfolioItem from "./components/Item";
 import { PortfolioItems } from "@/data/portfolio";
+import { Heading } from "@component-library/Typography";
 
 interface Props {}
 
@@ -18,7 +19,7 @@ const Portfolio: React.FC<Props> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
-      <h1>{t("Portfolio.Portfolio.header")}</h1>
+      <Heading variant="h1">{t("Portfolio.Portfolio.header")}</Heading>
       {PortfolioItems.map((portfolioItem, index) => {
         return (
           <PortfolioItem

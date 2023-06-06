@@ -2,6 +2,7 @@ import React, { PropsWithChildren, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import LogoURL from "@images/logo192.png";
 import { DefinedUseQueryResult, UseQueryResult } from "@tanstack/react-query";
+import { Heading } from "..";
 
 interface LoadingAnimationProps {
   color?: string;
@@ -68,7 +69,7 @@ export const LoadingSuspense = <T,>(
         {animation !== undefined && animation === true ? (
           <LoadingAnimation />
         ) : null}
-        {text === true ? <h1>{loadingText}</h1> : null}
+        {text === true ? <Heading variant="h1">{loadingText}</Heading> : null}
       </div>
     );
   if (
@@ -78,11 +79,11 @@ export const LoadingSuspense = <T,>(
   )
     return (
       <div className="felx-row flex items-center justify-center">
-        <h1>
+        <Heading variant="h1">
           {errorText === undefined
             ? `${t("General.LoadingSuspense.error")} : ${query.error.message}`
             : errorText}
-        </h1>
+        </Heading>
       </div>
     );
   return <>{children}</>;

@@ -12,6 +12,7 @@ import { Button } from "@component-library/Button";
 import useCart from "@/hooks/useCart";
 import { IProcessItem } from "..";
 import { ErrorType } from "@/types/general";
+import { Heading } from "@component-library/Typography";
 
 interface Props {}
 
@@ -79,9 +80,7 @@ const Cart: React.FC<Props> = (props) => {
   return (
     <LoadingSuspense query={cartQuery}>
       <div className="flex w-full flex-col items-center gap-5">
-        <h1 className="w-full bg-white p-2 text-center">
-          {t("AfterProcess.Cart.Cart.header")}
-        </h1>
+        <Heading variant="h1">{t("AfterProcess.Cart.Cart.header")}</Heading>
         <section className="flex w-full flex-col items-center justify-start gap-5">
           {cart.length > 0 ? (
             cart.map((process: IProcessItem, index: number) => (

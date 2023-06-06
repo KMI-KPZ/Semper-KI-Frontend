@@ -1,3 +1,4 @@
+import { Heading } from "@component-library/Typography";
 import { Button } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -21,7 +22,7 @@ const GuideOverview: React.FC<Props> = (props) => {
 
   return (
     <div className="flex max-h-[80vh] flex-col gap-5 overflow-y-auto bg-white p-5">
-      <h1>{t("Guide.Overview.GuideOverview.header")}</h1>
+      <Heading variant="h1">{t("Guide.Overview.GuideOverview.header")}</Heading>
       {questions.map((question: IGuideQuestion, index: number) => (
         <div
           className="guide-overview-question"

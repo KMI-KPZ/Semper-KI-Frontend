@@ -12,6 +12,7 @@ import useUser, {
   UserType,
 } from "@/hooks/useUser";
 import { useWebsocket } from "@/hooks/useWebsocket";
+import { Heading } from "@component-library/Typography";
 import { useQueryClient } from "@tanstack/react-query";
 import { createContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -317,8 +318,11 @@ const App: React.FC = () => {
       <Route path="user" element={<AdminUsers />} />
       <Route path="model" element={<AdminModels />} />
       <Route path="material" element={<AdminMaterials />} />
-      <Route path="procedure" element={<h1>Procedure</h1>} />
-      <Route path="printer" element={<h1>Printer</h1>} />
+      <Route
+        path="procedure"
+        element={<Heading variant="h1">Procedure</Heading>}
+      />
+      <Route path="printer" element={<Heading variant="h1">Printer</Heading>} />
       <Route path="order" element={<AdminOrders />} />
     </Route>
   );
@@ -360,7 +364,7 @@ const App: React.FC = () => {
     }
     return (
       <div className="flex h-screen w-screen flex-col items-center justify-center gap-5 overflow-clip bg-white">
-        <h1 className="md:text-4xl xl:text-9xl">{t("App.title")}</h1>
+        <Heading variant="h1">{t("App.title")}</Heading>
         <h2>{t("App.loading")}</h2>
       </div>
     );

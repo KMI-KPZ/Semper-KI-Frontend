@@ -1,4 +1,5 @@
 import { LoadingSuspense } from "@component-library/Loading";
+import { Heading } from "@component-library/Typography";
 import { useTranslation } from "react-i18next";
 import { useLogout } from "../Login/hooks/useLogin";
 
@@ -7,7 +8,7 @@ const Logout = () => {
   const { logoutQuery } = useLogout();
   return (
     <LoadingSuspense query={logoutQuery} animation>
-      <h1>{t("Logout.redirect")}</h1>
+      <Heading variant="h1">{t("Logout.redirect")}</Heading>
     </LoadingSuspense>
   );
 };

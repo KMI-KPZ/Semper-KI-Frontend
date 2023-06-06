@@ -1,3 +1,4 @@
+import { Heading } from "@component-library/Typography";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { EGuideQuestionState, IGuideOption, IGuideQuestion } from "../..";
@@ -90,7 +91,7 @@ const GuideQuestion: React.FC<Props> = (props) => {
 
   return (
     <div className="guide-question">
-      <h1>{t(title)}</h1>
+      <Heading variant="h1">{t(title)}</Heading>
       {error === true ? (
         <h2 className="guide-question-error">
           {t("Guide.Question.GuideQuestion.error.missing")}

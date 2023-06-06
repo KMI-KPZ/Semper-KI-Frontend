@@ -3,6 +3,7 @@ import { Button } from "@component-library/Button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTranslation } from "react-i18next";
 import { AppContext } from "@/pages/App";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   preOpen: boolean;
@@ -33,7 +34,9 @@ const PortfolioItem: React.FC<Props> = (props) => {
       ref={ref}
     >
       <div className="flex w-full flex-row items-center justify-between px-10">
-        <h2>{t(`Portfolio.PortfolioItem.${portfolioItem}.header`)}</h2>
+        <Heading variant="h2">
+          {t(`Portfolio.PortfolioItem.${portfolioItem}.header`)}
+        </Heading>
         <Button
           onClick={handleOnClickButton}
           icon={

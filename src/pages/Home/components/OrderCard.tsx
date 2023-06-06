@@ -11,6 +11,7 @@ import { Button } from "@component-library/Button";
 import { Badge } from "@component-library/Badge";
 import { UserType } from "@/hooks/useUser";
 import { OrderState, useOrders } from "@/pages/Orders/hooks/useOrders";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   className?: string;
@@ -35,7 +36,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
         className={`${additionalClassNames}  flex flex-col items-center justify-between gap-5 p-3`}
       >
         <div className="flex h-full w-full flex-col items-center justify-start gap-5">
-          <h2>{t("Home.HomeOrderCard.header")}</h2>
+          <Heading variant="h2">{t("Home.HomeOrderCard.header")}</Heading>
           <div className="w-full border-t-2" />
           <h3>{t("Home.HomeOrderCard.contracts.header")}</h3>
           <LoadingSuspense query={ordersQuery}>
@@ -97,7 +98,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
         className={`${additionalClassNames}  flex flex-col items-center justify-between gap-3 p-3`}
       >
         <div className="flex h-full w-full flex-col items-center justify-start gap-5">
-          <h2>{t("Home.HomeOrderCard.header")}</h2>
+          <Heading variant="h2">{t("Home.HomeOrderCard.header")}</Heading>
           <div className="w-full border-t-2" />
           <h3>{t("Home.HomeOrderCard.order.header")}</h3>
           <div className="flex w-full flex-col items-center justify-center gap-3 md:flex-row">
@@ -223,7 +224,9 @@ const HomeOrderCard: React.FC<Props> = (props) => {
       className={`${additionalClassNames} flex flex-col items-center justify-center gap-3 p-3 duration-300 hover:bg-türkis-300`}
     >
       <LocalShippingIcon fontSize="large" />
-      <h2>{t("Home.HomeOrderCard.button.start-order")}</h2>
+      <Heading variant="h2">
+        {t("Home.HomeOrderCard.button.start-order")}
+      </Heading>
     </Link>
   );
 };

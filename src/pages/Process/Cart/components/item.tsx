@@ -9,6 +9,7 @@ import { Button } from "@component-library/Button";
 import { AppContext } from "@/pages/App";
 import { getModelURI } from "@/services/utils";
 import { IProcessItem } from "../..";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   process: IProcessItem;
@@ -71,7 +72,7 @@ const CartItem: React.FC<Props> = (props) => {
           >
             {model !== undefined ? (
               <>
-                <h2>{model.title}</h2>
+                <Heading variant="h2">{model.title}</Heading>
                 <span>{model.tags}</span>
                 <span>{model.certificate}</span>
                 <span>{model.license}</span>
@@ -79,10 +80,10 @@ const CartItem: React.FC<Props> = (props) => {
               </>
             ) : (
               <>
-                <h2>
+                <Heading variant="h2">
                   {t("AfterProcess.Cart.CartItem.model")}{" "}
                   {model === undefined ? <ErrorIcon color="error" /> : null}
-                </h2>
+                </Heading>
                 <span>---</span>
               </>
             )}
@@ -95,15 +96,15 @@ const CartItem: React.FC<Props> = (props) => {
           >
             {material !== undefined ? (
               <>
-                <h2>{material.title}</h2>
+                <Heading variant="h2">{material.title}</Heading>
                 <span>{material.propList.join(", ")}</span>
               </>
             ) : (
               <>
-                <h2>
+                <Heading variant="h2">
                   {t("AfterProcess.Cart.CartItem.material")}{" "}
                   {material === undefined ? <ErrorIcon color="error" /> : null}
-                </h2>
+                </Heading>
                 <span>---</span>
               </>
             )}
@@ -116,11 +117,11 @@ const CartItem: React.FC<Props> = (props) => {
           >
             {postProcessings !== undefined ? (
               <>
-                <h2>
+                <Heading variant="h2">
                   {t("AfterProcess.Cart.CartItem.postProcessing", {
                     count: postProcessings.length,
                   })}
-                </h2>
+                </Heading>
                 {postProcessings.map((postProcessing, index) => (
                   <span key={index}>
                     {postProcessing.title} {postProcessing.value}
@@ -129,12 +130,12 @@ const CartItem: React.FC<Props> = (props) => {
               </>
             ) : (
               <>
-                <h2>
+                <Heading variant="h2">
                   {t("AfterProcess.Cart.CartItem.postProcessing", { count: 2 })}{" "}
                   {postProcessings === undefined ? (
                     <ErrorIcon color="error" />
                   ) : null}
-                </h2>
+                </Heading>
                 <span>---</span>
               </>
             )}

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import { getModelURI } from "@/services/utils";
 import { IProcessItem } from "../..";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   itemIndex: number;
@@ -28,7 +29,7 @@ const ManufacturerItem: React.FC<Props> = (props) => {
   return (
     <LoadingSuspense query={manufacturerQuery}>
       <div className="flex w-full flex-col items-center justify-between gap-5 bg-white p-2">
-        <h2>{processItem.model?.title}</h2>
+        <Heading variant="h2">{processItem.model?.title}</Heading>
         <div className="flex w-full flex-col items-start justify-around md:flex-row">
           <img
             src={getModelURI(processItem.model!)}

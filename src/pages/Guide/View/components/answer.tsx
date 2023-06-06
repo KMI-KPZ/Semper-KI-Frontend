@@ -1,3 +1,4 @@
+import { Heading } from "@component-library/Typography";
 import React, { useTransition } from "react";
 import { useTranslation } from "react-i18next";
 import { EGuideQuestionState, IGuideOption, IGuideQuestion } from "../..";
@@ -27,9 +28,9 @@ const GuideAnswers: React.FC<Props> = (props) => {
 
   return (
     <div className="flex h-80 w-full flex-col justify-start gap-5 overflow-y-auto overflow-x-hidden bg-white p-10 xl:h-full">
-      <h2>
+      <Heading variant="h2">
         {t("Guide.Answer.GuideAnswers.header")} {getProcessProgress()}
-      </h2>
+      </Heading>
       {questions
         .filter(
           (question: IGuideQuestion, index: number) =>

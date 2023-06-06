@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import { getModelURI } from "@/services/utils";
 import { IModel } from "..";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   model: IModel;
@@ -27,7 +28,7 @@ const ModelView: React.FC<Props> = (props) => {
 
   return (
     <div className="flex h-fit w-full flex-col items-center justify-start gap-5 bg-white p-5">
-      <h2 className="">{model.title}</h2>
+      <Heading variant="h2">{model.title}</Heading>
       <img className="w-full max-w-xs" src={getModelURI(model)} alt="Model" />
       <div className="model-view-tags">
         {model.tags.map((title: string, index: number) => (

@@ -96,11 +96,11 @@ const ManufacturerView: React.FC<Props> = (props) => {
         </div>
         {checkError === true ? (
           <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
-            <h2 className="text-red-500">
+            <Heading variant="h2">
               {t(
                 "AfterProcess.Manufacturer.ManufacturerView.noManufacturerSelected"
               )}
-            </h2>
+            </Heading>
           </div>
         ) : null}
         <div className="flex w-full flex-col items-center justify-start gap-5">
@@ -115,11 +115,11 @@ const ManufacturerView: React.FC<Props> = (props) => {
               />
             ))
           ) : (
-            <h2>
+            <Heading variant="h2">
               {t(
                 "AfterProcess.Manufacturer.ManufacturerView.noManufacturerSelected"
               )}
-            </h2>
+            </Heading>
           )}
         </div>
         <div className="flex flex-col gap-5 md:flex-row">

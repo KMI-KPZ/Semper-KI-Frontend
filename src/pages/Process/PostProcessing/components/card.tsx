@@ -1,3 +1,4 @@
+import { Heading } from "@component-library/Typography";
 import { IPostProcessing } from "..";
 
 interface Props<Item> {
@@ -56,7 +57,7 @@ const ItemCard = <Item extends IPostProcessing>(props: Props<Item>) => {
           grid === true ? "flex-col " : "w-full flex-row gap-5"
         }`}
       >
-        <h2 className="text-2xl font-bold">{item.title}</h2>
+        <Heading variant="h2">{item.title}</Heading>
         <input
           type="checkbox"
           className="h-10 w-10 checked:accent-türkis"

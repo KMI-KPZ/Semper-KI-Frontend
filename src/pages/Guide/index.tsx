@@ -65,7 +65,9 @@ const GuideRoutes: React.FC<Props> = (props) => {
       <Heading variant="h1">{t("Guide.GuideRoutes.header")}</Heading>
       <div className="flex w-full flex-col items-start justify-center gap-5 md:flex-row">
         <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
-          <h2>{t("Guide.GuideRoutes.information.header")}</h2>
+          <Heading variant="h2">
+            {t("Guide.GuideRoutes.information.header")}
+          </Heading>
           <span>{t("Guide.GuideRoutes.information.explanation")}</span>
           <div className="w-full border-t-2" />
           <div className="flex flex-col items-start justify-start gap-3">
@@ -84,7 +86,9 @@ const GuideRoutes: React.FC<Props> = (props) => {
           </div>
         </div>
         <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
-          <h2>{t("Guide.GuideRoutes.service.header")}</h2>
+          <Heading variant="h2">
+            {t("Guide.GuideRoutes.service.header")}
+          </Heading>
           <span>{t("Guide.GuideRoutes.service.explanation")}</span>
           <div className="w-full border-t-2" />
           <div className="flex flex-col items-start justify-start gap-3">

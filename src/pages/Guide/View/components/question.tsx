@@ -93,9 +93,9 @@ const GuideQuestion: React.FC<Props> = (props) => {
     <div className="guide-question">
       <Heading variant="h1">{t(title)}</Heading>
       {error === true ? (
-        <h2 className="guide-question-error">
+        <Heading variant="h2">
           {t("Guide.Question.GuideQuestion.error.missing")}
-        </h2>
+        </Heading>
       ) : null}
       <div className="guide-question-content">
         <GuideOptions

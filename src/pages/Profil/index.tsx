@@ -32,7 +32,7 @@ const Profil: React.FC<Props> = (props) => {
       <Heading variant="h1">{t("Profil.header")}</Heading>
       <div className="w-full border-t-4" />
       <div className="flex flex-col gap-2 p-5">
-        <h2>{t("Profil.general.header")}</h2>
+        <Heading variant="h2">{t("Profil.general.header")}</Heading>
         <div className="w-full border-t-2" />
         <span>
           {t("Profil.general.name")}: {user.name}
@@ -46,7 +46,7 @@ const Profil: React.FC<Props> = (props) => {
       </div>
       {userType === UserType.manufacturer ? (
         <div className="flex flex-col gap-2 p-5">
-          <h2>{t("Profil.company.header")}</h2>
+          <Heading variant="h2">{t("Profil.company.header")}</Heading>
           <div className="w-full border-t-2" />
           <span>
             {t("Profil.company.name")}: {user.organization}
@@ -57,7 +57,7 @@ const Profil: React.FC<Props> = (props) => {
         </div>
       ) : null}
       <div className="flex flex-col gap-2 p-5">
-        <h2>{t("Profil.address.header")}</h2>
+        <Heading variant="h2">{t("Profil.address.header")}</Heading>
         <div className="w-full border-t-2" />
         <span>
           {t("Profil.address.street")}: {user.address.street}{" "}
@@ -71,7 +71,7 @@ const Profil: React.FC<Props> = (props) => {
         </span>
       </div>{" "}
       <div className="flex flex-col gap-2 p-5">
-        <h2>{t("Profil.time.header")}</h2>
+        <Heading variant="h2">{t("Profil.time.header")}</Heading>
         <div className="w-full border-t-2" />
         <span>
           {t("Profil.time.created")}: {user.created.toLocaleString()}

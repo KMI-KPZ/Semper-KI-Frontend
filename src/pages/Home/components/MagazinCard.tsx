@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import BubblesSnipURL from "@images/Bubbles_snip.png";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   className?: string;
@@ -21,9 +22,7 @@ const HomeMagazinCard: React.FC<Props> = (props) => {
     `}
       to="https://infai.4imedia.com/"
     >
-      <h2 className="z-10 text-5xl font-bold tracking-wider text-white">
-        {t("Home.HomeMagazinCard.header")}
-      </h2>
+      <Heading variant="h2">{t("Home.HomeMagazinCard.header")}</Heading>
       <img
         className="felx absolute h-full w-full object-cover opacity-0 duration-500 group-hover:opacity-50"
         src={BubblesSnipURL}

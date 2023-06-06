@@ -3,6 +3,7 @@ import { Button } from "@component-library/Button";
 import { useTranslation } from "react-i18next";
 import { IModel } from "..";
 import useTailwind from "@/hooks/useTailwind";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   model: IModel;
@@ -43,7 +44,7 @@ export const ModelCard: React.FC<Props> = (props) => {
           alt="Model"
         />
         <div className="flex h-full flex-col items-center justify-around gap-2 p-3 md:justify-between ">
-          <h2 className="">{model.title}</h2>
+          <Heading variant="h2">{model.title}</Heading>
           <div className="hidden flex-row flex-wrap  items-center justify-center gap-2 md:flex ">
             {model.tags.map((title: string, index: number) => (
               <div key={index} className="rounded-lg bg-gray-200 px-2 py-1">
@@ -75,7 +76,7 @@ export const ModelCard: React.FC<Props> = (props) => {
         alt="Model"
       />
       <div className="flex h-full w-full flex-col items-center justify-around gap-5 p-3 sm:flex-row md:justify-between">
-        <h2 className="">{model.title}</h2>
+        <Heading variant="h2">{model.title}</Heading>
         <div className="hidden flex-col  flex-wrap items-center justify-center gap-2 md:flex">
           {model.tags.map((title: string, index: number) => (
             <div key={index} className="rounded-lg bg-gray-200 px-2 py-1">

@@ -1,3 +1,4 @@
+import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -20,10 +21,10 @@ const HomeNewsCard: React.FC<Props> = (props) => {
 
   return (
     <div
-      className={`${additionalClassNames} p-3 flex flex-col justify-start items-center gap-5 `}
+      className={`${additionalClassNames} flex flex-col items-center justify-start gap-5 p-3 `}
     >
-      <h2>{t("Home.HomeNewsCard.header")}</h2>
-      <div className="border-t-2 w-full" />
+      <Heading variant="h2">{t("Home.HomeNewsCard.header")}</Heading>
+      <div className="w-full border-t-2" />
       {newsList.length > 0 ? (
         newsList.map((news) => <HomeNewsCardItem {...news} />)
       ) : (
@@ -38,12 +39,12 @@ const HomeNewsCardItem: React.FC<NewsData> = (news) => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col justify-start items-start gap-3 p-5 w-full">
+    <div className="flex w-full flex-col items-start justify-start gap-3 p-5">
       <h3 className="pl-5">{title}</h3>
       <span>{text}</span>
       <Link
         to={link}
-        className="hover:text-türkis-950 text-türkis-800 duration-300 text-right w-full"
+        className="w-full text-right text-türkis-800 duration-300 hover:text-türkis-950"
       >
         {t("Home.HomeNewsCardItem.more")}
       </Link>

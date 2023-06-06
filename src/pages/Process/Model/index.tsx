@@ -11,6 +11,7 @@ import { IFilterItem } from "../Filter";
 import { ModelPreView } from "./components/preView";
 import ModelView from "./components/view";
 import IconUpload from "@icons/Upload.svg";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   filters: IFilterItem[];
@@ -104,7 +105,7 @@ export const ModelCatalog: React.FC<Props> = (props) => {
         src={IconUpload}
         alt={t("Process.Model.ModelCatalog.button.upload")}
       />
-      <h2 className="">{t("Process.Model.ModelCatalog.upload")}</h2>
+      <Heading variant="h2">{t("Process.Model.ModelCatalog.upload")}</Heading>
       <div className={`flex items-center justify-center gap-2 p-3`}>
         <Button onClick={handleOnClickCardUpload}>
           {t("Process.Model.ModelCatalog.button.select")}

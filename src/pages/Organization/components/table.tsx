@@ -9,6 +9,7 @@ import useOrganizations, {
 } from "../hooks/useOrganizations";
 import { LoadingSuspense } from "@component-library/Loading";
 import CheckIcon from "@mui/icons-material/Check";
+import { Heading } from "@component-library/Typography";
 
 interface OrganizationtableProps {}
 
@@ -26,7 +27,9 @@ const Organizationtable: React.FC<OrganizationtableProps> = (props) => {
         query={rolesQuery}
         errorText={t("Organization.components.table.error.empty")}
       >
-        <h2>{t("Organization.components.table.header")}</h2>
+        <Heading variant="h2">
+          {t("Organization.components.table.header")}
+        </Heading>
         <table className="w-full table-auto">
           <thead>
             <tr className="">

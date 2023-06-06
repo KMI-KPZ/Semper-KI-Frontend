@@ -2,6 +2,7 @@ import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { Button } from "@component-library/Button";
 import { IMaterial } from "..";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   material: IMaterial;
@@ -21,7 +22,7 @@ export const MaterialPreView: React.FC<Props> = (props) => {
           <CloseIcon fontSize="large" />
         </div>
       </div>
-      <h2 className="">{material.title}</h2>
+      <Heading variant="h2">{material.title}</Heading>
       <img className="w-full xl:max-w-xl" src={material.URI} alt="Model" />
       <div className="model-view-tags">
         {material.propList.map((title: string, index: number) => (

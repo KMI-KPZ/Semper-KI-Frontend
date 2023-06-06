@@ -365,7 +365,7 @@ const App: React.FC = () => {
     return (
       <div className="flex h-screen w-screen flex-col items-center justify-center gap-5 overflow-clip bg-white">
         <Heading variant="h1">{t("App.title")}</Heading>
-        <h2>{t("App.loading")}</h2>
+        <Heading variant="h2">{t("App.loading")}</Heading>
       </div>
     );
   }

@@ -195,9 +195,9 @@ const Checkout: React.FC<Props> = (props) => {
     return errorList.length > 0 ? (
       <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
         {errorList.map((error, index) => (
-          <h2 key={index} className="text-center text-red-400">
+          <Heading variant="h2" key={index}>
             {error}
-          </h2>
+          </Heading>
         ))}
       </div>
     ) : null;
@@ -205,7 +205,9 @@ const Checkout: React.FC<Props> = (props) => {
   const renderOrderSendSuccesfull = () => {
     return (
       <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
-        <h2>{t("AfterProcess.Checkout.Checkout.success.send")}</h2>
+        <Heading variant="h2">
+          {t("AfterProcess.Checkout.Checkout.success.send")}
+        </Heading>
         <h3>{t("AfterProcess.Checkout.Checkout.success.redirect")}</h3>
       </div>
     );
@@ -228,9 +230,9 @@ const Checkout: React.FC<Props> = (props) => {
               icon={<SendIcon fontSize="large" />}
               iconPos="back"
             >
-              <h2 className="text-white">
+              <Heading variant="h2">
                 {t("AfterProcess.Checkout.Checkout.button.request")}
-              </h2>
+              </Heading>
             </Button>
           </div>
         )}
@@ -264,7 +266,9 @@ const Checkout: React.FC<Props> = (props) => {
                 />
               ))
             ) : (
-              <h2>{t("AfterProcess.Checkout.Checkout.error.no-items")}</h2>
+              <Heading variant="h2">
+                {t("AfterProcess.Checkout.Checkout.error.no-items")}
+              </Heading>
             )}
           </div>
         ) : null}

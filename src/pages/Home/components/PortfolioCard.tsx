@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { UserSwitch } from "@/components/UserSwitch";
 import { UserType } from "@/hooks/useUser";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   className?: string;
@@ -23,7 +24,7 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
       className={`${additionalClassNames}  flex flex-col items-center justify-between gap-5 p-3`}
     >
       <div className="flex w-full flex-col items-center gap-3 overflow-clip">
-        <h2>{t("Home.HomePortfolioCard.header")}</h2>
+        <Heading variant="h2">{t("Home.HomePortfolioCard.header")}</Heading>
         <div className="w-full border-t-2" />
         <div
           className={`relative flex h-60 w-full flex-row gap-5 overflow-clip`}

@@ -6,6 +6,7 @@ import { Button } from "@component-library/Button";
 import FilterCard from "./components/card";
 import { IProgress } from "..";
 import { AppContext } from "@/pages/App";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   filterOpen: boolean;
@@ -206,7 +207,7 @@ const Filter: React.FC<Props> = (props) => {
             <CloseIcon fontSize="large" />
           </div>
         </div>
-        <h2 className="">{t("Process.Filter.Filter.header")}</h2>
+        <Heading variant="h2">{t("Process.Filter.Filter.header")}</Heading>
         {categoryList.map((category: ICategory, categoryIndex: number) => (
           <FilterCard
             category={category}

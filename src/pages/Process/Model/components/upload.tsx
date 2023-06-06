@@ -10,6 +10,7 @@ import { LoadingAnimation } from "@component-library/Loading";
 import useModelUpload from "@/pages/Process/Model/hooks/useModelUpload";
 import { getFileSizeAsString } from "@/services/utils";
 import { IModel } from "..";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   setProgress(path: string): void;
@@ -190,7 +191,9 @@ export const ModelUpload: React.FC<Props> = (props) => {
             className="hidden"
           />
           <UploadIcon className="h-40 w-40" />
-          <h2>{t("Process.Model.ModelUpload.card.header")}</h2>
+          <Heading variant="h2">
+            {t("Process.Model.ModelUpload.card.header")}
+          </Heading>
           {t("Process.Model.ModelUpload.card.text")}
         </div>
       )}

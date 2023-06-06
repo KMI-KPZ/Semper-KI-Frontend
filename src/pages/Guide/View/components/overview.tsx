@@ -29,7 +29,7 @@ const GuideOverview: React.FC<Props> = (props) => {
           key={index}
           // onClick={(e) => handleOnClickCard(question.filterId)}
         >
-          <h2>{question.title}</h2>
+          <Heading variant="h2">{question.title}</Heading>
           <GuideOptions
             key={index}
             type={question.type}

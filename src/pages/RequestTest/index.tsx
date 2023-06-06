@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@component-library/Button";
 import { useWebsocket } from "@/hooks/useWebsocket";
 import { User } from "@/hooks/useUser";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   user: User | undefined;
@@ -47,7 +48,7 @@ export const RequestTest: React.FC<Props> = (props) => {
       <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
         {chat.length > 0 ? (
           <div className="flex w-2/3 flex-col items-center justify-center gap-1 bg-slate-300 p-5">
-            <h2>Chat:</h2>
+            <Heading variant="h2">Chat:</Heading>
             {chat.map(({ send, data }, index) => (
               <div
                 key={index}

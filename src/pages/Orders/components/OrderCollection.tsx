@@ -16,6 +16,7 @@ import {
   useOrders,
 } from "../hooks/useOrders";
 import { OrderCollectionEvent, OrderEvent, UserType } from "@/hooks/useUser";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   index: number;
@@ -139,10 +140,10 @@ const OrderCollection: React.FC<Props> = (props) => {
   return (
     <div className="flex w-full flex-col items-start justify-start gap-5 bg-white p-5">
       <div className="flex w-full flex-col items-start justify-start gap-5 md:flex-row md:items-center md:justify-between">
-        <h2 className="break-words">
+        <Heading variant="h2">
           {t("Orders.OrderCollection.id")}: {orderCollection.id}
-        </h2>
-        <h2>
+        </Heading>
+        <Heading variant="h2">
           {t("Orders.OrderCollection.state.header")}
           {": "}
           {t(
@@ -150,11 +151,11 @@ const OrderCollection: React.FC<Props> = (props) => {
               OrderCollectionState[orderCollection.state]
             }`
           )}
-        </h2>
-        <h2>
+        </Heading>
+        <Heading variant="h2">
           {t("Orders.OrderCollection.date")}:{" "}
           {new Date(orderCollection.date).toLocaleString()}
-        </h2>
+        </Heading>
       </div>
       {isOpen === true ? (
         <>

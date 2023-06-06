@@ -24,7 +24,7 @@ const queryClient = new QueryClient({
 const fallback = (
   <div className="flex h-screen w-screen flex-col items-center justify-center gap-5 overflow-hidden bg-white">
     <Heading variant="h1">Semper-KI</Heading>
-    <h2>Loading...</h2>
+    <Heading variant="h2">Loading...</Heading>
   </div>
 );
 

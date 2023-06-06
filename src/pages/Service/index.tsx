@@ -1,4 +1,5 @@
 import CardView, { CardGroupType, CardItemType } from "@/components/CardView";
+import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
@@ -81,19 +82,19 @@ const ServiceRoutes: React.FC = () => {
       <Route
         path="use/design"
         element={
-          <h2>
+          <Heading variant="h2">
             {t("Service.ServiceRoutes.design")}
             {t("Service.ServiceRoutes.let")}
-          </h2>
+          </Heading>
         }
       />
       <Route
         path="use/accompany"
         element={
-          <h2>
+          <Heading variant="h2">
             {t("Service.ServiceRoutes.accompany")}
             {t("Service.ServiceRoutes.let")}
-          </h2>
+          </Heading>
         }
       />
       <Route
@@ -111,11 +112,15 @@ const ServiceRoutes: React.FC = () => {
       />
       <Route
         path="provide/design"
-        element={<h2>{t("Service.ServiceRoutes.design")}</h2>}
+        element={
+          <Heading variant="h2">{t("Service.ServiceRoutes.design")}</Heading>
+        }
       />
       <Route
         path="provide/accompany"
-        element={<h2>{t("Service.ServiceRoutes.accompany")}</h2>}
+        element={
+          <Heading variant="h2">{t("Service.ServiceRoutes.accompany")}</Heading>
+        }
       />
     </Routes>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import { IMaterial } from "..";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   material: IMaterial;
@@ -51,7 +52,7 @@ export const MaterialCatalogCard: React.FC<Props> = (props) => {
           grid === true ? "flex-col " : "w-full flex-row gap-5"
         }`}
       >
-        <h2 className="text-center">{material.title}</h2>
+        <Heading variant="h2">{material.title}</Heading>
         <div className="hidden flex-col items-center justify-center gap-2 2xl:flex">
           {material.propList.map((title: string, index: number) => (
             <div key={index}>{title}</div>

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Badge } from "@component-library/Badge";
 import { IHomeItem } from "..";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   homeItem: IHomeItem;
@@ -33,7 +34,7 @@ const HomeItem: React.FC<Props> = (props) => {
       ) : (
         homeItem.icon
       )}
-      <h2>{t(homeItem.title)}</h2>
+      <Heading variant="h2">{t(homeItem.title)}</Heading>
     </a>
   );
 };

@@ -6,6 +6,7 @@ import useOrganizations from "../hooks/useOrganizations";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Heading } from "@component-library/Typography";
 
 interface InvitationProps {}
 
@@ -79,7 +80,9 @@ const Invitation: React.FC<InvitationProps> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
-      <h2>{t("Organization.components.invitation.header")}</h2>
+      <Heading variant="h2">
+        {t("Organization.components.invitation.header")}
+      </Heading>
       <form
         className="relative flex w-full flex-col items-center justify-between gap-5 md:w-1/2 md:flex-row"
         onSubmit={handleSubmit(onSubmitInvite)}

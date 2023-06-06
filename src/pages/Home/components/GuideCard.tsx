@@ -4,6 +4,7 @@ import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import { UserType } from "@/hooks/useUser";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   className?: string;
@@ -21,7 +22,7 @@ const HomeGuideCard: React.FC<Props> = (props) => {
         className={`${additionalClassNames}  flex flex-col items-center justify-between gap-3 p-3`}
       >
         <div className="flex w-full flex-col items-center justify-start gap-3">
-          <h2>{t("Home.HomeGuideCard.header")}</h2>
+          <Heading variant="h2">{t("Home.HomeGuideCard.header")}</Heading>
           <div className="w-full border-t-2" />
           <div className="flex w-full flex-col items-start justify-center gap-1  ">
             <Link
@@ -54,7 +55,7 @@ const HomeGuideCard: React.FC<Props> = (props) => {
         className={`${additionalClassNames}  flex flex-col items-center justify-between gap-3 p-3`}
       >
         <div className="flex w-full flex-col items-center justify-start gap-3">
-          <h2>{t("Home.HomeGuideCard.header")}</h2>
+          <Heading variant="h2">{t("Home.HomeGuideCard.header")}</Heading>
           <div className="w-full border-t-2" />
           <div className="flex w-full flex-col items-start justify-around gap-5">
             <div className="flex w-full flex-col items-center justify-start gap-2">
@@ -116,7 +117,7 @@ const HomeGuideCard: React.FC<Props> = (props) => {
       className={`${additionalClassNames}  flex flex-col items-center justify-center gap-3 p-3 duration-300 hover:bg-türkis-300`}
     >
       <PsychologyAltIcon fontSize="large" />
-      <h2>{t("Home.HomeGuideCard.header")}</h2>
+      <Heading variant="h2">{t("Home.HomeGuideCard.header")}</Heading>
     </Link>
   );
 };

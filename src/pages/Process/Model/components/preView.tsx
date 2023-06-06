@@ -4,6 +4,7 @@ import { Button } from "@component-library/Button";
 import { useTranslation } from "react-i18next";
 import { getModelURI } from "@/services/utils";
 import { IModel } from "..";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   model: IModel;
@@ -32,7 +33,7 @@ export const ModelPreView: React.FC<Props> = (props) => {
           <CloseIcon fontSize="large" />
         </div>
       </div>
-      <h2 className="">{model.title}</h2>
+      <Heading variant="h2">{model.title}</Heading>
       <img
         className="w-full xl:max-w-xl"
         src={getModelURI(model)}

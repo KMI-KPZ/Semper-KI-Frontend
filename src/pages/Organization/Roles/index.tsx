@@ -1,3 +1,4 @@
+import { Heading } from "@component-library/Typography";
 import { useTranslation } from "react-i18next";
 import useOrganizations from "../hooks/useOrganizations";
 import OrganizationRolesForm from "./components/form";
@@ -12,7 +13,7 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 ">
-      <h2>{t("Organization.Roles.index.header")}</h2>
+      <Heading variant="h2">{t("Organization.Roles.index.header")}</Heading>
       {/* <div className="flex w-full flex-row flex-wrap items-center justify-center gap-5">
         <LoadingSuspense query={organizationRolesQuery}>
           {organizationRolesQuery.data !== undefined &&

@@ -92,9 +92,9 @@ const Cart: React.FC<Props> = (props) => {
               />
             ))
           ) : (
-            <h2 className="w-full bg-white p-2 text-center">
+            <Heading variant="h2">
               {t("AfterProcess.Cart.Cart.noItems")}
-            </h2>
+            </Heading>
           )}
         </section>
         {showError === true ? (

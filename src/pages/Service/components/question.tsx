@@ -1,3 +1,4 @@
+import { Heading } from "@component-library/Typography";
 import React from "react";
 import { EServiceQuestionType, IServiceQuestion } from "..";
 
@@ -70,7 +71,7 @@ const ServiceQuestion: React.FC<Props> = (props) => {
 
   return (
     <div className="service-question">
-      <h2>{title}</h2>
+      <Heading variant="h2">{title}</Heading>
       <div>{EServiceQuestionType[type]}</div>
       {renderInput(type)}
     </div>

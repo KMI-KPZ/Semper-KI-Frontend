@@ -1,5 +1,6 @@
 import { getModelURI } from "@/services/utils";
 import { LoadingAnimation } from "@component-library/Loading";
+import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { IProcessItem } from "../..";
@@ -18,7 +19,7 @@ const CheckoutItem: React.FC<Props> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-2 bg-white p-2 sm:basis-[48%] md:basis-[32%]">
-      <h2 className="text-center">{process.title}</h2>
+      <Heading variant="h2">{process.title}</Heading>
       <img
         src={getModelURI(process.model!)}
         className="max-h-40 w-full max-w-[200px] object-cover md:max-h-80 md:max-w-xs"

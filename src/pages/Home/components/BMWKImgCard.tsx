@@ -42,7 +42,7 @@ const HomeBMWKImgCard: React.FC<Props> = (props) => {
       </a> */}
       <a
         href="https://www.bmwk.de/"
-        className="h-1/2 w-1/2 select-none object-contain p-5 "
+        className="h-full w-full select-none object-contain p-5 "
         title="BMWK"
       >
         <img

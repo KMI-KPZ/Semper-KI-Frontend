@@ -38,7 +38,9 @@ const HomeOrderCard: React.FC<Props> = (props) => {
         <div className="flex h-full w-full flex-col items-center justify-start gap-5">
           <Heading variant="h2">{t("Home.HomeOrderCard.header")}</Heading>
           <div className="w-full border-t-2" />
-          <h3>{t("Home.HomeOrderCard.contracts.header")}</h3>
+          <Heading variant="h3">
+            {t("Home.HomeOrderCard.contracts.header")}
+          </Heading>
           <LoadingSuspense query={ordersQuery}>
             <ul className="flex w-full flex-col gap-2">
               <li className="flex w-full flex-row justify-between">
@@ -100,7 +102,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
         <div className="flex h-full w-full flex-col items-center justify-start gap-5">
           <Heading variant="h2">{t("Home.HomeOrderCard.header")}</Heading>
           <div className="w-full border-t-2" />
-          <h3>{t("Home.HomeOrderCard.order.header")}</h3>
+          <Heading variant="h3">{t("Home.HomeOrderCard.order.header")}</Heading>
           <div className="flex w-full flex-col items-center justify-center gap-3 md:flex-row">
             <Button
               to="/process/new"
@@ -127,7 +129,9 @@ const HomeOrderCard: React.FC<Props> = (props) => {
             />
           </div>
           <div className="w-full border-t-2" />
-          <h3>{t("Home.HomeOrderCard.orders.header")}</h3>
+          <Heading variant="h3">
+            {t("Home.HomeOrderCard.orders.header")}
+          </Heading>
           <LoadingSuspense query={ordersQuery}>
             <ul className="flex w-full flex-col gap-2">
               <li className="flex w-full flex-row justify-between">

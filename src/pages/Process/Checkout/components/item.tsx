@@ -25,14 +25,16 @@ const CheckoutItem: React.FC<Props> = (props) => {
         className="max-h-40 w-full max-w-[200px] object-cover md:max-h-80 md:max-w-xs"
       />
       <div className="flex w-full flex-row items-center justify-between px-5">
-        <h3>{t("CheckoutItem.printable")}:</h3>
+        <Heading variant="h3">{t("CheckoutItem.printable")}:</Heading>
         {printable.loading === true ? <LoadingAnimation text /> : null}
         {printable.loading === false &&
         printable.error === false &&
         printable.data !== "" ? (
-          <h3>{printable.data}</h3>
+          <Heading variant="h3">{printable.data}</Heading>
         ) : null}
-        {printable.error === true ? <h3>Fehler</h3> : null}
+        {printable.error === true ? (
+          <Heading variant="h3">Fehler</Heading>
+        ) : null}
         {printable.loading === false &&
         printable.error === false &&
         printable.data === ""
@@ -40,14 +42,16 @@ const CheckoutItem: React.FC<Props> = (props) => {
           : null}
       </div>
       <div className="flex w-full flex-row items-center justify-between px-5">
-        <h3>{t("CheckoutItem.logistics")}:</h3>
+        <Heading variant="h3">{t("CheckoutItem.logistics")}:</Heading>
         {logistics.loading === true ? <LoadingAnimation text /> : null}
         {logistics.loading === false &&
         logistics.error === false &&
         logistics.data !== "" ? (
-          <h3>{logistics.data}</h3>
+          <Heading variant="h3">{logistics.data}</Heading>
         ) : null}
-        {logistics.error === true ? <h3>Fehler</h3> : null}
+        {logistics.error === true ? (
+          <Heading variant="h3">Fehler</Heading>
+        ) : null}
         {logistics.loading === false &&
         logistics.error === false &&
         logistics.data === ""
@@ -55,14 +59,14 @@ const CheckoutItem: React.FC<Props> = (props) => {
           : null}
       </div>
       <div className="flex w-full flex-row items-center justify-between px-5">
-        <h3>{t("CheckoutItem.price")}:</h3>
+        <Heading variant="h3">{t("CheckoutItem.price")}:</Heading>
         {price.loading === true ? <LoadingAnimation text /> : null}
         {price.loading === false &&
         price.error === false &&
         price.data !== "" ? (
-          <h3>{price.data}</h3>
+          <Heading variant="h3">{price.data}</Heading>
         ) : null}
-        {price.error === true ? <h3>Fehler</h3> : null}
+        {price.error === true ? <Heading variant="h3">Fehler</Heading> : null}
         {price.loading === false && price.error === false && price.data === ""
           ? "?"
           : null}

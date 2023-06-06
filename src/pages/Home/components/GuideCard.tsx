@@ -59,7 +59,9 @@ const HomeGuideCard: React.FC<Props> = (props) => {
           <div className="w-full border-t-2" />
           <div className="flex w-full flex-col items-start justify-around gap-5">
             <div className="flex w-full flex-col items-center justify-start gap-2">
-              <h3>{t("Home.HomeGuideCard.information.header")}</h3>
+              <Heading variant="h3">
+                {t("Home.HomeGuideCard.information.header")}
+              </Heading>
               <div className="flex w-full flex-col items-start justify-center gap-1">
                 <Link
                   to="/guide"
@@ -83,7 +85,9 @@ const HomeGuideCard: React.FC<Props> = (props) => {
             </div>
             <div className="w-full border-t-2 " />
             <div className="flex w-full flex-col items-center justify-start gap-2">
-              <h3>{t("Home.HomeGuideCard.service.header")}</h3>
+              <Heading variant="h3">
+                {t("Home.HomeGuideCard.service.header")}
+              </Heading>
               <div className="flex w-full flex-col items-start justify-center gap-1">
                 <Link
                   to="/guide"

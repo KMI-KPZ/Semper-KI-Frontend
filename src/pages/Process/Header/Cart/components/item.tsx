@@ -5,6 +5,7 @@ import { IconBadge } from "@component-library/Badge";
 import { IProcessItem, ProcessContext } from "@/pages/Process";
 import { ReactNode, useContext, useEffect, useState } from "react";
 import StatusIcon from "../../components/statusIcon";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   process?: IProcessItem;
@@ -87,7 +88,7 @@ const CartItem: React.FC<Props> = (props) => {
           onChange={handleOnChangeInput}
         />
       ) : (
-        <h3 className="whitespace-nowrap">{titleText}</h3>
+        <Heading variant="h3">{titleText}</Heading>
       )}
       {isItem === true ? (
         <div className="flex flex-col items-center justify-center gap-1">

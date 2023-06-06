@@ -40,7 +40,9 @@ const HomeNewsCardItem: React.FC<NewsData> = (news) => {
 
   return (
     <div className="flex w-full flex-col items-start justify-start gap-3 p-5">
-      <h3 className="pl-5">{title}</h3>
+      <Heading variant="h3" className="pl-5">
+        {title}
+      </Heading>
       <span>{text}</span>
       <Link
         to={link}

@@ -56,13 +56,15 @@ export const RequestTest: React.FC<Props> = (props) => {
                   send ? "justify-end" : "justify-start"
                 }`}
               >
-                <h3>{JSON.stringify(JSON.parse(data))}</h3>
+                <Heading variant="h3">
+                  {JSON.stringify(JSON.parse(data))}
+                </Heading>
               </div>
             ))}
           </div>
         ) : null}
         <div className="flex flex-row items-center justify-around gap-5">
-          <h3>{state}</h3>
+          <Heading variant="h3">{state}</Heading>
           <input
             value={inputMessage}
             type="text"

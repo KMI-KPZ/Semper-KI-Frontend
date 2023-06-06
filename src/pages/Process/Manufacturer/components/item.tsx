@@ -36,7 +36,9 @@ const ManufacturerItem: React.FC<Props> = (props) => {
             className="h-full max-w-xs"
           />
           <div className="flex flex-row items-center justify-start gap-5 md:flex-col">
-            <h3>{t("AfterProcess.Manufacturer.ManufacturerItem.header")}</h3>
+            <Heading variant="h3">
+              {t("AfterProcess.Manufacturer.ManufacturerItem.header")}
+            </Heading>
             {manufacturerQuery.data !== undefined &&
               manufacturerQuery.data.map((manufacturer, manufacturerIndex) => (
                 <div
@@ -55,7 +57,7 @@ const ManufacturerItem: React.FC<Props> = (props) => {
                     checked={manufacturer.id === manufacturerID}
                     onChange={() => handleOnChangeInput(manufacturer.id)}
                   />
-                  <h3>{manufacturer.name}</h3>
+                  <Heading variant="h3">{manufacturer.name}</Heading>
                 </div>
               ))}
           </div>

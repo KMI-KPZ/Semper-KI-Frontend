@@ -46,7 +46,9 @@ const CardView: React.FC<Props> = (props) => {
             key={index}
           >
             {cardgroup.title !== undefined ? (
-              <h3 className="text-center">{t(cardgroup.title)}</h3>
+              <Heading variant="h3" className="text-center">
+                {t(cardgroup.title)}
+              </Heading>
             ) : null}
             {renderCards(cardgroup.cards)}
           </div>

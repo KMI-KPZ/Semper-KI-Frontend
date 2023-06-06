@@ -208,7 +208,9 @@ const Checkout: React.FC<Props> = (props) => {
         <Heading variant="h2">
           {t("AfterProcess.Checkout.Checkout.success.send")}
         </Heading>
-        <h3>{t("AfterProcess.Checkout.Checkout.success.redirect")}</h3>
+        <Heading variant="h3">
+          {t("AfterProcess.Checkout.Checkout.success.redirect")}
+        </Heading>
       </div>
     );
   };

@@ -10,6 +10,7 @@ import { NavigationItemData } from "@/data/navigation";
 import LogoURL from "@images/logo192.png";
 import { AppContext } from "@/pages/App";
 import { OrderCollectionEvent, UserType } from "@/hooks/useUser";
+import { Heading } from "@component-library/Typography";
 
 interface Language {
   code: string;
@@ -301,9 +302,7 @@ export const Header: React.FC<Props> = (props) => {
         alt="Kiss Logo"
       />
       <div className="hidden flex-col items-end justify-start text-inherit xs:flex">
-        <h3 className="p-0 text-3xl font-bold" data-testid="logoName">
-          {t("Header.Header.title")}
-        </h3>
+        <Heading variant="h3">{t("Header.Header.title")}</Heading>
         <h4 className="hidden text-xs font-bold md:block"></h4>
         {/* <h4 className="text-türkis text-sm">Blog</h4> */}
       </div>

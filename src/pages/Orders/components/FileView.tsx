@@ -4,6 +4,7 @@ import { Button } from "@component-library/Button";
 import DownloadIcon from "@mui/icons-material/Download";
 import useOrderFile from "../hooks/useOrderFiles";
 import { IOrder } from "../hooks/useOrders";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   order: IOrder;
@@ -47,7 +48,7 @@ const OrderFileView: React.FC<Props> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
-      <h3 className="">{t("Orders.OrderFileView.header")}</h3>
+      <Heading variant="h3">{t("Orders.OrderFileView.header")}</Heading>
       <div className="w-full border-b-2" />
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
         {order.files.length > 0

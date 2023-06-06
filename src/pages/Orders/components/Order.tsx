@@ -16,6 +16,7 @@ import { IOrder, OrderState, useOrders } from "../hooks/useOrders";
 import { OrderEvent, UserType } from "@/hooks/useUser";
 import { AppContext } from "@/pages/App";
 import { getModelURI } from "@/services/utils";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   order: IOrder;
@@ -144,10 +145,10 @@ const OrderView: React.FC<Props> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-start gap-3 border-2 p-3 md:items-start">
       <div className="flex w-full flex-col justify-between md:flex-row">
-        <h3 className="break-words">
+        <Heading variant="h3">
           {t("Orders.OrderView.header")} {order.id}
-        </h3>
-        <h3 className="break-words">{order.item.title}</h3>
+        </Heading>
+        <Heading variant="h3">{order.item.title}</Heading>
         <div className="flex flex-col items-center  justify-center gap-3 md:flex-row">
           {orderEvent !== undefined &&
           orderEvent.messages !== undefined &&
@@ -197,13 +198,13 @@ const OrderView: React.FC<Props> = (props) => {
           className="object-fit w-2/12"
         />
         <div className="flex w-1/4 flex-col items-center justify-start p-3">
-          <h3>{order.item.model?.title}</h3>
+          <Heading variant="h3">{order.item.model?.title}</Heading>
         </div>
         <div className="flex w-1/4 flex-col items-center justify-start p-3">
-          <h3>{order.item.material?.title}</h3>
+          <Heading variant="h3">{order.item.material?.title}</Heading>
         </div>
         <div className="flex w-1/4 flex-col items-center justify-start p-3">
-          <h3>{t("Orders.OrderView.postProcessing")}</h3>
+          <Heading variant="h3">{t("Orders.OrderView.postProcessing")}</Heading>
           {order.item.postProcessings?.map((postProcessing, index) => (
             <span key={index}>{postProcessing.title}</span>
           ))}

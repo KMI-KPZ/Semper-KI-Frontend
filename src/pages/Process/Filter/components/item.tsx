@@ -8,6 +8,7 @@ import FColor from "./FColor";
 import FNumber from "./FNumber";
 import FMultiSelection from "./FMultiSelection";
 import { IFilterItem } from "..";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   filterItem: IFilterItem;
@@ -75,7 +76,7 @@ const FilterItem: React.FC<Props> = (props) => {
           checked={filterItem.isChecked}
           onChange={handleChangeCheckbox}
         />
-        <h3>{filterItem.question.title}</h3>
+        <Heading variant="h3">{filterItem.question.title}</Heading>
       </div>
       <div className="flex justify-center">
         {filterItem.isChecked ? displayInput() : ""}

@@ -1,3 +1,4 @@
+import { Heading } from "@component-library/Typography";
 import React from "react";
 import { EGuideQuestionType } from "../..";
 import GuideOptions, { IGuideOptionProps } from "./options";
@@ -13,7 +14,7 @@ const GuideAnswer: React.FC<Props> = (props) => {
 
   return (
     <div className="guide-answer-card">
-      <h3>{title}</h3>
+      <Heading variant="h3">{title}</Heading>
       {active ? "---" : <GuideOptions {...props} />}
     </div>
   );

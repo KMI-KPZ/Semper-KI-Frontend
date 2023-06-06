@@ -6,6 +6,7 @@ import FactoryIcon from "@mui/icons-material/Factory";
 import { IOrder, OrderState } from "../hooks/useOrders";
 import { OrderEvent } from "@/hooks/useUser";
 import { getModelURI } from "@/services/utils";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   order: IOrder;
@@ -33,7 +34,7 @@ const OrderPreView: React.FC<Props> = (props) => {
         </div>
       ) : null}
       <img src={getModelURI(order.item.model!)} />
-      <h3 className="break-words">{order.item.title}</h3>
+      <Heading variant="h3">{order.item.title}</Heading>
       <span>{t(`Orders.OrderPreView.${OrderState[order.orderState]}`)}</span>
     </div>
   );

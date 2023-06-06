@@ -36,7 +36,9 @@ const ItemView = <Item extends IPostProcessing>(props: Props<Item>) => {
       case "selection":
         return renderSelectInput();
       default:
-        return <h3>No Correct Input found for:{type}</h3>;
+        return (
+          <Heading variant="h3">No Correct Input found for:{type}</Heading>
+        );
     }
   };
 
@@ -57,7 +59,7 @@ const ItemView = <Item extends IPostProcessing>(props: Props<Item>) => {
       </div>
       <Heading variant="h2">{item.title}</Heading>
       <img className="w-full xl:max-w-xl" src={item.URI} alt="Model" />
-      <h3>{item.type}</h3>
+      <Heading variant="h3">{item.type}</Heading>
       {item.value !== "" ? (
         <div className="flex flex-row items-center justify-center">
           {item.value}

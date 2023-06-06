@@ -5,6 +5,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useTranslation } from "react-i18next";
 import FilterItem from "./item";
 import { ICategory, IFilterItem } from "..";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   category: ICategory;
@@ -37,10 +38,10 @@ const FilterCard: React.FC<Props> = (props) => {
   return (
     <div className="bg-gray-100 p-3">
       <div className="flex flex-row items-center justify-between">
-        <h3>
+        <Heading variant="h3">
           {t(`Process.Filter.FilterCard.category.${category.title}`)}
           {getCountOfChecktItems()}
-        </h3>
+        </Heading>
         <IconButton
           onClick={(e) => handleOnClickMenuOpen(e, category, categoryIndex)}
         >

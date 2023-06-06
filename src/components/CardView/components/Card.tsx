@@ -1,3 +1,4 @@
+import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -37,7 +38,7 @@ const Card: React.FC<Props> = (props) => {
       href={carditem.link}
     >
       {carditem.icon !== undefined ? carditem.icon : null}
-      <h3 className="text-center">{t(carditem.title)}</h3>
+      <Heading variant="h3">{t(carditem.title)}</Heading>
     </a>
   );
 };

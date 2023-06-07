@@ -11,7 +11,8 @@ import { Button } from "@component-library/Button";
 import { Badge } from "@component-library/Badge";
 import { UserType } from "@/hooks/useUser";
 import { OrderState, useOrders } from "@/pages/Orders/hooks/useOrders";
-import { Heading } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/Typography";
+import Table from "@/components/Table";
 
 interface Props {
   className?: string;
@@ -42,6 +43,32 @@ const HomeOrderCard: React.FC<Props> = (props) => {
             {t("Home.HomeOrderCard.contracts.header")}
           </Heading>
           <LoadingSuspense query={ordersQuery}>
+            {/* <Table
+              header={[
+                t("Home.HomeOrderCard.contracts.date"),
+                t("Home.HomeOrderCard.contracts.article"),
+                t("Home.HomeOrderCard.contracts.status"),
+              ]}
+              rows={
+                ordersQuery.data !== undefined
+                  ? ordersQuery.data
+                      .slice(
+                        0,
+                        ordersQuery.data.length < orderShowCountManufacturer
+                          ? ordersQuery.data.length
+                          : orderShowCountManufacturer
+                      )
+                      .map((order, index) => [
+                        <Text variant="body" className="text-center">
+                          {new Date(order.date).toLocaleDateString()}
+                        </Text>,
+                        <Text variant="body">{order.orders.length}</Text>,
+                        <Text variant="body">{OrderState[order.state]}</Text>,
+                      ])
+                  : [[]]
+              }
+            /> */}
+
             <table className="w-full table-auto">
               <thead>
                 <tr>

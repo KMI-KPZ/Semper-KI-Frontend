@@ -7,7 +7,7 @@ interface Props {
   className?: string;
 }
 
-const HomeBMWKImgCard: React.FC<Props> = (props) => {
+const HomeImgCard: React.FC<Props> = (props) => {
   const { className } = props;
   const additionalClassNames = className ?? "";
   const { i18n } = useTranslation();
@@ -54,4 +54,4 @@ const HomeBMWKImgCard: React.FC<Props> = (props) => {
   );
 };
 
-export default HomeBMWKImgCard;
+export default HomeImgCard;

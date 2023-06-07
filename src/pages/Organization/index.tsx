@@ -7,12 +7,10 @@ import OrganizationRoles from "./Roles";
 import OrganizationTabel from "./components/table";
 import { Heading } from "@component-library/Typography";
 
-interface OrganizationViewProps {
-  user: User | undefined;
-}
+interface OrganizationViewProps {}
 
 const OrganizationView: React.FC<OrganizationViewProps> = (props) => {
-  const { user } = props;
+  const {} = props;
   const { t } = useTranslation();
 
   return (

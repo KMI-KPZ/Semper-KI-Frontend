@@ -38,7 +38,11 @@
       "login": "Anmelden",
       "register": "Registrieren",
       "logout": "Abmelden",
-      "organization":"Organisation"
+      "organization":"Organisation",
+      "materials":"Materialien",
+      "printers":"3D-Drucker",
+      "postprocessings":"Nachbearbeitungen",
+      "resources":"Ressourcen"
     }
   },
   "enum":{
@@ -349,6 +353,15 @@
       "button":{
         "client":"Für Autraggeber",
         "contractor":"Für Anbieter"
+      }
+    },
+    "HomeResourcesCard":{
+      "header":"Ressourcen",
+      "link":{
+        "printer":"3D-Drucker",
+        "material":"Materialien",
+        "postprocessing":"Nachbearbeitungen",
+        "overview":"Übersicht"
       }
     },
     "HomeSearchCard":{
@@ -692,6 +705,29 @@
    }
   },
   "Redirect":{},
+  "Resources":{
+    "header":"Ressourcen",
+    "components":{
+      "Menu":{
+        "overview":"Übersicht",
+        "materials":"Materialien",
+        "printers":"3D-Drucker",
+        "postProcessings":"Nachbearbeitung"
+      }
+    },
+    "Overview":{
+      "header":"Übersicht"
+    },
+    "Materials":{
+      "header":"Materialien"
+    },
+    "Printers":{
+      "header":"3D-Drucker"
+    },
+    "PostProcessings":{
+      "header":"Nachbearbeitungen"
+    }
+  },
   "Service":{
     "ServiceQuestion":{},
     "ServiceRoutes":{

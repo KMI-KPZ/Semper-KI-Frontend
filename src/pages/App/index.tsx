@@ -38,6 +38,7 @@ import ManufacturerView from "../Process/Manufacturer";
 import Profil from "../Profil";
 import Redirect from "../Redirect";
 import { RequestTest } from "../RequestTest";
+import ResoucesView from "../Resources";
 import ServiceRoutes from "../Service";
 import {
   PrivateAdminRoutes,
@@ -344,7 +345,8 @@ const App: React.FC = () => {
         path="contracts"
         element={<OrderCollectionOverview userType={UserType.manufacturer} />}
       />
-      <Route path="organization" element={<OrganizationView user={user} />} />
+      <Route path="organization" element={<OrganizationView />} />
+      <Route path="resources/*" element={<ResoucesView />} />
     </Route>
   );
   const privateRoutes = (

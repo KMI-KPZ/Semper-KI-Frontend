@@ -1,4 +1,6 @@
+import Table from "@/components/Table";
 import { LoadingSuspense } from "@component-library/Loading";
+import { Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import useOrganizations, { RoleProps } from "../../hooks/useOrganizations";

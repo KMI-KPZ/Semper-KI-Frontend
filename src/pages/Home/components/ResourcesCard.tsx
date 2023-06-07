@@ -7,6 +7,7 @@ import { ReactComponent as PrinterIcon } from "@icons/3DPrinter.svg";
 import { ReactComponent as MetalIcon } from "@icons/Metal.svg";
 import BrushIcon from "@mui/icons-material/Brush";
 import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
+import { Button } from "@component-library/Button";
 
 interface HomeResourcesProps {
   className?: string;
@@ -24,7 +25,15 @@ const HomeResourcesCard: React.FC<HomeResourcesProps> = (props) => {
       <Divider />
       <div className="flex flex-row flex-wrap items-start justify-center">
         <div className="flex  w-1/2 flex-col items-center justify-center p-2">
-          <Link
+          <Button style="secondary">
+            <div className="flex flex-col items-center justify-center gap-3 p-2">
+              <PrinterIcon fill="" />
+              <Text variant="body">
+                {t("Home.HomeResourcesCard.link.printer")}
+              </Text>
+            </div>
+          </Button>
+          {/* <Link
             to="/resources/printers"
             className={`flex h-full w-full flex-col items-center justify-center gap-3 rounded-2xl bg-slate-100 p-2 duration-300 hover:bg-türkis-300`}
           >
@@ -32,7 +41,7 @@ const HomeResourcesCard: React.FC<HomeResourcesProps> = (props) => {
             <Text variant="body">
               {t("Home.HomeResourcesCard.link.printer")}
             </Text>
-          </Link>
+          </Link> */}
         </div>
         <div className="flex w-1/2 flex-col items-center justify-center p-2">
           <Link

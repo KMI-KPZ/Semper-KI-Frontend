@@ -52,6 +52,7 @@ export const Button = <T,>(props: Props<T>) => {
       navigate(to);
     }
   };
+  const primaryColor: string = "";
 
   const addString = (oldString: string, newString: string): string =>
     oldString.concat(" ".concat(newString));

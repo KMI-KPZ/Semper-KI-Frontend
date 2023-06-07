@@ -16,7 +16,7 @@ const Heading: React.FC<PropsWithChildren<HeadingProps>> = ({
     case "h1":
       return (
         <h1
-          className={`font-ptsans text-2xl font-normal md:text-3xl ${additionalClassNames}`}
+          className={`font-ptsans text-2xl font-normal md:text-3xl ${additionalClassNames} `}
           {...props}
         >
           {children}
@@ -25,7 +25,7 @@ const Heading: React.FC<PropsWithChildren<HeadingProps>> = ({
     case "h2":
       return (
         <h2
-          className={`font-ptsans text-xl font-normal md:text-2xl ${additionalClassNames}`}
+          className={`font-ptsans text-xl font-normal md:text-2xl ${additionalClassNames} `}
           {...props}
         >
           {children}
@@ -76,7 +76,7 @@ const Text: React.FC<PropsWithChildren<TextProps>> = ({
     case "body":
       return (
         <span
-          className={`font-ptsans text-base font-normal ${additionalClassNames}`}
+          className={`font-ptsans text-base font-normal  ${additionalClassNames}`}
         >
           {children}
         </span>
@@ -84,7 +84,7 @@ const Text: React.FC<PropsWithChildren<TextProps>> = ({
     case "strong":
       return (
         <span
-          className={`font-ptsans text-base font-semibold ${additionalClassNames}`}
+          className={`font-ptsans text-base font-semibold  ${additionalClassNames}`}
         >
           {children}
         </span>
@@ -92,7 +92,7 @@ const Text: React.FC<PropsWithChildren<TextProps>> = ({
     case "small":
       return (
         <span
-          className={`font-ptsans text-xs font-normal ${additionalClassNames}`}
+          className={`font-ptsans text-xs font-normal  ${additionalClassNames}`}
         >
           {children}
         </span>
@@ -100,7 +100,7 @@ const Text: React.FC<PropsWithChildren<TextProps>> = ({
     case "button-text":
       return (
         <span
-          className={`font-ptsans text-sm font-semibold ${additionalClassNames}`}
+          className={`font-ptsans text-sm font-semibold  ${additionalClassNames}`}
         >
           {children}
         </span>
@@ -108,12 +108,28 @@ const Text: React.FC<PropsWithChildren<TextProps>> = ({
     case "quote":
       return (
         <span
-          className={`font-ptsans text-base font-semibold ${additionalClassNames}`}
+          className={`font-ptsans text-base font-semibold  ${additionalClassNames}`}
         >
           {children}
         </span>
       );
   }
+};
+
+type LinkProps = {
+  className?: string;
+  href: string;
+};
+const Link: React.FC<PropsWithChildren<LinkProps>> = ({
+  children,
+  className = "",
+  href,
+}) => {
+  return (
+    <a className={` ${className}`} href={href}>
+      {children}
+    </a>
+  );
 };
 
 export { Heading, Text };

@@ -302,9 +302,9 @@ export const Header: React.FC<Props> = (props) => {
         alt="Kiss Logo"
       />
       <div className="hidden flex-col items-end justify-start text-inherit xs:flex">
-        <Heading variant="h3">{t("Header.Header.title")}</Heading>
-        <h4 className="hidden text-xs font-bold md:block"></h4>
-        {/* <h4 className="text-türkis text-sm">Blog</h4> */}
+        <Heading variant="h2" className="font-black">
+          {t("Header.Header.title")}
+        </Heading>
       </div>
     </a>
   );

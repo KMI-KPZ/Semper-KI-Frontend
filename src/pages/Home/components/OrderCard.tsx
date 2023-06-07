@@ -42,40 +42,41 @@ const HomeOrderCard: React.FC<Props> = (props) => {
             {t("Home.HomeOrderCard.contracts.header")}
           </Heading>
           <LoadingSuspense query={ordersQuery}>
-            <ul className="flex w-full flex-col gap-2">
-              <li className="flex w-full flex-row justify-between">
-                <span className="text-left">
-                  {t("Home.HomeOrderCard.contracts.date")}
-                </span>
-                <span className="text-left">
-                  {t("Home.HomeOrderCard.contracts.article")}
-                </span>
-                <span className="text-left">
-                  {t("Home.HomeOrderCard.contracts.status")}
-                </span>
-              </li>
-              {ordersQuery.data !== undefined ? (
-                ordersQuery.data
-                  .slice(
-                    0,
-                    ordersQuery.data.length < orderShowCountManufacturer
-                      ? ordersQuery.data.length
-                      : orderShowCountManufacturer
-                  )
-                  .map((order, index) => (
-                    <li
-                      key={index}
-                      className="flex w-full flex-row justify-between"
-                    >
-                      <span>{new Date(order.date).toLocaleDateString()}</span>
-                      <span>{order.orders.length}</span>
-                      <span>{OrderState[order.state]}</span>
-                    </li>
-                  ))
-              ) : (
-                <></>
-              )}
-            </ul>
+            <table className="w-full table-auto">
+              <thead>
+                <tr>
+                  <th>{t("Home.HomeOrderCard.contracts.date")}</th>
+                  <th>{t("Home.HomeOrderCard.contracts.article")}</th>
+                  <th>{t("Home.HomeOrderCard.contracts.status")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ordersQuery.data !== undefined ? (
+                  ordersQuery.data
+                    .slice(
+                      0,
+                      ordersQuery.data.length < orderShowCountManufacturer
+                        ? ordersQuery.data.length
+                        : orderShowCountManufacturer
+                    )
+                    .map((order, index) => (
+                      <tr key={index}>
+                        <td className="text-center">
+                          {new Date(order.date).toLocaleDateString()}
+                        </td>
+                        <td className="text-center">{order.orders.length}</td>
+                        <td className="text-center">
+                          {OrderState[order.state]}
+                        </td>
+                      </tr>
+                    ))
+                ) : (
+                  <tr className="flex w-full flex-row justify-between">
+                    <td></td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </LoadingSuspense>
         </div>
         <Button
@@ -133,40 +134,41 @@ const HomeOrderCard: React.FC<Props> = (props) => {
             {t("Home.HomeOrderCard.orders.header")}
           </Heading>
           <LoadingSuspense query={ordersQuery}>
-            <ul className="flex w-full flex-col gap-2">
-              <li className="flex w-full flex-row justify-between">
-                <span className="text-left">
-                  {t("Home.HomeOrderCard.orders.date")}
-                </span>
-                <span className="text-left">
-                  {t("Home.HomeOrderCard.orders.article")}
-                </span>
-                <span className="text-left">
-                  {t("Home.HomeOrderCard.orders.status")}
-                </span>
-              </li>
-              {ordersQuery.data !== undefined ? (
-                ordersQuery.data
-                  .slice(
-                    0,
-                    ordersQuery.data.length < orderShowCountClient
-                      ? ordersQuery.data.length
-                      : orderShowCountClient
-                  )
-                  .map((order, index) => (
-                    <li
-                      key={index}
-                      className="flex w-full flex-row justify-between"
-                    >
-                      <span>{new Date(order.date).toLocaleDateString()}</span>
-                      <span>{order.orders.length}</span>
-                      <span>{OrderState[order.state]}</span>
-                    </li>
-                  ))
-              ) : (
-                <></>
-              )}
-            </ul>
+            <table className="table-auto">
+              <thead>
+                <tr>
+                  <th>{t("Home.HomeOrderCard.orders.date")}</th>
+                  <th>{t("Home.HomeOrderCard.orders.article")}</th>
+                  <th>{t("Home.HomeOrderCard.orders.status")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ordersQuery.data !== undefined ? (
+                  ordersQuery.data
+                    .slice(
+                      0,
+                      ordersQuery.data.length < orderShowCountClient
+                        ? ordersQuery.data.length
+                        : orderShowCountClient
+                    )
+                    .map((order, index) => (
+                      <tr key={index}>
+                        <td className="text-center">
+                          {new Date(order.date).toLocaleDateString()}
+                        </td>
+                        <td className="text-center">{order.orders.length}</td>
+                        <td className="text-center">
+                          {OrderState[order.state]}
+                        </td>
+                      </tr>
+                    ))
+                ) : (
+                  <tr className="flex w-full flex-row justify-between">
+                    <td></td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </LoadingSuspense>
         </div>
         <Button

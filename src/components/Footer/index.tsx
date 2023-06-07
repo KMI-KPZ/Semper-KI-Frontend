@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import { ReactComponent as MastodonIcon } from "@icons/Mastodon.svg";
 import { URL_Datenschutz, URL_Impressum } from "@/config/constants";
 
 const Footer: React.FC = () => {
@@ -37,13 +38,20 @@ const Footer: React.FC = () => {
             {t("Footer.Footer.contact")}
           </a>
         </li>
-        <li className="flex flex-row items-center justify-center gap-5 p-2">
+        <li className="flex flex-row items-center justify-center gap-4 p-2">
           <a
             className="link break-words"
             href={t("Footer.Footer.contact")}
             onClick={handleOnClickContact}
           >
             <InstagramIcon />
+          </a>
+          <a
+            className="link break-words"
+            href={t("Footer.Footer.contact")}
+            onClick={handleOnClickContact}
+          >
+            <MastodonIcon />
           </a>
           <span className="font-bold text-grau-400">© 2023 Semper-KI</span>
         </li>

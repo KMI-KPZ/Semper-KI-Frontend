@@ -71,12 +71,12 @@ export const Button = <T,>(props: Props<T>) => {
     if (style === "primary" && active === true)
       className = addString(
         className,
-        "bg-türkis hover:bg-grau-400 text-white hover:cursor-pointer"
+        "bg-türkis-800 hover:bg-grau-600 text-white hover:cursor-pointer"
       );
     if (style === "secondary" && active === true)
       className = addString(
         className,
-        "hover:bg-türkis bg-grau-400 text-white hover:cursor-pointer"
+        "hover:bg-türkis-300 bg-slate-100 text-black hover:cursor-pointer"
       );
     if (style === "primary" && active === false)
       className = addString(

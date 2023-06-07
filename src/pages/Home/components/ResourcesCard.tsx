@@ -25,56 +25,68 @@ const HomeResourcesCard: React.FC<HomeResourcesProps> = (props) => {
       <Divider />
       <div className="flex flex-row flex-wrap items-start justify-center">
         <div className="flex  w-1/2 flex-col items-center justify-center p-2">
-          <Button style="secondary">
-            <div className="flex flex-col items-center justify-center gap-3 p-2">
+          <Button
+            style="secondary"
+            size="full"
+            to="/resources/printers"
+            hrefText="/resources/printers"
+            title={t("Home.HomeResourcesCard.link.printer")}
+          >
+            <div className="flex flex-col items-center justify-center gap-3 p-1">
               <PrinterIcon fill="" />
               <Text variant="body">
                 {t("Home.HomeResourcesCard.link.printer")}
               </Text>
             </div>
           </Button>
-          {/* <Link
-            to="/resources/printers"
-            className={`flex h-full w-full flex-col items-center justify-center gap-3 rounded-2xl bg-slate-100 p-2 duration-300 hover:bg-türkis-300`}
-          >
-            <PrinterIcon />
-            <Text variant="body">
-              {t("Home.HomeResourcesCard.link.printer")}
-            </Text>
-          </Link> */}
         </div>
         <div className="flex w-1/2 flex-col items-center justify-center p-2">
-          <Link
+          <Button
+            style="secondary"
+            size="full"
             to="/resources/materials"
-            className={`flex h-full w-full flex-col items-center justify-center gap-3 rounded-2xl bg-slate-100 p-2 duration-300 hover:bg-türkis-300`}
+            hrefText="/resources/materials"
+            title={t("Home.HomeResourcesCard.link.material")}
           >
-            <MetalIcon />
-            <Text variant="body">
-              {t("Home.HomeResourcesCard.link.material")}
-            </Text>
-          </Link>
+            <div className="flex flex-col items-center justify-center gap-3 p-1">
+              <MetalIcon />
+              <Text variant="body">
+                {t("Home.HomeResourcesCard.link.material")}
+              </Text>
+            </div>
+          </Button>
         </div>
         <div className="flex w-1/2 flex-col items-center justify-center p-2">
-          <Link
+          <Button
+            style="secondary"
+            size="full"
             to="/resources/postprocessings"
-            className={`flex h-full w-full flex-col items-center justify-center gap-3 rounded-2xl bg-slate-100 p-2 duration-300 hover:bg-türkis-300`}
+            hrefText="/resources/postprocessings"
+            title={t("Home.HomeResourcesCard.link.postprocessing")}
           >
-            <BrushIcon />
-            <Text variant="body">
-              {t("Home.HomeResourcesCard.link.postprocessing")}
-            </Text>
-          </Link>
+            <div className="flex flex-col items-center justify-center gap-3 p-1">
+              <BrushIcon />
+              <Text variant="body">
+                {t("Home.HomeResourcesCard.link.postprocessing")}
+              </Text>
+            </div>
+          </Button>
         </div>
         <div className="flex w-1/2 flex-col items-center justify-center p-2">
-          <Link
+          <Button
+            style="secondary"
+            size="full"
             to="/resources"
-            className={`flex h-full w-full flex-col items-center justify-center gap-3 rounded-2xl bg-slate-100 p-2 duration-300 hover:bg-türkis-300`}
+            hrefText="/resources"
+            title={t("Home.HomeResourcesCard.link.overview")}
           >
-            <HomeRepairServiceIcon />
-            <Text variant="body">
-              {t("Home.HomeResourcesCard.link.overview")}
-            </Text>
-          </Link>
+            <div className="flex flex-col items-center justify-center gap-3 p-1">
+              <HomeRepairServiceIcon />
+              <Text variant="body">
+                {t("Home.HomeResourcesCard.link.overview")}
+              </Text>
+            </div>
+          </Button>
         </div>
       </div>
     </div>

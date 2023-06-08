@@ -198,9 +198,11 @@ export const ModelUpload: React.FC<Props> = (props) => {
         </div>
       )}
 
-      <Button onClick={handleClickNext} icon={<FileUploadIcon />}>
-        {t("Process.Model.ModelUpload.button.upload")}
-      </Button>
+      <Button
+        onClick={handleClickNext}
+        startIcon={<FileUploadIcon />}
+        title={t("Process.Model.ModelUpload.button.upload")}
+      />
     </div>
   );
 };

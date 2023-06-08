@@ -148,21 +148,22 @@ const Checkout: React.FC<Props> = (props) => {
     <div className="flex w-full flex-col gap-3 md:flex-row">
       <Button
         onClick={handleOnClickPrintable}
-        size="full"
+        width="full"
         active={!printable.loading}
-      >
-        {t("AfterProcess.Checkout.Checkout.button.printable")}
-      </Button>
+        title={t("AfterProcess.Checkout.Checkout.button.printable")}
+      />
       <Button
         onClick={handleOnClickLogistics}
-        size="full"
+        width="full"
         active={!logistics.loading}
-      >
-        {t("AfterProcess.Checkout.Checkout.button.logistics")}
-      </Button>
-      <Button onClick={handleOnClickPrice} size="full" active={!price.loading}>
-        {t("AfterProcess.Checkout.Checkout.button.price")}
-      </Button>
+        title={t("AfterProcess.Checkout.Checkout.button.logistics")}
+      />
+      <Button
+        onClick={handleOnClickPrice}
+        width="full"
+        active={!price.loading}
+        title={t("AfterProcess.Checkout.Checkout.button.price")}
+      />
     </div>
   );
   const renderLoadingAnimation = () => (
@@ -229,8 +230,8 @@ const Checkout: React.FC<Props> = (props) => {
             <Button
               active={checkAll === true}
               onClick={handleOnClickSend}
-              icon={<SendIcon fontSize="large" />}
-              iconPos="back"
+              endIcon={<SendIcon fontSize="large" />}
+              title={t("AfterProcess.Checkout.Checkout.button.request")}
             >
               <Heading variant="h2">
                 {t("AfterProcess.Checkout.Checkout.button.request")}

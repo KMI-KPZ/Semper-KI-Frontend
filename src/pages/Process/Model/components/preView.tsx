@@ -62,9 +62,10 @@ export const ModelPreView: React.FC<Props> = (props) => {
             ))
           : t("Process.Model.ModelPreView.noCertificates")}
       </div>
-      <Button onClick={handleOnClickButtonSelect}>
-        {t("Process.Model.ModelPreView.button.select")}
-      </Button>
+      <Button
+        onClick={handleOnClickButtonSelect}
+        title={t("Process.Model.ModelPreView.button.select")}
+      />
     </div>
   );
 };

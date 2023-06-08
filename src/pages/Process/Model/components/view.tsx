@@ -53,9 +53,10 @@ const ModelView: React.FC<Props> = (props) => {
             ))
           : t("Process.Model.ModelView.empty")}
       </div>
-      <Button onClick={deselectModel}>
-        {t("Process.Model.ModelView.button.change")}
-      </Button>
+      <Button
+        onClick={deselectModel}
+        title={t("Process.Model.ModelView.button.change")}
+      />
     </div>
   );
 };

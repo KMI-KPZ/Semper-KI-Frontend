@@ -142,8 +142,16 @@ const CartItem: React.FC<Props> = (props) => {
           </li>
           <li className="flex w-full flex-col items-center justify-end gap-5 px-5 py-3 md:w-fit">
             <div className="flex flex-row items-center justify-center gap-3">
-              <Button onClick={handleOnClickEdit} icon={<EditIcon />} />
-              <Button onClick={handleOnClickDelete} icon={<DeleteIcon />} />
+              <Button
+                onClick={handleOnClickEdit}
+                children={<EditIcon />}
+                title={t("AfterProcess.Cart.CartItem.button.edit")}
+              />
+              <Button
+                onClick={handleOnClickDelete}
+                children={<DeleteIcon />}
+                title={t("AfterProcess.Cart.CartItem.button.delete")}
+              />
             </div>
           </li>
         </ul>

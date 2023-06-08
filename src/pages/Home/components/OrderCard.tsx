@@ -109,7 +109,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
         <Button
           to="/contracts"
           title={t("Home.HomeOrderCard.button.all-orders")}
-          icon={
+          startIcon={
             ordersCount !== undefined ? (
               <Badge count={ordersCount}>
                 <FileCopyIcon />
@@ -135,17 +135,17 @@ const HomeOrderCard: React.FC<Props> = (props) => {
             <Button
               to="/process/new"
               title={t("Home.HomeOrderCard.order.new")}
-              icon={<AddIcon />}
+              children={<AddIcon />}
             />
             <Button
               to="/process/model"
               title={t("Home.HomeOrderCard.order.continue")}
-              icon={<PlayArrowIcon />}
+              children={<PlayArrowIcon />}
             />
             <Button
               to="/cart"
               title={t("Home.HomeOrderCard.order.cart")}
-              icon={
+              children={
                 cartCount !== undefined ? (
                   <Badge count={cartCount}>
                     <ShoppingCartIcon />
@@ -201,7 +201,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
         <Button
           to="/orders"
           title={t("Home.HomeOrderCard.button.all-orders")}
-          icon={
+          startIcon={
             ordersCount !== undefined ? (
               <Badge count={ordersCount}>
                 <FileCopyIcon />
@@ -210,7 +210,6 @@ const HomeOrderCard: React.FC<Props> = (props) => {
               <FileCopyIcon />
             )
           }
-          children={t("Home.HomeOrderCard.button.all-orders")}
         />
       </div>
     );

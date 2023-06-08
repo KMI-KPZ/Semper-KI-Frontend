@@ -65,9 +65,10 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
           {...register("description")}
           className="w-full bg-slate-100 px-5 py-2 "
         />
-        <Button onClick={handleSubmit(onSubmit)}>
-          {t("Organization.Roles.index.button.create")}
-        </Button>
+        <Button
+          onClick={handleSubmit(onSubmit)}
+          title={t("Organization.Roles.index.button.create")}
+        />
       </form>
       {errors.description !== undefined || errors.name !== undefined ? (
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">

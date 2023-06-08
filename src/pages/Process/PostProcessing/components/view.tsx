@@ -70,12 +70,13 @@ const ItemView = <Item extends IPostProcessing>(props: Props<Item>) => {
       </div>
       <Button
         onClick={handleOnClickButton}
-        style={item.checked ? "secondary" : "primary"}
-      >
-        {item.checked
-          ? t("Process.PostProcessing.ItemCard.button.deselect")
-          : t("Process.PostProcessing.ItemCard.button.select")}
-      </Button>
+        variant={item.checked ? "secondary" : "primary"}
+        title={
+          item.checked
+            ? t("Process.PostProcessing.ItemCard.button.deselect")
+            : t("Process.PostProcessing.ItemCard.button.select")
+        }
+      />
     </div>
   );
 };

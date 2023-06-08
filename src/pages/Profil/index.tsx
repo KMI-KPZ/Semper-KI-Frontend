@@ -52,7 +52,7 @@ const Profil: React.FC<Props> = (props) => {
             {t("Profil.company.name")}: {user.organization}
           </span>
           {user.organization === "None" ? (
-            <Button size="full"> {t("Profil.button.selectChange")}</Button>
+            <Button width="full" title={t("Profil.button.selectChange")} />
           ) : null}
         </div>
       ) : null}
@@ -83,9 +83,11 @@ const Profil: React.FC<Props> = (props) => {
           {t("Profil.time.updated")}: {user.updated.toLocaleString()}
         </span>
       </div>
-      <Button size="full" onClick={handleOnClickButtonDelete}>
-        {t("Profil.button.delete")}
-      </Button>
+      <Button
+        width="full"
+        onClick={handleOnClickButtonDelete}
+        title={t("Profil.button.delete")}
+      />
     </div>
   );
 };

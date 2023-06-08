@@ -71,9 +71,10 @@ export const RequestTest: React.FC<Props> = (props) => {
             className="border-2"
             onChange={handleOnChangeMessageInput}
           />
-          <Button onClick={handleOnClickSendMessage}>
-            Send Message To WebSocket
-          </Button>
+          <Button
+            onClick={handleOnClickSendMessage}
+            title="Send Message To WebSocket"
+          />
         </div>
       </div>
     </div>

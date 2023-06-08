@@ -45,7 +45,7 @@ const HomeGuideCard: React.FC<Props> = (props) => {
             </Link>
           </div>
         </div>
-        <Button>{t("Home.HomeGuideCard.button.all")}</Button>
+        <Button title={t("Home.HomeGuideCard.button.all")} />
       </div>
     );
 
@@ -111,7 +111,7 @@ const HomeGuideCard: React.FC<Props> = (props) => {
             </div>
           </div>
         </div>
-        <Button>{t("Home.HomeGuideCard.button.all")}</Button>
+        <Button title={t("Home.HomeGuideCard.button.all")} />
       </div>
     );
 

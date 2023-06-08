@@ -60,11 +60,10 @@ const OrderFileView: React.FC<Props> = (props) => {
                 <span className="p-2">{_fileName}</span>
                 <Button
                   onClick={() => handleOnClickButton(_fileName)}
-                  icon={<DownloadIcon />}
-                  query={_fileName === fileName ? buttonQuery : undefined}
-                >
-                  {t("Orders.OrderFileView.button.download")}
-                </Button>
+                  startIcon={<DownloadIcon />}
+                  loading={buttonQuery?.isLoading}
+                  title={t("Orders.OrderFileView.button.download")}
+                />
               </div>
             ))
           : t("Orders.OrderFileView.empty")}

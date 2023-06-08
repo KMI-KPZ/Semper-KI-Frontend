@@ -104,20 +104,22 @@ const Cart: React.FC<Props> = (props) => {
           />
         ) : null}
         <section className="flex w-full flex-col items-center justify-start gap-5 text-white md:flex-row md:justify-center">
-          <Button onClick={handleOnClickEdit} icon={<EditIcon />}>
-            {t("AfterProcess.Cart.Cart.edit")}
-          </Button>
-          <Button onClick={handleOnClickClear} icon={<DeleteIcon />}>
-            {t("AfterProcess.Cart.Cart.deleteCart")}
-          </Button>
+          <Button
+            onClick={handleOnClickEdit}
+            startIcon={<EditIcon />}
+            title={t("AfterProcess.Cart.Cart.edit")}
+          />
+          <Button
+            onClick={handleOnClickClear}
+            startIcon={<DeleteIcon />}
+            title={t("AfterProcess.Cart.Cart.deleteCart")}
+          />
           <Button
             active={errors.length === 0}
             onClick={handleOnClickSendRequest}
-            icon={<ArrowForwardIcon />}
-            iconPos="back"
-          >
-            {t("AfterProcess.Cart.Cart.request")}
-          </Button>
+            endIcon={<ArrowForwardIcon />}
+            title={t("AfterProcess.Cart.Cart.request")}
+          />
         </section>
       </div>
     </LoadingSuspense>

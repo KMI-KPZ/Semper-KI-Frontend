@@ -100,45 +100,40 @@ const OrderView: React.FC<Props> = (props) => {
       return (
         <div className="flex w-full flex-col items-center justify-center gap-3 md:w-fit md:flex-row">
           <Button
-            size="small"
-            icon={<CancelIcon />}
+            size="sm"
+            startIcon={<CancelIcon />}
             onClick={handleOnClickButtonCancel}
-          >
-            {t("Orders.OrderView.button.cancel")}
-          </Button>
+            title={t("Orders.OrderView.button.cancel")}
+          />
           <Button
-            size="small"
-            icon={<ReplayIcon />}
+            size="sm"
+            startIcon={<ReplayIcon />}
             onClick={handleOnClickButtonReOrder}
-          >
-            {t("Orders.OrderView.button.reOrder")}
-          </Button>
+            title={t("Orders.OrderView.button.reOrder")}
+          />
         </div>
       );
     if (userType === UserType.manufacturer)
       return (
         <div className="flex w-full flex-col items-center justify-center gap-3 md:w-fit md:flex-row">
           <Button
-            size="small"
-            icon={<CancelIcon />}
+            size="sm"
+            startIcon={<CancelIcon />}
             onClick={handleOnClickButtonReject}
-          >
-            {t("Orders.OrderView.button.reject")}
-          </Button>
+            title={t("Orders.OrderView.button.reject")}
+          />
           <Button
-            size="small"
-            icon={<QuestionMarkIcon />}
+            size="sm"
+            startIcon={<QuestionMarkIcon />}
             onClick={handleOnClickButtonVerify}
-          >
-            {t("Orders.OrderView.button.verify")}
-          </Button>
+            title={t("Orders.OrderView.button.verify")}
+          />
           <Button
-            size="small"
-            icon={<CheckIcon />}
+            size="sm"
+            startIcon={<CheckIcon />}
             onClick={handleOnClickButtonConfirm}
-          >
-            {t("Orders.OrderView.button.confirm")}
-          </Button>
+            title={t("Orders.OrderView.button.confirm")}
+          />
         </div>
       );
   };
@@ -155,33 +150,34 @@ const OrderView: React.FC<Props> = (props) => {
           orderEvent.messages > 0 ? (
             <Badge count={orderEvent.messages}>
               <Button
-                size="small"
-                icon={<MailIcon />}
+                size="sm"
+                startIcon={<MailIcon />}
                 onClick={handleOnClickButtonChat}
-              >
-                {t("Orders.OrderView.button.chat")}
-              </Button>
+                title={t("Orders.OrderView.button.chat")}
+              />
             </Badge>
           ) : (
             <Button
-              size="small"
-              icon={<MailIcon />}
+              size="sm"
+              startIcon={<MailIcon />}
               onClick={handleOnClickButtonChat}
-            >
-              {t("Orders.OrderView.button.chat")}
-            </Button>
+              title={t("Orders.OrderView.button.chat")}
+            />
           )}
           {menuOpen ? renderButtons() : null}
           <div className={`flex items-center justify-center `}>
             <Button
-              size="small"
-              icon={
+              size="sm"
+              startIcon={
                 <ExpandLessIcon
                   className={` ${
                     menuOpen ? "md:rotate-90" : "rotate-180 md:-rotate-90"
                   }`}
                 />
               }
+              title={t(
+                `Orders.OrderView.button.${menuOpen ? "expand" : "collapse"}`
+              )}
               onClick={handleOnClickButtonExpand}
             />
           </div>

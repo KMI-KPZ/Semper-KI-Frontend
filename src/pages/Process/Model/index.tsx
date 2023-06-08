@@ -107,9 +107,10 @@ export const ModelCatalog: React.FC<Props> = (props) => {
       />
       <Heading variant="h2">{t("Process.Model.ModelCatalog.upload")}</Heading>
       <div className={`flex items-center justify-center gap-2 p-3`}>
-        <Button onClick={handleOnClickCardUpload}>
-          {t("Process.Model.ModelCatalog.button.select")}
-        </Button>
+        <Button
+          onClick={handleOnClickCardUpload}
+          title={t("Process.Model.ModelCatalog.button.select")}
+        />
       </div>
     </div>
   );

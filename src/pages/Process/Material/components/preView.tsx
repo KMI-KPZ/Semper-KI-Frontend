@@ -3,6 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Button } from "@component-library/Button";
 import { IMaterial } from "..";
 import { Heading } from "@component-library/Typography";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   material: IMaterial;
@@ -12,6 +13,7 @@ interface Props {
 
 export const MaterialPreView: React.FC<Props> = (props) => {
   const { closeMaterialView, material, selectMaterial } = props;
+  const { t } = useTranslation();
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-start gap-5 overflow-y-auto overflow-x-hidden bg-white xl:max-h-[90vh] xl:w-fit xl:min-w-[700px]">
       <div className="flex w-full flex-row-reverse xl:hidden">
@@ -31,7 +33,10 @@ export const MaterialPreView: React.FC<Props> = (props) => {
           </div>
         ))}
       </div>
-      <Button onClick={() => selectMaterial(material)}>Auswählen</Button>
+      <Button
+        onClick={() => selectMaterial(material)}
+        title={t("Process.Material.MaterialPreView.button.select")}
+      />
     </div>
   );
 };

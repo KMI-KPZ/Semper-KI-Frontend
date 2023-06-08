@@ -11,9 +11,9 @@ import { LoadingSuspense } from "@component-library/Loading";
 import CheckIcon from "@mui/icons-material/Check";
 import { Heading } from "@component-library/Typography";
 
-interface OrganizationtableProps {}
+interface OrganizationTableProps {}
 
-const Organizationtable: React.FC<OrganizationtableProps> = (props) => {
+const OrganizationTable: React.FC<OrganizationTableProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { userQuery, rolesQuery } = useOrganizations();
@@ -113,8 +113,13 @@ const OrganizationtableRow: React.FC<{
       </td>
       <td className="flex flex-row items-center justify-center gap-3 p-3">
         <Button
+          title={t(
+            `Organization.components.table.button.${
+              edit === true ? "safe" : "edit"
+            }`
+          )}
           onClick={handleOnClickEdit}
-          icon={
+          children={
             edit === true ? (
               <CheckIcon fontSize="small" />
             ) : (
@@ -122,10 +127,14 @@ const OrganizationtableRow: React.FC<{
             )
           }
         />
-        <Button onClick={handleOnClickDelete} icon={<DeleteForeverIcon />} />
+        <Button
+          onClick={handleOnClickDelete}
+          children={<DeleteForeverIcon />}
+          title={t("Organization.components.table.button.delete")}
+        />
       </td>
     </tr>
   );
 };
 
-export default Organizationtable;
+export default OrganizationTable;

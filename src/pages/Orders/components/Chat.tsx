@@ -67,7 +67,11 @@ const ChatView: React.FC<Props> = (props) => {
   return (
     <div className="relative flex h-screen w-screen flex-col items-center justify-start gap-5 bg-slate-100 md:max-h-[80vh] md:max-w-2xl md:bg-transparent">
       <div className="absolute right-1 top-1 md:hidden">
-        <Button icon={<CloseIcon />} onClick={handleOnClickButtonClose} />
+        <Button
+          children={<CloseIcon />}
+          onClick={handleOnClickButtonClose}
+          title={t("Orders.ChatView.button.close")}
+        />
       </div>
       <div className="flex h-full w-full flex-col-reverse items-center justify-start gap-5 overflow-auto bg-white p-5">
         {chat
@@ -115,9 +119,9 @@ const ChatView: React.FC<Props> = (props) => {
           onChange={handleOnChangeTextArea}
         />
         <Button
-          hrefText="sendOrders"
-          icon={<SendIcon />}
+          children={<SendIcon />}
           onClick={handleOnClickButtonSend}
+          title={t("Orders.ChatView.button.send")}
         />
       </div>
     </div>

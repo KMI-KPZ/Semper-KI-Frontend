@@ -223,12 +223,14 @@ const Filter: React.FC<Props> = (props) => {
         ))}
       </div>
       <div className="flex flex-col justify-center gap-2 text-white xl:flex-row">
-        <Button onClick={handleOnClickResetButton}>
-          {t("Process.Filter.Filter.button.reset")}
-        </Button>
-        <Button onClick={handleOnClickApplyButton}>
-          {t("Process.Filter.Filter.button.apply")}
-        </Button>
+        <Button
+          onClick={handleOnClickResetButton}
+          title={t("Process.Filter.Filter.button.reset")}
+        />
+        <Button
+          onClick={handleOnClickApplyButton}
+          title={t("Process.Filter.Filter.button.apply")}
+        />
       </div>
     </div>
   );

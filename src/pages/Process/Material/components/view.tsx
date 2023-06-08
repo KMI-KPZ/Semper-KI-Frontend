@@ -23,9 +23,10 @@ export const MaterialView: React.FC<Props> = (props) => {
           </div>
         ))}
       </div>
-      <Button onClick={deselectMaterial}>
-        {t("Process.Material.MaterialView.button.change")}
-      </Button>
+      <Button
+        onClick={deselectMaterial}
+        title={t("Process.Material.MaterialView.button.change")}
+      />
     </div>
   );
 };

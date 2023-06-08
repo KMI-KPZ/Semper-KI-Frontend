@@ -26,67 +26,35 @@ const HomeResourcesCard: React.FC<HomeResourcesProps> = (props) => {
       <div className="flex flex-row flex-wrap items-start justify-center">
         <div className="flex  w-1/2 flex-col items-center justify-center p-2">
           <Button
-            style="secondary"
-            size="full"
+            variant="secondary"
             to="/resources/printers"
-            hrefText="/resources/printers"
+            startIcon={<PrinterIcon />}
             title={t("Home.HomeResourcesCard.link.printer")}
-          >
-            <div className="flex flex-col items-center justify-center gap-3 p-1">
-              <PrinterIcon fill="" />
-              <Text variant="body">
-                {t("Home.HomeResourcesCard.link.printer")}
-              </Text>
-            </div>
-          </Button>
+          />
         </div>
         <div className="flex w-1/2 flex-col items-center justify-center p-2">
           <Button
-            style="secondary"
-            size="full"
+            variant="secondary"
             to="/resources/materials"
-            hrefText="/resources/materials"
+            startIcon={<MetalIcon />}
             title={t("Home.HomeResourcesCard.link.material")}
-          >
-            <div className="flex flex-col items-center justify-center gap-3 p-1">
-              <MetalIcon />
-              <Text variant="body">
-                {t("Home.HomeResourcesCard.link.material")}
-              </Text>
-            </div>
-          </Button>
+          />
         </div>
         <div className="flex w-1/2 flex-col items-center justify-center p-2">
           <Button
-            style="secondary"
-            size="full"
+            variant="secondary"
             to="/resources/postprocessings"
-            hrefText="/resources/postprocessings"
+            startIcon={<BrushIcon />}
             title={t("Home.HomeResourcesCard.link.postprocessing")}
-          >
-            <div className="flex flex-col items-center justify-center gap-3 p-1">
-              <BrushIcon />
-              <Text variant="body">
-                {t("Home.HomeResourcesCard.link.postprocessing")}
-              </Text>
-            </div>
-          </Button>
+          />
         </div>
         <div className="flex w-1/2 flex-col items-center justify-center p-2">
           <Button
-            style="secondary"
-            size="full"
+            startIcon={<HomeRepairServiceIcon />}
+            variant="secondary"
             to="/resources"
-            hrefText="/resources"
             title={t("Home.HomeResourcesCard.link.overview")}
-          >
-            <div className="flex flex-col items-center justify-center gap-3 p-1">
-              <HomeRepairServiceIcon />
-              <Text variant="body">
-                {t("Home.HomeResourcesCard.link.overview")}
-              </Text>
-            </div>
-          </Button>
+          />
         </div>
       </div>
     </div>

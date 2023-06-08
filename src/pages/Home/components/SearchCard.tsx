@@ -76,7 +76,11 @@ const HomeSearchCard: React.FC<Props> = (props) => {
           />
         </div>
         <div className="flex w-1/5 items-center justify-center md:w-fit">
-          <Button icon={<SearchIcon />} onClick={sendText}></Button>
+          <Button
+            title={t("Home.components.SearchCard.search")}
+            children={<SearchIcon />}
+            onClick={sendText}
+          />
         </div>
       </div>
     </div>

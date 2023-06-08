@@ -57,9 +57,10 @@ export const ModelCard: React.FC<Props> = (props) => {
               grid === true ? "flex-row" : "flex-col"
             }`}
           >
-            <Button onClick={handleOnClickSelect}>
-              {t("Process.Model.ModelCard.button.select")}
-            </Button>
+            <Button
+              onClick={handleOnClickSelect}
+              title={t("Process.Model.ModelCard.button.select")}
+            />
           </div>
         </div>
       </div>
@@ -95,9 +96,10 @@ export const ModelCard: React.FC<Props> = (props) => {
           ))}
         </div>
         <div className="flex  flex-col flex-wrap gap-2 ">
-          <Button onClick={handleOnClickSelect}>
-            {t("Process.Model.ModelCard.button.select")}
-          </Button>
+          <Button
+            onClick={handleOnClickSelect}
+            title={t("Process.Model.ModelCard.button.select")}
+          />
         </div>
       </div>
     </div>

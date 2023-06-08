@@ -79,45 +79,41 @@ const OrderCollection: React.FC<Props> = (props) => {
       return (
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Button
-            size="small"
-            icon={<CancelIcon />}
+            size="sm"
+            startIcon={<CancelIcon />}
             onClick={handleOnClickButtonCancel}
-          >
-            {t("Orders.OrderCollection.button.cancel")}
-          </Button>
+            title={t("Orders.OrderCollection.button.cancel")}
+          />
           <Button
-            size="small"
-            icon={<ReplayIcon />}
+            size="sm"
+            startIcon={<ReplayIcon />}
             onClick={handleOnClickButtonReOrder}
-          >
-            {t("Orders.OrderCollection.button.reOrder")}
-          </Button>
+            title={t("Orders.OrderCollection.button.reOrder")}
+          />
         </div>
       );
     if (userType === UserType.manufacturer)
       return (
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Button
-            size="small"
-            icon={<CancelIcon />}
+            size="sm"
+            startIcon={<CancelIcon />}
             onClick={handleOnClickButtonReject}
-          >
-            {t("Orders.OrderCollection.button.reject")}
-          </Button>
+            title={t("Orders.OrderCollection.button.reject")}
+          />
           <Button
-            size="small"
-            icon={<QuestionMarkIcon />}
+            size="sm"
+            startIcon={<QuestionMarkIcon />}
             onClick={handleOnClickButtonVerify}
-          >
-            {t("Orders.OrderCollection.button.verify")}
-          </Button>
+            title={t("Orders.OrderCollection.button.verify")}
+          />
+
           <Button
-            size="small"
-            icon={<CheckIcon />}
+            size="sm"
+            startIcon={<CheckIcon />}
             onClick={handleOnClickButtonConfirm}
-          >
-            {t("Orders.OrderCollection.button.confirm")}
-          </Button>
+            title={t("Orders.OrderCollection.button.confirm")}
+          />
         </div>
       );
   };
@@ -185,8 +181,11 @@ const OrderCollection: React.FC<Props> = (props) => {
       )}
       <div className="flex w-full items-center justify-center">
         <Button
+          title={t(
+            `Orders.OrderCollection.button.${isOpen ? "expand" : "collapse"}`
+          )}
           onClick={handleOnClickButton}
-          icon={isOpen === true ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          startIcon={isOpen === true ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         />
       </div>
     </div>

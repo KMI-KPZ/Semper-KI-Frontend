@@ -29,9 +29,10 @@ const Portfolio: React.FC<Props> = (props) => {
           />
         );
       })}
-      <Button onClick={handleOnClickButton}>
-        {t("Portfolio.Portfolio.back")}
-      </Button>
+      <Button
+        onClick={handleOnClickButton}
+        title={t("Portfolio.Portfolio.back")}
+      />
     </div>
   );
 };

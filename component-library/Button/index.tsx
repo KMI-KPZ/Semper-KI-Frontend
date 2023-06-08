@@ -1,45 +1,45 @@
-import { DefinedUseQueryResult, UseQueryResult } from "@tanstack/react-query";
-import React, { ReactNode } from "react";
+import React, { PropsWithChildren, ReactNode } from "react";
 import LoopIcon from "@mui/icons-material/Loop";
 import { useNavigate } from "react-router-dom";
 
-interface Props<T> {
-  title?: string;
+interface ButtonProps {
+  title: string;
+  to?: string;
   onClick?(
     e?:
       | React.MouseEvent<HTMLAnchorElement, MouseEvent>
       | React.MouseEvent<HTMLDivElement, MouseEvent>
   ): void;
-  icon?: ReactNode;
-  iconPos?: Icon;
+  size?: ButtonSize;
+  variant?: ButtonVariant;
+  width?: ButtonWidth;
+  className?: string;
   active?: boolean;
-  children?: ReactNode;
-  size?: Size;
-  style?: Style;
-  hrefText?: string;
-  to?: string;
-  query?: UseQueryResult<T, Error> | DefinedUseQueryResult<T, Error>;
+  loading?: boolean;
+  startIcon?: ReactNode;
+  endIcon?: ReactNode;
 }
+type ButtonSize = "sm" | "xs" | "md" | "lg" | "xl";
+type ButtonVariant = "primary" | "secondary" | "text";
+type ButtonWidth = "fit" | "full" | "auto";
 
-type Icon = "front" | "back";
-type Size = "large" | "medium" | "small" | "xsmall" | "full";
-type Style = "primary" | "secondary";
-
-export const Button = <T,>(props: Props<T>) => {
+export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
   const {
     active = true,
-    icon,
-    iconPos = "front",
+    size = "md",
+    variant = "primary",
+    loading = false,
+    width = "auto",
+    className = "",
     onClick,
     title,
     children,
-    size = "medium",
-    style = "primary",
-    hrefText = "",
     to,
-    query,
+    endIcon,
+    startIcon,
   } = props;
   const navigate = useNavigate();
+
   const handleOnClickButton = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
@@ -47,48 +47,61 @@ export const Button = <T,>(props: Props<T>) => {
     e.stopPropagation();
     if (onClick !== undefined) {
       onClick(e);
-    }
-    if (to !== undefined) {
+    } else if (to !== undefined) {
       navigate(to);
     }
   };
-  const primaryColor: string = "";
 
-  const addString = (oldString: string, newString: string): string =>
-    oldString.concat(" ".concat(newString));
+  const getClassNameWidth = (): string => {
+    switch (width) {
+      case "full":
+        return "w-full";
+      case "fit":
+        return "w-fit";
+      case "auto":
+        return "w-full md:w-fit";
+    }
+  };
 
-  const getClassName = (): string => {
-    let className: string = "";
-    if (size === "small")
-      className = addString(className, "w-full md:w-fit md:py-1 md:px-2");
-    if (size === "xsmall")
-      className = addString(className, "w-full md:w-fit md:py-2 md:px-3");
-    if (size === "medium")
-      className = addString(className, "w-full md:w-fit md:py-2 md:px-4");
-    if (size === "large")
-      className = addString(className, "w-full md:w-fit md:py-3 md:px-5");
-    if (size === "full") className = addString(className, "w-full");
-    if (style === "primary" && active === true)
-      className = addString(
-        className,
-        "bg-türkis-800 hover:bg-grau-600 text-white hover:cursor-pointer"
-      );
-    if (style === "secondary" && active === true)
-      className = addString(
-        className,
-        "hover:bg-türkis-300 bg-slate-100 text-black hover:cursor-pointer"
-      );
-    if (style === "primary" && active === false)
-      className = addString(
-        className,
-        "hover:bg-grau-300 bg-grau-200 text-white hover:cursor-default"
-      );
-    if (style === "secondary" && active === false)
-      className = addString(
-        className,
-        "bg-grau-300 hover:bg-grau-200 text-white hover:cursor-default"
-      );
-    return className;
+  const getClassNameVariant = (): string => {
+    switch (variant) {
+      case "primary":
+        switch (active) {
+          case true:
+            return "bg-türkis-800 hover:bg-grau-600 text-white hover:cursor-pointer";
+          case false:
+            return "hover:bg-grau-300 bg-grau-200 text-white hover:cursor-default";
+        }
+      case "secondary":
+        switch (active) {
+          case true:
+            return "hover:bg-türkis-300 bg-slate-100 text-black hover:cursor-pointer";
+          case false:
+            return "bg-grau-300 hover:bg-grau-200 text-white hover:cursor-default";
+        }
+      case "text":
+        switch (active) {
+          case true:
+            return "duration-300 hover:cursor-pointer hover:text-türkis";
+          case false:
+            return "duration-300 hover:cursor-pointer text-türkis hover:text-inherit";
+        }
+    }
+  };
+
+  const getClassNameSize = (): string => {
+    switch (size) {
+      case "xs":
+        return "w-full px-5 py-3  md:w-fit md:py-1 md:px-2";
+      case "sm":
+        return "w-full px-5 py-3  md:w-fit md:py-2 md:px-3";
+      case "md":
+        return "w-full px-5 py-3  md:w-fit md:py-2 md:px-4";
+      case "lg":
+        return "w-full px-5 py-3  md:w-fit md:py-3 md:px-5";
+      case "xl":
+        return "w-full";
+    }
   };
 
   const getTitle = (): string => {
@@ -101,30 +114,22 @@ export const Button = <T,>(props: Props<T>) => {
     <a
       title={getTitle()}
       className={`
-      bezier flex flex-row items-center
-      justify-center
-      gap-3 px-5
-      py-3 transition duration-300
-      ${getClassName()}`}
+      bezier flex flex-row items-center justify-center gap-3 transition duration-300 
+      ${getClassNameVariant()} ${getClassNameSize()} ${getClassNameWidth()} ${className}`}
       onClick={handleOnClickButton}
-      href={hrefText}
+      href={to !== undefined ? to : title}
     >
-      {(query !== undefined && query.status === "success") ||
-      query === undefined ? (
-        <>
-          {iconPos === "front" ? icon : null}
-          {children ? <span>{children}</span> : null}
-          {iconPos === "back" ? icon : null}
-        </>
-      ) : null}
-      {query !== undefined && query.status === "loading" ? (
+      {loading === true ? (
         <div className="animate-spin">
           <LoopIcon />
         </div>
-      ) : null}
-      {query !== undefined && query.status === "error" ? (
-        <span>{query.error.message}</span>
-      ) : null}
+      ) : (
+        <>
+          {startIcon}
+          {children !== undefined ? children : title}
+          {endIcon}
+        </>
+      )}
     </a>
   );
 };

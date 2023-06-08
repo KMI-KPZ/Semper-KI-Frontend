@@ -92,12 +92,15 @@ const Invitation: React.FC<InvitationProps> = (props) => {
           placeholder={t("Organization.components.invitation.placeholder")}
           {...register("email")}
         />
-        <Button onClick={handleSubmit(onSubmitInvite)}>
-          {t("Organization.components.invitation.button.invite")}
-        </Button>
-        <Button onClick={handleSubmit(onSubmitLink)}>
-          {t("Organization.components.invitation.button.link")}
-        </Button>
+        <Button
+          onClick={handleSubmit(onSubmitInvite)}
+          title={t("Organization.components.invitation.button.invite")}
+        />
+        <Button
+          onClick={handleSubmit(onSubmitLink)}
+          title={t("Organization.components.invitation.button.link")}
+        />
+
         {showLoadedIn ? (
           <div className="absolute -right-28 w-fit p-5">
             {t("Organization.components.invitation.button.send")}
@@ -120,9 +123,10 @@ const Invitation: React.FC<InvitationProps> = (props) => {
                 value={inviteLink.link}
                 className="w-full select-all bg-slate-100 px-5 py-2 md:w-4/6"
               />
-              <Button onClick={() => handleOnClickButton(index)}>
-                {t("Organization.components.invitation.button.copy")}
-              </Button>
+              <Button
+                onClick={() => handleOnClickButton(index)}
+                title={t("Organization.components.invitation.button.copy")}
+              />
             </div>
           ))
         : null}

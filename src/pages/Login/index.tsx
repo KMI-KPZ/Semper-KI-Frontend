@@ -58,19 +58,13 @@ const LoginView: React.FC<Props> = (props) => {
         <Button
           onClick={handleOnClickButtonLogin}
           title={t("Login.LoginView.login.header")}
-          hrefText={t("Login.LoginView.login.header")}
-          icon={<LoginIcon />}
-        >
-          {t("Login.LoginView.login.header")}
-        </Button>
+          startIcon={<LoginIcon />}
+        />
         <Button
           onClick={handleOnClickButtonRegister}
           title={t("Login.LoginView.register.header")}
-          hrefText={t("Login.LoginView.register.header")}
-          icon={<CreateIcon />}
-        >
-          {t("Login.LoginView.register.header")}
-        </Button>
+          startIcon={<CreateIcon />}
+        />
       </div>
     </div>
   );

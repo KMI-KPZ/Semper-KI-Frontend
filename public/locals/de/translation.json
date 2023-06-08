@@ -365,7 +365,8 @@
       }
     },
     "HomeSearchCard":{
-      "placeholder":"Suche ..."
+      "placeholder":"Suche ...",
+      "search":"Suchen"
     },
     "HomeData":{
       "explore": "Ausprobieren",
@@ -408,7 +409,11 @@
   "Orders":{
     "ChatView":{
       "header":"Nachrichten",
-      "placeholder":"Nachricht..."
+      "placeholder":"Nachricht...",
+      "button":{
+        "close":"Schließen",
+        "send":"Nachricht Senden"
+      }
     },
     "OrderCollection":{
       "id":"ID",
@@ -418,7 +423,9 @@
         "reOrder":"Gesamten Auftrag erneut Bestellen",
         "reject":"Gesamten Auftrag Ablehnen",
         "confirm":"Gesamten Auftrag Bestätigen",
-        "verify":"Gesamten Auftrag Überprüfen"
+        "verify":"Gesamten Auftrag Überprüfen",
+        "expand":"Ausklappen",
+        "collapse":"Zusammenklappen"
       },
       "state":{
         "header":"Status",
@@ -459,7 +466,9 @@
         "reject":"Ablehnen",
         "confirm":"Bestätigen",
         "verify":"Überprüfen",
-        "chat":"Nachrichten"
+        "chat":"Nachrichten",
+        "expand":"Ausklappen",
+        "collapse":"Zusammenklappen"
       },
       "confirm":{
         "cancel":"Auftrag wirklich stonieren?",
@@ -513,6 +522,10 @@
       "provide-accompany":{
         "header":"Gesamtprozesse begleiten",
         "text":"Auftragnehmer, die Gesamtprozesse begleiten, fungieren als verlässliche Partner während der gesamten Reise des Kunden. Sie bieten Anleitung, Unterstützung und praktische Hilfe, um sicherzustellen, dass Kunden die notwendige Expertise und Ressourcen für ein erfolgreiches Ergebnis erhalten."
+      },
+      "button":{
+        "expand":"Ausklappen",
+        "collapse":"Zusammenklappen"
       }
     }
   },
@@ -564,7 +577,11 @@
           "item":"Artikel",
           "upload":"Modell Hochladen",
           "new":"Artikel erstellen",
-          "cart":"Warenkorb"
+          "cart":"Warenkorb",
+          "button":{
+            "edit":"Bearbeiten",
+            "delete":"Löschen"
+          }
         }
       },
       "Search":{
@@ -590,7 +607,11 @@
           "select":"Auswählen"
         }
       },
-      "MaterialPreView":{},
+      "MaterialPreView":{
+        "button":{
+          "select":"Auswählen"
+        }
+      },
       "MaterialView":{
         "button":{
           "change":"Ändern"
@@ -774,11 +795,18 @@
           "delete":"löschen",
           "status":"Status bearbeiten",
           "chat":"beantworten",
-          "empty":"keine Rollen angelegt"
+          "empty":"keine Rollen angelegt",
+          "button":{
+            "delete":"Löschen",
+            "edit":"Bearbeiten",
+            "safe":"Speichern"
+          }
         },
         "tag":{
           "button":{
-            "delete":"Löschen"
+            "delete":"Löschen",
+            "edit":"Bearbeiten",
+            "safe":"Speichern"
           }
         }
       }

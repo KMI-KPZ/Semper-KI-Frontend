@@ -125,18 +125,16 @@ const ManufacturerView: React.FC<Props> = (props) => {
         <div className="flex flex-col gap-5 md:flex-row">
           <Button
             onClick={handleOnClickCart}
-            icon={<ArrowBackIcon />}
-            iconPos="front"
-          >
-            {t("AfterProcess.Manufacturer.ManufacturerView.button.cart")}
-          </Button>
+            startIcon={<ArrowBackIcon />}
+            title={t("AfterProcess.Manufacturer.ManufacturerView.button.cart")}
+          />
           <Button
             onClick={handleOnCLickCheck}
-            icon={<ArrowForwardIcon />}
-            iconPos="back"
-          >
-            {t("AfterProcess.Manufacturer.ManufacturerView.button.checkOrder")}
-          </Button>
+            endIcon={<ArrowForwardIcon />}
+            title={t(
+              "AfterProcess.Manufacturer.ManufacturerView.button.checkOrder"
+            )}
+          />
         </div>
       </div>
     </LoadingSuspense>

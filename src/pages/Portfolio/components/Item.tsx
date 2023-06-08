@@ -39,7 +39,12 @@ const PortfolioItem: React.FC<Props> = (props) => {
         </Heading>
         <Button
           onClick={handleOnClickButton}
-          icon={
+          title={t(
+            `Portfolio.PortfolioItem.button.${
+              open === true ? "collapse" : "expand"
+            }`
+          )}
+          children={
             <div
               className={`transition-all duration-300 ${
                 open ? "rotate-180" : "rotate-0"

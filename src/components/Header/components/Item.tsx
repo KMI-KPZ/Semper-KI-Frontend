@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Badge } from "@component-library/Badge";
 import { ReactComponent as LogoIcon } from "@icons/Logo.svg";
 import { INavigationItem } from "@/data/navigation";
+import { Button } from "@component-library/Button";
 
 interface Props {
   isMenuItem?: boolean;
@@ -18,16 +19,22 @@ const HeaderItem: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const handleOnClick = (
-    e:
-      | React.MouseEvent<HTMLAnchorElement, MouseEvent>
-      | React.MouseEvent<HTMLLIElement, MouseEvent>
-  ) => {
+  const onClick = (e?: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     if (headeritem.extern === false) {
-      e.preventDefault();
+      e?.preventDefault();
       closeMenus();
       navigate(headeritem.link);
     }
+  };
+
+  const handleOnClickButton = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    onClick(e);
+  };
+
+  const handleOnClickLi = () => {
+    onClick();
   };
 
   const renderIcon =
@@ -43,25 +50,30 @@ const HeaderItem: React.FC<Props> = (props) => {
   return (
     <li
       className="group p-1 duration-300 hover:cursor-pointer hover:text-türkis"
-      onClick={handleOnClick}
+      onClick={handleOnClickLi}
       title={headeritem.title}
     >
-      <a
-        href={headeritem.link}
-        className="flex flex-row items-center gap-2 text-inherit"
-        onClick={handleOnClick}
-      >
-        {badge !== undefined && badge > 0 ? (
-          <Badge count={badge} position="large">
-            {renderIcon}
-          </Badge>
-        ) : (
-          renderIcon
-        )}
-        {onlyIcon !== undefined && onlyIcon === true ? null : (
-          <span className="text-xl">{t(headeritem.title)}</span>
-        )}
-      </a>
+      <Button
+        size="sm"
+        to={headeritem.link}
+        onClick={handleOnClickButton}
+        variant="text"
+        title={t(headeritem.title)}
+        startIcon={
+          badge !== undefined && badge > 0 ? (
+            <Badge count={badge} position="large">
+              {renderIcon}
+            </Badge>
+          ) : (
+            renderIcon
+          )
+        }
+        children={
+          onlyIcon !== undefined && onlyIcon === true ? null : (
+            <span className="text-xl">{t(headeritem.title)}</span>
+          )
+        }
+      />
     </li>
   );
 };

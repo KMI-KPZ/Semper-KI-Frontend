@@ -49,11 +49,15 @@ const HeaderItem: React.FC<Props> = (props) => {
 
   return (
     <li
-      className="group p-1 duration-300 hover:cursor-pointer hover:text-türkis"
+      className={`group p-1 duration-300 hover:cursor-pointer hover:text-türkis ${
+        !isMenuItem ? "w-full" : "w-fit"
+      }`}
       onClick={handleOnClickLi}
       title={headeritem.title}
     >
       <Button
+        width={!isMenuItem ? "full" : "fit"}
+        align={!isMenuItem ? "start" : "center"}
         size="sm"
         to={headeritem.link}
         onClick={handleOnClickButton}

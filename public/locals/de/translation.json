@@ -260,7 +260,11 @@
   },
   "Header":{
     "Header":{
-      "title":"Semper-KI"
+      "title":"Semper-KI",
+      "button":{
+        "close":"Menu Schließen",
+        "open":"Menu Öffnen"
+      }
     },
     "HeaderData":{
       "about-us": "Über uns",

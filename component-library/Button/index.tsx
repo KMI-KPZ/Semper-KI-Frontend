@@ -11,8 +11,10 @@ interface ButtonProps {
       | React.MouseEvent<HTMLDivElement, MouseEvent>
   ): void;
   size?: ButtonSize;
+  align?: ButtonAlign;
   variant?: ButtonVariant;
   width?: ButtonWidth;
+  direction?: ButtonDirection;
   className?: string;
   active?: boolean;
   loading?: boolean;
@@ -22,6 +24,8 @@ interface ButtonProps {
 type ButtonSize = "sm" | "xs" | "md" | "lg" | "xl";
 type ButtonVariant = "primary" | "secondary" | "text";
 type ButtonWidth = "fit" | "full" | "auto";
+type ButtonAlign = "start" | "center" | "end";
+type ButtonDirection = "col" | "row";
 
 export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
   const {
@@ -31,6 +35,8 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     loading = false,
     width = "auto",
     className = "",
+    align = "center",
+    direction = "row",
     onClick,
     title,
     children,
@@ -51,6 +57,8 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       navigate(to);
     }
   };
+
+  console.log("Button", width, title);
 
   const getClassNameWidth = (): string => {
     switch (width) {
@@ -75,7 +83,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       case "secondary":
         switch (active) {
           case true:
-            return "hover:bg-türkis-300 bg-slate-100 text-black hover:cursor-pointer";
+            return "hover:bg-türkis-300 bg-slate-200 text-black hover:cursor-pointer";
           case false:
             return "bg-grau-300 hover:bg-grau-200 text-white hover:cursor-default";
         }
@@ -92,15 +100,35 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
   const getClassNameSize = (): string => {
     switch (size) {
       case "xs":
-        return "w-full px-5 py-3  md:w-fit md:py-1 md:px-2";
+        return "px-3 py-2 md:py-1 md:px-2";
       case "sm":
-        return "w-full px-5 py-3  md:w-fit md:py-2 md:px-3";
+        return "px-4 py-3 md:py-2 md:px-3";
       case "md":
-        return "w-full px-5 py-3  md:w-fit md:py-2 md:px-4";
+        return "px-5 py-4 md:py-2 md:px-4";
       case "lg":
-        return "w-full px-5 py-3  md:w-fit md:py-3 md:px-5";
+        return "px-6 py-5 md:py-3 md:px-5";
       case "xl":
-        return "w-full";
+        return "px-7 py-6 md:py-4 md:px-6";
+    }
+  };
+
+  const getClassNameAlign = (): string => {
+    switch (align) {
+      case "start":
+        return "justify-start";
+      case "center":
+        return "justify-center";
+      case "end":
+        return "justify-end";
+    }
+  };
+
+  const getClassNameDirection = (): string => {
+    switch (direction) {
+      case "col":
+        return "flex-col";
+      case "row":
+        return "flex-row";
     }
   };
 
@@ -114,8 +142,10 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     <a
       title={getTitle()}
       className={`
-      bezier flex flex-row items-center justify-center gap-3 transition duration-300 
-      ${getClassNameVariant()} ${getClassNameSize()} ${getClassNameWidth()} ${className}`}
+      bezier group flex items-center gap-3 transition duration-300
+      ${getClassNameVariant()} ${getClassNameSize()} 
+      ${getClassNameWidth()} ${getClassNameAlign()} 
+      ${getClassNameDirection()} ${className}`}
       onClick={handleOnClickButton}
       href={to !== undefined ? to : title}
     >

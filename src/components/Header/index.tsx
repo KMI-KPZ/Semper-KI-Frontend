@@ -11,6 +11,7 @@ import LogoURL from "@images/logo192.png";
 import { AppContext } from "@/pages/App";
 import { OrderCollectionEvent, UserType } from "@/hooks/useUser";
 import { Heading } from "@component-library/Typography";
+import { Button } from "@component-library/Button";
 
 interface Language {
   code: string;
@@ -85,13 +86,7 @@ export const Header: React.FC<Props> = (props) => {
     setState((prevState) => ({ ...prevState, menuOpen: false }));
     setAppState((prevState) => ({ ...prevState, stopScroll: false }));
   };
-  const openMenu = (
-    e?:
-      | React.MouseEvent<HTMLAnchorElement, MouseEvent>
-      | React.MouseEvent<HTMLLIElement, MouseEvent>
-  ) => {
-    e?.preventDefault();
-    e?.stopPropagation();
+  const openMenu = () => {
     setState((prevState) => ({ ...prevState, menuOpen: true }));
     setAppState((prevState) => ({ ...prevState, stopScroll: true }));
   };
@@ -207,16 +202,6 @@ export const Header: React.FC<Props> = (props) => {
   );
   const renderMenuItems: JSX.Element = (
     <ul className="hidden flex-col gap-3 md:flex">
-      <div className="flex flex-row-reverse gap-4">
-        <div
-          className="flex justify-center duration-300  hover:cursor-pointer hover:text-türkis"
-          onClick={closeMenu}
-        >
-          <CloseIcon fontSize="large" />
-        </div>
-        {renderLanguageMenu}
-      </div>
-
       {NavigationItemData.filter(
         (item) =>
           item.preferred.includes("menu") && item.userTypes.includes(userType)
@@ -232,15 +217,6 @@ export const Header: React.FC<Props> = (props) => {
   );
   const renderMobileMenuItems = (
     <ul className="flex flex-col gap-3 md:hidden">
-      <div className="flex flex-row-reverse gap-4">
-        <div
-          className="flex justify-center p-2 duration-300 hover:cursor-pointer hover:text-türkis"
-          onClick={closeMenu}
-        >
-          <CloseIcon fontSize="large" />
-        </div>
-        {renderLanguageMenu}
-      </div>
       {NavigationItemData.filter(
         (item) =>
           (item.preferred.includes("menu") ||
@@ -272,19 +248,34 @@ export const Header: React.FC<Props> = (props) => {
         md:shadow-none
        "
       >
-        {renderMenuItems}
-        {renderMobileMenuItems}
-        <div
-          className="flex w-full flex-row 
-          items-center justify-center duration-300 hover:cursor-pointer hover:text-türkis"
-          onClick={closeMenu}
-        >
-          <ExpandLessIcon fontSize="large" className="md:rotate-90" />
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-row-reverse gap-3">
+            <Button
+              children={<CloseIcon fontSize="large" />}
+              title={t(`Header.Header.button.${menuOpen ? "close" : "open"}`)}
+              width="fit"
+              variant="secondary"
+              onClick={closeMenu}
+            />
+            {renderLanguageMenu}
+          </div>
+          {renderMenuItems}
+          {renderMobileMenuItems}
         </div>
+        <Button
+          title={t(`Header.Header.button.${menuOpen ? "close" : "open"}`)}
+          onClick={closeMenu}
+          children={
+            <ExpandLessIcon fontSize="large" className="md:rotate-90" />
+          }
+          variant="secondary"
+          width="full"
+        />
       </div>
     </>
   );
   const renderHomeButton: JSX.Element = (
+    // <Button tit/>
     <a
       href="/"
       className="group flex flex-row items-center gap-3 p-2 duration-300 hover:cursor-pointer hover:text-türkis "
@@ -312,15 +303,14 @@ export const Header: React.FC<Props> = (props) => {
     <li
       className="group flex items-center justify-center p-2 duration-300 hover:cursor-pointer hover:text-türkis"
       onClick={openMenu}
-      title="Menu"
+      title={t(`Header.Header.button.${menuOpen ? "close" : "open"}`)}
     >
-      <a
-        href={"/menu"}
+      <Button
+        variant="text"
+        title={t(`Header.Header.button.${menuOpen ? "close" : "open"}`)}
         onClick={openMenu}
-        className="flex items-center justify-center text-inherit"
-      >
-        <MenuIcon className="h-6 xl:h-10" />
-      </a>
+        children={<MenuIcon className="h-6 xl:h-10" />}
+      />
     </li>
   );
   return (
@@ -328,8 +318,8 @@ export const Header: React.FC<Props> = (props) => {
       data-testid="header"
       className="flex w-full flex-row items-center justify-between bg-white shadow-lg"
     >
-      <nav className="m-3">{renderHomeButton}</nav>
-      <nav className="m-3 flex flex-row items-center justify-center gap-4">
+      <nav className="m-2">{renderHomeButton}</nav>
+      <nav className="m-2 flex flex-row items-center justify-center gap-2 md:gap-4">
         {renderHeaderItems}
         {renderMobileHeaderItems}
         {renderMenuButton}

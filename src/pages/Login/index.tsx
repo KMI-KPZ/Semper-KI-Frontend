@@ -47,14 +47,14 @@ const LoginView: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex w-fit flex-col items-center justify-center gap-5 bg-white p-5">
+    <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5 sm:w-fit">
       <Heading variant="h1">
         {path === undefined
           ? t("Login.LoginView.header")
           : t("Login.LoginView.headerPath")}
       </Heading>
       <UserSwitch onClick={handleOnClickUserSwitch} userType={userType} />
-      <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
+      <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
         <Button
           onClick={handleOnClickButtonLogin}
           title={t("Login.LoginView.login.header")}

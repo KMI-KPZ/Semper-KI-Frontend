@@ -164,36 +164,35 @@ const HomeOrderCard: React.FC<Props> = (props) => {
       <div
         className={`${additionalClassNames} flex flex-col items-center justify-center gap-3 p-3`}
       >
-        <Link
+        <Button
           to="/process/new"
+          startIcon={<AddIcon />}
           title={t("Home.HomeOrderCard.order.new")}
-          className="flex flex-row justify-between gap-5 p-5 duration-300 hover:bg-türkis-300"
-        >
-          <AddIcon />
-          {t("Home.HomeOrderCard.order.new")}
-        </Link>
-        <Link
+          variant="outline"
+          size="xl"
+        />
+        <Button
+          size="xl"
           to="/process/model"
           title={t("Home.HomeOrderCard.order.continue")}
-          className="flex flex-row justify-between gap-5 p-5 duration-300 hover:bg-türkis-300"
-        >
-          <PlayArrowIcon />
-          {t("Home.HomeOrderCard.order.continue")}
-        </Link>
-        <Link
+          startIcon={<PlayArrowIcon />}
+          variant="outline"
+        />
+        <Button
+          size="xl"
+          variant="outline"
           to="/cart"
           title={t("Home.HomeOrderCard.order.cart")}
-          className="flex flex-row justify-between gap-5 p-5 duration-300 hover:bg-türkis-300"
-        >
-          {cartCount !== undefined ? (
-            <Badge count={cartCount}>
+          startIcon={
+            cartCount !== undefined ? (
+              <Badge count={cartCount}>
+                <ShoppingCartIcon />
+              </Badge>
+            ) : (
               <ShoppingCartIcon />
-            </Badge>
-          ) : (
-            <ShoppingCartIcon />
-          )}
-          {t("Home.HomeOrderCard.order.cart")}
-        </Link>
+            )
+          }
+        />
       </div>
     );
   return (

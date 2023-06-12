@@ -50,22 +50,26 @@ const Footer: React.FC = () => {
             extern
           />
         </li>
-        <li className="flex flex-row items-center justify-center p-2">
-          <Button
-            title={t("Footer.Footer.instagram")}
-            to={URL_Instagram}
-            variant="light"
-            extern
-            children={<InstagramIcon />}
-          />
-          <Button
-            title={t("Footer.Footer.mastodon")}
-            to={URL_Mastodon}
-            variant="light"
-            extern
-            children={<MastodonIcon />}
-          />
-          <span className="p-2 font-bold text-grau-400">© 2023 Semper-KI</span>
+        <li className="flex flex-col items-center justify-center xs:flex-row xs:gap-2 xs:p-2">
+          <div className="flex flex-row items-center justify-center gap-2">
+            <Button
+              title={t("Footer.Footer.instagram")}
+              to={URL_Instagram}
+              variant="light"
+              extern
+              children={<InstagramIcon />}
+            />
+            <Button
+              title={t("Footer.Footer.mastodon")}
+              to={URL_Mastodon}
+              variant="light"
+              extern
+              children={<MastodonIcon />}
+            />
+          </div>
+          <span className="whitespace-nowrap p-2 font-bold text-grau-400">
+            © 2023 Semper-KI
+          </span>
         </li>
       </ul>
     </footer>

@@ -4,10 +4,55 @@ import { Link } from "react-router-dom";
 import { UserSwitch } from "@/components/UserSwitch";
 import { UserType } from "@/hooks/useUser/types";
 import { Heading } from "@component-library/Typography";
+import { Button } from "@component-library/Button";
 
 interface Props {
   className?: string;
 }
+
+type LinkData = {
+  title: string;
+  link: string;
+  usertype: UserType;
+};
+
+const links: LinkData[] = [
+  {
+    title: "Home.HomePortfolioCard.client.information",
+    link: "/portfolio?name=use-information",
+    usertype: UserType.client,
+  },
+  {
+    title: "Home.HomePortfolioCard.client.produce",
+    link: "/portfolio?name=use-produce",
+    usertype: UserType.client,
+  },
+  {
+    title: "Home.HomePortfolioCard.client.design",
+    link: "/portfolio?name=use-design",
+    usertype: UserType.client,
+  },
+  {
+    title: "Home.HomePortfolioCard.client.accompany",
+    link: "/portfolio?name=use-accompany",
+    usertype: UserType.client,
+  },
+  {
+    title: "Home.HomePortfolioCard.contractor.produce",
+    link: "/portfolio?name=provide-produce",
+    usertype: UserType.manufacturer,
+  },
+  {
+    title: "Home.HomePortfolioCard.contractor.design",
+    link: "/portfolio?name=provide-design",
+    usertype: UserType.manufacturer,
+  },
+  {
+    title: "Home.HomePortfolioCard.contractor.accompany",
+    link: "/portfolio?name=provide-accompany",
+    usertype: UserType.manufacturer,
+  },
+];
 
 const HomePortfolioCard: React.FC<Props> = (props) => {
   const { className } = props;
@@ -34,54 +79,36 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
               userType === UserType.client ? "-left-[200%]" : "left-0"
             }`}
           >
-            <Link
-              to="/portfolio?name=use-information"
-              className={`px-3 py-1 duration-300 hover:bg-türkis-300`}
-            >
-              {`>`} {t("Home.HomePortfolioCard.client.information")}
-            </Link>
-            <Link
-              to="/portfolio?name=use-produce"
-              className={`px-3 py-1 duration-300 hover:bg-türkis-300 `}
-            >
-              {`>`} {t("Home.HomePortfolioCard.client.produce")}
-            </Link>
-            <Link
-              to="/portfolio?name=use-design"
-              className={`px-3 py-1 duration-300 hover:bg-türkis-300 `}
-            >
-              {`>`} {t("Home.HomePortfolioCard.client.design")}
-            </Link>
-            <Link
-              to="/portfolio?name=use-accompany"
-              className={`px-3 py-1 duration-300 hover:bg-türkis-300 `}
-            >
-              {`>`} {t("Home.HomePortfolioCard.client.accompany")}
-            </Link>
+            {links
+              .filter((link) => link.usertype === UserType.manufacturer)
+              .map((link, linkIndex) => (
+                <Button
+                  variant="outline"
+                  align="start"
+                  width="auto"
+                  title={`${t(link.title)}`}
+                  to={link.link}
+                  key={linkIndex}
+                />
+              ))}
           </div>
           <div
             className={`absolute flex w-full flex-col gap-2 overflow-clip duration-300 ${
               userType === UserType.client ? "left-0" : "left-[200%]"
             }`}
           >
-            <Link
-              to="/portfolio?name=provide-produce"
-              className={`px-3 py-1 duration-300 hover:bg-türkis-300 `}
-            >
-              {`>`} {t("Home.HomePortfolioCard.contractor.produce")}
-            </Link>
-            <Link
-              to="/portfolio?name=provide-design"
-              className={`px-3 py-1 duration-300 hover:bg-türkis-300 `}
-            >
-              {`>`} {t("Home.HomePortfolioCard.contractor.design")}
-            </Link>
-            <Link
-              to="/portfolio?name=provide-accompany"
-              className={`px-3 py-1 duration-300 hover:bg-türkis-300 `}
-            >
-              {`>`} {t("Home.HomePortfolioCard.contractor.accompany")}
-            </Link>
+            {links
+              .filter((link) => link.usertype === UserType.client)
+              .map((link, linkIndex) => (
+                <Button
+                  variant="outline"
+                  align="start"
+                  width="auto"
+                  title={`${t(link.title)}`}
+                  to={link.link}
+                  key={linkIndex}
+                />
+              ))}
           </div>
         </div>
       </div>

@@ -23,7 +23,7 @@ interface ButtonProps {
   extern?: boolean;
 }
 type ButtonSize = "sm" | "xs" | "md" | "lg" | "xl";
-type ButtonVariant = "primary" | "secondary" | "text" | "light";
+type ButtonVariant = "primary" | "secondary" | "outline" | "text" | "light";
 type ButtonWidth = "fit" | "full" | "auto";
 type ButtonAlign = "start" | "center" | "end";
 type ButtonDirection = "col" | "row";
@@ -91,6 +91,8 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
           case false:
             return "bg-grau-300 hover:bg-grau-200 text-white hover:cursor-default";
         }
+      case "outline":
+        return "text-black bg-slate-200 md:bg-inherit hover:shadow-inner-border hover:shadow-türkis-300 hover:cursor-pointer";
       case "text":
         switch (active) {
           case true:

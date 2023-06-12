@@ -19,7 +19,7 @@ import PrintIcon from "@mui/icons-material/Print";
 import HardwareIcon from "@mui/icons-material/Hardware";
 import ScienceIcon from "@mui/icons-material/Science";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
-import { UserType } from "@/hooks/useUser";
+import { UserType } from "@/hooks/useUser/types";
 import { NavigationItemPreferredType } from "@/components/Header";
 
 export type INavigationItem = {

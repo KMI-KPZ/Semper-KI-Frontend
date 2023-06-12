@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
-import { UserType } from "@/hooks/useUser";
 import { Heading } from "@component-library/Typography";
+import { UserType } from "@/hooks/useUser/types";
 
 interface Props {
   className?: string;
@@ -59,6 +59,10 @@ const HomeGuideCard: React.FC<Props> = (props) => {
           <div className="w-full border-t-2" />
           <div className="flex w-full flex-col items-start justify-around gap-5">
             <div className="flex w-full flex-col items-center justify-start gap-2">
+              <Button
+                title={t("Home.HomeGuideCard.information.header")}
+                variant="secondary"
+              />
               <Heading variant="h3">
                 {t("Home.HomeGuideCard.information.header")}
               </Heading>

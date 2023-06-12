@@ -5,7 +5,7 @@ import { Button } from "@component-library/Button";
 import { UserSwitch } from "@/components/UserSwitch";
 import LoginIcon from "@mui/icons-material/Login";
 import CreateIcon from "@mui/icons-material/Create";
-import { UserType } from "@/hooks/useUser";
+import { UserType } from "@/hooks/useUser/types";
 import { Heading } from "@component-library/Typography";
 
 interface Props {

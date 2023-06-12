@@ -1,4 +1,4 @@
-import { User, UserType } from "@/hooks/useUser";
+import { User, UserType } from "@/hooks/useUser/types";
 import { Error } from "@/pages/Error";
 import LoginView from "@/pages/Login";
 import React from "react";

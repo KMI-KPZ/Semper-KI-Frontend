@@ -1,4 +1,4 @@
-import { User } from "@/hooks/useUser";
+import { User } from "@/hooks/useUser/types";
 import { Divider } from "@component-library/Divider";
 import React from "react";
 import { useTranslation } from "react-i18next";

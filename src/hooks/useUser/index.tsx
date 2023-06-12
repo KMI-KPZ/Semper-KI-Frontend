@@ -1,8 +1,9 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { getUserType, parseAddress } from "../services/utils";
-import useCRSFToken from "./useCSRFToken";
-import useCustomAxios from "./useCustomAxios";
+import { getUserType, parseAddress } from "../../services/utils";
+import useCRSFToken from "../useCSRFToken";
+import useCustomAxios from "../useCustomAxios";
+import { User, UserType } from "./types";
 
 interface ReturnProps {
   userType: UserType;
@@ -13,43 +14,6 @@ interface ReturnProps {
   loadUserQuery: UseQueryResult<User, Error>;
   deleteUser(): void;
   updateUser(userType: UserType): void;
-}
-
-export type User = {
-  address: Address;
-  email: string;
-  hashedID: string;
-  name: string;
-  organization: string;
-  type: UserType;
-  created: Date;
-  accessed: Date;
-  updated: Date;
-};
-export enum UserType {
-  "client",
-  "manufacturer",
-  "admin",
-  "anonym",
-}
-
-export interface Address {
-  city: string;
-  houseNumber: string;
-  street: string;
-  country: string;
-  zipcode: string;
-}
-
-export interface OrderCollectionEvent {
-  orderCollectionID: string;
-  orders: OrderEvent[];
-}
-
-export interface OrderEvent {
-  orderID: string;
-  status?: number;
-  messages?: number;
 }
 
 const useUser = (): ReturnProps => {

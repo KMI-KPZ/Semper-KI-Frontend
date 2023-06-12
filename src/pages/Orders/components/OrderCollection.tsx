@@ -15,7 +15,11 @@ import {
   OrderState,
   useOrders,
 } from "../hooks/useOrders";
-import { OrderCollectionEvent, OrderEvent, UserType } from "@/hooks/useUser";
+import {
+  OrderCollectionEvent,
+  OrderEvent,
+  UserType,
+} from "@/hooks/useUser/types";
 import { Heading } from "@component-library/Typography";
 
 interface Props {

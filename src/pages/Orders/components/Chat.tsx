@@ -4,7 +4,7 @@ import SendIcon from "@mui/icons-material/Send";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "react-i18next";
 import { IChatMessage, useOrders } from "../hooks/useOrders";
-import { User } from "@/hooks/useUser";
+import { User } from "@/hooks/useUser/types";
 import { Heading } from "@component-library/Typography";
 
 interface Props {

@@ -5,12 +5,13 @@ import { Header } from "@/components/Header";
 import { URL_AboutUs } from "@/config/constants";
 import useCart from "@/hooks/useCart";
 import useMissedEvent from "@/hooks/useMissedEvent";
-import useUser, {
+import useUser from "@/hooks/useUser";
+import {
   OrderCollectionEvent,
   OrderEvent,
   User,
   UserType,
-} from "@/hooks/useUser";
+} from "@/hooks/useUser/types";
 import { useWebsocket } from "@/hooks/useWebsocket";
 import { Heading } from "@component-library/Typography";
 import { useQueryClient } from "@tanstack/react-query";

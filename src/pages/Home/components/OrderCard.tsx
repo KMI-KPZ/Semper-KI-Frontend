@@ -9,7 +9,7 @@ import FileCopyIcon from "@mui/icons-material/FileCopy";
 import { LoadingSuspense } from "@component-library/Loading";
 import { Button } from "@component-library/Button";
 import { Badge } from "@component-library/Badge";
-import { UserType } from "@/hooks/useUser";
+import { UserType } from "@/hooks/useUser/types";
 import { OrderState, useOrders } from "@/pages/Orders/hooks/useOrders";
 import { Heading, Text } from "@component-library/Typography";
 import Table from "@/components/Table";
@@ -23,13 +23,45 @@ interface Props {
 
 const HomeOrderCard: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const orderShowCountClient = 3;
+  const orderShowCountClient = 4;
   const orderShowCountManufacturer = 6;
   const { className, userType, cartCount, ordersCount } = props;
+  const orderShowCount =
+    userType === UserType.client
+      ? orderShowCountClient
+      : orderShowCountManufacturer;
   const { ordersQuery } = useOrders(
     userType === UserType.client || userType === UserType.manufacturer
   );
   const additionalClassNames = className ?? "";
+
+  const getOrderTable = () => (
+    <Table
+      header={[
+        t("Home.HomeOrderCard.contracts.date"),
+        t("Home.HomeOrderCard.contracts.article"),
+        t("Home.HomeOrderCard.contracts.status"),
+      ]}
+      rows={
+        ordersQuery.data !== undefined
+          ? ordersQuery.data
+              .slice(
+                0,
+                ordersQuery.data.length < orderShowCount
+                  ? ordersQuery.data.length
+                  : orderShowCount
+              )
+              .map((order, index) => [
+                <Text variant="body" className="text-center">
+                  {new Date(order.date).toLocaleDateString()}
+                </Text>,
+                <Text variant="body">{order.orders.length}</Text>,
+                <Text variant="body">{OrderState[order.state]}</Text>,
+              ])
+          : [[]]
+      }
+    />
+  );
 
   if (userType === UserType.manufacturer)
     return (
@@ -43,67 +75,11 @@ const HomeOrderCard: React.FC<Props> = (props) => {
             {t("Home.HomeOrderCard.contracts.header")}
           </Heading>
           <LoadingSuspense query={ordersQuery}>
-            {/* <Table
-              header={[
-                t("Home.HomeOrderCard.contracts.date"),
-                t("Home.HomeOrderCard.contracts.article"),
-                t("Home.HomeOrderCard.contracts.status"),
-              ]}
-              rows={
-                ordersQuery.data !== undefined
-                  ? ordersQuery.data
-                      .slice(
-                        0,
-                        ordersQuery.data.length < orderShowCountManufacturer
-                          ? ordersQuery.data.length
-                          : orderShowCountManufacturer
-                      )
-                      .map((order, index) => [
-                        <Text variant="body" className="text-center">
-                          {new Date(order.date).toLocaleDateString()}
-                        </Text>,
-                        <Text variant="body">{order.orders.length}</Text>,
-                        <Text variant="body">{OrderState[order.state]}</Text>,
-                      ])
-                  : [[]]
-              }
-            /> */}
-
-            <table className="w-full table-auto">
-              <thead>
-                <tr>
-                  <th>{t("Home.HomeOrderCard.contracts.date")}</th>
-                  <th>{t("Home.HomeOrderCard.contracts.article")}</th>
-                  <th>{t("Home.HomeOrderCard.contracts.status")}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {ordersQuery.data !== undefined ? (
-                  ordersQuery.data
-                    .slice(
-                      0,
-                      ordersQuery.data.length < orderShowCountManufacturer
-                        ? ordersQuery.data.length
-                        : orderShowCountManufacturer
-                    )
-                    .map((order, index) => (
-                      <tr key={index}>
-                        <td className="text-center">
-                          {new Date(order.date).toLocaleDateString()}
-                        </td>
-                        <td className="text-center">{order.orders.length}</td>
-                        <td className="text-center">
-                          {OrderState[order.state]}
-                        </td>
-                      </tr>
-                    ))
-                ) : (
-                  <tr className="flex w-full flex-row justify-between">
-                    <td></td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+            {ordersQuery.data !== undefined && ordersQuery.data.length > 0 ? (
+              getOrderTable()
+            ) : (
+              <Text variant="body">{t("Home.HomeOrderCard.order.empty")}</Text>
+            )}
           </LoadingSuspense>
         </div>
         <Button
@@ -161,41 +137,11 @@ const HomeOrderCard: React.FC<Props> = (props) => {
             {t("Home.HomeOrderCard.orders.header")}
           </Heading>
           <LoadingSuspense query={ordersQuery}>
-            <table className="table-auto">
-              <thead>
-                <tr>
-                  <th>{t("Home.HomeOrderCard.orders.date")}</th>
-                  <th>{t("Home.HomeOrderCard.orders.article")}</th>
-                  <th>{t("Home.HomeOrderCard.orders.status")}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {ordersQuery.data !== undefined ? (
-                  ordersQuery.data
-                    .slice(
-                      0,
-                      ordersQuery.data.length < orderShowCountClient
-                        ? ordersQuery.data.length
-                        : orderShowCountClient
-                    )
-                    .map((order, index) => (
-                      <tr key={index}>
-                        <td className="text-center">
-                          {new Date(order.date).toLocaleDateString()}
-                        </td>
-                        <td className="text-center">{order.orders.length}</td>
-                        <td className="text-center">
-                          {OrderState[order.state]}
-                        </td>
-                      </tr>
-                    ))
-                ) : (
-                  <tr className="flex w-full flex-row justify-between">
-                    <td></td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+            {ordersQuery.data !== undefined && ordersQuery.data.length > 0 ? (
+              getOrderTable()
+            ) : (
+              <Text variant="body">{t("Home.HomeOrderCard.order.empty")}</Text>
+            )}
           </LoadingSuspense>
         </div>
         <Button

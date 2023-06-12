@@ -51,7 +51,6 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
   const handleOnClickButton = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
-    console.log(title, extern);
     if (!extern) {
       e.preventDefault();
       e.stopPropagation();

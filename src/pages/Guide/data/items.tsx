@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import HardwareIcon from "@mui/icons-material/Hardware";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import HelpIcon from "@mui/icons-material/Help";
-import { UserType } from "@/hooks/useUser";
+import { UserType } from "@/hooks/useUser/types";
 import { CardItemType } from "@/components/CardView";
 
 export type TGuideItem = {

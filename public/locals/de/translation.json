@@ -330,7 +330,8 @@
         "header":"Meine Bestellungen",
         "date":"Datum",
         "article":"Anzahl Artikel",
-        "status":"Status"
+        "status":"Status",
+        "empty":"keine vorhandenen Bestellungen"
       },
       "contracts":{
         "header":"Meine Aufträge",

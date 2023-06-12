@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
-import useUser, { User, UserType } from "@/hooks/useUser";
+import { User, UserType } from "@/hooks/useUser/types";
 import { Heading } from "@component-library/Typography";
+import useUser from "@/hooks/useUser";
 
 interface Props {
   user: User;

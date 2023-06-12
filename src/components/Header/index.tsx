@@ -9,7 +9,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { NavigationItemData } from "@/data/navigation";
 import LogoURL from "@images/logo192.png";
 import { AppContext } from "@/pages/App";
-import { OrderCollectionEvent, UserType } from "@/hooks/useUser";
+import { OrderCollectionEvent, UserType } from "@/hooks/useUser/types";
 import { Heading, Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
 

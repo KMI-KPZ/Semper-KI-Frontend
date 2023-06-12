@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useCustomAxios from "./useCustomAxios";
-import { OrderCollectionEvent } from "./useUser";
+import { OrderCollectionEvent } from "./useUser/types";
 
 interface Props {
   isLoggedIn: boolean;

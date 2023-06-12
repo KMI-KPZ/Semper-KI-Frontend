@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { UserSwitch } from "@/components/UserSwitch";
-import { UserType } from "@/hooks/useUser";
+import { UserType } from "@/hooks/useUser/types";
 import { Heading } from "@component-library/Typography";
 
 interface Props {

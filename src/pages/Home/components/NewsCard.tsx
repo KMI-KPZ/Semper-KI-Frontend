@@ -36,7 +36,9 @@ const HomeNewsCard: React.FC<Props> = (props) => {
       <Heading variant="h2">{t("Home.HomeNewsCard.header")}</Heading>
       <div className="w-full border-t-2" />
       {newsList.length > 0 ? (
-        newsList.map((news) => <HomeNewsCardItem {...news} />)
+        newsList.map((news, index) => (
+          <HomeNewsCardItem key={index} {...news} />
+        ))
       ) : (
         <span>{t("Home.HomeNewsCard.no-items")}</span>
       )}

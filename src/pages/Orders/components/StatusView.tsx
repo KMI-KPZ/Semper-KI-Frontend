@@ -7,7 +7,7 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import EmailIcon from "@mui/icons-material/Email";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import { useTranslation } from "react-i18next";
-import { UserType } from "@/hooks/useUser";
+import { UserType } from "@/hooks/useUser/types";
 import { OrderState } from "../hooks/useOrders";
 import { Divider } from "@component-library/Divider";
 

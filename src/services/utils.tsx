@@ -1,4 +1,4 @@
-import { Address, UserType } from "@/hooks/useUser";
+import { Address, UserType } from "@/hooks/useUser/types";
 import { IProcessItem } from "@/pages/Process";
 import { EProcessStatusType } from "@/pages/Process/Header";
 import { IModel } from "@/pages/Process/Model";

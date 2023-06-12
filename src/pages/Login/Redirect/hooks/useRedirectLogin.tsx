@@ -1,5 +1,5 @@
 import useCustomAxios from "@/hooks/useCustomAxios";
-import { UserType } from "@/hooks/useUser";
+import { UserType } from "@/hooks/useUser/types";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import { useEffect } from "react";

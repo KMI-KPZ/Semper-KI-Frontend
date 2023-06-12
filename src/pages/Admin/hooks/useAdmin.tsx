@@ -1,5 +1,5 @@
 import useCustomAxios from "@/hooks/useCustomAxios";
-import { User } from "@/hooks/useUser";
+import { User } from "@/hooks/useUser/types";
 import { IOrder } from "@/pages/Orders/hooks/useOrders";
 import { IMaterial } from "@/pages/Process/Material";
 import { IModel } from "@/pages/Process/Model";

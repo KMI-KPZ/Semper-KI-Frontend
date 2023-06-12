@@ -20,9 +20,10 @@ interface ButtonProps {
   loading?: boolean;
   startIcon?: ReactNode;
   endIcon?: ReactNode;
+  extern?: boolean;
 }
 type ButtonSize = "sm" | "xs" | "md" | "lg" | "xl";
-type ButtonVariant = "primary" | "secondary" | "text";
+type ButtonVariant = "primary" | "secondary" | "text" | "light";
 type ButtonWidth = "fit" | "full" | "auto";
 type ButtonAlign = "start" | "center" | "end";
 type ButtonDirection = "col" | "row";
@@ -37,6 +38,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     className = "",
     align = "center",
     direction = "row",
+    extern = false,
     onClick,
     title,
     children,
@@ -49,16 +51,19 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
   const handleOnClickButton = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (onClick !== undefined) {
-      onClick(e);
-    } else if (to !== undefined) {
-      navigate(to);
+    console.log(title, extern);
+    if (!extern) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (onClick !== undefined) {
+        onClick(e);
+      } else if (to !== undefined) {
+        navigate(to);
+      }
     }
   };
 
-  console.log("Button", width, title);
+  if (title.includes(".")) console.log("Button", width, title);
 
   const getClassNameWidth = (): string => {
     switch (width) {
@@ -90,9 +95,16 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       case "text":
         switch (active) {
           case true:
-            return "duration-300 hover:cursor-pointer hover:text-türkis";
+            return "hover:cursor-pointer hover:text-türkis";
           case false:
-            return "duration-300 hover:cursor-pointer text-türkis hover:text-inherit";
+            return "hover:cursor-pointer text-türkis hover:text-inherit";
+        }
+      case "light":
+        switch (active) {
+          case true:
+            return "hover:text-türkis text-grau-400 font-bold";
+          case false:
+            return "text-grau-400 font-bold";
         }
     }
   };
@@ -142,7 +154,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     <a
       title={getTitle()}
       className={`
-      bezier group flex items-center gap-3 transition duration-300
+      bezier group flex items-center gap-3 whitespace-nowrap transition duration-300
       ${getClassNameVariant()} ${getClassNameSize()} 
       ${getClassNameWidth()} ${getClassNameAlign()} 
       ${getClassNameDirection()} ${className}`}

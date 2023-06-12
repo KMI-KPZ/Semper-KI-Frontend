@@ -62,7 +62,7 @@ const Heading: React.FC<PropsWithChildren<HeadingProps>> = ({
 };
 
 type TextProps = {
-  variant: "body" | "strong" | "small" | "button-text" | "quote";
+  variant: "body" | "strong" | "small" | "button-text" | "quote" | "custom";
   className?: string;
 };
 
@@ -110,6 +110,12 @@ const Text: React.FC<PropsWithChildren<TextProps>> = ({
         <span
           className={`font-ptsans text-base font-semibold  ${additionalClassNames}`}
         >
+          {children}
+        </span>
+      );
+    case "custom":
+      return (
+        <span className={`font-ptsans ${additionalClassNames}`}>
           {children}
         </span>
       );

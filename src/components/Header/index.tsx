@@ -10,7 +10,7 @@ import { NavigationItemData } from "@/data/navigation";
 import LogoURL from "@images/logo192.png";
 import { AppContext } from "@/pages/App";
 import { OrderCollectionEvent, UserType } from "@/hooks/useUser";
-import { Heading } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
 
 interface Language {
@@ -170,7 +170,7 @@ export const Header: React.FC<Props> = (props) => {
     </li>
   );
   const renderHeaderItems: JSX.Element = (
-    <ul className="hidden flex-row items-center justify-center gap-2 md:flex md:gap-4">
+    <ul className="hidden flex-row items-center justify-center  md:flex">
       {NavigationItemData.filter(
         (item) =>
           item.preferred.includes("header") && item.userTypes.includes(userType)
@@ -185,7 +185,7 @@ export const Header: React.FC<Props> = (props) => {
     </ul>
   );
   const renderMobileHeaderItems: JSX.Element = (
-    <ul className="flex flex-row items-center justify-center gap-2 md:hidden md:gap-4">
+    <ul className="flex flex-row items-center justify-center  md:hidden">
       {NavigationItemData.filter(
         (item) =>
           item.preferred.includes("header") && item.userTypes.includes(userType)
@@ -275,7 +275,6 @@ export const Header: React.FC<Props> = (props) => {
     </>
   );
   const renderHomeButton: JSX.Element = (
-    // <Button tit/>
     <a
       href="/"
       className="group flex flex-row items-center gap-3 p-2 duration-300 hover:cursor-pointer hover:text-türkis "
@@ -287,15 +286,15 @@ export const Header: React.FC<Props> = (props) => {
       title="Startseite"
     >
       <img
-        className="h-8 duration-300 group-hover:scale-110 md:h-10"
+        className="h-8 duration-300 group-hover:scale-110 group-hover:motion-safe:animate-pulse md:h-10"
         data-testid="logo"
         src={LogoURL}
         alt="Kiss Logo"
       />
       <div className="hidden flex-col items-end justify-start text-inherit xs:flex">
-        <Heading variant="h2" className="font-black">
+        <Text variant="custom" className="text-4xl font-bold">
           {t("Header.Header.title")}
-        </Heading>
+        </Text>
       </div>
     </a>
   );
@@ -319,7 +318,7 @@ export const Header: React.FC<Props> = (props) => {
       className="flex w-full flex-row items-center justify-between bg-white shadow-lg"
     >
       <nav className="m-2">{renderHomeButton}</nav>
-      <nav className="m-2 flex flex-row items-center justify-center gap-2 md:gap-4">
+      <nav className="m-2 flex flex-row items-center justify-center  ">
         {renderHeaderItems}
         {renderMobileHeaderItems}
         {renderMenuButton}

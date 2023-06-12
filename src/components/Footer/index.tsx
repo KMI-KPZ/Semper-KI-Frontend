@@ -3,7 +3,14 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { ReactComponent as MastodonIcon } from "@icons/Mastodon.svg";
-import { URL_Datenschutz, URL_Impressum } from "@/config/constants";
+import {
+  URL_Contact,
+  URL_Datenschutz,
+  URL_Impressum,
+  URL_Instagram,
+  URL_Mastodon,
+} from "@/config/constants";
+import { Button } from "@component-library/Button";
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
@@ -20,40 +27,45 @@ const Footer: React.FC = () => {
     <footer className="w-full bg-white shadow-inner ">
       <ul className="flex flex-col items-center md:flex-row md:justify-around">
         <li className="p-2">
-          <a className="link break-words p-2" href={URL_Impressum}>
-            {t("Footer.Footer.imprint")}
-          </a>
+          <Button
+            title={t("Footer.Footer.imprint")}
+            to={URL_Impressum}
+            variant="light"
+            extern
+          />
         </li>
         <li className="p-2">
-          <a className="link break-words p-2" href={URL_Datenschutz}>
-            {t("Footer.Footer.data-protection")}
-          </a>
+          <Button
+            title={t("Footer.Footer.data-protection")}
+            to={URL_Datenschutz}
+            variant="light"
+            extern
+          />
         </li>
         <li className="p-2">
-          <a
-            className="link break-words p-2"
-            href={t("Footer.Footer.contact")}
-            onClick={handleOnClickContact}
-          >
-            {t("Footer.Footer.contact")}
-          </a>
+          <Button
+            title={t("Footer.Footer.contact")}
+            to={URL_Contact}
+            variant="light"
+            extern
+          />
         </li>
-        <li className="flex flex-row items-center justify-center gap-4 p-2">
-          <a
-            className="link break-words"
-            href={t("Footer.Footer.contact")}
-            onClick={handleOnClickContact}
-          >
-            <InstagramIcon />
-          </a>
-          <a
-            className="link break-words"
-            href={t("Footer.Footer.contact")}
-            onClick={handleOnClickContact}
-          >
-            <MastodonIcon />
-          </a>
-          <span className="font-bold text-grau-400">© 2023 Semper-KI</span>
+        <li className="flex flex-row items-center justify-center p-2">
+          <Button
+            title={t("Footer.Footer.instagram")}
+            to={URL_Instagram}
+            variant="light"
+            extern
+            children={<InstagramIcon />}
+          />
+          <Button
+            title={t("Footer.Footer.mastodon")}
+            to={URL_Mastodon}
+            variant="light"
+            extern
+            children={<MastodonIcon />}
+          />
+          <span className="p-2 font-bold text-grau-400">© 2023 Semper-KI</span>
         </li>
       </ul>
     </footer>

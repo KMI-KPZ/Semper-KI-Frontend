@@ -183,7 +183,9 @@
     "Footer":{
       "imprint":"Impressum",
       "data-protection":"Datenschutzerklärung",
-      "contact":"Kontakt"
+      "contact":"Kontakt",
+      "instagram":"Instagram",
+      "mastodon":"Mastodon"
     }
   },
   "General":{
@@ -260,7 +262,7 @@
   },
   "Header":{
     "Header":{
-      "title":"Semper-KI",
+      "title":"SEMPER-KI",
       "button":{
         "close":"Menu Schließen",
         "open":"Menu Öffnen"

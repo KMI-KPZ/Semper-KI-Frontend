@@ -23,11 +23,7 @@
         font-weight: 700;
         font-style: italic;
         src: url(/assets/fonts/PTSans-BoldItalic.ttf) format("truetype");
-    }
-    .link {
-        @apply transition duration-500 ease-in-out hover:text-türkis text-grau-400 font-bold;
-        transition-timing-function: cubic-bezier(.645,.045,.355,1);
-    }
+}
     .bezier {
         transition-timing-function: cubic-bezier(.645,.045,.355,1);
     }

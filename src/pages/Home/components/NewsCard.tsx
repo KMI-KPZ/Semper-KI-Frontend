@@ -13,15 +13,25 @@ type NewsData = {
   link: string;
 };
 
+const newsData: NewsData[] = [
+  {
+    link: "https://news.google.com/",
+    text:
+      "Zugunglück in Chemiefabrik in Ludwigshafen die PVC-Folien, Polyester- und Polypropylen-Granulat herstellt.\n" +
+      "Konzern ist Hauptlieferant eines Herstellers von Blutentnahmesystemen.",
+    title: "Zugunglück in Chemiefabrik",
+  },
+];
+
 const HomeNewsCard: React.FC<Props> = (props) => {
   const { className } = props;
   const additionalClassNames = className ?? "";
   const { t } = useTranslation();
-  const newsList: NewsData[] = [];
+  const newsList: NewsData[] = newsData;
 
   return (
     <div
-      className={`${additionalClassNames} flex flex-col items-center justify-start gap-5 p-3 `}
+      className={`${additionalClassNames} flex flex-col items-center justify-start gap-3 overflow-auto p-3 `}
     >
       <Heading variant="h2">{t("Home.HomeNewsCard.header")}</Heading>
       <div className="w-full border-t-2" />
@@ -39,7 +49,7 @@ const HomeNewsCardItem: React.FC<NewsData> = (news) => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex w-full flex-col items-start justify-start gap-3 p-5">
+    <div className="flex w-full flex-col items-start justify-start gap-3 p-2">
       <Heading variant="h3" className="pl-5">
         {title}
       </Heading>

@@ -26,6 +26,7 @@ const HomeResourcesCard: React.FC<HomeResourcesProps> = (props) => {
       <div className="flex flex-row flex-wrap items-start justify-center">
         <div className="flex  w-1/2 flex-col items-center justify-center p-2">
           <Button
+            width="full"
             variant="secondary"
             to="/resources/printers"
             startIcon={<PrinterIcon />}
@@ -34,6 +35,7 @@ const HomeResourcesCard: React.FC<HomeResourcesProps> = (props) => {
         </div>
         <div className="flex w-1/2 flex-col items-center justify-center p-2">
           <Button
+            width="full"
             variant="secondary"
             to="/resources/materials"
             startIcon={<MetalIcon />}
@@ -42,21 +44,21 @@ const HomeResourcesCard: React.FC<HomeResourcesProps> = (props) => {
         </div>
         <div className="flex w-1/2 flex-col items-center justify-center p-2">
           <Button
+            width="full"
             variant="secondary"
             to="/resources/postprocessings"
             startIcon={<BrushIcon />}
             title={t("Home.HomeResourcesCard.link.postprocessing")}
           />
         </div>
-        <div className="flex w-1/2 flex-col items-center justify-center p-2">
-          <Button
-            startIcon={<HomeRepairServiceIcon />}
-            variant="secondary"
-            to="/resources"
-            title={t("Home.HomeResourcesCard.link.overview")}
-          />
-        </div>
       </div>
+      <Button
+        width="full"
+        startIcon={<HomeRepairServiceIcon />}
+        variant="primary"
+        to="/resources"
+        title={t("Home.HomeResourcesCard.link.overview")}
+      />
     </div>
   );
 };

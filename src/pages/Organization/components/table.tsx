@@ -103,11 +103,13 @@ const OrganizationtableRow: React.FC<{
           )
         ) : (
           <select onChange={handleOnChangeSelect}>
-            {allRoles?.map((_role, index) => (
-              <option key={index} value={_role.id}>
-                {_role.name}
-              </option>
-            ))}
+            {allRoles !== undefined && allRoles.length > 0
+              ? allRoles.map((_role, index) => (
+                  <option key={index} value={_role.id}>
+                    {_role.name}
+                  </option>
+                ))
+              : "none"}
           </select>
         )}
       </td>

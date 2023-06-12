@@ -340,6 +340,7 @@
         "status":"Status"
       },
       "button":{
+        "all-contracts":"Alle Aufträge",
         "all-orders":"Alle Bestellungen",
         "start-order":"Auftrag beginnen"
       }

@@ -135,7 +135,7 @@ const HomeGuideCard: React.FC<Props> = (props) => {
       </div>
       <div className="flex w-full flex-col items-center justify-center gap-3">
         <Divider />
-        <Button title={t("Home.HomeGuideCard.button.all")} />
+        <Button title={t("Home.HomeGuideCard.button.all")} to="/guide" />
       </div>
     </div>
   );

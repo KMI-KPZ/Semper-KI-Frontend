@@ -139,8 +139,12 @@ const HomeOrderCard: React.FC<Props> = (props) => {
       </LoadingSuspense>
       <Divider />
       <Button
-        to="/orders"
-        title={t("Home.HomeOrderCard.button.all-orders")}
+        to={userType === UserType.client ? "/orders" : "/contracts"}
+        title={t(
+          userType === UserType.client
+            ? "Home.HomeOrderCard.button.all-orders"
+            : "Home.HomeOrderCard.button.all-contracts"
+        )}
         startIcon={
           ordersCount !== undefined ? (
             <Badge count={ordersCount}>

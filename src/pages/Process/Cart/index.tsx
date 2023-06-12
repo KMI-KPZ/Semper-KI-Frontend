@@ -97,12 +97,6 @@ const Cart: React.FC<Props> = (props) => {
             </Heading>
           )}
         </section>
-        {showError === true ? (
-          <ErrorView
-            errors={errors}
-            itemName={t("AfterProcess.Cart.Cart.item", { count: errorCount })}
-          />
-        ) : null}
         <section className="flex w-full flex-col items-center justify-start gap-5 text-white md:flex-row md:justify-center">
           <Button
             onClick={handleOnClickEdit}
@@ -120,7 +114,13 @@ const Cart: React.FC<Props> = (props) => {
             endIcon={<ArrowForwardIcon />}
             title={t("AfterProcess.Cart.Cart.request")}
           />
-        </section>
+        </section>{" "}
+        {showError === true ? (
+          <ErrorView
+            errors={errors}
+            itemName={t("AfterProcess.Cart.Cart.item", { count: errorCount })}
+          />
+        ) : null}
       </div>
     </LoadingSuspense>
   );

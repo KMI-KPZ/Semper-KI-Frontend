@@ -82,7 +82,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
           case true:
             return "bg-türkis-800 hover:bg-grau-600 text-white hover:cursor-pointer";
           case false:
-            return "hover:bg-grau-300 bg-grau-200 text-white hover:cursor-default";
+            return "bg-grau-600 text-white hover:cursor-default";
         }
       case "secondary":
         switch (active) {

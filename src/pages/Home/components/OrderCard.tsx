@@ -13,6 +13,7 @@ import { UserType } from "@/hooks/useUser/types";
 import { OrderState, useOrders } from "@/pages/Orders/hooks/useOrders";
 import { Heading, Text } from "@component-library/Typography";
 import Table from "@/components/Table";
+import { Divider } from "@component-library/Divider";
 
 interface Props {
   className?: string;
@@ -34,6 +35,124 @@ const HomeOrderCard: React.FC<Props> = (props) => {
     userType === UserType.client || userType === UserType.manufacturer
   );
   const additionalClassNames = className ?? "";
+
+  const renderStartLink = () => (
+    <Link
+      to="/process/model"
+      className={`${additionalClassNames} flex flex-col items-center justify-center gap-3 p-3 duration-300 hover:bg-türkis-300`}
+    >
+      <LocalShippingIcon fontSize="large" />
+      <Heading variant="h2">
+        {t("Home.HomeOrderCard.button.start-order")}
+      </Heading>
+    </Link>
+  );
+
+  const renderHeader = () => (
+    <Heading variant="h2">{t("Home.HomeOrderCard.header")}</Heading>
+  );
+  const renderOrderControl = () => (
+    <div className="flex w-full flex-col items-center gap-2">
+      <Divider />
+      <Heading variant="h3">{t("Home.HomeOrderCard.order.header")}</Heading>
+      {userType === UserType.anonym
+        ? getBigOrderControl()
+        : getSmallOrderControl()}
+    </div>
+  );
+  const getBigOrderControl = () => (
+    <div className="flex w-full flex-col items-center justify-center gap-2">
+      <Button
+        to="/process/new"
+        startIcon={<AddIcon />}
+        title={t("Home.HomeOrderCard.order.new")}
+        variant="outline"
+        size="xl"
+      />
+      <Button
+        size="xl"
+        to="/process/model"
+        title={t("Home.HomeOrderCard.order.continue")}
+        startIcon={<PlayArrowIcon />}
+        variant="outline"
+      />
+      <Button
+        size="xl"
+        variant="outline"
+        to="/cart"
+        title={t("Home.HomeOrderCard.order.cart")}
+        startIcon={
+          cartCount !== undefined ? (
+            <Badge count={cartCount}>
+              <ShoppingCartIcon />
+            </Badge>
+          ) : (
+            <ShoppingCartIcon />
+          )
+        }
+      />
+    </div>
+  );
+  const getSmallOrderControl = () => (
+    <div className="flex w-full flex-col gap-3 md:w-fit md:flex-row">
+      <Button
+        to="/process/new"
+        title={t("Home.HomeOrderCard.order.new")}
+        children={<AddIcon />}
+      />
+      <Button
+        to="/process/model"
+        title={t("Home.HomeOrderCard.order.continue")}
+        children={<PlayArrowIcon />}
+      />
+      <Button
+        to="/cart"
+        title={t("Home.HomeOrderCard.order.cart")}
+        children={
+          cartCount !== undefined ? (
+            <Badge count={cartCount}>
+              <ShoppingCartIcon />
+            </Badge>
+          ) : (
+            <ShoppingCartIcon />
+          )
+        }
+      />
+    </div>
+  );
+  const renderOrders = () => (
+    <>
+      <Divider />
+      <Heading variant="h3">
+        {t(
+          userType === UserType.manufacturer
+            ? "Home.HomeOrderCard.contracts.header"
+            : "Home.HomeOrderCard.orders.header"
+        )}
+      </Heading>
+      <LoadingSuspense query={ordersQuery}>
+        {ordersQuery.data !== undefined && ordersQuery.data.length > 0 ? (
+          getOrderTable()
+        ) : (
+          <Text variant="body">{t("Home.HomeOrderCard.order.empty")}</Text>
+        )}
+      </LoadingSuspense>
+      <Divider />
+      <Button
+        to="/orders"
+        title={t("Home.HomeOrderCard.button.all-orders")}
+        startIcon={
+          ordersCount !== undefined ? (
+            <Badge count={ordersCount}>
+              <FileCopyIcon />
+            </Badge>
+          ) : (
+            <FileCopyIcon />
+          )
+        }
+      />
+    </>
+  );
 
   const getOrderTable = () => (
     <Table
@@ -63,148 +182,19 @@ const HomeOrderCard: React.FC<Props> = (props) => {
     />
   );
 
-  if (userType === UserType.manufacturer)
-    return (
-      <div
-        className={`${additionalClassNames}  flex flex-col items-center justify-between gap-5 p-3`}
-      >
-        <div className="flex h-full w-full flex-col items-center justify-start gap-5">
-          <Heading variant="h2">{t("Home.HomeOrderCard.header")}</Heading>
-          <div className="w-full border-t-2" />
-          <Heading variant="h3">
-            {t("Home.HomeOrderCard.contracts.header")}
-          </Heading>
-          <LoadingSuspense query={ordersQuery}>
-            {ordersQuery.data !== undefined && ordersQuery.data.length > 0 ? (
-              getOrderTable()
-            ) : (
-              <Text variant="body">{t("Home.HomeOrderCard.order.empty")}</Text>
-            )}
-          </LoadingSuspense>
-        </div>
-        <Button
-          to="/contracts"
-          title={t("Home.HomeOrderCard.button.all-orders")}
-          startIcon={
-            ordersCount !== undefined ? (
-              <Badge count={ordersCount}>
-                <FileCopyIcon />
-              </Badge>
-            ) : (
-              <FileCopyIcon />
-            )
-          }
-          children={t("Home.HomeOrderCard.button.all-orders")}
-        />
-      </div>
-    );
-  if (userType === UserType.client)
-    return (
-      <div
-        className={`${additionalClassNames}  flex flex-col items-center justify-between gap-3 p-3`}
-      >
-        <div className="flex h-full w-full flex-col items-center justify-start gap-5">
-          <Heading variant="h2">{t("Home.HomeOrderCard.header")}</Heading>
-          <div className="w-full border-t-2" />
-          <Heading variant="h3">{t("Home.HomeOrderCard.order.header")}</Heading>
-          <div className="flex w-full flex-col items-center justify-center gap-3 md:flex-row">
-            <Button
-              to="/process/new"
-              title={t("Home.HomeOrderCard.order.new")}
-              children={<AddIcon />}
-            />
-            <Button
-              to="/process/model"
-              title={t("Home.HomeOrderCard.order.continue")}
-              children={<PlayArrowIcon />}
-            />
-            <Button
-              to="/cart"
-              title={t("Home.HomeOrderCard.order.cart")}
-              children={
-                cartCount !== undefined ? (
-                  <Badge count={cartCount}>
-                    <ShoppingCartIcon />
-                  </Badge>
-                ) : (
-                  <ShoppingCartIcon />
-                )
-              }
-            />
-          </div>
-          <div className="w-full border-t-2" />
-          <Heading variant="h3">
-            {t("Home.HomeOrderCard.orders.header")}
-          </Heading>
-          <LoadingSuspense query={ordersQuery}>
-            {ordersQuery.data !== undefined && ordersQuery.data.length > 0 ? (
-              getOrderTable()
-            ) : (
-              <Text variant="body">{t("Home.HomeOrderCard.order.empty")}</Text>
-            )}
-          </LoadingSuspense>
-        </div>
-        <Button
-          to="/orders"
-          title={t("Home.HomeOrderCard.button.all-orders")}
-          startIcon={
-            ordersCount !== undefined ? (
-              <Badge count={ordersCount}>
-                <FileCopyIcon />
-              </Badge>
-            ) : (
-              <FileCopyIcon />
-            )
-          }
-        />
-      </div>
-    );
-  if (userType === UserType.anonym && cartCount !== undefined && cartCount > 0)
-    return (
-      <div
-        className={`${additionalClassNames} flex flex-col items-center justify-center gap-3 p-3`}
-      >
-        <Button
-          to="/process/new"
-          startIcon={<AddIcon />}
-          title={t("Home.HomeOrderCard.order.new")}
-          variant="outline"
-          size="xl"
-        />
-        <Button
-          size="xl"
-          to="/process/model"
-          title={t("Home.HomeOrderCard.order.continue")}
-          startIcon={<PlayArrowIcon />}
-          variant="outline"
-        />
-        <Button
-          size="xl"
-          variant="outline"
-          to="/cart"
-          title={t("Home.HomeOrderCard.order.cart")}
-          startIcon={
-            cartCount !== undefined ? (
-              <Badge count={cartCount}>
-                <ShoppingCartIcon />
-              </Badge>
-            ) : (
-              <ShoppingCartIcon />
-            )
-          }
-        />
-      </div>
-    );
+  if (
+    userType === UserType.anonym &&
+    (cartCount === undefined || cartCount === 0)
+  )
+    return renderStartLink();
   return (
-    <Link
-      to="/process/model"
-      className={`${additionalClassNames} flex flex-col items-center justify-center gap-3 p-3 duration-300 hover:bg-türkis-300`}
+    <div
+      className={`${additionalClassNames}  flex flex-col items-center justify-start gap-5 p-3`}
     >
-      <LocalShippingIcon fontSize="large" />
-      <Heading variant="h2">
-        {t("Home.HomeOrderCard.button.start-order")}
-      </Heading>
-    </Link>
+      {renderHeader()}
+      {userType !== UserType.manufacturer ? renderOrderControl() : null}
+      {userType !== UserType.anonym ? renderOrders() : null}
+    </div>
   );
 };
 

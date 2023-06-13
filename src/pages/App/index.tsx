@@ -25,6 +25,7 @@ import AdminUsers from "../Admin/Users";
 import { Error } from "../Error";
 import GuideRoutes from "../Guide";
 import { Home } from "../Home";
+import Imprint from "../Imprint";
 import LoginView from "../Login";
 import RedirectLogin from "../Login/Redirect";
 import Logout from "../Logout";
@@ -413,7 +414,7 @@ const App: React.FC = () => {
               element={
                 <ProcessView
                   isLoggedInResponse={isLoggedInResponse}
-                  guideAnswers={guideFilter}
+                  guideAnswers={guideFilter} 
                   selectedProgressItem={selectedProgressItem}
                 />
               }
@@ -437,6 +438,7 @@ const App: React.FC = () => {
               element={<Redirect link={URL_AboutUs} extern />}
             />
             <Route path="service/*" element={<ServiceRoutes />} />
+            <Route path="imprint" element={<Imprint/>}/>
             <Route path="*" element={<Error />} />
             {clientRoutes}
             {manufacturerRoutes}

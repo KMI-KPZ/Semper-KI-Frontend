@@ -87,7 +87,11 @@ const OrganizationTableRow: React.FC<OrganizationTableRowProps> = (props) => {
       <td>
         <div className="flex flex-row items-center justify-center gap-2">
           <div
-            title={t("Organization.Roles.components.tag.button.delete")}
+            title={t(
+              `Organization.Roles.components.tag.button.${
+                edit === true ? "safe" : "edit"
+              }`
+            )}
             onClick={handleOnClickEdit}
             className="flex items-center justify-center rounded-full p-1 hover:cursor-pointer hover:bg-orange"
           >

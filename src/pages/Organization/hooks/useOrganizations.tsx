@@ -24,6 +24,7 @@ interface useOrganizationsReturnProps {
     unknown
   >;
   assignRoleMutation: UseMutationResult<any, Error, AssignRoleProps, unknown>;
+  removeRoleMutation: UseMutationResult<any, Error, AssignRoleProps, unknown>;
   deleteUserMutation: UseMutationResult<any, Error, string, unknown>;
 }
 
@@ -237,6 +238,27 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
       queryClient.invalidateQueries(["organizations", "users"]);
     },
   });
+
+  const removeRoleMutation = useMutation<any, Error, AssignRoleProps>({
+    mutationFn: async (props) => {
+      const { email, roleID } = props;
+      return axiosCustom
+        .post(apiUrl, {
+          data: {
+            intent: "removeRole",
+            content: { email, roleID },
+          },
+        })
+        .then((response) => {
+          console.log("useOrganizations | removeRole ✅ |", response.data);
+          return response.data;
+        });
+    },
+    // onSuccess() {
+    //   queryClient.invalidateQueries(["organizations", "users"]);
+    // },
+  });
+
   const deleteUserMutation = useMutation<any, Error, string>({
     mutationFn: async (email) => {
       return axiosCustom
@@ -267,6 +289,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     deleteRoleMutation,
     setPermissionMutation,
     assignRoleMutation,
+    removeRoleMutation,
     deleteUserMutation,
   };
 };

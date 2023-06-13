@@ -324,7 +324,8 @@
         "new":"neuer Auftrag",
         "continue":"Auftrag fortsetzen",
         "cart":"Warenkorb",
-        "delete":"Warenkorb löschen"
+        "delete":"Warenkorb löschen",
+        "empty":"keine vorhandenen Bestellungen"
       },
       "orders":{
         "header":"Meine Bestellungen",
@@ -394,6 +395,12 @@
       "procedure": "Verfahren",
       "printer": "Drucker",
       "account": "Konto"
+    }
+  },
+  "Imprint":{
+    "header":"Impressum",
+    "disclaimer":{
+      "header":"Disclaimer – rechtliche Hinweise"
     }
   },
   "Login":{
@@ -829,8 +836,14 @@
         "created":"Erstellt am",
         "accessed":"letzter Zugegriff am",
         "actions":"Aktionen",
+        "empty":"keine Rollen angelegt",
         "error":{
           "empty":"keine Benutzer gefunden"
+        },
+        "button":{
+          "delete":"Löschen",
+          "edit":"Bearbeiten",
+          "safe":"Speichern"
         }
       },
       "invitation":{

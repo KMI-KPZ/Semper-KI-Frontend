@@ -67,12 +67,16 @@ const OrganizationtableRow: React.FC<{
   } = props;
   const { t } = useTranslation();
   const [edit, setEdit] = useState<boolean>(false);
-  const [role, setRole] = useState<RoleProps>(roles[0]);
-  const { assignRoleMutation, deleteUserMutation } = useOrganizations();
+  const [newRole, setNewRole] = useState<RoleProps>(roles[0]);
+  const { assignRoleMutation, removeRoleMutation, deleteUserMutation } =
+    useOrganizations();
 
   const handleOnClickEdit = () => {
-    if (edit === true && role !== undefined) {
-      assignRoleMutation.mutate({ email, roleID: role.id });
+    if (edit === true && newRole !== undefined) {
+      roles.forEach((role) => {
+        removeRoleMutation.mutate({ email, roleID: role.id });
+      });
+      assignRoleMutation.mutate({ email, roleID: newRole.id });
     }
     setEdit((prevState) => !prevState);
   };
@@ -81,9 +85,9 @@ const OrganizationtableRow: React.FC<{
   };
   const handleOnChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (allRoles !== undefined) {
-      const newRole = allRoles.find((_role) => _role.id === e.target.value);
-      if (newRole !== undefined) {
-        setRole(newRole);
+      const _newRole = allRoles.find((_role) => _role.id === e.target.value);
+      if (_newRole !== undefined) {
+        setNewRole(_newRole);
       }
     }
   };
@@ -96,20 +100,24 @@ const OrganizationtableRow: React.FC<{
       <td className="text-center">{email}</td>
       <td className="text-center">
         {edit === false ? (
-          role !== undefined ? (
-            role.name
+          newRole !== undefined ? (
+            newRole.name
           ) : (
-            "none"
+            "---"
           )
         ) : (
-          <select onChange={handleOnChangeSelect}>
-            {allRoles !== undefined && allRoles.length > 0
-              ? allRoles.map((_role, index) => (
-                  <option key={index} value={_role.id}>
-                    {_role.name}
-                  </option>
-                ))
-              : "none"}
+          <select onChange={handleOnChangeSelect} value={newRole.id}>
+            {allRoles !== undefined && allRoles.length > 0 ? (
+              allRoles.map((_role, index) => (
+                <option key={index} value={_role.id}>
+                  {_role.name}
+                </option>
+              ))
+            ) : (
+              <option value="empty" disabled>
+                {t("Organization.components.table.empty")}
+              </option>
+            )}
           </select>
         )}
       </td>
@@ -131,8 +139,8 @@ const OrganizationtableRow: React.FC<{
         />
         <Button
           onClick={handleOnClickDelete}
-          children={<DeleteForeverIcon />}
-          title={t("Organization.components.table.button.delete")}
+          children={<DeleteForeverIcon fontSize="small" />}
+          title={t("Organization.Roles.components.table.button.delete")}
         />
       </td>
     </tr>

@@ -10,7 +10,6 @@ import {
 } from "@/config/constants";
 import useCart from "@/hooks/useCart";
 import useMissedEvent from "@/hooks/useMissedEvent";
-import usePing from "@/hooks/usePing";
 import useUser from "@/hooks/useUser";
 import {
   OrderCollectionEvent,
@@ -98,7 +97,6 @@ const App: React.FC = () => {
   });
   const { cartQuery } = useCart();
   const queryClient = useQueryClient();
-  const { pingQuery } = usePing();
   const { t } = useTranslation();
 
   useEffect(() => {

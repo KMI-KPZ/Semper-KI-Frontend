@@ -49,7 +49,6 @@ import { RequestTest } from "../RequestTest";
 import ResoucesView from "../Resources";
 import ServiceRoutes from "../Service";
 import {
-  MagazinRoutes,
   PrivateAdminRoutes,
   PrivateClientRoutes,
   PrivateManufacturerRoutes,

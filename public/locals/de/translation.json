@@ -761,7 +761,21 @@
       "header":"Übersicht"
     },
     "Materials":{
-      "header":"Materialien"
+      "table":{
+        "header":"Materialien",
+        "name":"Name",
+        "actions":"Aktionen",
+        "button":{
+          "add":"Material Hinzufügen"
+        }
+      },
+      "form":{
+        "header":"Material",
+        "empty":"keine Materialien gefunden",
+        "button":{
+          "search":"Suchen"
+        }
+      }
     },
     "Printers":{
       "header":"3D-Drucker"

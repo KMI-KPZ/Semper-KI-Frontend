@@ -24,10 +24,10 @@ const ResoucesView: React.FC<ResoucesViewProps> = (props) => {
         <ResoucesMenu />
         <Routes>
           <Route index element={<ResourcesOverview />} />
-          <Route path="printers" element={<ResourcesPrinters />} />
-          <Route path="materials" element={<ResourcesMaterials />} />
+          <Route path="printers/*" element={<ResourcesPrinters />} />
+          <Route path="materials/*" element={<ResourcesMaterials />} />
           <Route
-            path="postprocessings"
+            path="postprocessings/*"
             element={<ResourcesPostProcessings />}
           />
         </Routes>

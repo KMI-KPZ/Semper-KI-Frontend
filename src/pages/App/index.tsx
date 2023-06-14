@@ -2,9 +2,15 @@ import Background from "@/components/Background";
 import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { URL_AboutUs } from "@/config/constants";
+import {
+  URL_AboutUs,
+  URL_Contact,
+  URL_Datenschutz,
+  URL_Impressum,
+} from "@/config/constants";
 import useCart from "@/hooks/useCart";
 import useMissedEvent from "@/hooks/useMissedEvent";
+import usePing from "@/hooks/usePing";
 import useUser from "@/hooks/useUser";
 import {
   OrderCollectionEvent,
@@ -25,13 +31,13 @@ import AdminUsers from "../Admin/Users";
 import { Error } from "../Error";
 import GuideRoutes from "../Guide";
 import { Home } from "../Home";
-import Imprint from "../Imprint";
 import LoginView from "../Login";
 import RedirectLogin from "../Login/Redirect";
 import Logout from "../Logout";
 import OrderCollectionOverview from "../Orders";
 import OrganizationView from "../Organization";
 import Portfolio from "../Portfolio";
+import Privacy from "../Legal/Privacy";
 import { IProcessItem, ProcessView } from "../Process";
 import Cart from "../Process/Cart";
 import Checkout from "../Process/Checkout";
@@ -43,11 +49,13 @@ import { RequestTest } from "../RequestTest";
 import ResoucesView from "../Resources";
 import ServiceRoutes from "../Service";
 import {
+  MagazinRoutes,
   PrivateAdminRoutes,
   PrivateClientRoutes,
   PrivateManufacturerRoutes,
   PrivateRoutes,
 } from "./components/PrivateRoutes";
+import Legal from "../Legal";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -91,6 +99,7 @@ const App: React.FC = () => {
   });
   const { cartQuery } = useCart();
   const queryClient = useQueryClient();
+  const { pingQuery } = usePing();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -414,7 +423,7 @@ const App: React.FC = () => {
               element={
                 <ProcessView
                   isLoggedInResponse={isLoggedInResponse}
-                  guideAnswers={guideFilter} 
+                  guideAnswers={guideFilter}
                   selectedProgressItem={selectedProgressItem}
                 />
               }
@@ -438,12 +447,12 @@ const App: React.FC = () => {
               element={<Redirect link={URL_AboutUs} extern />}
             />
             <Route path="service/*" element={<ServiceRoutes />} />
-            <Route path="imprint" element={<Imprint/>}/>
-            <Route path="*" element={<Error />} />
+            <Route path="legal/*" element={<Legal />}></Route>
             {clientRoutes}
             {manufacturerRoutes}
             {privateRoutes}
             {adminRoutes}
+            <Route path="*" element={<Error />} />
           </Routes>
         </main>
         <Footer />

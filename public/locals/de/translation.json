@@ -397,6 +397,12 @@
       "account": "Konto"
     }
   },
+  "Legal":{
+    "header":"Gesetzliches",
+    "imprint":"Impressum",
+    "privacy":"Datenschutzerklärung",
+    "contact":"Kontakt"
+  },
   "Imprint":{
     "header":"Impressum",
     "disclaimer":{

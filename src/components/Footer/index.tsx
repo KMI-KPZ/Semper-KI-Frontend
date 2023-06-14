@@ -11,6 +11,7 @@ import {
   URL_Mastodon,
 } from "@/config/constants";
 import { Button } from "@component-library/Button";
+import usePing from "@/hooks/usePing";
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
@@ -23,31 +24,41 @@ const Footer: React.FC = () => {
     navigate("/contact");
   };
 
+  const { pingQuery } = usePing();
+
+  const magazinIsUp = (): boolean => {
+    const up =
+      pingQuery.isFetched &&
+      pingQuery.data !== undefined &&
+      pingQuery.data.up === true;
+    return up;
+  };
+
   return (
     <footer className="w-full bg-white shadow-inner ">
       <ul className="flex flex-col items-center md:flex-row md:justify-around">
         <li className="p-2">
           <Button
-            title={t("Footer.Footer.imprint")}
-            to={URL_Impressum}
             variant="light"
-            extern
+            title={t("Legal.imprint")}
+            extern={magazinIsUp()}
+            to={magazinIsUp() ? URL_Impressum : "/legal/imprint"}
           />
         </li>
         <li className="p-2">
           <Button
-            title={t("Footer.Footer.data-protection")}
-            to={URL_Datenschutz}
             variant="light"
-            extern
+            title={t("Legal.privacy")}
+            extern={magazinIsUp()}
+            to={magazinIsUp() ? URL_Datenschutz : "/legal/privacy"}
           />
         </li>
         <li className="p-2">
           <Button
-            title={t("Footer.Footer.contact")}
-            to={URL_Contact}
             variant="light"
-            extern
+            title={t("Legal.contact")}
+            extern={magazinIsUp()}
+            to={magazinIsUp() ? URL_Contact : "/legal/contact"}
           />
         </li>
         <li className="flex flex-col items-center justify-center xs:flex-row xs:gap-2 xs:p-2">

@@ -63,7 +63,7 @@ const ResourcesMaterialsForm: React.FC<ResourcesMaterialsFormProps> = (
         {materialsQuery.data !== undefined && materialsQuery.data.length > 0 ? (
           <div className="flex w-full flex-col items-center justify-center gap-5">
             {materialsQuery.data.map((material, index) => (
-              <div key={index}>{material.name}</div>
+              <div key={index}>{material.title}</div>
             ))}
           </div>
         ) : (

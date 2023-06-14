@@ -50,7 +50,7 @@ const useOnto = (props: UseOntoProps): ReturnProps => {
         .get(`${import.meta.env.VITE_HTTP_API_URL}/public/onto/getMaterials/`)
         .then((res) => {
           console.log("useOnto| getMaterials ✅ |", res.data);
-          return res.data;
+          return res.data.materials;
         }),
   });
 

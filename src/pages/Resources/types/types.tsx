@@ -1,6 +1,7 @@
 export type OntoMaterialFlat = {
-  name: string;
+  title: string;
   URI: string;
+  propList: string[];
 };
 export type OntoPrinterFlat = {
   name: string;

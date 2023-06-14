@@ -59,11 +59,25 @@ const ResourcesMaterialsForm: React.FC<ResourcesMaterialsFormProps> = (
           title={t("Resources.Materials.form.button.search")}
         />
       </div>
-      <LoadingSuspense query={materialsQuery}>
+      <LoadingSuspense
+        query={materialsQuery}
+        errorText={t("Resources.Materials.form.empty")}
+      >
         {materialsQuery.data !== undefined && materialsQuery.data.length > 0 ? (
           <div className="flex w-full flex-col items-center justify-center gap-5">
             {materialsQuery.data.map((material, index) => (
-              <div key={index}>{material.title}</div>
+              <div
+                key={index}
+                className="flex w-full flex-row items-center justify-between"
+              >
+                <Text variant="body">{material.title}</Text>
+                {material.propList.map((name, index) => (
+                  <Text variant="body" key={index}>
+                    {name}
+                  </Text>
+                ))}
+                <Text variant="body">{material.URI}</Text>
+              </div>
             ))}
           </div>
         ) : (

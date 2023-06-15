@@ -13,16 +13,16 @@ interface ReturnProps {
 const usePing = (): ReturnProps => {
   const { axiosCustom } = useCustomAxios();
 
-  const sliceURLs = (urls: string[]): string[] => {
-    return urls.map((url) => url.slice(8, -1));
-  };
+  // const sliceURLs = (urls: string[]): string[] => {
+  //   return urls.map((url) => url.slice(8, -1));
+  // };
 
   const pingQuery = useQuery<{ up: boolean }, Error>({
     queryKey: ["ping"],
     queryFn: async () =>
       axiosCustom
         .post(`${import.meta.env.VITE_HTTP_API_URL}/public/isMagazineUp/`, {
-          urls: sliceURLs([URL_Impressum, URL_Datenschutz, URL_Contact]),
+          urls: [URL_Impressum, URL_Datenschutz, URL_Contact],
         })
         .then((res) => {
           console.log("usePing | isMagazineUp ✅ |", res.data);

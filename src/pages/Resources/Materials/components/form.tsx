@@ -5,9 +5,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
-import useOnto from "../../hooks/useOnto";
 import SearchIcon from "@mui/icons-material/Search";
 import { LoadingSuspense } from "@component-library/index";
+import useOntoMaterials from "../../hooks/useOntoMaterials";
 
 interface ResourcesMaterialsFormProps {}
 
@@ -17,7 +17,7 @@ const ResourcesMaterialsForm: React.FC<ResourcesMaterialsFormProps> = (
   const {} = props;
   const { t } = useTranslation();
   const [materialID, setMaterialID] = useState<string>("");
-  const { materialsQuery, materialQuery } = useOnto({});
+  const { materialsQuery, materialQuery } = useOntoMaterials({});
 
   const schema = yup
     .object({

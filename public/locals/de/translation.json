@@ -42,7 +42,8 @@
       "materials":"Materialien",
       "printers":"3D-Drucker",
       "postprocessings":"Nachbearbeitungen",
-      "resources":"Ressourcen"
+      "resources":"Ressourcen",
+      "add":"Hinzufügen"
     }
   },
   "enum":{
@@ -765,8 +766,10 @@
         "header":"Materialien",
         "name":"Name",
         "actions":"Aktionen",
+        "empty":"keine Materialien gefunden",
         "button":{
-          "add":"Material Hinzufügen"
+          "add":"Material Hinzufügen",
+          "delete":"Löschen"
         }
       },
       "form":{
@@ -778,7 +781,37 @@
       }
     },
     "Printers":{
-      "header":"3D-Drucker"
+      "table":{
+        "header":"3D-Drucker",
+        "name":"Name",
+        "actions":"Aktionen",
+        "empty":"keine Drucker gefunden",
+        "button":{
+          "add":"Drucker Hinzufügen",
+          "delete":"Löschen"
+        }
+      },
+      "form":{
+        "header":"Druckereingabe",
+        "empty":"keine Drucker gefunden",
+        "button":{
+          "search":"Suchen",
+          "new":"Neuen Drucker anlegen",
+          "edit":"Bearbeiten",
+          "safe":"Speichern",
+          "add":"Drucker Hinzufügen"
+        },
+        "yup":{
+          "name":"Name",
+          "boxSize":"Bauraum",
+          "boxSize_x":"Breite",
+          "boxSize_y":"Tiefe",
+          "boxSize_z":"Höhe",
+          "speed":"Druckgeschwindigkeit",
+          "amount":"Anzahl der Drucker",
+          "amountMaterials":"Anzahl der Materialien"
+        }
+      }
     },
     "PostProcessings":{
       "header":"Nachbearbeitungen"

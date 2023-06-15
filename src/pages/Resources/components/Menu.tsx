@@ -1,3 +1,4 @@
+import { Button } from "@component-library/Button";
 import { Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -11,20 +12,26 @@ const ResoucesMenu: React.FC<ResoucesMenuProps> = (props) => {
 
   return (
     <nav className="flex h-fit flex-col bg-white p-3">
-      <Link to="/resources">
-        <Text variant="body">{t("Resources.components.Menu.overview")}</Text>
-      </Link>
-      <Link to="/resources/printers">
-        <Text variant="body">{t("Resources.components.Menu.printers")}</Text>
-      </Link>
-      <Link to="/resources/materials">
-        <Text variant="body">{t("Resources.components.Menu.materials")}</Text>
-      </Link>
-      <Link to="/resources/postprocessings">
-        <Text variant="body">
-          {t("Resources.components.Menu.postProcessings")}
-        </Text>
-      </Link>
+      <Button
+        title={t("Resources.components.Menu.overview")}
+        to="/resources"
+        variant="text"
+      />
+      <Button
+        title={t("Resources.components.Menu.printers")}
+        to="/resources/printers"
+        variant="text"
+      />
+      <Button
+        title={t("Resources.components.Menu.materials")}
+        to="/resources/materials"
+        variant="text"
+      />
+      <Button
+        title={t("Resources.components.Menu.postProcessings")}
+        to="/resources/postprocessings"
+        variant="text"
+      />
     </nav>
   );
 };

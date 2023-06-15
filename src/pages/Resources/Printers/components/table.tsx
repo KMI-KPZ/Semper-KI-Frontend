@@ -4,56 +4,56 @@ import { Divider, LoadingSuspense } from "@component-library/index";
 import { Heading, Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useOntoMaterials from "../../hooks/useOntoMaterials";
+import useOntoPrinters from "../../hooks/useOntoPrinters";
 
-interface ResourcesMaterialsTableProps {}
+interface ResourcesPrintersTableProps {}
 
-const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
+const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
   props
 ) => {
   const {} = props;
   const { t } = useTranslation();
-  const { materialsQuery } = useOntoMaterials({});
+  const { printersQuery } = useOntoPrinters({});
 
   const handleOnClickDelete = (materialID: string) => {};
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
-      <Heading variant="h2">{t("Resources.Materials.table.header")}</Heading>
+      <Heading variant="h2">{t("Resources.Printers.table.header")}</Heading>
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-col">
         <Button
-          title={t("Resources.Materials.table.button.add")}
-          to="/resources/materials/add"
+          title={t("Resources.Printers.table.button.add")}
+          to="/resources/printers/add"
         />
       </div>
       <LoadingSuspense
-        query={materialsQuery}
-        errorText={t("Resources.Materials.table.empty")}
+        query={printersQuery}
+        errorText={t("Resources.Printers.table.empty")}
       >
         <Divider />
-        {materialsQuery.data !== undefined && materialsQuery.data.length > 0 ? (
+        {printersQuery.data !== undefined && printersQuery.data.length > 0 ? (
           <Table
             header={[
               <Heading variant="h3">
-                {t("Resources.Materials.table.name")}
+                {t("Resources.Printers.table.name")}
               </Heading>,
               <Heading variant="h3">
-                {t("Resources.Materials.table.actions")}
+                {t("Resources.Printers.table.actions")}
               </Heading>,
             ]}
-            rows={materialsQuery.data.map((material, index) => [
+            rows={printersQuery.data.map((material, index) => [
               <Text variant="body">{material.title}</Text>,
               <div className="flex flex-row items-center justify-center gap-5">
-                <Button title={t("Resources.Materials.table.button.delete")} />
+                <Button title={t("Resources.Printers.table.button.delete")} />
               </div>,
             ])}
           />
         ) : (
-          t("Resources.Materials.table.empty")
+          t("Resources.Printers.table.empty")
         )}
       </LoadingSuspense>
     </div>
   );
 };
 
-export default ResourcesMaterialsTable;
+export default ResourcesPrintersTable;

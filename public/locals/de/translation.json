@@ -799,10 +799,15 @@
           "new":"Neuen Drucker anlegen",
           "edit":"Bearbeiten",
           "safe":"Speichern",
-          "add":"Drucker Hinzufügen"
+          "add":"Drucker Hinzufügen",
+          "addValue":"Wert hinzufügen",
+          "removeValue":"Wert entfernen",
+          "addProperty":"Eigenschaft hinzufügen",
+          "removeProperty":"Eigenschaft entfernen"
         },
         "yup":{
           "name":"Name",
+          "value":"Wert",
           "boxSize":"Bauraum",
           "boxSize_x":"Breite",
           "boxSize_y":"Tiefe",

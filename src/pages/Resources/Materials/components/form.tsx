@@ -71,11 +71,6 @@ const ResourcesMaterialsForm: React.FC<ResourcesMaterialsFormProps> = (
                 className="flex w-full flex-row items-center justify-between"
               >
                 <Text variant="body">{material.title}</Text>
-                {material.propList.map((name, index) => (
-                  <Text variant="body" key={index}>
-                    {name}
-                  </Text>
-                ))}
                 <Text variant="body">{material.URI}</Text>
               </div>
             ))}

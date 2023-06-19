@@ -75,7 +75,7 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
   );
 
   return (
-    <form className="relative z-10 flex w-full flex-col items-center justify-center md:flex-row">
+    <div className="relative z-10 flex w-full flex-col items-center justify-center md:flex-row">
       <input
         value={printerName}
         onFocus={handleOnFocusInputName}
@@ -85,7 +85,7 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
         className="w-full bg-slate-100 px-5 py-2 "
       />
       {showDropdown ? renderDropdown() : null}
-    </form>
+    </div>
   );
 };
 

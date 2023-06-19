@@ -101,6 +101,8 @@ const App: React.FC = () => {
 
   useEffect(() => {
     document.body.style.overflowY = stopScroll === true ? "hidden" : "scroll";
+    document.body.style.scrollbarGutter = "stable";
+    // document.body.style.paddingRight = stopScroll === true ? "17px" : "";
   }, [stopScroll]);
 
   useEffect(() => {
@@ -335,6 +337,7 @@ const App: React.FC = () => {
       <Route path="order" element={<AdminOrders />} />
     </Route>
   );
+
   const clientRoutes = (
     <Route element={<PrivateClientRoutes user={user} />}>
       <Route path="manufacturer" element={<ManufacturerView />} />
@@ -346,6 +349,7 @@ const App: React.FC = () => {
       <Route path="assignments" element={<Error text="assignments" />} />
     </Route>
   );
+
   const manufacturerRoutes = (
     <Route element={<PrivateManufacturerRoutes user={user} />}>
       <Route path="proceedings" element={<Error text="proceedings" />} />

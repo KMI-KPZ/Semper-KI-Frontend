@@ -794,6 +794,8 @@
       "form":{
         "header":"Druckereingabe",
         "empty":"keine Drucker gefunden",
+        "emptyProps":"keine Eigenschaften angelegt",
+        "emptyValue":"keine Werte angelegt",
         "button":{
           "search":"Suchen",
           "new":"Neuen Drucker anlegen",
@@ -803,10 +805,12 @@
           "addValue":"Wert hinzufügen",
           "removeValue":"Wert entfernen",
           "addProperty":"Eigenschaft hinzufügen",
-          "removeProperty":"Eigenschaft entfernen"
+          "removeProperty":"Eigenschaft entfernen",
+          "reset":"Zurücksetzen"
         },
         "yup":{
           "name":"Name",
+          "propName":"Eigenschaft",
           "value":"Wert",
           "boxSize":"Bauraum",
           "boxSize_x":"Breite",

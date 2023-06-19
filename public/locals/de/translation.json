@@ -790,6 +790,9 @@
           "add":"Drucker Hinzufügen",
           "delete":"Löschen"
         }
+      }, 
+      "view":{
+        "name":"Druckername"
       },
       "form":{
         "header":"Druckereingabe",
@@ -806,11 +809,14 @@
           "removeValue":"Wert entfernen",
           "addProperty":"Eigenschaft hinzufügen",
           "removeProperty":"Eigenschaft entfernen",
-          "reset":"Zurücksetzen"
+          "reset":"Zurücksetzen",
+          "close":"Schließen"
         },
         "yup":{
           "name":"Name",
           "propName":"Eigenschaft",
+          "propNamerequired":"Eigenschaft benötigt",
+          "propValuerequired":"Wert benötigt",
           "value":"Wert",
           "boxSize":"Bauraum",
           "boxSize_x":"Breite",

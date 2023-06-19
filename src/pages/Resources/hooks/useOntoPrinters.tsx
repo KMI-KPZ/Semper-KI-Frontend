@@ -1,10 +1,25 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import {
+  useMutation,
+  UseMutationResult,
+  useQuery,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import useCustomAxios from "@/hooks/useCustomAxios";
-import { OntoPrinter, OntoPrinterFlat } from "../types/types";
+import {
+  OntoPrinter,
+  OntoPrinterFlat,
+  OntoPrinterProperty,
+} from "../types/types";
 
 interface ReturnProps {
   printersQuery: UseQueryResult<OntoPrinterFlat[], Error>;
   printerQuery: UseQueryResult<OntoPrinter, Error>;
+  printerMutation: UseMutationResult<
+    OntoPrinterProperty[],
+    Error,
+    string,
+    unknown
+  >;
 }
 
 type UseOntoProps = {
@@ -40,7 +55,26 @@ const useOntoPrinters = (props: UseOntoProps): ReturnProps => {
     enabled: printerID !== "",
   });
 
-  return { printersQuery, printerQuery };
+  const printerMutation = useMutation<OntoPrinterProperty[], Error, string>({
+    mutationFn: async (printerID: string) =>
+      axiosCustom
+        .post(`${import.meta.env.VITE_HTTP_API_URL}/public/onto/getPrinter/`, {
+          printer: printerID,
+        })
+        .then((res) => {
+          // console.log("useOnto| getPrinter ✅ |", printerID, res.data);
+          return res.data.properties.flatMap((object: Object) => {
+            if (typeof object === "string") return { name: object };
+            console.log("object", Object.keys(object), Object.values(object));
+            return {
+              name: "Eigneschnaft",
+              values: ["nischt", "good"],
+            };
+          });
+        }),
+  });
+
+  return { printersQuery, printerQuery, printerMutation };
 };
 
 export default useOntoPrinters;

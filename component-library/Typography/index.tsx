@@ -62,7 +62,14 @@ const Heading: React.FC<PropsWithChildren<HeadingProps>> = ({
 };
 
 type TextProps = {
-  variant: "body" | "strong" | "small" | "button-text" | "quote" | "custom";
+  variant:
+    | "body"
+    | "strong"
+    | "small"
+    | "button-text"
+    | "quote"
+    | "custom"
+    | "error";
   className?: string;
 };
 
@@ -77,6 +84,14 @@ const Text: React.FC<PropsWithChildren<TextProps>> = ({
       return (
         <span
           className={`font-ptsans text-base font-normal  ${additionalClassNames}`}
+        >
+          {children}
+        </span>
+      );
+    case "error":
+      return (
+        <span
+          className={`font-ptsans text-base font-normal text-red-500 ${additionalClassNames}`}
         >
           {children}
         </span>

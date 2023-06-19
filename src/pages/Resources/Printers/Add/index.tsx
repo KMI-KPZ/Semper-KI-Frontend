@@ -13,6 +13,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import ReplayIcon from "@mui/icons-material/Replay";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import CheckIcon from "@mui/icons-material/Check";
+import ResourcesPrintersAddPreView from "./components/preView";
 
 interface ResourcesPrintersAddProps {}
 
@@ -20,10 +21,8 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const [printerID, setPrinterID] = useState<string>("");
-  const { printersQuery } = useOntoPrinters({
-    printerID,
-  });
-  const [editPrinter, setEditPrinter] = useState<boolean>(false);
+  const { printerMutation } = useOntoPrinters({});
+  const [editPrinter, setEditPrinter] = useState<boolean>(true);
   const [newPrinter, setNewPrinter] = useState<boolean>(false);
 
   const schema = yup
@@ -35,8 +34,10 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
       ),
       properties: yup.array().of(
         yup.object().shape({
-          name: yup.string().required(),
-          values: yup.array().of(yup.string()).required(),
+          name: yup
+            .string()
+            .required(t("Resources.Printers.form.yup.propNamerequired")),
+          values: yup.array().of(yup.string().required()).required(),
         })
       ),
     })
@@ -52,23 +53,34 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<FormData>({ resolver: yupResolver(schema), mode: "onChange" });
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
+    mode: "onChange",
+  });
   const { fields, append, remove, update } = useFieldArray({
     control,
     name: "properties",
   });
-
   const onSubmit = (data: FormData) => {
     setEditPrinter(false);
     console.log("onSubmitInvite", data);
   };
-
-  const setPrinter = (name: string, uri?: string) => {
-    if (uri !== undefined) setPrinterID(uri);
-    setValue("printerName", name);
-    setEditPrinter(false);
+  const selectPrinter = (uri?: string) => {
+    if (uri !== undefined) {
+      printerMutation.mutate(uri, {
+        onSuccess(data, variables, context) {
+          setPrinterID(uri);
+          setValue("properties", data);
+        },
+      });
+      setEditPrinter(false);
+    } else {
+      setEditPrinter(true);
+    }
   };
-
+  const setPrinterName = (name: string) => {
+    setValue("printerName", name);
+  };
   const handleOnClickButtonEdit = () => {
     setEditPrinter(true);
   };
@@ -104,25 +116,47 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
   const handleOnClickButtonReset = () => {
     reset();
     remove();
+    setEditPrinter(true);
+  };
+  const getErrorMessage = (propertyIndex: number) => {
+    const propertiesError = errors.properties;
+    const propertyError =
+      errors.properties !== undefined
+        ? errors.properties[propertyIndex]
+        : undefined;
+    const propertyNameError =
+      propertyError !== undefined ? propertyError.name : undefined;
+    return propertyNameError !== undefined &&
+      propertyNameError.message !== undefined ? (
+      <Text variant="error">{propertyNameError.message}</Text>
+    ) : null;
   };
 
   const renderValueForm = () => {
     return fields !== undefined && fields.length > 0 ? (
       fields.map((prop, propertyIndex) => (
         <div
-          className="flex w-full flex-col items-start justify-center gap-5 px-10 md:flex-row"
+          className="flex w-full flex-col items-start justify-center gap-5 md:flex-row"
           key={prop.id}
         >
-          <input
-            placeholder={t("Resources.Printers.form.yup.propName") + "..."}
-            {...register(`properties.${propertyIndex}.name`)}
-            className="w-full bg-slate-100 px-5 py-2 "
-          />
-          <Button
-            children={<RemoveIcon />}
-            title={t("Resources.Printers.form.button.removeProperty")}
-            onClick={() => handleOnClickButtonRemoveProperty(propertyIndex)}
-          />
+          <div className="flex w-full flex-col items-center justify-start gap-2">
+            <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
+              <Text variant="body">
+                {t("Resources.Printers.form.yup.propName")}
+              </Text>
+              <input
+                placeholder={t("Resources.Printers.form.yup.propName") + "..."}
+                {...register(`properties.${propertyIndex}.name`)}
+                className="w-full bg-slate-100 px-5 py-2 "
+              />
+              <Button
+                children={<RemoveIcon />}
+                title={t("Resources.Printers.form.button.removeProperty")}
+                onClick={() => handleOnClickButtonRemoveProperty(propertyIndex)}
+              />
+            </div>
+            {getErrorMessage(propertyIndex)}
+          </div>
           <div className="flex w-full flex-col items-center justify-center gap-3">
             {watch(`properties.${propertyIndex}.values`) !== undefined ? (
               watch(`properties.${propertyIndex}.values`).map(
@@ -131,6 +165,9 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
                     key={valueIndex}
                     className="flex w-full flex-row items-center justify-center gap-3"
                   >
+                    <Text variant="body">
+                      {t("Resources.Printers.form.yup.value")}
+                    </Text>
                     <input
                       placeholder={
                         t("Resources.Printers.form.yup.value") + "..."
@@ -171,37 +208,32 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
     );
   };
 
-  const renderValueView = () => {
-    return fields !== undefined && fields.length > 0 ? (
-      fields.map((prop, propertyIndex) => (
-        <div
-          className="flex w-full flex-col items-start justify-center gap-5 px-10 md:flex-row"
-          key={propertyIndex}
-        >
-          <Text variant="body">{prop.name === "" ? "---" : prop.name}</Text>
-          <div className="flex flex-col items-start justify-start gap-2">
-            {prop.values.map((value, index) => (
-              <Text key={index} variant="body">
-                {value === "" ? "---" : value}
-              </Text>
-            ))}
-          </div>
-        </div>
-      ))
-    ) : (
-      <Text variant="body">{t("Resources.Printers.form.emptyProps")}</Text>
-    );
-  };
-
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5">
+    <div className="flex w-full flex-col items-center justify-center gap-5 md:p-5">
       <Heading variant="h2">{t("Resources.Printers.form.header")}</Heading>
       <form className="flex w-full flex-col items-center justify-center gap-5">
-        <ResourcesPrintersAddSearch
-          setPrinter={setPrinter}
-          printerName={watch("printerName")}
-        />
-        {editPrinter ? renderValueForm() : renderValueView()}
+        {editPrinter ? (
+          <>
+            <ResourcesPrintersAddSearch
+              selectPrinter={selectPrinter}
+              setPrinterName={setPrinterName}
+              printerName={watch("printerName")}
+              error={errors.printerName}
+            />
+            {renderValueForm()}
+            <Button
+              children={<AddIcon />}
+              title={t("Resources.Printers.form.button.addProperty")}
+              onClick={handleOnClickButtonAddProperty}
+            />
+          </>
+        ) : (
+          <ResourcesPrintersAddPreView
+            printerName={getValues("printerName")}
+            properties={watch("properties")}
+          />
+        )}
+
         <div className="flex w-full flex-col items-center justify-center gap-5 px-10 md:flex-row">
           <Button
             startIcon={<ReplayIcon />}
@@ -209,18 +241,11 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
             onClick={handleOnClickButtonReset}
           />
           {editPrinter ? (
-            <>
-              <Button
-                startIcon={<AddIcon />}
-                title={t("Resources.Printers.form.button.addProperty")}
-                onClick={handleOnClickButtonAddProperty}
-              />
-              <Button
-                startIcon={<CheckIcon />}
-                title={t("Resources.Printers.form.button.safe")}
-                onClick={handleOnClickButtonSafe}
-              />
-            </>
+            <Button
+              startIcon={<CheckIcon />}
+              title={t("Resources.Printers.form.button.safe")}
+              onClick={handleOnClickButtonSafe}
+            />
           ) : (
             <Button
               startIcon={<EditIcon />}

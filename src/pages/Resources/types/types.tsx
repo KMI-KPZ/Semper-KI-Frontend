@@ -15,6 +15,6 @@ export type OntoPrinter = {
   properties: OntoPrinterProperty[];
 };
 export type OntoPrinterProperty = {
-  title: string;
+  name: string;
   values: string[];
 };

@@ -3,7 +3,7 @@ import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
-import ResoucesMenu from "./components/Menu";
+import ResourcesMenu from "./components/Menu";
 import ResourcesMaterials from "./Materials";
 import ResourcesOverview from "./Overview";
 import ResourcesPostProcessings from "./PostProcessings";
@@ -21,7 +21,7 @@ const ResoucesView: React.FC<ResoucesViewProps> = (props) => {
         <Heading variant="h1">{t("Resources.header")}</Heading>
       </PageHeader>
       <div className="flex w-full flex-col gap-5 md:flex-row">
-        <ResoucesMenu />
+        <ResourcesMenu />
         <Routes>
           <Route index element={<ResourcesOverview />} />
           <Route path="printers/*" element={<ResourcesPrinters />} />

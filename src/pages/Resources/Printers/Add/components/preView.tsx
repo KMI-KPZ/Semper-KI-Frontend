@@ -20,6 +20,7 @@ const ResourcesPrintersAddPreView: React.FC<
       <Heading variant="h2">
         {`${t("Resources.Printers.view.name")} : ${printerName}`}
       </Heading>
+      <Heading variant="h3">{t("Resources.Printers.view.properties")}</Heading>
       {properties !== undefined ? (
         properties.map((prop, propertyIndex) => (
           <div

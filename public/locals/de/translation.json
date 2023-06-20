@@ -792,7 +792,8 @@
         }
       }, 
       "view":{
-        "name":"Druckername"
+        "name":"Druckername",
+        "properties":"Eigenschaften"
       },
       "form":{
         "header":"Druckereingabe",

@@ -1,39 +1,58 @@
 import { Button } from "@component-library/Button";
-import { Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-interface ResoucesMenuProps {}
+interface ResourcesMenuProps {}
 
-const ResoucesMenu: React.FC<ResoucesMenuProps> = (props) => {
+type ResourcesMenuItem = {
+  title: string;
+  to: string;
+};
+
+const ResourcesMenu: React.FC<ResourcesMenuProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
+  const { pathname } = useLocation();
+
+  const resourcesMenuItems: ResourcesMenuItem[] = [
+    {
+      title: t("Resources.components.Menu.overview"),
+      to: "/resources",
+    },
+    {
+      title: t("Resources.components.Menu.printers"),
+      to: "/resources/printers",
+    },
+    {
+      title: t("Resources.components.Menu.materials"),
+      to: "/resources/materials",
+    },
+    {
+      title: t("Resources.components.Menu.postProcessings"),
+      to: "/resources/postprocessings",
+    },
+  ];
+
+  const isActive = (to: string) => {
+    if (to === "/resources") return to === pathname;
+    return pathname.includes(to);
+  };
 
   return (
     <nav className="flex h-fit flex-col bg-white p-3">
-      <Button
-        title={t("Resources.components.Menu.overview")}
-        to="/resources"
-        variant="text"
-      />
-      <Button
-        title={t("Resources.components.Menu.printers")}
-        to="/resources/printers"
-        variant="text"
-      />
-      <Button
-        title={t("Resources.components.Menu.materials")}
-        to="/resources/materials"
-        variant="text"
-      />
-      <Button
-        title={t("Resources.components.Menu.postProcessings")}
-        to="/resources/postprocessings"
-        variant="text"
-      />
+      {resourcesMenuItems.map((resourcesMenuItem, index) => (
+        <Button
+          key={index}
+          title={`${isActive(resourcesMenuItem.to) ? ">" : ""} ${
+            resourcesMenuItem.title
+          }`}
+          to={resourcesMenuItem.to}
+          variant={isActive(resourcesMenuItem.to) ? "light" : "text"}
+        />
+      ))}
     </nav>
   );
 };
 
-export default ResoucesMenu;
+export default ResourcesMenu;

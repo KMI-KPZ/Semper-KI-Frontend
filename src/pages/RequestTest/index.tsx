@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button } from "@component-library/Button";
-import { useWebsocket } from "@/hooks/useWebsocket";
 import { User } from "@/hooks/useUser/types";
 import { Heading } from "@component-library/Typography";
+import { useWebsocket } from "../App/hooks/useWebsocket";
 
 interface Props {
   user: User | undefined;

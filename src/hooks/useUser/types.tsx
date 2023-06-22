@@ -24,13 +24,38 @@ export interface Address {
   zipcode: string;
 }
 
-export interface OrderCollectionEvent {
-  orderCollectionID: string;
-  orders: OrderEvent[];
+export type EventType = "orderEvent" | "orgaEvent";
+export interface Event {
+  eventType: EventType;
 }
 
-export interface OrderEvent {
+export interface OrderEvent extends Event {
+  eventType: "orderEvent";
+  orderCollectionID: string;
+  orders: OrderEventItem[];
+}
+
+export interface OrderEventItem {
   orderID: string;
   status?: number;
   messages?: number;
+}
+
+export interface OrgaEvent extends Event {
+  eventType: "orgaEvent";
+  orgaName: string;
+}
+
+export interface DeleteEvent {
+  eventType: EventType;
+}
+
+export interface DeleteOrderEvent extends DeleteEvent {
+  eventType: "orderEvent";
+  orderCollectionID: string;
+  orderID: string;
+  type: "message" | "status";
+}
+export interface DeleteOrgaEvent extends DeleteEvent {
+  eventType: "orgaEvent";
 }

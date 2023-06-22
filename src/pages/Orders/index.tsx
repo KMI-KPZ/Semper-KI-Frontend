@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { AppContext } from "../App";
 import { LoadingSuspense } from "@component-library/Loading";
 import { IOrderCollection, useOrders } from "./hooks/useOrders";
-import { OrderCollectionEvent, UserType } from "@/hooks/useUser/types";
+import { OrderEvent, UserType } from "@/hooks/useUser/types";
 import OrderCollection from "./components/OrderCollection";
 import { Heading } from "@component-library/Typography";
 
@@ -34,13 +34,17 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
       );
   }, [ordersQuery.data]);
 
-  const getOrderCollectionEventByID = (
+  const getOrderEventByID = (
     orderCollectionID: string
-  ): OrderCollectionEvent | undefined => {
+  ): OrderEvent | undefined => {
     if (missedEvents === undefined || missedEvents.length < 1) return undefined;
-    return missedEvents.find(
-      (orderEvent) => orderEvent.orderCollectionID === orderCollectionID
-    );
+    const orderEvent = missedEvents
+      .filter((event) => event.eventType === "orderEvent")
+      .find((_orderEvent) => {
+        const orderEvent = _orderEvent as OrderEvent;
+        return orderEvent.orderCollectionID === orderCollectionID;
+      });
+    return orderEvent as OrderEvent;
   };
 
   return (
@@ -66,9 +70,7 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
                     userType={userType}
                     isOpen={state[index]}
                     toggleOpen={toggleOpen}
-                    orderCollectionEvent={getOrderCollectionEventByID(
-                      orderCollection.id
-                    )}
+                    event={getOrderEventByID(orderCollection.id)}
                     key={index}
                   />
                 )

@@ -9,7 +9,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { NavigationItemData } from "@/data/navigation";
 import LogoURL from "@images/logo192.png";
 import { AppContext } from "@/pages/App";
-import { OrderCollectionEvent, UserType } from "@/hooks/useUser/types";
+import { Event, OrderEvent, UserType } from "@/hooks/useUser/types";
 import { Heading, Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
 
@@ -48,7 +48,7 @@ const languages: Language[] = [
 interface Props {
   isLoggedIn: boolean;
   userType: UserType;
-  events?: OrderCollectionEvent[];
+  events?: Event[];
   cartCount: number;
 }
 
@@ -107,14 +107,17 @@ export const Header: React.FC<Props> = (props) => {
   const getChangeCount = (): number | undefined => {
     if (events === undefined) return undefined;
     let count = 0;
-    events.forEach((orderCollectionEvent) => {
-      orderCollectionEvent.orders.forEach((orderEvent) => {
-        if (orderEvent.messages !== undefined && orderEvent.messages > 0)
-          count += orderEvent.messages;
-        if (orderEvent.status !== undefined && orderEvent.status > 0)
-          count += orderEvent.status;
+    events
+      .filter((event) => event.eventType === "orderEvent")
+      .forEach((_orderEvent) => {
+        const orderEvent = _orderEvent as OrderEvent;
+        orderEvent.orders.forEach((orderEvent) => {
+          if (orderEvent.messages !== undefined && orderEvent.messages > 0)
+            count += orderEvent.messages;
+          if (orderEvent.status !== undefined && orderEvent.status > 0)
+            count += orderEvent.status;
+        });
       });
-    });
     return count;
   };
   const count = getChangeCount();

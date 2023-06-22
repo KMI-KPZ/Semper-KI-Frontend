@@ -13,7 +13,13 @@ import { Badge } from "@component-library/Badge";
 import OrderFileView from "./FileView";
 import PopUp from "@/components/PopUp";
 import { IOrder, OrderState, useOrders } from "../hooks/useOrders";
-import { OrderEvent, UserType } from "@/hooks/useUser/types";
+import {
+  DeleteOrderEvent,
+  Event,
+  OrderEvent,
+  OrderEventItem,
+  UserType,
+} from "@/hooks/useUser/types";
 import { AppContext } from "@/pages/App";
 import { getModelURI } from "@/services/utils";
 import { Heading } from "@component-library/Typography";
@@ -22,7 +28,7 @@ interface Props {
   order: IOrder;
   orderCollectionID: string;
   userType: UserType;
-  orderEvent?: OrderEvent;
+  orderEvent?: OrderEventItem;
 }
 
 interface State {
@@ -41,13 +47,23 @@ const OrderView: React.FC<Props> = (props) => {
   const { deleteOrder, updateOrder } = useOrders();
   const { t } = useTranslation();
 
+  const getDeleteOrderEvent = (type: "status" | "message"): Event => {
+    const deleteOrderEvent: DeleteOrderEvent = {
+      eventType: "orderEvent",
+      orderCollectionID: orderCollectionID,
+      orderID: order.id,
+      type: type,
+    };
+    return deleteOrderEvent as Event;
+  };
+
   useEffect(() => {
-    deleteEvent(orderCollectionID, order.id, "status");
-    if (chatOpen) deleteEvent(orderCollectionID, order.id, "message");
+    deleteEvent(getDeleteOrderEvent("status"));
+    if (chatOpen) deleteEvent(getDeleteOrderEvent("message"));
   }, [order]);
 
   const handleOnClickButtonChat = () => {
-    deleteEvent(orderCollectionID, order.id, "message");
+    deleteEvent(getDeleteOrderEvent("message"));
     setState((prevState) => ({ ...prevState, chatOpen: true }));
   };
   const handleOnOutsideClickChat = () => {

@@ -132,3 +132,26 @@ export const getStatusByIndex = (process: IProcessItem): EProcessStatusType => {
   if (process.postProcessings === undefined) return EProcessStatusType.missing;
   return EProcessStatusType.ok;
 };
+
+export const splitFindArray = <T,>(
+  array: T[],
+  conditionFunction: (event: T) => boolean
+): {
+  otherArray: T[];
+  item: T | undefined;
+} => {
+  const otherArray = array.filter((item) => !conditionFunction(item));
+  const item = array.find((item) => conditionFunction(item));
+  return { otherArray, item };
+};
+export const splitArray = <T,>(
+  array: T[],
+  conditionFunction: (event: T) => boolean
+): {
+  arrayTrue: T[];
+  arrayFalse: T[];
+} => {
+  const arrayTrue = array.filter((item) => conditionFunction(item));
+  const arrayFalse = array.filter((item) => !conditionFunction(item));
+  return { arrayTrue, arrayFalse };
+};

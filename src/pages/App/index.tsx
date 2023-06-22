@@ -14,7 +14,7 @@ import {
   PrivateManufacturerRoutes,
   PrivateRoutes,
 } from "./components/PrivateRoutes";
-import { OrderCollectionEvent, User, UserType } from "@/hooks/useUser/types";
+import { DeleteEvent, Event, User, UserType } from "@/hooks/useUser/types";
 import useCart from "@/hooks/useCart";
 import useUser from "@/hooks/useUser";
 import Background from "@/components/Background";
@@ -44,7 +44,7 @@ export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
   stopScroll: boolean;
   guideFilter: IFilterItem[];
-  missedEvents: OrderCollectionEvent[];
+  missedEvents: Event[];
 };
 
 export type AppContext = {
@@ -52,11 +52,7 @@ export type AppContext = {
   cart: IProcessItem[];
   appState: AppState;
   setAppState: React.Dispatch<React.SetStateAction<AppState>>;
-  deleteEvent(
-    orderCollectionID: string,
-    orderID: string,
-    type: "message" | "status"
-  ): void;
+  deleteEvent(event: DeleteEvent): void;
 };
 
 const initialAppState: AppState = {

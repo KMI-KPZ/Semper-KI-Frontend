@@ -5,14 +5,14 @@ import HomePortfolioCard from "./components/PortfolioCard";
 import HomeMagazinCard from "./components/MagazinCard";
 import HomeNewsCard from "./components/NewsCard";
 import HomeImgCard from "./components/ImgCard";
-import { OrderCollectionEvent, UserType } from "@/hooks/useUser/types";
+import { Event, OrderEvent, UserType } from "@/hooks/useUser/types";
 import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import HomeResourcesCard from "./components/ResourcesCard";
 
 interface Props {
   userType: UserType;
-  events?: OrderCollectionEvent[];
+  events?: Event[];
   cartCount: number;
 }
 
@@ -30,14 +30,17 @@ export const Home: React.FC<Props> = (props) => {
   const getChangeCount = (): number | undefined => {
     if (events === undefined) return undefined;
     let count = 0;
-    events.forEach((orderCollectionEvent) => {
-      orderCollectionEvent.orders.forEach((orderEvent) => {
-        if (orderEvent.messages !== undefined && orderEvent.messages > 0)
-          count += orderEvent.messages;
-        if (orderEvent.status !== undefined && orderEvent.status > 0)
-          count += orderEvent.status;
+    events
+      .filter((event) => event.eventType === "orderEvent")
+      .forEach((_orderEvent) => {
+        const orderEvent = _orderEvent as OrderEvent;
+        orderEvent.orders.forEach((orderEvent) => {
+          if (orderEvent.messages !== undefined && orderEvent.messages > 0)
+            count += orderEvent.messages;
+          if (orderEvent.status !== undefined && orderEvent.status > 0)
+            count += orderEvent.status;
+        });
       });
-    });
     return count > 0 ? count : undefined;
   };
   const count = getChangeCount();

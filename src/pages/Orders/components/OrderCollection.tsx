@@ -16,8 +16,9 @@ import {
   useOrders,
 } from "../hooks/useOrders";
 import {
-  OrderCollectionEvent,
+  Event,
   OrderEvent,
+  OrderEventItem,
   UserType,
 } from "@/hooks/useUser/types";
 import { Heading } from "@component-library/Typography";
@@ -28,7 +29,7 @@ interface Props {
   userType: UserType;
   isOpen: boolean;
   toggleOpen(index: number): void;
-  orderCollectionEvent?: OrderCollectionEvent;
+  event?: OrderEvent;
 }
 
 const OrderCollection: React.FC<Props> = (props) => {
@@ -38,7 +39,7 @@ const OrderCollection: React.FC<Props> = (props) => {
     isOpen,
     toggleOpen,
     index,
-    orderCollectionEvent,
+    event: orderCollectionEvent,
   } = props;
   const { t } = useTranslation();
   const { deleteOrderCollection, updateOrder } = useOrders();
@@ -126,7 +127,9 @@ const OrderCollection: React.FC<Props> = (props) => {
     toggleOpen(index);
   };
 
-  const getOrderEventByID = (orderID: string): OrderEvent | undefined => {
+  const getOrderEventItemByID = (
+    orderID: string
+  ): OrderEventItem | undefined => {
     if (
       orderCollectionEvent === undefined ||
       orderCollectionEvent.orders.length < 1
@@ -167,7 +170,7 @@ const OrderCollection: React.FC<Props> = (props) => {
                 order={order}
                 orderCollectionID={orderCollection.id}
                 userType={userType}
-                orderEvent={getOrderEventByID(order.id)}
+                orderEvent={getOrderEventItemByID(order.id)}
               />
             ))}
           {renderButtons()}
@@ -178,7 +181,7 @@ const OrderCollection: React.FC<Props> = (props) => {
             <OrderPreView
               key={index}
               order={order}
-              orderEvent={getOrderEventByID(order.id)}
+              orderEvent={getOrderEventItemByID(order.id)}
             />
           ))}
         </div>

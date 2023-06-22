@@ -1,22 +1,17 @@
+import { Event } from "@/hooks/useUser/types";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import useCustomAxios from "../../../hooks/useCustomAxios";
-import { OrderCollectionEvent } from "../../../hooks/useUser/types";
 
 interface Props {
   isLoggedIn: boolean;
+  onLoadMissedEvents(missedEvents: Event[]): void;
 }
 
-interface ReturnProps {
-  initialMissedEvents: OrderCollectionEvent[];
-  status: "error" | "success" | "loading";
-  error: Error | null;
-}
-
-const useMissedEvent = (props: Props): ReturnProps => {
-  const { isLoggedIn } = props;
+const useMissedEvent = (props: Props): void => {
+  const { isLoggedIn, onLoadMissedEvents } = props;
   const { axiosCustom } = useCustomAxios();
-
-  const { data, status, error } = useQuery<OrderCollectionEvent[], Error>({
+  const { data, status, error } = useQuery<Event[], Error>({
     queryKey: ["missedEvents"],
     queryFn: async () =>
       axiosCustom
@@ -30,7 +25,9 @@ const useMissedEvent = (props: Props): ReturnProps => {
     initialData: [],
   });
 
-  return { initialMissedEvents: data, status, error };
+  useEffect(() => {
+    if (status === "success" && data.length > 0) onLoadMissedEvents(data);
+  }, [status, data]);
 };
 
 export default useMissedEvent;

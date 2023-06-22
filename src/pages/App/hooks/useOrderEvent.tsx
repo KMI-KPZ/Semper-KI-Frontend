@@ -3,7 +3,8 @@ import {
   Event,
   OrderEvent,
   OrderEventItem,
-} from "@/hooks/useUser/types";
+  OrderEventType,
+} from "@/pages/App/hooks/types";
 import { splitArray, splitFindArray } from "@/services/utils";
 import { Dispatch, SetStateAction } from "react";
 import { AppState } from "..";
@@ -11,60 +12,29 @@ import { AppState } from "..";
 const addOrderEventItemMessages = (
   oldEvent: OrderEventItem | undefined,
   newEvent: OrderEventItem | undefined
-): number | undefined => {
-  if (oldEvent === undefined && newEvent === undefined) return undefined;
-  if (
-    oldEvent === undefined &&
-    newEvent !== undefined &&
-    newEvent.messages !== undefined
-  )
-    return newEvent.messages > 0 ? newEvent.messages : undefined;
-  if (
-    newEvent === undefined &&
-    oldEvent !== undefined &&
-    oldEvent.messages !== undefined
-  )
-    return oldEvent.messages > 0 ? oldEvent.messages : undefined;
-  if (
-    oldEvent !== undefined &&
-    newEvent !== undefined &&
-    oldEvent.messages !== undefined &&
-    newEvent.messages !== undefined
-  ) {
-    const result = oldEvent.messages + newEvent.messages;
-    return result > 0 ? result : undefined;
+): number => {
+  if (oldEvent === undefined && newEvent === undefined) return 0;
+  if (oldEvent === undefined && newEvent !== undefined)
+    return newEvent.messages;
+  if (newEvent === undefined && oldEvent !== undefined)
+    return oldEvent.messages;
+  if (oldEvent !== undefined && newEvent !== undefined) {
+    return oldEvent.messages + newEvent.messages;
   }
-
-  return undefined;
+  return 0;
 };
 const addOrderEventItemStatus = (
   oldEvent: OrderEventItem | undefined,
   newEvent: OrderEventItem | undefined
-): number | undefined => {
-  if (oldEvent === undefined && newEvent === undefined) return undefined;
-  if (
-    oldEvent === undefined &&
-    newEvent !== undefined &&
-    newEvent.status !== undefined
-  )
-    return newEvent.status > 0 ? newEvent.status : undefined;
-  if (
-    newEvent === undefined &&
-    oldEvent !== undefined &&
-    oldEvent.status !== undefined
-  )
-    return oldEvent.status > 0 ? oldEvent.status : undefined;
-  if (
-    oldEvent !== undefined &&
-    newEvent !== undefined &&
-    oldEvent.status !== undefined &&
-    newEvent.status !== undefined
-  ) {
-    const result = oldEvent.status + newEvent.status;
-    return result > 0 ? result : undefined;
+): number => {
+  if (oldEvent === undefined && newEvent === undefined) return 0;
+  if (oldEvent === undefined && newEvent !== undefined) return newEvent.status;
+  if (newEvent === undefined && oldEvent !== undefined) return oldEvent.status;
+  if (oldEvent !== undefined && newEvent !== undefined) {
+    return oldEvent.status + newEvent.status;
   }
 
-  return undefined;
+  return 0;
 };
 const getExistingOrderEvent = (
   orderEvents: OrderEvent[],
@@ -126,8 +96,7 @@ const useOrderEvent = (
     events: Event[],
     newOrderEvent: OrderEvent
   ): Event[] => {
-    console.log("useOrderEvent | hydrateOrderEvents", events, newOrderEvent);
-    const noneOrderEvents: Event[] = events.filter(
+    const noneOrderEvents = events.filter(
       (event) => event.eventType !== "orderEvent"
     );
     const orderEvents: OrderEvent[] = events.filter(
@@ -155,12 +124,11 @@ const useOrderEvent = (
             orders: hydatedOrderEventItems,
           },
     ];
-
     return [...noneOrderEvents, ...newOrderEvents];
   };
 
   const deleteOrderEvent = (event: DeleteOrderEvent) => {
-    console.log("useOrderEvent | deleteOrderEvent", event);
+    // console.log("useOrderEvent | deleteOrderEvent", event);
     const { orderCollectionID, orderID, type } = event;
     setState((prevState) => {
       const { arrayTrue: _orderEvents, arrayFalse: otherEvents } = splitArray(
@@ -186,13 +154,10 @@ const useOrderEvent = (
       if (orderEventItem !== undefined) {
         orderEventItem = {
           ...orderEventItem,
-          messages: type === "message" ? undefined : orderEventItem.messages,
-          status: type === "status" ? undefined : orderEventItem.status,
+          messages: type === "message" ? 0 : orderEventItem.messages,
+          status: type === "status" ? 0 : orderEventItem.status,
         };
-        if (
-          orderEventItem.messages === undefined &&
-          orderEventItem.status === undefined
-        ) {
+        if (orderEventItem.messages === 0 && orderEventItem.status === 0) {
           orderEventItem = undefined;
         } else {
           newOrderEventItems.push(orderEventItem);

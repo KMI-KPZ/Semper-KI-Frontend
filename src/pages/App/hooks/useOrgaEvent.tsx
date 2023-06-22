@@ -1,4 +1,4 @@
-import { DeleteOrgaEvent, Event, OrgaEvent } from "@/hooks/useUser/types";
+import { DeleteOrgaEvent, Event, OrgaEvent } from "@/pages/App/hooks/types";
 
 interface ReturnProps {
   hydrateOrgaEvents: (events: Event[], newOrderEvent: OrgaEvent) => Event[];

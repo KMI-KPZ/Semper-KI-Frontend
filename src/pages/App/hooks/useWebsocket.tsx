@@ -17,8 +17,6 @@ export const useWebsocket = (
 
   useEffect(() => {
     if (load === true && state !== "connected") {
-      // console.log("useWebsocket | connecting");
-
       setState("connecting");
       const ws = new WebSocket(
         `${import.meta.env.VITE_WS_API_URL}/ws/generalWebsocket/`
@@ -38,7 +36,6 @@ export const useWebsocket = (
       };
       ws.onmessage = (event: MessageEvent) => {
         onMessage(event);
-        // console.log("useWebsocket | onmessage | ", event);
       };
 
       setSocket(ws);

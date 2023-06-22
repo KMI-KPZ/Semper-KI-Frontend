@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import { AppContext } from "../App";
 import { LoadingSuspense } from "@component-library/Loading";
 import { IOrderCollection, useOrders } from "./hooks/useOrders";
-import { OrderEvent, UserType } from "@/hooks/useUser/types";
+import { UserType } from "@/hooks/useUser/types";
+import { OrderEvent } from "@/pages/App/hooks/types";
 import OrderCollection from "./components/OrderCollection";
 import { Heading } from "@component-library/Typography";
 

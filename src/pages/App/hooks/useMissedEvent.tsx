@@ -1,4 +1,4 @@
-import { Event } from "@/hooks/useUser/types";
+import { Event } from "@/pages/App/hooks/types";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import useCustomAxios from "../../../hooks/useCustomAxios";

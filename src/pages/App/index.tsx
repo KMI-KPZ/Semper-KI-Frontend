@@ -14,7 +14,8 @@ import {
   PrivateManufacturerRoutes,
   PrivateRoutes,
 } from "./components/PrivateRoutes";
-import { DeleteEvent, Event, User, UserType } from "@/hooks/useUser/types";
+import { User, UserType } from "@/hooks/useUser/types";
+import { DeleteEvent, Event } from "@/pages/App/hooks/types";
 import useCart from "@/hooks/useCart";
 import useUser from "@/hooks/useUser";
 import Background from "@/components/Background";

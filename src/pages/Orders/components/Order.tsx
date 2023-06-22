@@ -13,13 +13,13 @@ import { Badge } from "@component-library/Badge";
 import OrderFileView from "./FileView";
 import PopUp from "@/components/PopUp";
 import { IOrder, OrderState, useOrders } from "../hooks/useOrders";
+import { UserType } from "@/hooks/useUser/types";
 import {
   DeleteOrderEvent,
   Event,
   OrderEvent,
   OrderEventItem,
-  UserType,
-} from "@/hooks/useUser/types";
+} from "@/pages/App/hooks/types";
 import { AppContext } from "@/pages/App";
 import { getModelURI } from "@/services/utils";
 import { Heading } from "@component-library/Typography";

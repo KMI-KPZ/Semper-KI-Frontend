@@ -134,23 +134,25 @@ export const getStatusByIndex = (process: IProcessItem): EProcessStatusType => {
 };
 
 export const splitFindArray = <T,>(
-  array: T[],
+  array: T[] | undefined,
   conditionFunction: (event: T) => boolean
 ): {
   otherArray: T[];
   item: T | undefined;
 } => {
+  if (array === undefined) return { otherArray: [], item: undefined };
   const otherArray = array.filter((item) => !conditionFunction(item));
   const item = array.find((item) => conditionFunction(item));
   return { otherArray, item };
 };
 export const splitArray = <T,>(
-  array: T[],
+  array: T[] | undefined,
   conditionFunction: (event: T) => boolean
 ): {
   arrayTrue: T[];
   arrayFalse: T[];
 } => {
+  if (array === undefined) return { arrayFalse: [], arrayTrue: [] };
   const arrayTrue = array.filter((item) => conditionFunction(item));
   const arrayFalse = array.filter((item) => !conditionFunction(item));
   return { arrayTrue, arrayFalse };

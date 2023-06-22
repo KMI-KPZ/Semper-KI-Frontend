@@ -4,7 +4,7 @@ import { Badge } from "@component-library/Badge";
 import EmailIcon from "@mui/icons-material/Email";
 import FactoryIcon from "@mui/icons-material/Factory";
 import { IOrder, OrderState } from "../hooks/useOrders";
-import { OrderEventItem } from "@/hooks/useUser/types";
+import { OrderEventItem } from "@/pages/App/hooks/types";
 import { getModelURI } from "@/services/utils";
 import { Heading } from "@component-library/Typography";
 

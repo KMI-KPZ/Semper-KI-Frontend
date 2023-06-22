@@ -5,10 +5,12 @@ import HomePortfolioCard from "./components/PortfolioCard";
 import HomeMagazinCard from "./components/MagazinCard";
 import HomeNewsCard from "./components/NewsCard";
 import HomeImgCard from "./components/ImgCard";
-import { Event, OrderEvent, UserType } from "@/hooks/useUser/types";
+import { UserType } from "@/hooks/useUser/types";
+import { Event, OrderEvent } from "@/pages/App/hooks/types";
 import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import HomeResourcesCard from "./components/ResourcesCard";
+import useEvents, { getOrderEventAmount } from "../App/hooks/useEvents";
 
 interface Props {
   userType: UserType;
@@ -27,24 +29,6 @@ export const Home: React.FC<Props> = (props) => {
   const { userType, events, cartCount } = props;
   const { t } = useTranslation();
 
-  const getChangeCount = (): number | undefined => {
-    if (events === undefined) return undefined;
-    let count = 0;
-    events
-      .filter((event) => event.eventType === "orderEvent")
-      .forEach((_orderEvent) => {
-        const orderEvent = _orderEvent as OrderEvent;
-        orderEvent.orders.forEach((orderEvent) => {
-          if (orderEvent.messages !== undefined && orderEvent.messages > 0)
-            count += orderEvent.messages;
-          if (orderEvent.status !== undefined && orderEvent.status > 0)
-            count += orderEvent.status;
-        });
-      });
-    return count > 0 ? count : undefined;
-  };
-  const count = getChangeCount();
-
   return (
     <div className="flex h-full w-full flex-grow flex-col items-center justify-start gap-5 md:grid md:grid-cols-3">
       <HomeSearchCard className="w-full bg-white md:order-2 md:col-span-2 md:h-full" />
@@ -52,7 +36,7 @@ export const Home: React.FC<Props> = (props) => {
         userType={userType}
         className="w-full bg-white md:order-1 md:row-span-3 md:h-full"
         cartCount={cartCount > 0 ? cartCount : undefined}
-        ordersCount={count}
+        ordersCount={getOrderEventAmount(events)}
       />
       <HomeGuideCard
         userType={userType}

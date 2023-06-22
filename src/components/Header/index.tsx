@@ -9,9 +9,11 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { NavigationItemData } from "@/data/navigation";
 import LogoURL from "@images/logo192.png";
 import { AppContext } from "@/pages/App";
-import { Event, OrderEvent, UserType } from "@/hooks/useUser/types";
+import { UserType } from "@/hooks/useUser/types";
+import { Event, OrderEvent } from "@/pages/App/hooks/types";
 import { Heading, Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
+import { getOrderEventAmount } from "@/pages/App/hooks/useEvents";
 
 interface Language {
   code: string;
@@ -104,31 +106,12 @@ export const Header: React.FC<Props> = (props) => {
     return returnString;
   };
 
-  const getChangeCount = (): number | undefined => {
-    if (events === undefined) return undefined;
-    let count = 0;
-    events
-      .filter((event) => event.eventType === "orderEvent")
-      .forEach((_orderEvent) => {
-        const orderEvent = _orderEvent as OrderEvent;
-        orderEvent.orders.forEach((orderEvent) => {
-          if (orderEvent.messages !== undefined && orderEvent.messages > 0)
-            count += orderEvent.messages;
-          if (orderEvent.status !== undefined && orderEvent.status > 0)
-            count += orderEvent.status;
-        });
-      });
-    return count;
-  };
-  const count = getChangeCount();
   const calcBadge = (title: string): number | undefined => {
     if (
-      count !== undefined &&
-      count > 0 &&
-      (title === "data.NavigationItem.contracts" ||
-        title === "data.NavigationItem.orders")
+      title === "data.NavigationItem.contracts" ||
+      title === "data.NavigationItem.orders"
     )
-      return getChangeCount();
+      return getOrderEventAmount(events);
     if (cartCount > 0 && title === "data.NavigationItem.cart") return cartCount;
     return undefined;
   };

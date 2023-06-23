@@ -4,7 +4,7 @@ import { AppContext } from "../App";
 import { LoadingSuspense } from "@component-library/Loading";
 import { IOrderCollection, useOrders } from "./hooks/useOrders";
 import { UserType } from "@/hooks/useUser/types";
-import { OrderEvent } from "@/pages/App/hooks/types";
+import { OrderEvent } from "@/pages/App/types";
 import OrderCollection from "./components/OrderCollection";
 import { Heading } from "@component-library/Typography";
 

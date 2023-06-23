@@ -6,7 +6,7 @@ import HomeMagazinCard from "./components/MagazinCard";
 import HomeNewsCard from "./components/NewsCard";
 import HomeImgCard from "./components/ImgCard";
 import { UserType } from "@/hooks/useUser/types";
-import { Event, OrderEvent } from "@/pages/App/hooks/types";
+import { Event, OrderEvent } from "@/pages/App/types";
 import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import HomeResourcesCard from "./components/ResourcesCard";

@@ -10,7 +10,7 @@ import { NavigationItemData } from "@/data/navigation";
 import LogoURL from "@images/logo192.png";
 import { AppContext } from "@/pages/App";
 import { UserType } from "@/hooks/useUser/types";
-import { Event, OrderEvent } from "@/pages/App/hooks/types";
+import { Event, OrderEvent } from "@/pages/App/types";
 import { Heading, Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
 import { getOrderEventAmount } from "@/pages/App/hooks/useEvents";

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import DownloadIcon from "@mui/icons-material/Download";
 import useOrderFile from "../hooks/useOrderFiles";
 import { IOrder } from "../hooks/useOrders";
 import { Heading } from "@component-library/Typography";
+import useFileView from "../hooks/useFileView";
 
 interface Props {
   order: IOrder;
@@ -16,33 +17,11 @@ const OrderFileView: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const [fileName, setFileName] = useState<string>("");
   const { orderFileQuery } = useOrderFile({ orderID: order.id, fileName });
+  useFileView(fileName, orderFileQuery, setFileName);
+
   const handleOnClickButton = (fileName: string) => {
     setFileName(fileName);
   };
-  useEffect(() => {
-    if (fileName !== "") {
-      orderFileQuery.refetch();
-    }
-  }, [fileName]);
-  useEffect(() => {
-    if (orderFileQuery.data !== undefined) {
-      const url = window.URL.createObjectURL(orderFileQuery.data);
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", fileName);
-
-      setFileName("");
-
-      // Append to html link element page
-      document.body.appendChild(link);
-
-      // Start download
-      link.click();
-
-      // Clean up and remove the link
-      link.parentNode!.removeChild(link);
-    }
-  }, [orderFileQuery.data]);
 
   const buttonQuery = fileName !== "" ? orderFileQuery : undefined;
 

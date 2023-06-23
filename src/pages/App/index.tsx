@@ -1,6 +1,6 @@
 import { Header } from "@/components/Header";
 import { Heading } from "@component-library/Typography";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../Error";

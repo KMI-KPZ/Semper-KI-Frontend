@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../App";
 import { LoadingSuspense } from "@component-library/Loading";
@@ -7,6 +7,7 @@ import { UserType } from "@/hooks/useUser/types";
 import { OrderEvent } from "@/pages/App/types";
 import OrderCollection from "./components/OrderCollection";
 import { Heading } from "@component-library/Typography";
+import useOrdersState from "./hooks/useOrdersState";
 
 interface Props {
   userType: UserType;
@@ -19,6 +20,7 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
   const [state, setState] = useState<boolean[]>([]);
   const { appState } = useContext(AppContext);
   const { missedEvents } = appState;
+  useOrdersState(ordersQuery, state, setState);
 
   const toggleOpen = (index: number) => {
     setState((prevState) => [
@@ -27,13 +29,6 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
       ...prevState.filter((open, _index) => _index > index),
     ]);
   };
-
-  useEffect(() => {
-    if (ordersQuery.data !== undefined && state.length === 0)
-      setState(
-        ordersQuery.data.map((open, index) => (index === 0 ? true : false))
-      );
-  }, [ordersQuery.data]);
 
   const getOrderEventByID = (
     orderCollectionID: string

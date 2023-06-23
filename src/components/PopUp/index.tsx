@@ -1,5 +1,5 @@
-import { AppContext } from "@/pages/App";
-import React, { ReactNode, useContext, useEffect } from "react";
+import React, { ReactNode } from "react";
+import usePopUpState from "./hooks/usePopUpState";
 
 interface Props {
   open: boolean;
@@ -9,11 +9,7 @@ interface Props {
 
 const PopUp: React.FC<Props> = (props) => {
   const { children, open, onOutsideClick } = props;
-  const { setAppState } = useContext(AppContext);
-
-  useEffect(() => {
-    setAppState((prevState) => ({ ...prevState, stopScroll: open }));
-  }, [open]);
+  usePopUpState(open);
 
   const handleOnClickBackground = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>

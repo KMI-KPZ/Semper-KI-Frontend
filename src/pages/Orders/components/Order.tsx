@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Button } from "@component-library/Button";
 import MailIcon from "@mui/icons-material/Mail";
 import ChatView from "./Chat";
@@ -29,6 +29,7 @@ import {
   OrdersEditPermission,
   OrdersFilePermission,
 } from "@/hooks/usePermissions";
+import useOrderEventChange from "../hooks/useOrderChange";
 
 interface Props {
   order: IOrder;
@@ -51,27 +52,18 @@ const OrderView: React.FC<Props> = (props) => {
   const { chatOpen, menuOpen } = state;
   const { user, deleteEvent } = useContext(AppContext);
   const { deleteOrder, updateOrder } = useOrders();
+  const { getDeleteOrderEvent } = useOrderEventChange(
+    order,
+    orderCollectionID,
+    chatOpen
+  );
   const { t } = useTranslation();
-
-  const getDeleteOrderEvent = (type: "status" | "message"): Event => {
-    const deleteOrderEvent: DeleteOrderEvent = {
-      eventType: "orderEvent",
-      orderCollectionID: orderCollectionID,
-      orderID: order.id,
-      type: type,
-    };
-    return deleteOrderEvent as Event;
-  };
-
-  useEffect(() => {
-    deleteEvent(getDeleteOrderEvent("status"));
-    if (chatOpen) deleteEvent(getDeleteOrderEvent("message"));
-  }, [order]);
 
   const handleOnClickButtonChat = () => {
     deleteEvent(getDeleteOrderEvent("message"));
     setState((prevState) => ({ ...prevState, chatOpen: true }));
   };
+
   const handleOnOutsideClickChat = () => {
     closeMenu();
   };

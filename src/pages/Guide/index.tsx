@@ -1,8 +1,9 @@
 import { Heading } from "@component-library/Typography";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { IFilterAnswer, IFilterItem } from "../Process/Filter";
+import useGuideState from "./hooks/useGuideState";
 
 export interface IGuide {
   title: string;
@@ -39,26 +40,22 @@ interface Props {
   setFilter(filter: IFilterItem[]): void;
 }
 
-interface State {
+export interface GuideState {
   menuOpen: boolean;
 }
 
 const GuideRoutes: React.FC<Props> = (props) => {
   const { setFilter } = props;
-  const [state, setState] = useState<State>({ menuOpen: false });
+  const [state, setState] = useState<GuideState>({ menuOpen: false });
   const navigate = useNavigate();
   const { path } = useParams();
   const handleOutsideClick = () => {
     setState((prevState) => ({ ...prevState, menuOpen: false }));
     navigate("/guide");
   };
-  const { t } = useTranslation();
+  useGuideState(path, setState);
 
-  useEffect(() => {
-    if (path !== undefined) {
-      setState((prevState) => ({ ...prevState, menuOpen: true }));
-    }
-  }, [path]);
+  const { t } = useTranslation();
 
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5">

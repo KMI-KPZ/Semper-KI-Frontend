@@ -18,6 +18,8 @@ import {
 import { UserType } from "@/hooks/useUser/types";
 import { Event, OrderEvent, OrderEventItem } from "@/pages/App/hooks/types";
 import { Heading } from "@component-library/Typography";
+import PermissionGate from "@/components/PermissionGate";
+import { OrdersEditPermission } from "@/hooks/usePermissions";
 
 interface Props {
   index: number;
@@ -169,7 +171,9 @@ const OrderCollection: React.FC<Props> = (props) => {
                 orderEvent={getOrderEventItemByID(order.id)}
               />
             ))}
-          {renderButtons()}
+          <PermissionGate gate={OrdersEditPermission}>
+            {renderButtons()}
+          </PermissionGate>
         </>
       ) : (
         <div className="flex flex-col items-start justify-start gap-5 md:flex-row">

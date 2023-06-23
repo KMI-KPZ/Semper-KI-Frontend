@@ -40,12 +40,19 @@ import ResoucesView from "../Resources";
 import ServiceRoutes from "../Service";
 import Legal from "../Legal";
 import useEvents from "./hooks/useEvents";
+import usePermissions, {
+  OrdersReadPermission,
+  OrgaReadPermission,
+  Permission,
+} from "@/hooks/usePermissions";
+import PermissionGate from "@/components/PermissionGate";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
   stopScroll: boolean;
   guideFilter: IFilterItem[];
   missedEvents: Event[];
+  permissions?: Permission[];
 };
 
 export type AppContext = {
@@ -77,6 +84,7 @@ const App: React.FC = () => {
   const { cartQuery } = useCart();
   const { deleteEvent } = useEvents(setState, isLoggedIn);
   const { t } = useTranslation();
+  usePermissions(setState, isLoggedIn && userType === UserType.manufacturer);
 
   useEffect(() => {
     document.body.style.overflowY = stopScroll === true ? "hidden" : "scroll";
@@ -119,9 +127,26 @@ const App: React.FC = () => {
       <Route path="proceedings" element={<Error text="proceedings" />} />
       <Route
         path="contracts"
-        element={<OrderCollectionOverview userType={UserType.manufacturer} />}
+        element={
+          <PermissionGate
+            gate={OrdersReadPermission}
+            showMessage
+            children={
+              <OrderCollectionOverview userType={UserType.manufacturer} />
+            }
+          />
+        }
       />
-      <Route path="organization" element={<OrganizationView />} />
+      <Route
+        path="organization"
+        element={
+          <PermissionGate
+            gate={OrgaReadPermission}
+            showMessage
+            children={<OrganizationView />}
+          />
+        }
+      />
       <Route path="resources/*" element={<ResoucesView />} />
     </Route>
   );

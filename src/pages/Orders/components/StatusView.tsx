@@ -10,6 +10,8 @@ import { useTranslation } from "react-i18next";
 import { UserType } from "@/hooks/useUser/types";
 import { OrderState } from "../hooks/useOrders";
 import { Divider } from "@component-library/Divider";
+import usePermissionGate from "@/components/PermissionGate/hooks";
+import { OrdersEditPermission } from "@/hooks/usePermissions";
 
 interface StatusViewProps {
   status: OrderState;
@@ -117,6 +119,7 @@ const StatusItem: React.FC<StatusItemType> = (props) => {
     userType,
   } = props;
   const { t } = useTranslation();
+  const { hasPermission } = usePermissionGate();
 
   const handleOnClickStatus = () => {
     if (userType === UserType.manufacturer) {
@@ -141,7 +144,9 @@ const StatusItem: React.FC<StatusItemType> = (props) => {
 
   return (
     <a
-      onClick={handleOnClickStatus}
+      onClick={
+        hasPermission(OrdersEditPermission) ? handleOnClickStatus : () => {}
+      }
       className={`flex w-full flex-col items-center justify-center rounded-xl p-3 md:w-fit ${getClassName()}`}
     >
       {icon}
@@ -166,6 +171,7 @@ const StatusDoubleItem: React.FC<StatusDoubleItemType> = (props) => {
     userType,
   } = props;
   const { t } = useTranslation();
+  const { hasPermission } = usePermissionGate();
 
   const handleOnClickStatus = (orderState: OrderState) => {
     if (userType === UserType.manufacturer) {
@@ -204,7 +210,11 @@ const StatusDoubleItem: React.FC<StatusDoubleItemType> = (props) => {
     >
       {status < itemDenied.orderState || status === itemDenied.orderState ? (
         <a
-          onClick={() => handleOnClickStatus(itemDenied.orderState)}
+          onClick={
+            hasPermission(OrdersEditPermission)
+              ? () => handleOnClickStatus(itemDenied.orderState)
+              : () => {}
+          }
           className={`flex h-full w-full flex-col items-center justify-center p-3 ${getClassName(
             itemDenied.orderState
           )}`}
@@ -218,7 +228,11 @@ const StatusDoubleItem: React.FC<StatusDoubleItemType> = (props) => {
       status === itemSucceed.orderState ||
       status > itemSucceed.orderState ? (
         <a
-          onClick={() => handleOnClickStatus(itemSucceed.orderState)}
+          onClick={
+            hasPermission(OrdersEditPermission)
+              ? () => handleOnClickStatus(itemSucceed.orderState)
+              : () => {}
+          }
           className={`flex h-full w-full flex-col items-center justify-center p-3  ${getClassName(
             itemSucceed.orderState
           )}`}

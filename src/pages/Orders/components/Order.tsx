@@ -23,6 +23,12 @@ import {
 import { AppContext } from "@/pages/App";
 import { getModelURI } from "@/services/utils";
 import { Heading } from "@component-library/Typography";
+import PermissionGate from "@/components/PermissionGate";
+import {
+  OrdersChatPermission,
+  OrdersEditPermission,
+  OrdersFilePermission,
+} from "@/hooks/usePermissions";
 
 interface Props {
   order: IOrder;
@@ -161,26 +167,30 @@ const OrderView: React.FC<Props> = (props) => {
         </Heading>
         <Heading variant="h3">{order.item.title}</Heading>
         <div className="flex flex-col items-center  justify-center gap-3 md:flex-row">
-          {orderEvent !== undefined &&
-          orderEvent.messages !== undefined &&
-          orderEvent.messages > 0 ? (
-            <Badge count={orderEvent.messages}>
+          <PermissionGate gate={OrdersChatPermission}>
+            {orderEvent !== undefined &&
+            orderEvent.messages !== undefined &&
+            orderEvent.messages > 0 ? (
+              <Badge count={orderEvent.messages}>
+                <Button
+                  size="sm"
+                  startIcon={<MailIcon />}
+                  onClick={handleOnClickButtonChat}
+                  title={t("Orders.OrderView.button.chat")}
+                />
+              </Badge>
+            ) : (
               <Button
                 size="sm"
                 startIcon={<MailIcon />}
                 onClick={handleOnClickButtonChat}
                 title={t("Orders.OrderView.button.chat")}
               />
-            </Badge>
-          ) : (
-            <Button
-              size="sm"
-              startIcon={<MailIcon />}
-              onClick={handleOnClickButtonChat}
-              title={t("Orders.OrderView.button.chat")}
-            />
-          )}
-          {menuOpen ? renderButtons() : null}
+            )}
+          </PermissionGate>
+          <PermissionGate gate={OrdersEditPermission}>
+            {menuOpen ? renderButtons() : null}
+          </PermissionGate>
           <div className={`flex items-center justify-center `}>
             <Button
               size="sm"
@@ -192,7 +202,7 @@ const OrderView: React.FC<Props> = (props) => {
                 />
               }
               title={t(
-                `Orders.OrderView.button.${menuOpen ? "expand" : "collapse"}`
+                `Orders.OrderView.button.${menuOpen ? "collapse" : "expand"}`
               )}
               onClick={handleOnClickButtonExpand}
             />
@@ -222,16 +232,20 @@ const OrderView: React.FC<Props> = (props) => {
           ))}
         </div>
       </div>
-      <OrderFileView order={order} orderCollectionID={orderCollectionID} />
-      <PopUp open={chatOpen} onOutsideClick={handleOnOutsideClickChat}>
-        <ChatView
-          chat={order.chat.messages}
-          user={user}
-          closeMenu={closeMenu}
-          orderCollectionID={orderCollectionID}
-          orderID={order.id}
-        />
-      </PopUp>
+      <PermissionGate gate={OrdersFilePermission}>
+        <OrderFileView order={order} orderCollectionID={orderCollectionID} />
+      </PermissionGate>
+      <PermissionGate gate={OrdersChatPermission}>
+        <PopUp open={chatOpen} onOutsideClick={handleOnOutsideClickChat}>
+          <ChatView
+            chat={order.chat.messages}
+            user={user}
+            closeMenu={closeMenu}
+            orderCollectionID={orderCollectionID}
+            orderID={order.id}
+          />
+        </PopUp>
+      </PermissionGate>
     </div>
   );
 };

@@ -926,5 +926,8 @@
         }
       }
     }
+  },
+  "PermissionGate":{
+    "message":"Diese Funktion ist mit ihren Rechten nicht nutzbar"
   }
 }

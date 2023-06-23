@@ -15,7 +15,7 @@ import {
   PrivateRoutes,
 } from "./components/PrivateRoutes";
 import { User, UserType } from "@/hooks/useUser/types";
-import { DeleteEvent, Event } from "@/pages/App/hooks/types";
+import { DeleteEvent, Event } from "@/pages/App/types";
 import useCart from "@/hooks/useCart";
 import useUser from "@/hooks/useUser";
 import Background from "@/components/Background";
@@ -46,6 +46,7 @@ import usePermissions, {
   Permission,
 } from "@/hooks/usePermissions";
 import PermissionGate from "@/components/PermissionGate";
+import useBodyScroll from "./hooks/useBodyScroll";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -85,12 +86,7 @@ const App: React.FC = () => {
   const { deleteEvent } = useEvents(setState, isLoggedIn);
   const { t } = useTranslation();
   usePermissions(setState, isLoggedIn && userType === UserType.manufacturer);
-
-  useEffect(() => {
-    document.body.style.overflowY = stopScroll === true ? "hidden" : "scroll";
-    document.body.style.scrollbarGutter = "stable";
-    // document.body.style.paddingRight = stopScroll === true ? "17px" : "";
-  }, [stopScroll]);
+  useBodyScroll(stopScroll);
 
   const setFilter = (guideFilter: IFilterItem[]): void => {
     setState((prevState) => ({ ...prevState, guideFilter }));

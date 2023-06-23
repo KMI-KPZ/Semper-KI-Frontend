@@ -4,7 +4,7 @@ import {
   OrderEvent,
   OrderEventItem,
   OrderEventType,
-} from "@/pages/App/hooks/types";
+} from "@/pages/App/types";
 import { splitArray, splitFindArray } from "@/services/utils";
 import { Dispatch, SetStateAction } from "react";
 import { AppState } from "..";

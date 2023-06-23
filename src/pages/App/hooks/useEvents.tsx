@@ -7,7 +7,7 @@ import {
   OrderEventItem,
   OrderEventType,
   OrgaEvent,
-} from "@/pages/App/hooks/types";
+} from "@/pages/App/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { AppState } from "..";

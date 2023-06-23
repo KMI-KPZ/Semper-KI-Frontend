@@ -19,7 +19,7 @@ import {
   Event,
   OrderEvent,
   OrderEventItem,
-} from "@/pages/App/hooks/types";
+} from "@/pages/App/types";
 import { AppContext } from "@/pages/App";
 import { getModelURI } from "@/services/utils";
 import { Heading } from "@component-library/Typography";

@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import customAxios from "./useCustomAxios";
+import logger from "@/hooks/useLogger";
 
 export interface ICartHook {
   cartQuery: DefinedUseQueryResult<IProcessItem[], Error>;
@@ -32,7 +33,7 @@ const useCart = (): ICartHook => {
       customAxios
         .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getCart/`)
         .then((res) => {
-          console.log("useCart | getCart ✅ |", res.data);
+          logger("useCart | getCart ✅ |", res.data);
           return res.data.cart !== undefined ? res.data.cart : [];
         }),
     initialData: [],
@@ -45,7 +46,7 @@ const useCart = (): ICartHook => {
           cart,
         })
         .then((res) => {
-          console.log("useCart | updateCart ✅ |", res.data, cart);
+          logger("useCart | updateCart ✅ |", res.data, cart);
           return res;
         }),
     onSuccess(data, variables, context) {

@@ -1,6 +1,7 @@
 import customAxios from "@/hooks/useCustomAxios";
 import React, { useEffect, useState } from "react";
 import { IProcessItem } from "../..";
+import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
   order: IRequestState;
@@ -76,7 +77,7 @@ const useCheckout = (): ReturnProps => {
         customAxios
           .get(`${import.meta.env.VITE_HTTP_API_URL}/public/checkPrintability/`)
           .then((res) => {
-            console.log("useCheckout | checkPrintability ✅ |", res.data);
+            logger("useCheckout | checkPrintability ✅ |", res.data);
             setPrintableList((prevState) => [
               ...prevState.filter((item, index: number) => index < _index),
               {
@@ -88,7 +89,7 @@ const useCheckout = (): ReturnProps => {
             ]);
           })
           .catch((error) => {
-            console.log("useCheckout | checkPrintability ❌ |", error);
+            logger("useCheckout | checkPrintability ❌ |", error);
             setPrintableList((prevState) => [
               ...prevState.filter((item, index: number) => index < _index),
               {
@@ -118,7 +119,7 @@ const useCheckout = (): ReturnProps => {
         customAxios
           .get(`${import.meta.env.VITE_HTTP_API_URL}/public/checkPrices/`)
           .then((res) => {
-            console.log("useCheckout | checkPrices ✅ |", res.data);
+            logger("useCheckout | checkPrices ✅ |", res.data);
             setPriceList((prevState) => [
               ...prevState.filter((item, index: number) => index < _index),
               {
@@ -130,7 +131,7 @@ const useCheckout = (): ReturnProps => {
             ]);
           })
           .catch((error) => {
-            console.log("useCheckout | checkPrices ❌ |", error);
+            logger("useCheckout | checkPrices ❌ |", error);
             setPriceList((prevState) => [
               ...prevState.filter((item, index: number) => index < _index),
               {
@@ -160,7 +161,7 @@ const useCheckout = (): ReturnProps => {
         customAxios
           .get(`${import.meta.env.VITE_HTTP_API_URL}/public/checkLogistics/`)
           .then((res) => {
-            console.log("useCheckout | checkLogistics ✅ |", res.data);
+            logger("useCheckout | checkLogistics ✅ |", res.data);
             setLogisticsList((prevState) => [
               ...prevState.filter((item, index: number) => index < _index),
               {
@@ -172,7 +173,7 @@ const useCheckout = (): ReturnProps => {
             ]);
           })
           .catch((error) => {
-            console.log("useCheckout | checkLogistics ❌ |", error);
+            logger("useCheckout | checkLogistics ❌ |", error);
             setLogisticsList((prevState) => [
               ...prevState.filter((item, index: number) => index < _index),
               {
@@ -196,7 +197,7 @@ const useCheckout = (): ReturnProps => {
     customAxios
       .get(`${import.meta.env.VITE_HTTP_API_URL}/public/sendOrder/`)
       .then((res) => {
-        console.log("useCheckout | sendOrder ✅ |", res.data);
+        logger("useCheckout | sendOrder ✅ |", res.data);
         setOrder({
           loading: false,
           error: false,
@@ -204,7 +205,7 @@ const useCheckout = (): ReturnProps => {
         });
       })
       .catch((error) => {
-        console.log("useCheckout | sendOrder ❌ |", error);
+        logger("useCheckout | sendOrder ❌ |", error);
         setOrder({
           loading: false,
           error: true,

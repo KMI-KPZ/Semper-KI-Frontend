@@ -4,6 +4,7 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { IMaterial } from "../Material";
 import { IModel } from "../Model";
 import { IPostProcessing } from "../PostProcessing";
+import logger from "@/hooks/useLogger";
 
 export interface IProcessData {
   filters: IFilterItem[];
@@ -26,7 +27,7 @@ const useProcessData = (
           filters,
         })
         .then((response) => {
-          console.log("useProcessData | getProcessData ✅ |", response.data);
+          logger("useProcessData | getProcessData ✅ |", response.data);
           return response.data;
         });
     },
@@ -47,7 +48,7 @@ export const useModelData = (
           filters,
         })
         .then((response) => {
-          console.log("useModelData | getModels ✅ |", response.data);
+          logger("useModelData | getModels ✅ |", response.data);
           return response.data.models;
         });
     },
@@ -68,7 +69,7 @@ export const useMaterialData = (
           filters,
         })
         .then((response) => {
-          console.log("useMaterialData | getMaterials ✅ |", response.data);
+          logger("useMaterialData | getMaterials ✅ |", response.data);
           return response.data.materials;
         });
     },
@@ -90,10 +91,7 @@ export const usePostProcessing = (
           filters,
         })
         .then((response) => {
-          console.log(
-            "usePostProcessing | getPostProcessing ✅ |",
-            response.data
-          );
+          logger("usePostProcessing | getPostProcessing ✅ |", response.data);
           return response.data.postProcessing;
         });
     },

@@ -4,6 +4,7 @@ import { Button } from "@component-library/Button";
 import { User, UserType } from "@/hooks/useUser/types";
 import { Heading } from "@component-library/Typography";
 import useUser from "@/hooks/useUser";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   user: User;
@@ -19,7 +20,7 @@ const Profil: React.FC<Props> = (props) => {
     deleteUser();
   };
   const handleOnChangeSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(e.currentTarget.checked);
+    // logger(e.currentTarget.checked);
     setUserType(
       e.currentTarget.checked === true ? UserType.manufacturer : UserType.client
     );

@@ -11,6 +11,7 @@ import useModelUpload from "@/pages/Process/Model/hooks/useModelUpload";
 import { getFileSizeAsString } from "@/services/utils";
 import { IModel } from "..";
 import { Heading } from "@component-library/Typography";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   setProgress(path: string): void;
@@ -117,7 +118,7 @@ export const ModelUpload: React.FC<Props> = (props) => {
   };
 
   const createProcessItems = (modelList: IModel[]) => {
-    console.log(fileList, modelList);
+    logger(fileList, modelList);
 
     createProcessItemFromModels(modelList, activeItemIndex);
   };

@@ -4,6 +4,7 @@ import { IOrder } from "@/pages/Orders/hooks/useOrders";
 import { IMaterial } from "@/pages/Process/Material";
 import { IModel } from "@/pages/Process/Model";
 import { useState } from "react";
+import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
   data: IAdminData;
@@ -32,11 +33,11 @@ const useAdmin = (): ReturnProps => {
     customAxios
       .get(`${import.meta.env.VITE_HTTP_API_URL}/admin/getData/`)
       .then((res) => {
-        console.log("useAdmin | loadData ✅ |", res.data);
+        logger("useAdmin | loadData ✅ |", res.data);
         setData(res.data);
       })
       .catch((error) => {
-        console.log("useAdmin | loadData ❌ |", error);
+        logger("useAdmin | loadData ❌ |", error);
       });
   };
 

@@ -1,5 +1,4 @@
 import { Button } from "@component-library/Button";
-import { LoadingSuspense } from "@component-library/Loading";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useOrganizations from "../hooks/useOrganizations";
@@ -7,6 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Heading } from "@component-library/Typography";
+import logger from "@/hooks/useLogger";
 
 interface InvitationProps {}
 
@@ -43,7 +43,7 @@ const Invitation: React.FC<InvitationProps> = (props) => {
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(schema) });
   const onSubmitInvite = (data: FormData) => {
-    console.log("onSubmitInvite", data);
+    logger("onSubmitInvite", data);
     setShowLoadedIn(true);
     inviteUserMutation.mutate(data.email, {
       onSuccess(data, variables, context) {
@@ -54,7 +54,7 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   };
 
   const onSubmitLink = (data: FormData) => {
-    console.log("onSubmitLink", data);
+    logger("onSubmitLink", data);
     setShowLoadedIn(true);
     inviteLinkMutation.mutate(data.email, {
       onSuccess(data, variables, context) {

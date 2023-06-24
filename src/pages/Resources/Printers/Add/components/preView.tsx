@@ -1,6 +1,7 @@
 import { Heading, Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import logger from "@/hooks/useLogger";
 
 interface ResourcesPrintersAddPreViewProps {
   printerName: string;
@@ -13,7 +14,7 @@ const ResourcesPrintersAddPreView: React.FC<
   const { printerName, properties } = props;
   const { t } = useTranslation();
 
-  console.log("ResourcesPrintersAddPreView", properties);
+  logger("ResourcesPrintersAddPreView", properties);
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">

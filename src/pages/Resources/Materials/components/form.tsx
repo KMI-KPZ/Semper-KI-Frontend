@@ -8,6 +8,7 @@ import * as yup from "yup";
 import SearchIcon from "@mui/icons-material/Search";
 import { LoadingSuspense } from "@component-library/index";
 import useOntoMaterials from "../../hooks/useOntoMaterials";
+import logger from "@/hooks/useLogger";
 
 interface ResourcesMaterialsFormProps {}
 
@@ -43,7 +44,7 @@ const ResourcesMaterialsForm: React.FC<ResourcesMaterialsFormProps> = (
   } = useForm<FormData>({ resolver: yupResolver(schema) });
 
   const onSubmit = (data: FormData) => {
-    console.log("onSubmitInvite", data);
+    logger("onSubmitInvite", data);
   };
 
   return (

@@ -5,6 +5,7 @@ import {
   URL_Datenschutz,
   URL_Impressum,
 } from "@/config/constants";
+import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
   pingQuery: UseQueryResult<{ up: boolean }, Error>;
@@ -23,7 +24,7 @@ const usePing = (): ReturnProps => {
           urls: [URL_Impressum, URL_Datenschutz, URL_Contact],
         })
         .then((res) => {
-          console.log("usePing | isMagazineUp ✅ |", res.data);
+          logger("usePing | isMagazineUp ✅ |", res.data);
           return res.data;
         }),
   });

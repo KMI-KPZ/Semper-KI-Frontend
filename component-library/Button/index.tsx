@@ -1,6 +1,7 @@
 import React, { PropsWithChildren, ReactNode } from "react";
 import LoopIcon from "@mui/icons-material/Loop";
 import { useNavigate } from "react-router-dom";
+import logger from "@/hooks/useLogger";
 
 interface ButtonProps {
   title: string;
@@ -62,7 +63,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     }
   };
 
-  if (title.includes(".")) console.log("Button", width, title);
+  if (title.includes(".")) logger("Button", width, title);
 
   const getClassNameWidth = (): string => {
     switch (width) {

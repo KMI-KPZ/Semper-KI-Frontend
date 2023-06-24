@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import logger from "@/hooks/useLogger";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface Props<T> {
@@ -22,11 +23,11 @@ export const useFetch = <T extends unknown>({ url }: Props<T>): ReturnProps => {
     axios
       .get(url)
       .then((response) => {
-        console.log("Fetch Hook Loaded Data", response.data.length, url);
+        logger("Fetch Hook Loaded Data", response.data.length, url);
         setData(response.data);
       })
       .catch((error) => {
-        console.log("Fetch Hook Error", error);
+        logger("Fetch Hook Error", error);
         setError(error);
       })
       .finally(() => {

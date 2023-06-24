@@ -2,6 +2,7 @@ import { Event } from "@/pages/App/types";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import customAxios from "@/hooks/useCustomAxios";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   isLoggedIn: boolean;
@@ -17,7 +18,7 @@ const useMissedEvent = (props: Props): void => {
       customAxios
         .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getMissedEvents/`)
         .then((res) => {
-          console.log("useMissedEvent | getMissedEvents ✅ |", res.data);
+          logger("useMissedEvent | getMissedEvents ✅ |", res.data);
           return res.data;
         }),
     enabled: isLoggedIn === true,

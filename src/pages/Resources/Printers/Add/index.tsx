@@ -14,6 +14,7 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import CheckIcon from "@mui/icons-material/Check";
 import ResourcesPrintersAddPreView from "./components/preView";
+import logger from "@/hooks/useLogger";
 
 interface ResourcesPrintersAddProps {}
 
@@ -63,7 +64,7 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
   });
   const onSubmit = (data: FormData) => {
     setEditPrinter(false);
-    console.log("onSubmitInvite", data);
+    logger("onSubmitInvite", data);
   };
   const selectPrinter = (uri?: string) => {
     if (uri !== undefined) {

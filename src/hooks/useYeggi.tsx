@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
   models: any;
@@ -25,7 +26,7 @@ const useYeggi = (): ReturnProps => {
         mode: "no-cors",
       }
     );
-    console.log(response);
+    logger(response);
   };
   return { models, searchModels };
 };

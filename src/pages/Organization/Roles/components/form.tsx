@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Button } from "@component-library/Button";
 import useOrganizations from "../../hooks/useOrganizations";
+import logger from "@/hooks/useLogger";
 
 interface OrganizationRolesFormProps {}
 
@@ -39,7 +40,7 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
   } = useForm<FormData>({ resolver: yupResolver(schema) });
 
   const onSubmit = (data: FormData) => {
-    console.log("onSubmitInvite", data);
+    logger("onSubmitInvite", data);
     setLoading(true);
     createRoleMutation.mutate(
       { name: data.name, description: data.description },

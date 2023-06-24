@@ -8,6 +8,7 @@ import {
 import { splitArray, splitFindArray } from "@/services/utils";
 import { Dispatch, SetStateAction } from "react";
 import { AppState } from "..";
+import logger from "@/hooks/useLogger";
 
 const addOrderEventItemMessages = (
   oldEvent: OrderEventItem | undefined,
@@ -128,7 +129,7 @@ const useOrderEvent = (
   };
 
   const deleteOrderEvent = (event: DeleteOrderEvent) => {
-    // console.log("useOrderEvent | deleteOrderEvent", event);
+    // logger("useOrderEvent | deleteOrderEvent", event);
     const { orderCollectionID, orderID, type } = event;
     setState((prevState) => {
       const { arrayTrue: _orderEvents, arrayFalse: otherEvents } = splitArray(

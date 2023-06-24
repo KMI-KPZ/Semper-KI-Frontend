@@ -13,6 +13,7 @@ import GuideOverview from "./components/overview";
 import GuideAnswers from "./components/answer";
 import GuideQuestion from "./components/question";
 import useFilter from "@/pages/Process/Filter/hooks/useFilter";
+import logger from "@/hooks/useLogger";
 
 const getQuestionByFilterId = (
   filterId: number,
@@ -127,7 +128,7 @@ const Guide: React.FC<Props> = (props) => {
   };
 
   const setOptions = (filterId: number, options: IGuideOption[]) => {
-    // console.log("Guide | setOptions", options);
+    // logger("Guide | setOptions", options);
     setState((prevState) => ({
       ...prevState,
       questions: [
@@ -148,7 +149,7 @@ const Guide: React.FC<Props> = (props) => {
   };
 
   const selectQuestion = (questionId?: number) => {
-    // console.log("Guide | selectQuestion", questionId, getNextQuestionId());
+    // logger("Guide | selectQuestion", questionId, getNextQuestionId());
     if (questionId === undefined && getNextQuestionId() === questions.length) {
       setState((prevState) => ({ ...prevState, overview: true }));
     } else {
@@ -163,7 +164,7 @@ const Guide: React.FC<Props> = (props) => {
 
   const applyFilter = () => {
     const filter = convertToGuideAnswer(questions);
-    console.log("Guide | applyFilter", filter);
+    logger("Guide | applyFilter", filter);
     setFilter(filter);
     navigate("/process/model");
   };

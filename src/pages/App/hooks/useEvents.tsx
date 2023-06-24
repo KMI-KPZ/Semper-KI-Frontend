@@ -15,6 +15,7 @@ import useMissedEvent from "./useMissedEvent";
 import useOrderEvent from "./useOrderEvent";
 import useOrgaEvent from "./useOrgaEvent";
 import { useWebsocket } from "./useWebsocket";
+import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
   hydrateEvents: (
@@ -88,7 +89,7 @@ const useEvents = (
   const onWebsocktEvent = (event: MessageEvent) => {
     if (event.data !== undefined) {
       const newEvent: Event = JSON.parse(event.data);
-      // console.log("useEvent | onWebsocktEvent ", newEvent);
+      // logger("useEvent | onWebsocktEvent ", newEvent);
       if (newEvent) {
         setState((prevState) => {
           return {

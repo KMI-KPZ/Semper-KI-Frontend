@@ -25,6 +25,7 @@ import {
   OrdersFilePermission,
 } from "@/hooks/usePermissions";
 import useOrderEventChange from "../hooks/useOrderEventChange";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   order: IOrder;
@@ -82,7 +83,7 @@ const OrderView: React.FC<Props> = (props) => {
   };
   const handleOnClickButtonReOrder = () => {
     if (window.confirm(t("Orders.OrderView.confirm.reOrder"))) {
-      console.log("//TODO ReOrder");
+      logger("//TODO ReOrder");
     }
   };
   const handleOnClickButtonReject = () => {

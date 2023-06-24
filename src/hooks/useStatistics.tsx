@@ -1,6 +1,6 @@
 import { useState } from "react";
 import customAxios from "./useCustomAxios";
-
+import logger from "@/hooks/useLogger";
 export interface IStatistics {
   active: number;
   loggedIn: number;
@@ -20,14 +20,14 @@ const useStatistics = (): ReturnProps => {
   //   customAxios
   //     .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getStatistics/`)
   //     .then((response) => {
-  //       console.log(
+  //       logger(
   //         "useStatistics| loadStatistics Success",
   //         JSON.stringify(response.data)
   //       );
   //       setStatistics(response.data);
   //     })
   //     .catch((error) => {
-  //       console.log("useStatistics| loadStatistics Error", error);
+  //       logger("useStatistics| loadStatistics Error", error);
   //     });
   // };
 

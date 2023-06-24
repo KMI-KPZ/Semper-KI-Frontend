@@ -1,5 +1,6 @@
 import customAxios from "@/hooks/useCustomAxios";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   orderID: string;
@@ -28,7 +29,7 @@ const useOrderFile = (props: Props): ReturnProps => {
           { responseType: "blob" }
         )
         .then((response) => {
-          console.log("useOrderFiles | orderFileQuery ✅ | ", fileName);
+          logger("useOrderFiles | orderFileQuery ✅ | ", fileName);
           return response.data;
         }),
     enabled: false,

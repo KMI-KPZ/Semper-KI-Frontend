@@ -15,6 +15,7 @@ import useCart from "@/hooks/useCart";
 import { checkForSelectedData } from "@/services/utils";
 import useOnQueryDataChange from "@/hooks/useOnQueryDataChange";
 import useSyncCart from "./hooks/useSyncCart";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   selectedProgressItem?: { index: number; progress: string };
@@ -75,28 +76,28 @@ const initialProcessState = (itemTitle?: string): IProcessState => ({
 export const ProcessContext = createContext<IProcessContext>({
   processState: initialProcessState(),
   createEmpytProcessItem: () => {
-    console.log("Error ProcessContext createProcessItem");
+    logger("Error ProcessContext createProcessItem");
   },
   deleteProcessItem: () => {
-    console.log("Error ProcessContext deleteProcess");
+    logger("Error ProcessContext deleteProcess");
   },
   selectProcessItem: () => {
-    console.log("Error ProcessContext selectProcess");
+    logger("Error ProcessContext selectProcess");
   },
   setProgress: () => {
-    console.log("Error ProcessContext setProgress");
+    logger("Error ProcessContext setProgress");
   },
   setGridState: () => {
-    console.log("Error ProcessContext setGridBoolean");
+    logger("Error ProcessContext setGridBoolean");
   },
   setFilterOpen: () => {
-    console.log("Error ProcessContext setFilterOpen");
+    logger("Error ProcessContext setFilterOpen");
   },
   searchModels: () => {
-    console.log("Error ProcessContext searchModels");
+    logger("Error ProcessContext searchModels");
   },
   setProcessItemTitle: () => {
-    console.log("Error ProcessContext setProcessItemTitle");
+    logger("Error ProcessContext setProcessItemTitle");
   },
 });
 
@@ -140,11 +141,11 @@ export const ProcessView: React.FC<Props> = (props) => {
   useSyncCart(hasChanged, items, setChangesFalse);
 
   const searchModels = (name: string): void => {
-    // console.log("Process | searchModels |", name);
+    // logger("Process | searchModels |", name);
     setState((prevState) => ({ ...prevState, searchText: name }));
   };
   const applyFilters = (filterItemList: IFilterItem[]): void => {
-    // console.log("Process | applyFilters |", filterItemList);
+    // logger("Process | applyFilters |", filterItemList);
     filtersMutate.mutate(filterItemList);
   };
   const startNewProcess = (): void => {
@@ -154,7 +155,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     }));
   };
   const createEmpytProcessItem = (): void => {
-    // console.log("Process | createEmpytProcessItem |", model);
+    // logger("Process | createEmpytProcessItem |", model);
     setState((prevState) => ({
       ...prevState,
       items: [
@@ -174,7 +175,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     models: IModel[],
     index: number
   ): void => {
-    // console.log("Process | createProcessItemFromModel |", model);
+    // logger("Process | createProcessItemFromModel |", model);
     const createItems = (): IProcessItem[] => {
       return models
         .filter((item, index) => index > 0)
@@ -200,7 +201,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     });
   };
   const deleteProcessItem = (index: number): void => {
-    // console.log("Process | deleteProcessItem |", index);
+    // logger("Process | deleteProcessItem |", index);
 
     setState((prevState) => {
       let items = [
@@ -279,7 +280,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     return progress;
   };
   const setProgress = (path: string): void => {
-    // console.log("Process| setProgress", path);
+    // logger("Process| setProgress", path);
     setState((prevState) => ({
       ...prevState,
       progress: getProgressByPath(path),
@@ -288,7 +289,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     // if (filtersQuery.data.length > 0) loadData(path);
   };
   const selectModel = (model: IModel): void => {
-    // console.log("Process | selectModel |", model);
+    // logger("Process | selectModel |", model);
     setState((prevState) => ({
       ...prevState,
       items: [
@@ -301,7 +302,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     navigate("/process/material");
   };
   const selectMaterial = (material: IMaterial): void => {
-    // console.log("Process | selectMaterial |", material);
+    // logger("Process | selectMaterial |", material);
 
     setState((prevState) => ({
       ...prevState,
@@ -315,7 +316,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     navigate("/process/postprocessing");
   };
   const selectPostProcessings = (postProcessings: IPostProcessing[]): void => {
-    // console.log("Process | selectPostProcessing |", postProcessings);
+    // logger("Process | selectPostProcessing |", postProcessings);
 
     setState((prevState) => ({
       ...prevState,
@@ -332,7 +333,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     setState((prevState) => ({ ...prevState, filterOpen: open }));
   };
   const deselectModel = () => {
-    // console.log("Process | removeModel |");
+    // logger("Process | removeModel |");
     setState((prevState) => ({
       ...prevState,
       items: [
@@ -348,7 +349,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     }));
   };
   const deselectMaterial = () => {
-    // console.log("Process | deselectMaterial |");
+    // logger("Process | deselectMaterial |");
     setState((prevState) => ({
       ...prevState,
       items: [
@@ -360,7 +361,7 @@ export const ProcessView: React.FC<Props> = (props) => {
     }));
   };
   const setProcessItemTitle = (title: string, _index: number) => {
-    // console.log("Process | setItemTitle |");
+    // logger("Process | setItemTitle |");
     setState((prevState) => ({
       ...prevState,
       items: [

@@ -1,6 +1,7 @@
 import customAxios from "@/hooks/useCustomAxios";
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
 import { IModel } from "..";
+import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
   uploadModels: UseMutationResult<IModel[], Error, File[], unknown>;
@@ -21,7 +22,7 @@ const useModelUpload = (): ReturnProps => {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((response) => {
-          console.log("useModelUpload | uploadModels ✅ |", response.data);
+          logger("useModelUpload | uploadModels ✅ |", response.data);
           return response.data.models;
         });
     },

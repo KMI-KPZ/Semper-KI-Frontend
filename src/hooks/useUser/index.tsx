@@ -4,6 +4,7 @@ import { getUserType, parseAddress } from "../../services/utils";
 import useCRSFToken from "../useCSRFToken";
 import customAxios from "../useCustomAxios";
 import { User, UserType } from "./types";
+import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
   userType: UserType;
@@ -26,7 +27,7 @@ const useUser = (): ReturnProps => {
       customAxios
         .get(`${import.meta.env.VITE_HTTP_API_URL}/public/isLoggedIn/`)
         .then((response) => {
-          console.log("useUser | isLoggedIn ✅ |", response.data);
+          logger("useUser | isLoggedIn ✅ |", response.data);
           return response.data === "Success" ? true : false;
         }),
     enabled: isCSRFTokenLoaded === true,
@@ -39,7 +40,7 @@ const useUser = (): ReturnProps => {
         .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getUser/`)
         .then((response) => {
           const userData = response.data;
-          console.log("useUser | getUser ✅ |", userData);
+          logger("useUser | getUser ✅ |", userData);
           return {
             ...userData,
             type: getUserType(userData.type),
@@ -59,11 +60,11 @@ const useUser = (): ReturnProps => {
     customAxios
       .delete(`${import.meta.env.VITE_HTTP_API_URL}/public/profileDeleteUser/`)
       .then((response) => {
-        console.log("useUser | profileDeleteUser ✅ |");
+        logger("useUser | profileDeleteUser ✅ |");
         navigate("/logout");
       })
       .catch((error) => {
-        console.log("useUser | deleteUser ❌ |", error);
+        logger("useUser | deleteUser ❌ |", error);
       });
   };
 
@@ -73,10 +74,10 @@ const useUser = (): ReturnProps => {
         userType: UserType[userType],
       })
       .then((response) => {
-        console.log("useUser | updateUser ✅ |", response);
+        logger("useUser | updateUser ✅ |", response);
       })
       .catch((error) => {
-        console.log("useUser | updateUser ❌ |", error);
+        logger("useUser | updateUser ❌ |", error);
       });
   };
 

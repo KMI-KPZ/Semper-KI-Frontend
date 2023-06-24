@@ -3,6 +3,7 @@ import React, { useTransition } from "react";
 import { useTranslation } from "react-i18next";
 import { EGuideQuestionState, IGuideOption, IGuideQuestion } from "../..";
 import GuideAnswer from "./answerItem";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   activeQuestionIndex: number;
@@ -24,7 +25,7 @@ const GuideAnswers: React.FC<Props> = (props) => {
     // setOptions(filterId, options);
   };
 
-  console.log();
+  logger();
 
   return (
     <div className="flex h-80 w-full flex-col justify-start gap-5 overflow-y-auto overflow-x-hidden bg-white p-10 xl:h-full">

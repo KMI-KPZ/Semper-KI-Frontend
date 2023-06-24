@@ -10,6 +10,7 @@ import {
   OntoPrinterFlat,
   OntoPrinterProperty,
 } from "../types/types";
+import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
   printersQuery: UseQueryResult<OntoPrinterFlat[], Error>;
@@ -35,7 +36,7 @@ const useOntoPrinters = (props: UseOntoProps): ReturnProps => {
       customAxios
         .get(`${import.meta.env.VITE_HTTP_API_URL}/public/onto/getPrinters/`)
         .then((res) => {
-          console.log("useOnto| getPrinters ✅ |", res.data);
+          logger("useOnto| getPrinters ✅ |", res.data);
           return res.data.printers;
         }),
   });
@@ -48,7 +49,7 @@ const useOntoPrinters = (props: UseOntoProps): ReturnProps => {
           printerID,
         })
         .then((res) => {
-          console.log("useOnto| getPrinter ✅ |", printerID, res.data);
+          logger("useOnto| getPrinter ✅ |", printerID, res.data);
           return res.data;
         }),
     enabled: printerID !== "",
@@ -61,10 +62,10 @@ const useOntoPrinters = (props: UseOntoProps): ReturnProps => {
           printer: printerID,
         })
         .then((res) => {
-          // console.log("useOnto| getPrinter ✅ |", printerID, res.data);
+          // logger("useOnto| getPrinter ✅ |", printerID, res.data);
           return res.data.properties.flatMap((object: Object) => {
             if (typeof object === "string") return { name: object };
-            console.log("object", Object.keys(object), Object.values(object));
+            logger("object", Object.keys(object), Object.values(object));
             return {
               name: "Eigneschnaft",
               values: ["nischt", "good"],

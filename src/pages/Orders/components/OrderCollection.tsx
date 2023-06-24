@@ -20,6 +20,7 @@ import { Event, OrderEvent, OrderEventItem } from "@/pages/App/types";
 import { Heading } from "@component-library/Typography";
 import PermissionGate from "@/components/PermissionGate";
 import { OrdersEditPermission } from "@/hooks/usePermissions";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   index: number;
@@ -49,7 +50,7 @@ const OrderCollection: React.FC<Props> = (props) => {
   };
   const handleOnClickButtonReOrder = () => {
     if (window.confirm(t("Orders.OrderCollection.button.re-order") + "?")) {
-      console.log("//TODO ReOrder");
+      logger("//TODO ReOrder");
     }
   };
   const handleOnClickButtonReject = () => {

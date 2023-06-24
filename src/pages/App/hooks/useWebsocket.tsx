@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
   sendMessage(message: string): void;
@@ -24,15 +25,15 @@ export const useWebsocket = (
 
       ws.onopen = () => {
         setState("connected");
-        console.log("useWebsocket | connected");
+        logger("useWebsocket | connected");
       };
       ws.onerror = () => {
         setState("error");
-        console.log("useWebsocket | error");
+        logger("useWebsocket | error");
       };
       ws.onclose = () => {
         setState("disconnected");
-        console.log("useWebsocket | disconnected");
+        logger("useWebsocket | disconnected");
       };
       ws.onmessage = (event: MessageEvent) => {
         onMessage(event);

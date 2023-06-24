@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { IServiceChapter, IServiceQuestion } from "..";
 import ServiceQuestion from "./question";
 import ServiceWizard from "./wizard";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   title: string;
@@ -28,7 +29,7 @@ const ServiceView: React.FC<Props> = (props) => {
   const { t } = useTranslation();
 
   const setQuestionAnswer = (value: string | number, _index: number) => {
-    // console.log("ServiceView | setQuestionAnswer ", value, _index);
+    // logger("ServiceView | setQuestionAnswer ", value, _index);
     setState((prevState) => ({
       ...prevState,
       questions: [
@@ -45,7 +46,7 @@ const ServiceView: React.FC<Props> = (props) => {
   };
 
   const setActiveChapter = (index: number) => {
-    console.log("ServiceView | setActiveChapter ", state);
+    logger("ServiceView | setActiveChapter ", state);
 
     setState((prevState) => ({
       ...prevState,

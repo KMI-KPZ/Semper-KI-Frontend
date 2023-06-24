@@ -6,7 +6,7 @@ import {
   UseQueryResult,
 } from "@tanstack/react-query";
 import customAxios from "@/hooks/useCustomAxios";
-import { useState } from "react";
+import logger from "@/hooks/useLogger";
 
 interface useOrganizationsReturnProps {
   userQuery: UseQueryResult<OrganizationsUser[], Error>;
@@ -75,7 +75,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
       return customAxios
         .post(apiUrl, { data: { intent: "fetchUsers" } })
         .then((res) => {
-          console.log("useOrganizations | fetchUsers ✅ |", res.data);
+          logger("useOrganizations | fetchUsers ✅ |", res.data);
           return res.data;
         });
     },
@@ -87,7 +87,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
       customAxios
         .post(apiUrl, { data: { intent: "getPermissions" } })
         .then((res) => {
-          console.log("useOrganizations | getPermissions ✅ |", res.data);
+          logger("useOrganizations | getPermissions ✅ |", res.data);
           return res.data;
         }),
   });
@@ -98,7 +98,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
       return customAxios
         .post(apiUrl, { data: { intent: "getRoles" } })
         .then((res) => {
-          console.log("useOrganizations | getRoles ✅ |", res.data);
+          logger("useOrganizations | getRoles ✅ |", res.data);
           return res.data;
         });
     },
@@ -115,10 +115,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((res) => {
-          console.log(
-            "useOrganizations | getPermissionsForRole ✅ |",
-            res.data
-          );
+          logger("useOrganizations | getPermissionsForRole ✅ |", res.data);
           return res.data;
         }),
     enabled: roleID !== undefined && roleID !== "",
@@ -131,7 +128,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           data: { intent: "getInviteLink", content: { email: email } },
         })
         .then((response) => {
-          console.log("useOrganizations | getInviteLink ✅ |", response.data);
+          logger("useOrganizations | getInviteLink ✅ |", response.data);
           return response.data;
         });
     },
@@ -147,7 +144,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           data: { intent: "addUser", content: { email: email } },
         })
         .then((response) => {
-          console.log("useOrganizations | addUser ✅ |", response.data);
+          logger("useOrganizations | addUser ✅ |", response.data);
           return response.data;
         });
     },
@@ -167,7 +164,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((response) => {
-          console.log("useOrganizations | createRole ✅ |", response.data);
+          logger("useOrganizations | createRole ✅ |", response.data);
           return response.data;
         });
     },
@@ -187,7 +184,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((response) => {
-          console.log(
+          logger(
             "useOrganizations | setPermissionsForRole ✅ |",
             response.data
           );
@@ -209,7 +206,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((response) => {
-          console.log("useOrganizations | deleteRole ✅ |", response.data);
+          logger("useOrganizations | deleteRole ✅ |", response.data);
           return response.data;
         });
     },
@@ -229,7 +226,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((response) => {
-          console.log("useOrganizations | assignRole ✅ |", response.data);
+          logger("useOrganizations | assignRole ✅ |", response.data);
           return response.data;
         });
     },
@@ -249,7 +246,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((response) => {
-          console.log("useOrganizations | removeRole ✅ |", response.data);
+          logger("useOrganizations | removeRole ✅ |", response.data);
           return response.data;
         });
     },
@@ -268,7 +265,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((response) => {
-          console.log("useOrganizations | deleteUser ✅ |", response.data);
+          logger("useOrganizations | deleteUser ✅ |", response.data);
           return response.data;
         });
     },

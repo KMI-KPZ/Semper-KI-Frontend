@@ -8,6 +8,7 @@ import {
   UseQueryResult,
 } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
+import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
   ordersQuery: UseQueryResult<IOrderCollection[], Error>;
@@ -75,7 +76,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
     async () => {
       const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/getOrders/`;
       return customAxios.get(apiUrl).then((response) => {
-        console.log("useOrders | getOrders ✅ |", response.data);
+        logger("useOrders | getOrders ✅ |", response.data);
         return response.data;
       });
     },
@@ -94,7 +95,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
       return customAxios
         .delete(apiUrl, { data: { id: orderID } })
         .then((response) => {
-          console.log("useOrders | deleteOrder ✅ |", response.data);
+          logger("useOrders | deleteOrder ✅ |", response.data);
           return response.data;
         });
     },
@@ -110,7 +111,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
       return customAxios
         .delete(apiUrl, { data: { id: orderCollectionID } })
         .then((response) => {
-          console.log("useOrders | deleteOrderCollection ✅ |", response.data);
+          logger("useOrders | deleteOrderCollection ✅ |", response.data);
           return response.data;
         });
     },
@@ -126,7 +127,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
           props,
         })
         .then((res) => {
-          console.log("useOrders | updateOrder ✅ |", res.data);
+          logger("useOrders | updateOrder ✅ |", res.data);
           return res;
         });
     },

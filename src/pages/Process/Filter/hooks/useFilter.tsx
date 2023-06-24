@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import { IFilterItem } from "@/pages/Process/Filter";
+import logger from "@/hooks/useLogger";
 const FilterItems = _FilterItems as IFilterItem[];
 
 interface ReturnProps {
@@ -29,7 +30,7 @@ const useFilter = (): ReturnProps => {
     queryFn: async () => {
       const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/getFilters/`;
       return customAxios.get(apiUrl).then((response) => {
-        console.log("useFilter | getFilters ✅ |", response.data);
+        logger("useFilter | getFilters ✅ |", response.data);
         return response.data;
       });
     },
@@ -44,7 +45,7 @@ const useFilter = (): ReturnProps => {
           filters,
         })
         .then((res) => {
-          console.log("useFilter | updateFilters ✅ |", res.data, filters);
+          logger("useFilter | updateFilters ✅ |", res.data, filters);
           return res;
         }),
     onSuccess(data, variables, context) {

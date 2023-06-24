@@ -1,4 +1,4 @@
-import useCustomAxios from "@/hooks/useCustomAxios";
+import customAxios from "@/hooks/useCustomAxios";
 import { IProcessItem } from "@/pages/Process";
 import {
   useMutation,
@@ -69,13 +69,12 @@ export enum OrderCollectionState {
 }
 
 export const useOrders = (shouldLoad?: boolean): ReturnProps => {
-  const { axiosCustom } = useCustomAxios();
   const queryClient = useQueryClient();
   const ordersQuery = useQuery<IOrderCollection[], Error>(
     ["orders"],
     async () => {
       const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/getOrders/`;
-      return axiosCustom.get(apiUrl).then((response) => {
+      return customAxios.get(apiUrl).then((response) => {
         console.log("useOrders | getOrders ✅ |", response.data);
         return response.data;
       });
@@ -92,7 +91,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
   const deleteOrder = useMutation<any, Error, string>({
     mutationFn: async (orderID: string) => {
       const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/deleteOrder/`;
-      return axiosCustom
+      return customAxios
         .delete(apiUrl, { data: { id: orderID } })
         .then((response) => {
           console.log("useOrders | deleteOrder ✅ |", response.data);
@@ -108,7 +107,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
       const apiUrl = `${
         import.meta.env.VITE_HTTP_API_URL
       }/public/deleteOrderCollection/`;
-      return axiosCustom
+      return customAxios
         .delete(apiUrl, { data: { id: orderCollectionID } })
         .then((response) => {
           console.log("useOrders | deleteOrderCollection ✅ |", response.data);
@@ -122,7 +121,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
 
   const updateOrder = useMutation<AxiosResponse, Error, IUpdateOrderData>({
     mutationFn: async (props: IUpdateOrderData) => {
-      return axiosCustom
+      return customAxios
         .put(`${import.meta.env.VITE_HTTP_API_URL}/public/updateOrder/`, {
           props,
         })

@@ -1,5 +1,4 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import useCustomAxios from "@/hooks/useCustomAxios";
 import { AppContext } from "@/pages/App";
 import { useContext } from "react";
 import { Permission } from "@/hooks/usePermissions";

@@ -1,4 +1,4 @@
-import useCustomAxios from "@/hooks/useCustomAxios";
+import customAxios from "@/hooks/useCustomAxios";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { IManufacturer } from "..";
 
@@ -7,12 +7,10 @@ interface ReturnProps {
 }
 
 const useManufacturer = (): ReturnProps => {
-  const { axiosCustom } = useCustomAxios();
-
   const manufacturerQuery = useQuery<IManufacturer[], Error>({
     queryKey: ["manufacturer"],
     queryFn: async () =>
-      axiosCustom
+      customAxios
         .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getManufacturers/`)
         .then((res) => {
           console.log("useManufacturer | getManufacturers ✅ |", res.data);

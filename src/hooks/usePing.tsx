@@ -1,5 +1,5 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import useCustomAxios from "@/hooks/useCustomAxios";
+import customAxios from "@/hooks/useCustomAxios";
 import {
   URL_Contact,
   URL_Datenschutz,
@@ -11,8 +11,6 @@ interface ReturnProps {
 }
 
 const usePing = (): ReturnProps => {
-  const { axiosCustom } = useCustomAxios();
-
   // const sliceURLs = (urls: string[]): string[] => {
   //   return urls.map((url) => url.slice(8, -1));
   // };
@@ -20,7 +18,7 @@ const usePing = (): ReturnProps => {
   const pingQuery = useQuery<{ up: boolean }, Error>({
     queryKey: ["ping"],
     queryFn: async () =>
-      axiosCustom
+      customAxios
         .post(`${import.meta.env.VITE_HTTP_API_URL}/public/isMagazineUp/`, {
           urls: [URL_Impressum, URL_Datenschutz, URL_Contact],
         })

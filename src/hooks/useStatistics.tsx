@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useCustomAxios from "./useCustomAxios";
+import customAxios from "./useCustomAxios";
 
 export interface IStatistics {
   active: number;
@@ -16,10 +16,8 @@ const useStatistics = (): ReturnProps => {
     loggedIn: 0,
   });
 
-  const { axiosCustom } = useCustomAxios();
-
   // const loadStatistics = () => {
-  //   axiosCustom
+  //   customAxios
   //     .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getStatistics/`)
   //     .then((response) => {
   //       console.log(

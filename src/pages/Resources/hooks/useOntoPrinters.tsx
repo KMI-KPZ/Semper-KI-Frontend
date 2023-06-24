@@ -4,7 +4,7 @@ import {
   useQuery,
   UseQueryResult,
 } from "@tanstack/react-query";
-import useCustomAxios from "@/hooks/useCustomAxios";
+import customAxios from "@/hooks/useCustomAxios";
 import {
   OntoPrinter,
   OntoPrinterFlat,
@@ -27,13 +27,12 @@ type UseOntoProps = {
 };
 
 const useOntoPrinters = (props: UseOntoProps): ReturnProps => {
-  const { axiosCustom } = useCustomAxios();
   const { printerID = "" } = props;
 
   const printersQuery = useQuery<OntoPrinterFlat[], Error>({
     queryKey: ["onto", "printers"],
     queryFn: async () =>
-      axiosCustom
+      customAxios
         .get(`${import.meta.env.VITE_HTTP_API_URL}/public/onto/getPrinters/`)
         .then((res) => {
           console.log("useOnto| getPrinters ✅ |", res.data);
@@ -44,7 +43,7 @@ const useOntoPrinters = (props: UseOntoProps): ReturnProps => {
   const printerQuery = useQuery<OntoPrinter, Error>({
     queryKey: ["onto", "printer", printerID],
     queryFn: async () =>
-      axiosCustom
+      customAxios
         .post(`${import.meta.env.VITE_HTTP_API_URL}/public/onto/getPrinter/`, {
           printerID,
         })
@@ -57,7 +56,7 @@ const useOntoPrinters = (props: UseOntoProps): ReturnProps => {
 
   const printerMutation = useMutation<OntoPrinterProperty[], Error, string>({
     mutationFn: async (printerID: string) =>
-      axiosCustom
+      customAxios
         .post(`${import.meta.env.VITE_HTTP_API_URL}/public/onto/getPrinter/`, {
           printer: printerID,
         })

@@ -2,7 +2,7 @@ import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { AxiosResponse } from "axios";
 import { UserType } from "@/hooks/useUser/types";
-import useCustomAxios from "@/hooks/useCustomAxios";
+import customAxios from "@/hooks/useCustomAxios";
 
 export const useLogin = (
   load: boolean,
@@ -12,13 +12,11 @@ export const useLogin = (
 ): {
   loginQuery: UseQueryResult<AxiosResponse<any, any>, Error>;
 } => {
-  const { axiosCustom } = useCustomAxios();
-
   const loginQuery = useQuery<AxiosResponse, Error>({
     queryKey: ["login"],
     queryFn: async () => {
       const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/login/`;
-      return axiosCustom.get(apiUrl, {
+      return customAxios.get(apiUrl, {
         headers: {
           Usertype: userType === undefined ? null : UserType[userType],
           Path: path === undefined ? "/" : path,
@@ -42,12 +40,11 @@ export const useLogin = (
 export const useLogout = (): {
   logoutQuery: UseQueryResult<AxiosResponse<any, any>, Error>;
 } => {
-  const { axiosCustom } = useCustomAxios();
   const logoutQuery = useQuery<AxiosResponse, Error>({
     queryKey: ["logout"],
     queryFn: async () => {
       const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/logout/`;
-      return axiosCustom.get(apiUrl);
+      return customAxios.get(apiUrl);
     },
   });
   useEffect(() => {

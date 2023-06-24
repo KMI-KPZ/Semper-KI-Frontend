@@ -1,4 +1,4 @@
-import useCustomAxios from "@/hooks/useCustomAxios";
+import customAxios from "@/hooks/useCustomAxios";
 import { IFilterItem } from "@/pages/Process/Filter";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { IMaterial } from "../Material";
@@ -15,15 +15,13 @@ export interface IProcessData {
 const useProcessData = (
   filters: IFilterItem[]
 ): { processDataQuery: UseQueryResult<IProcessData, Error> } => {
-  const { axiosCustom } = useCustomAxios();
-
   const processDataQuery = useQuery<IProcessData, Error>({
     queryKey: ["processData", "models", "materials", "postProcessings"],
     queryFn: async () => {
       const apiUrl = `${
         import.meta.env.VITE_HTTP_API_URL
       }/public/getProcessData/`;
-      return axiosCustom
+      return customAxios
         .post(apiUrl, {
           filters,
         })
@@ -40,12 +38,11 @@ const useProcessData = (
 export const useModelData = (
   filters: IFilterItem[]
 ): { modelsQuery: UseQueryResult<IModel[], Error> } => {
-  const { axiosCustom } = useCustomAxios();
   const modelsQuery = useQuery<IModel[], Error>({
     queryKey: ["models"],
     queryFn: async () => {
       const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/getModels/`;
-      return axiosCustom
+      return customAxios
         .post(apiUrl, {
           filters,
         })
@@ -60,14 +57,13 @@ export const useModelData = (
 export const useMaterialData = (
   filters: IFilterItem[]
 ): { materialsQuery: UseQueryResult<IMaterial[], Error> } => {
-  const { axiosCustom } = useCustomAxios();
   const materialsQuery = useQuery<IMaterial[], Error>({
     queryKey: ["materials"],
     queryFn: async () => {
       const apiUrl = `${
         import.meta.env.VITE_HTTP_API_URL
       }/public/getMaterials/`;
-      return axiosCustom
+      return customAxios
         .post(apiUrl, {
           filters,
         })
@@ -83,14 +79,13 @@ export const useMaterialData = (
 export const usePostProcessing = (
   filters: IFilterItem[]
 ): { postProcessingQuery: UseQueryResult<IPostProcessing[], Error> } => {
-  const { axiosCustom } = useCustomAxios();
   const postProcessingQuery = useQuery<IPostProcessing[], Error>({
     queryKey: ["postProcessings"],
     queryFn: async () => {
       const apiUrl = `${
         import.meta.env.VITE_HTTP_API_URL
       }/public/getPostProcessing/`;
-      return axiosCustom
+      return customAxios
         .post(apiUrl, {
           filters,
         })

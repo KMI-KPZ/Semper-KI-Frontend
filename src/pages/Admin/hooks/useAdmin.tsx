@@ -1,4 +1,4 @@
-import useCustomAxios from "@/hooks/useCustomAxios";
+import customAxios from "@/hooks/useCustomAxios";
 import { User } from "@/hooks/useUser/types";
 import { IOrder } from "@/pages/Orders/hooks/useOrders";
 import { IMaterial } from "@/pages/Process/Material";
@@ -27,10 +27,9 @@ const useAdmin = (): ReturnProps => {
     orders: [],
     printers: [],
   });
-  const { axiosCustom } = useCustomAxios();
 
   const loadData = () => {
-    axiosCustom
+    customAxios
       .get(`${import.meta.env.VITE_HTTP_API_URL}/admin/getData/`)
       .then((res) => {
         console.log("useAdmin | loadData ✅ |", res.data);

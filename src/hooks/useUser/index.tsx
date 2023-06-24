@@ -2,7 +2,7 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { getUserType, parseAddress } from "../../services/utils";
 import useCRSFToken from "../useCSRFToken";
-import useCustomAxios from "../useCustomAxios";
+import customAxios from "../useCustomAxios";
 import { User, UserType } from "./types";
 
 interface ReturnProps {
@@ -19,12 +19,11 @@ interface ReturnProps {
 const useUser = (): ReturnProps => {
   const navigate = useNavigate();
   const { isCSRFTokenLoaded } = useCRSFToken();
-  const { axiosCustom } = useCustomAxios();
 
   const loadIsLoggedInQuery = useQuery<boolean, Error>({
     queryKey: ["isLoggedIn"],
     queryFn: async () =>
-      axiosCustom
+      customAxios
         .get(`${import.meta.env.VITE_HTTP_API_URL}/public/isLoggedIn/`)
         .then((response) => {
           console.log("useUser | isLoggedIn ✅ |", response.data);
@@ -36,7 +35,7 @@ const useUser = (): ReturnProps => {
   const loadUserQuery = useQuery<User, Error>({
     queryKey: ["user"],
     queryFn: async () =>
-      axiosCustom
+      customAxios
         .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getUser/`)
         .then((response) => {
           const userData = response.data;
@@ -57,7 +56,7 @@ const useUser = (): ReturnProps => {
   });
 
   const deleteUser = () => {
-    axiosCustom
+    customAxios
       .delete(`${import.meta.env.VITE_HTTP_API_URL}/public/profileDeleteUser/`)
       .then((response) => {
         console.log("useUser | profileDeleteUser ✅ |");
@@ -69,7 +68,7 @@ const useUser = (): ReturnProps => {
   };
 
   const updateUser = (userType: UserType) => {
-    axiosCustom
+    customAxios
       .post(`${import.meta.env.VITE_HTTP_API_URL}/public/updateUser/`, {
         userType: UserType[userType],
       })

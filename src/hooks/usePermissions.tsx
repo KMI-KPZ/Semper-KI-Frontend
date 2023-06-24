@@ -1,7 +1,7 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import useCustomAxios from "@/hooks/useCustomAxios";
 import { Dispatch, SetStateAction } from "react";
 import { AppState } from "@/pages/App";
+import customAxios from "./useCustomAxios";
 
 interface ReturnProps {
   permissionQuery: UseQueryResult<Permission[], Error>;
@@ -41,12 +41,10 @@ const usePermissions = (
   setState: Dispatch<SetStateAction<AppState>>,
   loadPermissions: boolean
 ): ReturnProps => {
-  const { axiosCustom } = useCustomAxios();
-
   const permissionQuery = useQuery<Permission[], Error>({
     queryKey: ["permission"],
     queryFn: async () =>
-      axiosCustom
+      customAxios
         .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getPermissions/`)
         .then((res) => {
           console.log("usePermissions | loadPermissions ✅ |", res.data);

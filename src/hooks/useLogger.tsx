@@ -1,4 +1,4 @@
 const logger = (...data: any[]) => {
-  logger(data);
+  console.log(data);
 };
 export default logger;

@@ -14,6 +14,7 @@ import { Event, OrderEvent } from "@/pages/App/types";
 import { Heading, Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
 import { getOrderEventAmount } from "@/pages/App/hooks/useEvents";
+import useBodyScroll from "@/pages/App/hooks/useBodyScroll";
 
 interface Language {
   code: string;
@@ -61,7 +62,6 @@ interface State {
 
 export const Header: React.FC<Props> = (props) => {
   const { isLoggedIn, userType, cartCount, events } = props;
-  const { setAppState } = useContext(AppContext);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [state, setState] = useState<State>({
@@ -69,6 +69,7 @@ export const Header: React.FC<Props> = (props) => {
     languageMenuOpen: false,
   });
   const { menuOpen, languageMenuOpen } = state;
+  const { setScroll } = useBodyScroll();
 
   const changeLanguage = (code: string) => () => {
     closeLanguageMenu();
@@ -86,11 +87,11 @@ export const Header: React.FC<Props> = (props) => {
   };
   const closeMenu = () => {
     setState((prevState) => ({ ...prevState, menuOpen: false }));
-    setAppState((prevState) => ({ ...prevState, stopScroll: false }));
+    setScroll(false);
   };
   const openMenu = () => {
     setState((prevState) => ({ ...prevState, menuOpen: true }));
-    setAppState((prevState) => ({ ...prevState, stopScroll: true }));
+    setScroll(true);
   };
   const closeMenus = (): void => {
     closeLanguageMenu();

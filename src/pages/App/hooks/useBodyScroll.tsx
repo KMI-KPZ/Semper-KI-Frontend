@@ -1,15 +1,17 @@
-import { useEffect } from "react";
+interface ReturnProps {
+  setScroll(stopScroll: boolean): void;
+}
 
-interface ReturnProps {}
-
-const useBodyScroll = (stopScroll: boolean): ReturnProps => {
-  useEffect(() => {
+const useBodyScroll = (): ReturnProps => {
+  const setScroll = (stopScroll: boolean) => {
     document.body.style.overflowY = stopScroll === true ? "hidden" : "scroll";
     document.body.style.scrollbarGutter = "stable";
     // document.body.style.paddingRight = stopScroll === true ? "17px" : "";
-  }, [stopScroll]);
+  };
 
-  return {};
+  return {
+    setScroll,
+  };
 };
 
 export default useBodyScroll;

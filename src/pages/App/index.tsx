@@ -46,11 +46,9 @@ import usePermissions, {
   Permission,
 } from "@/hooks/usePermissions";
 import PermissionGate from "@/components/PermissionGate";
-import useBodyScroll from "./hooks/useBodyScroll";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
-  stopScroll: boolean;
   guideFilter: IFilterItem[];
   missedEvents: Event[];
   permissions?: Permission[];
@@ -65,7 +63,6 @@ export type AppContext = {
 };
 
 const initialAppState: AppState = {
-  stopScroll: false,
   guideFilter: [],
   missedEvents: [],
 };
@@ -80,13 +77,12 @@ export const AppContext = createContext<AppContext>({
 
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(initialAppState);
-  const { stopScroll, guideFilter, selectedProgressItem, missedEvents } = state;
+  const { guideFilter, selectedProgressItem, missedEvents } = state;
   const { isLoggedIn, userType, user, isLoggedInResponse } = useUser();
   const { cartQuery } = useCart();
   const { deleteEvent } = useEvents(setState, isLoggedIn);
   const { t } = useTranslation();
   usePermissions(setState, isLoggedIn && userType === UserType.manufacturer);
-  useBodyScroll(stopScroll);
 
   const setFilter = (guideFilter: IFilterItem[]): void => {
     setState((prevState) => ({ ...prevState, guideFilter }));

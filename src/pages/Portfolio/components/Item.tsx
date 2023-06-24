@@ -20,12 +20,7 @@ const PortfolioItem: React.FC<Props> = (props) => {
     setOpen((prevState) => !prevState);
   };
 
-  if (
-    preOpen === true &&
-    ref !== null &&
-    ref.current !== null &&
-    !appState.stopScroll
-  ) {
+  if (preOpen === true && ref !== null && ref.current !== null) {
     ref.current.scrollIntoView();
   }
   return (

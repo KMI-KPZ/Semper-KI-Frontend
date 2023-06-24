@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from "@component-library/Button";
 import { useTranslation } from "react-i18next";
 import { IModel } from "..";
-import useTailwind from "@/hooks/useTailwind";
 import { Heading } from "@component-library/Typography";
 
 interface Props {
@@ -14,7 +13,6 @@ interface Props {
 
 export const ModelCard: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { getBreakpointValue, getCurrentBreakpoint } = useTailwind();
   const { model, selectModel, grid, openModelView } = props;
   const handleOnClickSelect = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>

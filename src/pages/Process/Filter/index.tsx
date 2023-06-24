@@ -7,6 +7,7 @@ import FilterCard from "./components/card";
 import { IProgress } from "..";
 import { AppContext } from "@/pages/App";
 import { Heading } from "@component-library/Typography";
+import useBodyScroll from "@/pages/App/hooks/useBodyScroll";
 
 interface Props {
   filterOpen: boolean;
@@ -93,7 +94,7 @@ const Filter: React.FC<Props> = (props) => {
     guideAnswers,
     progress,
     filterOpen,
-    setFilterOpen,
+    setFilterOpen: parentSetFilterOpen,
   } = props;
   const hydratedFilterList: IFilterItem[] = hydrateFilter(
     filters,
@@ -105,6 +106,7 @@ const Filter: React.FC<Props> = (props) => {
   });
   const { categoryList, filterList } = state;
   const { t } = useTranslation();
+  const { setScroll } = useBodyScroll();
   const callApplyFilters = () => {
     applyFilters(
       filterList.map((filterItem: IFilterItem) => {
@@ -114,6 +116,11 @@ const Filter: React.FC<Props> = (props) => {
       })
     );
   };
+  const setFilterOpen = (open: boolean) => {
+    parentSetFilterOpen(open);
+    setScroll(open);
+  };
+
   const setFilterItem = (newFilterItem: IFilterItem) => {
     setState((prevState) => ({
       ...prevState,
@@ -175,10 +182,6 @@ const Filter: React.FC<Props> = (props) => {
   ) => {
     setFilterOpen(false);
   };
-
-  useEffect(() => {
-    setAppState((prevState) => ({ ...prevState, stopScroll: filterOpen }));
-  }, [filterOpen]);
 
   useEffect(() => {
     const handleResize = () => {

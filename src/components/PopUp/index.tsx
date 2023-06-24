@@ -1,5 +1,5 @@
+import useBodyScroll from "@/pages/App/hooks/useBodyScroll";
 import React, { ReactNode } from "react";
-import usePopUpState from "./hooks/usePopUpState";
 
 interface Props {
   open: boolean;
@@ -9,7 +9,8 @@ interface Props {
 
 const PopUp: React.FC<Props> = (props) => {
   const { children, open, onOutsideClick } = props;
-  usePopUpState(open);
+  const { setScroll } = useBodyScroll();
+  setScroll(open);
 
   const handleOnClickBackground = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>

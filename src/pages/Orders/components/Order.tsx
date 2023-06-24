@@ -14,12 +14,7 @@ import OrderFileView from "./FileView";
 import PopUp from "@/components/PopUp";
 import { IOrder, OrderState, useOrders } from "../hooks/useOrders";
 import { UserType } from "@/hooks/useUser/types";
-import {
-  DeleteOrderEvent,
-  Event,
-  OrderEvent,
-  OrderEventItem,
-} from "@/pages/App/types";
+import { OrderEventItem } from "@/pages/App/types";
 import { AppContext } from "@/pages/App";
 import { getModelURI } from "@/services/utils";
 import { Heading } from "@component-library/Typography";
@@ -29,7 +24,7 @@ import {
   OrdersEditPermission,
   OrdersFilePermission,
 } from "@/hooks/usePermissions";
-import useOrderEventChange from "../hooks/useOrderChange";
+import useOrderEventChange from "../hooks/useOrderEventChange";
 
 interface Props {
   order: IOrder;

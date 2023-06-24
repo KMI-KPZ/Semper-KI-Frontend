@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import useOrganizations, {
   Permission,
+  RolePermission,
   RoleProps,
 } from "../../hooks/useOrganizations";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -9,6 +10,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { LoadingSuspense } from "@component-library/Loading";
+import useOnQueryDataChange from "@/hooks/useOnQueryDataChange";
 
 interface OrganizationTableRowProps {
   role: RoleProps;
@@ -26,17 +28,17 @@ const OrganizationTableRow: React.FC<OrganizationTableRowProps> = (props) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [checkedPermissions, setCheckedPermissions] = useState<string[]>([]);
 
-  useEffect(() => {
-    if (
-      rolePermissionsQuery.data !== undefined &&
-      rolePermissionsQuery.data.length > 0
-    ) {
-      const newChecked = rolePermissionsQuery.data.map(
-        (permission) => permission.permission_name
-      );
-      setCheckedPermissions(newChecked);
-    }
-  }, [rolePermissionsQuery.data]);
+  const onQueryDataChange = (data: RolePermission[]) => {
+    const newChecked = data.map((permission) => permission.permission_name);
+    setCheckedPermissions(newChecked);
+  };
+
+  useOnQueryDataChange(
+    rolePermissionsQuery,
+    rolePermissionsQuery.data !== undefined &&
+      rolePermissionsQuery.data.length > 0,
+    onQueryDataChange
+  );
 
   const handleOnClickEdit = () => {
     if (edit === true)

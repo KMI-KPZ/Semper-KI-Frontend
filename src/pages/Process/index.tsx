@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { IModel, ModelCatalog } from "./Model";
 import { IMaterial, MaterialCatalog } from "./Material";
@@ -13,6 +13,8 @@ import Filter, { IFilterItem } from "./Filter";
 import { ModelUpload } from "./Model/components/upload";
 import useCart from "@/hooks/useCart";
 import { checkForSelectedData } from "@/services/utils";
+import useOnQueryDataChange from "@/hooks/useOnQueryDataChange";
+import useSyncCart from "./hooks/useSyncCart";
 
 interface Props {
   selectedProgressItem?: { index: number; progress: string };
@@ -113,38 +115,29 @@ export const ProcessView: React.FC<Props> = (props) => {
   const { hasChanged, grid, items, progress, activeItemIndex, filterOpen } =
     state;
   const { filtersQuery, updateFilters: filtersMutate } = useFilter();
-  useEffect(() => {
-    if (
-      cart !== undefined &&
-      error === null &&
-      (cart.length > 1 || (cart.length > 0 && checkForSelectedData(cart)))
-    ) {
-      setState((prevState) => ({
-        ...prevState,
-        items: cart,
-        activeItemIndex:
-          selectedProgressItem === undefined
-            ? prevState.activeItemIndex
-            : selectedProgressItem.index,
-        progress:
-          selectedProgressItem === undefined
-            ? prevState.progress
-            : getProgressByPath(selectedProgressItem.progress),
-      }));
-    }
-  }, [cart]);
 
-  useEffect(
-    function sycsChangedData() {
-      if (hasChanged === true)
-        updateCart.mutate(items, {
-          onSuccess(data, variables, context) {
-            setChangesFalse();
-          },
-        });
-    },
-    [items, hasChanged]
+  const onQueryDataChange = (data: IProcessItem[]) => {
+    setState((prevState) => ({
+      ...prevState,
+      items: cart,
+      activeItemIndex:
+        selectedProgressItem === undefined
+          ? prevState.activeItemIndex
+          : selectedProgressItem.index,
+      progress:
+        selectedProgressItem === undefined
+          ? prevState.progress
+          : getProgressByPath(selectedProgressItem.progress),
+    }));
+  };
+  useOnQueryDataChange(
+    cartQuery,
+    cartQuery.data !== undefined &&
+      (cartQuery.data.length > 1 ||
+        (cartQuery.data.length > 0 && checkForSelectedData(cartQuery.data))),
+    onQueryDataChange
   );
+  useSyncCart(hasChanged, items, setChangesFalse);
 
   const searchModels = (name: string): void => {
     // console.log("Process | searchModels |", name);

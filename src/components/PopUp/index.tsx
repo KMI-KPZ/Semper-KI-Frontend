@@ -9,8 +9,7 @@ interface Props {
 
 const PopUp: React.FC<Props> = (props) => {
   const { children, open, onOutsideClick } = props;
-  const { setScroll } = useBodyScroll();
-  setScroll(open);
+  useBodyScroll(open);
 
   const handleOnClickBackground = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>

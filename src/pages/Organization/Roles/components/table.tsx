@@ -28,34 +28,53 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
     <LoadingSuspense query={permissionsQuery}>
       {permissionsQuery.data !== undefined &&
       permissionsQuery.data.length > 0 ? (
-        <div className="w-full overflow-auto">
+        <div className="w-full overflow-auto ">
           <table className="w-full table-auto">
             <thead>
               <tr className="">
-                <th>{t("Organization.Roles.components.table.name")}</th>
-                <th>{t("Organization.Roles.components.table.description")}</th>
+                <th>
+                  <Text variant="body" className="p-2">
+                    {t("Organization.Roles.components.table.name")}
+                  </Text>
+                </th>
+                <th>
+                  <Text variant="body" className="p-2">
+                    {t("Organization.Roles.components.table.description")}
+                  </Text>
+                </th>
                 {permissionsQuery.data.map((permission, index) => (
-                  <th key={index}>{generateTitle(permission.value)}</th>
+                  <th key={index}>
+                    <Text variant="body" className="p-2">
+                      {generateTitle(permission.value)}
+                    </Text>
+                  </th>
                 ))}
-                <th>{t("Organization.Roles.components.table.actions")}</th>
+                <th>
+                  <Text variant="body" className="p-2">
+                    {t("Organization.Roles.components.table.actions")}
+                  </Text>
+                </th>
               </tr>
             </thead>
             <tbody className="">
-              {roles !== undefined && roles.length > 0 ? (
-                roles.map((role, index) => (
-                  <OrganizationTableRow
-                    role={role}
-                    key={index}
-                    allPermissions={permissionsQuery.data}
-                  />
-                ))
-              ) : (
-                <tr>
-                  <td>{t("Organization.Roles.components.table.empty")}</td>
-                </tr>
-              )}
+              {roles !== undefined && roles.length > 0
+                ? roles.map((role, index) => (
+                    <OrganizationTableRow
+                      role={role}
+                      key={index}
+                      allPermissions={permissionsQuery.data}
+                    />
+                  ))
+                : null}
             </tbody>
           </table>
+          {roles === undefined || roles.length === 0 ? (
+            <div className="flex w-full items-center justify-center">
+              <Text variant="body" className="text-gray-500">
+                {t("Organization.Roles.components.table.empty")}
+              </Text>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </LoadingSuspense>

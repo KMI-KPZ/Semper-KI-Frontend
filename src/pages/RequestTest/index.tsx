@@ -1,25 +1,28 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@component-library/Button";
-import { User } from "@/hooks/useUser/types";
-import { Heading } from "@component-library/Typography";
-import { useWebsocket } from "../App/hooks/useWebsocket";
-import PopUp from "@/components/PopUp";
-
+import Modal from "@component-library/Modal";
+import Bubbles1IMG from "../../../assets/images/Bubbles1_Trans.png";
 interface Props {}
 export const RequestTest: React.FC<Props> = (props) => {
   const [open, setOpen] = useState(false);
-
-  const handleOnClick = () => {
+  const openMenu = () => {
     setOpen(true);
   };
-
-  const handleOnOutsideClick = () => {
+  const closeMenu = () => {
     setOpen(false);
   };
-
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5">
-      TestSeite
+      <Button title="open" onClick={openMenu}>
+        Open
+      </Button>
+      <Modal
+        open={open}
+        closeModal={closeMenu}
+        className="flex w-full flex-row"
+      >
+        <img src={Bubbles1IMG} />
+      </Modal>
     </div>
   );
 };

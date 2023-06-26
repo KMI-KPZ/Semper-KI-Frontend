@@ -29,7 +29,7 @@ const PermissionGate: React.FC<PropsWithChildren<PermissionProps>> = (
   return allowAccess === true ? (
     <>{children}</>
   ) : (
-    // showMessage === undefined || showMessage === false ? null : (
+    //  showMessage === undefined || showMessage === false ? null : (
     //   <Text variant="body" children={t("PermissionGate.message")} />
     // );
     <div className="border-2 border-orange-500 ">{children}</div>

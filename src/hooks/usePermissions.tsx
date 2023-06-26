@@ -23,18 +23,18 @@ export const OrdersChatPermission: Permission = {
 };
 export const OrdersFilePermission: Permission = {
   context: "orders",
-  permission: "file",
+  permission: "files",
 };
 export const OrdersReadPermission: Permission = {
   context: "orders",
-  permission: "see",
+  permission: "read",
 };
 export const OrgaEditPermission: Permission = {
-  context: "organization",
+  context: "orga",
   permission: "edit",
 };
 export const OrgaReadPermission: Permission = {
-  context: "organization",
+  context: "orga",
   permission: "read",
 };
 

@@ -18,10 +18,8 @@ interface OrganizationTableRowProps {
 }
 
 const OrganizationTableRow: React.FC<OrganizationTableRowProps> = (props) => {
-  const {
-    role: { description, id, name },
-    allPermissions,
-  } = props;
+  const { role, allPermissions } = props;
+  const { description, id, name } = role;
   const { t } = useTranslation();
   const { rolePermissionsQuery, setPermissionMutation, deleteRoleMutation } =
     useOrganizations(id);
@@ -35,7 +33,8 @@ const OrganizationTableRow: React.FC<OrganizationTableRowProps> = (props) => {
 
   useOnQueryDataChange(
     rolePermissionsQuery,
-    rolePermissionsQuery.data !== undefined &&
+    checkedPermissions.length === 0 &&
+      rolePermissionsQuery.data !== undefined &&
       rolePermissionsQuery.data.length > 0,
     onQueryDataChange
   );

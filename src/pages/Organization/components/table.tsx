@@ -67,7 +67,11 @@ const OrganizationtableRow: React.FC<{
   } = props;
   const { t } = useTranslation();
   const [edit, setEdit] = useState<boolean>(false);
-  const [newRole, setNewRole] = useState<RoleProps>(roles[0]);
+  const [newRole, setNewRole] = useState<RoleProps>({
+    description: "---",
+    id: "---",
+    name: "---",
+  });
   const { assignRoleMutation, removeRoleMutation, deleteUserMutation } =
     useOrganizations();
 

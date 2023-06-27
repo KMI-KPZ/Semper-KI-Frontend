@@ -83,7 +83,7 @@ const App: React.FC = () => {
   const { guideFilter, selectedProgressItem, missedEvents } = state;
   const { isLoggedIn, userType, user, isLoggedInResponse } = useUser();
   const { cartQuery } = useCart();
-  const { deleteEvent } = useEvents(setState, isLoggedIn, userType);
+  const { socket, deleteEvent } = useEvents(setState, isLoggedIn, userType);
   const { t } = useTranslation();
   usePermissions(setState, isLoggedIn && userType === UserType.manufacturer);
 
@@ -148,7 +148,7 @@ const App: React.FC = () => {
   const privateRoutes = (
     <Route element={<PrivateRoutes user={user} />}>
       <Route path="account" element={<Profil user={user!} />} />
-      <Route path="test" element={<RequestTest />} />
+      <Route path="test" element={<RequestTest socket={socket} />} />
     </Route>
   );
 

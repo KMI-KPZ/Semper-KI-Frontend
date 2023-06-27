@@ -42,6 +42,7 @@ export const useWebsocket = (
         logger("useWebsocket | disconnected");
       };
       ws.onmessage = (event: MessageEvent) => {
+        logger("useWebsocket | onmessage", event);
         onMessage(event);
       };
 

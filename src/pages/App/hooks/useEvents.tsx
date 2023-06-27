@@ -22,6 +22,7 @@ import { UserType } from "@/hooks/useUser/types";
 
 interface ReturnProps {
   deleteEvent: (event: DeleteEvent) => void;
+  socket: WebSocket | null;
 }
 
 export const getOrderEventAmount = (
@@ -115,7 +116,7 @@ const useEvents = (
     }
   };
 
-  useWebsocket(onWebsocktEvent, isLoggedIn, userType);
+  const { socket } = useWebsocket(onWebsocktEvent, isLoggedIn, userType);
 
   const hydrateEvents = (newEvent: Event): void => {
     setState((prevState) => {
@@ -154,7 +155,7 @@ const useEvents = (
     }
   };
 
-  return { deleteEvent };
+  return { socket, deleteEvent };
 };
 
 export default useEvents;

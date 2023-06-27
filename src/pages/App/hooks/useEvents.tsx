@@ -98,10 +98,19 @@ const useEvents = (
         switch (newEvent.eventType) {
           case "orderEvent":
             hydrateEvents(newEvent);
-            toast(
-              t("toast.orderEvent"),
-              userType === UserType.client ? "/orders" : "/contracts"
-            );
+            const orderEvent = newEvent as OrderEvent;
+            if (orderEvent.orders[0].messages > 0) {
+              toast(
+                t("toast.orderEvent.message"),
+                userType === UserType.client ? "/orders" : "/contracts"
+              );
+            }
+            if (orderEvent.orders[0].status > 0) {
+              toast(
+                t("toast.orderEvent.status"),
+                userType === UserType.client ? "/orders" : "/contracts"
+              );
+            }
             break;
           case "orgaEvent":
             hydrateEvents(newEvent);

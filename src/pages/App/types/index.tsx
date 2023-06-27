@@ -1,4 +1,4 @@
-export type EventType = "orderEvent" | "orgaEvent";
+export type EventType = "orderEvent" | "orgaEvent" | "permissionEvent";
 export interface Event {
   eventType: EventType;
 }
@@ -18,6 +18,9 @@ export interface OrderEventItem {
 export interface OrgaEvent extends Event {
   eventType: "orgaEvent";
   orgaName: string;
+}
+export interface PermissionEvent extends Event {
+  eventType: "permissionEvent";
 }
 
 export interface DeleteEvent {

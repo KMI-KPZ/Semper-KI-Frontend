@@ -938,5 +938,13 @@
         "close":"Schließen"
       }
     }
+  },
+  "toast":{
+    "component":{
+      "to":"zur Seite"
+    },
+    "permissionEvent":"Ihre Rechte wurden aktualisiert",
+    "orgaEvent":"Ihre Organisation wurde aktualisiert",
+    "orderEvent":"Ihre Aufträge wurde aktualisiert"
   }
 }

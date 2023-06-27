@@ -3,7 +3,6 @@ import {
   Event,
   OrderEvent,
   OrderEventItem,
-  OrderEventType,
 } from "@/pages/App/types";
 import { splitArray, splitFindArray } from "@/services/utils";
 import { Dispatch, SetStateAction } from "react";

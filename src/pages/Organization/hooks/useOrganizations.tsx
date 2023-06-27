@@ -192,7 +192,9 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
         });
     },
     onSuccess() {
-      queryClient.invalidateQueries(["organizations", "roles", "permissions"]);
+      queryClient.invalidateQueries(["organizations", "roles"]);
+      queryClient.invalidateQueries(["organizations", "permissions"]);
+      queryClient.invalidateQueries(["permission"]);
     },
   });
 
@@ -212,6 +214,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     },
     onSuccess() {
       queryClient.invalidateQueries(["organizations", "roles"]);
+      queryClient.invalidateQueries(["permission"]);
     },
   });
 
@@ -232,6 +235,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     },
     onSuccess() {
       queryClient.invalidateQueries(["organizations", "users"]);
+      queryClient.invalidateQueries(["organizations", "permissions"]);
+      queryClient.invalidateQueries(["permission"]);
     },
   });
 

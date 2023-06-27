@@ -64,7 +64,7 @@ const OrganizationTableRow: React.FC<OrganizationTableRowProps> = (props) => {
 
   return (
     <tr>
-      <td>{name}</td>
+      <td className="text-center">{name}</td>
       <td className="text-center">{description}</td>
       {allPermissions.map((permission, index) => (
         <td key={index}>

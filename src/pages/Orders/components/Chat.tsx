@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { IChatMessage, useOrders } from "../hooks/useOrders";
 import { User } from "@/hooks/useUser/types";
 import { Heading } from "@component-library/Typography";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   closeMenu(): void;
@@ -64,6 +65,20 @@ const ChatView: React.FC<Props> = (props) => {
     closeMenu();
   };
 
+  const onEnterPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.code == "Enter" && e.shiftKey == false) {
+      e.preventDefault();
+      handleOnClickButtonSend();
+    }
+    if (e.code == "Enter" && e.shiftKey == true) {
+      e.preventDefault();
+      setState((prevState) => ({
+        ...prevState,
+        messageText: prevState.messageText + "\n",
+      }));
+    }
+  };
+
   return (
     <div className="relative flex h-screen w-screen flex-col items-center justify-start gap-5 bg-slate-100 md:max-h-[80vh] md:max-w-2xl md:bg-transparent">
       <div className="absolute right-1 top-1 md:hidden">
@@ -117,6 +132,7 @@ const ChatView: React.FC<Props> = (props) => {
           value={messageText}
           placeholder={t("Orders.ChatView.placeholder")}
           onChange={handleOnChangeTextArea}
+          onKeyDown={onEnterPress}
         />
         <Button
           children={<SendIcon />}

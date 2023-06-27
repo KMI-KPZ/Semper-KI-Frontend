@@ -10,7 +10,7 @@ import { Event, OrderEvent } from "@/pages/App/types";
 import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import HomeResourcesCard from "./components/ResourcesCard";
-import useEvents, { getOrderEventAmount } from "../App/hooks/useEvents";
+import { getOrderEventAmount } from "../App/hooks/useEvents";
 
 interface Props {
   userType: UserType;

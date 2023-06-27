@@ -16,12 +16,11 @@ import useOrderEvent from "./useOrderEvent";
 import useOrgaEvent from "./useOrgaEvent";
 import { useWebsocket } from "./useWebsocket";
 import logger from "@/hooks/useLogger";
+import { useTranslation } from "react-i18next";
+import { toast } from "./useToast";
+import { UserType } from "@/hooks/useUser/types";
 
 interface ReturnProps {
-  hydrateEvents: (
-    missedEvents: Event[],
-    newOrderCollectionEvent: Event
-  ) => Event[];
   deleteEvent: (event: DeleteEvent) => void;
 }
 
@@ -55,11 +54,13 @@ export const getOrderEventAmount = (
 
 const useEvents = (
   setState: Dispatch<SetStateAction<AppState>>,
-  isLoggedIn: boolean
+  isLoggedIn: boolean,
+  userType: UserType
 ): ReturnProps => {
   const queryClient = useQueryClient();
   const { hydrateOrderEvents, deleteOrderEvent } = useOrderEvent(setState);
   const { hydrateOrgaEvents, deleteOrgaEvent } = useOrgaEvent();
+  const { t } = useTranslation();
 
   const onLoadMissedEvents = (missedEvents: Event[]) => {
     if (missedEvents.length > 0) {
@@ -83,34 +84,63 @@ const useEvents = (
       case "orgaEvent":
         queryClient.invalidateQueries(["organizations"]);
         break;
+      case "permissionEvent":
+        queryClient.invalidateQueries(["permission"]);
+        break;
     }
   };
 
   const onWebsocktEvent = (event: MessageEvent) => {
     if (event.data !== undefined) {
       const newEvent: Event = JSON.parse(event.data);
-      // logger("useEvent | onWebsocktEvent ", newEvent);
       if (newEvent) {
-        setState((prevState) => {
-          return {
-            ...prevState,
-            missedEvents: hydrateEvents(prevState.missedEvents, newEvent),
-          };
-        });
+        switch (newEvent.eventType) {
+          case "orderEvent":
+            hydrateEvents(newEvent);
+            toast(
+              t("toast.orderEvent"),
+              userType === UserType.client ? "/orders" : "/contracts"
+            );
+            break;
+          case "orgaEvent":
+            hydrateEvents(newEvent);
+            toast(t("toast.orgaEvent"), "/organization");
+            break;
+          case "permissionEvent":
+            toast(t("toast.permissionEvent"), "/organization");
+            break;
+        }
         invalidateQueries(newEvent);
       }
     }
   };
 
-  useWebsocket(onWebsocktEvent, isLoggedIn);
+  useWebsocket(onWebsocktEvent, isLoggedIn, userType);
 
-  const hydrateEvents = (events: Event[], newEvent: Event): Event[] => {
-    switch (newEvent.eventType) {
-      case "orderEvent":
-        return hydrateOrderEvents(events, newEvent as OrderEvent);
-      case "orgaEvent":
-        return hydrateOrgaEvents(events, newEvent as OrgaEvent);
-    }
+  const hydrateEvents = (newEvent: Event): void => {
+    setState((prevState) => {
+      let newMissedEvent: Event[] = prevState.missedEvents;
+      switch (newEvent.eventType) {
+        case "orderEvent":
+          newMissedEvent = hydrateOrderEvents(
+            prevState.missedEvents,
+            newEvent as OrderEvent
+          );
+          break;
+        case "orgaEvent":
+          newMissedEvent = hydrateOrgaEvents(
+            prevState.missedEvents,
+            newEvent as OrgaEvent
+          );
+          break;
+        default:
+          break;
+      }
+      return {
+        ...prevState,
+        missedEvents: newMissedEvent,
+      };
+    });
   };
 
   const deleteEvent = (event: DeleteEvent) => {
@@ -124,7 +154,7 @@ const useEvents = (
     }
   };
 
-  return { hydrateEvents, deleteEvent };
+  return { deleteEvent };
 };
 
 export default useEvents;

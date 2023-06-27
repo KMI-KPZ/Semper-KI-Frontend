@@ -16,6 +16,7 @@ import {
 } from "./components/PrivateRoutes";
 import { User, UserType } from "@/hooks/useUser/types";
 import { DeleteEvent, Event } from "@/pages/App/types";
+import { ToastContainer } from "react-toastify";
 import useCart from "@/hooks/useCart";
 import useUser from "@/hooks/useUser";
 import Background from "@/components/Background";
@@ -46,6 +47,8 @@ import usePermissions, {
   Permission,
 } from "@/hooks/usePermissions";
 import PermissionGate from "@/components/PermissionGate";
+import "react-toastify/dist/ReactToastify.css";
+import logger from "@/hooks/useLogger";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -80,7 +83,7 @@ const App: React.FC = () => {
   const { guideFilter, selectedProgressItem, missedEvents } = state;
   const { isLoggedIn, userType, user, isLoggedInResponse } = useUser();
   const { cartQuery } = useCart();
-  const { deleteEvent } = useEvents(setState, isLoggedIn);
+  const { deleteEvent } = useEvents(setState, isLoggedIn, userType);
   const { t } = useTranslation();
   usePermissions(setState, isLoggedIn && userType === UserType.manufacturer);
 
@@ -145,7 +148,7 @@ const App: React.FC = () => {
   const privateRoutes = (
     <Route element={<PrivateRoutes user={user} />}>
       <Route path="account" element={<Profil user={user!} />} />
-      <Route path="test" element={<RequestTest user={user} />} />
+      <Route path="test" element={<RequestTest />} />
     </Route>
   );
 
@@ -235,6 +238,18 @@ const App: React.FC = () => {
         </main>
         <Footer />
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={8000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Background />
     </AppContext.Provider>
   );

@@ -10,6 +10,7 @@ import useOrganizations, {
 import { LoadingSuspense } from "@component-library/Loading";
 import CheckIcon from "@mui/icons-material/Check";
 import { Heading } from "@component-library/Typography";
+import logger from "@/hooks/useLogger";
 
 interface OrganizationTableProps {}
 
@@ -67,11 +68,16 @@ const OrganizationtableRow: React.FC<{
   } = props;
   const { t } = useTranslation();
   const [edit, setEdit] = useState<boolean>(false);
-  const [newRole, setNewRole] = useState<RoleProps>({
-    description: "---",
-    id: "---",
-    name: "---",
-  });
+  // logger("Email:", email, "Roles:", roles);
+  const [newRole, setNewRole] = useState<RoleProps>(
+    roles.length === 0
+      ? {
+          description: "---",
+          id: "---",
+          name: "---",
+        }
+      : roles[0]
+  );
   const { assignRoleMutation, removeRoleMutation, deleteUserMutation } =
     useOrganizations();
 
@@ -104,7 +110,7 @@ const OrganizationtableRow: React.FC<{
       <td className="text-center">{email}</td>
       <td className="text-center">
         {edit === false ? (
-          newRole !== undefined ? (
+          newRole.name !== "---" ? (
             newRole.name
           ) : (
             "---"

@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import ItemView from "./view";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ItemCard from "./card";
-import PopUp from "@/components/PopUp";
 import { IPostProcessing } from "..";
+import Modal from "@component-library/Modal";
 
 interface Props<Item> {
   grid: boolean;
@@ -15,7 +15,7 @@ interface Props<Item> {
 }
 
 interface State<Item> {
-  popUp: boolean;
+  modalOpen: boolean;
   itemOpen: Item | undefined;
 }
 
@@ -24,17 +24,21 @@ const Catalog = <Item extends IPostProcessing>(props: Props<Item>) => {
   const navigate = useNavigate();
   const { items, checkItem, grid, searchText } = props;
   const [state, setState] = useState<State<Item>>({
-    popUp: false,
+    modalOpen: false,
     itemOpen: undefined,
   });
-  const { itemOpen, popUp } = state;
+  const { itemOpen, modalOpen } = state;
   const openItemView = (item: Item) => {
-    setState((prevState) => ({ ...prevState, popUp: true, itemOpen: item }));
+    setState((prevState) => ({
+      ...prevState,
+      modalOpen: true,
+      itemOpen: item,
+    }));
   };
   const closeItemView = () => {
     setState((prevState) => ({
       ...prevState,
-      popUp: false,
+      modalOpen: false,
       itemOpen: undefined,
     }));
   };
@@ -92,9 +96,9 @@ const Catalog = <Item extends IPostProcessing>(props: Props<Item>) => {
             {t("Process.PostProcessing.Catalog.button")}
             <NavigateNextIcon fontSize="large" />
           </div>
-          <PopUp
-            open={popUp === true && itemOpen !== undefined}
-            onOutsideClick={closeItemView}
+          <Modal
+            open={modalOpen === true && itemOpen !== undefined}
+            closeModal={closeItemView}
           >
             {itemOpen !== undefined ? (
               <ItemView
@@ -103,7 +107,7 @@ const Catalog = <Item extends IPostProcessing>(props: Props<Item>) => {
                 checkItem={checkItem}
               />
             ) : null}
-          </PopUp>
+          </Modal>
         </>
       ) : (
         t("Process.PostProcessing.Catalog.empty")

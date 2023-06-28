@@ -4,10 +4,10 @@ import { IProcessState } from "..";
 import { useTranslation } from "react-i18next";
 import { useMaterialData } from "../hooks/useProcessData";
 import { LoadingSuspense } from "@component-library/Loading";
-import PopUp from "@/components/PopUp";
 import { MaterialPreView } from "./components/preView";
 import { MaterialView } from "./components/view";
 import { IFilterItem } from "../Filter";
+import Modal from "@component-library/Modal";
 
 interface Props {
   processState: IProcessState;
@@ -19,7 +19,7 @@ interface Props {
 }
 
 interface State {
-  popUp: boolean;
+  modalOpen: boolean;
   material: IMaterial | undefined;
 }
 
@@ -42,7 +42,7 @@ export const MaterialCatalog: React.FC<Props> = (props) => {
   } = props;
   const { grid, searchText } = processState;
   const [state, setState] = useState<State>({
-    popUp: false,
+    modalOpen: false,
     material: undefined,
   });
   const { materialsQuery } = useMaterialData(filters);
@@ -50,12 +50,12 @@ export const MaterialCatalog: React.FC<Props> = (props) => {
     setProgress("material");
   }, []);
   const openMaterialView = (material: IMaterial) => {
-    setState((prevState) => ({ ...prevState, popUp: true, material }));
+    setState((prevState) => ({ ...prevState, modalOpen: true, material }));
   };
   const closeMaterialView = () => {
     setState((prevState) => ({
       ...prevState,
-      popUp: false,
+      modalOpen: false,
       material: undefined,
     }));
   };
@@ -95,9 +95,9 @@ export const MaterialCatalog: React.FC<Props> = (props) => {
                   key={index}
                 />
               ))}
-            <PopUp
-              open={state.popUp === true && state.material !== undefined}
-              onOutsideClick={closeMaterialView}
+            <Modal
+              open={state.modalOpen === true && state.material !== undefined}
+              closeModal={closeMaterialView}
             >
               {state.material !== undefined ? (
                 <MaterialPreView
@@ -106,7 +106,7 @@ export const MaterialCatalog: React.FC<Props> = (props) => {
                   selectMaterial={selectMaterial}
                 />
               ) : null}
-            </PopUp>
+            </Modal>
           </>
         ) : (
           t("Process.Material.MaterialCatalog.empty")

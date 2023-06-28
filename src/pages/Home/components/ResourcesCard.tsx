@@ -24,7 +24,7 @@ const HomeResourcesCard: React.FC<HomeResourcesProps> = (props) => {
       <Heading variant="h2">{t("Home.HomeResourcesCard.header")}</Heading>
       <Divider />
       <div className="flex flex-row flex-wrap items-start justify-center">
-        <div className="flex  w-1/2 flex-col items-center justify-center p-2">
+        <div className="flex w-full flex-col items-center justify-center p-2 lg:w-1/2">
           <Button
             width="full"
             variant="secondary"
@@ -33,7 +33,7 @@ const HomeResourcesCard: React.FC<HomeResourcesProps> = (props) => {
             title={t("Home.HomeResourcesCard.link.printer")}
           />
         </div>
-        <div className="flex w-1/2 flex-col items-center justify-center p-2">
+        <div className="flex w-full flex-col items-center justify-center p-2 lg:w-1/2">
           <Button
             width="full"
             variant="secondary"
@@ -42,7 +42,7 @@ const HomeResourcesCard: React.FC<HomeResourcesProps> = (props) => {
             title={t("Home.HomeResourcesCard.link.material")}
           />
         </div>
-        <div className="flex w-1/2 flex-col items-center justify-center p-2">
+        <div className="flex w-full flex-col items-center justify-center p-2 lg:w-fit">
           <Button
             width="full"
             variant="secondary"

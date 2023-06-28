@@ -3,12 +3,15 @@ import {
   MouseEvent,
   PropsWithChildren,
   SyntheticEvent,
+  useContext,
   useEffect,
   useRef,
 } from "react";
 import { Button } from "..";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "react-i18next";
+import { AppContext } from "@/pages/App";
+import useBodyScroll from "@/pages/App/hooks/useBodyScroll";
 
 type ModelProps = {
   open: boolean;
@@ -27,6 +30,7 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   const { t } = useTranslation();
   const modalRef = useRef<HTMLDialogElement>(null);
   const className = _className || "";
+  useBodyScroll(open);
 
   // Eventlistener: trigger onclose when cancel detected
   const handleOnCancel = (e: SyntheticEvent<HTMLDialogElement, Event>) => {
@@ -76,7 +80,7 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   return (
     <dialog
       ref={modalRef}
-      className={`relative max-h-screen max-w-[100vw] overflow-auto p-0 shadow-lg
+      className={`relative max-h-screen max-w-[100vw] overflow-auto bg-transparent p-0 shadow-lg
       backdrop:fixed backdrop:bottom-0 backdrop:left-0 backdrop:right-0 backdrop:top-0 
       backdrop:bg-black backdrop:opacity-30 backdrop:blur-sm
      `}
@@ -86,14 +90,15 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
       onAnimationEnd={handleOnAnimEnd}
     >
       <div
-        className={`box-border min-h-[150px] min-w-[200px] bg-white p-5  ${className}`}
+        className={`box-border min-h-[150px] min-w-[200px] ${className}`}
         onClick={handleOnClickChildren}
       >
         <Button
-          className="absolute right-0 top-0"
+          className="absolute right-0 top-0 z-10 mr-3 mt-3"
           title={t("components.Modal.button.close")}
           children={<CloseIcon />}
-          variant="text"
+          variant="secondary"
+          width="fit"
           onClick={closeModal}
         />
         {children}

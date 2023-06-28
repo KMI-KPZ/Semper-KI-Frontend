@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useModelData } from "../hooks/useProcessData";
 import { LoadingSuspense } from "@component-library/Loading";
-import PopUp from "@/components/PopUp";
 import { IFilterItem } from "../Filter";
 import { ModelPreView } from "./components/preView";
 import ModelView from "./components/view";
 import IconUpload from "@icons/Upload.svg";
 import { Heading } from "@component-library/Typography";
+import Modal from "@component-library/Modal";
 
 interface Props {
   filters: IFilterItem[];
@@ -23,7 +23,7 @@ interface Props {
 }
 
 interface State {
-  popUp: boolean;
+  modalOpen: boolean;
   model: IModel | undefined;
 }
 
@@ -55,16 +55,23 @@ export const ModelCatalog: React.FC<Props> = (props) => {
   } = props;
   const { grid, searchText } = processState;
   const navigate = useNavigate();
-  const [state, setState] = useState<State>({ popUp: false, model: undefined });
+  const [state, setState] = useState<State>({
+    modalOpen: false,
+    model: undefined,
+  });
   const { modelsQuery } = useModelData(filters);
   useEffect(() => {
     setProgress("model");
   }, []);
   const openModelView = (model: IModel) => {
-    setState((prevState) => ({ ...prevState, popUp: true, model }));
+    setState((prevState) => ({ ...prevState, modalOpen: true, model }));
   };
   const closeModelView = () => {
-    setState((prevState) => ({ ...prevState, popUp: false, model: undefined }));
+    setState((prevState) => ({
+      ...prevState,
+      modalOpen: false,
+      model: undefined,
+    }));
   };
   const filterBySearch = (model: IModel): boolean => {
     if (searchText === "") {
@@ -138,9 +145,9 @@ export const ModelCatalog: React.FC<Props> = (props) => {
                   openModelView={openModelView}
                 />
               ))}
-            <PopUp
-              open={state.popUp === true && state.model !== undefined}
-              onOutsideClick={closeModelView}
+            <Modal
+              open={state.modalOpen === true && state.model !== undefined}
+              closeModal={closeModelView}
             >
               {state.model !== undefined ? (
                 <ModelPreView
@@ -149,7 +156,7 @@ export const ModelCatalog: React.FC<Props> = (props) => {
                   closeModelView={closeModelView}
                 />
               ) : null}
-            </PopUp>
+            </Modal>
           </>
         ) : (
           t("Process.Model.ModelCatalog.empty")

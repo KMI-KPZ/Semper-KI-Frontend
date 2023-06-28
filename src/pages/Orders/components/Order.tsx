@@ -11,7 +11,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import { Badge } from "@component-library/Badge";
 import OrderFileView from "./FileView";
-import PopUp from "@/components/PopUp";
 import { IOrder, OrderState, useOrders } from "../hooks/useOrders";
 import { UserType } from "@/hooks/useUser/types";
 import { OrderEventItem } from "@/pages/App/types";
@@ -26,6 +25,7 @@ import {
 } from "@/hooks/usePermissions";
 import useOrderEventChange from "../hooks/useOrderEventChange";
 import logger from "@/hooks/useLogger";
+import Modal from "@component-library/Modal";
 
 interface Props {
   order: IOrder;
@@ -224,7 +224,11 @@ const OrderView: React.FC<Props> = (props) => {
         <OrderFileView order={order} orderCollectionID={orderCollectionID} />
       </PermissionGate>
       <PermissionGate gate={OrdersChatPermission}>
-        <PopUp open={chatOpen} onOutsideClick={handleOnOutsideClickChat}>
+        <Modal
+          open={chatOpen}
+          closeModal={handleOnOutsideClickChat}
+          className="flex w-full flex-col  "
+        >
           <ChatView
             chat={order.chat.messages}
             user={user}
@@ -232,7 +236,7 @@ const OrderView: React.FC<Props> = (props) => {
             orderCollectionID={orderCollectionID}
             orderID={order.id}
           />
-        </PopUp>
+        </Modal>
       </PermissionGate>
     </div>
   );

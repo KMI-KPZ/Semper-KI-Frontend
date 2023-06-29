@@ -7,6 +7,7 @@ import {
 } from "@tanstack/react-query";
 import customAxios from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
+import usePermissions from "@/hooks/usePermissions";
 
 interface useOrganizationsReturnProps {
   userQuery: UseQueryResult<OrganizationsUser[], Error>;
@@ -68,6 +69,8 @@ export type AssignRoleProps = {
 const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const queryClient = useQueryClient();
   const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/organizations/`;
+  const staleTime: number = 300000;
+  const { reloadPermissions } = usePermissions();
 
   const userQuery = useQuery<OrganizationsUser[], Error>({
     queryKey: ["organizations", "users"],
@@ -79,6 +82,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           return res.data;
         });
     },
+    staleTime: staleTime,
   });
 
   const permissionsQuery = useQuery<Permission[], Error>({
@@ -90,6 +94,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           logger("useOrganizations | getPermissions ✅ |", res.data);
           return res.data;
         }),
+    staleTime: staleTime,
   });
 
   const rolesQuery = useQuery<RoleProps[], Error>({
@@ -102,6 +107,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           return res.data;
         });
     },
+    staleTime: staleTime,
   });
 
   const rolePermissionsQuery = useQuery<RolePermission[], Error>({
@@ -119,6 +125,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           return res.data;
         }),
     enabled: roleID !== undefined && roleID !== "",
+    staleTime: staleTime,
   });
 
   const inviteLinkMutation = useMutation<string, Error, string>({
@@ -193,8 +200,6 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     },
     onSuccess() {
       queryClient.invalidateQueries(["organizations", "roles"]);
-      queryClient.invalidateQueries(["organizations", "permissions"]);
-      queryClient.invalidateQueries(["permission"]);
     },
   });
 
@@ -214,7 +219,6 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     },
     onSuccess() {
       queryClient.invalidateQueries(["organizations", "roles"]);
-      queryClient.invalidateQueries(["permission"]);
     },
   });
 
@@ -229,14 +233,13 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((response) => {
-          logger("useOrganizations | assignRole ✅ |", response.data);
+          logger("useOrganizations | assignRole ✅ |", roleID);
           return response.data;
         });
     },
     onSuccess() {
       queryClient.invalidateQueries(["organizations", "users"]);
-      queryClient.invalidateQueries(["organizations", "permissions"]);
-      queryClient.invalidateQueries(["permission"]);
+      reloadPermissions();
     },
   });
 
@@ -251,13 +254,14 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((response) => {
-          logger("useOrganizations | removeRole ✅ |", response.data);
+          logger("useOrganizations | removeRole ✅ |", roleID);
           return response.data;
         });
     },
-    // onSuccess() {
-    //   queryClient.invalidateQueries(["organizations", "users"]);
-    // },
+    onSuccess() {
+      queryClient.invalidateQueries(["organizations", "roles"]);
+      queryClient.invalidateQueries(["organizations", "users"]);
+    },
   });
 
   const deleteUserMutation = useMutation<any, Error, string>({

@@ -1,6 +1,6 @@
 import { Header } from "@/components/Header";
 import { Heading } from "@component-library/Typography";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../Error";
@@ -63,6 +63,7 @@ export type AppContext = {
   appState: AppState;
   setAppState: React.Dispatch<React.SetStateAction<AppState>>;
   deleteEvent(event: DeleteEvent): void;
+  reloadPermissions: () => void;
 };
 
 const initialAppState: AppState = {
@@ -76,16 +77,22 @@ export const AppContext = createContext<AppContext>({
   appState: initialAppState,
   setAppState: () => {},
   deleteEvent: () => {},
+  reloadPermissions: () => {},
 });
 
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(initialAppState);
-  const { guideFilter, selectedProgressItem, missedEvents } = state;
+  const { guideFilter, selectedProgressItem, missedEvents, permissions } =
+    state;
   const { isLoggedIn, userType, user, isLoggedInResponse } = useUser();
   const { cartQuery } = useCart();
   const { socket, deleteEvent } = useEvents(setState, isLoggedIn, userType);
   const { t } = useTranslation();
-  usePermissions(setState, isLoggedIn && userType === UserType.manufacturer);
+  const { reloadPermissions } = usePermissions(
+    isLoggedIn &&
+      userType === UserType.manufacturer &&
+      permissions === undefined
+  );
 
   const setFilter = (guideFilter: IFilterItem[]): void => {
     setState((prevState) => ({ ...prevState, guideFilter }));
@@ -176,6 +183,7 @@ const App: React.FC = () => {
         cart: cartQuery.data,
         user,
         deleteEvent,
+        reloadPermissions: reloadPermissions,
       }}
     >
       <div

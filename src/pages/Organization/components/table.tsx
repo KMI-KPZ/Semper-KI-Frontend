@@ -68,7 +68,7 @@ const OrganizationtableRow: React.FC<{
   } = props;
   const { t } = useTranslation();
   const [edit, setEdit] = useState<boolean>(false);
-  // logger("Email:", email, "Roles:", roles);
+  // logger("Email:", email, "Roles:", roles[0]);
   const [newRole, setNewRole] = useState<RoleProps>(
     roles.length === 0
       ? {
@@ -78,6 +78,7 @@ const OrganizationtableRow: React.FC<{
         }
       : roles[0]
   );
+
   const { assignRoleMutation, removeRoleMutation, deleteUserMutation } =
     useOrganizations();
 
@@ -110,8 +111,8 @@ const OrganizationtableRow: React.FC<{
       <td className="text-center">{email}</td>
       <td className="text-center">
         {edit === false ? (
-          newRole.name !== "---" ? (
-            newRole.name
+          roles.length > 0 ? (
+            roles[0].name
           ) : (
             "---"
           )

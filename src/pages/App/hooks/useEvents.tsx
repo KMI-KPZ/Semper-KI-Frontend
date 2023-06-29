@@ -9,8 +9,8 @@ import {
   OrgaEvent,
 } from "@/pages/App/types";
 import { useQueryClient } from "@tanstack/react-query";
-import { Dispatch, SetStateAction, useEffect } from "react";
-import { AppState } from "..";
+import { Dispatch, SetStateAction, useContext, useEffect } from "react";
+import { AppContext, AppState } from "..";
 import useMissedEvent from "./useMissedEvent";
 import useOrderEvent from "./useOrderEvent";
 import useOrgaEvent from "./useOrgaEvent";
@@ -19,6 +19,7 @@ import logger from "@/hooks/useLogger";
 import { useTranslation } from "react-i18next";
 import { toast } from "./useToast";
 import { UserType } from "@/hooks/useUser/types";
+import usePermissions from "@/hooks/usePermissions";
 
 interface ReturnProps {
   deleteEvent: (event: DeleteEvent) => void;
@@ -62,7 +63,8 @@ const useEvents = (
   const { hydrateOrderEvents, deleteOrderEvent } = useOrderEvent(setState);
   const { hydrateOrgaEvents, deleteOrgaEvent } = useOrgaEvent();
   const { t } = useTranslation();
-
+  const { setAppState } = useContext(AppContext);
+  const { reloadPermissions } = usePermissions();
   const onLoadMissedEvents = (missedEvents: Event[]) => {
     if (missedEvents.length > 0) {
       setState((prevState) => ({
@@ -86,7 +88,7 @@ const useEvents = (
         queryClient.invalidateQueries(["organizations"]);
         break;
       case "permissionEvent":
-        queryClient.invalidateQueries(["permission"]);
+        reloadPermissions();
         break;
     }
   };

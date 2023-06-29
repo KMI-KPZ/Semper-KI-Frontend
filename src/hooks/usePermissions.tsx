@@ -1,11 +1,18 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { Dispatch, SetStateAction } from "react";
-import { AppState } from "@/pages/App";
+import {
+  useMutation,
+  UseMutationResult,
+  useQuery,
+  useQueryClient,
+  UseQueryResult,
+} from "@tanstack/react-query";
+import { Dispatch, SetStateAction, useContext } from "react";
+import { AppContext, AppState } from "@/pages/App";
 import customAxios from "./useCustomAxios";
 import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
   permissionQuery: UseQueryResult<Permission[], Error>;
+  reloadPermissions: () => void;
 }
 
 export interface Permission {
@@ -38,26 +45,44 @@ export const OrgaReadPermission: Permission = {
   permission: "read",
 };
 
-const usePermissions = (
-  setState: Dispatch<SetStateAction<AppState>>,
-  loadPermissions: boolean
-): ReturnProps => {
+const usePermissions = (loadPermissions?: boolean): ReturnProps => {
+  const queryClient = useQueryClient();
+  const { setAppState } = useContext(AppContext);
+
   const permissionQuery = useQuery<Permission[], Error>({
     queryKey: ["permission"],
-    queryFn: async () =>
-      customAxios
-        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getPermissions/`)
-        .then((res) => {
-          logger("usePermissions | loadPermissions ✅ |", res.data);
-          return res.data;
-        }),
-    onSuccess: (data) => {
-      setState((prevState) => ({ ...prevState, permissions: data }));
+    queryFn: async () => {
+      const url = `${import.meta.env.VITE_HTTP_API_URL}/public/getPermissions/`;
+      return customAxios.get(url).then((res) => {
+        logger("usePermissions | getPermissions ✅ |", res.data);
+        return res.data;
+      });
     },
-    enabled: loadPermissions === true,
+    onSuccess: (data) => {
+      setAppState((prevState) => ({ ...prevState, permissions: data }));
+    },
+    enabled: loadPermissions !== undefined && loadPermissions === true,
   });
 
-  return { permissionQuery };
+  const reloadPermissionMutation = useMutation<Permission[], Error, null>({
+    mutationFn: async () =>
+      customAxios
+        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getNewPermissions/`)
+        .then((res) => {
+          logger("usePermissions | getNewPermissions ✅ |", res.data);
+          return res.data;
+        }),
+    onSuccess(data, variables, context) {
+      setAppState((prevState) => ({ ...prevState, permissions: data }));
+    },
+  });
+
+  const reloadPermissions = () => {
+    logger("usePermissions | reloadPermissions |");
+    reloadPermissionMutation.mutate(null);
+  };
+
+  return { permissionQuery, reloadPermissions };
 };
 
 export default usePermissions;

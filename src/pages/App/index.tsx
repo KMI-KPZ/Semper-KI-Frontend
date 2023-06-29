@@ -48,9 +48,8 @@ import ServiceRoutes from "../Service";
 import Legal from "../Legal";
 import useEvents from "./hooks/useEvents";
 import usePermissions, {
-  OrdersReadPermission,
-  OrgaReadPermission,
   Permission,
+  PermissionGateType,
 } from "@/hooks/usePermissions";
 import PermissionGate from "@/components/PermissionGate";
 import "react-toastify/dist/ReactToastify.css";
@@ -60,7 +59,8 @@ export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
   guideFilter: IFilterItem[];
   missedEvents: Event[];
-  permissions?: Permission[];
+  permissions: Permission[];
+  permissionsGates: PermissionGateType[];
 };
 
 export type AppContext = {
@@ -74,6 +74,8 @@ export type AppContext = {
 const initialAppState: AppState = {
   guideFilter: [],
   missedEvents: [],
+  permissions: [],
+  permissionsGates: [],
 };
 
 export const AppContext = createContext<AppContext>({
@@ -141,7 +143,7 @@ const App: React.FC = () => {
         path="contracts"
         element={
           <PermissionGate
-            gate={OrdersReadPermission}
+            element="OrderCollectionOverview"
             showMessage
             children={
               <OrderCollectionOverview userType={UserType.manufacturer} />
@@ -153,7 +155,7 @@ const App: React.FC = () => {
         path="organization"
         element={
           <PermissionGate
-            gate={OrgaReadPermission}
+            element="OrganizationView"
             showMessage
             children={<OrganizationView />}
           />

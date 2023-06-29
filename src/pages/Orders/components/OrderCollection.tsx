@@ -18,9 +18,8 @@ import {
 import { UserType } from "@/hooks/useUser/types";
 import { Event, OrderEvent, OrderEventItem } from "@/pages/App/types";
 import { Heading } from "@component-library/Typography";
-import PermissionGate from "@/components/PermissionGate";
-import { OrdersEditPermission } from "@/hooks/usePermissions";
 import logger from "@/hooks/useLogger";
+import PermissionGate from "@/components/PermissionGate";
 
 interface Props {
   index: number;
@@ -172,7 +171,7 @@ const OrderCollection: React.FC<Props> = (props) => {
                 orderEvent={getOrderEventItemByID(order.id)}
               />
             ))}
-          <PermissionGate gate={OrdersEditPermission}>
+          <PermissionGate element={"OrderButtons"}>
             {renderButtons()}
           </PermissionGate>
         </>

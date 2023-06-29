@@ -1,4 +1,3 @@
-import { User } from "@/hooks/useUser/types";
 import { Divider } from "@component-library/Divider";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -7,7 +6,6 @@ import OrganizationRoles from "./Roles";
 import OrganizationTabel from "./components/table";
 import { Heading } from "@component-library/Typography";
 import PermissionGate from "@/components/PermissionGate";
-import { OrgaEditPermission } from "@/hooks/usePermissions";
 
 interface OrganizationViewProps {}
 
@@ -18,7 +16,7 @@ const OrganizationView: React.FC<OrganizationViewProps> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
       <Heading variant="h1">{t("Organization.index.header")}</Heading>
-      <PermissionGate gate={OrgaEditPermission}>
+      <PermissionGate element="OrganizationRoles">
         <Divider />
         <Invitation />
         <Divider />

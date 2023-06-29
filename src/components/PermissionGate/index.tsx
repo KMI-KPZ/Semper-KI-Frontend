@@ -1,37 +1,22 @@
-import logger from "@/hooks/useLogger";
-import { Permission } from "@/hooks/usePermissions";
 import { UserType } from "@/hooks/useUser/types";
 import { AppContext } from "@/pages/App";
-import { Text } from "@component-library/Typography";
 import React, { PropsWithChildren, useContext } from "react";
 import { useTranslation } from "react-i18next";
+import usePermissionGate from "./hooks";
 
 interface PermissionProps {
-  gate: Permission;
+  element: string;
   showMessage?: boolean;
 }
 
 const PermissionGate: React.FC<PropsWithChildren<PermissionProps>> = (
   props
 ) => {
-  const { user } = useContext(AppContext);
-  const { children, gate, showMessage } = props;
-  const {
-    appState: { permissions },
-  } = useContext(AppContext);
+  const { children, element, showMessage } = props;
   const { t } = useTranslation();
+  const { hasPermission } = usePermissionGate();
 
-  const allowAccess =
-    user?.type !== UserType.manufacturer ||
-    (user?.type === UserType.manufacturer &&
-      permissions !== undefined &&
-      permissions.find(
-        (permission) =>
-          permission.context === gate.context &&
-          permission.permission === gate.permission
-      ) !== undefined);
-
-  return allowAccess === true ? (
+  return hasPermission(element) ? (
     <>{children}</>
   ) : (
     //  showMessage === undefined || showMessage === false ? null : (

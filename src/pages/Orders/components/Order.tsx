@@ -18,11 +18,6 @@ import { AppContext } from "@/pages/App";
 import { getModelURI } from "@/services/utils";
 import { Heading } from "@component-library/Typography";
 import PermissionGate from "@/components/PermissionGate";
-import {
-  OrdersChatPermission,
-  OrdersEditPermission,
-  OrdersFilePermission,
-} from "@/hooks/usePermissions";
 import useOrderEventChange from "../hooks/useOrderEventChange";
 import logger from "@/hooks/useLogger";
 import Modal from "@component-library/Modal";
@@ -155,7 +150,7 @@ const OrderView: React.FC<Props> = (props) => {
         </Heading>
         <Heading variant="h3">{order.item.title}</Heading>
         <div className="flex flex-col items-center  justify-center gap-3 md:flex-row">
-          <PermissionGate gate={OrdersChatPermission}>
+          <PermissionGate element="OrderButton">
             {orderEvent !== undefined &&
             orderEvent.messages !== undefined &&
             orderEvent.messages > 0 ? (
@@ -176,7 +171,7 @@ const OrderView: React.FC<Props> = (props) => {
               />
             )}
           </PermissionGate>
-          <PermissionGate gate={OrdersEditPermission}>
+          <PermissionGate element="OrderButton">
             {menuOpen ? renderButtons() : null}
           </PermissionGate>
           <div className={`flex items-center justify-center `}>
@@ -220,10 +215,10 @@ const OrderView: React.FC<Props> = (props) => {
           ))}
         </div>
       </div>
-      <PermissionGate gate={OrdersFilePermission}>
+      <PermissionGate element="OrderFileView">
         <OrderFileView order={order} orderCollectionID={orderCollectionID} />
       </PermissionGate>
-      <PermissionGate gate={OrdersChatPermission}>
+      <PermissionGate element="ChatView">
         <Modal
           open={chatOpen}
           closeModal={handleOnOutsideClickChat}

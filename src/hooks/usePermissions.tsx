@@ -14,29 +14,9 @@ export interface Permission {
   permission: string;
 }
 
-export const OrdersEditPermission: Permission = {
-  context: "orders",
-  permission: "edit",
-};
-export const OrdersChatPermission: Permission = {
-  context: "orders",
-  permission: "chat",
-};
-export const OrdersFilePermission: Permission = {
-  context: "orders",
-  permission: "files",
-};
-export const OrdersReadPermission: Permission = {
-  context: "orders",
-  permission: "read",
-};
-export const OrgaEditPermission: Permission = {
-  context: "orga",
-  permission: "edit",
-};
-export const OrgaReadPermission: Permission = {
-  context: "orga",
-  permission: "read",
+export type PermissionGateType = {
+  elements: string[];
+  permission: Permission;
 };
 
 const usePermissions = (
@@ -49,7 +29,7 @@ const usePermissions = (
   };
 
   const permissionQuery = useQuery<Permission[], Error>({
-    queryKey: ["permission"],
+    queryKey: ["permissions"],
     queryFn: async () => {
       const url = `${import.meta.env.VITE_HTTP_API_URL}/public/getPermissions/`;
       return customAxios.get(url).then((res) => {
@@ -59,6 +39,23 @@ const usePermissions = (
     },
     onSuccess: (data) => {
       setPermissions(data);
+    },
+    enabled: loadPermissions !== undefined && loadPermissions === true,
+  });
+
+  const permissionGateQuery = useQuery<PermissionGateType[], Error>({
+    queryKey: ["permissionMask"],
+    queryFn: async () => {
+      const url = `${
+        import.meta.env.VITE_HTTP_API_URL
+      }/public/getPermissionMask/`;
+      return customAxios.get(url).then((res) => {
+        logger("usePermissions | getPermissions ✅ |", res.data);
+        return res.data.Rights;
+      });
+    },
+    onSuccess: (data) => {
+      setAppState((prevState) => ({ ...prevState, permissionGates: data }));
     },
     enabled: loadPermissions !== undefined && loadPermissions === true,
   });

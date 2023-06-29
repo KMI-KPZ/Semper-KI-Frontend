@@ -11,7 +11,6 @@ import { UserType } from "@/hooks/useUser/types";
 import { OrderState } from "../hooks/useOrders";
 import { Divider } from "@component-library/Divider";
 import usePermissionGate from "@/components/PermissionGate/hooks";
-import { OrdersEditPermission } from "@/hooks/usePermissions";
 
 interface StatusViewProps {
   status: OrderState;
@@ -144,9 +143,7 @@ const StatusItem: React.FC<StatusItemType> = (props) => {
 
   return (
     <a
-      onClick={
-        hasPermission(OrdersEditPermission) ? handleOnClickStatus : () => {}
-      }
+      onClick={hasPermission("OrderStatus") ? handleOnClickStatus : () => {}}
       className={`flex w-full flex-col items-center justify-center rounded-xl p-3 md:w-fit ${getClassName()}`}
     >
       {icon}
@@ -211,7 +208,7 @@ const StatusDoubleItem: React.FC<StatusDoubleItemType> = (props) => {
       {status < itemDenied.orderState || status === itemDenied.orderState ? (
         <a
           onClick={
-            hasPermission(OrdersEditPermission)
+            hasPermission("OrderStatus")
               ? () => handleOnClickStatus(itemDenied.orderState)
               : () => {}
           }
@@ -229,7 +226,7 @@ const StatusDoubleItem: React.FC<StatusDoubleItemType> = (props) => {
       status > itemSucceed.orderState ? (
         <a
           onClick={
-            hasPermission(OrdersEditPermission)
+            hasPermission("OrderStatus")
               ? () => handleOnClickStatus(itemSucceed.orderState)
               : () => {}
           }

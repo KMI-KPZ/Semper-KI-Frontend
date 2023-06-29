@@ -7,7 +7,7 @@ import useOrganizations, {
   OrganizationsUser,
   RoleProps,
 } from "../hooks/useOrganizations";
-import { LoadingSuspense } from "@component-library/Loading";
+import { LoadingAnimation, LoadingSuspense } from "@component-library/Loading";
 import CheckIcon from "@mui/icons-material/Check";
 import { Heading } from "@component-library/Typography";
 import logger from "@/hooks/useLogger";
@@ -78,16 +78,20 @@ const OrganizationtableRow: React.FC<{
         }
       : roles[0]
   );
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { assignRoleMutation, removeRoleMutation, deleteUserMutation } =
     useOrganizations();
 
   const handleOnClickEdit = () => {
     if (edit === true && newRole !== undefined) {
+      setLoading(true);
       roles.forEach((role) => {
         removeRoleMutation.mutate({ email, roleID: role.id });
       });
       assignRoleMutation.mutate({ email, roleID: newRole.id });
+    } else {
+      setNewRole(roles[0]);
     }
     setEdit((prevState) => !prevState);
   };
@@ -110,7 +114,9 @@ const OrganizationtableRow: React.FC<{
       <td className="text-center">{name}</td>
       <td className="text-center">{email}</td>
       <td className="text-center">
-        {edit === false ? (
+        {loading === true ? (
+          <LoadingAnimation text />
+        ) : edit === false ? (
           roles.length > 0 ? (
             roles[0].name
           ) : (

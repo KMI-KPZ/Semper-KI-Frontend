@@ -1,14 +1,8 @@
-import {
-  useMutation,
-  UseMutationResult,
-  useQuery,
-  useQueryClient,
-  UseQueryResult,
-} from "@tanstack/react-query";
-import { Dispatch, SetStateAction, useContext } from "react";
-import { AppContext, AppState } from "@/pages/App";
+import { useMutation, useQuery, UseQueryResult } from "@tanstack/react-query";
 import customAxios from "./useCustomAxios";
 import logger from "@/hooks/useLogger";
+import { Dispatch, SetStateAction, useContext } from "react";
+import { AppContext, AppState } from "@/pages/App";
 
 interface ReturnProps {
   permissionQuery: UseQueryResult<Permission[], Error>;
@@ -45,9 +39,14 @@ export const OrgaReadPermission: Permission = {
   permission: "read",
 };
 
-const usePermissions = (loadPermissions?: boolean): ReturnProps => {
-  const queryClient = useQueryClient();
-  const { setAppState } = useContext(AppContext);
+const usePermissions = (
+  setAppState: Dispatch<SetStateAction<AppState>>,
+  loadPermissions?: boolean
+): ReturnProps => {
+  const setPermissions = (permissions: Permission[]) => {
+    logger("usePermissions | setPermissions |", permissions);
+    setAppState((prevState) => ({ ...prevState, permissions }));
+  };
 
   const permissionQuery = useQuery<Permission[], Error>({
     queryKey: ["permission"],
@@ -59,7 +58,7 @@ const usePermissions = (loadPermissions?: boolean): ReturnProps => {
       });
     },
     onSuccess: (data) => {
-      setAppState((prevState) => ({ ...prevState, permissions: data }));
+      setPermissions(data);
     },
     enabled: loadPermissions !== undefined && loadPermissions === true,
   });
@@ -73,12 +72,11 @@ const usePermissions = (loadPermissions?: boolean): ReturnProps => {
           return res.data;
         }),
     onSuccess(data, variables, context) {
-      setAppState((prevState) => ({ ...prevState, permissions: data }));
+      setPermissions(data);
     },
   });
 
   const reloadPermissions = () => {
-    logger("usePermissions | reloadPermissions |");
     reloadPermissionMutation.mutate(null);
   };
 

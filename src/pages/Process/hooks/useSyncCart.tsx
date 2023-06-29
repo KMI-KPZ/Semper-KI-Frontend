@@ -8,17 +8,14 @@ const useSyncCart = (
   setChangesFalse: () => void
 ): void => {
   const { updateCart } = useCart();
-  useEffect(
-    function sycsChangedData() {
-      if (hasChanged === true)
-        updateCart.mutate(items, {
-          onSuccess(data, variables, context) {
-            setChangesFalse();
-          },
-        });
-    },
-    [items, hasChanged]
-  );
+  useEffect(() => {
+    if (hasChanged === true)
+      updateCart.mutate(items, {
+        onSuccess(data, variables, context) {
+          setChangesFalse();
+        },
+      });
+  }, [items, hasChanged]);
 };
 
 export default useSyncCart;

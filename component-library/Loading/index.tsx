@@ -49,6 +49,7 @@ interface LoadingSuspenseProps<T> {
   text?: boolean;
   loadingText?: string;
   errorText?: string;
+  refetchLoading?: boolean;
 }
 
 export const LoadingSuspense = <T,>(
@@ -62,8 +63,12 @@ export const LoadingSuspense = <T,>(
     loadingText = t("General.LoadingSuspense.loading"),
     text = true,
     errorText,
+    refetchLoading,
   } = props;
-  if (query.status === "loading")
+  if (
+    query.status === "loading" ||
+    (refetchLoading === true && query.isFetching)
+  )
     return (
       <div className="flex flex-col items-center justify-center pt-5">
         {animation !== undefined && animation === true ? (

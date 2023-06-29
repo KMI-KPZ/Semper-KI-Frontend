@@ -10,7 +10,7 @@ const useOnQueryDataChange = <T,>(
     if (query.data !== undefined && condition) {
       onChange(query.data);
     }
-  }, [query.data, condition, onChange]);
+  }, [query.data, condition]);
 };
 
 export default useOnQueryDataChange;

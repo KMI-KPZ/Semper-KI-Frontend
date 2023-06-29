@@ -1,3 +1,4 @@
+import logger from "@/hooks/useLogger";
 import { Permission } from "@/hooks/usePermissions";
 import { UserType } from "@/hooks/useUser/types";
 import { AppContext } from "@/pages/App";

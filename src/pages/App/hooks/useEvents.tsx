@@ -63,8 +63,7 @@ const useEvents = (
   const { hydrateOrderEvents, deleteOrderEvent } = useOrderEvent(setState);
   const { hydrateOrgaEvents, deleteOrgaEvent } = useOrgaEvent();
   const { t } = useTranslation();
-  const { setAppState } = useContext(AppContext);
-  const { reloadPermissions } = usePermissions();
+  const { reloadPermissions } = usePermissions(setState);
   const onLoadMissedEvents = (missedEvents: Event[]) => {
     if (missedEvents.length > 0) {
       setState((prevState) => ({

@@ -23,6 +23,7 @@ const OrganizationTable: React.FC<OrganizationTableProps> = (props) => {
     <LoadingSuspense
       query={userQuery}
       errorText={t("Organization.components.table.error.empty")}
+      refetchLoading
     >
       <LoadingSuspense
         query={rolesQuery}
@@ -42,7 +43,9 @@ const OrganizationTable: React.FC<OrganizationTableProps> = (props) => {
             </tr>
           </thead>
           <tbody className="">
-            {userQuery.data !== undefined && userQuery.data.length > 0
+            {userQuery.data !== undefined &&
+            userQuery.data.length > 0 &&
+            rolesQuery.data !== undefined
               ? userQuery.data.map((data, index) => (
                   <OrganizationtableRow
                     key={index}
@@ -60,7 +63,7 @@ const OrganizationTable: React.FC<OrganizationTableProps> = (props) => {
 
 const OrganizationtableRow: React.FC<{
   user: OrganizationsUser;
-  allRoles: RoleProps[] | undefined;
+  allRoles: RoleProps[];
 }> = (props) => {
   const {
     user: { email, name, picture, roles },
@@ -68,30 +71,27 @@ const OrganizationtableRow: React.FC<{
   } = props;
   const { t } = useTranslation();
   const [edit, setEdit] = useState<boolean>(false);
-  // logger("Email:", email, "Roles:", roles[0]);
   const [newRole, setNewRole] = useState<RoleProps>(
-    roles.length === 0
-      ? {
-          description: "---",
-          id: "---",
-          name: "---",
-        }
+    roles === undefined || (roles !== undefined && roles.length === 0)
+      ? allRoles[0]
       : roles[0]
   );
-  const [loading, setLoading] = useState<boolean>(false);
 
   const { assignRoleMutation, removeRoleMutation, deleteUserMutation } =
     useOrganizations();
 
   const handleOnClickEdit = () => {
     if (edit === true && newRole !== undefined) {
-      setLoading(true);
       roles.forEach((role) => {
         removeRoleMutation.mutate({ email, roleID: role.id });
       });
       assignRoleMutation.mutate({ email, roleID: newRole.id });
     } else {
-      setNewRole(roles[0]);
+      setNewRole(
+        roles === undefined || (roles !== undefined && roles.length === 0)
+          ? allRoles[0]
+          : roles[0]
+      );
     }
     setEdit((prevState) => !prevState);
   };
@@ -114,9 +114,7 @@ const OrganizationtableRow: React.FC<{
       <td className="text-center">{name}</td>
       <td className="text-center">{email}</td>
       <td className="text-center">
-        {loading === true ? (
-          <LoadingAnimation text />
-        ) : edit === false ? (
+        {edit === false ? (
           roles.length > 0 ? (
             roles[0].name
           ) : (

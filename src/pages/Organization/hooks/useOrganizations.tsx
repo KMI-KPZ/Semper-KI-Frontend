@@ -70,7 +70,6 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const queryClient = useQueryClient();
   const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/organizations/`;
   const staleTime: number = 300000;
-  const { reloadPermissions } = usePermissions();
 
   const userQuery = useQuery<OrganizationsUser[], Error>({
     queryKey: ["organizations", "users"],
@@ -239,7 +238,6 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     },
     onSuccess() {
       queryClient.invalidateQueries(["organizations", "users"]);
-      reloadPermissions();
     },
   });
 

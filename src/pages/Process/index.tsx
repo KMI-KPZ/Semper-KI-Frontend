@@ -133,9 +133,8 @@ export const ProcessView: React.FC<Props> = (props) => {
   };
   useOnQueryDataChange(
     cartQuery,
-    cartQuery.data !== undefined &&
-      (cartQuery.data.length > 1 ||
-        (cartQuery.data.length > 0 && checkForSelectedData(cartQuery.data))),
+    (cartQuery.data !== undefined && cartQuery.data.length > 1) ||
+      (cartQuery.data.length > 0 && checkForSelectedData(cartQuery.data)),
     onQueryDataChange
   );
   useSyncCart(hasChanged, items, setChangesFalse);

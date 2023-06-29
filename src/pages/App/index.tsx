@@ -1,6 +1,12 @@
 import { Header } from "@/components/Header";
 import { Heading } from "@component-library/Typography";
-import { createContext, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../Error";
@@ -63,7 +69,6 @@ export type AppContext = {
   appState: AppState;
   setAppState: React.Dispatch<React.SetStateAction<AppState>>;
   deleteEvent(event: DeleteEvent): void;
-  reloadPermissions: () => void;
 };
 
 const initialAppState: AppState = {
@@ -77,7 +82,6 @@ export const AppContext = createContext<AppContext>({
   appState: initialAppState,
   setAppState: () => {},
   deleteEvent: () => {},
-  reloadPermissions: () => {},
 });
 
 const App: React.FC = () => {
@@ -88,7 +92,8 @@ const App: React.FC = () => {
   const { cartQuery } = useCart();
   const { socket, deleteEvent } = useEvents(setState, isLoggedIn, userType);
   const { t } = useTranslation();
-  const { reloadPermissions } = usePermissions(
+  usePermissions(
+    setState,
     isLoggedIn &&
       userType === UserType.manufacturer &&
       permissions === undefined
@@ -96,6 +101,11 @@ const App: React.FC = () => {
 
   const setFilter = (guideFilter: IFilterItem[]): void => {
     setState((prevState) => ({ ...prevState, guideFilter }));
+  };
+
+  const loggedSetAppState = (value: SetStateAction<AppState>) => {
+    logger("loggedAppState", value);
+    setState(value);
   };
 
   const adminRoutes = (
@@ -179,11 +189,10 @@ const App: React.FC = () => {
     <AppContext.Provider
       value={{
         appState: state,
-        setAppState: setState,
+        setAppState: loggedSetAppState,
         cart: cartQuery.data,
         user,
         deleteEvent,
-        reloadPermissions: reloadPermissions,
       }}
     >
       <div

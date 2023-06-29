@@ -60,7 +60,7 @@ export type AppState = {
   guideFilter: IFilterItem[];
   missedEvents: Event[];
   permissions: Permission[];
-  permissionsGates: PermissionGateType[];
+  permissionGates: PermissionGateType[];
 };
 
 export type AppContext = {
@@ -75,7 +75,7 @@ const initialAppState: AppState = {
   guideFilter: [],
   missedEvents: [],
   permissions: [],
-  permissionsGates: [],
+  permissionGates: [],
 };
 
 export const AppContext = createContext<AppContext>({
@@ -94,12 +94,7 @@ const App: React.FC = () => {
   const { cartQuery } = useCart();
   const { socket, deleteEvent } = useEvents(setState, isLoggedIn, userType);
   const { t } = useTranslation();
-  usePermissions(
-    setState,
-    isLoggedIn &&
-      userType === UserType.manufacturer &&
-      permissions === undefined
-  );
+  usePermissions(setState, isLoggedIn);
 
   const setFilter = (guideFilter: IFilterItem[]): void => {
     setState((prevState) => ({ ...prevState, guideFilter }));
@@ -173,7 +168,9 @@ const App: React.FC = () => {
 
   if (
     isLoggedInResponse === false ||
-    (isLoggedIn === true && user === undefined)
+    (isLoggedIn === true &&
+      user === undefined &&
+      state.permissionGates.length > 0)
   ) {
     const rootElement = document.getElementById("root");
     if (rootElement) {

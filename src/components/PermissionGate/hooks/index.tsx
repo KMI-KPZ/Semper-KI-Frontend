@@ -1,6 +1,7 @@
 import { AppContext } from "@/pages/App";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserType } from "@/hooks/useUser/types";
+import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
   hasPermission(element: string): boolean;
@@ -9,11 +10,11 @@ interface ReturnProps {
 const usePermissionGate = (): ReturnProps => {
   const {
     user,
-    appState: { permissions, permissionsGates },
+    appState: { permissions, permissionGates },
   } = useContext(AppContext);
 
   const hasPermission = (element: string): boolean => {
-    const permissionGate = permissionsGates?.find((permissionGate) =>
+    const permissionGate = permissionGates?.find((permissionGate) =>
       permissionGate.elements.includes(element)
     );
 

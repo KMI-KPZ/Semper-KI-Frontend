@@ -24,7 +24,6 @@ const usePermissions = (
   loadPermissions?: boolean
 ): ReturnProps => {
   const setPermissions = (permissions: Permission[]) => {
-    logger("usePermissions | setPermissions |", permissions);
     setAppState((prevState) => ({ ...prevState, permissions }));
   };
 
@@ -50,7 +49,7 @@ const usePermissions = (
         import.meta.env.VITE_HTTP_API_URL
       }/public/getPermissionMask/`;
       return customAxios.get(url).then((res) => {
-        logger("usePermissions | getPermissions ✅ |", res.data);
+        logger("usePermissions | getPermissionMask ✅ |", res.data);
         return res.data.Rights;
       });
     },

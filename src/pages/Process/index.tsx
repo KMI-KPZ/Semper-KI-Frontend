@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import { IModel, ModelCatalog } from "./Model";
+import { ModelCatalog } from "./Model";
+import { IModel } from "./Model/types";
 import { IMaterial, MaterialCatalog } from "./Material";
 import { IPostProcessing, PostProcessingView } from "./PostProcessing";
 import NewProcess from "./New";
@@ -16,6 +17,12 @@ import { checkForSelectedData } from "@/services/utils";
 import useOnQueryDataChange from "@/hooks/useOnQueryDataChange";
 import useSyncCart from "./hooks/useSyncCart";
 import logger from "@/hooks/useLogger";
+import {
+  IProcessContext,
+  IProcessItem,
+  IProcessState,
+  IProgress,
+} from "./types";
 
 interface Props {
   selectedProgressItem?: { index: number; progress: string };
@@ -23,46 +30,6 @@ interface Props {
   isLoggedInResponse: boolean;
 }
 
-export interface IProcessItem {
-  title?: string;
-  model?: IModel;
-  material?: IMaterial;
-  postProcessings?: IPostProcessing[];
-  manufacturerID?: string;
-}
-
-export interface IProgress {
-  title: string;
-  link: string;
-  type: EProgressType;
-}
-
-export enum EProgressType {
-  "title",
-  "search",
-}
-
-export interface IProcessState {
-  items: IProcessItem[];
-  activeItemIndex: number;
-  grid: boolean;
-  searchText: string;
-  progress: IProgress;
-  filterOpen: boolean;
-  hasChanged: boolean;
-}
-
-export interface IProcessContext {
-  processState: IProcessState;
-  createEmpytProcessItem(): void;
-  deleteProcessItem(processId: number): void;
-  selectProcessItem(index: number): void;
-  setProgress(path: string): void;
-  setGridState(grid: boolean): void;
-  setFilterOpen(open: boolean): void;
-  searchModels(name: string): void;
-  setProcessItemTitle(title: string, index: number): void;
-}
 const initialProcessState = (itemTitle?: string): IProcessState => ({
   items: [{ title: itemTitle === undefined ? "Item 1" : itemTitle }],
   activeItemIndex: 0,

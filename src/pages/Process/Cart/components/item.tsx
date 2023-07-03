@@ -8,7 +8,7 @@ import ModelPlaceholderUrl from "@images/model_placeholder.png";
 import { Button } from "@component-library/Button";
 import { AppContext } from "@/pages/App";
 import { getModelURI } from "@/services/utils";
-import { IProcessItem } from "../..";
+import { IProcessItem } from "../../types";
 import { Heading } from "@component-library/Typography";
 
 interface Props {

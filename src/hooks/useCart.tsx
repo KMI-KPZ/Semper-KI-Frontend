@@ -1,4 +1,4 @@
-import { IProcessItem } from "@/pages/Process";
+import { IProcessItem } from "@/pages/Process/types";
 import {
   DefinedUseQueryResult,
   useMutation,
@@ -31,7 +31,7 @@ const useCart = (): ICartHook => {
     queryKey: ["cart", "load"],
     queryFn: async () =>
       customAxios
-        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getCart/`)
+        .get(`${process.env.VITE_HTTP_API_URL}/public/getCart/`)
         .then((res) => {
           logger("useCart | getCart ✅ |", res.data);
           return res.data.cart !== undefined ? res.data.cart : [];
@@ -42,7 +42,7 @@ const useCart = (): ICartHook => {
   const updateCart = useMutation<AxiosResponse, Error, IProcessItem[]>({
     mutationFn: async (cart: IProcessItem[]) =>
       customAxios
-        .post(`${import.meta.env.VITE_HTTP_API_URL}/public/updateCart/`, {
+        .post(`${process.env.VITE_HTTP_API_URL}/public/updateCart/`, {
           cart,
         })
         .then((res) => {

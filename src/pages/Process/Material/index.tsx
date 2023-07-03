@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MaterialCatalogCard } from "./components/card";
-import { IProcessState } from "..";
+import { IProcessState } from "../types";
 import { useTranslation } from "react-i18next";
 import { useMaterialData } from "../hooks/useProcessData";
 import { LoadingSuspense } from "@component-library/Loading";

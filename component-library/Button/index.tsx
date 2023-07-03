@@ -63,7 +63,8 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     }
   };
 
-  if (title.includes(".")) logger("Button", width, title);
+  if (title !== undefined && title.includes("."))
+    logger("Button", width, title);
 
   const getClassNameWidth = (): string => {
     switch (width) {

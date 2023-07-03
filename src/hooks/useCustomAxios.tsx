@@ -11,7 +11,7 @@ axios.defaults.headers.common = {
 axios.defaults.withCredentials = true;
 
 const axiosUnauthorized = axios.create({
-  baseURL: `${import.meta.env.VITE_HTTP_API_URL}/`,
+  baseURL: `${process.env.VITE_HTTP_API_URL}/`,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const CSRFToken = (): string => {
 };
 
 const axiosAuthorized = axios.create({
-  baseURL: `${import.meta.env.VITE_HTTP_API_URL}/`,
+  baseURL: `${process.env.VITE_HTTP_API_URL}/`,
   headers: {
     Accept: "application/json",
     "X-CSRFToken": CSRFToken(),

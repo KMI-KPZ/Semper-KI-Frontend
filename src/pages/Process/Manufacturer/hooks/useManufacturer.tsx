@@ -12,7 +12,7 @@ const useManufacturer = (): ReturnProps => {
     queryKey: ["manufacturer"],
     queryFn: async () =>
       customAxios
-        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getManufacturers/`)
+        .get(`${process.env.VITE_HTTP_API_URL}/public/getManufacturers/`)
         .then((res) => {
           logger("useManufacturer | getManufacturers ✅ |", res.data);
           return res.data;

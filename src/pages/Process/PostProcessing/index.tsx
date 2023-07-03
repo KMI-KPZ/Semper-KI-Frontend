@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Catalog from "./components/catalog";
-import { IProcessState } from "..";
+import { IProcessState } from "../types";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import { IFilterItem } from "../Filter";

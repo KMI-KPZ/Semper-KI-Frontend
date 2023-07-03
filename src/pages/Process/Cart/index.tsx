@@ -10,7 +10,7 @@ import { LoadingSuspense } from "@component-library/Loading";
 import { ErrorView } from "@component-library/Error";
 import { Button } from "@component-library/Button";
 import useCart from "@/hooks/useCart";
-import { IProcessItem } from "..";
+import { IProcessItem } from "../types";
 import { ErrorType } from "@/types/general";
 import { Heading } from "@component-library/Typography";
 

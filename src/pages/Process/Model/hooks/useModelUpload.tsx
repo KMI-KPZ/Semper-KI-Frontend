@@ -1,6 +1,6 @@
 import customAxios from "@/hooks/useCustomAxios";
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
-import { IModel } from "..";
+import { IModel } from "../types";
 import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
@@ -14,9 +14,7 @@ const useModelUpload = (): ReturnProps => {
       files.forEach((file) => {
         formData.append(file.name, file);
       });
-      const apiUrl = `${
-        import.meta.env.VITE_HTTP_API_URL
-      }/public/uploadModels/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/uploadModels/`;
       return customAxios
         .post(apiUrl, formData, {
           headers: { "Content-Type": "multipart/form-data" },

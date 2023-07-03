@@ -34,7 +34,7 @@ const useOntoPrinters = (props: UseOntoProps): ReturnProps => {
     queryKey: ["onto", "printers"],
     queryFn: async () =>
       customAxios
-        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/onto/getPrinters/`)
+        .get(`${process.env.VITE_HTTP_API_URL}/public/onto/getPrinters/`)
         .then((res) => {
           logger("useOnto| getPrinters ✅ |", res.data);
           return res.data.printers;
@@ -45,7 +45,7 @@ const useOntoPrinters = (props: UseOntoProps): ReturnProps => {
     queryKey: ["onto", "printer", printerID],
     queryFn: async () =>
       customAxios
-        .post(`${import.meta.env.VITE_HTTP_API_URL}/public/onto/getPrinter/`, {
+        .post(`${process.env.VITE_HTTP_API_URL}/public/onto/getPrinter/`, {
           printerID,
         })
         .then((res) => {
@@ -58,7 +58,7 @@ const useOntoPrinters = (props: UseOntoProps): ReturnProps => {
   const printerMutation = useMutation<OntoPrinterProperty[], Error, string>({
     mutationFn: async (printerID: string) =>
       customAxios
-        .post(`${import.meta.env.VITE_HTTP_API_URL}/public/onto/getPrinter/`, {
+        .post(`${process.env.VITE_HTTP_API_URL}/public/onto/getPrinter/`, {
           printer: printerID,
         })
         .then((res) => {

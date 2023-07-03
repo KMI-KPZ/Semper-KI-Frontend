@@ -11,7 +11,7 @@ const useOrga = (): ReturnProps => {
     queryKey: ["data"],
     queryFn: async () =>
       customAxios
-        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getData/`)
+        .get(`${process.env.VITE_HTTP_API_URL}/public/getData/`)
         .then((res) => {
           logger("useOrga | loadData ✅ |", res.data);
           return res.data;

@@ -2,7 +2,7 @@ import customAxios from "@/hooks/useCustomAxios";
 import { IFilterItem } from "@/pages/Process/Filter";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { IMaterial } from "../Material";
-import { IModel } from "../Model";
+import { IModel } from "../Model/types";
 import { IPostProcessing } from "../PostProcessing";
 import logger from "@/hooks/useLogger";
 
@@ -19,9 +19,7 @@ const useProcessData = (
   const processDataQuery = useQuery<IProcessData, Error>({
     queryKey: ["processData", "models", "materials", "postProcessings"],
     queryFn: async () => {
-      const apiUrl = `${
-        import.meta.env.VITE_HTTP_API_URL
-      }/public/getProcessData/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getProcessData/`;
       return customAxios
         .post(apiUrl, {
           filters,
@@ -42,7 +40,7 @@ export const useModelData = (
   const modelsQuery = useQuery<IModel[], Error>({
     queryKey: ["models"],
     queryFn: async () => {
-      const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/getModels/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getModels/`;
       return customAxios
         .post(apiUrl, {
           filters,
@@ -61,9 +59,7 @@ export const useMaterialData = (
   const materialsQuery = useQuery<IMaterial[], Error>({
     queryKey: ["materials"],
     queryFn: async () => {
-      const apiUrl = `${
-        import.meta.env.VITE_HTTP_API_URL
-      }/public/getMaterials/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getMaterials/`;
       return customAxios
         .post(apiUrl, {
           filters,
@@ -83,9 +79,7 @@ export const usePostProcessing = (
   const postProcessingQuery = useQuery<IPostProcessing[], Error>({
     queryKey: ["postProcessings"],
     queryFn: async () => {
-      const apiUrl = `${
-        import.meta.env.VITE_HTTP_API_URL
-      }/public/getPostProcessing/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getPostProcessing/`;
       return customAxios
         .post(apiUrl, {
           filters,

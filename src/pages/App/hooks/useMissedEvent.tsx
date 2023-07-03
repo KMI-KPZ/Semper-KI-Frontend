@@ -16,7 +16,7 @@ const useMissedEvent = (props: Props): void => {
     queryKey: ["missedEvents"],
     queryFn: async () =>
       customAxios
-        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getMissedEvents/`)
+        .get(`${process.env.VITE_HTTP_API_URL}/public/getMissedEvents/`)
         .then((res) => {
           logger("useMissedEvent | getMissedEvents ✅ |", res.data);
           return res.data;

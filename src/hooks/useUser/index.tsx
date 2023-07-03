@@ -25,7 +25,7 @@ const useUser = (): ReturnProps => {
     queryKey: ["isLoggedIn"],
     queryFn: async () =>
       customAxios
-        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/isLoggedIn/`)
+        .get(`${process.env.VITE_HTTP_API_URL}/public/isLoggedIn/`)
         .then((response) => {
           logger("useUser | isLoggedIn ✅ |", response.data);
           return response.data === "Success" ? true : false;
@@ -37,7 +37,7 @@ const useUser = (): ReturnProps => {
     queryKey: ["user"],
     queryFn: async () =>
       customAxios
-        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getUser/`)
+        .get(`${process.env.VITE_HTTP_API_URL}/public/getUser/`)
         .then((response) => {
           const userData = response.data;
           logger("useUser | getUser ✅ |", userData);
@@ -58,7 +58,7 @@ const useUser = (): ReturnProps => {
 
   const deleteUser = () => {
     customAxios
-      .delete(`${import.meta.env.VITE_HTTP_API_URL}/public/profileDeleteUser/`)
+      .delete(`${process.env.VITE_HTTP_API_URL}/public/profileDeleteUser/`)
       .then((response) => {
         logger("useUser | profileDeleteUser ✅ |");
         navigate("/logout");
@@ -70,7 +70,7 @@ const useUser = (): ReturnProps => {
 
   const updateUser = (userType: UserType) => {
     customAxios
-      .post(`${import.meta.env.VITE_HTTP_API_URL}/public/updateUser/`, {
+      .post(`${process.env.VITE_HTTP_API_URL}/public/updateUser/`, {
         userType: UserType[userType],
       })
       .then((response) => {

@@ -20,7 +20,7 @@ const usePing = (): ReturnProps => {
     queryKey: ["ping"],
     queryFn: async () =>
       customAxios
-        .post(`${import.meta.env.VITE_HTTP_API_URL}/public/isMagazineUp/`, {
+        .post(`${process.env.VITE_HTTP_API_URL}/public/isMagazineUp/`, {
           urls: [URL_Impressum, URL_Datenschutz, URL_Contact],
         })
         .then((res) => {

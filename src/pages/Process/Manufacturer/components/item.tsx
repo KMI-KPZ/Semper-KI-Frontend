@@ -3,7 +3,7 @@ import useManufacturer from "../hooks/useManufacturer";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import { getModelURI } from "@/services/utils";
-import { IProcessItem } from "../..";
+import { IProcessItem } from "../../types";
 import { Heading } from "@component-library/Typography";
 
 interface Props {

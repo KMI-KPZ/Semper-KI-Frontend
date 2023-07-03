@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IProcessState } from "..";
+import { IProcessState } from "../types";
 import { ModelCard } from "./components/card";
 import { Button } from "@component-library/Button";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ import ModelView from "./components/view";
 import IconUpload from "@icons/Upload.svg";
 import { Heading } from "@component-library/Typography";
 import Modal from "@component-library/Modal";
+import { IModel } from "./types";
 
 interface Props {
   filters: IFilterItem[];
@@ -25,22 +26,6 @@ interface Props {
 interface State {
   modalOpen: boolean;
   model: IModel | undefined;
-}
-
-export interface IModel {
-  id: string;
-  title: string;
-  tags: string[];
-  date: string;
-  license: string;
-  certificate: string[];
-  URI: string;
-  createdBy: string;
-}
-
-export enum EModelType {
-  "kiss",
-  "user",
 }
 
 export const ModelCatalog: React.FC<Props> = (props) => {

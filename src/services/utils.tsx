@@ -1,7 +1,7 @@
 import { Address, UserType } from "@/hooks/useUser/types";
-import { IProcessItem } from "@/pages/Process";
-import { EProcessStatusType } from "@/pages/Process/Header";
-import { IModel } from "@/pages/Process/Model";
+import { IProcessItem } from "@/pages/Process/types";
+import { EProcessStatusType } from "@/pages/Process/Header/types";
+import { IModel } from "@/pages/Process/Model/types";
 
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;
@@ -25,24 +25,24 @@ export const isNumber = (element: any): element is number => {
 
 export const getTimeAsText = (time: number): string => {
   let timeString: string = "";
-  const day = time / (24 * 60 * 60);
+  const day = Math.round(time / (24 * 60 * 60));
   if (day >= 1) {
-    timeString += `${Math.round(day)}Tage`;
+    timeString += `${day} Tage`;
     time -= day * 24 * 60 * 60;
   }
-  const hour = time / (60 * 60);
+  const hour = Math.round(time / (60 * 60));
   if (hour >= 1) {
-    timeString += `${Math.round(hour)}Stunde`;
+    timeString += `${day > 0 ? " " : ""}${hour} Stunde`;
     time -= hour * 60 * 60;
   }
-  const sec = time / 60;
+  const sec = Math.round(time / 60);
   if (sec >= 1) {
-    timeString += `${Math.round(sec)}Sekunden`;
+    timeString += `${hour > 0 ? " " : ""}${sec} Sekunden`;
   }
   return timeString;
 };
 
-export const getCurrentTimeInSecons = (): number => {
+export const getCurrentTimeInSeconds = (): number => {
   const now = new Date();
   return Math.round(now.getTime() / 1000);
 };
@@ -60,7 +60,7 @@ export const removeItemByIndex = <T,>(
   index: number
 ): Array<T> => {
   let newArr = arr;
-  if (index > -1) {
+  if (index > -1 && index < arr.length) {
     newArr.splice(index, 1);
   }
   return newArr;
@@ -78,8 +78,11 @@ export const getUserType = (name: string): UserType => {
     case "admin":
       type = UserType.admin;
       break;
+    case "anonym":
+      type = UserType.anonym;
+      break;
     default:
-      type = UserType.client;
+      type = UserType.anonym;
       break;
   }
   return type;

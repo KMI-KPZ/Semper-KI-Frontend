@@ -15,7 +15,7 @@ export const useLogin = (
   const loginQuery = useQuery<AxiosResponse, Error>({
     queryKey: ["login"],
     queryFn: async () => {
-      const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/login/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/login/`;
       return customAxios.get(apiUrl, {
         headers: {
           Usertype: userType === undefined ? null : UserType[userType],
@@ -43,7 +43,7 @@ export const useLogout = (): {
   const logoutQuery = useQuery<AxiosResponse, Error>({
     queryKey: ["logout"],
     queryFn: async () => {
-      const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/logout/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/logout/`;
       return customAxios.get(apiUrl);
     },
   });

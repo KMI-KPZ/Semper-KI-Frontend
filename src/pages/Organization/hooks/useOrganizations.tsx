@@ -68,7 +68,7 @@ export type AssignRoleProps = {
 
 const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const queryClient = useQueryClient();
-  const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/organizations/`;
+  const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/organizations/`;
   const staleTime: number = 300000;
 
   const userQuery = useQuery<OrganizationsUser[], Error>({

@@ -5,12 +5,6 @@ import Cart from "./Cart";
 import { Wizard } from "./Wizard";
 import { Heading } from "@component-library/Typography";
 
-export enum EProcessStatusType {
-  "ok",
-  "error",
-  "missing",
-}
-
 const Header: React.FC = () => {
   const { processState } = useContext(ProcessContext);
   const { progress } = processState;

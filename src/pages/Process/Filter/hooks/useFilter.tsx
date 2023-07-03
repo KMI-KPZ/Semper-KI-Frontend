@@ -28,7 +28,7 @@ const useFilter = (): ReturnProps => {
   const filtersQuery = useQuery<IFilterItem[], Error>({
     queryKey: ["filters"],
     queryFn: async () => {
-      const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/getFilters/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getFilters/`;
       return customAxios.get(apiUrl).then((response) => {
         logger("useFilter | getFilters ✅ |", response.data);
         return response.data;
@@ -41,7 +41,7 @@ const useFilter = (): ReturnProps => {
   const updateFilters = useMutation<AxiosResponse, Error, IFilterItem[]>({
     mutationFn: async (filters: IFilterItem[]) =>
       customAxios
-        .post(`${import.meta.env.VITE_HTTP_API_URL}/public/updateFilters/`, {
+        .post(`${process.env.VITE_HTTP_API_URL}/public/updateFilters/`, {
           filters,
         })
         .then((res) => {

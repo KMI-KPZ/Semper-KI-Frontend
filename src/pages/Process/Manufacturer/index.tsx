@@ -6,7 +6,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { LoadingSuspense } from "@component-library/Loading";
 import ManufacturerItem from "./components/item";
-import { IProcessItem } from "..";
+import { IProcessItem } from "../types";
 import useCart from "@/hooks/useCart";
 import { Heading } from "@component-library/Typography";
 

@@ -9,7 +9,7 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { LoadingAnimation } from "@component-library/Loading";
 import useModelUpload from "@/pages/Process/Model/hooks/useModelUpload";
 import { getFileSizeAsString } from "@/services/utils";
-import { IModel } from "..";
+import { IModel } from "../types";
 import { Heading } from "@component-library/Typography";
 import logger from "@/hooks/useLogger";
 

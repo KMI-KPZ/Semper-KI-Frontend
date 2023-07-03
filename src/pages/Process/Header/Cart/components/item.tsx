@@ -2,10 +2,11 @@ import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import { IconBadge } from "@component-library/Badge";
-import { IProcessItem, ProcessContext } from "@/pages/Process";
+import { IProcessItem } from "@/pages/Process/types";
 import { ReactNode, useContext, useEffect, useState } from "react";
 import StatusIcon from "../../components/statusIcon";
 import { Heading } from "@component-library/Typography";
+import { ProcessContext } from "@/pages/Process";
 
 interface Props {
   process?: IProcessItem;

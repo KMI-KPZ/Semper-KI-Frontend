@@ -1,6 +1,6 @@
 import useCart from "@/hooks/useCart";
 import { useEffect } from "react";
-import { IProcessItem } from "..";
+import { IProcessItem } from "../types";
 
 const useSyncCart = (
   hasChanged: boolean,

@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../Error";
 import { Home } from "../Home";
-import { IProcessItem, ProcessView } from "../Process";
+import { IProcessItem } from "../Process/types";
 import { IFilterItem } from "../Process/Filter";
 import { RequestTest } from "../RequestTest";
 import {
@@ -54,6 +54,7 @@ import usePermissions, {
 import PermissionGate from "@/components/PermissionGate";
 import "react-toastify/dist/ReactToastify.css";
 import logger from "@/hooks/useLogger";
+import { ProcessView } from "../Process";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };

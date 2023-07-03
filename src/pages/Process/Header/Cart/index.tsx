@@ -4,9 +4,10 @@ import { useTranslation } from "react-i18next";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddIcon from "@mui/icons-material/Add";
 import CartItem from "./components/item";
-import { IProcessItem, ProcessContext } from "../..";
+import { IProcessItem } from "../../types";
 import { getModelURI } from "@/services/utils";
 import IconModel from "@icons/Model.svg";
+import { ProcessContext } from "../..";
 
 interface Props {}
 

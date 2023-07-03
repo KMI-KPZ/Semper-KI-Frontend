@@ -2,8 +2,8 @@ import React from "react";
 import { ReactComponent as CheckIcon } from "@icons/Check.svg";
 import { ReactComponent as QuestionMarkIcon } from "@icons/QuestionMark.svg";
 import { ReactComponent as CloseIcon } from "@icons/X.svg";
-import { EProcessStatusType } from "..";
-import { IProcessItem } from "../..";
+import { EProcessStatusType } from "../types";
+import { IProcessItem } from "../../types";
 
 interface Props {
   process?: IProcessItem;

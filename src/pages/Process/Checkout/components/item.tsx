@@ -3,7 +3,7 @@ import { LoadingAnimation } from "@component-library/Loading";
 import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { IProcessItem } from "../..";
+import { IProcessItem } from "../../types";
 import { IRequestState } from "../hooks/useCheckout";
 
 type Props = {

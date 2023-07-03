@@ -1,5 +1,5 @@
 import customAxios from "@/hooks/useCustomAxios";
-import { IProcessItem } from "@/pages/Process";
+import { IProcessItem } from "@/pages/Process/types";
 import {
   useMutation,
   UseMutationResult,
@@ -74,7 +74,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
   const ordersQuery = useQuery<IOrderCollection[], Error>(
     ["orders"],
     async () => {
-      const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/getOrders/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getOrders/`;
       return customAxios.get(apiUrl).then((response) => {
         logger("useOrders | getOrders ✅ |", response.data);
         return response.data;
@@ -91,7 +91,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
 
   const deleteOrder = useMutation<any, Error, string>({
     mutationFn: async (orderID: string) => {
-      const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/deleteOrder/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/deleteOrder/`;
       return customAxios
         .delete(apiUrl, { data: { id: orderID } })
         .then((response) => {
@@ -105,9 +105,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
   });
   const deleteOrderCollection = useMutation<any, Error, string>({
     mutationFn: async (orderCollectionID: string) => {
-      const apiUrl = `${
-        import.meta.env.VITE_HTTP_API_URL
-      }/public/deleteOrderCollection/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/deleteOrderCollection/`;
       return customAxios
         .delete(apiUrl, { data: { id: orderCollectionID } })
         .then((response) => {
@@ -123,7 +121,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
   const updateOrder = useMutation<AxiosResponse, Error, IUpdateOrderData>({
     mutationFn: async (props: IUpdateOrderData) => {
       return customAxios
-        .put(`${import.meta.env.VITE_HTTP_API_URL}/public/updateOrder/`, {
+        .put(`${process.env.VITE_HTTP_API_URL}/public/updateOrder/`, {
           props,
         })
         .then((res) => {

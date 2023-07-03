@@ -19,7 +19,7 @@ const useOntoMaterials = (props: UseOntoProps): ReturnProps => {
     queryKey: ["onto", "materials"],
     queryFn: async () =>
       customAxios
-        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/onto/getMaterials/`)
+        .get(`${process.env.VITE_HTTP_API_URL}/public/onto/getMaterials/`)
         .then((res) => {
           logger("useOnto| getMaterials ✅ |", res.data);
           return res.data.materials;
@@ -30,7 +30,7 @@ const useOntoMaterials = (props: UseOntoProps): ReturnProps => {
     queryKey: ["onto", "material", materialID],
     queryFn: async () =>
       customAxios
-        .post(`${import.meta.env.VITE_HTTP_API_URL}/public/onto/getMaterial/`, {
+        .post(`${process.env.VITE_HTTP_API_URL}/public/onto/getMaterial/`, {
           materialID,
         })
         .then((res) => {

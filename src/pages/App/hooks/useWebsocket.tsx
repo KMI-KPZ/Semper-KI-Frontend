@@ -26,7 +26,7 @@ export const useWebsocket = (
     ) {
       setState("connecting");
       const ws = new WebSocket(
-        `${import.meta.env.VITE_WS_API_URL}/ws/generalWebsocket/`
+        `${process.env.VITE_WS_API_URL}/ws/generalWebsocket/`
       );
 
       ws.onopen = () => {

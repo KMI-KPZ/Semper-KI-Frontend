@@ -12,7 +12,7 @@ export const useRedirectLogin = (
   const redirectLoginQuery = useQuery<AxiosResponse, Error>({
     queryKey: ["login"],
     queryFn: async () => {
-      const apiUrl = `${import.meta.env.VITE_HTTP_API_URL}/public/login/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/login/`;
       return customAxios.get(apiUrl, {
         headers: {
           Usertype: "manufacturer",

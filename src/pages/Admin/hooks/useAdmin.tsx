@@ -2,7 +2,7 @@ import customAxios from "@/hooks/useCustomAxios";
 import { User } from "@/hooks/useUser/types";
 import { IOrder } from "@/pages/Orders/hooks/useOrders";
 import { IMaterial } from "@/pages/Process/Material";
-import { IModel } from "@/pages/Process/Model";
+import { IModel } from "@/pages/Process/Model/types";
 import { useState } from "react";
 import logger from "@/hooks/useLogger";
 
@@ -31,7 +31,7 @@ const useAdmin = (): ReturnProps => {
 
   const loadData = () => {
     customAxios
-      .get(`${import.meta.env.VITE_HTTP_API_URL}/admin/getData/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/admin/getData/`)
       .then((res) => {
         logger("useAdmin | loadData ✅ |", res.data);
         setData(res.data);

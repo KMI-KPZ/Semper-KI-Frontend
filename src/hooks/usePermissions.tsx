@@ -30,7 +30,7 @@ const usePermissions = (
   const permissionQuery = useQuery<Permission[], Error>({
     queryKey: ["permissions"],
     queryFn: async () => {
-      const url = `${import.meta.env.VITE_HTTP_API_URL}/public/getPermissions/`;
+      const url = `${process.env.VITE_HTTP_API_URL}/public/getPermissions/`;
       return customAxios.get(url).then((res) => {
         logger("usePermissions | getPermissions ✅ |", res.data);
         return res.data;
@@ -45,9 +45,7 @@ const usePermissions = (
   const permissionGateQuery = useQuery<PermissionGateType[], Error>({
     queryKey: ["permissionMask"],
     queryFn: async () => {
-      const url = `${
-        import.meta.env.VITE_HTTP_API_URL
-      }/public/getPermissionMask/`;
+      const url = `${process.env.VITE_HTTP_API_URL}/public/getPermissionMask/`;
       return customAxios.get(url).then((res) => {
         logger("usePermissions | getPermissionMask ✅ |", res.data);
         return res.data.Rights;
@@ -62,7 +60,7 @@ const usePermissions = (
   const reloadPermissionMutation = useMutation<Permission[], Error, null>({
     mutationFn: async () =>
       customAxios
-        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/getNewPermissions/`)
+        .get(`${process.env.VITE_HTTP_API_URL}/public/getNewPermissions/`)
         .then((res) => {
           logger("usePermissions | getNewPermissions ✅ |", res.data);
           return res.data;

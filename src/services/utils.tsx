@@ -2,6 +2,7 @@ import { Address, UserType } from "@/hooks/useUser/types";
 import { IProcessItem } from "@/pages/Process/types";
 import { EProcessStatusType } from "@/pages/Process/Header/types";
 import { IModel } from "@/pages/Process/Model/types";
+import logger from "@/hooks/useLogger";
 
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;
@@ -114,6 +115,7 @@ export const getModelURI = (model: IModel): string => {
 
 export const checkForSelectedData = (items: IProcessItem[]): boolean => {
   let contains: boolean = false;
+  if (items === undefined || items.length === 0) return false;
   items.forEach((item) => {
     if (
       item.model !== undefined ||
@@ -143,7 +145,8 @@ export const splitFindArray = <T,>(
   otherArray: T[];
   item: T | undefined;
 } => {
-  if (array === undefined) return { otherArray: [], item: undefined };
+  if (array === undefined || (array !== undefined && array.length === 0))
+    return { otherArray: [], item: undefined };
   const otherArray = array.filter((item) => !conditionFunction(item));
   const item = array.find((item) => conditionFunction(item));
   return { otherArray, item };
@@ -155,7 +158,8 @@ export const splitArray = <T,>(
   arrayTrue: T[];
   arrayFalse: T[];
 } => {
-  if (array === undefined) return { arrayFalse: [], arrayTrue: [] };
+  if (array === undefined || (array !== undefined && array.length === 0))
+    return { arrayFalse: [], arrayTrue: [] };
   const arrayTrue = array.filter((item) => conditionFunction(item));
   const arrayFalse = array.filter((item) => !conditionFunction(item));
   return { arrayTrue, arrayFalse };

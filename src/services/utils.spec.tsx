@@ -1,4 +1,3 @@
-import { log } from "console";
 import {
   getFileSizeAsString,
   getTimeAsText,
@@ -15,8 +14,6 @@ import {
   splitFindArray,
   splitArray,
 } from "./utils";
-import logger from "@/hooks/useLogger";
-import { UserType } from "@/hooks/useUser/types";
 
 describe("Utils", () => {
   describe("Test getFileSizeAsString", () => {
@@ -140,15 +137,262 @@ describe("Utils", () => {
       const value = removeItemByIndex(array, 1);
       expect(value).toStrictEqual(["a", "c"]);
     });
-    it("should return array without item", () => {
-      const array = ["a", "b", "c"];
-      const value = removeItemByIndex(array, 3);
-      expect(value).toStrictEqual(["a", "b", "c"]);
-    });
     it("should return emtpy array", () => {
       const array: any[] = [];
       const value = removeItemByIndex(array, 1);
       expect(value).toStrictEqual([]);
+    });
+    it("should the same array", () => {
+      const array = ["a", "b", "c"];
+      const value = removeItemByIndex(array, -1);
+      const value2 = removeItemByIndex(array, 3);
+      expect(value).toStrictEqual(["a", "b", "c"]);
+      expect(value2).toStrictEqual(["a", "b", "c"]);
+    });
+  });
+  describe("Test getModelURI", () => {
+    it("should return uri", () => {
+      const value = getModelURI({
+        URI: "https://test.test.png",
+        certificate: ["ISO3"],
+        createdBy: "kiss",
+        date: "2023-02-01",
+        id: "id",
+        license: "MIT",
+        tags: [],
+        title: "testmodel 0",
+      });
+      expect(value).toBe("https://test.test.png");
+    });
+    it("should return uri", () => {
+      const value = getModelURI({
+        URI: "b'/9j/test//Z'",
+        certificate: ["ISO3"],
+        createdBy: "lucas",
+        date: "2023-02-01",
+        id: "id",
+        license: "MIT",
+        tags: [],
+        title: "testmodel 0",
+      });
+      expect(value).toBe("data:image/jpeg;base64,/9j/test//Z");
+    });
+  });
+  describe("Test checkForSelectedData", () => {
+    it("should return true when something is selected", () => {
+      const value = checkForSelectedData([
+        {
+          title: "test",
+          material: {
+            id: "",
+            propList: [],
+            title: "testmaterial",
+            URI: "testuri",
+          },
+          model: undefined,
+          postProcessings: undefined,
+        },
+      ]);
+      expect(value).toBe(true);
+    });
+    it("should return true when nothing is selected", () => {
+      const value = checkForSelectedData([
+        {
+          title: "test",
+          material: undefined,
+          model: undefined,
+          postProcessings: undefined,
+        },
+      ]);
+      expect(value).toBe(false);
+    });
+    it("should return false when array is empty", () => {
+      const value = checkForSelectedData([]);
+      expect(value).toBe(false);
+    });
+  });
+  describe("Test isKey", () => {
+    it("should return true when key is key of object", () => {
+      const value = isKey({ test: "test" }, "test");
+      expect(value).toBe(true);
+    });
+    it("should return false when key is not key of object", () => {
+      const value = isKey({ test: "test" }, "test2");
+      expect(value).toBe(false);
+    });
+  });
+  describe("Test getStatusByIndex", () => {
+    it("should return ok(0) when everything is selected", () => {
+      const value = getStatusByIndex({
+        title: "test",
+        material: {
+          id: "",
+          propList: [],
+          title: "testmaterial",
+          URI: "testuri",
+        },
+        model: {
+          certificate: ["ISO3"],
+          createdBy: "kiss",
+          date: "2023-02-01",
+          id: "id",
+          license: "MIT",
+          tags: [],
+          title: "testmodel 0",
+          URI: "https://test.test.png",
+        },
+        postProcessings: [
+          {
+            title: "test",
+            id: "id",
+            checked: true,
+            type: 0,
+            URI: "https://test.test.png",
+            value: "value",
+            valueList: [],
+          },
+        ],
+      });
+      expect(value).toBe(0);
+    });
+    it("should return missing(2) when something is undefined", () => {
+      const value_model_undefined = getStatusByIndex({
+        title: "test",
+        material: {
+          id: "",
+          propList: [],
+          title: "testmaterial",
+          URI: "testuri",
+        },
+        model: undefined,
+        postProcessings: [
+          {
+            title: "test",
+            id: "id",
+            checked: true,
+            type: 0,
+            URI: "https://test.test.png",
+            value: "value",
+            valueList: [],
+          },
+        ],
+      });
+      const value_material_undefined = getStatusByIndex({
+        title: "test",
+        material: undefined,
+        model: {
+          certificate: ["ISO3"],
+          createdBy: "kiss",
+          date: "2023-02-01",
+          id: "id",
+          license: "MIT",
+          tags: [],
+          title: "testmodel 0",
+          URI: "https://test.test.png",
+        },
+        postProcessings: [
+          {
+            title: "test",
+            id: "id",
+            checked: true,
+            type: 0,
+            URI: "https://test.test.png",
+            value: "value",
+            valueList: [],
+          },
+        ],
+      });
+      const value_post_undefined = getStatusByIndex({
+        title: "test",
+        material: {
+          id: "",
+          propList: [],
+          title: "testmaterial",
+          URI: "testuri",
+        },
+        model: {
+          certificate: ["ISO3"],
+          createdBy: "kiss",
+          date: "2023-02-01",
+          id: "id",
+          license: "MIT",
+          tags: [],
+          title: "testmodel 0",
+          URI: "https://test.test.png",
+        },
+        postProcessings: undefined,
+      });
+      expect(value_model_undefined).toBe(2);
+      expect(value_material_undefined).toBe(2);
+      expect(value_post_undefined).toBe(2);
+    });
+  });
+  describe("Test splitArray", () => {
+    it("should split array in arrayTrue and arrayFalse on condition", () => {
+      const array = [1, 2, 3, 4, 5, 6, 7, 8];
+      const value = splitArray(array, (x) => x > 5);
+      expect(value).toStrictEqual({
+        arrayFalse: [1, 2, 3, 4, 5],
+        arrayTrue: [6, 7, 8],
+      });
+    });
+    it("should return empty arrays", () => {
+      const array: any[] = [];
+      const value = splitArray(array, (x) => x > 5);
+      const array_undefined: any[] | undefined = undefined;
+      const value_undefined = splitArray(array_undefined, (x) => x > 5);
+      expect(value).toStrictEqual({
+        arrayFalse: [],
+        arrayTrue: [],
+      });
+    });
+    it("should return emtpy arrayFalse when everything is true", () => {
+      const array = [6, 7, 8];
+      const value = splitArray(array, (x) => x > 5);
+      expect(value).toStrictEqual({
+        arrayFalse: [],
+        arrayTrue: [6, 7, 8],
+      });
+    });
+    it("should return emtpy arrayTrue when everything is false", () => {
+      const array = [1, 2, 3, 4];
+      const value = splitArray(array, (x) => x > 5);
+      expect(value).toStrictEqual({
+        arrayFalse: [1, 2, 3, 4],
+        arrayTrue: [],
+      });
+    });
+  });
+  describe("test splitFindArray", () => {
+    it("should split array in item and otherArray on condition", () => {
+      const array_number = [1, 2, 3, 4, 5, 6, 7, 8];
+      const value_number = splitFindArray(array_number, (x) => x === 5);
+      const array_string = ["1", "2", "3", "4", "5", "6", "7", "8"];
+      const value_string = splitFindArray(array_string, (x) => x === "5");
+      expect(value_number).toStrictEqual({
+        item: 5,
+        otherArray: [1, 2, 3, 4, 6, 7, 8],
+      });
+      expect(value_string).toStrictEqual({
+        item: "5",
+        otherArray: ["1", "2", "3", "4", "6", "7", "8"],
+      });
+    });
+    it("should return empty array and item when the only item satifys condition", () => {
+      const array = [5];
+      const value = splitFindArray(array, (x) => x === 5);
+      expect(value).toStrictEqual({
+        item: 5,
+        otherArray: [],
+      });
+    });
+    it("should return array and undefined when no item satifys condition", () => {
+      const array = [1, 2, 3, 4];
+      const value = splitFindArray(array, (x) => x === 5);
+      expect(value).toStrictEqual({
+        item: undefined,
+        otherArray: [1, 2, 3, 4],
+      });
     });
   });
 });

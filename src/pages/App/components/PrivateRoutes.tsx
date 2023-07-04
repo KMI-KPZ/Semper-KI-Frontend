@@ -1,8 +1,6 @@
 import { User, UserType } from "@/hooks/useUser/types";
 import { Error } from "@/pages/Error";
 import LoginView from "@/pages/Login";
-import { LoadingAnimation } from "@component-library/index";
-import { UseQueryResult } from "@tanstack/react-query";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet, useLocation } from "react-router-dom";

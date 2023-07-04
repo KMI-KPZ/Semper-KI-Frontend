@@ -47,7 +47,10 @@ const LoginView: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5 sm:w-fit">
+    <div
+      className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5 sm:w-fit"
+      data-testid="login"
+    >
       <Heading variant="h1">
         {path === undefined
           ? t("Login.LoginView.header")

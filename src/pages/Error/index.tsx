@@ -12,8 +12,8 @@ export const Error: React.FC<Props> = (props) => {
 
   return (
     <div
-      data-testid="Error"
-      className="flex flex-col items-center text-center bg-white p-5 gap-5"
+      data-testid="error"
+      className="flex flex-col items-center gap-5 bg-white p-5 text-center"
     >
       {text !== undefined ? (
         <span data-testid="ErrorMessage">{text}</span>
@@ -24,7 +24,7 @@ export const Error: React.FC<Props> = (props) => {
         </>
       )}
       <a
-        className="flex justify-center items-center p-3 shadow-lg hover:bg-gray-300 border"
+        className="flex items-center justify-center border p-3 shadow-lg hover:bg-gray-300"
         data-testid="HomeButton"
         href="/"
         onClick={(e) => {

@@ -138,7 +138,7 @@ export const getStatusByIndex = (process: IProcessItem): EProcessStatusType => {
   return EProcessStatusType.ok;
 };
 
-export const splitFindArray = <T,>(
+export const splitFindArray = <T extends any>(
   array: T[] | undefined,
   conditionFunction: (event: T) => boolean
 ): {
@@ -151,7 +151,7 @@ export const splitFindArray = <T,>(
   const item = array.find((item) => conditionFunction(item));
   return { otherArray, item };
 };
-export const splitArray = <T,>(
+export const splitArray = <T extends any>(
   array: T[] | undefined,
   conditionFunction: (event: T) => boolean
 ): {

@@ -22,6 +22,7 @@ interface ButtonProps {
   startIcon?: ReactNode;
   endIcon?: ReactNode;
   extern?: boolean;
+  testid?: string;
 }
 type ButtonSize = "sm" | "xs" | "md" | "lg" | "xl";
 type ButtonVariant = "primary" | "secondary" | "outline" | "text" | "light";
@@ -39,6 +40,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     className = "",
     align = "center",
     direction = "row",
+    testid = "",
     extern = false,
     onClick,
     title,
@@ -62,9 +64,6 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       }
     }
   };
-
-  if (title !== undefined && title.includes("."))
-    logger("Button", width, title);
 
   const getClassNameWidth = (): string => {
     switch (width) {
@@ -163,6 +162,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       ${getClassNameDirection()} ${className}`}
       onClick={handleOnClickButton}
       href={to !== undefined ? to : title}
+      data-testid={testid}
     >
       {loading === true ? (
         <div className="animate-spin">

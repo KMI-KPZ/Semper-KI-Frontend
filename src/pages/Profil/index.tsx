@@ -84,6 +84,7 @@ const Profil: React.FC<Props> = (props) => {
         </span>
       </div>
       <Button
+        testid="button-delete"
         width="full"
         onClick={handleOnClickButtonDelete}
         title={t("Profil.button.delete")}

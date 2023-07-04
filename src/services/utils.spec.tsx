@@ -340,8 +340,13 @@ describe("Utils", () => {
       const array: any[] = [];
       const value = splitArray(array, (x) => x > 5);
       const array_undefined: any[] | undefined = undefined;
-      const value_undefined = splitArray(array_undefined, (x) => x > 5);
+      const function_undefined = (a: number): boolean => a > 5;
+      const value_undefined = splitArray(array_undefined, function_undefined);
       expect(value).toStrictEqual({
+        arrayFalse: [],
+        arrayTrue: [],
+      });
+      expect(value_undefined).toStrictEqual({
         arrayFalse: [],
         arrayTrue: [],
       });
@@ -392,6 +397,20 @@ describe("Utils", () => {
       expect(value).toStrictEqual({
         item: undefined,
         otherArray: [1, 2, 3, 4],
+      });
+    });
+    it("should return empty array and undefined when array is empty or undefined", () => {
+      const array_empty: any[] = [];
+      const value_empty = splitFindArray(array_empty, (x) => x === 5);
+      const array_undefined = undefined;
+      const value_undefined = splitFindArray(array_undefined, (x) => x === 5);
+      expect(value_empty).toStrictEqual({
+        item: undefined,
+        otherArray: [],
+      });
+      expect(value_undefined).toStrictEqual({
+        item: undefined,
+        otherArray: [],
       });
     });
   });

@@ -5,7 +5,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Button } from "@component-library/Button";
 import FilterCard from "./components/card";
 import { IProgress } from "../types";
-import { AppContext } from "@/pages/App";
+import { AppContext } from "@/pages/App/App";
 import { Heading } from "@component-library/Typography";
 import useBodyScroll from "@/pages/App/hooks/useBodyScroll";
 

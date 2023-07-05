@@ -2,7 +2,7 @@ import React, { useContext, useRef, useState } from "react";
 import { Button } from "@component-library/Button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTranslation } from "react-i18next";
-import { AppContext } from "@/pages/App";
+import { AppContext } from "@/pages/App/App";
 import { Heading } from "@component-library/Typography";
 
 interface Props {

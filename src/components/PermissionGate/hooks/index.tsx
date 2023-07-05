@@ -1,4 +1,4 @@
-import { AppContext } from "@/pages/App";
+import { AppContext } from "@/pages/App/App";
 import { useContext, useEffect } from "react";
 import { UserType } from "@/hooks/useUser/types";
 import logger from "@/hooks/useLogger";

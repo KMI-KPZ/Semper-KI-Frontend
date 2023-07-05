@@ -15,6 +15,12 @@ import {
   splitArray,
 } from "./utils";
 
+import {
+  ModelBuilder,
+  MaterialBuilder,
+  PostProcessingBuilder,
+} from "@test/builder";
+
 describe("Utils", () => {
   describe("Test getFileSizeAsString", () => {
     it("should return 1B as string", () => {
@@ -152,43 +158,26 @@ describe("Utils", () => {
   });
   describe("Test getModelURI", () => {
     it("should return uri", () => {
-      const value = getModelURI({
-        URI: "https://test.test.png",
-        certificate: ["ISO3"],
-        createdBy: "kiss",
-        date: "2023-02-01",
-        id: "id",
-        license: "MIT",
-        tags: [],
-        title: "testmodel 0",
-      });
+      const model = new ModelBuilder().build();
+      const value = getModelURI(model);
       expect(value).toBe("https://test.test.png");
     });
     it("should return uri", () => {
-      const value = getModelURI({
-        URI: "b'/9j/test//Z'",
-        certificate: ["ISO3"],
-        createdBy: "lucas",
-        date: "2023-02-01",
-        id: "id",
-        license: "MIT",
-        tags: [],
-        title: "testmodel 0",
-      });
+      const model = new ModelBuilder()
+        .withCreatedBy("lucas")
+        .withURI("b'/9j/test//Z'")
+        .build();
+      const value = getModelURI(model);
       expect(value).toBe("data:image/jpeg;base64,/9j/test//Z");
     });
   });
   describe("Test checkForSelectedData", () => {
     it("should return true when something is selected", () => {
+      const material = new MaterialBuilder().build();
       const value = checkForSelectedData([
         {
           title: "test",
-          material: {
-            id: "",
-            propList: [],
-            title: "testmaterial",
-            URI: "testuri",
-          },
+          material: material,
           model: undefined,
           postProcessings: undefined,
         },
@@ -222,104 +211,35 @@ describe("Utils", () => {
     });
   });
   describe("Test getStatusByIndex", () => {
+    const material = new MaterialBuilder().build();
+    const model = new ModelBuilder().build();
+    const postProcessing = new PostProcessingBuilder().build();
     it("should return ok(0) when everything is selected", () => {
       const value = getStatusByIndex({
         title: "test",
-        material: {
-          id: "",
-          propList: [],
-          title: "testmaterial",
-          URI: "testuri",
-        },
-        model: {
-          certificate: ["ISO3"],
-          createdBy: "kiss",
-          date: "2023-02-01",
-          id: "id",
-          license: "MIT",
-          tags: [],
-          title: "testmodel 0",
-          URI: "https://test.test.png",
-        },
-        postProcessings: [
-          {
-            title: "test",
-            id: "id",
-            checked: true,
-            type: 0,
-            URI: "https://test.test.png",
-            value: "value",
-            valueList: [],
-          },
-        ],
+        material: material,
+        model: model,
+        postProcessings: [postProcessing],
       });
       expect(value).toBe(0);
     });
     it("should return missing(2) when something is undefined", () => {
       const value_model_undefined = getStatusByIndex({
         title: "test",
-        material: {
-          id: "",
-          propList: [],
-          title: "testmaterial",
-          URI: "testuri",
-        },
+        material: material,
         model: undefined,
-        postProcessings: [
-          {
-            title: "test",
-            id: "id",
-            checked: true,
-            type: 0,
-            URI: "https://test.test.png",
-            value: "value",
-            valueList: [],
-          },
-        ],
+        postProcessings: [postProcessing],
       });
       const value_material_undefined = getStatusByIndex({
         title: "test",
         material: undefined,
-        model: {
-          certificate: ["ISO3"],
-          createdBy: "kiss",
-          date: "2023-02-01",
-          id: "id",
-          license: "MIT",
-          tags: [],
-          title: "testmodel 0",
-          URI: "https://test.test.png",
-        },
-        postProcessings: [
-          {
-            title: "test",
-            id: "id",
-            checked: true,
-            type: 0,
-            URI: "https://test.test.png",
-            value: "value",
-            valueList: [],
-          },
-        ],
+        model: model,
+        postProcessings: [postProcessing],
       });
       const value_post_undefined = getStatusByIndex({
         title: "test",
-        material: {
-          id: "",
-          propList: [],
-          title: "testmaterial",
-          URI: "testuri",
-        },
-        model: {
-          certificate: ["ISO3"],
-          createdBy: "kiss",
-          date: "2023-02-01",
-          id: "id",
-          license: "MIT",
-          tags: [],
-          title: "testmodel 0",
-          URI: "https://test.test.png",
-        },
+        material: material,
+        model: model,
         postProcessings: undefined,
       });
       expect(value_model_undefined).toBe(2);

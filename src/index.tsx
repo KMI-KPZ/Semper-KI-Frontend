@@ -6,7 +6,7 @@ import "./i18n";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import App from "./pages/App";
+import App from "./pages/App/App";
 import { Heading } from "@component-library/Typography";
 
 const root = ReactDOM.createRoot(

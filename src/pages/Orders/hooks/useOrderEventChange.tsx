@@ -1,4 +1,4 @@
-import { AppContext } from "@/pages/App";
+import { AppContext } from "@/pages/App/App";
 import { DeleteOrderEvent, Event } from "@/pages/App/types";
 import { useContext, useEffect } from "react";
 import { IOrder } from "./useOrders";

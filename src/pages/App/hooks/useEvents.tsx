@@ -10,7 +10,7 @@ import {
 } from "@/pages/App/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { Dispatch, SetStateAction, useContext, useEffect } from "react";
-import { AppContext, AppState } from "..";
+import { AppContext, AppState } from "../App";
 import useMissedEvent from "./useMissedEvent";
 import useOrderEvent from "./useOrderEvent";
 import useOrgaEvent from "./useOrgaEvent";

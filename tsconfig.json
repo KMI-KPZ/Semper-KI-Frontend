@@ -8,6 +8,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "strictNullChecks": true, 
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "ESNext",
@@ -20,6 +21,7 @@
     "paths": {
         "@images/*": ["assets/images/*"],
         "@icons/*": ["assets/icons/*"],
+        "@locals/*": ["assets/locals/*"],
         "@component-library/*":["component-library/*"],
         "@/*": ["./src/*"],
         "@test/*": ["./test/*"],

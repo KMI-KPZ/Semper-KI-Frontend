@@ -2,7 +2,7 @@ import { useMutation, useQuery, UseQueryResult } from "@tanstack/react-query";
 import customAxios from "./useCustomAxios";
 import logger from "@/hooks/useLogger";
 import { Dispatch, SetStateAction, useContext } from "react";
-import { AppContext, AppState } from "@/pages/App";
+import { AppContext, AppState } from "@/pages/App/App";
 
 interface ReturnProps {
   permissionQuery: UseQueryResult<Permission[], Error>;

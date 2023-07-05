@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AppContext } from "../App";
+import { AppContext } from "../App/App";
 import { LoadingSuspense } from "@component-library/Loading";
 import { IOrderCollection, useOrders } from "./hooks/useOrders";
 import { UserType } from "@/hooks/useUser/types";

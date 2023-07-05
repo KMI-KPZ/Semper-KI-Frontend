@@ -178,7 +178,10 @@ const App: React.FC = () => {
       rootElement.style.overflow = "hidden";
     }
     return (
-      <div className="flex h-screen w-screen flex-col items-center justify-center gap-5 overflow-clip bg-white">
+      <div
+        data-testid="loadingSuspense"
+        className="flex h-screen w-screen flex-col items-center justify-center gap-5 overflow-clip bg-white"
+      >
         <Heading variant="h1">{t("App.title")}</Heading>
         <Heading variant="h2">{t("App.loading")}</Heading>
       </div>

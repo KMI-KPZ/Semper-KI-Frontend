@@ -10,7 +10,7 @@ import {
 import { Button } from "..";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "react-i18next";
-import { AppContext } from "@/pages/App";
+import { AppContext } from "@/pages/App/App";
 import useBodyScroll from "@/pages/App/hooks/useBodyScroll";
 
 type ModelProps = {

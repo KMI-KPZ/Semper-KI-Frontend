@@ -8,7 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { NavigationItemData } from "@/data/navigation";
 import LogoURL from "@images/logo192.png";
-import { AppContext } from "@/pages/App";
+import { AppContext } from "@/pages/App/App";
 import { UserType } from "@/hooks/useUser/types";
 import { Event, OrderEvent } from "@/pages/App/types";
 import { Heading, Text } from "@component-library/Typography";

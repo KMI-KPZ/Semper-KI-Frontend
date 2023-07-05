@@ -1,5 +1,5 @@
 import { UserType } from "@/hooks/useUser/types";
-import { AppContext } from "@/pages/App";
+import { AppContext } from "@/pages/App/App";
 import React, { PropsWithChildren, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import usePermissionGate from "./hooks";

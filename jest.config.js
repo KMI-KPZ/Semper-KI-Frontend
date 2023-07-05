@@ -11,8 +11,10 @@ module.exports = {
     
     // "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
     // "<rootDir>/tests/unit/__mocks__/fileMock.js",
+    "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
     '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/__mocks__/fileMock.js',
     '^.+\\.(svg)$': '<rootDir>/__mocks__/svg.js',
+    "\\useCustomAxios": "<rootDir>/__mocks__/customAxios.js",
     '^@images/(.*)$': '<rootDir>/assets/images/$1',
     '^@icons/(.*)$': '<rootDir>/assets/icons/$1',
     '^@component-library/(.*)$': '<rootDir>/component-library/$1',

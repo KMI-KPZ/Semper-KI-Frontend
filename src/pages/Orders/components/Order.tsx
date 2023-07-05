@@ -14,7 +14,7 @@ import OrderFileView from "./FileView";
 import { IOrder, OrderState, useOrders } from "../hooks/useOrders";
 import { UserType } from "@/hooks/useUser/types";
 import { OrderEventItem } from "@/pages/App/types";
-import { AppContext } from "@/pages/App";
+import { AppContext } from "@/pages/App/App";
 import { getModelURI } from "@/services/utils";
 import { Heading } from "@component-library/Typography";
 import PermissionGate from "@/components/PermissionGate";

@@ -1,8 +1,7 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button } from "@component-library/Button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTranslation } from "react-i18next";
-import { AppContext } from "@/pages/App/App";
 import { Heading } from "@component-library/Typography";
 
 interface Props {
@@ -14,7 +13,6 @@ const PortfolioItem: React.FC<Props> = (props) => {
   const { portfolioItem, preOpen } = props;
   const ref = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
-  const { appState } = useContext(AppContext);
   const [open, setOpen] = useState<boolean>(preOpen);
   const handleOnClickButton = () => {
     setOpen((prevState) => !prevState);
@@ -25,6 +23,7 @@ const PortfolioItem: React.FC<Props> = (props) => {
   }
   return (
     <div
+      data-testid="portfolio-item"
       className="flex w-full flex-col items-center justify-center gap-3"
       ref={ref}
     >
@@ -33,6 +32,7 @@ const PortfolioItem: React.FC<Props> = (props) => {
           {t(`Portfolio.PortfolioItem.${portfolioItem}.header`)}
         </Heading>
         <Button
+          testid="portfolio-item-button"
           onClick={handleOnClickButton}
           title={t(
             `Portfolio.PortfolioItem.button.${
@@ -51,16 +51,16 @@ const PortfolioItem: React.FC<Props> = (props) => {
         />
       </div>
       <div className="w-full border-t-2" />
-      <div
-        className={`gap 2transition-all flex w-full flex-col overflow-clip duration-300 ${
-          open ? `flex` : "hidden"
-        }`}
-      >
-        <span className="px-5 py-2 text-left">
-          {t(`Portfolio.PortfolioItem.${portfolioItem}.text`)}
-        </span>
-        <div className="w-full border-t-2" />
-      </div>
+      {open ? (
+        <div
+          className={`gap flex w-full flex-col overflow-clip transition-all duration-300 `}
+        >
+          <span className="px-5 py-2 text-left">
+            {t(`Portfolio.PortfolioItem.${portfolioItem}.text`)}
+          </span>
+          <div className="w-full border-t-2" />
+        </div>
+      ) : null}
     </div>
   );
 };

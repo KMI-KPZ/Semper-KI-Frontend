@@ -9,7 +9,10 @@ const Imprint: React.FC<ImprintProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <article className="flex w-full flex-col items-center justify-center gap-5 p-5">
+    <article
+      data-testid="imprint"
+      className="flex w-full flex-col items-center justify-center gap-5 p-5"
+    >
       <Heading variant="h1" className="w-full bg-white p-5 text-center">
         {t("Imprint.header")}
       </Heading>

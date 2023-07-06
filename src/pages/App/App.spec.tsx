@@ -1,10 +1,10 @@
 import { render } from "@test/render";
 import App, { AppState } from "./App";
 import useUser from "@/hooks/useUser";
+import usePermissions from "@/hooks/usePermissions";
 import { UserBuilder } from "@test/builder";
 import { UserType } from "@/hooks/useUser/types";
 import { Dispatch, SetStateAction } from "react";
-import logger from "@/hooks/useLogger";
 
 describe("<App>", () => {
   it("should render without crashing", () => {
@@ -22,20 +22,17 @@ describe("<App>", () => {
         ...useUser,
         isLoggedInResponse: true,
         isLoggedIn: true,
-        user: new UserBuilder().build(),
+        user: new UserBuilder().withType(UserType.client).build(),
         userType: UserType.client,
       });
     });
     jest.mock("@/hooks/usePermissions", () => {
-      return (
-        setAppState: Dispatch<SetStateAction<AppState>>,
-        loadPermissions?: boolean
-      ) => {
-        setAppState((prevState) => ({
-          ...prevState,
-          permissions: [{ context: "test", permission: "permission" }],
-        }));
-      };
+      return () => ({
+        __esModule: true,
+        permissionGates: [],
+        permissions: [],
+        reloadPermissions: jest.fn(),
+      });
     });
 
     const { getByTestId } = render(<App />);

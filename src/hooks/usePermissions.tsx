@@ -1,11 +1,13 @@
 import { useMutation, useQuery, UseQueryResult } from "@tanstack/react-query";
 import customAxios from "./useCustomAxios";
 import logger from "@/hooks/useLogger";
-import { Dispatch, SetStateAction, useContext } from "react";
-import { AppContext, AppState } from "@/pages/App/App";
+import { useContext, useState } from "react";
+import { AppContext } from "@/pages/App/App";
+import { User } from "./useUser/types";
 
 interface ReturnProps {
-  permissionQuery: UseQueryResult<Permission[], Error>;
+  permissions: Permission[] | undefined;
+  permissionGates: PermissionGateType[] | undefined;
   reloadPermissions: () => void;
 }
 
@@ -19,13 +21,8 @@ export type PermissionGateType = {
   permission: Permission;
 };
 
-const usePermissions = (
-  setAppState: Dispatch<SetStateAction<AppState>>,
-  loadPermissions?: boolean
-): ReturnProps => {
-  const setPermissions = (permissions: Permission[]) => {
-    setAppState((prevState) => ({ ...prevState, permissions }));
-  };
+const usePermissions = (user?: User): ReturnProps => {
+  const [permissions, setPermissions] = useState<Permission[]>();
 
   const permissionQuery = useQuery<Permission[], Error>({
     queryKey: ["permissions"],
@@ -39,7 +36,7 @@ const usePermissions = (
     onSuccess: (data) => {
       setPermissions(data);
     },
-    enabled: loadPermissions !== undefined && loadPermissions === true,
+    enabled: user !== undefined,
   });
 
   const permissionGateQuery = useQuery<PermissionGateType[], Error>({
@@ -51,10 +48,7 @@ const usePermissions = (
         return res.data.Rights;
       });
     },
-    onSuccess: (data) => {
-      setAppState((prevState) => ({ ...prevState, permissionGates: data }));
-    },
-    enabled: loadPermissions !== undefined && loadPermissions === true,
+    enabled: user !== undefined,
   });
 
   const reloadPermissionMutation = useMutation<Permission[], Error, null>({
@@ -74,7 +68,11 @@ const usePermissions = (
     reloadPermissionMutation.mutate(null);
   };
 
-  return { permissionQuery, reloadPermissions };
+  return {
+    permissionGates: permissionGateQuery.data,
+    permissions,
+    reloadPermissions,
+  };
 };
 
 export default usePermissions;

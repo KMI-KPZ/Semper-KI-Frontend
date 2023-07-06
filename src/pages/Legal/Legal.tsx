@@ -10,9 +10,9 @@ import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
-import Contact from "./Contact";
-import Imprint from "./Imprint";
-import Privacy from "./Privacy";
+import Contact from "./Contact/Contact";
+import Imprint from "./Imprint/Imprint";
+import Privacy from "./Privacy/Privacy";
 
 interface LegalProps {}
 
@@ -30,14 +30,20 @@ const Legal: React.FC<LegalProps> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
+    <div
+      className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5"
+      data-testid="legal"
+    >
       <Heading variant="h1">{t("Legal.header")}</Heading>
       <LoadingSuspense query={pingQuery}>
         <Routes>
           <Route
             index
             element={
-              <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
+              <div
+                data-testid="legalButton"
+                className="flex w-full flex-col items-center justify-center gap-5 md:flex-row"
+              >
                 <Button
                   title={t("Legal.imprint")}
                   extern={magazinIsUp()}

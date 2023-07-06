@@ -9,7 +9,10 @@ const Contact: React.FC<ContactProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <article className="flex w-full flex-col items-center justify-center gap-5  bg-white  p-5">
+    <article
+      data-testid="contact"
+      className="flex w-full flex-col items-center justify-center gap-5  bg-white  p-5"
+    >
       <Heading variant="h1" className="w-full p-5 text-center">
         Kontakt
       </Heading>

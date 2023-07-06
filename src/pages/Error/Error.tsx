@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Button } from "@component-library/Button";
 
 interface Props {
   text?: string;
@@ -23,17 +24,7 @@ export const Error: React.FC<Props> = (props) => {
           <span data-testid="ErrorMessage">{t("Error.text2")}</span>
         </>
       )}
-      <a
-        className="flex items-center justify-center border p-3 shadow-lg hover:bg-gray-300"
-        data-testid="HomeButton"
-        href="/"
-        onClick={(e) => {
-          e.preventDefault();
-          navigate("/");
-        }}
-      >
-        {t("Error.button")}
-      </a>
+      <Button title={t("Error.button")} to="/" />
     </div>
   );
 };

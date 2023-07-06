@@ -5,7 +5,7 @@ import { IModel } from "./Model/types";
 import { IMaterial, MaterialCatalog } from "./Material";
 import { IPostProcessing, PostProcessingView } from "./PostProcessing";
 import NewProcess from "./New";
-import { Error } from "../Error";
+import { Error } from "../Error/Error";
 import useFilter from "./Filter/hooks/useFilter";
 import Header from "./Header";
 import { useTranslation } from "react-i18next";

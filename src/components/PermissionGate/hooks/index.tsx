@@ -8,10 +8,7 @@ interface ReturnProps {
 }
 
 const usePermissionGate = (): ReturnProps => {
-  const {
-    user,
-    appState: { permissions, permissionGates },
-  } = useContext(AppContext);
+  const { user, permissions, permissionGates } = useContext(AppContext);
 
   const hasPermission = (element: string): boolean => {
     const permissionGate = permissionGates?.find((permissionGate) =>
@@ -21,6 +18,7 @@ const usePermissionGate = (): ReturnProps => {
     const allowAccess =
       user?.type !== UserType.manufacturer ||
       (user?.type === UserType.manufacturer &&
+        permissions !== undefined &&
         permissionGate !== undefined &&
         permissions.find(
           (permission) =>

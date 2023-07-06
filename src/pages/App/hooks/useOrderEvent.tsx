@@ -85,16 +85,14 @@ const hydrateOrderEventItems = (
 };
 
 interface ReturnProps {
-  hydrateOrderEvents: (events: Event[], newOrderEvent: OrderEvent) => Event[];
-  deleteOrderEvent: (event: DeleteOrderEvent) => void;
+  hydrateOrderEvents: (newOrderEvent: OrderEvent, events: Event[]) => Event[];
+  deleteOrderEvent: (event: DeleteOrderEvent, events: Event[]) => Event[];
 }
 
-const useOrderEvent = (
-  setState: Dispatch<SetStateAction<AppState>>
-): ReturnProps => {
+const useOrderEvent = (): ReturnProps => {
   const hydrateOrderEvents = (
-    events: Event[],
-    newOrderEvent: OrderEvent
+    newOrderEvent: OrderEvent,
+    events: Event[]
   ): Event[] => {
     const noneOrderEvents = events.filter(
       (event) => event.eventType !== "orderEvent"
@@ -127,58 +125,55 @@ const useOrderEvent = (
     return [...noneOrderEvents, ...newOrderEvents];
   };
 
-  const deleteOrderEvent = (event: DeleteOrderEvent) => {
+  const deleteOrderEvent = (
+    event: DeleteOrderEvent,
+    events: Event[]
+  ): Event[] => {
     // logger("useOrderEvent | deleteOrderEvent", event);
     const { orderCollectionID, orderID, type } = event;
-    setState((prevState) => {
-      const { arrayTrue: _orderEvents, arrayFalse: otherEvents } = splitArray(
-        prevState.missedEvents,
-        (event) => event.eventType === "orderEvent"
-      );
-      const orderEvents = _orderEvents as OrderEvent[];
-      const { otherArray: otherOrderEvents, item: orderEvent } = splitFindArray(
-        orderEvents,
-        (orderEvent) => orderEvent.orderCollectionID === orderCollectionID
-      );
-      let newOrderEventItems: OrderEventItem[] = [];
-      let orderEventItem: OrderEventItem | undefined = undefined;
-      if (orderEvent !== undefined) {
-        const { otherArray: _otherOrderEventItems, item: _orderEventItem } =
-          splitFindArray(
-            orderEvent.orders,
-            (orderEventItem) => orderEventItem.orderID === orderID
-          );
-        newOrderEventItems = _otherOrderEventItems;
-        orderEventItem = _orderEventItem;
-      }
-      if (orderEventItem !== undefined) {
-        orderEventItem = {
-          ...orderEventItem,
-          messages: type === "message" ? 0 : orderEventItem.messages,
-          status: type === "status" ? 0 : orderEventItem.status,
-        };
-        if (orderEventItem.messages === 0 && orderEventItem.status === 0) {
-          orderEventItem = undefined;
-        } else {
-          newOrderEventItems.push(orderEventItem);
-        }
-      }
 
-      return {
-        ...prevState,
-        missedEvents:
-          orderEvent !== undefined && newOrderEventItems.length > 0
-            ? [
-                ...otherEvents,
-                ...otherOrderEvents,
-                {
-                  ...orderEvent,
-                  orders: newOrderEventItems,
-                },
-              ]
-            : [...otherEvents, ...otherOrderEvents],
+    const { arrayTrue: _orderEvents, arrayFalse: otherEvents } = splitArray(
+      events,
+      (event) => event.eventType === "orderEvent"
+    );
+    const orderEvents = _orderEvents as OrderEvent[];
+    const { otherArray: otherOrderEvents, item: orderEvent } = splitFindArray(
+      orderEvents,
+      (orderEvent) => orderEvent.orderCollectionID === orderCollectionID
+    );
+    let newOrderEventItems: OrderEventItem[] = [];
+    let orderEventItem: OrderEventItem | undefined = undefined;
+    if (orderEvent !== undefined) {
+      const { otherArray: _otherOrderEventItems, item: _orderEventItem } =
+        splitFindArray(
+          orderEvent.orders,
+          (orderEventItem) => orderEventItem.orderID === orderID
+        );
+      newOrderEventItems = _otherOrderEventItems;
+      orderEventItem = _orderEventItem;
+    }
+    if (orderEventItem !== undefined) {
+      orderEventItem = {
+        ...orderEventItem,
+        messages: type === "message" ? 0 : orderEventItem.messages,
+        status: type === "status" ? 0 : orderEventItem.status,
       };
-    });
+      if (orderEventItem.messages === 0 && orderEventItem.status === 0) {
+        orderEventItem = undefined;
+      } else {
+        newOrderEventItems.push(orderEventItem);
+      }
+    }
+    return orderEvent !== undefined && newOrderEventItems.length > 0
+      ? [
+          ...otherEvents,
+          ...otherOrderEvents,
+          {
+            ...orderEvent,
+            orders: newOrderEventItems,
+          },
+        ]
+      : [...otherEvents, ...otherOrderEvents];
   };
 
   return { hydrateOrderEvents, deleteOrderEvent };

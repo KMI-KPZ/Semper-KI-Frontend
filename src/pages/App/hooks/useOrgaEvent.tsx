@@ -1,14 +1,14 @@
 import { DeleteOrgaEvent, Event, OrgaEvent } from "@/pages/App/types";
 
 interface ReturnProps {
-  hydrateOrgaEvents: (events: Event[], newOrderEvent: OrgaEvent) => Event[];
-  deleteOrgaEvent: (event: DeleteOrgaEvent) => void;
+  hydrateOrgaEvents: (newOrderEvent: OrgaEvent, events: Event[]) => Event[];
+  deleteOrgaEvent: (event: DeleteOrgaEvent, events: Event[]) => Event[];
 }
 
 const useOrgaEvent = (): ReturnProps => {
   const hydrateOrgaEvents = (
-    events: Event[],
-    newOrderEvent: OrgaEvent
+    newOrderEvent: OrgaEvent,
+    events: Event[]
   ): Event[] => {
     const noneOrgaEvents: Event[] = events.filter(
       (event) => event.eventType !== "orderEvent"
@@ -18,7 +18,9 @@ const useOrgaEvent = (): ReturnProps => {
     ) as OrgaEvent[];
     return [...orgaEvents];
   };
-  const deleteOrgaEvent = (event: DeleteOrgaEvent) => {};
+  const deleteOrgaEvent = (event: DeleteOrgaEvent, events: Event[]) => {
+    return events;
+  };
   return { deleteOrgaEvent, hydrateOrgaEvents };
 };
 

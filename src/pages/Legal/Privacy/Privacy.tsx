@@ -9,7 +9,10 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <article className="flex w-full flex-col items-center justify-center gap-5  p-5">
+    <article
+      data-testid="privacy"
+      className="flex w-full flex-col items-center justify-center gap-5  p-5"
+    >
       <Heading variant="h1" className="w-full bg-white p-5 text-center">
         Datenschutzerklärung
       </Heading>

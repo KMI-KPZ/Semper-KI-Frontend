@@ -9,7 +9,13 @@ import {
   OrgaEvent,
 } from "@/pages/App/types";
 import { useQueryClient } from "@tanstack/react-query";
-import { Dispatch, SetStateAction, useContext, useEffect } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { AppContext, AppState } from "../App";
 import useMissedEvent from "./useMissedEvent";
 import useOrderEvent from "./useOrderEvent";
@@ -24,6 +30,7 @@ import usePermissions from "@/hooks/usePermissions";
 interface ReturnProps {
   deleteEvent: (event: DeleteEvent) => void;
   socket: WebSocket | null;
+  events: Event[];
 }
 
 export const getOrderEventAmount = (
@@ -55,21 +62,19 @@ export const getOrderEventAmount = (
 };
 
 const useEvents = (
-  setState: Dispatch<SetStateAction<AppState>>,
   isLoggedIn: boolean,
-  userType: UserType
+  userType: UserType,
+  reloadPermissions: () => void
 ): ReturnProps => {
+  const [events, setEvents] = useState<Event[]>([]);
   const queryClient = useQueryClient();
-  const { hydrateOrderEvents, deleteOrderEvent } = useOrderEvent(setState);
+  const { hydrateOrderEvents, deleteOrderEvent } = useOrderEvent();
   const { hydrateOrgaEvents, deleteOrgaEvent } = useOrgaEvent();
   const { t } = useTranslation();
-  const { reloadPermissions } = usePermissions(setState);
+
   const onLoadMissedEvents = (missedEvents: Event[]) => {
     if (missedEvents.length > 0) {
-      setState((prevState) => ({
-        ...prevState,
-        missedEvents: missedEvents,
-      }));
+      setEvents(missedEvents);
     }
   };
 
@@ -87,6 +92,7 @@ const useEvents = (
         queryClient.invalidateQueries(["organizations"]);
         break;
       case "permissionEvent":
+        logger("reloade permissions");
         reloadPermissions();
         break;
     }
@@ -129,43 +135,43 @@ const useEvents = (
   const { socket } = useWebsocket(onWebsocktEvent, isLoggedIn, userType);
 
   const hydrateEvents = (newEvent: Event): void => {
-    setState((prevState) => {
-      let newMissedEvent: Event[] = prevState.missedEvents;
+    setEvents((prevState) => {
+      let newMissedEvent: Event[] = prevState;
       switch (newEvent.eventType) {
         case "orderEvent":
           newMissedEvent = hydrateOrderEvents(
-            prevState.missedEvents,
-            newEvent as OrderEvent
+            newEvent as OrderEvent,
+            prevState
           );
           break;
         case "orgaEvent":
-          newMissedEvent = hydrateOrgaEvents(
-            prevState.missedEvents,
-            newEvent as OrgaEvent
-          );
+          newMissedEvent = hydrateOrgaEvents(newEvent as OrgaEvent, prevState);
           break;
         default:
           break;
       }
-      return {
-        ...prevState,
-        missedEvents: newMissedEvent,
-      };
+      return newMissedEvent;
     });
   };
 
   const deleteEvent = (event: DeleteEvent) => {
     switch (event.eventType) {
       case "orderEvent":
-        deleteOrderEvent(event as DeleteOrderEvent);
+        setEvents((prevState) =>
+          deleteOrderEvent(event as DeleteOrderEvent, prevState)
+        );
+
         break;
       case "orgaEvent":
-        deleteOrgaEvent(event as DeleteOrgaEvent);
+        setEvents((prevState) =>
+          deleteOrgaEvent(event as DeleteOrgaEvent, prevState)
+        );
+
         break;
     }
   };
 
-  return { socket, deleteEvent };
+  return { socket, deleteEvent, events };
 };
 
 export default useEvents;

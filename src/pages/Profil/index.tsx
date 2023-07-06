@@ -34,7 +34,6 @@ const Profil: React.FC<Props> = (props) => {
       <div className="flex flex-col gap-2 p-5">
         <Heading variant="h2">{t("Profil.general.header")}</Heading>
         <div className="w-full border-t-2" />
-        <span>{t("FUCK.THIS")}</span>
         <span>
           {t("Profil.general.name")}: {user.name}
         </span>

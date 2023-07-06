@@ -1,15 +1,9 @@
 import { Header } from "@/components/Header";
 import { Heading } from "@component-library/Typography";
-import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Error } from "../Error";
+import { Error } from "../Error/Error";
 import { Home } from "../Home";
 import { IProcessItem } from "../Process/types";
 import { IFilterItem } from "../Process/Filter";
@@ -45,7 +39,7 @@ import ManufacturerView from "../Process/Manufacturer";
 import Profil from "../Profil";
 import ResoucesView from "../Resources";
 import ServiceRoutes from "../Service";
-import Legal from "../Legal";
+import Legal from "../Legal/Legal";
 import useEvents from "./hooks/useEvents";
 import usePermissions, {
   Permission,
@@ -53,19 +47,19 @@ import usePermissions, {
 } from "@/hooks/usePermissions";
 import PermissionGate from "@/components/PermissionGate";
 import "react-toastify/dist/ReactToastify.css";
-import logger from "@/hooks/useLogger";
 import { ProcessView } from "../Process";
+import logger from "@/hooks/useLogger";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
   guideFilter: IFilterItem[];
-  missedEvents: Event[];
-  permissions: Permission[];
-  permissionGates: PermissionGateType[];
 };
 
 export type AppContext = {
+  events: Event[];
   user: User | undefined;
+  permissions: Permission[] | undefined;
+  permissionGates: PermissionGateType[] | undefined;
   cart: IProcessItem[];
   appState: AppState;
   setAppState: React.Dispatch<React.SetStateAction<AppState>>;
@@ -74,13 +68,13 @@ export type AppContext = {
 
 const initialAppState: AppState = {
   guideFilter: [],
-  missedEvents: [],
-  permissions: [],
-  permissionGates: [],
 };
 
 export const AppContext = createContext<AppContext>({
+  events: [],
   user: undefined,
+  permissions: [],
+  permissionGates: [],
   cart: [],
   appState: initialAppState,
   setAppState: () => {},
@@ -89,21 +83,19 @@ export const AppContext = createContext<AppContext>({
 
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(initialAppState);
-  const { guideFilter, selectedProgressItem, missedEvents, permissions } =
-    state;
   const { isLoggedIn, userType, user, isLoggedInResponse } = useUser();
   const { cartQuery } = useCart();
-  const { socket, deleteEvent } = useEvents(setState, isLoggedIn, userType);
+  const { permissionGates, permissions, reloadPermissions } =
+    usePermissions(user);
+  const { socket, deleteEvent, events } = useEvents(
+    isLoggedIn,
+    userType,
+    reloadPermissions
+  );
   const { t } = useTranslation();
-  usePermissions(setState, isLoggedIn);
 
   const setFilter = (guideFilter: IFilterItem[]): void => {
     setState((prevState) => ({ ...prevState, guideFilter }));
-  };
-
-  const loggedSetAppState = (value: SetStateAction<AppState>) => {
-    logger("loggedAppState", value);
-    setState(value);
   };
 
   const adminRoutes = (
@@ -126,7 +118,9 @@ const App: React.FC = () => {
       <Route path="checkout" element={<Checkout />} />
       <Route
         path="orders"
-        element={<OrderCollectionOverview userType={UserType.client} />}
+        element={
+          <OrderCollectionOverview userType={UserType.client} events={events} />
+        }
       />
       <Route path="assignments" element={<Error text="assignments" />} />
     </Route>
@@ -142,7 +136,10 @@ const App: React.FC = () => {
             element="OrderCollectionOverview"
             showMessage
             children={
-              <OrderCollectionOverview userType={UserType.manufacturer} />
+              <OrderCollectionOverview
+                userType={UserType.manufacturer}
+                events={events}
+              />
             }
           />
         }
@@ -170,8 +167,7 @@ const App: React.FC = () => {
   if (
     isLoggedInResponse === false ||
     (isLoggedIn === true &&
-      user === undefined &&
-      state.permissionGates.length > 0)
+      (user === undefined || permissionGates === undefined))
   ) {
     const rootElement = document.getElementById("root");
     if (rootElement) {
@@ -192,10 +188,13 @@ const App: React.FC = () => {
     <AppContext.Provider
       value={{
         appState: state,
-        setAppState: loggedSetAppState,
+        setAppState: setState,
+        deleteEvent,
         cart: cartQuery.data,
         user,
-        deleteEvent,
+        permissions,
+        permissionGates,
+        events,
       }}
     >
       <div
@@ -206,7 +205,7 @@ const App: React.FC = () => {
           isLoggedIn={isLoggedIn}
           userType={userType}
           cartCount={cartQuery.data.length}
-          events={missedEvents}
+          events={events}
         />
         <main className="flex w-full flex-grow flex-col items-center justify-start gap-5 bg-slate-200 bg-opacity-80 p-5 xl:w-5/6">
           <Breadcrumb />
@@ -215,7 +214,7 @@ const App: React.FC = () => {
               index
               element={
                 <Home
-                  events={missedEvents}
+                  events={events}
                   userType={userType}
                   cartCount={cartQuery.data.length}
                 />
@@ -228,8 +227,8 @@ const App: React.FC = () => {
               element={
                 <ProcessView
                   isLoggedInResponse={isLoggedInResponse}
-                  guideAnswers={guideFilter}
-                  selectedProgressItem={selectedProgressItem}
+                  guideAnswers={state.guideFilter}
+                  selectedProgressItem={state.selectedProgressItem}
                 />
               }
             />

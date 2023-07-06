@@ -4,22 +4,21 @@ import { AppContext } from "../App/App";
 import { LoadingSuspense } from "@component-library/Loading";
 import { IOrderCollection, useOrders } from "./hooks/useOrders";
 import { UserType } from "@/hooks/useUser/types";
-import { OrderEvent } from "@/pages/App/types";
+import { Event, OrderEvent } from "@/pages/App/types";
 import OrderCollection from "./components/OrderCollection";
 import { Heading } from "@component-library/Typography";
 import useOrdersState from "./hooks/useOrdersState";
 
 interface Props {
   userType: UserType;
+  events: Event[];
 }
 
 const OrderCollectionOverview: React.FC<Props> = (props) => {
-  const { userType } = props;
+  const { userType, events } = props;
   const { t } = useTranslation();
   const { ordersQuery } = useOrders();
   const [state, setState] = useState<boolean[]>([]);
-  const { appState } = useContext(AppContext);
-  const { missedEvents } = appState;
   useOrdersState(ordersQuery, state, setState);
 
   const toggleOpen = (index: number) => {
@@ -33,8 +32,8 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
   const getOrderEventByID = (
     orderCollectionID: string
   ): OrderEvent | undefined => {
-    if (missedEvents === undefined || missedEvents.length < 1) return undefined;
-    const orderEvent = missedEvents
+    if (events === undefined || events.length < 1) return undefined;
+    const orderEvent = events
       .filter((event) => event.eventType === "orderEvent")
       .find((_orderEvent) => {
         const orderEvent = _orderEvent as OrderEvent;

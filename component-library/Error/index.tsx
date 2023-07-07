@@ -13,7 +13,7 @@ export const ErrorView: React.FC<Props> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <div className="felx-col flex gap-3">
+    <div className="flex flex-col gap-3">
       {errors.map((error, index) => (
         <Heading variant="h2" key={index}>
           {t(`General.ErrorView.${error}`, {

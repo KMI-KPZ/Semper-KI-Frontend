@@ -31,6 +31,7 @@ const HomeNewsCard: React.FC<Props> = (props) => {
 
   return (
     <div
+      data-testid="home-news-card"
       className={`${additionalClassNames} flex flex-col items-center justify-start gap-3 overflow-auto p-3 `}
     >
       <Heading variant="h2">{t("Home.HomeNewsCard.header")}</Heading>

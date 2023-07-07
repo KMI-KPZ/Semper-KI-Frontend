@@ -125,6 +125,7 @@ const HomeGuideCard: React.FC<Props> = (props) => {
 
   return (
     <div
+      data-testid="home-guide-card"
       className={`${additionalClassNames}  flex flex-col items-center justify-between gap-3 p-3`}
     >
       <div className="flex w-full flex-col items-center justify-start gap-3">

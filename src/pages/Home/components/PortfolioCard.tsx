@@ -66,6 +66,7 @@ const HomePortfolioCard: React.FC<Props> = (props) => {
 
   return (
     <div
+      data-testid="home-portfolio-card"
       className={`${additionalClassNames}  flex flex-col items-center justify-between gap-5 p-3`}
     >
       <div className="flex w-full flex-col items-center gap-3 overflow-clip">

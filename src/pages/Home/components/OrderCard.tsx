@@ -38,6 +38,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
 
   const renderStartLink = () => (
     <Link
+      data-testid="start-order-link"
       to="/process/model"
       className={`${additionalClassNames} flex flex-col items-center justify-center gap-3 p-3 duration-300 hover:bg-türkis-300`}
     >
@@ -52,7 +53,10 @@ const HomeOrderCard: React.FC<Props> = (props) => {
     <Heading variant="h2">{t("Home.HomeOrderCard.header")}</Heading>
   );
   const renderOrderControl = () => (
-    <div className="flex w-full flex-col items-center gap-2">
+    <div
+      className="flex w-full flex-col items-center gap-2"
+      data-testid="order-control"
+    >
       <Divider />
       <Heading variant="h3">{t("Home.HomeOrderCard.order.header")}</Heading>
       {userType === UserType.anonym
@@ -193,6 +197,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
     return renderStartLink();
   return (
     <div
+      data-testid="home-order-card"
       className={`${additionalClassNames}  flex flex-col items-center justify-start gap-5 p-3`}
     >
       {renderHeader()}

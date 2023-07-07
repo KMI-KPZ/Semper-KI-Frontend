@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
-import ResourcesMaterialsForm from "./components/form";
+import ResourcesMaterialsForm from "./components/ResourcesMaterialsForm";
 import ResourcesMaterialsTable from "./components/table";
 
 interface ResourcesMaterialsProps {}

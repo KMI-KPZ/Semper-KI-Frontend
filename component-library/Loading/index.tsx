@@ -83,7 +83,7 @@ export const LoadingSuspense = <T,>(
     query.error !== undefined
   )
     return (
-      <div className="felx-row flex items-center justify-center">
+      <div className="flex flex-row items-center justify-center">
         <Heading variant="h1">
           {errorText === undefined
             ? `${t("General.LoadingSuspense.error")} : ${query.error.message}`

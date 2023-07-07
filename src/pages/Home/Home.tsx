@@ -30,7 +30,10 @@ export const Home: React.FC<Props> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex h-full w-full flex-grow flex-col items-center justify-start gap-5 md:grid md:grid-cols-3">
+    <div
+      className="flex h-full w-full flex-grow flex-col items-center justify-start gap-5 md:grid md:grid-cols-3"
+      data-testid="home"
+    >
       <HomeSearchCard className="w-full bg-white md:order-2 md:col-span-2 md:h-full" />
       <HomeOrderCard
         userType={userType}

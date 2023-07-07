@@ -48,9 +48,12 @@ const ResourcesMaterialsForm: React.FC<ResourcesMaterialsFormProps> = (
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5">
+    <div
+      className="flex w-full flex-col items-center justify-center gap-5"
+      data-testid="resources-material-form"
+    >
       <Heading variant="h2">{t("Resources.Materials.form.header")}</Heading>
-      <div className="felx-col flex w-full items-center justify-start gap-5 md:flex-row">
+      <div className="flex w-full flex-col items-center justify-start gap-5 md:flex-row">
         <input
           type="search"
           className="borde-2 w-full border-2 border-slate-800 p-3 pl-5"

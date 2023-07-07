@@ -2,7 +2,6 @@ import { Divider } from "@component-library/Divider";
 import { Heading, Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { ReactComponent as PrinterIcon } from "@icons/3DPrinter.svg";
 import { ReactComponent as MetalIcon } from "@icons/Metal.svg";
 import BrushIcon from "@mui/icons-material/Brush";
@@ -20,6 +19,7 @@ const HomeResourcesCard: React.FC<HomeResourcesProps> = (props) => {
   return (
     <div
       className={`flex flex-col items-center justify-start gap-5 p-3 ${className}`}
+      data-testid="home-resources-card"
     >
       <Heading variant="h2">{t("Home.HomeResourcesCard.header")}</Heading>
       <Divider />

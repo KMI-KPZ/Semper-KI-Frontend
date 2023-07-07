@@ -14,6 +14,7 @@ const HomeMagazinCard: React.FC<Props> = (props) => {
 
   return (
     <a
+      data-testid="home-magazin-card"
       className={` ${additionalClassNames}
         group relative 
         flex select-none

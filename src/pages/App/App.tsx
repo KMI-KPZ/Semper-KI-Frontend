@@ -4,7 +4,7 @@ import { createContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
-import { Home } from "../Home";
+import { Home } from "../Home/Home";
 import { IProcessItem } from "../Process/types";
 import { IFilterItem } from "../Process/Filter";
 import { RequestTest } from "../RequestTest";

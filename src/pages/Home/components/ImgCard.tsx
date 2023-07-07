@@ -14,6 +14,7 @@ const HomeImgCard: React.FC<Props> = (props) => {
 
   return (
     <div
+      data-testid="home-img-card"
       className={`${additionalClassNames} flex flex-row flex-wrap justify-center bg-white`}
     >
       {/* <a

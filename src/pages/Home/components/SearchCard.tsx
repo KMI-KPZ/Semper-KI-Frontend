@@ -46,6 +46,7 @@ const HomeSearchCard: React.FC<Props> = (props) => {
   return (
     <div
       className={`${additionalClassNames}  flex flex-col items-center justify-center gap-5 p-3 `}
+      data-testid="home-search-card"
     >
       {/* {searchTexts.length > 0 ? (
         <div className="flex flex-col-reverse justify-center gap-5 w-full px-10 max-h-80 overflow-y-auto">

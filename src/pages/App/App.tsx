@@ -32,7 +32,7 @@ import RedirectLogin from "../Login/Redirect";
 import Logout from "../Logout";
 import OrderCollectionOverview from "../Orders";
 import OrganizationView from "../Organization";
-import Portfolio from "../Portfolio";
+import Portfolio from "../Portfolio/Portfolio";
 import Cart from "../Process/Cart";
 import Checkout from "../Process/Checkout";
 import ManufacturerView from "../Process/Manufacturer";

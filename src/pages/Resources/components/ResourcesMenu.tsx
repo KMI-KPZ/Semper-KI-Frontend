@@ -40,11 +40,15 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = (props) => {
   };
 
   return (
-    <nav className="flex h-fit flex-col bg-white p-3">
+    <nav
+      className="flex h-fit flex-col bg-white p-3"
+      data-testid="resources-menu"
+    >
       {resourcesMenuItems.map((resourcesMenuItem, index) => (
         <Button
+          testid="resources-menu-item"
           key={index}
-          title={`${isActive(resourcesMenuItem.to) ? ">" : ""} ${
+          title={`${isActive(resourcesMenuItem.to) ? "> " : ""}${
             resourcesMenuItem.title
           }`}
           to={resourcesMenuItem.to}

@@ -10,6 +10,7 @@ describe("<ResourcesMenu>", () => {
     render(<ResourcesMenu />);
     expect(screen.getAllByTestId("resources-menu-item")).toHaveLength(4);
   });
+
   it("should have active button", () => {
     const button = screen.getByTitle("Resources.components.Menu.printers");
     fireEvent.click(button);

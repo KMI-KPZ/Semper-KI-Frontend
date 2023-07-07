@@ -3,10 +3,10 @@ import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
-import ResourcesMenu from "./components/Menu";
+import ResourcesMenu from "./components/ResourcesMenu";
 import ResourcesMaterials from "./Materials";
-import ResourcesOverview from "./Overview";
-import ResourcesPostProcessings from "./PostProcessings";
+import ResourcesOverview from "./Overview/ResourcesOverview";
+import ResourcesPostProcessings from "./PostProcessings/ResourcesPostProcessings";
 import ResourcesPrinters from "./Printers";
 
 interface ResoucesViewProps {}

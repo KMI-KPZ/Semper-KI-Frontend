@@ -12,6 +12,7 @@ describe("<ResourcesMenu>", () => {
   });
 
   it("should have active button", () => {
+    render(<ResourcesMenu />);
     const button = screen.getByTitle("Resources.components.Menu.printers");
     fireEvent.click(button);
     expect(

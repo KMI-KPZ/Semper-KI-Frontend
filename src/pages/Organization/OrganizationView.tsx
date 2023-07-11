@@ -1,9 +1,9 @@
 import { Divider } from "@component-library/Divider";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Invitation from "./components/invitation";
-import OrganizationRoles from "./Roles";
-import OrganizationTabel from "./components/table";
+import Invitation from "./components/Invitation";
+import OrganizationRoles from "./Roles/OrganizationRoles";
+import OrganizationTabel from "./components/OrganizationTable";
 import { Heading } from "@component-library/Typography";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 

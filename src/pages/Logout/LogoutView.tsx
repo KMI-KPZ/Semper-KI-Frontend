@@ -3,7 +3,7 @@ import { Heading } from "@component-library/Typography";
 import { useTranslation } from "react-i18next";
 import { useLogout } from "../Login/hooks/useLogin";
 
-const Logout = () => {
+const LogoutView = () => {
   const { t } = useTranslation();
   const { logoutQuery } = useLogout();
   return (
@@ -13,4 +13,4 @@ const Logout = () => {
   );
 };
 
-export default Logout;
+export default LogoutView;

@@ -5,7 +5,7 @@ import { LoadingSuspense } from "@component-library/Loading";
 import { IOrderCollection, useOrders } from "./hooks/useOrders";
 import { UserType } from "@/hooks/useUser/types";
 import { Event, OrderEvent } from "@/pages/App/types";
-import OrderCollection from "./components/OrderCollection";
+import OrderCollectionView from "./components/OrderCollectionView";
 import { Heading } from "@component-library/Typography";
 import useOrdersState from "./hooks/useOrdersState";
 
@@ -14,7 +14,7 @@ interface Props {
   events: Event[];
 }
 
-const OrderCollectionOverview: React.FC<Props> = (props) => {
+const OrdersView: React.FC<Props> = (props) => {
   const { userType, events } = props;
   const { t } = useTranslation();
   const { ordersQuery } = useOrders();
@@ -59,7 +59,7 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
             {ordersQuery.data.length > 0 ? (
               ordersQuery.data.map(
                 (orderCollection: IOrderCollection, index: number) => (
-                  <OrderCollection
+                  <OrderCollectionView
                     index={index}
                     orderCollection={orderCollection}
                     userType={userType}
@@ -82,4 +82,4 @@ const OrderCollectionOverview: React.FC<Props> = (props) => {
   );
 };
 
-export default OrderCollectionOverview;
+export default OrdersView;

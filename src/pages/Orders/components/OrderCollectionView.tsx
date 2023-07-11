@@ -8,7 +8,7 @@ import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OrderPreView from "./OrderPreView";
-import OrderView from "./Order";
+import OrderView from "./OrderView";
 import {
   IOrderCollection,
   OrderCollectionState,
@@ -30,7 +30,7 @@ interface Props {
   event?: OrderEvent;
 }
 
-const OrderCollection: React.FC<Props> = (props) => {
+const OrderCollectionView: React.FC<Props> = (props) => {
   const {
     orderCollection,
     userType,
@@ -199,4 +199,4 @@ const OrderCollection: React.FC<Props> = (props) => {
   );
 };
 
-export default OrderCollection;
+export default OrderCollectionView;

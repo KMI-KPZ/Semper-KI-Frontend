@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Button } from "@component-library/Button";
 import MailIcon from "@mui/icons-material/Mail";
-import ChatView from "./Chat";
+import ChatView from "./ChatView";
 import StatusView from "./StatusView";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import { Badge } from "@component-library/Badge";
-import OrderFileView from "./FileView";
+import OrderFileView from "./OrderFileView";
 import { IOrder, OrderState, useOrders } from "../hooks/useOrders";
 import { UserType } from "@/hooks/useUser/types";
 import { OrderEventItem } from "@/pages/App/types";

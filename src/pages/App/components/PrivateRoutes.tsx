@@ -1,6 +1,6 @@
 import { User, UserType } from "@/hooks/useUser/types";
 import { Error } from "@/pages/Error/Error";
-import LoginView from "@/pages/Login";
+import LoginView from "@/pages/Login/LoginView";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet, useLocation } from "react-router-dom";

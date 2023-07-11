@@ -27,11 +27,11 @@ import AdminModels from "../Admin/Models";
 import AdminOrders from "../Admin/Orders";
 import AdminUsers from "../Admin/Users";
 import GuideRoutes from "../Guide";
-import LoginView from "../Login";
-import RedirectLogin from "../Login/Redirect";
-import Logout from "../Logout";
-import OrderCollectionOverview from "../Orders";
-import OrganizationView from "../Organization";
+import LoginView from "../Login/LoginView";
+import RedirectLogin from "../Login/Redirect/RedirectLogin";
+import LogoutView from "../Logout/LogoutView";
+import OrdersView from "../Orders/OrdersView";
+import OrganizationView from "../Organization/OrganizationView";
 import Portfolio from "../Portfolio/Portfolio";
 import Cart from "../Process/Cart";
 import Checkout from "../Process/Checkout";
@@ -117,9 +117,7 @@ const App: React.FC = () => {
       <Route path="checkout" element={<Checkout />} />
       <Route
         path="orders"
-        element={
-          <OrderCollectionOverview userType={UserType.client} events={events} />
-        }
+        element={<OrdersView userType={UserType.client} events={events} />}
       />
       <Route path="assignments" element={<Error text="assignments" />} />
     </Route>
@@ -135,10 +133,7 @@ const App: React.FC = () => {
             element="OrderCollectionOverview"
             showMessage
             children={
-              <OrderCollectionOverview
-                userType={UserType.manufacturer}
-                events={events}
-              />
+              <OrdersView userType={UserType.manufacturer} events={events} />
             }
           />
         }
@@ -240,7 +235,7 @@ const App: React.FC = () => {
               />
               <Route path="*" element={<Navigate to="/guide" />} />
             </Route>
-            <Route path="logout" element={<Logout />} />
+            <Route path="logout" element={<LogoutView />} />
             <Route path="portfolio" element={<Portfolio />} />
             <Route path="login" element={<LoginView />} />
             <Route path="login/redirect" element={<RedirectLogin />} />

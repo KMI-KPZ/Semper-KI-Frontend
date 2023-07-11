@@ -45,10 +45,9 @@ import usePermissions, {
   Permission,
   PermissionGateType,
 } from "@/hooks/usePermissions";
-import PermissionGate from "@/components/PermissionGate";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import "react-toastify/dist/ReactToastify.css";
 import { ProcessView } from "../Process";
-import logger from "@/hooks/useLogger";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };

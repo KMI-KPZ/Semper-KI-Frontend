@@ -5,7 +5,7 @@ import Invitation from "./components/invitation";
 import OrganizationRoles from "./Roles";
 import OrganizationTabel from "./components/table";
 import { Heading } from "@component-library/Typography";
-import PermissionGate from "@/components/PermissionGate";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface OrganizationViewProps {}
 

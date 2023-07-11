@@ -19,7 +19,7 @@ import { UserType } from "@/hooks/useUser/types";
 import { Event, OrderEvent, OrderEventItem } from "@/pages/App/types";
 import { Heading } from "@component-library/Typography";
 import logger from "@/hooks/useLogger";
-import PermissionGate from "@/components/PermissionGate";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface Props {
   index: number;

@@ -17,7 +17,7 @@ import { OrderEventItem } from "@/pages/App/types";
 import { AppContext } from "@/pages/App/App";
 import { getModelURI } from "@/services/utils";
 import { Heading } from "@component-library/Typography";
-import PermissionGate from "@/components/PermissionGate";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import useOrderEventChange from "../hooks/useOrderEventChange";
 import logger from "@/hooks/useLogger";
 import Modal from "@component-library/Modal";

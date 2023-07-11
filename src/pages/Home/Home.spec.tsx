@@ -1,7 +1,6 @@
 import { render, screen } from "@test/render";
 import { Home } from "./Home";
 import { UserType } from "@/hooks/useUser/types";
-import exp from "constants";
 
 describe("<Home>", () => {
   it("should render", () => {

@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import { UserType } from "@/hooks/useUser/types";
 import { OrderState } from "../hooks/useOrders";
 import { Divider } from "@component-library/Divider";
-import usePermissionGate from "@/components/PermissionGate/hooks";
+import usePermissionGate from "@/components/PermissionGate/hooks/usePermissionGate";
 
 interface StatusViewProps {
   status: OrderState;

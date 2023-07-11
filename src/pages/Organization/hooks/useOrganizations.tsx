@@ -74,12 +74,15 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const userQuery = useQuery<OrganizationsUser[], Error>({
     queryKey: ["organizations", "users"],
     queryFn: async () => {
-      return customAxios
-        .post(apiUrl, { data: { intent: "fetchUsers" } })
-        .then((res) => {
-          logger("useOrganizations | fetchUsers ✅ |", res.data);
-          return res.data;
-        });
+      return (
+        customAxios
+          // .post(apiUrl, { data: { intent: "fetchUsers" } })
+          .get(apiUrl + "fetchUsers/")
+          .then((res) => {
+            logger("useOrganizations | fetchUsers ✅ |", res.data);
+            return res.data;
+          })
+      );
     },
     staleTime: staleTime,
   });
@@ -88,7 +91,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     queryKey: ["organizations", "permissions"],
     queryFn: async () =>
       customAxios
-        .post(apiUrl, { data: { intent: "getPermissions" } })
+        // .post(apiUrl, { data: { intent: "getPermissions" } })
+        .get(apiUrl + "getPermissions/")
         .then((res) => {
           logger("useOrganizations | getPermissions ✅ |", res.data);
           return res.data;
@@ -99,12 +103,15 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const rolesQuery = useQuery<RoleProps[], Error>({
     queryKey: ["organizations", "roles"],
     queryFn: async () => {
-      return customAxios
-        .post(apiUrl, { data: { intent: "getRoles" } })
-        .then((res) => {
-          logger("useOrganizations | getRoles ✅ |", res.data);
-          return res.data;
-        });
+      return (
+        customAxios
+          // .post(apiUrl, { data: { intent: "getRoles" } })
+          .get(apiUrl + "getRoles/")
+          .then((res) => {
+            logger("useOrganizations | getRoles ✅ |", res.data);
+            return res.data;
+          })
+      );
     },
     staleTime: staleTime,
   });
@@ -113,9 +120,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     queryKey: ["organizations", "roles", roleID, "permissions"],
     queryFn: async () =>
       customAxios
-        .post(apiUrl, {
+        .post(apiUrl + "getPermissionsForRole/", {
           data: {
-            intent: "getPermissionsForRole",
             content: { roleID: roleID },
           },
         })
@@ -130,8 +136,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const inviteLinkMutation = useMutation<string, Error, string>({
     mutationFn: async (email: string) => {
       return customAxios
-        .post(apiUrl, {
-          data: { intent: "getInviteLink", content: { email: email } },
+        .post(apiUrl + "getInviteLink/", {
+          data: { content: { email: email } },
         })
         .then((response) => {
           logger("useOrganizations | getInviteLink ✅ |", response.data);
@@ -146,8 +152,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const inviteUserMutation = useMutation<any, Error, string>({
     mutationFn: async (email: string) => {
       return customAxios
-        .post(apiUrl, {
-          data: { intent: "addUser", content: { email: email } },
+        .post(apiUrl + "addUser/", {
+          data: { content: { email: email } },
         })
         .then((response) => {
           logger("useOrganizations | addUser ✅ |", response.data);
@@ -163,9 +169,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     mutationFn: async (props) => {
       const { description, name } = props;
       return customAxios
-        .post(apiUrl, {
+        .post(apiUrl + "createRole/", {
           data: {
-            intent: "createRole",
             content: { roleName: name, roleDescription: description },
           },
         })
@@ -183,9 +188,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     mutationFn: async (props) => {
       const { permissionIDs, roleID } = props;
       return customAxios
-        .post(apiUrl, {
+        .post(apiUrl + "setPermissionsForRole/", {
           data: {
-            intent: "setPermissionsForRole",
             content: { roleID, permissionIDs },
           },
         })
@@ -205,9 +209,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const deleteRoleMutation = useMutation<any, Error, string>({
     mutationFn: async (id: string) => {
       return customAxios
-        .post(apiUrl, {
+        .post(apiUrl + "deleteRole/", {
           data: {
-            intent: "deleteRole",
             content: { roleID: id },
           },
         })
@@ -225,9 +228,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     mutationFn: async (props) => {
       const { email, roleID } = props;
       return customAxios
-        .post(apiUrl, {
+        .post(apiUrl + "assignRole/", {
           data: {
-            intent: "assignRole",
             content: { email, roleID },
           },
         })
@@ -245,9 +247,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     mutationFn: async (props) => {
       const { email, roleID } = props;
       return customAxios
-        .post(apiUrl, {
+        .post(apiUrl + "removeRole/", {
           data: {
-            intent: "removeRole",
             content: { email, roleID },
           },
         })
@@ -265,9 +266,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const deleteUserMutation = useMutation<any, Error, string>({
     mutationFn: async (email) => {
       return customAxios
-        .post(apiUrl, {
+        .post(apiUrl + "deleteUser/", {
           data: {
-            intent: "deleteUser",
             content: { email },
           },
         })

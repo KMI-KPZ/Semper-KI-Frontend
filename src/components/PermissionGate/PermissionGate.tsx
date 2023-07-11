@@ -2,7 +2,7 @@ import { UserType } from "@/hooks/useUser/types";
 import { AppContext } from "@/pages/App/App";
 import React, { PropsWithChildren, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import usePermissionGate from "./hooks";
+import usePermissionGate from "./hooks/usePermissionGate";
 
 interface PermissionProps {
   element: string;

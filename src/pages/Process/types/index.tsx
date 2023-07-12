@@ -1,6 +1,6 @@
-import { IMaterial } from "../Material";
+import { IMaterial } from "../Material/Material";
 import { IModel } from "../Model/types";
-import { IPostProcessing } from "../PostProcessing";
+import { IPostProcessing } from "../PostProcessing/PostProcessing";
 
 export interface IProcessItem {
   title?: string;

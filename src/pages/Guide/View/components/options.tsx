@@ -2,7 +2,7 @@ import {
   EGuideQuestionState,
   EGuideQuestionType,
   IGuideOption,
-} from "@/pages/Guide";
+} from "@/pages/Guide/Guide";
 import React from "react";
 import GuideMultiSelection from "./multiSelection";
 import GuideRangeSlider from "./rangeSlider";

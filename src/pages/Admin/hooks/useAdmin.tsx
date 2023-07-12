@@ -1,7 +1,7 @@
 import customAxios from "@/hooks/useCustomAxios";
 import { User } from "@/hooks/useUser/types";
 import { IOrder } from "@/pages/Orders/hooks/useOrders";
-import { IMaterial } from "@/pages/Process/Material";
+import { IMaterial } from "@/pages/Process/Material/Material";
 import { IModel } from "@/pages/Process/Model/types";
 import { useState } from "react";
 import logger from "@/hooks/useLogger";

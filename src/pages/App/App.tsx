@@ -6,8 +6,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { IProcessItem } from "../Process/types";
-import { IFilterItem } from "../Process/Filter";
-import { RequestTest } from "../RequestTest";
+import { IFilterItem } from "../Process/Filter/Filter";
+import { RequestTest } from "../RequestTest/RequestTest";
 import {
   PrivateAdminRoutes,
   PrivateClientRoutes,
@@ -26,19 +26,19 @@ import AdminMaterials from "../Admin/Materials";
 import AdminModels from "../Admin/Models";
 import AdminOrders from "../Admin/Orders";
 import AdminUsers from "../Admin/Users";
-import GuideRoutes from "../Guide";
-import LoginView from "../Login/LoginView";
+import GuideRoutes from "../Guide/Guide";
+import Login from "../Login/Login";
 import RedirectLogin from "../Login/Redirect/RedirectLogin";
-import LogoutView from "../Logout/LogoutView";
-import OrdersView from "../Orders/OrdersView";
-import OrganizationView from "../Organization/OrganizationView";
+import Logout from "../Logout/Logout";
+import Orders from "../Orders/Orders";
+import Organization from "../Organization/Organization";
 import Portfolio from "../Portfolio/Portfolio";
-import Cart from "../Process/Cart";
-import Checkout from "../Process/Checkout";
-import ManufacturerView from "../Process/Manufacturer";
-import Profil from "../Profil";
-import ResoucesView from "../Resources";
-import ServiceRoutes from "../Service";
+import ProcessCart from "../Process/Cart/Cart";
+import ProcessCheckout from "../Process/Checkout/Checkout";
+import ProcessManufacturer from "../Process/Manufacturer/Manufacturer";
+import Profil from "../Profil/Profll";
+import Resouces from "../Resources/Resources";
+import Service from "../Service/Service";
 import Legal from "../Legal/Legal";
 import useEvents from "./hooks/useEvents";
 import usePermissions, {
@@ -47,7 +47,7 @@ import usePermissions, {
 } from "@/hooks/usePermissions";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import "react-toastify/dist/ReactToastify.css";
-import { ProcessView } from "../Process";
+import { Process } from "../Process/Process";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -113,11 +113,11 @@ const App: React.FC = () => {
 
   const clientRoutes = (
     <Route element={<PrivateClientRoutes user={user} />}>
-      <Route path="manufacturer" element={<ManufacturerView />} />
-      <Route path="checkout" element={<Checkout />} />
+      <Route path="manufacturer" element={<ProcessManufacturer />} />
+      <Route path="checkout" element={<ProcessCheckout />} />
       <Route
         path="orders"
-        element={<OrdersView userType={UserType.client} events={events} />}
+        element={<Orders userType={UserType.client} events={events} />}
       />
       <Route path="assignments" element={<Error text="assignments" />} />
     </Route>
@@ -130,10 +130,10 @@ const App: React.FC = () => {
         path="contracts"
         element={
           <PermissionGate
-            element="OrderCollectionOverview"
+            element="OrdersView"
             showMessage
             children={
-              <OrdersView userType={UserType.manufacturer} events={events} />
+              <Orders userType={UserType.manufacturer} events={events} />
             }
           />
         }
@@ -144,11 +144,20 @@ const App: React.FC = () => {
           <PermissionGate
             element="OrganizationView"
             showMessage
-            children={<OrganizationView />}
+            children={<Organization />}
           />
         }
       />
-      <Route path="resources/*" element={<ResoucesView />} />
+      <Route
+        path="resources/*"
+        element={
+          <PermissionGate
+            children={<Resouces />}
+            element="ResoucesView"
+            showMessage
+          />
+        }
+      />
     </Route>
   );
   const privateRoutes = (
@@ -215,11 +224,11 @@ const App: React.FC = () => {
               }
             />
 
-            <Route path="cart" element={<Cart />} />
+            <Route path="cart" element={<ProcessCart />} />
             <Route
               path="process/*"
               element={
-                <ProcessView
+                <Process
                   isLoggedInResponse={isLoggedInResponse}
                   guideAnswers={state.guideFilter}
                   selectedProgressItem={state.selectedProgressItem}
@@ -235,12 +244,12 @@ const App: React.FC = () => {
               />
               <Route path="*" element={<Navigate to="/guide" />} />
             </Route>
-            <Route path="logout" element={<LogoutView />} />
+            <Route path="logout" element={<Logout />} />
             <Route path="portfolio" element={<Portfolio />} />
-            <Route path="login" element={<LoginView />} />
+            <Route path="login" element={<Login />} />
             <Route path="login/redirect" element={<RedirectLogin />} />
-            <Route path="register" element={<LoginView />} />
-            <Route path="service/*" element={<ServiceRoutes />} />
+            <Route path="register" element={<Login />} />
+            <Route path="service/*" element={<Service />} />
             <Route path="legal/*" element={<Legal />}></Route>
             {clientRoutes}
             {manufacturerRoutes}

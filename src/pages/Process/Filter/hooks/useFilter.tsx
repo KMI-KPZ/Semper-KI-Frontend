@@ -8,7 +8,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
-import { IFilterItem } from "@/pages/Process/Filter";
+import { IFilterItem } from "@/pages/Process/Filter/Filter";
 import logger from "@/hooks/useLogger";
 const FilterItems = _FilterItems as IFilterItem[];
 

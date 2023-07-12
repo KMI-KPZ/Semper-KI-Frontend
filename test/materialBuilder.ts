@@ -1,4 +1,4 @@
-import { IMaterial } from "../src/pages/Process/Material";
+import { IMaterial } from "../src/pages/Process/Material/Material";
 
 export class MaterialBuilder {
     id: string="materialID";

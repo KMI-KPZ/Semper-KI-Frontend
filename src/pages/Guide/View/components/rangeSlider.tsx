@@ -1,4 +1,4 @@
-import { EGuideQuestionState, IGuideOption } from "@/pages/Guide";
+import { EGuideQuestionState, IGuideOption } from "@/pages/Guide/Guide";
 import { Slider } from "@mui/material";
 import React from "react";
 import GuideButtons from "./buttons";

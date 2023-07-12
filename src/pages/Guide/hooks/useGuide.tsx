@@ -1,4 +1,4 @@
-import { IGuide, IGuideQuestion } from "@/pages/Guide";
+import { IGuide, IGuideQuestion } from "@/pages/Guide/Guide";
 import { useState } from "react";
 import _GuideQuestions from "@/hooks/Data/GuideQuestions.json";
 import logger from "@/hooks/useLogger";

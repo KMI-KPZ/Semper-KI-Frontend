@@ -1,4 +1,4 @@
-import { IService, IServiceChapter } from "@/pages/Service";
+import { IService, IServiceChapter } from "@/pages/Service/Service";
 import { useState } from "react";
 import _Services from "@/hooks/Data/Services.json";
 const Services = _Services as IService[];

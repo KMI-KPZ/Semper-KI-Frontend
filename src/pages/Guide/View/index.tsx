@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useGuide from "../hooks/useGuide";
 import { LoadingAnimation } from "@component-library/Loading";
-import { EGuideQuestionType, IGuideOption, IGuideQuestion } from "..";
+import { EGuideQuestionType, IGuideOption, IGuideQuestion } from "../Guide";
 import {
   IFilterAnswer,
   IFilterItem,
   IFilterQuestion,
   IRangeMinMax,
-} from "@/pages/Process/Filter";
+} from "@/pages/Process/Filter/Filter";
 import GuideOverview from "./components/overview";
 import GuideAnswers from "./components/answer";
 import GuideQuestion from "./components/question";

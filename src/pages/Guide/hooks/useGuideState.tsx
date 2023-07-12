@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { GuideState } from "..";
+import { GuideState } from "../Guide";
 
 interface ReturnProps {}
 

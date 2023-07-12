@@ -1,15 +1,15 @@
-import HomeSearchCard from "./components/SearchCard";
-import HomeOrderCard from "./components/OrderCard";
-import HomeGuideCard from "./components/GuideCard";
-import HomePortfolioCard from "./components/PortfolioCard";
-import HomeMagazinCard from "./components/MagazinCard";
-import HomeNewsCard from "./components/NewsCard";
-import HomeImgCard from "./components/ImgCard";
+import HomeSearchCard from "./components/Search";
+import HomeOrderCard from "./components/Order";
+import HomeGuideCard from "./components/Guide";
+import HomePortfolioCard from "./components/Portfolio";
+import HomeMagazinCard from "./components/Magazin";
+import HomeNewsCard from "./components/News";
+import HomeImgCard from "./components/Images";
 import { UserType } from "@/hooks/useUser/types";
 import { Event, OrderEvent } from "@/pages/App/types";
 import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import HomeResourcesCard from "./components/ResourcesCard";
+import HomeResourcesCard from "./components/Resources";
 import { getOrderEventAmount } from "../App/hooks/useEvents";
 
 interface Props {

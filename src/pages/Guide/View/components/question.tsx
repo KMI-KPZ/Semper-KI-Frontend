@@ -1,7 +1,7 @@
 import { Heading } from "@component-library/Typography";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { EGuideQuestionState, IGuideOption, IGuideQuestion } from "../..";
+import { EGuideQuestionState, IGuideOption, IGuideQuestion } from "../../Guide";
 import GuideOptions from "./options";
 
 interface Props {

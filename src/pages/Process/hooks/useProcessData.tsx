@@ -1,9 +1,9 @@
 import customAxios from "@/hooks/useCustomAxios";
-import { IFilterItem } from "@/pages/Process/Filter";
+import { IFilterItem } from "@/pages/Process/Filter/Filter";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { IMaterial } from "../Material";
+import { IMaterial } from "../Material/Material";
 import { IModel } from "../Model/types";
-import { IPostProcessing } from "../PostProcessing";
+import { IPostProcessing } from "../PostProcessing/PostProcessing";
 import logger from "@/hooks/useLogger";
 
 export interface IProcessData {

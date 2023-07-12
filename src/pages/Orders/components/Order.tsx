@@ -150,7 +150,7 @@ const Order: React.FC<Props> = (props) => {
         </Heading>
         <Heading variant="h3">{order.item.title}</Heading>
         <div className="flex flex-col items-center  justify-center gap-3 md:flex-row">
-          <PermissionGate element="OrderButton">
+          <PermissionGate element="OrderButtons">
             {orderEvent !== undefined &&
             orderEvent.messages !== undefined &&
             orderEvent.messages > 0 ? (
@@ -171,7 +171,7 @@ const Order: React.FC<Props> = (props) => {
               />
             )}
           </PermissionGate>
-          <PermissionGate element="OrderButton">
+          <PermissionGate element="OrderButtons">
             {menuOpen ? renderButtons() : null}
           </PermissionGate>
           <div className={`flex items-center justify-center `}>
@@ -215,10 +215,10 @@ const Order: React.FC<Props> = (props) => {
           ))}
         </div>
       </div>
-      <PermissionGate element="OrderFileView">
+      <PermissionGate element="OrderFile">
         <OrderFile order={order} orderCollectionID={orderCollectionID} />
       </PermissionGate>
-      <PermissionGate element="ChatView">
+      <PermissionGate element="Chat">
         <Modal
           open={chatOpen}
           closeModal={handleOnOutsideClickChat}

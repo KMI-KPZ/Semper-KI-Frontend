@@ -130,7 +130,7 @@ const App: React.FC = () => {
         path="contracts"
         element={
           <PermissionGate
-            element="OrdersView"
+            element="Orders"
             showMessage
             children={
               <Orders userType={UserType.manufacturer} events={events} />
@@ -142,7 +142,7 @@ const App: React.FC = () => {
         path="organization"
         element={
           <PermissionGate
-            element="OrganizationView"
+            element="Organization"
             showMessage
             children={<Organization />}
           />
@@ -153,7 +153,7 @@ const App: React.FC = () => {
         element={
           <PermissionGate
             children={<Resouces />}
-            element="ResoucesView"
+            element="Resouces"
             showMessage
           />
         }

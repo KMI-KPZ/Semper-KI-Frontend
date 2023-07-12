@@ -5,6 +5,7 @@ import { Heading, Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import useOntoMaterials from "../../hooks/useOntoMaterials";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ResourcesMaterialsTableProps {}
 
@@ -20,12 +21,14 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
       <Heading variant="h2">{t("Resources.Materials.table.header")}</Heading>
-      <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-col">
-        <Button
-          title={t("Resources.Materials.table.button.add")}
-          to="/resources/materials/add"
-        />
-      </div>
+      <PermissionGate element="ResourcesMaterialsAddButton">
+        <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-col">
+          <Button
+            title={t("Resources.Materials.table.button.add")}
+            to="/resources/materials/add"
+          />
+        </div>
+      </PermissionGate>
       <LoadingSuspense
         query={materialsQuery}
         errorText={t("Resources.Materials.table.empty")}

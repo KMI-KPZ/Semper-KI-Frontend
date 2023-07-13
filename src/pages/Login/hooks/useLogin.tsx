@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { AxiosResponse } from "axios";
 import { UserType } from "@/hooks/useUser/types";
 import customAxios from "@/hooks/useCustomAxios";
+import { useLocation } from "react-router-dom";
+import logger from "@/hooks/useLogger";
 
 export const useLogin = (
   load: boolean,
@@ -10,27 +12,42 @@ export const useLogin = (
   register: boolean,
   path?: string
 ): {
-  loginQuery: UseQueryResult<AxiosResponse<any, any>, Error>;
+  loginQuery: UseQueryResult<string, Error>;
 } => {
-  const loginQuery = useQuery<AxiosResponse, Error>({
+  const { search } = useLocation();
+
+  const getReplacedSearchParam = () => {
+    return search !== "" ? search.replace("?", "&") : "";
+  };
+  const getUserType = (): string | null => {
+    if (getReplacedSearchParam() !== "") return UserType[UserType.manufacturer];
+    if (userType === undefined) return null;
+    return UserType[userType];
+  };
+
+  const loginQuery = useQuery<string, Error>({
     queryKey: ["login"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/login/`;
-      return customAxios.get(apiUrl, {
-        headers: {
-          Usertype: userType === undefined ? null : UserType[userType],
-          Path: path === undefined ? "/" : path,
-          Register: register !== undefined && register === true ? true : false,
-        },
-      });
+      return customAxios
+        .get(apiUrl, {
+          headers: {
+            Usertype: getUserType(),
+            Path: path === undefined ? "/" : path,
+            Register:
+              register !== undefined && register === true ? true : false,
+          },
+        })
+        .then((response) => {
+          logger("useLogin | loginQuery |", response);
+          return response.data;
+        });
     },
-    enabled: userType !== undefined && load === true,
+    onSuccess(data) {
+      window.location.href = `${data}${getReplacedSearchParam()}`;
+    },
+    enabled: (userType !== undefined && load === true) || search !== "",
   });
-
-  useEffect(() => {
-    if (loginQuery.data !== undefined && loginQuery.status === "success")
-      window.location.href = loginQuery.data.data;
-  }, [loginQuery.data]);
 
   return {
     loginQuery,

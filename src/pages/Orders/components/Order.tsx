@@ -149,48 +149,50 @@ const Order: React.FC<Props> = (props) => {
           {t("Orders.OrderView.header")} {order.id}
         </Heading>
         <Heading variant="h3">{order.item.title}</Heading>
-        <div className="flex flex-col items-center  justify-center gap-3 md:flex-row">
-          <PermissionGate element="OrderButtons">
-            {orderEvent !== undefined &&
-            orderEvent.messages !== undefined &&
-            orderEvent.messages > 0 ? (
-              <Badge count={orderEvent.messages}>
+        <PermissionGate element={["OrderButtons", "ChatButton"]} concat="or">
+          <div className="flex flex-col items-center  justify-center gap-3 md:flex-row">
+            <PermissionGate element="ChatButton">
+              {orderEvent !== undefined &&
+              orderEvent.messages !== undefined &&
+              orderEvent.messages > 0 ? (
+                <Badge count={orderEvent.messages}>
+                  <Button
+                    size="sm"
+                    startIcon={<MailIcon />}
+                    onClick={handleOnClickButtonChat}
+                    title={t("Orders.OrderView.button.chat")}
+                  />
+                </Badge>
+              ) : (
                 <Button
                   size="sm"
                   startIcon={<MailIcon />}
                   onClick={handleOnClickButtonChat}
                   title={t("Orders.OrderView.button.chat")}
                 />
-              </Badge>
-            ) : (
+              )}
+            </PermissionGate>
+            <PermissionGate element="OrderButtons">
+              {menuOpen ? renderButtons() : null}
+            </PermissionGate>
+            <div className={`flex items-center justify-center `}>
               <Button
                 size="sm"
-                startIcon={<MailIcon />}
-                onClick={handleOnClickButtonChat}
-                title={t("Orders.OrderView.button.chat")}
+                startIcon={
+                  <ExpandLessIcon
+                    className={` ${
+                      menuOpen ? "md:rotate-90" : "rotate-180 md:-rotate-90"
+                    }`}
+                  />
+                }
+                title={t(
+                  `Orders.OrderView.button.${menuOpen ? "collapse" : "expand"}`
+                )}
+                onClick={handleOnClickButtonExpand}
               />
-            )}
-          </PermissionGate>
-          <PermissionGate element="OrderButtons">
-            {menuOpen ? renderButtons() : null}
-          </PermissionGate>
-          <div className={`flex items-center justify-center `}>
-            <Button
-              size="sm"
-              startIcon={
-                <ExpandLessIcon
-                  className={` ${
-                    menuOpen ? "md:rotate-90" : "rotate-180 md:-rotate-90"
-                  }`}
-                />
-              }
-              title={t(
-                `Orders.OrderView.button.${menuOpen ? "collapse" : "expand"}`
-              )}
-              onClick={handleOnClickButtonExpand}
-            />
+            </div>
           </div>
-        </div>
+        </PermissionGate>
       </div>
       <StatusBar
         status={order.orderState}

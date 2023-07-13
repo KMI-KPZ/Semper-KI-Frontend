@@ -5,16 +5,28 @@ import { useTranslation } from "react-i18next";
 import usePermissionGate from "./hooks/usePermissionGate";
 
 interface PermissionProps {
-  element: string;
+  element: string | string[];
   showMessage?: boolean;
+  concat?: "or" | "and";
 }
 
 const PermissionGate: React.FC<PropsWithChildren<PermissionProps>> = (
   props
 ) => {
-  const { children, element, showMessage } = props;
+  const { children, element, showMessage = false, concat = "and" } = props;
   const { t } = useTranslation();
-  const { hasPermission } = usePermissionGate();
+  const { hasPermission: elementHasPermission } = usePermissionGate();
+
+  const checkElements = (elements: string[]) => {
+    return concat === "and"
+      ? elements.every((element) => elementHasPermission(element))
+      : elements.some((element) => elementHasPermission(element));
+  };
+  const hasPermission = (element: string | string[]): boolean => {
+    return Array.isArray(element)
+      ? checkElements(element)
+      : elementHasPermission(element);
+  };
 
   return hasPermission(element) ? (
     <>{children}</>

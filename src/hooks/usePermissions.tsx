@@ -1,4 +1,9 @@
-import { useMutation, useQuery, UseQueryResult } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import customAxios from "./useCustomAxios";
 import logger from "@/hooks/useLogger";
 import { useContext, useState } from "react";
@@ -23,6 +28,7 @@ export type PermissionGateType = {
 
 const usePermissions = (user?: User): ReturnProps => {
   const [permissions, setPermissions] = useState<Permission[]>();
+  const queryClient = useQueryClient();
 
   const permissionQuery = useQuery<Permission[], Error>({
     queryKey: ["permissions"],
@@ -61,6 +67,7 @@ const usePermissions = (user?: User): ReturnProps => {
         }),
     onSuccess(data, variables, context) {
       setPermissions(data);
+      queryClient.invalidateQueries(["permissions"]);
     },
   });
 

@@ -3,26 +3,31 @@ import { useEffect } from "react";
 import { AxiosResponse } from "axios";
 import { UserType } from "@/hooks/useUser/types";
 import customAxios from "@/hooks/useCustomAxios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 
 export const useLogin = (
   load: boolean,
-  userType: UserType,
+  orga: boolean,
   register: boolean,
   path?: string
 ): {
   loginQuery: UseQueryResult<string, Error>;
 } => {
   const { search } = useLocation();
+  const params = useSearchParams();
 
   const getReplacedSearchParam = () => {
     return search !== "" ? search.replace("?", "&") : "";
   };
-  const getUserType = (): string | null => {
+  const getUserType = (): string | undefined => {
     if (getReplacedSearchParam() !== "") return UserType[UserType.manufacturer];
-    if (userType === undefined) return null;
-    return UserType[userType];
+    if (orga === true) return UserType[UserType.manufacturer];
+    else return UserType[UserType.client];
+  };
+  const getOrgaID = (): string | undefined => {
+    const orgaID = params[0].get("organization");
+    return orgaID !== null ? orgaID : undefined;
   };
 
   const loginQuery = useQuery<string, Error>({
@@ -46,7 +51,7 @@ export const useLogin = (
     onSuccess(data) {
       window.location.href = `${data}${getReplacedSearchParam()}`;
     },
-    enabled: (userType !== undefined && load === true) || search !== "",
+    enabled: load === true || search !== "",
   });
 
   return {

@@ -416,6 +416,8 @@
     },
     "LoginView":{
       "header":"Anmeldung",
+      "user":"Benutzer",
+      "orga":"Organisation",
       "login":{
         "header":"Anmelden"
       },

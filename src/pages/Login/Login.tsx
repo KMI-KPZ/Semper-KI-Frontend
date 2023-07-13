@@ -2,20 +2,22 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLogin } from "./hooks/useLogin";
 import { Button } from "@component-library/Button";
-import { UserSwitch } from "@/components/UserSwitch";
 import LoginIcon from "@mui/icons-material/Login";
 import CreateIcon from "@mui/icons-material/Create";
 import { UserType } from "@/hooks/useUser/types";
-import { Heading } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/Typography";
+import Switch from "@/components/Switch";
+import PersonIcon from "@mui/icons-material/Person";
+import GroupIcon from "@mui/icons-material/Group";
 
 interface Props {
   path?: string;
   userType?: UserType;
 }
 type State = {
-  userType: UserType;
   load: boolean;
   register: boolean;
+  orga: boolean;
 };
 
 const Login: React.FC<Props> = (props) => {
@@ -23,11 +25,11 @@ const Login: React.FC<Props> = (props) => {
   const { path, userType: initialUserType } = props;
   const [state, setState] = useState<State>({
     load: false,
-    userType: initialUserType === undefined ? UserType.client : initialUserType,
     register: false,
+    orga: false,
   });
-  const { userType, load, register } = state;
-  const { loginQuery } = useLogin(load, userType, register);
+  const { load, register, orga } = state;
+  const { loginQuery } = useLogin(load, orga, register);
 
   const handleOnClickButtonLogin = () => {
     setState((prevState) => ({ ...prevState, load: true, register: false }));
@@ -36,13 +38,10 @@ const Login: React.FC<Props> = (props) => {
     setState((prevState) => ({ ...prevState, load: true, register: true }));
   };
 
-  const handleOnClickUserSwitch = () => {
+  const handleOnClickSwitch = () => {
     setState((prevState) => ({
       ...prevState,
-      userType:
-        prevState.userType === UserType.client
-          ? UserType.manufacturer
-          : UserType.client,
+      orga: !prevState.orga,
     }));
   };
 
@@ -56,7 +55,22 @@ const Login: React.FC<Props> = (props) => {
           ? t("Login.LoginView.header")
           : t("Login.LoginView.headerPath")}
       </Heading>
-      <UserSwitch onClick={handleOnClickUserSwitch} userType={userType} />
+      <Switch
+        value={orga}
+        leftChildren={
+          <div className="flex flex-row items-center justify-center gap-3 px-3 py-2">
+            <PersonIcon />
+            <Text variant="body">{t("Login.LoginView.user")}</Text>
+          </div>
+        }
+        rightChildren={
+          <div className="flex flex-row items-center justify-center gap-3 px-3 py-2">
+            <GroupIcon />
+            <Text variant="body">{t("Login.LoginView.orga")}</Text>
+          </div>
+        }
+        onClick={handleOnClickSwitch}
+      />
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
         <Button
           onClick={handleOnClickButtonLogin}
@@ -64,6 +78,7 @@ const Login: React.FC<Props> = (props) => {
           startIcon={<LoginIcon />}
         />
         <Button
+          active={!orga}
           onClick={handleOnClickButtonRegister}
           title={t("Login.LoginView.register.header")}
           startIcon={<CreateIcon />}

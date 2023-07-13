@@ -57,9 +57,10 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     if (!extern) {
       e.preventDefault();
       e.stopPropagation();
-      if (onClick !== undefined) {
+      if (onClick !== undefined && active && !loading) {
         onClick(e);
-      } else if (to !== undefined) {
+      }
+      if (to !== undefined && active) {
         navigate(to);
       }
     }

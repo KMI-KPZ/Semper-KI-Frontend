@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Button } from "@component-library/Button";
 import MailIcon from "@mui/icons-material/Mail";
 import Chat from "./Chat";
-import StatusBar from "./StatusBar";
+import StatusBar from "../StatusBar/StatusBar";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -195,7 +195,7 @@ const Order: React.FC<Props> = (props) => {
         </PermissionGate>
       </div>
       <StatusBar
-        status={order.orderState}
+        currentState={order.orderState}
         updateStatus={updateStatus}
         userType={userType}
       />

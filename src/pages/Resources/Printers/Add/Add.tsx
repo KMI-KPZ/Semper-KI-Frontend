@@ -33,14 +33,17 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
           name: t("Resources.Printers.form.yup.name"),
         })
       ),
-      properties: yup.array().of(
-        yup.object().shape({
-          name: yup
-            .string()
-            .required(t("Resources.Printers.form.yup.propNamerequired")),
-          values: yup.array().of(yup.string().required()).required(),
-        })
-      ),
+      properties: yup
+        .array()
+        .required()
+        .of(
+          yup.object().shape({
+            name: yup
+              .string()
+              .required(t("Resources.Printers.form.yup.propNamerequired")),
+            values: yup.array().of(yup.string().required()).required(),
+          })
+        ),
     })
     .required();
   type FormData = yup.InferType<typeof schema>;

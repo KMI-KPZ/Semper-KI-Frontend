@@ -1,5 +1,8 @@
-import { EProcessStatusType, EUserType } from "../interface/enums";
-import { IAddress, IModel, IProcessItem } from "../interface/Interface";
+import { Address, UserType } from "@/hooks/useUser/types";
+import { IProcessItem } from "@/pages/Process/types";
+import { EProcessStatusType } from "@/pages/Process/Header/types";
+import { IModel } from "@/pages/Process/Model/types";
+import logger from "@/hooks/useLogger";
 
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;
@@ -23,24 +26,24 @@ export const isNumber = (element: any): element is number => {
 
 export const getTimeAsText = (time: number): string => {
   let timeString: string = "";
-  const day = time / (24 * 60 * 60);
+  const day = Math.round(time / (24 * 60 * 60));
   if (day >= 1) {
-    timeString += `${Math.round(day)}Tage`;
+    timeString += `${day} Tage`;
     time -= day * 24 * 60 * 60;
   }
-  const hour = time / (60 * 60);
+  const hour = Math.round(time / (60 * 60));
   if (hour >= 1) {
-    timeString += `${Math.round(hour)}Stunde`;
+    timeString += `${day > 0 ? " " : ""}${hour} Stunde`;
     time -= hour * 60 * 60;
   }
-  const sec = time / 60;
+  const sec = Math.round(time / 60);
   if (sec >= 1) {
-    timeString += `${Math.round(sec)}Sekunden`;
+    timeString += `${hour > 0 ? " " : ""}${sec} Sekunden`;
   }
   return timeString;
 };
 
-export const getCurrentTimeInSecons = (): number => {
+export const getCurrentTimeInSeconds = (): number => {
   const now = new Date();
   return Math.round(now.getTime() / 1000);
 };
@@ -58,34 +61,37 @@ export const removeItemByIndex = <T,>(
   index: number
 ): Array<T> => {
   let newArr = arr;
-  if (index > -1) {
+  if (index > -1 && index < arr.length) {
     newArr.splice(index, 1);
   }
   return newArr;
 };
 
-export const getUserType = (name: string): EUserType => {
-  let type: EUserType = EUserType.client;
+export const getUserType = (name: string): UserType => {
+  let type: UserType = UserType.client;
   switch (name.toLocaleLowerCase()) {
     case "client":
-      type = EUserType.client;
+      type = UserType.client;
       break;
     case "manufacturer":
-      type = EUserType.manufacturer;
+      type = UserType.manufacturer;
       break;
     case "admin":
-      type = EUserType.admin;
+      type = UserType.admin;
+      break;
+    case "anonym":
+      type = UserType.anonym;
       break;
     default:
-      type = EUserType.client;
+      type = UserType.anonym;
       break;
   }
   return type;
 };
 
-export const parseAddress = (unparsedAddress: string): IAddress => {
+export const parseAddress = (unparsedAddress: string): Address => {
   const parseAddress = JSON.parse(unparsedAddress);
-  let newAddress: IAddress = {
+  let newAddress: Address = {
     street: parseAddress.street,
     houseNumber: parseAddress.number,
     city: parseAddress.city,
@@ -109,6 +115,7 @@ export const getModelURI = (model: IModel): string => {
 
 export const checkForSelectedData = (items: IProcessItem[]): boolean => {
   let contains: boolean = false;
+  if (items === undefined || items.length === 0) return false;
   items.forEach((item) => {
     if (
       item.model !== undefined ||
@@ -129,4 +136,31 @@ export const getStatusByIndex = (process: IProcessItem): EProcessStatusType => {
   if (process.material === undefined) return EProcessStatusType.missing;
   if (process.postProcessings === undefined) return EProcessStatusType.missing;
   return EProcessStatusType.ok;
+};
+
+export const splitFindArray = <T extends any>(
+  array: T[] | undefined,
+  conditionFunction: (event: T) => boolean
+): {
+  otherArray: T[];
+  item: T | undefined;
+} => {
+  if (array === undefined || (array !== undefined && array.length === 0))
+    return { otherArray: [], item: undefined };
+  const otherArray = array.filter((item) => !conditionFunction(item));
+  const item = array.find((item) => conditionFunction(item));
+  return { otherArray, item };
+};
+export const splitArray = <T extends any>(
+  array: T[] | undefined,
+  conditionFunction: (event: T) => boolean
+): {
+  arrayTrue: T[];
+  arrayFalse: T[];
+} => {
+  if (array === undefined || (array !== undefined && array.length === 0))
+    return { arrayFalse: [], arrayTrue: [] };
+  const arrayTrue = array.filter((item) => conditionFunction(item));
+  const arrayFalse = array.filter((item) => !conditionFunction(item));
+  return { arrayTrue, arrayFalse };
 };

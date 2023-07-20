@@ -1,3 +1,3 @@
-# Frontend
+# Semper-KI Frontend
 
 ##

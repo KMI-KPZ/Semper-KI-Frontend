@@ -6,28 +6,24 @@
 @layer base {
     @font-face {
         font-family: PTSans;
-        src: url(/public/assets/fonts/PTSans-Regular.ttf) format("truetype");
+        src: url(/assets/fonts/PTSans-Regular.ttf) format("truetype");
     }
     @font-face {
         font-family: PTSans;
         font-style: italic;
-        src: url(/public/assets/fonts/PTSans-Italic.ttf) format("truetype");
+        src: url(/assets/fonts/PTSans-Italic.ttf) format("truetype");
     }
     @font-face {
         font-family: PTSans;
         font-weight: 700;
-        src: url(/public/assets/fonts/PTSans-Bold.ttf) format("truetype");
+        src: url(/assets/fonts/PTSans-Bold.ttf) format("truetype");
     }
     @font-face {
         font-family: PTSans;
         font-weight: 700;
         font-style: italic;
-        src: url(/public/assets/fonts/PTSans-BoldItalic.ttf) format("truetype");
-    }
-    .link {
-        @apply transition duration-500 ease-in-out hover:text-türkis text-grau-400 font-bold;
-        transition-timing-function: cubic-bezier(.645,.045,.355,1);
-    }
+        src: url(/assets/fonts/PTSans-BoldItalic.ttf) format("truetype");
+}
     .bezier {
         transition-timing-function: cubic-bezier(.645,.045,.355,1);
     }

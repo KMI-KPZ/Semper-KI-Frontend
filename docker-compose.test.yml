@@ -2,4 +2,8 @@ version: "3.4"
 
 services:
   frontend:
-    command: ["yarn","test:ci"]
+    container_name: frontend-test
+    image: frontend-test
+    build:
+      context: .
+      dockerfile: ./Dockerfile.test.dev

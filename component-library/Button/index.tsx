@@ -25,7 +25,13 @@ interface ButtonProps {
   testid?: string;
 }
 type ButtonSize = "sm" | "xs" | "md" | "lg" | "xl";
-type ButtonVariant = "primary" | "secondary" | "outline" | "text" | "light";
+type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "outline"
+  | "text"
+  | "light"
+  | "link";
 type ButtonWidth = "fit" | "full" | "auto";
 type ButtonAlign = "start" | "center" | "end";
 type ButtonDirection = "col" | "row";
@@ -109,6 +115,8 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
           case false:
             return "text-grau-400 font-bold";
         }
+      case "link":
+        return "hover:text-blau underline";
     }
   };
 
@@ -156,7 +164,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
   return (
     <a
       title={getTitle()}
-      className={`
+      className={` 
       bezier group flex items-center gap-3 whitespace-nowrap transition duration-300
       ${getClassNameVariant()} ${getClassNameSize()} 
       ${getClassNameWidth()} ${getClassNameAlign()} 

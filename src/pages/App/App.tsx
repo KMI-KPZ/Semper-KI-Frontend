@@ -48,6 +48,9 @@ import usePermissions, {
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import "react-toastify/dist/ReactToastify.css";
 import { Process } from "../Process/Process";
+import CookieBanner from "@/components/CookieBanner/CookieBanner";
+import useCookieConsent from "@/components/CookieBanner/hooks/useCookieConsent";
+import Modal from "@component-library/Modal";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -82,6 +85,7 @@ export const AppContext = createContext<AppContext>({
 
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(initialAppState);
+  const { rejectCookies, acceptCookies, cookieConsent } = useCookieConsent();
   const { isLoggedIn, userType, user, isLoggedInResponse } = useUser();
   const { cartQuery } = useCart();
   const { permissionGates, permissions, reloadPermissions } =
@@ -258,6 +262,12 @@ const App: React.FC = () => {
             <Route path="*" element={<Error />} />
           </Routes>
         </main>
+        <Modal open={cookieConsent === undefined} noIcon>
+          <CookieBanner
+            acceptCookies={acceptCookies}
+            rejectCookies={rejectCookies}
+          />
+        </Modal>
         <Footer />
       </div>
       <ToastContainer

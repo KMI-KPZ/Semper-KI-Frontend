@@ -951,5 +951,27 @@
       "status":"Ihre Aufträge wurde aktualisiert",
       "message":"Neue Nachricht"
     }
+  },
+  "CookieBanner":{
+    "heading":"Cookie-Zustimmung verwalten",
+    "message":"Um dir ein optimales Erlebnis zu bieten, verwenden wir Technologien wie Cookies, um Geräteinformationen zu speichern und/oder darauf zuzugreifen. Wenn du diesen Technologien zustimmst, können wir Daten wie das Surfverhalten oder eindeutige IDs auf dieser Website verarbeiten. Wenn du deine Zustimmung nicht erteilst oder zurückziehst, können bestimmte Merkmale und Funktionen beeinträchtigt werden.",
+    "functional":{
+      "heading":"Funktional",
+      "message":"Die technische Speicherung oder der Zugang ist unbedingt erforderlich für den rechtmäßigen Zweck, die Nutzung eines bestimmten Dienstes zu ermöglichen, der vom Teilnehmer oder Nutzer ausdrücklich gewünscht wird, oder für den alleinigen Zweck, die Übertragung einer Nachricht über ein elektronisches Kommunikationsnetz durchzuführen."
+    },
+    "status":{
+      "alwaysActive":"Immer aktiv"
+    },
+    "button":{
+      "accept":"Akzeptieren",
+      "reject":"Ablehnen",
+      "showSettings":"Einstellungen ansehen",
+      "safeSettings":"Einstellungen speichern"
+    },
+    "link":{
+      "cookiePolicy":"Cookie-Richtlinie",
+      "dataProtection":"Datenschutzerklärung",
+      "imprint":"Impressum"
+    }
   }
 }

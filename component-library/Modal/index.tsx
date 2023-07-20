@@ -17,7 +17,8 @@ type ModelProps = {
   open: boolean;
   locked?: boolean;
   className?: string;
-  closeModal: () => void;
+  closeModal?: () => void;
+  noIcon?: boolean;
 };
 
 const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
@@ -26,6 +27,7 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   closeModal,
   children,
   className: _className,
+  noIcon,
 }) => {
   const { t } = useTranslation();
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -36,7 +38,7 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   const handleOnCancel = (e: SyntheticEvent<HTMLDialogElement, Event>) => {
     // logger("handleOnCancel", e);
     e.preventDefault();
-    if (!locked) closeModal();
+    if (!locked && closeModal) closeModal();
   };
 
   // Eventlistener: trigger onclose when click outside
@@ -44,7 +46,7 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
     e: MouseEvent<HTMLDialogElement, globalThis.MouseEvent>
   ) => {
     logger("handleOnClick");
-    closeModal();
+    if (closeModal) closeModal();
   };
 
   // Eventlistener: trigger close click on anim end
@@ -90,17 +92,19 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
       onAnimationEnd={handleOnAnimEnd}
     >
       <div
-        className={`box-border min-h-[150px] min-w-[200px] ${className}`}
+        className={`box-border min-h-[20px] min-w-[20px] ${className}`}
         onClick={handleOnClickChildren}
       >
-        <Button
-          className="absolute right-0 top-0 z-10 mr-3 mt-3"
-          title={t("components.Modal.button.close")}
-          children={<CloseIcon />}
-          variant="secondary"
-          width="fit"
-          onClick={closeModal}
-        />
+        {noIcon === true ? null : (
+          <Button
+            className="absolute right-0 top-0 z-10 mr-3 mt-3"
+            title={t("components.Modal.button.close")}
+            children={<CloseIcon />}
+            variant="secondary"
+            width="fit"
+            onClick={closeModal}
+          />
+        )}
         {children}
       </div>
     </dialog>

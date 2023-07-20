@@ -37,7 +37,7 @@
     "build": "tsc && vite build",
     "serve": "vite preview --port 3000",
     "test": "jest --coverage --ci --reporters=default --reporters=jest-junit",
-    "test:ci":"jest --ci --reporters=default"
+    "test:ci":"jest --ci --reporters=default && tsc && vite build"
   },
   "eslintConfig": {
     "extends": [

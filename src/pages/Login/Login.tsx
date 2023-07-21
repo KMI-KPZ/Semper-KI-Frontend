@@ -55,6 +55,9 @@ const Login: React.FC<Props> = (props) => {
           ? t("Login.LoginView.header")
           : t("Login.LoginView.headerPath")}
       </Heading>
+      <Heading variant="h3" className="text-red-500">
+        Momentan noch nicht funktional
+      </Heading>
       <Switch
         value={orga}
         leftChildren={

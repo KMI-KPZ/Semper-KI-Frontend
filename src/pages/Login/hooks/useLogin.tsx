@@ -51,7 +51,7 @@ export const useLogin = (
     onSuccess(data) {
       window.location.href = `${data}${getReplacedSearchParam()}`;
     },
-    enabled: load === true || search !== "",
+    enabled: false, //load === true || search !== "",
   });
 
   return {

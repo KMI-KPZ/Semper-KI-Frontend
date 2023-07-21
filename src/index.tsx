@@ -28,6 +28,8 @@ const fallback = (
   </div>
 );
 
+const testTSError: string = 2;
+
 root.render(
   <Suspense fallback={fallback}>
     <React.StrictMode>

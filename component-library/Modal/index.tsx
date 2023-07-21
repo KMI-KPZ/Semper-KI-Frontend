@@ -45,7 +45,6 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   const handleOnClick = (
     e: MouseEvent<HTMLDialogElement, globalThis.MouseEvent>
   ) => {
-    logger("handleOnClick");
     if (closeModal) closeModal();
   };
 
@@ -62,7 +61,6 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
     e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>
   ) => {
     e.stopPropagation();
-    logger("handleOnClickChildren");
   };
 
   // when open changes run open/close command

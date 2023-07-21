@@ -87,7 +87,9 @@ const useUser = (): ReturnProps => {
       : undefined;
   const userType: UserType = user === undefined ? UserType.anonym : user.type;
   const isLoggedInResponse: boolean =
-    loadIsLoggedInQuery.data !== undefined && loadIsLoggedInQuery.isFetched;
+    loadIsLoggedInQuery.data !== undefined &&
+    loadIsLoggedInQuery.isFetched &&
+    isCSRFTokenLoaded === true;
   const isLoggedIn: boolean =
     isLoggedInResponse && loadIsLoggedInQuery.data === true;
 

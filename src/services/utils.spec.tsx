@@ -25,7 +25,7 @@ describe("Utils", () => {
   describe("Test getFileSizeAsString", () => {
     it("should return 1B as string", () => {
       const value = getFileSizeAsString(1);
-      expect(value).toBe("1-B");
+      expect(value).toBe("1B");
       expect(typeof value).toBe("string");
     });
     it("should return 1KB", () => {

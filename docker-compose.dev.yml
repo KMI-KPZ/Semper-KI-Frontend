@@ -5,7 +5,9 @@ services:
     container_name: frontend-dev
     image: frontend-dev
     volumes:
-       - ./:/app
+       - ./src:/app/src
+       - ./assests:/app/assests
+       - ./component-library:/app/component-library
     build:
       context: .
       dockerfile: ./Dockerfile.dev

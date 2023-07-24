@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.7'
 
 services:
   frontend:
@@ -9,3 +9,5 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile.dev
+    ports:
+      - '127.0.0.1:3000:80'

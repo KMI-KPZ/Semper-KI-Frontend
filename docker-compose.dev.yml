@@ -5,9 +5,11 @@ services:
     container_name: frontend-dev
     image: frontend-dev
     volumes:
-       - ./:/app
+       - ./src:/app/src
+       - ./assets:/app/assets
+       - ./component-library:/app/component-library
     build:
       context: .
       dockerfile: ./Dockerfile.dev
     ports:
-      - '127.0.0.1:3000:80'
+      - '127.0.0.1:3000:3000'

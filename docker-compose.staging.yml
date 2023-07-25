@@ -2,8 +2,8 @@ version: '3.7'
 
 services:
   frontend:
-    container_name: frontend-prod-dev
-    image: frontend-prod-dev
+    container_name: frontend-staging
+    image: frontend-staging
     build:
       context: .
       dockerfile: ./Dockerfile

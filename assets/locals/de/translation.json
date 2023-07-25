@@ -286,7 +286,20 @@
   },
   "Home":{
     "Home":{
-      "header":"Übersicht"
+      "Anonym":{
+        "header":"Übersicht",
+        "title":"Semper-KI - Einfach 3D drucken.",
+        "claim1":"Geben Sie Ihre Idee in Auftrag",
+        "claim2":"Von der Idee zum Modell",
+        "claim3":"Vom Modell zum Prototyp",
+        "claim4":"Vom Prototyp zu Large Scale",
+        "claim5":"Bei uns finden Sie passende Partner für jeden Schritt Ihres Produktionsprozesses.",
+        "OrderCard":{
+          "title":"Auftrag",
+          "subTitle":"zur Herstellung eines Bauteils",
+          "demo":"Demo"
+        }
+      }
     },
     "HomeGuideCard":{
       "header":"Angeleiteter Einstieg",

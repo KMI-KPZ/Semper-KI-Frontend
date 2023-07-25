@@ -11,6 +11,8 @@ import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import HomeResourcesCard from "./components/Resources";
 import { getOrderEventAmount } from "../App/hooks/useEvents";
+import { Heading, Text } from "@component-library/Typography";
+import AnonymHome from "./Anonym/Home";
 
 interface Props {
   userType: UserType;
@@ -28,6 +30,8 @@ export interface IHomeItem {
 export const Home: React.FC<Props> = (props) => {
   const { userType, events, cartCount } = props;
   const { t } = useTranslation();
+
+  if (userType === UserType.anonym) return <AnonymHome />;
 
   return (
     <div

@@ -6,7 +6,7 @@ services:
     image: frontend-dev
     volumes:
        - ./src:/app/src
-       - ./assests:/app/assests
+       - ./assets:/app/assets
        - ./component-library:/app/component-library
     build:
       context: .

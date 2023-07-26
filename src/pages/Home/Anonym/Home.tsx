@@ -7,6 +7,7 @@ import HomeAnonymHeader from "./components/Header";
 import HomeAnonymOrga from "./components/Orga";
 import HomeAnonymIndividual from "./components/Individual";
 import HomeAnonymMagazinCard from "./components/Magazin";
+import HomeAnonymImages from "./components/Images";
 
 interface AnonymHomeProps {}
 
@@ -25,6 +26,7 @@ const AnonymHome: React.FC<AnonymHomeProps> = (props) => {
       <HomeAnonymOrga />
       <HomeAnonymIndividual />
       <HomeAnonymMagazinCard />
+      <HomeAnonymImages />
     </div>
   );
 };

@@ -5,28 +5,17 @@ import { UserType } from "@/hooks/useUser/types";
 describe("<Home>", () => {
   it("should render", () => {
     render(<Home cartCount={0} userType={UserType.anonym} />);
-    expect(screen.getByTestId("home")).toBeInTheDocument();
+    expect(screen.getByTestId("home-anonym")).toBeInTheDocument();
   });
-  it("should render homecards for anonym user", () => {
+  it("should render anonym Home for anonym user", () => {
     render(<Home cartCount={0} userType={UserType.anonym} />);
-    expect(screen.getByTestId("start-order-link")).toBeInTheDocument();
-    expect(screen.getByTestId("home-search-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-guide-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-magazin-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-news-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-img-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-portfolio-card")).toBeInTheDocument();
+    expect(screen.getByTestId("home-anonym-header")).toBeInTheDocument();
+    expect(screen.getByTestId("home-anonym-order")).toBeInTheDocument();
+    expect(screen.getByTestId("home-anonym-orga")).toBeInTheDocument();
+    expect(screen.getByTestId("home-anonym-individual")).toBeInTheDocument();
+    expect(screen.getByTestId("home-anonym-magazin")).toBeInTheDocument();
   });
-  it("should render homecards for anonym user with items in cart", () => {
-    render(<Home cartCount={2} userType={UserType.anonym} />);
-    expect(screen.getByTestId("home-order-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-search-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-guide-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-magazin-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-news-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-img-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-portfolio-card")).toBeInTheDocument();
-  });
+  it.todo("should render homecards for anonym user with items in cart");
   it("should render homecards for client user", () => {
     render(<Home cartCount={0} userType={UserType.client} />);
     expect(screen.getByTestId("home-order-card")).toBeInTheDocument();

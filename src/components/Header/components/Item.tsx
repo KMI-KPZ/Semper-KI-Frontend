@@ -65,9 +65,7 @@ const HeaderItem: React.FC<Props> = (props) => {
         title={t(headeritem.title)}
         startIcon={
           badge !== undefined && badge > 0 ? (
-            <Badge count={badge} position="large">
-              {renderIcon}
-            </Badge>
+            <Badge count={badge}>{renderIcon}</Badge>
           ) : (
             renderIcon
           )

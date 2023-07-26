@@ -173,7 +173,7 @@ export const Header: React.FC<Props> = (props) => {
     </ul>
   );
   const renderMobileHeaderItems: JSX.Element = (
-    <ul className="flex flex-row items-center justify-center  md:hidden">
+    <ul className=" hidden flex-row items-center justify-center xs:flex md:hidden">
       {NavigationItemData.filter(
         (item) =>
           item.preferred.includes("header") && item.userTypes.includes(userType)
@@ -279,8 +279,11 @@ export const Header: React.FC<Props> = (props) => {
         src={LogoURL}
         alt="Kiss Logo"
       />
-      <div className="hidden flex-col items-end justify-start text-inherit xs:flex">
-        <Text variant="custom" className="text-4xl font-bold">
+      <div className=" flex flex-col items-end justify-start text-inherit">
+        <Text
+          variant="custom"
+          className=" text-2xl font-bold xs:text-3xl md:text-4xl"
+        >
           {t("Header.Header.title")}
         </Text>
       </div>
@@ -288,7 +291,7 @@ export const Header: React.FC<Props> = (props) => {
   );
   const renderMenuButton: JSX.Element = (
     <li
-      className="group flex items-center justify-center p-2 duration-300 hover:cursor-pointer hover:text-türkis"
+      className="group flex items-center justify-center px-2 duration-300 hover:cursor-pointer hover:text-türkis xs:px-3"
       onClick={openMenu}
       title={t(`Header.Header.button.${menuOpen ? "close" : "open"}`)}
     >
@@ -303,10 +306,10 @@ export const Header: React.FC<Props> = (props) => {
   return (
     <header
       data-testid="header"
-      className="flex w-full flex-row items-center justify-between bg-white shadow-lg"
+      className="flex w-full flex-row items-center justify-between bg-white p-1 shadow-lg"
     >
-      <nav className="m-2">{renderHomeButton}</nav>
-      <nav className="m-2 flex flex-row items-center justify-center  ">
+      <nav>{renderHomeButton}</nav>
+      <nav className="flex flex-row items-center justify-center   ">
         {renderHeaderItems}
         {renderMobileHeaderItems}
         {renderMenuButton}

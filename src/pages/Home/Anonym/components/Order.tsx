@@ -3,27 +3,33 @@ import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import HomeAnonymContainer from "./Container";
 
-interface HomeAnonymOrderCardProps {}
+interface HomeAnonymOrderProps {}
 
-const HomeAnonymOrderCard: React.FC<HomeAnonymOrderCardProps> = (props) => {
+const HomeAnonymOrder: React.FC<HomeAnonymOrderProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
 
   return (
-    <div className="flex w-full flex-col items-center justify-around gap-5 bg-white p-5 md:flex-row">
-      <Heading variant="h2">{t("Home.Home.Anonym.OrderCard.title")}</Heading>
-      <Heading variant="subtitle">
-        {t("Home.Home.Anonym.OrderCard.subTitle")}
-      </Heading>
-      <Button
-        to="/process/new"
-        title={t("Home.Home.Anonym.OrderCard.demo")}
-        startIcon={<PlayArrowIcon fontSize="large" />}
-        variant="primary"
-      />
-    </div>
+    <HomeAnonymContainer data-testid="home-anonym-order">
+      <div className="flex w-full max-w-4xl flex-col items-center gap-5 md:flex-row md:justify-between md:gap-40">
+        <div className="flex w-full flex-col items-start justify-center gap-5">
+          <Heading variant="h2" className="text-7xl">
+            {t("Home.Home.Anonym.Order.title")}
+          </Heading>
+          <Heading variant="subtitle" className="pl-5">
+            {t("Home.Home.Anonym.Order.subTitle")}
+          </Heading>
+        </div>
+        <Button
+          to="/process/new"
+          title={t("Home.Home.Anonym.Order.demo")}
+          startIcon={<PlayArrowIcon />}
+        />
+      </div>
+    </HomeAnonymContainer>
   );
 };
 
-export default HomeAnonymOrderCard;
+export default HomeAnonymOrder;

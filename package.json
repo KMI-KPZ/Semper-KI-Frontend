@@ -27,6 +27,7 @@
     "react-router-dom": "^6.4.1",
     "react-toastify": "^9.1.3",
     "sass": "^1.55.0",
+    "tailwind-merge": "^1.14.0",
     "three-stl-loader": "^1.0.6",
     "typescript": "^5.1.6",
     "web-vitals": "^2.1.0",
@@ -37,7 +38,7 @@
     "build": "tsc && vite build",
     "serve": "vite preview --port 3000",
     "test": "jest --coverage --ci --reporters=default --reporters=jest-junit",
-    "test:ci":"jest --ci --reporters=default && tsc && vite build"
+    "test:ci": "jest --ci --reporters=default && tsc && vite build"
   },
   "eslintConfig": {
     "extends": [

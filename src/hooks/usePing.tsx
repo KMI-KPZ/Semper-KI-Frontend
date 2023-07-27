@@ -1,20 +1,22 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import {getCustomAxios} from "@/hooks/useCustomAxios";
+import { getCustomAxios } from "@/hooks/useCustomAxios";
 import {
   URL_Contact,
   URL_Datenschutz,
   URL_Impressum,
 } from "@/config/constants";
 import logger from "@/hooks/useLogger";
+import useCRSFToken from "./useCSRFToken";
 
 interface ReturnProps {
-  pingQuery: UseQueryResult<{ up: boolean }, Error>;
+  isMagazineUp(): boolean;
 }
 
 const usePing = (): ReturnProps => {
   // const sliceURLs = (urls: string[]): string[] => {
   //   return urls.map((url) => url.slice(8, -1));
   // };
+  const { isCSRFTokenLoaded } = useCRSFToken();
 
   const pingQuery = useQuery<{ up: boolean }, Error>({
     queryKey: ["ping"],
@@ -27,9 +29,18 @@ const usePing = (): ReturnProps => {
           logger("usePing | isMagazineUp ✅ |", res.data);
           return res.data;
         }),
+    enabled: isCSRFTokenLoaded === true,
   });
 
-  return { pingQuery };
+  const isMagazineUp = (): boolean => {
+    return (
+      pingQuery.isFetched &&
+      pingQuery.data !== undefined &&
+      pingQuery.data.up === true
+    );
+  };
+
+  return { isMagazineUp };
 };
 
 export default usePing;

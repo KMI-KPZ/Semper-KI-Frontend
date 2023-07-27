@@ -96,7 +96,7 @@ const App: React.FC = () => {
     userType,
     reloadPermissions
   );
-  const { pingQuery } = usePing();
+  const { isMagazineUp } = usePing();
   const { t } = useTranslation();
 
   const setFilter = (guideFilter: IFilterItem[]): void => {
@@ -270,7 +270,7 @@ const App: React.FC = () => {
             rejectCookies={rejectCookies}
           />
         </Modal>
-        <Footer />
+        <Footer isMagazineUp={isMagazineUp} />
       </div>
       <ToastContainer
         position="top-right"

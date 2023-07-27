@@ -1,5 +1,5 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import customAxios from "@/hooks/useCustomAxios";
+import { getCustomAxios } from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
@@ -10,7 +10,7 @@ const useOrga = (): ReturnProps => {
   const dataQuery = useQuery<any, Error>({
     queryKey: ["data"],
     queryFn: async () =>
-      customAxios
+      getCustomAxios()
         .get(`${process.env.VITE_HTTP_API_URL}/public/getData/`)
         .then((res) => {
           logger("useOrga | loadData ✅ |", res.data);

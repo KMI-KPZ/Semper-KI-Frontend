@@ -1,4 +1,4 @@
-import customAxios from "@/hooks/useCustomAxios";
+import { getCustomAxios } from "@/hooks/useCustomAxios";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import logger from "@/hooks/useLogger";
 
@@ -22,7 +22,7 @@ const useOrderFile = (props: Props): ReturnProps => {
   const orderFileQuery = useQuery<any, Error>({
     queryKey: ["order", "file", orderID, fileName],
     queryFn: async () =>
-      customAxios
+      getCustomAxios()
         .post(
           `${process.env.VITE_HTTP_API_URL}/public/getFileFromOrder/`,
           { id: orderID, filename: fileName },

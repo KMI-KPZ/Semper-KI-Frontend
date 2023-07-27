@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import Cookies from "js-cookie";
 
 axios.defaults.headers.common = {
@@ -46,8 +46,6 @@ const axiosAuthorized = axios.create({
   xsrfHeaderName: "X-CSRFToken",
 });
 
-const getCustomAxiosInstance = () => {
+export const getCustomAxios = (): AxiosInstance => {
   return CSRFToken() === "" ? axiosUnauthorized : axiosAuthorized;
 };
-const customAxios = getCustomAxiosInstance();
-export default customAxios;

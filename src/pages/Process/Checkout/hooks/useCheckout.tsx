@@ -1,4 +1,4 @@
-import customAxios from "@/hooks/useCustomAxios";
+import { getCustomAxios } from "@/hooks/useCustomAxios";
 import React, { useEffect, useState } from "react";
 import { IProcessItem } from "../../types";
 import logger from "@/hooks/useLogger";
@@ -74,7 +74,7 @@ const useCheckout = (): ReturnProps => {
           },
           ...prevState.filter((item, index: number) => index > _index),
         ]);
-        customAxios
+        getCustomAxios()
           .get(`${process.env.VITE_HTTP_API_URL}/public/checkPrintability/`)
           .then((res) => {
             logger("useCheckout | checkPrintability ✅ |", res.data);
@@ -116,7 +116,7 @@ const useCheckout = (): ReturnProps => {
           },
           ...prevState.filter((item, index: number) => index > _index),
         ]);
-        customAxios
+        getCustomAxios()
           .get(`${process.env.VITE_HTTP_API_URL}/public/checkPrices/`)
           .then((res) => {
             logger("useCheckout | checkPrices ✅ |", res.data);
@@ -158,7 +158,7 @@ const useCheckout = (): ReturnProps => {
           },
           ...prevState.filter((item, index: number) => index > _index),
         ]);
-        customAxios
+        getCustomAxios()
           .get(`${process.env.VITE_HTTP_API_URL}/public/checkLogistics/`)
           .then((res) => {
             logger("useCheckout | checkLogistics ✅ |", res.data);
@@ -194,7 +194,7 @@ const useCheckout = (): ReturnProps => {
       error: false,
       data: "",
     });
-    customAxios
+    getCustomAxios()
       .get(`${process.env.VITE_HTTP_API_URL}/public/sendOrder/`)
       .then((res) => {
         logger("useCheckout | sendOrder ✅ |", res.data);

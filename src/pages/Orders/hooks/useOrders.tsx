@@ -1,4 +1,4 @@
-import customAxios from "@/hooks/useCustomAxios";
+import { getCustomAxios } from "@/hooks/useCustomAxios";
 import { IProcessItem } from "@/pages/Process/types";
 import {
   useMutation,
@@ -75,10 +75,12 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
     ["orders"],
     async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getOrders/`;
-      return customAxios.get(apiUrl).then((response) => {
-        logger("useOrders | getOrders ✅ |", response.data);
-        return response.data;
-      });
+      return getCustomAxios()
+        .get(apiUrl)
+        .then((response) => {
+          logger("useOrders | getOrders ✅ |", response.data);
+          return response.data;
+        });
     },
     {
       enabled:
@@ -92,7 +94,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
   const deleteOrder = useMutation<any, Error, string>({
     mutationFn: async (orderID: string) => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/deleteOrder/`;
-      return customAxios
+      return getCustomAxios()
         .delete(apiUrl, { data: { id: orderID } })
         .then((response) => {
           logger("useOrders | deleteOrder ✅ |", response.data);
@@ -106,7 +108,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
   const deleteOrderCollection = useMutation<any, Error, string>({
     mutationFn: async (orderCollectionID: string) => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/deleteOrderCollection/`;
-      return customAxios
+      return getCustomAxios()
         .delete(apiUrl, { data: { id: orderCollectionID } })
         .then((response) => {
           logger("useOrders | deleteOrderCollection ✅ |", response.data);
@@ -120,7 +122,7 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
 
   const updateOrder = useMutation<AxiosResponse, Error, IUpdateOrderData>({
     mutationFn: async (props: IUpdateOrderData) => {
-      return customAxios
+      return getCustomAxios()
         .put(`${process.env.VITE_HTTP_API_URL}/public/updateOrder/`, {
           props,
         })

@@ -2,7 +2,7 @@ import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { AxiosResponse } from "axios";
 import { UserType } from "@/hooks/useUser/types";
-import customAxios from "@/hooks/useCustomAxios";
+import { getCustomAxios } from "@/hooks/useCustomAxios";
 import { useLocation, useSearchParams } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 
@@ -34,7 +34,7 @@ export const useLogin = (
     queryKey: ["login"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/login/`;
-      return customAxios
+      return getCustomAxios()
         .get(apiUrl, {
           headers: {
             Usertype: getUserType(),
@@ -66,7 +66,7 @@ export const useLogout = (): {
     queryKey: ["logout"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/logout/`;
-      return customAxios.get(apiUrl);
+      return getCustomAxios().get(apiUrl);
     },
   });
   useEffect(() => {

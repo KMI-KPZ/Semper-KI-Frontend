@@ -96,7 +96,7 @@ const App: React.FC = () => {
     userType,
     reloadPermissions
   );
-  // const { pingQuery } = usePing();
+  const { pingQuery } = usePing();
   const { t } = useTranslation();
 
   const setFilter = (guideFilter: IFilterItem[]): void => {

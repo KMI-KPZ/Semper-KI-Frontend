@@ -1,4 +1,4 @@
-import customAxios from "@/hooks/useCustomAxios";
+import { getCustomAxios } from "@/hooks/useCustomAxios";
 import { UserType } from "@/hooks/useUser/types";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
@@ -13,7 +13,7 @@ export const useRedirectLogin = (
     queryKey: ["login"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/login/`;
-      return customAxios.get(apiUrl, {
+      return getCustomAxios().get(apiUrl, {
         headers: {
           Usertype: "manufacturer",
         },

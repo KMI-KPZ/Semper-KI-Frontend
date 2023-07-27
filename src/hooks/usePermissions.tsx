@@ -4,7 +4,7 @@ import {
   useQueryClient,
   UseQueryResult,
 } from "@tanstack/react-query";
-import customAxios from "./useCustomAxios";
+import { getCustomAxios } from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
 import { useContext, useState } from "react";
 import { AppContext } from "@/pages/App/App";
@@ -34,10 +34,12 @@ const usePermissions = (user?: User): ReturnProps => {
     queryKey: ["permissions"],
     queryFn: async () => {
       const url = `${process.env.VITE_HTTP_API_URL}/public/getPermissions/`;
-      return customAxios.get(url).then((res) => {
-        logger("usePermissions | getPermissions ✅ |", res.data);
-        return res.data;
-      });
+      return getCustomAxios()
+        .get(url)
+        .then((res) => {
+          logger("usePermissions | getPermissions ✅ |", res.data);
+          return res.data;
+        });
     },
     onSuccess: (data) => {
       setPermissions(data);
@@ -49,17 +51,19 @@ const usePermissions = (user?: User): ReturnProps => {
     queryKey: ["permissionMask"],
     queryFn: async () => {
       const url = `${process.env.VITE_HTTP_API_URL}/public/getPermissionMask/`;
-      return customAxios.get(url).then((res) => {
-        logger("usePermissions | getPermissionMask ✅ |", res.data);
-        return res.data.Rights;
-      });
+      return getCustomAxios()
+        .get(url)
+        .then((res) => {
+          logger("usePermissions | getPermissionMask ✅ |", res.data);
+          return res.data.Rights;
+        });
     },
     enabled: user !== undefined,
   });
 
   const reloadPermissionMutation = useMutation<Permission[], Error, null>({
     mutationFn: async () =>
-      customAxios
+      getCustomAxios()
         .get(`${process.env.VITE_HTTP_API_URL}/public/getNewPermissions/`)
         .then((res) => {
           logger("usePermissions | getNewPermissions ✅ |", res.data);

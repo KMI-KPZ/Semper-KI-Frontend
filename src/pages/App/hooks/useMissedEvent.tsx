@@ -1,7 +1,7 @@
 import { Event } from "@/pages/App/types";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import customAxios from "@/hooks/useCustomAxios";
+import { getCustomAxios } from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
 
 interface Props {
@@ -15,7 +15,7 @@ const useMissedEvent = (props: Props): void => {
   const { data, status, error } = useQuery<Event[], Error>({
     queryKey: ["missedEvents"],
     queryFn: async () =>
-      customAxios
+      getCustomAxios()
         .get(`${process.env.VITE_HTTP_API_URL}/public/getMissedEvents/`)
         .then((res) => {
           logger("useMissedEvent | getMissedEvents ✅ |", res.data);

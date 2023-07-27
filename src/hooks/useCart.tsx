@@ -7,7 +7,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
-import customAxios from "./useCustomAxios";
+import { getCustomAxios } from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
 
 export interface ICartHook {
@@ -30,7 +30,7 @@ const useCart = (): ICartHook => {
   const cartQuery = useQuery<IProcessItem[], Error>({
     queryKey: ["cart", "load"],
     queryFn: async () =>
-      customAxios
+      getCustomAxios()
         .get(`${process.env.VITE_HTTP_API_URL}/public/getCart/`)
         .then((res) => {
           logger("useCart | getCart ✅ |", res.data);
@@ -41,7 +41,7 @@ const useCart = (): ICartHook => {
 
   const updateCart = useMutation<AxiosResponse, Error, IProcessItem[]>({
     mutationFn: async (cart: IProcessItem[]) =>
-      customAxios
+      getCustomAxios()
         .post(`${process.env.VITE_HTTP_API_URL}/public/updateCart/`, {
           cart,
         })

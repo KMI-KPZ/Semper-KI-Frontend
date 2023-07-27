@@ -1,4 +1,4 @@
-import customAxios from "@/hooks/useCustomAxios";
+import { getCustomAxios } from "@/hooks/useCustomAxios";
 import { IFilterItem } from "@/pages/Process/Filter/Filter";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { IMaterial } from "../Material/Material";
@@ -20,7 +20,7 @@ const useProcessData = (
     queryKey: ["processData", "models", "materials", "postProcessings"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getProcessData/`;
-      return customAxios
+      return getCustomAxios()
         .post(apiUrl, {
           filters,
         })
@@ -41,7 +41,7 @@ export const useModelData = (
     queryKey: ["models"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getModels/`;
-      return customAxios
+      return getCustomAxios()
         .post(apiUrl, {
           filters,
         })
@@ -60,7 +60,7 @@ export const useMaterialData = (
     queryKey: ["materials"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getMaterials/`;
-      return customAxios
+      return getCustomAxios()
         .post(apiUrl, {
           filters,
         })
@@ -80,7 +80,7 @@ export const usePostProcessing = (
     queryKey: ["postProcessings"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getPostProcessing/`;
-      return customAxios
+      return getCustomAxios()
         .post(apiUrl, {
           filters,
         })

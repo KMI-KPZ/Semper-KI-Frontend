@@ -51,6 +51,7 @@ import { Process } from "../Process/Process";
 import CookieBanner from "@/components/CookieBanner/CookieBanner";
 import useCookieConsent from "@/components/CookieBanner/hooks/useCookieConsent";
 import Modal from "@component-library/Modal";
+import usePing from "@/hooks/usePing";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -95,6 +96,7 @@ const App: React.FC = () => {
     userType,
     reloadPermissions
   );
+  // const { pingQuery } = usePing();
   const { t } = useTranslation();
 
   const setFilter = (guideFilter: IFilterItem[]): void => {

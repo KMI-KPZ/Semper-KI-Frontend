@@ -25,7 +25,7 @@ const HomeAnonymOrder: React.FC<HomeAnonymOrderProps> = (props) => {
         <Button
           to="/process/new"
           title={t("Home.Home.Anonym.Order.demo")}
-          startIcon={<PlayArrowIcon />}
+          startIcon={<PlayArrowIcon fontSize="large" />}
         />
       </div>
     </HomeAnonymContainer>

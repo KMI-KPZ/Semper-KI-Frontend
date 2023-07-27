@@ -256,7 +256,10 @@ const App: React.FC = () => {
             <Route path="login/redirect" element={<RedirectLogin />} />
             <Route path="register" element={<Login />} />
             <Route path="service/*" element={<Service />} />
-            <Route path="legal/*" element={<Legal />}></Route>
+            <Route
+              path="legal/*"
+              element={<Legal isMagazineUp={isMagazineUp} />}
+            ></Route>
             {clientRoutes}
             {manufacturerRoutes}
             {privateRoutes}

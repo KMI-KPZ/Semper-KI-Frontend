@@ -1,14 +1,14 @@
 import { AppContext } from "@/pages/App/App";
 import { DeleteOrderEvent, Event } from "@/pages/App/types";
 import { useContext, useEffect } from "react";
-import { IOrder } from "./useOrders";
+import { SubOrder } from "./useOrders";
 
 interface ReturnProps {
   getDeleteOrderEvent: (type: "status" | "message") => Event;
 }
 
 const useOrderEventChange = (
-  order: IOrder,
+  subOrder: SubOrder,
   orderCollectionID: string,
   chatOpen: boolean
 ): ReturnProps => {
@@ -18,7 +18,7 @@ const useOrderEventChange = (
     const deleteOrderEvent: DeleteOrderEvent = {
       eventType: "orderEvent",
       orderCollectionID: orderCollectionID,
-      orderID: order.id,
+      orderID: subOrder.id,
       type: type,
     };
     return deleteOrderEvent as Event;
@@ -27,7 +27,7 @@ const useOrderEventChange = (
   useEffect(() => {
     deleteEvent(getDeleteOrderEvent("status"));
     if (chatOpen) deleteEvent(getDeleteOrderEvent("message"));
-  }, [order]);
+  }, [subOrder]);
 
   return { getDeleteOrderEvent };
 };

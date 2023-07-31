@@ -26,11 +26,11 @@ import {
   IProcessState,
   IProgress,
 } from "./types";
+import ProcessHeaderCart from "./Header/Cart/Cart";
 
 interface Props {
   selectedProgressItem?: { index: number; progress: string };
   guideAnswers: IFilterItem[];
-  isLoggedInResponse: boolean;
 }
 
 const initialProcessState = (itemTitle?: string): IProcessState => ({
@@ -38,7 +38,7 @@ const initialProcessState = (itemTitle?: string): IProcessState => ({
   activeItemIndex: 0,
   searchText: "",
   grid: true,
-  progress: { title: "Modell finden", link: "/process/model", type: 0 },
+  progress: { title: "Modell finden", link: "model", type: 0 },
   filterOpen: false,
   hasChanged: false,
 });
@@ -72,7 +72,7 @@ export const ProcessContext = createContext<IProcessContext>({
 });
 
 export const Process: React.FC<Props> = (props) => {
-  const { guideAnswers, isLoggedInResponse, selectedProgressItem } = props;
+  const { guideAnswers, selectedProgressItem } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [state, setState] = useState<IProcessState>(
@@ -185,7 +185,7 @@ export const Process: React.FC<Props> = (props) => {
         hasChanged: true,
       };
     });
-    navigate("/process/model");
+    navigate("model");
   };
   const selectProcessItem = (index: number): void => {
     setState((prevState) => ({
@@ -195,9 +195,9 @@ export const Process: React.FC<Props> = (props) => {
     }));
 
     if (index === -1) {
-      navigate("/process/upload");
+      navigate("upload");
     } else {
-      navigate("/process/model");
+      navigate("model");
     }
   };
   const setGridState = (grid: boolean): void => {
@@ -206,42 +206,42 @@ export const Process: React.FC<Props> = (props) => {
   const getProgressByPath = (path: string): IProgress => {
     let progress: IProgress = {
       title: "Modell finden",
-      link: "/process/model",
+      link: "model",
       type: 0,
     };
     switch (path) {
       case "model":
         progress = {
           title: t("Process.ProcessView.path.model"),
-          link: "/process/model",
+          link: "model",
           type: 0,
         };
         break;
       case "upload":
         progress = {
           title: t("Process.ProcessView.path.upload"),
-          link: "/process/upload",
+          link: "upload",
           type: 1,
         };
         break;
       case "material":
         progress = {
           title: t("Process.ProcessView.path.material"),
-          link: "/process/material",
+          link: "material",
           type: 0,
         };
         break;
       case "postprocessing":
         progress = {
           title: t("Process.ProcessView.path.postprocessing"),
-          link: "/process/postprocessing",
+          link: "postprocessing",
           type: 1,
         };
         break;
       default:
         progress = {
           title: t("Process.ProcessView.path.model"),
-          link: "/process/model",
+          link: "model",
           type: 1,
         };
         break;
@@ -268,7 +268,7 @@ export const Process: React.FC<Props> = (props) => {
       ],
       hasChanged: true,
     }));
-    navigate("/process/material");
+    navigate("material");
   };
   const selectMaterial = (material: IMaterial): void => {
     // logger("Process | selectMaterial |", material);
@@ -282,7 +282,7 @@ export const Process: React.FC<Props> = (props) => {
       ],
       hasChanged: true,
     }));
-    navigate("/process/postprocessing");
+    navigate("postprocessing");
   };
   const selectPostProcessings = (postProcessings: IPostProcessing[]): void => {
     // logger("Process | selectPostProcessing |", postProcessings);
@@ -369,7 +369,7 @@ export const Process: React.FC<Props> = (props) => {
           <div className="flex w-full flex-col gap-5 ">
             <ProcessHeader />
             <Routes>
-              <Route index element={<Navigate to="/process/model" />} />
+              <Route index element={<Navigate to="model" />} />
               <Route
                 path="new"
                 element={<ProcessNewItem startNewProcess={startNewProcess} />}
@@ -434,6 +434,7 @@ export const Process: React.FC<Props> = (props) => {
               <Route path="*" element={<Error />} />
             </Routes>
           </div>
+          <ProcessHeaderCart />
         </div>
       </LoadingSuspense>
     </ProcessContext.Provider>

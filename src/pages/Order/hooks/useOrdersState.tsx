@@ -1,11 +1,11 @@
 import { UseQueryResult } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { IOrderCollection } from "./useOrders";
+import { Order } from "./useOrders";
 
 interface ReturnProps {}
 
 const useOrdersState = (
-  ordersQuery: UseQueryResult<IOrderCollection[], Error>,
+  ordersQuery: UseQueryResult<Order[], Error>,
   state: boolean[],
   setState: React.Dispatch<React.SetStateAction<boolean[]>>
 ): ReturnProps => {

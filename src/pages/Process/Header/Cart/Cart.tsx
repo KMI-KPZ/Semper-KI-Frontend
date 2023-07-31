@@ -8,6 +8,8 @@ import { IProcessItem } from "../../types";
 import { getModelURI } from "@/services/utils";
 import IconModel from "@icons/Model.svg";
 import { ProcessContext } from "../../Process";
+import { Heading } from "@component-library/Typography";
+import { Button } from "@component-library/Button";
 
 interface Props {}
 
@@ -22,7 +24,7 @@ const ProcessHeaderCart: React.FC<Props> = () => {
 
   const addNewItem = () => {
     createEmpytProcessItem();
-    navigate("/process/model");
+    navigate("model");
   };
 
   // const navigateToUpload = () => {
@@ -34,15 +36,17 @@ const ProcessHeaderCart: React.FC<Props> = () => {
   };
 
   return (
-    <div className="mb-5 flex w-full flex-row justify-between gap-5">
-      <div className="flex w-full flex-row flex-wrap gap-5 2xl:w-4/5">
-        {/* <CartItem
-          active={processState.activeItemIndex === -1}
-          icon={<CloudUploadIcon fontSize="large" />}
-          title={t("Process.Header.Cart.CartItem.upload")}
-          onClickCard={navigateToUpload}
-          isItem={false}
-        /> */}
+    <div className="flex min-w-fit max-w-sm flex-col justify-start gap-5 bg-white p-5">
+      <div className="flex flex-col items-center justify-center md:flex-row md:justify-between">
+        <Heading variant="h2">
+          {t("Process.Header.Cart.CartItem.title")}
+        </Heading>
+        <Button
+          to="."
+          title={t("Process.Header.Cart.CartItem.button.overview")}
+        />
+      </div>
+      <div className="flex w-full flex-col flex-wrap gap-5">
         {processState.items.map((processItem: IProcessItem, index: number) => (
           <ProcessHeaderCartItem
             key={index}
@@ -77,17 +81,6 @@ const ProcessHeaderCart: React.FC<Props> = () => {
           icon={<AddIcon fontSize="large" />}
           title={t("Process.Header.Cart.CartItem.new")}
           onClickCard={addNewItem}
-          isItem={false}
-        />
-      </div>
-      <div className="hidden w-fit flex-row items-start justify-end md:flex">
-        <ProcessHeaderCartItem
-          active={false}
-          icon={<ShoppingCartIcon fontSize="large" />}
-          title={t("Process.Header.Cart.CartItem.cart")}
-          onClickCard={() => {
-            navigate("/cart");
-          }}
           isItem={false}
         />
       </div>

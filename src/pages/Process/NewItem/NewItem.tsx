@@ -13,7 +13,7 @@ const ProcessNewItem: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   useEffect(() => {
     startNewProcess();
-    navigate("/process/model");
+    navigate("model");
   }, []);
   return <Heading variant="h1">{t("Process.NewProcess.header")}</Heading>;
 };

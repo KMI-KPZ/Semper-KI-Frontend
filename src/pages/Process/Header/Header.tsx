@@ -11,7 +11,6 @@ const ProcessHeader: React.FC = () => {
 
   return (
     <div className="flex flex-col">
-      <ProcessHeaderCart />
       <div className="flex flex-col gap-2 bg-white p-2">
         <ProcessHeaderWizard processState={processState} />
         <Heading variant="h1" className="text-center">

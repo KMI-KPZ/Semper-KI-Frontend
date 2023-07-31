@@ -2,11 +2,11 @@ import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import { IconBadge } from "@component-library/Badge";
-import { IProcessItem } from "@/pages/Process/types";
 import { ReactNode, useContext, useEffect, useState } from "react";
 import ProcessHeaderStatusIcon from "../../components/StatusIcon";
 import { Heading } from "@component-library/Typography";
 import { ProcessContext } from "@/pages/Process/Process";
+import { IProcessItem } from "@/pages/Process/types";
 
 interface Props {
   process?: IProcessItem;
@@ -69,7 +69,7 @@ const ProcessHeaderCartItem: React.FC<Props> = (props) => {
 
   return (
     <div
-      className={`flex h-12 flex-row items-center justify-start gap-3 bg-white px-3 py-2 duration-300 hover:cursor-pointer hover:bg-slate-200
+      className={`flex h-12 flex-row items-center justify-between gap-3 bg-white px-3 py-2 duration-300 hover:cursor-pointer hover:bg-slate-200
       ${active === true ? "shadow-border shadow-gray-500" : ""}
       `}
       onClick={handleOnClickCard}

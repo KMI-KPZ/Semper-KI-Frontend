@@ -30,7 +30,6 @@ import GuideRoutes from "../Guide/Guide";
 import Login from "../Login/Login";
 import RedirectLogin from "../Login/Redirect/RedirectLogin";
 import Logout from "../Logout/Logout";
-import Orders from "../Orders/Orders";
 import Organization from "../Organization/Organization";
 import Portfolio from "../Portfolio/Portfolio";
 import ProcessCart from "../Process/Cart/Cart";
@@ -52,6 +51,8 @@ import CookieBanner from "@/components/CookieBanner/CookieBanner";
 import useCookieConsent from "@/components/CookieBanner/hooks/useCookieConsent";
 import Modal from "@component-library/Modal";
 import usePing from "@/hooks/usePing";
+import Orders from "../Orders/Orders";
+import OrderView from "../Order/Order";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -121,10 +122,10 @@ const App: React.FC = () => {
     <Route element={<PrivateClientRoutes user={user} />}>
       <Route path="manufacturer" element={<ProcessManufacturer />} />
       <Route path="checkout" element={<ProcessCheckout />} />
-      <Route
+      {/* <Route
         path="orders"
         element={<Orders userType={UserType.client} events={events} />}
-      />
+      /> */}
       <Route path="assignments" element={<Error text="assignments" />} />
     </Route>
   );
@@ -132,7 +133,7 @@ const App: React.FC = () => {
   const manufacturerRoutes = (
     <Route element={<PrivateManufacturerRoutes user={user} />}>
       <Route path="proceedings" element={<Error text="proceedings" />} />
-      <Route
+      {/* <Route
         path="contracts"
         element={
           <PermissionGate
@@ -143,7 +144,7 @@ const App: React.FC = () => {
             }
           />
         }
-      />
+      /> */}
       <Route
         path="organization"
         element={
@@ -170,6 +171,20 @@ const App: React.FC = () => {
     <Route element={<PrivateRoutes user={user} />}>
       <Route path="account" element={<Profil user={user!} />} />
       <Route path="test" element={<RequestTest socket={socket} />} />
+      <Route path="orders" element={<Orders />} />
+      <Route path="order">
+        <Route index element={<Navigate to="/orders" />} />
+        <Route path=":id" element={<OrderView userType={userType} />} />
+        <Route
+          path=":id/process/*"
+          element={
+            <Process
+              guideAnswers={state.guideFilter}
+              selectedProgressItem={state.selectedProgressItem}
+            />
+          }
+        />
+      </Route>
     </Route>
   );
 
@@ -235,7 +250,6 @@ const App: React.FC = () => {
               path="process/*"
               element={
                 <Process
-                  isLoggedInResponse={isLoggedInResponse}
                   guideAnswers={state.guideFilter}
                   selectedProgressItem={state.selectedProgressItem}
                 />
@@ -259,7 +273,17 @@ const App: React.FC = () => {
             <Route
               path="legal/*"
               element={<Legal isMagazineUp={isMagazineUp} />}
-            ></Route>
+            />
+            <Route
+              path="demo/*"
+              element={
+                <Process
+                  guideAnswers={state.guideFilter}
+                  selectedProgressItem={state.selectedProgressItem}
+                />
+              }
+            />
+            <Route path="demo" element={<OrderView userType={userType} />} />
             {clientRoutes}
             {manufacturerRoutes}
             {privateRoutes}

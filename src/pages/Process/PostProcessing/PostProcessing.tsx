@@ -4,7 +4,7 @@ import { IProcessState } from "../types";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import { IFilterItem } from "../Filter/Filter";
-import { usePostProcessing } from "@/pages/Process/hooks/useProcessData";
+import { usePostProcessing } from "../hooks/useProcessData";
 
 interface Props {
   processState: IProcessState;

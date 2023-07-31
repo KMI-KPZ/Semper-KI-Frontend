@@ -3,13 +3,13 @@ import { useTranslation } from "react-i18next";
 import { Badge } from "@component-library/Badge";
 import EmailIcon from "@mui/icons-material/Email";
 import FactoryIcon from "@mui/icons-material/Factory";
-import { IOrder, OrderState } from "../hooks/useOrders";
+import { SubOrder, OrderState } from "../../hooks/useOrders";
 import { OrderEventItem } from "@/pages/App/types";
 import { getModelURI } from "@/services/utils";
 import { Heading } from "@component-library/Typography";
 
 interface Props {
-  order: IOrder;
+  order: SubOrder;
   orderEvent?: OrderEventItem;
 }
 
@@ -35,7 +35,7 @@ const OrderPreView: React.FC<Props> = (props) => {
       ) : null}
       <img src={getModelURI(order.item.model!)} />
       <Heading variant="h3">{order.item.title}</Heading>
-      <span>{t(`Orders.OrderPreView.${OrderState[order.orderState]}`)}</span>
+      <span>{t(`Orders.OrderPreView.${OrderState[order.state]}`)}</span>
     </div>
   );
 };

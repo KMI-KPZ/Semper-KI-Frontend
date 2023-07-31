@@ -15,7 +15,6 @@ import { Heading, Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
 import { getOrderEventAmount } from "@/pages/App/hooks/useEvents";
 import useBodyScroll from "@/pages/App/hooks/useBodyScroll";
-import logger from "@/hooks/useLogger";
 
 interface Language {
   code: string;

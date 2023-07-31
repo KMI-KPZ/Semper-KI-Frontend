@@ -76,7 +76,7 @@ export const ProcessModel: React.FC<Props> = (props) => {
   };
 
   const handleOnClickCardUpload = () => {
-    navigate("/process/upload");
+    navigate("upload");
   };
 
   const renderUplaodCart = () => (

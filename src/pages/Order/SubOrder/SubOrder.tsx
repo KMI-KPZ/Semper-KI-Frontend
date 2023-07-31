@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { Button } from "@component-library/Button";
 import MailIcon from "@mui/icons-material/Mail";
-import Chat from "./Chat";
-import StatusBar from "../StatusBar/StatusBar";
+import Chat from "./components/Chat";
+import StatusBar from "./StatusBar/StatusBar";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -10,8 +10,8 @@ import { useTranslation } from "react-i18next";
 import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import { Badge } from "@component-library/Badge";
-import OrderFile from "./OrderFile";
-import { IOrder, OrderState, useOrders } from "../hooks/useOrders";
+import OrderFile from "./components/OrderFile";
+import { OrderState, useOrders, Order, SubOrder } from "../hooks/useOrders";
 import { UserType } from "@/hooks/useUser/types";
 import { OrderEventItem } from "@/pages/App/types";
 import { AppContext } from "@/pages/App/App";
@@ -23,8 +23,8 @@ import logger from "@/hooks/useLogger";
 import Modal from "@component-library/Modal";
 
 interface Props {
-  order: IOrder;
-  orderCollectionID: string;
+  subOrder: SubOrder;
+  orderID: string;
   userType: UserType;
   orderEvent?: OrderEventItem;
 }
@@ -34,8 +34,8 @@ interface State {
   menuOpen: boolean;
 }
 
-const Order: React.FC<Props> = (props) => {
-  const { order, orderCollectionID, userType, orderEvent } = props;
+const SubOrderView: React.FC<Props> = (props) => {
+  const { subOrder, orderID, userType, orderEvent } = props;
   const [state, setState] = useState<State>({
     chatOpen: false,
     menuOpen: false,
@@ -44,8 +44,8 @@ const Order: React.FC<Props> = (props) => {
   const { user, deleteEvent } = useContext(AppContext);
   const { deleteOrder, updateOrder } = useOrders();
   const { getDeleteOrderEvent } = useOrderEventChange(
-    order,
-    orderCollectionID,
+    subOrder,
+    orderID,
     chatOpen
   );
   const { t } = useTranslation();
@@ -66,14 +66,14 @@ const Order: React.FC<Props> = (props) => {
   };
   const updateStatus = (status: OrderState) => {
     updateOrder.mutate({
-      orderCollectionID: orderCollectionID,
-      orderID: order.id,
+      orderCollectionID: orderID,
+      orderID: subOrder.id,
       state: status,
     });
   };
   const handleOnClickButtonCancel = () => {
     if (window.confirm(t("Orders.OrderView.confirm.cancel"))) {
-      deleteOrder.mutate(order.id);
+      deleteOrder.mutate(subOrder.id);
     }
   };
   const handleOnClickButtonReOrder = () => {
@@ -83,17 +83,17 @@ const Order: React.FC<Props> = (props) => {
   };
   const handleOnClickButtonReject = () => {
     if (window.confirm(t("Orders.OrderView.confirm.reject"))) {
-      updateStatus(OrderState.rejected);
+      updateStatus(OrderState.REJECTED);
     }
   };
   const handleOnClickButtonConfirm = () => {
     // if (window.confirm(t("OrderView.button.confirm") + "?")) {
-    updateStatus(OrderState.confirmed);
+    updateStatus(OrderState.CONFIRMED);
     // }
   };
   const handleOnClickButtonVerify = () => {
     // if (window.confirm(t("OrderView.button.verify") + "?")) {
-    updateStatus(OrderState.verify);
+    updateStatus(OrderState.CLARIFICATION);
     // }
   };
   const handleOnClickButtonExpand = () => {
@@ -146,9 +146,9 @@ const Order: React.FC<Props> = (props) => {
     <div className="flex w-full flex-col items-center justify-start gap-3 border-2 p-3 md:items-start">
       <div className="flex w-full flex-col justify-between md:flex-row">
         <Heading variant="h3">
-          {t("Orders.OrderView.header")} {order.id}
+          {t("Orders.OrderView.header")} {subOrder.id}
         </Heading>
-        <Heading variant="h3">{order.item.title}</Heading>
+        <Heading variant="h3">{subOrder.item.title}</Heading>
         <PermissionGate element={["OrderButtons", "ChatButton"]} concat="or">
           <div className="flex flex-col items-center  justify-center gap-3 md:flex-row">
             <PermissionGate element="ChatButton">
@@ -195,30 +195,30 @@ const Order: React.FC<Props> = (props) => {
         </PermissionGate>
       </div>
       <StatusBar
-        currentState={order.orderState}
+        currentState={subOrder.state}
         updateStatus={updateStatus}
         userType={userType}
       />
       <div className="flex w-full flex-col items-center justify-center gap-5 p-5 md:flex-row md:items-start md:justify-around">
         <img
-          src={getModelURI(order.item.model!)}
+          src={getModelURI(subOrder.item.model!)}
           className="object-fit w-2/12"
         />
         <div className="flex w-1/4 flex-col items-center justify-start p-3">
-          <Heading variant="h3">{order.item.model?.title}</Heading>
+          <Heading variant="h3">{subOrder.item.model?.title}</Heading>
         </div>
         <div className="flex w-1/4 flex-col items-center justify-start p-3">
-          <Heading variant="h3">{order.item.material?.title}</Heading>
+          <Heading variant="h3">{subOrder.item.material?.title}</Heading>
         </div>
         <div className="flex w-1/4 flex-col items-center justify-start p-3">
           <Heading variant="h3">{t("Orders.OrderView.postProcessing")}</Heading>
-          {order.item.postProcessings?.map((postProcessing, index) => (
+          {subOrder.item.postProcessings?.map((postProcessing, index) => (
             <span key={index}>{postProcessing.title}</span>
           ))}
         </div>
       </div>
       <PermissionGate element="OrderFile">
-        <OrderFile order={order} orderCollectionID={orderCollectionID} />
+        <OrderFile order={subOrder} orderCollectionID={orderID} />
       </PermissionGate>
       <PermissionGate element="Chat">
         <Modal
@@ -227,11 +227,11 @@ const Order: React.FC<Props> = (props) => {
           className="flex w-full flex-col  "
         >
           <Chat
-            chat={order.chat.messages}
+            chat={subOrder.chat.messages}
             user={user}
             closeMenu={closeMenu}
-            orderCollectionID={orderCollectionID}
-            orderID={order.id}
+            orderCollectionID={orderID}
+            orderID={subOrder.id}
           />
         </Modal>
       </PermissionGate>
@@ -239,4 +239,4 @@ const Order: React.FC<Props> = (props) => {
   );
 };
 
-export default Order;
+export default SubOrderView;

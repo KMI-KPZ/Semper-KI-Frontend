@@ -47,7 +47,7 @@ const ProcessCart: React.FC<Props> = (props) => {
   };
   const { errors, errorCount } = checkCart();
   const handleOnClickEdit = () => {
-    navigate("/process/model");
+    navigate("model");
   };
 
   const handleOnClickSendRequest = () => {

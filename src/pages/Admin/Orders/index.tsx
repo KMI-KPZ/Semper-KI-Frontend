@@ -1,4 +1,4 @@
-import { IOrder, OrderState } from "@/pages/Orders/hooks/useOrders";
+import { SubOrder, OrderState } from "@/pages/Order/hooks/useOrders";
 import { Heading } from "@component-library/Typography";
 import {
   Paper,
@@ -32,7 +32,7 @@ const AdminOrders: React.FC<Props> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {[].map((order: IOrder, index: number) => (
+            {[].map((order: SubOrder, index: number) => (
               <TableRow
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -44,7 +44,7 @@ const AdminOrders: React.FC<Props> = (props) => {
                   {/* {order.date.toLocaleDateString()} */}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {OrderState[order.orderState]}
+                  {OrderState[order.state]}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {/* {order.processList.length} */}

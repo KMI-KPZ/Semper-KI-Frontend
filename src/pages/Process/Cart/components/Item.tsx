@@ -32,19 +32,19 @@ const ProcessCartItem: React.FC<Props> = (props) => {
   };
 
   const handleOnClickModel = () => {
-    navigate("/process/model");
+    navigate("model");
     selectProgressItem("model");
   };
   const handleOnClickMaterial = () => {
-    navigate("/process/material");
+    navigate("material");
     selectProgressItem("material");
   };
   const handleOnClickPostprocessing = () => {
-    navigate("/process/postprocessing");
+    navigate("postprocessing");
     selectProgressItem("postprocessing");
   };
   const handleOnClickEdit = () => {
-    navigate("/process/model");
+    navigate("model");
     selectProgressItem("model");
   };
   const handleOnClickDelete = () => {

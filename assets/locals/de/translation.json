@@ -8,7 +8,7 @@
   "data":{
     "NavigationItem":{
       "home":"Startseite",
-      "process":"Bestellung",
+      "process":"Auftrag",
       "model":"Modell",
       "upload":"Modell Hochladen",
       "material":"Material",
@@ -17,7 +17,8 @@
       "manufacturer":"Hersteller",
       "checkout":"Kasse",
       "guide":"Wegweiser",
-      "orders":"Meine Bestellungen",
+      "order":"Aufträge",
+      "orders":"Meine Aufträge",
       "account":"Konto",
       "test":"Test",
       "service":"Service",
@@ -26,11 +27,10 @@
       "portfolio":"Portfolio",
       "use-service": "Service in Anspruch nehmen",
       "provide-service": "Service bereitstellen",
-      "continue": "Bestellung Fortsetzen",
-      "new-contract": "neue Bestellung",
+      "continue": "Auftrag Fortsetzen",
+      "new-contract": "neuer Auftrag",
       "proceedings": "Verfahren",
       "company": "Unternehmen",
-      "contracts": "Meine Aufträge",
       "user": "Benutzer",
       "procedure": "Verfahren",
       "printer": "Drucker",
@@ -43,7 +43,8 @@
       "printers":"3D-Drucker",
       "postprocessings":"Nachbearbeitungen",
       "resources":"Ressourcen",
-      "add":"Hinzufügen"
+      "add":"Hinzufügen",
+      "demo":"Demo"
     }
   },
   "enum":{
@@ -71,7 +72,7 @@
       "URI": "URI"
     },
     "AdminOrderView":{
-      "header": "Bestellungen",
+      "header": "Aufträge",
       "order-id": "Bestellnummer",
       "date": "Datum",
       "status": "Status",
@@ -109,7 +110,7 @@
     },
     "Checkout":{
       "Checkout": {
-        "title":"Bestellung überprüfen",
+        "title":"Auftrag überprüfen",
         "button":{
           "request":"Anfragen",
           "printable":"Druckbarkeit überprüfen",
@@ -139,7 +140,7 @@
         "noManufacturerSelected":"Bitte bei jedem Item einen Hersteller auswählen!",
         "button":{
           "cart":"Warenkorb",
-          "checkOrder":"Bestellung überprüfen"
+          "checkOrder":"Auftrag überprüfen"
         }
       }
     }
@@ -276,7 +277,7 @@
       "continue": "Fortfahren",
       "cart": "Warenkorb",
       "logout": "Abmelden",
-      "orders": "Bestellungen",
+      "orders": "Aufträge",
       "contracts": "Verträge",
       "account": "Konto",
       "test": "Test",
@@ -352,14 +353,14 @@
         "continue":"Auftrag fortsetzen",
         "cart":"Warenkorb",
         "delete":"Warenkorb löschen",
-        "empty":"keine vorhandenen Bestellungen"
+        "empty":"keine vorhandenen Aufträge"
       },
       "orders":{
-        "header":"Meine Bestellungen",
+        "header":"Meine Aufträge",
         "date":"Datum",
         "article":"Anzahl Artikel",
         "status":"Status",
-        "empty":"keine vorhandenen Bestellungen"
+        "empty":"keine vorhandenen Aufträge"
       },
       "contracts":{
         "header":"Meine Aufträge",
@@ -369,7 +370,7 @@
       },
       "button":{
         "all-contracts":"Alle Aufträge",
-        "all-orders":"Alle Bestellungen",
+        "all-orders":"Alle Aufträge",
         "start-order":"Auftrag beginnen"
       }
     },
@@ -408,13 +409,13 @@
       "explore": "Ausprobieren",
       "use-service": "Service in Anspruch nehmen",
       "provide-service": "Service bereitstellen",
-      "continue": "Bestellung Fortsetzen",
-      "new-contract": "neue Bestellung",
+      "continue": "Auftrag Fortsetzen",
+      "new-contract": "neue Auftrag",
       "proceedings": "Verfahren",
       "company": "Unternehmen",
       "guide": "Wegweiser",
       "cart": "Warenkorb",
-      "orders": "Meine Bestellungen",
+      "orders": "Meine Aufträge",
       "contracts": "Meine Aufträge",
       "user": "Benutzer",
       "model": "Modelle",
@@ -486,10 +487,10 @@
     },
     "OrderCollectionOverview":{
       "headline":{
-        "client":"Bestellungen",
+        "client":"Aufträge",
         "manufacturer":"Aufträge"
       },
-      "empty":"keine vorhandenen Bestellungen"    
+      "empty":"keine vorhandenen Aufträge"    
     },
     "OrderFileView":{
       "header":"Dateien",
@@ -508,7 +509,7 @@
       "finished":"Abgeschlossen"
     },
     "OrderView":{
-      "header":"Bestellung:",
+      "header":"Auftrag:",
       "postProcessing":"Nachbearbeitung",
       "button":{
         "cancel":"Stornieren",
@@ -624,11 +625,13 @@
       "Cart":{
         "Cart":{},
         "CartItem":{
+          "title":"Auftrag",
           "item":"Artikel",
           "upload":"Modell Hochladen",
           "new":"Artikel erstellen",
           "cart":"Warenkorb",
           "button":{
+            "overview":"Übersicht",
             "edit":"Bearbeiten",
             "delete":"Löschen"
           }
@@ -732,7 +735,7 @@
       }
     },
     "NewProcess":{
-      "header":"neue Bestellung Starten"
+      "header":"neue Auftrag Starten"
     },
     "ProcessView":{
       "item":"Artikel",
@@ -998,6 +1001,32 @@
       "cookiePolicy":"Cookie-Richtlinie",
       "dataProtection":"Datenschutzerklärung",
       "imprint":"Impressum"
+    }
+  },
+  "order":{
+    "overview":{
+      "title":"Meine Aufträge",
+      "draft":"Entwürfe",
+      "ongoing":"Laufend",
+      "completed":"Abgeschlossen",
+      "button":{
+        "create":"Neuen Auftrag erstellen"
+      },
+      "components":{
+        "table":{
+          "name":"Name",
+          "status":"Status",
+          "created":"Erstellt am",
+          "count":"Anzahl",
+          "actions":"Aktionen",
+          "noItems":"keine Entwürfe",
+          "button":{
+            "delete":"Löschen",
+            "edit":"Bearbeiten",
+            "detail":"Details"
+          }
+        }
+      }
     }
   }
 }

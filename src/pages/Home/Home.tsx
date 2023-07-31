@@ -31,7 +31,8 @@ export const Home: React.FC<Props> = (props) => {
   const { userType, events, cartCount } = props;
   const { t } = useTranslation();
 
-  if (userType === UserType.anonym) return <AnonymHome />;
+  // if (userType === UserType.anonym)
+  return <AnonymHome />;
 
   return (
     <div

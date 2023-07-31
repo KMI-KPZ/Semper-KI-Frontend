@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import DownloadIcon from "@mui/icons-material/Download";
-import useOrderFile from "../hooks/useOrderFiles";
-import { IOrder } from "../hooks/useOrders";
+import useOrderFile from "../../hooks/useOrderFiles";
+import { SubOrder } from "../../hooks/useOrders";
 import { Heading } from "@component-library/Typography";
-import useFileView from "../hooks/useFileView";
+import useFileView from "../../hooks/useFileView";
 
 interface Props {
-  order: IOrder;
+  order: SubOrder;
   orderCollectionID: string;
 }
 

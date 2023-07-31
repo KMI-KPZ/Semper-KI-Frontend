@@ -31,7 +31,7 @@ export const ProcessModelCard: React.FC<Props> = (props) => {
   if (grid === true)
     return (
       <div
-        className="flex w-full basis-[48%] flex-col items-center justify-start overflow-hidden bg-white 
+        className="flex w-full basis-[48%] flex-col items-center justify-start overflow-hidden bg-white
         hover:cursor-pointer hover:bg-gray-300 
         sm:basis-[32%] md:basis-[23.5%]"
         onClick={handleOnClickCard}

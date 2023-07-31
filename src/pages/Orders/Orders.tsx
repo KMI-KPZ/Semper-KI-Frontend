@@ -1,84 +1,57 @@
-import React, { useContext, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { AppContext } from "../App/App";
-import { LoadingSuspense } from "@component-library/Loading";
-import { IOrderCollection, useOrders } from "./hooks/useOrders";
-import { UserType } from "@/hooks/useUser/types";
-import { Event, OrderEvent } from "@/pages/App/types";
-import OrderCollection from "./components/OrderCollection";
+import { Button } from "@component-library/Button";
 import { Heading } from "@component-library/Typography";
-import useOrdersState from "./hooks/useOrdersState";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { Order, OrderState, useOrders } from "@/pages/Order/hooks/useOrders";
+import { LoadingSuspense } from "@component-library/Loading";
+import OrdersDraft from "./components/Draft";
+import OrdersOngoing from "./components/Ongoing";
+import OrdersCompleted from "./components/Completed";
+import { OrdersTableRowProps } from "./components/Table";
 
-interface Props {
-  userType: UserType;
-  events: Event[];
-}
+interface OrdersProps {}
 
-const Orders: React.FC<Props> = (props) => {
-  const { userType, events } = props;
+const Orders: React.FC<OrdersProps> = (props) => {
+  const {} = props;
   const { t } = useTranslation();
   const { ordersQuery } = useOrders();
-  const [state, setState] = useState<boolean[]>([]);
-  useOrdersState(ordersQuery, state, setState);
 
-  const toggleOpen = (index: number) => {
-    setState((prevState) => [
-      ...prevState.filter((open, _index) => _index < index),
-      !prevState[index],
-      ...prevState.filter((open, _index) => _index > index),
-    ]);
+  const convertOrdersToRows = (orders: Order[]): OrdersTableRowProps[] => {
+    return orders.map((order) => ({
+      id: order.id,
+      name: `Auftrag ${order.id}`,
+      count: order.subOrders.length,
+      created: order.date,
+      status: OrderState[order.state],
+    }));
   };
 
-  const getOrderEventByID = (
-    orderCollectionID: string
-  ): OrderEvent | undefined => {
-    if (events === undefined || events.length < 1) return undefined;
-    const orderEvent = events
-      .filter((event) => event.eventType === "orderEvent")
-      .find((_orderEvent) => {
-        const orderEvent = _orderEvent as OrderEvent;
-        return orderEvent.orderCollectionID === orderCollectionID;
-      });
-    return orderEvent as OrderEvent;
+  const getOrdersByState = (startState: OrderState, endState: OrderState) => {
+    const orders = ordersQuery.data;
+    return orders === undefined
+      ? []
+      : convertOrdersToRows(
+          orders.filter(
+            (order) => order.state >= startState && order.state <= endState
+          )
+        );
   };
 
   return (
-    <LoadingSuspense query={ordersQuery}>
-      <div className="flex w-full flex-col items-center gap-5 overflow-x-auto overflow-y-hidden p-3">
-        <div className="w-full bg-white px-5 py-3 text-center">
-          <Heading variant="h1">
-            {t(
-              userType === UserType.client
-                ? "Orders.OrderCollectionOverview.headline.client"
-                : "Orders.OrderCollectionOverview.headline.manufacturer"
-            )}
-          </Heading>
-        </div>
-        {ordersQuery.data !== undefined ? (
-          <ul className="flex w-full flex-col gap-5">
-            {ordersQuery.data.length > 0 ? (
-              ordersQuery.data.map(
-                (orderCollection: IOrderCollection, index: number) => (
-                  <OrderCollection
-                    index={index}
-                    orderCollection={orderCollection}
-                    userType={userType}
-                    isOpen={state[index]}
-                    toggleOpen={toggleOpen}
-                    event={getOrderEventByID(orderCollection.id)}
-                    key={index}
-                  />
-                )
-              )
-            ) : (
-              <li className="w-full p-3 text-center">
-                {t("Orders.OrderCollectionOverview.empty")}
-              </li>
-            )}
-          </ul>
-        ) : null}
-      </div>
-    </LoadingSuspense>
+    <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
+      <Heading variant="h1">{t("order.overview.title")}</Heading>
+      <LoadingSuspense query={ordersQuery}>
+        <OrdersDraft
+          rows={getOrdersByState(OrderState.DRAFT, OrderState.VERIFICATION)}
+        />
+        <OrdersOngoing
+          rows={getOrdersByState(OrderState.REQUESTED, OrderState.DELIVERY)}
+        />
+        <OrdersCompleted
+          rows={getOrdersByState(OrderState.COMPLETED, OrderState.COMPLETED)}
+        />
+      </LoadingSuspense>
+    </div>
   );
 };
 

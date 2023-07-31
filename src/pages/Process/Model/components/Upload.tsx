@@ -7,11 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@component-library/Button";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { LoadingAnimation } from "@component-library/Loading";
-import useModelUpload from "@/pages/Process/Model/hooks/useModelUpload";
 import { getFileSizeAsString } from "@/services/utils";
 import { IModel } from "../types";
 import { Heading } from "@component-library/Typography";
 import logger from "@/hooks/useLogger";
+import useModelUpload from "../hooks/useModelUpload";
 
 interface Props {
   setProgress(path: string): void;
@@ -128,7 +128,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
       uploadModels.mutate(fileList, {
         onSuccess(data) {
           createProcessItems(data);
-          navigate("/process/model");
+          navigate("model");
         },
       });
     } else {

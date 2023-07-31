@@ -11,7 +11,7 @@ import { AxiosResponse } from "axios";
 import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
-  ordersQuery: UseQueryResult<IOrderCollection[], Error>;
+  ordersQuery: UseQueryResult<Order[], Error>;
   deleteOrder: UseMutationResult<any, unknown, string, unknown>;
   deleteOrderCollection: UseMutationResult<any, unknown, string, unknown>;
   updateOrder: UseMutationResult<
@@ -22,17 +22,17 @@ interface ReturnProps {
   >;
 }
 
-export interface IOrderCollection {
+export interface Order {
   id: string;
   date: string;
-  state: OrderCollectionState;
-  orders: IOrder[];
+  state: OrderState;
+  subOrders: SubOrder[];
 }
 
-export interface IOrder {
+export interface SubOrder {
   id: string;
   item: IProcessItem;
-  orderState: OrderState;
+  state: OrderState;
   chat: { messages: IChatMessage[] };
   files: string[];
   updatedWhen: string;
@@ -54,24 +54,21 @@ export interface IUpdateOrderData {
 }
 
 export enum OrderState {
-  "requested" = 0,
-  "verify" = 1,
-  "rejected" = 2,
-  "confirmed" = 3,
-  "production" = 4,
-  "delivery" = 5,
-  "finished" = 6,
-}
-
-export enum OrderCollectionState {
-  "requested",
-  "progress",
-  "finished",
+  "DRAFT",
+  "MANUFACTURER_SELECTION",
+  "VERIFICATION",
+  "REQUESTED",
+  "CLARIFICATION",
+  "REJECTED",
+  "CONFIRMED",
+  "PRODUCTION",
+  "DELIVERY",
+  "COMPLETED",
 }
 
 export const useOrders = (shouldLoad?: boolean): ReturnProps => {
   const queryClient = useQueryClient();
-  const ordersQuery = useQuery<IOrderCollection[], Error>(
+  const ordersQuery = useQuery<Order[], Error>(
     ["orders"],
     async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getOrders/`;
@@ -79,7 +76,10 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
         .get(apiUrl)
         .then((response) => {
           logger("useOrders | getOrders ✅ |", response.data);
-          return response.data;
+          return response.data.map((order: any) => ({
+            ...order,
+            subOrders: order.orders,
+          }));
         });
     },
     {

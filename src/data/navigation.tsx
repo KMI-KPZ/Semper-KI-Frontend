@@ -47,17 +47,9 @@ export const NavigationItemData: INavigationItem[] = [
   },
   {
     userTypes: [UserType.anonym],
-    title: "data.NavigationItem.explore",
+    title: "data.NavigationItem.demo",
     link: "/process/model",
     icon: <ScienceIcon fontSize="large" />,
-    preferred: ["home"],
-    extern: false,
-  },
-  {
-    userTypes: [UserType.client],
-    title: "data.NavigationItem.continue",
-    link: "/process",
-    icon: <KeyboardDoubleArrowRightIcon fontSize="large" />,
     preferred: ["home"],
     extern: false,
   },
@@ -66,7 +58,7 @@ export const NavigationItemData: INavigationItem[] = [
     title: "data.NavigationItem.new-contract",
     link: "/process/new",
     icon: <AddShoppingCartIcon fontSize="large" />,
-    preferred: ["home"],
+    preferred: ["menu"],
     extern: false,
   },
   {
@@ -86,14 +78,6 @@ export const NavigationItemData: INavigationItem[] = [
     userTypes: [UserType.anonym, UserType.client, UserType.manufacturer],
   },
   {
-    title: "data.NavigationItem.cart",
-    link: "/cart",
-    icon: <ShoppingCartIcon fontSize="large" />,
-    extern: false,
-    preferred: ["header"],
-    userTypes: [UserType.anonym, UserType.client],
-  },
-  {
     title: "data.NavigationItem.login",
     link: "/login",
     icon: <LoginIcon fontSize="large" />,
@@ -104,7 +88,7 @@ export const NavigationItemData: INavigationItem[] = [
 
   {
     title: "data.NavigationItem.orders",
-    link: "/orders",
+    link: "/order",
     icon: <DescriptionIcon fontSize="large" />,
     extern: false,
     preferred: ["header", "home"],

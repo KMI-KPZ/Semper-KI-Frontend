@@ -10,7 +10,7 @@ import { LoadingSuspense } from "@component-library/Loading";
 import { Button } from "@component-library/Button";
 import { Badge } from "@component-library/Badge";
 import { UserType } from "@/hooks/useUser/types";
-import { OrderState, useOrders } from "@/pages/Orders/hooks/useOrders";
+import { OrderState, useOrders } from "@/pages/Order/hooks/useOrders";
 import { Heading, Text } from "@component-library/Typography";
 import Table from "@/components/Table";
 import { Divider } from "@component-library/Divider";
@@ -182,7 +182,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
                 <Text variant="body" className="text-center">
                   {new Date(order.date).toLocaleDateString()}
                 </Text>,
-                <Text variant="body">{order.orders.length}</Text>,
+                <Text variant="body">{order.subOrders.length}</Text>,
                 <Text variant="body">{OrderState[order.state]}</Text>,
               ])
           : [[]]

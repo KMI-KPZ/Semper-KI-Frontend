@@ -8,7 +8,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import { useTranslation } from "react-i18next";
 import { UserType } from "@/hooks/useUser/types";
-import { OrderState } from "../hooks/useOrders";
+import { OrderState } from "../../hooks/useOrders";
 import { Divider } from "@component-library/Divider";
 import usePermissionGate from "@/components/PermissionGate/hooks/usePermissionGate";
 import StatusItem from "./components/Item";
@@ -30,37 +30,37 @@ export type StatusData = {
 
 const statusData: StatusData[] = [
   {
-    itemOrderState: OrderState.requested,
+    itemOrderState: OrderState.REQUESTED,
     icon: <EmailIcon />,
     text: "Orders.StatusView.state.requested",
   },
   {
-    itemOrderState: OrderState.verify,
+    itemOrderState: OrderState.CLARIFICATION,
     icon: <QuestionMarkIcon />,
     text: "Orders.StatusView.state.verify",
   },
   {
-    itemOrderState: OrderState.rejected,
+    itemOrderState: OrderState.REJECTED,
     icon: <CloseIcon />,
     text: "Orders.StatusView.state.rejected",
   },
   {
-    itemOrderState: OrderState.confirmed,
+    itemOrderState: OrderState.CONFIRMED,
     icon: <CheckIcon />,
     text: "Orders.StatusView.state.confirmed",
   },
   {
-    itemOrderState: OrderState.production,
+    itemOrderState: OrderState.PRODUCTION,
     icon: <FactoryIcon />,
     text: "Orders.StatusView.state.production",
   },
   {
-    itemOrderState: OrderState.delivery,
+    itemOrderState: OrderState.DELIVERY,
     icon: <LocalShippingIcon />,
     text: "Orders.StatusView.state.delivery",
   },
   {
-    itemOrderState: OrderState.finished,
+    itemOrderState: OrderState.COMPLETED,
     icon: <DoneAllIcon />,
     text: "Orders.StatusView.state.finished",
   },
@@ -72,57 +72,57 @@ const StatusBar: React.FC<StatusViewProps> = (props) => {
     <div className="flex w-full flex-col items-center justify-center p-5 md:flex-row">
       <StatusItem
         item={{
-          itemOrderState: OrderState.requested,
+          itemOrderState: OrderState.REQUESTED,
           icon: <EmailIcon />,
           text: "Orders.StatusView.state.requested",
         }}
         {...props}
       />
-      <StatusItemConnector active={currentState > OrderState.requested} />
+      <StatusItemConnector active={currentState > OrderState.REQUESTED} />
       <StatusItem
         item={{
-          itemOrderState: OrderState.verify,
+          itemOrderState: OrderState.CLARIFICATION,
           icon: <QuestionMarkIcon />,
           text: "Orders.StatusView.state.verify",
         }}
         {...props}
       />
-      <StatusItemConnector active={currentState > OrderState.verify} />
+      <StatusItemConnector active={currentState > OrderState.CLARIFICATION} />
       <StatusBarDecisionItem
         item1={{
-          itemOrderState: OrderState.rejected,
+          itemOrderState: OrderState.REJECTED,
           icon: <CloseIcon />,
           text: "Orders.StatusView.state.rejected",
         }}
         item2={{
-          itemOrderState: OrderState.confirmed,
+          itemOrderState: OrderState.CONFIRMED,
           icon: <CheckIcon />,
           text: "Orders.StatusView.state.confirmed",
         }}
         {...props}
       />
-      <StatusItemConnector active={currentState > OrderState.confirmed} />
+      <StatusItemConnector active={currentState > OrderState.CONFIRMED} />
       <StatusItem
         item={{
-          itemOrderState: OrderState.production,
+          itemOrderState: OrderState.PRODUCTION,
           icon: <FactoryIcon />,
           text: "Orders.StatusView.state.production",
         }}
         {...props}
       />
-      <StatusItemConnector active={currentState > OrderState.production} />
+      <StatusItemConnector active={currentState > OrderState.PRODUCTION} />
       <StatusItem
         item={{
-          itemOrderState: OrderState.delivery,
+          itemOrderState: OrderState.DELIVERY,
           icon: <LocalShippingIcon />,
           text: "Orders.StatusView.state.delivery",
         }}
         {...props}
       />
-      <StatusItemConnector active={currentState > OrderState.delivery} />
+      <StatusItemConnector active={currentState > OrderState.DELIVERY} />
       <StatusItem
         item={{
-          itemOrderState: OrderState.finished,
+          itemOrderState: OrderState.COMPLETED,
           icon: <DoneAllIcon />,
           text: "Orders.StatusView.state.finished",
         }}

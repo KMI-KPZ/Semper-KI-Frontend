@@ -1,7 +1,7 @@
 import usePermissionGate from "@/components/PermissionGate/hooks/usePermissionGate";
 import { UserType } from "@/hooks/useUser/types";
 import { useTranslation } from "react-i18next";
-import { OrderState } from "../../hooks/useOrders";
+import { OrderState } from "../../../hooks/useOrders";
 import { StatusData } from "../StatusBar";
 import { Divider } from "@component-library/Divider";
 
@@ -32,9 +32,9 @@ const StatusBarDecisionItem: React.FC<StatusDoubleItemType> = (props) => {
 
   const getOuterClassName = (): string => {
     let classname: string[] = [];
-    if (currentState > OrderState.confirmed) {
+    if (currentState > OrderState.CONFIRMED) {
       classname.push("bg-orange-200");
-    } else if (currentState < OrderState.rejected) {
+    } else if (currentState < OrderState.REJECTED) {
       classname.push("bg-slate-100");
     }
     return classname.join(" ");

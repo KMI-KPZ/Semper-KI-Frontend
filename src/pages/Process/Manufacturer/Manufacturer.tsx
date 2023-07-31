@@ -83,7 +83,7 @@ const ProcessManufacturer: React.FC<Props> = (props) => {
   };
 
   const handleOnClickAdd = () => {
-    navigate("/process/model");
+    navigate("model");
   };
 
   return (

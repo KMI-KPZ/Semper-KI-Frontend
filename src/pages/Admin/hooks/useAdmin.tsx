@@ -1,6 +1,6 @@
 import { getCustomAxios } from "@/hooks/useCustomAxios";
 import { User } from "@/hooks/useUser/types";
-import { IOrder } from "@/pages/Orders/hooks/useOrders";
+import { SubOrder } from "@/pages/Order/hooks/useOrders";
 import { IMaterial } from "@/pages/Process/Material/Material";
 import { IModel } from "@/pages/Process/Model/types";
 import { useState } from "react";
@@ -17,7 +17,7 @@ export interface IAdminData {
   models: IModel[];
   materials: IMaterial[];
   printers: any[];
-  orders: IOrder[];
+  orders: SubOrder[];
 }
 
 const useAdmin = (): ReturnProps => {

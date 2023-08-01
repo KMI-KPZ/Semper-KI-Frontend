@@ -1,12 +1,10 @@
 import React, { ChangeEvent, useState } from "react";
 import { Button } from "@component-library/Button";
 import SendIcon from "@mui/icons-material/Send";
-import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "react-i18next";
-import { IChatMessage, useOrders } from "../../hooks/useOrders";
 import { User } from "@/hooks/useUser/types";
 import { Heading } from "@component-library/Typography";
-import logger from "@/hooks/useLogger";
+import { IChatMessage, useOrder } from "../../hooks/useOrder";
 
 interface Props {
   closeMenu(): void;
@@ -26,7 +24,7 @@ const Chat: React.FC<Props> = (props) => {
   const { chat, user, closeMenu, orderCollectionID, orderID } = props;
   const [state, setState] = useState<State>({});
   const { height, messageText } = state;
-  const { updateOrder } = useOrders();
+  const { updateOrder } = useOrder();
 
   const handleOnChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setState((prevState) => ({

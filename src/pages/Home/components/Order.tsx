@@ -10,10 +10,11 @@ import { LoadingSuspense } from "@component-library/Loading";
 import { Button } from "@component-library/Button";
 import { Badge } from "@component-library/Badge";
 import { UserType } from "@/hooks/useUser/types";
-import { OrderState, useOrders } from "@/pages/Order/hooks/useOrders";
 import { Heading, Text } from "@component-library/Typography";
 import Table from "@/components/Table";
 import { Divider } from "@component-library/Divider";
+import { OrderState } from "@/pages/Order/hooks/useOrder";
+import { useFlatOrders } from "@/pages/Orders/hooks/useFlatOrders";
 
 interface Props {
   className?: string;
@@ -31,9 +32,7 @@ const HomeOrderCard: React.FC<Props> = (props) => {
     userType === UserType.client
       ? orderShowCountClient
       : orderShowCountManufacturer;
-  const { ordersQuery } = useOrders(
-    userType === UserType.client || userType === UserType.manufacturer
-  );
+  const { ordersQuery } = useFlatOrders();
   const additionalClassNames = className ?? "";
 
   const renderStartLink = () => (
@@ -178,12 +177,12 @@ const HomeOrderCard: React.FC<Props> = (props) => {
                   ? ordersQuery.data.length
                   : orderShowCount
               )
-              .map((order, index) => [
+              .map((flatOrder, index) => [
                 <Text variant="body" className="text-center">
-                  {new Date(order.date).toLocaleDateString()}
+                  {new Date(flatOrder.date).toLocaleDateString()}
                 </Text>,
-                <Text variant="body">{order.subOrders.length}</Text>,
-                <Text variant="body">{OrderState[order.state]}</Text>,
+                <Text variant="body">{flatOrder.subOrderCount}</Text>,
+                <Text variant="body">{OrderState[flatOrder.state]}</Text>,
               ])
           : [[]]
       }

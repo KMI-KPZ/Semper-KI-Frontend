@@ -1,7 +1,7 @@
 import { AppContext } from "@/pages/App/App";
 import { DeleteOrderEvent, Event } from "@/pages/App/types";
 import { useContext, useEffect } from "react";
-import { SubOrder } from "./useOrders";
+import { SubOrder } from "./useOrder";
 
 interface ReturnProps {
   getDeleteOrderEvent: (type: "status" | "message") => Event;

@@ -53,10 +53,12 @@ import Modal from "@component-library/Modal";
 import usePing from "@/hooks/usePing";
 import Orders from "../Orders/Orders";
 import OrderView from "../Order/Order";
+import Demo from "../Demo/Demo";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
   guideFilter: IFilterItem[];
+  demoID?: string;
 };
 
 export type AppContext = {
@@ -274,16 +276,21 @@ const App: React.FC = () => {
               path="legal/*"
               element={<Legal isMagazineUp={isMagazineUp} />}
             />
-            <Route
-              path="demo/*"
-              element={
-                <Process
-                  guideAnswers={state.guideFilter}
-                  selectedProgressItem={state.selectedProgressItem}
+            <Route path="demo/*">
+              <Route index element={<Demo />} />
+              <Route path=":id/*">
+                <Route index element={<OrderView userType={userType} />} />
+                <Route
+                  path="process/*"
+                  element={
+                    <Process
+                      guideAnswers={state.guideFilter}
+                      selectedProgressItem={state.selectedProgressItem}
+                    />
+                  }
                 />
-              }
-            />
-            <Route path="demo" element={<OrderView userType={userType} />} />
+              </Route>
+            </Route>
             {clientRoutes}
             {manufacturerRoutes}
             {privateRoutes}

@@ -1,4 +1,4 @@
-import { SubOrder, OrderState } from "@/pages/Order/hooks/useOrders";
+import { OrderState, SubOrder } from "@/pages/Order/hooks/useOrder";
 import { Heading } from "@component-library/Typography";
 import {
   Paper,

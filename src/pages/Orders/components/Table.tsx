@@ -12,22 +12,14 @@ import { useTranslation } from "react-i18next";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import EditIcon from "@mui/icons-material/Edit";
-import { OrderState } from "@/pages/Order/hooks/useOrders";
+import { FlatOrder } from "@/pages/Orders/hooks/useFlatOrders";
 
 interface OrdersTableProps {
-  rows: OrdersTableRowProps[] | undefined;
-}
-
-export interface OrdersTableRowProps {
-  id: string;
-  name: string;
-  count: number;
-  created: string;
-  status: string;
+  flatOrders: FlatOrder[] | undefined;
 }
 
 const OrdersTable: React.FC<OrdersTableProps> = (props) => {
-  const { rows } = props;
+  const { flatOrders } = props;
   const { t } = useTranslation();
 
   const handleOnClickButtonDelete = () => {
@@ -52,22 +44,22 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {rows === undefined ? (
+        {flatOrders === undefined ? (
           <Text variant="body">
             {t("order.overview.components.table.noItems")}
           </Text>
         ) : (
-          rows.map((row) => (
+          flatOrders.map((flatOrder) => (
             <TableRow
-              key={row.name}
+              key={flatOrder.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                Artikel: #{flatOrder.id}
               </TableCell>
-              <TableCell>{row.status}</TableCell>
-              <TableCell>{row.count}</TableCell>
-              <TableCell>{row.created}</TableCell>
+              <TableCell>{flatOrder.state}</TableCell>
+              <TableCell>{flatOrder.subOrderCount}</TableCell>
+              <TableCell>{flatOrder.date}</TableCell>
               <TableCell>
                 <div className="flex w-fit flex-row items-center justify-center gap-5">
                   <Button
@@ -80,13 +72,13 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
                     variant="secondary"
                     title={t("order.overview.components.table.button.edit")}
                     children={<EditIcon />}
-                    to={`/process/${row.id}`}
+                    to={`/process/${flatOrder.id}`}
                   />
                   <Button
                     variant="secondary"
                     title={t("order.overview.components.table.button.detail")}
                     children={<PlayArrowIcon />}
-                    to={`/order/${row.id}`}
+                    to={`/order/${flatOrder.id}`}
                   />
                 </div>
               </TableCell>

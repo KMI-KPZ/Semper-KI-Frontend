@@ -1,9 +1,9 @@
 import usePermissionGate from "@/components/PermissionGate/hooks/usePermissionGate";
 import { UserType } from "@/hooks/useUser/types";
 import { useTranslation } from "react-i18next";
-import { OrderState } from "../../../hooks/useOrders";
 import { ReactNode } from "react";
 import { StatusData } from "../StatusBar";
+import { OrderState } from "@/pages/Order/hooks/useOrder";
 
 type StatusItemType = {
   item: StatusData;

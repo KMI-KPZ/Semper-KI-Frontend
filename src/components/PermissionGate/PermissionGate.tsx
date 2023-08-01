@@ -3,6 +3,7 @@ import { AppContext } from "@/pages/App/App";
 import React, { PropsWithChildren, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import usePermissionGate from "./hooks/usePermissionGate";
+import logger from "@/hooks/useLogger";
 
 interface PermissionProps {
   element: string | string[];

@@ -8,13 +8,16 @@ import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OrderPreView from "./SubOrder/components/OrderPreView";
+import EditIcon from "@mui/icons-material/Edit";
 import SubOrderView from "./SubOrder/SubOrder";
-import { Order, OrderState, useOrders } from "./hooks/useOrders";
 import { UserType } from "@/hooks/useUser/types";
 import { OrderEvent, OrderEventItem } from "@/pages/App/types";
 import { Heading } from "@component-library/Typography";
 import logger from "@/hooks/useLogger";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import FactoryIcon from "@mui/icons-material/Factory";
+import { useNavigate } from "react-router-dom";
+import { Order, OrderState, useOrder } from "./hooks/useOrder";
 
 interface Props {
   userType: UserType;
@@ -24,10 +27,11 @@ interface Props {
 const OrderView: React.FC<Props> = (props) => {
   const { userType, event: orderCollectionEvent } = props;
   const { t } = useTranslation();
-  const { deleteOrderCollection, updateOrder } = useOrders();
+  const navigate = useNavigate();
+  const { orderQuery } = useOrder();
   const order: Order = {
     date: new Date().toLocaleDateString(),
-    id: "1",
+    id: "bjhkjlkrnbqckubg6874bhjvsbhwvegzukwbnuifebwza1",
     state: OrderState.CONFIRMED,
     subOrders: [],
   };
@@ -67,48 +71,84 @@ const OrderView: React.FC<Props> = (props) => {
     // }
   };
 
-  const renderButtons = () => {
-    if (userType === UserType.client)
-      return (
-        <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
-          <Button
-            size="sm"
-            startIcon={<CancelIcon />}
-            onClick={handleOnClickButtonCancel}
-            title={t("Orders.OrderCollection.button.cancel")}
-          />
-          <Button
-            size="sm"
-            startIcon={<ReplayIcon />}
-            onClick={handleOnClickButtonReOrder}
-            title={t("Orders.OrderCollection.button.reOrder")}
-          />
-        </div>
-      );
-    if (userType === UserType.manufacturer)
-      return (
-        <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
-          <Button
-            size="sm"
-            startIcon={<CancelIcon />}
-            onClick={handleOnClickButtonReject}
-            title={t("Orders.OrderCollection.button.reject")}
-          />
-          <Button
-            size="sm"
-            startIcon={<QuestionMarkIcon />}
-            onClick={handleOnClickButtonVerify}
-            title={t("Orders.OrderCollection.button.verify")}
-          />
+  const handleOnClickButtonEdit = () => {
+    navigate("model");
+  };
+  const handleOnClickButtonManufacture = () => {};
 
-          <Button
-            size="sm"
-            startIcon={<CheckIcon />}
-            onClick={handleOnClickButtonConfirm}
-            title={t("Orders.OrderCollection.button.confirm")}
-          />
-        </div>
-      );
+  const renderAnonymButtons = () => {
+    return (
+      <>
+        <Button
+          size="sm"
+          startIcon={<EditIcon />}
+          to="model"
+          title={t("Orders.OrderCollection.button.edit")}
+        />
+        <Button
+          size="sm"
+          startIcon={<FactoryIcon />}
+          to="checkout"
+          title={t("Orders.OrderCollection.button.manufacturer")}
+        />
+      </>
+    );
+  };
+
+  const renderClientButtons = () => {
+    return (
+      <>
+        <Button
+          size="sm"
+          startIcon={<CancelIcon />}
+          onClick={handleOnClickButtonCancel}
+          title={t("Orders.OrderCollection.button.cancel")}
+        />
+        <Button
+          size="sm"
+          startIcon={<ReplayIcon />}
+          onClick={handleOnClickButtonReOrder}
+          title={t("Orders.OrderCollection.button.reOrder")}
+        />
+      </>
+    );
+  };
+
+  const renderManufacturerButtons = () => {
+    return (
+      <>
+        <Button
+          size="sm"
+          startIcon={<CancelIcon />}
+          onClick={handleOnClickButtonReject}
+          title={t("Orders.OrderCollection.button.reject")}
+        />
+        <Button
+          size="sm"
+          startIcon={<QuestionMarkIcon />}
+          onClick={handleOnClickButtonVerify}
+          title={t("Orders.OrderCollection.button.verify")}
+        />
+        <Button
+          size="sm"
+          startIcon={<CheckIcon />}
+          onClick={handleOnClickButtonConfirm}
+          title={t("Orders.OrderCollection.button.confirm")}
+        />
+      </>
+    );
+  };
+
+  const renderButtons = () => {
+    return (
+      <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
+        {userType === UserType.anonym ? renderAnonymButtons() : null}
+        {userType === UserType.client ? renderClientButtons() : null}
+        {userType === UserType.manufacturer
+          ? renderManufacturerButtons()
+          : null}
+      </div>
+    );
   };
 
   const handleOnClickButton = () => {
@@ -129,7 +169,7 @@ const OrderView: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-start justify-start gap-5 bg-white p-5">
+    <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
       <div className="flex w-full flex-col items-start justify-start gap-5 md:flex-row md:items-center md:justify-between">
         <Heading variant="h2">
           {t("Orders.OrderCollection.id")}: {order.id}
@@ -144,17 +184,25 @@ const OrderView: React.FC<Props> = (props) => {
           {new Date(order.date).toLocaleString()}
         </Heading>
       </div>
-      {order.subOrders
-        .sort((subOrderA, subOrderB) => (subOrderA.id < subOrderB.id ? -1 : 1))
-        .map((subOrder, index) => (
-          <SubOrderView
-            key={index}
-            subOrder={subOrder}
-            orderID={order.id}
-            userType={userType}
-            orderEvent={getOrderEventItemByID(subOrder.id)}
-          />
-        ))}
+      {order.subOrders.length === 0 ? (
+        <Heading variant="h2">
+          {t("Orders.OrderCollection.noSubOrders")}
+        </Heading>
+      ) : (
+        order.subOrders
+          .sort((subOrderA, subOrderB) =>
+            subOrderA.id < subOrderB.id ? -1 : 1
+          )
+          .map((subOrder, index) => (
+            <SubOrderView
+              key={index}
+              subOrder={subOrder}
+              orderID={order.id}
+              userType={userType}
+              orderEvent={getOrderEventItemByID(subOrder.id)}
+            />
+          ))
+      )}
       <PermissionGate element={"OrderButtons"}>
         {renderButtons()}
       </PermissionGate>

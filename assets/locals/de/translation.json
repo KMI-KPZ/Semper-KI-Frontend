@@ -469,7 +469,10 @@
     "OrderCollection":{
       "id":"ID",
       "date":"Datum",
+      "noSubOrders":"Keine unteraufträge vorhanden",
       "button":{
+        "manufacturer":"Herstellerauswahl",
+        "edit":"Bearbeiten",
         "cancel":"Gesamten Auftrag Stornieren",
         "reOrder":"Gesamten Auftrag erneut Bestellen",
         "reject":"Gesamten Auftrag Ablehnen",
@@ -1028,5 +1031,8 @@
         }
       }
     }
+  },
+  "Demo":{
+    "title":"Demoauftrag wird erstellt..."
   }
 }

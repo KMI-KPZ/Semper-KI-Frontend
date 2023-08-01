@@ -3,14 +3,15 @@ import { LoadingSuspense } from "@component-library/Loading";
 import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import OrdersTable, { OrdersTableRowProps } from "./Table";
+import OrdersTable from "./Table";
+import { FlatOrder } from "@/pages/Orders/hooks/useFlatOrders";
 
 interface OrdersDraftProps {
-  rows: OrdersTableRowProps[] | undefined;
+  flatOrders: FlatOrder[] | undefined;
 }
 
 const OrdersDraft: React.FC<OrdersDraftProps> = (props) => {
-  const { rows } = props;
+  const { flatOrders } = props;
   const { t } = useTranslation();
 
   return (
@@ -19,7 +20,7 @@ const OrdersDraft: React.FC<OrdersDraftProps> = (props) => {
         <Heading variant="h2">{t("order.overview.draft")}</Heading>
         <Button title={t("order.overview.button.create")} />
       </div>
-      <OrdersTable rows={rows} />
+      <OrdersTable flatOrders={flatOrders} />
     </div>
   );
 };

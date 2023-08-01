@@ -1,6 +1,6 @@
 import { UseQueryResult } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { Order } from "./useOrders";
+import { Order } from "./useOrder";
 
 interface ReturnProps {}
 

@@ -9,17 +9,18 @@ import {
 } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import logger from "@/hooks/useLogger";
+import { useNavigate } from "react-router-dom";
 
 interface ReturnProps {
-  ordersQuery: UseQueryResult<Order[], Error>;
-  deleteOrder: UseMutationResult<any, unknown, string, unknown>;
-  deleteOrderCollection: UseMutationResult<any, unknown, string, unknown>;
+  orderQuery: UseQueryResult<Order, Error>;
+  deleteSubOrder: UseMutationResult<any, unknown, string, unknown>;
   updateOrder: UseMutationResult<
     AxiosResponse<any, any>,
     Error,
     IUpdateOrderData,
     unknown
   >;
+  createOrder: UseMutationResult<string, Error, boolean, unknown>;
 }
 
 export interface Order {
@@ -66,16 +67,17 @@ export enum OrderState {
   "COMPLETED",
 }
 
-export const useOrders = (shouldLoad?: boolean): ReturnProps => {
+export const useOrder = (orderID?: string): ReturnProps => {
   const queryClient = useQueryClient();
-  const ordersQuery = useQuery<Order[], Error>(
-    ["orders"],
+  const navigate = useNavigate();
+  const orderQuery = useQuery<Order, Error>(
+    ["order", orderID],
     async () => {
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getOrders/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getOrder/${orderID}`;
       return getCustomAxios()
         .get(apiUrl)
         .then((response) => {
-          logger("useOrders | getOrders ✅ |", response.data);
+          logger("useOrdes | getOrder ✅ |", response.data);
           return response.data.map((order: any) => ({
             ...order,
             subOrders: order.orders,
@@ -83,35 +85,34 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
         });
     },
     {
-      enabled:
-        (shouldLoad !== undefined && shouldLoad === true) ||
-        shouldLoad === undefined
-          ? true
-          : false,
+      enabled: orderID !== undefined,
     }
   );
 
-  const deleteOrder = useMutation<any, Error, string>({
+  const createOrder = useMutation<string, Error, boolean>({
+    mutationFn: async (demo: boolean) => {
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createOrder/`;
+      return getCustomAxios()
+        .post(apiUrl)
+        .then((response) => {
+          logger("useOrder | createOrder ✅ |", response.data);
+
+          return response.data;
+        });
+    },
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries(["orders"]);
+      navigate(variables ? `/demo/${data}` : `/order/${data}`);
+    },
+  });
+
+  const deleteSubOrder = useMutation<any, Error, string>({
     mutationFn: async (orderID: string) => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/deleteOrder/`;
       return getCustomAxios()
         .delete(apiUrl, { data: { id: orderID } })
         .then((response) => {
-          logger("useOrders | deleteOrder ✅ |", response.data);
-          return response.data;
-        });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["orders"]);
-    },
-  });
-  const deleteOrderCollection = useMutation<any, Error, string>({
-    mutationFn: async (orderCollectionID: string) => {
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/deleteOrderCollection/`;
-      return getCustomAxios()
-        .delete(apiUrl, { data: { id: orderCollectionID } })
-        .then((response) => {
-          logger("useOrders | deleteOrderCollection ✅ |", response.data);
+          logger("useOrder | deleteOrder ✅ |", response.data);
           return response.data;
         });
     },
@@ -127,19 +128,19 @@ export const useOrders = (shouldLoad?: boolean): ReturnProps => {
           props,
         })
         .then((res) => {
-          logger("useOrders | updateOrder ✅ |", res.data);
+          logger("useOrder | updateOrder ✅ |", res.data);
           return res;
         });
     },
     onSuccess() {
-      queryClient.invalidateQueries(["orders"]);
+      queryClient.invalidateQueries(["order"]);
     },
   });
 
   return {
-    ordersQuery,
-    deleteOrder,
-    deleteOrderCollection,
+    createOrder,
+    orderQuery,
+    deleteSubOrder,
     updateOrder,
   };
 };

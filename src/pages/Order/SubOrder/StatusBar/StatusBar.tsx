@@ -6,15 +6,11 @@ import FactoryIcon from "@mui/icons-material/Factory";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import EmailIcon from "@mui/icons-material/Email";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
-import { useTranslation } from "react-i18next";
 import { UserType } from "@/hooks/useUser/types";
-import { OrderState } from "../../hooks/useOrders";
-import { Divider } from "@component-library/Divider";
-import usePermissionGate from "@/components/PermissionGate/hooks/usePermissionGate";
 import StatusItem from "./components/Item";
 import StatusItemConnector from "./components/ItemConnector";
-import StatusBarDoubleItem from "./components/DecisionItem";
 import StatusBarDecisionItem from "./components/DecisionItem";
+import { OrderState } from "../../hooks/useOrder";
 
 interface StatusViewProps {
   currentState: OrderState;

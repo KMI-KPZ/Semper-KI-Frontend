@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import DownloadIcon from "@mui/icons-material/Download";
 import useOrderFile from "../../hooks/useOrderFiles";
-import { SubOrder } from "../../hooks/useOrders";
 import { Heading } from "@component-library/Typography";
 import useFileView from "../../hooks/useFileView";
+import { SubOrder } from "../../hooks/useOrder";
 
 interface Props {
   order: SubOrder;

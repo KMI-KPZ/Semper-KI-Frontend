@@ -11,7 +11,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import { Badge } from "@component-library/Badge";
 import OrderFile from "./components/OrderFile";
-import { OrderState, useOrders, Order, SubOrder } from "../hooks/useOrders";
 import { UserType } from "@/hooks/useUser/types";
 import { OrderEventItem } from "@/pages/App/types";
 import { AppContext } from "@/pages/App/App";
@@ -21,6 +20,8 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import useOrderEventChange from "../hooks/useOrderEventChange";
 import logger from "@/hooks/useLogger";
 import Modal from "@component-library/Modal";
+import { OrderState, SubOrder, useOrder } from "../hooks/useOrder";
+import { useFlatOrders } from "../../Orders/hooks/useFlatOrders";
 
 interface Props {
   subOrder: SubOrder;
@@ -42,7 +43,7 @@ const SubOrderView: React.FC<Props> = (props) => {
   });
   const { chatOpen, menuOpen } = state;
   const { user, deleteEvent } = useContext(AppContext);
-  const { deleteOrder, updateOrder } = useOrders();
+  const { deleteSubOrder, updateOrder } = useOrder();
   const { getDeleteOrderEvent } = useOrderEventChange(
     subOrder,
     orderID,
@@ -73,7 +74,7 @@ const SubOrderView: React.FC<Props> = (props) => {
   };
   const handleOnClickButtonCancel = () => {
     if (window.confirm(t("Orders.OrderView.confirm.cancel"))) {
-      deleteOrder.mutate(subOrder.id);
+      deleteSubOrder.mutate(subOrder.id);
     }
   };
   const handleOnClickButtonReOrder = () => {

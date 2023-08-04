@@ -5,7 +5,7 @@ import OrdersTable from "./Table";
 import { FlatOrder } from "@/pages/Orders/hooks/useFlatOrders";
 
 interface OrdersCompletedProps {
-  flatOrders: FlatOrder[] | undefined;
+  flatOrders: FlatOrder[];
 }
 
 const OrdersCompleted: React.FC<OrdersCompletedProps> = (props) => {

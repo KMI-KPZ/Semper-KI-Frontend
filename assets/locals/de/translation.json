@@ -8,7 +8,7 @@
   "data":{
     "NavigationItem":{
       "home":"Startseite",
-      "process":"Auftrag",
+      "process":"Prozess",
       "model":"Modell",
       "upload":"Modell Hochladen",
       "material":"Material",
@@ -17,7 +17,7 @@
       "manufacturer":"Hersteller",
       "checkout":"Kasse",
       "guide":"Wegweiser",
-      "order":"Aufträge",
+      "order":"Auftragsdetails",
       "orders":"Meine Aufträge",
       "account":"Konto",
       "test":"Test",
@@ -473,19 +473,27 @@
       "button":{
         "manufacturer":"Herstellerauswahl",
         "edit":"Bearbeiten",
-        "cancel":"Gesamten Auftrag Stornieren",
-        "reOrder":"Gesamten Auftrag erneut Bestellen",
-        "reject":"Gesamten Auftrag Ablehnen",
-        "confirm":"Gesamten Auftrag Bestätigen",
-        "verify":"Gesamten Auftrag Überprüfen",
+        "cancel":"Stornieren",
+        "reOrder":"erneut Bestellen",
+        "reject":"Ablehnen",
+        "confirm":"Bestätigen",
+        "verified":"Überprüfen",
         "expand":"Ausklappen",
-        "collapse":"Zusammenklappen"
+        "collapse":"Zusammenklappen",
+        "delete":"Löschen"
       },
       "state":{
-        "header":"Status",
-        "requested":"Angefragt",
-        "progress":"In Bearbeitung",
-        "finished":"Abgeschlossen"
+        "DRAFT":"Entwurf",
+        "MANUFACTURER_SELECTED":"Hersteller ausgewählt",
+        "VERIFIED":"Überprüft",
+        "REQUESTED":"Angefragt",
+        "CLARIFICATION":"Rückfragen",
+        "REJECTED":"Abgelehnt",
+        "CONFIRMED":"Bestätigt",
+        "PRODUCTION":"In Produktion",
+        "DELIVERY":"Unterwegs",
+        "COMPLETED":"Abgeschlossen",
+        "header":"Status"
       }
     },
     "OrderCollectionOverview":{
@@ -1022,7 +1030,7 @@
           "created":"Erstellt am",
           "count":"Anzahl",
           "actions":"Aktionen",
-          "noItems":"keine Entwürfe",
+          "noItems":"keine Aufträge",
           "button":{
             "delete":"Löschen",
             "edit":"Bearbeiten",
@@ -1032,7 +1040,8 @@
       }
     }
   },
-  "Demo":{
-    "title":"Demoauftrag wird erstellt..."
+  "NewOrder":{
+    "demo":"Demoauftrag wird erstellt...",
+    "order":"Auftrag wird erstellt..."
   }
 }

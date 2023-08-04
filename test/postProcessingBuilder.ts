@@ -1,4 +1,5 @@
-import {EPostProcessingOptionType, IPostProcessing} from "../src/pages/Process/PostProcessing/PostProcessing"
+import { EPostProcessingOptionType, IPostProcessing } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/PostProcessing/PostProcessing";
+
 
 export class PostProcessingBuilder {
     id: string="postProcessingID";

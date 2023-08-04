@@ -13,9 +13,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import EditIcon from "@mui/icons-material/Edit";
 import { FlatOrder } from "@/pages/Orders/hooks/useFlatOrders";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { OrderState } from "@/pages/OrderRoutes/Order/hooks/useOrder";
 
 interface OrdersTableProps {
-  flatOrders: FlatOrder[] | undefined;
+  flatOrders: FlatOrder[];
 }
 
 const OrdersTable: React.FC<OrdersTableProps> = (props) => {
@@ -44,10 +46,14 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {flatOrders === undefined ? (
-          <Text variant="body">
-            {t("order.overview.components.table.noItems")}
-          </Text>
+        {flatOrders.length === 0 ? (
+          <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+            <TableCell colSpan={5} align="center">
+              <Text variant="body">
+                {t("order.overview.components.table.noItems")}
+              </Text>
+            </TableCell>
+          </TableRow>
         ) : (
           flatOrders.map((flatOrder) => (
             <TableRow
@@ -70,16 +76,18 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
                   />
                   <Button
                     variant="secondary"
-                    title={t("order.overview.components.table.button.edit")}
-                    children={<EditIcon />}
-                    to={`/process/${flatOrder.id}`}
-                  />
-                  <Button
-                    variant="secondary"
                     title={t("order.overview.components.table.button.detail")}
-                    children={<PlayArrowIcon />}
+                    children={<VisibilityIcon />}
                     to={`/order/${flatOrder.id}`}
                   />
+                  {flatOrder.state >= OrderState.REQUESTED ? null : (
+                    <Button
+                      variant="secondary"
+                      title={t("order.overview.components.table.button.edit")}
+                      children={<EditIcon />}
+                      to={`/order/${flatOrder.id}/process`}
+                    />
+                  )}
                 </div>
               </TableCell>
             </TableRow>

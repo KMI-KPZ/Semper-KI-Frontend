@@ -5,7 +5,7 @@ import OrdersTable from "./Table";
 import { FlatOrder } from "@/pages/Orders/hooks/useFlatOrders";
 
 interface OrdersOngoingProps {
-  flatOrders: FlatOrder[] | undefined;
+  flatOrders: FlatOrder[];
 }
 
 const OrdersOngoing: React.FC<OrdersOngoingProps> = (props) => {

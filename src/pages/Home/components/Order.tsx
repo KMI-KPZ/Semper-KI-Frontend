@@ -13,7 +13,7 @@ import { UserType } from "@/hooks/useUser/types";
 import { Heading, Text } from "@component-library/Typography";
 import Table from "@/components/Table";
 import { Divider } from "@component-library/Divider";
-import { OrderState } from "@/pages/Order/hooks/useOrder";
+import { OrderState } from "@/pages/OrderRoutes/Order/hooks/useOrder";
 import { useFlatOrders } from "@/pages/Orders/hooks/useFlatOrders";
 
 interface Props {

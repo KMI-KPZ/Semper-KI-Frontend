@@ -1,5 +1,4 @@
 import { getCustomAxios } from "@/hooks/useCustomAxios";
-import { IProcessItem } from "@/pages/Process/types";
 import {
   useMutation,
   UseMutationResult,
@@ -7,9 +6,8 @@ import {
   useQueryClient,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
 import logger from "@/hooks/useLogger";
-import { OrderState } from "../../Order/hooks/useOrder";
+import { OrderState } from "../../OrderRoutes/hooks/useOrder";
 
 interface ReturnProps {
   ordersQuery: UseQueryResult<FlatOrder[], Error>;

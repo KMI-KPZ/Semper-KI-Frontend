@@ -7,7 +7,7 @@ import OrdersTable from "./Table";
 import { FlatOrder } from "@/pages/Orders/hooks/useFlatOrders";
 
 interface OrdersDraftProps {
-  flatOrders: FlatOrder[] | undefined;
+  flatOrders: FlatOrder[];
 }
 
 const OrdersDraft: React.FC<OrdersDraftProps> = (props) => {
@@ -18,7 +18,7 @@ const OrdersDraft: React.FC<OrdersDraftProps> = (props) => {
     <div className="flex w-full flex-col gap-5">
       <div className="flex w-full flex-col items-center md:flex-row md:justify-between">
         <Heading variant="h2">{t("order.overview.draft")}</Heading>
-        <Button title={t("order.overview.button.create")} />
+        <Button title={t("order.overview.button.create")} to="/newOrder" />
       </div>
       <OrdersTable flatOrders={flatOrders} />
     </div>

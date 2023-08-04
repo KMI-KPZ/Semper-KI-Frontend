@@ -4,11 +4,11 @@ import { UserType } from "@/hooks/useUser/types";
 
 describe("<Home>", () => {
   it("should render", () => {
-    render(<Home cartCount={0} userType={UserType.anonym} />);
+    render(<Home userType={UserType.anonym} />);
     expect(screen.getByTestId("home-anonym")).toBeInTheDocument();
   });
   it("should render anonym Home for anonym user", () => {
-    render(<Home cartCount={0} userType={UserType.anonym} />);
+    render(<Home userType={UserType.anonym} />);
     expect(screen.getByTestId("home-anonym-header")).toBeInTheDocument();
     expect(screen.getByTestId("home-anonym-order")).toBeInTheDocument();
     expect(screen.getByTestId("home-anonym-orga")).toBeInTheDocument();
@@ -17,7 +17,7 @@ describe("<Home>", () => {
   });
   it.todo("should render homecards for anonym user with items in cart");
   it("should render homecards for client user", () => {
-    render(<Home cartCount={0} userType={UserType.client} />);
+    render(<Home userType={UserType.client} />);
     expect(screen.getByTestId("home-order-card")).toBeInTheDocument();
     expect(screen.getByTestId("home-search-card")).toBeInTheDocument();
     expect(screen.getByTestId("home-guide-card")).toBeInTheDocument();
@@ -27,7 +27,7 @@ describe("<Home>", () => {
     expect(screen.getByTestId("home-portfolio-card")).toBeInTheDocument();
   });
   it.skip("should render homecards for manufacturer user", () => {
-    render(<Home cartCount={0} userType={UserType.manufacturer} />);
+    render(<Home userType={UserType.manufacturer} />);
     expect(screen.getByTestId("home-order-card")).toBeInTheDocument();
     expect(screen.getByTestId("home-search-card")).toBeInTheDocument();
     expect(screen.getByTestId("home-guide-card")).toBeInTheDocument();

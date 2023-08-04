@@ -1,4 +1,5 @@
-import { IMaterial } from "../src/pages/Process/Material/Material";
+import { IMaterial } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Material/Material";
+
 
 export class MaterialBuilder {
     id: string="materialID";

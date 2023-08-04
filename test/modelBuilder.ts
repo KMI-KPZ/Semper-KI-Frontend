@@ -1,4 +1,4 @@
-import { IModel } from "../src/pages/Process/Model/types";
+import { IModel } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Model/types";
 
 export class ModelBuilder {
     id: string ="modelID";

@@ -3,17 +3,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import useGuide from "../hooks/useGuide";
 import { LoadingAnimation } from "@component-library/Loading";
 import { EGuideQuestionType, IGuideOption, IGuideQuestion } from "../Guide";
+import GuideOverview from "./components/overview";
+import GuideAnswers from "./components/answer";
+import GuideQuestion from "./components/question";
+import logger from "@/hooks/useLogger";
 import {
   IFilterAnswer,
   IFilterItem,
   IFilterQuestion,
   IRangeMinMax,
-} from "@/pages/Process/Filter/Filter";
-import GuideOverview from "./components/overview";
-import GuideAnswers from "./components/answer";
-import GuideQuestion from "./components/question";
-import useFilter from "@/pages/Process/Filter/hooks/useFilter";
-import logger from "@/hooks/useLogger";
+} from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Filter/Filter";
+import useFilter from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Filter/hooks/useFilter";
 
 const getQuestionByFilterId = (
   filterId: number,

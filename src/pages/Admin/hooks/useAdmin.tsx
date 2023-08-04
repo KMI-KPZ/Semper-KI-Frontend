@@ -1,10 +1,10 @@
 import { getCustomAxios } from "@/hooks/useCustomAxios";
 import { User } from "@/hooks/useUser/types";
-import { IMaterial } from "@/pages/Process/Material/Material";
-import { IModel } from "@/pages/Process/Model/types";
 import { useState } from "react";
 import logger from "@/hooks/useLogger";
-import { SubOrder } from "@/pages/Order/hooks/useOrder";
+import { SubOrder } from "@/pages/OrderRoutes/Order/hooks/useOrder";
+import { IModel } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Model/types";
+import { IMaterial } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Material/Material";
 
 interface ReturnProps {
   data: IAdminData;

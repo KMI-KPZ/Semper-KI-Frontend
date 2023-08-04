@@ -1,4 +1,4 @@
-import { IMaterial } from "@/pages/Process/Material/Material";
+import { IMaterial } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Material/Material";
 import { Heading } from "@component-library/Typography";
 import {
   Paper,

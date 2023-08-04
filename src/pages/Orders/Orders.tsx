@@ -7,7 +7,7 @@ import OrdersDraft from "./components/Draft";
 import OrdersOngoing from "./components/Ongoing";
 import OrdersCompleted from "./components/Completed";
 import { useFlatOrders } from "./hooks/useFlatOrders";
-import { OrderState } from "../Order/hooks/useOrder";
+import { OrderState } from "../OrderRoutes/hooks/useOrder";
 
 interface OrdersProps {}
 
@@ -35,7 +35,7 @@ const Orders: React.FC<OrdersProps> = (props) => {
         <OrdersDraft
           flatOrders={getFlatOrdersByState(
             OrderState.DRAFT,
-            OrderState.VERIFICATION
+            OrderState.VERIFIED
           )}
         />
         <OrdersOngoing

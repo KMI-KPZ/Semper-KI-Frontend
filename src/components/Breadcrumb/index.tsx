@@ -1,55 +1,75 @@
+import logger from "@/hooks/useLogger";
+import { Button } from "@component-library/Button";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 
 interface Props {}
 
+interface BreadcrumbItem {
+  name: string;
+  link: string;
+}
+
 const Breadcrumb: React.FC<Props> = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { pathname } = useLocation();
-  const splittet: string[] = pathname.split("/");
-  if (splittet[0] === "" && splittet[1] === "") {
-    splittet.splice(0, 1);
-  }
-  splittet[0] = "home";
 
-  const generateLink = (index: number): string => {
-    let link: string = "";
-    for (let i = 1; i <= index; i++) {
-      link = link.concat("/");
-      link = link.concat(splittet[i]);
+  const generateBreadcrumbItems = (): BreadcrumbItem[] => {
+    let breadcrumbItems: BreadcrumbItem[] = [];
+    let splittet: string[] = pathname.split("/");
+    if (splittet[0] === "" && splittet[1] === "") {
+      splittet.splice(0, 1);
     }
-    return link === "" ? "/" : link;
-  };
+    splittet.forEach((item: string, index: number) => {
+      if (index === 0) {
+        breadcrumbItems.push({
+          name: "home",
+          link: "/",
+        });
+      } else if (index === 1 && item === "order") {
+        breadcrumbItems.push({
+          name: "orders",
+          link: "/orders",
+        });
+        breadcrumbItems.push({
+          name: "order",
+          link: `/order/${splittet[2]}`,
+        });
+      } else if (index === 2 && splittet[1] === "order") {
+        //nothing
+      } else {
+        const link = splittet.slice(0, index + 1).join("/");
+        breadcrumbItems.push({
+          name: item,
+          link: link,
+        });
+      }
+    });
 
-  const handleOnClick = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    index: number
-  ) => {
-    e.preventDefault();
-    navigate(generateLink(index));
+    return breadcrumbItems;
   };
 
   return (
-    <nav className="hidden w-full text-left text-lg  font-bold md:block">
-      {splittet.map((name: string, index: number) => (
+    <nav className="hidden w-full flex-row items-center justify-start text-left text-lg font-bold md:flex">
+      {generateBreadcrumbItems().map((item: BreadcrumbItem, index: number) => (
         <React.Fragment key={index}>
           <span>{" > "}</span>
-          <a
-            className="p-1 duration-300 hover:cursor-pointer hover:text-türkis "
-            href={generateLink(index)}
-            onClick={(e) => handleOnClick(e, index)}
-          >
-            {i18n.exists(`data.NavigationItem.${name}`)
-              ? t(`data.NavigationItem.${name}`)
-              : name}
-          </a>
+          <Button
+            size="xs"
+            variant="text"
+            title={
+              i18n.exists(`data.NavigationItem.${item.name}`)
+                ? t(`data.NavigationItem.${item.name}`)
+                : item.name
+            }
+            to={item.link}
+          />
         </React.Fragment>
       ))}
     </nav>
   );
-  // ) : null;
 };
 
 export default Breadcrumb;

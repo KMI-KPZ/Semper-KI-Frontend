@@ -52,7 +52,6 @@ interface Props {
   isLoggedIn: boolean;
   userType: UserType;
   events?: Event[];
-  cartCount: number;
 }
 
 interface State {
@@ -61,7 +60,7 @@ interface State {
 }
 
 export const Header: React.FC<Props> = (props) => {
-  const { isLoggedIn, userType, cartCount, events } = props;
+  const { isLoggedIn, userType, events } = props;
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [state, setState] = useState<State>({
@@ -113,7 +112,7 @@ export const Header: React.FC<Props> = (props) => {
       title === "data.NavigationItem.orders"
     )
       return getOrderEventAmount(events);
-    if (cartCount > 0 && title === "data.NavigationItem.cart") return cartCount;
+    // if (cartCount > 0 && title === "data.NavigationItem.cart") return cartCount;
     return undefined;
   };
 

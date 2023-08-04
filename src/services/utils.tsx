@@ -1,8 +1,8 @@
-import { Address, UserType } from "@/hooks/useUser/types";
-import { IProcessItem } from "@/pages/Process/types";
-import { EProcessStatusType } from "@/pages/Process/Header/types";
-import { IModel } from "@/pages/Process/Model/types";
 import logger from "@/hooks/useLogger";
+import { Address, UserType } from "@/hooks/useUser/types";
+import { EProcessStatusType } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Header/types";
+import { IModel } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Model/types";
+import { IProcessItem } from "@/pages/OrderRoutes/Service/Manufacturing/types";
 
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;

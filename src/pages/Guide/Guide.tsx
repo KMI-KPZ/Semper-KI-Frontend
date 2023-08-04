@@ -2,8 +2,11 @@ import { Heading } from "@component-library/Typography";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
-import { IFilterAnswer, IFilterItem } from "../Process/Filter/Filter";
 import useGuideState from "./hooks/useGuideState";
+import {
+  IFilterAnswer,
+  IFilterItem,
+} from "../OrderRoutes/SubOrder/Service/Manufacturing/Filter/Filter";
 
 export interface IGuide {
   title: string;

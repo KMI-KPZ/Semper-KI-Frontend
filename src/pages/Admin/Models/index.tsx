@@ -1,4 +1,4 @@
-import { IModel } from "@/pages/Process/Model/types";
+import { IModel } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Model/types";
 import { Heading } from "@component-library/Typography";
 import {
   Paper,

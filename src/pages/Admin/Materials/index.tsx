@@ -1,4 +1,4 @@
-import { IMaterial } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Material/Material";
+import { MaterialProps } from "@/pages/OrderRoutes/Service/Manufacturing/Material/Material";
 import { Heading } from "@component-library/Typography";
 import {
   Paper,
@@ -30,7 +30,7 @@ const AdminMaterials: React.FC<Props> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {[].map((material: IMaterial, index: number) => (
+            {[].map((material: MaterialProps, index: number) => (
               <TableRow
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

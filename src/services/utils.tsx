@@ -1,7 +1,5 @@
-import logger from "@/hooks/useLogger";
 import { Address, UserType } from "@/hooks/useUser/types";
-import { EProcessStatusType } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Header/types";
-import { IModel } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Model/types";
+import { ModelProps } from "@/pages/OrderRoutes/Service/Manufacturing/Model/types";
 
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;
@@ -100,7 +98,7 @@ export const parseAddress = (unparsedAddress: string): Address => {
   return newAddress;
 };
 
-export const getModelURI = (model: IModel): string => {
+export const getModelURI = (model: ModelProps): string => {
   const convertStringForImage = (input: string): string => {
     let base64 = input;
     base64 = base64.slice(2);

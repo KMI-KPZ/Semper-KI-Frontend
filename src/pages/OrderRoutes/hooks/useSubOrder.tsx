@@ -3,18 +3,15 @@ import logger from "@/hooks/useLogger";
 import {
   useMutation,
   UseMutationResult,
-  useQuery,
   useQueryClient,
-  UseQueryResult,
 } from "@tanstack/react-query";
-import { OrderProps, OrderState, useOrder } from "./useOrder";
+import { OrderState, useOrder } from "./useOrder";
 import {
   ServiceManufacturingProps,
   UpdateServiceManufacturingProps,
-} from "../SubOrder/Service/Manufacturing/types";
+} from "../Service/Manufacturing/types";
+import { ServiceModellingProps } from "../Service/Modelling/Modelling";
 import { useNavigate, useParams } from "react-router-dom";
-import { ServiceProps } from "../SubOrder/Service/Service";
-import { ServiceModellingProps } from "../SubOrder/Service/Modelling/Modelling";
 
 interface ReturnProps {
   deleteSubOrder: UseMutationResult<string, Error, string, unknown>;

@@ -2,37 +2,41 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useGuide from "../hooks/useGuide";
 import { LoadingAnimation } from "@component-library/Loading";
-import { EGuideQuestionType, IGuideOption, IGuideQuestion } from "../Guide";
+import {
+  GuideQuestionType,
+  GuideOptionProps,
+  GuideQuestionProps,
+} from "../Guide";
 import GuideOverview from "./components/overview";
 import GuideAnswers from "./components/answer";
 import GuideQuestion from "./components/question";
 import logger from "@/hooks/useLogger";
 import {
-  IFilterAnswer,
-  IFilterItem,
-  IFilterQuestion,
-  IRangeMinMax,
-} from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Filter/Filter";
-import useFilter from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Filter/hooks/useFilter";
+  FilterItemProps,
+  FilterQuestionProps,
+  FilterAnswerProps,
+  RangeMinMaxProps,
+} from "@/pages/OrderRoutes/Service/Manufacturing/Filter/Filter";
+import useFilter from "@/pages/OrderRoutes/Service/Manufacturing/Filter/hooks/useFilter";
 
 const getQuestionByFilterId = (
   filterId: number,
-  filters: IFilterItem[]
-): IFilterQuestion =>
-  filters.filter((filterItem: IFilterItem) => filterItem.id === filterId)[0]
+  filters: FilterItemProps[]
+): FilterQuestionProps =>
+  filters.filter((filterItem: FilterItemProps) => filterItem.id === filterId)[0]
     .question;
 
 interface Props {
-  setFilter(filter: IFilterItem[]): void;
+  setFilter(filter: FilterItemProps[]): void;
 }
 
 interface State {
   activeQuestionIndex: number;
-  questions: IGuideQuestion[];
+  questions: GuideQuestionProps[];
   overview: boolean;
 }
 
-export const isIRangeMinMax = (value: any): value is IRangeMinMax => {
+export const isIRangeMinMax = (value: any): value is RangeMinMaxProps => {
   return !(
     (value as any).min === undefined && (value as any).max === undefined
   );
@@ -67,11 +71,11 @@ const Guide: React.FC<Props> = (props) => {
   }, [guideQuestions]);
 
   const createFilterItem = (
-    questionType: EGuideQuestionType,
+    questionType: GuideQuestionType,
     filterId: number,
-    answers: IFilterAnswer[]
-  ): IFilterItem => {
-    const guideAnswer = (): IFilterAnswer => {
+    answers: FilterAnswerProps[]
+  ): FilterItemProps => {
+    const guideAnswer = (): FilterAnswerProps => {
       switch (questionType) {
         case 0:
           return {
@@ -108,16 +112,18 @@ const Guide: React.FC<Props> = (props) => {
     };
   };
 
-  const convertToGuideAnswer = (questions: IGuideQuestion[]): IFilterItem[] => {
+  const convertToGuideAnswer = (
+    questions: GuideQuestionProps[]
+  ): FilterItemProps[] => {
     return questions
       .filter(
-        (question: IGuideQuestion) =>
+        (question: GuideQuestionProps) =>
           question.options.filter(
-            (option: IGuideOption) =>
+            (option: GuideOptionProps) =>
               option.checked === true && option.answer !== null
           ).length > 0
       )
-      .map((question: IGuideQuestion) => {
+      .map((question: GuideQuestionProps) => {
         const options = question.options.map((option) => option.answer);
         return createFilterItem(question.type, question.filterId, options);
       });
@@ -127,22 +133,22 @@ const Guide: React.FC<Props> = (props) => {
     return state.activeQuestionIndex + 1;
   };
 
-  const setOptions = (filterId: number, options: IGuideOption[]) => {
+  const setOptions = (filterId: number, options: GuideOptionProps[]) => {
     // logger("Guide | setOptions", options);
     setState((prevState) => ({
       ...prevState,
       questions: [
         ...prevState.questions.filter(
-          (question: IGuideQuestion) => question.filterId < filterId
+          (question: GuideQuestionProps) => question.filterId < filterId
         ),
         {
           ...prevState.questions.filter(
-            (question: IGuideQuestion) => question.filterId === filterId
+            (question: GuideQuestionProps) => question.filterId === filterId
           )[0],
           options: options,
         },
         ...prevState.questions.filter(
-          (question: IGuideQuestion) => question.filterId > filterId
+          (question: GuideQuestionProps) => question.filterId > filterId
         ),
       ],
     }));

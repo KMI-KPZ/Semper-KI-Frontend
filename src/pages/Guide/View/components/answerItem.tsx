@@ -1,11 +1,11 @@
 import { Heading } from "@component-library/Typography";
 import React from "react";
-import { EGuideQuestionType } from "../../Guide";
+import { GuideQuestionType } from "../../Guide";
 import GuideOptions, { IGuideOptionProps } from "./options";
 
 interface Props extends IGuideOptionProps {
   title: string;
-  type: EGuideQuestionType;
+  type: GuideQuestionType;
   active: boolean;
 }
 

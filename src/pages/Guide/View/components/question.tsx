@@ -1,12 +1,16 @@
 import { Heading } from "@component-library/Typography";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { EGuideQuestionState, IGuideOption, IGuideQuestion } from "../../Guide";
+import {
+  EGuideQuestionState,
+  GuideOptionProps,
+  GuideQuestionProps,
+} from "../../Guide";
 import GuideOptions from "./options";
 
 interface Props {
-  question: IGuideQuestion;
-  setOptions(filterId: number, options: IGuideOption[]): void;
+  question: GuideQuestionProps;
+  setOptions(filterId: number, options: GuideOptionProps[]): void;
   selectQuestion(activeQuestionIndex?: number): void;
   activeQuestionIndex: number;
 }
@@ -33,9 +37,9 @@ const GuideQuestion: React.FC<Props> = (props) => {
     setState((prevState) => ({ ...prevState, options }));
   }, [question]);
 
-  const isAnyOptionChecked = (options: IGuideOption[]): boolean => {
+  const isAnyOptionChecked = (options: GuideOptionProps[]): boolean => {
     let checked: boolean = false;
-    options.forEach((option: IGuideOption) => {
+    options.forEach((option: GuideOptionProps) => {
       if (option.checked === true) {
         checked = true;
       }

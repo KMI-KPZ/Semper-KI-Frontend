@@ -1,4 +1,4 @@
-import { EGuideQuestionState, IGuideOption } from "../../Guide";
+import { EGuideQuestionState, GuideOptionProps } from "../../Guide";
 import GuideButtons from "./buttons";
 import { IGuideOptionProps } from "./options";
 
@@ -35,20 +35,20 @@ const GuideMultiSelection: React.FC<Props> = (props) => {
     if (setOptions !== undefined)
       setOptions(filterId, [
         ...options.filter(
-          (option: IGuideOption, optionIndex: number) => optionIndex < index
+          (option: GuideOptionProps, optionIndex: number) => optionIndex < index
         ),
         {
           ...options.filter(
-            (FOption: IGuideOption, FOptionIndex: number) =>
+            (FOption: GuideOptionProps, FOptionIndex: number) =>
               FOptionIndex === index
           )[0],
           checked: !options.filter(
-            (FOption: IGuideOption, FOptionIndex: number) =>
+            (FOption: GuideOptionProps, FOptionIndex: number) =>
               FOptionIndex === index
           )[0].checked,
         },
         ...options.filter(
-          (option: IGuideOption, optionIndex: number) => optionIndex > index
+          (option: GuideOptionProps, optionIndex: number) => optionIndex > index
         ),
       ]);
   };
@@ -65,7 +65,7 @@ const GuideMultiSelection: React.FC<Props> = (props) => {
     <div
       className={`guide-question-cards ${EGuideQuestionState[questionState]}`}
     >
-      {options.map((option: IGuideOption, index: number) => (
+      {options.map((option: GuideOptionProps, index: number) => (
         <div
           key={index}
           className={`guide-question-card ${EGuideQuestionState[questionState]}`}

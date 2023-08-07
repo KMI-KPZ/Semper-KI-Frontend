@@ -2,14 +2,18 @@ import { Heading } from "@component-library/Typography";
 import { Button } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { EGuideQuestionState, IGuideOption, IGuideQuestion } from "../../Guide";
+import {
+  EGuideQuestionState,
+  GuideOptionProps,
+  GuideQuestionProps,
+} from "../../Guide";
 import GuideOptions from "./options";
 
 interface Props {
-  questions: IGuideQuestion[];
+  questions: GuideQuestionProps[];
   selectQuestion(filterId: number): void;
   applyFilter(): void;
-  setOptions(filterId: number, options: IGuideOption[]): void;
+  setOptions(filterId: number, options: GuideOptionProps[]): void;
 }
 
 const GuideOverview: React.FC<Props> = (props) => {
@@ -23,7 +27,7 @@ const GuideOverview: React.FC<Props> = (props) => {
   return (
     <div className="flex max-h-[80vh] flex-col gap-5 overflow-y-auto bg-white p-5">
       <Heading variant="h1">{t("Guide.Overview.GuideOverview.header")}</Heading>
-      {questions.map((question: IGuideQuestion, index: number) => (
+      {questions.map((question: GuideQuestionProps, index: number) => (
         <div
           className="guide-overview-question"
           key={index}

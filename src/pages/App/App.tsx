@@ -47,11 +47,11 @@ import Modal from "@component-library/Modal";
 import usePing from "@/hooks/usePing";
 import Orders from "../Orders/Orders";
 import OrderRoutes from "../OrderRoutes/OrderRoutes";
-import { IFilterItem } from "../OrderRoutes/SubOrder/Service/Manufacturing/Filter/Filter";
+import { FilterItemProps } from "../OrderRoutes/Service/Manufacturing/Filter/Filter";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
-  guideFilter: IFilterItem[];
+  guideFilter: FilterItemProps[];
   demoID?: string;
 };
 
@@ -93,7 +93,7 @@ const App: React.FC = () => {
   const { isMagazineUp } = usePing();
   const { t } = useTranslation();
 
-  const setFilter = (guideFilter: IFilterItem[]): void => {
+  const setFilter = (guideFilter: FilterItemProps[]): void => {
     setState((prevState) => ({ ...prevState, guideFilter }));
   };
 

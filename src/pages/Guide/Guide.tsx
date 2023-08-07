@@ -4,33 +4,33 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import useGuideState from "./hooks/useGuideState";
 import {
-  IFilterAnswer,
-  IFilterItem,
-} from "../OrderRoutes/SubOrder/Service/Manufacturing/Filter/Filter";
+  FilterItemProps,
+  FilterAnswerProps,
+} from "../OrderRoutes/Service/Manufacturing/Filter/Filter";
 
-export interface IGuide {
+export interface GuideProps {
   title: string;
-  questions: IGuideQuestion[];
+  questions: GuideQuestionProps[];
 }
 
-export interface IGuideQuestion {
-  type: EGuideQuestionType;
+export interface GuideQuestionProps {
+  type: GuideQuestionType;
   filterId: number;
   title: string;
-  options: IGuideOption[];
+  options: GuideOptionProps[];
 }
 
-export enum EGuideQuestionType {
+export enum GuideQuestionType {
   "selection",
   "multiSelection",
   "range",
 }
 
-export interface IGuideOption {
+export interface GuideOptionProps {
   checked: boolean;
   title?: string;
   icon?: string;
-  answer: IFilterAnswer;
+  answer: FilterAnswerProps;
 }
 
 export enum EGuideQuestionState {
@@ -40,7 +40,7 @@ export enum EGuideQuestionState {
 }
 
 interface Props {
-  setFilter(filter: IFilterItem[]): void;
+  setFilter(filter: FilterItemProps[]): void;
 }
 
 export interface GuideState {

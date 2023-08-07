@@ -1,4 +1,5 @@
-import { IModel } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Model/types";
+import { ModelProps } from "@/pages/OrderRoutes/Service/Manufacturing/Model/types";
+
 
 export class ModelBuilder {
     id: string ="modelID";
@@ -44,7 +45,7 @@ export class ModelBuilder {
     }
     
 
-    build():IModel {
+    build():ModelProps {
         return {
             id: this.id,
             title: this.title,

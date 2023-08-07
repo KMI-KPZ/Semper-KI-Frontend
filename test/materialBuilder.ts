@@ -1,4 +1,4 @@
-import { IMaterial } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Material/Material";
+import { MaterialProps } from "@/pages/OrderRoutes/Service/Manufacturing/Material/Material";
 
 
 export class MaterialBuilder {
@@ -25,7 +25,7 @@ export class MaterialBuilder {
     }
     
 
-    build():IMaterial {
+    build():MaterialProps {
         return {
             id: this.id,
             title: this.title,

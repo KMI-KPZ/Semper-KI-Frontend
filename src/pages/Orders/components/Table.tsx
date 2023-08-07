@@ -74,18 +74,19 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
                     children={<DeleteIcon />}
                     onClick={handleOnClickButtonDelete}
                   />
-                  <Button
-                    variant="secondary"
-                    title={t("order.overview.components.table.button.detail")}
-                    children={<VisibilityIcon />}
-                    to={`/order/${flatOrder.id}`}
-                  />
-                  {flatOrder.state >= OrderState.REQUESTED ? null : (
+                  {flatOrder.state < OrderState.REQUESTED ? (
                     <Button
                       variant="secondary"
                       title={t("order.overview.components.table.button.edit")}
                       children={<EditIcon />}
-                      to={`/order/${flatOrder.id}/process`}
+                      to={`/order/${flatOrder.id}`}
+                    />
+                  ) : (
+                    <Button
+                      variant="secondary"
+                      title={t("order.overview.components.table.button.detail")}
+                      children={<VisibilityIcon />}
+                      to={`/order/${flatOrder.id}`}
                     />
                   )}
                 </div>

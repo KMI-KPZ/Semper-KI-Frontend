@@ -1,7 +1,7 @@
 import {
   EGuideQuestionState,
-  EGuideQuestionType,
-  IGuideOption,
+  GuideQuestionType,
+  GuideOptionProps,
 } from "@/pages/Guide/Guide";
 import React from "react";
 import GuideMultiSelection from "./multiSelection";
@@ -9,14 +9,14 @@ import GuideRangeSlider from "./rangeSlider";
 import GuideSelection from "./selection";
 
 interface Props extends IGuideOptionProps {
-  type: EGuideQuestionType;
+  type: GuideQuestionType;
 }
 
 export interface IGuideOptionProps {
-  options: IGuideOption[];
+  options: GuideOptionProps[];
   filterId: number;
   questionState: EGuideQuestionState;
-  setOptions?(filterId: number, options: IGuideOption[]): void;
+  setOptions?(filterId: number, options: GuideOptionProps[]): void;
   confirmOptions?(filterId: number): void;
   skipQuestion?(): void;
   goBackQuestion?(): void;
@@ -36,7 +36,7 @@ const GuideOptions: React.FC<Props> = (props) => {
 
   const getGuideQuestionCards = (): JSX.Element => {
     switch (type) {
-      case EGuideQuestionType.multiSelection:
+      case GuideQuestionType.multiSelection:
         return (
           <GuideMultiSelection
             filterId={filterId}
@@ -48,7 +48,7 @@ const GuideOptions: React.FC<Props> = (props) => {
             goBackQuestion={goBackQuestion}
           />
         );
-      case EGuideQuestionType.selection:
+      case GuideQuestionType.selection:
         return (
           <GuideSelection
             filterId={filterId}
@@ -60,7 +60,7 @@ const GuideOptions: React.FC<Props> = (props) => {
             goBackQuestion={goBackQuestion}
           />
         );
-      case EGuideQuestionType.range:
+      case GuideQuestionType.range:
         return (
           <GuideRangeSlider
             filterId={filterId}

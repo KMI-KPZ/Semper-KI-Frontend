@@ -1,11 +1,10 @@
-import { getModelURI } from "@/services/utils";
 import { LoadingAnimation } from "@component-library/Loading";
 import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { IRequestState } from "../hooks/useCheckout";
 import { SubOrderProps } from "@/pages/OrderRoutes/hooks/useSubOrder";
-import { ServiceType } from "@/pages/OrderRoutes/SubOrder/Service/hooks/useService";
+import { ServiceType } from "@/pages/OrderRoutes/Service/hooks/useService";
 
 type Props = {
   suborder: SubOrderProps;

@@ -1,4 +1,4 @@
-import { IModel } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Model/types";
+import { ModelProps } from "@/pages/OrderRoutes/Service/Manufacturing/Model/types";
 import { Heading } from "@component-library/Typography";
 import {
   Paper,
@@ -33,7 +33,7 @@ const AdminModels: React.FC<Props> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {[].map((model: IModel, index: number) => (
+            {[].map((model: ModelProps, index: number) => (
               <TableRow
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

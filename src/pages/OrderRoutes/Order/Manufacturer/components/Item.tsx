@@ -2,10 +2,9 @@ import React from "react";
 import useManufacturer from "../hooks/useManufacturer";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
-import { getModelURI } from "@/services/utils";
 import { Heading } from "@component-library/Typography";
 import { SubOrderProps } from "@/pages/OrderRoutes/hooks/useSubOrder";
-import { ServiceType } from "@/pages/OrderRoutes/SubOrder/Service/hooks/useService";
+import { ServiceType } from "@/pages/OrderRoutes/Service/hooks/useService";
 
 interface Props {
   itemIndex: number;

@@ -1,14 +1,18 @@
 import { Heading } from "@component-library/Typography";
 import React, { useTransition } from "react";
 import { useTranslation } from "react-i18next";
-import { EGuideQuestionState, IGuideOption, IGuideQuestion } from "../../Guide";
+import {
+  EGuideQuestionState,
+  GuideOptionProps,
+  GuideQuestionProps,
+} from "../../Guide";
 import GuideAnswer from "./answerItem";
 import logger from "@/hooks/useLogger";
 
 interface Props {
   activeQuestionIndex: number;
-  questions: IGuideQuestion[];
-  setOptions(filterId: number, options: IGuideOption[]): void;
+  questions: GuideQuestionProps[];
+  setOptions(filterId: number, options: GuideOptionProps[]): void;
   selectQuestion(): void;
 }
 
@@ -34,10 +38,10 @@ const GuideAnswers: React.FC<Props> = (props) => {
       </Heading>
       {questions
         .filter(
-          (question: IGuideQuestion, index: number) =>
+          (question: GuideQuestionProps, index: number) =>
             index <= activeQuestionIndex
         )
-        .map((question: IGuideQuestion, questionIndex: number) => (
+        .map((question: GuideQuestionProps, questionIndex: number) => (
           <GuideAnswer
             questionState={EGuideQuestionState.answer}
             active={questionIndex === activeQuestionIndex}

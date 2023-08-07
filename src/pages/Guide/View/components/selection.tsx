@@ -1,4 +1,4 @@
-import { EGuideQuestionState, IGuideOption } from "@/pages/Guide/Guide";
+import { EGuideQuestionState, GuideOptionProps } from "@/pages/Guide/Guide";
 import React from "react";
 import GuideButtons from "./buttons";
 import { IGuideOptionProps } from "./options";
@@ -37,19 +37,21 @@ const GuideSelection: React.FC<Props> = (props) => {
       setOptions(filterId, [
         ...options
           .filter(
-            (option: IGuideOption, optionIndex: number) => optionIndex < index
+            (option: GuideOptionProps, optionIndex: number) =>
+              optionIndex < index
           )
           .map((FOption) => ({ ...FOption, checked: false })),
         {
           ...options.filter(
-            (FOption: IGuideOption, FOptionIndex: number) =>
+            (FOption: GuideOptionProps, FOptionIndex: number) =>
               FOptionIndex === index
           )[0],
           checked: true,
         },
         ...options
           .filter(
-            (option: IGuideOption, optionIndex: number) => optionIndex > index
+            (option: GuideOptionProps, optionIndex: number) =>
+              optionIndex > index
           )
           .map((FOption) => ({ ...FOption, checked: false })),
       ]);
@@ -67,7 +69,7 @@ const GuideSelection: React.FC<Props> = (props) => {
     <div
       className={`guide-question-cards ${EGuideQuestionState[questionState]}`}
     >
-      {options.map((option: IGuideOption, index: number) => (
+      {options.map((option: GuideOptionProps, index: number) => (
         <div
           key={index}
           className={`guide-question-card ${EGuideQuestionState[questionState]}`}

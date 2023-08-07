@@ -3,8 +3,8 @@ import { User } from "@/hooks/useUser/types";
 import { useState } from "react";
 import logger from "@/hooks/useLogger";
 import { SubOrderProps } from "@/pages/OrderRoutes/hooks/useSubOrder";
-import { IModel } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Model/types";
-import { IMaterial } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Material/Material";
+import { ModelProps } from "@/pages/OrderRoutes/Service/Manufacturing/Model/types";
+import { MaterialProps } from "@/pages/OrderRoutes/Service/Manufacturing/Material/Material";
 
 interface ReturnProps {
   data: IAdminData;
@@ -14,8 +14,8 @@ interface ReturnProps {
 
 export interface IAdminData {
   users: User[];
-  models: IModel[];
-  materials: IMaterial[];
+  models: ModelProps[];
+  materials: MaterialProps[];
   printers: any[];
   orders: SubOrderProps[];
 }

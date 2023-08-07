@@ -1,4 +1,4 @@
-import { EGuideQuestionState, IGuideOption } from "@/pages/Guide/Guide";
+import { EGuideQuestionState, GuideOptionProps } from "@/pages/Guide/Guide";
 import { Slider } from "@mui/material";
 import React from "react";
 import GuideButtons from "./buttons";
@@ -6,7 +6,7 @@ import { IGuideOptionProps } from "./options";
 
 interface Props extends IGuideOptionProps {}
 
-const calcValue = (options: IGuideOption[]): number[] => {
+const calcValue = (options: GuideOptionProps[]): number[] => {
   let values: number[] = [0, options.length - 1];
 
   const answers: number[] = options
@@ -37,7 +37,7 @@ const GuideRangeSlider: React.FC<Props> = (props) => {
   const min = 0;
   const max = options.length - 1;
 
-  const marks = options.map((option: IGuideOption, index: number) => ({
+  const marks = options.map((option: GuideOptionProps, index: number) => ({
     value: index,
     label: option.title,
   }));
@@ -60,28 +60,28 @@ const GuideRangeSlider: React.FC<Props> = (props) => {
       setOptions(filterId, [
         ...options
           .filter(
-            (option: IGuideOption, optionIndex: number) =>
+            (option: GuideOptionProps, optionIndex: number) =>
               optionIndex < value[0]
           )
-          .map((MOption: IGuideOption, index: number) => ({
+          .map((MOption: GuideOptionProps, index: number) => ({
             ...MOption,
             checked: false,
           })),
         ...options
           .filter(
-            (FOption: IGuideOption, FOptionIndex: number) =>
+            (FOption: GuideOptionProps, FOptionIndex: number) =>
               FOptionIndex >= value[0] && FOptionIndex <= value[1]
           )
-          .map((MOption: IGuideOption, index: number) => ({
+          .map((MOption: GuideOptionProps, index: number) => ({
             ...MOption,
             checked: true,
           })),
         ...options
           .filter(
-            (option: IGuideOption, optionIndex: number) =>
+            (option: GuideOptionProps, optionIndex: number) =>
               optionIndex > value[1]
           )
-          .map((MOption: IGuideOption, index: number) => ({
+          .map((MOption: GuideOptionProps, index: number) => ({
             ...MOption,
             checked: false,
           })),

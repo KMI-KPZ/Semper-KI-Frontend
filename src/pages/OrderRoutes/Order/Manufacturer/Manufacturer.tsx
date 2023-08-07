@@ -7,7 +7,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { LoadingSuspense } from "@component-library/Loading";
 import ProcessManufacturerItem from "./components/Item";
 import { Heading } from "@component-library/Typography";
-import { IProcessItem } from "../../SubOrder/Service/Manufacturing/types";
+import { useOrder } from "../../hooks/useOrder";
 
 interface Props {}
 
@@ -24,6 +24,7 @@ export interface IManufacturer {
 const ProcessManufacturer: React.FC<Props> = (props) => {
   const {} = props;
   const navigate = useNavigate();
+  const { orderQuery } = useOrder();
   const [state, setState] = useState<State>({
     manufacturerIDs: [].map(() => ""),
     error: false,
@@ -54,14 +55,6 @@ const ProcessManufacturer: React.FC<Props> = (props) => {
     //   manufacturerIDs.filter((manufacturerIndex) => manufacturerIndex !== "")
     //     .length === manufacturerIDs.length && cart.length > 0
     // );
-  };
-
-  const hydrateProcessItems = (): IProcessItem[] => {
-    return [];
-    // return cart.map((processItem, index) => ({
-    //   ...processItem,
-    //   manufacturerID: manufacturerIDs[index],
-    // }));
   };
 
   const handleOnCLickCheck = () => {
@@ -102,10 +95,10 @@ const ProcessManufacturer: React.FC<Props> = (props) => {
         </div>
       ) : null}
       <div className="flex w-full flex-col items-center justify-start gap-5">
-        {true ? (
-          [].map((processItem, index) => (
+        {orderQuery.data?.subOrders ? (
+          orderQuery.data?.subOrders.map((subOrder, index) => (
             <ProcessManufacturerItem
-              processItem={processItem}
+              subOrder={subOrder}
               key={index}
               itemIndex={index}
               manufacturerID={manufacturerIDs[index]}

@@ -4,7 +4,6 @@ import { IModel } from "../Model/types";
 import { IPostProcessing } from "../PostProcessing/PostProcessing";
 
 export interface ServiceManufacturingProps extends ServiceProps {
-  title: string;
   model?: IModel;
   material?: IMaterial;
   postProcessings?: IPostProcessing[];
@@ -27,7 +26,7 @@ export interface ServiceManufacturingState {
 
 export interface ServiceManufacturingContextReturnProps {
   processState: ServiceManufacturingState;
-  setGridState(grid: boolean): void;
-  setFilterOpen(open: boolean): void;
+  setGrid(grid: boolean): void;
+  setFilter(open: boolean): void;
   setSearchInput(name: string): void;
 }

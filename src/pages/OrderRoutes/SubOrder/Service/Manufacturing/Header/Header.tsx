@@ -1,20 +1,19 @@
 import React, { useContext } from "react";
 import { ServiceManufacturingContext } from "../Manufacturing";
 import ProcessHeaderSearch from "./Search/Search";
-import ProcessHeaderCart from "./Cart/Cart";
-import { ProcessHeaderWizard } from "./Wizard/Wizard";
+import { ServiceManufacturingWizard } from "./Wizard/Wizard";
 import { Heading } from "@component-library/Typography";
+import { useLocation } from "react-router-dom";
 
 const ProcessHeader: React.FC = () => {
-  const { processState } = useContext(ServiceManufacturingContext);
-  const { progress } = processState;
+  const location = useLocation();
 
   return (
     <div className="flex flex-col">
       <div className="flex flex-col gap-2 bg-white p-2">
-        <ProcessHeaderWizard processState={processState} />
+        <ServiceManufacturingWizard />
         <Heading variant="h1" className="text-center">
-          {progress.title}
+          {location.pathname[-1]}
         </Heading>
         <ProcessHeaderSearch />
       </div>

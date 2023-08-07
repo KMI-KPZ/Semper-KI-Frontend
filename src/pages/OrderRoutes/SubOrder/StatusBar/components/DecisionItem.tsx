@@ -3,7 +3,7 @@ import { UserType } from "@/hooks/useUser/types";
 import { useTranslation } from "react-i18next";
 import { StatusData } from "../StatusBar";
 import { Divider } from "@component-library/Divider";
-import { OrderState } from "@/pages/OrderRoutes/Order/hooks/useOrder";
+import { OrderState } from "@/pages/OrderRoutes/hooks/useOrder";
 
 type StatusDoubleItemType = {
   item1: StatusData;

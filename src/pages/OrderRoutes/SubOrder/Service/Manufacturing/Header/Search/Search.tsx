@@ -10,9 +10,9 @@ import { useTranslation } from "react-i18next";
 const ProcessHeaderSearch: React.FC = () => {
   const {
     processState,
-    setGridState,
+    setGrid: setGridState,
     setSearchInput: searchModels,
-    setFilterOpen,
+    setFilter: setFilterOpen,
   } = useContext(ServiceManufacturingContext);
   const [search, setSearch] = useState<string>("");
   const [touched, setTouched] = useState<boolean>(false);

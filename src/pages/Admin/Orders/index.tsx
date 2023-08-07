@@ -1,4 +1,5 @@
-import { OrderState, SubOrder } from "@/pages/OrderRoutes/Order/hooks/useOrder";
+import { OrderState } from "@/pages/OrderRoutes/hooks/useOrder";
+import { SubOrderProps } from "@/pages/OrderRoutes/hooks/useSubOrder";
 import { Heading } from "@component-library/Typography";
 import {
   Paper,
@@ -32,7 +33,7 @@ const AdminOrders: React.FC<Props> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {[].map((order: SubOrder, index: number) => (
+            {[].map((order: SubOrderProps, index: number) => (
               <TableRow
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

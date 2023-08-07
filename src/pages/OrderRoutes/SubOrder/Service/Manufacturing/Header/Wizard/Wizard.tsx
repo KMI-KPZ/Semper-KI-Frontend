@@ -1,46 +1,30 @@
 import React from "react";
-import ProcessHeaderWizardCard from "./components/Card";
+import ServiceManufacturingWizardItem from "./components/Card";
 import _wizardItems from "./data/items.json";
-import { IProcessItem, ServiceManufacturingState } from "../../types";
-import { EProcessStatusType } from "../types";
-const wizardItems: IWizardItem[] = _wizardItems;
+import { useLocation } from "react-router-dom";
+import useSubOrder from "@/pages/OrderRoutes/hooks/useSubOrder";
+const wizardItems: WizardItemProps[] = _wizardItems;
 
-interface IWizardItem {
+interface WizardItemProps {
   title: string;
-  links: string[];
+  link: string;
 }
 
-interface Props {
-  processState: ServiceManufacturingState;
-}
+interface Props {}
 
-export const ProcessHeaderWizard: React.FC<Props> = (props) => {
-  const { processState } = props;
-  const { activeItemIndex, items, progress } = processState;
-  const activeProcess: IProcessItem = items[activeItemIndex];
+export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
+  const {} = props;
+  const location = useLocation();
 
-  const getStatusByIndex = (index: number): EProcessStatusType => {
-    switch (index) {
-      case 0:
-        return activeProcess.model === undefined ? 2 : 0;
-      case 1:
-        return activeProcess.material === undefined ? 2 : 0;
-      case 2:
-        return activeProcess.postProcessings === undefined ? 2 : 0;
-      default:
-        return 2;
-    }
-  };
-
+  const { getCurrentSubOrder } = useSubOrder();
   return (
     <div className="flex flex-col items-center justify-around gap-3 sm:flex-row sm:gap-0">
-      {wizardItems.map((wizardItem: IWizardItem, index: number) => (
-        <ProcessHeaderWizardCard
-          statusType={getStatusByIndex(index)}
+      {wizardItems.map((wizardItem: WizardItemProps, index: number) => (
+        <ServiceManufacturingWizardItem
           key={index}
           title={wizardItem.title}
-          path={wizardItem.links[0]}
-          active={wizardItem.links.includes(progress.link) ? true : false}
+          path={wizardItem.link}
+          active={location.pathname.includes(wizardItem.link)}
         />
       ))}
     </div>

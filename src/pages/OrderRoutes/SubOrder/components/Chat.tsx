@@ -4,11 +4,12 @@ import SendIcon from "@mui/icons-material/Send";
 import { useTranslation } from "react-i18next";
 import { User } from "@/hooks/useUser/types";
 import { Heading } from "@component-library/Typography";
-import { IChatMessage, useOrder } from "../../hooks/useOrder";
+import { useOrder } from "../../hooks/useOrder";
+import useSubOrder, { ChatMessageProps } from "../../hooks/useSubOrder";
 
 interface Props {
   closeMenu(): void;
-  chat: IChatMessage[];
+  chat: ChatMessageProps[];
   user?: User;
   orderCollectionID: string;
   orderID: string;
@@ -24,7 +25,7 @@ const Chat: React.FC<Props> = (props) => {
   const { chat, user, closeMenu, orderCollectionID, orderID } = props;
   const [state, setState] = useState<State>({});
   const { height, messageText } = state;
-  const { updateOrder } = useOrder();
+  const { updateSubOrder } = useSubOrder();
 
   const handleOnChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setState((prevState) => ({
@@ -36,10 +37,8 @@ const Chat: React.FC<Props> = (props) => {
 
   const handleOnClickButtonSend = () => {
     if (messageText !== undefined && messageText !== "")
-      updateOrder.mutate(
+      updateSubOrder.mutate(
         {
-          orderCollectionID: orderCollectionID,
-          orderID: orderID,
           chat: {
             date: new Date().toISOString(),
             text: messageText,
@@ -83,7 +82,7 @@ const Chat: React.FC<Props> = (props) => {
         {chat
           .slice(0)
           .reverse()
-          .map((chatMessage: IChatMessage, index: number) => (
+          .map((chatMessage: ChatMessageProps, index: number) => (
             <div
               key={index}
               className={`flex w-full flex-col gap-3 ${

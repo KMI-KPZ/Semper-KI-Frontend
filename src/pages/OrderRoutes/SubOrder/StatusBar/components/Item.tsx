@@ -3,7 +3,7 @@ import { UserType } from "@/hooks/useUser/types";
 import { useTranslation } from "react-i18next";
 import { ReactNode } from "react";
 import { StatusData } from "../StatusBar";
-import { OrderState } from "@/pages/OrderRoutes/Order/hooks/useOrder";
+import { OrderState } from "@/pages/OrderRoutes/hooks/useOrder";
 
 type StatusItemType = {
   item: StatusData;

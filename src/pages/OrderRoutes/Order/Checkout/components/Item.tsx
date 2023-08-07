@@ -4,26 +4,23 @@ import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { IRequestState } from "../hooks/useCheckout";
-import { IProcessItem } from "@/pages/OrderRoutes/Service/Manufacturing/types";
+import { SubOrderProps } from "@/pages/OrderRoutes/hooks/useSubOrder";
+import { ServiceType } from "@/pages/OrderRoutes/SubOrder/Service/hooks/useService";
 
 type Props = {
-  process: IProcessItem;
+  suborder: SubOrderProps;
   printable: IRequestState;
   price: IRequestState;
   logistics: IRequestState;
 };
 
 const OrderCheckoutItem: React.FC<Props> = (props) => {
-  const { process, logistics, price, printable } = props;
+  const { suborder, logistics, price, printable } = props;
   const { t } = useTranslation();
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-2 bg-white p-2 sm:basis-[48%] md:basis-[32%]">
-      <Heading variant="h2">{process.title}</Heading>
-      <img
-        src={getModelURI(process.model!)}
-        className="max-h-40 w-full max-w-[200px] object-cover md:max-h-80 md:max-w-xs"
-      />
+      <Heading variant="h2">{ServiceType[suborder.service.type]}</Heading>
       <div className="flex w-full flex-row items-center justify-between px-5">
         <Heading variant="h3">{t("CheckoutItem.printable")}:</Heading>
         {printable.loading === true ? <LoadingAnimation text /> : null}

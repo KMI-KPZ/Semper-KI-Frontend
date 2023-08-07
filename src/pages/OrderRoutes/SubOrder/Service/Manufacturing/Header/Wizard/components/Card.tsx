@@ -1,18 +1,16 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import ProcessHeaderStatusIcon from "../../components/StatusIcon";
 import { EProcessStatusType } from "../../types";
 
 interface Props {
   title: string;
   path: string;
   active: boolean;
-  statusType: EProcessStatusType;
 }
 
-const ProcessHeaderWizardCard: React.FC<Props> = (props) => {
-  const { title, path, active, statusType } = props;
+const ServiceManufacturingWizardItem: React.FC<Props> = (props) => {
+  const { title, path, active } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -36,9 +34,9 @@ const ProcessHeaderWizardCard: React.FC<Props> = (props) => {
           <hr className="w-full border-b-2 border-b-black" />
         ) : null}
       </div>
-      <ProcessHeaderStatusIcon statusType={statusType} />
+      {/* <ProcessHeaderStatusIcon statusType={statusType} /> */}
     </div>
   );
 };
 
-export default ProcessHeaderWizardCard;
+export default ServiceManufacturingWizardItem;

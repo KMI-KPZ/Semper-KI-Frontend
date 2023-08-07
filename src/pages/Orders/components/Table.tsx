@@ -14,7 +14,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import EditIcon from "@mui/icons-material/Edit";
 import { FlatOrder } from "@/pages/Orders/hooks/useFlatOrders";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { OrderState } from "@/pages/OrderRoutes/Order/hooks/useOrder";
+import { OrderState } from "@/pages/OrderRoutes/hooks/useOrder";
 
 interface OrdersTableProps {
   flatOrders: FlatOrder[];

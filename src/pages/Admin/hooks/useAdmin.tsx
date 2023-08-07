@@ -2,7 +2,7 @@ import { getCustomAxios } from "@/hooks/useCustomAxios";
 import { User } from "@/hooks/useUser/types";
 import { useState } from "react";
 import logger from "@/hooks/useLogger";
-import { SubOrder } from "@/pages/OrderRoutes/Order/hooks/useOrder";
+import { SubOrderProps } from "@/pages/OrderRoutes/hooks/useSubOrder";
 import { IModel } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Model/types";
 import { IMaterial } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Material/Material";
 
@@ -17,7 +17,7 @@ export interface IAdminData {
   models: IModel[];
   materials: IMaterial[];
   printers: any[];
-  orders: SubOrder[];
+  orders: SubOrderProps[];
 }
 
 const useAdmin = (): ReturnProps => {

@@ -12,18 +12,20 @@ import {
   ServiceManufacturingProps,
   UpdateServiceManufacturingProps,
 } from "../SubOrder/Service/Manufacturing/types";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ServiceProps } from "../SubOrder/Service/Service";
+import { ServiceModellingProps } from "../SubOrder/Service/Modelling/Modelling";
 
 interface ReturnProps {
   deleteSubOrder: UseMutationResult<string, Error, string, unknown>;
-  createSubOrder: UseMutationResult<string, Error, string, unknown>;
+  createSubOrder: UseMutationResult<string, Error, void, unknown>;
   updateSubOrder: UseMutationResult<
     string,
     Error,
     UpdateSubOrderProps,
     unknown
   >;
+  getCurrentSubOrder: () => SubOrderProps | undefined;
 }
 
 export interface SubOrderProps {
@@ -32,7 +34,7 @@ export interface SubOrderProps {
   updatedWhen: string;
   chat: { messages: ChatMessageProps[] };
   files: string[];
-  service: ServiceProps;
+  service: ServiceManufacturingProps | ServiceModellingProps;
 }
 
 export interface ChatMessageProps {
@@ -43,8 +45,6 @@ export interface ChatMessageProps {
 }
 
 export interface UpdateSubOrderProps {
-  orderID: string;
-  subOrderID: string;
   chat?: ChatMessageProps;
   state?: OrderState;
   files?: File[];
@@ -55,9 +55,16 @@ const useSubOrder = (): ReturnProps => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { orderQuery } = useOrder();
+  const { orderID, subOrderID } = useParams();
 
-  const createSubOrder = useMutation<string, Error, string>({
-    mutationFn: async (orderID: string) => {
+  const getCurrentSubOrder = (): SubOrderProps | undefined => {
+    return orderQuery.data?.subOrders.find(
+      (subOrder) => subOrder.id === subOrderID
+    );
+  };
+
+  const createSubOrder = useMutation<string, Error, void>({
+    mutationFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createSubOrder/${orderID}`;
       return getCustomAxios()
         .get(apiUrl)
@@ -76,7 +83,9 @@ const useSubOrder = (): ReturnProps => {
     mutationFn: async (props: UpdateSubOrderProps) => {
       return getCustomAxios()
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateSubOrder/`, {
-          props,
+          orderID,
+          subOrderID,
+          ...props,
         })
         .then((res) => {
           logger("useSubOrder | updateSubOrder ✅ |", res.data);
@@ -106,7 +115,7 @@ const useSubOrder = (): ReturnProps => {
     },
   });
 
-  return { createSubOrder, deleteSubOrder, updateSubOrder };
+  return { createSubOrder, deleteSubOrder, updateSubOrder, getCurrentSubOrder };
 };
 
 export default useSubOrder;

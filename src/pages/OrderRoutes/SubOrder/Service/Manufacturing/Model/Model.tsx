@@ -4,7 +4,6 @@ import { ProcessModelCard } from "./components/Card";
 import { Button } from "@component-library/Button";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useModelData } from "../hooks/useServiceManufacturingData";
 import { LoadingSuspense } from "@component-library/Loading";
 import { IFilterItem } from "../Filter/Filter";
 import { ProcessModelPreView } from "./components/PreView";
@@ -13,14 +12,13 @@ import IconUpload from "@icons/Upload.svg";
 import { Heading } from "@component-library/Typography";
 import Modal from "@component-library/Modal";
 import { IModel } from "./types";
+import { useManufacturingModelData } from "./hooks/useModel";
+import { select } from "d3";
 
 interface Props {
   filters: IFilterItem[];
   processState: ServiceManufacturingState;
-  selectedModel: IModel | undefined;
-  selectModel(model: IModel): void;
-  deselectModel(): void;
-  setProgress(path: string): void;
+  model: IModel | undefined;
 }
 
 interface State {
@@ -30,24 +28,14 @@ interface State {
 
 export const ProcessModel: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const {
-    filters,
-    processState,
-    selectModel,
-    setProgress,
-    selectedModel,
-    deselectModel,
-  } = props;
+  const { filters, processState, model } = props;
   const { grid, searchText } = processState;
   const navigate = useNavigate();
   const [state, setState] = useState<State>({
     modalOpen: false,
     model: undefined,
   });
-  const { modelsQuery } = useModelData(filters);
-  useEffect(() => {
-    setProgress("model");
-  }, []);
+  const { modelsQuery } = useManufacturingModelData(filters);
   const openModelView = (model: IModel) => {
     setState((prevState) => ({ ...prevState, modalOpen: true, model }));
   };
@@ -79,6 +67,9 @@ export const ProcessModel: React.FC<Props> = (props) => {
     navigate("upload");
   };
 
+  const deselectModel = () => {};
+  const selectModel = (model: IModel) => {};
+
   const renderUplaodCart = () => (
     <div
       className={`flex  items-center justify-between overflow-hidden bg-white hover:cursor-pointer hover:bg-gray-300 ${
@@ -107,7 +98,7 @@ export const ProcessModel: React.FC<Props> = (props) => {
     </div>
   );
 
-  return selectedModel === undefined ? (
+  return model === undefined ? (
     <LoadingSuspense query={modelsQuery}>
       <div
         className={`flex gap-y-5 ${
@@ -124,10 +115,10 @@ export const ProcessModel: React.FC<Props> = (props) => {
               .map((model: IModel, index: number) => (
                 <ProcessModelCard
                   grid={processState.grid}
-                  selectModel={selectModel}
                   model={model}
                   key={index}
                   openModelView={openModelView}
+                  selectModel={selectModel}
                 />
               ))}
             <Modal
@@ -137,8 +128,8 @@ export const ProcessModel: React.FC<Props> = (props) => {
               {state.model !== undefined ? (
                 <ProcessModelPreView
                   model={state.model}
-                  selectModel={selectModel}
                   closeModelView={closeModelView}
+                  selectModel={selectModel}
                 />
               ) : null}
             </Modal>
@@ -149,6 +140,6 @@ export const ProcessModel: React.FC<Props> = (props) => {
       </div>
     </LoadingSuspense>
   ) : (
-    <ProcessModelItem model={selectedModel} deselectModel={deselectModel} />
+    <ProcessModelItem model={model} deselectModel={deselectModel} />
   );
 };

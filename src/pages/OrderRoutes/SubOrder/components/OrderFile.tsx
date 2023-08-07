@@ -5,15 +5,15 @@ import DownloadIcon from "@mui/icons-material/Download";
 import useOrderFile from "../../Order/hooks/useOrderFiles";
 import { Heading } from "@component-library/Typography";
 import useFileView from "../../Order/hooks/useFileView";
-import { SubOrder } from "../../hooks/useOrder";
+import { SubOrderProps } from "../../hooks/useSubOrder";
 
 interface Props {
-  order: SubOrder;
+  subOrder: SubOrderProps;
   orderCollectionID: string;
 }
 
 const OrderFile: React.FC<Props> = (props) => {
-  const { order } = props;
+  const { subOrder: order } = props;
   const { t } = useTranslation();
   const [fileName, setFileName] = useState<string>("");
   const { orderFileQuery } = useOrderFile({ orderID: order.id, fileName });

@@ -4,13 +4,12 @@ import { ServiceManufacturingState } from "../types";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import { IFilterItem } from "../Filter/Filter";
-import { usePostProcessing } from "../hooks/useServiceManufacturingData";
+import { usePostProcessing as useManufacturingPostProcessing } from "./hooks/usePostProcessing";
 
 interface Props {
   processState: ServiceManufacturingState;
   filters: IFilterItem[];
-  selectPostProcessings: (postProcessings: IPostProcessing[]) => void;
-  setProgress(path: string): void;
+  postProcessings: IPostProcessing[] | undefined;
 }
 
 export interface IPostProcessing {
@@ -31,37 +30,22 @@ export enum EPostProcessingOptionType {
 
 export const ProcessPostProcessing: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { setProgress, processState, filters, selectPostProcessings } = props;
-  const { grid, searchText, activeItemIndex, items } = processState;
-  const { postProcessingQuery } = usePostProcessing(filters);
-  const _checkedPostprocessings: IPostProcessing[] | undefined =
-    items[activeItemIndex].postProcessings;
-  const checkedPostprocessings: IPostProcessing[] =
-    _checkedPostprocessings === undefined ? [] : _checkedPostprocessings;
-  useEffect(() => {
-    setProgress("postprocessing");
-  }, []);
+  const { processState, filters, postProcessings } = props;
+  const { grid, searchText } = processState;
+  const { postProcessingQuery } = useManufacturingPostProcessing(filters);
 
-  const checkPostProcessing = (postProcessing: IPostProcessing) => {
-    const remove: boolean =
-      checkedPostprocessings.filter(
-        (checked) => checked.id === postProcessing.id
-      ).length > 0;
-    selectPostProcessings(
-      remove === true
-        ? checkedPostprocessings.filter(
-            (checked) => checked.id !== postProcessing.id
-          )
-        : [...checkedPostprocessings, { ...postProcessing, checked: true }]
-    );
-  };
+  const checkPostProcessing = (postProcessing: IPostProcessing) => {};
   const hydratePostProcessings = (
     initialPostProcessings: IPostProcessing[],
-    checkedPostprocessings: IPostProcessing[]
+    checkedPostprocessings: IPostProcessing[] | undefined
   ): IPostProcessing[] => {
     let initialIdList: string[] = initialPostProcessings.map((item) => item.id);
     let filteredPostprocessings: IPostProcessing[] =
-      checkedPostprocessings.filter((item) => initialIdList.includes(item.id));
+      checkedPostprocessings === undefined
+        ? []
+        : checkedPostprocessings.filter((item) =>
+            initialIdList.includes(item.id)
+          );
     let hydratedPostProcessings: IPostProcessing[] = [];
     initialPostProcessings.forEach((initialPostProcessing) => {
       let postprocessing: IPostProcessing = initialPostProcessing;
@@ -83,7 +67,7 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
             searchText={searchText}
             items={hydratePostProcessings(
               postProcessingQuery.data,
-              checkedPostprocessings
+              postProcessings
             )}
             checkItem={checkPostProcessing}
           />

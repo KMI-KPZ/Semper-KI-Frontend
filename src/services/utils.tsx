@@ -2,7 +2,6 @@ import logger from "@/hooks/useLogger";
 import { Address, UserType } from "@/hooks/useUser/types";
 import { EProcessStatusType } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Header/types";
 import { IModel } from "@/pages/OrderRoutes/SubOrder/Service/Manufacturing/Model/types";
-import { IProcessItem } from "@/pages/OrderRoutes/Service/Manufacturing/types";
 
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;
@@ -113,29 +112,8 @@ export const getModelURI = (model: IModel): string => {
     : `data:image/jpeg;base64,${convertStringForImage(model.URI)}`;
 };
 
-export const checkForSelectedData = (items: IProcessItem[]): boolean => {
-  let contains: boolean = false;
-  if (items === undefined || items.length === 0) return false;
-  items.forEach((item) => {
-    if (
-      item.model !== undefined ||
-      item.material !== undefined ||
-      item.postProcessings !== undefined
-    )
-      contains = true;
-  });
-  return contains;
-};
-
 export const isKey = <T extends object>(x: T, k: PropertyKey): k is keyof T => {
   return k in x;
-};
-
-export const getStatusByIndex = (process: IProcessItem): EProcessStatusType => {
-  if (process.model === undefined) return EProcessStatusType.missing;
-  if (process.material === undefined) return EProcessStatusType.missing;
-  if (process.postProcessings === undefined) return EProcessStatusType.missing;
-  return EProcessStatusType.ok;
 };
 
 export const splitFindArray = <T extends any>(

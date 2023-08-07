@@ -1,14 +1,14 @@
 import { AppContext } from "@/pages/App/App";
 import { DeleteOrderEvent, Event } from "@/pages/App/types";
 import { useContext, useEffect } from "react";
-import { SubOrder } from "../../hooks/useOrder";
+import { SubOrderProps } from "../../hooks/useSubOrder";
 
 interface ReturnProps {
   getDeleteOrderEvent: (type: "status" | "message") => Event;
 }
 
 const useOrderEventChange = (
-  subOrder: SubOrder,
+  subOrder: SubOrderProps,
   orderCollectionID: string,
   chatOpen: boolean
 ): ReturnProps => {

@@ -4,19 +4,19 @@ import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import { getModelURI } from "@/services/utils";
 import { Heading } from "@component-library/Typography";
-import { IProcessItem } from "@/pages/OrderRoutes/Service/Manufacturing/types";
+import { SubOrderProps } from "@/pages/OrderRoutes/hooks/useSubOrder";
+import { ServiceType } from "@/pages/OrderRoutes/SubOrder/Service/hooks/useService";
 
 interface Props {
   itemIndex: number;
-  processItem: IProcessItem;
+  subOrder: SubOrderProps;
   manufacturerID: string;
   setManufacturerIndex(itemIndex: number, manufacturerID: string): void;
 }
 
 const ProcessManufacturerItem: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { itemIndex, processItem, manufacturerID, setManufacturerIndex } =
-    props;
+  const { itemIndex, subOrder, manufacturerID, setManufacturerIndex } = props;
   const { manufacturerQuery } = useManufacturer();
 
   const handleOnClickManufacturer = (manufacturerID: string) => {
@@ -29,12 +29,8 @@ const ProcessManufacturerItem: React.FC<Props> = (props) => {
   return (
     <LoadingSuspense query={manufacturerQuery}>
       <div className="flex w-full flex-col items-center justify-between gap-5 bg-white p-2">
-        <Heading variant="h2">{processItem.model?.title}</Heading>
+        <Heading variant="h2">{ServiceType[subOrder.service.type]}</Heading>
         <div className="flex w-full flex-col items-start justify-around md:flex-row">
-          <img
-            src={getModelURI(processItem.model!)}
-            className="h-full max-w-xs"
-          />
           <div className="flex flex-row items-center justify-start gap-5 md:flex-col">
             <Heading variant="h3">
               {t("AfterProcess.Manufacturer.ManufacturerItem.header")}

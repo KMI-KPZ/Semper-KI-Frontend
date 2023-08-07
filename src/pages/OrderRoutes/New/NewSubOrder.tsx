@@ -13,12 +13,10 @@ const NewSubOrder: React.FC<NewSubOrderProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { createSubOrder } = useSubOrder();
-  const { orderID } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (orderID !== undefined) createSubOrder.mutate(orderID);
-    else navigate("..");
+    createSubOrder.mutate();
   }, []);
 
   return (

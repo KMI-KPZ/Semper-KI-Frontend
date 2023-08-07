@@ -1,7 +1,7 @@
 import { getCustomAxios } from "@/hooks/useCustomAxios";
 import React, { useEffect, useState } from "react";
 import logger from "@/hooks/useLogger";
-import { IProcessItem } from "@/pages/OrderRoutes/Service/Manufacturing/types";
+import { SubOrderProps } from "@/pages/OrderRoutes/hooks/useSubOrder";
 
 interface ReturnProps {
   order: IRequestState;
@@ -11,9 +11,9 @@ interface ReturnProps {
   printableList: IRequestState[];
   priceList: IRequestState[];
   logisticsList: IRequestState[];
-  checkPrintability(processList: IProcessItem[]): void;
-  checkPrices(processList: IProcessItem[]): void;
-  checkLogistics(processList: IProcessItem[]): void;
+  checkPrintability(subOrderList: SubOrderProps[]): void;
+  checkPrices(subOrderList: SubOrderProps[]): void;
+  checkLogistics(subOrderList: SubOrderProps[]): void;
   sendOrder(): void;
 }
 
@@ -62,9 +62,9 @@ const useCheckout = (): ReturnProps => {
     updateRequestState(logisticsList, setLogistics);
   }, [logisticsList]);
 
-  const checkPrintability = (processList: IProcessItem[]) => {
+  const checkPrintability = (subOrderList: SubOrderProps[]) => {
     Promise.all(
-      processList.map((_item, _index) => {
+      subOrderList.map((_item, _index) => {
         setPrintableList((prevState) => [
           ...prevState.filter((item, index: number) => index < _index),
           {
@@ -104,9 +104,9 @@ const useCheckout = (): ReturnProps => {
     );
   };
 
-  const checkPrices = (processList: IProcessItem[]) => {
+  const checkPrices = (subOrderList: SubOrderProps[]) => {
     Promise.all(
-      processList.map((_item, _index) => {
+      subOrderList.map((_item, _index) => {
         setPriceList((prevState) => [
           ...prevState.filter((item, index: number) => index < _index),
           {
@@ -146,9 +146,9 @@ const useCheckout = (): ReturnProps => {
     );
   };
 
-  const checkLogistics = (processList: IProcessItem[]) => {
+  const checkLogistics = (subOrderList: SubOrderProps[]) => {
     Promise.all(
-      processList.map((_item, _index) => {
+      subOrderList.map((_item, _index) => {
         setLogisticsList((prevState) => [
           ...prevState.filter((item, index: number) => index < _index),
           {

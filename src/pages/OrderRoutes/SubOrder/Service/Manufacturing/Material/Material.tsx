@@ -2,20 +2,17 @@ import React, { useEffect, useState } from "react";
 import { ProcessMaterialCard } from "./components/Card";
 import { ServiceManufacturingState } from "../types";
 import { useTranslation } from "react-i18next";
-import { useMaterialData } from "../hooks/useServiceManufacturingData";
 import { LoadingSuspense } from "@component-library/Loading";
 import { ProcessMaterialPreView } from "./components/PreView";
 import { ProcessMaterialItem } from "./components/Item";
 import { IFilterItem } from "../Filter/Filter";
 import Modal from "@component-library/Modal";
+import { useManufacturingMaterial } from "./hooks/useMaterial";
 
 interface Props {
   processState: ServiceManufacturingState;
-  selectedMaterial: IMaterial | undefined;
+  material: IMaterial | undefined;
   filters: IFilterItem[];
-  selectMaterial(material: IMaterial): void;
-  deselectMaterial(): void;
-  setProgress(path: string): void;
 }
 
 interface State {
@@ -32,23 +29,13 @@ export interface IMaterial {
 
 export const ProcessMaterial: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const {
-    selectMaterial,
-    setProgress,
-    filters,
-    processState,
-    deselectMaterial,
-    selectedMaterial,
-  } = props;
+  const { filters, processState, material: material } = props;
   const { grid, searchText } = processState;
   const [state, setState] = useState<State>({
     modalOpen: false,
     material: undefined,
   });
-  const { materialsQuery } = useMaterialData(filters);
-  useEffect(() => {
-    setProgress("material");
-  }, []);
+  const { materialsQuery } = useManufacturingMaterial(filters);
   const openMaterialView = (material: IMaterial) => {
     setState((prevState) => ({ ...prevState, modalOpen: true, material }));
   };
@@ -73,7 +60,10 @@ export const ProcessMaterial: React.FC<Props> = (props) => {
     return false;
   };
 
-  return selectedMaterial === undefined ? (
+  const selectMaterial = () => {};
+  const deselectMaterial = () => {};
+
+  return material === undefined ? (
     <LoadingSuspense query={materialsQuery}>
       <div
         className={`flex gap-y-5 ${
@@ -116,7 +106,7 @@ export const ProcessMaterial: React.FC<Props> = (props) => {
   ) : (
     <ProcessMaterialItem
       deselectMaterial={deselectMaterial}
-      material={selectedMaterial}
+      material={material}
     />
   );
 };

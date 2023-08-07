@@ -21,7 +21,6 @@ import {
   ServiceManufacturingProps,
   ServiceManufacturingState,
 } from "./types";
-import ProcessHeaderCart from "./Header/Cart/Cart";
 
 interface Props {
   service: ServiceManufacturingProps;
@@ -36,10 +35,10 @@ const initialServiceManufacturingState: ServiceManufacturingState = {
 export const ServiceManufacturingContext =
   createContext<ServiceManufacturingContextReturnProps>({
     processState: initialServiceManufacturingState,
-    setGridState: () => {
+    setGrid: () => {
       logger("Error ProcessContext setGridBoolean");
     },
-    setFilterOpen: () => {
+    setFilter: () => {
       logger("Error ProcessContext setFilterOpen");
     },
     setSearchInput: () => {
@@ -49,8 +48,6 @@ export const ServiceManufacturingContext =
 
 export const ServiceManufacturing: React.FC<Props> = (props) => {
   const { service } = props;
-  const { title, type, manufacturerID, material, model, postProcessings } =
-    service;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [state, setState] = useState<ServiceManufacturingState>(
@@ -67,10 +64,10 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
     // logger("Process | applyFilters |", filterItemList);
     filtersMutate.mutate(filterItemList);
   };
-  const setGridState = (grid: boolean): void => {
+  const setGrid = (grid: boolean): void => {
     setState((prevState) => ({ ...prevState, grid }));
   };
-  const setFilterOpen = (open: boolean): void => {
+  const setFilter = (open: boolean): void => {
     setState((prevState) => ({ ...prevState, filterOpen: open }));
   };
 
@@ -78,20 +75,18 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
     <ServiceManufacturingContext.Provider
       value={{
         processState: state,
-        setGridState,
-        setFilterOpen,
+        setGrid: setGrid,
+        setFilter: setFilter,
         setSearchInput,
       }}
     >
       <LoadingSuspense query={filtersQuery}>
         <div className="relativ flex w-full flex-col gap-5 xl:flex-row">
           <ProcessFilter
-            setFilterOpen={setFilterOpen}
+            setFilterOpen={setFilter}
             filterOpen={filterOpen}
             filters={filtersQuery.data}
             applyFilters={applyFilters}
-            guideAnswers={guideAnswers}
-            progress={progress}
           />
           <div className="flex w-full flex-col gap-5 ">
             <ProcessHeader />
@@ -101,16 +96,18 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
                 path="model"
                 element={
                   <ProcessModel
+                    model={service.model}
                     processState={state}
                     filters={filtersQuery.data}
                   />
                 }
               />
-              <Route path="upload" element={<ProcessModelUpload />} />
+              <Route path="model/upload" element={<ProcessModelUpload />} />
               <Route
                 path="material"
                 element={
                   <ProcessMaterial
+                    material={service.material}
                     processState={state}
                     filters={filtersQuery.data}
                   />
@@ -120,6 +117,7 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
                 path="postprocessing"
                 element={
                   <ProcessPostProcessing
+                    postProcessings={service.postProcessings}
                     processState={state}
                     filters={filtersQuery.data}
                   />
@@ -128,7 +126,6 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
               <Route path="*" element={<Error />} />
             </Routes>
           </div>
-          <ProcessHeaderCart />
         </div>
       </LoadingSuspense>
     </ServiceManufacturingContext.Provider>

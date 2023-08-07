@@ -201,7 +201,7 @@ const SubOrder: React.FC<Props> = (props) => {
         userType={userType}
       />
       <div className="flex w-full flex-col items-center justify-center gap-5 p-5 md:flex-row md:items-start md:justify-around">
-        <img
+        {/* <img
           src={getModelURI(subOrder.item.model!)}
           className="object-fit w-2/12"
         />
@@ -216,10 +216,10 @@ const SubOrder: React.FC<Props> = (props) => {
           {subOrder.item.postProcessings?.map((postProcessing, index) => (
             <span key={index}>{postProcessing.title}</span>
           ))}
-        </div>
+        </div> */}
       </div>
       <PermissionGate element="OrderFile">
-        <OrderFile order={subOrder} orderCollectionID={orderID} />
+        <OrderFile subOrder={subOrder} orderCollectionID={orderID} />
       </PermissionGate>
       <PermissionGate element="Chat">
         <Modal

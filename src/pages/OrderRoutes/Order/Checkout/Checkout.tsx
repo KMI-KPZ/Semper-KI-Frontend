@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import { LoadingAnimation, LoadingSuspense } from "@component-library/Loading";
 import { Heading } from "@component-library/Typography";
+import { useOrder } from "../../hooks/useOrder";
 
 interface Props {}
 interface State {
@@ -22,6 +23,8 @@ interface State {
 const OrderCheckout: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
+
+  const { orderQuery } = useOrder();
 
   const navigate = useNavigate();
   const [state, setState] = useState<State>({
@@ -242,11 +245,11 @@ const OrderCheckout: React.FC<Props> = (props) => {
           className="flex w-full flex-col items-center justify-center
       gap-y-3 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between"
         >
-          {true ? (
-            [].map((item, index) => (
+          {orderQuery.data?.subOrders ? (
+            orderQuery.data?.subOrders.map((item, index) => (
               <OrderCheckoutItem
                 key={index}
-                process={item}
+                suborder={item}
                 logistics={
                   logisticsList[index] === undefined
                     ? loadingDummy

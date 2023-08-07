@@ -8,9 +8,7 @@ import {
   parseAddress,
   removeItemByIndex,
   getModelURI,
-  checkForSelectedData,
   isKey,
-  getStatusByIndex,
   splitFindArray,
   splitArray,
 } from "./utils";
@@ -171,35 +169,6 @@ describe("Utils", () => {
       expect(value).toBe("data:image/jpeg;base64,/9j/test//Z");
     });
   });
-  describe("Test checkForSelectedData", () => {
-    it("should return true when something is selected", () => {
-      const material = new MaterialBuilder().build();
-      const value = checkForSelectedData([
-        {
-          title: "test",
-          material: material,
-          model: undefined,
-          postProcessings: undefined,
-        },
-      ]);
-      expect(value).toBe(true);
-    });
-    it("should return true when nothing is selected", () => {
-      const value = checkForSelectedData([
-        {
-          title: "test",
-          material: undefined,
-          model: undefined,
-          postProcessings: undefined,
-        },
-      ]);
-      expect(value).toBe(false);
-    });
-    it("should return false when array is empty", () => {
-      const value = checkForSelectedData([]);
-      expect(value).toBe(false);
-    });
-  });
   describe("Test isKey", () => {
     it("should return true when key is key of object", () => {
       const value = isKey({ test: "test" }, "test");
@@ -208,43 +177,6 @@ describe("Utils", () => {
     it("should return false when key is not key of object", () => {
       const value = isKey({ test: "test" }, "test2");
       expect(value).toBe(false);
-    });
-  });
-  describe("Test getStatusByIndex", () => {
-    const material = new MaterialBuilder().build();
-    const model = new ModelBuilder().build();
-    const postProcessing = new PostProcessingBuilder().build();
-    it("should return ok(0) when everything is selected", () => {
-      const value = getStatusByIndex({
-        title: "test",
-        material: material,
-        model: model,
-        postProcessings: [postProcessing],
-      });
-      expect(value).toBe(0);
-    });
-    it("should return missing(2) when something is undefined", () => {
-      const value_model_undefined = getStatusByIndex({
-        title: "test",
-        material: material,
-        model: undefined,
-        postProcessings: [postProcessing],
-      });
-      const value_material_undefined = getStatusByIndex({
-        title: "test",
-        material: undefined,
-        model: model,
-        postProcessings: [postProcessing],
-      });
-      const value_post_undefined = getStatusByIndex({
-        title: "test",
-        material: material,
-        model: model,
-        postProcessings: undefined,
-      });
-      expect(value_model_undefined).toBe(2);
-      expect(value_material_undefined).toBe(2);
-      expect(value_post_undefined).toBe(2);
     });
   });
   describe("Test splitArray", () => {

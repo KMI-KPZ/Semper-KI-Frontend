@@ -12,27 +12,23 @@ import { IModel } from "../types";
 import { Heading } from "@component-library/Typography";
 import logger from "@/hooks/useLogger";
 import useModelUpload from "../hooks/useModelUpload";
+import { useOrder } from "@/pages/OrderRoutes/hooks/useOrder";
+import useSubOrder from "@/pages/OrderRoutes/hooks/useSubOrder";
 
-interface Props {
-  setProgress(path: string): void;
-  createProcessItemFromModels(models: IModel[], index: number): void;
-  activeItemIndex: number;
-}
+interface Props {}
 
 export const ProcessModelUpload: React.FC<Props> = (props) => {
-  const { setProgress, createProcessItemFromModels, activeItemIndex } = props;
+  const {} = props;
   const { t } = useTranslation();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
   const [fileList, setFileList] = useState<File[]>([]);
   const [error, setError] = useState<boolean>(false);
+  const { updateSubOrder } = useSubOrder();
 
   const { uploadModels } = useModelUpload();
   const { status, error: uploadError } = uploadModels;
   const navigate = useNavigate();
-  useEffect(() => {
-    setProgress("upload");
-  }, []);
 
   const dataTypes: string[] = [
     ".STEP",
@@ -117,17 +113,15 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     setError(true);
   };
 
-  const createProcessItems = (modelList: IModel[]) => {
-    logger(fileList, modelList);
-
-    createProcessItemFromModels(modelList, activeItemIndex);
-  };
-
   const handleClickNext = () => {
     if (fileList.length > 0) {
       uploadModels.mutate(fileList, {
         onSuccess(data) {
-          createProcessItems(data);
+          updateSubOrder.mutate({
+            service: {
+              model: data[0],
+            },
+          });
           navigate("model");
         },
       });

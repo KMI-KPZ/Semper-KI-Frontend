@@ -4,7 +4,6 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import { Button } from "@component-library/Button";
 import ProcessFilterCard from "./components/Card";
-import { IProgress } from "../types";
 import { AppContext } from "@/pages/App/App";
 import { Heading } from "@component-library/Typography";
 import useBodyScroll from "@/pages/App/hooks/useBodyScroll";
@@ -12,9 +11,7 @@ import useBodyScroll from "@/pages/App/hooks/useBodyScroll";
 interface Props {
   filterOpen: boolean;
   setFilterOpen(open: boolean): void;
-  progress: IProgress;
   filters: IFilterItem[];
-  guideAnswers: IFilterItem[];
   applyFilters(filterItemList: IFilterItem[]): void;
 }
 
@@ -91,11 +88,10 @@ const ProcessFilter: React.FC<Props> = (props) => {
   const {
     applyFilters,
     filters,
-    guideAnswers,
-    progress,
     filterOpen,
     setFilterOpen: parentSetFilterOpen,
   } = props;
+  const guideAnswers: IFilterItem[] = [];
   const hydratedFilterList: IFilterItem[] = hydrateFilter(
     filters,
     guideAnswers

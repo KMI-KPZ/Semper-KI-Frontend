@@ -1,17 +1,21 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import useService, { ServiceType } from "./hooks/useService";
 import { ServiceManufacturing } from "./Manufacturing/Manufacturing";
 import { ServiceManufacturingProps } from "./Manufacturing/types";
-import { LoadingSuspense } from "@component-library/index";
 import ServiceOverview from "./Overview/Overview";
 import { useOrder } from "../hooks/useOrder";
+import { ServiceModellingProps } from "./Modelling/Modelling";
 
 export interface ServiceProps {
   type: ServiceType;
   title: string;
 }
+
+export type GeneralServiceProps =
+  | ServiceManufacturingProps
+  | ServiceModellingProps;
 
 const Service: React.FC<ServiceProps> = (props) => {
   const {} = props;
@@ -23,17 +27,9 @@ const Service: React.FC<ServiceProps> = (props) => {
   const renderService = () => {
     switch (service?.type) {
       case ServiceType.MANUFACTURING:
-        return (
-          <ServiceManufacturing
-            service={service as ServiceManufacturingProps}
-          />
-        );
+        return <ServiceManufacturing service={service} />;
       case ServiceType.MODELING:
         return <div>Modeling</div>;
-      case ServiceType.ASSEMBLY:
-        return <div>Assembly</div>;
-      default:
-        return <Navigate to=".." />;
     }
   };
 

@@ -4,8 +4,8 @@ import SendIcon from "@mui/icons-material/Send";
 import { useTranslation } from "react-i18next";
 import { User } from "@/hooks/useUser/types";
 import { Heading } from "@component-library/Typography";
-import { useOrder } from "../../hooks/useOrder";
-import useSubOrder, { ChatMessageProps } from "../../hooks/useSubOrder";
+import { useOrder } from "../../../hooks/useOrder";
+import useSubOrder, { ChatMessageProps } from "../../../hooks/useSubOrder";
 
 interface Props {
   closeMenu(): void;

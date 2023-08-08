@@ -10,7 +10,7 @@ import { UserType } from "@/hooks/useUser/types";
 import StatusItem from "./components/Item";
 import StatusItemConnector from "./components/ItemConnector";
 import StatusBarDecisionItem from "./components/DecisionItem";
-import { OrderState } from "../../hooks/useOrder";
+import { OrderState } from "../../../hooks/useOrder";
 
 interface StatusViewProps {
   currentState: OrderState;

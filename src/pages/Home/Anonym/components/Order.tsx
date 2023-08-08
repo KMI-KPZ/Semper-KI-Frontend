@@ -4,12 +4,15 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import HomeAnonymContainer from "./Container";
+import { useFlatOrders } from "@/pages/Orders/hooks/useFlatOrders";
+import AddIcon from "@mui/icons-material/Add";
 
 interface HomeAnonymOrderProps {}
 
 const HomeAnonymOrder: React.FC<HomeAnonymOrderProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
+  const { ordersQuery } = useFlatOrders();
 
   return (
     <HomeAnonymContainer data-testid="home-anonym-order">
@@ -22,11 +25,28 @@ const HomeAnonymOrder: React.FC<HomeAnonymOrderProps> = (props) => {
             {t("Home.Home.Anonym.Order.subTitle")}
           </Heading>
         </div>
-        <Button
-          to="/demo"
-          title={t("Home.Home.Anonym.Order.demo")}
-          startIcon={<PlayArrowIcon fontSize="large" />}
-        />
+        <div className="flex w-fit flex-col items-end gap-5">
+          {ordersQuery.data !== undefined && ordersQuery.data.length > 0 ? (
+            <>
+              <Button
+                title={t("Home.Home.Anonym.Order.button.continue")}
+                to="/orders"
+                startIcon={<PlayArrowIcon fontSize="large" />}
+              />
+              <Button
+                title={t("Home.Home.Anonym.Order.button.new")}
+                to="/order/new"
+                startIcon={<AddIcon fontSize="large" />}
+              />
+            </>
+          ) : (
+            <Button
+              to="/order/new"
+              title={t("Home.Home.Anonym.Order.button.demo")}
+              startIcon={<PlayArrowIcon fontSize="large" />}
+            />
+          )}
+        </div>
       </div>
     </HomeAnonymContainer>
   );

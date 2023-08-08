@@ -299,7 +299,11 @@
         "Order":{
           "title":"Auftrag",
           "subTitle":"zur Herstellung eines Bauteils",
-          "demo":"Demo"
+          "button":{
+            "demo":"Demo",
+            "new":"Neue Demo",
+            "continue":"Demo Fortsetzen"
+          }
         },
         "Orga":{
           "title":"Als Organisation anmelden",

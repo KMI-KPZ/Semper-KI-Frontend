@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import SubOrder from "../SubOrder/SubOrder";
+import SubOrder from "./SubOrder/SubOrder";
 import { UserType } from "@/hooks/useUser/types";
 import { OrderEvent, OrderEventItem } from "@/pages/App/types";
 import { Heading } from "@component-library/Typography";

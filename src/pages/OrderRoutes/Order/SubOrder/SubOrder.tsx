@@ -17,11 +17,12 @@ import { AppContext } from "@/pages/App/App";
 import { getModelURI } from "@/services/utils";
 import { Heading } from "@component-library/Typography";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import useOrderEventChange from "../Order/hooks/useOrderEventChange";
+import useOrderEventChange from "../hooks/useOrderEventChange";
 import logger from "@/hooks/useLogger";
 import Modal from "@component-library/Modal";
-import { OrderState } from "../hooks/useOrder";
-import useSubOrder, { SubOrderProps } from "../hooks/useSubOrder";
+import { OrderState } from "../../hooks/useOrder";
+import useSubOrder, { SubOrderProps } from "../../hooks/useSubOrder";
+import SubOrderService from "./Service/Service";
 
 interface Props {
   subOrder: SubOrderProps;
@@ -200,24 +201,7 @@ const SubOrder: React.FC<Props> = (props) => {
         updateStatus={updateStatus}
         userType={userType}
       />
-      <div className="flex w-full flex-col items-center justify-center gap-5 p-5 md:flex-row md:items-start md:justify-around">
-        {/* <img
-          src={getModelURI(subOrder.item.model!)}
-          className="object-fit w-2/12"
-        />
-        <div className="flex w-1/4 flex-col items-center justify-start p-3">
-          <Heading variant="h3">{subOrder.item.model?.title}</Heading>
-        </div>
-        <div className="flex w-1/4 flex-col items-center justify-start p-3">
-          <Heading variant="h3">{subOrder.item.material?.title}</Heading>
-        </div>
-        <div className="flex w-1/4 flex-col items-center justify-start p-3">
-          <Heading variant="h3">{t("Orders.OrderView.postProcessing")}</Heading>
-          {subOrder.item.postProcessings?.map((postProcessing, index) => (
-            <span key={index}>{postProcessing.title}</span>
-          ))}
-        </div> */}
-      </div>
+      <SubOrderService service={subOrder.service} />
       <PermissionGate element="OrderFile">
         <OrderFile subOrder={subOrder} orderCollectionID={orderID} />
       </PermissionGate>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import SubOrder from "./SubOrder/SubOrder";
-import { UserType } from "@/hooks/useUser/types";
+import { User, UserType } from "@/hooks/useUser/types";
 import { OrderEvent, OrderEventItem } from "@/pages/App/types";
 import { Heading } from "@component-library/Typography";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
@@ -12,12 +12,12 @@ import { LoadingAnimation, LoadingSuspense } from "@component-library/index";
 import OrderButtons from "./components/Buttons";
 
 interface Props {
-  userType: UserType;
+  user: User | undefined;
   event?: OrderEvent;
 }
 
 const Order: React.FC<Props> = (props) => {
-  const { userType, event: orderCollectionEvent } = props;
+  const { user, event: orderCollectionEvent } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { orderQuery } = useOrder();
@@ -58,7 +58,7 @@ const Order: React.FC<Props> = (props) => {
           </div>
           <PermissionGate element={"OrderButtons"}>
             <Divider />
-            <OrderButtons order={order} userType={userType} />
+            <OrderButtons order={order} user={user} />
           </PermissionGate>
           <Divider />
           {order.subOrders.length === 0 ? (
@@ -75,7 +75,7 @@ const Order: React.FC<Props> = (props) => {
                   key={index}
                   subOrder={subOrder}
                   orderID={order.id}
-                  userType={userType}
+                  user={user}
                   orderEvent={getOrderEventItemByID(subOrder.id)}
                 />
               ))

@@ -23,7 +23,7 @@ const StatusItem: React.FC<StatusItemType> = (props) => {
   const { hasPermission } = usePermissionGate();
 
   const handleOnClickStatus = () => {
-    if (userType === UserType.manufacturer) {
+    if (userType === UserType.ORGANIZATION) {
       setStatus(itemOrderState);
     }
   };
@@ -40,7 +40,7 @@ const StatusItem: React.FC<StatusItemType> = (props) => {
       classname.push(" bg-orange-200");
     }
     if (
-      userType === UserType.manufacturer &&
+      userType === UserType.ORGANIZATION &&
       currentState + 1 == itemOrderState
     ) {
       classname.push(" hover:cursor-pointer hover:bg-orange-300");

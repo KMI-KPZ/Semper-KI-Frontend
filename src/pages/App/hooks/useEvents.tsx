@@ -24,7 +24,7 @@ import { useWebsocket } from "./useWebsocket";
 import logger from "@/hooks/useLogger";
 import { useTranslation } from "react-i18next";
 import { toast } from "./useToast";
-import { UserType } from "@/hooks/useUser/types";
+import { User, UserType } from "@/hooks/useUser/types";
 import usePermissions from "@/hooks/usePermissions";
 
 interface ReturnProps {
@@ -63,7 +63,7 @@ export const getOrderEventAmount = (
 
 const useEvents = (
   isLoggedIn: boolean,
-  userType: UserType,
+  user: User | undefined,
   reloadPermissions: () => void
 ): ReturnProps => {
   const [events, setEvents] = useState<Event[]>([]);
@@ -109,13 +109,13 @@ const useEvents = (
             if (orderEvent.orders[0].messages > 0) {
               toast(
                 t("toast.orderEvent.message"),
-                userType === UserType.client ? "/orders" : "/contracts"
+                user?.usertype === UserType.USER ? "/orders" : "/contracts"
               );
             }
             if (orderEvent.orders[0].status > 0) {
               toast(
                 t("toast.orderEvent.status"),
-                userType === UserType.client ? "/orders" : "/contracts"
+                user?.usertype === UserType.USER ? "/orders" : "/contracts"
               );
             }
             break;
@@ -132,7 +132,7 @@ const useEvents = (
     }
   };
 
-  const { socket } = useWebsocket(onWebsocktEvent, isLoggedIn, userType);
+  const { socket } = useWebsocket(onWebsocktEvent, isLoggedIn, user);
 
   const hydrateEvents = (newEvent: Event): void => {
     setEvents((prevState) => {

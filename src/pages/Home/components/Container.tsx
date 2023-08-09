@@ -1,14 +1,13 @@
 import React, { PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
 
-interface HomeAnonymContainerProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface HomeContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-const HomeAnonymContainer: React.FC<
-  PropsWithChildren<HomeAnonymContainerProps>
-> = (props) => {
+const HomeContainer: React.FC<PropsWithChildren<HomeContainerProps>> = (
+  props
+) => {
   const { children, className, ...restProps } = props;
   return (
     <div
@@ -23,4 +22,4 @@ const HomeAnonymContainer: React.FC<
   );
 };
 
-export default HomeAnonymContainer;
+export default HomeContainer;

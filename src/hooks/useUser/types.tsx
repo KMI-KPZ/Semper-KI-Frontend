@@ -1,19 +1,21 @@
 export type User = {
-  address: Address;
+  accessed: Date;
+  created: Date;
+  details: any;
   email: string;
   hashedID: string;
+  lastSeen: Date;
   name: string;
   organization: string;
-  type: UserType;
-  created: Date;
-  accessed: Date;
   updated: Date;
+  usertype: UserType;
 };
+
 export enum UserType {
-  "client",
-  "manufacturer",
-  "admin",
-  "anonym",
+  "USER",
+  "ORGANIZATION",
+  "ADMIN",
+  "ANONYM",
 }
 
 export interface Address {

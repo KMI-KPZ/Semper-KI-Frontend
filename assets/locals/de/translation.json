@@ -317,6 +317,30 @@
           "advantage":"Ihre Vorteile",
           "register":"Registrieren"
         }
+      },
+      "Authorized":{
+        "Order":{
+          "title":"Aufträge",
+          "noOrders":"Keine Aufträge vorhanden",
+          "button":{
+            "new":"Neuer Auftrag",
+            "orders":"Meine Aufträge",
+            "continue":"Auftrag Fortsetzen",
+            "see":"Auftrag Ansehen"
+          }
+        },
+        "Organization":{
+          "title":"Organisation",
+          "button":{
+            "edit":"Oragnisation verwalten"
+          }
+        },
+        "Resources":{
+          "title":"Ressourcen",
+          "button":{
+            "edit":"Ressourcen verwalten"
+          }
+        }
       }
     },
     "HomeGuideCard":{

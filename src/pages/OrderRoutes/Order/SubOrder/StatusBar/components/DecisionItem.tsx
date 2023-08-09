@@ -25,7 +25,7 @@ const StatusBarDecisionItem: React.FC<StatusDoubleItemType> = (props) => {
   const { hasPermission } = usePermissionGate();
 
   const handleOnClickStatus = (orderState: OrderState) => {
-    if (userType === UserType.manufacturer) {
+    if (userType === UserType.ORGANIZATION) {
       setStatus(orderState);
     }
   };
@@ -49,7 +49,7 @@ const StatusBarDecisionItem: React.FC<StatusDoubleItemType> = (props) => {
     } else if (currentState < itemSucceed.itemOrderState) {
       classname.push("bg-slate-100");
     }
-    if (userType === UserType.manufacturer) {
+    if (userType === UserType.ORGANIZATION) {
       classname.push("hover:cursor-pointer hover:bg-orange-300");
     }
     return classname.join(" ");

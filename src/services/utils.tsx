@@ -64,26 +64,18 @@ export const removeItemByIndex = <T,>(
   return newArr;
 };
 
-export const getUserType = (name: string): UserType => {
-  let type: UserType = UserType.client;
+export const getUserType = (name?: string): UserType => {
+  if (name === undefined) return UserType.ANONYM;
   switch (name.toLocaleLowerCase()) {
-    case "client":
-      type = UserType.client;
-      break;
-    case "manufacturer":
-      type = UserType.manufacturer;
-      break;
+    case "user":
+      return UserType.USER;
+    case "organisation":
+      return UserType.ORGANIZATION;
     case "admin":
-      type = UserType.admin;
-      break;
-    case "anonym":
-      type = UserType.anonym;
-      break;
+      return UserType.ADMIN;
     default:
-      type = UserType.anonym;
-      break;
+      return UserType.ANONYM;
   }
-  return type;
 };
 
 export const parseAddress = (unparsedAddress: string): Address => {

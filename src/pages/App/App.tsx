@@ -6,12 +6,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { RequestTest } from "../RequestTest/RequestTest";
-import {
-  PrivateAdminRoutes,
-  PrivateClientRoutes,
-  PrivateManufacturerRoutes,
-  PrivateRoutes,
-} from "./components/PrivateRoutes";
+import { AdminRoutes, UserRoutes } from "./components/PrivateRoutes";
 import { User, UserType } from "@/hooks/useUser/types";
 import { DeleteEvent, Event } from "@/pages/App/types";
 import { ToastContainer } from "react-toastify";
@@ -23,7 +18,6 @@ import AdminMaterials from "../Admin/Materials";
 import AdminModels from "../Admin/Models";
 import AdminOrders from "../Admin/Orders";
 import AdminUsers from "../Admin/Users";
-import GuideRoutes from "../Guide/Guide";
 import Login from "../Login/Login";
 import RedirectLogin from "../Login/Redirect/RedirectLogin";
 import Logout from "../Logout/Logout";
@@ -82,12 +76,12 @@ export const AppContext = createContext<AppContext>({
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(initialAppState);
   const { rejectCookies, acceptCookies, cookieConsent } = useCookieConsent();
-  const { isLoggedIn, userType, user, isLoggedInResponse } = useUser();
+  const { isLoggedIn, user, isLoggedInResponse } = useUser();
   const { permissionGates, permissions, reloadPermissions } =
     usePermissions(user);
   const { socket, deleteEvent, events } = useEvents(
     isLoggedIn,
-    userType,
+    user,
     reloadPermissions
   );
   const { isMagazineUp } = usePing();
@@ -98,7 +92,7 @@ const App: React.FC = () => {
   };
 
   const adminRoutes = (
-    <Route element={<PrivateAdminRoutes userType={userType} />}>
+    <Route element={<AdminRoutes user={user} />}>
       <Route path="user" element={<AdminUsers />} />
       <Route path="model" element={<AdminModels />} />
       <Route path="material" element={<AdminMaterials />} />
@@ -111,32 +105,10 @@ const App: React.FC = () => {
     </Route>
   );
 
-  const clientRoutes = (
-    <Route element={<PrivateClientRoutes user={user} />}>
-      <Route path="manufacturer" element={<ProcessManufacturer />} />
-      {/* <Route
-        path="orders"
-        element={<Orders userType={UserType.client} events={events} />}
-      /> */}
-      <Route path="assignments" element={<Error text="assignments" />} />
-    </Route>
-  );
-
-  const manufacturerRoutes = (
-    <Route element={<PrivateManufacturerRoutes user={user} />}>
-      <Route path="proceedings" element={<Error text="proceedings" />} />
-      {/* <Route
-        path="contracts"
-        element={
-          <PermissionGate
-          element="Orders"
-          showMessage
-          children={
-            <Orders userType={UserType.manufacturer} events={events} />
-          }
-          />
-        }
-      /> */}
+  const userRoutes = (
+    <Route element={<UserRoutes user={user} />}>
+      <Route path="test" element={<RequestTest socket={socket} />} />
+      <Route path="account" element={<Profil user={user!} />} />
       <Route
         path="organization"
         element={
@@ -157,12 +129,6 @@ const App: React.FC = () => {
           />
         }
       />
-    </Route>
-  );
-  const privateRoutes = (
-    <Route element={<PrivateRoutes user={user} />}>
-      <Route path="account" element={<Profil user={user!} />} />
-      <Route path="test" element={<RequestTest socket={socket} />} />
     </Route>
   );
 
@@ -202,22 +168,11 @@ const App: React.FC = () => {
         className={`flex min-h-screen flex-col items-center justify-between gap-5 overflow-x-auto p-3 font-ptsans text-base`}
         data-testid="app"
       >
-        <Header isLoggedIn={isLoggedIn} userType={userType} events={events} />
+        <Header user={user} events={events} />
         <main className="flex w-full max-w-screen-2xl flex-grow flex-col items-center justify-start gap-5 bg-slate-200 bg-opacity-80 p-5 xl:w-5/6">
           <Breadcrumb />
           <Routes data-testid="routes">
-            <Route
-              index
-              element={<Home events={events} userType={userType} />}
-            />
-            <Route path="guide">
-              <Route index element={<GuideRoutes setFilter={setFilter} />} />
-              <Route
-                path=":path"
-                element={<GuideRoutes setFilter={setFilter} />}
-              />
-              <Route path="*" element={<Navigate to="/guide" />} />
-            </Route>
+            <Route index element={<Home events={events} user={user} />} />
             <Route path="logout" element={<Logout />} />
             <Route path="portfolio" element={<Portfolio />} />
             <Route path="login" element={<Login />} />
@@ -230,13 +185,8 @@ const App: React.FC = () => {
             />
             <Route path="demo/*" element={<Navigate to="/order/new" />} />
             <Route path="orders" element={<Orders />} />
-            <Route
-              path="order/*"
-              element={<OrderRoutes userType={userType} />}
-            />
-            {clientRoutes}
-            {manufacturerRoutes}
-            {privateRoutes}
+            <Route path="order/*" element={<OrderRoutes user={user} />} />
+            {userRoutes}
             {adminRoutes}
             <Route path="*" element={<Error />} />
           </Routes>

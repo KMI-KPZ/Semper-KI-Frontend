@@ -9,7 +9,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { NavigationItemData } from "@/data/navigation";
 import LogoURL from "@images/logo192.png";
 import { AppContext } from "@/pages/App/App";
-import { UserType } from "@/hooks/useUser/types";
+import { User, UserType } from "@/hooks/useUser/types";
 import { Event, OrderEvent } from "@/pages/App/types";
 import { Heading, Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
@@ -49,8 +49,7 @@ const languages: Language[] = [
 ];
 
 interface Props {
-  isLoggedIn: boolean;
-  userType: UserType;
+  user: User | undefined;
   events?: Event[];
 }
 
@@ -60,7 +59,8 @@ interface State {
 }
 
 export const Header: React.FC<Props> = (props) => {
-  const { isLoggedIn, userType, events } = props;
+  const { user, events } = props;
+  const userType = user === undefined ? UserType.ANONYM : user.usertype;
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [state, setState] = useState<State>({

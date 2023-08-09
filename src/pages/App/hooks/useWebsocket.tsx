@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import logger from "@/hooks/useLogger";
-import { UserType } from "@/hooks/useUser/types";
+import { User, UserType } from "@/hooks/useUser/types";
 
 interface ReturnProps {
   sendMessage(message: string): void;
@@ -13,17 +13,13 @@ type WebSocketState = "connecting" | "connected" | "disconnected" | "error";
 export const useWebsocket = (
   onMessage: (event: MessageEvent) => void,
   load: boolean,
-  userType: UserType
+  user: User | undefined
 ): ReturnProps => {
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [state, setState] = useState<WebSocketState>("disconnected");
 
   useEffect(() => {
-    if (
-      load === true &&
-      state !== "connected" &&
-      userType !== UserType.anonym
-    ) {
+    if (load === true && state !== "connected" && user !== undefined) {
       setState("connecting");
       const ws = new WebSocket(
         `${process.env.VITE_WS_API_URL}/ws/generalWebsocket/`
@@ -54,7 +50,7 @@ export const useWebsocket = (
         setState("disconnected");
       };
     }
-  }, [load, userType]);
+  }, [load, user]);
 
   const sendMessage = (message: string) => {
     if (state === "connected") {

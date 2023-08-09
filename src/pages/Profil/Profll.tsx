@@ -13,18 +13,9 @@ const Profil: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { user } = props;
   const { deleteUser, updateUser } = useUser();
-  const [userType, setUserType] = useState<UserType>(user.type);
 
   const handleOnClickButtonDelete = () => {
     deleteUser();
-  };
-  const handleOnChangeSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserType(
-      e.currentTarget.checked === true ? UserType.manufacturer : UserType.client
-    );
-    updateUser(
-      e.currentTarget.checked === true ? UserType.manufacturer : UserType.client
-    );
   };
 
   return (
@@ -41,10 +32,11 @@ const Profil: React.FC<Props> = (props) => {
           {t("Profil.general.email")}: {user.email}
         </span>
         <span>
-          {t("Profil.general.type")}: {t(`enum.UserType.${UserType[userType]}`)}
+          {t("Profil.general.type")}:{" "}
+          {t(`enum.UserType.${UserType[user.usertype]}`)}
         </span>
       </div>
-      {userType === UserType.manufacturer ? (
+      {user.usertype === UserType.ORGANIZATION ? (
         <div className="flex flex-col gap-2 p-5">
           <Heading variant="h2">{t("Profil.company.header")}</Heading>
           <div className="w-full border-t-2" />
@@ -56,7 +48,7 @@ const Profil: React.FC<Props> = (props) => {
           ) : null}
         </div>
       ) : null}
-      <div className="flex flex-col gap-2 p-5">
+      {/* <div className="flex flex-col gap-2 p-5">
         <Heading variant="h2">{t("Profil.address.header")}</Heading>
         <div className="w-full border-t-2" />
         <span>
@@ -69,7 +61,7 @@ const Profil: React.FC<Props> = (props) => {
         <span>
           {t("Profil.address.country")}: {user.address.country}
         </span>
-      </div>{" "}
+      </div> */}
       <div className="flex flex-col gap-2 p-5">
         <Heading variant="h2">{t("Profil.time.header")}</Heading>
         <div className="w-full border-t-2" />

@@ -22,8 +22,7 @@ describe("<App>", () => {
         ...useUser,
         isLoggedInResponse: true,
         isLoggedIn: true,
-        user: new UserBuilder().withType(UserType.client).build(),
-        userType: UserType.client,
+        user: new UserBuilder().withType(UserType.USER).build(),
       });
     });
     jest.mock("@/hooks/usePermissions", () => {

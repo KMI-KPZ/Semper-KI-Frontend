@@ -7,7 +7,6 @@ import { User, UserType } from "./types";
 import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
-  userType: UserType;
   user: User | undefined;
   isLoggedIn: boolean;
   isLoggedInResponse: boolean;
@@ -41,14 +40,15 @@ const useUser = (): ReturnProps => {
         .then((response) => {
           const userData = response.data;
           logger("useUser | getUser ✅ |", userData);
-          return {
+          const newUser: User = {
             ...userData,
-            type: getUserType(userData.type),
-            address: parseAddress(userData.address),
             accessed: new Date(userData.accessed),
             created: new Date(userData.created),
             updated: new Date(userData.updated),
+            lastSeen: new Date(userData.lastSeen),
+            usertype: getUserType(userData.usertype),
           };
+          return newUser;
         }),
     enabled:
       loadIsLoggedInQuery.isFetched &&
@@ -85,7 +85,6 @@ const useUser = (): ReturnProps => {
     loadUserQuery.data !== undefined && loadUserQuery.isFetched
       ? loadUserQuery.data
       : undefined;
-  const userType: UserType = user === undefined ? UserType.anonym : user.type;
   const isLoggedInResponse: boolean =
     loadIsLoggedInQuery.data !== undefined &&
     loadIsLoggedInQuery.isFetched &&
@@ -96,7 +95,6 @@ const useUser = (): ReturnProps => {
   return {
     loadIsLoggedInQuery,
     loadUserQuery,
-    userType,
     user,
     isLoggedIn,
     isLoggedInResponse,

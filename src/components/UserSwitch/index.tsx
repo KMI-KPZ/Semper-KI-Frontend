@@ -15,9 +15,7 @@ export const UserSwitch: React.FC<Props> = (props) => {
   const { t } = useTranslation();
 
   const handleOnClickSwitch = () => {
-    onClick(
-      userType === UserType.client ? UserType.manufacturer : UserType.client
-    );
+    onClick(userType === UserType.USER ? UserType.ORGANIZATION : UserType.USER);
   };
 
   return (
@@ -28,18 +26,18 @@ export const UserSwitch: React.FC<Props> = (props) => {
       <Button
         title={t("General.UserSwitch.button.client")}
         startIcon={<PersonIcon />}
-        variant={userType === UserType.client ? "primary" : "secondary"}
+        variant={userType === UserType.USER ? "primary" : "secondary"}
         onClick={handleOnClickSwitch}
       />
       <div
         className={`absolute ${
-          userType === UserType.client ? "left-0" : "right-0"
+          userType === UserType.USER ? "left-0" : "right-0"
         }`}
       />
       <Button
         title={t("General.UserSwitch.button.contractor")}
         startIcon={<FactoryIcon />}
-        variant={userType === UserType.manufacturer ? "primary" : "secondary"}
+        variant={userType === UserType.ORGANIZATION ? "primary" : "secondary"}
         onClick={handleOnClickSwitch}
       />
     </div>

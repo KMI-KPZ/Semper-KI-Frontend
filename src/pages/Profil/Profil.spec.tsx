@@ -15,19 +15,19 @@ jest.mock("@/hooks/useUser", () => ({
 
 describe("Profil", () => {
   it("should render without crashing", () => {
-    const user = new UserBuilder().withType(UserType.client).build();
+    const user = new UserBuilder().withType(UserType.USER).build();
     render(<Profil user={user} />);
     expect(true).toBeTruthy();
   });
   it("should call deleteUser onClickButtonDelete", () => {
-    const user = new UserBuilder().withType(UserType.client).build();
+    const user = new UserBuilder().withType(UserType.USER).build();
     render(<Profil user={user} />);
     const button = screen.getByTestId("button-delete");
     fireEvent.click(button);
     expect(mockedDeleteUser).toBeCalledTimes(1);
   });
   it("should render data from user", () => {
-    const user = new UserBuilder().withType(UserType.client).build();
+    const user = new UserBuilder().withType(UserType.USER).build();
     render(<Profil user={user} />);
     expect(screen.getByText(/test@test.de/)).toBeVisible();
     expect(screen.getByText(/testCity/)).toBeVisible();

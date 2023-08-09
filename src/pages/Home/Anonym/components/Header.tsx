@@ -1,7 +1,7 @@
 import { Heading, Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import HomeAnonymContainer from "./Container";
+import HomeContainer from "../../components/Container";
 
 interface HomeAnonymHeaderProps {}
 
@@ -10,7 +10,7 @@ const HomeAnonymHeader: React.FC<HomeAnonymHeaderProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <HomeAnonymContainer
+    <HomeContainer
       className="flex-col items-center gap-10 md:flex-row md:items-start md:gap-20"
       data-testid="home-anonym-header"
     >
@@ -24,7 +24,7 @@ const HomeAnonymHeader: React.FC<HomeAnonymHeaderProps> = (props) => {
         <br />
         <Text variant="body">{t("Home.Home.Anonym.Header.claim5")}</Text>
       </div>
-    </HomeAnonymContainer>
+    </HomeContainer>
   );
 };
 

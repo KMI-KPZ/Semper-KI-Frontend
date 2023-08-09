@@ -13,15 +13,15 @@ import FactoryIcon from "@mui/icons-material/Factory";
 import DeleteForever from "@mui/icons-material/DeleteForever";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
-import { UserType } from "@/hooks/useUser/types";
+import { User, UserType } from "@/hooks/useUser/types";
 
 interface OrderButtonsProps {
   order: OrderProps;
-  userType: UserType;
+  user: User | undefined;
 }
 
 const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
-  const { userType, order } = props;
+  const { user, order } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -65,7 +65,7 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
   };
   const handleOnClickButtonManufacture = () => {};
 
-  const renderClientButtons = () => {
+  const renderUserButtons = () => {
     return (
       <>
         {order.state < OrderState.REQUESTED ? (
@@ -126,7 +126,7 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
     );
   };
 
-  const renderManufacturerButtons = () => {
+  const renderOrganizationButtons = () => {
     return (
       <>
         {order.state === OrderState.REQUESTED ? (
@@ -160,9 +160,13 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
-      {userType === UserType.anonym ? renderClientButtons() : null}
-      {userType === UserType.client ? renderClientButtons() : null}
-      {userType === UserType.manufacturer ? renderManufacturerButtons() : null}
+      {user === undefined ? renderUserButtons() : null}
+      {user !== undefined && user.usertype === UserType.USER
+        ? renderUserButtons()
+        : null}
+      {user !== undefined && user.usertype === UserType.ORGANIZATION
+        ? renderOrganizationButtons()
+        : null}
     </div>
   );
 };

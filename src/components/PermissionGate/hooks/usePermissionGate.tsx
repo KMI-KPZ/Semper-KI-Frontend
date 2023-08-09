@@ -1,7 +1,6 @@
 import { AppContext } from "@/pages/App/App";
 import { useContext } from "react";
 import { UserType } from "@/hooks/useUser/types";
-import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
   hasPermission(element: string): boolean;
@@ -16,15 +15,19 @@ const usePermissionGate = (): ReturnProps => {
     );
 
     const allowAccess =
-      user?.type !== UserType.manufacturer ||
-      (user?.type === UserType.manufacturer &&
-        permissions !== undefined &&
-        permissionGate !== undefined &&
-        permissions.find(
-          (permission) =>
-            permission.context === permissionGate.permission.context &&
-            permission.permission === permissionGate.permission.permission
-        ) !== undefined);
+      user === undefined ||
+      (user !== undefined &&
+        (user.usertype === UserType.ADMIN ||
+          user.usertype === UserType.USER ||
+          (user.usertype === UserType.ORGANIZATION &&
+            permissions !== undefined &&
+            permissionGate !== undefined &&
+            permissions.find(
+              (permission) =>
+                permission.context === permissionGate.permission.context &&
+                permission.permission === permissionGate.permission.permission
+            ) !== undefined)));
+
     return allowAccess;
   };
 

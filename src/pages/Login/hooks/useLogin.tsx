@@ -21,9 +21,9 @@ export const useLogin = (
     return search !== "" ? search.replace("?", "&") : "";
   };
   const getUserType = (): string | undefined => {
-    if (getReplacedSearchParam() !== "") return UserType[UserType.manufacturer];
-    if (orga === true) return UserType[UserType.manufacturer];
-    else return UserType[UserType.client];
+    if (getReplacedSearchParam() !== "") return UserType[UserType.ORGANIZATION];
+    if (orga === true) return UserType[UserType.ORGANIZATION];
+    else return UserType[UserType.USER];
   };
   const getOrgaID = (): string | undefined => {
     const orgaID = params[0].get("organization");

@@ -11,7 +11,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import { Badge } from "@component-library/Badge";
 import OrderFile from "./components/OrderFile";
-import { UserType } from "@/hooks/useUser/types";
+import { User, UserType } from "@/hooks/useUser/types";
 import { OrderEventItem } from "@/pages/App/types";
 import { AppContext } from "@/pages/App/App";
 import { getModelURI } from "@/services/utils";
@@ -27,7 +27,7 @@ import SubOrderService from "./Service/Service";
 interface Props {
   subOrder: SubOrderProps;
   orderID: string;
-  userType: UserType;
+  user: User | undefined;
   orderEvent?: OrderEventItem;
 }
 
@@ -37,13 +37,13 @@ interface State {
 }
 
 const SubOrder: React.FC<Props> = (props) => {
-  const { subOrder, orderID, userType, orderEvent } = props;
+  const { subOrder, orderID, user, orderEvent } = props;
   const [state, setState] = useState<State>({
     chatOpen: false,
     menuOpen: false,
   });
   const { chatOpen, menuOpen } = state;
-  const { user, deleteEvent } = useContext(AppContext);
+  const { deleteEvent } = useContext(AppContext);
   const { deleteSubOrder, updateSubOrder } = useSubOrder();
   const { getDeleteOrderEvent } = useOrderEventChange(
     subOrder,
@@ -103,7 +103,8 @@ const SubOrder: React.FC<Props> = (props) => {
   };
 
   const renderButtons = () => {
-    if (userType === UserType.client)
+    if (user === undefined) return null;
+    if (user.usertype === UserType.USER)
       return (
         <div className="flex w-full flex-col items-center justify-center gap-3 md:w-fit md:flex-row">
           <Button
@@ -120,7 +121,7 @@ const SubOrder: React.FC<Props> = (props) => {
           />
         </div>
       );
-    if (userType === UserType.manufacturer)
+    if (user.usertype === UserType.ORGANIZATION)
       return (
         <div className="flex w-full flex-col items-center justify-center gap-3 md:w-fit md:flex-row">
           <Button
@@ -199,7 +200,7 @@ const SubOrder: React.FC<Props> = (props) => {
       <StatusBar
         currentState={subOrder.state}
         updateStatus={updateStatus}
-        userType={userType}
+        userType={user === undefined ? UserType.ANONYM : user.usertype}
       />
       <SubOrderService service={subOrder.service} />
       <PermissionGate element="OrderFile">

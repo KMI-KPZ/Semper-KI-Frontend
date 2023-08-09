@@ -1,4 +1,4 @@
-import { UserType } from "@/hooks/useUser/types";
+import { User, UserType } from "@/hooks/useUser/types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
@@ -9,11 +9,11 @@ import NewOrder from "./New/NewOrder";
 import NewSubOrder from "./New/NewSubOrder";
 
 interface OrderRoutesProps {
-  userType: UserType;
+  user: User | undefined;
 }
 
 const OrderRoutes: React.FC<OrderRoutesProps> = (props) => {
-  const { userType } = props;
+  const { user } = props;
   const { t } = useTranslation();
 
   return (
@@ -21,7 +21,7 @@ const OrderRoutes: React.FC<OrderRoutesProps> = (props) => {
       <Route index element={<Navigate to="/orders" />} />
       <Route path="new" element={<NewOrder />} />
       <Route path=":orderID/*">
-        <Route index element={<Order userType={userType} />} />
+        <Route index element={<Order user={user} />} />
         <Route path="checkout" element={<OrderCheckout />} />
         <Route path="subOrder">
           <Route index element={<Navigate to="../" />} />

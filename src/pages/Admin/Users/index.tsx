@@ -44,7 +44,7 @@ const AdminUsers: React.FC<Props> = (props) => {
                   {user.email}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {UserType[user.type]}
+                  {UserType[user.usertype]}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {/* {user.created} */}

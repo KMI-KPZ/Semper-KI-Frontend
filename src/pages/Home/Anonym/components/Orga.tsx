@@ -1,7 +1,7 @@
 import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import HomeAnonymContainer from "./Container";
+import HomeContainer from "../../components/Container";
 import { Button } from "@component-library/Button";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import LoginIcon from "@mui/icons-material/Login";
@@ -13,7 +13,7 @@ const HomeAnonymOrga: React.FC<HomeAnonymOrgaProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <HomeAnonymContainer
+    <HomeContainer
       className="md:flex-row md:gap-40"
       data-testid="home-anonym-orga"
     >
@@ -35,7 +35,7 @@ const HomeAnonymOrga: React.FC<HomeAnonymOrgaProps> = (props) => {
           />
         </div>
       </div>
-    </HomeAnonymContainer>
+    </HomeContainer>
   );
 };
 

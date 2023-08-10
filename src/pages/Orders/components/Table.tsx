@@ -20,17 +20,34 @@ interface OrdersTableProps {
   flatOrders: FlatOrderProps[];
 }
 
-interface OrderTableGroupProps {
+interface OrderTableGroupingsProps {
+  title: string;
   startState: OrderState;
   endState: OrderState;
 }
 
-const orderGroups: OrderTableGroupProps[] = [
+const orderGroupings: OrderTableGroupingsProps[] = [
   {
+    title: "draft",
     startState: OrderState.DRAFT,
     endState: OrderState.VERIFIED,
   },
+  {
+    title: "ongoing",
+    startState: OrderState.REQUESTED,
+    endState: OrderState.DELIVERY,
+  },
+  {
+    title: "completed",
+    startState: OrderState.COMPLETED,
+    endState: OrderState.COMPLETED,
+  },
 ];
+
+interface OrderTableGroupProps {
+  title: string;
+  flatOrders: FlatOrderProps[];
+}
 
 const OrdersTable: React.FC<OrdersTableProps> = (props) => {
   const { flatOrders } = props;
@@ -43,9 +60,50 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
       : logger("delete canceled");
   };
 
-  const getGroupedFlatOrder = (flatOrder: FlatOrderProps) => {
-    const groupedFlatOrder = flatOrders;
+  const getGroupedFlatOrder = (
+    flatOrders: FlatOrderProps[]
+  ): OrderTableGroupProps[] => {
+    const orderGroups: OrderTableGroupProps[] = orderGroupings.map(
+      (grouping): OrderTableGroupProps => {
+        const filteredOrders = flatOrders.filter(
+          (order) =>
+            order.state >= grouping.startState &&
+            order.state <= grouping.endState
+        );
+        return {
+          title: grouping.title,
+          flatOrders: filteredOrders,
+        };
+      }
+    );
+    return orderGroups;
   };
+
+  const renderRowButtons = (flatOrder: FlatOrderProps) => (
+    <div className="flex w-fit flex-row items-center justify-center gap-5">
+      <Button
+        variant="secondary"
+        title={t("order.overview.components.table.button.delete")}
+        children={<DeleteIcon />}
+        onClick={() => handleOnClickButtonDelete(flatOrder.orderID)}
+      />
+      {flatOrder.state < OrderState.REQUESTED ? (
+        <Button
+          variant="secondary"
+          title={t("order.overview.components.table.button.edit")}
+          children={<EditIcon />}
+          to={`/order/${flatOrder.orderID}`}
+        />
+      ) : (
+        <Button
+          variant="secondary"
+          title={t("order.overview.components.table.button.detail")}
+          children={<VisibilityIcon />}
+          to={`/order/${flatOrder.orderID}`}
+        />
+      )}
+    </div>
+  );
 
   return (
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -60,25 +118,25 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {flatOrders.length === 0 ? (
-          <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-            <TableCell colSpan={5} align="center">
-              <Text variant="body">
-                {t("order.overview.components.table.noItems")}
-              </Text>
-            </TableCell>
-          </TableRow>
-        ) : (
-          flatOrders
+        {getGroupedFlatOrder(flatOrders).map((group) =>
+          group.flatOrders
             .sort((subOrderA, subOrderB) =>
               subOrderA.created > subOrderB.created ? -1 : 1
             )
-            .map((flatOrder) => (
+            .map((flatOrder, index, groupFlatOrder) => (
               <TableRow
                 key={flatOrder.orderID}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row"></TableCell>
+                {index === 0 ? (
+                  <TableCell
+                    scope="row"
+                    rowSpan={groupFlatOrder.length}
+                    sx={{ border: 0 }}
+                  >
+                    {t(`order.overview.components.table.groups.${group.title}`)}
+                  </TableCell>
+                ) : null}
                 <TableCell component="th" scope="row">
                   Artikel: #{flatOrder.orderID}
                 </TableCell>
@@ -91,35 +149,7 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
                 </TableCell>
                 <TableCell>{flatOrder.subOrderCount}</TableCell>
                 <TableCell>{flatOrder.created.toLocaleDateString()}</TableCell>
-                <TableCell>
-                  <div className="flex w-fit flex-row items-center justify-center gap-5">
-                    <Button
-                      variant="secondary"
-                      title={t("order.overview.components.table.button.delete")}
-                      children={<DeleteIcon />}
-                      onClick={() =>
-                        handleOnClickButtonDelete(flatOrder.orderID)
-                      }
-                    />
-                    {flatOrder.state < OrderState.REQUESTED ? (
-                      <Button
-                        variant="secondary"
-                        title={t("order.overview.components.table.button.edit")}
-                        children={<EditIcon />}
-                        to={`/order/${flatOrder.orderID}`}
-                      />
-                    ) : (
-                      <Button
-                        variant="secondary"
-                        title={t(
-                          "order.overview.components.table.button.detail"
-                        )}
-                        children={<VisibilityIcon />}
-                        to={`/order/${flatOrder.orderID}`}
-                      />
-                    )}
-                  </div>
-                </TableCell>
+                <TableCell>{renderRowButtons(flatOrder)}</TableCell>
               </TableRow>
             ))
         )}

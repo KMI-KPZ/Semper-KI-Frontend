@@ -1067,6 +1067,11 @@
             "delete":"Löschen",
             "edit":"Bearbeiten",
             "detail":"Details"
+          },
+          "groups":{
+            "draft":"Entwürfe",
+            "ongoing":"Laufend",
+            "completed":"Abgeschlossen"
           }
         }
       }

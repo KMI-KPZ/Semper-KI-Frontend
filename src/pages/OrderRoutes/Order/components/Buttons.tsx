@@ -36,6 +36,7 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
   const handleOnClickButtonDelete = () => {
     if (window.confirm(t("Orders.OrderCollection.button.cancel") + "?")) {
       deleteOrder.mutate(order.orderID);
+      navigate("/orders");
     }
   };
   const handleOnClickButtonReOrder = () => {

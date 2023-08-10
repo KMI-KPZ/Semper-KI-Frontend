@@ -103,14 +103,14 @@ const useSubOrder = (): ReturnProps => {
     mutationFn: async (subOrderID: string) => {
       return getCustomAxios()
         .delete(
-          `${process.env.VITE_HTTP_API_URL}/public/deleteSubOrder/${orderID}/${subOrderID}`
+          `${process.env.VITE_HTTP_API_URL}/public/deleteSubOrder/${orderID}/${subOrderID}/`
         )
         .then((res) => {
           logger("useSubOrder | deleteSubOrder ✅ |", res.data);
           return res.data;
         });
     },
-    onSuccess(data, orderID, context) {
+    onSuccess(data, subOrderID, context) {
       queryClient.invalidateQueries(["order", orderID]);
       queryClient.invalidateQueries(["orders"]);
     },

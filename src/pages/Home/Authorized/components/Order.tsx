@@ -11,7 +11,7 @@ interface HomeAuthorizedOrderProps {}
 const HomeAuthorizedOrder: React.FC<HomeAuthorizedOrderProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { ordersQuery } = useFlatOrders();
+  // const { ordersQuery } = useFlatOrders();
   const { createOrder } = useOrder();
   const handleOnClickButtonNew = () => {
     createOrder.mutate();

@@ -15,6 +15,7 @@ import { User, UserType } from "@/hooks/useUser/types";
 import { OrderEventItem } from "@/pages/App/types";
 import { AppContext } from "@/pages/App/App";
 import { getModelURI } from "@/services/utils";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Heading, Text } from "@component-library/Typography";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import useOrderEventChange from "../hooks/useOrderEventChange";
@@ -110,13 +111,13 @@ const SubOrder: React.FC<Props> = (props) => {
         <div className="flex w-full flex-col items-center justify-center gap-3 md:w-fit md:flex-row">
           <Button
             size="sm"
-            startIcon={<CancelIcon />}
+            children={<DeleteIcon />}
             onClick={handleOnClickButtonCancel}
             title={t("Orders.OrderView.button.cancel")}
           />
           <Button
             size="sm"
-            startIcon={<ReplayIcon />}
+            children={<ReplayIcon />}
             onClick={handleOnClickButtonReOrder}
             title={t("Orders.OrderView.button.reOrder")}
           />
@@ -127,19 +128,19 @@ const SubOrder: React.FC<Props> = (props) => {
         <div className="flex w-full flex-col items-center justify-center gap-3 md:w-fit md:flex-row">
           <Button
             size="sm"
-            startIcon={<CancelIcon />}
+            children={<DeleteIcon />}
             onClick={handleOnClickButtonReject}
             title={t("Orders.OrderView.button.reject")}
           />
           <Button
             size="sm"
-            startIcon={<QuestionMarkIcon />}
+            children={<QuestionMarkIcon />}
             onClick={handleOnClickButtonVerify}
             title={t("Orders.OrderView.button.verify")}
           />
           <Button
             size="sm"
-            startIcon={<CheckIcon />}
+            children={<CheckIcon />}
             onClick={handleOnClickButtonConfirm}
             title={t("Orders.OrderView.button.confirm")}
           />
@@ -165,7 +166,7 @@ const SubOrder: React.FC<Props> = (props) => {
                 <Badge count={orderEvent.messages}>
                   <Button
                     size="sm"
-                    startIcon={<MailIcon />}
+                    children={<MailIcon />}
                     onClick={handleOnClickButtonChat}
                     title={t("Orders.OrderView.button.chat")}
                   />
@@ -173,31 +174,15 @@ const SubOrder: React.FC<Props> = (props) => {
               ) : (
                 <Button
                   size="sm"
-                  startIcon={<MailIcon />}
+                  children={<MailIcon />}
                   onClick={handleOnClickButtonChat}
                   title={t("Orders.OrderView.button.chat")}
                 />
               )}
             </PermissionGate>
             <PermissionGate element="OrderButtons">
-              {menuOpen ? renderButtons() : null}
+              {renderButtons()}
             </PermissionGate>
-            <div className={`flex items-center justify-center `}>
-              <Button
-                size="sm"
-                startIcon={
-                  <ExpandLessIcon
-                    className={` ${
-                      menuOpen ? "md:rotate-90" : "rotate-180 md:-rotate-90"
-                    }`}
-                  />
-                }
-                title={t(
-                  `Orders.OrderView.button.${menuOpen ? "collapse" : "expand"}`
-                )}
-                onClick={handleOnClickButtonExpand}
-              />
-            </div>
           </div>
         </PermissionGate>
       </div>

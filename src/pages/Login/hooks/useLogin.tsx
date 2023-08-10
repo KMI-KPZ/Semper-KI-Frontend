@@ -37,7 +37,7 @@ export const useLogin = (
       return getCustomAxios()
         .get(apiUrl, {
           headers: {
-            Usertype: getUserType(),
+            Usertype: getUserType()?.toLocaleLowerCase(),
             Path: path === undefined ? "/" : path,
             Register:
               register !== undefined && register === true ? true : false,

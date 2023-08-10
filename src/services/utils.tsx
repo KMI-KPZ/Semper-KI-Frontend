@@ -69,6 +69,8 @@ export const getUserType = (name?: string): UserType => {
   switch (name.toLocaleLowerCase()) {
     case "user":
       return UserType.USER;
+    case "organization":
+      return UserType.ORGANIZATION;
     case "organisation":
       return UserType.ORGANIZATION;
     case "admin":

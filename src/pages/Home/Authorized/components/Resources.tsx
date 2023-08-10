@@ -19,7 +19,7 @@ const HomeAuthorizedResources: React.FC<HomeAuthorizedResourcesProps> = (
       </Heading>
       <Button
         title={t("Home.Home.Authorized.Resources.button.edit")}
-        to="/organisation"
+        to="/organization"
       />
     </HomeContainer>
   );

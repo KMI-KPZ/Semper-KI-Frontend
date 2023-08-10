@@ -18,8 +18,10 @@ interface ReturnProps {
 }
 
 export interface OrderProps {
-  id: string;
-  date: string;
+  orderID: string;
+  client: string;
+  created: Date;
+  updated: Date;
   state: OrderState;
   subOrders: SubOrderProps[];
 }
@@ -51,15 +53,16 @@ export const useOrder = (): ReturnProps => {
   const orderQuery = useQuery<OrderProps, Error>(
     ["order", orderID],
     async () => {
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getOrder/${orderID}`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getOrder/${orderID}/`;
       return getCustomAxios()
         .get(apiUrl)
         .then((response) => {
           logger("useOrdes | getOrder ✅ |", response.data);
-          return response.data.map((order: any) => ({
-            ...order,
-            subOrders: order.orders,
-          }));
+          return {
+            created: new Date(response.data.created),
+            updated: new Date(response.data.updated),
+            ...response.data,
+          };
         });
     },
     {
@@ -75,7 +78,7 @@ export const useOrder = (): ReturnProps => {
         .then((response) => {
           logger("useOrder | createOrder ✅ |", response.data);
 
-          return response.data;
+          return response.data.orderID;
         });
     },
     onSuccess(data, variables, context) {
@@ -104,7 +107,9 @@ export const useOrder = (): ReturnProps => {
   const deleteOrder = useMutation<string, Error, string>({
     mutationFn: async (orderID: string) => {
       return getCustomAxios()
-        .patch(`${process.env.VITE_HTTP_API_URL}/public/deleteOrder/${orderID}`)
+        .delete(
+          `${process.env.VITE_HTTP_API_URL}/public/deleteOrder/${orderID}/`
+        )
         .then((res) => {
           logger("useOrder | deleteOrder ✅ |", res.data);
           return res.data;

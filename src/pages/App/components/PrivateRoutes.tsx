@@ -15,6 +15,18 @@ export const UserRoutes: React.FC<Props> = (props) => {
   return user === undefined ? <LoginView path={pathname} /> : <Outlet />;
 };
 
+export const OrganizationRoutes: React.FC<Props> = (props) => {
+  const { user } = props;
+  const { pathname } = useLocation();
+  const { t } = useTranslation();
+  if (user === undefined) return <LoginView path={pathname} />;
+  return user.usertype === UserType.ORGANIZATION ? (
+    <Outlet />
+  ) : (
+    <Error text={t("PrivateRoutes.error.organization")} />
+  );
+};
+
 export const AdminRoutes: React.FC<Props> = (props) => {
   const { user } = props;
   const { t } = useTranslation();

@@ -16,7 +16,7 @@ const SubOrderServiceManufacturing: React.FC<
 
   return (
     <div className="flex w-full flex-col md:flex-row">
-      <Text variant="body">Name: {service.title}</Text>
+      <Text variant="body">Herstellen lassen</Text>
       <Text variant="body">Modell: {service.model?.title}</Text>
       <Text variant="body">Material: {service.material?.title}</Text>
       <Text variant="body">

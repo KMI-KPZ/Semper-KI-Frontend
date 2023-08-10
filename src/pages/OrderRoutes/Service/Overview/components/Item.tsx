@@ -8,6 +8,7 @@ import useSubOrder, {
 } from "@/pages/OrderRoutes/hooks/useSubOrder";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
+import { ServiceType } from "../../hooks/useService";
 
 interface Props {
   subOrder: SubOrderProps;
@@ -23,19 +24,19 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
   const { orderID, subOrderID } = useParams();
   const [state, setState] = useState<State>({
     edit: false,
-    titleText: subOrder.service.title,
+    titleText: ServiceType[subOrder.service.type],
   });
   const { edit, titleText } = state;
   const navigate = useNavigate();
   const { deleteSubOrder } = useSubOrder();
-  const active = subOrderID === subOrder.id;
+  const active = subOrderID === subOrder.subOrderID;
 
   const handleOnClickCard = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    navigate(`/order/${orderID}/subOrder/${subOrder.id}/`);
+    navigate(`/order/${orderID}/subOrder/${subOrder.subOrderID}/`);
   };
 
   const handleOnClickDeleteIcon = (
@@ -43,7 +44,7 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    deleteSubOrder.mutate(subOrder.id);
+    deleteSubOrder.mutate(subOrder.subOrderID);
   };
 
   const handleOnClickEditCheckButton = (

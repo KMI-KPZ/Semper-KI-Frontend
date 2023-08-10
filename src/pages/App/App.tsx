@@ -6,7 +6,11 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { RequestTest } from "../RequestTest/RequestTest";
-import { AdminRoutes, UserRoutes } from "./components/PrivateRoutes";
+import {
+  AdminRoutes,
+  OrganizationRoutes,
+  UserRoutes,
+} from "./components/PrivateRoutes";
 import { User, UserType } from "@/hooks/useUser/types";
 import { DeleteEvent, Event } from "@/pages/App/types";
 import { ToastContainer } from "react-toastify";
@@ -105,10 +109,8 @@ const App: React.FC = () => {
     </Route>
   );
 
-  const userRoutes = (
-    <Route element={<UserRoutes user={user} />}>
-      <Route path="test" element={<RequestTest socket={socket} />} />
-      <Route path="account" element={<Profil user={user!} />} />
+  const organizationRoutes = (
+    <Route element={<OrganizationRoutes user={user} />}>
       <Route
         path="organization"
         element={
@@ -129,6 +131,13 @@ const App: React.FC = () => {
           />
         }
       />
+    </Route>
+  );
+
+  const userRoutes = (
+    <Route element={<UserRoutes user={user} />}>
+      <Route path="test" element={<RequestTest socket={socket} />} />
+      <Route path="account" element={<Profil user={user!} />} />
     </Route>
   );
 
@@ -187,6 +196,7 @@ const App: React.FC = () => {
             <Route path="orders" element={<Orders />} />
             <Route path="order/*" element={<OrderRoutes user={user} />} />
             {userRoutes}
+            {organizationRoutes}
             {adminRoutes}
             <Route path="*" element={<Error />} />
           </Routes>

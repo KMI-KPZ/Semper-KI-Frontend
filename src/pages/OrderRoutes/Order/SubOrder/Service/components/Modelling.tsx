@@ -15,7 +15,7 @@ const SubOrderServiceModelling: React.FC<SubOrderServiceModellingProps> = (
 
   return (
     <div className="flex w-full flex-col md:flex-row">
-      <Text variant="body">Name: {service.title}</Text>
+      <Text variant="body">Modell entwerfen</Text>
     </div>
   );
 };

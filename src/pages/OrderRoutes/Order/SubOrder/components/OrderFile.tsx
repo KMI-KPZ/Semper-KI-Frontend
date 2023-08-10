@@ -16,7 +16,10 @@ const OrderFile: React.FC<Props> = (props) => {
   const { subOrder: order } = props;
   const { t } = useTranslation();
   const [fileName, setFileName] = useState<string>("");
-  const { orderFileQuery } = useOrderFile({ orderID: order.id, fileName });
+  const { orderFileQuery } = useOrderFile({
+    orderID: order.subOrderID,
+    fileName,
+  });
   useFileView(fileName, orderFileQuery, setFileName);
 
   const handleOnClickButton = (fileName: string) => {

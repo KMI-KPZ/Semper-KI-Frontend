@@ -3,7 +3,7 @@ import { Button } from "@component-library/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { useTranslation } from "react-i18next";
 import { User } from "@/hooks/useUser/types";
-import { Heading } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/Typography";
 import { useOrder } from "../../../hooks/useOrder";
 import useSubOrder, { ChatMessageProps } from "../../../hooks/useSubOrder";
 
@@ -79,33 +79,36 @@ const Chat: React.FC<Props> = (props) => {
   return (
     <div className="relative flex h-screen w-screen flex-col items-center justify-start gap-5 bg-slate-100 md:max-h-[80vh] md:max-w-2xl md:bg-transparent">
       <div className="flex h-full w-full flex-col-reverse items-center justify-start gap-5 overflow-auto bg-white p-5">
-        {chat
-          .slice(0)
-          .reverse()
-          .map((chatMessage: ChatMessageProps, index: number) => (
-            <div
-              key={index}
-              className={`flex w-full flex-col gap-3 ${
-                chatMessage.userID === user?.hashedID
-                  ? "items-end"
-                  : "items-start"
-              }`}
-            >
-              <span>{chatMessage.userName}:</span>
+        {chat.length > 0 ? (
+          [...chat]
+            .reverse()
+            .map((chatMessage: ChatMessageProps, index: number) => (
               <div
-                className={`flex w-full items-end justify-start gap-3 rounded-full bg-slate-100 p-3 ${
+                key={index}
+                className={`flex w-full flex-col gap-3 ${
                   chatMessage.userID === user?.hashedID
-                    ? "flex-row-reverse"
-                    : "flex-row"
+                    ? "items-end"
+                    : "items-start"
                 }`}
               >
-                <span>{chatMessage.text}</span>
-                <span className="text-xs">
-                  {new Date(chatMessage.date).toLocaleString()}
-                </span>
+                <span>{chatMessage.userName}:</span>
+                <div
+                  className={`flex w-full items-end justify-start gap-3 rounded-full bg-slate-100 p-3 ${
+                    chatMessage.userID === user?.hashedID
+                      ? "flex-row-reverse"
+                      : "flex-row"
+                  }`}
+                >
+                  <span>{chatMessage.text}</span>
+                  <span className="text-xs">
+                    {new Date(chatMessage.date).toLocaleString()}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+        ) : (
+          <Text variant="body">{t("Orders.ChatView.noMessages")}</Text>
+        )}
         <Heading variant="h1">{t("Orders.ChatView.header")}</Heading>
       </div>
       <div className="flex h-fit w-full flex-col items-center justify-start gap-5 bg-white p-3 md:flex-row">

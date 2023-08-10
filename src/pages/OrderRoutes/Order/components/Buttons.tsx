@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { OrderProps, OrderState } from "../../hooks/useOrder";
+import { OrderProps, OrderState, useOrder } from "../../hooks/useOrder";
 import { Button } from "@component-library/Button";
 import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
@@ -11,9 +11,11 @@ import PolicyIcon from "@mui/icons-material/Policy";
 import SendIcon from "@mui/icons-material/Send";
 import FactoryIcon from "@mui/icons-material/Factory";
 import DeleteForever from "@mui/icons-material/DeleteForever";
+import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 import { User, UserType } from "@/hooks/useUser/types";
+import useSubOrder from "../../hooks/useSubOrder";
 
 interface OrderButtonsProps {
   order: OrderProps;
@@ -24,11 +26,17 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
   const { user, order } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { createSubOrder } = useSubOrder();
+  const { deleteOrder } = useOrder();
 
-  const handleOnClickButtonCancel = () => {
-    // if (window.confirm(t("Orders.OrderCollection.button.cancel") + "?")) {
-    //   deleteOrderCollection.mutate(orderCollection.id);
-    // }
+  const onButtonClickCreateSubOrder = () => {
+    createSubOrder.mutate();
+  };
+
+  const handleOnClickButtonDelete = () => {
+    if (window.confirm(t("Orders.OrderCollection.button.cancel") + "?")) {
+      deleteOrder.mutate(order.orderID);
+    }
   };
   const handleOnClickButtonReOrder = () => {
     if (window.confirm(t("Orders.OrderCollection.button.re-order") + "?")) {
@@ -73,6 +81,7 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
             size="sm"
             startIcon={<DeleteForever />}
             title={t("Orders.OrderCollection.button.delete")}
+            onClick={handleOnClickButtonDelete}
           />
         ) : null}
         {order.state === OrderState.REQUESTED ? (
@@ -88,6 +97,14 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
             startIcon={<EditIcon />}
             to="process/model"
             title={t("Orders.OrderCollection.button.edit")}
+          />
+        ) : null}
+        {order.state < OrderState.REQUESTED ? (
+          <Button
+            size="sm"
+            startIcon={<AddIcon />}
+            onClick={onButtonClickCreateSubOrder}
+            title={t("Orders.OrderCollection.button.new")}
           />
         ) : null}
         {order.state === OrderState.DRAFT ? (

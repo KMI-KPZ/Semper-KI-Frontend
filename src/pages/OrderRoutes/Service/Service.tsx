@@ -8,10 +8,7 @@ import ServiceOverview from "./Overview/Overview";
 import { useOrder } from "../hooks/useOrder";
 import { ServiceModellingProps } from "./Modelling/Modelling";
 
-export interface ServiceProps {
-  type: ServiceType;
-  title: string;
-}
+export interface ServiceProps {}
 
 export type GeneralServiceProps =
   | ServiceManufacturingProps

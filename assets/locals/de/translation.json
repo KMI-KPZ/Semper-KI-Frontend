@@ -488,6 +488,7 @@
   "Orders":{
     "ChatView":{
       "header":"Nachrichten",
+      "noMessages":"Keine Nachrichten vorhanden",
       "placeholder":"Nachricht...",
       "button":{
         "close":"Schließen",
@@ -499,6 +500,7 @@
       "date":"Datum",
       "noSubOrders":"Keine unteraufträge vorhanden",
       "button":{
+        "new":"Neuer SubAuftrag",
         "manufacturer":"Herstellerauswahl",
         "edit":"Bearbeiten",
         "cancel":"Stornieren",
@@ -622,7 +624,7 @@
   "PrivateRoutes":{
     "error":{
       "client":"Sie Müssen als Kunde angemeldet Sein um diese Seite zu sehen",
-      "manufacturer":"Sie Müssen als Hersteller angemeldet Sein um diese Seite zu sehen",
+      "organization":"Sie Müssen als Hersteller angemeldet Sein um diese Seite zu sehen",
       "admin":"404 - Seite nicht gefunden"
     }
   },
@@ -1053,6 +1055,8 @@
       },
       "components":{
         "table":{
+          "deleteConfirm":"Möchten Sie den Auftrag wirklich löschen?",
+          "grouping":"Gruppierung",
           "name":"Name",
           "status":"Status",
           "created":"Erstellt am",

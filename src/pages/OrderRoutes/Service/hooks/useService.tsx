@@ -17,7 +17,7 @@ const useService = (): ReturnProps => {
   const { subOrderID } = useParams();
   const getService = (): GeneralServiceProps | undefined => {
     const subOrder = orderQuery.data?.subOrders.find(
-      (subOrder) => subOrder.id === subOrderID
+      (subOrder) => subOrder.subOrderID === subOrderID
     );
     return subOrder?.service;
   };

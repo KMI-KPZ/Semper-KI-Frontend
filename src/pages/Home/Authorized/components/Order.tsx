@@ -19,10 +19,10 @@ const HomeAuthorizedOrder: React.FC<HomeAuthorizedOrderProps> = (props) => {
       <div className="flex flex-col">
         {ordersQuery.data !== undefined && ordersQuery.data.length > 0 ? (
           ordersQuery.data.slice(0, 5).map((order) => (
-            <div key={order.id}>
-              <Text variant="body">{order.id}</Text>
+            <div key={order.orderID}>
+              <Text variant="body">{order.orderID}</Text>
               <Text variant="body">{order.state}</Text>
-              <Text variant="body">{order.date}</Text>
+              <Text variant="body">{order.created.toLocaleDateString()}</Text>
               <Text variant="body">{order.subOrderCount}</Text>
               <Button
                 title={t(
@@ -30,7 +30,7 @@ const HomeAuthorizedOrder: React.FC<HomeAuthorizedOrderProps> = (props) => {
                     ? "Home.Home.Authorized.Order.button.continue"
                     : "Home.Home.Authorized.Order.button.see"
                 )}
-                to={`/order/${order.id}`}
+                to={`/order/${order.orderID}`}
               />
             </div>
           ))

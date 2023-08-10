@@ -10,6 +10,7 @@ import { OrderProps, OrderState, useOrder } from "../hooks/useOrder";
 import { Divider } from "@component-library/Divider";
 import { LoadingAnimation, LoadingSuspense } from "@component-library/index";
 import OrderButtons from "./components/Buttons";
+import useSubOrder from "../hooks/useSubOrder";
 
 interface Props {
   user: User | undefined;
@@ -21,6 +22,7 @@ const Order: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { orderQuery } = useOrder();
+
   const order: OrderProps | undefined = orderQuery.data;
 
   const getOrderEventItemByID = (
@@ -44,7 +46,7 @@ const Order: React.FC<Props> = (props) => {
         <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
           <div className="flex w-full flex-col items-start justify-start gap-5 md:flex-row md:items-center md:justify-between">
             <Heading variant="h2">
-              {t("Orders.OrderCollection.id")}: {order.id}
+              {t("Orders.OrderCollection.id")}: {order.orderID}
             </Heading>
             <Heading variant="h2">
               {t("Orders.OrderCollection.state.header")}
@@ -53,7 +55,7 @@ const Order: React.FC<Props> = (props) => {
             </Heading>
             <Heading variant="h2">
               {t("Orders.OrderCollection.date")}:{" "}
-              {new Date(order.date).toLocaleString()}
+              {new Date(order.created).toLocaleString()}
             </Heading>
           </div>
           <PermissionGate element={"OrderButtons"}>
@@ -68,15 +70,15 @@ const Order: React.FC<Props> = (props) => {
           ) : (
             order.subOrders
               .sort((subOrderA, subOrderB) =>
-                subOrderA.id < subOrderB.id ? -1 : 1
+                subOrderA.created < subOrderB.created ? -1 : 1
               )
               .map((subOrder, index) => (
                 <SubOrder
                   key={index}
                   subOrder={subOrder}
-                  orderID={order.id}
+                  orderID={order.orderID}
                   user={user}
-                  orderEvent={getOrderEventItemByID(subOrder.id)}
+                  orderEvent={getOrderEventItemByID(subOrder.subOrderID)}
                 />
               ))
           )}

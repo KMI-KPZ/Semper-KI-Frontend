@@ -27,12 +27,15 @@ interface ReturnProps {
 }
 
 export interface SubOrderProps {
-  id: string;
-  state: OrderState;
-  updatedWhen: string;
-  chat: { messages: ChatMessageProps[] };
+  chat: ChatMessageProps[];
+  contractor: string;
+  created: Date;
+  details: any;
   files: string[];
   service: GeneralServiceProps;
+  state: OrderState;
+  subOrderID: string;
+  updated: string;
 }
 
 export interface ChatMessageProps {
@@ -57,23 +60,23 @@ const useSubOrder = (): ReturnProps => {
 
   const getCurrentSubOrder = (): SubOrderProps | undefined => {
     return orderQuery.data?.subOrders.find(
-      (subOrder) => subOrder.id === subOrderID
+      (subOrder) => subOrder.subOrderID === subOrderID
     );
   };
 
   const createSubOrder = useMutation<string, Error, void>({
     mutationFn: async () => {
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createSubOrder/${orderID}`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createSubOrder/${orderID}/`;
       return getCustomAxios()
         .get(apiUrl)
         .then((response) => {
           logger("useSubOrder | createSubOrder ✅ |", response.data);
-          return response.data;
+          return response.data.subOrderID;
         });
     },
-    onSuccess(data, orderID, context) {
+    onSuccess(data, variables, context) {
       queryClient.invalidateQueries(["orders"]);
-      navigate(`/order/${orderID}/subOrder/${data}`);
+      queryClient.invalidateQueries(["order", orderID]);
     },
   });
 
@@ -97,10 +100,10 @@ const useSubOrder = (): ReturnProps => {
   });
 
   const deleteSubOrder = useMutation<string, Error, string>({
-    mutationFn: async (orderID: string) => {
+    mutationFn: async (subOrderID: string) => {
       return getCustomAxios()
-        .patch(
-          `${process.env.VITE_HTTP_API_URL}/public/deleteSubOrder/${orderID}`
+        .delete(
+          `${process.env.VITE_HTTP_API_URL}/public/deleteSubOrder/${orderID}/${subOrderID}`
         )
         .then((res) => {
           logger("useSubOrder | deleteSubOrder ✅ |", res.data);

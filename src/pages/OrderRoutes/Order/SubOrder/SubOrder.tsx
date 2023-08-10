@@ -15,7 +15,7 @@ import { User, UserType } from "@/hooks/useUser/types";
 import { OrderEventItem } from "@/pages/App/types";
 import { AppContext } from "@/pages/App/App";
 import { getModelURI } from "@/services/utils";
-import { Heading } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/Typography";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import useOrderEventChange from "../hooks/useOrderEventChange";
 import logger from "@/hooks/useLogger";
@@ -23,6 +23,7 @@ import Modal from "@component-library/Modal";
 import { OrderState } from "../../hooks/useOrder";
 import useSubOrder, { SubOrderProps } from "../../hooks/useSubOrder";
 import SubOrderService from "./Service/Service";
+import { ServiceType } from "../../Service/hooks/useService";
 
 interface Props {
   subOrder: SubOrderProps;
@@ -75,7 +76,7 @@ const SubOrder: React.FC<Props> = (props) => {
   };
   const handleOnClickButtonCancel = () => {
     if (window.confirm(t("Orders.OrderView.confirm.cancel"))) {
-      deleteSubOrder.mutate(subOrder.id);
+      deleteSubOrder.mutate(subOrder.subOrderID);
     }
   };
   const handleOnClickButtonReOrder = () => {
@@ -149,9 +150,12 @@ const SubOrder: React.FC<Props> = (props) => {
     <div className="flex w-full flex-col items-center justify-start gap-3 border-2 p-3 md:items-start">
       <div className="flex w-full flex-col justify-between md:flex-row">
         <Heading variant="h3">
-          {t("Orders.OrderView.header")} {subOrder.id}
+          {t("Orders.OrderView.header")} {subOrder.subOrderID}
         </Heading>
-        <Heading variant="h3">{subOrder.service.title}</Heading>
+        <Text variant="body">
+          {new Date(subOrder.created).toLocaleString()}
+        </Text>
+        <Heading variant="h3">{ServiceType[subOrder.service.type]}</Heading>
         <PermissionGate element={["OrderButtons", "ChatButton"]} concat="or">
           <div className="flex flex-col items-center  justify-center gap-3 md:flex-row">
             <PermissionGate element="ChatButton">
@@ -197,6 +201,7 @@ const SubOrder: React.FC<Props> = (props) => {
           </div>
         </PermissionGate>
       </div>
+      <div className="md:jube flex flex-col md:flex-row"></div>
       <StatusBar
         currentState={subOrder.state}
         updateStatus={updateStatus}
@@ -213,11 +218,11 @@ const SubOrder: React.FC<Props> = (props) => {
           className="flex w-full flex-col  "
         >
           <Chat
-            chat={subOrder.chat.messages}
+            chat={subOrder.chat}
             user={user}
             closeMenu={closeMenu}
             orderCollectionID={orderID}
-            orderID={subOrder.id}
+            orderID={subOrder.subOrderID}
           />
         </Modal>
       </PermissionGate>

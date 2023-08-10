@@ -10,50 +10,37 @@ import logger from "@/hooks/useLogger";
 import { OrderState } from "../../OrderRoutes/hooks/useOrder";
 
 interface ReturnProps {
-  ordersQuery: UseQueryResult<FlatOrder[], Error>;
-  deleteOrder: UseMutationResult<any, unknown, string, unknown>;
+  ordersQuery: UseQueryResult<FlatOrderProps[], Error>;
 }
 
-export interface FlatOrder {
-  id: string;
-  date: string;
+export interface FlatOrderProps {
+  orderID: string;
+  client: string;
+  created: Date;
+  updated: Date;
   state: OrderState;
   subOrderCount: number;
 }
 
 export const useFlatOrders = (): ReturnProps => {
-  const queryClient = useQueryClient();
-
-  const ordersQuery = useQuery<FlatOrder[], Error>(["orders"], async () => {
-    const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getOrders/`;
-    return getCustomAxios()
-      .get(apiUrl)
-      .then((response) => {
-        logger("useOrders | getOrders ✅ |", response.data);
-        return response.data.map((order: any) => ({
-          ...order,
-          subOrders: order.orders,
-        }));
-      });
-  });
-
-  const deleteOrder = useMutation<any, Error, string>({
-    mutationFn: async (orderCollectionID: string) => {
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/deleteOrderCollection/`;
+  const ordersQuery = useQuery<FlatOrderProps[], Error>(
+    ["orders"],
+    async () => {
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getFlatOrders/`;
       return getCustomAxios()
-        .delete(apiUrl, { data: { id: orderCollectionID } })
+        .get(apiUrl)
         .then((response) => {
-          logger("useOrders | deleteOrder ✅ |", response.data);
-          return response.data;
+          logger("useOrders | getOrders ✅ |", response.data);
+          return response.data.orders.map((order: any) => ({
+            ...order,
+            created: new Date(order.created),
+            updated: new Date(order.updated),
+          }));
         });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["orders"]);
-    },
-  });
+    }
+  );
 
   return {
     ordersQuery,
-    deleteOrder,
   };
 };

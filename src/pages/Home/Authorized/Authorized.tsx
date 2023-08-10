@@ -1,4 +1,4 @@
-import { User } from "@/hooks/useUser/types";
+import { User, UserType } from "@/hooks/useUser/types";
 import { Event } from "@/pages/App/types";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -24,12 +24,16 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
       <PermissionGate element={"HomeAuthorizedOrder"}>
         <HomeAuthorizedOrder />
       </PermissionGate>
-      <PermissionGate element={"HomeAuthorizedOrganization"}>
-        <HomeAuthorizedOrganization />
-      </PermissionGate>
-      <PermissionGate element={"HomeAuthorizedResources"}>
-        <HomeAuthorizedResources />
-      </PermissionGate>
+      {user.usertype === UserType.ORGANIZATION ? (
+        <>
+          <PermissionGate element={"HomeAuthorizedOrganization"}>
+            <HomeAuthorizedOrganization />
+          </PermissionGate>
+          <PermissionGate element={"HomeAuthorizedResources"}>
+            <HomeAuthorizedResources />
+          </PermissionGate>
+        </>
+      ) : null}
     </div>
   );
 };

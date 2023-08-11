@@ -1,5 +1,5 @@
 import { Button } from "@component-library/Button";
-import { Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/Typography";
 import {
   Table,
   TableBody,
@@ -63,19 +63,18 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
   const getGroupedFlatOrder = (
     flatOrders: FlatOrderProps[]
   ): OrderTableGroupProps[] => {
-    const orderGroups: OrderTableGroupProps[] = orderGroupings.map(
-      (grouping): OrderTableGroupProps => {
-        const filteredOrders = flatOrders.filter(
-          (order) =>
-            order.state >= grouping.startState &&
-            order.state <= grouping.endState
-        );
-        return {
+    let orderGroups: OrderTableGroupProps[] = [];
+    orderGroupings.forEach((grouping) => {
+      const filteredOrders = flatOrders.filter(
+        (order) =>
+          order.state >= grouping.startState && order.state <= grouping.endState
+      );
+      if (filteredOrders.length > 0)
+        orderGroups.push({
           title: grouping.title,
           flatOrders: filteredOrders,
-        };
-      }
-    );
+        });
+    });
     return orderGroups;
   };
 
@@ -118,10 +117,10 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {getGroupedFlatOrder(flatOrders).map((group) =>
+        {getGroupedFlatOrder(flatOrders).map((group, groupIndex, groups) =>
           group.flatOrders
             .sort((subOrderA, subOrderB) =>
-              subOrderA.created > subOrderB.created ? -1 : 1
+              subOrderA.state > subOrderB.state ? 1 : -1
             )
             .map((flatOrder, index, groupFlatOrder) => (
               <TableRow
@@ -132,9 +131,18 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
                   <TableCell
                     scope="row"
                     rowSpan={groupFlatOrder.length}
-                    sx={{ border: 0 }}
+                    sx={{
+                      verticalAlign: "top",
+                      border: groupIndex === groups.length - 1 ? 0 : undefined,
+                    }}
                   >
-                    {t(`order.overview.components.table.groups.${group.title}`)}
+                    <div className="flex h-full w-full flex-col items-center justify-start">
+                      <Heading variant="h2">
+                        {t(
+                          `order.overview.components.table.groups.${group.title}`
+                        )}
+                      </Heading>
+                    </div>
                   </TableCell>
                 ) : null}
                 <TableCell component="th" scope="row">

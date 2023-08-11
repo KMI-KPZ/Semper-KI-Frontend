@@ -23,15 +23,15 @@ export interface FlatOrderProps {
 }
 
 export const useFlatOrders = (): ReturnProps => {
-  const ordersQuery = useQuery<FlatOrderProps[], Error>(
-    ["orders"],
+  const flatOrdersQuery = useQuery<FlatOrderProps[], Error>(
+    ["flatOrders"],
     async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getFlatOrders/`;
       return getCustomAxios()
         .get(apiUrl)
         .then((response) => {
-          logger("useOrders | getOrders ✅ |", response.data);
-          return response.data.orders.map((order: any) => ({
+          logger("useFlatOrders | flatOrdersQuery ✅ |", response.data);
+          return response.data.orders.map((order: any, index: number) => ({
             ...order,
             created: new Date(order.created),
             updated: new Date(order.updated),
@@ -41,6 +41,6 @@ export const useFlatOrders = (): ReturnProps => {
   );
 
   return {
-    ordersQuery,
+    ordersQuery: flatOrdersQuery,
   };
 };

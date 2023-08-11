@@ -75,7 +75,7 @@ const useSubOrder = (): ReturnProps => {
         });
     },
     onSuccess(data, variables, context) {
-      queryClient.invalidateQueries(["orders"]);
+      queryClient.invalidateQueries(["flatOrders"]);
       queryClient.invalidateQueries(["order", orderID]);
     },
   });
@@ -95,7 +95,7 @@ const useSubOrder = (): ReturnProps => {
     },
     onSuccess(data, orderID, context) {
       queryClient.invalidateQueries(["order", orderID]);
-      queryClient.invalidateQueries(["orders"]);
+      queryClient.invalidateQueries(["flatOrders"]);
     },
   });
 
@@ -112,7 +112,7 @@ const useSubOrder = (): ReturnProps => {
     },
     onSuccess(data, subOrderID, context) {
       queryClient.invalidateQueries(["order", orderID]);
-      queryClient.invalidateQueries(["orders"]);
+      queryClient.invalidateQueries(["flatOrders"]);
     },
   });
 

@@ -86,7 +86,8 @@ const useEvents = (
   const invalidateQueries = (event: Event) => {
     switch (event.eventType) {
       case "orderEvent":
-        queryClient.invalidateQueries(["orders"]);
+        queryClient.invalidateQueries(["order"]);
+        queryClient.invalidateQueries(["flatOrders"]);
         break;
       case "orgaEvent":
         queryClient.invalidateQueries(["organizations"]);

@@ -61,6 +61,7 @@ export const useOrder = (): ReturnProps => {
           return {
             created: new Date(response.data.created),
             updated: new Date(response.data.updated),
+
             ...response.data,
           };
         });
@@ -82,7 +83,7 @@ export const useOrder = (): ReturnProps => {
         });
     },
     onSuccess(data, variables, context) {
-      queryClient.invalidateQueries(["orders"]);
+      queryClient.invalidateQueries(["flatOrders"]);
       navigate(`/order/${data}`);
     },
   });
@@ -100,7 +101,7 @@ export const useOrder = (): ReturnProps => {
     },
     onSuccess(data, orderID, context) {
       queryClient.invalidateQueries(["order", orderID]);
-      queryClient.invalidateQueries(["orders"]);
+      queryClient.invalidateQueries(["flatOrders"]);
     },
   });
 
@@ -117,7 +118,7 @@ export const useOrder = (): ReturnProps => {
     },
     onSuccess(data, orderID, context) {
       queryClient.invalidateQueries(["order", orderID]);
-      queryClient.invalidateQueries(["orders"]);
+      queryClient.invalidateQueries(["flatOrders"]);
     },
   });
 

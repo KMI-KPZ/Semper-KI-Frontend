@@ -154,6 +154,9 @@ const SubOrder: React.FC<Props> = (props) => {
           {t("Orders.OrderView.header")} {subOrder.subOrderID}
         </Heading>
         <Text variant="body">
+          {t(`Orders.OrderCollection.state.${OrderState[subOrder.state]}`)}
+        </Text>
+        <Text variant="body">
           {new Date(subOrder.created).toLocaleString()}
         </Text>
         <Heading variant="h3">{ServiceType[subOrder.service.type]}</Heading>
@@ -187,11 +190,7 @@ const SubOrder: React.FC<Props> = (props) => {
         </PermissionGate>
       </div>
       <div className="md:jube flex flex-col md:flex-row"></div>
-      <StatusBar
-        currentState={subOrder.state}
-        updateStatus={updateStatus}
-        userType={user === undefined ? UserType.ANONYM : user.usertype}
-      />
+      <StatusBar state={subOrder.state} serviceType={subOrder.service.type} />
       <SubOrderService service={subOrder.service} />
       <PermissionGate element="OrderFile">
         <OrderFile subOrder={subOrder} orderCollectionID={orderID} />

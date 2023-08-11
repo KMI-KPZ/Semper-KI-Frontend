@@ -11,11 +11,13 @@ import StatusItem from "./components/Item";
 import StatusItemConnector from "./components/ItemConnector";
 import StatusBarDecisionItem from "./components/DecisionItem";
 import { OrderState } from "../../../hooks/useOrder";
+import { ServiceType } from "@/pages/OrderRoutes/Service/hooks/useService";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
+import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 
 interface StatusViewProps {
-  currentState: OrderState;
-  userType: UserType;
-  updateStatus(status: OrderState): void;
+  state: OrderState;
+  serviceType: ServiceType;
 }
 
 export type StatusData = {
@@ -26,6 +28,21 @@ export type StatusData = {
 
 const statusData: StatusData[] = [
   {
+    itemOrderState: OrderState.DRAFT,
+    icon: <DesignServicesIcon />,
+    text: "Orders.StatusView.state.draft",
+  },
+  {
+    itemOrderState: OrderState.MANUFACTURER_SELECTED,
+    icon: <FactoryIcon />,
+    text: "Orders.StatusView.state.manufacturerSelected",
+  },
+  {
+    itemOrderState: OrderState.VERIFIED,
+    icon: <AssignmentTurnedInIcon />,
+    text: "Orders.StatusView.state.verified",
+  },
+  {
     itemOrderState: OrderState.REQUESTED,
     icon: <EmailIcon />,
     text: "Orders.StatusView.state.requested",
@@ -33,7 +50,7 @@ const statusData: StatusData[] = [
   {
     itemOrderState: OrderState.CLARIFICATION,
     icon: <QuestionMarkIcon />,
-    text: "Orders.StatusView.state.verify",
+    text: "Orders.StatusView.state.clarification",
   },
   {
     itemOrderState: OrderState.REJECTED,
@@ -63,67 +80,31 @@ const statusData: StatusData[] = [
 ];
 
 const StatusBar: React.FC<StatusViewProps> = (props) => {
-  const { currentState } = props;
+  const { serviceType, state } = props;
+
+  const getItems = (): StatusData[] => {
+    if (state < OrderState.REQUESTED)
+      return statusData.filter(
+        (data) => data.itemOrderState <= OrderState.REQUESTED
+      );
+    else
+      return statusData.filter(
+        (data) => data.itemOrderState >= OrderState.REQUESTED
+      );
+  };
+
   return (
     <div className="flex w-full flex-col items-center justify-center p-5 md:flex-row">
-      <StatusItem
-        item={{
-          itemOrderState: OrderState.REQUESTED,
-          icon: <EmailIcon />,
-          text: "Orders.StatusView.state.requested",
-        }}
-        {...props}
-      />
-      <StatusItemConnector active={currentState > OrderState.REQUESTED} />
-      <StatusItem
-        item={{
-          itemOrderState: OrderState.CLARIFICATION,
-          icon: <QuestionMarkIcon />,
-          text: "Orders.StatusView.state.verify",
-        }}
-        {...props}
-      />
-      <StatusItemConnector active={currentState > OrderState.CLARIFICATION} />
-      <StatusBarDecisionItem
-        item1={{
-          itemOrderState: OrderState.REJECTED,
-          icon: <CloseIcon />,
-          text: "Orders.StatusView.state.rejected",
-        }}
-        item2={{
-          itemOrderState: OrderState.CONFIRMED,
-          icon: <CheckIcon />,
-          text: "Orders.StatusView.state.confirmed",
-        }}
-        {...props}
-      />
-      <StatusItemConnector active={currentState > OrderState.CONFIRMED} />
-      <StatusItem
-        item={{
-          itemOrderState: OrderState.PRODUCTION,
-          icon: <FactoryIcon />,
-          text: "Orders.StatusView.state.production",
-        }}
-        {...props}
-      />
-      <StatusItemConnector active={currentState > OrderState.PRODUCTION} />
-      <StatusItem
-        item={{
-          itemOrderState: OrderState.DELIVERY,
-          icon: <LocalShippingIcon />,
-          text: "Orders.StatusView.state.delivery",
-        }}
-        {...props}
-      />
-      <StatusItemConnector active={currentState > OrderState.DELIVERY} />
-      <StatusItem
-        item={{
-          itemOrderState: OrderState.COMPLETED,
-          icon: <DoneAllIcon />,
-          text: "Orders.StatusView.state.finished",
-        }}
-        {...props}
-      />
+      {getItems().map((item, index) => {
+        return (
+          <Fragment key={index}>
+            <StatusItem item={item} state={state} />
+            {index !== getItems().length - 1 && (
+              <StatusItemConnector active={state >= item.itemOrderState} />
+            )}
+          </Fragment>
+        );
+      })}
     </div>
   );
 };

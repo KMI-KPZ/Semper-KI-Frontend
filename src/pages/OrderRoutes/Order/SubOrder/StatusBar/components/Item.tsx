@@ -7,55 +7,35 @@ import { OrderState } from "@/pages/OrderRoutes/hooks/useOrder";
 
 type StatusItemType = {
   item: StatusData;
-  currentState: OrderState;
-  userType: UserType;
-  updateStatus(status: OrderState): void;
+  state: OrderState;
 };
 
 const StatusItem: React.FC<StatusItemType> = (props) => {
   const {
     item: { icon, itemOrderState, text },
-    currentState,
-    updateStatus: setStatus,
-    userType,
+    state,
   } = props;
   const { t } = useTranslation();
-  const { hasPermission } = usePermissionGate();
-
-  const handleOnClickStatus = () => {
-    if (userType === UserType.ORGANIZATION) {
-      setStatus(itemOrderState);
-    }
-  };
 
   const getClassName = (): string => {
     let classname: string[] = [];
-    if (currentState === itemOrderState) {
+    if (state === itemOrderState) {
       classname.push(" bg-orange text-white");
-    } else if (currentState + 1 === itemOrderState) {
-      classname.push(" bg-slate-100");
-    } else if (currentState < itemOrderState) {
-      classname.push(" bg-slate-200 text-slate-700");
-    } else if (currentState > itemOrderState) {
+    } else if (state < itemOrderState) {
+      classname.push(" bg-slate-100 ");
+    } else if (state > itemOrderState) {
       classname.push(" bg-orange-200");
-    }
-    if (
-      userType === UserType.ORGANIZATION &&
-      currentState + 1 == itemOrderState
-    ) {
-      classname.push(" hover:cursor-pointer hover:bg-orange-300");
     }
     return classname.join(" ");
   };
 
   return (
-    <a
-      onClick={hasPermission("OrderStatus") ? handleOnClickStatus : () => {}}
+    <div
       className={`flex w-full flex-col items-center justify-center rounded-xl p-3 md:w-fit ${getClassName()}`}
     >
       {icon}
       <span className="text-center">{t(text)}</span>
-    </a>
+    </div>
   );
 };
 

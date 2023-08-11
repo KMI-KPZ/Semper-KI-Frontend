@@ -11,6 +11,7 @@ import { Divider } from "@component-library/Divider";
 import { LoadingAnimation, LoadingSuspense } from "@component-library/index";
 import OrderButtons from "./components/Buttons";
 import useSubOrder from "../hooks/useSubOrder";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   user: User | undefined;

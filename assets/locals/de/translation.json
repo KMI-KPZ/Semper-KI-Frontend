@@ -570,8 +570,11 @@
     },
     "StatusView":{
       "state":{
+        "draft":"Entwurf",
+        "manufacturerSelected":"Hersteller ausgewählt",
+        "verified":"Überprüft",
         "requested":"Angefragt",
-        "verify":"Rückfragen",
+        "clarification":"Rückfragen",
         "rejected":"Abgelehnt",
         "confirmed":"Bestätigt",
         "production":"In Produktion",

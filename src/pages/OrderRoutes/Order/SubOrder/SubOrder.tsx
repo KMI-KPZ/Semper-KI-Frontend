@@ -113,7 +113,7 @@ const SubOrder: React.FC<Props> = (props) => {
           <Button
             size="sm"
             children={<EditIcon />}
-            to={`/order/${orderID}/subOrder/${subOrder.subOrderID}`}
+            to={`/order/${orderID}/suborder/${subOrder.subOrderID}`}
             title={t("Orders.OrderView.button.edit")}
           />
           <Button

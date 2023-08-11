@@ -39,6 +39,16 @@ const Breadcrumb: React.FC<Props> = () => {
         });
       } else if (index === 2 && splittet[1] === "order") {
         //nothing
+      } else if (index === 3 && item === "suborder") {
+        breadcrumbItems.push({
+          name: "edit",
+          link:
+            splittet[4] === undefined
+              ? `/order/${splittet[2]}`
+              : `/order/${splittet[2]}/suborder/${splittet[4]}`,
+        });
+      } else if (index === 4 && splittet[3] === "suborder") {
+        //nothing
       } else {
         const link = splittet.slice(0, index + 1).join("/");
         breadcrumbItems.push({

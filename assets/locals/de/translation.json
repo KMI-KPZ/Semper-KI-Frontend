@@ -7,6 +7,7 @@
   },
   "data":{
     "NavigationItem":{
+      "edit":"Bearbeiten",
       "home":"Startseite",
       "process":"Prozess",
       "model":"Modell",
@@ -1086,6 +1087,13 @@
   },
   "OrderRoutes":{
     "Service":{
+      "Overview":{
+        "components":{
+          "Item":{
+            "empty":"Serviceauswahl"
+          }
+        }
+      },
       "type":{
         "MANUFACTURING":"Modell Herstellen lassen",
         "MODELING":"Modell Entwerfen lassen"

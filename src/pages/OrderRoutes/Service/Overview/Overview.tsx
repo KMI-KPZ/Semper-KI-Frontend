@@ -23,8 +23,11 @@ const ServiceOverview: React.FC<Props> = (props) => {
   const { createSubOrder } = useSubOrder();
 
   const addNewItem = () => {
-    createSubOrder.mutate();
-    navigate("model");
+    createSubOrder.mutate(undefined, {
+      onSuccess(data, variables, context) {
+        navigate(`../${data}`);
+      },
+    });
   };
 
   // const navigateToUpload = () => {

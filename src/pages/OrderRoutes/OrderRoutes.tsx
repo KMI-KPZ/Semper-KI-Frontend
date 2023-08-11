@@ -20,7 +20,7 @@ const OrderRoutes: React.FC<OrderRoutesProps> = (props) => {
       <Route path=":orderID/*">
         <Route index element={<Order user={user} />} />
         <Route path="checkout" element={<OrderCheckout />} />
-        <Route path="subOrder">
+        <Route path="suborder">
           <Route index element={<Navigate to="../" />} />
           <Route path=":subOrderID/*" element={<Service />} />
         </Route>

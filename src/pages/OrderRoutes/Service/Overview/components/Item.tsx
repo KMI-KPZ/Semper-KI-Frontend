@@ -9,6 +9,8 @@ import useSubOrder, {
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { ServiceType } from "../../hooks/useService";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   subOrder: SubOrderProps;
@@ -21,10 +23,14 @@ interface State {
 
 const ServiceOverviewItem: React.FC<Props> = (props) => {
   const { subOrder } = props;
+  const { t } = useTranslation();
   const { orderID, subOrderID } = useParams();
   const [state, setState] = useState<State>({
     edit: false,
-    titleText: ServiceType[subOrder.service.type],
+    titleText:
+      subOrder.service.type === undefined
+        ? t("OrderRoutes.Service.Overview.components.Item.empty")
+        : ServiceType[subOrder.service.type],
   });
   const { edit, titleText } = state;
   const navigate = useNavigate();
@@ -36,7 +42,7 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    navigate(`/order/${orderID}/subOrder/${subOrder.subOrderID}`);
+    navigate(`/order/${orderID}/suborder/${subOrder.subOrderID}`);
   };
 
   const handleOnClickDeleteIcon = (

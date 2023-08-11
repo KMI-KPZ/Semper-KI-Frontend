@@ -95,14 +95,6 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
         {order.state < OrderState.REQUESTED ? (
           <Button
             size="sm"
-            startIcon={<EditIcon />}
-            to="process/model"
-            title={t("Orders.OrderCollection.button.edit")}
-          />
-        ) : null}
-        {order.state < OrderState.REQUESTED ? (
-          <Button
-            size="sm"
             startIcon={<AddIcon />}
             onClick={onButtonClickCreateSubOrder}
             title={t("Orders.OrderCollection.button.new")}

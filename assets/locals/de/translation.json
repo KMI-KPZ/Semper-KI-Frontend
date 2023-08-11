@@ -1083,5 +1083,16 @@
   "NewOrder":{
     "demo":"Demoauftrag wird erstellt...",
     "order":"Auftrag wird erstellt..."
+  },
+  "OrderRoutes":{
+    "Service":{
+      "type":{
+        "MANUFACTURING":"Modell Herstellen lassen",
+        "MODELING":"Modell Entwerfen lassen"
+      },
+      "Select":{
+        "title":"Service auswählen"
+      }
+    }
   }
 }

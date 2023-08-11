@@ -12,7 +12,10 @@ import {
 } from "../Service/Manufacturing/types";
 import { ServiceModellingProps } from "../Service/Modelling/Modelling";
 import { useNavigate, useParams } from "react-router-dom";
-import { GeneralServiceProps } from "../Service/Service";
+import {
+  GeneralServiceProps,
+  GerneralUpdateServiceProps,
+} from "../Service/Service";
 
 interface ReturnProps {
   deleteSubOrder: UseMutationResult<string, Error, string, unknown>;
@@ -49,7 +52,7 @@ export interface UpdateSubOrderProps {
   chat?: ChatMessageProps;
   state?: OrderState;
   files?: File[];
-  service?: UpdateServiceManufacturingProps;
+  service?: GerneralUpdateServiceProps;
 }
 
 const useSubOrder = (): ReturnProps => {

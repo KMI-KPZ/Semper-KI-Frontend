@@ -3,16 +3,26 @@ import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
 import useService, { ServiceType } from "./hooks/useService";
 import { ServiceManufacturing } from "./Manufacturing/Manufacturing";
-import { ServiceManufacturingProps } from "./Manufacturing/types";
+import {
+  ServiceManufacturingProps,
+  UpdateServiceManufacturingProps,
+} from "./Manufacturing/types";
 import ServiceOverview from "./Overview/Overview";
 import { useOrder } from "../hooks/useOrder";
 import { ServiceModellingProps } from "./Modelling/Modelling";
+import ServiceSelect from "./Select/Select";
 
 export interface ServiceProps {}
 
 export type GeneralServiceProps =
   | ServiceManufacturingProps
   | ServiceModellingProps;
+
+export interface UpdateServiceProps {
+  type?: ServiceType;
+}
+
+export type GerneralUpdateServiceProps = UpdateServiceManufacturingProps;
 
 const Service: React.FC<ServiceProps> = (props) => {
   const {} = props;
@@ -21,8 +31,8 @@ const Service: React.FC<ServiceProps> = (props) => {
   const { getService } = useService();
   const service = getService();
 
-  const renderService = () => {
-    switch (service?.type) {
+  const renderService = (service: GeneralServiceProps) => {
+    switch (service.type) {
       case ServiceType.MANUFACTURING:
         return <ServiceManufacturing service={service} />;
       case ServiceType.MODELING:
@@ -31,8 +41,13 @@ const Service: React.FC<ServiceProps> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col-reverse md:flex-row">
-      {renderService()}
+    <div className="flex w-full flex-col-reverse gap-5 md:flex-row">
+      {service === undefined ||
+      (service !== undefined && service.type === undefined) ? (
+        <ServiceSelect />
+      ) : (
+        renderService(service)
+      )}
       <ServiceOverview subOrders={orderQuery.data?.subOrders} />
     </div>
   );

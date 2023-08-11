@@ -36,7 +36,7 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    navigate(`/order/${orderID}/subOrder/${subOrder.subOrderID}/`);
+    navigate(`/order/${orderID}/subOrder/${subOrder.subOrderID}`);
   };
 
   const handleOnClickDeleteIcon = (

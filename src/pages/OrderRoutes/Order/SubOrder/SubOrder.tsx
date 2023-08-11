@@ -25,6 +25,7 @@ import { OrderState } from "../../hooks/useOrder";
 import useSubOrder, { SubOrderProps } from "../../hooks/useSubOrder";
 import SubOrderService from "./Service/Service";
 import { ServiceType } from "../../Service/hooks/useService";
+import EditIcon from "@mui/icons-material/Edit";
 
 interface Props {
   subOrder: SubOrderProps;
@@ -109,6 +110,12 @@ const SubOrder: React.FC<Props> = (props) => {
     if (user.usertype === UserType.USER)
       return (
         <div className="flex w-full flex-col items-center justify-center gap-3 md:w-fit md:flex-row">
+          <Button
+            size="sm"
+            children={<EditIcon />}
+            to={`/order/${orderID}/subOrder/${subOrder.subOrderID}`}
+            title={t("Orders.OrderView.button.edit")}
+          />
           <Button
             size="sm"
             children={<DeleteIcon />}

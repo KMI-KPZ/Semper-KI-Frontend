@@ -1,25 +1,24 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AddIcon from "@mui/icons-material/Add";
 import ServiceOverviewItem from "./components/Item";
-import { getModelURI } from "@/services/utils";
-import IconModel from "@icons/Model.svg";
 import { Heading } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
 import useSubOrder, {
   SubOrderProps,
 } from "@/pages/OrderRoutes/hooks/useSubOrder";
+import { useOrder } from "../../hooks/useOrder";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-interface Props {
-  subOrders: SubOrderProps[] | undefined;
-}
+interface Props {}
 
 const ServiceOverview: React.FC<Props> = (props) => {
-  const { subOrders } = props;
+  const {} = props;
+  const [open, setOpen] = useState(true);
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { orderQuery } = useOrder();
   const { createSubOrder } = useSubOrder();
 
   const addNewItem = () => {
@@ -39,8 +38,8 @@ const ServiceOverview: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex min-w-fit max-w-sm flex-col justify-start gap-5 bg-white p-5">
-      <div className="flex flex-col items-center justify-center md:flex-row md:justify-between">
+    <div className="flex h-fit w-full flex-col justify-start gap-5 bg-white p-5 md:w-fit md:min-w-fit md:max-w-sm">
+      <div className="flex flex-col items-center justify-center gap-5 md:flex-row md:justify-between">
         <Heading variant="h2">
           {t("Process.Header.Cart.CartItem.title")}
         </Heading>
@@ -49,15 +48,36 @@ const ServiceOverview: React.FC<Props> = (props) => {
           title={t("Process.Header.Cart.CartItem.button.overview")}
         />
       </div>
-      <div className="flex w-full flex-col flex-wrap gap-5">
-        {subOrders !== undefined
-          ? subOrders.map((subOrder: SubOrderProps, index: number) => (
-              <ServiceOverviewItem key={index} subOrder={subOrder} />
-            ))
+      <div className="flex w-full flex-col flex-wrap items-center justify-center gap-5">
+        {open &&
+        orderQuery.data !== undefined &&
+        orderQuery.data.subOrders !== undefined &&
+        orderQuery.data.subOrders.length > 0
+          ? orderQuery.data.subOrders.map(
+              (subOrder: SubOrderProps, index: number) => (
+                <ServiceOverviewItem key={index} subOrder={subOrder} />
+              )
+            )
           : null}
         <Button
+          variant="secondary"
+          title={
+            open
+              ? t("Process.Header.Cart.CartItem.button.collapse")
+              : t("Process.Header.Cart.CartItem.button.expand")
+          }
+          children={
+            <ExpandMoreIcon
+              className={`duration-300 ${open ? "rotate-180" : ""}`}
+            />
+          }
+          onClick={() => setOpen(!open)}
+          width="full"
+        />
+        <Button
+          width="full"
           title={t("Process.Header.Cart.CartItem.new")}
-          startIcon={<AddIcon fontSize="large" />}
+          startIcon={<AddIcon />}
           onClick={addNewItem}
         />
       </div>

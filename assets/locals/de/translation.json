@@ -676,6 +676,8 @@
           "new":"Artikel erstellen",
           "cart":"Warenkorb",
           "button":{
+            "expand":"Ausklappen",
+            "collapse":"Zusammenklappen",
             "overview":"Übersicht",
             "edit":"Bearbeiten",
             "delete":"Löschen"

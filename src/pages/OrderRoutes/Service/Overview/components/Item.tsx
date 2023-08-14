@@ -72,7 +72,7 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
 
   return (
     <div
-      className={`flex h-12 flex-row items-center justify-between gap-3 bg-white px-3 py-2 duration-300 hover:cursor-pointer hover:bg-slate-200
+      className={`flex h-12 w-full flex-row items-center justify-between gap-3 bg-white px-3 py-2 duration-300 hover:cursor-pointer hover:bg-slate-200
       ${active === true ? "shadow-border shadow-gray-500" : ""}
       `}
       onClick={handleOnClickCard}

@@ -27,9 +27,11 @@ export type GerneralUpdateServiceProps = UpdateServiceManufacturingProps;
 const Service: React.FC<ServiceProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { orderQuery } = useOrder();
+
   const { getService } = useService();
-  const service = getService();
+  const service: GeneralServiceProps | undefined = {
+    type: Math.floor(Math.random() * 2),
+  }; //  getService();
 
   const renderService = (service: GeneralServiceProps) => {
     switch (service.type) {
@@ -41,14 +43,14 @@ const Service: React.FC<ServiceProps> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col-reverse gap-5 md:flex-row">
+    <div className="flex w-full flex-col-reverse justify-between gap-5 md:flex-row">
       {service === undefined ||
       (service !== undefined && service.type === undefined) ? (
         <ServiceSelect />
       ) : (
         renderService(service)
       )}
-      <ServiceOverview subOrders={orderQuery.data?.subOrders} />
+      <ServiceOverview />
     </div>
   );
 };

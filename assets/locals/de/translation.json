@@ -45,18 +45,23 @@
       "postprocessings":"Nachbearbeitungen",
       "resources":"Ressourcen",
       "add":"Hinzufügen",
-      "demo":"Demo"
+      "demo":"Demo",
+      "admin":"Adminbereich",
+      "users":"Benutzer verwalten"
     }
   },
   "enum":{
     "UserType":{
-      "client":"Auftraggeber",
-      "manufacturer":"Hersteller",
-      "admin":"Admin",
-      "anonym":"Anonym"
+      "USER":"Einzelperson",
+      "ORGANIZATION":"Organisation",
+      "ADMIN":"Admin",
+      "ANONYM":"Anonym"
     }
   },
   "Admin":{
+    "Overview":{
+      "title":"Adminbereich"
+    },
     "AdminMaterialView":{
       "header": "Materialien",
       "material-id": "Material-ID",
@@ -80,14 +85,35 @@
       "cart": "Warenkorb",
       "bill": "Rechnung"
     },
-    "AdminUserView":{
-      "header": "Benutzer",
+    "User":{
+      "orga":"Organisationen",
+      "empty":"keine Benutzer gefunden",
+      "title": "Benutzerverwaltung",
       "name": "Name",
       "email": "Email",
-      "type": "Type",
       "created": "Created",
       "accessed": "Accessed",
-      "updated": "Updated"
+      "updated": "Updated",
+      "lastSeen":"letzte Anmeldung",
+      "actions": "Aktionen",
+      "button":{
+        "delete":"Löschen"
+      },
+      "confirm":"User wirklich löschen?"
+    },
+    "Orga":{
+      "title":"Organisationsverwaltung",
+      "empty":"keine Organisation gefunden",
+      "name": "Name",
+      "created": "Created",
+      "accessed": "Accessed",
+      "updated": "Updated",
+      "actions": "Aktionen",
+      "canManufacturer":"Hersteller",
+      "button":{
+        "delete":"Löschen"
+      },
+      "confirm":"Organisation wirklich löschen?"
     }
   },
   "AfterProcess":{
@@ -340,6 +366,14 @@
           "title":"Ressourcen",
           "button":{
             "edit":"Ressourcen verwalten"
+          }
+        },
+        "Admin": {
+          "title": "Adminbereich",
+          "button":{
+            "orga":"Organisationen verwalten",
+            "user":"Benutzer verwalten",
+            "general":"Adminbereich"
           }
         }
       }

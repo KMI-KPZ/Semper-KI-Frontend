@@ -1,0 +1,105 @@
+import { User, UserType } from "@/hooks/useUser/types";
+import { Heading, Text } from "@component-library/Typography";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { UserSwitch } from "@/components/UserSwitch";
+import useAdmin from "../hooks/useAdmin";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Button } from "@component-library/Button";
+
+interface Props {
+  users: User[] | undefined;
+}
+
+const AdminUser: React.FC<Props> = (props) => {
+  const { users } = props;
+  const { t } = useTranslation();
+  const { deleteUser } = useAdmin();
+
+  const handleOnClickButtonDelete = (hashedID: string, name: string) => {
+    if (window.confirm(t("Admin.User.confirm")))
+      deleteUser.mutate({ hashedID, name });
+  };
+
+  return (
+    <div className="flex w-full flex-col items-center justify-normal gap-5 bg-white p-5">
+      <Heading variant="h1">{t("Admin.User.title")}</Heading>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 800 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>{t("Admin.User.name")}</TableCell>
+              <TableCell>{t("Admin.User.email")}</TableCell>
+              <TableCell>{t("Admin.User.orga")}</TableCell>
+              <TableCell>{t("Admin.User.created")}</TableCell>
+              <TableCell>{t("Admin.User.accessed")}</TableCell>
+              <TableCell>{t("Admin.User.updated")}</TableCell>
+              <TableCell>{t("Admin.User.lastSeen")}</TableCell>
+              <TableCell>{t("Admin.User.actions")}</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {users !== undefined && UserSwitch.length > 0 ? (
+              users.map((user: User, index: number) => (
+                <TableRow
+                  key={index}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {user.name}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {user.email}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {user.organizations.map((title) => title).join(", ")}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {new Date(user.created).toLocaleString()}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {new Date(user.accessed).toLocaleString()}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {new Date(user.updated).toLocaleString()}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {new Date(user.lastSeen).toLocaleString()}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <div className="flex w-full flex-row items-center justify-center gap-3 p-2">
+                      <Button
+                        title={t("Admin.User.button.delete")}
+                        onClick={() =>
+                          handleOnClickButtonDelete(user.hashedID, user.name)
+                        }
+                        children={<DeleteIcon />}
+                      />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell rowSpan={6}>
+                  <Text variant="body">{t("Admin.User.empty")}</Text>
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
+  );
+};
+
+export default AdminUser;

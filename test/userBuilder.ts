@@ -70,7 +70,7 @@ export class UserBuilder {
         return({
             email: this.email,
             name: this.name,
-            organization: this.organization,
+            organizations: this.organization,
             usertype: this.userType,
             hashedID: this.hashedID,
             created: this.created,

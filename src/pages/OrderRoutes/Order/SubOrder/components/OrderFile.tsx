@@ -30,8 +30,9 @@ const OrderFile: React.FC<Props> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
-      <Heading variant="h3">{t("Orders.OrderFileView.header")}</Heading>
-      <div className="w-full border-b-2" />
+      <div className="flex w-full">
+        <Heading variant="h3">{t("Orders.OrderFileView.header")}:</Heading>
+      </div>
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
         {order.files.length > 0
           ? order.files.map((_fileName, index) => (

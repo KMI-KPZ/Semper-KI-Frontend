@@ -18,10 +18,10 @@ import useUser from "@/hooks/useUser";
 import Background from "@/components/Background";
 import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
-import AdminMaterials from "../Admin/Materials";
-import AdminModels from "../Admin/Models";
-import AdminOrders from "../Admin/Orders";
-import AdminUser from "../Admin/User/User";
+import AdminMaterials from "../AdminRoutes/Materials";
+import AdminModels from "../AdminRoutes/Models";
+import AdminOrders from "../AdminRoutes/Orders";
+import AdminUser from "../AdminRoutes/User/User";
 import Login from "../Login/Login";
 import RedirectLogin from "../Login/Redirect/RedirectLogin";
 import Logout from "../Logout/Logout";
@@ -46,7 +46,7 @@ import usePing from "@/hooks/usePing";
 import Orders from "../Orders/Orders";
 import OrderRoutes from "../OrderRoutes/OrderRoutes";
 import { FilterItemProps } from "../OrderRoutes/Service/Manufacturing/Filter/Filter";
-import AdminRoutes from "../Admin/AdminRoutes";
+import AdminRoutes from "../AdminRoutes/AdminRoutes";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };

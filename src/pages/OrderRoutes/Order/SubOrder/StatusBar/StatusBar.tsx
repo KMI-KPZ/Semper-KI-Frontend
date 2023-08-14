@@ -94,7 +94,7 @@ const StatusBar: React.FC<StatusViewProps> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center p-5 md:flex-row">
+    <div className="flex w-full flex-col items-center justify-center md:flex-row">
       {getItems().map((item, index) => {
         return (
           <Fragment key={index}>

@@ -26,6 +26,7 @@ import useSubOrder, { SubOrderProps } from "../../hooks/useSubOrder";
 import SubOrderService from "./Service/Service";
 import { ServiceType } from "../../Service/hooks/useService";
 import EditIcon from "@mui/icons-material/Edit";
+import { Divider } from "@component-library/Divider";
 
 interface Props {
   subOrder: SubOrderProps;
@@ -109,20 +110,23 @@ const SubOrder: React.FC<Props> = (props) => {
     if (user === undefined) return null;
     if (user.usertype === UserType.USER)
       return (
-        <div className="flex w-full flex-col items-center justify-center gap-3 md:w-fit md:flex-row">
+        <div className="flex  flex-row flex-wrap items-center justify-center gap-3 md:w-fit">
           <Button
+            width="fit"
             size="sm"
             children={<EditIcon />}
             to={`/order/${orderID}/suborder/${subOrder.subOrderID}`}
             title={t("Orders.OrderView.button.edit")}
           />
           <Button
+            width="fit"
             size="sm"
             children={<DeleteIcon />}
             onClick={handleOnClickButtonCancel}
             title={t("Orders.OrderView.button.cancel")}
           />
           <Button
+            width="fit"
             size="sm"
             children={<ReplayIcon />}
             onClick={handleOnClickButtonReOrder}
@@ -132,20 +136,23 @@ const SubOrder: React.FC<Props> = (props) => {
       );
     if (user.usertype === UserType.ORGANIZATION)
       return (
-        <div className="flex w-full flex-col items-center justify-center gap-3 md:w-fit md:flex-row">
+        <div className="flex  flex-row flex-wrap items-center justify-center gap-3 md:w-fit">
           <Button
+            width="fit"
             size="sm"
             children={<DeleteIcon />}
             onClick={handleOnClickButtonReject}
             title={t("Orders.OrderView.button.reject")}
           />
           <Button
+            width="fit"
             size="sm"
             children={<QuestionMarkIcon />}
             onClick={handleOnClickButtonVerify}
             title={t("Orders.OrderView.button.verify")}
           />
           <Button
+            width="fit"
             size="sm"
             children={<CheckIcon />}
             onClick={handleOnClickButtonConfirm}
@@ -155,26 +162,24 @@ const SubOrder: React.FC<Props> = (props) => {
       );
   };
   return (
-    <div className="flex w-full flex-col items-center justify-start gap-3 border-2 p-3 md:items-start">
-      <div className="flex w-full flex-col justify-between md:flex-row">
-        <Heading variant="h3">
+    <div className="flex w-full flex-col items-center justify-start gap-5 border-2 p-5 md:items-start">
+      <div className="flex w-full flex-col flex-wrap items-center justify-center gap-5 lg:justify-between xl:flex-row">
+        <Heading variant="h3" className="break-all">
           {t("Orders.OrderView.header")} {subOrder.subOrderID}
         </Heading>
         <Text variant="body">
-          {t(`Orders.OrderCollection.state.${OrderState[subOrder.state]}`)}
+          {t("Orders.OrderView.created")}{" "}
+          {new Date(subOrder.created).toLocaleDateString()}
         </Text>
-        <Text variant="body">
-          {new Date(subOrder.created).toLocaleString()}
-        </Text>
-        <Heading variant="h3">{ServiceType[subOrder.service.type]}</Heading>
         <PermissionGate element={["OrderButtons", "ChatButton"]} concat="or">
-          <div className="flex flex-col items-center  justify-center gap-3 md:flex-row">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-3">
             <PermissionGate element="ChatButton">
               {orderEvent !== undefined &&
               orderEvent.messages !== undefined &&
               orderEvent.messages > 0 ? (
                 <Badge count={orderEvent.messages}>
                   <Button
+                    width="fit"
                     size="sm"
                     children={<MailIcon />}
                     onClick={handleOnClickButtonChat}
@@ -183,6 +188,7 @@ const SubOrder: React.FC<Props> = (props) => {
                 </Badge>
               ) : (
                 <Button
+                  width="fit"
                   size="sm"
                   children={<MailIcon />}
                   onClick={handleOnClickButtonChat}
@@ -196,9 +202,10 @@ const SubOrder: React.FC<Props> = (props) => {
           </div>
         </PermissionGate>
       </div>
-      <div className="md:jube flex flex-col md:flex-row"></div>
       <StatusBar state={subOrder.state} serviceType={subOrder.service.type} />
+      <Divider />
       <SubOrderService service={subOrder.service} />
+      <Divider />
       <PermissionGate element="OrderFile">
         <OrderFile subOrder={subOrder} orderCollectionID={orderID} />
       </PermissionGate>

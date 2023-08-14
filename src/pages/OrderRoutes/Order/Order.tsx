@@ -46,7 +46,7 @@ const Order: React.FC<Props> = (props) => {
       ) : (
         <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
           <div className="flex w-full flex-col items-start justify-start gap-5 md:flex-row md:items-center md:justify-between">
-            <Heading variant="h2">
+            <Heading variant="h2" className="break-all">
               {t("Orders.OrderCollection.id")}: {order.orderID}
             </Heading>
             <Heading variant="h2">

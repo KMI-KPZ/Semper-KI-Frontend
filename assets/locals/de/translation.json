@@ -586,6 +586,9 @@
     },
     "OrderView":{
       "header":"Auftrag:",
+      "created":"Erstellt am:",
+      "service":"Service:",
+      "status":"Status:",
       "postProcessing":"Nachbearbeitung",
       "button":{
         "cancel":"Stornieren",
@@ -601,6 +604,9 @@
         "cancel":"Auftrag wirklich stonieren?",
         "reOrder":"Auftrag wirklich erneut Bestellen?",
         "reject":"Auftrag wirklich Ablehnen?"
+      },
+      "Service":{
+        "title":"Service:"
       }
     },
     "StatusView":{

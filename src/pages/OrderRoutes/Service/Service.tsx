@@ -29,9 +29,7 @@ const Service: React.FC<ServiceProps> = (props) => {
   const { t } = useTranslation();
 
   const { getService } = useService();
-  const service: GeneralServiceProps | undefined = {
-    type: Math.floor(Math.random() * 2),
-  }; //  getService();
+  const service: GeneralServiceProps | undefined = getService();
 
   const renderService = (service: GeneralServiceProps) => {
     switch (service.type) {

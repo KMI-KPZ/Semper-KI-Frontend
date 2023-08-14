@@ -12,6 +12,7 @@ import ScienceIcon from "@mui/icons-material/Science";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import { UserType } from "@/hooks/useUser/types";
 import { NavigationItemPreferredType } from "@/components/Header";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 export type INavigationItem = {
   title: string;
@@ -23,6 +24,14 @@ export type INavigationItem = {
 };
 
 export const NavigationItemData: INavigationItem[] = [
+  {
+    userTypes: [UserType.ADMIN],
+    title: "data.NavigationItem.admin",
+    link: "/admin",
+    icon: <AdminPanelSettingsIcon fontSize="large" />,
+    preferred: ["header", "menu"],
+    extern: false,
+  },
   {
     userTypes: [UserType.ANONYM],
     title: "data.NavigationItem.demo",

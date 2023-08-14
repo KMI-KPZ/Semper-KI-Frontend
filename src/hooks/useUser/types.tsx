@@ -6,7 +6,7 @@ export type User = {
   hashedID: string;
   lastSeen: Date;
   name: string;
-  organization: string;
+  organizations: string[];
   updated: Date;
   usertype: UserType;
 };

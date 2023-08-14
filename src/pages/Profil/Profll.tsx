@@ -41,9 +41,9 @@ const Profil: React.FC<Props> = (props) => {
           <Heading variant="h2">{t("Profil.company.header")}</Heading>
           <div className="w-full border-t-2" />
           <span>
-            {t("Profil.company.name")}: {user.organization}
+            {t("Profil.company.name")}: {user.organizations}
           </span>
-          {user.organization === "None" ? (
+          {user.organizations === "None" ? (
             <Button width="full" title={t("Profil.button.selectChange")} />
           ) : null}
         </div>

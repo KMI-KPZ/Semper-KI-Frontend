@@ -6,6 +6,7 @@ import HomeAuthorizedOrder from "./components/Order";
 import HomeAuthorizedOrganization from "./components/Organization";
 import HomeAuthorizedResources from "./components/Resources";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import HomeAuthorizedAdmin from "./components/Admin";
 
 interface AuthorizedPropsHome {
   user: User;
@@ -34,6 +35,7 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
           </PermissionGate>
         </>
       ) : null}
+      {user.usertype === UserType.ADMIN ? <HomeAuthorizedAdmin /> : null}
     </div>
   );
 };

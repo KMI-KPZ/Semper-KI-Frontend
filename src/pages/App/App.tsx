@@ -7,10 +7,10 @@ import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { RequestTest } from "../RequestTest/RequestTest";
 import {
-  AdminRoutes,
-  OrganizationRoutes,
-  UserRoutes,
-} from "./components/PrivateRoutes";
+  AdminOutlet,
+  OrganizationOutlet,
+  UserOutlet,
+} from "./components/Outlet";
 import { User, UserType } from "@/hooks/useUser/types";
 import { DeleteEvent, Event } from "@/pages/App/types";
 import { ToastContainer } from "react-toastify";
@@ -21,7 +21,7 @@ import Footer from "@/components/Footer";
 import AdminMaterials from "../Admin/Materials";
 import AdminModels from "../Admin/Models";
 import AdminOrders from "../Admin/Orders";
-import AdminUsers from "../Admin/Users";
+import AdminUser from "../Admin/User/User";
 import Login from "../Login/Login";
 import RedirectLogin from "../Login/Redirect/RedirectLogin";
 import Logout from "../Logout/Logout";
@@ -46,6 +46,7 @@ import usePing from "@/hooks/usePing";
 import Orders from "../Orders/Orders";
 import OrderRoutes from "../OrderRoutes/OrderRoutes";
 import { FilterItemProps } from "../OrderRoutes/Service/Manufacturing/Filter/Filter";
+import AdminRoutes from "../Admin/AdminRoutes";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -96,21 +97,13 @@ const App: React.FC = () => {
   };
 
   const adminRoutes = (
-    <Route element={<AdminRoutes user={user} />}>
-      <Route path="user" element={<AdminUsers />} />
-      <Route path="model" element={<AdminModels />} />
-      <Route path="material" element={<AdminMaterials />} />
-      <Route
-        path="procedure"
-        element={<Heading variant="h1">Procedure</Heading>}
-      />
-      <Route path="printer" element={<Heading variant="h1">Printer</Heading>} />
-      <Route path="order" element={<AdminOrders />} />
+    <Route element={<AdminOutlet user={user} />}>
+      <Route path="admin/*" element={<AdminRoutes />} />
     </Route>
   );
 
   const organizationRoutes = (
-    <Route element={<OrganizationRoutes user={user} />}>
+    <Route element={<OrganizationOutlet user={user} />}>
       <Route
         path="organization"
         element={
@@ -135,7 +128,7 @@ const App: React.FC = () => {
   );
 
   const userRoutes = (
-    <Route element={<UserRoutes user={user} />}>
+    <Route element={<UserOutlet user={user} />}>
       <Route path="test" element={<RequestTest socket={socket} />} />
       <Route path="account" element={<Profil user={user!} />} />
     </Route>

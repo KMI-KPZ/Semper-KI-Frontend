@@ -9,13 +9,13 @@ interface Props {
   user: User | undefined;
 }
 
-export const UserRoutes: React.FC<Props> = (props) => {
+export const UserOutlet: React.FC<Props> = (props) => {
   const { user } = props;
   const { pathname } = useLocation();
   return user === undefined ? <LoginView path={pathname} /> : <Outlet />;
 };
 
-export const OrganizationRoutes: React.FC<Props> = (props) => {
+export const OrganizationOutlet: React.FC<Props> = (props) => {
   const { user } = props;
   const { pathname } = useLocation();
   const { t } = useTranslation();
@@ -27,7 +27,7 @@ export const OrganizationRoutes: React.FC<Props> = (props) => {
   );
 };
 
-export const AdminRoutes: React.FC<Props> = (props) => {
+export const AdminOutlet: React.FC<Props> = (props) => {
   const { user } = props;
   const { t } = useTranslation();
   return user !== undefined && user.usertype === UserType.ADMIN ? (

@@ -28,13 +28,15 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
   const [state, setState] = useState<State>({
     edit: false,
     titleText:
-      subOrder.service.type === undefined
-        ? t("OrderRoutes.Service.Overview.components.Item.empty")
-        : ServiceType[subOrder.service.type],
+      subOrder.details.title !== undefined
+        ? subOrder.details.title
+        : subOrder.service.type !== undefined
+        ? ServiceType[subOrder.service.type]
+        : t("OrderRoutes.Service.Overview.components.Item.empty"),
   });
   const { edit, titleText } = state;
   const navigate = useNavigate();
-  const { deleteSubOrder } = useSubOrder();
+  const { deleteSubOrder, updateSubOrder } = useSubOrder();
   const active = subOrderID === subOrder.subOrderID;
 
   const handleOnClickCard = (
@@ -58,7 +60,11 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    setState((prevState) => ({ ...prevState, edit: !prevState.edit }));
+    if (state.edit)
+      updateSubOrder.mutate({ details: { title: state.titleText } });
+    setState((prevState) => {
+      return { ...prevState, edit: !prevState.edit };
+    });
   };
 
   const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {

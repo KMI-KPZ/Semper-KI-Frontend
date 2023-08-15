@@ -11,8 +11,8 @@ interface Props {
   closeMenu(): void;
   chat: ChatMessageProps[];
   user?: User;
-  orderCollectionID: string;
   orderID: string;
+  subOrderID: string;
 }
 
 interface State {
@@ -22,10 +22,10 @@ interface State {
 
 const Chat: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { chat, user, closeMenu, orderCollectionID, orderID } = props;
+  const { chat, user, closeMenu, orderID, subOrderID } = props;
   const [state, setState] = useState<State>({});
   const { height, messageText } = state;
-  const { updateSubOrder } = useSubOrder();
+  const { updateSubOrderWithSubOrderID } = useSubOrder();
 
   const handleOnChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setState((prevState) => ({
@@ -37,13 +37,16 @@ const Chat: React.FC<Props> = (props) => {
 
   const handleOnClickButtonSend = () => {
     if (messageText !== undefined && messageText !== "")
-      updateSubOrder.mutate(
+      updateSubOrderWithSubOrderID.mutate(
         {
-          chat: {
-            date: new Date().toISOString(),
-            text: messageText,
-            userID: user!.hashedID,
-            userName: user!.name,
+          subOrderID,
+          changes: {
+            chat: {
+              date: new Date().toISOString(),
+              text: messageText,
+              userID: user!.hashedID,
+              userName: user!.name,
+            },
           },
         },
         {

@@ -97,12 +97,12 @@ const StatusBar: React.FC<StatusViewProps> = (props) => {
     <div className="flex w-full items-center justify-center">
       <div className="relative flex w-fit flex-col flex-wrap items-center justify-between pb-12 md:flex-row md:justify-center md:gap-y-16">
         {getItems().map((item, index) => (
-          <>
+          <Fragment key={index}>
             <StatusItem item={item} state={state} />
             {index < getItems().length - 1 ? (
               <StatusItemConnector active={state >= item.itemOrderState} />
             ) : null}
-          </>
+          </Fragment>
         ))}
       </div>
     </div>

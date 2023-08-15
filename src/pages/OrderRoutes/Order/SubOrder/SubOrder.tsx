@@ -37,18 +37,16 @@ interface Props {
 
 interface State {
   chatOpen: boolean;
-  menuOpen: boolean;
 }
 
 const SubOrder: React.FC<Props> = (props) => {
   const { subOrder, orderID, user, orderEvent } = props;
   const [state, setState] = useState<State>({
     chatOpen: false,
-    menuOpen: false,
   });
-  const { chatOpen, menuOpen } = state;
+  const { chatOpen } = state;
   const { deleteEvent } = useContext(AppContext);
-  const { deleteSubOrder, updateSubOrder } = useSubOrder();
+  const { deleteSubOrder, updateSubOrderWithSubOrderID } = useSubOrder();
   const { getDeleteOrderEvent } = useOrderEventChange(
     subOrder,
     orderID,
@@ -101,9 +99,6 @@ const SubOrder: React.FC<Props> = (props) => {
     // if (window.confirm(t("OrderView.button.verify") + "?")) {
     updateStatus(OrderState.CLARIFICATION);
     // }
-  };
-  const handleOnClickButtonExpand = () => {
-    setState((prevState) => ({ ...prevState, menuOpen: !prevState.menuOpen }));
   };
 
   const renderButtons = () => {
@@ -219,8 +214,8 @@ const SubOrder: React.FC<Props> = (props) => {
             chat={subOrder.chat}
             user={user}
             closeMenu={closeMenu}
-            orderCollectionID={orderID}
-            orderID={subOrder.subOrderID}
+            orderID={orderID}
+            subOrderID={subOrder.subOrderID}
           />
         </Modal>
       </PermissionGate>

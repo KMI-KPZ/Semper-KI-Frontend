@@ -6,11 +6,6 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { OrderState, useOrder } from "./useOrder";
-import {
-  ServiceManufacturingProps,
-  UpdateServiceManufacturingProps,
-} from "../Service/Manufacturing/types";
-import { ServiceModellingProps } from "../Service/Modelling/Modelling";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   GeneralServiceProps,
@@ -27,13 +22,26 @@ interface ReturnProps {
     unknown
   >;
   getCurrentSubOrder: () => SubOrderProps | undefined;
+  updateSubOrderWithSubOrderID: UseMutationResult<
+    string,
+    Error,
+    {
+      subOrderID: string;
+      changes: UpdateSubOrderProps;
+    },
+    unknown
+  >;
+}
+
+export interface SubOrderDetailsProps {
+  title?: string;
 }
 
 export interface SubOrderProps {
   chat: ChatMessageProps[];
   contractor: string;
   created: Date;
-  details: any;
+  details: SubOrderDetailsProps;
   files: string[];
   service: GeneralServiceProps;
   state: OrderState;
@@ -52,6 +60,7 @@ export interface UpdateSubOrderProps {
   chat?: ChatMessageProps;
   state?: OrderState;
   files?: File[];
+  details?: SubOrderDetailsProps;
   service?: GerneralUpdateServiceProps;
 }
 
@@ -102,6 +111,33 @@ const useSubOrder = (): ReturnProps => {
     },
   });
 
+  const updateSubOrderWithSubOrderID = useMutation<
+    string,
+    Error,
+    { subOrderID: string; changes: UpdateSubOrderProps }
+  >({
+    mutationFn: async (props: {
+      subOrderID: string;
+      changes: UpdateSubOrderProps;
+    }) => {
+      const { changes, subOrderID } = props;
+      return getCustomAxios()
+        .patch(`${process.env.VITE_HTTP_API_URL}/public/updateSubOrder/`, {
+          orderID,
+          subOrderID,
+          changes,
+        })
+        .then((res) => {
+          logger("useSubOrder | updateSubOrder ✅ |", res.data);
+          return res.data;
+        });
+    },
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries(["order", orderID]);
+      queryClient.invalidateQueries(["flatOrders"]);
+    },
+  });
+
   const deleteSubOrder = useMutation<string, Error, string>({
     mutationFn: async (subOrderID: string) => {
       return getCustomAxios()
@@ -119,7 +155,13 @@ const useSubOrder = (): ReturnProps => {
     },
   });
 
-  return { createSubOrder, deleteSubOrder, updateSubOrder, getCurrentSubOrder };
+  return {
+    createSubOrder,
+    deleteSubOrder,
+    updateSubOrder,
+    getCurrentSubOrder,
+    updateSubOrderWithSubOrderID,
+  };
 };
 
 export default useSubOrder;

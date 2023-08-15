@@ -11,23 +11,18 @@ import {
   OrganizationOutlet,
   UserOutlet,
 } from "./components/Outlet";
-import { User, UserType } from "@/hooks/useUser/types";
+import { User } from "@/hooks/useUser/types";
 import { DeleteEvent, Event } from "@/pages/App/types";
 import { ToastContainer } from "react-toastify";
 import useUser from "@/hooks/useUser";
 import Background from "@/components/Background";
 import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
-import AdminMaterials from "../AdminRoutes/Materials";
-import AdminModels from "../AdminRoutes/Models";
-import AdminOrders from "../AdminRoutes/Orders";
-import AdminUser from "../AdminRoutes/User/User";
 import Login from "../Login/Login";
 import RedirectLogin from "../Login/Redirect/RedirectLogin";
 import Logout from "../Logout/Logout";
 import Organization from "../Organization/Organization";
 import Portfolio from "../Portfolio/Portfolio";
-import ProcessManufacturer from "../OrderRoutes/Order/Manufacturer/Manufacturer";
 import Profil from "../Profil/Profll";
 import Resouces from "../Resources/Resources";
 import Service from "../Service/Service";

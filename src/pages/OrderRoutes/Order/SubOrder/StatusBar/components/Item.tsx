@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ReactNode } from "react";
 import { StatusData } from "../StatusBar";
 import { OrderState } from "@/pages/OrderRoutes/hooks/useOrder";
+import { Text } from "@component-library/Typography";
 
 type StatusItemType = {
   item: StatusData;
@@ -30,11 +31,18 @@ const StatusItem: React.FC<StatusItemType> = (props) => {
   };
 
   return (
-    <div
-      className={`flex w-full flex-col items-center justify-center rounded-xl p-3 md:w-fit ${getClassName()}`}
-    >
-      {icon}
-      <span className="text-center">{t(text)}</span>
+    <div className="relative z-10 flex flex-col items-center justify-center gap-5">
+      <div
+        className={`flex  items-center justify-center rounded-full p-5 ${getClassName()}`}
+      >
+        {icon}
+      </div>
+      <Text
+        variant="body"
+        className="absolute top-20 whitespace-nowrap bg-white text-center"
+      >
+        {t(text)}
+      </Text>
     </div>
   );
 };

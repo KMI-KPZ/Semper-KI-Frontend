@@ -89,7 +89,7 @@ const useSubOrder = (): ReturnProps => {
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateSubOrder/`, {
           orderID,
           subOrderID,
-          ...props,
+          changes: props,
         })
         .then((res) => {
           logger("useSubOrder | updateSubOrder ✅ |", res.data);

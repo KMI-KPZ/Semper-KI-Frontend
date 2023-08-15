@@ -1,4 +1,9 @@
-import { GeneralServiceProps, ServiceProps } from "../../Service";
+import {
+  GeneralServiceProps,
+  GerneralUpdateServiceProps,
+  ServiceProps,
+  UpdateServiceProps,
+} from "../../Service";
 import { ServiceType } from "../../hooks/useService";
 import { MaterialProps } from "../Material/Material";
 import { ModelProps } from "../Model/types";
@@ -18,7 +23,7 @@ export type UpdateServiceManufacturingProps = {
   material?: MaterialProps;
   postProcessings?: PostProcessingProps[];
   manufacturerID?: string;
-} & GeneralServiceProps;
+} & UpdateServiceProps;
 
 export interface ServiceManufacturingState {
   grid: boolean;

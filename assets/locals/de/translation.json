@@ -1150,6 +1150,15 @@
       "Select":{
         "title":"Service auswählen"
       }
+    },
+    "SubOrder":{
+      "components":{
+        "StateButton":{
+          "selectManufacturer":"Hersteller auswählen",
+          "verify":"Überprüfen",
+          "request":"Anfragen"
+        }
+      }
     }
   }
 }

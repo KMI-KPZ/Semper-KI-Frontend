@@ -56,14 +56,14 @@ const SubOrderService: React.FC<SubOrderServiceProps> = (props) => {
         <Divider className="mt-[0.3rem]" />
         <div className="flex flex-row items-center justify-center gap-3">
           <Button
-            title={t("OrderRoutes.Service.Service.button.delete")}
-            children={<DeleteIcon />}
-            onClick={handleOnClickButtonDelete}
-          />
-          <Button
             title={t("OrderRoutes.Service.Service.button.edit")}
             children={<EditIcon />}
             to={`suborder/${subOrderID}`}
+          />
+          <Button
+            title={t("OrderRoutes.Service.Service.button.delete")}
+            children={<DeleteIcon />}
+            onClick={handleOnClickButtonDelete}
           />
         </div>
       </div>

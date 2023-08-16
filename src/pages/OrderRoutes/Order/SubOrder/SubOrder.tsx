@@ -27,6 +27,7 @@ import SubOrderService from "./Service/Service";
 import { ServiceType } from "../../Service/hooks/useService";
 import EditIcon from "@mui/icons-material/Edit";
 import { Divider } from "@component-library/Divider";
+import SubOrderNextStepButton from "./components/StateButton";
 
 interface Props {
   subOrder: SubOrderProps;
@@ -106,53 +107,66 @@ const SubOrder: React.FC<Props> = (props) => {
     if (user.usertype === UserType.USER)
       return (
         <div className="flex  flex-row flex-wrap items-center justify-center gap-3 md:w-fit">
-          <Button
-            width="fit"
-            size="sm"
-            children={<EditIcon />}
-            to={`/order/${orderID}/suborder/${subOrder.subOrderID}`}
-            title={t("Orders.OrderView.button.edit")}
-          />
-          <Button
-            width="fit"
-            size="sm"
-            children={<DeleteIcon />}
-            onClick={handleOnClickButtonCancel}
-            title={t("Orders.OrderView.button.cancel")}
-          />
-          <Button
-            width="fit"
-            size="sm"
-            children={<ReplayIcon />}
-            onClick={handleOnClickButtonReOrder}
-            title={t("Orders.OrderView.button.reOrder")}
-          />
+          {subOrder.state < OrderState.REQUESTED ? (
+            <Button
+              width="fit"
+              size="sm"
+              children={<EditIcon />}
+              to={`/order/${orderID}/suborder/${subOrder.subOrderID}`}
+              title={t("Orders.OrderView.button.edit")}
+            />
+          ) : null}
+          {subOrder.state <= OrderState.REQUESTED ? (
+            <Button
+              width="fit"
+              size="sm"
+              children={<DeleteIcon />}
+              onClick={handleOnClickButtonCancel}
+              title={t("Orders.OrderView.button.cancel")}
+            />
+          ) : null}
+          {subOrder.state === OrderState.COMPLETED ? (
+            <Button
+              width="fit"
+              size="sm"
+              children={<ReplayIcon />}
+              onClick={handleOnClickButtonReOrder}
+              title={t("Orders.OrderView.button.reOrder")}
+            />
+          ) : null}
         </div>
       );
     if (user.usertype === UserType.ORGANIZATION)
       return (
         <div className="flex  flex-row flex-wrap items-center justify-center gap-3 md:w-fit">
-          <Button
-            width="fit"
-            size="sm"
-            children={<DeleteIcon />}
-            onClick={handleOnClickButtonReject}
-            title={t("Orders.OrderView.button.reject")}
-          />
-          <Button
-            width="fit"
-            size="sm"
-            children={<QuestionMarkIcon />}
-            onClick={handleOnClickButtonVerify}
-            title={t("Orders.OrderView.button.verify")}
-          />
-          <Button
-            width="fit"
-            size="sm"
-            children={<CheckIcon />}
-            onClick={handleOnClickButtonConfirm}
-            title={t("Orders.OrderView.button.confirm")}
-          />
+          {subOrder.state >= OrderState.REJECTED &&
+          subOrder.state <= OrderState.CONFIRMED ? (
+            <>
+              <Button
+                width="fit"
+                size="sm"
+                children={<DeleteIcon />}
+                onClick={handleOnClickButtonReject}
+                title={t("Orders.OrderView.button.reject")}
+              />
+              <Button
+                width="fit"
+                size="sm"
+                children={<CheckIcon />}
+                onClick={handleOnClickButtonConfirm}
+                title={t("Orders.OrderView.button.confirm")}
+              />
+            </>
+          ) : null}
+          {subOrder.state === OrderState.CONFIRMED ? (
+            <Button
+              width="fit"
+              size="sm"
+              children={<QuestionMarkIcon />}
+              onClick={handleOnClickButtonVerify}
+              title={t("Orders.OrderView.button.verify")}
+            />
+          ) : null}
         </div>
       );
   };
@@ -198,6 +212,7 @@ const SubOrder: React.FC<Props> = (props) => {
         </PermissionGate>
       </div>
       <StatusBar state={subOrder.state} serviceType={subOrder.service.type} />
+      <SubOrderNextStepButton state={subOrder.state} />
       <SubOrderService
         service={subOrder.service}
         subOrderID={subOrder.subOrderID}

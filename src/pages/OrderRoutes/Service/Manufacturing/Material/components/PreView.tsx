@@ -4,16 +4,25 @@ import { Button } from "@component-library/Button";
 import { MaterialProps } from "../Material";
 import { Heading } from "@component-library/Typography";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import useSubOrder from "@/pages/OrderRoutes/hooks/useSubOrder";
 
 interface Props {
   material: MaterialProps;
-  selectMaterial: (material: MaterialProps) => void;
   closeMaterialView(): void;
 }
 
 export const ProcessMaterialPreView: React.FC<Props> = (props) => {
-  const { closeMaterialView, material, selectMaterial } = props;
+  const { closeMaterialView, material } = props;
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { updateSubOrder } = useSubOrder();
+
+  const handleOnClickButtonSelect = () => {
+    updateSubOrder.mutate({ service: { material: material } });
+    navigate("../postprocessing");
+  };
+
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-start gap-5 overflow-y-auto overflow-x-hidden bg-white xl:max-h-[90vh] xl:w-fit xl:min-w-[700px]">
       <div className="flex w-full flex-row-reverse xl:hidden">
@@ -34,7 +43,7 @@ export const ProcessMaterialPreView: React.FC<Props> = (props) => {
         ))}
       </div>
       <Button
-        onClick={() => selectMaterial(material)}
+        onClick={handleOnClickButtonSelect}
         title={t("Process.Material.MaterialPreView.button.select")}
       />
     </div>

@@ -4,15 +4,16 @@ import { Button } from "@component-library/Button";
 import { getModelURI } from "@/services/utils";
 import { ModelProps } from "../types";
 import { Heading } from "@component-library/Typography";
+import useSubOrder from "@/pages/OrderRoutes/hooks/useSubOrder";
 
 interface Props {
   model: ModelProps;
-  deselectModel(): void;
 }
 
 const ProcessModelItem: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { model, deselectModel } = props;
+  const { model } = props;
+  const { updateSubOrder } = useSubOrder();
 
   const getDate = (): string => {
     let date: Date = new Date(model.date);
@@ -24,6 +25,10 @@ const ProcessModelItem: React.FC<Props> = (props) => {
     base64 = base64.slice(2);
     base64 = base64.slice(0, -1);
     return base64;
+  };
+
+  const handleOnClickButtonDeselect = () => {
+    updateSubOrder.mutate({ service: { model: undefined } });
   };
 
   return (
@@ -54,7 +59,7 @@ const ProcessModelItem: React.FC<Props> = (props) => {
           : t("Process.Model.ModelView.empty")}
       </div>
       <Button
-        onClick={deselectModel}
+        onClick={handleOnClickButtonDeselect}
         title={t("Process.Model.ModelView.button.change")}
       />
     </div>

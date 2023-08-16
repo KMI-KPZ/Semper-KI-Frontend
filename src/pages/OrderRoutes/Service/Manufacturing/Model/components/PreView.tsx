@@ -5,23 +5,27 @@ import { useTranslation } from "react-i18next";
 import { getModelURI } from "@/services/utils";
 import { ModelProps } from "../types";
 import { Heading } from "@component-library/Typography";
+import useSubOrder from "@/pages/OrderRoutes/hooks/useSubOrder";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   model: ModelProps;
-  selectModel: (model: ModelProps) => void;
   closeModelView(): void;
 }
 
 export const ProcessModelPreView: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { model, selectModel, closeModelView } = props;
+  const { model, closeModelView } = props;
+  const navigate = useNavigate();
+  const { updateSubOrder } = useSubOrder();
   const getDate = (): string => {
     let date: Date = new Date(model.date);
     return date.toLocaleDateString("uk-Uk");
   };
   const handleOnClickButtonSelect = () => {
     closeModelView();
-    selectModel(model);
+    updateSubOrder.mutate({ service: { model: model } });
+    navigate("../material");
   };
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-start gap-5 overflow-y-auto overflow-x-hidden bg-white xl:max-h-[90vh] xl:w-fit xl:min-w-[700px]">

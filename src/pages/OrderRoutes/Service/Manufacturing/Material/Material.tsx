@@ -79,7 +79,6 @@ export const ProcessMaterial: React.FC<Props> = (props) => {
               .map((material: MaterialProps, index: number) => (
                 <ProcessMaterialCard
                   grid={grid}
-                  selectMaterial={selectMaterial}
                   openMaterialView={openMaterialView}
                   material={material}
                   key={index}
@@ -93,7 +92,6 @@ export const ProcessMaterial: React.FC<Props> = (props) => {
                 <ProcessMaterialPreView
                   material={state.material}
                   closeMaterialView={closeMaterialView}
-                  selectMaterial={selectMaterial}
                 />
               ) : null}
             </Modal>
@@ -104,9 +102,6 @@ export const ProcessMaterial: React.FC<Props> = (props) => {
       </div>
     </LoadingSuspense>
   ) : (
-    <ProcessMaterialItem
-      deselectMaterial={deselectMaterial}
-      material={material}
-    />
+    <ProcessMaterialItem material={material} />
   );
 };

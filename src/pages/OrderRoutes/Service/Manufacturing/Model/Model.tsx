@@ -67,9 +67,6 @@ export const ProcessModel: React.FC<Props> = (props) => {
     navigate("upload");
   };
 
-  const deselectModel = () => {};
-  const selectModel = (model: ModelProps) => {};
-
   const renderUplaodCart = () => (
     <div
       className={`flex  items-center justify-between overflow-hidden bg-white hover:cursor-pointer hover:bg-gray-300 ${
@@ -118,7 +115,6 @@ export const ProcessModel: React.FC<Props> = (props) => {
                   model={model}
                   key={index}
                   openModelView={openModelView}
-                  selectModel={selectModel}
                 />
               ))}
             <Modal
@@ -129,7 +125,6 @@ export const ProcessModel: React.FC<Props> = (props) => {
                 <ProcessModelPreView
                   model={state.model}
                   closeModelView={closeModelView}
-                  selectModel={selectModel}
                 />
               ) : null}
             </Modal>
@@ -140,6 +135,6 @@ export const ProcessModel: React.FC<Props> = (props) => {
       </div>
     </LoadingSuspense>
   ) : (
-    <ProcessModelItem model={model} deselectModel={deselectModel} />
+    <ProcessModelItem model={model} />
   );
 };

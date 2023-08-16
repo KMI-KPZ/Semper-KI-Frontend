@@ -29,6 +29,7 @@ const Service: React.FC<ServiceProps> = (props) => {
   const { t } = useTranslation();
 
   const { getService } = useService();
+  const { orderQuery } = useOrder();
   const service: GeneralServiceProps | undefined = getService();
 
   const renderService = (service: GeneralServiceProps) => {
@@ -40,10 +41,22 @@ const Service: React.FC<ServiceProps> = (props) => {
     }
   };
 
+  const checkForOtherSuborders = (): boolean => {
+    return orderQuery.data !== undefined &&
+      orderQuery.data.subOrders.length === 0
+      ? false
+      : true;
+  };
+  if (service === undefined) {
+    return checkForOtherSuborders() ? (
+      <Navigate to={`../${orderQuery.data?.subOrders[0].subOrderID}`} />
+    ) : (
+      <Navigate to=".." />
+    );
+  }
   return (
     <div className="flex w-full flex-col-reverse justify-between gap-5 md:flex-row">
-      {service === undefined ||
-      (service !== undefined && service.type === undefined) ? (
+      {service !== undefined && service.type === undefined ? (
         <ServiceSelect />
       ) : (
         renderService(service)

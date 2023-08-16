@@ -1,7 +1,6 @@
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
-import { IconBadge } from "@component-library/Badge";
 import { Heading } from "@component-library/Typography";
 import useSubOrder, {
   SubOrderProps,
@@ -9,7 +8,6 @@ import useSubOrder, {
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { ServiceType } from "../../hooks/useService";
-import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 
 interface Props {
@@ -25,14 +23,15 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
   const { subOrder } = props;
   const { t } = useTranslation();
   const { orderID, subOrderID } = useParams();
+  const inputText: string =
+    subOrder.details.title !== undefined
+      ? subOrder.details.title
+      : subOrder.service.type !== undefined
+      ? t(`OrderRoutes.Service.type.${ServiceType[subOrder.service.type]}`)
+      : t("OrderRoutes.Service.Overview.components.Item.empty");
   const [state, setState] = useState<State>({
     edit: false,
-    titleText:
-      subOrder.details.title !== undefined
-        ? subOrder.details.title
-        : subOrder.service.type !== undefined
-        ? ServiceType[subOrder.service.type]
-        : t("OrderRoutes.Service.Overview.components.Item.empty"),
+    titleText: "",
   });
   const { edit, titleText } = state;
   const navigate = useNavigate();
@@ -63,7 +62,10 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
     if (state.edit)
       updateSubOrder.mutate({ details: { title: state.titleText } });
     setState((prevState) => {
-      return { ...prevState, edit: !prevState.edit };
+      return {
+        edit: !prevState.edit,
+        titleText: prevState.edit ? prevState.titleText : inputText,
+      };
     });
   };
 
@@ -91,7 +93,7 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
           onChange={handleOnChangeInput}
         />
       ) : (
-        <Heading variant="h3">{titleText}</Heading>
+        <Heading variant="h3">{inputText}</Heading>
       )}
       <div className="flex flex-col items-center justify-center gap-1">
         <a

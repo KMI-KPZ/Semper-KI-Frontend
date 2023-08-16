@@ -3,23 +3,27 @@ import { Button } from "@component-library/Button";
 import { useTranslation } from "react-i18next";
 import { ModelProps } from "../types";
 import { Heading } from "@component-library/Typography";
+import useSubOrder from "@/pages/OrderRoutes/hooks/useSubOrder";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   model: ModelProps;
   grid: boolean;
-  selectModel: (model: ModelProps) => void;
   openModelView(model: ModelProps): void;
 }
 
 export const ProcessModelCard: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { model, selectModel, grid, openModelView } = props;
+  const { model, grid, openModelView } = props;
+  const { updateSubOrder } = useSubOrder();
+  const navigate = useNavigate();
   const handleOnClickSelect = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    selectModel(model);
+    updateSubOrder.mutate({ service: { model: model } });
+    navigate("../material");
   };
 
   const handleOnClickCard = (

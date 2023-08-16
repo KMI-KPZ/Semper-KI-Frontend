@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import { FilterItemProps } from "../Filter/Filter";
 import { usePostProcessing as useManufacturingPostProcessing } from "./hooks/usePostProcessing";
+import { useNavigate } from "react-router-dom";
+import useSubOrder from "@/pages/OrderRoutes/hooks/useSubOrder";
 
 interface Props {
   processState: ServiceManufacturingState;
@@ -33,8 +35,27 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
   const { processState, filters, postProcessings } = props;
   const { grid, searchText } = processState;
   const { postProcessingQuery } = useManufacturingPostProcessing(filters);
+  const { updateSubOrder } = useSubOrder();
 
-  const checkPostProcessing = (postProcessing: PostProcessingProps) => {};
+  const checkPostProcessing = (postProcessing: PostProcessingProps) => {
+    let newPostProcessings: PostProcessingProps[] = [];
+    if (postProcessings === undefined) {
+      newPostProcessings.push(postProcessing);
+    } else {
+      const isPostProcessingAlreadyChecked: boolean =
+        postProcessings.find((item) => item.id === postProcessing.id) !==
+        undefined;
+      if (isPostProcessingAlreadyChecked) {
+        newPostProcessings = postProcessings.filter(
+          (item) => item.id !== postProcessing.id
+        );
+      } else {
+        newPostProcessings = [...postProcessings, postProcessing];
+      }
+    }
+    updateSubOrder.mutate({ service: { postProcessings: newPostProcessings } });
+  };
+
   const hydratePostProcessings = (
     initialPostProcessings: PostProcessingProps[],
     checkedPostprocessings: PostProcessingProps[] | undefined

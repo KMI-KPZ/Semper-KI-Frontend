@@ -6,6 +6,7 @@ import useOrderFile from "../../hooks/useOrderFiles";
 import { Heading } from "@component-library/Typography";
 import useFileView from "../../hooks/useFileView";
 import { SubOrderProps } from "../../../hooks/useSubOrder";
+import { Divider } from "@component-library/Divider";
 
 interface Props {
   subOrder: SubOrderProps;
@@ -30,8 +31,9 @@ const OrderFile: React.FC<Props> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
-      <div className="flex w-full">
+      <div className="flex w-full items-center gap-3">
         <Heading variant="h3">{t("Orders.OrderFileView.header")}:</Heading>
+        <Divider className="mt-[0.3rem]" />
       </div>
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
         {order.files.length > 0

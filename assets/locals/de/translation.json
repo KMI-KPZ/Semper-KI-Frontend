@@ -1129,6 +1129,12 @@
   },
   "OrderRoutes":{
     "Service":{
+      "Service":{
+        "button":{
+          "delete":"Service Löschen",
+          "edit":"Service Bearbeiten"
+        }
+      },
       "Overview":{
         "components":{
           "Item":{
@@ -1138,7 +1144,8 @@
       },
       "type":{
         "MANUFACTURING":"Modell Herstellen lassen",
-        "MODELING":"Modell Entwerfen lassen"
+        "MODELING":"Modell Entwerfen lassen",
+        "undefined":"Service auswahl"
       },
       "Select":{
         "title":"Service auswählen"

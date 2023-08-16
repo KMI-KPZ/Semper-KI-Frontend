@@ -1,6 +1,6 @@
 import { PostProcessingProps } from "@/pages/OrderRoutes/Service/Manufacturing/PostProcessing/PostProcessing";
 import { ServiceManufacturingProps } from "@/pages/OrderRoutes/Service/Manufacturing/types";
-import { Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -15,16 +15,29 @@ const SubOrderServiceManufacturing: React.FC<
   const { t } = useTranslation();
 
   return (
-    <div className="flex w-full flex-col md:flex-row">
-      <Text variant="body">Herstellen lassen</Text>
-      <Text variant="body">Modell: {service.model?.title}</Text>
-      <Text variant="body">Material: {service.material?.title}</Text>
-      <Text variant="body">
-        Nachbeabeitungen:{" "}
-        {service.postProcessings?.map(
-          (postProcessing: PostProcessingProps) => postProcessing.title
-        )}
-      </Text>
+    <div className="flex w-full flex-col gap-5 p-5">
+      <div className="flex w-full flex-col gap-5 md:flex-row">
+        <Text variant="body">Modell:</Text>
+        <Text variant="body">
+          {service.model === undefined ? "---" : service.model.title}
+        </Text>
+      </div>
+      <div className="flex w-full flex-col gap-5 md:flex-row">
+        <Text variant="body">Material:</Text>
+        <Text variant="body">
+          {service.material === undefined ? "---" : service.material.title}
+        </Text>
+      </div>
+      <div className="flex w-full flex-col gap-5 md:flex-row">
+        <Text variant="body">Nachbeabeitungen:</Text>
+        <Text variant="body">
+          {service.postProcessings === undefined
+            ? "---"
+            : service.postProcessings.map(
+                (postProcessing: PostProcessingProps) => postProcessing.title
+              )}
+        </Text>
+      </div>
     </div>
   );
 };

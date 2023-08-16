@@ -198,9 +198,10 @@ const SubOrder: React.FC<Props> = (props) => {
         </PermissionGate>
       </div>
       <StatusBar state={subOrder.state} serviceType={subOrder.service.type} />
-      <Divider />
-      <SubOrderService service={subOrder.service} />
-      <Divider />
+      <SubOrderService
+        service={subOrder.service}
+        subOrderID={subOrder.subOrderID}
+      />
       <PermissionGate element="OrderFile">
         <OrderFile subOrder={subOrder} orderCollectionID={orderID} />
       </PermissionGate>

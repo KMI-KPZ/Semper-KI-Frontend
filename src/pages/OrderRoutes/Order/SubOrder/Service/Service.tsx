@@ -7,14 +7,23 @@ import SubOrderServiceManufacturing from "./components/Manufacturing";
 import SubOrderServiceModelling from "./components/Modelling";
 import SubOrderServiceSelect from "./components/Select";
 import { Heading } from "@component-library/Typography";
+import { Divider } from "@component-library/Divider";
+import { Button } from "@component-library/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import { useNavigate } from "react-router-dom";
+import useSubOrder from "@/pages/OrderRoutes/hooks/useSubOrder";
 
 interface SubOrderServiceProps {
   service: GeneralServiceProps;
+  subOrderID: string;
 }
 
 const SubOrderService: React.FC<SubOrderServiceProps> = (props) => {
-  const { service } = props;
+  const { service, subOrderID } = props;
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { updateSubOrderWithSubOrderID } = useSubOrder();
 
   const renderService = () => {
     if (
@@ -30,10 +39,33 @@ const SubOrderService: React.FC<SubOrderServiceProps> = (props) => {
     }
   };
 
+  const handleOnClickButtonDelete = () => {
+    updateSubOrderWithSubOrderID.mutate({
+      subOrderID,
+      changes: { service: { type: undefined } },
+    });
+  };
+
   return (
     <div className="flex w-full flex-col items-center justify-start">
-      <div className="flex w-full">
-        <Heading variant="h3">{t("Orders.OrderView.Service.title")}</Heading>
+      <div className="flex w-full items-center gap-3">
+        <Heading variant="h3" className="whitespace-nowrap">
+          {t("Orders.OrderView.Service.title")}{" "}
+          {t(`OrderRoutes.Service.type.${ServiceType[service.type]}`)}
+        </Heading>
+        <Divider className="mt-[0.3rem]" />
+        <div className="flex flex-row items-center justify-center gap-3">
+          <Button
+            title={t("OrderRoutes.Service.Service.button.delete")}
+            children={<DeleteIcon />}
+            onClick={handleOnClickButtonDelete}
+          />
+          <Button
+            title={t("OrderRoutes.Service.Service.button.edit")}
+            children={<EditIcon />}
+            to={`suborder/${subOrderID}`}
+          />
+        </div>
       </div>
       {renderService()}
     </div>

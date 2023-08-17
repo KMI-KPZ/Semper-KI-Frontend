@@ -47,7 +47,9 @@
       "add":"Hinzufügen",
       "demo":"Demo",
       "admin":"Adminbereich",
-      "users":"Benutzer verwalten"
+      "users":"Benutzer verwalten",
+      "manufacturerSelection":"Herstellerauswahl",
+      "verification":"Überprüfung"
     }
   },
   "enum":{

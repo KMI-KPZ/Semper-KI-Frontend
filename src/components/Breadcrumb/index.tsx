@@ -1,4 +1,3 @@
-import logger from "@/hooks/useLogger";
 import { Button } from "@component-library/Button";
 import React from "react";
 import { useTranslation } from "react-i18next";

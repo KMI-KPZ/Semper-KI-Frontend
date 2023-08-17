@@ -8,7 +8,7 @@ import useSubOrder, {
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { ServiceType } from "../../hooks/useService";
-import { useTranslation } from "react-i18next";
+import { TFunction, useTranslation } from "react-i18next";
 
 interface Props {
   subOrder: SubOrderProps;
@@ -19,16 +19,23 @@ interface State {
   titleText: string;
 }
 
+export const getTitleFromSubOrder = (
+  subOrder: SubOrderProps,
+  t: TFunction<"translation", undefined>
+): string => {
+  return subOrder.details.title !== undefined
+    ? subOrder.details.title
+    : subOrder.service.type !== undefined
+    ? t(`OrderRoutes.Service.type.${ServiceType[subOrder.service.type]}`)
+    : t("OrderRoutes.Service.Overview.components.Item.empty");
+};
+
 const ServiceOverviewItem: React.FC<Props> = (props) => {
   const { subOrder } = props;
   const { t } = useTranslation();
   const { orderID, subOrderID } = useParams();
-  const inputText: string =
-    subOrder.details.title !== undefined
-      ? subOrder.details.title
-      : subOrder.service.type !== undefined
-      ? t(`OrderRoutes.Service.type.${ServiceType[subOrder.service.type]}`)
-      : t("OrderRoutes.Service.Overview.components.Item.empty");
+  const inputText: string = getTitleFromSubOrder(subOrder, t);
+
   const [state, setState] = useState<State>({
     edit: false,
     titleText: "",

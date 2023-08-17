@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { Button } from "@component-library/Button";
 import { useTranslation } from "react-i18next";
+import { Heading } from "@component-library/Typography";
 
 interface Props {
   className?: string;
@@ -66,7 +67,7 @@ const HomeSearchCard: React.FC<Props> = (props) => {
         </div>
       ) : null} */}
       <div className="flex w-full flex-row items-center justify-center gap-5">
-        <div className="flex w-4/5 items-center justify-center">
+        {/* <div className="flex w-4/5 items-center justify-center">
           <input
             value={text}
             type="text"
@@ -82,6 +83,9 @@ const HomeSearchCard: React.FC<Props> = (props) => {
             children={<SearchIcon />}
             onClick={sendText}
           />
+        </div> */}
+        <div className="font-ptsans text-4xl font-bold text-red-500">
+          Diese Seite ist ein Prototyp und wird fortlaufend bearbeitet
         </div>
       </div>
     </div>

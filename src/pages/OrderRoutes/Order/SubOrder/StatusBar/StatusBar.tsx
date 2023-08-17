@@ -9,7 +9,6 @@ import DoneAllIcon from "@mui/icons-material/DoneAll";
 import { UserType } from "@/hooks/useUser/types";
 import StatusItem from "./components/Item";
 import StatusItemConnector from "./components/ItemConnector";
-import StatusBarDecisionItem from "./components/DecisionItem";
 import { OrderState } from "../../../hooks/useOrder";
 import { ServiceType } from "@/pages/OrderRoutes/Service/hooks/useService";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";

@@ -16,7 +16,12 @@ export interface ServiceProps {}
 
 export type GeneralServiceProps =
   | ServiceManufacturingProps
-  | ServiceModellingProps;
+  | ServiceModellingProps
+  | ServiceUndefinedProps;
+
+export interface ServiceUndefinedProps {
+  type: ServiceType.UNDEFINED;
+}
 
 export interface UpdateServiceProps {
   type?: ServiceType;
@@ -56,7 +61,8 @@ const Service: React.FC<ServiceProps> = (props) => {
   }
   return (
     <div className="flex w-full flex-col-reverse justify-between gap-5 md:flex-row">
-      {service !== undefined && service.type === undefined ? (
+      {service !== undefined &&
+      (service.type === undefined || service.type === ServiceType.UNDEFINED) ? (
         <ServiceSelect />
       ) : (
         renderService(service)

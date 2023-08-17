@@ -6,15 +6,20 @@ import { ServiceType } from "../../hooks/useService";
 import useSubOrder from "@/pages/OrderRoutes/hooks/useSubOrder";
 
 const ServiceSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
-  const { active, icon, serviceType } = props;
+  const { active, icon, serviceType, subOrderID } = props;
   const { t } = useTranslation();
-  const { updateSubOrder } = useSubOrder();
+  const { updateSubOrder, updateSubOrderWithSubOrderID } = useSubOrder();
 
   const handleOnClickCard = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
-    updateSubOrder.mutate({ service: { type: serviceType } });
+    if (subOrderID !== undefined)
+      updateSubOrderWithSubOrderID.mutate({
+        subOrderID,
+        changes: { service: { type: serviceType } },
+      });
+    else updateSubOrder.mutate({ service: { type: serviceType } });
   };
 
   return (

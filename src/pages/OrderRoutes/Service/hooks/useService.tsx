@@ -8,6 +8,7 @@ interface ReturnProps {
 }
 
 export enum ServiceType {
+  "UNDEFINED",
   "MANUFACTURING",
   "MODELING",
 }

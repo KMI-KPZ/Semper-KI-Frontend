@@ -6,15 +6,18 @@ import FactoryIcon from "@mui/icons-material/Factory";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import ServiceSelectItem from "./components/Item";
 
-interface ServiceSelectProps {}
+interface ServiceSelectProps {
+  subOrderID?: string;
+}
 
 export interface ServiceSelectItemProps {
   serviceType: ServiceType;
   icon: React.ReactNode;
   active: boolean;
+  subOrderID?: string;
 }
 
-const serviceSelectItems: ServiceSelectItemProps[] = [
+export const serviceSelectItems: ServiceSelectItemProps[] = [
   {
     serviceType: ServiceType.MANUFACTURING,
     icon: <FactoryIcon />,
@@ -28,7 +31,7 @@ const serviceSelectItems: ServiceSelectItemProps[] = [
 ];
 
 const ServiceSelect: React.FC<ServiceSelectProps> = (props) => {
-  const {} = props;
+  const { subOrderID } = props;
   const { t } = useTranslation();
 
   return (
@@ -36,7 +39,7 @@ const ServiceSelect: React.FC<ServiceSelectProps> = (props) => {
       <Heading variant="h1">{t("OrderRoutes.Service.Select.title")}</Heading>
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
         {serviceSelectItems.map((item, index) => (
-          <ServiceSelectItem {...item} key={index} />
+          <ServiceSelectItem {...item} key={index} subOrderID={subOrderID} />
         ))}
       </div>
     </div>

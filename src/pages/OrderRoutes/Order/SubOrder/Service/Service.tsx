@@ -5,7 +5,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import SubOrderServiceManufacturing from "./components/Manufacturing";
 import SubOrderServiceModelling from "./components/Modelling";
-import SubOrderServiceSelect from "./components/Select";
 import { Heading } from "@component-library/Typography";
 import { Divider } from "@component-library/Divider";
 import { Button } from "@component-library/Button";
@@ -13,6 +12,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import useSubOrder from "@/pages/OrderRoutes/hooks/useSubOrder";
+import ServiceSelect from "@/pages/OrderRoutes/Service/Select/Select";
 
 interface SubOrderServiceProps {
   service: GeneralServiceProps;
@@ -30,8 +30,10 @@ const SubOrderService: React.FC<SubOrderServiceProps> = (props) => {
       service.type === undefined ||
       (service.type !== undefined && service.type === undefined)
     )
-      return <SubOrderServiceSelect />;
+      return <ServiceSelect subOrderID={subOrderID} />;
     switch (service.type) {
+      case ServiceType.UNDEFINED:
+        return <ServiceSelect subOrderID={subOrderID} />;
       case ServiceType.MANUFACTURING:
         return <SubOrderServiceManufacturing service={service} />;
       case ServiceType.MODELING:
@@ -42,7 +44,7 @@ const SubOrderService: React.FC<SubOrderServiceProps> = (props) => {
   const handleOnClickButtonDelete = () => {
     updateSubOrderWithSubOrderID.mutate({
       subOrderID,
-      changes: { service: { type: undefined } },
+      changes: { service: { type: ServiceType.UNDEFINED } },
     });
   };
 

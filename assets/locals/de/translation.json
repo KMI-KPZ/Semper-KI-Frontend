@@ -1147,6 +1147,7 @@
       "type":{
         "MANUFACTURING":"Modell Herstellen lassen",
         "MODELING":"Modell Entwerfen lassen",
+        "UNDEFINED":"Service auswahl",
         "undefined":"Service auswahl"
       },
       "Select":{

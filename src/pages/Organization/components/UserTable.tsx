@@ -29,34 +29,36 @@ const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
         query={rolesQuery}
         errorText={t("Organization.components.table.error.empty")}
       >
-        <Heading variant="h2">
-          {t("Organization.components.table.header")}
-        </Heading>
-        <div className="w-full  overflow-auto">
-          <table className="w-full table-auto">
-            <thead>
-              <tr className="">
-                <th>{t("Organization.components.table.picture")}</th>
-                <th>{t("Organization.components.table.name")}</th>
-                <th>{t("Organization.components.table.email")}</th>
-                <th>{t("Organization.components.table.role")}</th>
-                <th>{t("Organization.components.table.actions")}</th>
-              </tr>
-            </thead>
-            <tbody className="">
-              {userQuery.data !== undefined &&
-              userQuery.data.length > 0 &&
-              rolesQuery.data !== undefined
-                ? userQuery.data.map((data, index) => (
-                    <OrganizationtableRow
-                      key={index}
-                      user={data}
-                      allRoles={rolesQuery.data}
-                    />
-                  ))
-                : null}
-            </tbody>
-          </table>
+        <div className="flex w-full flex-col items-center justify-center gap-5 p-5 shadow-card ">
+          <Heading variant="h2">
+            {t("Organization.components.table.header")}
+          </Heading>
+          <div className="w-full overflow-auto">
+            <table className="w-full table-auto">
+              <thead>
+                <tr className="">
+                  <th>{t("Organization.components.table.picture")}</th>
+                  <th>{t("Organization.components.table.name")}</th>
+                  <th>{t("Organization.components.table.email")}</th>
+                  <th>{t("Organization.components.table.role")}</th>
+                  <th>{t("Organization.components.table.actions")}</th>
+                </tr>
+              </thead>
+              <tbody className="">
+                {userQuery.data !== undefined &&
+                userQuery.data.length > 0 &&
+                rolesQuery.data !== undefined
+                  ? userQuery.data.map((data, index) => (
+                      <OrganizationtableRow
+                        key={index}
+                        user={data}
+                        allRoles={rolesQuery.data}
+                      />
+                    ))
+                  : null}
+              </tbody>
+            </table>
+          </div>
         </div>
       </LoadingSuspense>
     </LoadingSuspense>

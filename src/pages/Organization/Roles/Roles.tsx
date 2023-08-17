@@ -12,18 +12,8 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
   const { rolesQuery: organizationRolesQuery } = useOrganizations();
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5 ">
+    <div className="flex w-full flex-col items-center justify-center gap-5 p-5 shadow-card ">
       <Heading variant="h2">{t("Organization.Roles.index.header")}</Heading>
-      {/* <div className="flex w-full flex-row flex-wrap items-center justify-center gap-5">
-        <LoadingSuspense query={organizationRolesQuery}>
-          {organizationRolesQuery.data !== undefined &&
-          organizationRolesQuery.data.length > 0
-            ? organizationRolesQuery.data.map((role, index) => (
-                <OrganizationRoleTag key={index} {...role} />
-              ))
-            : t("Organization.Roles.index.error.empty")}
-        </LoadingSuspense>
-      </div> */}
       <OrganizationRolesTable roles={organizationRolesQuery.data} />
       <OrganizationRolesForm />
     </div>

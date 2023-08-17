@@ -14,6 +14,7 @@ interface useOrganizationsReturnProps {
   rolesQuery: UseQueryResult<RoleProps[], Error>;
   permissionsQuery: UseQueryResult<Permission[], Error>;
   rolePermissionsQuery: UseQueryResult<RolePermission[], Error>;
+  organizationInfoQuery: UseQueryResult<OrganizationInfoProps, Error>;
   inviteLinkMutation: UseMutationResult<string, Error, string, unknown>;
   inviteUserMutation: UseMutationResult<any, Error, string, unknown>;
   createRoleMutation: UseMutationResult<any, Error, CreateRoleProps, unknown>;
@@ -27,6 +28,12 @@ interface useOrganizationsReturnProps {
   assignRoleMutation: UseMutationResult<any, Error, AssignRoleProps, unknown>;
   removeRoleMutation: UseMutationResult<any, Error, AssignRoleProps, unknown>;
   deleteUserMutation: UseMutationResult<any, Error, string, unknown>;
+  updateOrganizationInfo: UseMutationResult<
+    string,
+    Error,
+    UpdateOrgaInfoProps,
+    unknown
+  >;
 }
 
 export type OrganizationsUser = {
@@ -66,10 +73,46 @@ export type AssignRoleProps = {
   roleID: string;
 };
 
+export interface OrganizationInfoProps {
+  accessed: Date;
+  created: Date;
+  updated: Date;
+  details: { taxID: string; adress: string; email: string };
+  canManufacture: boolean;
+  hashedID: string;
+  name: string;
+}
+
+export interface UpdateOrgaInfoProps {
+  email: string;
+  adress: string;
+  taxID: string;
+  name: string;
+  canManufacture: boolean;
+}
+
 const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const queryClient = useQueryClient();
   const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/organizations/`;
   const staleTime: number = 300000;
+
+  const organizationInfoQuery = useQuery<OrganizationInfoProps, Error>({
+    queryKey: ["organizations", "info"],
+    queryFn: async () => {
+      return getCustomAxios()
+        .get(`${process.env.VITE_HTTP_API_URL}/public/getOrganization/`)
+        .then((res) => {
+          logger("useOrganizations | organizationInfoQuery ✅ |", res.data);
+          return {
+            ...res.data,
+            accessed: new Date(res.data.accessed),
+            created: new Date(res.data.created),
+            updated: new Date(res.data.updated),
+            details: { email: res.data.details["e-mail"], ...res.data.details },
+          };
+        });
+    },
+  });
 
   const userQuery = useQuery<OrganizationsUser[], Error>({
     queryKey: ["organizations", "users"],
@@ -131,6 +174,38 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
         }),
     enabled: roleID !== undefined && roleID !== "",
     staleTime: staleTime,
+  });
+
+  const updateOrganizationInfo = useMutation<
+    string,
+    Error,
+    UpdateOrgaInfoProps
+  >({
+    mutationFn: async (props) => {
+      const { name, email, adress, taxID, canManufacture } = props;
+      return getCustomAxios()
+        .patch(
+          `${process.env.VITE_HTTP_API_URL}/public/updateOrganizationDetails/`,
+          {
+            data: {
+              content: {
+                canManufacture,
+                detail: { "e-mail": email, adress, taxID },
+              },
+            },
+          }
+        )
+        .then((response) => {
+          logger(
+            "useOrganizations | updateOrganizationInfo ✅ |",
+            response.data
+          );
+          return response.data;
+        });
+    },
+    onSuccess() {
+      queryClient.invalidateQueries(["organizations", "info"]);
+    },
   });
 
   const inviteLinkMutation = useMutation<string, Error, string>({
@@ -282,6 +357,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   });
 
   return {
+    organizationInfoQuery,
     permissionsQuery,
     rolesQuery,
     userQuery,
@@ -294,6 +370,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     assignRoleMutation,
     removeRoleMutation,
     deleteUserMutation,
+    updateOrganizationInfo,
   };
 };
 

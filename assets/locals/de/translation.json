@@ -533,7 +533,7 @@
       }
     },
     "OrderCollection":{
-      "id":"ID",
+      "id":"AuftragsID",
       "date":"Datum",
       "noSubOrders":"Keine unteraufträge vorhanden",
       "button":{
@@ -587,7 +587,8 @@
       "finished":"Abgeschlossen"
     },
     "OrderView":{
-      "header":"Auftrag:",
+      "name":"Name:",
+      "id":"UnterauftragsID:",
       "created":"Erstellt am:",
       "service":"Service:",
       "status":"Status:",

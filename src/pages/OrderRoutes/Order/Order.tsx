@@ -60,10 +60,8 @@ const Order: React.FC<Props> = (props) => {
             </Heading>
           </div>
           <PermissionGate element={"OrderButtons"}>
-            <Divider />
             <OrderButtons order={order} user={user} />
           </PermissionGate>
-          <Divider />
           {order.subOrders.length === 0 ? (
             <Heading variant="h2">
               {t("Orders.OrderCollection.noSubOrders")}

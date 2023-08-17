@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 import { User, UserType } from "@/hooks/useUser/types";
 import useSubOrder from "../../hooks/useSubOrder";
+import { Divider } from "@component-library/Divider";
 
 interface OrderButtonsProps {
   order: OrderProps;
@@ -169,6 +170,7 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
+      <Divider className="hidden md:block" />
       {user === undefined ? renderUserButtons() : null}
       {user !== undefined && user.usertype === UserType.USER
         ? renderUserButtons()
@@ -176,6 +178,7 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
       {user !== undefined && user.usertype === UserType.ORGANIZATION
         ? renderOrganizationButtons()
         : null}
+      <Divider className="hidden md:block" />
     </div>
   );
 };

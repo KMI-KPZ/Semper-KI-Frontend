@@ -170,7 +170,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     <a
       title={getTitle()}
       className={` 
-      bezier group flex h-fit flex-wrap items-center gap-3 break-words transition duration-300 md:flex-nowrap
+      bezier group flex h-fit flex-wrap items-center gap-3 break-words transition duration-300 md:flex-nowrap  md:whitespace-nowrap
       ${getClassNameVariant()} ${getClassNameSize()} 
       ${getClassNameWidth()} ${getClassNameAlign()} 
       ${getClassNameDirection()} ${className}`}

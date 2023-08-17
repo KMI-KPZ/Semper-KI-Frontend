@@ -49,23 +49,25 @@ const SubOrderService: React.FC<SubOrderServiceProps> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-start">
-      <div className="flex w-full items-center gap-3">
+    <div className="flex w-full flex-col items-center justify-start pt-5 md:p-0">
+      <div className="flex w-full flex-col items-start gap-3 md:flex-row md:items-center">
         <Heading variant="h3" className="whitespace-nowrap">
           {t("Orders.OrderView.Service.title")}{" "}
           {t(`OrderRoutes.Service.type.${ServiceType[service.type]}`)}
         </Heading>
-        <Divider className="mt-[0.3rem]" />
-        <div className="flex flex-row items-center justify-center gap-3">
+        <Divider className="mt-[0.3rem] hidden md:block" />
+        <div className="flex w-full flex-row flex-wrap items-center justify-center gap-3 md:w-fit md:flex-nowrap">
           <Button
             title={t("OrderRoutes.Service.Service.button.edit")}
             children={<EditIcon />}
             to={`suborder/${subOrderID}`}
+            width="fit"
           />
           <Button
             title={t("OrderRoutes.Service.Service.button.delete")}
             children={<DeleteIcon />}
             onClick={handleOnClickButtonDelete}
+            width="fit"
           />
         </div>
       </div>

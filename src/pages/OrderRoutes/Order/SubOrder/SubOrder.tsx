@@ -28,6 +28,7 @@ import { ServiceType } from "../../Service/hooks/useService";
 import EditIcon from "@mui/icons-material/Edit";
 import { Divider } from "@component-library/Divider";
 import SubOrderNextStepButton from "./components/StateButton";
+import { getTitleFromSubOrder } from "../../Service/Overview/components/Item";
 
 interface Props {
   subOrder: SubOrderProps;
@@ -106,7 +107,7 @@ const SubOrder: React.FC<Props> = (props) => {
     if (user === undefined) return null;
     if (user.usertype === UserType.USER)
       return (
-        <div className="flex  flex-row flex-wrap items-center justify-center gap-3 md:w-fit">
+        <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:w-fit md:flex-nowrap">
           {subOrder.state < OrderState.REQUESTED ? (
             <Button
               width="fit"
@@ -138,7 +139,7 @@ const SubOrder: React.FC<Props> = (props) => {
       );
     if (user.usertype === UserType.ORGANIZATION)
       return (
-        <div className="flex  flex-row flex-wrap items-center justify-center gap-3 md:w-fit">
+        <div className="flex  flex-row flex-wrap items-center justify-center gap-3 md:w-fit md:flex-nowrap">
           {subOrder.state >= OrderState.REJECTED &&
           subOrder.state <= OrderState.CONFIRMED ? (
             <>
@@ -171,17 +172,14 @@ const SubOrder: React.FC<Props> = (props) => {
       );
   };
   return (
-    <div className="flex w-full flex-col items-center justify-start gap-5 border-2 p-5 md:items-start">
-      <div className="flex w-full flex-col flex-wrap items-center justify-center gap-5 lg:justify-between xl:flex-row">
-        <Heading variant="h3" className="break-all">
-          {t("Orders.OrderView.header")} {subOrder.subOrderID}
+    <div className="flex w-full flex-col items-center justify-start gap-5 p-5 shadow-card  md:items-start">
+      <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row lg:justify-between">
+        <Heading variant="h3" className="md:whitespace-nowrap">
+          {t("Orders.OrderView.name")} {getTitleFromSubOrder(subOrder, t)}
         </Heading>
-        <Text variant="body">
-          {t("Orders.OrderView.created")}{" "}
-          {new Date(subOrder.created).toLocaleDateString()}
-        </Text>
+        <Divider className="hidden md:block" />
         <PermissionGate element={["OrderButtons", "ChatButton"]} concat="or">
-          <div className="flex flex-row flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:flex-nowrap">
             <PermissionGate element="ChatButton">
               {orderEvent !== undefined &&
               orderEvent.messages !== undefined &&
@@ -210,6 +208,15 @@ const SubOrder: React.FC<Props> = (props) => {
             </PermissionGate>
           </div>
         </PermissionGate>
+      </div>
+      <div className="flex w-full flex-col items-start justify-start gap-5 md:flex-row md:flex-wrap md:justify-between">
+        <Text variant="body" className="break-all">
+          {t("Orders.OrderView.id")} {subOrder.subOrderID}
+        </Text>
+        <Text variant="body">
+          {t("Orders.OrderView.created")}{" "}
+          {new Date(subOrder.created).toLocaleDateString()}
+        </Text>
       </div>
       <StatusBar state={subOrder.state} serviceType={subOrder.service.type} />
       <SubOrderNextStepButton

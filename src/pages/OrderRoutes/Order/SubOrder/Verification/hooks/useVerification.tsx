@@ -23,7 +23,7 @@ export interface IRequestState {
   data: string;
 }
 
-const useCheckout = (): ReturnProps => {
+const useVerification = (): ReturnProps => {
   const emptyRequestState: IRequestState = {
     data: "",
     error: false,
@@ -229,4 +229,4 @@ const useCheckout = (): ReturnProps => {
   };
 };
 
-export default useCheckout;
+export default useVerification;

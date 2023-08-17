@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@component-library/Button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { LoadingSuspense } from "@component-library/Loading";
 import ProcessManufacturerItem from "./components/Item";
 import { Heading } from "@component-library/Typography";
-import { useOrder } from "../../hooks/useOrder";
+import { useOrder } from "../../../hooks/useOrder";
 
 interface Props {}
 
@@ -21,7 +20,7 @@ export interface IManufacturer {
   id: string;
 }
 
-const ProcessManufacturer: React.FC<Props> = (props) => {
+const SubOrderManufacturerSelection: React.FC<Props> = (props) => {
   const {} = props;
   const navigate = useNavigate();
   const { orderQuery } = useOrder();
@@ -131,4 +130,4 @@ const ProcessManufacturer: React.FC<Props> = (props) => {
   );
 };
 
-export default ProcessManufacturer;
+export default SubOrderManufacturerSelection;

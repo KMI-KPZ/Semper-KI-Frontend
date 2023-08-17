@@ -43,7 +43,8 @@ const Profil: React.FC<Props> = (props) => {
           <span>
             {t("Profil.company.name")}: {user.organizations}
           </span>
-          {user.organizations === "None" ? (
+          {user.organizations[0] !== undefined &&
+          user.organizations[0] === "None" ? (
             <Button width="full" title={t("Profil.button.selectChange")} />
           ) : null}
         </div>

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import useCheckout, { IRequestState } from "./hooks/useCheckout";
-import OrderCheckoutItem from "./components/Item";
+import useVerification, { IRequestState } from "./hooks/useVerification";
+import SubOrderVerificationItem from "./components/Item";
 import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import { LoadingAnimation, LoadingSuspense } from "@component-library/Loading";
 import { Heading } from "@component-library/Typography";
-import { useOrder } from "../../hooks/useOrder";
+import { useOrder } from "@/pages/OrderRoutes/hooks/useOrder";
+import useSubOrder from "@/pages/OrderRoutes/hooks/useSubOrder";
 
 interface Props {}
 interface State {
@@ -20,11 +21,12 @@ interface State {
   orderSendSuccesfull: boolean;
 }
 
-const OrderCheckout: React.FC<Props> = (props) => {
+const SubOrderCheckout: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
 
   const { orderQuery } = useOrder();
+  const { getCurrentSubOrder } = useSubOrder();
 
   const navigate = useNavigate();
   const [state, setState] = useState<State>({
@@ -57,7 +59,7 @@ const OrderCheckout: React.FC<Props> = (props) => {
     logistics,
     logisticsList,
     checkLogistics,
-  } = useCheckout();
+  } = useVerification();
   const loadingDummy: IRequestState = {
     error: false,
     loading: false,
@@ -247,7 +249,7 @@ const OrderCheckout: React.FC<Props> = (props) => {
         >
           {orderQuery.data?.subOrders ? (
             orderQuery.data?.subOrders.map((item, index) => (
-              <OrderCheckoutItem
+              <SubOrderVerificationItem
                 key={index}
                 suborder={item}
                 logistics={
@@ -278,4 +280,4 @@ const OrderCheckout: React.FC<Props> = (props) => {
   );
 };
 
-export default OrderCheckout;
+export default SubOrderCheckout;

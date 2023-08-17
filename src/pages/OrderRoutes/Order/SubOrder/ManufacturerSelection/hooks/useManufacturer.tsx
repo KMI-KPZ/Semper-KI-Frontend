@@ -1,6 +1,6 @@
 import { getCustomAxios } from "@/hooks/useCustomAxios";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { IManufacturer } from "../Manufacturer";
+import { IManufacturer } from "../ManufacturerSelection";
 import logger from "@/hooks/useLogger";
 
 interface ReturnProps {

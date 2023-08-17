@@ -3,8 +3,10 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Order from "./Order/Order";
-import OrderCheckout from "./Order/Checkout/Checkout";
 import Service from "./Service/Service";
+import SubOrderCheckout from "./Order/SubOrder/Verification/Verification";
+import SubOrder from "./Order/SubOrder/SubOrder";
+import SubOrderManufacturerSelection from "./Order/SubOrder/ManufacturerSelection/ManufacturerSelection";
 
 interface OrderRoutesProps {
   user: User | undefined;
@@ -19,9 +21,17 @@ const OrderRoutes: React.FC<OrderRoutesProps> = (props) => {
       <Route index element={<Navigate to="/orders" />} />
       <Route path=":orderID/*">
         <Route index element={<Order user={user} />} />
-        <Route path="checkout" element={<OrderCheckout />} />
         <Route path="suborder">
           <Route index element={<Navigate to="../" />} />
+          <Route path=":subOrderID/checkout" element={<SubOrderCheckout />} />
+          <Route
+            path=":subOrderID/verification"
+            element={<SubOrderCheckout />}
+          />
+          <Route
+            path=":subOrderID/manufacturerSelection"
+            element={<SubOrderManufacturerSelection />}
+          />
           <Route path=":subOrderID/*" element={<Service />} />
         </Route>
       </Route>

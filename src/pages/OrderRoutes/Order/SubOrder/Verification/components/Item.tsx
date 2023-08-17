@@ -2,7 +2,7 @@ import { LoadingAnimation } from "@component-library/Loading";
 import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { IRequestState } from "../hooks/useCheckout";
+import { IRequestState } from "../hooks/useVerification";
 import { SubOrderProps } from "@/pages/OrderRoutes/hooks/useSubOrder";
 import { ServiceType } from "@/pages/OrderRoutes/Service/hooks/useService";
 
@@ -13,7 +13,7 @@ type Props = {
   logistics: IRequestState;
 };
 
-const OrderCheckoutItem: React.FC<Props> = (props) => {
+const SubOrderVerificationItem: React.FC<Props> = (props) => {
   const { suborder, logistics, price, printable } = props;
   const { t } = useTranslation();
 
@@ -71,4 +71,4 @@ const OrderCheckoutItem: React.FC<Props> = (props) => {
   );
 };
 
-export default OrderCheckoutItem;
+export default SubOrderVerificationItem;

@@ -6,7 +6,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
-import EditIcon from "@mui/icons-material/Edit";
 import PolicyIcon from "@mui/icons-material/Policy";
 import SendIcon from "@mui/icons-material/Send";
 import FactoryIcon from "@mui/icons-material/Factory";

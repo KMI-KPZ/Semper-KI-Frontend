@@ -3,7 +3,7 @@ import { Address, User,UserType } from "@/hooks/useUser/types";
 export class UserBuilder {
     email:string = "test@test.de";
     name:string = "testName";
-    organization:string = "";
+    organizations:string[] = [""];
     userType:UserType = 0;
     hashedID:string= "7ae4dc547be2fdeffc5968366925368552ba4e279725333507e9bdc60c4d955d7d1a4baea3e989e93f1dwferhjztukcbe3435975b609633343e3c70e831a5a7"
     address:Address= {
@@ -31,8 +31,8 @@ export class UserBuilder {
         this.name = name;
         return this;
     }
-    withOrganization(organization:string):UserBuilder {
-        this.organization = organization;
+    withOrganizations(organizations:string[]):UserBuilder {
+        this.organizations = organizations;
         return this;
     }
     withHashedID(hashedID:string):UserBuilder {
@@ -70,7 +70,7 @@ export class UserBuilder {
         return({
             email: this.email,
             name: this.name,
-            organizations: this.organization,
+            organizations: this.organizations,
             usertype: this.userType,
             hashedID: this.hashedID,
             created: this.created,

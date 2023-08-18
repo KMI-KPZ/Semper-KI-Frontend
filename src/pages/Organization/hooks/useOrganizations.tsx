@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-query";
 import { getCustomAxios } from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
-import usePermissions from "@/hooks/usePermissions";
+import { ListItem } from "@mui/material";
 
 interface useOrganizationsReturnProps {
   userQuery: UseQueryResult<OrganizationsUser[], Error>;
@@ -59,7 +59,7 @@ export type RolePermission = {
   resource_server_identifier: string;
 };
 export type Permission = {
-  value: string;
+  permission_name: string;
   description: string;
 };
 
@@ -103,13 +103,17 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
         .get(`${process.env.VITE_HTTP_API_URL}/public/getOrganization/`)
         .then((res) => {
           logger("useOrganizations | organizationInfoQuery ✅ |", res.data);
-          return {
+          const orgaInfo: OrganizationInfoProps = {
             ...res.data,
             accessed: new Date(res.data.accessed),
             created: new Date(res.data.created),
             updated: new Date(res.data.updated),
-            details: { email: res.data.details["e-mail"], ...res.data.details },
+            details: {
+              ...JSON.parse(res.data.details),
+            },
           };
+          logger("useOrganizations | orgaInfo ✅ |", orgaInfo);
+          return orgaInfo;
         });
     },
   });
@@ -138,7 +142,12 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
         .get(apiUrl + "getPermissions/")
         .then((res) => {
           logger("useOrganizations | getPermissions ✅ |", res.data);
-          return res.data;
+          return res.data.map(
+            (item: { value: string; descibtion: String }) => ({
+              ...item,
+              permission_name: item.value,
+            })
+          );
         }),
     staleTime: staleTime,
   });
@@ -190,7 +199,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
             data: {
               content: {
                 canManufacture,
-                detail: { "e-mail": email, adress, taxID },
+                details: { email, adress, taxID },
               },
             },
           }

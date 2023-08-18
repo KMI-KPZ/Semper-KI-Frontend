@@ -90,12 +90,12 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
       onAnimationEnd={handleOnAnimEnd}
     >
       <div
-        className={`box-border min-h-[20px] min-w-[20px] ${className}`}
+        className={`box-border min-h-[20px] min-w-[20px] md:m-5 ${className}`}
         onClick={handleOnClickChildren}
       >
         {noIcon === true ? null : (
           <Button
-            className="absolute right-0 top-0 z-10 mr-3 mt-3"
+            className="absolute right-0 top-0 z-10 mr-3 mt-3 md:mr-5 md:mt-5"
             title={t("components.Modal.button.close")}
             children={<CloseIcon />}
             variant="secondary"

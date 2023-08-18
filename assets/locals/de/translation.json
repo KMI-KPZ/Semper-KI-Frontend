@@ -974,19 +974,28 @@
       "header":"Organisationsübersicht"
     },
     "Roles":{
-      "index":{
+      "Roles":{
         "header":"Rollen/Rechte",
         "name":"Name",
         "description":"Beschreibung",
-        "error":{
-          "empty":"keine Rollen angelegt"
-        },
+        "empty":"keine Rollen angelegt",
         "button":{
           "create":"Erstellen"
         }
       },
       "components":{
-        "table":{
+        "Item":{
+          "name":"Name",
+          "description":"Beschreibung",
+          "actions":"Aktionen",
+          "empty":"keine Rollen angelegt",
+          "button":{
+            "delete":"Löschen",
+            "edit":"Bearbeiten",
+            "safe":"Speichern"
+          }
+        },
+        "Table":{
           "name":"Name",
           "description":"Beschreibung",
           "actions":"Aktionen",
@@ -1008,11 +1017,35 @@
             "edit":"Bearbeiten",
             "safe":"Speichern"
           }
-        },
-        "tag":{
+        }
+      }
+    },
+    "Info":{
+      "accessed":"letzter Zugegriff am",
+      "created":"Erstellt am",
+      "updated":"Aktualisiert am",
+      "canManufacture":{
+        "name":"Kann Herstellen",
+        "true":"Ja",
+        "false":"Nein"
+      },
+      "id":"OrganisationsID",
+      "name":"Name",
+      "adress":"Adresse",
+      "email":"E-Mail",
+      "taxID":"Steuernummer",
+      "button":{
+        "edit":"Bearbeiten"
+      },
+      "components":{
+        "form":{
+          "title":"Organisationinformationen bearbeiten", 
+          "name":"Name der Organisation",
+          "taxID":"Steuernummer der Organisation",
+          "email":"Email der Organisation",
+          "adress":"Addresse der Organisation",
+          "canManufacture":"Kann Herstellen",
           "button":{
-            "delete":"Löschen",
-            "edit":"Bearbeiten",
             "safe":"Speichern"
           }
         }
@@ -1046,32 +1079,6 @@
           "send":"Gesendet!",
           "link":"Einladungslink erstellen",
           "copy":"Kopieren"
-        }
-      },
-      "Info":{
-        "accessed":"letzter Zugegriff am: ",
-        "created":"Erstellt am: ",
-        "updated":"Aktualisiert am: ",
-        "canManufacture":{
-          "name":"Kann Herstellen: ",
-          "true":"Ja",
-          "false":"Nein"
-        },
-        "id":"OrganisationsID: ",
-        "name":"Name: ",
-        "adress":"Adresse: ",
-        "email":"E-Mail: ",
-        "taxID":"Steuernummer: ",
-        "button":{
-          "edit":"Bearbeiten",
-          "safe":"Speichern"
-        },
-        "form":{
-          "name":"Name der Organisation",
-          "taxID":"Steuernummer der Organisation",
-          "email":"Email der Organisation",
-          "adress":"Addresse der Organisation",
-          "canManufacture":"Kann Herstellen"
         }
       }
     }

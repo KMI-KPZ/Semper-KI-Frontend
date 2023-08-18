@@ -6,7 +6,7 @@ import OrganizationRoles from "./Roles/Roles";
 import OrganizationTabel from "./components/UserTable";
 import { Heading } from "@component-library/Typography";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import OrganizationInfo from "./components/Info";
+import OrganizationInfo from "./Info/Info";
 
 interface OrganizationViewProps {}
 

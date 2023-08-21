@@ -8,6 +8,7 @@ import {
 import { getCustomAxios } from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
 import { ListItem } from "@mui/material";
+import { useState } from "react";
 
 interface useOrganizationsReturnProps {
   userQuery: UseQueryResult<OrganizationsUser[], Error>;
@@ -95,6 +96,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const queryClient = useQueryClient();
   const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/organizations/`;
   const staleTime: number = 300000;
+  const [showLogger, setShowLogger] = useState<boolean>(false);
 
   const organizationInfoQuery = useQuery<OrganizationInfoProps, Error>({
     queryKey: ["organizations", "info"],
@@ -102,7 +104,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
       return getCustomAxios()
         .get(`${process.env.VITE_HTTP_API_URL}/public/getOrganization/`)
         .then((res) => {
-          logger("useOrganizations | organizationInfoQuery ✅ |", res.data);
+          if (showLogger)
+            logger("useOrganizations | organizationInfoQuery ✅ |", res.data);
           const orgaInfo: OrganizationInfoProps = {
             ...res.data,
             accessed: new Date(res.data.accessed),
@@ -112,7 +115,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
               ...JSON.parse(res.data.details),
             },
           };
-          logger("useOrganizations | orgaInfo ✅ |", orgaInfo);
+          if (showLogger) logger("useOrganizations | orgaInfo ✅ |", orgaInfo);
           return orgaInfo;
         });
     },
@@ -126,7 +129,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           // .post(apiUrl, { data: { intent: "fetchUsers" } })
           .get(apiUrl + "fetchUsers/")
           .then((res) => {
-            logger("useOrganizations | fetchUsers ✅ |", res.data);
+            if (showLogger)
+              logger("useOrganizations | fetchUsers ✅ |", res.data);
             return res.data;
           })
       );
@@ -141,7 +145,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
         // .post(apiUrl, { data: { intent: "getPermissions" } })
         .get(apiUrl + "getPermissions/")
         .then((res) => {
-          logger("useOrganizations | getPermissions ✅ |", res.data);
+          if (showLogger)
+            logger("useOrganizations | getPermissions ✅ |", res.data);
           return res.data.map(
             (item: { value: string; descibtion: String }) => ({
               ...item,
@@ -160,7 +165,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           // .post(apiUrl, { data: { intent: "getRoles" } })
           .get(apiUrl + "getRoles/")
           .then((res) => {
-            logger("useOrganizations | getRoles ✅ |", res.data);
+            if (showLogger)
+              logger("useOrganizations | getRoles ✅ |", res.data);
             return res.data;
           })
       );
@@ -178,7 +184,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((res) => {
-          logger("useOrganizations | getPermissionsForRole ✅ |", res.data);
+          if (showLogger)
+            logger("useOrganizations | getPermissionsForRole ✅ |", res.data);
           return res.data;
         }),
     enabled: roleID !== undefined && roleID !== "",
@@ -205,10 +212,11 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           }
         )
         .then((response) => {
-          logger(
-            "useOrganizations | updateOrganizationInfo ✅ |",
-            response.data
-          );
+          if (showLogger)
+            logger(
+              "useOrganizations | updateOrganizationInfo ✅ |",
+              response.data
+            );
           return response.data;
         });
     },
@@ -224,7 +232,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           data: { content: { email: email } },
         })
         .then((response) => {
-          logger("useOrganizations | getInviteLink ✅ |", response.data);
+          if (showLogger)
+            logger("useOrganizations | getInviteLink ✅ |", response.data);
           return response.data;
         });
     },
@@ -240,7 +249,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           data: { content: { email: email } },
         })
         .then((response) => {
-          logger("useOrganizations | addUser ✅ |", response.data);
+          if (showLogger)
+            logger("useOrganizations | addUser ✅ |", response.data);
           return response.data;
         });
     },
@@ -259,7 +269,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((response) => {
-          logger("useOrganizations | createRole ✅ |", response.data);
+          if (showLogger)
+            logger("useOrganizations | createRole ✅ |", response.data);
           return response.data;
         });
     },
@@ -278,10 +289,11 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((response) => {
-          logger(
-            "useOrganizations | setPermissionsForRole ✅ |",
-            response.data
-          );
+          if (showLogger)
+            logger(
+              "useOrganizations | setPermissionsForRole ✅ |",
+              response.data
+            );
           return response.data;
         });
     },
@@ -299,7 +311,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((response) => {
-          logger("useOrganizations | deleteRole ✅ |", response.data);
+          if (showLogger)
+            logger("useOrganizations | deleteRole ✅ |", response.data);
           return response.data;
         });
     },
@@ -318,7 +331,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((response) => {
-          logger("useOrganizations | assignRole ✅ |", roleID);
+          if (showLogger) logger("useOrganizations | assignRole ✅ |", roleID);
           return response.data;
         });
     },
@@ -337,7 +350,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((response) => {
-          logger("useOrganizations | removeRole ✅ |", roleID);
+          if (showLogger) logger("useOrganizations | removeRole ✅ |", roleID);
           return response.data;
         });
     },
@@ -356,7 +369,8 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           },
         })
         .then((response) => {
-          logger("useOrganizations | deleteUser ✅ |", response.data);
+          if (showLogger)
+            logger("useOrganizations | deleteUser ✅ |", response.data);
           return response.data;
         });
     },

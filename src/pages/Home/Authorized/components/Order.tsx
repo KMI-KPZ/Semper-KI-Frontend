@@ -50,7 +50,7 @@ const HomeAuthorizedOrder: React.FC<HomeAuthorizedOrderProps> = (props) => {
           <Text variant="body">{t("Home.Home.Authorized.Order.noOrders")}</Text>
         )}
       </div> */}
-      <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
+      <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
         <Button
           title={t("Home.Home.Authorized.Order.button.new")}
           onClick={handleOnClickButtonNew}

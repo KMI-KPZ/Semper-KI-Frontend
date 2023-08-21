@@ -984,6 +984,14 @@
         }
       },
       "components":{
+        "Form":{
+          "title":"Rolle anlegen",
+          "name":"Name",
+          "description":"Beschreibung",
+          "button":{
+            "create":"Erstellen"
+          }
+        },
         "Item":{
           "name":"Name",
           "description":"Beschreibung",
@@ -993,7 +1001,8 @@
             "delete":"Löschen",
             "edit":"Bearbeiten",
             "safe":"Speichern"
-          }
+          },
+          "alert":"Rolle wirklich löschen?"
         },
         "Table":{
           "name":"Name",

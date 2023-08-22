@@ -95,7 +95,7 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
             {permissionsQuery.data !== undefined ? (
               <OrganizationRolesForm
                 roleID={editRoleID}
-                permissions={permissionsQuery.data}
+                allPermissions={permissionsQuery.data}
               />
             ) : null}
           </LoadingSuspense>

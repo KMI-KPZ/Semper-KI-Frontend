@@ -2,53 +2,63 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Button } from "@component-library/Button";
 import useOrganizations, { Permission } from "../../hooks/useOrganizations";
 import logger from "@/hooks/useLogger";
-import { Heading } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/Typography";
+import { getSimplifiedPermissions } from "../Roles";
 
 interface OrganizationRolesFormProps {
-  roleID: string;
-  permissions: Permission[];
+  allPermissions: Permission[];
+  roleID?: string;
+}
+
+interface FormData {
+  name: string;
+  description: string;
+  permissions: {
+    [key: string]: {
+      [key: string]: boolean;
+    };
+  };
 }
 
 const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
-  const { roleID, permissions } = props;
+  const { roleID, allPermissions } = props;
   const { t } = useTranslation();
   const { rolesQuery, createRoleMutation } = useOrganizations(roleID);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const schema = yup
-    .object({
-      name: yup.string().required(
-        t("yup.required", {
-          name: t("Organization.Roles.components.Form.name"),
-        })
-      ),
-      description: yup.string().required(
-        t("yup.required", {
-          name: t("Organization.Roles.components.Form.description"),
-        })
-      ),
-      permissions: yup
-        .array()
-        .of(
-          yup.object({
-            check: yup.boolean(),
-          })
-        )
-        .required(),
-    })
-    .required();
-  type FormData = yup.InferType<typeof schema>;
+  const getInintialDefaultValues = (): FormData => {
+    return {
+      name: "",
+      description: "",
+      permissions: {
+        test: {
+          test: true,
+        },
+      },
+    };
+  };
 
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({ resolver: yupResolver(schema) });
+  } = useForm<FormData>({
+    defaultValues:
+      roleID === undefined
+        ? getInintialDefaultValues()
+        : async () => {
+            return {
+              name: "",
+              description: "",
+              permissions: {},
+            };
+          },
+  });
 
   const onSubmit = (data: FormData) => {
     logger("onSubmitInvite", data);
@@ -72,31 +82,53 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
       <form className="flex w-full flex-col items-center justify-center gap-5">
         <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
           <input
-            placeholder={t("Organization.Roles.components.Form.name") + "..."}
-            {...register("name")}
+            placeholder={t("Organization.Roles.components.Table.name") + "..."}
+            {...register("name", {
+              required: t(
+                "Organization.Roles.components.Form.validation.name.required"
+              ),
+            })}
             className="w-full bg-slate-100 px-5 py-2 "
           />
           <input
             placeholder={
-              t("Organization.Roles.components.Form.description") + "..."
+              t("Organization.Roles.components.Table.description") + "..."
             }
-            {...register("description")}
+            {...register("description", {
+              required: t(
+                "Organization.Roles.components.Form.validation.name.required"
+              ),
+            })}
             className="w-full bg-slate-100 px-5 py-2 "
           />
         </div>
-        <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
-          {permissions.map((permission, index) => (
-            <input
-              type="checkbox"
-              placeholder={
-                t("Organization.Roles.components.Form.description") + "..."
-              }
-              {...register(`permissions.${index}.check`)}
-              name={`${permission}`}
-              className="w-full bg-slate-100 px-5 py-2 "
-            />
-          ))}
-        </div>
+        {getSimplifiedPermissions(allPermissions).map((_permission, _index) => (
+          <div
+            className="flex flex-col items-center justify-center gap-3"
+            key={_index}
+          >
+            <Heading variant="h2">
+              {t(`Organization.Roles.components.Table.${_permission.name}`)}
+            </Heading>
+            <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
+              {_permission.permissions.map((permission, index) => (
+                <label
+                  key={index}
+                  className="flex flex-col items-center justify-center gap-2"
+                >
+                  <Text variant="body">{permission}</Text>
+                  <input
+                    type="checkbox"
+                    {...register(
+                      `permissions.${_permission.name}.${permission}`
+                    )}
+                    className="w-full bg-slate-100 px-5 py-2 "
+                  />
+                </label>
+              ))}
+            </div>
+          </div>
+        ))}
         {errors.description !== undefined || errors.name !== undefined ? (
           <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
             {errors.name !== undefined ? (

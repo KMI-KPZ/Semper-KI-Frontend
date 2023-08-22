@@ -80,7 +80,7 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   return (
     <dialog
       ref={modalRef}
-      className={`relative max-h-screen max-w-[100vw] overflow-auto bg-transparent p-0 shadow-lg
+      className={`relative max-h-screen max-w-[100vw] overflow-auto bg-transparent p-0 
       backdrop:fixed backdrop:bottom-0 backdrop:left-0 backdrop:right-0 backdrop:top-0 
       backdrop:bg-black backdrop:opacity-30 backdrop:blur-sm
      `}
@@ -90,7 +90,7 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
       onAnimationEnd={handleOnAnimEnd}
     >
       <div
-        className={`box-border min-h-[20px] min-w-[20px] md:m-5 ${className}`}
+        className={`box-border min-h-[20px] min-w-[20px] p-5 shadow-lg ${className}`}
         onClick={handleOnClickChildren}
       >
         {noIcon === true ? null : (

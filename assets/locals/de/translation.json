@@ -98,8 +98,10 @@
       "updated": "Updated",
       "lastSeen":"letzte Anmeldung",
       "actions": "Aktionen",
+      "search":"Suchen...",
       "button":{
-        "delete":"Löschen"
+        "delete":"Löschen",
+        "search":"Suchen"
       },
       "confirm":"User wirklich löschen?"
     },

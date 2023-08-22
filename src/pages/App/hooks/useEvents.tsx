@@ -73,9 +73,9 @@ const useEvents = (
   const { t } = useTranslation();
 
   const onLoadMissedEvents = (missedEvents: Event[]) => {
-    if (missedEvents.length > 0) {
-      setEvents(missedEvents);
-    }
+    // if (missedEvents.length > 0) {
+    //   setEvents(missedEvents);
+    // }
   };
 
   useMissedEvent({
@@ -100,6 +100,7 @@ const useEvents = (
   };
 
   const onWebsocktEvent = (event: MessageEvent) => {
+    return;
     if (event.data !== undefined) {
       const newEvent: Event = JSON.parse(event.data);
       if (newEvent) {

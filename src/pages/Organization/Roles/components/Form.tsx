@@ -4,14 +4,17 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "@component-library/Button";
-import useOrganizations, { Permission } from "../../hooks/useOrganizations";
+import useOrganizations, {
+  Permission,
+  RoleProps,
+} from "../../hooks/useOrganizations";
 import logger from "@/hooks/useLogger";
 import { Heading, Text } from "@component-library/Typography";
 import { getSimplifiedPermissions } from "../Roles";
 
 interface OrganizationRolesFormProps {
   allPermissions: Permission[];
-  roleID?: string;
+  role?: RoleProps;
 }
 
 interface FormData {
@@ -21,26 +24,31 @@ interface FormData {
     [key: string]: {
       [key: string]: boolean;
     };
-  };
+  }[];
 }
 
 const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
-  const { roleID, allPermissions } = props;
+  const { role, allPermissions } = props;
   const { t } = useTranslation();
-  const { rolesQuery, createRoleMutation } = useOrganizations(roleID);
+  const { rolePermissionsQuery, createRoleMutation } = useOrganizations(
+    role?.id
+  );
   const [loading, setLoading] = useState<boolean>(false);
 
   const getInintialDefaultValues = (): FormData => {
     return {
       name: "",
       description: "",
-      permissions: {
-        test: {
-          test: true,
-        },
-      },
+      permissions: [],
     };
   };
+
+  logger(
+    "OrganizationRolesForm",
+    role,
+    allPermissions,
+    rolePermissionsQuery?.data
+  );
 
   const {
     reset,
@@ -49,13 +57,13 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
     formState: { errors },
   } = useForm<FormData>({
     defaultValues:
-      roleID === undefined
+      role === undefined
         ? getInintialDefaultValues()
         : async () => {
             return {
-              name: "",
-              description: "",
-              permissions: {},
+              name: role.name,
+              description: role.description,
+              permissions: [],
             };
           },
   });

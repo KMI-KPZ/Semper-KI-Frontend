@@ -4,7 +4,6 @@ import useOrganizations, {
   Permission,
   RoleProps,
 } from "../../hooks/useOrganizations";
-import { TableCell, TableRow } from "@mui/material";
 import logger from "@/hooks/useLogger";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
@@ -15,13 +14,13 @@ import { Button } from "@component-library/Button";
 interface OrganizationRolesTableRowProps {
   role: RoleProps;
   allPermissions: Permission[];
-  openForm: (roleID: string) => void;
+  editRole: (role: RoleProps) => void;
 }
 
 const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
   props
 ) => {
-  const { role, allPermissions, openForm } = props;
+  const { role, allPermissions, editRole } = props;
   const { t } = useTranslation();
   const { rolePermissionsQuery, deleteRoleMutation } = useOrganizations(
     role.id
@@ -32,22 +31,25 @@ const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
       deleteRoleMutation.mutate(role.id);
   };
   const handleOnClickButtonEdit = () => {
-    openForm(role.id);
+    editRole(role);
   };
 
   return (
-    <TableRow>
-      <TableCell>{role.name}</TableCell>
-      <TableCell>{role.description}</TableCell>
+    <tr>
+      <td align="center" className="p-2">
+        {role.name}
+      </td>
+      <td align="center" className="p-2">
+        {role.description}
+      </td>
       {rolePermissionsQuery.data !== undefined
         ? allPermissions.map((_permission, index) => (
-            <TableCell
+            <td
               key={index}
               align="center"
-              sx={{
-                borderLeft:
-                  index === 0 || index === 5 || index === 8 ? 1 : undefined,
-              }}
+              className={`p-2 ${
+                index === 0 || index === 5 || index === 8 ? "border-l-2" : ""
+              }`}
             >
               {rolePermissionsQuery.data.find((permission) => {
                 return (
@@ -58,10 +60,10 @@ const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
               ) : (
                 <CloseIcon />
               )}
-            </TableCell>
+            </td>
           ))
         : null}
-      <TableCell sx={{ borderLeft: 1 }}>
+      <td className="border-l-2 p-2">
         <div className="flex w-full flex-row items-center justify-center gap-5">
           <Button
             title={t(`Organization.components.table.button.edit`)}
@@ -74,8 +76,8 @@ const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
             title={t("Organization.Roles.components.table.button.delete")}
           />
         </div>
-      </TableCell>
-    </TableRow>
+      </td>
+    </tr>
   );
 };
 

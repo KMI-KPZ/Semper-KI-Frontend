@@ -77,6 +77,8 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
     }
   }, [open]);
 
+  if (open === false) return null;
+
   return (
     <dialog
       ref={modalRef}

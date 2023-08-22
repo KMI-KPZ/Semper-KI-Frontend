@@ -20,19 +20,19 @@ const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
   const { userQuery, rolesQuery } = useOrganizations();
 
   return (
-    <LoadingSuspense
-      query={userQuery}
-      errorText={t("Organization.components.table.error.empty")}
-      refetchLoading
-    >
+    <div className="flex w-full flex-col items-center justify-center gap-5 p-5 shadow-card ">
+      <Heading variant="h2">
+        {t("Organization.components.table.header")}
+      </Heading>
       <LoadingSuspense
-        query={rolesQuery}
+        query={userQuery}
         errorText={t("Organization.components.table.error.empty")}
+        refetchLoading
       >
-        <div className="flex w-full flex-col items-center justify-center gap-5 p-5 shadow-card ">
-          <Heading variant="h2">
-            {t("Organization.components.table.header")}
-          </Heading>
+        <LoadingSuspense
+          query={rolesQuery}
+          errorText={t("Organization.components.table.error.empty")}
+        >
           <div className="w-full overflow-auto">
             <table className="w-full table-auto">
               <thead>
@@ -59,9 +59,9 @@ const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
               </tbody>
             </table>
           </div>
-        </div>
+        </LoadingSuspense>
       </LoadingSuspense>
-    </LoadingSuspense>
+    </div>
   );
 };
 

@@ -96,7 +96,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const queryClient = useQueryClient();
   const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/organizations/`;
   const staleTime: number = 300000;
-  const [showLogger, setShowLogger] = useState<boolean>(false);
+  const [showLogger, setShowLogger] = useState<boolean>(true);
 
   const organizationInfoQuery = useQuery<OrganizationInfoProps, Error>({
     queryKey: ["organizations", "info"],
@@ -115,10 +115,10 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
               ...JSON.parse(res.data.details),
             },
           };
-          if (showLogger) logger("useOrganizations | orgaInfo ✅ |", orgaInfo);
           return orgaInfo;
         });
     },
+    staleTime: staleTime,
   });
 
   const userQuery = useQuery<OrganizationsUser[], Error>({

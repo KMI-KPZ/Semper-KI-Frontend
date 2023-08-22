@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import useOrganizations, {
   Permission,
   RolePermission,
+  RoleProps,
 } from "../hooks/useOrganizations";
 import OrganizationRolesForm from "./components/Form";
 import { Button, Divider, LoadingSuspense } from "@component-library/index";
@@ -54,19 +55,21 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
   const { t } = useTranslation();
   const { rolesQuery, permissionsQuery } = useOrganizations();
   const [edit, setEdit] = useState<boolean>(false);
-  const [editRoleID, setEditRoleID] = useState<string>("");
+  const [role, setRole] = useState<RoleProps | undefined>();
 
-  const openForm = (roleID: string) => {
+  const editRole = (role: RoleProps) => {
+    setRole(role);
     setEdit(true);
   };
-  const closeForm = (roleID: string) => {
-    setEdit(false);
+  const createNewRole = () => {
+    setRole(undefined);
+    setEdit(true);
   };
 
   return (
-    <LoadingSuspense query={rolesQuery}>
-      <div className="flex w-full flex-col items-center justify-center gap-5 p-5 shadow-card">
-        <Heading variant="h2">{t("Organization.Roles.Roles.header")}</Heading>
+    <div className="flex w-full flex-col items-center justify-center gap-5 p-5 shadow-card">
+      <Heading variant="h2">{t("Organization.Roles.Roles.header")}</Heading>
+      <LoadingSuspense query={rolesQuery}>
         {rolesQuery.data !== undefined && rolesQuery.data.length > 0 ? (
           <>
             <div className="flex w-full flex-col items-center justify-center gap-5 md:hidden">
@@ -78,30 +81,30 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
             </div>
             <OrganizationRolesTable
               roles={rolesQuery.data}
-              openForm={openForm}
+              editRole={editRole}
             />
             <Button title={t("Organization.Roles.Roles.button.create")} />
           </>
         ) : (
           <Text variant="body">{t("Organization.Roles.Roles.empty")}</Text>
         )}
-        <Modal
-          open={edit}
-          closeModal={() => {
-            setEdit(false), setEditRoleID("");
-          }}
-        >
-          <LoadingSuspense query={permissionsQuery}>
-            {permissionsQuery.data !== undefined ? (
-              <OrganizationRolesForm
-                roleID={editRoleID}
-                allPermissions={permissionsQuery.data}
-              />
-            ) : null}
-          </LoadingSuspense>
-        </Modal>
-      </div>
-    </LoadingSuspense>
+      </LoadingSuspense>
+      <Modal
+        open={edit}
+        closeModal={() => {
+          setEdit(false), setRole(undefined);
+        }}
+      >
+        <LoadingSuspense query={permissionsQuery}>
+          {permissionsQuery.data !== undefined ? (
+            <OrganizationRolesForm
+              role={role}
+              allPermissions={permissionsQuery.data}
+            />
+          ) : null}
+        </LoadingSuspense>
+      </Modal>
+    </div>
   );
 };
 

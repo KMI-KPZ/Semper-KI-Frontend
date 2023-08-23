@@ -18,35 +18,38 @@ export interface SimplifiedPermissionProps {
   name: string;
   permissions: string[];
 }
-export const getSortetPermissions = (
-  permissions: RolePermission[] | Permission[]
-): Permission[] => {
-  return permissions.sort((a, b) => {
-    if (a.permission_name < b.permission_name) {
-      return -1;
-    }
-    if (a.permission_name > b.permission_name) {
-      return 1;
-    }
-    return 0;
-  });
+export const sortPermissions = (
+  permission1: RolePermission | Permission,
+  permission2: RolePermission | Permission
+): number => {
+  if (permission1.permission_name < permission2.permission_name) {
+    return -1;
+  }
+  if (permission1.permission_name > permission2.permission_name) {
+    return 1;
+  }
+  return 0;
 };
 export const getSimplifiedPermissions = (
   permissions: RolePermission[] | Permission[]
 ): SimplifiedPermissionProps[] => {
   const simplifiedPermissions: SimplifiedPermissionProps[] = [];
-  getSortetPermissions(permissions).forEach((permission) => {
-    const [name, permissionName] = permission.permission_name.split(":");
-    const index = simplifiedPermissions.findIndex((item) => item.name === name);
-    if (index === -1) {
-      simplifiedPermissions.push({
-        name: name,
-        permissions: [permissionName],
-      });
-    } else {
-      simplifiedPermissions[index].permissions.push(permissionName);
-    }
-  });
+  permissions
+    .sort((perm1, perm2) => sortPermissions(perm1, perm2))
+    .forEach((permission) => {
+      const [name, permissionName] = permission.permission_name.split(":");
+      const index = simplifiedPermissions.findIndex(
+        (item) => item.name === name
+      );
+      if (index === -1) {
+        simplifiedPermissions.push({
+          name: name,
+          permissions: [permissionName],
+        });
+      } else {
+        simplifiedPermissions[index].permissions.push(permissionName);
+      }
+    });
   return simplifiedPermissions;
 };
 
@@ -57,6 +60,10 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [role, setRole] = useState<RoleProps | undefined>();
 
+  const resetForm = () => {
+    setRole(undefined);
+    setEdit(false);
+  };
   const editRole = (role: RoleProps) => {
     setRole(role);
     setEdit(true);
@@ -83,7 +90,10 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
               roles={rolesQuery.data}
               editRole={editRole}
             />
-            <Button title={t("Organization.Roles.Roles.button.create")} />
+            <Button
+              title={t("Organization.Roles.Roles.button.create")}
+              onClick={createNewRole}
+            />
           </>
         ) : (
           <Text variant="body">{t("Organization.Roles.Roles.empty")}</Text>
@@ -98,6 +108,7 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
         <LoadingSuspense query={permissionsQuery}>
           {permissionsQuery.data !== undefined ? (
             <OrganizationRolesForm
+              resetForm={resetForm}
               role={role}
               allPermissions={permissionsQuery.data}
             />

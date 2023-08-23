@@ -991,8 +991,10 @@
           "name":"Name",
           "description":"Beschreibung",
           "button":{
-            "create":"Erstellen"
-          }
+            "create":"Erstellen",
+            "safe"  :"Speichern"
+          },
+          "permissions":"Rechte"
         },
         "Item":{
           "name":"Name",

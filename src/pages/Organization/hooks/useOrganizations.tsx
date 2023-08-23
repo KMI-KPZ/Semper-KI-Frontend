@@ -20,7 +20,7 @@ interface useOrganizationsReturnProps {
   inviteUserMutation: UseMutationResult<any, Error, string, unknown>;
   createRoleMutation: UseMutationResult<any, Error, CreateRoleProps, unknown>;
   deleteRoleMutation: UseMutationResult<any, Error, string, unknown>;
-  setPermissionMutation: UseMutationResult<
+  updatePermissionForRoleMutation: UseMutationResult<
     any,
     Error,
     SetPermissionProps,
@@ -35,6 +35,7 @@ interface useOrganizationsReturnProps {
     UpdateOrgaInfoProps,
     unknown
   >;
+  editRoleMutation: UseMutationResult<any, Error, EditRoleProps, unknown>;
 }
 
 export type OrganizationsUser = {
@@ -90,6 +91,12 @@ export interface UpdateOrgaInfoProps {
   taxID: string;
   name: string;
   canManufacture: boolean;
+}
+
+export interface EditRoleProps {
+  roleID: string;
+  name: string;
+  description: string;
 }
 
 const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
@@ -279,7 +286,31 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     },
   });
 
-  const setPermissionMutation = useMutation<any, Error, SetPermissionProps>({
+  const editRoleMutation = useMutation<any, Error, EditRoleProps>({
+    mutationFn: async (props) => {
+      const { description, name, roleID } = props;
+      return getCustomAxios()
+        .post(apiUrl + "editRole/", {
+          data: {
+            content: { roleID, roleName: name, roleDescription: description },
+          },
+        })
+        .then((response) => {
+          if (showLogger)
+            logger("useOrganizations | editRole ✅ |", response.data);
+          return response.data;
+        });
+    },
+    onSuccess() {
+      queryClient.invalidateQueries(["organizations", "roles"]);
+    },
+  });
+
+  const updatePermissionForRoleMutation = useMutation<
+    any,
+    Error,
+    SetPermissionProps
+  >({
     mutationFn: async (props) => {
       const { permissionIDs, roleID } = props;
       return getCustomAxios()
@@ -385,11 +416,12 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     rolesQuery,
     userQuery,
     rolePermissionsQuery,
+    editRoleMutation,
     inviteLinkMutation,
     inviteUserMutation,
     createRoleMutation,
     deleteRoleMutation,
-    setPermissionMutation,
+    updatePermissionForRoleMutation,
     assignRoleMutation,
     removeRoleMutation,
     deleteUserMutation,

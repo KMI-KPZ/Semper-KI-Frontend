@@ -132,7 +132,9 @@ const App: React.FC = () => {
   if (
     isLoggedInResponse === false ||
     (isLoggedIn === true &&
-      (user === undefined || permissionGates === undefined))
+      (user === undefined ||
+        permissionGates === undefined ||
+        permissions === undefined))
   ) {
     const rootElement = document.getElementById("root");
     if (rootElement) {

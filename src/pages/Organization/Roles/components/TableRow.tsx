@@ -73,7 +73,7 @@ const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
           <Button
             onClick={handleOnClickButtonDelete}
             children={<DeleteForeverIcon fontSize="small" />}
-            title={t("Organization.Roles.components.table.button.delete")}
+            title={t("Organization.components.table.button.delete")}
           />
         </div>
       </td>

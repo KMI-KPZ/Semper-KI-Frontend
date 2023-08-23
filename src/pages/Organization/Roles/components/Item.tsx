@@ -5,17 +5,30 @@ import useOrganizations, {
   RoleProps,
 } from "../../hooks/useOrganizations";
 import { Text } from "@component-library/Typography";
-import { Divider, LoadingSuspense } from "@component-library/index";
+import { Button, Divider, LoadingSuspense } from "@component-library/index";
 import { SimplifiedPermissionProps, getSimplifiedPermissions } from "../Roles";
+import EditIcon from "@mui/icons-material/Edit";
+
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 interface OrganizationRolesItemProps {
   role: RoleProps;
+  editRole: (role: RoleProps) => void;
 }
 
 const OrganizationRolesItem: React.FC<OrganizationRolesItemProps> = (props) => {
-  const { role } = props;
+  const { role, editRole } = props;
   const { t } = useTranslation();
-  const { rolePermissionsQuery } = useOrganizations(role.id);
+  const { rolePermissionsQuery, deleteRoleMutation } = useOrganizations(
+    role.id
+  );
+  const handleOnClickButtonEdit = () => {
+    editRole(role);
+  };
+  const handleOnClickButtonDelete = () => {
+    if (window.confirm(t("Organization.Roles.components.Item.alert")))
+      deleteRoleMutation.mutate(role.id);
+  };
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 p-5 shadow-card md:flex-row">
@@ -54,6 +67,16 @@ const OrganizationRolesItem: React.FC<OrganizationRolesItemProps> = (props) => {
           <Text variant="body">{t("Organization.Roles.Roles.empty")}</Text>
         )}
       </LoadingSuspense>
+      <Button
+        title={t(`Organization.components.table.button.edit`)}
+        onClick={handleOnClickButtonEdit}
+        startIcon={<EditIcon fontSize="small" />}
+      />
+      <Button
+        onClick={handleOnClickButtonDelete}
+        startIcon={<DeleteForeverIcon fontSize="small" />}
+        title={t("Organization.components.table.button.delete")}
+      />
     </div>
   );
 };

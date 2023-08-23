@@ -82,7 +82,7 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
             <div className="flex w-full flex-col items-center justify-center gap-5 md:hidden">
               {rolesQuery.data.map((role, index, roles) => (
                 <Fragment key={index}>
-                  <OrganizationRolesItem role={role} />
+                  <OrganizationRolesItem editRole={editRole} role={role} />
                 </Fragment>
               ))}
             </div>

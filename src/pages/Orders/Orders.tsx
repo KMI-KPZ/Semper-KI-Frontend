@@ -6,6 +6,7 @@ import { LoadingSuspense } from "@component-library/Loading";
 import { useFlatOrders } from "./hooks/useFlatOrders";
 import { useOrder } from "../OrderRoutes/hooks/useOrder";
 import OrdersTable from "./components/Table";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface OrdersProps {}
 
@@ -23,10 +24,12 @@ const Orders: React.FC<OrdersProps> = (props) => {
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
       <div className="flex w-full flex-col md:flex-row md:justify-between">
         <Heading variant="h1">{t("order.overview.title")}</Heading>
-        <Button
-          title={t("order.overview.button.create")}
-          onClick={onButtonClickCreateOrder}
-        />
+        <PermissionGate element={"OrdersButtonNew"}>
+          <Button
+            title={t("order.overview.button.create")}
+            onClick={onButtonClickCreateOrder}
+          />
+        </PermissionGate>
       </div>
       <LoadingSuspense query={ordersQuery}>
         {ordersQuery.data !== undefined && ordersQuery.data.length > 0 ? (

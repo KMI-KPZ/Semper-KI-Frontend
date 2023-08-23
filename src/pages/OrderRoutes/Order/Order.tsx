@@ -59,9 +59,7 @@ const Order: React.FC<Props> = (props) => {
               {new Date(order.created).toLocaleString()}
             </Heading>
           </div>
-          <PermissionGate element={"OrderButtons"}>
-            <OrderButtons order={order} user={user} />
-          </PermissionGate>
+          <OrderButtons order={order} user={user} />
           {order.subOrders.length === 0 ? (
             <Heading variant="h2">
               {t("Orders.OrderCollection.noSubOrders")}

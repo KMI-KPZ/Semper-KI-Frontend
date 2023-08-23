@@ -21,7 +21,7 @@ interface State {
   orderSendSuccesfull: boolean;
 }
 
-const SubOrderCheckout: React.FC<Props> = (props) => {
+const SubOrderVerification: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
 
@@ -280,4 +280,4 @@ const SubOrderCheckout: React.FC<Props> = (props) => {
   );
 };
 
-export default SubOrderCheckout;
+export default SubOrderVerification;

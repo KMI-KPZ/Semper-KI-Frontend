@@ -3,19 +3,14 @@ import { Button } from "@component-library/Button";
 import MailIcon from "@mui/icons-material/Mail";
 import Chat from "./components/Chat";
 import StatusBar from "./StatusBar/StatusBar";
-import CancelIcon from "@mui/icons-material/Cancel";
-import ReplayIcon from "@mui/icons-material/Replay";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+
 import { useTranslation } from "react-i18next";
-import CheckIcon from "@mui/icons-material/Check";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import { Badge } from "@component-library/Badge";
 import OrderFile from "./components/OrderFile";
 import { User, UserType } from "@/hooks/useUser/types";
 import { OrderEventItem } from "@/pages/App/types";
 import { AppContext } from "@/pages/App/App";
 import { getModelURI } from "@/services/utils";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { Heading, Text } from "@component-library/Typography";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import useOrderEventChange from "../hooks/useOrderEventChange";
@@ -25,10 +20,11 @@ import { OrderState } from "../../hooks/useOrder";
 import useSubOrder, { SubOrderProps } from "../../hooks/useSubOrder";
 import SubOrderService from "./Service/Service";
 import { ServiceType } from "../../Service/hooks/useService";
-import EditIcon from "@mui/icons-material/Edit";
+
 import { Divider } from "@component-library/Divider";
 import SubOrderNextStepButton from "./components/StateButton";
 import { getTitleFromSubOrder } from "../../Service/Overview/components/Item";
+import SubOrderActionButtons from "./components/ActionButtons";
 
 interface Props {
   subOrder: SubOrderProps;
@@ -77,100 +73,7 @@ const SubOrder: React.FC<Props> = (props) => {
     //   state: status,
     // });
   };
-  const handleOnClickButtonCancel = () => {
-    if (window.confirm(t("Orders.OrderView.confirm.cancel"))) {
-      deleteSubOrder.mutate(subOrder.subOrderID);
-    }
-  };
-  const handleOnClickButtonReOrder = () => {
-    if (window.confirm(t("Orders.OrderView.confirm.reOrder"))) {
-      logger("//TODO ReOrder");
-    }
-  };
-  const handleOnClickButtonReject = () => {
-    if (window.confirm(t("Orders.OrderView.confirm.reject"))) {
-      updateStatus(OrderState.REJECTED);
-    }
-  };
-  const handleOnClickButtonConfirm = () => {
-    // if (window.confirm(t("OrderView.button.confirm") + "?")) {
-    updateStatus(OrderState.CONFIRMED);
-    // }
-  };
-  const handleOnClickButtonVerify = () => {
-    // if (window.confirm(t("OrderView.button.verify") + "?")) {
-    updateStatus(OrderState.CLARIFICATION);
-    // }
-  };
 
-  const renderButtons = () => {
-    if (user === undefined) return null;
-    if (user.usertype === UserType.USER)
-      return (
-        <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:w-fit md:flex-nowrap">
-          {subOrder.state < OrderState.REQUESTED ? (
-            <Button
-              width="fit"
-              size="sm"
-              children={<EditIcon />}
-              to={`/order/${orderID}/suborder/${subOrder.subOrderID}`}
-              title={t("Orders.OrderView.button.edit")}
-            />
-          ) : null}
-          {subOrder.state <= OrderState.REQUESTED ? (
-            <Button
-              width="fit"
-              size="sm"
-              children={<DeleteIcon />}
-              onClick={handleOnClickButtonCancel}
-              title={t("Orders.OrderView.button.cancel")}
-            />
-          ) : null}
-          {subOrder.state === OrderState.COMPLETED ? (
-            <Button
-              width="fit"
-              size="sm"
-              children={<ReplayIcon />}
-              onClick={handleOnClickButtonReOrder}
-              title={t("Orders.OrderView.button.reOrder")}
-            />
-          ) : null}
-        </div>
-      );
-    if (user.usertype === UserType.ORGANIZATION)
-      return (
-        <div className="flex  flex-row flex-wrap items-center justify-center gap-3 md:w-fit md:flex-nowrap">
-          {subOrder.state >= OrderState.REJECTED &&
-          subOrder.state <= OrderState.CONFIRMED ? (
-            <>
-              <Button
-                width="fit"
-                size="sm"
-                children={<DeleteIcon />}
-                onClick={handleOnClickButtonReject}
-                title={t("Orders.OrderView.button.reject")}
-              />
-              <Button
-                width="fit"
-                size="sm"
-                children={<CheckIcon />}
-                onClick={handleOnClickButtonConfirm}
-                title={t("Orders.OrderView.button.confirm")}
-              />
-            </>
-          ) : null}
-          {subOrder.state === OrderState.CONFIRMED ? (
-            <Button
-              width="fit"
-              size="sm"
-              children={<QuestionMarkIcon />}
-              onClick={handleOnClickButtonVerify}
-              title={t("Orders.OrderView.button.verify")}
-            />
-          ) : null}
-        </div>
-      );
-  };
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 p-5 shadow-card  md:items-start">
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row lg:justify-between">
@@ -180,7 +83,7 @@ const SubOrder: React.FC<Props> = (props) => {
         <Divider className="hidden md:block" />
         <PermissionGate element={["OrderButtons", "ChatButton"]} concat="or">
           <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:flex-nowrap">
-            <PermissionGate element="ChatButton">
+            <PermissionGate element="SubOrderButtonChat">
               {orderEvent !== undefined &&
               orderEvent.messages !== undefined &&
               orderEvent.messages > 0 ? (
@@ -203,9 +106,12 @@ const SubOrder: React.FC<Props> = (props) => {
                 />
               )}
             </PermissionGate>
-            <PermissionGate element="OrderButtons">
-              {renderButtons()}
-            </PermissionGate>
+            <SubOrderActionButtons
+              orderID={orderID}
+              subOrder={subOrder}
+              updateStatus={updateStatus}
+              user={user}
+            />
           </div>
         </PermissionGate>
       </div>

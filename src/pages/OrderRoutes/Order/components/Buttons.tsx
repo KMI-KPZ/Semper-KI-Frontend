@@ -16,6 +16,7 @@ import logger from "@/hooks/useLogger";
 import { User, UserType } from "@/hooks/useUser/types";
 import useSubOrder from "../../hooks/useSubOrder";
 import { Divider } from "@component-library/Divider";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface OrderButtonsProps {
   order: OrderProps;
@@ -74,94 +75,114 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
   };
   const handleOnClickButtonManufacture = () => {};
 
-  const renderUserButtons = () => {
+  const renderClientButtons = () => {
     return (
       <>
         {order.state < OrderState.REQUESTED ? (
-          <Button
-            size="sm"
-            startIcon={<DeleteForever />}
-            title={t("Orders.OrderCollection.button.delete")}
-            onClick={handleOnClickButtonDelete}
-          />
+          <PermissionGate element={"OrderButtonEdit"}>
+            <Button
+              size="sm"
+              startIcon={<DeleteForever />}
+              title={t("Orders.OrderCollection.button.delete")}
+              onClick={handleOnClickButtonDelete}
+            />
+          </PermissionGate>
         ) : null}
         {order.state === OrderState.REQUESTED ? (
-          <Button
-            size="sm"
-            startIcon={<CancelIcon />}
-            title={t("Orders.OrderCollection.button.cancel")}
-          />
+          <PermissionGate element={"OrderButtonDelete"}>
+            <Button
+              size="sm"
+              startIcon={<CancelIcon />}
+              title={t("Orders.OrderCollection.button.cancel")}
+            />
+          </PermissionGate>
         ) : null}
         {order.state < OrderState.REQUESTED ? (
-          <Button
-            size="sm"
-            startIcon={<AddIcon />}
-            onClick={onButtonClickCreateSubOrder}
-            title={t("Orders.OrderCollection.button.new")}
-          />
+          <PermissionGate element={"OrderButtonNew"}>
+            <Button
+              size="sm"
+              startIcon={<AddIcon />}
+              onClick={onButtonClickCreateSubOrder}
+              title={t("Orders.OrderCollection.button.new")}
+            />
+          </PermissionGate>
         ) : null}
         {order.state === OrderState.DRAFT ? (
-          <Button
-            size="sm"
-            startIcon={<FactoryIcon />}
-            to="checkout"
-            title={t("Orders.OrderCollection.button.manufacturer")}
-          />
+          <PermissionGate element={"OrderButtonManufacturerSelection"}>
+            <Button
+              size="sm"
+              startIcon={<FactoryIcon />}
+              to="checkout"
+              title={t("Orders.OrderCollection.button.manufacturer")}
+            />
+          </PermissionGate>
         ) : null}
         {order.state === OrderState.MANUFACTURER_SELECTED ? (
-          <Button
-            size="sm"
-            startIcon={<PolicyIcon />}
-            to="checkout"
-            title={t("Orders.OrderCollection.button.verified")}
-          />
+          <PermissionGate element={"OrderButtonVerify"}>
+            <Button
+              size="sm"
+              startIcon={<PolicyIcon />}
+              to="checkout"
+              title={t("Orders.OrderCollection.button.verified")}
+            />
+          </PermissionGate>
         ) : null}
         {order.state === OrderState.VERIFIED ? (
-          <Button
-            size="sm"
-            startIcon={<SendIcon />}
-            to="checkout"
-            title={t("Orders.OrderCollection.button.request")}
-          />
+          <PermissionGate element={"OrderButtonRequest"}>
+            <Button
+              size="sm"
+              startIcon={<SendIcon />}
+              to="checkout"
+              title={t("Orders.OrderCollection.button.request")}
+            />
+          </PermissionGate>
         ) : null}
         {order.state === OrderState.COMPLETED ? (
-          <Button
-            size="sm"
-            startIcon={<ReplayIcon />}
-            onClick={handleOnClickButtonReOrder}
-            title={t("Orders.OrderCollection.button.reOrder")}
-          />
+          <PermissionGate element={"OrderButtonReOrder"}>
+            <Button
+              size="sm"
+              startIcon={<ReplayIcon />}
+              onClick={handleOnClickButtonReOrder}
+              title={t("Orders.OrderCollection.button.reOrder")}
+            />
+          </PermissionGate>
         ) : null}
       </>
     );
   };
 
-  const renderOrganizationButtons = () => {
+  const renderContractorButtons = () => {
     return (
       <>
         {order.state === OrderState.REQUESTED ? (
-          <Button
-            size="sm"
-            startIcon={<CheckIcon />}
-            onClick={handleOnClickButtonConfirm}
-            title={t("Orders.OrderCollection.button.confirm")}
-          />
+          <PermissionGate element={"OrderButtonConfirm"}>
+            <Button
+              size="sm"
+              startIcon={<CheckIcon />}
+              onClick={handleOnClickButtonConfirm}
+              title={t("Orders.OrderCollection.button.confirm")}
+            />
+          </PermissionGate>
         ) : null}
         {order.state === OrderState.REQUESTED ||
         order.state === OrderState.CLARIFICATION ? (
           <>
-            <Button
-              size="sm"
-              startIcon={<CancelIcon />}
-              onClick={handleOnClickButtonReject}
-              title={t("Orders.OrderCollection.button.reject")}
-            />
-            <Button
-              size="sm"
-              startIcon={<QuestionMarkIcon />}
-              onClick={handleOnClickButtonVerify}
-              title={t("Orders.OrderCollection.button.verify")}
-            />
+            <PermissionGate element={"OrderButtonReject"}>
+              <Button
+                size="sm"
+                startIcon={<CancelIcon />}
+                onClick={handleOnClickButtonReject}
+                title={t("Orders.OrderCollection.button.reject")}
+              />
+            </PermissionGate>
+            <PermissionGate element={"OrderButtonVerify"}>
+              <Button
+                size="sm"
+                startIcon={<QuestionMarkIcon />}
+                onClick={handleOnClickButtonVerify}
+                title={t("Orders.OrderCollection.button.verify")}
+              />
+            </PermissionGate>
           </>
         ) : null}
       </>
@@ -171,13 +192,10 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
       <Divider className="hidden md:block" />
-      {user === undefined ? renderUserButtons() : null}
-      {user !== undefined && user.usertype === UserType.USER
-        ? renderUserButtons()
-        : null}
-      {user !== undefined && user.usertype === UserType.ORGANIZATION
-        ? renderOrganizationButtons()
-        : null}
+      {user === undefined ? renderClientButtons() : null}
+      {user !== undefined && user.organizations.includes(order.client)
+        ? renderClientButtons()
+        : renderContractorButtons()}
       <Divider className="hidden md:block" />
     </div>
   );

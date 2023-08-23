@@ -112,7 +112,6 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
       <Heading variant="h1" className="px-10">
         {t("Organization.Roles.components.Form.title")}
       </Heading>
-
       {loading ? (
         <LoadingAnimation />
       ) : (

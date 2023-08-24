@@ -50,21 +50,32 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
         ? {
             name: "",
             description: "",
-            permissions: [],
+            permissions: allPermissions.map((permission) => {
+              return {
+                name: permission.permission_name,
+                checked: true,
+              };
+            }),
           }
         : async () => {
             return {
               name: role.name,
               description: role.description,
-              permissions:
-                rolePermissionsQuery.data === undefined
-                  ? []
-                  : rolePermissionsQuery.data.map((permission) => {
-                      return {
-                        name: permission.permission_name,
-                        checked: true,
-                      };
-                    }),
+              permissions: allPermissions.map((permission) => {
+                return {
+                  name: permission.permission_name,
+                  checked:
+                    rolePermissionsQuery.data !== undefined
+                      ? rolePermissionsQuery.data.find(
+                          (rolePermission) =>
+                            rolePermission.permission_name ===
+                            permission.permission_name
+                        ) !== undefined
+                        ? true
+                        : false
+                      : false,
+                };
+              }),
             };
           },
   });

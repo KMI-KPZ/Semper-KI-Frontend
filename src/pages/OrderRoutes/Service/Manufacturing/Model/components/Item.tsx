@@ -28,7 +28,7 @@ const ProcessModelItem: React.FC<Props> = (props) => {
   };
 
   const handleOnClickButtonDeselect = () => {
-    updateSubOrder.mutate({ changes: { service: { model: undefined } } });
+    updateSubOrder.mutate({ deletions: { service: ["model"] } });
   };
 
   return (

@@ -81,22 +81,12 @@ const SubOrder: React.FC<Props> = (props) => {
           {t("Orders.OrderView.name")} {getTitleFromSubOrder(subOrder, t)}
         </Heading>
         <Divider className="hidden md:block" />
-        <PermissionGate element={["OrderButtons", "ChatButton"]} concat="or">
-          <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:flex-nowrap">
-            <PermissionGate element="SubOrderButtonChat">
-              {orderEvent !== undefined &&
-              orderEvent.messages !== undefined &&
-              orderEvent.messages > 0 ? (
-                <Badge count={orderEvent.messages}>
-                  <Button
-                    width="fit"
-                    size="sm"
-                    children={<MailIcon />}
-                    onClick={handleOnClickButtonChat}
-                    title={t("Orders.OrderView.button.chat")}
-                  />
-                </Badge>
-              ) : (
+        <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:flex-nowrap">
+          <PermissionGate element="SubOrderButtonChat">
+            {orderEvent !== undefined &&
+            orderEvent.messages !== undefined &&
+            orderEvent.messages > 0 ? (
+              <Badge count={orderEvent.messages}>
                 <Button
                   width="fit"
                   size="sm"
@@ -104,16 +94,24 @@ const SubOrder: React.FC<Props> = (props) => {
                   onClick={handleOnClickButtonChat}
                   title={t("Orders.OrderView.button.chat")}
                 />
-              )}
-            </PermissionGate>
-            <SubOrderActionButtons
-              orderID={orderID}
-              subOrder={subOrder}
-              updateStatus={updateStatus}
-              user={user}
-            />
-          </div>
-        </PermissionGate>
+              </Badge>
+            ) : (
+              <Button
+                width="fit"
+                size="sm"
+                children={<MailIcon />}
+                onClick={handleOnClickButtonChat}
+                title={t("Orders.OrderView.button.chat")}
+              />
+            )}
+          </PermissionGate>
+          <SubOrderActionButtons
+            orderID={orderID}
+            subOrder={subOrder}
+            updateStatus={updateStatus}
+            user={user}
+          />
+        </div>
       </div>
       <div className="flex w-full flex-col items-start justify-start gap-5 md:flex-row md:flex-wrap md:justify-between">
         <Text variant="body" className="break-all">

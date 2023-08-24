@@ -18,8 +18,10 @@ const Organization: React.FC<OrganizationViewProps> = (props) => {
     <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
       <Heading variant="h1">{t("Organization.index.header")}</Heading>
       <OrganizationInfo />
-      <PermissionGate element="OrganizationRoles">
+      <PermissionGate element="OrganizationInvitation">
         <Invitation />
+      </PermissionGate>
+      <PermissionGate element="OrganizationRoles">
         <OrganizationRoles />
       </PermissionGate>
       <OrganizationTabel />

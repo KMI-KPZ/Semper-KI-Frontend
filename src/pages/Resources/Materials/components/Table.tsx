@@ -21,7 +21,7 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
       <Heading variant="h2">{t("Resources.Materials.table.header")}</Heading>
-      <PermissionGate element="ResourcesMaterialsAddButton">
+      <PermissionGate element="ResourcesButtonAddMaterial">
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-col">
           <Button
             title={t("Resources.Materials.table.button.add")}

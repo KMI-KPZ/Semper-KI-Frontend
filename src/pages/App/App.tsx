@@ -25,7 +25,7 @@ import Organization from "../Organization/Organization";
 import Portfolio from "../Portfolio/Portfolio";
 import Profil from "../Profil/Profll";
 import Resouces from "../Resources/Resources";
-import Service from "../Service/Service";
+import ServiceRoutes from "../ServiceRoutes/ServiceRoutes";
 import Legal from "../Legal/Legal";
 import useEvents from "./hooks/useEvents";
 import usePermissions, {
@@ -177,7 +177,7 @@ const App: React.FC = () => {
             <Route path="login" element={<Login />} />
             <Route path="login/redirect" element={<RedirectLogin />} />
             <Route path="register" element={<Login />} />
-            <Route path="service/*" element={<Service />} />
+            <Route path="service/*" element={<ServiceRoutes />} />
             <Route
               path="legal/*"
               element={<Legal isMagazineUp={isMagazineUp} />}

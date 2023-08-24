@@ -6,6 +6,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import HomeContainer from "../../components/Container";
 import { useFlatOrders } from "@/pages/Orders/hooks/useFlatOrders";
 import AddIcon from "@mui/icons-material/Add";
+import { useOrder } from "@/pages/OrderRoutes/hooks/useOrder";
 
 interface HomeAnonymOrderProps {}
 
@@ -13,6 +14,10 @@ const HomeAnonymOrder: React.FC<HomeAnonymOrderProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { ordersQuery } = useFlatOrders();
+  const { createOrder } = useOrder();
+  const handleOnClickButtonNew = () => {
+    createOrder.mutate();
+  };
 
   return (
     <HomeContainer data-testid="home-anonym-order">
@@ -35,13 +40,13 @@ const HomeAnonymOrder: React.FC<HomeAnonymOrderProps> = (props) => {
               />
               <Button
                 title={t("Home.Home.Anonym.Order.button.new")}
-                to="/order/new"
+                onClick={handleOnClickButtonNew}
                 startIcon={<AddIcon fontSize="large" />}
               />
             </>
           ) : (
             <Button
-              to="/order/new"
+              onClick={handleOnClickButtonNew}
               title={t("Home.Home.Anonym.Order.button.demo")}
               startIcon={<PlayArrowIcon fontSize="large" />}
             />

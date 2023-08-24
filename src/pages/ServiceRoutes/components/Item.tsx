@@ -1,8 +1,8 @@
-import useService from "@/pages/Service/hooks/useService";
+import useService from "@/pages/ServiceRoutes/hooks/useService";
 import { Heading } from "@component-library/Typography";
 import React, { useEffect, useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
-import { IServiceChapter, IServiceQuestion } from "../Service";
+import { IServiceChapter, IServiceQuestion } from "../ServiceRoutes";
 import ServiceQuestion from "./Question";
 import ServiceWizard from "./Wizard";
 import logger from "@/hooks/useLogger";

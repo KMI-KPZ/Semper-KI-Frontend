@@ -102,7 +102,7 @@ export interface EditRoleProps {
 const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const queryClient = useQueryClient();
   const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/organizations/`;
-  const staleTime: number = 300000;
+  const staleTime: number = 300000; //
   const [showLogger, setShowLogger] = useState<boolean>(true);
 
   const organizationInfoQuery = useQuery<OrganizationInfoProps, Error>({

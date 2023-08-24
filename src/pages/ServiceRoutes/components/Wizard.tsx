@@ -1,5 +1,5 @@
 import React from "react";
-import { IServiceChapter } from "../Service";
+import { IServiceChapter } from "../ServiceRoutes";
 
 interface Props {
   activeChapter: number;

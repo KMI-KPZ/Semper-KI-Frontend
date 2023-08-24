@@ -1,6 +1,6 @@
 import { Heading } from "@component-library/Typography";
 import React from "react";
-import { EServiceQuestionType, IServiceQuestion } from "../Service";
+import { EServiceQuestionType, IServiceQuestion } from "../ServiceRoutes";
 
 interface Props extends IServiceQuestion {
   index: number;

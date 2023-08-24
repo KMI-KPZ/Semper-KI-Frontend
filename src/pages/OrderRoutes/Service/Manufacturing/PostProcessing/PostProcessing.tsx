@@ -53,7 +53,9 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
         newPostProcessings = [...postProcessings, postProcessing];
       }
     }
-    updateSubOrder.mutate({ service: { postProcessings: newPostProcessings } });
+    updateSubOrder.mutate({
+      changes: { service: { postProcessings: newPostProcessings } },
+    });
   };
 
   const hydratePostProcessings = (

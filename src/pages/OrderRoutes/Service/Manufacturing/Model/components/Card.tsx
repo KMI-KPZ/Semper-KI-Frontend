@@ -22,7 +22,7 @@ export const ProcessModelCard: React.FC<Props> = (props) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    updateSubOrder.mutate({ service: { model: model } });
+    updateSubOrder.mutate({ changes: { service: { model: model } } });
     navigate("../material");
   };
 

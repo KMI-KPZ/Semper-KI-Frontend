@@ -23,7 +23,7 @@ export const ProcessMaterialCard: React.FC<Props> = (props) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    updateSubOrder.mutate({ service: { material: material } });
+    updateSubOrder.mutate({ changes: { service: { material: material } } });
     navigate("../postprocessing");
   };
 

@@ -67,7 +67,9 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
     e.preventDefault();
     e.stopPropagation();
     if (state.edit)
-      updateSubOrder.mutate({ details: { title: state.titleText } });
+      updateSubOrder.mutate({
+        changes: { details: { title: state.titleText } },
+      });
     setState((prevState) => {
       return {
         edit: !prevState.edit,

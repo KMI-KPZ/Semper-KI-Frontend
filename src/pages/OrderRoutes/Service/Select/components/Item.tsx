@@ -17,9 +17,11 @@ const ServiceSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
     if (subOrderID !== undefined)
       updateSubOrderWithSubOrderID.mutate({
         subOrderID,
-        changes: { service: { type: serviceType } },
+        updates: {
+          changes: { service: { type: serviceType } },
+        },
       });
-    else updateSubOrder.mutate({ service: { type: serviceType } });
+    else updateSubOrder.mutate({ changes: { service: { type: serviceType } } });
   };
 
   return (

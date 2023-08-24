@@ -19,7 +19,7 @@ export const ProcessMaterialPreView: React.FC<Props> = (props) => {
   const { updateSubOrder } = useSubOrder();
 
   const handleOnClickButtonSelect = () => {
-    updateSubOrder.mutate({ service: { material: material } });
+    updateSubOrder.mutate({ changes: { service: { material: material } } });
     navigate("../postprocessing");
   };
 

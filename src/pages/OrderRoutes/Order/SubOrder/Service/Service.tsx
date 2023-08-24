@@ -44,7 +44,9 @@ const SubOrderService: React.FC<SubOrderServiceProps> = (props) => {
   const handleOnClickButtonDelete = () => {
     updateSubOrderWithSubOrderID.mutate({
       subOrderID,
-      changes: { service: { type: ServiceType.UNDEFINED } },
+      updates: {
+        changes: { service: { type: ServiceType.UNDEFINED } },
+      },
     });
   };
 

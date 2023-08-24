@@ -40,12 +40,14 @@ const Chat: React.FC<Props> = (props) => {
       updateSubOrderWithSubOrderID.mutate(
         {
           subOrderID,
-          changes: {
-            chat: {
-              date: new Date().toISOString(),
-              text: messageText,
-              userID: user!.hashedID,
-              userName: user!.name,
+          updates: {
+            changes: {
+              chat: {
+                date: new Date().toISOString(),
+                text: messageText,
+                userID: user!.hashedID,
+                userName: user!.name,
+              },
             },
           },
         },

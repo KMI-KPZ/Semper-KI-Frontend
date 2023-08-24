@@ -15,7 +15,7 @@ export const ProcessMaterialItem: React.FC<Props> = (props) => {
   const { updateSubOrder } = useSubOrder();
 
   const handleOnClickButtonDeselect = () => {
-    updateSubOrder.mutate({ service: { material: undefined } });
+    updateSubOrder.mutate({ deletions: { service: ["material"] } });
   };
 
   return (

@@ -118,8 +118,10 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
       uploadModels.mutate(fileList, {
         onSuccess(data) {
           updateSubOrder.mutate({
-            service: {
-              model: data[0],
+            changes: {
+              service: {
+                model: data[0],
+              },
             },
           });
           navigate("model");

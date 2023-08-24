@@ -27,7 +27,7 @@ interface ReturnProps {
     Error,
     {
       subOrderID: string;
-      changes: UpdateSubOrderProps;
+      updates: UpdateSubOrderProps;
     },
     unknown
   >;
@@ -57,11 +57,24 @@ export interface ChatMessageProps {
 }
 
 export interface UpdateSubOrderProps {
+  changes?: SubOrderChangesProps;
+  deletions?: SubOrderDeletionsProps;
+}
+
+export interface SubOrderChangesProps {
   chat?: ChatMessageProps;
   state?: OrderState;
   files?: File[];
   details?: SubOrderDetailsProps;
   service?: GerneralUpdateServiceProps;
+}
+
+export interface SubOrderDeletionsProps {
+  chat?: {};
+  state?: {};
+  files?: {};
+  details?: {};
+  service?: string[] | {};
 }
 
 const useSubOrder = (): ReturnProps => {
@@ -93,12 +106,13 @@ const useSubOrder = (): ReturnProps => {
   });
 
   const updateSubOrder = useMutation<string, Error, UpdateSubOrderProps>({
-    mutationFn: async (props: UpdateSubOrderProps) => {
+    mutationFn: async ({ changes, deletions }) => {
       return getCustomAxios()
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateSubOrder/`, {
           orderID,
           subOrderID,
-          changes: props,
+          changes: changes,
+          deletions: deletions,
         })
         .then((res) => {
           logger("useSubOrder | updateSubOrder ✅ |", res.data);
@@ -114,18 +128,19 @@ const useSubOrder = (): ReturnProps => {
   const updateSubOrderWithSubOrderID = useMutation<
     string,
     Error,
-    { subOrderID: string; changes: UpdateSubOrderProps }
+    { subOrderID: string; updates: UpdateSubOrderProps }
   >({
     mutationFn: async (props: {
       subOrderID: string;
-      changes: UpdateSubOrderProps;
+      updates: UpdateSubOrderProps;
     }) => {
-      const { changes, subOrderID } = props;
+      const { updates, subOrderID } = props;
       return getCustomAxios()
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateSubOrder/`, {
           orderID,
           subOrderID,
-          changes,
+          changes: updates.changes,
+          deletions: updates.deletions,
         })
         .then((res) => {
           logger("useSubOrder | updateSubOrder ✅ |", res.data);

@@ -24,7 +24,7 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
   };
   const handleOnClickButtonSelect = () => {
     closeModelView();
-    updateSubOrder.mutate({ service: { model: model } });
+    updateSubOrder.mutate({ changes: { service: { model: model } } });
     navigate("../material");
   };
   return (

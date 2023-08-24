@@ -106,7 +106,7 @@ const useSubOrder = (): ReturnProps => {
   });
 
   const updateSubOrder = useMutation<string, Error, UpdateSubOrderProps>({
-    mutationFn: async ({ changes, deletions }) => {
+    mutationFn: async ({ changes = {}, deletions = {} }) => {
       return getCustomAxios()
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateSubOrder/`, {
           orderID,
@@ -135,12 +135,13 @@ const useSubOrder = (): ReturnProps => {
       updates: UpdateSubOrderProps;
     }) => {
       const { updates, subOrderID } = props;
+      const { changes = {}, deletions = {} } = updates;
       return getCustomAxios()
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateSubOrder/`, {
           orderID,
           subOrderID,
-          changes: updates.changes,
-          deletions: updates.deletions,
+          changes: changes,
+          deletions: deletions,
         })
         .then((res) => {
           logger("useSubOrder | updateSubOrder ✅ |", res.data);

@@ -193,7 +193,9 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
     <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
       <Divider className="hidden md:block" />
       {user === undefined ? renderClientButtons() : null}
-      {user !== undefined && user.organizations.includes(order.client)
+      {user !== undefined &&
+      (user.organizations.includes(order.client) ||
+        user.hashedID === order.client)
         ? renderClientButtons()
         : renderContractorButtons()}
       <Divider className="hidden md:block" />

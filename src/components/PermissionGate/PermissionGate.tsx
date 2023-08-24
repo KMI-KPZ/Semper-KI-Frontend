@@ -6,28 +6,16 @@ import usePermissionGate from "./hooks/usePermissionGate";
 import logger from "@/hooks/useLogger";
 
 interface PermissionProps {
-  element: string | string[];
+  element: string;
   showMessage?: boolean;
-  concat?: "or" | "and";
 }
 
 const PermissionGate: React.FC<PropsWithChildren<PermissionProps>> = (
   props
 ) => {
-  const { children, element, showMessage = false, concat = "and" } = props;
+  const { children, element, showMessage = false } = props;
   const { t } = useTranslation();
-  const { hasPermission: elementHasPermission } = usePermissionGate();
-
-  const checkElements = (elements: string[]) => {
-    return concat === "and"
-      ? elements.every((element) => elementHasPermission(element))
-      : elements.some((element) => elementHasPermission(element));
-  };
-  const hasPermission = (element: string | string[]): boolean => {
-    return Array.isArray(element)
-      ? checkElements(element)
-      : elementHasPermission(element);
-  };
+  const { hasPermission } = usePermissionGate();
 
   return hasPermission(element) ? (
     <>{children}</>

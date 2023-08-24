@@ -56,7 +56,15 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
             return {
               name: role.name,
               description: role.description,
-              permissions: [],
+              permissions:
+                rolePermissionsQuery.data === undefined
+                  ? []
+                  : rolePermissionsQuery.data.map((permission) => {
+                      return {
+                        name: permission.permission_name,
+                        checked: true,
+                      };
+                    }),
             };
           },
   });
@@ -109,104 +117,112 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
-      <Heading variant="h1" className="px-10">
-        {t("Organization.Roles.components.Form.title")}
-      </Heading>
       {loading ? (
-        <LoadingAnimation />
+        <div className="flex items-center justify-center p-20">
+          <LoadingAnimation />
+        </div>
       ) : (
-        <form className="flex w-full flex-col items-center justify-center gap-5">
-          <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
-            <label className="flex flex-col items-center justify-center gap-2">
-              <Text variant="body">
-                {t("Organization.Roles.components.Table.name")}
-              </Text>
-              <input
-                placeholder={
-                  t("Organization.Roles.components.Table.name") + "..."
-                }
-                {...register("name", {
-                  required: t(
-                    "Organization.Roles.components.Form.validation.name.required"
-                  ),
-                })}
-                className="w-full bg-slate-100 px-5 py-2 "
-              />
-            </label>
-            <label className="flex flex-col items-center justify-center gap-2">
-              <Text variant="body">
-                {t("Organization.Roles.components.Table.description")}
-              </Text>
-
-              <input
-                placeholder={
-                  t("Organization.Roles.components.Table.description") + "..."
-                }
-                {...register("description", {
-                  required: t(
-                    "Organization.Roles.components.Form.validation.name.required"
-                  ),
-                })}
-                className="w-full bg-slate-100 px-5 py-2 "
-              />
-            </label>
-          </div>
-          <Heading variant="h2">
-            {t("Organization.Roles.components.Form.permissions")}
-          </Heading>
-          <div className="flex w-full flex-row flex-wrap gap-5">
-            {allPermissions
-              .sort((p1, p2) => sortPermissions(p1, p2))
-              .map((permission, index) => (
-                <label
-                  key={index}
-                  className="flex flex-col items-center justify-center gap-2"
-                >
-                  <Text variant="body">
-                    {permission.permission_name
-                      .split(":")
-                      .map((title) =>
-                        t(`Organization.Roles.components.Table.${title}`)
-                      )
-                      .join(" ")}
-                  </Text>
-                  <input
-                    type="hidden"
-                    {...register(`permissions.${index}.name`)}
-                    value={permission.permission_name}
-                    className="w-full bg-slate-100 px-5 py-2 "
-                  />
-                  <input
-                    type="checkbox"
-                    {...register(`permissions.${index}.checked`)}
-                    className="h-8 w-8  bg-slate-100 px-5 py-2"
-                  />
-                </label>
-              ))}
-          </div>
-          {errors.description !== undefined || errors.name !== undefined ? (
-            <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
-              {errors.name !== undefined ? (
-                <div className="w-full p-5 text-center text-red-500">
-                  {errors.name.message}
-                </div>
-              ) : null}
-              {errors.description !== undefined ? (
-                <div className="w-full p-5 text-center text-red-500">
-                  {errors.description.message}
-                </div>
-              ) : null}
-            </div>
-          ) : null}
-          <Button
-            onClick={handleSubmit(onSubmit)}
-            title={t(
-              `Organization.Roles.components.Form.button.${
-                role === undefined ? "create" : "safe"
+        <>
+          <Heading variant="h1" className="px-10">
+            {t(
+              `Organization.Roles.components.Form.title.${
+                role === undefined ? "create" : "edit"
               }`
             )}
-          />
-        </form>
+          </Heading>
+          <form className="flex w-full flex-col items-center justify-center gap-5">
+            <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
+              <label className="flex flex-col items-center justify-center gap-2">
+                <Text variant="body">
+                  {t("Organization.Roles.components.Table.name")}
+                </Text>
+                <input
+                  placeholder={
+                    t("Organization.Roles.components.Table.name") + "..."
+                  }
+                  {...register("name", {
+                    required: t(
+                      "Organization.Roles.components.Form.validation.name.required"
+                    ),
+                  })}
+                  className="w-full bg-slate-100 px-5 py-2 "
+                />
+              </label>
+              <label className="flex flex-col items-center justify-center gap-2">
+                <Text variant="body">
+                  {t("Organization.Roles.components.Table.description")}
+                </Text>
+
+                <input
+                  placeholder={
+                    t("Organization.Roles.components.Table.description") + "..."
+                  }
+                  {...register("description", {
+                    required: t(
+                      "Organization.Roles.components.Form.validation.name.required"
+                    ),
+                  })}
+                  className="w-full bg-slate-100 px-5 py-2 "
+                />
+              </label>
+            </div>
+            <Heading variant="h2">
+              {t("Organization.Roles.components.Form.permissions")}
+            </Heading>
+            <div className="flex w-full flex-row flex-wrap gap-5">
+              {allPermissions
+                .sort((p1, p2) => sortPermissions(p1, p2))
+                .map((permission, index) => (
+                  <label
+                    key={index}
+                    className="flex flex-col items-center justify-center gap-2"
+                  >
+                    <Text variant="body">
+                      {permission.permission_name
+                        .split(":")
+                        .map((title) =>
+                          t(`Organization.Roles.components.Table.${title}`)
+                        )
+                        .join(" ")}
+                    </Text>
+                    <input
+                      type="hidden"
+                      {...register(`permissions.${index}.name`)}
+                      value={permission.permission_name}
+                      className="w-full bg-slate-100 px-5 py-2 "
+                    />
+                    <input
+                      type="checkbox"
+                      {...register(`permissions.${index}.checked`)}
+                      className="h-8 w-8  bg-slate-100 px-5 py-2"
+                    />
+                  </label>
+                ))}
+            </div>
+            {errors.description !== undefined || errors.name !== undefined ? (
+              <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
+                {errors.name !== undefined ? (
+                  <div className="w-full p-5 text-center text-red-500">
+                    {errors.name.message}
+                  </div>
+                ) : null}
+                {errors.description !== undefined ? (
+                  <div className="w-full p-5 text-center text-red-500">
+                    {errors.description.message}
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
+            <Button
+              onClick={handleSubmit(onSubmit)}
+              title={t(
+                `Organization.Roles.components.Form.button.${
+                  role === undefined ? "create" : "safe"
+                }`
+              )}
+            />
+          </form>
+        </>
       )}
     </div>
   );

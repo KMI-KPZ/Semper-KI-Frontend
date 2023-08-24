@@ -987,7 +987,10 @@
       },
       "components":{
         "Form":{
-          "title":"Rolle anlegen",
+          "title":{
+            "create":"Rolle anlegen",
+            "edit":"Rolle bearbeiten"
+          },
           "name":"Name",
           "description":"Beschreibung",
           "button":{

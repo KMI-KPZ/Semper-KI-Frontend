@@ -21,7 +21,7 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
       <Heading variant="h2">{t("Resources.Printers.table.header")}</Heading>
-      <PermissionGate element="ResourcesPrintersAddButton">
+      <PermissionGate element="ResourcesButtonAddPrinter">
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-col">
           <Button
             title={t("Resources.Printers.table.button.add")}

@@ -55,17 +55,6 @@ const SubOrderActionButtons: React.FC<SubOrderActionButtonsProps> = (props) => {
 
   return (
     <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:w-fit md:flex-nowrap">
-      {subOrder.state < OrderState.REQUESTED ? (
-        <PermissionGate element="SubOrderButtonEdit">
-          <Button
-            width="fit"
-            size="sm"
-            children={<EditIcon />}
-            to={`/order/${orderID}/suborder/${subOrder.subOrderID}`}
-            title={t("Orders.OrderView.button.edit")}
-          />
-        </PermissionGate>
-      ) : null}
       {subOrder.state <= OrderState.REQUESTED ? (
         <PermissionGate element="SubOrderButtonDelete">
           <Button

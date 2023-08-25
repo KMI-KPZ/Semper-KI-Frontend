@@ -38,7 +38,7 @@ export interface SubOrderDetailsProps {
 }
 
 export interface SubOrderProps {
-  chat: ChatMessageProps[];
+  chat: { messages: ChatMessageProps[] };
   contractor: string;
   created: Date;
   details: SubOrderDetailsProps;

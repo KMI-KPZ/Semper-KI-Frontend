@@ -31,7 +31,8 @@ type ButtonVariant =
   | "outline"
   | "text"
   | "light"
-  | "link";
+  | "link"
+  | "icon";
 type ButtonWidth = "fit" | "full" | "auto";
 type ButtonAlign = "start" | "center" | "end";
 type ButtonDirection = "col" | "row";
@@ -117,6 +118,8 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
         }
       case "link":
         return "hover:text-blau underline";
+      case "icon":
+        return "hover:text-türkis rounded-full bg-slate-200";
     }
   };
 

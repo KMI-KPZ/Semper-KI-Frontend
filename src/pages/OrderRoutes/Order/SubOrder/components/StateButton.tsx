@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import FactoryIcon from "@mui/icons-material/Factory";
 import PolicyIcon from "@mui/icons-material/Policy";
 import SendIcon from "@mui/icons-material/Send";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 interface SubOrderStateButtonProps {
   subOrderID: string;
@@ -18,13 +19,20 @@ const SubOrderStateButton: React.FC<SubOrderStateButtonProps> = (props) => {
   const renderButtons = () => {
     if (state === OrderState.DRAFT)
       return (
-        <Button
-          startIcon={<FactoryIcon />}
-          title={t(
-            "OrderRoutes.SubOrder.components.StateButton.selectManufacturer"
-          )}
-          to={`suborder/${subOrderID}/manufacturerSelection`}
-        />
+        <>
+          <Button
+            startIcon={<PlayArrowIcon />}
+            title={t("OrderRoutes.SubOrder.components.StateButton.continue")}
+            to={`suborder/${subOrderID}`}
+          />
+          <Button
+            startIcon={<FactoryIcon />}
+            title={t(
+              "OrderRoutes.SubOrder.components.StateButton.selectManufacturer"
+            )}
+            to={`suborder/${subOrderID}/manufacturerSelection`}
+          />
+        </>
       );
     else if (state === OrderState.MANUFACTURER_SELECTED)
       return (

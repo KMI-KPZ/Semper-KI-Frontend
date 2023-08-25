@@ -107,7 +107,7 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
             />
           </PermissionGate>
         ) : null}
-        {order.state === OrderState.DRAFT ? (
+        {/* {order.state === OrderState.DRAFT ? (
           <PermissionGate element={"OrderButtonManufacturerSelection"}>
             <Button
               size="sm"
@@ -116,7 +116,7 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
               title={t("Orders.OrderCollection.button.manufacturer")}
             />
           </PermissionGate>
-        ) : null}
+        ) : null} */}
         {order.state === OrderState.MANUFACTURER_SELECTED ? (
           <PermissionGate element={"OrderButtonVerify"}>
             <Button

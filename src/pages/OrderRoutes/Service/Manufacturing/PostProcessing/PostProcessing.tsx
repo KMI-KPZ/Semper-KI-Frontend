@@ -7,6 +7,7 @@ import { FilterItemProps } from "../Filter/Filter";
 import { usePostProcessing as useManufacturingPostProcessing } from "./hooks/usePostProcessing";
 import { useNavigate } from "react-router-dom";
 import useSubOrder from "@/pages/OrderRoutes/hooks/useSubOrder";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   processState: ServiceManufacturingState;
@@ -40,7 +41,7 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
   const checkPostProcessing = (postProcessing: PostProcessingProps) => {
     let newPostProcessings: PostProcessingProps[] = [];
     if (postProcessings === undefined) {
-      newPostProcessings.push(postProcessing);
+      newPostProcessings.push({ ...postProcessing, checked: true });
     } else {
       const isPostProcessingAlreadyChecked: boolean =
         postProcessings.find((item) => item.id === postProcessing.id) !==
@@ -50,7 +51,10 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
           (item) => item.id !== postProcessing.id
         );
       } else {
-        newPostProcessings = [...postProcessings, postProcessing];
+        newPostProcessings = [
+          ...postProcessings,
+          { ...postProcessing, checked: true },
+        ];
       }
     }
     updateSubOrder.mutate({

@@ -13,6 +13,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import useSubOrder from "@/pages/OrderRoutes/hooks/useSubOrder";
 import ServiceSelect from "@/pages/OrderRoutes/Service/Select/Select";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 interface SubOrderServiceProps {
   service: GeneralServiceProps;
@@ -58,20 +59,6 @@ const SubOrderService: React.FC<SubOrderServiceProps> = (props) => {
           {t(`OrderRoutes.Service.type.${ServiceType[service.type]}`)}
         </Heading>
         <Divider className="mt-[0.3rem] hidden md:block" />
-        <div className="flex w-full flex-row flex-wrap items-center justify-center gap-3 md:w-fit md:flex-nowrap">
-          <Button
-            title={t("OrderRoutes.Service.Service.button.edit")}
-            children={<EditIcon />}
-            to={`suborder/${subOrderID}`}
-            width="fit"
-          />
-          <Button
-            title={t("OrderRoutes.Service.Service.button.delete")}
-            children={<DeleteIcon />}
-            onClick={handleOnClickButtonDelete}
-            width="fit"
-          />
-        </div>
       </div>
       {renderService()}
     </div>

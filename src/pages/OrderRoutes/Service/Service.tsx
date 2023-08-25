@@ -11,6 +11,7 @@ import ServiceOverview from "./Overview/Overview";
 import { useOrder } from "../hooks/useOrder";
 import { ServiceModellingProps } from "./Modelling/Modelling";
 import ServiceSelect from "./Select/Select";
+import logger from "@/hooks/useLogger";
 
 export interface ServiceProps {}
 

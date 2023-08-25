@@ -537,9 +537,9 @@
     "OrderCollection":{
       "id":"AuftragsID",
       "date":"Datum",
-      "noSubOrders":"Keine unteraufträge vorhanden",
+      "noSubOrders":"Keine Teilaufträge vorhanden",
       "button":{
-        "new":"Neuer SubAuftrag",
+        "new":"Neuer Teilauftrag",
         "manufacturer":"Herstellerauswahl",
         "edit":"Bearbeiten",
         "cancel":"Stornieren",
@@ -590,12 +590,13 @@
     },
     "OrderView":{
       "name":"Name:",
-      "id":"UnterauftragsID:",
+      "id":"TeilauftragsID:",
       "created":"Erstellt am:",
       "service":"Service:",
       "status":"Status:",
       "postProcessing":"Nachbearbeitung",
       "button":{
+        "editName":"Name ändern",
         "cancel":"Stornieren",
         "reOrder":"erneut Bestellen",
         "reject":"Ablehnen",
@@ -1207,6 +1208,7 @@
     "SubOrder":{
       "components":{
         "StateButton":{
+          "continue":"Fortsetzen",
           "selectManufacturer":"Hersteller auswählen",
           "verify":"Überprüfen",
           "request":"Anfragen"

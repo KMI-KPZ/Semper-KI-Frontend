@@ -6,6 +6,7 @@ import { User } from "@/hooks/useUser/types";
 import { Heading, Text } from "@component-library/Typography";
 import { useOrder } from "../../../hooks/useOrder";
 import useSubOrder, { ChatMessageProps } from "../../../hooks/useSubOrder";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   closeMenu(): void;
@@ -26,6 +27,7 @@ const Chat: React.FC<Props> = (props) => {
   const [state, setState] = useState<State>({});
   const { height, messageText } = state;
   const { updateSubOrderWithSubOrderID } = useSubOrder();
+  logger(chat);
 
   const handleOnChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setState((prevState) => ({

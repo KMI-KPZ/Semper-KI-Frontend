@@ -30,6 +30,7 @@ const HomeAnonymOrga: React.FC<HomeAnonymOrgaProps> = (props) => {
             title={t("Home.Home.Anonym.Orga.advantage")}
           />
           <Button
+            to="/registerOrganization"
             startIcon={<LoginIcon fontSize="large" />}
             title={t("Home.Home.Anonym.Orga.register")}
           />

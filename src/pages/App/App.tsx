@@ -42,6 +42,7 @@ import Orders from "../Orders/Orders";
 import OrderRoutes from "../OrderRoutes/OrderRoutes";
 import { FilterItemProps } from "../OrderRoutes/Service/Manufacturing/Filter/Filter";
 import AdminRoutes from "../AdminRoutes/AdminRoutes";
+import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -172,6 +173,10 @@ const App: React.FC = () => {
           <Breadcrumb />
           <Routes data-testid="routes">
             <Route index element={<Home events={events} user={user} />} />
+            <Route
+              path="registerOrganization"
+              element={<RegisterOrganization />}
+            />
             <Route path="logout" element={<Logout />} />
             <Route path="portfolio" element={<Portfolio />} />
             <Route path="login" element={<Login />} />

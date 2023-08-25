@@ -27,7 +27,6 @@ const Chat: React.FC<Props> = (props) => {
   const [state, setState] = useState<State>({});
   const { height, messageText } = state;
   const { updateSubOrderWithSubOrderID } = useSubOrder();
-  logger(chat);
 
   const handleOnChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setState((prevState) => ({

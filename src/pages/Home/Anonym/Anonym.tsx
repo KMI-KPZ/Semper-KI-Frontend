@@ -5,7 +5,7 @@ import Workflow from "@images/workflow.png";
 import HomeAnonymOrder from "./components/Order";
 import HomeAnonymHeader from "./components/Header";
 import HomeAnonymOrga from "./components/Orga";
-import HomeAnonymIndividual from "./components/Individual";
+import HomeAnonymClient from "./components/Client";
 import HomeAnonymMagazinCard from "./components/Magazin";
 import HomeAnonymImages from "./components/Images";
 
@@ -24,7 +24,7 @@ const AnonymHome: React.FC<AnonymHomeProps> = (props) => {
       <img src={Workflow} />
       <HomeAnonymOrder />
       <HomeAnonymOrga />
-      <HomeAnonymIndividual />
+      <HomeAnonymClient />
       <HomeAnonymMagazinCard />
       <HomeAnonymImages />
     </div>

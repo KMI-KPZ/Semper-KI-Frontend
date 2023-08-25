@@ -49,7 +49,8 @@
       "admin":"Adminbereich",
       "users":"Benutzer verwalten",
       "manufacturerSelection":"Herstellerauswahl",
-      "verification":"Überprüfung"
+      "verification":"Überprüfung",
+      "registerOrganization":"Organisation registrieren"
     }
   },
   "enum":{
@@ -1213,6 +1214,25 @@
           "verify":"Überprüfen",
           "request":"Anfragen"
         }
+      }
+    }
+  },
+  "RegisterOrganization":{
+    "title":"Organisation Registrieren",
+    "form":{
+      "name": "Name",
+      "email": "E-Mail",
+      "adress": "Adresse",
+      "taxID": "Steuernummer",
+      "canManufacture": "Kann Herstellen",
+      "button":{
+        "submit":"Registrieren"
+      },
+      "error":{
+        "name": "Name benötigt",
+        "email": "E-Mail benötigt",
+        "adress": "Adresse benötigt",
+        "taxID": "Steuernummer benötigt"
       }
     }
   }

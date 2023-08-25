@@ -1,16 +1,20 @@
 import { Heading } from "@component-library/Typography";
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import HomeContainer from "../../components/Container";
 import { Button } from "@component-library/Button";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import LoginIcon from "@mui/icons-material/Login";
+import { useLogin } from "@/pages/Login/hooks/useLogin";
+import { LoadingSuspense } from "@component-library/index";
 
 interface HomeAnonymIndividualProps {}
 
-const HomeAnonymIndividual: React.FC<HomeAnonymIndividualProps> = (props) => {
+const HomeAnonymClient: React.FC<HomeAnonymIndividualProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
+  const [load, setLoad] = useState<boolean>(false);
+  useLogin(load, false, true, "/");
 
   return (
     <HomeContainer
@@ -32,6 +36,7 @@ const HomeAnonymIndividual: React.FC<HomeAnonymIndividualProps> = (props) => {
             title={t("Home.Home.Anonym.Individual.advantage")}
           />
           <Button
+            onClick={() => setLoad(true)}
             startIcon={<LoginIcon fontSize="large" />}
             title={t("Home.Home.Anonym.Individual.register")}
           />
@@ -41,4 +46,4 @@ const HomeAnonymIndividual: React.FC<HomeAnonymIndividualProps> = (props) => {
   );
 };
 
-export default HomeAnonymIndividual;
+export default HomeAnonymClient;

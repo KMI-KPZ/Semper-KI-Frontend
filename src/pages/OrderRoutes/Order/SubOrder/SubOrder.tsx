@@ -207,7 +207,7 @@ const SubOrder: React.FC<Props> = (props) => {
         <Modal
           open={chatOpen}
           closeModal={handleOnOutsideClickChat}
-          className="flex w-full flex-col  "
+          className="flex w-full flex-col"
         >
           <Chat
             chat={subOrder.chat.messages}

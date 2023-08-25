@@ -34,7 +34,7 @@ const SubOrderStateButton: React.FC<SubOrderStateButtonProps> = (props) => {
           />
         </>
       );
-    else if (state === OrderState.MANUFACTURER_SELECTED)
+    else if (state === OrderState.CONTRACTOR_SELECTED)
       return (
         <Button
           startIcon={<PolicyIcon />}

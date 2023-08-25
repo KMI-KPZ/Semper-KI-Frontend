@@ -33,16 +33,16 @@ export interface UpdateOrderProps {
 }
 
 export enum OrderState {
-  "DRAFT",
-  "MANUFACTURER_SELECTED",
-  "VERIFIED",
-  "REQUESTED",
-  "CLARIFICATION",
-  "REJECTED",
-  "CONFIRMED",
-  "PRODUCTION",
-  "DELIVERY",
-  "COMPLETED",
+  "DRAFT" = 0,
+  "CONTRACTOR_SELECTED" = 100,
+  "VERIFIED" = 200,
+  "REQUESTED" = 300,
+  "CLARIFICATION" = 400,
+  "REJECTED" = 500,
+  "CONFIRMED" = 600,
+  "PRODUCTION" = 700,
+  "DELIVERY" = 800,
+  "COMPLETED" = 900,
 }
 
 export const useOrder = (): ReturnProps => {

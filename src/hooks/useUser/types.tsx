@@ -1,7 +1,7 @@
 export type User = {
   accessed: Date;
   created: Date;
-  details: any;
+  details: UserDetails;
   email: string;
   hashedID: string;
   lastSeen: Date;
@@ -10,6 +10,10 @@ export type User = {
   updated: Date;
   usertype: UserType;
 };
+
+interface UserDetails {
+  address?: string;
+}
 
 export enum UserType {
   "USER",

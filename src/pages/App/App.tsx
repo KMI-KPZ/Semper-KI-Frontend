@@ -23,7 +23,7 @@ import RedirectLogin from "../Login/Redirect/RedirectLogin";
 import Logout from "../Logout/Logout";
 import Organization from "../Organization/Organization";
 import Portfolio from "../Portfolio/Portfolio";
-import Profil from "../Profil/Profll";
+import Profile from "../Profile/Proflle";
 import Resouces from "../Resources/Resources";
 import ServiceRoutes from "../ServiceRoutes/ServiceRoutes";
 import Legal from "../Legal/Legal";
@@ -126,7 +126,7 @@ const App: React.FC = () => {
   const userRoutes = (
     <Route element={<UserOutlet user={user} />}>
       <Route path="test" element={<RequestTest socket={socket} />} />
-      <Route path="account" element={<Profil user={user!} />} />
+      <Route path="account" element={<Profile user={user!} />} />
     </Route>
   );
 

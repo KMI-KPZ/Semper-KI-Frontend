@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@test/render";
-import Profil from "./Profll";
+import Profile from "./Proflle";
 import { UserType } from "@/hooks/useUser/types";
 import { UserBuilder } from "@test/builder";
 
@@ -16,19 +16,19 @@ jest.mock("@/hooks/useUser", () => ({
 describe("Profil", () => {
   it("should render without crashing", () => {
     const user = new UserBuilder().withType(UserType.USER).build();
-    render(<Profil user={user} />);
+    render(<Profile user={user} />);
     expect(true).toBeTruthy();
   });
   it("should call deleteUser onClickButtonDelete", () => {
     const user = new UserBuilder().withType(UserType.USER).build();
-    render(<Profil user={user} />);
+    render(<Profile user={user} />);
     const button = screen.getByTestId("button-delete");
     fireEvent.click(button);
     expect(mockedDeleteUser).toBeCalledTimes(1);
   });
   it("should render data from user", () => {
     const user = new UserBuilder().withType(UserType.USER).build();
-    render(<Profil user={user} />);
+    render(<Profile user={user} />);
     expect(screen.getByText(/test@test.de/)).toBeVisible();
     expect(screen.getByText(/testCity/)).toBeVisible();
     expect(screen.getByText(/germany/)).toBeVisible();

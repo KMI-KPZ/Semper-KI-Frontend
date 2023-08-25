@@ -97,10 +97,10 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
       >
         {noIcon === true ? null : (
           <Button
-            className="absolute right-0 top-0 z-10 mr-3 mt-3 md:mr-5 md:mt-5"
+            className="absolute right-0 top-0 z-10 mr-3 mt-3 bg-none md:mr-5 md:mt-5"
             title={t("components.Modal.button.close")}
             children={<CloseIcon />}
-            variant="secondary"
+            variant="text"
             width="fit"
             onClick={closeModal}
           />

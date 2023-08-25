@@ -841,7 +841,7 @@
       }
     }
   },
-  "Profil":{
+  "Profile":{
     "header": "Account",
     "general":{
       "header":"Allgemein",
@@ -868,8 +868,15 @@
       "updated": "Aktualisiert am"
     },
     "button":{
+      "edit":"Bearbeiten",
+      "save":"Speichern",
       "selectChange":"Organisation wählen",
       "delete":"Account Löschen"
+   },
+   "components":{
+    "Form":{
+      "title":"Account bearbeiten"
+    }
    }
   },
   "Redirect":{},

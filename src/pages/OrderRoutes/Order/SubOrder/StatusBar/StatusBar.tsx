@@ -32,7 +32,7 @@ const statusData: StatusData[] = [
     text: "Orders.StatusView.state.draft",
   },
   {
-    itemOrderState: OrderState.MANUFACTURER_SELECTED,
+    itemOrderState: OrderState.CONTRACTOR_SELECTED,
     icon: <FactoryIcon />,
     text: "Orders.StatusView.state.manufacturerSelected",
   },

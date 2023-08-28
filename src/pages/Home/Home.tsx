@@ -1,4 +1,4 @@
-import { User, UserType } from "@/hooks/useUser/types";
+import { UserProps, UserType } from "@/hooks/useUser/types";
 import { Event } from "@/pages/App/types";
 import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
@@ -7,7 +7,7 @@ import { Button } from "@component-library/Button";
 import AuthorizedHome from "./Authorized/Authorized";
 
 interface Props {
-  user: User | undefined;
+  user: UserProps | undefined;
   events?: Event[];
 }
 

@@ -1,4 +1,4 @@
-import { User, UserType } from "@/hooks/useUser/types";
+import { UserProps, UserType } from "@/hooks/useUser/types";
 import { Error } from "@/pages/Error/Error";
 import LoginView from "@/pages/Login/Login";
 import React from "react";
@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Outlet, useLocation } from "react-router-dom";
 
 interface Props {
-  user: User | undefined;
+  user: UserProps | undefined;
 }
 
 export const UserOutlet: React.FC<Props> = (props) => {

@@ -13,9 +13,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { FlatOrderProps } from "@/pages/Orders/hooks/useFlatOrders";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { OrderState, useOrder } from "@/pages/OrderRoutes/hooks/useOrder";
 import logger from "@/hooks/useLogger";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import { OrderState, useOrder } from "@/pages/Order/hooks/useOrder";
 
 interface OrdersTableProps {
   flatOrders: FlatOrderProps[];

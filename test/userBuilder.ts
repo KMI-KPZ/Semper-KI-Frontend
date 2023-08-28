@@ -1,4 +1,4 @@
-import { Address, User,UserType } from "@/hooks/useUser/types";
+import { Address, UserProps,UserType } from "@/hooks/useUser/types";
 
 export class UserBuilder {
     email:string = "test@test.de";
@@ -66,7 +66,7 @@ export class UserBuilder {
 
 
 
-    build():User {
+    build():UserProps {
         return({
             email: this.email,
             name: this.name,

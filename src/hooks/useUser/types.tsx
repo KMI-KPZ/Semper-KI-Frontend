@@ -1,7 +1,7 @@
-export type User = {
+export type UserProps = {
   accessed: Date;
   created: Date;
-  details: UserDetails;
+  details: UserDetailsProps;
   email: string;
   hashedID: string;
   lastSeen: Date;
@@ -11,7 +11,7 @@ export type User = {
   usertype: UserType;
 };
 
-interface UserDetails {
+export interface UserDetailsProps {
   address?: string;
 }
 

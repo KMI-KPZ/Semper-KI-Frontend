@@ -3,17 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { getUserType, parseAddress } from "../../services/utils";
 import useCRSFToken from "../useCSRFToken";
 import { getCustomAxios } from "@/hooks/useCustomAxios";
-import { User, UserType } from "./types";
+import { UserDetailsProps, UserProps, UserType } from "./types";
 import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
-  user: User | undefined;
+  user: UserProps | undefined;
   isLoggedIn: boolean;
   isLoggedInResponse: boolean;
   loadIsLoggedInQuery: UseQueryResult<boolean, Error>;
-  loadUserQuery: UseQueryResult<User, Error>;
+  loadUserQuery: UseQueryResult<UserProps, Error>;
   deleteUser(): void;
-  updateUser(userType: UserType): void;
+  updateUserDetails(details: UserDetailsProps): void;
 }
 
 const useUser = (): ReturnProps => {
@@ -32,7 +32,7 @@ const useUser = (): ReturnProps => {
     enabled: isCSRFTokenLoaded === true,
   });
 
-  const loadUserQuery = useQuery<User, Error>({
+  const loadUserQuery = useQuery<UserProps, Error>({
     queryKey: ["user"],
     queryFn: async () =>
       getCustomAxios()
@@ -40,7 +40,7 @@ const useUser = (): ReturnProps => {
         .then((response) => {
           const userData = response.data;
           logger("useUser | getUser ✅ |", userData);
-          const newUser: User = {
+          const newUser: UserProps = {
             ...userData,
             accessed: new Date(userData.accessed),
             created: new Date(userData.created),
@@ -68,10 +68,10 @@ const useUser = (): ReturnProps => {
       });
   };
 
-  const updateUser = (userType: UserType) => {
+  const updateUserDetails = (details: UserDetailsProps) => {
     getCustomAxios()
-      .post(`${process.env.VITE_HTTP_API_URL}/public/updateUser/`, {
-        userType: UserType[userType],
+      .post(`${process.env.VITE_HTTP_API_URL}/public/updateUserDetails/`, {
+        details,
       })
       .then((response) => {
         logger("useUser | updateUser ✅ |", response);
@@ -81,7 +81,7 @@ const useUser = (): ReturnProps => {
       });
   };
 
-  const user: User | undefined =
+  const user: UserProps | undefined =
     loadUserQuery.data !== undefined && loadUserQuery.isFetched
       ? loadUserQuery.data
       : undefined;
@@ -99,7 +99,7 @@ const useUser = (): ReturnProps => {
     isLoggedIn,
     isLoggedInResponse,
     deleteUser,
-    updateUser,
+    updateUserDetails,
   };
 };
 

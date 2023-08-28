@@ -1,5 +1,5 @@
 import { Address, UserType } from "@/hooks/useUser/types";
-import { ModelProps } from "@/pages/OrderRoutes/Service/Manufacturing/Model/types";
+import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
 
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;

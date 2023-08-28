@@ -11,7 +11,7 @@ import {
   OrganizationOutlet,
   UserOutlet,
 } from "./components/Outlet";
-import { User } from "@/hooks/useUser/types";
+import { UserProps } from "@/hooks/useUser/types";
 import { DeleteEvent, Event } from "@/pages/App/types";
 import { ToastContainer } from "react-toastify";
 import useUser from "@/hooks/useUser";
@@ -25,7 +25,6 @@ import Organization from "../Organization/Organization";
 import Portfolio from "../Portfolio/Portfolio";
 import Profile from "../Profile/Proflle";
 import Resouces from "../Resources/Resources";
-import ServiceRoutes from "../ServiceRoutes/ServiceRoutes";
 import Legal from "../Legal/Legal";
 import useEvents from "./hooks/useEvents";
 import usePermissions, {
@@ -39,9 +38,9 @@ import useCookieConsent from "@/components/CookieBanner/hooks/useCookieConsent";
 import Modal from "@component-library/Modal";
 import usePing from "@/hooks/usePing";
 import Orders from "../Orders/Orders";
-import OrderRoutes from "../OrderRoutes/OrderRoutes";
-import { FilterItemProps } from "../OrderRoutes/Service/Manufacturing/Filter/Filter";
-import AdminRoutes from "../AdminRoutes/AdminRoutes";
+import OrderRoutes from "../Routes/Order";
+import { FilterItemProps } from "../Service/Manufacturing/Filter/Filter";
+import AdminRoutes from "../Routes/Admin";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 
 export type AppState = {
@@ -52,7 +51,7 @@ export type AppState = {
 
 export type AppContext = {
   events: Event[];
-  user: User | undefined;
+  user: UserProps | undefined;
   permissions: Permission[] | undefined;
   permissionGates: PermissionGateType[] | undefined;
   appState: AppState;
@@ -182,7 +181,6 @@ const App: React.FC = () => {
             <Route path="login" element={<Login />} />
             <Route path="login/redirect" element={<RedirectLogin />} />
             <Route path="register" element={<Login />} />
-            <Route path="service/*" element={<ServiceRoutes />} />
             <Route
               path="legal/*"
               element={<Legal isMagazineUp={isMagazineUp} />}

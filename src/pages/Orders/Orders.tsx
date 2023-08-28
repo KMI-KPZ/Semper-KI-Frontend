@@ -4,9 +4,9 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import { useFlatOrders } from "./hooks/useFlatOrders";
-import { useOrder } from "../OrderRoutes/hooks/useOrder";
 import OrdersTable from "./components/Table";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import { useOrder } from "../Order/hooks/useOrder";
 
 interface OrdersProps {}
 

@@ -6,7 +6,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import HomeContainer from "../../components/Container";
 import { useFlatOrders } from "@/pages/Orders/hooks/useFlatOrders";
 import AddIcon from "@mui/icons-material/Add";
-import { useOrder } from "@/pages/OrderRoutes/hooks/useOrder";
+import { useOrder } from "@/pages/Order/hooks/useOrder";
 
 interface HomeAnonymOrderProps {}
 

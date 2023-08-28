@@ -24,7 +24,7 @@ import { useWebsocket } from "./useWebsocket";
 import logger from "@/hooks/useLogger";
 import { useTranslation } from "react-i18next";
 import { toast } from "./useToast";
-import { User, UserType } from "@/hooks/useUser/types";
+import { UserProps, UserType } from "@/hooks/useUser/types";
 import usePermissions from "@/hooks/usePermissions";
 
 interface ReturnProps {
@@ -63,7 +63,7 @@ export const getOrderEventAmount = (
 
 const useEvents = (
   isLoggedIn: boolean,
-  user: User | undefined,
+  user: UserProps | undefined,
   reloadPermissions: () => void
 ): ReturnProps => {
   const [events, setEvents] = useState<Event[]>([]);

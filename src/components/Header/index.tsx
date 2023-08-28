@@ -9,7 +9,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { NavigationItemData } from "@/data/navigation";
 import LogoURL from "@images/logo192.png";
 import { AppContext } from "@/pages/App/App";
-import { User, UserType } from "@/hooks/useUser/types";
+import { UserProps, UserType } from "@/hooks/useUser/types";
 import { Event, OrderEvent } from "@/pages/App/types";
 import { Heading, Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
@@ -49,7 +49,7 @@ const languages: Language[] = [
 ];
 
 interface Props {
-  user: User | undefined;
+  user: UserProps | undefined;
   events?: Event[];
 }
 

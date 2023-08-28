@@ -1,4 +1,4 @@
-import { EPostProcessingOptionType, PostProcessingProps } from "@/pages/OrderRoutes/Service/Manufacturing/PostProcessing/PostProcessing";
+import { EPostProcessingOptionType, PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
 
 
 

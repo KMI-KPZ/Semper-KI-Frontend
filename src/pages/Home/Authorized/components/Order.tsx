@@ -1,11 +1,10 @@
-import { OrderState, useOrder } from "@/pages/OrderRoutes/hooks/useOrder";
-import { useFlatOrders } from "@/pages/Orders/hooks/useFlatOrders";
 import { Button } from "@component-library/Button";
-import { Heading, Text } from "@component-library/Typography";
+import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import HomeContainer from "../../components/Container";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import { useOrder } from "@/pages/Order/hooks/useOrder";
 
 interface HomeAuthorizedOrderProps {}
 

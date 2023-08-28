@@ -1,4 +1,4 @@
-import { ModelProps } from "@/pages/OrderRoutes/Service/Manufacturing/Model/types";
+import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
 
 
 export class ModelBuilder {

@@ -8,7 +8,7 @@ import { getCustomAxios } from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
 import { useContext, useState } from "react";
 import { AppContext } from "@/pages/App/App";
-import { User } from "./useUser/types";
+import { UserProps } from "./useUser/types";
 
 interface ReturnProps {
   permissions: Permission[] | undefined;
@@ -26,7 +26,7 @@ export type PermissionGateType = {
   permission: Permission;
 };
 
-const usePermissions = (user?: User): ReturnProps => {
+const usePermissions = (user?: UserProps): ReturnProps => {
   const [permissions, setPermissions] = useState<Permission[]>();
   const queryClient = useQueryClient();
 

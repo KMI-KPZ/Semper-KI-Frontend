@@ -1,4 +1,4 @@
-import { MaterialProps } from "@/pages/OrderRoutes/Service/Manufacturing/Material/Material";
+import { MaterialProps } from "@/pages/Service/Manufacturing/Material/Material";
 
 
 export class MaterialBuilder {

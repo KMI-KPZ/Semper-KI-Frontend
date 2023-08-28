@@ -7,7 +7,7 @@ import {
   UseQueryResult,
 } from "@tanstack/react-query";
 import logger from "@/hooks/useLogger";
-import { OrderState } from "../../OrderRoutes/hooks/useOrder";
+import { OrderState } from "@/pages/Order/hooks/useOrder";
 
 interface ReturnProps {
   ordersQuery: UseQueryResult<FlatOrderProps[], Error>;

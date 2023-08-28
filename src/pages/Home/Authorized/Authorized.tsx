@@ -1,4 +1,4 @@
-import { User, UserType } from "@/hooks/useUser/types";
+import { UserProps, UserType } from "@/hooks/useUser/types";
 import { Event } from "@/pages/App/types";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -9,7 +9,7 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import HomeAuthorizedAdmin from "./components/Admin";
 
 interface AuthorizedPropsHome {
-  user: User;
+  user: UserProps;
   events?: Event[];
 }
 

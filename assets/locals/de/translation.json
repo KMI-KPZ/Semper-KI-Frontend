@@ -869,13 +869,19 @@
     },
     "button":{
       "edit":"Bearbeiten",
-      "save":"Speichern",
       "selectChange":"Organisation wählen",
       "delete":"Account Löschen"
    },
    "components":{
     "Form":{
-      "title":"Account bearbeiten"
+      "title":"Account bearbeiten",
+      "address":"Adresse",
+      "button":{
+        "save":"Speichern"
+      },
+      "error":{
+        "address":"Adresse benötigt"
+      }
     }
    }
   },

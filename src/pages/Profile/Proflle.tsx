@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
-import { User, UserType } from "@/hooks/useUser/types";
+import { UserProps, UserType } from "@/hooks/useUser/types";
 import { Heading } from "@component-library/Typography";
 import useUser from "@/hooks/useUser";
 import EditIcon from "@mui/icons-material/Edit";
@@ -10,13 +10,13 @@ import Modal from "@component-library/Modal";
 import ProfileForm from "./components/Form";
 
 interface Props {
-  user: User;
+  user: UserProps;
 }
 
 const Profile: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { user } = props;
-  const { deleteUser, updateUser } = useUser();
+  const { deleteUser } = useUser();
   const [edit, setEdit] = useState(false);
 
   const handleOnClickButtonDelete = () => {

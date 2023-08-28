@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import logger from "@/hooks/useLogger";
-import { User, UserType } from "@/hooks/useUser/types";
+import { UserProps, UserType } from "@/hooks/useUser/types";
 
 interface ReturnProps {
   sendMessage(message: string): void;
@@ -13,7 +13,7 @@ type WebSocketState = "connecting" | "connected" | "disconnected" | "error";
 export const useWebsocket = (
   onMessage: (event: MessageEvent) => void,
   load: boolean,
-  user: User | undefined
+  user: UserProps | undefined
 ): ReturnProps => {
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [state, setState] = useState<WebSocketState>("disconnected");

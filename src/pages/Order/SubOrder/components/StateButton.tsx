@@ -6,6 +6,7 @@ import PolicyIcon from "@mui/icons-material/Policy";
 import SendIcon from "@mui/icons-material/Send";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { OrderState } from "@/pages/Order/hooks/useOrder";
+import useService from "@/pages/Service/hooks/useService";
 
 interface SubOrderStateButtonProps {
   subOrderID: string;
@@ -15,6 +16,7 @@ interface SubOrderStateButtonProps {
 const SubOrderStateButton: React.FC<SubOrderStateButtonProps> = (props) => {
   const { state, subOrderID } = props;
   const { t } = useTranslation();
+  const { isServiceComplete } = useService();
 
   const renderButtons = () => {
     if (state === OrderState.DRAFT)
@@ -28,9 +30,10 @@ const SubOrderStateButton: React.FC<SubOrderStateButtonProps> = (props) => {
           <Button
             startIcon={<FactoryIcon />}
             title={t(
-              "OrderRoutes.SubOrder.components.StateButton.selectManufacturer"
+              "OrderRoutes.SubOrder.components.StateButton.selectContractor"
             )}
-            to={`suborder/${subOrderID}/manufacturerSelection`}
+            to={`suborder/${subOrderID}/contractorSelection`}
+            active={isServiceComplete(subOrderID)}
           />
         </>
       );

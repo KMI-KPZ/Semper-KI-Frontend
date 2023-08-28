@@ -33,7 +33,7 @@ const statusData: StatusData[] = [
   {
     itemOrderState: OrderState.CONTRACTOR_SELECTED,
     icon: <FactoryIcon />,
-    text: "Orders.StatusView.state.manufacturerSelected",
+    text: "Orders.StatusView.state.contractorSelected",
   },
   {
     itemOrderState: OrderState.VERIFIED,

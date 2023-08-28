@@ -111,7 +111,7 @@ const SubOrder: React.FC<Props> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 p-5 shadow-card  md:items-start">
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row lg:justify-between">
-        <div className="flex flex-row items-center justify-center gap-2">
+        <div className="flex flex-col items-center justify-center gap-2 md:flex-row">
           {nameState.edit === true ? (
             <>
               <Heading variant="h3" className="md:whitespace-nowrap">
@@ -120,7 +120,7 @@ const SubOrder: React.FC<Props> = (props) => {
               <input
                 type="text"
                 value={nameState.titleText}
-                className="bg-slate-100 p-2"
+                className="w-full bg-slate-100 p-2 md:w-fit"
                 onChange={handleOnChangeInput}
               />
             </>
@@ -130,6 +130,7 @@ const SubOrder: React.FC<Props> = (props) => {
             </Heading>
           )}
           <Button
+            width="fit"
             onClick={handleOnClickEditCheckButton}
             variant="icon"
             title={t("Orders.OrderView.button.editName")}

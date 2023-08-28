@@ -1,3 +1,4 @@
+import useService from "@/pages/Service/hooks/useService";
 import { Button } from "@component-library/Button";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -14,6 +15,7 @@ const Breadcrumb: React.FC<Props> = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { pathname } = useLocation();
+  const { getServiceName } = useService();
 
   const generateBreadcrumbItems = (): BreadcrumbItem[] => {
     let breadcrumbItems: BreadcrumbItem[] = [];
@@ -40,7 +42,7 @@ const Breadcrumb: React.FC<Props> = () => {
         //nothing
       } else if (index === 3 && item === "suborder") {
         breadcrumbItems.push({
-          name: "edit",
+          name: getServiceName(splittet[4]),
           link:
             splittet[4] === undefined
               ? `/order/${splittet[2]}`

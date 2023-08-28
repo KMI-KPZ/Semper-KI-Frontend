@@ -48,7 +48,7 @@
       "demo":"Demo",
       "admin":"Adminbereich",
       "users":"Benutzer verwalten",
-      "manufacturerSelection":"Herstellerauswahl",
+      "contractorSelection":"Auftragnehmerauswahl",
       "verification":"Überprüfung",
       "registerOrganization":"Organisation registrieren"
     }
@@ -619,7 +619,7 @@
     "StatusView":{
       "state":{
         "draft":"Entwurf",
-        "manufacturerSelected":"Hersteller ausgewählt",
+        "contractorSelected":"Auftragnehmer ausgewählt",
         "verified":"Überprüft",
         "requested":"Angefragt",
         "clarification":"Rückfragen",
@@ -1223,7 +1223,7 @@
       "components":{
         "StateButton":{
           "continue":"Fortsetzen",
-          "selectManufacturer":"Hersteller auswählen",
+          "selectContractor":"Auftragnehmer auswählen",
           "verify":"Überprüfen",
           "request":"Anfragen"
         }

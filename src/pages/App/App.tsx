@@ -6,11 +6,6 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { RequestTest } from "../RequestTest/RequestTest";
-import {
-  AdminOutlet,
-  OrganizationOutlet,
-  UserOutlet,
-} from "./components/Outlet";
 import { UserProps } from "@/hooks/useUser/types";
 import { DeleteEvent, Event } from "@/pages/App/types";
 import { ToastContainer } from "react-toastify";
@@ -43,6 +38,7 @@ import { FilterItemProps } from "../Service/Manufacturing/Filter/Filter";
 import AdminRoutes from "../Routes/Admin";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import AppLoadingSuspense from "./components/LoadingSuspense";
+import { AdminOutlet, OrganizationOutlet, UserOutlet } from "../Outlets/Outlet";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };

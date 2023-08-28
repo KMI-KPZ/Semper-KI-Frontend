@@ -9,6 +9,7 @@ import SubOrder from "../Order/SubOrder/SubOrder";
 import SubOrderManufacturerSelection from "../Order/SubOrder/ManufacturerSelection/ManufacturerSelection";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import SubOrderCheckout from "../Order/SubOrder/Checkout/Checkout";
+import { UserOutlet } from "../Outlets/Outlet";
 
 interface OrderRoutesProps {
   user: UserProps | undefined;
@@ -25,30 +26,32 @@ const OrderRoutes: React.FC<OrderRoutesProps> = (props) => {
         <Route index element={<Order user={user} />} />
         <Route path="suborder">
           <Route index element={<Navigate to="../" />} />
-          <Route
-            path=":subOrderID/checkout"
-            element={
-              <PermissionGate element={"SubOrderCheckout"}>
-                <SubOrderCheckout />
-              </PermissionGate>
-            }
-          />
-          <Route
-            path=":subOrderID/verification"
-            element={
-              <PermissionGate element={"SubOrderVerification"}>
-                <SubOrderVerification />
-              </PermissionGate>
-            }
-          />
-          <Route
-            path=":subOrderID/manufacturerSelection"
-            element={
-              <PermissionGate element={"SubOrderManufacturerSelection"}>
-                <SubOrderManufacturerSelection />
-              </PermissionGate>
-            }
-          />
+          <Route element={<UserOutlet user={user} />}>
+            <Route
+              path=":subOrderID/checkout"
+              element={
+                <PermissionGate element={"SubOrderCheckout"}>
+                  <SubOrderCheckout />
+                </PermissionGate>
+              }
+            />
+            <Route
+              path=":subOrderID/verification"
+              element={
+                <PermissionGate element={"SubOrderVerification"}>
+                  <SubOrderVerification />
+                </PermissionGate>
+              }
+            />
+            <Route
+              path=":subOrderID/contractorSelection"
+              element={
+                <PermissionGate element={"SubOrderContractorSelection"}>
+                  <SubOrderManufacturerSelection />
+                </PermissionGate>
+              }
+            />
+          </Route>
           <Route path=":subOrderID/*" element={<Service />} />
         </Route>
       </Route>

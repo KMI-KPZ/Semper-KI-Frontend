@@ -1,10 +1,15 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { GeneralServiceProps, ServiceProps } from "../Service";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useOrder } from "@/pages/Order/hooks/useOrder";
+import { ServiceManufacturingProps } from "../Manufacturing/types";
+import logger from "@/hooks/useLogger";
+import useSubOrder from "@/pages/Order/SubOrder/hooks/useSubOrder";
 
 interface ReturnProps {
   getService: () => GeneralServiceProps | undefined;
+  isServiceComplete: (subOrderID: string) => boolean;
+  getServiceName: (subOrderID: string) => string;
 }
 
 export enum ServiceType {
@@ -14,16 +19,51 @@ export enum ServiceType {
 }
 
 const useService = (): ReturnProps => {
-  const { orderQuery } = useOrder();
+  const { getCurrentSubOrder } = useSubOrder();
   const { subOrderID } = useParams();
+
   const getService = (): GeneralServiceProps | undefined => {
-    const subOrder = orderQuery.data?.subOrders.find(
-      (subOrder) => subOrder.subOrderID === subOrderID
-    );
-    return subOrder?.service;
+    return getCurrentSubOrder()?.service;
   };
 
-  return { getService };
+  const isServiceComplete = (subOrderID: string): boolean => {
+    const subOrder = getCurrentSubOrder();
+    if (
+      subOrder === undefined ||
+      (subOrder !== undefined && subOrder.service === undefined)
+    )
+      return false;
+    switch (subOrder.service.type) {
+      case ServiceType.MANUFACTURING:
+        const manufacturingService =
+          subOrder.service as ServiceManufacturingProps;
+        return (
+          manufacturingService.model !== undefined &&
+          manufacturingService.material !== undefined &&
+          manufacturingService.postProcessings !== undefined
+        );
+      case ServiceType.MODELING:
+        return false;
+      case ServiceType.UNDEFINED:
+        return false;
+    }
+  };
+
+  const getServiceName = (subOrderID: string): string => {
+    const subOrder = getCurrentSubOrder();
+    if (subOrder === undefined || subOrder.service === undefined)
+      return "service";
+    switch (subOrder.service.type) {
+      case ServiceType.MANUFACTURING:
+        return "manufacturingService";
+      case ServiceType.MODELING:
+        return "modelingService";
+      case ServiceType.UNDEFINED:
+        return "service";
+    }
+  };
+
+  return { getService, isServiceComplete, getServiceName };
 };
 
 export default useService;

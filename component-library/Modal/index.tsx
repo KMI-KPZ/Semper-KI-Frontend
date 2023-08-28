@@ -92,7 +92,7 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
       onAnimationEnd={handleOnAnimEnd}
     >
       <div
-        className={`box-border min-h-[20px] min-w-[20px] p-5 shadow-lg ${className}`}
+        className={`box-border min-h-[20px] min-w-[20px] shadow-lg md:p-5 ${className}`}
         onClick={handleOnClickChildren}
       >
         {noIcon === true ? null : (

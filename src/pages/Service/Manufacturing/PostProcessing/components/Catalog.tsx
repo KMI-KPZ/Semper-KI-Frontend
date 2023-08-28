@@ -63,7 +63,7 @@ const ProcessPostProcessingCatalog = <Item extends PostProcessingProps>(
   };
 
   const handleOnClickCard = () => {
-    navigate("/cart");
+    navigate("../..");
   };
 
   return (

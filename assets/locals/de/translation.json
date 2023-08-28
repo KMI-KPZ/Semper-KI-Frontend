@@ -1159,6 +1159,7 @@
   },
   "order":{
     "overview":{
+      "orga":"Eingegangene Aufträge",
       "title":"Meine Aufträge",
       "draft":"Entwürfe",
       "ongoing":"Laufend",

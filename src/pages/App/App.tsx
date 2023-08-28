@@ -128,7 +128,7 @@ const App: React.FC = () => {
               element={<Legal isMagazineUp={isMagazineUp} />}
             />
             <Route path="demo/*" element={<Navigate to="/order/new" />} />
-            <Route path="orders" element={<Orders />} />
+            <Route path="orders" element={<Orders user={user} />} />
             <Route path="order/*" element={<OrderRoutes user={user} />} />
             <Route element={<UserOutlet user={user} />}>
               <Route path="test" element={<RequestTest socket={socket} />} />

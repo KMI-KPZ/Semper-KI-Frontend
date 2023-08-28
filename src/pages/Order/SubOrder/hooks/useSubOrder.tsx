@@ -11,6 +11,7 @@ import {
   GerneralUpdateServiceProps,
 } from "../../../Service/Service";
 import { OrderState, useOrder } from "@/pages/Order/hooks/useOrder";
+import usePathID from "@/hooks/usePathID";
 
 interface ReturnProps {
   deleteSubOrder: UseMutationResult<string, Error, string, unknown>;
@@ -21,7 +22,7 @@ interface ReturnProps {
     UpdateSubOrderProps,
     unknown
   >;
-  getCurrentSubOrder: () => SubOrderProps | undefined;
+  getCurrentSubOrder: (_subOrderID?: string) => SubOrderProps | undefined;
   updateSubOrderWithSubOrderID: UseMutationResult<
     string,
     Error,
@@ -82,10 +83,15 @@ const useSubOrder = (): ReturnProps => {
   const navigate = useNavigate();
   const { orderQuery } = useOrder();
   const { orderID, subOrderID } = useParams();
+  const { getOrderID, getSubOrderID } = usePathID();
 
-  const getCurrentSubOrder = (): SubOrderProps | undefined => {
+  const getCurrentSubOrder = (
+    _subOrderID?: string
+  ): SubOrderProps | undefined => {
     return orderQuery.data?.subOrders.find(
-      (subOrder) => subOrder.subOrderID === subOrderID
+      (subOrder) =>
+        subOrder.subOrderID ===
+        (_subOrderID === undefined ? subOrderID : _subOrderID)
     );
   };
 

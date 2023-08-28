@@ -20,14 +20,14 @@ export enum ServiceType {
 
 const useService = (): ReturnProps => {
   const { getCurrentSubOrder } = useSubOrder();
-  const { subOrderID } = useParams();
+  const { orderQuery } = useOrder();
 
   const getService = (): GeneralServiceProps | undefined => {
     return getCurrentSubOrder()?.service;
   };
 
   const isServiceComplete = (subOrderID: string): boolean => {
-    const subOrder = getCurrentSubOrder();
+    const subOrder = getCurrentSubOrder(subOrderID);
     if (
       subOrder === undefined ||
       (subOrder !== undefined && subOrder.service === undefined)

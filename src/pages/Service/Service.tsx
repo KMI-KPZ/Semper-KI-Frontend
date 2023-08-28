@@ -11,6 +11,7 @@ import ServiceOverview from "./Overview/Overview";
 import { ServiceModellingProps } from "./Modelling/Modelling";
 import ServiceSelect from "./Select/Select";
 import { useOrder } from "../Order/hooks/useOrder";
+import logger from "@/hooks/useLogger";
 
 export interface ServiceProps {}
 
@@ -34,39 +35,30 @@ const Service: React.FC<ServiceProps> = (props) => {
   const { t } = useTranslation();
 
   const { getService } = useService();
-  const { orderQuery } = useOrder();
   const service: GeneralServiceProps | undefined = getService();
 
-  const renderService = (service: GeneralServiceProps) => {
+  const renderService = (service?: GeneralServiceProps) => {
+    if (
+      service === undefined ||
+      (service !== undefined && service.type === undefined)
+    ) {
+      return <ServiceSelect />;
+    }
     switch (service.type) {
       case ServiceType.MANUFACTURING:
         return <ServiceManufacturing service={service} />;
       case ServiceType.MODELING:
         return <div>Modeling</div>;
+      case ServiceType.UNDEFINED:
+        return <ServiceSelect />;
     }
   };
 
-  const checkForOtherSuborders = (): boolean => {
-    return orderQuery.data !== undefined &&
-      orderQuery.data.subOrders.length === 0
-      ? false
-      : true;
-  };
-  if (service === undefined) {
-    return checkForOtherSuborders() ? (
-      <Navigate to={`../${orderQuery.data?.subOrders[0].subOrderID}`} />
-    ) : (
-      <Navigate to=".." />
-    );
-  }
+  logger("Service", service);
+
   return (
     <div className="flex w-full flex-col-reverse justify-between gap-5 md:flex-row">
-      {service !== undefined &&
-      (service.type === undefined || service.type === ServiceType.UNDEFINED) ? (
-        <ServiceSelect />
-      ) : (
-        renderService(service)
-      )}
+      {renderService(service)}
       <ServiceOverview />
     </div>
   );

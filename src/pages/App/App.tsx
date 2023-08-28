@@ -42,6 +42,7 @@ import OrderRoutes from "../Routes/Order";
 import { FilterItemProps } from "../Service/Manufacturing/Filter/Filter";
 import AdminRoutes from "../Routes/Admin";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
+import AppLoadingSuspense from "./components/LoadingSuspense";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -87,71 +88,16 @@ const App: React.FC = () => {
   const { isMagazineUp } = usePing();
   const { t } = useTranslation();
 
-  const setFilter = (guideFilter: FilterItemProps[]): void => {
-    setState((prevState) => ({ ...prevState, guideFilter }));
-  };
-
-  const adminRoutes = (
-    <Route element={<AdminOutlet user={user} />}>
-      <Route path="admin/*" element={<AdminRoutes />} />
-    </Route>
-  );
-
-  const organizationRoutes = (
-    <Route element={<OrganizationOutlet user={user} />}>
-      <Route
-        path="organization"
-        element={
-          <PermissionGate
-            element="Organization"
-            showMessage
-            children={<Organization />}
-          />
-        }
-      />
-      <Route
-        path="resources/*"
-        element={
-          <PermissionGate
-            children={<Resouces />}
-            element="Resouces"
-            showMessage
-          />
-        }
-      />
-    </Route>
-  );
-
-  const userRoutes = (
-    <Route element={<UserOutlet user={user} />}>
-      <Route path="test" element={<RequestTest socket={socket} />} />
-      <Route path="account" element={<Profile user={user!} />} />
-    </Route>
-  );
-
-  if (
+  const showLoadingSuspense = (): boolean =>
     isLoggedInResponse === false ||
     (isLoggedIn === true &&
       (user === undefined ||
         permissionGates === undefined ||
-        permissions === undefined))
-  ) {
-    const rootElement = document.getElementById("root");
-    if (rootElement) {
-      rootElement.style.overflow = "hidden";
-    }
-    return (
-      <div
-        data-testid="loadingSuspense"
-        className="flex h-screen w-screen flex-col items-center justify-center gap-5 overflow-clip bg-white"
-      >
-        <Heading variant="h1">{t("App.title")}</Heading>
-        <Heading variant="h2">{t("App.loading")}</Heading>
-      </div>
-    );
-  }
+        permissions === undefined));
 
-  return (
+  return showLoadingSuspense() ? (
+    <AppLoadingSuspense />
+  ) : (
     <AppContext.Provider
       value={{
         appState: state,
@@ -188,9 +134,35 @@ const App: React.FC = () => {
             <Route path="demo/*" element={<Navigate to="/order/new" />} />
             <Route path="orders" element={<Orders />} />
             <Route path="order/*" element={<OrderRoutes user={user} />} />
-            {userRoutes}
-            {organizationRoutes}
-            {adminRoutes}
+            <Route element={<UserOutlet user={user} />}>
+              <Route path="test" element={<RequestTest socket={socket} />} />
+              <Route path="account" element={<Profile user={user!} />} />
+            </Route>
+            <Route element={<OrganizationOutlet user={user} />}>
+              <Route
+                path="organization"
+                element={
+                  <PermissionGate
+                    element="Organization"
+                    showMessage
+                    children={<Organization />}
+                  />
+                }
+              />
+              <Route
+                path="resources/*"
+                element={
+                  <PermissionGate
+                    children={<Resouces />}
+                    element="Resouces"
+                    showMessage
+                  />
+                }
+              />
+            </Route>
+            <Route element={<AdminOutlet user={user} />}>
+              <Route path="admin/*" element={<AdminRoutes />} />
+            </Route>
             <Route path="*" element={<Error />} />
           </Routes>
         </main>

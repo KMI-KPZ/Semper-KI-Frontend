@@ -42,7 +42,7 @@ const useAdmin = (): ReturnProps => {
     queryKey: ["admin"],
     queryFn: async () =>
       getCustomAxios()
-        .get(`${import.meta.env.VITE_HTTP_API_URL}/public/admin/getAll/`)
+        .get(`${process.env.VITE_HTTP_API_URL}/public/admin/getAll/`)
         .then((res) => {
           logger("useAdmin | adminQuery ✅ |", res.data);
           return res.data;
@@ -51,9 +51,7 @@ const useAdmin = (): ReturnProps => {
 
   const deleteUser = useMutation<any, Error, DeleteUserProps>({
     mutationFn: async ({ hashedID, name }) => {
-      const url = `${
-        import.meta.env.VITE_HTTP_API_URL
-      }/public/admin/deleteUser/`;
+      const url = `${process.env.VITE_HTTP_API_URL}/public/admin/deleteUser/`;
       return getCustomAxios()
         .delete(url, {
           data: {
@@ -73,9 +71,7 @@ const useAdmin = (): ReturnProps => {
 
   const deleteOrganization = useMutation<any, Error, DeleteUserProps>({
     mutationFn: async ({ hashedID, name }) => {
-      const url = `${
-        import.meta.env.VITE_HTTP_API_URL
-      }/public/admin/deleteOrganization/`;
+      const url = `${process.env.VITE_HTTP_API_URL}/public/admin/deleteOrganization/`;
       return getCustomAxios()
         .delete(url, {
           data: {

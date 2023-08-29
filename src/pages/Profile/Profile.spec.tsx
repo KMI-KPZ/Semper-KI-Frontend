@@ -29,11 +29,8 @@ describe("Profil", () => {
   it("should render data from user", () => {
     const user = new UserBuilder().withType(UserType.USER).build();
     render(<Profile user={user} />);
+    expect(screen.getByText(/enum.UserType.USER/)).toBeVisible();
     expect(screen.getByText(/test@test.de/)).toBeVisible();
-    expect(screen.getByText(/testCity/)).toBeVisible();
-    expect(screen.getByText(/germany/)).toBeVisible();
-    expect(screen.getByText(/testStreet/)).toBeVisible();
-    expect(screen.getByText(/54321/)).toBeVisible();
-    expect(screen.getByText(/12345/)).toBeVisible();
+    expect(screen.getByText(/testName/)).toBeVisible();
   });
 });

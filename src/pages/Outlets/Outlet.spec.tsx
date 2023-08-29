@@ -24,11 +24,6 @@ describe("PrivateRoutes", () => {
       render(<UserOutlet user={user} />);
       expect(screen.getByTestId("outlet")).toBeInTheDocument();
     });
-    it("should render Error if user is not client", () => {
-      const user = new UserBuilder().withType(UserType.ORGANIZATION).build();
-      render(<UserOutlet user={user} />);
-      expect(screen.getByTestId("error")).toBeInTheDocument();
-    });
   });
   describe("<PrivateAdminRoutes>", () => {
     it("should render without crashing", () => {

@@ -97,11 +97,11 @@ describe("Utils", () => {
   });
   describe("Test getUserType", () => {
     it("should return client", () => {
-      const value = getUserType("client");
+      const value = getUserType("user");
       expect(value).toBe(0);
     });
     it("should return manufacturer", () => {
-      const value = getUserType("manufacturer");
+      const value = getUserType("organization");
       expect(value).toBe(1);
     });
     it("should return admin", () => {

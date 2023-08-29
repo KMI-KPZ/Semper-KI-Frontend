@@ -1,10 +1,8 @@
 import { render } from "@test/render";
 import App, { AppState } from "./App";
 import useUser from "@/hooks/useUser";
-import usePermissions from "@/hooks/usePermissions";
 import { UserBuilder } from "@test/builder";
 import { UserType } from "@/hooks/useUser/types";
-import { Dispatch, SetStateAction } from "react";
 
 describe("<App>", () => {
   it("should render without crashing", () => {

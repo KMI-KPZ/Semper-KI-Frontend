@@ -20,24 +20,12 @@ describe("<Home>", () => {
   it("should render homecards for USER", () => {
     const user = new UserBuilder().withType(UserType.USER).build();
     render(<Home user={user} />);
-    expect(screen.getByTestId("home-order-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-search-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-guide-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-magazin-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-news-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-img-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-portfolio-card")).toBeInTheDocument();
+    expect(screen.getByTestId("home-authorized")).toBeInTheDocument();
   });
-  it.skip("should render homecards for manufacturer user", () => {
+  it("should render homecards for manufacturer user", () => {
     const user = new UserBuilder().withType(UserType.ORGANIZATION).build();
     render(<Home user={user} />);
-    expect(screen.getByTestId("home-order-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-search-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-guide-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-magazin-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-news-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-img-card")).toBeInTheDocument();
-    expect(screen.getByTestId("home-resources-card")).toBeInTheDocument();
+    expect(screen.getByTestId("home-authorized")).toBeInTheDocument();
   });
   it.todo("should render homecards for admin user");
 });

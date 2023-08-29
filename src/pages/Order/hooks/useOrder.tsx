@@ -35,6 +35,7 @@ export interface UpdateOrderProps {
 export enum OrderState {
   "DRAFT" = 0,
   "CONTRACTOR_SELECTED" = 100,
+  // "VERIFYING" = 150,
   "VERIFIED" = 200,
   "REQUESTED" = 300,
   "CLARIFICATION" = 400,

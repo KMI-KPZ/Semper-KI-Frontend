@@ -63,6 +63,7 @@ export interface UpdateSubOrderProps {
 }
 
 export interface SubOrderChangesProps {
+  contractor?: string[];
   chat?: ChatMessageProps;
   state?: OrderState;
   files?: File[];

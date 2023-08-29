@@ -26,11 +26,14 @@ const useService = (): ReturnProps => {
     return getCurrentSubOrder()?.service;
   };
 
-  const isServiceComplete = (subOrderID: string): boolean => {
+  const isServiceReady = (subOrderID: string): boolean => {
     const subOrder = getCurrentSubOrder(subOrderID);
     if (
       subOrder === undefined ||
-      (subOrder !== undefined && subOrder.service === undefined)
+      (subOrder !== undefined && subOrder.service === undefined) ||
+      (subOrder !== undefined &&
+        subOrder.service !== undefined &&
+        subOrder.service.type === undefined)
     )
       return false;
     switch (subOrder.service.type) {
@@ -63,7 +66,7 @@ const useService = (): ReturnProps => {
     }
   };
 
-  return { getService, isServiceComplete, getServiceName };
+  return { getService, isServiceComplete: isServiceReady, getServiceName };
 };
 
 export default useService;

@@ -144,7 +144,8 @@
       "Checkout": {
         "title":"Auftrag überprüfen",
         "button":{
-          "request":"Anfragen",
+          "verify":"Überprüfen",
+          "request":"Überprüfen & Anfragen",
           "printable":"Druckbarkeit überprüfen",
           "logistics":"Lieferzeit berechnen",
           "price":"Preis berechnen"
@@ -157,7 +158,7 @@
           "redirect":"Sie werden nun zu Startseite weitergeleitet"
         }
       },
-      "CheckoutItem":{
+      "Item":{
         "printable":"Druckbarkeit",
         "logistics":"Lieferzeit",
         "price":"Preis"
@@ -168,11 +169,15 @@
         "header":"Verfügbare Hersteller:"
       },
       "ManufacturerView":{
+
         "header":"Hersteller auswählen",
         "noManufacturerSelected":"Bitte bei jedem Item einen Hersteller auswählen!",
         "button":{
-          "cart":"Warenkorb",
+          "overview":"Auftragsdetails",
           "checkOrder":"Auftrag überprüfen"
+        },
+        "error":{
+          "missing":"Bitte mindestens eine Option auswählen"
         }
       }
     }
@@ -620,6 +625,7 @@
       "state":{
         "draft":"Entwurf",
         "contractorSelected":"Auftragnehmer ausgewählt",
+        "verifying":"Überprüfung läuft",
         "verified":"Überprüft",
         "requested":"Angefragt",
         "clarification":"Rückfragen",

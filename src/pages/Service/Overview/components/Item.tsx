@@ -58,7 +58,9 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    deleteSubOrder.mutate(subOrder.subOrderID);
+    if (window.confirm(t("Orders.OrderView.confirm.cancel"))) {
+      deleteSubOrder.mutate(subOrder.subOrderID);
+    }
   };
 
   const handleOnClickEditCheckButton = (

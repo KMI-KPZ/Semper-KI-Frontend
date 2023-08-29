@@ -1,10 +1,14 @@
 import { getCustomAxios } from "@/hooks/useCustomAxios";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { IManufacturer } from "../ManufacturerSelection";
 import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
   manufacturerQuery: UseQueryResult<IManufacturer[], Error>;
+}
+
+export interface IManufacturer {
+  name: string;
+  id: string;
 }
 
 const useManufacturer = (): ReturnProps => {

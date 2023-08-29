@@ -4,11 +4,10 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Order from "../Order/Order";
 import Service from "../Service/Service";
-import SubOrderVerification from "../Order/SubOrder/Verification/Verification";
-import SubOrder from "../Order/SubOrder/SubOrder";
-import SubOrderManufacturerSelection from "../Order/SubOrder/ManufacturerSelection/ManufacturerSelection";
+import SubOrderVerification from "../Order/Verification/Verification";
+import OrderContractorSelection from "../Order/ContractorSelection/ContractorSelection";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import SubOrderCheckout from "../Order/SubOrder/Checkout/Checkout";
+import SubOrderCheckout from "../Order/Checkout/Checkout";
 import { UserOutlet } from "../Outlets/Outlet";
 
 interface OrderRoutesProps {
@@ -24,6 +23,16 @@ const OrderRoutes: React.FC<OrderRoutesProps> = (props) => {
       <Route index element={<Navigate to="/orders" />} />
       <Route path=":orderID/*">
         <Route index element={<Order user={user} />} />
+        <Route element={<UserOutlet user={user} />}>
+          <Route
+            path="contractorSelection"
+            element={
+              <PermissionGate element={"SubOrderContractorSelection"}>
+                <OrderContractorSelection />
+              </PermissionGate>
+            }
+          />
+        </Route>
         <Route path="suborder">
           <Route index element={<Navigate to="../" />} />
           <Route element={<UserOutlet user={user} />}>
@@ -47,7 +56,7 @@ const OrderRoutes: React.FC<OrderRoutesProps> = (props) => {
               path=":subOrderID/contractorSelection"
               element={
                 <PermissionGate element={"SubOrderContractorSelection"}>
-                  <SubOrderManufacturerSelection />
+                  <OrderContractorSelection />
                 </PermissionGate>
               }
             />

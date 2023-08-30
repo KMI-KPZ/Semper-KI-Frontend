@@ -3,11 +3,19 @@ import { useTranslation } from "react-i18next";
 import SubOrder from "./SubOrder/SubOrder";
 import { UserProps, UserType } from "@/hooks/useUser/types";
 import { OrderEvent, OrderEventItem } from "@/pages/App/types";
-import { Heading } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/Typography";
 import { useNavigate } from "react-router-dom";
-import { LoadingAnimation, LoadingSuspense } from "@component-library/index";
+import {
+  Button,
+  Divider,
+  LoadingAnimation,
+  LoadingSuspense,
+} from "@component-library/index";
 import OrderButtons from "./components/Buttons";
 import { OrderProps, OrderState, useOrder } from "./hooks/useOrder";
+import Container from "@component-library/Container";
+import CancelIcon from "@mui/icons-material/Cancel";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface Props {
   user: UserProps | undefined;
@@ -41,21 +49,48 @@ const Order: React.FC<Props> = (props) => {
         <LoadingAnimation />
       ) : (
         <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
-          <div className="flex w-full flex-col items-start justify-start gap-5 md:flex-row md:items-center md:justify-between">
-            <Heading variant="h2" className="break-all">
-              {t("Orders.OrderCollection.id")}: {order.orderID}
-            </Heading>
+          <Container width="full" justify="between" align="start">
+            <Container direction="col" align="start">
+              <Heading variant="h2" className="break-all">
+                {t("Orders.OrderCollection.id")}: {order.orderID}
+              </Heading>
+              <Heading variant="h2">
+                {t("Orders.OrderCollection.state.header")}
+                {": "}
+                {t(`Orders.OrderCollection.state.${OrderState[order.state]}`)}
+              </Heading>
+              <Heading variant="h2">
+                {t("Orders.OrderCollection.date")}:{" "}
+                {new Date(order.created).toLocaleString()}
+              </Heading>
+            </Container>
+            <Container>
+              <PermissionGate element={"OrderButtonDelete"}>
+                <Button
+                  size="sm"
+                  startIcon={<CancelIcon />}
+                  title={t("Orders.OrderCollection.button.cancel")}
+                />
+              </PermissionGate>
+            </Container>
+          </Container>
+          <Divider />
+          <Container width="full" justify="between">
             <Heading variant="h2">
-              {t("Orders.OrderCollection.state.header")}
-              {": "}
-              {t(`Orders.OrderCollection.state.${OrderState[order.state]}`)}
+              {t("Orders.OrderCollection.subOrders")}
+              {":"}
             </Heading>
-            <Heading variant="h2">
-              {t("Orders.OrderCollection.date")}:{" "}
-              {new Date(order.created).toLocaleString()}
-            </Heading>
-          </div>
-          <OrderButtons order={order} user={user} />
+            <OrderButtons order={order} user={user} />
+          </Container>
+          <Container justify="between" width="full">
+            <label className="flex flex-row items-center justify-start gap-3">
+              <input type="checkbox" className="h-8 w-8" />
+              <Text variant="body" className="whitespace-nowrap">
+                {t("Orders.OrderCollection.selectAll")}
+              </Text>
+            </label>
+          </Container>
+
           {order.subOrders.length === 0 ? (
             <Heading variant="h2">
               {t("Orders.OrderCollection.noSubOrders")}

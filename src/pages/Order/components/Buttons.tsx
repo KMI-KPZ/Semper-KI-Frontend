@@ -17,6 +17,7 @@ import useSubOrder from "../SubOrder/hooks/useSubOrder";
 import { Divider } from "@component-library/Divider";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { OrderProps, OrderState, useOrder } from "../hooks/useOrder";
+import { Text } from "@component-library/Typography";
 
 interface OrderButtonsProps {
   order: OrderProps;
@@ -78,7 +79,7 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
   const renderClientButtons = () => {
     return (
       <>
-        {order.state < OrderState.REQUESTED ? (
+        {/* {order.state < OrderState.REQUESTED ? (
           <PermissionGate element={"OrderButtonEdit"}>
             <Button
               size="sm"
@@ -87,8 +88,8 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
               onClick={handleOnClickButtonDelete}
             />
           </PermissionGate>
-        ) : null}
-        {order.state === OrderState.REQUESTED ? (
+        ) : null} */}
+        {/* {order.state === OrderState.REQUESTED ? (
           <PermissionGate element={"OrderButtonDelete"}>
             <Button
               size="sm"
@@ -96,7 +97,7 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
               title={t("Orders.OrderCollection.button.cancel")}
             />
           </PermissionGate>
-        ) : null}
+        ) : null} */}
         {order.state < OrderState.REQUESTED ? (
           <PermissionGate element={"OrderButtonNew"}>
             <Button
@@ -191,14 +192,12 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
-      <Divider className="hidden md:block" />
       {user === undefined ? renderClientButtons() : null}
       {user !== undefined &&
       (user.organizations.includes(order.client) ||
         user.hashedID === order.client)
         ? renderClientButtons()
         : renderContractorButtons()}
-      <Divider className="hidden md:block" />
     </div>
   );
 };

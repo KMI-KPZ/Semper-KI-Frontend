@@ -7,6 +7,7 @@ import SendIcon from "@mui/icons-material/Send";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { OrderState } from "@/pages/Order/hooks/useOrder";
 import useService from "@/pages/Service/hooks/useService";
+import EditIcon from "@mui/icons-material/Edit";
 
 interface SubOrderStateButtonProps {
   subOrderID: string;
@@ -22,9 +23,14 @@ const SubOrderStateButton: React.FC<SubOrderStateButtonProps> = (props) => {
     if (state === OrderState.DRAFT)
       return (
         <>
-          <Button
+          {/* <Button
             startIcon={<PlayArrowIcon />}
             title={t("OrderRoutes.SubOrder.components.StateButton.continue")}
+            to={`suborder/${subOrderID}`}
+          /> */}
+          <Button
+            startIcon={<EditIcon />}
+            title={t("OrderRoutes.SubOrder.components.StateButton.edit")}
             to={`suborder/${subOrderID}`}
           />
           <Button

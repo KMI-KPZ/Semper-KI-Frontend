@@ -32,6 +32,22 @@ const OrderRoutes: React.FC<OrderRoutesProps> = (props) => {
               </PermissionGate>
             }
           />
+          <Route
+            path="checkout"
+            element={
+              <PermissionGate element={"SubOrderCheckout"}>
+                <SubOrderCheckout />
+              </PermissionGate>
+            }
+          />
+          <Route
+            path="verification"
+            element={
+              <PermissionGate element={"SubOrderVerification"}>
+                <SubOrderVerification />
+              </PermissionGate>
+            }
+          />
         </Route>
         <Route path="suborder">
           <Route index element={<Navigate to="../" />} />

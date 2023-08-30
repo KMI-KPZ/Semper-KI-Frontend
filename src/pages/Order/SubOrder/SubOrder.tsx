@@ -23,6 +23,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import { OrderState } from "../hooks/useOrder";
 
+import InfoIcon from "@mui/icons-material/Info";
+import SubOrderInfo from "./components/Info";
+
 interface Props {
   subOrder: SubOrderProps;
   orderID: string;
@@ -32,6 +35,7 @@ interface Props {
 
 interface State {
   chatOpen: boolean;
+  infoOpen: boolean;
 }
 
 const SubOrder: React.FC<Props> = (props) => {
@@ -39,6 +43,7 @@ const SubOrder: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const [state, setState] = useState<State>({
     chatOpen: false,
+    infoOpen: false,
   });
   const inputText: string = getTitleFromSubOrder(subOrder, t);
   const [nameState, setNameState] = useState<{
@@ -108,10 +113,22 @@ const SubOrder: React.FC<Props> = (props) => {
     }));
   };
 
+  const handleOnClickButtonInfo = () => {
+    setState((prevState) => ({ ...prevState, infoOpen: true }));
+  };
+
+  const handleOnOutsideClickInfo = () => {
+    setState((prevState) => ({
+      ...prevState,
+      infoOpen: false,
+    }));
+  };
+
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 p-5 shadow-card  md:items-start">
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row lg:justify-between">
         <div className="flex flex-col items-center justify-center gap-2 md:flex-row">
+          <input type="checkbox" className="h-8 w-8" />
           {nameState.edit === true ? (
             <>
               <Heading variant="h3" className="md:whitespace-nowrap">
@@ -145,6 +162,13 @@ const SubOrder: React.FC<Props> = (props) => {
         </div>
         <Divider className="hidden md:block" />
         <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:flex-nowrap">
+          <Button
+            width="fit"
+            size="sm"
+            children={<InfoIcon />}
+            onClick={handleOnClickButtonInfo}
+            title={t("Orders.OrderView.button.info")}
+          />
           {user !== undefined ? (
             <PermissionGate element="SubOrderButtonChat">
               {orderEvent !== undefined &&
@@ -178,15 +202,6 @@ const SubOrder: React.FC<Props> = (props) => {
           />
         </div>
       </div>
-      <div className="flex w-full flex-col items-start justify-start gap-5 md:flex-row md:flex-wrap md:justify-between">
-        <Text variant="body" className="break-all">
-          {t("Orders.OrderView.id")} {subOrder.subOrderID}
-        </Text>
-        <Text variant="body">
-          {t("Orders.OrderView.created")}{" "}
-          {new Date(subOrder.created).toLocaleDateString()}
-        </Text>
-      </div>
       <StatusBar state={subOrder.state} serviceType={subOrder.service.type} />
       <SubOrderNextStepButton
         state={subOrder.state}
@@ -214,6 +229,13 @@ const SubOrder: React.FC<Props> = (props) => {
           />
         </Modal>
       </PermissionGate>
+      <Modal
+        open={state.infoOpen}
+        closeModal={handleOnOutsideClickInfo}
+        className="flex w-full flex-col"
+      >
+        <SubOrderInfo subOrder={subOrder} />
+      </Modal>
     </div>
   );
 };

@@ -541,9 +541,11 @@
       }
     },
     "OrderCollection":{
+      "subOrders":"Teilaufträge",
       "id":"AuftragsID",
       "date":"Datum",
       "noSubOrders":"Keine Teilaufträge vorhanden",
+      "selectAll":"Alle auswählen",
       "button":{
         "new":"Neuer Teilauftrag",
         "manufacturer":"Herstellerauswahl",
@@ -598,10 +600,12 @@
       "name":"Name:",
       "id":"TeilauftragsID:",
       "created":"Erstellt am:",
+      "updated":"Aktualisiert am:",
       "service":"Service:",
       "status":"Status:",
       "postProcessing":"Nachbearbeitung",
       "button":{
+        "info":"Informationen",
         "editName":"Name ändern",
         "cancel":"Stornieren",
         "reOrder":"erneut Bestellen",
@@ -1229,7 +1233,8 @@
     "SubOrder":{
       "components":{
         "StateButton":{
-          "continue":"Fortsetzen",
+          "edit":"Bearbeiten",
+          "continue":"Service Fortsetzen",
           "selectContractor":"Auftragnehmer auswählen",
           "verify":"Überprüfen",
           "request":"Anfragen"

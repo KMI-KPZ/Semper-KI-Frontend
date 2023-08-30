@@ -3,7 +3,7 @@ import useSubOrder, {
   SubOrderProps,
 } from "@/pages/Order/SubOrder/hooks/useSubOrder";
 import { Button } from "@component-library/Button";
-import React from "react";
+import React, { Dispatch, SetStateAction, useContext } from "react";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -17,18 +17,29 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { OrderState } from "@/pages/Order/hooks/useOrder";
 import SubOrderService from "../Service/Service";
 import useService from "@/pages/Service/hooks/useService";
+import { SubOrderState } from "../SubOrder";
+import { AppContext } from "@/pages/App/App";
+import InfoIcon from "@mui/icons-material/Info";
+import useOrderEventChange from "../../hooks/useOrderEventChange";
+import { OrderEventItem } from "@/pages/App/types";
+import { Badge } from "@component-library/Badge";
+import MailIcon from "@mui/icons-material/Mail";
 
 interface SubOrderActionButtonsProps {
   user: UserProps | undefined;
   orderID: string;
   subOrder: SubOrderProps;
   updateStatus: (status: OrderState) => void;
+  setState: Dispatch<SetStateAction<SubOrderState>>;
+  orderEvent?: OrderEventItem;
 }
 
 const SubOrderActionButtons: React.FC<SubOrderActionButtonsProps> = (props) => {
-  const { orderID, subOrder, user, updateStatus } = props;
+  const { orderID, subOrder, user, updateStatus, setState, orderEvent } = props;
   const { t } = useTranslation();
+  const { deleteEvent } = useContext(AppContext);
   const { deleteSubOrder, updateSubOrderWithSubOrderID } = useSubOrder();
+  const { getDeleteOrderEvent } = useOrderEventChange(subOrder, orderID, true); // todo: check if this is correct
 
   const handleOnClickButtonCancel = () => {
     if (window.confirm(t("Orders.OrderView.confirm.cancel"))) {
@@ -56,8 +67,55 @@ const SubOrderActionButtons: React.FC<SubOrderActionButtonsProps> = (props) => {
     // }
   };
 
+  const handleOnClickButtonChat = () => {
+    deleteEvent(getDeleteOrderEvent("message"));
+    setState((prevState) => ({ ...prevState, chatOpen: true }));
+  };
+
+  const closeMenu = () => {
+    setState((prevState) => ({
+      ...prevState,
+      chatOpen: false,
+    }));
+  };
+  const handleOnClickButtonInfo = () => {
+    setState((prevState) => ({ ...prevState, infoOpen: true }));
+  };
+
   return (
-    <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:w-fit md:flex-nowrap">
+    <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:flex-nowrap">
+      <Button
+        width="fit"
+        size="sm"
+        children={<InfoIcon />}
+        onClick={handleOnClickButtonInfo}
+        title={t("Orders.OrderView.button.info")}
+      />
+      {user !== undefined ? (
+        <PermissionGate element="SubOrderButtonChat">
+          {orderEvent !== undefined &&
+          orderEvent.messages !== undefined &&
+          orderEvent.messages > 0 ? (
+            <Badge count={orderEvent.messages}>
+              <Button
+                width="fit"
+                size="sm"
+                children={<MailIcon />}
+                onClick={handleOnClickButtonChat}
+                title={t("Orders.OrderView.button.chat")}
+              />
+            </Badge>
+          ) : (
+            <Button
+              width="fit"
+              size="sm"
+              children={<MailIcon />}
+              onClick={handleOnClickButtonChat}
+              title={t("Orders.OrderView.button.chat")}
+            />
+          )}
+        </PermissionGate>
+      ) : null}
       {subOrder.state <= OrderState.REQUESTED ? (
         <PermissionGate element="SubOrderButtonDelete">
           <Button

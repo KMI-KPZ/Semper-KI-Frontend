@@ -9,6 +9,8 @@ import { Divider } from "@component-library/Divider";
 import { useNavigate } from "react-router-dom";
 import useSubOrder from "@/pages/Order/SubOrder/hooks/useSubOrder";
 import ServiceSelect from "@/pages/Service/Select/Select";
+import { Button } from "@component-library/Button";
+import EditIcon from "@mui/icons-material/Edit";
 
 interface SubOrderServiceProps {
   service: GeneralServiceProps;
@@ -54,6 +56,11 @@ const SubOrderService: React.FC<SubOrderServiceProps> = (props) => {
           {t(`OrderRoutes.Service.type.${ServiceType[service.type]}`)}
         </Heading>
         <Divider className="mt-[0.3rem] hidden md:block" />
+        <Button
+          children={<EditIcon />}
+          title={t("OrderRoutes.SubOrder.components.StateButton.edit")}
+          to={`suborder/${subOrderID}`}
+        />
       </div>
       {renderService()}
     </div>

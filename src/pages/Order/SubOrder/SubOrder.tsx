@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Button } from "@component-library/Button";
-import MailIcon from "@mui/icons-material/Mail";
+
 import Chat from "./components/Chat";
 import StatusBar from "./StatusBar/StatusBar";
 import { useTranslation } from "react-i18next";
@@ -22,8 +22,6 @@ import SubOrderActionButtons from "./components/ActionButtons";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import { OrderState } from "../hooks/useOrder";
-
-import InfoIcon from "@mui/icons-material/Info";
 import SubOrderInfo from "./components/Info";
 
 interface Props {
@@ -33,7 +31,7 @@ interface Props {
   orderEvent?: OrderEventItem;
 }
 
-interface State {
+export interface SubOrderState {
   chatOpen: boolean;
   infoOpen: boolean;
 }
@@ -41,7 +39,7 @@ interface State {
 const SubOrder: React.FC<Props> = (props) => {
   const { subOrder, orderID, user, orderEvent } = props;
   const { t } = useTranslation();
-  const [state, setState] = useState<State>({
+  const [state, setState] = useState<SubOrderState>({
     chatOpen: false,
     infoOpen: false,
   });
@@ -53,29 +51,9 @@ const SubOrder: React.FC<Props> = (props) => {
     edit: false,
     titleText: "",
   });
-  const { chatOpen } = state;
-  const { deleteEvent } = useContext(AppContext);
-  const { deleteSubOrder, updateSubOrderWithSubOrderID } = useSubOrder();
-  const { getDeleteOrderEvent } = useOrderEventChange(
-    subOrder,
-    orderID,
-    chatOpen
-  );
 
-  const handleOnClickButtonChat = () => {
-    deleteEvent(getDeleteOrderEvent("message"));
-    setState((prevState) => ({ ...prevState, chatOpen: true }));
-  };
+  const { updateSubOrderWithSubOrderID } = useSubOrder();
 
-  const handleOnOutsideClickChat = () => {
-    closeMenu();
-  };
-  const closeMenu = () => {
-    setState((prevState) => ({
-      ...prevState,
-      chatOpen: false,
-    }));
-  };
   const updateStatus = (status: OrderState) => {
     // updateOrder.mutate({
     //   orderCollectionID: orderID,
@@ -113,11 +91,13 @@ const SubOrder: React.FC<Props> = (props) => {
     }));
   };
 
-  const handleOnClickButtonInfo = () => {
-    setState((prevState) => ({ ...prevState, infoOpen: true }));
+  const closeChat = () => {
+    setState((prevState) => ({
+      ...prevState,
+      chatOpen: false,
+    }));
   };
-
-  const handleOnOutsideClickInfo = () => {
+  const closeInfo = () => {
     setState((prevState) => ({
       ...prevState,
       infoOpen: false,
@@ -129,11 +109,11 @@ const SubOrder: React.FC<Props> = (props) => {
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row lg:justify-between">
         <div className="flex flex-col items-center justify-center gap-2 md:flex-row">
           <input type="checkbox" className="h-8 w-8" />
+          <Heading variant="h3" className="md:whitespace-nowrap">
+            {t("Orders.OrderView.name")}
+          </Heading>
           {nameState.edit === true ? (
             <>
-              <Heading variant="h3" className="md:whitespace-nowrap">
-                {t("Orders.OrderView.name")}
-              </Heading>
               <input
                 type="text"
                 value={nameState.titleText}
@@ -143,7 +123,7 @@ const SubOrder: React.FC<Props> = (props) => {
             </>
           ) : (
             <Heading variant="h3" className="md:whitespace-nowrap">
-              {t("Orders.OrderView.name")} {getTitleFromSubOrder(subOrder, t)}
+              {getTitleFromSubOrder(subOrder, t)}
             </Heading>
           )}
           <Button
@@ -161,52 +141,16 @@ const SubOrder: React.FC<Props> = (props) => {
           />
         </div>
         <Divider className="hidden md:block" />
-        <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:flex-nowrap">
-          <Button
-            width="fit"
-            size="sm"
-            children={<InfoIcon />}
-            onClick={handleOnClickButtonInfo}
-            title={t("Orders.OrderView.button.info")}
-          />
-          {user !== undefined ? (
-            <PermissionGate element="SubOrderButtonChat">
-              {orderEvent !== undefined &&
-              orderEvent.messages !== undefined &&
-              orderEvent.messages > 0 ? (
-                <Badge count={orderEvent.messages}>
-                  <Button
-                    width="fit"
-                    size="sm"
-                    children={<MailIcon />}
-                    onClick={handleOnClickButtonChat}
-                    title={t("Orders.OrderView.button.chat")}
-                  />
-                </Badge>
-              ) : (
-                <Button
-                  width="fit"
-                  size="sm"
-                  children={<MailIcon />}
-                  onClick={handleOnClickButtonChat}
-                  title={t("Orders.OrderView.button.chat")}
-                />
-              )}
-            </PermissionGate>
-          ) : null}
-          <SubOrderActionButtons
-            orderID={orderID}
-            subOrder={subOrder}
-            updateStatus={updateStatus}
-            user={user}
-          />
-        </div>
+        <SubOrderActionButtons
+          setState={setState}
+          orderID={orderID}
+          subOrder={subOrder}
+          updateStatus={updateStatus}
+          user={user}
+          orderEvent={orderEvent}
+        />
       </div>
       <StatusBar state={subOrder.state} serviceType={subOrder.service.type} />
-      <SubOrderNextStepButton
-        state={subOrder.state}
-        subOrderID={subOrder.subOrderID}
-      />
       <SubOrderService
         service={subOrder.service}
         subOrderID={subOrder.subOrderID}
@@ -216,14 +160,14 @@ const SubOrder: React.FC<Props> = (props) => {
       </PermissionGate>
       <PermissionGate element="Chat">
         <Modal
-          open={chatOpen}
-          closeModal={handleOnOutsideClickChat}
+          open={state.chatOpen}
+          closeModal={closeChat}
           className="flex w-full flex-col"
         >
           <Chat
             chat={subOrder.chat.messages}
             user={user}
-            closeMenu={closeMenu}
+            closeMenu={closeChat}
             orderID={orderID}
             subOrderID={subOrder.subOrderID}
           />
@@ -231,7 +175,7 @@ const SubOrder: React.FC<Props> = (props) => {
       </PermissionGate>
       <Modal
         open={state.infoOpen}
-        closeModal={handleOnOutsideClickInfo}
+        closeModal={closeInfo}
         className="flex w-full flex-col"
       >
         <SubOrderInfo subOrder={subOrder} />

@@ -98,7 +98,10 @@ const StatusBar: React.FC<StatusViewProps> = (props) => {
           <Fragment key={index}>
             <StatusItem item={item} state={state} />
             {index < getItems().length - 1 ? (
-              <StatusItemConnector active={state > item.itemOrderState} />
+              <StatusItemConnector
+                active={state >= item.itemOrderState}
+                ongoging={state === item.itemOrderState}
+              />
             ) : null}
           </Fragment>
         ))}

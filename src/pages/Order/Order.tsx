@@ -146,16 +146,25 @@ const Order: React.FC<Props> = (props) => {
             </PermissionGate>
           </Container>
           <Container justify="between" width="full">
-            <label className="flex flex-row items-center justify-start gap-3">
-              <input
-                type="checkbox"
-                className="h-8 w-8"
-                onChange={handleOnChangeCheckboxSelectAll}
-              />
-              <Text variant="body" className="whitespace-nowrap">
-                {t("Orders.OrderCollection.selectAll")}
-              </Text>
-            </label>
+            <Container direction="row" wrap="wrap">
+              <label className="flex flex-row items-center justify-start gap-3">
+                <input
+                  type="checkbox"
+                  className="h-8 w-8"
+                  onChange={handleOnChangeCheckboxSelectAll}
+                />
+                <Text variant="body" className="whitespace-nowrap">
+                  {t("Orders.OrderCollection.selectAll")}
+                </Text>
+              </label>
+              {checkedSubOrders.length > 0 ? (
+                <Text variant="body" className="whitespace-nowrap">
+                  {t("Orders.OrderCollection.selected", {
+                    count: checkedSubOrders.length,
+                  })}
+                </Text>
+              ) : null}
+            </Container>
             <OrderButtons
               order={order}
               user={user}

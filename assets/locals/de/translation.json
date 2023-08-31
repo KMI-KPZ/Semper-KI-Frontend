@@ -541,6 +541,7 @@
       }
     },
     "OrderCollection":{
+      "selected":"{{count}} Ausgewählt",
       "subOrders":"Teilaufträge",
       "id":"AuftragsID",
       "date":"Datum",

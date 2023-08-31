@@ -108,7 +108,7 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
   const { user, order, checkedSubOrders } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { createSubOrder, deleteSubOrder } = useSubOrder();
+  const { deleteSubOrder } = useSubOrder();
 
   const showClientButton = (): boolean =>
     user === undefined ||
@@ -133,12 +133,17 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
     );
   };
 
+  const getCountOfSelectedSubOrders = (button: OrderButtonProps): number => {
+    return order.subOrders.filter((subOrder) =>
+      checkedSubOrders.includes(subOrder.subOrderID)
+    ).length;
+  };
+
   const handleOnClickButton = (button: OrderButtonProps) => {
     switch (button.type) {
       case "Delete":
         if (window.confirm(t("Orders.OrderCollection.button.cancel") + "?")) {
           logger("checkefSubOrders", checkedSubOrders);
-
           checkedSubOrders.forEach((subOrderID) => {
             deleteSubOrder.mutate(subOrderID);
           });
@@ -165,9 +170,7 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
         }
         break;
       case "Verify":
-        if (window.confirm(t("Orders.OrderCollection.button.verify") + "?")) {
-          logger("//TODO Verify");
-        }
+        navigate("verification");
         break;
       case "Edit":
         navigate(`suborder/${checkedSubOrders[0]}`);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import useVerification, { IRequestState } from "./hooks/useVerification";
+import useVerification from "./hooks/useVerification";
 import SubOrderVerificationItem from "./components/Item";
 import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +25,7 @@ export interface VerifyFormData {
 const SubOrderVerification: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
+  const { verifyOrder } = useVerification();
 
   const { orderQuery } = useOrder();
   const subOrders: SubOrderProps[] =
@@ -47,19 +48,27 @@ const SubOrderVerification: React.FC<Props> = (props) => {
   const navigate = useNavigate();
 
   const handleOnClickButtonVerify = (data: VerifyFormData) => {
-    logger("verify", data);
-    data.suborders.forEach((suborder) => {
-      if (suborder.checked === true) {
-      }
-    });
+    if (orderQuery.data !== undefined) {
+      verifyOrder.mutate({
+        orderID: orderQuery.data.orderID,
+        suborderIDs: data.suborders
+          .filter((suborder) => suborder.checked === true)
+          .map((subOrder) => subOrder.suborder.subOrderID),
+        send: false,
+      });
+    }
   };
 
   const handleOnClickButtonRequest = (data: VerifyFormData) => {
-    logger("request", data);
-    data.suborders.forEach((suborder) => {
-      if (suborder.checked === true) {
-      }
-    });
+    if (orderQuery.data !== undefined) {
+      verifyOrder.mutate({
+        orderID: orderQuery.data.orderID,
+        suborderIDs: data.suborders
+          .filter((suborder) => suborder.checked === true)
+          .map((subOrder) => subOrder.suborder.subOrderID),
+        send: true,
+      });
+    }
   };
 
   return (

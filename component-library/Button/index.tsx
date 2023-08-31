@@ -2,6 +2,7 @@ import React, { PropsWithChildren, ReactNode } from "react";
 import LoopIcon from "@mui/icons-material/Loop";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
+import { twMerge } from "tailwind-merge";
 
 interface ButtonProps {
   title: string;
@@ -119,7 +120,12 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       case "link":
         return "hover:text-blau underline";
       case "icon":
-        return "hover:text-türkis rounded-full bg-slate-200";
+        switch (active) {
+          case true:
+            return "hover:text-türkis rounded-full bg-slate-200";
+          case false:
+            return "hover:text-türkis rounded-full bg-slate-200 text-slate-400 hover:cursor-default";
+        }
     }
   };
 
@@ -172,11 +178,15 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
   return (
     <a
       title={getTitle()}
-      className={` 
-      bezier group flex h-fit flex-wrap items-center gap-3 break-words transition duration-300 md:flex-nowrap  md:whitespace-nowrap
-      ${getClassNameVariant()} ${getClassNameSize()} 
-      ${getClassNameWidth()} ${getClassNameAlign()} 
-      ${getClassNameDirection()} ${className}`}
+      className={twMerge(
+        `bezier group flex h-fit flex-wrap items-center gap-3 break-words transition duration-300 md:flex-nowrap  md:whitespace-nowrap`,
+        getClassNameVariant(),
+        getClassNameSize(),
+        getClassNameWidth(),
+        getClassNameAlign(),
+        getClassNameDirection(),
+        className
+      )}
       onClick={handleOnClickButton}
       href={to !== undefined ? to : title}
       data-testid={testid}

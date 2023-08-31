@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SubOrder from "./SubOrder/SubOrder";
 import { UserProps, UserType } from "@/hooks/useUser/types";
@@ -16,6 +16,11 @@ import { OrderProps, OrderState, useOrder } from "./hooks/useOrder";
 import Container from "@component-library/Container";
 import CancelIcon from "@mui/icons-material/Cancel";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import AddIcon from "@mui/icons-material/Add";
+import useSubOrder from "./SubOrder/hooks/useSubOrder";
+import logger from "@/hooks/useLogger";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { use } from "i18next";
 
 interface Props {
   user: UserProps | undefined;
@@ -26,9 +31,57 @@ const Order: React.FC<Props> = (props) => {
   const { user, event: orderCollectionEvent } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { orderQuery } = useOrder();
+  const { orderQuery, deleteOrder } = useOrder();
+  const { createSubOrder } = useSubOrder();
+  const [checkedSubOrders, setCheckedSubOrders] = useState<string[]>([]);
 
   const order: OrderProps | undefined = orderQuery.data;
+
+  const handleOnClickDelete = () => {
+    if (
+      window.confirm(t("Orders.OrderCollection.confirm.delete")) &&
+      order !== undefined
+    ) {
+      deleteOrder.mutate(order.orderID, {
+        onSuccess: () => navigate("/orders"),
+      });
+    }
+  };
+
+  const onButtonClickCreateSubOrder = () => {
+    createSubOrder.mutate();
+  };
+
+  const handleOnChangeCheckboxSelect = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    subOrderID: string
+  ) => {
+    const checked = e.target.checked;
+    if (order === undefined) return;
+    if (checked) {
+      setCheckedSubOrders([...checkedSubOrders, subOrderID]);
+    } else {
+      setCheckedSubOrders(
+        checkedSubOrders.filter(
+          (checkedSubOrder) => checkedSubOrder !== subOrderID
+        )
+      );
+    }
+  };
+
+  const handleOnChangeCheckboxSelectAll = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const checked = e.target.checked;
+    if (order === undefined) return;
+    if (checked) {
+      setCheckedSubOrders(
+        order.subOrders.map((subOrder) => subOrder.subOrderID)
+      );
+    } else {
+      setCheckedSubOrders([]);
+    }
+  };
 
   const getOrderEventItemByID = (
     orderID: string
@@ -67,9 +120,11 @@ const Order: React.FC<Props> = (props) => {
             <Container>
               <PermissionGate element={"OrderButtonDelete"}>
                 <Button
+                  variant="icon"
                   size="sm"
-                  startIcon={<CancelIcon />}
-                  title={t("Orders.OrderCollection.button.cancel")}
+                  children={<DeleteIcon />}
+                  title={t("Orders.OrderCollection.button.delete")}
+                  onClick={handleOnClickDelete}
                 />
               </PermissionGate>
             </Container>
@@ -80,17 +135,33 @@ const Order: React.FC<Props> = (props) => {
               {t("Orders.OrderCollection.subOrders")}
               {":"}
             </Heading>
-            <OrderButtons order={order} user={user} />
+            <PermissionGate element={"OrderButtonNew"}>
+              <Button
+                variant="icon"
+                size="sm"
+                startIcon={<AddIcon />}
+                onClick={onButtonClickCreateSubOrder}
+                title={t("Orders.OrderCollection.button.new")}
+              />
+            </PermissionGate>
           </Container>
           <Container justify="between" width="full">
             <label className="flex flex-row items-center justify-start gap-3">
-              <input type="checkbox" className="h-8 w-8" />
+              <input
+                type="checkbox"
+                className="h-8 w-8"
+                onChange={handleOnChangeCheckboxSelectAll}
+              />
               <Text variant="body" className="whitespace-nowrap">
                 {t("Orders.OrderCollection.selectAll")}
               </Text>
             </label>
+            <OrderButtons
+              order={order}
+              user={user}
+              checkedSubOrders={checkedSubOrders}
+            />
           </Container>
-
           {order.subOrders.length === 0 ? (
             <Heading variant="h2">
               {t("Orders.OrderCollection.noSubOrders")}
@@ -107,6 +178,8 @@ const Order: React.FC<Props> = (props) => {
                   orderID={order.orderID}
                   user={user}
                   orderEvent={getOrderEventItemByID(subOrder.subOrderID)}
+                  checked={checkedSubOrders.includes(subOrder.subOrderID)}
+                  handleOnChangeCheckboxSelect={handleOnChangeCheckboxSelect}
                 />
               ))
           )}

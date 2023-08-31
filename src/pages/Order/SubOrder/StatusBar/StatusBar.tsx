@@ -12,7 +12,6 @@ import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import { OrderState } from "@/pages/Order/hooks/useOrder";
 import { ServiceType } from "@/pages/Service/hooks/useService";
-import SubOrderButtonConnector from "./components/ButtonConnector";
 
 interface StatusViewProps {
   state: OrderState;
@@ -99,11 +98,7 @@ const StatusBar: React.FC<StatusViewProps> = (props) => {
           <Fragment key={index}>
             <StatusItem item={item} state={state} />
             {index < getItems().length - 1 ? (
-              state === item.itemOrderState ? (
-                <SubOrderButtonConnector />
-              ) : (
-                <StatusItemConnector active={state > item.itemOrderState} />
-              )
+              <StatusItemConnector active={state > item.itemOrderState} />
             ) : null}
           </Fragment>
         ))}

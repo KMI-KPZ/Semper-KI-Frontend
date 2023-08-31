@@ -23,17 +23,14 @@ const SubOrderStateButton: React.FC<SubOrderStateButtonProps> = (props) => {
     if (state === OrderState.DRAFT)
       return (
         <>
-          {/* <Button
-            startIcon={<PlayArrowIcon />}
-            title={t("OrderRoutes.SubOrder.components.StateButton.continue")}
-            to={`suborder/${subOrderID}`}
-          /> */}
           <Button
+            variant="icon"
             startIcon={<EditIcon />}
             title={t("OrderRoutes.SubOrder.components.StateButton.edit")}
             to={`suborder/${subOrderID}`}
           />
           <Button
+            variant="icon"
             startIcon={<FactoryIcon />}
             title={t(
               "OrderRoutes.SubOrder.components.StateButton.selectContractor"
@@ -46,6 +43,7 @@ const SubOrderStateButton: React.FC<SubOrderStateButtonProps> = (props) => {
     else if (state === OrderState.CONTRACTOR_SELECTED)
       return (
         <Button
+          variant="icon"
           startIcon={<PolicyIcon />}
           title={t("OrderRoutes.SubOrder.components.StateButton.verify")}
           to={`suborder/${subOrderID}/verification`}
@@ -54,6 +52,7 @@ const SubOrderStateButton: React.FC<SubOrderStateButtonProps> = (props) => {
     else if (state === OrderState.VERIFIED)
       return (
         <Button
+          variant="icon"
           startIcon={<SendIcon />}
           title={t("OrderRoutes.SubOrder.components.StateButton.request")}
           to={`suborder/${subOrderID}/checkout`}

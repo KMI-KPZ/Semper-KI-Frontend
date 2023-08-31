@@ -1,4 +1,5 @@
 import { ServiceModellingProps } from "@/pages/Service/Modelling/Modelling";
+import Container from "@component-library/Container";
 import { Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -14,9 +15,9 @@ const SubOrderServiceModelling: React.FC<SubOrderServiceModellingProps> = (
   const { t } = useTranslation();
 
   return (
-    <div className="flex w-full flex-col md:flex-row">
+    <Container>
       <Text variant="body">Modell entwerfen</Text>
-    </div>
+    </Container>
   );
 };
 

@@ -69,6 +69,10 @@ export const useOrder = (): ReturnProps => {
     },
     {
       enabled: orderID !== undefined,
+      onError: (error) => {
+        logger("useOrder | getOrder ❌ |", error);
+        navigate("/orders");
+      },
     }
   );
 

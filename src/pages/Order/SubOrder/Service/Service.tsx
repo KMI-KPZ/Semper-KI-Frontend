@@ -6,11 +6,7 @@ import SubOrderServiceManufacturing from "./components/Manufacturing";
 import SubOrderServiceModelling from "./components/Modelling";
 import { Heading } from "@component-library/Typography";
 import { Divider } from "@component-library/Divider";
-import { useNavigate } from "react-router-dom";
-import useSubOrder from "@/pages/Order/SubOrder/hooks/useSubOrder";
 import ServiceSelect from "@/pages/Service/Select/Select";
-import { Button } from "@component-library/Button";
-import EditIcon from "@mui/icons-material/Edit";
 
 interface SubOrderServiceProps {
   service: GeneralServiceProps;
@@ -20,8 +16,6 @@ interface SubOrderServiceProps {
 const SubOrderService: React.FC<SubOrderServiceProps> = (props) => {
   const { service, subOrderID } = props;
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const { updateSubOrderWithSubOrderID } = useSubOrder();
 
   const renderService = () => {
     if (
@@ -39,28 +33,14 @@ const SubOrderService: React.FC<SubOrderServiceProps> = (props) => {
     }
   };
 
-  const handleOnClickButtonDelete = () => {
-    updateSubOrderWithSubOrderID.mutate({
-      subOrderID,
-      updates: {
-        changes: { service: { type: ServiceType.UNDEFINED } },
-      },
-    });
-  };
-
   return (
-    <div className="flex w-full flex-col items-center justify-start pt-5 md:p-0">
+    <div className="flex w-full flex-col items-center justify-center pt-5 md:p-0">
       <div className="flex w-full flex-col items-start gap-3 md:flex-row md:items-center">
         <Heading variant="h3" className="whitespace-nowrap">
           {t("Orders.OrderView.Service.title")}{" "}
           {t(`OrderRoutes.Service.type.${ServiceType[service.type]}`)}
         </Heading>
         <Divider className="mt-[0.3rem] hidden md:block" />
-        <Button
-          children={<EditIcon />}
-          title={t("OrderRoutes.SubOrder.components.StateButton.edit")}
-          to={`suborder/${subOrderID}`}
-        />
       </div>
       {renderService()}
     </div>

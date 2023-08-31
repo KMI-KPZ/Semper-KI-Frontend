@@ -23,12 +23,18 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import { OrderState } from "../hooks/useOrder";
 import SubOrderInfo from "./components/Info";
+import Container from "@component-library/Container";
 
 interface Props {
   subOrder: SubOrderProps;
   orderID: string;
   user: UserProps | undefined;
   orderEvent?: OrderEventItem;
+  checked: boolean;
+  handleOnChangeCheckboxSelect: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    subOrderID: string
+  ) => void;
 }
 
 export interface SubOrderState {
@@ -37,7 +43,14 @@ export interface SubOrderState {
 }
 
 const SubOrder: React.FC<Props> = (props) => {
-  const { subOrder, orderID, user, orderEvent } = props;
+  const {
+    subOrder,
+    orderID,
+    user,
+    orderEvent,
+    checked,
+    handleOnChangeCheckboxSelect,
+  } = props;
   const { t } = useTranslation();
   const [state, setState] = useState<SubOrderState>({
     chatOpen: false,
@@ -107,8 +120,15 @@ const SubOrder: React.FC<Props> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 p-5 shadow-card  md:items-start">
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row lg:justify-between">
-        <div className="flex flex-col items-center justify-center gap-2 md:flex-row">
-          <input type="checkbox" className="h-8 w-8" />
+        <Container direction="row" gap={3} className="flex-wrap md:flex-nowrap">
+          <input
+            type="checkbox"
+            className="h-8 w-8"
+            checked={checked}
+            onChange={(e) =>
+              handleOnChangeCheckboxSelect(e, subOrder.subOrderID)
+            }
+          />
           <Heading variant="h3" className="md:whitespace-nowrap">
             {t("Orders.OrderView.name")}
           </Heading>
@@ -139,7 +159,7 @@ const SubOrder: React.FC<Props> = (props) => {
               )
             }
           />
-        </div>
+        </Container>
         <Divider className="hidden md:block" />
         <SubOrderActionButtons
           setState={setState}
@@ -151,6 +171,10 @@ const SubOrder: React.FC<Props> = (props) => {
         />
       </div>
       <StatusBar state={subOrder.state} serviceType={subOrder.service.type} />
+      <SubOrderNextStepButton
+        state={subOrder.state}
+        subOrderID={subOrder.subOrderID}
+      />
       <SubOrderService
         service={subOrder.service}
         subOrderID={subOrder.subOrderID}

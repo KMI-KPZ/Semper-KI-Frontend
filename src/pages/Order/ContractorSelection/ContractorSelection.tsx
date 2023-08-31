@@ -97,7 +97,10 @@ const OrderContractorSelection: React.FC<Props> = (props) => {
                     {manufacturerQuery.data !== undefined &&
                     manufacturerQuery.data.length > 0 ? (
                       manufacturerQuery.data.map((manufacturer, _index) => (
-                        <label className="flex flex-row items-center justify-center gap-5 p-3 shadow-card">
+                        <label
+                          className="flex flex-row items-center justify-center gap-5 p-3 shadow-card"
+                          key={_index}
+                        >
                           <Text variant="body">{manufacturer.name}</Text>
                           <input
                             type="radio"
@@ -125,7 +128,7 @@ const OrderContractorSelection: React.FC<Props> = (props) => {
       </div>
       <div className="flex flex-col gap-5 md:flex-row">
         <Button
-          to="../.."
+          to=".."
           startIcon={<ArrowBackIcon />}
           title={t(
             "AfterProcess.Manufacturer.ManufacturerView.button.overview"

@@ -546,22 +546,25 @@
       "date":"Datum",
       "noSubOrders":"Keine Teilaufträge vorhanden",
       "selectAll":"Alle auswählen",
+      "confirm":{
+        "delete":"Aufträge wirklich löschen?"
+      },
       "button":{
         "new":"Neuer Teilauftrag",
-        "manufacturer":"Herstellerauswahl",
+        "contractorSelect":"Auftragnehmer auswählen",
         "edit":"Bearbeiten",
         "cancel":"Stornieren",
         "reOrder":"erneut Bestellen",
         "reject":"Ablehnen",
         "confirm":"Bestätigen",
-        "verified":"Überprüfen",
+        "verify":"Überprüfen",
         "expand":"Ausklappen",
         "collapse":"Zusammenklappen",
         "delete":"Löschen"
       },
       "state":{
         "DRAFT":"Entwurf",
-        "MANUFACTURER_SELECTED":"Hersteller ausgewählt",
+        "CONTRACTOR_SELECTED":"Auftragnehmer ausgewählt",
         "VERIFIED":"Überprüft",
         "REQUESTED":"Angefragt",
         "CLARIFICATION":"Rückfragen",

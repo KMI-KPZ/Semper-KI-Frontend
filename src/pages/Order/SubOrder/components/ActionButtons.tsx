@@ -4,19 +4,14 @@ import useSubOrder, {
 } from "@/pages/Order/SubOrder/hooks/useSubOrder";
 import { Button } from "@component-library/Button";
 import React, { Dispatch, SetStateAction, useContext } from "react";
-import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import { useTranslation } from "react-i18next";
 import logger from "@/hooks/useLogger";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { OrderState } from "@/pages/Order/hooks/useOrder";
-import SubOrderService from "../Service/Service";
-import useService from "@/pages/Service/hooks/useService";
 import { SubOrderState } from "../SubOrder";
 import { AppContext } from "@/pages/App/App";
 import InfoIcon from "@mui/icons-material/Info";
@@ -85,6 +80,7 @@ const SubOrderActionButtons: React.FC<SubOrderActionButtonsProps> = (props) => {
   return (
     <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:flex-nowrap">
       <Button
+        variant="icon"
         width="fit"
         size="sm"
         children={<InfoIcon />}
@@ -98,6 +94,7 @@ const SubOrderActionButtons: React.FC<SubOrderActionButtonsProps> = (props) => {
           orderEvent.messages > 0 ? (
             <Badge count={orderEvent.messages}>
               <Button
+                variant="icon"
                 width="fit"
                 size="sm"
                 children={<MailIcon />}
@@ -107,6 +104,7 @@ const SubOrderActionButtons: React.FC<SubOrderActionButtonsProps> = (props) => {
             </Badge>
           ) : (
             <Button
+              variant="icon"
               width="fit"
               size="sm"
               children={<MailIcon />}
@@ -119,6 +117,7 @@ const SubOrderActionButtons: React.FC<SubOrderActionButtonsProps> = (props) => {
       {subOrder.state <= OrderState.REQUESTED ? (
         <PermissionGate element="SubOrderButtonDelete">
           <Button
+            variant="icon"
             width="fit"
             size="sm"
             children={<DeleteIcon />}
@@ -130,6 +129,7 @@ const SubOrderActionButtons: React.FC<SubOrderActionButtonsProps> = (props) => {
       {subOrder.state === OrderState.COMPLETED ? (
         <PermissionGate element="SubOrderButtonReOrder">
           <Button
+            variant="icon"
             width="fit"
             size="sm"
             children={<ReplayIcon />}
@@ -144,6 +144,7 @@ const SubOrderActionButtons: React.FC<SubOrderActionButtonsProps> = (props) => {
         <>
           <PermissionGate element="SubOrderButtonReject">
             <Button
+              variant="icon"
               width="fit"
               size="sm"
               children={<DeleteIcon />}
@@ -153,6 +154,7 @@ const SubOrderActionButtons: React.FC<SubOrderActionButtonsProps> = (props) => {
           </PermissionGate>
           <PermissionGate element="SubOrderButtonConfirm">
             <Button
+              variant="icon"
               width="fit"
               size="sm"
               children={<CheckIcon />}
@@ -165,6 +167,7 @@ const SubOrderActionButtons: React.FC<SubOrderActionButtonsProps> = (props) => {
       {subOrder.state === OrderState.CONFIRMED ? (
         <PermissionGate element="SubOrderButtonVerify">
           <Button
+            variant="icon"
             width="fit"
             size="sm"
             children={<QuestionMarkIcon />}

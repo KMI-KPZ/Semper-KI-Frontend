@@ -20,7 +20,6 @@ export enum ServiceType {
 
 const useService = (): ReturnProps => {
   const { getCurrentSubOrder } = useSubOrder();
-  const { orderQuery } = useOrder();
 
   const getService = (): GeneralServiceProps | undefined => {
     return getCurrentSubOrder()?.service;

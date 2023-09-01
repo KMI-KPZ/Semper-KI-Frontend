@@ -2,24 +2,21 @@ import React, { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import CheckIcon from "@mui/icons-material/Check";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ReplayIcon from "@mui/icons-material/Replay";
-import PolicyIcon from "@mui/icons-material/Policy";
-import SendIcon from "@mui/icons-material/Send";
 import FactoryIcon from "@mui/icons-material/Factory";
 import DeleteForever from "@mui/icons-material/DeleteForever";
-import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
-import { UserProps, UserType } from "@/hooks/useUser/types";
-import useSubOrder from "../SubOrder/hooks/useSubOrder";
-import { Divider } from "@component-library/Divider";
+import { UserProps } from "@/hooks/useUser/types";
+import useSubOrder, { SubOrderProps } from "../SubOrder/hooks/useSubOrder";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { OrderProps, OrderState, useOrder } from "../hooks/useOrder";
-import { Text } from "@component-library/Typography";
+import { OrderProps, OrderState } from "../hooks/useOrder";
 import Container from "@component-library/Container";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
+import useService from "@/pages/Service/hooks/useService";
+import Order from "../Order";
 
 interface OrderButtonsProps {
   order: OrderProps;
@@ -33,6 +30,10 @@ interface OrderButtonProps {
   icon: ReactNode;
   contractor: boolean;
   allowedStates: OrderState[];
+}
+
+interface OrderButtonWithCountProps extends OrderButtonProps {
+  count?: number;
 }
 
 type OrderButtonType =
@@ -51,12 +52,17 @@ const OrderButtonData: OrderButtonProps[] = [
     type: "Delete",
     icon: <DeleteForever />,
     contractor: false,
-    allowedStates: [OrderState.DRAFT],
+    allowedStates: [
+      OrderState.DRAFT,
+      OrderState.CONTRACTOR_SELECTED,
+      OrderState.DELIVERY,
+      OrderState.REQUESTED,
+    ],
   },
   {
     title: "Orders.OrderCollection.button.edit",
     type: "Edit",
-    icon: <AddIcon />,
+    icon: <EditIcon />,
     contractor: false,
     allowedStates: [OrderState.DRAFT],
   },
@@ -109,6 +115,7 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { deleteSubOrder } = useSubOrder();
+  const { isServiceComplete } = useService();
 
   const showClientButton = (): boolean =>
     user === undefined ||
@@ -122,21 +129,41 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
     (showClientButton() && button.contractor === false) ||
     (showContractorButton() && button.contractor === true);
 
-  const filterButtonsBySelectedSubOrders = (
-    button: OrderButtonProps
-  ): boolean => {
-    const selectedSubOrderStates: OrderState[] = order.subOrders
-      .filter((subOrder) => checkedSubOrders.includes(subOrder.subOrderID))
-      .map((subOrder) => subOrder.state);
-    return button.allowedStates.some((state) =>
-      selectedSubOrderStates.includes(state)
-    );
+  const getCountOfSubOrdersForButton = (
+    button: OrderButtonProps,
+    selectedSubOrders: SubOrderProps[]
+  ): number => {
+    return selectedSubOrders.filter(
+      (subOrder) =>
+        button.allowedStates.includes(subOrder.state) &&
+        ((isServiceComplete(subOrder.subOrderID) &&
+          button.type === "ContractorSelection") ||
+          button.type !== "ContractorSelection")
+    ).length;
   };
 
-  const getCountOfSelectedSubOrders = (button: OrderButtonProps): number => {
-    return order.subOrders.filter((subOrder) =>
-      checkedSubOrders.includes(subOrder.subOrderID)
-    ).length;
+  const getButtons = (): OrderButtonWithCountProps[] => {
+    const buttonsFilterByUser = OrderButtonData.filter(filterButtonsByUser);
+    let buttonsWithCount: OrderButtonWithCountProps[] = [];
+
+    const selectedSubOrderStates: SubOrderProps[] = order.subOrders.filter(
+      (subOrder) => checkedSubOrders.includes(subOrder.subOrderID)
+    );
+
+    buttonsFilterByUser.forEach((button) => {
+      const count = getCountOfSubOrdersForButton(
+        button,
+        selectedSubOrderStates
+      );
+      if (count > 0) {
+        buttonsWithCount.push({
+          ...button,
+          count: count,
+        });
+      }
+    });
+
+    return buttonsWithCount;
   };
 
   const handleOnClickButton = (button: OrderButtonProps) => {
@@ -183,20 +210,20 @@ const OrderButtons: React.FC<OrderButtonsProps> = (props) => {
 
   return (
     <Container wrap="wrap">
-      {OrderButtonData.filter((button) => filterButtonsByUser(button))
-        .filter((button) => filterButtonsBySelectedSubOrders(button))
-        .map((button, index) => (
-          <PermissionGate element={`OrderButton${button.type}`} key={index}>
-            <Button
-              key={index}
-              variant="icon"
-              size="sm"
-              startIcon={button.icon}
-              onClick={() => handleOnClickButton(button)}
-              title={t(button.title)}
-            />
-          </PermissionGate>
-        ))}
+      {getButtons().map((button, index) => (
+        <PermissionGate element={`OrderButton${button.type}`} key={index}>
+          <Button
+            key={index}
+            variant="icon"
+            size="sm"
+            startIcon={button.icon}
+            onClick={() => handleOnClickButton(button)}
+            title={`${t(button.title)}${
+              button.count !== undefined ? ` ( ${button.count} )` : ""
+            }`}
+          />
+        </PermissionGate>
+      ))}
     </Container>
   );
 };

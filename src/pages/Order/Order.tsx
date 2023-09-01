@@ -22,6 +22,7 @@ import OrderTitleForm from "./components/TitleForm";
 import InfoIcon from "@mui/icons-material/Info";
 import OrderInfo from "./components/Info";
 import Modal from "@component-library/Modal";
+import useCheckedSubOrders from "./hooks/useCheckedSubOrders";
 
 interface Props {
   user: UserProps | undefined;
@@ -34,7 +35,11 @@ const Order: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const { orderQuery, deleteOrder, updateOrder } = useOrder();
   const { createSubOrder } = useSubOrder();
-  const [checkedSubOrders, setCheckedSubOrders] = useState<string[]>([]);
+  const {
+    checkedSubOrders,
+    handleOnChangeCheckboxSelect,
+    handleOnChangeCheckboxSelectAll,
+  } = useCheckedSubOrders(orderQuery.data);
   const [infoOpen, setInfoOpen] = useState<boolean>(false);
 
   const order: OrderProps | undefined = orderQuery.data;
@@ -52,37 +57,6 @@ const Order: React.FC<Props> = (props) => {
 
   const onButtonClickCreateSubOrder = () => {
     createSubOrder.mutate();
-  };
-
-  const handleOnChangeCheckboxSelect = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    subOrderID: string
-  ) => {
-    const checked = e.target.checked;
-    if (order === undefined) return;
-    if (checked) {
-      setCheckedSubOrders([...checkedSubOrders, subOrderID]);
-    } else {
-      setCheckedSubOrders(
-        checkedSubOrders.filter(
-          (checkedSubOrder) => checkedSubOrder !== subOrderID
-        )
-      );
-    }
-  };
-
-  const handleOnChangeCheckboxSelectAll = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const checked = e.target.checked;
-    if (order === undefined) return;
-    if (checked) {
-      setCheckedSubOrders(
-        order.subOrders.map((subOrder) => subOrder.subOrderID)
-      );
-    } else {
-      setCheckedSubOrders([]);
-    }
   };
 
   const getOrderEventItemByID = (
@@ -182,6 +156,7 @@ const Order: React.FC<Props> = (props) => {
                   type="checkbox"
                   className="h-8 w-8"
                   onChange={handleOnChangeCheckboxSelectAll}
+                  checked={checkedSubOrders.length === order.subOrders.length}
                 />
                 <Text variant="body" className="whitespace-nowrap">
                   {t("Orders.OrderCollection.selectAll")}

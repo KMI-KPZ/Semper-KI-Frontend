@@ -24,6 +24,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import { OrderState } from "../hooks/useOrder";
 import SubOrderInfo from "./components/Info";
 import Container from "@component-library/Container";
+import OrderTitleForm from "../components/TitleForm";
 
 interface Props {
   subOrder: SubOrderProps;
@@ -56,14 +57,6 @@ const SubOrder: React.FC<Props> = (props) => {
     chatOpen: false,
     infoOpen: false,
   });
-  const inputText: string = getTitleFromSubOrder(subOrder, t);
-  const [nameState, setNameState] = useState<{
-    edit: boolean;
-    titleText: string;
-  }>({
-    edit: false,
-    titleText: "",
-  });
 
   const { updateSubOrderWithSubOrderID } = useSubOrder();
 
@@ -75,33 +68,13 @@ const SubOrder: React.FC<Props> = (props) => {
     // });
   };
 
-  const handleOnClickEditCheckButton = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (nameState.edit)
-      updateSubOrderWithSubOrderID.mutate({
-        subOrderID: subOrder.subOrderID,
-        updates: {
-          changes: { details: { title: nameState.titleText } },
-        },
-      });
-    setNameState((prevState) => {
-      return {
-        edit: !prevState.edit,
-        titleText: prevState.edit ? prevState.titleText : inputText,
-      };
+  const updateSubOrderTitle = (title: string) => {
+    updateSubOrderWithSubOrderID.mutate({
+      subOrderID: subOrder.subOrderID,
+      updates: {
+        changes: { details: { title: title } },
+      },
     });
-  };
-
-  const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setNameState((prevState) => ({
-      ...prevState,
-      titleText: e.target.value,
-    }));
   };
 
   const closeChat = () => {
@@ -129,35 +102,10 @@ const SubOrder: React.FC<Props> = (props) => {
               handleOnChangeCheckboxSelect(e, subOrder.subOrderID)
             }
           />
-          <Heading variant="h3" className="md:whitespace-nowrap">
-            {t("Orders.OrderView.name")}
-          </Heading>
-          {nameState.edit === true ? (
-            <>
-              <input
-                type="text"
-                value={nameState.titleText}
-                className="w-full bg-slate-100 p-2 md:w-fit"
-                onChange={handleOnChangeInput}
-              />
-            </>
-          ) : (
-            <Heading variant="h3" className="md:whitespace-nowrap">
-              {getTitleFromSubOrder(subOrder, t)}
-            </Heading>
-          )}
-          <Button
-            width="fit"
-            onClick={handleOnClickEditCheckButton}
-            variant="icon"
-            title={t("Orders.OrderView.button.editName")}
-            children={
-              nameState.edit ? (
-                <CheckIcon fontSize="small" />
-              ) : (
-                <EditIcon fontSize="small" />
-              )
-            }
+          <OrderTitleForm
+            title={getTitleFromSubOrder(subOrder, t)}
+            updateTitle={updateSubOrderTitle}
+            headerType="h3"
           />
         </Container>
         <Divider className="hidden md:block" />

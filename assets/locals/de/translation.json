@@ -541,6 +541,7 @@
       }
     },
     "OrderCollection":{
+      "title":"Auftrag",
       "selected":"{{count}} Ausgewählt",
       "subOrders":"Teilaufträge",
       "id":"AuftragsID",
@@ -564,6 +565,7 @@
         "delete":"Löschen"
       },
       "state":{
+        "title":"Status",
         "DRAFT":"Entwurf",
         "CONTRACTOR_SELECTED":"Auftragnehmer ausgewählt",
         "VERIFIED":"Überprüft",
@@ -643,7 +645,12 @@
         "delivery":"Unterwegs",
         "finished":"Abgeschlossen"
       }
-    } 
+    },
+    "OrderInfo":{
+      "id":"AuftragsID:",
+      "created":"Erstellt am:",
+      "updated":"Aktualisiert am:"
+    }
   },
   "PopUp":{},
   "Portfolio":{

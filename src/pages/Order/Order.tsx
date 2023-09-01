@@ -14,13 +14,14 @@ import {
 import OrderButtons from "./components/Buttons";
 import { OrderProps, OrderState, useOrder } from "./hooks/useOrder";
 import Container from "@component-library/Container";
-import CancelIcon from "@mui/icons-material/Cancel";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import AddIcon from "@mui/icons-material/Add";
 import useSubOrder from "./SubOrder/hooks/useSubOrder";
-import logger from "@/hooks/useLogger";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { use } from "i18next";
+import OrderTitleForm from "./components/TitleForm";
+import InfoIcon from "@mui/icons-material/Info";
+import OrderInfo from "./components/Info";
+import Modal from "@component-library/Modal";
 
 interface Props {
   user: UserProps | undefined;
@@ -31,9 +32,10 @@ const Order: React.FC<Props> = (props) => {
   const { user, event: orderCollectionEvent } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { orderQuery, deleteOrder } = useOrder();
+  const { orderQuery, deleteOrder, updateOrder } = useOrder();
   const { createSubOrder } = useSubOrder();
   const [checkedSubOrders, setCheckedSubOrders] = useState<string[]>([]);
+  const [infoOpen, setInfoOpen] = useState<boolean>(false);
 
   const order: OrderProps | undefined = orderQuery.data;
 
@@ -96,30 +98,57 @@ const Order: React.FC<Props> = (props) => {
     );
   };
 
+  const updateOrderTitle = (title: string) => {
+    if (order === undefined) return;
+    updateOrder.mutate({
+      orderID: order.orderID,
+      title: title,
+    });
+  };
+
+  const handleOnClickButtonInfo = () => {
+    setInfoOpen(true);
+  };
+
+  const closeInfo = () => {
+    setInfoOpen(false);
+  };
+
   return (
     <LoadingSuspense query={orderQuery}>
       {order === undefined ? (
         <LoadingAnimation />
       ) : (
         <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
-          <Container width="full" justify="between" align="start">
+          <Container width="full" justify="between">
             <Container direction="col" align="start">
-              <Heading variant="h2" className="break-all">
-                {t("Orders.OrderCollection.id")}: {order.orderID}
-              </Heading>
-              <Heading variant="h2">
-                {t("Orders.OrderCollection.state.header")}
-                {": "}
-                {t(`Orders.OrderCollection.state.${OrderState[order.state]}`)}
-              </Heading>
-              <Heading variant="h2">
-                {t("Orders.OrderCollection.date")}:{" "}
-                {new Date(order.created).toLocaleString()}
-              </Heading>
+              <OrderTitleForm
+                headerType="h1"
+                title={
+                  order.title === undefined
+                    ? t("Orders.OrderCollection.title")
+                    : order.title
+                }
+                updateTitle={updateOrderTitle}
+              />
             </Container>
-            <Container>
+            <Text variant="body">
+              {t("Orders.OrderCollection.state.title")}
+              {": "}
+              {t(`Orders.OrderCollection.state.${OrderState[order.state]}`)}
+            </Text>
+            <Container direction="row" wrap="wrap">
+              <Button
+                variant="icon"
+                width="fit"
+                size="sm"
+                children={<InfoIcon />}
+                onClick={handleOnClickButtonInfo}
+                title={t("Orders.OrderView.button.info")}
+              />
               <PermissionGate element={"OrderButtonDelete"}>
                 <Button
+                  width="fit"
                   variant="icon"
                   size="sm"
                   children={<DeleteIcon />}
@@ -137,6 +166,7 @@ const Order: React.FC<Props> = (props) => {
             </Heading>
             <PermissionGate element={"OrderButtonNew"}>
               <Button
+                width="fit"
                 variant="icon"
                 size="sm"
                 startIcon={<AddIcon />}
@@ -192,6 +222,13 @@ const Order: React.FC<Props> = (props) => {
                 />
               ))
           )}
+          <Modal
+            open={infoOpen}
+            closeModal={closeInfo}
+            className="flex w-full flex-col"
+          >
+            <OrderInfo order={order} />
+          </Modal>
         </div>
       )}
     </LoadingSuspense>

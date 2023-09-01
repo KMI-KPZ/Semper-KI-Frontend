@@ -24,12 +24,14 @@ export interface OrderProps {
   updated: Date;
   state: OrderState;
   subOrders: SubOrderProps[];
+  title?: string;
 }
 
 export interface UpdateOrderProps {
   orderID: string;
   date?: string;
   state?: OrderState;
+  title?: string;
 }
 
 export enum OrderState {

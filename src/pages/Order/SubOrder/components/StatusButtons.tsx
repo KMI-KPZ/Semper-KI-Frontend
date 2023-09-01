@@ -9,12 +9,12 @@ import { OrderState } from "@/pages/Order/hooks/useOrder";
 import useService from "@/pages/Service/hooks/useService";
 import EditIcon from "@mui/icons-material/Edit";
 
-interface SubOrderStateButtonProps {
+interface SubOrderStatusButtonsProps {
   subOrderID: string;
   state: OrderState;
 }
 
-const SubOrderStateButton: React.FC<SubOrderStateButtonProps> = (props) => {
+const SubOrderStatusButtons: React.FC<SubOrderStatusButtonsProps> = (props) => {
   const { state, subOrderID } = props;
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
@@ -67,4 +67,4 @@ const SubOrderStateButton: React.FC<SubOrderStateButtonProps> = (props) => {
   );
 };
 
-export default SubOrderStateButton;
+export default SubOrderStatusButtons;

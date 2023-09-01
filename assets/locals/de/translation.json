@@ -50,7 +50,8 @@
       "users":"Benutzer verwalten",
       "contractorSelection":"Auftragnehmerauswahl",
       "verification":"Überprüfung",
-      "registerOrganization":"Organisation registrieren"
+      "registerOrganization":"Organisation registrieren",
+      "verifyEMail":"E-Mail verifizieren"
     }
   },
   "enum":{
@@ -1271,5 +1272,11 @@
         "taxID": "Steuernummer benötigt"
       }
     }
+  },
+  "EmailVerification":{
+    "title":"Email Verifizieren",
+    "text":"Bitte bestätigen Sie ihre Email Adresse, indem Sie auf den Link in der Email klicken, die Auth0 Ihnen gesendet hat.",
+    "text2":"Dies ist notwendig um die Registrierung abzuschließen.",
+    "text3":"Vielen Dank für ihr Verständnis"
   }
 }

@@ -16,9 +16,9 @@ import Modal from "@component-library/Modal";
 import useSubOrder, { SubOrderProps } from "./hooks/useSubOrder";
 import SubOrderService from "./Service/Service";
 import { Divider } from "@component-library/Divider";
-import SubOrderNextStepButton from "./components/StateButton";
+import SubOrderNextStepButton from "./components/StatusButtons";
 import { getTitleFromSubOrder } from "../../Service/Overview/components/Item";
-import SubOrderActionButtons from "./components/ActionButtons";
+import SubOrderButtons from "./components/Buttons";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import { OrderState } from "../hooks/useOrder";
@@ -109,7 +109,7 @@ const SubOrder: React.FC<Props> = (props) => {
           />
         </Container>
         <Divider className="hidden md:block" />
-        <SubOrderActionButtons
+        <SubOrderButtons
           setState={setState}
           orderID={orderID}
           subOrder={subOrder}

@@ -39,6 +39,7 @@ import AdminRoutes from "../Routes/Admin";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import AppLoadingSuspense from "./components/LoadingSuspense";
 import { AdminOutlet, OrganizationOutlet, UserOutlet } from "../Outlets/Outlet";
+import EmailVerification from "../EmailVerification/EmailVerification";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -120,6 +121,7 @@ const App: React.FC = () => {
             />
             <Route path="logout" element={<Logout />} />
             <Route path="portfolio" element={<Portfolio />} />
+            <Route path="verifyEMail" element={<EmailVerification />} />
             <Route path="login" element={<Login />} />
             <Route path="login/redirect" element={<RedirectLogin />} />
             <Route path="register" element={<Login />} />

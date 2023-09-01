@@ -20,7 +20,7 @@ import { OrderEventItem } from "@/pages/App/types";
 import { Badge } from "@component-library/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 
-interface SubOrderActionButtonsProps {
+interface SubOrderButtonsProps {
   user: UserProps | undefined;
   orderID: string;
   subOrder: SubOrderProps;
@@ -29,7 +29,7 @@ interface SubOrderActionButtonsProps {
   orderEvent?: OrderEventItem;
 }
 
-const SubOrderActionButtons: React.FC<SubOrderActionButtonsProps> = (props) => {
+const SubOrderButtons: React.FC<SubOrderButtonsProps> = (props) => {
   const { orderID, subOrder, user, updateStatus, setState, orderEvent } = props;
   const { t } = useTranslation();
   const { deleteEvent } = useContext(AppContext);
@@ -180,4 +180,4 @@ const SubOrderActionButtons: React.FC<SubOrderActionButtonsProps> = (props) => {
   );
 };
 
-export default SubOrderActionButtons;
+export default SubOrderButtons;

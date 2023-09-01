@@ -90,7 +90,8 @@ const Order: React.FC<Props> = (props) => {
 
   return (
     <LoadingSuspense query={orderQuery}>
-      {order === undefined ? (
+      {order === undefined ||
+      (order !== undefined && order.orderID === undefined) ? (
         <LoadingAnimation />
       ) : (
         <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">

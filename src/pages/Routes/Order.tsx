@@ -7,7 +7,7 @@ import Service from "../Service/Service";
 import SubOrderVerification from "../Order/Verification/Verification";
 import OrderContractorSelection from "../Order/ContractorSelection/ContractorSelection";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import SubOrderCheckout from "../Order/Checkout/Checkout";
+import OrderCheckout from "../Order/Checkout/Checkout";
 import { UserOutlet } from "../Outlets/Outlet";
 
 interface OrderRoutesProps {
@@ -36,7 +36,7 @@ const OrderRoutes: React.FC<OrderRoutesProps> = (props) => {
             path="checkout"
             element={
               <PermissionGate element={"SubOrderCheckout"}>
-                <SubOrderCheckout />
+                <OrderCheckout />
               </PermissionGate>
             }
           />
@@ -56,7 +56,7 @@ const OrderRoutes: React.FC<OrderRoutesProps> = (props) => {
               path=":subOrderID/checkout"
               element={
                 <PermissionGate element={"SubOrderCheckout"}>
-                  <SubOrderCheckout />
+                  <OrderCheckout />
                 </PermissionGate>
               }
             />

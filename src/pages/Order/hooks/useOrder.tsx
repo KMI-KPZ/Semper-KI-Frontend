@@ -61,12 +61,12 @@ export const useOrder = (): ReturnProps => {
         .get(apiUrl)
         .then((response) => {
           logger("useOrdes | getOrder ✅ |", response.data);
-          return {
+          const order = {
+            ...response.data,
             created: new Date(response.data.created),
             updated: new Date(response.data.updated),
-
-            ...response.data,
           };
+          return order;
         });
     },
     {

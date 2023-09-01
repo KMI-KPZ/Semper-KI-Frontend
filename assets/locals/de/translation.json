@@ -1276,7 +1276,16 @@
   "EmailVerification":{
     "title":"Email Verifizieren",
     "text":"Bitte bestätigen Sie ihre Email Adresse, indem Sie auf den Link in der Email klicken, die Auth0 Ihnen gesendet hat.",
-    "text2":"Dies ist notwendig um die Registrierung abzuschließen.",
+    "text2":"Dies ist notwendig um die Registrierung abzuschließen und um Semper-KI nutzen zu können.",
     "text3":"Vielen Dank für ihr Verständnis"
+  },
+  "Checkout":{
+    "title":"Aufträge anfragen",
+    "button":{
+      "send":"Anfragen"
+    },
+    "error":{
+      "no-items":"keine Aufträge vorhanden"
+    }
   }
 }

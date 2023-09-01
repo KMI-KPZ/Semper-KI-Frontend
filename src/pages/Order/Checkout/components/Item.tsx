@@ -5,15 +5,15 @@ import { useTranslation } from "react-i18next";
 import { SubOrderProps } from "@/pages/Order/SubOrder/hooks/useSubOrder";
 import { ServiceType } from "@/pages/Service/hooks/useService";
 import { UseFormRegister } from "react-hook-form";
-import { VerifyFormData } from "../Verification";
+import { CheckoutFormData } from "../Checkout";
 
 type Props = {
   index: number;
   suborder: SubOrderProps;
-  register: UseFormRegister<VerifyFormData>;
+  register: UseFormRegister<CheckoutFormData>;
 };
 
-const SubOrderVerificationItem: React.FC<Props> = (props) => {
+const OrderCheckoutItem: React.FC<Props> = (props) => {
   const { suborder, register, index } = props;
   const { t } = useTranslation();
 
@@ -32,4 +32,4 @@ const SubOrderVerificationItem: React.FC<Props> = (props) => {
   );
 };
 
-export default SubOrderVerificationItem;
+export default OrderCheckoutItem;

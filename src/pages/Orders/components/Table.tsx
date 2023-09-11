@@ -16,6 +16,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import logger from "@/hooks/useLogger";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { OrderState, useOrder } from "@/pages/Order/hooks/useOrder";
+import Container from "@component-library/Container";
 
 interface OrdersTableProps {
   flatOrders: FlatOrderProps[];
@@ -110,64 +111,75 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
   );
 
   return (
-    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-      <TableHead>
-        <TableRow>
-          <TableCell>{t("order.overview.components.table.grouping")}</TableCell>
-          <TableCell>{t("order.overview.components.table.name")}</TableCell>
-          <TableCell>{t("order.overview.components.table.status")}</TableCell>
-          <TableCell>{t("order.overview.components.table.count")}</TableCell>
-          <TableCell>{t("order.overview.components.table.created")}</TableCell>
-          <TableCell>{t("order.overview.components.table.actions")}</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {getGroupedFlatOrder(flatOrders).map((group, groupIndex, groups) =>
-          group.flatOrders
-            .sort((subOrderA, subOrderB) =>
-              subOrderA.state > subOrderB.state ? 1 : -1
-            )
-            .map((flatOrder, index, groupFlatOrder) => (
-              <TableRow
-                key={flatOrder.orderID}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                {index === 0 ? (
-                  <TableCell
-                    scope="row"
-                    rowSpan={groupFlatOrder.length}
-                    sx={{
-                      verticalAlign: "top",
-                      border: groupIndex === groups.length - 1 ? 0 : undefined,
-                    }}
-                  >
-                    <div className="flex h-full w-full flex-col items-center justify-start">
-                      <Heading variant="h2">
-                        {t(
-                          `order.overview.components.table.groups.${group.title}`
-                        )}
-                      </Heading>
-                    </div>
+    <Container className="overflow-auto" width="full">
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>
+              {t("order.overview.components.table.grouping")}
+            </TableCell>
+            <TableCell>{t("order.overview.components.table.name")}</TableCell>
+            <TableCell>{t("order.overview.components.table.status")}</TableCell>
+            <TableCell>{t("order.overview.components.table.count")}</TableCell>
+            <TableCell>
+              {t("order.overview.components.table.created")}
+            </TableCell>
+            <TableCell>
+              {t("order.overview.components.table.actions")}
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {getGroupedFlatOrder(flatOrders).map((group, groupIndex, groups) =>
+            group.flatOrders
+              .sort((subOrderA, subOrderB) =>
+                subOrderA.state > subOrderB.state ? 1 : -1
+              )
+              .map((flatOrder, index, groupFlatOrder) => (
+                <TableRow
+                  key={flatOrder.orderID}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  {index === 0 ? (
+                    <TableCell
+                      scope="row"
+                      rowSpan={groupFlatOrder.length}
+                      sx={{
+                        verticalAlign: "top",
+                        border:
+                          groupIndex === groups.length - 1 ? 0 : undefined,
+                      }}
+                    >
+                      <div className="flex h-full w-full flex-col items-center justify-start">
+                        <Heading variant="h2">
+                          {t(
+                            `order.overview.components.table.groups.${group.title}`
+                          )}
+                        </Heading>
+                      </div>
+                    </TableCell>
+                  ) : null}
+                  <TableCell component="th" scope="row">
+                    Artikel: #{flatOrder.orderID}
                   </TableCell>
-                ) : null}
-                <TableCell component="th" scope="row">
-                  Artikel: #{flatOrder.orderID}
-                </TableCell>
-                <TableCell>
-                  {t(
-                    `Orders.OrderCollection.state.${
-                      OrderState[flatOrder.state]
-                    }`
-                  )}
-                </TableCell>
-                <TableCell>{flatOrder.subOrderCount}</TableCell>
-                <TableCell>{flatOrder.created.toLocaleDateString()}</TableCell>
-                <TableCell>{renderRowButtons(flatOrder)}</TableCell>
-              </TableRow>
-            ))
-        )}
-      </TableBody>
-    </Table>
+                  <TableCell>
+                    {t(
+                      `Orders.OrderCollection.state.${
+                        OrderState[flatOrder.state]
+                      }`
+                    )}
+                  </TableCell>
+                  <TableCell>{flatOrder.subOrderCount}</TableCell>
+                  <TableCell>
+                    {flatOrder.created.toLocaleDateString()}
+                  </TableCell>
+                  <TableCell>{renderRowButtons(flatOrder)}</TableCell>
+                </TableRow>
+              ))
+          )}
+        </TableBody>
+      </Table>
+    </Container>
   );
 };
 

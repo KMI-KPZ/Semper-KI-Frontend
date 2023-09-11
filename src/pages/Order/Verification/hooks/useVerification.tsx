@@ -14,7 +14,7 @@ interface ReturnProps {
 
 export interface VerificationProps {
   orderID: string;
-  suborderIDs: string[];
+  subOrderIDs: string[];
   send: boolean;
 }
 
@@ -22,15 +22,11 @@ const useVerification = (): ReturnProps => {
   const queryClient = useQueryClient();
 
   const verifyOrder = useMutation<any, Error, VerificationProps>({
-    mutationFn: async ({ orderID, suborderIDs, send }) => {
+    mutationFn: async (props) => {
       const url = `${process.env.VITE_HTTP_API_URL}/public/verifyOrder/`;
       return getCustomAxios()
         .patch(url, {
-          data: {
-            orderID,
-            suborderIDs,
-            send,
-          },
+          ...props,
         })
         .then((response) => {
           logger("useVerification | verifyOrder ✅ |", response.data);

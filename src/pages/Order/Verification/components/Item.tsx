@@ -26,7 +26,7 @@ const SubOrderVerificationItem: React.FC<Props> = (props) => {
       <input
         className="h-10 w-10"
         type="checkbox"
-        {...register(`suborders.${index}.checked`)}
+        {...register(`subOrders.${index}.checked`)}
       />
     </label>
   );

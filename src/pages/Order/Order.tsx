@@ -75,8 +75,9 @@ const Order: React.FC<Props> = (props) => {
   const updateOrderTitle = (title: string) => {
     if (order === undefined) return;
     updateOrder.mutate({
-      orderID: order.orderID,
-      title: title,
+      changes: {
+        title: title,
+      },
     });
   };
 

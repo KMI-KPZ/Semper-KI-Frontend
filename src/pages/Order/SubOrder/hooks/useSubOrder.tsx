@@ -72,11 +72,11 @@ export interface SubOrderChangesProps {
 }
 
 export interface SubOrderDeletionsProps {
-  chat?: {};
-  state?: {};
-  files?: {};
-  details?: {};
-  service?: string[] | {};
+  chat?: "";
+  state?: "";
+  files?: "";
+  details?: "";
+  service?: string[] | "";
 }
 
 const useSubOrder = (): ReturnProps => {

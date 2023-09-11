@@ -28,10 +28,17 @@ export interface OrderProps {
 }
 
 export interface UpdateOrderProps {
-  orderID: string;
-  date?: string;
+  changes?: OrderChangesProps;
+  deletions?: OrderDeletionsProps;
+}
+
+export interface OrderChangesProps {
   state?: OrderState;
   title?: string;
+}
+export interface OrderDeletionsProps {
+  title?: "";
+  state?: "";
 }
 
 export enum OrderState {
@@ -85,7 +92,6 @@ export const useOrder = (): ReturnProps => {
         .get(apiUrl)
         .then((response) => {
           logger("useOrder | createOrder ✅ |", response.data);
-
           return response.data.orderID;
         });
     },
@@ -96,17 +102,19 @@ export const useOrder = (): ReturnProps => {
   });
 
   const updateOrder = useMutation<string, Error, UpdateOrderProps>({
-    mutationFn: async (props: UpdateOrderProps) => {
+    mutationFn: async ({ changes = {}, deletions = {} }) => {
       return getCustomAxios()
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateOrder/`, {
-          props,
+          orderID,
+          changes,
+          deletions,
         })
         .then((res) => {
           logger("useOrder | updateOrder ✅ |", res.data);
           return res.data;
         });
     },
-    onSuccess(data, orderID, context) {
+    onSuccess(data, variables, context) {
       queryClient.invalidateQueries(["order", orderID]);
       queryClient.invalidateQueries(["flatOrders"]);
     },

@@ -19,7 +19,7 @@ import { queryByTestId } from "@testing-library/react";
 
 interface Props {}
 export interface VerifyFormData {
-  suborders: { suborder: SubOrderProps; checked: boolean }[];
+  subOrders: { subOrder: SubOrderProps; checked: boolean }[];
 }
 
 const SubOrderVerification: React.FC<Props> = (props) => {
@@ -41,7 +41,7 @@ const SubOrderVerification: React.FC<Props> = (props) => {
     formState: { errors },
   } = useForm<VerifyFormData>({
     defaultValues: async () => ({
-      suborders: subOrders.map((suborder) => ({ suborder, checked: true })),
+      subOrders: subOrders.map((subOrder) => ({ subOrder, checked: true })),
     }),
   });
 
@@ -51,9 +51,9 @@ const SubOrderVerification: React.FC<Props> = (props) => {
     if (orderQuery.data !== undefined) {
       verifyOrder.mutate({
         orderID: orderQuery.data.orderID,
-        suborderIDs: data.suborders
+        subOrderIDs: data.subOrders
           .filter((suborder) => suborder.checked === true)
-          .map((subOrder) => subOrder.suborder.subOrderID),
+          .map((subOrder) => subOrder.subOrder.subOrderID),
         send: false,
       });
     }
@@ -63,9 +63,9 @@ const SubOrderVerification: React.FC<Props> = (props) => {
     if (orderQuery.data !== undefined) {
       verifyOrder.mutate({
         orderID: orderQuery.data.orderID,
-        suborderIDs: data.suborders
+        subOrderIDs: data.subOrders
           .filter((suborder) => suborder.checked === true)
-          .map((subOrder) => subOrder.suborder.subOrderID),
+          .map((subOrder) => subOrder.subOrder.subOrderID),
         send: true,
       });
     }

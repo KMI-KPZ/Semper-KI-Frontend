@@ -8,6 +8,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import Modal from "@component-library/Modal";
 import ProfileForm from "./components/Form";
+import Container from "@component-library/Container";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface Props {
   user: UserProps;
@@ -32,10 +34,10 @@ const Profile: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex flex-col gap-5 bg-white p-5">
+    <Container className=" bg-white p-5" direction="col" width="full">
       <Heading variant="h1">{t("Profile.header")}</Heading>
       <div className="w-full border-t-4" />
-      <div className="flex flex-col gap-2 p-5">
+      <Container direction="col" align="start">
         <Heading variant="h2">{t("Profile.general.header")}</Heading>
         <div className="w-full border-t-2" />
         <span>
@@ -48,30 +50,31 @@ const Profile: React.FC<Props> = (props) => {
           {t("Profile.general.type")}:{" "}
           {t(`enum.UserType.${UserType[user.usertype]}`)}
         </span>
-      </div>
+      </Container>
+
       {user.usertype === UserType.ORGANIZATION ? (
-        <div className="flex flex-col gap-2 p-5">
+        <Container direction="col" align="start">
           <Heading variant="h2">{t("Profile.company.header")}</Heading>
           <div className="w-full border-t-2" />
-          <span>
+          <span className="break-all">
             {t("Profile.company.name")}: {user.organizations}
           </span>
           {user.organizations[0] !== undefined &&
           user.organizations[0] === "None" ? (
-            <Button width="full" title={t("Profile.button.selectChange")} />
+            <Button title={t("Profile.button.selectChange")} />
           ) : null}
-        </div>
+        </Container>
       ) : null}
       {user.details.address !== undefined ? (
-        <div className="flex flex-col gap-2 p-5">
+        <Container direction="col" align="start">
           <Heading variant="h2">{t("Profile.address.header")}</Heading>
           <div className="w-full border-t-2" />
           <span>
             {t("Profile.address.street")}: {user.details.address}
           </span>
-        </div>
+        </Container>
       ) : null}
-      <div className="flex flex-col gap-2 p-5">
+      <Container direction="col" align="start">
         <Heading variant="h2">{t("Profile.time.header")}</Heading>
         <div className="w-full border-t-2" />
         <span>
@@ -83,23 +86,24 @@ const Profile: React.FC<Props> = (props) => {
         <span>
           {t("Profile.time.updated")}: {user.updated.toLocaleString()}
         </span>
-      </div>
+      </Container>
       <Modal open={edit} closeModal={closeModal}>
         <ProfileForm user={user} />
       </Modal>
-      <Button
-        width="full"
-        title={t(`Profile.button.${edit ? "save" : "edit"}`)}
-        startIcon={edit ? <CheckIcon /> : <EditIcon />}
-        onClick={handleOnClickButtonEdit}
-      />
-      <Button
-        testid="button-delete"
-        width="full"
-        onClick={handleOnClickButtonDelete}
-        title={t("Profile.button.delete")}
-      />
-    </div>
+      <Container justify="center">
+        <Button
+          title={t(`Profile.button.${edit ? "save" : "edit"}`)}
+          startIcon={edit ? <CheckIcon /> : <EditIcon />}
+          onClick={handleOnClickButtonEdit}
+        />
+        <Button
+          testid="button-delete"
+          startIcon={<DeleteIcon />}
+          onClick={handleOnClickButtonDelete}
+          title={t("Profile.button.delete")}
+        />
+      </Container>
+    </Container>
   );
 };
 

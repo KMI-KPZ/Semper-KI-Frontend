@@ -56,7 +56,7 @@ const Orders: React.FC<OrdersProps> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
-      <div className="flex w-full flex-col md:flex-row md:justify-between">
+      <div className="flex w-full flex-col gap-2 md:flex-row md:justify-between">
         <Heading variant="h1">{t("order.overview.title")}</Heading>
         <PermissionGate element={"OrdersButtonNew"}>
           <Button

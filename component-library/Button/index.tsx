@@ -122,9 +122,9 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       case "icon":
         switch (active) {
           case true:
-            return "hover:text-türkis rounded-full bg-slate-200";
+            return "hover:text-türkis bg-slate-200";
           case false:
-            return "hover:text-türkis rounded-full bg-slate-200 text-slate-400 hover:cursor-default";
+            return "hover:text-türkis bg-slate-200 text-slate-400 hover:cursor-default";
         }
     }
   };
@@ -179,7 +179,10 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     <a
       title={getTitle()}
       className={twMerge(
-        `bezier group flex h-fit flex-wrap items-center gap-3 break-words transition duration-300 md:flex-nowrap  md:whitespace-nowrap`,
+        `bezier group flex h-fit flex-wrap items-center 
+         justify-center gap-3 break-words rounded-lg
+         text-center transition duration-300  
+         md:flex-nowrap md:whitespace-nowrap`,
         getClassNameVariant(),
         getClassNameSize(),
         getClassNameWidth(),

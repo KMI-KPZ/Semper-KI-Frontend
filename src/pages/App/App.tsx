@@ -21,7 +21,7 @@ import Portfolio from "../Portfolio/Portfolio";
 import Profile from "../Profile/Proflle";
 import Resouces from "../Resources/Resources";
 import Legal from "../Legal/Legal";
-import useEvents from "./hooks/useEvents";
+import useEvents from "./hooks/useEvents/useEvents";
 import usePermissions, {
   Permission,
   PermissionGateType,

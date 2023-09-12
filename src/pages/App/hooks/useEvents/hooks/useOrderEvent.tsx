@@ -6,7 +6,6 @@ import {
 } from "@/pages/App/types";
 import { splitArray, splitFindArray } from "@/services/utils";
 import { Dispatch, SetStateAction } from "react";
-import { AppState } from "../App";
 import logger from "@/hooks/useLogger";
 
 const addOrderEventItemMessages = (

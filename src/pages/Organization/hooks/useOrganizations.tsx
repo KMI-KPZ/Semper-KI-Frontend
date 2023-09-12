@@ -386,7 +386,6 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
         });
     },
     onSuccess() {
-      queryClient.invalidateQueries(["organizations", "roles"]);
       queryClient.invalidateQueries(["organizations", "users"]);
     },
   });

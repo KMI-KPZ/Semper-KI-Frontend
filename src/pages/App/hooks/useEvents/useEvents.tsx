@@ -4,28 +4,19 @@ import {
   DeleteOrgaEvent,
   Event,
   OrderEvent,
-  OrderEventItem,
   OrderEventType,
   OrgaEvent,
 } from "@/pages/App/types";
 import { useQueryClient } from "@tanstack/react-query";
-import {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { AppContext, AppState } from "../App";
-import useMissedEvent from "./useMissedEvent";
-import useOrderEvent from "./useOrderEvent";
-import useOrgaEvent from "./useOrgaEvent";
-import { useWebsocket } from "./useWebsocket";
+import { useState } from "react";
+import useMissedEvent from "./hooks/useMissedEvent";
 import logger from "@/hooks/useLogger";
 import { useTranslation } from "react-i18next";
-import { toast } from "./useToast";
+import { toast } from "../useToast";
 import { UserProps, UserType } from "@/hooks/useUser/types";
-import usePermissions from "@/hooks/usePermissions";
+import useOrderEvent from "./hooks/useOrderEvent";
+import useOrgaEvent from "./hooks/useOrgaEvent";
+import { useWebsocket } from "./hooks/useWebsocket";
 
 interface ReturnProps {
   deleteEvent: (event: DeleteEvent) => void;
@@ -100,7 +91,6 @@ const useEvents = (
   };
 
   const onWebsocktEvent = (event: MessageEvent) => {
-    return;
     if (event.data !== undefined) {
       const newEvent: Event = JSON.parse(event.data);
       if (newEvent) {
@@ -126,6 +116,8 @@ const useEvents = (
             toast(t("toast.orgaEvent"), "/organization");
             break;
           case "permissionEvent":
+            queryClient.invalidateQueries(["permissions"]);
+            queryClient.invalidateQueries(["organizations", "users"]);
             toast(t("toast.permissionEvent"), "/organization");
             break;
         }

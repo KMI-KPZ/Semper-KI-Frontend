@@ -49,25 +49,39 @@ const SubOrderVerification: React.FC<Props> = (props) => {
 
   const handleOnClickButtonVerify = (data: VerifyFormData) => {
     if (orderQuery.data !== undefined) {
-      verifyOrder.mutate({
-        orderID: orderQuery.data.orderID,
-        subOrderIDs: data.subOrders
-          .filter((suborder) => suborder.checked === true)
-          .map((subOrder) => subOrder.subOrder.subOrderID),
-        send: false,
-      });
+      verifyOrder.mutate(
+        {
+          orderID: orderQuery.data.orderID,
+          subOrderIDs: data.subOrders
+            .filter((suborder) => suborder.checked === true)
+            .map((subOrder) => subOrder.subOrder.subOrderID),
+          send: false,
+        },
+        {
+          onSuccess: () => {
+            navigate("../..");
+          },
+        }
+      );
     }
   };
 
   const handleOnClickButtonRequest = (data: VerifyFormData) => {
     if (orderQuery.data !== undefined) {
-      verifyOrder.mutate({
-        orderID: orderQuery.data.orderID,
-        subOrderIDs: data.subOrders
-          .filter((suborder) => suborder.checked === true)
-          .map((subOrder) => subOrder.subOrder.subOrderID),
-        send: true,
-      });
+      verifyOrder.mutate(
+        {
+          orderID: orderQuery.data.orderID,
+          subOrderIDs: data.subOrders
+            .filter((suborder) => suborder.checked === true)
+            .map((subOrder) => subOrder.subOrder.subOrderID),
+          send: true,
+        },
+        {
+          onSuccess: () => {
+            navigate("../..");
+          },
+        }
+      );
     }
   };
 

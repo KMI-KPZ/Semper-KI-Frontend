@@ -115,7 +115,9 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
         />
       </div>
       <div className={`flex w-full flex-col items-center gap-5 md:flex-row`}>
-        <Text variant={`body`}>{t(`Organization.Info.name`)}</Text>
+        <Text variant={`body`}>
+          {t(`Organization.Info.components.form.canManufacture`)}
+        </Text>
         <input
           type="checkbox"
           className={`h-10 w-10 bg-slate-100`}

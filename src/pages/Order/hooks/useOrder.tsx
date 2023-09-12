@@ -24,6 +24,10 @@ export interface OrderProps {
   updated: Date;
   state: OrderState;
   subOrders: SubOrderProps[];
+  details: OrderDetailsProps;
+}
+
+export interface OrderDetailsProps {
   title?: string;
 }
 
@@ -34,10 +38,10 @@ export interface UpdateOrderProps {
 
 export interface OrderChangesProps {
   state?: OrderState;
-  title?: string;
+  details?: OrderDetailsProps;
 }
 export interface OrderDeletionsProps {
-  title?: "";
+  details?: { title?: "" };
   state?: "";
 }
 

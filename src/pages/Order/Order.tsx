@@ -76,7 +76,9 @@ const Order: React.FC<Props> = (props) => {
     if (order === undefined) return;
     updateOrder.mutate({
       changes: {
-        title: title,
+        details: {
+          title,
+        },
       },
     });
   };
@@ -101,9 +103,9 @@ const Order: React.FC<Props> = (props) => {
               <OrderTitleForm
                 headerType="h1"
                 title={
-                  order.title === undefined
+                  order.details.title === undefined
                     ? t("Orders.OrderCollection.title")
-                    : order.title
+                    : order.details.title
                 }
                 updateTitle={updateOrderTitle}
               />

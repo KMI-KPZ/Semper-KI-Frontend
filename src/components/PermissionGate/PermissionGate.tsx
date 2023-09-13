@@ -18,8 +18,7 @@ const PermissionGate: React.FC<PropsWithChildren<PermissionProps>> = (
   const { t } = useTranslation();
   const { hasPermission } = usePermissionGate();
 
-  const inDebugMode = process.env.NODE_ENV === "development" && false;
-  logger("PermissionGate", hasPermission(element), "element", element);
+  const inDebugMode = process.env.NODE_ENV === "development";
 
   return hasPermission(element) ? (
     <>{children}</>

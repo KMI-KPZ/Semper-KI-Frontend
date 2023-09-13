@@ -152,7 +152,7 @@ const App: React.FC = () => {
                 element={
                   <PermissionGate
                     children={<Resouces />}
-                    element="Resouces"
+                    element="Resources"
                     showMessage
                   />
                 }

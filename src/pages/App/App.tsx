@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
-import { RequestTest } from "../RequestTest/RequestTest";
+import { Test } from "../Test/Test";
 import { UserProps } from "@/hooks/useUser/types";
 import { DeleteEvent, Event } from "@/pages/App/types";
 import { ToastContainer } from "react-toastify";
@@ -133,7 +133,7 @@ const App: React.FC = () => {
             <Route path="orders" element={<Orders user={user} />} />
             <Route path="order/*" element={<OrderRoutes user={user} />} />
             <Route element={<UserOutlet user={user} />}>
-              <Route path="test" element={<RequestTest socket={socket} />} />
+              <Route path="test" element={<Test socket={socket} />} />
               <Route path="account" element={<Profile user={user!} />} />
             </Route>
             <Route element={<OrganizationOutlet user={user} />}>

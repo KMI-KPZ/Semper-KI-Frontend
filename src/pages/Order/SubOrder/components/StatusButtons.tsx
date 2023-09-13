@@ -8,6 +8,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { OrderState } from "@/pages/Order/hooks/useOrder";
 import useService from "@/pages/Service/hooks/useService";
 import EditIcon from "@mui/icons-material/Edit";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface SubOrderStatusButtonsProps {
   subOrderID: string;
@@ -23,40 +24,49 @@ const SubOrderStatusButtons: React.FC<SubOrderStatusButtonsProps> = (props) => {
     if (state === OrderState.DRAFT)
       return (
         <>
-          <Button
-            variant="icon"
-            startIcon={<EditIcon />}
-            title={t("OrderRoutes.SubOrder.components.StateButton.edit")}
-            to={`suborder/${subOrderID}`}
-          />
-          <Button
-            variant="icon"
-            startIcon={<FactoryIcon />}
-            title={t(
-              "OrderRoutes.SubOrder.components.StateButton.selectContractor"
-            )}
-            to={`suborder/${subOrderID}/contractorSelection`}
-            active={isServiceComplete(subOrderID)}
-          />
+          <PermissionGate element="SubOrderButtonEdit">
+            <Button
+              variant="icon"
+              startIcon={<EditIcon />}
+              title={t("OrderRoutes.SubOrder.components.StateButton.edit")}
+              to={`suborder/${subOrderID}`}
+            />
+          </PermissionGate>
+
+          <PermissionGate element="SubOrderButtonContractorSelection">
+            <Button
+              variant="icon"
+              startIcon={<FactoryIcon />}
+              title={t(
+                "OrderRoutes.SubOrder.components.StateButton.selectContractor"
+              )}
+              to={`suborder/${subOrderID}/contractorSelection`}
+              active={isServiceComplete(subOrderID)}
+            />
+          </PermissionGate>
         </>
       );
     else if (state === OrderState.CONTRACTOR_SELECTED)
       return (
-        <Button
-          variant="icon"
-          startIcon={<PolicyIcon />}
-          title={t("OrderRoutes.SubOrder.components.StateButton.verify")}
-          to={`suborder/${subOrderID}/verification`}
-        />
+        <PermissionGate element="SubOrderButtonVerify">
+          <Button
+            variant="icon"
+            startIcon={<PolicyIcon />}
+            title={t("OrderRoutes.SubOrder.components.StateButton.verify")}
+            to={`suborder/${subOrderID}/verification`}
+          />
+        </PermissionGate>
       );
     else if (state === OrderState.VERIFIED)
       return (
-        <Button
-          variant="icon"
-          startIcon={<SendIcon />}
-          title={t("OrderRoutes.SubOrder.components.StateButton.request")}
-          to={`suborder/${subOrderID}/checkout`}
-        />
+        <PermissionGate element="SubOrderButtonRequest">
+          <Button
+            variant="icon"
+            startIcon={<SendIcon />}
+            title={t("OrderRoutes.SubOrder.components.StateButton.request")}
+            to={`suborder/${subOrderID}/checkout`}
+          />
+        </PermissionGate>
       );
   };
 

@@ -5,6 +5,7 @@ import { ServiceType } from "../hooks/useService";
 import FactoryIcon from "@mui/icons-material/Factory";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import ServiceSelectItem from "./components/Item";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ServiceSelectProps {
   subOrderID?: string;
@@ -37,11 +38,13 @@ const ServiceSelect: React.FC<ServiceSelectProps> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
       <Heading variant="h1">{t("OrderRoutes.Service.Select.title")}</Heading>
-      <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
-        {serviceSelectItems.map((item, index) => (
-          <ServiceSelectItem {...item} key={index} subOrderID={subOrderID} />
-        ))}
-      </div>
+      <PermissionGate element="SubOrderServiceSelection">
+        <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
+          {serviceSelectItems.map((item, index) => (
+            <ServiceSelectItem {...item} key={index} subOrderID={subOrderID} />
+          ))}
+        </div>
+      </PermissionGate>
     </div>
   );
 };

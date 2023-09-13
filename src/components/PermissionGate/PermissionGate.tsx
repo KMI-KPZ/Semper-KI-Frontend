@@ -4,6 +4,7 @@ import React, { PropsWithChildren, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import usePermissionGate from "./hooks/usePermissionGate";
 import logger from "@/hooks/useLogger";
+import { Text } from "@component-library/Typography";
 
 interface PermissionProps {
   element: string;
@@ -17,13 +18,15 @@ const PermissionGate: React.FC<PropsWithChildren<PermissionProps>> = (
   const { t } = useTranslation();
   const { hasPermission } = usePermissionGate();
 
+  const inDebugMode = process.env.NODE_ENV === "development" && false;
+  logger("PermissionGate", hasPermission(element), "element", element);
+
   return hasPermission(element) ? (
     <>{children}</>
-  ) : (
-    //  showMessage === undefined || showMessage === false ? null : (
-    //   <Text variant="body" children={t("PermissionGate.message")} />
-    // );
+  ) : inDebugMode ? (
     <div className="border-2 border-orange-500 ">{children}</div>
+  ) : showMessage === undefined || showMessage === false ? null : (
+    <Text variant="body" children={t("PermissionGate.message")} />
   );
 };
 

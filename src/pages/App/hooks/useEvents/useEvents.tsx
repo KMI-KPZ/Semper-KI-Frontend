@@ -10,7 +10,6 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import useMissedEvent from "./hooks/useMissedEvent";
-import logger from "@/hooks/useLogger";
 import { useTranslation } from "react-i18next";
 import { toast } from "../useToast";
 import { UserProps, UserType } from "@/hooks/useUser/types";
@@ -64,9 +63,9 @@ const useEvents = (
   const { t } = useTranslation();
 
   const onLoadMissedEvents = (missedEvents: Event[]) => {
-    // if (missedEvents.length > 0) {
-    //   setEvents(missedEvents);
-    // }
+    if (missedEvents.length > 0) {
+      setEvents(missedEvents);
+    }
   };
 
   useMissedEvent({
@@ -84,19 +83,30 @@ const useEvents = (
         queryClient.invalidateQueries(["organizations"]);
         break;
       case "permissionEvent":
-        logger("reloade permissions");
+        queryClient.invalidateQueries(["permissions"]);
+        queryClient.invalidateQueries(["organizations", "users"]);
         reloadPermissions();
         break;
     }
   };
 
+  const isParseableJSON = (str: string) => {
+    try {
+      JSON.parse(str);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
   const onWebsocktEvent = (event: MessageEvent) => {
-    if (event.data !== undefined) {
+    if (event.data !== undefined && isParseableJSON(event.data)) {
       const newEvent: Event = JSON.parse(event.data);
       if (newEvent) {
+        invalidateQueries(newEvent);
+        hydrateEvents(newEvent);
         switch (newEvent.eventType) {
           case "orderEvent":
-            hydrateEvents(newEvent);
             const orderEvent = newEvent as OrderEvent;
             if (orderEvent.orders[0].messages > 0) {
               toast(
@@ -112,16 +122,12 @@ const useEvents = (
             }
             break;
           case "orgaEvent":
-            hydrateEvents(newEvent);
             toast(t("toast.orgaEvent"), "/organization");
             break;
           case "permissionEvent":
-            queryClient.invalidateQueries(["permissions"]);
-            queryClient.invalidateQueries(["organizations", "users"]);
             toast(t("toast.permissionEvent"), "/organization");
             break;
         }
-        invalidateQueries(newEvent);
       }
     }
   };
@@ -130,21 +136,21 @@ const useEvents = (
 
   const hydrateEvents = (newEvent: Event): void => {
     setEvents((prevState) => {
-      let newMissedEvent: Event[] = prevState;
+      let newMissedEvents: Event[] = prevState;
       switch (newEvent.eventType) {
         case "orderEvent":
-          newMissedEvent = hydrateOrderEvents(
+          newMissedEvents = hydrateOrderEvents(
             newEvent as OrderEvent,
             prevState
           );
           break;
         case "orgaEvent":
-          newMissedEvent = hydrateOrgaEvents(newEvent as OrgaEvent, prevState);
+          newMissedEvents = hydrateOrgaEvents(newEvent as OrgaEvent, prevState);
           break;
-        default:
-          break;
+        case "permissionEvent":
+          newMissedEvents.push(newEvent);
       }
-      return newMissedEvent;
+      return newMissedEvents;
     });
   };
 
@@ -160,7 +166,6 @@ const useEvents = (
         setEvents((prevState) =>
           deleteOrgaEvent(event as DeleteOrgaEvent, prevState)
         );
-
         break;
     }
   };

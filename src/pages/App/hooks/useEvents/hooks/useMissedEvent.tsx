@@ -21,7 +21,7 @@ const useMissedEvent = (props: Props): void => {
           logger("useMissedEvent | getMissedEvents ✅ |", res.data);
           return res.data;
         }),
-    enabled: isLoggedIn === true && false,
+    enabled: isLoggedIn === true,
     refetchOnWindowFocus: false,
     initialData: [],
   });

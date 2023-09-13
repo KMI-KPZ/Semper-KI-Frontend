@@ -4,6 +4,7 @@ import useOrganizations from "../hooks/useOrganizations";
 import { Button, LoadingSuspense, Text } from "@component-library/index";
 import OrganizationInfoForm from "./components/Form";
 import Modal from "@component-library/Modal";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface OrganizationInfoProps {}
 
@@ -69,10 +70,12 @@ const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
               {organizationInfoQuery.data.details.taxID}
             </Text>
           </div>
-          <Button
-            title={t(`Organization.Info.button.edit`)}
-            onClick={openEdit}
-          />
+          <PermissionGate element="OrganizationButtonEditOrga">
+            <Button
+              title={t(`Organization.Info.button.edit`)}
+              onClick={openEdit}
+            />
+          </PermissionGate>
           <Modal open={edit} closeModal={closeEdit}>
             <OrganizationInfoForm
               closeEdit={closeEdit}

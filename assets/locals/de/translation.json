@@ -1049,6 +1049,7 @@
           "alert":"Rolle wirklich löschen?"
         },
         "Table":{
+          
           "name":"Name",
           "description":"Beschreibung",
           "actions":"Aktionen",
@@ -1106,6 +1107,7 @@
     },
     "components":{
       "table":{
+        "confirmDelete":"Möchten Sie den Benutzer wirklich löschen?",
         "header":"Benutzer",
         "name":"Benutzername",
         "picture":"Profilbild",

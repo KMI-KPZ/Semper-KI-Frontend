@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface OrderTitleFormProps {
   title: string;
@@ -63,19 +64,21 @@ const OrderTitleForm: React.FC<OrderTitleFormProps> = (props) => {
           {t("Orders.OrderView.name")} {title}
         </Heading>
       )}
-      <Button
-        width="fit"
-        onClick={handleOnClickEditCheckButton}
-        variant="icon"
-        title={t("Orders.OrderView.button.editName")}
-        children={
-          state.edit ? (
-            <CheckIcon fontSize="small" />
-          ) : (
-            <EditIcon fontSize="small" />
-          )
-        }
-      />
+      <PermissionGate element="OrderButtonEditName">
+        <Button
+          width="fit"
+          onClick={handleOnClickEditCheckButton}
+          variant="icon"
+          title={t("Orders.OrderView.button.editName")}
+          children={
+            state.edit ? (
+              <CheckIcon fontSize="small" />
+            ) : (
+              <EditIcon fontSize="small" />
+            )
+          }
+        />
+      </PermissionGate>
     </Container>
   );
 };

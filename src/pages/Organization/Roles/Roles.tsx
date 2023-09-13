@@ -11,6 +11,7 @@ import OrganizationRolesItem from "./components/Item";
 import { Fragment, useState } from "react";
 import OrganizationRolesTable from "./components/Table";
 import Modal from "@component-library/Modal";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface OrganizationRolesProps {}
 
@@ -90,10 +91,12 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
               roles={rolesQuery.data}
               editRole={editRole}
             />
-            <Button
-              title={t("Organization.Roles.Roles.button.create")}
-              onClick={createNewRole}
-            />
+            <PermissionGate element="OrganizationButtonCreateRole">
+              <Button
+                title={t("Organization.Roles.Roles.button.create")}
+                onClick={createNewRole}
+              />
+            </PermissionGate>
           </>
         ) : (
           <Text variant="body">{t("Organization.Roles.Roles.empty")}</Text>

@@ -1,9 +1,7 @@
-export type EventType = "orderEvent" | "orgaEvent" | "permissionEvent";
-export interface Event {
-  eventType: EventType;
-}
 
-export interface OrderEvent extends Event {
+export type Event = OrderEvent | OrgaEvent | PermissionEvent; 
+
+export interface OrderEvent {
   eventType: "orderEvent";
   orderCollectionID: string;
   orders: OrderEventItem[];
@@ -15,25 +13,24 @@ export interface OrderEventItem {
   messages: number;
 }
 
-export interface OrgaEvent extends Event {
+export interface OrgaEvent  {
   eventType: "orgaEvent";
   orgaName: string;
 }
-export interface PermissionEvent extends Event {
+export interface PermissionEvent  {
   eventType: "permissionEvent";
 }
 
-export interface DeleteEvent {
-  eventType: EventType;
-}
+export type DeleteEvent = DeleteOrderEvent | DeleteOrgaEvent;
+
 export type OrderEventType = "message" | "status";
 
-export interface DeleteOrderEvent extends DeleteEvent {
+export interface DeleteOrderEvent  {
   eventType: "orderEvent";
   orderCollectionID: string;
   orderID: string;
   type: OrderEventType;
 }
-export interface DeleteOrgaEvent extends DeleteEvent {
+export interface DeleteOrgaEvent {
   eventType: "orgaEvent";
 }

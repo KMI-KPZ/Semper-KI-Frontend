@@ -4,7 +4,7 @@ import { useContext, useEffect } from "react";
 import { SubOrderProps } from "../SubOrder/hooks/useSubOrder";
 
 interface ReturnProps {
-  getDeleteOrderEvent: (type: "status" | "message") => Event;
+  getDeleteOrderEvent: (type: "status" | "message") => DeleteOrderEvent;
 }
 
 const useOrderEventChange = (
@@ -14,14 +14,16 @@ const useOrderEventChange = (
 ): ReturnProps => {
   const { deleteEvent } = useContext(AppContext);
 
-  const getDeleteOrderEvent = (type: "status" | "message"): Event => {
+  const getDeleteOrderEvent = (
+    type: "status" | "message"
+  ): DeleteOrderEvent => {
     const deleteOrderEvent: DeleteOrderEvent = {
       eventType: "orderEvent",
       orderCollectionID: orderCollectionID,
       orderID: subOrder.subOrderID,
       type: type,
     };
-    return deleteOrderEvent as Event;
+    return deleteOrderEvent;
   };
 
   useEffect(() => {

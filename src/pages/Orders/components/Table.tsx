@@ -90,23 +90,14 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
           onClick={() => handleOnClickButtonDelete(flatOrder.orderID)}
         />
       </PermissionGate>
-      {flatOrder.state < OrderState.REQUESTED ? (
-        <PermissionGate element={"OrderButtonEdit"}>
-          <Button
-            variant="secondary"
-            title={t("order.overview.components.table.button.edit")}
-            children={<EditIcon />}
-            to={`/order/${flatOrder.orderID}`}
-          />
-        </PermissionGate>
-      ) : (
+      <PermissionGate element={"OrderButtonSee"}>
         <Button
           variant="secondary"
           title={t("order.overview.components.table.button.detail")}
           children={<VisibilityIcon />}
           to={`/order/${flatOrder.orderID}`}
         />
-      )}
+      </PermissionGate>
     </div>
   );
 

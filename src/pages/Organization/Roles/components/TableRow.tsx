@@ -10,6 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button } from "@component-library/Button";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface OrganizationRolesTableRowProps {
   role: RoleProps;
@@ -65,16 +66,20 @@ const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
         : null}
       <td className="border-l-2 p-2">
         <div className="flex w-full flex-row items-center justify-center gap-5">
-          <Button
-            title={t(`Organization.components.table.button.edit`)}
-            onClick={handleOnClickButtonEdit}
-            children={<EditIcon fontSize="small" />}
-          />
-          <Button
-            onClick={handleOnClickButtonDelete}
-            children={<DeleteForeverIcon fontSize="small" />}
-            title={t("Organization.components.table.button.delete")}
-          />
+          <PermissionGate element="OrganizationButtonEditRole">
+            <Button
+              title={t(`Organization.components.table.button.edit`)}
+              onClick={handleOnClickButtonEdit}
+              children={<EditIcon fontSize="small" />}
+            />
+          </PermissionGate>
+          <PermissionGate element="OrganizationButtonDeleteRole">
+            <Button
+              onClick={handleOnClickButtonDelete}
+              children={<DeleteForeverIcon fontSize="small" />}
+              title={t("Organization.components.table.button.delete")}
+            />
+          </PermissionGate>
         </div>
       </td>
     </tr>

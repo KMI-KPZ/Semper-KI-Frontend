@@ -1,12 +1,5 @@
 import { Button } from "@component-library/Button";
 import { Heading, Text } from "@component-library/Typography";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -81,7 +74,7 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
   };
 
   const renderRowButtons = (flatOrder: FlatOrderProps) => (
-    <div className="flex w-fit flex-row items-center justify-center gap-5">
+    <div className="flex w-full flex-row items-center justify-center gap-5">
       <PermissionGate element={"OrderButtonDelete"}>
         <Button
           variant="secondary"
@@ -103,43 +96,46 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
 
   return (
     <Container className="overflow-auto" width="full">
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>
-              {t("order.overview.components.table.grouping")}
-            </TableCell>
-            <TableCell>{t("order.overview.components.table.name")}</TableCell>
-            <TableCell>{t("order.overview.components.table.status")}</TableCell>
-            <TableCell>{t("order.overview.components.table.count")}</TableCell>
-            <TableCell>
+      <table aria-label="simple table" className="w-full table-auto ">
+        <thead className="">
+          <tr className="border-b-2">
+            <th>{t("order.overview.components.table.grouping")}</th>
+            <th className="text-left">
+              {t("order.overview.components.table.name")}
+            </th>
+            <th className="text-left">
+              {t("order.overview.components.table.status")}
+            </th>
+            <th className="text-left">
+              {t("order.overview.components.table.count")}
+            </th>
+            <th className="text-left">
               {t("order.overview.components.table.created")}
-            </TableCell>
-            <TableCell>
-              {t("order.overview.components.table.actions")}
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
+            </th>
+            <th>{t("order.overview.components.table.actions")}</th>
+          </tr>
+        </thead>
+        <tbody>
           {getGroupedFlatOrder(flatOrders).map((group, groupIndex, groups) =>
             group.flatOrders
               .sort((subOrderA, subOrderB) =>
                 subOrderA.state > subOrderB.state ? 1 : -1
               )
               .map((flatOrder, index, groupFlatOrder) => (
-                <TableRow
+                <tr
                   key={flatOrder.orderID}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   {index === 0 ? (
-                    <TableCell
+                    <td
                       scope="row"
                       rowSpan={groupFlatOrder.length}
-                      sx={{
-                        verticalAlign: "top",
-                        border:
-                          groupIndex === groups.length - 1 ? 0 : undefined,
-                      }}
+
+                      // sx={{
+                      //   verticalAlign: "top",
+                      //   border:
+                      //     groupIndex === groups.length - 1 ? 0 : undefined,
+                      // }}
                     >
                       <div className="flex h-full w-full flex-col items-center justify-start">
                         <Heading variant="h2">
@@ -148,28 +144,28 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
                           )}
                         </Heading>
                       </div>
-                    </TableCell>
+                    </td>
                   ) : null}
-                  <TableCell component="th" scope="row">
-                    Artikel: #{flatOrder.orderID}
-                  </TableCell>
-                  <TableCell>
+                  <td scope="row">
+                    {flatOrder.details.title === undefined
+                      ? `Auftrag: #${flatOrder.orderID}`
+                      : flatOrder.details.title}
+                  </td>
+                  <td>
                     {t(
                       `Orders.OrderCollection.state.${
                         OrderState[flatOrder.state]
                       }`
                     )}
-                  </TableCell>
-                  <TableCell>{flatOrder.subOrderCount}</TableCell>
-                  <TableCell>
-                    {flatOrder.created.toLocaleDateString()}
-                  </TableCell>
-                  <TableCell>{renderRowButtons(flatOrder)}</TableCell>
-                </TableRow>
+                  </td>
+                  <td>{flatOrder.subOrderCount}</td>
+                  <td>{flatOrder.created.toLocaleDateString()}</td>
+                  <td>{renderRowButtons(flatOrder)}</td>
+                </tr>
               ))
           )}
-        </TableBody>
-      </Table>
+        </tbody>
+      </table>
     </Container>
   );
 };

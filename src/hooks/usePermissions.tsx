@@ -7,7 +7,6 @@ import {
 import { getCustomAxios } from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
 import { useContext, useState } from "react";
-import { AppContext } from "@/pages/App/App";
 import { UserProps } from "./useUser/types";
 
 interface ReturnProps {
@@ -61,22 +60,22 @@ const usePermissions = (user?: UserProps): ReturnProps => {
     enabled: user !== undefined,
   });
 
-  const reloadPermissionMutation = useMutation<Permission[], Error, null>({
+  const reloadPermissionMutation = useMutation<Permission[], Error, void>({
     mutationFn: async () =>
       getCustomAxios()
         .get(`${process.env.VITE_HTTP_API_URL}/public/getNewPermissions/`)
         .then((res) => {
-          logger("usePermissions | getNewPermissions ✅ |", res.data);
+          logger("usePermissions | relodePermissions ✅"); // |", res.data);
           return res.data;
         }),
     onSuccess(data, variables, context) {
-      setPermissions(data);
+      // setPermissions(data);
       queryClient.invalidateQueries(["permissions"]);
     },
   });
 
   const reloadPermissions = () => {
-    reloadPermissionMutation.mutate(null);
+    reloadPermissionMutation.mutate();
   };
 
   return {

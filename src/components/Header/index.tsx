@@ -13,8 +13,8 @@ import { UserProps, UserType } from "@/hooks/useUser/types";
 import { Event, OrderEvent } from "@/pages/App/types";
 import { Heading, Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
-import { getOrderEventAmount } from "@/pages/App/hooks/useEvents/useEvents";
 import useBodyScroll from "@/pages/App/hooks/useBodyScroll";
+import { getOrderEventAmount } from "@/pages/App/hooks/useEvents/hooks/useOrderEvent";
 
 interface Language {
   code: string;

@@ -1,3 +1,4 @@
+import logger from "@/hooks/useLogger";
 import { Address, UserType } from "@/hooks/useUser/types";
 import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
 
@@ -133,4 +134,25 @@ export const splitArray = <T extends any>(
   const arrayTrue = array.filter((item) => conditionFunction(item));
   const arrayFalse = array.filter((item) => !conditionFunction(item));
   return { arrayTrue, arrayFalse };
+};
+
+export const JSONIsParseable = (input: any): boolean => {
+  if (typeof input !== "string") return false;
+  try {
+    JSON.parse(input);
+    return true;
+  } catch (error) {
+    logger("JSONIsParseable error: ", error);
+    return false;
+  }
+};
+
+export const JSONSafeParse = <T,>(input: any): T | undefined => {
+  if (typeof input !== "string") return undefined;
+  try {
+    return JSON.parse(input) as T;
+  } catch (error) {
+    logger("JSONSafeParse error: ", error);
+    return undefined;
+  }
 };

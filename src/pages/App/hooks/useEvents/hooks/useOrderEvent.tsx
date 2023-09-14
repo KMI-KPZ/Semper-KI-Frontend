@@ -3,10 +3,44 @@ import {
   Event,
   OrderEvent,
   OrderEventItem,
+  OrderEventType,
 } from "@/pages/App/types";
 import { splitArray, splitFindArray } from "@/services/utils";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 import logger from "@/hooks/useLogger";
+import { useTranslation } from "react-i18next";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "../../useToast";
+import { UserType } from "@/hooks/useUser/types";
+import { AppContext } from "@/pages/App/App";
+
+export const getOrderEventAmount = (
+  events: Event[] | undefined,
+  type?: OrderEventType
+) => {
+  if (events === undefined) return undefined;
+  let count = 0;
+  events
+    .filter((event) => event.eventType === "orderEvent")
+    .forEach((_orderEvent) => {
+      const orderEvent = _orderEvent as OrderEvent;
+      orderEvent.orders.forEach((orderEvent) => {
+        if (
+          orderEvent.messages !== undefined &&
+          orderEvent.messages > 0 &&
+          (type === "message" || type === undefined)
+        )
+          count += orderEvent.messages;
+        if (
+          orderEvent.status !== undefined &&
+          orderEvent.status > 0 &&
+          (type === "status" || type === undefined)
+        )
+          count += orderEvent.status;
+      });
+    });
+  return count > 0 ? count : undefined;
+};
 
 const addOrderEventItemMessages = (
   oldEvent: OrderEventItem | undefined,
@@ -84,11 +118,19 @@ const hydrateOrderEventItems = (
 };
 
 interface ReturnProps {
-  hydrateOrderEvents: (newOrderEvent: OrderEvent, events: Event[]) => Event[];
+  handleNewOrderEvent: (
+    newEvent: OrderEvent,
+    events: Event[],
+    setEvents: Dispatch<SetStateAction<Event[]>>
+  ) => void;
   deleteOrderEvent: (event: DeleteOrderEvent, events: Event[]) => Event[];
 }
 
 const useOrderEvent = (): ReturnProps => {
+  const queryClient = useQueryClient();
+  const { t } = useTranslation();
+  const { user } = useContext(AppContext);
+
   const hydrateOrderEvents = (
     newOrderEvent: OrderEvent,
     events: Event[]
@@ -175,7 +217,30 @@ const useOrderEvent = (): ReturnProps => {
       : [...otherEvents, ...otherOrderEvents];
   };
 
-  return { hydrateOrderEvents, deleteOrderEvent };
+  const handleNewOrderEvent = (
+    newEvent: OrderEvent,
+    events: Event[],
+    setEvents: Dispatch<SetStateAction<Event[]>>
+  ) => {
+    queryClient.invalidateQueries(["order"]);
+    queryClient.invalidateQueries(["flatOrders"]);
+    setEvents(hydrateOrderEvents(newEvent, events));
+    const orderEvent = newEvent;
+    if (orderEvent.orders[0].messages > 0) {
+      toast(
+        t("toast.orderEvent.message"),
+        user?.usertype === UserType.USER ? "/orders" : "/contracts"
+      );
+    }
+    if (orderEvent.orders[0].status > 0) {
+      toast(
+        t("toast.orderEvent.status"),
+        user?.usertype === UserType.USER ? "/orders" : "/contracts"
+      );
+    }
+  };
+
+  return { handleNewOrderEvent, deleteOrderEvent };
 };
 
 export default useOrderEvent;

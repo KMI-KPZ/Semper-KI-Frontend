@@ -76,7 +76,7 @@ export const useWebsocket = (
       };
 
       ws.onmessage = (event: MessageEvent) => {
-        logger("useWebsocket | onmessage", event);
+        // logger("useWebsocket | onmessage", event);
         onMessage(event);
       };
 

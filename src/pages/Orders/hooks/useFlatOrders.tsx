@@ -7,7 +7,7 @@ import {
   UseQueryResult,
 } from "@tanstack/react-query";
 import logger from "@/hooks/useLogger";
-import { OrderState } from "@/pages/Order/hooks/useOrder";
+import { OrderDetailsProps, OrderState } from "@/pages/Order/hooks/useOrder";
 
 interface ReturnProps {
   ordersQuery: UseQueryResult<FlatOrderProps[], Error>;
@@ -18,6 +18,7 @@ export interface FlatOrderProps {
   client: string;
   created: Date;
   updated: Date;
+  details: OrderDetailsProps;
   state: OrderState;
   subOrderCount: number;
 }

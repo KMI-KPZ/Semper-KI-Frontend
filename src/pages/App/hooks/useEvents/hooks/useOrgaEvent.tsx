@@ -28,9 +28,11 @@ const useOrgaEvent = (): ReturnProps => {
     ) as OrgaEvent[];
     return [...orgaEvents];
   };
+
   const deleteOrgaEvent = (event: DeleteOrgaEvent, events: Event[]) => {
     return events;
   };
+
   const handleNewOrgaEvent = (
     newEvent: OrgaEvent,
     events: Event[],

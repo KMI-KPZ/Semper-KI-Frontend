@@ -47,16 +47,20 @@ export interface OrderDeletionsProps {
 
 export enum OrderState {
   "DRAFT" = 0,
-  "CONTRACTOR_SELECTED" = 100,
-  // "VERIFYING" = 150,
-  "VERIFIED" = 200,
-  "REQUESTED" = 300,
-  "CLARIFICATION" = 400,
-  "REJECTED" = 500,
-  "CONFIRMED" = 600,
-  "PRODUCTION" = 700,
-  "DELIVERY" = 800,
-  "COMPLETED" = 900,
+  "SERVICE_COMPLICATIONS" = 100,
+  "SERVICE_READY" = 200,
+  "CONTRACTOR_SELECTED" = 300,
+  "VERIFYING" = 400,
+  "VERIFIED" = 500,
+  "REQUESTED" = 600,
+  "CLARIFICATION" = 700,
+  "CONTRACTOR_REJECTED" = 800,
+  "CONTRACTOR_CONFIRMED" = 900,
+  "CLIENT_REJECTED" = 1000,
+  "CLIENT_CONFIRMED" = 1100,
+  "PRODUCTION" = 1200,
+  "DELIVERY" = 1300,
+  "COMPLETED" = 1400,
 }
 
 export const useOrder = (): ReturnProps => {

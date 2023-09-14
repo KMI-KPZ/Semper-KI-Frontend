@@ -83,7 +83,6 @@ const App: React.FC = () => {
     reloadPermissions
   );
   const { isMagazineUp } = usePing();
-  const { t } = useTranslation();
 
   const showLoadingSuspense = (): boolean =>
     isLoggedInResponse === false ||

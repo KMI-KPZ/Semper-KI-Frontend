@@ -96,76 +96,98 @@ const OrdersTable: React.FC<OrdersTableProps> = (props) => {
 
   return (
     <Container className="overflow-auto" width="full">
-      <table aria-label="simple table" className="w-full table-auto ">
-        <thead className="">
-          <tr className="border-b-2">
-            <th>{t("order.overview.components.table.grouping")}</th>
-            <th className="text-left">
-              {t("order.overview.components.table.name")}
-            </th>
-            <th className="text-left">
-              {t("order.overview.components.table.status")}
-            </th>
-            <th className="text-left">
-              {t("order.overview.components.table.count")}
-            </th>
-            <th className="text-left">
-              {t("order.overview.components.table.created")}
-            </th>
-            <th>{t("order.overview.components.table.actions")}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {getGroupedFlatOrder(flatOrders).map((group, groupIndex, groups) =>
-            group.flatOrders
-              .sort((subOrderA, subOrderB) =>
-                subOrderA.state > subOrderB.state ? 1 : -1
-              )
-              .map((flatOrder, index, groupFlatOrder) => (
-                <tr
-                  key={flatOrder.orderID}
-                  // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  {index === 0 ? (
-                    <td
-                      scope="row"
-                      rowSpan={groupFlatOrder.length}
-
-                      // sx={{
-                      //   verticalAlign: "top",
-                      //   border:
-                      //     groupIndex === groups.length - 1 ? 0 : undefined,
-                      // }}
-                    >
-                      <div className="flex h-full w-full flex-col items-center justify-start">
-                        <Heading variant="h2">
-                          {t(
-                            `order.overview.components.table.groups.${group.title}`
-                          )}
-                        </Heading>
-                      </div>
+      <div className="w-full">
+        <table aria-label="simple table" className="w-full table-auto">
+          <thead className="">
+            <tr className="border-b">
+              <th className="p-3 md:pb-3">
+                <Text variant="strong">
+                  {t("order.overview.components.table.grouping")}
+                </Text>
+              </th>
+              <th className="p-3 text-left md:pb-3">
+                <Text variant="strong">
+                  {t("order.overview.components.table.name")}
+                </Text>
+              </th>
+              <th className="p-3 text-left md:pb-3">
+                <Text variant="strong">
+                  {t("order.overview.components.table.status")}
+                </Text>
+              </th>
+              <th className="p-3 text-left md:pb-3">
+                <Text variant="strong">
+                  {t("order.overview.components.table.count")}
+                </Text>
+              </th>
+              <th className="p-3 text-left md:pb-3">
+                <Text variant="strong" className="whitespace-nowrap">
+                  {t("order.overview.components.table.created")}
+                </Text>
+              </th>
+              <th className="p-3 md:pb-3">
+                <Text variant="strong">
+                  {t("order.overview.components.table.actions")}
+                </Text>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {getGroupedFlatOrder(flatOrders).map((group, groupIndex, groups) =>
+              group.flatOrders
+                .sort((subOrderA, subOrderB) =>
+                  subOrderA.state > subOrderB.state ? 1 : -1
+                )
+                .map((flatOrder, index, groupFlatOrder) => (
+                  <tr
+                    className={` ${
+                      groupFlatOrder.length - 1 === index &&
+                      groups.length - 1 === groupIndex
+                        ? ""
+                        : "border-b"
+                    }`}
+                    key={flatOrder.orderID}
+                  >
+                    {index === 0 ? (
+                      <td
+                        scope="row"
+                        rowSpan={groupFlatOrder.length}
+                        className={`h-full p-3 align-top md:py-3`}
+                      >
+                        <div className="flex w-full justify-center">
+                          <Heading variant="h2">
+                            {t(
+                              `order.overview.components.table.groups.${group.title}`
+                            )}
+                          </Heading>
+                        </div>
+                      </td>
+                    ) : null}
+                    <td className="p-3 md:py-3">
+                      {flatOrder.details.title === undefined
+                        ? `Auftrag: #${flatOrder.orderID}`
+                        : flatOrder.details.title}
                     </td>
-                  ) : null}
-                  <td scope="row">
-                    {flatOrder.details.title === undefined
-                      ? `Auftrag: #${flatOrder.orderID}`
-                      : flatOrder.details.title}
-                  </td>
-                  <td>
-                    {t(
-                      `Orders.OrderCollection.state.${
-                        OrderState[flatOrder.state]
-                      }`
-                    )}
-                  </td>
-                  <td>{flatOrder.subOrderCount}</td>
-                  <td>{flatOrder.created.toLocaleDateString()}</td>
-                  <td>{renderRowButtons(flatOrder)}</td>
-                </tr>
-              ))
-          )}
-        </tbody>
-      </table>
+                    <td className="p-3 md:py-3">
+                      {t(
+                        `Orders.OrderCollection.state.${
+                          OrderState[flatOrder.state]
+                        }`
+                      )}
+                    </td>
+                    <td className="p-3 md:py-3">{flatOrder.subOrderCount}</td>
+                    <td className="p-3 md:py-3">
+                      {flatOrder.created.toLocaleDateString()}
+                    </td>
+                    <td className="p-3 md:py-3">
+                      {renderRowButtons(flatOrder)}
+                    </td>
+                  </tr>
+                ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </Container>
   );
 };

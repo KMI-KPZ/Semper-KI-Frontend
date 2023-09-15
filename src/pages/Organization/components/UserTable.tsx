@@ -36,39 +36,41 @@ const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
           errorText={t("Organization.components.table.error.empty")}
         >
           <div className="w-full overflow-auto">
-            <table className="w-full table-auto border-separate border-spacing-y-2">
-              <thead>
-                <tr>
-                  <th />
-                  <th className="text-left">
-                    {t("Organization.components.table.name")}
-                  </th>
-                  <th className="text-left">
-                    {t("Organization.components.table.email")}
-                  </th>
-                  <th className="text-left">
-                    {t("Organization.components.table.role")}
-                  </th>
-                  <th>{t("Organization.components.table.actions")}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {userQuery.data !== undefined &&
-                userQuery.data.length > 0 &&
-                rolesQuery.data !== undefined
-                  ? userQuery.data.map((data, index) => (
-                      <OrganizationtableRow
-                        key={index}
-                        user={data}
-                        currentUser={
-                          user !== undefined && user.email === data.email
-                        }
-                        allRoles={rolesQuery.data}
-                      />
-                    ))
-                  : null}
-              </tbody>
-            </table>
+            <div className="w-full">
+              <table className="w-full table-auto border-separate border-spacing-y-2">
+                <thead>
+                  <tr>
+                    <th>{""}</th>
+                    <th className="text-left">
+                      {t("Organization.components.table.name")}
+                    </th>
+                    <th className="text-left">
+                      {t("Organization.components.table.email")}
+                    </th>
+                    <th className="text-left">
+                      {t("Organization.components.table.role")}
+                    </th>
+                    <th>{t("Organization.components.table.actions")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {userQuery.data !== undefined &&
+                  userQuery.data.length > 0 &&
+                  rolesQuery.data !== undefined
+                    ? userQuery.data.map((data, index) => (
+                        <OrganizationtableRow
+                          key={index}
+                          user={data}
+                          currentUser={
+                            user !== undefined && user.email === data.email
+                          }
+                          allRoles={rolesQuery.data}
+                        />
+                      ))
+                    : null}
+                </tbody>
+              </table>
+            </div>
           </div>
         </LoadingSuspense>
       </LoadingSuspense>
@@ -135,7 +137,9 @@ const OrganizationtableRow: React.FC<{
       }`}
     >
       <td>
-        <img src={picture} className="h-20  rounded-l-xl" />
+        <div className="h-20 w-20 overflow-clip rounded-l-xl object-contain">
+          <img src={picture} />
+        </div>
       </td>
       <td>{name}</td>
       <td>{email}</td>

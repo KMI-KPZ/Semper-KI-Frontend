@@ -22,11 +22,7 @@ const OrderTitleForm: React.FC<OrderTitleFormProps> = (props) => {
     titleText: "",
   });
 
-  const handleOnClickEditCheckButton = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const updatedTitle = () => {
     if (state.edit) updateTitle(state.titleText);
     setState((prevState) => {
       return {
@@ -34,6 +30,14 @@ const OrderTitleForm: React.FC<OrderTitleFormProps> = (props) => {
         titleText: prevState.edit ? prevState.titleText : title,
       };
     });
+  };
+
+  const handleOnClickEditCheckButton = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+    updatedTitle();
   };
 
   const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,6 +49,13 @@ const OrderTitleForm: React.FC<OrderTitleFormProps> = (props) => {
     }));
   };
 
+  const handelOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      updatedTitle();
+    }
+  };
+
   return (
     <Container direction="row" gap={3} className="flex-wrap md:flex-nowrap">
       {state.edit === true ? (
@@ -53,6 +64,8 @@ const OrderTitleForm: React.FC<OrderTitleFormProps> = (props) => {
             {t("Orders.OrderView.name")}
           </Heading>
           <input
+            autoFocus
+            onKeyDown={handelOnKeyDown}
             type="text"
             value={state.titleText}
             className="w-full bg-slate-100 p-2 md:w-fit"

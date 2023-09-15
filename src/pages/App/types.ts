@@ -3,12 +3,12 @@ export type Event = OrderEvent | OrgaEvent | PermissionEvent;
 
 export interface OrderEvent {
   eventType: "orderEvent";
-  orderCollectionID: string;
-  orders: OrderEventItem[];
+  orderID: string;
+  subOrders: OrderEventItem[];
 }
 
 export interface OrderEventItem {
-  orderID: string;
+  subOrderID: string;
   status: number;
   messages: number;
 }
@@ -27,8 +27,8 @@ export type OrderEventType = "message" | "status";
 
 export interface DeleteOrderEvent  {
   eventType: "orderEvent";
-  orderCollectionID: string;
   orderID: string;
+  subOrderID: string;
   type: OrderEventType;
 }
 export interface DeleteOrgaEvent {

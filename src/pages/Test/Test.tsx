@@ -7,6 +7,7 @@ import usePermissions from "@/hooks/usePermissions";
 import { AppContext } from "../App/App";
 import Container from "@component-library/Container";
 import { Heading } from "@component-library/Typography";
+import TestRender from "./TestRender";
 interface Props {
   socket: WebSocket | null;
 }
@@ -45,7 +46,7 @@ export const Test: React.FC<Props> = (props) => {
         closeModal={closeMenu}
         className="flex w-full flex-row"
       >
-        <img src={Bubbles1IMG} />
+        <TestRender />
       </Modal>
     </div>
   );

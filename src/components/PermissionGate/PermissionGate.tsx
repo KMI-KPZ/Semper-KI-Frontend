@@ -23,7 +23,9 @@ const PermissionGate: React.FC<PropsWithChildren<PermissionProps>> = (
   return hasPermission(element) ? (
     <>{children}</>
   ) : inDebugMode ? (
-    <div className="border-2 border-orange-500 ">{children}</div>
+    <div className="overflow-clip rounded-xl border-2 border-red-500 ">
+      {children}
+    </div>
   ) : showMessage === undefined || showMessage === false ? null : (
     <Text variant="body" children={t("PermissionGate.message")} />
   );

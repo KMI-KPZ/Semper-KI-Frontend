@@ -1,6 +1,8 @@
 import { getCustomAxios } from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
 import { UserProps } from "@/hooks/useUser/types";
+import { SubOrderProps } from "@/pages/Order/SubOrder/hooks/useSubOrder";
+import { OrderDetailsProps, OrderState } from "@/pages/Order/hooks/useOrder";
 import { FlatOrderProps } from "@/pages/Orders/hooks/useFlatOrders";
 import {
   useMutation,
@@ -14,7 +16,7 @@ interface ReturnProps {
   adminQuery: UseQueryResult<AdminProps, Error>;
   deleteUser: UseMutationResult<any, Error, DeleteUserProps, unknown>;
   deleteOrganization: UseMutationResult<any, Error, DeleteUserProps, unknown>;
-  adminOrdersQuery: UseQueryResult<FlatOrderProps[], Error>;
+  adminOrdersQuery: UseQueryResult<AdminFlatOrderProps[], Error>;
 }
 
 interface DeleteUserProps {
@@ -37,6 +39,18 @@ export interface OrganizationProps {
   accessed: Date;
 }
 
+export interface AdminFlatOrderProps {
+  accessed: Date;
+  client: string;
+  clientName: string;
+  created: Date;
+  details: OrderDetailsProps;
+  orderCollectionID: string;
+  status: OrderState;
+  subOrderCount: number;
+  updated: Date;
+}
+
 const useAdmin = (): ReturnProps => {
   const queryClient = useQueryClient();
 
@@ -51,22 +65,19 @@ const useAdmin = (): ReturnProps => {
         }),
   });
 
-  const adminOrdersQuery = useQuery<FlatOrderProps[], Error>({
+  const adminOrdersQuery = useQuery<AdminFlatOrderProps[], Error>({
     queryKey: ["admin, flatOrders"],
     queryFn: async () =>
       getCustomAxios()
         .get(`${process.env.VITE_HTTP_API_URL}/public/admin/getOrdersFlat/`)
         .then((res) => {
           logger("useAdmin | adminOrdersQuery ✅ |", res.data);
-          return Object.keys(res.data).map((key: any) => {
-            return {
-              ...res.data[key],
-              state: res.data[key].status,
-              orderID: res.data[key].orderCollectionID,
-              created: new Date(res.data[key].created),
-              updated: new Date(res.data[key].updated),
-            };
-          });
+          return res.data.map((order: any) => ({
+            ...order,
+            accessed: new Date(order.accessed),
+            created: new Date(order.created),
+            updated: new Date(order.updated),
+          }));
         }),
   });
 

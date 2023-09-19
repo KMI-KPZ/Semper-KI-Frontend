@@ -83,11 +83,19 @@
     },
     "AdminOrderView":{
       "header": "Aufträge",
-      "order-id": "Bestellnummer",
-      "date": "Datum",
-      "status": "Status",
-      "cart": "Warenkorb",
-      "bill": "Rechnung"
+      "orderID": "Bestellnummer",
+      "clientName":"Kunde",
+      "orderTitle":"Titel",
+      "subOrderCount":"Anzahl Teilaufträge",
+      "status":"Status",
+      "accessed":"Zugriff",
+      "created":"Erstellt",
+      "updated":"Aktualisiert",
+      "actions":"Aktionen",
+      "buttons":{
+        "show":"Anzeigen",
+        "delete":"Löschen"
+      }
     },
     "User":{
       "orga":"Organisationen",

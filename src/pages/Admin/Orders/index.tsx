@@ -14,9 +14,14 @@ import {
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { AdminFlatOrderProps } from "../hooks/useAdmin";
+import { Button } from "@component-library/Button";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Container from "@component-library/Container";
 
 interface Props {
-  orders?: FlatOrderProps[];
+  orders?: AdminFlatOrderProps[];
 }
 
 const AdminOrders: React.FC<Props> = (props) => {
@@ -37,11 +42,11 @@ const AdminOrders: React.FC<Props> = (props) => {
     }
   };
 
-  const filterOrdersBySearchInput = (order: FlatOrderProps): boolean => {
+  const filterOrdersBySearchInput = (order: AdminFlatOrderProps): boolean => {
     const searchInput = watch("search");
     if (searchInput === undefined || searchInput === "") return true;
     const searchInputLowerCase = searchInput.toLowerCase();
-    const orderID = order.orderID;
+    const orderID = order.orderCollectionID;
     const client = order.client.toLocaleLowerCase();
     const created = order.created.toLocaleDateString();
     const updated = order.updated.toLocaleDateString();
@@ -75,40 +80,67 @@ const AdminOrders: React.FC<Props> = (props) => {
         <Table sx={{ minWidth: 800 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>{t("Admin.AdminOrderView.order-id")}</TableCell>
-              <TableCell>{t("Admin.AdminOrderView.date")}</TableCell>
+              <TableCell>{t("Admin.AdminOrderView.orderID")}</TableCell>
+              <TableCell>{t("Admin.AdminOrderView.clientName")}</TableCell>
+              <TableCell>{t("Admin.AdminOrderView.orderTitle")}</TableCell>
+              <TableCell>{t("Admin.AdminOrderView.subOrderCount")}</TableCell>
               <TableCell>{t("Admin.AdminOrderView.status")}</TableCell>
-              <TableCell>{t("Admin.AdminOrderView.cart")}</TableCell>
-              <TableCell>{t("Admin.AdminOrderView.bill")}</TableCell>
+              <TableCell>{t("Admin.AdminOrderView.accessed")}</TableCell>
+              <TableCell>{t("Admin.AdminOrderView.created")}</TableCell>
+              <TableCell>{t("Admin.AdminOrderView.updated")}</TableCell>
+              <TableCell>{t("Admin.AdminOrderView.actions")}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {orders !== undefined && orders.length > 0
               ? orders
                   .filter(filterOrdersBySearchInput)
-                  .map((order: FlatOrderProps, index: number) => (
+                  .map((order: AdminFlatOrderProps, index: number) => (
                     <TableRow
                       key={index}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <TableCell component="th" scope="row">
-                        {order.orderID}
+                        {order.orderCollectionID}
                       </TableCell>
                       <TableCell component="th" scope="row">
-                        {order.created.toLocaleDateString()}
+                        {order.clientName}
                       </TableCell>
                       <TableCell component="th" scope="row">
-                        {t(
-                          `Orders.OrderCollection.state.${
-                            OrderState[order.state]
-                          }`
-                        )}
+                        {order.details.title === undefined
+                          ? "---"
+                          : order.details.title}
                       </TableCell>
                       <TableCell component="th" scope="row">
                         {order.subOrderCount}
                       </TableCell>
                       <TableCell component="th" scope="row">
-                        {order.details.title}
+                        {t(
+                          `Orders.OrderCollection.state.${
+                            OrderState[order.status]
+                          }`
+                        )}
+                      </TableCell>
+                      <TableCell component="th" scope="row">
+                        {order.accessed.toLocaleDateString()}
+                      </TableCell>
+                      <TableCell component="th" scope="row">
+                        {order.created.toLocaleDateString()}
+                      </TableCell>
+                      <TableCell component="th" scope="row">
+                        {order.updated.toLocaleDateString()}
+                      </TableCell>
+                      <TableCell component="th" scope="row">
+                        <Container>
+                          <Button
+                            title={t("Admin.AdminOrderView.buttons.show")}
+                            children={<VisibilityIcon />}
+                          />
+                          <Button
+                            title={t("Admin.AdminOrderView.buttons.delete")}
+                            children={<DeleteIcon />}
+                          />
+                        </Container>
                       </TableCell>
                     </TableRow>
                   ))

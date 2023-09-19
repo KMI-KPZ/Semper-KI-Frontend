@@ -5,13 +5,14 @@ import useAdmin from "../Admin/hooks/useAdmin";
 import Admin from "../Admin/Admin";
 import AdminUser from "../Admin/User/User";
 import AdminOrganization from "../Admin/Organization/Organization";
+import AdminOrders from "../Admin/Orders";
 interface AdminRoutesProps {}
 
 const AdminRoutes: React.FC<AdminRoutesProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
 
-  const { adminQuery } = useAdmin();
+  const { adminQuery, adminOrdersQuery } = useAdmin();
 
   return (
     <Routes>
@@ -25,6 +26,10 @@ const AdminRoutes: React.FC<AdminRoutesProps> = (props) => {
         element={
           <AdminOrganization organizations={adminQuery.data?.organizations} />
         }
+      />
+      <Route
+        path="orders"
+        element={<AdminOrders orders={adminOrdersQuery.data} />}
       />
     </Routes>
   );

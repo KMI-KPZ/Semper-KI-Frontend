@@ -64,11 +64,11 @@ const Order: React.FC<Props> = (props) => {
   ): OrderEventItem | undefined => {
     if (
       orderCollectionEvent === undefined ||
-      orderCollectionEvent.orders.length < 1
+      orderCollectionEvent.subOrders.length < 1
     )
       return undefined;
-    return orderCollectionEvent.orders.find(
-      (orderEvent) => orderEvent.orderID === orderID
+    return orderCollectionEvent.subOrders.find(
+      (orderEvent) => orderEvent.subOrderID === orderID
     );
   };
 

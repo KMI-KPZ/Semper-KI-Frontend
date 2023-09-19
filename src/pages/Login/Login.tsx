@@ -9,6 +9,7 @@ import { Heading, Text } from "@component-library/Typography";
 import Switch from "@/components/Switch";
 import PersonIcon from "@mui/icons-material/Person";
 import GroupIcon from "@mui/icons-material/Group";
+import { UserSwitch } from "@/components/UserSwitch";
 
 interface Props {
   path?: string;
@@ -45,6 +46,13 @@ const Login: React.FC<Props> = (props) => {
     }));
   };
 
+  const testOnClick = (userType: UserType) => {
+    setState((prevState) => ({
+      ...prevState,
+      orga: userType === UserType.ORGANIZATION,
+    }));
+  };
+
   return (
     <div
       className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5 sm:w-fit"
@@ -55,21 +63,9 @@ const Login: React.FC<Props> = (props) => {
           ? t("Login.LoginView.header")
           : t("Login.LoginView.headerPath")}
       </Heading>
-      <Switch
-        value={orga}
-        leftChildren={
-          <div className="flex flex-row items-center justify-center gap-3 px-3 py-2">
-            <PersonIcon />
-            <Text variant="body">{t("Login.LoginView.user")}</Text>
-          </div>
-        }
-        rightChildren={
-          <div className="flex flex-row items-center justify-center gap-3 px-3 py-2">
-            <GroupIcon />
-            <Text variant="body">{t("Login.LoginView.orga")}</Text>
-          </div>
-        }
-        onClick={handleOnClickSwitch}
+      <UserSwitch
+        onClick={testOnClick}
+        userType={orga ? UserType.ORGANIZATION : UserType.USER}
       />
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
         <Button

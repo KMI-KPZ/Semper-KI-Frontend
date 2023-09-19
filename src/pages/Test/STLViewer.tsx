@@ -21,7 +21,7 @@ const Model: React.FC<{ fileURL: string }> = (props) => {
   });
   const loader = new STLLoader();
   loader.load(fileURL, (geometry) => {
-    const material = new THREE.MeshStandardMaterial({ color: 0x6e57ca });
+    const material = new THREE.MeshStandardMaterial({ color: 0x9686d9 });
     const mesh = new THREE.Mesh(geometry, material);
     modelRef.current?.add(mesh);
   });
@@ -67,8 +67,8 @@ const ModelPreview = (props: { file?: string }) => {
     <div className="h-[800px] w-[1000px]">
       <Canvas>
         <CameraControls />
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
+        <ambientLight intensity={0.7} />
+        <directionalLight position={[10, -40, 30]} intensity={2} />
         {file !== undefined ? <Model fileURL={file} /> : <Loading />}
       </Canvas>
     </div>

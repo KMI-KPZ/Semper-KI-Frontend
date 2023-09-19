@@ -24,7 +24,7 @@ export const getOrderEventAmount = (
     .filter((event) => event.eventType === "orderEvent")
     .forEach((_orderEvent) => {
       const orderEvent = _orderEvent as OrderEvent;
-      orderEvent.orders.forEach((orderEvent) => {
+      orderEvent.subOrders.forEach((orderEvent) => {
         if (
           orderEvent.messages !== undefined &&
           orderEvent.messages > 0 &&
@@ -74,12 +74,11 @@ const getExistingOrderEvent = (
   newOrderEvent: OrderEvent
 ): OrderEvent | undefined => {
   return orderEvents.find(
-    (orderEvent) =>
-      orderEvent.orderCollectionID === newOrderEvent.orderCollectionID
+    (orderEvent) => orderEvent.orderID === newOrderEvent.orderID
   );
 };
 const getOrderEventItemIDs = (orderEventItems: OrderEventItem[]): string[] => {
-  return orderEventItems.map((orderEventItem) => orderEventItem.orderID);
+  return orderEventItems.map((orderEventItem) => orderEventItem.subOrderID);
 };
 const hydrateOrderEventItems = (
   existingOrderEvent: OrderEvent | undefined,
@@ -87,18 +86,18 @@ const hydrateOrderEventItems = (
 ): OrderEventItem[] => {
   if (existingOrderEvent === undefined) return newOrderEventItems;
   const newItemIDs = getOrderEventItemIDs(newOrderEventItems);
-  const existingItemIDs = getOrderEventItemIDs(existingOrderEvent.orders);
+  const existingItemIDs = getOrderEventItemIDs(existingOrderEvent.subOrders);
   const existingUntouchedItems: OrderEventItem[] =
-    existingOrderEvent.orders.filter(
-      (orderEventItem) => !newItemIDs.includes(orderEventItem.orderID)
+    existingOrderEvent.subOrders.filter(
+      (orderEventItem) => !newItemIDs.includes(orderEventItem.subOrderID)
     );
-  const existingItems: OrderEventItem[] = existingOrderEvent.orders.filter(
-    (orderEventItem) => newItemIDs.includes(orderEventItem.orderID)
+  const existingItems: OrderEventItem[] = existingOrderEvent.subOrders.filter(
+    (orderEventItem) => newItemIDs.includes(orderEventItem.subOrderID)
   );
   const hydratedExistingItems = existingItems.map((existingOrderEventItem) => {
     const newItem = newOrderEventItems.find(
       (newOrderEventItem) =>
-        newOrderEventItem.orderID === existingOrderEventItem.orderID
+        newOrderEventItem.subOrderID === existingOrderEventItem.subOrderID
     );
     return {
       ...existingOrderEventItem,
@@ -107,7 +106,8 @@ const hydrateOrderEventItems = (
     };
   });
   const newUntouchedItems = newOrderEventItems.filter(
-    (newOrderEventItem) => !existingItemIDs.includes(newOrderEventItem.orderID)
+    (newOrderEventItem) =>
+      !existingItemIDs.includes(newOrderEventItem.subOrderID)
   );
 
   return [
@@ -148,19 +148,18 @@ const useOrderEvent = (): ReturnProps => {
     );
     const hydatedOrderEventItems = hydrateOrderEventItems(
       existingOrderEvent,
-      newOrderEvent.orders
+      newOrderEvent.subOrders
     );
 
     const newOrderEvents: OrderEvent[] = [
       ...orderEvents.filter(
-        (orderEvent) =>
-          orderEvent.orderCollectionID !== newOrderEvent.orderCollectionID
+        (orderEvent) => orderEvent.orderID !== newOrderEvent.orderID
       ),
       existingOrderEvent === undefined
         ? newOrderEvent
         : {
             ...existingOrderEvent,
-            orders: hydatedOrderEventItems,
+            subOrders: hydatedOrderEventItems,
           },
     ];
     return [...noneOrderEvents, ...newOrderEvents];
@@ -171,7 +170,7 @@ const useOrderEvent = (): ReturnProps => {
     events: Event[]
   ): Event[] => {
     // logger("useOrderEvent | deleteOrderEvent", event);
-    const { orderCollectionID, orderID, type } = event;
+    const { subOrderID, orderID, type } = event;
 
     const { arrayTrue: _orderEvents, arrayFalse: otherEvents } = splitArray(
       events,
@@ -180,15 +179,15 @@ const useOrderEvent = (): ReturnProps => {
     const orderEvents = _orderEvents as OrderEvent[];
     const { otherArray: otherOrderEvents, item: orderEvent } = splitFindArray(
       orderEvents,
-      (orderEvent) => orderEvent.orderCollectionID === orderCollectionID
+      (orderEvent) => orderEvent.orderID === orderID
     );
     let newOrderEventItems: OrderEventItem[] = [];
     let orderEventItem: OrderEventItem | undefined = undefined;
     if (orderEvent !== undefined) {
       const { otherArray: _otherOrderEventItems, item: _orderEventItem } =
         splitFindArray(
-          orderEvent.orders,
-          (orderEventItem) => orderEventItem.orderID === orderID
+          orderEvent.subOrders,
+          (orderEventItem) => orderEventItem.subOrderID === orderID
         );
       newOrderEventItems = _otherOrderEventItems;
       orderEventItem = _orderEventItem;
@@ -211,7 +210,7 @@ const useOrderEvent = (): ReturnProps => {
           ...otherOrderEvents,
           {
             ...orderEvent,
-            orders: newOrderEventItems,
+            subOrders: newOrderEventItems,
           },
         ]
       : [...otherEvents, ...otherOrderEvents];
@@ -226,13 +225,13 @@ const useOrderEvent = (): ReturnProps => {
     queryClient.invalidateQueries(["flatOrders"]);
     setEvents(hydrateOrderEvents(newEvent, events));
     const orderEvent = newEvent;
-    if (orderEvent.orders[0].messages > 0) {
+    if (orderEvent.subOrders[0].messages > 0) {
       toast(
         t("toast.orderEvent.message"),
         user?.usertype === UserType.USER ? "/orders" : "/contracts"
       );
     }
-    if (orderEvent.orders[0].status > 0) {
+    if (orderEvent.subOrders[0].status > 0) {
       toast(
         t("toast.orderEvent.status"),
         user?.usertype === UserType.USER ? "/orders" : "/contracts"

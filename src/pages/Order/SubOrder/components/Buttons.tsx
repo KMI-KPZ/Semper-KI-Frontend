@@ -48,12 +48,12 @@ const SubOrderButtons: React.FC<SubOrderButtonsProps> = (props) => {
   };
   const handleOnClickButtonReject = () => {
     if (window.confirm(t("Orders.OrderView.confirm.reject"))) {
-      updateStatus(OrderState.REJECTED);
+      updateStatus(OrderState.CONTRACTOR_REJECTED);
     }
   };
   const handleOnClickButtonConfirm = () => {
     // if (window.confirm(t("OrderView.button.confirm") + "?")) {
-    updateStatus(OrderState.CONFIRMED);
+    updateStatus(OrderState.CONTRACTOR_CONFIRMED);
     // }
   };
   const handleOnClickButtonVerify = () => {
@@ -139,8 +139,8 @@ const SubOrderButtons: React.FC<SubOrderButtonsProps> = (props) => {
         </PermissionGate>
       ) : null}
 
-      {subOrder.state >= OrderState.REJECTED &&
-      subOrder.state <= OrderState.CONFIRMED ? (
+      {subOrder.state >= OrderState.CONTRACTOR_REJECTED &&
+      subOrder.state <= OrderState.CONTRACTOR_CONFIRMED ? (
         <>
           <PermissionGate element="SubOrderButtonReject">
             <Button
@@ -164,7 +164,7 @@ const SubOrderButtons: React.FC<SubOrderButtonsProps> = (props) => {
           </PermissionGate>
         </>
       ) : null}
-      {subOrder.state === OrderState.CONFIRMED ? (
+      {subOrder.state === OrderState.CONTRACTOR_CONFIRMED ? (
         <PermissionGate element="SubOrderButtonVerify">
           <Button
             variant="icon"

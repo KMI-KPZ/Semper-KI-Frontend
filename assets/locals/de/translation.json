@@ -244,8 +244,8 @@
     },
     "UserSwitch":{
       "button":{
-        "client":"Für Autraggeber",
-        "contractor":"Für Auftragnehmer"
+        "client":"Als Einzelnutzer",
+        "contractor":"Als Organisation"
       }
     }
   },
@@ -384,7 +384,8 @@
           "button":{
             "orga":"Organisationen verwalten",
             "user":"Benutzer verwalten",
-            "general":"Adminbereich"
+            "general":"Adminbereich",
+            "orders":"Aufträge verwalten"
           }
         }
       }

@@ -19,8 +19,8 @@ const useOrderEventChange = (
   ): DeleteOrderEvent => {
     const deleteOrderEvent: DeleteOrderEvent = {
       eventType: "orderEvent",
-      orderCollectionID: orderCollectionID,
-      orderID: subOrder.subOrderID,
+      orderID: orderCollectionID,
+      subOrderID: subOrder.subOrderID,
       type: type,
     };
     return deleteOrderEvent;

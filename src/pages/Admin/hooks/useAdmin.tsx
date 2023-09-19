@@ -1,6 +1,7 @@
 import { getCustomAxios } from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
 import { UserProps } from "@/hooks/useUser/types";
+import { FlatOrderProps } from "@/pages/Orders/hooks/useFlatOrders";
 import {
   useMutation,
   UseMutationResult,
@@ -13,6 +14,7 @@ interface ReturnProps {
   adminQuery: UseQueryResult<AdminProps, Error>;
   deleteUser: UseMutationResult<any, Error, DeleteUserProps, unknown>;
   deleteOrganization: UseMutationResult<any, Error, DeleteUserProps, unknown>;
+  adminOrdersQuery: UseQueryResult<FlatOrderProps[], Error>;
 }
 
 interface DeleteUserProps {
@@ -46,6 +48,25 @@ const useAdmin = (): ReturnProps => {
         .then((res) => {
           logger("useAdmin | adminQuery ✅ |", res.data);
           return res.data;
+        }),
+  });
+
+  const adminOrdersQuery = useQuery<FlatOrderProps[], Error>({
+    queryKey: ["admin, flatOrders"],
+    queryFn: async () =>
+      getCustomAxios()
+        .get(`${process.env.VITE_HTTP_API_URL}/public/admin/getOrdersFlat/`)
+        .then((res) => {
+          logger("useAdmin | adminOrdersQuery ✅ |", res.data);
+          return Object.keys(res.data).map((key: any) => {
+            return {
+              ...res.data[key],
+              state: res.data[key].status,
+              orderID: res.data[key].orderCollectionID,
+              created: new Date(res.data[key].created),
+              updated: new Date(res.data[key].updated),
+            };
+          });
         }),
   });
 
@@ -89,7 +110,7 @@ const useAdmin = (): ReturnProps => {
     },
   });
 
-  return { adminQuery, deleteUser, deleteOrganization };
+  return { adminQuery, deleteUser, deleteOrganization, adminOrdersQuery };
 };
 
 export default useAdmin;

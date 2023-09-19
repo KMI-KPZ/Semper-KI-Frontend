@@ -21,6 +21,10 @@ const Admin: React.FC<AdminProps> = (props) => {
           title={t("Home.Home.Authorized.Admin.button.orga")}
           to="/admin/organization"
         />
+        <Button
+          title={t("Home.Home.Authorized.Admin.button.orders")}
+          to="/admin/orders"
+        />
       </div>
     </div>
   );

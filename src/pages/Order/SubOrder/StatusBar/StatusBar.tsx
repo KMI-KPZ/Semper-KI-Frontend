@@ -51,12 +51,12 @@ const statusData: StatusData[] = [
     text: "Orders.StatusView.state.clarification",
   },
   {
-    itemOrderState: OrderState.REJECTED,
+    itemOrderState: OrderState.CONTRACTOR_REJECTED,
     icon: <CloseIcon />,
     text: "Orders.StatusView.state.rejected",
   },
   {
-    itemOrderState: OrderState.CONFIRMED,
+    itemOrderState: OrderState.CONTRACTOR_CONFIRMED,
     icon: <CheckIcon />,
     text: "Orders.StatusView.state.confirmed",
   },

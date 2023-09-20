@@ -158,7 +158,7 @@ const App: React.FC = () => {
               />
             </Route>
             <Route element={<AdminOutlet user={user} />}>
-              <Route path="admin/*" element={<AdminRoutes />} />
+              <Route path="admin/*" element={<AdminRoutes user={user} />} />
             </Route>
             <Route path="*" element={<Error />} />
           </Routes>

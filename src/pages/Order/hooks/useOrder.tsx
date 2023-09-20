@@ -142,6 +142,7 @@ export const useOrder = (): ReturnProps => {
     onSuccess(data, orderID, context) {
       queryClient.invalidateQueries(["order", orderID]);
       queryClient.invalidateQueries(["flatOrders"]);
+      queryClient.invalidateQueries(["admin, flatOrders"]);
     },
   });
 

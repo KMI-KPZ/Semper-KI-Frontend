@@ -1,4 +1,4 @@
-import { OrderState } from "@/pages/Order/hooks/useOrder";
+import { OrderState, useOrder } from "@/pages/Order/hooks/useOrder";
 import { SubOrderProps } from "@/pages/Order/SubOrder/hooks/useSubOrder";
 import { FlatOrderProps } from "@/pages/Orders/hooks/useFlatOrders";
 import { Heading } from "@component-library/Typography";
@@ -27,9 +27,9 @@ interface Props {
 const AdminOrders: React.FC<Props> = (props) => {
   const { orders } = props;
   const { t } = useTranslation();
-  const handleOnClickButtonDelete = (hashedID: string, name: string) => {
-    // if (window.confirm(t("Admin.Orga.confirm")))
-    // deleteOrganization.mutate({ hashedID, name });
+  const { deleteOrder } = useOrder();
+  const handleOnClickButtonDelete = (orderID: string) => {
+    if (window.confirm(t("Admin.Orga.confirm"))) deleteOrder.mutate(orderID);
   };
 
   const { register, watch } = useForm<{
@@ -135,10 +135,14 @@ const AdminOrders: React.FC<Props> = (props) => {
                           <Button
                             title={t("Admin.AdminOrderView.buttons.show")}
                             children={<VisibilityIcon />}
+                            to={`/admin/orders/${order.orderCollectionID}`}
                           />
                           <Button
                             title={t("Admin.AdminOrderView.buttons.delete")}
                             children={<DeleteIcon />}
+                            onClick={() =>
+                              handleOnClickButtonDelete(order.orderCollectionID)
+                            }
                           />
                         </Container>
                       </TableCell>

@@ -17,6 +17,9 @@ import { Button } from "@component-library/Button";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Container from "@component-library/Container";
+import logger from "@/hooks/useLogger";
+import Search from "@component-library/Search";
+import useSearch from "@/hooks/useSearch";
 
 interface Props {
   orders?: AdminFlatOrderProps[];
@@ -26,6 +29,7 @@ const AdminOrders: React.FC<Props> = (props) => {
   const { orders } = props;
   const { t } = useTranslation();
   const { deleteOrder } = useOrder();
+  const { filterDataBySearchInput, handleSearchInputChange } = useSearch();
   const handleOnClickButtonDelete = (orderID: string) => {
     if (window.confirm(t("Admin.AdminOrderView.confirm")))
       deleteOrder.mutate(orderID);
@@ -42,11 +46,14 @@ const AdminOrders: React.FC<Props> = (props) => {
   };
 
   const filterOrdersBySearchInput = (order: AdminFlatOrderProps): boolean => {
-    const searchInput = watch("search");
+    const rawSearchInput = watch("search");
+    const searchInput =
+      rawSearchInput === undefined ? "" : rawSearchInput.toLocaleLowerCase();
     if (searchInput === undefined || searchInput === "") return true;
     const searchInputLowerCase = searchInput.toLowerCase();
-    const orderID = order.orderCollectionID;
+    const orderID = order.orderCollectionID.toLocaleLowerCase();
     const client = order.client.toLocaleLowerCase();
+    const clientName = order.clientName.toLocaleLowerCase();
     const created = order.created.toLocaleDateString();
     const updated = order.updated.toLocaleDateString();
     const title =
@@ -58,13 +65,15 @@ const AdminOrders: React.FC<Props> = (props) => {
       client.includes(searchInputLowerCase) ||
       created.includes(searchInputLowerCase) ||
       updated.includes(searchInputLowerCase) ||
-      title.includes(searchInputLowerCase)
+      title.includes(searchInputLowerCase) ||
+      clientName.includes(searchInputLowerCase)
     );
   };
 
   return (
     <div className="flex w-full flex-col items-center justify-normal gap-5 bg-white p-5">
       <Heading variant="h1">{t("Admin.AdminOrderView.header")}</Heading>
+      <Search handleSearchInputChange={handleSearchInputChange} />
       <form className="flex w-full flex-col gap-5 md:flex-row">
         <input
           onKeyDown={handelOnKeyDown}

@@ -1,6 +1,4 @@
 import { OrderState, useOrder } from "@/pages/Order/hooks/useOrder";
-import { SubOrderProps } from "@/pages/Order/SubOrder/hooks/useSubOrder";
-import { FlatOrderProps } from "@/pages/Orders/hooks/useFlatOrders";
 import { Heading } from "@component-library/Typography";
 import {
   Paper,
@@ -29,7 +27,8 @@ const AdminOrders: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { deleteOrder } = useOrder();
   const handleOnClickButtonDelete = (orderID: string) => {
-    if (window.confirm(t("Admin.Orga.confirm"))) deleteOrder.mutate(orderID);
+    if (window.confirm(t("Admin.AdminOrderView.confirm")))
+      deleteOrder.mutate(orderID);
   };
 
   const { register, watch } = useForm<{

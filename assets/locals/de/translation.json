@@ -95,7 +95,8 @@
       "buttons":{
         "show":"Anzeigen",
         "delete":"Löschen"
-      }
+      },
+      "confirm":"Auftrag wirklich löschen?"
     },
     "User":{
       "orga":"Organisationen",
@@ -1297,6 +1298,14 @@
     },
     "error":{
       "no-items":"keine Aufträge vorhanden"
+    }
+  },
+  "Coypu":{
+    "title":"Coypu News",
+    "button":{
+      "link":"Zur Quelle",
+      "more":"Mehr lesen...",
+      "less":"Weniger lesen..."
     }
   }
 }

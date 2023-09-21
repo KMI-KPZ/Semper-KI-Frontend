@@ -69,7 +69,7 @@ export const ProcessModel: React.FC<Props> = (props) => {
 
   const renderUplaodCart = () => (
     <div
-      className={`flex  items-center justify-between overflow-hidden bg-white hover:cursor-pointer hover:bg-gray-300 ${
+      className={`flex items-center justify-between overflow-hidden bg-white hover:cursor-pointer hover:bg-gray-300 ${
         grid === true
           ? "basis-[48%] flex-col sm:basis-[32%] md:basis-[23.5%]"
           : "w-full flex-row"

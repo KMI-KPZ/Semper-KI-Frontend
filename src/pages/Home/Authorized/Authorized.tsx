@@ -7,6 +7,7 @@ import HomeAuthorizedOrganization from "./components/Organization";
 import HomeAuthorizedResources from "./components/Resources";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import HomeAuthorizedAdmin from "./components/Admin";
+import Coypu from "../components/Coypu";
 
 interface AuthorizedPropsHome {
   user: UserProps;
@@ -36,6 +37,7 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
         </>
       ) : null}
       {user.usertype === UserType.ADMIN ? <HomeAuthorizedAdmin /> : null}
+      <Coypu />
     </div>
   );
 };

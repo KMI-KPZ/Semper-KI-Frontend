@@ -8,6 +8,7 @@ import HomeAnonymOrga from "./components/Orga";
 import HomeAnonymClient from "./components/Client";
 import HomeAnonymMagazinCard from "./components/Magazin";
 import HomeAnonymImages from "./components/Images";
+import Coypu from "../components/Coypu";
 
 interface AnonymHomeProps {}
 
@@ -26,6 +27,7 @@ const AnonymHome: React.FC<AnonymHomeProps> = (props) => {
       <HomeAnonymOrga />
       <HomeAnonymClient />
       <HomeAnonymMagazinCard />
+      <Coypu />
       <HomeAnonymImages />
     </div>
   );

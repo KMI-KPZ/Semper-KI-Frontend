@@ -24,6 +24,7 @@ interface ButtonProps {
   endIcon?: ReactNode;
   extern?: boolean;
   testid?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
 }
 type ButtonSize = "sm" | "xs" | "md" | "lg" | "xl";
 type ButtonVariant =
@@ -50,6 +51,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     direction = "row",
     testid = "",
     extern = false,
+    target = "_self",
     onClick,
     title,
     children,
@@ -193,6 +195,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       onClick={handleOnClickButton}
       href={to !== undefined ? to : title}
       data-testid={testid}
+      target={target}
     >
       {loading === true ? (
         <div className="animate-spin">

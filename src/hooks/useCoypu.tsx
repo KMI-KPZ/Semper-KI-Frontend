@@ -28,7 +28,7 @@ const useCoypu = (): ReturnProps => {
   const coypuQuery = useQuery<CoypuProps[], Error>({
     queryKey: ["coypu"],
     queryFn: async () => {
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/private/coypu/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/coypu/`;
       return getCustomAxios()
         .get(apiUrl)
         .then((response) => {

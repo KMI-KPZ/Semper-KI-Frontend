@@ -20,7 +20,7 @@ const Coypu: React.FC<CoypuProps> = (props) => {
   const getCoypu = () => {};
 
   return (
-    <Container direction="col">
+    <Container direction="col" width="full">
       <Heading variant="h1" className="w-full bg-white p-5 text-center">
         {t("Coypu.title")}
       </Heading>

@@ -32,7 +32,7 @@ interface AdminProps {
 export interface OrganizationProps {
   hashedID: string;
   name: string;
-  canManufacturer: boolean;
+  canManufacture: boolean;
   details: any;
   created: Date;
   updated: Date;

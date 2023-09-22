@@ -35,55 +35,10 @@ const AdminOrders: React.FC<Props> = (props) => {
       deleteOrder.mutate(orderID);
   };
 
-  const { register, watch } = useForm<{
-    search: string;
-  }>();
-
-  const handelOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-    }
-  };
-
-  const filterOrdersBySearchInput = (order: AdminFlatOrderProps): boolean => {
-    const rawSearchInput = watch("search");
-    const searchInput =
-      rawSearchInput === undefined ? "" : rawSearchInput.toLocaleLowerCase();
-    if (searchInput === undefined || searchInput === "") return true;
-    const searchInputLowerCase = searchInput.toLowerCase();
-    const orderID = order.orderCollectionID.toLocaleLowerCase();
-    const client = order.client.toLocaleLowerCase();
-    const clientName = order.clientName.toLocaleLowerCase();
-    const created = order.created.toLocaleDateString();
-    const updated = order.updated.toLocaleDateString();
-    const title =
-      order.details.title === undefined
-        ? ""
-        : order.details.title.toLocaleLowerCase();
-    return (
-      orderID.includes(searchInputLowerCase) ||
-      client.includes(searchInputLowerCase) ||
-      created.includes(searchInputLowerCase) ||
-      updated.includes(searchInputLowerCase) ||
-      title.includes(searchInputLowerCase) ||
-      clientName.includes(searchInputLowerCase)
-    );
-  };
-
   return (
     <div className="flex w-full flex-col items-center justify-normal gap-5 bg-white p-5">
       <Heading variant="h1">{t("Admin.AdminOrderView.header")}</Heading>
       <Search handleSearchInputChange={handleSearchInputChange} />
-      <form className="flex w-full flex-col gap-5 md:flex-row">
-        <input
-          onKeyDown={handelOnKeyDown}
-          className="flex w-full bg-slate-100 p-3"
-          type="search"
-          {...register("search")}
-          placeholder={t("Admin.User.search")}
-        />
-      </form>
-
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 800 }} aria-label="simple table">
           <TableHead>
@@ -102,7 +57,9 @@ const AdminOrders: React.FC<Props> = (props) => {
           <TableBody>
             {orders !== undefined && orders.length > 0
               ? orders
-                  .filter(filterOrdersBySearchInput)
+                  .filter((order: AdminFlatOrderProps) =>
+                    filterDataBySearchInput(order)
+                  )
                   .map((order: AdminFlatOrderProps, index: number) => (
                     <TableRow
                       key={index}
@@ -130,13 +87,13 @@ const AdminOrders: React.FC<Props> = (props) => {
                         )}
                       </TableCell>
                       <TableCell component="th" scope="row">
-                        {order.accessed.toLocaleDateString()}
+                        {order.accessed.toLocaleString()}
                       </TableCell>
                       <TableCell component="th" scope="row">
-                        {order.created.toLocaleDateString()}
+                        {order.created.toLocaleString()}
                       </TableCell>
                       <TableCell component="th" scope="row">
-                        {order.updated.toLocaleDateString()}
+                        {order.updated.toLocaleString()}
                       </TableCell>
                       <TableCell component="th" scope="row">
                         <Container>

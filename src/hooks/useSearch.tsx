@@ -1,23 +1,64 @@
+import { Tty } from "@mui/icons-material";
+import { type } from "os";
 import { useState } from "react";
+import logger from "./useLogger";
 
 interface ReturnProps<T> {
   handleSearchInputChange: (search: string) => void;
-  filterDataBySearchInput: (data: T, keys: (keyof T)[]) => boolean;
+  filterDataBySearchInput: (
+    data: T,
+    _keys?: (keyof T)[] | undefined
+  ) => boolean;
 }
 
-const useSearch = <T,>(): ReturnProps<T> => {
+const isDate = (value: any): boolean => {
+  return value instanceof Date;
+};
+
+const valueIncludesSearchInput = (value: any, searchInput: string): boolean => {
+  if (value === undefined || value === null) return false;
+  if (isDate(value))
+    return value.toLocaleString().toLocaleLowerCase().includes(searchInput);
+  else if (typeof value === "boolean") {
+    return value.toString().toLocaleLowerCase().includes(searchInput);
+  } else if (typeof value === "number") {
+    return value.toString().toLocaleLowerCase().includes(searchInput);
+  } else if (typeof value === "string") {
+    return value.toLocaleLowerCase().includes(searchInput);
+  } else if (typeof value === "object") {
+    return filterDataWithSearchInput(value, searchInput);
+  } else return false;
+};
+
+const filterDataWithSearchInput = <T,>(
+  _data: T,
+  searchInput: string,
+  _keys?: (keyof T)[]
+): boolean => {
+  if (typeof _data === "object" && _data !== null && _data !== undefined) {
+    const keys =
+      _keys === undefined ? (Object.keys(_data) as (keyof T)[]) : _keys;
+    return keys.some((key) =>
+      valueIncludesSearchInput(_data[key], searchInput)
+    );
+  } else return valueIncludesSearchInput(_data, searchInput);
+};
+
+const useSearch = <T extends any>(): ReturnProps<T> => {
   const [searchInput, setSearchInput] = useState<string>("");
 
   const handleSearchInputChange = (search: string) => {
     setSearchInput(search);
   };
 
-  const filterDataBySearchInput = (data: T, keys: (keyof T)[]): boolean => {
-    const searchInputLowerCase = searchInput.toLocaleLowerCase();
-    return keys.some((key) =>
-      (data[key] as unknown as string)
-        .toLocaleLowerCase()
-        .includes(searchInputLowerCase)
+  const filterDataBySearchInput = (
+    data: T,
+    _keys?: (keyof T)[] | undefined
+  ): boolean => {
+    return filterDataWithSearchInput(
+      data,
+      searchInput.toLocaleLowerCase(),
+      _keys
     );
   };
 

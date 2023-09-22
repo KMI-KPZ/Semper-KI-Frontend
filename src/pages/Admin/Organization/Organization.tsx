@@ -15,7 +15,8 @@ import { Button } from "@component-library/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
-import { useForm } from "react-hook-form";
+import useSearch from "@/hooks/useSearch";
+import Search from "@component-library/Search";
 
 interface AdminOrganizationProps {
   organizations: OrganizationProps[] | undefined;
@@ -25,44 +26,17 @@ const AdminOrganization: React.FC<AdminOrganizationProps> = (props) => {
   const { organizations } = props;
   const { t } = useTranslation();
   const { deleteOrganization } = useAdmin();
+  const { filterDataBySearchInput, handleSearchInputChange } = useSearch();
 
   const handleOnClickButtonDelete = (hashedID: string, name: string) => {
     if (window.confirm(t("Admin.Orga.confirm")))
       deleteOrganization.mutate({ hashedID, name });
   };
 
-  const { register, watch } = useForm<{
-    search: string;
-  }>();
-
-  const handelOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-    }
-  };
-
-  const filterOrganizationBySearchInput = (
-    orga: OrganizationProps
-  ): boolean => {
-    const searchInput = watch("search");
-    if (searchInput === undefined || searchInput === "") return true;
-    const searchInputLowerCase = searchInput.toLowerCase();
-    const name = orga.name.toLowerCase();
-    return name.includes(searchInputLowerCase);
-  };
-
   return (
     <div className="flex w-full flex-col items-center justify-normal gap-5 bg-white p-5">
       <Heading variant="h1">{t("Admin.Orga.title")}</Heading>
-      <form className="flex w-full flex-col gap-5 md:flex-row">
-        <input
-          onKeyDown={handelOnKeyDown}
-          className="flex w-full bg-slate-100 p-3"
-          type="search"
-          {...register("search")}
-          placeholder={t("Admin.User.search")}
-        />
-      </form>
+      <Search handleSearchInputChange={handleSearchInputChange} />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 800 }} aria-label="simple table">
           <TableHead>
@@ -78,7 +52,7 @@ const AdminOrganization: React.FC<AdminOrganizationProps> = (props) => {
           <TableBody>
             {organizations !== undefined && organizations.length > 0 ? (
               organizations
-                .filter((orga) => filterOrganizationBySearchInput(orga))
+                .filter((orga) => filterDataBySearchInput(orga))
                 .map((orga: OrganizationProps, index: number) => (
                   <TableRow
                     key={index}
@@ -88,7 +62,11 @@ const AdminOrganization: React.FC<AdminOrganizationProps> = (props) => {
                       {orga.name}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {orga.canManufacturer ? <CheckIcon /> : <ClearIcon />}
+                      {orga.canManufacture === true ? (
+                        <CheckIcon />
+                      ) : (
+                        <ClearIcon />
+                      )}
                     </TableCell>
                     <TableCell component="th" scope="row">
                       {new Date(orga.created).toLocaleString()}

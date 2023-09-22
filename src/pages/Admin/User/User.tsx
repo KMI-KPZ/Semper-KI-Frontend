@@ -15,8 +15,8 @@ import { UserSwitch } from "@/components/UserSwitch";
 import useAdmin from "../hooks/useAdmin";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button } from "@component-library/Button";
-import { useForm } from "react-hook-form";
-
+import useSearch from "@/hooks/useSearch";
+import Search from "@component-library/Search";
 interface Props {
   users: UserProps[] | undefined;
 }
@@ -25,50 +25,17 @@ const AdminUser: React.FC<Props> = (props) => {
   const { users } = props;
   const { t } = useTranslation();
   const { deleteUser } = useAdmin();
+  const { filterDataBySearchInput, handleSearchInputChange } = useSearch();
 
   const handleOnClickButtonDelete = (hashedID: string, name: string) => {
     if (window.confirm(t("Admin.User.confirm")))
       deleteUser.mutate({ hashedID, name });
   };
 
-  const { register, watch } = useForm<{
-    search: string;
-  }>();
-
-  const handelOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-    }
-  };
-
-  const filterUserBySearchInput = (users: UserProps): boolean => {
-    const searchInput = watch("search");
-    if (searchInput === undefined || searchInput === "") return true;
-    const searchInputLowerCase = searchInput.toLowerCase();
-    const name = users.name.toLowerCase();
-    const email = users.email.toLowerCase();
-    const organizations = users.organizations
-      .map((organization) => organization.toLowerCase())
-      .join(", ");
-    return (
-      name.includes(searchInputLowerCase) ||
-      email.includes(searchInputLowerCase) ||
-      organizations.includes(searchInputLowerCase)
-    );
-  };
-
   return (
     <div className="flex w-full flex-col items-center justify-normal gap-5 bg-white p-5">
       <Heading variant="h1">{t("Admin.User.title")}</Heading>
-      <form className="flex w-full flex-col gap-5 md:flex-row">
-        <input
-          onKeyDown={handelOnKeyDown}
-          className="flex w-full bg-slate-100 p-3"
-          type="search"
-          {...register("search")}
-          placeholder={t("Admin.User.search")}
-        />
-      </form>
+      <Search handleSearchInputChange={handleSearchInputChange} />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 800 }} aria-label="simple table">
           <TableHead>
@@ -86,7 +53,7 @@ const AdminUser: React.FC<Props> = (props) => {
           <TableBody>
             {users !== undefined && UserSwitch.length > 0 ? (
               users
-                .filter((user) => filterUserBySearchInput(user))
+                .filter((user) => filterDataBySearchInput(user))
                 .map((user: UserProps, index: number) => (
                   <TableRow
                     key={index}

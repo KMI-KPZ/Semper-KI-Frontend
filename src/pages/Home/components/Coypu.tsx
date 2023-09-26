@@ -21,9 +21,10 @@ const Coypu: React.FC<CoypuProps> = (props) => {
 
   return (
     <Container direction="col" width="full">
-      <Heading variant="h1" className="w-full bg-white p-5 text-center">
-        {t("Coypu.title")}
-      </Heading>
+      <Container className="bg-white p-5" gap={3} direction="col" width="full">
+        <Heading variant="h2">{t("Coypu.title")}</Heading>
+        <Heading variant="h3">{t("Coypu.title2")}</Heading>
+      </Container>
       {coypuQuery.data !== undefined && coypuQuery.data.length > 0 ? (
         <ul className="flex h-fit w-full flex-row flex-wrap items-start justify-center gap-5">
           {coypuQuery.data

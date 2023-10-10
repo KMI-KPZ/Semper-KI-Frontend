@@ -33,7 +33,7 @@ const AdminMaterials: React.FC<Props> = (props) => {
             {[].map((material: MaterialProps, index: number) => (
               <TableRow
                 key={index}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                sx={{ "&:last-child td, &:last-child th": { bproject: 0 } }}
               >
                 <TableCell component="th" scope="row">
                   {material.title}

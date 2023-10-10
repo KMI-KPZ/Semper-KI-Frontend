@@ -1,9 +1,9 @@
 import {
-  DeleteOrderEvent,
+  DeleteProjectEvent,
   Event,
-  OrderEvent,
-  OrderEventItem,
-  OrderEventType,
+  ProjectEvent,
+  ProjectEventItem,
+  ProjectEventType,
 } from "@/pages/App/types";
 import { splitArray, splitFindArray } from "@/services/utils";
 import { Dispatch, SetStateAction, useContext } from "react";
@@ -14,37 +14,37 @@ import { toast } from "../../useToast";
 import { UserType } from "@/hooks/useUser/types";
 import { AppContext } from "@/pages/App/App";
 
-export const getOrderEventAmount = (
+export const getProjectEventAmount = (
   events: Event[] | undefined,
-  type?: OrderEventType
+  type?: ProjectEventType
 ) => {
   if (events === undefined) return undefined;
   let count = 0;
   events
-    .filter((event) => event.eventType === "orderEvent")
-    .forEach((_orderEvent) => {
-      const orderEvent = _orderEvent as OrderEvent;
-      orderEvent.subOrders.forEach((orderEvent) => {
+    .filter((event) => event.eventType === "projectEvent")
+    .forEach((_projectEvent) => {
+      const projectEvent = _projectEvent as ProjectEvent;
+      projectEvent.processes.forEach((projectEvent) => {
         if (
-          orderEvent.messages !== undefined &&
-          orderEvent.messages > 0 &&
+          projectEvent.messages !== undefined &&
+          projectEvent.messages > 0 &&
           (type === "message" || type === undefined)
         )
-          count += orderEvent.messages;
+          count += projectEvent.messages;
         if (
-          orderEvent.status !== undefined &&
-          orderEvent.status > 0 &&
+          projectEvent.status !== undefined &&
+          projectEvent.status > 0 &&
           (type === "status" || type === undefined)
         )
-          count += orderEvent.status;
+          count += projectEvent.status;
       });
     });
   return count > 0 ? count : undefined;
 };
 
-const addOrderEventItemMessages = (
-  oldEvent: OrderEventItem | undefined,
-  newEvent: OrderEventItem | undefined
+const addProjectEventItemMessages = (
+  oldEvent: ProjectEventItem | undefined,
+  newEvent: ProjectEventItem | undefined
 ): number => {
   if (oldEvent === undefined && newEvent === undefined) return 0;
   if (oldEvent === undefined && newEvent !== undefined)
@@ -56,9 +56,9 @@ const addOrderEventItemMessages = (
   }
   return 0;
 };
-const addOrderEventItemStatus = (
-  oldEvent: OrderEventItem | undefined,
-  newEvent: OrderEventItem | undefined
+const addProjectEventItemStatus = (
+  oldEvent: ProjectEventItem | undefined,
+  newEvent: ProjectEventItem | undefined
 ): number => {
   if (oldEvent === undefined && newEvent === undefined) return 0;
   if (oldEvent === undefined && newEvent !== undefined) return newEvent.status;
@@ -69,45 +69,57 @@ const addOrderEventItemStatus = (
 
   return 0;
 };
-const getExistingOrderEvent = (
-  orderEvents: OrderEvent[],
-  newOrderEvent: OrderEvent
-): OrderEvent | undefined => {
-  return orderEvents.find(
-    (orderEvent) => orderEvent.orderID === newOrderEvent.orderID
+const getExistingProjectEvent = (
+  projectEvents: ProjectEvent[],
+  newProjectEvent: ProjectEvent
+): ProjectEvent | undefined => {
+  return projectEvents.find(
+    (projectEvent) => projectEvent.projectID === newProjectEvent.projectID
   );
 };
-const getOrderEventItemIDs = (orderEventItems: OrderEventItem[]): string[] => {
-  return orderEventItems.map((orderEventItem) => orderEventItem.subOrderID);
-};
-const hydrateOrderEventItems = (
-  existingOrderEvent: OrderEvent | undefined,
-  newOrderEventItems: OrderEventItem[]
-): OrderEventItem[] => {
-  if (existingOrderEvent === undefined) return newOrderEventItems;
-  const newItemIDs = getOrderEventItemIDs(newOrderEventItems);
-  const existingItemIDs = getOrderEventItemIDs(existingOrderEvent.subOrders);
-  const existingUntouchedItems: OrderEventItem[] =
-    existingOrderEvent.subOrders.filter(
-      (orderEventItem) => !newItemIDs.includes(orderEventItem.subOrderID)
-    );
-  const existingItems: OrderEventItem[] = existingOrderEvent.subOrders.filter(
-    (orderEventItem) => newItemIDs.includes(orderEventItem.subOrderID)
+const getProjectEventItemIDs = (
+  projectEventItems: ProjectEventItem[]
+): string[] => {
+  return projectEventItems.map(
+    (projectEventItem) => projectEventItem.processID
   );
-  const hydratedExistingItems = existingItems.map((existingOrderEventItem) => {
-    const newItem = newOrderEventItems.find(
-      (newOrderEventItem) =>
-        newOrderEventItem.subOrderID === existingOrderEventItem.subOrderID
+};
+const hydrateProjectEventItems = (
+  existingProjectEvent: ProjectEvent | undefined,
+  newProjectEventItems: ProjectEventItem[]
+): ProjectEventItem[] => {
+  if (existingProjectEvent === undefined) return newProjectEventItems;
+  const newItemIDs = getProjectEventItemIDs(newProjectEventItems);
+  const existingItemIDs = getProjectEventItemIDs(
+    existingProjectEvent.processes
+  );
+  const existingUntouchedItems: ProjectEventItem[] =
+    existingProjectEvent.processes.filter(
+      (projectEventItem) => !newItemIDs.includes(projectEventItem.processID)
     );
-    return {
-      ...existingOrderEventItem,
-      messages: addOrderEventItemMessages(existingOrderEventItem, newItem),
-      status: addOrderEventItemStatus(existingOrderEventItem, newItem),
-    };
-  });
-  const newUntouchedItems = newOrderEventItems.filter(
-    (newOrderEventItem) =>
-      !existingItemIDs.includes(newOrderEventItem.subOrderID)
+  const existingItems: ProjectEventItem[] =
+    existingProjectEvent.processes.filter((projectEventItem) =>
+      newItemIDs.includes(projectEventItem.processID)
+    );
+  const hydratedExistingItems = existingItems.map(
+    (existingProjectEventItem) => {
+      const newItem = newProjectEventItems.find(
+        (newProjectEventItem) =>
+          newProjectEventItem.processID === existingProjectEventItem.processID
+      );
+      return {
+        ...existingProjectEventItem,
+        messages: addProjectEventItemMessages(
+          existingProjectEventItem,
+          newItem
+        ),
+        status: addProjectEventItemStatus(existingProjectEventItem, newItem),
+      };
+    }
+  );
+  const newUntouchedItems = newProjectEventItems.filter(
+    (newProjectEventItem) =>
+      !existingItemIDs.includes(newProjectEventItem.processID)
   );
 
   return [
@@ -118,128 +130,129 @@ const hydrateOrderEventItems = (
 };
 
 interface ReturnProps {
-  handleNewOrderEvent: (
-    newEvent: OrderEvent,
+  handleNewProjectEvent: (
+    newEvent: ProjectEvent,
     events: Event[],
     setEvents: Dispatch<SetStateAction<Event[]>>
   ) => void;
-  deleteOrderEvent: (event: DeleteOrderEvent, events: Event[]) => Event[];
+  deleteProjectEvent: (event: DeleteProjectEvent, events: Event[]) => Event[];
 }
 
-const useOrderEvent = (): ReturnProps => {
+const useProjectEvent = (): ReturnProps => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const { user } = useContext(AppContext);
 
-  const hydrateOrderEvents = (
-    newOrderEvent: OrderEvent,
+  const hydrateProjectEvents = (
+    newProjectEvent: ProjectEvent,
     events: Event[]
   ): Event[] => {
-    const noneOrderEvents = events.filter(
-      (event) => event.eventType !== "orderEvent"
+    const noneProjectEvents = events.filter(
+      (event) => event.eventType !== "projectEvent"
     );
-    const orderEvents: OrderEvent[] = events.filter(
-      (event) => event.eventType === "orderEvent"
-    ) as OrderEvent[];
+    const projectEvents: ProjectEvent[] = events.filter(
+      (event) => event.eventType === "projectEvent"
+    ) as ProjectEvent[];
 
-    const existingOrderEvent = getExistingOrderEvent(
-      orderEvents,
-      newOrderEvent
+    const existingProjectEvent = getExistingProjectEvent(
+      projectEvents,
+      newProjectEvent
     );
-    const hydatedOrderEventItems = hydrateOrderEventItems(
-      existingOrderEvent,
-      newOrderEvent.subOrders
+    const hydatedProjectEventItems = hydrateProjectEventItems(
+      existingProjectEvent,
+      newProjectEvent.processes
     );
 
-    const newOrderEvents: OrderEvent[] = [
-      ...orderEvents.filter(
-        (orderEvent) => orderEvent.orderID !== newOrderEvent.orderID
+    const newProjectEvents: ProjectEvent[] = [
+      ...projectEvents.filter(
+        (projectEvent) => projectEvent.projectID !== newProjectEvent.projectID
       ),
-      existingOrderEvent === undefined
-        ? newOrderEvent
+      existingProjectEvent === undefined
+        ? newProjectEvent
         : {
-            ...existingOrderEvent,
-            subOrders: hydatedOrderEventItems,
+            ...existingProjectEvent,
+            processes: hydatedProjectEventItems,
           },
     ];
-    return [...noneOrderEvents, ...newOrderEvents];
+    return [...noneProjectEvents, ...newProjectEvents];
   };
 
-  const deleteOrderEvent = (
-    event: DeleteOrderEvent,
+  const deleteProjectEvent = (
+    event: DeleteProjectEvent,
     events: Event[]
   ): Event[] => {
-    // logger("useOrderEvent | deleteOrderEvent", event);
-    const { subOrderID, orderID, type } = event;
+    // logger("useProjectEvent | deleteProjectEvent", event);
+    const { processID, projectID, type } = event;
 
-    const { arrayTrue: _orderEvents, arrayFalse: otherEvents } = splitArray(
+    const { arrayTrue: _projectEvents, arrayFalse: otherEvents } = splitArray(
       events,
-      (event) => event.eventType === "orderEvent"
+      (event) => event.eventType === "projectEvent"
     );
-    const orderEvents = _orderEvents as OrderEvent[];
-    const { otherArray: otherOrderEvents, item: orderEvent } = splitFindArray(
-      orderEvents,
-      (orderEvent) => orderEvent.orderID === orderID
-    );
-    let newOrderEventItems: OrderEventItem[] = [];
-    let orderEventItem: OrderEventItem | undefined = undefined;
-    if (orderEvent !== undefined) {
-      const { otherArray: _otherOrderEventItems, item: _orderEventItem } =
+    const projectEvents = _projectEvents as ProjectEvent[];
+    const { otherArray: otherProjectEvents, item: projectEvent } =
+      splitFindArray(
+        projectEvents,
+        (projectEvent) => projectEvent.projectID === projectID
+      );
+    let newProjectEventItems: ProjectEventItem[] = [];
+    let projectEventItem: ProjectEventItem | undefined = undefined;
+    if (projectEvent !== undefined) {
+      const { otherArray: _otherProjectEventItems, item: _projectEventItem } =
         splitFindArray(
-          orderEvent.subOrders,
-          (orderEventItem) => orderEventItem.subOrderID === orderID
+          projectEvent.processes,
+          (projectEventItem) => projectEventItem.processID === projectID
         );
-      newOrderEventItems = _otherOrderEventItems;
-      orderEventItem = _orderEventItem;
+      newProjectEventItems = _otherProjectEventItems;
+      projectEventItem = _projectEventItem;
     }
-    if (orderEventItem !== undefined) {
-      orderEventItem = {
-        ...orderEventItem,
-        messages: type === "message" ? 0 : orderEventItem.messages,
-        status: type === "status" ? 0 : orderEventItem.status,
+    if (projectEventItem !== undefined) {
+      projectEventItem = {
+        ...projectEventItem,
+        messages: type === "message" ? 0 : projectEventItem.messages,
+        status: type === "status" ? 0 : projectEventItem.status,
       };
-      if (orderEventItem.messages === 0 && orderEventItem.status === 0) {
-        orderEventItem = undefined;
+      if (projectEventItem.messages === 0 && projectEventItem.status === 0) {
+        projectEventItem = undefined;
       } else {
-        newOrderEventItems.push(orderEventItem);
+        newProjectEventItems.push(projectEventItem);
       }
     }
-    return orderEvent !== undefined && newOrderEventItems.length > 0
+    return projectEvent !== undefined && newProjectEventItems.length > 0
       ? [
           ...otherEvents,
-          ...otherOrderEvents,
+          ...otherProjectEvents,
           {
-            ...orderEvent,
-            subOrders: newOrderEventItems,
+            ...projectEvent,
+            processes: newProjectEventItems,
           },
         ]
-      : [...otherEvents, ...otherOrderEvents];
+      : [...otherEvents, ...otherProjectEvents];
   };
 
-  const handleNewOrderEvent = (
-    newEvent: OrderEvent,
+  const handleNewProjectEvent = (
+    newEvent: ProjectEvent,
     events: Event[],
     setEvents: Dispatch<SetStateAction<Event[]>>
   ) => {
-    queryClient.invalidateQueries(["order"]);
-    queryClient.invalidateQueries(["flatOrders"]);
-    setEvents(hydrateOrderEvents(newEvent, events));
-    const orderEvent = newEvent;
-    if (orderEvent.subOrders[0].messages > 0) {
+    queryClient.invalidateQueries(["project"]);
+    queryClient.invalidateQueries(["flatProjects"]);
+    setEvents(hydrateProjectEvents(newEvent, events));
+    const projectEvent = newEvent;
+    if (projectEvent.processes[0].messages > 0) {
       toast(
-        t("toast.orderEvent.message"),
-        user?.usertype === UserType.USER ? "/orders" : "/contracts"
+        t("toast.projectEvent.message"),
+        user?.usertype === UserType.USER ? "/projects" : "/contracts"
       );
     }
-    if (orderEvent.subOrders[0].status > 0) {
+    if (projectEvent.processes[0].status > 0) {
       toast(
-        t("toast.orderEvent.status"),
-        user?.usertype === UserType.USER ? "/orders" : "/contracts"
+        t("toast.projectEvent.status"),
+        user?.usertype === UserType.USER ? "/projects" : "/contracts"
       );
     }
   };
 
-  return { handleNewOrderEvent, deleteOrderEvent };
+  return { handleNewProjectEvent, deleteProjectEvent };
 };
 
-export default useOrderEvent;
+export default useProjectEvent;

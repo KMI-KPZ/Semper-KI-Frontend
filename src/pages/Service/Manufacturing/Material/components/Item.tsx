@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import { MaterialProps } from "../Material";
 import { Heading } from "@component-library/Typography";
-import useSubOrder from "@/pages/Order/SubOrder/hooks/useSubOrder";
+import useProcess from "@/pages/Projects/hooks/useProcess";
 
 interface Props {
   material: MaterialProps;
@@ -12,10 +12,10 @@ interface Props {
 export const ProcessMaterialItem: React.FC<Props> = (props) => {
   const { material } = props;
   const { t } = useTranslation();
-  const { updateSubOrder } = useSubOrder();
+  const { updateProcess } = useProcess();
 
   const handleOnClickButtonDeselect = () => {
-    updateSubOrder.mutate({ deletions: { service: ["material"] } });
+    updateProcess.mutate({ deletions: { service: ["material"] } });
   };
 
   return (

@@ -4,7 +4,7 @@ import { Button } from "@component-library/Button";
 import { getModelURI } from "@/services/utils";
 import { ModelProps } from "../types";
 import { Heading } from "@component-library/Typography";
-import useSubOrder from "@/pages/Order/SubOrder/hooks/useSubOrder";
+import useProcess from "@/pages/Projects/hooks/useProcess";
 
 interface Props {
   model: ModelProps;
@@ -13,7 +13,7 @@ interface Props {
 const ProcessModelItem: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { model } = props;
-  const { updateSubOrder } = useSubOrder();
+  const { updateProcess } = useProcess();
 
   const getDate = (): string => {
     let date: Date = new Date(model.date);
@@ -28,7 +28,7 @@ const ProcessModelItem: React.FC<Props> = (props) => {
   };
 
   const handleOnClickButtonDeselect = () => {
-    updateSubOrder.mutate({ deletions: { service: ["model"] } });
+    updateProcess.mutate({ deletions: { service: ["model"] } });
   };
 
   return (

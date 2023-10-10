@@ -10,11 +10,11 @@ import { NavigationItemData } from "@/data/navigation";
 import LogoURL from "@images/logo192.png";
 import { AppContext } from "@/pages/App/App";
 import { UserProps, UserType } from "@/hooks/useUser/types";
-import { Event, OrderEvent } from "@/pages/App/types";
+import { Event, ProjectEvent } from "@/pages/App/types";
 import { Heading, Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
 import useBodyScroll from "@/pages/App/hooks/useBodyScroll";
-import { getOrderEventAmount } from "@/pages/App/hooks/useEvents/hooks/useOrderEvent";
+import { getProjectEventAmount } from "@/pages/App/hooks/useEvents/hooks/useOrderEvent";
 
 interface Language {
   code: string;
@@ -111,7 +111,7 @@ export const Header: React.FC<Props> = (props) => {
       title === "data.NavigationItem.contracts" ||
       title === "data.NavigationItem.orders"
     )
-      return getOrderEventAmount(events);
+      return getProjectEventAmount(events);
     // if (cartCount > 0 && title === "data.NavigationItem.cart") return cartCount;
     return undefined;
   };

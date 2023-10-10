@@ -2,16 +2,14 @@ import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import { Heading } from "@component-library/Typography";
-import useSubOrder, {
-  SubOrderProps,
-} from "@/pages/Order/SubOrder/hooks/useSubOrder";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { ServiceType } from "../../hooks/useService";
 import { TFunction, useTranslation } from "react-i18next";
+import useProcess, { ProcessProps } from "@/pages/Projects/hooks/useProcess";
 
 interface Props {
-  subOrder: SubOrderProps;
+  process: ProcessProps;
 }
 
 interface State {
@@ -19,22 +17,22 @@ interface State {
   titleText: string;
 }
 
-export const getTitleFromSubOrder = (
-  subOrder: SubOrderProps,
+export const getTitleFromProcess = (
+  process: ProcessProps,
   t: TFunction<"translation", undefined>
 ): string => {
-  return subOrder.details.title !== undefined
-    ? subOrder.details.title
-    : subOrder.service.type !== undefined
-    ? t(`OrderRoutes.Service.type.${ServiceType[subOrder.service.type]}`)
-    : t("OrderRoutes.Service.Overview.components.Item.empty");
+  return process.details.title !== undefined
+    ? process.details.title
+    : process.service.type !== undefined
+    ? t(`ProjectRoutes.Service.type.${ServiceType[process.service.type]}`)
+    : t("ProjectRoutes.Service.Overview.components.Item.empty");
 };
 
 const ServiceOverviewItem: React.FC<Props> = (props) => {
-  const { subOrder } = props;
+  const { process } = props;
   const { t } = useTranslation();
-  const { orderID, subOrderID } = useParams();
-  const inputText: string = getTitleFromSubOrder(subOrder, t);
+  const { projectID, processID } = useParams();
+  const inputText: string = getTitleFromProcess(process, t);
 
   const [state, setState] = useState<State>({
     edit: false,
@@ -42,15 +40,15 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
   });
   const { edit, titleText } = state;
   const navigate = useNavigate();
-  const { deleteSubOrder, updateSubOrder } = useSubOrder();
-  const active = subOrderID === subOrder.subOrderID;
+  const { deleteProcess, updateProcess } = useProcess();
+  const active = processID === process.processID;
 
   const handleOnClickCard = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    navigate(`/order/${orderID}/suborder/${subOrder.subOrderID}`);
+    navigate(`/project/${projectID}/subproject/${process.processID}`);
   };
 
   const handleOnClickDeleteIcon = (
@@ -58,8 +56,8 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    if (window.confirm(t("Orders.OrderView.confirm.cancel"))) {
-      deleteSubOrder.mutate(subOrder.subOrderID);
+    if (window.confirm(t("Projects.ProjectView.confirm.cancel"))) {
+      deleteProcess.mutate(process.processID);
     }
   };
 
@@ -69,7 +67,7 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
     e.preventDefault();
     e.stopPropagation();
     if (state.edit)
-      updateSubOrder.mutate({
+      updateProcess.mutate({
         changes: { details: { title: state.titleText } },
       });
     setState((prevState) => {
@@ -92,7 +90,7 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
   return (
     <div
       className={`flex h-fit w-full flex-row items-center justify-between gap-3 bg-white px-3 py-2 duration-300 hover:cursor-pointer hover:bg-slate-200
-      ${active === true ? "shadow-border shadow-gray-500" : ""}
+      ${active === true ? "shadow-bproject shadow-gray-500" : ""}
       `}
       onClick={handleOnClickCard}
     >

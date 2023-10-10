@@ -5,11 +5,9 @@ import AddIcon from "@mui/icons-material/Add";
 import ServiceOverviewItem from "./components/Item";
 import { Heading } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
-import useSubOrder, {
-  SubOrderProps,
-} from "@/pages/Order/SubOrder/hooks/useSubOrder";
+import { useProject } from "@/pages/Projects/hooks/useProject";
+import useProcess, { ProcessProps } from "@/pages/Projects/hooks/useProcess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useOrder } from "@/pages/Order/hooks/useOrder";
 
 interface Props {}
 
@@ -18,11 +16,11 @@ const ServiceOverview: React.FC<Props> = (props) => {
   const [open, setOpen] = useState(true);
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { orderQuery } = useOrder();
-  const { createSubOrder } = useSubOrder();
+  const { projectQuery } = useProject();
+  const { createProcess } = useProcess();
 
   const addNewItem = () => {
-    createSubOrder.mutate(undefined, {
+    createProcess.mutate(undefined, {
       onSuccess(data, variables, context) {
         navigate(`../${data}`);
       },
@@ -50,12 +48,12 @@ const ServiceOverview: React.FC<Props> = (props) => {
       </div>
       <div className="flex w-full flex-col flex-wrap items-center justify-center gap-5">
         {open &&
-        orderQuery.data !== undefined &&
-        orderQuery.data.subOrders !== undefined &&
-        orderQuery.data.subOrders.length > 0
-          ? orderQuery.data.subOrders.map(
-              (subOrder: SubOrderProps, index: number) => (
-                <ServiceOverviewItem key={index} subOrder={subOrder} />
+        projectQuery.data !== undefined &&
+        projectQuery.data.processes !== undefined &&
+        projectQuery.data.processes.length > 0
+          ? projectQuery.data.processes.map(
+              (process: ProcessProps, index: number) => (
+                <ServiceOverviewItem key={index} process={process} />
               )
             )
           : null}

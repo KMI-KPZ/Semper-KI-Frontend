@@ -11,7 +11,7 @@ describe("<Home>", () => {
   it("should render anonym Home for anonym user", () => {
     render(<Home user={undefined} />);
     expect(screen.getByTestId("home-anonym-header")).toBeInTheDocument();
-    expect(screen.getByTestId("home-anonym-order")).toBeInTheDocument();
+    expect(screen.getByTestId("home-anonym-project")).toBeInTheDocument();
     expect(screen.getByTestId("home-anonym-orga")).toBeInTheDocument();
     expect(screen.getByTestId("home-anonym-individual")).toBeInTheDocument();
     expect(screen.getByTestId("home-anonym-magazin")).toBeInTheDocument();

@@ -1,9 +1,9 @@
 import { getCustomAxios } from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
 import { UserProps } from "@/hooks/useUser/types";
-import { SubOrderProps } from "@/pages/Order/SubOrder/hooks/useSubOrder";
-import { OrderDetailsProps, OrderState } from "@/pages/Order/hooks/useOrder";
-import { FlatOrderProps } from "@/pages/Orders/hooks/useFlatOrders";
+import { FlatProjectProps } from "@/pages/Projects/hooks/useFlatProjects";
+import { ProcessState } from "@/pages/Projects/hooks/useProcess";
+import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";
 import {
   useMutation,
   UseMutationResult,
@@ -16,7 +16,7 @@ interface ReturnProps {
   adminQuery: UseQueryResult<AdminProps, Error>;
   deleteUser: UseMutationResult<any, Error, DeleteUserProps, unknown>;
   deleteOrganization: UseMutationResult<any, Error, DeleteUserProps, unknown>;
-  adminOrdersQuery: UseQueryResult<AdminFlatOrderProps[], Error>;
+  adminProjectsQuery: UseQueryResult<AdminFlatProjectProps[], Error>;
 }
 
 interface DeleteUserProps {
@@ -39,15 +39,15 @@ export interface OrganizationProps {
   accessed: Date;
 }
 
-export interface AdminFlatOrderProps {
+export interface AdminFlatProjectProps {
   accessed: Date;
   client: string;
   clientName: string;
   created: Date;
-  details: OrderDetailsProps;
-  orderCollectionID: string;
-  status: OrderState;
-  subOrderCount: number;
+  details: ProjectDetailsProps;
+  projectCollectionID: string;
+  status: ProcessState;
+  processCount: number;
   updated: Date;
 }
 
@@ -65,18 +65,18 @@ const useAdmin = (): ReturnProps => {
         }),
   });
 
-  const adminOrdersQuery = useQuery<AdminFlatOrderProps[], Error>({
-    queryKey: ["admin, flatOrders"],
+  const adminProjectsQuery = useQuery<AdminFlatProjectProps[], Error>({
+    queryKey: ["admin, flatProjects"],
     queryFn: async () =>
       getCustomAxios()
-        .get(`${process.env.VITE_HTTP_API_URL}/public/admin/getOrdersFlat/`)
+        .get(`${process.env.VITE_HTTP_API_URL}/public/admin/getProjectsFlat/`)
         .then((res) => {
-          logger("useAdmin | adminOrdersQuery ✅ |", res.data);
-          return res.data.map((order: any) => ({
-            ...order,
-            accessed: new Date(order.accessed),
-            created: new Date(order.created),
-            updated: new Date(order.updated),
+          logger("useAdmin | adminProjectsQuery ✅ |", res.data);
+          return res.data.map((project: any) => ({
+            ...project,
+            accessed: new Date(project.accessed),
+            created: new Date(project.created),
+            updated: new Date(project.updated),
           }));
         }),
   });
@@ -121,7 +121,7 @@ const useAdmin = (): ReturnProps => {
     },
   });
 
-  return { adminQuery, deleteUser, deleteOrganization, adminOrdersQuery };
+  return { adminQuery, deleteUser, deleteOrganization, adminProjectsQuery };
 };
 
 export default useAdmin;

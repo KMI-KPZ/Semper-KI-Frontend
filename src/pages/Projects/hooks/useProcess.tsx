@@ -1,0 +1,204 @@
+import { getCustomAxios } from "@/hooks/useCustomAxios";
+import logger from "@/hooks/useLogger";
+import {
+  useMutation,
+  UseMutationResult,
+  useQueryClient,
+} from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
+import usePathID from "@/hooks/usePathID";
+import {
+  GeneralServiceProps,
+  GerneralUpdateServiceProps,
+} from "@/pages/Service/Service";
+import { useProject } from "./useProject";
+
+interface ReturnProps {
+  deleteProcess: UseMutationResult<string, Error, string, unknown>;
+  createProcess: UseMutationResult<string, Error, void, unknown>;
+  updateProcess: UseMutationResult<string, Error, UpdateProcessProps, unknown>;
+  getCurrentProcess: (_processID?: string) => ProcessProps | undefined;
+  updateProcessWithProcessID: UseMutationResult<
+    string,
+    Error,
+    {
+      processID: string;
+      updates: UpdateProcessProps;
+    },
+    unknown
+  >;
+}
+
+export interface ProcessDetailsProps {
+  title?: string;
+}
+
+export interface ProcessProps {
+  chat: { messages: ChatMessageProps[] };
+  contractor: string;
+  created: Date;
+  details: ProcessDetailsProps;
+  files: string[];
+  service: GeneralServiceProps;
+  state: ProcessState;
+  processID: string;
+  updated: string;
+}
+
+export interface ChatMessageProps {
+  userID: string;
+  userName: string;
+  date: string;
+  text: string;
+}
+
+export interface UpdateProcessProps {
+  changes?: ProcessChangesProps;
+  deletions?: ProcessDeletionsProps;
+}
+
+export interface ProcessChangesProps {
+  contractor?: string[];
+  chat?: ChatMessageProps;
+  state?: ProcessState;
+  files?: File[];
+  details?: ProcessDetailsProps;
+  service?: GerneralUpdateServiceProps;
+}
+
+export interface ProcessDeletionsProps {
+  chat?: "";
+  state?: "";
+  files?: "";
+  details?: "";
+  service?: string[] | "";
+}
+
+export enum ProcessState {
+  "DRAFT" = 0,
+  "WAITING_FOR_OTHER_PROCESS" = 100,
+  "SERVICE_READY" = 200,
+  "SERVICE_COMPLICATION" = 201,
+  "CONTRACTOR_SELECTED" = 300,
+  "VERIFYING" = 400,
+  "VERIFIED" = 500,
+  "REQUESTED" = 600,
+  "CLARIFICATION" = 700,
+  "CONFIRMED_BY_CONTRACTOR" = 800,
+  "REJECTED_BY_CONTRACTOR" = 801,
+  "CONFIRMED_BY_CLIENT" = 900,
+  "REJECTED_BY_CLIENT" = 901,
+  "PRODUCTION" = 1000,
+  "DELIVERY" = 1100,
+  "DISPUTE" = 1200,
+  "COMPLETED" = 1300,
+  "FAILED" = 1400,
+  "CANCELED" = 1500,
+}
+
+const useProcess = (): ReturnProps => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const { projectID, processID } = useParams();
+  const { projectQuery } = useProject();
+
+  const getCurrentProcess = (_processID?: string): ProcessProps | undefined => {
+    return projectQuery.data?.processes.find(
+      (process) =>
+        process.processID ===
+        (_processID === undefined ? processID : _processID)
+    );
+  };
+
+  const createProcess = useMutation<string, Error, void>({
+    mutationFn: async () => {
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createProcessID/${projectID}/`;
+      return getCustomAxios()
+        .get(apiUrl)
+        .then((response) => {
+          logger("useProcess | createProcess ✅ |", response.data);
+          return response.data.processID;
+        });
+    },
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries(["flatProjects"]);
+      queryClient.invalidateQueries(["project", projectID]);
+    },
+  });
+
+  const updateProcess = useMutation<string, Error, UpdateProcessProps>({
+    mutationFn: async ({ changes = {}, deletions = {} }) => {
+      return getCustomAxios()
+        .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
+          projectID,
+          processID,
+          changes: changes,
+          deletions: deletions,
+        })
+        .then((res) => {
+          logger("useProcess | updateProcess ✅ |", res.data);
+          return res.data;
+        });
+    },
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries(["project", projectID]);
+      queryClient.invalidateQueries(["flatProjects"]);
+    },
+  });
+
+  const updateProcessWithProcessID = useMutation<
+    string,
+    Error,
+    { processID: string; updates: UpdateProcessProps }
+  >({
+    mutationFn: async (props: {
+      processID: string;
+      updates: UpdateProcessProps;
+    }) => {
+      const { updates, processID } = props;
+      const { changes = {}, deletions = {} } = updates;
+      return getCustomAxios()
+        .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
+          projectID,
+          processID,
+          changes: changes,
+          deletions: deletions,
+        })
+        .then((res) => {
+          logger("useProcess | updateProcess ✅ |", res.data);
+          return res.data;
+        });
+    },
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries(["project", projectID]);
+      queryClient.invalidateQueries(["flatProjects"]);
+    },
+  });
+
+  const deleteProcess = useMutation<string, Error, string>({
+    mutationFn: async (processID: string) => {
+      return getCustomAxios()
+        .delete(
+          `${process.env.VITE_HTTP_API_URL}/public/deleteProcess/${projectID}/${processID}/`
+        )
+        .then((res) => {
+          logger("useProcess | deleteProcess ✅ |", res.data);
+          return res.data;
+        });
+    },
+    onSuccess(data, processID, context) {
+      queryClient.invalidateQueries(["project", projectID]);
+      queryClient.invalidateQueries(["flatProjects"]);
+    },
+  });
+
+  return {
+    createProcess,
+    deleteProcess,
+    updateProcess,
+    getCurrentProcess,
+    updateProcessWithProcessID,
+  };
+};
+
+export default useProcess;

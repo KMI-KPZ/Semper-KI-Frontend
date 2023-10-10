@@ -51,7 +51,10 @@
       "contractorSelection":"Auftragnehmerauswahl",
       "verification":"Überprüfung",
       "registerOrganization":"Organisation registrieren",
-      "verifyEMail":"E-Mail verifizieren"
+      "verifyEMail":"E-Mail verifizieren",
+      "manufacturing":"Herstellen lassen",
+      "projects":"Meine Projekte",
+      "project":"Projekt"
     }
   },
   "enum":{
@@ -366,6 +369,9 @@
         }
       },
       "Authorized":{
+        "Projects":{
+          "title":"Meine Projekte"
+        },
         "Order":{
           "title":"Aufträge",
           "noOrders":"Keine Aufträge vorhanden",
@@ -1208,6 +1214,7 @@
           "name":"Name",
           "status":"Status",
           "created":"Erstellt am",
+          "updated":"Aktualisiert am",
           "count":"Anzahl",
           "actions":"Aktionen",
           "noItems":"keine Aufträge",
@@ -1307,6 +1314,16 @@
       "link":"Zum Artikel",
       "more":"Mehr lesen...",
       "less":"Weniger lesen..."
+    }
+  },
+  "Projects":{
+    "Projects":{
+      "title":"Meine Projekte",
+      "title2":"Eigegangene Projekte",
+      "empty":"keine Projekte vorhanden",
+      "buttons":{
+        "create":"Projekt erstellen"
+      }
     }
   }
 }

@@ -8,14 +8,14 @@ import ServiceSelectItem from "./components/Item";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ServiceSelectProps {
-  subOrderID?: string;
+  processID?: string;
 }
 
 export interface ServiceSelectItemProps {
   serviceType: ServiceType;
   icon: React.ReactNode;
   active: boolean;
-  subOrderID?: string;
+  processID?: string;
 }
 
 export const serviceSelectItems: ServiceSelectItemProps[] = [
@@ -32,16 +32,16 @@ export const serviceSelectItems: ServiceSelectItemProps[] = [
 ];
 
 const ServiceSelect: React.FC<ServiceSelectProps> = (props) => {
-  const { subOrderID } = props;
+  const { processID } = props;
   const { t } = useTranslation();
 
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
-      <Heading variant="h1">{t("OrderRoutes.Service.Select.title")}</Heading>
-      <PermissionGate element="SubOrderServiceSelection">
+      <Heading variant="h1">{t("ProjectRoutes.Service.Select.title")}</Heading>
+      <PermissionGate element="ProcessServiceSelection">
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           {serviceSelectItems.map((item, index) => (
-            <ServiceSelectItem {...item} key={index} subOrderID={subOrderID} />
+            <ServiceSelectItem {...item} key={index} processID={processID} />
           ))}
         </div>
       </PermissionGate>

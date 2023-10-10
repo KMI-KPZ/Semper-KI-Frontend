@@ -2,12 +2,13 @@ import { UserProps, UserType } from "@/hooks/useUser/types";
 import { Event } from "@/pages/App/types";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import HomeAuthorizedOrder from "./components/Order";
+import HomeAuthorizedProject from "./components/Project";
 import HomeAuthorizedOrganization from "./components/Organization";
 import HomeAuthorizedResources from "./components/Resources";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import HomeAuthorizedAdmin from "./components/Admin";
 import Coypu from "../components/Coypu";
+import HomeAuthorizedProjects from "./components/Projects";
 
 interface AuthorizedPropsHome {
   user: UserProps;
@@ -23,8 +24,9 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
       className="flex w-full flex-col items-center justify-center gap-10"
       data-testid="home-authorized"
     >
-      <PermissionGate element={"HomeAuthorizedOrder"}>
-        <HomeAuthorizedOrder />
+      <HomeAuthorizedProjects />
+      <PermissionGate element={"HomeAuthorizedProject"}>
+        <HomeAuthorizedProject />
       </PermissionGate>
       {user.usertype === UserType.ORGANIZATION ? (
         <>

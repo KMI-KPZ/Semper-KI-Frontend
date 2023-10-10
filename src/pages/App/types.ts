@@ -1,14 +1,14 @@
 
-export type Event = OrderEvent | OrgaEvent | PermissionEvent; 
+export type Event = ProjectEvent | OrgaEvent | PermissionEvent; 
 
-export interface OrderEvent {
-  eventType: "orderEvent";
-  orderID: string;
-  subOrders: OrderEventItem[];
+export interface ProjectEvent {
+  eventType: "projectEvent";
+  projectID: string;
+  processes: ProjectEventItem[];
 }
 
-export interface OrderEventItem {
-  subOrderID: string;
+export interface ProjectEventItem {
+  processID: string;
   status: number;
   messages: number;
 }
@@ -21,15 +21,15 @@ export interface PermissionEvent  {
   eventType: "permissionEvent";
 }
 
-export type DeleteEvent = DeleteOrderEvent | DeleteOrgaEvent;
+export type DeleteEvent = DeleteProjectEvent | DeleteOrgaEvent;
 
-export type OrderEventType = "message" | "status";
+export type ProjectEventType = "message" | "status";
 
-export interface DeleteOrderEvent  {
-  eventType: "orderEvent";
-  orderID: string;
-  subOrderID: string;
-  type: OrderEventType;
+export interface DeleteProjectEvent  {
+  eventType: "projectEvent";
+  projectID: string;
+  processID: string;
+  type: ProjectEventType;
 }
 export interface DeleteOrgaEvent {
   eventType: "orgaEvent";

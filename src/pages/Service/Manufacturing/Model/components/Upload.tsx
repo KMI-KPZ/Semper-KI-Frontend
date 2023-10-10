@@ -10,7 +10,7 @@ import { LoadingAnimation } from "@component-library/Loading";
 import { getFileSizeAsString } from "@/services/utils";
 import { Heading } from "@component-library/Typography";
 import useModelUpload from "../hooks/useModelUpload";
-import useSubOrder from "@/pages/Order/SubOrder/hooks/useSubOrder";
+import useProcess from "@/pages/Projects/hooks/useProcess";
 
 interface Props {}
 
@@ -21,7 +21,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const [dragActive, setDragActive] = useState(false);
   const [fileList, setFileList] = useState<File[]>([]);
   const [error, setError] = useState<boolean>(false);
-  const { updateSubOrder } = useSubOrder();
+  const { updateProcess } = useProcess();
 
   const { uploadModels } = useModelUpload();
   const { status, error: uploadError } = uploadModels;
@@ -114,7 +114,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     if (fileList.length > 0) {
       uploadModels.mutate(fileList, {
         onSuccess(data) {
-          updateSubOrder.mutate({
+          updateProcess.mutate({
             changes: {
               service: {
                 model: data[0],

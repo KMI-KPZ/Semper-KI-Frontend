@@ -3,25 +3,25 @@ import { useTranslation } from "react-i18next";
 import { ServiceSelectItemProps } from "../Select";
 import { Text } from "@component-library/Typography";
 import { ServiceType } from "../../hooks/useService";
-import useSubOrder from "@/pages/Order/SubOrder/hooks/useSubOrder";
+import useProcess from "@/pages/Projects/hooks/useProcess";
 
 const ServiceSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
-  const { active, icon, serviceType, subOrderID } = props;
+  const { active, icon, serviceType, processID } = props;
   const { t } = useTranslation();
-  const { updateSubOrder, updateSubOrderWithSubOrderID } = useSubOrder();
+  const { updateProcess, updateProcessWithProcessID } = useProcess();
 
   const handleOnClickCard = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
-    if (subOrderID !== undefined)
-      updateSubOrderWithSubOrderID.mutate({
-        subOrderID,
+    if (processID !== undefined)
+      updateProcessWithProcessID.mutate({
+        processID,
         updates: {
           changes: { service: { type: serviceType } },
         },
       });
-    else updateSubOrder.mutate({ changes: { service: { type: serviceType } } });
+    else updateProcess.mutate({ changes: { service: { type: serviceType } } });
   };
 
   return (
@@ -32,7 +32,7 @@ const ServiceSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
     >
       {icon}
       <Text variant="body">
-        {t(`OrderRoutes.Service.type.${ServiceType[serviceType]}`)}
+        {t(`ProjectRoutes.Service.type.${ServiceType[serviceType]}`)}
       </Text>
     </a>
   );

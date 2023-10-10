@@ -1,15 +1,14 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { GeneralServiceProps, ServiceProps } from "../Service";
 import { useLocation, useParams } from "react-router-dom";
-import { useOrder } from "@/pages/Order/hooks/useOrder";
 import { ServiceManufacturingProps } from "../Manufacturing/types";
 import logger from "@/hooks/useLogger";
-import useSubOrder from "@/pages/Order/SubOrder/hooks/useSubOrder";
+import useProcess from "@/pages/Projects/hooks/useProcess";
 
 interface ReturnProps {
   getService: () => GeneralServiceProps | undefined;
-  isServiceComplete: (subOrderID: string) => boolean;
-  getServiceName: (subOrderID: string) => string;
+  isServiceComplete: (processID: string) => boolean;
+  getServiceName: (processID: string) => string;
 }
 
 export enum ServiceType {
@@ -19,26 +18,26 @@ export enum ServiceType {
 }
 
 const useService = (): ReturnProps => {
-  const { getCurrentSubOrder } = useSubOrder();
+  const { getCurrentProcess } = useProcess();
 
   const getService = (): GeneralServiceProps | undefined => {
-    return getCurrentSubOrder()?.service;
+    return getCurrentProcess()?.service;
   };
 
-  const isServiceReady = (subOrderID: string): boolean => {
-    const subOrder = getCurrentSubOrder(subOrderID);
+  const isServiceReady = (processID: string): boolean => {
+    const process = getCurrentProcess(processID);
     if (
-      subOrder === undefined ||
-      (subOrder !== undefined && subOrder.service === undefined) ||
-      (subOrder !== undefined &&
-        subOrder.service !== undefined &&
-        subOrder.service.type === undefined)
+      process === undefined ||
+      (process !== undefined && process.service === undefined) ||
+      (process !== undefined &&
+        process.service !== undefined &&
+        process.service.type === undefined)
     )
       return false;
-    switch (subOrder.service.type) {
+    switch (process.service.type) {
       case ServiceType.MANUFACTURING:
         const manufacturingService =
-          subOrder.service as ServiceManufacturingProps;
+          process.service as ServiceManufacturingProps;
         return (
           manufacturingService.model !== undefined &&
           manufacturingService.material !== undefined &&
@@ -51,11 +50,11 @@ const useService = (): ReturnProps => {
     }
   };
 
-  const getServiceName = (subOrderID: string): string => {
-    const subOrder = getCurrentSubOrder();
-    if (subOrder === undefined || subOrder.service === undefined)
+  const getServiceName = (processID: string): string => {
+    const process = getCurrentProcess();
+    if (process === undefined || process.service === undefined)
       return "service";
-    switch (subOrder.service.type) {
+    switch (process.service.type) {
       case ServiceType.MANUFACTURING:
         return "manufacturingService";
       case ServiceType.MODELING:

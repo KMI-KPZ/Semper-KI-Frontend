@@ -37,7 +37,7 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
                         key={index}
                         colSpan={permission.permissions.length}
                         align="center"
-                        className="border-l-2 p-2"
+                        className="bproject-l-2 p-2"
                       >
                         {t(
                           `Organization.Roles.components.Table.${permission.name}`
@@ -45,11 +45,11 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
                       </th>
                     )
                   )}
-                  <th rowSpan={2} className="border-l-2 p-2 text-center">
+                  <th rowSpan={2} className="bproject-l-2 p-2 text-center">
                     {t("Organization.Roles.components.Table.actions")}
                   </th>
                 </tr>
-                <tr className="border-b-2">
+                <tr className="bproject-b-2">
                   {getSimplifiedPermissions(permissionsQuery.data).map(
                     (permission: SimplifiedPermissionProps, index) =>
                       permission.permissions.map(
@@ -57,7 +57,7 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
                           <th
                             key={index + _index}
                             className={`${
-                              _index === 0 ? "border-l-2" : ""
+                              _index === 0 ? "bproject-l-2" : ""
                             } p-2`}
                           >
                             {t(

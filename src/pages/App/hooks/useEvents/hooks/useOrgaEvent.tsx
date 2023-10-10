@@ -17,14 +17,14 @@ const useOrgaEvent = (): ReturnProps => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const hydrateOrgaEvents = (
-    newOrderEvent: OrgaEvent,
+    newProjectEvent: OrgaEvent,
     events: Event[]
   ): Event[] => {
     const noneOrgaEvents: Event[] = events.filter(
-      (event) => event.eventType !== "orderEvent"
+      (event) => event.eventType !== "projectEvent"
     );
     const orgaEvents: OrgaEvent[] = events.filter(
-      (event) => event.eventType === "orderEvent"
+      (event) => event.eventType === "projectEvent"
     ) as OrgaEvent[];
     return [...orgaEvents];
   };

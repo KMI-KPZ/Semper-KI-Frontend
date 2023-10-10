@@ -34,8 +34,8 @@ const HomeAuthorizedAdmin: React.FC<HomeAuthorizedAdminProps> = (props) => {
         />
         <Button
           startIcon={<NoteIcon />}
-          title={t("Home.Home.Authorized.Admin.button.orders")}
-          to="/admin/orders"
+          title={t("Home.Home.Authorized.Admin.button.projects")}
+          to="/admin/projects"
         />
       </div>
     </div>

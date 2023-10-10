@@ -5,10 +5,10 @@ import useAdmin from "../Admin/hooks/useAdmin";
 import Admin from "../Admin/Admin";
 import AdminUser from "../Admin/User/User";
 import AdminOrganization from "../Admin/Organization/Organization";
-import AdminOrders from "../Admin/Orders";
-import Order from "../Order/Order";
+import AdminProjects from "../Admin/Projects";
 import { UserProps } from "@/hooks/useUser/types";
 import Service from "../Service/Service";
+import Project from "../Projects/Project/Project";
 interface AdminRoutesProps {
   user: UserProps | undefined;
 }
@@ -17,7 +17,7 @@ const AdminRoutes: React.FC<AdminRoutesProps> = (props) => {
   const { user } = props;
   const { t } = useTranslation();
 
-  const { adminQuery, adminOrdersQuery } = useAdmin();
+  const { adminQuery, adminProjectsQuery } = useAdmin();
 
   return (
     <Routes>
@@ -33,12 +33,12 @@ const AdminRoutes: React.FC<AdminRoutesProps> = (props) => {
         }
       />
       <Route
-        path="orders"
-        element={<AdminOrders orders={adminOrdersQuery.data} />}
+        path="projects"
+        element={<AdminProjects projects={adminProjectsQuery.data} />}
       />
-      <Route path="orders/:orderID/*" element={<Order user={user} />} />
+      <Route path="projects/:projectID/*" element={<Project user={user} />} />
       <Route
-        path="orders/:orderID/suborder/:subOrderID/*"
+        path="projects/:projectID/subproject/:processID/*"
         element={<Service />}
       />
     </Routes>

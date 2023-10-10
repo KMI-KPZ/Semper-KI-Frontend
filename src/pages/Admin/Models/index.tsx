@@ -36,7 +36,7 @@ const AdminModels: React.FC<Props> = (props) => {
             {[].map((model: ModelProps, index: number) => (
               <TableRow
                 key={index}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                sx={{ "&:last-child td, &:last-child th": { bproject: 0 } }}
               >
                 <TableCell component="th" scope="row">
                   {model.title}

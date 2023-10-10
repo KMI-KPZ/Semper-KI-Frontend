@@ -49,7 +49,7 @@ const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
               key={index}
               align="center"
               className={`p-2 ${
-                index === 0 || index === 5 || index === 8 ? "border-l-2" : ""
+                index === 0 || index === 5 || index === 8 ? "bproject-l-2" : ""
               }`}
             >
               {rolePermissionsQuery.data.find((permission) => {
@@ -64,7 +64,7 @@ const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
             </td>
           ))
         : null}
-      <td className="border-l-2 p-2">
+      <td className="bproject-l-2 p-2">
         <div className="flex w-full flex-row items-center justify-center gap-5">
           <PermissionGate element="OrganizationButtonEditRole">
             <Button

@@ -5,11 +5,11 @@ import useMissedEvent from "./hooks/useMissedEvent";
 import { useTranslation } from "react-i18next";
 import { toast } from "../useToast";
 import { UserProps } from "@/hooks/useUser/types";
-import useOrderEvent from "./hooks/useOrderEvent";
 import useOrgaEvent from "./hooks/useOrgaEvent";
 import { useWebsocket } from "./hooks/useWebsocket";
 import { JSONIsParseable, JSONSafeParse } from "@/services/utils";
 import logger from "@/hooks/useLogger";
+import useProjectEvent from "./hooks/useOrderEvent";
 
 interface ReturnProps {
   deleteEvent: (event: DeleteEvent) => void;
@@ -24,7 +24,7 @@ const useEvents = (
 ): ReturnProps => {
   const [events, setEvents] = useState<Event[]>([]);
   const queryClient = useQueryClient();
-  const { handleNewOrderEvent, deleteOrderEvent } = useOrderEvent();
+  const { handleNewProjectEvent, deleteProjectEvent } = useProjectEvent();
   const { handleNewOrgaEvent, deleteOrgaEvent } = useOrgaEvent();
   const { t } = useTranslation();
   const onLoadMissedEvents = (missedEvents: Event[]) => {
@@ -59,8 +59,8 @@ const useEvents = (
 
   const handleNewEvent = (newEvent: Event) => {
     switch (newEvent.eventType) {
-      case "orderEvent":
-        handleNewOrderEvent(newEvent, events, setEvents);
+      case "projectEvent":
+        handleNewProjectEvent(newEvent, events, setEvents);
         break;
       case "orgaEvent":
         handleNewOrgaEvent(newEvent, events, setEvents);
@@ -77,8 +77,8 @@ const useEvents = (
 
   const deleteEvent = (event: DeleteEvent) => {
     switch (event.eventType) {
-      case "orderEvent":
-        setEvents((prevState) => deleteOrderEvent(event, prevState));
+      case "projectEvent":
+        setEvents((prevState) => deleteProjectEvent(event, prevState));
         break;
       case "orgaEvent":
         setEvents((prevState) => deleteOrgaEvent(event, prevState));

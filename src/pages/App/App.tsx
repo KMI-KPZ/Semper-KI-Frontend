@@ -1,7 +1,5 @@
 import { Header } from "@/components/Header";
-import { Heading } from "@component-library/Typography";
 import { createContext, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
@@ -32,14 +30,13 @@ import CookieBanner from "@/components/CookieBanner/CookieBanner";
 import useCookieConsent from "@/components/CookieBanner/hooks/useCookieConsent";
 import Modal from "@component-library/Modal";
 import usePing from "@/hooks/usePing";
-import Orders from "../Orders/Orders";
-import OrderRoutes from "../Routes/Order";
 import { FilterItemProps } from "../Service/Manufacturing/Filter/Filter";
 import AdminRoutes from "../Routes/Admin";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import AppLoadingSuspense from "./components/LoadingSuspense";
 import { AdminOutlet, OrganizationOutlet, UserOutlet } from "../Outlets/Outlet";
 import EmailVerification from "../EmailVerification/EmailVerification";
+import ProjectsRoutes from "../Projects/Routes/Projects";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -128,9 +125,8 @@ const App: React.FC = () => {
               path="legal/*"
               element={<Legal isMagazineUp={isMagazineUp} />}
             />
-            <Route path="demo/*" element={<Navigate to="/order/new" />} />
-            <Route path="orders" element={<Orders user={user} />} />
-            <Route path="order/*" element={<OrderRoutes user={user} />} />
+            <Route path="demo/*" element={<Navigate to="/project/new" />} />
+            <Route path="projects/*" element={<ProjectsRoutes user={user} />} />
             <Route element={<UserOutlet user={user} />}>
               <Route path="test" element={<Test socket={socket} />} />
               <Route path="account" element={<Profile user={user!} />} />

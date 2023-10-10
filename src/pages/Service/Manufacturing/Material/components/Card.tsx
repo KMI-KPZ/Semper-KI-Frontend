@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import { MaterialProps } from "../Material";
 import { Heading } from "@component-library/Typography";
-import useSubOrder from "@/pages/Order/SubOrder/hooks/useSubOrder";
 import { useNavigate } from "react-router-dom";
+import useProcess from "@/pages/Projects/hooks/useProcess";
 
 interface Props {
   material: MaterialProps;
@@ -15,7 +15,7 @@ interface Props {
 export const ProcessMaterialCard: React.FC<Props> = (props) => {
   const { material, openMaterialView, grid } = props;
   const { t } = useTranslation();
-  const { updateSubOrder } = useSubOrder();
+  const { updateProcess } = useProcess();
   const navigate = useNavigate();
 
   const handleOnClickSelect = (
@@ -23,7 +23,7 @@ export const ProcessMaterialCard: React.FC<Props> = (props) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    updateSubOrder.mutate({ changes: { service: { material: material } } });
+    updateProcess.mutate({ changes: { service: { material: material } } });
     navigate("../postprocessing");
   };
 

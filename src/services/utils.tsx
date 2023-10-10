@@ -156,3 +156,14 @@ export const JSONSafeParse = <T,>(input: any): T | undefined => {
     return undefined;
   }
 };
+
+export const sortByKey = <T,>(item1: T, item2: T, key: keyof T): number => {
+  if (item1[key] === undefined || item2[key] === undefined) return 0;
+  if (item1[key] > item2[key]) {
+    return 1;
+  }
+  if (item1[key] < item2[key]) {
+    return -1;
+  }
+  return 0;
+};

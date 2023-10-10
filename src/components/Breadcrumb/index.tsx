@@ -29,6 +29,13 @@ const Breadcrumb: React.FC<Props> = () => {
           name: "home",
           link: "/",
         });
+      } else if (index === 2 && splittet[1] === "projects") {
+        breadcrumbItems.push({ link: `/projects/${item}`, name: "project" });
+      } else if (index === 3 && splittet[1] === "projects") {
+        breadcrumbItems.push({
+          link: `/projects/${splittet[2]}/${item}`,
+          name: "process",
+        });
       } else if (index === 1 && item === "order") {
         breadcrumbItems.push({
           name: "orders",

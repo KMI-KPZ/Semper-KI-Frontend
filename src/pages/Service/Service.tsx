@@ -10,7 +10,6 @@ import {
 import ServiceOverview from "./Overview/Overview";
 import { ServiceModellingProps } from "./Modelling/Modelling";
 import ServiceSelect from "./Select/Select";
-import { useOrder } from "../Order/hooks/useOrder";
 import logger from "@/hooks/useLogger";
 
 export interface ServiceProps {}

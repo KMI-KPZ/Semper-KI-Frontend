@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 import { getModelURI } from "@/services/utils";
 import { ModelProps } from "../types";
 import { Heading } from "@component-library/Typography";
-import useSubOrder from "@/pages/Order/SubOrder/hooks/useSubOrder";
 import { useNavigate } from "react-router-dom";
+import useProcess from "@/pages/Projects/hooks/useProcess";
 
 interface Props {
   model: ModelProps;
@@ -17,14 +17,14 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { model, closeModelView } = props;
   const navigate = useNavigate();
-  const { updateSubOrder } = useSubOrder();
+  const { updateProcess } = useProcess();
   const getDate = (): string => {
     let date: Date = new Date(model.date);
     return date.toLocaleDateString("uk-Uk");
   };
   const handleOnClickButtonSelect = () => {
     closeModelView();
-    updateSubOrder.mutate({ changes: { service: { model: model } } });
+    updateProcess.mutate({ changes: { service: { model: model } } });
     navigate("../material");
   };
   return (

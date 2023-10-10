@@ -5,7 +5,7 @@ import { MaterialProps } from "../Material";
 import { Heading } from "@component-library/Typography";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import useSubOrder from "@/pages/Order/SubOrder/hooks/useSubOrder";
+import useProcess from "@/pages/Projects/hooks/useProcess";
 
 interface Props {
   material: MaterialProps;
@@ -16,10 +16,10 @@ export const ProcessMaterialPreView: React.FC<Props> = (props) => {
   const { closeMaterialView, material } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { updateSubOrder } = useSubOrder();
+  const { updateProcess } = useProcess();
 
   const handleOnClickButtonSelect = () => {
-    updateSubOrder.mutate({ changes: { service: { material: material } } });
+    updateProcess.mutate({ changes: { service: { material: material } } });
     navigate("../postprocessing");
   };
 

@@ -6,8 +6,8 @@ import { LoadingSuspense } from "@component-library/Loading";
 import { FilterItemProps } from "../Filter/Filter";
 import { usePostProcessing as useManufacturingPostProcessing } from "./hooks/usePostProcessing";
 import { useNavigate } from "react-router-dom";
-import useSubOrder from "@/pages/Order/SubOrder/hooks/useSubOrder";
 import logger from "@/hooks/useLogger";
+import useProcess from "@/pages/Projects/hooks/useProcess";
 
 interface Props {
   processState: ServiceManufacturingState;
@@ -36,7 +36,7 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
   const { processState, filters, postProcessings } = props;
   const { grid, searchText } = processState;
   const { postProcessingQuery } = useManufacturingPostProcessing(filters);
-  const { updateSubOrder } = useSubOrder();
+  const { updateProcess } = useProcess();
 
   const checkPostProcessing = (postProcessing: PostProcessingProps) => {
     let newPostProcessings: PostProcessingProps[] = [];
@@ -57,7 +57,7 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
         ];
       }
     }
-    updateSubOrder.mutate({
+    updateProcess.mutate({
       changes: { service: { postProcessings: newPostProcessings } },
     });
   };

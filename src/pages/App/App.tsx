@@ -34,9 +34,13 @@ import { FilterItemProps } from "../Service/Manufacturing/Filter/Filter";
 import AdminRoutes from "../Routes/Admin";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import AppLoadingSuspense from "./components/LoadingSuspense";
-import { AdminOutlet, OrganizationOutlet, UserOutlet } from "../Outlets/Outlet";
+import {
+  AdminOutlet,
+  OrganizationOutlet,
+  UserOutlet,
+} from "../Outlets/UserOutlet";
 import EmailVerification from "../EmailVerification/EmailVerification";
-import ProjectsRoutes from "../Projects/Routes/Projects";
+import ProjectsRoutes from "../Routes/ProjectsRoutes";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };

@@ -1,20 +1,14 @@
 import { Heading } from "@component-library/Typography";
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { ServiceType } from "../hooks/useService";
+import useService, { ServiceType } from "../hooks/useService";
 import FactoryIcon from "@mui/icons-material/Factory";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
-import ServiceSelectItem from "./components/Item";
+import ServiceSelectItem, { ServiceSelectItemProps } from "./components/Item";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import { useParams } from "react-router-dom";
 
 interface ServiceSelectProps {
-  processID?: string;
-}
-
-export interface ServiceSelectItemProps {
-  serviceType: ServiceType;
-  icon: React.ReactNode;
-  active: boolean;
   processID?: string;
 }
 
@@ -32,8 +26,11 @@ export const serviceSelectItems: ServiceSelectItemProps[] = [
 ];
 
 const ServiceSelect: React.FC<ServiceSelectProps> = (props) => {
-  const { processID } = props;
+  const { processID } = useParams();
   const { t } = useTranslation();
+  const { getService } = useService();
+
+  const service = getService();
 
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
@@ -41,7 +38,13 @@ const ServiceSelect: React.FC<ServiceSelectProps> = (props) => {
       <PermissionGate element="ProcessServiceSelection">
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           {serviceSelectItems.map((item, index) => (
-            <ServiceSelectItem {...item} key={index} processID={processID} />
+            <ServiceSelectItem
+              {...item}
+              key={index}
+              processID={processID}
+              active={service.type === item.serviceType}
+              serviceSelected={service.type !== ServiceType.UNDEFINED}
+            />
           ))}
         </div>
       </PermissionGate>

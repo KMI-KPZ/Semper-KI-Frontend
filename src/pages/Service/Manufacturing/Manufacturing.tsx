@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { ProcessModel } from "./Model/Model";
 import { ProcessMaterial } from "./Material/Material";
@@ -16,10 +16,9 @@ import {
   ServiceManufacturingState,
 } from "./types";
 import { Error } from "@/pages/Error/Error";
+import { ServiceContext } from "../context/ServiceContext";
 
-interface Props {
-  service: ServiceManufacturingProps;
-}
+interface Props {}
 
 const initialServiceManufacturingState: ServiceManufacturingState = {
   searchText: "",
@@ -42,8 +41,9 @@ export const ServiceManufacturingContext =
   });
 
 export const ServiceManufacturing: React.FC<Props> = (props) => {
-  const { service } = props;
   const { t } = useTranslation();
+  const { service: service_ } = useContext(ServiceContext);
+  const service = service_ as ServiceManufacturingProps;
   const navigate = useNavigate();
   const [state, setState] = useState<ServiceManufacturingState>(
     initialServiceManufacturingState

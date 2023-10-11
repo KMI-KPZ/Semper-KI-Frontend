@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { UserProps, UserType } from "@/hooks/useUser/types";
 import { Heading, Text } from "@component-library/Typography";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Button,
   Divider,
@@ -25,6 +25,7 @@ import useCheckedProcesses from "./hooks/useCheckedProcesses";
 import { ProjectEvent, ProjectEventItem } from "@/pages/App/types";
 import { ProjectContext } from "../context/ProjectContext";
 import logger from "@/hooks/useLogger";
+import useScrollToProcess from "./hooks/useScrollToProcess";
 
 interface Props {
   user: UserProps | undefined;
@@ -34,8 +35,8 @@ interface Props {
 const Project: React.FC<Props> = (props) => {
   const { user, event: projectCollectionEvent } = props;
   const { project: testProject } = useContext(ProjectContext);
-
-  logger("Project", testProject);
+  const { processID } = useParams();
+  useScrollToProcess(processID);
 
   const { t } = useTranslation();
   const navigate = useNavigate();

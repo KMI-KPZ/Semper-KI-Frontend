@@ -8,12 +8,12 @@ import { Heading } from "@component-library/Typography";
 import { Divider } from "@component-library/Divider";
 import ServiceSelect from "@/pages/Service/Select/Select";
 
-interface ProcessServiceProps {
+interface ProcessServicePreviewProps {
   service: GeneralServiceProps;
   processID: string;
 }
 
-const ProcessService: React.FC<ProcessServiceProps> = (props) => {
+const ProcessServicePreview: React.FC<ProcessServicePreviewProps> = (props) => {
   const { service, processID } = props;
   const { t } = useTranslation();
 
@@ -47,4 +47,4 @@ const ProcessService: React.FC<ProcessServiceProps> = (props) => {
   );
 };
 
-export default ProcessService;
+export default ProcessServicePreview;

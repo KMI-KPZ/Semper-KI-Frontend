@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@test/render";
 import { UserType } from "@/hooks/useUser/types";
 import { UserBuilder } from "@test/userBuilder";
-import { AdminOutlet, UserOutlet } from "./Outlet";
+import { AdminOutlet, UserOutlet } from "./UserOutlet";
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),

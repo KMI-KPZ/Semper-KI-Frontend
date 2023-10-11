@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { UserProps } from "@/hooks/useUser/types";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import Modal from "@component-library/Modal";
-import ProcessService from "./Service/Service";
+import ProcessServicePreview from "./ServicePreview/ServicePreview";
 import { Divider } from "@component-library/Divider";
 import ProcessNextStepButton from "./components/StatusButtons";
 import ProcessButtons from "./components/Buttons";
@@ -19,7 +19,7 @@ import ProjectTitleForm from "../components/TitleForm";
 import useProcess, { ProcessProps, ProcessState } from "../../hooks/useProcess";
 import { ProjectEventItem } from "@/pages/App/types";
 import { getTitleFromProcess } from "@/pages/Service/Overview/components/Item";
-import ProjectFile from "./components/OrderFile";
+import ProjectFile from "./components/ProcessFile";
 
 interface Props {
   process: ProcessProps;
@@ -86,7 +86,10 @@ const Process: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-start gap-5 p-5 shadow-card  md:items-start">
+    <div
+      className="flex w-full flex-col items-center justify-start gap-5 p-5 shadow-card  md:items-start"
+      id={process.processID}
+    >
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row lg:justify-between">
         <Container direction="row" gap={3} className="flex-wrap md:flex-nowrap">
           <input
@@ -116,7 +119,10 @@ const Process: React.FC<Props> = (props) => {
         state={process.state}
         processID={process.processID}
       />
-      <ProcessService service={process.service} processID={process.processID} />
+      <ProcessServicePreview
+        service={process.service}
+        processID={process.processID}
+      />
       <PermissionGate element="ProjectFile">
         <ProjectFile process={process} projectCollectionID={projectID} />
       </PermissionGate>
@@ -127,7 +133,7 @@ const Process: React.FC<Props> = (props) => {
           className="flex w-full flex-col"
         >
           <Chat
-            chat={process.chat.messages}
+            chat={process.messages.messages}
             user={user}
             closeMenu={closeChat}
             projectID={projectID}

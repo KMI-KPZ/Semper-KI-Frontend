@@ -7,11 +7,11 @@ import {
 } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import usePathID from "@/hooks/usePathID";
+import { useProject } from "./useProject";
 import {
   GeneralServiceProps,
   GerneralUpdateServiceProps,
-} from "@/pages/Service/Service";
-import { useProject } from "./useProject";
+} from "@/pages/Service/hooks/useService";
 
 interface ReturnProps {
   deleteProcess: UseMutationResult<string, Error, string, unknown>;
@@ -34,7 +34,7 @@ export interface ProcessDetailsProps {
 }
 
 export interface ProcessProps {
-  chat: { messages: ChatMessageProps[] };
+  messages: { messages: ChatMessageProps[] };
   contractor: string;
   created: Date;
   details: ProcessDetailsProps;
@@ -98,7 +98,6 @@ export enum ProcessState {
 
 const useProcess = (): ReturnProps => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
   const { projectID, processID } = useParams();
   const { projectQuery } = useProject();
 

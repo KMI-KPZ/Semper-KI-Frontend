@@ -3,27 +3,27 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
-  manufacturerQuery: UseQueryResult<IManufacturer[], Error>;
+  contractorsQuery: UseQueryResult<ContractorProps[], Error>;
 }
 
-export interface IManufacturer {
+export interface ContractorProps {
   name: string;
   id: string;
 }
 
-const useManufacturer = (): ReturnProps => {
-  const manufacturerQuery = useQuery<IManufacturer[], Error>({
-    queryKey: ["manufacturer"],
+const useContractors = (): ReturnProps => {
+  const contractorsQuery = useQuery<ContractorProps[], Error>({
+    queryKey: ["contractors"],
     queryFn: async () =>
       getCustomAxios()
-        .get(`${process.env.VITE_HTTP_API_URL}/public/getManufacturers/`)
+        .get(`${process.env.VITE_HTTP_API_URL}/public/getContractors/`)
         .then((res) => {
-          logger("useManufacturer | getManufacturers ✅ |", res.data);
-          return res.data;
+          logger("useContractors | getContractors ✅ |", res.data);
+          return res.data === "fu" ? [] : res.data;
         }),
   });
 
-  return { manufacturerQuery };
+  return { contractorsQuery };
 };
 
-export default useManufacturer;
+export default useContractors;

@@ -206,7 +206,7 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
         navigate("verification");
         break;
       case "Edit":
-        navigate(`process/${checkedProcesses[0]}`);
+        navigate(`${checkedProcesses[0]}`);
         break;
       case "ContractorSelection":
         navigate("contractorSelection");

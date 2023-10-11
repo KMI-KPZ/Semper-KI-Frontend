@@ -8,6 +8,8 @@ import useService from "@/pages/Service/hooks/useService";
 import EditIcon from "@mui/icons-material/Edit";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { ProcessState } from "@/pages/Projects/hooks/useProcess";
+import { useParams } from "react-router-dom";
+import logger from "@/hooks/useLogger";
 
 interface ProcessStatusButtonsProps {
   processID: string;
@@ -15,9 +17,10 @@ interface ProcessStatusButtonsProps {
 }
 
 const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
-  const { state, processID } = props;
+  const { state, processID: manuelProcessID } = props;
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
+  const { projectID, processID } = useParams();
 
   const renderButtons = () => {
     if (state === ProcessState.DRAFT)
@@ -28,10 +31,13 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
               variant="icon"
               startIcon={<EditIcon />}
               title={t("ProjectRoutes.Process.components.StateButton.edit")}
-              to={`process/${processID}`}
+              to={
+                processID === undefined
+                  ? `${manuelProcessID}/service/edit`
+                  : `service/edit`
+              }
             />
           </PermissionGate>
-
           <PermissionGate element="ProcessButtonContractorSelection">
             <Button
               variant="icon"
@@ -39,8 +45,12 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
               title={t(
                 "ProjectRoutes.Process.components.StateButton.selectContractor"
               )}
-              to={`process/${processID}/contractorSelection`}
-              active={isServiceComplete(processID)}
+              to={
+                processID === undefined
+                  ? `${manuelProcessID}/contractorSelection`
+                  : `contractorSelection`
+              }
+              active={isServiceComplete(manuelProcessID)}
             />
           </PermissionGate>
         </>
@@ -52,7 +62,11 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
             variant="icon"
             startIcon={<PolicyIcon />}
             title={t("ProjectRoutes.Process.components.StateButton.verify")}
-            to={`process/${processID}/verification`}
+            to={
+              processID === undefined
+                ? `${manuelProcessID}/verification`
+                : `verification`
+            }
           />
         </PermissionGate>
       );
@@ -63,7 +77,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
             variant="icon"
             startIcon={<SendIcon />}
             title={t("ProjectRoutes.Process.components.StateButton.request")}
-            to={`process/${processID}/checkout`}
+            to={`${manuelProcessID}/checkout`}
           />
         </PermissionGate>
       );

@@ -1,12 +1,15 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { GeneralServiceProps, ServiceProps } from "../Service";
 import { useLocation, useParams } from "react-router-dom";
-import { ServiceManufacturingProps } from "../Manufacturing/types";
+import {
+  ServiceManufacturingProps,
+  UpdateServiceManufacturingProps,
+} from "../Manufacturing/types";
 import logger from "@/hooks/useLogger";
 import useProcess from "@/pages/Projects/hooks/useProcess";
+import { ServiceModellingProps } from "../Modelling/Modelling";
 
 interface ReturnProps {
-  getService: () => GeneralServiceProps | undefined;
+  getService: () => GeneralServiceProps;
   isServiceComplete: (processID: string) => boolean;
   getServiceName: (processID: string) => string;
 }
@@ -17,11 +20,34 @@ export enum ServiceType {
   "MODELING",
 }
 
+export type GeneralServiceProps =
+  | ServiceManufacturingProps
+  | ServiceModellingProps
+  | ServiceUndefinedProps;
+
+export interface ServiceUndefinedProps {
+  type: ServiceType.UNDEFINED;
+}
+
+export interface UpdateServiceProps {
+  type?: ServiceType;
+}
+
+export type GerneralUpdateServiceProps =
+  | UpdateServiceManufacturingProps
+  | UpdateServiceUndefinedProps;
+
+export interface UpdateServiceUndefinedProps {
+  type: ServiceType;
+}
+
 const useService = (): ReturnProps => {
   const { getCurrentProcess } = useProcess();
 
-  const getService = (): GeneralServiceProps | undefined => {
-    return getCurrentProcess()?.service;
+  const getService = (): GeneralServiceProps => {
+    const service = getCurrentProcess()?.service;
+    if (service === undefined) return { type: ServiceType.UNDEFINED };
+    return service;
   };
 
   const isServiceReady = (processID: string): boolean => {
@@ -48,6 +74,7 @@ const useService = (): ReturnProps => {
       case ServiceType.UNDEFINED:
         return false;
     }
+    return false;
   };
 
   const getServiceName = (processID: string): string => {
@@ -62,6 +89,7 @@ const useService = (): ReturnProps => {
       case ServiceType.UNDEFINED:
         return "service";
     }
+    return "service";
   };
 
   return { getService, isServiceComplete: isServiceReady, getServiceName };

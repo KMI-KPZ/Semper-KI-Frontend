@@ -2,14 +2,16 @@ import { UserProps } from "@/hooks/useUser/types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
-import ProjectContextProvider from "../context/ProjectContext";
-import Projects from "../Project";
-import Project from "../Project/Project";
-import { UserOutlet } from "@/pages/Outlets/Outlet";
+import ProjectContextProvider from "../Projects/context/ProjectContext";
+import Projects from "../Projects/Project";
+import Project from "../Projects/Project/Project";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import ProjectContractorSelection from "../Project/ContractorSelection/ContractorSelection";
-import ProjectCheckout from "../Project/Checkout/Checkout";
-import ProcessVerification from "../Project/Verification/Verification";
+import ProjectContractorSelection from "../Projects/Project/ContractorSelection/ContractorSelection";
+import ProjectCheckout from "../Projects/Project/Checkout/Checkout";
+import ProcessVerification from "../Projects/Project/Verification/Verification";
+import ServiceRoutes from "./ServiceRoutes";
+import { UserOutlet } from "../Outlets/UserOutlet";
+import ProcessContextProvider from "../Projects/context/ProcessContext";
 
 interface ProjectsRoutesProps {
   user: UserProps | undefined;
@@ -21,9 +23,23 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
 
   return (
     <Routes>
-      <Route index element={<Projects user={user} />} />
+      <Route
+        index
+        element={
+          <PermissionGate element="Projects">
+            <Projects user={user} />
+          </PermissionGate>
+        }
+      />
       <Route path=":projectID/*" element={<ProjectContextProvider />}>
-        <Route index element={<Project user={user} />} />
+        <Route
+          index
+          element={
+            <PermissionGate element="Projects">
+              <Project user={user} />
+            </PermissionGate>
+          }
+        />
         <Route element={<UserOutlet user={user} />}>
           <Route
             path="contractorSelection"
@@ -50,7 +66,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
             }
           />
         </Route>
-        <Route path=":processID/*">
+        <Route path=":processID/*" element={<ProcessContextProvider />}>
           <Route index element={<Project user={user} />} />
           <Route element={<UserOutlet user={user} />}>
             <Route
@@ -78,15 +94,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
               }
             />
           </Route>
-          <Route path="service">
-            <Route
-              index
-              element={<div className="">Project Process Service</div>}
-            />
-            <Route path="manufacturing" element={<div>manufacturing</div>} />
-            <Route path="modelling" element={<div>Modelling</div>} />
-            <Route path="*" element={<Navigate to="." />} />
-          </Route>
+          <Route path="service/*" element={<ServiceRoutes />} />
         </Route>
       </Route>
     </Routes>

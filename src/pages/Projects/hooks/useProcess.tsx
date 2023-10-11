@@ -34,7 +34,7 @@ export interface ProcessDetailsProps {
 }
 
 export interface ProcessProps {
-  chat: { messages: ChatMessageProps[] };
+  messages: { messages: ChatMessageProps[] };
   contractor: string;
   created: Date;
   details: ProcessDetailsProps;

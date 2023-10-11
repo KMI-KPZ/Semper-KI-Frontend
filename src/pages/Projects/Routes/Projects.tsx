@@ -21,9 +21,23 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
 
   return (
     <Routes>
-      <Route index element={<Projects user={user} />} />
+      <Route
+        index
+        element={
+          <PermissionGate element="Projects">
+            <Projects user={user} />
+          </PermissionGate>
+        }
+      />
       <Route path=":projectID/*" element={<ProjectContextProvider />}>
-        <Route index element={<Project user={user} />} />
+        <Route
+          index
+          element={
+            <PermissionGate element="Projects">
+              <Project user={user} />
+            </PermissionGate>
+          }
+        />
         <Route element={<UserOutlet user={user} />}>
           <Route
             path="contractorSelection"

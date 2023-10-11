@@ -19,7 +19,7 @@ import ProjectTitleForm from "../components/TitleForm";
 import useProcess, { ProcessProps, ProcessState } from "../../hooks/useProcess";
 import { ProjectEventItem } from "@/pages/App/types";
 import { getTitleFromProcess } from "@/pages/Service/Overview/components/Item";
-import ProjectFile from "./components/OrderFile";
+import ProjectFile from "./components/ProcessFile";
 
 interface Props {
   process: ProcessProps;
@@ -127,7 +127,7 @@ const Process: React.FC<Props> = (props) => {
           className="flex w-full flex-col"
         >
           <Chat
-            chat={process.chat.messages}
+            chat={process.messages.messages}
             user={user}
             closeMenu={closeChat}
             projectID={projectID}

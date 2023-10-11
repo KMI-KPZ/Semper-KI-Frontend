@@ -91,7 +91,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
           variant="secondary"
           title={t("project.overview.components.table.button.detail")}
           children={<VisibilityIcon />}
-          to={`/project/${flatProject.projectID}`}
+          to={`/projects/${flatProject.projectID}`}
         />
       </PermissionGate>
     </div>

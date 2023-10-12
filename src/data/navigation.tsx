@@ -57,8 +57,8 @@ export const NavigationItemData: INavigationItem[] = [
     userTypes: [UserType.ANONYM],
   },
   {
-    title: "data.NavigationItem.orders",
-    link: "/order",
+    title: "data.NavigationItem.projects",
+    link: "/projects",
     icon: <DescriptionIcon fontSize="large" />,
     extern: false,
     preferred: ["header", "home"],

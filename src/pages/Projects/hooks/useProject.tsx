@@ -8,7 +8,7 @@ import {
 } from "@tanstack/react-query";
 import logger from "@/hooks/useLogger";
 import { useNavigate, useParams } from "react-router-dom";
-import { ProcessProps, ProcessState } from "./useProcess";
+import { ProcessProps, ProcessStatus } from "./useProcess";
 
 interface ReturnProps {
   projectQuery: UseQueryResult<ProjectProps, Error>;
@@ -22,7 +22,7 @@ export interface ProjectProps {
   client: string;
   created: Date;
   updated: Date;
-  state: ProcessState;
+  projectStatus: ProcessStatus;
   processes: ProcessProps[];
   details: ProjectDetailsProps;
 }
@@ -37,12 +37,12 @@ export interface UpdateProjectProps {
 }
 
 export interface ProjectChangesProps {
-  state?: ProcessState;
+  projectStatus?: ProcessStatus;
   details?: ProjectDetailsProps;
 }
 export interface ProjectDeletionsProps {
   details?: { title?: "" };
-  state?: "";
+  projectStatus?: "";
 }
 
 export const useProject = (): ReturnProps => {

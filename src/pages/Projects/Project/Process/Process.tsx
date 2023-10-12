@@ -16,7 +16,10 @@ import CheckIcon from "@mui/icons-material/Check";
 import ProcessInfo from "./components/Info";
 import Container from "@component-library/Container";
 import ProjectTitleForm from "../components/TitleForm";
-import useProcess, { ProcessProps, ProcessState } from "../../hooks/useProcess";
+import useProcess, {
+  ProcessProps,
+  ProcessStatus,
+} from "../../hooks/useProcess";
 import { ProjectEventItem } from "@/pages/App/types";
 import { getTitleFromProcess } from "@/pages/Service/Overview/components/Item";
 import ProjectFile from "./components/ProcessFile";
@@ -55,7 +58,7 @@ const Process: React.FC<Props> = (props) => {
 
   const { updateProcessWithProcessID } = useProcess();
 
-  const updateStatus = (status: ProcessState) => {
+  const updateStatus = (status: ProcessStatus) => {
     // updateProject.mutate({
     //   projectCollectionID: projectID,
     //   projectID: process.id,
@@ -114,9 +117,12 @@ const Process: React.FC<Props> = (props) => {
           projectEvent={projectEvent}
         />
       </div>
-      <StatusBar state={process.state} serviceType={process.service.type} />
+      <StatusBar
+        state={process.processStatus}
+        serviceType={process.service.type}
+      />
       <ProcessNextStepButton
-        state={process.state}
+        state={process.processStatus}
         processID={process.processID}
       />
       <ProcessServicePreview

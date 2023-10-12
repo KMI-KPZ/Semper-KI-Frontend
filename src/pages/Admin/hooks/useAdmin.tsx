@@ -2,7 +2,7 @@ import { getCustomAxios } from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
 import { UserProps } from "@/hooks/useUser/types";
 import { FlatProjectProps } from "@/pages/Projects/hooks/useFlatProjects";
-import { ProcessState } from "@/pages/Projects/hooks/useProcess";
+import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";
 import {
   useMutation,
@@ -46,7 +46,7 @@ export interface AdminFlatProjectProps {
   created: Date;
   details: ProjectDetailsProps;
   projectCollectionID: string;
-  status: ProcessState;
+  status: ProcessStatus;
   processCount: number;
   updated: Date;
 }

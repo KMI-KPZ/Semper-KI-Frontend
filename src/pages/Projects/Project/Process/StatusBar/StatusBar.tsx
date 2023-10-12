@@ -11,67 +11,67 @@ import StatusItemConnector from "./components/ItemConnector";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import { ServiceType } from "@/pages/Service/hooks/useService";
-import { ProcessState } from "@/pages/Projects/hooks/useProcess";
+import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 
 interface StatusViewProps {
-  state: ProcessState;
+  state: ProcessStatus;
   serviceType: ServiceType;
 }
 
 export type StatusData = {
-  itemProcessState: ProcessState;
+  itemProcessState: ProcessStatus;
   icon: ReactNode;
   text: string;
 };
 
 const statusData: StatusData[] = [
   {
-    itemProcessState: ProcessState.DRAFT,
+    itemProcessState: ProcessStatus.DRAFT,
     icon: <DesignServicesIcon />,
     text: "Projects.StatusView.state.draft",
   },
   {
-    itemProcessState: ProcessState.CONTRACTOR_SELECTED,
+    itemProcessState: ProcessStatus.CONTRACTOR_SELECTED,
     icon: <FactoryIcon />,
     text: "Projects.StatusView.state.contractorSelected",
   },
   {
-    itemProcessState: ProcessState.VERIFIED,
+    itemProcessState: ProcessStatus.VERIFIED,
     icon: <AssignmentTurnedInIcon />,
     text: "Projects.StatusView.state.verified",
   },
   {
-    itemProcessState: ProcessState.REQUESTED,
+    itemProcessState: ProcessStatus.REQUESTED,
     icon: <EmailIcon />,
     text: "Projects.StatusView.state.requested",
   },
   {
-    itemProcessState: ProcessState.CLARIFICATION,
+    itemProcessState: ProcessStatus.CLARIFICATION,
     icon: <QuestionMarkIcon />,
     text: "Projects.StatusView.state.clarification",
   },
   {
-    itemProcessState: ProcessState.REJECTED_BY_CONTRACTOR,
+    itemProcessState: ProcessStatus.REJECTED_BY_CONTRACTOR,
     icon: <CloseIcon />,
     text: "Projects.StatusView.state.rejected",
   },
   {
-    itemProcessState: ProcessState.CONFIRMED_BY_CONTRACTOR,
+    itemProcessState: ProcessStatus.CONFIRMED_BY_CONTRACTOR,
     icon: <CheckIcon />,
     text: "Projects.StatusView.state.confirmed",
   },
   {
-    itemProcessState: ProcessState.PRODUCTION,
+    itemProcessState: ProcessStatus.PRODUCTION,
     icon: <FactoryIcon />,
     text: "Projects.StatusView.state.production",
   },
   {
-    itemProcessState: ProcessState.DELIVERY,
+    itemProcessState: ProcessStatus.DELIVERY,
     icon: <LocalShippingIcon />,
     text: "Projects.StatusView.state.delivery",
   },
   {
-    itemProcessState: ProcessState.COMPLETED,
+    itemProcessState: ProcessStatus.COMPLETED,
     icon: <DoneAllIcon />,
     text: "Projects.StatusView.state.finished",
   },
@@ -81,13 +81,13 @@ const StatusBar: React.FC<StatusViewProps> = (props) => {
   const { serviceType, state } = props;
 
   const getItems = (): StatusData[] => {
-    if (state < ProcessState.REQUESTED)
+    if (state < ProcessStatus.REQUESTED)
       return statusData.filter(
-        (data) => data.itemProcessState <= ProcessState.REQUESTED
+        (data) => data.itemProcessState <= ProcessStatus.REQUESTED
       );
     else
       return statusData.filter(
-        (data) => data.itemProcessState >= ProcessState.REQUESTED
+        (data) => data.itemProcessState >= ProcessStatus.REQUESTED
       );
   };
 

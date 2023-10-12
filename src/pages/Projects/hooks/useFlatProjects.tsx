@@ -9,7 +9,7 @@ import {
 import logger from "@/hooks/useLogger";
 import { t } from "i18next";
 import { ProjectDetailsProps } from "./useProject";
-import { ProcessState } from "./useProcess";
+import { ProcessStatus } from "./useProcess";
 
 interface ReturnProps {
   flatProjectsQuery: UseQueryResult<FlatProjectProps[], Error>;
@@ -21,7 +21,7 @@ export interface FlatProjectProps {
   created: Date;
   updated: Date;
   details: ProjectDetailsProps;
-  state: ProcessState;
+  state: ProcessStatus;
   processesCount: number;
 }
 
@@ -92,7 +92,7 @@ export const useFlatProjects = (): ReturnProps => {
                     : project.details,
                 state:
                   project.state === undefined
-                    ? ProcessState.DRAFT
+                    ? ProcessStatus.DRAFT
                     : project.state,
                 processesCount:
                   project.processesCount === undefined

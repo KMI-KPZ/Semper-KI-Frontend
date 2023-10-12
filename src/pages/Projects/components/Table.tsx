@@ -9,7 +9,7 @@ import logger from "@/hooks/useLogger";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import Container from "@component-library/Container";
 import { FlatProjectProps } from "../hooks/useFlatProjects";
-import { ProcessState } from "../hooks/useProcess";
+import { ProcessStatus } from "../hooks/useProcess";
 import { useProject } from "../hooks/useProject";
 
 interface ProjectsTableProps {
@@ -18,25 +18,25 @@ interface ProjectsTableProps {
 
 interface ProjectsTableGroupingsProps {
   title: string;
-  startState: ProcessState;
-  endState: ProcessState;
+  startState: ProcessStatus;
+  endState: ProcessStatus;
 }
 
 const projectGroupings: ProjectsTableGroupingsProps[] = [
   {
     title: "draft",
-    startState: ProcessState.DRAFT,
-    endState: ProcessState.VERIFIED,
+    startState: ProcessStatus.DRAFT,
+    endState: ProcessStatus.VERIFIED,
   },
   {
     title: "ongoing",
-    startState: ProcessState.REQUESTED,
-    endState: ProcessState.DELIVERY,
+    startState: ProcessStatus.REQUESTED,
+    endState: ProcessStatus.DELIVERY,
   },
   {
     title: "completed",
-    startState: ProcessState.COMPLETED,
-    endState: ProcessState.COMPLETED,
+    startState: ProcessStatus.COMPLETED,
+    endState: ProcessStatus.COMPLETED,
   },
 ];
 
@@ -180,7 +180,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
                       <td className="p-3 md:py-3">
                         {t(
                           `Projects.ProjectCollection.state.${
-                            ProcessState[flatProject.state]
+                            ProcessStatus[flatProject.state]
                           }`
                         )}
                       </td>

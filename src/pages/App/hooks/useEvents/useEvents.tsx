@@ -9,7 +9,7 @@ import useOrgaEvent from "./hooks/useOrgaEvent";
 import { useWebsocket } from "./hooks/useWebsocket";
 import { JSONIsParseable, JSONSafeParse } from "@/services/utils";
 import logger from "@/hooks/useLogger";
-import useProjectEvent from "./hooks/useOrderEvent";
+import useProjectEvent from "./hooks/useProjectEvent";
 
 interface ReturnProps {
   deleteEvent: (event: DeleteEvent) => void;

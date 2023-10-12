@@ -26,6 +26,7 @@ export const serviceSelectItems: ServiceSelectItemProps[] = [
 ];
 
 const ServiceSelect: React.FC<ServiceSelectProps> = (props) => {
+  const { processID: manuelProcessID } = props;
   const { processID } = useParams();
   const { t } = useTranslation();
   const { getService } = useService();

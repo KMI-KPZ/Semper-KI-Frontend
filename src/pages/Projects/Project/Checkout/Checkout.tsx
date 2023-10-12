@@ -9,7 +9,7 @@ import useCheckout from "./hooks/useCheckout";
 import { useNavigate } from "react-router-dom";
 import ProjectCheckoutItem from "./components/Item";
 import logger from "@/hooks/useLogger";
-import { ProcessProps, ProcessState } from "../../hooks/useProcess";
+import { ProcessProps, ProcessStatus } from "../../hooks/useProcess";
 import { useProject } from "../../hooks/useProject";
 
 interface ProjectCheckoutProps {}
@@ -27,10 +27,10 @@ const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
   const processes: ProcessProps[] =
     projectQuery.data !== undefined &&
     projectQuery.data.processes.filter(
-      (process) => process.state === ProcessState.VERIFIED
+      (process) => process.processStatus === ProcessStatus.VERIFIED
     ).length > 0
       ? projectQuery.data.processes.filter(
-          (process) => process.state === ProcessState.VERIFIED
+          (process) => process.processStatus === ProcessStatus.VERIFIED
         )
       : [];
 

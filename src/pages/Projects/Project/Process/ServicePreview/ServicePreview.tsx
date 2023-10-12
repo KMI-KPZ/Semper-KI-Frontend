@@ -1,5 +1,7 @@
-import { GeneralServiceProps } from "@/pages/Service/Service";
-import { ServiceType } from "@/pages/Service/hooks/useService";
+import {
+  GeneralServiceProps,
+  ServiceType,
+} from "@/pages/Service/hooks/useService";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProcessServiceManufacturing from "./components/Manufacturing";

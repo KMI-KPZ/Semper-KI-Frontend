@@ -20,7 +20,7 @@ import logger from "@/hooks/useLogger";
 import Search from "@component-library/Search";
 import useSearch from "@/hooks/useSearch";
 import { useProject } from "@/pages/Projects/hooks/useProject";
-import { ProcessState } from "@/pages/Projects/hooks/useProcess";
+import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 
 interface Props {
   projects?: AdminFlatProjectProps[];
@@ -85,7 +85,7 @@ const AdminProjects: React.FC<Props> = (props) => {
                       <TableCell component="th" scope="row">
                         {t(
                           `Projects.ProjectCollection.state.${
-                            ProcessState[project.status]
+                            ProcessStatus[project.status]
                           }`
                         )}
                       </TableCell>

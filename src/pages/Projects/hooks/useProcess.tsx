@@ -40,7 +40,7 @@ export interface ProcessProps {
   details: ProcessDetailsProps;
   files: string[];
   service: GeneralServiceProps;
-  state: ProcessState;
+  processStatus: ProcessStatus;
   processID: string;
   updated: string;
 }
@@ -60,7 +60,7 @@ export interface UpdateProcessProps {
 export interface ProcessChangesProps {
   contractor?: string[];
   chat?: ChatMessageProps;
-  state?: ProcessState;
+  processStatus?: ProcessStatus;
   files?: File[];
   details?: ProcessDetailsProps;
   service?: GerneralUpdateServiceProps;
@@ -68,13 +68,13 @@ export interface ProcessChangesProps {
 
 export interface ProcessDeletionsProps {
   chat?: "";
-  state?: "";
+  processStatus?: "";
   files?: "";
   details?: "";
   service?: string[] | "";
 }
 
-export enum ProcessState {
+export enum ProcessStatus {
   "DRAFT" = 0,
   "WAITING_FOR_OTHER_PROCESS" = 100,
   "SERVICE_READY" = 200,

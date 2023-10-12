@@ -7,7 +7,10 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Heading, Text } from "@component-library/Typography";
 import useService, { ServiceType } from "@/pages/Service/hooks/useService";
 import useContractor from "./hooks/useContractor";
-import useProcess, { ProcessProps, ProcessState } from "../../hooks/useProcess";
+import useProcess, {
+  ProcessProps,
+  ProcessStatus,
+} from "../../hooks/useProcess";
 import { useProject } from "../../hooks/useProject";
 import { useForm } from "react-hook-form";
 
@@ -57,7 +60,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
           processID: process.process.processID,
           updates: {
             changes: {
-              state: ProcessState.CONTRACTOR_SELECTED,
+              processStatus: ProcessStatus.CONTRACTOR_SELECTED,
               contractor: [process.contractorID],
             },
           },

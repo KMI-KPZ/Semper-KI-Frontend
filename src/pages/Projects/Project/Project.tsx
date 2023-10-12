@@ -19,7 +19,7 @@ import ProjectTitleForm from "./components/TitleForm";
 import InfoIcon from "@mui/icons-material/Info";
 import ProjectInfo from "./components/Info";
 import Modal from "@component-library/Modal";
-import useProcess, { ProcessState } from "../hooks/useProcess";
+import useProcess, { ProcessStatus } from "../hooks/useProcess";
 import Process from "./Process/Process";
 import useCheckedProcesses from "./hooks/useCheckedProcesses";
 import { ProjectEvent, ProjectEventItem } from "@/pages/App/types";
@@ -122,7 +122,7 @@ const Project: React.FC<Props> = (props) => {
               {": "}
               {t(
                 `Projects.ProjectCollection.state.${
-                  ProcessState[project.state]
+                  ProcessStatus[project.projectStatus]
                 }`
               )}
             </Text>

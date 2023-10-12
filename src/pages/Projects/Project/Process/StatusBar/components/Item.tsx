@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { StatusData } from "../StatusBar";
 import { Text } from "@component-library/Typography";
-import { ProcessState } from "@/pages/Projects/hooks/useProcess";
+import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 
 type StatusItemType = {
   item: StatusData;
-  state: ProcessState;
+  state: ProcessStatus;
 };
 
 const StatusItem: React.FC<StatusItemType> = (props) => {

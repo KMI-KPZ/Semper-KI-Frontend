@@ -7,13 +7,13 @@ import SendIcon from "@mui/icons-material/Send";
 import useService from "@/pages/Service/hooks/useService";
 import EditIcon from "@mui/icons-material/Edit";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { ProcessState } from "@/pages/Projects/hooks/useProcess";
+import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { useParams } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 
 interface ProcessStatusButtonsProps {
   processID: string;
-  state: ProcessState;
+  state: ProcessStatus;
 }
 
 const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
@@ -23,64 +23,69 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { projectID, processID } = useParams();
 
   const renderButtons = () => {
-    if (state === ProcessState.DRAFT)
-      return (
-        <>
-          <PermissionGate element="ProcessButtonEdit">
+    switch (state) {
+      case ProcessStatus.DRAFT:
+        return (
+          <>
+            <PermissionGate element="ProcessButtonEdit">
+              <Button
+                variant="icon"
+                startIcon={<EditIcon />}
+                title={t("ProjectRoutes.Process.components.StateButton.edit")}
+                to={
+                  processID === undefined
+                    ? `${manuelProcessID}/service/edit`
+                    : `service/edit`
+                }
+              />
+            </PermissionGate>
+            <PermissionGate element="ProcessButtonContractorSelection">
+              <Button
+                variant="icon"
+                startIcon={<FactoryIcon />}
+                title={t(
+                  "ProjectRoutes.Process.components.StateButton.selectContractor"
+                )}
+                to={
+                  processID === undefined
+                    ? `${manuelProcessID}/contractorSelection`
+                    : `contractorSelection`
+                }
+                active={isServiceComplete(manuelProcessID)}
+              />
+            </PermissionGate>
+          </>
+        );
+      case ProcessStatus.CONTRACTOR_SELECTED:
+        return (
+          <PermissionGate element="ProcessButtonVerify">
             <Button
               variant="icon"
-              startIcon={<EditIcon />}
-              title={t("ProjectRoutes.Process.components.StateButton.edit")}
+              startIcon={<PolicyIcon />}
+              title={t("ProjectRoutes.Process.components.StateButton.verify")}
               to={
                 processID === undefined
-                  ? `${manuelProcessID}/service/edit`
-                  : `service/edit`
+                  ? `${manuelProcessID}/verification`
+                  : `verification`
               }
             />
           </PermissionGate>
-          <PermissionGate element="ProcessButtonContractorSelection">
+        );
+      case ProcessStatus.VERIFIED:
+        return (
+          <PermissionGate element="ProcessButtonRequest">
             <Button
               variant="icon"
-              startIcon={<FactoryIcon />}
-              title={t(
-                "ProjectRoutes.Process.components.StateButton.selectContractor"
-              )}
-              to={
-                processID === undefined
-                  ? `${manuelProcessID}/contractorSelection`
-                  : `contractorSelection`
-              }
-              active={isServiceComplete(manuelProcessID)}
+              startIcon={<SendIcon />}
+              title={t("ProjectRoutes.Process.components.StateButton.request")}
+              to={`${manuelProcessID}/checkout`}
             />
           </PermissionGate>
-        </>
-      );
-    else if (state === ProcessState.CONTRACTOR_SELECTED)
-      return (
-        <PermissionGate element="ProcessButtonVerify">
-          <Button
-            variant="icon"
-            startIcon={<PolicyIcon />}
-            title={t("ProjectRoutes.Process.components.StateButton.verify")}
-            to={
-              processID === undefined
-                ? `${manuelProcessID}/verification`
-                : `verification`
-            }
-          />
-        </PermissionGate>
-      );
-    else if (state === ProcessState.VERIFIED)
-      return (
-        <PermissionGate element="ProcessButtonRequest">
-          <Button
-            variant="icon"
-            startIcon={<SendIcon />}
-            title={t("ProjectRoutes.Process.components.StateButton.request")}
-            to={`${manuelProcessID}/checkout`}
-          />
-        </PermissionGate>
-      );
+        );
+
+      default:
+        break;
+    }
   };
 
   return (

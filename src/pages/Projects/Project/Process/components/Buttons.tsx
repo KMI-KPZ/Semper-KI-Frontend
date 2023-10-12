@@ -16,7 +16,7 @@ import { Badge } from "@component-library/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 import useProcess, {
   ProcessProps,
-  ProcessState,
+  ProcessStatus,
 } from "@/pages/Projects/hooks/useProcess";
 import { ProcessComponentState } from "../Process";
 
@@ -24,7 +24,7 @@ interface ProcessButtonsProps {
   user: UserProps | undefined;
   projectID: string;
   process: ProcessProps;
-  updateStatus: (status: ProcessState) => void;
+  updateStatus: (status: ProcessStatus) => void;
   setState: Dispatch<SetStateAction<ProcessComponentState>>;
   projectEvent?: ProjectEventItem;
 }
@@ -53,17 +53,17 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
   };
   const handleOnClickButtonReject = () => {
     if (window.confirm(t("Projects.ProjectView.confirm.reject"))) {
-      updateStatus(ProcessState.REJECTED_BY_CONTRACTOR);
+      updateStatus(ProcessStatus.REJECTED_BY_CONTRACTOR);
     }
   };
   const handleOnClickButtonConfirm = () => {
     // if (window.confirm(t("ProjectView.button.confirm") + "?")) {
-    updateStatus(ProcessState.CONFIRMED_BY_CONTRACTOR);
+    updateStatus(ProcessStatus.CONFIRMED_BY_CONTRACTOR);
     // }
   };
   const handleOnClickButtonVerify = () => {
     // if (window.confirm(t("ProjectView.button.verify") + "?")) {
-    updateStatus(ProcessState.CLARIFICATION);
+    updateStatus(ProcessStatus.CLARIFICATION);
     // }
   };
 
@@ -119,7 +119,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
           )}
         </PermissionGate>
       ) : null}
-      {process.state <= ProcessState.REQUESTED ? (
+      {process.processStatus <= ProcessStatus.REQUESTED ? (
         <PermissionGate element="ProcessButtonDelete">
           <Button
             variant="icon"
@@ -131,7 +131,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
           />
         </PermissionGate>
       ) : null}
-      {process.state === ProcessState.COMPLETED ? (
+      {process.processStatus === ProcessStatus.COMPLETED ? (
         <PermissionGate element="ProcessButtonReProject">
           <Button
             variant="icon"
@@ -144,8 +144,8 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
         </PermissionGate>
       ) : null}
 
-      {process.state >= ProcessState.REJECTED_BY_CONTRACTOR &&
-      process.state <= ProcessState.CONFIRMED_BY_CONTRACTOR ? (
+      {process.processStatus >= ProcessStatus.REJECTED_BY_CONTRACTOR &&
+      process.processStatus <= ProcessStatus.CONFIRMED_BY_CONTRACTOR ? (
         <>
           <PermissionGate element="ProcessButtonReject">
             <Button
@@ -169,7 +169,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
           </PermissionGate>
         </>
       ) : null}
-      {process.state === ProcessState.CONFIRMED_BY_CONTRACTOR ? (
+      {process.processStatus === ProcessStatus.CONFIRMED_BY_CONTRACTOR ? (
         <PermissionGate element="ProcessButtonVerify">
           <Button
             variant="icon"

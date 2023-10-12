@@ -15,7 +15,10 @@ import Container from "@component-library/Container";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import useService from "@/pages/Service/hooks/useService";
 import { ProjectProps } from "../../hooks/useProject";
-import useProcess, { ProcessProps, ProcessState } from "../../hooks/useProcess";
+import useProcess, {
+  ProcessProps,
+  ProcessStatus,
+} from "../../hooks/useProcess";
 
 interface ProjectButtonsProps {
   project: ProjectProps;
@@ -28,7 +31,7 @@ interface ProjectButtonProps {
   type: ProjectButtonType;
   icon: ReactNode;
   contractor: boolean;
-  allowedStates: ProcessState[];
+  allowedStates: ProcessStatus[];
 }
 
 interface ProjectButtonWithCountProps extends ProjectButtonProps {
@@ -52,10 +55,10 @@ const ProjectButtonData: ProjectButtonProps[] = [
     icon: <DeleteForever />,
     contractor: false,
     allowedStates: [
-      ProcessState.DRAFT,
-      ProcessState.CONTRACTOR_SELECTED,
-      ProcessState.DELIVERY,
-      ProcessState.REQUESTED,
+      ProcessStatus.DRAFT,
+      ProcessStatus.CONTRACTOR_SELECTED,
+      ProcessStatus.DELIVERY,
+      ProcessStatus.REQUESTED,
     ],
   },
   {
@@ -63,49 +66,49 @@ const ProjectButtonData: ProjectButtonProps[] = [
     type: "Edit",
     icon: <EditIcon />,
     contractor: false,
-    allowedStates: [ProcessState.DRAFT],
+    allowedStates: [ProcessStatus.DRAFT],
   },
   {
     title: "Projects.ProjectCollection.button.cancel",
     type: "Cancel",
     icon: <CancelIcon />,
     contractor: false,
-    allowedStates: [ProcessState.REQUESTED],
+    allowedStates: [ProcessStatus.REQUESTED],
   },
   {
     title: "Projects.ProjectCollection.button.contractorSelect",
     type: "ContractorSelection",
     icon: <FactoryIcon />,
     contractor: false,
-    allowedStates: [ProcessState.DRAFT],
+    allowedStates: [ProcessStatus.DRAFT],
   },
   {
     title: "Projects.ProjectCollection.button.verify",
     type: "Verify",
     icon: <AssignmentTurnedInIcon />,
     contractor: false,
-    allowedStates: [ProcessState.CONTRACTOR_SELECTED],
+    allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
   },
   {
     title: "Projects.ProjectCollection.button.reject",
     type: "Reject",
     icon: <CancelIcon />,
     contractor: true,
-    allowedStates: [ProcessState.REQUESTED, ProcessState.CLARIFICATION],
+    allowedStates: [ProcessStatus.REQUESTED, ProcessStatus.CLARIFICATION],
   },
   {
     title: "Projects.ProjectCollection.button.confirm",
     type: "Confirm",
     icon: <CheckIcon />,
     contractor: true,
-    allowedStates: [ProcessState.REQUESTED, ProcessState.CLARIFICATION],
+    allowedStates: [ProcessStatus.REQUESTED, ProcessStatus.CLARIFICATION],
   },
   {
     title: "Projects.ProjectCollection.button.reProject",
     type: "ReProject",
     icon: <ReplayIcon />,
     contractor: false,
-    allowedStates: [ProcessState.COMPLETED],
+    allowedStates: [ProcessStatus.COMPLETED],
   },
 ];
 
@@ -134,7 +137,7 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
   ): number => {
     return selectedProcesses.filter(
       (process) =>
-        button.allowedStates.includes(process.state) &&
+        button.allowedStates.includes(process.processStatus) &&
         ((isServiceComplete(process.processID) &&
           button.type === "ContractorSelection") ||
           button.type !== "ContractorSelection")

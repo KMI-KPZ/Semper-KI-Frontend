@@ -50,7 +50,7 @@ const PortfolioItem: React.FC<Props> = (props) => {
           }
         />
       </div>
-      <div className="bproject-t-2 w-full" />
+      <div className="w-full border-t-2" />
       {open ? (
         <div
           className={`gap flex w-full flex-col overflow-clip transition-all duration-300 `}
@@ -58,7 +58,7 @@ const PortfolioItem: React.FC<Props> = (props) => {
           <span className="px-5 py-2 text-left">
             {t(`Portfolio.PortfolioItem.${portfolioItem}.text`)}
           </span>
-          <div className="bproject-t-2 w-full" />
+          <div className="w-full border-t-2" />
         </div>
       ) : null}
     </div>

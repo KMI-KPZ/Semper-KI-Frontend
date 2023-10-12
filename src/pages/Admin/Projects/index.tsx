@@ -65,7 +65,7 @@ const AdminProjects: React.FC<Props> = (props) => {
                     <TableRow
                       key={index}
                       sx={{
-                        "&:last-child td, &:last-child th": { bproject: 0 },
+                        "&:last-child td, &:last-child th": { border: 0 },
                       }}
                     >
                       <TableCell component="th" scope="row">

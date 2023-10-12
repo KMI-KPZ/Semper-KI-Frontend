@@ -36,10 +36,10 @@ const Profile: React.FC<Props> = (props) => {
   return (
     <Container className=" bg-white p-5" direction="col" width="full">
       <Heading variant="h1">{t("Profile.header")}</Heading>
-      <div className="bproject-t-4 w-full" />
+      <div className="border-t-4 w-full" />
       <Container direction="col" align="start">
         <Heading variant="h2">{t("Profile.general.header")}</Heading>
-        <div className="bproject-t-2 w-full" />
+        <div className="border-t-2 w-full" />
         <span>
           {t("Profile.general.name")}: {user.name}
         </span>
@@ -55,7 +55,7 @@ const Profile: React.FC<Props> = (props) => {
       {user.usertype === UserType.ORGANIZATION ? (
         <Container direction="col" align="start">
           <Heading variant="h2">{t("Profile.company.header")}</Heading>
-          <div className="bproject-t-2 w-full" />
+          <div className="border-t-2 w-full" />
           <span className="break-all">
             {t("Profile.company.name")}: {user.organizations}
           </span>
@@ -68,7 +68,7 @@ const Profile: React.FC<Props> = (props) => {
       {user.details.address !== undefined ? (
         <Container direction="col" align="start">
           <Heading variant="h2">{t("Profile.address.header")}</Heading>
-          <div className="bproject-t-2 w-full" />
+          <div className="border-t-2 w-full" />
           <span>
             {t("Profile.address.street")}: {user.details.address}
           </span>
@@ -76,7 +76,7 @@ const Profile: React.FC<Props> = (props) => {
       ) : null}
       <Container direction="col" align="start">
         <Heading variant="h2">{t("Profile.time.header")}</Heading>
-        <div className="bproject-t-2 w-full" />
+        <div className="border-t-2 w-full" />
         <span>
           {t("Profile.time.created")}: {user.created.toLocaleString()}
         </span>

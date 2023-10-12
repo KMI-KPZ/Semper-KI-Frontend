@@ -31,7 +31,7 @@ const ServiceManufacturingWizardItem: React.FC<Props> = (props) => {
       <div className="flex flex-col">
         {t(title)}
         {active === true ? (
-          <hr className="bproject-b-2 bproject-b-black w-full" />
+          <hr className="w-full border-b-2 border-b-black" />
         ) : null}
       </div>
       {/* <ProcessHeaderStatusIcon statusType={statusType} /> */}

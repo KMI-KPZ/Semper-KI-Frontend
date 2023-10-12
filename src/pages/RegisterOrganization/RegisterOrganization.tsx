@@ -36,7 +36,7 @@ const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
         <label className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Text variant="body">{t("RegisterOrganization.form.name")}</Text>
           <input
-            className="bproject-2 bproject-gray-300 w-full rounded-md p-2"
+            className="w-full rounded-md border-2 border-gray-300 p-2"
             type="text"
             placeholder={t("RegisterOrganization.form.name")}
             {...register("name", { required: true })}
@@ -52,7 +52,7 @@ const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
             {t("RegisterOrganization.form.email")}
           </Text>
           <input
-            className="bproject-2 bproject-gray-300 w-full rounded-md p-2"
+            className="w-full rounded-md border-2 border-gray-300 p-2"
             type="email"
             placeholder={t("RegisterOrganization.form.email")}
             {...register("email", { required: true })}
@@ -66,7 +66,7 @@ const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
         <label className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Text variant="body">{t("RegisterOrganization.form.adress")}</Text>
           <input
-            className="bproject-2 bproject-gray-300 w-full rounded-md p-2"
+            className="w-full rounded-md border-2 border-gray-300 p-2"
             type="text"
             placeholder={t("RegisterOrganization.form.adress")}
             {...register("adress", { required: true })}
@@ -80,7 +80,7 @@ const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
         <label className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Text variant="body">{t("RegisterOrganization.form.taxID")}</Text>
           <input
-            className="bproject-2 bproject-gray-300 w-full rounded-md p-2"
+            className="w-full rounded-md border-2 border-gray-300 p-2"
             type="text"
             placeholder={t("RegisterOrganization.form.taxID")}
             {...register("taxID", { required: true })}
@@ -96,7 +96,7 @@ const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
             {t("RegisterOrganization.form.canManufacture")}
           </Text>
           <input
-            className="bproject-2 bproject-gray-300 h-8 w-8 rounded-md p-2"
+            className="h-8 w-8 rounded-md border-2 border-gray-300 p-2"
             type="checkbox"
             placeholder={t("RegisterOrganization.form.canManufacture")}
             {...register("canManufacture")}

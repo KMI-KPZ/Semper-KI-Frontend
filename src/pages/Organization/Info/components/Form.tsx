@@ -78,7 +78,7 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
         <Text variant={`body`}>{t(`Organization.Info.name`)}</Text>
         <input
           className={`w-full bg-slate-100 px-3 py-2 md:w-fit md:flex-grow ${
-            errors.name !== undefined ? "bproject-red-500 bg-red-500" : ""
+            errors.name !== undefined ? "border-red-500 bg-red-500" : ""
           }}`}
           placeholder={t("Organization.Info.components.form.name")}
           {...register("name")}
@@ -88,7 +88,7 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
         <Text variant={`body`}>{t(`Organization.Info.adress`)}</Text>
         <input
           className={`w-full bg-slate-100 px-3 py-2 md:w-fit md:flex-grow ${
-            errors.adress !== undefined ? "bproject-red-500" : ""
+            errors.adress !== undefined ? "border-red-500" : ""
           }`}
           placeholder={t("Organization.Info.components.form.adress")}
           {...register("adress")}
@@ -98,7 +98,7 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
         <Text variant={`body`}>{t(`Organization.Info.email`)}</Text>
         <input
           className={`w-full bg-slate-100 px-3 py-2 md:w-fit md:flex-grow ${
-            errors.email !== undefined ? "bproject-red-500" : ""
+            errors.email !== undefined ? "border-red-500" : ""
           }`}
           placeholder={t("Organization.Info.components.form.email")}
           {...register("email")}
@@ -108,7 +108,7 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
         <Text variant={`body`}>{t(`Organization.Info.taxID`)}</Text>
         <input
           className={`w-full bg-slate-100 px-3 py-2 md:w-fit md:flex-grow ${
-            errors.taxID !== undefined ? "bproject-red-500" : ""
+            errors.taxID !== undefined ? "border-red-500" : ""
           }`}
           placeholder={t("Organization.Info.components.form.taxID")}
           {...register("taxID")}

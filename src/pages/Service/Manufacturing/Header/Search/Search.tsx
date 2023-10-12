@@ -54,7 +54,7 @@ const ProcessHeaderSearch: React.FC = () => {
       <div className="flex w-full flex-row 2xl:w-[70%]">
         <input
           type="text"
-          className="bproject-none w-[85%] bg-gray-200 pl-5"
+          className="w-[85%] border-none bg-gray-200 pl-5"
           placeholder={t("Process.Header.Search.placeholder")}
           autoFocus
           value={search}

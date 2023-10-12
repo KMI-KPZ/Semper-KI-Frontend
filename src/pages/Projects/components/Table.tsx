@@ -102,7 +102,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
       <div className="w-full">
         <table aria-label="simple table" className="w-full table-auto">
           <thead className="">
-            <tr className="bproject-b">
+            <tr className="border-b">
               <th className="p-3 md:pb-3">
                 <Text variant="strong">
                   {t("project.overview.components.table.grouping")}
@@ -153,7 +153,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
                         groupFlatProject.length - 1 === index &&
                         groups.length - 1 === groupIndex
                           ? ""
-                          : "bproject-b"
+                          : "border-b"
                       }`}
                       key={flatProject.projectID + index + groupIndex}
                     >

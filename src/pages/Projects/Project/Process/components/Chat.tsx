@@ -121,7 +121,7 @@ const Chat: React.FC<Props> = (props) => {
       <div className="flex h-fit w-full flex-col items-center justify-start gap-5 bg-white p-3 md:flex-row">
         <textarea
           // type="text"
-          className={`bproject-2 w-full resize-none rounded-md px-4 ${
+          className={`w-full resize-none rounded-md border-2 px-4 ${
             height !== undefined && height > 72 ? "" : "h-fit"
           }`}
           style={

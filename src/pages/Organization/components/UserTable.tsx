@@ -37,7 +37,7 @@ const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
         >
           <div className="w-full overflow-auto">
             <div className="w-full">
-              <table className="bproject-separate bproject-spacing-y-2 w-full table-auto">
+              <table className="w-full table-auto border-separate border-spacing-y-2">
                 <thead>
                   <tr>
                     <th>{""}</th>

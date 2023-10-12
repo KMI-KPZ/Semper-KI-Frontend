@@ -56,7 +56,7 @@ const ResourcesMaterialsForm: React.FC<ResourcesMaterialsFormProps> = (
       <div className="flex w-full flex-col items-center justify-start gap-5 md:flex-row">
         <input
           type="search"
-          className="borde-2 bproject-2 bproject-slate-800 w-full p-3 pl-5"
+          className="borde-2 w-full border-2 border-slate-800 p-3 pl-5"
         />
         <Button
           startIcon={<SearchIcon />}

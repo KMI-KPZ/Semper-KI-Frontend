@@ -100,7 +100,7 @@ const StatusBar: React.FC<StatusViewProps> = (props) => {
             {index < getItems().length - 1 ? (
               <StatusItemConnector
                 active={state >= item.itemProcessState}
-                ongoging={state === item.itemProcessState}
+                onGoing={state === item.itemProcessState}
               />
             ) : null}
           </Fragment>

@@ -2,13 +2,13 @@ import { on } from "events";
 
 type StatusItemConnector = {
   active: boolean;
-  ongoging: boolean;
+  onGoing: boolean;
 };
 
 const StatusItemConnector: React.FC<StatusItemConnector> = (props) => {
-  const { active, ongoging } = props;
+  const { active, onGoing } = props;
 
-  if (ongoging === true)
+  if (onGoing === true)
     return (
       <>
         <div
@@ -26,8 +26,8 @@ const StatusItemConnector: React.FC<StatusItemConnector> = (props) => {
 
   return (
     <div
-      className={`bproject-l-2 md:bproject-l-0 md:bproject-t-2 h-14 md:h-0 md:w-20 ${
-        active ? "bproject-orange-200" : "bproject-slate-100"
+      className={`h-14 border-l-2 md:h-0 md:w-20 md:border-l-0 md:border-t-2 ${
+        active ? "border-orange-200" : "border-slate-100"
       }`}
     />
   );

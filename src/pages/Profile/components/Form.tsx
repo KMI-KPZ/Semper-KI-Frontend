@@ -36,7 +36,7 @@ const ProfileForm: React.FC<ProfileFormProps> = (props) => {
         <label className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Text variant="body">{t("Profile.components.Form.address")}</Text>
           <input
-            className="bproject-2 bproject-gray-300 w-full rounded-md p-2"
+            className="w-full rounded-md border-2 border-gray-300 p-2"
             type="text"
             placeholder={t("Profile.components.Form.address")}
             {...register("address", { required: true })}

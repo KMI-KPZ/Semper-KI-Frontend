@@ -20,11 +20,11 @@ const ProcessPostProcessingItem = <Item extends PostProcessingProps>(
   const { t } = useTranslation();
 
   const renderNumberInput = () => (
-    <input className="bproject" type="number" min="0" />
+    <input className="border" type="number" min="0" />
   );
-  const renderTextInput = () => <input className="bproject" type="text" />;
+  const renderTextInput = () => <input className="border" type="text" />;
   const renderSelectInput = () => (
-    <select className="bproject">
+    <select className="border">
       {item.valueList.map((title, index) => (
         <option key={index} value={title}>
           {title}

@@ -23,10 +23,8 @@ const useCheckout = (): ReturnProps => {
       const url = `${process.env.VITE_HTTP_API_URL}/public/sendProject/`;
       return getCustomAxios()
         .patch(url, {
-          data: {
-            projectID,
-            processIDs,
-          },
+          projectID,
+          processIDs,
         })
         .then((response) => {
           logger("useCheckout | sendProject ✅ |", response.data);

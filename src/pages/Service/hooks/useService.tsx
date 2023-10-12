@@ -50,7 +50,7 @@ const useService = (): ReturnProps => {
     return service;
   };
 
-  const isServiceReady = (processID: string): boolean => {
+  const isServiceComplete = (processID: string): boolean => {
     const process = getCurrentProcess(processID);
     if (
       process === undefined ||
@@ -92,7 +92,7 @@ const useService = (): ReturnProps => {
     return "service";
   };
 
-  return { getService, isServiceComplete: isServiceReady, getServiceName };
+  return { getService, isServiceComplete, getServiceName };
 };
 
 export default useService;

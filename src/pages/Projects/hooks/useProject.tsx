@@ -22,7 +22,7 @@ export interface ProjectProps {
   client: string;
   created: Date;
   updated: Date;
-  projectStatus: ProcessStatus;
+  status: ProcessStatus;
   processes: ProcessProps[];
   details: ProjectDetailsProps;
 }
@@ -37,12 +37,12 @@ export interface UpdateProjectProps {
 }
 
 export interface ProjectChangesProps {
-  projectStatus?: ProcessStatus;
+  status?: ProcessStatus;
   details?: ProjectDetailsProps;
 }
 export interface ProjectDeletionsProps {
   details?: { title?: "" };
-  projectStatus?: "";
+  status?: "";
 }
 
 export const useProject = (): ReturnProps => {

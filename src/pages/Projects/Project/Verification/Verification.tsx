@@ -30,8 +30,7 @@ const ProcessVerification: React.FC<Props> = (props) => {
     projectQuery.data === undefined
       ? []
       : projectQuery.data.processes.filter(
-          (process) =>
-            process.processStatus === ProcessStatus.CONTRACTOR_SELECTED
+          (process) => process.status === ProcessStatus.CONTRACTOR_SELECTED
         );
 
   const {

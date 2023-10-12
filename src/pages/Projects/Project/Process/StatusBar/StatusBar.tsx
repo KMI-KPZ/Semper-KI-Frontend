@@ -14,7 +14,7 @@ import { ServiceType } from "@/pages/Service/hooks/useService";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 
 interface StatusViewProps {
-  state: ProcessStatus;
+  status: ProcessStatus;
   serviceType: ServiceType;
 }
 
@@ -78,10 +78,10 @@ const statusData: StatusData[] = [
 ];
 
 const StatusBar: React.FC<StatusViewProps> = (props) => {
-  const { serviceType, state } = props;
+  const { serviceType, status } = props;
 
   const getItems = (): StatusData[] => {
-    if (state < ProcessStatus.REQUESTED)
+    if (status < ProcessStatus.REQUESTED)
       return statusData.filter(
         (data) => data.itemProcessState <= ProcessStatus.REQUESTED
       );
@@ -96,11 +96,11 @@ const StatusBar: React.FC<StatusViewProps> = (props) => {
       <div className="relative flex w-fit flex-col flex-wrap items-center justify-between pb-12 md:flex-row md:justify-center md:gap-y-16">
         {getItems().map((item, index) => (
           <Fragment key={index}>
-            <StatusItem item={item} state={state} />
+            <StatusItem item={item} state={status} />
             {index < getItems().length - 1 ? (
               <StatusItemConnector
-                active={state >= item.itemProcessState}
-                onGoing={state === item.itemProcessState}
+                active={status >= item.itemProcessState}
+                onGoing={status === item.itemProcessState}
               />
             ) : null}
           </Fragment>

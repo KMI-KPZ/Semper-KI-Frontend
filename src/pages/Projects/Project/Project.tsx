@@ -122,7 +122,7 @@ const Project: React.FC<Props> = (props) => {
               {": "}
               {t(
                 `Projects.ProjectCollection.state.${
-                  ProcessStatus[project.projectStatus]
+                  ProcessStatus[project.status]
                 }`
               )}
             </Text>

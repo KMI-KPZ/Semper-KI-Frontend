@@ -119,7 +119,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
           )}
         </PermissionGate>
       ) : null}
-      {process.processStatus <= ProcessStatus.REQUESTED ? (
+      {process.status <= ProcessStatus.REQUESTED ? (
         <PermissionGate element="ProcessButtonDelete">
           <Button
             variant="icon"
@@ -131,7 +131,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
           />
         </PermissionGate>
       ) : null}
-      {process.processStatus === ProcessStatus.COMPLETED ? (
+      {process.status === ProcessStatus.COMPLETED ? (
         <PermissionGate element="ProcessButtonReProject">
           <Button
             variant="icon"
@@ -144,8 +144,8 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
         </PermissionGate>
       ) : null}
 
-      {process.processStatus >= ProcessStatus.REJECTED_BY_CONTRACTOR &&
-      process.processStatus <= ProcessStatus.CONFIRMED_BY_CONTRACTOR ? (
+      {process.status >= ProcessStatus.REJECTED_BY_CONTRACTOR &&
+      process.status <= ProcessStatus.CONFIRMED_BY_CONTRACTOR ? (
         <>
           <PermissionGate element="ProcessButtonReject">
             <Button
@@ -169,7 +169,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
           </PermissionGate>
         </>
       ) : null}
-      {process.processStatus === ProcessStatus.CONFIRMED_BY_CONTRACTOR ? (
+      {process.status === ProcessStatus.CONFIRMED_BY_CONTRACTOR ? (
         <PermissionGate element="ProcessButtonVerify">
           <Button
             variant="icon"

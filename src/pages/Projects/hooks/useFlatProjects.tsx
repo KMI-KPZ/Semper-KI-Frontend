@@ -21,7 +21,7 @@ export interface FlatProjectProps {
   created: Date;
   updated: Date;
   details: ProjectDetailsProps;
-  state: ProcessStatus;
+  status: ProcessStatus;
   processesCount: number;
 }
 
@@ -41,8 +41,8 @@ export const isFlatProject = (project: any): project is FlatProjectProps => {
     typeof project.updated === "string" &&
     "details" in project &&
     project.details !== undefined &&
-    "state" in project &&
-    project.state !== undefined &&
+    "status" in project &&
+    project.status !== undefined &&
     "processesCount" in project &&
     project.processesCount !== undefined &&
     typeof project.processesCount === "number"
@@ -90,10 +90,10 @@ export const useFlatProjects = (): ReturnProps => {
                         items: [],
                       }
                     : project.details,
-                state:
-                  project.state === undefined
+                status:
+                  project.status === undefined
                     ? ProcessStatus.DRAFT
-                    : project.state,
+                    : project.status,
                 processesCount:
                   project.processesCount === undefined
                     ? 0

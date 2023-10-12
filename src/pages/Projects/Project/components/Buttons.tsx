@@ -137,7 +137,7 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
   ): number => {
     return selectedProcesses.filter(
       (process) =>
-        button.allowedStates.includes(process.processStatus) &&
+        button.allowedStates.includes(process.status) &&
         ((isServiceComplete(process.processID) &&
           button.type === "ContractorSelection") ||
           button.type !== "ContractorSelection")

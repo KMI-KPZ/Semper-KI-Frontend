@@ -60,7 +60,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
           processID: process.process.processID,
           updates: {
             changes: {
-              processStatus: ProcessStatus.CONTRACTOR_SELECTED,
+              status: ProcessStatus.CONTRACTOR_SELECTED,
               contractor: [process.contractorID],
             },
           },

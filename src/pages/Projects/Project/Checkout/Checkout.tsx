@@ -27,10 +27,10 @@ const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
   const processes: ProcessProps[] =
     projectQuery.data !== undefined &&
     projectQuery.data.processes.filter(
-      (process) => process.processStatus === ProcessStatus.VERIFIED
+      (process) => process.status === ProcessStatus.VERIFIED
     ).length > 0
       ? projectQuery.data.processes.filter(
-          (process) => process.processStatus === ProcessStatus.VERIFIED
+          (process) => process.status === ProcessStatus.VERIFIED
         )
       : [];
 

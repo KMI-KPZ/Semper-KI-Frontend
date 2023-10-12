@@ -64,8 +64,8 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
     projectGroupings.forEach((grouping) => {
       const filteredProjects = flatProjects.filter(
         (project) =>
-          project.state >= grouping.startState &&
-          project.state <= grouping.endState
+          project.status >= grouping.startState &&
+          project.status <= grouping.endState
       );
       if (filteredProjects.length > 0)
         projectGroups.push({
@@ -145,7 +145,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
               (group, groupIndex, groups) =>
                 group.flatProjects
                   .sort((projectA, projectB) =>
-                    projectA.state > projectB.state ? 1 : -1
+                    projectA.status > projectB.status ? 1 : -1
                   )
                   .map((flatProject, index, groupFlatProject) => (
                     <tr
@@ -180,7 +180,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
                       <td className="p-3 md:py-3">
                         {t(
                           `Projects.ProjectCollection.state.${
-                            ProcessStatus[flatProject.state]
+                            ProcessStatus[flatProject.status]
                           }`
                         )}
                       </td>

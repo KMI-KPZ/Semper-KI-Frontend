@@ -18,16 +18,14 @@ const ProcessVerificationItem: React.FC<Props> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <label className="flex w-full flex-col items-center justify-center gap-2 bg-white p-2 sm:basis-[48%] md:basis-[32%]">
-      <Heading variant="h2">
-        {process.details.title}
-        {ServiceType[process.service.type]}
-      </Heading>
+    <label className="flex w-full flex-col items-center justify-center gap-2 bg-white p-2 md:flex-row">
       <input
         className="h-10 w-10"
         type="checkbox"
         {...register(`processes.${index}.checked`)}
       />
+      <Heading variant="h2">{process.details.title}</Heading>
+      <Heading variant="h2">{ServiceType[process.service.type]}</Heading>
     </label>
   );
 };

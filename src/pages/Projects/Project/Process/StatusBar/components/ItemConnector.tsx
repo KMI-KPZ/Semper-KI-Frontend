@@ -13,12 +13,12 @@ const StatusItemConnector: React.FC<StatusItemConnector> = (props) => {
       <>
         <div
           className={
-            "h-14 w-[2px] bg-gradient-to-b from-orange-200 to-slate-100 md:hidden"
+            "h-14 w-[2px] bg-gradient-to-b from-orange to-slate-100 md:hidden"
           }
         />
         <div
           className={
-            "hidden h-[2px] w-20 bg-gradient-to-r from-orange-200 to-slate-100 md:block"
+            "hidden h-[2px] w-20 bg-gradient-to-r from-orange to-slate-100 md:block"
           }
         />
       </>

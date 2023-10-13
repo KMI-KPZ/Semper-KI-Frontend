@@ -15,7 +15,11 @@ const ProcessNewItem: React.FC<Props> = (props) => {
     startNewProcess();
     navigate("model");
   }, []);
-  return <Heading variant="h1">{t("Process.NewProcess.header")}</Heading>;
+  return (
+    <Heading variant="h1">
+      {t("Service.Manufacturing.NewItem.NewItem.title")}
+    </Heading>
+  );
 };
 
 export default ProcessNewItem;

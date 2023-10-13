@@ -43,24 +43,27 @@ const ProcessModelItem: React.FC<Props> = (props) => {
         ))}
       </div>
       <div className="model-view-date">
-        {t("Process.Model.ModelView.created")}: {getDate()}
+        {t("Service.Manufacturing.Model.components.Item.created")}: {getDate()}
       </div>
       <div className="model-view-licens">
-        {t("Process.Model.ModelView.license")}: {model.license}
+        {t("Service.Manufacturing.Model.components.Item.license")}:{" "}
+        {model.license}
       </div>
       <div className="model-view-certificates">
-        {t("Process.Model.ModelView.certificates")}:
+        {t("Service.Manufacturing.Model.components.Item.certificates")}:
         {model.certificate.length > 0
           ? model.certificate.map((title: string, index: number) => (
               <div className="model-view-certificate" key={index}>
                 {title}
               </div>
             ))
-          : t("Process.Model.ModelView.empty")}
+          : t(
+              "Service.Manufacturing.Model.components.Item.error.noCertificates"
+            )}
       </div>
       <Button
         onClick={handleOnClickButtonDeselect}
-        title={t("Process.Model.ModelView.button.change")}
+        title={t("Service.Manufacturing.Model.components.Item.button.change")}
       />
     </div>
   );

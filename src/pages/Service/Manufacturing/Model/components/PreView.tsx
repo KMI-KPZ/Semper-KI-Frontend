@@ -51,24 +51,28 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
         ))}
       </div>
       <div className="model-view-date">
-        {t("Process.Model.ModelPreView.created")}: {getDate()}
+        {t("Service.Manufacturing.Model.components.PreView.created")}:{" "}
+        {getDate()}
       </div>
       <div className="model-view-licens">
-        {t("Process.Model.ModelPreView.license")}: {model.license}
+        {t("Service.Manufacturing.Model.components.PreView.license")}:{" "}
+        {model.license}
       </div>
       <div className="model-view-certificates">
-        {t("Process.Model.ModelPreView.certificates")}:
+        {t("Service.Manufacturing.Model.components.PreView.certificates")}:
         {model.certificate.length > 0
           ? model.certificate.map((title: string, index: number) => (
               <div className="model-view-certificate" key={index}>
                 {title}
               </div>
             ))
-          : t("Process.Model.ModelPreView.noCertificates")}
+          : t("Service.Manufacturing.Model.components.PreView.noCertificates")}
       </div>
       <Button
         onClick={handleOnClickButtonSelect}
-        title={t("Process.Model.ModelPreView.button.select")}
+        title={t(
+          "Service.Manufacturing.Model.components.PreView.button.select"
+        )}
       />
     </div>
   );

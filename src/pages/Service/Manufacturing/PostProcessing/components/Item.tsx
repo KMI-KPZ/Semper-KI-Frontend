@@ -78,8 +78,12 @@ const ProcessPostProcessingItem = <Item extends PostProcessingProps>(
         variant={item.checked ? "secondary" : "primary"}
         title={
           item.checked
-            ? t("Process.PostProcessing.ItemCard.button.deselect")
-            : t("Process.PostProcessing.ItemCard.button.select")
+            ? t(
+                "Service.Manufacturing.PostProcessing.components.Item.button.deselect"
+              )
+            : t(
+                "Service.Manufacturing.PostProcessing.components.Item.button.select"
+              )
         }
       />
     </div>

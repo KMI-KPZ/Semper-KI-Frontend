@@ -12,9 +12,6 @@ const ProcessHeader: React.FC = () => {
     <div className="flex flex-col">
       <div className="flex flex-col gap-2 bg-white p-2">
         <ServiceManufacturingWizard />
-        <Heading variant="h1" className="text-center">
-          {location.pathname[-1]}
-        </Heading>
         <ProcessHeaderSearch />
       </div>
     </div>

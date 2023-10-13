@@ -44,7 +44,9 @@ export const ProcessMaterialPreView: React.FC<Props> = (props) => {
       </div>
       <Button
         onClick={handleOnClickButtonSelect}
-        title={t("Process.Material.MaterialPreView.button.select")}
+        title={t(
+          "Service.Manufacturing.Material.components.PreView.button.select"
+        )}
       />
     </div>
   );

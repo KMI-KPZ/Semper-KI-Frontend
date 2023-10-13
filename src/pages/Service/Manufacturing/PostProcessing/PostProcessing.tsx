@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProcessPostProcessCatalog from "./components/Catalog";
-import { ServiceManufacturingState } from "../types";
+import { ServiceManufacturingState } from "../types/types";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import { FilterItemProps } from "../Filter/Filter";
@@ -100,7 +100,9 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
           />
         </div>
       ) : (
-        t("Process.PostProcessing.PostProcessingView.empty")
+        t(
+          "Service.Manufacturing.PostProcessing.PostProcessing.error.noPostProcessings"
+        )
       )}
     </LoadingSuspense>
   );

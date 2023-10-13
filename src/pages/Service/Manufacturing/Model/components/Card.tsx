@@ -61,7 +61,9 @@ export const ProcessModelCard: React.FC<Props> = (props) => {
           >
             <Button
               onClick={handleOnClickSelect}
-              title={t("Process.Model.ModelCard.button.select")}
+              title={t(
+                "Service.Manufacturing.Model.components.Card.button.select"
+              )}
             />
           </div>
         </div>
@@ -90,9 +92,12 @@ export const ProcessModelCard: React.FC<Props> = (props) => {
 
         <div className="hidden flex-col items-center justify-center gap-2 md:flex">
           <div>
-            {t("Process.Model.ModelCard.license")}: {model.license}
+            {t("Service.Manufacturing.Model.components.Card.license")}:{" "}
+            {model.license}
           </div>
-          <div>{t("Process.Model.ModelCard.certificates")}:</div>
+          <div>
+            {t("Service.Manufacturing.Model.components.Card.certificates")}:
+          </div>
           {model.certificate.map((title: string, index: number) => (
             <div key={index}>{title}</div>
           ))}
@@ -100,7 +105,9 @@ export const ProcessModelCard: React.FC<Props> = (props) => {
         <div className="flex  flex-col flex-wrap gap-2 ">
           <Button
             onClick={handleOnClickSelect}
-            title={t("Process.Model.ModelCard.button.select")}
+            title={t(
+              "Service.Manufacturing.Model.components.Card.button.select"
+            )}
           />
         </div>
       </div>

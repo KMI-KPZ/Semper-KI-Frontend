@@ -139,7 +139,9 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   return (
     <div className="flex flex-col items-center justify-center gap-5 bg-white p-5">
       {error && (
-        <div className="error">{t("Process.Model.ModelUpload.error")}</div>
+        <div className="error">
+          {t("Service.Manufacturing.Model.components.Upload.error")}
+        </div>
       )}
 
       <div className="flex flex-row flex-wrap items-center justify-center gap-5">
@@ -165,7 +167,9 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
       {status === "loading" ? (
         <div className="pt-5">
           <LoadingAnimation />
-          <span>{t("Process.Model.ModelUpload.loading")}</span>
+          <span>
+            {t("Service.Manufacturing.Model.components.Upload.loading")}
+          </span>
         </div>
       ) : (
         <div
@@ -186,16 +190,16 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
           />
           <UploadIcon className="h-40 w-40" />
           <Heading variant="h2">
-            {t("Process.Model.ModelUpload.card.header")}
+            {t("Service.Manufacturing.Model.components.Upload.card.title")}
           </Heading>
-          {t("Process.Model.ModelUpload.card.text")}
+          {t("Service.Manufacturing.Model.components.Upload.card.text")}
         </div>
       )}
 
       <Button
         onClick={handleClickNext}
         startIcon={<FileUploadIcon />}
-        title={t("Process.Model.ModelUpload.button.upload")}
+        title={t("Service.Manufacturing.Model.components.Upload.button.upload")}
       />
     </div>
   );

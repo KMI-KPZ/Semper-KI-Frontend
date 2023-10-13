@@ -52,7 +52,7 @@ const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
             : "max-h-44 min-h-full w-44 "
         }`}
         src={item.URI}
-        alt="Model"
+        alt="PostProcessing"
       />
       <div
         className={`flex h-full items-center justify-around gap-2 p-3  md:justify-between ${

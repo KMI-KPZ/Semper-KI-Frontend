@@ -3,7 +3,7 @@ import { useLocation, useParams } from "react-router-dom";
 import {
   ServiceManufacturingProps,
   UpdateServiceManufacturingProps,
-} from "../Manufacturing/types";
+} from "../Manufacturing/types/types";
 import logger from "@/hooks/useLogger";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 import { ServiceModellingProps } from "../Modelling/Modelling";

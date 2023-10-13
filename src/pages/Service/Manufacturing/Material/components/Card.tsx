@@ -64,7 +64,9 @@ export const ProcessMaterialCard: React.FC<Props> = (props) => {
         </div>
         <Button
           onClick={handleOnClickSelect}
-          title={t("Process.Material.MaterialCatalogCard.button.select")}
+          title={t(
+            "Service.Manufacturing.Material.components.Card.button.select"
+          )}
         />
       </div>
     </div>

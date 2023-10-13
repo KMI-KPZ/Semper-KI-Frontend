@@ -1,6 +1,6 @@
 import Contact from "@/pages/Legal/Contact/Contact";
 import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
-import { ServiceManufacturingProps } from "@/pages/Service/Manufacturing/types";
+import { ServiceManufacturingProps } from "@/pages/Service/Manufacturing/types/types";
 import Container from "@component-library/Container";
 import { Heading, Text } from "@component-library/Typography";
 import React from "react";

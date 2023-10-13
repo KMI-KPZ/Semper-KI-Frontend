@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ServiceManufacturingState } from "../types";
+import { ServiceManufacturingState } from "../types/types";
 import { ProcessModelCard } from "./components/Card";
 import { Button } from "@component-library/Button";
 import { useNavigate } from "react-router-dom";
@@ -83,13 +83,15 @@ export const ProcessModel: React.FC<Props> = (props) => {
             : "max-h-44 min-h-full w-44 pl-10 "
         }`}
         src={IconUpload}
-        alt={t("Process.Model.ModelCatalog.button.upload")}
+        alt={t("Service.Manufacturing.Model.Model.upload.img")}
       />
-      <Heading variant="h2">{t("Process.Model.ModelCatalog.upload")}</Heading>
+      <Heading variant="h2">
+        {t("Service.Manufacturing.Model.Model.upload.title")}
+      </Heading>
       <div className={`flex items-center justify-center gap-2 p-3`}>
         <Button
           onClick={handleOnClickCardUpload}
-          title={t("Process.Model.ModelCatalog.button.select")}
+          title={t("Service.Manufacturing.Model.Model.upload.button")}
         />
       </div>
     </div>
@@ -130,7 +132,7 @@ export const ProcessModel: React.FC<Props> = (props) => {
             </Modal>
           </>
         ) : (
-          t("Process.Model.ModelCatalog.empty")
+          t("Service.Manufacturing.Model.Model.error.noModels")
         )}
       </div>
     </LoadingSuspense>

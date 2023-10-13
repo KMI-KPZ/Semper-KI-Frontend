@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ProcessMaterialCard } from "./components/Card";
-import { ServiceManufacturingState } from "../types";
+import { ServiceManufacturingState } from "../types/types";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import { ProcessMaterialPreView } from "./components/PreView";
@@ -97,7 +97,7 @@ export const ProcessMaterial: React.FC<Props> = (props) => {
             </Modal>
           </>
         ) : (
-          t("Process.Material.MaterialCatalog.empty")
+          t("Service.Manufacturing.Material.Material.error.noMaterials")
         )}
       </div>
     </LoadingSuspense>

@@ -63,7 +63,7 @@ const ProcessPostProcessingCatalog = <Item extends PostProcessingProps>(
   };
 
   const handleOnClickCard = () => {
-    navigate("../..");
+    navigate("../../..");
   };
 
   return (
@@ -95,7 +95,9 @@ const ProcessPostProcessingCatalog = <Item extends PostProcessingProps>(
             }`}
             onClick={handleOnClickCard}
           >
-            {t("Process.PostProcessing.Catalog.button")}
+            {t(
+              "Service.Manufacturing.PostProcessing.components.Catalog.button.overview"
+            )}
             <NavigateNextIcon fontSize="large" />
           </div>
           <Modal
@@ -112,7 +114,9 @@ const ProcessPostProcessingCatalog = <Item extends PostProcessingProps>(
           </Modal>
         </>
       ) : (
-        t("Process.PostProcessing.Catalog.empty")
+        t(
+          "Service.Manufacturing.PostProcessing.components.Catalog.error.noPostProcessings"
+        )
       )}
     </div>
   );

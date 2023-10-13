@@ -31,7 +31,9 @@ export const ProcessMaterialItem: React.FC<Props> = (props) => {
       </div>
       <Button
         onClick={handleOnClickButtonDeselect}
-        title={t("Process.Material.MaterialView.button.change")}
+        title={t(
+          "Service.Manufacturing.Material.components.Item.button.change"
+        )}
       />
     </div>
   );

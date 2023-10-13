@@ -14,7 +14,7 @@ import {
   ServiceManufacturingContextReturnProps,
   ServiceManufacturingProps,
   ServiceManufacturingState,
-} from "./types";
+} from "./types/types";
 import { Error } from "@/pages/Error/Error";
 import { ServiceContext } from "../context/ServiceContext";
 

@@ -1172,11 +1172,125 @@
         "Header": {}
       },
       "hooks": {},
-      "Material": {},
-      "Model": {},
-      "NewItem": {},
-      "PostProcessing": {},
-      "types": {},
+      "Material": {
+        "components": {
+          "Card": {
+            "button": {
+              "select": "Auswählen"
+            }
+          },
+          "Item": {
+            "button": {
+              "change": "Ändern"
+            }
+          },
+          "PreView": {
+            "button": {
+              "select": "Auswählen"
+            }
+          }
+        },
+        "hooks": {},
+        "Material": {
+          "error": {
+            "noMaterials": "keine Materialien gefunden"
+          }
+        }
+      },
+      "Model": {
+        "components": {
+          "Card": {
+            "license": "Lizenz",
+            "certificates": "Zertifikate",
+            "button": {
+              "select": "Auswählen"
+            }
+          },
+          "Item": {
+            "created": "Erstellt am",
+            "license": "Lizenz",
+            "certificates": "Zertifikate",
+            "error": {
+              "noCertificates": "keine Zertifikate vorhanden"
+            },
+            "button": {
+              "change": "Ändern"
+            }
+          },
+          "PreView": {
+            "created": "Erstellt am",
+            "license": "Lizenz",
+            "certificates": "Zertifikate",
+            "error": {
+              "noCertificates": "keine Zertifikate vorhanden"
+            },
+            "button": {
+              "select": "Auswählen"
+            }
+          },
+          "Upload": {
+            "error": "Fehler beim Hochladen",
+            "loading": "Laden...",
+            "card": {
+              "title": "Modell Hochladen",
+              "text": "per Drag & Drop oder Klick"
+            },
+            "button": {
+              "upload": "Hochladen"
+            }
+          }
+        },
+        "hooks": {
+          "useModel": {},
+          "useModelUpload": {}
+        },
+        "types": {},
+        "Model": {
+          "upload": {
+            "img": "Modell Hochladen",
+            "title": "Modell Hochladen",
+            "button": "zum Upload"
+          },
+          "error": {
+            "noModels": "keine Modelle gefunden"
+          }
+        }
+      },
+      "NewItem": {
+        "NewItem": {
+          "title": "Erstelle einen neuen Prozess..."
+        }
+      },
+      "PostProcessing": {
+        "components": {
+          "Card": {},
+          "Catalog": {
+            "button": {
+              "overview": "zur Übersicht"
+            },
+            "error": {
+              "noPostProcessings": "keine Nachbearbeitungen gefunden"
+            }
+          },
+          "Item": {
+            "button": {
+              "select": "Auswählen",
+              "deselect": "Abwählen"
+            }
+          }
+        },
+        "hooks": {
+          "usePostProcessing": {}
+        },
+        "PostProcessing": {
+          "error": {
+            "noPostProcessings": "keine Nachbearbeitungen gefunden"
+          }
+        }
+      },
+      "types": {
+        "types": {}
+      },
       "Manufacturing": {}
     },
     "Modelling": {},
@@ -1243,26 +1357,6 @@
         "WizardCard": {}
       },
       "Header": {}
-    },
-    "Material": {
-      "MaterialCatalog": {
-        "empty": "keine Materialien gefunden"
-      },
-      "MaterialCatalogCard": {
-        "button": {
-          "select": "Auswählen"
-        }
-      },
-      "MaterialPreView": {
-        "button": {
-          "select": "Auswählen"
-        }
-      },
-      "MaterialView": {
-        "button": {
-          "change": "Ändern"
-        }
-      }
     }
   },
   "Test": {}

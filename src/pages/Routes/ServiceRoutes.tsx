@@ -6,7 +6,7 @@ import ServiceOverview from "../Service/Overview/Overview";
 import ServiceSelect from "../Service/Select/Select";
 import { ServiceManufacturing } from "../Service/Manufacturing/Manufacturing";
 import { ServiceType } from "../Service/hooks/useService";
-import ServiceModelling from "../Service/Modelling/Modelling";
+import ServiceModeling from "../Service/Modelling/Modelling";
 import { ServiceContextProvider } from "../Service/context/ServiceContext";
 import ServiceEdit from "../Service/Edit/Edit";
 
@@ -25,7 +25,7 @@ const ServiceRoutes: React.FC<ServiceRoutesProps> = (props) => {
           <Route path="manufacturing/*" element={<ServiceManufacturing />} />
           <Route
             path="modeling/*"
-            element={<ServiceModelling type={ServiceType.MODELING} />}
+            element={<ServiceModeling type={ServiceType.MODELING} />}
           />
           <Route path="*" element={<Navigate to="." />} />
         </Route>

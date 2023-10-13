@@ -6,7 +6,7 @@ import {
 } from "../Manufacturing/types/types";
 import logger from "@/hooks/useLogger";
 import useProcess from "@/pages/Projects/hooks/useProcess";
-import { ServiceModellingProps } from "../Modelling/Modelling";
+import { ServiceModelingProps } from "../Modelling/Modelling";
 
 interface ReturnProps {
   getService: () => GeneralServiceProps;
@@ -22,7 +22,7 @@ export enum ServiceType {
 
 export type GeneralServiceProps =
   | ServiceManufacturingProps
-  | ServiceModellingProps
+  | ServiceModelingProps
   | ServiceUndefinedProps;
 
 export interface ServiceUndefinedProps {

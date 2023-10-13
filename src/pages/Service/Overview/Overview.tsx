@@ -20,11 +20,7 @@ const ServiceOverview: React.FC<Props> = (props) => {
   const { createProcess } = useProcess();
 
   const addNewItem = () => {
-    createProcess.mutate(undefined, {
-      onSuccess(data, variables, context) {
-        navigate(`../${data}`);
-      },
-    });
+    createProcess.mutate();
   };
 
   // const navigateToUpload = () => {
@@ -38,12 +34,10 @@ const ServiceOverview: React.FC<Props> = (props) => {
   return (
     <div className="flex h-fit w-full flex-col justify-start gap-5 bg-white p-5 md:w-fit md:min-w-fit md:max-w-sm">
       <div className="flex flex-col items-center justify-center gap-5 md:flex-row md:justify-between">
-        <Heading variant="h2">
-          {t("Process.Header.Cart.CartItem.title")}
-        </Heading>
+        <Heading variant="h2">{t("Service.Overview.Overview.title")}</Heading>
         <Button
           to=".."
-          title={t("Process.Header.Cart.CartItem.button.overview")}
+          title={t("Service.Overview.Overview.button.overview")}
         />
       </div>
       <div className="flex w-full flex-col flex-wrap items-center justify-center gap-5">
@@ -61,8 +55,8 @@ const ServiceOverview: React.FC<Props> = (props) => {
           variant="secondary"
           title={
             open
-              ? t("Process.Header.Cart.CartItem.button.collapse")
-              : t("Process.Header.Cart.CartItem.button.expand")
+              ? t("Service.Overview.Overview.button.collapse")
+              : t("Service.Overview.Overview.button.expand")
           }
           children={
             <ExpandMoreIcon
@@ -74,7 +68,7 @@ const ServiceOverview: React.FC<Props> = (props) => {
         />
         <Button
           width="full"
-          title={t("Process.Header.Cart.CartItem.new")}
+          title={t("Service.Overview.Overview.button.new")}
           startIcon={<AddIcon />}
           onClick={addNewItem}
         />

@@ -1,16 +1,22 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { ServiceType } from "../hooks/useService";
+import Container from "@component-library/Container";
+import { Heading } from "@component-library/Typography";
 
-export type ServiceModellingProps = {
+export type ServiceModelingProps = {
   type: ServiceType.MODELING;
 };
 
-const ServiceModelling: React.FC<ServiceModellingProps> = (props) => {
+const ServiceModeling: React.FC<ServiceModelingProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
 
-  return <div className="">ServiceModelling</div>;
+  return (
+    <Container>
+      <Heading variant="h1">{t("Service.Modeling.Modeling.title")}</Heading>
+    </Container>
+  );
 };
 
-export default ServiceModelling;
+export default ServiceModeling;

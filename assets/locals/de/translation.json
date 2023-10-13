@@ -1293,8 +1293,30 @@
       },
       "Manufacturing": {}
     },
-    "Modelling": {},
-    "Overview": {},
+    "Modeling": {
+      "Modeling": {
+        "title": "Modell entwerfen lasssen"
+      }
+    },
+    "Overview": {
+      "components": {
+        "Item": {
+          "confirm": {
+            "cancel": "Prozess wirklich löschen?"
+          },
+          "titleEmpty": "Prozess"
+        }
+      },
+      "Overview": {
+        "title": "Projekt",
+        "button": {
+          "overview": "zur Übersicht",
+          "expand": "Ausklappen",
+          "collapse": "Zusammenklappen",
+          "new": "neuen Prozess anlegen"
+        }
+      }
+    },
     "Select": {},
     "Service": {},
 

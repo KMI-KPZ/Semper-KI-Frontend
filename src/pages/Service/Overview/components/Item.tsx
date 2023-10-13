@@ -25,7 +25,7 @@ export const getTitleFromProcess = (
     ? process.details.title
     : process.service.type !== undefined
     ? t(`enum.ServiceType.${ServiceType[process.service.type]}`)
-    : t("ProjectRoutes.Service.Overview.components.Item.empty");
+    : t("Service.Overview.components.Item.titleEmpty");
 };
 
 const ServiceOverviewItem: React.FC<Props> = (props) => {
@@ -48,7 +48,7 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    navigate(`/project/${projectID}/suborder/${process.processID}`);
+    navigate(`/projects/${projectID}/${process.processID}`);
   };
 
   const handleOnClickDeleteIcon = (
@@ -56,7 +56,7 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    if (window.confirm(t("Projects.ProjectView.confirm.cancel"))) {
+    if (window.confirm(t("Service.Overview.components.Item.confirm.cancel"))) {
       deleteProcess.mutate(process.processID);
     }
   };

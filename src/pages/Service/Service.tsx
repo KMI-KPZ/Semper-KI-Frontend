@@ -8,7 +8,7 @@ import {
   UpdateServiceManufacturingProps,
 } from "./Manufacturing/types/types";
 import ServiceOverview from "./Overview/Overview";
-import { ServiceModellingProps } from "./Modelling/Modelling";
+import { ServiceModelingProps } from "./Modelling/Modelling";
 import ServiceSelect from "./Select/Select";
 import logger from "@/hooks/useLogger";
 

@@ -24,7 +24,7 @@ export const getTitleFromProcess = (
   return process.details.title !== undefined
     ? process.details.title
     : process.service.type !== undefined
-    ? t(`ProjectRoutes.Service.type.${ServiceType[process.service.type]}`)
+    ? t(`enum.ServiceType.${ServiceType[process.service.type]}`)
     : t("ProjectRoutes.Service.Overview.components.Item.empty");
 };
 

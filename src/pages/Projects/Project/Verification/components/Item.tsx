@@ -25,7 +25,9 @@ const ProcessVerificationItem: React.FC<Props> = (props) => {
         {...register(`processes.${index}.checked`)}
       />
       <Heading variant="h2">{process.details.title}</Heading>
-      <Heading variant="h2">{ServiceType[process.service.type]}</Heading>
+      <Heading variant="h2">
+        {t(`enum.ServiceType.${ServiceType[process.service.type]}`)}
+      </Heading>
     </label>
   );
 };

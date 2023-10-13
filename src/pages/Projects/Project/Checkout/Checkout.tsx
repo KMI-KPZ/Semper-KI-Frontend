@@ -87,7 +87,7 @@ const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
           ))
         ) : (
           <Heading variant="h2">
-            {t("Projects.Project.Checkout.Checkout.error.no-items")}
+            {t("Projects.Project.Checkout.Checkout.error.noItems")}
           </Heading>
         )}
       </div>

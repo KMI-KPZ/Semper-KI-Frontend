@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import ProjectContextProvider from "../Projects/context/ProjectContext";
-import Projects from "../Projects/Project";
+import Projects from "../Projects/Projects";
 import Project from "../Projects/Project/Project";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import ProjectContractorSelection from "../Projects/Project/ContractorSelection/ContractorSelection";

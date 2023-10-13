@@ -31,7 +31,9 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
               <Button
                 variant="icon"
                 startIcon={<EditIcon />}
-                title={t("ProjectRoutes.Process.components.StateButton.edit")}
+                title={t(
+                  "Projects.Project.Process.components.StatusButtons.service"
+                )}
                 to={
                   processID === undefined
                     ? `${manuelProcessID}/service/edit`
@@ -44,7 +46,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
                 variant="icon"
                 startIcon={<FactoryIcon />}
                 title={t(
-                  "ProjectRoutes.Process.components.StateButton.selectContractor"
+                  "Projects.Project.Process.components.StatusButtons.selectContractor"
                 )}
                 to={
                   processID === undefined
@@ -62,7 +64,9 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
             <Button
               variant="icon"
               startIcon={<PolicyIcon />}
-              title={t("ProjectRoutes.Process.components.StateButton.verify")}
+              title={t(
+                "Projects.Project.Process.components.StatusButtons.verify"
+              )}
               to={
                 processID === undefined
                   ? `${manuelProcessID}/verification`
@@ -77,7 +81,9 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
             <Button
               variant="icon"
               startIcon={<SendIcon />}
-              title={t("ProjectRoutes.Process.components.StateButton.request")}
+              title={t(
+                "Projects.Project.Process.components.StatusButtons.request"
+              )}
               to={`${manuelProcessID}/checkout`}
             />
           </PermissionGate>

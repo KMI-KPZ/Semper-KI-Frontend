@@ -802,7 +802,7 @@
             "send": "Anfragen"
           },
           "error": {
-            "no-items": "keine Aufträge vorhanden"
+            "noItems": "keine passenden Prozesse gefunden"
           }
         }
       },
@@ -860,106 +860,126 @@
       },
       "Process": {
         "components": {
-          "Buttons": {},
-          "Chat": {},
-          "Info": {},
-          "ProcessFile": {},
-          "StatusButtons": {}
+          "Buttons": {
+            "button": {
+              "info": "Informationen",
+              "chat": "Nachrichten",
+              "cancel": "Stornieren",
+              "reProject": "erneut Bestellen",
+              "reject": "Ablehnen",
+              "confirm": "Bestätigen",
+              "verify": "Überprüfen"
+            },
+            "confirm": {
+              "cancel": "Auftrag wirklich stonieren?",
+              "reProject": "Auftrag wirklich erneut Bestellen?",
+              "reject": "Auftrag wirklich Ablehnen?"
+            }
+          },
+          "Chat": {
+            "title": "Nachrichten",
+            "noMessages": "Keine Nachrichten vorhanden",
+            "placeholder": "Nachricht...",
+            "button": {
+              "close": "Schließen",
+              "send": "Nachricht Senden"
+            }
+          },
+          "Info": {
+            "id": "ProzessID:",
+            "created": "Erstellt am:",
+            "updated": "Aktualisiert am:"
+          },
+          "ProcessFile": {
+            "title": "Dateien",
+            "empty": "keine Dateien gefunden",
+            "button": {
+              "download": "Herunterladen"
+            }
+          },
+          "StatusButtons": {
+            "service": "Service bearbeiten",
+            "selectContractor": "Auftragnehmer auswählen",
+            "verify": "Überprüfen",
+            "request": "Anfragen"
+          }
         },
         "hooks": {},
-        "ServicePreview": {},
-        "StatusBar": {},
+        "ServicePreview": {
+          "components": {
+            "Manufacturing": {
+              "model": "Modell:",
+              "material": "Material:",
+              "postProcessings": "Nachbearbeitungen:"
+            },
+            "Modelling": {
+              "title": "Modell entwerfen lasssen"
+            }
+          },
+          "ServicePreview": {
+            "title": "Service:"
+          }
+        },
+        "StatusBar": {
+          "components": {
+            "Item": {},
+            "ItemConnector": {}
+          },
+          "StatusBar": {
+            "draft": "Entwurf",
+            "contractorSelected": "Auftragnehmer",
+            "verified": "Überprüfung",
+            "requested": "Anfrage",
+            "clarification": "Rückfragen",
+            "rejected": "Abgelehnt",
+            "confirmed": "Bestätigt",
+            "production": "In Produktion",
+            "delivery": "Unterwegs",
+            "finished": "Abgeschlossen"
+          }
+        },
         "Process": {}
-      }
-    },
-
-    "ChatView": {
-      "header": "Nachrichten",
-      "noMessages": "Keine Nachrichten vorhanden",
-      "placeholder": "Nachricht...",
-      "button": {
-        "close": "Schließen",
-        "send": "Nachricht Senden"
-      }
-    },
-    "ProjectCollection": {
-      "title": "Auftrag",
-      "selected": "{{count}} Ausgewählt",
-      "subProjects": "Teilaufträge",
-      "id": "AuftragsID",
-      "date": "Datum",
-      "noSubProjects": "Keine Teilaufträge vorhanden",
-      "selectAll": "Alle auswählen",
-      "confirm": {
-        "delete": "Aufträge wirklich löschen?"
-      }
-    },
-    "ProjectCollectionOverview": {
-      "headline": {
-        "client": "Aufträge",
-        "manufacturer": "Aufträge"
       },
-      "empty": "keine vorhandenen Aufträge"
-    },
-    "ProjectFileView": {
-      "header": "Dateien",
-      "empty": "keine Dateien gefunden",
-      "button": {
-        "download": "Herunterladen"
-      }
-    },
-    "ProjectPreView": {
-      "requested": "Angefragt",
-      "verify": "Rückfragen",
-      "rejected": "Abgelehnt",
-      "confirmed": "Bestätigt",
-      "production": "In Produktion",
-      "delivery": "Unterwegs",
-      "finished": "Abgeschlossen"
-    },
-    "ProjectView": {
-      "name": "Name:",
-      "id": "TeilauftragsID:",
-      "created": "Erstellt am:",
-      "updated": "Aktualisiert am:",
-      "service": "Service:",
-      "status": "Status:",
-      "postProcessing": "Nachbearbeitung",
-      "button": {
-        "info": "Informationen",
-        "editName": "Name ändern",
-        "cancel": "Stornieren",
-        "reProject": "erneut Bestellen",
-        "reject": "Ablehnen",
-        "confirm": "Bestätigen",
-        "verify": "Überprüfen",
-        "chat": "Nachrichten",
-        "expand": "Ausklappen",
-        "collapse": "Zusammenklappen"
+      "Verification": {
+        "components": {
+          "Item": {}
+        },
+        "hooks": {
+          "useVerification": {}
+        },
+        "Verification": {
+          "title": "Überprüfung",
+          "error": {
+            "noItems": "keine passenden Prozesse gefunden"
+          },
+          "button": {
+            "verify": "Überprüfen",
+            "request": "Überprüfen und Anfragen"
+          }
+        }
       },
-      "confirm": {
-        "cancel": "Auftrag wirklich stonieren?",
-        "reProject": "Auftrag wirklich erneut Bestellen?",
-        "reject": "Auftrag wirklich Ablehnen?"
-      },
-      "Service": {
-        "title": "Service:"
+      "Project": {
+        "title": "Projekt",
+        "state": "Status: ",
+        "selected": "{{count}} Ausgewählt",
+        "processes": "Prozesse:",
+        "noProcesses": "Keine Teilaufträge vorhanden",
+        "selectAll": "Alle auswählen",
+        "confirm": {
+          "delete": "Projekt wirklich löschen?"
+        },
+        "button": {
+          "info": "Informationen öffnen",
+          "delete": "Projekt löschen",
+          "new": "neuen Prozess anlegen"
+        }
       }
     },
-    "StatusView": {
-      "state": {
-        "draft": "Entwurf",
-        "contractorSelected": "Auftragnehmer ausgewählt",
-        "verifying": "Überprüfung läuft",
-        "verified": "Überprüft",
-        "requested": "Angefragt",
-        "clarification": "Rückfragen",
-        "rejected": "Abgelehnt",
-        "confirmed": "Bestätigt",
-        "production": "In Produktion",
-        "delivery": "Unterwegs",
-        "finished": "Abgeschlossen"
-      }
+    "Projects": {
+      "title": "Meine Projekte",
+      "orga": "Eingegangene Projekte",
+      "empty": "keine Projekte angelegt",
+      "button": { "create": "Projekt anlegen" }
     }
   },
   "Redirect": {},

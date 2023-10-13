@@ -32,7 +32,9 @@ const ProjectFile: React.FC<Props> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
       <div className="flex w-full items-center gap-3">
-        <Heading variant="h3">{t("Projects.ProjectFileView.header")}:</Heading>
+        <Heading variant="h3">
+          {t("Projects.Project.Process.components.ProcessFile.title")}:
+        </Heading>
         <Divider className="mt-[0.3rem]" />
       </div>
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
@@ -47,11 +49,13 @@ const ProjectFile: React.FC<Props> = (props) => {
                   onClick={() => handleOnClickButton(_fileName)}
                   startIcon={<DownloadIcon />}
                   loading={buttonQuery?.isLoading}
-                  title={t("Projects.ProjectFileView.button.download")}
+                  title={t(
+                    "Projects.Project.Process.components.ProcessFile.button.download"
+                  )}
                 />
               </div>
             ))
-          : t("Projects.ProjectFileView.empty")}
+          : t("Projects.Project.Process.components.ProcessFile.empty")}
       </div>
     </div>
   );

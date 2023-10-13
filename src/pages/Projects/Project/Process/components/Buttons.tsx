@@ -42,17 +42,29 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
   ); // todo: check if this is correct
 
   const handleOnClickButtonCancel = () => {
-    if (window.confirm(t("Projects.ProjectView.confirm.cancel"))) {
+    if (
+      window.confirm(
+        t("Projects.Project.Process.components.Buttons.confirm.cancel")
+      )
+    ) {
       deleteProcess.mutate(process.processID);
     }
   };
   const handleOnClickButtonReProject = () => {
-    if (window.confirm(t("Projects.ProjectView.confirm.reProject"))) {
+    if (
+      window.confirm(
+        t("Projects.Project.Process.components.Buttons.confirm.reProject")
+      )
+    ) {
       logger("//TODO ReProject");
     }
   };
   const handleOnClickButtonReject = () => {
-    if (window.confirm(t("Projects.ProjectView.confirm.reject"))) {
+    if (
+      window.confirm(
+        t("Projects.Project.Process.components.Buttons.confirm.reject")
+      )
+    ) {
       updateStatus(ProcessStatus.REJECTED_BY_CONTRACTOR);
     }
   };
@@ -90,7 +102,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
         size="sm"
         children={<InfoIcon />}
         onClick={handleOnClickButtonInfo}
-        title={t("Projects.ProjectView.button.info")}
+        title={t("Projects.Project.Process.components.Buttons.button.info")}
       />
       {user !== undefined ? (
         <PermissionGate element="ProcessButtonChat">
@@ -104,7 +116,9 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
                 size="sm"
                 children={<MailIcon />}
                 onClick={handleOnClickButtonChat}
-                title={t("Projects.ProjectView.button.chat")}
+                title={t(
+                  "Projects.Project.Process.components.Buttons.button.chat"
+                )}
               />
             </Badge>
           ) : (
@@ -114,7 +128,9 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
               size="sm"
               children={<MailIcon />}
               onClick={handleOnClickButtonChat}
-              title={t("Projects.ProjectView.button.chat")}
+              title={t(
+                "Projects.Project.Process.components.Buttons.button.chat"
+              )}
             />
           )}
         </PermissionGate>
@@ -127,7 +143,9 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
             size="sm"
             children={<DeleteIcon />}
             onClick={handleOnClickButtonCancel}
-            title={t("Projects.ProjectView.button.cancel")}
+            title={t(
+              "Projects.Project.Process.components.Buttons.button.cancel"
+            )}
           />
         </PermissionGate>
       ) : null}
@@ -139,7 +157,9 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
             size="sm"
             children={<ReplayIcon />}
             onClick={handleOnClickButtonReProject}
-            title={t("Projects.ProjectView.button.reProject")}
+            title={t(
+              "Projects.Project.Process.components.Buttons.button.reProject"
+            )}
           />
         </PermissionGate>
       ) : null}
@@ -154,7 +174,9 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
               size="sm"
               children={<DeleteIcon />}
               onClick={handleOnClickButtonReject}
-              title={t("Projects.ProjectView.button.reject")}
+              title={t(
+                "Projects.Project.Process.components.Buttons.button.reject"
+              )}
             />
           </PermissionGate>
           <PermissionGate element="ProcessButtonConfirm">
@@ -164,7 +186,9 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
               size="sm"
               children={<CheckIcon />}
               onClick={handleOnClickButtonConfirm}
-              title={t("Projects.ProjectView.button.confirm")}
+              title={t(
+                "Projects.Project.Process.components.Buttons.button.confirm"
+              )}
             />
           </PermissionGate>
         </>
@@ -177,7 +201,9 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
             size="sm"
             children={<QuestionMarkIcon />}
             onClick={handleOnClickButtonVerify}
-            title={t("Projects.ProjectView.button.verify")}
+            title={t(
+              "Projects.Project.Process.components.Buttons.button.verify"
+            )}
           />
         </PermissionGate>
       ) : null}

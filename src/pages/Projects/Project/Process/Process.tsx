@@ -9,7 +9,6 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import Modal from "@component-library/Modal";
 import ProcessServicePreview from "./ServicePreview/ServicePreview";
 import { Divider } from "@component-library/Divider";
-import ProcessNextStepButton from "./components/StatusButtons";
 import ProcessButtons from "./components/Buttons";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
@@ -23,6 +22,7 @@ import useProcess, {
 import { ProjectEventItem } from "@/pages/App/types";
 import { getTitleFromProcess } from "@/pages/Service/Overview/components/Item";
 import ProjectFile from "./components/ProcessFile";
+import ProcessStatusButtons from "./components/StatusButtons";
 
 interface Props {
   process: ProcessProps;
@@ -118,7 +118,7 @@ const Process: React.FC<Props> = (props) => {
         />
       </div>
       <StatusBar status={process.status} serviceType={process.service.type} />
-      <ProcessNextStepButton
+      <ProcessStatusButtons
         state={process.status}
         processID={process.processID}
       />

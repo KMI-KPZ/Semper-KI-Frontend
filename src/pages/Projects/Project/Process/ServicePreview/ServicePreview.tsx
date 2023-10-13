@@ -39,8 +39,8 @@ const ProcessServicePreview: React.FC<ProcessServicePreviewProps> = (props) => {
     <div className="flex w-full flex-col items-center justify-center pt-5 md:p-0">
       <div className="flex w-full flex-col items-start gap-3 md:flex-row md:items-center">
         <Heading variant="h3" className="whitespace-nowrap">
-          {t("Projects.ProjectView.Service.title")}{" "}
-          {t(`ProjectRoutes.Service.type.${ServiceType[service.type]}`)}
+          {t("Projects.Project.Process.ServicePreview.ServicePreview.title")}{" "}
+          {t(`enum.ServiceType.${ServiceType[service.type]}`)}
         </Heading>
         <Divider className="mt-[0.3rem] hidden md:block" />
       </div>

@@ -14,14 +14,14 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
   return (
     <div className="flex w-fit flex-col items-start justify-center gap-5 bg-white p-10">
       <Text variant="body" className="break-all">
-        {t("Projects.ProjectView.id")} {process.processID}
+        {t("Projects.Project.Process.components.Info.id")} {process.processID}
       </Text>
       <Text variant="body">
-        {t("Projects.ProjectView.created")}{" "}
+        {t("Projects.Project.Process.components.Info.created")}{" "}
         {new Date(process.created).toLocaleDateString()}
       </Text>
       <Text variant="body">
-        {t("Projects.ProjectView.updated")}{" "}
+        {t("Projects.Project.Process.components.Info.updated")}{" "}
         {new Date(process.updated).toLocaleDateString()}
       </Text>
     </div>

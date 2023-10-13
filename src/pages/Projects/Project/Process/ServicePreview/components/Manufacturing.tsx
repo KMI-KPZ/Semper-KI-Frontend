@@ -19,19 +19,31 @@ const ProcessServiceManufacturing: React.FC<
   return (
     <Container direction="col" align="start" className="p-5">
       <Container>
-        <Text variant="body">Modell:</Text>
+        <Text variant="body">
+          {t(
+            "Projects.Project.Process.ServicePreview.components.Manufacturing.model"
+          )}
+        </Text>
         <Text variant="body">
           {service.model === undefined ? "---" : service.model.title}
         </Text>
       </Container>
       <Container>
-        <Text variant="body">Material:</Text>
+        <Text variant="body">
+          {t(
+            "Projects.Project.Process.ServicePreview.components.Manufacturing.material"
+          )}
+        </Text>
         <Text variant="body">
           {service.material === undefined ? "---" : service.material.title}
         </Text>
       </Container>
       <Container>
-        <Text variant="body">Nachbeabeitungen:</Text>
+        <Text variant="body">
+          {t(
+            "Projects.Project.Process.ServicePreview.components.Manufacturing.postProcessings"
+          )}
+        </Text>
         <Text variant="body">
           {service.postProcessings === undefined
             ? "---"

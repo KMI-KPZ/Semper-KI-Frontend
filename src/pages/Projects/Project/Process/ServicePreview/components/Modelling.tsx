@@ -16,7 +16,11 @@ const ProcessServiceModelling: React.FC<ProcessServiceModellingProps> = (
 
   return (
     <Container>
-      <Text variant="body">Modell entwerfen</Text>
+      <Text variant="body">
+        {t(
+          "Projects.Project.Process.ServicePreview.components.Modelling.title"
+        )}
+      </Text>
     </Container>
   );
 };

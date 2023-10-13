@@ -53,7 +53,7 @@ const Project: React.FC<Props> = (props) => {
 
   const handleOnClickDelete = () => {
     if (
-      window.confirm(t("Projects.ProjectCollection.confirm.delete")) &&
+      window.confirm(t("Projects.Project.Project.confirm.delete")) &&
       project !== undefined
     ) {
       deleteProject.mutate(project.projectID, {
@@ -111,20 +111,15 @@ const Project: React.FC<Props> = (props) => {
                 headerType="h1"
                 title={
                   project.details.title === undefined
-                    ? t("Projects.ProjectCollection.title")
+                    ? t("Projects.Project.Project.title")
                     : project.details.title
                 }
                 updateTitle={updateProjectTitle}
               />
             </Container>
             <Text variant="body">
-              {t("Projects.ProjectCollection.state.title")}
-              {": "}
-              {t(
-                `Projects.ProjectCollection.state.${
-                  ProcessStatus[project.status]
-                }`
-              )}
+              {t("Projects.Project.Project.state")}
+              {t(`enum.ProcessStatus.${ProcessStatus[project.status]}`)}
             </Text>
             <Container direction="row" wrap="wrap">
               <Button
@@ -133,7 +128,7 @@ const Project: React.FC<Props> = (props) => {
                 size="sm"
                 children={<InfoIcon />}
                 onClick={handleOnClickButtonInfo}
-                title={t("Projects.ProjectView.button.info")}
+                title={t("Projects.Project.Project.button.info")}
               />
               <PermissionGate element={"ProjectButtonDelete"}>
                 <Button
@@ -141,7 +136,7 @@ const Project: React.FC<Props> = (props) => {
                   variant="icon"
                   size="sm"
                   children={<DeleteIcon />}
-                  title={t("Projects.ProjectCollection.button.delete")}
+                  title={t("Projects.Project.Project.button.delete")}
                   onClick={handleOnClickDelete}
                 />
               </PermissionGate>
@@ -150,8 +145,7 @@ const Project: React.FC<Props> = (props) => {
           <Divider />
           <Container width="full" justify="between">
             <Heading variant="h2">
-              {t("Projects.ProjectCollection.processes")}
-              {":"}
+              {t("Projects.Project.Project.processes")}
             </Heading>
             <PermissionGate element={"ProjectButtonNew"}>
               <Button
@@ -160,7 +154,7 @@ const Project: React.FC<Props> = (props) => {
                 size="sm"
                 startIcon={<AddIcon />}
                 onClick={onButtonClickCreateProcess}
-                title={t("Projects.ProjectCollection.button.new")}
+                title={t("Projects.Project.Project.button.new")}
               />
             </PermissionGate>
           </Container>
@@ -177,12 +171,12 @@ const Project: React.FC<Props> = (props) => {
                     }
                   />
                   <Text variant="body" className="whitespace-nowrap">
-                    {t("Projects.ProjectCollection.selectAll")}
+                    {t("Projects.Project.Project.selectAll")}
                   </Text>
                 </label>
                 {checkedProcesses.length > 0 ? (
                   <Text variant="body" className="whitespace-nowrap">
-                    {t("Projects.ProjectCollection.selected", {
+                    {t("Projects.Project.Project.selected", {
                       count: checkedProcesses.length,
                     })}
                   </Text>
@@ -197,7 +191,7 @@ const Project: React.FC<Props> = (props) => {
           ) : null}
           {project.processes.length === 0 ? (
             <Heading variant="h2">
-              {t("Projects.ProjectCollection.noProcesses")}
+              {t("Projects.Project.Project.noProcesses")}
             </Heading>
           ) : (
             project.processes

@@ -4,7 +4,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import { FlatProjectProps, useFlatProjects } from "./hooks/useFlatProjects";
-import ProjectsTable from "../Projects/components/Table";
+import ProjectsTable from "./components/Table";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { UserProps, UserType } from "@/hooks/useUser/types";
 import { useProject } from "./hooks/useProject";
@@ -51,9 +51,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
         }
       />
     ) : (
-      <Text variant="body">
-        {t("Projects.ProjectCollectionOverview.empty")}
-      </Text>
+      <Text variant="body">{t("Projects.Projects.empty")}</Text>
     );
 
   const renderOrganizationProjects = (user: UserProps) =>
@@ -68,18 +66,16 @@ const Projects: React.FC<ProjectsProps> = (props) => {
           .sort(sortProjectByUpdatedDate)}
       />
     ) : (
-      <Text variant="body">
-        {t("Projects.ProjectCollectionOverview.empty")}
-      </Text>
+      <Text variant="body">{t("Projects.Projects.empty")}</Text>
     );
 
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
       <div className="flex w-full flex-col gap-2 md:flex-row md:justify-between">
-        <Heading variant="h1">{t("project.overview.title")}</Heading>
+        <Heading variant="h1">{t("Projects.Projects.title")}</Heading>
         <PermissionGate element={"ProjectsButtonNew"}>
           <Button
-            title={t("project.overview.button.create")}
+            title={t("Projects.Projects.button.create")}
             onClick={onButtonClickCreateProject}
           />
         </PermissionGate>
@@ -89,7 +85,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
         {user !== undefined && user.usertype === UserType.ORGANIZATION ? (
           <>
             <Heading variant="h2" className="mt-10 w-full text-left">
-              {t("project.overview.orga")}
+              {t("Projects.Projects.orga")}
             </Heading>
             {renderOrganizationProjects(user)}
           </>

@@ -114,9 +114,13 @@ const Chat: React.FC<Props> = (props) => {
               </div>
             ))
         ) : (
-          <Text variant="body">{t("Projects.ChatView.noMessages")}</Text>
+          <Text variant="body">
+            {t("Projects.Project.Process.components.Chat.noMessages")}
+          </Text>
         )}
-        <Heading variant="h1">{t("Projects.ChatView.header")}</Heading>
+        <Heading variant="h1">
+          {t("Projects.Project.Process.components.Chat.title")}
+        </Heading>
       </div>
       <div className="flex h-fit w-full flex-col items-center justify-start gap-5 bg-white p-3 md:flex-row">
         <textarea
@@ -130,14 +134,16 @@ const Chat: React.FC<Props> = (props) => {
               : {}
           }
           value={messageText}
-          placeholder={t("Projects.ChatView.placeholder")}
+          placeholder={t(
+            "Projects.Project.Process.components.Chat.placeholder"
+          )}
           onChange={handleOnChangeTextArea}
           onKeyDown={onEnterPress}
         />
         <Button
           children={<SendIcon />}
           onClick={handleOnClickButtonSend}
-          title={t("Projects.ChatView.button.send")}
+          title={t("Projects.Project.Process.components.Chat.button.send")}
         />
       </div>
     </div>

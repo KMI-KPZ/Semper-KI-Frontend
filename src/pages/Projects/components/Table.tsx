@@ -51,7 +51,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
   const { deleteProject } = useProject();
 
   const handleOnClickButtonDelete = (projectID: string) => {
-    window.confirm(t("Project.components.table.deleteConfirm")) === true
+    window.confirm(t("Projects.components.Table.deleteConfirm")) === true
       ? deleteProject.mutate(projectID)
       : logger("delete canceled");
   };
@@ -80,7 +80,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
       <PermissionGate element={"ProjectButtonDelete"}>
         <Button
           variant="secondary"
-          title={t("Project.components.table.button.delete")}
+          title={t("Projects.components.Table.button.delete")}
           children={<DeleteIcon />}
           onClick={() => handleOnClickButtonDelete(flatProject.projectID)}
         />
@@ -88,7 +88,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
       <PermissionGate element={"ProjectButtonSee"}>
         <Button
           variant="secondary"
-          title={t("Project.components.table.button.detail")}
+          title={t("Projects.components.Table.button.detail")}
           children={<VisibilityIcon />}
           to={`/projects/${flatProject.projectID}`}
         />
@@ -104,37 +104,37 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
             <tr className="border-b">
               <th className="p-3 md:pb-3">
                 <Text variant="strong">
-                  {t("Project.components.table.grouping")}
+                  {t("Projects.components.Table.grouping")}
                 </Text>
               </th>
               <th className="p-3 text-left md:pb-3">
                 <Text variant="strong">
-                  {t("Project.components.table.name")}
+                  {t("Projects.components.Table.name")}
                 </Text>
               </th>
               <th className="p-3 text-left md:pb-3">
                 <Text variant="strong">
-                  {t("Project.components.table.status")}
+                  {t("Projects.components.Table.status")}
                 </Text>
               </th>
               <th className="p-3 text-left md:pb-3">
                 <Text variant="strong">
-                  {t("Project.components.table.count")}
+                  {t("Projects.components.Table.count")}
                 </Text>
               </th>
               <th className="p-3 text-left md:pb-3">
                 <Text variant="strong" className="whitespace-nowrap">
-                  {t("Project.components.table.created")}
+                  {t("Projects.components.Table.created")}
                 </Text>
               </th>
               <th className="p-3 text-left md:pb-3">
                 <Text variant="strong" className="whitespace-nowrap">
-                  {t("Project.components.table.updated")}
+                  {t("Projects.components.Table.updated")}
                 </Text>
               </th>
               <th className="p-3 md:pb-3">
                 <Text variant="strong">
-                  {t("Project.components.table.actions")}
+                  {t("Projects.components.Table.actions")}
                 </Text>
               </th>
             </tr>
@@ -165,7 +165,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
                           <div className="flex w-full justify-center">
                             <Heading variant="h2">
                               {t(
-                                `Project.components.table.groups.${group.title}`
+                                `Projects.components.Table.groups.${group.title}`
                               )}
                             </Heading>
                           </div>
@@ -178,7 +178,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
                       </td>
                       <td className="p-3 md:py-3">
                         {t(
-                          `Projects.ProjectCollection.state.${
+                          `enum.ProcessStatus.${
                             ProcessStatus[flatProject.status]
                           }`
                         )}

@@ -28,52 +28,52 @@ const statusData: StatusData[] = [
   {
     itemProcessState: ProcessStatus.DRAFT,
     icon: <DesignServicesIcon />,
-    text: "Projects.StatusView.state.draft",
+    text: "Projects.Project.Process.StatusBar.StatusBar.draft",
   },
   {
     itemProcessState: ProcessStatus.CONTRACTOR_SELECTED,
     icon: <FactoryIcon />,
-    text: "Projects.StatusView.state.contractorSelected",
+    text: "Projects.Project.Process.StatusBar.StatusBar.contractorSelected",
   },
   {
     itemProcessState: ProcessStatus.VERIFIED,
     icon: <AssignmentTurnedInIcon />,
-    text: "Projects.StatusView.state.verified",
+    text: "Projects.Project.Process.StatusBar.StatusBar.verified",
   },
   {
     itemProcessState: ProcessStatus.REQUESTED,
     icon: <EmailIcon />,
-    text: "Projects.StatusView.state.requested",
+    text: "Projects.Project.Process.StatusBar.StatusBar.requested",
   },
   {
     itemProcessState: ProcessStatus.CLARIFICATION,
     icon: <QuestionMarkIcon />,
-    text: "Projects.StatusView.state.clarification",
+    text: "Projects.Project.Process.StatusBar.StatusBar.clarification",
   },
   {
     itemProcessState: ProcessStatus.REJECTED_BY_CONTRACTOR,
     icon: <CloseIcon />,
-    text: "Projects.StatusView.state.rejected",
+    text: "Projects.Project.Process.StatusBar.StatusBar.rejected",
   },
   {
     itemProcessState: ProcessStatus.CONFIRMED_BY_CONTRACTOR,
     icon: <CheckIcon />,
-    text: "Projects.StatusView.state.confirmed",
+    text: "Projects.Project.Process.StatusBar.StatusBar.confirmed",
   },
   {
     itemProcessState: ProcessStatus.PRODUCTION,
     icon: <FactoryIcon />,
-    text: "Projects.StatusView.state.production",
+    text: "Projects.Project.Process.StatusBar.StatusBar.production",
   },
   {
     itemProcessState: ProcessStatus.DELIVERY,
     icon: <LocalShippingIcon />,
-    text: "Projects.StatusView.state.delivery",
+    text: "Projects.Project.Process.StatusBar.StatusBar.delivery",
   },
   {
     itemProcessState: ProcessStatus.COMPLETED,
     icon: <DoneAllIcon />,
-    text: "Projects.StatusView.state.finished",
+    text: "Projects.Project.Process.StatusBar.StatusBar.finished",
   },
 ];
 

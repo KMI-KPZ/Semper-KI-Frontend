@@ -86,18 +86,18 @@ const ProcessVerification: React.FC<Props> = (props) => {
   return (
     <div className="flex w-full flex-col items-center gap-5">
       <Heading variant="h1">
-        {t("AfterProcess.Checkout.Checkout.title")}
+        {t("Projects.Project.Verification.Verification.title")}
       </Heading>
       <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5 md:flex-row">
         <Button
           onClick={handleSubmit(handleOnClickButtonVerify)}
           endIcon={<AssignmentTurnedInIcon fontSize="large" />}
-          title={t("AfterProcess.Checkout.Checkout.button.verify")}
+          title={t("Projects.Project.Verification.Verification.button.verify")}
         />
         <Button
           onClick={handleSubmit(handleOnClickButtonRequest)}
           endIcon={<ScheduleSendIcon fontSize="large" />}
-          title={t("AfterProcess.Checkout.Checkout.button.request")}
+          title={t("Projects.Project.Verification.Verification.button.request")}
         />
       </div>
 
@@ -116,7 +116,7 @@ const ProcessVerification: React.FC<Props> = (props) => {
           ))
         ) : (
           <Heading variant="h2">
-            {t("AfterProcess.Checkout.Checkout.error.no-items")}
+            {t("Projects.Project.Verification.Verification.error.noItems")}
           </Heading>
         )}
       </div>

@@ -8,7 +8,7 @@ import { ServiceManufacturing } from "../Service/Manufacturing/Manufacturing";
 import { ServiceType } from "../Service/hooks/useService";
 import ServiceModelling from "../Service/Modelling/Modelling";
 import { ServiceContextProvider } from "../Service/context/ServiceContext";
-import ServiceEdit from "../Service/Edit/ServiceEdit";
+import ServiceEdit from "../Service/Edit/Edit";
 
 interface ServiceRoutesProps {}
 

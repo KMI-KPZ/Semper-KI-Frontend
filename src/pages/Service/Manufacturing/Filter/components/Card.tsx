@@ -39,7 +39,7 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
     <div className="bg-gray-100 p-3">
       <div className="flex flex-row items-center justify-between">
         <Heading variant="h3">
-          {t(`Process.Filter.FilterCard.category.${category.title}`)}
+          {t(`enum.FilterCategoryType.${category.title.toLocaleUpperCase()}`)}
           {getCountOfChecktItems()}
         </Heading>
         <IconButton

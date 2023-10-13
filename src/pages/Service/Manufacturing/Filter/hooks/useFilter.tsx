@@ -22,6 +22,29 @@ interface ReturnProps {
   >;
 }
 
+export enum FilterType {
+  "TEXT",
+  "TEXTAREA",
+  "NUMBER",
+  "DATE",
+  "COLOR",
+  "SLIDER",
+  "SLIDERSELECTION",
+  "SELECTION",
+  "MUILTISELECT",
+}
+
+export enum FilterCategoryType {
+  "GENERAL",
+  "MODEL",
+  "MATERIAL",
+  "PROCEEDING",
+  "MANUFACTURER",
+  "POSTPROCESSING",
+  "ADDITIVE",
+  "TEST",
+}
+
 const useFilter = (): ReturnProps => {
   const queryClient = useQueryClient();
 

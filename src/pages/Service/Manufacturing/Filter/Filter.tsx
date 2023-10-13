@@ -208,7 +208,9 @@ const ProcessFilter: React.FC<Props> = (props) => {
             <CloseIcon fontSize="large" />
           </div>
         </div>
-        <Heading variant="h2">{t("Process.Filter.Filter.header")}</Heading>
+        <Heading variant="h2">
+          {t("Service.Manufacturing.Filter.Filter.header")}
+        </Heading>
         {categoryList.map((category: ICategory, categoryIndex: number) => (
           <ProcessFilterCard
             category={category}
@@ -226,11 +228,11 @@ const ProcessFilter: React.FC<Props> = (props) => {
       <div className="flex flex-col justify-center gap-2 text-white xl:flex-row">
         <Button
           onClick={handleOnClickResetButton}
-          title={t("Process.Filter.Filter.button.reset")}
+          title={t("Service.Manufacturing.Filter.Filter.button.reset")}
         />
         <Button
           onClick={handleOnClickApplyButton}
-          title={t("Process.Filter.Filter.button.apply")}
+          title={t("Service.Manufacturing.Filter.Filter.button.apply")}
         />
       </div>
     </div>

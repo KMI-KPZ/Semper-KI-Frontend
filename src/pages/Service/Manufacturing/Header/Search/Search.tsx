@@ -55,7 +55,9 @@ const ProcessHeaderSearch: React.FC = () => {
         <input
           type="text"
           className="w-[85%] border-none bg-gray-200 pl-5"
-          placeholder={t("Process.Header.Search.placeholder")}
+          placeholder={t(
+            "Service.Manufacturing.Header.Search.Search.placeholder"
+          )}
           autoFocus
           value={search}
           onChange={handleOnChangeInput}

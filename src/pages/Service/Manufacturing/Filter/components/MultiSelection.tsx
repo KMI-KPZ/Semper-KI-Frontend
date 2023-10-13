@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { FilterItemProps } from "../Filter";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   filterItem: FilterItemProps;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
+  const { t } = useTranslation();
   const { filterItem, setFilterItem } = props;
   const options: string[] =
     filterItem.question.values !== null && filterItem.question.values.length > 0
@@ -91,7 +93,13 @@ const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
                 onChange={(e) => toggleAllValues()}
                 onClick={(e) => toggleAllValues()}
               />
-              {allChecked ? "Alle Abwählen" : "Alle Wählen"}
+              {allChecked
+                ? t(
+                    "Service.Manufacturing.Filter.components.MultiSelection.button.unCheckAll"
+                  )
+                : t(
+                    "Service.Manufacturing.Filter.components.MultiSelection.button.checkAll"
+                  )}
             </div>
             {options
               .filter((name) =>

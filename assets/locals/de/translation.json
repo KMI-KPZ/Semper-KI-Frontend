@@ -94,6 +94,27 @@
       "OK": "OK",
       "ERROR": "Fehler",
       "MISSING": "Fehlend"
+    },
+    "FilterType": {
+      "TEXT": "Text",
+      "TEXTAREA": "Textfeld",
+      "NUMBER": "Zahl",
+      "DATE": "Datum",
+      "COLOR": "Farbe",
+      "SLIDER": "Schieberegler",
+      "SLIDERSELECTION": "Schieberegler mit Auswahl",
+      "SELECTION": "Auswahl",
+      "MUILTISELECT": "Mehrfachauswahl"
+    },
+    "FilterCategoryType": {
+      "GENERAL": "Allgemein",
+      "MODEL": "Modell",
+      "MATERIAL": "Material",
+      "PROCEEDING": "Verfahren",
+      "MANUFACTURER": "Hersteller",
+      "POSTPROCESSING": "Nachbearbeitung",
+      "ADDITIVE": "Additive",
+      "TEST": "Test"
     }
   },
   "components": {
@@ -1089,6 +1110,80 @@
   },
   "Routes": {},
   "Service": {
+    "context": {
+      "SerivceContext": {}
+    },
+    "Edit": {
+      "Edit": {}
+    },
+    "hooks": {
+      "useServiceEdit": {},
+      "useService": {}
+    },
+    "Manufacturing": {
+      "Filter": {
+        "components": {
+          "Card": {},
+          "ColorPicker": {},
+          "DatePicker": {},
+          "Item": {},
+          "MultiSelection": {
+            "button": {
+              "checkAll": "Alle Auswählen",
+              "unCheckAll": "Alle Abwählen"
+            }
+          },
+          "NumberInput": {},
+          "Selection": {},
+          "Slider": {},
+          "SliderSelection": {},
+          "TextArea": {},
+          "TestInput": {}
+        },
+        "hooks": {
+          "useFilter": {}
+        },
+        "Filter": {
+          "header": "Vorgaben",
+          "button": {
+            "reset": "Zurücksetzen",
+            "apply": "Anwenden"
+          }
+        }
+      },
+      "Header": {
+        "Search": {
+          "Search": {
+            "placeholder": "Suche ..."
+          }
+        },
+        "types": {},
+        "Wizard": {
+          "components": {
+            "Card": {}
+          },
+          "data": {
+            "model": "Modell",
+            "material": "Material",
+            "postprocessing": "Nachbearbeitung"
+          },
+          "Wizard": {}
+        },
+        "Header": {}
+      },
+      "hooks": {},
+      "Material": {},
+      "Model": {},
+      "NewItem": {},
+      "PostProcessing": {},
+      "types": {},
+      "Manufacturing": {}
+    },
+    "Modelling": {},
+    "Overview": {},
+    "Select": {},
+    "Service": {},
+
     "ServiceQuestion": {},
     "ServiceRoutes": {
       "let": "lassen",
@@ -1101,7 +1196,74 @@
     "ServiceView": {
       "header": "Service Anbieten"
     },
-    "ServiceWizard": {}
+    "ServiceWizard": {},
+    "Filter": {
+      "FilterCard": {
+        "category": {
+          "general": "Allgemein",
+          "model": "Modell",
+          "material": "Material",
+          "proceeding": "Verfahren",
+          "manufacturer": "Hersteller",
+          "post-Processing": "Nachbearbeitung",
+          "additive": "Zusatz",
+          "test": "Test"
+        }
+      },
+      "FilterItem": {}
+    },
+    "Header": {
+      "Cart": {
+        "Cart": {},
+        "CartItem": {
+          "title": "Auftrag",
+          "item": "Artikel",
+          "upload": "Modell Hochladen",
+          "new": "Artikel erstellen",
+          "cart": "Warenkorb",
+          "button": {
+            "expand": "Ausklappen",
+            "collapse": "Zusammenklappen",
+            "overview": "Übersicht",
+            "edit": "Bearbeiten",
+            "delete": "Löschen"
+          }
+        }
+      },
+      "Search": {
+        "placeholder": "Suche ..."
+      },
+      "StatusIcon": {},
+      "Wizard": {
+        "Wizard": {
+          "model": "Modell",
+          "material": "Material",
+          "post-processing": "Nachbearbeitung"
+        },
+        "WizardCard": {}
+      },
+      "Header": {}
+    },
+    "Material": {
+      "MaterialCatalog": {
+        "empty": "keine Materialien gefunden"
+      },
+      "MaterialCatalogCard": {
+        "button": {
+          "select": "Auswählen"
+        }
+      },
+      "MaterialPreView": {
+        "button": {
+          "select": "Auswählen"
+        }
+      },
+      "MaterialView": {
+        "button": {
+          "change": "Ändern"
+        }
+      }
+    }
   },
   "Test": {}
 }

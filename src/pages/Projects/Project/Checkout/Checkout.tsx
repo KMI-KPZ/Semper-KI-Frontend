@@ -62,12 +62,14 @@ const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center gap-5">
-      <Heading variant="h1">{t("Checkout.title")}</Heading>
+      <Heading variant="h1">
+        {t("Projects.Project.Checkout.Checkout.title")}
+      </Heading>
       <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5 md:flex-row">
         <Button
           onClick={handleSubmit(handleOnClickButtonSend)}
           endIcon={<SendIcon fontSize="large" />}
-          title={t("Checkout.button.send")}
+          title={t("Projects.Project.Checkout.Checkout.button.send")}
         />
       </div>
       <div
@@ -84,7 +86,9 @@ const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
             />
           ))
         ) : (
-          <Heading variant="h2">{t("Checkout.error.no-items")}</Heading>
+          <Heading variant="h2">
+            {t("Projects.Project.Checkout.Checkout.error.no-items")}
+          </Heading>
         )}
       </div>
     </div>

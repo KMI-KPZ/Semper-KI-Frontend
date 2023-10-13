@@ -14,14 +14,14 @@ const ProjectInfo: React.FC<ProjectInfoProps> = (props) => {
   return (
     <div className="flex w-fit flex-col items-start justify-center gap-5 bg-white p-10">
       <Text variant="body" className="break-all">
-        {t("Projects.ProjectInfo.id")} {project.projectID}
+        {t("Projects.Project.components.Info.id")} {project.projectID}
       </Text>
       <Text variant="body">
-        {t("Projects.ProjectInfo.created")}{" "}
+        {t("Projects.Project.components.Info.created")}{" "}
         {new Date(project.created).toLocaleDateString()}
       </Text>
       <Text variant="body">
-        {t("Projects.ProjectInfo.updated")}{" "}
+        {t("Projects.Project.components.Info.updated")}{" "}
         {new Date(project.updated).toLocaleDateString()}
       </Text>
     </div>

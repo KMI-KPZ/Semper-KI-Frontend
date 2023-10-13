@@ -60,7 +60,7 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
       {state.edit === true ? (
         <>
           <Heading variant={headerType} className="md:whitespace-nowrap">
-            {t("Projects.ProjectView.name")}
+            {t("Projects.Project.components.TitleForm.name")}
           </Heading>
           <input
             autoFocus
@@ -73,7 +73,7 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
         </>
       ) : (
         <Heading variant={headerType} className="md:whitespace-nowrap">
-          {t("Projects.ProjectView.name")} {title}
+          {t("Projects.Project.components.TitleForm.name")} {title}
         </Heading>
       )}
       <PermissionGate element="ProjectButtonEditName">
@@ -81,7 +81,7 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
           width="fit"
           onClick={handleOnClickEditCheckButton}
           variant="icon"
-          title={t("Projects.ProjectView.button.editName")}
+          title={t("Projects.Project.components.TitleForm.button.edit")}
           children={
             state.edit ? (
               <CheckIcon fontSize="small" />

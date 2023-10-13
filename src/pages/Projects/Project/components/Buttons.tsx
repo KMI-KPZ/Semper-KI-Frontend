@@ -50,7 +50,7 @@ type ProjectButtonType =
 
 const ProjectButtonData: ProjectButtonProps[] = [
   {
-    title: "Projects.ProjectCollection.button.delete",
+    title: "Projects.Project.components.Buttons.button.delete",
     type: "Delete",
     icon: <DeleteForever />,
     contractor: false,
@@ -62,49 +62,49 @@ const ProjectButtonData: ProjectButtonProps[] = [
     ],
   },
   {
-    title: "Projects.ProjectCollection.button.edit",
+    title: "Projects.Project.components.Buttons.button.edit",
     type: "Edit",
     icon: <EditIcon />,
     contractor: false,
     allowedStates: [ProcessStatus.DRAFT],
   },
   {
-    title: "Projects.ProjectCollection.button.cancel",
+    title: "Projects.Project.components.Buttons.button.cancel",
     type: "Cancel",
     icon: <CancelIcon />,
     contractor: false,
     allowedStates: [ProcessStatus.REQUESTED],
   },
   {
-    title: "Projects.ProjectCollection.button.contractorSelect",
+    title: "Projects.Project.components.Buttons.button.contractorSelect",
     type: "ContractorSelection",
     icon: <FactoryIcon />,
     contractor: false,
     allowedStates: [ProcessStatus.DRAFT],
   },
   {
-    title: "Projects.ProjectCollection.button.verify",
+    title: "Projects.Project.components.Buttons.button.verify",
     type: "Verify",
     icon: <AssignmentTurnedInIcon />,
     contractor: false,
     allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
   },
   {
-    title: "Projects.ProjectCollection.button.reject",
+    title: "Projects.Project.components.Buttons.button.reject",
     type: "Reject",
     icon: <CancelIcon />,
     contractor: true,
     allowedStates: [ProcessStatus.REQUESTED, ProcessStatus.CLARIFICATION],
   },
   {
-    title: "Projects.ProjectCollection.button.confirm",
+    title: "Projects.Project.components.Buttons.button.confirm",
     type: "Confirm",
     icon: <CheckIcon />,
     contractor: true,
     allowedStates: [ProcessStatus.REQUESTED, ProcessStatus.CLARIFICATION],
   },
   {
-    title: "Projects.ProjectCollection.button.reProject",
+    title: "Projects.Project.components.Buttons.button.reProject",
     type: "ReProject",
     icon: <ReplayIcon />,
     contractor: false,
@@ -169,7 +169,9 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
     switch (button.type) {
       case "Delete":
         if (
-          window.confirm(t("Projects.ProjectCollection.button.cancel") + "?")
+          window.confirm(
+            t("Projects.Project.components.Buttons.button.cancel") + "?"
+          )
         ) {
           logger("checkefProcesses", checkedProcesses);
           checkedProcesses.forEach((processID) => {
@@ -179,28 +181,36 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
         break;
       case "Cancel":
         if (
-          window.confirm(t("Projects.ProjectCollection.button.cancel") + "?")
+          window.confirm(
+            t("Projects.Project.components.Buttons.button.cancel") + "?"
+          )
         ) {
           logger("//TODO Cancel");
         }
         break;
       case "ReProject":
         if (
-          window.confirm(t("Projects.ProjectCollection.button.reProject") + "?")
+          window.confirm(
+            t("Projects.Project.components.Buttons.button.reProject") + "?"
+          )
         ) {
           logger("//TODO ReProject");
         }
         break;
       case "Reject":
         if (
-          window.confirm(t("Projects.ProjectCollection.button.reject") + "?")
+          window.confirm(
+            t("Projects.Project.components.Buttons.button.reject") + "?"
+          )
         ) {
           logger("//TODO Reject");
         }
         break;
       case "Confirm":
         if (
-          window.confirm(t("Projects.ProjectCollection.button.confirm") + "?")
+          window.confirm(
+            t("Projects.Project.components.Buttons.button.confirm") + "?"
+          )
         ) {
           logger("//TODO Confirm");
         }

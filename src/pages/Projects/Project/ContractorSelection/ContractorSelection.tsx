@@ -80,7 +80,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
     <form className="flex w-full flex-col items-center gap-5">
       <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
         <Heading variant="h1">
-          {t("AfterProcess.Contractor.ContractorView.header")}
+          {t("Projects.Project.ContractorSelection.ContractorSelection.title")}
         </Heading>
       </div>
       <div className="flex w-full flex-col items-center justify-start gap-5">
@@ -122,7 +122,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
                   {errors.processes?.[index]?.contractorID ? (
                     <Text variant="body" className="text-red-500">
                       {t(
-                        "AfterProcess.Contractor.ContractorView.error.missing"
+                        "Projects.Project.ContractorSelection.ContractorSelection.error.missing"
                       )}
                     </Text>
                   ) : null}
@@ -134,13 +134,15 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
         <Button
           to=".."
           startIcon={<ArrowBackIcon />}
-          title={t("AfterProcess.Contractor.ContractorView.button.overview")}
+          title={t(
+            "Projects.Project.ContractorSelection.ContractorSelection.button.overview"
+          )}
         />
         <Button
           onClick={handleSubmit(onSubmit)}
           endIcon={<ArrowForwardIcon />}
           title={t(
-            "AfterProcess.Contractor.ContractorView.button.checkProject"
+            "Projects.Project.ContractorSelection.ContractorSelection.button.submit"
           )}
         />
       </div>

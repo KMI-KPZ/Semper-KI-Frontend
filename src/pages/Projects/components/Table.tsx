@@ -51,8 +51,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
   const { deleteProject } = useProject();
 
   const handleOnClickButtonDelete = (projectID: string) => {
-    window.confirm(t("project.overview.components.table.deleteConfirm")) ===
-    true
+    window.confirm(t("Project.components.table.deleteConfirm")) === true
       ? deleteProject.mutate(projectID)
       : logger("delete canceled");
   };
@@ -81,7 +80,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
       <PermissionGate element={"ProjectButtonDelete"}>
         <Button
           variant="secondary"
-          title={t("project.overview.components.table.button.delete")}
+          title={t("Project.components.table.button.delete")}
           children={<DeleteIcon />}
           onClick={() => handleOnClickButtonDelete(flatProject.projectID)}
         />
@@ -89,7 +88,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
       <PermissionGate element={"ProjectButtonSee"}>
         <Button
           variant="secondary"
-          title={t("project.overview.components.table.button.detail")}
+          title={t("Project.components.table.button.detail")}
           children={<VisibilityIcon />}
           to={`/projects/${flatProject.projectID}`}
         />
@@ -105,37 +104,37 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
             <tr className="border-b">
               <th className="p-3 md:pb-3">
                 <Text variant="strong">
-                  {t("project.overview.components.table.grouping")}
+                  {t("Project.components.table.grouping")}
                 </Text>
               </th>
               <th className="p-3 text-left md:pb-3">
                 <Text variant="strong">
-                  {t("project.overview.components.table.name")}
+                  {t("Project.components.table.name")}
                 </Text>
               </th>
               <th className="p-3 text-left md:pb-3">
                 <Text variant="strong">
-                  {t("project.overview.components.table.status")}
+                  {t("Project.components.table.status")}
                 </Text>
               </th>
               <th className="p-3 text-left md:pb-3">
                 <Text variant="strong">
-                  {t("project.overview.components.table.count")}
+                  {t("Project.components.table.count")}
                 </Text>
               </th>
               <th className="p-3 text-left md:pb-3">
                 <Text variant="strong" className="whitespace-nowrap">
-                  {t("project.overview.components.table.created")}
+                  {t("Project.components.table.created")}
                 </Text>
               </th>
               <th className="p-3 text-left md:pb-3">
                 <Text variant="strong" className="whitespace-nowrap">
-                  {t("project.overview.components.table.updated")}
+                  {t("Project.components.table.updated")}
                 </Text>
               </th>
               <th className="p-3 md:pb-3">
                 <Text variant="strong">
-                  {t("project.overview.components.table.actions")}
+                  {t("Project.components.table.actions")}
                 </Text>
               </th>
             </tr>
@@ -166,7 +165,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
                           <div className="flex w-full justify-center">
                             <Heading variant="h2">
                               {t(
-                                `project.overview.components.table.groups.${group.title}`
+                                `Project.components.table.groups.${group.title}`
                               )}
                             </Heading>
                           </div>

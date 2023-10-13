@@ -239,7 +239,7 @@ const useProjectEvent = (): ReturnProps => {
     setEvents(hydrateProjectEvents(newEvent, events));
     const projectEvent = newEvent;
     if (projectEvent.processes[0].messages > 0) {
-      toast(t("toast.projectEvent.message"), "/projects");
+      toast(t("App.hooks.useEvents.hooks.useProjectEvent.toast"), "/projects");
     }
     if (projectEvent.processes[0].status > 0) {
       toast(t("toast.projectEvent.status"), "/projects");

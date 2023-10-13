@@ -40,7 +40,7 @@ const useOrgaEvent = (): ReturnProps => {
   ) => {
     queryClient.invalidateQueries(["organizations"]);
     setEvents(hydrateOrgaEvents(newEvent, events));
-    toast(t("toast.orgaEvent"), "/organization");
+    toast(t("App.hooks.useEvents.hooks.useOrgaEvent.toast"), "/organization");
   };
   return { deleteOrgaEvent, handleNewOrgaEvent };
 };

@@ -23,7 +23,7 @@ export const OrganizationOutlet: React.FC<Props> = (props) => {
   return user.usertype === UserType.ORGANIZATION ? (
     <Outlet />
   ) : (
-    <Error text={t("PrivateRoutes.error.organization")} />
+    <Error text={t("Outlets.UserOutlet.error.organization")} />
   );
 };
 

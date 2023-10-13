@@ -1,5 +1,5 @@
-export enum EProcessStatusType {
-    "ok",
-    "error",
-    "missing",
+export enum ProcessStatusType {
+    "OK",
+    "ERROR",
+    "MISSING",
   }

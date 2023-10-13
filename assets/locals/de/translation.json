@@ -63,6 +63,37 @@
       "ORGANIZATION":"Organisation",
       "ADMIN":"Admin",
       "ANONYM":"Anonym"
+    },
+    "ProcessStatus":{
+      "DRAFT":"Entwurf",
+      "WAITING_FOR_OTHER_PROCESS":"Warten auf andere Prozesse",
+      "SERVICE_READY":"Service bereit",
+      "SERVICE_COMPLICATION":"Service Komplikation",
+      "CONTRACTOR_SELECTED":"Auftragnehmer ausgewählt",
+      "VERIFYING":"Überprüfen",
+      "VERIFIED":"Überprüft",
+      "REQUESTED":"Angefragt",
+      "CLARIFICATION":"Rückfragen",
+      "CONFIRMED_BY_CONTRACTOR":"Bestätigt durch Auftragnehmer",
+      "REJECTED_BY_CONTRACTOR":"Abgelehnt durch Auftragnehmer",
+      "CONFIRMED_BY_CLIENT":"Bestätigt durch Kunde",
+      "REJECTED_BY_CLIENT":"Abgelehnt durch Kunde",
+      "PRODUCTION":"In Produktion",
+      "DELIVERY":"Unterwegs",
+      "DISPUTE" : "Streitfall",
+      "COMPLETED":"Abgeschlossen",
+      "FAILED":"Fehlgeschlagen",
+      "CANCELED":"Abgebrochen"
+    },
+    "ServiceType":{
+      "MANUFACTURING":"Modell Herstellen lassen",
+      "MODELING":"Modell Entwerfen lassen",
+      "UNDEFINED":"Service auswahl"
+    },
+    "ProcessStatusType":{
+      "OK":"OK",
+      "ERROR":"Fehler",
+      "MISSING":"Fehlend"
     }
   },
   "components":{
@@ -71,6 +102,8 @@
     "Breadcrumb":{  
     },
     "CardView":{
+      "Card":{},
+      "CardView":{}
     },
     "CookieBanner":{
       "heading":"Cookie-Zustimmung verwalten",
@@ -94,14 +127,6 @@
         "imprint":"Impressum"
       }
     },
-    "Modal":{
-      "button":{
-        "close":"Schließen"
-      }
-    },
-    "PermissionGate":{
-      "message":"Diese Funktion ist mit ihren Rechten nicht nutzbar"
-    },
     "Footer":{
       "Footer":{
         "imprint":"Impressum",
@@ -110,21 +135,77 @@
         "instagram":"Instagram",
         "mastodon":"Mastodon"
       }
+    },
+    "Header":{
+      "Header":{
+        "title":"SEMPER-KI",
+        "button":{
+          "close":"Menu Schließen",
+          "open":"Menu Öffnen"
+        }
+      },
+      "HeaderData":{
+        "about-us": "Über uns",
+        "login": "Anmelden",
+        "register": "Registrieren",
+        "continue": "Fortfahren",
+        "cart": "Warenkorb",
+        "logout": "Abmelden",
+        "orders": "Aufträge",
+        "contracts": "Verträge",
+        "account": "Konto",
+        "test": "Test",
+        "guide": "Wegweiser"
+      },
+      "HeaderItem":{}
+    },
+    "Modal":{
+      "button":{
+        "close":"Schließen"
+      }
+    },
+    "PermissionGate":{
+      "message":"Diese Funktion ist mit ihren Rechten nicht nutzbar"
     }
   },
-   
-  
+  "component-library":{
+    "Badege":{},
+    "Button":{},
+    "Container":{},
+    "Divider":{},
+    "Error":{
+      "incomplete":"Bitte {{name}} vervollständigen.",
+      "empty":"Keine {{name}} vorhanden"
+    },
+    "Input":{},
+    "Loading":{
+      "LoadingSuspense":{     
+        "loading":"Laden...",
+        "error":"Error:"
+      },
+      "LoadingAnimation":{
+        "text":"Laden"
+      }
+    },
+    "Modal":{},
+    "Page":{},
+    "Search":{},
+    "Swicht":{},
+    "Typography":{}
+  },
   "Admin":{
-    "Overview":{
-      "title":"Adminbereich"
+    "hooks":{
+      "useAdmin":{}
     },
-    "AdminMaterialView":{
-      "header": "Materialien",
-      "material-id": "Material-ID",
-      "name": "Name",
-      "propList": "Eigenschaftenliste"
+    "Materials":{
+      "Materials":{
+        "header": "Materialien",
+        "material-id": "Material-ID",
+        "name": "Name",
+        "propList": "Eigenschaftenliste"
+      }
     },
-    "AdminModelView": {
+    "Models": {
       "header": "Modelle",
       "name": "Name",
       "date": "Datum",
@@ -133,12 +214,26 @@
       "certificates": "Zertifikate",
       "URI": "URI"
     },
-    "AdminOrderView":{
+    "Organization":{
+      "title":"Organisationsverwaltung",
+      "empty":"keine Organisation gefunden",
+      "name": "Name",
+      "created": "Created",
+      "accessed": "Accessed",
+      "updated": "Updated",
+      "actions": "Aktionen",
+      "canManufacturer":"Hersteller",
+      "button":{
+        "delete":"Löschen"
+      },
+      "confirm":"Organisation wirklich löschen?"
+    },
+    "Projects":{
       "header": "Aufträge",
       "orderID": "Bestellnummer",
       "clientName":"Kunde",
       "orderTitle":"Titel",
-      "subOrderCount":"Anzahl Teilaufträge",
+      "subProjectCount":"Anzahl Teilaufträge",
       "status":"Status",
       "accessed":"Zugriff",
       "created":"Erstellt",
@@ -168,24 +263,36 @@
       },
       "confirm":"User wirklich löschen?"
     },
-    "Orga":{
-      "title":"Organisationsverwaltung",
-      "empty":"keine Organisation gefunden",
-      "name": "Name",
-      "created": "Created",
-      "accessed": "Accessed",
-      "updated": "Updated",
-      "actions": "Aktionen",
-      "canManufacturer":"Hersteller",
-      "button":{
-        "delete":"Löschen"
-      },
-      "confirm":"Organisation wirklich löschen?"
-    }
+    "Admin":{}  
   },
   "App":{
     "title":"Semper-KI",
-    "loading":"Laden..."
+    "loading":"Laden...",
+    "components":{},
+    "hooks":{
+      "useEvents":{
+        "hooks":{
+          "useMissedEvent":{},
+          "useOrgaEvent":{
+            "toast":"Ihre Organisation wurde aktualisiert"
+          },
+          "useProjectEvents":{
+            "toast":{
+              "status":"Ihre Aufträge wurde aktualisiert",
+              "message":"Neue Nachricht"
+            }
+          },
+          "useWebsocket":{}
+        },
+        "useEvents":{
+          "toast":{
+            "permission":"Ihre Rechte wurden aktualisiert"
+          }
+        }
+      },
+      "useBodyScroll":{},
+      "useToast":{}
+    }
   },
   "EmailVerification":{
     "title":"Email Verifizieren",
@@ -209,7 +316,7 @@
           "claim4":"Vom Prototyp zu Large Scale",
           "claim5":"Bei uns finden Sie passende Partner für jeden Schritt Ihres Produktionsprozesses."
         },
-        "Order":{
+        "Project":{
           "title":"Auftrag",
           "subTitle":"zur Herstellung eines Bauteils",
           "button":{
@@ -235,9 +342,9 @@
         "Projects":{
           "title":"Meine Projekte"
         },
-        "Order":{
+        "Project":{
           "title":"Aufträge",
-          "noOrders":"Keine Aufträge vorhanden",
+          "noProjects":"Keine Aufträge vorhanden",
           "button":{
             "new":"Neuer Auftrag",
             "orders":"Meine Aufträge",
@@ -298,7 +405,7 @@
     "HomeNewsCardItem":{
       "more":"Mehr lesen..."
     },
-    "HomeOrderCard":{
+    "HomeProjectCard":{
       "header":"Aufträge",
       "order":{
         "header":"Aktuell",
@@ -382,7 +489,31 @@
     "header":"Gesetzliches",
     "imprint":"Impressum",
     "privacy":"Datenschutzerklärung",
-    "contact":"Kontakt"
+    "contact":"Kontakt",
+    "Contact":{
+      "Contact":{
+        "header":"Kontakt",
+        "title":{
+          "name":"Name",
+          "email":"E-Mail",
+          "message":"Nachricht"
+        },
+        "input":{
+          "name":"Name...",
+          "email":"E-Mail...",
+          "message":"Nachricht..."
+        },
+        "button":{
+          "send":"Nachricht Senden"
+        }
+      }
+    },
+    "Imprint":{
+      "header":"Impressum",
+      "disclaimer":{
+        "header":"Disclaimer – rechtliche Hinweise"
+      }
+    }
   },
   "Login":{
     "Login":{
@@ -534,6 +665,15 @@
       }
     }
   },
+  "Outlets":{
+    "UserOutlets":{
+      "error":{
+        "client":"Sie Müssen als Kunde angemeldet Sein um diese Seite zu sehen",
+        "organization":"Sie Müssen als Hersteller angemeldet Sein um diese Seite zu sehen",
+        "admin":"404 - Seite nicht gefunden"
+      }
+    }
+  },
   "Portfolio":{
       "Portfolio":{
         "header":"Unser Portfolio",
@@ -618,131 +758,42 @@
       }
     }
   },
-
-  "CardView":{
-    "Card":{},
-    "CardView":{}
-  },
-  "Contact":{
-    "Contact":{
-      "header":"Kontakt",
-      "title":{
-        "name":"Name",
-        "email":"E-Mail",
-        "message":"Nachricht"
-      },
-      "input":{
-        "name":"Name...",
-        "email":"E-Mail...",
-        "message":"Nachricht..."
-      },
-      "button":{
-        "send":"Nachricht Senden"
-      }
-    }
-  },
-  "General":{
-    "Badege":{},
-    "Button":{},
-    "ErrorView":{
-      "incomplete":"Bitte {{name}} vervollständigen.",
-      "empty":"Keine {{name}} vorhanden"
-    },
-    "LoadingSuspense":{     
-      "loading":"Laden...",
-      "error":"Error:"
-    },
-    "LoadingAnimation":{
-      "text":"Laden"
-    },
-    "UserSwitch":{
-      "button":{
-        "client":"Als Einzelnutzer",
-        "contractor":"Als Organisation"
-      }
-    }
-  },
-  "Guide":{
-    "Answer":{
-      "GuideAnswer":{},
-      "GuideAnswers":{
-        "header":"Vorgaben"
-      }
-    },
-    "Components":{
-      "GButton":{},
-      "GMultiSelection":{},
-      "GOption":{},
-      "GRangeSlider":{},
-      "GSelection":{}
-    },
-    "Overview":{
-      "GuideOverview":{
-        "header":"Überblick",
+  "Projects":{
+    "order":{
+      "overview":{
+        "orga":"Eingegangene Aufträge",
+        "title":"Meine Aufträge",
+        "draft":"Entwürfe",
+        "ongoing":"Laufend",
+        "completed":"Abgeschlossen",
         "button":{
-          "search":"Suchen"
+          "create":"Neuen Auftrag erstellen"
+        },
+        "components":{
+          "table":{
+            "deleteConfirm":"Möchten Sie den Auftrag wirklich löschen?",
+            "grouping":"Gruppierung",
+            "name":"Name",
+            "status":"Status",
+            "created":"Erstellt am",
+            "updated":"Aktualisiert am",
+            "count":"Anzahl",
+            "actions":"Aktionen",
+            "noItems":"keine Aufträge",
+            "button":{
+              "delete":"Löschen",
+              "edit":"Bearbeiten",
+              "detail":"Details"
+            },
+            "groups":{
+              "draft":"Entwürfe",
+              "ongoing":"Laufend",
+              "completed":"Abgeschlossen"
+            }
+          }
         }
       }
     },
-    "Question":{
-      "GuideQuestion":{
-        "error":{
-          "missing":"Bitte mindestens eine Option auswählen"
-        }
-      }
-    },
-    "Guide":{},
-    "GuideRoutes":{
-      "header":"Angeleitete Einstiege",
-      "information":{
-        "header":"zu Informationen",
-        "explanation":"Informationen zum Thema 3D-Druck",
-        "beginner":"Anfänger",
-        "advanced":"Fortgeschritten",
-        "expert":"Experte"
-      },
-      "service":{
-        "header":"um Service Nutzen",
-        "explanation":"Einstieg in unsere Services",
-        "use-produce":"Bauteil Herstellen lassen",
-        "use-design":"Modell entwerfen lassen",
-        "use-accompany":"Gesamtprozess begleiten lassen",
-        "provide-produce":"Bauteile Herstellen",
-        "provide-design":"Modelle entwerfen",
-        "provide-accompany":"Gesamtprozesse begleiten"
-      }
-    }
-  },
-  "Header":{
-    "Header":{
-      "title":"SEMPER-KI",
-      "button":{
-        "close":"Menu Schließen",
-        "open":"Menu Öffnen"
-      }
-    },
-    "HeaderData":{
-      "about-us": "Über uns",
-      "login": "Anmelden",
-      "register": "Registrieren",
-      "continue": "Fortfahren",
-      "cart": "Warenkorb",
-      "logout": "Abmelden",
-      "orders": "Aufträge",
-      "contracts": "Verträge",
-      "account": "Konto",
-      "test": "Test",
-      "guide": "Wegweiser"
-    },
-    "HeaderItem":{}
-  },
-  "Imprint":{
-    "header":"Impressum",
-    "disclaimer":{
-      "header":"Disclaimer – rechtliche Hinweise"
-    }
-  },
-  "Orders":{
     "ChatView":{
       "header":"Nachrichten",
       "noMessages":"Keine Nachrichten vorhanden",
@@ -752,13 +803,13 @@
         "send":"Nachricht Senden"
       }
     },
-    "OrderCollection":{
+    "ProjectCollection":{
       "title":"Auftrag",
       "selected":"{{count}} Ausgewählt",
-      "subOrders":"Teilaufträge",
+      "subProjects":"Teilaufträge",
       "id":"AuftragsID",
       "date":"Datum",
-      "noSubOrders":"Keine Teilaufträge vorhanden",
+      "noSubProjects":"Keine Teilaufträge vorhanden",
       "selectAll":"Alle auswählen",
       "confirm":{
         "delete":"Aufträge wirklich löschen?"
@@ -768,7 +819,7 @@
         "contractorSelect":"Auftragnehmer auswählen",
         "edit":"Bearbeiten",
         "cancel":"Stornieren",
-        "reOrder":"erneut Bestellen",
+        "reProject":"erneut Bestellen",
         "reject":"Ablehnen",
         "confirm":"Bestätigen",
         "verify":"Überprüfen",
@@ -791,21 +842,21 @@
         "header":"Status"
       }
     },
-    "OrderCollectionOverview":{
+    "ProjectCollectionOverview":{
       "headline":{
         "client":"Aufträge",
         "manufacturer":"Aufträge"
       },
       "empty":"keine vorhandenen Aufträge"    
     },
-    "OrderFileView":{
+    "ProjectFileView":{
       "header":"Dateien",
       "empty":"keine Dateien gefunden",
       "button":{
         "download":"Herunterladen"
       }
     },
-    "OrderPreView":{
+    "ProjectPreView":{
       "requested":"Angefragt",
       "verify":"Rückfragen",
       "rejected":"Abgelehnt",
@@ -814,7 +865,7 @@
       "delivery":"Unterwegs",
       "finished":"Abgeschlossen"
     },
-    "OrderView":{
+    "ProjectView":{
       "name":"Name:",
       "id":"TeilauftragsID:",
       "created":"Erstellt am:",
@@ -826,7 +877,7 @@
         "info":"Informationen",
         "editName":"Name ändern",
         "cancel":"Stornieren",
-        "reOrder":"erneut Bestellen",
+        "reProject":"erneut Bestellen",
         "reject":"Ablehnen",
         "confirm":"Bestätigen",
         "verify":"Überprüfen",
@@ -836,7 +887,7 @@
       },
       "confirm":{
         "cancel":"Auftrag wirklich stonieren?",
-        "reOrder":"Auftrag wirklich erneut Bestellen?",
+        "reProject":"Auftrag wirklich erneut Bestellen?",
         "reject":"Auftrag wirklich Ablehnen?"
       },
       "Service":{
@@ -858,193 +909,23 @@
         "finished":"Abgeschlossen"
       }
     },
-    "OrderInfo":{
+    "ProjectInfo":{
       "id":"AuftragsID:",
       "created":"Erstellt am:",
       "updated":"Aktualisiert am:"
-    }
-  },
-  "PopUp":{},
-  "PrivateRoutes":{
-    "error":{
-      "client":"Sie Müssen als Kunde angemeldet Sein um diese Seite zu sehen",
-      "organization":"Sie Müssen als Hersteller angemeldet Sein um diese Seite zu sehen",
-      "admin":"404 - Seite nicht gefunden"
-    }
-  },
-  "Process":{
-    "Filter":{
-      "Components":{
-        "FColor":{},
-        "FDate":{},
-        "FMultiSelection":{},
-        "FNumber":{},
-        "FSelection":{},
-        "FSlider":{},
-        "FSliderSelection":{},
-        "FText":{},
-        "FTextArea":{}
-      },
-      "Filter":{
-        "header":"Vorgaben",
-        "button":{
-          "reset":"Zurücksetzen",
-          "apply":"Anwenden"
-        }
-      },
-      "FilterCard":{
-        "category":{
-          "general":"Allgemein",
-          "model":"Modell",
-          "material":"Material",
-          "proceeding":"Verfahren",
-          "manufacturer":"Hersteller",
-          "post-Processing":"Nachbearbeitung",
-          "additive":"Zusatz",
-          "test":"Test"
-        }
-      },
-      "FilterItem":{}
     },
-    "Header":{
-      "Cart":{
-        "Cart":{},
-        "CartItem":{
-          "title":"Auftrag",
-          "item":"Artikel",
-          "upload":"Modell Hochladen",
-          "new":"Artikel erstellen",
-          "cart":"Warenkorb",
-          "button":{
-            "expand":"Ausklappen",
-            "collapse":"Zusammenklappen",
-            "overview":"Übersicht",
-            "edit":"Bearbeiten",
-            "delete":"Löschen"
-          }
-        }
+    "Checkout":{
+      "title":"Aufträge anfragen",
+      "button":{
+        "send":"Anfragen"
       },
-      "Search":{
-        "placeholder":"Suche ..."
-      },
-      "StatusIcon":{},
-      "Wizard": {
-        "Wizard":{
-          "model": "Modell",
-          "material":"Material",
-          "post-processing": "Nachbearbeitung"
-        },
-        "WizardCard":{}
-      },
-      "Header":{}
-    },
-    "Material":{
-      "MaterialCatalog":{
-        "empty":"keine Materialien gefunden"
-      },
-      "MaterialCatalogCard":{
-        "button":{
-          "select":"Auswählen"
-        }
-      },
-      "MaterialPreView":{
-        "button":{
-          "select":"Auswählen"
-        }
-      },
-      "MaterialView":{
-        "button":{
-          "change":"Ändern"
-        }
-      }
-    },
-    "Model":{
-      "ModelCard":{
-        "license":"Lizenz",
-        "certificates":"Zertifikate",
-        "button":{
-          "select":"Auswählen"
-        }
-      },
-      "ModelCatalog":{
-        "upload":"Modell Hochladen",
-        "button":{
-          "upload":"Link Modell Hochladen",
-          "select":"Auswählen"
-        },
-        "empty":"keine Modelle gefunden"
-      },
-      "ModelPreView":{
-        "created":"Erstellt am",
-        "license":"Lizenz",
-        "certificates":"Zertifikate",
-        "noCertificates":"keine",
-        "button":{
-          "select":"Auswählen"
-        }
-      },
-      "ModelUpload": {
-        "header": "Modell hochladen",
-        "loading":"Hochladen...",
-        "error": "Bitte einen der folgenden Dateitypen hochladen .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF",
-        "card": {
-          "header": "Modell hochladen per Dran & Drop",
-          "text": "( .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF)"
-        },
-        "button":{
-          "upload": "Hochladen"
-        }
-      },
-      "ModelView":{
-        "created":"Erstellt am",
-        "license":"Lizenz",
-        "certificates":"Zertifikate",
-        "empty":"keine",
-        "button":{
-          "change":"Ändern"
-        }
-      }
-    },
-    "PostProcessing":{
-      "Catalog":{
-        "empty":"keine Nachbearbeitungen gefunden",
-        "button":"Weiter"
-      },
-      "ItemCard":{
-        "button":{
-          "select":"Auswählen",
-          "deselect":"Entfernen"
-        }
-      },
-      "ItemView":{},
-      "PostProcessingView":{
-        "empty":"keine Nachbearbeitungen gefunden"
-      }
-    },
-    "NewProcess":{
-      "header":"neue Auftrag Starten"
-    },
-    "ProcessView":{
-      "item":"Artikel",
-      "path":{
-        "model":"Modell finden",
-        "upload":"Modell/e hochladen",
-        "material":"Material finden",
-        "postprocessing":"Nachbearbeitung hinzufügen"
+      "error":{
+        "no-items":"keine Aufträge vorhanden"
       }
     }
   },
-  "Projects":{
-    "Projects":{
-      "title":"Meine Projekte",
-      "title2":"Eigegangene Projekte",
-      "empty":"keine Projekte vorhanden",
-      "buttons":{
-        "create":"Projekt erstellen"
-      }
-    },
-    "Project":{
-    }
+  "Redirect":{
+
   },
   "RegisterOrganization":{
       "title":"Organisation Registrieren",
@@ -1150,6 +1031,8 @@
         "header":"Nachbearbeitungen"
       }
   },
+  "Routes":{
+  },
   "Service":{
     "ServiceQuestion":{},
     "ServiceRoutes":{
@@ -1165,175 +1048,6 @@
     },
     "ServiceWizard":{}
   },
-
-
-  
-  "AfterProcess":{
-    "Cart":{
-      "Cart":{
-        "header":"Warenkorb",
-        "item_one":"das Produkt",
-        "item_other":"die Produkte",
-        "noItems":"keine Produkte",
-        "edit":"Bearbeiten",
-        "request":"Anfragen",
-        "deleteCart":"Warenkorb löschen"
-      },
-      "CartItem":{
-        "model":"Modell",
-        "material":"Material",
-        "postProcessing_one":"Nachbearbeitung",
-        "postProcessing_other":"Nachbearbeitungen"
-       
-      }
-    },
-    "Checkout":{
-      "Checkout": {
-        "title":"Auftrag überprüfen",
-        "button":{
-          "verify":"Überprüfen",
-          "request":"Überprüfen & Anfragen",
-          "printable":"Druckbarkeit überprüfen",
-          "logistics":"Lieferzeit berechnen",
-          "price":"Preis berechnen"
-        },
-        "error":{
-          "no-items":"keine Items vorhanden"
-        },
-        "success":{
-          "send":"Der Auftrag wurde Erfolgreich übermittelt!",
-          "redirect":"Sie werden nun zu Startseite weitergeleitet"
-        }
-      },
-      "Item":{
-        "printable":"Druckbarkeit",
-        "logistics":"Lieferzeit",
-        "price":"Preis"
-      }
-    },
-    "Manufacturer":{
-      "ManufacturerItem":{
-        "header":"Verfügbare Hersteller:"
-      },
-      "ManufacturerView":{
-
-        "header":"Hersteller auswählen",
-        "noManufacturerSelected":"Bitte bei jedem Item einen Hersteller auswählen!",
-        "button":{
-          "overview":"Auftragsdetails",
-          "checkOrder":"Auftrag überprüfen"
-        },
-        "error":{
-          "missing":"Bitte mindestens eine Option auswählen"
-        }
-      }
-    }
-   
-  },
-  "toast":{
-    "component":{
-      "to":"zur Seite"
-    },
-    "permissionEvent":"Ihre Rechte wurden aktualisiert",
-    "orgaEvent":"Ihre Organisation wurde aktualisiert",
-    "orderEvent":{
-      "status":"Ihre Aufträge wurde aktualisiert",
-      "message":"Neue Nachricht"
-    }
-  },
-  
-  "order":{
-    "overview":{
-      "orga":"Eingegangene Aufträge",
-      "title":"Meine Aufträge",
-      "draft":"Entwürfe",
-      "ongoing":"Laufend",
-      "completed":"Abgeschlossen",
-      "button":{
-        "create":"Neuen Auftrag erstellen"
-      },
-      "components":{
-        "table":{
-          "deleteConfirm":"Möchten Sie den Auftrag wirklich löschen?",
-          "grouping":"Gruppierung",
-          "name":"Name",
-          "status":"Status",
-          "created":"Erstellt am",
-          "updated":"Aktualisiert am",
-          "count":"Anzahl",
-          "actions":"Aktionen",
-          "noItems":"keine Aufträge",
-          "button":{
-            "delete":"Löschen",
-            "edit":"Bearbeiten",
-            "detail":"Details"
-          },
-          "groups":{
-            "draft":"Entwürfe",
-            "ongoing":"Laufend",
-            "completed":"Abgeschlossen"
-          }
-        }
-      }
-    }
-  },
-  "NewOrder":{
-    "demo":"Demoauftrag wird erstellt...",
-    "order":"Auftrag wird erstellt..."
-  },
-  "OrderRoutes":{
-    "Service":{
-      "Service":{
-        "button":{
-          "delete":"Service Löschen",
-          "edit":"Service Bearbeiten"
-        }
-      },
-      "Overview":{
-        "components":{
-          "Item":{
-            "empty":"Serviceauswahl"
-          }
-        }
-      },
-      "type":{
-        "MANUFACTURING":"Modell Herstellen lassen",
-        "MODELING":"Modell Entwerfen lassen",
-        "UNDEFINED":"Service auswahl",
-        "undefined":"Service auswahl"
-      },
-      "Select":{
-        "title":"Service auswählen"
-      }
-    },
-    "SubOrder":{
-      "components":{
-        "StateButton":{
-          "edit":"Bearbeiten",
-          "continue":"Service Fortsetzen",
-          "selectContractor":"Auftragnehmer auswählen",
-          "verify":"Überprüfen",
-          "request":"Anfragen"
-        }
-      }
-    }
-  },
-  "Checkout":{
-    "title":"Aufträge anfragen",
-    "button":{
-      "send":"Anfragen"
-    },
-    "error":{
-      "no-items":"keine Aufträge vorhanden"
-    }
-  },
-  "Coypu":{
-    "title":"Coypu News",
-    "title2":"nutzen nur für forschungszwecke",
-    "button":{
-      "link":"Zum Artikel",
-      "more":"Mehr lesen...",
-      "less":"Weniger lesen..."
-    }
-  }
+  "Test":{
+  } 
 }

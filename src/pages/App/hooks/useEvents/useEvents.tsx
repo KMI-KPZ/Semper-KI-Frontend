@@ -68,7 +68,10 @@ const useEvents = (
       case "permissionEvent":
         queryClient.invalidateQueries(["organizations", "users"]);
         reloadPermissions();
-        toast(t("toast.permissionEvent"), "/organization");
+        toast(
+          t("App.hooks.useEvents.useEvents.toast.permission"),
+          "/organization"
+        );
         break;
     }
   };

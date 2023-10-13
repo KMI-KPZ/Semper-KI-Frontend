@@ -9,7 +9,7 @@ export interface ModelProps {
   createdBy: string;
 }
 
-export enum EModelType {
-  "kiss",
-  "user",
+export enum ManufacturingModelType {
+  "KISS",
+  "USER",
 }

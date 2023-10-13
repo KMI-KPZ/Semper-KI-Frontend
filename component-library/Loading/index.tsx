@@ -60,7 +60,7 @@ export const LoadingSuspense = <T,>(
     children,
     query,
     animation = false,
-    loadingText = t("General.LoadingSuspense.loading"),
+    loadingText = t("component-library.Loading.LoadingSuspense.loading"),
     text = true,
     errorText,
     refetchLoading,
@@ -86,7 +86,9 @@ export const LoadingSuspense = <T,>(
       <div className="flex flex-row items-center justify-center">
         <Heading variant="h1">
           {errorText === undefined
-            ? `${t("General.LoadingSuspense.error")} : ${query.error.message}`
+            ? `${t("component-library.Loading.LoadingSuspense.error")} : ${
+                query.error.message
+              }`
             : errorText}
         </Heading>
       </div>

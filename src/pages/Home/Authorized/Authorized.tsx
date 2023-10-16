@@ -1,14 +1,13 @@
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { UserProps, UserType } from "@/hooks/useUser/types";
 import { Event } from "@/pages/App/types";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import HomeAuthorizedProject from "./components/Project";
-import HomeAuthorizedOrganization from "./components/Organization";
-import HomeAuthorizedResources from "./components/Resources";
-import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import HomeAuthorizedAdmin from "./components/Admin";
+import HomeProjects from "../components/Projects";
+import HomeOrganization from "../components/Organization";
+import HomeResources from "../components/Resources";
+import HomeAdmin from "../components/Admin";
 import Coypu from "../components/Coypu";
-import HomeAuthorizedProjects from "./components/Projects";
 
 interface AuthorizedPropsHome {
   user: UserProps;
@@ -24,21 +23,20 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
       className="flex w-full flex-col items-center justify-center gap-10"
       data-testid="home-authorized"
     >
-      <HomeAuthorizedProjects />
       <PermissionGate element={"HomeAuthorizedProject"}>
-        <HomeAuthorizedProject />
+        <HomeProjects />
       </PermissionGate>
       {user.usertype === UserType.ORGANIZATION ? (
         <>
           <PermissionGate element={"HomeAuthorizedOrganization"}>
-            <HomeAuthorizedOrganization />
+            <HomeOrganization />
           </PermissionGate>
           <PermissionGate element={"HomeAuthorizedResources"}>
-            <HomeAuthorizedResources />
+            <HomeResources />
           </PermissionGate>
         </>
       ) : null}
-      {user.usertype === UserType.ADMIN ? <HomeAuthorizedAdmin /> : null}
+      {user.usertype === UserType.ADMIN ? <HomeAdmin /> : null}
       <Coypu />
     </div>
   );

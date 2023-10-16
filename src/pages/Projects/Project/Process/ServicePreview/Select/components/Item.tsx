@@ -1,20 +1,21 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@component-library/Typography";
-import { ServiceType } from "../../hooks/useService";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 import { useNavigate, useParams } from "react-router-dom";
 import logger from "@/hooks/useLogger";
+import { ServiceType } from "@/pages/Service/hooks/useService";
 
 export interface ServiceSelectItemProps {
   serviceType: ServiceType;
   icon: React.ReactNode;
   active: boolean;
+  manuelProcessID: string;
   serviceSelected?: boolean;
 }
 
-const ServiceSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
-  const { active, icon, serviceType, serviceSelected } = props;
+const ServicePreviewSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
+  const { active, icon, serviceType, manuelProcessID, serviceSelected } = props;
   const { t } = useTranslation();
   const { updateProcess, updateProcessWithProcessID } = useProcess();
   const navigate = useNavigate();
@@ -24,8 +25,24 @@ const ServiceSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
-    if (active) {
-      navigateToService();
+
+    if (
+      processID === undefined ||
+      (processID !== undefined && processID !== manuelProcessID)
+    ) {
+      updateProcessWithProcessID.mutate(
+        {
+          processID: manuelProcessID,
+          updates: {
+            changes: { service: { type: serviceType } },
+          },
+        },
+        {
+          onSuccess: () => {
+            navigateToService();
+          },
+        }
+      );
     } else {
       updateProcess.mutate(
         { changes: { service: { type: serviceType } } },
@@ -39,7 +56,11 @@ const ServiceSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
   };
 
   const navigateToService = () => {
-    navigate("edit");
+    navigate(
+      processID !== undefined && processID !== manuelProcessID
+        ? `../${manuelProcessID}/service/edit`
+        : `${manuelProcessID}/service/edit`
+    );
   };
 
   return (
@@ -63,4 +84,4 @@ const ServiceSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
   );
 };
 
-export default ServiceSelectItem;
+export default ServicePreviewSelectItem;

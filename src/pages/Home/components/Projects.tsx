@@ -1,14 +1,14 @@
-import { Button } from "@component-library/Button";
-import { Heading } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import HomeContainer from "../../components/Container";
+import { Heading } from "@component-library/Typography";
+import { Button } from "@component-library/Button";
 import { useProject } from "@/pages/Projects/hooks/useProject";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import HomeContainer from "./Container";
 
-interface HomeAuthorizedProjectProps {}
+interface HomeProjectsProps {}
 
-const HomeAuthorizedProject: React.FC<HomeAuthorizedProjectProps> = (props) => {
+const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   // const { projectsQuery } = useFlatProjects();
@@ -19,17 +19,17 @@ const HomeAuthorizedProject: React.FC<HomeAuthorizedProjectProps> = (props) => {
 
   return (
     <HomeContainer>
-      <Heading variant="h2">{t("Home.Home.Authorized.Project.title")}</Heading>
+      <Heading variant="h2">{t("Home.components.Projects.title")}</Heading>
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
         <PermissionGate element={"ProjectsButtonNew"}>
           <Button
-            title={t("Home.Home.Authorized.Project.button.new")}
+            title={t("Home.components.Projects.button.new")}
             onClick={handleOnClickButtonNew}
           />
         </PermissionGate>
         <PermissionGate element={"ProjectsButton"}>
           <Button
-            title={t("Home.Home.Authorized.Project.button.projects")}
+            title={t("Home.components.Projects.button.projects")}
             to="/projects"
           />
         </PermissionGate>
@@ -38,4 +38,4 @@ const HomeAuthorizedProject: React.FC<HomeAuthorizedProjectProps> = (props) => {
   );
 };
 
-export default HomeAuthorizedProject;
+export default HomeProjects;

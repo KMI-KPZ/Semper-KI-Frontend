@@ -9,6 +9,8 @@ import ProcessServiceModelling from "./components/Modelling";
 import { Heading } from "@component-library/Typography";
 import { Divider } from "@component-library/Divider";
 import ServiceSelect from "@/pages/Service/Select/Select";
+import logger from "@/hooks/useLogger";
+import ServicePreviewSelect from "./Select/Select";
 
 interface ProcessServicePreviewProps {
   service: GeneralServiceProps;
@@ -20,14 +22,9 @@ const ProcessServicePreview: React.FC<ProcessServicePreviewProps> = (props) => {
   const { t } = useTranslation();
 
   const renderService = () => {
-    if (
-      service.type === undefined ||
-      (service.type !== undefined && service.type === undefined)
-    )
-      return <ServiceSelect processID={processID} />;
     switch (service.type) {
       case ServiceType.UNDEFINED:
-        return <ServiceSelect processID={processID} />;
+        return <ServicePreviewSelect service={service} processID={processID} />;
       case ServiceType.MANUFACTURING:
         return <ProcessServiceManufacturing service={service} />;
       case ServiceType.MODELING:

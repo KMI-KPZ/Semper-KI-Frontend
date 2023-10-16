@@ -238,7 +238,9 @@ export const Header: React.FC<Props> = (props) => {
           <div className="flex flex-row-reverse gap-3">
             <Button
               children={<CloseIcon fontSize="large" />}
-              title={t(`Header.Header.button.${menuOpen ? "close" : "open"}`)}
+              title={t(
+                `components.Header.Header.button.${menuOpen ? "close" : "open"}`
+              )}
               width="fit"
               variant="secondary"
               onClick={closeMenu}
@@ -249,7 +251,9 @@ export const Header: React.FC<Props> = (props) => {
           {renderMobileMenuItems}
         </div>
         <Button
-          title={t(`Header.Header.button.${menuOpen ? "close" : "open"}`)}
+          title={t(
+            `components.Header.Header.button.${menuOpen ? "close" : "open"}`
+          )}
           onClick={closeMenu}
           children={
             <ExpandLessIcon fontSize="large" className="md:rotate-90" />
@@ -282,7 +286,7 @@ export const Header: React.FC<Props> = (props) => {
           variant="custom"
           className=" text-2xl font-bold xs:text-3xl md:text-4xl"
         >
-          {t("Header.Header.title")}
+          {t("components.Header.Header.title")}
         </Text>
       </div>
     </a>
@@ -291,11 +295,15 @@ export const Header: React.FC<Props> = (props) => {
     <li
       className="group flex items-center justify-center px-2 duration-300 hover:cursor-pointer hover:text-türkis xs:px-3"
       onClick={openMenu}
-      title={t(`Header.Header.button.${menuOpen ? "close" : "open"}`)}
+      title={t(
+        `components.Header.Header.button.${menuOpen ? "close" : "open"}`
+      )}
     >
       <Button
         variant="text"
-        title={t(`Header.Header.button.${menuOpen ? "close" : "open"}`)}
+        title={t(
+          `components.Header.Header.button.${menuOpen ? "close" : "open"}`
+        )}
         onClick={openMenu}
         children={<MenuIcon className="h-6 xl:h-10" />}
       />

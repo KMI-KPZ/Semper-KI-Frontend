@@ -7,7 +7,7 @@ interface Props {
   className?: string;
 }
 
-const HomeAnonymImages: React.FC<Props> = (props) => {
+const HomeImages: React.FC<Props> = (props) => {
   const { className } = props;
   const additionalClassNames = className ?? "";
   const { i18n } = useTranslation();
@@ -31,4 +31,4 @@ const HomeAnonymImages: React.FC<Props> = (props) => {
   );
 };
 
-export default HomeAnonymImages;
+export default HomeImages;

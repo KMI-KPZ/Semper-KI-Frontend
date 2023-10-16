@@ -7,7 +7,7 @@ import { twMerge } from "tailwind-merge";
 interface Props {
   className?: string;
 }
-const HomeAnonymMagazin: React.FC<Props> = (props) => {
+const HomeMagazin: React.FC<Props> = (props) => {
   const { className } = props;
   const { t } = useTranslation();
 
@@ -28,7 +28,7 @@ const HomeAnonymMagazin: React.FC<Props> = (props) => {
         variant="h2"
         className="z-10 text-4xl tracking-widest text-white md:text-5xl md:font-bold"
       >
-        {t("Home.HomeMagazinCard.header")}
+        {t("Home.components.Magazin.title")}
       </Heading>
       <img
         className="absolute flex h-full w-full object-cover opacity-0 duration-500 group-hover:opacity-50 "
@@ -38,4 +38,4 @@ const HomeAnonymMagazin: React.FC<Props> = (props) => {
   );
 };
 
-export default HomeAnonymMagazin;
+export default HomeMagazin;

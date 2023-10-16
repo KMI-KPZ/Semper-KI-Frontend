@@ -178,13 +178,15 @@
       },
       "HeaderItem": {}
     },
-    "Modal": {
-      "button": {
-        "close": "Schließen"
-      }
-    },
+    "Menu": {},
     "PermissionGate": {
       "message": "Diese Funktion ist mit ihren Rechten nicht nutzbar"
+    },
+    "Switch": {},
+    "Table": {},
+    "UserSwitch": {
+      "client": "Einzelnutzer",
+      "organization": "Organisation"
     }
   },
   "component-library": {
@@ -206,7 +208,11 @@
         "text": "Laden"
       }
     },
-    "Modal": {},
+    "Modal": {
+      "button": {
+        "close": "Schließen"
+      }
+    },
     "Page": {},
     "Search": {},
     "Swicht": {},
@@ -285,9 +291,12 @@
     "Admin": {}
   },
   "App": {
-    "title": "Semper-KI",
-    "loading": "Laden...",
-    "components": {},
+    "components": {
+      "LoadingSuspense": {
+        "title": "Semper-KI",
+        "loading": "Laden..."
+      }
+    },
     "hooks": {
       "useEvents": {
         "hooks": {
@@ -295,7 +304,7 @@
           "useOrgaEvent": {
             "toast": "Ihre Organisation wurde aktualisiert"
           },
-          "useProjectEvents": {
+          "useProjectEvent": {
             "toast": {
               "status": "Ihre Aufträge wurde aktualisiert",
               "message": "Neue Nachricht"
@@ -311,7 +320,8 @@
       },
       "useBodyScroll": {},
       "useToast": {}
-    }
+    },
+    "App": {}
   },
   "EmailVerification": {
     "title": "Email Verifizieren",
@@ -325,184 +335,80 @@
     "button": "Zurück zur Startseite"
   },
   "Home": {
-    "Home": {
-      "Anonym": {
-        "Header": {
-          "title": "Semper-KI - Einfach 3D drucken.",
-          "claim1": "Geben Sie Ihre Idee in Auftrag",
-          "claim2": "Von der Idee zum Modell",
-          "claim3": "Vom Modell zum Prototyp",
-          "claim4": "Vom Prototyp zu Large Scale",
-          "claim5": "Bei uns finden Sie passende Partner für jeden Schritt Ihres Produktionsprozesses."
-        },
-        "Project": {
-          "title": "Auftrag",
-          "subTitle": "zur Herstellung eines Bauteils",
-          "button": {
-            "demo": "Demo",
-            "new": "Neue Demo",
-            "continue": "Demo Fortsetzen"
-          }
-        },
-        "Orga": {
-          "title": "Als Organisation anmelden",
-          "subTitle": "Um Services anbieten und nutzen zu können",
-          "advantage": "Ihre Vorteile",
-          "register": "Registrieren"
-        },
-        "Individual": {
-          "title": "Als Einzelperson anmelden",
-          "subTitle": "Um Services ausschließlich nutzen zu können",
-          "advantage": "Ihre Vorteile",
-          "register": "Registrieren"
+    "Anonym": {
+      "Anonym": {}
+    },
+    "Authorized": {
+      "Authorized": {}
+    },
+    "components": {
+      "Admin": {
+        "title": "Adminbereich",
+        "button": {
+          "orga": "Organisationen verwalten",
+          "user": "Benutzer verwalten",
+          "general": "Adminbereich",
+          "orders": "Aufträge verwalten"
         }
       },
-      "Authorized": {
-        "Projects": {
-          "title": "Meine Projekte"
-        },
-        "Project": {
-          "title": "Aufträge",
-          "noProjects": "Keine Aufträge vorhanden",
-          "button": {
-            "new": "Neuer Auftrag",
-            "orders": "Meine Aufträge",
-            "continue": "Auftrag Fortsetzen",
-            "see": "Auftrag Ansehen"
-          }
-        },
-        "Organization": {
-          "title": "Organisation",
-          "button": {
-            "edit": "Oragnisation verwalten"
-          }
-        },
-        "Resources": {
-          "title": "Ressourcen",
-          "button": {
-            "edit": "Ressourcen verwalten"
-          }
-        },
-        "Admin": {
-          "title": "Adminbereich",
-          "button": {
-            "orga": "Organisationen verwalten",
-            "user": "Benutzer verwalten",
-            "general": "Adminbereich",
-            "orders": "Aufträge verwalten"
-          }
+      "ClientInfo": {
+        "title": "Als Einzelperson anmelden",
+        "subTitle": "Um Services ausschließlich nutzen zu können",
+        "advantage": "Ihre Vorteile",
+        "register": "Registrieren"
+      },
+      "Container": {},
+      "Coypu": {
+        "title": "Coypu News",
+        "title2": "nutzen nur für forschungszwecke",
+        "button": {
+          "link": "Zum Artikel",
+          "less": "Weniger anzeigen",
+          "more": "Mehr anzeigen"
+        }
+      },
+      "Header": {
+        "title": "Semper-KI - Einfach 3D drucken.",
+        "claim1": "Geben Sie Ihre Idee in Auftrag",
+        "claim2": "Von der Idee zum Modell",
+        "claim3": "Vom Modell zum Prototyp",
+        "claim4": "Vom Prototyp zu Large Scale",
+        "claim5": "Bei uns finden Sie passende Partner für jeden Schritt Ihres Produktionsprozesses."
+      },
+      "Images": {},
+      "Magazin": {
+        "title": "MAGAZIN"
+      },
+      "OrgaInfo": {
+        "title": "Als Organisation anmelden",
+        "subTitle": "Um Services anbieten und nutzen zu können",
+        "advantage": "Ihre Vorteile",
+        "register": "Registrieren"
+      },
+      "Organization": {
+        "title": "Organisation",
+        "button": {
+          "edit": "Oragnisation verwalten"
+        }
+      },
+      "Projects": {
+        "title": "Projekte",
+        "noProjects": "Keine Projekte vorhanden",
+        "button": {
+          "new": "Neues Projekt",
+          "projects": "Meine Projekte",
+          "continue": "Projekt Fortsetzen",
+          "see": "Projekt Ansehen"
+        }
+      },
+      "Resources": {
+        "title": "Ressourcen",
+        "button": {
+          "edit": "Ressourcen verwalten"
         }
       }
     },
-    "HomeGuideCard": {
-      "header": "Angeleiteter Einstieg",
-      "information": {
-        "header": "zu Informationen",
-        "beginner": "Anfänger",
-        "advanced": "Fortgeschritten",
-        "expert": "Experte"
-      },
-      "service": {
-        "header": "zu Services",
-        "use-produce": "Bauteil Herstellen lassen",
-        "use-design": "Modell entwerfen lassen",
-        "use-accompany": "Gesamtprozess begleiten lassen",
-        "provide-produce": "Bauteile Herstellen",
-        "provide-design": "Modelle entwerfen",
-        "provide-accompany": "Gesamtprozesse begleiten"
-      },
-      "button": { "all": "Zu allen Angeleiteten Einstiegen" }
-    },
-    "HomeItem": {},
-    "HomeMagazinCard": {
-      "header": "MAGAZIN"
-    },
-    "HomeNewsCard": {
-      "header": "Neuigkeiten",
-      "no-items": "keine Neuigkeiten"
-    },
-    "HomeNewsCardItem": {
-      "more": "Mehr lesen..."
-    },
-    "HomeProjectCard": {
-      "header": "Aufträge",
-      "order": {
-        "header": "Aktuell",
-        "new": "neuer Auftrag",
-        "continue": "Auftrag fortsetzen",
-        "cart": "Warenkorb",
-        "delete": "Warenkorb löschen",
-        "empty": "keine vorhandenen Aufträge"
-      },
-      "orders": {
-        "header": "Meine Aufträge",
-        "date": "Datum",
-        "article": "Anzahl Artikel",
-        "status": "Status",
-        "empty": "keine vorhandenen Aufträge"
-      },
-      "contracts": {
-        "header": "Meine Aufträge",
-        "date": "Datum",
-        "article": "Anzahl Artikel",
-        "status": "Status"
-      },
-      "button": {
-        "all-contracts": "Alle Aufträge",
-        "all-orders": "Alle Aufträge",
-        "start-order": "Auftrag beginnen"
-      }
-    },
-    "HomePortfolioCard": {
-      "header": "Unser Portfolio",
-      "client": {
-        "information": "Informieren über 3D-Druck",
-        "produce": "Teil herstellen lassen",
-        "design": "Modell entwerfen lassen",
-        "accompany": "Gesamtprozess begleiten lassen"
-      },
-      "contractor": {
-        "produce": "Teile herstellen",
-        "design": "Modelle entwerfen",
-        "accompany": "Gesamtprozesse begleiten"
-      },
-      "button": {
-        "client": "Für Autraggeber",
-        "contractor": "Für Anbieter"
-      }
-    },
-    "HomeResourcesCard": {
-      "header": "Ressourcen",
-      "link": {
-        "printer": "3D-Drucker",
-        "material": "Materialien",
-        "postprocessing": "Nachbearbeitungen",
-        "overview": "Übersicht"
-      }
-    },
-    "HomeSearchCard": {
-      "placeholder": "Suche ...",
-      "search": "Suchen"
-    },
-    "HomeData": {
-      "explore": "Ausprobieren",
-      "use-service": "Service in Anspruch nehmen",
-      "provide-service": "Service bereitstellen",
-      "continue": "Auftrag Fortsetzen",
-      "new-contract": "neue Auftrag",
-      "proceedings": "Verfahren",
-      "company": "Unternehmen",
-      "guide": "Wegweiser",
-      "cart": "Warenkorb",
-      "orders": "Meine Aufträge",
-      "contracts": "Meine Aufträge",
-      "user": "Benutzer",
-      "model": "Modelle",
-      "material": "Materialien",
-      "procedure": "Verfahren",
-      "printer": "Drucker",
-      "account": "Konto"
-    }
+    "Home": {}
   },
   "Legal": {
     "header": "Gesetzliches",
@@ -599,7 +505,7 @@
           "description": "Beschreibung",
           "actions": "Aktionen",
           "orga": "Organisation",
-          "orders": "Aufträge",
+          "processes": "Projekte",
           "data": "Daten",
           "files": "Dateien",
           "resources": "Ressourcen",
@@ -609,7 +515,7 @@
           "insert": "hinzufügen",
           "delete": "löschen",
           "status": "Status bearbeiten",
-          "chat": "beantworten",
+          "messages": "beantworten",
           "empty": "keine Rollen angelegt",
           "button": {
             "delete": "Löschen",
@@ -1317,69 +1223,15 @@
         }
       }
     },
-    "Select": {},
-    "Service": {},
-
-    "ServiceQuestion": {},
-    "ServiceRoutes": {
-      "let": "lassen",
-      "use": "Service in Anspruch nehmen",
-      "provide": "Service Anbieten",
-      "produce": "Produzieren",
-      "design": "Entwerfen",
-      "accompany": "Gesamtprozess begleiten"
+    "Select": {
+      "components": {
+        "Item": {}
+      },
+      "Select": {
+        "title": "Service auswählen"
+      }
     },
-    "ServiceView": {
-      "header": "Service Anbieten"
-    },
-    "ServiceWizard": {},
-    "Filter": {
-      "FilterCard": {
-        "category": {
-          "general": "Allgemein",
-          "model": "Modell",
-          "material": "Material",
-          "proceeding": "Verfahren",
-          "manufacturer": "Hersteller",
-          "post-Processing": "Nachbearbeitung",
-          "additive": "Zusatz",
-          "test": "Test"
-        }
-      },
-      "FilterItem": {}
-    },
-    "Header": {
-      "Cart": {
-        "Cart": {},
-        "CartItem": {
-          "title": "Auftrag",
-          "item": "Artikel",
-          "upload": "Modell Hochladen",
-          "new": "Artikel erstellen",
-          "cart": "Warenkorb",
-          "button": {
-            "expand": "Ausklappen",
-            "collapse": "Zusammenklappen",
-            "overview": "Übersicht",
-            "edit": "Bearbeiten",
-            "delete": "Löschen"
-          }
-        }
-      },
-      "Search": {
-        "placeholder": "Suche ..."
-      },
-      "StatusIcon": {},
-      "Wizard": {
-        "Wizard": {
-          "model": "Modell",
-          "material": "Material",
-          "post-processing": "Nachbearbeitung"
-        },
-        "WizardCard": {}
-      },
-      "Header": {}
-    }
+    "Service": {}
   },
   "Test": {}
 }

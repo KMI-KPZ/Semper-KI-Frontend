@@ -2,20 +2,21 @@ import { Heading, Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Workflow from "@images/workflow.png";
-import HomeAnonymProject from "./components/Project";
-import HomeAnonymHeader from "./components/Header";
-import HomeAnonymOrga from "./components/Orga";
-import HomeAnonymClient from "./components/Client";
-import HomeAnonymMagazinCard from "./components/Magazin";
-import HomeAnonymImages from "./components/Images";
 import Coypu from "../components/Coypu";
 import Container from "@component-library/Container";
 import logger from "@/hooks/useLogger";
 import { Button } from "@component-library/Button";
+import HomeHeader from "../components/Header";
+import HomeProjects from "../components/Projects";
+import HomeOrganization from "../components/Organization";
+import HomeClientInfo from "../components/ClientInfo";
+import HomeMagazin from "../components/Magazin";
+import HomeImages from "../components/Images";
+import HomeOrgaInfo from "../components/OrgaInfo";
 
-interface AnonymHomeProps {}
+interface HomeProps {}
 
-const AnonymHome: React.FC<AnonymHomeProps> = (props) => {
+const Home: React.FC<HomeProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
 
@@ -31,16 +32,16 @@ const AnonymHome: React.FC<AnonymHomeProps> = (props) => {
           </Text>
         </Container>
       ) : null}
-      <HomeAnonymHeader />
+      <HomeHeader />
       <img src={Workflow} />
-      <HomeAnonymProject />
-      <HomeAnonymOrga />
-      <HomeAnonymClient />
-      <HomeAnonymMagazinCard />
+      <HomeProjects />
+      <HomeOrgaInfo />
+      <HomeClientInfo />
+      <HomeMagazin />
       <Coypu />
-      <HomeAnonymImages />
+      <HomeImages />
     </div>
   );
 };
 
-export default AnonymHome;
+export default Home;

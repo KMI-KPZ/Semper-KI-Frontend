@@ -20,7 +20,15 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { state, processID: manuelProcessID } = props;
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
-  const { projectID, processID } = useParams();
+  const { processID } = useParams();
+
+  const calcPath = (path: string): string => {
+    return processID !== undefined && processID !== manuelProcessID
+      ? `../${manuelProcessID}/${path}}`
+      : processID === undefined
+      ? `${manuelProcessID}/${path}`
+      : `${path}`;
+  };
 
   const renderButtons = () => {
     switch (state) {
@@ -34,11 +42,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
                 title={t(
                   "Projects.Project.Process.components.StatusButtons.service"
                 )}
-                to={
-                  processID === undefined
-                    ? `${manuelProcessID}/service/edit`
-                    : `service/edit`
-                }
+                to={calcPath("service/edit")}
               />
             </PermissionGate>
             <PermissionGate element="ProcessButtonContractorSelection">
@@ -48,11 +52,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
                 title={t(
                   "Projects.Project.Process.components.StatusButtons.selectContractor"
                 )}
-                to={
-                  processID === undefined
-                    ? `${manuelProcessID}/contractorSelection`
-                    : `contractorSelection`
-                }
+                to={calcPath("contractorSelection")}
                 active={isServiceComplete(manuelProcessID)}
               />
             </PermissionGate>
@@ -67,11 +67,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
               title={t(
                 "Projects.Project.Process.components.StatusButtons.verify"
               )}
-              to={
-                processID === undefined
-                  ? `${manuelProcessID}/verification`
-                  : `verification`
-              }
+              to={calcPath("verification")}
             />
           </PermissionGate>
         );
@@ -84,7 +80,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
               title={t(
                 "Projects.Project.Process.components.StatusButtons.request"
               )}
-              to={`${manuelProcessID}/checkout`}
+              to={calcPath("checkout")}
             />
           </PermissionGate>
         );

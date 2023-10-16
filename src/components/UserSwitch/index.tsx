@@ -25,7 +25,7 @@ export const UserSwitch: React.FC<Props> = (props) => {
     <Container className="p-3" gap={5}>
       <Text
         variant="body"
-        children={t("General.UserSwitch.button.client")}
+        children={t("components.UserSwitch.client")}
         className={`rounded-full px-4 py-1 transition-all duration-300
         ${userType === UserType.USER ? " bg-türkis-800 text-white" : ""}
         `}
@@ -36,7 +36,7 @@ export const UserSwitch: React.FC<Props> = (props) => {
       />
       <Text
         variant="body"
-        children={t("General.UserSwitch.button.contractor")}
+        children={t("components.UserSwitch.organization")}
         className={`rounded-full px-4 py-1 transition-all duration-300
         ${userType === UserType.ORGANIZATION ? " bg-türkis-800 text-white" : ""}
         `}

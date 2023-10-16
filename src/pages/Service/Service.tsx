@@ -1,16 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Navigate } from "react-router-dom";
-import useService, { ServiceType } from "./hooks/useService";
-import { ServiceManufacturing } from "./Manufacturing/Manufacturing";
-import {
-  ServiceManufacturingProps,
-  UpdateServiceManufacturingProps,
-} from "./Manufacturing/types/types";
-import ServiceOverview from "./Overview/Overview";
-import { ServiceModelingProps } from "./Modelling/Modelling";
 import ServiceSelect from "./Select/Select";
-import logger from "@/hooks/useLogger";
 
 interface ServiceProps {}
 

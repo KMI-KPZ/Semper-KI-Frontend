@@ -11,6 +11,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button } from "@component-library/Button";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import { getSimplifiedPermissions, sortPermissions } from "../Roles";
 
 interface OrganizationRolesTableRowProps {
   role: RoleProps;
@@ -49,7 +50,7 @@ const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
               key={index}
               align="center"
               className={`p-2 ${
-                index === 0 || index === 5 || index === 8 ? "border-l-2" : ""
+                index === 0 || index === 3 || index === 7 ? "border-l-2" : ""
               }`}
             >
               {rolePermissionsQuery.data.find((permission) => {

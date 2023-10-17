@@ -15,6 +15,7 @@ interface ReturnProps {
   createProject: UseMutationResult<string, Error, void, unknown>;
   updateProject: UseMutationResult<string, Error, UpdateProjectProps, unknown>;
   deleteProject: UseMutationResult<string, Error, string, unknown>;
+  createProjectWithProcess: UseMutationResult<string, Error, void, unknown>;
 }
 
 export interface ProjectProps {
@@ -86,8 +87,21 @@ export const useProject = (): ReturnProps => {
         });
     },
     onSuccess(data, variables, context) {
+      queryClient.invalidateQueries(["project"]);
       queryClient.invalidateQueries(["flatProjects"]);
       navigate(`/projects/${data}`);
+    },
+  });
+
+  const createProjectWithProcess = useMutation<string, Error, void>({
+    mutationFn: async () => {
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createProjectID/`;
+      return getCustomAxios()
+        .get(apiUrl)
+        .then((response) => {
+          logger("useProject | createProjectWithProcess ✅ |", response.data);
+          return response.data.projectID;
+        });
     },
   });
 
@@ -133,5 +147,6 @@ export const useProject = (): ReturnProps => {
     projectQuery,
     updateProject,
     deleteProject,
+    createProjectWithProcess,
   };
 };

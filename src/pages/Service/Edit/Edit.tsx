@@ -3,13 +3,13 @@ import { useTranslation } from "react-i18next";
 import useService, { ServiceType } from "../hooks/useService";
 import { useNavigate } from "react-router-dom";
 import { LoadingAnimation } from "@component-library/index";
-import useSerivceEdit from "../hooks/useSerivceEdit";
+import useServiceEdit from "../hooks/useServiceEdit";
 
 interface ServiceEditProps {}
 
 const ServiceEdit: React.FC<ServiceEditProps> = (props) => {
   const {} = props;
-  useSerivceEdit();
+  useServiceEdit();
   return <LoadingAnimation />;
 };
 

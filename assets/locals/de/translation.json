@@ -395,10 +395,10 @@
         "title": "Projekte",
         "noProjects": "Keine Projekte vorhanden",
         "button": {
+          "demo": "Ausprobieren",
           "new": "Neues Projekt",
-          "projects": "Meine Projekte",
           "continue": "Projekt Fortsetzen",
-          "see": "Projekt Ansehen"
+          "projects": "Meine Projekte"
         }
       },
       "Resources": {
@@ -685,7 +685,7 @@
   "Projects": {
     "components": {
       "Table": {
-        "deleteConfirm": "Möchten Sie den Auftrag wirklich löschen?",
+        "deleteConfirm": "Möchten Sie das Projekt wirklich löschen?",
         "grouping": "Gruppierung",
         "name": "Name",
         "status": "Status",
@@ -750,7 +750,7 @@
           }
         },
         "Info": {
-          "id": "AuftragsID:",
+          "id": "ProjektID:",
           "created": "Erstellt am:",
           "updated": "Aktualisiert am:"
         },
@@ -798,9 +798,9 @@
               "verify": "Überprüfen"
             },
             "confirm": {
-              "cancel": "Auftrag wirklich stonieren?",
-              "reProject": "Auftrag wirklich erneut Bestellen?",
-              "reject": "Auftrag wirklich Ablehnen?"
+              "cancel": "Projekt wirklich stonieren?",
+              "reProject": "Projekt wirklich erneut Bestellen?",
+              "reject": "Projekt wirklich Ablehnen?"
             }
           },
           "Chat": {

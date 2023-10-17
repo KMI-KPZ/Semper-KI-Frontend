@@ -26,7 +26,7 @@ const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
   } = useForm<FormData>();
 
   const onSubmit = (data: FormData) => {
-    logger("onSubmit", data);
+    logger("onSubmit", data); //TODO: implement register organization
   };
 
   return (

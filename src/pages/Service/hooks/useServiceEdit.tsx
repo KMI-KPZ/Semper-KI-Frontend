@@ -4,7 +4,7 @@ import useService, { ServiceType } from "./useService";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 
-const useSerivceEdit = () => {
+const useServiceEdit = () => {
   const { getService } = useService();
   const service = getService();
   const navigate = useNavigate();
@@ -25,4 +25,4 @@ const useSerivceEdit = () => {
   }, []);
 };
 
-export default useSerivceEdit;
+export default useServiceEdit;

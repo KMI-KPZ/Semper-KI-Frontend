@@ -5,11 +5,12 @@ import {
   UpdateServiceManufacturingProps,
 } from "../Manufacturing/types/types";
 import logger from "@/hooks/useLogger";
-import useProcess from "@/pages/Projects/hooks/useProcess";
+import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { ServiceModelingProps } from "../Modelling/Modelling";
+import { ProjectProps } from "@/pages/Projects/hooks/useProject";
 
 interface ReturnProps {
-  getService: () => GeneralServiceProps;
+  getService: () => ServiceQueryProps;
   isServiceComplete: (processID: string) => boolean;
   getServiceName: (processID: string) => string;
 }
@@ -41,17 +42,27 @@ export interface UpdateServiceUndefinedProps {
   type: ServiceType;
 }
 
-const useService = (): ReturnProps => {
-  const { getCurrentProcess } = useProcess();
+interface ServiceQueryProps {
+  service: GeneralServiceProps;
+  projectQuery: UseQueryResult<ProjectProps, Error>;
+}
 
-  const getService = (): GeneralServiceProps => {
-    const service = getCurrentProcess()?.service;
-    if (service === undefined) return { type: ServiceType.UNDEFINED };
-    return service;
+const useService = (): ReturnProps => {
+  const { getCurrentProcess, getProcessQuery } = useProcess();
+
+  const getService = (): ServiceQueryProps => {
+    const { process, projectQuery } = getProcessQuery();
+    const service = process?.service;
+    return {
+      service:
+        service === undefined ? { type: ServiceType.UNDEFINED } : service,
+      projectQuery,
+    };
   };
 
   const isServiceComplete = (processID: string): boolean => {
     const process = getCurrentProcess(processID);
+
     if (
       process === undefined ||
       (process !== undefined && process.service === undefined) ||
@@ -60,21 +71,29 @@ const useService = (): ReturnProps => {
         process.service.type === undefined)
     )
       return false;
+
+    let serviceReady = false;
+
     switch (process.service.type) {
       case ServiceType.MANUFACTURING:
         const manufacturingService =
           process.service as ServiceManufacturingProps;
-        return (
+        if (
           manufacturingService.model !== undefined &&
           manufacturingService.material !== undefined &&
           manufacturingService.postProcessings !== undefined
-        );
+        )
+          serviceReady = true;
+        break;
       case ServiceType.MODELING:
-        return false;
+        serviceReady = true;
+        break;
       case ServiceType.UNDEFINED:
-        return false;
+        serviceReady = false;
+        break;
     }
-    return false;
+
+    return serviceReady && process.status === ProcessStatus.DRAFT;
   };
 
   const getServiceName = (processID: string): string => {

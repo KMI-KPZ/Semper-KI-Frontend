@@ -4,10 +4,11 @@ import {
   useMutation,
   UseMutationResult,
   useQueryClient,
+  UseQueryResult,
 } from "@tanstack/react-query";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import usePathID from "@/hooks/usePathID";
-import { useProject } from "./useProject";
+import { ProjectProps, useProject } from "./useProject";
 import {
   GeneralServiceProps,
   GerneralUpdateServiceProps,
@@ -27,7 +28,7 @@ interface ReturnProps {
     },
     unknown
   >;
-  createProcessWithProjectID: UseMutationResult<string, Error, string, unknown>;
+  getProcessQuery: (_processID?: string) => ProcessQueryProps;
 }
 
 export interface ProcessDetailsProps {
@@ -61,7 +62,7 @@ export interface UpdateProcessProps {
 
 export interface ProcessChangesProps {
   contractor?: string[];
-  chat?: ChatMessageProps;
+  messages?: ChatMessageProps;
   status?: ProcessStatus;
   files?: File[];
   details?: ProcessDetailsProps;
@@ -69,7 +70,7 @@ export interface ProcessChangesProps {
 }
 
 export interface ProcessDeletionsProps {
-  chat?: "";
+  messages?: "";
   status?: "";
   files?: "";
   details?: "";
@@ -98,11 +99,27 @@ export enum ProcessStatus {
   "CANCELED" = 1500,
 }
 
+interface ProcessQueryProps {
+  process: ProcessProps | undefined;
+  projectQuery: UseQueryResult<ProjectProps, Error>;
+}
+
 const useProcess = (): ReturnProps => {
   const queryClient = useQueryClient();
   const { projectID, processID } = useParams();
   const { projectQuery } = useProject();
   const navigate = useNavigate();
+
+  const getProcessQuery = (_processID?: string): ProcessQueryProps => {
+    return {
+      process: projectQuery.data?.processes.find(
+        (process) =>
+          process.processID ===
+          (_processID === undefined ? processID : _processID)
+      ),
+      projectQuery,
+    };
+  };
 
   const getCurrentProcess = (_processID?: string): ProcessProps | undefined => {
     return projectQuery.data?.processes.find(
@@ -125,23 +142,6 @@ const useProcess = (): ReturnProps => {
     onSuccess(data, variables, context) {
       queryClient.invalidateQueries(["flatProjects"]);
       queryClient.invalidateQueries(["project", projectID]);
-    },
-  });
-
-  const createProcessWithProjectID = useMutation<string, Error, string>({
-    mutationFn: async (manuelProjectID: string) => {
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createProcessID/${manuelProjectID}/`;
-      return getCustomAxios()
-        .get(apiUrl)
-        .then((response) => {
-          logger("useProcess | createProcess ✅ |", response.data);
-          return response.data.processID;
-        });
-    },
-    onSuccess(newProcessID, manuelProjectID, context) {
-      queryClient.invalidateQueries(["flatProjects"]);
-      queryClient.invalidateQueries(["project", manuelProjectID]);
-      navigate(`/projects/${manuelProjectID}/${newProcessID}/service`);
     },
   });
 
@@ -216,8 +216,8 @@ const useProcess = (): ReturnProps => {
     deleteProcess,
     updateProcess,
     getCurrentProcess,
+    getProcessQuery,
     updateProcessWithProcessID,
-    createProcessWithProjectID: createProcessWithProjectID,
   };
 };
 

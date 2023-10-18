@@ -44,7 +44,7 @@ const Chat: React.FC<Props> = (props) => {
           processID,
           updates: {
             changes: {
-              chat: {
+              messages: {
                 date: new Date().toISOString(),
                 text: messageText,
                 userID: user!.hashedID,

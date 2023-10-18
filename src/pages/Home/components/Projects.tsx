@@ -18,18 +18,13 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const { user } = useContext(AppContext);
 
   const { flatProjectsQuery } = useFlatProjects();
-  const { createProject, createProjectWithProcess } = useProject();
-  const { createProcessWithProjectID } = useProcess();
+  const { createProject } = useProject();
 
   const handleOnClickButtonNew = () => {
     createProject.mutate();
   };
   const handleOnClickButtonDemo = () => {
-    createProjectWithProcess.mutate(undefined, {
-      onSuccess(data) {
-        createProcessWithProjectID.mutate(data);
-      },
-    });
+    createProject.mutate();
   };
 
   return (

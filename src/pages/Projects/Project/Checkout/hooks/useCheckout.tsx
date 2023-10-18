@@ -5,6 +5,7 @@ import {
   UseMutationResult,
   useQueryClient,
 } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 interface ReturnProps {
   sendProject: UseMutationResult<any, Error, CheckoutProps, unknown>;
@@ -17,6 +18,7 @@ export interface CheckoutProps {
 
 const useCheckout = (): ReturnProps => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const sendProject = useMutation<any, Error, CheckoutProps>({
     mutationFn: async ({ projectID, processIDs }) => {
@@ -33,6 +35,7 @@ const useCheckout = (): ReturnProps => {
     },
     onSuccess(data, variables, context) {
       queryClient.invalidateQueries(["project", variables.projectID]);
+      navigate(`/projects/${variables.projectID}/${variables.processIDs[0]}`);
     },
   });
 

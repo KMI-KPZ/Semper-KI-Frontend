@@ -8,6 +8,7 @@ import ServiceSelectItem, { ServiceSelectItemProps } from "./components/Item";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { useParams } from "react-router-dom";
 import { Button } from "@component-library/Button";
+import { LoadingSuspense } from "@component-library/index";
 
 interface ServiceSelectProps {}
 
@@ -29,24 +30,26 @@ const ServiceSelect: React.FC<ServiceSelectProps> = (props) => {
   const { t } = useTranslation();
   const { getService } = useService();
 
-  const service = getService();
+  const { service, projectQuery } = getService();
 
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
       <Heading variant="h1">{t("Service.Select.Select.title")}</Heading>
-      <PermissionGate element="ProcessServiceSelection">
-        <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
-          {serviceSelectItems.map((item, index) => (
-            <ServiceSelectItem
-              {...item}
-              key={index}
-              active={service.type === item.serviceType}
-              serviceSelected={service.type !== ServiceType.UNDEFINED}
-            />
-          ))}
-        </div>
-        {/* {service !== undefined ? <Button title={t("")} /> : null} */}
-      </PermissionGate>
+      <LoadingSuspense query={projectQuery}>
+        <PermissionGate element="ProcessServiceSelection">
+          <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
+            {serviceSelectItems.map((item, index) => (
+              <ServiceSelectItem
+                {...item}
+                key={index}
+                active={service.type === item.serviceType}
+                serviceSelected={service.type !== ServiceType.UNDEFINED}
+              />
+            ))}
+          </div>
+          {/* {service !== undefined ? <Button title={t("")} /> : null} */}
+        </PermissionGate>
+      </LoadingSuspense>
     </div>
   );
 };

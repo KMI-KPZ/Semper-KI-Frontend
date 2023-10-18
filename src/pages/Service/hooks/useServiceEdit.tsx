@@ -6,23 +6,25 @@ import logger from "@/hooks/useLogger";
 
 const useServiceEdit = () => {
   const { getService } = useService();
-  const service = getService();
+  const { service, projectQuery } = getService();
   const navigate = useNavigate();
   useEffect(() => {
-    if (service === undefined) navigate("service");
-    else
-      switch (service.type) {
-        case ServiceType.MANUFACTURING:
-          navigate("../manufacturing");
-          break;
-        case ServiceType.MODELING:
-          navigate("../modelling");
-          break;
-        case ServiceType.UNDEFINED:
-          navigate("..");
-          break;
-      }
-  }, []);
+    if (projectQuery.isFetched && !projectQuery.isRefetching) {
+      if (service === undefined) navigate("service");
+      else
+        switch (service.type) {
+          case ServiceType.MANUFACTURING:
+            navigate("../manufacturing");
+            break;
+          case ServiceType.MODELING:
+            navigate("../modelling");
+            break;
+          case ServiceType.UNDEFINED:
+            navigate("..");
+            break;
+        }
+    }
+  }, [projectQuery, service]);
 };
 
 export default useServiceEdit;

@@ -24,7 +24,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
 
   const calcPath = (path: string): string => {
     return processID !== undefined && processID !== manuelProcessID
-      ? `../${manuelProcessID}/${path}}`
+      ? `../${manuelProcessID}/${path}`
       : processID === undefined
       ? `${manuelProcessID}/${path}`
       : `${path}`;

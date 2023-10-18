@@ -8,14 +8,13 @@ import {
 } from "@tanstack/react-query";
 import logger from "@/hooks/useLogger";
 import { useNavigate, useParams } from "react-router-dom";
-import { ProcessProps, ProcessStatus } from "./useProcess";
+import useProcess, { ProcessProps, ProcessStatus } from "./useProcess";
 
 interface ReturnProps {
   projectQuery: UseQueryResult<ProjectProps, Error>;
   createProject: UseMutationResult<string, Error, void, unknown>;
   updateProject: UseMutationResult<string, Error, UpdateProjectProps, unknown>;
   deleteProject: UseMutationResult<string, Error, string, unknown>;
-  createProjectWithProcess: UseMutationResult<string, Error, void, unknown>;
 }
 
 export interface ProjectProps {
@@ -87,21 +86,24 @@ export const useProject = (): ReturnProps => {
         });
     },
     onSuccess(data, variables, context) {
-      queryClient.invalidateQueries(["project"]);
-      queryClient.invalidateQueries(["flatProjects"]);
-      navigate(`/projects/${data}`);
+      createProcessWithProjectID.mutate(data);
     },
   });
 
-  const createProjectWithProcess = useMutation<string, Error, void>({
-    mutationFn: async () => {
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createProjectID/`;
+  const createProcessWithProjectID = useMutation<string, Error, string>({
+    mutationFn: async (manuelProjectID: string) => {
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createProcessID/${manuelProjectID}/`;
       return getCustomAxios()
         .get(apiUrl)
         .then((response) => {
-          logger("useProject | createProjectWithProcess ✅ |", response.data);
-          return response.data.projectID;
+          logger("useProcess | createProcess ✅ |", response.data);
+          return response.data.processID;
         });
+    },
+    onSuccess(newProcessID, manuelProjectID, context) {
+      queryClient.invalidateQueries(["flatProjects"]);
+      queryClient.invalidateQueries(["project", manuelProjectID]);
+      navigate(`/projects/${manuelProjectID}/${newProcessID}`);
     },
   });
 
@@ -147,6 +149,5 @@ export const useProject = (): ReturnProps => {
     projectQuery,
     updateProject,
     deleteProject,
-    createProjectWithProcess,
   };
 };

@@ -10,6 +10,9 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { useParams } from "react-router-dom";
 import logger from "@/hooks/useLogger";
+import LiveHelpIcon from "@mui/icons-material/LiveHelp";
+import ClearIcon from "@mui/icons-material/Clear";
+import CheckIcon from "@mui/icons-material/Check";
 
 interface ProcessStatusButtonsProps {
   processID: string;
@@ -84,9 +87,47 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
             />
           </PermissionGate>
         );
+      case ProcessStatus.REQUESTED:
+        return (
+          <>
+            <PermissionGate element="ProcessButtonClarification">
+              <Button
+                variant="icon"
+                startIcon={<LiveHelpIcon />}
+                title={t(
+                  "Projects.Project.Process.components.StatusButtons.clarification"
+                )}
+              />
+            </PermissionGate>
+            <PermissionGate element="ProcessButtonRejectByContractor">
+              <Button
+                variant="icon"
+                startIcon={<ClearIcon />}
+                title={t(
+                  "Projects.Project.Process.components.StatusButtons.reject"
+                )}
+              />
+            </PermissionGate>
+            <PermissionGate element="ProcessButtonConfirmedByContractor">
+              <Button
+                variant="icon"
+                startIcon={<CheckIcon />}
+                title={t(
+                  "Projects.Project.Process.components.StatusButtons.confirm"
+                )}
+              />
+            </PermissionGate>
+          </>
+        );
+      case ProcessStatus.CLARIFICATION:
+        return;
+      case ProcessStatus.REJECTED_BY_CONTRACTOR:
+        return;
+      case ProcessStatus.CONFIRMED_BY_CONTRACTOR:
+        return;
 
       default:
-        break;
+        return;
     }
   };
 

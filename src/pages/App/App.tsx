@@ -41,6 +41,7 @@ import {
 } from "../Outlets/UserOutlet";
 import EmailVerification from "../EmailVerification/EmailVerification";
 import ProjectsRoutes from "../Routes/ProjectsRoutes";
+import ResKriVer from "../ResKriVer/ResKriVer";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -119,6 +120,7 @@ const App: React.FC = () => {
               path="registerOrganization"
               element={<RegisterOrganization />}
             />
+            <Route path="reskriver" element={<ResKriVer />} />
             <Route path="logout" element={<Logout />} />
             <Route path="portfolio" element={<Portfolio />} />
             <Route path="verifyEMail" element={<EmailVerification />} />

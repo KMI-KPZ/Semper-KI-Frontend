@@ -828,7 +828,10 @@
             "service": "Service bearbeiten",
             "selectContractor": "Auftragnehmer auswählen",
             "verify": "Überprüfen",
-            "request": "Anfragen"
+            "request": "Anfragen",
+            "clarification": "Rückfragen",
+            "reject": "Ablehnen",
+            "confirm": "Bestätigen"
           }
         },
         "hooks": {},
@@ -926,6 +929,16 @@
         "email": "E-Mail benötigt",
         "adress": "Adresse benötigt",
         "taxID": "Steuernummer benötigt"
+      }
+    }
+  },
+  "ResKriVer": {
+    "ResKriVer": {
+      "title": "Weiterleitung von ResKriVer",
+      "loading": "laden ihrer Daten",
+      "data": "Übertragene Daten:",
+      "button": {
+        "search": "Prozess Starten"
       }
     }
   },

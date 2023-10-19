@@ -34,7 +34,7 @@ export const LoadingAnimation: React.FC<LoadingAnimationProps> = (props) => {
       </div>
     );
   return (
-    <div className="">
+    <div className=" mt-6">
       <div className="h-24 w-24 animate-bounce">
         <img src={LogoURL} alt="" />
       </div>

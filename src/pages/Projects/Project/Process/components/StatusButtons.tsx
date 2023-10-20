@@ -13,17 +13,21 @@ import logger from "@/hooks/useLogger";
 import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
+import { use } from "i18next";
+import useStatusButtons from "../hooks/useStatusButtons";
 
 interface ProcessStatusButtonsProps {
+  projectID: string;
   processID: string;
   state: ProcessStatus;
 }
 
 const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
-  const { state, processID: manuelProcessID } = props;
+  const { state, processID: manuelProcessID, projectID } = props;
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
   const { processID } = useParams();
+  const { updateStatus } = useStatusButtons();
 
   const calcPath = (path: string): string => {
     return processID !== undefined && processID !== manuelProcessID
@@ -31,6 +35,14 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
       : processID === undefined
       ? `${manuelProcessID}/${path}`
       : `${path}`;
+  };
+
+  const onClickButton = (status: ProcessStatus) => {
+    updateStatus.mutate({
+      projectID: projectID,
+      processID: manuelProcessID,
+      status: status,
+    });
   };
 
   const renderButtons = () => {
@@ -97,15 +109,19 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
                 title={t(
                   "Projects.Project.Process.components.StatusButtons.clarification"
                 )}
+                onClick={() => onClickButton(ProcessStatus.CLARIFICATION)}
               />
             </PermissionGate>
-            <PermissionGate element="ProcessButtonRejectByContractor">
+            <PermissionGate element="ProcessButtonRejectedByContractor">
               <Button
                 variant="icon"
                 startIcon={<ClearIcon />}
                 title={t(
                   "Projects.Project.Process.components.StatusButtons.reject"
                 )}
+                onClick={() =>
+                  onClickButton(ProcessStatus.REJECTED_BY_CONTRACTOR)
+                }
               />
             </PermissionGate>
             <PermissionGate element="ProcessButtonConfirmedByContractor">
@@ -115,16 +131,69 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
                 title={t(
                   "Projects.Project.Process.components.StatusButtons.confirm"
                 )}
+                onClick={() =>
+                  onClickButton(ProcessStatus.CONFIRMED_BY_CONTRACTOR)
+                }
               />
             </PermissionGate>
           </>
         );
       case ProcessStatus.CLARIFICATION:
-        return;
+        return (
+          <>
+            <PermissionGate element="ProcessButtonRejectedByContractor">
+              <Button
+                variant="icon"
+                startIcon={<ClearIcon />}
+                title={t(
+                  "Projects.Project.Process.components.StatusButtons.reject"
+                )}
+                onClick={() =>
+                  onClickButton(ProcessStatus.REJECTED_BY_CONTRACTOR)
+                }
+              />
+            </PermissionGate>
+            <PermissionGate element="ProcessButtonConfirmedByContractor">
+              <Button
+                variant="icon"
+                startIcon={<CheckIcon />}
+                title={t(
+                  "Projects.Project.Process.components.StatusButtons.confirm"
+                )}
+                onClick={() =>
+                  onClickButton(ProcessStatus.CONFIRMED_BY_CONTRACTOR)
+                }
+              />
+            </PermissionGate>
+          </>
+        );
       case ProcessStatus.REJECTED_BY_CONTRACTOR:
         return;
       case ProcessStatus.CONFIRMED_BY_CONTRACTOR:
-        return;
+        return (
+          <>
+            <PermissionGate element="ProcessButtonRejectedByClient">
+              <Button
+                variant="icon"
+                startIcon={<ClearIcon />}
+                title={t(
+                  "Projects.Project.Process.components.StatusButtons.reject"
+                )}
+                onClick={() => onClickButton(ProcessStatus.REJECTED_BY_CLIENT)}
+              />
+            </PermissionGate>
+            <PermissionGate element="ProcessButtonConfirmedByClient">
+              <Button
+                variant="icon"
+                startIcon={<CheckIcon />}
+                title={t(
+                  "Projects.Project.Process.components.StatusButtons.confirm"
+                )}
+                onClick={() => onClickButton(ProcessStatus.CONFIRMED_BY_CLIENT)}
+              />
+            </PermissionGate>
+          </>
+        );
 
       default:
         return;

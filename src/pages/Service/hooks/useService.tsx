@@ -80,8 +80,7 @@ const useService = (): ReturnProps => {
           process.service as ServiceManufacturingProps;
         if (
           manufacturingService.model !== undefined &&
-          manufacturingService.material !== undefined &&
-          manufacturingService.postProcessings !== undefined
+          manufacturingService.material !== undefined
         )
           serviceReady = true;
         break;

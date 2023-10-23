@@ -831,7 +831,10 @@
             "request": "Anfragen",
             "clarification": "Rückfragen",
             "reject": "Ablehnen",
-            "confirm": "Bestätigen"
+            "confirm": "Bestätigen",
+            "confirmContractor": "Angebot erstellen",
+            "production": "Produktion starten",
+            "complete": "Abschließen"
           }
         },
         "hooks": {},
@@ -856,15 +859,16 @@
             "ItemConnector": {}
           },
           "StatusBar": {
-            "draft": "Entwurf",
+            "draft": "Service",
             "contractorSelected": "Auftragnehmer",
             "verified": "Überprüfung",
             "requested": "Anfrage",
             "clarification": "Rückfragen",
-            "rejected": "Abgelehnt",
+            "offer": "Angebot",
+            "client": "Bestätigung",
             "confirmed": "Bestätigt",
-            "production": "In Produktion",
-            "delivery": "Unterwegs",
+            "production": "Produktion",
+            "delivery": "Lieferung",
             "finished": "Abgeschlossen"
           }
         },
@@ -1078,15 +1082,15 @@
         },
         "types": {},
         "Wizard": {
-          "components": {
-            "Card": {}
-          },
-          "data": {
+          "Wizard": {
+            "empty": "---",
             "model": "Modell",
             "material": "Material",
-            "postprocessing": "Nachbearbeitung"
-          },
-          "Wizard": {}
+            "postprocessing": "Nachbearbeitung",
+            "overview": "zur Übersicht",
+            "ready": "Vollständig",
+            "notReady": "Unvollständig"
+          }
         },
         "Header": {}
       },
@@ -1241,7 +1245,8 @@
         "Item": {}
       },
       "Select": {
-        "title": "Service auswählen"
+        "title": "Service auswählen",
+        "continue": "Service Fortsetzen"
       }
     },
     "Service": {}

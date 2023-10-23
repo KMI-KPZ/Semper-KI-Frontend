@@ -10,7 +10,7 @@ type StatusItemType = {
 
 const StatusItem: React.FC<StatusItemType> = (props) => {
   const {
-    item: { icon, itemProcessState, text },
+    item: { icon, startStatus: itemProcessState, text },
     state,
   } = props;
   const { t } = useTranslation();

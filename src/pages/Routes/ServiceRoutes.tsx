@@ -30,7 +30,7 @@ const ServiceRoutes: React.FC<ServiceRoutesProps> = (props) => {
           <Route path="*" element={<Navigate to="." />} />
         </Route>
       </Routes>
-      <ServiceOverview />
+      {/* <ServiceOverview /> */}
     </div>
   );
 };

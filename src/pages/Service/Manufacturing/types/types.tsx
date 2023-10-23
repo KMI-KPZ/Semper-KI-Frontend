@@ -30,4 +30,5 @@ export interface ServiceManufacturingContextReturnProps {
   setGrid(grid: boolean): void;
   setFilter(open: boolean): void;
   setSearchInput(name: string): void;
+  service: ServiceManufacturingProps;
 }

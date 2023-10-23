@@ -66,36 +66,36 @@ const ProcessHeaderSearch: React.FC = () => {
           className="flex w-[15%] flex-row items-center justify-center bg-gray-300 text-white"
           onClick={handleOnClickSearchButton}
         >
-          <SearchIcon fontSize="large" />
+          <SearchIcon />
         </div>
       </div>
-      <div className="flex w-20 flex-row items-center justify-center bg-gray-200 p-2 hover:cursor-pointer hover:bg-gray-300">
-        <SortIcon fontSize="large" />
+      <div className="flex w-20 flex-row items-center justify-center bg-gray-200 hover:cursor-pointer hover:bg-gray-300">
+        <SortIcon />
       </div>
       <div
         onClick={handleOnClickFilterButton}
-        className="flex w-20 flex-row items-center justify-center bg-gray-200 p-2 hover:cursor-pointer hover:bg-gray-300 2xl:hidden"
+        className="flex w-20 flex-row items-center justify-center bg-gray-200 hover:cursor-pointer hover:bg-gray-300 2xl:hidden"
       >
-        <FilterAltIcon fontSize="large" />
+        <FilterAltIcon />
       </div>
       <div
-        className={`hidden w-20 flex-row items-center justify-center bg-gray-200 p-2 hover:cursor-pointer hover:bg-gray-300 xs:flex ${
+        className={`hidden w-20 flex-row items-center justify-center bg-gray-200 hover:cursor-pointer hover:bg-gray-300 xs:flex ${
           processState.grid ? "bg-gray-400" : ""
         }`}
         onClick={(e) => handleOnClickGridButton(e, true)}
       >
-        <div className="flex flex-row justify-between">
+        <div className="flex scale-75 flex-row justify-between">
           <RectangleIcon />
           <RectangleIcon />
         </div>
       </div>
       <div
-        className={`hidden w-20 flex-row items-center justify-center bg-gray-200 p-2 hover:cursor-pointer hover:bg-gray-300 xs:flex ${
+        className={`hidden w-20 flex-row items-center justify-center bg-gray-200 hover:cursor-pointer hover:bg-gray-300 xs:flex ${
           processState.grid ? "" : "bg-gray-400"
         }`}
         onClick={(e) => handleOnClickGridButton(e, false)}
       >
-        <div className="flex flex-col justify-between">
+        <div className="flex scale-75 flex-col justify-between">
           <RectangleIcon />
           <RectangleIcon />
         </div>

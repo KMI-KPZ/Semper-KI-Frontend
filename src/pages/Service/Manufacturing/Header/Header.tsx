@@ -6,11 +6,9 @@ import { Heading } from "@component-library/Typography";
 import { useLocation } from "react-router-dom";
 
 const ProcessHeader: React.FC = () => {
-  const location = useLocation();
-
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col gap-2 bg-white p-2">
+      <div className="flex flex-col gap-4  bg-white p-3">
         <ServiceManufacturingWizard />
         <ProcessHeaderSearch />
       </div>

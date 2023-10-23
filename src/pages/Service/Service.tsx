@@ -11,7 +11,6 @@ const Service: React.FC<ServiceProps> = (props) => {
   return (
     <div className="flex w-full flex-col-reverse justify-between gap-5 md:flex-row">
       <ServiceSelect />
-      {/* <ServiceOverview /> */}
     </div>
   );
 };

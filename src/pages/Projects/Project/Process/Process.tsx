@@ -97,7 +97,7 @@ const Process: React.FC<Props> = (props) => {
         <Container direction="row" gap={3} className="flex-wrap md:flex-nowrap">
           <input
             type="checkbox"
-            className="h-8 w-8"
+            className="h-6 w-6"
             checked={checked}
             onChange={(e) => handleOnChangeCheckboxSelect(e, process.processID)}
           />

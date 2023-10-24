@@ -17,6 +17,7 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import React, { useContext } from "react";
+import { AppContext } from "@/pages/App/App";
 
 interface ProcessStatusButtonsProps {
   projectID: string;
@@ -29,9 +30,18 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
   const { processID } = useParams();
-  const { updateProcessWithProcessID, getProcessQuery } = useProcess();
+  const { updateProcessWithProcessID } = useProcess();
+  const { user } = useContext(AppContext);
 
   const { process } = useContext(ProcessContext);
+  const shouldRenderFor = (type: "CLIENT" | "CONTRACTOR"): boolean => {
+    return (
+      user !== undefined &&
+      ((type === "CONTRACTOR" &&
+        process.contractor === user.organizations[0]) ||
+        (type === "CLIENT" && process.client === user.hashedID))
+    );
+  };
 
   const calcPath = (path: string): string => {
     return processID !== undefined && processID !== manuelProcessID
@@ -108,7 +118,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
           </PermissionGate>
         );
       case ProcessStatus.REQUESTED:
-        return (
+        return shouldRenderFor("CONTRACTOR") ? (
           <>
             <PermissionGate element="ProcessButtonClarification">
               <Button
@@ -145,9 +155,9 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
               />
             </PermissionGate>
           </>
-        );
+        ) : null;
       case ProcessStatus.CLARIFICATION:
-        return (
+        return shouldRenderFor("CONTRACTOR") ? (
           <>
             <PermissionGate element="ProcessButtonRejectedByContractor">
               <Button
@@ -174,11 +184,11 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
               />
             </PermissionGate>
           </>
-        );
+        ) : null;
       case ProcessStatus.REJECTED_BY_CONTRACTOR:
         return;
       case ProcessStatus.CONFIRMED_BY_CONTRACTOR:
-        return (
+        return shouldRenderFor("CLIENT") ? (
           <>
             <PermissionGate element="ProcessButtonRejectedByClient">
               <Button
@@ -201,11 +211,11 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
               />
             </PermissionGate>
           </>
-        );
+        ) : null;
       case ProcessStatus.REJECTED_BY_CLIENT:
         return;
       case ProcessStatus.CONFIRMED_BY_CLIENT:
-        return (
+        return shouldRenderFor("CONTRACTOR") ? (
           <PermissionGate element="ProcessButtonProduction">
             <Button
               variant="icon"
@@ -216,9 +226,9 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
               onClick={() => onClickButton(ProcessStatus.PRODUCTION)}
             />
           </PermissionGate>
-        );
+        ) : null;
       case ProcessStatus.PRODUCTION:
-        return (
+        return shouldRenderFor("CONTRACTOR") ? (
           <PermissionGate element="ProcessButtonDelivery">
             <Button
               variant="icon"
@@ -229,9 +239,9 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
               onClick={() => onClickButton(ProcessStatus.DELIVERY)}
             />
           </PermissionGate>
-        );
+        ) : null;
       case ProcessStatus.DELIVERY:
-        return (
+        return shouldRenderFor("CONTRACTOR") ? (
           <PermissionGate element="ProcessButtonComplete">
             <Button
               variant="icon"
@@ -242,7 +252,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
               onClick={() => onClickButton(ProcessStatus.COMPLETED)}
             />
           </PermissionGate>
-        );
+        ) : null;
 
       default:
         return;

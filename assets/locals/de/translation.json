@@ -834,6 +834,7 @@
             "confirm": "Bestätigen",
             "confirmContractor": "Angebot erstellen",
             "production": "Produktion starten",
+            "delivery": "Lieferung starten",
             "complete": "Abschließen"
           }
         },

@@ -18,6 +18,7 @@ import DoneAllIcon from "@mui/icons-material/DoneAll";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import React, { useContext } from "react";
 import { AppContext } from "@/pages/App/App";
+import logger from "@/hooks/useLogger";
 
 interface ProcessStatusButtonsProps {
   projectID: string;
@@ -30,15 +31,16 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
   const { processID } = useParams();
-  const { updateProcessWithProcessID } = useProcess();
+  const { updateProcessWithProcessID, getCurrentProcess } = useProcess();
   const { user } = useContext(AppContext);
+  const process = getCurrentProcess(manuelProcessID);
 
-  const { process } = useContext(ProcessContext);
   const shouldRenderFor = (type: "CLIENT" | "CONTRACTOR"): boolean => {
     return (
+      process !== undefined &&
       user !== undefined &&
       ((type === "CONTRACTOR" &&
-        process.contractor === user.organizations[0]) ||
+        process.contractor[0] === user.organizations[0]) ||
         (type === "CLIENT" && process.client === user.hashedID))
     );
   };

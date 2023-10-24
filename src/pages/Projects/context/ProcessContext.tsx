@@ -14,7 +14,7 @@ export interface ProcessContextProps {
 export const ProcessContext = React.createContext<ProcessContextProps>({
   process: {
     client: "",
-    contractor: "",
+    contractor: [""],
     created: new Date(),
     details: {},
     files: [],

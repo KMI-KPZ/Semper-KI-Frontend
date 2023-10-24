@@ -3,15 +3,27 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Outlet } from "react-router-dom";
 import useProcess, { ProcessProps } from "../hooks/useProcess";
 import logger from "@/hooks/useLogger";
+import { LoadingAnimation } from "@component-library/index";
 
 interface ProcessContextProviderProps {}
 
 export interface ProcessContextProps {
-  process?: ProcessProps;
+  process: ProcessProps;
 }
 
 export const ProcessContext = React.createContext<ProcessContextProps>({
-  process: undefined,
+  process: {
+    contractor: "",
+    created: new Date(),
+    details: {},
+    files: [],
+    messages: { messages: [] },
+    processID: "",
+    service: { type: 0 },
+    serviceStatus: 0,
+    status: 0,
+    updated: "",
+  },
 });
 
 const ProcessContextProvider: React.FC<ProcessContextProviderProps> = (
@@ -19,16 +31,19 @@ const ProcessContextProvider: React.FC<ProcessContextProviderProps> = (
 ) => {
   const {} = props;
   const { t } = useTranslation();
-  const { getCurrentProcess } = useProcess();
-  const process = getCurrentProcess();
-  if (process === undefined)
-    logger("ProcessContextProvider", process !== undefined ? process : ""); // return <Navigate to="/projects" />;
+  const { getProcessQuery } = useProcess();
+  const { process, projectQuery } = getProcessQuery();
 
-  return (
-    <ProcessContext.Provider value={{ process }}>
-      <Outlet />
-    </ProcessContext.Provider>
-  );
+  if (projectQuery.isLoading) return <LoadingAnimation />;
+
+  if (process !== undefined && projectQuery.isFetched)
+    return (
+      <ProcessContext.Provider value={{ process }}>
+        <Outlet />
+      </ProcessContext.Provider>
+    );
+
+  return <Navigate to="/projects" />;
 };
 
 export default ProcessContextProvider;

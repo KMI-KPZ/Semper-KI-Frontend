@@ -1082,6 +1082,9 @@
         },
         "types": {},
         "Wizard": {
+          "components": {
+            "Item": {}
+          },
           "Wizard": {
             "empty": "---",
             "model": "Modell",

@@ -93,7 +93,7 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
                 path="model"
                 element={
                   <ProcessModel
-                    model={service.model}
+                    model={service !== undefined ? service.model : undefined}
                     processState={state}
                     filters={filtersQuery.data}
                   />
@@ -104,7 +104,9 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
                 path="material"
                 element={
                   <ProcessMaterial
-                    material={service.material}
+                    material={
+                      service !== undefined ? service.material : undefined
+                    }
                     processState={state}
                     filters={filtersQuery.data}
                   />
@@ -114,7 +116,11 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
                 path="postprocessing"
                 element={
                   <ProcessPostProcessing
-                    postProcessings={service.postProcessings}
+                    postProcessings={
+                      service !== undefined
+                        ? service.postProcessings
+                        : undefined
+                    }
                     processState={state}
                     filters={filtersQuery.data}
                   />

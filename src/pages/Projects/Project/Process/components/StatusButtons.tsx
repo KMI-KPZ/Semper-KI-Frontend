@@ -1,5 +1,4 @@
 import { Button } from "@component-library/Button";
-import React from "react";
 import { useTranslation } from "react-i18next";
 import FactoryIcon from "@mui/icons-material/Factory";
 import PolicyIcon from "@mui/icons-material/Policy";
@@ -7,7 +6,7 @@ import SendIcon from "@mui/icons-material/Send";
 import useService from "@/pages/Service/hooks/useService";
 import EditIcon from "@mui/icons-material/Edit";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
+import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { useParams } from "react-router-dom";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
@@ -16,6 +15,8 @@ import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import DescriptionIcon from "@mui/icons-material/Description";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
+import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
+import React, { useContext } from "react";
 
 interface ProcessStatusButtonsProps {
   projectID: string;
@@ -28,7 +29,9 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
   const { processID } = useParams();
-  const { updateStatus } = useStatusButtons();
+  const { updateProcessWithProcessID, getProcessQuery } = useProcess();
+
+  const { process } = useContext(ProcessContext);
 
   const calcPath = (path: string): string => {
     return processID !== undefined && processID !== manuelProcessID
@@ -39,14 +42,18 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   };
 
   const onClickButton = (status: ProcessStatus) => {
-    updateStatus.mutate({
-      projectID: projectID,
+    updateProcessWithProcessID.mutate({
       processID: manuelProcessID,
-      status: status,
+      updates: {
+        changes: {
+          status,
+        },
+      },
     });
   };
 
   const renderButtons = () => {
+    if (process === undefined) return;
     switch (state) {
       case ProcessStatus.DRAFT:
         return (

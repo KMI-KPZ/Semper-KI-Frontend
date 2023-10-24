@@ -2,6 +2,7 @@ import React, { useDebugValue } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Outlet } from "react-router-dom";
 import { ProjectProps, useProject } from "../hooks/useProject";
+import { LoadingAnimation } from "@component-library/index";
 
 interface ProjectOutletProps {}
 
@@ -17,6 +18,8 @@ const ProjectContextProvider: React.FC<ProjectOutletProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { projectQuery } = useProject();
+
+  if (projectQuery.isLoading) return <LoadingAnimation />;
 
   return (
     <ProjectContext.Provider value={{ project: projectQuery.data }}>

@@ -28,6 +28,15 @@ interface ReturnProps {
     },
     unknown
   >;
+  updateProcessesWithProcessIDs: UseMutationResult<
+    string,
+    Error,
+    {
+      processIDs: string[];
+      updates: UpdateProcessProps;
+    },
+    unknown
+  >;
   getProcessQuery: (_processID?: string) => ProcessQueryProps;
 }
 
@@ -150,7 +159,7 @@ const useProcess = (): ReturnProps => {
       return getCustomAxios()
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
           projectID,
-          processID,
+          processIDs: [processID],
           changes: changes,
           deletions: deletions,
         })
@@ -179,9 +188,38 @@ const useProcess = (): ReturnProps => {
       return getCustomAxios()
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
           projectID,
-          processID,
-          changes: changes,
-          deletions: deletions,
+          processIDs: [processID],
+          changes,
+          deletions,
+        })
+        .then((res) => {
+          logger("useProcess | updateProcess ✅ |", res.data);
+          return res.data;
+        });
+    },
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries(["project", projectID]);
+      queryClient.invalidateQueries(["flatProjects"]);
+    },
+  });
+
+  const updateProcessesWithProcessIDs = useMutation<
+    string,
+    Error,
+    { processIDs: string[]; updates: UpdateProcessProps }
+  >({
+    mutationFn: async (props: {
+      processIDs: string[];
+      updates: UpdateProcessProps;
+    }) => {
+      const { updates, processIDs } = props;
+      const { changes = {}, deletions = {} } = updates;
+      return getCustomAxios()
+        .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
+          projectID,
+          processIDs,
+          changes,
+          deletions,
         })
         .then((res) => {
           logger("useProcess | updateProcess ✅ |", res.data);
@@ -218,6 +256,7 @@ const useProcess = (): ReturnProps => {
     getCurrentProcess,
     getProcessQuery,
     updateProcessWithProcessID,
+    updateProcessesWithProcessIDs,
   };
 };
 

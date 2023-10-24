@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import useProcess from "@/pages/Projects/hooks/useProcess";
-import { Button } from "@component-library/Button";
 import { useTranslation } from "react-i18next";
 import { ServiceManufacturingContext } from "../../Manufacturing";
 import { Text } from "@component-library/Typography";
 import Container from "@component-library/Container";
 import logger from "@/hooks/useLogger";
 import useService from "@/pages/Service/hooks/useService";
+import ManufacturingWizardItem from "./components/Item";
 interface Props {}
 
 export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
@@ -21,10 +21,10 @@ export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
 
   const { getCurrentProcess } = useProcess();
   return (
-    <div className="flex flex-col items-center justify-around gap-3 sm:flex-row sm:gap-0">
-      <Button
+    <div className="flex flex-col items-center justify-around gap-5 sm:flex-row ">
+      <ManufacturingWizardItem
         title={t("Service.Manufacturing.Header.Wizard.Wizard.model")}
-        variant={location.pathname.includes("model") ? "primary" : "secondary"}
+        active={location.pathname.includes("model")}
         to="model"
       >
         <Container direction="col">
@@ -39,12 +39,10 @@ export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
             )}
           </Text>
         </Container>
-      </Button>
-      <Button
+      </ManufacturingWizardItem>
+      <ManufacturingWizardItem
         title={t("Service.Manufacturing.Header.Wizard.Wizard.material")}
-        variant={
-          location.pathname.includes("material") ? "primary" : "secondary"
-        }
+        active={location.pathname.includes("material")}
         to="material"
       >
         <Container direction="col">
@@ -57,12 +55,10 @@ export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
               : t("Service.Manufacturing.Header.Wizard.Wizard.empty")}
           </Text>
         </Container>
-      </Button>
-      <Button
+      </ManufacturingWizardItem>
+      <ManufacturingWizardItem
         title={t("Service.Manufacturing.Header.Wizard.Wizard.postprocessing")}
-        variant={
-          location.pathname.includes("postprocessing") ? "primary" : "secondary"
-        }
+        active={location.pathname.includes("postprocessing")}
         to="postprocessing"
       >
         <Container direction="col">
@@ -75,8 +71,8 @@ export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
               : service.postProcessings.length}
           </Text>
         </Container>
-      </Button>
-      <Button
+      </ManufacturingWizardItem>
+      <ManufacturingWizardItem
         title={t("Service.Manufacturing.Header.Wizard.Wizard.overview")}
         to="../.."
       >
@@ -92,7 +88,7 @@ export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
             )}
           </Text>
         </Container>
-      </Button>
+      </ManufacturingWizardItem>
     </div>
   );
 };

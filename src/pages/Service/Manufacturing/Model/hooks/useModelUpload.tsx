@@ -6,16 +6,25 @@ import { useNavigate } from "react-router-dom";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 
 interface ReturnProps {
-  uploadModels: UseMutationResult<
+  uploadModel: UseMutationResult<
     ModelProps[],
     Error,
-    UploadModelsProps,
+    UploadModelProps,
     unknown
   >;
 }
 
-interface UploadModelsProps {
+interface ModelUploadProps {
+  tags: string[];
+  date: Date;
+  license: string;
+  certificate: string[];
+}
+
+interface UploadModelProps {
+  projectID: string;
   processID: string;
+  model: ModelUploadProps;
   file: File;
 }
 
@@ -23,43 +32,33 @@ const useModelUpload = (): ReturnProps => {
   const navigate = useNavigate();
   const { updateProcess } = useProcess();
 
-  const uploadModels = useMutation<ModelProps[], Error, UploadModelsProps>({
+  const uploadModel = useMutation<ModelProps[], Error, UploadModelProps>({
     mutationFn: async (props) => {
-      const { file, processID } = props;
+      const { model, processID, projectID, file } = props;
       const formData = new FormData();
-      // files.forEach((file) => {
       formData.append(file.name, file);
-      // });
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/uploadModels/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/uploadModel/`;
       return getCustomAxios()
         .post(
           apiUrl,
           {
+            projectID,
             processID,
-            file: formData,
+            model: model,
+            formData,
           },
           {
             headers: { "Content-Type": "multipart/form-data" },
           }
         )
         .then((response) => {
-          logger("useModelUpload | uploadModels ✅ |", response.data);
+          logger("useModelUpload | uploadModel ✅ |", response.data);
           return response.data.models;
         });
     },
-    onSuccess(data) {
-      updateProcess.mutate({
-        changes: {
-          service: {
-            model: data[0],
-          },
-        },
-      });
-      navigate("..");
-    },
   });
 
-  return { uploadModels };
+  return { uploadModel };
 };
 
 export default useModelUpload;

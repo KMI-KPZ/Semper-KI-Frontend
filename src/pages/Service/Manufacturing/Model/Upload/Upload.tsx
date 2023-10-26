@@ -14,6 +14,9 @@ import useProcess from "@/pages/Projects/hooks/useProcess";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 import { set } from "react-hook-form";
 import Container from "@component-library/Container";
+import Modal from "@component-library/Modal";
+import logger from "@/hooks/useLogger";
+import ManufacturingModelUploadForm from "./components/Form";
 
 interface Props {}
 
@@ -23,10 +26,8 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
   const [file, setFile] = useState<File>();
-  const { project } = useContext(ProjectContext);
 
-  const { uploadModels } = useModelUpload();
-  const { status, error } = uploadModels;
+  const [formOpen, setFormOpen] = useState<boolean>(false);
 
   const dataTypes: string[] = [
     ".STEP",
@@ -83,44 +84,48 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
 
   const addFile = (inputFile: File): void => {
     setFile(inputFile);
-    uploadModels.mutate({
-      processID: project.projectID,
-      file: inputFile,
-    });
+    setFormOpen(true);
   };
 
-  if (status === "loading")
-    return (
-      <Container direction="col" width="full" className="gap-5 bg-white p-5">
-        <LoadingAnimation />
-        <Heading variant="h1">
-          {t("Service.Manufacturing.Model.components.Upload.loading")}
-        </Heading>
-      </Container>
-    );
+  const closeForm = () => {
+    logger("closeForm");
+    setFormOpen(false);
+  };
 
   return (
-    <div
-      className="flex w-full grow flex-col  items-center justify-center gap-2  rounded-lg bg-white p-2 text-black
+    <>
+      <div
+        className="flex w-full grow flex-col  items-center justify-center gap-2  rounded-lg bg-white p-2 text-black
       transition  duration-300 hover:cursor-pointer  hover:bg-türkis-200 "
-      onClick={handleClickUploadCard}
-      onDragEnter={handleDragOnUploadCard}
-      onDragLeave={handleDragOnUploadCard}
-      onDragOver={handleDragOnUploadCard}
-      onDrop={handleDropOnUploadCard}
-    >
-      <input
-        accept={dataTypes.map((type: string) => type).join(",")}
-        type="file"
-        ref={hiddenFileInput}
-        onChange={handleChangeHiddenInput}
-        className="hidden"
+        onClick={handleClickUploadCard}
+        onDragEnter={handleDragOnUploadCard}
+        onDragLeave={handleDragOnUploadCard}
+        onDragOver={handleDragOnUploadCard}
+        onDrop={handleDropOnUploadCard}
+      >
+        <input
+          accept={dataTypes.map((type: string) => type).join(",")}
+          type="file"
+          ref={hiddenFileInput}
+          onChange={handleChangeHiddenInput}
+          className="hidden"
+        />
+        <UploadIcon className="h-40 w-40" />
+        <Heading variant="h2">
+          {t("Service.Manufacturing.Model.Upload.Upload.card.title")}
+        </Heading>
+        {t("Service.Manufacturing.Model.Upload.Upload.card.text")}
+      </div>
+
+      <Modal
+        open={formOpen}
+        closeModal={closeForm}
+        children={
+          file === undefined ? null : (
+            <ManufacturingModelUploadForm file={file} />
+          )
+        }
       />
-      <UploadIcon className="h-40 w-40" />
-      <Heading variant="h2">
-        {t("Service.Manufacturing.Model.components.Upload.card.title")}
-      </Heading>
-      {t("Service.Manufacturing.Model.components.Upload.card.text")}
-    </div>
+    </>
   );
 };

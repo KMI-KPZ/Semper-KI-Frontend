@@ -1154,6 +1154,30 @@
             "button": {
               "select": "Auswählen"
             }
+          }
+        },
+        "hooks": {
+          "useModel": {},
+          "useModelUpload": {}
+        },
+        "types": {},
+        "Upload": {
+          "components": {
+            "Form": {
+              "name": "Name:",
+              "size": "Größe:",
+              "type": "Dateityp:",
+              "date": "Datum:",
+              "title": "Datei Informationen hinzufügen",
+              "tags": "Tags",
+              "tagsPH": "Tag1, Tag2, ...",
+              "certificate": "Zertifikate",
+              "certificatePH": "Zertifikate1, Zertifikate2, ...",
+              "license": "Lizenz",
+              "button": {
+                "send": "Modell Hochladen"
+              }
+            }
           },
           "Upload": {
             "error": "Fehler beim Hochladen",
@@ -1167,11 +1191,6 @@
             }
           }
         },
-        "hooks": {
-          "useModel": {},
-          "useModelUpload": {}
-        },
-        "types": {},
         "Model": {
           "upload": {
             "img": "Modell Hochladen",

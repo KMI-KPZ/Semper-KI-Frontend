@@ -16,7 +16,7 @@ export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
   const { t } = useTranslation();
 
   const { service } = useContext(ServiceManufacturingContext);
-  logger("ServiceManufacturingWizard | service", service);
+  // logger("ServiceManufacturingWizard | service", service);
   const { isServiceComplete } = useService();
 
   const { getCurrentProcess } = useProcess();

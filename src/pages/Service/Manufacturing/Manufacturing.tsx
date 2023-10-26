@@ -8,7 +8,7 @@ import ProcessHeader from "./Header/Header";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import ProcessFilter, { FilterItemProps } from "./Filter/Filter";
-import { ProcessModelUpload } from "./Model/components/Upload";
+import { ProcessModelUpload } from "./Model/Upload/Upload";
 import logger from "@/hooks/useLogger";
 import {
   ServiceManufacturingContextReturnProps,

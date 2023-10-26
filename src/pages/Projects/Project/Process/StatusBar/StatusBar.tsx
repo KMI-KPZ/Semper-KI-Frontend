@@ -103,8 +103,16 @@ const StatusBar: React.FC<StatusViewProps> = (props) => {
             <StatusItem item={item} state={status} />
             {index < getItems().length - 1 ? (
               <StatusItemConnector
-                active={status >= item.startStatus}
-                onGoing={status === item.startStatus}
+                active={
+                  (status >= item.startStatus &&
+                    item.endStatus === undefined) ||
+                  (item.endStatus !== undefined && status > item.endStatus)
+                }
+                onGoing={
+                  (status === item.startStatus &&
+                    item.endStatus === undefined) ||
+                  (item.endStatus !== undefined && status === item.endStatus)
+                }
               />
             ) : null}
           </Fragment>

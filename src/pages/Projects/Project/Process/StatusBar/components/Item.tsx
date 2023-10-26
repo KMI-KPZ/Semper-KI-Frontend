@@ -10,18 +10,21 @@ type StatusItemType = {
 
 const StatusItem: React.FC<StatusItemType> = (props) => {
   const {
-    item: { icon, startStatus: itemProcessState, text },
+    item: { icon, startStatus, endStatus, text },
     state,
   } = props;
   const { t } = useTranslation();
 
   const getClassName = (): string => {
     let classname: string[] = [];
-    if (state === itemProcessState) {
+    if (
+      (state === startStatus && endStatus === undefined) ||
+      (state >= startStatus && endStatus !== undefined && state <= endStatus)
+    ) {
       classname.push(" bg-orange text-white");
-    } else if (state < itemProcessState) {
+    } else if (state < startStatus) {
       classname.push(" bg-slate-100 ");
-    } else if (state > itemProcessState) {
+    } else if (state > startStatus) {
       classname.push(" bg-orange-200");
     }
     return classname.join(" ");

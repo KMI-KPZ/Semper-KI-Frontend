@@ -1,9 +1,9 @@
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as UploadIcon } from "@icons/Upload.svg";
 import { ReactComponent as DeleteIcon } from "@icons/Delete.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@component-library/Button";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { LoadingAnimation } from "@component-library/Loading";
@@ -11,6 +11,9 @@ import { getFileSizeAsString } from "@/services/utils";
 import { Heading } from "@component-library/Typography";
 import useModelUpload from "../hooks/useModelUpload";
 import useProcess from "@/pages/Projects/hooks/useProcess";
+import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
+import { set } from "react-hook-form";
+import Container from "@component-library/Container";
 
 interface Props {}
 
@@ -19,13 +22,11 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
-  const [fileList, setFileList] = useState<File[]>([]);
-  const [error, setError] = useState<boolean>(false);
-  const { updateProcess } = useProcess();
+  const [file, setFile] = useState<File>();
+  const { project } = useContext(ProjectContext);
 
   const { uploadModels } = useModelUpload();
-  const { status, error: uploadError } = uploadModels;
-  const navigate = useNavigate();
+  const { status, error } = uploadModels;
 
   const dataTypes: string[] = [
     ".STEP",
@@ -46,9 +47,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
 
   const handleChangeHiddenInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      for (let index = 0; index < e.target.files.length; index++) {
-        addFile(e.target.files[index]);
-      }
+      addFile(e.target.files[0]);
     }
   };
 
@@ -74,133 +73,54 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const newFiles: File[] = Array.from(e.dataTransfer.files);
-      addFile(newFiles);
-    }
+    const newFile: File = e.dataTransfer.files[0];
+    addFile(newFile);
   };
 
-  const deleteFile = (
-    e: React.MouseEvent<SVGSVGElement, MouseEvent>,
-    index: number
-  ): void => {
-    setFileList((prevState) =>
-      prevState.filter((file: File, fileIndex: number) => index !== fileIndex)
-    );
+  const deleteFile = (e: React.MouseEvent<SVGSVGElement, MouseEvent>): void => {
+    setFile(undefined);
   };
 
-  const addFile = (inputFile: File | File[]): void => {
-    let files: File[];
-    files =
-      inputFile.constructor === Array
-        ? [...inputFile]
-        : inputFile instanceof File
-        ? [inputFile]
-        : [];
-    files.forEach((file: File) => {
-      new RegExp("(" + dataTypes.join("|").replace(/\./g, "\\.") + ")$").test(
-        file.name.toUpperCase()
-      )
-        ? setFileList((prevState) => [...prevState, file])
-        : showError();
+  const addFile = (inputFile: File): void => {
+    setFile(inputFile);
+    uploadModels.mutate({
+      processID: project.projectID,
+      file: inputFile,
     });
   };
 
-  const showError = () => {
-    setError(true);
-  };
-
-  const handleClickNext = () => {
-    if (fileList.length > 0) {
-      uploadModels.mutate(fileList, {
-        onSuccess(data) {
-          updateProcess.mutate({
-            changes: {
-              service: {
-                model: data[0],
-              },
-            },
-          });
-          navigate("model");
-        },
-      });
-    } else {
-      showError();
-    }
-  };
-
-  useEffect(() => {
-    if (error === true)
-      setTimeout(() => {
-        setError(false);
-      }, 5000);
-  }, [error]);
+  if (status === "loading")
+    return (
+      <Container direction="col" width="full" className="gap-5 bg-white p-5">
+        <LoadingAnimation />
+        <Heading variant="h1">
+          {t("Service.Manufacturing.Model.components.Upload.loading")}
+        </Heading>
+      </Container>
+    );
 
   return (
-    <div className="flex flex-col items-center justify-center gap-5 bg-white p-5">
-      {error && (
-        <div className="error">
-          {t("Service.Manufacturing.Model.components.Upload.error")}
-        </div>
-      )}
-
-      <div className="flex flex-row flex-wrap items-center justify-center gap-5">
-        {fileList.map((file: File, index: number) => (
-          <div
-            key={index}
-            className="flex flex-col items-center justify-center gap-2 bg-gray-100 p-2"
-          >
-            <div className="canvas">
-              <ViewInArIcon sx={{ fontSize: "90px", margin: "auto" }} />
-            </div>
-            {file.name}
-            <div className="flex flex-row items-center justify-center gap-2">
-              {getFileSizeAsString(file.size)}
-              <DeleteIcon
-                className="h-6 w-6 hover:cursor-pointer hover:bg-gray-300"
-                onClick={(e) => deleteFile(e, index)}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-      {status === "loading" ? (
-        <div className="pt-5">
-          <LoadingAnimation />
-          <span>
-            {t("Service.Manufacturing.Model.components.Upload.loading")}
-          </span>
-        </div>
-      ) : (
-        <div
-          className="flex max-w-2xl flex-col items-center justify-center gap-2 bg-gray-100 p-2 hover:cursor-pointer hover:bg-gray-300"
-          onClick={handleClickUploadCard}
-          onDragEnter={handleDragOnUploadCard}
-          onDragLeave={handleDragOnUploadCard}
-          onDragOver={handleDragOnUploadCard}
-          onDrop={handleDropOnUploadCard}
-        >
-          <input
-            accept={dataTypes.map((type: string) => type).join(",")}
-            type="file"
-            multiple
-            ref={hiddenFileInput}
-            onChange={handleChangeHiddenInput}
-            className="hidden"
-          />
-          <UploadIcon className="h-40 w-40" />
-          <Heading variant="h2">
-            {t("Service.Manufacturing.Model.components.Upload.card.title")}
-          </Heading>
-          {t("Service.Manufacturing.Model.components.Upload.card.text")}
-        </div>
-      )}
-
-      <Button
-        onClick={handleClickNext}
-        startIcon={<FileUploadIcon />}
-        title={t("Service.Manufacturing.Model.components.Upload.button.upload")}
+    <div
+      className="flex w-full grow flex-col  items-center justify-center gap-2  rounded-lg bg-white p-2 text-black
+      transition  duration-300 hover:cursor-pointer  hover:bg-türkis-200 "
+      onClick={handleClickUploadCard}
+      onDragEnter={handleDragOnUploadCard}
+      onDragLeave={handleDragOnUploadCard}
+      onDragOver={handleDragOnUploadCard}
+      onDrop={handleDropOnUploadCard}
+    >
+      <input
+        accept={dataTypes.map((type: string) => type).join(",")}
+        type="file"
+        ref={hiddenFileInput}
+        onChange={handleChangeHiddenInput}
+        className="hidden"
       />
+      <UploadIcon className="h-40 w-40" />
+      <Heading variant="h2">
+        {t("Service.Manufacturing.Model.components.Upload.card.title")}
+      </Heading>
+      {t("Service.Manufacturing.Model.components.Upload.card.text")}
     </div>
   );
 };

@@ -1157,7 +1157,7 @@
           },
           "Upload": {
             "error": "Fehler beim Hochladen",
-            "loading": "Laden...",
+            "loading": "Model wird hochgeladen",
             "card": {
               "title": "Modell Hochladen",
               "text": "per Drag & Drop oder Klick"

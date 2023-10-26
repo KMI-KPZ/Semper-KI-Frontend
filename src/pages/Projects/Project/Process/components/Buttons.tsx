@@ -41,6 +41,16 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
     true
   ); // todo: check if this is correct
 
+  const shouldRenderFor = (type: "CLIENT" | "CONTRACTOR"): boolean => {
+    return (
+      process !== undefined &&
+      user !== undefined &&
+      ((type === "CONTRACTOR" &&
+        process.contractor[0] === user.organizations[0]) ||
+        (type === "CLIENT" && process.client === user.hashedID))
+    );
+  };
+
   const handleOnClickButtonCancel = () => {
     if (
       window.confirm(
@@ -135,7 +145,8 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
           )}
         </PermissionGate>
       ) : null}
-      {process.status <= ProcessStatus.REQUESTED ? (
+      {process.status <= ProcessStatus.REQUESTED &&
+      shouldRenderFor("CLIENT") ? (
         <PermissionGate element="ProcessButtonDelete">
           <Button
             variant="icon"
@@ -149,7 +160,8 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
           />
         </PermissionGate>
       ) : null}
-      {process.status === ProcessStatus.COMPLETED ? (
+      {process.status === ProcessStatus.COMPLETED &&
+      shouldRenderFor("CLIENT") ? (
         <PermissionGate element="ProcessButtonReProject">
           <Button
             variant="icon"
@@ -159,50 +171,6 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
             onClick={handleOnClickButtonReProject}
             title={t(
               "Projects.Project.Process.components.Buttons.button.reProject"
-            )}
-          />
-        </PermissionGate>
-      ) : null}
-
-      {process.status >= ProcessStatus.REJECTED_BY_CONTRACTOR &&
-      process.status <= ProcessStatus.CONFIRMED_BY_CONTRACTOR ? (
-        <>
-          <PermissionGate element="ProcessButtonReject">
-            <Button
-              variant="icon"
-              width="fit"
-              size="sm"
-              children={<DeleteIcon />}
-              onClick={handleOnClickButtonReject}
-              title={t(
-                "Projects.Project.Process.components.Buttons.button.reject"
-              )}
-            />
-          </PermissionGate>
-          <PermissionGate element="ProcessButtonConfirm">
-            <Button
-              variant="icon"
-              width="fit"
-              size="sm"
-              children={<CheckIcon />}
-              onClick={handleOnClickButtonConfirm}
-              title={t(
-                "Projects.Project.Process.components.Buttons.button.confirm"
-              )}
-            />
-          </PermissionGate>
-        </>
-      ) : null}
-      {process.status === ProcessStatus.CONFIRMED_BY_CONTRACTOR ? (
-        <PermissionGate element="ProcessButtonVerify">
-          <Button
-            variant="icon"
-            width="fit"
-            size="sm"
-            children={<QuestionMarkIcon />}
-            onClick={handleOnClickButtonVerify}
-            title={t(
-              "Projects.Project.Process.components.Buttons.button.verify"
             )}
           />
         </PermissionGate>

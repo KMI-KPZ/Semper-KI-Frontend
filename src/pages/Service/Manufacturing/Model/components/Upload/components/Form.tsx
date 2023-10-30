@@ -61,7 +61,10 @@ const ManufacturingModelUploadForm: React.FC<
             ? []
             : data.certificate.split(",").map((item) => item.trim()),
         date: new Date(),
-        license: data.license === undefined ? "" : data.license,
+        license:
+          data.license === undefined
+            ? []
+            : data.license.split(",").map((item) => item.trim()),
         tags:
           data.tags === undefined
             ? []
@@ -82,9 +85,6 @@ const ManufacturingModelUploadForm: React.FC<
         <Text variant="body">{`${t(
           `Service.Manufacturing.Model.Upload.components.Form.size`
         )} ${file.size}`}</Text>
-        <Text variant="body">{`${t(
-          `Service.Manufacturing.Model.Upload.components.Form.type`
-        )} ${file.type}`}</Text>
         <Text variant="body">{`${t(
           `Service.Manufacturing.Model.Upload.components.Form.date`
         )} ${new Date().toLocaleDateString()}`}</Text>
@@ -117,7 +117,7 @@ const ManufacturingModelUploadForm: React.FC<
               errors.license !== undefined ? "border-red-500 bg-red-500" : ""
             }}`}
             placeholder={t(
-              "Service.Manufacturing.Model.Upload.components.Form.license"
+              "Service.Manufacturing.Model.Upload.components.Form.licensePH"
             )}
             {...register("license")}
           />

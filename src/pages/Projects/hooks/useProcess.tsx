@@ -13,6 +13,8 @@ import {
   GeneralServiceProps,
   GerneralUpdateServiceProps,
 } from "@/pages/Service/hooks/useService";
+import { useContext } from "react";
+import { ProjectContext } from "../context/ProjectContext";
 
 interface ReturnProps {
   deleteProcess: UseMutationResult<string, Error, string, unknown>;
@@ -123,12 +125,13 @@ interface ProcessQueryProps {
 const useProcess = (): ReturnProps => {
   const queryClient = useQueryClient();
   const { projectID, processID } = useParams();
+  const { project } = useContext(ProjectContext);
   const { projectQuery } = useProject();
   const navigate = useNavigate();
 
   const getProcessQuery = (_processID?: string): ProcessQueryProps => {
     return {
-      process: projectQuery.data?.processes.find(
+      process: project.processes.find(
         (process) =>
           process.processID ===
           (_processID === undefined ? processID : _processID)
@@ -138,7 +141,7 @@ const useProcess = (): ReturnProps => {
   };
 
   const getCurrentProcess = (_processID?: string): ProcessProps | undefined => {
-    return projectQuery.data?.processes.find(
+    return project.processes.find(
       (process) =>
         process.processID ===
         (_processID === undefined ? processID : _processID)
@@ -214,12 +217,10 @@ const useProcess = (): ReturnProps => {
     mutationFn: async ({ files, processID }) => {
       const formData = new FormData();
       files.forEach((file) => formData.append(file.name, file));
+      formData.append("processID", processID);
+      formData.append("projectID", project.projectID);
       return getCustomAxios()
-        .post(`${process.env.VITE_HTTP_API_URL}/public/uploadFiles/`, {
-          projectID,
-          processID: processID,
-          formData,
-        })
+        .post(`${process.env.VITE_HTTP_API_URL}/public/uploadFiles/`, formData)
         .then((res) => {
           logger("useProcess | uploadFiles ✅ |", res.data);
           return res.data;

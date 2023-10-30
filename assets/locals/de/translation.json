@@ -1174,6 +1174,7 @@
               "certificate": "Zertifikate",
               "certificatePH": "Zertifikate1, Zertifikate2, ...",
               "license": "Lizenz",
+              "licensePH": "Lizenz1, Lizenz2 ...",
               "button": {
                 "send": "Modell Hochladen"
               }

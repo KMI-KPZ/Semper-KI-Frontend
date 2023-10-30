@@ -17,7 +17,7 @@ interface ReturnProps {
 interface ModelUploadProps {
   tags: string[];
   date: Date;
-  license: string;
+  license: string[];
   certificate: string[];
 }
 
@@ -29,30 +29,21 @@ interface UploadModelProps {
 }
 
 const useModelUpload = (): ReturnProps => {
-  const navigate = useNavigate();
-  const { updateProcess } = useProcess();
-
   const uploadModel = useMutation<ModelProps[], Error, UploadModelProps>({
     mutationFn: async (props) => {
       const { model, processID, projectID, file } = props;
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append(file.name, file);
       formData.append("tags", model.tags.join(","));
-      formData.append("license", model.license);
+      formData.append("license", model.license.join(","));
       formData.append("certificate", model.certificate.join(","));
       formData.append("projectID", projectID);
       formData.append("processID", processID);
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/uploadModel/`;
       return getCustomAxios()
-        .post(
-          apiUrl,
-
-          formData,
-
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-          }
-        )
+        .post(apiUrl, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
         .then((response) => {
           logger("useModelUpload | uploadModel ✅ |", response.data);
           return response.data.models;

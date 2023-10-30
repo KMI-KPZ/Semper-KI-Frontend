@@ -268,7 +268,8 @@ const useProcess = (): ReturnProps => {
     mutationFn: async (processID: string) => {
       return getCustomAxios()
         .delete(
-          `${process.env.VITE_HTTP_API_URL}/public/deleteProcess/${URLProjectID}/${processID}/`
+          `${process.env.VITE_HTTP_API_URL}/public/deleteProcess/${URLProjectID}/`,
+          { data: { processIDs: [processID] } }
         )
         .then((res) => {
           logger("useProcess | deleteProcess ✅ |", res.data);

@@ -3,6 +3,7 @@ import logger from "@/hooks/useLogger";
 import {
   useMutation,
   UseMutationResult,
+  useQuery,
   useQueryClient,
   UseQueryResult,
 } from "@tanstack/react-query";
@@ -124,17 +125,16 @@ interface ProcessQueryProps {
 
 const useProcess = (): ReturnProps => {
   const queryClient = useQueryClient();
-  const { projectID, processID } = useParams();
+  const { projectID: URLProjectID, processID: URLProcessID } = useParams();
   const { project } = useContext(ProjectContext);
   const { projectQuery } = useProject();
-  const navigate = useNavigate();
 
   const getProcessQuery = (_processID?: string): ProcessQueryProps => {
     return {
       process: project.processes.find(
         (process) =>
           process.processID ===
-          (_processID === undefined ? processID : _processID)
+          (_processID === undefined ? URLProcessID : _processID)
       ),
       projectQuery,
     };
@@ -144,13 +144,13 @@ const useProcess = (): ReturnProps => {
     return project.processes.find(
       (process) =>
         process.processID ===
-        (_processID === undefined ? processID : _processID)
+        (_processID === undefined ? URLProcessID : _processID)
     );
   };
 
   const createProcess = useMutation<string, Error, void>({
     mutationFn: async () => {
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createProcessID/${projectID}/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createProcessID/${URLProjectID}/`;
       return getCustomAxios()
         .get(apiUrl)
         .then((response) => {
@@ -160,7 +160,7 @@ const useProcess = (): ReturnProps => {
     },
     onSuccess(data, variables, context) {
       queryClient.invalidateQueries(["flatProjects"]);
-      queryClient.invalidateQueries(["project", projectID]);
+      queryClient.invalidateQueries(["project", URLProjectID]);
     },
   });
 
@@ -168,8 +168,8 @@ const useProcess = (): ReturnProps => {
     mutationFn: async ({ changes = {}, deletions = {} }) => {
       return getCustomAxios()
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
-          projectID,
-          processIDs: [processID],
+          projectID: URLProjectID,
+          processIDs: [URLProcessID],
           changes: changes,
           deletions: deletions,
         })
@@ -179,7 +179,7 @@ const useProcess = (): ReturnProps => {
         });
     },
     onSuccess(data, variables, context) {
-      queryClient.invalidateQueries(["project", projectID]);
+      queryClient.invalidateQueries(["project", URLProjectID]);
       queryClient.invalidateQueries(["flatProjects"]);
     },
   });
@@ -197,7 +197,7 @@ const useProcess = (): ReturnProps => {
       const { changes = {}, deletions = {} } = updates;
       return getCustomAxios()
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
-          projectID,
+          projectID: URLProjectID,
           processIDs: [processID],
           changes,
           deletions,
@@ -208,7 +208,7 @@ const useProcess = (): ReturnProps => {
         });
     },
     onSuccess(data, variables, context) {
-      queryClient.invalidateQueries(["project", projectID]);
+      queryClient.invalidateQueries(["project", URLProjectID]);
       queryClient.invalidateQueries(["flatProjects"]);
     },
   });
@@ -231,7 +231,7 @@ const useProcess = (): ReturnProps => {
         });
     },
     onSuccess(data, variables, context) {
-      queryClient.invalidateQueries(["project", projectID]);
+      queryClient.invalidateQueries(["project", URLProjectID]);
     },
   });
 
@@ -248,7 +248,7 @@ const useProcess = (): ReturnProps => {
       const { changes = {}, deletions = {} } = updates;
       return getCustomAxios()
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
-          projectID,
+          projectID: URLProjectID,
           processIDs,
           changes,
           deletions,
@@ -259,7 +259,7 @@ const useProcess = (): ReturnProps => {
         });
     },
     onSuccess(data, variables, context) {
-      queryClient.invalidateQueries(["project", projectID]);
+      queryClient.invalidateQueries(["project", URLProjectID]);
       queryClient.invalidateQueries(["flatProjects"]);
     },
   });
@@ -268,7 +268,7 @@ const useProcess = (): ReturnProps => {
     mutationFn: async (processID: string) => {
       return getCustomAxios()
         .delete(
-          `${process.env.VITE_HTTP_API_URL}/public/deleteProcess/${projectID}/${processID}/`
+          `${process.env.VITE_HTTP_API_URL}/public/deleteProcess/${URLProjectID}/${processID}/`
         )
         .then((res) => {
           logger("useProcess | deleteProcess ✅ |", res.data);
@@ -276,7 +276,7 @@ const useProcess = (): ReturnProps => {
         });
     },
     onSuccess(data, processID, context) {
-      queryClient.invalidateQueries(["project", projectID]);
+      queryClient.invalidateQueries(["project", URLProjectID]);
       queryClient.invalidateQueries(["flatProjects"]);
     },
   });

@@ -62,7 +62,6 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
   };
 
   const addFiles = (files: File[]): void => {
-    logger("Upload", "addFiles", files);
     mutation(files);
   };
 

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Outlet } from "react-router-dom";
 import { ProjectProps, useProject } from "../hooks/useProject";
 import { LoadingAnimation } from "@component-library/index";
+import { UseQueryResult } from "@tanstack/react-query";
 
 interface ProjectOutletProps {}
 

@@ -44,10 +44,11 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
   const shouldRenderFor = (type: "CLIENT" | "CONTRACTOR"): boolean => {
     return (
       process !== undefined &&
-      user !== undefined &&
-      ((type === "CONTRACTOR" &&
-        process.contractor[0] === user.organizations[0]) ||
-        (type === "CLIENT" && process.client === user.hashedID))
+      (user === undefined ||
+        (user !== undefined &&
+          ((type === "CONTRACTOR" &&
+            process.contractor[0] === user.organizations[0]) ||
+            (type === "CLIENT" && process.client === user.hashedID))))
     );
   };
 

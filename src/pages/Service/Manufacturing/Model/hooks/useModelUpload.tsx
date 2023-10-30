@@ -36,7 +36,7 @@ const useModelUpload = (): ReturnProps => {
     mutationFn: async (props) => {
       const { model, processID, projectID, file } = props;
       const formData = new FormData();
-      formData.append(file.name, file);
+      formData.append("file", file);
       formData.append("tags", model.tags.join(","));
       formData.append("license", model.license);
       formData.append("certificate", model.certificate.join(","));
@@ -46,12 +46,9 @@ const useModelUpload = (): ReturnProps => {
       return getCustomAxios()
         .post(
           apiUrl,
-          {
-            // projectID,
-            // processID,
-            // model: model,
-            formData,
-          },
+
+          formData,
+
           {
             headers: { "Content-Type": "multipart/form-data" },
           }

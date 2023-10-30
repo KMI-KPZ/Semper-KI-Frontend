@@ -9,7 +9,7 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { LoadingAnimation } from "@component-library/Loading";
 import { getFileSizeAsString } from "@/services/utils";
 import { Heading } from "@component-library/Typography";
-import useModelUpload from "../hooks/useModelUpload";
+import useModelUpload from "../../hooks/useModelUpload";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 import { set } from "react-hook-form";
@@ -95,8 +95,11 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   return (
     <>
       <div
-        className="flex w-full grow flex-col  items-center justify-center gap-2  rounded-lg bg-white p-2 text-black
-      transition  duration-300 hover:cursor-pointer  hover:bg-türkis-200 "
+        className={`flex w-full grow flex-col items-center justify-center gap-2  
+                     bg-white p-2 text-black transition duration-300
+                    hover:cursor-pointer  hover:bg-türkis-200 
+                    ${dragActive ? "bg-türkis-200" : ""}
+                    `}
         onClick={handleClickUploadCard}
         onDragEnter={handleDragOnUploadCard}
         onDragLeave={handleDragOnUploadCard}

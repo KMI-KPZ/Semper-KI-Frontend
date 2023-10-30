@@ -14,6 +14,7 @@ import Modal from "@component-library/Modal";
 import { ModelProps } from "./types";
 import { useManufacturingModelData } from "./hooks/useModel";
 import { select } from "d3";
+import { ProcessModelUpload } from "./components/Upload/Upload";
 
 interface Props {
   filters: FilterItemProps[];
@@ -63,40 +64,6 @@ export const ProcessModel: React.FC<Props> = (props) => {
     return false;
   };
 
-  const handleOnClickCardUpload = () => {
-    navigate("upload");
-  };
-
-  const renderUplaodCart = () => (
-    <div
-      className={`flex items-center justify-between overflow-hidden bg-white hover:cursor-pointer hover:bg-gray-300 ${
-        grid === true
-          ? "basis-[48%] flex-col sm:basis-[32%] md:basis-[23.5%]"
-          : "w-full flex-row"
-      }`}
-      onClick={handleOnClickCardUpload}
-    >
-      <img
-        className={`p-5 ${
-          grid === true
-            ? "h-44 min-w-full max-w-[200%]"
-            : "max-h-44 min-h-full w-44 pl-10 "
-        }`}
-        src={IconUpload}
-        alt={t("Service.Manufacturing.Model.Model.upload.img")}
-      />
-      <Heading variant="h2">
-        {t("Service.Manufacturing.Model.Model.upload.title")}
-      </Heading>
-      <div className={`flex items-center justify-center gap-2 p-3`}>
-        <Button
-          onClick={handleOnClickCardUpload}
-          title={t("Service.Manufacturing.Model.Model.upload.button")}
-        />
-      </div>
-    </div>
-  );
-
   return model === undefined ? (
     <LoadingSuspense query={modelsQuery}>
       <div
@@ -108,7 +75,7 @@ export const ProcessModel: React.FC<Props> = (props) => {
       >
         {modelsQuery.data !== undefined && modelsQuery.data.length > 0 ? (
           <>
-            {renderUplaodCart()}
+            <ProcessModelUpload />
             {modelsQuery.data
               .filter((model, index) => filterBySearch(model))
               .map((model: ModelProps, index: number) => (

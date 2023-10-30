@@ -23,6 +23,7 @@ import { ProjectEventItem } from "@/pages/App/types";
 import { getTitleFromProcess } from "@/pages/Service/Overview/components/Item";
 import ProjectFile from "./components/ProcessFile";
 import ProcessStatusButtons from "./components/StatusButtons";
+import { Upload } from "@/components/Upload";
 
 interface Props {
   process: ProcessProps;
@@ -56,7 +57,7 @@ const Process: React.FC<Props> = (props) => {
     infoOpen: false,
   });
 
-  const { updateProcessWithProcessID } = useProcess();
+  const { updateProcessWithProcessID, uploadFiles } = useProcess();
 
   const updateStatus = (status: ProcessStatus) => {
     // updateProject.mutate({
@@ -86,6 +87,15 @@ const Process: React.FC<Props> = (props) => {
       ...prevState,
       infoOpen: false,
     }));
+  };
+
+  const uploadFilesMutation = (files: File[]) => {
+    updateProcessWithProcessID.mutate({
+      processID: process.processID,
+      updates: {
+        changes: { files: files },
+      },
+    });
   };
 
   return (
@@ -129,6 +139,7 @@ const Process: React.FC<Props> = (props) => {
       />
       <PermissionGate element="ProjectFile">
         <ProjectFile process={process} projectCollectionID={projectID} />
+        <Upload mutation={uploadFilesMutation} icon></Upload>
       </PermissionGate>
       <PermissionGate element="Chat">
         <Modal

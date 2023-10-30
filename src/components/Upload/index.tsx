@@ -13,11 +13,18 @@ import { useTranslation } from "react-i18next";
 interface Props {
   multiple?: boolean;
   dataTypes?: string[];
-  mutation: UseMutationResult<string, Error, string, unknown>;
+  icon?: boolean;
+  mutation(files: File[]): void;
 }
 
 export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
-  const { children, dataTypes = [], multiple = false } = props;
+  const {
+    children,
+    dataTypes = [],
+    multiple = false,
+    mutation,
+    icon = false,
+  } = props;
   const { t } = useTranslation();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
@@ -98,69 +105,31 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
   const handleClickNext = () => {};
 
   return (
-    <div className="flex flex-col items-center justify-center gap-5 bg-white p-5">
-      {error && (
-        <div className="error">
-          {t("Service.Manufacturing.Model.components.Upload.error")}
-        </div>
-      )}
-
-      <div className="flex flex-row flex-wrap items-center justify-center gap-5">
-        {fileList.map((file: File, index: number) => (
-          <div
-            key={index}
-            className="flex flex-col items-center justify-center gap-2 bg-gray-100 p-2"
-          >
-            <div className="canvas">
-              <ViewInArIcon sx={{ fontSize: "90px", margin: "auto" }} />
-            </div>
-            {file.name}
-            <div className="flex flex-row items-center justify-center gap-2">
-              {/* {getFileSizeAsString(file.size)} */}
-              <DeleteIcon
-                className="h-6 w-6 hover:cursor-pointer hover:bg-gray-300"
-                onClick={(e) => deleteFile(e, index)}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-      {status === "loading" ? (
-        <div className="pt-5">
-          <LoadingAnimation />
-          <span>
-            {t("Service.Manufacturing.Model.components.Upload.loading")}
-          </span>
-        </div>
-      ) : (
-        <div
-          className="flex max-w-2xl flex-col items-center justify-center gap-2 bg-gray-100 p-2 hover:cursor-pointer hover:bg-gray-300"
-          onClick={handleClickUploadCard}
-          onDragEnter={handleDragOnUploadCard}
-          onDragLeave={handleDragOnUploadCard}
-          onDragOver={handleDragOnUploadCard}
-          onDrop={handleDropOnUploadCard}
-        >
-          <input
-            accept={dataTypes.map((type: string) => type).join(",")}
-            type="file"
-            multiple
-            ref={hiddenFileInput}
-            onChange={handleChangeHiddenInput}
-            className="hidden"
-          />
-          <UploadIcon className="h-40 w-40" />
-          <Heading variant="h2">
-            {t("Service.Manufacturing.Model.components.Upload.card.title")}
-          </Heading>
-          {t("Service.Manufacturing.Model.components.Upload.card.text")}
-        </div>
-      )}
-      <Button
-        onClick={handleClickNext}
-        startIcon={<FileUploadIcon />}
-        title={t("Service.Manufacturing.Model.components.Upload.button.upload")}
+    <div
+      className={`flex w-full grow flex-col items-center justify-center gap-2  
+    rounded-xl border-2 bg-white p-2 text-slate-800 transition duration-300
+   hover:cursor-pointer  hover:bg-türkis-200 
+   ${dragActive ? "bg-türkis-200" : ""}
+   
+   `}
+      onClick={handleClickUploadCard}
+      onDragEnter={handleDragOnUploadCard}
+      onDragLeave={handleDragOnUploadCard}
+      onDragOver={handleDragOnUploadCard}
+      onDrop={handleDropOnUploadCard}
+    >
+      <input
+        accept={dataTypes.map((type: string) => type).join(",")}
+        type="file"
+        multiple
+        ref={hiddenFileInput}
+        onChange={handleChangeHiddenInput}
+        className="hidden"
       />
+      {icon === true ? (
+        <UploadIcon className="h-10 w-10 md:h-32 md:w-32" />
+      ) : null}
+      {children}
     </div>
   );
 };

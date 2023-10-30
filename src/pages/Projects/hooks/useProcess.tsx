@@ -38,6 +38,7 @@ interface ReturnProps {
     unknown
   >;
   getProcessQuery: (_processID?: string) => ProcessQueryProps;
+  uploadFiles: UseMutationResult<string, Error, UplaodFilesProps, unknown>;
 }
 
 export interface ProcessDetailsProps {
@@ -85,6 +86,11 @@ export interface ProcessDeletionsProps {
   files?: "";
   details?: "";
   service?: string[] | "";
+}
+
+export interface UplaodFilesProps {
+  processID: string;
+  files: File[];
 }
 
 export enum ProcessStatus {
@@ -204,6 +210,26 @@ const useProcess = (): ReturnProps => {
     },
   });
 
+  const uploadFiles = useMutation<string, Error, UplaodFilesProps>({
+    mutationFn: async ({ files, processID }) => {
+      const formData = new FormData();
+      files.forEach((file) => formData.append(file.name, file));
+      return getCustomAxios()
+        .post(`${process.env.VITE_HTTP_API_URL}/public/uploadFiles/`, {
+          projectID,
+          processID: processID,
+          formData,
+        })
+        .then((res) => {
+          logger("useProcess | uploadFiles ✅ |", res.data);
+          return res.data;
+        });
+    },
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries(["project", projectID]);
+    },
+  });
+
   const updateProcessesWithProcessIDs = useMutation<
     string,
     Error,
@@ -258,6 +284,7 @@ const useProcess = (): ReturnProps => {
     getProcessQuery,
     updateProcessWithProcessID,
     updateProcessesWithProcessIDs,
+    uploadFiles,
   };
 };
 

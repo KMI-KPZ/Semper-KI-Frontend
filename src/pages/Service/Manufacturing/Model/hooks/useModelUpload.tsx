@@ -37,14 +37,19 @@ const useModelUpload = (): ReturnProps => {
       const { model, processID, projectID, file } = props;
       const formData = new FormData();
       formData.append(file.name, file);
+      formData.append("tags", model.tags.join(","));
+      formData.append("license", model.license);
+      formData.append("certificate", model.certificate.join(","));
+      formData.append("projectID", projectID);
+      formData.append("processID", processID);
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/uploadModel/`;
       return getCustomAxios()
         .post(
           apiUrl,
           {
-            projectID,
-            processID,
-            model: model,
+            // projectID,
+            // processID,
+            // model: model,
             formData,
           },
           {

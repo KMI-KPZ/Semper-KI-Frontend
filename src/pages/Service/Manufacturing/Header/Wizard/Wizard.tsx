@@ -63,7 +63,7 @@ export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
       >
         <Container direction="col">
           <Text variant="body">
-            {t("Service.Manufacturing.Header.Wizard.Wizard.material")}
+            {t("Service.Manufacturing.Header.Wizard.Wizard.postprocessing")}
           </Text>
           <Text variant="body">
             {service.postProcessings === undefined

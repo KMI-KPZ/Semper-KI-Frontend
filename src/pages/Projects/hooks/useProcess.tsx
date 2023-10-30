@@ -220,7 +220,11 @@ const useProcess = (): ReturnProps => {
       formData.append("processID", processID);
       formData.append("projectID", project.projectID);
       return getCustomAxios()
-        .post(`${process.env.VITE_HTTP_API_URL}/public/uploadFiles/`, formData)
+        .post(
+          `${process.env.VITE_HTTP_API_URL}/public/uploadFiles/`,
+          formData,
+          { headers: { "Content-Type": "multipart/form-data" } }
+        )
         .then((res) => {
           logger("useProcess | uploadFiles ✅ |", res.data);
           return res.data;

@@ -184,6 +184,11 @@
     },
     "Switch": {},
     "Table": {},
+    "Upload": {
+      "title_one": "Datei hochladen",
+      "title_other": "Dateien hochladen",
+      "subTitle": "Per Drag & Drop oder Klick"
+    },
     "UserSwitch": {
       "client": "Einzelnutzer",
       "organization": "Organisation"

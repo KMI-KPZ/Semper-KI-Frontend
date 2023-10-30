@@ -90,11 +90,9 @@ const Process: React.FC<Props> = (props) => {
   };
 
   const uploadFilesMutation = (files: File[]) => {
-    updateProcessWithProcessID.mutate({
+    uploadFiles.mutate({
       processID: process.processID,
-      updates: {
-        changes: { files: files },
-      },
+      files: files,
     });
   };
 
@@ -139,7 +137,7 @@ const Process: React.FC<Props> = (props) => {
       />
       <PermissionGate element="ProjectFile">
         <ProjectFile process={process} projectCollectionID={projectID} />
-        <Upload mutation={uploadFilesMutation} icon></Upload>
+        <Upload mutation={uploadFilesMutation} icon multiple></Upload>
       </PermissionGate>
       <PermissionGate element="Chat">
         <Modal

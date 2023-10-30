@@ -1,14 +1,8 @@
-import useModelUpload from "@/pages/Service/Manufacturing/Model/hooks/useModelUpload";
-import { Button } from "@component-library/Button";
-import { Heading } from "@component-library/Typography";
-import { UseMutationResult } from "@tanstack/react-query";
+import { Heading, Text } from "@component-library/Typography";
 import { PropsWithChildren, useEffect, useRef, useState } from "react";
-import FileUploadIcon from "@mui/icons-material/FileUpload";
-import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import { ReactComponent as UploadIcon } from "@icons/Upload.svg";
-import { ReactComponent as DeleteIcon } from "@icons/Delete.svg";
-import { LoadingAnimation } from "@component-library/index";
 import { useTranslation } from "react-i18next";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   multiple?: boolean;
@@ -33,9 +27,7 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
 
   const handleChangeHiddenInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      for (let index = 0; index < e.target.files.length; index++) {
-        addFile(e.target.files[index]);
-      }
+      addFiles(Array.from(e.target.files));
     }
   };
 
@@ -55,44 +47,23 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
       setDragActive(false);
     }
   };
+
   const handleDropOnUploadCard = function (e: React.DragEvent<HTMLDivElement>) {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const newFiles: File[] = Array.from(e.dataTransfer.files);
-      addFile(newFiles);
+      addFiles(Array.from(e.dataTransfer.files));
     }
-  };
-
-  const deleteFile = (
-    e: React.MouseEvent<SVGSVGElement, MouseEvent>,
-    index: number
-  ): void => {
-    setFileList((prevState) =>
-      prevState.filter((file: File, fileIndex: number) => index !== fileIndex)
-    );
   };
 
   const showError = () => {
     setError(true);
   };
 
-  const addFile = (inputFile: File | File[]): void => {
-    let files: File[];
-    files =
-      inputFile.constructor === Array
-        ? [...inputFile]
-        : inputFile instanceof File
-        ? [inputFile]
-        : [];
-    files.forEach((file: File) => {
-      new RegExp("(" + dataTypes.join("|").replace(/\./g, "\\.") + ")$").test(
-        file.name.toUpperCase()
-      )
-        ? setFileList((prevState) => [...prevState, file])
-        : showError();
-    });
+  const addFiles = (files: File[]): void => {
+    logger("Upload", "addFiles", files);
+    mutation(files);
   };
 
   useEffect(() => {
@@ -102,12 +73,10 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
       }, 5000);
   }, [error]);
 
-  const handleClickNext = () => {};
-
   return (
     <div
       className={`flex w-full grow flex-col items-center justify-center gap-2  
-    rounded-xl border-2 bg-white p-2 text-slate-800 transition duration-300
+    rounded-xl border-2 bg-white p-2 text-black transition duration-300
    hover:cursor-pointer  hover:bg-türkis-200 
    ${dragActive ? "bg-türkis-200" : ""}
    
@@ -129,7 +98,16 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
       {icon === true ? (
         <UploadIcon className="h-10 w-10 md:h-32 md:w-32" />
       ) : null}
-      {children}
+      {children === undefined ? (
+        <>
+          <Text>
+            {t("components.Upload.title", { count: multiple === true ? 2 : 1 })}
+          </Text>
+          <Text>{t("components.Upload.subTitle")}</Text>
+        </>
+      ) : (
+        children
+      )}
     </div>
   );
 };

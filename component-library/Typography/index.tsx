@@ -78,7 +78,7 @@ const Heading: React.FC<PropsWithChildren<HeadingProps>> = ({
 };
 
 type TextProps = {
-  variant:
+  variant?:
     | "body"
     | "strong"
     | "small"
@@ -91,7 +91,7 @@ type TextProps = {
 
 const Text: React.FC<PropsWithChildren<TextProps>> = ({
   children,
-  variant,
+  variant = "body",
   className,
 }) => {
   const additionalClassNames = className ?? "";

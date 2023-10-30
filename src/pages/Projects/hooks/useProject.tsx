@@ -8,7 +8,11 @@ import {
 } from "@tanstack/react-query";
 import logger from "@/hooks/useLogger";
 import { useNavigate, useParams } from "react-router-dom";
-import useProcess, { ProcessProps, ProcessStatus } from "./useProcess";
+import useProcess, {
+  FilesDescriptionProps,
+  ProcessProps,
+  ProcessStatus,
+} from "./useProcess";
 
 interface ReturnProps {
   projectQuery: UseQueryResult<ProjectProps, Error>;
@@ -45,6 +49,15 @@ export interface ProjectDeletionsProps {
   status?: "";
 }
 
+const getFiles = (filesObject: Object): FilesDescriptionProps[] => {
+  let files: FilesDescriptionProps[] = Object.entries(filesObject).map(
+    ([key, value]) => {
+      return { ...value } as FilesDescriptionProps;
+    }
+  );
+  return files;
+};
+
 export const useProject = (): ReturnProps => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -62,6 +75,14 @@ export const useProject = (): ReturnProps => {
             ...response.data,
             created: new Date(response.data.created),
             updated: new Date(response.data.updated),
+            processes: response.data.processes.map((process: any) => {
+              return {
+                ...process,
+                created: new Date(process.created),
+                updated: new Date(process.updated),
+                files: getFiles(process.files),
+              };
+            }),
           };
           return Project;
         });

@@ -42,6 +42,13 @@ interface ReturnProps {
   >;
   getProcessQuery: (_processID?: string) => ProcessQueryProps;
   uploadFiles: UseMutationResult<string, Error, UplaodFilesProps, unknown>;
+  downloadFile: UseMutationResult<Blob, Error, DownloadFileProps, unknown>;
+  downloadFilesZIP: UseMutationResult<
+    Blob,
+    Error,
+    DownloadFilesZIPProps,
+    unknown
+  >;
 }
 
 export interface ProcessDetailsProps {
@@ -52,14 +59,21 @@ export interface ProcessProps {
   messages: { messages: ChatMessageProps[] };
   contractor: string[];
   client: string;
-  created: Date;
   details: ProcessDetailsProps;
-  files: string[];
+  files: FilesDescriptionProps[];
   service: GeneralServiceProps;
   status: ProcessStatus;
   serviceStatus: number;
   processID: string;
-  updated: string;
+  created: Date;
+  updated: Date;
+}
+
+export interface FilesDescriptionProps {
+  createdBy: string;
+  date: string;
+  id: string;
+  title: string;
 }
 
 export interface ChatMessageProps {
@@ -94,6 +108,15 @@ export interface ProcessDeletionsProps {
 export interface UplaodFilesProps {
   processID: string;
   files: File[];
+}
+
+export interface DownloadFileProps {
+  processID: string;
+  fileID: string;
+}
+export interface DownloadFilesZIPProps {
+  processID: string;
+  fileIDs: string[];
 }
 
 export enum ProcessStatus {
@@ -282,6 +305,38 @@ const useProcess = (): ReturnProps => {
     },
   });
 
+  const downloadFile = useMutation<Blob, Error, DownloadFileProps>({
+    mutationFn: async ({ processID, fileID }) => {
+      return getCustomAxios()
+        .get(
+          `${process.env.VITE_HTTP_API_URL}/public/downloadFile/${processID}/${fileID}`,
+          { responseType: "blob" }
+        )
+        .then((res) => {
+          logger("useProcess | downloadFile ✅ |", res.data);
+          return res.data;
+        });
+    },
+  });
+
+  const downloadFilesZIP = useMutation<Blob, Error, DownloadFilesZIPProps>({
+    mutationFn: async ({ processID, fileIDs }) => {
+      return getCustomAxios()
+        .get(
+          `${
+            process.env.VITE_HTTP_API_URL
+          }/public/downloadFilesAsZip/${processID}?fileIDs=${fileIDs.join(
+            ","
+          )}`,
+          { responseType: "blob" }
+        )
+        .then((res) => {
+          logger("useProcess | downloadFilesZIP ✅ |", res.data);
+          return res.data;
+        });
+    },
+  });
+
   return {
     createProcess,
     deleteProcess,
@@ -291,6 +346,8 @@ const useProcess = (): ReturnProps => {
     updateProcessWithProcessID,
     updateProcessesWithProcessIDs,
     uploadFiles,
+    downloadFile,
+    downloadFilesZIP,
   };
 };
 

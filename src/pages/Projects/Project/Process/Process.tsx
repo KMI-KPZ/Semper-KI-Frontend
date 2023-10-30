@@ -136,7 +136,7 @@ const Process: React.FC<Props> = (props) => {
         processID={process.processID}
       />
       <PermissionGate element="ProjectFile">
-        <ProjectFile process={process} projectCollectionID={projectID} />
+        <ProjectFile process={process} projectID={projectID} />
         <Upload mutation={uploadFilesMutation} icon multiple></Upload>
       </PermissionGate>
       <PermissionGate element="Chat">

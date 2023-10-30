@@ -826,7 +826,8 @@
             "title": "Dateien",
             "empty": "keine Dateien gefunden",
             "button": {
-              "download": "Herunterladen"
+              "download": "Herunterladen",
+              "downloadAll": "Alles Als .zip Herunterladen"
             }
           },
           "StatusButtons": {

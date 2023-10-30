@@ -1,33 +1,68 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import DownloadIcon from "@mui/icons-material/Download";
 import { Heading } from "@component-library/Typography";
-import useFileView from "../../hooks/useFileView";
 import { Divider } from "@component-library/Divider";
-import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
-import useProcessFile from "../../hooks/useProcessFile";
+import useProcess, {
+  FilesDescriptionProps,
+  ProcessProps,
+} from "@/pages/Projects/hooks/useProcess";
 
 interface Props {
   process: ProcessProps;
-  projectCollectionID: string;
+  projectID: string;
 }
 
 const ProjectFile: React.FC<Props> = (props) => {
-  const { process: project } = props;
+  const { process } = props;
   const { t } = useTranslation();
-  const [fileName, setFileName] = useState<string>("");
-  const { processFileQuery } = useProcessFile({
-    processID: project.processID,
-    fileName,
-  });
-  useFileView(fileName, processFileQuery, setFileName);
+  const [loadingFileID, setLoadingFileID] = useState<string>("");
 
-  const handleOnClickButton = (fileName: string) => {
-    setFileName(fileName);
+  const createDownload = (blob: Blob, title: string) => {
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", title);
+
+    setLoadingFileID("");
+
+    // Append to html link element page
+    document.body.appendChild(link);
+
+    // Start download
+    link.click();
+
+    // Clean up and remove the link
+    link.parentNode!.removeChild(link);
   };
 
-  const buttonQuery = fileName !== "" ? processFileQuery : undefined;
+  const { downloadFile, downloadFilesZIP } = useProcess();
+
+  const handleOnClickButtonDownloadFile = (file: FilesDescriptionProps) => {
+    setLoadingFileID(file.id);
+    downloadFile.mutate(
+      { processID: process.processID, fileID: file.id },
+      {
+        onSettled(data) {
+          if (data) createDownload(data, file.title);
+        },
+      }
+    );
+  };
+  const handleOnClickButtonDownloadZip = () => {
+    downloadFilesZIP.mutate(
+      {
+        processID: process.processID,
+        fileIDs: process.files.map((file) => file.id),
+      },
+      {
+        onSettled(data) {
+          if (data) createDownload(data, "files.zip");
+        },
+      }
+    );
+  };
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
@@ -37,26 +72,41 @@ const ProjectFile: React.FC<Props> = (props) => {
         </Heading>
         <Divider className="mt-[0.3rem]" />
       </div>
-      <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
-        {project.files.length > 0
-          ? project.files.map((_fileName, index) => (
+      <div className="flex w-full flex-col flex-wrap items-center justify-center gap-5 md:flex-row">
+        {process.files.length > 0 ? (
+          <>
+            {process.files.map((file, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center justify-center bg-slate-100 p-2"
+                className="flex flex-col items-center justify-center rounded-xl  p-2 shadow-md"
               >
-                <span className="p-2">{_fileName}</span>
+                <span className="p-2">{file.title}</span>
                 <Button
-                  onClick={() => handleOnClickButton(_fileName)}
+                  variant="icon"
+                  onClick={() => handleOnClickButtonDownloadFile(file)}
                   startIcon={<DownloadIcon />}
-                  loading={buttonQuery?.isLoading}
+                  loading={downloadFile.isLoading && loadingFileID === file.id}
                   title={t(
                     "Projects.Project.Process.components.ProcessFile.button.download"
                   )}
                 />
               </div>
-            ))
-          : t("Projects.Project.Process.components.ProcessFile.empty")}
+            ))}
+          </>
+        ) : (
+          t("Projects.Project.Process.components.ProcessFile.empty")
+        )}
       </div>
+      {process.files.length > 0 ? (
+        <Button
+          title={t(
+            "Projects.Project.Process.components.ProcessFile.button.downloadAll"
+          )}
+          onClick={handleOnClickButtonDownloadZip}
+          startIcon={<DownloadIcon />}
+          loading={downloadFilesZIP.isLoading}
+        />
+      ) : null}
     </div>
   );
 };

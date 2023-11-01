@@ -5,90 +5,94 @@ import { useTranslation } from "react-i18next";
 import { ServiceManufacturingContext } from "../../Manufacturing";
 import { Text } from "@component-library/Typography";
 import Container from "@component-library/Container";
-import logger from "@/hooks/useLogger";
 import useService from "@/pages/Service/hooks/useService";
 import ManufacturingWizardItem from "./components/Item";
+import { Button } from "@component-library/Button";
+import ViewInArIcon from "@mui/icons-material/ViewInAr";
+import ConstructionIcon from "@mui/icons-material/Construction";
+import BrushIcon from "@mui/icons-material/Brush";
+import DoneAllOutlinedIcon from "@mui/icons-material/DoneAllOutlined";
+import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 interface Props {}
 
 export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
   const {} = props;
   const location = useLocation();
   const { t } = useTranslation();
+  const getCount = (): [number, number] => {
+    let count = 0;
+    let total = 0;
+    if (service.model !== undefined) {
+      count++;
+    }
+    if (service.material !== undefined) {
+      count++;
+    }
+    if (service.postProcessings !== undefined) {
+      count++;
+    }
+    total = 3;
+    return [count, total];
+  };
 
   const { service } = useContext(ServiceManufacturingContext);
-  // logger("ServiceManufacturingWizard | service", service);
-  const { isServiceComplete } = useService();
+  const getCompletedButtonText = () => {
+    const [count, total] = getCount();
+    return count === total ? (
+      <DoneAllOutlinedIcon />
+    ) : (
+      <>
+        {count} / {total}
+      </>
+    );
+  };
 
-  const { getCurrentProcess } = useProcess();
   return (
     <div className="flex flex-col items-center justify-around gap-5 sm:flex-row ">
+      <Button
+        title={t("Service.Manufacturing.Header.Wizard.Wizard.overview")}
+        children={<ArrowBackOutlinedIcon />}
+        to="../.."
+      />
       <ManufacturingWizardItem
         title={t("Service.Manufacturing.Header.Wizard.Wizard.model")}
+        completed={service.model !== undefined}
+        icon={<ViewInArIcon />}
         active={location.pathname.includes("model")}
         to="model"
-      >
-        <Container direction="col">
-          <Text variant="body">
-            {t("Service.Manufacturing.Header.Wizard.Wizard.model")}
-          </Text>
-          <Text variant="body">
-            {t(
-              service.model !== undefined
-                ? service.model.title
-                : "Service.Manufacturing.Header.Wizard.Wizard.empty"
-            )}
-          </Text>
-        </Container>
-      </ManufacturingWizardItem>
+      />
       <ManufacturingWizardItem
         title={t("Service.Manufacturing.Header.Wizard.Wizard.material")}
         active={location.pathname.includes("material")}
         to="material"
-      >
-        <Container direction="col">
-          <Text variant="body">
-            {t("Service.Manufacturing.Header.Wizard.Wizard.material")}
-          </Text>
-          <Text variant="body">
-            {service.material !== undefined
-              ? service.material.title
-              : t("Service.Manufacturing.Header.Wizard.Wizard.empty")}
-          </Text>
-        </Container>
-      </ManufacturingWizardItem>
+        completed={service.material !== undefined}
+        icon={<ConstructionIcon />}
+      />
       <ManufacturingWizardItem
         title={t("Service.Manufacturing.Header.Wizard.Wizard.postprocessing")}
         active={location.pathname.includes("postprocessing")}
         to="postprocessing"
-      >
-        <Container direction="col">
-          <Text variant="body">
-            {t("Service.Manufacturing.Header.Wizard.Wizard.postprocessing")}
-          </Text>
-          <Text variant="body">
-            {service.postProcessings === undefined
-              ? 0
-              : service.postProcessings.length}
-          </Text>
-        </Container>
-      </ManufacturingWizardItem>
-      <ManufacturingWizardItem
+        completed={service.postProcessings !== undefined}
+        icon={<BrushIcon />}
+      />
+
+      <Button
         title={t("Service.Manufacturing.Header.Wizard.Wizard.overview")}
+        children={getCompletedButtonText()}
         to="../.."
-      >
-        <Container direction="col">
-          <Text variant="body">
-            {t("Service.Manufacturing.Header.Wizard.Wizard.overview")}
-          </Text>
-          <Text variant="body">
-            {t(
-              isServiceComplete(getCurrentProcess()!.processID)
-                ? "Service.Manufacturing.Header.Wizard.Wizard.ready"
-                : "Service.Manufacturing.Header.Wizard.Wizard.notReady"
-            )}
-          </Text>
-        </Container>
-      </ManufacturingWizardItem>
+        active={
+          service.material !== undefined &&
+          service.model !== undefined &&
+          service.postProcessings !== undefined
+        }
+        variant={
+          service.material !== undefined &&
+          service.model !== undefined &&
+          service.postProcessings !== undefined
+            ? "primary"
+            : "secondary"
+        }
+      />
     </div>
   );
 };

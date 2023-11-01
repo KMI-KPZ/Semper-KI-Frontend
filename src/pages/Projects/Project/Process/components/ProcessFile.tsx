@@ -8,6 +8,8 @@ import useProcess, {
   FilesDescriptionProps,
   ProcessProps,
 } from "@/pages/Projects/hooks/useProcess";
+import Container from "@component-library/Container";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface Props {
   process: ProcessProps;
@@ -37,7 +39,10 @@ const ProjectFile: React.FC<Props> = (props) => {
     link.parentNode!.removeChild(link);
   };
 
-  const { downloadFile, downloadFilesZIP } = useProcess();
+  const { downloadFile, downloadFilesZIP, deleteFile } = useProcess();
+  const hanleOnClickButtonDelete = (file: FilesDescriptionProps) => {
+    deleteFile.mutate({ processID: process.processID, fileID: file.id });
+  };
 
   const handleOnClickButtonDownloadFile = (file: FilesDescriptionProps) => {
     setLoadingFileID(file.id);
@@ -81,15 +86,32 @@ const ProjectFile: React.FC<Props> = (props) => {
                 className="flex flex-col items-center justify-center rounded-xl  p-2 shadow-md"
               >
                 <span className="p-2">{file.title}</span>
-                <Button
-                  variant="icon"
-                  onClick={() => handleOnClickButtonDownloadFile(file)}
-                  startIcon={<DownloadIcon />}
-                  loading={downloadFile.isLoading && loadingFileID === file.id}
-                  title={t(
-                    "Projects.Project.Process.components.ProcessFile.button.download"
-                  )}
-                />
+                <Container>
+                  <Button
+                    size="sm"
+                    variant="icon"
+                    onClick={() => hanleOnClickButtonDelete(file)}
+                    children={<DeleteIcon />}
+                    loading={
+                      downloadFile.isLoading && loadingFileID === file.id
+                    }
+                    title={t(
+                      "Projects.Project.Process.components.ProcessFile.button.delete"
+                    )}
+                  />
+                  <Button
+                    size="sm"
+                    variant="icon"
+                    onClick={() => handleOnClickButtonDownloadFile(file)}
+                    children={<DownloadIcon />}
+                    loading={
+                      downloadFile.isLoading && loadingFileID === file.id
+                    }
+                    title={t(
+                      "Projects.Project.Process.components.ProcessFile.button.download"
+                    )}
+                  />
+                </Container>
               </div>
             ))}
           </>

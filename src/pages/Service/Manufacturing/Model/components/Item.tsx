@@ -32,7 +32,7 @@ const ProcessModelItem: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex h-fit w-full flex-col items-center justify-start gap-5 bg-white p-5">
+    <div className="flex h-fit w-full  flex-col items-center justify-start gap-5 bg-white p-5">
       <Heading variant="h2">{model.title}</Heading>
       <img className="w-full max-w-xs" src={getModelURI(model)} alt="Model" />
       <div className="model-view-tags">
@@ -47,11 +47,11 @@ const ProcessModelItem: React.FC<Props> = (props) => {
       </div>
       <div className="model-view-licens">
         {t("Service.Manufacturing.Model.components.Item.license")}:{" "}
-        {model.license}
+        {model.licenses}
       </div>
       <div className="model-view-certificates">
         {t("Service.Manufacturing.Model.components.Item.certificates")}:
-        {model.certificates.length > 0
+        {model.certificates !== undefined && model.certificates.length > 0
           ? model.certificates.map((title: string, index: number) => (
               <div className="model-view-certificate" key={index}>
                 {title}

@@ -45,7 +45,7 @@ const AdminModels: React.FC<Props> = (props) => {
                   {model.date}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {model.license}
+                  {model.licenses}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {model.certificates.join(", ")}

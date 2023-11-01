@@ -58,7 +58,9 @@ export const ProcessModel: React.FC<Props> = (props) => {
       model.certificates.filter((certificate) =>
         certificate.toLocaleLowerCase().includes(searchText)
       ).length > 0 ||
-      model.license.toLocaleLowerCase().includes(searchText)
+      model.licenses.filter((certificate) =>
+        certificate.toLocaleLowerCase().includes(searchText)
+      ).length > 0
     )
       return true;
     return false;

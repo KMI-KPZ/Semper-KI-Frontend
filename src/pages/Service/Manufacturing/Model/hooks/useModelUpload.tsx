@@ -34,6 +34,7 @@ interface UploadModelProps {
 
 const useModelUpload = (): ReturnProps => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const { updateProcessWithProcessID } = useProcess();
   const uploadModel = useMutation<ModelProps[], Error, UploadModelProps>({
     mutationFn: async (props) => {
@@ -56,15 +57,16 @@ const useModelUpload = (): ReturnProps => {
         });
     },
     onSuccess(data, variables, context) {
-      const model: ModelProps[] = Object.entries(data).map(([key, value]) => {
-        logger("UseModelUpload | onSuccess ✅ |", value);
-        return { ...value } as ModelProps;
-      });
-      if (model.length === 0) return;
-      updateProcessWithProcessID.mutate({
-        processID: variables.processID,
-        updates: { changes: { service: { model: model[0] } } },
-      });
+      // const model: ModelProps[] = Object.entries(data).map(([key, value]) => {
+      //   logger("UseModelUpload | onSuccess ✅ |", value);
+      //   return { ...value } as ModelProps;
+      // });
+      // if (model.length === 0) return;
+      // updateProcessWithProcessID.mutate({
+      //   processID: variables.processID,
+      //   updates: { changes: { service: { model: model[0] } } },
+      // });
+      navigate("../material");
     },
   });
 

@@ -124,7 +124,7 @@ export const useProject = (): ReturnProps => {
     onSuccess(newProcessID, manuelProjectID, context) {
       queryClient.invalidateQueries(["flatProjects"]);
       queryClient.invalidateQueries(["project", manuelProjectID]);
-      navigate(`/projects/${manuelProjectID}/${newProcessID}/service`);
+      navigate(`/projects/${manuelProjectID}/${newProcessID}`);
     },
   });
 

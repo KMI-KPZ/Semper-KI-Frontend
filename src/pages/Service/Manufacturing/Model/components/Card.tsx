@@ -93,7 +93,7 @@ export const ProcessModelCard: React.FC<Props> = (props) => {
         <div className="hidden flex-col items-center justify-center gap-2 md:flex">
           <div>
             {t("Service.Manufacturing.Model.components.Card.license")}:{" "}
-            {model.license}
+            {model.licenses}
           </div>
           <div>
             {t("Service.Manufacturing.Model.components.Card.certificates")}:

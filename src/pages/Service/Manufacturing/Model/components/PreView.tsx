@@ -56,7 +56,7 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
       </div>
       <div className="model-view-licens">
         {t("Service.Manufacturing.Model.components.PreView.license")}:{" "}
-        {model.license}
+        {model.licenses}
       </div>
       <div className="model-view-certificates">
         {t("Service.Manufacturing.Model.components.PreView.certificates")}:

@@ -19,6 +19,7 @@ import useProcess, {
   ProcessStatus,
 } from "@/pages/Projects/hooks/useProcess";
 import { ProcessComponentState } from "../Process";
+import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 
 interface ProcessButtonsProps {
   user: UserProps | undefined;
@@ -35,6 +36,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
   const { t } = useTranslation();
   const { deleteEvent } = useContext(AppContext);
   const { deleteProcess, updateProcessWithProcessID } = useProcess();
+  const { project } = useContext(ProjectContext);
   const { getDeleteProjectEvent } = useProjectEventChange(
     process,
     projectID,
@@ -115,7 +117,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
         onClick={handleOnClickButtonInfo}
         title={t("Projects.Project.Process.components.Buttons.button.info")}
       />
-      {user !== undefined ? (
+      {process.status >= ProcessStatus.REQUESTED && user !== undefined ? (
         <PermissionGate element="ProcessButtonChat">
           {projectEvent !== undefined &&
           projectEvent.messages !== undefined &&

@@ -3,7 +3,7 @@ export interface ModelProps {
   title: string;
   tags: string[]; //
   date: string; //
-  license: string; //
+  licenses: string[]; //
   certificates: string[]; //
   URI: string; //X
   createdBy: string;

@@ -49,6 +49,7 @@ interface ReturnProps {
     DownloadFilesZIPProps,
     unknown
   >;
+  deleteFile: UseMutationResult<string, Error, DeleteFileProps, unknown>;
 }
 
 export interface ProcessDetailsProps {
@@ -117,6 +118,10 @@ export interface DownloadFileProps {
 export interface DownloadFilesZIPProps {
   processID: string;
   fileIDs: string[];
+}
+export interface DeleteFileProps {
+  processID: string;
+  fileID: string;
 }
 
 export enum ProcessStatus {
@@ -336,6 +341,21 @@ const useProcess = (): ReturnProps => {
         });
     },
   });
+  const deleteFile = useMutation<string, Error, DeleteFileProps>({
+    mutationFn: async ({ processID, fileID }) => {
+      return getCustomAxios()
+        .delete(
+          `${process.env.VITE_HTTP_API_URL}/public/downloadFilesAsZip/${processID}/${fileID}`
+        )
+        .then((res) => {
+          logger("useProcess | deleteFile ✅ |", res.data);
+          return res.data;
+        });
+    },
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries(["project", URLProjectID]);
+    },
+  });
 
   return {
     createProcess,
@@ -348,6 +368,7 @@ const useProcess = (): ReturnProps => {
     uploadFiles,
     downloadFile,
     downloadFilesZIP,
+    deleteFile,
   };
 };
 

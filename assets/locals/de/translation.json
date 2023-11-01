@@ -826,6 +826,7 @@
             "title": "Dateien",
             "empty": "keine Dateien gefunden",
             "button": {
+              "delete": "Löschen",
               "download": "Herunterladen",
               "downloadAll": "Alles Als .zip Herunterladen"
             }
@@ -1074,7 +1075,7 @@
           "useFilter": {}
         },
         "Filter": {
-          "header": "Vorgaben",
+          "header": "Vorgabenfilter",
           "button": {
             "reset": "Zurücksetzen",
             "apply": "Anwenden"

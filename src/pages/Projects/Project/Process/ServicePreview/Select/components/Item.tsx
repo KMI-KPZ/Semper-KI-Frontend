@@ -21,6 +21,16 @@ const ServicePreviewSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
   const navigate = useNavigate();
   const { processID } = useParams();
 
+  const navigateToService = () => {
+    navigate(
+      processID !== undefined && processID !== manuelProcessID
+        ? `../${manuelProcessID}/service/edit`
+        : processID !== undefined && processID === manuelProcessID
+        ? `service/edit`
+        : `${manuelProcessID}/service/edit`
+    );
+  };
+
   const handleOnClickCard = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
@@ -53,14 +63,6 @@ const ServicePreviewSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
         }
       );
     }
-  };
-
-  const navigateToService = () => {
-    navigate(
-      processID !== undefined && processID !== manuelProcessID
-        ? `../${manuelProcessID}/service/edit`
-        : `${manuelProcessID}/service/edit`
-    );
   };
 
   return (

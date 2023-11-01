@@ -4,7 +4,7 @@ export interface ModelProps {
   tags: string[]; //
   date: string; //
   license: string; //
-  certificate: string[]; //
+  certificates: string[]; //
   URI: string; //X
   createdBy: string;
 }

@@ -98,7 +98,7 @@ export const ProcessModelCard: React.FC<Props> = (props) => {
           <div>
             {t("Service.Manufacturing.Model.components.Card.certificates")}:
           </div>
-          {model.certificate.map((title: string, index: number) => (
+          {model.certificates.map((title: string, index: number) => (
             <div key={index}>{title}</div>
           ))}
         </div>

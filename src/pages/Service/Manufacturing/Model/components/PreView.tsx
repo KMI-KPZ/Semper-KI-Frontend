@@ -60,8 +60,8 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
       </div>
       <div className="model-view-certificates">
         {t("Service.Manufacturing.Model.components.PreView.certificates")}:
-        {model.certificate.length > 0
-          ? model.certificate.map((title: string, index: number) => (
+        {model.certificates.length > 0
+          ? model.certificates.map((title: string, index: number) => (
               <div className="model-view-certificate" key={index}>
                 {title}
               </div>

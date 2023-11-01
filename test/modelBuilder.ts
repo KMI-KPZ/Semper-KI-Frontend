@@ -52,7 +52,7 @@ export class ModelBuilder {
             tags: this.tags,
             date: this.date,
             license: this.license,
-            certificate: this.certificate,
+            certificates: this.certificate,
             URI: this.URI,
             createdBy: this.createdBy,
         }

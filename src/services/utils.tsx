@@ -100,6 +100,8 @@ export const getModelURI = (model: ModelProps): string => {
     base64 = base64.slice(0, -1);
     return base64;
   };
+  if (model.URI === undefined) return "";
+
   return model.createdBy === "kiss"
     ? model.URI
     : `data:image/jpeg;base64,${convertStringForImage(model.URI)}`;

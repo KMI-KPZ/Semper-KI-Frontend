@@ -1,5 +1,9 @@
 import { getCustomAxios } from "@/hooks/useCustomAxios";
-import { useMutation, UseMutationResult } from "@tanstack/react-query";
+import {
+  useMutation,
+  UseMutationResult,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { ModelProps } from "../types";
 import logger from "@/hooks/useLogger";
 import { useNavigate } from "react-router-dom";
@@ -29,6 +33,8 @@ interface UploadModelProps {
 }
 
 const useModelUpload = (): ReturnProps => {
+  const queryClient = useQueryClient();
+  const { updateProcessWithProcessID } = useProcess();
   const uploadModel = useMutation<ModelProps[], Error, UploadModelProps>({
     mutationFn: async (props) => {
       const { model, processID, projectID, file } = props;
@@ -46,8 +52,19 @@ const useModelUpload = (): ReturnProps => {
         })
         .then((response) => {
           logger("useModelUpload | uploadModel ✅ |", response.data);
-          return response.data.models;
+          return response.data;
         });
+    },
+    onSuccess(data, variables, context) {
+      const model: ModelProps[] = Object.entries(data).map(([key, value]) => {
+        logger("UseModelUpload | onSuccess ✅ |", value);
+        return { ...value } as ModelProps;
+      });
+      if (model.length === 0) return;
+      updateProcessWithProcessID.mutate({
+        processID: variables.processID,
+        updates: { changes: { service: { model: model[0] } } },
+      });
     },
   });
 

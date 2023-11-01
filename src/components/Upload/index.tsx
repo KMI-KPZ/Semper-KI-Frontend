@@ -95,7 +95,7 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
         className="hidden"
       />
       {icon === true ? (
-        <UploadIcon className="h-10 w-10 md:h-32 md:w-32" />
+        <UploadIcon className="h-10 w-10 md:h-24 md:w-24" />
       ) : null}
       {children === undefined ? (
         <>

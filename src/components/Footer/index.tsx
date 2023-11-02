@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { ReactComponent as MastodonIcon } from "@icons/Mastodon.svg";
+import  ContactForm  from "./ContactForm";
 import {
   URL_Contact,
   URL_Datenschutz,
@@ -11,6 +12,7 @@ import {
   URL_Mastodon,
 } from "@/config/constants";
 import { Button } from "@component-library/Button";
+import Modal from "@component-library/Modal";
 
 interface Props {
   isMagazineUp(): boolean;
@@ -20,6 +22,7 @@ const Footer: React.FC<Props> = (props) => {
   const { isMagazineUp } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [open,setOpen] = useState<boolean>(false);
 
   const handleOnClickContact = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -28,7 +31,15 @@ const Footer: React.FC<Props> = (props) => {
     navigate("/contact");
   };
 
+  const contactOnClick= function(){
+      setOpen((prevState) => (!prevState));
+  }
+
   return (
+      <>
+        <Modal open={open} closeModal={()=> ( setOpen(false))}>
+            <ContactForm closeEdit={contactOnClick} />
+        </Modal>
     <footer className="w-full bg-white shadow-inner ">
       <ul className="flex flex-col items-center md:flex-row md:justify-around">
         <li className="p-2">
@@ -50,9 +61,8 @@ const Footer: React.FC<Props> = (props) => {
         <li className="p-2">
           <Button
             variant="light"
+            onClick={contactOnClick}
             title={t("components.Footer.Footer.contact")}
-            extern={isMagazineUp()}
-            to={isMagazineUp() ? URL_Contact : "/legal/contact"}
           />
         </li>
         <li className="flex flex-col items-center justify-center xs:flex-row xs:gap-2 xs:p-2">
@@ -78,6 +88,7 @@ const Footer: React.FC<Props> = (props) => {
         </li>
       </ul>
     </footer>
+      </>
   );
 };
 

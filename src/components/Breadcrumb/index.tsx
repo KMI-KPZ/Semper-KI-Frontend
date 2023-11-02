@@ -6,9 +6,115 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 interface Props {}
 
+export type DataNaviagtionTranlationType =
+  | "edit"
+  | "home"
+  | "process"
+  | "model"
+  | "upload"
+  | "material"
+  | "postprocessing"
+  | "cart"
+  | "manufacturer"
+  | "checkout"
+  | "guide"
+  | "order"
+  | "orders"
+  | "account"
+  | "test"
+  | "service"
+  | "use"
+  | "provide"
+  | "portfolio"
+  | "use-service"
+  | "provide-service"
+  | "continue"
+  | "new-contract"
+  | "proceedings"
+  | "company"
+  | "user"
+  | "procedure"
+  | "printer"
+  | "about-us"
+  | "login"
+  | "register"
+  | "logout"
+  | "organization"
+  | "materials"
+  | "printers"
+  | "postprocessings"
+  | "resources"
+  | "add"
+  | "demo"
+  | "admin"
+  | "users"
+  | "contractorSelection"
+  | "verification"
+  | "registerOrganization"
+  | "verifyEMail"
+  | "manufacturing"
+  | "projects"
+  | "project";
+
 interface BreadcrumbItem {
   name: string;
   link: string;
+  tname?: DataNaviagtionTranlationType;
+}
+
+export function isDataNaviagtionTranlationType(
+  input: string
+): input is DataNaviagtionTranlationType {
+  return [
+    "edit",
+    "home",
+    "process",
+    "model",
+    "upload",
+    "material",
+    "postprocessing",
+    "cart",
+    "manufacturer",
+    "checkout",
+    "guide",
+    "order",
+    "orders",
+    "account",
+    "test",
+    "service",
+    "use",
+    "provide",
+    "portfolio",
+    "use-service",
+    "provide-service",
+    "continue",
+    "new-contract",
+    "proceedings",
+    "company",
+    "user",
+    "procedure",
+    "printer",
+    "about-us",
+    "login",
+    "register",
+    "logout",
+    "organization",
+    "materials",
+    "printers",
+    "postprocessings",
+    "resources",
+    "add",
+    "demo",
+    "admin",
+    "users",
+    "contractorSelection",
+    "verification",
+    "registerOrganization",
+    "verifyEMail",
+    "manufacturing",
+    "projects",
+    "project",
+  ].includes(input);
 }
 
 const Breadcrumb: React.FC<Props> = () => {
@@ -26,42 +132,52 @@ const Breadcrumb: React.FC<Props> = () => {
     splittet.forEach((item: string, index: number) => {
       if (index === 0) {
         breadcrumbItems.push({
+          tname: "home",
           name: "home",
           link: "/",
         });
       } else if (index === 2 && splittet[1] === "projects") {
-        breadcrumbItems.push({ link: `/projects/${item}`, name: "project" });
+        breadcrumbItems.push({
+          link: `/projects/${item}`,
+          tname: "project",
+          name: "project",
+        });
       } else if (index === 3 && splittet[1] === "projects") {
         breadcrumbItems.push({
           link: `/projects/${splittet[2]}/${item}`,
+          tname: "process",
           name: "process",
         });
-      } else if (index === 1 && item === "order") {
+      } else if (index === 1 && item === "projects") {
         breadcrumbItems.push({
-          name: "orders",
-          link: "/orders",
+          tname: "projects",
+          name: "projects",
+          link: "/projects",
         });
         breadcrumbItems.push({
-          name: "order",
-          link: `/order/${splittet[2]}`,
+          tname: "projects",
+          name: "projects",
+          link: `/projects/${splittet[2]}`,
         });
-      } else if (index === 2 && splittet[1] === "order") {
+      } else if (index === 2 && splittet[1] === "projects") {
         //nothing
-      } else if (index === 3 && item === "suborder") {
+      } else if (index === 3 && item === "process") {
         breadcrumbItems.push({
-          name: getServiceName(splittet[4]),
+          tname: "projects",
+          name: "projects",
           link:
             splittet[4] === undefined
-              ? `/order/${splittet[2]}`
-              : `/order/${splittet[2]}/suborder/${splittet[4]}`,
+              ? `/projects/${splittet[2]}`
+              : `/projects/${splittet[2]}/process/${splittet[4]}`,
         });
-      } else if (index === 4 && splittet[3] === "suborder") {
+      } else if (index === 4 && splittet[3] === "process") {
         //nothing
       } else {
         const link = splittet.slice(0, index + 1).join("/");
         breadcrumbItems.push({
           name: item,
           link: link,
+          tname: isDataNaviagtionTranlationType(item) ? item : undefined,
         });
       }
     });
@@ -78,8 +194,8 @@ const Breadcrumb: React.FC<Props> = () => {
             size="xs"
             variant="text"
             title={
-              i18n.exists(`data.NavigationItem.${item.name}`)
-                ? t(`data.NavigationItem.${item.name}`)
+              item.tname !== undefined
+                ? t(`data.NavigationItem.${item.tname}`)
                 : item.name
             }
             to={item.link}

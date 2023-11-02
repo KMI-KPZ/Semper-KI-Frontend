@@ -19,17 +19,17 @@ const AdminModels: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   return (
     <div className="admin-view">
-      <Heading variant="h1">{t("Admin.AdminModelView.header")}</Heading>
+      <Heading variant="h1">{t("Admin.Models.header")}</Heading>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 800 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>{t("Admin.AdminModelView.name")}</TableCell>
-              <TableCell>{t("Admin.AdminModelView.date")}</TableCell>
-              <TableCell>{t("Admin.AdminModelView.license")}</TableCell>
-              <TableCell>{t("Admin.AdminModelView.tags")}</TableCell>
-              <TableCell>{t("Admin.AdminModelView.certificates")}</TableCell>
-              <TableCell>{t("Admin.AdminModelView.URI")}</TableCell>
+              <TableCell>{t("Admin.Models.name")}</TableCell>
+              <TableCell>{t("Admin.Models.date")}</TableCell>
+              <TableCell>{t("Admin.Models.license")}</TableCell>
+              <TableCell>{t("Admin.Models.tags")}</TableCell>
+              <TableCell>{t("Admin.Models.certificates")}</TableCell>
+              <TableCell>{t("Admin.Models.URI")}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

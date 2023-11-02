@@ -14,21 +14,21 @@ const Admin: React.FC<AdminProps> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
-      <Heading variant="h1">{t("Admin.Overview.title")}</Heading>
+      <Heading variant="h1">{t("Admin.Admin.title")}</Heading>
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
         <Button
           startIcon={<SupervisorAccountIcon />}
-          title={t("Home.Home.Authorized.Admin.button.user")}
+          title={t("Admin.Admin.buttons.user")}
           to="/admin/user"
         />
         <Button
           startIcon={<FactoryIcon />}
-          title={t("Home.Home.Authorized.Admin.button.orga")}
+          title={t("Admin.Admin.buttons.orga")}
           to="/admin/organization"
         />
         <Button
           startIcon={<NoteIcon />}
-          title={t("Home.Home.Authorized.Admin.button.projects")}
+          title={t("Admin.Admin.buttons.projects")}
           to="/admin/projects"
         />
       </div>

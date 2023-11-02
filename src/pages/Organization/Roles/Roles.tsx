@@ -12,11 +12,37 @@ import { Fragment, useState } from "react";
 import OrganizationRolesTable from "./components/Table";
 import Modal from "@component-library/Modal";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import { type } from "os";
 
 interface OrganizationRolesProps {}
 
+export type SimplifiedPermissionTranslationType =
+  | "orga"
+  | "resources"
+  | "processes"
+  | "read"
+  | "edit"
+  | "delete"
+  | "messages"
+  | "files";
+
+export function isSimplifiedPermissionTranslationType(
+  input: string
+): input is SimplifiedPermissionTranslationType {
+  return [
+    "orga",
+    "resources",
+    "processes",
+    "read",
+    "edit",
+    "delete",
+    "messages",
+    "files",
+  ].includes(input);
+}
+
 export interface SimplifiedPermissionProps {
-  name: string;
+  name: SimplifiedPermissionTranslationType;
   permissions: string[];
 }
 export const sortPermissions = (
@@ -44,7 +70,7 @@ export const getSimplifiedPermissions = (
       );
       if (index === -1) {
         simplifiedPermissions.push({
-          name: name,
+          name: name as SimplifiedPermissionTranslationType,
           permissions: [permissionName],
         });
       } else {

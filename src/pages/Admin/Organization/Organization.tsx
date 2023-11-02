@@ -29,24 +29,24 @@ const AdminOrganization: React.FC<AdminOrganizationProps> = (props) => {
   const { filterDataBySearchInput, handleSearchInputChange } = useSearch();
 
   const handleOnClickButtonDelete = (hashedID: string, name: string) => {
-    if (window.confirm(t("Admin.Orga.confirm")))
+    if (window.confirm(t("Admin.Organization.confirm")))
       deleteOrganization.mutate({ hashedID, name });
   };
 
   return (
     <div className="flex w-full flex-col items-center justify-normal gap-5 bg-white p-5">
-      <Heading variant="h1">{t("Admin.Orga.title")}</Heading>
+      <Heading variant="h1">{t("Admin.Organization.title")}</Heading>
       <Search handleSearchInputChange={handleSearchInputChange} />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 800 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>{t("Admin.Orga.name")}</TableCell>
-              <TableCell>{t("Admin.Orga.canManufacturer")}</TableCell>
-              <TableCell>{t("Admin.Orga.created")}</TableCell>
-              <TableCell>{t("Admin.Orga.accessed")}</TableCell>
-              <TableCell>{t("Admin.Orga.updated")}</TableCell>
-              <TableCell>{t("Admin.Orga.actions")}</TableCell>
+              <TableCell>{t("Admin.Organization.name")}</TableCell>
+              <TableCell>{t("Admin.Organization.canManufacturer")}</TableCell>
+              <TableCell>{t("Admin.Organization.created")}</TableCell>
+              <TableCell>{t("Admin.Organization.accessed")}</TableCell>
+              <TableCell>{t("Admin.Organization.updated")}</TableCell>
+              <TableCell>{t("Admin.Organization.actions")}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -80,7 +80,7 @@ const AdminOrganization: React.FC<AdminOrganizationProps> = (props) => {
                     <TableCell component="th" scope="row">
                       <div className="flex w-full flex-row items-center justify-center gap-3 p-2">
                         <Button
-                          title={t("Admin.Orga.button.delete")}
+                          title={t("Admin.Organization.button.delete")}
                           onClick={() =>
                             handleOnClickButtonDelete(orga.hashedID, orga.name)
                           }
@@ -93,7 +93,7 @@ const AdminOrganization: React.FC<AdminOrganizationProps> = (props) => {
             ) : (
               <TableRow>
                 <TableCell rowSpan={6}>
-                  <Text variant="body">{t("Admin.Orga.empty")}</Text>
+                  <Text variant="body">{t("Admin.Organization.empty")}</Text>
                 </TableCell>
               </TableRow>
             )}

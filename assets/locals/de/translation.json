@@ -55,6 +55,28 @@
       "manufacturing": "Herstellen lassen",
       "projects": "Meine Projekte",
       "project": "Projekt"
+    },
+    "permissions": {
+      "orga:read": "Organisationen lesen",
+      "orga:edit": "Organisationen bearbeiten",
+      "resources:edit": "Ressourcen bearbeiten",
+      "resources:read": "Ressourcen lesen",
+      "orga:delete": "Organisationen löschen",
+      "processes:read": "Prozesse lesen",
+      "processes:messages": "Prozessnachrichten lesen",
+      "processes:edit": "Prozesse bearbeiten",
+      "processes:delete": "Prozesse löschen",
+      "processes:files": "Prozessdateien lesen"
+    },
+    "simplifiedPermissions": {
+      "orga": "Organisation",
+      "processes": "Prozesse",
+      "resources": "Ressourcen",
+      "read": "Ansehen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "messages": "Nachrichten",
+      "files": "Dateien"
     }
   },
   "enum": {
@@ -117,13 +139,39 @@
       "TEST": "Test"
     }
   },
+  "component-library": {
+    "Badege": {},
+    "Button": {},
+    "Container": {},
+    "Divider": {},
+    "Error": {
+      "incomplete": "Bitte {{name}} vervollständigen.",
+      "empty": "Keine {{name}} vorhanden",
+      "incorrect": "{{name}} ist nicht vorhanden"
+    },
+    "Input": {},
+    "Loading": {
+      "LoadingSuspense": {
+        "loading": "Laden...",
+        "error": "Error:"
+      },
+      "LoadingAnimation": {
+        "text": "Laden"
+      }
+    },
+    "Modal": {
+      "button": {
+        "close": "Schließen"
+      }
+    },
+    "Page": {},
+    "Search": {},
+    "Swicht": {},
+    "Typography": {}
+  },
   "components": {
     "Background": {},
     "Breadcrumb": {},
-    "CardView": {
-      "Card": {},
-      "CardView": {}
-    },
     "CookieBanner": {
       "heading": "Cookie-Zustimmung verwalten",
       "message": "Um dir ein optimales Erlebnis zu bieten, verwenden wir Technologien wie Cookies, um Geräteinformationen zu speichern und/oder darauf zuzugreifen. Wenn du diesen Technologien zustimmst, können wir Daten wie das Surfverhalten oder eindeutige IDs auf dieser Website verarbeiten. Wenn du deine Zustimmung nicht erteilst oder zurückziehst, können bestimmte Merkmale und Funktionen beeinträchtigt werden.",
@@ -149,8 +197,9 @@
     "Footer": {
       "Footer": {
         "imprint": "Impressum",
-        "data-protection": "Datenschutzerklärung",
+        "privacy": "Datenschutzerklärung",
         "contact": "Kontakt",
+        "data-protection": "Datenschutzerklärung",
         "instagram": "Instagram",
         "mastodon": "Mastodon"
       }
@@ -194,35 +243,6 @@
       "organization": "Organisation"
     }
   },
-  "component-library": {
-    "Badege": {},
-    "Button": {},
-    "Container": {},
-    "Divider": {},
-    "Error": {
-      "incomplete": "Bitte {{name}} vervollständigen.",
-      "empty": "Keine {{name}} vorhanden"
-    },
-    "Input": {},
-    "Loading": {
-      "LoadingSuspense": {
-        "loading": "Laden...",
-        "error": "Error:"
-      },
-      "LoadingAnimation": {
-        "text": "Laden"
-      }
-    },
-    "Modal": {
-      "button": {
-        "close": "Schließen"
-      }
-    },
-    "Page": {},
-    "Search": {},
-    "Swicht": {},
-    "Typography": {}
-  },
   "Admin": {
     "hooks": {
       "useAdmin": {}
@@ -259,11 +279,11 @@
       "confirm": "Organisation wirklich löschen?"
     },
     "Projects": {
-      "header": "Aufträge",
-      "orderID": "Bestellnummer",
+      "header": "Projekte",
+      "projectID": "ProjektID",
       "clientName": "Kunde",
-      "orderTitle": "Titel",
-      "subProjectCount": "Anzahl Teilaufträge",
+      "projectTitle": "Titel",
+      "processesCount": "Anzahl Prozesse",
       "status": "Status",
       "accessed": "Zugriff",
       "created": "Erstellt",
@@ -293,7 +313,14 @@
       },
       "confirm": "User wirklich löschen?"
     },
-    "Admin": {}
+    "Admin": {
+      "title": "Adminbereich",
+      "buttons": {
+        "orga": "Organisationen verwalten",
+        "user": "Benutzer verwalten",
+        "projects": "Projekte verwalten"
+      }
+    }
   },
   "App": {
     "components": {
@@ -353,7 +380,7 @@
           "orga": "Organisationen verwalten",
           "user": "Benutzer verwalten",
           "general": "Adminbereich",
-          "orders": "Aufträge verwalten"
+          "projects": "Projekte verwalten"
         }
       },
       "ClientInfo": {
@@ -416,10 +443,6 @@
     "Home": {}
   },
   "Legal": {
-    "header": "Gesetzliches",
-    "imprint": "Impressum",
-    "privacy": "Datenschutzerklärung",
-    "contact": "Kontakt",
     "Contact": {
       "Contact": {
         "header": "Kontakt",
@@ -439,10 +462,16 @@
       }
     },
     "Imprint": {
-      "header": "Impressum",
+      "title": "Impressum",
       "disclaimer": {
         "header": "Disclaimer – rechtliche Hinweise"
       }
+    },
+    "Legal": {
+      "title": "Gesetzliches",
+      "imprint": "Impressum",
+      "privacy": "Datenschutzerklärung",
+      "contact": "Kontakt"
     }
   },
   "Login": {
@@ -481,17 +510,20 @@
       },
       "components": {
         "Form": {
+          "name": "Name",
+          "permissions": "Rechte",
+          "description": "Beschreibung",
           "title": {
             "create": "Rolle anlegen",
             "edit": "Rolle bearbeiten"
           },
-          "name": "Name",
-          "description": "Beschreibung",
           "button": {
             "create": "Erstellen",
             "safe": "Speichern"
           },
-          "permissions": "Rechte"
+          "validation": {
+            "required": "wird benötigt"
+          }
         },
         "Item": {
           "name": "Name",

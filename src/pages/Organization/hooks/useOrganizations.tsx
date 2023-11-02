@@ -55,13 +55,25 @@ export type CreateRoleProps = {
 };
 
 export type RolePermission = {
-  permission_name: string;
+  permission_name: PermissionTranslationType;
   description: string;
   resource_server_name: string;
   resource_server_identifier: string;
 };
+
+export type PermissionTranslationType =
+  | "orga:read"
+  | "resources:edit"
+  | "resources:read"
+  | "orga:delete"
+  | "processes:read"
+  | "processes:messages"
+  | "processes:edit"
+  | "processes:delete"
+  | "processes:files";
+
 export type Permission = {
-  permission_name: string;
+  permission_name: PermissionTranslationType;
   description: string;
 };
 

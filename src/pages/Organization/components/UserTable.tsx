@@ -189,7 +189,7 @@ const OrganizationtableRow: React.FC<{
             <Button
               onClick={handleOnClickDelete}
               children={<DeleteForeverIcon fontSize="small" />}
-              title={t("Organization.Roles.components.table.button.delete")}
+              title={t("Organization.Roles.components.Table.button.delete")}
             />
           </PermissionGate>
         </div>

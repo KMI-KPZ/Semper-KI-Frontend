@@ -153,7 +153,7 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
                   }
                   {...register("name", {
                     required: t(
-                      "Organization.Roles.components.Form.validation.name.required"
+                      "Organization.Roles.components.Form.validation.required"
                     ),
                   })}
                   className="w-full bg-slate-100 px-5 py-2 "
@@ -170,7 +170,7 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
                   }
                   {...register("description", {
                     required: t(
-                      "Organization.Roles.components.Form.validation.name.required"
+                      "Organization.Roles.components.Form.validation.required"
                     ),
                   })}
                   className="w-full bg-slate-100 px-5 py-2 "
@@ -191,9 +191,7 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
                     <Text variant="body">
                       {permission.permission_name
                         .split(":")
-                        .map((title) =>
-                          t(`Organization.Roles.components.Table.${title}`)
-                        )
+                        .map((title) => t(`data.permissions.${title}`))
                         .join(" ")}
                     </Text>
                     <input

@@ -13,9 +13,10 @@ import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import { UserType } from "@/hooks/useUser/types";
 import { NavigationItemPreferredType } from "@/components/Header";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import { DataNaviagtionTranlationType } from "@/components/Breadcrumb";
 
 export type INavigationItem = {
-  title: string;
+  title: DataNaviagtionTranlationType;
   link: string;
   icon: ReactNode;
   extern: boolean;
@@ -26,7 +27,7 @@ export type INavigationItem = {
 export const NavigationItemData: INavigationItem[] = [
   {
     userTypes: [UserType.ADMIN],
-    title: "data.NavigationItem.admin",
+    title: "admin",
     link: "/admin",
     icon: <AdminPanelSettingsIcon fontSize="large" />,
     preferred: ["header", "menu"],
@@ -34,14 +35,14 @@ export const NavigationItemData: INavigationItem[] = [
   },
   {
     userTypes: [UserType.ANONYM],
-    title: "data.NavigationItem.demo",
+    title: "demo",
     link: "/process/model",
     icon: <ScienceIcon fontSize="large" />,
     preferred: ["home"],
     extern: false,
   },
   {
-    title: "data.NavigationItem.logout",
+    title: "logout",
     link: "/logout",
     icon: <LogoutIcon fontSize="large" />,
     extern: false,
@@ -49,7 +50,7 @@ export const NavigationItemData: INavigationItem[] = [
     userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
   },
   {
-    title: "data.NavigationItem.login",
+    title: "login",
     link: "/login",
     icon: <LoginIcon fontSize="large" />,
     extern: false,
@@ -57,7 +58,7 @@ export const NavigationItemData: INavigationItem[] = [
     userTypes: [UserType.ANONYM],
   },
   {
-    title: "data.NavigationItem.projects",
+    title: "projects",
     link: "/projects",
     icon: <DescriptionIcon fontSize="large" />,
     extern: false,
@@ -65,7 +66,7 @@ export const NavigationItemData: INavigationItem[] = [
     userTypes: [UserType.USER, UserType.ORGANIZATION],
   },
   {
-    title: "data.NavigationItem.organization",
+    title: "organization",
     link: "/organization",
     icon: <CorporateFareIcon fontSize="large" />,
     extern: false,
@@ -73,7 +74,7 @@ export const NavigationItemData: INavigationItem[] = [
     userTypes: [UserType.ORGANIZATION],
   },
   {
-    title: "data.NavigationItem.account",
+    title: "account",
     link: "/account",
     icon: <PersonIcon fontSize="large" />,
     extern: false,
@@ -82,7 +83,7 @@ export const NavigationItemData: INavigationItem[] = [
   },
 
   {
-    title: "data.NavigationItem.test",
+    title: "test",
     link: "/test",
     icon: <BugReportIcon fontSize="large" />,
     extern: false,
@@ -91,7 +92,7 @@ export const NavigationItemData: INavigationItem[] = [
   },
   {
     userTypes: [UserType.ADMIN],
-    title: "data.NavigationItem.user",
+    title: "user",
     link: "/user",
     icon: <PersonIcon fontSize="large" />,
     preferred: ["home"],
@@ -99,7 +100,7 @@ export const NavigationItemData: INavigationItem[] = [
   },
   {
     userTypes: [UserType.ADMIN],
-    title: "data.NavigationItem.model",
+    title: "model",
     link: "/model",
     icon: <ViewInArIcon fontSize="large" />,
     preferred: ["home"],
@@ -107,7 +108,7 @@ export const NavigationItemData: INavigationItem[] = [
   },
   {
     userTypes: [UserType.ADMIN],
-    title: "data.NavigationItem.material",
+    title: "material",
     link: "/material",
     icon: <HomeRepairServiceIcon fontSize="large" />,
     preferred: ["home"],
@@ -115,7 +116,7 @@ export const NavigationItemData: INavigationItem[] = [
   },
   {
     userTypes: [UserType.ADMIN],
-    title: "data.NavigationItem.procedure",
+    title: "procedure",
     link: "/procedure",
     icon: <SyncAltIcon fontSize="large" />,
     preferred: ["home"],
@@ -123,7 +124,7 @@ export const NavigationItemData: INavigationItem[] = [
   },
   {
     userTypes: [UserType.ADMIN],
-    title: "data.NavigationItem.printer",
+    title: "printer",
     link: "/printer",
     icon: <PrintIcon fontSize="large" />,
     preferred: ["home"],

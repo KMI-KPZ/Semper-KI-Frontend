@@ -34,7 +34,7 @@ const Footer: React.FC<Props> = (props) => {
         <li className="p-2">
           <Button
             variant="light"
-            title={t("Legal.imprint")}
+            title={t("components.Footer.Footer.imprint")}
             extern={isMagazineUp()}
             to={isMagazineUp() ? URL_Impressum : "/legal/imprint"}
           />
@@ -42,7 +42,7 @@ const Footer: React.FC<Props> = (props) => {
         <li className="p-2">
           <Button
             variant="light"
-            title={t("Legal.privacy")}
+            title={t("components.Footer.Footer.privacy")}
             extern={isMagazineUp()}
             to={isMagazineUp() ? URL_Datenschutz : "/legal/privacy"}
           />
@@ -50,7 +50,7 @@ const Footer: React.FC<Props> = (props) => {
         <li className="p-2">
           <Button
             variant="light"
-            title={t("Legal.contact")}
+            title={t("components.Footer.Footer.contact")}
             extern={isMagazineUp()}
             to={isMagazineUp() ? URL_Contact : "/legal/contact"}
           />
@@ -58,14 +58,14 @@ const Footer: React.FC<Props> = (props) => {
         <li className="flex flex-col items-center justify-center xs:flex-row xs:gap-2 xs:p-2">
           <div className="flex flex-row items-center justify-center gap-2">
             <Button
-              title={t("Footer.Footer.instagram")}
+              title={t("components.Footer.Footer.instagram")}
               to={URL_Instagram}
               variant="light"
               extern
               children={<InstagramIcon />}
             />
             <Button
-              title={t("Footer.Footer.mastodon")}
+              title={t("components.Footer.Footer.mastodon")}
               to={URL_Mastodon}
               variant="light"
               extern

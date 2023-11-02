@@ -345,7 +345,7 @@ const useProcess = (): ReturnProps => {
     mutationFn: async ({ processID, fileID }) => {
       return getCustomAxios()
         .delete(
-          `${process.env.VITE_HTTP_API_URL}/public/downloadFilesAsZip/${processID}/${fileID}`
+          `${process.env.VITE_HTTP_API_URL}/public/deleteFile/${processID}/${fileID}`
         )
         .then((res) => {
           logger("useProcess | deleteFile ✅ |", res.data);

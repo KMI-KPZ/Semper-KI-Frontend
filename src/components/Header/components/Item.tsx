@@ -62,7 +62,7 @@ const HeaderItem: React.FC<Props> = (props) => {
         to={headeritem.link}
         onClick={handleOnClickButton}
         variant="text"
-        title={t(headeritem.title)}
+        title={t(`data.NavigationItem.${headeritem.title}`)}
         startIcon={
           badge !== undefined && badge > 0 ? (
             <Badge count={badge}>{renderIcon}</Badge>
@@ -72,7 +72,9 @@ const HeaderItem: React.FC<Props> = (props) => {
         }
         children={
           onlyIcon !== undefined && onlyIcon === true ? null : (
-            <span className="text-xl">{t(headeritem.title)}</span>
+            <span className="text-xl">
+              {t(`data.NavigationItem.${headeritem.title}`)}
+            </span>
           )
         }
       />

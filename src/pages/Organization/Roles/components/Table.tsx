@@ -39,9 +39,7 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
                         align="center"
                         className="border-l-2 p-2"
                       >
-                        {t(
-                          `Organization.Roles.components.Table.${permission.name}`
-                        )}
+                        {t(`data.simplifiedPermissions.${permission.name}`)}
                       </th>
                     )
                   )}
@@ -60,9 +58,7 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
                               _index === 0 ? "border-l-2" : ""
                             } p-2`}
                           >
-                            {t(
-                              `Organization.Roles.components.Table.${_permission}`
-                            )}
+                            {t(`data.simplifiedPermissions.${_permission}`)}
                           </th>
                         )
                       )

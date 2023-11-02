@@ -27,7 +27,7 @@ const PermissionGate: React.FC<PropsWithChildren<PermissionProps>> = (
       {children}
     </div>
   ) : showMessage === undefined || showMessage === false ? null : (
-    <Text variant="body" children={t("PermissionGate.message")} />
+    <Text variant="body" children={t("components.PermissionGate.message")} />
   );
 };
 

@@ -10,6 +10,7 @@ import Modal from "@component-library/Modal";
 import ProfileForm from "./components/Form";
 import Container from "@component-library/Container";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { type } from "os";
 
 interface Props {
   user: UserProps;
@@ -36,10 +37,10 @@ const Profile: React.FC<Props> = (props) => {
   return (
     <Container className=" bg-white p-5" direction="col" width="full">
       <Heading variant="h1">{t("Profile.header")}</Heading>
-      <div className="border-t-4 w-full" />
+      <div className="w-full border-t-4" />
       <Container direction="col" align="start">
         <Heading variant="h2">{t("Profile.general.header")}</Heading>
-        <div className="border-t-2 w-full" />
+        <div className="w-full border-t-2" />
         <span>
           {t("Profile.general.name")}: {user.name}
         </span>
@@ -48,14 +49,16 @@ const Profile: React.FC<Props> = (props) => {
         </span>
         <span>
           {t("Profile.general.type")}:{" "}
-          {t(`enum.UserType.${UserType[user.usertype]}`)}
+          {t(
+            `enum.UserType.${UserType[user.usertype] as keyof typeof UserType}`
+          )}
         </span>
       </Container>
 
       {user.usertype === UserType.ORGANIZATION ? (
         <Container direction="col" align="start">
           <Heading variant="h2">{t("Profile.company.header")}</Heading>
-          <div className="border-t-2 w-full" />
+          <div className="w-full border-t-2" />
           <span className="break-all">
             {t("Profile.company.name")}: {user.organizations}
           </span>
@@ -68,7 +71,7 @@ const Profile: React.FC<Props> = (props) => {
       {user.details.address !== undefined ? (
         <Container direction="col" align="start">
           <Heading variant="h2">{t("Profile.address.header")}</Heading>
-          <div className="border-t-2 w-full" />
+          <div className="w-full border-t-2" />
           <span>
             {t("Profile.address.street")}: {user.details.address}
           </span>
@@ -76,7 +79,7 @@ const Profile: React.FC<Props> = (props) => {
       ) : null}
       <Container direction="col" align="start">
         <Heading variant="h2">{t("Profile.time.header")}</Heading>
-        <div className="border-t-2 w-full" />
+        <div className="w-full border-t-2" />
         <span>
           {t("Profile.time.created")}: {user.created.toLocaleString()}
         </span>
@@ -92,8 +95,8 @@ const Profile: React.FC<Props> = (props) => {
       </Modal>
       <Container justify="center">
         <Button
-          title={t(`Profile.button.${edit ? "save" : "edit"}`)}
-          startIcon={edit ? <CheckIcon /> : <EditIcon />}
+          title={t(`Profile.button.edit`)}
+          startIcon={<EditIcon />}
           onClick={handleOnClickButtonEdit}
         />
         <Button

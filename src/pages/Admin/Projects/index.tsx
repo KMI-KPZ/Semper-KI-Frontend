@@ -32,27 +32,27 @@ const AdminProjects: React.FC<Props> = (props) => {
   const { deleteProject } = useProject();
   const { filterDataBySearchInput, handleSearchInputChange } = useSearch();
   const handleOnClickButtonDelete = (projectID: string) => {
-    if (window.confirm(t("Admin.AdminProjectView.confirm")))
+    if (window.confirm(t("Admin.Projects.confirm")))
       deleteProject.mutate(projectID);
   };
 
   return (
     <div className="flex w-full flex-col items-center justify-normal gap-5 bg-white p-5">
-      <Heading variant="h1">{t("Admin.AdminProjectView.header")}</Heading>
+      <Heading variant="h1">{t("Admin.Projects.header")}</Heading>
       <Search handleSearchInputChange={handleSearchInputChange} />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 800 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>{t("Admin.AdminProjectView.projectID")}</TableCell>
-              <TableCell>{t("Admin.AdminProjectView.clientName")}</TableCell>
-              <TableCell>{t("Admin.AdminProjectView.projectTitle")}</TableCell>
-              <TableCell>{t("Admin.AdminProjectView.processCount")}</TableCell>
-              <TableCell>{t("Admin.AdminProjectView.status")}</TableCell>
-              <TableCell>{t("Admin.AdminProjectView.accessed")}</TableCell>
-              <TableCell>{t("Admin.AdminProjectView.created")}</TableCell>
-              <TableCell>{t("Admin.AdminProjectView.updated")}</TableCell>
-              <TableCell>{t("Admin.AdminProjectView.actions")}</TableCell>
+              <TableCell>{t("Admin.Projects.projectID")}</TableCell>
+              <TableCell>{t("Admin.Projects.clientName")}</TableCell>
+              <TableCell>{t("Admin.Projects.projectTitle")}</TableCell>
+              <TableCell>{t("Admin.Projects.processesCount")}</TableCell>
+              <TableCell>{t("Admin.Projects.status")}</TableCell>
+              <TableCell>{t("Admin.Projects.accessed")}</TableCell>
+              <TableCell>{t("Admin.Projects.created")}</TableCell>
+              <TableCell>{t("Admin.Projects.updated")}</TableCell>
+              <TableCell>{t("Admin.Projects.actions")}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -84,8 +84,10 @@ const AdminProjects: React.FC<Props> = (props) => {
                       </TableCell>
                       <TableCell component="th" scope="row">
                         {t(
-                          `Projects.ProjectCollection.state.${
-                            ProcessStatus[project.status]
+                          `enum.ProcessStatus.${
+                            ProcessStatus[
+                              project.status
+                            ] as keyof typeof ProcessStatus
                           }`
                         )}
                       </TableCell>
@@ -101,12 +103,12 @@ const AdminProjects: React.FC<Props> = (props) => {
                       <TableCell component="th" scope="row">
                         <Container>
                           <Button
-                            title={t("Admin.AdminProjectView.buttons.show")}
+                            title={t("Admin.Projects.buttons.show")}
                             children={<VisibilityIcon />}
                             to={`/admin/projects/${project.projectCollectionID}`}
                           />
                           <Button
-                            title={t("Admin.AdminProjectView.buttons.delete")}
+                            title={t("Admin.Projects.buttons.delete")}
                             children={<DeleteIcon />}
                             onClick={() =>
                               handleOnClickButtonDelete(

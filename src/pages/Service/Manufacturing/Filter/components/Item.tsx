@@ -20,71 +20,69 @@ const ProcessFilterItem: React.FC<Props> = (props) => {
 
   const displayInput = () => {
     switch (filterItem.question.type) {
-      case "slider":
+      case "SLIDER":
         return (
           <ProcessFilterSlider
             filterItem={filterItem}
             setFilterItem={setFilterItem}
           />
         );
-      case "sliderselection":
+      case "SLIDERSELECTION":
         return (
           <ProcessFilterSliderSelection
             filterItem={filterItem}
             setFilterItem={setFilterItem}
           />
         );
-      case "selection":
+      case "SELECTION":
         return (
           <ProcessFilterSelection
             filterItem={filterItem}
             setFilterItem={setFilterItem}
           />
         );
-      case "multiselection":
+      case "MUILTISELECT":
         return (
           <ProcessFilterMultiSelection
             filterItem={filterItem}
             setFilterItem={setFilterItem}
           />
         );
-      case "date":
+      case "DATE":
         return (
           <ProcessFilterDatePicker
             filterItem={filterItem}
             setFilterItem={setFilterItem}
           />
         );
-      case "text":
+      case "TEXT":
         return (
           <ProcessFilterTextInput
             filterItem={filterItem}
             setFilterItem={setFilterItem}
           />
         );
-      case "textarea":
+      case "TEXTAREA":
         return (
           <ProcessFilterTextArea
             filterItem={filterItem}
             setFilterItem={setFilterItem}
           />
         );
-      case "color":
+      case "COLOR":
         return (
           <ProcessFilterColorPicker
             filterItem={filterItem}
             setFilterItem={setFilterItem}
           />
         );
-      case "number":
+      case "NUMBER":
         return (
           <ProcessFilterNumberInput
             filterItem={filterItem}
             setFilterItem={setFilterItem}
           />
         );
-      default:
-        return <></>;
     }
   };
 

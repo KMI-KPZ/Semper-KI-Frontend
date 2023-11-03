@@ -4,17 +4,17 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useTranslation } from "react-i18next";
 import ProcessFilterItem from "./Item";
-import { ICategory, FilterItemProps } from "../Filter";
+import { CategoryProps, FilterItemProps } from "../Filter";
 import { Heading } from "@component-library/Typography";
 
 interface Props {
-  category: ICategory;
+  category: CategoryProps;
   categoryIndex: number;
   filterItemList: FilterItemProps[];
   setFilterItem(filterItem: FilterItemProps): void;
   handleOnClickMenuOpen(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    category: ICategory,
+    category: CategoryProps,
     index: number
   ): void;
 }
@@ -39,8 +39,9 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
     <div className="bg-gray-100 p-3">
       <div className="flex flex-row items-center justify-between">
         <Heading variant="h3">
-          {t(`enum.FilterCategoryType.${category.title.toLocaleUpperCase()}`)}
-          {getCountOfChecktItems()}
+          {`${t(
+            `enum.FilterCategoryType.${category.title}`
+          )} ${getCountOfChecktItems()}`}
         </Heading>
         <IconButton
           onClick={(e) => handleOnClickMenuOpen(e, category, categoryIndex)}

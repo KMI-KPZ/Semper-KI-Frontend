@@ -22,62 +22,72 @@ export type StatusData = {
   startStatus: ProcessStatus;
   endStatus?: ProcessStatus;
   icon: ReactNode;
-  text: string;
+  text:
+    | "draft"
+    | "contractorSelected"
+    | "verified"
+    | "requested"
+    | "clarification"
+    | "offer"
+    | "client"
+    | "production"
+    | "delivery"
+    | "finished";
 };
 
 const statusData: StatusData[] = [
   {
     startStatus: ProcessStatus.DRAFT,
     icon: <DesignServicesIcon />,
-    text: "Projects.Project.Process.StatusBar.StatusBar.draft",
+    text: "draft",
   },
   {
     startStatus: ProcessStatus.CONTRACTOR_SELECTED,
     icon: <FactoryIcon />,
-    text: "Projects.Project.Process.StatusBar.StatusBar.contractorSelected",
+    text: "contractorSelected",
   },
   {
     startStatus: ProcessStatus.VERIFYING,
     endStatus: ProcessStatus.VERIFIED,
     icon: <AssignmentTurnedInIcon />,
-    text: "Projects.Project.Process.StatusBar.StatusBar.verified",
+    text: "verified",
   },
   {
     startStatus: ProcessStatus.REQUESTED,
     icon: <EmailIcon />,
-    text: "Projects.Project.Process.StatusBar.StatusBar.requested",
+    text: "requested",
   },
   {
     startStatus: ProcessStatus.CLARIFICATION,
     icon: <QuestionMarkIcon />,
-    text: "Projects.Project.Process.StatusBar.StatusBar.clarification",
+    text: "clarification",
   },
   {
     startStatus: ProcessStatus.CONFIRMED_BY_CONTRACTOR,
     endStatus: ProcessStatus.REJECTED_BY_CONTRACTOR,
     icon: <DescriptionIcon />,
-    text: "Projects.Project.Process.StatusBar.StatusBar.offer",
+    text: "offer",
   },
   {
     startStatus: ProcessStatus.CONFIRMED_BY_CLIENT,
     endStatus: ProcessStatus.REJECTED_BY_CLIENT,
     icon: <CheckIcon />,
-    text: "Projects.Project.Process.StatusBar.StatusBar.client",
+    text: "client",
   },
   {
     startStatus: ProcessStatus.PRODUCTION,
     icon: <FactoryIcon />,
-    text: "Projects.Project.Process.StatusBar.StatusBar.production",
+    text: "production",
   },
   {
     startStatus: ProcessStatus.DELIVERY,
     icon: <LocalShippingIcon />,
-    text: "Projects.Project.Process.StatusBar.StatusBar.delivery",
+    text: "delivery",
   },
   {
     startStatus: ProcessStatus.COMPLETED,
     icon: <DoneAllIcon />,
-    text: "Projects.Project.Process.StatusBar.StatusBar.finished",
+    text: "finished",
   },
 ];
 

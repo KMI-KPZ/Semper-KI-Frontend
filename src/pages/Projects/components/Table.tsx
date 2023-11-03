@@ -17,7 +17,7 @@ interface ProjectsTableProps {
 }
 
 interface ProjectsTableGroupingsProps {
-  title: string;
+  title: "draft" | "ongoing" | "completed";
   startState: ProcessStatus;
   endState: ProcessStatus;
 }
@@ -41,7 +41,7 @@ const projectGroupings: ProjectsTableGroupingsProps[] = [
 ];
 
 interface ProjectsTableGroupProps {
-  title: string;
+  title: "draft" | "ongoing" | "completed";
   flatProjects: FlatProjectProps[];
 }
 

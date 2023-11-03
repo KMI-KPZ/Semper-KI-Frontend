@@ -41,7 +41,7 @@ const StatusItem: React.FC<StatusItemType> = (props) => {
         variant="body"
         className="absolute top-20 whitespace-nowrap bg-white text-center"
       >
-        {t(text)}
+        {t(`Projects.Project.Process.StatusBar.StatusBar.${text}`)}
       </Text>
     </div>
   );

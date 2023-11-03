@@ -17,11 +17,32 @@ interface Props {
 
 interface State {
   filterList: FilterItemProps[];
-  categoryList: ICategory[];
+  categoryList: CategoryProps[];
 }
 
-export interface ICategory {
-  title: string;
+export type FilterCategoryType =
+  | "GENERAL"
+  | "MODEL"
+  | "MATERIAL"
+  | "PROCEEDING"
+  | "MANUFACTURER"
+  | "POSTPROCESSING"
+  | "ADDITIVE"
+  | "TEST";
+
+export type FilterType =
+  | "TEXT"
+  | "TEXTAREA"
+  | "NUMBER"
+  | "DATE"
+  | "COLOR"
+  | "SLIDER"
+  | "SLIDERSELECTION"
+  | "SELECTION"
+  | "MUILTISELECT";
+
+export interface CategoryProps {
+  title: FilterCategoryType;
   open: boolean;
 }
 
@@ -36,8 +57,8 @@ export interface FilterItemProps {
 export interface FilterQuestionProps {
   isSelectable: boolean;
   title: string;
-  category: string;
-  type: string;
+  category: FilterCategoryType;
+  type: FilterType;
   values: string[] | null;
   range: number[] | null;
   units: string[] | string | null;
@@ -55,14 +76,14 @@ export interface RangeMinMaxProps {
 
 const generateCategoryList = (
   filterItemList: FilterItemProps[]
-): ICategory[] => {
-  let stringList: string[] = [];
+): CategoryProps[] => {
+  let stringList: FilterCategoryType[] = [];
   filterItemList.forEach((filterItem: FilterItemProps) => {
     if (!stringList.includes(filterItem.question.category))
       stringList.push(filterItem.question.category);
   });
-  let categoryList: ICategory[] = [];
-  stringList.forEach((category: string) => {
+  let categoryList: CategoryProps[] = [];
+  stringList.forEach((category) => {
     categoryList.push({ title: category, open: false });
   });
   return categoryList;
@@ -158,7 +179,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
   };
   const handleOnClickMenuOpen = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    category: ICategory,
+    category: CategoryProps,
     index: number
   ) => {
     e.preventDefault();
@@ -166,11 +187,13 @@ const ProcessFilter: React.FC<Props> = (props) => {
       ...prevState,
       categoryList: [
         ...prevState.categoryList.filter(
-          (category: ICategory, categoryIndex: number) => categoryIndex < index
+          (category: CategoryProps, categoryIndex: number) =>
+            categoryIndex < index
         ),
         { title: category.title, open: !category.open },
         ...prevState.categoryList.filter(
-          (category: ICategory, categoryIndex: number) => categoryIndex > index
+          (category: CategoryProps, categoryIndex: number) =>
+            categoryIndex > index
         ),
       ],
     }));
@@ -211,7 +234,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
         <Heading variant="h2">
           {t("Service.Manufacturing.Filter.Filter.header")}
         </Heading>
-        {categoryList.map((category: ICategory, categoryIndex: number) => (
+        {categoryList.map((category: CategoryProps, categoryIndex: number) => (
           <ProcessFilterCard
             category={category}
             categoryIndex={categoryIndex}

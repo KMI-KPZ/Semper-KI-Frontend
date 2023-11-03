@@ -27,7 +27,15 @@ interface ProjectButtonsProps {
 }
 
 interface ProjectButtonProps {
-  title: string;
+  title:
+    | "delete"
+    | "edit"
+    | "cancel"
+    | "contractorSelect"
+    | "verify"
+    | "reject"
+    | "confirm"
+    | "reProject";
   type: ProjectButtonType;
   icon: ReactNode;
   contractor: boolean;
@@ -50,7 +58,7 @@ type ProjectButtonType =
 
 const ProjectButtonData: ProjectButtonProps[] = [
   {
-    title: "Projects.Project.components.Buttons.button.delete",
+    title: "delete",
     type: "Delete",
     icon: <DeleteForever />,
     contractor: false,
@@ -62,49 +70,49 @@ const ProjectButtonData: ProjectButtonProps[] = [
     ],
   },
   {
-    title: "Projects.Project.components.Buttons.button.edit",
+    title: "edit",
     type: "Edit",
     icon: <EditIcon />,
     contractor: false,
     allowedStates: [ProcessStatus.DRAFT],
   },
   {
-    title: "Projects.Project.components.Buttons.button.cancel",
+    title: "cancel",
     type: "Cancel",
     icon: <CancelIcon />,
     contractor: false,
     allowedStates: [ProcessStatus.REQUESTED],
   },
   {
-    title: "Projects.Project.components.Buttons.button.contractorSelect",
+    title: "contractorSelect",
     type: "ContractorSelection",
     icon: <FactoryIcon />,
     contractor: false,
     allowedStates: [ProcessStatus.DRAFT],
   },
   {
-    title: "Projects.Project.components.Buttons.button.verify",
+    title: "verify",
     type: "Verify",
     icon: <AssignmentTurnedInIcon />,
     contractor: false,
     allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
   },
   {
-    title: "Projects.Project.components.Buttons.button.reject",
+    title: "reject",
     type: "Reject",
     icon: <CancelIcon />,
     contractor: true,
     allowedStates: [ProcessStatus.REQUESTED, ProcessStatus.CLARIFICATION],
   },
   {
-    title: "Projects.Project.components.Buttons.button.confirm",
+    title: "confirm",
     type: "Confirm",
     icon: <CheckIcon />,
     contractor: true,
     allowedStates: [ProcessStatus.REQUESTED, ProcessStatus.CLARIFICATION],
   },
   {
-    title: "Projects.Project.components.Buttons.button.reProject",
+    title: "reProject",
     type: "ReProject",
     icon: <ReplayIcon />,
     contractor: false,
@@ -237,9 +245,9 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
             size="sm"
             startIcon={button.icon}
             onClick={() => handleOnClickButton(button)}
-            title={`${t(button.title)}${
-              button.count !== undefined ? ` ( ${button.count} )` : ""
-            }`}
+            title={`${t(
+              `Projects.Project.components.Buttons.button.${button.title}`
+            )} ${button.count !== undefined ? ` ( ${button.count} )` : ""}`}
           />
         </PermissionGate>
       ))}

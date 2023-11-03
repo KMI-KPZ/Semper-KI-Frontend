@@ -1,12 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useOrganizations, {
-  RolePermission,
-  RoleProps,
-} from "../../hooks/useOrganizations";
+import useOrganizations, { RoleProps } from "../../hooks/useOrganizations";
 import { Text } from "@component-library/Typography";
 import { Button, Divider, LoadingSuspense } from "@component-library/index";
-import { SimplifiedPermissionProps, getSimplifiedPermissions } from "../Roles";
+import { PermissionGroupProps, getGroupedPermissions } from "../Roles";
 import EditIcon from "@mui/icons-material/Edit";
 
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -49,15 +46,15 @@ const OrganizationRolesItem: React.FC<OrganizationRolesItemProps> = (props) => {
         {rolePermissionsQuery.data !== undefined &&
         rolePermissionsQuery.data.length > 0 ? (
           <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row ">
-            {getSimplifiedPermissions(rolePermissionsQuery.data).map(
-              (permission: SimplifiedPermissionProps, index) => (
+            {getGroupedPermissions(rolePermissionsQuery.data).map(
+              (permission: PermissionGroupProps, index) => (
                 <div
                   className="flex w-full flex-row justify-between gap-5 "
                   key={index}
                 >
-                  <Text variant="body">{permission.name}:</Text>
+                  <Text variant="body">{permission.context}:</Text>
                   <Text variant="body" className="whitespace-nowrap">
-                    {permission.permissions.join(", ")}
+                    {permission.permissionTypes.join(", ")}
                   </Text>
                 </div>
               )

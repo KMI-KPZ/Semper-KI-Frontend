@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "@component-library/Button";
 import useOrganizations, {
-  Permission,
+  PermissionProps,
   RoleProps,
 } from "../../hooks/useOrganizations";
 import logger from "@/hooks/useLogger";
@@ -14,7 +14,7 @@ import { sortPermissions } from "../Roles";
 import { LoadingAnimation } from "@component-library/index";
 
 interface OrganizationRolesFormProps {
-  allPermissions: Permission[];
+  allPermissions: PermissionProps[];
   role?: RoleProps;
   resetForm(): void;
 }
@@ -189,11 +189,8 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
                     className="flex flex-col items-center justify-center gap-2"
                   >
                     <Text variant="body">
-                      {permission.permission_name
-                        .split(":")
-                        .map((title) => t(`data.permissions.${title}`))
-                        .join(" ")}
-                    </Text>
+                      {t(`types.permissionName.${permission.permission_name}`)}
+                      </Text>
                     <input
                       type="hidden"
                       {...register(`permissions.${index}.name`)}

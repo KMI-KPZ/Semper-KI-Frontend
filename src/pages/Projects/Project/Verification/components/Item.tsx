@@ -26,7 +26,11 @@ const ProcessVerificationItem: React.FC<Props> = (props) => {
       />
       <Heading variant="h2">{process.details.title}</Heading>
       <Heading variant="h2">
-        {t(`enum.ServiceType.${ServiceType[process.service.type]}`)}
+        {t(
+          `enum.ServiceType.${
+            ServiceType[process.service.type] as keyof typeof ServiceType
+          }`
+        )}
       </Heading>
     </label>
   );

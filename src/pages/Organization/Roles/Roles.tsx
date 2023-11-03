@@ -1,8 +1,9 @@
 import { Heading, Text } from "@component-library/Typography";
 import { useTranslation } from "react-i18next";
 import useOrganizations, {
-  Permission,
-  RolePermission,
+  PermissionContextTranslationType,
+  PermissionProps,
+  PermissionTypeTranslationType,
   RoleProps,
 } from "../hooks/useOrganizations";
 import OrganizationRolesForm from "./components/Form";
@@ -12,42 +13,17 @@ import { Fragment, useState } from "react";
 import OrganizationRolesTable from "./components/Table";
 import Modal from "@component-library/Modal";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { type } from "os";
 
 interface OrganizationRolesProps {}
 
-export type SimplifiedPermissionTranslationType =
-  | "orga"
-  | "resources"
-  | "processes"
-  | "read"
-  | "edit"
-  | "delete"
-  | "messages"
-  | "files";
-
-export function isSimplifiedPermissionTranslationType(
-  input: string
-): input is SimplifiedPermissionTranslationType {
-  return [
-    "orga",
-    "resources",
-    "processes",
-    "read",
-    "edit",
-    "delete",
-    "messages",
-    "files",
-  ].includes(input);
+export interface PermissionGroupProps {
+  context: PermissionContextTranslationType;
+  permissionTypes: PermissionTypeTranslationType[];
 }
 
-export interface SimplifiedPermissionProps {
-  name: SimplifiedPermissionTranslationType;
-  permissions: string[];
-}
 export const sortPermissions = (
-  permission1: RolePermission | Permission,
-  permission2: RolePermission | Permission
+  permission1: PermissionProps,
+  permission2: PermissionProps
 ): number => {
   if (permission1.permission_name < permission2.permission_name) {
     return -1;
@@ -57,27 +33,49 @@ export const sortPermissions = (
   }
   return 0;
 };
-export const getSimplifiedPermissions = (
-  permissions: RolePermission[] | Permission[]
-): SimplifiedPermissionProps[] => {
-  const simplifiedPermissions: SimplifiedPermissionProps[] = [];
+
+export const getGroupedPermissions = (
+  permissions: PermissionProps[]
+): PermissionGroupProps[] => {
+  const groupedPermissions: PermissionGroupProps[] = [];
   permissions
     .sort((perm1, perm2) => sortPermissions(perm1, perm2))
     .forEach((permission) => {
-      const [name, permissionName] = permission.permission_name.split(":");
-      const index = simplifiedPermissions.findIndex(
-        (item) => item.name === name
+      const index = groupedPermissions.findIndex(
+        (item) => item.context === permission.context
       );
       if (index === -1) {
-        simplifiedPermissions.push({
-          name: name as SimplifiedPermissionTranslationType,
-          permissions: [permissionName],
+        groupedPermissions.push({
+          context: permission.context,
+          permissionTypes: [permission.permissionType],
         });
       } else {
-        simplifiedPermissions[index].permissions.push(permissionName);
+        groupedPermissions[index].permissionTypes.push(
+          permission.permissionType
+        );
       }
     });
-  return simplifiedPermissions;
+  return groupedPermissions;
+};
+
+export const getPermissinContextTranslations = (
+  permissions: PermissionProps[]
+): { context: PermissionContextTranslationType; count: number }[] => {
+  let contexts: PermissionContextTranslationType[] = [];
+  permissions.sort(sortPermissions).forEach((permission) => {
+    if (!contexts.includes(permission.context)) {
+      contexts.push(permission.context);
+    }
+  });
+  let list: { context: PermissionContextTranslationType; count: number }[] = [];
+  contexts.forEach((context) => {
+    list.push({
+      context: context,
+      count: permissions.filter((permission) => permission.context === context)
+        .length,
+    });
+  });
+  return list;
 };
 
 const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {

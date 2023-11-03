@@ -13,8 +13,8 @@ import { useState } from "react";
 interface useOrganizationsReturnProps {
   userQuery: UseQueryResult<OrganizationsUser[], Error>;
   rolesQuery: UseQueryResult<RoleProps[], Error>;
-  permissionsQuery: UseQueryResult<Permission[], Error>;
-  rolePermissionsQuery: UseQueryResult<RolePermission[], Error>;
+  permissionsQuery: UseQueryResult<PermissionProps[], Error>;
+  rolePermissionsQuery: UseQueryResult<PermissionProps[], Error>;
   organizationInfoQuery: UseQueryResult<OrganizationInfoProps, Error>;
   inviteLinkMutation: UseMutationResult<string, Error, string, unknown>;
   inviteUserMutation: UseMutationResult<any, Error, string, unknown>;
@@ -54,14 +54,7 @@ export type CreateRoleProps = {
   description: string;
 };
 
-export type RolePermission = {
-  permission_name: PermissionTranslationType;
-  description: string;
-  resource_server_name: string;
-  resource_server_identifier: string;
-};
-
-export type PermissionTranslationType =
+export type PermissionNameTranslationType =
   | "orga:read"
   | "resources:edit"
   | "resources:read"
@@ -71,9 +64,22 @@ export type PermissionTranslationType =
   | "processes:edit"
   | "processes:delete"
   | "processes:files";
+export type PermissionContextTranslationType =
+  | "resources"
+  | "orga"
+  | "processes";
+export type PermissionTypeTranslationType =
+  | "read"
+  | "edit"
+  | "delete"
+  | "messages"
+  | "delete"
+  | "files";
 
-export type Permission = {
-  permission_name: PermissionTranslationType;
+export type PermissionProps = {
+  permission_name: PermissionNameTranslationType;
+  context: PermissionContextTranslationType;
+  permissionType: PermissionTypeTranslationType;
   description: string;
 };
 
@@ -157,19 +163,27 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     staleTime: staleTime,
   });
 
-  const permissionsQuery = useQuery<Permission[], Error>({
+  const permissionsQuery = useQuery<PermissionProps[], Error>({
     queryKey: ["organizations", "permissions"],
     queryFn: async () =>
       getCustomAxios()
-        // .post(apiUrl, { data: { intent: "getPermissions" } })
         .get(apiUrl + "getPermissions/")
         .then((res) => {
           if (showLogger)
             logger("useOrganizations | getPermissions ✅ |", res.data);
           return res.data.map(
-            (item: { value: string; descibtion: String }) => ({
-              ...item,
-              permission_name: item.value,
+            (item: {
+              value: string;
+              description: string;
+            }): PermissionProps => ({
+              permission_name: item.value as PermissionNameTranslationType,
+              context: item.value.split(
+                ":"
+              )[0] as PermissionContextTranslationType,
+              permissionType: item.value.split(
+                ":"
+              )[1] as PermissionTypeTranslationType,
+              description: item.description,
             })
           );
         }),
@@ -193,7 +207,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     staleTime: staleTime,
   });
 
-  const rolePermissionsQuery = useQuery<RolePermission[], Error>({
+  const rolePermissionsQuery = useQuery<PermissionProps[], Error>({
     queryKey: ["organizations", "roles", roleID, "permissions"],
     queryFn: async () =>
       getCustomAxios()
@@ -205,7 +219,24 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
         .then((res) => {
           if (showLogger)
             logger("useOrganizations | getPermissionsForRole ✅ |", res.data);
-          return res.data;
+          return res.data.map(
+            (permission: {
+              description: string;
+              permission_name: string;
+              resource_server_identifier: string;
+              resource_server_name: string;
+            }): PermissionProps => ({
+              permission_name:
+                permission.permission_name as PermissionNameTranslationType,
+              context: permission.permission_name.split(
+                ":"
+              )[0] as PermissionContextTranslationType,
+              permissionType: permission.permission_name.split(
+                ":"
+              )[1] as PermissionTypeTranslationType,
+              description: permission.description,
+            })
+          );
         }),
     enabled: roleID !== undefined && roleID !== "",
     staleTime: staleTime,

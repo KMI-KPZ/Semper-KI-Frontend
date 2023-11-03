@@ -24,12 +24,12 @@ const ResourcesMaterialsForm: React.FC<ResourcesMaterialsFormProps> = (
     .object({
       name: yup.string().required(
         t("yup.required", {
-          name: t("Organization.Roles.index.name"),
+          name: t("Organization.Roles.Roles.name"),
         })
       ),
       description: yup.string().required(
         t("yup.required", {
-          name: t("Organization.Roles.index.description"),
+          name: t("Organization.Roles.Roles.description"),
         })
       ),
     })

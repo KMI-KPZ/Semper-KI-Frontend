@@ -5,8 +5,9 @@ import { Heading } from "@component-library/Typography";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { ServiceType } from "../../hooks/useService";
-import { TFunction, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import useProcess, { ProcessProps } from "@/pages/Projects/hooks/useProcess";
+import { TFunction } from "i18next";
 
 interface Props {
   process: ProcessProps;
@@ -24,7 +25,11 @@ export const getTitleFromProcess = (
   return process.details.title !== undefined
     ? process.details.title
     : process.service.type !== undefined
-    ? t(`enum.ServiceType.${ServiceType[process.service.type]}`)
+    ? t(
+        `enum.ServiceType.${
+          ServiceType[process.service.type] as keyof typeof ServiceType
+        }`
+      )
     : t("Service.Overview.components.Item.titleEmpty");
 };
 

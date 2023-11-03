@@ -55,28 +55,6 @@
       "manufacturing": "Herstellen lassen",
       "projects": "Meine Projekte",
       "project": "Projekt"
-    },
-    "permissions": {
-      "orga:read": "Organisationen lesen",
-      "orga:edit": "Organisationen bearbeiten",
-      "resources:edit": "Ressourcen bearbeiten",
-      "resources:read": "Ressourcen lesen",
-      "orga:delete": "Organisationen löschen",
-      "processes:read": "Prozesse lesen",
-      "processes:messages": "Prozessnachrichten lesen",
-      "processes:edit": "Prozesse bearbeiten",
-      "processes:delete": "Prozesse löschen",
-      "processes:files": "Prozessdateien lesen"
-    },
-    "simplifiedPermissions": {
-      "orga": "Organisation",
-      "processes": "Prozesse",
-      "resources": "Ressourcen",
-      "read": "Ansehen",
-      "edit": "Bearbeiten",
-      "delete": "Löschen",
-      "messages": "Nachrichten",
-      "files": "Dateien"
     }
   },
   "enum": {
@@ -137,6 +115,32 @@
       "POSTPROCESSING": "Nachbearbeitung",
       "ADDITIVE": "Additive",
       "TEST": "Test"
+    }
+  },
+  "types": {
+    "permissionName": {
+      "orga:read": "Organisationen lesen",
+      "orga:edit": "Organisationen bearbeiten",
+      "resources:edit": "Ressourcen bearbeiten",
+      "resources:read": "Ressourcen lesen",
+      "orga:delete": "Organisationen löschen",
+      "processes:read": "Prozesse lesen",
+      "processes:messages": "Prozessnachrichten lesen",
+      "processes:edit": "Prozesse bearbeiten",
+      "processes:delete": "Prozesse löschen",
+      "processes:files": "Prozessdateien lesen"
+    },
+    "permissionContext": {
+      "orga": "Organisation",
+      "processes": "Prozesse",
+      "resources": "Ressourcen"
+    },
+    "permissionType": {
+      "read": "Ansehen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "messages": "Nachrichten",
+      "files": "Dateien"
     }
   },
   "component-library": {

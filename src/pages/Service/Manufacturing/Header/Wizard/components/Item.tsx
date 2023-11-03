@@ -40,7 +40,7 @@ const ManufacturingWizardItem: React.FC<
           : "border-2"
       )}
       onClick={handleOnClickButton}
-      title={t(title)}
+      title={title}
       href={to}
     >
       {icon}

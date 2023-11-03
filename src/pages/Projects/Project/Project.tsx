@@ -119,7 +119,11 @@ const Project: React.FC<Props> = (props) => {
             </Container>
             <Text variant="body">
               {t("Projects.Project.Project.state")}
-              {t(`enum.ProcessStatus.${ProcessStatus[project.status]}`)}
+              {t(
+                `enum.ProcessStatus.${
+                  ProcessStatus[project.status] as keyof typeof ProcessStatus
+                }`
+              )}
             </Text>
             <Container direction="row" wrap="wrap">
               <Button

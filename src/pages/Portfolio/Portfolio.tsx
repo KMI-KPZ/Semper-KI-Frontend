@@ -3,10 +3,28 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import { useSearchParams } from "react-router-dom";
 import PortfolioItem from "./components/Item";
-import { PortfolioItems } from "@/data/portfolio";
 import { Heading } from "@component-library/Typography";
 
 interface Props {}
+
+export type PortfolioItemType =
+  | "use-information"
+  | "use-produce"
+  | "use-design"
+  | "use-accompany"
+  | "provide-produce"
+  | "provide-design"
+  | "provide-accompany";
+
+export const PortfolioItems: PortfolioItemType[] = [
+  "use-information",
+  "use-produce",
+  "use-design",
+  "use-accompany",
+  "provide-produce",
+  "provide-design",
+  "provide-accompany",
+];
 
 const Portfolio: React.FC<Props> = (props) => {
   const {} = props;

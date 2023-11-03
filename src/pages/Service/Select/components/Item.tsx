@@ -57,7 +57,11 @@ const ServiceSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
     >
       {icon}
       <Text variant="body">
-        {t(`enum.ServiceType.${ServiceType[serviceType]}`)}
+        {t(
+          `enum.ServiceType.${
+            ServiceType[serviceType] as keyof typeof ServiceType
+          }`
+        )}
       </Text>
     </a>
   );

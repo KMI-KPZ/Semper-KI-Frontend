@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import useOrganizations, {
-  Permission,
+  PermissionProps,
   RoleProps,
 } from "../../hooks/useOrganizations";
 import logger from "@/hooks/useLogger";
@@ -11,11 +11,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button } from "@component-library/Button";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { getSimplifiedPermissions, sortPermissions } from "../Roles";
+import { getGroupedPermissions, sortPermissions } from "../Roles";
 
 interface OrganizationRolesTableRowProps {
   role: RoleProps;
-  allPermissions: Permission[];
+  allPermissions: PermissionProps[];
   editRole: (role: RoleProps) => void;
 }
 
@@ -50,7 +50,7 @@ const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
               key={index}
               align="center"
               className={`p-2 ${
-                index === 0 || index === 3 || index === 7 ? "border-l-2" : ""
+                index === 0 || index === 3 || index === 8 ? "border-l-2" : ""
               }`}
             >
               {rolePermissionsQuery.data.find((permission) => {

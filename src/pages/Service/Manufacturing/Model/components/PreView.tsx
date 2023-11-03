@@ -66,7 +66,9 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
                 {title}
               </div>
             ))
-          : t("Service.Manufacturing.Model.components.PreView.noCertificates")}
+          : t(
+              "Service.Manufacturing.Model.components.PreView.error.noCertificates"
+            )}
       </div>
       <Button
         onClick={handleOnClickButtonSelect}

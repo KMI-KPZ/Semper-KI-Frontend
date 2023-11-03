@@ -179,7 +179,9 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
                       <td className="p-3 md:py-3">
                         {t(
                           `enum.ProcessStatus.${
-                            ProcessStatus[flatProject.status]
+                            ProcessStatus[
+                              flatProject.status
+                            ] as keyof typeof ProcessStatus
                           }`
                         )}
                       </td>

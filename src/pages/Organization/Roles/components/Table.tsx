@@ -1,7 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import useOrganizations, { RoleProps } from "../../hooks/useOrganizations";
-import { SimplifiedPermissionProps, getSimplifiedPermissions } from "../Roles";
+import {
+  getGroupedPermissions,
+  getPermissinContextTranslations,
+  sortPermissions,
+} from "../Roles";
 import { LoadingSuspense } from "@component-library/index";
 import OrganizationRolesTableRow from "./TableRow";
 
@@ -31,15 +35,17 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
                   <th rowSpan={2} className="p-2" align="center">
                     {t("Organization.Roles.components.Table.description")}
                   </th>
-                  {getSimplifiedPermissions(permissionsQuery.data).map(
-                    (permission: SimplifiedPermissionProps, index) => (
+                  {getPermissinContextTranslations(permissionsQuery.data).map(
+                    (permissionContext, index) => (
                       <th
                         key={index}
-                        colSpan={permission.permissions.length}
+                        colSpan={permissionContext.count}
                         align="center"
                         className="border-l-2 p-2"
                       >
-                        {t(`data.simplifiedPermissions.${permission.name}`)}
+                        {t(
+                          `types.permissionContext.${permissionContext.context}`
+                        )}
                       </th>
                     )
                   )}
@@ -48,17 +54,17 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
                   </th>
                 </tr>
                 <tr className="border-b-2">
-                  {getSimplifiedPermissions(permissionsQuery.data).map(
-                    (permission: SimplifiedPermissionProps, index) =>
-                      permission.permissions.map(
-                        (_permission, _index, _allPermissions) => (
+                  {getGroupedPermissions(permissionsQuery.data).map(
+                    (permissiongroup, index) =>
+                      permissiongroup.permissionTypes.map(
+                        (permission, index_) => (
                           <th
-                            key={index + _index}
-                            className={`${
-                              _index === 0 ? "border-l-2" : ""
-                            } p-2`}
+                            key={`${index}${index_}`}
+                            className={`
+                        ${index_ === 0 ? "border-l-2" : ""}
+                        p-2`}
                           >
-                            {t(`data.simplifiedPermissions.${_permission}`)}
+                            {t(`types.permissionType.${permission}`)}
                           </th>
                         )
                       )

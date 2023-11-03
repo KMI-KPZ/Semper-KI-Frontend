@@ -1,10 +1,14 @@
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import Contact from "@/pages/Legal/Contact/Contact";
 import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
 import { ServiceManufacturingProps } from "@/pages/Service/Manufacturing/types/types";
+import { Button } from "@component-library/Button";
 import Container from "@component-library/Container";
+import Modal from "@component-library/Modal";
 import { Heading, Text } from "@component-library/Typography";
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import ProcessServiceManufacturingModelPreview from "./ModellPreView";
 
 interface ProcessServiceManufacturingProps {
   service: ServiceManufacturingProps;
@@ -15,9 +19,22 @@ const ProcessServiceManufacturing: React.FC<
 > = (props) => {
   const { service } = props;
   const { t } = useTranslation();
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleOnClickButtonOpen = () => {
+    setOpen(true);
+  };
 
   return (
     <Container direction="col" align="start" className="p-5">
+      <PermissionGate element={"ProcessButtonModelPreView"}>
+        <Button
+          onClick={handleOnClickButtonOpen}
+          title={t(
+            "Projects.Project.Process.ServicePreview.components.Manufacturing.buttons.modelPreView"
+          )}
+        />
+      </PermissionGate>
       <Container>
         <Text variant="body">
           {t(
@@ -52,6 +69,14 @@ const ProcessServiceManufacturing: React.FC<
               )}
         </Text>
       </Container>
+      <Modal
+        open={open}
+        closeModal={() => {
+          setOpen(false);
+        }}
+      >
+        <ProcessServiceManufacturingModelPreview modelUrl="/assets/test/3DBenchy.stl" />
+      </Modal>
     </Container>
   );
 };

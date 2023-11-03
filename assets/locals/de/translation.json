@@ -897,7 +897,10 @@
             "Manufacturing": {
               "model": "Modell:",
               "material": "Material:",
-              "postProcessings": "Nachbearbeitungen:"
+              "postProcessings": "Nachbearbeitungen:",
+              "buttons": {
+                "modelPreView": "Modell Vorschau"
+              }
             },
             "Modelling": {
               "title": "Modell entwerfen lasssen"

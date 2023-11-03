@@ -55,6 +55,15 @@
       "manufacturing": "Herstellen lassen",
       "projects": "Meine Projekte",
       "project": "Projekt"
+    },
+    "ContactForm": {
+      "subject": "Betreff",
+      "message": "Nachricht",
+      "button": "Senden",
+      "name": "Name",
+      "email": "E-Mail-Adresse",
+      "error": "Fehler beim Senden der Nachricht",
+      "success": "Nachricht erfolgreich gesendet"
     }
   },
   "enum": {
@@ -206,6 +215,9 @@
         "data-protection": "Datenschutzerklärung",
         "instagram": "Instagram",
         "mastodon": "Mastodon"
+      },
+      "ContactForm": {
+        "title": "Kontaktformular"
       }
     },
     "Header": {

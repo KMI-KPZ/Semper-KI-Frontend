@@ -34,7 +34,7 @@ interface Props {
 
 const Project: React.FC<Props> = (props) => {
   const { user, event: projectCollectionEvent } = props;
-  const { project: testProject } = useContext(ProjectContext);
+  const { project } = useContext(ProjectContext);
   const { processID } = useParams();
   useScrollToProcess(processID);
 
@@ -48,8 +48,6 @@ const Project: React.FC<Props> = (props) => {
     handleOnChangeCheckboxSelectAll,
   } = useCheckedProcesses(projectQuery.data);
   const [infoOpen, setInfoOpen] = useState<boolean>(false);
-
-  const project: ProjectProps | undefined = projectQuery.data;
 
   const handleOnClickDelete = () => {
     if (

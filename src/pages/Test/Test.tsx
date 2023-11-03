@@ -8,6 +8,9 @@ import { AppContext } from "../App/App";
 import Container from "@component-library/Container";
 import { Heading } from "@component-library/Typography";
 import TestRender from "./TestRender";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import SaveIcon from "@mui/icons-material/Save";
+import useTest from "./hooks/useTest";
 interface Props {
   socket: WebSocket | null;
 }
@@ -16,6 +19,7 @@ export const Test: React.FC<Props> = (props) => {
   const [open, setOpen] = useState(false);
   const { events } = useContext(AppContext);
   const { reloadPermissions } = usePermissions();
+  const { safeProjectsQuery } = useTest();
   const openMenu = () => {
     setOpen(true);
   };
@@ -24,6 +28,9 @@ export const Test: React.FC<Props> = (props) => {
   };
   const closeSocket = () => {
     socket?.close();
+  };
+  const handleOnClickButtonSave = () => {
+    safeProjectsQuery.mutate();
   };
 
   return (
@@ -48,6 +55,14 @@ export const Test: React.FC<Props> = (props) => {
       >
         <TestRender />
       </Modal>
+      <PermissionGate element={"ProjectButtonSave"}>
+        <Button
+          size="sm"
+          startIcon={<SaveIcon />}
+          title="Projekte in DB Speichern"
+          onClick={handleOnClickButtonSave}
+        />
+      </PermissionGate>
     </div>
   );
 };

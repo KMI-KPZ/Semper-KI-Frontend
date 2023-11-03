@@ -16,7 +16,7 @@ const useTest = (): useTestReturnProps => {
   const safeProjectsQuery = useMutation<string, Error, void>({
     mutationFn: async () => {
       return getCustomAxios()
-        .get(`${process.env.VITE_HTTP_API_URL}/public/safeProject/`)
+        .get(`${process.env.VITE_HTTP_API_URL}/public/safeProjects/`)
         .then((res) => {
           logger("useTest | safeProject ✅ |", res.data);
           return res.data;

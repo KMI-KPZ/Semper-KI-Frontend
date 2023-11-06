@@ -1,8 +1,8 @@
 import { render } from "@test/render";
 import App, { AppState } from "./App";
-import useUser from "@/hooks/UseUser";
+import useUser from "@/hooks/useUser";
 import { UserBuilder } from "@test/builder";
-import { UserType } from "@/hooks/UseUser";
+import { UserType } from "@/hooks/useUser";
 
 describe("<App>", () => {
   it("should render without crashing", () => {

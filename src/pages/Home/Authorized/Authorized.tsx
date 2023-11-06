@@ -1,5 +1,5 @@
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { UserProps, UserType } from "@/hooks/UseUser";
+import { UserProps, UserType } from "@/hooks/useUser";
 import { Event } from "@/pages/App/types";
 import React from "react";
 import { useTranslation } from "react-i18next";

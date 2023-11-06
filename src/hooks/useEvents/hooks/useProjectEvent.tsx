@@ -10,10 +10,10 @@ import { Dispatch, SetStateAction, useContext } from "react";
 import logger from "@/hooks/useLogger";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { UserType } from "@/hooks/UseUser";
+import { UserType } from "@/hooks/useUser";
 import { AppContext } from "@/pages/App/App";
 import { UserContext } from "@/contexts/UserContextProvider";
-import { toast } from "@/pages/App/hooks/useToast";
+import { toast } from "@/hooks/useToast";
 
 export const getProjectEventAmount = (
   events: Event[] | undefined,

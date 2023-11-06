@@ -1,4 +1,4 @@
-import { UserProps } from "@/hooks/UseUser";
+import { UserProps } from "@/hooks/useUser";
 import { Button } from "@component-library/Button";
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import ReplayIcon from "@mui/icons-material/Replay";

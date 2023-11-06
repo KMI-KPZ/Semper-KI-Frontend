@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
-import useUser, { UserProps, UserType } from "@/hooks/UseUser";
+import useUser, { UserProps, UserType } from "@/hooks/useUser";
 import { Heading } from "@component-library/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";

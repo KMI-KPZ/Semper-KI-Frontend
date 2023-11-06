@@ -1,4 +1,4 @@
-import { UserProps, UserType } from "@/hooks/UseUser";
+import { UserProps, UserType } from "@/hooks/useUser";
 import { Event } from "@/pages/App/types";
 import { ReactNode, useContext } from "react";
 import { useTranslation } from "react-i18next";

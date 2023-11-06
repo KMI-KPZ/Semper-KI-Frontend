@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import logger from "@/hooks/useLogger";
-import { UserProps, UserType } from "@/hooks/UseUser";
+import { UserProps, UserType } from "@/hooks/useUser";
 import { use } from "i18next";
 import { UserContext } from "@/contexts/UserContextProvider";
 

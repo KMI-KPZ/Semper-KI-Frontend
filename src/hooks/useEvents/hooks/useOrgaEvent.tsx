@@ -1,4 +1,4 @@
-import { toast } from "@/pages/App/hooks/useToast";
+import { toast } from "@/hooks/useToast";
 import { DeleteOrgaEvent, Event, OrgaEvent } from "@/pages/App/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { Dispatch, SetStateAction } from "react";

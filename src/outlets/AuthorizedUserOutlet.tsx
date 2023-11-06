@@ -2,7 +2,7 @@ import { AppLoadingSuspense } from "@component-library/Loading";
 import React, { PropsWithChildren, createContext, useContext } from "react";
 import { UserContext } from "../contexts/UserContextProvider";
 import { Outlet } from "react-router-dom";
-import { UserProps } from "@/hooks/UseUser";
+import { UserProps } from "@/hooks/useUser";
 
 interface AuthorizedUserOutletProps {}
 

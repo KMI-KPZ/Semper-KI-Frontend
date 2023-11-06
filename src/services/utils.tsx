@@ -1,4 +1,4 @@
-import { Address, UserType } from "@/hooks/UseUser";
+import { Address, UserType } from "@/hooks/useUser";
 import logger from "@/hooks/useLogger";
 import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
 

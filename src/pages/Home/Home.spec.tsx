@@ -1,6 +1,6 @@
 import { render, screen } from "@test/render";
 import { Home } from "./Home";
-import { UserType } from "@/hooks/UseUser";
+import { UserType } from "@/hooks/useUser";
 import { UserBuilder } from "@test/userBuilder";
 
 describe.skip("<Home>", () => {

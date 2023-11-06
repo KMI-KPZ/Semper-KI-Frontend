@@ -1,5 +1,5 @@
 import { UserContext } from "@/contexts/UserContextProvider";
-import { UserType } from "@/hooks/UseUser";
+import { UserType } from "@/hooks/useUser";
 import { Error } from "@/pages/Error/Error";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";

@@ -490,19 +490,18 @@
   },
   "Login": {
     "Login": {
-      "redirect": "Weiterleiten zur Anmeldung"
-    },
-    "LoginView": {
       "header": "Anmeldung",
       "user": "Benutzer",
       "orga": "Organisation",
-      "login": {
-        "header": "Anmelden"
-      },
-      "register": {
-        "header": "Registieren"
-      },
-      "headerPath": "Für die gewünschte Seite müssen sie sich anmelden"
+      "admin": "Mocked Anmeldungen",
+      "headerPath": "Für die gewünschte Seite müssen sie sich anmelden",
+      "buttons": {
+        "login": "Anmelden",
+        "register": "Registieren",
+        "user": "Einzelnutzer",
+        "orga": "Organisation",
+        "admin": "Admin"
+      }
     }
   },
   "Logout": {

@@ -12,10 +12,10 @@ import { AppContext } from "@/pages/App/App";
 import { Event, ProjectEvent } from "@/pages/App/types";
 import { Heading, Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
-import useBodyScroll from "@/pages/App/hooks/useBodyScroll";
+import useBodyScroll from "@/hooks/useBodyScroll";
 import { EventContext } from "@/contexts/EventContextProvider";
 import { UserContext } from "@/contexts/UserContextProvider";
-import { UserType } from "@/hooks/UseUser";
+import { UserType } from "@/hooks/useUser";
 import { getProjectEventAmount } from "@/hooks/useEvents/hooks/useProjectEvent";
 
 interface Language {

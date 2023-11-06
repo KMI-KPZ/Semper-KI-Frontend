@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import Container from "@component-library/Container";
 import Switch from "@component-library/Switch";
 import { Text } from "@component-library/Typography";
-import { UserType } from "@/hooks/UseUser";
+import { UserType } from "@/hooks/useUser";
 
 interface Props {
   userType: UserType;

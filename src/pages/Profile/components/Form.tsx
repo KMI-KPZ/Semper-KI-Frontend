@@ -1,5 +1,5 @@
 import logger from "@/hooks/useLogger";
-import { UserProps } from "@/hooks/UseUser";
+import { UserProps } from "@/hooks/useUser";
 import { Button } from "@component-library/Button";
 import { Heading, Text } from "@component-library/Typography";
 import { useForm } from "react-hook-form";

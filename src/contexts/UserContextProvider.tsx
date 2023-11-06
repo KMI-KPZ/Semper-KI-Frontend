@@ -1,4 +1,4 @@
-import useUser, { UserProps } from "@/hooks/UseUser";
+import useUser, { UserProps } from "@/hooks/useUser";
 import { AppLoadingSuspense } from "@component-library/Loading";
 import React, { PropsWithChildren, createContext } from "react";
 import { useTranslation } from "react-i18next";

@@ -1,6 +1,6 @@
 import { PermissionContext } from "@/contexts/PermissionContextProvider";
 import { UserContext } from "@/contexts/UserContextProvider";
-import { UserType } from "@/hooks/UseUser";
+import { UserType } from "@/hooks/useUser";
 import { useContext } from "react";
 interface ReturnProps {
   hasPermission(element: string): boolean;

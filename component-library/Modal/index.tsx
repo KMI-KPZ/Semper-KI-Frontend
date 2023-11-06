@@ -3,15 +3,13 @@ import {
   MouseEvent,
   PropsWithChildren,
   SyntheticEvent,
-  useContext,
   useEffect,
   useRef,
 } from "react";
 import { Button } from "..";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "react-i18next";
-import { AppContext } from "@/pages/App/App";
-import useBodyScroll from "@/pages/App/hooks/useBodyScroll";
+import useBodyScroll from "@/hooks/useBodyScroll";
 
 type ModelProps = {
   open: boolean;

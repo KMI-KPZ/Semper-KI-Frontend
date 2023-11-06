@@ -1,14 +1,12 @@
+import ServiceEdit from "@/pages/Service/Edit/Edit";
+import { ServiceManufacturing } from "@/pages/Service/Manufacturing/Manufacturing";
+import ServiceModeling from "@/pages/Service/Modelling/Modelling";
+import ServiceSelect from "@/pages/Service/Select/Select";
+import { ServiceContextProvider } from "@/pages/Service/context/ServiceContext";
+import { ServiceType } from "@/pages/Service/hooks/useService";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Service from "../Service/Service";
-import ServiceOverview from "../Service/Overview/Overview";
-import ServiceSelect from "../Service/Select/Select";
-import { ServiceManufacturing } from "../Service/Manufacturing/Manufacturing";
-import { ServiceType } from "../Service/hooks/useService";
-import ServiceModeling from "../Service/Modelling/Modelling";
-import { ServiceContextProvider } from "../Service/context/ServiceContext";
-import ServiceEdit from "../Service/Edit/Edit";
 
 interface ServiceRoutesProps {}
 

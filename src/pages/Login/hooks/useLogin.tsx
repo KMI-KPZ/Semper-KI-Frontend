@@ -1,7 +1,7 @@
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { AxiosResponse } from "axios";
-import { UserType } from "@/hooks/UseUser";
+import { UserType } from "@/hooks/useUser";
 import { getCustomAxios } from "@/hooks/useCustomAxios";
 import { useLocation, useSearchParams } from "react-router-dom";
 import logger from "@/hooks/useLogger";

@@ -22,15 +22,15 @@ import useCookieConsent from "@/components/CookieBanner/hooks/useCookieConsent";
 import Modal from "@component-library/Modal";
 import usePing from "@/hooks/usePing";
 import { FilterItemProps } from "../Service/Manufacturing/Filter/Filter";
-import AdminRoutes from "../Routes/Admin";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import EmailVerification from "../EmailVerification/EmailVerification";
-import ProjectsRoutes from "../Routes/ProjectsRoutes";
 import ResKriVer from "../ResKriVer/ResKriVer";
 import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
 import { OrganizationOutlet } from "@/outlets/OrganizationOutlet";
 import { AdminOutlet } from "@/outlets/AdminOutlet";
 import { ToastContainer } from "react-toastify";
+import ProjectsRoutes from "@/routes/ProjectsRoutes";
+import AdminRoutes from "@/routes/AdminRotes";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };

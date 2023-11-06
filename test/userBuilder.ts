@@ -1,4 +1,4 @@
-import { Address, UserProps, UserType } from "@/hooks/UseUser";
+import { Address, UserProps, UserType } from "@/hooks/useUser";
 
 export class UserBuilder {
     email:string = "test@test.de";

@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "@component-library/Button";
 import { Heading, Text } from "@component-library/Typography";
 import { getCustomAxios } from "@/hooks/useCustomAxios";
-import { toast } from "@/pages/App/hooks/useToast";
+import { toast } from "@/hooks/useToast";
 
 interface ContactFormProps {
   closeEdit: () => void;

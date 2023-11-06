@@ -6,7 +6,7 @@ import { Button } from "@component-library/Button";
 import ProcessFilterCard from "./components/Card";
 import { AppContext } from "@/pages/App/App";
 import { Heading } from "@component-library/Typography";
-import useBodyScroll from "@/pages/App/hooks/useBodyScroll";
+import useBodyScroll from "@/hooks/useBodyScroll";
 
 interface Props {
   filterOpen: boolean;

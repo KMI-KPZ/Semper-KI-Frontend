@@ -62,8 +62,8 @@ const useUser = (): ReturnProps => {
 
   const loadUserQuery = useQuery<UserProps, Error>({
     queryKey: ["user"],
-    queryFn: async () =>
-      getCustomAxios()
+    queryFn: async () => {
+      return getCustomAxios()
         .get(`${process.env.VITE_HTTP_API_URL}/public/getUser/`)
         .then((response) => {
           const userData = response.data;
@@ -77,7 +77,8 @@ const useUser = (): ReturnProps => {
             usertype: getUserType(userData.usertype),
           };
           return newUser;
-        }),
+        });
+    },
     enabled:
       loadIsLoggedInQuery.isFetched &&
       loadIsLoggedInQuery.data !== undefined &&

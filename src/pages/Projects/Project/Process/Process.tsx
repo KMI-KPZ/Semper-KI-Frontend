@@ -4,7 +4,6 @@ import { Button } from "@component-library/Button";
 import Chat from "./components/Chat";
 import StatusBar from "./StatusBar/StatusBar";
 import { useTranslation } from "react-i18next";
-import { UserProps } from "@/hooks/UseUser";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import Modal from "@component-library/Modal";
 import ProcessServicePreview from "./ServicePreview/ServicePreview";
@@ -24,6 +23,7 @@ import { getTitleFromProcess } from "@/pages/Service/Overview/components/Item";
 import ProjectFile from "./components/ProcessFile";
 import ProcessStatusButtons from "./components/StatusButtons";
 import { Upload } from "@/components/Upload";
+import { UserProps } from "@/hooks/useUser";
 
 interface Props {
   process: ProcessProps;

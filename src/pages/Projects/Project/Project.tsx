@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { UserProps, UserType } from "@/hooks/UseUser";
+import { UserProps, UserType } from "@/hooks/useUser";
 import { Heading, Text } from "@component-library/Typography";
 import { useNavigate, useParams } from "react-router-dom";
 import {

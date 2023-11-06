@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import PersonIcon from "@mui/icons-material/Person";
-import FactoryIcon from "@mui/icons-material/Factory";
-import { UserType } from "@/hooks/useUser/types";
-import { Button } from "@component-library/Button";
 import Container from "@component-library/Container";
 import Switch from "@component-library/Switch";
 import { Text } from "@component-library/Typography";
+import { UserType } from "@/hooks/UseUser";
 
 interface Props {
   userType: UserType;

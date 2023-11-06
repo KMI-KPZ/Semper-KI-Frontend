@@ -1,14 +1,14 @@
-import { AppContext } from "@/pages/App/App";
+import { PermissionContext } from "@/contexts/PermissionContextProvider";
+import { UserContext } from "@/contexts/UserContextProvider";
+import { UserType } from "@/hooks/UseUser";
 import { useContext } from "react";
-import { UserType } from "@/hooks/useUser/types";
-import logger from "@/hooks/useLogger";
-
 interface ReturnProps {
   hasPermission(element: string): boolean;
 }
 
 const usePermissionGate = (): ReturnProps => {
-  const { user, permissions, permissionGates } = useContext(AppContext);
+  const { user } = useContext(UserContext);
+  const { permissions, permissionGates } = useContext(PermissionContext);
 
   const hasPermission = (element: string): boolean => {
     const permissionGate = permissionGates?.find((permissionGate) =>

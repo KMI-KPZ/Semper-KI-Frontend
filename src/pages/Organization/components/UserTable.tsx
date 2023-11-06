@@ -12,13 +12,14 @@ import CheckIcon from "@mui/icons-material/Check";
 import { Heading } from "@component-library/Typography";
 import { AppContext } from "@/pages/App/App";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import { UserContext } from "@/contexts/UserContextProvider";
 
 interface OrganizationTableProps {}
 
 const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { user } = useContext(AppContext);
+  const { user } = useContext(UserContext);
   const { userQuery, rolesQuery } = useOrganizations();
 
   return (

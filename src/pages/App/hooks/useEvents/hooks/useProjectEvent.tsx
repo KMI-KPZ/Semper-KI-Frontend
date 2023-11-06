@@ -11,8 +11,9 @@ import logger from "@/hooks/useLogger";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "../../useToast";
-import { UserType } from "@/hooks/useUser/types";
+import { UserType } from "@/hooks/UseUser";
 import { AppContext } from "@/pages/App/App";
+import { UserContext } from "@/contexts/UserContextProvider";
 
 export const getProjectEventAmount = (
   events: Event[] | undefined,
@@ -141,7 +142,7 @@ interface ReturnProps {
 const useProjectEvent = (): ReturnProps => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
-  const { user } = useContext(AppContext);
+  const { user } = useContext(UserContext);
 
   const hydrateProjectEvents = (
     newProjectEvent: ProjectEvent,

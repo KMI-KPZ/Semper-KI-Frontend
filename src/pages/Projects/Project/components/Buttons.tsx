@@ -9,7 +9,7 @@ import DeleteForever from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
-import { UserProps } from "@/hooks/useUser/types";
+import { UserProps } from "@/hooks/UseUser";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import Container from "@component-library/Container";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";

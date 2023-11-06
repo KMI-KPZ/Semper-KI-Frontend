@@ -1,6 +1,6 @@
 import { getCustomAxios } from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
-import { UserProps } from "@/hooks/useUser/types";
+import { UserProps } from "@/hooks/UseUser";
 import { FlatProjectProps } from "@/pages/Projects/hooks/useFlatProjects";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";

@@ -9,12 +9,14 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { NavigationItemData } from "@/data/navigation";
 import LogoURL from "@images/logo192.png";
 import { AppContext } from "@/pages/App/App";
-import { UserProps, UserType } from "@/hooks/useUser/types";
 import { Event, ProjectEvent } from "@/pages/App/types";
 import { Heading, Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
 import useBodyScroll from "@/pages/App/hooks/useBodyScroll";
 import { getProjectEventAmount } from "@/pages/App/hooks/useEvents/hooks/useProjectEvent";
+import { EventContext } from "@/contexts/EventContextProvider";
+import { UserContext } from "@/contexts/UserContextProvider";
+import { UserType } from "@/hooks/UseUser";
 
 interface Language {
   code: string;
@@ -48,10 +50,7 @@ const languages: Language[] = [
   },
 ];
 
-interface Props {
-  user: UserProps | undefined;
-  events?: Event[];
-}
+interface Props {}
 
 interface State {
   languageMenuOpen: boolean;
@@ -59,7 +58,9 @@ interface State {
 }
 
 export const Header: React.FC<Props> = (props) => {
-  const { user, events } = props;
+  const {} = props;
+  const { user } = useContext(UserContext);
+  const { events } = useContext(EventContext);
   const userType = user === undefined ? UserType.ANONYM : user.usertype;
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();

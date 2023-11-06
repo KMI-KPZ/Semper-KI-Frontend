@@ -1,5 +1,5 @@
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { UserProps, UserType } from "@/hooks/useUser/types";
+import { UserProps, UserType } from "@/hooks/UseUser";
 import { Event } from "@/pages/App/types";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -11,11 +11,10 @@ import Coypu from "../components/Coypu";
 
 interface AuthorizedPropsHome {
   user: UserProps;
-  events?: Event[];
 }
 
 const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
-  const { user, events } = props;
+  const { user } = props;
   const { t } = useTranslation();
 
   return (

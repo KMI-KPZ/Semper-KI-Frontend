@@ -1,4 +1,4 @@
-import { UserProps, UserType } from "@/hooks/useUser/types";
+import { UserProps, UserType } from "@/hooks/UseUser";
 import { Button } from "@component-library/Button";
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import ReplayIcon from "@mui/icons-material/Replay";
@@ -20,6 +20,8 @@ import useProcess, {
 } from "@/pages/Projects/hooks/useProcess";
 import { ProcessComponentState } from "../Process";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
+import { EventContext } from "@/contexts/EventContextProvider";
+import useEvents from "@/pages/App/hooks/useEvents/useEvents";
 
 interface ProcessButtonsProps {
   user: UserProps | undefined;
@@ -34,7 +36,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
   const { projectID, process, user, updateStatus, setState, projectEvent } =
     props;
   const { t } = useTranslation();
-  const { deleteEvent } = useContext(AppContext);
+  const { deleteEvent } = useEvents();
   const { deleteProcess, updateProcessWithProcessID } = useProcess();
   const { project } = useContext(ProjectContext);
   const { getDeleteProjectEvent } = useProjectEventChange(

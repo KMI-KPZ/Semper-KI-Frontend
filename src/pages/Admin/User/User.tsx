@@ -1,4 +1,4 @@
-import { UserProps, UserType } from "@/hooks/useUser/types";
+import { UserProps, UserType } from "@/hooks/UseUser";
 import { Heading, Text } from "@component-library/Typography";
 import {
   Paper,

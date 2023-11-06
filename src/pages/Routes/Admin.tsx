@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
 import useAdmin from "../Admin/hooks/useAdmin";
@@ -6,15 +6,15 @@ import Admin from "../Admin/Admin";
 import AdminUser from "../Admin/User/User";
 import AdminOrganization from "../Admin/Organization/Organization";
 import AdminProjects from "../Admin/Projects";
-import { UserProps } from "@/hooks/useUser/types";
+import { UserProps } from "@/hooks/UseUser";
 import Service from "../Service/Service";
 import Project from "../Projects/Project/Project";
-interface AdminRoutesProps {
-  user: UserProps | undefined;
-}
+import { AuthorizedUserContext } from "@/outlets/AuthorizedUserOutlet";
+interface AdminRoutesProps {}
 
 const AdminRoutes: React.FC<AdminRoutesProps> = (props) => {
-  const { user } = props;
+  const {} = props;
+  const { user } = useContext(AuthorizedUserContext);
   const { t } = useTranslation();
 
   const { adminQuery, adminProjectsQuery } = useAdmin();

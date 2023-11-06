@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import logger from "@/hooks/useLogger";
-import { UserProps, UserType } from "@/hooks/useUser/types";
+import { UserProps, UserType } from "@/hooks/UseUser";
+import { use } from "i18next";
+import { UserContext } from "@/contexts/UserContextProvider";
 
 interface ReturnProps {
   sendMessage(message: string): void;
@@ -11,10 +13,9 @@ interface ReturnProps {
 type WebSocketState = "connecting" | "connected" | "disconnected" | "error";
 
 export const useWebsocket = (
-  onMessage: (event: MessageEvent) => void,
-  load: boolean,
-  user: UserProps | undefined
+  onMessage: (event: MessageEvent) => void
 ): ReturnProps => {
+  const { user } = useContext(UserContext);
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [state, setState] = useState<WebSocketState>("disconnected");
   const reconnectTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -94,7 +95,7 @@ export const useWebsocket = (
       }, 5000); // Adjust the delay as needed
     };
 
-    if (load === true && state !== "connected" && user !== undefined) {
+    if (state !== "connected" && user !== undefined) {
       setState("connecting");
       createWebSocket();
     }
@@ -110,7 +111,7 @@ export const useWebsocket = (
         setState("disconnected");
       }
     };
-  }, [load, user]);
+  }, [user]);
 
   const sendMessage = (message: string) => {
     if (state === "connected") {

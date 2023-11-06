@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
-import { UserProps, UserType } from "@/hooks/useUser/types";
+import useUser, { UserProps, UserType } from "@/hooks/UseUser";
 import { Heading } from "@component-library/Typography";
-import useUser from "@/hooks/useUser";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import Modal from "@component-library/Modal";
@@ -11,14 +10,14 @@ import ProfileForm from "./components/Form";
 import Container from "@component-library/Container";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { type } from "os";
+import { AuthorizedUserContext } from "@/outlets/AuthorizedUserOutlet";
 
-interface Props {
-  user: UserProps;
-}
+interface Props {}
 
 const Profile: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { user } = props;
+  const {} = props;
+  const { user } = useContext(AuthorizedUserContext);
   const { deleteUser } = useUser();
   const [edit, setEdit] = useState(false);
 

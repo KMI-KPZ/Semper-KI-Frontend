@@ -4,7 +4,7 @@ import { useLogin } from "./hooks/useLogin";
 import { Button } from "@component-library/Button";
 import LoginIcon from "@mui/icons-material/Login";
 import CreateIcon from "@mui/icons-material/Create";
-import { UserType } from "@/hooks/useUser/types";
+import { UserType } from "@/hooks/UseUser";
 import { Heading, Text } from "@component-library/Typography";
 import Switch from "@/components/Switch";
 import PersonIcon from "@mui/icons-material/Person";

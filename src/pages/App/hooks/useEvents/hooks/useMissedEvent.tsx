@@ -1,16 +1,18 @@
 import { Event } from "@/pages/App/types";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { getCustomAxios } from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
+import { use } from "i18next";
+import { UserContext } from "@/contexts/UserContextProvider";
 
 interface Props {
-  isLoggedIn: boolean;
   onLoadMissedEvents(missedEvents: Event[]): void;
 }
 
 const useMissedEvent = (props: Props): void => {
-  const { isLoggedIn, onLoadMissedEvents } = props;
+  const { onLoadMissedEvents } = props;
+  const { user } = useContext(UserContext);
 
   const { data, status, error } = useQuery<Event[], Error>({
     queryKey: ["missedEvents"],
@@ -21,7 +23,7 @@ const useMissedEvent = (props: Props): void => {
           logger("useMissedEvent | getMissedEvents ✅ |", res.data);
           return res.data;
         }),
-    enabled: isLoggedIn === true && false, //TO-DO
+    enabled: user !== undefined, //TO-DO
     refetchOnWindowFocus: false,
     initialData: [],
   });

@@ -9,13 +9,14 @@ import { AppContext } from "@/pages/App/App";
 import Container from "@component-library/Container";
 import { useFlatProjects } from "@/pages/Projects/hooks/useFlatProjects";
 import useProcess from "@/pages/Projects/hooks/useProcess";
+import { UserContext } from "@/contexts/UserContextProvider";
 
 interface HomeProjectsProps {}
 
 const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { user } = useContext(AppContext);
+  const { user } = useContext(UserContext);
 
   const { flatProjectsQuery } = useFlatProjects();
   const { createProject } = useProject();

@@ -1,5 +1,5 @@
-import { UserProps } from "@/hooks/useUser/types";
-import React from "react";
+import { UserProps } from "@/hooks/UseUser";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import ProjectContextProvider from "../Projects/context/ProjectContext";
@@ -10,16 +10,16 @@ import ProjectContractorSelection from "../Projects/Project/ContractorSelection/
 import ProjectCheckout from "../Projects/Project/Checkout/Checkout";
 import ProcessVerification from "../Projects/Project/Verification/Verification";
 import ServiceRoutes from "./ServiceRoutes";
-import { UserOutlet } from "../Outlets/UserOutlet";
 import ProcessContextProvider from "../Projects/context/ProcessContext";
+import { UserContext } from "@/contexts/UserContextProvider";
+import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
 
-interface ProjectsRoutesProps {
-  user: UserProps | undefined;
-}
+interface ProjectsRoutesProps {}
 
 const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
-  const { user } = props;
+  const {} = props;
   const { t } = useTranslation();
+  const { user } = useContext(UserContext);
 
   return (
     <Routes>
@@ -40,7 +40,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
             </PermissionGate>
           }
         />
-        <Route element={<UserOutlet user={user} />}>
+        <Route element={<AuthorizedUserOutlet />}>
           <Route
             path="contractorSelection"
             element={
@@ -68,7 +68,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
         </Route>
         <Route path=":processID/*" element={<ProcessContextProvider />}>
           <Route index element={<Project user={user} />} />
-          <Route element={<UserOutlet user={user} />}>
+          <Route element={<AuthorizedUserOutlet />}>
             <Route
               path="checkout"
               element={

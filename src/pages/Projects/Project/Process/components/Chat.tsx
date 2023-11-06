@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 import { Button } from "@component-library/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { useTranslation } from "react-i18next";
-import { UserProps } from "@/hooks/useUser/types";
+import { UserProps } from "@/hooks/UseUser";
 import { Heading, Text } from "@component-library/Typography";
 import logger from "@/hooks/useLogger";
 import useProcess, {

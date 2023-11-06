@@ -6,12 +6,12 @@ import {
 } from "@tanstack/react-query";
 import { getCustomAxios } from "@/hooks/useCustomAxios";
 import logger from "@/hooks/useLogger";
-import { useContext, useState } from "react";
-import { UserProps } from "./useUser/types";
+import { useContext } from "react";
+import { UserContext } from "@/contexts/UserContextProvider";
 
 interface ReturnProps {
-  permissions: Permission[] | undefined;
-  permissionGates: PermissionGateType[] | undefined;
+  permissionQuery: UseQueryResult<Permission[], Error>;
+  permissionGateQuery: UseQueryResult<PermissionGateType[], Error>;
   reloadPermissions: () => void;
 }
 
@@ -25,8 +25,8 @@ export type PermissionGateType = {
   permission: Permission;
 };
 
-const usePermissions = (user?: UserProps): ReturnProps => {
-  const [permissions, setPermissions] = useState<Permission[]>();
+const usePermissions = (): ReturnProps => {
+  const { user } = useContext(UserContext);
   const queryClient = useQueryClient();
 
   const permissionQuery = useQuery<Permission[], Error>({
@@ -39,9 +39,6 @@ const usePermissions = (user?: UserProps): ReturnProps => {
           logger("usePermissions | getPermissions ✅ |", res.data);
           return res.data;
         });
-    },
-    onSuccess: (data) => {
-      setPermissions(data);
     },
     enabled: user !== undefined,
   });
@@ -79,8 +76,8 @@ const usePermissions = (user?: UserProps): ReturnProps => {
   };
 
   return {
-    permissionGates: permissionGateQuery.data,
-    permissions,
+    permissionQuery,
+    permissionGateQuery,
     reloadPermissions,
   };
 };

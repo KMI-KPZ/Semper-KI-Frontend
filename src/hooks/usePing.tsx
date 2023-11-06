@@ -16,7 +16,7 @@ const usePing = (): ReturnProps => {
   // const sliceURLs = (urls: string[]): string[] => {
   //   return urls.map((url) => url.slice(8, -1));
   // };
-  const { isCSRFTokenLoaded } = useCRSFToken();
+  const { CSRFTokenIsLoaded } = useCRSFToken();
 
   const pingQuery = useQuery<{ up: boolean }, Error>({
     queryKey: ["ping"],
@@ -29,7 +29,7 @@ const usePing = (): ReturnProps => {
           logger("usePing | isMagazineUp ✅ |", res.data);
           return res.data;
         }),
-    enabled: isCSRFTokenLoaded === true,
+    enabled: CSRFTokenIsLoaded() === true,
   });
 
   const isMagazineUp = (): boolean => {

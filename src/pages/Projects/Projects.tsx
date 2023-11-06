@@ -6,7 +6,7 @@ import { LoadingSuspense } from "@component-library/Loading";
 import { FlatProjectProps, useFlatProjects } from "./hooks/useFlatProjects";
 import ProjectsTable from "./components/Table";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { UserProps, UserType } from "@/hooks/useUser/types";
+import { UserProps, UserType } from "@/hooks/UseUser";
 import { useProject } from "./hooks/useProject";
 
 interface ProjectsProps {

@@ -11,13 +11,11 @@ import TestRender from "./TestRender";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import SaveIcon from "@mui/icons-material/Save";
 import useTest from "./hooks/useTest";
-interface Props {
-  socket: WebSocket | null;
-}
+import { EventContext } from "@/contexts/EventContextProvider";
+interface Props {}
 export const Test: React.FC<Props> = (props) => {
-  const { socket } = props;
+  const { socket, events } = useContext(EventContext);
   const [open, setOpen] = useState(false);
-  const { events } = useContext(AppContext);
   const { reloadPermissions } = usePermissions();
   const { safeProjectsQuery } = useTest();
   const openMenu = () => {

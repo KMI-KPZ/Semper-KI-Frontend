@@ -19,6 +19,7 @@ import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import React, { useContext } from "react";
 import { AppContext } from "@/pages/App/App";
 import logger from "@/hooks/useLogger";
+import { UserContext } from "@/contexts/UserContextProvider";
 
 interface ProcessStatusButtonsProps {
   projectID: string;
@@ -32,7 +33,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { isServiceComplete } = useService();
   const { processID } = useParams();
   const { updateProcessWithProcessID, getCurrentProcess } = useProcess();
-  const { user } = useContext(AppContext);
+  const { user } = useContext(UserContext);
   const process = getCurrentProcess(manuelProcessID);
 
   const shouldRenderFor = (type: "CLIENT" | "CONTRACTOR"): boolean => {

@@ -5,7 +5,7 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
-  isCSRFTokenLoaded: boolean;
+  CSRFTokenIsLoaded(): boolean;
   CSRFTokenQuery: UseQueryResult<string, Error>;
 }
 
@@ -23,14 +23,16 @@ const useCRSFToken = (): ReturnProps => {
     },
     staleTime: 1000 * 60 * 24,
   });
-  const checkCSRFTokenLoaded = (): boolean => {
-    return CSRFTokenQuery.data !== "" && Cookies.get("csrftoken") !== undefined
+  const CSRFTokenIsLoaded = (): boolean => {
+    return CSRFTokenQuery.isFetched &&
+      CSRFTokenQuery.data !== "" &&
+      Cookies.get("csrftoken") !== undefined
       ? true
       : false;
   };
 
   return {
-    isCSRFTokenLoaded: checkCSRFTokenLoaded(),
+    CSRFTokenIsLoaded,
     CSRFTokenQuery,
   };
 };

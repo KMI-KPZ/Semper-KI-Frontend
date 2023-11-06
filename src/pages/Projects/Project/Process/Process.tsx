@@ -4,7 +4,7 @@ import { Button } from "@component-library/Button";
 import Chat from "./components/Chat";
 import StatusBar from "./StatusBar/StatusBar";
 import { useTranslation } from "react-i18next";
-import { UserProps } from "@/hooks/useUser/types";
+import { UserProps } from "@/hooks/UseUser";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import Modal from "@component-library/Modal";
 import ProcessServicePreview from "./ServicePreview/ServicePreview";

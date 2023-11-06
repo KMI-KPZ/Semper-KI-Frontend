@@ -4,10 +4,6 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { Test } from "../Test/Test";
-import { UserProps } from "@/hooks/useUser/types";
-import { DeleteEvent, Event } from "@/pages/App/types";
-import { ToastContainer } from "react-toastify";
-import useUser from "@/hooks/useUser";
 import Background from "@/components/Background";
 import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
@@ -19,11 +15,6 @@ import Portfolio from "../Portfolio/Portfolio";
 import Profile from "../Profile/Proflle";
 import Resouces from "../Resources/Resources";
 import Legal from "../Legal/Legal";
-import useEvents from "./hooks/useEvents/useEvents";
-import usePermissions, {
-  Permission,
-  PermissionGateType,
-} from "@/hooks/usePermissions";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import "react-toastify/dist/ReactToastify.css";
 import CookieBanner from "@/components/CookieBanner/CookieBanner";
@@ -33,15 +24,13 @@ import usePing from "@/hooks/usePing";
 import { FilterItemProps } from "../Service/Manufacturing/Filter/Filter";
 import AdminRoutes from "../Routes/Admin";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
-import AppLoadingSuspense from "./components/LoadingSuspense";
-import {
-  AdminOutlet,
-  OrganizationOutlet,
-  UserOutlet,
-} from "../Outlets/UserOutlet";
 import EmailVerification from "../EmailVerification/EmailVerification";
 import ProjectsRoutes from "../Routes/ProjectsRoutes";
 import ResKriVer from "../ResKriVer/ResKriVer";
+import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
+import { OrganizationOutlet } from "@/outlets/OrganizationOutlet";
+import { AdminOutlet } from "@/outlets/AdminOutlet";
+import { ToastContainer } from "react-toastify";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -50,13 +39,8 @@ export type AppState = {
 };
 
 export type AppContext = {
-  events: Event[];
-  user: UserProps | undefined;
-  permissions: Permission[] | undefined;
-  permissionGates: PermissionGateType[] | undefined;
   appState: AppState;
   setAppState: React.Dispatch<React.SetStateAction<AppState>>;
-  deleteEvent(event: DeleteEvent): void;
 };
 
 const initialAppState: AppState = {
@@ -64,58 +48,30 @@ const initialAppState: AppState = {
 };
 
 export const AppContext = createContext<AppContext>({
-  events: [],
-  user: undefined,
-  permissions: [],
-  permissionGates: [],
   appState: initialAppState,
   setAppState: () => {},
-  deleteEvent: () => {},
 });
 
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(initialAppState);
   const { rejectCookies, acceptCookies, cookieConsent } = useCookieConsent();
-  const { isLoggedIn, user, isLoggedInResponse } = useUser();
-  const { permissionGates, permissions, reloadPermissions } =
-    usePermissions(user);
-  const { socket, deleteEvent, events } = useEvents(
-    isLoggedIn,
-    user,
-    reloadPermissions
-  );
-  const { isMagazineUp } = usePing();
 
-  const showLoadingSuspense = (): boolean =>
-    isLoggedInResponse === false ||
-    (isLoggedIn === true &&
-      (user === undefined ||
-        permissionGates === undefined ||
-        permissions === undefined));
-
-  return showLoadingSuspense() ? (
-    <AppLoadingSuspense />
-  ) : (
+  return (
     <AppContext.Provider
       value={{
         appState: state,
         setAppState: setState,
-        deleteEvent,
-        user,
-        permissions,
-        permissionGates,
-        events,
       }}
     >
       <div
         className={`flex min-h-screen flex-col items-center justify-between gap-5 overflow-x-auto p-3 font-ptsans text-base`}
         data-testid="app"
       >
-        <Header user={user} events={events} />
+        <Header />
         <main className="flex w-full max-w-screen-2xl flex-grow flex-col items-center justify-start gap-5 bg-slate-200 bg-opacity-80 p-5 xl:w-5/6">
           <Breadcrumb />
           <Routes data-testid="routes">
-            <Route index element={<Home events={events} user={user} />} />
+            <Route index element={<Home />} />
             <Route
               path="registerOrganization"
               element={<RegisterOrganization />}
@@ -127,40 +83,37 @@ const App: React.FC = () => {
             <Route path="login" element={<Login />} />
             <Route path="login/redirect" element={<RedirectLogin />} />
             <Route path="register" element={<Login />} />
-            <Route
-              path="legal/*"
-              element={<Legal isMagazineUp={isMagazineUp} />}
-            />
+            <Route path="legal/*" element={<Legal />} />
             <Route path="demo/*" element={<Navigate to="/project/new" />} />
-            <Route path="projects/*" element={<ProjectsRoutes user={user} />} />
-            <Route element={<UserOutlet user={user} />}>
-              <Route path="test" element={<Test socket={socket} />} />
-              <Route path="account" element={<Profile user={user!} />} />
-            </Route>
-            <Route element={<OrganizationOutlet user={user} />}>
-              <Route
-                path="organization"
-                element={
-                  <PermissionGate
-                    element="Organization"
-                    showMessage
-                    children={<Organization />}
-                  />
-                }
-              />
-              <Route
-                path="resources/*"
-                element={
-                  <PermissionGate
-                    children={<Resouces />}
-                    element="Resources"
-                    showMessage
-                  />
-                }
-              />
-            </Route>
-            <Route element={<AdminOutlet user={user} />}>
-              <Route path="admin/*" element={<AdminRoutes user={user} />} />
+            <Route path="projects/*" element={<ProjectsRoutes />} />
+            <Route element={<AuthorizedUserOutlet />}>
+              <Route path="test" element={<Test />} />
+              <Route path="account" element={<Profile />} />
+              <Route element={<OrganizationOutlet />}>
+                <Route
+                  path="organization"
+                  element={
+                    <PermissionGate
+                      element="Organization"
+                      showMessage
+                      children={<Organization />}
+                    />
+                  }
+                />
+                <Route
+                  path="resources/*"
+                  element={
+                    <PermissionGate
+                      children={<Resouces />}
+                      element="Resources"
+                      showMessage
+                    />
+                  }
+                />
+              </Route>
+              <Route element={<AdminOutlet />}>
+                <Route path="admin/*" element={<AdminRoutes />} />
+              </Route>
             </Route>
             <Route path="*" element={<Error />} />
           </Routes>
@@ -171,7 +124,7 @@ const App: React.FC = () => {
             rejectCookies={rejectCookies}
           />
         </Modal>
-        <Footer isMagazineUp={isMagazineUp} />
+        <Footer />
       </div>
       <ToastContainer
         position="top-right"

@@ -1,15 +1,17 @@
 import { DeleteEvent, Event } from "@/pages/App/types";
 import { useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useMissedEvent from "./hooks/useMissedEvent";
 import { useTranslation } from "react-i18next";
 import { toast } from "../useToast";
-import { UserProps } from "@/hooks/useUser/types";
+import { UserProps } from "@/hooks/UseUser";
 import useOrgaEvent from "./hooks/useOrgaEvent";
 import { useWebsocket } from "./hooks/useWebsocket";
 import { JSONIsParseable, JSONSafeParse } from "@/services/utils";
 import logger from "@/hooks/useLogger";
 import useProjectEvent from "./hooks/useProjectEvent";
+import { UserContext } from "@/contexts/UserContextProvider";
+import { PermissionContext } from "@/contexts/PermissionContextProvider";
 
 interface ReturnProps {
   deleteEvent: (event: DeleteEvent) => void;
@@ -17,11 +19,10 @@ interface ReturnProps {
   events: Event[];
 }
 
-const useEvents = (
-  isLoggedIn: boolean,
-  user: UserProps | undefined,
-  reloadPermissions: () => void
-): ReturnProps => {
+const useEvents = (): ReturnProps => {
+  const { user } = useContext(UserContext);
+  const { reloadPermissions } = useContext(PermissionContext);
+
   const [events, setEvents] = useState<Event[]>([]);
   const queryClient = useQueryClient();
   const { handleNewProjectEvent, deleteProjectEvent } = useProjectEvent();
@@ -33,7 +34,6 @@ const useEvents = (
     }
   };
   useMissedEvent({
-    isLoggedIn,
     onLoadMissedEvents,
   });
 
@@ -76,7 +76,7 @@ const useEvents = (
     }
   };
 
-  const { socket } = useWebsocket(onWebsocktEvent, isLoggedIn, user);
+  const { socket } = useWebsocket(onWebsocktEvent);
 
   const deleteEvent = (event: DeleteEvent) => {
     switch (event.eventType) {

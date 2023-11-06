@@ -14,13 +14,12 @@ import Contact from "./Contact/Contact";
 import Imprint from "./Imprint/Imprint";
 import Privacy from "./Privacy/Privacy";
 
-interface LegalProps {
-  isMagazineUp(): boolean;
-}
+interface LegalProps {}
 
 const Legal: React.FC<LegalProps> = (props) => {
-  const { isMagazineUp } = props;
+  const {} = props;
   const { t } = useTranslation();
+  const { isMagazineUp } = usePing();
 
   return (
     <div

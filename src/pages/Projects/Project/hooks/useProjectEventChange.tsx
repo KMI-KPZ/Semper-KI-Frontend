@@ -2,7 +2,7 @@ import { AppContext } from "@/pages/App/App";
 import { useContext, useEffect } from "react";
 import { ProcessProps } from "../../hooks/useProcess";
 import { DeleteProjectEvent } from "@/pages/App/types";
-import useEvents from "@/pages/App/hooks/useEvents/useEvents";
+import useEvents from "@/hooks/useEvents/useEvents";
 
 interface ReturnProps {
   getDeleteProjectEvent: (type: "status" | "message") => DeleteProjectEvent;

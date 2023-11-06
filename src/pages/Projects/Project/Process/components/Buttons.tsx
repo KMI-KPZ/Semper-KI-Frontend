@@ -1,9 +1,7 @@
-import { UserProps, UserType } from "@/hooks/UseUser";
+import { UserProps } from "@/hooks/UseUser";
 import { Button } from "@component-library/Button";
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import ReplayIcon from "@mui/icons-material/Replay";
-import CheckIcon from "@mui/icons-material/Check";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useTranslation } from "react-i18next";
 import logger from "@/hooks/useLogger";
@@ -20,8 +18,7 @@ import useProcess, {
 } from "@/pages/Projects/hooks/useProcess";
 import { ProcessComponentState } from "../Process";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
-import { EventContext } from "@/contexts/EventContextProvider";
-import useEvents from "@/pages/App/hooks/useEvents/useEvents";
+import useEvents from "@/hooks/useEvents/useEvents";
 
 interface ProcessButtonsProps {
   user: UserProps | undefined;

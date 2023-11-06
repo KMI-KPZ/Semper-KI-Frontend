@@ -1,8 +1,8 @@
+import { toast } from "@/pages/App/hooks/useToast";
 import { DeleteOrgaEvent, Event, OrgaEvent } from "@/pages/App/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { Dispatch, SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
-import { toast } from "../../useToast";
 
 interface ReturnProps {
   handleNewOrgaEvent: (

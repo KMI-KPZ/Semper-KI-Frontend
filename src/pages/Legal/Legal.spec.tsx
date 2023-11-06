@@ -3,7 +3,7 @@ import Legal from "./Legal";
 
 describe("<Legal>", () => {
   it("should render without crashing", () => {
-    render(<Legal isMagazineUp={() => true} />);
+    render(<Legal />);
     expect(screen.getByTestId("legal")).toBeInTheDocument();
   });
   it.todo("should render buttons when path is /legal");

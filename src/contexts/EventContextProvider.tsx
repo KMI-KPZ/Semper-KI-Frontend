@@ -1,4 +1,4 @@
-import useEvents from "@/pages/App/hooks/useEvents/useEvents";
+import useEvents from "@/hooks/useEvents/useEvents";
 import { DeleteEvent, Event } from "@/pages/App/types";
 import React, { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";

@@ -3,7 +3,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import useMissedEvent from "./hooks/useMissedEvent";
 import { useTranslation } from "react-i18next";
-import { toast } from "../useToast";
 import { UserProps } from "@/hooks/UseUser";
 import useOrgaEvent from "./hooks/useOrgaEvent";
 import { useWebsocket } from "./hooks/useWebsocket";
@@ -12,6 +11,7 @@ import logger from "@/hooks/useLogger";
 import useProjectEvent from "./hooks/useProjectEvent";
 import { UserContext } from "@/contexts/UserContextProvider";
 import { PermissionContext } from "@/contexts/PermissionContextProvider";
+import { toast } from "@/pages/App/hooks/useToast";
 
 interface ReturnProps {
   deleteEvent: (event: DeleteEvent) => void;

@@ -35,10 +35,7 @@ const Login: React.FC<Props> = (props) => {
   const { load, register, orga } = state;
   const { loginQuery } = useLogin(load, orga, register);
 
-  const [mockedUserType, setMockedUserType] = useState<
-    MockedUserType | undefined
-  >();
-  const { loadMockedUserQuery } = useDevMode({ mockedUserType });
+  const { mockedLoginMutation } = useDevMode();
 
   const handleOnClickButtonLogin = () => {
     setState((prevState) => ({ ...prevState, load: true, register: false }));
@@ -62,7 +59,7 @@ const Login: React.FC<Props> = (props) => {
   };
 
   const handleOnClickButtonMockedLogin = (type: MockedUserType) => {
-    setMockedUserType(type);
+    mockedLoginMutation.mutate(type);
   };
 
   return (

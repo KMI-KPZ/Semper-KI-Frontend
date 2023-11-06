@@ -1,54 +1,44 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
 import { getCustomAxios } from "./useCustomAxios";
 import logger from "./useLogger";
-import { getUserType } from "@/services/utils";
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
-import useUser, { UserProps } from "./useUser";
-
-interface useDevModeProps {
-  mockedUserType?: MockedUserType;
-}
+import { UseMutationResult, useMutation } from "@tanstack/react-query";
+import { useLocation } from "react-router-dom";
 
 interface useDevModeReturnProps {
-  loadMockedUserQuery: UseQueryResult<UserProps, Error>;
+  mockedLoginMutation: UseMutationResult<
+    string,
+    Error,
+    MockedUserType,
+    unknown
+  >;
 }
 
 export type MockedUserType = "user" | "organisation" | "admin";
 
-const useDevMode = (props: useDevModeProps): useDevModeReturnProps => {
-  const { mockedUserType } = props;
-  const { loadIsLoggedInQuery } = useUser();
+const useDevMode = (): useDevModeReturnProps => {
+  const { search } = useLocation();
+  const getReplacedSearchParam = () => {
+    return search !== "" ? search.replace("?", "&") : "";
+  };
 
-  const loadMockedUserQuery = useQuery<UserProps, Error>({
-    queryKey: ["user"],
-    queryFn: async () => {
+  const mockedLoginMutation = useMutation<string, Error, MockedUserType>({
+    mutationFn: async (usertype) => {
       return getCustomAxios()
         .get(`${process.env.VITE_HTTP_API_URL}/private/mockLogin/`, {
-          headers: { Usertype: mockedUserType },
+          headers: {
+            Usertype: usertype,
+          },
         })
         .then((response) => {
-          const userData = response.data;
-          logger("useUser | mockedGetUser ✅ |", userData);
-          const newUser: UserProps = {
-            ...userData,
-            accessed: new Date(userData.accessed),
-            created: new Date(userData.created),
-            updated: new Date(userData.updated),
-            lastSeen: new Date(userData.lastSeen),
-            usertype: getUserType(userData.usertype),
-          };
-          return newUser;
+          logger("useDevMode | mockedLoginMutation |", response);
+          return response.data;
         });
     },
-    enabled:
-      mockedUserType !== undefined &&
-      loadIsLoggedInQuery.isFetched &&
-      loadIsLoggedInQuery.data !== undefined &&
-      loadIsLoggedInQuery.data === true,
+    onSuccess(data) {
+      window.location.href = `${data}${getReplacedSearchParam()}`;
+    },
   });
 
-  return { loadMockedUserQuery };
+  return { mockedLoginMutation };
 };
 
 export default useDevMode;

@@ -1,6 +1,6 @@
 import { Button } from "@component-library/Button";
 import { Heading, Text } from "@component-library/Typography";
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import { FlatProjectProps, useFlatProjects } from "./hooks/useFlatProjects";
@@ -8,16 +8,15 @@ import ProjectsTable from "./components/Table";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { UserProps, UserType } from "@/hooks/useUser";
 import { useProject } from "./hooks/useProject";
+import { UserContext } from "@/contexts/UserContextProvider";
 
-interface ProjectsProps {
-  user: UserProps | undefined;
-}
+interface ProjectsProps {}
 
 const Projects: React.FC<ProjectsProps> = (props) => {
-  const { user } = props;
   const { t } = useTranslation();
   const { flatProjectsQuery } = useFlatProjects();
   const { createProject } = useProject();
+  const { user } = useContext(UserContext);
 
   const onButtonClickCreateProject = () => {
     createProject.mutate();

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import CheckIcon from "@mui/icons-material/Check";
@@ -19,10 +19,10 @@ import useProcess, {
   ProcessProps,
   ProcessStatus,
 } from "../../hooks/useProcess";
+import { UserContext } from "@/contexts/UserContextProvider";
 
 interface ProjectButtonsProps {
   project: ProjectProps;
-  user: UserProps | undefined;
   checkedProcesses: string[];
 }
 
@@ -121,7 +121,8 @@ const ProjectButtonData: ProjectButtonProps[] = [
 ];
 
 const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
-  const { user, project, checkedProcesses } = props;
+  const { project, checkedProcesses } = props;
+  const { user } = useContext(UserContext);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { deleteProcess } = useProcess();

@@ -24,11 +24,11 @@ import ProjectFile from "./components/ProcessFile";
 import ProcessStatusButtons from "./components/StatusButtons";
 import { Upload } from "@/components/Upload";
 import { UserProps } from "@/hooks/useUser";
+import { UserContext } from "@/contexts/UserContextProvider";
 
 interface Props {
   process: ProcessProps;
   projectID: string;
-  user: UserProps | undefined;
   projectEvent?: ProjectEventItem;
   checked: boolean;
   handleOnChangeCheckboxSelect: (
@@ -46,11 +46,11 @@ const Process: React.FC<Props> = (props) => {
   const {
     process,
     projectID,
-    user,
     projectEvent,
     checked,
     handleOnChangeCheckboxSelect,
   } = props;
+  const { user } = useContext(UserContext);
   const { t } = useTranslation();
   const [state, setState] = useState<ProcessComponentState>({
     chatOpen: false,

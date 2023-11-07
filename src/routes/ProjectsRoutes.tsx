@@ -19,7 +19,6 @@ interface ProjectsRoutesProps {}
 const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { user } = useContext(UserContext);
 
   return (
     <Routes>
@@ -27,7 +26,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
         index
         element={
           <PermissionGate element="Projects">
-            <Projects user={user} />
+            <Projects />
           </PermissionGate>
         }
       />
@@ -36,7 +35,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
           index
           element={
             <PermissionGate element="Projects">
-              <Project user={user} />
+              <Project />
             </PermissionGate>
           }
         />
@@ -67,7 +66,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
           />
         </Route>
         <Route path=":processID/*" element={<ProcessContextProvider />}>
-          <Route index element={<Project user={user} />} />
+          <Route index element={<Project />} />
           <Route element={<AuthorizedUserOutlet />}>
             <Route
               path="checkout"

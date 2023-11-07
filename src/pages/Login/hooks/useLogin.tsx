@@ -1,4 +1,9 @@
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
+import {
+  UseMutationResult,
+  UseQueryResult,
+  useMutation,
+  useQuery,
+} from "@tanstack/react-query";
 import { useEffect } from "react";
 import { AxiosResponse } from "axios";
 import { UserType } from "@/hooks/useUser";
@@ -6,41 +11,39 @@ import { getCustomAxios } from "@/hooks/useCustomAxios";
 import { useLocation, useSearchParams } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 
-export const useLogin = (
-  load: boolean,
-  orga: boolean,
-  register: boolean,
-  path?: string
-): {
-  loginQuery: UseQueryResult<string, Error>;
+interface LoginMutationProps {
+  userType: LoginUserType;
+  register: boolean;
+  path?: string;
+}
+
+export type LoginUserType =
+  | "user"
+  | "organisation"
+  | "admin"
+  | "fakeUser"
+  | "fakeOrganisation"
+  | "fakeAdmin";
+
+export const useLogin = (): {
+  loginMutation: UseMutationResult<string, Error, LoginMutationProps, unknown>;
 } => {
   const { search } = useLocation();
-  const params = useSearchParams();
 
   const getReplacedSearchParam = () => {
     return search !== "" ? search.replace("?", "&") : "";
   };
-  const getUserType = (): string | undefined => {
-    if (getReplacedSearchParam() !== "") return UserType[UserType.ORGANIZATION];
-    if (orga === true) return UserType[UserType.ORGANIZATION];
-    else return UserType[UserType.USER];
-  };
-  const getOrgaID = (): string | undefined => {
-    const orgaID = params[0].get("organization");
-    return orgaID !== null ? orgaID : undefined;
-  };
 
-  const loginQuery = useQuery<string, Error>({
-    queryKey: ["login"],
-    queryFn: async () => {
+  const loginMutation = useMutation<string, Error, LoginMutationProps>({
+    mutationFn: async (props) => {
+      const { register, path, userType } = props;
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/login/`;
       return getCustomAxios()
         .get(apiUrl, {
           headers: {
-            Usertype: getUserType()?.toLocaleLowerCase(),
+            Usertype: userType,
             Path: path === undefined ? "/" : path,
-            Register:
-              register !== undefined && register === true ? true : false,
+            Register: register,
           },
         })
         .then((response) => {
@@ -51,11 +54,10 @@ export const useLogin = (
     onSuccess(data) {
       window.location.href = `${data}${getReplacedSearchParam()}`;
     },
-    enabled: load === true || search !== "",
   });
 
   return {
-    loginQuery,
+    loginMutation,
   };
 };
 

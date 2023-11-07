@@ -24,16 +24,14 @@ import Process from "./Process/Process";
 import useCheckedProcesses from "./hooks/useCheckedProcesses";
 import { ProjectEvent, ProjectEventItem } from "@/pages/App/types";
 import { ProjectContext } from "../context/ProjectContext";
-import logger from "@/hooks/useLogger";
 import useScrollToProcess from "./hooks/useScrollToProcess";
 
 interface Props {
-  user: UserProps | undefined;
   event?: ProjectEvent;
 }
 
 const Project: React.FC<Props> = (props) => {
-  const { user, event: projectCollectionEvent } = props;
+  const { event: projectCollectionEvent } = props;
   const { project } = useContext(ProjectContext);
   const { processID } = useParams();
   useScrollToProcess(processID);
@@ -186,7 +184,6 @@ const Project: React.FC<Props> = (props) => {
               </Container>
               <ProjectButtons
                 project={project}
-                user={user}
                 checkedProcesses={checkedProcesses}
               />
             </Container>
@@ -205,7 +202,6 @@ const Project: React.FC<Props> = (props) => {
                   key={index}
                   process={process}
                   projectID={project.projectID}
-                  user={user}
                   projectEvent={getProjectEventItemByID(process.processID)}
                   checked={checkedProcesses.includes(process.processID)}
                   handleOnChangeCheckboxSelect={handleOnChangeCheckboxSelect}

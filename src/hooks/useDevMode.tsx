@@ -1,6 +1,10 @@
 import { getCustomAxios } from "./useCustomAxios";
 import logger from "./useLogger";
-import { UseMutationResult, useMutation } from "@tanstack/react-query";
+import {
+  UseMutationResult,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 
 interface useDevModeReturnProps {
@@ -15,6 +19,7 @@ interface useDevModeReturnProps {
 export type MockedUserType = "user" | "organisation" | "admin";
 
 const useDevMode = (): useDevModeReturnProps => {
+  const queryClient = useQueryClient();
   const { search } = useLocation();
   const getReplacedSearchParam = () => {
     return search !== "" ? search.replace("?", "&") : "";
@@ -34,7 +39,8 @@ const useDevMode = (): useDevModeReturnProps => {
         });
     },
     onSuccess(data) {
-      window.location.href = `${data}${getReplacedSearchParam()}`;
+      queryClient.invalidateQueries(["user"]);
+      // window.location.href = `${data}${getReplacedSearchParam()}`;
     },
   });
 

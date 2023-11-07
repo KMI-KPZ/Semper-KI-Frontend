@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLogin } from "./hooks/useLogin";
+import { LoginUserType, useLogin } from "./hooks/useLogin";
 import { Button } from "@component-library/Button";
 import LoginIcon from "@mui/icons-material/Login";
 import CreateIcon from "@mui/icons-material/Create";
@@ -19,29 +19,29 @@ interface Props {
   userType?: UserType;
 }
 type State = {
-  load: boolean;
-  register: boolean;
   orga: boolean;
 };
 
 const Login: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { path, userType: initialUserType } = props;
+  const { path, userType } = props;
   const [state, setState] = useState<State>({
-    load: false,
-    register: false,
     orga: false,
   });
-  const { load, register, orga } = state;
-  const { loginQuery } = useLogin(load, orga, register);
-
-  const { mockedLoginMutation } = useDevMode();
+  const { orga } = state;
+  const { loginMutation } = useLogin();
 
   const handleOnClickButtonLogin = () => {
-    setState((prevState) => ({ ...prevState, load: true, register: false }));
+    loginMutation.mutate({
+      userType: orga ? "organisation" : "user",
+      register: false,
+    });
   };
   const handleOnClickButtonRegister = () => {
-    setState((prevState) => ({ ...prevState, load: true, register: true }));
+    loginMutation.mutate({
+      userType: orga ? "organisation" : "user",
+      register: true,
+    });
   };
 
   const handleOnClickSwitch = () => {
@@ -58,8 +58,11 @@ const Login: React.FC<Props> = (props) => {
     }));
   };
 
-  const handleOnClickButtonMockedLogin = (type: MockedUserType) => {
-    mockedLoginMutation.mutate(type);
+  const handleOnClickButtonMockedLogin = (type: LoginUserType) => {
+    loginMutation.mutate({
+      userType: type,
+      register: false,
+    });
   };
 
   return (
@@ -94,17 +97,17 @@ const Login: React.FC<Props> = (props) => {
           <Heading variant="h1">{t("Login.Login.admin")}</Heading>
           <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
             <Button
-              onClick={() => handleOnClickButtonMockedLogin("user")}
+              onClick={() => handleOnClickButtonMockedLogin("fakeUser")}
               title={t("Login.Login.buttons.user")}
               startIcon={<PersonIcon />}
             />
             <Button
-              onClick={() => handleOnClickButtonMockedLogin("organisation")}
+              onClick={() => handleOnClickButtonMockedLogin("fakeOrganisation")}
               title={t("Login.Login.buttons.orga")}
               startIcon={<PeopleIcon />}
             />
             <Button
-              onClick={() => handleOnClickButtonMockedLogin("admin")}
+              onClick={() => handleOnClickButtonMockedLogin("fakeAdmin")}
               title={t("Login.Login.buttons.admin")}
               startIcon={<AdminPanelSettingsIcon />}
             />

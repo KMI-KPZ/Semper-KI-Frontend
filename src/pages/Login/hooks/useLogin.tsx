@@ -19,10 +19,10 @@ interface LoginMutationProps {
 
 export type LoginUserType =
   | "user"
-  | "organisation"
+  | "organization"
   | "admin"
   | "fakeUser"
-  | "fakeOrganisation"
+  | "fakeOrganization"
   | "fakeAdmin";
 
 export const useLogin = (): {

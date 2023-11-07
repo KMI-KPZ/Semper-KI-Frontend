@@ -33,13 +33,13 @@ const Login: React.FC<Props> = (props) => {
 
   const handleOnClickButtonLogin = () => {
     loginMutation.mutate({
-      userType: orga ? "organisation" : "user",
+      userType: orga ? "organization" : "user",
       register: false,
     });
   };
   const handleOnClickButtonRegister = () => {
     loginMutation.mutate({
-      userType: orga ? "organisation" : "user",
+      userType: orga ? "organization" : "user",
       register: true,
     });
   };
@@ -102,7 +102,7 @@ const Login: React.FC<Props> = (props) => {
               startIcon={<PersonIcon />}
             />
             <Button
-              onClick={() => handleOnClickButtonMockedLogin("fakeOrganisation")}
+              onClick={() => handleOnClickButtonMockedLogin("fakeOrganization")}
               title={t("Login.Login.buttons.orga")}
               startIcon={<PeopleIcon />}
             />

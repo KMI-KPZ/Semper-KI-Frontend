@@ -16,7 +16,7 @@ interface useDevModeReturnProps {
   >;
 }
 
-export type MockedUserType = "user" | "organisation" | "admin";
+export type MockedUserType = "user" | "organization" | "admin";
 
 const useDevMode = (): useDevModeReturnProps => {
   const queryClient = useQueryClient();

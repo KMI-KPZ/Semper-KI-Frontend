@@ -17,7 +17,7 @@ export const Test: React.FC<Props> = (props) => {
   const { socket, events } = useContext(EventContext);
   const [open, setOpen] = useState(false);
   const { reloadPermissions } = usePermissions();
-  const { safeProjectsQuery } = useTest();
+  const { saveProjectsQuery } = useTest();
   const openMenu = () => {
     setOpen(true);
   };
@@ -28,7 +28,7 @@ export const Test: React.FC<Props> = (props) => {
     socket?.close();
   };
   const handleOnClickButtonSave = () => {
-    safeProjectsQuery.mutate();
+    saveProjectsQuery.mutate();
   };
 
   return (

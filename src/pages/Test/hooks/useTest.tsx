@@ -7,18 +7,18 @@ import {
 } from "@tanstack/react-query";
 
 interface useTestReturnProps {
-  safeProjectsQuery: UseMutationResult<string, Error, void, unknown>;
+  saveProjectsQuery: UseMutationResult<string, Error, void, unknown>;
 }
 
 const useTest = (): useTestReturnProps => {
   const queryClient = useQueryClient();
 
-  const safeProjectsQuery = useMutation<string, Error, void>({
+  const saveProjectsQuery = useMutation<string, Error, void>({
     mutationFn: async () => {
       return getCustomAxios()
-        .get(`${process.env.VITE_HTTP_API_URL}/public/safeProjects/`)
+        .get(`${process.env.VITE_HTTP_API_URL}/public/saveProjects/`)
         .then((res) => {
-          logger("useTest | safeProject ✅ |", res.data);
+          logger("useTest | saveProjects ✅ |", res.data);
           return res.data;
         });
     },
@@ -28,7 +28,7 @@ const useTest = (): useTestReturnProps => {
     },
   });
 
-  return { safeProjectsQuery };
+  return { saveProjectsQuery };
 };
 
 export default useTest;

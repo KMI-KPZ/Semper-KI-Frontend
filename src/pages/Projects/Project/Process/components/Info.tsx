@@ -1,4 +1,4 @@
-import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
+import { ProcessProps, ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -23,6 +23,15 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
       <Text variant="body">
         {t("Projects.Project.Process.components.Info.updated")}{" "}
         {new Date(process.updated).toLocaleDateString()}
+      </Text>
+      <Text variant="body">
+        {t("Projects.Project.Process.components.Info.status")}{" "}
+        {t(
+          `enum.ProcessStatus.${
+            ProcessStatus[process.status] as keyof typeof ProcessStatus
+          }`
+        )}
+        {` (${process.status})`}
       </Text>
     </div>
   );

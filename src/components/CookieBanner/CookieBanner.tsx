@@ -73,7 +73,7 @@ const CookieBanner: React.FC<CookieBannerProps> = (props) => {
           size="sm"
           title={
             showSettings
-              ? t("components.CookieBanner.button.safeSettings")
+              ? t("components.CookieBanner.button.saveSettings")
               : t("components.CookieBanner.button.showSettings")
           }
           onClick={handleOnClickSettingsButton}

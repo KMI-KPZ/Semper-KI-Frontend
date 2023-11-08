@@ -26,7 +26,8 @@ const TestRender: React.FC<TestRenderProps> = (props) => {
           <Heading variant="h1">{stlFile.name}</Heading>
         </>
       ) : null}
-      <STLViewer file="/assets/test/3DBenchy.stl" />
+      {/* <STLViewer file="/assets/test/3DBenchy.stl" /> */}
+      <STLViewer file="http://127.0.0.1:8000/public/downloadFile/sU9o59nbYyEbF1todXCOiQoler0OeTDZ20v0eYA-sOg/UfwjErzsfrC_BMvdTvI2ofhBVL_SJj-kXHryJ3jwjUw" />
     </Container>
   );
 };

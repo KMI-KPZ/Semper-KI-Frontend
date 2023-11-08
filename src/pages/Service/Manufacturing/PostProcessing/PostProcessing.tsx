@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProcessPostProcessCatalog from "./components/Catalog";
 import { ServiceManufacturingState } from "../types/types";
 import { useTranslation } from "react-i18next";
@@ -7,7 +7,9 @@ import { FilterItemProps } from "../Filter/Filter";
 import { usePostProcessing as useManufacturingPostProcessing } from "./hooks/usePostProcessing";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
-import useProcess from "@/pages/Projects/hooks/useProcess";
+import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
+import useService from "../../hooks/useService";
+import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 
 interface Props {
   processState: ServiceManufacturingState;
@@ -37,6 +39,8 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
   const { grid, searchText } = processState;
   const { postProcessingQuery } = useManufacturingPostProcessing(filters);
   const { updateProcess } = useProcess();
+  const { isServiceComplete } = useService();
+  const { process } = useContext(ProcessContext);
 
   const checkPostProcessing = (postProcessing: PostProcessingProps) => {
     let newPostProcessings: PostProcessingProps[] = [];
@@ -57,9 +61,22 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
         ];
       }
     }
-    updateProcess.mutate({
-      changes: { service: { postProcessings: newPostProcessings } },
-    });
+    const serviceComplete = isServiceComplete(process.processID);
+    updateProcess.mutate(
+      serviceComplete
+        ? {
+            changes: {
+              service: { postProcessings: newPostProcessings },
+              status: ProcessStatus.SERVICE_READY,
+            },
+          }
+        : {
+            changes: {
+              service: { postProcessings: newPostProcessings },
+              status: ProcessStatus.SERVICE_IN_PROGRESS,
+            },
+          }
+    );
   };
 
   const hydratePostProcessings = (

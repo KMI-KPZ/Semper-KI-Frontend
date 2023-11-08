@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import { MaterialProps } from "../Material";
 import { Heading } from "@component-library/Typography";
 import { useNavigate } from "react-router-dom";
-import useProcess from "@/pages/Projects/hooks/useProcess";
+import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
+import useService from "@/pages/Service/hooks/useService";
+import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 
 interface Props {
   material: MaterialProps;
@@ -17,13 +19,30 @@ export const ProcessMaterialCard: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { updateProcess } = useProcess();
   const navigate = useNavigate();
+  const { isServiceComplete } = useService();
+  const { process } = useContext(ProcessContext);
 
   const handleOnClickSelect = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    updateProcess.mutate({ changes: { service: { material: material } } });
+    const serviceComplete = isServiceComplete(process.processID);
+    updateProcess.mutate(
+      serviceComplete
+        ? {
+            changes: {
+              service: { material: material },
+              status: ProcessStatus.SERVICE_READY,
+            },
+          }
+        : {
+            changes: {
+              service: { material: material },
+              status: ProcessStatus.SERVICE_IN_PROGRESS,
+            },
+          }
+    );
     navigate("../postprocessing");
   };
 

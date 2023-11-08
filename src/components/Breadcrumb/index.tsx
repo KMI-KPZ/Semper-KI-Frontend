@@ -154,11 +154,6 @@ const Breadcrumb: React.FC<Props> = () => {
           name: "projects",
           link: "/projects",
         });
-        breadcrumbItems.push({
-          tname: "projects",
-          name: "projects",
-          link: `/projects/${splittet[2]}`,
-        });
       } else if (index === 2 && splittet[1] === "projects") {
         //nothing
       } else if (index === 3 && item === "process") {

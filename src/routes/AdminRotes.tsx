@@ -35,7 +35,7 @@ const AdminRoutes: React.FC<AdminRoutesProps> = (props) => {
         path="projects"
         element={<AdminProjects projects={adminProjectsQuery.data} />}
       />
-      <Route path="projects/:projectID/*" element={<Project user={user} />} />
+      <Route path="projects/:projectID/*" element={<Project />} />
       <Route
         path="projects/:projectID/suborder/:processID/*"
         element={<Service />}

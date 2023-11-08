@@ -19,7 +19,7 @@ interface UpdateStatusProps {
   status: ProcessStatus;
 }
 
-const useStatusButtons = (): useStatusButtonsReturnProps => {
+const useStatusButtonAPI = (): useStatusButtonsReturnProps => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
 
@@ -43,4 +43,4 @@ const useStatusButtons = (): useStatusButtonsReturnProps => {
   return { updateStatus };
 };
 
-export default useStatusButtons;
+export default useStatusButtonAPI;

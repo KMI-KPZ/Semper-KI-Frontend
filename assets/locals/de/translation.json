@@ -68,6 +68,7 @@
       "DRAFT": "Entwurf",
       "WAITING_FOR_OTHER_PROCESS": "Warten auf andere Prozesse",
       "SERVICE_READY": "Service bereit",
+      "SERVICE_IN_PROGRESS": "Service in bearbeitung",
       "SERVICE_COMPLICATION": "Service Komplikation",
       "CONTRACTOR_SELECTED": "Auftragnehmer ausgewählt",
       "VERIFYING": "Überprüfen",
@@ -190,7 +191,7 @@
         "accept": "Akzeptieren",
         "reject": "Ablehnen",
         "showSettings": "Einstellungen ansehen",
-        "safeSettings": "Einstellungen speichern"
+        "saveSettings": "Einstellungen speichern"
       },
       "link": {
         "cookiePolicy": "Cookie-Richtlinie",
@@ -833,7 +834,22 @@
         "useProcessFile": {},
         "useProjectEventChange": {},
         "useProjectState": {},
-        "useScrollToProcess": {}
+        "useScrollToProcess": {},
+        "useStatusButtons": {
+          "DELETE": "Löschen",
+          "CONTRACTOR_SELECTED": "Auftragnehmer auswählen",
+          "VERIFYING": "Überprüfen",
+          "REQUESTED": "Anfragen",
+          "CLARIFICATION": "Rückfragen",
+          "CONFIRMED_BY_CONTRACTOR": "Angebot erstellen",
+          "REJECTED_BY_CONTRACTOR": "Anfage ablehnen",
+          "CONFIRMED_BY_CLIENT": "Angeot bestätigen",
+          "REJECTED_BY_CLIENT": "Angebot ablehnen",
+          "PRODUCTION": "Produktion starten",
+          "DELIVERY": "Lieferung starten",
+          "COMPLETED": "Auftrag abschließen",
+          "REPROJECT": "erneut Bestellen"
+        }
       },
       "Process": {
         "components": {
@@ -865,7 +881,8 @@
           "Info": {
             "id": "ProzessID:",
             "created": "Erstellt am:",
-            "updated": "Aktualisiert am:"
+            "updated": "Aktualisiert am:",
+            "status": "Prozessstatus:"
           },
           "ProcessFile": {
             "title": "Dateien",

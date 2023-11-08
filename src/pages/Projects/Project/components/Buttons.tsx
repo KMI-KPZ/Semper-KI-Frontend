@@ -7,12 +7,12 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import FactoryIcon from "@mui/icons-material/Factory";
 import DeleteForever from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
+import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
-import { UserProps } from "@/hooks/useUser";
+import { UserProps, UserType } from "@/hooks/useUser";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import Container from "@component-library/Container";
-import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import useService from "@/pages/Service/hooks/useService";
 import { ProjectProps } from "../../hooks/useProject";
 import useProcess, {
@@ -20,105 +20,14 @@ import useProcess, {
   ProcessStatus,
 } from "../../hooks/useProcess";
 import { UserContext } from "@/contexts/UserContextProvider";
+import useStatusButtons, {
+  StatusButtonCountProps,
+} from "../hooks/useStatusButtons";
 
 interface ProjectButtonsProps {
   project: ProjectProps;
   checkedProcesses: string[];
 }
-
-interface ProjectButtonProps {
-  title:
-    | "delete"
-    | "edit"
-    | "cancel"
-    | "contractorSelect"
-    | "verify"
-    | "reject"
-    | "confirm"
-    | "reProject";
-  type: ProjectButtonType;
-  icon: ReactNode;
-  contractor: boolean;
-  allowedStates: ProcessStatus[];
-}
-
-interface ProjectButtonWithCountProps extends ProjectButtonProps {
-  count?: number;
-}
-
-type ProjectButtonType =
-  | "Delete"
-  | "Cancel"
-  | "ReProject"
-  | "Reject"
-  | "Confirm"
-  | "Verify"
-  | "Edit"
-  | "ContractorSelection";
-
-const ProjectButtonData: ProjectButtonProps[] = [
-  {
-    title: "delete",
-    type: "Delete",
-    icon: <DeleteForever />,
-    contractor: false,
-    allowedStates: [
-      ProcessStatus.DRAFT,
-      ProcessStatus.CONTRACTOR_SELECTED,
-      ProcessStatus.DELIVERY,
-      ProcessStatus.REQUESTED,
-    ],
-  },
-  {
-    title: "edit",
-    type: "Edit",
-    icon: <EditIcon />,
-    contractor: false,
-    allowedStates: [ProcessStatus.DRAFT],
-  },
-  {
-    title: "cancel",
-    type: "Cancel",
-    icon: <CancelIcon />,
-    contractor: false,
-    allowedStates: [ProcessStatus.REQUESTED],
-  },
-  {
-    title: "contractorSelect",
-    type: "ContractorSelection",
-    icon: <FactoryIcon />,
-    contractor: false,
-    allowedStates: [ProcessStatus.DRAFT],
-  },
-  {
-    title: "verify",
-    type: "Verify",
-    icon: <AssignmentTurnedInIcon />,
-    contractor: false,
-    allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
-  },
-  {
-    title: "reject",
-    type: "Reject",
-    icon: <CancelIcon />,
-    contractor: true,
-    allowedStates: [ProcessStatus.REQUESTED, ProcessStatus.CLARIFICATION],
-  },
-  {
-    title: "confirm",
-    type: "Confirm",
-    icon: <CheckIcon />,
-    contractor: true,
-    allowedStates: [ProcessStatus.REQUESTED, ProcessStatus.CLARIFICATION],
-  },
-  {
-    title: "reProject",
-    type: "ReProject",
-    icon: <ReplayIcon />,
-    contractor: false,
-    allowedStates: [ProcessStatus.COMPLETED],
-  },
-];
 
 const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
   const { project, checkedProcesses } = props;
@@ -126,57 +35,17 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { deleteProcess } = useProcess();
-  const { isServiceComplete } = useService();
+  const { getProjectStatusButtons } = useStatusButtons();
 
-  const showClientButton = (): boolean =>
-    user === undefined ||
-    (user !== undefined &&
-      (user.organizations.includes(project.client) ||
-        user.hashedID === project.client));
-
-  const showContractorButton = (): boolean => user !== undefined && false;
-
-  const filterButtonsByUser = (button: ProjectButtonProps): boolean =>
-    (showClientButton() && button.contractor === false) ||
-    (showContractorButton() && button.contractor === true);
-
-  const getCountOfProcessesForButton = (
-    button: ProjectButtonProps,
-    selectedProcesses: ProcessProps[]
-  ): number => {
-    return selectedProcesses.filter(
-      (process) =>
-        button.allowedStates.includes(process.status) &&
-        ((isServiceComplete(process.processID) &&
-          button.type === "ContractorSelection") ||
-          button.type !== "ContractorSelection")
-    ).length;
-  };
-
-  const getButtons = (): ProjectButtonWithCountProps[] => {
-    const buttonsFilterByUser = ProjectButtonData.filter(filterButtonsByUser);
-    let buttonsWithCount: ProjectButtonWithCountProps[] = [];
-
-    const selectedProcessStates: ProcessProps[] = project.processes.filter(
-      (process) => checkedProcesses.includes(process.processID)
+  const getSelectedProcesses = (): ProcessProps[] => {
+    return project.processes.filter((process) =>
+      checkedProcesses.includes(process.processID)
     );
-
-    buttonsFilterByUser.forEach((button) => {
-      const count = getCountOfProcessesForButton(button, selectedProcessStates);
-      if (count > 0) {
-        buttonsWithCount.push({
-          ...button,
-          count: count,
-        });
-      }
-    });
-
-    return buttonsWithCount;
   };
 
-  const handleOnClickButton = (button: ProjectButtonProps) => {
-    switch (button.type) {
-      case "Delete":
+  const handleOnClickButton = (button: StatusButtonCountProps) => {
+    switch (button.title) {
+      case "DELETE":
         if (
           window.confirm(
             t("Projects.Project.components.Buttons.button.cancel") + "?"
@@ -188,16 +57,7 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
           });
         }
         break;
-      case "Cancel":
-        if (
-          window.confirm(
-            t("Projects.Project.components.Buttons.button.cancel") + "?"
-          )
-        ) {
-          logger("//TODO Cancel");
-        }
-        break;
-      case "ReProject":
+      case "REPROJECT":
         if (
           window.confirm(
             t("Projects.Project.components.Buttons.button.reProject") + "?"
@@ -206,7 +66,7 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
           logger("//TODO ReProject");
         }
         break;
-      case "Reject":
+      case "REJECTED_BY_CONTRACTOR":
         if (
           window.confirm(
             t("Projects.Project.components.Buttons.button.reject") + "?"
@@ -215,7 +75,7 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
           logger("//TODO Reject");
         }
         break;
-      case "Confirm":
+      case "CONFIRMED_BY_CONTRACTOR":
         if (
           window.confirm(
             t("Projects.Project.components.Buttons.button.confirm") + "?"
@@ -224,13 +84,10 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
           logger("//TODO Confirm");
         }
         break;
-      case "Verify":
+      case "VERIFYING":
         navigate("verification");
         break;
-      case "Edit":
-        navigate(`${checkedProcesses[0]}`);
-        break;
-      case "ContractorSelection":
+      case "CONTRACTOR_SELECTED":
         navigate("contractorSelection");
         break;
     }
@@ -238,8 +95,8 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
 
   return (
     <Container wrap="wrap">
-      {getButtons().map((button, index) => (
-        <PermissionGate element={`ProjectButton${button.type}`} key={index}>
+      {getProjectStatusButtons(getSelectedProcesses()).map((button, index) => (
+        <PermissionGate element={`ProjectButton${button.title}`} key={index}>
           <Button
             key={index}
             variant="icon"
@@ -247,7 +104,7 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
             startIcon={button.icon}
             onClick={() => handleOnClickButton(button)}
             title={`${t(
-              `Projects.Project.components.Buttons.button.${button.title}`
+              `Projects.Project.hooks.useStatusButtons.${button.title}`
             )} ${button.count !== undefined ? ` ( ${button.count} )` : ""}`}
           />
         </PermissionGate>

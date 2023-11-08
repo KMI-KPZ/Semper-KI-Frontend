@@ -13,8 +13,11 @@ interface HomeClientInfoProps {}
 const HomeClientInfo: React.FC<HomeClientInfoProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const [load, setLoad] = useState<boolean>(false);
-  useLogin(load, false, true, "/");
+  const { loginMutation } = useLogin();
+
+  const handleOnClickButton = () => {
+    loginMutation.mutate({ userType: "user", register: true });
+  };
 
   return (
     <HomeContainer
@@ -36,7 +39,7 @@ const HomeClientInfo: React.FC<HomeClientInfoProps> = (props) => {
             title={t("Home.components.ClientInfo.advantage")}
           />
           <Button
-            onClick={() => setLoad(true)}
+            onClick={handleOnClickButton}
             startIcon={<LoginIcon fontSize="large" />}
             title={t("Home.components.ClientInfo.register")}
           />

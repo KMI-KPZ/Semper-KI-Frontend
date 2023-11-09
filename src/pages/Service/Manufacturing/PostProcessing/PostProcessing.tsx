@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import ProcessPostProcessCatalog from "./components/Catalog";
-import { ServiceManufacturingState } from "../types/types";
+import {
+  ServiceManufacturingProps,
+  ServiceManufacturingState,
+} from "../types/types";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import { FilterItemProps } from "../Filter/Filter";
@@ -38,9 +41,7 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
   const { processState, filters, postProcessings } = props;
   const { grid, searchText } = processState;
   const { postProcessingQuery } = useManufacturingPostProcessing(filters);
-  const { updateProcess } = useProcess();
-  const { isServiceComplete } = useService();
-  const { process } = useContext(ProcessContext);
+  const { updatedService } = useService();
 
   const checkPostProcessing = (postProcessing: PostProcessingProps) => {
     let newPostProcessings: PostProcessingProps[] = [];
@@ -61,22 +62,7 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
         ];
       }
     }
-    const serviceComplete = isServiceComplete(process.processID);
-    updateProcess.mutate(
-      serviceComplete
-        ? {
-            changes: {
-              service: { postProcessings: newPostProcessings },
-              status: ProcessStatus.SERVICE_READY,
-            },
-          }
-        : {
-            changes: {
-              service: { postProcessings: newPostProcessings },
-              status: ProcessStatus.SERVICE_IN_PROGRESS,
-            },
-          }
-    );
+    updatedService({ postProcessings: newPostProcessings });
   };
 
   const hydratePostProcessings = (

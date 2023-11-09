@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { ProcessProps } from "../../hooks/useProcess";
 import {
   StatusButtonProps,
+  StatusButtonTitleType,
   StatusButtonData as statusButtonData,
 } from "../components/StatusButtonData";
 import { UserContext } from "@/contexts/UserContextProvider";
@@ -55,10 +56,19 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
     return isAllowed;
   };
 
+  const filterButtonByTitle = (
+    button: StatusButtonProps,
+    excludes: StatusButtonTitleType[]
+  ): boolean => {
+    return !excludes.includes(button.title);
+  };
+
   const getProcessStatusButtons = (
     process: ProcessProps
   ): StatusButtonProps[] => {
+    const exludes: StatusButtonTitleType[] = ["DELETE"];
     return statusButtonData
+      .filter((button) => filterButtonByTitle(button, exludes))
       .filter((button) => filterButtonByStatus(process, button))
       .filter((button) => filterButtonByUser(process, button));
   };
@@ -66,8 +76,10 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   const getProjectStatusButtons = (
     processes: ProcessProps[]
   ): StatusButtonCountProps[] => {
+    const exludes: StatusButtonTitleType[] = [];
     const allButtons = processes.flatMap((process) =>
       statusButtonData
+        .filter((button) => filterButtonByTitle(button, exludes))
         .filter((button) => filterButtonByStatus(process, button))
         .filter((button) => filterButtonByUser(process, button))
     );

@@ -9,6 +9,9 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { useParams } from "react-router-dom";
 import { Button } from "@component-library/Button";
 import { LoadingSuspense } from "@component-library/index";
+import useProcess from "@/pages/Projects/hooks/useProcess";
+import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
+import { ServiceContext } from "../context/ServiceContext";
 
 interface ServiceSelectProps {}
 
@@ -28,30 +31,27 @@ export const serviceSelectItems: ServiceSelectItemProps[] = [
 const ServiceSelect: React.FC<ServiceSelectProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { getService } = useService();
-
-  const { service, projectQuery } = getService();
+  const { process } = useContext(ProcessContext);
+  const service = process.service;
 
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
       <Heading variant="h1">{t("Service.Select.Select.title")}</Heading>
-      <LoadingSuspense query={projectQuery}>
-        <PermissionGate element="ProcessServiceSelection">
-          <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
-            {serviceSelectItems.map((item, index) => (
-              <ServiceSelectItem
-                {...item}
-                key={index}
-                active={service.type === item.serviceType}
-                serviceSelected={service.type !== ServiceType.UNDEFINED}
-              />
-            ))}
-          </div>
-          {service !== undefined && service.type !== ServiceType.UNDEFINED ? (
-            <Button title={t("Service.Select.Select.continue")} to="edit" />
-          ) : null}
-        </PermissionGate>
-      </LoadingSuspense>
+      <PermissionGate element="ProcessServiceSelection">
+        <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
+          {serviceSelectItems.map((item, index) => (
+            <ServiceSelectItem
+              {...item}
+              key={index}
+              active={service.type === item.serviceType}
+              serviceSelected={service.type !== ServiceType.UNDEFINED}
+            />
+          ))}
+        </div>
+        {service !== undefined && service.type !== ServiceType.UNDEFINED ? (
+          <Button title={t("Service.Select.Select.continue")} to="edit" />
+        ) : null}
+      </PermissionGate>
     </div>
   );
 };

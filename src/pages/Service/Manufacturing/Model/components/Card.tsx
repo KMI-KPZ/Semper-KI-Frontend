@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import useService from "@/pages/Service/hooks/useService";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
+import { ServiceManufacturingProps } from "../../types/types";
 
 interface Props {
   model: ModelProps;
@@ -17,32 +18,15 @@ interface Props {
 export const ProcessModelCard: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { model, grid, openModelView } = props;
-  const { updateProcess } = useProcess();
   const navigate = useNavigate();
-  const { isServiceComplete } = useService();
-  const { process } = useContext(ProcessContext);
+  const { updatedService } = useService();
 
   const handleOnClickSelect = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    const serviceComplete = isServiceComplete(process.processID);
-    updateProcess.mutate(
-      serviceComplete
-        ? {
-            changes: {
-              service: { model: model },
-              status: ProcessStatus.SERVICE_READY,
-            },
-          }
-        : {
-            changes: {
-              service: { model: model },
-              status: ProcessStatus.SERVICE_IN_PROGRESS,
-            },
-          }
-    );
+    updatedService({ model });
     navigate("../material");
   };
 

@@ -121,7 +121,6 @@ const Breadcrumb: React.FC<Props> = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { pathname } = useLocation();
-  const { getServiceName } = useService();
 
   const generateBreadcrumbItems = (): BreadcrumbItem[] => {
     let breadcrumbItems: BreadcrumbItem[] = [];

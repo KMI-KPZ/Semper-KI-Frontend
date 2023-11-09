@@ -4,8 +4,15 @@ import { UserType } from "@/hooks/useUser";
 import CancelIcon from "@mui/icons-material/Cancel";
 import FactoryIcon from "@mui/icons-material/Factory";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
+import ClearIcon from "@mui/icons-material/Clear";
+import CheckIcon from "@mui/icons-material/Check";
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import DescriptionIcon from "@mui/icons-material/Description";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
 
 export type StatusButtonTitleType =
+  | "EDIT"
   | "DELETE"
   | "CONTRACTOR_SELECTED"
   | "VERIFYING"
@@ -28,6 +35,16 @@ export interface StatusButtonProps {
 }
 
 export const StatusButtonData: StatusButtonProps[] = [
+  {
+    title: "EDIT",
+    icon: <FactoryIcon />,
+    user: UserType.USER,
+    allowedStates: [
+      ProcessStatus.SERVICE_IN_PROGRESS,
+      ProcessStatus.SERVICE_READY,
+      ProcessStatus.SERVICE_COMPLICATION,
+    ],
+  },
   {
     title: "DELETE",
     icon: <FactoryIcon />,

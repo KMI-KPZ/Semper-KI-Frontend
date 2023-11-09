@@ -12,6 +12,7 @@ import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import { ServiceType } from "@/pages/Service/hooks/useService";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import DescriptionIcon from "@mui/icons-material/Description";
+import ModeIcon from "@mui/icons-material/Mode";
 
 interface StatusViewProps {
   status: ProcessStatus;
@@ -24,6 +25,7 @@ export type StatusData = {
   icon: ReactNode;
   text:
     | "draft"
+    | "service"
     | "contractorSelected"
     | "verified"
     | "requested"
@@ -40,6 +42,12 @@ const statusData: StatusData[] = [
     startStatus: ProcessStatus.DRAFT,
     icon: <DesignServicesIcon />,
     text: "draft",
+  },
+  {
+    startStatus: ProcessStatus.SERVICE_READY,
+    endStatus: ProcessStatus.SERVICE_COMPLICATION,
+    icon: <ModeIcon />,
+    text: "service",
   },
   {
     startStatus: ProcessStatus.CONTRACTOR_SELECTED,

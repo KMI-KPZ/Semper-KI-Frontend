@@ -129,7 +129,7 @@ const Process: React.FC<Props> = (props) => {
       <ProcessStatusButtons
         projectID={projectID}
         state={process.status}
-        processID={process.processID}
+        process={process}
       />
       <ProcessServicePreview
         service={process.service}

@@ -43,7 +43,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
         projectQuery.data === undefined
           ? []
           : projectQuery.data.processes
-              .filter((process) => isServiceComplete(process.processID))
+              .filter((process) => isServiceComplete(process.service))
               .map((process) => {
                 return {
                   process: process,
@@ -87,7 +87,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
         {projectQuery.data !== undefined &&
         projectQuery.data.processes.length > 0
           ? projectQuery.data.processes
-              .filter((process) => isServiceComplete(process.processID))
+              .filter((process) => isServiceComplete(process.service))
               .map((process, index) => (
                 <label
                   key={index}

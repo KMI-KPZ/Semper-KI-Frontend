@@ -5,14 +5,19 @@ import {
   UpdateServiceManufacturingProps,
 } from "../Manufacturing/types/types";
 import logger from "@/hooks/useLogger";
-import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
+import useProcess, {
+  ProcessProps,
+  ProcessStatus,
+} from "@/pages/Projects/hooks/useProcess";
 import { ServiceModelingProps } from "../Modelling/Modelling";
 import { ProjectProps } from "@/pages/Projects/hooks/useProject";
+import { useContext } from "react";
+import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
+import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 
 interface ReturnProps {
-  getService: () => ServiceQueryProps;
-  isServiceComplete: (processID: string) => boolean;
-  getServiceName: (processID: string) => string;
+  isServiceComplete: (service: GeneralServiceProps) => boolean;
+  updatedService: (updateServiceProps: UpdateServiceManufacturingProps) => void;
 }
 
 export enum ServiceType {
@@ -48,69 +53,48 @@ interface ServiceQueryProps {
 }
 
 const useService = (): ReturnProps => {
-  const { getCurrentProcess, getProcessQuery } = useProcess();
+  const { project } = useContext(ProjectContext);
+  const { process } = useContext(ProcessContext);
+  const { updateProcess } = useProcess();
+  const service = process.service as ServiceManufacturingProps;
 
-  const getService = (): ServiceQueryProps => {
-    const { process, projectQuery } = getProcessQuery();
-    const service = process?.service;
-    return {
-      service:
-        service === undefined ? { type: ServiceType.UNDEFINED } : service,
-      projectQuery,
-    };
-  };
-
-  const isServiceComplete = (processID: string): boolean => {
-    const process = getCurrentProcess(processID);
-
-    if (
-      process === undefined ||
-      (process !== undefined && process.service === undefined) ||
-      (process !== undefined &&
-        process.service !== undefined &&
-        process.service.type === undefined)
-    )
-      return false;
-
-    let serviceReady = false;
-
-    switch (process.service.type) {
+  const isServiceComplete = (service: GeneralServiceProps): boolean => {
+    switch (service.type) {
       case ServiceType.MANUFACTURING:
-        const manufacturingService =
-          process.service as ServiceManufacturingProps;
-        if (
+        const manufacturingService = service as ServiceManufacturingProps;
+        return (
           manufacturingService.model !== undefined &&
           manufacturingService.material !== undefined
-        )
-          serviceReady = true;
-        break;
+        );
       case ServiceType.MODELING:
-        serviceReady = true;
-        break;
+        return true;
       case ServiceType.UNDEFINED:
-        serviceReady = false;
-        break;
+        return false;
     }
-
-    return serviceReady && process.status === ProcessStatus.DRAFT;
   };
 
-  const getServiceName = (processID: string): string => {
-    const process = getCurrentProcess();
-    if (process === undefined || process.service === undefined)
-      return "service";
-    switch (process.service.type) {
-      case ServiceType.MANUFACTURING:
-        return "manufacturingService";
-      case ServiceType.MODELING:
-        return "modelingService";
-      case ServiceType.UNDEFINED:
-        return "service";
-    }
-    return "service";
+  const updatedService = (
+    updateServiceProps: UpdateServiceManufacturingProps
+  ) => {
+    const newService: ServiceManufacturingProps = {
+      ...service,
+      ...updateServiceProps,
+    };
+    const serviceIsComplete = isServiceComplete(newService);
+    updateProcess.mutate({
+      changes: {
+        service: newService,
+        status: serviceIsComplete
+          ? ProcessStatus.SERVICE_READY
+          : ProcessStatus.SERVICE_IN_PROGRESS,
+      },
+    });
   };
 
-  return { getService, isServiceComplete, getServiceName };
+  return {
+    isServiceComplete,
+    updatedService,
+  };
 };
 
 export default useService;

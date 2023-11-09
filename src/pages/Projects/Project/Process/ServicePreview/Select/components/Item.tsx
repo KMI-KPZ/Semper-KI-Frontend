@@ -1,10 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@component-library/Typography";
-import useProcess from "@/pages/Projects/hooks/useProcess";
+import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { useNavigate, useParams } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 import { ServiceType } from "@/pages/Service/hooks/useService";
+import Process from "../../../Process";
 
 export interface ServiceSelectItemProps {
   serviceType: ServiceType;
@@ -44,7 +45,10 @@ const ServicePreviewSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
         {
           processID: manuelProcessID,
           updates: {
-            changes: { service: { type: serviceType } },
+            changes: {
+              service: { type: serviceType },
+              status: ProcessStatus.SERVICE_IN_PROGRESS,
+            },
           },
         },
         {
@@ -55,7 +59,12 @@ const ServicePreviewSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
       );
     } else {
       updateProcess.mutate(
-        { changes: { service: { type: serviceType } } },
+        {
+          changes: {
+            service: { type: serviceType },
+            status: ProcessStatus.SERVICE_IN_PROGRESS,
+          },
+        },
         {
           onSuccess: () => {
             navigateToService();

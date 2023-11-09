@@ -1,40 +1,33 @@
 import { Button } from "@component-library/Button";
 import { useTranslation } from "react-i18next";
-import FactoryIcon from "@mui/icons-material/Factory";
-import PolicyIcon from "@mui/icons-material/Policy";
-import SendIcon from "@mui/icons-material/Send";
-import useService from "@/pages/Service/hooks/useService";
-import EditIcon from "@mui/icons-material/Edit";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
-import { useParams } from "react-router-dom";
-import ClearIcon from "@mui/icons-material/Clear";
-import CheckIcon from "@mui/icons-material/Check";
-import useStatusButtonAPI from "../hooks/useStatusButtonAPI";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import DescriptionIcon from "@mui/icons-material/Description";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import DoneAllIcon from "@mui/icons-material/DoneAll";
+import useProcess, {
+  ProcessProps,
+  ProcessStatus,
+} from "@/pages/Projects/hooks/useProcess";
+import { useNavigate, useParams } from "react-router-dom";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import React, { useContext } from "react";
-import { AppContext } from "@/pages/App/App";
-import logger from "@/hooks/useLogger";
 import { UserContext } from "@/contexts/UserContextProvider";
+import useStatusButtons from "../../hooks/useStatusButtons";
+import { StatusButtonProps } from "../../components/StatusButtonData";
+import useService from "@/pages/Service/hooks/useService";
 
 interface ProcessStatusButtonsProps {
   projectID: string;
-  processID: string;
+  process: ProcessProps;
   state: ProcessStatus;
 }
 
 const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
-  const { state, processID: manuelProcessID, projectID } = props;
+  const { state, process, projectID } = props;
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
   const { processID } = useParams();
   const { updateProcessWithProcessID, getCurrentProcess } = useProcess();
   const { user } = useContext(UserContext);
-  const process = getCurrentProcess(manuelProcessID);
+  const { getProcessStatusButtons } = useStatusButtons();
+  const naviagate = useNavigate();
 
   const shouldRenderFor = (type: "CLIENT" | "CONTRACTOR"): boolean => {
     return (
@@ -47,16 +40,16 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   };
 
   const calcPath = (path: string): string => {
-    return processID !== undefined && processID !== manuelProcessID
-      ? `../${manuelProcessID}/${path}`
+    return processID !== undefined && processID !== process.processID
+      ? `../${process.processID}/${path}`
       : processID === undefined
-      ? `${manuelProcessID}/${path}`
+      ? `${process.processID}/${path}`
       : `${path}`;
   };
 
   const onClickButton = (status: ProcessStatus) => {
     updateProcessWithProcessID.mutate({
-      processID: manuelProcessID,
+      processID: process.processID,
       updates: {
         changes: {
           status,
@@ -65,206 +58,67 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
     });
   };
 
-  const renderButtons = () => {
-    if (process === undefined) return;
-    switch (state) {
-      case ProcessStatus.DRAFT:
-        return (
-          <>
-            <PermissionGate element="ProcessButtonEdit">
-              <Button
-                variant="icon"
-                startIcon={<EditIcon />}
-                title={t(
-                  "Projects.Project.Process.components.StatusButtons.service"
-                )}
-                to={calcPath("service/edit")}
-              />
-            </PermissionGate>
-            <PermissionGate element="ProcessButtonContractorSelection">
-              <Button
-                variant="icon"
-                startIcon={<FactoryIcon />}
-                title={t(
-                  "Projects.Project.Process.components.StatusButtons.selectContractor"
-                )}
-                to={calcPath("contractorSelection")}
-                active={isServiceComplete(manuelProcessID)}
-              />
-            </PermissionGate>
-          </>
-        );
-      case ProcessStatus.CONTRACTOR_SELECTED:
-        return (
-          <PermissionGate element="ProcessButtonVerify">
-            <Button
-              variant="icon"
-              startIcon={<PolicyIcon />}
-              title={t(
-                "Projects.Project.Process.components.StatusButtons.verify"
-              )}
-              to={calcPath("verification")}
-            />
-          </PermissionGate>
-        );
-      case ProcessStatus.VERIFIED:
-        return (
-          <PermissionGate element="ProcessButtonRequest">
-            <Button
-              variant="icon"
-              startIcon={<SendIcon />}
-              title={t(
-                "Projects.Project.Process.components.StatusButtons.request"
-              )}
-              to={calcPath("checkout")}
-            />
-          </PermissionGate>
-        );
-      case ProcessStatus.REQUESTED:
-        return shouldRenderFor("CONTRACTOR") ? (
-          <>
-            <PermissionGate element="ProcessButtonClarification">
-              <Button
-                variant="icon"
-                startIcon={<QuestionMarkIcon />}
-                title={t(
-                  "Projects.Project.Process.components.StatusButtons.clarification"
-                )}
-                onClick={() => onClickButton(ProcessStatus.CLARIFICATION)}
-              />
-            </PermissionGate>
-            <PermissionGate element="ProcessButtonRejectedByContractor">
-              <Button
-                variant="icon"
-                startIcon={<ClearIcon />}
-                title={t(
-                  "Projects.Project.Process.components.StatusButtons.reject"
-                )}
-                onClick={() =>
-                  onClickButton(ProcessStatus.REJECTED_BY_CONTRACTOR)
-                }
-              />
-            </PermissionGate>
-            <PermissionGate element="ProcessButtonConfirmedByContractor">
-              <Button
-                variant="icon"
-                startIcon={<DescriptionIcon />}
-                title={t(
-                  "Projects.Project.Process.components.StatusButtons.confirmContractor"
-                )}
-                onClick={() =>
-                  onClickButton(ProcessStatus.CONFIRMED_BY_CONTRACTOR)
-                }
-              />
-            </PermissionGate>
-          </>
-        ) : null;
-      case ProcessStatus.CLARIFICATION:
-        return shouldRenderFor("CONTRACTOR") ? (
-          <>
-            <PermissionGate element="ProcessButtonRejectedByContractor">
-              <Button
-                variant="icon"
-                startIcon={<ClearIcon />}
-                title={t(
-                  "Projects.Project.Process.components.StatusButtons.reject"
-                )}
-                onClick={() =>
-                  onClickButton(ProcessStatus.REJECTED_BY_CONTRACTOR)
-                }
-              />
-            </PermissionGate>
-            <PermissionGate element="ProcessButtonConfirmedByContractor">
-              <Button
-                variant="icon"
-                startIcon={<DescriptionIcon />}
-                title={t(
-                  "Projects.Project.Process.components.StatusButtons.confirmContractor"
-                )}
-                onClick={() =>
-                  onClickButton(ProcessStatus.CONFIRMED_BY_CONTRACTOR)
-                }
-              />
-            </PermissionGate>
-          </>
-        ) : null;
-      case ProcessStatus.REJECTED_BY_CONTRACTOR:
-        return;
-      case ProcessStatus.CONFIRMED_BY_CONTRACTOR:
-        return shouldRenderFor("CLIENT") ? (
-          <>
-            <PermissionGate element="ProcessButtonRejectedByClient">
-              <Button
-                variant="icon"
-                startIcon={<ClearIcon />}
-                title={t(
-                  "Projects.Project.Process.components.StatusButtons.reject"
-                )}
-                onClick={() => onClickButton(ProcessStatus.REJECTED_BY_CLIENT)}
-              />
-            </PermissionGate>
-            <PermissionGate element="ProcessButtonConfirmedByClient">
-              <Button
-                variant="icon"
-                startIcon={<CheckIcon />}
-                title={t(
-                  "Projects.Project.Process.components.StatusButtons.confirm"
-                )}
-                onClick={() => onClickButton(ProcessStatus.CONFIRMED_BY_CLIENT)}
-              />
-            </PermissionGate>
-          </>
-        ) : null;
-      case ProcessStatus.REJECTED_BY_CLIENT:
-        return;
-      case ProcessStatus.CONFIRMED_BY_CLIENT:
-        return shouldRenderFor("CONTRACTOR") ? (
-          <PermissionGate element="ProcessButtonProduction">
-            <Button
-              variant="icon"
-              startIcon={<FactoryIcon />}
-              title={t(
-                "Projects.Project.Process.components.StatusButtons.production"
-              )}
-              onClick={() => onClickButton(ProcessStatus.PRODUCTION)}
-            />
-          </PermissionGate>
-        ) : null;
-      case ProcessStatus.PRODUCTION:
-        return shouldRenderFor("CONTRACTOR") ? (
-          <PermissionGate element="ProcessButtonDelivery">
-            <Button
-              variant="icon"
-              startIcon={<LocalShippingIcon />}
-              title={t(
-                "Projects.Project.Process.components.StatusButtons.delivery"
-              )}
-              onClick={() => onClickButton(ProcessStatus.DELIVERY)}
-            />
-          </PermissionGate>
-        ) : null;
-      case ProcessStatus.DELIVERY:
-        return shouldRenderFor("CONTRACTOR") ? (
-          <PermissionGate element="ProcessButtonComplete">
-            <Button
-              variant="icon"
-              startIcon={<DoneAllIcon />}
-              title={t(
-                "Projects.Project.Process.components.StatusButtons.complete"
-              )}
-              onClick={() => onClickButton(ProcessStatus.COMPLETED)}
-            />
-          </PermissionGate>
-        ) : null;
-
-      default:
-        return;
+  const handleOnClickButton = (button: StatusButtonProps) => {
+    switch (button.title) {
+      case "EDIT":
+        naviagate(calcPath("service/edit"));
+        break;
+      case "DELETE":
+        break;
+      case "REPROJECT":
+        break;
+      case "CLARIFICATION":
+        onClickButton(ProcessStatus.CLARIFICATION);
+        break;
+      case "COMPLETED":
+        onClickButton(ProcessStatus.COMPLETED);
+        break;
+      case "CONFIRMED_BY_CLIENT":
+        onClickButton(ProcessStatus.CONFIRMED_BY_CLIENT);
+        break;
+      case "CONFIRMED_BY_CONTRACTOR":
+        onClickButton(ProcessStatus.CONFIRMED_BY_CONTRACTOR);
+        break;
+      case "REJECTED_BY_CLIENT":
+        onClickButton(ProcessStatus.REJECTED_BY_CLIENT);
+        break;
+      case "REJECTED_BY_CONTRACTOR":
+        onClickButton(ProcessStatus.REJECTED_BY_CONTRACTOR);
+        break;
+      case "CONTRACTOR_SELECTED":
+        onClickButton(ProcessStatus.CONTRACTOR_SELECTED);
+        break;
+      case "DELIVERY":
+        onClickButton(ProcessStatus.DELIVERY);
+        break;
+      case "PRODUCTION":
+        onClickButton(ProcessStatus.PRODUCTION);
+        break;
+      case "REQUESTED":
+        onClickButton(ProcessStatus.REQUESTED);
+        break;
+      case "VERIFYING":
+        onClickButton(ProcessStatus.VERIFYING);
+        break;
     }
   };
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
-      {renderButtons()}
+      {getProcessStatusButtons(process).map((button, index) => (
+        <PermissionGate element={`ProjectButton${button.title}`} key={index}>
+          <Button
+            key={index}
+            variant="icon"
+            size="sm"
+            startIcon={button.icon}
+            onClick={() => handleOnClickButton(button)}
+            title={`${t(
+              `Projects.Project.hooks.useStatusButtons.${button.title}`
+            )}`}
+          />
+        </PermissionGate>
+      ))}
     </div>
   );
 };

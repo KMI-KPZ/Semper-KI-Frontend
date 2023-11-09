@@ -836,6 +836,7 @@
         "useProjectState": {},
         "useScrollToProcess": {},
         "useStatusButtons": {
+          "EDIT": "Service bearbeiten",
           "DELETE": "Löschen",
           "CONTRACTOR_SELECTED": "Auftragnehmer auswählen",
           "VERIFYING": "Überprüfen",
@@ -932,7 +933,8 @@
             "ItemConnector": {}
           },
           "StatusBar": {
-            "draft": "Service",
+            "draft": "Entwurf",
+            "service": "Service",
             "contractorSelected": "Auftragnehmer",
             "verified": "Überprüfung",
             "requested": "Anfrage",

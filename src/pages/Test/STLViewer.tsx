@@ -64,7 +64,7 @@ const ModelPreview = (props: { file?: string }) => {
   const { file } = props;
 
   return (
-    <div className="h-[800px] w-[1000px]">
+    <div className="h-[600px] w-[1000px]">
       <Canvas>
         <CameraControls />
         <ambientLight intensity={0.7} />

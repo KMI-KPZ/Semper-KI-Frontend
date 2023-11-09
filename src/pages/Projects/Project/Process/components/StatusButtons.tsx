@@ -5,7 +5,7 @@ import useProcess, {
   ProcessProps,
   ProcessStatus,
 } from "@/pages/Projects/hooks/useProcess";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import React, { useContext } from "react";
 import { UserContext } from "@/contexts/UserContextProvider";
@@ -27,7 +27,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { updateProcessWithProcessID, getCurrentProcess } = useProcess();
   const { user } = useContext(UserContext);
   const { getProcessStatusButtons } = useStatusButtons();
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
 
   const shouldRenderFor = (type: "CLIENT" | "CONTRACTOR"): boolean => {
     return (
@@ -61,7 +61,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const handleOnClickButton = (button: StatusButtonProps) => {
     switch (button.title) {
       case "EDIT":
-        naviagate(calcPath("service/edit"));
+        navigate(calcPath("service/edit"));
         break;
       case "DELETE":
         break;
@@ -86,7 +86,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
         onClickButton(ProcessStatus.REJECTED_BY_CONTRACTOR);
         break;
       case "CONTRACTOR_SELECTED":
-        onClickButton(ProcessStatus.CONTRACTOR_SELECTED);
+        navigate("contractorSelection");
         break;
       case "DELIVERY":
         onClickButton(ProcessStatus.DELIVERY);

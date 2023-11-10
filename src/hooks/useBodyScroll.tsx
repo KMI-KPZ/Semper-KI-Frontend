@@ -1,3 +1,4 @@
+import { use } from "i18next";
 import { useEffect } from "react";
 
 interface ReturnProps {
@@ -5,6 +6,10 @@ interface ReturnProps {
 }
 
 const useBodyScroll = (): ReturnProps => {
+  useEffect(() => {
+    setScroll(false);
+  }, []);
+
   const setScroll = (stopScroll: boolean) => {
     document.body.style.overflowY = stopScroll === true ? "hidden" : "scroll";
     document.body.style.scrollbarGutter = "stable";

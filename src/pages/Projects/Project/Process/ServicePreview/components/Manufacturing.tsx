@@ -32,11 +32,17 @@ const ProcessServiceManufacturing: React.FC<
 
   const handleOnClickButtonOpen = () => {
     setOpen(true);
-    if (process.files.length > 0) {
+    if (
+      service.model !== undefined &&
+      process.files.length > 0 &&
+      process.files.find(
+        (file) => service.model !== undefined && file.id === service.model.id
+      ) !== undefined
+    ) {
       downloadFileTest.mutate(
         {
           processID: process.processID,
-          fileID: process.files[0].id,
+          fileID: service.model.id,
         },
         {
           onSuccess(data) {

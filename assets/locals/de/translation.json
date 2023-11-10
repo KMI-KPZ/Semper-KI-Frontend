@@ -917,7 +917,8 @@
               "postProcessings": "Nachbearbeitungen:",
               "buttons": {
                 "modelPreView": "Modell Vorschau"
-              }
+              },
+              "noModel": "kein Modell vorhanden"
             },
             "Modelling": {
               "title": "Modell entwerfen lasssen"

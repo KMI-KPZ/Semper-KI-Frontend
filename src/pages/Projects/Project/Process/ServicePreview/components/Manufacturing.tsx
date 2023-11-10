@@ -30,6 +30,11 @@ const ProcessServiceManufacturing: React.FC<
   const { downloadFileTest } = useTest();
   const [fileUrl, setFileUrl] = useState<string>("");
 
+  const closeModal = () => {
+    setOpen(false);
+    setFileUrl("");
+  };
+
   const handleOnClickButtonOpen = () => {
     setOpen(true);
     if (
@@ -56,14 +61,16 @@ const ProcessServiceManufacturing: React.FC<
 
   return (
     <Container direction="col" align="start" className="p-5">
-      <PermissionGate element={"ProcessButtonModelPreView"}>
-        <Button
-          onClick={handleOnClickButtonOpen}
-          title={t(
-            "Projects.Project.Process.ServicePreview.components.Manufacturing.buttons.modelPreView"
-          )}
-        />
-      </PermissionGate>
+      {service.model !== undefined ? (
+        <PermissionGate element={"ProcessButtonModelPreView"}>
+          <Button
+            onClick={handleOnClickButtonOpen}
+            title={t(
+              "Projects.Project.Process.ServicePreview.components.Manufacturing.buttons.modelPreView"
+            )}
+          />
+        </PermissionGate>
+      ) : null}
       <Container>
         <Text variant="body">
           {t(
@@ -100,15 +107,17 @@ const ProcessServiceManufacturing: React.FC<
       </Container>
       <Modal
         open={open}
-        closeModal={() => {
-          setOpen(false);
-        }}
+        closeModal={closeModal}
         className="h-full max-w-7xl bg-white"
       >
         {fileUrl !== "" ? (
           <ModelPreview file={fileUrl} />
         ) : (
-          <div className="h-40 w-40 bg-slate-500">nothing:{fileUrl}</div>
+          <div className="p-20">
+            {t(
+              "Projects.Project.Process.ServicePreview.components.Manufacturing.noModel"
+            )}
+          </div>
         )}
       </Modal>
     </Container>

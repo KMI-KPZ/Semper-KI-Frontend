@@ -83,7 +83,7 @@ const useService = (): ReturnProps => {
     const serviceIsComplete = isServiceComplete(newService);
     updateProcess.mutate({
       changes: {
-        service: newService,
+        service: updateServiceProps,
         status: serviceIsComplete
           ? ProcessStatus.SERVICE_READY
           : ProcessStatus.SERVICE_IN_PROGRESS,

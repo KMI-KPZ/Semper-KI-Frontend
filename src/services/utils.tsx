@@ -169,3 +169,19 @@ export const sortByKey = <T,>(item1: T, item2: T, key: keyof T): number => {
   }
   return 0;
 };
+
+export const createDownload = (blob: Blob, title: string) => {
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.setAttribute("download", title);
+
+  // Append to html link element page
+  document.body.appendChild(link);
+
+  // Start download
+  link.click();
+
+  // Clean up and remove the link
+  link.parentNode!.removeChild(link);
+};

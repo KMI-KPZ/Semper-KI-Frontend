@@ -11,24 +11,30 @@ import { Divider } from "@component-library/Divider";
 import ServiceSelect from "@/pages/Service/Select/Select";
 import logger from "@/hooks/useLogger";
 import ServicePreviewSelect from "./Select/Select";
+import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
+import { ServiceManufacturingProps } from "@/pages/Service/Manufacturing/types/types";
 
 interface ProcessServicePreviewProps {
-  service: GeneralServiceProps;
-  processID: string;
+  process: ProcessProps;
 }
 
 const ProcessServicePreview: React.FC<ProcessServicePreviewProps> = (props) => {
-  const { service, processID } = props;
+  const { process } = props;
   const { t } = useTranslation();
 
   const renderService = () => {
-    switch (service.type) {
+    switch (process.service.type) {
       case ServiceType.UNDEFINED:
-        return <ServicePreviewSelect service={service} processID={processID} />;
+        return <ServicePreviewSelect process={process} />;
       case ServiceType.MANUFACTURING:
-        return <ProcessServiceManufacturing service={service} />;
+        return (
+          <ProcessServiceManufacturing
+            process={process}
+            service={process.service as ServiceManufacturingProps}
+          />
+        );
       case ServiceType.MODELING:
-        return <ProcessServiceModelling service={service} />;
+        return <ProcessServiceModelling process={process} />;
     }
   };
 
@@ -39,7 +45,7 @@ const ProcessServicePreview: React.FC<ProcessServicePreviewProps> = (props) => {
           {t("Projects.Project.Process.ServicePreview.ServicePreview.title")}{" "}
           {t(
             `enum.ServiceType.${
-              ServiceType[service.type] as keyof typeof ServiceType
+              ServiceType[process.service.type] as keyof typeof ServiceType
             }`
           )}
         </Heading>

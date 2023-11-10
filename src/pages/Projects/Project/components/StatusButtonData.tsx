@@ -4,12 +4,16 @@ import { UserType } from "@/hooks/useUser";
 import CancelIcon from "@mui/icons-material/Cancel";
 import FactoryIcon from "@mui/icons-material/Factory";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
-import ClearIcon from "@mui/icons-material/Clear";
-import CheckIcon from "@mui/icons-material/Check";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import MailIcon from "@mui/icons-material/Mail";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import DescriptionIcon from "@mui/icons-material/Description";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import TaskIcon from "@mui/icons-material/Task";
+import ReplayIcon from "@mui/icons-material/Replay";
+import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
 
 export type StatusButtonTitleType =
   | "EDIT"
@@ -37,7 +41,7 @@ export interface StatusButtonProps {
 export const StatusButtonData: StatusButtonProps[] = [
   {
     title: "EDIT",
-    icon: <FactoryIcon />,
+    icon: <EditIcon />,
     user: UserType.USER,
     allowedStates: [
       ProcessStatus.SERVICE_IN_PROGRESS,
@@ -47,7 +51,7 @@ export const StatusButtonData: StatusButtonProps[] = [
   },
   {
     title: "DELETE",
-    icon: <FactoryIcon />,
+    icon: <DeleteIcon />,
     user: UserType.USER,
     allowedStates: [
       ProcessStatus.DRAFT,
@@ -67,25 +71,25 @@ export const StatusButtonData: StatusButtonProps[] = [
   },
   {
     title: "VERIFYING",
-    icon: <AssignmentTurnedInIcon />,
+    icon: <TroubleshootIcon />,
     user: UserType.USER,
     allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
   },
   {
     title: "REQUESTED",
-    icon: <CancelIcon />,
+    icon: <MailIcon />,
     user: UserType.USER,
     allowedStates: [ProcessStatus.VERIFIED],
   },
   {
     title: "CLARIFICATION",
-    icon: <CancelIcon />,
+    icon: <QuestionAnswerIcon />,
     user: UserType.ORGANIZATION,
     allowedStates: [ProcessStatus.REQUESTED],
   },
   {
     title: "CONFIRMED_BY_CONTRACTOR",
-    icon: <CancelIcon />,
+    icon: <DescriptionIcon />,
     user: UserType.ORGANIZATION,
     allowedStates: [ProcessStatus.REQUESTED, ProcessStatus.CLARIFICATION],
   },
@@ -97,7 +101,7 @@ export const StatusButtonData: StatusButtonProps[] = [
   },
   {
     title: "CONFIRMED_BY_CLIENT",
-    icon: <CancelIcon />,
+    icon: <DoneAllIcon />,
     user: UserType.USER,
     allowedStates: [ProcessStatus.CONFIRMED_BY_CONTRACTOR],
   },
@@ -109,25 +113,25 @@ export const StatusButtonData: StatusButtonProps[] = [
   },
   {
     title: "PRODUCTION",
-    icon: <CancelIcon />,
+    icon: <FactoryIcon />,
     user: UserType.ORGANIZATION,
     allowedStates: [ProcessStatus.CONFIRMED_BY_CLIENT],
   },
   {
     title: "DELIVERY",
-    icon: <CancelIcon />,
+    icon: <LocalShippingIcon />,
     user: UserType.ORGANIZATION,
     allowedStates: [ProcessStatus.PRODUCTION],
   },
   {
     title: "COMPLETED",
-    icon: <CancelIcon />,
+    icon: <TaskIcon />,
     user: UserType.USER,
     allowedStates: [ProcessStatus.DELIVERY],
   },
   {
     title: "REPROJECT",
-    icon: <CancelIcon />,
+    icon: <ReplayIcon />,
     user: UserType.USER,
     allowedStates: [ProcessStatus.COMPLETED],
   },

@@ -3,12 +3,13 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Outlet } from "react-router-dom";
 import { ProjectProps, useProject } from "../hooks/useProject";
 import { LoadingAnimation } from "@component-library/index";
-import { UseQueryResult } from "@tanstack/react-query";
+import { Query, UseQueryResult } from "@tanstack/react-query";
 
 interface ProjectOutletProps {}
 
 export interface ProjectContextProps {
   project: ProjectProps;
+  queryIsRefetching: boolean;
 }
 
 export const ProjectContext = React.createContext<ProjectContextProps>({
@@ -21,6 +22,7 @@ export const ProjectContext = React.createContext<ProjectContextProps>({
     updated: new Date(),
     status: 0,
   },
+  queryIsRefetching: false,
 });
 
 const ProjectContextProvider: React.FC<ProjectOutletProps> = (props) => {
@@ -32,7 +34,12 @@ const ProjectContextProvider: React.FC<ProjectOutletProps> = (props) => {
 
   if (projectQuery.isFetched && projectQuery.data !== undefined)
     return (
-      <ProjectContext.Provider value={{ project: projectQuery.data }}>
+      <ProjectContext.Provider
+        value={{
+          project: projectQuery.data,
+          queryIsRefetching: projectQuery.isRefetching,
+        }}
+      >
         <Outlet />
       </ProjectContext.Provider>
     );

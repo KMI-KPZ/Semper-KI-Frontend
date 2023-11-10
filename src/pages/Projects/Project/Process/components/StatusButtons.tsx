@@ -23,7 +23,6 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { state, process, projectID } = props;
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
-  const { processID } = useParams();
   const { updateProcessWithProcessID, getCurrentProcess } = useProcess();
   const { user } = useContext(UserContext);
   const { getProcessStatusButtons } = useStatusButtons();
@@ -40,11 +39,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   };
 
   const calcPath = (path: string): string => {
-    return processID !== undefined && processID !== process.processID
-      ? `../${process.processID}/${path}`
-      : processID === undefined
-      ? `${process.processID}/${path}`
-      : `${path}`;
+    return `/projects/${projectID}/${process.processID}/${path}`;
   };
 
   const onClickButton = (status: ProcessStatus) => {

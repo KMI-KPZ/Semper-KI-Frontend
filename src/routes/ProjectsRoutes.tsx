@@ -66,7 +66,6 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
           />
         </Route>
         <Route path=":processID/*" element={<ProcessContextProvider />}>
-          <Route index element={<Project />} />
           <Route element={<AuthorizedUserOutlet />}>
             <Route
               path="checkout"
@@ -93,7 +92,8 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
               }
             />
           </Route>
-          <Route path="service/*" element={<ServiceRoutes />} />
+          <Route path="*" element={<Project />} />
+          {/* <Route path="service/*" element={<ServiceRoutes />} /> */}
         </Route>
       </Route>
     </Routes>

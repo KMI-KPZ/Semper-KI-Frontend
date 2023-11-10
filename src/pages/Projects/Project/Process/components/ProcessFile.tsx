@@ -10,6 +10,7 @@ import useProcess, {
 } from "@/pages/Projects/hooks/useProcess";
 import Container from "@component-library/Container";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { createDownload } from "@/services/utils";
 
 interface Props {
   process: ProcessProps;
@@ -20,24 +21,6 @@ const ProjectFile: React.FC<Props> = (props) => {
   const { process } = props;
   const { t } = useTranslation();
   const [loadingFileID, setLoadingFileID] = useState<string>("");
-
-  const createDownload = (blob: Blob, title: string) => {
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", title);
-
-    setLoadingFileID("");
-
-    // Append to html link element page
-    document.body.appendChild(link);
-
-    // Start download
-    link.click();
-
-    // Clean up and remove the link
-    link.parentNode!.removeChild(link);
-  };
 
   const { downloadFile, downloadFilesZIP, deleteFile } = useProcess();
   const hanleOnClickButtonDelete = (file: FilesDescriptionProps) => {
@@ -50,7 +33,10 @@ const ProjectFile: React.FC<Props> = (props) => {
       { processID: process.processID, fileID: file.id },
       {
         onSettled(data) {
-          if (data) createDownload(data, file.title);
+          if (data) {
+            createDownload(data, file.title);
+            setLoadingFileID("");
+          }
         },
       }
     );
@@ -63,7 +49,10 @@ const ProjectFile: React.FC<Props> = (props) => {
       },
       {
         onSettled(data) {
-          if (data) createDownload(data, "files.zip");
+          if (data) {
+            createDownload(data, "files.zip");
+            setLoadingFileID("");
+          }
         },
       }
     );

@@ -12,10 +12,10 @@ import useService, {
   GeneralServiceProps,
   ServiceType,
 } from "@/pages/Service/hooks/useService";
+import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
 
 interface ServiceSelectProps {
-  service: GeneralServiceProps;
-  processID: string;
+  process: ProcessProps;
 }
 
 interface ServiceSelectItemData {
@@ -38,7 +38,7 @@ export const serviceSelectItems: ServiceSelectItemData[] = [
 ];
 
 const ServicePreviewSelect: React.FC<ServiceSelectProps> = (props) => {
-  const { service, processID } = props;
+  const { process } = props;
   const { t } = useTranslation();
 
   return (
@@ -50,9 +50,9 @@ const ServicePreviewSelect: React.FC<ServiceSelectProps> = (props) => {
             <ServicePreviewSelectItem
               {...item}
               key={index}
-              manuelProcessID={processID}
-              active={service.type === item.serviceType}
-              serviceSelected={service.type !== ServiceType.UNDEFINED}
+              manuelProcessID={process.processID}
+              active={process.service.type === item.serviceType}
+              serviceSelected={process.service.type !== ServiceType.UNDEFINED}
             />
           ))}
         </div>

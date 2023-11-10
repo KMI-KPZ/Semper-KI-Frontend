@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { UserProps, UserType } from "@/hooks/useUser";
 import { Heading, Text } from "@component-library/Typography";
-import { useNavigate, useParams } from "react-router-dom";
+import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
   Divider,
@@ -25,6 +25,7 @@ import useCheckedProcesses from "./hooks/useCheckedProcesses";
 import { ProjectEvent, ProjectEventItem } from "@/pages/App/types";
 import { ProjectContext } from "../context/ProjectContext";
 import useScrollToProcess from "./hooks/useScrollToProcess";
+import ServiceRoutes from "@/routes/ServiceRoutes";
 
 interface Props {
   event?: ProjectEvent;
@@ -101,6 +102,9 @@ const Project: React.FC<Props> = (props) => {
         <LoadingAnimation />
       ) : (
         <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
+          <Routes>
+            <Route path="service/*" element={<ServiceRoutes />} />
+          </Routes>
           <Container width="full" justify="between">
             <Container direction="col" align="start">
               <ProjectTitleForm

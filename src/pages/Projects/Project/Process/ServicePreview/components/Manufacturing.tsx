@@ -6,23 +6,46 @@ import { Button } from "@component-library/Button";
 import Container from "@component-library/Container";
 import Modal from "@component-library/Modal";
 import { Heading, Text } from "@component-library/Typography";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ProcessServiceManufacturingModelPreview from "./ModellPreView";
+import useTest from "@/pages/Test/hooks/useTest";
+import ModelPreview from "@/pages/Test/STLViewer";
+import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
+import { use } from "i18next";
+import logger from "@/hooks/useLogger";
+import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
 
 interface ProcessServiceManufacturingProps {
+  process: ProcessProps;
   service: ServiceManufacturingProps;
 }
 
 const ProcessServiceManufacturing: React.FC<
   ProcessServiceManufacturingProps
 > = (props) => {
-  const { service } = props;
+  const { process, service } = props;
   const { t } = useTranslation();
   const [open, setOpen] = useState<boolean>(false);
+  const { downloadFileTest } = useTest();
+  const [fileUrl, setFileUrl] = useState<string>("");
 
   const handleOnClickButtonOpen = () => {
     setOpen(true);
+    if (process.files.length > 0) {
+      downloadFileTest.mutate(
+        {
+          processID: process.processID,
+          fileID: process.files[0].id,
+        },
+        {
+          onSuccess(data) {
+            // logger("success", "downloadFileTest.mutate", data);
+            setFileUrl(data);
+          },
+        }
+      );
+    }
   };
 
   return (
@@ -74,8 +97,13 @@ const ProcessServiceManufacturing: React.FC<
         closeModal={() => {
           setOpen(false);
         }}
+        className="h-full max-w-7xl bg-white"
       >
-        <ProcessServiceManufacturingModelPreview modelUrl="/assets/test/3DBenchy.stl" />
+        {fileUrl !== "" ? (
+          <ModelPreview file={fileUrl} />
+        ) : (
+          <div className="h-40 w-40 bg-slate-500">nothing:{fileUrl}</div>
+        )}
       </Modal>
     </Container>
   );

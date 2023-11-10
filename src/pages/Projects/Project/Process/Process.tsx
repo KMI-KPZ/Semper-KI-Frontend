@@ -131,10 +131,7 @@ const Process: React.FC<Props> = (props) => {
         state={process.status}
         process={process}
       />
-      <ProcessServicePreview
-        service={process.service}
-        processID={process.processID}
-      />
+      <ProcessServicePreview process={process} />
       <PermissionGate element="ProjectFile">
         <ProjectFile process={process} projectID={projectID} />
         <Upload mutation={uploadFilesMutation} icon multiple></Upload>

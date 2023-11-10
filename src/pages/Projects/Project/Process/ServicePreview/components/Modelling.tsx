@@ -1,3 +1,4 @@
+import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
 import { ServiceModelingProps } from "@/pages/Service/Modelling/Modelling";
 import Container from "@component-library/Container";
 import { Text } from "@component-library/Typography";
@@ -5,13 +6,13 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 interface ProcessServiceModellingProps {
-  service: ServiceModelingProps;
+  process: ProcessProps;
 }
 
 const ProcessServiceModelling: React.FC<ProcessServiceModellingProps> = (
   props
 ) => {
-  const { service } = props;
+  const { process } = props;
   const { t } = useTranslation();
 
   return (

@@ -6,7 +6,7 @@ import { Button } from "@component-library/Button";
 import ProcessFilterCard from "./components/Card";
 import { AppContext } from "@/pages/App/App";
 import { Heading } from "@component-library/Typography";
-import useBodyScroll from "@/hooks/useBodyScroll";
+import { BodyScrollContext } from "@/contexts/BodyScrollContextProvider";
 
 interface Props {
   filterOpen: boolean;
@@ -125,7 +125,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
   });
   const { categoryList, filterList } = state;
   const { t } = useTranslation();
-  const { setScroll } = useBodyScroll();
+  const { setBodyScroll } = useContext(BodyScrollContext);
   const callApplyFilters = () => {
     applyFilters(
       filterList.map((filterItem: FilterItemProps) => {
@@ -137,7 +137,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
   };
   const setFilterOpen = (open: boolean) => {
     parentSetFilterOpen(open);
-    setScroll(open);
+    setBodyScroll(open);
   };
 
   const setFilterItem = (newFilterItem: FilterItemProps) => {

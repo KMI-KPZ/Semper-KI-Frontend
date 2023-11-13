@@ -11,6 +11,7 @@ import { Heading } from "@component-library/Typography";
 import UserContextProvider from "./contexts/UserContextProvider";
 import PermissionContextProvider from "./contexts/PermissionContextProvider";
 import EventContextProvider from "./contexts/EventContextProvider";
+import BodyScrollContextProvider from "./contexts/BodyScrollContextProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -39,8 +40,10 @@ root.render(
           <UserContextProvider>
             <PermissionContextProvider>
               <EventContextProvider>
-                <App />
-                <ReactQueryDevtools />
+                <BodyScrollContextProvider>
+                  <App />
+                  <ReactQueryDevtools />
+                </BodyScrollContextProvider>
               </EventContextProvider>
             </PermissionContextProvider>
           </UserContextProvider>

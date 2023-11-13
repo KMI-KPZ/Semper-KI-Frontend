@@ -12,11 +12,11 @@ import { AppContext } from "@/pages/App/App";
 import { Event, ProjectEvent } from "@/pages/App/types";
 import { Heading, Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
-import useBodyScroll from "@/hooks/useBodyScroll";
 import { EventContext } from "@/contexts/EventContextProvider";
 import { UserContext } from "@/contexts/UserContextProvider";
 import { UserType } from "@/hooks/useUser";
 import { getProjectEventAmount } from "@/hooks/useEvents/hooks/useProjectEvent";
+import { BodyScrollContext } from "@/contexts/BodyScrollContextProvider";
 
 interface Language {
   code: string;
@@ -69,7 +69,7 @@ export const Header: React.FC<Props> = (props) => {
     languageMenuOpen: false,
   });
   const { menuOpen, languageMenuOpen } = state;
-  const { setScroll } = useBodyScroll();
+  const { setBodyScroll } = useContext(BodyScrollContext);
 
   const changeLanguage = (code: string) => () => {
     closeLanguageMenu();
@@ -87,11 +87,11 @@ export const Header: React.FC<Props> = (props) => {
   };
   const closeMenu = () => {
     setState((prevState) => ({ ...prevState, menuOpen: false }));
-    setScroll(false);
+    setBodyScroll(true);
   };
   const openMenu = () => {
     setState((prevState) => ({ ...prevState, menuOpen: true }));
-    setScroll(true);
+    setBodyScroll(false);
   };
   const closeMenus = (): void => {
     closeLanguageMenu();

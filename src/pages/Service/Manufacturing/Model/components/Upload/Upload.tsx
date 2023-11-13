@@ -53,14 +53,16 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   };
 
   const handleClickUploadCard = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     if (hiddenFileInput.current !== null) {
       hiddenFileInput.current.click();
     }
   };
 
-  const handleDragOnUploadCard = function (e: React.DragEvent<HTMLDivElement>) {
+  const handleDragOnUploadCard = function (
+    e: React.DragEvent<HTMLAnchorElement>
+  ) {
     e.preventDefault();
     e.stopPropagation();
     if (e.type === "dragenter" || e.type === "dragover") {
@@ -70,7 +72,9 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     }
   };
 
-  const handleDropOnUploadCard = function (e: React.DragEvent<HTMLDivElement>) {
+  const handleDropOnUploadCard = function (
+    e: React.DragEvent<HTMLAnchorElement>
+  ) {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
@@ -94,10 +98,10 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
 
   return (
     <>
-      <div
+      <a
         className={`flex w-full grow flex-col items-center justify-center gap-2  
-                     bg-white p-2 text-black transition duration-300
-                    hover:cursor-pointer  hover:bg-türkis-200 
+                     bg-white p-2 text-black transition
+                    duration-300  hover:cursor-pointer hover:bg-türkis-200
                     ${dragActive ? "bg-türkis-200" : ""}
                     `}
         onClick={handleClickUploadCard}
@@ -105,6 +109,8 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
         onDragLeave={handleDragOnUploadCard}
         onDragOver={handleDragOnUploadCard}
         onDrop={handleDropOnUploadCard}
+        href={t("Service.Manufacturing.Model.Upload.Upload.card.title")}
+        title={t("Service.Manufacturing.Model.Upload.Upload.card.title")}
       >
         <input
           accept={dataTypes.map((type: string) => type).join(",")}
@@ -118,17 +124,19 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
           {t("Service.Manufacturing.Model.Upload.Upload.card.title")}
         </Heading>
         {t("Service.Manufacturing.Model.Upload.Upload.card.text")}
-      </div>
+      </a>
 
-      <Modal
-        open={formOpen}
-        closeModal={closeForm}
-        children={
-          file === undefined ? null : (
-            <ManufacturingModelUploadForm file={file} />
-          )
-        }
-      />
+      {formOpen ? (
+        <Modal
+          open={formOpen}
+          closeModal={closeForm}
+          children={
+            file === undefined ? null : (
+              <ManufacturingModelUploadForm file={file} />
+            )
+          }
+        />
+      ) : null}
     </>
   );
 };

@@ -88,17 +88,19 @@ export const ProcessModel: React.FC<Props> = (props) => {
                   openModelView={openModelView}
                 />
               ))}
-            <Modal
-              open={state.modalOpen === true && state.model !== undefined}
-              closeModal={closeModelView}
-            >
-              {state.model !== undefined ? (
-                <ProcessModelPreView
-                  model={state.model}
-                  closeModelView={closeModelView}
-                />
-              ) : null}
-            </Modal>
+            {state.modalOpen === true && state.model !== undefined ? (
+              <Modal
+                open={state.modalOpen === true && state.model !== undefined}
+                closeModal={closeModelView}
+              >
+                {state.model !== undefined ? (
+                  <ProcessModelPreView
+                    model={state.model}
+                    closeModelView={closeModelView}
+                  />
+                ) : null}
+              </Modal>
+            ) : null}
           </>
         ) : (
           t("Service.Manufacturing.Model.Model.error.noModels")

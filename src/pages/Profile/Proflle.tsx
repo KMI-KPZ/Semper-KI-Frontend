@@ -17,8 +17,7 @@ interface Props {}
 const Profile: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const {} = props;
-  const { user } = useContext(AuthorizedUserContext);
-  const { deleteUser } = useUser();
+  const { user, deleteUser } = useContext(AuthorizedUserContext);
   const [edit, setEdit] = useState(false);
 
   const handleOnClickButtonDelete = () => {

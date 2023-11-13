@@ -12,11 +12,12 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import SaveIcon from "@mui/icons-material/Save";
 import useTest from "./hooks/useTest";
 import { EventContext } from "@/contexts/EventContextProvider";
+import { PermissionContext } from "@/contexts/PermissionContextProvider";
 interface Props {}
 export const Test: React.FC<Props> = (props) => {
   const { socket, events } = useContext(EventContext);
   const [open, setOpen] = useState(false);
-  const { reloadPermissions } = usePermissions();
+  const { reloadPermissions } = useContext(PermissionContext);
   const { saveProjectsQuery } = useTest();
   const openMenu = () => {
     setOpen(true);

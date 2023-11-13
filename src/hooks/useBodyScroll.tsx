@@ -1,23 +1,19 @@
 import { use } from "i18next";
 import { useEffect } from "react";
+import logger from "./useLogger";
 
 interface ReturnProps {
-  setScroll(stopScroll: boolean): void;
+  setBodyScroll(scroll: boolean): void;
 }
 
 const useBodyScroll = (): ReturnProps => {
-  useEffect(() => {
-    setScroll(false);
-  }, []);
-
-  const setScroll = (stopScroll: boolean) => {
-    document.body.style.overflowY = stopScroll === true ? "hidden" : "scroll";
+  const setBodyScroll = (scroll: boolean) => {
+    document.body.style.overflowY = scroll === true ? "scroll" : "hidden";
     document.body.style.scrollbarGutter = "stable";
-    // document.body.style.paddingRight = stopScroll === true ? "17px" : "";
   };
 
   return {
-    setScroll,
+    setBodyScroll,
   };
 };
 

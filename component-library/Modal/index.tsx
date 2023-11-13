@@ -4,14 +4,14 @@ import {
   MouseEvent,
   PropsWithChildren,
   SyntheticEvent,
+  useContext,
   useEffect,
   useRef,
 } from "react";
 import { Button } from "..";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "react-i18next";
-import useBodyScroll from "@/hooks/useBodyScroll";
-import { set } from "react-hook-form";
+import { BodyScrollContext } from "@/contexts/BodyScrollContextProvider";
 
 type ModelProps = {
   open: boolean;
@@ -31,11 +31,12 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
 }) => {
   const { t } = useTranslation();
   const modalRef = useRef<HTMLDialogElement>(null);
-  const { setScroll } = useBodyScroll();
+  const { setBodyScroll } = useContext(BodyScrollContext);
 
   const closeModalWithScroll = () => {
-    setScroll(false);
-    if (!locked && closeModal !== undefined) closeModal();
+    setBodyScroll(true);
+    modalRef.current?.close();
+    if (closeModal) closeModal();
   };
 
   const closeModalOnEscape = (e: KeyboardEvent<HTMLDialogElement>) => {
@@ -59,11 +60,7 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   // Eventlistener: trigger close click on anim end
   const handleOnAnimEnd = () => {
     // logger("handleOnAnimEnd");
-    const { current } = modalRef;
-    if (modalRef !== null && current !== null && !open) {
-      setScroll(false);
-      current.close();
-    }
+    closeModalWithScroll();
   };
 
   const handleOnClickChildren = (
@@ -74,17 +71,13 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
 
   // when open changes run open/close command
   useEffect(() => {
-    // logger("useEffect", open);
-    const { current } = modalRef;
-    if (modalRef !== null && current !== null) {
-      if (open === true) {
-        // current.close();
-        setScroll(true);
-        current.showModal();
-      } else {
-        setScroll(false);
-        current.close();
-      }
+    if (open === true) {
+      setBodyScroll(false);
+      modalRef.current?.showModal();
+    } else {
+      setBodyScroll(true);
+      modalRef.current?.close();
+      if (closeModal) closeModal();
     }
   }, [open]);
 
@@ -93,9 +86,9 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   return (
     <dialog
       ref={modalRef}
-      className={`fixed max-h-screen max-w-[100vw] overflow-auto bg-transparent p-0 
-      backdrop:fixed backdrop:bottom-0 backdrop:left-0 backdrop:right-0 backdrop:top-0 
-      backdrop:bg-black backdrop:opacity-30 backdrop:blur-sm
+      className={`fixed max-h-screen max-w-7xl overflow-auto bg-transparent 
+      p-0 backdrop:fixed backdrop:bottom-0 backdrop:left-0 backdrop:right-0 
+      backdrop:top-0 backdrop:bg-black backdrop:opacity-30 backdrop:blur-sm
      `}
       onKeyDown={closeModalOnEscape}
       onClose={closeModal}

@@ -8,6 +8,7 @@ interface AuthorizedUserOutletProps {}
 
 export type AuthorizedUserContext = {
   user: UserProps;
+  deleteUser(): void;
 };
 
 export const AuthorizedUserContext = createContext<AuthorizedUserContext>({
@@ -23,14 +24,15 @@ export const AuthorizedUserContext = createContext<AuthorizedUserContext>({
     updated: new Date(),
     usertype: 0,
   },
+  deleteUser: () => {},
 });
 
 const AuthorizedUserOutlet: React.FC<AuthorizedUserOutletProps> = (props) => {
   const {} = props;
-  const { user } = useContext(UserContext);
+  const { user, deleteUser } = useContext(UserContext);
 
   return user !== undefined ? (
-    <AuthorizedUserContext.Provider value={{ user }}>
+    <AuthorizedUserContext.Provider value={{ user, deleteUser }}>
       <Outlet />
     </AuthorizedUserContext.Provider>
   ) : (

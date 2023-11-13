@@ -1,8 +1,7 @@
-import { AppContext } from "@/pages/App/App";
 import { useContext, useEffect } from "react";
 import { ProcessProps } from "../../hooks/useProcess";
 import { DeleteProjectEvent } from "@/pages/App/types";
-import useEvents from "@/hooks/useEvents/useEvents";
+import { EventContext } from "@/contexts/EventContextProvider";
 
 interface ReturnProps {
   getDeleteProjectEvent: (type: "status" | "message") => DeleteProjectEvent;
@@ -13,7 +12,7 @@ const useProjectEventChange = (
   projectCollectionID: string,
   chatOpen: boolean
 ): ReturnProps => {
-  const { deleteEvent } = useEvents();
+  const { deleteEvent } = useContext(EventContext);
 
   const getDeleteProjectEvent = (
     type: "status" | "message"

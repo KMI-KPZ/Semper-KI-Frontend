@@ -91,7 +91,7 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
   return (
     <LoadingSuspense query={postProcessingQuery}>
       {postProcessingQuery.data !== undefined ? (
-        <div className="flex flex-col gap-y-5">
+        <div className="flex max-h-[60vh] flex-col gap-y-5 overflow-x-auto overflow-y-scroll">
           <ProcessPostProcessCatalog
             grid={grid}
             searchText={searchText}

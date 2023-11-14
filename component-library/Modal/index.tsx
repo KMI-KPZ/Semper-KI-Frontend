@@ -12,6 +12,7 @@ import { Button } from "..";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "react-i18next";
 import { BodyScrollContext } from "@/contexts/BodyScrollContextProvider";
+import { twMerge } from "tailwind-merge";
 
 type ModelProps = {
   open: boolean;
@@ -54,7 +55,36 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   const handleOnClick = (
     e: MouseEvent<HTMLDialogElement, globalThis.MouseEvent>
   ) => {
+    // const dialogDimensions = modalRef.current?.getBoundingClientRect();
+    // if (dialogDimensions !== undefined)
+    //   logger(
+    //     "Close Modal",
+    //     "left",
+    //     e.clientX < dialogDimensions.left,
+    //     "right",
+    //     e.clientX > dialogDimensions.right,
+    //     "top",
+    //     e.clientY < dialogDimensions.top,
+    //     "bottom",
+    //     e.clientY > dialogDimensions.bottom,
+    //     "x",
+    //     e.clientX,
+    //     "y",
+    //     e.clientY,
+    //     "width",
+    //     dialogDimensions.width,
+    //     "height",
+    //     dialogDimensions.height
+    //   );
+    // if (
+    //   dialogDimensions !== undefined &&
+    //   (e.clientX < dialogDimensions.left ||
+    //     e.clientX > dialogDimensions.right ||
+    //     e.clientY < dialogDimensions.top ||
+    //     e.clientY > dialogDimensions.bottom)
+    // ) {
     closeModalWithScroll();
+    // }
   };
 
   // Eventlistener: trigger close click on anim end
@@ -86,10 +116,17 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   return (
     <dialog
       ref={modalRef}
-      className={`fixed max-h-screen max-w-7xl overflow-auto bg-transparent 
-      p-0 backdrop:fixed backdrop:bottom-0 backdrop:left-0 backdrop:right-0 
-      backdrop:top-0 backdrop:bg-black backdrop:opacity-30 backdrop:blur-sm
-     `}
+      className={twMerge(
+        `fixed  h-full w-full overflow-auto rounded-xl
+        bg-transparent 
+        bg-white bg-opacity-80 
+        p-0 backdrop:fixed
+        backdrop:bottom-0 backdrop:left-0 backdrop:right-0 backdrop:top-0
+       backdrop:bg-black backdrop:opacity-30 backdrop:blur-sm
+        md:h-fit md:max-h-[90vh] md:w-fit md:max-w-7xl
+     `
+        // className
+      )}
       onKeyDown={closeModalOnEscape}
       onClose={closeModal}
       onCancel={handleOnCancel}
@@ -97,12 +134,12 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
       onAnimationEnd={handleOnAnimEnd}
     >
       <div
-        className={`box-border min-h-[20px] min-w-[20px] shadow-lg md:p-5 ${className}`}
+        className={twMerge(`h-full w-full md:p-5`, className)}
         onClick={handleOnClickChildren}
       >
         {noIcon === true ? null : (
           <Button
-            className="absolute right-0 top-0 z-10 mr-3 mt-3 bg-none md:mr-5 md:mt-5"
+            className="absolute right-0 top-0 z-10 mr-1 mt-2 bg-slate-300 bg-none md:mr-1 md:mt-2"
             title={t("component-library.Modal.button.close")}
             children={<CloseIcon />}
             variant="text"

@@ -69,7 +69,7 @@ export const ProcessModel: React.FC<Props> = (props) => {
   return model === undefined ? (
     <LoadingSuspense query={modelsQuery}>
       <div
-        className={`flex gap-y-5 ${
+        className={`flex max-h-[60vh] gap-y-5 overflow-x-auto overflow-y-scroll ${
           grid === true
             ? "flex-row flex-wrap justify-between"
             : "flex-col flex-nowrap "

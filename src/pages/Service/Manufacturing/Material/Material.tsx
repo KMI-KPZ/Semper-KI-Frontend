@@ -66,7 +66,7 @@ export const ProcessMaterial: React.FC<Props> = (props) => {
   return material === undefined ? (
     <LoadingSuspense query={materialsQuery}>
       <div
-        className={`flex gap-y-5 ${
+        className={`flex gap-y-5 md:max-h-[60vh] md:overflow-x-auto md:overflow-y-scroll ${
           grid === true
             ? "flex-row flex-wrap justify-between"
             : "flex-col flex-nowrap "

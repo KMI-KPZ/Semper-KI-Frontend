@@ -29,7 +29,7 @@ const ServiceRoutes: React.FC<ServiceRoutesProps> = (props) => {
     <Modal
       open={true}
       closeModal={closeModal}
-      className="h-full w-full rounded-xl bg-white bg-opacity-80 p-10 md:max-w-7xl"
+      className="h-full w-full  bg-white bg-opacity-80 p-10 md:max-w-7xl"
     >
       <Routes>
         <Route element={<ServiceContextProvider />}>

@@ -3,6 +3,7 @@ import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { ReactComponent as UploadIcon } from "@icons/Upload.svg";
 import { useTranslation } from "react-i18next";
 import logger from "@/hooks/useLogger";
+import { Button } from "@component-library/Button";
 
 interface Props {
   multiple?: boolean;
@@ -32,13 +33,25 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
   };
 
   const handleClickUploadCard = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
+    e.preventDefault();
     if (hiddenFileInput.current !== null) {
       hiddenFileInput.current.click();
     }
   };
-  const handleDragOnUploadCard = function (e: React.DragEvent<HTMLDivElement>) {
+  const handleClickUploadButton = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    if (hiddenFileInput.current !== null) {
+      hiddenFileInput.current.click();
+    }
+  };
+
+  const handleDragOnUploadCard = function (
+    e: React.DragEvent<HTMLAnchorElement>
+  ) {
     e.preventDefault();
     e.stopPropagation();
     if (e.type === "dragenter" || e.type === "dragover") {
@@ -48,7 +61,9 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
     }
   };
 
-  const handleDropOnUploadCard = function (e: React.DragEvent<HTMLDivElement>) {
+  const handleDropOnUploadCard = function (
+    e: React.DragEvent<HTMLAnchorElement>
+  ) {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
@@ -73,19 +88,7 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
   }, [error]);
 
   return (
-    <div
-      className={`flex w-full grow flex-col items-center justify-center gap-2  
-    rounded-xl border-2 bg-white p-2 text-black transition duration-300
-   hover:cursor-pointer  hover:bg-türkis-200 
-   ${dragActive ? "bg-türkis-200" : ""}
-   
-   `}
-      onClick={handleClickUploadCard}
-      onDragEnter={handleDragOnUploadCard}
-      onDragLeave={handleDragOnUploadCard}
-      onDragOver={handleDragOnUploadCard}
-      onDrop={handleDropOnUploadCard}
-    >
+    <>
       <input
         accept={dataTypes.map((type: string) => type).join(",")}
         type="file"
@@ -94,19 +97,37 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
         onChange={handleChangeHiddenInput}
         className="hidden"
       />
-      {icon === true ? (
-        <UploadIcon className="h-10 w-10 md:h-24 md:w-24" />
-      ) : null}
-      {children === undefined ? (
-        <>
-          <Text>
-            {t("components.Upload.title", { count: multiple === true ? 2 : 1 })}
-          </Text>
-          <Text>{t("components.Upload.subTitle")}</Text>
-        </>
-      ) : (
-        children
-      )}
-    </div>
+      <a
+        className={`flex w-full grow flex-col items-center justify-center gap-2  
+      rounded-xl border-2 bg-white p-2 text-black transition duration-300
+      hover:cursor-pointer  hover:bg-türkis-200 
+   ${dragActive ? "bg-türkis-200" : ""}
+   
+   `}
+        onClick={handleClickUploadCard}
+        onDragEnter={handleDragOnUploadCard}
+        onDragLeave={handleDragOnUploadCard}
+        onDragOver={handleDragOnUploadCard}
+        onDrop={handleDropOnUploadCard}
+        href="#"
+        title={t("components.Upload.title")}
+      >
+        {icon === true ? (
+          <UploadIcon className="h-10 w-10 md:h-24 md:w-24" />
+        ) : null}
+        {children === undefined ? (
+          <>
+            <Text>
+              {t("components.Upload.title", {
+                count: multiple === true ? 2 : 1,
+              })}
+            </Text>
+            <Text>{t("components.Upload.subTitle")}</Text>
+          </>
+        ) : (
+          children
+        )}
+      </a>
+    </>
   );
 };

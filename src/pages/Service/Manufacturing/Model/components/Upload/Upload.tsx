@@ -55,9 +55,9 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const handleClickUploadCard = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
-    if (hiddenFileInput.current !== null) {
-      hiddenFileInput.current.click();
-    }
+    e.preventDefault();
+    logger("Click on Upload Card");
+    hiddenFileInput.current?.click();
   };
 
   const handleDragOnUploadCard = function (
@@ -109,23 +109,22 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
         onDragLeave={handleDragOnUploadCard}
         onDragOver={handleDragOnUploadCard}
         onDrop={handleDropOnUploadCard}
-        href={t("Service.Manufacturing.Model.Upload.Upload.card.title")}
         title={t("Service.Manufacturing.Model.Upload.Upload.card.title")}
+        href="#"
       >
-        <input
-          accept={dataTypes.map((type: string) => type).join(",")}
-          type="file"
-          ref={hiddenFileInput}
-          onChange={handleChangeHiddenInput}
-          className="hidden"
-        />
         <UploadIcon className="h-40 w-40" />
         <Heading variant="h2">
           {t("Service.Manufacturing.Model.Upload.Upload.card.title")}
         </Heading>
         {t("Service.Manufacturing.Model.Upload.Upload.card.text")}
       </a>
-
+      <input
+        accept={dataTypes.map((type: string) => type).join(",")}
+        type="file"
+        ref={hiddenFileInput}
+        onChange={handleChangeHiddenInput}
+        className="hidden"
+      />
       {formOpen ? (
         <Modal
           open={formOpen}

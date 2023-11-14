@@ -85,7 +85,7 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
             filters={filtersQuery.data}
             applyFilters={applyFilters}
           />
-          <div className="flex w-full flex-col gap-5 ">
+          <div className="flex w-full flex-col gap-5">
             <ProcessHeader />
             <Routes>
               <Route index element={<Navigate to="model" />} />

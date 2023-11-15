@@ -106,6 +106,7 @@ const ProcessServiceManufacturing: React.FC<
         </Text>
       </Container>
       <Modal
+        title="ModelPreview"
         open={open}
         closeModal={closeModal}
         className="h-full max-w-7xl bg-white"

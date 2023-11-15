@@ -13,8 +13,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "react-i18next";
 import { BodyScrollContext } from "@/contexts/BodyScrollContextProvider";
 import { twMerge } from "tailwind-merge";
+import { ModalContext } from "@/contexts/ModalContextProvider";
 
 type ModelProps = {
+  title: string;
   open: boolean;
   locked?: boolean;
   className?: string;
@@ -23,6 +25,7 @@ type ModelProps = {
 };
 
 const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
+  title,
   open,
   locked = false,
   closeModal,
@@ -32,10 +35,10 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
 }) => {
   const { t } = useTranslation();
   const modalRef = useRef<HTMLDialogElement>(null);
-  const { setBodyScroll } = useContext(BodyScrollContext);
+  const { deleteModal, registerModal } = useContext(ModalContext);
 
   const closeModalWithScroll = () => {
-    setBodyScroll(true);
+    deleteModal(title);
     modalRef.current?.close();
     if (closeModal) closeModal();
   };
@@ -102,10 +105,10 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   // when open changes run open/close command
   useEffect(() => {
     if (open === true) {
-      setBodyScroll(false);
+      registerModal(title, modalRef);
       modalRef.current?.showModal();
     } else {
-      setBodyScroll(true);
+      deleteModal(title);
       modalRef.current?.close();
       if (closeModal) closeModal();
     }
@@ -119,13 +122,12 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
       className={twMerge(
         `fixed  h-full w-full overflow-auto rounded-xl
         bg-transparent 
-        bg-white bg-opacity-80 
+        bg-white bg-opacity-70
         p-0 backdrop:fixed
         backdrop:bottom-0 backdrop:left-0 backdrop:right-0 backdrop:top-0
        backdrop:bg-black backdrop:opacity-30 backdrop:blur-sm
         md:h-fit md:max-h-[90vh] md:w-fit md:max-w-7xl
      `
-        // className
       )}
       onKeyDown={closeModalOnEscape}
       onClose={closeModal}
@@ -134,16 +136,17 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
       onAnimationEnd={handleOnAnimEnd}
     >
       <div
-        className={twMerge(`h-full w-full md:p-5`, className)}
+        className={twMerge(`h-full w-full  md:p-10`, className)}
         onClick={handleOnClickChildren}
       >
         {noIcon === true ? null : (
           <Button
-            className="absolute right-0 top-0 z-10 mr-1 mt-2 bg-slate-300 bg-none md:mr-1 md:mt-2"
+            className="absolute right-0 top-0 z-10 "
             title={t("component-library.Modal.button.close")}
             children={<CloseIcon />}
             variant="text"
             width="fit"
+            size="sm"
             onClick={closeModal}
           />
         )}

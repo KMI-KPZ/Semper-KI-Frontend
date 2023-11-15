@@ -90,6 +90,7 @@ export const ProcessModel: React.FC<Props> = (props) => {
               ))}
             {state.modalOpen === true && state.model !== undefined ? (
               <Modal
+                title="ProcessModelPreView"
                 open={state.modalOpen === true && state.model !== undefined}
                 closeModal={closeModelView}
               >

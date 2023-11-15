@@ -37,7 +37,7 @@ const Footer: React.FC<Props> = (props) => {
 
   return (
     <>
-      <Modal open={open} closeModal={() => setOpen(false)}>
+      <Modal open={open} closeModal={() => setOpen(false)} title="ContactForm">
         <ContactForm closeEdit={contactOnClick} />
       </Modal>
       <footer className="w-full bg-white shadow-inner ">

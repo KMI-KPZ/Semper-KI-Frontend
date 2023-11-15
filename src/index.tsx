@@ -12,6 +12,7 @@ import UserContextProvider from "./contexts/UserContextProvider";
 import PermissionContextProvider from "./contexts/PermissionContextProvider";
 import EventContextProvider from "./contexts/EventContextProvider";
 import BodyScrollContextProvider from "./contexts/BodyScrollContextProvider";
+import ModalContextProvider from "./contexts/ModalContextProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -41,8 +42,10 @@ root.render(
             <PermissionContextProvider>
               <EventContextProvider>
                 <BodyScrollContextProvider>
-                  <App />
-                  <ReactQueryDevtools />
+                  <ModalContextProvider>
+                    <App />
+                    <ReactQueryDevtools />
+                  </ModalContextProvider>
                 </BodyScrollContextProvider>
               </EventContextProvider>
             </PermissionContextProvider>

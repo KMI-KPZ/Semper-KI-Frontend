@@ -213,6 +213,7 @@ const Project: React.FC<Props> = (props) => {
               ))
           )}
           <Modal
+            title="ProjectInfo"
             open={infoOpen}
             closeModal={closeInfo}
             className="flex w-full flex-col"

@@ -76,7 +76,11 @@ const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
               onClick={openEdit}
             />
           </PermissionGate>
-          <Modal open={edit} closeModal={closeEdit}>
+          <Modal
+            open={edit}
+            closeModal={closeEdit}
+            title="OrganizationInfoForm"
+          >
             <OrganizationInfoForm
               closeEdit={closeEdit}
               organizationInfo={organizationInfoQuery.data}

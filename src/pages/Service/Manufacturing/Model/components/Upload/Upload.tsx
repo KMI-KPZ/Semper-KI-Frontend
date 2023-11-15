@@ -127,6 +127,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
       />
       {formOpen ? (
         <Modal
+          title="ManufacturingModelUploadForm"
           open={formOpen}
           closeModal={closeForm}
           children={

@@ -12,7 +12,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex w-fit flex-col items-start justify-center gap-5 bg-white p-10">
+    <div className="flex h-full w-full flex-col items-start justify-center gap-5 bg-white p-5">
       <Text variant="body" className="break-all">
         {t("Projects.Project.components.Info.id")} {project.projectID}
       </Text>

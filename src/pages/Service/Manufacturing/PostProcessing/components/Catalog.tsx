@@ -101,6 +101,7 @@ const ProcessPostProcessingCatalog = <Item extends PostProcessingProps>(
             <NavigateNextIcon fontSize="large" />
           </div>
           <Modal
+            title="ProcessPostProcessingItem"
             open={modalOpen === true && itemOpen !== undefined}
             closeModal={closeItemView}
           >

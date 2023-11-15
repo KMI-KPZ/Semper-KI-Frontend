@@ -118,7 +118,7 @@ const App: React.FC = () => {
             <Route path="*" element={<Error />} />
           </Routes>
         </main>
-        <Modal open={cookieConsent === undefined} noIcon>
+        <Modal open={cookieConsent === undefined} noIcon title="CookieBanner">
           <CookieBanner
             acceptCookies={acceptCookies}
             rejectCookies={rejectCookies}

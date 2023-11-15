@@ -138,6 +138,7 @@ const Process: React.FC<Props> = (props) => {
       </PermissionGate>
       <PermissionGate element="Chat">
         <Modal
+          title="Chat"
           open={state.chatOpen}
           closeModal={closeChat}
           className="flex w-full flex-col"
@@ -152,6 +153,7 @@ const Process: React.FC<Props> = (props) => {
         </Modal>
       </PermissionGate>
       <Modal
+        title="ProcessInfo"
         open={state.infoOpen}
         closeModal={closeInfo}
         className="flex w-full flex-col"

@@ -48,6 +48,7 @@ export const Test: React.FC<Props> = (props) => {
       </Button>
       <Button title="reloadPermissions" onClick={reloadPermissions} />
       <Modal
+        title="TestRender"
         open={open}
         closeModal={closeMenu}
         className="flex w-full flex-row"

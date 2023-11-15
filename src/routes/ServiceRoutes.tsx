@@ -27,9 +27,10 @@ const ServiceRoutes: React.FC<ServiceRoutesProps> = (props) => {
   return (
     // <div className="flex w-full flex-col-reverse justify-between gap-5 md:flex-row">
     <Modal
+      title="ServiceRoutes"
       open={true}
       closeModal={closeModal}
-      className="h-full w-full  bg-white bg-opacity-80 p-10 md:max-w-7xl"
+      className="md:max-w-7xl"
     >
       <Routes>
         <Route element={<ServiceContextProvider />}>

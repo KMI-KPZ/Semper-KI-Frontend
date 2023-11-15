@@ -85,6 +85,7 @@ export const ProcessMaterial: React.FC<Props> = (props) => {
                 />
               ))}
             <Modal
+              title="ProcessMaterialPreView"
               open={state.modalOpen === true && state.material !== undefined}
               closeModal={closeMaterialView}
             >

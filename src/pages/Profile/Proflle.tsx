@@ -88,7 +88,7 @@ const Profile: React.FC<Props> = (props) => {
           {t("Profile.time.updated")}: {user.updated.toLocaleString()}
         </span>
       </Container>
-      <Modal open={edit} closeModal={closeModal}>
+      <Modal open={edit} closeModal={closeModal} title="ProfileForm">
         <ProfileForm user={user} />
       </Modal>
       <Container justify="center">

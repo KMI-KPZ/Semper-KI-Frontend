@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AddIcon from "@mui/icons-material/Add";
@@ -8,6 +8,7 @@ import { Button } from "@component-library/Button";
 import { useProject } from "@/pages/Projects/hooks/useProject";
 import useProcess, { ProcessProps } from "@/pages/Projects/hooks/useProcess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 
 interface Props {}
 
@@ -16,7 +17,7 @@ const ServiceOverview: React.FC<Props> = (props) => {
   const [open, setOpen] = useState(true);
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { projectQuery } = useProject();
+  const { projectQuery } = useContext(ProjectContext);
   const { createProcess } = useProcess();
 
   const addNewItem = () => {

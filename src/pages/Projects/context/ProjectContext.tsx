@@ -1,4 +1,4 @@
-import React, { useDebugValue } from "react";
+import React, { PropsWithChildren, useDebugValue } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Outlet } from "react-router-dom";
 import { ProjectProps, useProject } from "../hooks/useProject";
@@ -9,7 +9,7 @@ interface ProjectOutletProps {}
 
 export interface ProjectContextProps {
   project: ProjectProps;
-  queryIsRefetching: boolean;
+  projectQuery: UseQueryResult<ProjectProps, Error>;
 }
 
 export const ProjectContext = React.createContext<ProjectContextProps>({
@@ -22,7 +22,7 @@ export const ProjectContext = React.createContext<ProjectContextProps>({
     updated: new Date(),
     status: 0,
   },
-  queryIsRefetching: false,
+  projectQuery: {} as UseQueryResult<ProjectProps, Error>,
 });
 
 const ProjectContextProvider: React.FC<ProjectOutletProps> = (props) => {
@@ -37,7 +37,7 @@ const ProjectContextProvider: React.FC<ProjectOutletProps> = (props) => {
       <ProjectContext.Provider
         value={{
           project: projectQuery.data,
-          queryIsRefetching: projectQuery.isRefetching,
+          projectQuery: projectQuery,
         }}
       >
         <Outlet />

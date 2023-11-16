@@ -33,13 +33,13 @@ interface Props {
 
 const Project: React.FC<Props> = (props) => {
   const { event: projectCollectionEvent } = props;
-  const { project } = useContext(ProjectContext);
+  const { project, projectQuery } = useContext(ProjectContext);
   const { processID } = useParams();
   useScrollToProcess(processID);
 
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { projectQuery, deleteProject, updateProject } = useProject();
+  const { deleteProject, updateProject } = useProject();
   const { createProcess } = useProcess();
   const {
     checkedProcesses,
@@ -96,133 +96,124 @@ const Project: React.FC<Props> = (props) => {
   };
 
   return (
-    <LoadingSuspense query={projectQuery}>
-      {project === undefined ||
-      (project !== undefined && project.projectID === undefined) ? (
-        <LoadingAnimation />
-      ) : (
-        <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
-          <Routes>
-            <Route path="service/*" element={<ServiceRoutes />} />
-          </Routes>
-          <Container width="full" justify="between">
-            <Container direction="col" align="start">
-              <ProjectTitleForm
-                headerType="h1"
-                title={
-                  project.details.title === undefined
-                    ? t("Projects.Project.Project.title")
-                    : project.details.title
-                }
-                updateTitle={updateProjectTitle}
-              />
-            </Container>
-            <Text variant="body">
-              {t("Projects.Project.Project.state")}
-              {t(
-                `enum.ProcessStatus.${
-                  ProcessStatus[project.status] as keyof typeof ProcessStatus
-                }`
-              )}
-            </Text>
-            <Container direction="row" wrap="wrap">
-              <Button
-                variant="icon"
-                width="fit"
-                size="sm"
-                children={<InfoIcon />}
-                onClick={handleOnClickButtonInfo}
-                title={t("Projects.Project.Project.button.info")}
-              />
-              <PermissionGate element={"ProjectButtonDelete"}>
-                <Button
-                  width="fit"
-                  variant="icon"
-                  size="sm"
-                  children={<DeleteIcon />}
-                  title={t("Projects.Project.Project.button.delete")}
-                  onClick={handleOnClickDelete}
-                />
-              </PermissionGate>
-            </Container>
-          </Container>
-          <Divider />
-          <Container width="full" justify="between">
-            <Heading variant="h2">
-              {t("Projects.Project.Project.processes")}
-            </Heading>
-            <PermissionGate element={"ProjectButtonNew"}>
-              <Button
-                width="fit"
-                variant="icon"
-                size="sm"
-                startIcon={<AddIcon />}
-                onClick={onButtonClickCreateProcess}
-                title={t("Projects.Project.Project.button.new")}
-              />
-            </PermissionGate>
-          </Container>
-          {project.processes.length > 0 ? (
-            <Container justify="between" width="full">
-              <Container direction="row" wrap="wrap">
-                <label className="flex flex-row items-center justify-start gap-3">
-                  <input
-                    type="checkbox"
-                    className="h-8 w-8"
-                    onChange={handleOnChangeCheckboxSelectAll}
-                    checked={
-                      checkedProcesses.length === project.processes.length
-                    }
-                  />
-                  <Text variant="body" className="whitespace-nowrap">
-                    {t("Projects.Project.Project.selectAll")}
-                  </Text>
-                </label>
-                {checkedProcesses.length > 0 ? (
-                  <Text variant="body" className="whitespace-nowrap">
-                    {t("Projects.Project.Project.selected", {
-                      count: checkedProcesses.length,
-                    })}
-                  </Text>
-                ) : null}
-              </Container>
-              <ProjectButtons
-                project={project}
-                checkedProcesses={checkedProcesses}
-              />
-            </Container>
-          ) : null}
-          {project.processes.length === 0 ? (
-            <Heading variant="h2">
-              {t("Projects.Project.Project.noProcesses")}
-            </Heading>
-          ) : (
-            project.processes
-              .sort((processA, processB) =>
-                processA.created < processB.created ? -1 : 1
-              )
-              .map((process, index) => (
-                <Process
-                  key={index}
-                  process={process}
-                  projectID={project.projectID}
-                  projectEvent={getProjectEventItemByID(process.processID)}
-                  checked={checkedProcesses.includes(process.processID)}
-                  handleOnChangeCheckboxSelect={handleOnChangeCheckboxSelect}
-                />
-              ))
+    <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
+      {/* <Routes>
+        <Route path="service/*" element={<ServiceRoutes />} />
+      </Routes> */}
+      <Modal
+        title="ProjectInfo"
+        open={infoOpen}
+        closeModal={closeInfo}
+        className="flex w-full flex-col"
+      >
+        <ProjectInfo project={project} />
+      </Modal>
+      <Container width="full" justify="between">
+        <Container direction="col" align="start">
+          <ProjectTitleForm
+            headerType="h1"
+            title={
+              project.details.title === undefined
+                ? t("Projects.Project.Project.title")
+                : project.details.title
+            }
+            updateTitle={updateProjectTitle}
+          />
+        </Container>
+        <Text variant="body">
+          {t("Projects.Project.Project.state")}
+          {t(
+            `enum.ProcessStatus.${
+              ProcessStatus[project.status] as keyof typeof ProcessStatus
+            }`
           )}
-          <Modal
-            title="ProjectInfo"
-            open={infoOpen}
-            closeModal={closeInfo}
-            className="flex w-full flex-col"
-          >
-            <ProjectInfo project={project} />
-          </Modal>
-        </div>
+        </Text>
+        <Container direction="row" wrap="wrap">
+          <Button
+            variant="icon"
+            width="fit"
+            size="sm"
+            children={<InfoIcon />}
+            onClick={handleOnClickButtonInfo}
+            title={t("Projects.Project.Project.button.info")}
+          />
+          <PermissionGate element={"ProjectButtonDelete"}>
+            <Button
+              width="fit"
+              variant="icon"
+              size="sm"
+              children={<DeleteIcon />}
+              title={t("Projects.Project.Project.button.delete")}
+              onClick={handleOnClickDelete}
+            />
+          </PermissionGate>
+        </Container>
+      </Container>
+      <Divider />
+      <Container width="full" justify="between">
+        <Heading variant="h2">
+          {t("Projects.Project.Project.processes")}
+        </Heading>
+        <PermissionGate element={"ProjectButtonNew"}>
+          <Button
+            width="fit"
+            variant="icon"
+            size="sm"
+            startIcon={<AddIcon />}
+            onClick={onButtonClickCreateProcess}
+            title={t("Projects.Project.Project.button.new")}
+          />
+        </PermissionGate>
+      </Container>
+      {project.processes.length > 0 ? (
+        <Container justify="between" width="full">
+          <Container direction="row" wrap="wrap">
+            <label className="flex flex-row items-center justify-start gap-3">
+              <input
+                type="checkbox"
+                className="h-8 w-8"
+                onChange={handleOnChangeCheckboxSelectAll}
+                checked={checkedProcesses.length === project.processes.length}
+              />
+              <Text variant="body" className="whitespace-nowrap">
+                {t("Projects.Project.Project.selectAll")}
+              </Text>
+            </label>
+            {checkedProcesses.length > 0 ? (
+              <Text variant="body" className="whitespace-nowrap">
+                {t("Projects.Project.Project.selected", {
+                  count: checkedProcesses.length,
+                })}
+              </Text>
+            ) : null}
+          </Container>
+          <ProjectButtons
+            project={project}
+            checkedProcesses={checkedProcesses}
+          />
+        </Container>
+      ) : null}
+      {project.processes.length === 0 ? (
+        <Heading variant="h2">
+          {t("Projects.Project.Project.noProcesses")}
+        </Heading>
+      ) : (
+        project.processes
+          .sort((processA, processB) =>
+            processA.created < processB.created ? -1 : 1
+          )
+          .map((process, index) => (
+            <Process
+              key={index}
+              process={process}
+              projectID={project.projectID}
+              projectEvent={getProjectEventItemByID(process.processID)}
+              checked={checkedProcesses.includes(process.processID)}
+              handleOnChangeCheckboxSelect={handleOnChangeCheckboxSelect}
+            />
+          ))
       )}
-    </LoadingSuspense>
+    </div>
   );
 };
 

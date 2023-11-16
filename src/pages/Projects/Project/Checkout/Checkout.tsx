@@ -1,6 +1,6 @@
 import Container from "@component-library/Container";
 import { Heading } from "@component-library/Typography";
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { Button } from "@component-library/Button";
@@ -11,6 +11,7 @@ import ProjectCheckoutItem from "./components/Item";
 import logger from "@/hooks/useLogger";
 import { ProcessProps, ProcessStatus } from "../../hooks/useProcess";
 import { useProject } from "../../hooks/useProject";
+import { ProjectContext } from "../../context/ProjectContext";
 
 interface ProjectCheckoutProps {}
 
@@ -23,13 +24,13 @@ const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
   const { t } = useTranslation();
   const { sendProject } = useCheckout();
 
-  const { projectQuery } = useProject();
+  const { projectQuery: query } = useContext(ProjectContext);
   const processes: ProcessProps[] =
-    projectQuery.data !== undefined &&
-    projectQuery.data.processes.filter(
+    query.data !== undefined &&
+    query.data.processes.filter(
       (process) => process.status === ProcessStatus.VERIFIED
     ).length > 0
-      ? projectQuery.data.processes.filter(
+      ? query.data.processes.filter(
           (process) => process.status === ProcessStatus.VERIFIED
         )
       : [];
@@ -50,9 +51,9 @@ const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
   const navigate = useNavigate();
 
   const handleOnClickButtonSend = (data: CheckoutFormData) => {
-    if (projectQuery.data !== undefined) {
+    if (query.data !== undefined) {
       sendProject.mutate({
-        projectID: projectQuery.data.projectID,
+        projectID: query.data.projectID,
         processIDs: data.processes
           .filter((process) => process.checked === true)
           .map((process) => process.process.processID),

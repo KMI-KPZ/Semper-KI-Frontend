@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useVerification from "./hooks/useVerification";
 import ProcessVerificationItem from "./components/Item";
 import SendIcon from "@mui/icons-material/Send";
@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { queryByTestId } from "@testing-library/react";
 import { ProcessProps, ProcessStatus } from "../../hooks/useProcess";
 import { useProject } from "../../hooks/useProject";
+import { ProjectContext } from "../../context/ProjectContext";
 
 interface Props {}
 export interface VerifyFormData {
@@ -25,7 +26,7 @@ const ProcessVerification: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { verifyProject } = useVerification();
 
-  const { projectQuery } = useProject();
+  const { projectQuery } = useContext(ProjectContext);
   const processes: ProcessProps[] =
     projectQuery.data === undefined
       ? []

@@ -149,14 +149,13 @@ export enum ProcessStatus {
 
 interface ProcessQueryProps {
   process: ProcessProps | undefined;
-  projectQuery: UseQueryResult<ProjectProps, Error>;
+  query: UseQueryResult<ProjectProps, Error>;
 }
 
 const useProcess = (): ReturnProps => {
   const queryClient = useQueryClient();
   const { projectID: URLProjectID, processID: URLProcessID } = useParams();
-  const { project } = useContext(ProjectContext);
-  const { projectQuery } = useProject();
+  const { project, projectQuery: query } = useContext(ProjectContext);
 
   const getProcessQuery = (_processID?: string): ProcessQueryProps => {
     return {
@@ -165,7 +164,7 @@ const useProcess = (): ReturnProps => {
           process.processID ===
           (_processID === undefined ? URLProcessID : _processID)
       ),
-      projectQuery,
+      query,
     };
   };
 

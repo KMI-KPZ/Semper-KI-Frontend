@@ -34,7 +34,7 @@ const useModal = (): useModalReturnProps => {
   }, [modals]);
 
   const registerModal = (modal: string, ref: RefObject<HTMLDialogElement>) => {
-    // logger("useModal", "registerModal", modal, modals);
+    // logger("useModal", "registerModal", ref.current, modal, modals);
     setModals((prevState) => [
       ...prevState.filter((item) => item.title !== modal),
       { title: modal, ref },

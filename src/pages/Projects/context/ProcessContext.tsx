@@ -33,7 +33,7 @@ const ProcessContextProvider: React.FC<ProcessContextProviderProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { getProcessQuery } = useProcess();
-  const { process, projectQuery } = getProcessQuery();
+  const { process, query: projectQuery } = getProcessQuery();
 
   if (projectQuery.isLoading) return <LoadingAnimation />;
 

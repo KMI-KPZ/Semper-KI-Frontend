@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@component-library/Button";
@@ -13,6 +13,7 @@ import useProcess, {
 } from "../../hooks/useProcess";
 import { useProject } from "../../hooks/useProject";
 import { useForm } from "react-hook-form";
+import { ProjectContext } from "../../context/ProjectContext";
 
 interface Props {}
 
@@ -26,7 +27,7 @@ interface FormData {
 const ProjectContractorSelection: React.FC<Props> = (props) => {
   const {} = props;
   const navigate = useNavigate();
-  const { projectQuery } = useProject();
+  const { projectQuery } = useContext(ProjectContext);
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
   const { contractorsQuery } = useContractor();

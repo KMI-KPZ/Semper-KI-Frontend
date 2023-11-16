@@ -85,14 +85,14 @@ export const useProject = (): ReturnProps => {
             }),
           };
           return Project;
+        })
+        .catch((error) => {
+          logger("useProject | getProject ❌ |", error);
+          navigate("/projects");
         });
     },
     {
       enabled: projectID !== undefined,
-      onError: (error) => {
-        logger("useProject | getProject ❌ |", error);
-        navigate("/projects");
-      },
     }
   );
 

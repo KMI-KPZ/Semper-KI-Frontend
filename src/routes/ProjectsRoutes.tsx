@@ -12,6 +12,8 @@ import ProjectContractorSelection from "@/pages/Projects/Project/ContractorSelec
 import ProjectCheckout from "@/pages/Projects/Project/Checkout/Checkout";
 import ProcessVerification from "@/pages/Projects/Project/Verification/Verification";
 import ProcessContextProvider from "@/pages/Projects/context/ProcessContext";
+import { Error } from "@/pages/Error/Error";
+import RoutePermissionGate from "@/components/PermissionGate/RoutePermissionGate";
 import ServiceRoutes from "./ServiceRoutes";
 
 interface ProjectsRoutesProps {}
@@ -66,6 +68,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
           />
         </Route>
         <Route path=":processID/*" element={<ProcessContextProvider />}>
+          <Route index element={<Project />} />
           <Route element={<AuthorizedUserOutlet />}>
             <Route
               path="checkout"
@@ -92,10 +95,13 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
               }
             />
           </Route>
-          <Route path="*" element={<Project />} />
-          {/* <Route path="service/*" element={<ServiceRoutes />} /> */}
+          {/* <Route path="*" element={<Project />} /> */}
+          <Route path="service/*" element={<ServiceRoutes />} />
+          <Route path="*" element={<Error text="process" />} />
         </Route>
+        <Route path="*" element={<Error text="project" />} />
       </Route>
+      <Route path="*" element={<Error text="projects" />} />
     </Routes>
   );
 };

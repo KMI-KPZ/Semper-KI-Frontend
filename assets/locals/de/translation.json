@@ -736,7 +736,12 @@
   "Projects": {
     "components": {
       "Table": {
+        "label": {
+          "selectProject": "Projekt {{name}} auswählen",
+          "selectAllProjects": "Alle Projekte auswählen"
+        },
         "deleteConfirm": "Möchten Sie das Projekt wirklich löschen?",
+        "deleteSelectedConfirm": "Möchten alle ausgewählte Projekt wirklich löschen?",
         "grouping": "Gruppierung",
         "name": "Name",
         "status": "Status",
@@ -746,6 +751,7 @@
         "actions": "Aktionen",
         "noItems": "keine Aufträge",
         "button": {
+          "deleteSelected": "Ausgewählte Löschen",
           "delete": "Löschen",
           "edit": "Bearbeiten",
           "detail": "Details"

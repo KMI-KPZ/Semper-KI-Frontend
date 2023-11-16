@@ -25,16 +25,13 @@ import ProcessStatusButtons from "./components/StatusButtons";
 import { Upload } from "@/components/Upload";
 import { UserProps } from "@/hooks/useUser";
 import { UserContext } from "@/contexts/UserContextProvider";
+import useCheckedProcesses from "../hooks/useCheckedProcesses";
 
 interface Props {
   process: ProcessProps;
   projectID: string;
   projectEvent?: ProjectEventItem;
   checked: boolean;
-  handleOnChangeCheckboxSelect: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    processID: string
-  ) => void;
 }
 
 export interface ProcessComponentState {
@@ -43,19 +40,14 @@ export interface ProcessComponentState {
 }
 
 const Process: React.FC<Props> = (props) => {
-  const {
-    process,
-    projectID,
-    projectEvent,
-    checked,
-    handleOnChangeCheckboxSelect,
-  } = props;
+  const { process, projectID, projectEvent, checked } = props;
   const { user } = useContext(UserContext);
   const { t } = useTranslation();
   const [state, setState] = useState<ProcessComponentState>({
     chatOpen: false,
     infoOpen: false,
   });
+  const { handleOnChangeCheckboxSelect } = useCheckedProcesses();
 
   const { updateProcessWithProcessID, uploadFiles } = useProcess();
 
@@ -104,8 +96,13 @@ const Process: React.FC<Props> = (props) => {
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row lg:justify-between">
         <Container direction="row" gap={3} className="flex-wrap md:flex-nowrap">
           <input
+            id="selectProcess"
             type="checkbox"
             className="h-6 w-6"
+            name={t("Projects.Project.Project.label.selectProcess")}
+            value={t("Projects.Project.Process.Process.label.selectProcess", {
+              name: process.details.title,
+            })}
             checked={checked}
             onChange={(e) => handleOnChangeCheckboxSelect(e, process.processID)}
           />

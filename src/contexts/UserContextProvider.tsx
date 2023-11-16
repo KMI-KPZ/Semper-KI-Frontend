@@ -1,6 +1,12 @@
 import useUser, { UserProps } from "@/hooks/useUser";
 import { AppLoadingSuspense } from "@component-library/Loading";
-import React, { PropsWithChildren, createContext } from "react";
+import { userInfo } from "os";
+import React, {
+  Dispatch,
+  PropsWithChildren,
+  createContext,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 interface UserContextProviderProps {}
@@ -19,13 +25,25 @@ const UserContextProvider: React.FC<
   PropsWithChildren<UserContextProviderProps>
 > = (props) => {
   const { children } = props;
-  const { loadIsLoggedInQuery, loadUserQuery, deleteUser } = useUser();
+  const { loadIsLoggedInQuery, userQuery, deleteUser } = useUser();
 
   const isLoggedInIsLoaded: boolean =
     loadIsLoggedInQuery.isFetched && loadIsLoggedInQuery.data !== undefined;
 
-  return isLoggedInIsLoaded ? (
-    <UserContext.Provider value={{ user: loadUserQuery.data, deleteUser }}>
+  const userIsLoaded: boolean =
+    isLoggedInIsLoaded &&
+    ((loadIsLoggedInQuery.data === true &&
+      userQuery.isFetched &&
+      userQuery.data !== undefined) ||
+      loadIsLoggedInQuery.data === false);
+
+  return isLoggedInIsLoaded && userIsLoaded ? (
+    <UserContext.Provider
+      value={{
+        user: userQuery.data,
+        deleteUser,
+      }}
+    >
       {children}
     </UserContext.Provider>
   ) : (

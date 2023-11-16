@@ -14,6 +14,10 @@ import useProcess, {
 import { useProject } from "../../hooks/useProject";
 import { useForm } from "react-hook-form";
 import { ProjectContext } from "../../context/ProjectContext";
+import ProcessInfoCard from "../components/ProcessInfoCard";
+import Container from "@component-library/Container";
+import useCheckedProcesses from "../hooks/useCheckedProcesses";
+import { twMerge } from "tailwind-merge";
 
 interface Props {}
 
@@ -27,12 +31,11 @@ interface FormData {
 const ProjectContractorSelection: React.FC<Props> = (props) => {
   const {} = props;
   const navigate = useNavigate();
-  const { projectQuery } = useContext(ProjectContext);
+  const { project, checkedProcesses } = useContext(ProjectContext);
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
   const { contractorsQuery } = useContractor();
   const { updateProcessWithProcessID } = useProcess();
-  const { processID } = useParams();
 
   const {
     register,
@@ -41,9 +44,9 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   } = useForm<FormData>({
     defaultValues: async () => ({
       processes:
-        projectQuery.data === undefined
+        project.processes.length === 0
           ? []
-          : projectQuery.data.processes
+          : project.processes
               .filter((process) => isServiceComplete(process.service))
               .map((process) => {
                 return {
@@ -55,26 +58,28 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   });
 
   const onSubmit = (data: FormData) => {
-    data.processes.forEach((process, index, allProcesses) => {
-      updateProcessWithProcessID.mutate(
-        {
-          processID: process.process.processID,
-          updates: {
-            changes: {
-              status: ProcessStatus.CONTRACTOR_SELECTED,
-              contractor: [process.contractorID],
+    data.processes
+      .filter((process) => checkedProcesses.includes(process.process.processID))
+      .forEach((process, index, allProcesses) => {
+        updateProcessWithProcessID.mutate(
+          {
+            processID: process.process.processID,
+            updates: {
+              changes: {
+                status: ProcessStatus.CONTRACTOR_SELECTED,
+                contractor: [process.contractorID],
+              },
             },
           },
-        },
-        {
-          onSuccess: () => {
-            if (index === allProcesses.length - 1) {
-              navigate("../..");
-            }
-          },
-        }
-      );
-    });
+          {
+            onSuccess: () => {
+              if (index === allProcesses.length - 1) {
+                navigate("../..");
+              }
+            },
+          }
+        );
+      });
   };
 
   return (
@@ -85,49 +90,67 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
         </Heading>
       </div>
       <div className="flex w-full flex-col items-center justify-start gap-5">
-        {projectQuery.data !== undefined &&
-        projectQuery.data.processes.length > 0
-          ? projectQuery.data.processes
-              .filter((process) => isServiceComplete(process.service))
+        {project.processes.length > 0
+          ? project.processes
+              .filter(
+                (process) =>
+                  isServiceComplete(process.service) &&
+                  process.status === ProcessStatus.SERVICE_READY
+              )
               .map((process, index) => (
-                <label
+                <div
                   key={index}
-                  className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5 md:flex-row"
+                  className={twMerge(
+                    `flex w-full flex-col items-center justify-center gap-20  p-5 md:flex-row md:items-start md:justify-between`,
+                    checkedProcesses.includes(process.processID)
+                      ? "bg-white"
+                      : "bg-slate-100"
+                  )}
                 >
-                  <Text variant="body">{process.details.title}</Text>
-                  <Text variant="body">
-                    {ServiceType[process.service.type]}
-                  </Text>
-                  <div className="flex grow flex-row items-center justify-center gap-5">
+                  <ProcessInfoCard process={process} />
+                  <Container
+                    direction="col"
+                    className="grow md:max-w-2xl md:items-start md:justify-start"
+                  >
+                    <Heading variant="h2">
+                      {t(
+                        "Projects.Project.ContractorSelection.ContractorSelection.contractor"
+                      )}
+                    </Heading>
                     {contractorsQuery.data !== undefined &&
                     contractorsQuery.data.length > 0 ? (
                       contractorsQuery.data.map((manufacturer, _index) => (
                         <label
-                          className="flex flex-row items-center justify-center gap-5 p-3 shadow-card"
+                          className="flex w-full flex-row items-center justify-center gap-5 p-3 shadow-card"
                           key={_index}
                         >
-                          <Text variant="body">{manufacturer.name}</Text>
                           <input
                             type="radio"
                             {...register(`processes.${index}.contractorID`, {
-                              required: true,
+                              required: checkedProcesses.includes(
+                                process.processID
+                              ),
+                              disabled: !checkedProcesses.includes(
+                                process.processID
+                              ),
                             })}
                             value={manufacturer.id}
                           />
+                          <Text variant="body">{manufacturer.name}</Text>
                         </label>
                       ))
                     ) : (
                       <Text variant="body">No manufacturers found</Text>
                     )}
-                  </div>
-                  {errors.processes?.[index]?.contractorID ? (
-                    <Text variant="body" className="text-red-500">
-                      {t(
-                        "Projects.Project.ContractorSelection.ContractorSelection.error.missing"
-                      )}
-                    </Text>
-                  ) : null}
-                </label>
+                    {errors.processes?.[index]?.contractorID ? (
+                      <Text variant="body" className="text-red-500">
+                        {t(
+                          "Projects.Project.ContractorSelection.ContractorSelection.error.missing"
+                        )}
+                      </Text>
+                    ) : null}
+                  </Container>
+                </div>
               ))
           : null}
       </div>

@@ -6,10 +6,10 @@ import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 
 const useServiceEdit = () => {
   const { service } = useContext(ServiceContext);
-  const { queryIsRefetching } = useContext(ProjectContext);
+  const { projectQuery } = useContext(ProjectContext);
   const navigate = useNavigate();
   useEffect(() => {
-    if (!queryIsRefetching)
+    if (!projectQuery.isRefetching && projectQuery.isFetched)
       if (service === undefined) navigate("service");
       else
         switch (service.type) {
@@ -23,7 +23,7 @@ const useServiceEdit = () => {
             navigate("..");
             break;
         }
-  }, [service, queryIsRefetching]);
+  }, [service, projectQuery]);
 };
 
 export default useServiceEdit;

@@ -12,6 +12,7 @@ import { UserContext } from "@/contexts/UserContextProvider";
 import useStatusButtons from "../../hooks/useStatusButtons";
 import { StatusButtonProps } from "../../components/StatusButtonData";
 import useService from "@/pages/Service/hooks/useService";
+import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 
 interface ProcessStatusButtonsProps {
   projectID: string;
@@ -21,9 +22,9 @@ interface ProcessStatusButtonsProps {
 
 const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { state, process, projectID } = props;
+  const { setCheckedProcesses } = useContext(ProjectContext);
   const { t } = useTranslation();
-  const { isServiceComplete } = useService();
-  const { updateProcessWithProcessID, getCurrentProcess } = useProcess();
+  const { updateProcessWithProcessID } = useProcess();
   const { user } = useContext(UserContext);
   const { getProcessStatusButtons } = useStatusButtons();
   const navigate = useNavigate();
@@ -54,6 +55,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   };
 
   const handleOnClickButton = (button: StatusButtonProps) => {
+    setCheckedProcesses([process.processID]);
     switch (button.title) {
       case "EDIT":
         navigate(calcPath("service/edit"));

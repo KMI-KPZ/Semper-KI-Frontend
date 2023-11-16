@@ -13,7 +13,6 @@ import ProjectCheckout from "@/pages/Projects/Project/Checkout/Checkout";
 import ProcessVerification from "@/pages/Projects/Project/Verification/Verification";
 import ProcessContextProvider from "@/pages/Projects/context/ProcessContext";
 import { Error } from "@/pages/Error/Error";
-import RoutePermissionGate from "@/components/PermissionGate/RoutePermissionGate";
 import ServiceRoutes from "./ServiceRoutes";
 
 interface ProjectsRoutesProps {}
@@ -95,7 +94,6 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
               }
             />
           </Route>
-          {/* <Route path="*" element={<Project />} /> */}
           <Route path="service/*" element={<ServiceRoutes />} />
           <Route path="*" element={<Error text="process" />} />
         </Route>

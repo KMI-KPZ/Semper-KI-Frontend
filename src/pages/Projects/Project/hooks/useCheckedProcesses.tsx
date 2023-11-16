@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ProjectProps } from "../../hooks/useProject";
+import { ProjectContext } from "../../context/ProjectContext";
 
 interface useCheckedProcessesReturnProps {
   checkedProcesses: string[];
@@ -12,10 +13,9 @@ interface useCheckedProcessesReturnProps {
   ) => void;
 }
 
-const useCheckedProcesses = (
-  project: ProjectProps | undefined
-): useCheckedProcessesReturnProps => {
-  const [checkedProcesses, setCheckedProcesses] = useState<string[]>([]);
+const useCheckedProcesses = (): useCheckedProcessesReturnProps => {
+  const { project, checkedProcesses, setCheckedProcesses } =
+    useContext(ProjectContext);
 
   const handleOnChangeCheckboxSelect = (
     e: React.ChangeEvent<HTMLInputElement>,

@@ -1,4 +1,9 @@
-import React, { PropsWithChildren, useDebugValue } from "react";
+import React, {
+  Dispatch,
+  PropsWithChildren,
+  useDebugValue,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Outlet } from "react-router-dom";
 import { ProjectProps, useProject } from "../hooks/useProject";
@@ -10,6 +15,8 @@ interface ProjectOutletProps {}
 export interface ProjectContextProps {
   project: ProjectProps;
   projectQuery: UseQueryResult<ProjectProps, Error>;
+  checkedProcesses: string[];
+  setCheckedProcesses: Dispatch<React.SetStateAction<string[]>>;
 }
 
 export const ProjectContext = React.createContext<ProjectContextProps>({
@@ -23,12 +30,15 @@ export const ProjectContext = React.createContext<ProjectContextProps>({
     status: 0,
   },
   projectQuery: {} as UseQueryResult<ProjectProps, Error>,
+  checkedProcesses: [],
+  setCheckedProcesses: () => {},
 });
 
 const ProjectContextProvider: React.FC<ProjectOutletProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { projectQuery } = useProject();
+  const [checkedProcesses, setCheckedProcesses] = useState<string[]>([]);
 
   if (projectQuery.isLoading) return <LoadingAnimation />;
 
@@ -38,6 +48,8 @@ const ProjectContextProvider: React.FC<ProjectOutletProps> = (props) => {
         value={{
           project: projectQuery.data,
           projectQuery: projectQuery,
+          checkedProcesses,
+          setCheckedProcesses,
         }}
       >
         <Outlet />

@@ -7,7 +7,7 @@ import logger from "./useLogger";
 
 interface ReturnProps {
   loadIsLoggedInQuery: UseQueryResult<boolean, Error>;
-  loadUserQuery: UseQueryResult<UserProps, Error>;
+  userQuery: UseQueryResult<UserProps, Error>;
   deleteUser(): void;
   updateUserDetails(details: UserDetailsProps): void;
 }
@@ -60,7 +60,7 @@ const useUser = (): ReturnProps => {
     enabled: CSRFTokenIsLoaded(),
   });
 
-  const loadUserQuery = useQuery<UserProps, Error>({
+  const userQuery = useQuery<UserProps, Error>({
     queryKey: ["user"],
     queryFn: async () => {
       return getCustomAxios()
@@ -112,7 +112,7 @@ const useUser = (): ReturnProps => {
 
   return {
     loadIsLoggedInQuery,
-    loadUserQuery,
+    userQuery,
     deleteUser,
     updateUserDetails,
   };

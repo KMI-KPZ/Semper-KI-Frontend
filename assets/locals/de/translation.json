@@ -785,6 +785,14 @@
         }
       },
       "components": {
+        "ProcessInfoCard": {
+          "title": "Prozessinformationen",
+          "name": "Name:",
+          "service": "Service:",
+          "model": "Modell:",
+          "material": "Material:",
+          "postProcessing": "Nachbearbeitung:"
+        },
         "Buttons": {
           "button": {
             "new": "Neuer Teilauftrag",
@@ -818,6 +826,7 @@
           "useContractor": {}
         },
         "ContractorSelection": {
+          "contractor": "Auftagnehmer",
           "title": "Auftagnehmer auswählen",
           "error": {
             "missing": "Bitte wählen Sie einen Auftragnehmer aus"
@@ -918,7 +927,7 @@
               "buttons": {
                 "modelPreView": "Modell Vorschau"
               },
-              "noModel": "kein Modell vorhanden"
+              "noModel": "keine Modellvorschau vorhanden"
             },
             "Modelling": {
               "title": "Modell entwerfen lasssen"
@@ -948,7 +957,11 @@
             "finished": "Abgeschlossen"
           }
         },
-        "Process": {}
+        "Process": {
+          "label": {
+            "selectProcess": "Prozess {{name}} auswählen"
+          }
+        }
       },
       "Verification": {
         "components": {
@@ -975,6 +988,10 @@
         "processes": "Prozesse:",
         "noProcesses": "Keine Teilaufträge vorhanden",
         "selectAll": "Alle auswählen",
+        "label": {
+          "selectProcess": "Prozess auswählen",
+          "selectAllProcesses": "Alle Prozesse auswählen"
+        },
         "confirm": {
           "delete": "Projekt wirklich löschen?"
         },

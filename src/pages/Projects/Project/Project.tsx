@@ -41,11 +41,8 @@ const Project: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const { deleteProject, updateProject } = useProject();
   const { createProcess } = useProcess();
-  const {
-    checkedProcesses,
-    handleOnChangeCheckboxSelect,
-    handleOnChangeCheckboxSelectAll,
-  } = useCheckedProcesses(projectQuery.data);
+  const { checkedProcesses, handleOnChangeCheckboxSelectAll } =
+    useCheckedProcesses();
   const [infoOpen, setInfoOpen] = useState<boolean>(false);
 
   const handleOnClickDelete = () => {
@@ -168,11 +165,17 @@ const Project: React.FC<Props> = (props) => {
       {project.processes.length > 0 ? (
         <Container justify="between" width="full">
           <Container direction="row" wrap="wrap">
-            <label className="flex flex-row items-center justify-start gap-3">
+            <label
+              className="flex flex-row items-center justify-start gap-3"
+              htmlFor="selectAllProcesses"
+            >
               <input
                 type="checkbox"
                 className="h-8 w-8"
                 onChange={handleOnChangeCheckboxSelectAll}
+                id="selectAllProcesses"
+                name={t("Projects.Project.Project.label.selectProcess")}
+                value={t("Projects.Project.Project.label.selectAllProcesses")}
                 checked={checkedProcesses.length === project.processes.length}
               />
               <Text variant="body" className="whitespace-nowrap">
@@ -209,7 +212,6 @@ const Project: React.FC<Props> = (props) => {
               projectID={project.projectID}
               projectEvent={getProjectEventItemByID(process.processID)}
               checked={checkedProcesses.includes(process.processID)}
-              handleOnChangeCheckboxSelect={handleOnChangeCheckboxSelect}
             />
           ))
       )}

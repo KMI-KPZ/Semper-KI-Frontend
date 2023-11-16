@@ -172,6 +172,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
   };
 
   const getTitle = (): string => {
+    if (title !== undefined && children === undefined) return "";
     if (title !== undefined) return title;
     if (typeof children === "string") return children;
     return "";

@@ -91,6 +91,7 @@ export const Test: React.FC<Props> = (props) => {
           {testDynamicQuery.data !== undefined
             ? testDynamicQuery.data.map((item, index) => (
                 <Button
+                  key={index}
                   variant="icon"
                   title={item.title}
                   onClick={() => handleOnButtonClick(item)}

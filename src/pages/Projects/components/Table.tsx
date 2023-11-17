@@ -14,6 +14,8 @@ import { useProject } from "../hooks/useProject";
 
 interface ProjectsTableProps {
   flatProjects: FlatProjectProps[];
+  selectedProjects: string[];
+  setSelectedProjects: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 interface ProjectsTableGroupingsProps {
@@ -46,10 +48,9 @@ interface ProjectsTableGroupProps {
 }
 
 const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
-  const { flatProjects } = props;
+  const { flatProjects, selectedProjects, setSelectedProjects } = props;
   const { t } = useTranslation();
   const { deleteProject } = useProject();
-  const [checkedProjects, setCheckedProjects] = React.useState<string[]>([]);
 
   const handleOnClickButtonDelete = (projectID: string) => {
     window.confirm(t("Projects.components.Table.deleteConfirm")) === true
@@ -57,25 +58,14 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
       : logger("delete canceled");
   };
 
-  const handleOnClickButtonDeleteSelected = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    if (
-      window.confirm(t("Projects.components.Table.deleteSelectedConfirm")) ===
-      true
-    ) {
-      checkedProjects.forEach((projectID) => deleteProject.mutate(projectID));
-    } else logger("delete canceled");
-  };
-
   const handleOnChangeCheckboxSelectAll = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const checked = e.target.checked;
     if (checked) {
-      setCheckedProjects(flatProjects.map((project) => project.projectID));
+      setSelectedProjects(flatProjects.map((project) => project.projectID));
     } else {
-      setCheckedProjects([]);
+      setSelectedProjects([]);
     }
   };
 
@@ -85,10 +75,10 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
   ) => {
     const checked = e.target.checked;
     if (checked) {
-      setCheckedProjects([...checkedProjects, projectID]);
+      setSelectedProjects([...selectedProjects, projectID]);
     } else {
-      setCheckedProjects(
-        checkedProjects.filter(
+      setSelectedProjects(
+        selectedProjects.filter(
           (checkedProjectID) => checkedProjectID !== projectID
         )
       );
@@ -137,27 +127,16 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
 
   return (
     <Container className="overflow-auto" width="full" direction="col">
-      {checkedProjects.length > 0 ? (
-        <Container justify="end" width="full">
-          <Button
-            variant="icon"
-            size="sm"
-            startIcon={<DeleteIcon />}
-            onClick={handleOnClickButtonDeleteSelected}
-            title={t("Projects.components.Table.button.deleteSelected")}
-          />
-        </Container>
-      ) : null}
       <div className="w-full">
         <table aria-label="simple table" className="w-full table-auto">
           <thead className="">
             <tr className="border-b">
-              <th className="p-3 md:pb-3">
+              <th className="p-3 ">
                 <Text variant="strong">
                   {t("Projects.components.Table.grouping")}
                 </Text>
               </th>
-              <th className="p-3 text-left md:pb-3">
+              <th className="p-3 text-left">
                 <input
                   type="checkbox"
                   className="h-6 w-6"
@@ -165,35 +144,35 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
                   id="selectAllProjects"
                   name={t("Projects.components.Table.label.selectAllProjects")}
                   value={t("Projects.components.Table.label.selectAllProjects")}
-                  checked={checkedProjects.length === flatProjects.length}
+                  checked={selectedProjects.length === flatProjects.length}
                 />
               </th>
-              <th className="p-3 text-left md:pb-3">
+              <th className="p-3 text-left ">
                 <Text variant="strong">
                   {t("Projects.components.Table.name")}
                 </Text>
               </th>
-              <th className="p-3 text-left md:pb-3">
+              <th className="hidden p-3 text-left md:table-cell ">
                 <Text variant="strong">
                   {t("Projects.components.Table.status")}
                 </Text>
               </th>
-              <th className="p-3 text-left md:pb-3">
+              <th className="p-3 text-left ">
                 <Text variant="strong">
                   {t("Projects.components.Table.count")}
                 </Text>
               </th>
-              <th className="p-3 text-left md:pb-3">
+              <th className="hidden p-3 text-left md:table-cell ">
                 <Text variant="strong" className="whitespace-nowrap">
                   {t("Projects.components.Table.created")}
                 </Text>
               </th>
-              <th className="p-3 text-left md:pb-3">
+              <th className="p-3 text-left ">
                 <Text variant="strong" className="whitespace-nowrap">
                   {t("Projects.components.Table.updated")}
                 </Text>
               </th>
-              <th className="p-3 md:pb-3">
+              <th className="p-3 ">
                 <Text variant="strong">
                   {t("Projects.components.Table.actions")}
                 </Text>
@@ -249,7 +228,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
                               name: flatProject.projectID,
                             }
                           )}
-                          checked={checkedProjects.includes(
+                          checked={selectedProjects.includes(
                             flatProject.projectID
                           )}
                           onChange={(e) =>
@@ -265,7 +244,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
                           ? `Auftrag: #${flatProject.projectID}`
                           : flatProject.details.title}
                       </td>
-                      <td className="p-3 md:py-3">
+                      <td className="hidden p-3 md:table-cell md:py-3">
                         {t(
                           `enum.ProcessStatus.${
                             ProcessStatus[
@@ -277,7 +256,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
                       <td className="p-3 md:py-3">
                         {flatProject.processesCount}
                       </td>
-                      <td className="p-3 md:py-3">
+                      <td className="hidden p-3 md:table-cell md:py-3">
                         {flatProject.created.toLocaleDateString()}
                       </td>
                       <td className="p-3 md:py-3">

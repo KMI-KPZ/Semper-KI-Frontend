@@ -68,7 +68,7 @@ const App: React.FC = () => {
         data-testid="app"
       >
         <Header />
-        <main className="flex w-full max-w-screen-2xl flex-grow flex-col items-center justify-start gap-5 bg-slate-200 bg-opacity-80 p-5 xl:w-5/6">
+        <main className="flex w-full max-w-screen-2xl flex-grow flex-col items-center justify-start gap-5 bg-slate-200 bg-opacity-80 p-5 ">
           <Breadcrumb />
           <Routes data-testid="routes">
             <Route index element={<Home />} />

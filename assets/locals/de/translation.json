@@ -741,7 +741,7 @@
           "selectAllProjects": "Alle Projekte auswählen"
         },
         "deleteConfirm": "Möchten Sie das Projekt wirklich löschen?",
-        "deleteSelectedConfirm": "Möchten alle ausgewählte Projekt wirklich löschen?",
+
         "grouping": "Gruppierung",
         "name": "Name",
         "status": "Status",
@@ -751,7 +751,6 @@
         "actions": "Aktionen",
         "noItems": "keine Aufträge",
         "button": {
-          "deleteSelected": "Ausgewählte Löschen",
           "delete": "Löschen",
           "edit": "Bearbeiten",
           "detail": "Details"
@@ -855,6 +854,7 @@
           "DELETE": "Löschen",
           "CONTRACTOR_SELECTED": "Auftragnehmer auswählen",
           "VERIFYING": "Überprüfen",
+          "VERIFYING_AND_REQUESTED": "Überprüfen und automatisch Anfragen",
           "REQUESTED": "Anfragen",
           "CLARIFICATION": "Rückfragen",
           "CONFIRMED_BY_CONTRACTOR": "Angebot erstellen",
@@ -1012,7 +1012,11 @@
       "title": "Meine Projekte",
       "orga": "Eingegangene Projekte",
       "empty": "keine Projekte angelegt",
-      "button": { "create": "Projekt anlegen" }
+      "deleteSelectedConfirm": "Möchten alle ausgewählte Projekt wirklich löschen?",
+      "button": {
+        "create": "Projekt anlegen",
+        "deleteSelected": "Ausgewählte Projekte Löschen"
+      }
     }
   },
   "Redirect": {},

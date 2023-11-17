@@ -14,11 +14,13 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import TaskIcon from "@mui/icons-material/Task";
 import ReplayIcon from "@mui/icons-material/Replay";
 import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
+import ScheduleSendIcon from "@mui/icons-material/ScheduleSend";
 
 export type StatusButtonTitleType =
   | "EDIT"
   | "DELETE"
   | "CONTRACTOR_SELECTED"
+  | "VERIFYING_AND_REQUESTED"
   | "VERIFYING"
   | "REQUESTED"
   | "CLARIFICATION"
@@ -72,6 +74,12 @@ export const StatusButtonData: StatusButtonProps[] = [
   {
     title: "VERIFYING",
     icon: <TroubleshootIcon />,
+    user: UserType.USER,
+    allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
+  },
+  {
+    title: "VERIFYING_AND_REQUESTED",
+    icon: <ScheduleSendIcon />,
     user: UserType.USER,
     allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
   },

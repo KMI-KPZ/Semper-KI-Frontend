@@ -13,6 +13,7 @@ import useStatusButtons from "../../hooks/useStatusButtons";
 import { StatusButtonProps } from "../../components/StatusButtonData";
 import useService from "@/pages/Service/hooks/useService";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
+import useVerification from "../../Verification/hooks/useVerification";
 
 interface ProcessStatusButtonsProps {
   projectID: string;
@@ -28,6 +29,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { user } = useContext(UserContext);
   const { getProcessStatusButtons } = useStatusButtons();
   const navigate = useNavigate();
+  const { verifyProject } = useVerification();
 
   const shouldRenderFor = (type: "CLIENT" | "CONTRACTOR"): boolean => {
     return (
@@ -64,6 +66,23 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
         break;
       case "REPROJECT":
         break;
+      case "VERIFYING":
+        verifyProject.mutate({
+          projectID: projectID,
+          processIDs: [process.processID],
+          send: false,
+        });
+        break;
+      case "VERIFYING_AND_REQUESTED":
+        verifyProject.mutate({
+          projectID: projectID,
+          processIDs: [process.processID],
+          send: true,
+        });
+        break;
+      case "REQUESTED":
+        onClickButton(ProcessStatus.REQUESTED);
+        break;
       case "CLARIFICATION":
         onClickButton(ProcessStatus.CLARIFICATION);
         break;
@@ -90,12 +109,6 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
         break;
       case "PRODUCTION":
         onClickButton(ProcessStatus.PRODUCTION);
-        break;
-      case "REQUESTED":
-        onClickButton(ProcessStatus.REQUESTED);
-        break;
-      case "VERIFYING":
-        onClickButton(ProcessStatus.VERIFYING);
         break;
     }
   };

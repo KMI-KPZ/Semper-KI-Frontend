@@ -9,17 +9,29 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { UserProps, UserType } from "@/hooks/useUser";
 import { useProject } from "./hooks/useProject";
 import { UserContext } from "@/contexts/UserContextProvider";
+import DeleteIcon from "@mui/icons-material/Delete";
+import logger from "@/hooks/useLogger";
+import Container from "@component-library/Container";
 
 interface ProjectsProps {}
 
 const Projects: React.FC<ProjectsProps> = (props) => {
   const { t } = useTranslation();
   const { flatProjectsQuery } = useFlatProjects();
-  const { createProject } = useProject();
+  const { createProject, deleteProject } = useProject();
   const { user } = useContext(UserContext);
+  const [selectedProjects, setSelectedProjects] = React.useState<string[]>([]);
 
   const onButtonClickCreateProject = () => {
     createProject.mutate();
+  };
+
+  const handleOnClickButtonDeleteSelected = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    if (window.confirm(t("Projects.Projects.deleteSelectedConfirm")) === true) {
+      selectedProjects.forEach((projectID) => deleteProject.mutate(projectID));
+    } else logger("delete canceled");
   };
 
   const sortProjectByUpdatedDate = (
@@ -39,6 +51,8 @@ const Projects: React.FC<ProjectsProps> = (props) => {
     flatProjectsQuery.data !== undefined &&
     flatProjectsQuery.data.length > 0 ? (
       <ProjectsTable
+        selectedProjects={selectedProjects}
+        setSelectedProjects={setSelectedProjects}
         flatProjects={
           user !== undefined && user.usertype === UserType.ORGANIZATION
             ? flatProjectsQuery.data
@@ -60,6 +74,8 @@ const Projects: React.FC<ProjectsProps> = (props) => {
       (project) => !user.organizations.includes(project.client)
     ).length > 0 ? (
       <ProjectsTable
+        selectedProjects={selectedProjects}
+        setSelectedProjects={setSelectedProjects}
         flatProjects={flatProjectsQuery.data
           .filter((project) => !user.organizations.includes(project.client))
           .sort(sortProjectByUpdatedDate)}
@@ -72,12 +88,25 @@ const Projects: React.FC<ProjectsProps> = (props) => {
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
       <div className="flex w-full flex-col gap-2 md:flex-row md:justify-between">
         <Heading variant="h1">{t("Projects.Projects.title")}</Heading>
-        <PermissionGate element={"ProjectsButtonNew"}>
-          <Button
-            title={t("Projects.Projects.button.create")}
-            onClick={onButtonClickCreateProject}
-          />
-        </PermissionGate>
+        <Container className="md:justify-end">
+          {selectedProjects.length > 0 ? (
+            <PermissionGate element={"ProjectsButtonDeleteSelected"}>
+              <Button
+                variant="icon"
+                size="sm"
+                startIcon={<DeleteIcon />}
+                onClick={handleOnClickButtonDeleteSelected}
+                title={t("Projects.Projects.button.deleteSelected")}
+              />
+            </PermissionGate>
+          ) : null}
+          <PermissionGate element={"ProjectsButtonNew"}>
+            <Button
+              title={t("Projects.Projects.button.create")}
+              onClick={onButtonClickCreateProject}
+            />
+          </PermissionGate>
+        </Container>
       </div>
       <LoadingSuspense query={flatProjectsQuery}>
         {renderClientProjects()}

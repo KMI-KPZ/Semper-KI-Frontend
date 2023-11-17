@@ -147,21 +147,6 @@ const Project: React.FC<Props> = (props) => {
         </Container>
       </Container>
       <Divider />
-      <Container width="full" justify="between">
-        <Heading variant="h2">
-          {t("Projects.Project.Project.processes")}
-        </Heading>
-        <PermissionGate element={"ProjectButtonNew"}>
-          <Button
-            width="fit"
-            variant="icon"
-            size="sm"
-            startIcon={<AddIcon />}
-            onClick={onButtonClickCreateProcess}
-            title={t("Projects.Project.Project.button.new")}
-          />
-        </PermissionGate>
-      </Container>
       {project.processes.length > 0 ? (
         <Container justify="between" width="full">
           <Container direction="row" wrap="wrap">
@@ -190,10 +175,21 @@ const Project: React.FC<Props> = (props) => {
               </Text>
             ) : null}
           </Container>
-          <ProjectButtons
-            project={project}
-            checkedProcesses={checkedProcesses}
-          />
+          <Container direction="row" wrap="wrap">
+            <ProjectButtons
+              project={project}
+              checkedProcesses={checkedProcesses}
+            />
+            <PermissionGate element={"ProjectButtonNew"}>
+              <Button
+                variant="icon"
+                size="sm"
+                startIcon={<AddIcon />}
+                onClick={onButtonClickCreateProcess}
+                title={t("Projects.Project.Project.button.new")}
+              />
+            </PermissionGate>
+          </Container>
         </Container>
       ) : null}
       {project.processes.length === 0 ? (

@@ -86,7 +86,7 @@ export const Test: React.FC<Props> = (props) => {
       <LoadingSuspense query={testDynamicQuery}>
         <Container
           direction="row"
-          className="overflow-clip rounded-xl border-2 p-5"
+          className="max-w-4xl flex-wrap overflow-clip rounded-xl border-2 p-5"
         >
           {testDynamicQuery.data !== undefined
             ? testDynamicQuery.data.map((item, index) => (

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { ReactNode, useContext, useState } from "react";
 import { Button } from "@component-library/Button";
 import Modal from "@component-library/Modal";
 import Bubbles1IMG from "../../../assets/images/Bubbles1_Trans.png";
@@ -10,15 +10,20 @@ import { Heading } from "@component-library/Typography";
 import TestRender from "./TestRender";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import SaveIcon from "@mui/icons-material/Save";
-import useTest from "./hooks/useTest";
+import useTest, { TestDynamicProps } from "./hooks/useTest";
 import { EventContext } from "@/contexts/EventContextProvider";
 import { PermissionContext } from "@/contexts/PermissionContextProvider";
+import { LoadingAnimation, LoadingSuspense } from "@component-library/Loading";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 interface Props {}
 export const Test: React.FC<Props> = (props) => {
   const { socket, events } = useContext(EventContext);
   const [open, setOpen] = useState(false);
   const { reloadPermissions } = useContext(PermissionContext);
-  const { saveProjectsQuery } = useTest();
+  const { saveProjectsQuery, testDynamicQuery, dynamicButtonMutation } =
+    useTest();
   const openMenu = () => {
     setOpen(true);
   };
@@ -30,6 +35,21 @@ export const Test: React.FC<Props> = (props) => {
   };
   const handleOnClickButtonSave = () => {
     saveProjectsQuery.mutate();
+  };
+
+  const handleOnButtonClick = (props: TestDynamicProps) => {
+    dynamicButtonMutation.mutate(props);
+  };
+
+  const getButtonIcon = (icon: string): ReactNode => {
+    switch (icon) {
+      case "Edit":
+        return <EditIcon />;
+      case "Delete":
+        return <DeleteIcon />;
+      default:
+        return;
+    }
   };
 
   return (
@@ -63,6 +83,23 @@ export const Test: React.FC<Props> = (props) => {
           onClick={handleOnClickButtonSave}
         />
       </PermissionGate>
+      <LoadingSuspense query={testDynamicQuery}>
+        <Container
+          direction="row"
+          className="overflow-clip rounded-xl border-2 p-5"
+        >
+          {testDynamicQuery.data !== undefined
+            ? testDynamicQuery.data.map((item, index) => (
+                <Button
+                  variant="icon"
+                  title={item.title}
+                  onClick={() => handleOnButtonClick(item)}
+                  startIcon={getButtonIcon(item.icon)}
+                />
+              ))
+            : null}
+        </Container>
+      </LoadingSuspense>
     </div>
   );
 };

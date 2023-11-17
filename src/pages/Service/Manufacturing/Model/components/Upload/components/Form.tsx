@@ -11,6 +11,7 @@ import useModelUpload from "../../../hooks/useModelUpload";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 import ModelPreview from "@/pages/Test/STLViewer";
+import { StlViewer } from "react-stl-viewer";
 
 interface ManufacturingModelUploadFormProps {
   file: File;
@@ -84,7 +85,7 @@ const ManufacturingModelUploadForm: React.FC<
         <Text variant="body">{`${t(
           `Service.Manufacturing.Model.Upload.components.Form.name`
         )} ${file.name}`}</Text>
-        <ModelPreview file={url} className="h-60 w-full" />
+        <ModelPreview file={url} className="h-80" />
         <Text variant="body">{`${t(
           `Service.Manufacturing.Model.Upload.components.Form.size`
         )} ${file.size}`}</Text>

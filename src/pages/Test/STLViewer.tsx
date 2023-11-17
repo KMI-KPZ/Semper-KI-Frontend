@@ -9,6 +9,8 @@ import {
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import * as THREE from "three";
 import { twMerge } from "tailwind-merge";
+import { StlViewer } from "react-stl-viewer";
+import { LoadingAnimation } from "@component-library/Loading";
 
 const Model: React.FC<{ fileURL: string }> = (props) => {
   const { fileURL } = props;
@@ -63,23 +65,39 @@ const CameraControls = () => {
 };
 
 const ModelPreview = (props: { file?: string; className?: string }) => {
-  const { file, className } = props;
+  const { file, className: _className } = props;
 
-  return (
-    <div
-      className={twMerge(
-        "h-[600px] w-[1000px] overflow-clip rounded-xl border-2",
-        className
-      )}
-    >
-      <Canvas>
-        <CameraControls />
-        <ambientLight intensity={0.7} />
-        <directionalLight position={[10, -40, 30]} intensity={2} />
-        {file !== undefined ? <Model fileURL={file} /> : <Loading />}
-      </Canvas>
-    </div>
+  const className = twMerge(
+    "overflow-clip w-full h-full rounded-xl border-2 md:w-[80vw] md:h-[80vh] md:max-h-screen md:max-w-7xl",
+    _className
   );
+
+  if (file === undefined) return <LoadingAnimation />;
+  return (
+    <StlViewer
+      className={className}
+      url={file}
+      orbitControls
+      shadows
+      showAxes
+      modelProps={{ color: "red", scale: 1.5 }}
+    />
+  );
+  // return (
+  //   <div
+  //     className={twMerge(
+  //       "h-[600px] w-[1000px] overflow-clip rounded-xl border-2",
+  //       className
+  //     )}
+  //   >
+  //     <Canvas>
+  //       <CameraControls />
+  //       <ambientLight intensity={0.7} />
+  //       <directionalLight position={[10, -40, 30]} intensity={2} />
+  //       {file !== undefined ? <Model fileURL={file} /> : <Loading />}
+  //     </Canvas>
+  //   </div>
+  // );
 };
 
 export default ModelPreview;

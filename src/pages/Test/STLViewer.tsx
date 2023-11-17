@@ -1,4 +1,4 @@
-import React, { useRef, Suspense } from "react";
+import React, { useRef, Suspense, PropsWithChildren } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
   OrbitControls,
@@ -8,7 +8,7 @@ import {
 } from "@react-three/drei";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import * as THREE from "three";
-import logger from "@/hooks/useLogger";
+import { twMerge } from "tailwind-merge";
 
 const Model: React.FC<{ fileURL: string }> = (props) => {
   const { fileURL } = props;
@@ -17,6 +17,7 @@ const Model: React.FC<{ fileURL: string }> = (props) => {
   useFrame(() => {
     if (modelRef.current !== null) {
       modelRef.current.rotation.z += 0.01;
+      // modelRef.current.rotation.y = -1;
     }
   });
   const loader = new STLLoader();
@@ -47,24 +48,30 @@ const CameraControls = () => {
       <PerspectiveCamera
         makeDefault
         fov={75}
+        // position={[-0.5, 50, 38]}
         position={[-0.5, -90, 38]}
         ref={cameraRef}
       />
       <OrbitControls
         ref={orbitRef}
         // rotation={[0, 0, 0]} // Set the initial rotation
-        // position={[0, 0, 0]} // Set the initial position of the camera
+        // position={[1, 5, 1]} // Set the initial position of the camera
         // target={[0, 0, 0]} // Set the initial target or look-at point
       />
     </>
   );
 };
 
-const ModelPreview = (props: { file?: string }) => {
-  const { file } = props;
+const ModelPreview = (props: { file?: string; className?: string }) => {
+  const { file, className } = props;
 
   return (
-    <div className="h-[600px] w-[1000px]">
+    <div
+      className={twMerge(
+        "h-[600px] w-[1000px] overflow-clip rounded-xl border-2",
+        className
+      )}
+    >
       <Canvas>
         <CameraControls />
         <ambientLight intensity={0.7} />

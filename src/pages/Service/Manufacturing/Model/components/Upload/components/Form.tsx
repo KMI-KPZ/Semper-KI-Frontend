@@ -10,6 +10,7 @@ import { Button } from "@component-library/Button";
 import useModelUpload from "../../../hooks/useModelUpload";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
+import ModelPreview from "@/pages/Test/STLViewer";
 
 interface ManufacturingModelUploadFormProps {
   file: File;
@@ -24,6 +25,7 @@ const ManufacturingModelUploadForm: React.FC<
   const { status, error } = uploadModel;
   const { project } = useContext(ProjectContext);
   const { process } = useContext(ProcessContext);
+  const url = URL.createObjectURL(file);
 
   const schema = yup
     .object({
@@ -74,7 +76,7 @@ const ManufacturingModelUploadForm: React.FC<
   };
 
   return (
-    <form className="flex w-full flex-col gap-5 bg-white p-5">
+    <form className="flex w-full flex-col gap-5 bg-white p-5 md:max-w-4xl">
       <Heading variant="h1" className="px-10">
         {t("Service.Manufacturing.Model.Upload.components.Form.title")}
       </Heading>
@@ -82,6 +84,7 @@ const ManufacturingModelUploadForm: React.FC<
         <Text variant="body">{`${t(
           `Service.Manufacturing.Model.Upload.components.Form.name`
         )} ${file.name}`}</Text>
+        <ModelPreview file={url} className="h-60 w-full" />
         <Text variant="body">{`${t(
           `Service.Manufacturing.Model.Upload.components.Form.size`
         )} ${file.size}`}</Text>
@@ -91,7 +94,7 @@ const ManufacturingModelUploadForm: React.FC<
       </Container>
       <Container width="full" direction="col" align="center" justify="center">
         <div className={`flex w-full flex-col items-center gap-5 md:flex-row`}>
-          <Text variant="body">
+          <Text variant="body" className="md:w-2/12">
             {t(
               `Service.Manufacturing.Model.Upload.components.Form.certificate`
             )}
@@ -109,7 +112,7 @@ const ManufacturingModelUploadForm: React.FC<
           />
         </div>
         <div className={`flex w-full flex-col items-center gap-5 md:flex-row`}>
-          <Text variant="body">
+          <Text variant="body" className="md:w-2/12">
             {t(`Service.Manufacturing.Model.Upload.components.Form.license`)}
           </Text>
           <input
@@ -123,7 +126,7 @@ const ManufacturingModelUploadForm: React.FC<
           />
         </div>
         <div className={`flex w-full flex-col items-center gap-5 md:flex-row`}>
-          <Text variant="body">
+          <Text variant="body" className="md:w-2/12">
             {t(`Service.Manufacturing.Model.Upload.components.Form.tags`)}
           </Text>
           <input

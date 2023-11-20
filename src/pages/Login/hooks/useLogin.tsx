@@ -7,7 +7,7 @@ import {
 import { useEffect } from "react";
 import { AxiosResponse } from "axios";
 import { UserType } from "@/hooks/useUser";
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import { useLocation, useSearchParams } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 
@@ -38,7 +38,7 @@ export const useLogin = (): {
     mutationFn: async (props) => {
       const { register, path, userType } = props;
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/login/`;
-      return getCustomAxios()
+      return customAxios
         .get(apiUrl, {
           headers: {
             Usertype: userType,
@@ -68,7 +68,7 @@ export const useLogout = (): {
     queryKey: ["logout"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/logout/`;
-      return getCustomAxios().get(apiUrl);
+      return customAxios.get(apiUrl);
     },
   });
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { MaterialProps } from "../Material";
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { FilterItemProps } from "../../Filter/Filter";
 
@@ -11,7 +11,7 @@ export const useManufacturingMaterial = (
     queryKey: ["materials"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getMaterials/`;
-      return getCustomAxios()
+      return customAxios
         .post(apiUrl, {
           filters,
         })

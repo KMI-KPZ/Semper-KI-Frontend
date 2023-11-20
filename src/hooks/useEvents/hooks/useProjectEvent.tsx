@@ -10,7 +10,7 @@ import { Dispatch, SetStateAction, useContext } from "react";
 import logger from "@/hooks/useLogger";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { UserType } from "@/hooks/useUser";
+import useUser, { UserType } from "@/hooks/useUser";
 import { AppContext } from "@/pages/App/App";
 import { UserContext } from "@/contexts/UserContextProvider";
 import { toast } from "@/hooks/useToast";
@@ -142,7 +142,7 @@ interface ReturnProps {
 const useProjectEvent = (): ReturnProps => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
 
   const hydrateProjectEvents = (
     newProjectEvent: ProjectEvent,

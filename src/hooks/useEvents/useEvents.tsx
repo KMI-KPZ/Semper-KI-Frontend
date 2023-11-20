@@ -1,17 +1,16 @@
 import { DeleteEvent, Event } from "@/pages/App/types";
 import { useQueryClient } from "@tanstack/react-query";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import useMissedEvent from "./hooks/useMissedEvent";
 import { useTranslation } from "react-i18next";
-import { UserProps } from "@/hooks/useUser";
+import useUser from "@/hooks/useUser";
 import useOrgaEvent from "./hooks/useOrgaEvent";
-import { useWebsocket } from "./hooks/useWebsocket";
+import { useEventsWebsocket } from "../../api/Events/useEventsWebsocket";
 import { JSONIsParseable, JSONSafeParse } from "@/services/utils";
 import logger from "@/hooks/useLogger";
 import useProjectEvent from "./hooks/useProjectEvent";
-import { UserContext } from "@/contexts/UserContextProvider";
-import { PermissionContext } from "@/contexts/PermissionContextProvider";
 import { toast } from "@/hooks/useToast";
+import usePermissions from "../usePermissions";
 
 interface ReturnProps {
   deleteEvent: (event: DeleteEvent) => void;
@@ -20,8 +19,8 @@ interface ReturnProps {
 }
 
 const useEvents = (): ReturnProps => {
-  const { user } = useContext(UserContext);
-  const { reloadPermissions } = useContext(PermissionContext);
+  const { user } = useUser();
+  const { reloadPermissions } = usePermissions();
 
   const [events, setEvents] = useState<Event[]>([]);
   const queryClient = useQueryClient();
@@ -33,9 +32,6 @@ const useEvents = (): ReturnProps => {
       setEvents(missedEvents);
     }
   };
-  useMissedEvent({
-    onLoadMissedEvents,
-  });
 
   const onWebsocktEvent = (event: MessageEvent) => {
     if (event.data !== undefined && JSONIsParseable(event.data)) {
@@ -76,7 +72,7 @@ const useEvents = (): ReturnProps => {
     }
   };
 
-  const { socket } = useWebsocket(onWebsocktEvent);
+  const { socket } = useEventsWebsocket(onWebsocktEvent);
 
   const deleteEvent = (event: DeleteEvent) => {
     switch (event.eventType) {

@@ -1,13 +1,11 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { getUserType, parseAddress } from "../services/utils";
-import useCRSFToken from "./useCSRFToken";
-import { getCustomAxios } from "./useCustomAxios";
-import logger from "./useLogger";
+import useUserMutations from "@/api/User/useUserMutations";
+import { UserContext } from "@/contexts/UserContextProvider";
+import { UseQueryResult } from "@tanstack/react-query";
+import { useContext } from "react";
 
 interface ReturnProps {
-  loadIsLoggedInQuery: UseQueryResult<boolean, Error>;
-  userQuery: UseQueryResult<UserProps, Error>;
+  isLoggedIn: boolean;
+  user: UserProps | undefined;
   deleteUser(): void;
   updateUserDetails(details: UserDetailsProps): void;
 }
@@ -45,76 +43,21 @@ export interface Address {
 }
 
 const useUser = (): ReturnProps => {
-  const navigate = useNavigate();
-  const { CSRFTokenIsLoaded } = useCRSFToken();
-
-  const loadIsLoggedInQuery = useQuery<boolean, Error>({
-    queryKey: ["isLoggedIn"],
-    queryFn: async () =>
-      getCustomAxios()
-        .get(`${process.env.VITE_HTTP_API_URL}/public/isLoggedIn/`)
-        .then((response) => {
-          logger("useUser | isLoggedIn ✅ |", response.data);
-          return response.data === "Success" ? true : false;
-        }),
-    enabled: CSRFTokenIsLoaded(),
-  });
-
-  const userQuery = useQuery<UserProps, Error>({
-    queryKey: ["user"],
-    queryFn: async () => {
-      return getCustomAxios()
-        .get(`${process.env.VITE_HTTP_API_URL}/public/getUser/`)
-        .then((response) => {
-          const userData = response.data;
-          logger("useUser | getUser ✅ |", userData);
-          const newUser: UserProps = {
-            ...userData,
-            accessed: new Date(userData.accessed),
-            created: new Date(userData.created),
-            updated: new Date(userData.updated),
-            lastSeen: new Date(userData.lastSeen),
-            usertype: getUserType(userData.usertype),
-          };
-          return newUser;
-        });
-    },
-    enabled:
-      loadIsLoggedInQuery.isFetched &&
-      loadIsLoggedInQuery.data !== undefined &&
-      loadIsLoggedInQuery.data === true,
-  });
+  const { isLoggedIn, user } = useContext(UserContext);
+  const { deleteUserMutation, updateUserDetailsMutation } = useUserMutations();
 
   const deleteUser = () => {
-    getCustomAxios()
-      .delete(`${process.env.VITE_HTTP_API_URL}/public/profileDeleteUser/`)
-      .then((response) => {
-        logger("useUser | profileDeleteUser ✅ |");
-        navigate("/logout");
-      })
-      .catch((error) => {
-        logger("useUser | deleteUser ❌ |", error);
-      });
+    deleteUserMutation.mutate();
   };
-
   const updateUserDetails = (details: UserDetailsProps) => {
-    getCustomAxios()
-      .post(`${process.env.VITE_HTTP_API_URL}/public/updateUserDetails/`, {
-        details,
-      })
-      .then((response) => {
-        logger("useUser | updateUser ✅ |", response);
-      })
-      .catch((error) => {
-        logger("useUser | updateUser ❌ |", error);
-      });
+    updateUserDetailsMutation.mutate(details);
   };
 
   return {
-    loadIsLoggedInQuery,
-    userQuery,
     deleteUser,
+    isLoggedIn,
     updateUserDetails,
+    user,
   };
 };
 

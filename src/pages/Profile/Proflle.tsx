@@ -4,13 +4,11 @@ import { Button } from "@component-library/Button";
 import useUser, { UserProps, UserType } from "@/hooks/useUser";
 import { Heading } from "@component-library/Typography";
 import EditIcon from "@mui/icons-material/Edit";
-import CheckIcon from "@mui/icons-material/Check";
 import Modal from "@component-library/Modal";
 import ProfileForm from "./components/Form";
 import Container from "@component-library/Container";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { type } from "os";
-import { AuthorizedUserContext } from "@/outlets/AuthorizedUserOutlet";
+import { AuthorizedUserContext } from "@/routeOutlets/AuthorizedUserOutlet";
 
 interface Props {}
 

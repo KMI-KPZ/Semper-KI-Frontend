@@ -1,8 +1,9 @@
+import useEventsQuerys from "@/api/Events/useEventsQuerys";
+import { useEventsWebsocket } from "@/api/Events/useEventsWebsocket";
 import useEvents from "@/hooks/useEvents/useEvents";
+import logger from "@/hooks/useLogger";
 import { DeleteEvent, Event } from "@/pages/App/types";
 import React, { PropsWithChildren } from "react";
-import { useTranslation } from "react-i18next";
-import { Outlet } from "react-router-dom";
 
 interface EventContextProviderProps {}
 
@@ -22,6 +23,16 @@ const EventContextProvider: React.FC<
   PropsWithChildren<EventContextProviderProps>
 > = (props) => {
   const { children } = props;
+  const { missedEventsQuery } = useEventsQuerys();
+  const { socket: testSocket } = useEventsWebsocket(() => [{}]);
+
+  if (testSocket !== null) {
+    testSocket.onmessage = (event: MessageEvent) => {
+      logger("testSocket | onmessage", event);
+    };
+    console.log("testSocket");
+  }
+
   const { socket, deleteEvent, events } = useEvents();
 
   return (

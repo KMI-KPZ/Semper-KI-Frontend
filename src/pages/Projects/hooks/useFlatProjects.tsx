@@ -1,4 +1,4 @@
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import {
   useMutation,
   UseMutationResult,
@@ -54,54 +54,52 @@ export const useFlatProjects = (): ReturnProps => {
     ["flatProjects"],
     async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getFlatProjects/`; //TODO change when path changes
-      return getCustomAxios()
-        .get(apiUrl)
-        .then((response) => {
-          logger("useFlatProjects | flatProjectsQuery ✅ |", response.data);
-          return response.data.projects.map((project: any, index: number) => {
-            if (isFlatProject(project)) {
-              return {
-                ...project,
-                created: new Date(project.created),
-                updated: new Date(project.updated),
-              };
-            } else {
-              logger("useFlatProjects | flatProjectsQuery ❌ |", project);
-              return {
-                projectID:
-                  project.projectID === undefined
-                    ? "errorProjectID"
-                    : project.projectID,
-                client:
-                  project.client === undefined ? "errorClient" : project.client,
-                created:
-                  project.created === undefined
-                    ? new Date()
-                    : new Date(project.created),
-                updated:
-                  project.updated === undefined
-                    ? new Date()
-                    : new Date(project.updated),
-                details:
-                  project.details === undefined
-                    ? {
-                        title: "errorName",
-                        description: "errorDescription",
-                        items: [],
-                      }
-                    : project.details,
-                status:
-                  project.status === undefined
-                    ? ProcessStatus.DRAFT
-                    : project.status,
-                processesCount:
-                  project.processesCount === undefined
-                    ? 0
-                    : project.processesCount,
-              };
-            }
-          });
+      return customAxios.get(apiUrl).then((response) => {
+        logger("useFlatProjects | flatProjectsQuery ✅ |", response.data);
+        return response.data.projects.map((project: any, index: number) => {
+          if (isFlatProject(project)) {
+            return {
+              ...project,
+              created: new Date(project.created),
+              updated: new Date(project.updated),
+            };
+          } else {
+            logger("useFlatProjects | flatProjectsQuery ❌ |", project);
+            return {
+              projectID:
+                project.projectID === undefined
+                  ? "errorProjectID"
+                  : project.projectID,
+              client:
+                project.client === undefined ? "errorClient" : project.client,
+              created:
+                project.created === undefined
+                  ? new Date()
+                  : new Date(project.created),
+              updated:
+                project.updated === undefined
+                  ? new Date()
+                  : new Date(project.updated),
+              details:
+                project.details === undefined
+                  ? {
+                      title: "errorName",
+                      description: "errorDescription",
+                      items: [],
+                    }
+                  : project.details,
+              status:
+                project.status === undefined
+                  ? ProcessStatus.DRAFT
+                  : project.status,
+              processesCount:
+                project.processesCount === undefined
+                  ? 0
+                  : project.processesCount,
+            };
+          }
         });
+      });
     }
   );
 

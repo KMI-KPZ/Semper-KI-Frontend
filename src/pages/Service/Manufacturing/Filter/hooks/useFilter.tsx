@@ -1,4 +1,4 @@
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import _FilterItems from "@/hooks/Data/FilterQuestions.json";
 import {
   DefinedUseQueryResult,
@@ -52,12 +52,10 @@ const useFilter = (): ReturnProps => {
     queryKey: ["filters"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getFilters/`;
-      return getCustomAxios()
-        .get(apiUrl)
-        .then((response) => {
-          logger("useFilter | getFilters ✅ |", response.data);
-          return response.data;
-        });
+      return customAxios.get(apiUrl).then((response) => {
+        logger("useFilter | getFilters ✅ |", response.data);
+        return response.data;
+      });
     },
     initialData: FilterItems,
     enabled: false,
@@ -65,7 +63,7 @@ const useFilter = (): ReturnProps => {
 
   const updateFilters = useMutation<AxiosResponse, Error, FilterItemProps[]>({
     mutationFn: async (filters: FilterItemProps[]) =>
-      getCustomAxios()
+      customAxios
         .post(`${process.env.VITE_HTTP_API_URL}/public/updateFilters/`, {
           filters,
         })

@@ -13,6 +13,7 @@ import PermissionContextProvider from "./contexts/PermissionContextProvider";
 import EventContextProvider from "./contexts/EventContextProvider";
 import BodyScrollContextProvider from "./contexts/BodyScrollContextProvider";
 import ModalContextProvider from "./contexts/ModalContextProvider";
+import CSRFOutlet from "./outlets/CSRFOutlet";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -38,18 +39,20 @@ root.render(
     <React.StrictMode>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <UserContextProvider>
-            <PermissionContextProvider>
-              <EventContextProvider>
-                <BodyScrollContextProvider>
-                  <ModalContextProvider>
-                    <App />
-                    <ReactQueryDevtools />
-                  </ModalContextProvider>
-                </BodyScrollContextProvider>
-              </EventContextProvider>
-            </PermissionContextProvider>
-          </UserContextProvider>
+          <CSRFOutlet>
+            <UserContextProvider>
+              <PermissionContextProvider>
+                <EventContextProvider>
+                  <BodyScrollContextProvider>
+                    <ModalContextProvider>
+                      <App />
+                      <ReactQueryDevtools />
+                    </ModalContextProvider>
+                  </BodyScrollContextProvider>
+                </EventContextProvider>
+              </PermissionContextProvider>
+            </UserContextProvider>
+          </CSRFOutlet>
         </QueryClientProvider>
       </BrowserRouter>
     </React.StrictMode>

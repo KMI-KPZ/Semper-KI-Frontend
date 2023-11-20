@@ -14,7 +14,7 @@ import { Heading, Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
 import { EventContext } from "@/contexts/EventContextProvider";
 import { UserContext } from "@/contexts/UserContextProvider";
-import { UserType } from "@/hooks/useUser";
+import useUser, { UserType } from "@/hooks/useUser";
 import { getProjectEventAmount } from "@/hooks/useEvents/hooks/useProjectEvent";
 import { BodyScrollContext } from "@/contexts/BodyScrollContextProvider";
 
@@ -59,7 +59,7 @@ interface State {
 
 export const Header: React.FC<Props> = (props) => {
   const {} = props;
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
   const { events } = useContext(EventContext);
   const userType = user === undefined ? UserType.ANONYM : user.usertype;
   const navigate = useNavigate();

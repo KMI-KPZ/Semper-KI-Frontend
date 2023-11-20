@@ -23,7 +23,7 @@ import { getTitleFromProcess } from "@/pages/Service/Overview/components/Item";
 import ProjectFile from "./components/ProcessFile";
 import ProcessStatusButtons from "./components/StatusButtons";
 import { Upload } from "@/components/Upload";
-import { UserProps } from "@/hooks/useUser";
+import useUser, { UserProps } from "@/hooks/useUser";
 import { UserContext } from "@/contexts/UserContextProvider";
 import useCheckedProcesses from "../hooks/useCheckedProcesses";
 
@@ -41,7 +41,7 @@ export interface ProcessComponentState {
 
 const Process: React.FC<Props> = (props) => {
   const { process, projectID, projectEvent, checked } = props;
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
   const { t } = useTranslation();
   const [state, setState] = useState<ProcessComponentState>({
     chatOpen: false,

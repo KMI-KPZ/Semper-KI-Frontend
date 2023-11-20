@@ -1,4 +1,4 @@
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import {
   useMutation,
@@ -23,7 +23,7 @@ const useCheckout = (): ReturnProps => {
   const sendProject = useMutation<any, Error, CheckoutProps>({
     mutationFn: async ({ projectID, processIDs }) => {
       const url = `${process.env.VITE_HTTP_API_URL}/public/sendProject/`;
-      return getCustomAxios()
+      return customAxios
         .patch(url, {
           projectID,
           processIDs,

@@ -1,4 +1,4 @@
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import {
   useMutation,
   UseMutationResult,
@@ -67,7 +67,7 @@ export const useProject = (): ReturnProps => {
     ["project", projectID],
     async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getProject/${projectID}/`;
-      return getCustomAxios()
+      return customAxios
         .get(apiUrl)
         .then((response) => {
           logger("useOrdes | getProject ✅ |", response.data);
@@ -99,12 +99,10 @@ export const useProject = (): ReturnProps => {
   const createProject = useMutation<string, Error, void>({
     mutationFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createProjectID/`;
-      return getCustomAxios()
-        .get(apiUrl)
-        .then((response) => {
-          logger("useProject | createProject ✅ |", response.data);
-          return response.data.projectID;
-        });
+      return customAxios.get(apiUrl).then((response) => {
+        logger("useProject | createProject ✅ |", response.data);
+        return response.data.projectID;
+      });
     },
     onSuccess(data, variables, context) {
       createProcessWithProjectID.mutate(data);
@@ -114,12 +112,10 @@ export const useProject = (): ReturnProps => {
   const createProcessWithProjectID = useMutation<string, Error, string>({
     mutationFn: async (manuelProjectID: string) => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createProcessID/${manuelProjectID}/`;
-      return getCustomAxios()
-        .get(apiUrl)
-        .then((response) => {
-          logger("useProcess | createProcess ✅ |", response.data);
-          return response.data.processID;
-        });
+      return customAxios.get(apiUrl).then((response) => {
+        logger("useProcess | createProcess ✅ |", response.data);
+        return response.data.processID;
+      });
     },
     onSuccess(newProcessID, manuelProjectID, context) {
       queryClient.invalidateQueries(["flatProjects"]);
@@ -130,7 +126,7 @@ export const useProject = (): ReturnProps => {
 
   const updateProject = useMutation<string, Error, UpdateProjectProps>({
     mutationFn: async ({ changes = {}, deletions = {} }) => {
-      return getCustomAxios()
+      return customAxios
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProject/`, {
           projectID,
           changes,
@@ -149,7 +145,7 @@ export const useProject = (): ReturnProps => {
 
   const deleteProject = useMutation<string, Error, string>({
     mutationFn: async (ProjectID: string) => {
-      return getCustomAxios()
+      return customAxios
         .delete(
           `${process.env.VITE_HTTP_API_URL}/public/deleteProject/${ProjectID}/`
         )

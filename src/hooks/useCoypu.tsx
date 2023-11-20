@@ -1,8 +1,9 @@
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import logger from "@/hooks/useLogger";
 import DOMPurify from "dompurify";
 import { AssignmentReturned } from "@mui/icons-material";
+import { getQuery } from "@/api/query";
 
 interface ReturnProps {
   coypuQuery: UseQueryResult<CoypuProps[], Error>;
@@ -29,35 +30,61 @@ const useCoypu = (): ReturnProps => {
     queryKey: ["coypu"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/coypu/`;
-      return getCustomAxios()
-        .get(apiUrl)
-        .then((response) => {
-          logger("useCoypu | ✅ |", response.data);
-          const coypu = response.data
-            .filter((data: any) => data.rawhtml.url !== "")
-            .map((data: any) => ({
-              ...data,
-              rawhtml: convertHTML(DOMPurify.sanitize(data.rawhtml.value)),
-              date: new Date(data.date.value),
-              evt: data.evt.value,
-              url: data.rawhtml.url,
-            }))
-            .sort((a: CoypuProps, b: CoypuProps) => {
-              if (a.date > b.date) {
-                return -1;
-              }
-              if (a.date < b.date) {
-                return 1;
-              }
-              return 0;
-            });
-          return coypu;
-        });
+      return customAxios.get(apiUrl).then((response) => {
+        logger("useCoypu | ✅ |", response.data);
+        const coypu = response.data
+          .filter((data: any) => data.rawhtml.url !== "")
+          .map((data: any) => ({
+            ...data,
+            rawhtml: convertHTML(DOMPurify.sanitize(data.rawhtml.value)),
+            date: new Date(data.date.value),
+            evt: data.evt.value,
+            url: data.rawhtml.url,
+          }))
+          .sort((a: CoypuProps, b: CoypuProps) => {
+            if (a.date > b.date) {
+              return -1;
+            }
+            if (a.date < b.date) {
+              return 1;
+            }
+            return 0;
+          });
+        return coypu;
+      });
     },
     staleTime: 1000 * 60 * 1, // 24 hours
   });
 
-  return { coypuQuery };
+  const coypuQuery2 = getQuery<CoypuProps[]>({
+    keys: ["coypu"],
+    url: "public/coypu/",
+    title: "useCoypu",
+    convertFn: (data) => {
+      const coypu = data
+        .filter((data: any) => data.rawhtml.url !== "")
+        .map((data: any) => ({
+          ...data,
+          rawhtml: convertHTML(DOMPurify.sanitize(data.rawhtml.value)),
+          date: new Date(data.date.value),
+          evt: data.evt.value,
+          url: data.rawhtml.url,
+        }))
+        .sort((a: CoypuProps, b: CoypuProps) => {
+          if (a.date > b.date) {
+            return -1;
+          }
+          if (a.date < b.date) {
+            return 1;
+          }
+          return 0;
+        });
+      return coypu;
+    },
+    options: { staleTime: 1000 * 60 * 1 },
+  });
+
+  return { coypuQuery: coypuQuery2 };
 };
 
 export default useCoypu;

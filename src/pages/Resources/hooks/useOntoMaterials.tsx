@@ -1,5 +1,5 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import { OntoMaterialFlat } from "../types/types";
 import logger from "@/hooks/useLogger";
 
@@ -18,7 +18,7 @@ const useOntoMaterials = (props: UseOntoProps): ReturnProps => {
   const materialsQuery = useQuery<OntoMaterialFlat[], Error>({
     queryKey: ["onto", "materials"],
     queryFn: async () =>
-      getCustomAxios()
+      customAxios
         .get(`${process.env.VITE_HTTP_API_URL}/public/onto/getMaterials/`)
         .then((res) => {
           logger("useOnto| getMaterials ✅ |", res.data);
@@ -29,7 +29,7 @@ const useOntoMaterials = (props: UseOntoProps): ReturnProps => {
   const materialQuery = useQuery<OntoMaterialFlat, Error>({
     queryKey: ["onto", "material", materialID],
     queryFn: async () =>
-      getCustomAxios()
+      customAxios
         .post(`${process.env.VITE_HTTP_API_URL}/public/onto/getMaterial/`, {
           materialID,
         })

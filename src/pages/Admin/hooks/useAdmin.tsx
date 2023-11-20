@@ -1,4 +1,4 @@
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { UserProps } from "@/hooks/useUser";
 import { FlatProjectProps } from "@/pages/Projects/hooks/useFlatProjects";
@@ -57,7 +57,7 @@ const useAdmin = (): ReturnProps => {
   const adminQuery = useQuery<AdminProps, Error>({
     queryKey: ["admin"],
     queryFn: async () =>
-      getCustomAxios()
+      customAxios
         .get(`${process.env.VITE_HTTP_API_URL}/public/admin/getAll/`)
         .then((res) => {
           logger("useAdmin | adminQuery ✅ |", res.data);
@@ -68,7 +68,7 @@ const useAdmin = (): ReturnProps => {
   const adminProjectsQuery = useQuery<AdminFlatProjectProps[], Error>({
     queryKey: ["admin, flatProjects"],
     queryFn: async () =>
-      getCustomAxios()
+      customAxios
         .get(`${process.env.VITE_HTTP_API_URL}/public/admin/getProjectsFlat/`)
         .then((res) => {
           logger("useAdmin | adminProjectsQuery ✅ |", res.data);
@@ -84,7 +84,7 @@ const useAdmin = (): ReturnProps => {
   const deleteUser = useMutation<any, Error, DeleteUserProps>({
     mutationFn: async ({ hashedID, name }) => {
       const url = `${process.env.VITE_HTTP_API_URL}/public/admin/deleteUser/`;
-      return getCustomAxios()
+      return customAxios
         .delete(url, {
           data: {
             hashedID,
@@ -104,7 +104,7 @@ const useAdmin = (): ReturnProps => {
   const deleteOrganization = useMutation<any, Error, DeleteUserProps>({
     mutationFn: async ({ hashedID, name }) => {
       const url = `${process.env.VITE_HTTP_API_URL}/public/admin/deleteOrganization/`;
-      return getCustomAxios()
+      return customAxios
         .delete(url, {
           data: {
             hashedID,

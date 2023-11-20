@@ -1,4 +1,4 @@
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import {
   useMutation,
@@ -179,12 +179,10 @@ const useProcess = (): ReturnProps => {
   const createProcess = useMutation<string, Error, void>({
     mutationFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createProcessID/${URLProjectID}/`;
-      return getCustomAxios()
-        .get(apiUrl)
-        .then((response) => {
-          logger("useProcess | createProcess ✅ |", response.data);
-          return response.data.processID;
-        });
+      return customAxios.get(apiUrl).then((response) => {
+        logger("useProcess | createProcess ✅ |", response.data);
+        return response.data.processID;
+      });
     },
     onSuccess(data, variables, context) {
       queryClient.invalidateQueries(["flatProjects"]);
@@ -194,7 +192,7 @@ const useProcess = (): ReturnProps => {
 
   const updateProcess = useMutation<string, Error, UpdateProcessProps>({
     mutationFn: async ({ changes = {}, deletions = {} }) => {
-      return getCustomAxios()
+      return customAxios
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
           projectID: URLProjectID,
           processIDs: [URLProcessID],
@@ -223,7 +221,7 @@ const useProcess = (): ReturnProps => {
     }) => {
       const { updates, processID } = props;
       const { changes = {}, deletions = {} } = updates;
-      return getCustomAxios()
+      return customAxios
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
           projectID: URLProjectID,
           processIDs: [processID],
@@ -247,7 +245,7 @@ const useProcess = (): ReturnProps => {
       files.forEach((file) => formData.append(file.name, file));
       formData.append("processID", processID);
       formData.append("projectID", project.projectID);
-      return getCustomAxios()
+      return customAxios
         .post(
           `${process.env.VITE_HTTP_API_URL}/public/uploadFiles/`,
           formData,
@@ -274,7 +272,7 @@ const useProcess = (): ReturnProps => {
     }) => {
       const { updates, processIDs } = props;
       const { changes = {}, deletions = {} } = updates;
-      return getCustomAxios()
+      return customAxios
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
           projectID: URLProjectID,
           processIDs,
@@ -294,7 +292,7 @@ const useProcess = (): ReturnProps => {
 
   const deleteProcess = useMutation<string, Error, string>({
     mutationFn: async (processID: string) => {
-      return getCustomAxios()
+      return customAxios
         .delete(
           `${process.env.VITE_HTTP_API_URL}/public/deleteProcess/${URLProjectID}/`,
           { data: { processIDs: [processID] } }
@@ -312,7 +310,7 @@ const useProcess = (): ReturnProps => {
 
   const downloadFile = useMutation<Blob, Error, DownloadFileProps>({
     mutationFn: async ({ processID, fileID }) => {
-      return getCustomAxios()
+      return customAxios
         .get(
           `${process.env.VITE_HTTP_API_URL}/public/downloadFile/${processID}/${fileID}`,
           { responseType: "blob" }
@@ -326,7 +324,7 @@ const useProcess = (): ReturnProps => {
 
   const downloadFilesZIP = useMutation<Blob, Error, DownloadFilesZIPProps>({
     mutationFn: async ({ processID, fileIDs }) => {
-      return getCustomAxios()
+      return customAxios
         .get(
           `${
             process.env.VITE_HTTP_API_URL
@@ -343,7 +341,7 @@ const useProcess = (): ReturnProps => {
   });
   const deleteFile = useMutation<string, Error, DeleteFileProps>({
     mutationFn: async ({ processID, fileID }) => {
-      return getCustomAxios()
+      return customAxios
         .delete(
           `${process.env.VITE_HTTP_API_URL}/public/deleteFile/${processID}/${fileID}`
         )

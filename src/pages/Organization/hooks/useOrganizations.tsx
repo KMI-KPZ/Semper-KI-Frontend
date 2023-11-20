@@ -5,7 +5,7 @@ import {
   useQueryClient,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { ListItem } from "@mui/material";
 import { useState } from "react";
@@ -126,7 +126,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const organizationInfoQuery = useQuery<OrganizationInfoProps, Error>({
     queryKey: ["organizations", "info"],
     queryFn: async () => {
-      return getCustomAxios()
+      return customAxios
         .get(`${process.env.VITE_HTTP_API_URL}/public/getOrganization/`)
         .then((res) => {
           if (showLogger)
@@ -150,7 +150,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     queryKey: ["organizations", "users"],
     queryFn: async () => {
       return (
-        getCustomAxios()
+        customAxios
           // .post(apiUrl, { data: { intent: "fetchUsers" } })
           .get(apiUrl + "fetchUsers/")
           .then((res) => {
@@ -166,27 +166,22 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const permissionsQuery = useQuery<PermissionProps[], Error>({
     queryKey: ["organizations", "permissions"],
     queryFn: async () =>
-      getCustomAxios()
-        .get(apiUrl + "getPermissions/")
-        .then((res) => {
-          if (showLogger)
-            logger("useOrganizations | getPermissions ✅ |", res.data);
-          return res.data.map(
-            (item: {
-              value: string;
-              description: string;
-            }): PermissionProps => ({
-              permission_name: item.value as PermissionNameTranslationType,
-              context: item.value.split(
-                ":"
-              )[0] as PermissionContextTranslationType,
-              permissionType: item.value.split(
-                ":"
-              )[1] as PermissionTypeTranslationType,
-              description: item.description,
-            })
-          );
-        }),
+      customAxios.get(apiUrl + "getPermissions/").then((res) => {
+        if (showLogger)
+          logger("useOrganizations | getPermissions ✅ |", res.data);
+        return res.data.map(
+          (item: { value: string; description: string }): PermissionProps => ({
+            permission_name: item.value as PermissionNameTranslationType,
+            context: item.value.split(
+              ":"
+            )[0] as PermissionContextTranslationType,
+            permissionType: item.value.split(
+              ":"
+            )[1] as PermissionTypeTranslationType,
+            description: item.description,
+          })
+        );
+      }),
     staleTime: staleTime,
   });
 
@@ -194,7 +189,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     queryKey: ["organizations", "roles"],
     queryFn: async () => {
       return (
-        getCustomAxios()
+        customAxios
           // .post(apiUrl, { data: { intent: "getRoles" } })
           .get(apiUrl + "getRoles/")
           .then((res) => {
@@ -210,7 +205,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const rolePermissionsQuery = useQuery<PermissionProps[], Error>({
     queryKey: ["organizations", "roles", roleID, "permissions"],
     queryFn: async () =>
-      getCustomAxios()
+      customAxios
         .post(apiUrl + "getPermissionsForRole/", {
           data: {
             content: { roleID: roleID },
@@ -249,7 +244,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   >({
     mutationFn: async (props) => {
       const { name, email, adress, taxID, canManufacture } = props;
-      return getCustomAxios()
+      return customAxios
         .patch(
           `${process.env.VITE_HTTP_API_URL}/public/updateOrganizationDetails/`,
           {
@@ -277,7 +272,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
 
   const inviteLinkMutation = useMutation<string, Error, string>({
     mutationFn: async (email: string) => {
-      return getCustomAxios()
+      return customAxios
         .post(apiUrl + "getInviteLink/", {
           data: { content: { email: email } },
         })
@@ -294,7 +289,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
 
   const inviteUserMutation = useMutation<any, Error, string>({
     mutationFn: async (email: string) => {
-      return getCustomAxios()
+      return customAxios
         .post(apiUrl + "addUser/", {
           data: { content: { email: email } },
         })
@@ -312,7 +307,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const createRoleMutation = useMutation<any, Error, CreateRoleProps>({
     mutationFn: async (props) => {
       const { description, name } = props;
-      return getCustomAxios()
+      return customAxios
         .post(apiUrl + "createRole/", {
           data: {
             content: { roleName: name, roleDescription: description },
@@ -332,7 +327,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const editRoleMutation = useMutation<any, Error, EditRoleProps>({
     mutationFn: async (props) => {
       const { description, name, roleID } = props;
-      return getCustomAxios()
+      return customAxios
         .post(apiUrl + "editRole/", {
           data: {
             content: { roleID, roleName: name, roleDescription: description },
@@ -356,7 +351,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   >({
     mutationFn: async (props) => {
       const { permissionIDs, roleID } = props;
-      return getCustomAxios()
+      return customAxios
         .post(apiUrl + "setPermissionsForRole/", {
           data: {
             content: { roleID, permissionIDs },
@@ -378,7 +373,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
 
   const deleteRoleMutation = useMutation<any, Error, string>({
     mutationFn: async (id: string) => {
-      return getCustomAxios()
+      return customAxios
         .post(apiUrl + "deleteRole/", {
           data: {
             content: { roleID: id },
@@ -398,7 +393,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const assignRoleMutation = useMutation<any, Error, AssignRoleProps>({
     mutationFn: async (props) => {
       const { email, roleID } = props;
-      return getCustomAxios()
+      return customAxios
         .post(apiUrl + "assignRole/", {
           data: {
             content: { email, roleID },
@@ -417,7 +412,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const removeRoleMutation = useMutation<any, Error, AssignRoleProps>({
     mutationFn: async (props) => {
       const { email, roleID } = props;
-      return getCustomAxios()
+      return customAxios
         .post(apiUrl + "removeRole/", {
           data: {
             content: { email, roleID },
@@ -435,7 +430,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
 
   const deleteUserMutation = useMutation<any, Error, string>({
     mutationFn: async (email) => {
-      return getCustomAxios()
+      return customAxios
         .post(apiUrl + "deleteUser/", {
           data: {
             content: { email },

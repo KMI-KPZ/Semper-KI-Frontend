@@ -1,13 +1,7 @@
 import { ReactNode, useContext, useState } from "react";
 import { Button } from "@component-library/Button";
-import Modal from "@component-library/Modal";
-import Bubbles1IMG from "../../../assets/images/Bubbles1_Trans.png";
-import logger from "@/hooks/useLogger";
-import usePermissions from "@/hooks/usePermissions";
-import { AppContext } from "../App/App";
 import Container from "@component-library/Container";
 import { Heading } from "@component-library/Typography";
-import TestRender from "./TestRender";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import SaveIcon from "@mui/icons-material/Save";
 import useTest, { TestDynamicProps } from "./hooks/useTest";
@@ -16,12 +10,13 @@ import { PermissionContext } from "@/contexts/PermissionContextProvider";
 import { LoadingAnimation, LoadingSuspense } from "@component-library/Loading";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import usePermissions from "@/hooks/usePermissions";
 
 interface Props {}
 export const Test: React.FC<Props> = (props) => {
   const { socket, events } = useContext(EventContext);
   const [open, setOpen] = useState(false);
-  const { reloadPermissions } = useContext(PermissionContext);
+  const { reloadPermissions } = usePermissions();
   const { saveProjectsQuery, testDynamicQuery, dynamicButtonMutation } =
     useTest();
   const openMenu = () => {
@@ -67,14 +62,6 @@ export const Test: React.FC<Props> = (props) => {
         Open
       </Button>
       <Button title="reloadPermissions" onClick={reloadPermissions} />
-      <Modal
-        title="TestRender"
-        open={open}
-        closeModal={closeMenu}
-        className="flex w-full flex-row"
-      >
-        <TestRender />
-      </Modal>
       <PermissionGate element={"ProjectButtonSave"}>
         <Button
           size="sm"

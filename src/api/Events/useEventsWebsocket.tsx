@@ -1,10 +1,8 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import logger from "@/hooks/useLogger";
-import { UserProps, UserType } from "@/hooks/useUser";
-import { use } from "i18next";
-import { UserContext } from "@/contexts/UserContextProvider";
+import useUser from "@/hooks/useUser";
 
-interface ReturnProps {
+interface useEventsWebsocketReturnProps {
   sendMessage(message: string): void;
   socket: WebSocket | null;
   state: WebSocketState;
@@ -12,46 +10,15 @@ interface ReturnProps {
 
 type WebSocketState = "connecting" | "connected" | "disconnected" | "error";
 
-export const useWebsocket = (
+export const useEventsWebsocket = (
   onMessage: (event: MessageEvent) => void
-): ReturnProps => {
-  const { user } = useContext(UserContext);
+): useEventsWebsocketReturnProps => {
+  const { user } = useUser();
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [state, setState] = useState<WebSocketState>("disconnected");
   const reconnectTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // if (load === true && state !== "connected" && user !== undefined) {
-    //   setState("connecting");
-    //   const ws = new WebSocket(
-    //     `${process.env.VITE_WS_API_URL}/ws/generalWebsocket/`
-    //   );
-
-    //   ws.onopen = () => {
-    //     setState("connected");
-    //     logger("useWebsocket | connected");
-    //   };
-    //   ws.onerror = () => {
-    //     setState("error");
-    //     logger("useWebsocket | error");
-    //   };
-    //   ws.onclose = () => {
-    //     setState("disconnected");
-    //     logger("useWebsocket | disconnected");
-    //   };
-    //   ws.onmessage = (event: MessageEvent) => {
-    //     logger("useWebsocket | onmessage", event);
-    //     onMessage(event);
-    //   };
-
-    //   setSocket(ws);
-
-    //   return () => {
-    //     ws.close();
-    //     setSocket(null);
-    //     setState("disconnected");
-    //   };
-    // }
     const createWebSocket = () => {
       const ws = new WebSocket(
         `${process.env.VITE_WS_API_URL}/ws/generalWebsocket/`

@@ -10,7 +10,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
-import { UserProps, UserType } from "@/hooks/useUser";
+import useUser, { UserProps, UserType } from "@/hooks/useUser";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import Container from "@component-library/Container";
 import useService from "@/pages/Service/hooks/useService";
@@ -31,7 +31,7 @@ interface ProjectButtonsProps {
 
 const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
   const { project, checkedProcesses } = props;
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { deleteProcess } = useProcess();

@@ -1,31 +1,26 @@
+import useUserQuerys from "@/api/User/useUserQuerys";
 import useUser, { UserProps } from "@/hooks/useUser";
 import { AppLoadingSuspense } from "@component-library/Loading";
-import { userInfo } from "os";
-import React, {
-  Dispatch,
-  PropsWithChildren,
-  createContext,
-  useState,
-} from "react";
-import { useTranslation } from "react-i18next";
+import { UseQueryResult } from "@tanstack/react-query";
+import React, { PropsWithChildren, createContext } from "react";
 
 interface UserContextProviderProps {}
 
 export type UserContext = {
   user: UserProps | undefined;
-  deleteUser(): void;
+  isLoggedIn: boolean;
 };
 
 export const UserContext = createContext<UserContext>({
   user: undefined,
-  deleteUser: () => {},
+  isLoggedIn: false,
 });
 
 const UserContextProvider: React.FC<
   PropsWithChildren<UserContextProviderProps>
 > = (props) => {
   const { children } = props;
-  const { loadIsLoggedInQuery, userQuery, deleteUser } = useUser();
+  const { loadIsLoggedInQuery, userQuery } = useUserQuerys();
 
   const isLoggedInIsLoaded: boolean =
     loadIsLoggedInQuery.isFetched && loadIsLoggedInQuery.data !== undefined;
@@ -41,7 +36,7 @@ const UserContextProvider: React.FC<
     <UserContext.Provider
       value={{
         user: userQuery.data,
-        deleteUser,
+        isLoggedIn: loadIsLoggedInQuery.data === true,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import { getCustomAxios } from "./useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import logger from "./useLogger";
 import {
   UseMutationResult,
@@ -27,7 +27,7 @@ const useDevMode = (): useDevModeReturnProps => {
 
   const mockedLoginMutation = useMutation<string, Error, MockedUserType>({
     mutationFn: async (usertype) => {
-      return getCustomAxios()
+      return customAxios
         .get(`${process.env.VITE_HTTP_API_URL}/private/mockLogin/`, {
           headers: {
             Usertype: usertype,

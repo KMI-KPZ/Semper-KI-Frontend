@@ -6,7 +6,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "@component-library/Button";
 import { Heading, Text } from "@component-library/Typography";
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import { toast } from "@/hooks/useToast";
 
 interface ContactFormProps {
@@ -60,7 +60,7 @@ const ContactForm: React.FC<ContactFormProps> = (props) => {
 
   const onSubmit = (data: FormData) => {
     logger("onSubmit", data);
-    getCustomAxios()
+    customAxios
       .post(apiUrl, data)
       .then((response) => {
         logger("response", response);

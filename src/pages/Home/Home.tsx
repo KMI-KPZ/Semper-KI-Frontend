@@ -1,4 +1,4 @@
-import { UserProps, UserType } from "@/hooks/useUser";
+import useUser, { UserProps, UserType } from "@/hooks/useUser";
 import { Event } from "@/pages/App/types";
 import { ReactNode, useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,7 +12,7 @@ interface Props {}
 export const Home: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
 
   if (user === undefined) return <AnonymHome />;
   return <AuthorizedHome user={user} />;

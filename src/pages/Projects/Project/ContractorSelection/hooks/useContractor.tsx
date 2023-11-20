@@ -1,4 +1,4 @@
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import logger from "@/hooks/useLogger";
 
@@ -15,7 +15,7 @@ const useContractors = (): ReturnProps => {
   const contractorsQuery = useQuery<ContractorProps[], Error>({
     queryKey: ["contractors"],
     queryFn: async () =>
-      getCustomAxios()
+      customAxios
         .get(`${process.env.VITE_HTTP_API_URL}/public/getContractors/`)
         .then((res) => {
           logger("useContractors | getContractors ✅ |", res.data);

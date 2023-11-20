@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import logger from "@/hooks/useLogger";
 
@@ -14,12 +14,10 @@ const useCRSFToken = (): ReturnProps => {
     queryKey: ["csrf"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/csrfCookie/`;
-      return getCustomAxios()
-        .get(apiUrl)
-        .then((response) => {
-          logger("useCRSFToken | ✅ |");
-          return response.data;
-        });
+      return customAxios.get(apiUrl).then((response) => {
+        logger("useCRSFToken | ✅ |");
+        return response.data;
+      });
     },
     staleTime: 1000 * 60 * 24,
   });

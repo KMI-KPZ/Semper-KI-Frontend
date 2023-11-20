@@ -14,6 +14,7 @@ import { StatusButtonProps } from "../../components/StatusButtonData";
 import useService from "@/pages/Service/hooks/useService";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 import useVerification from "../../Verification/hooks/useVerification";
+import useUser from "@/hooks/useUser";
 
 interface ProcessStatusButtonsProps {
   projectID: string;
@@ -26,7 +27,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { setCheckedProcesses } = useContext(ProjectContext);
   const { t } = useTranslation();
   const { updateProcessWithProcessID } = useProcess();
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
   const { getProcessStatusButtons } = useStatusButtons();
   const navigate = useNavigate();
   const { verifyProject } = useVerification();

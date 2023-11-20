@@ -1,5 +1,4 @@
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import Contact from "@/pages/Legal/Contact/Contact";
 import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
 import { ServiceManufacturingProps } from "@/pages/Service/Manufacturing/types/types";
 import { Button } from "@component-library/Button";
@@ -8,13 +7,8 @@ import Modal from "@component-library/Modal";
 import { Heading, Text } from "@component-library/Typography";
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
-import ProcessServiceManufacturingModelPreview from "./ModellPreView";
-import useTest from "@/pages/Test/hooks/useTest";
 import ModelPreview from "@/pages/Test/STLViewer";
-import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
-import { use } from "i18next";
-import logger from "@/hooks/useLogger";
-import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
+import useProcess, { ProcessProps } from "@/pages/Projects/hooks/useProcess";
 
 interface ProcessServiceManufacturingProps {
   process: ProcessProps;
@@ -27,7 +21,7 @@ const ProcessServiceManufacturing: React.FC<
   const { process, service } = props;
   const { t } = useTranslation();
   const [open, setOpen] = useState<boolean>(false);
-  const { downloadFileTest } = useTest();
+  const { downloadFile } = useProcess();
   const [fileUrl, setFileUrl] = useState<string>("");
 
   const closeModal = () => {
@@ -44,15 +38,15 @@ const ProcessServiceManufacturing: React.FC<
         (file) => service.model !== undefined && file.id === service.model.id
       ) !== undefined
     ) {
-      downloadFileTest.mutate(
+      downloadFile.mutate(
         {
           processID: process.processID,
           fileID: service.model.id,
         },
         {
           onSuccess(data) {
-            // logger("success", "downloadFileTest.mutate", data);
-            setFileUrl(data);
+            const url = window.URL.createObjectURL(data);
+            setFileUrl(url);
           },
         }
       );

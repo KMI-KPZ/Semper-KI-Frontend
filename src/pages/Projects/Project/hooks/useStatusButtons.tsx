@@ -6,7 +6,7 @@ import {
   StatusButtonData as statusButtonData,
 } from "../components/StatusButtonData";
 import { UserContext } from "@/contexts/UserContextProvider";
-import { UserType } from "@/hooks/useUser";
+import useUser, { UserType } from "@/hooks/useUser";
 
 interface UseStatusButtonsReturnProps {
   getProjectStatusButtons: (
@@ -20,7 +20,7 @@ export interface StatusButtonCountProps extends StatusButtonProps {
 }
 
 const useStatusButtons = (): UseStatusButtonsReturnProps => {
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
 
   const filterButtonByUser = (
     process: ProcessProps,

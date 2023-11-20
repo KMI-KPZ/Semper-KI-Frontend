@@ -1,4 +1,4 @@
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import {
   useMutation,
@@ -24,7 +24,7 @@ const useVerification = (): ReturnProps => {
   const verifyProject = useMutation<any, Error, VerificationProps>({
     mutationFn: async (props) => {
       const url = `${process.env.VITE_HTTP_API_URL}/public/verifyProject/`;
-      return getCustomAxios()
+      return customAxios
         .patch(url, {
           ...props,
         })

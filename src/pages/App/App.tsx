@@ -25,12 +25,12 @@ import { FilterItemProps } from "../Service/Manufacturing/Filter/Filter";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import EmailVerification from "../EmailVerification/EmailVerification";
 import ResKriVer from "../ResKriVer/ResKriVer";
-import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
-import { OrganizationOutlet } from "@/outlets/OrganizationOutlet";
-import { AdminOutlet } from "@/outlets/AdminOutlet";
+import { OrganizationOutlet } from "@/routeOutlets/OrganizationOutlet";
+import { AdminOutlet } from "@/routeOutlets/AdminOutlet";
 import { ToastContainer } from "react-toastify";
 import ProjectsRoutes from "@/routes/ProjectsRoutes";
 import AdminRoutes from "@/routes/AdminRotes";
+import AuthorizedUserOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };

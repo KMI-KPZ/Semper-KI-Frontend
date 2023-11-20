@@ -6,9 +6,8 @@ import { LoadingSuspense } from "@component-library/Loading";
 import { FlatProjectProps, useFlatProjects } from "./hooks/useFlatProjects";
 import ProjectsTable from "./components/Table";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { UserProps, UserType } from "@/hooks/useUser";
+import useUser, { UserProps, UserType } from "@/hooks/useUser";
 import { useProject } from "./hooks/useProject";
-import { UserContext } from "@/contexts/UserContextProvider";
 import DeleteIcon from "@mui/icons-material/Delete";
 import logger from "@/hooks/useLogger";
 import Container from "@component-library/Container";
@@ -19,7 +18,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
   const { t } = useTranslation();
   const { flatProjectsQuery } = useFlatProjects();
   const { createProject, deleteProject } = useProject();
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
   const [selectedProjects, setSelectedProjects] = React.useState<string[]>([]);
 
   const onButtonClickCreateProject = () => {

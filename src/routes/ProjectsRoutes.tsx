@@ -1,9 +1,6 @@
-import { UserProps } from "@/hooks/useUser";
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { UserContext } from "@/contexts/UserContextProvider";
-import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
+import { Route, Routes } from "react-router-dom";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import Projects from "@/pages/Projects/Projects";
 import ProjectContextProvider from "@/pages/Projects/context/ProjectContext";
@@ -14,6 +11,7 @@ import ProcessVerification from "@/pages/Projects/Project/Verification/Verificat
 import ProcessContextProvider from "@/pages/Projects/context/ProcessContext";
 import { Error } from "@/pages/Error/Error";
 import ServiceRoutes from "./ServiceRoutes";
+import AuthorizedUserOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 
 interface ProjectsRoutesProps {}
 

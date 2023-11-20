@@ -1,4 +1,4 @@
-import { getCustomAxios } from "@/hooks/useCustomAxios";
+import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import {
@@ -27,12 +27,10 @@ const useStatusButtonAPI = (): useStatusButtonsReturnProps => {
     mutationFn: async (props) => {
       const { projectID, processID, status } = props;
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/updateProcessStatus/${projectID}/${processID}/${status}}`;
-      return getCustomAxios()
-        .patch(apiUrl)
-        .then((response) => {
-          logger("useStatusButtons | updateStatus ✅ |", response.data);
-          return response.data.processID;
-        });
+      return customAxios.patch(apiUrl).then((response) => {
+        logger("useStatusButtons | updateStatus ✅ |", response.data);
+        return response.data.processID;
+      });
     },
     onSuccess(data, variables, context) {
       queryClient.invalidateQueries(["flatProjects"]);

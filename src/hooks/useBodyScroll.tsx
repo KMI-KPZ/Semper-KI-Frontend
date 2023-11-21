@@ -1,17 +1,12 @@
-import { use } from "i18next";
-import { useEffect } from "react";
-import logger from "./useLogger";
+import { BodyScrollContext } from "@/contexts/BodyScrollContextProvider";
+import { useContext } from "react";
 
 interface ReturnProps {
   setBodyScroll(scroll: boolean): void;
 }
 
 const useBodyScroll = (): ReturnProps => {
-  const setBodyScroll = (scroll: boolean) => {
-    document.body.style.overflowY = scroll === true ? "scroll" : "hidden";
-    document.body.style.scrollbarGutter = "stable";
-  };
-
+  const { setBodyScroll } = useContext(BodyScrollContext);
   return {
     setBodyScroll,
   };

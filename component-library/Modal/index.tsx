@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import { BodyScrollContext } from "@/contexts/BodyScrollContextProvider";
 import { twMerge } from "tailwind-merge";
 import { ModalContext } from "@/contexts/ModalContextProvider";
+import useModal from "@/hooks/useModal";
 
 type ModelProps = {
   title: string;
@@ -35,7 +36,7 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
 }) => {
   const { t } = useTranslation();
   const modalRef = useRef<HTMLDialogElement>(null);
-  const { deleteModal, registerModal } = useContext(ModalContext);
+  const { deleteModal, registerModal } = useModal();
 
   const closeModalWithScroll = () => {
     deleteModal(title);

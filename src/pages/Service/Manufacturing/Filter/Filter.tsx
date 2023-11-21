@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import CloseIcon from "@mui/icons-material/Close";
-
 import { Button } from "@component-library/Button";
 import ProcessFilterCard from "./components/Card";
 import { AppContext } from "@/pages/App/App";
 import { Heading } from "@component-library/Typography";
-import { BodyScrollContext } from "@/contexts/BodyScrollContextProvider";
+import useBodyScroll from "@/hooks/useBodyScroll";
 
 interface Props {
   filterOpen: boolean;
@@ -125,7 +124,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
   });
   const { categoryList, filterList } = state;
   const { t } = useTranslation();
-  const { setBodyScroll } = useContext(BodyScrollContext);
+  const { setBodyScroll } = useBodyScroll();
   const callApplyFilters = () => {
     applyFilters(
       filterList.map((filterItem: FilterItemProps) => {

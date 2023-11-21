@@ -8,16 +8,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { NavigationItemData } from "@/data/navigation";
 import LogoURL from "@images/logo192.png";
-import { AppContext } from "@/pages/App/App";
-import { Event, ProjectEvent } from "@/pages/App/types";
-import { Heading, Text } from "@component-library/Typography";
+import { Text } from "@component-library/Typography";
 import { Button } from "@component-library/Button";
-import { EventContext } from "@/contexts/EventContextProvider";
-import { UserContext } from "@/contexts/UserContextProvider";
 import useUser, { UserType } from "@/hooks/useUser";
 import { getProjectEventAmount } from "@/hooks/useEvents/hooks/useProjectEvent";
-import { BodyScrollContext } from "@/contexts/BodyScrollContextProvider";
 import useEvents from "@/hooks/useEvents/useEvents";
+import useBodyScroll from "@/hooks/useBodyScroll";
 
 interface Language {
   code: string;
@@ -70,7 +66,7 @@ export const Header: React.FC<Props> = (props) => {
     languageMenuOpen: false,
   });
   const { menuOpen, languageMenuOpen } = state;
-  const { setBodyScroll } = useContext(BodyScrollContext);
+  const { setBodyScroll } = useBodyScroll();
 
   const changeLanguage = (code: string) => () => {
     closeLanguageMenu();

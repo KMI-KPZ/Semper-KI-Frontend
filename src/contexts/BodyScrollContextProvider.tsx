@@ -1,6 +1,4 @@
-import useBodyScroll from "@/hooks/useBodyScroll";
 import React, { PropsWithChildren } from "react";
-import { useTranslation } from "react-i18next";
 
 interface BodyScrollContextProviderProps {}
 
@@ -16,8 +14,11 @@ const BodyScrollContextProvider: React.FC<
   PropsWithChildren<BodyScrollContextProviderProps>
 > = (props) => {
   const { children } = props;
-  const { t } = useTranslation();
-  const { setBodyScroll } = useBodyScroll();
+
+  const setBodyScroll = (scroll: boolean) => {
+    document.body.style.overflowY = scroll === true ? "scroll" : "hidden";
+    document.body.style.scrollbarGutter = "stable";
+  };
 
   return (
     <BodyScrollContext.Provider value={{ setBodyScroll }}>

@@ -1,28 +1,32 @@
 import useModal from "@/hooks/useModal";
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, RefObject, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface ModalContextProviderProps {}
 
+export interface ModalItem {
+  title: string;
+  ref: RefObject<HTMLDialogElement>;
+}
+
 export type ModalContext = {
-  registerModal(modal: string, ref: React.RefObject<HTMLDialogElement>): void;
-  deleteModal(modal: string): void;
+  modals: ModalItem[];
+  setModals: React.Dispatch<React.SetStateAction<ModalItem[]>>;
 };
 
 export const ModalContext = React.createContext<ModalContext>({
-  registerModal: () => {},
-  deleteModal: () => {},
+  modals: [],
+  setModals: () => {},
 });
 
 const ModalContextProvider: React.FC<
   PropsWithChildren<ModalContextProviderProps>
 > = (props) => {
   const { children } = props;
-  const { t } = useTranslation();
-  const { registerModal, deleteModal } = useModal();
+  const [modals, setModals] = useState<ModalItem[]>([]);
 
   return (
-    <ModalContext.Provider value={{ registerModal, deleteModal }}>
+    <ModalContext.Provider value={{ modals, setModals }}>
       {children}
     </ModalContext.Provider>
   );

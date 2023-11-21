@@ -1,7 +1,7 @@
-import { BodyScrollContext } from "@/contexts/BodyScrollContextProvider";
-import React, { RefObject, useContext, useEffect, useState } from "react";
+import { RefObject, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import logger from "./useLogger";
+import useBodyScroll from "./useBodyScroll";
+import { ModalContext } from "@/contexts/ModalContextProvider";
 
 interface useModalReturnProps {
   registerModal(modal: string, ref: RefObject<HTMLDialogElement>): void;
@@ -10,11 +10,8 @@ interface useModalReturnProps {
 
 const useModal = (): useModalReturnProps => {
   const { t } = useTranslation();
-  const { setBodyScroll } = useContext(BodyScrollContext);
-
-  const [modals, setModals] = useState<
-    { title: string; ref: RefObject<HTMLDialogElement> }[]
-  >([]);
+  const { setBodyScroll } = useBodyScroll();
+  const { modals, setModals } = useContext(ModalContext);
 
   const hasUndefinedRef = () =>
     modals.some((item) => item.ref.current === null);

@@ -92,7 +92,15 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
               }
             />
           </Route>
-          <Route path="service/*" element={<ServiceRoutes />} />
+          <Route
+            path="service/*"
+            element={
+              <>
+                <Project />
+                <ServiceRoutes />
+              </>
+            }
+          />
           <Route path="*" element={<Error text="process" />} />
         </Route>
         <Route path="*" element={<Error text="project" />} />

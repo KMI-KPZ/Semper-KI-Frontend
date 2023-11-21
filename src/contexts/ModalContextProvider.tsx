@@ -1,6 +1,4 @@
-import useModal from "@/hooks/useModal";
 import React, { PropsWithChildren, RefObject, useState } from "react";
-import { useTranslation } from "react-i18next";
 
 interface ModalContextProviderProps {}
 

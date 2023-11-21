@@ -39,12 +39,15 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   const { deleteModal, registerModal } = useModal();
 
   const closeModalWithScroll = () => {
-    deleteModal(title);
-    modalRef.current?.close();
-    if (closeModal) closeModal();
+    if (locked === undefined || locked === false) {
+      deleteModal(title);
+      modalRef.current?.close();
+      if (closeModal) closeModal();
+    }
   };
 
   const closeModalOnEscape = (e: KeyboardEvent<HTMLDialogElement>) => {
+    e.preventDefault();
     if (e.key === "Escape") {
       closeModalWithScroll();
     }

@@ -47,8 +47,8 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   };
 
   const closeModalOnEscape = (e: KeyboardEvent<HTMLDialogElement>) => {
-    e.preventDefault();
     if (e.key === "Escape") {
+      e.preventDefault();
       closeModalWithScroll();
     }
   };
@@ -96,7 +96,6 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
 
   // Eventlistener: trigger close click on anim end
   const handleOnAnimEnd = () => {
-    // logger("handleOnAnimEnd");
     closeModalWithScroll();
   };
 
@@ -124,12 +123,12 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
     <dialog
       ref={modalRef}
       className={twMerge(
-        `fixed  h-full w-full overflow-auto rounded-xl
-        bg-transparent 
-        bg-white bg-opacity-70
-        p-0 backdrop:fixed
-        backdrop:bottom-0 backdrop:left-0 backdrop:right-0 backdrop:top-0
-       backdrop:bg-black backdrop:opacity-30 backdrop:blur-sm
+        `fixed h-full w-full overflow-auto rounded-xl bg-transparent
+        bg-white bg-opacity-70 p-0
+        backdrop:fixed backdrop:bottom-0
+        backdrop:left-0 backdrop:right-0
+        backdrop:top-0 backdrop:bg-black
+        backdrop:opacity-30
         md:h-fit md:max-h-[90vh] md:w-fit md:max-w-7xl
      `
       )}

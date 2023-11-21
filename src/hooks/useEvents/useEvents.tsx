@@ -1,16 +1,14 @@
 import { DeleteEvent, Event } from "@/pages/App/types";
 import { useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
-import useMissedEvent from "./hooks/useMissedEvent";
+import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
-import useUser from "@/hooks/useUser";
 import useOrgaEvent from "./hooks/useOrgaEvent";
-import { useEventsWebsocket } from "../../api/Events/useEventsWebsocket";
 import { JSONIsParseable, JSONSafeParse } from "@/services/utils";
 import logger from "@/hooks/useLogger";
 import useProjectEvent from "./hooks/useProjectEvent";
 import { toast } from "@/hooks/useToast";
 import usePermissions from "../usePermissions";
+import { EventContext } from "@/contexts/EventContextProvider";
 
 interface ReturnProps {
   deleteEvent: (event: DeleteEvent) => void;
@@ -19,19 +17,20 @@ interface ReturnProps {
 }
 
 const useEvents = (): ReturnProps => {
-  const { user } = useUser();
+  const { missedEvents, socket } = useContext(EventContext);
   const { reloadPermissions } = usePermissions();
 
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<Event[]>(missedEvents);
   const queryClient = useQueryClient();
   const { handleNewProjectEvent, deleteProjectEvent } = useProjectEvent();
   const { handleNewOrgaEvent, deleteOrgaEvent } = useOrgaEvent();
   const { t } = useTranslation();
-  const onLoadMissedEvents = (missedEvents: Event[]) => {
-    if (missedEvents.length > 0) {
-      setEvents(missedEvents);
-    }
-  };
+
+  if (socket !== null) {
+    socket.onmessage = (event) => {
+      onWebsocktEvent(event);
+    };
+  }
 
   const onWebsocktEvent = (event: MessageEvent) => {
     if (event.data !== undefined && JSONIsParseable(event.data)) {
@@ -71,8 +70,6 @@ const useEvents = (): ReturnProps => {
         break;
     }
   };
-
-  const { socket } = useEventsWebsocket(onWebsocktEvent);
 
   const deleteEvent = (event: DeleteEvent) => {
     switch (event.eventType) {

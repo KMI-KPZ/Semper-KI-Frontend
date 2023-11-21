@@ -11,10 +11,11 @@ import { LoadingAnimation, LoadingSuspense } from "@component-library/Loading";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import usePermissions from "@/hooks/usePermissions";
+import useEvents from "@/hooks/useEvents/useEvents";
 
 interface Props {}
 export const Test: React.FC<Props> = (props) => {
-  const { socket, events } = useContext(EventContext);
+  const { socket, events } = useEvents();
   const [open, setOpen] = useState(false);
   const { reloadPermissions } = usePermissions();
   const { saveProjectsQuery, testDynamicQuery, dynamicButtonMutation } =
@@ -73,13 +74,13 @@ export const Test: React.FC<Props> = (props) => {
       <LoadingSuspense query={testDynamicQuery}>
         <Container
           direction="row"
-          className="max-w-4xl flex-wrap overflow-clip rounded-xl border-2 p-5"
+          className="max-w-4xl flex-wrap overflow-clip rounded-xl border-2 border-white p-5"
         >
           {testDynamicQuery.data !== undefined
             ? testDynamicQuery.data.map((item, index) => (
                 <Button
                   key={index}
-                  variant="icon"
+                  variant="outline"
                   title={item.title}
                   onClick={() => handleOnButtonClick(item)}
                   startIcon={getButtonIcon(item.icon)}

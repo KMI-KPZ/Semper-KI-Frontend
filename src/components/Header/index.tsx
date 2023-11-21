@@ -17,6 +17,7 @@ import { UserContext } from "@/contexts/UserContextProvider";
 import useUser, { UserType } from "@/hooks/useUser";
 import { getProjectEventAmount } from "@/hooks/useEvents/hooks/useProjectEvent";
 import { BodyScrollContext } from "@/contexts/BodyScrollContextProvider";
+import useEvents from "@/hooks/useEvents/useEvents";
 
 interface Language {
   code: string;
@@ -60,7 +61,7 @@ interface State {
 export const Header: React.FC<Props> = (props) => {
   const {} = props;
   const { user } = useUser();
-  const { events } = useContext(EventContext);
+  const { events } = useEvents();
   const userType = user === undefined ? UserType.ANONYM : user.usertype;
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();

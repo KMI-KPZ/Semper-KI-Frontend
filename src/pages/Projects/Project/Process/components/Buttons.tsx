@@ -34,7 +34,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
   const { projectID, process, user, updateStatus, setState, projectEvent } =
     props;
   const { t } = useTranslation();
-  const { deleteEvent } = useContext(EventContext);
+  const { deleteEvent } = useEvents();
   const { deleteProcess, updateProcessWithProcessID } = useProcess();
   const { project } = useContext(ProjectContext);
   const { getDeleteProjectEvent } = useProjectEventChange(

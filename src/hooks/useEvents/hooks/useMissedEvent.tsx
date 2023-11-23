@@ -5,7 +5,7 @@ import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { use } from "i18next";
 import { UserContext } from "@/contexts/UserContextProvider";
-import useUser from "@/hooks/useUser";
+import useUser, { UserType } from "@/hooks/useUser";
 
 interface Props {
   onLoadMissedEvents(missedEvents: Event[]): void;
@@ -24,7 +24,7 @@ const useMissedEvent = (props: Props): void => {
           logger("useMissedEvent | getMissedEvents ✅ |", res.data);
           return res.data;
         }),
-    enabled: user !== undefined, //TO-DO
+    enabled: user.usertype !== UserType.ANONYM, //TO-DO
     refetchOnWindowFocus: false,
     initialData: [],
   });

@@ -6,7 +6,7 @@ import { LoadingSuspense } from "@component-library/Loading";
 import { FlatProjectProps, useFlatProjects } from "./hooks/useFlatProjects";
 import ProjectsTable from "./components/Table";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import useUser, { UserProps, UserType } from "@/hooks/useUser";
+import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 import { useProject } from "./hooks/useProject";
 import DeleteIcon from "@mui/icons-material/Delete";
 import logger from "@/hooks/useLogger";
@@ -53,7 +53,8 @@ const Projects: React.FC<ProjectsProps> = (props) => {
         selectedProjects={selectedProjects}
         setSelectedProjects={setSelectedProjects}
         flatProjects={
-          user !== undefined && user.usertype === UserType.ORGANIZATION
+          user.usertype !== UserType.ANONYM &&
+          user.usertype === UserType.ORGANIZATION
             ? flatProjectsQuery.data
                 .filter((project) =>
                   user.organizations.includes(project.client)
@@ -66,7 +67,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
       <Text variant="body">{t("Projects.Projects.empty")}</Text>
     );
 
-  const renderOrganizationProjects = (user: UserProps) =>
+  const renderOrganizationProjects = (user: AuthorizedUserProps) =>
     flatProjectsQuery.data !== undefined &&
     flatProjectsQuery.data.length > 0 &&
     flatProjectsQuery.data.filter(
@@ -109,7 +110,8 @@ const Projects: React.FC<ProjectsProps> = (props) => {
       </div>
       <LoadingSuspense query={flatProjectsQuery}>
         {renderClientProjects()}
-        {user !== undefined && user.usertype === UserType.ORGANIZATION ? (
+        {user.usertype !== UserType.ANONYM &&
+        user.usertype === UserType.ORGANIZATION ? (
           <>
             <Heading variant="h2" className="mt-10 w-full text-left">
               {t("Projects.Projects.orga")}

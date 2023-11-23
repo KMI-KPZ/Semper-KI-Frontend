@@ -58,7 +58,6 @@ export const Header: React.FC<Props> = (props) => {
   const {} = props;
   const { user } = useUser();
   const { events } = useEvents();
-  const userType = user === undefined ? UserType.ANONYM : user.usertype;
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [state, setState] = useState<State>({
@@ -157,7 +156,8 @@ export const Header: React.FC<Props> = (props) => {
     <ul className="hidden flex-row items-center justify-center  md:flex">
       {NavigationItemData.filter(
         (item) =>
-          item.preferred.includes("header") && item.userTypes.includes(userType)
+          item.preferred.includes("header") &&
+          item.userTypes.includes(user.usertype)
       ).map((item, index: number) => (
         <HeaderItem
           key={index}
@@ -172,7 +172,8 @@ export const Header: React.FC<Props> = (props) => {
     <ul className=" hidden flex-row items-center justify-center xs:flex md:hidden">
       {NavigationItemData.filter(
         (item) =>
-          item.preferred.includes("header") && item.userTypes.includes(userType)
+          item.preferred.includes("header") &&
+          item.userTypes.includes(user.usertype)
       ).map((item, index: number) => (
         <HeaderItem
           key={index}
@@ -188,7 +189,8 @@ export const Header: React.FC<Props> = (props) => {
     <ul className="hidden flex-col gap-3 md:flex">
       {NavigationItemData.filter(
         (item) =>
-          item.preferred.includes("menu") && item.userTypes.includes(userType)
+          item.preferred.includes("menu") &&
+          item.userTypes.includes(user.usertype)
       ).map((item, index: number) => (
         <HeaderItem
           key={index}
@@ -205,7 +207,7 @@ export const Header: React.FC<Props> = (props) => {
         (item) =>
           (item.preferred.includes("menu") ||
             item.preferred.includes("header")) &&
-          item.userTypes.includes(userType)
+          item.userTypes.includes(user.usertype)
       ).map((item, index: number) => (
         <HeaderItem
           key={index}

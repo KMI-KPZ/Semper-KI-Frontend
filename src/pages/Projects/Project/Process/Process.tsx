@@ -23,9 +23,10 @@ import { getTitleFromProcess } from "@/pages/Service/Overview/components/Item";
 import ProjectFile from "./components/ProcessFile";
 import ProcessStatusButtons from "./components/StatusButtons";
 import { Upload } from "@/components/Upload";
-import useUser, { UserProps } from "@/hooks/useUser";
+import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 import { UserContext } from "@/contexts/UserContextProvider";
 import useCheckedProcesses from "../hooks/useCheckedProcesses";
+import AuthorizedUserOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 
 interface Props {
   process: ProcessProps;
@@ -133,22 +134,24 @@ const Process: React.FC<Props> = (props) => {
         <ProjectFile process={process} projectID={projectID} />
         <Upload mutation={uploadFilesMutation} icon multiple></Upload>
       </PermissionGate>
-      <PermissionGate element="Chat">
-        <Modal
-          title="Chat"
-          open={state.chatOpen}
-          closeModal={closeChat}
-          className="flex w-full flex-col"
-        >
-          <Chat
-            chat={process.messages.messages}
-            user={user}
-            closeMenu={closeChat}
-            projectID={projectID}
-            processID={process.processID}
-          />
-        </Modal>
-      </PermissionGate>
+      {user.usertype !== UserType.ANONYM ? (
+        <PermissionGate element="Chat">
+          <Modal
+            title="Chat"
+            open={state.chatOpen}
+            closeModal={closeChat}
+            className="flex w-full flex-col"
+          >
+            <Chat
+              chat={process.messages.messages}
+              user={user}
+              closeMenu={closeChat}
+              projectID={projectID}
+              processID={process.processID}
+            />
+          </Modal>
+        </PermissionGate>
+      ) : null}
       <Modal
         title="ProcessInfo"
         open={state.infoOpen}

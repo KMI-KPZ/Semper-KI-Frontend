@@ -10,7 +10,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
-import useUser, { UserProps, UserType } from "@/hooks/useUser";
+import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import Container from "@component-library/Container";
 import useService from "@/pages/Service/hooks/useService";

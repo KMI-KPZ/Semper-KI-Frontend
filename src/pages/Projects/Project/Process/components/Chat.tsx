@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 import { Button } from "@component-library/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { useTranslation } from "react-i18next";
-import { UserProps } from "@/hooks/useUser";
+import { AuthorizedUserProps, UserProps } from "@/hooks/useUser";
 import { Heading, Text } from "@component-library/Typography";
 import logger from "@/hooks/useLogger";
 import useProcess, {
@@ -12,7 +12,7 @@ import useProcess, {
 interface Props {
   closeMenu(): void;
   chat: ChatMessageProps[];
-  user?: UserProps;
+  user: AuthorizedUserProps;
   projectID: string;
   processID: string;
 }
@@ -47,8 +47,8 @@ const Chat: React.FC<Props> = (props) => {
               messages: {
                 date: new Date().toISOString(),
                 text: messageText,
-                userID: user!.hashedID,
-                userName: user!.name,
+                userID: user.hashedID,
+                userName: user.name,
               },
             },
           },

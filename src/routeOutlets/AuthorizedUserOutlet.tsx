@@ -2,12 +2,12 @@ import { AppLoadingSuspense } from "@component-library/Loading";
 import React, { PropsWithChildren, createContext, useContext } from "react";
 import { UserContext } from "../contexts/UserContextProvider";
 import { Navigate, Outlet } from "react-router-dom";
-import useUser, { UserProps } from "@/hooks/useUser";
+import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 
 interface AuthorizedUserOutletProps {}
 
 export type AuthorizedUserContext = {
-  user: UserProps;
+  user: AuthorizedUserProps;
   deleteUser(): void;
 };
 
@@ -31,7 +31,7 @@ const AuthorizedUserOutlet: React.FC<AuthorizedUserOutletProps> = (props) => {
   const {} = props;
   const { user, deleteUser } = useUser();
 
-  return user !== undefined ? (
+  return user.usertype !== UserType.ANONYM ? (
     <AuthorizedUserContext.Provider value={{ user, deleteUser }}>
       <Outlet />
     </AuthorizedUserContext.Provider>

@@ -10,7 +10,7 @@ import Container from "@component-library/Container";
 import { useFlatProjects } from "@/pages/Projects/hooks/useFlatProjects";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 import { UserContext } from "@/contexts/UserContextProvider";
-import useUser from "@/hooks/useUser";
+import useUser, { UserType } from "@/hooks/useUser";
 
 interface HomeProjectsProps {}
 
@@ -32,7 +32,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   return (
     <HomeContainer>
       <Heading variant="h2">{t("Home.components.Projects.title")}</Heading>
-      {user === undefined ? (
+      {user.usertype === UserType.ANONYM ? (
         <Container>
           {flatProjectsQuery.isFetched &&
           flatProjectsQuery.data !== undefined &&

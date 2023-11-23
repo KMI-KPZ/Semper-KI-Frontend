@@ -1,6 +1,6 @@
 import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
-import { UserProps } from "@/hooks/useUser";
+import { AuthorizedUserProps } from "@/hooks/useUser";
 import { FlatProjectProps } from "@/pages/Projects/hooks/useFlatProjects";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";
@@ -25,7 +25,7 @@ interface DeleteUserProps {
 }
 
 interface AdminProps {
-  user: UserProps[];
+  user: AuthorizedUserProps[];
   organizations: OrganizationProps[];
 }
 

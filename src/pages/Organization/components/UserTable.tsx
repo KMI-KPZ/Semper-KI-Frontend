@@ -13,7 +13,7 @@ import { Heading } from "@component-library/Typography";
 import { AppContext } from "@/pages/App/App";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { UserContext } from "@/contexts/UserContextProvider";
-import useUser from "@/hooks/useUser";
+import useUser, { UserType } from "@/hooks/useUser";
 
 interface OrganizationTableProps {}
 
@@ -64,7 +64,8 @@ const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
                           key={index}
                           user={data}
                           currentUser={
-                            user !== undefined && user.email === data.email
+                            user.usertype !== UserType.ANONYM &&
+                            user.email === data.email
                           }
                           allRoles={rolesQuery.data}
                         />

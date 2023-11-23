@@ -1,4 +1,4 @@
-import useUser from "@/hooks/useUser";
+import useUser, { UserType } from "@/hooks/useUser";
 import { Event } from "@/pages/App/types";
 import {
   DefinedUseQueryResult,
@@ -24,7 +24,7 @@ const useEventsQuerys = (): useEventsQuerysReturnProps => {
           logger("useMissedEvent | getMissedEvents ✅ |", res.data);
           return res.data;
         }),
-    enabled: user !== undefined,
+    enabled: user.usertype !== UserType.ANONYM,
   });
 
   return { missedEventsQuery };

@@ -1,12 +1,12 @@
 import logger from "@/hooks/useLogger";
-import { UserProps } from "@/hooks/useUser";
+import { AuthorizedUserProps } from "@/hooks/useUser";
 import { Button } from "@component-library/Button";
 import { Heading, Text } from "@component-library/Typography";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 interface ProfileFormProps {
-  user: UserProps;
+  user: AuthorizedUserProps;
 }
 
 interface FormData {

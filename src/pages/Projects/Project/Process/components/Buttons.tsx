@@ -1,4 +1,4 @@
-import { UserProps } from "@/hooks/useUser";
+import { AuthorizedUserProps, UserProps, UserType } from "@/hooks/useUser";
 import { Button } from "@component-library/Button";
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import ReplayIcon from "@mui/icons-material/Replay";
@@ -22,7 +22,7 @@ import useEvents from "@/hooks/useEvents/useEvents";
 import { EventContext } from "@/contexts/EventContextProvider";
 
 interface ProcessButtonsProps {
-  user: UserProps | undefined;
+  user: UserProps;
   projectID: string;
   process: ProcessProps;
   updateStatus: (status: ProcessStatus) => void;
@@ -45,12 +45,12 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
 
   const shouldRenderFor = (type: "CLIENT" | "CONTRACTOR"): boolean => {
     return (
-      process !== undefined &&
-      (user === undefined ||
-        (user !== undefined &&
-          ((type === "CONTRACTOR" &&
-            process.contractor[0] === user.organizations[0]) ||
-            (type === "CLIENT" && process.client === user.hashedID))))
+      (process !== undefined &&
+        user.usertype !== UserType.ANONYM &&
+        ((type === "CONTRACTOR" &&
+          process.contractor[0] === user.organizations[0]) ||
+          (type === "CLIENT" && process.client === user.hashedID))) ||
+      user.usertype === UserType.ANONYM
     );
   };
 
@@ -117,7 +117,8 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
         onClick={handleOnClickButtonInfo}
         title={t("Projects.Project.Process.components.Buttons.button.info")}
       />
-      {process.status >= ProcessStatus.REQUESTED && user !== undefined ? (
+      {process.status >= ProcessStatus.REQUESTED &&
+      user.usertype !== UserType.ANONYM ? (
         <PermissionGate element="ProcessButtonChat">
           {projectEvent !== undefined &&
           projectEvent.messages !== undefined &&

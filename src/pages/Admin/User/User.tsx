@@ -1,4 +1,4 @@
-import { UserProps, UserType } from "@/hooks/useUser";
+import { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 import { Heading, Text } from "@component-library/Typography";
 import {
   Paper,
@@ -18,7 +18,7 @@ import { Button } from "@component-library/Button";
 import useSearch from "@/hooks/useSearch";
 import Search from "@component-library/Search";
 interface Props {
-  users: UserProps[] | undefined;
+  users: AuthorizedUserProps[] | undefined;
 }
 
 const AdminUser: React.FC<Props> = (props) => {
@@ -54,7 +54,7 @@ const AdminUser: React.FC<Props> = (props) => {
             {users !== undefined && UserSwitch.length > 0 ? (
               users
                 .filter((user) => filterDataBySearchInput(user))
-                .map((user: UserProps, index: number) => (
+                .map((user: AuthorizedUserProps, index: number) => (
                   <TableRow
                     key={index}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import logger from "@/hooks/useLogger";
-import useUser from "@/hooks/useUser";
+import useUser, { UserType } from "@/hooks/useUser";
 
 interface useEventsWebsocketReturnProps {
   sendMessage(message: string): void;
@@ -62,7 +62,7 @@ export const useEventsWebsocket =
         }, 5000); // Adjust the delay as needed
       };
 
-      if (state !== "connected" && user !== undefined) {
+      if (state !== "connected" && user.usertype !== UserType.ANONYM) {
         setState("connecting");
         createWebSocket();
       }

@@ -14,8 +14,7 @@ const usePermissionGate = (): ReturnProps => {
     );
 
     const allowAccess =
-      user === undefined ||
-      (user !== undefined &&
+      (user.usertype !== UserType.ANONYM &&
         (user.usertype === UserType.ADMIN ||
           user.usertype === UserType.USER ||
           (user.usertype === UserType.ORGANIZATION &&
@@ -25,7 +24,8 @@ const usePermissionGate = (): ReturnProps => {
               (permission) =>
                 permission.context === permissionGate.permission.context &&
                 permission.permission === permissionGate.permission.permission
-            ) !== undefined)));
+            ) !== undefined))) ||
+      user.usertype === UserType.ANONYM;
 
     return allowAccess;
   };

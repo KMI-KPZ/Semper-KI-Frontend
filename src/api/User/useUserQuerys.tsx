@@ -1,13 +1,13 @@
 import { customAxios } from "../customAxios";
 import logger from "@/hooks/useLogger";
 import { getUserType } from "@/services/utils";
-import { UserProps } from "@/hooks/useUser";
+import { AuthorizedUserProps } from "@/hooks/useUser";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 interface useUserQueryReturnProps {
   loadIsLoggedInQuery: UseQueryResult<boolean, Error>;
-  userQuery: UseQueryResult<UserProps, Error>;
+  userQuery: UseQueryResult<AuthorizedUserProps, Error>;
 }
 
 const useUserQuerys = (): useUserQueryReturnProps => {
@@ -24,7 +24,7 @@ const useUserQuerys = (): useUserQueryReturnProps => {
         }),
   });
 
-  const userQuery = useQuery<UserProps, Error>({
+  const userQuery = useQuery<AuthorizedUserProps, Error>({
     queryKey: ["user"],
     queryFn: async () => {
       return customAxios
@@ -32,7 +32,7 @@ const useUserQuerys = (): useUserQueryReturnProps => {
         .then((response) => {
           const userData = response.data;
           logger("useUser | getUser ✅ |", userData);
-          const newUser: UserProps = {
+          const newUser: AuthorizedUserProps = {
             ...userData,
             accessed: new Date(userData.accessed),
             created: new Date(userData.created),

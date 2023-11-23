@@ -1,16 +1,21 @@
 import useUserMutations from "@/api/User/useUserMutations";
 import { UserContext } from "@/contexts/UserContextProvider";
-import { UseQueryResult } from "@tanstack/react-query";
 import { useContext } from "react";
 
 interface ReturnProps {
   isLoggedIn: boolean;
-  user: UserProps | undefined;
+  user: UserProps;
   deleteUser(): void;
   updateUserDetails(details: UserDetailsProps): void;
 }
 
-export type UserProps = {
+export type UserProps = AnonymUser | AuthorizedUserProps;
+
+export type AnonymUser = {
+  usertype: UserType.ANONYM;
+};
+
+export interface AuthorizedUserProps {
   accessed: Date;
   created: Date;
   details: UserDetailsProps;
@@ -20,8 +25,8 @@ export type UserProps = {
   name: string;
   organizations: string[];
   updated: Date;
-  usertype: UserType;
-};
+  usertype: UserType.USER | UserType.ORGANIZATION | UserType.ADMIN;
+}
 
 export interface UserDetailsProps {
   address?: string;

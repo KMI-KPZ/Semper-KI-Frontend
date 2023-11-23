@@ -2,7 +2,7 @@ import useEventsQuerys from "@/api/Events/useEventsQuerys";
 import { useEventsWebsocket } from "@/api/Events/useEventsWebsocket";
 import useEvents from "@/hooks/useEvents/useEvents";
 import logger from "@/hooks/useLogger";
-import useUser from "@/hooks/useUser";
+import useUser, { UserType } from "@/hooks/useUser";
 import { DeleteEvent, Event } from "@/pages/App/types";
 import { AppLoadingSuspense } from "@component-library/index";
 import React, { PropsWithChildren } from "react";
@@ -28,10 +28,10 @@ const EventContextProvider: React.FC<
   const { socket } = useEventsWebsocket();
 
   if (
-    user === undefined ||
-    (user !== undefined &&
+    (user.usertype !== UserType.ANONYM &&
       missedEventsQuery.isFetched &&
-      missedEventsQuery.data !== undefined)
+      missedEventsQuery.data !== undefined) ||
+    user.usertype === UserType.ANONYM
   ) {
     return (
       <EventContext.Provider

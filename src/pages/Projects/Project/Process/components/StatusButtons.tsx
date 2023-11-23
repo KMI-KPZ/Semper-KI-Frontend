@@ -14,7 +14,7 @@ import { StatusButtonProps } from "../../components/StatusButtonData";
 import useService from "@/pages/Service/hooks/useService";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 import useVerification from "../../Verification/hooks/useVerification";
-import useUser from "@/hooks/useUser";
+import useUser, { UserType } from "@/hooks/useUser";
 
 interface ProcessStatusButtonsProps {
   projectID: string;
@@ -35,7 +35,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const shouldRenderFor = (type: "CLIENT" | "CONTRACTOR"): boolean => {
     return (
       process !== undefined &&
-      user !== undefined &&
+      user.usertype !== UserType.ANONYM &&
       ((type === "CONTRACTOR" &&
         process.contractor[0] === user.organizations[0]) ||
         (type === "CLIENT" && process.client === user.hashedID))

@@ -1,5 +1,11 @@
 import useUserQuerys from "@/api/User/useUserQuerys";
-import useUser, { UserProps } from "@/hooks/useUser";
+import logger from "@/hooks/useLogger";
+import useUser, {
+  UserProps,
+  AuthorizedUserProps,
+  UserType,
+  AnonymUser,
+} from "@/hooks/useUser";
 import { AppLoadingSuspense } from "@component-library/Loading";
 import { UseQueryResult } from "@tanstack/react-query";
 import React, { PropsWithChildren, createContext } from "react";
@@ -7,12 +13,12 @@ import React, { PropsWithChildren, createContext } from "react";
 interface UserContextProviderProps {}
 
 export type UserContext = {
-  user: UserProps | undefined;
+  user: UserProps;
   isLoggedIn: boolean;
 };
 
 export const UserContext = createContext<UserContext>({
-  user: undefined,
+  user: { usertype: UserType.ANONYM },
   isLoggedIn: false,
 });
 
@@ -25,18 +31,23 @@ const UserContextProvider: React.FC<
   const isLoggedInIsLoaded: boolean =
     loadIsLoggedInQuery.isFetched && loadIsLoggedInQuery.data !== undefined;
 
+  const isLoggedIn: boolean = loadIsLoggedInQuery.data === true;
+
   const userIsLoaded: boolean =
     isLoggedInIsLoaded &&
-    ((loadIsLoggedInQuery.data === true &&
-      userQuery.isFetched &&
-      userQuery.data !== undefined) ||
-      loadIsLoggedInQuery.data === false);
+    (!isLoggedIn ||
+      (isLoggedIn && userQuery.isFetched && userQuery.data !== undefined));
+
+  const user: UserProps =
+    userQuery.data === undefined
+      ? { usertype: UserType.ANONYM }
+      : userQuery.data;
 
   return isLoggedInIsLoaded && userIsLoaded ? (
     <UserContext.Provider
       value={{
-        user: userQuery.data,
-        isLoggedIn: loadIsLoggedInQuery.data === true,
+        user,
+        isLoggedIn,
       }}
     >
       {children}

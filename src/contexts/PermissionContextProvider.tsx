@@ -7,7 +7,7 @@ import usePermissions, {
 } from "@/hooks/usePermissions";
 import { Outlet } from "react-router-dom";
 import { AppLoadingSuspense } from "@component-library/Loading";
-import useUser from "@/hooks/useUser";
+import useUser, { UserType } from "@/hooks/useUser";
 import usePermissionQuerys from "@/api/Permissions/usePermissionsQuerys";
 
 interface PermissionContextProviderProps {}
@@ -33,12 +33,12 @@ const PermissionContextProvider: React.FC<
     permissionGatesQuery.isFetched;
   const permissionsAreLoaded = (): boolean => permissionsQuery.isFetched;
 
-  return user === undefined ||
-    (user !== undefined &&
-      permissionGatesAreLoaded() &&
-      permissionGatesQuery.data !== undefined &&
-      permissionsAreLoaded() &&
-      permissionsQuery.data !== undefined) ? (
+  return (user.usertype !== UserType.ANONYM &&
+    permissionGatesAreLoaded() &&
+    permissionGatesQuery.data !== undefined &&
+    permissionsAreLoaded() &&
+    permissionsQuery.data !== undefined) ||
+    user.usertype === UserType.ANONYM ? (
     <PermissionContext.Provider
       value={{
         permissions: permissionsQuery.data,

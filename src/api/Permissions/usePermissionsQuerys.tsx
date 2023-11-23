@@ -1,4 +1,4 @@
-import useUser from "@/hooks/useUser";
+import useUser, { UserType } from "@/hooks/useUser";
 import {
   UseQueryResult,
   useQuery,
@@ -25,7 +25,7 @@ const usePermissionsQuerys = (): usePermissionsQuerysReturnProps => {
         return res.data;
       });
     },
-    enabled: user !== undefined,
+    enabled: user.usertype !== UserType.ANONYM,
   });
 
   const permissionGatesQuery = useQuery<PermissionGateType[], Error>({
@@ -37,7 +37,7 @@ const usePermissionsQuerys = (): usePermissionsQuerysReturnProps => {
         return res.data.Rights;
       });
     },
-    enabled: user !== undefined,
+    enabled: user.usertype !== UserType.ANONYM,
   });
   return { permissionGatesQuery, permissionsQuery };
 };

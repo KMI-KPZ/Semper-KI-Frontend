@@ -64,13 +64,13 @@ const App: React.FC = () => {
       }}
     >
       <div
-        className={`flex min-h-screen flex-col items-center justify-between gap-5 overflow-x-auto p-3  font-ptsans text-base `}
+        className={`flex min-h-screen flex-col items-center justify-between  overflow-x-auto font-ptsans text-base`}
         data-testid="app"
         id="app"
       >
         <Header />
-        <main className="flex w-full max-w-screen-2xl flex-grow flex-col items-center justify-start gap-5 bg-opacity-80 md:bg-slate-200 md:p-5 ">
-          <Breadcrumb />
+        <main className="flex w-full flex-grow flex-col items-center justify-start gap-5 bg-opacity-80 ">
+          {/* <Breadcrumb /> */}
           <Routes data-testid="routes">
             <Route index element={<Home />} />
             <Route

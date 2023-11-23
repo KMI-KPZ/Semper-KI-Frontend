@@ -14,7 +14,7 @@ const HomeOrgaInfo: React.FC<HomeOrgaInfoProps> = (props) => {
 
   return (
     <HomeContainer
-      className="md:flex-row md:gap-40"
+      className="bg-slate-500 md:flex-row md:gap-40"
       data-testid="home-anonym-orga"
     >
       <div className="flex w-full max-w-4xl flex-col gap-5 md:flex-row md:justify-between md:gap-40">

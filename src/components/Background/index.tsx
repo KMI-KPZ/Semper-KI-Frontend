@@ -12,7 +12,7 @@ const Background: React.FC<Props> = (props) => {
     <div
       className="fixed left-0 top-0 -z-10
      h-full min-h-[200px] w-full
-     overflow-hidden bg-gradient-to-tr from-türkis-800 to-blau-800 brightness-125 grayscale-[30%]
+     bg-ultramarinblau-dark
      "
     >
       <div className="hidden h-full w-full opacity-10 grayscale-[40%]">

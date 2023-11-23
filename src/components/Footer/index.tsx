@@ -40,7 +40,7 @@ const Footer: React.FC<Props> = (props) => {
       <Modal open={open} closeModal={() => setOpen(false)} title="ContactForm">
         <ContactForm closeEdit={contactOnClick} />
       </Modal>
-      <footer className="w-full bg-white shadow-inner ">
+      <footer className="w-full bg-ultramarinblau text-white shadow-inner grayscale-[90%] ">
         <ul className="flex flex-col items-center md:flex-row md:justify-around">
           <li className="p-2">
             <Button
@@ -48,7 +48,6 @@ const Footer: React.FC<Props> = (props) => {
               title={t("components.Footer.Footer.imprint")}
               extern={isMagazineUp()}
               to={isMagazineUp() ? URL_Impressum : "/legal/imprint"}
-              className="text-grau-600"
             />
           </li>
           <li className="p-2">
@@ -57,7 +56,6 @@ const Footer: React.FC<Props> = (props) => {
               title={t("components.Footer.Footer.privacy")}
               extern={isMagazineUp()}
               to={isMagazineUp() ? URL_Datenschutz : "/legal/privacy"}
-              className="text-grau-600"
             />
           </li>
           <li className="p-2">
@@ -65,7 +63,6 @@ const Footer: React.FC<Props> = (props) => {
               variant="light"
               onClick={contactOnClick}
               title={t("components.Footer.Footer.contact")}
-              className="text-grau-600"
             />
           </li>
           <li className="flex flex-col items-center justify-center xs:flex-row xs:gap-2 xs:p-2">
@@ -85,7 +82,7 @@ const Footer: React.FC<Props> = (props) => {
                 children={<MastodonIcon />}
               />
             </div>
-            <span className="whitespace-nowrap p-2 font-bold text-grau-600">
+            <span className="whitespace-nowrap p-2 font-bold">
               © 2023 Semper-KI
             </span>
           </li>

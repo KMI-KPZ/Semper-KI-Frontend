@@ -14,6 +14,7 @@ import useUser, { UserType } from "@/hooks/useUser";
 import { getProjectEventAmount } from "@/hooks/useEvents/hooks/useProjectEvent";
 import useEvents from "@/hooks/useEvents/useEvents";
 import useBodyScroll from "@/hooks/useBodyScroll";
+import Breadcrumb from "../Breadcrumb";
 
 interface Language {
   code: string;
@@ -284,7 +285,7 @@ export const Header: React.FC<Props> = (props) => {
       <div className=" flex flex-col items-end justify-start text-inherit">
         <Text
           variant="custom"
-          className=" text-2xl font-bold xs:text-3xl md:text-4xl"
+          className=" text-2xl font-bold text-[#263652] xs:text-3xl md:text-4xl"
         >
           {t("components.Header.Header.title")}
         </Text>
@@ -305,7 +306,8 @@ export const Header: React.FC<Props> = (props) => {
           `components.Header.Header.button.${menuOpen ? "close" : "open"}`
         )}
         onClick={openMenu}
-        children={<MenuIcon className="h-6 xl:h-10" />}
+        children={<MenuIcon className="h-6 text-[#263652] xl:h-10" />}
+        className=""
       />
     </li>
   );

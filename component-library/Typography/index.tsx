@@ -18,7 +18,7 @@ const Heading: React.FC<PropsWithChildren<HeadingProps>> = ({
       return (
         <h1
           className={twMerge(
-            `font-ptsans text-2xl font-normal md:text-3xl`,
+            `font-ptsans text-2xl font-normal text-[#263652] md:text-3xl`,
             additionalClassNames
           )}
           {...props}
@@ -30,7 +30,7 @@ const Heading: React.FC<PropsWithChildren<HeadingProps>> = ({
       return (
         <h2
           className={twMerge(
-            `font-ptsans text-xl font-normal md:text-2xl`,
+            `font-ptsans text-xl font-normal text-[#263652] md:text-2xl`,
             additionalClassNames
           )}
           {...props}
@@ -42,7 +42,7 @@ const Heading: React.FC<PropsWithChildren<HeadingProps>> = ({
       return (
         <h3
           className={twMerge(
-            `font-ptsans text-xl font-normal`,
+            `font-ptsans text-xl font-normal text-[#263652]`,
             additionalClassNames
           )}
           {...props}
@@ -54,7 +54,7 @@ const Heading: React.FC<PropsWithChildren<HeadingProps>> = ({
       return (
         <h4
           className={twMerge(
-            `font-ptsans text-base font-normal`,
+            `font-ptsans text-base font-normal text-[#263652]`,
             additionalClassNames
           )}
           {...props}
@@ -66,7 +66,7 @@ const Heading: React.FC<PropsWithChildren<HeadingProps>> = ({
       return (
         <h4
           className={twMerge(
-            `font-ptsans text-xl font-medium`,
+            `font-ptsans text-xl font-medium text-[#263652]`,
             additionalClassNames
           )}
           {...props}

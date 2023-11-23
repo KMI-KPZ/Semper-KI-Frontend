@@ -30,7 +30,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   };
 
   return (
-    <HomeContainer>
+    <HomeContainer className="bg-slate-300">
       <Heading variant="h2">{t("Home.components.Projects.title")}</Heading>
       {user.usertype === UserType.ANONYM ? (
         <Container>

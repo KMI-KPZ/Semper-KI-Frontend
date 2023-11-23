@@ -13,6 +13,10 @@ export default {
     },
     extend: {
       colors: {
+        'ultramarinblau': {
+          DEFAULT:'#00387B',
+          dark:'#263652'
+        },
         'türkis': {
           DEFAULT: '#7DBCBC',
           50: '#F6FAFA',

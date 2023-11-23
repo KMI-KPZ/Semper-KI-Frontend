@@ -18,7 +18,7 @@ export type UserContext = {
 };
 
 export const UserContext = createContext<UserContext>({
-  user: { usertype: UserType.ANONYM },
+  user: { usertype: 3 },
   isLoggedIn: false,
 });
 

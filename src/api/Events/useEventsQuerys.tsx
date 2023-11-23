@@ -22,7 +22,7 @@ const useEventsQuerys = (): useEventsQuerysReturnProps => {
         .get(`${process.env.VITE_HTTP_API_URL}/public/getMissedEvents/`)
         .then((res) => {
           logger("useMissedEvent | getMissedEvents ✅ |", res.data);
-          return res.data;
+          return res.data.events;
         }),
     enabled: user.usertype !== UserType.ANONYM,
   });

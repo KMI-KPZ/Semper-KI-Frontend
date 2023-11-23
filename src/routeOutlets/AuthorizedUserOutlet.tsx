@@ -27,7 +27,9 @@ export const AuthorizedUserContext = createContext<AuthorizedUserContext>({
   deleteUser: () => {},
 });
 
-const AuthorizedUserOutlet: React.FC<AuthorizedUserOutletProps> = (props) => {
+const AuthorizedUserRouteOutlet: React.FC<AuthorizedUserOutletProps> = (
+  props
+) => {
   const {} = props;
   const { user, deleteUser } = useUser();
 
@@ -40,4 +42,4 @@ const AuthorizedUserOutlet: React.FC<AuthorizedUserOutletProps> = (props) => {
   );
 };
 
-export default AuthorizedUserOutlet;
+export default AuthorizedUserRouteOutlet;

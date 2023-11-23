@@ -8,7 +8,7 @@ import { AuthorizedUserContext } from "./AuthorizedUserOutlet";
 
 interface Props {}
 
-export const AdminOutlet: React.FC<Props> = (props) => {
+export const AdminRouteOutlet: React.FC<Props> = (props) => {
   const { user } = useContext(AuthorizedUserContext);
   const { t } = useTranslation();
   return user.usertype === UserType.ADMIN ? <Outlet /> : <Error />;

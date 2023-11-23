@@ -25,12 +25,12 @@ import { FilterItemProps } from "../Service/Manufacturing/Filter/Filter";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import EmailVerification from "../EmailVerification/EmailVerification";
 import ResKriVer from "../ResKriVer/ResKriVer";
-import { OrganizationOutlet } from "@/routeOutlets/OrganizationOutlet";
-import { AdminOutlet } from "@/routeOutlets/AdminOutlet";
+import { OrganizationRouteOutlet } from "@/routeOutlets/OrganizationOutlet";
+import { AdminRouteOutlet } from "@/routeOutlets/AdminOutlet";
 import { ToastContainer } from "react-toastify";
 import ProjectsRoutes from "@/routes/ProjectsRoutes";
 import AdminRoutes from "@/routes/AdminRotes";
-import AuthorizedUserOutlet from "@/routeOutlets/AuthorizedUserOutlet";
+import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -87,10 +87,10 @@ const App: React.FC = () => {
             <Route path="legal/*" element={<Legal />} />
             <Route path="demo/*" element={<Navigate to="/project/new" />} />
             <Route path="projects/*" element={<ProjectsRoutes />} />
-            <Route element={<AuthorizedUserOutlet />}>
+            <Route element={<AuthorizedUserRouteOutlet />}>
               <Route path="test" element={<Test />} />
               <Route path="account" element={<Profile />} />
-              <Route element={<OrganizationOutlet />}>
+              <Route element={<OrganizationRouteOutlet />}>
                 <Route
                   path="organization"
                   element={
@@ -112,7 +112,7 @@ const App: React.FC = () => {
                   }
                 />
               </Route>
-              <Route element={<AdminOutlet />}>
+              <Route element={<AdminRouteOutlet />}>
                 <Route path="admin/*" element={<AdminRoutes />} />
               </Route>
             </Route>

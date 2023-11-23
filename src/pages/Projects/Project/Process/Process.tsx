@@ -26,7 +26,7 @@ import { Upload } from "@/components/Upload";
 import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 import { UserContext } from "@/contexts/UserContextProvider";
 import useCheckedProcesses from "../hooks/useCheckedProcesses";
-import AuthorizedUserOutlet from "@/routeOutlets/AuthorizedUserOutlet";
+import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 
 interface Props {
   process: ProcessProps;

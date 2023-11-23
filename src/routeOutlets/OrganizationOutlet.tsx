@@ -8,7 +8,7 @@ import { AuthorizedUserContext } from "./AuthorizedUserOutlet";
 
 interface Props {}
 
-export const OrganizationOutlet: React.FC<Props> = (props) => {
+export const OrganizationRouteOutlet: React.FC<Props> = (props) => {
   const { user } = useContext(AuthorizedUserContext);
   const { pathname } = useLocation();
   const { t } = useTranslation();

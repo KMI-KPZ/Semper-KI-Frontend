@@ -102,7 +102,9 @@ export default {
         'border':'0px 0px 0px 3px rgba(0, 0, 0, 1)',
         'inner-border':'inset 0px 0px 0px 3px rgba(0, 0, 0, 1)',
         'card':'0px 2px 10px 2px rgba(0, 0, 0, 0.2)',
-        'inner-xl':'inset 1px 2px 5px 2px rgb(0 0 0 / 0.05)'
+        'inner-xl':'inset 1px 2px 5px 2px rgb(0 0 0 / 0.05)',
+        'button':       '0px 0px 5px 2px rgba(0,0,0,0.3),inset 0px 0px 0px 0px rgba(0,0,0,0)',
+        'button-inner': 'inset 0px 0px 5px 3px rgba(0,0,0,0.3),0px 0px 0px 0px rgba(0,0,0,0)',
       }
     },
   },

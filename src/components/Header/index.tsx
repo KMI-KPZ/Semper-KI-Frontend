@@ -277,7 +277,7 @@ export const Header: React.FC<Props> = (props) => {
       title="Startseite"
     >
       <img
-        className="h-8 duration-300 group-hover:scale-110 group-hover:motion-safe:animate-pulse md:h-10"
+        className="h-8 duration-300 group-hover:scale-110  md:h-10"
         data-testid="logo"
         src={LogoURL}
         alt="Kiss Logo"

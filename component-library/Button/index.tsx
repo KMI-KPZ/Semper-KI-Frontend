@@ -92,7 +92,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       case "primary":
         switch (active) {
           case true:
-            return "bg-türkis-500 hover:bg-grau-600 text-white hover:cursor-pointer";
+            return "bg-grau-50 hover:bg-grau-100 text-black hover:cursor-pointer shadow-button hover:shadow-button-inner focus:shadow-button-inner";
           case false:
             return "bg-grau-600 text-white hover:cursor-default";
         }
@@ -184,8 +184,10 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       className={twMerge(
         `bezier group flex h-fit flex-wrap items-center 
          justify-center gap-3 break-words rounded-lg
-         text-center transition duration-300
-         md:flex-nowrap md:whitespace-nowrap`,
+         text-center transition
+         duration-200 
+         md:flex-nowrap md:whitespace-nowrap
+         `,
         getClassNameVariant(),
         getClassNameSize(),
         getClassNameWidth(),

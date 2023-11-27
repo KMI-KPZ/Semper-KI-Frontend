@@ -54,7 +54,8 @@ export type DataNaviagtionTranlationType =
   | "verifyEMail"
   | "manufacturing"
   | "projects"
-  | "project";
+  | "project"
+  | "demonstrator";
 
 interface BreadcrumbItem {
   name: string;
@@ -114,6 +115,7 @@ export function isDataNaviagtionTranlationType(
     "manufacturing",
     "projects",
     "project",
+    "demonstrator",
   ].includes(input);
 }
 

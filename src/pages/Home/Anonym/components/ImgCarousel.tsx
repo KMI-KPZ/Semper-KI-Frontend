@@ -92,7 +92,7 @@ const HomeImgCarousel: React.FC<HomeImgCarouselProps> = (props) => {
       setCurrentPartnerIndex((prevIndex) =>
         prevIndex === partners.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [currentPartnerIndex, partners.length]);
@@ -100,14 +100,14 @@ const HomeImgCarousel: React.FC<HomeImgCarouselProps> = (props) => {
   useEffect(() => {
     if (carouselRef.current) {
       const scrollWidth = carouselRef.current.scrollWidth / partners.length;
-      logger("scroll", scrollWidth, carouselRef.current);
+      // logger("scroll", scrollWidth, carouselRef.current);
       carouselRef.current.scrollLeft = currentPartnerIndex * scrollWidth;
     }
   }, [currentPartnerIndex, partners.length]);
 
   return (
     <div
-      className="flex w-full flex-grow basis-2/3 items-center justify-start overflow-x-scroll scroll-smooth"
+      className="flex w-full flex-grow basis-2/3 items-center justify-start overflow-x-hidden scroll-smooth"
       ref={carouselRef}
     >
       <div className="flex h-fit w-fit flex-row items-center justify-center gap-5 py-5">

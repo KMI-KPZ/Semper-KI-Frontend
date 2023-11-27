@@ -7,6 +7,7 @@
   },
   "data": {
     "NavigationItem": {
+      "demonstrator": "Demonstrator",
       "edit": "Bearbeiten",
       "home": "Startseite",
       "process": "Prozess",
@@ -384,8 +385,15 @@
   "Home": {
     "Anonym": {
       "Anonym": {
+        "alt": {
+          "subtitle": "Wir machen 3D-Druck intelligent",
+          "buttonToDemonstrator": "Zum Demonstrator"
+        },
         "prototype": "Diese Seite ist ein Prototyp und wird fortlaufend bearbeitet",
-        "vision": "Wir bringen 3D-Druck dahin, wo er Potential hat. Unsere KI-Technologien ermitteln für jeden Bedarf optimale Services, Produktionspartner und -bedingungen - unabhängig von Ihren Vorkenntnissen. Unser Kern: Wir sind flexibel. Kosten, Zeit, Qualität, Quantität - Sie legen die Paramter fest. Den Rest macht Semper-KI. Gefördert vom BMWK.",
+        "visionTitle1": "Wir vermitteln, was Sie brauchen",
+        "visionTitle2": "Mit KI zum 3D-Druck",
+        "vision1": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. Dazu gehören vorgelagerte Services wie Modellerstellung und Materialberatung genauso wie die Vermittlung von Nachbearbeitung oder Rechtsberatung. Der Druck findet beim optimalen Partner statt. Für all das setzen wir auf KI-Technologien. Gefördert vom Bundesministerium für Wirtschaft und Klimaschutz.",
+        "vision2": "Kern unserer Plattform sind Künstliche Intelligenzen. Diese Technologien haben wir speziell für die Vernetzung von Kunden mit der 3D-Druck-Branche entwickelt. Unsere KI ist ein semantisches Netz. In dieses Netz speisen wir Informationen über alle verfügbaren 3D-Druck-Prozesse ein. In Kombination mit den Anfragen, die auf der Plattform eingehen, ermitteln unsere KI-Technologien daraus die optimale Produktionsstrategie.",
         "demonstrator": "Demonstrator ausprobieren",
         "buttons": {
           "demonstrator": "Zum Demonstrator"

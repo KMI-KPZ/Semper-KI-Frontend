@@ -2,11 +2,11 @@ import { Heading, Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Container from "@component-library/Container";
-import Hero from "@images/Hero16.9.png";
+import Hero from "@images/Hero_16_9.png";
 import HomeContainer from "../components/Container";
 import SemperKI from "@images/Semper-KI.png";
 import WirMachen3DDruck from "@images/Wir-machen-3D-Druck.png";
-import ButtonIcon from "@images/Button.png";
+import ButtonIcon from "@images/OnButton.png";
 import SemperLogo from "@images/Logo-Semper.png";
 import ContentBox from "@component-library/ContentBox";
 import { Button } from "@component-library/Button";
@@ -14,6 +14,8 @@ import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import LoginIcon from "@mui/icons-material/Login";
 import { useLogin } from "@/pages/Login/hooks/useLogin";
 import HomeImgCarousel from "./components/ImgCarousel";
+import { useProject } from "@/pages/Projects/hooks/useProject";
+import { useNavigate } from "react-router-dom";
 
 interface HomeProps {}
 
@@ -21,9 +23,15 @@ const Home: React.FC<HomeProps> = (props) => {
   const {} = props;
   const { t, i18n } = useTranslation();
   const { loginMutation } = useLogin();
+  const { createProject } = useProject();
+  const navigate = useNavigate();
 
   const handleOnClickButton = () => {
     loginMutation.mutate({ userType: "user", register: true });
+  };
+
+  const handleOnClickButtonDemonstrator = () => {
+    createProject.mutate();
   };
 
   return (
@@ -39,21 +47,52 @@ const Home: React.FC<HomeProps> = (props) => {
           </Text>
         </Container>
       ) : null}
-      <HomeContainer className="h-screen bg-black bg-opacity-70">
-        <ContentBox className="">
-          <img src={SemperLogo} className="w-fit" />
-          <img src={SemperKI} className="w-fit" />
+      <HomeContainer className="h-fit min-h-screen bg-black bg-opacity-70">
+        <ContentBox className="flex-wrap">
+          <img src={SemperLogo} className="w-[300px]" alt="" />
+          <img src={SemperKI} className="w-[750px]" alt="Sermper-KI" />
         </ContentBox>
-        <ContentBox className="">
-          <img src={WirMachen3DDruck} className="w-fit" />
-          <img src={ButtonIcon} className="w-fit" />
+        <ContentBox className="flex-wrap">
+          <img
+            src={WirMachen3DDruck}
+            className="w-[800px]"
+            alt={t("Home.Anonym.Anonym.alt.subtitle")}
+          />
+          <a
+            className="w-fit"
+            href="#"
+            onClick={handleOnClickButtonDemonstrator}
+          >
+            <img
+              src={ButtonIcon}
+              className="h-32 w-32 object-cover duration-300 hover:scale-110"
+              alt={t("Home.Anonym.Anonym.alt.buttonToDemonstrator")}
+            />
+          </a>
         </ContentBox>
       </HomeContainer>
-      <HomeContainer className="h-fit min-h-[50vh] bg-black bg-opacity-30">
-        <ContentBox className="h-fit">
-          <Text variant="body" className="text-white md:text-xl">
-            {t("Home.Anonym.Anonym.vision")}
-          </Text>
+      <HomeContainer className="h-fit min-h-[30vh]  bg-gradient-to-b from-[#064EA1]/80  via-[#2773BB]/80 to-[#43BBC2]/80 md:bg-gradient-to-r">
+        {/* <HomeContainer className="h-fit min-h-[30vh]  bg-gradient-to-b from-violet-800/80  via-orange-800/80 to-türkis-800/80 md:bg-gradient-to-r"> */}
+        <ContentBox className="h-fit items-start justify-between gap-10">
+          <Container direction="col" gap={5} width="full" align="start">
+            <Heading variant="h2" className="text-white">
+              {t("Home.Anonym.Anonym.visionTitle1")}
+            </Heading>
+            <Text variant="body" className="text-justify text-white md:text-xl">
+              {t("Home.Anonym.Anonym.vision1")}
+            </Text>
+          </Container>
+          <Container direction="col" gap={5} width="full" align="start">
+            <Heading variant="h2" className="text-white">
+              {t("Home.Anonym.Anonym.visionTitle2")}
+            </Heading>
+            <Text
+              variant="body"
+              className=" text-justify text-white md:text-xl"
+            >
+              {t("Home.Anonym.Anonym.vision2")}
+            </Text>
+          </Container>
         </ContentBox>
       </HomeContainer>
       <HomeContainer className="h-fit min-h-[20vh] bg-ultramarinblau-dark">
@@ -61,7 +100,10 @@ const Home: React.FC<HomeProps> = (props) => {
           <Text variant="body" className="text-3xl">
             {t("Home.Anonym.Anonym.demonstrator")}
           </Text>
-          <Button title={t("Home.Anonym.Anonym.buttons.demonstrator")} />
+          <Button
+            title={t("Home.Anonym.Anonym.buttons.demonstrator")}
+            onClick={() => navigate("/projects")}
+          />
         </ContentBox>
       </HomeContainer>
       <HomeContainer

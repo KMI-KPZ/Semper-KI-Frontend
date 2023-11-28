@@ -16,7 +16,10 @@ import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 
 interface ReturnProps {
-  isServiceComplete: (service: GeneralServiceProps) => boolean;
+  isServiceComplete: (
+    serviceType: ServiceType,
+    service: ServiceProps
+  ) => boolean;
   updatedService: (updateServiceProps: UpdateServiceManufacturingProps) => void;
 }
 
@@ -26,14 +29,12 @@ export enum ServiceType {
   "MODELING",
 }
 
-export type GeneralServiceProps =
+export type ServiceProps =
   | ServiceManufacturingProps
   | ServiceModelingProps
   | ServiceUndefinedProps;
 
-export interface ServiceUndefinedProps {
-  type: ServiceType.UNDEFINED;
-}
+export interface ServiceUndefinedProps {}
 
 export interface UpdateServiceProps {
   type?: ServiceType;
@@ -48,7 +49,7 @@ export interface UpdateServiceUndefinedProps {
 }
 
 interface ServiceQueryProps {
-  service: GeneralServiceProps;
+  service: ServiceProps;
   projectQuery: UseQueryResult<ProjectProps, Error>;
 }
 
@@ -58,8 +59,11 @@ const useService = (): ReturnProps => {
   const { updateProcess } = useProcess();
   const service = process.service as ServiceManufacturingProps;
 
-  const isServiceComplete = (service: GeneralServiceProps): boolean => {
-    switch (service.type) {
+  const isServiceComplete = (
+    serviceType: ServiceType,
+    service: ServiceProps
+  ): boolean => {
+    switch (serviceType) {
       case ServiceType.MANUFACTURING:
         const manufacturingService = service as ServiceManufacturingProps;
         return (
@@ -80,7 +84,10 @@ const useService = (): ReturnProps => {
       ...service,
       ...updateServiceProps,
     };
-    const serviceIsComplete = isServiceComplete(newService);
+    const serviceIsComplete = isServiceComplete(
+      ServiceType.MANUFACTURING,
+      newService
+    );
     updateProcess.mutate({
       changes: {
         service: updateServiceProps,

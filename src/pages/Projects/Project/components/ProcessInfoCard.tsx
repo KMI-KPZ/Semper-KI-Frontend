@@ -49,24 +49,24 @@ const ProcessInfoCard: React.FC<ProcessInfoCardProps> = (props) => {
           <Text variant="body">
             {t(
               `enum.ServiceType.${
-                ServiceType[process.service.type] as keyof typeof ServiceType
+                ServiceType[process.serviceType] as keyof typeof ServiceType
               }`
             )}
           </Text>
         </Container>
-        {process.service.type === ServiceType.MANUFACTURING ? (
+        {process.serviceType === ServiceType.MANUFACTURING ? (
           <>
             <Container direction="row">
               <Text variant="body">
                 {t("Projects.Project.components.ProcessInfoCard.model")}
               </Text>
-              <Text variant="body">{process.service.model?.title}</Text>
+              <Text variant="body">{process.service?.model?.title}</Text>
             </Container>
             <Container direction="row">
               <Text variant="body">
                 {t("Projects.Project.components.ProcessInfoCard.material")}
               </Text>
-              <Text variant="body">{process.service.material?.title}</Text>
+              <Text variant="body">{process.service?.material?.title}</Text>
             </Container>
             <Container direction="row">
               <Text variant="body">

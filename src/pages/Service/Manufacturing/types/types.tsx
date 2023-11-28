@@ -4,7 +4,6 @@ import { ModelProps } from "../Model/types";
 import { PostProcessingProps } from "../PostProcessing/PostProcessing";
 
 export type ServiceManufacturingProps = {
-  type: ServiceType.MANUFACTURING;
   model?: ModelProps;
   material?: MaterialProps;
   postProcessings?: PostProcessingProps[];

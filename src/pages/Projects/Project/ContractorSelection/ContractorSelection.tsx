@@ -47,7 +47,9 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
         project.processes.length === 0
           ? []
           : project.processes
-              .filter((process) => isServiceComplete(process.service))
+              .filter((process) =>
+                isServiceComplete(process.serviceType, process.service)
+              )
               .map((process) => {
                 return {
                   process: process,
@@ -94,7 +96,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
           ? project.processes
               .filter(
                 (process) =>
-                  isServiceComplete(process.service) &&
+                  isServiceComplete(process.serviceType, process.service) &&
                   process.status === ProcessStatus.SERVICE_READY
               )
               .map((process, index) => (

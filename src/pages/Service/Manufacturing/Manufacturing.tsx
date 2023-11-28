@@ -38,7 +38,7 @@ export const ServiceManufacturingContext =
     setSearchInput: () => {
       logger("Error ProcessContext searchModels");
     },
-    service: { type: 1 },
+    service: {},
   });
 
 export const ServiceManufacturing: React.FC<Props> = (props) => {

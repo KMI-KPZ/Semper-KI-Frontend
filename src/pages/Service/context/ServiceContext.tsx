@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useState } from "react";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 import { Outlet } from "react-router-dom";
-import { GeneralServiceProps } from "../hooks/useService";
+import { ServiceProps } from "../hooks/useService";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 
 type ServiceContextType = {
-  service: GeneralServiceProps | undefined;
+  service: ServiceProps | undefined;
 };
 
 export const ServiceContext = createContext<ServiceContextType>({

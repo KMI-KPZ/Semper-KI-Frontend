@@ -24,10 +24,10 @@ export const getTitleFromProcess = (
 ): string => {
   return process.details.title !== undefined
     ? process.details.title
-    : process.service.type !== undefined
+    : process.serviceType !== undefined
     ? t(
         `enum.ServiceType.${
-          ServiceType[process.service.type] as keyof typeof ServiceType
+          ServiceType[process.serviceType] as keyof typeof ServiceType
         }`
       )
     : t("Service.Overview.components.Item.titleEmpty");

@@ -11,8 +11,9 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import usePathID from "@/hooks/usePathID";
 import { ProjectProps, useProject } from "./useProject";
 import {
-  GeneralServiceProps,
+  ServiceProps,
   GerneralUpdateServiceProps,
+  ServiceType,
 } from "@/pages/Service/hooks/useService";
 import { useContext } from "react";
 import { ProjectContext } from "../context/ProjectContext";
@@ -57,17 +58,18 @@ export interface ProcessDetailsProps {
 }
 
 export interface ProcessProps {
-  messages: { messages: ChatMessageProps[] };
-  contractor: string[];
-  client: string;
-  details: ProcessDetailsProps;
-  files: FilesDescriptionProps[];
-  service: GeneralServiceProps;
-  status: ProcessStatus;
-  serviceStatus: number;
   processID: string;
+  client: string;
+  status: ProcessStatus;
+  details: ProcessDetailsProps;
+  serviceStatus: number;
+  service: ServiceProps;
+  serviceType: ServiceType;
   created: Date;
   updated: Date;
+  files: FilesDescriptionProps[];
+  messages: { messages: ChatMessageProps[] };
+  contractor: string[];
 }
 
 export interface FilesDescriptionProps {

@@ -50,15 +50,27 @@ const Home: React.FC<HomeProps> = (props) => {
       <HomeContainer className="h-fit min-h-screen bg-black bg-opacity-70">
         <ContentBox className="flex-wrap">
           <img src={SemperLogo} className="w-[300px]" alt="" />
-          <img src={SemperKI} className="w-[750px]" alt="Sermper-KI" />
+          {/* <Heading
+            variant="h1"
+            className="font-black tracking-wide text-white shadow-white [text-shadow:_#FFF_0px_0px_5px,_#FFF_0px_0px_10px,_#FFF_0px_0px_15px,_#FF2D95_0px_0px_20px,_#FF2D95_0px_0px_30px,_#FF2D95_0px_0px_40px,_#FF2D95_0px_0px_50px,_#FF2D95_0px_0px_75px] md:text-9xl"
+          >
+            {t("Home.Anonym.Anonym.title")}
+          </Heading> */}
+          <Heading
+            variant="h1"
+            className="text-6xl font-black tracking-wide text-white shadow-white [text-shadow:_0px_0px_20px_var(--tw-shadow-color)] md:text-9xl"
+          >
+            {t("Home.Anonym.Anonym.title")}
+          </Heading>
         </ContentBox>
         <ContentBox className="flex-wrap">
-          <img
-            src={WirMachen3DDruck}
-            className="w-[800px]"
-            alt={t("Home.Anonym.Anonym.alt.subtitle")}
-          />
-          <a
+          <Heading
+            variant="h2"
+            className="text-3xl font-black tracking-wide text-white shadow-white [text-shadow:_0px_0px_20px_var(--tw-shadow-color)] md:text-5xl "
+          >
+            {t("Home.Anonym.Anonym.subTitle")}
+          </Heading>
+          {/* <a
             className="w-fit"
             href="#"
             onClick={handleOnClickButtonDemonstrator}
@@ -68,7 +80,7 @@ const Home: React.FC<HomeProps> = (props) => {
               className="h-32 w-32 object-cover duration-300 hover:scale-110"
               alt={t("Home.Anonym.Anonym.alt.buttonToDemonstrator")}
             />
-          </a>
+          </a> */}
         </ContentBox>
       </HomeContainer>
       <HomeContainer className="h-fit min-h-[30vh]  bg-gradient-to-b from-[#064EA1]/80  via-[#2773BB]/80 to-[#43BBC2]/80 md:bg-gradient-to-r">
@@ -78,7 +90,10 @@ const Home: React.FC<HomeProps> = (props) => {
             <Heading variant="h2" className="text-white">
               {t("Home.Anonym.Anonym.visionTitle1")}
             </Heading>
-            <Text variant="body" className="text-justify text-white md:text-xl">
+            <Text
+              variant="body"
+              className="hyphens-auto text-justify text-white md:text-xl"
+            >
               {t("Home.Anonym.Anonym.vision1")}
             </Text>
           </Container>
@@ -88,7 +103,7 @@ const Home: React.FC<HomeProps> = (props) => {
             </Heading>
             <Text
               variant="body"
-              className=" text-justify text-white md:text-xl"
+              className="hyphens-auto text-justify text-white md:text-xl"
             >
               {t("Home.Anonym.Anonym.vision2")}
             </Text>
@@ -97,9 +112,9 @@ const Home: React.FC<HomeProps> = (props) => {
       </HomeContainer>
       <HomeContainer className="h-fit min-h-[20vh] bg-ultramarinblau-dark">
         <ContentBox className="justify-between py-5">
-          <Text variant="body" className="text-3xl">
+          <Heading variant="h2" className="text-3xl text-white">
             {t("Home.Anonym.Anonym.demonstrator")}
-          </Text>
+          </Heading>
           <Button
             title={t("Home.Anonym.Anonym.buttons.demonstrator")}
             onClick={() => navigate("/projects")}
@@ -159,11 +174,10 @@ const Home: React.FC<HomeProps> = (props) => {
           </div>
         </ContentBox>
       </HomeContainer>
-      <HomeContainer className={`bg-slate-200`}>
+      <HomeContainer className={`bg-white`}>
         <ContentBox>
-          <Heading variant="h2" className="basis-1/3 text-black">
-            Innovation klappt nur als Team. Wir arbeiten eng zusammen und freuen
-            uns über neue Partner in Forschung und Entwicklung.
+          <Heading variant="h2" className="basis-1/3 hyphens-auto text-black">
+            {t("Home.Anonym.Anonym.partner")}
           </Heading>
           <HomeImgCarousel />
         </ContentBox>

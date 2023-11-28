@@ -123,7 +123,7 @@ const Process: React.FC<Props> = (props) => {
           projectEvent={projectEvent}
         />
       </div>
-      <StatusBar status={process.status} serviceType={process.service.type} />
+      <StatusBar status={process.status} serviceType={process.serviceType} />
       <ProcessStatusButtons
         projectID={projectID}
         state={process.status}

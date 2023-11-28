@@ -9,7 +9,7 @@ import ServicePreviewSelectItem, {
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { useParams } from "react-router-dom";
 import useService, {
-  GeneralServiceProps,
+  ServiceProps,
   ServiceType,
 } from "@/pages/Service/hooks/useService";
 import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
@@ -51,8 +51,8 @@ const ServicePreviewSelect: React.FC<ServiceSelectProps> = (props) => {
               {...item}
               key={index}
               manuelProcessID={process.processID}
-              active={process.service.type === item.serviceType}
-              serviceSelected={process.service.type !== ServiceType.UNDEFINED}
+              active={process.serviceType === item.serviceType}
+              serviceSelected={process.serviceType !== ServiceType.UNDEFINED}
             />
           ))}
         </div>

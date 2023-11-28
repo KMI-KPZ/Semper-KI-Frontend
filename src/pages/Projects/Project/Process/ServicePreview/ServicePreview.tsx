@@ -1,7 +1,4 @@
-import {
-  GeneralServiceProps,
-  ServiceType,
-} from "@/pages/Service/hooks/useService";
+import { ServiceProps, ServiceType } from "@/pages/Service/hooks/useService";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProcessServiceManufacturing from "./components/Manufacturing";
@@ -23,7 +20,7 @@ const ProcessServicePreview: React.FC<ProcessServicePreviewProps> = (props) => {
   const { t } = useTranslation();
 
   const renderService = () => {
-    switch (process.service.type) {
+    switch (process.serviceType) {
       case ServiceType.UNDEFINED:
         return <ServicePreviewSelect process={process} />;
       case ServiceType.MANUFACTURING:
@@ -45,7 +42,7 @@ const ProcessServicePreview: React.FC<ProcessServicePreviewProps> = (props) => {
           {t("Projects.Project.Process.ServicePreview.ServicePreview.title")}{" "}
           {t(
             `enum.ServiceType.${
-              ServiceType[process.service.type] as keyof typeof ServiceType
+              ServiceType[process.serviceType] as keyof typeof ServiceType
             }`
           )}
         </Heading>

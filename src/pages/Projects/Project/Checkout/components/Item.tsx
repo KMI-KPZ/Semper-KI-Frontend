@@ -25,7 +25,7 @@ const ProjectCheckoutItem: React.FC<Props> = (props) => {
         {...register(`processes.${index}.checked`)}
       />
       <Heading variant="h2">{process.details.title}</Heading>
-      <Heading variant="h2">{ServiceType[process.service.type]}</Heading>
+      <Heading variant="h2">{ServiceType[process.serviceType]}</Heading>
     </label>
   );
 };

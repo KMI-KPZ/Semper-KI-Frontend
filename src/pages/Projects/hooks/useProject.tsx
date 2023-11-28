@@ -24,11 +24,11 @@ interface ReturnProps {
 export interface ProjectProps {
   projectID: string;
   client: string;
+  status: ProcessStatus;
   created: Date;
   updated: Date;
-  status: ProcessStatus;
-  processes: ProcessProps[];
   details: ProjectDetailsProps;
+  processes: ProcessProps[];
 }
 
 export interface ProjectDetailsProps {
@@ -67,29 +67,34 @@ export const useProject = (): ReturnProps => {
     ["project", projectID],
     async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getProject/${projectID}/`;
-      return customAxios
-        .get(apiUrl)
-        .then((response) => {
-          logger("useOrdes | getProject ✅ |", response.data);
-          const Project = {
-            ...response.data,
-            created: new Date(response.data.created),
-            updated: new Date(response.data.updated),
-            processes: response.data.processes.map((process: any) => {
-              return {
-                ...process,
-                created: new Date(process.created),
-                updated: new Date(process.updated),
-                files: getFiles(process.files),
-              };
-            }),
-          };
-          return Project;
-        })
-        .catch((error) => {
-          logger("useProject | getProject ❌ |", error);
-          navigate("/projects");
-        });
+      return customAxios.get(apiUrl).then((response) => {
+        logger("useOrdes | getProject ✅ |", response.data);
+        const Project: ProjectProps = {
+          client: response.data.client,
+          projectID: response.data.projectID,
+          status: response.data.status,
+          details: response.data.details,
+          created: new Date(response.data.createdWhen),
+          updated: new Date(response.data.updatedWhen),
+          processes: response.data.processes.map(
+            (process: any): ProcessProps => ({
+              client: process.client,
+              processID: process.processID,
+              status: process.processStatus,
+              serviceStatus: process.serviceStatus,
+              serviceType: process.serviceType,
+              details: process.serviceDetails,
+              contractor: process.contractor,
+              messages: process.messages.messages,
+              service: process.service,
+              created: new Date(process.createdWhen),
+              updated: new Date(process.updatedWhen),
+              files: getFiles(process.files),
+            })
+          ),
+        };
+        return Project;
+      });
     },
     {
       enabled: projectID !== undefined,

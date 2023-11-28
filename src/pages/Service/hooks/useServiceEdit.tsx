@@ -3,16 +3,17 @@ import useService, { ServiceType } from "./useService";
 import { useNavigate } from "react-router-dom";
 import { ServiceContext } from "../context/ServiceContext";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
+import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 
 const useServiceEdit = () => {
-  const { service } = useContext(ServiceContext);
+  const { process } = useContext(ProcessContext);
   const { projectQuery } = useContext(ProjectContext);
   const navigate = useNavigate();
   useEffect(() => {
     if (!projectQuery.isRefetching && projectQuery.isFetched)
-      if (service === undefined) navigate("service");
+      if (process.serviceType === undefined) navigate("service");
       else
-        switch (service.type) {
+        switch (process.serviceType) {
           case ServiceType.MANUFACTURING:
             navigate("../manufacturing");
             break;
@@ -23,7 +24,7 @@ const useServiceEdit = () => {
             navigate("..");
             break;
         }
-  }, [service, projectQuery]);
+  }, [process, projectQuery]);
 };
 
 export default useServiceEdit;

@@ -24,6 +24,7 @@ export const ProcessContext = React.createContext<ProcessContextProps>({
     serviceStatus: 0,
     status: 0,
     updated: new Date(),
+    serviceType: 0,
   },
 });
 

@@ -20,7 +20,7 @@ const useServiceEdit = () => {
           case ServiceType.MODELING:
             navigate("../modelling");
             break;
-          case ServiceType.UNDEFINED:
+          case ServiceType.NONE:
             navigate("..");
             break;
         }

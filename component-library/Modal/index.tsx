@@ -46,11 +46,12 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
     }
   };
 
-  const closeModalOnEscape = (e: KeyboardEvent<HTMLDialogElement>) => {
+  const onKeyDown = (e: KeyboardEvent<HTMLDialogElement>) => {
     if (e.key === "Escape") {
       e.preventDefault();
       closeModalWithScroll();
     }
+    logger("Modal onKeyDown", e.key);
   };
 
   // Eventlistener: trigger onclose when cancel detected
@@ -132,7 +133,7 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
         md:h-fit md:max-h-[90vh] md:w-fit md:max-w-7xl
      `
       )}
-      onKeyDown={closeModalOnEscape}
+      onKeyDown={onKeyDown}
       onClose={closeModal}
       onCancel={handleOnCancel}
       onClick={handleOnClick}

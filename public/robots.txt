@@ -1,3 +1,15 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow: /
+
+User-agent: Googlebot
+Allow: /$
+
+User-agent: Bingbot
+Allow: /$
+
+User-agent: Yahoo Slurp
+Allow: /$
+
+User-agent: DuckDuckGo
+Allow: /$

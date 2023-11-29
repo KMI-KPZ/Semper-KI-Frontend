@@ -89,6 +89,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
     flatProjects: FlatProjectProps[]
   ): ProjectsTableGroupProps[] => {
     let projectGroups: ProjectsTableGroupProps[] = [];
+
     projectGroupings.forEach((grouping) => {
       const filteredProjects = flatProjects.filter(
         (project) =>

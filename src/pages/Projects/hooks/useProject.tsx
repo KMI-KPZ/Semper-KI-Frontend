@@ -13,6 +13,7 @@ import useProcess, {
   ProcessProps,
   ProcessStatus,
 } from "./useProcess";
+import { ServiceType } from "@/pages/Service/hooks/useService";
 
 interface ReturnProps {
   projectQuery: UseQueryResult<ProjectProps, Error>;
@@ -68,8 +69,7 @@ export const useProject = (): ReturnProps => {
     async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getProject/${projectID}/`;
       return customAxios.get(apiUrl).then((response) => {
-        logger("useOrdes | getProject ✅ |", response.data);
-        const Project: ProjectProps = {
+        const project: ProjectProps = {
           client: response.data.client,
           projectID: response.data.projectID,
           status: response.data.status,
@@ -93,7 +93,8 @@ export const useProject = (): ReturnProps => {
             })
           ),
         };
-        return Project;
+        logger("useOrdes | getProject ✅ |", project);
+        return project;
       });
     },
     {

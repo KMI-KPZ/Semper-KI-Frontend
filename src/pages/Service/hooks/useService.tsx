@@ -24,7 +24,7 @@ interface ReturnProps {
 }
 
 export enum ServiceType {
-  "UNDEFINED",
+  "NONE",
   "MANUFACTURING",
   "MODELING",
 }
@@ -72,7 +72,7 @@ const useService = (): ReturnProps => {
         );
       case ServiceType.MODELING:
         return true;
-      case ServiceType.UNDEFINED:
+      case ServiceType.NONE:
         return false;
     }
   };

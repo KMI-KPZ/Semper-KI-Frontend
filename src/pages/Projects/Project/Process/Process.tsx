@@ -97,7 +97,7 @@ const Process: React.FC<Props> = (props) => {
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row lg:justify-between">
         <Container direction="row" gap={3} className="flex-wrap md:flex-nowrap">
           <input
-            id="selectProcess"
+            id={`selectProcess${process.processID}`}
             type="checkbox"
             className="h-6 w-6"
             name={t("Projects.Project.Project.label.selectProcess")}
@@ -108,9 +108,10 @@ const Process: React.FC<Props> = (props) => {
             onChange={(e) => handleOnChangeCheckboxSelect(e, process.processID)}
           />
           <ProjectTitleForm
+            forId={`selectProcess${process.processID}`}
             title={getTitleFromProcess(process, t)}
             updateTitle={updateProcessTitle}
-            headerType="h3"
+            headerType="h2"
           />
         </Container>
         <Divider className="hidden md:block" />

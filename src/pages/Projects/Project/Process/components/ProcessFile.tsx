@@ -61,7 +61,7 @@ const ProjectFile: React.FC<Props> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
       <div className="flex w-full items-center gap-3">
-        <Heading variant="h3">
+        <Heading variant="h2">
           {t("Projects.Project.Process.components.ProcessFile.title")}:
         </Heading>
         <Divider className="mt-[0.3rem]" />

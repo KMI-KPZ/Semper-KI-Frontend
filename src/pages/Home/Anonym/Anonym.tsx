@@ -48,14 +48,8 @@ const Home: React.FC<HomeProps> = (props) => {
         </Container>
       ) : null}
       <HomeContainer className="h-fit min-h-screen bg-black bg-opacity-70">
-        <ContentBox className="flex-wrap">
+        <ContentBox className="flex-wrap justify-center">
           <img src={SemperLogo} className="w-[300px]" alt="" />
-          {/* <Heading
-            variant="h1"
-            className="font-black tracking-wide text-white shadow-white [text-shadow:_#FFF_0px_0px_5px,_#FFF_0px_0px_10px,_#FFF_0px_0px_15px,_#FF2D95_0px_0px_20px,_#FF2D95_0px_0px_30px,_#FF2D95_0px_0px_40px,_#FF2D95_0px_0px_50px,_#FF2D95_0px_0px_75px] md:text-9xl"
-          >
-            {t("Home.Anonym.Anonym.title")}
-          </Heading> */}
           <Heading
             variant="h1"
             className="text-6xl font-black tracking-wide text-white shadow-white [text-shadow:_0px_0px_20px_var(--tw-shadow-color)] md:text-9xl"
@@ -63,24 +57,13 @@ const Home: React.FC<HomeProps> = (props) => {
             {t("Home.Anonym.Anonym.title")}
           </Heading>
         </ContentBox>
-        <ContentBox className="flex-wrap">
+        <ContentBox className="flex-wrap justify-center">
           <Heading
             variant="h2"
             className="text-3xl font-black tracking-wide text-white shadow-white [text-shadow:_0px_0px_20px_var(--tw-shadow-color)] md:text-5xl "
           >
             {t("Home.Anonym.Anonym.subTitle")}
           </Heading>
-          {/* <a
-            className="w-fit"
-            href="#"
-            onClick={handleOnClickButtonDemonstrator}
-          >
-            <img
-              src={ButtonIcon}
-              className="h-32 w-32 object-cover duration-300 hover:scale-110"
-              alt={t("Home.Anonym.Anonym.alt.buttonToDemonstrator")}
-            />
-          </a> */}
         </ContentBox>
       </HomeContainer>
       <HomeContainer className="h-fit min-h-[30vh]  bg-gradient-to-b from-[#064EA1]/80  via-[#2773BB]/80 to-[#43BBC2]/80 md:bg-gradient-to-r">
@@ -130,7 +113,7 @@ const Home: React.FC<HomeProps> = (props) => {
             <Heading variant="h2" className="text-white">
               {t("Home.components.OrgaInfo.title")}
             </Heading>
-            <Heading variant="subtitle" className="pl-5 text-white">
+            <Heading variant="h3" className="pl-5 text-white">
               {t("Home.components.OrgaInfo.subTitle")}
             </Heading>
           </div>
@@ -155,7 +138,7 @@ const Home: React.FC<HomeProps> = (props) => {
             <Heading variant="h2" className="text-white">
               {t("Home.components.ClientInfo.title")}
             </Heading>
-            <Heading variant="subtitle" className="pl-5 text-white">
+            <Heading variant="h3" className="pl-5 text-white">
               {t("Home.components.ClientInfo.subTitle")}
             </Heading>
           </div>

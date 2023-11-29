@@ -52,7 +52,7 @@ const ServicePreviewSelect: React.FC<ServiceSelectProps> = (props) => {
               key={index}
               manuelProcessID={process.processID}
               active={process.serviceType === item.serviceType}
-              serviceSelected={process.serviceType !== ServiceType.UNDEFINED}
+              serviceSelected={process.serviceType !== ServiceType.NONE}
             />
           ))}
         </div>

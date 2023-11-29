@@ -64,12 +64,12 @@ const App: React.FC = () => {
       }}
     >
       <div
-        className={`flex min-h-screen flex-col items-center justify-between  overflow-x-auto font-ptsans text-base`}
+        className={`flex min-h-screen flex-col items-center justify-between overflow-x-auto font-ptsans text-base`}
         data-testid="app"
         id="app"
       >
         <Header />
-        <main className="flex w-full flex-grow flex-col items-center justify-start gap-5 bg-opacity-80 ">
+        <main className="flex w-full flex-grow flex-col items-center justify-start">
           {/* <Breadcrumb /> */}
           <Routes data-testid="routes">
             <Route index element={<Home />} />

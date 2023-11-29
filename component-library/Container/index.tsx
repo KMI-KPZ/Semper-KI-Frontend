@@ -19,7 +19,7 @@ const Container: React.FC<PropsWithChildren<ContainerProps>> = (props) => {
     direction = "auto",
     justify = "center",
     wrap,
-    gap = 0,
+    gap = 5,
     width = "auto",
     height,
     className,

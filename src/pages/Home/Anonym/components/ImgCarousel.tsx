@@ -119,6 +119,7 @@ const HomeImgCarousel: React.FC<HomeImgCarouselProps> = (props) => {
             className="flex w-60 items-center justify-center"
           >
             <img
+              alt={partner.title}
               className="w-60 duration-300 hover:scale-105"
               src={partner.img}
             />

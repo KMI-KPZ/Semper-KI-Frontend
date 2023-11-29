@@ -90,7 +90,7 @@
     "ServiceType": {
       "MANUFACTURING": "Modell Herstellen lassen",
       "MODELING": "Modell Entwerfen lassen",
-      "UNDEFINED": "Service auswahl"
+      "NONE": "Service auswahl"
     },
     "ProcessStatusType": {
       "OK": "OK",

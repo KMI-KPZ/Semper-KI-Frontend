@@ -48,6 +48,7 @@ const Footer: React.FC<Props> = (props) => {
               title={t("components.Footer.Footer.imprint")}
               extern={isMagazineUp()}
               to={isMagazineUp() ? URL_Impressum : "/legal/imprint"}
+              className="text-white"
             />
           </li>
           <li className="p-2">
@@ -56,6 +57,7 @@ const Footer: React.FC<Props> = (props) => {
               title={t("components.Footer.Footer.privacy")}
               extern={isMagazineUp()}
               to={isMagazineUp() ? URL_Datenschutz : "/legal/privacy"}
+              className="text-white"
             />
           </li>
           <li className="p-2">
@@ -63,6 +65,7 @@ const Footer: React.FC<Props> = (props) => {
               variant="light"
               onClick={contactOnClick}
               title={t("components.Footer.Footer.contact")}
+              className="text-white"
             />
           </li>
           <li className="flex flex-col items-center justify-center xs:flex-row xs:gap-2 xs:p-2">
@@ -73,6 +76,7 @@ const Footer: React.FC<Props> = (props) => {
                 variant="light"
                 extern
                 children={<InstagramIcon />}
+                className="text-white"
               />
               <Button
                 title={t("components.Footer.Footer.mastodon")}
@@ -80,6 +84,7 @@ const Footer: React.FC<Props> = (props) => {
                 variant="light"
                 extern
                 children={<MastodonIcon />}
+                className="text-white"
               />
             </div>
             <span className="whitespace-nowrap p-2 font-bold">

@@ -15,6 +15,7 @@ import { getProjectEventAmount } from "@/hooks/useEvents/hooks/useProjectEvent";
 import useEvents from "@/hooks/useEvents/useEvents";
 import useBodyScroll from "@/hooks/useBodyScroll";
 import Breadcrumb from "../Breadcrumb";
+import Modal from "@component-library/Modal";
 
 interface Language {
   code: string;
@@ -293,23 +294,23 @@ export const Header: React.FC<Props> = (props) => {
     </a>
   );
   const renderMenuButton: JSX.Element = (
-    <li
-      className="group flex items-center justify-center px-2 duration-300 hover:cursor-pointer hover:text-türkis xs:px-3"
-      onClick={openMenu}
+    // <li
+    //   className="group flex items-center justify-center px-2 duration-300 hover:cursor-pointer hover:text-türkis xs:px-3"
+    //   onClick={openMenu}
+    //   title={t(
+    //     `components.Header.Header.button.${menuOpen ? "close" : "open"}`
+    //   )}
+    // >
+    <Button
+      variant="text"
       title={t(
         `components.Header.Header.button.${menuOpen ? "close" : "open"}`
       )}
-    >
-      <Button
-        variant="text"
-        title={t(
-          `components.Header.Header.button.${menuOpen ? "close" : "open"}`
-        )}
-        onClick={openMenu}
-        children={<MenuIcon className="h-6 text-[#263652] xl:h-10" />}
-        className=""
-      />
-    </li>
+      onClick={openMenu}
+      children={<MenuIcon className="h-6 text-[#263652] xl:h-10" />}
+      className=""
+    />
+    //</li>
   );
   return (
     <header

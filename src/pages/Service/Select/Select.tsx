@@ -44,12 +44,11 @@ const ServiceSelect: React.FC<ServiceSelectProps> = (props) => {
               {...item}
               key={index}
               active={process.serviceType === item.serviceType}
-              serviceSelected={process.serviceType !== ServiceType.UNDEFINED}
+              serviceSelected={process.serviceType !== ServiceType.NONE}
             />
           ))}
         </div>
-        {service !== undefined &&
-        process.serviceType !== ServiceType.UNDEFINED ? (
+        {service !== undefined && process.serviceType !== ServiceType.NONE ? (
           <Button title={t("Service.Select.Select.continue")} to="edit" />
         ) : null}
       </PermissionGate>

@@ -21,7 +21,7 @@ const ProcessServicePreview: React.FC<ProcessServicePreviewProps> = (props) => {
 
   const renderService = () => {
     switch (process.serviceType) {
-      case ServiceType.UNDEFINED:
+      case ServiceType.NONE:
         return <ServicePreviewSelect process={process} />;
       case ServiceType.MANUFACTURING:
         return (

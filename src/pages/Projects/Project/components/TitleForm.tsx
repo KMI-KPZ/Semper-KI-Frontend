@@ -11,10 +11,11 @@ interface ProjectTitleFormProps {
   title: string;
   updateTitle(title: string): void;
   headerType: "h1" | "h2" | "h3";
+  forId?: string;
 }
 
 const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
-  const { title, updateTitle, headerType } = props;
+  const { title, updateTitle, headerType, forId } = props;
   const { t } = useTranslation();
   const [state, setState] = useState<{ edit: boolean; titleText: string }>({
     edit: false,
@@ -72,9 +73,11 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
           />
         </>
       ) : (
-        <Heading variant={headerType} className="md:whitespace-nowrap">
-          {t("Projects.Project.components.TitleForm.name")} {title}
-        </Heading>
+        <label htmlFor={forId}>
+          <Heading variant={headerType} className="md:whitespace-nowrap">
+            {t("Projects.Project.components.TitleForm.name")} {title}
+          </Heading>
+        </label>
       )}
       <PermissionGate element="ProjectButtonEditName">
         <Button

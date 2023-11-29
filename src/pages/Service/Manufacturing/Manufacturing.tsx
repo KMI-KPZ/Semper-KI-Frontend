@@ -12,7 +12,7 @@ import { ProcessModelUpload } from "./Model/components/Upload/Upload";
 import logger from "@/hooks/useLogger";
 import {
   ServiceManufacturingContextReturnProps,
-  ServiceManufacturingProps,
+  ManufacturingServiceProps,
   ServiceManufacturingState,
 } from "./types/types";
 import { Error } from "@/pages/Error/Error";
@@ -44,7 +44,7 @@ export const ServiceManufacturingContext =
 export const ServiceManufacturing: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { service: service_ } = useContext(ServiceContext);
-  const service = service_ as ServiceManufacturingProps;
+  const service = service_ as ManufacturingServiceProps;
   const navigate = useNavigate();
   const [state, setState] = useState<ServiceManufacturingState>(
     initialServiceManufacturingState

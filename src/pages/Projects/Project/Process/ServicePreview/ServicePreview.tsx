@@ -9,7 +9,7 @@ import ServiceSelect from "@/pages/Service/Select/Select";
 import logger from "@/hooks/useLogger";
 import ServicePreviewSelect from "./Select/Select";
 import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
-import { ServiceManufacturingProps } from "@/pages/Service/Manufacturing/types/types";
+import { ManufacturingServiceProps } from "@/pages/Service/Manufacturing/types/types";
 
 interface ProcessServicePreviewProps {
   process: ProcessProps;
@@ -27,7 +27,7 @@ const ProcessServicePreview: React.FC<ProcessServicePreviewProps> = (props) => {
         return (
           <ProcessServiceManufacturing
             process={process}
-            service={process.service as ServiceManufacturingProps}
+            service={process.service as ManufacturingServiceProps}
           />
         );
       case ServiceType.MODELING:

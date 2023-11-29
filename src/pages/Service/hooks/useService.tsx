@@ -1,7 +1,7 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { useLocation, useParams } from "react-router-dom";
 import {
-  ServiceManufacturingProps,
+  ManufacturingServiceProps,
   UpdateServiceManufacturingProps,
 } from "../Manufacturing/types/types";
 import logger from "@/hooks/useLogger";
@@ -9,7 +9,7 @@ import useProcess, {
   ProcessProps,
   ProcessStatus,
 } from "@/pages/Projects/hooks/useProcess";
-import { ServiceModelingProps } from "../Modelling/Modelling";
+import { ModelingServiceProps } from "../Modelling/Modelling";
 import { ProjectProps } from "@/pages/Projects/hooks/useProject";
 import { useContext } from "react";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
@@ -30,11 +30,9 @@ export enum ServiceType {
 }
 
 export type ServiceProps =
-  | ServiceManufacturingProps
-  | ServiceModelingProps
-  | ServiceUndefinedProps;
-
-export interface ServiceUndefinedProps {}
+  | ManufacturingServiceProps
+  | ModelingServiceProps
+  | undefined;
 
 export interface UpdateServiceProps {
   type?: ServiceType;
@@ -57,7 +55,6 @@ const useService = (): ReturnProps => {
   const { project } = useContext(ProjectContext);
   const { process } = useContext(ProcessContext);
   const { updateProcess } = useProcess();
-  const service = process.service as ServiceManufacturingProps;
 
   const isServiceComplete = (
     serviceType: ServiceType,
@@ -65,7 +62,7 @@ const useService = (): ReturnProps => {
   ): boolean => {
     switch (serviceType) {
       case ServiceType.MANUFACTURING:
-        const manufacturingService = service as ServiceManufacturingProps;
+        const manufacturingService = service as ManufacturingServiceProps;
         return (
           manufacturingService.model !== undefined &&
           manufacturingService.material !== undefined
@@ -80,8 +77,8 @@ const useService = (): ReturnProps => {
   const updatedService = (
     updateServiceProps: UpdateServiceManufacturingProps
   ) => {
-    const newService: ServiceManufacturingProps = {
-      ...service,
+    const newService: ManufacturingServiceProps = {
+      ...process.service,
       ...updateServiceProps,
     };
     const serviceIsComplete = isServiceComplete(

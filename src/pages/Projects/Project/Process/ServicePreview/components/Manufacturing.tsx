@@ -1,6 +1,6 @@
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
-import { ServiceManufacturingProps } from "@/pages/Service/Manufacturing/types/types";
+import { ManufacturingServiceProps } from "@/pages/Service/Manufacturing/types/types";
 import { Button } from "@component-library/Button";
 import Container from "@component-library/Container";
 import Modal from "@component-library/Modal";
@@ -12,7 +12,7 @@ import useProcess, { ProcessProps } from "@/pages/Projects/hooks/useProcess";
 
 interface ProcessServiceManufacturingProps {
   process: ProcessProps;
-  service: ServiceManufacturingProps;
+  service: ManufacturingServiceProps;
 }
 
 const ProcessServiceManufacturing: React.FC<

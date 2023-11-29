@@ -3,7 +3,7 @@ import { MaterialProps } from "../Material/Material";
 import { ModelProps } from "../Model/types";
 import { PostProcessingProps } from "../PostProcessing/PostProcessing";
 
-export type ServiceManufacturingProps = {
+export type ManufacturingServiceProps = {
   model?: ModelProps;
   material?: MaterialProps;
   postProcessings?: PostProcessingProps[];
@@ -29,5 +29,5 @@ export interface ServiceManufacturingContextReturnProps {
   setGrid(grid: boolean): void;
   setFilter(open: boolean): void;
   setSearchInput(name: string): void;
-  service: ServiceManufacturingProps;
+  service: ManufacturingServiceProps;
 }

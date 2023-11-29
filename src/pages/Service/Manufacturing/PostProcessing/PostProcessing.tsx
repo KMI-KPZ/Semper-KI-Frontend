@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import ProcessPostProcessCatalog from "./components/Catalog";
 import {
-  ServiceManufacturingProps,
+  ManufacturingServiceProps,
   ServiceManufacturingState,
 } from "../types/types";
 import { useTranslation } from "react-i18next";

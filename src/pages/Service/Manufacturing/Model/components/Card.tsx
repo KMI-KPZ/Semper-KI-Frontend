@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import useService from "@/pages/Service/hooks/useService";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
-import { ServiceManufacturingProps } from "../../types/types";
+import { ManufacturingServiceProps } from "../../types/types";
 
 interface Props {
   model: ModelProps;

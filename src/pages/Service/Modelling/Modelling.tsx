@@ -4,9 +4,9 @@ import { ServiceType } from "../hooks/useService";
 import Container from "@component-library/Container";
 import { Heading } from "@component-library/Typography";
 
-export type ServiceModelingProps = {};
+export type ModelingServiceProps = {};
 
-const ServiceModeling: React.FC<ServiceModelingProps> = (props) => {
+const ServiceModeling: React.FC<ModelingServiceProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
 

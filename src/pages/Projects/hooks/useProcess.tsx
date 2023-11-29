@@ -17,6 +17,8 @@ import {
 } from "@/pages/Service/hooks/useService";
 import { useContext } from "react";
 import { ProjectContext } from "../context/ProjectContext";
+import { ManufacturingServiceProps } from "@/pages/Service/Manufacturing/types/types";
+import { ModelingServiceProps } from "@/pages/Service/Modelling/Modelling";
 
 interface ReturnProps {
   deleteProcess: UseMutationResult<string, Error, string, unknown>;
@@ -57,26 +59,52 @@ export interface ProcessDetailsProps {
   title?: string;
 }
 
-export interface ProcessProps {
+export type ProcessProps =
+  | NoServiceProcessProps
+  | ManufactoringProcessProps
+  | ModelingProcessProps;
+
+export type DefaultProcessProps = {
   processID: string;
   client: string;
   status: ProcessStatus;
   details: ProcessDetailsProps;
   serviceStatus: number;
-  service: ServiceProps;
   serviceType: ServiceType;
+  service: ServiceProps;
   created: Date;
   updated: Date;
   files: FilesDescriptionProps[];
   messages: { messages: ChatMessageProps[] };
   contractor: string[];
-}
+};
+
+export type NoServiceProcessProps = {
+  serviceType: ServiceType.NONE;
+  service: undefined;
+} & DefaultProcessProps;
+
+export type ManufactoringProcessProps = {
+  serviceType: ServiceType.MANUFACTURING;
+  service: ManufacturingServiceProps;
+} & DefaultProcessProps;
+
+export type ModelingProcessProps = {
+  serviceType: ServiceType.MODELING;
+  service: ModelingServiceProps;
+} & DefaultProcessProps;
 
 export interface FilesDescriptionProps {
   createdBy: string;
-  date: string;
   id: string;
   title: string;
+  path: string;
+  fileName: string;
+  tags: string[];
+  date: Date;
+  licenses: string[];
+  certificates: string[];
+  URI: string;
 }
 
 export interface ChatMessageProps {

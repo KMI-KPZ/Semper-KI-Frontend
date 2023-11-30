@@ -21,38 +21,57 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <ContentBox>
-      <Routes>
+    <Routes>
+      <Route
+        index
+        element={
+          <PermissionGate element="Projects">
+            <Projects />
+          </PermissionGate>
+        }
+      />
+      <Route path=":projectID/*" element={<ProjectContextProvider />}>
         <Route
           index
           element={
             <PermissionGate element="Projects">
-              <Projects />
+              <Project />
             </PermissionGate>
           }
         />
-        <Route path=":projectID/*" element={<ProjectContextProvider />}>
+        <Route element={<AuthorizedUserRouteOutlet />}>
           <Route
-            index
+            path="contractorSelection"
             element={
-              <PermissionGate element="Projects">
-                <Project />
+              <PermissionGate element={"ProjectContractorSelection"}>
+                <ProjectContractorSelection />
               </PermissionGate>
             }
           />
+          <Route
+            path="checkout"
+            element={
+              <PermissionGate element={"ProjectCheckout"}>
+                <ProjectCheckout />
+              </PermissionGate>
+            }
+          />
+          <Route
+            path="verification"
+            element={
+              <PermissionGate element={"ProjectVerification"}>
+                <ProcessVerification />
+              </PermissionGate>
+            }
+          />
+        </Route>
+        <Route path=":processID/*" element={<ProcessContextProvider />}>
+          <Route index element={<Project />} />
           <Route element={<AuthorizedUserRouteOutlet />}>
-            <Route
-              path="contractorSelection"
-              element={
-                <PermissionGate element={"ProjectContractorSelection"}>
-                  <ProjectContractorSelection />
-                </PermissionGate>
-              }
-            />
             <Route
               path="checkout"
               element={
-                <PermissionGate element={"ProjectCheckout"}>
+                <PermissionGate element={"ProcessCheckout"}>
                   <ProjectCheckout />
                 </PermissionGate>
               }
@@ -60,56 +79,35 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
             <Route
               path="verification"
               element={
-                <PermissionGate element={"ProjectVerification"}>
+                <PermissionGate element={"ProcessVerification"}>
                   <ProcessVerification />
                 </PermissionGate>
               }
             />
-          </Route>
-          <Route path=":processID/*" element={<ProcessContextProvider />}>
-            <Route index element={<Project />} />
-            <Route element={<AuthorizedUserRouteOutlet />}>
-              <Route
-                path="checkout"
-                element={
-                  <PermissionGate element={"ProcessCheckout"}>
-                    <ProjectCheckout />
-                  </PermissionGate>
-                }
-              />
-              <Route
-                path="verification"
-                element={
-                  <PermissionGate element={"ProcessVerification"}>
-                    <ProcessVerification />
-                  </PermissionGate>
-                }
-              />
-              <Route
-                path="contractorSelection"
-                element={
-                  <PermissionGate element={"ProcessContractorSelection"}>
-                    <ProjectContractorSelection />
-                  </PermissionGate>
-                }
-              />
-            </Route>
             <Route
-              path="service/*"
+              path="contractorSelection"
               element={
-                <>
-                  <Project />
-                  <ServiceRoutes />
-                </>
+                <PermissionGate element={"ProcessContractorSelection"}>
+                  <ProjectContractorSelection />
+                </PermissionGate>
               }
             />
-            <Route path="*" element={<Error text="process" />} />
           </Route>
-          <Route path="*" element={<Error text="project" />} />
+          <Route
+            path="service/*"
+            element={
+              <>
+                <Project />
+                <ServiceRoutes />
+              </>
+            }
+          />
+          <Route path="*" element={<Error text="process" />} />
         </Route>
-        <Route path="*" element={<Error text="projects" />} />
-      </Routes>
-    </ContentBox>
+        <Route path="*" element={<Error text="project" />} />
+      </Route>
+      <Route path="*" element={<Error text="projects" />} />
+    </Routes>
   );
 };
 

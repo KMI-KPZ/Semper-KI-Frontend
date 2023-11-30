@@ -31,6 +31,7 @@ import { ToastContainer } from "react-toastify";
 import ProjectsRoutes from "@/routes/ProjectsRoutes";
 import AdminRoutes from "@/routes/AdminRotes";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
+import ContentBox from "@component-library/ContentBox";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };
@@ -75,29 +76,120 @@ const App: React.FC = () => {
             <Route index element={<Home />} />
             <Route
               path="registerOrganization"
-              element={<RegisterOrganization />}
+              element={
+                <ContentBox>
+                  <RegisterOrganization />
+                </ContentBox>
+              }
             />
-            <Route path="reskriver" element={<ResKriVer />} />
-            <Route path="logout" element={<Logout />} />
-            <Route path="portfolio" element={<Portfolio />} />
-            <Route path="verifyEMail" element={<EmailVerification />} />
-            <Route path="login" element={<Login />} />
-            <Route path="login/redirect" element={<RedirectLogin />} />
-            <Route path="register" element={<Login />} />
-            <Route path="legal/*" element={<Legal />} />
+            <Route
+              path="reskriver"
+              element={
+                <ContentBox>
+                  <ResKriVer />
+                </ContentBox>
+              }
+            />
+            <Route
+              path="logout"
+              element={
+                <ContentBox>
+                  <Logout />
+                </ContentBox>
+              }
+            />
+            <Route
+              path="portfolio"
+              element={
+                <ContentBox>
+                  <Portfolio />
+                </ContentBox>
+              }
+            />
+            <Route
+              path="verifyEMail"
+              element={
+                <ContentBox>
+                  <EmailVerification />
+                </ContentBox>
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <ContentBox>
+                  <Login />
+                </ContentBox>
+              }
+            />
+            <Route
+              path="login/redirect"
+              element={
+                <ContentBox>
+                  <RedirectLogin />
+                </ContentBox>
+              }
+            />
+            <Route
+              path="register"
+              element={
+                <ContentBox>
+                  <Login />
+                </ContentBox>
+              }
+            />
+            <Route
+              path="legal/*"
+              element={
+                <ContentBox>
+                  <Legal />
+                </ContentBox>
+              }
+            />
             <Route path="demo/*" element={<Navigate to="/project/new" />} />
-            <Route path="projects/*" element={<ProjectsRoutes />} />
+            <Route
+              path="projects/*"
+              element={
+                <ContentBox>
+                  <ProjectsRoutes />
+                </ContentBox>
+              }
+            />
             <Route element={<AuthorizedUserRouteOutlet />}>
-              <Route path="test" element={<Test />} />
-              <Route path="account" element={<Profile />} />
-              <Route element={<OrganizationRouteOutlet />}>
+              <Route
+                path="test"
+                element={
+                  <ContentBox>
+                    <Test />
+                  </ContentBox>
+                }
+              />
+              <Route
+                path="account"
+                element={
+                  <ContentBox>
+                    <Profile />
+                  </ContentBox>
+                }
+              />
+              <Route
+                element={
+                  <ContentBox>
+                    <OrganizationRouteOutlet />
+                  </ContentBox>
+                }
+              >
                 <Route
                   path="organization"
                   element={
                     <PermissionGate
                       element="Organization"
                       showMessage
-                      children={<Organization />}
+                      children={
+                        <ContentBox>
+                          <Organization />
+                        </ContentBox>
+                      }
                     />
                   }
                 />
@@ -105,7 +197,11 @@ const App: React.FC = () => {
                   path="resources/*"
                   element={
                     <PermissionGate
-                      children={<Resouces />}
+                      children={
+                        <ContentBox>
+                          <Resouces />
+                        </ContentBox>
+                      }
                       element="Resources"
                       showMessage
                     />
@@ -113,10 +209,24 @@ const App: React.FC = () => {
                 />
               </Route>
               <Route element={<AdminRouteOutlet />}>
-                <Route path="admin/*" element={<AdminRoutes />} />
+                <Route
+                  path="admin/*"
+                  element={
+                    <ContentBox>
+                      <AdminRoutes />
+                    </ContentBox>
+                  }
+                />
               </Route>
             </Route>
-            <Route path="*" element={<Error />} />
+            <Route
+              path="*"
+              element={
+                <ContentBox>
+                  <Error />
+                </ContentBox>
+              }
+            />
           </Routes>
         </main>
         <Modal

@@ -1059,9 +1059,9 @@
   },
   "ResKriVer": {
     "ResKriVer": {
-      "title": "Weiterleitung von ResKriVer",
+      "title": "Einen Auftrag bei Sermper-KI erstellen",
       "loading": "laden ihrer Daten",
-      "data": "Übertragene Daten:",
+      "data": "Übertragene Daten aus ResKriVer:",
       "button": {
         "search": "Prozess Starten"
       }

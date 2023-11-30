@@ -6,6 +6,7 @@ import AnonymHome from "./Anonym/Anonym";
 import { Button } from "@component-library/Button";
 import AuthorizedHome from "./Authorized/Authorized";
 import { UserContext } from "@/contexts/UserContextProvider";
+import ContentBox from "@component-library/ContentBox";
 
 interface Props {}
 
@@ -15,5 +16,9 @@ export const Home: React.FC<Props> = (props) => {
   const { user } = useUser();
 
   if (user.usertype === UserType.ANONYM) return <AnonymHome />;
-  return <AuthorizedHome user={user} />;
+  return (
+    <ContentBox>
+      <AuthorizedHome user={user} />
+    </ContentBox>
+  );
 };

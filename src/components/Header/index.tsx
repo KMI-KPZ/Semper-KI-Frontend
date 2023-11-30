@@ -286,7 +286,7 @@ export const Header: React.FC<Props> = (props) => {
       <div className=" flex flex-col items-end justify-start text-inherit">
         <Text
           variant="custom"
-          className=" text-2xl font-bold text-[#263652] xs:text-3xl md:text-4xl"
+          className="text-2xl font-bold text-[#263652] xs:text-3xl md:text-4xl"
         >
           {t("components.Header.Header.title")}
         </Text>

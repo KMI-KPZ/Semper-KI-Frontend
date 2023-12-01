@@ -18,7 +18,7 @@ export const ServiceContextProvider: React.FC<ServiceContextProviderProps> = (
   props
 ) => {
   const {} = props;
-  const { process } = useContext(ProcessContext);
+  const { process } = useProcess();
 
   return (
     <ServiceContext.Provider value={{ service: process.service }}>

@@ -5,12 +5,14 @@ import DownloadIcon from "@mui/icons-material/Download";
 import { Heading } from "@component-library/Typography";
 import { Divider } from "@component-library/Divider";
 import useProcess, {
+  FileProps,
   FilesDescriptionProps,
   ProcessProps,
 } from "@/pages/Projects/hooks/useProcess";
 import Container from "@component-library/Container";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { createDownload } from "@/services/utils";
+import useGernalProcess from "@/pages/Projects/hooks/useGernalProcess";
 
 interface Props {
   process: ProcessProps;
@@ -22,19 +24,19 @@ const ProjectFile: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const [loadingFileID, setLoadingFileID] = useState<string>("");
 
-  const { downloadFile, downloadFilesZIP, deleteFile } = useProcess();
-  const hanleOnClickButtonDelete = (file: FilesDescriptionProps) => {
-    deleteFile.mutate({ processID: process.processID, fileID: file.id });
+  const { downloadFile, downloadZIP, deleteFile } = useGernalProcess();
+  const hanleOnClickButtonDelete = (file: FileProps) => {
+    deleteFile({ processID: process.processID, fileID: file.id });
   };
 
-  const handleOnClickButtonDownloadFile = (file: FilesDescriptionProps) => {
+  const handleOnClickButtonDownloadFile = (file: FileProps) => {
     setLoadingFileID(file.id);
-    downloadFile.mutate(
+    downloadFile(
       { processID: process.processID, fileID: file.id },
       {
         onSettled(data) {
           if (data) {
-            createDownload(data, file.title);
+            createDownload(data, file.fileName);
             setLoadingFileID("");
           }
         },
@@ -42,7 +44,7 @@ const ProjectFile: React.FC<Props> = (props) => {
     );
   };
   const handleOnClickButtonDownloadZip = () => {
-    downloadFilesZIP.mutate(
+    downloadZIP(
       {
         processID: process.processID,
         fileIDs: process.files.map((file) => file.id),
@@ -74,7 +76,7 @@ const ProjectFile: React.FC<Props> = (props) => {
                 key={index}
                 className="flex flex-col items-center justify-center rounded-xl  p-2 shadow-md"
               >
-                <span className="p-2">{file.title}</span>
+                <span className="p-2">{file.fileName}</span>
                 <Container>
                   <Button
                     size="sm"

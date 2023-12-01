@@ -68,7 +68,6 @@ export class UserBuilder {
 
     build():UserProps {
         return({
-            email: this.email,
             name: this.name,
             organizations: this.organizations,
             usertype: this.userType,

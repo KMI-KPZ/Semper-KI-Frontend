@@ -16,7 +16,7 @@ export interface ServiceSelectItemProps {
 const ServiceSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
   const { active, icon, serviceType, serviceSelected } = props;
   const { t } = useTranslation();
-  const { updateProcess, updateProcessWithProcessID } = useProcess();
+  const { updateProcess } = useProcess();
   const navigate = useNavigate();
   const { processID } = useParams();
 
@@ -27,7 +27,7 @@ const ServiceSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
     if (active) {
       navigateToService();
     } else {
-      updateProcess.mutate(
+      updateProcess(
         {
           changes: {
             service: { type: serviceType },

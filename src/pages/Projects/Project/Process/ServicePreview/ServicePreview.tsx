@@ -10,6 +10,7 @@ import logger from "@/hooks/useLogger";
 import ServicePreviewSelect from "./Select/Select";
 import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
 import { ManufacturingServiceProps } from "@/pages/Service/Manufacturing/types/types";
+import ProcessServiceSelect from "./components/Select";
 
 interface ProcessServicePreviewProps {
   process: ProcessProps;
@@ -22,7 +23,7 @@ const ProcessServicePreview: React.FC<ProcessServicePreviewProps> = (props) => {
   const renderService = () => {
     switch (process.serviceType) {
       case ServiceType.NONE:
-        return <ServicePreviewSelect process={process} />;
+        return <ProcessServiceSelect />;
       case ServiceType.MANUFACTURING:
         return (
           <ProcessServiceManufacturing

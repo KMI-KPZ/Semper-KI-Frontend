@@ -16,19 +16,19 @@ export type AnonymUser = {
 };
 
 export interface AuthorizedUserProps {
-  accessed: Date;
-  created: Date;
-  details: UserDetailsProps;
-  email: string;
   hashedID: string;
-  lastSeen: Date;
   name: string;
   organizations: string[];
+  details: UserDetailsProps;
+  created: Date;
   updated: Date;
+  accessed: Date;
+  lastSeen: Date;
   usertype: UserType.USER | UserType.ORGANIZATION | UserType.ADMIN;
 }
 
 export interface UserDetailsProps {
+  email: string;
   address?: string;
 }
 

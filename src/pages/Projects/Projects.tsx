@@ -22,14 +22,14 @@ const Projects: React.FC<ProjectsProps> = (props) => {
   const [selectedProjects, setSelectedProjects] = React.useState<string[]>([]);
 
   const onButtonClickCreateProject = () => {
-    createProject.mutate();
+    createProject();
   };
 
   const handleOnClickButtonDeleteSelected = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     if (window.confirm(t("Projects.Projects.deleteSelectedConfirm")) === true) {
-      selectedProjects.forEach((projectID) => deleteProject.mutate(projectID));
+      selectedProjects.forEach((projectID) => deleteProject(projectID));
     } else logger("delete canceled");
   };
 

@@ -31,7 +31,7 @@ const Home: React.FC<HomeProps> = (props) => {
   };
 
   const handleOnClickButtonDemonstrator = () => {
-    createProject.mutate();
+    createProject();
   };
 
   return (
@@ -93,7 +93,7 @@ const Home: React.FC<HomeProps> = (props) => {
           </Container>
         </ContentBox>
       </HomeContainer>
-      <HomeContainer className="h-fit min-h-[20vh] bg-ultramarinblau-dark">
+      <HomeContainer className="h-fit min-h-[25vh] bg-ultramarinblau-dark">
         <ContentBox className="justify-between py-5">
           <Heading variant="h2" className="text-3xl text-white">
             {t("Home.Anonym.Anonym.demonstrator")}
@@ -105,7 +105,7 @@ const Home: React.FC<HomeProps> = (props) => {
         </ContentBox>
       </HomeContainer>
       <HomeContainer
-        className="h-fit min-h-[20vh] bg-slate-500"
+        className="h-fit min-h-[25vh] bg-slate-700"
         data-testid="home-anonym-orga"
       >
         <ContentBox className="flex w-full flex-col gap-5 md:flex-row md:justify-between md:gap-40">
@@ -132,7 +132,7 @@ const Home: React.FC<HomeProps> = (props) => {
           </div>
         </ContentBox>
       </HomeContainer>
-      <HomeContainer className="h-fit min-h-[20vh] bg-ultramarinblau-dark">
+      <HomeContainer className="h-fit min-h-[25vh] bg-ultramarinblau-dark">
         <ContentBox className="flex w-full  flex-col gap-5 md:flex-row md:justify-between md:gap-40">
           <div className="flex flex-col items-start justify-center gap-5">
             <Heading variant="h2" className="text-white">

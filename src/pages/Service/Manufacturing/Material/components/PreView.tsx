@@ -19,7 +19,7 @@ export const ProcessMaterialPreView: React.FC<Props> = (props) => {
   const { updateProcess } = useProcess();
 
   const handleOnClickButtonSelect = () => {
-    updateProcess.mutate({ changes: { service: { material: material } } });
+    updateProcess({ changes: { service: { material: material } } });
     navigate("../postprocessing");
   };
 

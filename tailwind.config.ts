@@ -103,8 +103,8 @@ export default {
         'inner-border':'inset 0px 0px 0px 3px rgba(0, 0, 0, 1)',
         'card':'0px 2px 10px 2px rgba(0, 0, 0, 0.2)',
         'inner-xl':'inset 1px 2px 5px 2px rgb(0 0 0 / 0.05)',
-        'button':       '0px 0px 5px 2px rgba(0,0,0,0.3),inset 0px 0px 0px 0px rgba(0,0,0,0)',
-        'button-inner': 'inset 0px 0px 5px 3px rgba(0,0,0,0.3),0px 0px 0px 0px rgba(0,0,0,0)',
+        'button':       '0px 0px 5px 2px rgba(0,0,0,0.3) , inset 0px 0px 0px 0px rgba(0,0,0,0)',
+        'button-inner': '0px 0px 0px 0px rgba(0,0,0,0) , inset 0px 0px 5px 3px rgba(0,0,0,0.3)',
         'glow':'0 0px 20px rgba(255,255, 255, 0.35), 0 0px 65px rgba(255, 255,255, 0.2)',
       }
     },

@@ -38,7 +38,7 @@ const ProcessServiceManufacturing: React.FC<
         (file) => service.model !== undefined && file.id === service.model.id
       ) !== undefined
     ) {
-      downloadFile.mutate(
+      downloadFile(
         {
           processID: process.processID,
           fileID: service.model.id,

@@ -20,6 +20,7 @@ import { ProcessComponentState } from "../Process";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 import useEvents from "@/hooks/useEvents/useEvents";
 import { EventContext } from "@/contexts/EventContextProvider";
+import useGernalProcess from "@/pages/Projects/hooks/useGernalProcess";
 
 interface ProcessButtonsProps {
   user: UserProps;
@@ -35,7 +36,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
     props;
   const { t } = useTranslation();
   const { deleteEvent } = useEvents();
-  const { deleteProcess, updateProcessWithProcessID } = useProcess();
+  const { deleteProcess, updateProcess } = useGernalProcess();
   const { project } = useContext(ProjectContext);
   const { getDeleteProjectEvent } = useProjectEventChange(
     process,
@@ -60,7 +61,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
         t("Projects.Project.Process.components.Buttons.confirm.cancel")
       )
     ) {
-      deleteProcess.mutate(process.processID);
+      deleteProcess({ processIDs: [process.processID] });
     }
   };
   const handleOnClickButtonReProject = () => {

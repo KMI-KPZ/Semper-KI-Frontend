@@ -15,6 +15,7 @@ import useService from "@/pages/Service/hooks/useService";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 import useVerification from "../../Verification/hooks/useVerification";
 import useUser, { UserType } from "@/hooks/useUser";
+import useGernalProcess from "@/pages/Projects/hooks/useGernalProcess";
 
 interface ProcessStatusButtonsProps {
   projectID: string;
@@ -26,7 +27,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { state, process, projectID } = props;
   const { setCheckedProcesses } = useContext(ProjectContext);
   const { t } = useTranslation();
-  const { updateProcessWithProcessID } = useProcess();
+  const { updateProcess } = useGernalProcess();
   const { user } = useUser();
   const { getProcessStatusButtons } = useStatusButtons();
   const navigate = useNavigate();
@@ -47,8 +48,8 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   };
 
   const onClickButton = (status: ProcessStatus) => {
-    updateProcessWithProcessID.mutate({
-      processID: process.processID,
+    updateProcess({
+      processIDs: [process.processID],
       updates: {
         changes: {
           status,

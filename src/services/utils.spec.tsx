@@ -4,7 +4,7 @@ import {
   isNumber,
   getCurrentTimeInSeconds,
   removeItem,
-  getUserType,
+  getAuthorizedUserType,
   parseAddress,
   removeItemByIndex,
   getModelURI,
@@ -97,27 +97,27 @@ describe("Utils", () => {
   });
   describe("Test getUserType", () => {
     it("should return client", () => {
-      const value = getUserType("user");
+      const value = getAuthorizedUserType("user");
       expect(value).toBe(0);
     });
     it("should return manufacturer", () => {
-      const value = getUserType("organization");
+      const value = getAuthorizedUserType("organization");
       expect(value).toBe(1);
     });
     it("should return admin", () => {
-      const value = getUserType("admin");
+      const value = getAuthorizedUserType("admin");
       expect(value).toBe(2);
     });
     it("should return anonym", () => {
-      const value = getUserType("anonym");
+      const value = getAuthorizedUserType("anonym");
       expect(value).toBe(3);
     });
     it("should return anonym when empty", () => {
-      const value = getUserType("");
+      const value = getAuthorizedUserType("");
       expect(value).toBe(3);
     });
     it("should return anonym when something else", () => {
-      const value = getUserType("else");
+      const value = getAuthorizedUserType("else");
       expect(value).toBe(3);
     });
   });

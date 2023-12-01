@@ -31,7 +31,7 @@ export const serviceSelectItems: ServiceSelectItemProps[] = [
 const ServiceSelect: React.FC<ServiceSelectProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { process } = useContext(ProcessContext);
+  const { process } = useProcess();
   const service = process.service;
 
   return (

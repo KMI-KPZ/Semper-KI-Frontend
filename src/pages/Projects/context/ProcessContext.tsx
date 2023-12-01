@@ -1,9 +1,10 @@
 import React, { useDebugValue } from "react";
 import { useTranslation } from "react-i18next";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useParams } from "react-router-dom";
 import useProcess, { ProcessProps } from "../hooks/useProcess";
 import logger from "@/hooks/useLogger";
 import { LoadingAnimation } from "@component-library/index";
+import { useProject } from "../hooks/useProject";
 
 interface ProcessContextProviderProps {}
 
@@ -33,10 +34,15 @@ const ProcessContextProvider: React.FC<ProcessContextProviderProps> = (
 ) => {
   const {} = props;
   const { t } = useTranslation();
-  const { getProcessQuery } = useProcess();
-  const { process, query: projectQuery } = getProcessQuery();
+  const { project, projectQuery } = useProject();
+  const { processID } = useParams();
 
-  if (projectQuery.isLoading) return <LoadingAnimation />;
+  const process = project.processes.find(
+    (process) => process.processID === processID
+  );
+
+  if (projectQuery.isLoading || projectQuery.isRefetching)
+    return <LoadingAnimation />;
 
   if (process !== undefined && projectQuery.isFetched)
     return (

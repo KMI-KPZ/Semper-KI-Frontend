@@ -62,7 +62,7 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
     e.preventDefault();
     e.stopPropagation();
     if (window.confirm(t("Service.Overview.components.Item.confirm.cancel"))) {
-      deleteProcess.mutate(process.processID);
+      deleteProcess();
     }
   };
 
@@ -72,7 +72,7 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
     e.preventDefault();
     e.stopPropagation();
     if (state.edit)
-      updateProcess.mutate({
+      updateProcess({
         changes: { details: { title: state.titleText } },
       });
     setState((prevState) => {

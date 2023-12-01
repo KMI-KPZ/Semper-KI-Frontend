@@ -32,8 +32,7 @@ const AdminProjects: React.FC<Props> = (props) => {
   const { deleteProject } = useProject();
   const { filterDataBySearchInput, handleSearchInputChange } = useSearch();
   const handleOnClickButtonDelete = (projectID: string) => {
-    if (window.confirm(t("Admin.Projects.confirm")))
-      deleteProject.mutate(projectID);
+    if (window.confirm(t("Admin.Projects.confirm"))) deleteProject(projectID);
   };
 
   return (

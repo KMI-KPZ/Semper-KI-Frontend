@@ -12,7 +12,7 @@ import GroupIcon from "@mui/icons-material/Group";
 import { UserSwitch } from "@/components/UserSwitch";
 import PeopleIcon from "@mui/icons-material/People";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import useDevMode, { MockedUserType } from "@/hooks/useDevMode";
+import Container from "@component-library/Container";
 
 interface Props {
   path?: string;
@@ -66,10 +66,7 @@ const Login: React.FC<Props> = (props) => {
   };
 
   return (
-    <div
-      className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5 sm:w-fit"
-      data-testid="login"
-    >
+    <Container direction="col" className="bg-white p-5">
       <Heading variant="h1">
         {path === undefined
           ? t("Login.Login.header")
@@ -93,7 +90,7 @@ const Login: React.FC<Props> = (props) => {
         />
       </div>
       {process.env.NODE_ENV === "development" ? (
-        <>
+        <Container direction="col">
           <Heading variant="h1">{t("Login.Login.admin")}</Heading>
           <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
             <Button
@@ -112,9 +109,9 @@ const Login: React.FC<Props> = (props) => {
               startIcon={<AdminPanelSettingsIcon />}
             />
           </div>
-        </>
+        </Container>
       ) : null}
-    </div>
+    </Container>
   );
 };
 

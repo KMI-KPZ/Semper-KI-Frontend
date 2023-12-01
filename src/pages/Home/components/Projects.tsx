@@ -24,14 +24,14 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const { createProject } = useProject();
 
   const handleOnClickButtonNew = () => {
-    createProject.mutate();
+    createProject();
   };
   const handleOnClickButtonDemo = () => {
-    createProject.mutate();
+    createProject();
   };
 
   return (
-    <HomeContainer className="bg-slate-300">
+    <HomeContainer className="bg-white">
       <ContentBox className="py-5">
         <Heading variant="h2">{t("Home.components.Projects.title")}</Heading>
         {user.usertype === UserType.ANONYM ? (

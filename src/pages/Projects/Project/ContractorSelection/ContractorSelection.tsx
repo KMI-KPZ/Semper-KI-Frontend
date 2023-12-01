@@ -18,6 +18,7 @@ import ProcessInfoCard from "../components/ProcessInfoCard";
 import Container from "@component-library/Container";
 import useCheckedProcesses from "../hooks/useCheckedProcesses";
 import { twMerge } from "tailwind-merge";
+import useGernalProcess from "../../hooks/useGernalProcess";
 
 interface Props {}
 
@@ -35,7 +36,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
   const { contractorsQuery } = useContractor();
-  const { updateProcessWithProcessID } = useProcess();
+  const { updateProcess } = useGernalProcess();
 
   const {
     register,
@@ -63,24 +64,15 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
     data.processes
       .filter((process) => checkedProcesses.includes(process.process.processID))
       .forEach((process, index, allProcesses) => {
-        updateProcessWithProcessID.mutate(
-          {
-            processID: process.process.processID,
-            updates: {
-              changes: {
-                status: ProcessStatus.CONTRACTOR_SELECTED,
-                contractor: [process.contractorID],
-              },
+        updateProcess({
+          processIDs: [process.process.processID],
+          updates: {
+            changes: {
+              status: ProcessStatus.CONTRACTOR_SELECTED,
+              contractor: [process.contractorID],
             },
           },
-          {
-            onSuccess: () => {
-              if (index === allProcesses.length - 1) {
-                navigate("../..");
-              }
-            },
-          }
-        );
+        });
       });
   };
 

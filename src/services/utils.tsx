@@ -65,8 +65,10 @@ export const removeItemByIndex = <T,>(
   return newArr;
 };
 
-export const getUserType = (name?: string): UserType => {
-  if (name === undefined) return UserType.ANONYM;
+export const getAuthorizedUserType = (
+  name?: string
+): UserType.ADMIN | UserType.ORGANIZATION | UserType.USER => {
+  if (name === undefined) return UserType.USER;
   switch (name.toLocaleLowerCase()) {
     case "user":
       return UserType.USER;
@@ -77,7 +79,7 @@ export const getUserType = (name?: string): UserType => {
     case "admin":
       return UserType.ADMIN;
     default:
-      return UserType.ANONYM;
+      return UserType.USER;
   }
 };
 
@@ -184,4 +186,11 @@ export const createDownload = (blob: Blob, title: string) => {
 
   // Clean up and remove the link
   link.parentNode!.removeChild(link);
+};
+
+export const objectToArray = <T,>(object: Object): T[] => {
+  let array: T[] = Object.entries(object).map(([key, value]) => {
+    return { ...value } as T;
+  });
+  return array;
 };

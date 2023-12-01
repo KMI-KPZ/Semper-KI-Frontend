@@ -8,6 +8,7 @@ import logger from "@/hooks/useLogger";
 import useProcess, {
   ChatMessageProps,
 } from "@/pages/Projects/hooks/useProcess";
+import useGernalProcess from "@/pages/Projects/hooks/useGernalProcess";
 
 interface Props {
   closeMenu(): void;
@@ -27,7 +28,7 @@ const Chat: React.FC<Props> = (props) => {
   const { chat, user, closeMenu, projectID, processID } = props;
   const [state, setState] = useState<State>({});
   const { height, messageText } = state;
-  const { updateProcessWithProcessID } = useProcess();
+  const { updateProcess } = useGernalProcess();
 
   const handleOnChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setState((prevState) => ({
@@ -39,9 +40,9 @@ const Chat: React.FC<Props> = (props) => {
 
   const handleOnClickButtonSend = () => {
     if (messageText !== undefined && messageText !== "")
-      updateProcessWithProcessID.mutate(
+      updateProcess(
         {
-          processID,
+          processIDs: [processID],
           updates: {
             changes: {
               messages: {

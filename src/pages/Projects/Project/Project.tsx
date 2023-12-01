@@ -26,6 +26,7 @@ import { ProjectEvent, ProjectEventItem } from "@/pages/App/types";
 import { ProjectContext } from "../context/ProjectContext";
 import useScrollToProcess from "./hooks/useScrollToProcess";
 import ServiceRoutes from "@/routes/ServiceRoutes";
+import useGernalProcess from "../hooks/useGernalProcess";
 
 interface Props {
   event?: ProjectEvent;
@@ -40,7 +41,7 @@ const Project: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { deleteProject, updateProject } = useProject();
-  const { createProcess } = useProcess();
+  const { createProcess } = useGernalProcess();
   const { checkedProcesses, handleOnChangeCheckboxSelectAll } =
     useCheckedProcesses();
   const [infoOpen, setInfoOpen] = useState<boolean>(false);
@@ -50,14 +51,12 @@ const Project: React.FC<Props> = (props) => {
       window.confirm(t("Projects.Project.Project.confirm.delete")) &&
       project !== undefined
     ) {
-      deleteProject.mutate(project.projectID, {
-        onSuccess: () => navigate("/projects"),
-      });
+      deleteProject(project.projectID);
     }
   };
 
   const onButtonClickCreateProcess = () => {
-    createProcess.mutate();
+    createProcess();
   };
 
   const getProjectEventItemByID = (
@@ -75,7 +74,7 @@ const Project: React.FC<Props> = (props) => {
 
   const updateProjectTitle = (title: string) => {
     if (project === undefined) return;
-    updateProject.mutate({
+    updateProject({
       changes: {
         details: {
           title,

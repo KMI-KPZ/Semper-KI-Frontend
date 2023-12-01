@@ -51,7 +51,7 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
       e.preventDefault();
       closeModalWithScroll();
     }
-    logger("Modal onKeyDown", e.key);
+    // logger("Modal onKeyDown", e.key);
   };
 
   // Eventlistener: trigger onclose when cancel detected

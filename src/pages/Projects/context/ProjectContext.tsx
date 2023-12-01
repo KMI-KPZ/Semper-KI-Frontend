@@ -9,6 +9,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { ProjectProps, useProject } from "../hooks/useProject";
 import { LoadingAnimation } from "@component-library/index";
 import { Query, UseQueryResult } from "@tanstack/react-query";
+import useProjectQuerys from "@/api/Project/useProjectQuerys";
 
 interface ProjectOutletProps {}
 
@@ -37,7 +38,7 @@ export const ProjectContext = React.createContext<ProjectContextProps>({
 const ProjectContextProvider: React.FC<ProjectOutletProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { projectQuery } = useProject();
+  const { projectQuery } = useProjectQuerys();
   const [checkedProcesses, setCheckedProcesses] = useState<string[]>([]);
 
   if (projectQuery.isLoading) return <LoadingAnimation />;

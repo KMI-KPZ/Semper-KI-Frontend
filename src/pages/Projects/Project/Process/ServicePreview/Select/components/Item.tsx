@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 import { ServiceType } from "@/pages/Service/hooks/useService";
 import Process from "../../../Process";
+import useGernalProcess from "@/pages/Projects/hooks/useGernalProcess";
 
 export interface ServiceSelectItemProps {
   serviceType: ServiceType;
@@ -18,7 +19,7 @@ export interface ServiceSelectItemProps {
 const ServicePreviewSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
   const { active, icon, serviceType, manuelProcessID, serviceSelected } = props;
   const { t } = useTranslation();
-  const { updateProcess, updateProcessWithProcessID } = useProcess();
+  const { updateProcess } = useGernalProcess();
   const navigate = useNavigate();
   const { processID } = useParams();
 
@@ -41,36 +42,15 @@ const ServicePreviewSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
       processID === undefined ||
       (processID !== undefined && processID !== manuelProcessID)
     ) {
-      updateProcessWithProcessID.mutate(
-        {
-          processID: manuelProcessID,
-          updates: {
-            changes: {
-              service: { type: serviceType },
-              status: ProcessStatus.SERVICE_IN_PROGRESS,
-            },
-          },
-        },
-        {
-          onSuccess: () => {
-            navigateToService();
-          },
-        }
-      );
-    } else {
-      updateProcess.mutate(
-        {
+      updateProcess({
+        processIDs: [manuelProcessID],
+        updates: {
           changes: {
             service: { type: serviceType },
             status: ProcessStatus.SERVICE_IN_PROGRESS,
           },
         },
-        {
-          onSuccess: () => {
-            navigateToService();
-          },
-        }
-      );
+      });
     }
   };
 

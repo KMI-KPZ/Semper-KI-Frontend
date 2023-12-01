@@ -63,7 +63,7 @@ const AdminUser: React.FC<Props> = (props) => {
                       {user.name}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {user.email}
+                      {user.details.email}
                     </TableCell>
                     <TableCell component="th" scope="row">
                       {user.organizations.map((title) => title).join(", ")}

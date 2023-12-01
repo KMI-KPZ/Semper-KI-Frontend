@@ -21,7 +21,7 @@ const ServiceOverview: React.FC<Props> = (props) => {
   const { createProcess } = useProcess();
 
   const addNewItem = () => {
-    createProcess.mutate();
+    createProcess();
   };
 
   // const navigateToUpload = () => {

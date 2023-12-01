@@ -85,7 +85,7 @@ const useService = (): ReturnProps => {
       ServiceType.MANUFACTURING,
       newService
     );
-    updateProcess.mutate({
+    updateProcess({
       changes: {
         service: updateServiceProps,
         status: serviceIsComplete

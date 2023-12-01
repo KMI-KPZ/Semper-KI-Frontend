@@ -1,6 +1,6 @@
 import { customAxios } from "../customAxios";
 import logger from "@/hooks/useLogger";
-import { getUserType } from "@/services/utils";
+import { getAuthorizedUserType } from "@/services/utils";
 import { AuthorizedUserProps } from "@/hooks/useUser";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
@@ -33,12 +33,18 @@ const useUserQuerys = (): useUserQueryReturnProps => {
           const userData = response.data;
           logger("useUser | getUser ✅ |", userData);
           const newUser: AuthorizedUserProps = {
-            ...userData,
-            accessed: new Date(userData.accessed),
-            created: new Date(userData.created),
-            updated: new Date(userData.updated),
+            hashedID: userData.hashedID,
+            name: userData.name,
+            organizations: userData.organizations,
+            details: {
+              email: userData.details.email,
+              address: userData.details.address,
+            },
+            accessed: new Date(userData.accessedWhen),
+            created: new Date(userData.createdWhen),
+            updated: new Date(userData.updatedWhen),
             lastSeen: new Date(userData.lastSeen),
-            usertype: getUserType(userData.usertype),
+            usertype: getAuthorizedUserType(userData.usertype),
           };
           return newUser;
         });

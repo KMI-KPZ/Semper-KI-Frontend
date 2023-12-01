@@ -19,40 +19,19 @@ import { useContext } from "react";
 import { ProjectContext } from "../context/ProjectContext";
 import { ManufacturingServiceProps } from "@/pages/Service/Manufacturing/types/types";
 import { ModelingServiceProps } from "@/pages/Service/Modelling/Modelling";
+import { ProcessContext } from "../context/ProcessContext";
+import useProcessMutations from "@/api/Process/useProcessMutations";
+import useGernalProcess from "./useGernalProcess";
 
 interface ReturnProps {
-  deleteProcess: UseMutationResult<string, Error, string, unknown>;
-  createProcess: UseMutationResult<string, Error, void, unknown>;
-  updateProcess: UseMutationResult<string, Error, UpdateProcessProps, unknown>;
-  getCurrentProcess: (_processID?: string) => ProcessProps | undefined;
-  updateProcessWithProcessID: UseMutationResult<
-    string,
-    Error,
-    {
-      processID: string;
-      updates: UpdateProcessProps;
-    },
-    unknown
-  >;
-  updateProcessesWithProcessIDs: UseMutationResult<
-    string,
-    Error,
-    {
-      processIDs: string[];
-      updates: UpdateProcessProps;
-    },
-    unknown
-  >;
-  getProcessQuery: (_processID?: string) => ProcessQueryProps;
-  uploadFiles: UseMutationResult<string, Error, UplaodFilesProps, unknown>;
-  downloadFile: UseMutationResult<Blob, Error, DownloadFileProps, unknown>;
-  downloadFilesZIP: UseMutationResult<
-    Blob,
-    Error,
-    DownloadFilesZIPProps,
-    unknown
-  >;
-  deleteFile: UseMutationResult<string, Error, DeleteFileProps, unknown>;
+  process: ProcessProps;
+  createProcess: () => void;
+  updateProcess: (updates: UpdateProcessProps) => void;
+  deleteProcess: () => void;
+  uploadFiles: (files: File[]) => void;
+  downloadFile: (fileID: string) => void;
+  downloadZIP: (fileIDs: string[]) => void;
+  deleteFile: (fileID: string) => void;
 }
 
 export interface ProcessDetailsProps {
@@ -74,7 +53,7 @@ export type DefaultProcessProps = {
   service: ServiceProps;
   created: Date;
   updated: Date;
-  files: FilesDescriptionProps[];
+  files: FileProps[];
   messages: { messages: ChatMessageProps[] };
   contractor: string[];
 };
@@ -93,6 +72,14 @@ export type ModelingProcessProps = {
   serviceType: ServiceType.MODELING;
   service: ModelingServiceProps;
 } & DefaultProcessProps;
+
+export type FileProps = {
+  createdBy: string;
+  date: Date;
+  fileName: string;
+  id: string;
+  path: string;
+};
 
 export interface FilesDescriptionProps {
   createdBy: string;
@@ -183,220 +170,56 @@ interface ProcessQueryProps {
 }
 
 const useProcess = (): ReturnProps => {
-  const queryClient = useQueryClient();
-  const { projectID: URLProjectID, processID: URLProcessID } = useParams();
-  const { project, projectQuery: query } = useContext(ProjectContext);
+  const { process } = useContext(ProcessContext);
+  const {
+    createProcess,
+    updateProcess: _updateProcess,
+    deleteProcess: _deleteProcess,
+    uploadFiles: _uploadFiles,
+    downloadFile: _downloadFile,
+    downloadZIP: _downloadZIP,
+    deleteFile: _deleteFile,
+  } = useGernalProcess();
 
-  const getProcessQuery = (_processID?: string): ProcessQueryProps => {
-    return {
-      process: project.processes.find(
-        (process) =>
-          process.processID ===
-          (_processID === undefined ? URLProcessID : _processID)
-      ),
-      query,
-    };
+  const updateProcess = (updates: UpdateProcessProps) => {
+    _updateProcess({
+      processIDs: [process.processID],
+      updates,
+    });
   };
 
-  const getCurrentProcess = (_processID?: string): ProcessProps | undefined => {
-    return project.processes.find(
-      (process) =>
-        process.processID ===
-        (_processID === undefined ? URLProcessID : _processID)
-    );
+  const deleteProcess = () => {
+    _deleteProcess({ processIDs: [process.processID] });
   };
 
-  const createProcess = useMutation<string, Error, void>({
-    mutationFn: async () => {
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createProcessID/${URLProjectID}/`;
-      return customAxios.get(apiUrl).then((response) => {
-        logger("useProcess | createProcess ✅ |", response.data);
-        return response.data.processID;
-      });
-    },
-    onSuccess(data, variables, context) {
-      queryClient.invalidateQueries(["flatProjects"]);
-      queryClient.invalidateQueries(["project", URLProjectID]);
-    },
-  });
+  const uploadFiles = (files: File[]) => {
+    _uploadFiles({
+      processID: process.processID,
+      files,
+    });
+  };
 
-  const updateProcess = useMutation<string, Error, UpdateProcessProps>({
-    mutationFn: async ({ changes = {}, deletions = {} }) => {
-      return customAxios
-        .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
-          projectID: URLProjectID,
-          processIDs: [URLProcessID],
-          changes: changes,
-          deletions: deletions,
-        })
-        .then((res) => {
-          logger("useProcess | updateProcess ✅ |", res.data);
-          return res.data;
-        });
-    },
-    onSuccess(data, variables, context) {
-      queryClient.invalidateQueries(["project", URLProjectID]);
-      queryClient.invalidateQueries(["flatProjects"]);
-    },
-  });
+  const downloadFile = (fileID: string) => {
+    _downloadFile({ processID: process.processID, fileID });
+  };
 
-  const updateProcessWithProcessID = useMutation<
-    string,
-    Error,
-    { processID: string; updates: UpdateProcessProps }
-  >({
-    mutationFn: async (props: {
-      processID: string;
-      updates: UpdateProcessProps;
-    }) => {
-      const { updates, processID } = props;
-      const { changes = {}, deletions = {} } = updates;
-      return customAxios
-        .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
-          projectID: URLProjectID,
-          processIDs: [processID],
-          changes,
-          deletions,
-        })
-        .then((res) => {
-          logger("useProcess | updateProcess ✅ |", res.data);
-          return res.data;
-        });
-    },
-    onSuccess(data, variables, context) {
-      queryClient.invalidateQueries(["project", URLProjectID]);
-      queryClient.invalidateQueries(["flatProjects"]);
-    },
-  });
+  const downloadZIP = (fileIDs: string[]) => {
+    _downloadZIP({ processID: process.processID, fileIDs });
+  };
 
-  const uploadFiles = useMutation<string, Error, UplaodFilesProps>({
-    mutationFn: async ({ files, processID }) => {
-      const formData = new FormData();
-      files.forEach((file) => formData.append(file.name, file));
-      formData.append("processID", processID);
-      formData.append("projectID", project.projectID);
-      return customAxios
-        .post(
-          `${process.env.VITE_HTTP_API_URL}/public/uploadFiles/`,
-          formData,
-          { headers: { "Content-Type": "multipart/form-data" } }
-        )
-        .then((res) => {
-          logger("useProcess | uploadFiles ✅ |", res.data);
-          return res.data;
-        });
-    },
-    onSuccess(data, variables, context) {
-      queryClient.invalidateQueries(["project", URLProjectID]);
-    },
-  });
-
-  const updateProcessesWithProcessIDs = useMutation<
-    string,
-    Error,
-    { processIDs: string[]; updates: UpdateProcessProps }
-  >({
-    mutationFn: async (props: {
-      processIDs: string[];
-      updates: UpdateProcessProps;
-    }) => {
-      const { updates, processIDs } = props;
-      const { changes = {}, deletions = {} } = updates;
-      return customAxios
-        .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
-          projectID: URLProjectID,
-          processIDs,
-          changes,
-          deletions,
-        })
-        .then((res) => {
-          logger("useProcess | updateProcess ✅ |", res.data);
-          return res.data;
-        });
-    },
-    onSuccess(data, variables, context) {
-      queryClient.invalidateQueries(["project", URLProjectID]);
-      queryClient.invalidateQueries(["flatProjects"]);
-    },
-  });
-
-  const deleteProcess = useMutation<string, Error, string>({
-    mutationFn: async (processID: string) => {
-      return customAxios
-        .delete(
-          `${process.env.VITE_HTTP_API_URL}/public/deleteProcess/${URLProjectID}/`,
-          { data: { processIDs: [processID] } }
-        )
-        .then((res) => {
-          logger("useProcess | deleteProcess ✅ |", res.data);
-          return res.data;
-        });
-    },
-    onSuccess(data, processID, context) {
-      queryClient.invalidateQueries(["project", URLProjectID]);
-      queryClient.invalidateQueries(["flatProjects"]);
-    },
-  });
-
-  const downloadFile = useMutation<Blob, Error, DownloadFileProps>({
-    mutationFn: async ({ processID, fileID }) => {
-      return customAxios
-        .get(
-          `${process.env.VITE_HTTP_API_URL}/public/downloadFile/${processID}/${fileID}`,
-          { responseType: "blob" }
-        )
-        .then((res) => {
-          logger("useProcess | downloadFile ✅ |", res.data);
-          return res.data;
-        });
-    },
-  });
-
-  const downloadFilesZIP = useMutation<Blob, Error, DownloadFilesZIPProps>({
-    mutationFn: async ({ processID, fileIDs }) => {
-      return customAxios
-        .get(
-          `${
-            process.env.VITE_HTTP_API_URL
-          }/public/downloadFilesAsZip/${processID}?fileIDs=${fileIDs.join(
-            ","
-          )}`,
-          { responseType: "blob" }
-        )
-        .then((res) => {
-          logger("useProcess | downloadFilesZIP ✅ |", res.data);
-          return res.data;
-        });
-    },
-  });
-  const deleteFile = useMutation<string, Error, DeleteFileProps>({
-    mutationFn: async ({ processID, fileID }) => {
-      return customAxios
-        .delete(
-          `${process.env.VITE_HTTP_API_URL}/public/deleteFile/${processID}/${fileID}`
-        )
-        .then((res) => {
-          logger("useProcess | deleteFile ✅ |", res.data);
-          return res.data;
-        });
-    },
-    onSuccess(data, variables, context) {
-      queryClient.invalidateQueries(["project", URLProjectID]);
-    },
-  });
+  const deleteFile = (fileID: string) => {
+    _deleteFile({ processID: process.processID, fileID });
+  };
 
   return {
+    process,
     createProcess,
-    deleteProcess,
-    updateProcess,
-    getCurrentProcess,
-    getProcessQuery,
-    updateProcessWithProcessID,
-    updateProcessesWithProcessIDs,
-    uploadFiles,
-    downloadFile,
-    downloadFilesZIP,
     deleteFile,
+    deleteProcess,
+    downloadFile,
+    downloadZIP,
+    updateProcess,
+    uploadFiles,
   };
 };
 

@@ -35,7 +35,7 @@ const ServiceRoutes: React.FC<ServiceRoutesProps> = (props) => {
       <Routes>
         <Route element={<ServiceContextProvider />}>
           <Route index element={<ServiceSelect />} />
-          <Route path="edit" element={<ServiceEdit />} />
+          {/* <Route path="edit" element={<ServiceEdit />} /> */}
           <Route path="manufacturing/*" element={<ServiceManufacturing />} />
           <Route path="modeling/*" element={<ServiceModeling />} />
           <Route path="*" element={<Navigate to="." />} />

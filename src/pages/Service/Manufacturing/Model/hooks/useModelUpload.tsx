@@ -35,7 +35,6 @@ interface UploadModelProps {
 const useModelUpload = (): ReturnProps => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const { updateProcessWithProcessID } = useProcess();
   const uploadModel = useMutation<ModelProps[], Error, UploadModelProps>({
     mutationFn: async (props) => {
       const { model, processID, projectID, file } = props;

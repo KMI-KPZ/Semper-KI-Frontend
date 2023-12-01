@@ -34,7 +34,7 @@ const ResKriVer: React.FC<ResKriVerProps> = (props) => {
   }
 
   const handleOnClickButton = () => {
-    createProject.mutate();
+    createProject();
   };
 
   const { register, handleSubmit, formState } = useForm({

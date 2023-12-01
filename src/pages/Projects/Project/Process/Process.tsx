@@ -27,6 +27,7 @@ import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 import { UserContext } from "@/contexts/UserContextProvider";
 import useCheckedProcesses from "../hooks/useCheckedProcesses";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
+import useGernalProcess from "../../hooks/useGernalProcess";
 
 interface Props {
   process: ProcessProps;
@@ -50,7 +51,7 @@ const Process: React.FC<Props> = (props) => {
   });
   const { handleOnChangeCheckboxSelect } = useCheckedProcesses();
 
-  const { updateProcessWithProcessID, uploadFiles } = useProcess();
+  const { updateProcess, uploadFiles } = useGernalProcess();
 
   const updateStatus = (status: ProcessStatus) => {
     // updateProject.mutate({
@@ -61,8 +62,8 @@ const Process: React.FC<Props> = (props) => {
   };
 
   const updateProcessTitle = (title: string) => {
-    updateProcessWithProcessID.mutate({
-      processID: process.processID,
+    updateProcess({
+      processIDs: [process.processID],
       updates: {
         changes: { details: { title: title } },
       },
@@ -83,7 +84,7 @@ const Process: React.FC<Props> = (props) => {
   };
 
   const uploadFilesMutation = (files: File[]) => {
-    uploadFiles.mutate({
+    uploadFiles({
       processID: process.processID,
       files: files,
     });

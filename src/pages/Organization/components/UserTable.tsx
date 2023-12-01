@@ -65,7 +65,7 @@ const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
                           user={data}
                           currentUser={
                             user.usertype !== UserType.ANONYM &&
-                            user.email === data.email
+                            user.details.email === data.email
                           }
                           allRoles={rolesQuery.data}
                         />

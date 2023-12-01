@@ -41,7 +41,7 @@ const Profile: React.FC<Props> = (props) => {
           {t("Profile.general.name")}: {user.name}
         </span>
         <span>
-          {t("Profile.general.email")}: {user.email}
+          {t("Profile.general.email")}: {user.details.email}
         </span>
         <span>
           {t("Profile.general.type")}:{" "}

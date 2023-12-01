@@ -12,7 +12,6 @@ import ProcessContextProvider from "@/pages/Projects/context/ProcessContext";
 import { Error } from "@/pages/Error/Error";
 import ServiceRoutes from "./ServiceRoutes";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
-import ContentBox from "@component-library/ContentBox";
 
 interface ProjectsRoutesProps {}
 

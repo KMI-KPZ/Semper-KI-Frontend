@@ -11,16 +11,19 @@ export interface ContractorProps {
   id: string;
 }
 
-const useContractors = (): ReturnProps => {
+const useContractors = (processID: string): ReturnProps => {
   const contractorsQuery = useQuery<ContractorProps[], Error>({
     queryKey: ["contractors"],
     queryFn: async () =>
       customAxios
-        .get(`${process.env.VITE_HTTP_API_URL}/public/getContractors/`)
+        .get(
+          `${process.env.VITE_HTTP_API_URL}/public/getContractors/${processID}/`
+        )
         .then((res) => {
           logger("useContractors | getContractors ✅ |", res.data);
           return res.data === "fu" ? [] : res.data;
         }),
+    enabled: processID !== undefined,
   });
 
   return { contractorsQuery };

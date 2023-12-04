@@ -19,10 +19,11 @@ import Container from "@component-library/Container";
 import useCheckedProcesses from "../hooks/useCheckedProcesses";
 import { twMerge } from "tailwind-merge";
 import useGeneralProcess from "../../hooks/useGeneralProcess";
+import ProjectContractorSelectionItem from "./components/Item";
 
 interface Props {}
 
-interface FormData {
+export interface ContractorSelectionFormData {
   processes: {
     process: ProcessProps;
     contractorID: string;
@@ -35,14 +36,14 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   const { project, checkedProcesses } = useContext(ProjectContext);
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
-  const { contractorsQuery } = useContractor();
+
   const { updateProcess } = useGeneralProcess();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<ContractorSelectionFormData>({
     defaultValues: async () => ({
       processes:
         project.processes.length === 0
@@ -60,7 +61,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
     }),
   });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: ContractorSelectionFormData) => {
     data.processes
       .filter((process) => checkedProcesses.includes(process.process.processID))
       .forEach((process, index, allProcesses) => {
@@ -94,59 +95,13 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
                   ) && process.processStatus === ProcessStatus.SERVICE_READY
               )
               .map((process, index) => (
-                <div
+                <ProjectContractorSelectionItem
                   key={index}
-                  className={twMerge(
-                    `flex w-full flex-col items-center justify-center gap-20  p-5 md:flex-row md:items-start md:justify-between`,
-                    checkedProcesses.includes(process.processID)
-                      ? "bg-white"
-                      : "bg-slate-100"
-                  )}
-                >
-                  <ProcessInfoCard process={process} />
-                  <Container
-                    direction="col"
-                    className="grow md:max-w-2xl md:items-start md:justify-start"
-                  >
-                    <Heading variant="h2">
-                      {t(
-                        "Projects.Project.ContractorSelection.ContractorSelection.contractor"
-                      )}
-                    </Heading>
-                    {contractorsQuery.data !== undefined &&
-                    contractorsQuery.data.length > 0 ? (
-                      contractorsQuery.data.map((manufacturer, _index) => (
-                        <label
-                          className="flex w-full flex-row items-center justify-center gap-5 p-3 shadow-card"
-                          key={_index}
-                        >
-                          <input
-                            type="radio"
-                            {...register(`processes.${index}.contractorID`, {
-                              required: checkedProcesses.includes(
-                                process.processID
-                              ),
-                              disabled: !checkedProcesses.includes(
-                                process.processID
-                              ),
-                            })}
-                            value={manufacturer.id}
-                          />
-                          <Text variant="body">{manufacturer.name}</Text>
-                        </label>
-                      ))
-                    ) : (
-                      <Text variant="body">No manufacturers found</Text>
-                    )}
-                    {errors.processes?.[index]?.contractorID ? (
-                      <Text variant="body" className="text-red-500">
-                        {t(
-                          "Projects.Project.ContractorSelection.ContractorSelection.error.missing"
-                        )}
-                      </Text>
-                    ) : null}
-                  </Container>
-                </div>
+                  process={process}
+                  index={index}
+                  register={register}
+                  errors={errors}
+                />
               ))
           : null}
       </div>

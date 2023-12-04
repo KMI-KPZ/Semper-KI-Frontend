@@ -52,6 +52,7 @@ const Project: React.FC<Props> = (props) => {
       project !== undefined
     ) {
       deleteProject([project.projectID]);
+      navigate("/projects");
     }
   };
 

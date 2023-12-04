@@ -65,8 +65,8 @@ const useModelUpload = (): ReturnProps => {
       //   processID: variables.processID,
       //   updates: { changes: { service: { model: model[0] } } },
       // });
-      queryClient.invalidateQueries(["project", variables.projectID]);
       navigate("../material");
+      queryClient.invalidateQueries(["project", variables.projectID]);
     },
   });
 

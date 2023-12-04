@@ -27,8 +27,8 @@ export const ProcessMaterialCard: React.FC<Props> = (props) => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    updatedService({ material });
     navigate("../postprocessing");
+    updatedService({ material });
   };
 
   const handleOnClickCard = (

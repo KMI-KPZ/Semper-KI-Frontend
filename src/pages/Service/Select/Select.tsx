@@ -32,7 +32,7 @@ const ServiceSelect: React.FC<ServiceSelectProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { process } = useProcess();
-  const service = process.service;
+  const service = process.serviceDetails;
 
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">

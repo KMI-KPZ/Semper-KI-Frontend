@@ -52,7 +52,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
       processIDs: [process.processID],
       updates: {
         changes: {
-          status,
+          processStatus: status,
         },
       },
     });

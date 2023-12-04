@@ -7,7 +7,6 @@ import { Heading } from "@component-library/Typography";
 import { Divider } from "@component-library/Divider";
 import ServiceSelect from "@/pages/Service/Select/Select";
 import logger from "@/hooks/useLogger";
-import ServicePreviewSelect from "./Select/Select";
 import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
 import { ManufacturingServiceProps } from "@/pages/Service/Manufacturing/types/types";
 import ProcessServiceSelect from "./components/Select";
@@ -23,14 +22,9 @@ const ProcessServicePreview: React.FC<ProcessServicePreviewProps> = (props) => {
   const renderService = () => {
     switch (process.serviceType) {
       case ServiceType.NONE:
-        return <ProcessServiceSelect />;
+        return <ProcessServiceSelect process={process} />;
       case ServiceType.MANUFACTURING:
-        return (
-          <ProcessServiceManufacturing
-            process={process}
-            service={process.service as ManufacturingServiceProps}
-          />
-        );
+        return <ProcessServiceManufacturing process={process} />;
       case ServiceType.MODELING:
         return <ProcessServiceModelling process={process} />;
     }

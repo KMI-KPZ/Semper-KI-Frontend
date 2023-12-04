@@ -65,7 +65,7 @@ const Process: React.FC<Props> = (props) => {
     updateProcess({
       processIDs: [process.processID],
       updates: {
-        changes: { details: { title: title } },
+        changes: { processDetails: { title: title } },
       },
     });
   };
@@ -103,7 +103,7 @@ const Process: React.FC<Props> = (props) => {
             className="h-6 w-6"
             name={t("Projects.Project.Project.label.selectProcess")}
             value={t("Projects.Project.Process.Process.label.selectProcess", {
-              name: process.details.title,
+              name: process.processDetails.title,
             })}
             checked={checked}
             onChange={(e) => handleOnChangeCheckboxSelect(e, process.processID)}
@@ -125,10 +125,13 @@ const Process: React.FC<Props> = (props) => {
           projectEvent={projectEvent}
         />
       </div>
-      <StatusBar status={process.status} serviceType={process.serviceType} />
+      <StatusBar
+        status={process.processStatus}
+        serviceType={process.serviceType}
+      />
       <ProcessStatusButtons
         projectID={projectID}
-        state={process.status}
+        state={process.processStatus}
         process={process}
       />
       <ProcessServicePreview process={process} />

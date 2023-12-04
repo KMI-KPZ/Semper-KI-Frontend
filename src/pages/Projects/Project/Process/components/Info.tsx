@@ -18,20 +18,20 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
       </Text>
       <Text variant="body">
         {t("Projects.Project.Process.components.Info.created")}{" "}
-        {new Date(process.created).toLocaleDateString()}
+        {new Date(process.createdWhen).toLocaleDateString()}
       </Text>
       <Text variant="body">
         {t("Projects.Project.Process.components.Info.updated")}{" "}
-        {new Date(process.updated).toLocaleDateString()}
+        {new Date(process.updatedWhen).toLocaleDateString()}
       </Text>
       <Text variant="body">
         {t("Projects.Project.Process.components.Info.status")}{" "}
         {t(
           `enum.ProcessStatus.${
-            ProcessStatus[process.status] as keyof typeof ProcessStatus
+            ProcessStatus[process.processStatus] as keyof typeof ProcessStatus
           }`
         )}
-        {` (${process.status})`}
+        {` (${process.processStatus})`}
       </Text>
     </div>
   );

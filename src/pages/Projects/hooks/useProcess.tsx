@@ -1,6 +1,7 @@
 import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import {
+  MutateOptions,
   useMutation,
   UseMutationResult,
   useQuery,
@@ -20,17 +21,30 @@ import { ProjectContext } from "../context/ProjectContext";
 import { ManufacturingServiceProps } from "@/pages/Service/Manufacturing/types/types";
 import { ModelingServiceProps } from "@/pages/Service/Modelling/Modelling";
 import { ProcessContext } from "../context/ProcessContext";
-import useProcessMutations from "@/api/Process/useProcessMutations";
+import useProcessMutations, {
+  DownloadFileMutationProps,
+  DownloadZIPMutationProps,
+  UpdateProcessMutationProps,
+} from "@/api/Process/useProcessMutations";
 import useGernalProcess from "./useGernalProcess";
 
 interface ReturnProps {
   process: ProcessProps;
   createProcess: () => void;
-  updateProcess: (updates: UpdateProcessProps) => void;
+  updateProcess: (
+    updates: UpdateProcessProps,
+    options?: MutateOptions<string, Error, UpdateProcessMutationProps, unknown>
+  ) => void;
   deleteProcess: () => void;
   uploadFiles: (files: File[]) => void;
-  downloadFile: (fileID: string) => void;
-  downloadZIP: (fileIDs: string[]) => void;
+  downloadFile: (
+    fileID: string,
+    options?: MutateOptions<Blob, Error, DownloadFileMutationProps, unknown>
+  ) => void;
+  downloadZIP: (
+    fileIDs: string[],
+    options?: MutateOptions<Blob, Error, DownloadZIPMutationProps, unknown>
+  ) => void;
   deleteFile: (fileID: string) => void;
 }
 
@@ -44,33 +58,33 @@ export type ProcessProps =
   | ModelingProcessProps;
 
 export type DefaultProcessProps = {
-  processID: string;
   client: string;
-  status: ProcessStatus;
-  details: ProcessDetailsProps;
-  serviceStatus: number;
+  processID: string;
+  processStatus: ProcessStatus;
+  processDetails: ProcessDetailsProps;
   serviceType: ServiceType;
-  service: ServiceProps;
-  created: Date;
-  updated: Date;
+  serviceStatus: number;
+  serviceDetails: ServiceProps;
+  createdWhen: Date;
+  updatedWhen: Date;
   files: FileProps[];
   messages: { messages: ChatMessageProps[] };
-  contractor: string[];
+  contractor: string;
 };
 
 export type NoServiceProcessProps = {
   serviceType: ServiceType.NONE;
-  service: undefined;
+  serviceDetails: undefined;
 } & DefaultProcessProps;
 
 export type ManufactoringProcessProps = {
   serviceType: ServiceType.MANUFACTURING;
-  service: ManufacturingServiceProps;
+  serviceDetails: ManufacturingServiceProps;
 } & DefaultProcessProps;
 
 export type ModelingProcessProps = {
   serviceType: ServiceType.MODELING;
-  service: ModelingServiceProps;
+  serviceDetails: ModelingServiceProps;
 } & DefaultProcessProps;
 
 export type FileProps = {
@@ -107,12 +121,14 @@ export interface UpdateProcessProps {
 }
 
 export interface ProcessChangesProps {
-  contractor?: string[];
+  serviceStatus?: number;
+  serviceType?: ServiceType;
+  provisionalContractor?: string;
   messages?: ChatMessageProps;
-  status?: ProcessStatus;
+  processStatus?: ProcessStatus;
   files?: File[];
-  details?: ProcessDetailsProps;
-  service?: GerneralUpdateServiceProps;
+  processDetails?: ProcessDetailsProps;
+  serviceDetails?: GerneralUpdateServiceProps;
 }
 
 export interface ProcessDeletionsProps {
@@ -181,11 +197,17 @@ const useProcess = (): ReturnProps => {
     deleteFile: _deleteFile,
   } = useGernalProcess();
 
-  const updateProcess = (updates: UpdateProcessProps) => {
-    _updateProcess({
-      processIDs: [process.processID],
-      updates,
-    });
+  const updateProcess = (
+    updates: UpdateProcessProps,
+    options?: MutateOptions<string, Error, UpdateProcessMutationProps, unknown>
+  ) => {
+    _updateProcess(
+      {
+        processIDs: [process.processID],
+        updates,
+      },
+      options
+    );
   };
 
   const deleteProcess = () => {
@@ -199,12 +221,18 @@ const useProcess = (): ReturnProps => {
     });
   };
 
-  const downloadFile = (fileID: string) => {
-    _downloadFile({ processID: process.processID, fileID });
+  const downloadFile = (
+    fileID: string,
+    options?: MutateOptions<Blob, Error, DownloadFileMutationProps, unknown>
+  ) => {
+    _downloadFile({ processID: process.processID, fileID }, options);
   };
 
-  const downloadZIP = (fileIDs: string[]) => {
-    _downloadZIP({ processID: process.processID, fileIDs });
+  const downloadZIP = (
+    fileIDs: string[],
+    options?: MutateOptions<Blob, Error, DownloadZIPMutationProps, unknown>
+  ) => {
+    _downloadZIP({ processID: process.processID, fileIDs }, options);
   };
 
   const deleteFile = (fileID: string) => {

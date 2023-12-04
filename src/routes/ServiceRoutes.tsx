@@ -4,6 +4,7 @@ import ServiceEdit from "@/pages/Service/Edit/Edit";
 import { ServiceManufacturing } from "@/pages/Service/Manufacturing/Manufacturing";
 import ServiceModeling from "@/pages/Service/Modelling/Modelling";
 import ServiceSelect from "@/pages/Service/Select/Select";
+import Service from "@/pages/Service/Service";
 import { ServiceContextProvider } from "@/pages/Service/context/ServiceContext";
 import { ServiceType } from "@/pages/Service/hooks/useService";
 import Modal from "@component-library/Modal";
@@ -34,7 +35,7 @@ const ServiceRoutes: React.FC<ServiceRoutesProps> = (props) => {
     >
       <Routes>
         <Route element={<ServiceContextProvider />}>
-          <Route index element={<ServiceSelect />} />
+          <Route index element={<Service />} />
           {/* <Route path="edit" element={<ServiceEdit />} /> */}
           <Route path="manufacturing/*" element={<ServiceManufacturing />} />
           <Route path="modeling/*" element={<ServiceModeling />} />

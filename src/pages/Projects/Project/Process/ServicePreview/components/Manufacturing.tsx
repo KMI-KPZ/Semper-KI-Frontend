@@ -8,17 +8,19 @@ import { Heading, Text } from "@component-library/Typography";
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ModelPreview from "@/pages/Test/STLViewer";
-import useProcess, { ProcessProps } from "@/pages/Projects/hooks/useProcess";
+import useProcess, {
+  ManufactoringProcessProps,
+  ProcessProps,
+} from "@/pages/Projects/hooks/useProcess";
 
 interface ProcessServiceManufacturingProps {
-  process: ProcessProps;
-  service: ManufacturingServiceProps;
+  process: ManufactoringProcessProps;
 }
 
 const ProcessServiceManufacturing: React.FC<
   ProcessServiceManufacturingProps
 > = (props) => {
-  const { process, service } = props;
+  const { process } = props;
   const { t } = useTranslation();
   const [open, setOpen] = useState<boolean>(false);
   const { downloadFile } = useProcess();
@@ -32,30 +34,26 @@ const ProcessServiceManufacturing: React.FC<
   const handleOnClickButtonOpen = () => {
     setOpen(true);
     if (
-      service.model !== undefined &&
+      process.serviceDetails.model !== undefined &&
       process.files.length > 0 &&
       process.files.find(
-        (file) => service.model !== undefined && file.id === service.model.id
+        (file) =>
+          process.serviceDetails.model !== undefined &&
+          file.id === process.serviceDetails.model.id
       ) !== undefined
     ) {
-      downloadFile(
-        {
-          processID: process.processID,
-          fileID: service.model.id,
+      downloadFile(process.serviceDetails.model.id, {
+        onSuccess(data) {
+          const url = window.URL.createObjectURL(data);
+          setFileUrl(url);
         },
-        {
-          onSuccess(data) {
-            const url = window.URL.createObjectURL(data);
-            setFileUrl(url);
-          },
-        }
-      );
+      });
     }
   };
 
   return (
     <Container direction="col" align="start" className="p-5">
-      {service.model !== undefined ? (
+      {process.serviceDetails.model !== undefined ? (
         <PermissionGate element={"ProcessButtonModelPreView"}>
           <Button
             onClick={handleOnClickButtonOpen}
@@ -72,7 +70,9 @@ const ProcessServiceManufacturing: React.FC<
           )}
         </Text>
         <Text variant="body">
-          {service.model === undefined ? "---" : service.model.title}
+          {process.serviceDetails.model === undefined
+            ? "---"
+            : process.serviceDetails.model.title}
         </Text>
       </Container>
       <Container>
@@ -82,7 +82,9 @@ const ProcessServiceManufacturing: React.FC<
           )}
         </Text>
         <Text variant="body">
-          {service.material === undefined ? "---" : service.material.title}
+          {process.serviceDetails.material === undefined
+            ? "---"
+            : process.serviceDetails.material.title}
         </Text>
       </Container>
       <Container>
@@ -92,9 +94,9 @@ const ProcessServiceManufacturing: React.FC<
           )}
         </Text>
         <Text variant="body">
-          {service.postProcessings === undefined
+          {process.serviceDetails.postProcessings === undefined
             ? "---"
-            : service.postProcessings.map(
+            : process.serviceDetails.postProcessings.map(
                 (postProcessing: PostProcessingProps) => postProcessing.title
               )}
         </Text>

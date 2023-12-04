@@ -8,16 +8,22 @@ import FactoryIcon from "@mui/icons-material/Factory";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import useService, { ServiceType } from "@/pages/Service/hooks/useService";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
-import useProcess from "@/pages/Projects/hooks/useProcess";
+import useProcess, {
+  ProcessProps,
+  ProcessStatus,
+} from "@/pages/Projects/hooks/useProcess";
 import logger from "@/hooks/useLogger";
+import useGernalProcess from "@/pages/Projects/hooks/useGernalProcess";
 
-interface ProcessServiceSelectProps {}
+interface ProcessServiceSelectProps {
+  process: ProcessProps;
+}
 
 const ProcessServiceSelect: React.FC<ProcessServiceSelectProps> = (props) => {
-  const {} = props;
+  const { process } = props;
   const { t } = useTranslation();
   const { servicesQuery } = useServices();
-  const { updateProcess } = useProcess();
+  const { updateProcess } = useGernalProcess();
 
   const getIcon = (serviceType: ServiceType) => {
     switch (serviceType) {
@@ -35,7 +41,15 @@ const ProcessServiceSelect: React.FC<ProcessServiceSelectProps> = (props) => {
     serviceType: ServiceType
   ) => {
     e.preventDefault();
-    logger("ProcessServiceSelect | handleOnClickCard |", serviceType);
+    updateProcess({
+      processIDs: [process.processID],
+      updates: {
+        changes: {
+          serviceType,
+          processStatus: ProcessStatus.SERVICE_IN_PROGRESS,
+        },
+      },
+    });
   };
 
   if (servicesQuery.isLoading) return <LoadingAnimation />;
@@ -49,7 +63,7 @@ const ProcessServiceSelect: React.FC<ProcessServiceSelectProps> = (props) => {
             onClick={(e) => handleOnClickCard(e, service.identifier)}
             className="
             flex flex-col items-center justify-center gap-5 rounded-xl 
-             p-5 shadow-button duration-300 
+             p-5 shadow-card duration-300 
             hover:cursor-pointer hover:shadow-button-inner focus:shadow-button-inner
             "
           >

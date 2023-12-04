@@ -24,7 +24,7 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
   };
   const handleOnClickButtonSelect = () => {
     closeModelView();
-    updateProcess({ changes: { service: { model: model } } });
+    updateProcess({ changes: { serviceDetails: { model } } });
     navigate("../material");
   };
   return (

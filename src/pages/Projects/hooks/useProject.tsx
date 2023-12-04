@@ -9,15 +9,15 @@ interface ReturnProps {
   projectQuery: UseQueryResult<ProjectProps, Error>;
   createProject(): void;
   updateProject(updateProps: UpdateProjectProps): void;
-  deleteProject(projectID: string): void;
+  deleteProject(projectIDs: string[]): void;
 }
 
 export interface ProjectProps {
   projectID: string;
   client: string;
   status: ProcessStatus;
-  created: Date;
-  updated: Date;
+  createdWhen: Date;
+  updatedWhen: Date;
   details: ProjectDetailsProps;
   processes: ProcessProps[];
 }
@@ -55,8 +55,8 @@ export const useProject = (): ReturnProps => {
   const updateProject = (updateProps: UpdateProjectProps) => {
     updateProjectMutation.mutate(updateProps);
   };
-  const deleteProject = (projectID: string) => {
-    deleteProjectMutation.mutate(projectID);
+  const deleteProject = (projectIDs: string[]) => {
+    deleteProjectMutation.mutate(projectIDs);
   };
 
   return {

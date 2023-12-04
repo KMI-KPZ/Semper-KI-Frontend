@@ -30,8 +30,8 @@ const ServiceSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
       updateProcess(
         {
           changes: {
-            service: { type: serviceType },
-            status: ProcessStatus.SERVICE_IN_PROGRESS,
+            serviceType,
+            processStatus: ProcessStatus.SERVICE_IN_PROGRESS,
           },
         },
         {

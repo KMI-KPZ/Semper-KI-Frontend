@@ -25,7 +25,7 @@ const ProcessInfoCard: React.FC<ProcessInfoCardProps> = (props) => {
         className="h-6 w-6"
         name={t("Projects.Project.Project.label.selectProcess")}
         value={t("Projects.Project.Process.Process.label.selectProcess", {
-          name: process.details.title,
+          name: process.processDetails.title,
         })}
         checked={checkedProcesses.includes(process.processID)}
         onChange={(e) => handleOnChangeCheckboxSelect(e, process.processID)}
@@ -34,12 +34,12 @@ const ProcessInfoCard: React.FC<ProcessInfoCardProps> = (props) => {
         <Heading variant="h2">
           {t("Projects.Project.components.ProcessInfoCard.title")}
         </Heading>
-        {process.details.title !== undefined ? (
+        {process.processDetails.title !== undefined ? (
           <Container direction="row">
             <Text variant="body">
               {t("Projects.Project.components.ProcessInfoCard.name")}
             </Text>
-            <Text variant="body">{process.details.title}</Text>
+            <Text variant="body">{process.processDetails.title}</Text>
           </Container>
         ) : null}
         <Container direction="row">
@@ -60,13 +60,15 @@ const ProcessInfoCard: React.FC<ProcessInfoCardProps> = (props) => {
               <Text variant="body">
                 {t("Projects.Project.components.ProcessInfoCard.model")}
               </Text>
-              <Text variant="body">{process.service?.model?.title}</Text>
+              <Text variant="body">{process.serviceDetails?.model?.title}</Text>
             </Container>
             <Container direction="row">
               <Text variant="body">
                 {t("Projects.Project.components.ProcessInfoCard.material")}
               </Text>
-              <Text variant="body">{process.service?.material?.title}</Text>
+              <Text variant="body">
+                {process.serviceDetails?.material?.title}
+              </Text>
             </Container>
             <Container direction="row">
               <Text variant="body">
@@ -75,7 +77,7 @@ const ProcessInfoCard: React.FC<ProcessInfoCardProps> = (props) => {
                 )}
               </Text>
               <Text variant="body">
-                {process.service.postProcessings
+                {process.serviceDetails.postProcessings
                   ?.map((postProcessing) => postProcessing.title)
                   .join(", ")}
               </Text>

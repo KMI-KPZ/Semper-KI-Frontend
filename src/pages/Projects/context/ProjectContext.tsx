@@ -23,11 +23,11 @@ export interface ProjectContextProps {
 export const ProjectContext = React.createContext<ProjectContextProps>({
   project: {
     client: "",
-    created: new Date(),
+    createdWhen: new Date(),
     details: {},
     processes: [],
     projectID: "",
-    updated: new Date(),
+    updatedWhen: new Date(),
     status: 0,
   },
   projectQuery: {} as UseQueryResult<ProjectProps, Error>,

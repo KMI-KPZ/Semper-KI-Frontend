@@ -118,7 +118,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
         onClick={handleOnClickButtonInfo}
         title={t("Projects.Project.Process.components.Buttons.button.info")}
       />
-      {process.status >= ProcessStatus.REQUESTED &&
+      {process.processStatus >= ProcessStatus.REQUESTED &&
       user.usertype !== UserType.ANONYM ? (
         <PermissionGate element="ProcessButtonChat">
           {projectEvent !== undefined &&
@@ -150,7 +150,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
           )}
         </PermissionGate>
       ) : null}
-      {process.status <= ProcessStatus.REQUESTED &&
+      {process.processStatus <= ProcessStatus.REQUESTED &&
       shouldRenderFor("CLIENT") ? (
         <PermissionGate element="ProcessButtonDelete">
           <Button
@@ -165,7 +165,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
           />
         </PermissionGate>
       ) : null}
-      {process.status === ProcessStatus.COMPLETED &&
+      {process.processStatus === ProcessStatus.COMPLETED &&
       shouldRenderFor("CLIENT") ? (
         <PermissionGate element="ProcessButtonReProject">
           <Button

@@ -78,7 +78,7 @@ const useService = (): ReturnProps => {
     updateServiceProps: UpdateServiceManufacturingProps
   ) => {
     const newService: ManufacturingServiceProps = {
-      ...process.service,
+      ...process.serviceDetails,
       ...updateServiceProps,
     };
     const serviceIsComplete = isServiceComplete(
@@ -87,8 +87,8 @@ const useService = (): ReturnProps => {
     );
     updateProcess({
       changes: {
-        service: updateServiceProps,
-        status: serviceIsComplete
+        serviceDetails: updateServiceProps,
+        processStatus: serviceIsComplete
           ? ProcessStatus.SERVICE_READY
           : ProcessStatus.SERVICE_IN_PROGRESS,
       },

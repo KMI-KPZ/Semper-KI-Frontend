@@ -51,7 +51,7 @@ const Project: React.FC<Props> = (props) => {
       window.confirm(t("Projects.Project.Project.confirm.delete")) &&
       project !== undefined
     ) {
-      deleteProject(project.projectID);
+      deleteProject([project.projectID]);
     }
   };
 
@@ -198,7 +198,7 @@ const Project: React.FC<Props> = (props) => {
       ) : (
         project.processes
           .sort((processA, processB) =>
-            processA.created < processB.created ? -1 : 1
+            processA.createdWhen < processB.createdWhen ? -1 : 1
           )
           .map((process, index) => (
             <Process

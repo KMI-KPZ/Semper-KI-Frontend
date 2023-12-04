@@ -22,8 +22,8 @@ export const getTitleFromProcess = (
   process: ProcessProps,
   t: TFunction<"translation", undefined>
 ): string => {
-  return process.details.title !== undefined
-    ? process.details.title
+  return process.processDetails.title !== undefined
+    ? process.processDetails.title
     : process.serviceType !== undefined
     ? t(
         `enum.ServiceType.${
@@ -73,7 +73,7 @@ const ServiceOverviewItem: React.FC<Props> = (props) => {
     e.stopPropagation();
     if (state.edit)
       updateProcess({
-        changes: { details: { title: state.titleText } },
+        changes: { processDetails: { title: state.titleText } },
       });
     setState((prevState) => {
       return {

@@ -43,7 +43,7 @@ export const ServiceManufacturingContext =
 
 export const ServiceManufacturing: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { service: service_ } = useContext(ServiceContext);
+  const { serviceDetails: service_ } = useContext(ServiceContext);
   const service = service_ as ManufacturingServiceProps;
   const navigate = useNavigate();
   const [state, setState] = useState<ServiceManufacturingState>(

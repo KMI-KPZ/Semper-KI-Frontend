@@ -18,11 +18,11 @@ const ProjectInfo: React.FC<ProjectInfoProps> = (props) => {
       </Text>
       <Text variant="body">
         {t("Projects.Project.components.Info.created")}{" "}
-        {new Date(project.created).toLocaleDateString()}
+        {new Date(project.createdWhen).toLocaleDateString()}
       </Text>
       <Text variant="body">
         {t("Projects.Project.components.Info.updated")}{" "}
-        {new Date(project.updated).toLocaleDateString()}
+        {new Date(project.updatedWhen).toLocaleDateString()}
       </Text>
     </div>
   );

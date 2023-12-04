@@ -22,7 +22,7 @@ interface useProjectMutationsReturnProps {
     UpdateProjectProps,
     unknown
   >;
-  deleteProjectMutation: UseMutationResult<string, Error, string, unknown>;
+  deleteProjectMutation: UseMutationResult<string, Error, string[], unknown>;
 }
 
 const useProjectMutations = (): useProjectMutationsReturnProps => {
@@ -62,7 +62,8 @@ const useProjectMutations = (): useProjectMutationsReturnProps => {
   });
 
   const updateProjectMutation = useMutation<string, Error, UpdateProjectProps>({
-    mutationFn: async ({ changes = {}, deletions = {} }) => {
+    mutationFn: async (props) => {
+      const { changes = {}, deletions = {} } = props;
       return customAxios
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProject/`, {
           projectID,
@@ -80,11 +81,13 @@ const useProjectMutations = (): useProjectMutationsReturnProps => {
     },
   });
 
-  const deleteProjectMutation = useMutation<string, Error, string>({
-    mutationFn: async (ProjectID: string) => {
+  const deleteProjectMutation = useMutation<string, Error, string[]>({
+    mutationFn: async (projectIDs: string[]) => {
       return customAxios
         .delete(
-          `${process.env.VITE_HTTP_API_URL}/public/deleteProject/${ProjectID}/`
+          `${
+            process.env.VITE_HTTP_API_URL
+          }/public/deleteProject?projectIDs=${projectIDs.join(",")}`
         )
         .then((res) => {
           logger("useProjectMutations | deleteProject ✅ |", res.data);

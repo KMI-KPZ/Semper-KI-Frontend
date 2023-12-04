@@ -23,8 +23,11 @@ const ProjectFile: React.FC<Props> = (props) => {
   const { process } = props;
   const { t } = useTranslation();
   const [loadingFileID, setLoadingFileID] = useState<string>("");
+  const [downloadFilesZIPIsLoading, setDownloadFilesZIPIsLoading] =
+    useState<boolean>(false);
 
   const { downloadFile, downloadZIP, deleteFile } = useGernalProcess();
+
   const hanleOnClickButtonDelete = (file: FileProps) => {
     deleteFile({ processID: process.processID, fileID: file.id });
   };
@@ -44,6 +47,7 @@ const ProjectFile: React.FC<Props> = (props) => {
     );
   };
   const handleOnClickButtonDownloadZip = () => {
+    setDownloadFilesZIPIsLoading(true);
     downloadZIP(
       {
         processID: process.processID,
@@ -53,7 +57,7 @@ const ProjectFile: React.FC<Props> = (props) => {
         onSettled(data) {
           if (data) {
             createDownload(data, "files.zip");
-            setLoadingFileID("");
+            setDownloadFilesZIPIsLoading(false);
           }
         },
       }
@@ -83,9 +87,7 @@ const ProjectFile: React.FC<Props> = (props) => {
                     variant="icon"
                     onClick={() => hanleOnClickButtonDelete(file)}
                     children={<DeleteIcon />}
-                    loading={
-                      downloadFile.isLoading && loadingFileID === file.id
-                    }
+                    loading={loadingFileID === file.id}
                     title={t(
                       "Projects.Project.Process.components.ProcessFile.button.delete"
                     )}
@@ -95,9 +97,7 @@ const ProjectFile: React.FC<Props> = (props) => {
                     variant="icon"
                     onClick={() => handleOnClickButtonDownloadFile(file)}
                     children={<DownloadIcon />}
-                    loading={
-                      downloadFile.isLoading && loadingFileID === file.id
-                    }
+                    loading={loadingFileID === file.id}
                     title={t(
                       "Projects.Project.Process.components.ProcessFile.button.download"
                     )}
@@ -117,7 +117,7 @@ const ProjectFile: React.FC<Props> = (props) => {
           )}
           onClick={handleOnClickButtonDownloadZip}
           startIcon={<DownloadIcon />}
-          loading={downloadFilesZIP.isLoading}
+          loading={downloadFilesZIPIsLoading}
         />
       ) : null}
     </div>

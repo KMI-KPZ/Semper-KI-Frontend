@@ -29,7 +29,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     if (window.confirm(t("Projects.Projects.deleteSelectedConfirm")) === true) {
-      selectedProjects.forEach((projectID) => deleteProject(projectID));
+      deleteProject(selectedProjects);
     } else logger("delete canceled");
   };
 

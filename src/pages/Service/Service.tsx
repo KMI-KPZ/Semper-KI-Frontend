@@ -1,18 +1,29 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import ServiceSelect from "./Select/Select";
+import React, { useContext } from "react";
+import { LoadingAnimation } from "@component-library/index";
+import useService, { ServiceType } from "./hooks/useService";
+import useProcess from "../Projects/hooks/useProcess";
+import { Navigate } from "react-router-dom";
+import { useProject } from "../Projects/hooks/useProject";
 
 interface ServiceProps {}
 
 const Service: React.FC<ServiceProps> = (props) => {
   const {} = props;
-  const { t } = useTranslation();
+  const { project } = useProject();
+  const { process } = useProcess();
 
-  return (
-    <div className="flex w-full flex-col-reverse justify-between gap-5 md:flex-row">
-      <ServiceSelect />
-    </div>
-  );
+  switch (process.serviceType) {
+    case ServiceType.NONE:
+      return (
+        <Navigate to={`/projects/${project.projectID}/${process.processID}`} />
+      );
+    case ServiceType.MANUFACTURING:
+      return <Navigate to="manufacturing" />;
+    case ServiceType.MODELING:
+      return <Navigate to="modeling" />;
+  }
+
+  return <LoadingAnimation />;
 };
 
 export default Service;

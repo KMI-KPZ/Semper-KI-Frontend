@@ -54,7 +54,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
 
   const handleOnClickButtonDelete = (projectID: string) => {
     window.confirm(t("Projects.components.Table.deleteConfirm")) === true
-      ? deleteProject(projectID)
+      ? deleteProject([projectID])
       : logger("delete canceled");
   };
 

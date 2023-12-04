@@ -49,7 +49,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
           ? []
           : project.processes
               .filter((process) =>
-                isServiceComplete(process.serviceType, process.service)
+                isServiceComplete(process.serviceType, process.serviceDetails)
               )
               .map((process) => {
                 return {
@@ -68,8 +68,8 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
           processIDs: [process.process.processID],
           updates: {
             changes: {
-              status: ProcessStatus.CONTRACTOR_SELECTED,
-              contractor: [process.contractorID],
+              processStatus: ProcessStatus.CONTRACTOR_SELECTED,
+              provisionalContractor: process.contractorID,
             },
           },
         });
@@ -88,8 +88,10 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
           ? project.processes
               .filter(
                 (process) =>
-                  isServiceComplete(process.serviceType, process.service) &&
-                  process.status === ProcessStatus.SERVICE_READY
+                  isServiceComplete(
+                    process.serviceType,
+                    process.serviceDetails
+                  ) && process.processStatus === ProcessStatus.SERVICE_READY
               )
               .map((process, index) => (
                 <div

@@ -52,7 +52,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
     process: ProcessProps,
     button: StatusButtonProps
   ): boolean => {
-    const isAllowed = button.allowedStates.includes(process.status);
+    const isAllowed = button.allowedStates.includes(process.processStatus);
     return isAllowed;
   };
 

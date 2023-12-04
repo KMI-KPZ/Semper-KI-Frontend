@@ -31,8 +31,8 @@ const ManufacturingModelUploadForm: React.FC<
   const schema = yup
     .object({
       tags: yup.string(),
-      license: yup.string(),
-      certificate: yup.string(),
+      licenses: yup.string(),
+      certificates: yup.string(),
     })
     .required();
   type FormData = yup.InferType<typeof schema>;
@@ -47,8 +47,8 @@ const ManufacturingModelUploadForm: React.FC<
     resolver: yupResolver(schema),
     defaultValues: {
       tags: "",
-      license: "",
-      certificate: "",
+      licenses: "",
+      certificates: "",
     },
   });
 
@@ -59,15 +59,15 @@ const ManufacturingModelUploadForm: React.FC<
       processID: process.processID,
       file: file,
       model: {
-        certificate:
-          data.certificate === undefined
+        certificates:
+          data.certificates === undefined
             ? []
-            : data.certificate.split(",").map((item) => item.trim()),
+            : data.certificates.split(",").map((item) => item.trim()),
         date: new Date(),
-        license:
-          data.license === undefined
+        licenses:
+          data.licenses === undefined
             ? []
-            : data.license.split(",").map((item) => item.trim()),
+            : data.licenses.split(",").map((item) => item.trim()),
         tags:
           data.tags === undefined
             ? []
@@ -102,14 +102,14 @@ const ManufacturingModelUploadForm: React.FC<
           </Text>
           <input
             className={`w-full bg-slate-100 px-3 py-2 md:w-fit md:flex-grow ${
-              errors.certificate !== undefined
+              errors.certificates !== undefined
                 ? "border-red-500 bg-red-500"
                 : ""
             }}`}
             placeholder={t(
               "Service.Manufacturing.Model.Upload.components.Form.certificatePH"
             )}
-            {...register("certificate")}
+            {...register("certificates")}
           />
         </div>
         <div className={`flex w-full flex-col items-center gap-5 md:flex-row`}>
@@ -118,12 +118,12 @@ const ManufacturingModelUploadForm: React.FC<
           </Text>
           <input
             className={`w-full bg-slate-100 px-3 py-2 md:w-fit md:flex-grow ${
-              errors.license !== undefined ? "border-red-500 bg-red-500" : ""
+              errors.licenses !== undefined ? "border-red-500 bg-red-500" : ""
             }}`}
             placeholder={t(
               "Service.Manufacturing.Model.Upload.components.Form.licensePH"
             )}
-            {...register("license")}
+            {...register("licenses")}
           />
         </div>
         <div className={`flex w-full flex-col items-center gap-5 md:flex-row`}>

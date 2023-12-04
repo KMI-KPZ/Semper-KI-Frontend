@@ -41,8 +41,7 @@ const ProcessContextProvider: React.FC<ProcessContextProviderProps> = (
     (process) => process.processID === processID
   );
 
-  if (projectQuery.isLoading || projectQuery.isRefetching)
-    return <LoadingAnimation />;
+  if (projectQuery.isLoading) return <LoadingAnimation />;
 
   if (process !== undefined && projectQuery.isFetched)
     return (
@@ -51,7 +50,7 @@ const ProcessContextProvider: React.FC<ProcessContextProviderProps> = (
       </ProcessContext.Provider>
     );
 
-  return <Navigate to="/projects" />;
+  return <Navigate to={`/projects/${project.projectID}`} />;
 };
 
 export default ProcessContextProvider;

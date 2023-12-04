@@ -21,8 +21,8 @@ interface ReturnProps {
 interface ModelUploadProps {
   tags: string[];
   date: Date;
-  license: string[];
-  certificate: string[];
+  licenses: string[];
+  certificates: string[];
 }
 
 interface UploadModelProps {
@@ -41,8 +41,8 @@ const useModelUpload = (): ReturnProps => {
       const formData = new FormData();
       formData.append(file.name, file);
       formData.append("tags", model.tags.join(","));
-      formData.append("license", model.license.join(","));
-      formData.append("certificate", model.certificate.join(","));
+      formData.append("licenses", model.licenses.join(","));
+      formData.append("certificates", model.certificates.join(","));
       formData.append("projectID", projectID);
       formData.append("processID", processID);
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/uploadModel/`;
@@ -65,6 +65,7 @@ const useModelUpload = (): ReturnProps => {
       //   processID: variables.processID,
       //   updates: { changes: { service: { model: model[0] } } },
       // });
+      queryClient.invalidateQueries(["project", variables.projectID]);
       navigate("../material");
     },
   });

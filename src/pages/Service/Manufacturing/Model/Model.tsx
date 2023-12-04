@@ -67,17 +67,17 @@ export const ProcessModel: React.FC<Props> = (props) => {
   };
 
   return model === undefined ? (
-    <LoadingSuspense query={modelsQuery}>
-      <div
-        className={`flex max-h-[60vh] gap-y-5 overflow-x-auto overflow-y-scroll ${
-          grid === true
-            ? "flex-row flex-wrap justify-between"
-            : "flex-col flex-nowrap "
-        }`}
-      >
+    <div
+      className={`flex max-h-[60vh] gap-y-5 overflow-x-auto overflow-y-auto ${
+        grid === true
+          ? "flex-row flex-wrap justify-between"
+          : "flex-col flex-nowrap "
+      }`}
+    >
+      <ProcessModelUpload />
+      <LoadingSuspense query={modelsQuery}>
         {modelsQuery.data !== undefined && modelsQuery.data.length > 0 ? (
           <>
-            <ProcessModelUpload />
             {modelsQuery.data
               .filter((model, index) => filterBySearch(model))
               .map((model: ModelProps, index: number) => (
@@ -88,26 +88,26 @@ export const ProcessModel: React.FC<Props> = (props) => {
                   openModelView={openModelView}
                 />
               ))}
-            {state.modalOpen === true && state.model !== undefined ? (
-              <Modal
-                title="ProcessModelPreView"
-                open={state.modalOpen === true && state.model !== undefined}
-                closeModal={closeModelView}
-              >
-                {state.model !== undefined ? (
-                  <ProcessModelPreView
-                    model={state.model}
-                    closeModelView={closeModelView}
-                  />
-                ) : null}
-              </Modal>
-            ) : null}
           </>
         ) : (
           t("Service.Manufacturing.Model.Model.error.noModels")
         )}
-      </div>
-    </LoadingSuspense>
+      </LoadingSuspense>
+      {state.modalOpen === true && state.model !== undefined ? (
+        <Modal
+          title="ProcessModelPreView"
+          open={state.modalOpen === true && state.model !== undefined}
+          closeModal={closeModelView}
+        >
+          {state.model !== undefined ? (
+            <ProcessModelPreView
+              model={state.model}
+              closeModelView={closeModelView}
+            />
+          ) : null}
+        </Modal>
+      ) : null}
+    </div>
   ) : (
     <ProcessModelItem model={model} />
   );

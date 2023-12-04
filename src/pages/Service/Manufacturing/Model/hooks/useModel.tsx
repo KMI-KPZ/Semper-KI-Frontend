@@ -20,6 +20,8 @@ export const useManufacturingModelData = (
           return response.data.models;
         });
     },
+    enabled: false,
+    initialData: [],
   });
   return { modelsQuery };
 };

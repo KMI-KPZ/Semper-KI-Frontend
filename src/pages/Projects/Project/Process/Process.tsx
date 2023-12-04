@@ -27,7 +27,7 @@ import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 import { UserContext } from "@/contexts/UserContextProvider";
 import useCheckedProcesses from "../hooks/useCheckedProcesses";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
-import useGernalProcess from "../../hooks/useGernalProcess";
+import useGeneralProcess from "../../hooks/useGeneralProcess";
 
 interface Props {
   process: ProcessProps;
@@ -51,7 +51,7 @@ const Process: React.FC<Props> = (props) => {
   });
   const { handleOnChangeCheckboxSelect } = useCheckedProcesses();
 
-  const { updateProcess, uploadFiles } = useGernalProcess();
+  const { updateProcess, uploadFiles } = useGeneralProcess();
 
   const updateStatus = (status: ProcessStatus) => {
     // updateProject.mutate({

@@ -26,7 +26,7 @@ import useProcessMutations, {
   DownloadZIPMutationProps,
   UpdateProcessMutationProps,
 } from "@/api/Process/useProcessMutations";
-import useGernalProcess from "./useGernalProcess";
+import useGeneralProcess from "./useGeneralProcess";
 
 interface ReturnProps {
   process: ProcessProps;
@@ -195,7 +195,7 @@ const useProcess = (): ReturnProps => {
     downloadFile: _downloadFile,
     downloadZIP: _downloadZIP,
     deleteFile: _deleteFile,
-  } = useGernalProcess();
+  } = useGeneralProcess();
 
   const updateProcess = (
     updates: UpdateProcessProps,

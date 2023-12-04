@@ -139,8 +139,11 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
       const { processIDs } = props;
       return customAxios
         .delete(
-          `${process.env.VITE_HTTP_API_URL}/public/deleteProcess/${projectID}/`,
-          { data: { processIDs } }
+          `${
+            process.env.VITE_HTTP_API_URL
+          }/public/deleteProcesses/${projectID}/?processIDs=${processIDs.join(
+            ","
+          )}`
         )
         .then((res) => {
           logger("useProcessMutations | deleteProcessMutation ✅ |", res.data);

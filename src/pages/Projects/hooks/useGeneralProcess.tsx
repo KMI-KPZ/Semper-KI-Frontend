@@ -8,7 +8,7 @@ import useProcessMutations, {
 import { DownloadFilesZIPProps } from "./useProcess";
 import { MutateOptions } from "@tanstack/react-query";
 
-interface useGernalProcessReturnProps {
+interface useGeneralProcessReturnProps {
   createProcess: () => void;
   updateProcess: (
     props: UpdateProcessMutationProps,
@@ -27,7 +27,7 @@ interface useGernalProcessReturnProps {
   ) => void;
 }
 
-const useGernalProcess = (): useGernalProcessReturnProps => {
+const useGeneralProcess = (): useGeneralProcessReturnProps => {
   const {
     createProcessMutation,
     updateProcessMutation,
@@ -80,4 +80,4 @@ const useGernalProcess = (): useGernalProcessReturnProps => {
   };
 };
 
-export default useGernalProcess;
+export default useGeneralProcess;

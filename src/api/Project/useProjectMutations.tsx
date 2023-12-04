@@ -71,7 +71,7 @@ const useProjectMutations = (): useProjectMutationsReturnProps => {
           deletions,
         })
         .then((res) => {
-          logger("useProjectMutations | updateProject ✅ |", res.data);
+          logger("useProjectMutations | updateProjectMutation ✅ |", res.data);
           return res.data;
         });
     },
@@ -87,10 +87,10 @@ const useProjectMutations = (): useProjectMutationsReturnProps => {
         .delete(
           `${
             process.env.VITE_HTTP_API_URL
-          }/public/deleteProject?projectIDs=${projectIDs.join(",")}`
+          }/public/deleteProjects/?projectIDs=${projectIDs.join(",")}`
         )
         .then((res) => {
-          logger("useProjectMutations | deleteProject ✅ |", res.data);
+          logger("useProjectMutations | deleteProjectMutation ✅ |", res.data);
           return res.data;
         });
     },

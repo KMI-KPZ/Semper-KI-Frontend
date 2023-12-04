@@ -8,7 +8,7 @@ import logger from "@/hooks/useLogger";
 import useProcess, {
   ChatMessageProps,
 } from "@/pages/Projects/hooks/useProcess";
-import useGernalProcess from "@/pages/Projects/hooks/useGernalProcess";
+import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 
 interface Props {
   closeMenu(): void;
@@ -28,7 +28,7 @@ const Chat: React.FC<Props> = (props) => {
   const { chat, user, closeMenu, projectID, processID } = props;
   const [state, setState] = useState<State>({});
   const { height, messageText } = state;
-  const { updateProcess } = useGernalProcess();
+  const { updateProcess } = useGeneralProcess();
 
   const handleOnChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setState((prevState) => ({

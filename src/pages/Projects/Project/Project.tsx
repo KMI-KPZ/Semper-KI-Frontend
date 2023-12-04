@@ -26,7 +26,7 @@ import { ProjectEvent, ProjectEventItem } from "@/pages/App/types";
 import { ProjectContext } from "../context/ProjectContext";
 import useScrollToProcess from "./hooks/useScrollToProcess";
 import ServiceRoutes from "@/routes/ServiceRoutes";
-import useGernalProcess from "../hooks/useGernalProcess";
+import useGeneralProcess from "../hooks/useGeneralProcess";
 
 interface Props {
   event?: ProjectEvent;
@@ -41,7 +41,7 @@ const Project: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { deleteProject, updateProject } = useProject();
-  const { createProcess } = useGernalProcess();
+  const { createProcess } = useGeneralProcess();
   const { checkedProcesses, handleOnChangeCheckboxSelectAll } =
     useCheckedProcesses();
   const [infoOpen, setInfoOpen] = useState<boolean>(false);
@@ -146,51 +146,50 @@ const Project: React.FC<Props> = (props) => {
         </Container>
       </Container>
       <Divider />
-      {project.processes.length > 0 ? (
-        <Container justify="between" width="full">
-          <Container direction="row" wrap="wrap">
-            <label
-              className="flex flex-row items-center justify-start gap-3"
-              htmlFor="selectAllProcesses"
-            >
-              <input
-                type="checkbox"
-                className="h-8 w-8"
-                onChange={handleOnChangeCheckboxSelectAll}
-                id="selectAllProcesses"
-                name={t("Projects.Project.Project.label.selectProcess")}
-                value={t("Projects.Project.Project.label.selectAllProcesses")}
-                checked={checkedProcesses.length === project.processes.length}
-              />
-              <Text variant="body" className="whitespace-nowrap">
-                {t("Projects.Project.Project.selectAll")}
-              </Text>
-            </label>
-            {checkedProcesses.length > 0 ? (
-              <Text variant="body" className="whitespace-nowrap">
-                {t("Projects.Project.Project.selected", {
-                  count: checkedProcesses.length,
-                })}
-              </Text>
-            ) : null}
-          </Container>
-          <Container direction="row" wrap="wrap">
-            <ProjectButtons
-              project={project}
-              checkedProcesses={checkedProcesses}
+      <Container justify="between" width="full">
+        <Container direction="row" wrap="wrap">
+          <label
+            className="flex flex-row items-center justify-start gap-3"
+            htmlFor="selectAllProcesses"
+          >
+            <input
+              type="checkbox"
+              className="h-8 w-8"
+              onChange={handleOnChangeCheckboxSelectAll}
+              id="selectAllProcesses"
+              name={t("Projects.Project.Project.label.selectProcess")}
+              value={t("Projects.Project.Project.label.selectAllProcesses")}
+              checked={checkedProcesses.length === project.processes.length}
             />
-            <PermissionGate element={"ProjectButtonNew"}>
-              <Button
-                variant="icon"
-                size="sm"
-                startIcon={<AddIcon />}
-                onClick={onButtonClickCreateProcess}
-                title={t("Projects.Project.Project.button.new")}
-              />
-            </PermissionGate>
-          </Container>
+            <Text variant="body" className="whitespace-nowrap">
+              {t("Projects.Project.Project.selectAll")}
+            </Text>
+          </label>
+          {checkedProcesses.length > 0 ? (
+            <Text variant="body" className="whitespace-nowrap">
+              {t("Projects.Project.Project.selected", {
+                count: checkedProcesses.length,
+              })}
+            </Text>
+          ) : null}
         </Container>
-      ) : null}
+        <Container direction="row" wrap="wrap">
+          <ProjectButtons
+            project={project}
+            checkedProcesses={checkedProcesses}
+          />
+          <PermissionGate element={"ProjectButtonNew"}>
+            <Button
+              variant="icon"
+              size="sm"
+              startIcon={<AddIcon />}
+              onClick={onButtonClickCreateProcess}
+              title={t("Projects.Project.Project.button.new")}
+            />
+          </PermissionGate>
+        </Container>
+      </Container>
+
       {project.processes.length === 0 ? (
         <Heading variant="h2">
           {t("Projects.Project.Project.noProcesses")}

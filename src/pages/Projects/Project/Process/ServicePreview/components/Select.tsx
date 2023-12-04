@@ -13,7 +13,7 @@ import useProcess, {
   ProcessStatus,
 } from "@/pages/Projects/hooks/useProcess";
 import logger from "@/hooks/useLogger";
-import useGernalProcess from "@/pages/Projects/hooks/useGernalProcess";
+import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 
 interface ProcessServiceSelectProps {
   process: ProcessProps;
@@ -23,7 +23,7 @@ const ProcessServiceSelect: React.FC<ProcessServiceSelectProps> = (props) => {
   const { process } = props;
   const { t } = useTranslation();
   const { servicesQuery } = useServices();
-  const { updateProcess } = useGernalProcess();
+  const { updateProcess } = useGeneralProcess();
 
   const getIcon = (serviceType: ServiceType) => {
     switch (serviceType) {

@@ -23,7 +23,7 @@ import { UserContext } from "@/contexts/UserContextProvider";
 import useStatusButtons, {
   StatusButtonCountProps,
 } from "../hooks/useStatusButtons";
-import useGernalProcess from "../../hooks/useGernalProcess";
+import useGeneralProcess from "../../hooks/useGeneralProcess";
 
 interface ProjectButtonsProps {
   project: ProjectProps;
@@ -35,7 +35,7 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
   const { user } = useUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { deleteProcess } = useGernalProcess();
+  const { deleteProcess } = useGeneralProcess();
   const { getProjectStatusButtons } = useStatusButtons();
 
   const getSelectedProcesses = (): ProcessProps[] => {

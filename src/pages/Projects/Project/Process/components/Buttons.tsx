@@ -20,7 +20,7 @@ import { ProcessComponentState } from "../Process";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 import useEvents from "@/hooks/useEvents/useEvents";
 import { EventContext } from "@/contexts/EventContextProvider";
-import useGernalProcess from "@/pages/Projects/hooks/useGernalProcess";
+import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 
 interface ProcessButtonsProps {
   user: UserProps;
@@ -36,7 +36,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
     props;
   const { t } = useTranslation();
   const { deleteEvent } = useEvents();
-  const { deleteProcess, updateProcess } = useGernalProcess();
+  const { deleteProcess, updateProcess } = useGeneralProcess();
   const { project } = useContext(ProjectContext);
   const { getDeleteProjectEvent } = useProjectEventChange(
     process,

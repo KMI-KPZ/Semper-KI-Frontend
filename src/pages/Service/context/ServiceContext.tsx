@@ -22,12 +22,10 @@ export const ServiceContextProvider: React.FC<ServiceContextProviderProps> = (
   const { projectQuery, project } = useProject();
   const { process } = useProcess();
 
-  if (projectQuery.isLoading || projectQuery.isRefetching)
-    return <LoadingAnimation />;
+  if (projectQuery.isLoading) return <LoadingAnimation />;
 
   if (
     projectQuery.isFetched &&
-    !projectQuery.isRefetching &&
     process !== undefined &&
     process.serviceType !== undefined &&
     process.serviceType !== 0

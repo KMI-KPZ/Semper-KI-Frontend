@@ -12,7 +12,7 @@ import useProcess, {
 import Container from "@component-library/Container";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { createDownload } from "@/services/utils";
-import useGernalProcess from "@/pages/Projects/hooks/useGernalProcess";
+import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 
 interface Props {
   process: ProcessProps;
@@ -26,7 +26,7 @@ const ProjectFile: React.FC<Props> = (props) => {
   const [downloadFilesZIPIsLoading, setDownloadFilesZIPIsLoading] =
     useState<boolean>(false);
 
-  const { downloadFile, downloadZIP, deleteFile } = useGernalProcess();
+  const { downloadFile, downloadZIP, deleteFile } = useGeneralProcess();
 
   const hanleOnClickButtonDelete = (file: FileProps) => {
     deleteFile({ processID: process.processID, fileID: file.id });

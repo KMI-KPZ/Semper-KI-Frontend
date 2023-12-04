@@ -18,7 +18,7 @@ import ProcessInfoCard from "../components/ProcessInfoCard";
 import Container from "@component-library/Container";
 import useCheckedProcesses from "../hooks/useCheckedProcesses";
 import { twMerge } from "tailwind-merge";
-import useGernalProcess from "../../hooks/useGernalProcess";
+import useGeneralProcess from "../../hooks/useGeneralProcess";
 
 interface Props {}
 
@@ -36,7 +36,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
   const { contractorsQuery } = useContractor();
-  const { updateProcess } = useGernalProcess();
+  const { updateProcess } = useGeneralProcess();
 
   const {
     register,

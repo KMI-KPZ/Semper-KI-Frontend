@@ -12,6 +12,7 @@ import useProcess, {
   ManufactoringProcessProps,
   ProcessProps,
 } from "@/pages/Projects/hooks/useProcess";
+import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 
 interface ProcessServiceManufacturingProps {
   process: ManufactoringProcessProps;
@@ -23,7 +24,7 @@ const ProcessServiceManufacturing: React.FC<
   const { process } = props;
   const { t } = useTranslation();
   const [open, setOpen] = useState<boolean>(false);
-  const { downloadFile } = useProcess();
+  const { downloadFile } = useGeneralProcess();
   const [fileUrl, setFileUrl] = useState<string>("");
 
   const closeModal = () => {
@@ -42,12 +43,18 @@ const ProcessServiceManufacturing: React.FC<
           file.id === process.serviceDetails.model.id
       ) !== undefined
     ) {
-      downloadFile(process.serviceDetails.model.id, {
-        onSuccess(data) {
-          const url = window.URL.createObjectURL(data);
-          setFileUrl(url);
+      downloadFile(
+        {
+          processID: process.processID,
+          fileID: process.serviceDetails.model.id,
         },
-      });
+        {
+          onSuccess(data) {
+            const url = window.URL.createObjectURL(data);
+            setFileUrl(url);
+          },
+        }
+      );
     }
   };
 
@@ -72,7 +79,7 @@ const ProcessServiceManufacturing: React.FC<
         <Text variant="body">
           {process.serviceDetails.model === undefined
             ? "---"
-            : process.serviceDetails.model.title}
+            : process.serviceDetails.model.fileName}
         </Text>
       </Container>
       <Container>

@@ -18,12 +18,12 @@ export type AnonymUser = {
 export interface AuthorizedUserProps {
   hashedID: string;
   name: string;
-  organizations: string[];
   details: UserDetailsProps;
   created: Date;
   updated: Date;
   accessed: Date;
   lastSeen: Date;
+  organization?: string;
   usertype: UserType.USER | UserType.ORGANIZATION | UserType.ADMIN;
 }
 

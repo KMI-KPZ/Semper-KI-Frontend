@@ -33,7 +33,7 @@ const ProcessModelItem: React.FC<Props> = (props) => {
 
   return (
     <div className="flex h-fit w-full  flex-col items-center justify-start gap-5 bg-white p-5">
-      <Heading variant="h2">{model.title}</Heading>
+      <Heading variant="h2">{model.fileName}</Heading>
       <img className="w-full max-w-xs" src={getModelURI(model)} alt="Model" />
       <div className="model-view-tags">
         {model.tags.map((title: string, index: number) => (

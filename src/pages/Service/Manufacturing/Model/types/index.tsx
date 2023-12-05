@@ -1,6 +1,6 @@
 export interface ModelProps {
   id: string;
-  title: string;
+  fileName: string;
   tags: string[]; //
   date: string; //
   licenses: string[]; //

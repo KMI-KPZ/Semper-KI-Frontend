@@ -52,7 +52,7 @@ export const ProcessModel: React.FC<Props> = (props) => {
       return true;
     }
     if (
-      model.title.toLocaleLowerCase().includes(searchText) ||
+      model.fileName.toLocaleLowerCase().includes(searchText) ||
       model.tags.filter((tag) => tag.toLocaleLowerCase().includes(searchText))
         .length > 0 ||
       model.certificates.filter((certificate) =>

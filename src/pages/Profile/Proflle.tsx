@@ -56,10 +56,9 @@ const Profile: React.FC<Props> = (props) => {
           <Heading variant="h2">{t("Profile.company.header")}</Heading>
           <div className="w-full border-t-2" />
           <span className="break-all">
-            {t("Profile.company.name")}: {user.organizations}
+            {t("Profile.company.name")}: {user.organization}
           </span>
-          {user.organizations[0] !== undefined &&
-          user.organizations[0] === "None" ? (
+          {user.organization !== undefined && user.organization === "None" ? (
             <Button title={t("Profile.button.selectChange")} />
           ) : null}
         </Container>

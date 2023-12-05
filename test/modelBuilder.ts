@@ -48,7 +48,7 @@ export class ModelBuilder {
     build():ModelProps {
         return {
             id: this.id,
-            title: this.title,
+            fileName: this.title,
             tags: this.tags,
             date: this.date,
             licenses: this.licenses,

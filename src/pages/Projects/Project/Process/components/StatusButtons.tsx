@@ -37,8 +37,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
     return (
       process !== undefined &&
       user.usertype !== UserType.ANONYM &&
-      ((type === "CONTRACTOR" &&
-        process.contractor[0] === user.organizations[0]) ||
+      ((type === "CONTRACTOR" && process.contractor === user.organization) ||
         (type === "CLIENT" && process.client === user.hashedID))
     );
   };

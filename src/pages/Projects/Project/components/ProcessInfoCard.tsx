@@ -60,7 +60,9 @@ const ProcessInfoCard: React.FC<ProcessInfoCardProps> = (props) => {
               <Text variant="body">
                 {t("Projects.Project.components.ProcessInfoCard.model")}
               </Text>
-              <Text variant="body">{process.serviceDetails?.model?.title}</Text>
+              <Text variant="body">
+                {process.serviceDetails?.model?.fileName}
+              </Text>
             </Container>
             <Container direction="row">
               <Text variant="body">

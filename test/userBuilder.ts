@@ -3,7 +3,7 @@ import { Address, AuthorizedUserProps, UserProps, UserType } from "@/hooks/useUs
 export class UserBuilder {
     email:string = "test@test.de";
     name:string = "testName";
-    organizations:string[] = [""];
+    organization:string = "";
     userType:UserType = 0;
     hashedID:string= "7ae4dc547be2fdeffc5968366925368552ba4e279725333507e9bdc60c4d955d7d1a4baea3e989e93f1dwferhjztukcbe3435975b609633343e3c70e831a5a7"
     address:Address= {
@@ -31,8 +31,8 @@ export class UserBuilder {
         this.name = name;
         return this;
     }
-    withOrganizations(organizations:string[]):UserBuilder {
-        this.organizations = organizations;
+    withOrganizations(organization:string):UserBuilder {
+        this.organization = organization;
         return this;
     }
     withHashedID(hashedID:string):UserBuilder {
@@ -69,7 +69,7 @@ export class UserBuilder {
     build():UserProps {
         return({
             name: this.name,
-            organizations: this.organizations,
+            organization: this.organization,
             usertype: this.userType,
             hashedID: this.hashedID,
             created: this.created,

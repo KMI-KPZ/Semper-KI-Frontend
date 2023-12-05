@@ -12,6 +12,8 @@ import { AppContext } from "../App/App";
 import ContentBox from "@component-library/ContentBox";
 import { useForm } from "react-hook-form";
 import SendIcon from "@mui/icons-material/Send";
+import SemperKILogo from "@images/Logo-Semper.png";
+import ResKriVerLogo from "@images/ResKriVer_Logo.svg";
 
 interface ResKriVerProps {}
 
@@ -51,21 +53,31 @@ const ResKriVer: React.FC<ResKriVerProps> = (props) => {
 
   return (
     <ContentBox>
-      <Container direction="col" className="bg-white p-5" width="full">
-        <Heading variant="h1">{t("ResKriVer.ResKriVer.title")}</Heading>
-        <Container width="full" direction="auto">
-          <Container direction="col" className="grow basis-1/2">
-            <form
-              onSubmit={handleSubmit((data) => console.log(data))}
-              className="flex w-full flex-col items-center justify-center gap-5 text-black"
+      <Container direction="col" width="full">
+        <Container width="full" className="bg-white p-20">
+          <form
+            onSubmit={handleSubmit((data) => console.log(data))}
+            className="relative flex w-full flex-col items-center justify-center gap-10 border-2 bg-white p-5 py-16 text-black"
+          >
+            <Heading
+              variant="h1"
+              className="absolute -left-8 -top-8 rounded-full border-2 bg-white p-3"
             >
+              {t("ResKriVer.ResKriVer.title")}
+            </Heading>
+            <img
+              src={ResKriVerLogo}
+              className="absolute -right-16 -top-16 w-32 "
+            />
+            <Heading variant="h2">Diese Daten wurden übermittelt</Heading>
+            <Container direction="col" width="full">
               <Container direction="row" width="full">
                 <Container
                   direction="col"
                   width="fit"
-                  align="start"
+                  align="end"
                   justify="center"
-                  className="gap-6"
+                  className="gap-8"
                 >
                   <label htmlFor="name">Artikelname</label>
                   <label htmlFor="count">Anzahl</label>
@@ -73,62 +85,67 @@ const ResKriVer: React.FC<ResKriVerProps> = (props) => {
                   <label htmlFor="material">Material</label>
                   <label htmlFor="sterilizability">Sterilisierbarkeit</label>
                 </Container>
-                <Container direction="col" width="full" justify="center">
+                <Container
+                  direction="col"
+                  width="full"
+                  justify="center"
+                  className="max-w-xl"
+                >
                   <input
                     id="name"
                     {...(register("name"), { placeholder: "Artikelname..." })}
-                    className="w-full rounded-xl border-2 pl-3"
+                    className="w-full rounded-full border-2 bg-gradient-to-r from-blue-200/50 to-pink-200/50 py-1 pl-3"
                   />
                   <input
                     id="count"
                     {...(register("count"), { placeholder: "Anzahl..." })}
-                    className="w-full rounded-xl border-2  pl-3"
+                    className="w-full rounded-full border-2 bg-gradient-to-r from-blue-200/50 to-pink-200/50 py-1 pl-3"
                   />
                   <input
                     id="time"
                     {...(register("time"), { placeholder: "Zeit..." })}
-                    className="w-full rounded-xl border-2  pl-3"
+                    className="w-full rounded-full border-2 bg-gradient-to-r from-blue-200/50 to-pink-200/50 py-1 pl-3"
                   />
                   <input
                     id="material"
                     {...(register("material"), { placeholder: "Material..." })}
-                    className="w-full rounded-xl border-2  pl-3"
+                    className="w-full rounded-full border-2 bg-gradient-to-r from-blue-200/50 to-pink-200/50 py-1 pl-3"
                   />
                   <input
                     id="sterilizability"
                     {...(register("sterilizability"),
                     { placeholder: "Sterilisierbarkeit..." })}
-                    className="w-full rounded-xl border-2  pl-3"
+                    className="w-full rounded-full border-2 bg-gradient-to-r from-blue-200/50 to-pink-200/50 py-1 pl-3"
                   />
                 </Container>
               </Container>
-
-              <Button
-                title={t("ResKriVer.ResKriVer.button.search")}
-                endIcon={<NavigateNextIcon />}
-                onClick={handleSubmit(onSubmit)}
-              />
-            </form>
-          </Container>
-          <Container direction="col" className="grow basis-1/2">
-            <Container
-              direction="col"
-              justify="end"
-              align="center"
-              width="full"
-              className="h-64 grow rounded-xl border-2 p-5"
-            >
-              <Text>Hallo ich bin der Semper-Bot.</Text>
-              <Text>Wie kann ich ihnen helfen?</Text>
-              <Container width="full">
-                <input
-                  type="search"
-                  className="w-full resize-none rounded-xl border-2 p-2"
-                  placeholder="Ich möchte das mein Artikel ..."
-                />
-                <Button title="senden" children={<SendIcon />} />
-              </Container>
             </Container>
+            <Button
+              title={t("ResKriVer.ResKriVer.button.search")}
+              endIcon={<NavigateNextIcon />}
+              onClick={handleSubmit(onSubmit)}
+              className="absolute -bottom-5 right-20 rounded-full  bg-white"
+            />
+          </form>
+        </Container>
+        <Container width="full" className="px-20">
+          <Container direction="row" width="full" className="relative">
+            <input
+              type="search"
+              className="w-full resize-none rounded-full bg-gradient-to-r from-blue-200/50 to-white px-5 py-3 tracking-wider"
+              placeholder="Message SEMPER-KI..."
+            />
+            <Button
+              width="fit"
+              title="senden"
+              children={
+                <img
+                  src={SemperKILogo}
+                  className="h-10 rotate-180 object-contain"
+                />
+              }
+              className="absolute right-0 rounded-full bg-white px-4 py-1 "
+            />
           </Container>
         </Container>
       </Container>

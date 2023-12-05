@@ -31,15 +31,15 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
         const userIsAllowed =
           (user.usertype !== UserType.ANONYM &&
             (user.hashedID === process.client ||
-              user.organizations.includes(process.client))) ||
+              (user.organization !== undefined &&
+                user.organization.includes(process.client)))) ||
           user.usertype === UserType.ANONYM;
         return userIsAllowed;
       case UserType.ORGANIZATION:
         const orgaIsAllowed =
           user.usertype !== UserType.ANONYM &&
-          user.organizations.filter((orga) => {
-            process.contractor.includes(orga);
-          }).length > 0;
+          user.organization !== undefined &&
+          user.organization === process.contractor;
         return orgaIsAllowed;
       case UserType.ADMIN:
         return true;

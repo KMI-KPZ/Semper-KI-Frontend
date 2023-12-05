@@ -17,15 +17,18 @@ const PermissionGate: React.FC<PropsWithChildren<PermissionProps>> = (
 
   const inDebugMode = process.env.NODE_ENV === "development";
 
-  return hasPermission(element) ? (
-    <>{children}</>
-  ) : inDebugMode ? (
-    <div className="overflow-clip rounded-xl border-2 border-red-500 ">
-      {children}
-    </div>
-  ) : showMessage === undefined || showMessage === false ? null : (
-    <Text variant="body" children={t("components.PermissionGate.message")} />
-  );
+  if (hasPermission(element)) return <>{children}</>;
+  if (inDebugMode)
+    return (
+      <div className="w-fit overflow-clip rounded-xl border-2 border-red-500 ">
+        {children}
+      </div>
+    );
+  if (showMessage !== undefined || showMessage === true)
+    return (
+      <Text variant="body" children={t("components.PermissionGate.message")} />
+    );
+  return null;
 };
 
 export default PermissionGate;

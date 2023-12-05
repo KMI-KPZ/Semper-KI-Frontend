@@ -50,7 +50,7 @@ export const ProcessModelCard: React.FC<Props> = (props) => {
           alt="Model"
         />
         <div className="flex h-full flex-col items-center justify-around gap-2 p-3 md:justify-between ">
-          <Heading variant="h2">{model.title}</Heading>
+          <Heading variant="h2">{model.fileName}</Heading>
           <div className="hidden flex-row flex-wrap  items-center justify-center gap-2 md:flex ">
             {model.tags.map((title: string, index: number) => (
               <div key={index} className="rounded-lg bg-gray-200 px-2 py-1">
@@ -85,7 +85,7 @@ export const ProcessModelCard: React.FC<Props> = (props) => {
         alt="Model"
       />
       <div className="flex h-full w-full flex-col items-center justify-around gap-5 p-3 sm:flex-row md:justify-between">
-        <Heading variant="h2">{model.title}</Heading>
+        <Heading variant="h2">{model.fileName}</Heading>
         <div className="hidden flex-col  flex-wrap items-center justify-center gap-2 md:flex">
           {model.tags.map((title: string, index: number) => (
             <div key={index} className="rounded-lg bg-gray-200 px-2 py-1">

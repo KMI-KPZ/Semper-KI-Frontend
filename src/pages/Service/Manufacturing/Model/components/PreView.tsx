@@ -37,7 +37,7 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
           <CloseIcon fontSize="large" />
         </div>
       </div>
-      <Heading variant="h2">{model.title}</Heading>
+      <Heading variant="h2">{model.fileName}</Heading>
       <img
         className="w-full xl:max-w-xl"
         src={getModelURI(model)}

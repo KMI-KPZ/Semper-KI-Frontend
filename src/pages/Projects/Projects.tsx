@@ -56,9 +56,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
           user.usertype !== UserType.ANONYM &&
           user.usertype === UserType.ORGANIZATION
             ? flatProjectsQuery.data
-                .filter((project) =>
-                  user.organizations.includes(project.client)
-                )
+                .filter((project) => user.organization === project.client)
                 .sort(sortProjectByUpdatedDate)
             : flatProjectsQuery.data.sort(sortProjectByUpdatedDate)
         }
@@ -71,13 +69,13 @@ const Projects: React.FC<ProjectsProps> = (props) => {
     flatProjectsQuery.data !== undefined &&
     flatProjectsQuery.data.length > 0 &&
     flatProjectsQuery.data.filter(
-      (project) => !user.organizations.includes(project.client)
+      (project) => user.organization !== project.client
     ).length > 0 ? (
       <ProjectsTable
         selectedProjects={selectedProjects}
         setSelectedProjects={setSelectedProjects}
         flatProjects={flatProjectsQuery.data
-          .filter((project) => !user.organizations.includes(project.client))
+          .filter((project) => user.organization !== project.client)
           .sort(sortProjectByUpdatedDate)}
       />
     ) : (

@@ -21,7 +21,6 @@ export const AuthorizedUserContext = createContext<AuthorizedUserContext>({
     hashedID: "",
     lastSeen: new Date(),
     name: "",
-    organizations: [],
     updated: new Date(),
     usertype: 0,
   },

@@ -39,7 +39,7 @@ const AdminModels: React.FC<Props> = (props) => {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {model.title}
+                  {model.fileName}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {model.date}

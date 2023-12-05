@@ -66,7 +66,9 @@ const AdminUser: React.FC<Props> = (props) => {
                       {user.details.email}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {user.organizations.map((title) => title).join(", ")}
+                      {user.organization !== undefined
+                        ? user.organization
+                        : "---"}
                     </TableCell>
                     <TableCell component="th" scope="row">
                       {new Date(user.created).toLocaleString()}

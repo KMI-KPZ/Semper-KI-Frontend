@@ -31,11 +31,10 @@ const useUserQuerys = (): useUserQueryReturnProps => {
         .get(`${process.env.VITE_HTTP_API_URL}/public/getUser/`)
         .then((response) => {
           const userData = response.data;
-          logger("useUser | getUser ✅ |", userData);
           const newUser: AuthorizedUserProps = {
             hashedID: userData.hashedID,
             name: userData.name,
-            organizations: userData.organizations,
+            organization: userData.Organization,
             details: {
               email: userData.details.email,
               address: userData.details.address,
@@ -46,6 +45,7 @@ const useUserQuerys = (): useUserQueryReturnProps => {
             lastSeen: new Date(userData.lastSeen),
             usertype: getAuthorizedUserType(userData.usertype),
           };
+          logger("useUser | getUser ✅ |", newUser);
           return newUser;
         });
     },

@@ -1042,18 +1042,21 @@
     "title": "Organisation Registrieren",
     "form": {
       "name": "Name",
+      "display_name": "Anzeigename",
+      "logo_url": "Logo URL",
+      "primary_color": "Primärfarbe",
+      "background_color": "Sekundärfarbe",
       "email": "E-Mail",
-      "adress": "Adresse",
-      "taxID": "Steuernummer",
-      "canManufacture": "Kann Herstellen",
       "button": {
         "submit": "Registrieren"
       },
       "error": {
-        "name": "Name benötigt",
-        "email": "E-Mail benötigt",
-        "adress": "Adresse benötigt",
-        "taxID": "Steuernummer benötigt"
+        "name": "Name wird benötigt",
+        "display_name": "Anzeigename wird benötigt",
+        "logo_url": "Logo URL wird benötigt",
+        "primary_color": "Primärfarbe wird benötigt",
+        "background_color": "Sekundärfarbe wird benötigt",
+        "email": "E-Mail wird benötigt"
       }
     }
   },

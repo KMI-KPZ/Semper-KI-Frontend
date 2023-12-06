@@ -77,12 +77,6 @@ const ContactForm: React.FC<ContactFormProps> = (props) => {
     closeEdit();
   };
 
-  // for each field in schema
-  for (const field in schema.fields) {
-    logger("field", field);
-    logger("errors", errors);
-  }
-
   return (
     <div className="bg-white p-10  ">
       <Heading variant="h2" className={`p-5 text-center`}>

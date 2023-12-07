@@ -9,6 +9,7 @@ import { Button } from "@component-library/Button";
 import { Heading, Text } from "@component-library/Typography";
 import useOrganizations, {
   OrganizationInfoProps,
+  UpdateOrgaInfoProps,
 } from "../../hooks/useOrganizations";
 import useProcessQuerys from "@/api/Process/useProcessQuerys";
 import useServices from "@/pages/Projects/Project/Process/ServicePreview/hooks/useService";
@@ -81,7 +82,16 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
 
   const onSubmit = (data: FormData) => {
     logger("onSubmit", data);
-    updateOrganizationInfo.mutate(data);
+    const fixedData: UpdateOrgaInfoProps = {
+      adress: data.adress,
+      email: data.email,
+      name: data.name,
+      taxID: data.taxID,
+      supportedServices: data.supportedServices
+        .filter((service) => service.checked)
+        .map((service) => service.type),
+    };
+    updateOrganizationInfo.mutate(fixedData);
     closeEdit();
   };
 

@@ -109,10 +109,7 @@ export interface UpdateOrgaInfoProps {
   adress: string;
   taxID: string;
   name: string;
-  supportedServices: {
-    checked?: boolean;
-    type: number;
-  }[];
+  supportedServices: number[];
 }
 
 export interface EditRoleProps {
@@ -255,9 +252,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
           {
             data: {
               content: {
-                supportedServices: supportedServices
-                  .filter((service) => service.checked)
-                  .map((service) => service.type),
+                supportedServices,
                 details: { email, adress, taxID },
               },
             },

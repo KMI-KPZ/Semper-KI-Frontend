@@ -9,6 +9,7 @@ import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { ListItem } from "@mui/material";
 import { useState } from "react";
+import { ServiceType } from "@/pages/Service/hooks/useService";
 
 interface useOrganizationsReturnProps {
   userQuery: UseQueryResult<OrganizationsUser[], Error>;
@@ -94,11 +95,11 @@ export type AssignRoleProps = {
 };
 
 export interface OrganizationInfoProps {
-  accessed: Date;
-  created: Date;
-  updated: Date;
+  accessedWhen: Date;
+  createdWhen: Date;
+  updatedWhen: Date;
   details: { taxID: string; adress: string; email: string };
-  canManufacture: boolean;
+  supportedServices: ServiceType[];
   hashedID: string;
   name: string;
 }
@@ -108,7 +109,10 @@ export interface UpdateOrgaInfoProps {
   adress: string;
   taxID: string;
   name: string;
-  canManufacture: boolean;
+  supportedServices: {
+    checked?: boolean;
+    type: number;
+  }[];
 }
 
 export interface EditRoleProps {
@@ -133,12 +137,13 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
             logger("useOrganizations | organizationInfoQuery ✅ |", res.data);
           const orgaInfo: OrganizationInfoProps = {
             ...res.data,
-            accessed: new Date(res.data.accessed),
-            created: new Date(res.data.created),
-            updated: new Date(res.data.updated),
-            details: {
-              ...JSON.parse(res.data.details),
-            },
+            accessedWhen: new Date(res.data.accessedWhen),
+            createdWhen: new Date(res.data.createdWhen),
+            updatedWhen: new Date(res.data.updatedWhen),
+            details: res.data.details,
+            supportedServices: res.data.supportedServices.filter(
+              (serviceType: ServiceType) => serviceType !== 0
+            ),
           };
           return orgaInfo;
         });
@@ -243,14 +248,16 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     UpdateOrgaInfoProps
   >({
     mutationFn: async (props) => {
-      const { name, email, adress, taxID, canManufacture } = props;
+      const { name, email, adress, taxID, supportedServices } = props;
       return customAxios
         .patch(
           `${process.env.VITE_HTTP_API_URL}/public/updateOrganizationDetails/`,
           {
             data: {
               content: {
-                canManufacture,
+                supportedServices: supportedServices
+                  .filter((service) => service.checked)
+                  .map((service) => service.type),
                 details: { email, adress, taxID },
               },
             },

@@ -607,16 +607,13 @@
       "accessed": "letzter Zugegriff am",
       "created": "Erstellt am",
       "updated": "Aktualisiert am",
-      "canManufacture": {
-        "name": "Kann Herstellen",
-        "true": "Ja",
-        "false": "Nein"
-      },
+      "services": "Services die Sie anbieten",
       "id": "OrganisationsID",
       "name": "Name",
       "adress": "Adresse",
       "email": "E-Mail",
       "taxID": "Steuernummer",
+      "noService": "keine Services ",
       "button": {
         "edit": "Bearbeiten"
       },
@@ -627,7 +624,7 @@
           "taxID": "Steuernummer der Organisation",
           "email": "Email der Organisation",
           "adress": "Addresse der Organisation",
-          "canManufacture": "Kann Herstellen",
+          "services": "Services die Sie anbieten",
           "button": {
             "safe": "Speichern"
           }

@@ -19,8 +19,11 @@ const useServices = (): useServicesReturnProps => {
     async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getServices/`;
       return customAxios.get(apiUrl).then((response) => {
-        const services = objectToArray<ServiceItemProps>(response.data);
+        const services = objectToArray<ServiceItemProps>(response.data).filter(
+          (service) => service.identifier !== 0
+        );
         logger("useService | servicesQuery ✅ |", services);
+
         return services;
       });
     }

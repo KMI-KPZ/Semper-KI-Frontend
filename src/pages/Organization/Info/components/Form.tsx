@@ -10,6 +10,9 @@ import { Heading, Text } from "@component-library/Typography";
 import useOrganizations, {
   OrganizationInfoProps,
 } from "../../hooks/useOrganizations";
+import useProcessQuerys from "@/api/Process/useProcessQuerys";
+import useServices from "@/pages/Projects/Project/Process/ServicePreview/hooks/useService";
+import { ServiceType } from "@/pages/Service/hooks/useService";
 
 interface OrganizationInfoFormProps {
   closeEdit: () => void;
@@ -20,17 +23,22 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
   const { organizationInfo, closeEdit } = props;
   const { t } = useTranslation();
   const { updateOrganizationInfo } = useOrganizations();
+  const { servicesQuery } = useServices();
   const schema = yup
     .object({
       email: yup
         .string()
         .email(t("yup.email"))
         .required(t("yup.required", { name: t("Organization.Info.email") })),
-      canManufacture: yup.boolean().required(
-        t("yup.required", {
-          name: t("Organization.Info.canManufacture.name"),
-        })
-      ),
+      supportedServices: yup
+        .array()
+        .of(
+          yup.object({
+            checked: yup.boolean(),
+            type: yup.number().required(),
+          })
+        )
+        .required(),
       name: yup
         .string()
         .required(t("yup.required", { name: t("Organization.Info.name") })),
@@ -45,6 +53,7 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
   type FormData = yup.InferType<typeof schema>;
 
   const {
+    getValues,
     reset,
     register,
     watch,
@@ -54,7 +63,15 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
     resolver: yupResolver(schema),
     defaultValues: {
       adress: organizationInfo.details.adress,
-      canManufacture: organizationInfo.canManufacture,
+      supportedServices:
+        servicesQuery.data !== undefined
+          ? servicesQuery.data.map((service) => ({
+              checked: organizationInfo.supportedServices.includes(
+                service.identifier
+              ),
+              type: service.identifier,
+            }))
+          : [],
       email: organizationInfo.details.email,
       name: organizationInfo.name,
       taxID: organizationInfo.details.taxID,
@@ -116,17 +133,31 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
       </div>
       <div className={`flex w-full flex-col items-center gap-5 md:flex-row`}>
         <Text variant={`body`}>
-          {t(`Organization.Info.components.form.canManufacture`)}
+          {t(`Organization.Info.components.form.services`)}
         </Text>
-        <input
-          type="checkbox"
-          className={`h-10 w-10 bg-slate-100`}
-          placeholder={t("Organization.Info.components.form.canManufacture")}
-          {...register("canManufacture")}
-        />
+        {servicesQuery.data !== undefined
+          ? servicesQuery.data.map((service, index) => (
+              <label key={index} className={`flex items-center gap-5`}>
+                <Text variant={`body`}>
+                  {t(
+                    `enum.ServiceType.${
+                      ServiceType[
+                        service.identifier
+                      ] as keyof typeof ServiceType
+                    }`
+                  )}
+                </Text>
+                <input
+                  type="checkbox"
+                  className={`h-6 w-6 bg-slate-100`}
+                  {...register(`supportedServices.${index}.checked`)}
+                />
+              </label>
+            ))
+          : null}
       </div>
       {errors.adress !== undefined ||
-      errors.canManufacture !== undefined ||
+      errors.supportedServices !== undefined ||
       errors.email !== undefined ||
       errors.name !== undefined ||
       errors.taxID !== undefined ? (
@@ -145,8 +176,8 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
           {errors.taxID !== undefined ? (
             <div className={``}>{errors.taxID.message}</div>
           ) : null}
-          {errors.canManufacture !== undefined ? (
-            <div className={``}>{errors.canManufacture.message}</div>
+          {errors.supportedServices !== undefined ? (
+            <div className={``}>{errors.supportedServices.message}</div>
           ) : null}
         </div>
       ) : null}

@@ -5,6 +5,8 @@ import { Button, LoadingSuspense, Text } from "@component-library/index";
 import OrganizationInfoForm from "./components/Form";
 import Modal from "@component-library/Modal";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import Container from "@component-library/Container";
+import { ServiceType } from "@/pages/Service/hooks/useService";
 
 interface OrganizationInfoProps {}
 
@@ -29,15 +31,15 @@ const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
           <div className="flex w-full flex-col justify-between gap-x-14 gap-y-5 md:flex-row md:flex-wrap">
             <Text variant="body">
               {`${t(`Organization.Info.accessed`)}: `}
-              {organizationInfoQuery.data.accessed.toLocaleDateString()}
+              {organizationInfoQuery.data.accessedWhen.toLocaleDateString()}
             </Text>
             <Text variant="body">
               {`${t(`Organization.Info.created`)}: `}
-              {organizationInfoQuery.data.created.toLocaleDateString()}
+              {organizationInfoQuery.data.createdWhen.toLocaleDateString()}
             </Text>
             <Text variant="body">
               {`${t(`Organization.Info.updated`)}: `}
-              {organizationInfoQuery.data.updated.toLocaleDateString()}
+              {organizationInfoQuery.data.updatedWhen.toLocaleDateString()}
             </Text>
             <Text variant="body">
               {`${t(`Organization.Info.name`)}: `}
@@ -49,14 +51,6 @@ const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
             </Text>
           </div>
           <div className="flex w-full flex-col justify-between gap-x-14 gap-y-5 md:flex-row md:flex-wrap">
-            <Text variant="body">
-              {`${t(`Organization.Info.canManufacture.name`)}: `}
-              {t(
-                `Organization.Info.canManufacture.${
-                  organizationInfoQuery.data.canManufacture ? "true" : "false"
-                }`
-              )}
-            </Text>
             <Text variant="body">
               {`${t(`Organization.Info.adress`)}: `}
               {organizationInfoQuery.data.details.adress}
@@ -70,6 +64,24 @@ const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
               {organizationInfoQuery.data.details.taxID}
             </Text>
           </div>
+          <Container width="full" className="flex-wrap">
+            <Text variant="body">{`${t(`Organization.Info.services`)}: `}</Text>
+            {organizationInfoQuery.data.supportedServices.length > 0 ? (
+              organizationInfoQuery.data.supportedServices.map(
+                (service, index) => (
+                  <Text key={index}>
+                    {t(
+                      `enum.ServiceType.${
+                        ServiceType[service] as keyof typeof ServiceType
+                      }`
+                    )}
+                  </Text>
+                )
+              )
+            ) : (
+              <Text>{t("Organization.Info.noService")}</Text>
+            )}
+          </Container>
           <PermissionGate element="OrganizationButtonEditOrga">
             <Button
               title={t(`Organization.Info.button.edit`)}

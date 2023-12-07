@@ -72,6 +72,7 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
               type: service.identifier,
             }))
           : [],
+
       email: organizationInfo.details.email,
       name: organizationInfo.name,
       taxID: organizationInfo.details.taxID,
@@ -151,6 +152,12 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
                   type="checkbox"
                   className={`h-6 w-6 bg-slate-100`}
                   {...register(`supportedServices.${index}.checked`)}
+                />
+                <input
+                  type="hidden"
+                  className={`h-6 w-6 bg-slate-100`}
+                  {...register(`supportedServices.${index}.type`)}
+                  value={service.identifier}
                 />
               </label>
             ))

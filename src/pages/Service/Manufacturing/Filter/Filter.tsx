@@ -6,6 +6,7 @@ import ProcessFilterCard from "./components/Card";
 import { AppContext } from "@/pages/App/App";
 import { Heading } from "@component-library/Typography";
 import useBodyScroll from "@/hooks/useBodyScroll";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   filterOpen: boolean;
@@ -106,7 +107,6 @@ const hydrateFilter = (
 };
 
 const ProcessFilter: React.FC<Props> = (props) => {
-  const { setAppState } = useContext(AppContext);
   const {
     applyFilters,
     filters,
@@ -177,7 +177,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
     setFilterOpen(false);
   };
   const handleOnClickMenuOpen = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     category: CategoryProps,
     index: number
   ) => {

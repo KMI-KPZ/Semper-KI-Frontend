@@ -7,11 +7,7 @@ import { twMerge } from "tailwind-merge";
 interface ButtonProps {
   title: string;
   to?: string;
-  onClick?(
-    e?:
-      | React.MouseEvent<HTMLAnchorElement, MouseEvent>
-      | React.MouseEvent<HTMLDivElement, MouseEvent>
-  ): void;
+  onClick?(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
   size?: ButtonSize;
   align?: ButtonAlign;
   variant?: ButtonVariant;

@@ -12,6 +12,7 @@ import ProcessContextProvider from "@/pages/Projects/context/ProcessContext";
 import { Error } from "@/pages/Error/Error";
 import ServiceRoutes from "./ServiceRoutes";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
+import ProcessHistory from "@/pages/Projects/Project/Process/History/History";
 
 interface ProjectsRoutesProps {}
 
@@ -66,6 +67,15 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
         </Route>
         <Route path=":processID/*" element={<ProcessContextProvider />}>
           <Route index element={<Project />} />
+          <Route
+            path="history"
+            element={
+              <>
+                <Project />
+                <ProcessHistory />
+              </>
+            }
+          />
           <Route element={<AuthorizedUserRouteOutlet />}>
             <Route
               path="checkout"

@@ -117,6 +117,15 @@
       "POSTPROCESSING": "Nachbearbeitung",
       "ADDITIVE": "Additive",
       "TEST": "Test"
+    },
+    "ProcessHistoryType": {
+      "CREATION": "Erstellung",
+      "STATUS": "Status",
+      "MESSAGE": "Nachricht",
+      "FILE": "Datei",
+      "DELETION": "Löschung",
+      "DETAILS": "Details",
+      "OTHER": "Sonstiges"
     }
   },
   "types": {
@@ -890,6 +899,7 @@
           "Buttons": {
             "button": {
               "info": "Informationen",
+              "history": "Verlauf",
               "chat": "Nachrichten",
               "cancel": "Stornieren",
               "reProject": "erneut Bestellen",
@@ -939,6 +949,20 @@
             "production": "Produktion starten",
             "delivery": "Lieferung starten",
             "complete": "Abschließen"
+          }
+        },
+        "History": {
+          "History": {
+            "noHistory": "kein Verlauf vorhanden",
+            "accessedWhen": "Zugriff am:",
+            "contentID": "InhaltID:",
+            "createdBy": "Erstellt von:",
+            "createdWhen": "Erstellt am:",
+            "data": "Daten:",
+            "dataID": "DatenID:",
+            "details": "Details:",
+            "type": "Typ:",
+            "updatedWhen": "Aktualisiert am:"
           }
         },
         "hooks": {},
@@ -1170,7 +1194,9 @@
     "Manufacturing": {
       "Filter": {
         "components": {
-          "Card": {},
+          "Card": {
+            "buttons": { "open": "Öffnen" }
+          },
           "ColorPicker": {},
           "DatePicker": {},
           "Item": {},

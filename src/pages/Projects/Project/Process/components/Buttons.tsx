@@ -21,6 +21,7 @@ import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 import useEvents from "@/hooks/useEvents/useEvents";
 import { EventContext } from "@/contexts/EventContextProvider";
 import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
+import HistoryIcon from "@mui/icons-material/History";
 
 interface ProcessButtonsProps {
   user: UserProps;
@@ -116,6 +117,14 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
         children={<InfoIcon />}
         onClick={handleOnClickButtonInfo}
         title={t("Projects.Project.Process.components.Buttons.button.info")}
+      />
+      <Button
+        variant="icon"
+        width="fit"
+        size="sm"
+        children={<HistoryIcon />}
+        to={`/projects/${projectID}/${process.processID}/history`}
+        title={t("Projects.Project.Process.components.Buttons.button.history")}
       />
       {process.processStatus >= ProcessStatus.REQUESTED &&
       user.usertype !== UserType.ANONYM ? (

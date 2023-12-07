@@ -92,7 +92,7 @@ const Process: React.FC<Props> = (props) => {
 
   return (
     <div
-      className="flex w-full flex-col items-center justify-start gap-5 p-5 shadow-card  md:items-start"
+      className="flex w-full flex-col items-center  justify-start gap-5 p-5 shadow-card  md:items-start"
       id={process.processID}
     >
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row lg:justify-between">
@@ -148,7 +148,7 @@ const Process: React.FC<Props> = (props) => {
             className="flex w-full flex-col"
           >
             <Chat
-              chat={process.messages.messages}
+              chat={process.messages}
               user={user}
               closeMenu={closeChat}
               projectID={projectID}

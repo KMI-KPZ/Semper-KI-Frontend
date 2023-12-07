@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import ProcessFilterItem from "./Item";
 import { CategoryProps, FilterItemProps } from "../Filter";
 import { Heading } from "@component-library/Typography";
+import { Button } from "@component-library/Button";
 
 interface Props {
   category: CategoryProps;
@@ -13,7 +14,7 @@ interface Props {
   filterItemList: FilterItemProps[];
   setFilterItem(filterItem: FilterItemProps): void;
   handleOnClickMenuOpen(
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     category: CategoryProps,
     index: number
   ): void;
@@ -43,11 +44,14 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
             `enum.FilterCategoryType.${category.title}`
           )} ${getCountOfChecktItems()}`}
         </Heading>
-        <IconButton
+        <Button
+          variant="icon"
+          title={t("Service.Manufacturing.Filter.components.Card.buttons.open")}
           onClick={(e) => handleOnClickMenuOpen(e, category, categoryIndex)}
-        >
-          {category.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-        </IconButton>
+          children={
+            category.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />
+          }
+        />
       </div>
       {category.open
         ? filterItemList.map((filterItem: FilterItemProps, index: number) => (

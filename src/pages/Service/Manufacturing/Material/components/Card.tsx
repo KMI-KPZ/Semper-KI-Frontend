@@ -23,7 +23,7 @@ export const ProcessMaterialCard: React.FC<Props> = (props) => {
   const { updatedService } = useService();
 
   const handleOnClickSelect = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
     e.stopPropagation();

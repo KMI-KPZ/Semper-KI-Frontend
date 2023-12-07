@@ -1064,23 +1064,34 @@
   "Redirect": {},
   "RegisterOrganization": {
     "title": "Organisation Registrieren",
+    "success": "Organisation erfolgreich registriert. Sie erhalten in Kürze eine Email mit einem Bestätigungslink.",
+    "button": {
+      "login": "Zur Anmeldung"
+    },
     "form": {
-      "name": "Name",
+      "name": "Anmeldename",
       "display_name": "Anzeigename",
       "logo_url": "Logo URL",
       "primary_color": "Primärfarbe",
-      "background_color": "Sekundärfarbe",
+      "background_color": "Hintergrundfarbe",
       "email": "E-Mail",
       "button": {
         "submit": "Registrieren"
       },
       "error": {
-        "name": "Name wird benötigt",
+        "name": {
+          "required": "Anmeldename wird benötigt",
+          "regex": "Darf nur Kleinbuchstaben, Zahlen, Unterstriche (_) und Bindestriche (-) enthalten und mit einem Kleinbuchstaben oder Zahl beginnen",
+          "length": "Muss zwischen 3 und 50 Zeichen lang sein"
+        },
         "display_name": "Anzeigename wird benötigt",
         "logo_url": "Logo URL wird benötigt",
         "primary_color": "Primärfarbe wird benötigt",
-        "background_color": "Sekundärfarbe wird benötigt",
-        "email": "E-Mail wird benötigt"
+        "background_color": "Hintergrundfarbe wird benötigt",
+        "email": {
+          "required": "E-Mail wird benötigt",
+          "email": "E-Mail muss eine gültige E-Mail sein"
+        }
       }
     }
   },

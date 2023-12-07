@@ -13,6 +13,7 @@ import { UserSwitch } from "@/components/UserSwitch";
 import PeopleIcon from "@mui/icons-material/People";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Container from "@component-library/Container";
+import { Navigate, useNavigate } from "react-router-dom";
 
 interface Props {
   path?: string;
@@ -30,6 +31,7 @@ const Login: React.FC<Props> = (props) => {
   });
   const { orga } = state;
   const { loginMutation } = useLogin();
+  const navigate = useNavigate();
 
   const handleOnClickButtonLogin = () => {
     loginMutation.mutate({
@@ -38,10 +40,14 @@ const Login: React.FC<Props> = (props) => {
     });
   };
   const handleOnClickButtonRegister = () => {
-    loginMutation.mutate({
-      userType: orga ? "organization" : "user",
-      register: true,
-    });
+    if (orga) {
+      navigate("/registerorganization");
+    } else {
+      loginMutation.mutate({
+        userType: "user",
+        register: true,
+      });
+    }
   };
 
   const handleOnClickSwitch = () => {
@@ -83,7 +89,6 @@ const Login: React.FC<Props> = (props) => {
           startIcon={<LoginIcon />}
         />
         <Button
-          active={!orga}
           onClick={handleOnClickButtonRegister}
           title={t("Login.Login.buttons.register")}
           startIcon={<CreateIcon />}

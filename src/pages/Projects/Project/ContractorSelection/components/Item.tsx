@@ -64,7 +64,17 @@ const ProjectContractorSelectionItem: React.FC<
             </label>
           ))
         ) : (
-          <Text variant="body">No manufacturers found</Text>
+          <label className="flex w-full flex-row items-center justify-center gap-5 p-3 shadow-card">
+            <input
+              type="radio"
+              {...register(`processes.${index}.contractorID`, {
+                required: true,
+                disabled: true,
+              })}
+              value={""}
+            />
+            <Text variant="body">No manufacturers found</Text>
+          </label>
         )}
         {errors.processes?.[index]?.contractorID ? (
           <Text variant="body" className="text-red-500">

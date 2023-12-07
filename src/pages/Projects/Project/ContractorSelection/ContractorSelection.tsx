@@ -20,6 +20,7 @@ import useCheckedProcesses from "../hooks/useCheckedProcesses";
 import { twMerge } from "tailwind-merge";
 import useGeneralProcess from "../../hooks/useGeneralProcess";
 import ProjectContractorSelectionItem from "./components/Item";
+import logger from "@/hooks/useLogger";
 
 interface Props {}
 
@@ -62,6 +63,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   });
 
   const onSubmit = (data: ContractorSelectionFormData) => {
+    logger("onSubmit", data);
     data.processes
       .filter((process) => checkedProcesses.includes(process.process.processID))
       .forEach((process, index, allProcesses) => {
@@ -75,6 +77,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
           },
         });
       });
+    navigate("..");
   };
 
   return (

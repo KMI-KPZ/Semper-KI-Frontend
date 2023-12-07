@@ -20,7 +20,7 @@ const useRegisterOrganisation = (): useRegisterOrganisationReturnProps => {
   >({
     mutationFn: async (props) => {
       const {} = props;
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/organizations/createNew`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/organizations/createNew/`;
       return customAxios
         .post(apiUrl, { data: { content: props } })
         .then((response) => {

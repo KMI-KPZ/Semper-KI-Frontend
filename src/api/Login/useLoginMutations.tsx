@@ -1,5 +1,5 @@
 import { customAxios } from "@/api/customAxios";
-import logger from "./useLogger";
+import logger from "@/hooks/useLogger";
 import {
   UseMutationResult,
   useMutation,
@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 
-interface useDevModeReturnProps {
+interface useLoginMutationsReturnProps {
   mockedLoginMutation: UseMutationResult<
     string,
     Error,
@@ -18,12 +18,8 @@ interface useDevModeReturnProps {
 
 export type MockedUserType = "user" | "organization" | "admin";
 
-const useDevMode = (): useDevModeReturnProps => {
+const useLoginMutations = (): useLoginMutationsReturnProps => {
   const queryClient = useQueryClient();
-  const { search } = useLocation();
-  const getReplacedSearchParam = () => {
-    return search !== "" ? search.replace("?", "&") : "";
-  };
 
   const mockedLoginMutation = useMutation<string, Error, MockedUserType>({
     mutationFn: async (usertype) => {
@@ -47,4 +43,4 @@ const useDevMode = (): useDevModeReturnProps => {
   return { mockedLoginMutation };
 };
 
-export default useDevMode;
+export default useLoginMutations;

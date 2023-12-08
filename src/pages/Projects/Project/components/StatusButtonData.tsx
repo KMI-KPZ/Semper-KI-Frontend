@@ -40,7 +40,7 @@ export interface StatusButtonProps {
   allowedStates: ProcessStatus[];
 }
 
-export const StatusButtonData: StatusButtonProps[] = [
+export const statusButtonData: StatusButtonProps[] = [
   {
     title: "EDIT",
     icon: <EditIcon />,

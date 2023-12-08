@@ -1,4 +1,3 @@
-import useCoypu from "@/hooks/useCoypu";
 import logger from "@/hooks/useLogger";
 import { Button } from "@component-library/Button";
 import Container from "@component-library/Container";
@@ -8,13 +7,14 @@ import { useTranslation } from "react-i18next";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import useCoypuQuerys from "@/api/Coypu/useCoypuQuerys";
 
 interface CoypuProps {}
 
 const Coypu: React.FC<CoypuProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { coypuQuery } = useCoypu();
+  const { coypuQuery } = useCoypuQuerys();
   const [expanded, setExpanded] = useState<boolean>(false);
 
   const getCoypu = () => {};

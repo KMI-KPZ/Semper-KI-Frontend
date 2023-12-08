@@ -1,4 +1,5 @@
-import useCRSFToken from "@/hooks/useCSRFToken";
+import useCSRFTokenQuerys from "@/api/CSRFToken/useCSRFTokenQuerys";
+import useCSRFToken from "@/hooks/useCSRFToken";
 import { AppLoadingSuspense } from "@component-library/index";
 import React, { PropsWithChildren } from "react";
 
@@ -6,7 +7,8 @@ interface CSRFOutletProps {}
 
 const CSRFOutlet: React.FC<PropsWithChildren<CSRFOutletProps>> = (props) => {
   const { children } = props;
-  const { CSRFTokenIsLoaded, CSRFTokenQuery } = useCRSFToken();
+  const { CSRFTokenQuery } = useCSRFTokenQuerys();
+  const { CSRFTokenIsLoaded } = useCSRFToken();
 
   if (
     CSRFTokenQuery.isFetched &&

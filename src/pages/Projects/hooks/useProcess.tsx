@@ -8,8 +8,6 @@ import {
   useQueryClient,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import usePathID from "@/hooks/usePathID";
 import { ProjectProps, useProject } from "./useProject";
 import {
   ServiceProps,

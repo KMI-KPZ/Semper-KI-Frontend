@@ -1,19 +1,10 @@
 import { customAxios } from "@/api/customAxios";
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import logger from "@/hooks/useLogger";
+import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import DOMPurify from "dompurify";
-import { AssignmentReturned } from "@mui/icons-material";
-import { getQuery } from "@/api/query";
 
-interface ReturnProps {
+interface useCoypuQuerysReturnProps {
   coypuQuery: UseQueryResult<CoypuProps[], Error>;
-}
-
-export interface CoypuProps {
-  evt: string;
-  rawhtml: string;
-  date: Date;
-  url: string;
 }
 
 const convertHTML = (_html: string): string => {
@@ -25,7 +16,14 @@ const convertHTML = (_html: string): string => {
   return html;
 };
 
-const useCoypu = (): ReturnProps => {
+export interface CoypuProps {
+  evt: string;
+  rawhtml: string;
+  date: Date;
+  url: string;
+}
+
+const useCoypuQuerys = (): useCoypuQuerysReturnProps => {
   const coypuQuery = useQuery<CoypuProps[], Error>({
     queryKey: ["coypu"],
     queryFn: async () => {
@@ -56,35 +54,7 @@ const useCoypu = (): ReturnProps => {
     staleTime: 1000 * 60 * 1, // 24 hours
   });
 
-  const coypuQuery2 = getQuery<CoypuProps[]>({
-    keys: ["coypu"],
-    url: "public/coypu/",
-    title: "useCoypu",
-    convertFn: (data) => {
-      const coypu = data
-        .filter((data: any) => data.rawhtml.url !== "")
-        .map((data: any) => ({
-          ...data,
-          rawhtml: convertHTML(DOMPurify.sanitize(data.rawhtml.value)),
-          date: new Date(data.date.value),
-          evt: data.evt.value,
-          url: data.rawhtml.url,
-        }))
-        .sort((a: CoypuProps, b: CoypuProps) => {
-          if (a.date > b.date) {
-            return -1;
-          }
-          if (a.date < b.date) {
-            return 1;
-          }
-          return 0;
-        });
-      return coypu;
-    },
-    options: { staleTime: 1000 * 60 * 1 },
-  });
-
-  return { coypuQuery: coypuQuery2 };
+  return { coypuQuery };
 };
 
-export default useCoypu;
+export default useCoypuQuerys;

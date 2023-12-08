@@ -3,9 +3,8 @@ import { ProcessProps } from "../../hooks/useProcess";
 import {
   StatusButtonProps,
   StatusButtonTitleType,
-  StatusButtonData as statusButtonData,
+  statusButtonData as statusButtonData,
 } from "../components/StatusButtonData";
-import { UserContext } from "@/contexts/UserContextProvider";
 import useUser, { UserType } from "@/hooks/useUser";
 
 interface UseStatusButtonsReturnProps {

@@ -35,7 +35,7 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
         .array()
         .of(
           yup.object({
-            checked: yup.boolean(),
+            checked: yup.string().required(),
             type: yup.number().required(),
           })
         )
@@ -67,9 +67,9 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
       supportedServices:
         servicesQuery.data !== undefined
           ? servicesQuery.data.map((service) => ({
-              checked: organizationInfo.supportedServices.includes(
-                service.identifier
-              ),
+              checked:
+                "" +
+                organizationInfo.supportedServices.includes(service.identifier),
               type: service.identifier,
             }))
           : [],
@@ -88,12 +88,14 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
       name: data.name,
       taxID: data.taxID,
       supportedServices: data.supportedServices
-        .filter((service) => service.checked)
+        .filter((service) => service.checked === "true")
         .map((service) => service.type),
     };
     updateOrganizationInfo.mutate(fixedData);
     closeEdit();
   };
+
+  logger("Service", watch("supportedServices"));
 
   return (
     <form

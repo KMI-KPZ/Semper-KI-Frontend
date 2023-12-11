@@ -20,7 +20,6 @@ import "react-toastify/dist/ReactToastify.css";
 import CookieBanner from "@/components/CookieBanner/CookieBanner";
 import useCookieConsent from "@/components/CookieBanner/hooks/useCookieConsent";
 import Modal from "@component-library/Modal";
-import usePing from "@/hooks/usePing";
 import { FilterItemProps } from "../Service/Manufacturing/Filter/Filter";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import EmailVerification from "../EmailVerification/EmailVerification";

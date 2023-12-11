@@ -1,9 +1,7 @@
 import useEventsQuerys from "@/api/Events/useEventsQuerys";
 import { useEventsWebsocket } from "@/api/Events/useEventsWebsocket";
-import useEvents from "@/hooks/useEvents/useEvents";
-import logger from "@/hooks/useLogger";
 import useUser, { UserType } from "@/hooks/useUser";
-import { DeleteEvent, Event } from "@/pages/App/types";
+import { Event } from "@/pages/App/types";
 import { AppLoadingSuspense } from "@component-library/index";
 import React, { PropsWithChildren } from "react";
 

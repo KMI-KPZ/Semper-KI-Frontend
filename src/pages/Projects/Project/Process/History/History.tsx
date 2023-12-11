@@ -29,9 +29,9 @@ const ProcessHistory: React.FC<ProcessHistoryProps> = (props) => {
           <Container direction="col">
             {processHistoryQuery.data
               .sort((a, b) => (a.createdWhen < b.createdWhen ? 1 : -1))
-              .map((historyItem) => (
+              .map((historyItem, index_) => (
                 <Container
-                  key={historyItem.dataID}
+                  key={index_}
                   direction="col"
                   align="start"
                   justify="between"

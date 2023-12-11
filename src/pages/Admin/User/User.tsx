@@ -1,4 +1,4 @@
-import { AuthorizedUserProps, UserType } from "@/hooks/useUser";
+import { AuthorizedUserProps } from "@/hooks/useUser";
 import { Heading, Text } from "@component-library/Typography";
 import {
   Paper,
@@ -11,20 +11,18 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { UserSwitch } from "@/components/UserSwitch";
 import useAdmin from "../hooks/useAdmin";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button } from "@component-library/Button";
 import useSearch from "@/hooks/useSearch";
 import Search from "@component-library/Search";
-interface Props {
-  users: AuthorizedUserProps[] | undefined;
-}
+
+interface Props {}
 
 const AdminUser: React.FC<Props> = (props) => {
-  const { users } = props;
+  const {} = props;
   const { t } = useTranslation();
-  const { deleteUser } = useAdmin();
+  const { deleteUser, users } = useAdmin();
   const { filterDataBySearchInput, handleSearchInputChange } = useSearch();
 
   const handleOnClickButtonDelete = (hashedID: string, name: string) => {
@@ -51,7 +49,7 @@ const AdminUser: React.FC<Props> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users !== undefined && UserSwitch.length > 0 ? (
+            {users.length > 0 ? (
               users
                 .filter((user) => filterDataBySearchInput(user))
                 .map((user: AuthorizedUserProps, index: number) => (

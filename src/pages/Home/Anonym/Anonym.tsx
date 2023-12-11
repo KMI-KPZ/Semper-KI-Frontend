@@ -12,17 +12,17 @@ import ContentBox from "@component-library/ContentBox";
 import { Button } from "@component-library/Button";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import LoginIcon from "@mui/icons-material/Login";
-import { useLogin } from "@/pages/Login/hooks/useLogin";
 import HomeImgCarousel from "./components/ImgCarousel";
 import { useProject } from "@/pages/Projects/hooks/useProject";
 import { useNavigate } from "react-router-dom";
+import useLoginMutations from "@/api/Login/useLoginMutations";
 
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props) => {
   const {} = props;
   const { t, i18n } = useTranslation();
-  const { loginMutation } = useLogin();
+  const { loginMutation } = useLoginMutations();
   const { createProject } = useProject();
   const navigate = useNavigate();
 

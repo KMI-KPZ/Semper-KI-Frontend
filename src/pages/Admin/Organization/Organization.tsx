@@ -18,14 +18,12 @@ import CheckIcon from "@mui/icons-material/Check";
 import useSearch from "@/hooks/useSearch";
 import Search from "@component-library/Search";
 
-interface AdminOrganizationProps {
-  organizations: OrganizationProps[] | undefined;
-}
+interface AdminOrganizationProps {}
 
 const AdminOrganization: React.FC<AdminOrganizationProps> = (props) => {
-  const { organizations } = props;
+  const {} = props;
   const { t } = useTranslation();
-  const { deleteOrganization } = useAdmin();
+  const { deleteOrganization, organizations } = useAdmin();
   const { filterDataBySearchInput, handleSearchInputChange } = useSearch();
 
   const handleOnClickButtonDelete = (hashedID: string, name: string) => {

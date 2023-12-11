@@ -68,7 +68,13 @@ const ProcessServiceSelect: React.FC<ProcessServiceSelectProps> = (props) => {
             "
           >
             {getIcon(service.identifier)}
-            <Text>{service.name}</Text>
+            <Text>
+              {t(
+                `enum.ServiceType.${
+                  ServiceType[service.identifier] as keyof typeof ServiceType
+                }`
+              )}
+            </Text>
           </a>
         ))}
       </Container>

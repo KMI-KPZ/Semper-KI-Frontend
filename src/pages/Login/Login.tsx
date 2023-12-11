@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { LoginUserType, useLogin } from "./hooks/useLogin";
 import { Button } from "@component-library/Button";
 import LoginIcon from "@mui/icons-material/Login";
 import CreateIcon from "@mui/icons-material/Create";
@@ -14,6 +13,9 @@ import PeopleIcon from "@mui/icons-material/People";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Container from "@component-library/Container";
 import { Navigate, useNavigate } from "react-router-dom";
+import useLoginMutations, {
+  LoginUserType,
+} from "@/api/Login/useLoginMutations";
 
 interface Props {
   path?: string;
@@ -30,7 +32,7 @@ const Login: React.FC<Props> = (props) => {
     orga: false,
   });
   const { orga } = state;
-  const { loginMutation } = useLogin();
+  const { loginMutation } = useLoginMutations();
   const navigate = useNavigate();
 
   const handleOnClickButtonLogin = () => {

@@ -1,13 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import logger from "@/hooks/useLogger";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "@component-library/Button";
 import { Heading, Text } from "@component-library/Typography";
-import { customAxios } from "@/api/customAxios";
-import { toast } from "@/hooks/useToast";
+import useContactFormMutations from "@/api/ContactForm/useContactFormMutations";
 
 interface ContactFormProps {
   closeEdit: () => void;
@@ -16,7 +14,7 @@ interface ContactFormProps {
 const ContactForm: React.FC<ContactFormProps> = (props) => {
   const { closeEdit } = props;
   const { t } = useTranslation();
-  const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/contact/`;
+  const { sendContactFormMutation } = useContactFormMutations();
   const schema = yup
     .object()
     .shape({
@@ -59,21 +57,7 @@ const ContactForm: React.FC<ContactFormProps> = (props) => {
   });
 
   const onSubmit = (data: FormData) => {
-    logger("onSubmit", data);
-    customAxios
-      .post(apiUrl, data)
-      .then((response) => {
-        logger("response", response);
-        if (response.data.result === false) {
-          toast(t("components.Footer.ContactForm.error"));
-          return;
-        }
-        toast(t("components.Footer.ContactForm.success"));
-      })
-      .catch((error) => {
-        toast(t("components.Footer.ContactForm.error"));
-        logger("error", error);
-      });
+    sendContactFormMutation.mutate(data);
     closeEdit();
   };
 

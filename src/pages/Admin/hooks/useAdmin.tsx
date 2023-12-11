@@ -1,30 +1,25 @@
-import { customAxios } from "@/api/customAxios";
-import logger from "@/hooks/useLogger";
+import useAdminMutations from "@/api/Admin/useAdminMutations";
 import { AuthorizedUserProps } from "@/hooks/useUser";
-import { FlatProjectProps } from "@/pages/Projects/hooks/useFlatProjects";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";
-import {
-  useMutation,
-  UseMutationResult,
-  useQuery,
-  useQueryClient,
-  UseQueryResult,
-} from "@tanstack/react-query";
+import { AdminContext } from "@/routeOutlets/AdminOutlet";
+import { UseMutationResult } from "@tanstack/react-query";
+import { useContext } from "react";
 
 interface ReturnProps {
-  adminQuery: UseQueryResult<AdminProps, Error>;
+  users: AuthorizedUserProps[];
+  organizations: OrganizationProps[];
+  flatProjects: AdminFlatProjectProps[];
   deleteUser: UseMutationResult<any, Error, DeleteUserProps, unknown>;
   deleteOrganization: UseMutationResult<any, Error, DeleteUserProps, unknown>;
-  adminProjectsQuery: UseQueryResult<AdminFlatProjectProps[], Error>;
 }
 
-interface DeleteUserProps {
+export interface DeleteUserProps {
   hashedID: string;
   name: string;
 }
 
-interface AdminProps {
+export interface AdminProps {
   user: AuthorizedUserProps[];
   organizations: OrganizationProps[];
 }
@@ -52,76 +47,16 @@ export interface AdminFlatProjectProps {
 }
 
 const useAdmin = (): ReturnProps => {
-  const queryClient = useQueryClient();
+  const { flatProjects, organizations, users } = useContext(AdminContext);
+  const { deleteOrganization, deleteUser } = useAdminMutations();
 
-  const adminQuery = useQuery<AdminProps, Error>({
-    queryKey: ["admin"],
-    queryFn: async () =>
-      customAxios
-        .get(`${process.env.VITE_HTTP_API_URL}/public/admin/getAll/`)
-        .then((res) => {
-          logger("useAdmin | adminQuery ✅ |", res.data);
-          return res.data;
-        }),
-  });
-
-  const adminProjectsQuery = useQuery<AdminFlatProjectProps[], Error>({
-    queryKey: ["admin, flatProjects"],
-    queryFn: async () =>
-      customAxios
-        .get(`${process.env.VITE_HTTP_API_URL}/public/admin/getProjectsFlat/`)
-        .then((res) => {
-          logger("useAdmin | adminProjectsQuery ✅ |", res.data);
-          return res.data.map((project: any) => ({
-            ...project,
-            accessed: new Date(project.accessed),
-            created: new Date(project.created),
-            updated: new Date(project.updated),
-          }));
-        }),
-  });
-
-  const deleteUser = useMutation<any, Error, DeleteUserProps>({
-    mutationFn: async ({ hashedID, name }) => {
-      const url = `${process.env.VITE_HTTP_API_URL}/public/admin/deleteUser/`;
-      return customAxios
-        .delete(url, {
-          data: {
-            hashedID,
-            name,
-          },
-        })
-        .then((response) => {
-          logger("useOrganizations | deleteUser ✅ |", response.data);
-          return response.data;
-        });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["admin"]);
-    },
-  });
-
-  const deleteOrganization = useMutation<any, Error, DeleteUserProps>({
-    mutationFn: async ({ hashedID, name }) => {
-      const url = `${process.env.VITE_HTTP_API_URL}/public/admin/deleteOrganization/`;
-      return customAxios
-        .delete(url, {
-          data: {
-            hashedID,
-            name,
-          },
-        })
-        .then((response) => {
-          logger("useOrganizations | deleteOrganization ✅ |", response.data);
-          return response.data;
-        });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["admin"]);
-    },
-  });
-
-  return { adminQuery, deleteUser, deleteOrganization, adminProjectsQuery };
+  return {
+    deleteUser,
+    deleteOrganization,
+    flatProjects,
+    organizations,
+    users,
+  };
 };
 
 export default useAdmin;

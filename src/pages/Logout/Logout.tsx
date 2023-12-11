@@ -1,4 +1,4 @@
-import useLoginMutations from "@/api/Login/useLoginMutations";
+import useLogin from "@/hooks/useLogin";
 import Container from "@component-library/Container";
 import { LoadingAnimation } from "@component-library/Loading";
 import { Heading } from "@component-library/Typography";
@@ -7,10 +7,10 @@ import { useTranslation } from "react-i18next";
 
 const Logout = () => {
   const { t } = useTranslation();
-  const { logoutMutation } = useLoginMutations();
+  const { logout } = useLogin();
 
   useEffect(() => {
-    logoutMutation.mutate();
+    logout();
   }, []);
 
   return (

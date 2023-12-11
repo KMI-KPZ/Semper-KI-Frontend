@@ -6,7 +6,7 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { useLocation } from "react-router-dom";
+import { redirect, useLocation } from "react-router-dom";
 
 interface useLoginMutationsReturnProps {
   mockedLoginMutation: UseMutationResult<
@@ -47,7 +47,7 @@ const useLoginMutations = (): useLoginMutationsReturnProps => {
 
   const loginMutation = useMutation<string, Error, LoginMutationProps>({
     mutationFn: async (props) => {
-      const { register, path, userType } = props;
+      const { register, path, userType, redirect } = props;
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/login/`;
       return customAxios
         .get(apiUrl, {
@@ -63,7 +63,9 @@ const useLoginMutations = (): useLoginMutationsReturnProps => {
         });
     },
     onSuccess(data) {
-      window.location.href = `${data}${getReplacedSearchParam()}`;
+      window.location.href = `${data}${getReplacedSearchParam()}${
+        redirect !== undefined ? `&${redirect}` : ""
+      }`;
     },
   });
 

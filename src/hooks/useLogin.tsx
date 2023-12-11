@@ -10,6 +10,7 @@ export interface LoginMutationProps {
   userType: LoginUserType;
   register: boolean;
   path?: string;
+  redirect?: string;
 }
 
 export type LoginUserType =

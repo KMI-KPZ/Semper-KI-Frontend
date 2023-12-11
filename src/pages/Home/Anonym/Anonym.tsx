@@ -15,19 +15,19 @@ import LoginIcon from "@mui/icons-material/Login";
 import HomeImgCarousel from "./components/ImgCarousel";
 import { useProject } from "@/pages/Projects/hooks/useProject";
 import { useNavigate } from "react-router-dom";
-import useLoginMutations from "@/api/Login/useLoginMutations";
+import useLogin from "@/hooks/useLogin";
 
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props) => {
   const {} = props;
   const { t, i18n } = useTranslation();
-  const { loginMutation } = useLoginMutations();
+  const { login } = useLogin();
   const { createProject } = useProject();
   const navigate = useNavigate();
 
   const handleOnClickButton = () => {
-    loginMutation.mutate({ userType: "user", register: true });
+    login({ userType: "user", register: true });
   };
 
   const handleOnClickButtonDemonstrator = () => {

@@ -1,17 +1,10 @@
 import { customAxios } from "@/api/customAxios";
-import {
-  useMutation,
-  UseMutationResult,
-  useQuery,
-  useQueryClient,
-  UseQueryResult,
-} from "@tanstack/react-query";
 import logger from "@/hooks/useLogger";
-import { t } from "i18next";
-import { ProjectDetailsProps } from "./useProject";
-import { ProcessStatus } from "./useProcess";
+import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
+import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";
+import { UseQueryResult, useQuery } from "@tanstack/react-query";
 
-interface ReturnProps {
+interface useFlatProjectQuerysReturnProps {
   flatProjectsQuery: UseQueryResult<FlatProjectProps[], Error>;
 }
 
@@ -49,7 +42,7 @@ export const isFlatProject = (project: any): project is FlatProjectProps => {
   );
 };
 
-export const useFlatProjects = (): ReturnProps => {
+const useFlatProjectQuerys = (): useFlatProjectQuerysReturnProps => {
   const flatProjectsQuery = useQuery<FlatProjectProps[], Error>(
     ["flatProjects"],
     async () => {
@@ -70,8 +63,7 @@ export const useFlatProjects = (): ReturnProps => {
       });
     }
   );
-
-  return {
-    flatProjectsQuery,
-  };
+  return { flatProjectsQuery };
 };
+
+export default useFlatProjectQuerys;

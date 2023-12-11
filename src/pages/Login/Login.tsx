@@ -13,10 +13,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Container from "@component-library/Container";
 import { Navigate, useNavigate } from "react-router-dom";
-import useLoginMutations, {
-  LoginUserType,
-} from "@/api/Login/useLoginMutations";
-
+import useLogin, { LoginUserType } from "@/hooks/useLogin";
 interface Props {
   path?: string;
   userType?: UserType;
@@ -32,11 +29,11 @@ const Login: React.FC<Props> = (props) => {
     orga: false,
   });
   const { orga } = state;
-  const { loginMutation } = useLoginMutations();
+  const { login } = useLogin();
   const navigate = useNavigate();
 
   const handleOnClickButtonLogin = () => {
-    loginMutation.mutate({
+    login({
       userType: orga ? "organization" : "user",
       register: false,
     });
@@ -45,7 +42,7 @@ const Login: React.FC<Props> = (props) => {
     if (orga) {
       navigate("/registerorganization");
     } else {
-      loginMutation.mutate({
+      login({
         userType: "user",
         register: true,
       });
@@ -67,7 +64,7 @@ const Login: React.FC<Props> = (props) => {
   };
 
   const handleOnClickButtonMockedLogin = (type: LoginUserType) => {
-    loginMutation.mutate({
+    login({
       userType: type,
       register: false,
     });

@@ -4,20 +4,19 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import LoginIcon from "@mui/icons-material/Login";
-import { LoadingSuspense } from "@component-library/index";
 import HomeContainer from "./Container";
 import ContentBox from "@component-library/ContentBox";
-import useLoginMutations from "@/api/Login/useLoginMutations";
+import useLogin from "@/hooks/useLogin";
 
 interface HomeClientInfoProps {}
 
 const HomeClientInfo: React.FC<HomeClientInfoProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { loginMutation } = useLoginMutations();
+  const { login } = useLogin();
 
   const handleOnClickButton = () => {
-    loginMutation.mutate({ userType: "user", register: true });
+    login({ userType: "user", register: true });
   };
 
   return (

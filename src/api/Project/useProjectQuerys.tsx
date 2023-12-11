@@ -4,8 +4,12 @@ import {
   FileProps,
   FilesDescriptionProps,
   ProcessProps,
+  ProcessStatus,
 } from "@/pages/Projects/hooks/useProcess";
-import { ProjectProps } from "@/pages/Projects/hooks/useProject";
+import {
+  ProjectDetailsProps,
+  ProjectProps,
+} from "@/pages/Projects/hooks/useProject";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 

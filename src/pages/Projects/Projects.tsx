@@ -3,7 +3,6 @@ import { Heading, Text } from "@component-library/Typography";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
-import { FlatProjectProps, useFlatProjects } from "./hooks/useFlatProjects";
 import ProjectsTable from "./components/Table";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
@@ -11,12 +10,15 @@ import { useProject } from "./hooks/useProject";
 import DeleteIcon from "@mui/icons-material/Delete";
 import logger from "@/hooks/useLogger";
 import Container from "@component-library/Container";
+import useFlatProjectQuerys, {
+  FlatProjectProps,
+} from "@/api/Project/useFlatProjectQuerys";
 
 interface ProjectsProps {}
 
 const Projects: React.FC<ProjectsProps> = (props) => {
   const { t } = useTranslation();
-  const { flatProjectsQuery } = useFlatProjects();
+  const { flatProjectsQuery } = useFlatProjectQuerys();
   const { createProject, deleteProject } = useProject();
   const { user } = useUser();
   const [selectedProjects, setSelectedProjects] = React.useState<string[]>([]);

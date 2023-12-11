@@ -8,7 +8,6 @@ import Background from "@/components/Background";
 import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
 import Login from "../Login/Login";
-import RedirectLogin from "../Login/Redirect/RedirectLogin";
 import Logout from "../Logout/Logout";
 import Organization from "../Organization/Organization";
 import Portfolio from "../Portfolio/Portfolio";
@@ -31,6 +30,7 @@ import ProjectsRoutes from "@/routes/ProjectsRoutes";
 import AdminRoutes from "@/routes/AdminRotes";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import ContentBox from "@component-library/ContentBox";
+import RedirectLogin from "../Login/RedirectLogin";
 
 export type AppState = {
   selectedProgressItem?: { index: number; progress: string };

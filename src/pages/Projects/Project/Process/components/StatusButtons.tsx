@@ -6,16 +6,13 @@ import useProcess, {
   ProcessStatus,
 } from "@/pages/Projects/hooks/useProcess";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import React, { useContext } from "react";
-import { UserContext } from "@/contexts/UserContextProvider";
 import useStatusButtons from "../../hooks/useStatusButtons";
 import { StatusButtonProps } from "../../components/StatusButtonData";
-import useService from "@/pages/Service/hooks/useService";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
-import useVerification from "../../Verification/hooks/useVerification";
 import useUser, { UserType } from "@/hooks/useUser";
 import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
+import { useProject } from "@/pages/Projects/hooks/useProject";
 
 interface ProcessStatusButtonsProps {
   projectID: string;
@@ -31,7 +28,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { user } = useUser();
   const { getProcessStatusButtons } = useStatusButtons();
   const navigate = useNavigate();
-  const { verifyProject } = useVerification();
+  const { verifyProject } = useProject();
 
   const shouldRenderFor = (type: "CLIENT" | "CONTRACTOR"): boolean => {
     return (
@@ -68,15 +65,13 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
       case "REPROJECT":
         break;
       case "VERIFYING":
-        verifyProject.mutate({
-          projectID: projectID,
+        verifyProject({
           processIDs: [process.processID],
           send: false,
         });
         break;
       case "VERIFYING_AND_REQUESTED":
-        verifyProject.mutate({
-          projectID: projectID,
+        verifyProject({
           processIDs: [process.processID],
           send: true,
         });

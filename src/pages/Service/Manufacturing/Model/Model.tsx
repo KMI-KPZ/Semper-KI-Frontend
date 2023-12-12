@@ -12,9 +12,9 @@ import IconUpload from "@icons/Upload.svg";
 import { Heading } from "@component-library/Typography";
 import Modal from "@component-library/Modal";
 import { ModelProps } from "./types";
-import { useManufacturingModelData } from "./hooks/useModel";
 import { select } from "d3";
 import { ProcessModelUpload } from "./components/Upload/Upload";
+import { useManufacturingModelQuerys } from "@/api/Service/Manufacturing/useManufacturingQuerys";
 
 interface Props {
   filters: FilterItemProps[];
@@ -36,7 +36,7 @@ export const ProcessModel: React.FC<Props> = (props) => {
     modalOpen: false,
     model: undefined,
   });
-  const { modelsQuery } = useManufacturingModelData(filters);
+  const { modelsQuery } = useManufacturingModelQuerys(filters);
   const openModelView = (model: ModelProps) => {
     setState((prevState) => ({ ...prevState, modalOpen: true, model }));
   };

@@ -8,7 +8,7 @@ import { Heading, Text } from "@component-library/Typography";
 import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { ContractorSelectionFormData } from "../ContractorSelection";
-import useContractors from "../hooks/useContractor";
+import useContractorsQuerys from "../../../../../api/Project/useContractorQuerys";
 
 interface ProjectContractorSelectionItemProps {
   process: ProcessProps;
@@ -23,7 +23,7 @@ const ProjectContractorSelectionItem: React.FC<
   const { register, errors, index, process } = props;
   const { t } = useTranslation();
   const { checkedProcesses } = useCheckedProcesses();
-  const { contractorsQuery } = useContractors(process.processID);
+  const { contractorsQuery } = useContractorsQuerys(process.processID);
 
   return (
     <div

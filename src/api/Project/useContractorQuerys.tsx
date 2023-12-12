@@ -11,16 +11,16 @@ export interface ContractorProps {
   id: string;
 }
 
-const useContractors = (processID: string): ReturnProps => {
+const useContractorsQuerys = (processID: string): ReturnProps => {
   const contractorsQuery = useQuery<ContractorProps[], Error>({
-    queryKey: ["contractors"],
+    queryKey: ["contractors", processID],
     queryFn: async () =>
       customAxios
         .get(
           `${process.env.VITE_HTTP_API_URL}/public/getContractors/${processID}/`
         )
         .then((res) => {
-          logger("useContractors | getContractors ✅ |", res.data);
+          logger("useContractorsQuerys | getContractors ✅ |", res.data);
           return res.data === "fu" ? [] : res.data;
         }),
     enabled: processID !== undefined,
@@ -29,4 +29,4 @@ const useContractors = (processID: string): ReturnProps => {
   return { contractorsQuery };
 };
 
-export default useContractors;
+export default useContractorsQuerys;

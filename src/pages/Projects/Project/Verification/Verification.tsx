@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import useVerification from "./hooks/useVerification";
 import ProcessVerificationItem from "./components/Item";
-import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
@@ -24,7 +22,7 @@ export interface VerifyFormData {
 const ProcessVerification: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { verifyProject } = useVerification();
+  const { verifyProject } = useProject();
 
   const { projectQuery } = useContext(ProjectContext);
   const processes: ProcessProps[] =
@@ -49,39 +47,23 @@ const ProcessVerification: React.FC<Props> = (props) => {
 
   const handleOnClickButtonVerify = (data: VerifyFormData) => {
     if (projectQuery.data !== undefined) {
-      verifyProject.mutate(
-        {
-          projectID: projectQuery.data.projectID,
-          processIDs: data.processes
-            .filter((process) => process.checked === true)
-            .map((process) => process.process.processID),
-          send: false,
-        },
-        {
-          onSuccess: () => {
-            navigate("../..");
-          },
-        }
-      );
+      verifyProject({
+        processIDs: data.processes
+          .filter((process) => process.checked === true)
+          .map((process) => process.process.processID),
+        send: false,
+      });
     }
   };
 
   const handleOnClickButtonRequest = (data: VerifyFormData) => {
     if (projectQuery.data !== undefined) {
-      verifyProject.mutate(
-        {
-          projectID: projectQuery.data.projectID,
-          processIDs: data.processes
-            .filter((process) => process.checked === true)
-            .map((process) => process.process.processID),
-          send: true,
-        },
-        {
-          onSuccess: () => {
-            navigate("../..");
-          },
-        }
-      );
+      verifyProject({
+        processIDs: data.processes
+          .filter((process) => process.checked === true)
+          .map((process) => process.process.processID),
+        send: true,
+      });
     }
   };
 

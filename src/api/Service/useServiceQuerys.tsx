@@ -4,7 +4,7 @@ import { ServiceType } from "@/pages/Service/hooks/useService";
 import { objectToArray } from "@/services/utils";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 
-interface useServicesReturnProps {
+interface useServiceQuerysReturnProps {
   servicesQuery: UseQueryResult<ServiceItemProps[], Error>;
 }
 
@@ -13,7 +13,7 @@ export interface ServiceItemProps {
   identifier: ServiceType;
 }
 
-const useServices = (): useServicesReturnProps => {
+const useServiceQuerys = (): useServiceQuerysReturnProps => {
   const servicesQuery = useQuery<ServiceItemProps[], Error>(
     ["services"],
     async () => {
@@ -32,4 +32,4 @@ const useServices = (): useServicesReturnProps => {
   return { servicesQuery };
 };
 
-export default useServices;
+export default useServiceQuerys;

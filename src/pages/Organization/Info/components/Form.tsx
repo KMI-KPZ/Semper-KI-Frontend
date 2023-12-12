@@ -4,16 +4,14 @@ import logger from "@/hooks/useLogger";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { error } from "console";
 import { Button } from "@component-library/Button";
 import { Heading, Text } from "@component-library/Typography";
 import useOrganizations, {
   OrganizationInfoProps,
   UpdateOrgaInfoProps,
 } from "../../hooks/useOrganizations";
-import useProcessQuerys from "@/api/Process/useProcessQuerys";
-import useServices from "@/pages/Projects/Project/Process/ServicePreview/hooks/useService";
 import { ServiceType } from "@/pages/Service/hooks/useService";
+import useServiceQuerys from "@/api/Service/useServiceQuerys";
 
 interface OrganizationInfoFormProps {
   closeEdit: () => void;
@@ -24,7 +22,7 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
   const { organizationInfo, closeEdit } = props;
   const { t } = useTranslation();
   const { updateOrganizationInfo } = useOrganizations();
-  const { servicesQuery } = useServices();
+  const { servicesQuery } = useServiceQuerys();
   const schema = yup
     .object({
       email: yup

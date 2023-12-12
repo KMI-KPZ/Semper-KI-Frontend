@@ -9,7 +9,7 @@ import {
   OntoPrinter,
   OntoPrinterFlat,
   OntoPrinterProperty,
-} from "../types/types";
+} from "../../pages/Resources/types/types";
 import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
@@ -27,7 +27,7 @@ type UseOntoProps = {
   printerID?: string;
 };
 
-const useOntoPrinters = (props: UseOntoProps): ReturnProps => {
+const useOntologyPrinterQuerys = (props: UseOntoProps): ReturnProps => {
   const { printerID = "" } = props;
 
   const printersQuery = useQuery<OntoPrinterFlat[], Error>({
@@ -77,4 +77,4 @@ const useOntoPrinters = (props: UseOntoProps): ReturnProps => {
   return { printersQuery, printerQuery, printerMutation };
 };
 
-export default useOntoPrinters;
+export default useOntologyPrinterQuerys;

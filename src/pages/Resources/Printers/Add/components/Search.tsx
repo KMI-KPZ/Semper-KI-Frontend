@@ -1,10 +1,10 @@
-import useOntoPrinters from "@/pages/Resources/hooks/useOntoPrinters";
 import { OntoPrinter, OntoPrinterFlat } from "@/pages/Resources/types/types";
 import { Button, LoadingSuspense, Text } from "@component-library/index";
 import React, { useState } from "react";
 import { FieldError, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import useOntologyPrinterQuerys from "@/api/Ontology/useOntologyPrinterQuerys";
 
 interface ResourcesPrintersAddSearchProps {
   setPrinterName(name: string): void;
@@ -25,7 +25,7 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
   const printerName =
     _printerName === undefined ? "" : _printerName.toLocaleLowerCase();
   const { t } = useTranslation();
-  const { printersQuery } = useOntoPrinters({});
+  const { printersQuery } = useOntologyPrinterQuerys({});
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
   const handleOnFocusInputName = (

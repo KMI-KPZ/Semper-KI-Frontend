@@ -1,6 +1,6 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { customAxios } from "@/api/customAxios";
-import { OntoMaterialFlat } from "../types/types";
+import { OntoMaterialFlat } from "../../pages/Resources/types/types";
 import logger from "@/hooks/useLogger";
 
 interface ReturnProps {
@@ -12,7 +12,7 @@ type UseOntoProps = {
   materialID?: string;
 };
 
-const useOntoMaterials = (props: UseOntoProps): ReturnProps => {
+const useOntologyMaterialQuerys = (props: UseOntoProps): ReturnProps => {
   const { materialID = "" } = props;
 
   const materialsQuery = useQuery<OntoMaterialFlat[], Error>({
@@ -43,4 +43,4 @@ const useOntoMaterials = (props: UseOntoProps): ReturnProps => {
   return { materialsQuery, materialQuery };
 };
 
-export default useOntoMaterials;
+export default useOntologyMaterialQuerys;

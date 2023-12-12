@@ -1,18 +1,15 @@
 import Container from "@component-library/Container";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useServices from "../hooks/useService";
 import { LoadingAnimation, Text } from "@component-library/index";
 import { Error } from "@/pages/Error/Error";
 import FactoryIcon from "@mui/icons-material/Factory";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
-import useService, { ServiceType } from "@/pages/Service/hooks/useService";
+import { ServiceType } from "@/pages/Service/hooks/useService";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
-import useProcess, {
-  ProcessProps,
-  ProcessStatus,
-} from "@/pages/Projects/hooks/useProcess";
+import { ProcessProps, ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import logger from "@/hooks/useLogger";
+import useServiceQuerys from "@/api/Service/useServiceQuerys";
 import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 
 interface ProcessServiceSelectProps {
@@ -22,7 +19,7 @@ interface ProcessServiceSelectProps {
 const ProcessServiceSelect: React.FC<ProcessServiceSelectProps> = (props) => {
   const { process } = props;
   const { t } = useTranslation();
-  const { servicesQuery } = useServices();
+  const { servicesQuery } = useServiceQuerys();
   const { updateProcess } = useGeneralProcess();
 
   const getIcon = (serviceType: ServiceType) => {

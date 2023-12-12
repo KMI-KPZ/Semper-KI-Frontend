@@ -23,6 +23,27 @@ interface useProjectMutationsReturnProps {
     unknown
   >;
   deleteProjectMutation: UseMutationResult<string, Error, string[], unknown>;
+  sendProjectMutation: UseMutationResult<
+    any,
+    Error,
+    SendProjectMutationProps,
+    unknown
+  >;
+  verifyProjectMutation: UseMutationResult<
+    any,
+    Error,
+    VerifyProjectMutationProps,
+    unknown
+  >;
+}
+
+export interface SendProjectMutationProps {
+  processIDs: string[];
+}
+
+export interface VerifyProjectMutationProps {
+  processIDs: string[];
+  send: boolean;
 }
 
 const useProjectMutations = (): useProjectMutationsReturnProps => {
@@ -101,11 +122,58 @@ const useProjectMutations = (): useProjectMutationsReturnProps => {
     },
   });
 
+  const sendProjectMutation = useMutation<any, Error, SendProjectMutationProps>(
+    {
+      mutationFn: async ({ processIDs }) => {
+        const url = `${process.env.VITE_HTTP_API_URL}/public/sendProject/`;
+        return customAxios
+          .patch(url, {
+            projectID,
+            processIDs,
+          })
+          .then((response) => {
+            logger("useCheckout | sendProject ✅ |", response.data);
+            return response.data;
+          });
+      },
+      onSuccess(data, variables, context) {
+        queryClient.invalidateQueries(["project", projectID]);
+        navigate(`/projects/${projectID}/${variables.processIDs[0]}`);
+      },
+    }
+  );
+
+  const verifyProjectMutation = useMutation<
+    any,
+    Error,
+    VerifyProjectMutationProps
+  >({
+    mutationFn: async (props) => {
+      const { processIDs, send } = props;
+      const url = `${process.env.VITE_HTTP_API_URL}/public/verifyProject/`;
+      return customAxios
+        .patch(url, {
+          projectID,
+          processIDs,
+          send,
+        })
+        .then((response) => {
+          logger("useVerification | verifyProject ✅ |", response.data);
+          return response.data;
+        });
+    },
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries(["project", projectID]);
+    },
+  });
+
   return {
     createProcessWithIDMutation,
     createProjectMutation,
     deleteProjectMutation,
     updateProjectMutation,
+    sendProjectMutation,
+    verifyProjectMutation,
   };
 };
 

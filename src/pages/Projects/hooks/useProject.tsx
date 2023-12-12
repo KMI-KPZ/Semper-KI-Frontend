@@ -10,6 +10,8 @@ interface ReturnProps {
   createProject(): void;
   updateProject(updateProps: UpdateProjectProps): void;
   deleteProject(projectIDs: string[]): void;
+  verifyProject(props: VerifyProjectProps): void;
+  sendProject(props: SendProjectProps): void;
 }
 
 export interface ProjectProps {
@@ -40,12 +42,23 @@ export interface ProjectDeletionsProps {
   status?: "";
 }
 
+export interface VerifyProjectProps {
+  processIDs: string[];
+  send: boolean;
+}
+
+export interface SendProjectProps {
+  processIDs: string[];
+}
+
 export const useProject = (): ReturnProps => {
   const { project, projectQuery } = useContext(ProjectContext);
   const {
     createProjectMutation,
     deleteProjectMutation,
     updateProjectMutation,
+    sendProjectMutation,
+    verifyProjectMutation,
   } = useProjectMutations();
 
   const createProject = () => {
@@ -59,11 +72,21 @@ export const useProject = (): ReturnProps => {
     deleteProjectMutation.mutate(projectIDs);
   };
 
+  const sendProject = (props: SendProjectProps) => {
+    sendProjectMutation.mutate(props);
+  };
+
+  const verifyProject = (props: VerifyProjectProps) => {
+    verifyProjectMutation.mutate(props);
+  };
+
   return {
     project,
     projectQuery,
     createProject,
     updateProject,
     deleteProject,
+    sendProject,
+    verifyProject,
   };
 };

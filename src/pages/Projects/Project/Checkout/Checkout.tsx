@@ -5,13 +5,14 @@ import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { Button } from "@component-library/Button";
 import SendIcon from "@mui/icons-material/Send";
-import useCheckout from "./hooks/useCheckout";
 import { useNavigate } from "react-router-dom";
 import ProjectCheckoutItem from "./components/Item";
 import logger from "@/hooks/useLogger";
 import { ProcessProps, ProcessStatus } from "../../hooks/useProcess";
 import { useProject } from "../../hooks/useProject";
 import { ProjectContext } from "../../context/ProjectContext";
+import useProcessMutations from "@/api/Process/useProcessMutations";
+import useProjectMutations from "@/api/Project/useProjectMutations";
 
 interface ProjectCheckoutProps {}
 
@@ -22,7 +23,7 @@ export interface CheckoutFormData {
 const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { sendProject } = useCheckout();
+  const { sendProject } = useProject();
 
   const { projectQuery: query } = useContext(ProjectContext);
   const processes: ProcessProps[] =
@@ -52,8 +53,7 @@ const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
 
   const handleOnClickButtonSend = (data: CheckoutFormData) => {
     if (query.data !== undefined) {
-      sendProject.mutate({
-        projectID: query.data.projectID,
+      sendProject({
         processIDs: data.processes
           .filter((process) => process.checked === true)
           .map((process) => process.process.processID),

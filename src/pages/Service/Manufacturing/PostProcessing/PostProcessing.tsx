@@ -7,12 +7,12 @@ import {
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
 import { FilterItemProps } from "../Filter/Filter";
-import { usePostProcessing as useManufacturingPostProcessing } from "./hooks/usePostProcessing";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import useService from "../../hooks/useService";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
+import { useManufacturingPostProcessingQuerys } from "@/api/Service/Manufacturing/useManufacturingQuerys";
 
 interface Props {
   processState: ServiceManufacturingState;
@@ -40,7 +40,7 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { processState, filters, postProcessings } = props;
   const { grid, searchText } = processState;
-  const { postProcessingQuery } = useManufacturingPostProcessing(filters);
+  const { postProcessingQuery } = useManufacturingPostProcessingQuerys(filters);
   const { updatedService } = useService();
 
   const checkPostProcessing = (postProcessing: PostProcessingProps) => {

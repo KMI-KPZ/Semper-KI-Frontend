@@ -6,9 +6,9 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
-import useRegisterOrganisation from "./hooks/useRegisterOrganisation";
 import { type } from "os";
 import { yupResolver } from "@hookform/resolvers/yup";
+import useOrganizationMutations from "@/api/Organization/useOrganizationMutations";
 
 interface RegisterOrganizationProps {}
 export type RegisterOrganizationFormData = {
@@ -25,7 +25,7 @@ const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
   const { t } = useTranslation();
   const [success, setSuccess] = React.useState(false);
 
-  const { registerOrganizationMutation } = useRegisterOrganisation();
+  const { registerOrganizationMutation } = useOrganizationMutations();
   const schema = yup
     .object()
     .shape({

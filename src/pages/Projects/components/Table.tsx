@@ -8,9 +8,9 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import logger from "@/hooks/useLogger";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import Container from "@component-library/Container";
-import { FlatProjectProps } from "../hooks/useFlatProjects";
 import { ProcessStatus } from "../hooks/useProcess";
 import { useProject } from "../hooks/useProject";
+import { FlatProjectProps } from "@/api/Project/useFlatProjectQuerys";
 
 interface ProjectsTableProps {
   flatProjects: FlatProjectProps[];

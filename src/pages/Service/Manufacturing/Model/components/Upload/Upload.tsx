@@ -9,7 +9,7 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { LoadingAnimation } from "@component-library/Loading";
 import { getFileSizeAsString } from "@/services/utils";
 import { Heading } from "@component-library/Typography";
-import useModelUpload from "../../hooks/useModelUpload";
+import useManufacturingMutations from "../../../../../../api/Service/Manufacturing/useManufacturingMutations";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 import { set } from "react-hook-form";

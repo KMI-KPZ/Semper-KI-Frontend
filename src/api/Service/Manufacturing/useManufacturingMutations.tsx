@@ -4,13 +4,12 @@ import {
   UseMutationResult,
   useQueryClient,
 } from "@tanstack/react-query";
-import { ModelProps } from "../types";
+import { ModelProps } from "../../../pages/Service/Manufacturing/Model/types";
 import logger from "@/hooks/useLogger";
 import { useNavigate } from "react-router-dom";
-import useProcess from "@/pages/Projects/hooks/useProcess";
 
 interface ReturnProps {
-  uploadModel: UseMutationResult<
+  uploadModelMutation: UseMutationResult<
     ModelProps[],
     Error,
     UploadModelProps,
@@ -32,10 +31,14 @@ interface UploadModelProps {
   file: File;
 }
 
-const useModelUpload = (): ReturnProps => {
+const useManufacturingMutations = (): ReturnProps => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const uploadModel = useMutation<ModelProps[], Error, UploadModelProps>({
+  const uploadModelMutation = useMutation<
+    ModelProps[],
+    Error,
+    UploadModelProps
+  >({
     mutationFn: async (props) => {
       const { model, processID, projectID, file } = props;
       const formData = new FormData();
@@ -70,7 +73,7 @@ const useModelUpload = (): ReturnProps => {
     },
   });
 
-  return { uploadModel };
+  return { uploadModelMutation };
 };
 
-export default useModelUpload;
+export default useManufacturingMutations;

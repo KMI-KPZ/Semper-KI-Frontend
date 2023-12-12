@@ -6,7 +6,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Heading, Text } from "@component-library/Typography";
 import useService, { ServiceType } from "@/pages/Service/hooks/useService";
-import useContractor from "./hooks/useContractor";
+import useContractor from "../../../../api/Project/useContractorQuerys";
 import useProcess, {
   ProcessProps,
   ProcessStatus,

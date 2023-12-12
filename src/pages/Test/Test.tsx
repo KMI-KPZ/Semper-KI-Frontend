@@ -4,7 +4,6 @@ import Container from "@component-library/Container";
 import { Heading } from "@component-library/Typography";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import SaveIcon from "@mui/icons-material/Save";
-import useTest, { TestDynamicProps } from "./hooks/useTest";
 import { EventContext } from "@/contexts/EventContextProvider";
 import { PermissionContext } from "@/contexts/PermissionContextProvider";
 import { LoadingAnimation, LoadingSuspense } from "@component-library/Loading";
@@ -12,6 +11,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import usePermissions from "@/hooks/usePermissions";
 import useEvents from "@/hooks/useEvents/useEvents";
+import useTest from "@/api/Test/useTest";
 
 interface Props {}
 export const Test: React.FC<Props> = (props) => {

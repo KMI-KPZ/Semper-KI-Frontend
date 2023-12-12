@@ -3,7 +3,7 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { ProcessModel } from "./Model/Model";
 import { ProcessMaterial } from "./Material/Material";
 import { ProcessPostProcessing } from "./PostProcessing/PostProcessing";
-import useFilter from "./Filter/hooks/useFilter";
+import useFilterQuerys from "../../../api/Filter/useFilterQuerys";
 import ProcessHeader from "./Header/Header";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
@@ -17,6 +17,7 @@ import {
 } from "./types/types";
 import { Error } from "@/pages/Error/Error";
 import { ServiceContext } from "../context/ServiceContext";
+import useFilter from "@/hooks/useFilter";
 
 interface Props {}
 
@@ -50,7 +51,7 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
     initialServiceManufacturingState
   );
   const { grid, filterOpen, searchText } = state;
-  const { filtersQuery, updateFilters: filtersMutate } = useFilter();
+  const { filtersQuery, updateFilterMutation } = useFilter();
 
   const setSearchInput = (name: string): void => {
     // logger("Process | searchModels |", name);
@@ -58,7 +59,7 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
   };
   const applyFilters = (filterItemList: FilterItemProps[]): void => {
     // logger("Process | applyFilters |", filterItemList);
-    filtersMutate.mutate(filterItemList);
+    updateFilterMutation.mutate(filterItemList);
   };
   const setGrid = (grid: boolean): void => {
     setState((prevState) => ({ ...prevState, grid }));

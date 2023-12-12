@@ -7,11 +7,11 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import HomeContainer from "./Container";
 import { AppContext } from "@/pages/App/App";
 import Container from "@component-library/Container";
-import { useFlatProjects } from "@/pages/Projects/hooks/useFlatProjects";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 import { UserContext } from "@/contexts/UserContextProvider";
 import useUser, { UserType } from "@/hooks/useUser";
 import ContentBox from "@component-library/ContentBox";
+import useFlatProjectQuerys from "@/api/Project/useFlatProjectQuerys";
 
 interface HomeProjectsProps {}
 
@@ -20,7 +20,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const { t } = useTranslation();
   const { user } = useUser();
 
-  const { flatProjectsQuery } = useFlatProjects();
+  const { flatProjectsQuery } = useFlatProjectQuerys();
   const { createProject } = useProject();
 
   const handleOnClickButtonNew = () => {

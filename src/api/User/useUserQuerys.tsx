@@ -34,7 +34,7 @@ const useUserQuerys = (): useUserQueryReturnProps => {
           const newUser: AuthorizedUserProps = {
             hashedID: userData.hashedID,
             name: userData.name,
-            organization: userData.Organization,
+            organization: userData.organization,
             details: {
               email: userData.details.email,
               address: userData.details.address,

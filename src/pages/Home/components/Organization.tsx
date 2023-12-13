@@ -11,7 +11,7 @@ const HomeOrganization: React.FC<HomeOrganizationProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <HomeContainer>
+    <HomeContainer className="gap-5 bg-white p-5">
       <Heading variant="h2">{t("Home.components.Organization.title")}</Heading>
       <Button
         title={t("Home.components.Organization.button.edit")}

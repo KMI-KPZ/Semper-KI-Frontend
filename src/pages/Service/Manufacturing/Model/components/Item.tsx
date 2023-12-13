@@ -28,7 +28,7 @@ const ProcessModelItem: React.FC<Props> = (props) => {
   };
 
   const handleOnClickButtonDeselect = () => {
-    updateProcess({ deletions: { service: ["model"] } });
+    updateProcess({ deletions: { serviceDetails: ["model"] } });
   };
 
   return (

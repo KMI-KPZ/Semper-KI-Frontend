@@ -120,11 +120,8 @@ export interface ProcessChangesProps {
 }
 
 export interface ProcessDeletionsProps {
-  messages?: "";
-  status?: "";
-  files?: "";
-  details?: "";
-  service?: string[] | "";
+  processDetails?: "";
+  serviceDetails?: string[] | "";
 }
 
 export interface UplaodFilesProps {

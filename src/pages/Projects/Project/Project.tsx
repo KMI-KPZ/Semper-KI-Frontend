@@ -134,7 +134,7 @@ const Project: React.FC<Props> = (props) => {
             onClick={handleOnClickButtonInfo}
             title={t("Projects.Project.Project.button.info")}
           />
-          <PermissionGate element={"ProjectButtonDelete"}>
+          <PermissionGate element={"ProjectButtonDELETE"}>
             <Button
               width="fit"
               variant="icon"

@@ -23,7 +23,7 @@ interface useOrganizationMutationsReturnProps {
     unknown
   >;
   inviteLinkMutation: UseMutationResult<string, Error, string, unknown>;
-  inviteUserMutation: UseMutationResult<any, Error, string, unknown>;
+  inviteUserMutation: UseMutationResult<any, Error, InvitationProps, unknown>;
   createRoleMutation: UseMutationResult<any, Error, CreateRoleProps, unknown>;
   editRoleMutation: UseMutationResult<any, Error, EditRoleProps, unknown>;
   updatePermissionForRoleMutation: UseMutationResult<
@@ -43,6 +43,11 @@ interface useOrganizationMutationsReturnProps {
     unknown
   >;
 }
+
+export type InvitationProps = {
+  email: string;
+  roleID: string;
+};
 
 const useOrganizationMutations = (): useOrganizationMutationsReturnProps => {
   const queryClient = useQueryClient();
@@ -99,11 +104,11 @@ const useOrganizationMutations = (): useOrganizationMutationsReturnProps => {
     },
   });
 
-  const inviteUserMutation = useMutation<any, Error, string>({
-    mutationFn: async (email: string) => {
+  const inviteUserMutation = useMutation<any, Error, InvitationProps>({
+    mutationFn: async (props) => {
       return customAxios
         .post(apiUrl + "addUser/", {
-          data: { content: { email: email } },
+          data: { content: props },
         })
         .then((response) => {
           if (showLogger)

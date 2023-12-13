@@ -11,7 +11,7 @@ const HomeResources: React.FC<HomeResourcesProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <HomeContainer>
+    <HomeContainer className="gap-5 bg-white p-5">
       <Heading variant="h2">{t("Home.components.Resources.title")}</Heading>
       <Button
         title={t("Home.components.Resources.button.edit")}

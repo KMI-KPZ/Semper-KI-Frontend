@@ -1,6 +1,8 @@
 import { UseMutationResult, UseQueryResult } from "@tanstack/react-query";
 import { ServiceType } from "@/pages/Service/hooks/useService";
-import useOrganizationMutations from "@/api/Organization/useOrganizationMutations";
+import useOrganizationMutations, {
+  InvitationProps,
+} from "@/api/Organization/useOrganizationMutations";
 import useOrganizationQuerys from "@/api/Organization/useOrganizationQuerys";
 
 interface useOrganizationsReturnProps {
@@ -10,7 +12,7 @@ interface useOrganizationsReturnProps {
   rolePermissionsQuery: UseQueryResult<PermissionProps[], Error>;
   organizationInfoQuery: UseQueryResult<OrganizationInfoProps, Error>;
   inviteLinkMutation: UseMutationResult<string, Error, string, unknown>;
-  inviteUserMutation: UseMutationResult<any, Error, string, unknown>;
+  inviteUserMutation: UseMutationResult<any, Error, InvitationProps, unknown>;
   createRoleMutation: UseMutationResult<any, Error, CreateRoleProps, unknown>;
   deleteRoleMutation: UseMutationResult<any, Error, string, unknown>;
   updatePermissionForRoleMutation: UseMutationResult<

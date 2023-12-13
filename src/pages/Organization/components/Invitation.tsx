@@ -24,7 +24,8 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   const { t } = useTranslation();
   const [links, setLinks] = useState<InviteLink[]>([]);
   const [showLoadedIn, setShowLoadedIn] = useState<boolean>(false);
-  const { inviteLinkMutation, inviteUserMutation } = useOrganizations();
+  const { inviteLinkMutation, inviteUserMutation, rolesQuery } =
+    useOrganizations();
 
   const schema = yup
     .object({
@@ -32,6 +33,7 @@ const Invitation: React.FC<InvitationProps> = (props) => {
         .string()
         .required(t("yup.required", { name: "Email" }))
         .email(t("yup.email")),
+      roleID: yup.string().required(t("yup.required", { name: "Role" })),
     })
     .required();
   type FormData = yup.InferType<typeof schema>;
@@ -44,14 +46,8 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   } = useForm<FormData>({ resolver: yupResolver(schema) });
 
   const onSubmitInvite = (data: FormData) => {
-    logger("onSubmitInvite", data);
-    setShowLoadedIn(true);
-    inviteUserMutation.mutate(data.email, {
-      onSuccess(data, variables, context) {
-        setShowLoadedIn(false);
-        reset();
-      },
-    });
+    // logger("onSubmitInvite", data);
+    inviteUserMutation.mutate(data);
   };
 
   const onSubmitLink = (data: FormData) => {
@@ -93,6 +89,22 @@ const Invitation: React.FC<InvitationProps> = (props) => {
           placeholder={t("Organization.components.invitation.placeholder")}
           {...register("email")}
         />
+        <select
+          className="rounded-xl bg-grau-50 p-3 shadow-button"
+          {...register("roleID")}
+        >
+          {rolesQuery.data !== undefined && rolesQuery.data.length > 0 ? (
+            rolesQuery.data.map((_role, index) => (
+              <option key={index} value={_role.id}>
+                {_role.name}
+              </option>
+            ))
+          ) : (
+            <option value="empty" disabled>
+              {t("Organization.components.table.empty")}
+            </option>
+          )}
+        </select>
         <Button
           onClick={handleSubmit(onSubmitInvite)}
           title={t("Organization.components.invitation.button.invite")}

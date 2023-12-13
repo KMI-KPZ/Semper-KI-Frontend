@@ -36,7 +36,6 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
         </>
       ) : null}
       {user.usertype === UserType.ADMIN ? <HomeAdmin /> : null}
-      <Coypu />
     </div>
   );
 };

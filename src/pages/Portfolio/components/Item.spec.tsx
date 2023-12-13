@@ -9,7 +9,7 @@ describe("<PortfolioItem>", () => {
   it("should render open with preOpen true", () => {
     render(<PortfolioItem portfolioItem="provide-accompany" preOpen />);
     expect(
-      screen.getByText("Portfolio.PortfolioItem.item.text")
+      screen.getByText("Portfolio.PortfolioItem.provide-accompany.text")
     ).toBeInTheDocument();
   });
   it("should render closed with preOpen false", () => {
@@ -21,12 +21,12 @@ describe("<PortfolioItem>", () => {
   it("should open item when button is clicked", () => {
     render(<PortfolioItem portfolioItem="provide-accompany" preOpen={false} />);
     expect(
-      screen.queryByText("Portfolio.PortfolioItem.item.text")
+      screen.queryByText("Portfolio.PortfolioItem.provide-accompany.text")
     ).not.toBeInTheDocument();
     const button = screen.getByTestId("portfolio-item-button");
     fireEvent.click(button);
     expect(
-      screen.getByText("Portfolio.PortfolioItem.item.text")
+      screen.getByText("Portfolio.PortfolioItem.provide-accompany.text")
     ).toBeInTheDocument();
   });
   it("should close item when button is clicked", () => {
@@ -34,7 +34,7 @@ describe("<PortfolioItem>", () => {
     window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
     render(<PortfolioItem portfolioItem="provide-accompany" preOpen />);
     expect(
-      screen.getByText("Portfolio.PortfolioItem.item.text")
+      screen.getByText("Portfolio.PortfolioItem.provide-accompany.text")
     ).toBeInTheDocument();
     const button = screen.getByTestId("portfolio-item-button");
     fireEvent.click(button);

@@ -3,7 +3,7 @@ import { ProcessProps } from "../../hooks/useProcess";
 import {
   StatusButtonProps,
   StatusButtonTitleType,
-  statusButtonData as statusButtonData,
+  statusButtonData,
 } from "../components/StatusButtonData";
 import useUser, { UserType } from "@/hooks/useUser";
 

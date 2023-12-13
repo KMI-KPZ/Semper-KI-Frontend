@@ -11,7 +11,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import usePermissions from "@/hooks/usePermissions";
 import useEvents from "@/hooks/useEvents/useEvents";
-import useTest from "@/api/Test/useTest";
+import useTest, { TestDynamicProps } from "@/api/Test/useTest";
 
 interface Props {}
 export const Test: React.FC<Props> = (props) => {

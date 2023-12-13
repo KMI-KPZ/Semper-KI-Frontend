@@ -15,7 +15,7 @@ export const ProcessMaterialItem: React.FC<Props> = (props) => {
   const { updateProcess } = useProcess();
 
   const handleOnClickButtonDeselect = () => {
-    updateProcess({ deletions: { service: ["material"] } });
+    updateProcess({ deletions: { serviceDetails: ["material"] } });
   };
 
   return (

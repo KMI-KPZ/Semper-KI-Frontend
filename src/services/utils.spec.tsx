@@ -1,3 +1,4 @@
+import { UserType } from "@/hooks/useUser";
 import {
   getFileSizeAsString,
   getTimeAsText,
@@ -95,30 +96,26 @@ describe("Utils", () => {
       expect(value).toStrictEqual(["a", "b", "c"]);
     });
   });
-  describe("Test getUserType", () => {
+  describe("Test getAuthorizedUserType", () => {
     it("should return client", () => {
       const value = getAuthorizedUserType("user");
-      expect(value).toBe(0);
+      expect(value).toBe(UserType.USER);
     });
     it("should return manufacturer", () => {
       const value = getAuthorizedUserType("organization");
-      expect(value).toBe(1);
+      expect(value).toBe(UserType.ORGANIZATION);
     });
     it("should return admin", () => {
       const value = getAuthorizedUserType("admin");
-      expect(value).toBe(2);
+      expect(value).toBe(UserType.ADMIN);
     });
-    it("should return anonym", () => {
-      const value = getAuthorizedUserType("anonym");
-      expect(value).toBe(3);
-    });
-    it("should return anonym when empty", () => {
+    it("should return user when empty", () => {
       const value = getAuthorizedUserType("");
-      expect(value).toBe(3);
+      expect(value).toBe(UserType.USER);
     });
-    it("should return anonym when something else", () => {
+    it("should return user when something else", () => {
       const value = getAuthorizedUserType("else");
-      expect(value).toBe(3);
+      expect(value).toBe(UserType.USER);
     });
   });
   describe("Test parseAddress", () => {

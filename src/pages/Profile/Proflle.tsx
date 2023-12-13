@@ -49,30 +49,28 @@ const Profile: React.FC<Props> = (props) => {
             `enum.UserType.${UserType[user.usertype] as keyof typeof UserType}`
           )}
         </span>
-      </Container>
 
-      {user.usertype === UserType.ORGANIZATION ? (
-        <Container direction="col" align="start">
-          <Heading variant="h2">{t("Profile.company.header")}</Heading>
-          <div className="w-full border-t-2" />
-          <span className="break-all">
-            {t("Profile.company.name")}: {user.organization}
-          </span>
-          {user.organization !== undefined && user.organization === "None" ? (
-            <Button title={t("Profile.button.selectChange")} />
-          ) : null}
-        </Container>
-      ) : null}
-      {user.details.address !== undefined ? (
-        <Container direction="col" align="start">
-          <Heading variant="h2">{t("Profile.address.header")}</Heading>
-          <div className="w-full border-t-2" />
-          <span>
-            {t("Profile.address.street")}: {user.details.address}
-          </span>
-        </Container>
-      ) : null}
-      <Container direction="col" align="start">
+        {user.usertype === UserType.ORGANIZATION ? (
+          <>
+            <Heading variant="h2">{t("Profile.company.header")}</Heading>
+            <div className="w-full border-t-2" />
+            <span className="break-all">
+              {t("Profile.company.name")}: {user.organization}
+            </span>
+            {user.organization !== undefined && user.organization === "None" ? (
+              <Button title={t("Profile.button.selectChange")} />
+            ) : null}
+          </>
+        ) : null}
+        {user.details.address !== undefined ? (
+          <>
+            <Heading variant="h2">{t("Profile.address.header")}</Heading>
+            <div className="w-full border-t-2" />
+            <span>
+              {t("Profile.address.street")}: {user.details.address}
+            </span>
+          </>
+        ) : null}
         <Heading variant="h2">{t("Profile.time.header")}</Heading>
         <div className="w-full border-t-2" />
         <span>
@@ -84,23 +82,23 @@ const Profile: React.FC<Props> = (props) => {
         <span>
           {t("Profile.time.updated")}: {user.updated.toLocaleString()}
         </span>
+        <Container justify="center">
+          <Button
+            title={t(`Profile.button.edit`)}
+            startIcon={<EditIcon />}
+            onClick={handleOnClickButtonEdit}
+          />
+          <Button
+            testid="button-delete"
+            startIcon={<DeleteIcon />}
+            onClick={handleOnClickButtonDelete}
+            title={t("Profile.button.delete")}
+          />
+        </Container>
       </Container>
       <Modal open={edit} closeModal={closeModal} title="ProfileForm">
         <ProfileForm user={user} />
       </Modal>
-      <Container justify="center">
-        <Button
-          title={t(`Profile.button.edit`)}
-          startIcon={<EditIcon />}
-          onClick={handleOnClickButtonEdit}
-        />
-        <Button
-          testid="button-delete"
-          startIcon={<DeleteIcon />}
-          onClick={handleOnClickButtonDelete}
-          title={t("Profile.button.delete")}
-        />
-      </Container>
     </Container>
   );
 };

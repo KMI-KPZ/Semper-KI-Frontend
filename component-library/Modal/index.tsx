@@ -151,7 +151,7 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
             variant="text"
             width="fit"
             size="sm"
-            onClick={closeModal}
+            onClick={closeModalWithScroll}
           />
         )}
         {children}

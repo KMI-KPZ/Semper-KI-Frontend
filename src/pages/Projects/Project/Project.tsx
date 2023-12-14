@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AuthorizedUserProps, UserType } from "@/hooks/useUser";
+import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 import { Heading, Text } from "@component-library/Typography";
 import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import {
@@ -30,13 +30,19 @@ import useGeneralProcess from "../hooks/useGeneralProcess";
 
 interface Props {
   event?: ProjectEvent;
+  adminProject?: ProjectProps;
 }
 
 const Project: React.FC<Props> = (props) => {
-  const { event: projectCollectionEvent } = props;
-  const { project, projectQuery } = useContext(ProjectContext);
+  const { event: projectCollectionEvent, adminProject } = props;
+  const { project: _project } = useContext(ProjectContext);
   const { processID } = useParams();
   useScrollToProcess(processID);
+  const { user } = useUser();
+  const project: ProjectProps =
+    user.usertype === UserType.ADMIN && adminProject !== undefined
+      ? adminProject
+      : _project;
 
   const { t } = useTranslation();
   const navigate = useNavigate();

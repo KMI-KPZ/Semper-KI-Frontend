@@ -19,9 +19,9 @@ export interface AuthorizedUserProps {
   hashedID: string;
   name: string;
   details: UserDetailsProps;
-  created: Date;
-  updated: Date;
-  accessed: Date;
+  createdWhen: Date;
+  updatedWhen: Date;
+  accessedWhen: Date;
   lastSeen: Date;
   organization?: string;
   usertype: UserType.USER | UserType.ORGANIZATION | UserType.ADMIN;

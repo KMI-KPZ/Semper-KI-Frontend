@@ -29,21 +29,21 @@ export interface OrganizationProps {
   name: string;
   canManufacture: boolean;
   details: any;
-  created: Date;
-  updated: Date;
-  accessed: Date;
+  createdWhen: Date;
+  updatedWhen: Date;
+  accessedWhen: Date;
 }
 
 export interface AdminFlatProjectProps {
-  accessed: Date;
+  accessedWhen: Date;
   client: string;
   clientName: string;
-  created: Date;
+  createdWhen: Date;
   details: ProjectDetailsProps;
-  projectCollectionID: string;
+  processesCount: number;
+  projectID: string;
   status: ProcessStatus;
-  processCount: number;
-  updated: Date;
+  updatedWhen: Date;
 }
 
 const useAdmin = (): ReturnProps => {

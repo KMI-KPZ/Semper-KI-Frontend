@@ -67,13 +67,13 @@ const AdminOrganization: React.FC<AdminOrganizationProps> = (props) => {
                       )}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {new Date(orga.created).toLocaleString()}
+                      {new Date(orga.createdWhen).toLocaleString()}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {new Date(orga.accessed).toLocaleString()}
+                      {new Date(orga.accessedWhen).toLocaleString()}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {new Date(orga.updated).toLocaleString()}
+                      {new Date(orga.updatedWhen).toLocaleString()}
                     </TableCell>
                     <TableCell component="th" scope="row">
                       <div className="flex w-full flex-row items-center justify-center gap-3 p-2">

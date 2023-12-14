@@ -13,14 +13,20 @@ import Container from "@component-library/Container";
 import useFlatProjectQuerys, {
   FlatProjectProps,
 } from "@/api/Project/useFlatProjectQuerys";
+import useAdminQuerys from "@/api/Admin/useAdminQuerys";
 
 interface ProjectsProps {}
 
 const Projects: React.FC<ProjectsProps> = (props) => {
   const { t } = useTranslation();
-  const { flatProjectsQuery } = useFlatProjectQuerys();
-  const { createProject, deleteProject } = useProject();
   const { user } = useUser();
+  const { flatProjectsQuery: userFlatProjectsQuery } = useFlatProjectQuerys();
+  const { adminFlatProjectsQuery } = useAdminQuerys();
+  const flatProjectsQuery =
+    user.usertype === UserType.ADMIN
+      ? adminFlatProjectsQuery
+      : userFlatProjectsQuery;
+  const { createProject, deleteProject } = useProject();
   const [selectedProjects, setSelectedProjects] = React.useState<string[]>([]);
 
   const onButtonClickCreateProject = () => {
@@ -39,10 +45,10 @@ const Projects: React.FC<ProjectsProps> = (props) => {
     project1: FlatProjectProps,
     project2: FlatProjectProps
   ) => {
-    if (project1.updated > project2.updated) {
+    if (project1.updatedWhen > project2.updatedWhen) {
       return 1;
     }
-    if (project1.updated < project2.updated) {
+    if (project1.updatedWhen < project2.updatedWhen) {
       return -1;
     }
     return 0;

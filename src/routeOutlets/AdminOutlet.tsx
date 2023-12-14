@@ -30,7 +30,8 @@ export const AdminContext = createContext<AdminContext>({
 export const AdminRouteOutlet: React.FC<Props> = (props) => {
   const { user } = useContext(AuthorizedUserContext);
   const { t } = useTranslation();
-  const { adminQuery, adminProjectsQuery } = useAdminQuerys();
+  const { adminQuery, adminFlatProjectsQuery: adminProjectsQuery } =
+    useAdminQuerys();
 
   if (user.usertype !== UserType.ADMIN) return <Error />;
 

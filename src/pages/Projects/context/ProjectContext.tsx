@@ -10,6 +10,8 @@ import { ProjectProps, useProject } from "../hooks/useProject";
 import { LoadingAnimation } from "@component-library/index";
 import { Query, UseQueryResult } from "@tanstack/react-query";
 import useProjectQuerys from "@/api/Project/useProjectQuerys";
+import useAdminQuerys from "@/api/Admin/useAdminQuerys";
+import useUser, { UserType } from "@/hooks/useUser";
 
 interface ProjectOutletProps {}
 
@@ -38,7 +40,11 @@ export const ProjectContext = React.createContext<ProjectContextProps>({
 const ProjectContextProvider: React.FC<ProjectOutletProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { projectQuery } = useProjectQuerys();
+  const { user } = useUser();
+  const { projectQuery: userProjectQuery } = useProjectQuerys();
+  const { adminProjectQuery } = useAdminQuerys();
+  const projectQuery =
+    user.usertype === UserType.ADMIN ? adminProjectQuery : userProjectQuery;
   const [checkedProcesses, setCheckedProcesses] = useState<string[]>([]);
 
   if (projectQuery.isLoading) return <LoadingAnimation />;

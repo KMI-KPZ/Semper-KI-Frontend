@@ -11,7 +11,7 @@ import {
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { AdminFlatProjectProps } from "../hooks/useAdmin";
+import useAdmin, { AdminFlatProjectProps } from "../hooks/useAdmin";
 import { Button } from "@component-library/Button";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -22,21 +22,21 @@ import useSearch from "@/hooks/useSearch";
 import { useProject } from "@/pages/Projects/hooks/useProject";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 
-interface Props {
-  projects?: AdminFlatProjectProps[];
-}
+interface Props {}
 
 const AdminProjects: React.FC<Props> = (props) => {
-  const { projects } = props;
+  const {} = props;
   const { t } = useTranslation();
+  const { flatProjects } = useAdmin();
   const { deleteProject } = useProject();
   const { filterDataBySearchInput, handleSearchInputChange } = useSearch();
+
   const handleOnClickButtonDelete = (projectID: string) => {
     if (window.confirm(t("Admin.Projects.confirm"))) deleteProject([projectID]);
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-normal gap-5 bg-white p-5">
+    <div className="flex w-full flex-col items-center justify-normal gap-5 overflow-auto bg-white p-5">
       <Heading variant="h1">{t("Admin.Projects.header")}</Heading>
       <Search handleSearchInputChange={handleSearchInputChange} />
       <TableContainer component={Paper}>
@@ -55,8 +55,8 @@ const AdminProjects: React.FC<Props> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {projects !== undefined && projects.length > 0
-              ? projects
+            {flatProjects.length > 0
+              ? flatProjects
                   .filter((project: AdminFlatProjectProps) =>
                     filterDataBySearchInput(project)
                   )
@@ -68,7 +68,7 @@ const AdminProjects: React.FC<Props> = (props) => {
                       }}
                     >
                       <TableCell component="th" scope="row">
-                        {project.projectCollectionID}
+                        {project.projectID}
                       </TableCell>
                       <TableCell component="th" scope="row">
                         {project.clientName}
@@ -79,7 +79,7 @@ const AdminProjects: React.FC<Props> = (props) => {
                           : project.details.title}
                       </TableCell>
                       <TableCell component="th" scope="row">
-                        {project.processCount}
+                        {project.processesCount}
                       </TableCell>
                       <TableCell component="th" scope="row">
                         {t(
@@ -91,28 +91,26 @@ const AdminProjects: React.FC<Props> = (props) => {
                         )}
                       </TableCell>
                       <TableCell component="th" scope="row">
-                        {project.accessed.toLocaleString()}
+                        {project.accessedWhen.toLocaleString()}
                       </TableCell>
                       <TableCell component="th" scope="row">
-                        {project.created.toLocaleString()}
+                        {project.createdWhen.toLocaleString()}
                       </TableCell>
                       <TableCell component="th" scope="row">
-                        {project.updated.toLocaleString()}
+                        {project.updatedWhen.toLocaleString()}
                       </TableCell>
                       <TableCell component="th" scope="row">
                         <Container>
                           <Button
                             title={t("Admin.Projects.buttons.show")}
                             children={<VisibilityIcon />}
-                            to={`/admin/projects/${project.projectCollectionID}`}
+                            to={`/admin/projects/${project.projectID}`}
                           />
                           <Button
                             title={t("Admin.Projects.buttons.delete")}
                             children={<DeleteIcon />}
                             onClick={() =>
-                              handleOnClickButtonDelete(
-                                project.projectCollectionID
-                              )
+                              handleOnClickButtonDelete(project.projectID)
                             }
                           />
                         </Container>

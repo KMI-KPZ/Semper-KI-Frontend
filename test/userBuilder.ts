@@ -72,9 +72,9 @@ export class UserBuilder {
             organization: this.organization,
             usertype: this.userType,
             hashedID: this.hashedID,
-            created: this.created,
-            updated: this.updated,
-            accessed: this.accessed,
+            createdWhen: this.created,
+            updatedWhen: this.updated,
+            accessedWhen: this.accessed,
             lastSeen: this.lastSeen,
             details: this.details
         })   

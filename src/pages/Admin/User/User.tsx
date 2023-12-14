@@ -69,13 +69,13 @@ const AdminUser: React.FC<Props> = (props) => {
                         : "---"}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {new Date(user.created).toLocaleString()}
+                      {new Date(user.createdWhen).toLocaleString()}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {new Date(user.accessed).toLocaleString()}
+                      {new Date(user.accessedWhen).toLocaleString()}
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      {new Date(user.updated).toLocaleString()}
+                      {new Date(user.updatedWhen).toLocaleString()}
                     </TableCell>
                     <TableCell component="th" scope="row">
                       {new Date(user.lastSeen).toLocaleString()}

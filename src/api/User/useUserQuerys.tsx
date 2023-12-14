@@ -39,9 +39,9 @@ const useUserQuerys = (): useUserQueryReturnProps => {
               email: userData.details.email,
               address: userData.details.address,
             },
-            accessed: new Date(userData.accessedWhen),
-            created: new Date(userData.createdWhen),
-            updated: new Date(userData.updatedWhen),
+            accessedWhen: new Date(userData.accessedWhen),
+            createdWhen: new Date(userData.createdWhen),
+            updatedWhen: new Date(userData.updatedWhen),
             lastSeen: new Date(userData.lastSeen),
             usertype: getAuthorizedUserType(userData.usertype),
           };

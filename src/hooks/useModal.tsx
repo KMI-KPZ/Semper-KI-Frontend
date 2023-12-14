@@ -2,6 +2,7 @@ import { RefObject, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useBodyScroll from "./useBodyScroll";
 import { ModalContext } from "@/contexts/ModalContextProvider";
+import logger from "./useLogger";
 
 interface useModalReturnProps {
   registerModal(modal: string, ref: RefObject<HTMLDialogElement>): void;
@@ -23,6 +24,9 @@ const useModal = (): useModalReturnProps => {
         ...prevState.filter((item) => item.ref.current !== null),
       ]);
     }
+  }, [modals]);
+
+  useEffect(() => {
     if (modals.length > 0) {
       setBodyScroll(false);
     } else {

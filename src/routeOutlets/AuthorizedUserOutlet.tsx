@@ -13,15 +13,15 @@ export type AuthorizedUserContext = {
 
 export const AuthorizedUserContext = createContext<AuthorizedUserContext>({
   user: {
-    accessed: new Date(),
-    created: new Date(),
+    accessedWhen: new Date(),
+    createdWhen: new Date(),
     details: {
       email: "",
     },
     hashedID: "",
     lastSeen: new Date(),
     name: "",
-    updated: new Date(),
+    updatedWhen: new Date(),
     usertype: 0,
   },
   deleteUser: () => {},

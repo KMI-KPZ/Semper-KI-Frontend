@@ -1,5 +1,6 @@
 import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
+import useUser, { UserType } from "@/hooks/useUser";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
@@ -12,8 +13,8 @@ export interface FlatProjectProps {
   projectID: string;
   client: string;
   status: ProcessStatus;
-  created: Date;
-  updated: Date;
+  createdWhen: Date;
+  updatedWhen: Date;
   details: ProjectDetailsProps;
   processesCount: number;
 }
@@ -43,9 +44,10 @@ export const isFlatProject = (project: any): project is FlatProjectProps => {
 };
 
 const useFlatProjectQuerys = (): useFlatProjectQuerysReturnProps => {
-  const flatProjectsQuery = useQuery<FlatProjectProps[], Error>(
-    ["flatProjects"],
-    async () => {
+  const { user } = useUser();
+  const flatProjectsQuery = useQuery<FlatProjectProps[], Error>({
+    queryKey: ["flatProjects"],
+    queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getFlatProjects/`; //TODO change when path changes
       return customAxios.get(apiUrl).then((response) => {
         logger("useFlatProjects | flatProjectsQuery ✅ |", response.data);
@@ -56,13 +58,14 @@ const useFlatProjectQuerys = (): useFlatProjectQuerysReturnProps => {
             status: project.status,
             details: project.details,
             processesCount: project.processesCount,
-            created: new Date(project.createdWhen),
-            updated: new Date(project.updatedWhen),
+            createdWhen: new Date(project.createdWhen),
+            updatedWhen: new Date(project.updatedWhen),
           })
         );
       });
-    }
-  );
+    },
+    enabled: user.usertype !== UserType.ADMIN,
+  });
   return { flatProjectsQuery };
 };
 

@@ -49,11 +49,11 @@ export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col items-center justify-around gap-5 sm:flex-row ">
-      <Button
+      {/* <Button
         title={t("Service.Manufacturing.Header.Wizard.Wizard.overview")}
         children={<ArrowBackOutlinedIcon />}
         to="../.."
-      />
+      /> */}
       <ManufacturingWizardItem
         title={t("Service.Manufacturing.Header.Wizard.Wizard.model")}
         completed={service.model !== undefined}
@@ -76,7 +76,7 @@ export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
         icon={<BrushIcon />}
       />
 
-      <Button
+      {/* <Button
         title={t("Service.Manufacturing.Header.Wizard.Wizard.overview")}
         children={getCompletedButtonText()}
         to="../.."
@@ -92,7 +92,7 @@ export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
             ? "primary"
             : "secondary"
         }
-      />
+      /> */}
     </div>
   );
 };

@@ -27,7 +27,7 @@ import { OrganizationRouteOutlet } from "@/routeOutlets/OrganizationOutlet";
 import { AdminRouteOutlet } from "@/routeOutlets/AdminOutlet";
 import { ToastContainer } from "react-toastify";
 import ProjectsRoutes from "@/routes/ProjectsRoutes";
-import AdminRoutes from "@/routes/AdminRotes";
+import AdminRoutes from "@/routes/AdminRoutes";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import ContentBox from "@component-library/ContentBox";
 import RedirectLogin from "../Login/RedirectLogin";

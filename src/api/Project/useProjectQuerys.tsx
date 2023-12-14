@@ -1,5 +1,6 @@
 import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
+import useUser, { UserType } from "@/hooks/useUser";
 import {
   FileProps,
   FilesDescriptionProps,
@@ -17,7 +18,7 @@ interface useProjectQuerysReturnProps {
   projectQuery: UseQueryResult<ProjectProps, Error>;
 }
 
-const getFiles = (filesObject: Object): FileProps[] => {
+export const getProjectFiles = (filesObject: Object): FileProps[] => {
   let files: FileProps[] = Object.entries(filesObject).map(([key, value]) => {
     return { ...value } as FileProps;
   });
@@ -25,6 +26,7 @@ const getFiles = (filesObject: Object): FileProps[] => {
 };
 
 const useProjectQuerys = (): useProjectQuerysReturnProps => {
+  const { user } = useUser();
   const { projectID } = useParams();
 
   const projectQuery = useQuery<ProjectProps, Error>(
@@ -52,7 +54,7 @@ const useProjectQuerys = (): useProjectQuerysReturnProps => {
               contractor: process.contractor,
               createdWhen: new Date(process.createdWhen),
               updatedWhen: new Date(process.updatedWhen),
-              files: getFiles(process.files),
+              files: getProjectFiles(process.files),
             })
           ),
         };
@@ -61,7 +63,7 @@ const useProjectQuerys = (): useProjectQuerysReturnProps => {
       });
     },
     {
-      enabled: projectID !== undefined,
+      enabled: projectID !== undefined && user.usertype !== UserType.ADMIN,
     }
   );
 

@@ -66,10 +66,13 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
     process: ProcessProps
   ): StatusButtonProps[] => {
     const exludes: StatusButtonTitleType[] = ["DELETE"];
-    return statusButtonData
-      .filter((button) => filterButtonByTitle(button, exludes))
-      .filter((button) => filterButtonByStatus(process, button))
-      .filter((button) => filterButtonByUser(process, button));
+
+    return user.usertype === UserType.ADMIN
+      ? statusButtonData
+      : statusButtonData
+          .filter((button) => filterButtonByTitle(button, exludes))
+          .filter((button) => filterButtonByStatus(process, button))
+          .filter((button) => filterButtonByUser(process, button));
   };
 
   const getProjectStatusButtons = (
@@ -77,10 +80,12 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   ): StatusButtonCountProps[] => {
     const exludes: StatusButtonTitleType[] = [];
     const allButtons = processes.flatMap((process) =>
-      statusButtonData
-        .filter((button) => filterButtonByTitle(button, exludes))
-        .filter((button) => filterButtonByStatus(process, button))
-        .filter((button) => filterButtonByUser(process, button))
+      user.usertype === UserType.ADMIN
+        ? statusButtonData
+        : statusButtonData
+            .filter((button) => filterButtonByTitle(button, exludes))
+            .filter((button) => filterButtonByStatus(process, button))
+            .filter((button) => filterButtonByUser(process, button))
     );
 
     let buttonsWithCount: StatusButtonCountProps[] = [];

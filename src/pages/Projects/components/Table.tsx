@@ -120,7 +120,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
           variant="secondary"
           title={t("Projects.components.Table.button.detail")}
           children={<VisibilityIcon />}
-          to={`/projects/${flatProject.projectID}`}
+          to={`${flatProject.projectID}`}
         />
       </PermissionGate>
     </div>
@@ -258,10 +258,10 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
                         {flatProject.processesCount}
                       </td>
                       <td className="hidden p-3 md:table-cell md:py-3">
-                        {flatProject.created.toLocaleDateString()}
+                        {flatProject.createdWhen.toLocaleDateString()}
                       </td>
                       <td className="p-3 md:py-3">
-                        {flatProject.updated.toLocaleDateString()}
+                        {flatProject.updatedWhen.toLocaleDateString()}
                       </td>
                       <td className="p-3 md:py-3">
                         {renderRowButtons(flatProject)}

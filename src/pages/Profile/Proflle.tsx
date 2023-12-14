@@ -74,13 +74,13 @@ const Profile: React.FC<Props> = (props) => {
         <Heading variant="h2">{t("Profile.time.header")}</Heading>
         <div className="w-full border-t-2" />
         <span>
-          {t("Profile.time.created")}: {user.created.toLocaleString()}
+          {t("Profile.time.created")}: {user.createdWhen.toLocaleString()}
         </span>
         <span>
-          {t("Profile.time.accessed")}: {user.accessed.toLocaleString()}
+          {t("Profile.time.accessed")}: {user.accessedWhen.toLocaleString()}
         </span>
         <span>
-          {t("Profile.time.updated")}: {user.updated.toLocaleString()}
+          {t("Profile.time.updated")}: {user.updatedWhen.toLocaleString()}
         </span>
         <Container justify="center">
           <Button

@@ -22,9 +22,11 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
       className="flex w-full flex-col items-center justify-center gap-10"
       data-testid="home-authorized"
     >
-      <PermissionGate element={"HomeAuthorizedProject"}>
-        <HomeProjects />
-      </PermissionGate>
+      {user.usertype !== UserType.ADMIN ? (
+        <PermissionGate element={"HomeAuthorizedProject"}>
+          <HomeProjects />
+        </PermissionGate>
+      ) : null}
       {user.usertype === UserType.ORGANIZATION ? (
         <>
           <PermissionGate element={"HomeAuthorizedOrganization"}>

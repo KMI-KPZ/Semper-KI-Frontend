@@ -13,7 +13,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Container from "@component-library/Container";
 import { Navigate, useNavigate } from "react-router-dom";
-import useLogin, { LoginUserType } from "@/hooks/useLogin";
+import useLogin, { LoginUserType, MockedUserType } from "@/hooks/useLogin";
 interface Props {
   path?: string;
   userType?: UserType;
@@ -29,7 +29,7 @@ const Login: React.FC<Props> = (props) => {
     orga: false,
   });
   const { orga } = state;
-  const { login } = useLogin();
+  const { login, mockedLogin } = useLogin();
   const navigate = useNavigate();
 
   const handleOnClickButtonLogin = () => {
@@ -63,11 +63,8 @@ const Login: React.FC<Props> = (props) => {
     }));
   };
 
-  const handleOnClickButtonMockedLogin = (type: LoginUserType) => {
-    login({
-      userType: type,
-      register: false,
-    });
+  const handleOnClickButtonMockedLogin = (type: MockedUserType) => {
+    mockedLogin(type);
   };
 
   return (
@@ -98,17 +95,17 @@ const Login: React.FC<Props> = (props) => {
           <Heading variant="h1">{t("Login.Login.admin")}</Heading>
           <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
             <Button
-              onClick={() => handleOnClickButtonMockedLogin("fakeUser")}
+              onClick={() => handleOnClickButtonMockedLogin("user")}
               title={t("Login.Login.buttons.user")}
               startIcon={<PersonIcon />}
             />
             <Button
-              onClick={() => handleOnClickButtonMockedLogin("fakeOrganization")}
+              onClick={() => handleOnClickButtonMockedLogin("organization")}
               title={t("Login.Login.buttons.orga")}
               startIcon={<PeopleIcon />}
             />
             <Button
-              onClick={() => handleOnClickButtonMockedLogin("fakeAdmin")}
+              onClick={() => handleOnClickButtonMockedLogin("admin")}
               title={t("Login.Login.buttons.admin")}
               startIcon={<AdminPanelSettingsIcon />}
             />

@@ -31,3 +31,14 @@ export interface ServiceManufacturingContextReturnProps {
   setSearchInput(name: string): void;
   service: ManufacturingServiceProps;
 }
+
+export const instanceOfManufacturingServiceProps = (
+  object: any
+): object is ManufacturingServiceProps => {
+  return (
+    "model" in object ||
+    "material" in object ||
+    "postProcessings" in object ||
+    "manufacturerID" in object
+  );
+};

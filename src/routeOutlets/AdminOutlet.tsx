@@ -12,13 +12,14 @@ import {
 } from "@/pages/Admin/hooks/useAdmin";
 import useAdminQuerys from "@/api/Admin/useAdminQuerys";
 import { LoadingAnimation } from "@component-library/index";
+import { FlatProjectProps } from "@/api/Project/useFlatProjectQuerys";
 
 interface Props {}
 
 export type AdminContext = {
   users: AuthorizedUserProps[];
   organizations: OrganizationProps[];
-  flatProjects: AdminFlatProjectProps[];
+  flatProjects: FlatProjectProps[];
 };
 
 export const AdminContext = createContext<AdminContext>({

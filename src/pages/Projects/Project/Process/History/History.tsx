@@ -1,4 +1,6 @@
-import useProcessQuerys from "@/api/Process/useProcessQuerys";
+import useProcessQuerys, {
+  ProcessHistoryType,
+} from "@/api/Process/useProcessQuerys";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 import Container from "@component-library/Container";
 import Modal from "@component-library/Modal";
@@ -38,19 +40,40 @@ const ProcessHistory: React.FC<ProcessHistoryProps> = (props) => {
                   width="full"
                   className="rounded-xl bg-white p-5"
                 >
-                  {Object.keys(historyItem).map((untypedKey, index) => {
-                    const typedKey = untypedKey as keyof typeof historyItem;
-                    return (
-                      <Container key={index} align="start">
-                        <Text className="md:min-w-[120px]">
-                          {t(
-                            `Projects.Project.Process.History.History.${typedKey}`
-                          )}
-                        </Text>
-                        <ProcessHistoryItem data={historyItem[typedKey]} />
-                      </Container>
-                    );
-                  })}
+                  <Container align="start" direction="row" justify="between">
+                    <Text className="md:min-w-[120px]">
+                      {t(`Projects.Project.Process.History.History.createdBy`)}
+                    </Text>
+                    <Text>{historyItem.createdBy}</Text>
+                  </Container>
+                  <Container align="start" direction="row" justify="between">
+                    <Text className="md:min-w-[120px]">
+                      {t(
+                        `Projects.Project.Process.History.History.createdWhen`
+                      )}
+                    </Text>
+                    <Text>{historyItem.createdWhen.toLocaleString()}</Text>
+                  </Container>
+                  <Container align="start" direction="row" justify="between">
+                    <Text className="md:min-w-[120px]">
+                      {t(`Projects.Project.Process.History.History.type`)}
+                    </Text>
+                    <Text>
+                      {t(
+                        `enum.ProcessHistoryType.${
+                          ProcessHistoryType[
+                            historyItem.type
+                          ] as keyof typeof ProcessHistoryType
+                        }`
+                      )}
+                    </Text>
+                  </Container>
+                  <Container align="start" direction="row" justify="between">
+                    <Text className="md:min-w-[120px]">
+                      {t(`Projects.Project.Process.History.History.data`)}
+                    </Text>
+                    <ProcessHistoryItem item={historyItem} />
+                  </Container>
                 </Container>
               ))}
           </Container>

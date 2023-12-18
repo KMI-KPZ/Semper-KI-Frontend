@@ -7,7 +7,7 @@ import React, {
 import { useTranslation } from "react-i18next";
 import { Navigate, Outlet } from "react-router-dom";
 import { ProjectProps, useProject } from "../hooks/useProject";
-import { LoadingAnimation } from "@component-library/index";
+import { AppLoadingSuspense, LoadingAnimation } from "@component-library/index";
 import { Query, UseQueryResult } from "@tanstack/react-query";
 import useProjectQuerys from "@/api/Project/useProjectQuerys";
 import useAdminQuerys from "@/api/Admin/useAdminQuerys";
@@ -47,8 +47,7 @@ const ProjectContextProvider: React.FC<ProjectOutletProps> = (props) => {
     user.usertype === UserType.ADMIN ? adminProjectQuery : userProjectQuery;
   const [checkedProcesses, setCheckedProcesses] = useState<string[]>([]);
 
-  if (projectQuery.isLoading) return <LoadingAnimation />;
-
+  if (projectQuery.isLoading) return <LoadingAnimation className="py-40" />;
   if (projectQuery.isFetched && projectQuery.data !== undefined)
     return (
       <ProjectContext.Provider

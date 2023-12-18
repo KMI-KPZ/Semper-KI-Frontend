@@ -21,6 +21,7 @@ import Search from "@component-library/Search";
 import useSearch from "@/hooks/useSearch";
 import { useProject } from "@/pages/Projects/hooks/useProject";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
+import { FlatProjectProps } from "@/api/Project/useFlatProjectQuerys";
 
 interface Props {}
 
@@ -48,7 +49,7 @@ const AdminProjects: React.FC<Props> = (props) => {
               <TableCell>{t("Admin.Projects.projectTitle")}</TableCell>
               <TableCell>{t("Admin.Projects.processesCount")}</TableCell>
               <TableCell>{t("Admin.Projects.status")}</TableCell>
-              <TableCell>{t("Admin.Projects.accessed")}</TableCell>
+              {/* <TableCell>{t("Admin.Projects.accessed")}</TableCell> */}
               <TableCell>{t("Admin.Projects.created")}</TableCell>
               <TableCell>{t("Admin.Projects.updated")}</TableCell>
               <TableCell>{t("Admin.Projects.actions")}</TableCell>
@@ -57,10 +58,10 @@ const AdminProjects: React.FC<Props> = (props) => {
           <TableBody>
             {flatProjects.length > 0
               ? flatProjects
-                  .filter((project: AdminFlatProjectProps) =>
+                  .filter((project: FlatProjectProps) =>
                     filterDataBySearchInput(project)
                   )
-                  .map((project: AdminFlatProjectProps, index: number) => (
+                  .map((project: FlatProjectProps, index: number) => (
                     <TableRow
                       key={index}
                       sx={{
@@ -71,7 +72,7 @@ const AdminProjects: React.FC<Props> = (props) => {
                         {project.projectID}
                       </TableCell>
                       <TableCell component="th" scope="row">
-                        {project.clientName}
+                        {project.client}
                       </TableCell>
                       <TableCell component="th" scope="row">
                         {project.details.title === undefined
@@ -89,9 +90,6 @@ const AdminProjects: React.FC<Props> = (props) => {
                             ] as keyof typeof ProcessStatus
                           }`
                         )}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {project.accessedWhen.toLocaleString()}
                       </TableCell>
                       <TableCell component="th" scope="row">
                         {project.createdWhen.toLocaleString()}

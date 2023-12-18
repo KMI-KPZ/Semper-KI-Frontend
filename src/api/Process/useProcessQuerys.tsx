@@ -1,5 +1,13 @@
 import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
+import ProcessHistory from "@/pages/Projects/Project/Process/History/History";
+import {
+  ChatMessageProps,
+  FileProps,
+  FilesDescriptionProps,
+} from "@/pages/Projects/hooks/useProcess";
+import { ProcessStatusType } from "@/pages/Service/Manufacturing/Header/types";
+import { ServiceProps } from "@/pages/Service/hooks/useService";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
@@ -18,15 +26,45 @@ export enum ProcessHistoryType {
 }
 
 export type HistoryProps = {
-  accessedWhen: Date;
-  contentID: string;
   createdBy: string;
   createdWhen: Date;
+} & (
+  | ProcessHistoryCREATION
+  | ProcessHistorySTATUS
+  | ProcessHistoryMESSAGE
+  | ProcessHistoryFILE
+  | ProcessHistoryDELETION
+  | ProcessHistoryDETAILS
+  | ProcessHistoryOTHER
+);
+
+export type ProcessHistoryCREATION = {
+  type: ProcessHistoryType.CREATION;
   data: {};
-  dataID: string;
-  details: Object;
-  type: ProcessHistoryType;
-  updatedWhen: Date;
+};
+export type ProcessHistorySTATUS = {
+  type: ProcessHistoryType.STATUS;
+  data: ProcessStatusType;
+};
+export type ProcessHistoryMESSAGE = {
+  type: ProcessHistoryType.MESSAGE;
+  data: ChatMessageProps;
+};
+export type ProcessHistoryFILE = {
+  type: ProcessHistoryType.FILE;
+  data: FileProps;
+};
+export type ProcessHistoryDELETION = {
+  type: ProcessHistoryType.DELETION;
+  data: {};
+};
+export type ProcessHistoryDETAILS = {
+  type: ProcessHistoryType.DETAILS;
+  data: ServiceProps;
+};
+export type ProcessHistoryOTHER = {
+  type: ProcessHistoryType.OTHER;
+  data: any;
 };
 
 const useProcessQuerys = (): useProcessQuerysReturnProps => {
@@ -42,15 +80,10 @@ const useProcessQuerys = (): useProcessQuerysReturnProps => {
         .then((response) => {
           const history: HistoryProps[] = response.data.history.map(
             (historyItem: any) => ({
-              createdWhen: new Date(historyItem.createdWhen),
-              accessedWhen: new Date(historyItem.accessedWhen),
-              updatedWhen: new Date(historyItem.updatedWhen),
               createdBy: historyItem.createdBy,
+              createdWhen: new Date(historyItem.createdWhen),
               type: historyItem.type,
-              contentID: historyItem.contentID,
               data: historyItem.data,
-              dataID: historyItem.dataID,
-              details: historyItem.details,
             })
           );
           logger("useProcessQuerys | processHistoryQuery ✅ |", history);

@@ -18,10 +18,14 @@ interface useProjectQuerysReturnProps {
   projectQuery: UseQueryResult<ProjectProps, Error>;
 }
 
-export const getProjectFiles = (filesObject: Object): FileProps[] => {
-  let files: FileProps[] = Object.entries(filesObject).map(([key, value]) => {
-    return { ...value } as FileProps;
-  });
+export const getProjectFiles = (
+  filesObject: Object
+): FilesDescriptionProps[] => {
+  let files: FilesDescriptionProps[] = Object.entries(filesObject).map(
+    ([key, value]) => {
+      return { ...value } as FilesDescriptionProps;
+    }
+  );
   return files;
 };
 

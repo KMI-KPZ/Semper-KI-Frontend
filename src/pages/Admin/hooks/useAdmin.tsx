@@ -1,4 +1,5 @@
 import useAdminMutations from "@/api/Admin/useAdminMutations";
+import { FlatProjectProps } from "@/api/Project/useFlatProjectQuerys";
 import { AuthorizedUserProps } from "@/hooks/useUser";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";
@@ -9,7 +10,7 @@ import { useContext } from "react";
 interface ReturnProps {
   users: AuthorizedUserProps[];
   organizations: OrganizationProps[];
-  flatProjects: AdminFlatProjectProps[];
+  flatProjects: FlatProjectProps[];
   deleteUser: UseMutationResult<any, Error, DeleteUserProps, unknown>;
   deleteOrganization: UseMutationResult<any, Error, DeleteUserProps, unknown>;
 }

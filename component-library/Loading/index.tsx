@@ -3,14 +3,16 @@ import { useTranslation } from "react-i18next";
 import LogoURL from "@images/logo192.png";
 import { DefinedUseQueryResult, UseQueryResult } from "@tanstack/react-query";
 import { Heading } from "..";
+import { twMerge } from "tailwind-merge";
 
 interface LoadingAnimationProps {
   color?: string;
   text?: boolean;
+  className?: string;
 }
 
 export const LoadingAnimation: React.FC<LoadingAnimationProps> = (props) => {
-  const { color, text } = props;
+  const { color, text, className } = props;
   const { t } = useTranslation();
   const [state, setState] = useState<number>(0);
 
@@ -34,7 +36,7 @@ export const LoadingAnimation: React.FC<LoadingAnimationProps> = (props) => {
       </div>
     );
   return (
-    <div className=" mt-6">
+    <div className={twMerge("mt-6 p-20", className)}>
       <div className="h-24 w-24 animate-bounce">
         <img src={LogoURL} alt="" />
       </div>

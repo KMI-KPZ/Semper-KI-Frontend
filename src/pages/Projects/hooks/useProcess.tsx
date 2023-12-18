@@ -55,7 +55,7 @@ export type DefaultProcessProps = {
   serviceDetails: ServiceProps;
   createdWhen: Date;
   updatedWhen: Date;
-  files: FileProps[];
+  files: FilesDescriptionProps[];
   messages: ChatMessageProps[];
   contractor: string;
 };

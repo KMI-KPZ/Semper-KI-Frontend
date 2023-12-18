@@ -124,7 +124,7 @@
       "MESSAGE": "Nachricht",
       "FILE": "Datei",
       "DELETION": "Löschung",
-      "DETAILS": "Details",
+      "DETAILS": "Prozessdetails",
       "OTHER": "Sonstiges"
     }
   },
@@ -949,17 +949,45 @@
           }
         },
         "History": {
+          "components": {
+            "Item": {
+              "created": "Prozess erstellt",
+              "status": "Status aktualisiert zu ",
+              "message": {
+                "userID": "BenutzerID: ",
+                "userName": "Benutzername: ",
+                "date": "Datum: ",
+                "text": "Text: "
+              },
+              "file": {
+                "createdBy": "Erstellt von: ",
+                "date": "Datum: ",
+                "fileName": "Dateiname: ",
+                "id": "ID: ",
+                "path": "Pfad: "
+              },
+              "deletition": {
+                "deleted": "Datei Gelöscht"
+              },
+              "other": {
+                "text": "Text: "
+              }
+            },
+            "ServiceText": {
+              "manufacturing": {
+                "model": "Modell: ",
+                "material": "Material: ",
+                "postProcessings": "Nachbearbeitungen: ",
+                "manufacturer": "Hersteller: "
+              }
+            }
+          },
           "History": {
             "noHistory": "kein Verlauf vorhanden",
-            "accessedWhen": "Zugriff am:",
-            "contentID": "InhaltID:",
             "createdBy": "Erstellt von:",
             "createdWhen": "Erstellt am:",
             "data": "Daten:",
-            "dataID": "DatenID:",
-            "details": "Details:",
-            "type": "Typ:",
-            "updatedWhen": "Aktualisiert am:"
+            "type": "Typ:"
           }
         },
         "hooks": {},

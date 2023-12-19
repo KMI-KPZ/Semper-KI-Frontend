@@ -17,10 +17,9 @@ interface ReturnProps {
 }
 
 const useEvents = (): ReturnProps => {
-  const { missedEvents, socket } = useContext(EventContext);
+  const { events, socket, setEvents } = useContext(EventContext);
   const { reloadPermissions } = usePermissions();
 
-  const [events, setEvents] = useState<Event[]>(missedEvents);
   const queryClient = useQueryClient();
   const { handleNewProjectEvent, deleteProjectEvent } = useProjectEvent();
   const { handleNewOrgaEvent, deleteOrgaEvent } = useOrgaEvent();
@@ -81,6 +80,8 @@ const useEvents = (): ReturnProps => {
         break;
     }
   };
+
+  // logger("useEvents | events", events);
 
   return { socket, deleteEvent, events };
 };

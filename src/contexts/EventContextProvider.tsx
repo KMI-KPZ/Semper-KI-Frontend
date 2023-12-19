@@ -3,18 +3,20 @@ import { useEventsWebsocket } from "@/api/Events/useEventsWebsocket";
 import useUser, { UserType } from "@/hooks/useUser";
 import { Event } from "@/pages/App/types";
 import { AppLoadingSuspense } from "@component-library/index";
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useState } from "react";
 
 interface EventContextProviderProps {}
 
 export type EventContext = {
   socket: WebSocket | null;
-  missedEvents: Event[];
+  events: Event[];
+  setEvents: React.Dispatch<React.SetStateAction<Event[]>>;
 };
 
 export const EventContext = React.createContext<EventContext>({
   socket: null,
-  missedEvents: [],
+  events: [],
+  setEvents: () => {},
 });
 
 const EventContextProvider: React.FC<
@@ -24,6 +26,9 @@ const EventContextProvider: React.FC<
   const { user } = useUser();
   const { missedEventsQuery } = useEventsQuerys();
   const { socket } = useEventsWebsocket();
+  const [events, setEvents] = useState<Event[]>(
+    missedEventsQuery.data !== undefined ? missedEventsQuery.data : []
+  );
 
   if (
     (user.usertype !== UserType.ANONYM &&
@@ -35,8 +40,8 @@ const EventContextProvider: React.FC<
       <EventContext.Provider
         value={{
           socket,
-          missedEvents:
-            missedEventsQuery.data === undefined ? [] : missedEventsQuery.data,
+          events,
+          setEvents,
         }}
       >
         {children}

@@ -43,6 +43,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<ContractorSelectionFormData>({
     defaultValues: async () => ({

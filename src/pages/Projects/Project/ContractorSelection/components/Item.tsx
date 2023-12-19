@@ -49,7 +49,7 @@ const ProjectContractorSelectionItem: React.FC<
         contractorsQuery.data.length > 0 ? (
           contractorsQuery.data.map((manufacturer, _index) => (
             <label
-              className="flex w-full flex-row items-center justify-center gap-5 p-3 shadow-card"
+              className="flex w-full flex-row items-center justify-center gap-10 p-3 shadow-card"
               key={_index}
             >
               <input
@@ -58,9 +58,12 @@ const ProjectContractorSelectionItem: React.FC<
                   required: checkedProcesses.includes(process.processID),
                   disabled: !checkedProcesses.includes(process.processID),
                 })}
-                value={manufacturer.id}
+                value={manufacturer.hashedID}
               />
-              <Text variant="body">{manufacturer.name}</Text>
+              <Container direction="col" align="start">
+                <Text variant="body">{manufacturer.name}</Text>
+                <Text variant="body">{manufacturer.details.adress}</Text>
+              </Container>
             </label>
           ))
         ) : (
@@ -71,7 +74,7 @@ const ProjectContractorSelectionItem: React.FC<
                 required: true,
                 disabled: true,
               })}
-              value={""}
+              value=""
             />
             <Text variant="body">No manufacturers found</Text>
           </label>

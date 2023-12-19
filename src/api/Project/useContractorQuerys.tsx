@@ -8,7 +8,10 @@ interface ReturnProps {
 
 export interface ContractorProps {
   name: string;
-  id: string;
+  hashedID: string;
+  details: {
+    adress: string;
+  };
 }
 
 const useContractorsQuerys = (processID: string): ReturnProps => {

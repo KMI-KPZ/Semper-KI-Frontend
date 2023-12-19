@@ -22,7 +22,8 @@ export type LoginUserType =
   | "fakeAdmin";
 
 const useLogin = (): useLoginReturnProps => {
-  const { loginMutation, logoutMutation } = useLoginMutations();
+  const { loginMutation, logoutMutation, mockedLoginMutation } =
+    useLoginMutations();
 
   const login = (data: LoginMutationProps) => {
     loginMutation.mutate(data);
@@ -33,7 +34,7 @@ const useLogin = (): useLoginReturnProps => {
   };
 
   const mockedLogin = (userType: LoginUserType) => {
-    loginMutation.mutate({ userType, register: false });
+    mockedLoginMutation.mutate(userType);
   };
 
   return { login, logout, mockedLogin };

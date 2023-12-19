@@ -1,6 +1,6 @@
 import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
-import { LoginMutationProps } from "@/hooks/useLogin";
+import { LoginMutationProps, LoginUserType } from "@/hooks/useLogin";
 import {
   UseMutationResult,
   useMutation,
@@ -11,6 +11,7 @@ import { redirect, useLocation } from "react-router-dom";
 interface useLoginMutationsReturnProps {
   loginMutation: UseMutationResult<string, Error, LoginMutationProps, unknown>;
   logoutMutation: UseMutationResult<string, Error, void, unknown>;
+  mockedLoginMutation: UseMutationResult<string, Error, LoginUserType, unknown>;
 }
 
 const useLoginMutations = (): useLoginMutationsReturnProps => {
@@ -45,6 +46,25 @@ const useLoginMutations = (): useLoginMutationsReturnProps => {
     },
   });
 
+  const mockedLoginMutation = useMutation<string, Error, LoginUserType>({
+    mutationFn: async (UserType) => {
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/login/`;
+      return customAxios
+        .get(apiUrl, {
+          headers: {
+            UserType,
+          },
+        })
+        .then((response) => {
+          logger("useLoginMutations | mockedLoginMutation |", response);
+          return response.data;
+        });
+    },
+    onSuccess(data) {
+      window.location.href = data;
+    },
+  });
+
   const logoutMutation = useMutation<string, Error, void>({
     mutationFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/logout/`;
@@ -58,7 +78,7 @@ const useLoginMutations = (): useLoginMutationsReturnProps => {
     },
   });
 
-  return { loginMutation, logoutMutation };
+  return { loginMutation, logoutMutation, mockedLoginMutation };
 };
 
 export default useLoginMutations;

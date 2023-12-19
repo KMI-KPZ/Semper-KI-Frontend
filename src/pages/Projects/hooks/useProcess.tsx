@@ -37,6 +37,7 @@ interface ReturnProps {
 }
 
 export interface ProcessDetailsProps {
+  provisionalContractor?: string;
   title?: string;
 }
 
@@ -47,6 +48,7 @@ export type ProcessProps =
 
 export type DefaultProcessProps = {
   client: string;
+  contractor: string;
   processID: string;
   processStatus: ProcessStatus;
   processDetails: ProcessDetailsProps;
@@ -57,7 +59,6 @@ export type DefaultProcessProps = {
   updatedWhen: Date;
   files: FilesDescriptionProps[];
   messages: ChatMessageProps[];
-  contractor: string;
 };
 
 export type NoServiceProcessProps = {

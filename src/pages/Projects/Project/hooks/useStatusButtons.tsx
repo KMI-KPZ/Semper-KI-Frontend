@@ -38,7 +38,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
         const orgaIsAllowed =
           user.usertype !== UserType.ANONYM &&
           user.organization !== undefined &&
-          user.organization === process.contractor;
+          user.organization === process.processDetails.provisionalContractor;
         return orgaIsAllowed;
       case UserType.ADMIN:
         return user.usertype === UserType.ADMIN;

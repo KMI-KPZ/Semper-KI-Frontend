@@ -13,7 +13,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Container from "@component-library/Container";
 import { Navigate, useNavigate } from "react-router-dom";
-import useLogin, { LoginUserType, MockedUserType } from "@/hooks/useLogin";
+import useLogin, { LoginUserType } from "@/hooks/useLogin";
 interface Props {
   path?: string;
   userType?: UserType;
@@ -63,7 +63,7 @@ const Login: React.FC<Props> = (props) => {
     }));
   };
 
-  const handleOnClickButtonMockedLogin = (type: MockedUserType) => {
+  const handleOnClickButtonMockedLogin = (type: LoginUserType) => {
     mockedLogin(type);
   };
 
@@ -95,17 +95,17 @@ const Login: React.FC<Props> = (props) => {
           <Heading variant="h1">{t("Login.Login.admin")}</Heading>
           <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
             <Button
-              onClick={() => handleOnClickButtonMockedLogin("user")}
+              onClick={() => handleOnClickButtonMockedLogin("fakeUser")}
               title={t("Login.Login.buttons.user")}
               startIcon={<PersonIcon />}
             />
             <Button
-              onClick={() => handleOnClickButtonMockedLogin("organization")}
+              onClick={() => handleOnClickButtonMockedLogin("fakeOrganization")}
               title={t("Login.Login.buttons.orga")}
               startIcon={<PeopleIcon />}
             />
             <Button
-              onClick={() => handleOnClickButtonMockedLogin("admin")}
+              onClick={() => handleOnClickButtonMockedLogin("fakeAdmin")}
               title={t("Login.Login.buttons.admin")}
               startIcon={<AdminPanelSettingsIcon />}
             />

@@ -1,13 +1,6 @@
 import React, { ReactNode, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/Button";
-import CheckIcon from "@mui/icons-material/Check";
-import CancelIcon from "@mui/icons-material/Cancel";
-import ReplayIcon from "@mui/icons-material/Replay";
-import FactoryIcon from "@mui/icons-material/Factory";
-import DeleteForever from "@mui/icons-material/DeleteForever";
-import EditIcon from "@mui/icons-material/Edit";
-import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";

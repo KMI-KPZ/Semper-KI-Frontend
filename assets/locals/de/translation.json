@@ -874,6 +874,7 @@
         "useProjectState": {},
         "useScrollToProcess": {},
         "useStatusButtons": {
+          "SELECT_SERVICE": "Service auswählen",
           "EDIT": "Service bearbeiten",
           "DELETE": "Löschen",
           "CONTRACTOR_SELECTED": "Auftragnehmer auswählen",

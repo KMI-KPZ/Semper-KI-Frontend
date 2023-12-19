@@ -1,6 +1,6 @@
 import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
-import { LoginMutationProps, MockedUserType } from "@/hooks/useLogin";
+import { LoginMutationProps } from "@/hooks/useLogin";
 import {
   UseMutationResult,
   useMutation,
@@ -9,12 +9,6 @@ import {
 import { redirect, useLocation } from "react-router-dom";
 
 interface useLoginMutationsReturnProps {
-  mockedLoginMutation: UseMutationResult<
-    string,
-    Error,
-    MockedUserType,
-    unknown
-  >;
   loginMutation: UseMutationResult<string, Error, LoginMutationProps, unknown>;
   logoutMutation: UseMutationResult<string, Error, void, unknown>;
 }
@@ -26,24 +20,6 @@ const useLoginMutations = (): useLoginMutationsReturnProps => {
   const getReplacedSearchParam = () => {
     return search !== "" ? search.replace("?", "&") : "";
   };
-
-  const mockedLoginMutation = useMutation<string, Error, MockedUserType>({
-    mutationFn: async (usertype) => {
-      return customAxios
-        .get(`${process.env.VITE_HTTP_API_URL}/private/mockLogin/`, {
-          headers: {
-            Usertype: usertype,
-          },
-        })
-        .then((response) => {
-          logger("useLoginMutations | mockedLoginMutation |", response);
-          return response.data;
-        });
-    },
-    onSuccess(data) {
-      queryClient.invalidateQueries(["user"]);
-    },
-  });
 
   const loginMutation = useMutation<string, Error, LoginMutationProps>({
     mutationFn: async (props) => {
@@ -82,7 +58,7 @@ const useLoginMutations = (): useLoginMutationsReturnProps => {
     },
   });
 
-  return { mockedLoginMutation, loginMutation, logoutMutation };
+  return { loginMutation, logoutMutation };
 };
 
 export default useLoginMutations;

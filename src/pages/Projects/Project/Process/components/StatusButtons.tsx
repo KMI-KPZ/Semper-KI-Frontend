@@ -106,6 +106,9 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
       case "PRODUCTION":
         onClickButton(ProcessStatus.PRODUCTION);
         break;
+      case "SELECT_SERVICE":
+        onClickButton(ProcessStatus.DRAFT);
+        break;
     }
   };
 

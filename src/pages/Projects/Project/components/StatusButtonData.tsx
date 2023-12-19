@@ -14,9 +14,11 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import TaskIcon from "@mui/icons-material/Task";
 import ReplayIcon from "@mui/icons-material/Replay";
 import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import ScheduleSendIcon from "@mui/icons-material/ScheduleSend";
 
 export type StatusButtonTitleType =
+  | "SELECT_SERVICE"
   | "EDIT"
   | "DELETE"
   | "CONTRACTOR_SELECTED"
@@ -41,6 +43,12 @@ export interface StatusButtonProps {
 }
 
 export const statusButtonData: StatusButtonProps[] = [
+  {
+    title: "SELECT_SERVICE",
+    icon: <DesignServicesIcon />,
+    user: UserType.ADMIN,
+    allowedStates: [ProcessStatus.DRAFT],
+  },
   {
     title: "EDIT",
     icon: <EditIcon />,

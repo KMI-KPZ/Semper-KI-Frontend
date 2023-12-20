@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Button } from "@component-library/Button";
 
-import Chat from "./components/Chat";
+import ProcessChat from "./Chat/Chat";
 import StatusBar from "./StatusBar/StatusBar";
 import { useTranslation } from "react-i18next";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
@@ -147,7 +147,7 @@ const Process: React.FC<Props> = (props) => {
             closeModal={closeChat}
             className="flex w-full flex-col"
           >
-            <Chat
+            <ProcessChat
               chat={process.messages}
               user={user}
               closeMenu={closeChat}

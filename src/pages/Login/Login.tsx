@@ -12,8 +12,9 @@ import { UserSwitch } from "@/components/UserSwitch";
 import PeopleIcon from "@mui/icons-material/People";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Container from "@component-library/Container";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import useLogin, { LoginUserType } from "@/hooks/useLogin";
+import logger from "@/hooks/useLogger";
 interface Props {
   path?: string;
   userType?: UserType;
@@ -31,11 +32,14 @@ const Login: React.FC<Props> = (props) => {
   const { orga } = state;
   const { login, mockedLogin } = useLogin();
   const navigate = useNavigate();
+  const [queryParameters] = useSearchParams();
+  const redirectURL = queryParameters.get("redirectURL");
 
   const handleOnClickButtonLogin = () => {
     login({
       userType: orga ? "organization" : "user",
       register: false,
+      path: redirectURL !== null ? redirectURL : undefined,
     });
   };
   const handleOnClickButtonRegister = () => {
@@ -45,6 +49,7 @@ const Login: React.FC<Props> = (props) => {
       login({
         userType: "user",
         register: true,
+        path: redirectURL !== null ? redirectURL : undefined,
       });
     }
   };

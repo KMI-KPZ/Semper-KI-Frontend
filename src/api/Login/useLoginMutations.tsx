@@ -35,7 +35,7 @@ const useLoginMutations = (): useLoginMutationsReturnProps => {
           },
         })
         .then((response) => {
-          logger("useLoginMutations | loginMutation |", response);
+          logger("useLoginMutations | loginMutation |", response.data);
           return response.data;
         });
     },

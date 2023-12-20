@@ -10,7 +10,7 @@ import useProcess, {
 } from "@/pages/Projects/hooks/useProcess";
 import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 
-interface Props {
+interface ProcessChatProps {
   closeMenu(): void;
   chat: ChatMessageProps[];
   user: AuthorizedUserProps;
@@ -23,7 +23,7 @@ interface State {
   messageText?: string;
 }
 
-const Chat: React.FC<Props> = (props) => {
+const ProcessChat: React.FC<ProcessChatProps> = (props) => {
   const { t } = useTranslation();
   const { chat, user, closeMenu, projectID, processID } = props;
   const [state, setState] = useState<State>({});
@@ -151,4 +151,4 @@ const Chat: React.FC<Props> = (props) => {
   );
 };
 
-export default Chat;
+export default ProcessChat;

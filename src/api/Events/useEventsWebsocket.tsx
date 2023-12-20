@@ -26,27 +26,22 @@ export const useEventsWebsocket =
 
         ws.onopen = () => {
           setState("connected");
-          logger("useEventsWebsocket |  connected");
+          logger("useEventsWebsocket | connected");
         };
 
         ws.onerror = () => {
           setState("error");
-          logger("useEventsWebsocket |  error");
+          logger("useEventsWebsocket | error");
           // Attempt to reconnect after a delay
           scheduleReconnect();
         };
 
         ws.onclose = () => {
           setState("disconnected");
-          logger("useEventsWebsocket |  disconnected");
+          logger("useEventsWebsocket | disconnected");
           // Attempt to reconnect after a delay
           scheduleReconnect();
         };
-
-        // ws.onmessage = (event: MessageEvent) => {
-        //   // logger("useEventsWebsocket |  onmessage", event);
-        //   onMessage(event);
-        // };
 
         setSocket(ws);
       };

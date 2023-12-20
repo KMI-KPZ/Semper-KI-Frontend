@@ -1,8 +1,9 @@
 import { AppLoadingSuspense } from "@component-library/Loading";
 import React, { PropsWithChildren, createContext, useContext } from "react";
 import { UserContext } from "../contexts/UserContextProvider";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
+import logger from "@/hooks/useLogger";
 
 interface AuthorizedUserOutletProps {}
 
@@ -32,13 +33,14 @@ const AuthorizedUserRouteOutlet: React.FC<AuthorizedUserOutletProps> = (
 ) => {
   const {} = props;
   const { user, deleteUser } = useUser();
+  const { pathname } = useLocation();
 
   return user.usertype !== UserType.ANONYM ? (
     <AuthorizedUserContext.Provider value={{ user, deleteUser }}>
       <Outlet />
     </AuthorizedUserContext.Provider>
   ) : (
-    <Navigate to="/login" />
+    <Navigate to={`/login?redirectURL=${pathname}`} />
   );
 };
 

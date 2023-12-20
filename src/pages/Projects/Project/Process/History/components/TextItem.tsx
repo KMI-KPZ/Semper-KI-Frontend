@@ -15,8 +15,8 @@ const ProcessHistoryTextItem: React.FC<ProcessHistoryTextItemProps> = (
 
   return (
     <Container justify="between" direction="row" width="full">
-      <Text className=" break-all ">{name}</Text>
-      <Text>{data}</Text>
+      <Text className="">{name}</Text>
+      <Text className="break-all">{data}</Text>
     </Container>
   );
 };

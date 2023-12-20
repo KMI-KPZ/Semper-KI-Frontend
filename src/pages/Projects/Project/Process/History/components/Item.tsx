@@ -105,14 +105,7 @@ const ProcessHistoryItem: React.FC<ProcessHistoryItemProps> = (props) => {
     case ProcessHistoryType.DETAILS:
       return <ProcessHistoryServiceText service={item.data} />;
     case ProcessHistoryType.OTHER:
-      return (
-        <ProcessHistoryTextItem
-          name={t(
-            "Projects.Project.Process.History.components.Item.other.text"
-          )}
-          data={String(item.data)}
-        />
-      );
+      return <Text className="break-all">{String(item.data)}</Text>;
   }
 };
 

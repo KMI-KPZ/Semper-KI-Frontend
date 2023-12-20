@@ -822,7 +822,7 @@
           "material": "Material:",
           "postProcessing": "Nachbearbeitung:"
         },
-        "Buttons": {
+        "StatusButtons": {
           "button": {
             "new": "Neuer Teilauftrag",
             "edit": "Bearbeiten",
@@ -889,7 +889,10 @@
           "PRODUCTION": "Produktion starten",
           "DELIVERY": "Lieferung starten",
           "COMPLETED": "Auftrag abschließen",
-          "REPROJECT": "erneut Bestellen"
+          "REPROJECT": "erneut Bestellen",
+          "buttons": {
+            "confirmAll": "Wollen Sie wirklich alle ausgewählten Prozesse {{title}}?"
+          }
         }
       },
       "Process": {

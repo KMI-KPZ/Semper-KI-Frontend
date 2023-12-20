@@ -9,7 +9,7 @@ import {
   LoadingAnimation,
   LoadingSuspense,
 } from "@component-library/index";
-import ProjectButtons from "./components/Buttons";
+import ProjectButtons from "./components/StatusButtons";
 import { ProjectProps, useProject } from "../hooks/useProject";
 import Container from "@component-library/Container";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";

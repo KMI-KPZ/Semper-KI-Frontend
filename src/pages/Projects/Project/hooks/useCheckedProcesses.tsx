@@ -4,6 +4,7 @@ import { ProjectContext } from "../../context/ProjectContext";
 
 interface useCheckedProcessesReturnProps {
   checkedProcesses: string[];
+  setCheckedProcesses: React.Dispatch<React.SetStateAction<string[]>>;
   handleOnChangeCheckboxSelect: (
     e: React.ChangeEvent<HTMLInputElement>,
     processID: string
@@ -48,6 +49,7 @@ const useCheckedProcesses = (): useCheckedProcessesReturnProps => {
 
   return {
     checkedProcesses,
+    setCheckedProcesses,
     handleOnChangeCheckboxSelect,
     handleOnChangeCheckboxSelectAll,
   };

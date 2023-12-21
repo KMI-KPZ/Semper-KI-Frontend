@@ -83,7 +83,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
               element={
                 <>
                   <Project />
-                  {/* <ProcessChat/> */}
+                  <ProcessChat />
                 </>
               }
             />

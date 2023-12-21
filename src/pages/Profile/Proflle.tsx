@@ -8,14 +8,14 @@ import Modal from "@component-library/Modal";
 import ProfileForm from "./components/Form";
 import Container from "@component-library/Container";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { AuthorizedUserContext } from "@/routeOutlets/AuthorizedUserOutlet";
+import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 
 interface Props {}
 
 const Profile: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const {} = props;
-  const { user, deleteUser } = useContext(AuthorizedUserContext);
+  const { user, deleteUser } = useAuthorizedUser();
   const [edit, setEdit] = useState(false);
 
   const handleOnClickButtonDelete = () => {

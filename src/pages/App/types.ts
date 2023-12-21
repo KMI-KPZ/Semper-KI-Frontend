@@ -9,7 +9,7 @@ export interface ProjectEvent {
 
 export interface ProjectEventItem {
   processID: string;
-  status: number;
+  processStatus: number;
   messages: number;
 }
 

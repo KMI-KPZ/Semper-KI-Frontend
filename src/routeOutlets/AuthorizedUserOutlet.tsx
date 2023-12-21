@@ -2,7 +2,11 @@ import { AppLoadingSuspense } from "@component-library/Loading";
 import React, { PropsWithChildren, createContext, useContext } from "react";
 import { UserContext } from "../contexts/UserContextProvider";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
+import useUser, {
+  AuthorizedUserProps,
+  UserDetailsProps,
+  UserType,
+} from "@/hooks/useUser";
 import logger from "@/hooks/useLogger";
 
 interface AuthorizedUserOutletProps {}
@@ -10,6 +14,7 @@ interface AuthorizedUserOutletProps {}
 export type AuthorizedUserContext = {
   user: AuthorizedUserProps;
   deleteUser(): void;
+  updateUserDetails: (details: UserDetailsProps) => void;
 };
 
 export const AuthorizedUserContext = createContext<AuthorizedUserContext>({
@@ -26,17 +31,20 @@ export const AuthorizedUserContext = createContext<AuthorizedUserContext>({
     usertype: 0,
   },
   deleteUser: () => {},
+  updateUserDetails: () => {},
 });
 
 const AuthorizedUserRouteOutlet: React.FC<AuthorizedUserOutletProps> = (
   props
 ) => {
   const {} = props;
-  const { user, deleteUser } = useUser();
+  const { user, deleteUser, updateUserDetails } = useUser();
   const { pathname } = useLocation();
 
   return user.usertype !== UserType.ANONYM ? (
-    <AuthorizedUserContext.Provider value={{ user, deleteUser }}>
+    <AuthorizedUserContext.Provider
+      value={{ user, deleteUser, updateUserDetails }}
+    >
       <Outlet />
     </AuthorizedUserContext.Provider>
   ) : (

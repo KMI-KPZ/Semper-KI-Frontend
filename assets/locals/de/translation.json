@@ -363,7 +363,7 @@
           },
           "useProjectEvent": {
             "toast": {
-              "status": "Ihre Aufträge wurde aktualisiert",
+              "status": "Prozessstatus wurde aktualisiert",
               "message": "Neue Nachricht"
             }
           },
@@ -884,14 +884,14 @@
           "CLARIFICATION": "Rückfragen",
           "CONFIRMED_BY_CONTRACTOR": "Angebot erstellen",
           "REJECTED_BY_CONTRACTOR": "Anfage ablehnen",
-          "CONFIRMED_BY_CLIENT": "Angeot bestätigen",
+          "CONFIRMED_BY_CLIENT": "Angebot bestätigen",
           "REJECTED_BY_CLIENT": "Angebot ablehnen",
           "PRODUCTION": "Produktion starten",
           "DELIVERY": "Lieferung starten",
           "COMPLETED": "Auftrag abschließen",
           "REPROJECT": "erneut Bestellen",
           "buttons": {
-            "confirmAll": "Wollen Sie wirklich alle ausgewählten Prozesse {{title}}?"
+            "confirmAll": "Wollen Sie wirklich alle betroffene Prozesse {{title}}?"
           }
         }
       },

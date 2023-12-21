@@ -7,6 +7,7 @@ import useProcessMutations, {
 } from "@/api/Process/useProcessMutations";
 import { DownloadFilesZIPProps } from "./useProcess";
 import { MutateOptions } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface useGeneralProcessReturnProps {
   createProcess: () => void;
@@ -37,6 +38,8 @@ const useGeneralProcess = (): useGeneralProcessReturnProps => {
     deleteFileMutation,
     downloadZIPMutation,
   } = useProcessMutations();
+  const navigate = useNavigate();
+  const { processID } = useParams();
 
   const createProcess = () => {
     createProcessMutation.mutate();
@@ -67,6 +70,10 @@ const useGeneralProcess = (): useGeneralProcessReturnProps => {
     options?: MutateOptions<Blob, Error, DownloadZIPMutationProps, unknown>
   ) => {
     downloadZIPMutation.mutate(props, options);
+  };
+
+  const processNavigate = (path: string, processID: string) => {
+    navigate(`${processID === undefined ? `${processID}/` : ""}${path}`);
   };
 
   return {

@@ -15,6 +15,7 @@ import {
   UpdateProcessMutationProps,
 } from "@/api/Process/useProcessMutations";
 import useGeneralProcess from "./useGeneralProcess";
+import { useNavigate } from "react-router-dom";
 
 interface ReturnProps {
   process: ProcessProps;
@@ -34,6 +35,7 @@ interface ReturnProps {
     options?: MutateOptions<Blob, Error, DownloadZIPMutationProps, unknown>
   ) => void;
   deleteFile: (fileID: string) => void;
+  processNavigate: (path: string) => void;
 }
 
 export interface ProcessDetailsProps {
@@ -173,6 +175,7 @@ interface ProcessQueryProps {
 
 const useProcess = (): ReturnProps => {
   const { process } = useContext(ProcessContext);
+  const navigate = useNavigate();
   const {
     createProcess,
     updateProcess: _updateProcess,
@@ -225,7 +228,12 @@ const useProcess = (): ReturnProps => {
     _deleteFile({ processID: process.processID, fileID });
   };
 
+  const processNavigate = (path: string) => {
+    navigate(path);
+  };
+
   return {
+    processNavigate,
     process,
     createProcess,
     deleteFile,

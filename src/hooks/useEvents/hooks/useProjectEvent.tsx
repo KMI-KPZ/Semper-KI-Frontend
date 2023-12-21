@@ -33,11 +33,11 @@ export const getProjectEventAmount = (
         )
           count += projectEvent.messages;
         if (
-          projectEvent.status !== undefined &&
-          projectEvent.status > 0 &&
+          projectEvent.processStatus !== undefined &&
+          projectEvent.processStatus > 0 &&
           (type === "status" || type === undefined)
         )
-          count += projectEvent.status;
+          count += projectEvent.processStatus;
       });
     });
   return count > 0 ? count : undefined;
@@ -62,10 +62,12 @@ const addProjectEventItemStatus = (
   newEvent: ProjectEventItem | undefined
 ): number => {
   if (oldEvent === undefined && newEvent === undefined) return 0;
-  if (oldEvent === undefined && newEvent !== undefined) return newEvent.status;
-  if (newEvent === undefined && oldEvent !== undefined) return oldEvent.status;
+  if (oldEvent === undefined && newEvent !== undefined)
+    return newEvent.processStatus;
+  if (newEvent === undefined && oldEvent !== undefined)
+    return oldEvent.processStatus;
   if (oldEvent !== undefined && newEvent !== undefined) {
-    return oldEvent.status + newEvent.status;
+    return oldEvent.processStatus + newEvent.processStatus;
   }
 
   return 0;
@@ -210,9 +212,12 @@ const useProjectEvent = (): ReturnProps => {
       projectEventItem = {
         ...projectEventItem,
         messages: type === "message" ? 0 : projectEventItem.messages,
-        status: type === "status" ? 0 : projectEventItem.status,
+        processStatus: type === "status" ? 0 : projectEventItem.processStatus,
       };
-      if (projectEventItem.messages === 0 && projectEventItem.status === 0) {
+      if (
+        projectEventItem.messages === 0 &&
+        projectEventItem.processStatus === 0
+      ) {
         projectEventItem = undefined;
       } else {
         newProjectEventItems.push(projectEventItem);
@@ -242,10 +247,10 @@ const useProjectEvent = (): ReturnProps => {
     if (projectEvent.processes[0].messages > 0) {
       toast(
         t("App.hooks.useEvents.hooks.useProjectEvent.toast.message"),
-        `/projects/${newEvent.projectID}/${projectEvent.processes[0].processID}`
+        `/projects/${newEvent.projectID}/${projectEvent.processes[0].processID}/chat`
       );
     }
-    if (projectEvent.processes[0].status > 0) {
+    if (projectEvent.processes[0].processStatus > 0) {
       toast(
         t("App.hooks.useEvents.hooks.useProjectEvent.toast.status"),
         `/projects/${newEvent.projectID}/${projectEvent.processes[0].processID}`

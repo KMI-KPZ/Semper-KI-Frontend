@@ -70,12 +70,6 @@ const Process: React.FC<Props> = (props) => {
     });
   };
 
-  const closeChat = () => {
-    setState((prevState) => ({
-      ...prevState,
-      chatOpen: false,
-    }));
-  };
   const closeInfo = () => {
     setState((prevState) => ({
       ...prevState,
@@ -135,24 +129,6 @@ const Process: React.FC<Props> = (props) => {
         <ProjectFile process={process} projectID={projectID} />
         <Upload mutation={uploadFilesMutation} icon multiple></Upload>
       </PermissionGate>
-      {user.usertype !== UserType.ANONYM ? (
-        <PermissionGate element="Chat">
-          <Modal
-            title="Chat"
-            open={state.chatOpen}
-            closeModal={closeChat}
-            className="flex w-full flex-col"
-          >
-            <ProcessChat
-              chat={process.messages}
-              user={user}
-              closeMenu={closeChat}
-              projectID={projectID}
-              processID={process.processID}
-            />
-          </Modal>
-        </PermissionGate>
-      ) : null}
       <Modal
         title="ProcessInfo"
         open={state.infoOpen}

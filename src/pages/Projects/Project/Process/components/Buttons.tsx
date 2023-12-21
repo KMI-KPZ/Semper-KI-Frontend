@@ -22,6 +22,7 @@ import useEvents from "@/hooks/useEvents/useEvents";
 import { EventContext } from "@/contexts/EventContextProvider";
 import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 import HistoryIcon from "@mui/icons-material/History";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface ProcessButtonsProps {
   user: UserProps;
@@ -37,8 +38,9 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
     props;
   const { t } = useTranslation();
   const { deleteEvent } = useEvents();
+  const { processID } = useParams();
   const { deleteProcess, updateProcess } = useGeneralProcess();
-  const { project } = useContext(ProjectContext);
+  const navigate = useNavigate();
   const { getDeleteProjectEvent } = useProjectEventChange(
     process,
     projectID,
@@ -95,7 +97,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
 
   const handleOnClickButtonChat = () => {
     deleteEvent(getDeleteProjectEvent("message"));
-    setState((prevState) => ({ ...prevState, chatOpen: true }));
+    navigate(`${processID === undefined ? `${process.processID}/` : ""}chat`);
   };
 
   const closeMenu = () => {

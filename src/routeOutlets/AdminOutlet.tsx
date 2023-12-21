@@ -3,16 +3,11 @@ import { Error } from "@/pages/Error/Error";
 import { createContext, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Outlet } from "react-router-dom";
-import { AuthorizedUserContext } from "./AuthorizedUserOutlet";
-import { UseQueryResult } from "@tanstack/react-query";
-import {
-  AdminFlatProjectProps,
-  AdminProps,
-  OrganizationProps,
-} from "@/pages/Admin/hooks/useAdmin";
+import { OrganizationProps } from "@/pages/Admin/hooks/useAdmin";
 import useAdminQuerys from "@/api/Admin/useAdminQuerys";
 import { LoadingAnimation } from "@component-library/index";
 import { FlatProjectProps } from "@/api/Project/useFlatProjectQuerys";
+import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 
 interface Props {}
 
@@ -29,7 +24,7 @@ export const AdminContext = createContext<AdminContext>({
 });
 
 export const AdminRouteOutlet: React.FC<Props> = (props) => {
-  const { user } = useContext(AuthorizedUserContext);
+  const { user } = useAuthorizedUser();
   const { t } = useTranslation();
   const { adminQuery, adminFlatProjectsQuery: adminProjectsQuery } =
     useAdminQuerys();

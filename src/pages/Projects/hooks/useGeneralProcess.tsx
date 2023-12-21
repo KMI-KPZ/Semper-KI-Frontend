@@ -26,6 +26,7 @@ interface useGeneralProcessReturnProps {
     props: DownloadFilesZIPProps,
     options?: MutateOptions<Blob, Error, DownloadZIPMutationProps, unknown>
   ) => void;
+  getNavigationPrefix: (currentProcessID: string) => string;
 }
 
 const useGeneralProcess = (): useGeneralProcessReturnProps => {
@@ -72,11 +73,12 @@ const useGeneralProcess = (): useGeneralProcessReturnProps => {
     downloadZIPMutation.mutate(props, options);
   };
 
-  const processNavigate = (path: string, processID: string) => {
-    navigate(`${processID === undefined ? `${processID}/` : ""}${path}`);
+  const getNavigationPrefix = (currentProcessID: string) => {
+    return processID === undefined ? `${currentProcessID}/` : "";
   };
 
   return {
+    getNavigationPrefix,
     createProcess,
     deleteFile,
     deleteProcess,

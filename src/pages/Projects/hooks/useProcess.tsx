@@ -35,7 +35,7 @@ interface ReturnProps {
     options?: MutateOptions<Blob, Error, DownloadZIPMutationProps, unknown>
   ) => void;
   deleteFile: (fileID: string) => void;
-  processNavigate: (path: string) => void;
+  getNavigationPrefix: () => string;
 }
 
 export interface ProcessDetailsProps {
@@ -184,6 +184,7 @@ const useProcess = (): ReturnProps => {
     downloadFile: _downloadFile,
     downloadZIP: _downloadZIP,
     deleteFile: _deleteFile,
+    getNavigationPrefix: _getNavigationPrefix,
   } = useGeneralProcess();
 
   const updateProcess = (
@@ -228,12 +229,12 @@ const useProcess = (): ReturnProps => {
     _deleteFile({ processID: process.processID, fileID });
   };
 
-  const processNavigate = (path: string) => {
-    navigate(path);
+  const getNavigationPrefix = (): string => {
+    return _getNavigationPrefix(process.processID);
   };
 
   return {
-    processNavigate,
+    getNavigationPrefix,
     process,
     createProcess,
     deleteFile,

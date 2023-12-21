@@ -39,7 +39,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
   const { t } = useTranslation();
   const { deleteEvent } = useEvents();
   const { processID } = useParams();
-  const { deleteProcess, updateProcess } = useGeneralProcess();
+  const { deleteProcess, getNavigationPrefix } = useGeneralProcess();
   const navigate = useNavigate();
   const { getDeleteProjectEvent } = useProjectEventChange(
     process,
@@ -97,7 +97,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
 
   const handleOnClickButtonChat = () => {
     deleteEvent(getDeleteProjectEvent("message"));
-    navigate(`${processID === undefined ? `${process.processID}/` : ""}chat`);
+    navigate(`${getNavigationPrefix(process.processID)}chat`);
   };
 
   const closeMenu = () => {

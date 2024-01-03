@@ -13,22 +13,22 @@ The user interface of the Semper-KI Frontend is designed to be intuitive and use
 To download the Semper-KI Frontend files, follow these steps:
 
 1. Clone the repository: `git clone git@github.com:KMI-KPZ/Frontend.git`
-2. Navigate to the project directory: `cd Semper-KI-Frontend`
 
 ## Local Development Server
 
 To run the Semper-KI Frontend locally in development mode, use the following commands:
 
+1. Make sure Node.js and yarn is installed on your System.
 1. Install dependencies: `yarn install`
-2. Start the development server: `yarn start`
-3. The development server is runnning on: `http://127.0.0.1:3000/`
+1. Start the development server: `yarn start`
+1. The development server is runnning on: `http://127.0.0.1:3000/`
 
 ## Dockerized Servers
 
 To run the Semper-KI Frontend using Docker, follow these steps:
 
 1. Make sure Docker is installed on your System.
-2. Navigate to the project directory: `cd Semper-KI-Frontend`
+2. Navigate to the project directory
 
 ### Development
 
@@ -37,12 +37,19 @@ Start the development container with HMR
 1. Start the development container: `docker compose -f "docker-compose.dev.yml" up -d --build`
 2. The development server is exposed on: `http://127.0.0.1:3000/`
 
-### Production / Staging
+### Production
 
-Start the production/staging container without HMR
+Start the production container without HMR
 
-1. Start the production/staging container: `docker compose -f "docker-compose.prod.yml" up -d --build` / `docker compose -f "docker-compose.staging.yml" up -d --build`
-2. The production/staging server is exposed on: `http://127.0.0.1:3001/` / `http://127.0.0.1:3000/`
+1. Start the production container: `docker compose -f "docker-compose.prod.yml" up -d --build`
+2. The production server is exposed on: `http://127.0.0.1:3001/`
+
+### Staging
+
+Start the staging container without HMR
+
+1. Start the staging container: `docker compose -f "docker-compose.staging.yml" up -d --build`
+2. The staging server is exposed on: `http://127.0.0.1:3000/`
 
 ## Connection to Backend
 

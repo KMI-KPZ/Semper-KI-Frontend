@@ -187,8 +187,8 @@ const Breadcrumb: React.FC<Props> = () => {
         <React.Fragment key={index}>
           <span>{" > "}</span>
           <Button
-            size="xs"
-            variant="text"
+            size="sm"
+            variant="secondary"
             title={
               item.tname !== undefined
                 ? t(`data.NavigationItem.${item.tname}`)

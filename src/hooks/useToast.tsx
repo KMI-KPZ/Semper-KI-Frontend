@@ -9,7 +9,7 @@ export const toast = (title: string, to?: string): void => {
       <Text variant="body">{title}</Text>
       {to !== undefined ? (
         <Button
-          variant="text"
+          variant="secondary"
           title={to}
           to={to}
           children={<ArrowForwardIcon />}

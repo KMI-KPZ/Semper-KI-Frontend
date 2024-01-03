@@ -43,6 +43,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
                 <Button
                   title={t("Home.components.Projects.button.new")}
                   onClick={handleOnClickButtonDemo}
+                  variant="primary"
                 />
                 <Button
                   title={t("Home.components.Projects.button.continue")}
@@ -66,6 +67,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
               <Button
                 title={t("Home.components.Projects.button.new")}
                 onClick={handleOnClickButtonNew}
+                variant="primary"
               />
             </PermissionGate>
             <PermissionGate element={"ProjectsButton"}>

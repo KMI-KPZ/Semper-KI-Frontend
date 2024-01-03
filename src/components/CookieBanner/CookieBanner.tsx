@@ -84,19 +84,19 @@ const CookieBanner: React.FC<CookieBannerProps> = (props) => {
           extern
           title={t("components.CookieBanner.link.cookiePolicy")}
           to={URL_Cookies}
-          variant="link"
+          variant="secondary"
         />
         <Button
           extern
           title={t("components.CookieBanner.link.dataProtection")}
           to={URL_Datenschutz}
-          variant="link"
+          variant="secondary"
         />
         <Button
           extern
           title={t("components.CookieBanner.link.imprint")}
           to={URL_Impressum}
-          variant="link"
+          variant="secondary"
         />
       </div>
     </div>

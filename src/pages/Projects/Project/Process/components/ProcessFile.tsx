@@ -84,7 +84,7 @@ const ProjectFile: React.FC<Props> = (props) => {
                 <Container>
                   <Button
                     size="sm"
-                    variant="icon"
+                    variant="secondary"
                     onClick={() => hanleOnClickButtonDelete(file)}
                     children={<DeleteIcon />}
                     loading={loadingFileID === file.id}
@@ -94,7 +94,7 @@ const ProjectFile: React.FC<Props> = (props) => {
                   />
                   <Button
                     size="sm"
-                    variant="icon"
+                    variant="secondary"
                     onClick={() => handleOnClickButtonDownloadFile(file)}
                     children={<DownloadIcon />}
                     loading={loadingFileID === file.id}

@@ -30,7 +30,7 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
         <PermissionGate element={`ProjectButton${button.title}`} key={index}>
           <Button
             key={index}
-            variant="icon"
+            variant="secondary"
             size="sm"
             startIcon={button.icon}
             onClick={() => handleOnClickButtonCount(button)}

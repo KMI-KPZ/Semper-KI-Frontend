@@ -98,7 +98,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
           {selectedProjects.length > 0 ? (
             <PermissionGate element={"ProjectsButtonDeleteSelected"}>
               <Button
-                variant="icon"
+                variant="secondary"
                 size="sm"
                 startIcon={<DeleteIcon />}
                 onClick={handleOnClickButtonDeleteSelected}

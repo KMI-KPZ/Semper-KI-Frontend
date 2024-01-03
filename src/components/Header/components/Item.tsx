@@ -56,12 +56,13 @@ const HeaderItem: React.FC<Props> = (props) => {
       title={headeritem.title}
     >
       <Button
-        width={!isMenuItem ? "full" : "fit"}
-        align={!isMenuItem ? "start" : "center"}
+        className={`${
+          !isMenuItem ? "w-full justify-start" : "w-fit justify-center"
+        }`}
         size="sm"
         to={headeritem.link}
         onClick={handleOnClickButton}
-        variant="text"
+        variant="tertiary"
         title={t(`data.NavigationItem.${headeritem.title}`)}
         startIcon={
           badge !== undefined && badge > 0 ? (

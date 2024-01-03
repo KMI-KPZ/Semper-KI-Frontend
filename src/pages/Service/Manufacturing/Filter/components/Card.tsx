@@ -45,7 +45,7 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
           )} ${getCountOfChecktItems()}`}
         </Heading>
         <Button
-          variant="icon"
+          variant="secondary"
           title={t("Service.Manufacturing.Filter.components.Card.buttons.open")}
           onClick={(e) => handleOnClickMenuOpen(e, category, categoryIndex)}
           children={

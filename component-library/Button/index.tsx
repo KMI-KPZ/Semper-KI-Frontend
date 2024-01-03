@@ -1,7 +1,6 @@
 import React, { PropsWithChildren, ReactNode } from "react";
 import LoopIcon from "@mui/icons-material/Loop";
 import { useNavigate } from "react-router-dom";
-import logger from "@/hooks/useLogger";
 import { twMerge } from "tailwind-merge";
 
 interface ButtonProps {
@@ -9,7 +8,6 @@ interface ButtonProps {
   to?: string;
   onClick?(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
   size?: ButtonSize;
-  align?: ButtonAlign;
   variant?: ButtonVariant;
   width?: ButtonWidth;
   direction?: ButtonDirection;
@@ -22,28 +20,19 @@ interface ButtonProps {
   testid?: string;
   target?: "_blank" | "_self" | "_parent" | "_top";
 }
-type ButtonSize = "sm" | "xs" | "md" | "lg" | "xl";
-type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "outline"
-  | "text"
-  | "light"
-  | "link"
-  | "icon";
+type ButtonSize = "sm" | "md" | "lg";
+type ButtonVariant = "primary" | "secondary" | "tertiary";
 type ButtonWidth = "fit" | "full" | "auto";
-type ButtonAlign = "start" | "center" | "end";
 type ButtonDirection = "col" | "row";
 
 export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
   const {
     active = true,
     size = "md",
-    variant = "primary",
+    variant = "secondary",
     loading = false,
     width = "auto",
     className = "",
-    align = "center",
     direction = "row",
     testid = "",
     extern = false,
@@ -73,98 +62,77 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
   };
 
   const getClassNameWidth = (): string => {
+    let className = "";
     switch (width) {
       case "full":
-        return "w-full";
+        className = "w-full";
+        break;
       case "fit":
-        return "w-fit";
+        className = "w-fit";
+        break;
       case "auto":
-        return "w-full md:w-fit";
+        className = "w-full md:w-fit";
+        break;
     }
+    return className;
   };
 
   const getClassNameVariant = (): string => {
+    let className = "";
     switch (variant) {
       case "primary":
-        switch (active) {
-          case true:
-            return "bg-grau-50 hover:bg-grau-100 text-black hover:cursor-pointer shadow-button hover:shadow-button-inner focus:shadow-button-inner";
-          case false:
-            return "bg-grau-600 text-white hover:cursor-default";
-        }
+        if (active)
+          className =
+            "bg-blau-600 border-blau-700 border-2  text-white hover:cursor-pointer shadow-button-primary hover:shadow-button-inner-primary  focus:shadow-button-inner-primary ";
+        else
+          className =
+            "bg-slate-500 border-2 border-slate-700 text-slate-100 hover:cursor-default shadow-button-inner-primary";
+        break;
       case "secondary":
-        switch (active) {
-          case true:
-            return "hover:bg-türkis-300 bg-slate-200 text-black hover:cursor-pointer";
-          case false:
-            return "bg-grau-300 hover:bg-grau-200 text-white hover:cursor-default";
-        }
-      case "outline":
-        return "text-black bg-slate-200 md:bg-inherit hover:shadow-inner-border hover:shadow-türkis-300 hover:cursor-pointer";
-      case "text":
-        switch (active) {
-          case true:
-            return "hover:cursor-pointer hover:text-türkis";
-          case false:
-            return "hover:cursor-pointer text-türkis hover:text-inherit";
-        }
-      case "light":
-        switch (active) {
-          case true:
-            return "hover:text-türkis text-grau-400 font-bold";
-          case false:
-            return "text-grau-400 font-bold";
-        }
-      case "link":
-        return "hover:text-blau underline";
-      case "icon":
-        switch (active) {
-          case true:
-            return "hover:text-türkis bg-slate-200";
-          case false:
-            return "hover:text-türkis bg-slate-200 text-slate-400 hover:cursor-default";
-        }
+        if (active)
+          className =
+            "bg-slate-50 border-2 border-slate-300 text-black hover:cursor-pointer shadow-button-secondary hover:shadow-button-inner-secondary  focus:shadow-button-inner-secondary";
+        else
+          className =
+            " bg-slate-200 border-2 border-slate-400 text-slate-700 hover:cursor-default shadow-button-inner-secondary";
+        break;
+      case "tertiary":
+        if (active)
+          className =
+            " text-black hover:cursor-pointer hover:scale-105 focus:scale-105 scale-100";
+        else className = "text-slate-600  hover:cursor-default";
+        break;
     }
+    return className;
   };
 
   const getClassNameSize = (): string => {
+    let className = "";
     switch (size) {
-      case "xs":
-        return "py-1 px-2";
-      // return "px-3 py-2 md:py-1 md:px-2";
       case "sm":
-        return "py-2 px-3";
-      // return "px-4 py-3 md:py-2 md:px-3";
+        className = "py-2 px-3";
+        break;
       case "md":
-        return "py-2 px-4";
-      // return "px-5 py-4 md:py-2 md:px-4";
+        className = "py-3 px-4";
+        break;
       case "lg":
-        return "py-3 px-5";
-      // return "px-6 py-5 md:py-3 md:px-5";
-      case "xl":
-        return ":py-4 px-6";
-      // return "px-7 py-6 md:py-4 md:px-6";
+        className = "py-4 px-5";
+        break;
     }
-  };
-
-  const getClassNameAlign = (): string => {
-    switch (align) {
-      case "start":
-        return "justify-start";
-      case "center":
-        return "justify-center";
-      case "end":
-        return "justify-end";
-    }
+    return className;
   };
 
   const getClassNameDirection = (): string => {
+    let className = "";
     switch (direction) {
       case "col":
-        return "flex-col";
+        className = "flex-col";
+        break;
       case "row":
-        return "flex-row";
+        className = "flex-row";
+        break;
     }
+    return className;
   };
 
   const getTitle = (): string => {
@@ -178,16 +146,17 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     <a
       title={getTitle()}
       className={twMerge(
-        `bezier group flex h-fit flex-wrap items-center 
-         justify-center gap-3 break-words rounded-lg
-         text-center transition
-         duration-200 
-         md:flex-nowrap md:whitespace-nowrap
+        ` bezier group flex
+          h-fit flex-wrap
+          items-center justify-center 
+          gap-3 break-words 
+          rounded-lg text-center
+          transition duration-200 
+          md:flex-nowrap md:whitespace-nowrap
          `,
         getClassNameVariant(),
         getClassNameSize(),
         getClassNameWidth(),
-        getClassNameAlign(),
         getClassNameDirection(),
         className
       )}
@@ -195,6 +164,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       href={to !== undefined ? to : title}
       data-testid={testid}
       target={target}
+      tabIndex={active ? undefined : -1}
     >
       {loading === true ? (
         <div className="animate-spin">

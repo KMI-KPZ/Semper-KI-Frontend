@@ -52,7 +52,7 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = (props) => {
             resourcesMenuItem.title
           }`}
           to={resourcesMenuItem.to}
-          variant={isActive(resourcesMenuItem.to) ? "light" : "text"}
+          variant={isActive(resourcesMenuItem.to) ? "primary" : "secondary"}
         />
       ))}
     </nav>

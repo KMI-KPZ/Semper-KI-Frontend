@@ -113,7 +113,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
   return (
     <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:flex-nowrap">
       <Button
-        variant="icon"
+        variant="secondary"
         width="fit"
         size="sm"
         children={<InfoIcon />}
@@ -121,7 +121,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
         title={t("Projects.Project.Process.components.Buttons.button.info")}
       />
       <Button
-        variant="icon"
+        variant="secondary"
         width="fit"
         size="sm"
         children={<HistoryIcon />}
@@ -136,7 +136,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
           projectEvent.messages > 0 ? (
             <Badge count={projectEvent.messages}>
               <Button
-                variant="icon"
+                variant="secondary"
                 width="fit"
                 size="sm"
                 children={<MailIcon />}
@@ -148,7 +148,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
             </Badge>
           ) : (
             <Button
-              variant="icon"
+              variant="secondary"
               width="fit"
               size="sm"
               children={<MailIcon />}
@@ -164,7 +164,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
       shouldRenderFor("CLIENT") ? (
         <PermissionGate element="ProcessButtonDelete">
           <Button
-            variant="icon"
+            variant="secondary"
             width="fit"
             size="sm"
             children={<DeleteIcon />}
@@ -179,7 +179,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
       shouldRenderFor("CLIENT") ? (
         <PermissionGate element="ProcessButtonReProject">
           <Button
-            variant="icon"
+            variant="secondary"
             width="fit"
             size="sm"
             children={<ReplayIcon />}

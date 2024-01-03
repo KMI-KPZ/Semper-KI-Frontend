@@ -56,7 +56,6 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
     <div className="flex max-h-80 w-full flex-col gap-2 overflow-auto bg-slate-100 p-2 md:absolute md:top-12">
       <Button
         children={<ExpandLessIcon />}
-        align="center"
         title={t("Resources.Printers.form.button.close")}
         variant="secondary"
         width="full"
@@ -75,7 +74,6 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
               )
               .map((printer, index) => (
                 <Button
-                  align="start"
                   key={index}
                   title={printer.title}
                   variant="secondary"
@@ -86,7 +84,6 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
           : t("Resources.Printers.form.empty")}
       </LoadingSuspense>
       <Button
-        align="start"
         title={t("Resources.Printers.form.button.new")}
         variant="secondary"
         width="full"

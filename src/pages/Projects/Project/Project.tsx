@@ -133,7 +133,7 @@ const Project: React.FC<Props> = (props) => {
         </Text>
         <Container direction="row" wrap="wrap">
           <Button
-            variant="icon"
+            variant="secondary"
             width="fit"
             size="sm"
             children={<InfoIcon />}
@@ -143,7 +143,7 @@ const Project: React.FC<Props> = (props) => {
           <PermissionGate element={"ProjectButtonDELETE"}>
             <Button
               width="fit"
-              variant="icon"
+              variant="secondary"
               size="sm"
               children={<DeleteIcon />}
               title={t("Projects.Project.Project.button.delete")}
@@ -187,7 +187,7 @@ const Project: React.FC<Props> = (props) => {
           />
           <PermissionGate element={"ProjectButtonNew"}>
             <Button
-              variant="icon"
+              variant="secondary"
               size="sm"
               startIcon={<AddIcon />}
               onClick={onButtonClickCreateProcess}

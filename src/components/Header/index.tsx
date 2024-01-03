@@ -125,7 +125,7 @@ export const Header: React.FC<Props> = (props) => {
             onClick={openLanguageMenu}
           >
             <div
-              className={`fi fi-${getFlagButtonClassName()} scale-80 duration-300 group-hover:shadow-border group-hover:shadow-türkis xl:scale-100`}
+              className={`fi fi-${getFlagButtonClassName()}  duration-300 group-hover:shadow-border group-hover:shadow-türkis xl:scale-100`}
             />
           </a>
           {state.languageMenuOpen === true ? (
@@ -231,8 +231,9 @@ export const Header: React.FC<Props> = (props) => {
         absolute right-0 top-0 z-40
         flex h-screen w-screen flex-col 
         justify-between
-        overflow-x-hidden bg-white 
-       p-3 shadow-xl md:w-fit
+        overflow-x-hidden
+        bg-white p-3 
+       shadow-xl md:w-fit md:min-w-[250px]
         md:shadow-none
        "
       >
@@ -244,8 +245,9 @@ export const Header: React.FC<Props> = (props) => {
                 `components.Header.Header.button.${menuOpen ? "close" : "open"}`
               )}
               width="fit"
-              variant="secondary"
+              variant="primary"
               onClick={closeMenu}
+              className="px-3 py-2"
             />
             {renderLanguageMenu}
           </div>
@@ -302,13 +304,13 @@ export const Header: React.FC<Props> = (props) => {
     //   )}
     // >
     <Button
-      variant="text"
+      variant="primary"
       title={t(
         `components.Header.Header.button.${menuOpen ? "close" : "open"}`
       )}
       onClick={openMenu}
-      children={<MenuIcon className="h-6 text-[#263652] xl:h-10" />}
-      className=""
+      children={<MenuIcon fontSize="medium" />}
+      className="px-3 py-2"
     />
     //</li>
   );
@@ -318,7 +320,7 @@ export const Header: React.FC<Props> = (props) => {
       className="flex w-full flex-row items-center justify-between bg-white p-1 shadow-lg"
     >
       <nav>{renderHomeButton}</nav>
-      <nav className="flex flex-row items-center justify-center   ">
+      <nav className="flex flex-row items-center justify-center">
         {renderHeaderItems}
         {renderMobileHeaderItems}
         {renderMenuButton}

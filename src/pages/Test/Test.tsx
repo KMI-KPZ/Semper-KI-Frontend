@@ -1,7 +1,7 @@
 import { ReactNode, useContext, useState } from "react";
 import { Button } from "@component-library/Button";
 import Container from "@component-library/Container";
-import { Heading } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/Typography";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import SaveIcon from "@mui/icons-material/Save";
 import { EventContext } from "@/contexts/EventContextProvider";
@@ -71,6 +71,18 @@ export const Test: React.FC<Props> = (props) => {
           onClick={handleOnClickButtonSave}
         />
       </PermissionGate>
+      <Container
+        direction="row"
+        className=" max-w-md flex-wrap rounded-xl border-2 border-white bg-white p-5"
+      >
+        <Text className="text-bold w-full px-3 text-center">ButtonTest</Text>
+        <Button title="Primary Active" variant="primary" active />
+        <Button title="Primary Passive" variant="primary" active={false} />
+        <Button title="Secondary Active" variant="secondary" active />
+        <Button title="Secondary Passive" variant="secondary" active={false} />
+        <Button title="Tertiary Active" variant="tertiary" active />
+        <Button title="Tertiary Passive" variant="tertiary" active={false} />
+      </Container>
       <LoadingSuspense query={testDynamicQuery}>
         <Container
           direction="row"
@@ -80,7 +92,7 @@ export const Test: React.FC<Props> = (props) => {
             ? testDynamicQuery.data.map((item, index) => (
                 <Button
                   key={index}
-                  variant="outline"
+                  variant="secondary"
                   title={item.title}
                   onClick={() => handleOnButtonClick(item)}
                   startIcon={getButtonIcon(item.icon)}

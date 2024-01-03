@@ -83,7 +83,7 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
         <Button
           width="fit"
           onClick={handleOnClickEditCheckButton}
-          variant="icon"
+          variant="secondary"
           title={t("Projects.Project.components.TitleForm.button.edit")}
           children={
             state.edit ? (

@@ -20,7 +20,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
         <PermissionGate element={`ProjectButton${button.title}`} key={index}>
           <Button
             key={index}
-            variant="icon"
+            variant="secondary"
             size="sm"
             startIcon={button.icon}
             onClick={() => handleOnClickButton(button, process.processID)}

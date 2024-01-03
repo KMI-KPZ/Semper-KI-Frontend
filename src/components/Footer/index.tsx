@@ -44,7 +44,7 @@ const Footer: React.FC<Props> = (props) => {
         <ul className="flex flex-col items-center md:flex-row md:justify-around">
           <li className="p-2">
             <Button
-              variant="light"
+              variant="tertiary"
               title={t("components.Footer.Footer.imprint")}
               extern={isMagazineUp()}
               to={isMagazineUp() ? URL_Impressum : "/legal/imprint"}
@@ -53,7 +53,7 @@ const Footer: React.FC<Props> = (props) => {
           </li>
           <li className="p-2">
             <Button
-              variant="light"
+              variant="tertiary"
               title={t("components.Footer.Footer.privacy")}
               extern={isMagazineUp()}
               to={isMagazineUp() ? URL_Datenschutz : "/legal/privacy"}
@@ -62,7 +62,7 @@ const Footer: React.FC<Props> = (props) => {
           </li>
           <li className="p-2">
             <Button
-              variant="light"
+              variant="tertiary"
               onClick={contactOnClick}
               title={t("components.Footer.Footer.contact")}
               className="text-white"
@@ -73,7 +73,7 @@ const Footer: React.FC<Props> = (props) => {
               <Button
                 title={t("components.Footer.Footer.instagram")}
                 to={URL_Instagram}
-                variant="light"
+                variant="tertiary"
                 extern
                 children={<InstagramIcon />}
                 className="text-white"
@@ -81,7 +81,7 @@ const Footer: React.FC<Props> = (props) => {
               <Button
                 title={t("components.Footer.Footer.mastodon")}
                 to={URL_Mastodon}
-                variant="light"
+                variant="tertiary"
                 extern
                 children={<MastodonIcon />}
                 className="text-white"

@@ -41,7 +41,7 @@ const Coypu: React.FC<CoypuProps> = (props) => {
                     target="_blank"
                     className="gap-2"
                     endIcon={<OpenInNewIcon />}
-                    size="xs"
+                    size="sm"
                     variant="secondary"
                     extern
                     to={coypu.url}

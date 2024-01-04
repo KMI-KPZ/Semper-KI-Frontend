@@ -36,31 +36,33 @@ const fallback = (
 );
 
 root.render(
-    <Suspense fallback={fallback}>
-        <React.StrictMode>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/demo*" element={<Demonstrator/>}/>
-                </Routes>
-                <QueryClientProvider client={queryClient}>
-                    <CSRFOutlet>
-                        <UserContextProvider>
-                            <PermissionContextProvider>
-                                <EventContextProvider>
-                                    <BodyScrollContextProvider>
-                                        <ModalContextProvider>
-                                            <Routes>
-                                                <Route path="/" element={<App/>}/>
-                                            </Routes>
-                                            <ReactQueryDevtools/>
-                                        </ModalContextProvider>
-                                    </BodyScrollContextProvider>
-                                </EventContextProvider>
-                            </PermissionContextProvider>
-                        </UserContextProvider>
-                    </CSRFOutlet>
-                </QueryClientProvider>
-            </BrowserRouter>
-        </React.StrictMode>
-    </Suspense>
+    <React.StrictMode>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/demo" element={
+                    <Demonstrator/>
+                }/>
+                <Route path="/*" element={
+                       <Suspense fallback={fallback}>
+                           <QueryClientProvider client={queryClient}>
+                               <CSRFOutlet>
+                                   <UserContextProvider>
+                                       <PermissionContextProvider>
+                                           <EventContextProvider>
+                                               <BodyScrollContextProvider>
+                                                   <ModalContextProvider>
+                                                       <App/>
+                                                   </ModalContextProvider>
+                                               </BodyScrollContextProvider>
+                                           </EventContextProvider>
+                                       </PermissionContextProvider>
+                                   </UserContextProvider>
+                               </CSRFOutlet>
+                           </QueryClientProvider>
+                       </Suspense>
+                   }/>
+            </Routes>
+            {/*<ReactQueryDevtools/>*/}
+        </BrowserRouter>
+     </React.StrictMode>
 );

@@ -10,7 +10,7 @@ The user interface of the Semper-KI Frontend is designed to be intuitive and use
 
 ## Download
 
-To download the Semper-KI Frontend files, follow these steps:
+To download the Semper-KI Frontend, follow these steps:
 
 1. Clone the repository: `git clone git@github.com:KMI-KPZ/Frontend.git`
 

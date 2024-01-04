@@ -16,7 +16,7 @@
     "dompurify": "^3.0.5",
     "flag-icons": "^6.6.6",
     "formik": "^2.2.9",
-    "i18next": "^22.0.0",
+    "i18next": "^23.7.15",
     "i18next-browser-languagedetector": "^6.1.8",
     "i18next-http-backend": "^1.4.4",
     "js-cookie": "^3.0.1",

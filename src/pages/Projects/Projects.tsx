@@ -14,6 +14,7 @@ import useFlatProjectQuerys, {
   FlatProjectProps,
 } from "@/api/Project/useFlatProjectQuerys";
 import useAdminQuerys from "@/api/Admin/useAdminQuerys";
+import ProjectsCards from "./components/Cards";
 
 interface ProjectsProps {}
 
@@ -99,7 +100,6 @@ const Projects: React.FC<ProjectsProps> = (props) => {
             <PermissionGate element={"ProjectsButtonDeleteSelected"}>
               <Button
                 variant="secondary"
-                size="sm"
                 startIcon={<DeleteIcon />}
                 onClick={handleOnClickButtonDeleteSelected}
                 title={t("Projects.Projects.button.deleteSelected")}
@@ -108,6 +108,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
           ) : null}
           <PermissionGate element={"ProjectsButtonNew"}>
             <Button
+              variant="primary"
               title={t("Projects.Projects.button.create")}
               onClick={onButtonClickCreateProject}
             />
@@ -115,7 +116,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
         </Container>
       </div>
       <LoadingSuspense query={flatProjectsQuery}>
-        {renderClientProjects()}
+        {/* {renderClientProjects()}
         {user.usertype !== UserType.ANONYM &&
         user.usertype === UserType.ORGANIZATION ? (
           <>
@@ -124,7 +125,14 @@ const Projects: React.FC<ProjectsProps> = (props) => {
             </Heading>
             {renderOrganizationProjects(user)}
           </>
-        ) : null}
+        ) : null} */}
+        <ProjectsCards
+          flatProjects={
+            flatProjectsQuery.data === undefined ? [] : flatProjectsQuery.data
+          }
+          selectedProjects={selectedProjects}
+          setSelectedProjects={setSelectedProjects}
+        />
       </LoadingSuspense>
     </div>
   );

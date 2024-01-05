@@ -131,7 +131,7 @@ const Project: React.FC<Props> = (props) => {
             }`
           )}
         </Text>
-        <Container direction="row" wrap="wrap">
+        <Container direction="row" wrap="wrap" gap={3}>
           <Button
             variant="secondary"
             width="fit"
@@ -187,7 +187,7 @@ const Project: React.FC<Props> = (props) => {
           />
           <PermissionGate element={"ProjectButtonNew"}>
             <Button
-              variant="secondary"
+              variant="primary"
               size="sm"
               startIcon={<AddIcon />}
               onClick={onButtonClickCreateProcess}

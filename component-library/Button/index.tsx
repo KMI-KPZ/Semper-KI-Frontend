@@ -20,7 +20,7 @@ interface ButtonProps {
   testid?: string;
   target?: "_blank" | "_self" | "_parent" | "_top";
 }
-type ButtonSize = "sm" | "md" | "lg";
+type ButtonSize = "xs" | "sm" | "md" | "lg";
 type ButtonVariant = "primary" | "secondary" | "tertiary";
 type ButtonWidth = "fit" | "full" | "auto";
 type ButtonDirection = "col" | "row";
@@ -83,15 +83,15 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       case "primary":
         if (active)
           className =
-            "bg-blau-600 border-blau-700 border-2  text-white hover:cursor-pointer shadow-button-primary hover:shadow-button-inner-primary  focus:shadow-button-inner-primary ";
+            "bg-blau-button  border-blau-700 border-2  text-white hover:cursor-pointer shadow-button-primary hover:shadow-button-inner-primary  focus:shadow-button-inner-primary ";
         else
           className =
-            "bg-slate-500 border-2 border-slate-700 text-slate-100 hover:cursor-default shadow-button-inner-primary";
+            "bg-slate-500 border-2 border-slate-500 text-slate-100 hover:cursor-default shadow-button-inner-primary";
         break;
       case "secondary":
         if (active)
           className =
-            "bg-slate-50 border-2 border-slate-300 text-black hover:cursor-pointer shadow-button-secondary hover:shadow-button-inner-secondary  focus:shadow-button-inner-secondary";
+            "bg-slate-50 border-2 border-slate-500 text-black hover:cursor-pointer shadow-button-secondary hover:shadow-button-inner-secondary  focus:shadow-button-inner-secondary";
         else
           className =
             " bg-slate-200 border-2 border-slate-400 text-slate-700 hover:cursor-default shadow-button-inner-secondary";
@@ -109,6 +109,9 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
   const getClassNameSize = (): string => {
     let className = "";
     switch (size) {
+      case "xs":
+        className = "py-1 px-2";
+        break;
       case "sm":
         className = "py-2 px-3";
         break;

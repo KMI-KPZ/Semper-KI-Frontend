@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import { Button } from "@component-library/Button";
 import Container from "@component-library/Container";
 import { Heading, Text } from "@component-library/Typography";
@@ -12,12 +12,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import usePermissions from "@/hooks/usePermissions";
 import useEvents from "@/hooks/useEvents/useEvents";
 import useTest, { TestDynamicProps } from "@/api/Test/useTest";
+import logger from "@/hooks/useLogger";
 
 interface Props {}
 export const Test: React.FC<Props> = (props) => {
   const { socket, events } = useEvents();
   const [open, setOpen] = useState(false);
   const { reloadPermissions } = usePermissions();
+
   const { saveProjectsQuery, testDynamicQuery, dynamicButtonMutation } =
     useTest();
   const openMenu = () => {

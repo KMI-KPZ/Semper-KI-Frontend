@@ -81,10 +81,11 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
       )}
       <PermissionGate element="ProjectButtonEditName">
         <Button
-          width="fit"
           onClick={handleOnClickEditCheckButton}
           variant="secondary"
           title={t("Projects.Project.components.TitleForm.button.edit")}
+          size="xs"
+          width="fit"
           children={
             state.edit ? (
               <CheckIcon fontSize="small" />

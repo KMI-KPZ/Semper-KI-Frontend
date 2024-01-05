@@ -60,8 +60,8 @@ const ProcessServiceSelect: React.FC<ProcessServiceSelectProps> = (props) => {
             onClick={(e) => handleOnClickCard(e, service.identifier)}
             className="
             flex flex-col items-center justify-center gap-5 rounded-xl 
-             p-5 shadow-card duration-300 
-            hover:cursor-pointer hover:shadow-button-inner focus:shadow-button-inner
+             border-2  border-blau-button p-5 shadow-card duration-300
+            hover:cursor-pointer hover:shadow-button-inner-primary focus:shadow-button-inner-primary
             "
           >
             {getIcon(service.identifier)}

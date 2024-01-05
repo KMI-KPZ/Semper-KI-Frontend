@@ -88,6 +88,7 @@ const Login: React.FC<Props> = (props) => {
           onClick={handleOnClickButtonLogin}
           title={t("Login.Login.buttons.login")}
           startIcon={<LoginIcon />}
+          variant="primary"
         />
         <Button
           onClick={handleOnClickButtonRegister}
@@ -102,17 +103,23 @@ const Login: React.FC<Props> = (props) => {
             <Button
               onClick={() => handleOnClickButtonMockedLogin("fakeUser")}
               title={t("Login.Login.buttons.user")}
+              variant="primary"
               startIcon={<PersonIcon />}
+              className="bg-green-700"
             />
             <Button
               onClick={() => handleOnClickButtonMockedLogin("fakeOrganization")}
+              variant="primary"
               title={t("Login.Login.buttons.orga")}
               startIcon={<PeopleIcon />}
+              className="bg-blue-700"
             />
             <Button
               onClick={() => handleOnClickButtonMockedLogin("fakeAdmin")}
+              variant="primary"
               title={t("Login.Login.buttons.admin")}
               startIcon={<AdminPanelSettingsIcon />}
+              className="bg-red-700"
             />
           </div>
         </Container>

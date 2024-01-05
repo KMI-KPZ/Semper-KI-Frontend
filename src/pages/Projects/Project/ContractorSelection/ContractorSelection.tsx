@@ -120,6 +120,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
         <Button
           onClick={handleSubmit(onSubmit)}
           endIcon={<ArrowForwardIcon />}
+          variant="primary"
           title={t(
             "Projects.Project.ContractorSelection.ContractorSelection.button.submit"
           )}

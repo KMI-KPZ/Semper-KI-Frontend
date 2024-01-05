@@ -42,6 +42,14 @@ export const NavigationItemData: INavigationItem[] = [
     extern: false,
   },
   {
+    title: "demonstrator",
+    link: "/projects",
+    icon: <ScienceIcon fontSize="large" />,
+    extern: false,
+    preferred: ["header", "home"],
+    userTypes: [UserType.ANONYM],
+  },
+  {
     title: "logout",
     link: "/logout",
     icon: <LogoutIcon fontSize="large" />,
@@ -57,14 +65,7 @@ export const NavigationItemData: INavigationItem[] = [
     preferred: ["header"],
     userTypes: [UserType.ANONYM],
   },
-  {
-    title: "demonstrator",
-    link: "/projects",
-    icon: <ScienceIcon fontSize="large" />,
-    extern: false,
-    preferred: ["header", "home"],
-    userTypes: [UserType.ANONYM],
-  },
+
   {
     title: "projects",
     link: "/projects",

@@ -784,6 +784,23 @@
           "ongoing": "Laufend",
           "completed": "Abgeschlossen"
         }
+      },
+      "Card": {
+        "name": "Name:",
+        "status": "Status:",
+        "count": "Anzahl:",
+        "created": "Erstellt am:",
+        "updated": "Aktualisiert am:",
+        "client": "Nutzer:"
+      },
+      "Cards": {
+        "label": {
+          "selectProject": "Projekt {{name}} auswählen",
+          "selectAllOwnProjects": "Alle eigenen Projekte auswählen",
+          "selectAllRecievedProjects": "Alle empfangenen Projekte auswählen"
+        },
+        "ownProjects": "Eigene Projekte",
+        "receivedProjects": "Erhaltene Projekte"
       }
     },
     "context": {
@@ -1080,7 +1097,7 @@
       }
     },
     "Projects": {
-      "title": "Meine Projekte",
+      "title": "Projektübersicht",
       "orga": "Eingegangene Projekte",
       "empty": "keine Projekte angelegt",
       "deleteSelectedConfirm": "Möchten alle ausgewählte Projekt wirklich löschen?",

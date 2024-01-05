@@ -87,8 +87,11 @@ const Profile: React.FC<Props> = (props) => {
             title={t(`Profile.button.edit`)}
             startIcon={<EditIcon />}
             onClick={handleOnClickButtonEdit}
+            variant="primary"
           />
           <Button
+            className="border-2 border-red-800 bg-red-700"
+            variant="primary"
             testid="button-delete"
             startIcon={<DeleteIcon />}
             onClick={handleOnClickButtonDelete}

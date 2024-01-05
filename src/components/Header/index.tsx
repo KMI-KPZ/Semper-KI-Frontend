@@ -310,7 +310,6 @@ export const Header: React.FC<Props> = (props) => {
       )}
       onClick={openMenu}
       children={<MenuIcon fontSize="medium" />}
-      className="px-3 py-2"
     />
     //</li>
   );

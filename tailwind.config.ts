@@ -19,6 +19,7 @@ export default {
           dark:'#263652'
         },
         'türkis': {
+          'button':'#56BDBE',
           DEFAULT: '#7DBCBC',
           50: '#F6FAFA',
           100: '#E9F4F4',
@@ -33,6 +34,7 @@ export default {
           950: '#152828'
         },
         'blau': {
+          'button':'#064EA1',
           DEFAULT: '#556DB0',
           50: '#D2D9EA',
           100: '#C4CDE4',
@@ -101,11 +103,11 @@ export default {
       boxShadow:{
         'border':'0px 0px 0px 3px rgba(0, 0, 0, 1)',
         'inner-border':'inset 0px 0px 0px 3px rgba(0, 0, 0, 1)',
-        'card':'0px 2px 10px 2px rgba(0, 0, 0, 0.2)',
+        'card':'0px 1px 5px 2px rgba(0, 0, 0, 0.2)',
         'inner-xl':'inset 1px 2px 5px 2px rgb(0 0 0 / 0.05)',
-        'button-primary':       '0px 0px 4px 1px rgba(0,0,0,0.3) , inset 0px 0px 0px 0px rgba(0,0,0,0)',
-        'button-inner-primary': '0px 0px 0px 0px rgba(0,0,0,0) , inset 0px 0px 4px 2px rgba(0,0,0,0.3)',
-        'button-secondary':       '0px 0px 3px 1px rgba(0,0,0,0.2) , inset 0px 0px 0px 0px rgba(0,0,0,0)',
+        'button-primary':       '0px 1px 3px 1px rgba(0,0,0,0.3) , inset 0px 0px 0px 0px rgba(0,0,0,0)',
+        'button-inner-primary': '0px 0px 0px 0px rgba(0,0,0,0) , inset 0px 0px 4px 2px rgba(0,0,0,0.4)',
+        'button-secondary':       '0px 0px 1px 1px rgba(0,0,0,0.1) , inset 0px 0px 0px 0px rgba(0,0,0,0)',
         'button-inner-secondary': '0px 0px 0px 0px rgba(0,0,0,0) , inset 0px 0px 3px 1px rgba(0,0,0,0.2)',
         'glow':'0 0px 20px rgba(255,255, 255, 0.35), 0 0px 65px rgba(255, 255,255, 0.2)',
       },

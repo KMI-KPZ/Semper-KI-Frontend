@@ -3,7 +3,6 @@ import { Heading, Text } from "@component-library/Typography";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/Loading";
-import ProjectsTable from "./components/Table";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 import { useProject } from "./hooks/useProject";
@@ -28,6 +27,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
       ? adminFlatProjectsQuery
       : userFlatProjectsQuery;
   const { createProject, deleteProject } = useProject();
+
   const [selectedProjects, setSelectedProjects] = React.useState<string[]>([]);
 
   const onButtonClickCreateProject = () => {
@@ -39,6 +39,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
   ) => {
     if (window.confirm(t("Projects.Projects.deleteSelectedConfirm")) === true) {
       deleteProject(selectedProjects);
+      setSelectedProjects([]);
     } else logger("delete canceled");
   };
 
@@ -54,42 +55,6 @@ const Projects: React.FC<ProjectsProps> = (props) => {
     }
     return 0;
   };
-
-  const renderClientProjects = () =>
-    flatProjectsQuery.data !== undefined &&
-    flatProjectsQuery.data.length > 0 ? (
-      <ProjectsTable
-        selectedProjects={selectedProjects}
-        setSelectedProjects={setSelectedProjects}
-        flatProjects={
-          user.usertype !== UserType.ANONYM &&
-          user.usertype === UserType.ORGANIZATION
-            ? flatProjectsQuery.data
-                .filter((project) => user.organization === project.client)
-                .sort(sortProjectByUpdatedDate)
-            : flatProjectsQuery.data.sort(sortProjectByUpdatedDate)
-        }
-      />
-    ) : (
-      <Text variant="body">{t("Projects.Projects.empty")}</Text>
-    );
-
-  const renderOrganizationProjects = (user: AuthorizedUserProps) =>
-    flatProjectsQuery.data !== undefined &&
-    flatProjectsQuery.data.length > 0 &&
-    flatProjectsQuery.data.filter(
-      (project) => user.organization !== project.client
-    ).length > 0 ? (
-      <ProjectsTable
-        selectedProjects={selectedProjects}
-        setSelectedProjects={setSelectedProjects}
-        flatProjects={flatProjectsQuery.data
-          .filter((project) => user.organization !== project.client)
-          .sort(sortProjectByUpdatedDate)}
-      />
-    ) : (
-      <Text variant="body">{t("Projects.Projects.empty")}</Text>
-    );
 
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
@@ -116,16 +81,6 @@ const Projects: React.FC<ProjectsProps> = (props) => {
         </Container>
       </div>
       <LoadingSuspense query={flatProjectsQuery}>
-        {/* {renderClientProjects()}
-        {user.usertype !== UserType.ANONYM &&
-        user.usertype === UserType.ORGANIZATION ? (
-          <>
-            <Heading variant="h2" className="mt-10 w-full text-left">
-              {t("Projects.Projects.orga")}
-            </Heading>
-            {renderOrganizationProjects(user)}
-          </>
-        ) : null} */}
         <ProjectsCards
           flatProjects={
             flatProjectsQuery.data === undefined ? [] : flatProjectsQuery.data

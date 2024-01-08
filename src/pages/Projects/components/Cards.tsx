@@ -56,6 +56,7 @@ const ProjectsCards: React.FC<ProjectsCardsProps> = (props) => {
               name={t("Projects.components.Cards.label.selectAllOwnProjects")}
               value={t("Projects.components.Cards.label.selectAllOwnProjects")}
               checked={
+                selectedProjects.length > 0 &&
                 selectedProjects.length === ownProjects.length &&
                 ownProjects.filter((project) =>
                   selectedProjects.includes(project.projectID)
@@ -95,6 +96,7 @@ const ProjectsCards: React.FC<ProjectsCardsProps> = (props) => {
                   "Projects.components.Cards.label.selectAllRecievedProjects"
                 )}
                 checked={
+                  selectedProjects.length > 0 &&
                   selectedProjects.length === recievedProjects.length &&
                   recievedProjects.filter((project) =>
                     selectedProjects.includes(project.projectID)

@@ -51,8 +51,8 @@ const ProjectsCard: React.FC<ProjectsCardProps> = (props) => {
       width="full"
       className="rounded-md p-2 shadow-button-primary"
     >
-      <Container gap={3} className="md:justify-between">
-        <label className="flex w-full items-center justify-center">
+      <Container gap={3} className=" md:justify-between">
+        <label className="flex w-full  items-center justify-center p-3">
           <input
             id="selectProcess"
             type="checkbox"
@@ -76,75 +76,68 @@ const ProjectsCard: React.FC<ProjectsCardProps> = (props) => {
           </Text>
         </label>
       </Container>
-      <Container gap={3} justify="between" className="grow flex-wrap">
+      <Container
+        gap={3}
+        justify="between"
+        className="grow flex-wrap"
+        align="start"
+      >
         <Container
           gap={3}
           direction="row"
-          className="flex-wrap"
           justify="start"
+          align="start"
+          width="full"
         >
-          <Text className="min-w-[100px]">
+          <Text className="min-w-[120px]">
             {t("Projects.components.Card.name")}
           </Text>
-          <Text className="min-w-[100px]">
+          <Text className="min-w-[120px] break-all ">
             {flatProject.details.title === undefined
               ? `Auftrag: #${flatProject.projectID}`
               : flatProject.details.title}
           </Text>
         </Container>
-        <Container
-          gap={3}
-          direction="row"
-          className="flex-wrap"
-          justify="start"
-        >
-          <Text className="min-w-[100px]">
-            {t("Projects.components.Card.count")}
-          </Text>
-          <Text className="min-w-[100px]">{flatProject.processesCount}</Text>
+
+        <Container direction="col" align="start" gap={3}>
+          <Container gap={3} direction="row" justify="start">
+            <Text className="min-w-[120px]">
+              {t("Projects.components.Card.created")}
+            </Text>
+            <Text className="min-w-[120px]">
+              {flatProject.createdWhen.toLocaleString()}
+            </Text>
+          </Container>
+          <Container gap={3} direction="row" justify="start">
+            <Text className="min-w-[120px]">
+              {t("Projects.components.Card.updated")}
+            </Text>
+            <Text className="min-w-[120px]">
+              {flatProject.updatedWhen.toLocaleString()}
+            </Text>
+          </Container>
         </Container>
-        <Container
-          gap={3}
-          direction="row"
-          className="flex-wrap"
-          justify="start"
-        >
-          <Text className="min-w-[100px]">
-            {t("Projects.components.Card.created")}
-          </Text>
-          <Text className="min-w-[100px]">
-            {flatProject.createdWhen.toLocaleString()}
-          </Text>
-        </Container>
-        <Container
-          gap={3}
-          direction="row"
-          className="flex-wrap"
-          justify="start"
-        >
-          <Text className="min-w-[100px]">
-            {t("Projects.components.Card.updated")}
-          </Text>
-          <Text className="min-w-[100px]">
-            {flatProject.updatedWhen.toLocaleString()}
-          </Text>
-        </Container>
-        <Container
-          gap={3}
-          direction="row"
-          className="flex-wrap"
-          justify="start"
-        >
-          <Text className="min-w-[100px]">
-            {t("Projects.components.Card.status")}
-          </Text>
-          <Text className="min-w-[100px]">
-            {t(
-              `enum.ProcessStatus.${
-                ProcessStatus[flatProject.status] as keyof typeof ProcessStatus
-              }`
-            )}
-          </Text>
+        <Container direction="col" align="start" gap={3}>
+          <Container gap={3} direction="row" justify="start">
+            <Text className="min-w-[120px]">
+              {t("Projects.components.Card.count")}
+            </Text>
+            <Text className="min-w-[120px]">{flatProject.processesCount}</Text>
+          </Container>
+          <Container gap={3} direction="row" justify="start" align="start">
+            <Text className="min-w-[120px]">
+              {t("Projects.components.Card.status")}
+            </Text>
+            <Text className="min-w-[120px]">
+              {t(
+                `enum.ProcessStatus.${
+                  ProcessStatus[
+                    flatProject.status
+                  ] as keyof typeof ProcessStatus
+                }`
+              )}
+            </Text>
+          </Container>
         </Container>
       </Container>
       <Container gap={3}>

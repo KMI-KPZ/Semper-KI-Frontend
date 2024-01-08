@@ -101,6 +101,7 @@ const Home: React.FC<HomeProps> = (props) => {
           <Button
             title={t("Home.Anonym.Anonym.buttons.demonstrator")}
             onClick={() => navigate("/projects")}
+            variant="secondary"
           />
         </ContentBox>
       </HomeContainer>

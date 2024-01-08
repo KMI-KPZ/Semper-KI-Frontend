@@ -83,7 +83,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       case "primary":
         if (active)
           className =
-            "bg-blau-button  border-blau-700 border-2  text-white hover:cursor-pointer shadow-button-primary hover:shadow-button-inner-primary  focus:shadow-button-inner-primary ";
+            "bg-blau-button  border-blau-700 border-2 brightness-100 hover:brightness-95  text-white hover:cursor-pointer shadow-button-primary hover:shadow-button-inner-primary  focus:shadow-button-inner-primary ";
         else
           className =
             "bg-slate-500 border-2 border-slate-500 text-slate-100 hover:cursor-default shadow-button-inner-primary";
@@ -91,7 +91,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       case "secondary":
         if (active)
           className =
-            "bg-slate-50 border-2 border-slate-500 text-black hover:cursor-pointer shadow-button-secondary hover:shadow-button-inner-secondary  focus:shadow-button-inner-secondary";
+            "bg-slate-50 border-2 border-slate-500 brightness-100 hover:brightness-95 text-black hover:cursor-pointer shadow-button-secondary hover:shadow-button-inner-secondary  focus:shadow-button-inner-secondary";
         else
           className =
             " bg-slate-200 border-2 border-slate-400 text-slate-700 hover:cursor-default shadow-button-inner-secondary";
@@ -99,7 +99,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       case "tertiary":
         if (active)
           className =
-            " text-black hover:cursor-pointer hover:scale-105 focus:scale-105 scale-100";
+            " text-black hover:cursor-pointer hover:scale-105 hover:bg-slate-100 focus:scale-105 scale-100";
         else className = "text-slate-600  hover:cursor-default";
         break;
     }

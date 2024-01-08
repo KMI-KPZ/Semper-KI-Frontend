@@ -31,11 +31,12 @@ import AdminRoutes from "@/routes/AdminRoutes";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import ContentBox from "@component-library/ContentBox";
 import RedirectLogin from "../Login/RedirectLogin";
+import Menu from "@/components/Menu";
 
 export type AppState = {
-  selectedProgressItem?: { index: number; progress: string };
   guideFilter: FilterItemProps[];
   demoID?: string;
+  menuOpen: boolean;
 };
 
 export type AppContext = {
@@ -45,6 +46,7 @@ export type AppContext = {
 
 const initialAppState: AppState = {
   guideFilter: [],
+  menuOpen: false,
 };
 
 export const AppContext = createContext<AppContext>({
@@ -239,6 +241,7 @@ const App: React.FC = () => {
             rejectCookies={rejectCookies}
           />
         </Modal>
+        <Menu />
         <Footer />
       </div>
       <ToastContainer

@@ -252,7 +252,17 @@
       },
       "HeaderItem": {}
     },
-    "Menu": {},
+    "Menu": {
+      "components": {
+        "LanguageMenu": {
+          "button": {
+            "languageMenu": "Sprachmenü",
+            "de": "Deutsch",
+            "gb": "Englisch"
+          }
+        }
+      }
+    },
     "PermissionGate": {
       "message": "Diese Funktion ist mit ihren Rechten nicht nutzbar"
     },

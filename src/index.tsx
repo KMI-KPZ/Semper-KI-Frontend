@@ -5,9 +5,7 @@ import "./index.css";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 import App from "./pages/App/App";
-import Demonstrator from "./pages/Demonstrator/Demonstrator";
 import {Heading} from "@component-library/Typography";
 import UserContextProvider from "./contexts/UserContextProvider";
 import PermissionContextProvider from "./contexts/PermissionContextProvider";
@@ -15,6 +13,7 @@ import EventContextProvider from "./contexts/EventContextProvider";
 import BodyScrollContextProvider from "./contexts/BodyScrollContextProvider";
 import ModalContextProvider from "./contexts/ModalContextProvider";
 import CSRFOutlet from "./outlets/CSRFOutlet";
+import DemonstratorApp from "@/pages/Demonstrator/DemonstratorApp";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
@@ -40,7 +39,7 @@ root.render(
         <BrowserRouter>
             <Routes>
                 <Route path="/demo" element={
-                    <Demonstrator/>
+                    <DemonstratorApp/>
                 }/>
                 <Route path="/*" element={
                        <Suspense fallback={fallback}>

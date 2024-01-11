@@ -72,7 +72,7 @@ const Project: React.FC<Props> = (props) => {
     if (project === undefined) return;
     updateProject({
       changes: {
-        details: {
+        projectDetails: {
           title,
         },
       },

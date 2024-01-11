@@ -35,10 +35,10 @@ export interface UpdateProjectProps {
 
 export interface ProjectChangesProps {
   status?: ProcessStatus;
-  details?: ProjectDetailsProps;
+  projectDetails?: ProjectDetailsProps;
 }
 export interface ProjectDeletionsProps {
-  details?: { title?: "" };
+  projectDetails?: { title?: "" };
   status?: "";
 }
 

@@ -1,4 +1,10 @@
-import { DeleteEvent, Event } from "@/pages/App/types";
+import {
+  DeleteEvent,
+  Event,
+  ProcessEventItem,
+  ProjectEventItem,
+  ProjectEvents,
+} from "@/pages/App/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -9,11 +15,23 @@ import useProjectEvent from "./hooks/useProjectEvent";
 import { toast } from "@/hooks/useToast";
 import usePermissions from "../usePermissions";
 import { EventContext } from "@/contexts/EventContextProvider";
+import Project from "@/pages/Projects/Project/Project";
 
 interface ReturnProps {
   deleteEvent: (event: DeleteEvent) => void;
   socket: WebSocket | null;
   events: Event[];
+  getProjectEventItem: (projectID: string) => ProjectEventItem | undefined;
+  getProjectEventCount: (projectID: string) => number;
+  getProcessEventItem: (
+    projectID: string,
+    processID: string
+  ) => ProcessEventItem | undefined;
+  getProcessEventItemCount: (
+    projectID: string,
+    processID: string,
+    type: "messages" | "processStatus"
+  ) => number;
 }
 
 const useEvents = (): ReturnProps => {
@@ -33,15 +51,22 @@ const useEvents = (): ReturnProps => {
 
   const onWebsocktEvent = (event: MessageEvent) => {
     if (event.data !== undefined && JSONIsParseable(event.data)) {
-      const newEvent = JSONSafeParse<Event>(event.data);
-      logger(
-        "useEvents | onWebsocktEvent | ",
-        newEvent !== undefined
-          ? newEvent
-          : `JSONSafeParse failed | ${event.data}`
-      );
+      const newEvent = JSONSafeParse<any>(event.data);
+      // logger(
+      //   "useEvents | onWebsocktEvent | ",
+      //   newEvent !== undefined
+      //     ? newEvent
+      //     : `JSONSafeParse failed | ${event.data}`
+      // );
       if (newEvent !== undefined) {
-        handleNewEvent(newEvent);
+        const fixedEvent: Event = {
+          eventType: newEvent.eventType,
+          events: [
+            { projectID: newEvent.projectID, processes: newEvent.processes },
+          ],
+        };
+        // logger("useEvents | onWebsocktEvent | fixedEvent", fixedEvent);
+        handleNewEvent(fixedEvent);
       }
     } else {
       logger(
@@ -71,6 +96,7 @@ const useEvents = (): ReturnProps => {
   };
 
   const deleteEvent = (event: DeleteEvent) => {
+    logger("useEvents | deleteEvent | event", event);
     switch (event.eventType) {
       case "projectEvent":
         setEvents((prevState) => deleteProjectEvent(event, prevState));
@@ -81,9 +107,71 @@ const useEvents = (): ReturnProps => {
     }
   };
 
-  // logger("useEvents | events", events);
+  const getProjectEventItem = (
+    projectID: string
+  ): ProjectEventItem | undefined => {
+    const projectEvent = events.find(
+      (event) => event.eventType === "projectEvent"
+    ) as ProjectEvents;
+    if (projectEvent === undefined) return undefined;
 
-  return { socket, deleteEvent, events };
+    const projectEventItem = projectEvent.events.find(
+      (event) => event.projectID === projectID
+    );
+    if (projectEventItem === undefined) return undefined;
+    return projectEventItem;
+  };
+
+  const getProjectEventCount = (projectID: string): number => {
+    const projectEvent = getProjectEventItem(projectID);
+    if (projectEvent === undefined) return 0;
+    let count = 0;
+    projectEvent.processes.forEach((process) => {
+      count +=
+        (process.messages !== undefined ? process.messages : 0) +
+        (process.processStatus !== undefined ? process.processStatus : 0);
+    });
+    return count;
+  };
+
+  const getProcessEventItem = (
+    projectID: string,
+    processID: string
+  ): ProcessEventItem | undefined => {
+    const projectEvent = getProjectEventItem(projectID);
+    if (projectEvent === undefined) return undefined;
+    const processEventItem = projectEvent.processes.find(
+      (process) => process.processID === processID
+    );
+    if (processEventItem === undefined) return undefined;
+    return processEventItem;
+  };
+
+  const getProcessEventItemCount = (
+    projectID: string,
+    processID: string,
+    type: "messages" | "processStatus"
+  ): number => {
+    const processEventItem = getProcessEventItem(projectID, processID);
+    if (processEventItem === undefined) return 0;
+    return type === "messages"
+      ? processEventItem.messages !== undefined
+        ? processEventItem.messages
+        : 0
+      : processEventItem.processStatus !== undefined
+      ? processEventItem.processStatus
+      : 0;
+  };
+
+  return {
+    socket,
+    deleteEvent,
+    events,
+    getProjectEventItem,
+    getProjectEventCount,
+    getProcessEventItem,
+    getProcessEventItemCount,
+  };
 };
 
 export default useEvents;

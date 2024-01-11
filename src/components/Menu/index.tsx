@@ -20,6 +20,7 @@ import HeaderItem from "../Header/components/Item";
 import useEvents from "@/hooks/useEvents/useEvents";
 import { getProjectEventAmount } from "@/hooks/useEvents/hooks/useProjectEvent";
 import logger from "@/hooks/useLogger";
+import useBadge from "@/hooks/useBadge";
 
 interface MenuProps {}
 
@@ -29,19 +30,9 @@ const Menu: React.FC<MenuProps> = (props) => {
   const { setMenu, appState } = useApp();
   const { user } = useUser();
   const { t } = useTranslation();
-  const { events } = useEvents();
   const modalRef = useRef<HTMLDialogElement>(null);
   const { deleteModal, registerModal } = useModal();
-
-  const calcBadge = (title: string): number | undefined => {
-    if (
-      title === "data.NavigationItem.contracts" ||
-      title === "data.NavigationItem.orders"
-    )
-      return getProjectEventAmount(events);
-    // if (cartCount > 0 && title === "data.NavigationItem.cart") return cartCount;
-    return undefined;
-  };
+  const { calcBadge } = useBadge();
 
   const closeMenu = () => {
     setMenu(false);

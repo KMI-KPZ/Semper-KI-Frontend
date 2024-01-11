@@ -39,7 +39,6 @@ const useGeneralProcess = (): useGeneralProcessReturnProps => {
     deleteFileMutation,
     downloadZIPMutation,
   } = useProcessMutations();
-  const navigate = useNavigate();
   const { processID } = useParams();
 
   const createProcess = () => {

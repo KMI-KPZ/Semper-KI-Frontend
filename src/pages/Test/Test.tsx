@@ -56,7 +56,44 @@ export const Test: React.FC<Props> = (props) => {
         <Heading variant="h1">Events</Heading>
         {events.length > 0
           ? events.map((event, index) => (
-              <div key={index}>{JSON.stringify(event)}</div>
+              <Container
+                direction="col"
+                justify="start"
+                align="start"
+                key={index}
+              >
+                <Text>{event.eventType}</Text>
+                {event.eventType === "projectEvent"
+                  ? event.events.map((projectEventItem, _index) => (
+                      <Container
+                        direction="col"
+                        justify="start"
+                        align="start"
+                        key={_index}
+                      >
+                        <Text> ProjektID: {projectEventItem.projectID}</Text>
+                        {projectEventItem.processes.map(
+                          (processEventItem, __index) => (
+                            <Container
+                              direction="col"
+                              justify="start"
+                              align="start"
+                              key={__index}
+                            >
+                              <Text>
+                                ProcessID: {processEventItem.processID}
+                              </Text>
+                              <Text>
+                                Status: {processEventItem.processStatus}
+                              </Text>
+                              <Text>Messages: {processEventItem.messages}</Text>
+                            </Container>
+                          )
+                        )}
+                      </Container>
+                    ))
+                  : null}
+              </Container>
             ))
           : "No Events"}
       </Container>

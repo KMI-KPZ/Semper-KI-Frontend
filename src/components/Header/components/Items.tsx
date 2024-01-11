@@ -6,6 +6,7 @@ import useUser from "@/hooks/useUser";
 import useEvents from "@/hooks/useEvents/useEvents";
 import { getProjectEventAmount } from "@/hooks/useEvents/hooks/useProjectEvent";
 import useApp from "@/hooks/useApp";
+import useBadge from "@/hooks/useBadge";
 
 interface HeaderItemsProps {}
 
@@ -14,19 +15,9 @@ const HeaderItems: React.FC<HeaderItemsProps> = (props) => {
   const { t } = useTranslation();
   const { user } = useUser();
   const { setMenu } = useApp();
-  const { events } = useEvents();
+  const { calcBadge } = useBadge();
   const closeMenus = () => {
     setMenu(false);
-  };
-
-  const calcBadge = (title: string): number | undefined => {
-    if (
-      title === "data.NavigationItem.contracts" ||
-      title === "data.NavigationItem.orders"
-    )
-      return getProjectEventAmount(events);
-    // if (cartCount > 0 && title === "data.NavigationItem.cart") return cartCount;
-    return undefined;
   };
 
   return (

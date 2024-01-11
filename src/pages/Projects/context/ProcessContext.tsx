@@ -50,6 +50,7 @@ const ProcessContextProvider: React.FC<ProcessContextProviderProps> = (
       </ProcessContext.Provider>
     );
 
+  if (projectQuery.isRefetching) return <LoadingAnimation />;
   return <Navigate to={`/projects/${project.projectID}`} />;
 };
 

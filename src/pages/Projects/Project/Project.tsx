@@ -22,30 +22,32 @@ import Modal from "@component-library/Modal";
 import useProcess, { ProcessStatus } from "../hooks/useProcess";
 import Process from "./Process/Process";
 import useCheckedProcesses from "./hooks/useCheckedProcesses";
-import { ProjectEvent, ProjectEventItem } from "@/pages/App/types";
+import {
+  ProjectEvents,
+  ProjectEventItem,
+  ProcessEventItem,
+} from "@/pages/App/types";
 import { ProjectContext } from "../context/ProjectContext";
 import useScrollToProcess from "./hooks/useScrollToProcess";
-import ServiceRoutes from "@/routes/ServiceRoutes";
 import useGeneralProcess from "../hooks/useGeneralProcess";
 
 interface Props {
-  event?: ProjectEvent;
   adminProject?: ProjectProps;
 }
 
 const Project: React.FC<Props> = (props) => {
-  const { event: projectCollectionEvent, adminProject } = props;
-  const { project: _project } = useContext(ProjectContext);
+  const { adminProject } = props;
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const { processID } = useParams();
   useScrollToProcess(processID);
   const { user } = useUser();
+
+  const { project: _project } = useContext(ProjectContext);
   const project: ProjectProps =
     user.usertype === UserType.ADMIN && adminProject !== undefined
       ? adminProject
       : _project;
-
-  const { t } = useTranslation();
-  const navigate = useNavigate();
   const { deleteProject, updateProject } = useProject();
   const { createProcess } = useGeneralProcess();
   const { checkedProcesses, handleOnChangeCheckboxSelectAll } =
@@ -64,19 +66,6 @@ const Project: React.FC<Props> = (props) => {
 
   const onButtonClickCreateProcess = () => {
     createProcess();
-  };
-
-  const getProjectEventItemByID = (
-    projectID: string
-  ): ProjectEventItem | undefined => {
-    if (
-      projectCollectionEvent === undefined ||
-      projectCollectionEvent.processes.length < 1
-    )
-      return undefined;
-    return projectCollectionEvent.processes.find(
-      (projectEvent) => projectEvent.processID === projectID
-    );
   };
 
   const updateProjectTitle = (title: string) => {
@@ -211,7 +200,6 @@ const Project: React.FC<Props> = (props) => {
               key={index}
               process={process}
               projectID={project.projectID}
-              projectEvent={getProjectEventItemByID(process.processID)}
               checked={checkedProcesses.includes(process.processID)}
             />
           ))

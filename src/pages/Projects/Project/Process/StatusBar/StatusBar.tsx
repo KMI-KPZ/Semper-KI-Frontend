@@ -10,13 +10,18 @@ import StatusItemConnector from "./components/ItemConnector";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import { ServiceType } from "@/pages/Service/hooks/useService";
-import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
+import { ProcessProps, ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import DescriptionIcon from "@mui/icons-material/Description";
 import ModeIcon from "@mui/icons-material/Mode";
+import useEvents from "@/hooks/useEvents/useEvents";
+import { Badge } from "@component-library/Badge";
 
 interface StatusViewProps {
   status: ProcessStatus;
   serviceType: ServiceType;
+  projectID: string;
+  processID: string;
+  statusCountAction: "still" | "move";
 }
 
 export type StatusData = {
@@ -100,7 +105,8 @@ const statusData: StatusData[] = [
 ];
 
 const StatusBar: React.FC<StatusViewProps> = (props) => {
-  const { serviceType, status } = props;
+  const { serviceType, status, processID, projectID, statusCountAction } =
+    props;
 
   const getItems = (): StatusData[] => {
     if (status < ProcessStatus.REQUESTED)
@@ -118,7 +124,13 @@ const StatusBar: React.FC<StatusViewProps> = (props) => {
       <div className="relative flex w-fit flex-col flex-wrap items-center justify-between pb-12 md:flex-row md:justify-center md:gap-y-16">
         {getItems().map((item, index) => (
           <Fragment key={index}>
-            <StatusItem item={item} state={status} />
+            <StatusItem
+              statusCountAction={statusCountAction}
+              item={item}
+              state={status}
+              processID={processID}
+              projectID={projectID}
+            />
             {index < getItems().length - 1 ? (
               <StatusItemConnector
                 active={

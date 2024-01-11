@@ -34,14 +34,6 @@ export const NavigationItemData: INavigationItem[] = [
     extern: false,
   },
   {
-    userTypes: [UserType.ANONYM],
-    title: "demo",
-    link: "/process/model",
-    icon: <ScienceIcon fontSize="large" />,
-    preferred: ["home"],
-    extern: false,
-  },
-  {
     title: "demonstrator",
     link: "/projects",
     icon: <ScienceIcon fontSize="large" />,

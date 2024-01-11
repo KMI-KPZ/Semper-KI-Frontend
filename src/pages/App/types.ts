@@ -1,19 +1,23 @@
 
-export type Event = ProjectEvent | OrgaEvent | PermissionEvent; 
+export type Event = ProjectEvents | OrgaEvents | PermissionEvent; 
 
-export interface ProjectEvent {
+export interface ProjectEvents {
   eventType: "projectEvent";
-  projectID: string;
-  processes: ProjectEventItem[];
+  events: ProjectEventItem[];
 }
 
 export interface ProjectEventItem {
-  processID: string;
-  processStatus: number;
-  messages: number;
+  projectID: string;
+  processes: ProcessEventItem[];
 }
 
-export interface OrgaEvent  {
+export interface ProcessEventItem {
+  processStatus?: number;
+  messages?: number;
+  processID:string;
+}
+
+export interface OrgaEvents  {
   eventType: "orgaEvent";
   orgaName: string;
 }

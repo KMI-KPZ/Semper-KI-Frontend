@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { MouseEvent, useContext, useState } from "react";
 import { Button } from "@component-library/Button";
 
 import ProcessChat from "./Chat/Chat";
@@ -18,7 +18,7 @@ import useProcess, {
   ProcessProps,
   ProcessStatus,
 } from "../../hooks/useProcess";
-import { ProjectEventItem } from "@/pages/App/types";
+import { ProcessEventItem, ProjectEventItem } from "@/pages/App/types";
 import { getTitleFromProcess } from "@/pages/Service/Overview/components/Item";
 import ProjectFile from "./components/ProcessFile";
 import ProcessStatusButtons from "./components/StatusButtons";
@@ -28,30 +28,35 @@ import { UserContext } from "@/contexts/UserContextProvider";
 import useCheckedProcesses from "../hooks/useCheckedProcesses";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import useGeneralProcess from "../../hooks/useGeneralProcess";
+import logger from "@/hooks/useLogger";
+import useEvents from "@/hooks/useEvents/useEvents";
 
 interface Props {
   process: ProcessProps;
   projectID: string;
-  projectEvent?: ProjectEventItem;
   checked: boolean;
 }
 
 export interface ProcessComponentState {
   chatOpen: boolean;
   infoOpen: boolean;
+  statusCountAction: "still" | "move";
+  statusCountReset: boolean;
 }
 
 const Process: React.FC<Props> = (props) => {
-  const { process, projectID, projectEvent, checked } = props;
+  const { process, projectID, checked } = props;
   const { user } = useUser();
   const { t } = useTranslation();
   const [state, setState] = useState<ProcessComponentState>({
     chatOpen: false,
     infoOpen: false,
+    statusCountAction: "still",
+    statusCountReset: false,
   });
   const { handleOnChangeCheckboxSelect } = useCheckedProcesses();
-
   const { updateProcess, uploadFiles } = useGeneralProcess();
+  const { deleteEvent } = useEvents();
 
   const updateStatus = (status: ProcessStatus) => {
     // updateProject.mutate({
@@ -84,10 +89,33 @@ const Process: React.FC<Props> = (props) => {
     });
   };
 
+  const handleOnMouseOver = () => {
+    if (state.statusCountReset === false) {
+      setState((prevState) => ({
+        ...prevState,
+        statusCountAction: "move",
+        statusCountReset: true,
+      }));
+      setTimeout(() => {
+        setState((prevState) => ({
+          ...prevState,
+          statusCountReset: false,
+        }));
+        deleteEvent({
+          eventType: "projectEvent",
+          projectID: projectID,
+          processID: process.processID,
+          type: "status",
+        });
+      }, 10000);
+    }
+  };
+
   return (
     <div
       className="flex w-full flex-col items-center  justify-start gap-5 p-5 shadow-card  md:items-start"
       id={process.processID}
+      onMouseOver={handleOnMouseOver}
     >
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row lg:justify-between">
         <Container direction="row" gap={3} className="flex-wrap md:flex-nowrap">
@@ -116,10 +144,12 @@ const Process: React.FC<Props> = (props) => {
           process={process}
           updateStatus={updateStatus}
           user={user}
-          projectEvent={projectEvent}
         />
       </div>
       <StatusBar
+        statusCountAction={state.statusCountAction}
+        projectID={projectID}
+        processID={process.processID}
         status={process.processStatus}
         serviceType={process.serviceType}
       />

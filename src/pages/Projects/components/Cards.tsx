@@ -6,6 +6,7 @@ import { Heading, Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProjectsCard from "./Card";
+import { Divider } from "@component-library/Divider";
 
 interface ProjectsCardsProps {
   flatProjects: FlatProjectProps[];
@@ -81,46 +82,53 @@ const ProjectsCards: React.FC<ProjectsCardsProps> = (props) => {
         ))}
       </Container>
       {user.usertype === UserType.ORGANIZATION ? (
-        <Container direction="col" width="full">
-          <Container direction="row" justify="start" width="full">
-            <label className="flex flex-row items-center justify-center">
-              <input
-                type="checkbox"
-                className="h-6 w-6"
-                onChange={(e) => handleOnChangeCheckboxSelectAll(e, "recieved")}
-                id="selectAllRecievedProjects"
-                name={t(
-                  "Projects.components.Cards.label.selectAllRecievedProjects"
-                )}
-                value={t(
-                  "Projects.components.Cards.label.selectAllRecievedProjects"
-                )}
-                checked={
-                  selectedProjects.length > 0 &&
-                  selectedProjects.length === recievedProjects.length &&
-                  recievedProjects.filter((project) =>
-                    selectedProjects.includes(project.projectID)
-                  ).length === recievedProjects.length
-                }
-              />
-              <Text className="hidden">
-                {t("Projects.components.Cards.label.selectAllRecievedProjects")}
-              </Text>
-            </label>
-            <Heading variant="h2">
-              {t("Projects.components.Cards.receivedProjects")}
-            </Heading>
-          </Container>
+        <>
+          <Divider />
+          <Container direction="col" width="full">
+            <Container direction="row" justify="start" width="full">
+              <label className="flex flex-row items-center justify-center">
+                <input
+                  type="checkbox"
+                  className="h-6 w-6"
+                  onChange={(e) =>
+                    handleOnChangeCheckboxSelectAll(e, "recieved")
+                  }
+                  id="selectAllRecievedProjects"
+                  name={t(
+                    "Projects.components.Cards.label.selectAllRecievedProjects"
+                  )}
+                  value={t(
+                    "Projects.components.Cards.label.selectAllRecievedProjects"
+                  )}
+                  checked={
+                    selectedProjects.length > 0 &&
+                    selectedProjects.length === recievedProjects.length &&
+                    recievedProjects.filter((project) =>
+                      selectedProjects.includes(project.projectID)
+                    ).length === recievedProjects.length
+                  }
+                />
+                <Text className="hidden">
+                  {t(
+                    "Projects.components.Cards.label.selectAllRecievedProjects"
+                  )}
+                </Text>
+              </label>
+              <Heading variant="h2">
+                {t("Projects.components.Cards.receivedProjects")}
+              </Heading>
+            </Container>
 
-          {recievedProjects.map((flatProject, index) => (
-            <ProjectsCard
-              flatProject={flatProject}
-              key={index}
-              selectedProjects={selectedProjects}
-              setSelectedProjects={setSelectedProjects}
-            />
-          ))}
-        </Container>
+            {recievedProjects.map((flatProject, index) => (
+              <ProjectsCard
+                flatProject={flatProject}
+                key={index}
+                selectedProjects={selectedProjects}
+                setSelectedProjects={setSelectedProjects}
+              />
+            ))}
+          </Container>
+        </>
       ) : null}
     </Container>
   );

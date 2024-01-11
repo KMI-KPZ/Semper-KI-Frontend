@@ -8,8 +8,7 @@ import logger from "@/hooks/useLogger";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { AppContext } from "@/pages/App/App";
 import InfoIcon from "@mui/icons-material/Info";
-import useProjectEventChange from "../../hooks/useProjectEventChange";
-import { ProjectEventItem } from "@/pages/App/types";
+import { ProcessEventItem, ProjectEventItem } from "@/pages/App/types";
 import { Badge } from "@component-library/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 import useProcess, {
@@ -30,22 +29,14 @@ interface ProcessButtonsProps {
   process: ProcessProps;
   updateStatus: (status: ProcessStatus) => void;
   setState: Dispatch<SetStateAction<ProcessComponentState>>;
-  projectEvent?: ProjectEventItem;
 }
 
 const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
-  const { projectID, process, user, updateStatus, setState, projectEvent } =
-    props;
+  const { projectID, process, user, updateStatus, setState } = props;
   const { t } = useTranslation();
-  const { deleteEvent } = useEvents();
-  const { processID } = useParams();
+  const { deleteEvent, getProcessEventItemCount } = useEvents();
   const { deleteProcess, getNavigationPrefix } = useGeneralProcess();
   const navigate = useNavigate();
-  const { getDeleteProjectEvent } = useProjectEventChange(
-    process,
-    projectID,
-    true
-  ); // todo: check if this is correct
 
   const shouldRenderFor = (type: "CLIENT" | "CONTRACTOR"): boolean => {
     return (
@@ -96,7 +87,12 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
   };
 
   const handleOnClickButtonChat = () => {
-    deleteEvent(getDeleteProjectEvent("message"));
+    deleteEvent({
+      eventType: "projectEvent",
+      processID: process.processID,
+      projectID,
+      type: "message",
+    });
     navigate(`${getNavigationPrefix(process.processID)}chat`);
   };
 
@@ -131,22 +127,13 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
       {process.processStatus >= ProcessStatus.REQUESTED &&
       user.usertype !== UserType.ANONYM ? (
         <PermissionGate element="ProcessButtonChat">
-          {projectEvent !== undefined &&
-          projectEvent.messages !== undefined &&
-          projectEvent.messages > 0 ? (
-            <Badge count={projectEvent.messages}>
-              <Button
-                variant="secondary"
-                width="fit"
-                size="sm"
-                children={<MailIcon />}
-                onClick={handleOnClickButtonChat}
-                title={t(
-                  "Projects.Project.Process.components.Buttons.button.chat"
-                )}
-              />
-            </Badge>
-          ) : (
+          <Badge
+            count={getProcessEventItemCount(
+              projectID,
+              process.processID,
+              "messages"
+            )}
+          >
             <Button
               variant="secondary"
               width="fit"
@@ -157,7 +144,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
                 "Projects.Project.Process.components.Buttons.button.chat"
               )}
             />
-          )}
+          </Badge>
         </PermissionGate>
       ) : null}
       {process.processStatus <= ProcessStatus.REQUESTED &&

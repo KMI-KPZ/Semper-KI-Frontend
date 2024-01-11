@@ -13,7 +13,7 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface useProcessMutationsReturnProps {
   createProcessMutation: UseMutationResult<string, Error, void, unknown>;
@@ -89,6 +89,8 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
   const queryClient = useQueryClient();
   const { projectID } = useParams();
   const { project } = useProject();
+  const navigate = useNavigate();
+  const { processID } = useParams();
 
   const createProcessMutation = useMutation<string, Error, void>({
     mutationFn: async () => {
@@ -101,6 +103,7 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
     onSuccess(data, variables, context) {
       queryClient.invalidateQueries(["flatProjects"]);
       queryClient.invalidateQueries(["project", projectID]);
+      navigate(`${processID === undefined ? "" : "../"}${data}`);
     },
   });
 

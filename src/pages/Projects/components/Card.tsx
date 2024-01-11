@@ -10,6 +10,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useProject } from "../hooks/useProject";
 import logger from "@/hooks/useLogger";
+import { Badge } from "@component-library/Badge";
+import useEvents from "@/hooks/useEvents/useEvents";
 
 interface ProjectsCardProps {
   flatProject: FlatProjectProps;
@@ -21,6 +23,7 @@ const ProjectsCard: React.FC<ProjectsCardProps> = (props) => {
   const { flatProject, selectedProjects, setSelectedProjects } = props;
   const { t } = useTranslation();
   const { deleteProject } = useProject();
+  const { getProjectEventCount } = useEvents();
 
   const handleOnClickButtonDelete = (projectID: string) => {
     window.confirm(t("Projects.components.Table.deleteConfirm")) === true
@@ -150,12 +153,17 @@ const ProjectsCard: React.FC<ProjectsCardProps> = (props) => {
           />
         </PermissionGate>
         <PermissionGate element={"ProjectButtonSee"}>
-          <Button
-            variant="secondary"
-            title={t("Projects.components.Table.button.detail")}
-            children={<VisibilityIcon />}
-            to={`${flatProject.projectID}`}
-          />
+          <Badge
+            position="small"
+            count={getProjectEventCount(flatProject.projectID)}
+          >
+            <Button
+              variant="secondary"
+              title={t("Projects.components.Table.button.detail")}
+              children={<VisibilityIcon />}
+              to={`${flatProject.projectID}`}
+            />
+          </Badge>
         </PermissionGate>
       </Container>
     </Container>

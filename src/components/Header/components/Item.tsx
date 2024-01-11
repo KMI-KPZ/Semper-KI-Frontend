@@ -65,11 +65,7 @@ const HeaderItem: React.FC<Props> = (props) => {
         variant="tertiary"
         title={t(`data.NavigationItem.${headeritem.title}`)}
         startIcon={
-          badge !== undefined && badge > 0 ? (
-            <Badge count={badge}>{renderIcon}</Badge>
-          ) : (
-            renderIcon
-          )
+          <Badge count={badge === undefined ? 0 : badge}>{renderIcon}</Badge>
         }
         children={
           onlyIcon !== undefined && onlyIcon === true ? null : (

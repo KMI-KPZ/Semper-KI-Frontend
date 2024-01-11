@@ -15,7 +15,7 @@ export interface FlatProjectProps {
   status: ProcessStatus;
   createdWhen: Date;
   updatedWhen: Date;
-  details: ProjectDetailsProps;
+  projectDetails: ProjectDetailsProps;
   processesCount: number;
 }
 
@@ -56,7 +56,7 @@ const useFlatProjectQuerys = (): useFlatProjectQuerysReturnProps => {
             client: project.client,
             projectID: project.projectID,
             status: project.status,
-            details: project.details,
+            projectDetails: project.projectDetails,
             processesCount: project.processesCount,
             createdWhen: new Date(project.createdWhen),
             updatedWhen: new Date(project.updatedWhen),

@@ -75,9 +75,9 @@ const AdminProjects: React.FC<Props> = (props) => {
                         {project.client}
                       </TableCell>
                       <TableCell component="th" scope="row">
-                        {project.details.title === undefined
+                        {project.projectDetails.title === undefined
                           ? "---"
-                          : project.details.title}
+                          : project.projectDetails.title}
                       </TableCell>
                       <TableCell component="th" scope="row">
                         {project.processesCount}

@@ -73,9 +73,9 @@ const ProjectsCard: React.FC<ProjectsCardProps> = (props) => {
           />
           <Text className="hidden">
             {t("Projects.components.Card.name")}
-            {flatProject.details.title === undefined
+            {flatProject.projectDetails.title === undefined
               ? `Auftrag: #${flatProject.projectID}`
-              : flatProject.details.title}
+              : flatProject.projectDetails.title}
           </Text>
         </label>
       </Container>
@@ -96,9 +96,9 @@ const ProjectsCard: React.FC<ProjectsCardProps> = (props) => {
             {t("Projects.components.Card.name")}
           </Text>
           <Text className="min-w-[120px] break-all ">
-            {flatProject.details.title === undefined
+            {flatProject.projectDetails.title === undefined
               ? `Auftrag: #${flatProject.projectID}`
-              : flatProject.details.title}
+              : flatProject.projectDetails.title}
           </Text>
         </Container>
 

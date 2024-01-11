@@ -26,7 +26,7 @@ export const ProjectContext = React.createContext<ProjectContextProps>({
   project: {
     client: "",
     createdWhen: new Date(),
-    details: {},
+    projectDetails: {},
     processes: [],
     projectID: "",
     updatedWhen: new Date(),

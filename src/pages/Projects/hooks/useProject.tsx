@@ -20,7 +20,7 @@ export interface ProjectProps {
   status: ProcessStatus;
   createdWhen: Date;
   updatedWhen: Date;
-  details: ProjectDetailsProps;
+  projectDetails: ProjectDetailsProps;
   processes: ProcessProps[];
 }
 

@@ -105,9 +105,9 @@ const Project: React.FC<Props> = (props) => {
           <ProjectTitleForm
             headerType="h1"
             title={
-              project.details.title === undefined
+              project.projectDetails.title === undefined
                 ? t("Projects.Project.Project.title")
-                : project.details.title
+                : project.projectDetails.title
             }
             updateTitle={updateProjectTitle}
           />
@@ -205,10 +205,7 @@ const Project: React.FC<Props> = (props) => {
           ))
       )}
       <Modal
-        open={
-          project.details === undefined ||
-          (project.details !== undefined && project.details.title === undefined)
-        }
+        open={project.projectDetails.title === undefined}
         locked={true}
         title="projectTitle"
         noIcon={true}

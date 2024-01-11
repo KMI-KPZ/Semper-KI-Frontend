@@ -204,6 +204,25 @@ const Project: React.FC<Props> = (props) => {
             />
           ))
       )}
+      <Modal
+        open={
+          project.details === undefined ||
+          (project.details !== undefined && project.details.title === undefined)
+        }
+        locked={true}
+        title="projectTitle"
+        noIcon={true}
+      >
+        <Container className="bg-white p-10" direction="col">
+          <ProjectTitleForm
+            headerType="h1"
+            title={t("Projects.Project.Project.modal.projectName")}
+            labelTitle={t("Projects.Project.Project.modal.projectName")}
+            updateTitle={updateProjectTitle}
+            edit={true}
+          />
+        </Container>
+      </Modal>
     </div>
   );
 };

@@ -1086,6 +1086,10 @@
         }
       },
       "Project": {
+        "modal": {
+          "projectName": "Projektname",
+          "processName": "Prozessname"
+        },
         "title": "Projekt",
         "state": "Status: ",
         "selected": "{{count}} Ausgewählt",

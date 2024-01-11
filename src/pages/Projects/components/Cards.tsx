@@ -12,10 +12,19 @@ interface ProjectsCardsProps {
   flatProjects: FlatProjectProps[];
   selectedProjects: string[];
   setSelectedProjects: React.Dispatch<React.SetStateAction<string[]>>;
+  filterDataBySearchInput: (
+    data: FlatProjectProps,
+    _keys?: (keyof FlatProjectProps)[] | undefined
+  ) => boolean;
 }
 
 const ProjectsCards: React.FC<ProjectsCardsProps> = (props) => {
-  const { flatProjects, selectedProjects, setSelectedProjects } = props;
+  const {
+    flatProjects,
+    selectedProjects,
+    setSelectedProjects,
+    filterDataBySearchInput,
+  } = props;
   const { t } = useTranslation();
   const { user } = useUser();
 

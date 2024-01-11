@@ -6,19 +6,22 @@ import { useTranslation } from "react-i18next";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import { boolean } from "yup";
 
 interface ProjectTitleFormProps {
   title: string;
   updateTitle(title: string): void;
   headerType: "h1" | "h2" | "h3";
+  labelTitle?: string;
   forId?: string;
+  edit?: boolean;
 }
 
 const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
-  const { title, updateTitle, headerType, forId } = props;
+  const { title, updateTitle, headerType, labelTitle, forId, edit } = props;
   const { t } = useTranslation();
   const [state, setState] = useState<{ edit: boolean; titleText: string }>({
-    edit: false,
+    edit: edit === undefined ? false : edit,
     titleText: "",
   });
 
@@ -61,7 +64,9 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
       {state.edit === true ? (
         <>
           <Heading variant={headerType} className="md:whitespace-nowrap">
-            {t("Projects.Project.components.TitleForm.name")}
+            {labelTitle !== undefined
+              ? labelTitle
+              : t("Projects.Project.components.TitleForm.name")}
           </Heading>
           <input
             autoFocus

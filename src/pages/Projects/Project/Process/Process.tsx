@@ -107,7 +107,7 @@ const Process: React.FC<Props> = (props) => {
           processID: process.processID,
           type: "status",
         });
-      }, 10000);
+      }, 7000);
     }
   };
 

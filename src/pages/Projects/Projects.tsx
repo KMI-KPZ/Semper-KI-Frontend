@@ -14,6 +14,8 @@ import useFlatProjectQuerys, {
 } from "@/api/Project/useFlatProjectQuerys";
 import useAdminQuerys from "@/api/Admin/useAdminQuerys";
 import ProjectsCards from "./components/Cards";
+import useSearch from "@/hooks/useSearch";
+import Search from "@component-library/Search";
 
 interface ProjectsProps {}
 
@@ -27,6 +29,8 @@ const Projects: React.FC<ProjectsProps> = (props) => {
       ? adminFlatProjectsQuery
       : userFlatProjectsQuery;
   const { createProject, deleteProject } = useProject();
+  const { filterDataBySearchInput, handleSearchInputChange } =
+    useSearch<FlatProjectProps>();
 
   const [selectedProjects, setSelectedProjects] = React.useState<string[]>([]);
 
@@ -80,8 +84,10 @@ const Projects: React.FC<ProjectsProps> = (props) => {
           </PermissionGate>
         </Container>
       </div>
+      <Search handleSearchInputChange={handleSearchInputChange} />
       <LoadingSuspense query={flatProjectsQuery}>
         <ProjectsCards
+          filterDataBySearchInput={filterDataBySearchInput}
           flatProjects={
             flatProjectsQuery.data === undefined ? [] : flatProjectsQuery.data
           }

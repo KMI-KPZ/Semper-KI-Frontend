@@ -86,7 +86,7 @@ const AdminProjects: React.FC<Props> = (props) => {
                         {t(
                           `enum.ProcessStatus.${
                             ProcessStatus[
-                              project.status
+                              project.projectStatus
                             ] as keyof typeof ProcessStatus
                           }`
                         )}

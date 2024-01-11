@@ -16,11 +16,11 @@ interface ReturnProps {
 
 export interface ProjectProps {
   projectID: string;
+  projectStatus: ProcessStatus;
+  projectDetails: ProjectDetailsProps;
   client: string;
-  status: ProcessStatus;
   createdWhen: Date;
   updatedWhen: Date;
-  projectDetails: ProjectDetailsProps;
   processes: ProcessProps[];
 }
 
@@ -34,12 +34,12 @@ export interface UpdateProjectProps {
 }
 
 export interface ProjectChangesProps {
-  status?: ProcessStatus;
+  projectStatus?: ProcessStatus;
   projectDetails?: ProjectDetailsProps;
 }
 export interface ProjectDeletionsProps {
   projectDetails?: { title?: "" };
-  status?: "";
+  projectStatus?: "";
 }
 
 export interface VerifyProjectProps {

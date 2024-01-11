@@ -135,7 +135,7 @@ const ProjectsCard: React.FC<ProjectsCardProps> = (props) => {
               {t(
                 `enum.ProcessStatus.${
                   ProcessStatus[
-                    flatProject.status
+                    flatProject.projectStatus
                   ] as keyof typeof ProcessStatus
                 }`
               )}

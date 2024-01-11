@@ -80,7 +80,7 @@ const useAdminQuerys = (): useAdminQuerysReturnProps => {
         const project: ProjectProps = {
           client: response.data.client,
           projectID: response.data.projectID,
-          status: response.data.status,
+          projectStatus: response.data.status,
           projectDetails: response.data.details,
           createdWhen: new Date(response.data.createdWhen),
           updatedWhen: new Date(response.data.updatedWhen),

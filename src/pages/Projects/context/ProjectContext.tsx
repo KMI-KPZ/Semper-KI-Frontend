@@ -30,7 +30,7 @@ export const ProjectContext = React.createContext<ProjectContextProps>({
     processes: [],
     projectID: "",
     updatedWhen: new Date(),
-    status: 0,
+    projectStatus: 0,
   },
   projectQuery: {} as UseQueryResult<ProjectProps, Error>,
   checkedProcesses: [],

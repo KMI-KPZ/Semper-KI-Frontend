@@ -116,7 +116,7 @@ const Project: React.FC<Props> = (props) => {
           {t("Projects.Project.Project.state")}
           {t(
             `enum.ProcessStatus.${
-              ProcessStatus[project.status] as keyof typeof ProcessStatus
+              ProcessStatus[project.projectStatus] as keyof typeof ProcessStatus
             }`
           )}
         </Text>

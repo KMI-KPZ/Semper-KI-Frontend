@@ -41,7 +41,7 @@ const useProjectQuerys = (): useProjectQuerysReturnProps => {
         const project: ProjectProps = {
           client: response.data.client,
           projectID: response.data.projectID,
-          status: response.data.status,
+          projectStatus: response.data.projectStatus,
           projectDetails: response.data.projectDetails,
           createdWhen: new Date(response.data.createdWhen),
           updatedWhen: new Date(response.data.updatedWhen),

@@ -809,6 +809,7 @@
           "selectAllOwnProjects": "Alle eigenen Projekte auswählen",
           "selectAllRecievedProjects": "Alle empfangenen Projekte auswählen"
         },
+        "adminProjects": "Alle Projekte",
         "ownProjects": "Eigene Projekte",
         "receivedProjects": "Erhaltene Projekte"
       }

@@ -78,17 +78,21 @@ const ProjectsCards: React.FC<ProjectsCardsProps> = (props) => {
             </Text>
           </label>
           <Heading variant="h2">
-            {t("Projects.components.Cards.ownProjects")}
+            {user.usertype === UserType.ADMIN
+              ? t("Projects.components.Cards.adminProjects")
+              : t("Projects.components.Cards.ownProjects")}
           </Heading>
         </Container>
-        {ownProjects.map((flatProject, index) => (
-          <ProjectsCard
-            flatProject={flatProject}
-            key={index}
-            selectedProjects={selectedProjects}
-            setSelectedProjects={setSelectedProjects}
-          />
-        ))}
+        {ownProjects
+          .filter((flatProject) => filterDataBySearchInput(flatProject))
+          .map((flatProject, index) => (
+            <ProjectsCard
+              flatProject={flatProject}
+              key={index}
+              selectedProjects={selectedProjects}
+              setSelectedProjects={setSelectedProjects}
+            />
+          ))}
       </Container>
       {user.usertype === UserType.ORGANIZATION ? (
         <>
@@ -128,14 +132,16 @@ const ProjectsCards: React.FC<ProjectsCardsProps> = (props) => {
               </Heading>
             </Container>
 
-            {recievedProjects.map((flatProject, index) => (
-              <ProjectsCard
-                flatProject={flatProject}
-                key={index}
-                selectedProjects={selectedProjects}
-                setSelectedProjects={setSelectedProjects}
-              />
-            ))}
+            {recievedProjects
+              .filter((flatProject) => filterDataBySearchInput(flatProject))
+              .map((flatProject, index) => (
+                <ProjectsCard
+                  flatProject={flatProject}
+                  key={index}
+                  selectedProjects={selectedProjects}
+                  setSelectedProjects={setSelectedProjects}
+                />
+              ))}
           </Container>
         </>
       ) : null}

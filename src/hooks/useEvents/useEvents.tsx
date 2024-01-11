@@ -51,22 +51,15 @@ const useEvents = (): ReturnProps => {
 
   const onWebsocktEvent = (event: MessageEvent) => {
     if (event.data !== undefined && JSONIsParseable(event.data)) {
-      const newEvent = JSONSafeParse<any>(event.data);
-      // logger(
-      //   "useEvents | onWebsocktEvent | ",
-      //   newEvent !== undefined
-      //     ? newEvent
-      //     : `JSONSafeParse failed | ${event.data}`
-      // );
+      const newEvent = JSONSafeParse<Event>(event.data);
+      logger(
+        "useEvents | onWebsocktEvent | ",
+        newEvent !== undefined
+          ? newEvent
+          : `JSONSafeParse failed | ${event.data}`
+      );
       if (newEvent !== undefined) {
-        const fixedEvent: Event = {
-          eventType: newEvent.eventType,
-          events: [
-            { projectID: newEvent.projectID, processes: newEvent.processes },
-          ],
-        };
-        // logger("useEvents | onWebsocktEvent | fixedEvent", fixedEvent);
-        handleNewEvent(fixedEvent);
+        handleNewEvent(newEvent);
       }
     } else {
       logger(

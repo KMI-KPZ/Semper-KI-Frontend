@@ -7,6 +7,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { boolean } from "yup";
+import OwnerGate from "@/components/OwnerGate/OwnerGate";
 
 interface ProjectTitleFormProps {
   title: string;
@@ -84,22 +85,24 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
           </Heading>
         </label>
       )}
-      <PermissionGate element="ProjectButtonEditName">
-        <Button
-          onClick={handleOnClickEditCheckButton}
-          variant="secondary"
-          title={t("Projects.Project.components.TitleForm.button.edit")}
-          size="xs"
-          width="fit"
-          children={
-            state.edit ? (
-              <CheckIcon fontSize="small" />
-            ) : (
-              <EditIcon fontSize="small" />
-            )
-          }
-        />
-      </PermissionGate>
+      <OwnerGate>
+        <PermissionGate element="ProjectButtonEditName">
+          <Button
+            onClick={handleOnClickEditCheckButton}
+            variant="secondary"
+            title={t("Projects.Project.components.TitleForm.button.edit")}
+            size="xs"
+            width="fit"
+            children={
+              state.edit ? (
+                <CheckIcon fontSize="small" />
+              ) : (
+                <EditIcon fontSize="small" />
+              )
+            }
+          />
+        </PermissionGate>
+      </OwnerGate>
     </Container>
   );
 };

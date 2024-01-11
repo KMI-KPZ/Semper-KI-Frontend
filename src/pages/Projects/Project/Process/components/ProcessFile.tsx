@@ -13,6 +13,7 @@ import Container from "@component-library/Container";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { createDownload } from "@/services/utils";
 import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
+import OwnerGate from "@/components/OwnerGate/OwnerGate";
 
 interface Props {
   process: ProcessProps;
@@ -28,7 +29,7 @@ const ProjectFile: React.FC<Props> = (props) => {
 
   const { downloadFile, downloadZIP, deleteFile } = useGeneralProcess();
 
-  const hanleOnClickButtonDelete = (file: FileProps) => {
+  const handleOnClickButtonDelete = (file: FileProps) => {
     deleteFile({ processID: process.processID, fileID: file.id });
   };
 
@@ -82,16 +83,18 @@ const ProjectFile: React.FC<Props> = (props) => {
               >
                 <span className="p-2">{file.fileName}</span>
                 <Container>
-                  <Button
-                    size="sm"
-                    variant="secondary"
-                    onClick={() => hanleOnClickButtonDelete(file)}
-                    children={<DeleteIcon />}
-                    loading={loadingFileID === file.id}
-                    title={t(
-                      "Projects.Project.Process.components.ProcessFile.button.delete"
-                    )}
-                  />
+                  <OwnerGate>
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() => handleOnClickButtonDelete(file)}
+                      children={<DeleteIcon />}
+                      loading={loadingFileID === file.id}
+                      title={t(
+                        "Projects.Project.Process.components.ProcessFile.button.delete"
+                      )}
+                    />
+                  </OwnerGate>
                   <Button
                     size="sm"
                     variant="secondary"

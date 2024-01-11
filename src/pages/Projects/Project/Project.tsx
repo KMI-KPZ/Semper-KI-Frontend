@@ -30,6 +30,7 @@ import {
 import { ProjectContext } from "../context/ProjectContext";
 import useScrollToProcess from "./hooks/useScrollToProcess";
 import useGeneralProcess from "../hooks/useGeneralProcess";
+import OwnerGate from "@/components/OwnerGate/OwnerGate";
 
 interface Props {
   adminProject?: ProjectProps;
@@ -89,9 +90,6 @@ const Project: React.FC<Props> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
-      {/* <Routes>
-        <Route path="service/*" element={<ServiceRoutes />} />
-      </Routes> */}
       <Modal
         title="ProjectInfo"
         open={infoOpen}
@@ -129,16 +127,18 @@ const Project: React.FC<Props> = (props) => {
             onClick={handleOnClickButtonInfo}
             title={t("Projects.Project.Project.button.info")}
           />
-          <PermissionGate element={"ProjectButtonDELETE"}>
-            <Button
-              width="fit"
-              variant="secondary"
-              size="sm"
-              children={<DeleteIcon />}
-              title={t("Projects.Project.Project.button.delete")}
-              onClick={handleOnClickDelete}
-            />
-          </PermissionGate>
+          <OwnerGate>
+            <PermissionGate element={"ProjectButtonDELETE"}>
+              <Button
+                width="fit"
+                variant="secondary"
+                size="sm"
+                children={<DeleteIcon />}
+                title={t("Projects.Project.Project.button.delete")}
+                onClick={handleOnClickDelete}
+              />
+            </PermissionGate>
+          </OwnerGate>
         </Container>
       </Container>
       <Divider />
@@ -174,15 +174,17 @@ const Project: React.FC<Props> = (props) => {
             project={project}
             checkedProcesses={checkedProcesses}
           />
-          <PermissionGate element={"ProjectButtonNew"}>
-            <Button
-              variant="primary"
-              size="sm"
-              startIcon={<AddIcon />}
-              onClick={onButtonClickCreateProcess}
-              title={t("Projects.Project.Project.button.new")}
-            />
-          </PermissionGate>
+          <OwnerGate>
+            <PermissionGate element={"ProjectButtonNew"}>
+              <Button
+                variant="primary"
+                size="sm"
+                startIcon={<AddIcon />}
+                onClick={onButtonClickCreateProcess}
+                title={t("Projects.Project.Project.button.new")}
+              />
+            </PermissionGate>
+          </OwnerGate>
         </Container>
       </Container>
 
@@ -204,22 +206,24 @@ const Project: React.FC<Props> = (props) => {
             />
           ))
       )}
-      <Modal
-        open={project.projectDetails.title === undefined}
-        locked={true}
-        title="projectTitle"
-        noIcon={true}
-      >
-        <Container className="bg-white p-10" direction="col">
-          <ProjectTitleForm
-            headerType="h1"
-            title={t("Projects.Project.Project.modal.projectName")}
-            labelTitle={t("Projects.Project.Project.modal.projectName")}
-            updateTitle={updateProjectTitle}
-            edit={true}
-          />
-        </Container>
-      </Modal>
+      <OwnerGate>
+        <Modal
+          open={project.projectDetails.title === undefined}
+          locked={true}
+          title="projectTitle"
+          noIcon={true}
+        >
+          <Container className="bg-white p-10" direction="col">
+            <ProjectTitleForm
+              headerType="h1"
+              title={t("Projects.Project.Project.modal.projectName")}
+              labelTitle={t("Projects.Project.Project.modal.projectName")}
+              updateTitle={updateProjectTitle}
+              edit={true}
+            />
+          </Container>
+        </Modal>
+      </OwnerGate>
     </div>
   );
 };

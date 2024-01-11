@@ -56,7 +56,7 @@ const Process: React.FC<Props> = (props) => {
   });
   const { handleOnChangeCheckboxSelect } = useCheckedProcesses();
   const { updateProcess, uploadFiles } = useGeneralProcess();
-  const { deleteEvent } = useEvents();
+  const { deleteEvent, getProcessEventItem } = useEvents();
 
   const updateStatus = (status: ProcessStatus) => {
     // updateProject.mutate({
@@ -90,7 +90,10 @@ const Process: React.FC<Props> = (props) => {
   };
 
   const handleOnMouseOver = () => {
-    if (state.statusCountReset === false) {
+    if (
+      state.statusCountReset === false &&
+      getProcessEventItem(projectID, process.processID) !== undefined
+    ) {
       setState((prevState) => ({
         ...prevState,
         statusCountAction: "move",

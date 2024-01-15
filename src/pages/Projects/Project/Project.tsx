@@ -225,9 +225,6 @@ const Project: React.FC<Props> = (props) => {
           </Container>
         </Modal>
       </OwnerGate>
-      <Modal title="addressForm" open>
-        <AddressForm />
-      </Modal>
     </div>
   );
 };

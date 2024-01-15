@@ -21,6 +21,9 @@ import { twMerge } from "tailwind-merge";
 import useGeneralProcess from "../../hooks/useGeneralProcess";
 import ProjectContractorSelectionItem from "./components/Item";
 import logger from "@/hooks/useLogger";
+import AddressForm from "@component-library/Form/AddressForm/AddressForm";
+import Modal from "@component-library/Modal";
+import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 
 interface Props {}
 
@@ -37,6 +40,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   const { project, checkedProcesses } = useContext(ProjectContext);
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
+  const { user } = useAuthorizedUser();
 
   const { updateProcess } = useGeneralProcess();
 
@@ -80,6 +84,13 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
       });
     navigate("..");
   };
+
+  if (user.details.address === undefined)
+    return (
+      <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
+        <AddressForm />
+      </div>
+    );
 
   return (
     <form className="flex w-full flex-col items-center gap-5">

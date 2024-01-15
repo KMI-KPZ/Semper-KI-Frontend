@@ -1,4 +1,8 @@
-import { UseMutationResult, useMutation } from "@tanstack/react-query";
+import {
+  UseMutationResult,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { customAxios } from "../customAxios";
 import logger from "@/hooks/useLogger";
@@ -16,6 +20,7 @@ interface useUserMutationsReturnProps {
 
 const useUserMutations = (): useUserMutationsReturnProps => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const deleteUserMutation = useMutation<void, Error, void>({
     mutationFn: async () =>
@@ -28,12 +33,15 @@ const useUserMutations = (): useUserMutationsReturnProps => {
         .catch((error) => {
           logger("useUser | deleteUser ❌ |", error);
         }),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["user"]);
+    },
   });
 
   const updateUserDetailsMutation = useMutation<void, Error, UpdateUserProps>({
     mutationFn: async (details) =>
       customAxios
-        .post(`${process.env.VITE_HTTP_API_URL}/public/updateUserDetails/`, {
+        .patch(`${process.env.VITE_HTTP_API_URL}/public/updateUserDetails/`, {
           details,
         })
         .then((response) => {
@@ -43,6 +51,9 @@ const useUserMutations = (): useUserMutationsReturnProps => {
         .catch((error) => {
           logger("useUser | updateUser ❌ |", error);
         }),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["user"]);
+    },
   });
 
   return {

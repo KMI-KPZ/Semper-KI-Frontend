@@ -6,7 +6,7 @@ import TextInput from "../Inputs/TextInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useUser, { UserAddressProps } from "@/hooks/useUser";
-import { Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/Typography";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 
 interface AddressFormProps {
@@ -67,6 +67,9 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col items-center gap-5"
     >
+      <Heading variant="h1">
+        {t("component-library.Form.AddressForm.AddressForm.header")}
+      </Heading>
       {labels.map((label) => (
         <TextInput
           labelText={t(

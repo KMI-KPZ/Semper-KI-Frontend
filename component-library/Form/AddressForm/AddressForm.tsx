@@ -23,7 +23,10 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
     lastName: yup.string().required(t("yup.required")),
     company: yup.string(),
     street: yup.string().required(t("yup.required")),
-    houseNumber: yup.string().required(t("yup.required")),
+    houseNumber: yup
+      .number()
+      .typeError(t("yup.number"))
+      .required(t("yup.required")),
     zipcode: yup.string().required(t("yup.required")),
     city: yup.string().required(t("yup.required")),
     country: yup.string().required(t("yup.required")),
@@ -65,7 +68,7 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col items-center gap-5"
+      className="flex flex-col items-center gap-5 bg-white p-5"
     >
       <Heading variant="h1">
         {t("component-library.Form.AddressForm.AddressForm.header")}

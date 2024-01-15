@@ -915,10 +915,20 @@
       },
       "ContractorSelection": {
         "components": {},
+
         "hooks": {
           "useContractor": {}
         },
         "ContractorSelection": {
+          "address": {
+            "title": "Liefer und Rechnungsadresse",
+            "name": "Name",
+            "company": "Firma",
+            "address": "Addresse",
+            "button": {
+              "edit": "Bearbeiten"
+            }
+          },
           "contractor": "Auftagnehmer",
           "title": "Auftagnehmer auswählen",
           "error": {

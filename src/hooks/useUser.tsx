@@ -41,7 +41,7 @@ export interface UserAddressProps {
   lastName: string;
   company?: string;
   street: string;
-  houseNumber: string;
+  houseNumber: number;
   zipcode: string;
   city: string;
   country: string;

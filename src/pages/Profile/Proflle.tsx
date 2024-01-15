@@ -71,7 +71,11 @@ const Profile: React.FC<Props> = (props) => {
               {user.details.address.lastName}
             </span>
             <span>
-              {t("Profile.address.company")}: {user.details.address.company}
+              {t("Profile.address.company")}:{" "}
+              {user.details.address.company !== undefined &&
+              user.details.address.company !== ""
+                ? user.details.address.company
+                : "  ---"}
             </span>
             <span>
               {t("Profile.address.street")}: {user.details.address.street}{" "}
@@ -117,7 +121,7 @@ const Profile: React.FC<Props> = (props) => {
         </Container>
       </Container>
       <Modal open={edit} closeModal={closeModal} title="ProfileForm">
-        <AddressForm />
+        <AddressForm closeModal={closeModal} />
       </Modal>
     </Container>
   );

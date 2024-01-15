@@ -40,7 +40,7 @@ const Footer: React.FC<Props> = (props) => {
       <Modal open={open} closeModal={() => setOpen(false)} title="ContactForm">
         <ContactForm closeEdit={contactOnClick} />
       </Modal>
-      <footer className="w-full bg-ultramarinblau text-white shadow-inner grayscale-[90%] ">
+      <footer className="w-full bg-slate-800 text-white shadow-inner ">
         <ul className="flex flex-col items-center md:flex-row md:justify-around">
           <li className="p-2">
             <Button
@@ -48,7 +48,7 @@ const Footer: React.FC<Props> = (props) => {
               title={t("components.Footer.Footer.imprint")}
               extern={isMagazineUp()}
               to={isMagazineUp() ? URL_Impressum : "/legal/imprint"}
-              className="text-white"
+              className=" text-white  hover:bg-slate-700 "
             />
           </li>
           <li className="p-2">
@@ -57,7 +57,7 @@ const Footer: React.FC<Props> = (props) => {
               title={t("components.Footer.Footer.privacy")}
               extern={isMagazineUp()}
               to={isMagazineUp() ? URL_Datenschutz : "/legal/privacy"}
-              className="text-white"
+              className="text-white hover:bg-slate-700 "
             />
           </li>
           <li className="p-2">
@@ -65,7 +65,7 @@ const Footer: React.FC<Props> = (props) => {
               variant="tertiary"
               onClick={contactOnClick}
               title={t("components.Footer.Footer.contact")}
-              className="text-white"
+              className="text-white hover:bg-slate-700 "
             />
           </li>
           <li className="flex flex-col items-center justify-center xs:flex-row xs:gap-2 xs:p-2">
@@ -76,7 +76,7 @@ const Footer: React.FC<Props> = (props) => {
                 variant="tertiary"
                 extern
                 children={<InstagramIcon />}
-                className="text-white"
+                className="text-white hover:bg-slate-700 "
               />
               <Button
                 title={t("components.Footer.Footer.mastodon")}
@@ -84,7 +84,7 @@ const Footer: React.FC<Props> = (props) => {
                 variant="tertiary"
                 extern
                 children={<MastodonIcon />}
-                className="text-white"
+                className="text-white hover:bg-slate-700 "
               />
             </div>
             <span className="whitespace-nowrap p-2 font-bold">

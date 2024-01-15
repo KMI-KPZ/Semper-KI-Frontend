@@ -4,6 +4,7 @@ import { UserContext } from "../contexts/UserContextProvider";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import useUser, {
   AuthorizedUserProps,
+  UpdateUserProps,
   UserDetailsProps,
   UserType,
 } from "@/hooks/useUser";
@@ -14,7 +15,7 @@ interface AuthorizedUserOutletProps {}
 export type AuthorizedUserContext = {
   user: AuthorizedUserProps;
   deleteUser(): void;
-  updateUserDetails: (details: UserDetailsProps) => void;
+  updateUserDetails: (details: UpdateUserProps) => void;
 };
 
 export const AuthorizedUserContext = createContext<AuthorizedUserContext>({

@@ -1,6 +1,7 @@
 {
   "yup": {
-    "required": "{{name}} wird benötigt",
+    "requiredName": "{{name}} wird benötigt",
+    "required": "wird benötigt",
     "string": "Bitte Zeichenfolge eingeben",
     "number": "Bitte Zahl eingeben",
     "email": "Bitte gültige Email angeben"
@@ -164,6 +165,26 @@
       "empty": "Keine {{name}} vorhanden",
       "incorrect": "{{name}} ist nicht vorhanden"
     },
+    "Form": {
+      "AddressForm": {
+        "AddressForm": {
+          "labels": {
+            "firstName": "Vorname *",
+            "lastName": "Nachname *",
+            "company": "Firma",
+            "street": "Straße *",
+            "houseNumber": "Hausnummer *",
+            "zipcode": "Postleitzahl *",
+            "city": "Stadt *",
+            "country": "Land *"
+          },
+          "hint": "* Pflichtfeld",
+          "buttons": {
+            "save": "Speichern"
+          }
+        }
+      }
+    },
     "Input": {},
     "Loading": {
       "LoadingSuspense": {
@@ -185,6 +206,19 @@
     "Typography": {}
   },
   "components": {
+    "AddressForm": {
+      "AddressForm": {
+        "title": "Adresse bearbeiten",
+        "street": "Straße",
+        "houseNumber": "Hausnummer",
+        "city": "Stadt",
+        "zipcode": "Postleitzahl",
+        "country": "Land",
+        "button": {
+          "save": "Speichern"
+        }
+      }
+    },
     "Background": {},
     "Breadcrumb": {},
     "CookieBanner": {
@@ -737,8 +771,9 @@
     },
     "address": {
       "header": "Adresse",
+      "name": "Name",
+      "company": "Firma",
       "street": "Straße",
-      "houseNumber": "Hausnummer",
       "city": "Stadt",
       "zipcode": "Postleitzahl",
       "country": "Land"

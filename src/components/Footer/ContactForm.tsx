@@ -21,19 +21,23 @@ const ContactForm: React.FC<ContactFormProps> = (props) => {
       email: yup
         .string()
         .email(t("yup.email"))
-        .required(t("yup.required", { name: t("Organization.Info.email") })),
+        .required(
+          t("yup.requiredName", { name: t("Organization.Info.email") })
+        ),
       subject: yup.string().required(
-        t("yup.required", {
+        t("yup.requiredName", {
           name: t("components.Footer.ContactForm.subject"),
         })
       ),
       name: yup
         .string()
         .required(
-          t("yup.required", { name: t("components.Footer.ContactForm.name") })
+          t("yup.requiredName", {
+            name: t("components.Footer.ContactForm.name"),
+          })
         ),
       message: yup.string().required(
-        t("yup.required", {
+        t("yup.requiredName", {
           name: t("components.Footer.ContactForm.message"),
         })
       ),

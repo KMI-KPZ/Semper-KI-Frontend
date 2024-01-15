@@ -31,9 +31,9 @@ const Invitation: React.FC<InvitationProps> = (props) => {
     .object({
       email: yup
         .string()
-        .required(t("yup.required", { name: "Email" }))
+        .required(t("yup.requiredName", { name: "Email" }))
         .email(t("yup.email")),
-      roleID: yup.string().required(t("yup.required", { name: "Role" })),
+      roleID: yup.string().required(t("yup.requiredName", { name: "Role" })),
     })
     .required();
   type FormData = yup.InferType<typeof schema>;
@@ -90,7 +90,7 @@ const Invitation: React.FC<InvitationProps> = (props) => {
           {...register("email")}
         />
         <select
-          className="rounded-xl bg-grau-50 p-3 shadow-button"
+          className="shadow-button rounded-xl bg-grau-50 p-3"
           {...register("roleID")}
         >
           {rolesQuery.data !== undefined && rolesQuery.data.length > 0 ? (

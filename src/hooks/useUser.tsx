@@ -6,7 +6,7 @@ interface ReturnProps {
   isLoggedIn: boolean;
   user: UserProps;
   deleteUser(): void;
-  updateUserDetails(details: UserDetailsProps): void;
+  updateUserDetails(details: UpdateUserProps): void;
 }
 
 export type UserProps = AnonymUser | AuthorizedUserProps;
@@ -29,7 +29,22 @@ export interface AuthorizedUserProps {
 
 export interface UserDetailsProps {
   email: string;
-  address?: string;
+  address?: UserAddressProps;
+}
+
+export interface UpdateUserProps {
+  address?: UserAddressProps;
+}
+
+export interface UserAddressProps {
+  firstName: string;
+  lastName: string;
+  company?: string;
+  street: string;
+  houseNumber: string;
+  zipcode: string;
+  city: string;
+  country: string;
 }
 
 export enum UserType {
@@ -54,7 +69,7 @@ const useUser = (): ReturnProps => {
   const deleteUser = () => {
     deleteUserMutation.mutate();
   };
-  const updateUserDetails = (details: UserDetailsProps) => {
+  const updateUserDetails = (details: UpdateUserProps) => {
     updateUserDetailsMutation.mutate(details);
   };
 

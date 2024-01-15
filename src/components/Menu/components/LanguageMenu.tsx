@@ -86,8 +86,7 @@ const MenuLanguageMenu: React.FC<MenuLanguageMenuProps> = (props) => {
                   >
                     <div
                       data-testid={country_code}
-                      className={`fi scale-150 duration-300 group-hover:shadow-border
-                    group-hover:shadow-türkis fi-${country_code} ${
+                      className={`fi scale-150 duration-300 fi-${country_code} ${
                         i18n.language === code ? "grayscale" : ""
                       }`}
                     />

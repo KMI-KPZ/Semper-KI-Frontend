@@ -29,7 +29,7 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
   const schema = yup
     .object({
       printerName: yup.string().required(
-        t("yup.required", {
+        t("yup.requiredName", {
           name: t("Resources.Printers.form.yup.name"),
         })
       ),

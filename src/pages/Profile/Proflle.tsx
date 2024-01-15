@@ -5,10 +5,10 @@ import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 import { Heading } from "@component-library/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import Modal from "@component-library/Modal";
-import ProfileForm from "./components/Form";
 import Container from "@component-library/Container";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
+import AddressForm from "@component-library/Form/AddressForm/AddressForm";
 
 interface Props {}
 
@@ -67,7 +67,24 @@ const Profile: React.FC<Props> = (props) => {
             <Heading variant="h2">{t("Profile.address.header")}</Heading>
             <div className="w-full border-t-2" />
             <span>
-              {t("Profile.address.street")}: {user.details.address}
+              {t("Profile.address.name")}: {user.details.address.firstName}{" "}
+              {user.details.address.lastName}
+            </span>
+            <span>
+              {t("Profile.address.company")}: {user.details.address.company}
+            </span>
+            <span>
+              {t("Profile.address.street")}: {user.details.address.street}{" "}
+              {user.details.address.houseNumber}
+            </span>
+            <span>
+              {t("Profile.address.zipcode")}: {user.details.address.zipcode}
+            </span>
+            <span>
+              {t("Profile.address.city")}: {user.details.address.city}
+            </span>
+            <span>
+              {t("Profile.address.country")}: {user.details.address.country}
             </span>
           </>
         ) : null}
@@ -100,7 +117,7 @@ const Profile: React.FC<Props> = (props) => {
         </Container>
       </Container>
       <Modal open={edit} closeModal={closeModal} title="ProfileForm">
-        <ProfileForm user={user} />
+        <AddressForm />
       </Modal>
     </Container>
   );

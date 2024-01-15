@@ -10,7 +10,7 @@ const OwnerGate: React.FC<PropsWithChildren<OwnerGateProps>> = (props) => {
   const { children } = props;
   const { user } = useUser();
   const { project } = useProject();
-  logger("Usergate", project, user);
+  // logger("Usergate", project, user);
 
   return user.usertype === UserType.ORGANIZATION &&
     project.client !== user.organization

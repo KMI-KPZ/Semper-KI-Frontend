@@ -31,6 +31,7 @@ import { ProjectContext } from "../context/ProjectContext";
 import useScrollToProcess from "./hooks/useScrollToProcess";
 import useGeneralProcess from "../hooks/useGeneralProcess";
 import OwnerGate from "@/components/OwnerGate/OwnerGate";
+import AddressForm from "@component-library/Form/AddressForm/AddressForm";
 
 interface Props {
   adminProject?: ProjectProps;
@@ -224,6 +225,9 @@ const Project: React.FC<Props> = (props) => {
           </Container>
         </Modal>
       </OwnerGate>
+      <Modal title="addressForm" open>
+        <AddressForm />
+      </Modal>
     </div>
   );
 };

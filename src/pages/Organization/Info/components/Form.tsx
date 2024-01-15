@@ -28,7 +28,9 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
       email: yup
         .string()
         .email(t("yup.email"))
-        .required(t("yup.required", { name: t("Organization.Info.email") })),
+        .required(
+          t("yup.requiredName", { name: t("Organization.Info.email") })
+        ),
       supportedServices: yup
         .array()
         .of(
@@ -40,13 +42,17 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
         .required(),
       name: yup
         .string()
-        .required(t("yup.required", { name: t("Organization.Info.name") })),
+        .required(t("yup.requiredName", { name: t("Organization.Info.name") })),
       taxID: yup
         .string()
-        .required(t("yup.required", { name: t("Organization.Info.taxID") })),
+        .required(
+          t("yup.requiredName", { name: t("Organization.Info.taxID") })
+        ),
       adress: yup
         .string()
-        .required(t("yup.required", { name: t("Organization.Info.adress") })),
+        .required(
+          t("yup.requiredName", { name: t("Organization.Info.adress") })
+        ),
     })
     .required();
   type FormData = yup.InferType<typeof schema>;

@@ -2,14 +2,14 @@ import { UseMutationResult, useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { customAxios } from "../customAxios";
 import logger from "@/hooks/useLogger";
-import { UserDetailsProps } from "@/hooks/useUser";
+import { UpdateUserProps, UserDetailsProps } from "@/hooks/useUser";
 
 interface useUserMutationsReturnProps {
   deleteUserMutation: UseMutationResult<void, Error, void, unknown>;
   updateUserDetailsMutation: UseMutationResult<
     void,
     Error,
-    UserDetailsProps,
+    UpdateUserProps,
     unknown
   >;
 }
@@ -30,7 +30,7 @@ const useUserMutations = (): useUserMutationsReturnProps => {
         }),
   });
 
-  const updateUserDetailsMutation = useMutation<void, Error, UserDetailsProps>({
+  const updateUserDetailsMutation = useMutation<void, Error, UpdateUserProps>({
     mutationFn: async (details) =>
       customAxios
         .post(`${process.env.VITE_HTTP_API_URL}/public/updateUserDetails/`, {

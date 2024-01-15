@@ -23,12 +23,12 @@ const ResourcesMaterialsForm: React.FC<ResourcesMaterialsFormProps> = (
   const schema = yup
     .object({
       name: yup.string().required(
-        t("yup.required", {
+        t("yup.requiredName", {
           name: t("Organization.Roles.Roles.name"),
         })
       ),
       description: yup.string().required(
-        t("yup.required", {
+        t("yup.requiredName", {
           name: t("Organization.Roles.Roles.description"),
         })
       ),

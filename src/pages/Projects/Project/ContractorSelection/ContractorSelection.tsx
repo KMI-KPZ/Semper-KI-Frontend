@@ -87,124 +87,128 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   };
 
   return (
-    <form className="flex w-full flex-col items-center gap-5">
-      <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
-        <Heading variant="h1">
-          {t("Projects.Project.ContractorSelection.ContractorSelection.title")}
-        </Heading>
-      </div>
-
-      <div className="flex w-full flex-col items-start  justify-start gap-5 bg-white p-5">
-        <Container direction="auto" justify="between" width="full">
-          <Heading variant="h2">
+    <>
+      <form className="flex w-full flex-col items-center gap-5">
+        <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
+          <Heading variant="h1">
             {t(
-              "Projects.Project.ContractorSelection.ContractorSelection.address.title"
+              "Projects.Project.ContractorSelection.ContractorSelection.title"
             )}
           </Heading>
+        </div>
+
+        <div className="flex w-full flex-col items-start  justify-start gap-5 bg-white p-5">
+          <Container direction="auto" justify="between" width="full">
+            <Heading variant="h2">
+              {t(
+                "Projects.Project.ContractorSelection.ContractorSelection.address.title"
+              )}
+            </Heading>
+            <Button
+              onClick={() => {
+                setEdit(true);
+              }}
+              size="sm"
+              variant="secondary"
+              title={t(
+                "Projects.Project.ContractorSelection.ContractorSelection.address.button.edit"
+              )}
+            />
+          </Container>
+          <div className="w-full border-t-2" />
+          <Container direction="row" justify="start" className="flex-wrap">
+            <Text className="min-w-[100px]">
+              {t(
+                "Projects.Project.ContractorSelection.ContractorSelection.address.name"
+              )}
+              :
+            </Text>
+            <Text>
+              {user.details.address === undefined
+                ? "---"
+                : user.details.address.firstName +
+                  " " +
+                  user.details.address.lastName}
+            </Text>
+          </Container>
+          <Container direction="row" justify="start" className="flex-wrap">
+            <Text className="min-w-[100px]">
+              {t(
+                "Projects.Project.ContractorSelection.ContractorSelection.address.company"
+              )}
+              :
+            </Text>
+            <Text>
+              {user.details.address === undefined
+                ? "---"
+                : user.details.address.company !== undefined &&
+                  user.details.address.company !== ""
+                ? user.details.address.company
+                : "  ---"}
+            </Text>
+          </Container>
+          <Container direction="row" justify="start" className="flex-wrap">
+            <Text className="min-w-[100px]">
+              {t(
+                "Projects.Project.ContractorSelection.ContractorSelection.address.address"
+              )}
+              :
+            </Text>
+            <Text>
+              {user.details.address === undefined
+                ? "---"
+                : user.details.address.street +
+                  " " +
+                  user.details.address.houseNumber +
+                  ", " +
+                  user.details.address.zipcode +
+                  " ," +
+                  user.details.address.city +
+                  " ," +
+                  user.details.address.country}
+            </Text>
+          </Container>
+        </div>
+
+        <div className="flex w-full flex-col items-center justify-start gap-5">
+          {project.processes.length > 0
+            ? project.processes
+                .filter(
+                  (process) =>
+                    isServiceComplete(
+                      process.serviceType,
+                      process.serviceDetails
+                    ) && process.processStatus === ProcessStatus.SERVICE_READY
+                )
+                .map((process, index) => (
+                  <ProjectContractorSelectionItem
+                    key={index}
+                    process={process}
+                    index={index}
+                    register={register}
+                    errors={errors}
+                  />
+                ))
+            : null}
+        </div>
+        <Container className="bg-white p-5" width="full">
           <Button
-            onClick={() => {
-              setEdit(true);
-            }}
-            size="sm"
-            variant="secondary"
+            to=".."
+            startIcon={<ArrowBackIcon />}
             title={t(
-              "Projects.Project.ContractorSelection.ContractorSelection.address.button.edit"
+              "Projects.Project.ContractorSelection.ContractorSelection.button.overview"
+            )}
+          />
+          <Button
+            onClick={handleSubmit(onSubmit)}
+            endIcon={<ArrowForwardIcon />}
+            variant="primary"
+            title={t(
+              "Projects.Project.ContractorSelection.ContractorSelection.button.submit"
             )}
           />
         </Container>
-        <div className="w-full border-t-2" />
-        <Container direction="row" justify="start" className="flex-wrap">
-          <Text className="min-w-[100px]">
-            {t(
-              "Projects.Project.ContractorSelection.ContractorSelection.address.name"
-            )}
-            :
-          </Text>
-          <Text>
-            {user.details.address === undefined
-              ? "---"
-              : user.details.address.firstName +
-                " " +
-                user.details.address.lastName}
-          </Text>
-        </Container>
-        <Container direction="row" justify="start" className="flex-wrap">
-          <Text className="min-w-[100px]">
-            {t(
-              "Projects.Project.ContractorSelection.ContractorSelection.address.company"
-            )}
-            :
-          </Text>
-          <Text>
-            {user.details.address === undefined
-              ? "---"
-              : user.details.address.company !== undefined &&
-                user.details.address.company !== ""
-              ? user.details.address.company
-              : "  ---"}
-          </Text>
-        </Container>
-        <Container direction="row" justify="start" className="flex-wrap">
-          <Text className="min-w-[100px]">
-            {t(
-              "Projects.Project.ContractorSelection.ContractorSelection.address.address"
-            )}
-            :
-          </Text>
-          <Text>
-            {user.details.address === undefined
-              ? "---"
-              : user.details.address.street +
-                " " +
-                user.details.address.houseNumber +
-                ", " +
-                user.details.address.zipcode +
-                " ," +
-                user.details.address.city +
-                " ," +
-                user.details.address.country}
-          </Text>
-        </Container>
-      </div>
-
-      <div className="flex w-full flex-col items-center justify-start gap-5">
-        {project.processes.length > 0
-          ? project.processes
-              .filter(
-                (process) =>
-                  isServiceComplete(
-                    process.serviceType,
-                    process.serviceDetails
-                  ) && process.processStatus === ProcessStatus.SERVICE_READY
-              )
-              .map((process, index) => (
-                <ProjectContractorSelectionItem
-                  key={index}
-                  process={process}
-                  index={index}
-                  register={register}
-                  errors={errors}
-                />
-              ))
-          : null}
-      </div>
-      <Container className="bg-white p-5" width="full">
-        <Button
-          to=".."
-          startIcon={<ArrowBackIcon />}
-          title={t(
-            "Projects.Project.ContractorSelection.ContractorSelection.button.overview"
-          )}
-        />
-        <Button
-          onClick={handleSubmit(onSubmit)}
-          endIcon={<ArrowForwardIcon />}
-          variant="primary"
-          title={t(
-            "Projects.Project.ContractorSelection.ContractorSelection.button.submit"
-          )}
-        />
-      </Container>
+      </form>
       <Modal
         title="ProjectInfo"
         open={edit || user.details.address === undefined}
@@ -218,7 +222,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
           }}
         />
       </Modal>
-    </form>
+    </>
   );
 };
 

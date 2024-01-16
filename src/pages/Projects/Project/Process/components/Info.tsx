@@ -12,7 +12,7 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex w-fit flex-col items-start justify-center gap-5 bg-white p-10">
+    <div className="flex h-full w-full flex-col items-start justify-center gap-5 bg-white p-10">
       <Text variant="body" className="break-all">
         {t("Projects.Project.Process.components.Info.id")} {process.processID}
       </Text>

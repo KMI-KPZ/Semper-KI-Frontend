@@ -36,7 +36,10 @@ const TextInput = <T extends FieldValues>(props: TextInputProps<T>) => {
   } = props;
 
   return (
-    <div className="mb-4 flex items-center justify-start gap-5" key={label}>
+    <div
+      className="mb-4 flex w-full flex-wrap items-center justify-start gap-5 md:w-fit"
+      key={label}
+    >
       <label
         htmlFor={label.toLowerCase()}
         style={{
@@ -49,7 +52,7 @@ const TextInput = <T extends FieldValues>(props: TextInputProps<T>) => {
         type="text"
         id={label.toLowerCase()}
         {...register(label, { ...registerOptions, required })}
-        className={`w-full rounded-md border border-gray-300 p-2 md:w-80 ${
+        className={`grow rounded-md border border-gray-300 p-2 md:w-[400px] ${
           error !== undefined ? "border-2 border-red-500" : ""
         }`}
       />

@@ -124,13 +124,22 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
     <dialog
       ref={modalRef}
       className={twMerge(
-        `fixed h-full w-full overflow-auto rounded-xl bg-transparent
-        bg-white bg-opacity-70 p-0
-        backdrop:fixed backdrop:bottom-0
-        backdrop:left-0 backdrop:right-0
-        backdrop:top-0 backdrop:bg-black
+        `
+        h-fit
+        w-fit 
+        backdrop:fixed 
+        backdrop:bottom-0 
+        backdrop:left-0
+        backdrop:right-0 
+        backdrop:top-0
+        backdrop:bg-black
         backdrop:opacity-30
-        md:h-fit md:max-h-[90vh] md:w-fit md:max-w-7xl
+        md:max-h-[90vh]
+        md:max-w-7xl
+        md:rounded-xl
+        md:bg-transparent
+      md:bg-white
+        md:bg-opacity-70
      `
       )}
       onKeyDown={onKeyDown}
@@ -140,15 +149,18 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
       onAnimationEnd={handleOnAnimEnd}
     >
       <div
-        className={twMerge(`h-full w-full  md:p-10`, className)}
+        className={twMerge(
+          `fixed  left-0 top-0 flex h-screen w-screen items-center justify-center  md:relative md:left-auto md:top-auto md:h-full md:w-full md:p-10`,
+          className
+        )}
         onClick={handleOnClickChildren}
       >
         {noIcon === true ? null : (
           <Button
-            className="absolute right-0 top-0 z-10 "
+            className="absolute right-1 top-1 z-10  "
             title={t("component-library.Modal.button.close")}
             children={<CloseIcon />}
-            variant="secondary"
+            variant="tertiary"
             width="fit"
             size="sm"
             onClick={closeModalWithScroll}

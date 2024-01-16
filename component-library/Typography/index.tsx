@@ -87,11 +87,13 @@ type TextProps = {
     | "custom"
     | "error";
   className?: string;
+  style?: React.CSSProperties | undefined;
 };
 
 const Text: React.FC<PropsWithChildren<TextProps>> = ({
   children,
   variant = "body",
+  style,
   className,
 }) => {
   const additionalClassNames = className ?? "";
@@ -99,6 +101,7 @@ const Text: React.FC<PropsWithChildren<TextProps>> = ({
     case "body":
       return (
         <span
+          style={style}
           className={twMerge(
             `font-ptsans text-base font-normal`,
             additionalClassNames
@@ -110,6 +113,7 @@ const Text: React.FC<PropsWithChildren<TextProps>> = ({
     case "error":
       return (
         <span
+          style={style}
           className={twMerge(
             `font-ptsans text-base font-normal text-red-500`,
             additionalClassNames
@@ -121,6 +125,7 @@ const Text: React.FC<PropsWithChildren<TextProps>> = ({
     case "strong":
       return (
         <span
+          style={style}
           className={twMerge(
             `font-ptsans text-base font-semibold`,
             additionalClassNames
@@ -132,6 +137,7 @@ const Text: React.FC<PropsWithChildren<TextProps>> = ({
     case "small":
       return (
         <span
+          style={style}
           className={twMerge(
             `font-ptsans text-xs font-normal `,
             additionalClassNames
@@ -143,6 +149,7 @@ const Text: React.FC<PropsWithChildren<TextProps>> = ({
     case "button-text":
       return (
         <span
+          style={style}
           className={twMerge(
             `font-ptsans text-sm font-semibold`,
             additionalClassNames
@@ -154,6 +161,7 @@ const Text: React.FC<PropsWithChildren<TextProps>> = ({
     case "quote":
       return (
         <span
+          style={style}
           className={twMerge(
             `font-ptsans text-base font-semibold`,
             additionalClassNames
@@ -164,7 +172,10 @@ const Text: React.FC<PropsWithChildren<TextProps>> = ({
       );
     case "custom":
       return (
-        <span className={twMerge(`font-ptsans`, additionalClassNames)}>
+        <span
+          className={twMerge(`font-ptsans`, additionalClassNames)}
+          style={style}
+        >
           {children}
         </span>
       );

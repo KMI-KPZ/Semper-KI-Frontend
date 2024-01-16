@@ -207,10 +207,10 @@
       },
       "OrganizationForm": {
         "title": "Organisationinformationen bearbeiten",
-        "name": "Name der Organisation",
-        "taxID": "Steuernummer der Organisation",
-        "email": "Email der Organisation",
-        "address": "Addresse der Organisation",
+        "name": "Organisationsname",
+        "taxID": "Steuernummer",
+        "email": "Email",
+        "address": "Addresse",
         "supportedServices": "Services die Sie anbieten",
         "button": {
           "safe": "Speichern"

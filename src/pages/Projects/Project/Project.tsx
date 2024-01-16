@@ -214,7 +214,10 @@ const Project: React.FC<Props> = (props) => {
           title="projectTitle"
           noIcon={true}
         >
-          <Container className="bg-white p-10" direction="col">
+          <Container
+            className="flex h-full w-full items-center justify-center bg-white p-10"
+            direction="col"
+          >
             <ProjectTitleForm
               headerType="h1"
               title={t("Projects.Project.Project.modal.projectName")}

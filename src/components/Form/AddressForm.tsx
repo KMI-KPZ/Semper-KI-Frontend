@@ -66,7 +66,7 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col items-center gap-5 bg-white p-5"
+      className={`flex h-full w-full flex-col items-center justify-start gap-5 overflow-auto bg-white p-5 md:justify-center`}
     >
       <Heading variant="h1">{t("components.Form.AddressForm.header")}</Heading>
       {labels.map((label) => (

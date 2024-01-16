@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import useOrganizations from "../hooks/useOrganizations";
 import { Button, LoadingSuspense, Text } from "@component-library/index";
-import OrganizationInfoForm from "./components/Form";
 import Modal from "@component-library/Modal";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import Container from "@component-library/Container";
@@ -94,14 +93,10 @@ const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
             closeModal={closeEdit}
             title="OrganizationInfoForm"
           >
-            <OrganizationInfoForm
+            <OrganizationForm
               closeEdit={closeEdit}
               organizationInfo={organizationInfoQuery.data}
             />
-            {/* <OrganizationForm
-              closeEdit={closeEdit}
-              organizationInfo={organizationInfoQuery.data}
-            /> */}
           </Modal>
         </div>
       ) : null}

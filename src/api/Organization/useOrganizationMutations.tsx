@@ -60,7 +60,7 @@ const useOrganizationMutations = (): useOrganizationMutationsReturnProps => {
     UpdateOrgaInfoProps
   >({
     mutationFn: async (props) => {
-      const { name, email, adress, taxID, supportedServices } = props;
+      const { name, email, address: adress, taxID, supportedServices } = props;
       return customAxios
         .patch(
           `${process.env.VITE_HTTP_API_URL}/public/updateOrganizationDetails/`,

@@ -21,7 +21,7 @@ import { twMerge } from "tailwind-merge";
 import useGeneralProcess from "../../hooks/useGeneralProcess";
 import ProjectContractorSelectionItem from "./components/Item";
 import logger from "@/hooks/useLogger";
-import AddressForm from "@component-library/Form/AddressForm/AddressForm";
+import AddressForm from "@/components/Form/AddressForm";
 import Modal from "@component-library/Modal";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 

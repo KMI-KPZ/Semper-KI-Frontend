@@ -7,6 +7,7 @@ import Modal from "@component-library/Modal";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import Container from "@component-library/Container";
 import { ServiceType } from "@/pages/Service/hooks/useService";
+import OrganizationForm from "@/components/Form/OrganizationForm";
 
 interface OrganizationInfoProps {}
 
@@ -97,6 +98,10 @@ const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
               closeEdit={closeEdit}
               organizationInfo={organizationInfoQuery.data}
             />
+            {/* <OrganizationForm
+              closeEdit={closeEdit}
+              organizationInfo={organizationInfoQuery.data}
+            /> */}
           </Modal>
         </div>
       ) : null}

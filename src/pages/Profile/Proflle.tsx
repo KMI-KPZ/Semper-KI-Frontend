@@ -8,7 +8,7 @@ import Modal from "@component-library/Modal";
 import Container from "@component-library/Container";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
-import AddressForm from "@component-library/Form/AddressForm/AddressForm";
+import AddressForm from "@/components/Form/AddressForm";
 
 interface Props {}
 

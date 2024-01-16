@@ -100,7 +100,7 @@ export interface OrganizationInfoProps {
 
 export interface UpdateOrgaInfoProps {
   email: string;
-  adress: string;
+  address: string;
   taxID: string;
   name: string;
   supportedServices: number[];

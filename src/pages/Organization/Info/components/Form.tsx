@@ -86,7 +86,7 @@ const OrganizationInfoForm: React.FC<OrganizationInfoFormProps> = (props) => {
 
   const onSubmit = (data: FormData) => {
     const fixedData: UpdateOrgaInfoProps = {
-      adress: data.adress,
+      address: data.adress,
       email: data.email,
       name: data.name,
       taxID: data.taxID,

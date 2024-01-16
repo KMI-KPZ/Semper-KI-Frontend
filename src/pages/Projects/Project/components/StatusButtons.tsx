@@ -25,13 +25,13 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
   };
 
   return (
-    <Container wrap="wrap">
+    <>
       {getProjectStatusButtons(getSelectedProcesses()).map((button, index) => (
         <PermissionGate element={`ProjectButton${button.title}`} key={index}>
           <Button
             key={index}
             variant="secondary"
-            size="sm"
+            size="xs"
             startIcon={button.icon}
             onClick={() => handleOnClickButtonCount(button)}
             title={`${t(
@@ -44,7 +44,7 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
           />
         </PermissionGate>
       ))}
-    </Container>
+    </>
   );
 };
 

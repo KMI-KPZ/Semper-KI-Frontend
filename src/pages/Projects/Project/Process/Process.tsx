@@ -30,7 +30,7 @@ import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import useGeneralProcess from "../../hooks/useGeneralProcess";
 import logger from "@/hooks/useLogger";
 import useEvents from "@/hooks/useEvents/useEvents";
-import AddressForm from "@component-library/Form/AddressForm/AddressForm";
+import AddressForm from "@/components/Form/AddressForm";
 
 interface Props {
   process: ProcessProps;

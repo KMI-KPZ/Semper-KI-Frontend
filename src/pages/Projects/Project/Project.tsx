@@ -31,7 +31,7 @@ import { ProjectContext } from "../context/ProjectContext";
 import useScrollToProcess from "./hooks/useScrollToProcess";
 import useGeneralProcess from "../hooks/useGeneralProcess";
 import OwnerGate from "@/components/OwnerGate/OwnerGate";
-import AddressForm from "@component-library/Form/AddressForm/AddressForm";
+import AddressForm from "@/components/Form/AddressForm";
 
 interface Props {
   adminProject?: ProjectProps;
@@ -170,7 +170,7 @@ const Project: React.FC<Props> = (props) => {
             </Text>
           ) : null}
         </Container>
-        <Container direction="row" wrap="wrap">
+        <Container direction="row" wrap="wrap" justify="end">
           <ProjectButtons
             project={project}
             checkedProcesses={checkedProcesses}
@@ -179,7 +179,7 @@ const Project: React.FC<Props> = (props) => {
             <PermissionGate element={"ProjectButtonNew"}>
               <Button
                 variant="primary"
-                size="sm"
+                size="xs"
                 startIcon={<AddIcon />}
                 onClick={onButtonClickCreateProcess}
                 title={t("Projects.Project.Project.button.new")}
@@ -196,7 +196,7 @@ const Project: React.FC<Props> = (props) => {
       ) : (
         project.processes
           .sort((processA, processB) =>
-            processA.createdWhen < processB.createdWhen ? -1 : 1
+            processA.createdWhen > processB.createdWhen ? -1 : 1
           )
           .map((process, index) => (
             <Process

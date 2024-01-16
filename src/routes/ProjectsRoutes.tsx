@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import Projects from "@/pages/Projects/Projects";
 import ProjectContextProvider from "@/pages/Projects/context/ProjectContext";
@@ -14,6 +14,7 @@ import ServiceRoutes from "./ServiceRoutes";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import ProcessHistory from "@/pages/Projects/Project/Process/History/History";
 import ProcessChat from "@/pages/Projects/Project/Process/Chat/Chat";
+import Redirect from "@/pages/Redirect/Redirect";
 
 interface ProjectsRoutesProps {}
 
@@ -87,29 +88,14 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
                 </>
               }
             />
-            <Route
-              path="checkout"
-              element={
-                <PermissionGate element={"ProcessCheckout"}>
-                  <ProjectCheckout />
-                </PermissionGate>
-              }
-            />
+            <Route path="checkout" element={<Navigate to="../../checkout" />} />
             <Route
               path="verification"
-              element={
-                <PermissionGate element={"ProcessVerification"}>
-                  <ProcessVerification />
-                </PermissionGate>
-              }
+              element={<Navigate to="../../verification" />}
             />
             <Route
               path="contractorSelection"
-              element={
-                <PermissionGate element={"ProcessContractorSelection"}>
-                  <ProjectContractorSelection />
-                </PermissionGate>
-              }
+              element={<Navigate to="../../contractorSelection" />}
             />
           </Route>
           <Route

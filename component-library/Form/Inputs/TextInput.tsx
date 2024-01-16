@@ -5,6 +5,7 @@ import {
   FieldError,
   FieldErrors,
   FieldValues,
+  Merge,
   Path,
   RegisterOptions,
   UseFormRegister,
@@ -17,7 +18,10 @@ interface TextInputProps<T extends FieldValues> {
   registerOptions?: RegisterOptions<T>;
   labelMaxWidth?: number;
   required?: boolean;
-  error?: FieldError;
+  error?:
+    | FieldError
+    | Merge<FieldError, (FieldError | undefined)[]>
+    | undefined;
 }
 
 const TextInput = <T extends FieldValues>(props: TextInputProps<T>) => {

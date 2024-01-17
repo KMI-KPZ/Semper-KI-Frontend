@@ -1,5 +1,5 @@
-import { PageHeader } from "@component-library/Page";
-import { Heading } from "@component-library/Typography";
+import { PageHeader } from "@component-library/index";
+import { Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";

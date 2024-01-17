@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Heading, Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/index";
 import useService, { ServiceType } from "@/pages/Service/hooks/useService";
 import useContractor from "../../../../api/Project/useContractorQuerys";
 import useProcess, {
@@ -15,14 +15,14 @@ import { useProject } from "../../hooks/useProject";
 import { useForm } from "react-hook-form";
 import { ProjectContext } from "../../context/ProjectContext";
 import ProcessInfoCard from "../components/ProcessInfoCard";
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 import useCheckedProcesses from "../hooks/useCheckedProcesses";
 import { twMerge } from "tailwind-merge";
 import useGeneralProcess from "../../hooks/useGeneralProcess";
 import ProjectContractorSelectionItem from "./components/Item";
 import logger from "@/hooks/useLogger";
 import AddressForm from "@/components/Form/AddressForm";
-import Modal from "@component-library/Modal";
+import { Modal } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 
 interface Props {}

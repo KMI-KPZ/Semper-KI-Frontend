@@ -1,5 +1,5 @@
 import useService from "@/pages/Service/hooks/useService";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";

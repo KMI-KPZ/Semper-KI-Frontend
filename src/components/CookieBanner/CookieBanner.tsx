@@ -3,8 +3,8 @@ import {
   URL_Datenschutz,
   URL_Impressum,
 } from "@/config/constants";
-import { Button } from "@component-library/Button";
-import { Heading, Text } from "@component-library/Typography";
+import { Button } from "@component-library/index";
+import { Heading, Text } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 

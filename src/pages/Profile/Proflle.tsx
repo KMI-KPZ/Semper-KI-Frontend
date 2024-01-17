@@ -1,11 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@component-library/Button";
+import { Button, Container } from "@component-library/index";
 import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import EditIcon from "@mui/icons-material/Edit";
-import Modal from "@component-library/Modal";
-import Container from "@component-library/Container";
+import { Modal } from "@component-library/index";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import AddressForm from "@/components/Form/AddressForm";

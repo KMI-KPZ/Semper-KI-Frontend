@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Text } from "@component-library/Typography";
+import { Text } from "@component-library/index";
 import { ServiceType } from "../../hooks/useService";
 import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { useNavigate, useParams } from "react-router-dom";

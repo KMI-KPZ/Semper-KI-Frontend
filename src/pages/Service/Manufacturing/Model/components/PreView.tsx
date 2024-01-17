@@ -1,10 +1,10 @@
 import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import { getModelURI } from "@/services/utils";
 import { ModelProps } from "../types";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 

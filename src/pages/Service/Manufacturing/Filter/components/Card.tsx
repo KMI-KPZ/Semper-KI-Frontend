@@ -5,8 +5,8 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useTranslation } from "react-i18next";
 import ProcessFilterItem from "./Item";
 import { CategoryProps, FilterItemProps } from "../Filter";
-import { Heading } from "@component-library/Typography";
-import { Button } from "@component-library/Button";
+import { Heading } from "@component-library/index";
+import { Button } from "@component-library/index";
 
 interface Props {
   category: CategoryProps;

@@ -25,7 +25,7 @@ type ModelProps = {
   noIcon?: boolean;
 };
 
-const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
+export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   title,
   open,
   locked = false,
@@ -171,4 +171,3 @@ const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
     </dialog>
   );
 };
-export default Modal;

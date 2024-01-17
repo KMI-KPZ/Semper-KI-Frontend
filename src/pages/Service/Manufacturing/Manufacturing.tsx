@@ -6,7 +6,7 @@ import { ProcessPostProcessing } from "./PostProcessing/PostProcessing";
 import useFilterQuerys from "../../../api/Filter/useFilterQuerys";
 import ProcessHeader from "./Header/Header";
 import { useTranslation } from "react-i18next";
-import { LoadingSuspense } from "@component-library/Loading";
+import { LoadingSuspense } from "@component-library/index";
 import ProcessFilter, { FilterItemProps } from "./Filter/Filter";
 import { ProcessModelUpload } from "./Model/components/Upload/Upload";
 import logger from "@/hooks/useLogger";

@@ -1,4 +1,4 @@
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

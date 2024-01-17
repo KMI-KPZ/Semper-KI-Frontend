@@ -7,7 +7,7 @@ interface SwitchProps {
   variant?: "one" | "two";
 }
 
-const Switch: React.FC<SwitchProps> = (props) => {
+export const Switch: React.FC<SwitchProps> = (props) => {
   const { onChange, value, variant = "one" } = props;
   const { t } = useTranslation();
 
@@ -17,6 +17,7 @@ const Switch: React.FC<SwitchProps> = (props) => {
 
   return (
     <div
+      data-testid="switch-component"
       className={`relative h-8 w-14 rounded-full border-4 border-türkis-800 bg-slate-200 p-1 transition-all duration-300 hover:cursor-pointer hover:bg-slate-100`}
       onClick={handelOnClick}
     >
@@ -28,5 +29,3 @@ const Switch: React.FC<SwitchProps> = (props) => {
     </div>
   );
 };
-
-export default Switch;

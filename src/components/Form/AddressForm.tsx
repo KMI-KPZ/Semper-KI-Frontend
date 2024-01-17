@@ -1,4 +1,4 @@
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -6,7 +6,7 @@ import TextInput from "../../../component-library/Form/Inputs/TextInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useUser, { UserAddressProps } from "@/hooks/useUser";
-import { Heading, Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 
 interface AddressFormProps {

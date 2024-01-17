@@ -1,4 +1,4 @@
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import React, {
   KeyboardEvent,
   MouseEvent,

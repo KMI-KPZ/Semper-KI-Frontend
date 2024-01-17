@@ -1,8 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 import { ProjectProps } from "../../hooks/useProject";
 import { ProcessProps } from "../../hooks/useProcess";
 import useStatusButtons from "../hooks/useStatusButtons";

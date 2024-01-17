@@ -11,8 +11,7 @@ import {
   URL_Instagram,
   URL_Mastodon,
 } from "@/config/constants";
-import { Button } from "@component-library/Button";
-import Modal from "@component-library/Modal";
+import { Button, Modal } from "@component-library/index";
 import usePing from "@/hooks/usePing";
 
 interface Props {}

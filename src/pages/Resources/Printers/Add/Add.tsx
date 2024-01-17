@@ -1,5 +1,5 @@
-import { Button } from "@component-library/Button";
-import { Heading, Text } from "@component-library/Typography";
+import { Button } from "@component-library/index";
+import { Heading, Text } from "@component-library/index";
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";

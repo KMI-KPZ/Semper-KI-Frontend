@@ -1,8 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import { MaterialProps } from "../Material";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 
 interface Props {

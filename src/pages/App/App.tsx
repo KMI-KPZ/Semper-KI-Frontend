@@ -18,7 +18,7 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import "react-toastify/dist/ReactToastify.css";
 import CookieBanner from "@/components/CookieBanner/CookieBanner";
 import useCookieConsent from "@/components/CookieBanner/hooks/useCookieConsent";
-import Modal from "@component-library/Modal";
+import { Modal } from "@component-library/index";
 import { FilterItemProps } from "../Service/Manufacturing/Filter/Filter";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import EmailVerification from "../EmailVerification/EmailVerification";
@@ -29,7 +29,7 @@ import { ToastContainer } from "react-toastify";
 import ProjectsRoutes from "@/routes/ProjectsRoutes";
 import AdminRoutes from "@/routes/AdminRoutes";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
-import ContentBox from "@component-library/ContentBox";
+import { ContentBox } from "@component-library/index";
 import RedirectLogin from "../Login/RedirectLogin";
 import Menu from "@/components/Menu";
 

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
-import { Heading, Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/index";
 import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
@@ -11,14 +11,14 @@ import {
 } from "@component-library/index";
 import ProjectButtons from "./components/StatusButtons";
 import { ProjectProps, useProject } from "../hooks/useProject";
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ProjectTitleForm from "./components/TitleForm";
 import InfoIcon from "@mui/icons-material/Info";
 import ProjectInfo from "./components/Info";
-import Modal from "@component-library/Modal";
+import { Modal } from "@component-library/index";
 import useProcess, { ProcessStatus } from "../hooks/useProcess";
 import Process from "./Process/Process";
 import useCheckedProcesses from "./hooks/useCheckedProcesses";
@@ -123,7 +123,7 @@ const Project: React.FC<Props> = (props) => {
           <Button
             variant="secondary"
             width="fit"
-            size="sm"
+            size="xs"
             children={<InfoIcon />}
             onClick={handleOnClickButtonInfo}
             title={t("Projects.Project.Project.button.info")}
@@ -133,7 +133,7 @@ const Project: React.FC<Props> = (props) => {
               <Button
                 width="fit"
                 variant="secondary"
-                size="sm"
+                size="xs"
                 children={<DeleteIcon />}
                 title={t("Projects.Project.Project.button.delete")}
                 onClick={handleOnClickDelete}

@@ -3,13 +3,13 @@ import { useTranslation } from "react-i18next";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import useOrganizations, {
   PermissionProps,
   RoleProps,
 } from "../../hooks/useOrganizations";
 import logger from "@/hooks/useLogger";
-import { Heading, Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/index";
 import { sortPermissions } from "../Roles";
 import { LoadingAnimation } from "@component-library/index";
 
@@ -190,7 +190,7 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
                   >
                     <Text variant="body">
                       {t(`types.permissionName.${permission.permission_name}`)}
-                      </Text>
+                    </Text>
                     <input
                       type="hidden"
                       {...register(`permissions.${index}.name`)}

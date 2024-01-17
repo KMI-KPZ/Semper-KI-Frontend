@@ -1,5 +1,5 @@
-import Container from "@component-library/Container";
-import { Heading, Text } from "@component-library/Typography";
+import { Container } from "@component-library/index";
+import { Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

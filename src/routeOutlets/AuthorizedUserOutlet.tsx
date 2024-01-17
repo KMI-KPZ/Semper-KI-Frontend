@@ -1,4 +1,4 @@
-import { AppLoadingSuspense } from "@component-library/Loading";
+import { AppLoadingSuspense } from "@component-library/index";
 import React, { PropsWithChildren, createContext, useContext } from "react";
 import { UserContext } from "../contexts/UserContextProvider";
 import { Navigate, Outlet, useLocation } from "react-router-dom";

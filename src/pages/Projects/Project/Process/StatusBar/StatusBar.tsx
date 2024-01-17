@@ -14,7 +14,7 @@ import { ProcessProps, ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import DescriptionIcon from "@mui/icons-material/Description";
 import ModeIcon from "@mui/icons-material/Mode";
 import useEvents from "@/hooks/useEvents/useEvents";
-import { Badge } from "@component-library/Badge";
+import { Badge } from "@component-library/Badge/Badge";
 
 interface StatusViewProps {
   status: ProcessStatus;

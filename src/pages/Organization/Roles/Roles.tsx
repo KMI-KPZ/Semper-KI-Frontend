@@ -1,4 +1,4 @@
-import { Heading, Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import useOrganizations, {
   PermissionContextTranslationType,
@@ -11,7 +11,7 @@ import { Button, Divider, LoadingSuspense } from "@component-library/index";
 import OrganizationRolesItem from "./components/Item";
 import { Fragment, useState } from "react";
 import OrganizationRolesTable from "./components/Table";
-import Modal from "@component-library/Modal";
+import { Modal } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface OrganizationRolesProps {}

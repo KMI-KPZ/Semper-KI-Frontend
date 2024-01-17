@@ -2,8 +2,8 @@ import useProcessQuerys, {
   ProcessHistoryType,
 } from "@/api/Process/useProcessQuerys";
 import useProcess from "@/pages/Projects/hooks/useProcess";
-import Container from "@component-library/Container";
-import Modal from "@component-library/Modal";
+import { Container } from "@component-library/index";
+import { Modal } from "@component-library/index";
 import {
   LoadingAnimation,
   LoadingSuspense,

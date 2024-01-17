@@ -1,7 +1,7 @@
 import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
 import { ModelingServiceProps } from "@/pages/Service/Modelling/Modelling";
-import Container from "@component-library/Container";
-import { Text } from "@component-library/Typography";
+import { Container } from "@component-library/index";
+import { Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

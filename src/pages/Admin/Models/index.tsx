@@ -1,5 +1,5 @@
 import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import {
   Paper,
   Table,

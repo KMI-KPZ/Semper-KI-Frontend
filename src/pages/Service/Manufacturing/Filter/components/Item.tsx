@@ -8,7 +8,7 @@ import ProcessFilterColorPicker from "./ColorPicker";
 import ProcessFilterNumberInput from "./NumberInput";
 import ProcessFilterMultiSelection from "./MultiSelection";
 import { FilterItemProps } from "../Filter";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 
 interface Props {
   filterItem: FilterItemProps;

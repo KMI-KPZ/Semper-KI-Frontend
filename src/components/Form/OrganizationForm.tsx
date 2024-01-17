@@ -4,8 +4,8 @@ import logger from "@/hooks/useLogger";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button } from "@component-library/Button";
-import { Heading, Text } from "@component-library/Typography";
+import { Button } from "@component-library/index";
+import { Heading, Text } from "@component-library/index";
 import { ServiceType } from "@/pages/Service/hooks/useService";
 import useServiceQuerys from "@/api/Service/useServiceQuerys";
 import TextInput from "@component-library/Form/Inputs/TextInput";
@@ -14,7 +14,7 @@ import useOrganizations, {
   UpdateOrgaInfoProps,
 } from "@/pages/Organization/hooks/useOrganizations";
 import { LoadingAnimation } from "@component-library/index";
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 
 interface OrganizationFormProps {
   closeEdit: () => void;

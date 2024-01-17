@@ -1,11 +1,11 @@
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useOrganizations from "../hooks/useOrganizations";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import logger from "@/hooks/useLogger";
 
 interface InvitationProps {}

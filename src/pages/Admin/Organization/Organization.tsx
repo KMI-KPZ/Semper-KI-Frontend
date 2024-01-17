@@ -1,4 +1,4 @@
-import { Heading, Text } from "@component-library/Typography";
+import { Heading, Search, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import useAdmin, { OrganizationProps } from "../hooks/useAdmin";
@@ -11,12 +11,11 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
 import useSearch from "@/hooks/useSearch";
-import Search from "@component-library/Search";
 
 interface AdminOrganizationProps {}
 

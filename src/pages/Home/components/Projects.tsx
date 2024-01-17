@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { Heading } from "@component-library/Typography";
-import { Button } from "@component-library/Button";
+import { Heading } from "@component-library/index";
+import { Button } from "@component-library/index";
 import { useProject } from "@/pages/Projects/hooks/useProject";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import HomeContainer from "./Container";
 import { AppContext } from "@/pages/App/App";
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 import { UserContext } from "@/contexts/UserContextProvider";
 import useUser, { UserType } from "@/hooks/useUser";
-import ContentBox from "@component-library/ContentBox";
+import { ContentBox } from "@component-library/index";
 import useFlatProjectQuerys from "@/api/Project/useFlatProjectQuerys";
 
 interface HomeProjectsProps {}

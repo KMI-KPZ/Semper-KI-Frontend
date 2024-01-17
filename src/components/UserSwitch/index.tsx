@@ -1,8 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Container from "@component-library/Container";
-import Switch from "@component-library/Switch";
-import { Text } from "@component-library/Typography";
+import { Text, Switch, Container } from "@component-library/index";
 import { UserType } from "@/hooks/useUser";
 
 interface Props {

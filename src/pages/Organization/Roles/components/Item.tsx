@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import useOrganizations, { RoleProps } from "../../hooks/useOrganizations";
-import { Text } from "@component-library/Typography";
+import { Text } from "@component-library/index";
 import { Button, Divider, LoadingSuspense } from "@component-library/index";
 import { PermissionGroupProps, getGroupedPermissions } from "../Roles";
 import EditIcon from "@mui/icons-material/Edit";

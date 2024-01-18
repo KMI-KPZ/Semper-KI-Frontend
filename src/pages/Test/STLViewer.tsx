@@ -10,7 +10,7 @@ import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import * as THREE from "three";
 import { twMerge } from "tailwind-merge";
 import { StlViewer } from "react-stl-viewer";
-import { LoadingAnimation } from "@component-library/Loading";
+import { LoadingAnimation } from "@component-library/index";
 
 const Model: React.FC<{ fileURL: string }> = (props) => {
   const { fileURL } = props;

@@ -4,8 +4,8 @@ import {
 } from "@/api/Process/useProcessQuerys";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { ProcessStatusType } from "@/pages/Service/Manufacturing/Header/types";
-import Container from "@component-library/Container";
-import { Text } from "@component-library/Typography";
+import { Container } from "@component-library/index";
+import { Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProcessHistoryTextItem from "./TextItem";

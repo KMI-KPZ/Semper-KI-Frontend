@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
-import { Heading, Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/index";
 import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
@@ -11,14 +11,14 @@ import {
 } from "@component-library/index";
 import ProjectButtons from "./components/StatusButtons";
 import { ProjectProps, useProject } from "../hooks/useProject";
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ProjectTitleForm from "./components/TitleForm";
 import InfoIcon from "@mui/icons-material/Info";
 import ProjectInfo from "./components/Info";
-import Modal from "@component-library/Modal";
+import { Modal } from "@component-library/index";
 import useProcess, { ProcessStatus } from "../hooks/useProcess";
 import Process from "./Process/Process";
 import useCheckedProcesses from "./hooks/useCheckedProcesses";
@@ -31,7 +31,7 @@ import { ProjectContext } from "../context/ProjectContext";
 import useScrollToProcess from "./hooks/useScrollToProcess";
 import useGeneralProcess from "../hooks/useGeneralProcess";
 import OwnerGate from "@/components/OwnerGate/OwnerGate";
-import AddressForm from "@component-library/Form/AddressForm/AddressForm";
+import AddressForm from "@/components/Form/AddressForm";
 
 interface Props {
   adminProject?: ProjectProps;
@@ -123,7 +123,7 @@ const Project: React.FC<Props> = (props) => {
           <Button
             variant="secondary"
             width="fit"
-            size="sm"
+            size="xs"
             children={<InfoIcon />}
             onClick={handleOnClickButtonInfo}
             title={t("Projects.Project.Project.button.info")}
@@ -133,7 +133,7 @@ const Project: React.FC<Props> = (props) => {
               <Button
                 width="fit"
                 variant="secondary"
-                size="sm"
+                size="xs"
                 children={<DeleteIcon />}
                 title={t("Projects.Project.Project.button.delete")}
                 onClick={handleOnClickDelete}
@@ -151,7 +151,7 @@ const Project: React.FC<Props> = (props) => {
           >
             <input
               type="checkbox"
-              className="h-8 w-8"
+              className="h-7 w-7"
               onChange={handleOnChangeCheckboxSelectAll}
               id="selectAllProcesses"
               name={t("Projects.Project.Project.label.selectProcess")}
@@ -170,7 +170,7 @@ const Project: React.FC<Props> = (props) => {
             </Text>
           ) : null}
         </Container>
-        <Container direction="row" wrap="wrap">
+        <Container direction="row" wrap="wrap" justify="end">
           <ProjectButtons
             project={project}
             checkedProcesses={checkedProcesses}
@@ -179,7 +179,7 @@ const Project: React.FC<Props> = (props) => {
             <PermissionGate element={"ProjectButtonNew"}>
               <Button
                 variant="primary"
-                size="sm"
+                size="xs"
                 startIcon={<AddIcon />}
                 onClick={onButtonClickCreateProcess}
                 title={t("Projects.Project.Project.button.new")}
@@ -196,7 +196,7 @@ const Project: React.FC<Props> = (props) => {
       ) : (
         project.processes
           .sort((processA, processB) =>
-            processA.createdWhen < processB.createdWhen ? -1 : 1
+            processA.createdWhen > processB.createdWhen ? -1 : 1
           )
           .map((process, index) => (
             <Process
@@ -214,7 +214,10 @@ const Project: React.FC<Props> = (props) => {
           title="projectTitle"
           noIcon={true}
         >
-          <Container className="bg-white p-10" direction="col">
+          <Container
+            className="flex h-full w-full items-center justify-center bg-white p-10"
+            direction="col"
+          >
             <ProjectTitleForm
               headerType="h1"
               title={t("Projects.Project.Project.modal.projectName")}

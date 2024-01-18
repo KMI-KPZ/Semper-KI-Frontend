@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 import usePermissionGate from "./hooks/usePermissionGate";
-import { Text } from "@component-library/Typography";
+import { Text } from "@component-library/index";
 import { Outlet } from "react-router-dom";
 
 interface PermissionProps {

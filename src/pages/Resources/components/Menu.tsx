@@ -1,4 +1,4 @@
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";

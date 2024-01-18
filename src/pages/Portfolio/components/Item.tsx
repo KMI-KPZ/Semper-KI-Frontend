@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTranslation } from "react-i18next";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import { PortfolioItemType } from "../Portfolio";
 
 interface Props {

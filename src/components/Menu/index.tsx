@@ -1,4 +1,4 @@
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import React, {
   KeyboardEvent,
   MouseEvent,
@@ -96,7 +96,7 @@ const Menu: React.FC<MenuProps> = (props) => {
         backdrop:left-0 
         backdrop:right-0
         backdrop:top-0
-         backdrop:bg-black
+        backdrop:bg-black
         backdrop:opacity-30
    `
       )}

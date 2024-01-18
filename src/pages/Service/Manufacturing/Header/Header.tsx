@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { ServiceManufacturingContext } from "../Manufacturing";
 import ProcessHeaderSearch from "./Search/Search";
 import { ServiceManufacturingWizard } from "./Wizard/Wizard";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import { useLocation } from "react-router-dom";
 
 const ProcessHeader: React.FC = () => {

@@ -1,8 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 import { ProjectProps } from "../../hooks/useProject";
 import { ProcessProps } from "../../hooks/useProcess";
 import useStatusButtons from "../hooks/useStatusButtons";
@@ -25,13 +25,13 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
   };
 
   return (
-    <Container wrap="wrap">
+    <>
       {getProjectStatusButtons(getSelectedProcesses()).map((button, index) => (
         <PermissionGate element={`ProjectButton${button.title}`} key={index}>
           <Button
             key={index}
             variant="secondary"
-            size="sm"
+            size="xs"
             startIcon={button.icon}
             onClick={() => handleOnClickButtonCount(button)}
             title={`${t(
@@ -44,7 +44,7 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
           />
         </PermissionGate>
       ))}
-    </Container>
+    </>
   );
 };
 

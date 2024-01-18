@@ -1,15 +1,15 @@
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import DownloadIcon from "@mui/icons-material/Download";
-import { Heading } from "@component-library/Typography";
-import { Divider } from "@component-library/Divider";
+import { Heading } from "@component-library/index";
+import { Divider } from "@component-library/index";
 import useProcess, {
   FileProps,
   FilesDescriptionProps,
   ProcessProps,
 } from "@/pages/Projects/hooks/useProcess";
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { createDownload } from "@/services/utils";
 import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
@@ -118,6 +118,7 @@ const ProjectFile: React.FC<Props> = (props) => {
           title={t(
             "Projects.Project.Process.components.ProcessFile.button.downloadAll"
           )}
+          size="sm"
           onClick={handleOnClickButtonDownloadZip}
           startIcon={<DownloadIcon />}
           loading={downloadFilesZIPIsLoading}

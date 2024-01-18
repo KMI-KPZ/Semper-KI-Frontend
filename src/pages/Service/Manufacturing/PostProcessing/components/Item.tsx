@@ -1,11 +1,11 @@
 import CloseIcon from "@mui/icons-material/Close";
-import { Button } from "@component-library/Button";
 import { useTranslation } from "react-i18next";
 import {
   EPostProcessingOptionType,
   PostProcessingProps,
 } from "../PostProcessing";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
+import { Button } from "@component-library/index";
 
 interface Props<Item> {
   item: Item;

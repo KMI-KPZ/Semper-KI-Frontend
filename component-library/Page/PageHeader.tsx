@@ -3,7 +3,9 @@ import { useTranslation } from "react-i18next";
 
 interface PageHeaderProps {}
 
-const PageHeader: React.FC<PropsWithChildren<PageHeaderProps>> = (props) => {
+export const PageHeader: React.FC<PropsWithChildren<PageHeaderProps>> = (
+  props
+) => {
   const { children } = props;
   const { t } = useTranslation();
 
@@ -11,5 +13,3 @@ const PageHeader: React.FC<PropsWithChildren<PageHeaderProps>> = (props) => {
     <div className="w-full bg-white px-5 py-3 text-center">{children}</div>
   );
 };
-
-export { PageHeader };

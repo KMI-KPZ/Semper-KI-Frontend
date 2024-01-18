@@ -2,14 +2,14 @@ import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import useOrganizations, {
   OrganizationsUser,
   RoleProps,
 } from "../hooks/useOrganizations";
-import { LoadingSuspense } from "@component-library/Loading";
+import { LoadingSuspense } from "@component-library/index";
 import CheckIcon from "@mui/icons-material/Check";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import { AppContext } from "@/pages/App/App";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { UserContext } from "@/contexts/UserContextProvider";

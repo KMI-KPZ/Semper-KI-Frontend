@@ -1,9 +1,9 @@
-import { Heading, Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/index";
 import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { ReactComponent as UploadIcon } from "@icons/Upload.svg";
 import { useTranslation } from "react-i18next";
 import logger from "@/hooks/useLogger";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 
 interface Props {
   multiple?: boolean;

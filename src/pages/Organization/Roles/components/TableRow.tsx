@@ -9,7 +9,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { getGroupedPermissions, sortPermissions } from "../Roles";
 

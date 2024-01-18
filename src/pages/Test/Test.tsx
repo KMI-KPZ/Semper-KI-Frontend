@@ -1,12 +1,12 @@
 import { ReactNode, useContext, useEffect, useState } from "react";
-import { Button } from "@component-library/Button";
-import Container from "@component-library/Container";
-import { Heading, Text } from "@component-library/Typography";
+import { Button } from "@component-library/index";
+import { Container } from "@component-library/index";
+import { Heading, Text } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import SaveIcon from "@mui/icons-material/Save";
 import { EventContext } from "@/contexts/EventContextProvider";
 import { PermissionContext } from "@/contexts/PermissionContextProvider";
-import { LoadingAnimation, LoadingSuspense } from "@component-library/Loading";
+import { LoadingAnimation, LoadingSuspense } from "@component-library/index";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import usePermissions from "@/hooks/usePermissions";

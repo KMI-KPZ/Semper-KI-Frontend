@@ -5,7 +5,7 @@ import {
   ServiceManufacturingState,
 } from "../types/types";
 import { useTranslation } from "react-i18next";
-import { LoadingSuspense } from "@component-library/Loading";
+import { LoadingSuspense } from "@component-library/index";
 import { FilterItemProps } from "../Filter/Filter";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";

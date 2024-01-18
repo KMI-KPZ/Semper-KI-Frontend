@@ -1,6 +1,6 @@
-import { Button } from "@component-library/Button";
-import Container from "@component-library/Container";
-import { Heading } from "@component-library/Typography";
+import { Button } from "@component-library/index";
+import { Container } from "@component-library/index";
+import { Heading } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import EditIcon from "@mui/icons-material/Edit";

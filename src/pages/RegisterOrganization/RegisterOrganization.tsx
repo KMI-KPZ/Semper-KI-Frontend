@@ -1,7 +1,7 @@
 import logger from "@/hooks/useLogger";
-import { Button } from "@component-library/Button";
-import Container from "@component-library/Container";
-import { Heading, Text } from "@component-library/Typography";
+import { Button } from "@component-library/index";
+import { Container } from "@component-library/index";
+import { Heading, Text } from "@component-library/index";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";

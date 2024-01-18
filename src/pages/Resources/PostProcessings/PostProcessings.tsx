@@ -1,4 +1,4 @@
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

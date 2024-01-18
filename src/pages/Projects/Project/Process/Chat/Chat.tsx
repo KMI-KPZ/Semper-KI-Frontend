@@ -1,16 +1,16 @@
 import React, { ChangeEvent, useState } from "react";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import SendIcon from "@mui/icons-material/Send";
 import { useTranslation } from "react-i18next";
 import useUser, { AuthorizedUserProps, UserProps } from "@/hooks/useUser";
-import { Heading, Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/index";
 import logger from "@/hooks/useLogger";
 import useProcess, {
   ChatMessageProps,
 } from "@/pages/Projects/hooks/useProcess";
 import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 import { useNavigate } from "react-router-dom";
-import Modal from "@component-library/Modal";
+import { Modal } from "@component-library/index";
 import { useProject } from "@/pages/Projects/hooks/useProject";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 

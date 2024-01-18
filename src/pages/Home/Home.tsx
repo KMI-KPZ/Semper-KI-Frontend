@@ -3,10 +3,8 @@ import { Event } from "@/pages/App/types";
 import { ReactNode, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import AnonymHome from "./Anonym/Anonym";
-import { Button } from "@component-library/Button";
 import AuthorizedHome from "./Authorized/Authorized";
-import { UserContext } from "@/contexts/UserContextProvider";
-import ContentBox from "@component-library/ContentBox";
+import { ContentBox } from "@component-library/index";
 
 interface Props {}
 

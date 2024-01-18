@@ -1,4 +1,4 @@
-import { LoadingAnimation, LoadingSuspense } from "@component-library/Loading";
+import { LoadingAnimation, LoadingSuspense } from "@component-library/index";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";

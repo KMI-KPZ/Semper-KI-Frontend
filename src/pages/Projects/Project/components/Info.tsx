@@ -1,4 +1,4 @@
-import { Text } from "@component-library/Typography";
+import { Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { ProjectProps } from "../../hooks/useProject";

@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import CloseIcon from "@mui/icons-material/Close";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import ProcessFilterCard from "./components/Card";
 import { AppContext } from "@/pages/App/App";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import useBodyScroll from "@/hooks/useBodyScroll";
 import logger from "@/hooks/useLogger";
 
@@ -249,10 +249,12 @@ const ProcessFilter: React.FC<Props> = (props) => {
       </div>
       <div className="flex flex-col justify-center gap-2 text-white xl:flex-row">
         <Button
+          size="sm"
           onClick={handleOnClickResetButton}
           title={t("Service.Manufacturing.Filter.Filter.button.reset")}
         />
         <Button
+          size="sm"
           onClick={handleOnClickApplyButton}
           title={t("Service.Manufacturing.Filter.Filter.button.apply")}
         />

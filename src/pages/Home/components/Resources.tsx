@@ -1,5 +1,5 @@
-import { Button } from "@component-library/Button";
-import { Heading } from "@component-library/Typography";
+import { Button } from "@component-library/index";
+import { Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import HomeContainer from "./Container";

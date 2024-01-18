@@ -1,4 +1,4 @@
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { ProcessProps } from "@/pages/Projects/hooks/useProcess";

@@ -1,10 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { Badge } from "@component-library/Badge";
+import { Badge } from "@component-library/Badge/Badge";
 import { ReactComponent as LogoIcon } from "@icons/Logo.svg";
 import { INavigationItem } from "@/data/navigation";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 
 interface Props {
   isMenuItem?: boolean;

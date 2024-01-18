@@ -1,5 +1,5 @@
 import { AuthorizedUserProps, UserProps, UserType } from "@/hooks/useUser";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import ReplayIcon from "@mui/icons-material/Replay";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -9,7 +9,7 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { AppContext } from "@/pages/App/App";
 import InfoIcon from "@mui/icons-material/Info";
 import { ProcessEventItem, ProjectEventItem } from "@/pages/App/types";
-import { Badge } from "@component-library/Badge";
+import { Badge } from "@component-library/Badge/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 import useProcess, {
   ProcessProps,
@@ -66,25 +66,6 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
       logger("//TODO ReProject");
     }
   };
-  const handleOnClickButtonReject = () => {
-    if (
-      window.confirm(
-        t("Projects.Project.Process.components.Buttons.confirm.reject")
-      )
-    ) {
-      updateStatus(ProcessStatus.REJECTED_BY_CONTRACTOR);
-    }
-  };
-  const handleOnClickButtonConfirm = () => {
-    // if (window.confirm(t("ProjectView.button.confirm") + "?")) {
-    updateStatus(ProcessStatus.CONFIRMED_BY_CONTRACTOR);
-    // }
-  };
-  const handleOnClickButtonVerify = () => {
-    // if (window.confirm(t("ProjectView.button.verify") + "?")) {
-    updateStatus(ProcessStatus.CLARIFICATION);
-    // }
-  };
 
   const handleOnClickButtonChat = () => {
     deleteEvent({
@@ -111,15 +92,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
       <Button
         variant="secondary"
         width="fit"
-        size="sm"
-        children={<InfoIcon />}
-        onClick={handleOnClickButtonInfo}
-        title={t("Projects.Project.Process.components.Buttons.button.info")}
-      />
-      <Button
-        variant="secondary"
-        width="fit"
-        size="sm"
+        size="xs"
         children={<HistoryIcon />}
         to={`/projects/${projectID}/${process.processID}/history`}
         title={t("Projects.Project.Process.components.Buttons.button.history")}
@@ -137,7 +110,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
             <Button
               variant="secondary"
               width="fit"
-              size="sm"
+              size="xs"
               children={<MailIcon />}
               onClick={handleOnClickButtonChat}
               title={t(
@@ -147,32 +120,40 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
           </Badge>
         </PermissionGate>
       ) : null}
-      {process.processStatus <= ProcessStatus.REQUESTED &&
-      shouldRenderFor("CLIENT") ? (
-        <PermissionGate element="ProcessButtonDelete">
-          <Button
-            variant="secondary"
-            width="fit"
-            size="sm"
-            children={<DeleteIcon />}
-            onClick={handleOnClickButtonCancel}
-            title={t(
-              "Projects.Project.Process.components.Buttons.button.cancel"
-            )}
-          />
-        </PermissionGate>
-      ) : null}
       {process.processStatus === ProcessStatus.COMPLETED &&
       shouldRenderFor("CLIENT") ? (
         <PermissionGate element="ProcessButtonReProject">
           <Button
             variant="secondary"
             width="fit"
-            size="sm"
+            size="xs"
             children={<ReplayIcon />}
             onClick={handleOnClickButtonReProject}
             title={t(
               "Projects.Project.Process.components.Buttons.button.reProject"
+            )}
+          />
+        </PermissionGate>
+      ) : null}
+      <Button
+        variant="secondary"
+        width="fit"
+        size="xs"
+        children={<InfoIcon />}
+        onClick={handleOnClickButtonInfo}
+        title={t("Projects.Project.Process.components.Buttons.button.info")}
+      />
+      {process.processStatus <= ProcessStatus.REQUESTED &&
+      shouldRenderFor("CLIENT") ? (
+        <PermissionGate element="ProcessButtonDelete">
+          <Button
+            variant="secondary"
+            width="fit"
+            size="xs"
+            children={<DeleteIcon />}
+            onClick={handleOnClickButtonCancel}
+            title={t(
+              "Projects.Project.Process.components.Buttons.button.cancel"
             )}
           />
         </PermissionGate>

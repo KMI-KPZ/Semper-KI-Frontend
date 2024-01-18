@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import { MaterialProps } from "../Material";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
 import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import useService from "@/pages/Service/hooks/useService";

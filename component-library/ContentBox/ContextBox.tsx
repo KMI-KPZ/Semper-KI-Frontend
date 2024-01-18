@@ -6,7 +6,9 @@ interface ContentBoxProps {
   className?: string;
 }
 
-const ContentBox: React.FC<PropsWithChildren<ContentBoxProps>> = (props) => {
+export const ContentBox: React.FC<PropsWithChildren<ContentBoxProps>> = (
+  props
+) => {
   const { children, className } = props;
 
   return (
@@ -20,5 +22,3 @@ const ContentBox: React.FC<PropsWithChildren<ContentBoxProps>> = (props) => {
     </div>
   );
 };
-
-export default ContentBox;

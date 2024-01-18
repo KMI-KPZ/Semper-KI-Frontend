@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import useOrganizations from "../hooks/useOrganizations";
 import { Button, LoadingSuspense, Text } from "@component-library/index";
-import OrganizationInfoForm from "./components/Form";
-import Modal from "@component-library/Modal";
+import { Modal } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 import { ServiceType } from "@/pages/Service/hooks/useService";
+import OrganizationForm from "@/components/Form/OrganizationForm";
 
 interface OrganizationInfoProps {}
 
@@ -64,23 +64,25 @@ const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
               {organizationInfoQuery.data.details.taxID}
             </Text>
           </div>
-          <Container width="full" className="flex-wrap">
+          <Container width="full" justify="start" align="start">
             <Text variant="body">{`${t(`Organization.Info.services`)}: `}</Text>
-            {organizationInfoQuery.data.supportedServices.length > 0 ? (
-              organizationInfoQuery.data.supportedServices.map(
-                (service, index) => (
-                  <Text key={index}>
-                    {t(
-                      `enum.ServiceType.${
-                        ServiceType[service] as keyof typeof ServiceType
-                      }`
-                    )}
-                  </Text>
+            <Container>
+              {organizationInfoQuery.data.supportedServices.length > 0 ? (
+                organizationInfoQuery.data.supportedServices.map(
+                  (service, index) => (
+                    <Text key={index}>
+                      {t(
+                        `enum.ServiceType.${
+                          ServiceType[service] as keyof typeof ServiceType
+                        }`
+                      )}
+                    </Text>
+                  )
                 )
-              )
-            ) : (
-              <Text>{t("Organization.Info.noService")}</Text>
-            )}
+              ) : (
+                <Text>{t("Organization.Info.noService")}</Text>
+              )}
+            </Container>
           </Container>
           <PermissionGate element="OrganizationButtonEditOrga">
             <Button
@@ -93,7 +95,7 @@ const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
             closeModal={closeEdit}
             title="OrganizationInfoForm"
           >
-            <OrganizationInfoForm
+            <OrganizationForm
               closeEdit={closeEdit}
               organizationInfo={organizationInfoQuery.data}
             />

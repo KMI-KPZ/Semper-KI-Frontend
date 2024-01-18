@@ -5,7 +5,7 @@ interface SearchProps {
   handleSearchInputChange: (search: string) => void;
 }
 
-const Search: React.FC<SearchProps> = (props) => {
+export const Search: React.FC<SearchProps> = (props) => {
   const { handleSearchInputChange } = props;
   const { t } = useTranslation();
   const handleOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -29,5 +29,3 @@ const Search: React.FC<SearchProps> = (props) => {
     </form>
   );
 };
-
-export default Search;

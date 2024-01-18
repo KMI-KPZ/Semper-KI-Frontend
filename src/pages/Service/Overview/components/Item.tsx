@@ -1,7 +1,7 @@
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { ServiceType } from "../../hooks/useService";

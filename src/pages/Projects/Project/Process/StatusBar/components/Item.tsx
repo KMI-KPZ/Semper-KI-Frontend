@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { StatusData } from "../StatusBar";
-import { Text } from "@component-library/Typography";
+import { Text } from "@component-library/index";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
-import { Badge } from "@component-library/Badge";
+import { Badge } from "@component-library/Badge/Badge";
 import useEvents from "@/hooks/useEvents/useEvents";
 
 type StatusItemType = {

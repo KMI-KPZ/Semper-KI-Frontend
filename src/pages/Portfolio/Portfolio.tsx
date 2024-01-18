@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import { useSearchParams } from "react-router-dom";
 import PortfolioItem from "./components/Item";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 
 interface Props {}
 

@@ -6,7 +6,7 @@ import usePermissions, {
   PermissionGateType,
 } from "@/hooks/usePermissions";
 import { Outlet } from "react-router-dom";
-import { AppLoadingSuspense } from "@component-library/Loading";
+import { AppLoadingSuspense } from "@component-library/index";
 import useUser, { UserType } from "@/hooks/useUser";
 import usePermissionQuerys from "@/api/Permissions/usePermissionsQuerys";
 

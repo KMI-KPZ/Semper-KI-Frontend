@@ -1,10 +1,10 @@
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
 import { ManufacturingServiceProps } from "@/pages/Service/Manufacturing/types/types";
-import { Button } from "@component-library/Button";
-import Container from "@component-library/Container";
-import Modal from "@component-library/Modal";
-import { Heading, Text } from "@component-library/Typography";
+import { Button } from "@component-library/index";
+import { Container } from "@component-library/index";
+import { Modal } from "@component-library/index";
+import { Heading, Text } from "@component-library/index";
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ModelPreview from "@/pages/Test/STLViewer";
@@ -63,6 +63,7 @@ const ProcessServiceManufacturing: React.FC<
       {process.serviceDetails.model !== undefined ? (
         <PermissionGate element={"ProcessButtonModelPreView"}>
           <Button
+            size="sm"
             onClick={handleOnClickButtonOpen}
             title={t(
               "Projects.Project.Process.ServicePreview.components.Manufacturing.buttons.modelPreView"

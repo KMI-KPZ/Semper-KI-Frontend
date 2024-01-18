@@ -1,24 +1,21 @@
-import {
-  useMutation,
-  UseMutationResult,
-  useQuery,
-  useQueryClient,
-  UseQueryResult,
-} from "@tanstack/react-query";
-import customAxios from "@/hooks/useCustomAxios";
-import logger from "@/hooks/useLogger";
-import usePermissions from "@/hooks/usePermissions";
+import { UseMutationResult, UseQueryResult } from "@tanstack/react-query";
+import { ServiceType } from "@/pages/Service/hooks/useService";
+import useOrganizationMutations, {
+  InvitationProps,
+} from "@/api/Organization/useOrganizationMutations";
+import useOrganizationQuerys from "@/api/Organization/useOrganizationQuerys";
 
 interface useOrganizationsReturnProps {
   userQuery: UseQueryResult<OrganizationsUser[], Error>;
   rolesQuery: UseQueryResult<RoleProps[], Error>;
-  permissionsQuery: UseQueryResult<Permission[], Error>;
-  rolePermissionsQuery: UseQueryResult<RolePermission[], Error>;
+  permissionsQuery: UseQueryResult<PermissionProps[], Error>;
+  rolePermissionsQuery: UseQueryResult<PermissionProps[], Error>;
+  organizationInfoQuery: UseQueryResult<OrganizationInfoProps, Error>;
   inviteLinkMutation: UseMutationResult<string, Error, string, unknown>;
-  inviteUserMutation: UseMutationResult<any, Error, string, unknown>;
+  inviteUserMutation: UseMutationResult<any, Error, InvitationProps, unknown>;
   createRoleMutation: UseMutationResult<any, Error, CreateRoleProps, unknown>;
   deleteRoleMutation: UseMutationResult<any, Error, string, unknown>;
-  setPermissionMutation: UseMutationResult<
+  updatePermissionForRoleMutation: UseMutationResult<
     any,
     Error,
     SetPermissionProps,
@@ -27,6 +24,13 @@ interface useOrganizationsReturnProps {
   assignRoleMutation: UseMutationResult<any, Error, AssignRoleProps, unknown>;
   removeRoleMutation: UseMutationResult<any, Error, AssignRoleProps, unknown>;
   deleteUserMutation: UseMutationResult<any, Error, string, unknown>;
+  updateOrganizationInfo: UseMutationResult<
+    string,
+    Error,
+    UpdateOrgaInfoProps,
+    unknown
+  >;
+  editRoleMutation: UseMutationResult<any, Error, EditRoleProps, unknown>;
 }
 
 export type OrganizationsUser = {
@@ -45,14 +49,32 @@ export type CreateRoleProps = {
   description: string;
 };
 
-export type RolePermission = {
-  permission_name: string;
-  description: string;
-  resource_server_name: string;
-  resource_server_identifier: string;
-};
-export type Permission = {
-  value: string;
+export type PermissionNameTranslationType =
+  | "orga:read"
+  | "resources:edit"
+  | "resources:read"
+  | "orga:delete"
+  | "processes:read"
+  | "processes:messages"
+  | "processes:edit"
+  | "processes:delete"
+  | "processes:files";
+export type PermissionContextTranslationType =
+  | "resources"
+  | "orga"
+  | "processes";
+export type PermissionTypeTranslationType =
+  | "read"
+  | "edit"
+  | "delete"
+  | "messages"
+  | "delete"
+  | "files";
+
+export type PermissionProps = {
+  permission_name: PermissionNameTranslationType;
+  context: PermissionContextTranslationType;
+  permissionType: PermissionTypeTranslationType;
   description: string;
 };
 
@@ -66,234 +88,68 @@ export type AssignRoleProps = {
   roleID: string;
 };
 
+export interface OrganizationInfoProps {
+  accessedWhen: Date;
+  createdWhen: Date;
+  updatedWhen: Date;
+  details: { taxID: string; adress: string; email: string };
+  supportedServices: ServiceType[];
+  hashedID: string;
+  name: string;
+}
+
+export interface UpdateOrgaInfoProps {
+  email: string;
+  adress: string;
+  taxID: string;
+  name: string;
+  supportedServices: number[];
+}
+
+export interface EditRoleProps {
+  roleID: string;
+  name: string;
+  description: string;
+}
+
 const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
-  const queryClient = useQueryClient();
-  const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/organizations/`;
-  const staleTime: number = 300000;
+  const {
+    organizationInfoQuery,
+    permissionsQuery,
+    rolePermissionsQuery,
+    rolesQuery,
+    userQuery,
+  } = useOrganizationQuerys(roleID);
 
-  const userQuery = useQuery<OrganizationsUser[], Error>({
-    queryKey: ["organizations", "users"],
-    queryFn: async () => {
-      return (
-        customAxios
-          // .post(apiUrl, { data: { intent: "fetchUsers" } })
-          .get(apiUrl + "fetchUsers/")
-          .then((res) => {
-            logger("useOrganizations | fetchUsers ✅ |", res.data);
-            return res.data;
-          })
-      );
-    },
-    staleTime: staleTime,
-  });
-
-  const permissionsQuery = useQuery<Permission[], Error>({
-    queryKey: ["organizations", "permissions"],
-    queryFn: async () =>
-      customAxios
-        // .post(apiUrl, { data: { intent: "getPermissions" } })
-        .get(apiUrl + "getPermissions/")
-        .then((res) => {
-          logger("useOrganizations | getPermissions ✅ |", res.data);
-          return res.data;
-        }),
-    staleTime: staleTime,
-  });
-
-  const rolesQuery = useQuery<RoleProps[], Error>({
-    queryKey: ["organizations", "roles"],
-    queryFn: async () => {
-      return (
-        customAxios
-          // .post(apiUrl, { data: { intent: "getRoles" } })
-          .get(apiUrl + "getRoles/")
-          .then((res) => {
-            logger("useOrganizations | getRoles ✅ |", res.data);
-            return res.data;
-          })
-      );
-    },
-    staleTime: staleTime,
-  });
-
-  const rolePermissionsQuery = useQuery<RolePermission[], Error>({
-    queryKey: ["organizations", "roles", roleID, "permissions"],
-    queryFn: async () =>
-      customAxios
-        .post(apiUrl + "getPermissionsForRole/", {
-          data: {
-            content: { roleID: roleID },
-          },
-        })
-        .then((res) => {
-          logger("useOrganizations | getPermissionsForRole ✅ |", res.data);
-          return res.data;
-        }),
-    enabled: roleID !== undefined && roleID !== "",
-    staleTime: staleTime,
-  });
-
-  const inviteLinkMutation = useMutation<string, Error, string>({
-    mutationFn: async (email: string) => {
-      return customAxios
-        .post(apiUrl + "getInviteLink/", {
-          data: { content: { email: email } },
-        })
-        .then((response) => {
-          logger("useOrganizations | getInviteLink ✅ |", response.data);
-          return response.data;
-        });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["organizations", "users"]);
-    },
-  });
-
-  const inviteUserMutation = useMutation<any, Error, string>({
-    mutationFn: async (email: string) => {
-      return customAxios
-        .post(apiUrl + "addUser/", {
-          data: { content: { email: email } },
-        })
-        .then((response) => {
-          logger("useOrganizations | addUser ✅ |", response.data);
-          return response.data;
-        });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["organizations", "users"]);
-    },
-  });
-
-  const createRoleMutation = useMutation<any, Error, CreateRoleProps>({
-    mutationFn: async (props) => {
-      const { description, name } = props;
-      return customAxios
-        .post(apiUrl + "createRole/", {
-          data: {
-            content: { roleName: name, roleDescription: description },
-          },
-        })
-        .then((response) => {
-          logger("useOrganizations | createRole ✅ |", response.data);
-          return response.data;
-        });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["organizations", "roles"]);
-    },
-  });
-
-  const setPermissionMutation = useMutation<any, Error, SetPermissionProps>({
-    mutationFn: async (props) => {
-      const { permissionIDs, roleID } = props;
-      return customAxios
-        .post(apiUrl + "setPermissionsForRole/", {
-          data: {
-            content: { roleID, permissionIDs },
-          },
-        })
-        .then((response) => {
-          logger(
-            "useOrganizations | setPermissionsForRole ✅ |",
-            response.data
-          );
-          return response.data;
-        });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["organizations", "roles"]);
-    },
-  });
-
-  const deleteRoleMutation = useMutation<any, Error, string>({
-    mutationFn: async (id: string) => {
-      return customAxios
-        .post(apiUrl + "deleteRole/", {
-          data: {
-            content: { roleID: id },
-          },
-        })
-        .then((response) => {
-          logger("useOrganizations | deleteRole ✅ |", response.data);
-          return response.data;
-        });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["organizations", "roles"]);
-    },
-  });
-
-  const assignRoleMutation = useMutation<any, Error, AssignRoleProps>({
-    mutationFn: async (props) => {
-      const { email, roleID } = props;
-      return customAxios
-        .post(apiUrl + "assignRole/", {
-          data: {
-            content: { email, roleID },
-          },
-        })
-        .then((response) => {
-          logger("useOrganizations | assignRole ✅ |", roleID);
-          return response.data;
-        });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["organizations", "users"]);
-    },
-  });
-
-  const removeRoleMutation = useMutation<any, Error, AssignRoleProps>({
-    mutationFn: async (props) => {
-      const { email, roleID } = props;
-      return customAxios
-        .post(apiUrl + "removeRole/", {
-          data: {
-            content: { email, roleID },
-          },
-        })
-        .then((response) => {
-          logger("useOrganizations | removeRole ✅ |", roleID);
-          return response.data;
-        });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["organizations", "roles"]);
-      queryClient.invalidateQueries(["organizations", "users"]);
-    },
-  });
-
-  const deleteUserMutation = useMutation<any, Error, string>({
-    mutationFn: async (email) => {
-      return customAxios
-        .post(apiUrl + "deleteUser/", {
-          data: {
-            content: { email },
-          },
-        })
-        .then((response) => {
-          logger("useOrganizations | deleteUser ✅ |", response.data);
-          return response.data;
-        });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["organizations", "users"]);
-    },
-  });
+  const {
+    assignRoleMutation,
+    createRoleMutation,
+    deleteRoleMutation,
+    deleteUserMutation,
+    editRoleMutation,
+    inviteLinkMutation,
+    inviteUserMutation,
+    removeRoleMutation,
+    updateOrganizationInfo,
+    updatePermissionForRoleMutation,
+  } = useOrganizationMutations();
 
   return {
+    organizationInfoQuery,
     permissionsQuery,
     rolesQuery,
     userQuery,
     rolePermissionsQuery,
+    editRoleMutation,
     inviteLinkMutation,
     inviteUserMutation,
     createRoleMutation,
     deleteRoleMutation,
-    setPermissionMutation,
+    updatePermissionForRoleMutation,
     assignRoleMutation,
     removeRoleMutation,
     deleteUserMutation,
+    updateOrganizationInfo,
   };
 };
 

@@ -1,16 +1,15 @@
+import { UserType } from "@/hooks/useUser";
 import {
   getFileSizeAsString,
   getTimeAsText,
   isNumber,
   getCurrentTimeInSeconds,
   removeItem,
-  getUserType,
+  getAuthorizedUserType,
   parseAddress,
   removeItemByIndex,
   getModelURI,
-  checkForSelectedData,
   isKey,
-  getStatusByIndex,
   splitFindArray,
   splitArray,
 } from "./utils";
@@ -97,30 +96,26 @@ describe("Utils", () => {
       expect(value).toStrictEqual(["a", "b", "c"]);
     });
   });
-  describe("Test getUserType", () => {
+  describe("Test getAuthorizedUserType", () => {
     it("should return client", () => {
-      const value = getUserType("client");
-      expect(value).toBe(0);
+      const value = getAuthorizedUserType("user");
+      expect(value).toBe(UserType.USER);
     });
     it("should return manufacturer", () => {
-      const value = getUserType("manufacturer");
-      expect(value).toBe(1);
+      const value = getAuthorizedUserType("organization");
+      expect(value).toBe(UserType.ORGANIZATION);
     });
     it("should return admin", () => {
-      const value = getUserType("admin");
-      expect(value).toBe(2);
+      const value = getAuthorizedUserType("admin");
+      expect(value).toBe(UserType.ADMIN);
     });
-    it("should return anonym", () => {
-      const value = getUserType("anonym");
-      expect(value).toBe(3);
+    it("should return user when empty", () => {
+      const value = getAuthorizedUserType("");
+      expect(value).toBe(UserType.USER);
     });
-    it("should return anonym when empty", () => {
-      const value = getUserType("");
-      expect(value).toBe(3);
-    });
-    it("should return anonym when something else", () => {
-      const value = getUserType("else");
-      expect(value).toBe(3);
+    it("should return user when something else", () => {
+      const value = getAuthorizedUserType("else");
+      expect(value).toBe(UserType.USER);
     });
   });
   describe("Test parseAddress", () => {
@@ -171,35 +166,6 @@ describe("Utils", () => {
       expect(value).toBe("data:image/jpeg;base64,/9j/test//Z");
     });
   });
-  describe("Test checkForSelectedData", () => {
-    it("should return true when something is selected", () => {
-      const material = new MaterialBuilder().build();
-      const value = checkForSelectedData([
-        {
-          title: "test",
-          material: material,
-          model: undefined,
-          postProcessings: undefined,
-        },
-      ]);
-      expect(value).toBe(true);
-    });
-    it("should return true when nothing is selected", () => {
-      const value = checkForSelectedData([
-        {
-          title: "test",
-          material: undefined,
-          model: undefined,
-          postProcessings: undefined,
-        },
-      ]);
-      expect(value).toBe(false);
-    });
-    it("should return false when array is empty", () => {
-      const value = checkForSelectedData([]);
-      expect(value).toBe(false);
-    });
-  });
   describe("Test isKey", () => {
     it("should return true when key is key of object", () => {
       const value = isKey({ test: "test" }, "test");
@@ -208,43 +174,6 @@ describe("Utils", () => {
     it("should return false when key is not key of object", () => {
       const value = isKey({ test: "test" }, "test2");
       expect(value).toBe(false);
-    });
-  });
-  describe("Test getStatusByIndex", () => {
-    const material = new MaterialBuilder().build();
-    const model = new ModelBuilder().build();
-    const postProcessing = new PostProcessingBuilder().build();
-    it("should return ok(0) when everything is selected", () => {
-      const value = getStatusByIndex({
-        title: "test",
-        material: material,
-        model: model,
-        postProcessings: [postProcessing],
-      });
-      expect(value).toBe(0);
-    });
-    it("should return missing(2) when something is undefined", () => {
-      const value_model_undefined = getStatusByIndex({
-        title: "test",
-        material: material,
-        model: undefined,
-        postProcessings: [postProcessing],
-      });
-      const value_material_undefined = getStatusByIndex({
-        title: "test",
-        material: undefined,
-        model: model,
-        postProcessings: [postProcessing],
-      });
-      const value_post_undefined = getStatusByIndex({
-        title: "test",
-        material: material,
-        model: model,
-        postProcessings: undefined,
-      });
-      expect(value_model_undefined).toBe(2);
-      expect(value_material_undefined).toBe(2);
-      expect(value_post_undefined).toBe(2);
     });
   });
   describe("Test splitArray", () => {

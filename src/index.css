@@ -23,9 +23,12 @@
         font-weight: 700;
         font-style: italic;
         src: url(/assets/fonts/PTSans-BoldItalic.ttf) format("truetype");
-}
+    }
     .bezier {
         transition-timing-function: cubic-bezier(.645,.045,.355,1);
+    }
+    body {
+        scrollbar-gutter: stable;
     }
 }
 

@@ -2,89 +2,234 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Button } from "@component-library/Button";
-import useOrganizations from "../../hooks/useOrganizations";
+import useOrganizations, {
+  PermissionProps,
+  RoleProps,
+} from "../../hooks/useOrganizations";
 import logger from "@/hooks/useLogger";
+import { Heading, Text } from "@component-library/Typography";
+import { sortPermissions } from "../Roles";
+import { LoadingAnimation } from "@component-library/index";
 
-interface OrganizationRolesFormProps {}
+interface OrganizationRolesFormProps {
+  allPermissions: PermissionProps[];
+  role?: RoleProps;
+  resetForm(): void;
+}
+
+interface FormData {
+  name: string;
+  description: string;
+  permissions: {
+    name: string;
+    checked: boolean;
+  }[];
+}
 
 const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
-  const {} = props;
+  const { role, allPermissions, resetForm } = props;
   const { t } = useTranslation();
-  const { rolesQuery: organizationRolesQuery, createRoleMutation } =
-    useOrganizations();
+  const {
+    rolePermissionsQuery,
+    createRoleMutation,
+    updatePermissionForRoleMutation,
+    editRoleMutation,
+  } = useOrganizations(role?.id);
   const [loading, setLoading] = useState<boolean>(false);
-
-  const schema = yup
-    .object({
-      name: yup.string().required(
-        t("yup.required", {
-          name: t("Organization.Roles.index.name"),
-        })
-      ),
-      description: yup.string().required(
-        t("yup.required", {
-          name: t("Organization.Roles.index.description"),
-        })
-      ),
-    })
-    .required();
-  type FormData = yup.InferType<typeof schema>;
 
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({ resolver: yupResolver(schema) });
+  } = useForm<FormData>({
+    defaultValues:
+      role === undefined
+        ? {
+            name: "",
+            description: "",
+            permissions: allPermissions.map((permission) => {
+              return {
+                name: permission.permission_name,
+                checked: true,
+              };
+            }),
+          }
+        : async () => {
+            return {
+              name: role.name,
+              description: role.description,
+              permissions: allPermissions.map((permission) => {
+                return {
+                  name: permission.permission_name,
+                  checked:
+                    rolePermissionsQuery.data !== undefined
+                      ? rolePermissionsQuery.data.find(
+                          (rolePermission) =>
+                            rolePermission.permission_name ===
+                            permission.permission_name
+                        ) !== undefined
+                        ? true
+                        : false
+                      : false,
+                };
+              }),
+            };
+          },
+  });
 
   const onSubmit = (data: FormData) => {
-    logger("onSubmitInvite", data);
+    logger("onSubmitInvite", data, role);
     setLoading(true);
-    createRoleMutation.mutate(
-      { name: data.name, description: data.description },
-      {
-        onSuccess(data, variables, context) {
-          setLoading(false);
-          reset();
-        },
-      }
-    );
+    if (role === undefined) {
+      createRoleMutation.mutate(
+        { name: data.name, description: data.description },
+        {
+          onSuccess(_data, variables, context) {
+            updatePermissionForRoleMutation.mutate(
+              {
+                roleID: _data.id,
+                permissionIDs: data.permissions
+                  .filter((permission) => permission.checked)
+                  .map((permission) => permission.name),
+              },
+              {
+                onSuccess() {
+                  setLoading(false);
+                  resetForm();
+                  reset();
+                },
+              }
+            );
+          },
+        }
+      );
+    } else {
+      editRoleMutation.mutate(
+        { roleID: role.id, name: data.name, description: data.description },
+        {
+          onSuccess() {
+            updatePermissionForRoleMutation.mutate({
+              roleID: role.id,
+              permissionIDs: data.permissions
+                .filter((permission) => permission.checked)
+                .map((permission) => permission.name),
+            });
+            setLoading(false);
+            resetForm();
+            reset();
+          },
+        }
+      );
+    }
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center md:w-4/6 md:flex-row">
-      <form className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
-        <input
-          placeholder={t("Organization.Roles.index.name") + "..."}
-          {...register("name")}
-          className="w-full bg-slate-100 px-5 py-2 "
-        />
-        <input
-          placeholder={t("Organization.Roles.index.description") + "..."}
-          {...register("description")}
-          className="w-full bg-slate-100 px-5 py-2 "
-        />
-        <Button
-          onClick={handleSubmit(onSubmit)}
-          title={t("Organization.Roles.index.button.create")}
-        />
-      </form>
-      {errors.description !== undefined || errors.name !== undefined ? (
-        <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
-          {errors.name !== undefined ? (
-            <div className="w-full p-5 text-center text-red-500">
-              {errors.name.message}
-            </div>
-          ) : null}
-          {errors.description !== undefined ? (
-            <div className="w-full p-5 text-center text-red-500">
-              {errors.description.message}
-            </div>
-          ) : null}
+    <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
+      {loading ? (
+        <div className="flex items-center justify-center p-20">
+          <LoadingAnimation />
         </div>
-      ) : null}
+      ) : (
+        <>
+          <Heading variant="h1" className="px-10">
+            {t(
+              `Organization.Roles.components.Form.title.${
+                role === undefined ? "create" : "edit"
+              }`
+            )}
+          </Heading>
+          <form className="flex w-full flex-col items-center justify-center gap-5">
+            <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
+              <label className="flex flex-col items-center justify-center gap-2">
+                <Text variant="body">
+                  {t("Organization.Roles.components.Table.name")}
+                </Text>
+                <input
+                  placeholder={
+                    t("Organization.Roles.components.Table.name") + "..."
+                  }
+                  {...register("name", {
+                    required: t(
+                      "Organization.Roles.components.Form.validation.required"
+                    ),
+                  })}
+                  className="w-full bg-slate-100 px-5 py-2 "
+                />
+              </label>
+              <label className="flex flex-col items-center justify-center gap-2">
+                <Text variant="body">
+                  {t("Organization.Roles.components.Table.description")}
+                </Text>
+
+                <input
+                  placeholder={
+                    t("Organization.Roles.components.Table.description") + "..."
+                  }
+                  {...register("description", {
+                    required: t(
+                      "Organization.Roles.components.Form.validation.required"
+                    ),
+                  })}
+                  className="w-full bg-slate-100 px-5 py-2 "
+                />
+              </label>
+            </div>
+            <Heading variant="h2">
+              {t("Organization.Roles.components.Form.permissions")}
+            </Heading>
+            <div className="flex w-full flex-row flex-wrap gap-5">
+              {allPermissions
+                .sort((p1, p2) => sortPermissions(p1, p2))
+                .map((permission, index) => (
+                  <label
+                    key={index}
+                    className="flex flex-col items-center justify-center gap-2"
+                  >
+                    <Text variant="body">
+                      {t(`types.permissionName.${permission.permission_name}`)}
+                      </Text>
+                    <input
+                      type="hidden"
+                      {...register(`permissions.${index}.name`)}
+                      value={permission.permission_name}
+                      className="w-full bg-slate-100 px-5 py-2 "
+                    />
+                    <input
+                      type="checkbox"
+                      {...register(`permissions.${index}.checked`)}
+                      className="h-8 w-8  bg-slate-100 px-5 py-2"
+                    />
+                  </label>
+                ))}
+            </div>
+            {errors.description !== undefined || errors.name !== undefined ? (
+              <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
+                {errors.name !== undefined ? (
+                  <div className="w-full p-5 text-center text-red-500">
+                    {errors.name.message}
+                  </div>
+                ) : null}
+                {errors.description !== undefined ? (
+                  <div className="w-full p-5 text-center text-red-500">
+                    {errors.description.message}
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
+            <Button
+              onClick={handleSubmit(onSubmit)}
+              title={t(
+                `Organization.Roles.components.Form.button.${
+                  role === undefined ? "create" : "safe"
+                }`
+              )}
+            />
+          </form>
+        </>
+      )}
     </div>
   );
 };

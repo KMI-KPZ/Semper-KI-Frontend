@@ -3,14 +3,16 @@ import { useTranslation } from "react-i18next";
 import LogoURL from "@images/logo192.png";
 import { DefinedUseQueryResult, UseQueryResult } from "@tanstack/react-query";
 import { Heading } from "..";
+import { twMerge } from "tailwind-merge";
 
 interface LoadingAnimationProps {
   color?: string;
   text?: boolean;
+  className?: string;
 }
 
 export const LoadingAnimation: React.FC<LoadingAnimationProps> = (props) => {
-  const { color, text } = props;
+  const { color, text, className } = props;
   const { t } = useTranslation();
   const [state, setState] = useState<number>(0);
 
@@ -34,7 +36,7 @@ export const LoadingAnimation: React.FC<LoadingAnimationProps> = (props) => {
       </div>
     );
   return (
-    <div className="">
+    <div className={twMerge("mt-6 p-20", className)}>
       <div className="h-24 w-24 animate-bounce">
         <img src={LogoURL} alt="" />
       </div>
@@ -60,7 +62,7 @@ export const LoadingSuspense = <T,>(
     children,
     query,
     animation = false,
-    loadingText = t("General.LoadingSuspense.loading"),
+    loadingText = t("component-library.Loading.LoadingSuspense.loading"),
     text = true,
     errorText,
     refetchLoading,
@@ -86,10 +88,32 @@ export const LoadingSuspense = <T,>(
       <div className="flex flex-row items-center justify-center">
         <Heading variant="h1">
           {errorText === undefined
-            ? `${t("General.LoadingSuspense.error")} : ${query.error.message}`
+            ? `${t("component-library.Loading.LoadingSuspense.error")} : ${
+                query.error.message
+              }`
             : errorText}
         </Heading>
       </div>
     );
   return <>{children}</>;
+};
+
+interface AppLoadingSuspenseProps {}
+
+export const AppLoadingSuspense: React.FC<AppLoadingSuspenseProps> = (
+  props
+) => {
+  const {} = props;
+  const { t } = useTranslation();
+
+  return (
+    <div className="flex h-screen w-screen flex-col items-center justify-center gap-5 overflow-clip bg-white">
+      <Heading variant="h1">
+        {t("App.components.LoadingSuspense.title")}
+      </Heading>
+      <Heading variant="h2">
+        {t("App.components.LoadingSuspense.loading")}
+      </Heading>
+    </div>
+  );
 };

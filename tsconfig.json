@@ -27,5 +27,5 @@
         "@test/*": ["./test/*"],
     },
   },
-  "include": ["src", "assets", "component-library"]
+  "include": ["src", "assets", "component-library","**/*.ts","**/*.tsx"],
 }

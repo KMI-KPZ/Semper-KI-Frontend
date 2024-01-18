@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
-import useOntoPrinters from "../../hooks/useOntoPrinters";
+import useOntologyPrinterQuerys from "../../../../api/Ontology/useOntologyPrinterQuerys";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import ResourcesPrintersAddSearch from "./components/Search";
@@ -22,14 +22,14 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const [printerID, setPrinterID] = useState<string>("");
-  const { printerMutation } = useOntoPrinters({});
+  const { printerMutation } = useOntologyPrinterQuerys({});
   const [editPrinter, setEditPrinter] = useState<boolean>(true);
   const [newPrinter, setNewPrinter] = useState<boolean>(false);
 
   const schema = yup
     .object({
       printerName: yup.string().required(
-        t("yup.required", {
+        t("yup.requiredName", {
           name: t("Resources.Printers.form.yup.name"),
         })
       ),

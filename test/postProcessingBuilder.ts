@@ -1,4 +1,6 @@
-import {EPostProcessingOptionType, IPostProcessing} from "../src/pages/Process/PostProcessing/PostProcessing"
+import { EPostProcessingOptionType, PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
+
+
 
 export class PostProcessingBuilder {
     id: string="postProcessingID";
@@ -39,7 +41,7 @@ export class PostProcessingBuilder {
     }
 
 
-    build():IPostProcessing {
+    build():PostProcessingProps {
         return {
             id: this.id,
             title: this.title,

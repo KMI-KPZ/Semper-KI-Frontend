@@ -3,10 +3,11 @@ import { Button } from "@component-library/Button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTranslation } from "react-i18next";
 import { Heading } from "@component-library/Typography";
+import { PortfolioItemType } from "../Portfolio";
 
 interface Props {
   preOpen: boolean;
-  portfolioItem: string;
+  portfolioItem: PortfolioItemType;
 }
 
 const PortfolioItem: React.FC<Props> = (props) => {

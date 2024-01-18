@@ -14,7 +14,7 @@ const Imprint: React.FC<ImprintProps> = (props) => {
       className="flex w-full flex-col items-center justify-center gap-5 p-5"
     >
       <Heading variant="h1" className="w-full bg-white p-5 text-center">
-        {t("Imprint.header")}
+        {t("Legal.Imprint.title")}
       </Heading>
       <section className="flex w-full flex-col items-start justify-start gap-3 bg-white p-5">
         <Text variant="body" className="pl-5">
@@ -111,7 +111,7 @@ const Imprint: React.FC<ImprintProps> = (props) => {
         </Text>
       </section>
       <section className="flex w-full flex-col items-start justify-start gap-3 bg-white p-5">
-        <Heading variant="h2">{t("Imprint.disclaimer.header")}</Heading>
+        <Heading variant="h2">{t("Legal.Imprint.disclaimer.header")}</Heading>
         <Heading variant="h3">§1 Warnhinweis zu Inhalten</Heading>
         <Text variant="body" className="pl-5">
           Die kostenlosen und frei zugänglichen Inhalte dieser Webseite wurden

@@ -1,13 +1,19 @@
+import "./i18n";
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import "./i18n";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import App from "./pages/App/App";
 import { Heading } from "@component-library/Typography";
+import UserContextProvider from "./contexts/UserContextProvider";
+import PermissionContextProvider from "./contexts/PermissionContextProvider";
+import EventContextProvider from "./contexts/EventContextProvider";
+import BodyScrollContextProvider from "./contexts/BodyScrollContextProvider";
+import ModalContextProvider from "./contexts/ModalContextProvider";
+import CSRFOutlet from "./outlets/CSRFOutlet";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -33,8 +39,20 @@ root.render(
     <React.StrictMode>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <App />
-          <ReactQueryDevtools />
+          <CSRFOutlet>
+            <UserContextProvider>
+              <PermissionContextProvider>
+                <EventContextProvider>
+                  <BodyScrollContextProvider>
+                    <ModalContextProvider>
+                      <App />
+                      <ReactQueryDevtools />
+                    </ModalContextProvider>
+                  </BodyScrollContextProvider>
+                </EventContextProvider>
+              </PermissionContextProvider>
+            </UserContextProvider>
+          </CSRFOutlet>
         </QueryClientProvider>
       </BrowserRouter>
     </React.StrictMode>

@@ -19,54 +19,44 @@ interface LegalProps {}
 const Legal: React.FC<LegalProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { pingQuery } = usePing();
-
-  const magazinIsUp = (): boolean => {
-    const up =
-      pingQuery.isFetched &&
-      pingQuery.data !== undefined &&
-      pingQuery.data.up === true;
-    return up;
-  };
+  const { isMagazineUp } = usePing();
 
   return (
     <div
       className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5"
       data-testid="legal"
     >
-      <Heading variant="h1">{t("Legal.header")}</Heading>
-      <LoadingSuspense query={pingQuery}>
-        <Routes>
-          <Route
-            index
-            element={
-              <div
-                data-testid="legalButton"
-                className="flex w-full flex-col items-center justify-center gap-5 md:flex-row"
-              >
-                <Button
-                  title={t("Legal.imprint")}
-                  extern={magazinIsUp()}
-                  to={magazinIsUp() ? URL_Impressum : "/legal/imprint"}
-                />
-                <Button
-                  title={t("Legal.privacy")}
-                  extern={magazinIsUp()}
-                  to={magazinIsUp() ? URL_Datenschutz : "/legal/privacy"}
-                />
-                <Button
-                  title={t("Legal.contact")}
-                  extern={magazinIsUp()}
-                  to={magazinIsUp() ? URL_Contact : "/legal/contact"}
-                />
-              </div>
-            }
-          />
-          <Route path="imprint" element={<Imprint />} />
-          <Route path="privacy" element={<Privacy />} />
-          <Route path="contact" element={<Contact />} />
-        </Routes>
-      </LoadingSuspense>
+      <Heading variant="h1">{t("Legal.Legal.title")}</Heading>
+      <Routes>
+        <Route
+          index
+          element={
+            <div
+              data-testid="legalButton"
+              className="flex w-full flex-col items-center justify-center gap-5 md:flex-row"
+            >
+              <Button
+                title={t("Legal.Legal.imprint")}
+                extern={isMagazineUp()}
+                to={isMagazineUp() ? URL_Impressum : "/legal/imprint"}
+              />
+              <Button
+                title={t("Legal.Legal.privacy")}
+                extern={isMagazineUp()}
+                to={isMagazineUp() ? URL_Datenschutz : "/legal/privacy"}
+              />
+              <Button
+                title={t("Legal.Legal.contact")}
+                extern={isMagazineUp()}
+                to={isMagazineUp() ? URL_Contact : "/legal/contact"}
+              />
+            </div>
+          }
+        />
+        <Route path="imprint" element={<Imprint />} />
+        <Route path="privacy" element={<Privacy />} />
+        <Route path="contact" element={<Contact />} />
+      </Routes>
     </div>
   );
 };

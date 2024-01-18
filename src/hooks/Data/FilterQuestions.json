@@ -1,319 +1,292 @@
 [
-    {
-      "id": 0,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "costs",
-        "category": "general",
-        "type": "slider",
-        "range":[0,9999],
-        "values":null,
-        "units":"€"
-      },
-      "answer":null
+  {
+    "id": 0,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "costs",
+      "category": "GENERAL",
+      "type": "SLIDER",
+      "range": [0, 9999],
+      "values": null,
+      "units": "€"
     },
-    {
-      "id": 1,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "deliverTime",
-        "category": "general",
-        "type": "sliderselection",
-        "range":[0,99],
-        "values":null,
-        "units":[
-          "Tage",
-          "Wochen"
-        ]
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 1,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "deliverTime",
+      "category": "GENERAL",
+      "type": "SLIDERSELECTION",
+      "range": [0, 99],
+      "values": null,
+      "units": ["Tage", "Wochen"]
     },
-    {
-      "id": 2,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "amount",
-        "category": "general",
-        "type": "slider",
-        "range":[0,99999],
-        "values":null,
-        "units":"Stück"
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 2,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "amount",
+      "category": "GENERAL",
+      "type": "SLIDER",
+      "range": [0, 99999],
+      "values": null,
+      "units": "Stück"
     },
-    {
-      "id": 3,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "categorys",
-        "category": "general",
-        "type": "multiselection",
-        "range":null,
-        "values":[
-          "medicine",
-          "fashion",
-          "hobby",
-          "tools",
-          "models",
-          "toy",
-          "gadgets",
-          "art",
-          "learning"
-        ],
-        "units":null
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 3,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "categorys",
+      "category": "GENERAL",
+      "type": "MULTISELECTION",
+      "range": null,
+      "values": [
+        "medicine",
+        "fashion",
+        "hobby",
+        "tools",
+        "MODELs",
+        "toy",
+        "gadgets",
+        "art",
+        "learning"
+      ],
+      "units": null
     },
-    {
-      "id": 4,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "boxSize",
-        "category": "general",
-        "type": "sliderselection",
-        "range":[0,9999],
-        "values":null,
-        "units":[
-          "m",
-          "cm",
-          "mm"
-        ]
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 4,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "boxSize",
+      "category": "GENERAL",
+      "type": "SLIDERSELECTION",
+      "range": [0, 9999],
+      "values": null,
+      "units": ["m", "cm", "mm"]
     },
-    {
-      "id": 5,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "materialcategory",
-        "category": "general",
-        "type": "multiselection",
-        "range":[0,9999],
-        "values":["Metall","Plastic","Ceramic","Organic"],
-        "units":null
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 5,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "materialcategory",
+      "category": "GENERAL",
+      "type": "MULTISELECTION",
+      "range": [0, 9999],
+      "values": ["Metall", "Plastic", "Ceramic", "Organic"],
+      "units": null
     },
-    {
-      "id": 6,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "volume",
-        "category": "model",
-        "type": "sliderselection",
-        "range":[0,9999],
-        "values":null,
-        "units":[
-          "m³",
-          "cm³",
-          "mm³"
-        ]
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 6,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "volume",
+      "category": "MODEL",
+      "type": "SLIDERSELECTION",
+      "range": [0, 9999],
+      "values": null,
+      "units": ["m³", "cm³", "mm³"]
     },
-    {
-      "id": 7,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "materialCategory",
-        "category": "material",
-        "type": "selection",
-        "range":null,
-        "values":[
-          "plastic",
-          "metal",
-          "ceramic",
-          "organic"
-        ],
-        "units":null
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 7,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "materialCategory",
+      "category": "MATERIAL",
+      "type": "SELECTION",
+      "range": null,
+      "values": ["plastic", "metal", "ceramic", "organic"],
+      "units": null
     },
-    {
-      "id": 8,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "proceeding",
-        "category": "material",
-        "type": "selection",
-        "range":null,
-        "values":[
-          "3D-Print,Molding"
-        ],
-        "units":null
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 8,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "proceeding",
+      "category": "MATERIAL",
+      "type": "SELECTION",
+      "range": null,
+      "values": ["3D-Print,Molding"],
+      "units": null
     },
-    {
-      "id": 9,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "proceeding",
-        "category": "proceeding",
-        "type": "selection",
-        "range":null,
-        "values":[
-          "3D-Print",
-          "Molding"
-        ],
-        "units":null
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 9,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "proceeding",
+      "category": "PROCEEDING",
+      "type": "SELECTION",
+      "range": null,
+      "values": ["3D-Print", "Molding"],
+      "units": null
     },
-    {
-      "id": 10,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "manufacturer",
-        "category": "manufacturer",
-        "type": "selection",
-        "range":null,
-        "values":[
-          "Man 1",
-          "Man 2"
-        ],
-        "units":null
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 10,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "manufacturer",
+      "category": "MANUFACTURER",
+      "type": "SELECTION",
+      "range": null,
+      "values": ["Man 1", "Man 2"],
+      "units": null
     },
-    {
-      "id": 11,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "post-Processing",
-        "category": "post-Processing",
-        "type": "selection",
-        "range":null,
-        "values":[
-          "Finish",
-          "Threds"
-        ],
-        "units":null
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 11,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "postProcessing",
+      "category": "POSTPROCESSING",
+      "type": "SELECTION",
+      "range": null,
+      "values": ["Finish", "Threds"],
+      "units": null
     },
-    {
-      "id": 12,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "date",
-        "category": "test",
-        "type": "date",
-        "range":null,
-        "values":null,
-        "units":null
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 12,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "date",
+      "category": "TEST",
+      "type": "DATE",
+      "range": null,
+      "values": null,
+      "units": null
     },
-    {
-      "id": 13,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "text",
-        "category": "test",
-        "type": "text",
-        "range":null,
-        "values":null,
-        "units":null
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 13,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "text",
+      "category": "TEST",
+      "type": "TEXT",
+      "range": null,
+      "values": null,
+      "units": null
     },
-    {
-      "id": 14,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "textarea",
-        "category": "test",
-        "type": "textarea",
-        "range":null,
-        "values":null,
-        "units":null
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 14,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "textarea",
+      "category": "TEST",
+      "type": "TEXTAREA",
+      "range": null,
+      "values": null,
+      "units": null
     },
-    {
-      "id": 15,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "color",
-        "category": "test",
-        "type": "color",
-        "range":null,
-        "values":null,
-        "units":null
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 15,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "color",
+      "category": "TEST",
+      "type": "COLOR",
+      "range": null,
+      "values": null,
+      "units": null
     },
-    {
-      "id": 16,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "number",
-        "category": "test",
-        "type": "number",
-        "range":null,
-        "values":null,
-        "units":null
-      },
-      "answer":null
+    "answer": null
+  },
+  {
+    "id": 16,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "number",
+      "category": "TEST",
+      "type": "NUMBER",
+      "range": null,
+      "values": null,
+      "units": null
     },
-    {
-      "id": 17,
-      "isChecked":false,
-      "isOpen":false,
-      "question":{
-        "isSelectable":true,
-        "title": "multiselection",
-        "category": "test",
-        "type": "multiselection",
-        "range":null,
-        "values":[          
-          "medicine",
-          "fashion",
-          "hobby",
-          "tools",
-          "models",
-          "toy",
-          "gadgets",
-          "art",
-          "learning"
-        ],
-        "units":null
-      },
-      "answer":null
-    }
-  ]
+    "answer": null
+  },
+  {
+    "id": 17,
+    "isChecked": false,
+    "isOpen": false,
+    "question": {
+      "isSelectable": true,
+      "title": "multiselection",
+      "category": "TEST",
+      "type": "MULTISELECTION",
+      "range": null,
+      "values": [
+        "medicine",
+        "fashion",
+        "hobby",
+        "tools",
+        "MODELs",
+        "toy",
+        "gadgets",
+        "art",
+        "learning"
+      ],
+      "units": null
+    },
+    "answer": null
+  }
+]

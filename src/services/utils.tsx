@@ -1,8 +1,6 @@
-import { Address, UserType } from "@/hooks/useUser/types";
-import { IProcessItem } from "@/pages/Process/types";
-import { EProcessStatusType } from "@/pages/Process/Header/types";
-import { IModel } from "@/pages/Process/Model/types";
+import { Address, UserType } from "@/hooks/useUser";
 import logger from "@/hooks/useLogger";
+import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
 
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;
@@ -67,26 +65,22 @@ export const removeItemByIndex = <T,>(
   return newArr;
 };
 
-export const getUserType = (name: string): UserType => {
-  let type: UserType = UserType.client;
+export const getAuthorizedUserType = (
+  name?: string
+): UserType.ADMIN | UserType.ORGANIZATION | UserType.USER => {
+  if (name === undefined) return UserType.USER;
   switch (name.toLocaleLowerCase()) {
-    case "client":
-      type = UserType.client;
-      break;
-    case "manufacturer":
-      type = UserType.manufacturer;
-      break;
+    case "user":
+      return UserType.USER;
+    case "organization":
+      return UserType.ORGANIZATION;
+    case "organisation":
+      return UserType.ORGANIZATION;
     case "admin":
-      type = UserType.admin;
-      break;
-    case "anonym":
-      type = UserType.anonym;
-      break;
+      return UserType.ADMIN;
     default:
-      type = UserType.anonym;
-      break;
+      return UserType.USER;
   }
-  return type;
 };
 
 export const parseAddress = (unparsedAddress: string): Address => {
@@ -101,41 +95,22 @@ export const parseAddress = (unparsedAddress: string): Address => {
   return newAddress;
 };
 
-export const getModelURI = (model: IModel): string => {
+export const getModelURI = (model: ModelProps): string => {
   const convertStringForImage = (input: string): string => {
     let base64 = input;
     base64 = base64.slice(2);
     base64 = base64.slice(0, -1);
     return base64;
   };
+  if (model.URI === undefined) return "";
+
   return model.createdBy === "kiss"
     ? model.URI
     : `data:image/jpeg;base64,${convertStringForImage(model.URI)}`;
 };
 
-export const checkForSelectedData = (items: IProcessItem[]): boolean => {
-  let contains: boolean = false;
-  if (items === undefined || items.length === 0) return false;
-  items.forEach((item) => {
-    if (
-      item.model !== undefined ||
-      item.material !== undefined ||
-      item.postProcessings !== undefined
-    )
-      contains = true;
-  });
-  return contains;
-};
-
 export const isKey = <T extends object>(x: T, k: PropertyKey): k is keyof T => {
   return k in x;
-};
-
-export const getStatusByIndex = (process: IProcessItem): EProcessStatusType => {
-  if (process.model === undefined) return EProcessStatusType.missing;
-  if (process.material === undefined) return EProcessStatusType.missing;
-  if (process.postProcessings === undefined) return EProcessStatusType.missing;
-  return EProcessStatusType.ok;
 };
 
 export const splitFindArray = <T extends any>(
@@ -163,4 +138,59 @@ export const splitArray = <T extends any>(
   const arrayTrue = array.filter((item) => conditionFunction(item));
   const arrayFalse = array.filter((item) => !conditionFunction(item));
   return { arrayTrue, arrayFalse };
+};
+
+export const JSONIsParseable = (input: any): boolean => {
+  if (typeof input !== "string") return false;
+  try {
+    JSON.parse(input);
+    return true;
+  } catch (error) {
+    logger("JSONIsParseable error: ", error);
+    return false;
+  }
+};
+
+export const JSONSafeParse = <T,>(input: any): T | undefined => {
+  if (typeof input !== "string") return undefined;
+  try {
+    return JSON.parse(input) as T;
+  } catch (error) {
+    logger("JSONSafeParse error: ", error);
+    return undefined;
+  }
+};
+
+export const sortByKey = <T,>(item1: T, item2: T, key: keyof T): number => {
+  if (item1[key] === undefined || item2[key] === undefined) return 0;
+  if (item1[key] > item2[key]) {
+    return 1;
+  }
+  if (item1[key] < item2[key]) {
+    return -1;
+  }
+  return 0;
+};
+
+export const createDownload = (blob: Blob, title: string) => {
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.setAttribute("download", title);
+
+  // Append to html link element page
+  document.body.appendChild(link);
+
+  // Start download
+  link.click();
+
+  // Clean up and remove the link
+  link.parentNode!.removeChild(link);
+};
+
+export const objectToArray = <T,>(object: Object): T[] => {
+  let array: T[] = Object.entries(object).map(([key, value]) => {
+    return { ...value } as T;
+  });
+  return array;
 };

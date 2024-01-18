@@ -1,39 +1,40 @@
-export type EventType = "orderEvent" | "orgaEvent" | "permissionEvent";
-export interface Event {
-  eventType: EventType;
+
+export type Event = ProjectEvents | OrgaEvents | PermissionEvent; 
+
+export interface ProjectEvents {
+  eventType: "projectEvent";
+  events: ProjectEventItem[];
 }
 
-export interface OrderEvent extends Event {
-  eventType: "orderEvent";
-  orderCollectionID: string;
-  orders: OrderEventItem[];
+export interface ProjectEventItem {
+  projectID: string;
+  processes: ProcessEventItem[];
 }
 
-export interface OrderEventItem {
-  orderID: string;
-  status: number;
-  messages: number;
+export interface ProcessEventItem {
+  processStatus?: number;
+  messages?: number;
+  processID:string;
 }
 
-export interface OrgaEvent extends Event {
+export interface OrgaEvents  {
   eventType: "orgaEvent";
   orgaName: string;
 }
-export interface PermissionEvent extends Event {
+export interface PermissionEvent  {
   eventType: "permissionEvent";
 }
 
-export interface DeleteEvent {
-  eventType: EventType;
-}
-export type OrderEventType = "message" | "status";
+export type DeleteEvent = DeleteProjectEvent | DeleteOrgaEvent;
 
-export interface DeleteOrderEvent extends DeleteEvent {
-  eventType: "orderEvent";
-  orderCollectionID: string;
-  orderID: string;
-  type: OrderEventType;
+export type ProjectEventType = "message" | "status";
+
+export interface DeleteProjectEvent  {
+  eventType: "projectEvent";
+  projectID: string;
+  processID: string;
+  type: ProjectEventType;
 }
-export interface DeleteOrgaEvent extends DeleteEvent {
+export interface DeleteOrgaEvent {
   eventType: "orgaEvent";
 }

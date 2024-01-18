@@ -1,36 +1,39 @@
 {
-  "yup":{
-    "required":"{{name}} wird benötigt",
-    "string":"Bitte Zeichenfolge eingeben",
-    "number":"Bitte Zahl eingeben",
-    "email":"Bitte gültige Email angeben"
+  "yup": {
+    "requiredName": "{{name}} wird benötigt",
+    "required": "wird benötigt",
+    "string": "Bitte Zeichenfolge eingeben",
+    "number": "Bitte Zahl eingeben",
+    "email": "Bitte gültige Email angeben"
   },
-  "data":{
-    "NavigationItem":{
-      "home":"Startseite",
-      "process":"Bestellung",
-      "model":"Modell",
-      "upload":"Modell Hochladen",
-      "material":"Material",
-      "postprocessing":"Nachbearbeitung",
-      "cart":"Warenkorb",
-      "manufacturer":"Hersteller",
-      "checkout":"Kasse",
-      "guide":"Wegweiser",
-      "orders":"Meine Bestellungen",
-      "account":"Konto",
-      "test":"Test",
-      "service":"Service",
-      "use":"In Anspruch nehmen",
-      "provide":"Service Anbieten",
-      "portfolio":"Portfolio",
+  "data": {
+    "NavigationItem": {
+      "demonstrator": "Demonstrator",
+      "edit": "Bearbeiten",
+      "home": "Startseite",
+      "process": "Prozess",
+      "model": "Modell",
+      "upload": "Modell Hochladen",
+      "material": "Material",
+      "postprocessing": "Nachbearbeitung",
+      "cart": "Warenkorb",
+      "manufacturer": "Hersteller",
+      "checkout": "Kasse",
+      "guide": "Wegweiser",
+      "order": "Auftragsdetails",
+      "orders": "Meine Aufträge",
+      "account": "Konto",
+      "test": "Test",
+      "service": "Service",
+      "use": "In Anspruch nehmen",
+      "provide": "Service Anbieten",
+      "portfolio": "Portfolio",
       "use-service": "Service in Anspruch nehmen",
       "provide-service": "Service bereitstellen",
-      "continue": "Bestellung Fortsetzen",
-      "new-contract": "neue Bestellung",
+      "continue": "Auftrag Fortsetzen",
+      "new-contract": "neuer Auftrag",
       "proceedings": "Verfahren",
       "company": "Unternehmen",
-      "contracts": "Meine Aufträge",
       "user": "Benutzer",
       "procedure": "Verfahren",
       "printer": "Drucker",
@@ -38,30 +41,291 @@
       "login": "Anmelden",
       "register": "Registrieren",
       "logout": "Abmelden",
-      "organization":"Organisation",
-      "materials":"Materialien",
-      "printers":"3D-Drucker",
-      "postprocessings":"Nachbearbeitungen",
-      "resources":"Ressourcen",
-      "add":"Hinzufügen"
+      "organization": "Organisation",
+      "materials": "Materialien",
+      "printers": "3D-Drucker",
+      "postprocessings": "Nachbearbeitungen",
+      "resources": "Ressourcen",
+      "add": "Hinzufügen",
+      "demo": "Demo",
+      "admin": "Adminbereich",
+      "users": "Benutzer verwalten",
+      "contractorSelection": "Auftragnehmerauswahl",
+      "verification": "Überprüfung",
+      "registerOrganization": "Organisation registrieren",
+      "verifyEMail": "E-Mail verifizieren",
+      "manufacturing": "Herstellen lassen",
+      "projects": "Meine Projekte",
+      "project": "Projekt"
     }
   },
-  "enum":{
-    "UserType":{
-      "client":"Auftraggeber",
-      "manufacturer":"Hersteller",
-      "admin":"Admin",
-      "anonym":"Anonym"
-    }
-  },
-  "Admin":{
-    "AdminMaterialView":{
-      "header": "Materialien",
-      "material-id": "Material-ID",
-      "name": "Name",
-      "propList": "Eigenschaftenliste"
+  "enum": {
+    "UserType": {
+      "USER": "Einzelperson",
+      "ORGANIZATION": "Organisation",
+      "ADMIN": "Admin",
+      "ANONYM": "Anonym"
     },
-    "AdminModelView": {
+    "ProcessStatus": {
+      "DRAFT": "Entwurf",
+      "WAITING_FOR_OTHER_PROCESS": "Warten auf andere Prozesse",
+      "SERVICE_READY": "Service bereit",
+      "SERVICE_IN_PROGRESS": "Service in bearbeitung",
+      "SERVICE_COMPLICATION": "Service Komplikation",
+      "CONTRACTOR_SELECTED": "Auftragnehmer ausgewählt",
+      "VERIFYING": "Überprüfen",
+      "VERIFIED": "Überprüft",
+      "REQUESTED": "Angefragt",
+      "CLARIFICATION": "Rückfragen",
+      "CONFIRMED_BY_CONTRACTOR": "Bestätigt durch Auftragnehmer",
+      "REJECTED_BY_CONTRACTOR": "Abgelehnt durch Auftragnehmer",
+      "CONFIRMED_BY_CLIENT": "Bestätigt durch Kunde",
+      "REJECTED_BY_CLIENT": "Abgelehnt durch Kunde",
+      "PRODUCTION": "In Produktion",
+      "DELIVERY": "Unterwegs",
+      "DISPUTE": "Streitfall",
+      "COMPLETED": "Abgeschlossen",
+      "FAILED": "Fehlgeschlagen",
+      "CANCELED": "Abgebrochen"
+    },
+    "ServiceType": {
+      "MANUFACTURING": "Modell Herstellen lassen",
+      "MODELING": "Modell Entwerfen lassen",
+      "NONE": "Service auswahl"
+    },
+    "ProcessStatusType": {
+      "OK": "OK",
+      "ERROR": "Fehler",
+      "MISSING": "Fehlend"
+    },
+    "FilterType": {
+      "TEXT": "Text",
+      "TEXTAREA": "Textfeld",
+      "NUMBER": "Zahl",
+      "DATE": "Datum",
+      "COLOR": "Farbe",
+      "SLIDER": "Schieberegler",
+      "SLIDERSELECTION": "Schieberegler mit Auswahl",
+      "SELECTION": "Auswahl",
+      "MUILTISELECT": "Mehrfachauswahl"
+    },
+    "FilterCategoryType": {
+      "GENERAL": "Allgemein",
+      "MODEL": "Modell",
+      "MATERIAL": "Material",
+      "PROCEEDING": "Verfahren",
+      "MANUFACTURER": "Hersteller",
+      "POSTPROCESSING": "Nachbearbeitung",
+      "ADDITIVE": "Additive",
+      "TEST": "Test"
+    },
+    "ProcessHistoryType": {
+      "CREATION": "Erstellung",
+      "STATUS": "Status",
+      "MESSAGE": "Nachricht",
+      "FILE": "Datei",
+      "DELETION": "Löschung",
+      "DETAILS": "Prozessdetails",
+      "OTHER": "Sonstiges"
+    }
+  },
+  "types": {
+    "permissionName": {
+      "orga:read": "Organisationen lesen",
+      "orga:edit": "Organisationen bearbeiten",
+      "resources:edit": "Ressourcen bearbeiten",
+      "resources:read": "Ressourcen lesen",
+      "orga:delete": "Organisationen löschen",
+      "processes:read": "Prozesse lesen",
+      "processes:messages": "Prozessnachrichten lesen",
+      "processes:edit": "Prozesse bearbeiten",
+      "processes:delete": "Prozesse löschen",
+      "processes:files": "Prozessdateien lesen"
+    },
+    "permissionContext": {
+      "orga": "Organisation",
+      "processes": "Prozesse",
+      "resources": "Ressourcen"
+    },
+    "permissionType": {
+      "read": "Ansehen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "messages": "Nachrichten",
+      "files": "Dateien"
+    }
+  },
+  "component-library": {
+    "Badege": {},
+    "Button": {},
+    "Container": {},
+    "Divider": {},
+    "Error": {
+      "incomplete": "Bitte {{name}} vervollständigen.",
+      "empty": "Keine {{name}} vorhanden",
+      "incorrect": "{{name}} ist nicht vorhanden"
+    },
+    "Form": {
+      "AddressForm": {
+        "AddressForm": {
+          "header": "Adresse bearbeiten",
+          "labels": {
+            "firstName": "Vorname *",
+            "lastName": "Nachname *",
+            "company": "Firma",
+            "street": "Straße *",
+            "houseNumber": "Hausnummer *",
+            "zipcode": "Postleitzahl *",
+            "city": "Stadt *",
+            "country": "Land *"
+          },
+          "hint": "* Pflichtfeld",
+          "buttons": {
+            "save": "Speichern"
+          }
+        }
+      }
+    },
+    "Input": {},
+    "Loading": {
+      "LoadingSuspense": {
+        "loading": "Laden...",
+        "error": "Error:"
+      },
+      "LoadingAnimation": {
+        "text": "Laden"
+      }
+    },
+    "Modal": {
+      "button": {
+        "close": "Schließen"
+      }
+    },
+    "Page": {},
+    "Search": {},
+    "Swicht": {},
+    "Typography": {}
+  },
+  "components": {
+    "AddressForm": {
+      "AddressForm": {
+        "title": "Adresse bearbeiten",
+        "street": "Straße",
+        "houseNumber": "Hausnummer",
+        "city": "Stadt",
+        "zipcode": "Postleitzahl",
+        "country": "Land",
+        "button": {
+          "save": "Speichern"
+        }
+      }
+    },
+    "Background": {},
+    "Breadcrumb": {},
+    "CookieBanner": {
+      "heading": "Cookie-Zustimmung verwalten",
+      "message": "Um dir ein optimales Erlebnis zu bieten, verwenden wir Technologien wie Cookies, um Geräteinformationen zu speichern und/oder darauf zuzugreifen. Wenn du diesen Technologien zustimmst, können wir Daten wie das Surfverhalten oder eindeutige IDs auf dieser Website verarbeiten. Wenn du deine Zustimmung nicht erteilst oder zurückziehst, können bestimmte Merkmale und Funktionen beeinträchtigt werden.",
+      "functional": {
+        "heading": "Funktional",
+        "message": "Die technische Speicherung oder der Zugang ist unbedingt erforderlich für den rechtmäßigen Zweck, die Nutzung eines bestimmten Dienstes zu ermöglichen, der vom Teilnehmer oder Nutzer ausdrücklich gewünscht wird, oder für den alleinigen Zweck, die Übertragung einer Nachricht über ein elektronisches Kommunikationsnetz durchzuführen."
+      },
+      "status": {
+        "alwaysActive": "Immer aktiv"
+      },
+      "button": {
+        "accept": "Akzeptieren",
+        "reject": "Ablehnen",
+        "showSettings": "Einstellungen ansehen",
+        "saveSettings": "Einstellungen speichern"
+      },
+      "link": {
+        "cookiePolicy": "Cookie-Richtlinie",
+        "dataProtection": "Datenschutzerklärung",
+        "imprint": "Impressum"
+      }
+    },
+    "Footer": {
+      "Footer": {
+        "imprint": "Impressum",
+        "privacy": "Datenschutzerklärung",
+        "contact": "Kontakt",
+        "data-protection": "Datenschutzerklärung",
+        "instagram": "Instagram",
+        "mastodon": "Mastodon"
+      },
+      "ContactForm": {
+        "title": "Kontaktformular",
+        "subject": "Betreff",
+        "message": "Nachricht",
+        "button": "Senden",
+        "name": "Name",
+        "email": "E-Mail-Adresse",
+        "error": "Fehler beim Senden der Nachricht",
+        "success": "Nachricht erfolgreich gesendet"
+      }
+    },
+    "Header": {
+      "Header": {
+        "title": "SEMPER-KI",
+        "button": {
+          "close": "Menu Schließen",
+          "open": "Menu Öffnen"
+        }
+      },
+      "HeaderData": {
+        "about-us": "Über uns",
+        "login": "Anmelden",
+        "register": "Registrieren",
+        "continue": "Fortfahren",
+        "cart": "Warenkorb",
+        "logout": "Abmelden",
+        "orders": "Aufträge",
+        "contracts": "Verträge",
+        "account": "Konto",
+        "test": "Test",
+        "guide": "Wegweiser"
+      },
+      "HeaderItem": {}
+    },
+    "Menu": {
+      "components": {
+        "LanguageMenu": {
+          "button": {
+            "languageMenu": "Sprachmenü",
+            "de": "Deutsch",
+            "gb": "Englisch"
+          }
+        }
+      }
+    },
+    "PermissionGate": {
+      "message": "Diese Funktion ist mit ihren Rechten nicht nutzbar"
+    },
+    "Switch": {},
+    "Table": {},
+    "Upload": {
+      "title_one": "Datei hochladen",
+      "title_other": "Dateien hochladen",
+      "subTitle": "Per Drag & Drop oder Klick"
+    },
+    "UserSwitch": {
+      "client": "Einzelnutzer",
+      "organization": "Organisation"
+    }
+  },
+  "Admin": {
+    "hooks": {
+      "useAdmin": {}
+    },
+    "Materials": {
+      "Materials": {
+        "header": "Materialien",
+        "material-id": "Material-ID",
+        "name": "Name",
+        "propList": "Eigenschaftenliste"
+      }
+    },
+    "Models": {
       "header": "Modelle",
       "name": "Name",
       "date": "Datum",
@@ -70,908 +334,1213 @@
       "certificates": "Zertifikate",
       "URI": "URI"
     },
-    "AdminOrderView":{
-      "header": "Bestellungen",
-      "order-id": "Bestellnummer",
-      "date": "Datum",
-      "status": "Status",
-      "cart": "Warenkorb",
-      "bill": "Rechnung"
-    },
-    "AdminUserView":{
-      "header": "Benutzer",
+    "Organization": {
+      "title": "Organisationsverwaltung",
+      "empty": "keine Organisation gefunden",
       "name": "Name",
-      "email": "Email",
-      "type": "Type",
       "created": "Created",
       "accessed": "Accessed",
-      "updated": "Updated"
+      "updated": "Updated",
+      "actions": "Aktionen",
+      "canManufacturer": "Hersteller",
+      "button": {
+        "delete": "Löschen"
+      },
+      "confirm": "Organisation wirklich löschen?"
+    },
+    "Projects": {
+      "header": "Projekte",
+      "projectID": "ProjektID",
+      "clientName": "Kunde",
+      "projectTitle": "Titel",
+      "processesCount": "Anzahl Prozesse",
+      "status": "Status",
+      "accessed": "Zugriff",
+      "created": "Erstellt",
+      "updated": "Aktualisiert",
+      "actions": "Aktionen",
+      "buttons": {
+        "show": "Anzeigen",
+        "delete": "Löschen"
+      },
+      "confirm": "Auftrag wirklich löschen?"
+    },
+    "User": {
+      "orga": "Organisationen",
+      "empty": "keine Benutzer gefunden",
+      "title": "Benutzerverwaltung",
+      "name": "Name",
+      "email": "Email",
+      "created": "Created",
+      "accessed": "Accessed",
+      "updated": "Updated",
+      "lastSeen": "letzte Anmeldung",
+      "actions": "Aktionen",
+      "search": "Suchen...",
+      "button": {
+        "delete": "Löschen",
+        "search": "Suchen"
+      },
+      "confirm": "User wirklich löschen?"
+    },
+    "Admin": {
+      "title": "Adminbereich",
+      "buttons": {
+        "orga": "Organisationen verwalten",
+        "user": "Benutzer verwalten",
+        "projects": "Projekte verwalten"
+      }
     }
   },
-  "AfterProcess":{
-    "Cart":{
-      "Cart":{
-        "header":"Warenkorb",
-        "item_one":"das Produkt",
-        "item_other":"die Produkte",
-        "noItems":"keine Produkte",
-        "edit":"Bearbeiten",
-        "request":"Anfragen",
-        "deleteCart":"Warenkorb löschen"
-      },
-      "CartItem":{
-        "model":"Modell",
-        "material":"Material",
-        "postProcessing_one":"Nachbearbeitung",
-        "postProcessing_other":"Nachbearbeitungen"
-       
+  "App": {
+    "components": {
+      "LoadingSuspense": {
+        "title": "Semper-KI",
+        "loading": "Laden..."
       }
     },
-    "Checkout":{
-      "Checkout": {
-        "title":"Bestellung überprüfen",
-        "button":{
-          "request":"Anfragen",
-          "printable":"Druckbarkeit überprüfen",
-          "logistics":"Lieferzeit berechnen",
-          "price":"Preis berechnen"
+    "hooks": {
+      "useEvents": {
+        "hooks": {
+          "useMissedEvent": {},
+          "useOrgaEvent": {
+            "toast": "Ihre Organisation wurde aktualisiert"
+          },
+          "useProjectEvent": {
+            "toast": {
+              "status": "Prozessstatus wurde aktualisiert",
+              "message": "Neue Nachricht"
+            }
+          },
+          "useWebsocket": {}
         },
-        "error":{
-          "no-items":"keine Items vorhanden"
-        },
-        "success":{
-          "send":"Der Auftrag wurde Erfolgreich übermittelt!",
-          "redirect":"Sie werden nun zu Startseite weitergeleitet"
-        }
-      },
-      "CheckoutItem":{
-        "printable":"Druckbarkeit",
-        "logistics":"Lieferzeit",
-        "price":"Preis"
-      }
-    },
-    "Manufacturer":{
-      "ManufacturerItem":{
-        "header":"Verfügbare Hersteller:"
-      },
-      "ManufacturerView":{
-        "header":"Hersteller auswählen",
-        "noManufacturerSelected":"Bitte bei jedem Item einen Hersteller auswählen!",
-        "button":{
-          "cart":"Warenkorb",
-          "checkOrder":"Bestellung überprüfen"
-        }
-      }
-    }
-   
-  },
-  "App":{
-    "title":"Semper-KI",
-    "loading":"Laden..."
-  },
-  "Background":{},
-  "Breadcrumb":{
-    
-  },
-  "CardView":{
-    "Card":{},
-    "CardView":{}
-  },
-  "Contact":{
-    "Contact":{
-      "header":"Kontakt",
-      "title":{
-        "name":"Name",
-        "email":"E-Mail",
-        "message":"Nachricht"
-      },
-      "input":{
-        "name":"Name...",
-        "email":"E-Mail...",
-        "message":"Nachricht..."
-      },
-      "button":{
-        "send":"Nachricht Senden"
-      }
-    }
-  },
-  "Error": {
-    "text":"Seite nicht gefunden oder etwas ist schiefgelaufen",
-    "text2":"Falls sie diese Seite erreichen wollten laden sie Erneut oder kontaktieren sie unseren Support",
-    "button":"Zurück zur Startseite"
-  },
-  "Footer":{
-    "Footer":{
-      "imprint":"Impressum",
-      "data-protection":"Datenschutzerklärung",
-      "contact":"Kontakt",
-      "instagram":"Instagram",
-      "mastodon":"Mastodon"
-    }
-  },
-  "General":{
-    "Badege":{},
-    "Button":{},
-    "ErrorView":{
-      "incomplete":"Bitte {{name}} vervollständigen.",
-      "empty":"Keine {{name}} vorhanden"
-    },
-    "LoadingSuspense":{     
-      "loading":"Laden...",
-      "error":"Error:"
-    },
-    "LoadingAnimation":{
-      "text":"Laden"
-    },
-    "UserSwitch":{
-      "button":{
-        "client":"Für Autraggeber",
-        "contractor":"Für Auftragnehmer"
-      }
-    }
-  },
-  "Guide":{
-    "Answer":{
-      "GuideAnswer":{},
-      "GuideAnswers":{
-        "header":"Vorgaben"
-      }
-    },
-    "Components":{
-      "GButton":{},
-      "GMultiSelection":{},
-      "GOption":{},
-      "GRangeSlider":{},
-      "GSelection":{}
-    },
-    "Overview":{
-      "GuideOverview":{
-        "header":"Überblick",
-        "button":{
-          "search":"Suchen"
-        }
-      }
-    },
-    "Question":{
-      "GuideQuestion":{
-        "error":{
-          "missing":"Bitte mindestens eine Option auswählen"
-        }
-      }
-    },
-    "Guide":{},
-    "GuideRoutes":{
-      "header":"Angeleitete Einstiege",
-      "information":{
-        "header":"zu Informationen",
-        "explanation":"Informationen zum Thema 3D-Druck",
-        "beginner":"Anfänger",
-        "advanced":"Fortgeschritten",
-        "expert":"Experte"
-      },
-      "service":{
-        "header":"um Service Nutzen",
-        "explanation":"Einstieg in unsere Services",
-        "use-produce":"Bauteil Herstellen lassen",
-        "use-design":"Modell entwerfen lassen",
-        "use-accompany":"Gesamtprozess begleiten lassen",
-        "provide-produce":"Bauteile Herstellen",
-        "provide-design":"Modelle entwerfen",
-        "provide-accompany":"Gesamtprozesse begleiten"
-      }
-    }
-  },
-  "Header":{
-    "Header":{
-      "title":"SEMPER-KI",
-      "button":{
-        "close":"Menu Schließen",
-        "open":"Menu Öffnen"
-      }
-    },
-    "HeaderData":{
-      "about-us": "Über uns",
-      "login": "Anmelden",
-      "register": "Registrieren",
-      "continue": "Fortfahren",
-      "cart": "Warenkorb",
-      "logout": "Abmelden",
-      "orders": "Bestellungen",
-      "contracts": "Verträge",
-      "account": "Konto",
-      "test": "Test",
-      "guide": "Wegweiser"
-    },
-    "HeaderItem":{}
-  },
-  "Home":{
-    "Home":{
-      "header":"Übersicht"
-    },
-    "HomeGuideCard":{
-      "header":"Angeleiteter Einstieg",
-      "information":{
-        "header":"zu Informationen",
-        "beginner":"Anfänger",
-        "advanced":"Fortgeschritten",
-        "expert":"Experte"
-      },
-      "service":{
-        "header":"zu Services",
-        "use-produce":"Bauteil Herstellen lassen",
-        "use-design":"Modell entwerfen lassen",
-        "use-accompany":"Gesamtprozess begleiten lassen",
-        "provide-produce":"Bauteile Herstellen",
-        "provide-design":"Modelle entwerfen",
-        "provide-accompany":"Gesamtprozesse begleiten"
-      },
-      "button":{"all":"Zu allen Angeleiteten Einstiegen"}
-    },
-    "HomeItem":{},
-    "HomeMagazinCard":{
-      "header":"MAGAZIN"
-    },
-    "HomeNewsCard":{
-      "header":"Neuigkeiten",
-      "no-items":"keine Neuigkeiten"
-    },
-    "HomeNewsCardItem":{
-      "more":"Mehr lesen..."
-    },
-    "HomeOrderCard":{
-      "header":"Aufträge",
-      "order":{
-        "header":"Aktuell",
-        "new":"neuer Auftrag",
-        "continue":"Auftrag fortsetzen",
-        "cart":"Warenkorb",
-        "delete":"Warenkorb löschen",
-        "empty":"keine vorhandenen Bestellungen"
-      },
-      "orders":{
-        "header":"Meine Bestellungen",
-        "date":"Datum",
-        "article":"Anzahl Artikel",
-        "status":"Status",
-        "empty":"keine vorhandenen Bestellungen"
-      },
-      "contracts":{
-        "header":"Meine Aufträge",
-        "date":"Datum",
-        "article":"Anzahl Artikel",
-        "status":"Status"
-      },
-      "button":{
-        "all-contracts":"Alle Aufträge",
-        "all-orders":"Alle Bestellungen",
-        "start-order":"Auftrag beginnen"
-      }
-    },
-    "HomePortfolioCard":{
-      "header":"Unser Portfolio",
-      "client":{
-        "information":"Informieren über 3D-Druck",
-        "produce":"Teil herstellen lassen",
-        "design":"Modell entwerfen lassen",
-        "accompany":"Gesamtprozess begleiten lassen"
-      },
-      "contractor":{
-        "produce":"Teile herstellen",
-        "design":"Modelle entwerfen",
-        "accompany":"Gesamtprozesse begleiten"
-      },
-      "button":{
-        "client":"Für Autraggeber",
-        "contractor":"Für Anbieter"
-      }
-    },
-    "HomeResourcesCard":{
-      "header":"Ressourcen",
-      "link":{
-        "printer":"3D-Drucker",
-        "material":"Materialien",
-        "postprocessing":"Nachbearbeitungen",
-        "overview":"Übersicht"
-      }
-    },
-    "HomeSearchCard":{
-      "placeholder":"Suche ...",
-      "search":"Suchen"
-    },
-    "HomeData":{
-      "explore": "Ausprobieren",
-      "use-service": "Service in Anspruch nehmen",
-      "provide-service": "Service bereitstellen",
-      "continue": "Bestellung Fortsetzen",
-      "new-contract": "neue Bestellung",
-      "proceedings": "Verfahren",
-      "company": "Unternehmen",
-      "guide": "Wegweiser",
-      "cart": "Warenkorb",
-      "orders": "Meine Bestellungen",
-      "contracts": "Meine Aufträge",
-      "user": "Benutzer",
-      "model": "Modelle",
-      "material": "Materialien",
-      "procedure": "Verfahren",
-      "printer": "Drucker",
-      "account": "Konto"
-    }
-  },
-  "Legal":{
-    "header":"Gesetzliches",
-    "imprint":"Impressum",
-    "privacy":"Datenschutzerklärung",
-    "contact":"Kontakt"
-  },
-  "Imprint":{
-    "header":"Impressum",
-    "disclaimer":{
-      "header":"Disclaimer – rechtliche Hinweise"
-    }
-  },
-  "Login":{
-    "Login":{
-      "redirect":"Weiterleiten zur Anmeldung"
-    },
-    "LoginView":{
-      "header":"Anmeldung",
-      "user":"Benutzer",
-      "orga":"Organisation",
-      "login":{
-        "header":"Anmelden"
-      },
-      "register":{
-        "header":"Registieren"
-      },
-      "headerPath":"Für die gewünschte Seite müssen sie sich anmelden"
-    }
-  },
-  "Logout":{
-    "redirect":"Weiterleiten zur Abmeldung"
-  },
-  "Orders":{
-    "ChatView":{
-      "header":"Nachrichten",
-      "placeholder":"Nachricht...",
-      "button":{
-        "close":"Schließen",
-        "send":"Nachricht Senden"
-      }
-    },
-    "OrderCollection":{
-      "id":"ID",
-      "date":"Datum",
-      "button":{
-        "cancel":"Gesamten Auftrag Stornieren",
-        "reOrder":"Gesamten Auftrag erneut Bestellen",
-        "reject":"Gesamten Auftrag Ablehnen",
-        "confirm":"Gesamten Auftrag Bestätigen",
-        "verify":"Gesamten Auftrag Überprüfen",
-        "expand":"Ausklappen",
-        "collapse":"Zusammenklappen"
-      },
-      "state":{
-        "header":"Status",
-        "requested":"Angefragt",
-        "progress":"In Bearbeitung",
-        "finished":"Abgeschlossen"
-      }
-    },
-    "OrderCollectionOverview":{
-      "headline":{
-        "client":"Bestellungen",
-        "manufacturer":"Aufträge"
-      },
-      "empty":"keine vorhandenen Bestellungen"    
-    },
-    "OrderFileView":{
-      "header":"Dateien",
-      "empty":"keine Dateien gefunden",
-      "button":{
-        "download":"Herunterladen"
-      }
-    },
-    "OrderPreView":{
-      "requested":"Angefragt",
-      "verify":"Rückfragen",
-      "rejected":"Abgelehnt",
-      "confirmed":"Bestätigt",
-      "production":"In Produktion",
-      "delivery":"Unterwegs",
-      "finished":"Abgeschlossen"
-    },
-    "OrderView":{
-      "header":"Bestellung:",
-      "postProcessing":"Nachbearbeitung",
-      "button":{
-        "cancel":"Stornieren",
-        "reOrder":"erneut Bestellen",
-        "reject":"Ablehnen",
-        "confirm":"Bestätigen",
-        "verify":"Überprüfen",
-        "chat":"Nachrichten",
-        "expand":"Ausklappen",
-        "collapse":"Zusammenklappen"
-      },
-      "confirm":{
-        "cancel":"Auftrag wirklich stonieren?",
-        "reOrder":"Auftrag wirklich erneut Bestellen?",
-        "reject":"Auftrag wirklich Ablehnen?"
-      }
-    },
-    "StatusView":{
-      "state":{
-        "requested":"Angefragt",
-        "verify":"Rückfragen",
-        "rejected":"Abgelehnt",
-        "confirmed":"Bestätigt",
-        "production":"In Produktion",
-        "delivery":"Unterwegs",
-        "finished":"Abgeschlossen"
-      }
-    } 
-  },
-  "PopUp":{},
-  "Portfolio":{
-    "Portfolio":{
-      "header":"Unser Portfolio",
-      "back":"Nach Oben"
-    },
-    "PortfolioItem":{
-      "use-information":{
-        "header":"Informieren über 3D-Druck",
-        "text":"Dieser Service ermöglicht es Kunden, auf wertvolle Informationen und Daten zuzugreifen, die für ihre Bedürfnisse relevant sind. Ob Marktforschung, Branchentrends oder spezifische Erkenntnisse - wir stellen umfassende Informationsressourcen zur Verfügung, um fundierte Entscheidungen zu treffen."
-      },
-      "use-produce":{
-        "header":"Bauteil Herstellen lassen",
-        "text":"Mit diesem Service können Kunden unsere Expertise und Ressourcen nutzen, um effizient hochwertige Ergebnisse zu erzielen. Wir unterstützen bei der Produktion von Produkten und der Erstellung von Inhalten und sorgen so für einen reibungslosen und professionellen Produktionsprozess."
-      },
-      "use-design":{
-        "header":"Modell entwerfen lassen",
-        "text":"Mit unserem Modell entwerfen Service können Kunden auf unser kreatives Können zugreifen, um ihre Vision zum Leben zu erwecken. Wir bieten professionelle Designlösungen, die auf Ihre Anforderungen zugeschnitten sind. Egal, ob es darum geht, fesselnde Grafiken zu erstellen, benutzerfreundliche Oberflächen zu gestalten oder beeindruckende visuelle Identitäten zu entwickeln."
-      },
-      "use-accompany":{
-        "header":"Gesamtprozess begleiten lassen",
-        "text":"Dieser Service bietet Kunden kontinuierliche Unterstützung und Begleitung auf ihrem Weg. Wir begleiten Sie bei jedem Schritt, indem wir Expertenrat, individuelle Beratungen und ein engagiertes Support-System bieten, um Ihren Erfolg sicherzustellen."
-      },
-      "provide-produce":{
-        "header":"Bauteile Herstellen",
-        "text":"Auftragnehmer, die Bauteile Herstellen, bringen ihr Fachwissen und ihre Ressourcen ein, um die Produktionsbedürfnisse der Kunden zu erfüllen. Von der Herstellung von Produkten bis zur Erstellung von Inhalten - unsere erfahrenen Auftragnehmer sorgen für effiziente und erstklassige Ergebnisse."
-      },
-      "provide-design":{
-        "header":"Modelle entwerfen",
-        "text":"Auftragnehmer, die Modele entwerfen, zeichnen sich durch kreative Problemlösungsfähigkeiten aus. Sie bringen ihre künstlerischen Fähigkeiten und Branchenkenntnisse ein, um herausragende Designlösungen für Kunden zu liefern. Ob Logo-Design, Webentwicklung oder Erstellung einer Markenidentität - unsere Auftragnehmer bieten professionelle Expertise."
-      },
-      "provide-accompany":{
-        "header":"Gesamtprozesse begleiten",
-        "text":"Auftragnehmer, die Gesamtprozesse begleiten, fungieren als verlässliche Partner während der gesamten Reise des Kunden. Sie bieten Anleitung, Unterstützung und praktische Hilfe, um sicherzustellen, dass Kunden die notwendige Expertise und Ressourcen für ein erfolgreiches Ergebnis erhalten."
-      },
-      "button":{
-        "expand":"Ausklappen",
-        "collapse":"Zusammenklappen"
-      }
-    }
-  },
-  "PrivateRoutes":{
-    "error":{
-      "client":"Sie Müssen als Kunde angemeldet Sein um diese Seite zu sehen",
-      "manufacturer":"Sie Müssen als Hersteller angemeldet Sein um diese Seite zu sehen",
-      "admin":"404 - Seite nicht gefunden"
-    }
-  },
-  "Process":{
-    "Filter":{
-      "Components":{
-        "FColor":{},
-        "FDate":{},
-        "FMultiSelection":{},
-        "FNumber":{},
-        "FSelection":{},
-        "FSlider":{},
-        "FSliderSelection":{},
-        "FText":{},
-        "FTextArea":{}
-      },
-      "Filter":{
-        "header":"Vorgaben",
-        "button":{
-          "reset":"Zurücksetzen",
-          "apply":"Anwenden"
-        }
-      },
-      "FilterCard":{
-        "category":{
-          "general":"Allgemein",
-          "model":"Modell",
-          "material":"Material",
-          "proceeding":"Verfahren",
-          "manufacturer":"Hersteller",
-          "post-Processing":"Nachbearbeitung",
-          "additive":"Zusatz",
-          "test":"Test"
-        }
-      },
-      "FilterItem":{}
-    },
-    "Header":{
-      "Cart":{
-        "Cart":{},
-        "CartItem":{
-          "item":"Artikel",
-          "upload":"Modell Hochladen",
-          "new":"Artikel erstellen",
-          "cart":"Warenkorb",
-          "button":{
-            "edit":"Bearbeiten",
-            "delete":"Löschen"
+        "useEvents": {
+          "toast": {
+            "permission": "Ihre Rechte wurden aktualisiert"
           }
         }
       },
-      "Search":{
-        "placeholder":"Suche ..."
-      },
-      "StatusIcon":{},
-      "Wizard": {
-        "Wizard":{
-          "model": "Modell",
-          "material":"Material",
-          "post-processing": "Nachbearbeitung"
-        },
-        "WizardCard":{}
-      },
-      "Header":{}
+      "useBodyScroll": {},
+      "useToast": {}
     },
-    "Material":{
-      "MaterialCatalog":{
-        "empty":"keine Materialien gefunden"
-      },
-      "MaterialCatalogCard":{
-        "button":{
-          "select":"Auswählen"
-        }
-      },
-      "MaterialPreView":{
-        "button":{
-          "select":"Auswählen"
-        }
-      },
-      "MaterialView":{
-        "button":{
-          "change":"Ändern"
+    "App": {}
+  },
+  "EmailVerification": {
+    "title": "Email Verifizieren",
+    "text": "Bitte bestätigen Sie ihre Email Adresse, indem Sie auf den Link in der Email klicken, die Auth0 Ihnen gesendet hat.",
+    "text2": "Dies ist notwendig um die Registrierung abzuschließen und um Semper-KI nutzen zu können.",
+    "text3": "Vielen Dank für ihr Verständnis"
+  },
+  "Error": {
+    "text": "Seite nicht gefunden oder etwas ist schiefgelaufen",
+    "text2": "Falls sie diese Seite erreichen wollten laden sie Erneut oder kontaktieren sie unseren Support",
+    "button": "Zurück zur Startseite"
+  },
+  "Home": {
+    "Anonym": {
+      "Anonym": {
+        "title": "SEMPER-KI",
+        "subTitle": "WIR MACHEN 3D-DRUCK INTELLIGENT",
+        "alt": {
+          "subtitle": "Wir machen 3D-Druck intelligent",
+          "buttonToDemonstrator": "Zum Demonstrator"
+        },
+        "prototype": "Diese Seite ist ein Prototyp und wird fortlaufend bearbeitet",
+        "visionTitle1": "Wir vermitteln, was Sie brauchen",
+        "visionTitle2": "Mit KI zum 3D-Druck",
+        "vision1": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. Dazu gehören vorgelagerte Services wie Modellerstellung und Materialberatung genauso wie die Vermittlung von Nachbearbeitung oder Rechtsberatung. Der Druck findet beim optimalen Partner statt. Für all das setzen wir auf KI-Technologien. Gefördert vom Bundesministerium für Wirtschaft und Klimaschutz.",
+        "vision2": "Kern unserer Plattform sind Künstliche Intelligenzen. Diese Technologien haben wir speziell für die Vernetzung von Kunden mit der 3D-Druck-Branche entwickelt. Unsere KI ist ein semantisches Netz. In dieses Netz speisen wir Informationen über alle verfügbaren 3D-Druck-Prozesse ein. In Kombination mit den Anfragen, die auf der Plattform eingehen, ermitteln unsere KI-Technologien daraus die optimale Produktionsstrategie.",
+        "partner": "Innovation klappt nur als Team. Wir arbeiten eng zusammen und freuen uns über neue Partner in Forschung und Entwicklung. Gefördert vom BMWK.",
+        "demonstrator": "Demonstrator ausprobieren",
+        "buttons": {
+          "demonstrator": "Zum Demonstrator"
         }
       }
     },
-    "Model":{
-      "ModelCard":{
-        "license":"Lizenz",
-        "certificates":"Zertifikate",
-        "button":{
-          "select":"Auswählen"
+    "Authorized": {
+      "Authorized": {}
+    },
+    "components": {
+      "Admin": {
+        "title": "Adminbereich",
+        "button": {
+          "orga": "Organisationen verwalten",
+          "user": "Benutzer verwalten",
+          "general": "Adminbereich",
+          "projects": "Projekte verwalten"
         }
       },
-      "ModelCatalog":{
-        "upload":"Modell Hochladen",
-        "button":{
-          "upload":"Link Modell Hochladen",
-          "select":"Auswählen"
-        },
-        "empty":"keine Modelle gefunden"
+      "ClientInfo": {
+        "title": "Als Einzelperson anmelden",
+        "subTitle": "Um Services ausschließlich nutzen zu können",
+        "advantage": "Ihre Vorteile",
+        "register": "Registrieren"
       },
-      "ModelPreView":{
-        "created":"Erstellt am",
-        "license":"Lizenz",
-        "certificates":"Zertifikate",
-        "noCertificates":"keine",
-        "button":{
-          "select":"Auswählen"
+      "Container": {},
+      "Coypu": {
+        "title": "Coypu News",
+        "title2": "nutzen nur für forschungszwecke",
+        "button": {
+          "link": "Zum Artikel",
+          "less": "Weniger anzeigen",
+          "more": "Mehr anzeigen"
         }
       },
-      "ModelUpload": {
-        "header": "Modell hochladen",
-        "loading":"Hochladen...",
-        "error": "Bitte einen der folgenden Dateitypen hochladen .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF",
-        "card": {
-          "header": "Modell hochladen per Dran & Drop",
-          "text": "( .STEP, .STP, .SLDPRT, .STL, .SAT, .3DXML, .3MF, .PRT,\n .IPT, .CATPART, .X_T, .PTC, .X_B, .DXF)"
-        },
-        "button":{
-          "upload": "Hochladen"
+      "Header": {
+        "title": "Semper-KI - Einfach 3D drucken.",
+        "claim1": "Geben Sie Ihre Idee in Auftrag",
+        "claim2": "Von der Idee zum Modell",
+        "claim3": "Vom Modell zum Prototyp",
+        "claim4": "Vom Prototyp zu Large Scale",
+        "claim5": "Bei uns finden Sie passende Partner für jeden Schritt Ihres Produktionsprozesses."
+      },
+      "Images": {},
+      "Magazin": {
+        "title": "MAGAZIN"
+      },
+      "OrgaInfo": {
+        "title": "Als Organisation anmelden",
+        "subTitle": "Um Services anbieten und nutzen zu können",
+        "advantage": "Ihre Vorteile",
+        "register": "Registrieren"
+      },
+      "Organization": {
+        "title": "Organisation",
+        "button": {
+          "edit": "Oragnisation verwalten"
         }
       },
-      "ModelView":{
-        "created":"Erstellt am",
-        "license":"Lizenz",
-        "certificates":"Zertifikate",
-        "empty":"keine",
-        "button":{
-          "change":"Ändern"
+      "Projects": {
+        "title": "Projekte",
+        "noProjects": "Keine Projekte vorhanden",
+        "button": {
+          "demo": "Ausprobieren",
+          "new": "Neues Projekt",
+          "continue": "Projekt Fortsetzen",
+          "projects": "Meine Projekte"
+        }
+      },
+      "Resources": {
+        "title": "Ressourcen",
+        "button": {
+          "edit": "Ressourcen verwalten"
         }
       }
     },
-    "PostProcessing":{
-      "Catalog":{
-        "empty":"keine Nachbearbeitungen gefunden",
-        "button":"Weiter"
-      },
-      "ItemCard":{
-        "button":{
-          "select":"Auswählen",
-          "deselect":"Entfernen"
+    "Home": {}
+  },
+  "Legal": {
+    "Contact": {
+      "Contact": {
+        "header": "Kontakt",
+        "title": {
+          "name": "Name",
+          "email": "E-Mail",
+          "message": "Nachricht"
+        },
+        "input": {
+          "name": "Name...",
+          "email": "E-Mail...",
+          "message": "Nachricht..."
+        },
+        "button": {
+          "send": "Nachricht Senden"
         }
-      },
-      "ItemView":{},
-      "PostProcessingView":{
-        "empty":"keine Nachbearbeitungen gefunden"
       }
     },
-    "NewProcess":{
-      "header":"neue Bestellung Starten"
+    "Imprint": {
+      "title": "Impressum",
+      "disclaimer": {
+        "header": "Disclaimer – rechtliche Hinweise"
+      }
     },
-    "ProcessView":{
-      "item":"Artikel",
-      "path":{
-        "model":"Modell finden",
-        "upload":"Modell/e hochladen",
-        "material":"Material finden",
-        "postprocessing":"Nachbearbeitung hinzufügen"
+    "Legal": {
+      "title": "Gesetzliches",
+      "imprint": "Impressum",
+      "privacy": "Datenschutzerklärung",
+      "contact": "Kontakt"
+    }
+  },
+  "Login": {
+    "Login": {
+      "header": "Anmeldung",
+      "user": "Benutzer",
+      "orga": "Organisation",
+      "admin": "Mocked Anmeldungen",
+      "headerPath": "Für die gewünschte Seite müssen sie sich anmelden",
+      "buttons": {
+        "login": "Anmelden",
+        "register": "Registieren",
+        "user": "Einzelnutzer",
+        "orga": "Organisation",
+        "admin": "Admin"
       }
     }
   },
-  "Profil":{
+  "Logout": {
+    "redirect": "Weiterleiten zur Abmeldung"
+  },
+  "Organization": {
+    "index": {
+      "header": "Organisationsübersicht"
+    },
+    "Roles": {
+      "Roles": {
+        "header": "Rollen/Rechte",
+        "name": "Name",
+        "description": "Beschreibung",
+        "empty": "keine Rollen angelegt",
+        "button": {
+          "create": "Erstellen"
+        }
+      },
+      "components": {
+        "Form": {
+          "name": "Name",
+          "permissions": "Rechte",
+          "description": "Beschreibung",
+          "title": {
+            "create": "Rolle anlegen",
+            "edit": "Rolle bearbeiten"
+          },
+          "button": {
+            "create": "Erstellen",
+            "safe": "Speichern"
+          },
+          "validation": {
+            "required": "wird benötigt"
+          }
+        },
+        "Item": {
+          "name": "Name",
+          "description": "Beschreibung",
+          "actions": "Aktionen",
+          "empty": "keine Rollen angelegt",
+          "button": {
+            "delete": "Löschen",
+            "edit": "Bearbeiten",
+            "safe": "Speichern"
+          },
+          "alert": "Rolle wirklich löschen?"
+        },
+        "Table": {
+          "name": "Name",
+          "description": "Beschreibung",
+          "actions": "Aktionen",
+          "orga": "Organisation",
+          "processes": "Projekte",
+          "data": "Daten",
+          "files": "Dateien",
+          "resources": "Ressourcen",
+          "read": "ansehen",
+          "edit": "bearbeiten",
+          "create": "hinzufügen",
+          "insert": "hinzufügen",
+          "delete": "löschen",
+          "status": "Status bearbeiten",
+          "messages": "beantworten",
+          "empty": "keine Rollen angelegt",
+          "button": {
+            "delete": "Löschen",
+            "edit": "Bearbeiten",
+            "safe": "Speichern"
+          }
+        }
+      }
+    },
+    "Info": {
+      "accessed": "letzter Zugegriff am",
+      "created": "Erstellt am",
+      "updated": "Aktualisiert am",
+      "services": "Services die Sie anbieten",
+      "id": "OrganisationsID",
+      "name": "Name",
+      "adress": "Adresse",
+      "email": "E-Mail",
+      "taxID": "Steuernummer",
+      "noService": "keine Services ",
+      "button": {
+        "edit": "Bearbeiten"
+      },
+      "components": {
+        "form": {
+          "title": "Organisationinformationen bearbeiten",
+          "name": "Name der Organisation",
+          "taxID": "Steuernummer der Organisation",
+          "email": "Email der Organisation",
+          "adress": "Addresse der Organisation",
+          "services": "Services die Sie anbieten",
+          "button": {
+            "safe": "Speichern"
+          }
+        }
+      }
+    },
+    "components": {
+      "table": {
+        "confirmDelete": "Möchten Sie den Benutzer wirklich löschen?",
+        "header": "Benutzer",
+        "name": "Benutzername",
+        "picture": "Profilbild",
+        "email": "E-Mail",
+        "role": "Rolle",
+        "created": "Erstellt am",
+        "accessed": "letzter Zugegriff am",
+        "actions": "Aktionen",
+        "empty": "keine Rollen angelegt",
+        "error": {
+          "empty": "keine Benutzer gefunden"
+        },
+        "button": {
+          "delete": "Löschen",
+          "edit": "Bearbeiten",
+          "safe": "Speichern"
+        }
+      },
+      "invitation": {
+        "header": "Benutzer einladen",
+        "placeholder": "Email...",
+        "button": {
+          "invite": "Einladen",
+          "send": "Gesendet!",
+          "link": "Einladungslink erstellen",
+          "copy": "Kopieren"
+        }
+      }
+    }
+  },
+  "Outlets": {
+    "UserOutlets": {
+      "error": {
+        "client": "Sie Müssen als Kunde angemeldet Sein um diese Seite zu sehen",
+        "organization": "Sie Müssen als Hersteller angemeldet Sein um diese Seite zu sehen",
+        "admin": "404 - Seite nicht gefunden"
+      }
+    }
+  },
+  "Portfolio": {
+    "Portfolio": {
+      "header": "Unser Portfolio",
+      "back": "Nach Oben"
+    },
+    "PortfolioItem": {
+      "use-information": {
+        "header": "Informieren über 3D-Druck",
+        "text": "Dieser Service ermöglicht es Kunden, auf wertvolle Informationen und Daten zuzugreifen, die für ihre Bedürfnisse relevant sind. Ob Marktforschung, Branchentrends oder spezifische Erkenntnisse - wir stellen umfassende Informationsressourcen zur Verfügung, um fundierte Entscheidungen zu treffen."
+      },
+      "use-produce": {
+        "header": "Bauteil Herstellen lassen",
+        "text": "Mit diesem Service können Kunden unsere Expertise und Ressourcen nutzen, um effizient hochwertige Ergebnisse zu erzielen. Wir unterstützen bei der Produktion von Produkten und der Erstellung von Inhalten und sorgen so für einen reibungslosen und professionellen Produktionsprozess."
+      },
+      "use-design": {
+        "header": "Modell entwerfen lassen",
+        "text": "Mit unserem Modell entwerfen Service können Kunden auf unser kreatives Können zugreifen, um ihre Vision zum Leben zu erwecken. Wir bieten professionelle Designlösungen, die auf Ihre Anforderungen zugeschnitten sind. Egal, ob es darum geht, fesselnde Grafiken zu erstellen, benutzerfreundliche Oberflächen zu gestalten oder beeindruckende visuelle Identitäten zu entwickeln."
+      },
+      "use-accompany": {
+        "header": "Gesamtprozess begleiten lassen",
+        "text": "Dieser Service bietet Kunden kontinuierliche Unterstützung und Begleitung auf ihrem Weg. Wir begleiten Sie bei jedem Schritt, indem wir Expertenrat, individuelle Beratungen und ein engagiertes Support-System bieten, um Ihren Erfolg sicherzustellen."
+      },
+      "provide-produce": {
+        "header": "Bauteile Herstellen",
+        "text": "Auftragnehmer, die Bauteile Herstellen, bringen ihr Fachwissen und ihre Ressourcen ein, um die Produktionsbedürfnisse der Kunden zu erfüllen. Von der Herstellung von Produkten bis zur Erstellung von Inhalten - unsere erfahrenen Auftragnehmer sorgen für effiziente und erstklassige Ergebnisse."
+      },
+      "provide-design": {
+        "header": "Modelle entwerfen",
+        "text": "Auftragnehmer, die Modele entwerfen, zeichnen sich durch kreative Problemlösungsfähigkeiten aus. Sie bringen ihre künstlerischen Fähigkeiten und Branchenkenntnisse ein, um herausragende Designlösungen für Kunden zu liefern. Ob Logo-Design, Webentwicklung oder Erstellung einer Markenidentität - unsere Auftragnehmer bieten professionelle Expertise."
+      },
+      "provide-accompany": {
+        "header": "Gesamtprozesse begleiten",
+        "text": "Auftragnehmer, die Gesamtprozesse begleiten, fungieren als verlässliche Partner während der gesamten Reise des Kunden. Sie bieten Anleitung, Unterstützung und praktische Hilfe, um sicherzustellen, dass Kunden die notwendige Expertise und Ressourcen für ein erfolgreiches Ergebnis erhalten."
+      },
+      "button": {
+        "expand": "Ausklappen",
+        "collapse": "Zusammenklappen"
+      }
+    }
+  },
+  "Profile": {
     "header": "Account",
-    "general":{
-      "header":"Allgemein",
+    "general": {
+      "header": "Allgemein",
       "name": "Name",
       "email": "E-Mail",
       "type": "Benutzertyp"
     },
     "company": {
-      "header":"Organisation",
-      "name":"Name"
+      "header": "Organisation",
+      "name": "Name"
     },
-    "address":{
+    "address": {
       "header": "Adresse",
+      "name": "Name",
+      "company": "Firma",
       "street": "Straße",
-      "houseNumber": "Hausnummer",
       "city": "Stadt",
       "zipcode": "Postleitzahl",
       "country": "Land"
     },
-    "time":{
-      "header":"Zugriffe",
+    "time": {
+      "header": "Zugriffe",
       "created": "Erstellt am",
       "accessed": "letzter Zugegriff am",
       "updated": "Aktualisiert am"
     },
-    "button":{
-      "selectChange":"Organisation wählen",
-      "delete":"Account Löschen"
-   }
-  },
-  "Redirect":{},
-  "Resources":{
-    "header":"Ressourcen",
-    "components":{
-      "Menu":{
-        "overview":"Übersicht",
-        "materials":"Materialien",
-        "printers":"3D-Drucker",
-        "postProcessings":"Nachbearbeitung"
-      }
+    "button": {
+      "edit": "Bearbeiten",
+      "selectChange": "Organisation wählen",
+      "delete": "Account Löschen"
     },
-    "Overview":{
-      "header":"Übersicht"
-    },
-    "Materials":{
-      "table":{
-        "header":"Materialien",
-        "name":"Name",
-        "actions":"Aktionen",
-        "empty":"keine Materialien gefunden",
-        "button":{
-          "add":"Material Hinzufügen",
-          "delete":"Löschen"
-        }
-      },
-      "form":{
-        "header":"Material",
-        "empty":"keine Materialien gefunden",
-        "button":{
-          "search":"Suchen"
-        }
-      }
-    },
-    "Printers":{
-      "table":{
-        "header":"3D-Drucker",
-        "name":"Name",
-        "actions":"Aktionen",
-        "empty":"keine Drucker gefunden",
-        "button":{
-          "add":"Drucker Hinzufügen",
-          "delete":"Löschen"
-        }
-      }, 
-      "view":{
-        "name":"Druckername",
-        "properties":"Eigenschaften"
-      },
-      "form":{
-        "header":"Druckereingabe",
-        "empty":"keine Drucker gefunden",
-        "emptyProps":"keine Eigenschaften angelegt",
-        "emptyValue":"keine Werte angelegt",
-        "button":{
-          "search":"Suchen",
-          "new":"Neuen Drucker anlegen",
-          "edit":"Bearbeiten",
-          "safe":"Speichern",
-          "add":"Drucker Hinzufügen",
-          "addValue":"Wert hinzufügen",
-          "removeValue":"Wert entfernen",
-          "addProperty":"Eigenschaft hinzufügen",
-          "removeProperty":"Eigenschaft entfernen",
-          "reset":"Zurücksetzen",
-          "close":"Schließen"
+    "components": {
+      "Form": {
+        "title": "Account bearbeiten",
+        "address": "Adresse",
+        "button": {
+          "save": "Speichern"
         },
-        "yup":{
-          "name":"Name",
-          "propName":"Eigenschaft",
-          "propNamerequired":"Eigenschaft benötigt",
-          "propValuerequired":"Wert benötigt",
-          "value":"Wert",
-          "boxSize":"Bauraum",
-          "boxSize_x":"Breite",
-          "boxSize_y":"Tiefe",
-          "boxSize_z":"Höhe",
-          "speed":"Druckgeschwindigkeit",
-          "amount":"Anzahl der Drucker",
-          "amountMaterials":"Anzahl der Materialien"
+        "error": {
+          "address": "Adresse benötigt"
         }
       }
-    },
-    "PostProcessings":{
-      "header":"Nachbearbeitungen"
     }
   },
-  "Service":{
-    "ServiceQuestion":{},
-    "ServiceRoutes":{
-      "let":"lassen",
-      "use":"Service in Anspruch nehmen",
-      "provide":"Service Anbieten",
-      "produce":"Produzieren",
-      "design":"Entwerfen",
-      "accompany":"Gesamtprozess begleiten"
-    },
-    "ServiceView":{
-      "header":"Service Anbieten"
-    },
-    "ServiceWizard":{}
-  },
-  "Organization":{
-    "index":{
-      "header":"Organisationsübersicht"
-    },
-    "Roles":{
-      "index":{
-        "header":"Rollen/Rechte",
-        "name":"Name",
-        "description":"Beschreibung",
-        "error":{
-          "empty":"keine Rollen angelegt"
+  "Projects": {
+    "components": {
+      "Table": {
+        "label": {
+          "selectProject": "Projekt {{name}} auswählen",
+          "selectAllProjects": "Alle Projekte auswählen"
         },
-        "button":{
-          "create":"Erstellen"
+        "deleteConfirm": "Möchten Sie das Projekt wirklich löschen?",
+
+        "grouping": "Gruppierung",
+        "name": "Name",
+        "status": "Status",
+        "created": "Erstellt am",
+        "updated": "Aktualisiert am",
+        "count": "Anzahl",
+        "actions": "Aktionen",
+        "noItems": "keine Aufträge",
+        "button": {
+          "delete": "Löschen",
+          "edit": "Bearbeiten",
+          "detail": "Details"
+        },
+        "groups": {
+          "draft": "Entwürfe",
+          "ongoing": "Laufend",
+          "completed": "Abgeschlossen"
         }
       },
-      "components":{
-        "table":{
-          "name":"Name",
-          "description":"Beschreibung",
-          "actions":"Aktionen",
-          "orga":"Organisation",
-          "orders":"Aufträge",
-          "data":"Daten",
-          "files":"Dateien",
-          "resources":"Ressourcen",
-          "read":"ansehen",
-          "edit":"bearbeiten",
-          "create":"hinzufügen",
-          "insert":"hinzufügen",
-          "delete":"löschen",
-          "status":"Status bearbeiten",
-          "chat":"beantworten",
-          "empty":"keine Rollen angelegt",
-          "button":{
-            "delete":"Löschen",
-            "edit":"Bearbeiten",
-            "safe":"Speichern"
-          }
+      "Card": {
+        "name": "Name:",
+        "status": "Status:",
+        "count": "Anzahl:",
+        "created": "Erstellt am:",
+        "updated": "Aktualisiert am:",
+        "client": "Nutzer:"
+      },
+      "Cards": {
+        "label": {
+          "selectProject": "Projekt {{name}} auswählen",
+          "selectAllOwnProjects": "Alle eigenen Projekte auswählen",
+          "selectAllRecievedProjects": "Alle empfangenen Projekte auswählen"
         },
-        "tag":{
-          "button":{
-            "delete":"Löschen",
-            "edit":"Bearbeiten",
-            "safe":"Speichern"
+        "adminProjects": "Alle Projekte",
+        "ownProjects": "Eigene Projekte",
+        "receivedProjects": "Erhaltene Projekte"
+      }
+    },
+    "context": {
+      "ProcessContext": {},
+      "ProjectContext": {}
+    },
+    "hooks": {
+      "useFlatProjects": {},
+      "useProcess": {},
+      "useProject": {}
+    },
+    "Project": {
+      "Checkout": {
+        "components": {
+          "Item": {}
+        },
+        "hooks": {
+          "useCheckout": {}
+        },
+        "Checkout": {
+          "title": "Aufträge anfragen",
+          "button": {
+            "send": "Anfragen"
+          },
+          "error": {
+            "noItems": "keine passenden Prozesse gefunden"
           }
         }
-      }
-    },
-    "components":{
-      "table":{
-        "header":"Benutzer",
-        "name":"Benutzername",
-        "picture":"Profilbild",
-        "email":"E-Mail",
-        "role":"Rolle",
-        "created":"Erstellt am",
-        "accessed":"letzter Zugegriff am",
-        "actions":"Aktionen",
-        "empty":"keine Rollen angelegt",
-        "error":{
-          "empty":"keine Benutzer gefunden"
+      },
+      "components": {
+        "ProcessInfoCard": {
+          "title": "Prozessinformationen",
+          "name": "Name:",
+          "service": "Service:",
+          "model": "Modell:",
+          "material": "Material:",
+          "postProcessing": "Nachbearbeitung:"
         },
-        "button":{
-          "delete":"Löschen",
-          "edit":"Bearbeiten",
-          "safe":"Speichern"
+        "StatusButtons": {
+          "button": {
+            "new": "Neuer Teilauftrag",
+            "edit": "Bearbeiten",
+            "cancel": "Stornieren",
+            "contractorSelect": "Auftragnehmer auswählen",
+            "verify": "Überprüfen",
+            "reject": "Ablehnen",
+            "confirm": "Bestätigen",
+            "reProject": "erneut Bestellen",
+            "expand": "Ausklappen",
+            "collapse": "Zusammenklappen",
+            "delete": "Löschen"
+          }
+        },
+        "Info": {
+          "id": "ProjektID:",
+          "created": "Erstellt am:",
+          "updated": "Aktualisiert am:"
+        },
+        "TitleForm": {
+          "name": "Name: ",
+          "button": {
+            "edit": "Name Bearbeiten"
+          }
         }
       },
-      "invitation":{
-        "header":"Benutzer einladen",
-        "placeholder":"Email...",
-        "button":{
-          "invite":"Einladen",
-          "send":"Gesendet!",
-          "link":"Einladungslink erstellen",
-          "copy":"Kopieren"
+      "ContractorSelection": {
+        "components": {},
+
+        "hooks": {
+          "useContractor": {}
+        },
+        "ContractorSelection": {
+          "address": {
+            "title": "Liefer und Rechnungsadresse",
+            "name": "Name",
+            "company": "Firma",
+            "address": "Addresse",
+            "button": {
+              "edit": "Bearbeiten"
+            }
+          },
+          "contractor": "Auftagnehmer",
+          "title": "Auftagnehmer auswählen",
+          "error": {
+            "missing": "Bitte wählen Sie einen Auftragnehmer aus"
+          },
+          "button": {
+            "overview": "zur Übersicht",
+            "submit": "Auftragnehmer auswählen"
+          }
+        }
+      },
+      "hooks": {
+        "useCheckedProcesses": {},
+        "useFileView": {},
+        "useProcessFile": {},
+        "useProjectEventChange": {},
+        "useProjectState": {},
+        "useScrollToProcess": {},
+        "useStatusButtons": {
+          "SELECT_SERVICE": "Service auswählen",
+          "EDIT": "Service bearbeiten",
+          "DELETE": "Löschen",
+          "CONTRACTOR_SELECTED": "Auftragnehmer auswählen",
+          "VERIFYING": "Überprüfen",
+          "VERIFYING_AND_REQUESTED": "Überprüfen und automatisch Anfragen",
+          "REQUESTED": "Anfragen",
+          "CLARIFICATION": "Rückfragen",
+          "CONFIRMED_BY_CONTRACTOR": "Angebot erstellen",
+          "REJECTED_BY_CONTRACTOR": "Anfage ablehnen",
+          "CONFIRMED_BY_CLIENT": "Angebot bestätigen",
+          "REJECTED_BY_CLIENT": "Angebot ablehnen",
+          "PRODUCTION": "Produktion starten",
+          "DELIVERY": "Lieferung starten",
+          "COMPLETED": "Auftrag abschließen",
+          "REPROJECT": "erneut Bestellen",
+          "buttons": {
+            "confirmAll": "Wollen Sie wirklich alle betroffene Prozesse {{title}}?"
+          }
+        }
+      },
+      "Process": {
+        "components": {
+          "Buttons": {
+            "button": {
+              "info": "Informationen",
+              "history": "Verlauf",
+              "chat": "Nachrichten",
+              "cancel": "Stornieren",
+              "reProject": "erneut Bestellen",
+              "reject": "Ablehnen",
+              "confirm": "Bestätigen",
+              "verify": "Überprüfen"
+            },
+            "confirm": {
+              "cancel": "Projekt wirklich stonieren?",
+              "reProject": "Projekt wirklich erneut Bestellen?",
+              "reject": "Projekt wirklich Ablehnen?"
+            }
+          },
+          "Chat": {
+            "title": "Nachrichten",
+            "noMessages": "Keine Nachrichten vorhanden",
+            "placeholder": "Nachricht...",
+            "button": {
+              "close": "Schließen",
+              "send": "Nachricht Senden"
+            }
+          },
+          "Info": {
+            "id": "ProzessID:",
+            "created": "Erstellt am:",
+            "updated": "Aktualisiert am:",
+            "status": "Prozessstatus:"
+          },
+          "ProcessFile": {
+            "title": "Dateien",
+            "empty": "keine Dateien gefunden",
+            "button": {
+              "delete": "Löschen",
+              "download": "Herunterladen",
+              "downloadAll": "Alles Als .zip Herunterladen"
+            }
+          },
+          "StatusButtons": {
+            "service": "Service bearbeiten",
+            "selectContractor": "Auftragnehmer auswählen",
+            "verify": "Überprüfen",
+            "request": "Anfragen",
+            "clarification": "Rückfragen",
+            "reject": "Ablehnen",
+            "confirm": "Bestätigen",
+            "confirmContractor": "Angebot erstellen",
+            "production": "Produktion starten",
+            "delivery": "Lieferung starten",
+            "complete": "Abschließen"
+          }
+        },
+        "History": {
+          "components": {
+            "Item": {
+              "created": "Prozess erstellt",
+              "status": "Status aktualisiert zu ",
+              "message": {
+                "userID": "BenutzerID: ",
+                "userName": "Benutzername: ",
+                "date": "Datum: ",
+                "text": "Text: "
+              },
+              "file": {
+                "createdBy": "Erstellt von: ",
+                "date": "Datum: ",
+                "fileName": "Dateiname: ",
+                "id": "ID: ",
+                "path": "Pfad: "
+              },
+              "deletition": {
+                "deleted": "Datei Gelöscht"
+              },
+              "other": {
+                "text": "Text: "
+              }
+            },
+            "ServiceText": {
+              "manufacturing": {
+                "model": "Modell: ",
+                "material": "Material: ",
+                "postProcessings": "Nachbearbeitungen: ",
+                "manufacturer": "Hersteller: "
+              }
+            }
+          },
+          "History": {
+            "noHistory": "kein Verlauf vorhanden",
+            "createdBy": "Erstellt von:",
+            "createdWhen": "Erstellt am:",
+            "data": "Daten:",
+            "type": "Typ:"
+          }
+        },
+        "hooks": {},
+        "ServicePreview": {
+          "components": {
+            "Manufacturing": {
+              "model": "Modell:",
+              "material": "Material:",
+              "postProcessings": "Nachbearbeitungen:",
+              "buttons": {
+                "modelPreView": "Modell Vorschau"
+              },
+              "noModel": "keine Modellvorschau vorhanden"
+            },
+            "Modelling": {
+              "title": "Modell entwerfen lasssen"
+            }
+          },
+          "ServicePreview": {
+            "title": "Service:"
+          }
+        },
+        "StatusBar": {
+          "components": {
+            "Item": {},
+            "ItemConnector": {}
+          },
+          "StatusBar": {
+            "draft": "Entwurf",
+            "service": "Service",
+            "contractorSelected": "Auftragnehmer",
+            "verified": "Überprüfung",
+            "requested": "Anfrage",
+            "clarification": "Rückfragen",
+            "offer": "Angebot",
+            "client": "Bestätigung",
+            "confirmed": "Bestätigt",
+            "production": "Produktion",
+            "delivery": "Lieferung",
+            "finished": "Abgeschlossen"
+          }
+        },
+        "Process": {
+          "label": {
+            "selectProcess": "Prozess {{name}} auswählen"
+          }
+        }
+      },
+      "Verification": {
+        "components": {
+          "Item": {}
+        },
+        "hooks": {
+          "useVerification": {}
+        },
+        "Verification": {
+          "title": "Überprüfung",
+          "error": {
+            "noItems": "keine passenden Prozesse gefunden"
+          },
+          "button": {
+            "verify": "Überprüfen",
+            "request": "Überprüfen und Anfragen"
+          }
+        }
+      },
+      "Project": {
+        "modal": {
+          "projectName": "Projektname",
+          "processName": "Prozessname"
+        },
+        "title": "Projekt",
+        "state": "Status: ",
+        "selected": "{{count}} Ausgewählt",
+        "processes": "Prozesse:",
+        "noProcesses": "Keine Teilaufträge vorhanden",
+        "selectAll": "Alle auswählen",
+        "label": {
+          "selectProcess": "Prozess auswählen",
+          "selectAllProcesses": "Alle Prozesse auswählen"
+        },
+        "confirm": {
+          "delete": "Projekt wirklich löschen?"
+        },
+        "button": {
+          "info": "Informationen öffnen",
+          "delete": "Projekt löschen",
+          "new": "neuen Prozess anlegen"
+        }
+      }
+    },
+    "Projects": {
+      "title": "Projektübersicht",
+      "orga": "Eingegangene Projekte",
+      "empty": "keine Projekte angelegt",
+      "deleteSelectedConfirm": "Möchten alle ausgewählte Projekt wirklich löschen?",
+      "button": {
+        "create": "Projekt anlegen",
+        "deleteSelected": "Ausgewählte Projekte Löschen"
+      }
+    }
+  },
+  "Redirect": {},
+  "RegisterOrganization": {
+    "title": "Organisation Registrieren",
+    "success": "Organisation erfolgreich registriert. Sie erhalten in Kürze eine Email mit einem Bestätigungslink.",
+    "button": {
+      "login": "Zur Anmeldung"
+    },
+    "form": {
+      "name": "Anmeldename",
+      "display_name": "Anzeigename",
+      "logo_url": "Logo URL",
+      "primary_color": "Primärfarbe",
+      "background_color": "Hintergrundfarbe",
+      "email": "E-Mail",
+      "button": {
+        "submit": "Registrieren"
+      },
+      "error": {
+        "name": {
+          "required": "Anmeldename wird benötigt",
+          "regex": "Darf nur Kleinbuchstaben, Zahlen, Unterstriche (_) und Bindestriche (-) enthalten und mit einem Kleinbuchstaben oder Zahl beginnen",
+          "length": "Muss zwischen 3 und 50 Zeichen lang sein"
+        },
+        "display_name": "Anzeigename wird benötigt",
+        "logo_url": "Logo URL wird benötigt",
+        "primary_color": "Primärfarbe wird benötigt",
+        "background_color": "Hintergrundfarbe wird benötigt",
+        "email": {
+          "required": "E-Mail wird benötigt",
+          "email": "E-Mail muss eine gültige E-Mail sein"
         }
       }
     }
   },
-  "PermissionGate":{
-    "message":"Diese Funktion ist mit ihren Rechten nicht nutzbar"
-  },
-  "components":{
-    "Modal":{
-      "button":{
-        "close":"Schließen"
+  "ResKriVer": {
+    "ResKriVer": {
+      "title": "Ihr Auftrag wird bearbeitet",
+      "loading": "laden ihrer Daten",
+      "data": "Übertragene Daten aus ResKriVer:",
+      "button": {
+        "search": "Fortsetzen"
       }
     }
   },
-  "toast":{
-    "component":{
-      "to":"zur Seite"
+  "Resources": {
+    "header": "Ressourcen",
+    "components": {
+      "Menu": {
+        "overview": "Übersicht",
+        "materials": "Materialien",
+        "printers": "3D-Drucker",
+        "postProcessings": "Nachbearbeitung"
+      }
     },
-    "permissionEvent":"Ihre Rechte wurden aktualisiert",
-    "orgaEvent":"Ihre Organisation wurde aktualisiert",
-    "orderEvent":{
-      "status":"Ihre Aufträge wurde aktualisiert",
-      "message":"Neue Nachricht"
+    "Overview": {
+      "header": "Übersicht"
+    },
+    "Materials": {
+      "table": {
+        "header": "Materialien",
+        "name": "Name",
+        "actions": "Aktionen",
+        "empty": "keine Materialien gefunden",
+        "button": {
+          "add": "Material Hinzufügen",
+          "delete": "Löschen"
+        }
+      },
+      "form": {
+        "header": "Material",
+        "empty": "keine Materialien gefunden",
+        "button": {
+          "search": "Suchen"
+        }
+      }
+    },
+    "Printers": {
+      "table": {
+        "header": "3D-Drucker",
+        "name": "Name",
+        "actions": "Aktionen",
+        "empty": "keine Drucker gefunden",
+        "button": {
+          "add": "Drucker Hinzufügen",
+          "delete": "Löschen"
+        }
+      },
+      "view": {
+        "name": "Druckername",
+        "properties": "Eigenschaften"
+      },
+      "form": {
+        "header": "Druckereingabe",
+        "empty": "keine Drucker gefunden",
+        "emptyProps": "keine Eigenschaften angelegt",
+        "emptyValue": "keine Werte angelegt",
+        "button": {
+          "search": "Suchen",
+          "new": "Neuen Drucker anlegen",
+          "edit": "Bearbeiten",
+          "safe": "Speichern",
+          "add": "Drucker Hinzufügen",
+          "addValue": "Wert hinzufügen",
+          "removeValue": "Wert entfernen",
+          "addProperty": "Eigenschaft hinzufügen",
+          "removeProperty": "Eigenschaft entfernen",
+          "reset": "Zurücksetzen",
+          "close": "Schließen"
+        },
+        "yup": {
+          "name": "Name",
+          "propName": "Eigenschaft",
+          "propNamerequired": "Eigenschaft benötigt",
+          "propValuerequired": "Wert benötigt",
+          "value": "Wert",
+          "boxSize": "Bauraum",
+          "boxSize_x": "Breite",
+          "boxSize_y": "Tiefe",
+          "boxSize_z": "Höhe",
+          "speed": "Druckgeschwindigkeit",
+          "amount": "Anzahl der Drucker",
+          "amountMaterials": "Anzahl der Materialien"
+        }
+      }
+    },
+    "PostProcessings": {
+      "header": "Nachbearbeitungen"
     }
   },
-  "CookieBanner":{
-    "heading":"Cookie-Zustimmung verwalten",
-    "message":"Um dir ein optimales Erlebnis zu bieten, verwenden wir Technologien wie Cookies, um Geräteinformationen zu speichern und/oder darauf zuzugreifen. Wenn du diesen Technologien zustimmst, können wir Daten wie das Surfverhalten oder eindeutige IDs auf dieser Website verarbeiten. Wenn du deine Zustimmung nicht erteilst oder zurückziehst, können bestimmte Merkmale und Funktionen beeinträchtigt werden.",
-    "functional":{
-      "heading":"Funktional",
-      "message":"Die technische Speicherung oder der Zugang ist unbedingt erforderlich für den rechtmäßigen Zweck, die Nutzung eines bestimmten Dienstes zu ermöglichen, der vom Teilnehmer oder Nutzer ausdrücklich gewünscht wird, oder für den alleinigen Zweck, die Übertragung einer Nachricht über ein elektronisches Kommunikationsnetz durchzuführen."
+  "Routes": {},
+  "Service": {
+    "context": {
+      "SerivceContext": {}
     },
-    "status":{
-      "alwaysActive":"Immer aktiv"
+    "Edit": {
+      "Edit": {}
     },
-    "button":{
-      "accept":"Akzeptieren",
-      "reject":"Ablehnen",
-      "showSettings":"Einstellungen ansehen",
-      "safeSettings":"Einstellungen speichern"
+    "hooks": {
+      "useServiceEdit": {},
+      "useService": {}
     },
-    "link":{
-      "cookiePolicy":"Cookie-Richtlinie",
-      "dataProtection":"Datenschutzerklärung",
-      "imprint":"Impressum"
-    }
-  }
+    "Manufacturing": {
+      "Filter": {
+        "components": {
+          "Card": {
+            "buttons": { "open": "Öffnen" }
+          },
+          "ColorPicker": {},
+          "DatePicker": {},
+          "Item": {},
+          "MultiSelection": {
+            "button": {
+              "checkAll": "Alle Auswählen",
+              "unCheckAll": "Alle Abwählen"
+            }
+          },
+          "NumberInput": {},
+          "Selection": {},
+          "Slider": {},
+          "SliderSelection": {},
+          "TextArea": {},
+          "TestInput": {}
+        },
+        "hooks": {
+          "useFilter": {}
+        },
+        "Filter": {
+          "header": "Vorgabenfilter",
+          "button": {
+            "reset": "Zurücksetzen",
+            "apply": "Anwenden"
+          }
+        }
+      },
+      "Header": {
+        "Search": {
+          "Search": {
+            "placeholder": "Suche ..."
+          }
+        },
+        "types": {},
+        "Wizard": {
+          "components": {
+            "Item": {}
+          },
+          "Wizard": {
+            "empty": "---",
+            "model": "Modell",
+            "material": "Material",
+            "postprocessing": "Nachbearbeitung",
+            "overview": "zur Übersicht",
+            "ready": "Vollständig",
+            "notReady": "Unvollständig"
+          }
+        },
+        "Header": {}
+      },
+      "hooks": {},
+      "Material": {
+        "components": {
+          "Card": {
+            "button": {
+              "select": "Auswählen"
+            }
+          },
+          "Item": {
+            "button": {
+              "change": "Ändern"
+            }
+          },
+          "PreView": {
+            "button": {
+              "select": "Auswählen"
+            }
+          }
+        },
+        "hooks": {},
+        "Material": {
+          "error": {
+            "noMaterials": "keine Materialien gefunden"
+          }
+        }
+      },
+      "Model": {
+        "components": {
+          "Card": {
+            "license": "Lizenz",
+            "certificates": "Zertifikate",
+            "button": {
+              "select": "Auswählen"
+            }
+          },
+          "Item": {
+            "created": "Erstellt am",
+            "license": "Lizenz",
+            "certificates": "Zertifikate",
+            "error": {
+              "noCertificates": "keine Zertifikate vorhanden"
+            },
+            "button": {
+              "change": "Ändern"
+            }
+          },
+          "PreView": {
+            "created": "Erstellt am",
+            "license": "Lizenz",
+            "certificates": "Zertifikate",
+            "error": {
+              "noCertificates": "keine Zertifikate vorhanden"
+            },
+            "button": {
+              "select": "Auswählen"
+            }
+          }
+        },
+        "hooks": {
+          "useModel": {},
+          "useModelUpload": {}
+        },
+        "types": {},
+        "Upload": {
+          "components": {
+            "Form": {
+              "name": "Name:",
+              "size": "Größe:",
+              "type": "Dateityp:",
+              "date": "Datum:",
+              "title": "Datei Informationen hinzufügen",
+              "tags": "Tags",
+              "tagsPH": "Tag1, Tag2, ...",
+              "certificate": "Zertifikate",
+              "certificatePH": "Zertifikate1, Zertifikate2, ...",
+              "license": "Lizenz",
+              "licensePH": "Lizenz1, Lizenz2 ...",
+              "button": {
+                "send": "Modell Hochladen"
+              }
+            }
+          },
+          "Upload": {
+            "error": "Fehler beim Hochladen",
+            "loading": "Model wird hochgeladen",
+            "card": {
+              "title": "Modell Hochladen",
+              "text": "per Drag & Drop oder Klick"
+            },
+            "button": {
+              "upload": "Hochladen"
+            }
+          }
+        },
+        "Model": {
+          "upload": {
+            "img": "Modell Hochladen",
+            "title": "Modell Hochladen",
+            "button": "zum Upload"
+          },
+          "error": {
+            "noModels": "keine Modelle gefunden"
+          }
+        }
+      },
+      "NewItem": {
+        "NewItem": {
+          "title": "Erstelle einen neuen Prozess..."
+        }
+      },
+      "PostProcessing": {
+        "components": {
+          "Card": {},
+          "Catalog": {
+            "button": {
+              "overview": "zur Übersicht"
+            },
+            "error": {
+              "noPostProcessings": "keine Nachbearbeitungen gefunden"
+            }
+          },
+          "Item": {
+            "button": {
+              "select": "Auswählen",
+              "deselect": "Abwählen"
+            }
+          }
+        },
+        "hooks": {
+          "usePostProcessing": {}
+        },
+        "PostProcessing": {
+          "error": {
+            "noPostProcessings": "keine Nachbearbeitungen gefunden"
+          }
+        }
+      },
+      "types": {
+        "types": {}
+      },
+      "Manufacturing": {}
+    },
+    "Modeling": {
+      "Modeling": {
+        "title": "Modell entwerfen lasssen"
+      }
+    },
+    "Overview": {
+      "components": {
+        "Item": {
+          "confirm": {
+            "cancel": "Prozess wirklich löschen?"
+          },
+          "titleEmpty": "Prozess"
+        }
+      },
+      "Overview": {
+        "title": "Projekt",
+        "button": {
+          "overview": "zur Übersicht",
+          "expand": "Ausklappen",
+          "collapse": "Zusammenklappen",
+          "new": "neuen Prozess anlegen"
+        }
+      }
+    },
+    "Select": {
+      "components": {
+        "Item": {}
+      },
+      "Select": {
+        "title": "Service auswählen",
+        "continue": "Service Fortsetzen"
+      }
+    },
+    "Service": {}
+  },
+  "Test": {}
 }

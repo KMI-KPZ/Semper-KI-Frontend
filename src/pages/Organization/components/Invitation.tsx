@@ -24,14 +24,16 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   const { t } = useTranslation();
   const [links, setLinks] = useState<InviteLink[]>([]);
   const [showLoadedIn, setShowLoadedIn] = useState<boolean>(false);
-  const { inviteLinkMutation, inviteUserMutation } = useOrganizations();
+  const { inviteLinkMutation, inviteUserMutation, rolesQuery } =
+    useOrganizations();
 
   const schema = yup
     .object({
       email: yup
         .string()
-        .required(t("yup.required", { name: "Email" }))
+        .required(t("yup.requiredName", { name: "Email" }))
         .email(t("yup.email")),
+      roleID: yup.string().required(t("yup.requiredName", { name: "Role" })),
     })
     .required();
   type FormData = yup.InferType<typeof schema>;
@@ -42,15 +44,10 @@ const Invitation: React.FC<InvitationProps> = (props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(schema) });
+
   const onSubmitInvite = (data: FormData) => {
-    logger("onSubmitInvite", data);
-    setShowLoadedIn(true);
-    inviteUserMutation.mutate(data.email, {
-      onSuccess(data, variables, context) {
-        setShowLoadedIn(false);
-        reset();
-      },
-    });
+    // logger("onSubmitInvite", data);
+    inviteUserMutation.mutate(data);
   };
 
   const onSubmitLink = (data: FormData) => {
@@ -79,19 +76,35 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5">
-      <Heading variant="h2">
+    <div className="flex w-full flex-col items-center gap-5 p-5 shadow-card">
+      <Heading variant="h2" className="whitespace-nowrap">
         {t("Organization.components.invitation.header")}
       </Heading>
       <form
-        className="relative flex w-full flex-col items-center justify-between gap-5 md:w-1/2 md:flex-row"
+        className="flex w-full flex-col flex-wrap items-center justify-center gap-5 md:flex-row"
         onSubmit={handleSubmit(onSubmitInvite)}
       >
         <input
-          className="w-full bg-slate-100 px-5 py-2 md:w-4/6"
+          className="w-full bg-slate-100 px-5 py-2 md:w-fit md:flex-grow"
           placeholder={t("Organization.components.invitation.placeholder")}
           {...register("email")}
         />
+        <select
+          className="shadow-button rounded-xl bg-grau-50 p-3"
+          {...register("roleID")}
+        >
+          {rolesQuery.data !== undefined && rolesQuery.data.length > 0 ? (
+            rolesQuery.data.map((_role, index) => (
+              <option key={index} value={_role.id}>
+                {_role.name}
+              </option>
+            ))
+          ) : (
+            <option value="empty" disabled>
+              {t("Organization.components.table.empty")}
+            </option>
+          )}
+        </select>
         <Button
           onClick={handleSubmit(onSubmitInvite)}
           title={t("Organization.components.invitation.button.invite")}
@@ -100,36 +113,39 @@ const Invitation: React.FC<InvitationProps> = (props) => {
           onClick={handleSubmit(onSubmitLink)}
           title={t("Organization.components.invitation.button.link")}
         />
-
-        {showLoadedIn ? (
-          <div className="absolute -right-28 w-fit p-5">
-            {t("Organization.components.invitation.button.send")}
-          </div>
-        ) : null}
-        {errors.email !== undefined ? (
-          <div className="absolute -right-60 w-fit p-5">
-            {errors.email.message}
-          </div>
-        ) : null}
       </form>
-      {links.length > 0
-        ? links.map((inviteLink, index) => (
-            <div className="relative flex w-full flex-col items-center justify-center gap-5 md:w-4/6 md:flex-row">
+      {showLoadedIn || errors.email !== undefined ? (
+        <div className="flex w-full flex-col items-center justify-center md:flex-row">
+          {showLoadedIn ? (
+            <div className="">
+              {t("Organization.components.invitation.button.send")}
+            </div>
+          ) : null}
+          {errors.email !== undefined ? (
+            <div className="">{errors.email.message}</div>
+          ) : null}
+        </div>
+      ) : null}
+      {links.length > 0 ? (
+        <div className="flex w-full flex-col items-center justify-center md:flex-row">
+          {links.map((inviteLink, index) => (
+            <div className="relative flex w-full flex-col items-center justify-center gap-5  md:flex-row">
               <span className="">{inviteLink.email}</span>
               <input
                 readOnly
                 onClick={handleOnClickInput}
                 type="text"
                 value={inviteLink.link}
-                className="w-full select-all bg-slate-100 px-5 py-2 md:w-4/6"
+                className="w-full flex-grow select-all bg-slate-100 px-5 py-2"
               />
               <Button
                 onClick={() => handleOnClickButton(index)}
                 title={t("Organization.components.invitation.button.copy")}
               />
             </div>
-          ))
-        : null}
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -1,129 +1,29 @@
-import CardView, { CardGroupType, CardItemType } from "@/components/CardView";
-import { Heading } from "@component-library/Typography";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { Navigate, Route, Routes } from "react-router-dom";
-import ServiceItem from "./components/Item";
+import React, { useContext } from "react";
+import { LoadingAnimation } from "@component-library/index";
+import useService, { ServiceType } from "./hooks/useService";
+import useProcess from "../Projects/hooks/useProcess";
+import { Navigate } from "react-router-dom";
+import { useProject } from "../Projects/hooks/useProject";
 
-import _ServiceCards from "./data/items.json";
-const ServiceCards = _ServiceCards as CardItemType[];
-const cardsUse: CardItemType[] = [
-  ...ServiceCards.map((card: CardItemType) => ({
-    icon: card.icon,
-    link: `/service/use/${card.link}`,
-    title: card.title,
-  })),
-];
-const cardsProvide: CardItemType[] = [
-  ...ServiceCards.map((card: CardItemType) => ({
-    icon: card.icon,
-    link: `/service/provide/${card.link}`,
-    title: card.title,
-  })),
-];
-const cardGoupsIndex: CardGroupType[] = [
-  {
-    title: "use",
-    cards: cardsUse,
-  },
-  {
-    title: "provide",
-    cards: cardsProvide,
-  },
-];
+interface ServiceProps {}
 
-export interface IService {
-  title: string;
-  chapters: IServiceChapter[];
-}
+const Service: React.FC<ServiceProps> = (props) => {
+  const {} = props;
+  const { project } = useProject();
+  const { process } = useProcess();
 
-export interface IServiceChapter {
-  title: string;
-  icon: string;
-  questions: IServiceQuestion[];
-}
+  switch (process.serviceType) {
+    case ServiceType.NONE:
+      return (
+        <Navigate to={`/projects/${project.projectID}/${process.processID}`} />
+      );
+    case ServiceType.MANUFACTURING:
+      return <Navigate to="manufacturing" />;
+    case ServiceType.MODELING:
+      return <Navigate to="modeling" />;
+  }
 
-export interface IServiceQuestion {
-  title: string;
-  type: EServiceQuestionType;
-  options?: string[];
-  range?: [number, number];
-  answer?: number | string;
-}
-
-export enum EServiceQuestionType {
-  "text",
-  "textarea",
-  "selection",
-  "number",
-}
-
-const Service: React.FC = () => {
-  const { t } = useTranslation();
-
-  return (
-    <Routes>
-      <Route
-        index
-        element={
-          <CardView title="ServiceRoutes.title" cardGroups={cardGoupsIndex} />
-        }
-      />
-      <Route
-        path="use"
-        element={
-          <CardView
-            title={t("Service.ServiceRoutes.use")}
-            cardGroups={[{ cards: cardsUse }]}
-          />
-        }
-      />
-      <Route path="use/produce" element={<Navigate to="/process/model" />} />
-      <Route
-        path="use/design"
-        element={
-          <Heading variant="h2">
-            {t("Service.ServiceRoutes.design")}
-            {t("Service.ServiceRoutes.let")}
-          </Heading>
-        }
-      />
-      <Route
-        path="use/accompany"
-        element={
-          <Heading variant="h2">
-            {t("Service.ServiceRoutes.accompany")}
-            {t("Service.ServiceRoutes.let")}
-          </Heading>
-        }
-      />
-      <Route
-        path="provide"
-        element={
-          <CardView
-            title={t("Service.ServiceRoutes.provide")}
-            cardGroups={[{ cards: cardsProvide }]}
-          />
-        }
-      />
-      <Route
-        path="provide/produce"
-        element={<ServiceItem title={t("Service.ServiceRoutes.produce")} />}
-      />
-      <Route
-        path="provide/design"
-        element={
-          <Heading variant="h2">{t("Service.ServiceRoutes.design")}</Heading>
-        }
-      />
-      <Route
-        path="provide/accompany"
-        element={
-          <Heading variant="h2">{t("Service.ServiceRoutes.accompany")}</Heading>
-        }
-      />
-    </Routes>
-  );
+  return <LoadingAnimation />;
 };
 
 export default Service;

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { ReactComponent as MastodonIcon } from "@icons/Mastodon.svg";
+import ContactForm from "./ContactForm";
 import {
   URL_Contact,
   URL_Datenschutz,
@@ -11,11 +12,17 @@ import {
   URL_Mastodon,
 } from "@/config/constants";
 import { Button } from "@component-library/Button";
+import Modal from "@component-library/Modal";
 import usePing from "@/hooks/usePing";
 
-const Footer: React.FC = () => {
+interface Props {}
+
+const Footer: React.FC<Props> = (props) => {
+  const {} = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [open, setOpen] = useState<boolean>(false);
+  const { isMagazineUp } = usePing();
 
   const handleOnClickContact = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -24,66 +31,69 @@ const Footer: React.FC = () => {
     navigate("/contact");
   };
 
-  const { pingQuery } = usePing();
-
-  const magazinIsUp = (): boolean => {
-    const up =
-      pingQuery.isFetched &&
-      pingQuery.data !== undefined &&
-      pingQuery.data.up === true;
-    return up;
+  const contactOnClick = function () {
+    setOpen((prevState) => !prevState);
   };
 
   return (
-    <footer className="w-full bg-white shadow-inner ">
-      <ul className="flex flex-col items-center md:flex-row md:justify-around">
-        <li className="p-2">
-          <Button
-            variant="light"
-            title={t("Legal.imprint")}
-            extern={magazinIsUp()}
-            to={magazinIsUp() ? URL_Impressum : "/legal/imprint"}
-          />
-        </li>
-        <li className="p-2">
-          <Button
-            variant="light"
-            title={t("Legal.privacy")}
-            extern={magazinIsUp()}
-            to={magazinIsUp() ? URL_Datenschutz : "/legal/privacy"}
-          />
-        </li>
-        <li className="p-2">
-          <Button
-            variant="light"
-            title={t("Legal.contact")}
-            extern={magazinIsUp()}
-            to={magazinIsUp() ? URL_Contact : "/legal/contact"}
-          />
-        </li>
-        <li className="flex flex-col items-center justify-center xs:flex-row xs:gap-2 xs:p-2">
-          <div className="flex flex-row items-center justify-center gap-2">
+    <>
+      <Modal open={open} closeModal={() => setOpen(false)} title="ContactForm">
+        <ContactForm closeEdit={contactOnClick} />
+      </Modal>
+      <footer className="w-full bg-slate-800 text-white shadow-inner ">
+        <ul className="flex flex-col items-center md:flex-row md:justify-around">
+          <li className="p-2">
             <Button
-              title={t("Footer.Footer.instagram")}
-              to={URL_Instagram}
-              variant="light"
-              extern
-              children={<InstagramIcon />}
+              variant="tertiary"
+              title={t("components.Footer.Footer.imprint")}
+              extern={isMagazineUp()}
+              to={isMagazineUp() ? URL_Impressum : "/legal/imprint"}
+              className=" text-white  hover:bg-slate-700 "
             />
+          </li>
+          <li className="p-2">
             <Button
-              title={t("Footer.Footer.mastodon")}
-              to={URL_Mastodon}
-              variant="light"
-              extern
-              children={<MastodonIcon />}
+              variant="tertiary"
+              title={t("components.Footer.Footer.privacy")}
+              extern={isMagazineUp()}
+              to={isMagazineUp() ? URL_Datenschutz : "/legal/privacy"}
+              className="text-white hover:bg-slate-700 "
             />
-          </div>
-          <span className="whitespace-nowrap p-2 font-bold text-grau-400">
-            © 2023 Semper-KI
-          </span>
-        </li>
-      </ul>
-    </footer>
+          </li>
+          <li className="p-2">
+            <Button
+              variant="tertiary"
+              onClick={contactOnClick}
+              title={t("components.Footer.Footer.contact")}
+              className="text-white hover:bg-slate-700 "
+            />
+          </li>
+          <li className="flex flex-col items-center justify-center xs:flex-row xs:gap-2 xs:p-2">
+            <div className="flex flex-row items-center justify-center gap-2">
+              <Button
+                title={t("components.Footer.Footer.instagram")}
+                to={URL_Instagram}
+                variant="tertiary"
+                extern
+                children={<InstagramIcon />}
+                className="text-white hover:bg-slate-700 "
+              />
+              <Button
+                title={t("components.Footer.Footer.mastodon")}
+                to={URL_Mastodon}
+                variant="tertiary"
+                extern
+                children={<MastodonIcon />}
+                className="text-white hover:bg-slate-700 "
+              />
+            </div>
+            <span className="whitespace-nowrap p-2 font-bold">
+              © 2023 Semper-KI
+            </span>
+          </li>
+        </ul>
+      </footer>
+    </>
   );
 };
 

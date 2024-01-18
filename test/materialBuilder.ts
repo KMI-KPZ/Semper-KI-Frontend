@@ -1,4 +1,5 @@
-import { IMaterial } from "../src/pages/Process/Material/Material";
+import { MaterialProps } from "@/pages/Service/Manufacturing/Material/Material";
+
 
 export class MaterialBuilder {
     id: string="materialID";
@@ -24,7 +25,7 @@ export class MaterialBuilder {
     }
     
 
-    build():IMaterial {
+    build():MaterialProps {
         return {
             id: this.id,
             title: this.title,

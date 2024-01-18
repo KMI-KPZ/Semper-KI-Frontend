@@ -4,7 +4,7 @@ import { Divider, LoadingSuspense } from "@component-library/index";
 import { Heading, Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useOntoMaterials from "../../hooks/useOntoMaterials";
+import useOntologyMaterialQuerys from "../../../../api/Ontology/useOntologyMaterialQuerys";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ResourcesMaterialsTableProps {}
@@ -14,14 +14,14 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
 ) => {
   const {} = props;
   const { t } = useTranslation();
-  const { materialsQuery } = useOntoMaterials({});
+  const { materialsQuery } = useOntologyMaterialQuerys({});
 
   const handleOnClickDelete = (materialID: string) => {};
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
       <Heading variant="h2">{t("Resources.Materials.table.header")}</Heading>
-      <PermissionGate element="ResourcesMaterialsAddButton">
+      <PermissionGate element="ResourcesButtonAddMaterial">
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-col">
           <Button
             title={t("Resources.Materials.table.button.add")}

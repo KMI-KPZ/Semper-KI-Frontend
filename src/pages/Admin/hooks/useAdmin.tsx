@@ -1,57 +1,63 @@
-import customAxios from "@/hooks/useCustomAxios";
-import { User } from "@/hooks/useUser/types";
-import { IOrder } from "@/pages/Orders/hooks/useOrders";
-import { IMaterial } from "@/pages/Process/Material/Material";
-import { IModel } from "@/pages/Process/Model/types";
-import { useState } from "react";
-import logger from "@/hooks/useLogger";
+import useAdminMutations from "@/api/Admin/useAdminMutations";
+import { FlatProjectProps } from "@/api/Project/useFlatProjectQuerys";
+import { AuthorizedUserProps } from "@/hooks/useUser";
+import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
+import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";
+import { AdminContext } from "@/routeOutlets/AdminOutlet";
+import { UseMutationResult } from "@tanstack/react-query";
+import { useContext } from "react";
 
 interface ReturnProps {
-  data: IAdminData;
-  loadData(): void;
-  clearData(): void;
+  users: AuthorizedUserProps[];
+  organizations: OrganizationProps[];
+  flatProjects: FlatProjectProps[];
+  deleteUser: UseMutationResult<any, Error, DeleteUserProps, unknown>;
+  deleteOrganization: UseMutationResult<any, Error, DeleteUserProps, unknown>;
 }
 
-export interface IAdminData {
-  users: User[];
-  models: IModel[];
-  materials: IMaterial[];
-  printers: any[];
-  orders: IOrder[];
+export interface DeleteUserProps {
+  hashedID: string;
+  name: string;
+}
+
+export interface AdminProps {
+  user: AuthorizedUserProps[];
+  organizations: OrganizationProps[];
+}
+
+export interface OrganizationProps {
+  hashedID: string;
+  name: string;
+  canManufacture: boolean;
+  details: any;
+  createdWhen: Date;
+  updatedWhen: Date;
+  accessedWhen: Date;
+}
+
+export interface AdminFlatProjectProps {
+  accessedWhen: Date;
+  client: string;
+  clientName: string;
+  createdWhen: Date;
+  details: ProjectDetailsProps;
+  processesCount: number;
+  projectID: string;
+  status: ProcessStatus;
+  updatedWhen: Date;
 }
 
 const useAdmin = (): ReturnProps => {
-  const [data, setData] = useState<IAdminData>({
-    users: [],
-    models: [],
-    materials: [],
-    orders: [],
-    printers: [],
-  });
+  const { flatProjects, organizations, users } = useContext(AdminContext);
+  const { deleteOrganization, deleteUser } = useAdminMutations();
 
-  const loadData = () => {
-    customAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/admin/getData/`)
-      .then((res) => {
-        logger("useAdmin | loadData ✅ |", res.data);
-        setData(res.data);
-      })
-      .catch((error) => {
-        logger("useAdmin | loadData ❌ |", error);
-      });
+  return {
+    deleteUser,
+    deleteOrganization,
+    flatProjects,
+    organizations,
+    users,
   };
-
-  const clearData = () => {
-    setData({
-      users: [],
-      models: [],
-      materials: [],
-      orders: [],
-      printers: [],
-    });
-  };
-
-  return { data, loadData, clearData };
 };
 
 export default useAdmin;

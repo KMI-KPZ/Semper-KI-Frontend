@@ -1,11 +1,12 @@
-import { IModel } from "../src/pages/Process/Model/types";
+import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
+
 
 export class ModelBuilder {
     id: string ="modelID";
     title: string="modelTitle";
     tags: string[]=["Tag1"];
     date: string="2023-02-01";
-    license: string="MIT";
+    licenses: string[]=["MIT"];
     certificate: string[]=["ISO"];
     URI: string="https://test.test.png";
     createdBy: string="kiss";
@@ -26,8 +27,8 @@ export class ModelBuilder {
         this.date = date;
         return this;
     }
-    withLicense(license:string):ModelBuilder {
-        this.license = license;
+    withLicense(licenses:string[]):ModelBuilder {
+        this.licenses = licenses;
         return this;
     }
     withCertificate(certificate:string[]):ModelBuilder {
@@ -44,14 +45,14 @@ export class ModelBuilder {
     }
     
 
-    build():IModel {
+    build():ModelProps {
         return {
             id: this.id,
-            title: this.title,
+            fileName: this.title,
             tags: this.tags,
             date: this.date,
-            license: this.license,
-            certificate: this.certificate,
+            licenses: this.licenses,
+            certificates: this.certificate,
             URI: this.URI,
             createdBy: this.createdBy,
         }

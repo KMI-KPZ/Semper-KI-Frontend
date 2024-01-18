@@ -1,83 +1,91 @@
-import Table from "@/components/Table";
-import { LoadingSuspense } from "@component-library/Loading";
-import { Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import useOrganizations, { RoleProps } from "../../hooks/useOrganizations";
-import OrganizationTableRow from "./TableRow";
+import {
+  getGroupedPermissions,
+  getPermissinContextTranslations,
+  sortPermissions,
+} from "../Roles";
+import { LoadingSuspense } from "@component-library/index";
+import OrganizationRolesTableRow from "./TableRow";
 
 interface OrganizationRolesTableProps {
-  roles: RoleProps[] | undefined;
+  roles: RoleProps[];
+  editRole: (role: RoleProps) => void;
 }
 
 const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
   props
 ) => {
-  const { roles } = props;
+  const { roles, editRole } = props;
   const { t } = useTranslation();
   const { permissionsQuery } = useOrganizations();
 
-  const generateTitle = (name: string): string => {
-    const names: string[] = name.split(":");
-    return `${t(`Organization.Roles.components.table.${names[0]}`)} ${t(
-      `Organization.Roles.components.table.${names[1]}`
-    )}`;
-  };
-
   return (
-    <LoadingSuspense query={permissionsQuery}>
-      {permissionsQuery.data !== undefined &&
-      permissionsQuery.data.length > 0 ? (
-        <div className="w-full overflow-auto ">
-          <table className="w-full table-auto">
-            <thead>
-              <tr className="">
-                <th>
-                  <Text variant="body" className="p-2">
-                    {t("Organization.Roles.components.table.name")}
-                  </Text>
-                </th>
-                <th>
-                  <Text variant="body" className="p-2">
-                    {t("Organization.Roles.components.table.description")}
-                  </Text>
-                </th>
-                {permissionsQuery.data.map((permission, index) => (
-                  <th key={index}>
-                    <Text variant="body" className="p-2">
-                      {generateTitle(permission.value)}
-                    </Text>
+    <div className="hidden w-full overflow-auto md:flex ">
+      <LoadingSuspense query={permissionsQuery}>
+        {permissionsQuery.data !== undefined ? (
+          <div className="flex w-full">
+            <table className="w-full table-auto">
+              <thead>
+                <tr>
+                  <th rowSpan={2} className="p-2" align="center">
+                    {t("Organization.Roles.components.Table.name")}
                   </th>
+                  <th rowSpan={2} className="p-2" align="center">
+                    {t("Organization.Roles.components.Table.description")}
+                  </th>
+                  {getPermissinContextTranslations(permissionsQuery.data).map(
+                    (permissionContext, index) => (
+                      <th
+                        key={index}
+                        colSpan={permissionContext.count}
+                        align="center"
+                        className="border-l-2 p-2"
+                      >
+                        {t(
+                          `types.permissionContext.${permissionContext.context}`
+                        )}
+                      </th>
+                    )
+                  )}
+                  <th rowSpan={2} className="border-l-2 p-2 text-center">
+                    {t("Organization.Roles.components.Table.actions")}
+                  </th>
+                </tr>
+                <tr className="border-b-2">
+                  {getGroupedPermissions(permissionsQuery.data).map(
+                    (permissiongroup, index) =>
+                      permissiongroup.permissionTypes.map(
+                        (permission, index_) => (
+                          <th
+                            key={`${index}${index_}`}
+                            className={`
+                        ${index_ === 0 ? "border-l-2" : ""}
+                        p-2`}
+                          >
+                            {t(`types.permissionType.${permission}`)}
+                          </th>
+                        )
+                      )
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                {roles.map((role: RoleProps, index) => (
+                  <OrganizationRolesTableRow
+                    editRole={editRole}
+                    key={index}
+                    role={role}
+                    allPermissions={permissionsQuery.data}
+                  />
                 ))}
-                <th>
-                  <Text variant="body" className="p-2">
-                    {t("Organization.Roles.components.table.actions")}
-                  </Text>
-                </th>
-              </tr>
-            </thead>
-            <tbody className="">
-              {roles !== undefined && roles.length > 0
-                ? roles.map((role, index) => (
-                    <OrganizationTableRow
-                      role={role}
-                      key={index}
-                      allPermissions={permissionsQuery.data}
-                    />
-                  ))
-                : null}
-            </tbody>
-          </table>
-          {roles === undefined || roles.length === 0 ? (
-            <div className="flex w-full items-center justify-center">
-              <Text variant="body" className="text-gray-500">
-                {t("Organization.Roles.components.table.empty")}
-              </Text>
-            </div>
-          ) : null}
-        </div>
-      ) : null}
-    </LoadingSuspense>
+              </tbody>
+            </table>
+          </div>
+        ) : null}
+      </LoadingSuspense>
+    </div>
   );
 };
 

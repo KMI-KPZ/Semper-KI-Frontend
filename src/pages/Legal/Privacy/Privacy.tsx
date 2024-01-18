@@ -250,7 +250,7 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
         <Heading variant="h3">Widerspruch gegen Werbe-Mails</Heading>
         <Text variant="body">
           Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten
-          Kontaktdaten zur Übersendung von nicht ausdrücklich angeforderter
+          Kontaktdaten zur Übersendung von nicht ausdrücklich angefprojectter
           Werbung und Informationsmaterialien wird hiermit widersprochen. Die
           Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im
           Falle der unverlangten Zusendung von Werbeinformationen, etwa durch
@@ -292,8 +292,8 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
           kann die Funktionalität dieser Website eingeschränkt sein. Cookies,
           die zur Durchführung des elektronischen Kommunikationsvorgangs oder
           zur Bereitstellung bestimmter, von Ihnen erwünschter Funktionen (z.B.
-          Warenkorbfunktion) erforderlich sind, werden auf Grundlage von Art. 6
-          Abs. 1 lit. f DSGVO gespeichert. Der Websitebetreiber hat ein
+          Warenkorbfunktion) erfprojectlich sind, werden auf Grundlage von Art.
+          6 Abs. 1 lit. f DSGVO gespeichert. Der Websitebetreiber hat ein
           berechtigtes Interesse an der Speicherung von Cookies zur technisch
           fehlerfreien und optimierten Bereitstellung seiner Dienste. Soweit
           andere Cookies (z.B. Cookies zur Analyse Ihres Surfverhaltens)
@@ -333,7 +333,7 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
           Rechtmäßigkeit der bis zum Widerruf erfolgten
           Datenverarbeitungsvorgänge bleibt vom Widerruf unberührt. Die von
           Ihnen im Kontaktformular eingegebenen Daten verbleiben bei uns, bis
-          Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung
+          Sie uns zur Löschung auffprojectn, Ihre Einwilligung zur Speicherung
           widerrufen oder der Zweck für die Datenspeicherung entfällt (z.B. nach
           abgeschlossener Bearbeitung Ihrer Anfrage). Zwingende gesetzliche
           Bestimmungen – insbesondere Aufbewahrungsfristen – bleiben unberührt.
@@ -356,16 +356,16 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
         </Text>
         <Text variant="body">
           Die verarbeiteten Daten, deren Art, Umfang und Zweck sowie die
-          Erforderlichkeit ihrer Verarbeitung bestimmen sich nach dem jeweiligen
-          Vertragsverhältnis. Hierzu zählen Bestandsdaten, Stammdaten der
-          Personen (z.B. Name, Adresse), sowie Kontaktdaten (z.B. E-Mailadresse,
-          Telefon), Vertragsdaten (z.B. Inhalte und Informationen, Namen von
-          Kontaktpersonen) und Zahlungsdaten (z.B. Bankverbindung,
-          Zahlungshistorie). Personenbezogene Daten über die Inanspruchnahme
-          unserer Internetseiten (Nutzungsdaten) erheben, verarbeiten und nutzen
-          wir nur, soweit dies erforderlich ist, um der Nutzerin die
-          Inanspruchnahme des Dienstes zu ermöglichen. Die erhobenen Daten
-          werden nach Abschluss des Auftrags oder Beendigung der
+          Erfprojectlichkeit ihrer Verarbeitung bestimmen sich nach dem
+          jeweiligen Vertragsverhältnis. Hierzu zählen Bestandsdaten, Stammdaten
+          der Personen (z.B. Name, Adresse), sowie Kontaktdaten (z.B.
+          E-Mailadresse, Telefon), Vertragsdaten (z.B. Inhalte und
+          Informationen, Namen von Kontaktpersonen) und Zahlungsdaten (z.B.
+          Bankverbindung, Zahlungshistorie). Personenbezogene Daten über die
+          Inanspruchnahme unserer Internetseiten (Nutzungsdaten) erheben,
+          verarbeiten und nutzen wir nur, soweit dies erfprojectlich ist, um der
+          Nutzerin die Inanspruchnahme des Dienstes zu ermöglichen. Die
+          erhobenen Daten werden nach Abschluss des Auftrags oder Beendigung der
           Geschäftsbeziehung gelöscht. Für den Fall der geschäftlichen
           Verarbeitung bewahren wir die Daten so lange auf, wie sie zur
           Geschäftsabwicklung, bzw. zu Gewährleistungs- oder Haftungspflichten
@@ -395,9 +395,9 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
           keine gesetzliche Aufbewahrungspflicht oder ein sonstiger Rechtsgrund
           zur weiteren Speicherung vorliegt. Sofern ersichtlich ist, dass die
           Aufbewahrung Ihrer Daten nach Ablauf der Aufbewahrungsfrist
-          erforderlich sein wird (z.B. aufgrund eines drohenden oder anhängigen
-          Rechtsstreits), findet eine Löschung erst statt, wenn die Daten
-          gegenstandslos geworden sind. Sonstige gesetzliche
+          erfprojectlich sein wird (z.B. aufgrund eines drohenden oder
+          anhängigen Rechtsstreits), findet eine Löschung erst statt, wenn die
+          Daten gegenstandslos geworden sind. Sonstige gesetzliche
           Aufbewahrungspflichten bleiben unberührt.
         </Text>
       </section>

@@ -34,36 +34,38 @@ const CookieBanner: React.FC<CookieBannerProps> = (props) => {
       `}
     >
       <div className="flex w-full items-center justify-center gap-5">
-        <Heading variant="h1">{t("CookieBanner.heading")}</Heading>
+        <Heading variant="h1">{t("components.CookieBanner.heading")}</Heading>
       </div>
       <div className="flex w-full items-center justify-center gap-5">
-        <Text variant="body">{t("CookieBanner.message")}</Text>
+        <Text variant="body">{t("components.CookieBanner.message")}</Text>
       </div>
       {showSettings ? (
         <div className="flex w-full flex-col items-start justify-center gap-5">
           <div className="flex w-full flex-col items-center gap-5 md:flex-row md:justify-between">
             <Heading variant="h2">
-              {t("CookieBanner.functional.heading")}
+              {t("components.CookieBanner.functional.heading")}
             </Heading>
 
             <Text variant="body" className="text-türkis">
-              {t("CookieBanner.status.alwaysActive")}
+              {t("components.CookieBanner.status.alwaysActive")}
             </Text>
           </div>
-          <Text variant="body">{t("CookieBanner.functional.message")}</Text>
+          <Text variant="body">
+            {t("components.CookieBanner.functional.message")}
+          </Text>
         </div>
       ) : null}
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
         <Button
           variant="primary"
           size="sm"
-          title={t("CookieBanner.button.accept")}
+          title={t("components.CookieBanner.button.accept")}
           onClick={acceptCookies}
         />
         <Button
           variant="primary"
           size="sm"
-          title={t("CookieBanner.button.reject")}
+          title={t("components.CookieBanner.button.reject")}
           onClick={rejectCookies}
         />
         <Button
@@ -71,8 +73,8 @@ const CookieBanner: React.FC<CookieBannerProps> = (props) => {
           size="sm"
           title={
             showSettings
-              ? t("CookieBanner.button.safeSettings")
-              : t("CookieBanner.button.showSettings")
+              ? t("components.CookieBanner.button.saveSettings")
+              : t("components.CookieBanner.button.showSettings")
           }
           onClick={handleOnClickSettingsButton}
         />
@@ -80,21 +82,21 @@ const CookieBanner: React.FC<CookieBannerProps> = (props) => {
       <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
         <Button
           extern
-          title={t("CookieBanner.link.cookiePolicy")}
+          title={t("components.CookieBanner.link.cookiePolicy")}
           to={URL_Cookies}
-          variant="link"
+          variant="secondary"
         />
         <Button
           extern
-          title={t("CookieBanner.link.dataProtection")}
+          title={t("components.CookieBanner.link.dataProtection")}
           to={URL_Datenschutz}
-          variant="link"
+          variant="secondary"
         />
         <Button
           extern
-          title={t("CookieBanner.link.imprint")}
+          title={t("components.CookieBanner.link.imprint")}
           to={URL_Impressum}
-          variant="link"
+          variant="secondary"
         />
       </div>
     </div>

@@ -4,7 +4,7 @@ import { Divider, LoadingSuspense } from "@component-library/index";
 import { Heading, Text } from "@component-library/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useOntoPrinters from "../../hooks/useOntoPrinters";
+import useOntologyPrinterQuerys from "../../../../api/Ontology/useOntologyPrinterQuerys";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 
 interface ResourcesPrintersTableProps {}
@@ -14,14 +14,14 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
 ) => {
   const {} = props;
   const { t } = useTranslation();
-  const { printersQuery } = useOntoPrinters({});
+  const { printersQuery } = useOntologyPrinterQuerys({});
 
   const handleOnClickDelete = (materialID: string) => {};
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
       <Heading variant="h2">{t("Resources.Printers.table.header")}</Heading>
-      <PermissionGate element="ResourcesPrintersAddButton">
+      <PermissionGate element="ResourcesButtonAddPrinter">
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-col">
           <Button
             title={t("Resources.Printers.table.button.add")}

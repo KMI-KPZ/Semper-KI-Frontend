@@ -1,7 +1,7 @@
 import { ErrorType } from "@/types/general";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { Heading } from "..";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   errors: ErrorType[];
@@ -9,16 +9,14 @@ interface Props {
 }
 
 export const ErrorView: React.FC<Props> = (props) => {
-  const { errors, itemName } = props;
+  const { errors, itemName: name } = props;
   const { t } = useTranslation();
 
   return (
     <div className="flex flex-col gap-3">
       {errors.map((error, index) => (
         <Heading variant="h2" key={index}>
-          {t(`General.ErrorView.${error}`, {
-            itemName,
-          })}
+          {t(`component-library.Error.${error}`, { name })}
         </Heading>
       ))}
     </div>

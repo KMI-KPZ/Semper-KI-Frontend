@@ -1,10 +1,10 @@
-import { Address, User,UserType } from "@/hooks/useUser/types";
+import { Address, AuthorizedUserProps, UserProps, UserType } from "@/hooks/useUser";
 
 export class UserBuilder {
     email:string = "test@test.de";
     name:string = "testName";
     organization:string = "";
-    type:UserType = 0;
+    userType:UserType = 0;
     hashedID:string= "7ae4dc547be2fdeffc5968366925368552ba4e279725333507e9bdc60c4d955d7d1a4baea3e989e93f1dwferhjztukcbe3435975b609633343e3c70e831a5a7"
     address:Address= {
         city: "testCity",
@@ -16,9 +16,11 @@ export class UserBuilder {
     created:Date= new Date()
     updated:Date= new Date()
     accessed:Date= new Date()
+    lastSeen:Date= new Date()
+    details:any={};
 
     withType(type:UserType):UserBuilder {
-        this.type = type;
+        this.userType = type;
         return this;
     }
     withEmail(email:string):UserBuilder {
@@ -29,7 +31,7 @@ export class UserBuilder {
         this.name = name;
         return this;
     }
-    withOrganization(organization:string):UserBuilder {
+    withOrganizations(organization:string):UserBuilder {
         this.organization = organization;
         return this;
     }
@@ -53,18 +55,28 @@ export class UserBuilder {
         this.accessed = accessed;
         return this;
     }
+    withLastSeen(lastSeen:Date):UserBuilder {
+        this.lastSeen = lastSeen;
+        return this;
+    }
+    withDetails(details:any):UserBuilder {
+        this.details = details.email;
+        return this;
+    }
 
-    build():User {
+
+
+    build():UserProps {
         return({
-            email: this.email,
             name: this.name,
             organization: this.organization,
-            type: this.type,
+            usertype: this.userType,
             hashedID: this.hashedID,
-            address: this.address,
-            created: this.created,
-            updated: this.updated,
-            accessed: this.accessed
+            createdWhen: this.created,
+            updatedWhen: this.updated,
+            accessedWhen: this.accessed,
+            lastSeen: this.lastSeen,
+            details: this.details
         })   
     }
 }

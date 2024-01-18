@@ -13,10 +13,10 @@ describe("<ResourcesMenu>", () => {
 
   it("should have active button", () => {
     render(<ResourcesMenu />);
-    const button = screen.getByTitle("Resources.components.Menu.printers");
+    const button = screen.getByText("Resources.components.Menu.printers");
     fireEvent.click(button);
     expect(
-      screen.getByTitle("> Resources.components.Menu.printers")
+      screen.getByText("> Resources.components.Menu.printers")
     ).toBeInTheDocument();
   });
 });

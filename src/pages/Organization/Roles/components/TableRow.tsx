@@ -1,118 +1,90 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import useOrganizations, {
-  Permission,
-  RolePermission,
+  PermissionProps,
   RoleProps,
 } from "../../hooks/useOrganizations";
-import ClearIcon from "@mui/icons-material/Clear";
-import EditIcon from "@mui/icons-material/Edit";
+import logger from "@/hooks/useLogger";
 import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
+import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { LoadingSuspense } from "@component-library/Loading";
-import useOnQueryDataChange from "@/hooks/useOnQueryDataChange";
+import { Button } from "@component-library/Button";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import { getGroupedPermissions, sortPermissions } from "../Roles";
 
-interface OrganizationTableRowProps {
+interface OrganizationRolesTableRowProps {
   role: RoleProps;
-  allPermissions: Permission[];
+  allPermissions: PermissionProps[];
+  editRole: (role: RoleProps) => void;
 }
 
-const OrganizationTableRow: React.FC<OrganizationTableRowProps> = (props) => {
-  const { role, allPermissions } = props;
-  const { description, id, name } = role;
+const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
+  props
+) => {
+  const { role, allPermissions, editRole } = props;
   const { t } = useTranslation();
-  const { rolePermissionsQuery, setPermissionMutation, deleteRoleMutation } =
-    useOrganizations(id);
-  const [edit, setEdit] = useState<boolean>(false);
-  const [checkedPermissions, setCheckedPermissions] = useState<string[]>([]);
-
-  const onQueryDataChange = (data: RolePermission[]) => {
-    const newChecked = data.map((permission) => permission.permission_name);
-    setCheckedPermissions(newChecked);
-  };
-
-  useOnQueryDataChange(
-    rolePermissionsQuery,
-    checkedPermissions.length === 0 &&
-      rolePermissionsQuery.data !== undefined &&
-      rolePermissionsQuery.data.length > 0,
-    onQueryDataChange
+  const { rolePermissionsQuery, deleteRoleMutation } = useOrganizations(
+    role.id
   );
 
-  const handleOnClickEdit = () => {
-    if (edit === true)
-      setPermissionMutation.mutate({
-        roleID: id,
-        permissionIDs: checkedPermissions,
-      });
-    setEdit((prevState) => !prevState);
+  const handleOnClickButtonDelete = () => {
+    if (window.confirm(t("Organization.Roles.components.Item.alert")))
+      deleteRoleMutation.mutate(role.id);
   };
-  const handleOnClickDelete = () => {
-    deleteRoleMutation.mutate(id);
-  };
-
-  const handleOnChangeCheckbox = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    value: string
-  ) => {
-    setCheckedPermissions((prevState) =>
-      e.target.checked
-        ? [...prevState, value]
-        : [...prevState.filter((_value) => _value !== value)]
-    );
+  const handleOnClickButtonEdit = () => {
+    editRole(role);
   };
 
   return (
     <tr>
-      <td className="text-center">{name}</td>
-      <td className="text-center">{description}</td>
-      {allPermissions.map((permission, index) => (
-        <td key={index}>
-          <div className="flex items-center justify-center">
-            <LoadingSuspense query={rolePermissionsQuery} loadingText="...">
-              {edit === true ? (
-                <input
-                  type="checkbox"
-                  checked={checkedPermissions.includes(permission.value)}
-                  onChange={(e) => handleOnChangeCheckbox(e, permission.value)}
-                />
-              ) : checkedPermissions.includes(permission.value) ? (
-                <CheckIcon fontSize="small" />
+      <td align="center" className="p-2">
+        {role.name}
+      </td>
+      <td align="center" className="p-2">
+        {role.description}
+      </td>
+      {rolePermissionsQuery.data !== undefined
+        ? allPermissions.map((_permission, index) => (
+            <td
+              key={index}
+              align="center"
+              className={`p-2 ${
+                index === 0 || index === 3 || index === 8 ? "border-l-2" : ""
+              }`}
+            >
+              {rolePermissionsQuery.data.find((permission) => {
+                return (
+                  permission.permission_name === _permission.permission_name
+                );
+              }) !== undefined ? (
+                <CheckIcon />
               ) : (
-                <ClearIcon fontSize="small" />
+                <CloseIcon />
               )}
-            </LoadingSuspense>
-          </div>
-        </td>
-      ))}
-      <td>
-        <div className="flex flex-row items-center justify-center gap-2">
-          <div
-            title={t(
-              `Organization.Roles.components.tag.button.${
-                edit === true ? "safe" : "edit"
-              }`
-            )}
-            onClick={handleOnClickEdit}
-            className="flex items-center justify-center rounded-full p-1 hover:cursor-pointer hover:bg-orange"
-          >
-            {edit === true ? (
-              <CheckIcon fontSize="small" />
-            ) : (
-              <EditIcon fontSize="small" />
-            )}
-          </div>
-          <div
-            title={t("Organization.Roles.components.tag.button.delete")}
-            className="flex items-center justify-center rounded-full p-1 hover:cursor-pointer hover:bg-red-300"
-            onClick={handleOnClickDelete}
-          >
-            <DeleteForeverIcon fontSize="small" />
-          </div>
+            </td>
+          ))
+        : null}
+      <td className="border-l-2 p-2">
+        <div className="flex w-full flex-row items-center justify-center gap-5">
+          <PermissionGate element="OrganizationButtonEditRole">
+            <Button
+              title={t(`Organization.components.table.button.edit`)}
+              onClick={handleOnClickButtonEdit}
+              children={<EditIcon fontSize="small" />}
+            />
+          </PermissionGate>
+          <PermissionGate element="OrganizationButtonDeleteRole">
+            <Button
+              onClick={handleOnClickButtonDelete}
+              children={<DeleteForeverIcon fontSize="small" />}
+              title={t("Organization.components.table.button.delete")}
+            />
+          </PermissionGate>
         </div>
       </td>
     </tr>
   );
 };
 
-export default OrganizationTableRow;
+export default OrganizationRolesTableRow;

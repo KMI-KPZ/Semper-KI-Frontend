@@ -1,18 +1,13 @@
 import React, { PropsWithChildren, ReactNode } from "react";
 import LoopIcon from "@mui/icons-material/Loop";
 import { useNavigate } from "react-router-dom";
-import logger from "@/hooks/useLogger";
+import { twMerge } from "tailwind-merge";
 
 interface ButtonProps {
   title: string;
   to?: string;
-  onClick?(
-    e?:
-      | React.MouseEvent<HTMLAnchorElement, MouseEvent>
-      | React.MouseEvent<HTMLDivElement, MouseEvent>
-  ): void;
+  onClick?(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
   size?: ButtonSize;
-  align?: ButtonAlign;
   variant?: ButtonVariant;
   width?: ButtonWidth;
   direction?: ButtonDirection;
@@ -23,31 +18,25 @@ interface ButtonProps {
   endIcon?: ReactNode;
   extern?: boolean;
   testid?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
 }
-type ButtonSize = "sm" | "xs" | "md" | "lg" | "xl";
-type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "outline"
-  | "text"
-  | "light"
-  | "link";
+type ButtonSize = "xs" | "sm" | "md" | "lg";
+type ButtonVariant = "primary" | "secondary" | "tertiary";
 type ButtonWidth = "fit" | "full" | "auto";
-type ButtonAlign = "start" | "center" | "end";
 type ButtonDirection = "col" | "row";
 
 export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
   const {
     active = true,
     size = "md",
-    variant = "primary",
+    variant = "secondary",
     loading = false,
     width = "auto",
     className = "",
-    align = "center",
     direction = "row",
     testid = "",
     extern = false,
+    target = "_self",
     onClick,
     title,
     children,
@@ -73,89 +62,84 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
   };
 
   const getClassNameWidth = (): string => {
+    let className = "";
     switch (width) {
       case "full":
-        return "w-full";
+        className = "w-full";
+        break;
       case "fit":
-        return "w-fit";
+        className = "w-fit";
+        break;
       case "auto":
-        return "w-full md:w-fit";
+        className = "w-full md:w-fit";
+        break;
     }
+    return className;
   };
 
   const getClassNameVariant = (): string => {
+    let className = "";
     switch (variant) {
       case "primary":
-        switch (active) {
-          case true:
-            return "bg-türkis-800 hover:bg-grau-600 text-white hover:cursor-pointer";
-          case false:
-            return "bg-grau-600 text-white hover:cursor-default";
-        }
+        if (active)
+          className =
+            "bg-blau-button  border-blau-700 border-2 brightness-100 hover:brightness-95  text-white hover:cursor-pointer shadow-button-primary hover:shadow-button-inner-primary  focus:shadow-button-inner-primary ";
+        else
+          className =
+            "bg-slate-500 border-2 border-slate-500 text-slate-100 hover:cursor-default shadow-button-inner-primary";
+        break;
       case "secondary":
-        switch (active) {
-          case true:
-            return "hover:bg-türkis-300 bg-slate-200 text-black hover:cursor-pointer";
-          case false:
-            return "bg-grau-300 hover:bg-grau-200 text-white hover:cursor-default";
-        }
-      case "outline":
-        return "text-black bg-slate-200 md:bg-inherit hover:shadow-inner-border hover:shadow-türkis-300 hover:cursor-pointer";
-      case "text":
-        switch (active) {
-          case true:
-            return "hover:cursor-pointer hover:text-türkis";
-          case false:
-            return "hover:cursor-pointer text-türkis hover:text-inherit";
-        }
-      case "light":
-        switch (active) {
-          case true:
-            return "hover:text-türkis text-grau-400 font-bold";
-          case false:
-            return "text-grau-400 font-bold";
-        }
-      case "link":
-        return "hover:text-blau underline";
+        if (active)
+          className =
+            "bg-slate-50 border-2 border-slate-500 brightness-100 hover:brightness-95 text-black hover:cursor-pointer shadow-button-secondary hover:shadow-button-inner-secondary  focus:shadow-button-inner-secondary";
+        else
+          className =
+            " bg-slate-200 border-2 border-slate-400 text-slate-700 hover:cursor-default shadow-button-inner-secondary";
+        break;
+      case "tertiary":
+        if (active)
+          className =
+            " text-black hover:cursor-pointer hover:scale-105 hover:bg-slate-100 focus:scale-105 scale-100";
+        else className = "text-slate-600  hover:cursor-default";
+        break;
     }
+    return className;
   };
 
   const getClassNameSize = (): string => {
+    let className = "";
     switch (size) {
       case "xs":
-        return "px-3 py-2 md:py-1 md:px-2";
+        className = "py-1 px-2";
+        break;
       case "sm":
-        return "px-4 py-3 md:py-2 md:px-3";
+        className = "py-2 px-3";
+        break;
       case "md":
-        return "px-5 py-4 md:py-2 md:px-4";
+        className = "py-3 px-4";
+        break;
       case "lg":
-        return "px-6 py-5 md:py-3 md:px-5";
-      case "xl":
-        return "px-7 py-6 md:py-4 md:px-6";
+        className = "py-4 px-5";
+        break;
     }
-  };
-
-  const getClassNameAlign = (): string => {
-    switch (align) {
-      case "start":
-        return "justify-start";
-      case "center":
-        return "justify-center";
-      case "end":
-        return "justify-end";
-    }
+    return className;
   };
 
   const getClassNameDirection = (): string => {
+    let className = "";
     switch (direction) {
       case "col":
-        return "flex-col";
+        className = "flex-col";
+        break;
       case "row":
-        return "flex-row";
+        className = "flex-row";
+        break;
     }
+    return className;
   };
 
   const getTitle = (): string => {
+    if (title !== undefined && children === undefined) return "";
     if (title !== undefined) return title;
     if (typeof children === "string") return children;
     return "";
@@ -164,14 +148,26 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
   return (
     <a
       title={getTitle()}
-      className={` 
-      bezier group flex items-center gap-3 whitespace-nowrap transition duration-300
-      ${getClassNameVariant()} ${getClassNameSize()} 
-      ${getClassNameWidth()} ${getClassNameAlign()} 
-      ${getClassNameDirection()} ${className}`}
+      className={twMerge(
+        ` bezier group flex
+          h-fit flex-wrap
+          items-center justify-center 
+          gap-3 break-words 
+          rounded-lg text-center
+          transition duration-200 
+          md:flex-nowrap md:whitespace-nowrap
+         `,
+        getClassNameVariant(),
+        getClassNameSize(),
+        getClassNameWidth(),
+        getClassNameDirection(),
+        className
+      )}
       onClick={handleOnClickButton}
       href={to !== undefined ? to : title}
       data-testid={testid}
+      target={target}
+      tabIndex={active ? undefined : -1}
     >
       {loading === true ? (
         <div className="animate-spin">

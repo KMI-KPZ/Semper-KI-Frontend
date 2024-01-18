@@ -6,6 +6,7 @@ import OrganizationRoles from "./Roles/Roles";
 import OrganizationTabel from "./components/UserTable";
 import { Heading } from "@component-library/Typography";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import OrganizationInfo from "./Info/Info";
 
 interface OrganizationViewProps {}
 
@@ -16,13 +17,13 @@ const Organization: React.FC<OrganizationViewProps> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
       <Heading variant="h1">{t("Organization.index.header")}</Heading>
-      <PermissionGate element="OrganizationRoles">
-        <Divider />
+      <OrganizationInfo />
+      <PermissionGate element="OrganizationInvitation">
         <Invitation />
-        <Divider />
+      </PermissionGate>
+      <PermissionGate element="OrganizationRoles">
         <OrganizationRoles />
       </PermissionGate>
-      <Divider />
       <OrganizationTabel />
     </div>
   );

@@ -93,14 +93,6 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
         variant="secondary"
         width="fit"
         size="xs"
-        children={<InfoIcon />}
-        onClick={handleOnClickButtonInfo}
-        title={t("Projects.Project.Process.components.Buttons.button.info")}
-      />
-      <Button
-        variant="secondary"
-        width="fit"
-        size="xs"
         children={<HistoryIcon />}
         to={`/projects/${projectID}/${process.processID}/history`}
         title={t("Projects.Project.Process.components.Buttons.button.history")}
@@ -128,21 +120,6 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
           </Badge>
         </PermissionGate>
       ) : null}
-      {process.processStatus <= ProcessStatus.REQUESTED &&
-      shouldRenderFor("CLIENT") ? (
-        <PermissionGate element="ProcessButtonDelete">
-          <Button
-            variant="secondary"
-            width="fit"
-            size="xs"
-            children={<DeleteIcon />}
-            onClick={handleOnClickButtonCancel}
-            title={t(
-              "Projects.Project.Process.components.Buttons.button.cancel"
-            )}
-          />
-        </PermissionGate>
-      ) : null}
       {process.processStatus === ProcessStatus.COMPLETED &&
       shouldRenderFor("CLIENT") ? (
         <PermissionGate element="ProcessButtonReProject">
@@ -154,6 +131,29 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
             onClick={handleOnClickButtonReProject}
             title={t(
               "Projects.Project.Process.components.Buttons.button.reProject"
+            )}
+          />
+        </PermissionGate>
+      ) : null}
+      <Button
+        variant="secondary"
+        width="fit"
+        size="xs"
+        children={<InfoIcon />}
+        onClick={handleOnClickButtonInfo}
+        title={t("Projects.Project.Process.components.Buttons.button.info")}
+      />
+      {process.processStatus <= ProcessStatus.REQUESTED &&
+      shouldRenderFor("CLIENT") ? (
+        <PermissionGate element="ProcessButtonDelete">
+          <Button
+            variant="secondary"
+            width="fit"
+            size="xs"
+            children={<DeleteIcon />}
+            onClick={handleOnClickButtonCancel}
+            title={t(
+              "Projects.Project.Process.components.Buttons.button.cancel"
             )}
           />
         </PermissionGate>

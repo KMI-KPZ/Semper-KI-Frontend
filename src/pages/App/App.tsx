@@ -4,8 +4,6 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { Test } from "../Test/Test";
-import Background from "@/components/Background";
-import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
 import Login from "../Login/Login";
 import Logout from "../Logout/Logout";
@@ -32,6 +30,7 @@ import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import { ContentBox } from "@component-library/index";
 import RedirectLogin from "../Login/RedirectLogin";
 import Menu from "@/components/Menu";
+import { Background } from "@/components/index";
 
 export type AppState = {
   guideFilter: FilterItemProps[];

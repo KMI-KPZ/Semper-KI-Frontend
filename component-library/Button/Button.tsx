@@ -34,7 +34,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     width = "auto",
     className = "",
     direction = "row",
-    testid = "",
+    testid = "button",
     extern = false,
     target = "_self",
     onClick,

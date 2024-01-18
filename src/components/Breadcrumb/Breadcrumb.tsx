@@ -119,7 +119,7 @@ export function isDataNaviagtionTranlationType(
   ].includes(input);
 }
 
-const Breadcrumb: React.FC<Props> = () => {
+export const Breadcrumb: React.FC<Props> = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { pathname } = useLocation();
@@ -201,5 +201,3 @@ const Breadcrumb: React.FC<Props> = () => {
     </nav>
   );
 };
-
-export default Breadcrumb;

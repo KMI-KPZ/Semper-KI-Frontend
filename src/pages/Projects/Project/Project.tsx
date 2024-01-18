@@ -151,7 +151,7 @@ const Project: React.FC<Props> = (props) => {
           >
             <input
               type="checkbox"
-              className="h-8 w-8"
+              className="h-7 w-7"
               onChange={handleOnChangeCheckboxSelectAll}
               id="selectAllProcesses"
               name={t("Projects.Project.Project.label.selectProcess")}

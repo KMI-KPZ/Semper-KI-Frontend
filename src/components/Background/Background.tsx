@@ -1,7 +1,7 @@
 import React from "react";
 interface Props {}
 
-const Background: React.FC<Props> = (props) => {
+export const Background: React.FC<Props> = (props) => {
   const showFancyBG = false;
 
   return (
@@ -13,5 +13,3 @@ const Background: React.FC<Props> = (props) => {
     ></div>
   );
 };
-
-export default Background;

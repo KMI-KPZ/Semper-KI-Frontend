@@ -1,5 +1,5 @@
 import useService from "@/pages/Service/hooks/useService";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -119,7 +119,7 @@ export function isDataNaviagtionTranlationType(
   ].includes(input);
 }
 
-const Breadcrumb: React.FC<Props> = () => {
+export const Breadcrumb: React.FC<Props> = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { pathname } = useLocation();
@@ -201,5 +201,3 @@ const Breadcrumb: React.FC<Props> = () => {
     </nav>
   );
 };
-
-export default Breadcrumb;

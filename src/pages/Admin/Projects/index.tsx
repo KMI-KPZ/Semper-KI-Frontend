@@ -1,4 +1,4 @@
-import { Heading } from "@component-library/Typography";
+import { Heading, Search } from "@component-library/index";
 import {
   Paper,
   Table,
@@ -12,12 +12,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import useAdmin, { AdminFlatProjectProps } from "../hooks/useAdmin";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 import logger from "@/hooks/useLogger";
-import Search from "@component-library/Search";
 import useSearch from "@/hooks/useSearch";
 import { useProject } from "@/pages/Projects/hooks/useProject";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";

@@ -12,7 +12,9 @@ interface ContainerProps {
   className?: string;
 }
 
-const Container: React.FC<PropsWithChildren<ContainerProps>> = (props) => {
+export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
+  props
+) => {
   const {
     children,
     align = "center",
@@ -80,5 +82,3 @@ const Container: React.FC<PropsWithChildren<ContainerProps>> = (props) => {
     </div>
   );
 };
-
-export default Container;

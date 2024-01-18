@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button } from "@component-library/Button";
-import { Heading, Text } from "@component-library/Typography";
+import { Button } from "@component-library/index";
+import { Heading, Text } from "@component-library/index";
 import useContactFormMutations from "@/api/ContactForm/useContactFormMutations";
 
 interface ContactFormProps {
@@ -29,13 +29,11 @@ const ContactForm: React.FC<ContactFormProps> = (props) => {
           name: t("components.Footer.ContactForm.subject"),
         })
       ),
-      name: yup
-        .string()
-        .required(
-          t("yup.requiredName", {
-            name: t("components.Footer.ContactForm.name"),
-          })
-        ),
+      name: yup.string().required(
+        t("yup.requiredName", {
+          name: t("components.Footer.ContactForm.name"),
+        })
+      ),
       message: yup.string().required(
         t("yup.requiredName", {
           name: t("components.Footer.ContactForm.message"),

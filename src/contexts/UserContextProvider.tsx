@@ -6,7 +6,7 @@ import useUser, {
   UserType,
   AnonymUser,
 } from "@/hooks/useUser";
-import { AppLoadingSuspense } from "@component-library/Loading";
+import { AppLoadingSuspense } from "@component-library/index";
 import { UseQueryResult } from "@tanstack/react-query";
 import React, { PropsWithChildren, createContext } from "react";
 

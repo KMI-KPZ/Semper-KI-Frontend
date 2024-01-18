@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import LoginIcon from "@mui/icons-material/Login";
 import CreateIcon from "@mui/icons-material/Create";
 import { UserType } from "@/hooks/useUser";
-import { Heading, Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/index";
 import Switch from "@/components/Switch";
 import PersonIcon from "@mui/icons-material/Person";
 import GroupIcon from "@mui/icons-material/Group";
 import { UserSwitch } from "@/components/UserSwitch";
 import PeopleIcon from "@mui/icons-material/People";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import useLogin, { LoginUserType } from "@/hooks/useLogin";
 

@@ -1,12 +1,12 @@
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import TextInput from "../Inputs/TextInput";
+import TextInput from "../../../component-library/Form/Inputs/TextInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useUser, { UserAddressProps } from "@/hooks/useUser";
-import { Heading, Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 
 interface AddressFormProps {
@@ -59,25 +59,19 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
 
   const maxLength = Math.max(
     ...labels.map(
-      (label) =>
-        t(`component-library.Form.AddressForm.AddressForm.labels.${label}`)
-          .length
+      (label) => t(`components.Form.AddressForm.labels.${label}`).length
     )
   );
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col items-center gap-5 bg-white p-5"
+      className={`flex h-full w-full flex-col items-center justify-start gap-5 overflow-auto bg-white p-5 md:justify-center`}
     >
-      <Heading variant="h1">
-        {t("component-library.Form.AddressForm.AddressForm.header")}
-      </Heading>
+      <Heading variant="h1">{t("components.Form.AddressForm.header")}</Heading>
       {labels.map((label) => (
         <TextInput
-          labelText={t(
-            `component-library.Form.AddressForm.AddressForm.labels.${label}`
-          )}
+          labelText={t(`components.Form.AddressForm.labels.${label}`)}
           label={label}
           register={register}
           error={errors[label]}
@@ -85,10 +79,10 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
           key={label}
         />
       ))}
-      <Text>{t("component-library.Form.AddressForm.AddressForm.hint")}</Text>
+      <Text>{t("components.Form.AddressForm.hint")}</Text>
       <Button
         variant="primary"
-        title={t("component-library.Form.AddressForm.AddressForm.buttons.save")}
+        title={t("components.Form.AddressForm.buttons.save")}
         onClick={handleSubmit(onSubmit)}
       />
     </form>

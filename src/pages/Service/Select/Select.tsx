@@ -1,4 +1,4 @@
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import useService, { ServiceType } from "../hooks/useService";
@@ -7,7 +7,7 @@ import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import ServiceSelectItem, { ServiceSelectItemProps } from "./components/Item";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { useParams } from "react-router-dom";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import { LoadingSuspense } from "@component-library/index";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";

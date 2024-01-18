@@ -5,8 +5,8 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useTranslation } from "react-i18next";
 import ProcessFilterItem from "./Item";
 import { CategoryProps, FilterItemProps } from "../Filter";
-import { Heading } from "@component-library/Typography";
-import { Button } from "@component-library/Button";
+import { Heading } from "@component-library/index";
+import { Button } from "@component-library/index";
 
 interface Props {
   category: CategoryProps;
@@ -45,7 +45,8 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
           )} ${getCountOfChecktItems()}`}
         </Heading>
         <Button
-          variant="secondary"
+          variant="tertiary"
+          size="sm"
           title={t("Service.Manufacturing.Filter.components.Card.buttons.open")}
           onClick={(e) => handleOnClickMenuOpen(e, category, categoryIndex)}
           children={

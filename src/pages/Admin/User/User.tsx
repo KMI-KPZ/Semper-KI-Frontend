@@ -1,5 +1,5 @@
 import { AuthorizedUserProps } from "@/hooks/useUser";
-import { Heading, Text } from "@component-library/Typography";
+import { Heading, Search, Text } from "@component-library/index";
 import {
   Paper,
   Table,
@@ -13,9 +13,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import useAdmin from "../hooks/useAdmin";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import useSearch from "@/hooks/useSearch";
-import Search from "@component-library/Search";
 
 interface Props {}
 

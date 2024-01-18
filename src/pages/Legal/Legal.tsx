@@ -4,9 +4,9 @@ import {
   URL_Impressum,
 } from "@/config/constants";
 import usePing from "@/hooks/usePing";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import { LoadingSuspense } from "@component-library/index";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";

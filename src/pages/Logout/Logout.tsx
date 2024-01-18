@@ -1,7 +1,7 @@
 import useLogin from "@/hooks/useLogin";
-import Container from "@component-library/Container";
-import { LoadingAnimation } from "@component-library/Loading";
-import { Heading } from "@component-library/Typography";
+import { Container } from "@component-library/index";
+import { LoadingAnimation } from "@component-library/index";
+import { Heading } from "@component-library/index";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import { getModelURI } from "@/services/utils";
 import { ModelProps } from "../types";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 
 interface Props {

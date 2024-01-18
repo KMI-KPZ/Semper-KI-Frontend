@@ -1,21 +1,21 @@
-import { Heading, Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 import Hero from "@images/Hero_16_9.png";
 import HomeContainer from "../components/Container";
 import SemperKI from "@images/Semper-KI.png";
 import WirMachen3DDruck from "@images/Wir-machen-3D-Druck.png";
 import ButtonIcon from "@images/OnButton.png";
 import SemperLogo from "@images/Logo-Semper.png";
-import ContentBox from "@component-library/ContentBox";
-import { Button } from "@component-library/Button";
+import { ContentBox } from "@component-library/index";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import LoginIcon from "@mui/icons-material/Login";
 import HomeImgCarousel from "./components/ImgCarousel";
 import { useProject } from "@/pages/Projects/hooks/useProject";
 import { useNavigate } from "react-router-dom";
 import useLogin from "@/hooks/useLogin";
+import { Button } from "@component-library/index";
 
 interface HomeProps {}
 

@@ -1,12 +1,12 @@
 import { FlatProjectProps } from "@/api/Project/useFlatProjectQuerys";
 import logger from "@/hooks/useLogger";
 import useUser, { UserType } from "@/hooks/useUser";
-import Container from "@component-library/Container";
-import { Heading, Text } from "@component-library/Typography";
+import { Container } from "@component-library/index";
+import { Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProjectsCard from "./Card";
-import { Divider } from "@component-library/Divider";
+import { Divider } from "@component-library/index";
 
 interface ProjectsCardsProps {
   flatProjects: FlatProjectProps[];

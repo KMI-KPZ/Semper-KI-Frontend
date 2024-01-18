@@ -7,7 +7,7 @@ import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import App from "./pages/App/App";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import UserContextProvider from "./contexts/UserContextProvider";
 import PermissionContextProvider from "./contexts/PermissionContextProvider";
 import EventContextProvider from "./contexts/EventContextProvider";

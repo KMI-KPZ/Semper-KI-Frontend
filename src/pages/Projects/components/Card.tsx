@@ -1,16 +1,16 @@
 import { FlatProjectProps } from "@/api/Project/useFlatProjectQuerys";
-import Container from "@component-library/Container";
-import { Text } from "@component-library/Typography";
+import { Container } from "@component-library/index";
+import { Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { ProcessStatus } from "../hooks/useProcess";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useProject } from "../hooks/useProject";
 import logger from "@/hooks/useLogger";
-import { Badge } from "@component-library/Badge";
+import { Badge } from "@component-library/Badge/Badge";
 import useEvents from "@/hooks/useEvents/useEvents";
 
 interface ProjectsCardProps {

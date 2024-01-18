@@ -7,7 +7,7 @@ import ServiceSelect from "@/pages/Service/Select/Select";
 import Service from "@/pages/Service/Service";
 import { ServiceContextProvider } from "@/pages/Service/context/ServiceContext";
 import { ServiceType } from "@/pages/Service/hooks/useService";
-import Modal from "@component-library/Modal";
+import { Modal } from "@component-library/index";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";

@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { ProcessProps } from "../../hooks/useProcess";
-import { Heading, Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/index";
 import { ServiceType } from "@/pages/Service/hooks/useService";
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 import { ProjectContext } from "../../context/ProjectContext";
 import useCheckedProcesses from "../hooks/useCheckedProcesses";
 

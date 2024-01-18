@@ -1,18 +1,18 @@
 import { MouseEvent, useContext, useState } from "react";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 
 import ProcessChat from "./Chat/Chat";
 import StatusBar from "./StatusBar/StatusBar";
 import { useTranslation } from "react-i18next";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import Modal from "@component-library/Modal";
+import { Modal } from "@component-library/index";
 import ProcessServicePreview from "./ServicePreview/ServicePreview";
-import { Divider } from "@component-library/Divider";
+import { Divider } from "@component-library/index";
 import ProcessButtons from "./components/Buttons";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import ProcessInfo from "./components/Info";
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 import ProjectTitleForm from "../components/TitleForm";
 import useProcess, {
   ProcessProps,
@@ -30,7 +30,7 @@ import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import useGeneralProcess from "../../hooks/useGeneralProcess";
 import logger from "@/hooks/useLogger";
 import useEvents from "@/hooks/useEvents/useEvents";
-import AddressForm from "@component-library/Form/AddressForm/AddressForm";
+import AddressForm from "@/components/Form/AddressForm";
 
 interface Props {
   process: ProcessProps;

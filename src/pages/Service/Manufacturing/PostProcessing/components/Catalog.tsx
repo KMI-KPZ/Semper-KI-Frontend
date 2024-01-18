@@ -5,7 +5,7 @@ import ProcessPostProcessingItem from "./Item";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ProcessPostProcessingCard from "./Card";
 import { PostProcessingProps } from "../PostProcessing";
-import Modal from "@component-library/Modal";
+import { Modal } from "@component-library/index";
 
 interface Props<Item> {
   grid: boolean;

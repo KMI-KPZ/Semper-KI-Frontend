@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import LogoURL from "@images/logo192.png";
-import { Text } from "@component-library/Typography";
+import { Text } from "@component-library/index";
 
 interface HeaderHomeButtonProps {}
 

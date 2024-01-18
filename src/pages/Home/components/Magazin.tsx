@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import BubblesSnipURL from "@images/Bubbles_snip.png";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import { twMerge } from "tailwind-merge";
 
 interface Props {

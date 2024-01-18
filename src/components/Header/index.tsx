@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTranslation } from "react-i18next";
 import HeaderItem from "./components/Item";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import { UserType } from "@/hooks/useUser";
 import HeaderHomeButton from "./components/HomeButton";
 import useApp from "@/hooks/useApp";

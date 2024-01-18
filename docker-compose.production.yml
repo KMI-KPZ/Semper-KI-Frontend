@@ -2,10 +2,10 @@ version: '3.7'
 
 services:
   frontend:
-    container_name: frontend-prod
-    image: frontend-prod
+    container_name: frontend-production
+    image: frontend-production
     build:
       context: .
       dockerfile: ./Dockerfile
     ports:
-      - '127.0.0.1:3001:80'
+      - '127.0.0.1:3002:80'

@@ -1,4 +1,4 @@
-import { LoadingAnimation } from "@component-library/Loading";
+import { LoadingAnimation } from "@component-library/index";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 

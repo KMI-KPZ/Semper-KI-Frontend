@@ -1,7 +1,7 @@
 import Table from "@/components/Table";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import { Divider, LoadingSuspense } from "@component-library/index";
-import { Heading, Text } from "@component-library/Typography";
+import { Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import useOntologyMaterialQuerys from "../../../../api/Ontology/useOntologyMaterialQuerys";

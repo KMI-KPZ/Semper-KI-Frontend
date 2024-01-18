@@ -1,4 +1,4 @@
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import { ClickAwayListener } from "@mui/material";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";

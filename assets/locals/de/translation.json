@@ -165,27 +165,7 @@
       "empty": "Keine {{name}} vorhanden",
       "incorrect": "{{name}} ist nicht vorhanden"
     },
-    "Form": {
-      "AddressForm": {
-        "AddressForm": {
-          "header": "Adresse bearbeiten",
-          "labels": {
-            "firstName": "Vorname *",
-            "lastName": "Nachname *",
-            "company": "Firma",
-            "street": "Straße *",
-            "houseNumber": "Hausnummer *",
-            "zipcode": "Postleitzahl *",
-            "city": "Stadt *",
-            "country": "Land *"
-          },
-          "hint": "* Pflichtfeld",
-          "buttons": {
-            "save": "Speichern"
-          }
-        }
-      }
-    },
+    "Form": {},
     "Input": {},
     "Loading": {
       "LoadingSuspense": {
@@ -207,16 +187,33 @@
     "Typography": {}
   },
   "components": {
-    "AddressForm": {
+    "Form": {
       "AddressForm": {
-        "title": "Adresse bearbeiten",
-        "street": "Straße",
-        "houseNumber": "Hausnummer",
-        "city": "Stadt",
-        "zipcode": "Postleitzahl",
-        "country": "Land",
-        "button": {
+        "header": "Adresse bearbeiten",
+        "labels": {
+          "firstName": "Vorname *",
+          "lastName": "Nachname *",
+          "company": "Firma",
+          "street": "Straße *",
+          "houseNumber": "Hausnummer *",
+          "zipcode": "Postleitzahl *",
+          "city": "Stadt *",
+          "country": "Land *"
+        },
+        "hint": "* Pflichtfeld",
+        "buttons": {
           "save": "Speichern"
+        }
+      },
+      "OrganizationForm": {
+        "title": "Organisationinformationen bearbeiten",
+        "name": "Organisationsname",
+        "taxID": "Steuernummer",
+        "email": "Email",
+        "address": "Addresse",
+        "supportedServices": "Services die Sie anbieten",
+        "button": {
+          "safe": "Speichern"
         }
       }
     },

@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
-import Container from "@component-library/Container";
-import { Heading, Text } from "@component-library/Typography";
+import { Container } from "@component-library/index";
+import { Heading, Text } from "@component-library/index";
 import { Button, LoadingAnimation } from "@component-library/index";
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -9,7 +9,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import useProcess from "../Projects/hooks/useProcess";
 import { useProject } from "../Projects/hooks/useProject";
 import { AppContext } from "../App/App";
-import ContentBox from "@component-library/ContentBox";
+import { ContentBox } from "@component-library/index";
 import { useForm } from "react-hook-form";
 import SendIcon from "@mui/icons-material/Send";
 import SemperKILogo from "@images/Logo-Semper.png";

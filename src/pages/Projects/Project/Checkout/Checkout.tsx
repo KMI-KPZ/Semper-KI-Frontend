@@ -1,9 +1,9 @@
-import Container from "@component-library/Container";
-import { Heading } from "@component-library/Typography";
+import { Container } from "@component-library/index";
+import { Heading } from "@component-library/index";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 import ProjectCheckoutItem from "./components/Item";

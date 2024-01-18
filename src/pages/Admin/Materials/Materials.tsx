@@ -1,5 +1,5 @@
 import { MaterialProps } from "@/pages/Service/Manufacturing/Material/Material";
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import {
   Paper,
   Table,

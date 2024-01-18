@@ -1,11 +1,11 @@
-import { Heading } from "@component-library/Typography";
+import { Heading } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import LoginIcon from "@mui/icons-material/Login";
 import HomeContainer from "./Container";
-import ContentBox from "@component-library/ContentBox";
+import { ContentBox } from "@component-library/index";
 import useLogin from "@/hooks/useLogin";
 
 interface HomeClientInfoProps {}

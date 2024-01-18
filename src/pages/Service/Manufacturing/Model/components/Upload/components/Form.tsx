@@ -1,12 +1,12 @@
-import Container from "@component-library/Container";
-import { Heading, Text } from "@component-library/Typography";
+import { Container } from "@component-library/index";
+import { Heading, Text } from "@component-library/index";
 import React, { useContext } from "react";
 import * as yup from "yup";
 import { useTranslation } from "react-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import logger from "@/hooks/useLogger";
-import { Button } from "@component-library/Button";
+import { Button } from "@component-library/index";
 import useManufacturingMutations from "../../../../../../../api/Service/Manufacturing/useManufacturingMutations";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
@@ -77,7 +77,7 @@ const ManufacturingModelUploadForm: React.FC<
   };
 
   return (
-    <form className="flex w-full flex-col gap-5 bg-white p-5 md:max-w-4xl">
+    <form className="flex h-full w-full flex-col items-start gap-5 overflow-auto bg-white p-5 md:max-w-4xl">
       <Heading variant="h1" className="px-10">
         {t("Service.Manufacturing.Model.Upload.components.Form.title")}
       </Heading>

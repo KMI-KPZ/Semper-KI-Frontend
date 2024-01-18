@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { ProcessMaterialCard } from "./components/Card";
 import { ServiceManufacturingState } from "../types/types";
 import { useTranslation } from "react-i18next";
-import { LoadingSuspense } from "@component-library/Loading";
+import { LoadingSuspense } from "@component-library/index";
 import { ProcessMaterialPreView } from "./components/PreView";
 import { ProcessMaterialItem } from "./components/Item";
 import { FilterItemProps } from "../Filter/Filter";
-import Modal from "@component-library/Modal";
+import { Modal } from "@component-library/index";
 import { useManufacturingMaterialQuerys } from "../../../../api/Service/Manufacturing/useManufacturingQuerys";
 
 interface Props {

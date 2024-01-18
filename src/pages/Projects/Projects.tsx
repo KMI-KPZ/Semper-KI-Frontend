@@ -1,21 +1,20 @@
-import { Button } from "@component-library/Button";
-import { Heading, Text } from "@component-library/Typography";
+import { Button, Search } from "@component-library/index";
+import { Heading, Text } from "@component-library/index";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { LoadingSuspense } from "@component-library/Loading";
+import { LoadingSuspense } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 import { useProject } from "./hooks/useProject";
 import DeleteIcon from "@mui/icons-material/Delete";
 import logger from "@/hooks/useLogger";
-import Container from "@component-library/Container";
+import { Container } from "@component-library/index";
 import useFlatProjectQuerys, {
   FlatProjectProps,
 } from "@/api/Project/useFlatProjectQuerys";
 import useAdminQuerys from "@/api/Admin/useAdminQuerys";
 import ProjectsCards from "./components/Cards";
 import useSearch from "@/hooks/useSearch";
-import Search from "@component-library/Search";
 
 interface ProjectsProps {}
 

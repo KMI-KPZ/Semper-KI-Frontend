@@ -1,5 +1,5 @@
-import { Button } from "@component-library/Button";
-import { Text } from "@component-library/Typography";
+import { Button } from "@component-library/index";
+import { Text } from "@component-library/index";
 import { toast as toastify_toast } from "react-toastify";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 

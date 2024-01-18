@@ -13,7 +13,7 @@ import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import { UserType } from "@/hooks/useUser";
 import { NavigationItemPreferredType } from "@/components/Header";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import { DataNaviagtionTranlationType } from "@/components/Breadcrumb";
+import { DataNaviagtionTranlationType } from "@/components";
 
 export type INavigationItem = {
   title: DataNaviagtionTranlationType;

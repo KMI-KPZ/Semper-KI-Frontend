@@ -77,7 +77,7 @@ const ManufacturingModelUploadForm: React.FC<
   };
 
   return (
-    <form className="flex w-full flex-col gap-5 bg-white p-5 md:max-w-4xl">
+    <form className="flex h-full w-full flex-col items-start gap-5 overflow-auto bg-white p-5 md:max-w-4xl">
       <Heading variant="h1" className="px-10">
         {t("Service.Manufacturing.Model.Upload.components.Form.title")}
       </Heading>

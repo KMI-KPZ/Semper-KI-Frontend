@@ -79,7 +79,7 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
       }}
     >
       <LoadingSuspense query={filtersQuery}>
-        <div className="relativ flex h-full w-full flex-col gap-5 xl:flex-row">
+        <div className="relativ flex h-full w-full flex-col gap-5 overflow-auto xl:flex-row">
           <ProcessFilter
             setFilterOpen={setFilter}
             filterOpen={filterOpen}

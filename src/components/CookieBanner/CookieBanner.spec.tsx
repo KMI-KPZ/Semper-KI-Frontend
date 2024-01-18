@@ -2,6 +2,13 @@ import React from "react";
 import { render, fireEvent } from "@test/render";
 import CookieBanner from "./CookieBanner";
 
+const mockedUsedNavigate = jest.fn();
+
+jest.mock("react-router-dom", () => ({
+  ...(jest.requireActual("react-router-dom") as any),
+  useNavigate: () => mockedUsedNavigate,
+}));
+
 describe.skip("CookieBanner", () => {
   it("renders correctly", () => {
     const acceptCookies = jest.fn();

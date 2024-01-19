@@ -31,6 +31,7 @@ import useGeneralProcess from "../../hooks/useGeneralProcess";
 import logger from "@/hooks/useLogger";
 import useEvents from "@/hooks/useEvents/useEvents";
 import AddressForm from "@/components/Form/AddressForm";
+import ProcessAddress from "./components/Address";
 
 interface Props {
   process: ProcessProps;
@@ -158,6 +159,9 @@ const Process: React.FC<Props> = (props) => {
         serviceType={process.serviceType}
       />
       <ProcessStatusButtons process={process} />
+      {process.processDetails.clientAddress !== undefined ? (
+        <ProcessAddress address={process.processDetails.clientAddress} />
+      ) : null}
       <ProcessServicePreview process={process} />
       <PermissionGate element="ProjectFile">
         <ProjectFile process={process} projectID={projectID} />

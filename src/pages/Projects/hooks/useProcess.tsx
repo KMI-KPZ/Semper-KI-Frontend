@@ -16,6 +16,7 @@ import {
 } from "@/api/Process/useProcessMutations";
 import useGeneralProcess from "./useGeneralProcess";
 import { useNavigate } from "react-router-dom";
+import { UserAddressProps } from "@/hooks/useUser";
 
 interface ReturnProps {
   process: ProcessProps;
@@ -41,6 +42,7 @@ interface ReturnProps {
 export interface ProcessDetailsProps {
   provisionalContractor?: string;
   title?: string;
+  clientAddress?: UserAddressProps;
 }
 
 export type ProcessProps =

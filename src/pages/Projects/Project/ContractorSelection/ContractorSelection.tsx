@@ -24,6 +24,7 @@ import logger from "@/hooks/useLogger";
 import AddressForm from "@/components/Form/AddressForm";
 import { Modal } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
+import { UserAddressProps } from "@/hooks/useUser";
 
 interface Props {}
 
@@ -42,6 +43,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   const { isServiceComplete } = useService();
   const { user } = useAuthorizedUser();
   const [edit, setEdit] = useState(false);
+  const [address, setAddress] = useState(user.details.address);
 
   const { updateProcess } = useGeneralProcess();
 
@@ -79,11 +81,23 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
             changes: {
               processStatus: ProcessStatus.CONTRACTOR_SELECTED,
               provisionalContractor: process.contractorID,
+              processDetails: {
+                clientAddress: address,
+              },
             },
           },
         });
       });
     navigate("..");
+  };
+
+  const handelOnButtonClickReset = () => {
+    setAddress(user.details.address);
+  };
+
+  const handleOnSubmitAddressForm = (data: UserAddressProps) => {
+    logger("handleOnSubmitAddressForm", data);
+    setAddress(data);
   };
 
   return (
@@ -104,16 +118,26 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
                 "Projects.Project.ContractorSelection.ContractorSelection.address.title"
               )}
             </Heading>
-            <Button
-              onClick={() => {
-                setEdit(true);
-              }}
-              size="sm"
-              variant="secondary"
-              title={t(
-                "Projects.Project.ContractorSelection.ContractorSelection.address.button.edit"
-              )}
-            />
+            <Container direction="auto">
+              <Button
+                onClick={handelOnButtonClickReset}
+                size="sm"
+                variant="secondary"
+                title={t(
+                  "Projects.Project.ContractorSelection.ContractorSelection.address.button.reset"
+                )}
+              />
+              <Button
+                onClick={() => {
+                  setEdit(true);
+                }}
+                size="sm"
+                variant="secondary"
+                title={t(
+                  "Projects.Project.ContractorSelection.ContractorSelection.address.button.edit"
+                )}
+              />
+            </Container>
           </Container>
           <div className="w-full border-t-2" />
           <Container direction="row" justify="start" className="flex-wrap">
@@ -124,11 +148,9 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
               :
             </Text>
             <Text>
-              {user.details.address === undefined
+              {address === undefined
                 ? "---"
-                : user.details.address.firstName +
-                  " " +
-                  user.details.address.lastName}
+                : address.firstName + " " + address.lastName}
             </Text>
           </Container>
           <Container direction="row" justify="start" className="flex-wrap">
@@ -139,11 +161,10 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
               :
             </Text>
             <Text>
-              {user.details.address === undefined
+              {address === undefined
                 ? "---"
-                : user.details.address.company !== undefined &&
-                  user.details.address.company !== ""
-                ? user.details.address.company
+                : address.company !== undefined && address.company !== ""
+                ? address.company
                 : "  ---"}
             </Text>
           </Container>
@@ -155,17 +176,17 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
               :
             </Text>
             <Text>
-              {user.details.address === undefined
+              {address === undefined
                 ? "---"
-                : user.details.address.street +
+                : address.street +
                   " " +
-                  user.details.address.houseNumber +
+                  address.houseNumber +
                   ", " +
-                  user.details.address.zipcode +
+                  address.zipcode +
                   " ," +
-                  user.details.address.city +
+                  address.city +
                   " ," +
-                  user.details.address.country}
+                  address.country}
             </Text>
           </Container>
         </div>
@@ -211,12 +232,14 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
       </form>
       <Modal
         title="ProjectInfo"
-        open={edit || user.details.address === undefined}
+        open={edit || address === undefined}
         closeModal={() => {
           setEdit(false);
         }}
       >
         <AddressForm
+          initialAddress={address}
+          customSubmit={handleOnSubmitAddressForm}
           closeModal={() => {
             setEdit(false);
           }}

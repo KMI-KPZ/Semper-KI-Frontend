@@ -122,6 +122,7 @@ const Home: React.FC<HomeProps> = (props) => {
             <Button
               startIcon={<AutoAwesomeIcon fontSize="large" />}
               title={t("Home.components.OrgaInfo.advantage")}
+              to="advantages/organization"
               width="full"
             />
             <Button
@@ -148,6 +149,7 @@ const Home: React.FC<HomeProps> = (props) => {
               startIcon={<AutoAwesomeIcon fontSize="large" />}
               title={t("Home.components.ClientInfo.advantage")}
               width="full"
+              to="advantages/user"
             />
             <Button
               onClick={handleOnClickButton}

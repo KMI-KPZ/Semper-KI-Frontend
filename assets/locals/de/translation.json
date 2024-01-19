@@ -389,6 +389,32 @@
       }
     }
   },
+  "Advantages": {
+    "components": {
+      "User": {
+        "heading": "Vorteile für Einzelpersonen",
+        "text": "Unser Ziel ist, 3D-Druck zugänglicher zu machen. Dafür setzen wir auf Technologien Künstlicher Intelligenz. Sie sind speziell für die Additive Fertigung entwickelt. In unser Wissensnetz speisen wir verfügbare Informationen über 3D-Druck-Prozesse, Materialien und Akteure am Markt ein.",
+        "subHeading": "Optimiertes Matching",
+        "fact1": "Einfaches Onboarding u.a. unterstützt durch einen Chatbot",
+        "fact2": "Zielorientierte, automatisierte Bedarfserfassung",
+        "fact3": "Freie Gewichtung von Produktqualität, Zeit, Kosten, Regionalität",
+        "fact4": "Keine 3D-Druck-Expertise notwendig",
+        "fact5": "Verschiedene Prüf-Services",
+        "fact6": "Zertifizierte Hersteller und Dienstleister"
+      },
+      "Organization": {
+        "heading": "Vorteile für Organisationen",
+        "text": "Unser Ziel ist, 3D-Druck zugänglicher zu machen. Dafür setzen wir auf Technologien Künstlicher Intelligenz. Sie sind speziell für die Additive Fertigung entwickelt. In unser Wissensnetz speisen wir verfügbare Informationen über 3D-Druck-Prozesse, Materialien und Akteure am Markt ein.",
+        "subHeading": "Sie bestimmen die Parameter",
+        "subHeading2": "Die Semper-KI ermittelt das bestmögliche Matching.",
+        "fact1": "Selbst erstellte Kostenfunktion",
+        "fact2": "KI-gestützte Infrastruktur für alle Schritte der Beauftragung",
+        "fact3": "Automatisierte Prüf-Services",
+        "fact4": "Automatisierte Vorauswahl von relevanten Kunden und Aufträgen"
+      }
+    },
+    "Advantages": {}
+  },
   "App": {
     "components": {
       "LoadingSuspense": {
@@ -923,7 +949,8 @@
             "company": "Firma",
             "address": "Addresse",
             "button": {
-              "edit": "Bearbeiten"
+              "edit": "Bearbeiten",
+              "reset": "Auf Standard-Adresse zurücksetzen"
             }
           },
           "contractor": "Auftagnehmer",
@@ -983,6 +1010,16 @@
               "cancel": "Projekt wirklich stonieren?",
               "reProject": "Projekt wirklich erneut Bestellen?",
               "reject": "Projekt wirklich Ablehnen?"
+            }
+          },
+          "Address": {
+            "title": "Adresse",
+            "name": "Name",
+            "company": "Firma",
+            "address": "Addresse",
+            "button": {
+              "edit": "Bearbeiten",
+              "reset": "Auf Standard-Adresse zurücksetzen"
             }
           },
           "Chat": {

@@ -1,7 +1,7 @@
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
 import { ManufacturingServiceProps } from "@/pages/Service/Manufacturing/types/types";
-import { Button } from "@component-library/index";
+import { Button, LoadingAnimation } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { Modal } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
@@ -24,6 +24,7 @@ const ProcessServiceManufacturing: React.FC<
   const { process } = props;
   const { t } = useTranslation();
   const [open, setOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const { downloadFile } = useGeneralProcess();
   const [fileUrl, setFileUrl] = useState<string>("");
 
@@ -34,6 +35,7 @@ const ProcessServiceManufacturing: React.FC<
 
   const handleOnClickButtonOpen = () => {
     setOpen(true);
+    setLoading(true);
     if (
       process.serviceDetails.model !== undefined &&
       process.files.length > 0 &&
@@ -52,6 +54,7 @@ const ProcessServiceManufacturing: React.FC<
           onSuccess(data) {
             const url = window.URL.createObjectURL(data);
             setFileUrl(url);
+            setLoading(false);
           },
         }
       );
@@ -115,7 +118,9 @@ const ProcessServiceManufacturing: React.FC<
         closeModal={closeModal}
         className="h-full max-w-7xl bg-white"
       >
-        {fileUrl !== "" ? (
+        {loading ? (
+          <LoadingAnimation />
+        ) : fileUrl !== "" ? (
           <ModelPreview file={fileUrl} />
         ) : (
           <div className="p-20">

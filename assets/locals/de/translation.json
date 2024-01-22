@@ -973,7 +973,7 @@
         "useScrollToProcess": {},
         "useStatusButtons": {
           "SELECT_SERVICE": "Service auswählen",
-          "EDIT": "Service bearbeiten",
+          "EDIT": "Service vervollständigen",
           "DELETE": "Löschen",
           "CONTRACTOR_SELECTED": "Auftragnehmer auswählen",
           "VERIFYING": "Überprüfen",
@@ -1047,7 +1047,7 @@
             }
           },
           "StatusButtons": {
-            "service": "Service bearbeiten",
+            "service": "Service vervollständigen",
             "selectContractor": "Auftragnehmer auswählen",
             "verify": "Überprüfen",
             "request": "Anfragen",

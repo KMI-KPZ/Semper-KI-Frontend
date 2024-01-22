@@ -73,7 +73,12 @@ const useGeneralProcess = (): useGeneralProcessReturnProps => {
   };
 
   const getNavigationPrefix = (currentProcessID: string) => {
-    return processID === undefined ? `${currentProcessID}/` : "";
+    const paramProcessIDAvaliable = processID !== undefined;
+    const atCurrentProcessID =
+      paramProcessIDAvaliable && processID === currentProcessID;
+    return `${atCurrentProcessID ? "" : `..`}${
+      paramProcessIDAvaliable ? "" : ""
+    }`;
   };
 
   return {

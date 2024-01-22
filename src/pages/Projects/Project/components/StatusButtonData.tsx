@@ -39,6 +39,7 @@ export interface StatusButtonProps {
   title: StatusButtonTitleType;
   icon: ReactNode;
   user: UserType;
+  priority: "primary" | "secondary";
   allowedStates: ProcessStatus[];
 }
 
@@ -48,17 +49,19 @@ export const statusButtonData: StatusButtonProps[] = [
     icon: <DesignServicesIcon />,
     user: UserType.ADMIN,
     allowedStates: [ProcessStatus.DRAFT],
+    priority: "primary",
   },
-  {
-    title: "EDIT",
-    icon: <EditIcon />,
-    user: UserType.USER,
-    allowedStates: [
-      ProcessStatus.SERVICE_IN_PROGRESS,
-      ProcessStatus.SERVICE_READY,
-      ProcessStatus.SERVICE_COMPLICATION,
-    ],
-  },
+  // {
+  //   title: "EDIT",
+  //   icon: <EditIcon />,
+  //   user: UserType.USER,
+  //   allowedStates: [
+  //     ProcessStatus.SERVICE_IN_PROGRESS,
+  //     ProcessStatus.SERVICE_READY,
+  //     ProcessStatus.SERVICE_COMPLICATION,
+  //   ],
+  //   priority: "primary",
+  // },
   {
     title: "DELETE",
     icon: <DeleteIcon />,
@@ -72,83 +75,97 @@ export const statusButtonData: StatusButtonProps[] = [
       ProcessStatus.VERIFYING,
       ProcessStatus.VERIFIED,
     ],
+    priority: "primary",
   },
   {
     title: "CONTRACTOR_SELECTED",
     icon: <FactoryIcon />,
     user: UserType.USER,
     allowedStates: [ProcessStatus.SERVICE_READY],
+    priority: "primary",
   },
   {
     title: "VERIFYING",
     icon: <TroubleshootIcon />,
     user: UserType.USER,
     allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
+    priority: "secondary",
   },
   {
     title: "VERIFYING_AND_REQUESTED",
     icon: <ScheduleSendIcon />,
     user: UserType.USER,
     allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
+    priority: "primary",
   },
   {
     title: "REQUESTED",
     icon: <MailIcon />,
     user: UserType.USER,
     allowedStates: [ProcessStatus.VERIFIED],
+    priority: "primary",
   },
   {
     title: "CLARIFICATION",
     icon: <QuestionAnswerIcon />,
     user: UserType.ORGANIZATION,
     allowedStates: [ProcessStatus.REQUESTED],
+    priority: "secondary",
   },
   {
     title: "CONFIRMED_BY_CONTRACTOR",
     icon: <DescriptionIcon />,
     user: UserType.ORGANIZATION,
     allowedStates: [ProcessStatus.REQUESTED, ProcessStatus.CLARIFICATION],
+    priority: "primary",
   },
   {
     title: "REJECTED_BY_CONTRACTOR",
     icon: <CancelIcon />,
     user: UserType.ORGANIZATION,
     allowedStates: [ProcessStatus.REQUESTED, ProcessStatus.CLARIFICATION],
+    priority: "secondary",
   },
   {
     title: "CONFIRMED_BY_CLIENT",
     icon: <DoneAllIcon />,
     user: UserType.USER,
     allowedStates: [ProcessStatus.CONFIRMED_BY_CONTRACTOR],
+    priority: "primary",
   },
   {
     title: "REJECTED_BY_CLIENT",
     icon: <CancelIcon />,
     user: UserType.USER,
     allowedStates: [ProcessStatus.CONFIRMED_BY_CONTRACTOR],
+    priority: "secondary",
   },
   {
     title: "PRODUCTION",
     icon: <FactoryIcon />,
     user: UserType.ORGANIZATION,
     allowedStates: [ProcessStatus.CONFIRMED_BY_CLIENT],
+    priority: "primary",
   },
   {
     title: "DELIVERY",
     icon: <LocalShippingIcon />,
     user: UserType.ORGANIZATION,
     allowedStates: [ProcessStatus.PRODUCTION],
+    priority: "primary",
   },
   {
     title: "COMPLETED",
     icon: <TaskIcon />,
     user: UserType.USER,
     allowedStates: [ProcessStatus.DELIVERY],
+    priority: "primary",
   },
   {
     title: "REPROJECT",
     icon: <ReplayIcon />,
     user: UserType.USER,
     allowedStates: [ProcessStatus.COMPLETED],
+    priority: "primary",
   },
 ];

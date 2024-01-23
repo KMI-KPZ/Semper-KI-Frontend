@@ -13,6 +13,7 @@ import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import useService from "../../hooks/useService";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import { useManufacturingPostProcessingQuerys } from "@/api/Service/Manufacturing/useManufacturingQuerys";
+import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
 
 interface Props {
   processState: ServiceManufacturingState;
@@ -42,6 +43,7 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
   const { grid, searchText } = processState;
   const { postProcessingQuery } = useManufacturingPostProcessingQuerys(filters);
   const { updatedService } = useService();
+  const { process } = useProcess();
 
   const checkPostProcessing = (postProcessing: PostProcessingProps) => {
     let newPostProcessings: PostProcessingProps[] = [];
@@ -88,7 +90,7 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
     return hydratedPostProcessings;
   };
 
-  return (
+  return isProcessAtServiceStatus(process) ? (
     <LoadingSuspense query={postProcessingQuery}>
       {postProcessingQuery.data !== undefined ? (
         <div className="flex max-h-[60vh] flex-col gap-y-5 overflow-x-auto overflow-y-scroll">
@@ -108,5 +110,18 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
         )
       )}
     </LoadingSuspense>
+  ) : postProcessings !== undefined ? (
+    <div className="flex max-h-[60vh] flex-col gap-y-5 overflow-x-auto overflow-y-scroll">
+      <ProcessPostProcessCatalog
+        grid={grid}
+        searchText={searchText}
+        items={postProcessings}
+        checkItem={checkPostProcessing}
+      />
+    </div>
+  ) : (
+    t(
+      "Service.Manufacturing.PostProcessing.PostProcessing.error.noPostProcessingsSelected"
+    )
   );
 };

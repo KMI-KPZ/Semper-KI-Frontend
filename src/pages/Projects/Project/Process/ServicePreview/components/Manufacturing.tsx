@@ -95,14 +95,13 @@ const ProcessServiceManufacturing: React.FC<
   return (
     <Container
       direction="auto"
-      align="start"
       justify="around"
-      className=""
+      className="flex-wrap items-center md:items-start"
       width="full"
     >
-      <Container direction="col">
+      <Container direction="col" className="w-full md:w-fit">
         <Card
-          className={`flex-row ${
+          className={`w-full flex-row flex-wrap md:w-fit ${
             process.serviceDetails.model === undefined
               ? "border-yellow-500"
               : "border-green-500"
@@ -116,7 +115,9 @@ const ProcessServiceManufacturing: React.FC<
           </Text>
           <Text variant="body">
             {process.serviceDetails.model === undefined
-              ? "---"
+              ? t(
+                  "Projects.Project.Process.ServicePreview.components.Manufacturing.notSelected"
+                )
               : process.serviceDetails.model.fileName}
           </Text>
         </Card>
@@ -133,7 +134,7 @@ const ProcessServiceManufacturing: React.FC<
         ) : null}
       </Container>
       <Card
-        className={`flex-row ${
+        className={`w-full flex-row flex-wrap md:w-fit ${
           process.serviceDetails.material === undefined
             ? "border-yellow-500"
             : "border-green-500"
@@ -147,12 +148,14 @@ const ProcessServiceManufacturing: React.FC<
         </Text>
         <Text variant="body">
           {process.serviceDetails.material === undefined
-            ? "---"
+            ? t(
+                "Projects.Project.Process.ServicePreview.components.Manufacturing.notSelected"
+              )
             : process.serviceDetails.material.title}
         </Text>
       </Card>
       <Card
-        className="flex-row border-green-500"
+        className="w-full flex-row flex-wrap border-green-500 md:w-fit"
         onClick={(e) => handleOnClickCard(e, "postprocessing")}
       >
         <Text variant="body">
@@ -162,7 +165,9 @@ const ProcessServiceManufacturing: React.FC<
         </Text>
         <Text variant="body">
           {process.serviceDetails.postProcessings === undefined
-            ? "---"
+            ? t(
+                "Projects.Project.Process.ServicePreview.components.Manufacturing.notSelected"
+              )
             : process.serviceDetails.postProcessings.map(
                 (postProcessing: PostProcessingProps) => postProcessing.title
               )}

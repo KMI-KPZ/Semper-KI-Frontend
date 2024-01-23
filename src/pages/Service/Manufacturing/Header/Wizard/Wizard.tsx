@@ -72,7 +72,7 @@ export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
         title={t("Service.Manufacturing.Header.Wizard.Wizard.postprocessing")}
         active={location.pathname.includes("postprocessing")}
         to="postprocessing"
-        completed={service.postProcessings !== undefined}
+        completed={true}
         icon={<BrushIcon />}
       />
 

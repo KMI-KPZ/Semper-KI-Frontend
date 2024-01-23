@@ -5,6 +5,7 @@ import { getModelURI } from "@/services/utils";
 import { ModelProps } from "../types";
 import { Heading } from "@component-library/index";
 import useProcess from "@/pages/Projects/hooks/useProcess";
+import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
 
 interface Props {
   model: ModelProps;
@@ -13,7 +14,7 @@ interface Props {
 const ProcessModelItem: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { model } = props;
-  const { updateProcess } = useProcess();
+  const { process, updateProcess } = useProcess();
 
   const getDate = (): string => {
     let date: Date = new Date(model.date);
@@ -61,10 +62,12 @@ const ProcessModelItem: React.FC<Props> = (props) => {
               "Service.Manufacturing.Model.components.Item.error.noCertificates"
             )}
       </div>
-      <Button
-        onClick={handleOnClickButtonDeselect}
-        title={t("Service.Manufacturing.Model.components.Item.button.change")}
-      />
+      {isProcessAtServiceStatus(process) ? (
+        <Button
+          onClick={handleOnClickButtonDeselect}
+          title={t("Service.Manufacturing.Model.components.Item.button.change")}
+        />
+      ) : null}
     </div>
   );
 };

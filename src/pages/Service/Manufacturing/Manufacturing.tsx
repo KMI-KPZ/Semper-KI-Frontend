@@ -18,6 +18,8 @@ import {
 import { Error } from "@/pages/Error/Error";
 import { ServiceContext } from "../context/ServiceContext";
 import useFilter from "@/hooks/useFilter";
+import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
+import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
 
 interface Props {}
 
@@ -46,12 +48,12 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { serviceDetails: service_ } = useContext(ServiceContext);
   const service = service_ as ManufacturingServiceProps;
-  const navigate = useNavigate();
   const [state, setState] = useState<ServiceManufacturingState>(
     initialServiceManufacturingState
   );
   const { grid, filterOpen, searchText } = state;
   const { filtersQuery, updateFilterMutation } = useFilter();
+  const { process } = useProcess();
 
   const setSearchInput = (name: string): void => {
     // logger("Process | searchModels |", name);
@@ -80,12 +82,14 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
     >
       <LoadingSuspense query={filtersQuery}>
         <div className="relativ flex h-full w-full flex-col gap-5 overflow-auto xl:flex-row">
-          <ProcessFilter
-            setFilterOpen={setFilter}
-            filterOpen={filterOpen}
-            filters={filtersQuery.data}
-            applyFilters={applyFilters}
-          />
+          {isProcessAtServiceStatus(process) ? (
+            <ProcessFilter
+              setFilterOpen={setFilter}
+              filterOpen={filterOpen}
+              filters={filtersQuery.data}
+              applyFilters={applyFilters}
+            />
+          ) : null}
           <div className="flex w-full flex-col gap-5">
             <ProcessHeader />
             <Routes>

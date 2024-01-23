@@ -11,6 +11,7 @@ import { ProcessProps, ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import logger from "@/hooks/useLogger";
 import useServiceQuerys from "@/api/Service/useServiceQuerys";
 import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
+import Card from "@component-library/Card/Card";
 
 interface ProcessServiceSelectProps {
   process: ProcessProps;
@@ -54,16 +55,7 @@ const ProcessServiceSelect: React.FC<ProcessServiceSelectProps> = (props) => {
     return (
       <Container width="full" className="flex-wrap">
         {servicesQuery.data.map((service, index) => (
-          <a
-            key={index}
-            href="#"
-            onClick={(e) => handleOnClickCard(e, service.identifier)}
-            className="
-            flex flex-col items-center justify-center gap-5 rounded-xl 
-             border-2  border-blau-button p-5 shadow-card duration-300
-            hover:cursor-pointer hover:shadow-button-inner-primary focus:shadow-button-inner-primary
-            "
-          >
+          <Card onClick={(e) => handleOnClickCard(e, service.identifier)}>
             {getIcon(service.identifier)}
             <Text>
               {t(
@@ -72,7 +64,7 @@ const ProcessServiceSelect: React.FC<ProcessServiceSelectProps> = (props) => {
                 }`
               )}
             </Text>
-          </a>
+          </Card>
         ))}
       </Container>
     );

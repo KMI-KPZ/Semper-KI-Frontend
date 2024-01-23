@@ -5,7 +5,11 @@ import useProcessMutations, {
   UpdateProcessMutationProps,
   UploadFilesMutationProps,
 } from "@/api/Process/useProcessMutations";
-import { DownloadFilesZIPProps } from "./useProcess";
+import {
+  DownloadFilesZIPProps,
+  ProcessProps,
+  ProcessStatus,
+} from "./useProcess";
 import { MutateOptions } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -28,6 +32,13 @@ interface useGeneralProcessReturnProps {
   ) => void;
   getNavigationPrefix: (currentProcessID: string) => string;
 }
+
+export const isProcessAtServiceStatus = (process: ProcessProps): boolean => {
+  return (
+    process.processStatus >= ProcessStatus.SERVICE_READY &&
+    process.processStatus <= ProcessStatus.SERVICE_COMPLICATION
+  );
+};
 
 const useGeneralProcess = (): useGeneralProcessReturnProps => {
   const {
@@ -73,7 +84,12 @@ const useGeneralProcess = (): useGeneralProcessReturnProps => {
   };
 
   const getNavigationPrefix = (currentProcessID: string) => {
-    return processID === undefined ? `${currentProcessID}/` : "";
+    const paramProcessIDAvaliable = processID !== undefined;
+    const processIDsAreEqual = processID === currentProcessID;
+
+    if (processIDsAreEqual) return "";
+    if (!paramProcessIDAvaliable) return `${currentProcessID}/`;
+    return `../${currentProcessID}/`;
   };
 
   return {

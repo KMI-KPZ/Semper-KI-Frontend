@@ -31,6 +31,7 @@ import { ContentBox } from "@component-library/index";
 import RedirectLogin from "../Login/RedirectLogin";
 import Menu from "@/components/Menu";
 import { Background } from "@/components/index";
+import Advantages from "../Advantages/Advantages";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -74,6 +75,22 @@ const App: React.FC = () => {
           {/* <Breadcrumb /> */}
           <Routes data-testid="routes">
             <Route index element={<Home />} />
+            <Route
+              path="advantages/user"
+              element={
+                <ContentBox>
+                  <Advantages type="user" />
+                </ContentBox>
+              }
+            />
+            <Route
+              path="advantages/organization"
+              element={
+                <ContentBox>
+                  <Advantages type="organization" />
+                </ContentBox>
+              }
+            />
             <Route
               path="registerOrganization"
               element={

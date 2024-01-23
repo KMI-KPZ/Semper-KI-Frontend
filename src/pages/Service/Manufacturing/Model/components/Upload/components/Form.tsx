@@ -141,6 +141,7 @@ const ManufacturingModelUploadForm: React.FC<
           />
         </div>
         <Button
+        loading={uploadModel.isLoading}
           variant="primary"
           title={t(
             `Service.Manufacturing.Model.Upload.components.Form.button.send`

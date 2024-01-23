@@ -4,6 +4,7 @@ import { Button } from "@component-library/index";
 import { MaterialProps } from "../Material";
 import { Heading } from "@component-library/index";
 import useProcess from "@/pages/Projects/hooks/useProcess";
+import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
 
 interface Props {
   material: MaterialProps;
@@ -12,7 +13,7 @@ interface Props {
 export const ProcessMaterialItem: React.FC<Props> = (props) => {
   const { material } = props;
   const { t } = useTranslation();
-  const { updateProcess } = useProcess();
+  const { process, updateProcess } = useProcess();
 
   const handleOnClickButtonDeselect = () => {
     updateProcess({ deletions: { serviceDetails: ["material"] } });
@@ -29,12 +30,14 @@ export const ProcessMaterialItem: React.FC<Props> = (props) => {
           </div>
         ))}
       </div>
-      <Button
-        onClick={handleOnClickButtonDeselect}
-        title={t(
-          "Service.Manufacturing.Material.components.Item.button.change"
-        )}
-      />
+      {isProcessAtServiceStatus(process) ? (
+        <Button
+          onClick={handleOnClickButtonDeselect}
+          title={t(
+            "Service.Manufacturing.Material.components.Item.button.change"
+          )}
+        />
+      ) : null}
     </div>
   );
 };

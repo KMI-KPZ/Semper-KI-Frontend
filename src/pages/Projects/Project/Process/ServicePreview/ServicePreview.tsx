@@ -31,7 +31,7 @@ const ProcessServicePreview: React.FC<ProcessServicePreviewProps> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center pt-5 md:p-0">
+    <div className="flex w-full flex-col items-center justify-center gap-5 pt-5 md:p-0">
       <div className="flex w-full flex-col items-start gap-3 md:flex-row md:items-center">
         <Heading variant="h3" className="whitespace-nowrap">
           {t("Projects.Project.Process.ServicePreview.ServicePreview.title")}{" "}

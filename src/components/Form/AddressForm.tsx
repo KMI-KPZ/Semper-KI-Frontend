@@ -11,10 +11,12 @@ import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 
 interface AddressFormProps {
   closeModal?(): void;
+  initialAddress?: UserAddressProps;
+  customSubmit?(data: UserAddressProps): void;
 }
 
 const AddressForm: React.FC<AddressFormProps> = (props) => {
-  const { closeModal } = props;
+  const { closeModal, customSubmit, initialAddress } = props;
   const { t } = useTranslation();
   const { user, updateUserDetails } = useAuthorizedUser();
 
@@ -38,11 +40,16 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
     formState: { errors },
   } = useForm<UserAddressProps>({
     resolver: yupResolver(schema),
-    defaultValues: user.details.address,
+    defaultValues:
+      initialAddress !== undefined ? initialAddress : user.details.address,
   });
 
   const onSubmit = (data: UserAddressProps) => {
-    updateUserDetails({ address: data });
+    if (customSubmit !== undefined) {
+      customSubmit(data);
+    } else {
+      updateUserDetails({ address: data });
+    }
     closeModal !== undefined ? closeModal() : null;
   };
 

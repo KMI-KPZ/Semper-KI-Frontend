@@ -153,7 +153,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
           h-fit flex-wrap
           items-center justify-center 
           gap-3 break-words 
-          rounded-lg text-center
+          rounded-lg text-center    
           transition duration-200 
           md:flex-nowrap md:whitespace-nowrap
          `,

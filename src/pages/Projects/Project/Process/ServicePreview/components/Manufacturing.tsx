@@ -1,7 +1,7 @@
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
 import { ManufacturingServiceProps } from "@/pages/Service/Manufacturing/types/types";
-import { Button } from "@component-library/index";
+import { Button, LoadingAnimation } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { Modal } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
@@ -13,6 +13,8 @@ import useProcess, {
   ProcessProps,
 } from "@/pages/Projects/hooks/useProcess";
 import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
+import Card from "@component-library/Card/Card";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface ProcessServiceManufacturingProps {
   process: ManufactoringProcessProps;
@@ -23,8 +25,10 @@ const ProcessServiceManufacturing: React.FC<
 > = (props) => {
   const { process } = props;
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [open, setOpen] = useState<boolean>(false);
-  const { downloadFile } = useGeneralProcess();
+  const [loading, setLoading] = useState<boolean>(false);
+  const { downloadFile, getNavigationPrefix } = useGeneralProcess();
   const [fileUrl, setFileUrl] = useState<string>("");
 
   const closeModal = () => {
@@ -34,6 +38,7 @@ const ProcessServiceManufacturing: React.FC<
 
   const handleOnClickButtonOpen = () => {
     setOpen(true);
+    setLoading(true);
     if (
       process.serviceDetails.model !== undefined &&
       process.files.length > 0 &&
@@ -52,38 +57,90 @@ const ProcessServiceManufacturing: React.FC<
           onSuccess(data) {
             const url = window.URL.createObjectURL(data);
             setFileUrl(url);
+            setLoading(false);
           },
         }
       );
     }
   };
 
+  const handleOnClickCard = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    card: "model" | "material" | "postprocessing"
+  ) => {
+    e.preventDefault();
+    switch (card) {
+      case "model":
+        navigate(
+          `${getNavigationPrefix(process.processID)}service/manufacturing/model`
+        );
+        break;
+      case "material":
+        navigate(
+          `${getNavigationPrefix(
+            process.processID
+          )}service/manufacturing/material`
+        );
+        break;
+      case "postprocessing":
+        navigate(
+          `${getNavigationPrefix(
+            process.processID
+          )}service/manufacturing/postprocessing`
+        );
+        break;
+    }
+  };
+
   return (
-    <Container direction="col" align="start" className="p-5">
-      {process.serviceDetails.model !== undefined ? (
-        <PermissionGate element={"ProcessButtonModelPreView"}>
-          <Button
-            size="sm"
-            onClick={handleOnClickButtonOpen}
-            title={t(
-              "Projects.Project.Process.ServicePreview.components.Manufacturing.buttons.modelPreView"
+    <Container
+      direction="auto"
+      justify="around"
+      className="flex-wrap items-center md:items-start"
+      width="full"
+    >
+      <Container direction="col" className="w-full md:w-fit">
+        <Card
+          className={`w-full flex-row flex-wrap md:w-fit ${
+            process.serviceDetails.model === undefined
+              ? "border-yellow-500"
+              : "border-green-500"
+          }`}
+          onClick={(e) => handleOnClickCard(e, "model")}
+        >
+          <Text variant="body">
+            {t(
+              "Projects.Project.Process.ServicePreview.components.Manufacturing.model"
             )}
-          />
-        </PermissionGate>
-      ) : null}
-      <Container>
-        <Text variant="body">
-          {t(
-            "Projects.Project.Process.ServicePreview.components.Manufacturing.model"
-          )}
-        </Text>
-        <Text variant="body">
-          {process.serviceDetails.model === undefined
-            ? "---"
-            : process.serviceDetails.model.fileName}
-        </Text>
+          </Text>
+          <Text variant="body">
+            {process.serviceDetails.model === undefined
+              ? t(
+                  "Projects.Project.Process.ServicePreview.components.Manufacturing.notSelected"
+                )
+              : process.serviceDetails.model.fileName}
+          </Text>
+        </Card>
+        {process.serviceDetails.model !== undefined ? (
+          <PermissionGate element={"ProcessButtonModelPreView"}>
+            <Button
+              size="sm"
+              onClick={handleOnClickButtonOpen}
+              title={t(
+                "Projects.Project.Process.ServicePreview.components.Manufacturing.buttons.modelPreView"
+              )}
+            />
+          </PermissionGate>
+        ) : null}
       </Container>
-      <Container>
+      <Card
+        className={`w-full flex-row flex-wrap md:w-fit ${
+          process.serviceDetails.material === undefined
+            ? "border-yellow-500"
+            : "border-green-500"
+        }`}
+        onClick={(e) => handleOnClickCard(e, "material")}
+      >
         <Text variant="body">
           {t(
             "Projects.Project.Process.ServicePreview.components.Manufacturing.material"
@@ -91,11 +148,16 @@ const ProcessServiceManufacturing: React.FC<
         </Text>
         <Text variant="body">
           {process.serviceDetails.material === undefined
-            ? "---"
+            ? t(
+                "Projects.Project.Process.ServicePreview.components.Manufacturing.notSelected"
+              )
             : process.serviceDetails.material.title}
         </Text>
-      </Container>
-      <Container>
+      </Card>
+      <Card
+        className="w-full flex-row flex-wrap border-green-500 md:w-fit"
+        onClick={(e) => handleOnClickCard(e, "postprocessing")}
+      >
         <Text variant="body">
           {t(
             "Projects.Project.Process.ServicePreview.components.Manufacturing.postProcessings"
@@ -103,19 +165,23 @@ const ProcessServiceManufacturing: React.FC<
         </Text>
         <Text variant="body">
           {process.serviceDetails.postProcessings === undefined
-            ? "---"
+            ? t(
+                "Projects.Project.Process.ServicePreview.components.Manufacturing.notSelected"
+              )
             : process.serviceDetails.postProcessings.map(
                 (postProcessing: PostProcessingProps) => postProcessing.title
               )}
         </Text>
-      </Container>
+      </Card>
       <Modal
         title="ModelPreview"
         open={open}
         closeModal={closeModal}
         className="h-full max-w-7xl bg-white"
       >
-        {fileUrl !== "" ? (
+        {loading ? (
+          <LoadingAnimation />
+        ) : fileUrl !== "" ? (
           <ModelPreview file={fileUrl} />
         ) : (
           <div className="p-20">

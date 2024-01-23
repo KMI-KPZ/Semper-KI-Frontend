@@ -68,7 +68,7 @@ const ModelPreview = (props: { file?: string; className?: string }) => {
   const { file, className: _className } = props;
 
   const className = twMerge(
-    "overflow-clip w-full h-full rounded-xl border-2 ",
+    "overflow-clip w-full h-full rounded-xl border-2 max-h-[600px] max-w-[1000px] h-[300px] w-[500px] ",
     _className
   );
 

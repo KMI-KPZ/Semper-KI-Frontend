@@ -9,6 +9,20 @@ export interface ModelProps {
   createdBy: string;
 }
 
+export interface ModelDetailsProps {
+  filename: string;
+  measurements: {
+    volume: number;
+    surfaceArea: number;
+    mbbDimensions: {
+      _1: number;
+      _2: number;
+      _3: number;
+    };
+    mbbVolume: number;
+  };
+}
+
 export enum ManufacturingModelType {
   "KISS",
   "USER",

@@ -15,6 +15,8 @@ import useProcess, {
 import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 import Card from "@component-library/Card/Card";
 import { useNavigate, useParams } from "react-router-dom";
+import { useManufacturingModelDetailsQuerys } from "@/api/Service/Manufacturing/useManufacturingQuerys";
+import ModelDetails from "./ModelDetails";
 
 interface ProcessServiceManufacturingProps {
   process: ManufactoringProcessProps;
@@ -38,30 +40,6 @@ const ProcessServiceManufacturing: React.FC<
 
   const handleOnClickButtonOpen = () => {
     setOpen(true);
-    setLoading(true);
-    if (
-      process.serviceDetails.model !== undefined &&
-      process.files.length > 0 &&
-      process.files.find(
-        (file) =>
-          process.serviceDetails.model !== undefined &&
-          file.id === process.serviceDetails.model.id
-      ) !== undefined
-    ) {
-      downloadFile(
-        {
-          processID: process.processID,
-          fileID: process.serviceDetails.model.id,
-        },
-        {
-          onSuccess(data) {
-            const url = window.URL.createObjectURL(data);
-            setFileUrl(url);
-            setLoading(false);
-          },
-        }
-      );
-    }
   };
 
   const handleOnClickCard = (
@@ -179,17 +157,7 @@ const ProcessServiceManufacturing: React.FC<
         closeModal={closeModal}
         className="h-full max-w-7xl bg-white"
       >
-        {loading ? (
-          <LoadingAnimation />
-        ) : fileUrl !== "" ? (
-          <ModelPreview file={fileUrl} />
-        ) : (
-          <div className="p-20">
-            {t(
-              "Projects.Project.Process.ServicePreview.components.Manufacturing.noModel"
-            )}
-          </div>
-        )}
+        <ModelDetails process={process} />
       </Modal>
     </Container>
   );

@@ -15,6 +15,7 @@ import useOrganizations, {
 } from "@/pages/Organization/hooks/useOrganizations";
 import { LoadingAnimation } from "@component-library/index";
 import { Container } from "@component-library/index";
+import useGeneralInput from "@component-library/Form/hooks/useGeneralInput";
 
 interface OrganizationFormProps {
   closeEdit: () => void;
@@ -34,6 +35,8 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
   const { t } = useTranslation();
   const { updateOrganizationInfo } = useOrganizations();
   const { servicesQuery } = useServiceQuerys();
+  const { getMaxLabelWidth } = useGeneralInput();
+
   const schema = yup
     .object({
       email: yup
@@ -96,10 +99,8 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
     "supportedServices",
   ];
 
-  const maxLength = Math.max(
-    ...labels.map(
-      (label) => t(`components.Form.OrganizationForm.${label}`).length
-    )
+  const maxLength = getMaxLabelWidth(
+    labels.map((label) => t(`components.Form.OrganizationForm.${label}`))
   );
 
   return (
@@ -131,7 +132,7 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
           <Text
             variant={`body`}
             style={{
-              width: maxLength !== undefined ? `${maxLength * 8}px` : "",
+              width: maxLength !== undefined ? `${maxLength}px` : "",
             }}
           >
             {t(`Organization.Info.components.form.services`)}

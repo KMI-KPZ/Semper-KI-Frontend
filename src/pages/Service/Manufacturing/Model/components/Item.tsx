@@ -14,7 +14,7 @@ interface Props {
 const ProcessModelItem: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { model } = props;
-  const { process, updateProcess } = useProcess();
+  const { process, deleteModel } = useProcess();
 
   const getDate = (): string => {
     let date: Date = new Date(model.date);
@@ -29,7 +29,7 @@ const ProcessModelItem: React.FC<Props> = (props) => {
   };
 
   const handleOnClickButtonDeselect = () => {
-    updateProcess({ deletions: { serviceDetails: ["model"] } });
+    deleteModel();
   };
 
   return (

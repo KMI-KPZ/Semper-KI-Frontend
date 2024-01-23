@@ -14,7 +14,7 @@ const ResourcesPrintersAddPreView: React.FC<
   const { printerName, properties } = props;
   const { t } = useTranslation();
 
-  logger("ResourcesPrintersAddPreView", properties);
+  // logger("ResourcesPrintersAddPreView", properties);
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">

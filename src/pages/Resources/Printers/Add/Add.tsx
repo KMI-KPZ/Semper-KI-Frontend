@@ -15,6 +15,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import CheckIcon from "@mui/icons-material/Check";
 import ResourcesPrintersAddPreView from "./components/PreView";
 import logger from "@/hooks/useLogger";
+import { error } from "console";
 
 interface ResourcesPrintersAddProps {}
 
@@ -59,15 +60,15 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: "onTouched",
   });
   const { fields, append, remove, update } = useFieldArray({
     control,
     name: "properties",
   });
   const onSubmit = (data: FormData) => {
+    logger("onSubmitInvite", data, errors);
     setEditPrinter(false);
-    logger("onSubmitInvite", data);
   };
   const selectPrinter = (uri?: string) => {
     if (uri !== undefined) {
@@ -89,7 +90,9 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
     setEditPrinter(true);
   };
   const handleOnClickButtonSafe = () => {
-    setEditPrinter(false);
+    logger("handleOnClickButtonSafe", errors);
+    if (errors.printerName === undefined && errors.properties === undefined)
+      setEditPrinter(false);
   };
   const handleOnClickButtonAddProperty = () => {
     append({ name: "", values: [""] });
@@ -122,6 +125,7 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
     remove();
     setEditPrinter(true);
   };
+
   const getErrorMessage = (propertyIndex: number) => {
     const propertiesError = errors.properties;
     const propertyError =
@@ -155,6 +159,7 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
               />
               <Button
                 children={<RemoveIcon />}
+                size="xs"
                 title={t("Resources.Printers.form.button.removeProperty")}
                 onClick={() => handleOnClickButtonRemoveProperty(propertyIndex)}
               />
@@ -182,6 +187,7 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
                       className="w-full bg-slate-100 px-5 py-2 "
                     />
                     <Button
+                      size="xs"
                       title={t("Resources.Printers.form.button.removeValue")}
                       onClick={() =>
                         handleOnClickButtonRemoveValue(
@@ -200,6 +206,7 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
               </Text>
             )}
             <Button
+              size="xs"
               title={t("Resources.Printers.form.button.addValue")}
               onClick={() => handleOnClickButtonAddValue(propertyIndex)}
               children={<AddIcon />}
@@ -226,6 +233,7 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
             />
             {renderValueForm()}
             <Button
+              size="xs"
               children={<AddIcon />}
               title={t("Resources.Printers.form.button.addProperty")}
               onClick={handleOnClickButtonAddProperty}
@@ -249,6 +257,7 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
               startIcon={<CheckIcon />}
               title={t("Resources.Printers.form.button.safe")}
               onClick={handleOnClickButtonSafe}
+              variant="primary"
             />
           ) : (
             <Button
@@ -258,6 +267,7 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
             />
           )}
           <Button
+            variant="primary"
             endIcon={<ArrowForwardIcon />}
             active={!editPrinter}
             title={t("Resources.Printers.form.button.add")}

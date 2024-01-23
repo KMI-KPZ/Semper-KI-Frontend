@@ -32,6 +32,7 @@ import RedirectLogin from "../Login/RedirectLogin";
 import Menu from "@/components/Menu";
 import { Background } from "@/components/index";
 import Advantages from "../Advantages/Advantages";
+import Chatbot from "@/components/Chatbot/Chatbot";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -260,6 +261,7 @@ const App: React.FC = () => {
         <Menu />
         <Footer />
       </div>
+      <Chatbot />
       <ToastContainer
         position="top-right"
         autoClose={8000}

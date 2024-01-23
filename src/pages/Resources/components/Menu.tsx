@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 
 interface ResourcesMenuProps {}
 
-type ResourcesMenuItem = {
+export type ResourcesMenuItem = {
   title: string;
   to: string;
 };
@@ -41,16 +41,15 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = (props) => {
 
   return (
     <nav
-      className="flex h-fit flex-col bg-white p-3"
+      className="flex h-fit flex-col gap-5 bg-white p-3"
       data-testid="resources-menu"
     >
       {resourcesMenuItems.map((resourcesMenuItem, index) => (
         <Button
+          width="full"
           testid="resources-menu-item"
           key={index}
-          title={`${isActive(resourcesMenuItem.to) ? "> " : ""}${
-            resourcesMenuItem.title
-          }`}
+          title={`${resourcesMenuItem.title}`}
           to={resourcesMenuItem.to}
           variant={isActive(resourcesMenuItem.to) ? "primary" : "secondary"}
         />

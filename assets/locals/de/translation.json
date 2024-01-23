@@ -1115,6 +1115,14 @@
               "noModel": "keine Modellvorschau vorhanden",
               "notSelected": "nicht ausgewählt"
             },
+            "ModelDetails": {
+              "title": "Modell Details",
+              "filename": "Dateiname:",
+              "volume": "Volumen:",
+              "surfaceArea": "Oberfläche:",
+              "mbbDimensions": "MBB Dimensionen:",
+              "mbbVolume": "MBB Volumen:"
+            },
             "Modelling": {
               "title": "Modell entwerfen lasssen"
             }

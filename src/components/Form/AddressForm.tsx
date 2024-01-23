@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useUser, { UserAddressProps } from "@/hooks/useUser";
 import { Heading, Text } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
+import useGeneralInput from "@component-library/Form/hooks/useGeneralInput";
 
 interface AddressFormProps {
   closeModal?(): void;
@@ -19,6 +20,7 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
   const { closeModal, customSubmit, initialAddress } = props;
   const { t } = useTranslation();
   const { user, updateUserDetails } = useAuthorizedUser();
+  const { getMaxLabelWidth } = useGeneralInput();
 
   const schema = yup.object().shape({
     firstName: yup.string().required(t("yup.required")),
@@ -64,10 +66,8 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
     "country",
   ];
 
-  const maxLength = Math.max(
-    ...labels.map(
-      (label) => t(`components.Form.AddressForm.labels.${label}`).length
-    )
+  const maxLength = getMaxLabelWidth(
+    labels.map((label) => t(`components.Form.AddressForm.labels.${label}`))
   );
 
   return (

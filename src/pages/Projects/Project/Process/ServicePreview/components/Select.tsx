@@ -55,7 +55,10 @@ const ProcessServiceSelect: React.FC<ProcessServiceSelectProps> = (props) => {
     return (
       <Container width="full" className="flex-wrap">
         {servicesQuery.data.map((service, index) => (
-          <Card onClick={(e) => handleOnClickCard(e, service.identifier)}>
+          <Card
+            onClick={(e) => handleOnClickCard(e, service.identifier)}
+            key={index}
+          >
             {getIcon(service.identifier)}
             <Text>
               {t(

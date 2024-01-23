@@ -53,6 +53,12 @@ interface useProcessMutationsReturnProps {
     DeleteFileMutationProps,
     unknown
   >;
+  deleteModelMutation: UseMutationResult<
+    string,
+    Error,
+    DeleteModelMutationProps,
+    unknown
+  >;
 }
 
 export type MultipleProcessMutationProps = {
@@ -84,6 +90,8 @@ export type DownloadZIPMutationProps = {
 export type DeleteFileMutationProps = {
   fileID: string;
 } & SingleProcessMutationProps;
+
+export type DeleteModelMutationProps = {} & SingleProcessMutationProps;
 
 const useProcessMutations = (): useProcessMutationsReturnProps => {
   const queryClient = useQueryClient();
@@ -252,6 +260,27 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
     },
   });
 
+  const deleteModelMutation = useMutation<
+    string,
+    Error,
+    DeleteModelMutationProps
+  >({
+    mutationFn: async (props) => {
+      const { processID } = props;
+      return customAxios
+        .delete(
+          `${process.env.VITE_HTTP_API_URL}/public/deleteModel/${processID}/`
+        )
+        .then((res) => {
+          logger("useProcessMutations | deleteModelMutation ✅ |", res.data);
+          return res.data;
+        });
+    },
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries(["project", projectID]);
+    },
+  });
+
   return {
     createProcessMutation,
     deleteFileMutation,
@@ -260,6 +289,7 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
     downloadZIPMutation,
     updateProcessMutation,
     uploadFilesMutation,
+    deleteModelMutation,
   };
 };
 

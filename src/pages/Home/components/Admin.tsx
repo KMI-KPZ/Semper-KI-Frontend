@@ -18,11 +18,6 @@ const HomeAdmin: React.FC<HomeAdminProps> = (props) => {
       <Heading variant="h1">{t("Home.components.Admin.title")}</Heading>
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
         <Button
-          startIcon={<AdminPanelSettingsIcon />}
-          title={t("Home.components.Admin.button.general")}
-          to="/admin"
-        />
-        <Button
           startIcon={<SupervisorAccountIcon />}
           title={t("Home.components.Admin.button.user")}
           to="/admin/user"

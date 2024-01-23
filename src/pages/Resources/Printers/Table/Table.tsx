@@ -26,6 +26,7 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
           <Button
             title={t("Resources.Printers.table.button.add")}
             to="/resources/printers/add"
+            variant="primary"
           />
         </div>
       </PermissionGate>

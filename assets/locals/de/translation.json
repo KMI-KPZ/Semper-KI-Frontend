@@ -1113,7 +1113,8 @@
                 "modelPreView": "Modell Vorschau"
               },
               "noModel": "keine Modellvorschau vorhanden",
-              "notSelected": "nicht ausgewählt"
+              "notSelected": "nicht ausgewählt",
+              "amount": "Anzahl:"
             },
             "ModelDetails": {
               "title": "Modell Details",

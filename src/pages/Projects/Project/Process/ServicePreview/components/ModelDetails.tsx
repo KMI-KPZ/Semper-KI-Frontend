@@ -78,14 +78,6 @@ const ModelDetails: React.FC<ModelDetailsProps> = (props) => {
           <Container direction="row" justify="between" width="full">
             <Text>
               {t(
-                "Projects.Project.Process.ServicePreview.components.ModelDetails.filename"
-              )}
-            </Text>
-            <Text>{modelDetailsQuery.data.filename}</Text>
-          </Container>
-          <Container direction="row" justify="between" width="full">
-            <Text>
-              {t(
                 "Projects.Project.Process.ServicePreview.components.ModelDetails.volume"
               )}
             </Text>
@@ -105,7 +97,7 @@ const ModelDetails: React.FC<ModelDetailsProps> = (props) => {
                 "Projects.Project.Process.ServicePreview.components.ModelDetails.mbbDimensions"
               )}
             </Text>
-            <Text>{`${modelDetailsQuery.data.measurements.mbbDimensions._1}x${modelDetailsQuery.data.measurements.mbbDimensions._2}x${modelDetailsQuery.data.measurements.mbbDimensions._3}`}</Text>
+            <Text>{`${modelDetailsQuery.data.measurements.mbbDimensions._1} x ${modelDetailsQuery.data.measurements.mbbDimensions._2} x ${modelDetailsQuery.data.measurements.mbbDimensions._3}`}</Text>
           </Container>
           <Container direction="row" justify="between" width="full">
             <Text>

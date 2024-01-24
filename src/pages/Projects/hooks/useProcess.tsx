@@ -44,6 +44,7 @@ export interface ProcessDetailsProps {
   provisionalContractor?: string;
   title?: string;
   clientAddress?: UserAddressProps;
+  amount: number;
 }
 
 export type ProcessProps =
@@ -121,8 +122,15 @@ export interface ProcessChangesProps {
   messages?: ChatMessageProps;
   processStatus?: ProcessStatus;
   files?: File[];
-  processDetails?: ProcessDetailsProps;
+  processDetails?: UpdateProcessDetailsProps;
   serviceDetails?: GerneralUpdateServiceProps;
+}
+
+export interface UpdateProcessDetailsProps {
+  provisionalContractor?: string;
+  title?: string;
+  clientAddress?: UserAddressProps;
+  amount?: number;
 }
 
 export interface ProcessDeletionsProps {

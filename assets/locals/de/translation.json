@@ -1296,7 +1296,8 @@
         "empty": "keine Drucker gefunden",
         "button": {
           "add": "Drucker Hinzufügen",
-          "delete": "Löschen"
+          "delete": "Löschen",
+          "edit": "Bearbeiten"
         }
       },
       "view": {
@@ -1311,7 +1312,11 @@
         "button": {
           "search": "Suchen",
           "new": "Neuen Drucker anlegen",
-          "edit": "Bearbeiten",
+          "edit": {
+            "new": "bearbeiten",
+            "existing": "neue Variante anlegen",
+            "variant": "Variante bearbeiten"
+          },
           "safe": "Speichern",
           "add": "Drucker Hinzufügen",
           "addValue": "Wert hinzufügen",
@@ -1319,9 +1324,11 @@
           "addProperty": "Eigenschaft hinzufügen",
           "removeProperty": "Eigenschaft entfernen",
           "reset": "Zurücksetzen",
-          "close": "Schließen"
+          "close": "Schließen",
+          "back": "Zurück"
         },
         "yup": {
+          "notSamePrinterName": "Druckername muss eindeutig sein",
           "name": "Name",
           "propName": "Eigenschaft",
           "propNamerequired": "Eigenschaft benötigt",

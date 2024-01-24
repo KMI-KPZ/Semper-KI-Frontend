@@ -6,9 +6,14 @@ import ResourcesPrintersAddSearch from "./components/Search";
 import EditIcon from "@mui/icons-material/Edit";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ResourcesPrintersAddPreView from "./components/PreView";
-import { NewOntoPrinter, OntoPrinter } from "../../types/types";
+import {
+  NewOntoPrinter,
+  OntoPrinter,
+  OntoPrinterType,
+} from "../../types/types";
 import PrintersAddForm from "./components/Form";
 import useOntologyPrinterMutations from "@/api/Ontology/useOntologyPrinterMutations";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 interface ResourcesPrintersAddProps {}
 
@@ -26,8 +31,14 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
   const handleOnClickButtonSubmit = () => {
     if (printer !== undefined) addPrinterMutation.mutate({ printer });
   };
+
+  const handleOnClickButtonBack = () => {
+    setPrinter(undefined);
+    setEdit(false);
+  };
+
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5 md:p-5">
+    <div className="flex h-full w-full flex-col items-center justify-start gap-5 md:p-5">
       <Heading variant="h2">{t("Resources.Printers.form.header")}</Heading>
       <div className="flex w-full flex-col items-center justify-center gap-5">
         {printer === undefined ? (
@@ -45,8 +56,15 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
                 <ResourcesPrintersAddPreView printer={printer} />
                 <div className="flex w-full flex-col items-center justify-center gap-5 px-10 md:flex-row">
                   <Button
+                    startIcon={<ArrowBackIcon />}
+                    title={t("Resources.Printers.form.button.back")}
+                    onClick={handleOnClickButtonBack}
+                  />
+                  <Button
                     startIcon={<EditIcon />}
-                    title={t("Resources.Printers.form.button.edit")}
+                    title={t(
+                      `Resources.Printers.form.button.edit.${printer.type}`
+                    )}
                     onClick={handleOnClickButtonEdit}
                   />
 

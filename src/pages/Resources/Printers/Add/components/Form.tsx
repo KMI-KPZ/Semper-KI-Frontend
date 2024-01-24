@@ -1,4 +1,4 @@
-import { Button } from "@component-library/index";
+import { Button, Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useState } from "react";
@@ -10,11 +10,13 @@ import AddIcon from "@mui/icons-material/Add";
 import ReplayIcon from "@mui/icons-material/Replay";
 import CheckIcon from "@mui/icons-material/Check";
 import logger from "@/hooks/useLogger";
-import useOntologyPrinterQuerys from "@/api/Ontology/useOntologyPrinterQuerys";
 import { NewOntoPrinter, OntoPrinter } from "@/pages/Resources/types/types";
-import ResourcesPrintersAddSearch from "./Search";
+import useOntologyMaterialQuerys from "@/api/Ontology/useOntologyMaterialQuerys";
+import useOntologyPrinterQuerys from "@/api/Ontology/useOntologyPrinterQuerys";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import useOntoPrinters from "@/hooks/useOntoPrinters";
 interface PrintersAddFormProps {
-  printer?: OntoPrinter | NewOntoPrinter | undefined;
+  printer: OntoPrinter | NewOntoPrinter;
   setPrinter(printer: OntoPrinter | NewOntoPrinter): void;
   setEdit(edit: boolean): void;
 }
@@ -22,14 +24,21 @@ interface PrintersAddFormProps {
 const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
   const { printer, setPrinter, setEdit } = props;
   const { t } = useTranslation();
+  const { allPrinters } = useOntoPrinters();
 
   const schema = yup
     .object({
-      printerName: yup.string().required(
-        t("yup.requiredName", {
-          name: t("Resources.Printers.form.yup.name"),
-        })
-      ),
+      printerName: yup
+        .string()
+        .notOneOf(
+          [...allPrinters.map((printer) => printer.title)],
+          t("Resources.Printers.form.yup.notSamePrinterName")
+        )
+        .required(
+          t("yup.requiredName", {
+            name: t("Resources.Printers.form.yup.name"),
+          })
+        ),
       properties: yup
         .array()
         .required()
@@ -53,7 +62,6 @@ const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
   type FormData = yup.InferType<typeof schema>;
 
   const {
-    reset,
     register,
     setValue,
     getValues,
@@ -80,8 +88,20 @@ const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
   });
 
   const onSubmit = (data: FormData) => {
-    logger("PrintersAddForm", data);
-    setPrinter({ title: data.printerName, properties: data.properties });
+    setPrinter(
+      printer.type === "existing"
+        ? {
+            title: data.printerName,
+            properties: data.properties,
+            type: "variant",
+            lastURI: printer.URI,
+          }
+        : {
+            title: data.printerName,
+            properties: data.properties,
+            type: "new",
+          }
+    );
     setEdit(false);
   };
 
@@ -116,18 +136,17 @@ const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
   };
 
   const handleOnClickButtonReset = () => {
-    setPrinter({
-      title: printer === undefined ? "" : printer.title,
-      properties: [],
-    });
-    reset();
-    remove();
+    setValue("printerName", printer.title);
+    setValue(
+      "properties",
+      printer.properties.map((property) => ({
+        ...property,
+      }))
+    );
   };
 
-  const setPrinterAndForm = (printer: OntoPrinter | NewOntoPrinter) => {
-    setValue("printerName", printer.title);
-    setValue("properties", printer.properties);
-    setPrinter({ title: printer.title, properties: printer.properties });
+  const handleOnClickButtonBack = () => {
+    setEdit(false);
   };
 
   const getErrorMessage = (propertyIndex: number) => {
@@ -269,11 +288,20 @@ const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
-      <ResourcesPrintersAddSearch
-        setPrinter={setPrinterAndForm}
-        printer={printer}
-      />
       <form className="flex w-full flex-col items-center justify-center gap-5">
+        <Container width="full" className="flex-wrap">
+          <Text variant="body">{t("Resources.Printers.view.name")}</Text>
+          <input
+            placeholder={t("Resources.Printers.form.yup.name") + "..."}
+            type="test"
+            className="w-full bg-slate-100 px-5 py-2 md:w-fit md:grow "
+            {...register("printerName")}
+          />
+        </Container>
+        {errors.printerName !== undefined &&
+        errors.printerName.message !== undefined ? (
+          <Text variant="error">{errors.printerName.message}</Text>
+        ) : null}
         {renderValueForm()}
         <Button
           size="xs"
@@ -282,6 +310,11 @@ const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
           children={<AddIcon />}
         />
         <div className="flex w-full flex-col items-center justify-center gap-5 px-10 md:flex-row">
+          <Button
+            startIcon={<ArrowBackIcon />}
+            title={t("Resources.Printers.form.button.back")}
+            onClick={handleOnClickButtonBack}
+          />
           <Button
             startIcon={<ReplayIcon />}
             title={t("Resources.Printers.form.button.reset")}

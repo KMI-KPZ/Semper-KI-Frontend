@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-query";
 import { customAxios } from "@/api/customAxios";
 import {
+  ExistingOntoPrinter,
   OntoPrinter,
   OntoPrinterFlat,
   OntoPrinterProperty,
@@ -41,7 +42,7 @@ const useOntologyPrinterQuerys = (props: UseOntoProps): ReturnProps => {
         }),
   });
 
-  const printerQuery = useQuery<OntoPrinter, Error>({
+  const printerQuery = useQuery<ExistingOntoPrinter, Error>({
     queryKey: ["onto", "printer", printerID],
     queryFn: async () =>
       customAxios
@@ -50,7 +51,12 @@ const useOntologyPrinterQuerys = (props: UseOntoProps): ReturnProps => {
         })
         .then((res) => {
           logger("useOnto| getPrinter ✅ |", printerID, res.data);
-          return res.data;
+          return res.data.map(
+            (printer: any): ExistingOntoPrinter => ({
+              ...printer,
+              type: "existing",
+            })
+          );
         }),
     enabled: printerID !== "",
   });

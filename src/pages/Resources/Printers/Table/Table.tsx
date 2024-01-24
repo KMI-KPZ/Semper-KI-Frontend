@@ -48,7 +48,14 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
             rows={printersQuery.data.map((material, index) => [
               <Text variant="body">{material.title}</Text>,
               <div className="flex flex-row items-center justify-center gap-5">
-                <Button title={t("Resources.Printers.table.button.delete")} />
+                <Button
+                  size="sm"
+                  title={t("Resources.Printers.table.button.delete")}
+                />
+                <Button
+                  size="sm"
+                  title={t("Resources.Printers.table.button.edit")}
+                />
               </div>,
             ])}
           />

@@ -1,32 +1,31 @@
-import { OntoPrinter, OntoPrinterFlat } from "@/pages/Resources/types/types";
+import {
+  NewOntoPrinter,
+  OntoPrinter,
+  OntoPrinterFlat,
+} from "@/pages/Resources/types/types";
 import { Button, LoadingSuspense, Text } from "@component-library/index";
 import React, { useState } from "react";
-import { FieldError, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import useOntologyPrinterQuerys from "@/api/Ontology/useOntologyPrinterQuerys";
 
 interface ResourcesPrintersAddSearchProps {
-  setPrinterName(name: string): void;
-  selectPrinter(uri?: string): void;
-  printerName: string | undefined;
-  error?: FieldError;
+  printer?: OntoPrinter | NewOntoPrinter | undefined;
+  setPrinter(printer: OntoPrinter | NewOntoPrinter): void;
 }
 
 const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
   props
 ) => {
-  const {
-    setPrinterName,
-    printerName: _printerName,
-    selectPrinter,
-    error,
-  } = props;
-  const printerName =
-    _printerName === undefined ? "" : _printerName.toLocaleLowerCase();
+  const { setPrinter, printer } = props;
+
   const { t } = useTranslation();
   const { printersQuery } = useOntologyPrinterQuerys({});
+  const [printerName, setPrinterName] = useState<string>(
+    printer !== undefined ? printer.title : ""
+  );
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const { printerMutation } = useOntologyPrinterQuerys({});
 
   const handleOnFocusInputName = (
     e: React.FocusEvent<HTMLInputElement, Element>
@@ -41,11 +40,19 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
   const handleOnClickButtonPrinter = (printer: OntoPrinterFlat) => {
     setShowDropdown(false);
     setPrinterName(printer.title);
-    selectPrinter(printer.URI);
+    printerMutation.mutate(printer.URI, {
+      onSuccess(data, variables, context) {
+        setPrinter({
+          URI: printer.URI,
+          properties: data,
+          title: printer.title,
+        });
+      },
+    });
   };
 
   const handleOnClickButtonNew = () => {
-    selectPrinter();
+    setPrinter({ URI: "", properties: [], title: printerName });
     setShowDropdown(false);
   };
   const handleOnClickButtonClose = () => {
@@ -105,11 +112,7 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
           className="w-full bg-slate-100 px-5 py-2 "
         />
       </div>
-      {error !== undefined ? (
-        <Text variant="error" className="w-full text-center">
-          {error.message}
-        </Text>
-      ) : null}
+
       {showDropdown ? renderDropdown() : null}
     </div>
   );

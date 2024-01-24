@@ -65,7 +65,7 @@ const useOntologyPrinterQuerys = (props: UseOntoProps): ReturnProps => {
           // logger("useOnto| getPrinter ✅ |", printerID, res.data);
           return res.data.properties.flatMap((object: Object) => {
             if (typeof object === "string") return { name: object };
-            logger("object", Object.keys(object), Object.values(object));
+            // logger("object", Object.keys(object), Object.values(object));
             return {
               name: "Eigneschnaft",
               values: ["nischt", "good"],

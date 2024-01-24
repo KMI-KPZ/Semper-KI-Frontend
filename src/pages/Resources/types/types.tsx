@@ -9,6 +9,10 @@ export type OntoPrinterFlat = {
   title: string;
   URI: string;
 };
+export interface NewOntoPrinter {
+  title: string;
+  properties: OntoPrinterProperty[];
+}
 export type OntoPrinter = {
   title: string;
   URI: string;

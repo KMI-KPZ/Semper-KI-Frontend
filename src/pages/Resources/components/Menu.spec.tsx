@@ -15,8 +15,8 @@ describe("<ResourcesMenu>", () => {
     render(<ResourcesMenu />);
     const button = screen.getByText("Resources.components.Menu.printers");
     fireEvent.click(button);
-    expect(
-      screen.getByText("> Resources.components.Menu.printers")
-    ).toBeInTheDocument();
+    expect(screen.getByText("Resources.components.Menu.printers")).toHaveClass(
+      "bg-blau-button border-blau-700"
+    );
   });
 });

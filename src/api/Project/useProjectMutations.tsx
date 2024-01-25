@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { UpdateProjectProps } from "@/pages/Projects/hooks/useProject";
 import {
@@ -54,7 +54,7 @@ const useProjectMutations = (): useProjectMutationsReturnProps => {
   const createProjectMutation = useMutation<string, Error, void>({
     mutationFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createProjectID/`;
-      return customAxios.get(apiUrl).then((response) => {
+      return authorizedCustomAxios.get(apiUrl).then((response) => {
         logger("useProjectMutations | createProject ✅ |", response.data);
         return response.data.projectID;
       });
@@ -67,7 +67,7 @@ const useProjectMutations = (): useProjectMutationsReturnProps => {
   const createProcessWithIDMutation = useMutation<string, Error, string>({
     mutationFn: async (manuelProjectID: string) => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createProcessID/${manuelProjectID}/`;
-      return customAxios.get(apiUrl).then((response) => {
+      return authorizedCustomAxios.get(apiUrl).then((response) => {
         logger(
           "useProjectMutations | createProcessWithProjectID ✅ |",
           response.data
@@ -85,7 +85,7 @@ const useProjectMutations = (): useProjectMutationsReturnProps => {
   const updateProjectMutation = useMutation<string, Error, UpdateProjectProps>({
     mutationFn: async (props) => {
       const { changes = {}, deletions = {} } = props;
-      return customAxios
+      return authorizedCustomAxios
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProject/`, {
           projectID,
           changes,
@@ -104,7 +104,7 @@ const useProjectMutations = (): useProjectMutationsReturnProps => {
 
   const deleteProjectMutation = useMutation<string, Error, string[]>({
     mutationFn: async (projectIDs: string[]) => {
-      return customAxios
+      return authorizedCustomAxios
         .delete(
           `${
             process.env.VITE_HTTP_API_URL
@@ -126,7 +126,7 @@ const useProjectMutations = (): useProjectMutationsReturnProps => {
     {
       mutationFn: async ({ processIDs }) => {
         const url = `${process.env.VITE_HTTP_API_URL}/public/sendProject/`;
-        return customAxios
+        return authorizedCustomAxios
           .patch(url, {
             projectID,
             processIDs,
@@ -151,7 +151,7 @@ const useProjectMutations = (): useProjectMutationsReturnProps => {
     mutationFn: async (props) => {
       const { processIDs, send } = props;
       const url = `${process.env.VITE_HTTP_API_URL}/public/verifyProject/`;
-      return customAxios
+      return authorizedCustomAxios
         .patch(url, {
           projectID,
           processIDs,

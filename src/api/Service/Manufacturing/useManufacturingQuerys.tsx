@@ -1,6 +1,6 @@
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { MaterialProps } from "../../../pages/Service/Manufacturing/Material/Material";
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { FilterItemProps } from "../../../pages/Service/Manufacturing/Filter/Filter";
 import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
@@ -17,7 +17,7 @@ export const useManufacturingMaterialQuerys = (
     queryKey: ["materials"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getMaterials/`;
-      return customAxios
+      return authorizedCustomAxios
         .post(apiUrl, {
           filters,
         })
@@ -38,7 +38,7 @@ export const useManufacturingPostProcessingQuerys = (
     queryKey: ["postProcessings"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getPostProcessing/`;
-      return customAxios
+      return authorizedCustomAxios
         .post(apiUrl, {
           filters,
         })
@@ -58,7 +58,7 @@ export const useManufacturingModelQuerys = (
     queryKey: ["models"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getModels/`;
-      return customAxios
+      return authorizedCustomAxios
         .post(apiUrl, {
           filters,
         })
@@ -81,7 +81,7 @@ export const useManufacturingModelDetailsQuerys = (
     queryKey: ["project", project.projectID, processID, "modelDetails"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/checkModel/${processID}/`;
-      return customAxios.get(apiUrl).then((response) => {
+      return authorizedCustomAxios.get(apiUrl).then((response) => {
         logger(
           "useManufacturingModelDetailsQuerys | modelDetailsQuery ✅ |",
           response.data

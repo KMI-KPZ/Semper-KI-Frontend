@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { NewOntoPrinter, OntoPrinter } from "@/pages/Resources/types/types";
 import {
@@ -31,7 +31,7 @@ const useOntologyPrinterMutations =
     >({
       mutationFn: async ({ printer }) => {
         const url = `${process.env.VITE_HTTP_API_URL}/public/onto/addPrinter/`;
-        return customAxios
+        return authorizedCustomAxios
           .post(url, {
             data: printer,
           })

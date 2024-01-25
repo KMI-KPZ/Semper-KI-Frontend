@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import {
   AssignRoleProps,
@@ -61,7 +61,7 @@ const useOrganizationMutations = (): useOrganizationMutationsReturnProps => {
   >({
     mutationFn: async (props) => {
       const { name, email, address: adress, taxID, supportedServices } = props;
-      return customAxios
+      return authorizedCustomAxios
         .patch(
           `${process.env.VITE_HTTP_API_URL}/public/updateOrganizationDetails/`,
           {
@@ -89,7 +89,7 @@ const useOrganizationMutations = (): useOrganizationMutationsReturnProps => {
 
   const inviteLinkMutation = useMutation<string, Error, string>({
     mutationFn: async (email: string) => {
-      return customAxios
+      return authorizedCustomAxios
         .post(apiUrl + "getInviteLink/", {
           data: { content: { email: email } },
         })
@@ -106,7 +106,7 @@ const useOrganizationMutations = (): useOrganizationMutationsReturnProps => {
 
   const inviteUserMutation = useMutation<any, Error, InvitationProps>({
     mutationFn: async (props) => {
-      return customAxios
+      return authorizedCustomAxios
         .post(apiUrl + "addUser/", {
           data: { content: props },
         })
@@ -124,7 +124,7 @@ const useOrganizationMutations = (): useOrganizationMutationsReturnProps => {
   const createRoleMutation = useMutation<any, Error, CreateRoleProps>({
     mutationFn: async (props) => {
       const { description, name } = props;
-      return customAxios
+      return authorizedCustomAxios
         .post(apiUrl + "createRole/", {
           data: {
             content: { roleName: name, roleDescription: description },
@@ -144,7 +144,7 @@ const useOrganizationMutations = (): useOrganizationMutationsReturnProps => {
   const editRoleMutation = useMutation<any, Error, EditRoleProps>({
     mutationFn: async (props) => {
       const { description, name, roleID } = props;
-      return customAxios
+      return authorizedCustomAxios
         .post(apiUrl + "editRole/", {
           data: {
             content: { roleID, roleName: name, roleDescription: description },
@@ -168,7 +168,7 @@ const useOrganizationMutations = (): useOrganizationMutationsReturnProps => {
   >({
     mutationFn: async (props) => {
       const { permissionIDs, roleID } = props;
-      return customAxios
+      return authorizedCustomAxios
         .post(apiUrl + "setPermissionsForRole/", {
           data: {
             content: { roleID, permissionIDs },
@@ -190,7 +190,7 @@ const useOrganizationMutations = (): useOrganizationMutationsReturnProps => {
 
   const deleteRoleMutation = useMutation<any, Error, string>({
     mutationFn: async (id: string) => {
-      return customAxios
+      return authorizedCustomAxios
         .post(apiUrl + "deleteRole/", {
           data: {
             content: { roleID: id },
@@ -210,7 +210,7 @@ const useOrganizationMutations = (): useOrganizationMutationsReturnProps => {
   const assignRoleMutation = useMutation<any, Error, AssignRoleProps>({
     mutationFn: async (props) => {
       const { email, roleID } = props;
-      return customAxios
+      return authorizedCustomAxios
         .post(apiUrl + "assignRole/", {
           data: {
             content: { email, roleID },
@@ -229,7 +229,7 @@ const useOrganizationMutations = (): useOrganizationMutationsReturnProps => {
   const removeRoleMutation = useMutation<any, Error, AssignRoleProps>({
     mutationFn: async (props) => {
       const { email, roleID } = props;
-      return customAxios
+      return authorizedCustomAxios
         .post(apiUrl + "removeRole/", {
           data: {
             content: { email, roleID },
@@ -247,7 +247,7 @@ const useOrganizationMutations = (): useOrganizationMutationsReturnProps => {
 
   const deleteUserMutation = useMutation<any, Error, string>({
     mutationFn: async (email) => {
-      return customAxios
+      return authorizedCustomAxios
         .post(apiUrl + "deleteUser/", {
           data: {
             content: { email },
@@ -272,7 +272,7 @@ const useOrganizationMutations = (): useOrganizationMutationsReturnProps => {
     mutationFn: async (props) => {
       const {} = props;
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/organizations/createNew/`;
-      return customAxios
+      return authorizedCustomAxios
         .post(apiUrl, { data: { content: props } })
         .then((response) => {
           logger(

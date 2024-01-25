@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import { OntoPrinterContext } from "@/contexts/OntoPrinterContextProvider";
 import { OntoPrinterFlat } from "@/pages/Resources/types/types";
 import { useContext } from "react";

@@ -43,7 +43,11 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
       (process !== undefined &&
         user.usertype !== UserType.ANONYM &&
         ((type === "CONTRACTOR" && process.contractor === user.organization) ||
-          (type === "CLIENT" && process.client === user.hashedID))) ||
+          (type === "CLIENT" &&
+            ((user.usertype === UserType.USER &&
+              process.client === user.hashedID) ||
+              (user.usertype === UserType.ORGANIZATION &&
+                process.client === user.organization))))) ||
       user.usertype === UserType.ANONYM
     );
   };

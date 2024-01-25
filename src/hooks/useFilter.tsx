@@ -1,6 +1,6 @@
 import useFilterMutations from "@/api/Filter/useFilterMutations";
 import useFilterQuerys from "@/api/Filter/useFilterQuerys";
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import { FilterItemProps } from "@/pages/Service/Manufacturing/Filter/Filter";
 import {
   DefinedUseQueryResult,

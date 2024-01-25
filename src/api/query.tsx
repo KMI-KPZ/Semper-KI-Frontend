@@ -4,7 +4,7 @@ import {
   UseQueryResult,
   useQuery,
 } from "@tanstack/react-query";
-import { customAxios } from "./customAxios";
+import { authorizedCustomAxios } from "./customAxios";
 import logger from "@/hooks/useLogger";
 
 export interface getQueryProps<T> {
@@ -23,7 +23,7 @@ export const getQuery = <T,>(
     queryKey: keys,
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/${url}`;
-      return customAxios.get(apiUrl).then((response) => {
+      return authorizedCustomAxios.get(apiUrl).then((response) => {
         logger(title, response.data);
         if (convertFn === undefined) {
           return response.data;

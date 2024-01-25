@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import { AppContext, AppState } from "@/pages/App/App";
 import { useContext } from "react";
 

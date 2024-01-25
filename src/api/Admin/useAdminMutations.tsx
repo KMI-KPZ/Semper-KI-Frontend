@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { DeleteUserProps } from "@/pages/Admin/hooks/useAdmin";
 import {
@@ -18,7 +18,7 @@ const useAdminMutations = (): useAdminMutationsReturnProps => {
   const deleteUser = useMutation<any, Error, DeleteUserProps>({
     mutationFn: async ({ hashedID, name }) => {
       const url = `${process.env.VITE_HTTP_API_URL}/public/admin/deleteUser/`;
-      return customAxios
+      return authorizedCustomAxios
         .delete(url, {
           data: {
             hashedID,
@@ -38,7 +38,7 @@ const useAdminMutations = (): useAdminMutationsReturnProps => {
   const deleteOrganization = useMutation<any, Error, DeleteUserProps>({
     mutationFn: async ({ hashedID, name }) => {
       const url = `${process.env.VITE_HTTP_API_URL}/public/admin/deleteOrganization/`;
-      return customAxios
+      return authorizedCustomAxios
         .delete(url, {
           data: {
             hashedID,

@@ -4,7 +4,7 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { customAxios } from "../customAxios";
+import { authorizedCustomAxios } from "../customAxios";
 import logger from "@/hooks/useLogger";
 import { Permission, PermissionGateType } from "@/hooks/usePermissions";
 
@@ -20,7 +20,7 @@ const usePermissionsQuerys = (): usePermissionsQuerysReturnProps => {
     queryKey: ["permissions"],
     queryFn: async () => {
       const url = `${process.env.VITE_HTTP_API_URL}/public/getPermissions/`;
-      return customAxios.get(url).then((res) => {
+      return authorizedCustomAxios.get(url).then((res) => {
         logger("usePermission | getPermissions ✅ |", res.data);
         return res.data;
       });
@@ -32,7 +32,7 @@ const usePermissionsQuerys = (): usePermissionsQuerysReturnProps => {
     queryKey: ["permissionMask"],
     queryFn: async () => {
       const url = `${process.env.VITE_HTTP_API_URL}/public/getPermissionMask/`;
-      return customAxios.get(url).then((res) => {
+      return authorizedCustomAxios.get(url).then((res) => {
         logger("usePermission | getPermissionMask ✅ |", res.data);
         return res.data.Rights;
       });

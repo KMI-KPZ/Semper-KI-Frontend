@@ -4,7 +4,7 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 
 interface usePermissionsMutationsReturnProps {
@@ -21,7 +21,7 @@ const usePermissionsMutations = (): usePermissionsMutationsReturnProps => {
 
   const reloadPermissionsMutation = useMutation<Permission[], Error, void>({
     mutationFn: async () =>
-      customAxios
+      authorizedCustomAxios
         .get(`${process.env.VITE_HTTP_API_URL}/public/getNewPermissions/`)
         .then((res) => {
           logger("usePermissions | relodePermissions ✅"); // |", res.data);

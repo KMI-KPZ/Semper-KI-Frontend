@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { FilterItemProps } from "@/pages/Service/Manufacturing/Filter/Filter";
 import {
@@ -25,7 +25,7 @@ const useFilterMutations = (): useFilterMutationsReturnProps => {
     FilterItemProps[]
   >({
     mutationFn: async (filters: FilterItemProps[]) =>
-      customAxios
+      authorizedCustomAxios
         .post(`${process.env.VITE_HTTP_API_URL}/public/updateFilters/`, {
           filters,
         })

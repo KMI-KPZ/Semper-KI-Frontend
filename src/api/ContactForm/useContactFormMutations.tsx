@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { UseMutationResult, useMutation } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -25,7 +25,7 @@ const useContactFormMutations = (): useContactFormMutationsReturnProps => {
   const sendContactFormMutation = useMutation<any, Error, ContactFormData>({
     mutationFn: async (data) => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/contact/`;
-      customAxios
+      authorizedCustomAxios
         .post(apiUrl, data)
         .then((response) => {
           if (response.data.result === false) {

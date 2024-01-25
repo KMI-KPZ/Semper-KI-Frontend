@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import {
   OrganizationInfoProps,
@@ -35,7 +35,7 @@ const useOrganizationQuerys = (
   const organizationInfoQuery = useQuery<OrganizationInfoProps, Error>({
     queryKey: ["organizations", "info"],
     queryFn: async () => {
-      return customAxios
+      return authorizedCustomAxios
         .get(`${process.env.VITE_HTTP_API_URL}/public/getOrganization/`)
         .then((res) => {
           if (showLogger)
@@ -60,7 +60,7 @@ const useOrganizationQuerys = (
     queryKey: ["organizations", "users"],
     queryFn: async () => {
       return (
-        customAxios
+        authorizedCustomAxios
           // .post(apiUrl, { data: { intent: "fetchUsers" } })
           .get(apiUrl + "fetchUsers/")
           .then((res) => {
@@ -76,7 +76,7 @@ const useOrganizationQuerys = (
   const permissionsQuery = useQuery<PermissionProps[], Error>({
     queryKey: ["organizations", "permissions"],
     queryFn: async () =>
-      customAxios.get(apiUrl + "getPermissions/").then((res) => {
+      authorizedCustomAxios.get(apiUrl + "getPermissions/").then((res) => {
         if (showLogger)
           logger("useOrganizations | getPermissions ✅ |", res.data);
         return !Array.isArray(res.data)
@@ -104,7 +104,7 @@ const useOrganizationQuerys = (
     queryKey: ["organizations", "roles"],
     queryFn: async () => {
       return (
-        customAxios
+        authorizedCustomAxios
           // .post(apiUrl, { data: { intent: "getRoles" } })
           .get(apiUrl + "getRoles/")
           .then((res) => {
@@ -120,7 +120,7 @@ const useOrganizationQuerys = (
   const rolePermissionsQuery = useQuery<PermissionProps[], Error>({
     queryKey: ["organizations", "roles", roleID, "permissions"],
     queryFn: async () =>
-      customAxios
+      authorizedCustomAxios
         .post(apiUrl + "getPermissionsForRole/", {
           data: {
             content: { roleID: roleID },

@@ -46,5 +46,5 @@ const axiosAuthorized = axios.create({
   xsrfHeaderName: "X-CSRFToken",
 });
 
-export const customAxios: AxiosInstance =
-  CSRFToken() === "" ? axiosUnauthorized : axiosAuthorized;
+export const unauthorizedCustomAxios: AxiosInstance = axiosUnauthorized;
+export const authorizedCustomAxios: AxiosInstance = axiosAuthorized;

@@ -10,6 +10,7 @@ import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import PrintIcon from "@mui/icons-material/Print";
 import ScienceIcon from "@mui/icons-material/Science";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
+import FactoryIcon from "@mui/icons-material/Factory";
 import { UserType } from "@/hooks/useUser";
 import { NavigationItemPreferredType } from "@/components/Header";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
@@ -70,6 +71,14 @@ export const NavigationItemData: INavigationItem[] = [
     title: "organization",
     link: "/organization",
     icon: <CorporateFareIcon fontSize="large" />,
+    extern: false,
+    preferred: ["header", "home"],
+    userTypes: [UserType.ORGANIZATION],
+  },
+  {
+    title: "resources",
+    link: "/resources",
+    icon: <FactoryIcon fontSize="large" />,
     extern: false,
     preferred: ["header", "home"],
     userTypes: [UserType.ORGANIZATION],

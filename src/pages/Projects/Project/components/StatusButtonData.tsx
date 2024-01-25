@@ -16,6 +16,7 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import ScheduleSendIcon from "@mui/icons-material/ScheduleSend";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export type StatusButtonTitleType =
   | "SELECT_SERVICE"
@@ -33,7 +34,8 @@ export type StatusButtonTitleType =
   | "PRODUCTION"
   | "DELIVERY"
   | "COMPLETED"
-  | "REPROJECT";
+  | "REPROJECT"
+  | "SERVICE_IN_PROGRESS";
 
 export interface StatusButtonProps {
   title: StatusButtonTitleType;
@@ -52,15 +54,15 @@ export const statusButtonData: StatusButtonProps[] = [
     priority: "primary",
   },
   // {
-  //   title: "EDIT",
-  //   icon: <EditIcon />,
+  //   title: "SELECT_SERVICE",
+  //   icon: <ArrowBackIcon />,
   //   user: UserType.USER,
   //   allowedStates: [
   //     ProcessStatus.SERVICE_IN_PROGRESS,
   //     ProcessStatus.SERVICE_READY,
   //     ProcessStatus.SERVICE_COMPLICATION,
   //   ],
-  //   priority: "primary",
+  //   priority: "secondary",
   // },
   {
     title: "DELETE",
@@ -77,6 +79,13 @@ export const statusButtonData: StatusButtonProps[] = [
     ],
     priority: "primary",
   },
+  // {
+  //   title: "SERVICE_IN_PROGRESS",
+  //   icon: <ArrowBackIcon />,
+  //   user: UserType.USER,
+  //   allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
+  //   priority: "secondary",
+  // },
   {
     title: "CONTRACTOR_SELECTED",
     icon: <FactoryIcon />,

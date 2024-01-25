@@ -104,9 +104,10 @@ const Project: React.FC<Props> = (props) => {
           <ProjectTitleForm
             headerType="h1"
             title={
-              project.projectDetails.title === undefined
-                ? t("Projects.Project.Project.title")
-                : project.projectDetails.title
+              project.projectDetails !== undefined &&
+              project.projectDetails.title !== undefined
+                ? project.projectDetails.title
+                : t("Projects.Project.Project.title")
             }
             updateTitle={updateProjectTitle}
           />
@@ -170,7 +171,7 @@ const Project: React.FC<Props> = (props) => {
             </Text>
           ) : null}
         </Container>
-        <Container direction="row" wrap="wrap" justify="end">
+        <Container direction="row" wrap="wrap" justify="center">
           <ProjectButtons
             project={project}
             checkedProcesses={checkedProcesses}
@@ -209,7 +210,11 @@ const Project: React.FC<Props> = (props) => {
       )}
       <OwnerGate>
         <Modal
-          open={project.projectDetails.title === undefined}
+          open={
+            (project.projectDetails === undefined ||
+              project.projectDetails.title === undefined) &&
+            user.usertype !== UserType.ADMIN
+          }
           locked={true}
           title="projectTitle"
           noIcon={true}

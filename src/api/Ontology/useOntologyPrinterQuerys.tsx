@@ -4,8 +4,9 @@ import {
   useQuery,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import {
+  ExistingOntoPrinter,
   OntoPrinter,
   OntoPrinterFlat,
   OntoPrinterProperty,
@@ -33,7 +34,7 @@ const useOntologyPrinterQuerys = (props: UseOntoProps): ReturnProps => {
   const printersQuery = useQuery<OntoPrinterFlat[], Error>({
     queryKey: ["onto", "printers"],
     queryFn: async () =>
-      customAxios
+      authorizedCustomAxios
         .get(`${process.env.VITE_HTTP_API_URL}/public/onto/getPrinters/`)
         .then((res) => {
           logger("useOnto| getPrinters ✅ |", res.data);
@@ -41,23 +42,28 @@ const useOntologyPrinterQuerys = (props: UseOntoProps): ReturnProps => {
         }),
   });
 
-  const printerQuery = useQuery<OntoPrinter, Error>({
+  const printerQuery = useQuery<ExistingOntoPrinter, Error>({
     queryKey: ["onto", "printer", printerID],
     queryFn: async () =>
-      customAxios
+      authorizedCustomAxios
         .post(`${process.env.VITE_HTTP_API_URL}/public/onto/getPrinter/`, {
           printerID,
         })
         .then((res) => {
           logger("useOnto| getPrinter ✅ |", printerID, res.data);
-          return res.data;
+          return res.data.map(
+            (printer: any): ExistingOntoPrinter => ({
+              ...printer,
+              type: "existing",
+            })
+          );
         }),
     enabled: printerID !== "",
   });
 
   const printerMutation = useMutation<OntoPrinterProperty[], Error, string>({
     mutationFn: async (printerID: string) =>
-      customAxios
+      authorizedCustomAxios
         .post(`${process.env.VITE_HTTP_API_URL}/public/onto/getPrinter/`, {
           printer: printerID,
         })
@@ -65,7 +71,7 @@ const useOntologyPrinterQuerys = (props: UseOntoProps): ReturnProps => {
           // logger("useOnto| getPrinter ✅ |", printerID, res.data);
           return res.data.properties.flatMap((object: Object) => {
             if (typeof object === "string") return { name: object };
-            logger("object", Object.keys(object), Object.values(object));
+            // logger("object", Object.keys(object), Object.values(object));
             return {
               name: "Eigneschnaft",
               values: ["nischt", "good"],

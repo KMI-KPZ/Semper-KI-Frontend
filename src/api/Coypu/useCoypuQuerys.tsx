@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import DOMPurify from "dompurify";
@@ -28,7 +28,7 @@ const useCoypuQuerys = (): useCoypuQuerysReturnProps => {
     queryKey: ["coypu"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/coypu/`;
-      return customAxios.get(apiUrl).then((response) => {
+      return authorizedCustomAxios.get(apiUrl).then((response) => {
         logger("useCoypu | ✅ |", response.data);
         const coypu = response.data
           .filter((data: any) => data.rawhtml.url !== "")

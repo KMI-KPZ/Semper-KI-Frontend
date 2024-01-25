@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { ReactComponent as MastodonIcon } from "@icons/Mastodon.svg";
-import ContactForm from "./ContactForm";
 import {
   URL_Contact,
   URL_Datenschutz,
@@ -13,6 +12,7 @@ import {
 } from "@/config/constants";
 import { Button, Modal } from "@component-library/index";
 import usePing from "@/hooks/usePing";
+import ContactForm from "../Form/ContactForm";
 
 interface Props {}
 
@@ -37,7 +37,7 @@ const Footer: React.FC<Props> = (props) => {
   return (
     <>
       <Modal open={open} closeModal={() => setOpen(false)} title="ContactForm">
-        <ContactForm closeEdit={contactOnClick} />
+        <ContactForm closeEdit={() => setOpen(false)} />
       </Modal>
       <footer className="w-full bg-slate-800 text-white shadow-inner ">
         <ul className="flex flex-col items-center md:flex-row md:justify-around">

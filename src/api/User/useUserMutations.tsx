@@ -4,7 +4,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { customAxios } from "../customAxios";
+import { authorizedCustomAxios } from "../customAxios";
 import logger from "@/hooks/useLogger";
 import { UpdateUserProps, UserDetailsProps } from "@/hooks/useUser";
 
@@ -24,7 +24,7 @@ const useUserMutations = (): useUserMutationsReturnProps => {
 
   const deleteUserMutation = useMutation<void, Error, void>({
     mutationFn: async () =>
-      customAxios
+      authorizedCustomAxios
         .delete(`${process.env.VITE_HTTP_API_URL}/public/profileDeleteUser/`)
         .then((response) => {
           logger("useUser | profileDeleteUser ✅ |");
@@ -40,7 +40,7 @@ const useUserMutations = (): useUserMutationsReturnProps => {
 
   const updateUserDetailsMutation = useMutation<void, Error, UpdateUserProps>({
     mutationFn: async (details) =>
-      customAxios
+      authorizedCustomAxios
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateUserDetails/`, {
           details,
         })

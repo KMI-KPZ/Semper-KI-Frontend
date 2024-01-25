@@ -6,6 +6,8 @@ import {
 } from "../PostProcessing";
 import { Heading } from "@component-library/index";
 import { Button } from "@component-library/index";
+import useProcess from "@/pages/Projects/hooks/useProcess";
+import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
 
 interface Props<Item> {
   item: Item;
@@ -18,6 +20,7 @@ const ProcessPostProcessingItem = <Item extends PostProcessingProps>(
 ) => {
   const { closeItemView, item, checkItem } = props;
   const { t } = useTranslation();
+  const { process } = useProcess();
 
   const renderNumberInput = () => (
     <input className="border" type="number" min="0" />
@@ -73,19 +76,21 @@ const ProcessPostProcessingItem = <Item extends PostProcessingProps>(
       <div className="flex flex-row items-center justify-center">
         {renderInput(item.type)}
       </div>
-      <Button
-        onClick={handleOnClickButton}
-        variant={item.checked ? "secondary" : "primary"}
-        title={
-          item.checked
-            ? t(
-                "Service.Manufacturing.PostProcessing.components.Item.button.deselect"
-              )
-            : t(
-                "Service.Manufacturing.PostProcessing.components.Item.button.select"
-              )
-        }
-      />
+      {isProcessAtServiceStatus(process) ? (
+        <Button
+          onClick={handleOnClickButton}
+          variant={item.checked ? "secondary" : "primary"}
+          title={
+            item.checked
+              ? t(
+                  "Service.Manufacturing.PostProcessing.components.Item.button.deselect"
+                )
+              : t(
+                  "Service.Manufacturing.PostProcessing.components.Item.button.select"
+                )
+          }
+        />
+      ) : null}
     </div>
   );
 };

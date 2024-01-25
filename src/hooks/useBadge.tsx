@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import useEvents from "./useEvents/useEvents";
 import { getProjectEventAmount } from "./useEvents/hooks/useProjectEvent";
 import logger from "./useLogger";

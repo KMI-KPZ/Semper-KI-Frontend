@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import { AuthorizedUserContext } from "@/routeOutlets/AuthorizedUserOutlet";
 import { useContext } from "react";
 import {

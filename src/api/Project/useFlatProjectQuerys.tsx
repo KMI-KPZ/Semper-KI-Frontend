@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import useUser, { UserType } from "@/hooks/useUser";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
@@ -49,7 +49,7 @@ const useFlatProjectQuerys = (): useFlatProjectQuerysReturnProps => {
     queryKey: ["flatProjects"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getFlatProjects/`; //TODO change when path changes
-      return customAxios.get(apiUrl).then((response) => {
+      return authorizedCustomAxios.get(apiUrl).then((response) => {
         logger("useFlatProjects | flatProjectsQuery ✅ |", response.data);
         return response.data.projects.map(
           (project: any, index: number): FlatProjectProps => ({

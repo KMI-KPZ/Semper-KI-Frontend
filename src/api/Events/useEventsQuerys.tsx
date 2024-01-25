@@ -5,7 +5,7 @@ import {
   UseQueryResult,
   useQuery,
 } from "@tanstack/react-query";
-import { customAxios } from "../customAxios";
+import { authorizedCustomAxios } from "../customAxios";
 import logger from "@/hooks/useLogger";
 
 interface useEventsQuerysReturnProps {
@@ -18,7 +18,7 @@ const useEventsQuerys = (): useEventsQuerysReturnProps => {
   const missedEventsQuery = useQuery<Event[], Error>({
     queryKey: ["missedEvents"],
     queryFn: async () =>
-      customAxios
+      authorizedCustomAxios
         .get(`${process.env.VITE_HTTP_API_URL}/public/getMissedEvents/`)
         .then((res) => {
           logger("useMissedEvent | getMissedEvents ✅ |", res.data);

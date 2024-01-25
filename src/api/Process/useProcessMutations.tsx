@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import {
   DeleteFileProps,
@@ -53,6 +53,12 @@ interface useProcessMutationsReturnProps {
     DeleteFileMutationProps,
     unknown
   >;
+  deleteModelMutation: UseMutationResult<
+    string,
+    Error,
+    DeleteModelMutationProps,
+    unknown
+  >;
 }
 
 export type MultipleProcessMutationProps = {
@@ -85,6 +91,8 @@ export type DeleteFileMutationProps = {
   fileID: string;
 } & SingleProcessMutationProps;
 
+export type DeleteModelMutationProps = {} & SingleProcessMutationProps;
+
 const useProcessMutations = (): useProcessMutationsReturnProps => {
   const queryClient = useQueryClient();
   const { projectID } = useParams();
@@ -95,7 +103,7 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
   const createProcessMutation = useMutation<string, Error, void>({
     mutationFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/createProcessID/${projectID}/`;
-      return customAxios.get(apiUrl).then((response) => {
+      return authorizedCustomAxios.get(apiUrl).then((response) => {
         logger("useProcess | createProcessMutation ✅ |", response.data);
         return response.data.processID;
       });
@@ -115,7 +123,7 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
     mutationFn: async (props) => {
       const { updates, processIDs } = props;
       const { changes = {}, deletions = {} } = updates;
-      return customAxios
+      return authorizedCustomAxios
         .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
           projectID,
           processIDs,
@@ -140,7 +148,7 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
   >({
     mutationFn: async (props) => {
       const { processIDs } = props;
-      return customAxios
+      return authorizedCustomAxios
         .delete(
           `${
             process.env.VITE_HTTP_API_URL
@@ -170,7 +178,7 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
       files.forEach((file) => formData.append(file.name, file));
       formData.append("processID", processID);
       formData.append("projectID", project.projectID);
-      return customAxios
+      return authorizedCustomAxios
         .post(
           `${process.env.VITE_HTTP_API_URL}/public/uploadFiles/`,
           formData,
@@ -193,7 +201,7 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
   >({
     mutationFn: async (props) => {
       const { processID, fileID } = props;
-      return customAxios
+      return authorizedCustomAxios
         .get(
           `${process.env.VITE_HTTP_API_URL}/public/downloadFile/${processID}/${fileID}`,
           { responseType: "blob" }
@@ -212,7 +220,7 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
   >({
     mutationFn: async (props) => {
       const { processID, fileIDs } = props;
-      return customAxios
+      return authorizedCustomAxios
         .get(
           `${
             process.env.VITE_HTTP_API_URL
@@ -238,12 +246,33 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
   >({
     mutationFn: async (props) => {
       const { processID, fileID } = props;
-      return customAxios
+      return authorizedCustomAxios
         .delete(
           `${process.env.VITE_HTTP_API_URL}/public/deleteFile/${processID}/${fileID}`
         )
         .then((res) => {
           logger("useProcessMutations | deleteFileMutation ✅ |", res.data);
+          return res.data;
+        });
+    },
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries(["project", projectID]);
+    },
+  });
+
+  const deleteModelMutation = useMutation<
+    string,
+    Error,
+    DeleteModelMutationProps
+  >({
+    mutationFn: async (props) => {
+      const { processID } = props;
+      return authorizedCustomAxios
+        .delete(
+          `${process.env.VITE_HTTP_API_URL}/public/deleteModel/${processID}/`
+        )
+        .then((res) => {
+          logger("useProcessMutations | deleteModelMutation ✅ |", res.data);
           return res.data;
         });
     },
@@ -260,6 +289,7 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
     downloadZIPMutation,
     updateProcessMutation,
     uploadFilesMutation,
+    deleteModelMutation,
   };
 };
 

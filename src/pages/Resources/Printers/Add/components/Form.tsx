@@ -203,22 +203,27 @@ const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
     return fields !== undefined && fields.length > 0 ? (
       fields.map((prop, propertyIndex) => (
         <div
-          className="flex w-full flex-col items-start justify-center gap-5 md:flex-row"
+          className="flex w-full flex-col items-start justify-center gap-5 rounded-xl bg-slate-100 p-5 md:flex-row"
           key={prop.id}
         >
           <div className="flex w-full flex-col items-center justify-start gap-2">
-            <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
+            <div className="flex w-full flex-col items-center justify-center gap-3 md:flex-row">
               <Text variant="body">
                 {t("Resources.Printers.form.yup.propName")}
               </Text>
               <input
                 placeholder={t("Resources.Printers.form.yup.propName") + "..."}
                 {...register(`properties.${propertyIndex}.name`)}
-                className="w-full bg-slate-100 px-5 py-2 "
+                className={`w-full grow rounded-md border border-gray-300 p-2 md:w-fit ${
+                  getErrorMessage(propertyIndex) !== null
+                    ? "border-2 border-red-500"
+                    : ""
+                }`}
               />
               <Button
                 children={<RemoveIcon />}
                 size="xs"
+                width="fit"
                 title={t("Resources.Printers.form.button.removeProperty")}
                 onClick={() => handleOnClickButtonRemoveProperty(propertyIndex)}
               />
@@ -244,9 +249,17 @@ const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
                         {...register(
                           `properties.${propertyIndex}.values.${valueIndex}`
                         )}
-                        className="w-full bg-slate-100 px-5 py-2 "
+                        className={` grow rounded-md border border-gray-300 p-2 md:w-fit ${
+                          getValueItemErrorMessage(
+                            propertyIndex,
+                            valueIndex
+                          ) !== null
+                            ? "border-2 border-red-500"
+                            : ""
+                        }`}
                       />
                       <Button
+                        width="fit"
                         size="xs"
                         title={t("Resources.Printers.form.button.removeValue")}
                         onClick={() =>
@@ -271,6 +284,7 @@ const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
               </>
             )}
             <Button
+              width="fit"
               size="xs"
               title={t("Resources.Printers.form.button.addValue")}
               onClick={() => handleOnClickButtonAddValue(propertyIndex)}
@@ -287,14 +301,19 @@ const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
+    <div className="flex w-full flex-col items-center justify-center gap-5 bg-white">
       <form className="flex w-full flex-col items-center justify-center gap-5">
         <Container width="full" className="flex-wrap">
           <Text variant="body">{t("Resources.Printers.view.name")}</Text>
           <input
             placeholder={t("Resources.Printers.form.yup.name") + "..."}
             type="test"
-            className="w-full bg-slate-100 px-5 py-2 md:w-fit md:grow "
+            className={`grow rounded-md border border-gray-300 p-2 ${
+              errors.printerName !== undefined &&
+              errors.printerName.message !== undefined
+                ? "border-2 border-red-500"
+                : ""
+            }`}
             {...register("printerName")}
           />
         </Container>
@@ -305,6 +324,7 @@ const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
         {renderValueForm()}
         <Button
           size="xs"
+          width="fit"
           title={t("Resources.Printers.form.button.addValue")}
           onClick={handleOnClickButtonAddProperty}
           children={<AddIcon />}

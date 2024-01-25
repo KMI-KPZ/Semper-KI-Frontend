@@ -171,7 +171,7 @@ const Project: React.FC<Props> = (props) => {
             </Text>
           ) : null}
         </Container>
-        <Container direction="row" wrap="wrap" justify="end">
+        <Container direction="row" wrap="wrap" justify="center">
           <ProjectButtons
             project={project}
             checkedProcesses={checkedProcesses}

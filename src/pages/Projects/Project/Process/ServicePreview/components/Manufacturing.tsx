@@ -7,7 +7,9 @@ import { Text } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ManufactoringProcessProps } from "@/pages/Projects/hooks/useProcess";
-import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
+import useGeneralProcess, {
+  isProcessAtServiceStatus,
+} from "@/pages/Projects/hooks/useGeneralProcess";
 import Card from "@component-library/Card/Card";
 import { useNavigate } from "react-router-dom";
 import ModelDetails from "./ModelDetails";
@@ -173,12 +175,16 @@ const ProcessServiceManufacturing: React.FC<
             "Projects.Project.Process.ServicePreview.components.Manufacturing.amount"
           )}
         </Text>
-        <input
-          onChange={handleOnChangeInputAmount}
-          type="number"
-          value={process.processDetails.amount}
-          className=" rounded-md border border-gray-300 p-2 text-center"
-        />
+        {isProcessAtServiceStatus(process) ? (
+          <input
+            onChange={handleOnChangeInputAmount}
+            type="number"
+            value={process.processDetails.amount}
+            className=" rounded-md border border-gray-300 p-2 text-center"
+          />
+        ) : (
+          <Text>{process.processDetails.amount}</Text>
+        )}
       </Container>
       <Modal
         title="ModelPreview"

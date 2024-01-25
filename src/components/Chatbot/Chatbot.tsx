@@ -5,22 +5,22 @@ interface ChatbotProps {}
 
 const Chatbot: React.FC<ChatbotProps> = (props) => {
   const {} = props;
-  //   useEffect(() => {
-  //     const script = document.createElement("script");
+  useEffect(() => {
+    const script = document.createElement("script");
 
-  //     // URL des Scripts setzen
-  //     script.src =
-  //       "https://dev.semper-ki.org:39080/kbot-widget/bots/preview/VYK27sy7BYTr5IEV5NpNrd-EWU5NT4ZPQJGx_STuZjM=/widget.js";
+    // URL des Scripts setzen
+    script.src =
+      "https://dev.semper-ki.org:39080/kbot-widget/bots/preview/Uf50Hf6LKvI3iE88WxT7Hysp8n50N0BU0ih9AsnlLvQ=/widget.js";
 
-  //     // Optional: Weitere Attribute setzen, z.B. async oder defer
-  //     script.async = true;
+    // Optional: Weitere Attribute setzen, z.B. async oder defer
+    script.async = true;
 
-  //     // Script-Element zum Dokument hinzufügen
-  //     document.body.appendChild(script);
-  //   }, []);
+    // Script-Element zum Dokument hinzufügen
+    document.body.appendChild(script);
+  }, []);
 
   return (
-    <script src="https://dev.semper-ki.org:39080/kbot-widget/bots/preview/VYK27sy7BYTr5IEV5NpNrd-EWU5NT4ZPQJGx_STuZjM=/widget.js"></script>
+    <script src="https://dev.semper-ki.org:39080/kbot-widget/bots/preview/Uf50Hf6LKvI3iE88WxT7Hysp8n50N0BU0ih9AsnlLvQ=/widget.js"></script>
   );
 };
 

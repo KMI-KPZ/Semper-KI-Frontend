@@ -6,6 +6,8 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ProcessPostProcessingCard from "./Card";
 import { PostProcessingProps } from "../PostProcessing";
 import { Modal } from "@component-library/index";
+import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
+import useProcess from "@/pages/Projects/hooks/useProcess";
 
 interface Props<Item> {
   grid: boolean;
@@ -29,6 +31,7 @@ const ProcessPostProcessingCatalog = <Item extends PostProcessingProps>(
     modalOpen: false,
     itemOpen: undefined,
   });
+  const { process } = useProcess();
   const { itemOpen, modalOpen } = state;
   const openItemView = (item: Item) => {
     setState((prevState) => ({
@@ -87,19 +90,22 @@ const ProcessPostProcessingCatalog = <Item extends PostProcessingProps>(
                 key={index}
               />
             ))}
-          <div
-            className={`bezier flex flex-row items-center justify-center self-center overflow-hidden bg-türkis p-5 text-white transition  duration-300 hover:cursor-pointer hover:bg-grau-400 ${
-              grid === true
-                ? "h-fit basis-[48%] sm:basis-[32%] md:basis-[23.5%]"
-                : "w-full "
-            }`}
-            onClick={handleOnClickCard}
-          >
-            {t(
-              "Service.Manufacturing.PostProcessing.components.Catalog.button.overview"
-            )}
-            <NavigateNextIcon fontSize="large" />
-          </div>
+
+          {isProcessAtServiceStatus(process) ? (
+            <div
+              className={`bezier flex flex-row items-center justify-center self-center overflow-hidden bg-türkis p-5 text-white transition  duration-300 hover:cursor-pointer hover:bg-grau-400 ${
+                grid === true
+                  ? "h-fit basis-[48%] sm:basis-[32%] md:basis-[23.5%]"
+                  : "w-full "
+              }`}
+              onClick={handleOnClickCard}
+            >
+              {t(
+                "Service.Manufacturing.PostProcessing.components.Catalog.button.overview"
+              )}
+              <NavigateNextIcon fontSize="large" />
+            </div>
+          ) : null}
           <Modal
             title="ProcessPostProcessingItem"
             open={modalOpen === true && itemOpen !== undefined}

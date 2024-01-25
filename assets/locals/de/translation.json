@@ -546,7 +546,10 @@
       "Resources": {
         "title": "Ressourcen",
         "button": {
-          "edit": "Ressourcen verwalten"
+          "overview": "Übersicht",
+          "printer": "3D-Drucker",
+          "materials": "Materialien",
+          "postprocessing": "Nachbearbeitungen"
         }
       }
     },
@@ -975,6 +978,7 @@
           "SELECT_SERVICE": "Service auswählen",
           "EDIT": "Service vervollständigen",
           "DELETE": "Löschen",
+          "SERVICE_IN_PROGRESS": "Service in bearbeitung",
           "CONTRACTOR_SELECTED": "Auftragnehmer auswählen",
           "VERIFYING": "Überprüfen",
           "VERIFYING_AND_REQUESTED": "Überprüfen und automatisch Anfragen",
@@ -1328,7 +1332,7 @@
           "back": "Zurück"
         },
         "yup": {
-          "notSamePrinterName": "Druckername muss eindeutig sein",
+          "notSamePrinterName": "Druckername schon vergeben",
           "name": "Name",
           "propName": "Eigenschaft",
           "propNamerequired": "Eigenschaft benötigt",

@@ -88,6 +88,7 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
         className="flex-wrap"
       >
         {allPrinters
+          .slice(0, 50)
           .filter((printer) => filterDataBySearchInput(printer))
           .map((printer, index) => (
             <Card key={index} onClick={() => handleOnClickCardPrinter(printer)}>

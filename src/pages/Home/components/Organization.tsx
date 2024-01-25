@@ -1,4 +1,4 @@
-import { Button } from "@component-library/index";
+import { Button, Container } from "@component-library/index";
 import { Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -11,12 +11,14 @@ const HomeOrganization: React.FC<HomeOrganizationProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <HomeContainer className="gap-5 bg-white p-5">
+    <HomeContainer className="flex-row gap-5 bg-white p-10 ">
       <Heading variant="h2">{t("Home.components.Organization.title")}</Heading>
-      <Button
-        title={t("Home.components.Organization.button.edit")}
-        to="/organization"
-      />
+      <Container width="full">
+        <Button
+          title={t("Home.components.Organization.button.edit")}
+          to="/organization"
+        />
+      </Container>
     </HomeContainer>
   );
 };

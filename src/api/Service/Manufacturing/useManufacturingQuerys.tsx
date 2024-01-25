@@ -4,7 +4,11 @@ import { customAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { FilterItemProps } from "../../../pages/Service/Manufacturing/Filter/Filter";
 import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
-import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
+import {
+  ModelDetailsProps,
+  ModelProps,
+} from "@/pages/Service/Manufacturing/Model/types";
+import { useProject } from "@/pages/Projects/hooks/useProject";
 
 export const useManufacturingMaterialQuerys = (
   filters: FilterItemProps[]
@@ -67,4 +71,25 @@ export const useManufacturingModelQuerys = (
     initialData: [],
   });
   return { modelsQuery };
+};
+
+export const useManufacturingModelDetailsQuerys = (
+  processID: string
+): { modelDetailsQuery: UseQueryResult<ModelDetailsProps, Error> } => {
+  const { project } = useProject();
+  const modelDetailsQuery = useQuery<ModelDetailsProps, Error>({
+    queryKey: ["project", project.projectID, processID, "modelDetails"],
+    queryFn: async () => {
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/checkModel/${processID}/`;
+      return customAxios.get(apiUrl).then((response) => {
+        logger(
+          "useManufacturingModelDetailsQuerys | modelDetailsQuery ✅ |",
+          response.data
+        );
+        return response.data;
+      });
+    },
+    enabled: processID !== "",
+  });
+  return { modelDetailsQuery };
 };

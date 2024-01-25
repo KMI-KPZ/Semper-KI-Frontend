@@ -79,18 +79,23 @@ const useOrganizationQuerys = (
       customAxios.get(apiUrl + "getPermissions/").then((res) => {
         if (showLogger)
           logger("useOrganizations | getPermissions ✅ |", res.data);
-        return res.data.map(
-          (item: { value: string; description: string }): PermissionProps => ({
-            permission_name: item.value as PermissionNameTranslationType,
-            context: item.value.split(
-              ":"
-            )[0] as PermissionContextTranslationType,
-            permissionType: item.value.split(
-              ":"
-            )[1] as PermissionTypeTranslationType,
-            description: item.description,
-          })
-        );
+        return !Array.isArray(res.data)
+          ? []
+          : res.data.map(
+              (item: {
+                value: string;
+                description: string;
+              }): PermissionProps => ({
+                permission_name: item.value as PermissionNameTranslationType,
+                context: item.value.split(
+                  ":"
+                )[0] as PermissionContextTranslationType,
+                permissionType: item.value.split(
+                  ":"
+                )[1] as PermissionTypeTranslationType,
+                description: item.description,
+              })
+            );
       }),
     staleTime: staleTime,
   });

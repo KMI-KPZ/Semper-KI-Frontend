@@ -37,12 +37,14 @@ interface ReturnProps {
   ) => void;
   deleteFile: (fileID: string) => void;
   getNavigationPrefix: () => string;
+  deleteModel: () => void;
 }
 
 export interface ProcessDetailsProps {
   provisionalContractor?: string;
   title?: string;
   clientAddress?: UserAddressProps;
+  amount: number;
 }
 
 export type ProcessProps =
@@ -120,8 +122,15 @@ export interface ProcessChangesProps {
   messages?: ChatMessageProps;
   processStatus?: ProcessStatus;
   files?: File[];
-  processDetails?: ProcessDetailsProps;
+  processDetails?: UpdateProcessDetailsProps;
   serviceDetails?: GerneralUpdateServiceProps;
+}
+
+export interface UpdateProcessDetailsProps {
+  provisionalContractor?: string;
+  title?: string;
+  clientAddress?: UserAddressProps;
+  amount?: number;
 }
 
 export interface ProcessDeletionsProps {
@@ -187,6 +196,7 @@ const useProcess = (): ReturnProps => {
     downloadZIP: _downloadZIP,
     deleteFile: _deleteFile,
     getNavigationPrefix: _getNavigationPrefix,
+    deleteModel: _deleteModel,
   } = useGeneralProcess();
 
   const updateProcess = (
@@ -235,6 +245,10 @@ const useProcess = (): ReturnProps => {
     return _getNavigationPrefix(process.processID);
   };
 
+  const deleteModel = () => {
+    _deleteModel({ processID: process.processID });
+  };
+
   return {
     getNavigationPrefix,
     process,
@@ -245,6 +259,7 @@ const useProcess = (): ReturnProps => {
     downloadZIP,
     updateProcess,
     uploadFiles,
+    deleteModel,
   };
 };
 

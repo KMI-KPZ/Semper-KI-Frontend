@@ -1,5 +1,7 @@
 import { Heading } from "@component-library/index";
 import { PostProcessingProps } from "../PostProcessing";
+import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
+import useProcess from "@/pages/Projects/hooks/useProcess";
 
 interface Props<Item> {
   item: Item;
@@ -12,6 +14,7 @@ const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
   props: Props<Item>
 ) => {
   const { grid, item, openItemView, checkItem } = props;
+  const { process } = useProcess();
 
   const handleOnClickSelect = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -60,13 +63,15 @@ const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
         }`}
       >
         <Heading variant="h2">{item.title}</Heading>
-        <input
-          type="checkbox"
-          className="h-10 w-10 checked:accent-türkis"
-          checked={item.checked}
-          onClick={handleOnClickCheckbox}
-          onChange={handleOnChangeCheckbox}
-        />
+        {isProcessAtServiceStatus(process) ? (
+          <input
+            type="checkbox"
+            className="h-10 w-10 checked:accent-türkis"
+            checked={item.checked}
+            onClick={handleOnClickCheckbox}
+            onChange={handleOnChangeCheckbox}
+          />
+        ) : null}
       </div>
     </div>
   );

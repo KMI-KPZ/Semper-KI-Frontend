@@ -26,6 +26,7 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
           <Button
             title={t("Resources.Materials.table.button.add")}
             to="/resources/materials/add"
+            variant="primary"
           />
         </div>
       </PermissionGate>

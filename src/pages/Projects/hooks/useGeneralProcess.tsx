@@ -1,4 +1,5 @@
 import useProcessMutations, {
+  DeleteModelMutationProps,
   DeleteProcessMutationProps,
   DownloadFileMutationProps,
   DownloadZIPMutationProps,
@@ -31,6 +32,7 @@ interface useGeneralProcessReturnProps {
     options?: MutateOptions<Blob, Error, DownloadZIPMutationProps, unknown>
   ) => void;
   getNavigationPrefix: (currentProcessID: string) => string;
+  deleteModel: (props: DeleteModelMutationProps) => void;
 }
 
 export const isProcessAtServiceStatus = (process: ProcessProps): boolean => {
@@ -49,6 +51,7 @@ const useGeneralProcess = (): useGeneralProcessReturnProps => {
     downloadFileMutation,
     deleteFileMutation,
     downloadZIPMutation,
+    deleteModelMutation,
   } = useProcessMutations();
   const { processID } = useParams();
 
@@ -82,6 +85,9 @@ const useGeneralProcess = (): useGeneralProcessReturnProps => {
   ) => {
     downloadZIPMutation.mutate(props, options);
   };
+  const deleteModel = (props: DeleteModelMutationProps) => {
+    deleteModelMutation.mutate(props);
+  };
 
   const getNavigationPrefix = (currentProcessID: string) => {
     const paramProcessIDAvaliable = processID !== undefined;
@@ -101,6 +107,7 @@ const useGeneralProcess = (): useGeneralProcessReturnProps => {
     downloadZIP,
     updateProcess,
     uploadFiles,
+    deleteModel,
   };
 };
 

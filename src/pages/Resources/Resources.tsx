@@ -8,6 +8,7 @@ import ResourcesMaterials from "./Materials/Materials";
 import ResourcesOverview from "./Overview/Overview";
 import ResourcesPostProcessings from "./PostProcessings/PostProcessings";
 import ResourcesPrinters from "./Printers/Printers";
+import OntoPrinterContextProvider from "@/contexts/OntoPrinterContextProvider";
 
 interface ResoucesProps {}
 
@@ -24,7 +25,14 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
         <ResourcesMenu />
         <Routes>
           <Route index element={<ResourcesOverview />} />
-          <Route path="printers/*" element={<ResourcesPrinters />} />
+          <Route
+            path="printers/*"
+            element={
+              <OntoPrinterContextProvider>
+                <ResourcesPrinters />
+              </OntoPrinterContextProvider>
+            }
+          />
           <Route path="materials/*" element={<ResourcesMaterials />} />
           <Route
             path="postprocessings/*"

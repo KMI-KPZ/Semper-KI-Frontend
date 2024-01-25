@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import ProcessHistory from "@/pages/Projects/Project/Process/History/History";
 import {
@@ -73,7 +73,7 @@ const useProcessQuerys = (): useProcessQuerysReturnProps => {
   const processHistoryQuery = useQuery<HistoryProps[], Error>({
     queryKey: ["project", projectID, processID, "history"],
     queryFn: async (props) =>
-      customAxios
+      authorizedCustomAxios
         .get(
           `${process.env.VITE_HTTP_API_URL}/public/getProcessHistory/${processID}`
         )

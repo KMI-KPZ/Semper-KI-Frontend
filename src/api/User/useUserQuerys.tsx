@@ -1,4 +1,4 @@
-import { customAxios } from "../customAxios";
+import { authorizedCustomAxios } from "../customAxios";
 import logger from "@/hooks/useLogger";
 import { getAuthorizedUserType } from "@/services/utils";
 import { AuthorizedUserProps } from "@/hooks/useUser";
@@ -16,7 +16,7 @@ const useUserQuerys = (): useUserQueryReturnProps => {
   const loadIsLoggedInQuery = useQuery<boolean, Error>({
     queryKey: ["isLoggedIn"],
     queryFn: async () =>
-      customAxios
+      authorizedCustomAxios
         .get(`${process.env.VITE_HTTP_API_URL}/public/isLoggedIn/`)
         .then((response) => {
           logger("useUser | isLoggedIn ✅ |", response.data);
@@ -27,7 +27,7 @@ const useUserQuerys = (): useUserQueryReturnProps => {
   const userQuery = useQuery<AuthorizedUserProps, Error>({
     queryKey: ["user"],
     queryFn: async () => {
-      return customAxios
+      return authorizedCustomAxios
         .get(`${process.env.VITE_HTTP_API_URL}/public/getUser/`)
         .then((response) => {
           const userData = response.data;

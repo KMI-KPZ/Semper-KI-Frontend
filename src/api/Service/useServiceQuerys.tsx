@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { ServiceType } from "@/pages/Service/hooks/useService";
 import { objectToArray } from "@/services/utils";
@@ -18,7 +18,7 @@ const useServiceQuerys = (): useServiceQuerysReturnProps => {
     ["services"],
     async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getServices/`;
-      return customAxios.get(apiUrl).then((response) => {
+      return authorizedCustomAxios.get(apiUrl).then((response) => {
         const services = objectToArray<ServiceItemProps>(response.data).filter(
           (service) => service.identifier !== 0
         );

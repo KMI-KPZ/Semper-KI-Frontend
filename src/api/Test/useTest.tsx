@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import {
   UseMutationResult,
@@ -31,7 +31,7 @@ const useTest = (): useTestReturnProps => {
 
   const saveProjectsQuery = useMutation<string, Error, void>({
     mutationFn: async () => {
-      return customAxios
+      return authorizedCustomAxios
         .get(`${process.env.VITE_HTTP_API_URL}/public/saveProjects/`)
         .then((res) => {
           logger("useTest | saveProjects ✅ |", res.data);
@@ -48,7 +48,7 @@ const useTest = (): useTestReturnProps => {
     ["testDynamicQuery"],
     async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/dynamic/`;
-      return customAxios.get(apiUrl).then((response) => {
+      return authorizedCustomAxios.get(apiUrl).then((response) => {
         logger("useTest | testDynamicQuery ✅ |", response.data);
         return response.data.Buttons;
       });
@@ -57,7 +57,7 @@ const useTest = (): useTestReturnProps => {
 
   const dynamicButtonMutation = useMutation<string, Error, TestDynamicProps>({
     mutationFn: async ({ payload, action }) => {
-      return customAxios
+      return authorizedCustomAxios
         .post(`${process.env.VITE_HTTP_API_URL}/${action}`, { payload })
         .then((res) => {
           logger("useTest | dynamicButtonMutation ✅ |", res.data);

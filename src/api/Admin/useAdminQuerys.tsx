@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 import {
@@ -26,7 +26,7 @@ const useAdminQuerys = (): useAdminQuerysReturnProps => {
   const adminQuery = useQuery<AdminProps, Error>({
     queryKey: ["admin"],
     queryFn: async () =>
-      customAxios
+      authorizedCustomAxios
         .get(`${process.env.VITE_HTTP_API_URL}/public/admin/getAll/`)
         .then((res) => {
           logger("useAdminQuerys | adminQuery ✅ |", res.data);
@@ -56,7 +56,7 @@ const useAdminQuerys = (): useAdminQuerysReturnProps => {
   const adminFlatProjectsQuery = useQuery<FlatProjectProps[], Error>({
     queryKey: ["flatProjects"],
     queryFn: async () =>
-      customAxios
+      authorizedCustomAxios
         .get(
           `${process.env.VITE_HTTP_API_URL}/public/admin/getAllProjectsFlatAsAdmin/`
         )
@@ -76,7 +76,7 @@ const useAdminQuerys = (): useAdminQuerysReturnProps => {
     ["project", projectID],
     async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/admin/getSpecificProjectAsAdmin/${projectID}/`;
-      return customAxios.get(apiUrl).then((response) => {
+      return authorizedCustomAxios.get(apiUrl).then((response) => {
         const project: ProjectProps = {
           client: response.data.client,
           projectID: response.data.projectID,

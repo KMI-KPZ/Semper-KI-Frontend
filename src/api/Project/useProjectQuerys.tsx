@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import useUser, { UserType } from "@/hooks/useUser";
 import {
@@ -37,7 +37,7 @@ const useProjectQuerys = (): useProjectQuerysReturnProps => {
     ["project", projectID],
     async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getProject/${projectID}/`;
-      return customAxios.get(apiUrl).then((response) => {
+      return authorizedCustomAxios.get(apiUrl).then((response) => {
         const project: ProjectProps = {
           client: response.data.client,
           projectID: response.data.projectID,

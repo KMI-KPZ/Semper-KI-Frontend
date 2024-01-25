@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import {
@@ -15,7 +15,7 @@ const usePingQuerys = (): usePingQuerysReturnProps => {
   const pingQuery = useQuery<boolean, Error>({
     queryKey: ["ping"],
     queryFn: async (urls) => {
-      return customAxios
+      return authorizedCustomAxios
         .post(`${process.env.VITE_HTTP_API_URL}/public/isMagazineUp/`, {
           urls: [URL_Contact, URL_Datenschutz, URL_Impressum],
         })

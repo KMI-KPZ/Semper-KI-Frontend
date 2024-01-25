@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
 import { LoginMutationProps, LoginUserType } from "@/hooks/useLogin";
 import {
@@ -26,7 +26,7 @@ const useLoginMutations = (): useLoginMutationsReturnProps => {
     mutationFn: async (props) => {
       const { register, path, userType, redirect } = props;
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/login/`;
-      return customAxios
+      return authorizedCustomAxios
         .get(apiUrl, {
           headers: {
             Usertype: userType,
@@ -49,7 +49,7 @@ const useLoginMutations = (): useLoginMutationsReturnProps => {
   const mockedLoginMutation = useMutation<string, Error, LoginUserType>({
     mutationFn: async (UserType) => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/login/`;
-      return customAxios
+      return authorizedCustomAxios
         .get(apiUrl, {
           headers: {
             UserType,
@@ -68,7 +68,7 @@ const useLoginMutations = (): useLoginMutationsReturnProps => {
   const logoutMutation = useMutation<string, Error, void>({
     mutationFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/logout/`;
-      return customAxios.get(apiUrl).then((response) => {
+      return authorizedCustomAxios.get(apiUrl).then((response) => {
         logger("useLoginMutations | logoutMutation |", response);
         return response.data;
       });

@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import _FilterItems from "@/hooks/Data/FilterQuestions.json";
 import {
   DefinedUseQueryResult,
@@ -45,7 +45,7 @@ const useFilterQuerys = (): ReturnProps => {
     queryKey: ["filters"],
     queryFn: async () => {
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getFilters/`;
-      return customAxios.get(apiUrl).then((response) => {
+      return authorizedCustomAxios.get(apiUrl).then((response) => {
         logger("useFilter | getFilters ✅ |", response.data);
         return response.data;
       });

@@ -1,4 +1,4 @@
-import { customAxios } from "@/api/customAxios";
+import { authorizedCustomAxios } from "@/api/customAxios";
 import {
   useMutation,
   UseMutationResult,
@@ -49,7 +49,7 @@ const useManufacturingMutations = (): ReturnProps => {
       formData.append("projectID", projectID);
       formData.append("processID", processID);
       const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/uploadModel/`;
-      return customAxios
+      return authorizedCustomAxios
         .post(apiUrl, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         })

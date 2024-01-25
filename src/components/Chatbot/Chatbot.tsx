@@ -10,7 +10,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
 
     // URL des Scripts setzen
     script.src =
-      "https://dev.semper-ki.org:39080/kbot-widget/bots/preview/Uf50Hf6LKvI3iE88WxT7Hysp8n50N0BU0ih9AsnlLvQ=/widget.js";
+      "https://chat.semper-ki.org/kbot-widget/bots/preview/Uf50Hf6LKvI3iE88WxT7Hysp8n50N0BU0ih9AsnlLvQ=/widget.js";
 
     // Optional: Weitere Attribute setzen, z.B. async oder defer
     script.async = true;
@@ -20,7 +20,8 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
   }, []);
 
   return (
-    <script src="https://dev.semper-ki.org:39080/kbot-widget/bots/preview/Uf50Hf6LKvI3iE88WxT7Hysp8n50N0BU0ih9AsnlLvQ=/widget.js"></script>
+    <></>
+    // <script src="https://chat.semper-ki.org/kbot-widget/bots/preview/Uf50Hf6LKvI3iE88WxT7Hysp8n50N0BU0ih9AsnlLvQ=/widget.js"></script>
   );
 };
 

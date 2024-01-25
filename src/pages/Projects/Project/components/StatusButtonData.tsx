@@ -53,17 +53,17 @@ export const statusButtonData: StatusButtonProps[] = [
     allowedStates: [ProcessStatus.DRAFT],
     priority: "primary",
   },
-  {
-    title: "SELECT_SERVICE",
-    icon: <ArrowBackIcon />,
-    user: UserType.USER,
-    allowedStates: [
-      ProcessStatus.SERVICE_IN_PROGRESS,
-      ProcessStatus.SERVICE_READY,
-      ProcessStatus.SERVICE_COMPLICATION,
-    ],
-    priority: "secondary",
-  },
+  // {
+  //   title: "SELECT_SERVICE",
+  //   icon: <ArrowBackIcon />,
+  //   user: UserType.USER,
+  //   allowedStates: [
+  //     ProcessStatus.SERVICE_IN_PROGRESS,
+  //     ProcessStatus.SERVICE_READY,
+  //     ProcessStatus.SERVICE_COMPLICATION,
+  //   ],
+  //   priority: "secondary",
+  // },
   {
     title: "DELETE",
     icon: <DeleteIcon />,
@@ -79,13 +79,13 @@ export const statusButtonData: StatusButtonProps[] = [
     ],
     priority: "primary",
   },
-  {
-    title: "SERVICE_IN_PROGRESS",
-    icon: <ArrowBackIcon />,
-    user: UserType.USER,
-    allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
-    priority: "secondary",
-  },
+  // {
+  //   title: "SERVICE_IN_PROGRESS",
+  //   icon: <ArrowBackIcon />,
+  //   user: UserType.USER,
+  //   allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
+  //   priority: "secondary",
+  // },
   {
     title: "CONTRACTOR_SELECTED",
     icon: <FactoryIcon />,

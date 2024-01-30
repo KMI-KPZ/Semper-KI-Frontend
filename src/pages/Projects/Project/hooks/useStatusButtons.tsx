@@ -368,7 +368,9 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
         }
         break;
       case "request":
-        if (button.action.data.processStatus !== undefined) {
+        if (button.action.data.processStatus === undefined) {
+          statusButtonRequest({ processIDs, button: button.action.data });
+        } else {
           if (button.action.data.processStatus === "VERIFYING_AND_REQUESTED") {
             verifyProject({
               processIDs,
@@ -388,8 +390,6 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
               ProcessStatus[processStatusString as keyof typeof ProcessStatus];
             updateProcessStatus(processStatus, processIDs);
           }
-        } else {
-          statusButtonRequest({ processIDs, button: button.action.data });
         }
         break;
     }

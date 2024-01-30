@@ -3,28 +3,28 @@ import { UserType } from "@/hooks/useUser";
 import { StatusButtonPropsExtern } from "./useStatusButtons";
 
 export const externalStatusButtonData: StatusButtonPropsExtern[] = [
-  {
-    title: "TEST",
-    icon: "lol",
-    action: {
-      type: "request",
-      data: {
-        lol: "fuck you",
-        Romemo: "rgegr",
-        count: ["gtgerg", 3],
-      },
-    },
-    active: true,
-    buttonVariant: "secondary",
-    showIn: "both",
-    user: UserType.USER,
-    allowedStates: [
-      ProcessStatus.DRAFT,
-      ProcessStatus.SERVICE_READY,
-      ProcessStatus.SERVICE_IN_PROGRESS,
-      ProcessStatus.SERVICE_COMPLICATION,
-    ],
-  },
+  // {
+  //   title: "TEST",
+  //   icon: "lol",
+  //   action: {
+  //     type: "request",
+  //     data: {
+  //       lol: "fuck you",
+  //       Romemo: "rgegr",
+  //       count: ["gtgerg", 3],
+  //     },
+  //   },
+  //   active: true,
+  //   buttonVariant: "secondary",
+  //   showIn: "both",
+  //   user: UserType.USER,
+  //   allowedStates: [
+  //     ProcessStatus.DRAFT,
+  //     ProcessStatus.SERVICE_READY,
+  //     ProcessStatus.SERVICE_IN_PROGRESS,
+  //     ProcessStatus.SERVICE_COMPLICATION,
+  //   ],
+  // },
   {
     title: "BACK",
     icon: "ArrowBackIcon",

@@ -4,6 +4,7 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
 import React from "react";
 import useStatusButtons from "../../hooks/useStatusButtons";
+import { ProcessPostProcessing } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
 
 interface ProcessStatusButtonsProps {
   process: ProcessProps;
@@ -17,16 +18,22 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   return (
     <div className="flex w-full flex-col flex-wrap items-center justify-center gap-5 md:flex-row">
       {getProcessStatusButtons(process).map((button, index) => (
-        <PermissionGate element={`ProjectButton${button.title}`} key={index}>
+        <PermissionGate
+          element={
+            button.action.type === "function" &&
+            button.action.function.type === "deleteProcess"
+              ? "ProjectButtonDelete"
+              : `ProjectStatusButtons`
+          }
+          key={index}
+        >
           <Button
             key={index}
-            variant={button.priority}
+            variant={button.buttonVariant}
             size="sm"
             startIcon={button.icon}
             onClick={() => handleOnClickButton(button, process.processID)}
-            title={`${t(
-              `Projects.Project.hooks.useStatusButtons.${button.title}`
-            )}`}
+            title={button.title}
           />
         </PermissionGate>
       ))}

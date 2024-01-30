@@ -12,11 +12,16 @@ import { ProcessContext } from "../context/ProcessContext";
 import {
   DownloadFileMutationProps,
   DownloadZIPMutationProps,
+  StatusButtonRequestMutationProps,
   UpdateProcessMutationProps,
 } from "@/api/Process/useProcessMutations";
 import useGeneralProcess from "./useGeneralProcess";
 import { useNavigate } from "react-router-dom";
 import { UserAddressProps } from "@/hooks/useUser";
+import {
+  StatusButtonActionRequestProps,
+  StatusButtonPropsExtern,
+} from "../Project/hooks/useStatusButtons";
 
 interface ReturnProps {
   process: ProcessProps;
@@ -38,6 +43,7 @@ interface ReturnProps {
   deleteFile: (fileID: string) => void;
   getNavigationPrefix: () => string;
   deleteModel: () => void;
+  statusButtonRequest: (button: StatusButtonActionRequestProps) => void;
 }
 
 export interface ProcessDetailsProps {
@@ -57,6 +63,7 @@ export type DefaultProcessProps = {
   contractor: string;
   processID: string;
   processStatus: ProcessStatus;
+  processStatusButtons?: StatusButtonPropsExtern[];
   processDetails: ProcessDetailsProps;
   serviceType: ServiceType;
   serviceStatus: number;
@@ -197,6 +204,7 @@ const useProcess = (): ReturnProps => {
     deleteFile: _deleteFile,
     getNavigationPrefix: _getNavigationPrefix,
     deleteModel: _deleteModel,
+    statusButtonRequest: _statusButtonRequest,
   } = useGeneralProcess();
 
   const updateProcess = (
@@ -249,7 +257,12 @@ const useProcess = (): ReturnProps => {
     _deleteModel({ processID: process.processID });
   };
 
+  const statusButtonRequest = (button: StatusButtonActionRequestProps) => {
+    _statusButtonRequest({ processIDs: [process.processID], button });
+  };
+
   return {
+    statusButtonRequest,
     getNavigationPrefix,
     process,
     createProcess,

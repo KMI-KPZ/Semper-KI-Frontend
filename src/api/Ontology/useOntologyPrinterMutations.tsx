@@ -17,6 +17,7 @@ interface useOntologyPrinterMutationsReturnProps {
 }
 
 interface AddPrinterMutationProps {
+  organizationID: string;
   printer: OntoPrinter | NewOntoPrinter;
 }
 
@@ -29,11 +30,12 @@ const useOntologyPrinterMutations =
       Error,
       AddPrinterMutationProps
     >({
-      mutationFn: async ({ printer }) => {
-        const url = `${process.env.VITE_HTTP_API_URL}/public/onto/addPrinter/`;
+      mutationFn: async ({ organizationID, printer }) => {
+        const url = `${process.env.VITE_HTTP_API_URL}/public/orga/addPrinter/`;
         return authorizedCustomAxios
           .post(url, {
-            data: printer,
+            organization: organizationID,
+            printer,
           })
           .then((response) => {
             logger(

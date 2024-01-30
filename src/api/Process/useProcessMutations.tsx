@@ -1,5 +1,6 @@
 import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
+import { StatusButtonActionRequestProps } from "@/pages/Projects/Project/hooks/useStatusButtons";
 import {
   DeleteFileProps,
   DownloadFileProps,
@@ -59,6 +60,12 @@ interface useProcessMutationsReturnProps {
     DeleteModelMutationProps,
     unknown
   >;
+  statusButtonRequestMutation: UseMutationResult<
+    string,
+    Error,
+    StatusButtonRequestMutationProps,
+    unknown
+  >;
 }
 
 export type MultipleProcessMutationProps = {
@@ -92,6 +99,10 @@ export type DeleteFileMutationProps = {
 } & SingleProcessMutationProps;
 
 export type DeleteModelMutationProps = {} & SingleProcessMutationProps;
+
+export type StatusButtonRequestMutationProps = {
+  button: StatusButtonActionRequestProps;
+} & MultipleProcessMutationProps;
 
 const useProcessMutations = (): useProcessMutationsReturnProps => {
   const queryClient = useQueryClient();
@@ -281,6 +292,31 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
     },
   });
 
+  const statusButtonRequestMutation = useMutation<
+    string,
+    Error,
+    StatusButtonRequestMutationProps
+  >({
+    mutationFn: async (props) => {
+      const { processIDs, button } = props;
+      return authorizedCustomAxios
+        .post(`${process.env.VITE_HTTP_API_URL}/public/statusButtonRequest/`, {
+          processIDs,
+          buttonData: { ...button },
+        })
+        .then((res) => {
+          logger(
+            "useProcessMutations | statusButtonRequestMutation ✅ |",
+            res.data
+          );
+          return res.data;
+        });
+    },
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries(["project", projectID]);
+    },
+  });
+
   return {
     createProcessMutation,
     deleteFileMutation,
@@ -290,6 +326,7 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
     updateProcessMutation,
     uploadFilesMutation,
     deleteModelMutation,
+    statusButtonRequestMutation,
   };
 };
 

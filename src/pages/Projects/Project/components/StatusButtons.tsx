@@ -2,7 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { Container } from "@component-library/index";
 import { ProjectProps } from "../../hooks/useProject";
 import { ProcessProps } from "../../hooks/useProcess";
 import useStatusButtons from "../hooks/useStatusButtons";
@@ -27,16 +26,22 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
   return (
     <>
       {getProjectStatusButtons(getSelectedProcesses()).map((button, index) => (
-        <PermissionGate element={`ProjectButton${button.title}`} key={index}>
+        <PermissionGate
+          element={
+            button.action.type === "function" &&
+            button.action.function.type === "deleteProcess"
+              ? "ProjectButtonDelete"
+              : `ProjectStatusButtons`
+          }
+          key={index}
+        >
           <Button
             key={index}
             variant="secondary"
             size="xs"
             startIcon={button.icon}
             onClick={() => handleOnClickButtonCount(button)}
-            title={`${t(
-              `Projects.Project.hooks.useStatusButtons.${button.title}`
-            )} ${
+            title={`${button.title} ${
               button.processes !== undefined
                 ? ` ( ${button.processes.length} )`
                 : ""

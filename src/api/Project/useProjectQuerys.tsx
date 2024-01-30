@@ -53,6 +53,7 @@ const useProjectQuerys = (): useProjectQuerysReturnProps => {
               processStatus: process.processStatus,
               serviceDetails: process.serviceDetails,
               serviceStatus: process.serviceStatus,
+              processStatusButtons: process.processStatusButtons,
               serviceType: process.serviceType,
               messages: process.messages.messages,
               contractor: process.contractor,

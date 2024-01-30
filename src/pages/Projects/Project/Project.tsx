@@ -130,7 +130,7 @@ const Project: React.FC<Props> = (props) => {
             title={t("Projects.Project.Project.button.info")}
           />
           <OwnerGate>
-            <PermissionGate element={"ProjectButtonDELETE"}>
+            <PermissionGate element={"ProjectButtonDelete"}>
               <Button
                 width="fit"
                 variant="secondary"

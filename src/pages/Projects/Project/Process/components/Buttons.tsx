@@ -39,17 +39,18 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
   const navigate = useNavigate();
 
   const shouldRenderFor = (type: "CLIENT" | "CONTRACTOR"): boolean => {
-    return (
-      (process !== undefined &&
-        user.usertype !== UserType.ANONYM &&
-        ((type === "CONTRACTOR" && process.contractor === user.organization) ||
-          (type === "CLIENT" &&
-            ((user.usertype === UserType.USER &&
-              process.client === user.hashedID) ||
-              (user.usertype === UserType.ORGANIZATION &&
-                process.client === user.organization))))) ||
-      user.usertype === UserType.ANONYM
-    );
+    const renderForAnonym = user.usertype === UserType.ANONYM;
+    const renderForContractor =
+      type === "CONTRACTOR" &&
+      user.usertype === UserType.ORGANIZATION &&
+      process.contractor === user.organization;
+    const renderForClient =
+      type === "CLIENT" &&
+      ((user.usertype === UserType.USER && process.client === user.hashedID) ||
+        (user.usertype === UserType.ORGANIZATION &&
+          process.client === user.organization));
+
+    return renderForContractor || renderForClient || renderForAnonym;
   };
 
   const handleOnClickButtonCancel = () => {

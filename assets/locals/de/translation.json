@@ -975,6 +975,7 @@
         "useProjectState": {},
         "useScrollToProcess": {},
         "useStatusButtons": {
+          "BACK": "Zurück",
           "SELECT_SERVICE": "Service auswählen",
           "EDIT": "Service vervollständigen",
           "DELETE": "Löschen",
@@ -992,6 +993,7 @@
           "DELIVERY": "Lieferung starten",
           "COMPLETED": "Auftrag abschließen",
           "REPROJECT": "erneut Bestellen",
+          "NONE": "error",
           "buttons": {
             "confirmAll": "Wollen Sie wirklich alle betroffene Prozesse {{title}}?"
           }
@@ -1125,8 +1127,8 @@
               "filename": "Dateiname:",
               "volume": "Volumen:",
               "surfaceArea": "Oberfläche:",
-              "mbbDimensions": "MBB Dimensionen:",
-              "mbbVolume": "MBB Volumen:"
+              "mbbDimensions": "Modell Hüllkörper Dimensionen:",
+              "mbbVolume": "Modell Hüllkörper Volumen:"
             },
             "Modelling": {
               "title": "Modell entwerfen lasssen"

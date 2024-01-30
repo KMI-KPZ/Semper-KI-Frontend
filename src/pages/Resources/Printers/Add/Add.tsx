@@ -14,22 +14,41 @@ import {
 import PrintersAddForm from "./components/Form";
 import useOntologyPrinterMutations from "@/api/Ontology/useOntologyPrinterMutations";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import useAuthorizedUser from "@/hooks/useAuthorizedUser";
+import { useNavigate } from "react-router-dom";
 
 interface ResourcesPrintersAddProps {}
 
 const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
+  const { user } = useAuthorizedUser();
   const [printer, setPrinter] = useState<OntoPrinter | NewOntoPrinter>();
   const [edit, setEdit] = useState<boolean>(false);
   const { addPrinterMutation } = useOntologyPrinterMutations();
+  const navigate = useNavigate();
 
   const handleOnClickButtonEdit = () => {
     setEdit(true);
   };
 
-  const handleOnClickButtonSubmit = () => {
-    if (printer !== undefined) addPrinterMutation.mutate({ printer });
+  const handleOnClickButtonSubmit = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    if (printer !== undefined)
+      addPrinterMutation.mutate(
+        {
+          organizationID:
+            user.organization !== undefined ? user.organization : "",
+          printer,
+        },
+        {
+          onSuccess(data, variables, context) {
+            navigate("/resources/printers");
+          },
+        }
+      );
   };
 
   const handleOnClickButtonBack = () => {

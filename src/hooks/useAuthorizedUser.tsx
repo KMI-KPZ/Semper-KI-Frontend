@@ -1,11 +1,6 @@
-import { authorizedCustomAxios } from "@/api/customAxios";
 import { AuthorizedUserContext } from "@/routeOutlets/AuthorizedUserOutlet";
 import { useContext } from "react";
-import {
-  AuthorizedUserProps,
-  UpdateUserProps,
-  UserDetailsProps,
-} from "./useUser";
+import { AuthorizedUserProps, UpdateUserProps } from "./useUser";
 
 interface useAuthorizedUserReturnProps {
   user: AuthorizedUserProps;

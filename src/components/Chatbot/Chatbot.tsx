@@ -5,18 +5,22 @@ interface ChatbotProps {}
 
 const Chatbot: React.FC<ChatbotProps> = (props) => {
   const {} = props;
+
+  const isChatbotEnabled = false;
   useEffect(() => {
-    const script = document.createElement("script");
+    if (isChatbotEnabled) {
+      const script = document.createElement("script");
 
-    // URL des Scripts setzen
-    script.src =
-      "https://chat.semper-ki.org/kbot-widget/bots/preview/Uf50Hf6LKvI3iE88WxT7Hysp8n50N0BU0ih9AsnlLvQ=/widget.js";
+      // URL des Scripts setzen
+      script.src =
+        "https://chat.semper-ki.org/kbot-widget/bots/preview/Uf50Hf6LKvI3iE88WxT7Hysp8n50N0BU0ih9AsnlLvQ=/widget.js";
 
-    // Optional: Weitere Attribute setzen, z.B. async oder defer
-    script.async = true;
+      // Optional: Weitere Attribute setzen, z.B. async oder defer
+      script.async = true;
 
-    // Script-Element zum Dokument hinzufügen
-    document.body.appendChild(script);
+      // Script-Element zum Dokument hinzufügen
+      document.body.appendChild(script);
+    }
   }, []);
 
   return (

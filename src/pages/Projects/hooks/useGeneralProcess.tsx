@@ -3,6 +3,7 @@ import useProcessMutations, {
   DeleteProcessMutationProps,
   DownloadFileMutationProps,
   DownloadZIPMutationProps,
+  StatusButtonRequestMutationProps,
   UpdateProcessMutationProps,
   UploadFilesMutationProps,
 } from "@/api/Process/useProcessMutations";
@@ -33,6 +34,7 @@ interface useGeneralProcessReturnProps {
   ) => void;
   getNavigationPrefix: (currentProcessID: string) => string;
   deleteModel: (props: DeleteModelMutationProps) => void;
+  statusButtonRequest: (props: StatusButtonRequestMutationProps) => void;
 }
 
 export const isProcessAtServiceStatus = (process: ProcessProps): boolean => {
@@ -52,6 +54,7 @@ const useGeneralProcess = (): useGeneralProcessReturnProps => {
     deleteFileMutation,
     downloadZIPMutation,
     deleteModelMutation,
+    statusButtonRequestMutation,
   } = useProcessMutations();
   const { processID } = useParams();
 
@@ -98,6 +101,10 @@ const useGeneralProcess = (): useGeneralProcessReturnProps => {
     return `../${currentProcessID}/`;
   };
 
+  const statusButtonRequest = (props: StatusButtonRequestMutationProps) => {
+    statusButtonRequestMutation.mutate(props);
+  };
+
   return {
     getNavigationPrefix,
     createProcess,
@@ -108,6 +115,7 @@ const useGeneralProcess = (): useGeneralProcessReturnProps => {
     updateProcess,
     uploadFiles,
     deleteModel,
+    statusButtonRequest,
   };
 };
 

@@ -4,26 +4,6 @@ import { StatusButtonPropsExtern } from "./useStatusButtons";
 
 export const externalStatusButtonData: StatusButtonPropsExtern[] = [
   {
-    title: "BACK",
-    icon: "ArrowBackIcon",
-    action: {
-      type: "function",
-      function: {
-        type: "backstepStatus",
-        targetStatus: ProcessStatus.DRAFT,
-      },
-    },
-    active: true,
-    buttonVariant: "secondary",
-    showIn: "process",
-    user: UserType.USER,
-    allowedStates: [
-      ProcessStatus.SERVICE_READY,
-      ProcessStatus.SERVICE_IN_PROGRESS,
-      ProcessStatus.SERVICE_COMPLICATION,
-    ],
-  },
-  {
     title: "DELETE",
     icon: "DeleteIcon",
     action: {
@@ -58,22 +38,6 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     allowedStates: [ProcessStatus.SERVICE_READY],
   },
   {
-    title: "BACK",
-    icon: "ArrowBackIcon",
-    action: {
-      type: "function",
-      function: {
-        type: "backstepStatus",
-        targetStatus: ProcessStatus.SERVICE_READY,
-      },
-    },
-    active: true,
-    buttonVariant: "secondary",
-    showIn: "process",
-    user: UserType.USER,
-    allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
-  },
-  {
     title: "VERIFYING",
     icon: "TroubleshootIcon",
     action: {
@@ -102,22 +66,6 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     showIn: "both",
     user: UserType.USER,
     allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
-  },
-  {
-    title: "BACK",
-    icon: "ArrowBackIcon",
-    action: {
-      type: "function",
-      function: {
-        type: "backstepStatus",
-        targetStatus: ProcessStatus.CONTRACTOR_SELECTED,
-      },
-    },
-    active: true,
-    buttonVariant: "secondary",
-    showIn: "process",
-    user: UserType.USER,
-    allowedStates: [ProcessStatus.VERIFIED],
   },
   {
     title: "REQUESTED",

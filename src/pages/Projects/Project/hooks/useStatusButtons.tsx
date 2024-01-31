@@ -97,16 +97,11 @@ export interface StatusButtonActionRequestProps {
 
 export interface StatusButtonActionFunctionProps {
   type: "function";
-  function: SBAFBackstepStatusProps | SBAFDeleteProcessProps;
+  function: SBAFDeleteProcessProps;
 }
 
 export interface SBAFDeleteProcessProps {
   type: "deleteProcess";
-}
-
-export interface SBAFBackstepStatusProps {
-  type: "backstepStatus";
-  targetStatus: ProcessStatus;
 }
 
 export interface StatusButtonProcessProps extends StatusButtonProps {
@@ -362,12 +357,6 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
         switch (button.action.function.type) {
           case "deleteProcess":
             deleteProcess({ processIDs });
-            break;
-          case "backstepStatus":
-            updateProcessStatus(
-              button.action.function.targetStatus,
-              processIDs
-            );
             break;
         }
         break;

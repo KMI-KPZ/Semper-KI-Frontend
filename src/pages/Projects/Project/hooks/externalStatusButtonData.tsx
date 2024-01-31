@@ -3,28 +3,6 @@ import { UserType } from "@/hooks/useUser";
 import { StatusButtonPropsExtern } from "./useStatusButtons";
 
 export const externalStatusButtonData: StatusButtonPropsExtern[] = [
-  // {
-  //   title: "TEST",
-  //   icon: "lol",
-  //   action: {
-  //     type: "request",
-  //     data: {
-  //       lol: "fuck you",
-  //       Romemo: "rgegr",
-  //       count: ["gtgerg", 3],
-  //     },
-  //   },
-  //   active: true,
-  //   buttonVariant: "secondary",
-  //   showIn: "both",
-  //   user: UserType.USER,
-  //   allowedStates: [
-  //     ProcessStatus.DRAFT,
-  //     ProcessStatus.SERVICE_READY,
-  //     ProcessStatus.SERVICE_IN_PROGRESS,
-  //     ProcessStatus.SERVICE_COMPLICATION,
-  //   ],
-  // },
   {
     title: "BACK",
     icon: "ArrowBackIcon",
@@ -101,7 +79,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     action: {
       type: "request",
       data: {
-        processStatus: "VERIFYING",
+        localTestDataStatus: "VERIFYING",
       },
     },
     active: true,
@@ -116,7 +94,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     action: {
       type: "request",
       data: {
-        processStatus: "VERIFYING_AND_REQUESTED",
+        localTestDataStatus: "VERIFYING_AND_REQUESTED",
       },
     },
     active: true,
@@ -147,7 +125,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     action: {
       type: "request",
       data: {
-        processStatus: "REQUESTED",
+        localTestDataStatus: "REQUESTED",
       },
     },
     active: true,
@@ -162,7 +140,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     action: {
       type: "request",
       data: {
-        processStatus: "CLARIFICATION",
+        localTestDataStatus: "CLARIFICATION",
       },
     },
     active: true,
@@ -177,7 +155,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     action: {
       type: "request",
       data: {
-        processStatus: "CONFIRMED_BY_CONTRACTOR",
+        localTestDataStatus: "CONFIRMED_BY_CONTRACTOR",
       },
     },
     active: true,
@@ -192,7 +170,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     action: {
       type: "request",
       data: {
-        processStatus: "REJECTED_BY_CONTRACTOR",
+        localTestDataStatus: "REJECTED_BY_CONTRACTOR",
       },
     },
     active: true,
@@ -207,7 +185,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     action: {
       type: "request",
       data: {
-        processStatus: "CONFIRMED_BY_CLIENT",
+        localTestDataStatus: "CONFIRMED_BY_CLIENT",
       },
     },
     active: true,
@@ -222,7 +200,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     action: {
       type: "request",
       data: {
-        processStatus: "REJECTED_BY_CLIENT",
+        localTestDataStatus: "REJECTED_BY_CLIENT",
       },
     },
     active: true,
@@ -237,7 +215,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     action: {
       type: "request",
       data: {
-        processStatus: "PRODUCTION",
+        localTestDataStatus: "PRODUCTION",
       },
     },
     active: true,
@@ -252,7 +230,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     action: {
       type: "request",
       data: {
-        processStatus: "DELIVERY",
+        localTestDataStatus: "DELIVERY",
       },
     },
     active: true,
@@ -267,7 +245,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     action: {
       type: "request",
       data: {
-        processStatus: "COMPLETED",
+        localTestDataStatus: "COMPLETED",
       },
     },
     active: true,
@@ -282,7 +260,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     action: {
       type: "request",
       data: {
-        processStatus: "REPROJECT",
+        localTestDataStatus: "REPROJECT",
       },
     },
     active: true,

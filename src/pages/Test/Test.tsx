@@ -13,6 +13,7 @@ import usePermissions from "@/hooks/usePermissions";
 import useEvents from "@/hooks/useEvents/useEvents";
 import useTest, { TestDynamicProps } from "@/api/Test/useTest";
 import logger from "@/hooks/useLogger";
+import ExampleForm from "@/components/Form/ExampleForm";
 
 interface Props {}
 export const Test: React.FC<Props> = (props) => {
@@ -115,6 +116,12 @@ export const Test: React.FC<Props> = (props) => {
         className=" max-w-md flex-wrap rounded-xl border-2 border-white bg-white p-5"
       >
         <div className="bg-red-500 p-5 backdrop-brightness-50">ergwerg</div>
+      </Container>
+      <Container
+        direction="row"
+        className="  flex-wrap rounded-xl border-2 border-white bg-white p-5"
+      >
+        <ExampleForm />
       </Container>
       <Container
         direction="row"

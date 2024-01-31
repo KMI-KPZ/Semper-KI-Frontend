@@ -32,27 +32,28 @@ const TextInput = <T extends FieldValues>(props: TextInputProps<T>) => {
   } = props;
 
   return (
-    <div
-      className="mb-4 flex w-full flex-wrap items-center justify-start gap-5 md:w-fit"
-      key={label}
-    >
-      <label
-        htmlFor={label.toLowerCase()}
-        style={{
-          width: labelMaxWidth !== undefined ? `${labelMaxWidth}px` : "",
-        }}
+    <div className="flex w-full flex-col items-center justify-center gap-5">
+      <div
+        className="flex w-full flex-wrap items-center justify-start gap-5 md:w-fit"
+        key={label}
       >
-        {labelText !== undefined ? labelText : label}
-      </label>
-      <input
-        type="text"
-        id={label.toLowerCase()}
-        {...register(label, { ...registerOptions, required })}
-        className={`grow rounded-md border border-gray-300 p-2 md:min-w-[600px] ${
-          error !== undefined ? "border-2 border-red-500" : ""
-        }`}
-      />
-
+        <label
+          htmlFor={label.toLowerCase()}
+          style={{
+            width: labelMaxWidth !== undefined ? `${labelMaxWidth}px` : "",
+          }}
+        >
+          {labelText !== undefined ? labelText : label}
+        </label>
+        <input
+          type="text"
+          id={label.toLowerCase()}
+          {...register(label, { ...registerOptions, required })}
+          className={`grow rounded-md border border-gray-300 p-2 md:min-w-[600px] ${
+            error !== undefined ? "border-2 border-red-500" : ""
+          }`}
+        />
+      </div>
       {error !== undefined ? (
         <span className="text-red-500">{error.message}</span>
       ) : null}

@@ -190,29 +190,32 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   };
   const tranformTitle = (title: string): StatusButtonTitleType => {
     let typedTitel: StatusButtonTitleType = "NONE";
-    if (
-      title === "BACK" ||
-      title === "SERVICE_IN_PROGRESS" ||
-      title === "SELECT_SERVICE" ||
-      title === "EDIT" ||
-      title === "DELETE" ||
-      title === "SERVICE_IN_PROGRESS" ||
-      title === "CONTRACTOR_SELECTED" ||
-      title === "VERIFYING_AND_REQUESTED" ||
-      title === "VERIFYING" ||
-      title === "REQUESTED" ||
-      title === "CLARIFICATION" ||
-      title === "CONFIRMED_BY_CONTRACTOR" ||
-      title === "REJECTED_BY_CONTRACTOR" ||
-      title === "CONFIRMED_BY_CLIENT" ||
-      title === "REJECTED_BY_CLIENT" ||
-      title === "PRODUCTION" ||
-      title === "DELIVERY" ||
-      title === "COMPLETED" ||
-      title === "REPROJECT"
-    )
+
+    const validStatusButtonTitles: StatusButtonTitleType[] = [
+      "BACK",
+      "SERVICE_IN_PROGRESS",
+      "SELECT_SERVICE",
+      "EDIT",
+      "DELETE",
+      "SERVICE_IN_PROGRESS",
+      "CONTRACTOR_SELECTED",
+      "VERIFYING_AND_REQUESTED",
+      "VERIFYING",
+      "REQUESTED",
+      "CLARIFICATION",
+      "CONFIRMED_BY_CONTRACTOR",
+      "REJECTED_BY_CONTRACTOR",
+      "CONFIRMED_BY_CLIENT",
+      "REJECTED_BY_CLIENT",
+      "PRODUCTION",
+      "DELIVERY",
+      "COMPLETED",
+      "REPROJECT",
+    ];
+
+    if (validStatusButtonTitles.includes(title as StatusButtonTitleType)) {
       typedTitel = title as StatusButtonTitleType;
-    else typedTitel = "NONE";
+    } else typedTitel = "NONE";
 
     return t(`Projects.Project.hooks.useStatusButtons.${typedTitel}`);
   };
@@ -368,24 +371,26 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
         }
         break;
       case "request":
-        if (button.action.data.processStatus === undefined) {
+        if (button.action.data.localTestDataStatus === undefined) {
           statusButtonRequest({ processIDs, button: button.action.data });
         } else {
-          if (button.action.data.processStatus === "VERIFYING_AND_REQUESTED") {
+          if (
+            button.action.data.localTestDataStatus === "VERIFYING_AND_REQUESTED"
+          ) {
             verifyProject({
               processIDs,
               send: true,
             });
-          } else if (button.action.data.processStatus === "VERIFYING") {
+          } else if (button.action.data.localTestDataStatus === "VERIFYING") {
             verifyProject({
               processIDs,
               send: false,
             });
-          } else if (button.action.data.processStatus === "REQUESTED") {
+          } else if (button.action.data.localTestDataStatus === "REQUESTED") {
             sendProject({ processIDs });
           } else {
             const processStatusString = button.action.data
-              .processStatus as string;
+              .localTestDataStatus as string;
             const processStatus: ProcessStatus =
               ProcessStatus[processStatusString as keyof typeof ProcessStatus];
             updateProcessStatus(processStatus, processIDs);

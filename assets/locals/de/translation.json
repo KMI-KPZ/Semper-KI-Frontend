@@ -215,6 +215,16 @@
         "button": {
           "safe": "Speichern"
         }
+      },
+      "ExampleForm": {
+        "title": "Organisationinformationen bearbeiten",
+        "text": "Text",
+        "count": "Anzahl",
+        "email": "Email",
+        "area": "Bereich",
+        "button": {
+          "save": "Speichern"
+        }
       }
     },
     "Background": {},

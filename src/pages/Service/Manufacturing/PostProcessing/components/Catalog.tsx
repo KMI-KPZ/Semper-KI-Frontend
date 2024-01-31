@@ -8,6 +8,7 @@ import { PostProcessingProps } from "../PostProcessing";
 import { Modal } from "@component-library/index";
 import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
 import useProcess from "@/pages/Projects/hooks/useProcess";
+import useModal from "@/hooks/useModal";
 
 interface Props<Item> {
   grid: boolean;
@@ -32,6 +33,7 @@ const ProcessPostProcessingCatalog = <Item extends PostProcessingProps>(
     itemOpen: undefined,
   });
   const { process } = useProcess();
+  const { deleteModal } = useModal();
   const { itemOpen, modalOpen } = state;
   const openItemView = (item: Item) => {
     setState((prevState) => ({
@@ -66,6 +68,7 @@ const ProcessPostProcessingCatalog = <Item extends PostProcessingProps>(
   };
 
   const handleOnClickCard = () => {
+    deleteModal("ServiceRoutes");
     navigate("../../..");
   };
 
@@ -107,7 +110,7 @@ const ProcessPostProcessingCatalog = <Item extends PostProcessingProps>(
             </div>
           ) : null}
           <Modal
-            title="ProcessPostProcessingItem"
+            modalKey="ProcessPostProcessingItem"
             open={modalOpen === true && itemOpen !== undefined}
             closeModal={closeItemView}
           >

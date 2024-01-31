@@ -27,7 +27,7 @@ const ProcessHistory: React.FC<ProcessHistoryProps> = (props) => {
   return (
     <Modal
       open
-      title="ProcessHistory"
+      modalKey="ProcessHistory"
       closeModal={() => {
         navigate("..");
       }}

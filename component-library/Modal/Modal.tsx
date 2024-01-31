@@ -17,7 +17,7 @@ import { ModalContext } from "@/contexts/ModalContextProvider";
 import useModal from "@/hooks/useModal";
 
 type ModelProps = {
-  title: string;
+  modalKey: string;
   open: boolean;
   locked?: boolean;
   className?: string;
@@ -26,7 +26,7 @@ type ModelProps = {
 };
 
 export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
-  title,
+  modalKey: title,
   open,
   locked = false,
   closeModal,

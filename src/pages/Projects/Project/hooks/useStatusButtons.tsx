@@ -29,6 +29,7 @@ import ScheduleSendIcon from "@mui/icons-material/ScheduleSend";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { ServiceType } from "@/pages/Service/hooks/useService";
 import ReportIcon from "@mui/icons-material/Report";
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 
 interface UseStatusButtonsReturnProps {
   getProjectStatusButtons: (
@@ -351,7 +352,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   ) => {
     switch (button.action.type) {
       case "navigation":
-        navigate("contractorSelection");
+        navigate(button.action.to);
         break;
       case "function":
         switch (button.action.function.type) {

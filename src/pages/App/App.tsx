@@ -251,7 +251,7 @@ const App: React.FC = () => {
           open={cookieConsent === undefined}
           locked={cookieConsent === undefined}
           noIcon
-          title="CookieBanner"
+          modalKey="CookieBanner"
         >
           <CookieBanner
             acceptCookies={acceptCookies}

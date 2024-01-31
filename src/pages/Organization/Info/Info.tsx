@@ -93,7 +93,7 @@ const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
           <Modal
             open={edit}
             closeModal={closeEdit}
-            title="OrganizationInfoForm"
+            modalKey="OrganizationInfoForm"
           >
             <OrganizationForm
               closeEdit={closeEdit}

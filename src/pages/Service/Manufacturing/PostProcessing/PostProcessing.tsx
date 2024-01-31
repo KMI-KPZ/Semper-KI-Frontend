@@ -14,6 +14,7 @@ import useService from "../../hooks/useService";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import { useManufacturingPostProcessingQuerys } from "@/api/Service/Manufacturing/useManufacturingQuerys";
 import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
+import useModal from "@/hooks/useModal";
 
 interface Props {
   processState: ServiceManufacturingState;

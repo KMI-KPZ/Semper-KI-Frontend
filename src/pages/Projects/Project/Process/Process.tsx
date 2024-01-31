@@ -168,7 +168,7 @@ const Process: React.FC<Props> = (props) => {
         <Upload mutation={uploadFilesMutation} icon multiple></Upload>
       </PermissionGate>
       <Modal
-        title="ProcessInfo"
+        modalKey="ProcessInfo"
         open={state.infoOpen}
         closeModal={closeInfo}
         className="flex w-full flex-col"

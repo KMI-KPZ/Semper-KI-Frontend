@@ -119,7 +119,7 @@ const Profile: React.FC<Props> = (props) => {
           />
         </Container>
       </Container>
-      <Modal open={edit} closeModal={closeModal} title="ProfileForm">
+      <Modal open={edit} closeModal={closeModal} modalKey="ProfileForm">
         <AddressForm closeModal={closeModal} />
       </Modal>
     </Container>

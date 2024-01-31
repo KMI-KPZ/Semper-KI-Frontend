@@ -11,7 +11,7 @@ jest.mock("react-router-dom", () => ({
 describe.skip("Modal", () => {
   it("renders the modal with the provided title", () => {
     render(
-      <Modal title="Test Modal" open={true}>
+      <Modal modalKey="Test Modal" open={true}>
         LOL
       </Modal>
     );

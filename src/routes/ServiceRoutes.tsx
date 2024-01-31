@@ -28,7 +28,7 @@ const ServiceRoutes: React.FC<ServiceRoutesProps> = (props) => {
   return (
     // <div className="flex w-full flex-col-reverse justify-between gap-5 md:flex-row">
     <Modal
-      title="ServiceRoutes"
+      modalKey="ServiceRoutes"
       open={true}
       closeModal={closeModal}
       className="md:max-w-7xl"

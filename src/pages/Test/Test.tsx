@@ -111,12 +111,7 @@ export const Test: React.FC<Props> = (props) => {
           onClick={handleOnClickButtonSave}
         />
       </PermissionGate>
-      <Container
-        direction="row"
-        className=" max-w-md flex-wrap rounded-xl border-2 border-white bg-white p-5"
-      >
-        <div className="bg-red-500 p-5 backdrop-brightness-50">ergwerg</div>
-      </Container>
+
       <Container
         direction="row"
         className="  flex-wrap rounded-xl border-2 border-white bg-white p-5"

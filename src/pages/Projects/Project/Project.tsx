@@ -92,7 +92,7 @@ const Project: React.FC<Props> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
       <Modal
-        title="ProjectInfo"
+        modalKey="ProjectInfo"
         open={infoOpen}
         closeModal={closeInfo}
         className="flex w-full flex-col"
@@ -216,7 +216,7 @@ const Project: React.FC<Props> = (props) => {
             user.usertype !== UserType.ADMIN
           }
           locked={true}
-          title="projectTitle"
+          modalKey="projectTitle"
           noIcon={true}
         >
           <Container

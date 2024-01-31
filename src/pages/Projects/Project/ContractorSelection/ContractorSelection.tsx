@@ -231,7 +231,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
         </Container>
       </form>
       <Modal
-        title="ProjectInfo"
+        modalKey="ProjectInfo"
         open={edit || address === undefined}
         closeModal={() => {
           setEdit(false);

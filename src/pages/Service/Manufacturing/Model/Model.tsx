@@ -95,7 +95,7 @@ export const ProcessModel: React.FC<Props> = (props) => {
       </LoadingSuspense>
       {state.modalOpen === true && state.model !== undefined ? (
         <Modal
-          title="ProcessModelPreView"
+          modalKey="ProcessModelPreView"
           open={state.modalOpen === true && state.model !== undefined}
           closeModal={closeModelView}
         >

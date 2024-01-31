@@ -127,7 +127,7 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
         )}
       </LoadingSuspense>
       <Modal
-        title="OrganizationRolesForm"
+        modalKey="OrganizationRolesForm"
         open={edit}
         closeModal={() => {
           setEdit(false), setRole(undefined);

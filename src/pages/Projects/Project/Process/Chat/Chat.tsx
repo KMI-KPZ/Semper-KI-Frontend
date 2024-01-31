@@ -83,7 +83,7 @@ const ProcessChat: React.FC<ProcessChatProps> = (props) => {
 
   return (
     <Modal
-      title="ProcessChat"
+      modalKey="ProcessChat"
       open
       closeModal={() => {
         navigate("..");

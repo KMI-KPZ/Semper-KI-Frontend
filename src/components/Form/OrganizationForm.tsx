@@ -146,7 +146,6 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
                       type="checkbox"
                       value={service.identifier}
                       {...register(`supportedServices`)}
-                      style={{}}
                     />
                     <Text variant={`body`}>
                       {t(

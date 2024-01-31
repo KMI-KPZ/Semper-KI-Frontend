@@ -32,7 +32,7 @@ const TextInput = <T extends FieldValues>(props: TextInputProps<T>) => {
   } = props;
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5">
+    <div className="flex w-full flex-col items-center justify-center gap-3">
       <div
         className="flex w-full flex-wrap items-center justify-start gap-5 md:w-fit"
         key={label}

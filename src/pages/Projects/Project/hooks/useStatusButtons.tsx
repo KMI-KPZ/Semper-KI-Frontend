@@ -34,12 +34,9 @@ interface UseStatusButtonsReturnProps {
   getProjectStatusButtons: (
     processes: ProcessProps[]
   ) => StatusButtonProcessProps[];
-  getProcessStatusButtons: (process: ProcessProps) => StatusButtonPropsIntern[];
+  getProcessStatusButtons: (process: ProcessProps) => StatusButtonProps[];
   handleOnClickButtonCount: (button: StatusButtonProcessProps) => void;
-  handleOnClickButton: (
-    button: StatusButtonPropsIntern,
-    processID: string
-  ) => void;
+  handleOnClickButton: (button: StatusButtonProps, processID: string) => void;
 }
 
 export type StatusButtonTitleType =
@@ -79,7 +76,7 @@ export type StatusButtonPropsExtern = {
   icon: string;
 } & StatusButtonPropsGeneric;
 
-export type StatusButtonPropsIntern = {
+export type StatusButtonProps = {
   icon: ReactNode;
 } & StatusButtonPropsGeneric;
 
@@ -112,7 +109,7 @@ export interface SBAFBackstepStatusProps {
   targetStatus: ProcessStatus;
 }
 
-export interface StatusButtonProcessProps extends StatusButtonPropsIntern {
+export interface StatusButtonProcessProps extends StatusButtonProps {
   processes: string[];
 }
 
@@ -128,21 +125,24 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   const getStatusButtons = (
     process: ProcessProps,
     showIn: StatusButtonShowInType
-  ): StatusButtonPropsIntern[] => {
+  ): StatusButtonProps[] => {
     if (process.processStatusButtons !== undefined) {
-      return transformExternalStatusButtonData(process.processStatusButtons);
+      return filterRemoteButtons(
+        transformExternalStatusButtons(process.processStatusButtons),
+        showIn
+      );
     } else {
-      return getFilteredButtons(
+      return filterLocalButtons(
         process,
-        transformExternalStatusButtonData(externalStatusButtonData),
+        transformExternalStatusButtons(externalStatusButtonData),
         showIn
       );
     }
   };
 
-  const transformExternalStatusButtonData = (
+  const transformExternalStatusButtons = (
     externalStatusButtons: StatusButtonPropsExtern[]
-  ): StatusButtonPropsIntern[] => {
+  ): StatusButtonProps[] => {
     return externalStatusButtons.map((button) => ({
       ...button,
       title: tranformTitle(button.title),
@@ -222,7 +222,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
 
   const filterButtonByUser = (
     process: ProcessProps,
-    button: StatusButtonPropsIntern
+    button: StatusButtonProps
   ): boolean => {
     if (button.user === undefined) return true;
     switch (button.user) {
@@ -250,37 +250,42 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
 
   const filterButtonByStatus = (
     process: ProcessProps,
-    button: StatusButtonPropsIntern
+    button: StatusButtonProps
   ): boolean => {
-    const isAllowed =
-      button.allowedStates === undefined
-        ? true
-        : button.allowedStates.includes(process.processStatus);
-    return isAllowed;
+    return button.allowedStates === undefined
+      ? true
+      : button.allowedStates.includes(process.processStatus);
   };
 
-  const filterButtonByTitle = (
-    button: StatusButtonPropsIntern,
+  const filterButtonByShowIn = (
+    button: StatusButtonProps,
     showIn: StatusButtonShowInType
   ): boolean => {
     return showIn === button.showIn || button.showIn === "both";
   };
 
-  const getFilteredButtons = (
+  const filterLocalButtons = (
     process: ProcessProps,
-    buttons: StatusButtonPropsIntern[],
+    buttons: StatusButtonProps[],
     showIn: StatusButtonShowInType
-  ): StatusButtonPropsIntern[] => {
+  ): StatusButtonProps[] => {
     if (user.usertype === UserType.ADMIN) return buttons;
     return buttons
-      .filter((button) => filterButtonByTitle(button, showIn))
+      .filter((button) => filterButtonByShowIn(button, showIn))
       .filter((button) => filterButtonByStatus(process, button))
       .filter((button) => filterButtonByUser(process, button));
   };
 
+  const filterRemoteButtons = (
+    buttons: StatusButtonProps[],
+    showIn: StatusButtonShowInType
+  ): StatusButtonProps[] => {
+    return buttons.filter((button) => filterButtonByShowIn(button, showIn));
+  };
+
   const getProcessStatusButtons = (
     process: ProcessProps
-  ): StatusButtonPropsIntern[] => {
+  ): StatusButtonProps[] => {
     return getStatusButtons(process, "process");
   };
 
@@ -325,10 +330,6 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
     });
   };
 
-  const calcPath = (path: string, processID: string): string => {
-    return `/projects/${project.projectID}/${processID}/${path}`;
-  };
-
   const handleOnClickButtonCount = (button: StatusButtonProcessProps) => {
     if (
       window.confirm(
@@ -342,7 +343,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   };
 
   const handleOnClickButton = (
-    button: StatusButtonPropsIntern,
+    button: StatusButtonProps,
     processID: string
   ) => {
     setCheckedProcesses([processID]);
@@ -350,7 +351,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   };
 
   const handleButtonAction = (
-    button: StatusButtonPropsIntern,
+    button: StatusButtonProps,
     processIDs: string[]
   ) => {
     switch (button.action.type) {

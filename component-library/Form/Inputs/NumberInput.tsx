@@ -7,7 +7,7 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 
-interface TextAreaInputProps<T extends FieldValues> {
+interface NumberInputProps<T extends FieldValues> {
   label: Path<T>;
   register: UseFormRegister<T>;
   labelText?: string;
@@ -20,7 +20,7 @@ interface TextAreaInputProps<T extends FieldValues> {
     | undefined;
 }
 
-const TextAreaInput = <T extends FieldValues>(props: TextAreaInputProps<T>) => {
+const NumberInput = <T extends FieldValues>(props: NumberInputProps<T>) => {
   const {
     label,
     register,
@@ -45,10 +45,11 @@ const TextAreaInput = <T extends FieldValues>(props: TextAreaInputProps<T>) => {
         >
           {labelText !== undefined ? labelText : label}
         </label>
-        <textarea
+        <input
+          type="number"
           id={label.toLowerCase()}
           {...register(label, { ...registerOptions, required })}
-          className={`min-h-[150px] grow rounded-md border border-gray-300 p-2 md:min-w-[600px] ${
+          className={`grow rounded-md border border-gray-300 p-2 text-center md:min-w-[600px] ${
             error !== undefined ? "border-2 border-red-500" : ""
           }`}
         />
@@ -60,4 +61,4 @@ const TextAreaInput = <T extends FieldValues>(props: TextAreaInputProps<T>) => {
   );
 };
 
-export default TextAreaInput;
+export default NumberInput;

@@ -222,6 +222,7 @@
         "count": "Anzahl",
         "email": "Email",
         "area": "Bereich",
+        "isTrue": "Ist Wahr",
         "button": {
           "save": "Speichern"
         }

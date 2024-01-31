@@ -10,12 +10,14 @@ import {
   GeneralInput,
   InputLabelProps,
 } from "@component-library/Form/GeneralInput";
+import logger from "@/hooks/useLogger";
 
 export interface ExampleDataProps {
   text: string;
   count: number;
   email: string;
   area: string;
+  isTrue: boolean;
 }
 
 interface ExampleFormProps {
@@ -34,6 +36,7 @@ const ExampleForm: React.FC<ExampleFormProps> = (props) => {
     count: yup.number().typeError(t("yup.number")).required(t("yup.required")),
     email: yup.string().email(t("yup.email")).required(t("yup.required")),
     area: yup.string().required(t("yup.required")),
+    isTrue: yup.boolean().required(t("yup.required")),
   });
 
   const {
@@ -46,6 +49,7 @@ const ExampleForm: React.FC<ExampleFormProps> = (props) => {
   });
 
   const onSubmit = (data: ExampleDataProps) => {
+    logger("ExampleForm", data);
     if (customSubmit !== undefined) {
       customSubmit(data);
     } else {
@@ -56,9 +60,10 @@ const ExampleForm: React.FC<ExampleFormProps> = (props) => {
 
   const labelItems: InputLabelProps<ExampleDataProps>[] = [
     { label: "text", type: "text" },
-    { label: "count", type: "text" },
+    { label: "count", type: "number" },
     { label: "email", type: "text" },
     { label: "area", type: "textarea" },
+    { label: "isTrue", type: "checkbox" },
   ];
 
   const maxLength = getMaxLabelWidth(

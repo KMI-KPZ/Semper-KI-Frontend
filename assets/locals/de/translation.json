@@ -224,7 +224,8 @@
         "area": "Bereich",
         "isTrue": "Ist Wahr",
         "button": {
-          "save": "Speichern"
+          "reset": "Zurücksetzen",
+          "submit": "Senden"
         }
       }
     },

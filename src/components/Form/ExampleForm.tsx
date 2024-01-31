@@ -1,4 +1,4 @@
-import { Button, Heading, Text } from "@component-library/index";
+import { Button, Container, Heading, Text } from "@component-library/index";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -32,14 +32,24 @@ const ExampleForm: React.FC<ExampleFormProps> = (props) => {
   const { getMaxLabelWidth } = useGeneralInput();
 
   const schema = yup.object().shape({
-    text: yup.string().required(t("yup.required")),
+    text: yup
+      .string()
+      .required(
+        t("yup.requiredName", { name: t("components.Form.ExampleForm.text") })
+      ),
     count: yup.number().typeError(t("yup.number")).required(t("yup.required")),
-    email: yup.string().email(t("yup.email")).required(t("yup.required")),
+    email: yup
+      .string()
+      .email(t("yup.email"))
+      .required(
+        t("yup.requiredName", { name: t("components.Form.ExampleForm.email") })
+      ),
     area: yup.string().required(t("yup.required")),
     isTrue: yup.boolean().required(t("yup.required")),
   });
 
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors },
@@ -48,7 +58,7 @@ const ExampleForm: React.FC<ExampleFormProps> = (props) => {
     defaultValues: initialData !== undefined ? initialData : undefined,
   });
 
-  const onSubmit = (data: ExampleDataProps) => {
+  const handleOnClickButtonSubmit = (data: ExampleDataProps) => {
     logger("ExampleForm", data);
     if (customSubmit !== undefined) {
       customSubmit(data);
@@ -56,6 +66,10 @@ const ExampleForm: React.FC<ExampleFormProps> = (props) => {
       // do something else
     }
     closeModal !== undefined ? closeModal() : null;
+  };
+
+  const handleOnClickButtonReset = () => {
+    reset();
   };
 
   const labelItems: InputLabelProps<ExampleDataProps>[] = [
@@ -74,7 +88,7 @@ const ExampleForm: React.FC<ExampleFormProps> = (props) => {
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(handleOnClickButtonSubmit)}
       className={`flex h-full w-full flex-col items-center justify-start gap-5 overflow-auto bg-white p-5 md:justify-center`}
     >
       <Heading variant="h1">{t("components.Form.ExampleForm.title")}</Heading>
@@ -89,11 +103,18 @@ const ExampleForm: React.FC<ExampleFormProps> = (props) => {
           labelMaxWidth={maxLength}
         />
       ))}
-      <Button
-        variant="primary"
-        title={t("components.Form.ExampleForm.button.save")}
-        onClick={handleSubmit(onSubmit)}
-      />
+      <Container>
+        <Button
+          variant="primary"
+          title={t("components.Form.ExampleForm.button.reset")}
+          onClick={handleOnClickButtonReset}
+        />
+        <Button
+          variant="primary"
+          title={t("components.Form.ExampleForm.button.submit")}
+          onClick={handleSubmit(handleOnClickButtonSubmit)}
+        />
+      </Container>
     </form>
   );
 };

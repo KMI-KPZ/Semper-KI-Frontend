@@ -301,6 +301,7 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
       const { processIDs, button } = props;
       return authorizedCustomAxios
         .post(`${process.env.VITE_HTTP_API_URL}/public/statusButtonRequest/`, {
+          projectID,
           processIDs,
           buttonData: { ...button },
         })

@@ -8,12 +8,12 @@
   },
   "data": {
     "NavigationItem": {
-      "demonstrator": "Demonstrator",
+      "demonstrator": "Loslegen!",
       "edit": "Bearbeiten",
       "home": "Startseite",
       "process": "Prozess",
       "model": "Modell",
-      "upload": "Modell Hochladen",
+      "upload": "Modell hochladen",
       "material": "Material",
       "postprocessing": "Nachbearbeitung",
       "cart": "Warenkorb",
@@ -22,16 +22,16 @@
       "guide": "Wegweiser",
       "order": "Auftragsdetails",
       "orders": "Meine Aufträge",
-      "account": "Konto",
+      "account": "Profil",
       "test": "Test",
       "service": "Service",
       "use": "In Anspruch nehmen",
-      "provide": "Service Anbieten",
+      "provide": "Service anbieten",
       "portfolio": "Portfolio",
       "use-service": "Service in Anspruch nehmen",
       "provide-service": "Service bereitstellen",
-      "continue": "Auftrag Fortsetzen",
-      "new-contract": "neuer Auftrag",
+      "continue": "Auftrag fortsetzen",
+      "new-contract": "Neuer Auftrag",
       "proceedings": "Verfahren",
       "company": "Unternehmen",
       "user": "Benutzer",
@@ -70,13 +70,13 @@
       "DRAFT": "Entwurf",
       "WAITING_FOR_OTHER_PROCESS": "Warten auf andere Prozesse",
       "SERVICE_READY": "Service bereit",
-      "SERVICE_IN_PROGRESS": "Service in bearbeitung",
+      "SERVICE_IN_PROGRESS": "Service in Bearbeitung",
       "SERVICE_COMPLICATION": "Service Komplikation",
       "CONTRACTOR_SELECTED": "Auftragnehmer ausgewählt",
-      "VERIFYING": "Überprüfen",
+      "VERIFYING": "Überprüfen lassen",
       "VERIFIED": "Überprüft",
       "REQUESTED": "Angefragt",
-      "CLARIFICATION": "Rückfragen",
+      "CLARIFICATION": "Rückfragen vom Auftragnehmer",
       "CONFIRMED_BY_CONTRACTOR": "Bestätigt durch Auftragnehmer",
       "REJECTED_BY_CONTRACTOR": "Abgelehnt durch Auftragnehmer",
       "CONFIRMED_BY_CLIENT": "Bestätigt durch Kunde",
@@ -89,8 +89,8 @@
       "CANCELED": "Abgebrochen"
     },
     "ServiceType": {
-      "MANUFACTURING": "Modell Herstellen lassen",
-      "MODELING": "Modell Entwerfen lassen",
+      "MANUFACTURING": "Modell 3D-drucken lassen",
+      "MODELING": "Modell entwerfen lassen",
       "NONE": "Service auswahl"
     },
     "ProcessStatusType": {
@@ -345,7 +345,7 @@
     },
     "Organization": {
       "title": "Organisationsverwaltung",
-      "empty": "keine Organisation gefunden",
+      "empty": "Keine Organisation gefunden",
       "name": "Name",
       "created": "Created",
       "accessed": "Accessed",
@@ -380,10 +380,10 @@
       "title": "Benutzerverwaltung",
       "name": "Name",
       "email": "Email",
-      "created": "Created",
-      "accessed": "Accessed",
-      "updated": "Updated",
-      "lastSeen": "letzte Anmeldung",
+      "created": "Erstellt",
+      "accessed": "Zugriff",
+      "updated": "Aktualisiert",
+      "lastSeen": "Letzte Anmeldung",
       "actions": "Aktionen",
       "search": "Suchen...",
       "button": {
@@ -461,7 +461,7 @@
     "App": {}
   },
   "EmailVerification": {
-    "title": "Email Verifizieren",
+    "title": "Email verifizieren",
     "text": "Bitte bestätigen Sie ihre Email Adresse, indem Sie auf den Link in der Email klicken, die Auth0 Ihnen gesendet hat.",
     "text2": "Dies ist notwendig um die Registrierung abzuschließen und um Semper-KI nutzen zu können.",
     "text3": "Vielen Dank für ihr Verständnis"
@@ -486,9 +486,9 @@
         "vision1": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. Dazu gehören vorgelagerte Services wie Modellerstellung und Materialberatung genauso wie die Vermittlung von Nachbearbeitung oder Rechtsberatung. Der Druck findet beim optimalen Partner statt. Für all das setzen wir auf KI-Technologien. Gefördert vom Bundesministerium für Wirtschaft und Klimaschutz.",
         "vision2": "Kern unserer Plattform sind Künstliche Intelligenzen. Diese Technologien haben wir speziell für die Vernetzung von Kunden mit der 3D-Druck-Branche entwickelt. Unsere KI ist ein semantisches Netz. In dieses Netz speisen wir Informationen über alle verfügbaren 3D-Druck-Prozesse ein. In Kombination mit den Anfragen, die auf der Plattform eingehen, ermitteln unsere KI-Technologien daraus die optimale Produktionsstrategie.",
         "partner": "Innovation klappt nur als Team. Wir arbeiten eng zusammen und freuen uns über neue Partner in Forschung und Entwicklung. Gefördert vom BMWK.",
-        "demonstrator": "Demonstrator ausprobieren",
+        "demonstrator": "Einfach ausprobieren! (Projekte werden übernommen)",
         "buttons": {
-          "demonstrator": "Zum Demonstrator"
+          "demonstrator": "Loslegen!"
         }
       }
     },
@@ -522,7 +522,7 @@
         }
       },
       "Header": {
-        "title": "Semper-KI - Einfach 3D drucken.",
+        "title": "Semper-KI - Einfach 3D-drucken.",
         "claim1": "Geben Sie Ihre Idee in Auftrag",
         "claim2": "Von der Idee zum Modell",
         "claim3": "Vom Modell zum Prototyp",
@@ -947,7 +947,7 @@
         "TitleForm": {
           "name": "Name: ",
           "button": {
-            "edit": "Name Bearbeiten"
+            "edit": "Name bearbeiten"
           }
         }
       },
@@ -991,14 +991,14 @@
           "SELECT_SERVICE": "Service auswählen",
           "EDIT": "Service vervollständigen",
           "DELETE": "Löschen",
-          "SERVICE_IN_PROGRESS": "Service in bearbeitung",
+          "SERVICE_IN_PROGRESS": "Service in Bearbeitung",
           "CONTRACTOR_SELECTED": "Auftragnehmer auswählen",
-          "VERIFYING": "Überprüfen",
-          "VERIFYING_AND_REQUESTED": "Überprüfen und automatisch Anfragen",
+          "VERIFYING": "Überprüfung veranlassen",
+          "VERIFYING_AND_REQUESTED": "Überprüfung veranlassen und automatisch Anfragen",
           "REQUESTED": "Anfragen",
-          "CLARIFICATION": "Rückfragen",
+          "CLARIFICATION": "Rückfragen des Auftragnehmers",
           "CONFIRMED_BY_CONTRACTOR": "Angebot erstellen",
-          "REJECTED_BY_CONTRACTOR": "Anfage ablehnen",
+          "REJECTED_BY_CONTRACTOR": "Anfrage ablehnen",
           "CONFIRMED_BY_CLIENT": "Angebot bestätigen",
           "REJECTED_BY_CLIENT": "Angebot ablehnen",
           "PRODUCTION": "Produktion starten",
@@ -1113,7 +1113,7 @@
             }
           },
           "History": {
-            "noHistory": "kein Verlauf vorhanden",
+            "noHistory": "Kein Verlauf vorhanden",
             "createdBy": "Erstellt von:",
             "createdWhen": "Erstellt am:",
             "data": "Daten:",
@@ -1508,9 +1508,9 @@
               "title": "Datei Informationen hinzufügen",
               "tags": "Tags",
               "tagsPH": "Tag1, Tag2, ...",
-              "certificate": "Zertifikate",
+              "certificate": "Eventuelle Zertifikate",
               "certificatePH": "Zertifikate1, Zertifikate2, ...",
-              "license": "Lizenz",
+              "license": "Lizenz der Datei",
               "licensePH": "Lizenz1, Lizenz2 ...",
               "button": {
                 "send": "Modell Hochladen"

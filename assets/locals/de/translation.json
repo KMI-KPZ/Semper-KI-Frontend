@@ -313,8 +313,8 @@
     "Switch": {},
     "Table": {},
     "Upload": {
-      "title_one": "Datei hochladen",
-      "title_other": "Dateien hochladen",
+      "title_one": "Weitere Datei hochladen",
+      "title_other": "Weitere Dateien hochladen",
       "subTitle": "Per Drag & Drop oder Klick"
     },
     "UserSwitch": {
@@ -668,7 +668,7 @@
           "orga": "Organisation",
           "processes": "Projekte",
           "data": "Daten",
-          "files": "Dateien",
+          "files": "Weitere Dateien",
           "resources": "Ressourcen",
           "read": "ansehen",
           "edit": "bearbeiten",
@@ -1056,7 +1056,7 @@
             "status": "Prozessstatus:"
           },
           "ProcessFile": {
-            "title": "Dateien",
+            "title": "Weitere Dateien",
             "empty": "keine Dateien gefunden",
             "button": {
               "delete": "Löschen",

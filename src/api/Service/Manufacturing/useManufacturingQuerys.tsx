@@ -80,7 +80,7 @@ export const useManufacturingModelDetailsQuerys = (
   const modelDetailsQuery = useQuery<ModelDetailsProps, Error>({
     queryKey: ["project", project.projectID, processID, "modelDetails"],
     queryFn: async () => {
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/checkModel/${processID}/`;
+      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/checkModel/${project.projectID}/${processID}/`;
       return authorizedCustomAxios.get(apiUrl).then((response) => {
         logger(
           "useManufacturingModelDetailsQuerys | modelDetailsQuery ✅ |",

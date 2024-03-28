@@ -214,7 +214,7 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
       const { processID, fileID } = props;
       return authorizedCustomAxios
         .get(
-          `${process.env.VITE_HTTP_API_URL}/public/downloadFile/${processID}/${fileID}`,
+          `${process.env.VITE_HTTP_API_URL}/public/downloadFile/${projectID}/${processID}/${fileID}`,
           { responseType: "blob" }
         )
         .then((res) => {
@@ -235,7 +235,7 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
         .get(
           `${
             process.env.VITE_HTTP_API_URL
-          }/public/downloadFilesAsZip/${processID}?fileIDs=${fileIDs.join(
+          }/public/downloadFilesAsZip/${projectID}/${processID}?fileIDs=${fileIDs.join(
             ","
           )}`,
           { responseType: "blob" }
@@ -280,7 +280,7 @@ const useProcessMutations = (): useProcessMutationsReturnProps => {
       const { processID } = props;
       return authorizedCustomAxios
         .delete(
-          `${process.env.VITE_HTTP_API_URL}/public/deleteModel/${processID}/`
+          `${process.env.VITE_HTTP_API_URL}/public/deleteModel/${projectID}/${processID}/`
         )
         .then((res) => {
           logger("useProcessMutations | deleteModelMutation ✅ |", res.data);

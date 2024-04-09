@@ -44,7 +44,6 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   const { user } = useAuthorizedUser();
   const [edit, setEdit] = useState(false);
   const [address, setAddress] = useState(user.details.address);
-
   const { updateProcess } = useGeneralProcess();
 
   const {
@@ -52,8 +51,9 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
     handleSubmit,
     watch,
     formState: { errors },
+    setValue,
   } = useForm<ContractorSelectionFormData>({
-    defaultValues: async () => ({
+    defaultValues: {
       processes:
         project.processes.length === 0
           ? []
@@ -67,7 +67,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
                   contractorID: "",
                 };
               }),
-    }),
+    },
   });
 
   const onSubmit = (data: ContractorSelectionFormData) => {
@@ -189,6 +189,13 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
                   address.country}
             </Text>
           </Container>
+          {address === undefined ? (
+            <Text variant="body" className="text-red-500">
+              {t(
+                "Projects.Project.ContractorSelection.ContractorSelection.error.address"
+              )}
+            </Text>
+          ) : null}
         </div>
 
         <div className="flex w-full flex-col items-center justify-start gap-5">
@@ -232,7 +239,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
       </form>
       <Modal
         modalKey="ProjectInfo"
-        open={edit || address === undefined}
+        open={edit}
         closeModal={() => {
           setEdit(false);
         }}

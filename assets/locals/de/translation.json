@@ -972,7 +972,8 @@
           "contractor": "Auftagnehmer",
           "title": "Auftagnehmer auswählen",
           "error": {
-            "missing": "Bitte wählen Sie einen Auftragnehmer aus"
+            "missing": "Bitte wählen Sie einen Auftragnehmer aus",
+            "address": "Bitte geben Sie eine Adresse an"
           },
           "button": {
             "overview": "zur Übersicht",

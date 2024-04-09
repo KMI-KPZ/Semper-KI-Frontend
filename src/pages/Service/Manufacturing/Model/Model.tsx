@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ServiceManufacturingState } from "../types/types";
 import { ProcessModelCard } from "./components/Card";
-import { Button } from "@component-library/index";
+import { Button, Container } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
@@ -90,7 +90,9 @@ export const ProcessModel: React.FC<Props> = (props) => {
               ))}
           </>
         ) : (
-          t("Service.Manufacturing.Model.Model.error.noModels")
+          <Container className="bg-white p-5" width="full">
+            {t("Service.Manufacturing.Model.Model.error.noModels")}
+          </Container>
         )}
       </LoadingSuspense>
       {state.modalOpen === true && state.model !== undefined ? (

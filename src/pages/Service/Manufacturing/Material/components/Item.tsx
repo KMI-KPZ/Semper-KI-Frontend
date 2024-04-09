@@ -1,10 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@component-library/index";
+import { Button, Container } from "@component-library/index";
 import { MaterialProps } from "../Material";
 import { Heading } from "@component-library/index";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   material: MaterialProps;
@@ -14,9 +15,20 @@ export const ProcessMaterialItem: React.FC<Props> = (props) => {
   const { material } = props;
   const { t } = useTranslation();
   const { process, updateProcess } = useProcess();
+  const navigate = useNavigate();
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   const handleOnClickButtonDeselect = () => {
     updateProcess({ deletions: { serviceDetails: ["material"] } });
+    setLoading(true);
+  };
+
+  const handleOnClickButtonModel = () => {
+    navigate("../model");
+  };
+
+  const handleOnClickButtonPostProcessing = () => {
+    navigate("../postprocessing");
   };
 
   return (
@@ -30,14 +42,30 @@ export const ProcessMaterialItem: React.FC<Props> = (props) => {
           </div>
         ))}
       </div>
-      {isProcessAtServiceStatus(process) ? (
+
+      <Container>
         <Button
+          variant="primary"
+          onClick={handleOnClickButtonModel}
+          title={t(
+            "Service.Manufacturing.Material.components.Item.button.model"
+          )}
+        />
+        <Button
+          loading={loading}
           onClick={handleOnClickButtonDeselect}
           title={t(
             "Service.Manufacturing.Material.components.Item.button.change"
           )}
         />
-      ) : null}
+        <Button
+          variant="primary"
+          onClick={handleOnClickButtonPostProcessing}
+          title={t(
+            "Service.Manufacturing.Material.components.Item.button.postprocessing"
+          )}
+        />
+      </Container>
     </div>
   );
 };

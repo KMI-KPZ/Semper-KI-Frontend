@@ -5,7 +5,7 @@ import ProcessPostProcessingItem from "./Item";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ProcessPostProcessingCard from "./Card";
 import { PostProcessingProps } from "../PostProcessing";
-import { Modal } from "@component-library/index";
+import { Button, Modal } from "@component-library/index";
 import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 import useModal from "@/hooks/useModal";
@@ -72,6 +72,14 @@ const ProcessPostProcessingCatalog = <Item extends PostProcessingProps>(
     navigate("../../..");
   };
 
+  const handleOnClickButtonModel = () => {
+    navigate("../model");
+  };
+
+  const handleOnClickButtonMaterial = () => {
+    navigate("../material");
+  };
+
   return (
     <div
       className={`flex gap-y-5 ${
@@ -94,7 +102,7 @@ const ProcessPostProcessingCatalog = <Item extends PostProcessingProps>(
               />
             ))}
 
-          {isProcessAtServiceStatus(process) ? (
+          {/* {isProcessAtServiceStatus(process) ? (
             <div
               className={`bezier flex flex-row items-center justify-center self-center overflow-hidden bg-türkis p-5 text-white transition  duration-300 hover:cursor-pointer hover:bg-grau-400 ${
                 grid === true
@@ -108,7 +116,37 @@ const ProcessPostProcessingCatalog = <Item extends PostProcessingProps>(
               )}
               <NavigateNextIcon fontSize="large" />
             </div>
-          ) : null}
+          ) : null} */}
+          <div
+            className={`bezier flex flex-col items-center justify-center gap-5 self-center  p-5 transition  duration-300 hover:cursor-pointer  ${
+              grid === true
+                ? "h-fit basis-[48%] sm:basis-[32%] md:basis-[23.5%]"
+                : "w-full "
+            }`}
+          >
+            <Button
+              width="full"
+              variant="primary"
+              onClick={handleOnClickCard}
+              title={t(
+                "Service.Manufacturing.PostProcessing.components.Catalog.button.overview"
+              )}
+            />
+            <Button
+              width="full"
+              onClick={handleOnClickButtonModel}
+              title={t(
+                "Service.Manufacturing.PostProcessing.components.Catalog.button.model"
+              )}
+            />
+            <Button
+              width="full"
+              onClick={handleOnClickButtonMaterial}
+              title={t(
+                "Service.Manufacturing.PostProcessing.components.Catalog.button.material"
+              )}
+            />
+          </div>
           <Modal
             modalKey="ProcessPostProcessingItem"
             open={modalOpen === true && itemOpen !== undefined}

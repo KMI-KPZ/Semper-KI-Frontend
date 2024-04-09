@@ -139,7 +139,7 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
         md:rounded-xl
         md:bg-transparent
       md:bg-white
-        md:bg-opacity-70
+        md:bg-opacity-80
      `
       )}
       onKeyDown={onKeyDown}

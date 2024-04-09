@@ -68,7 +68,7 @@ const useManufacturingMutations = (): ReturnProps => {
       //   processID: variables.processID,
       //   updates: { changes: { service: { model: model[0] } } },
       // });
-      navigate("../material");
+      // navigate("../material");
       queryClient.invalidateQueries(["project", variables.projectID]);
     },
   });

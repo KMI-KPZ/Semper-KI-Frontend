@@ -313,8 +313,8 @@
     "Switch": {},
     "Table": {},
     "Upload": {
-      "title_one": "Weitere Datei hochladen",
-      "title_other": "Weitere Dateien hochladen",
+      "title_one": "zusätzliche Datei hochladen",
+      "title_other": "zusätzliche Dateien hochladen",
       "subTitle": "Per Drag & Drop oder Klick"
     },
     "UserSwitch": {
@@ -668,7 +668,7 @@
           "orga": "Organisation",
           "processes": "Projekte",
           "data": "Daten",
-          "files": "Weitere Dateien",
+          "files": "zusätzliche Dateien",
           "resources": "Ressourcen",
           "read": "ansehen",
           "edit": "bearbeiten",
@@ -883,6 +883,7 @@
           "selectAllOwnProjects": "Alle eigenen Projekte auswählen",
           "selectAllRecievedProjects": "Alle empfangenen Projekte auswählen"
         },
+        "noProjects": "Keine Projekte vorhanden",
         "adminProjects": "Alle Projekte",
         "ownProjects": "Eigene Projekte",
         "receivedProjects": "Erhaltene Projekte"
@@ -1056,7 +1057,7 @@
             "status": "Prozessstatus:"
           },
           "ProcessFile": {
-            "title": "Weitere Dateien",
+            "title": "Dateien",
             "empty": "keine Dateien gefunden",
             "button": {
               "delete": "Löschen",
@@ -1445,7 +1446,9 @@
           },
           "Item": {
             "button": {
-              "change": "Ändern"
+              "change": "Ändern",
+              "model": "zu den Modellen / Modelluplaod",
+              "postprocessing": "zu den Nachbearbeitungen"
             }
           },
           "PreView": {
@@ -1478,7 +1481,9 @@
               "noCertificates": "keine Zertifikate vorhanden"
             },
             "button": {
-              "change": "Ändern"
+              "change": "Ändern",
+              "materials": "zu den Materialien",
+              "postprocessing": "zu den Nachbearbeitungen"
             }
           },
           "PreView": {
@@ -1550,7 +1555,9 @@
           "Card": {},
           "Catalog": {
             "button": {
-              "overview": "zur Übersicht"
+              "overview": "zur Übersicht",
+              "model": "zu den Modellen / Modelluplaod",
+              "material": "zu den Materialien"
             },
             "error": {
               "noPostProcessings": "keine Nachbearbeitungen gefunden"

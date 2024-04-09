@@ -83,16 +83,20 @@ const ProjectsCards: React.FC<ProjectsCardsProps> = (props) => {
               : t("Projects.components.Cards.ownProjects")}
           </Heading>
         </Container>
-        {ownProjects
-          .filter((flatProject) => filterDataBySearchInput(flatProject))
-          .map((flatProject, index) => (
-            <ProjectsCard
-              flatProject={flatProject}
-              key={index}
-              selectedProjects={selectedProjects}
-              setSelectedProjects={setSelectedProjects}
-            />
-          ))}
+        {ownProjects.length > 0 ? (
+          ownProjects
+            .filter((flatProject) => filterDataBySearchInput(flatProject))
+            .map((flatProject, index) => (
+              <ProjectsCard
+                flatProject={flatProject}
+                key={index}
+                selectedProjects={selectedProjects}
+                setSelectedProjects={setSelectedProjects}
+              />
+            ))
+        ) : (
+          <Text>{t("Projects.components.Cards.noProjects")}</Text>
+        )}
       </Container>
       {user.usertype === UserType.ORGANIZATION ? (
         <>

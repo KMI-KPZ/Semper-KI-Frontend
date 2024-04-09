@@ -94,14 +94,14 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
 
   return (
     <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:flex-nowrap">
-      <Button
+      {/* <Button
         variant="secondary"
         width="fit"
         size="xs"
         children={<HistoryIcon />}
         to={`/projects/${projectID}/${process.processID}/history`}
         title={t("Projects.Project.Process.components.Buttons.button.history")}
-      />
+      /> */}
       {process.processStatus >= ProcessStatus.REQUESTED &&
       user.usertype !== UserType.ANONYM ? (
         <PermissionGate element="ProcessButtonChat">

@@ -21,14 +21,16 @@ export const ProcessMaterialCard: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { updatedService } = useService();
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   const handleOnClickSelect = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    navigate("../postprocessing");
+    // navigate("../postprocessing");
     updatedService({ material });
+    setLoading(true);
   };
 
   const handleOnClickCard = (
@@ -39,10 +41,10 @@ export const ProcessMaterialCard: React.FC<Props> = (props) => {
   };
   return (
     <div
-      className={`flex items-center justify-start overflow-hidden bg-white hover:cursor-pointer hover:bg-gray-300 ${
+      className={`flex items-center justify-start  bg-white hover:cursor-pointer hover:bg-gray-300 ${
         grid === true
           ? "basis-[48%] flex-col sm:basis-[32%] md:basis-[23.5%]"
-          : "w-full flex-row"
+          : "h-fit w-full flex-row"
       }`}
       onClick={handleOnClickCard}
     >
@@ -57,7 +59,7 @@ export const ProcessMaterialCard: React.FC<Props> = (props) => {
       />
       <div
         className={`flex h-full items-center justify-around gap-2 p-3  md:justify-between ${
-          grid === true ? "flex-col " : "w-full flex-row gap-5"
+          grid === true ? "flex-col" : "w-full flex-row gap-5"
         }`}
       >
         <Heading variant="h2">{material.title}</Heading>
@@ -67,6 +69,7 @@ export const ProcessMaterialCard: React.FC<Props> = (props) => {
           ))}
         </div>
         <Button
+          loading={loading}
           onClick={handleOnClickSelect}
           title={t(
             "Service.Manufacturing.Material.components.Card.button.select"

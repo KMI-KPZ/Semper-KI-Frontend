@@ -27,7 +27,7 @@ export const ProcessModelCard: React.FC<Props> = (props) => {
     e.preventDefault();
     e.stopPropagation();
     updatedService({ model });
-    navigate("../material");
+    // navigate("../material");
   };
 
   const handleOnClickCard = (

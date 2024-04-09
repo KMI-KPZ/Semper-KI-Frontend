@@ -22,15 +22,12 @@ export const getTitleFromProcess = (
   process: ProcessProps,
   t: TFunction<"translation", undefined>
 ): string => {
-  return process.processDetails.title !== undefined
-    ? process.processDetails.title
-    : process.serviceType !== undefined
-    ? t(
-        `enum.ServiceType.${
-          ServiceType[process.serviceType] as keyof typeof ServiceType
-        }`
-      )
-    : t("Service.Overview.components.Item.titleEmpty");
+  return `${t("Service.Overview.components.Item.titleEmpty")}${
+    process.serviceType === ServiceType.MANUFACTURING &&
+    process.serviceDetails?.model?.fileName
+      ? `: ${process.serviceDetails?.model?.fileName}`
+      : `: ${new Date(process.createdWhen).toLocaleString()}`
+  }`;
 };
 
 const ServiceOverviewItem: React.FC<Props> = (props) => {

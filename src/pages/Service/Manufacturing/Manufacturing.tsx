@@ -81,15 +81,15 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
       }}
     >
       <LoadingSuspense query={filtersQuery}>
-        <div className="relativ flex h-full w-full flex-col gap-5 overflow-auto xl:flex-row">
-          {isProcessAtServiceStatus(process) ? (
+        <div className="relativ flex h-full min-h-[70vh] w-full min-w-[60vw] flex-col gap-5 overflow-auto xl:flex-row">
+          {/* {isProcessAtServiceStatus(process) ? (
             <ProcessFilter
               setFilterOpen={setFilter}
               filterOpen={filterOpen}
               filters={filtersQuery.data}
               applyFilters={applyFilters}
             />
-          ) : null}
+          ) : null} */}
           <div className="flex w-full flex-col gap-5">
             <ProcessHeader />
             <Routes>

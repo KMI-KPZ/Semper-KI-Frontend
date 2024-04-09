@@ -1,5 +1,5 @@
 import { MouseEvent, useContext, useState } from "react";
-import { Button } from "@component-library/index";
+import { Button, Heading } from "@component-library/index";
 
 import ProcessChat from "./Chat/Chat";
 import StatusBar from "./StatusBar/StatusBar";
@@ -124,7 +124,7 @@ const Process: React.FC<Props> = (props) => {
     >
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row lg:justify-between">
         <Container direction="row" gap={3} className="flex-wrap md:flex-nowrap">
-          <input
+          {/* <input
             id={`selectProcess${process.processID}`}
             type="checkbox"
             className="h-6 w-6"
@@ -134,13 +134,10 @@ const Process: React.FC<Props> = (props) => {
             })}
             checked={checked}
             onChange={(e) => handleOnChangeCheckboxSelect(e, process.processID)}
-          />
-          <ProjectTitleForm
-            forId={`selectProcess${process.processID}`}
-            title={getTitleFromProcess(process, t)}
-            updateTitle={updateProcessTitle}
-            headerType="h2"
-          />
+          /> */}
+          <Heading variant="h2" className="whitespace-nowrap">
+            {getTitleFromProcess(process, t)}
+          </Heading>
         </Container>
         <Divider className="hidden md:block" />
         <ProcessButtons
@@ -163,10 +160,13 @@ const Process: React.FC<Props> = (props) => {
         <ProcessAddress address={process.processDetails.clientAddress} />
       ) : null}
       <ProcessServicePreview process={process} />
-      <PermissionGate element="ProjectFile">
-        <ProjectFile process={process} projectID={projectID} />
-        <Upload mutation={uploadFilesMutation} icon multiple></Upload>
-      </PermissionGate>
+      {process.processStatus > ProcessStatus.CONTRACTOR_SELECTED ||
+      process.files.length > 0 ? (
+        <PermissionGate element="ProjectFile">
+          <ProjectFile process={process} projectID={projectID} />
+          <Upload mutation={uploadFilesMutation} icon multiple></Upload>
+        </PermissionGate>
+      ) : null}
       <Modal
         modalKey="ProcessInfo"
         open={state.infoOpen}

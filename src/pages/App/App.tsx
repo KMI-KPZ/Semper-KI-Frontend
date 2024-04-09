@@ -30,7 +30,7 @@ import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import { ContentBox } from "@component-library/index";
 import RedirectLogin from "../Login/RedirectLogin";
 import Menu from "@/components/Menu";
-import { Background } from "@/components/index";
+import { Background, Breadcrumb } from "@/components/index";
 import Advantages from "../Advantages/Advantages";
 import Chatbot from "@/components/Chatbot/Chatbot";
 
@@ -173,6 +173,7 @@ const App: React.FC = () => {
                 </ContentBox>
               }
             />
+
             <Route element={<AuthorizedUserRouteOutlet />}>
               <Route
                 path="test"

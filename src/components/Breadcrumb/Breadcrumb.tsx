@@ -132,11 +132,11 @@ export const Breadcrumb: React.FC<Props> = () => {
     }
     splittet.forEach((item: string, index: number) => {
       if (index === 0) {
-        breadcrumbItems.push({
-          tname: "home",
-          name: "home",
-          link: "/",
-        });
+        // breadcrumbItems.push({
+        //   tname: "home",
+        //   name: "home",
+        //   link: "/",
+        // });
       } else if (index === 2 && splittet[1] === "projects") {
         breadcrumbItems.push({
           link: `/projects/${item}`,
@@ -182,13 +182,14 @@ export const Breadcrumb: React.FC<Props> = () => {
   };
 
   return (
-    <nav className="hidden w-full flex-row items-center justify-start text-left text-lg font-bold text-white md:flex">
+    <nav className="hidden w-full flex-row items-center justify-start pl-10 text-left text-lg font-bold text-white md:flex">
       {generateBreadcrumbItems().map((item: BreadcrumbItem, index: number) => (
         <React.Fragment key={index}>
           <span>{" > "}</span>
           <Button
+            className="text-white"
             size="sm"
-            variant="secondary"
+            variant="tertiary"
             title={
               item.tname !== undefined
                 ? t(`data.NavigationItem.${item.tname}`)

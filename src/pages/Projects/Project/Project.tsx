@@ -112,14 +112,14 @@ const Project: React.FC<Props> = (props) => {
             updateTitle={updateProjectTitle}
           />
         </Container>
-        <Text variant="body">
+        {/* <Text variant="body">
           {t("Projects.Project.Project.state")}
           {t(
             `enum.ProcessStatus.${
               ProcessStatus[project.projectStatus] as keyof typeof ProcessStatus
             }`
           )}
-        </Text>
+        </Text> */}
         <Container direction="row" wrap="wrap" gap={3}>
           <Button
             variant="secondary"
@@ -129,7 +129,7 @@ const Project: React.FC<Props> = (props) => {
             onClick={handleOnClickButtonInfo}
             title={t("Projects.Project.Project.button.info")}
           />
-          <OwnerGate>
+          {/* <OwnerGate>
             <PermissionGate element={"ProjectButtonDelete"}>
               <Button
                 width="fit"
@@ -140,13 +140,13 @@ const Project: React.FC<Props> = (props) => {
                 onClick={handleOnClickDelete}
               />
             </PermissionGate>
-          </OwnerGate>
+          </OwnerGate> */}
         </Container>
       </Container>
       <Divider />
       <Container justify="between" width="full">
         <Container direction="row" wrap="wrap">
-          <label
+          {/* <label
             className="flex flex-row items-center justify-start gap-3"
             htmlFor="selectAllProcesses"
           >
@@ -169,13 +169,13 @@ const Project: React.FC<Props> = (props) => {
                 count: checkedProcesses.length,
               })}
             </Text>
-          ) : null}
+          ) : null} */}
         </Container>
         <Container direction="row" wrap="wrap" justify="center">
-          <ProjectButtons
+          {/* <ProjectButtons
             project={project}
             checkedProcesses={checkedProcesses}
-          />
+          /> */}
           <OwnerGate>
             <PermissionGate element={"ProjectButtonNew"}>
               <Button

@@ -4,12 +4,15 @@ import { Button, Container, LoadingAnimation } from "@component-library/index";
 import { getModelURI } from "@/services/utils";
 import { ModelProps } from "../types";
 import { Heading } from "@component-library/index";
-import useProcess from "@/pages/Projects/hooks/useProcess";
+import useProcess, {
+  ManufactoringProcessProps,
+} from "@/pages/Projects/hooks/useProcess";
 import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
 import ModelPreview from "@/pages/Test/STLViewer";
 import { ServiceType } from "@/pages/Service/hooks/useService";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
+import ModelDetails from "@/pages/Projects/Project/Process/ServicePreview/components/ModelDetails";
 
 interface Props {
   model: ModelProps;
@@ -77,36 +80,40 @@ const ProcessModelItem: React.FC<Props> = (props) => {
     <div className="flex h-fit w-full  flex-col items-center justify-start gap-5 bg-white p-5">
       <Heading variant="h2">{model.fileName}</Heading>
       {/* <img className="w-full max-w-xs" src={getModelURI(model)} alt="Model" /> */}
-      {fileUrl === "" ? (
+      {/* {fileUrl === "" ? (
         <LoadingAnimation />
       ) : (
         <ModelPreview file={fileUrl} className="h-80" />
-      )}
-      <div className="model-view-tags">
-        {model.tags.map((title: string, index: number) => (
-          <div key={index} className="model-view-tag">
-            {title}
-          </div>
-        ))}
-      </div>
-      <div className="model-view-date">
-        {t("Service.Manufacturing.Model.components.Item.created")}: {getDate()}
-      </div>
-      <div className="model-view-licens">
-        {t("Service.Manufacturing.Model.components.Item.license")}:{" "}
-        {model.licenses}
-      </div>
-      <div className="model-view-certificates">
-        {t("Service.Manufacturing.Model.components.Item.certificates")}:
-        {model.certificates !== undefined && model.certificates.length > 0
-          ? model.certificates.map((title: string, index: number) => (
-              <div className="model-view-certificate" key={index}>
-                {title}
-              </div>
-            ))
-          : t(
-              "Service.Manufacturing.Model.components.Item.error.noCertificates"
-            )}
+      )} */}
+      <ModelDetails process={process as ManufactoringProcessProps} />
+      <div className="flex w-[342px] flex-col gap-5">
+        <div className="w-full">
+          {model.tags.map((title: string, index: number) => (
+            <div key={index} className="model-view-tag">
+              {title}
+            </div>
+          ))}
+        </div>
+        <div className="w-full">
+          {t("Service.Manufacturing.Model.components.Item.created")}:{" "}
+          {getDate()}
+        </div>
+        <div className="w-full">
+          {t("Service.Manufacturing.Model.components.Item.license")}:{" "}
+          {model.licenses}
+        </div>
+        <div className="w-full">
+          {t("Service.Manufacturing.Model.components.Item.certificates")}:
+          {model.certificates !== undefined && model.certificates.length > 0
+            ? model.certificates.map((title: string, index: number) => (
+                <div className="model-view-certificate" key={index}>
+                  {title}
+                </div>
+              ))
+            : t(
+                "Service.Manufacturing.Model.components.Item.error.noCertificates"
+              )}
+        </div>
       </div>
 
       <Container>

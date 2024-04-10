@@ -8,6 +8,9 @@ import { ProcessMaterialItem } from "./components/Item";
 import { FilterItemProps } from "../Filter/Filter";
 import { Modal } from "@component-library/index";
 import { useManufacturingMaterialQuerys } from "../../../../api/Service/Manufacturing/useManufacturingQuerys";
+import useProcess from "@/pages/Projects/hooks/useProcess";
+import { ServiceType } from "../../hooks/useService";
+import logger from "@/hooks/useLogger";
 
 interface Props {
   processState: ServiceManufacturingState;
@@ -30,12 +33,64 @@ export interface MaterialProps {
 export const ProcessMaterial: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { filters, processState, material: material } = props;
+  const { process } = useProcess();
   const { grid, searchText } = processState;
   const [state, setState] = useState<State>({
     modalOpen: false,
     material: undefined,
   });
-  const { materialsQuery } = useManufacturingMaterialQuerys(filters);
+  // logger(process.serviceDetails);
+  const { materialsQuery } = useManufacturingMaterialQuerys([
+    ...filters,
+    {
+      id: 20,
+      isChecked: false,
+      isOpen: false,
+      question: {
+        isSelectable: false,
+        title: "material",
+        category: "MATERIAL",
+        type: "TEXT",
+        range: null,
+        values: null,
+        units: null,
+      },
+      answer: {
+        unit: "id",
+        value:
+          process.serviceType === ServiceType.MANUFACTURING
+            ? process.serviceDetails.material !== undefined
+              ? process.serviceDetails.material.id
+              : ""
+            : "",
+      },
+    },
+    {
+      id: 21,
+      isChecked: false,
+      isOpen: false,
+      question: {
+        isSelectable: false,
+        title: "postprocessings",
+        category: "POSTPROCESSING",
+        type: "TEXT",
+        range: null,
+        values: null,
+        units: null,
+      },
+      answer: {
+        unit: "ids",
+        value:
+          process.serviceType === ServiceType.MANUFACTURING
+            ? process.serviceDetails.postProcessings !== undefined
+              ? process.serviceDetails.postProcessings.map(
+                  (postProcessing) => postProcessing.id
+                )
+              : []
+            : [],
+      },
+    },
+  ]);
   const openMaterialView = (material: MaterialProps) => {
     setState((prevState) => ({ ...prevState, modalOpen: true, material }));
   };

@@ -10,7 +10,7 @@ import { FilterItemProps } from "../Filter/Filter";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
-import useService from "../../hooks/useService";
+import useService, { ServiceType } from "../../hooks/useService";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import { useManufacturingPostProcessingQuerys } from "@/api/Service/Manufacturing/useManufacturingQuerys";
 import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
@@ -42,9 +42,60 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { processState, filters, postProcessings } = props;
   const { grid, searchText } = processState;
-  const { postProcessingQuery } = useManufacturingPostProcessingQuerys(filters);
-  const { updatedService } = useService();
   const { process } = useProcess();
+  // logger(process.serviceDetails);
+  const { postProcessingQuery } = useManufacturingPostProcessingQuerys([
+    ...filters,
+    {
+      id: 20,
+      isChecked: false,
+      isOpen: false,
+      question: {
+        isSelectable: false,
+        title: "material",
+        category: "MATERIAL",
+        type: "TEXT",
+        range: null,
+        values: null,
+        units: null,
+      },
+      answer: {
+        unit: "id",
+        value:
+          process.serviceType === ServiceType.MANUFACTURING
+            ? process.serviceDetails.material !== undefined
+              ? process.serviceDetails.material.id
+              : ""
+            : "",
+      },
+    },
+    {
+      id: 21,
+      isChecked: false,
+      isOpen: false,
+      question: {
+        isSelectable: false,
+        title: "postprocessings",
+        category: "POSTPROCESSING",
+        type: "TEXT",
+        range: null,
+        values: null,
+        units: null,
+      },
+      answer: {
+        unit: "ids",
+        value:
+          process.serviceType === ServiceType.MANUFACTURING
+            ? process.serviceDetails.postProcessings !== undefined
+              ? process.serviceDetails.postProcessings.map(
+                  (postProcessing) => postProcessing.id
+                )
+              : []
+            : [],
+      },
+    },
+  ]);
+  const { updatedService } = useService();
 
   const checkPostProcessing = (postProcessing: PostProcessingProps) => {
     let newPostProcessings: PostProcessingProps[] = [];

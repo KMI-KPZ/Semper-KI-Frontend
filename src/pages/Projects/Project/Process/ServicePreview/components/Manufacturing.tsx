@@ -110,7 +110,7 @@ const ProcessServiceManufacturing: React.FC<
                 : process.serviceDetails.model.fileName}
             </Text>
           </Card>
-          {process.serviceDetails.model !== undefined ? (
+          {/* {process.serviceDetails.model !== undefined ? (
             <PermissionGate element={"ProcessButtonModelPreView"}>
               <Button
                 size="sm"
@@ -120,7 +120,7 @@ const ProcessServiceManufacturing: React.FC<
                 )}
               />
             </PermissionGate>
-          ) : null}
+          ) : null} */}
         </Container>
         <Card
           className={`w-full flex-row flex-wrap md:w-fit ${

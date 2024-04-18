@@ -27,11 +27,11 @@ const HomeImgCarousel: React.FC<HomeImgCarouselProps> = (props) => {
   const { t, i18n } = useTranslation();
 
   const partners: HomeImgItemProps[] = [
-    {
-      img: i18n.language === "de" ? BMWKdeURL : BMWKenURL,
-      href: "https://www.bmwk.de/",
-      title: "BMWK",
-    },
+    // {
+    //   img: i18n.language === "de" ? BMWKdeURL : BMWKenURL,
+    //   href: "https://www.bmwk.de/",
+    //   title: "BMWK",
+    // },
     {
       img: DATEV,
       href: "https://www.datev.de/",

@@ -485,10 +485,12 @@
         "visionTitle2": "Mit KI zum 3D-Druck",
         "vision1": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. Dazu gehören vorgelagerte Services wie Modellerstellung und Materialberatung genauso wie die Vermittlung von Nachbearbeitung oder Rechtsberatung. Der Druck findet beim optimalen Partner statt. Für all das setzen wir auf KI-Technologien. Gefördert vom Bundesministerium für Wirtschaft und Klimaschutz.",
         "vision2": "Kern unserer Plattform sind Künstliche Intelligenzen. Diese Technologien haben wir speziell für die Vernetzung von Kunden mit der 3D-Druck-Branche entwickelt. Unsere KI ist ein semantisches Netz. In dieses Netz speisen wir Informationen über alle verfügbaren 3D-Druck-Prozesse ein. In Kombination mit den Anfragen, die auf der Plattform eingehen, ermitteln unsere KI-Technologien daraus die optimale Produktionsstrategie.",
-        "partner": "Innovation klappt nur als Team. Wir arbeiten eng zusammen und freuen uns über neue Partner in Forschung und Entwicklung. Gefördert vom BMWK.",
+        "partner": "Unsere Projektpartner",
+        "partnertext": "Innovation klappt nur als Team. Wir arbeiten eng zusammen und freuen uns über neue Partner in Forschung und Entwicklung. Gefördert vom BMWK.",
         "demonstrator": "Einfach ausprobieren! (Projekte werden übernommen)",
         "buttons": {
-          "demonstrator": "Loslegen!"
+          "demonstrator": "Loslegen!",
+          "magazin": "Zur Projektseite"
         }
       }
     },

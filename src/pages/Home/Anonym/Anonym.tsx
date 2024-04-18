@@ -16,6 +16,9 @@ import { useProject } from "@/pages/Projects/hooks/useProject";
 import { useNavigate } from "react-router-dom";
 import useLogin from "@/hooks/useLogin";
 import { Button } from "@component-library/index";
+import BMWKdeURL from "@images/BMWK_de.png";
+import BMWKenURL from "@images/BMWE_en.png";
+import LaunchIcon from "@mui/icons-material/Launch";
 
 interface HomeProps {}
 
@@ -161,11 +164,36 @@ const Home: React.FC<HomeProps> = (props) => {
         </ContentBox>
       </HomeContainer>
       <HomeContainer className={`bg-white`}>
-        <ContentBox>
-          <Heading variant="h2" className="basis-1/3 hyphens-auto text-black">
+        <ContentBox className="flex flex-col md:flex-col">
+          <Heading variant="h2" className="w-full hyphens-auto text-black">
             {t("Home.Anonym.Anonym.partner")}
           </Heading>
           <HomeImgCarousel />
+          <Container className="flex-col md:flex-row">
+            <a
+              href={"https://www.bmwk.de/"}
+              title={"BMWK"}
+              className="flex w-60 items-center justify-center"
+            >
+              <img
+                alt={"BMWK"}
+                className="w-40 duration-300 hover:scale-105"
+                src={i18n.language === "de" ? BMWKdeURL : BMWKenURL}
+              />
+            </a>
+            <Text variant="body" className="text-black md:text-xl">
+              {t("Home.Anonym.Anonym.partnertext")}
+            </Text>
+            <Button
+              title={t("Home.Anonym.Anonym.buttons.magazin")}
+              endIcon={<LaunchIcon />}
+              extern
+              target="_blank"
+              to="https://magazin.semper-ki.org/"
+              onClick={() => navigate("/magazin")}
+              variant="primary"
+            />
+          </Container>
         </ContentBox>
       </HomeContainer>
     </div>

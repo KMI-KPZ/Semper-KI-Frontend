@@ -1239,25 +1239,13 @@
       "login": "Zur Anmeldung"
     },
     "form": {
-      "name": "Anmeldename",
-      "display_name": "Anzeigename",
-      "logo_url": "Logo URL",
-      "primary_color": "Primärfarbe",
-      "background_color": "Hintergrundfarbe",
+      "display_name": "Organisationsname",
       "email": "E-Mail",
       "button": {
         "submit": "Registrieren"
       },
       "error": {
-        "name": {
-          "required": "Anmeldename wird benötigt",
-          "regex": "Darf nur Kleinbuchstaben, Zahlen, Unterstriche (_) und Bindestriche (-) enthalten und mit einem Kleinbuchstaben oder Zahl beginnen",
-          "length": "Muss zwischen 3 und 50 Zeichen lang sein"
-        },
-        "display_name": "Anzeigename wird benötigt",
-        "logo_url": "Logo URL wird benötigt",
-        "primary_color": "Primärfarbe wird benötigt",
-        "background_color": "Hintergrundfarbe wird benötigt",
+        "display_name": "Organisationsname wird benötigt",
         "email": {
           "required": "E-Mail wird benötigt",
           "email": "E-Mail muss eine gültige E-Mail sein"

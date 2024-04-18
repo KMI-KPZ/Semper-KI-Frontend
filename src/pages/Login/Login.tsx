@@ -60,7 +60,7 @@ const Login: React.FC<Props> = (props) => {
 
   return (
     <Container direction="col" className=" p-5">
-      <Container direction="col" className="bg-white p-5">
+      <Container direction="col" className="bg-white p-5 md:px-20">
         <Heading variant="h2">{t("Login.Login.client")}</Heading>
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Button
@@ -76,7 +76,7 @@ const Login: React.FC<Props> = (props) => {
           />
         </div>
       </Container>
-      <Container direction="col" className="bg-white p-5">
+      <Container direction="col" className="bg-white p-5 md:px-20">
         <Heading variant="h2">{t("Login.Login.orga")}</Heading>
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Button

@@ -5,7 +5,6 @@ import React, {
   SyntheticEvent,
   useEffect,
   useRef,
-  useState,
 } from "react";
 import { useTranslation } from "react-i18next";
 import CloseIcon from "@mui/icons-material/Close";
@@ -17,9 +16,6 @@ import { twMerge } from "tailwind-merge";
 import { NavigationItemData } from "@/data/navigation";
 import useUser from "@/hooks/useUser";
 import HeaderItem from "../Header/components/Item";
-import useEvents from "@/hooks/useEvents/useEvents";
-import { getProjectEventAmount } from "@/hooks/useEvents/hooks/useProjectEvent";
-import logger from "@/hooks/useLogger";
 import useBadge from "@/hooks/useBadge";
 
 interface MenuProps {}

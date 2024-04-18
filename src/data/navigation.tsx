@@ -76,14 +76,14 @@ export const NavigationItemData: INavigationItem[] = [
     userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
   },
 
-  {
-    title: "test",
-    link: "/test",
-    icon: <BugReportIcon fontSize="large" />,
-    extern: false,
-    preferred: ["menu"],
-    userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
-  },
+  // {
+  //   title: "test",
+  //   link: "/test",
+  //   icon: <BugReportIcon fontSize="large" />,
+  //   extern: false,
+  //   preferred: ["menu"],
+  //   userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
+  // },
   {
     userTypes: [UserType.ADMIN],
     title: "user",

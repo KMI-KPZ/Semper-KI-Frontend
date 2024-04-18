@@ -54,7 +54,11 @@ export const Test: React.FC<Props> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5">
       <Container direction="col" className="bg-white p-5">
-        <Heading variant="h1">Events</Heading>
+        <Heading variant="h1">TestPage</Heading>
+      </Container>
+
+      <Container direction="col" className="bg-white p-5">
+        <Heading variant="h2">Events</Heading>
         {events.length > 0
           ? events.map((event, index) => (
               <Container

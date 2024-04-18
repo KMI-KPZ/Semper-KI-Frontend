@@ -30,7 +30,7 @@ import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import { ContentBox } from "@component-library/index";
 import RedirectLogin from "../Login/RedirectLogin";
 import Menu from "@/components/Menu";
-import { Background } from "@/components/index";
+import { Background, Breadcrumb } from "@/components/index";
 import Advantages from "../Advantages/Advantages";
 import Chatbot from "@/components/Chatbot/Chatbot";
 
@@ -73,7 +73,7 @@ const App: React.FC = () => {
       >
         <Header />
         <main className="flex h-full w-full flex-grow flex-col items-center justify-start">
-          {/* <Breadcrumb /> */}
+          <Breadcrumb />
           <Routes data-testid="routes">
             <Route index element={<Home />} />
             <Route

@@ -132,11 +132,11 @@ export const Breadcrumb: React.FC<Props> = () => {
     }
     splittet.forEach((item: string, index: number) => {
       if (index === 0) {
-        breadcrumbItems.push({
-          tname: "home",
-          name: "home",
-          link: "/",
-        });
+        // breadcrumbItems.push({
+        //   tname: "home",
+        //   name: "home",
+        //   link: "/",
+        // });
       } else if (index === 2 && splittet[1] === "projects") {
         breadcrumbItems.push({
           link: `/projects/${item}`,
@@ -188,7 +188,7 @@ export const Breadcrumb: React.FC<Props> = () => {
           <span>{" > "}</span>
           <Button
             size="sm"
-            variant="secondary"
+            variant="breadcrumb"
             title={
               item.tname !== undefined
                 ? t(`data.NavigationItem.${item.tname}`)

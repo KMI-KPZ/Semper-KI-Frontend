@@ -806,22 +806,17 @@
     "header": "Account",
     "general": {
       "header": "Allgemein",
-      "name": "Name",
-      "email": "E-Mail",
-      "type": "Benutzertyp"
+      "name": "Name:",
+      "email": "E-Mail: ",
+      "type": "Benutzertyp: "
     },
     "company": {
       "header": "Organisation",
       "name": "Name"
     },
     "address": {
-      "header": "Adresse",
-      "name": "Name",
-      "company": "Firma",
-      "street": "Straße",
-      "city": "Stadt",
-      "zipcode": "Postleitzahl",
-      "country": "Land"
+      "header": "Adressen",
+      "noAddress": "Keine Adresse vorhanden"
     },
     "time": {
       "header": "Zugriffe",
@@ -830,11 +825,22 @@
       "updated": "Aktualisiert am"
     },
     "button": {
-      "edit": "Bearbeiten",
-      "selectChange": "Organisation wählen",
-      "delete": "Account Löschen"
+      "delete": "Account Löschen",
+      "addAddress": "Adresse hinzufügen"
     },
     "components": {
+      "Address": {
+        "company": "Firma:",
+        "name": "Name:",
+        "street": "Straße:",
+        "city": "Stadt:",
+        "country": "Land:",
+        "standard": "Standard-Adresse",
+        "buttons": {
+          "edit": "Bearbeiten",
+          "delete": "Adresse löschen"
+        }
+      },
       "Form": {
         "title": "Account bearbeiten",
         "address": "Adresse",

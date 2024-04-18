@@ -182,7 +182,7 @@ export const Breadcrumb: React.FC<Props> = () => {
   };
 
   return (
-    <nav className="hidden w-full flex-row items-center justify-start text-left text-lg font-bold text-white md:flex">
+    <nav className="hidden w-full flex-row items-center justify-start pl-10 text-left text-lg font-bold text-white md:flex">
       {generateBreadcrumbItems().map((item: BreadcrumbItem, index: number) => (
         <React.Fragment key={index}>
           <span>{" > "}</span>

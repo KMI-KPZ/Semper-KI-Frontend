@@ -43,7 +43,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   const { isServiceComplete } = useService();
   const { user } = useAuthorizedUser();
   const [edit, setEdit] = useState(false);
-  const [address, setAddress] = useState(user.details.address);
+  const [address, setAddress] = useState(user.details.addresses);
 
   const { updateProcess } = useGeneralProcess();
 
@@ -92,7 +92,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   };
 
   const handelOnButtonClickReset = () => {
-    setAddress(user.details.address);
+    setAddress(user.details.addresses);
   };
 
   const handleOnSubmitAddressForm = (data: UserAddressProps) => {

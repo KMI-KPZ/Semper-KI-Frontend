@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container } from "@component-library/index";
+import { Button, Container, Divider, Text } from "@component-library/index";
 import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 import { Heading } from "@component-library/index";
-import EditIcon from "@mui/icons-material/Edit";
+import AddIcon from "@mui/icons-material/Add";
 import { Modal } from "@component-library/index";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import AddressForm from "@/components/Form/AddressForm";
+import Address from "./components/Address";
+import AddressCard from "./components/Address";
 
 interface Props {}
 
@@ -30,88 +32,112 @@ const Profile: React.FC<Props> = (props) => {
   };
 
   return (
-    <Container className=" bg-white p-5" direction="col" width="full">
-      <Heading variant="h1">{t("Profile.header")}</Heading>
-      <div className="w-full border-t-4" />
-      <Container direction="col" align="start">
+    <Container className="md:max-w-2xl" direction="col" width="full">
+      <Heading
+        variant="h1"
+        className="flex w-full items-center justify-center bg-white  p-5"
+      >
+        {t("Profile.header")}
+      </Heading>
+      <Container direction="col" className="bg-white p-5 " width="full">
         <Heading variant="h2">{t("Profile.general.header")}</Heading>
-        <div className="w-full border-t-2" />
-        <span>
-          {t("Profile.general.name")}: {user.name}
-        </span>
-        <span>
-          {t("Profile.general.email")}: {user.details.email}
-        </span>
-        <span>
-          {t("Profile.general.type")}:{" "}
-          {t(
-            `enum.UserType.${UserType[user.usertype] as keyof typeof UserType}`
-          )}
-        </span>
+        <Divider />
+        <Container width="full" direction="row" align="start" justify="start">
+          <Container
+            direction="col"
+            width="fit"
+            justify="start"
+            align="start"
+            className="p-3"
+            gap={3}
+          >
+            <Text>{t("Profile.general.name")}</Text>
+            <Text>{t("Profile.general.type")}</Text>
+            <Text>{t("Profile.general.email")}</Text>
+          </Container>
+          <Container
+            direction="col"
+            width="fit"
+            justify="start"
+            align="start"
+            className="p-3"
+            gap={3}
+          >
+            <Text>{user.name}</Text>
+            <Text>
+              {t(
+                `enum.UserType.${
+                  UserType[user.usertype] as keyof typeof UserType
+                }`
+              )}
+            </Text>
+            <Text>{user.details.email}</Text>
+          </Container>
+        </Container>
 
         {user.usertype === UserType.ORGANIZATION ? (
           <>
             <Heading variant="h2">{t("Profile.company.header")}</Heading>
-            <div className="w-full border-t-2" />
+            <Divider />
             <span className="break-all">
               {t("Profile.company.name")}: {user.organization}
             </span>
-            {user.organization !== undefined && user.organization === "None" ? (
-              <Button title={t("Profile.button.selectChange")} />
-            ) : null}
           </>
         ) : null}
-        {user.details.address !== undefined ? (
-          <>
-            <Heading variant="h2">{t("Profile.address.header")}</Heading>
-            <div className="w-full border-t-2" />
-            <span>
-              {t("Profile.address.name")}: {user.details.address.firstName}{" "}
-              {user.details.address.lastName}
-            </span>
-            <span>
-              {t("Profile.address.company")}:{" "}
-              {user.details.address.company !== undefined &&
-              user.details.address.company !== ""
-                ? user.details.address.company
-                : "  ---"}
-            </span>
-            <span>
-              {t("Profile.address.street")}: {user.details.address.street}{" "}
-              {user.details.address.houseNumber}
-            </span>
-            <span>
-              {t("Profile.address.zipcode")}: {user.details.address.zipcode}
-            </span>
-            <span>
-              {t("Profile.address.city")}: {user.details.address.city}
-            </span>
-            <span>
-              {t("Profile.address.country")}: {user.details.address.country}
-            </span>
-          </>
-        ) : null}
-        <Heading variant="h2">{t("Profile.time.header")}</Heading>
-        <div className="w-full border-t-2" />
-        <span>
-          {t("Profile.time.created")}: {user.createdWhen.toLocaleString()}
-        </span>
-        <span>
-          {t("Profile.time.accessed")}: {user.accessedWhen.toLocaleString()}
-        </span>
-        <span>
-          {t("Profile.time.updated")}: {user.updatedWhen.toLocaleString()}
-        </span>
-        <Container justify="center">
+        <Heading variant="h2">{t("Profile.address.header")}</Heading>
+        <Divider />
+        <Container width="full" justify="start" align="center">
+          {user.details.addresses.length > 0 ? (
+            user.details.addresses.map((address, index) => (
+              <Address key={index} address={address} />
+            ))
+          ) : (
+            <Text>{t("Profile.address.noAddress")}</Text>
+          )}
+        </Container>
+        <Container width="full" align="center" justify="center">
           <Button
-            title={t(`Profile.button.edit`)}
-            startIcon={<EditIcon />}
+            size="sm"
+            variant="secondary"
+            startIcon={<AddIcon />}
             onClick={handleOnClickButtonEdit}
-            variant="primary"
+            title={t("Profile.button.addAddress")}
           />
+        </Container>
+        <Heading variant="h2">{t("Profile.time.header")}</Heading>
+        <Divider />
+        <Container width="full" direction="row" align="start" justify="start">
+          <Container
+            direction="col"
+            width="fit"
+            justify="start"
+            align="start"
+            className="p-3"
+            gap={3}
+          >
+            <Text>{t("Profile.time.created")}</Text>
+            <Text>{t("Profile.time.accessed")}</Text>
+            <Text>{t("Profile.time.updated")}</Text>
+          </Container>
+          <Container
+            direction="col"
+            width="fit"
+            justify="start"
+            align="start"
+            className="p-3"
+            gap={3}
+          >
+            <Text>{user.createdWhen.toLocaleString()}</Text>
+            <Text>{user.accessedWhen.toLocaleString()}</Text>
+            <Text>{user.updatedWhen.toLocaleString()}</Text>
+          </Container>
+        </Container>
+
+        <Container width="full">
           <Button
             className="border-2 border-red-800 bg-red-700"
             variant="primary"
+            size="sm"
             testid="button-delete"
             startIcon={<DeleteIcon />}
             onClick={handleOnClickButtonDelete}

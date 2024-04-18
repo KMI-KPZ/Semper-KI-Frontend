@@ -115,7 +115,8 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
         className = " text-white hover:cursor-pointer hover:underline ";
         break;
       case "text":
-        className = " text-slate-600 hover:cursor-pointer hover:underline ";
+        className =
+          " p-1 text-black hover:cursor-pointer hover:text-ultramarinblau underline";
         break;
     }
     return className;
@@ -172,10 +173,10 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
           transition duration-200 
           md:flex-nowrap md:whitespace-nowrap
          `,
-        getClassNameVariant(),
         getClassNameSize(),
         getClassNameWidth(),
         getClassNameDirection(),
+        getClassNameVariant(),
         className
       )}
       onClick={handleOnClickButton}

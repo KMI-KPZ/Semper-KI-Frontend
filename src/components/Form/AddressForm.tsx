@@ -34,6 +34,7 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
     zipcode: yup.string().required(t("yup.required")),
     city: yup.string().required(t("yup.required")),
     country: yup.string().required(t("yup.required")),
+    standard: yup.boolean().required(t("yup.required")),
   });
 
   const {
@@ -43,7 +44,7 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
   } = useForm<UserAddressProps>({
     resolver: yupResolver(schema),
     defaultValues:
-      initialAddress !== undefined ? initialAddress : user.details.address,
+      initialAddress !== undefined ? initialAddress : user.details.addresses,
   });
 
   const onSubmit = (data: UserAddressProps) => {
@@ -64,6 +65,7 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
     "zipcode",
     "city",
     "country",
+    "standard",
   ];
 
   const maxLength = getMaxLabelWidth(

@@ -1,4 +1,5 @@
-import useUserMutations from "@/api/User/useUserMutations";
+import useDeleteUser from "@/api/User/Mutations/useDeleteUser";
+import useUpdateUserDetails from "@/api/User/Mutations/useUpdateUserDetails";
 import { UserContext } from "@/contexts/UserContextProvider";
 import { useContext } from "react";
 
@@ -29,7 +30,7 @@ export interface AuthorizedUserProps {
 
 export interface UserDetailsProps {
   email: string;
-  address?: UserAddressProps;
+  addresses: UserAddressProps[];
 }
 
 export interface UpdateUserProps {
@@ -45,6 +46,7 @@ export interface UserAddressProps {
   zipcode: string;
   city: string;
   country: string;
+  standard: boolean;
 }
 
 export enum UserType {
@@ -64,7 +66,8 @@ export interface Address {
 
 const useUser = (): ReturnProps => {
   const { isLoggedIn, user } = useContext(UserContext);
-  const { deleteUserMutation, updateUserDetailsMutation } = useUserMutations();
+  const deleteUserMutation = useDeleteUser();
+  const updateUserDetailsMutation = useUpdateUserDetails();
 
   const deleteUser = () => {
     deleteUserMutation.mutate();

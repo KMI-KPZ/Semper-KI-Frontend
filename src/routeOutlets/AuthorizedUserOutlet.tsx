@@ -24,6 +24,7 @@ export const AuthorizedUserContext = createContext<AuthorizedUserContext>({
     createdWhen: new Date(),
     details: {
       email: "",
+      addresses: [],
     },
     hashedID: "",
     lastSeen: new Date(),

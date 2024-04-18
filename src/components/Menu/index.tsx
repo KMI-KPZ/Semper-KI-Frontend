@@ -143,6 +143,7 @@ const Menu: React.FC<MenuProps> = (props) => {
           </ul>
         </div>
         <Button
+          className="md:hidden"
           title={t(`components.Header.Header.button.close`)}
           onClick={closeMenu}
           children={<ExpandLessIcon className="md:rotate-90" />}

@@ -25,84 +25,80 @@ type State = {
 
 const Login: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { path, userType } = props;
-  const [state, setState] = useState<State>({
-    orga: false,
-  });
-  const { orga } = state;
+
   const { login, mockedLogin } = useLogin();
   const navigate = useNavigate();
   const [queryParameters] = useSearchParams();
   const redirectURL = queryParameters.get("redirectURL");
 
-  const handleOnClickButtonLogin = () => {
+  const handleLogin = (
+    userType: "user" | "organization",
+    register: boolean
+  ) => {
     login({
-      userType: orga ? "organization" : "user",
-      register: false,
+      userType: userType,
+      register: register,
       path: redirectURL !== null ? redirectURL : undefined,
     });
   };
-  const handleOnClickButtonRegister = () => {
-    if (orga) {
-      navigate("/registerorganization");
-    } else {
-      login({
-        userType: "user",
-        register: true,
-        path: redirectURL !== null ? redirectURL : undefined,
-      });
-    }
-  };
 
-  const handleOnClickSwitch = () => {
-    setState((prevState) => ({
-      ...prevState,
-      orga: !prevState.orga,
-    }));
+  const handleOnClickButtonLoginOrga = () => {
+    handleLogin("organization", false);
   };
-
-  const testOnClick = (userType: UserType) => {
-    setState((prevState) => ({
-      ...prevState,
-      orga: userType === UserType.ORGANIZATION,
-    }));
+  const handleOnClickButtonLoginClient = () => {
+    handleLogin("user", false);
   };
-
+  const handleOnClickButtonRegisterOrga = () => {
+    navigate("/registerorganization");
+  };
+  const handleOnClickButtonRegisterClient = () => {
+    handleLogin("user", true);
+  };
   const handleOnClickButtonMockedLogin = (type: LoginUserType) => {
     mockedLogin(type);
   };
 
   return (
-    <Container direction="col" className="bg-white p-5">
-      <Heading variant="h1">
-        {path === undefined
-          ? t("Login.Login.header")
-          : t("Login.Login.headerPath")}
-      </Heading>
-      <UserSwitch
-        onClick={testOnClick}
-        userType={orga ? UserType.ORGANIZATION : UserType.USER}
-      />
-      <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
-        <Button
-          onClick={handleOnClickButtonLogin}
-          title={t("Login.Login.buttons.login")}
-          startIcon={<LoginIcon />}
-          variant="primary"
-        />
-        <Button
-          onClick={handleOnClickButtonRegister}
-          title={t("Login.Login.buttons.register")}
-          startIcon={<CreateIcon />}
-        />
-      </div>
+    <Container direction="col" className=" p-5">
+      <Container direction="col" className="bg-white p-5">
+        <Heading variant="h2">{t("Login.Login.client")}</Heading>
+        <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
+          <Button
+            onClick={handleOnClickButtonLoginClient}
+            title={t("Login.Login.buttons.login")}
+            startIcon={<LoginIcon />}
+            variant="primary"
+          />
+          <Button
+            onClick={handleOnClickButtonRegisterClient}
+            title={t("Login.Login.buttons.register")}
+            startIcon={<CreateIcon />}
+          />
+        </div>
+      </Container>
+      <Container direction="col" className="bg-white p-5">
+        <Heading variant="h2">{t("Login.Login.orga")}</Heading>
+        <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
+          <Button
+            onClick={handleOnClickButtonLoginOrga}
+            title={t("Login.Login.buttons.login")}
+            startIcon={<LoginIcon />}
+            variant="primary"
+          />
+          <Button
+            onClick={handleOnClickButtonRegisterOrga}
+            title={t("Login.Login.buttons.register")}
+            startIcon={<CreateIcon />}
+          />
+        </div>
+      </Container>
       {process.env.NODE_ENV === "development" ? (
-        <Container direction="col">
+        <Container direction="col" className="bg-white p-5">
           <Heading variant="h1">{t("Login.Login.admin")}</Heading>
           <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
             <Button
               onClick={() => handleOnClickButtonMockedLogin("fakeUser")}
-              title={t("Login.Login.buttons.user")}
+              title={t("Login.Login.buttons.testuser")}
               variant="primary"
               startIcon={<PersonIcon />}
               className="bg-green-700"
@@ -110,14 +106,14 @@ const Login: React.FC<Props> = (props) => {
             <Button
               onClick={() => handleOnClickButtonMockedLogin("fakeOrganization")}
               variant="primary"
-              title={t("Login.Login.buttons.orga")}
+              title={t("Login.Login.buttons.testorga")}
               startIcon={<PeopleIcon />}
               className="bg-blue-700"
             />
             <Button
               onClick={() => handleOnClickButtonMockedLogin("fakeAdmin")}
               variant="primary"
-              title={t("Login.Login.buttons.admin")}
+              title={t("Login.Login.buttons.testadmin")}
               startIcon={<AdminPanelSettingsIcon />}
               className="bg-red-700"
             />

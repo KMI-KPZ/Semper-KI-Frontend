@@ -42,22 +42,6 @@ export const NavigationItemData: INavigationItem[] = [
     preferred: ["header", "home"],
     userTypes: [UserType.ANONYM],
   },
-  {
-    title: "logout",
-    link: "/logout",
-    icon: <LogoutIcon fontSize="large" />,
-    extern: false,
-    preferred: ["menu"],
-    userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
-  },
-  {
-    title: "login",
-    link: "/login",
-    icon: <LoginIcon fontSize="large" />,
-    extern: false,
-    preferred: ["header"],
-    userTypes: [UserType.ANONYM],
-  },
 
   {
     title: "projects",
@@ -139,5 +123,21 @@ export const NavigationItemData: INavigationItem[] = [
     icon: <PrintIcon fontSize="large" />,
     preferred: ["home"],
     extern: false,
+  },
+  {
+    title: "logout",
+    link: "/logout",
+    icon: <LogoutIcon fontSize="large" />,
+    extern: false,
+    preferred: ["menu"],
+    userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
+  },
+  {
+    title: "login",
+    link: "/login",
+    icon: <LoginIcon fontSize="large" />,
+    extern: false,
+    preferred: ["header"],
+    userTypes: [UserType.ANONYM],
   },
 ];

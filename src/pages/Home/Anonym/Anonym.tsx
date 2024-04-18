@@ -118,7 +118,7 @@ const Home: React.FC<HomeProps> = (props) => {
               {t("Home.components.OrgaInfo.subTitle")}
             </Heading>
           </div>
-          <div className="flex w-full flex-col items-start justify-center gap-5 md:w-auto">
+          <div className="flex w-full flex-row items-start justify-center gap-5 md:w-auto">
             <Button
               startIcon={<AutoAwesomeIcon fontSize="large" />}
               title={t("Home.components.OrgaInfo.advantage")}
@@ -144,7 +144,7 @@ const Home: React.FC<HomeProps> = (props) => {
               {t("Home.components.ClientInfo.subTitle")}
             </Heading>
           </div>
-          <div className="flex w-full flex-col items-start justify-center gap-5 md:w-auto">
+          <div className="flex w-full flex-row items-start justify-center gap-5 md:w-auto">
             <Button
               startIcon={<AutoAwesomeIcon fontSize="large" />}
               title={t("Home.components.ClientInfo.advantage")}

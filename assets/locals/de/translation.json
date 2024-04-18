@@ -404,7 +404,7 @@
   "Advantages": {
     "components": {
       "User": {
-        "heading": "Vorteile für Einzelpersonen",
+        "heading": "Vorteile für Privatpersonen",
         "text": "Unser Ziel ist, 3D-Druck zugänglicher zu machen. Dafür setzen wir auf Technologien Künstlicher Intelligenz. Sie sind speziell für die Additive Fertigung entwickelt. In unser Wissensnetz speisen wir verfügbare Informationen über 3D-Druck-Prozesse, Materialien und Akteure am Markt ein.",
         "subHeading": "Optimiertes Matching",
         "fact1": "Einfaches Onboarding u.a. unterstützt durch einen Chatbot",
@@ -506,10 +506,10 @@
         }
       },
       "ClientInfo": {
-        "title": "Als Einzelperson anmelden",
-        "subTitle": "Um Services ausschließlich nutzen zu können",
-        "advantage": "Ihre Vorteile",
-        "register": "Registrieren"
+        "title": "Als Privatperson anmelden",
+        "subTitle": "Um Services nutzen zu können",
+        "advantage": "Ihre Vorteile als Privatperson",
+        "register": "Als Privatperson Registrieren"
       },
       "Container": {},
       "Coypu": {
@@ -536,8 +536,8 @@
       "OrgaInfo": {
         "title": "Als Organisation anmelden",
         "subTitle": "Um Services anbieten und nutzen zu können",
-        "advantage": "Ihre Vorteile",
-        "register": "Registrieren"
+        "advantage": "Ihre Vorteile als Organisation",
+        "register": "Als Organisation Registrieren"
       },
       "Organization": {
         "title": "Organisation",
@@ -602,16 +602,17 @@
   "Login": {
     "Login": {
       "header": "Anmeldung",
-      "user": "Benutzer",
-      "orga": "Organisation",
+      "client": "Als Privatperson anmelden",
+      "orga": "Als Organisation anmelden",
       "admin": "Mocked Anmeldungen",
       "headerPath": "Für die gewünschte Seite müssen sie sich anmelden",
       "buttons": {
         "login": "Anmelden",
         "register": "Registieren",
-        "user": "Einzelnutzer",
-        "orga": "Organisation",
-        "admin": "Admin"
+
+        "testuser": "Einzelnutzer",
+        "testorga": "Organisation",
+        "testadmin": "Admin"
       }
     }
   },

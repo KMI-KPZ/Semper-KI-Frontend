@@ -8,7 +8,7 @@
   },
   "data": {
     "NavigationItem": {
-      "demonstrator": "Loslegen!",
+      "demonstrator": "Loslegen",
       "edit": "Bearbeiten",
       "home": "Startseite",
       "process": "Prozess",
@@ -487,9 +487,12 @@
         "vision2": "Kern unserer Plattform sind Künstliche Intelligenzen. Diese Technologien haben wir speziell für die Vernetzung von Kunden mit der 3D-Druck-Branche entwickelt. Unsere KI ist ein semantisches Netz. In dieses Netz speisen wir Informationen über alle verfügbaren 3D-Druck-Prozesse ein. In Kombination mit den Anfragen, die auf der Plattform eingehen, ermitteln unsere KI-Technologien daraus die optimale Produktionsstrategie.",
         "partner": "Unsere Projektpartner",
         "partnertext": "Innovation klappt nur als Team. Wir arbeiten eng zusammen und freuen uns über neue Partner in Forschung und Entwicklung. Gefördert vom BMWK.",
-        "demonstrator": "Einfach ausprobieren! (Projekte werden übernommen)",
+        "demonstrator": {
+          "title": "Einfach ausprobieren",
+          "subTitle": "Projekte werden bei späterer Registrierung übernommen"
+        },
         "buttons": {
-          "demonstrator": "Loslegen!",
+          "demonstrator": "Loslegen",
           "magazin": "Zur Projektseite"
         }
       }
@@ -537,7 +540,7 @@
       },
       "OrgaInfo": {
         "title": "Als Organisation anmelden",
-        "subTitle": "Um Services anbieten und nutzen zu können",
+        "subTitle": "Um Services nutzen und anbieten zu können",
         "advantage": "Ihre Vorteile als Organisation",
         "register": "Als Organisation Registrieren"
       },

@@ -116,6 +116,7 @@ const HomeImgCarousel: React.FC<HomeImgCarouselProps> = (props) => {
             key={index}
             href={partner.href}
             title={partner.title}
+            target="_blank"
             className="flex w-60 items-center justify-center"
           >
             <img

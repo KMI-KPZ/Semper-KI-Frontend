@@ -15,6 +15,7 @@ import { UserType } from "@/hooks/useUser";
 import { NavigationItemPreferredType } from "@/components/Header";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { DataNaviagtionTranlationType } from "@/components";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 
 export type INavigationItem = {
   title: DataNaviagtionTranlationType;
@@ -37,7 +38,7 @@ export const NavigationItemData: INavigationItem[] = [
   {
     title: "demonstrator",
     link: "/projects",
-    icon: <ScienceIcon fontSize="large" />,
+    icon: <RocketLaunchIcon fontSize="large" />,
     extern: false,
     preferred: ["header", "home"],
     userTypes: [UserType.ANONYM],

@@ -19,6 +19,9 @@ import { Button } from "@component-library/index";
 import BMWKdeURL from "@images/BMWK_de.png";
 import BMWKenURL from "@images/BMWE_en.png";
 import LaunchIcon from "@mui/icons-material/Launch";
+import PersonIcon from "@mui/icons-material/Person";
+import CorporateFareIcon from "@mui/icons-material/CorporateFare";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 
 interface HomeProps {}
 
@@ -98,10 +101,19 @@ const Home: React.FC<HomeProps> = (props) => {
       </HomeContainer>
       <HomeContainer className="h-fit min-h-[25vh] bg-ultramarinblau-dark">
         <ContentBox className="justify-between py-5">
-          <Heading variant="h2" className="text-3xl text-white">
-            {t("Home.Anonym.Anonym.demonstrator")}
-          </Heading>
+          <Container direction="col" align="start">
+            <Container>
+              <RocketLaunchIcon fontSize="large" />
+              <Heading variant="h2" className="text-3xl text-white">
+                {t("Home.Anonym.Anonym.demonstrator.title")}
+              </Heading>
+            </Container>
+            <Heading variant="h3" className="pl-16 text-white">
+              {t("Home.Anonym.Anonym.demonstrator.subTitle")}
+            </Heading>
+          </Container>
           <Button
+            startIcon={<RocketLaunchIcon fontSize="large" />}
             title={t("Home.Anonym.Anonym.buttons.demonstrator")}
             onClick={() => navigate("/projects")}
             variant="secondary"
@@ -114,10 +126,13 @@ const Home: React.FC<HomeProps> = (props) => {
       >
         <ContentBox className="flex w-full flex-col gap-5 md:flex-row md:justify-between md:gap-40">
           <div className="flex flex-col items-start justify-center gap-5">
-            <Heading variant="h2" className="text-white">
-              {t("Home.components.OrgaInfo.title")}
-            </Heading>
-            <Heading variant="h3" className="pl-5 text-white">
+            <Container>
+              <CorporateFareIcon fontSize="large" />
+              <Heading variant="h2" className="text-white">
+                {t("Home.components.OrgaInfo.title")}
+              </Heading>
+            </Container>
+            <Heading variant="h3" className="pl-16 text-white">
               {t("Home.components.OrgaInfo.subTitle")}
             </Heading>
           </div>
@@ -140,10 +155,13 @@ const Home: React.FC<HomeProps> = (props) => {
       <HomeContainer className="h-fit min-h-[25vh] bg-ultramarinblau-dark">
         <ContentBox className="flex w-full  flex-col gap-5 md:flex-row md:justify-between md:gap-40">
           <div className="flex flex-col items-start justify-center gap-5">
-            <Heading variant="h2" className="text-white">
-              {t("Home.components.ClientInfo.title")}
-            </Heading>
-            <Heading variant="h3" className="pl-5 text-white">
+            <Container>
+              <PersonIcon fontSize="large" />
+              <Heading variant="h2" className="text-white">
+                {t("Home.components.ClientInfo.title")}
+              </Heading>
+            </Container>
+            <Heading variant="h3" className="pl-16 text-white">
               {t("Home.components.ClientInfo.subTitle")}
             </Heading>
           </div>

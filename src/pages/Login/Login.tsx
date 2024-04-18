@@ -7,6 +7,7 @@ import { UserType } from "@/hooks/useUser";
 import { Heading, Text } from "@component-library/index";
 import Switch from "@/components/Switch";
 import PersonIcon from "@mui/icons-material/Person";
+import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import GroupIcon from "@mui/icons-material/Group";
 import { UserSwitch } from "@/components/UserSwitch";
 import PeopleIcon from "@mui/icons-material/People";
@@ -15,6 +16,7 @@ import { Container } from "@component-library/index";
 import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import useLogin, { LoginUserType } from "@/hooks/useLogin";
 import logger from "@/hooks/useLogger";
+
 interface Props {
   path?: string;
   userType?: UserType;
@@ -61,7 +63,10 @@ const Login: React.FC<Props> = (props) => {
   return (
     <Container direction="col" className=" p-5">
       <Container direction="col" className="bg-white p-5 md:px-20">
-        <Heading variant="h2">{t("Login.Login.client")}</Heading>
+        <PersonIcon style={{ fontSize: "45px", color: "#263652" }} />
+        <Container>
+          <Heading variant="h2">{t("Login.Login.client")}</Heading>
+        </Container>
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Button
             onClick={handleOnClickButtonLoginClient}
@@ -77,7 +82,10 @@ const Login: React.FC<Props> = (props) => {
         </div>
       </Container>
       <Container direction="col" className="bg-white p-5 md:px-20">
-        <Heading variant="h2">{t("Login.Login.orga")}</Heading>
+        <CorporateFareIcon style={{ fontSize: "45px", color: "#263652" }} />
+        <Container>
+          <Heading variant="h2">{t("Login.Login.orga")}</Heading>
+        </Container>
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Button
             onClick={handleOnClickButtonLoginOrga}
@@ -107,7 +115,7 @@ const Login: React.FC<Props> = (props) => {
               onClick={() => handleOnClickButtonMockedLogin("fakeOrganization")}
               variant="primary"
               title={t("Login.Login.buttons.testorga")}
-              startIcon={<PeopleIcon />}
+              startIcon={<CorporateFareIcon />}
               className="bg-blue-700"
             />
             <Button

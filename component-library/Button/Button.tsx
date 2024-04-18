@@ -21,7 +21,12 @@ interface ButtonProps {
   target?: "_blank" | "_self" | "_parent" | "_top";
 }
 type ButtonSize = "xs" | "sm" | "md" | "lg";
-type ButtonVariant = "primary" | "secondary" | "tertiary" | "breadcrumb";
+type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "breadcrumb"
+  | "text";
 type ButtonWidth = "fit" | "full" | "auto";
 type ButtonDirection = "col" | "row";
 
@@ -107,9 +112,10 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
         else className = "text-slate-600  hover:cursor-default";
         break;
       case "breadcrumb":
-        if (active)
-          className = " text-white hover:cursor-pointer hover:underline ";
-        else className = "text-slate-600  hover:cursor-default";
+        className = " text-white hover:cursor-pointer hover:underline ";
+        break;
+      case "text":
+        className = " text-slate-600 hover:cursor-pointer hover:underline ";
         break;
     }
     return className;

@@ -9,7 +9,6 @@ import Login from "../Login/Login";
 import Logout from "../Logout/Logout";
 import Organization from "../Organization/Organization";
 import Portfolio from "../Portfolio/Portfolio";
-import Profile from "../Profile/Proflle";
 import Resouces from "../Resources/Resources";
 import Legal from "../Legal/Legal";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
@@ -33,6 +32,7 @@ import Menu from "@/components/Menu";
 import { Background, Breadcrumb } from "@/components/index";
 import Advantages from "../Advantages/Advantages";
 import Chatbot from "@/components/Chatbot/Chatbot";
+import Profile from "../Profile/Proflle";
 
 export type AppState = {
   guideFilter: FilterItemProps[];

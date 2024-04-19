@@ -198,7 +198,8 @@
           "houseNumber": "Hausnummer *",
           "zipcode": "Postleitzahl *",
           "city": "Stadt *",
-          "country": "Land *"
+          "country": "Land *",
+          "standard": "als Standardadresse verwenden"
         },
         "hint": "* Pflichtfeld",
         "buttons": {
@@ -828,8 +829,12 @@
       "delete": "Account Löschen",
       "addAddress": "Adresse hinzufügen"
     },
+    "existingAddressTitle": "Addresse bearbeiten",
+    "newAddressTitle": "Neue Addresse anlegen",
+    "confirmDelete": "Möchten Sie ihren Account wirklich unwiederuflich löschen?",
     "components": {
       "Address": {
+        "confirmDelete": "Möchten Sie die Adresse wirklich löschen?",
         "company": "Firma:",
         "name": "Name:",
         "street": "Straße:",

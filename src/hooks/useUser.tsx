@@ -1,13 +1,10 @@
-import useDeleteUser from "@/api/User/Mutations/useDeleteUser";
-import useUpdateUserDetails from "@/api/User/Mutations/useUpdateUserDetails";
 import { UserContext } from "@/contexts/UserContextProvider";
+import { UseMutationResult } from "@tanstack/react-query";
 import { useContext } from "react";
 
 interface ReturnProps {
   isLoggedIn: boolean;
   user: UserProps;
-  deleteUser(): void;
-  updateUserDetails(details: UpdateUserProps): void;
 }
 
 export type UserProps = AnonymUser | AuthorizedUserProps;
@@ -37,7 +34,7 @@ export interface UpdateUserProps {
   address?: UserAddressProps;
 }
 
-export interface UserAddressProps {
+export interface NewUserAddressProps {
   firstName: string;
   lastName: string;
   company?: string;
@@ -48,6 +45,10 @@ export interface UserAddressProps {
   country: string;
   standard: boolean;
 }
+
+export type UserAddressProps = {
+  id: string;
+} & NewUserAddressProps;
 
 export enum UserType {
   "USER",
@@ -66,20 +67,9 @@ export interface Address {
 
 const useUser = (): ReturnProps => {
   const { isLoggedIn, user } = useContext(UserContext);
-  const deleteUserMutation = useDeleteUser();
-  const updateUserDetailsMutation = useUpdateUserDetails();
-
-  const deleteUser = () => {
-    deleteUserMutation.mutate();
-  };
-  const updateUserDetails = (details: UpdateUserProps) => {
-    updateUserDetailsMutation.mutate(details);
-  };
 
   return {
-    deleteUser,
     isLoggedIn,
-    updateUserDetails,
     user,
   };
 };

@@ -1,3 +1,4 @@
+import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { Address, UserAddressProps } from "@/hooks/useUser";
 import { Button, Container, Divider, Text } from "@component-library/index";
 import React from "react";
@@ -5,21 +6,29 @@ import { useTranslation } from "react-i18next";
 
 interface AddressProps {
   address: UserAddressProps;
+  handleOnClickButtonEditAddress: (address: UserAddressProps) => void;
 }
 
 const AddressCard: React.FC<AddressProps> = (props) => {
-  const { address } = props;
+  const { address, handleOnClickButtonEditAddress } = props;
+  const { deleteAddress, updateAddress } = useAuthorizedUser();
   const { t } = useTranslation();
 
   const handleOnClickCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.checked);
+    updateAddress.mutate({
+      ...address,
+      standard: e.target.checked,
+    });
   };
 
   const handleOnButtonClickEdit = () => {
-    console.log("Edit");
+    handleOnClickButtonEditAddress(address);
   };
+
   const handleOnButtonClickDelete = () => {
-    console.log("Delete");
+    if (window.confirm(t("Profile.components.Address.confirmDelete"))) {
+      deleteAddress.mutate(address.id);
+    }
   };
 
   return (

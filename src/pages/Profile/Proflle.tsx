@@ -1,7 +1,11 @@
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Divider, Text } from "@component-library/index";
-import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
+import useUser, {
+  AuthorizedUserProps,
+  UserAddressProps,
+  UserType,
+} from "@/hooks/useUser";
 import { Heading } from "@component-library/index";
 import AddIcon from "@mui/icons-material/Add";
 import { Modal } from "@component-library/index";
@@ -9,26 +13,39 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import AddressForm from "@/components/Form/AddressForm";
 import Address from "./components/Address";
-import AddressCard from "./components/Address";
 
 interface Props {}
+
+interface EditState {
+  edit: boolean;
+  address: UserAddressProps | undefined;
+}
 
 const Profile: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const {} = props;
   const { user, deleteUser } = useAuthorizedUser();
-  const [edit, setEdit] = useState(false);
+  const [addressForm, setAddressForm] = useState<EditState>({
+    edit: false,
+    address: undefined,
+  });
+
+  const handleOnClickButtonEditAddress = (address: UserAddressProps) => {
+    setAddressForm({ edit: true, address: address });
+  };
 
   const handleOnClickButtonDelete = () => {
-    deleteUser();
+    if (t("Profile.confirmDelete")) {
+      deleteUser.mutate();
+    }
   };
 
-  const handleOnClickButtonEdit = () => {
-    setEdit(true);
+  const handleOnClickButtonAddAddress = () => {
+    setAddressForm({ edit: true, address: undefined });
   };
 
-  const closeModal = () => {
-    setEdit(false);
+  const closeModalAddress = () => {
+    setAddressForm({ edit: false, address: undefined });
   };
 
   return (
@@ -89,7 +106,11 @@ const Profile: React.FC<Props> = (props) => {
         <Container width="full" justify="start" align="center">
           {user.details.addresses.length > 0 ? (
             user.details.addresses.map((address, index) => (
-              <Address key={index} address={address} />
+              <Address
+                key={index}
+                address={address}
+                handleOnClickButtonEditAddress={handleOnClickButtonEditAddress}
+              />
             ))
           ) : (
             <Text>{t("Profile.address.noAddress")}</Text>
@@ -100,7 +121,7 @@ const Profile: React.FC<Props> = (props) => {
             size="sm"
             variant="secondary"
             startIcon={<AddIcon />}
-            onClick={handleOnClickButtonEdit}
+            onClick={handleOnClickButtonAddAddress}
             title={t("Profile.button.addAddress")}
           />
         </Container>
@@ -145,8 +166,20 @@ const Profile: React.FC<Props> = (props) => {
           />
         </Container>
       </Container>
-      <Modal open={edit} closeModal={closeModal} modalKey="ProfileForm">
-        <AddressForm closeModal={closeModal} />
+      <Modal
+        open={addressForm.edit}
+        closeModal={closeModalAddress}
+        modalKey="ProfileForm"
+      >
+        <AddressForm
+          closeModal={closeModalAddress}
+          initialAddress={addressForm.address}
+          title={
+            addressForm.address === undefined
+              ? t("Profile.newAddressTitle")
+              : t("Profile.existingAddressTitle")
+          }
+        />
       </Modal>
     </Container>
   );

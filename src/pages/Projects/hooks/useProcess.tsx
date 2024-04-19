@@ -136,7 +136,8 @@ export interface ProcessChangesProps {
 export interface UpdateProcessDetailsProps {
   provisionalContractor?: string;
   title?: string;
-  clientAddress?: UserAddressProps;
+  clientDeliverAddress?: UserAddressProps;
+  clientBillingAddress?: UserAddressProps;
   amount?: number;
 }
 

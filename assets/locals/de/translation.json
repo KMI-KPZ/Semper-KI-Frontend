@@ -187,6 +187,25 @@
     "Typography": {}
   },
   "components": {
+    "Address": {
+      "AddressCard": {
+        "yes": "Ja",
+        "no": "Nein",
+        "confirmDelete": "Möchten Sie die Adresse wirklich löschen?",
+        "company": "Firma:",
+        "name": "Name:",
+        "street": "Straße:",
+        "city": "Stadt:",
+        "country": "Land:",
+        "selected": "Ausgewählt",
+        "notSelected": "nicht ausgewählt",
+        "standard": "Standard-Adresse:",
+        "buttons": {
+          "edit": "Bearbeiten",
+          "delete": "Adresse löschen"
+        }
+      }
+    },
     "Form": {
       "AddressForm": {
         "header": "Adresse bearbeiten",
@@ -829,23 +848,10 @@
       "delete": "Account Löschen",
       "addAddress": "Adresse hinzufügen"
     },
-    "existingAddressTitle": "Addresse bearbeiten",
-    "newAddressTitle": "Neue Addresse anlegen",
+    "existingAddressTitle": "Adresse bearbeiten",
+    "newAddressTitle": "Neue Adresse anlegen",
     "confirmDelete": "Möchten Sie ihren Account wirklich unwiederuflich löschen?",
     "components": {
-      "Address": {
-        "confirmDelete": "Möchten Sie die Adresse wirklich löschen?",
-        "company": "Firma:",
-        "name": "Name:",
-        "street": "Straße:",
-        "city": "Stadt:",
-        "country": "Land:",
-        "standard": "Standard-Adresse",
-        "buttons": {
-          "edit": "Bearbeiten",
-          "delete": "Adresse löschen"
-        }
-      },
       "Form": {
         "title": "Account bearbeiten",
         "address": "Adresse",
@@ -976,13 +982,13 @@
         },
         "ContractorSelection": {
           "address": {
-            "title": "Liefer und Rechnungsadresse",
-            "name": "Name",
-            "company": "Firma",
-            "address": "Addresse",
+            "sameAddress": "Rechnungsadresse gleich Lieferadresse",
+            "title": "Liefer und Rechungsadresse",
+            "titleDeliver": "Lieferadresse",
+            "titleBilling": "Rechnungsadresse",
+            "noAddress": "keine Adressen vorhanden",
             "button": {
-              "edit": "Bearbeiten",
-              "reset": "Auf Standard-Adresse zurücksetzen"
+              "new": "neue Adresse anlegen"
             }
           },
           "contractor": "Auftagnehmer",

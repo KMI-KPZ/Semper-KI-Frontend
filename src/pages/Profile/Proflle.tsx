@@ -12,7 +12,7 @@ import { Modal } from "@component-library/index";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import AddressForm from "@/components/Form/AddressForm";
-import Address from "./components/Address";
+import AddressCard from "@/components/Address/AddressCard";
 
 interface Props {}
 
@@ -25,14 +25,7 @@ const Profile: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const {} = props;
   const { user, deleteUser } = useAuthorizedUser();
-  const [addressForm, setAddressForm] = useState<EditState>({
-    edit: false,
-    address: undefined,
-  });
-
-  const handleOnClickButtonEditAddress = (address: UserAddressProps) => {
-    setAddressForm({ edit: true, address: address });
-  };
+  const [newAddress, setNewAddress] = useState(false);
 
   const handleOnClickButtonDelete = () => {
     if (t("Profile.confirmDelete")) {
@@ -41,11 +34,11 @@ const Profile: React.FC<Props> = (props) => {
   };
 
   const handleOnClickButtonAddAddress = () => {
-    setAddressForm({ edit: true, address: undefined });
+    setNewAddress(true);
   };
 
   const closeModalAddress = () => {
-    setAddressForm({ edit: false, address: undefined });
+    setNewAddress(false);
   };
 
   return (
@@ -106,11 +99,7 @@ const Profile: React.FC<Props> = (props) => {
         <Container width="full" justify="start" align="center">
           {user.details.addresses.length > 0 ? (
             user.details.addresses.map((address, index) => (
-              <Address
-                key={index}
-                address={address}
-                handleOnClickButtonEditAddress={handleOnClickButtonEditAddress}
-              />
+              <AddressCard key={index} address={address} />
             ))
           ) : (
             <Text>{t("Profile.address.noAddress")}</Text>
@@ -167,18 +156,13 @@ const Profile: React.FC<Props> = (props) => {
         </Container>
       </Container>
       <Modal
-        open={addressForm.edit}
+        open={newAddress}
         closeModal={closeModalAddress}
         modalKey="ProfileForm"
       >
         <AddressForm
           closeModal={closeModalAddress}
-          initialAddress={addressForm.address}
-          title={
-            addressForm.address === undefined
-              ? t("Profile.newAddressTitle")
-              : t("Profile.existingAddressTitle")
-          }
+          title={t("Profile.newAddressTitle")}
         />
       </Modal>
     </Container>

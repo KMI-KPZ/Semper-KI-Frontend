@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "@component-library/index";
+import { Button, Divider } from "@component-library/index";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Heading, Text } from "@component-library/index";
@@ -19,12 +19,13 @@ import { Container } from "@component-library/index";
 import useCheckedProcesses from "../hooks/useCheckedProcesses";
 import { twMerge } from "tailwind-merge";
 import useGeneralProcess from "../../hooks/useGeneralProcess";
-import ProjectContractorSelectionItem from "./components/Item";
+import ProjectContractorSelectionItem from "./components/ContractorItem";
 import logger from "@/hooks/useLogger";
 import AddressForm from "@/components/Form/AddressForm";
 import { Modal } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { UserAddressProps } from "@/hooks/useUser";
+import AddressCard from "@/components/Address/AddressCard";
 
 interface Props {}
 
@@ -42,10 +43,16 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
   const { user } = useAuthorizedUser();
-  const [edit, setEdit] = useState(false);
-  const [address, setAddress] = useState(user.details.addresses);
-
   const { updateProcess } = useGeneralProcess();
+
+  const [edit, setEdit] = useState(false);
+  const [deliverAddress, setDeliverAddress] = useState(
+    user.details.addresses.find((address) => address.standard === true)
+  );
+  const [billingAddress, setBillingAddress] = useState(
+    user.details.addresses.find((address) => address.standard === true)
+  );
+  const [addressesEqual, setAddressesEqual] = useState(true);
 
   const {
     register,
@@ -72,6 +79,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
 
   const onSubmit = (data: ContractorSelectionFormData) => {
     logger("onSubmit", data);
+
     data.processes
       .filter((process) => checkedProcesses.includes(process.process.processID))
       .forEach((process, index, allProcesses) => {
@@ -82,7 +90,10 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
               processStatus: ProcessStatus.CONTRACTOR_SELECTED,
               provisionalContractor: process.contractorID,
               processDetails: {
-                clientAddress: address,
+                clientDeliverAddress: deliverAddress,
+                clientBillingAddress: addressesEqual
+                  ? deliverAddress
+                  : billingAddress,
               },
             },
           },
@@ -91,13 +102,20 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
     navigate("..");
   };
 
-  const handelOnButtonClickReset = () => {
-    setAddress(user.details.addresses);
+  const handleOnClickCardDeliverAddress = (address: UserAddressProps) => {
+    logger("Delivery", address);
+    setDeliverAddress(address);
   };
 
-  const handleOnSubmitAddressForm = (data: UserAddressProps) => {
-    logger("handleOnSubmitAddressForm", data);
-    setAddress(data);
+  const handleOnClickCardBillingAddress = (address: UserAddressProps) => {
+    logger("Billing", address);
+    setBillingAddress(address);
+  };
+
+  const handleOnChangeAddressEqual = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setAddressesEqual(event.target.checked);
   };
 
   return (
@@ -111,22 +129,32 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
           </Heading>
         </div>
 
-        <div className="flex w-full flex-col items-start  justify-start gap-5 bg-white p-5">
+        <Container className="bg-white p-5" width="full" direction="col">
           <Container direction="auto" justify="between" width="full">
             <Heading variant="h2">
               {t(
-                "Projects.Project.ContractorSelection.ContractorSelection.address.title"
+                addressesEqual === true
+                  ? "Projects.Project.ContractorSelection.ContractorSelection.address.title"
+                  : "Projects.Project.ContractorSelection.ContractorSelection.address.titleDeliver"
               )}
             </Heading>
-            <Container direction="auto">
-              <Button
-                onClick={handelOnButtonClickReset}
-                size="sm"
-                variant="secondary"
-                title={t(
-                  "Projects.Project.ContractorSelection.ContractorSelection.address.button.reset"
-                )}
+            <Container>
+              <input
+                type="checkbox"
+                id="addressEqual"
+                checked={addressesEqual}
+                className="h-4 w-4"
+                onChange={handleOnChangeAddressEqual}
               />
+              <label htmlFor="addressEqual">
+                <Text>
+                  {t(
+                    "Projects.Project.ContractorSelection.ContractorSelection.address.sameAddress"
+                  )}
+                </Text>
+              </label>
+            </Container>
+            <Container direction="auto">
               <Button
                 onClick={() => {
                   setEdit(true);
@@ -134,62 +162,75 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
                 size="sm"
                 variant="secondary"
                 title={t(
-                  "Projects.Project.ContractorSelection.ContractorSelection.address.button.edit"
+                  "Projects.Project.ContractorSelection.ContractorSelection.address.button.new"
                 )}
               />
             </Container>
           </Container>
-          <div className="w-full border-t-2" />
-          <Container direction="row" justify="start" className="flex-wrap">
-            <Text className="min-w-[100px]">
-              {t(
-                "Projects.Project.ContractorSelection.ContractorSelection.address.name"
-              )}
-              :
-            </Text>
-            <Text>
-              {address === undefined
-                ? "---"
-                : address.firstName + " " + address.lastName}
-            </Text>
+          <Divider />
+          <Container direction="row" width="full">
+            {user.details.addresses.length > 0 ? (
+              user.details.addresses.map((address, index) => (
+                <AddressCard
+                  key={index}
+                  address={address}
+                  select={{
+                    checked: deliverAddress?.id === address.id,
+                    handleOnClickCard: handleOnClickCardDeliverAddress,
+                  }}
+                />
+              ))
+            ) : (
+              <Text>
+                {t(
+                  "Projects.Project.ContractorSelection.ContractorSelection.address.noAddress"
+                )}
+              </Text>
+            )}
           </Container>
-          <Container direction="row" justify="start" className="flex-wrap">
-            <Text className="min-w-[100px]">
-              {t(
-                "Projects.Project.ContractorSelection.ContractorSelection.address.company"
-              )}
-              :
-            </Text>
-            <Text>
-              {address === undefined
-                ? "---"
-                : address.company !== undefined && address.company !== ""
-                ? address.company
-                : "  ---"}
-            </Text>
+        </Container>
+        {addressesEqual === false ? (
+          <Container className="bg-white p-5" width="full" direction="col">
+            <Container direction="auto" justify="between" width="full">
+              <Heading variant="h2">
+                {t(
+                  "Projects.Project.ContractorSelection.ContractorSelection.address.titleBilling"
+                )}
+              </Heading>
+              <Container direction="auto">
+                <Button
+                  onClick={() => {
+                    setEdit(true);
+                  }}
+                  size="sm"
+                  variant="secondary"
+                  title={t(
+                    "Projects.Project.ContractorSelection.ContractorSelection.address.button.new"
+                  )}
+                />
+              </Container>
+            </Container>
+            <Divider />
+            {user.details.addresses.length > 0 ? (
+              user.details.addresses.map((address, index) => (
+                <AddressCard
+                  key={index}
+                  address={address}
+                  select={{
+                    checked: billingAddress?.id === address.id,
+                    handleOnClickCard: handleOnClickCardBillingAddress,
+                  }}
+                />
+              ))
+            ) : (
+              <Text>
+                {t(
+                  "Projects.Project.ContractorSelection.ContractorSelection.address.noAddress"
+                )}
+              </Text>
+            )}
           </Container>
-          <Container direction="row" justify="start" className="flex-wrap">
-            <Text className="min-w-[100px]">
-              {t(
-                "Projects.Project.ContractorSelection.ContractorSelection.address.address"
-              )}
-              :
-            </Text>
-            <Text>
-              {address === undefined
-                ? "---"
-                : address.street +
-                  " " +
-                  address.houseNumber +
-                  ", " +
-                  address.zipcode +
-                  " ," +
-                  address.city +
-                  " ," +
-                  address.country}
-            </Text>
-          </Container>
-        </div>
+        ) : null}
 
         <div className="flex w-full flex-col items-center justify-start gap-5">
           {project.processes.length > 0
@@ -232,14 +273,12 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
       </form>
       <Modal
         modalKey="ProjectInfo"
-        open={edit || address === undefined}
+        open={edit}
         closeModal={() => {
           setEdit(false);
         }}
       >
         <AddressForm
-          initialAddress={address}
-          customSubmit={handleOnSubmitAddressForm}
           closeModal={() => {
             setEdit(false);
           }}

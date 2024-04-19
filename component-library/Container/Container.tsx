@@ -11,6 +11,7 @@ interface ContainerProps {
   height?: "full" | "fit";
   gap?: 3 | 5;
   className?: string;
+  onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
@@ -26,6 +27,7 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
     width = "auto",
     height,
     className,
+    onClick,
   } = props;
 
   const getAlign = () => {
@@ -78,6 +80,7 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
         getGap(),
         className
       )}
+      onClick={onClick}
     >
       {children}
     </div>

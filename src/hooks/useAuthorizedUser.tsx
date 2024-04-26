@@ -1,12 +1,15 @@
 import { AuthorizedUserContext } from "@/routeOutlets/AuthorizedUserOutlet";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {
   AuthorizedUserProps,
   NewUserAddressProps,
   UpdateUserProps,
   UserAddressProps,
+  UserType,
 } from "./useUser";
 import { UseMutationResult } from "@tanstack/react-query";
+import { toast } from "./useToast";
+import { useTranslation } from "react-i18next";
 
 interface useAuthorizedUserReturnProps {
   user: AuthorizedUserProps;
@@ -26,6 +29,7 @@ const useAuthorizedUser = (): useAuthorizedUserReturnProps => {
     deleteAddress,
     updateAddress,
   } = useContext(AuthorizedUserContext);
+  const { t } = useTranslation();
 
   return {
     deleteUser,

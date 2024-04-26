@@ -1,6 +1,8 @@
 import { UserContext } from "@/contexts/UserContextProvider";
 import { UseMutationResult } from "@tanstack/react-query";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "./useToast";
 
 interface ReturnProps {
   isLoggedIn: boolean;
@@ -67,6 +69,7 @@ export interface Address {
 
 const useUser = (): ReturnProps => {
   const { isLoggedIn, user } = useContext(UserContext);
+  const { t } = useTranslation();
 
   return {
     isLoggedIn,

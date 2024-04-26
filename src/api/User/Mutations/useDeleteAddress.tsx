@@ -7,7 +7,7 @@ const useDeleteAddress = () => {
   const deleteAddress = async (addressID: string) =>
     authorizedCustomAxios
       .delete(
-        `${process.env.VITE_HTTP_API_URL}/public/deleteAddress/${addressID}`
+        `${process.env.VITE_HTTP_API_URL}/public/deleteAddress/${addressID}/`
       )
       .then((response) => {
         logger("useDeleteAddress | deleteAddress ✅ |", response);

@@ -78,7 +78,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   });
 
   const onSubmit = (data: ContractorSelectionFormData) => {
-    logger("onSubmit", data);
+    // logger("onSubmit", data, deliverAddress, billingAddress);
 
     data.processes
       .filter((process) => checkedProcesses.includes(process.process.processID))
@@ -139,14 +139,17 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
               )}
             </Heading>
             <Container>
-              <input
-                type="checkbox"
-                id="addressEqual"
-                checked={addressesEqual}
-                className="h-4 w-4"
-                onChange={handleOnChangeAddressEqual}
-              />
-              <label htmlFor="addressEqual">
+              <label
+                htmlFor="addressEqual"
+                className="flex flex-row items-center justify-center gap-3 hover:cursor-pointer"
+              >
+                <input
+                  type="checkbox"
+                  id="addressEqual"
+                  checked={addressesEqual}
+                  className="h-4 w-4"
+                  onChange={handleOnChangeAddressEqual}
+                />
                 <Text>
                   {t(
                     "Projects.Project.ContractorSelection.ContractorSelection.address.sameAddress"

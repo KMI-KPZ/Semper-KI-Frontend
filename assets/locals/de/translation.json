@@ -342,6 +342,11 @@
       "organization": "Organisation"
     }
   },
+  "contexts": {
+    "UserContextProvider": {
+      "completeUserData": "Bitte vervollständigen Sie ihre Benutzerdaten"
+    }
+  },
   "Admin": {
     "hooks": {
       "useAdmin": {}

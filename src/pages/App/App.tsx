@@ -57,7 +57,6 @@ export const AppContext = createContext<AppContext>({
 
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(initialAppState);
-  const { rejectCookies, acceptCookies, cookieConsent } = useCookieConsent();
 
   return (
     <AppContext.Provider
@@ -247,17 +246,7 @@ const App: React.FC = () => {
             />
           </Routes>
         </main>
-        <Modal
-          open={cookieConsent === undefined}
-          locked={cookieConsent === undefined}
-          noIcon
-          modalKey="CookieBanner"
-        >
-          <CookieBanner
-            acceptCookies={acceptCookies}
-            rejectCookies={rejectCookies}
-          />
-        </Modal>
+        <CookieBanner />
         <Menu />
         <Footer />
       </div>

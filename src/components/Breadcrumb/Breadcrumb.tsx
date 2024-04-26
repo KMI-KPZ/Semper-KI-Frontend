@@ -3,6 +3,7 @@ import { Button } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
 
 interface Props {}
 
@@ -132,11 +133,11 @@ export const Breadcrumb: React.FC<Props> = () => {
     }
     splittet.forEach((item: string, index: number) => {
       if (index === 0) {
-        // breadcrumbItems.push({
-        //   tname: "home",
-        //   name: "home",
-        //   link: "/",
-        // });
+        breadcrumbItems.push({
+          tname: "home",
+          name: "home",
+          link: "/",
+        });
       } else if (index === 2 && splittet[1] === "projects") {
         breadcrumbItems.push({
           link: `/projects/${item}`,
@@ -181,23 +182,41 @@ export const Breadcrumb: React.FC<Props> = () => {
     return breadcrumbItems;
   };
 
+  const items = generateBreadcrumbItems();
+
   return (
     <nav className="hidden w-full flex-row items-center justify-start pl-10 text-left text-lg font-bold text-white md:flex">
-      {generateBreadcrumbItems().map((item: BreadcrumbItem, index: number) => (
-        <React.Fragment key={index}>
-          <span>{" > "}</span>
-          <Button
-            size="sm"
-            variant="breadcrumb"
-            title={
-              item.tname !== undefined
-                ? t(`data.NavigationItem.${item.tname}`)
-                : item.name
-            }
-            to={item.link}
-          />
-        </React.Fragment>
-      ))}
+      {items.length > 1
+        ? items.map((item: BreadcrumbItem, index: number) =>
+            index === 0 ? (
+              <Button
+                size="sm"
+                variant="breadcrumb"
+                title={
+                  item.tname !== undefined
+                    ? t(`data.NavigationItem.${item.tname}`)
+                    : item.name
+                }
+                children={<HomeIcon />}
+                to={item.link}
+              />
+            ) : (
+              <React.Fragment key={index}>
+                <span>{" > "}</span>
+                <Button
+                  size="sm"
+                  variant="breadcrumb"
+                  title={
+                    item.tname !== undefined
+                      ? t(`data.NavigationItem.${item.tname}`)
+                      : item.name
+                  }
+                  to={item.link}
+                />
+              </React.Fragment>
+            )
+          )
+        : null}
     </nav>
   );
 };

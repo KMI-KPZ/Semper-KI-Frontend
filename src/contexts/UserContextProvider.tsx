@@ -1,8 +1,15 @@
 import useGetUser from "@/api/User/Querys/useGetUser";
 import useGetUserIsLoggedIn from "@/api/User/Querys/useGetUserIsLoggedIn";
+import { toast } from "@/hooks/useToast";
 import { UserProps, UserType } from "@/hooks/useUser";
 import { AppLoadingSuspense } from "@component-library/index";
-import React, { PropsWithChildren, createContext } from "react";
+import React, {
+  PropsWithChildren,
+  createContext,
+  useEffect,
+  useState,
+} from "react";
+import { useTranslation } from "react-i18next";
 
 interface UserContextProviderProps {}
 
@@ -20,8 +27,10 @@ const UserContextProvider: React.FC<
   PropsWithChildren<UserContextProviderProps>
 > = (props) => {
   const { children } = props;
+  const { t } = useTranslation();
   const userIsLoggedInQuery = useGetUserIsLoggedIn();
   const userQuery = useGetUser(userIsLoggedInQuery);
+  const [userReminder, setUserReminder] = useState(false);
 
   const isLoggedInIsLoaded: boolean =
     userIsLoggedInQuery.isFetched && userIsLoggedInQuery.data !== undefined;
@@ -37,6 +46,19 @@ const UserContextProvider: React.FC<
     userQuery.data === undefined
       ? { usertype: UserType.ANONYM }
       : userQuery.data;
+
+  useEffect(() => {
+    if (
+      userReminder === false &&
+      user.usertype !== UserType.ANONYM &&
+      user.details.addresses.length === 0
+      // user.details.email === undefined ||
+      // user.details.email === "")
+    ) {
+      setUserReminder(true);
+      toast(t("contexts.UserContextProvider.completeUserData"), "account");
+    }
+  }, [user, userReminder]);
 
   return isLoggedInIsLoaded && userIsLoaded ? (
     <UserContext.Provider

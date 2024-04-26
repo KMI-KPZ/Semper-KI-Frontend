@@ -78,8 +78,6 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   });
 
   const onSubmit = (data: ContractorSelectionFormData) => {
-    // logger("onSubmit", data, deliverAddress, billingAddress);
-
     data.processes
       .filter((process) => checkedProcesses.includes(process.process.processID))
       .forEach((process, index, allProcesses) => {

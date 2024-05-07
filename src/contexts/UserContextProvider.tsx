@@ -1,5 +1,5 @@
 import useGetUser from "@/api/User/Querys/useGetUser";
-import useGetUserIsLoggedIn from "@/api/User/Querys/useGetUserIsLoggedIn";
+import useGetIsUserLoggedIn from "@/api/User/Querys/useGetIsUserLoggedIn";
 import { toast } from "@/hooks/useToast";
 import { UserProps, UserType } from "@/hooks/useUser";
 import { AppLoadingSuspense } from "@component-library/index";
@@ -28,7 +28,7 @@ const UserContextProvider: React.FC<
 > = (props) => {
   const { children } = props;
   const { t } = useTranslation();
-  const userIsLoggedInQuery = useGetUserIsLoggedIn();
+  const userIsLoggedInQuery = useGetIsUserLoggedIn();
   const userQuery = useGetUser(userIsLoggedInQuery);
   const [userReminder, setUserReminder] = useState(false);
 

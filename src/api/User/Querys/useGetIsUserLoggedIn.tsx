@@ -2,12 +2,12 @@ import logger from "@/hooks/useLogger";
 import { useQuery } from "@tanstack/react-query";
 import { authorizedCustomAxios } from "@/api/customAxios";
 
-const useGetUserIsLoggedIn = () => {
+const useGetIsUserLoggedIn = () => {
   const fetchIsLoggedIn = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/isLoggedIn/`)
       .then((response) => {
-        logger("useUser | isLoggedIn ✅ |", response.data);
+        logger("useGetIsUserLoggedIn | isLoggedIn ✅ |", response.data);
         return response.data === "Success" ? true : false;
       });
 
@@ -17,4 +17,4 @@ const useGetUserIsLoggedIn = () => {
   });
 };
 
-export default useGetUserIsLoggedIn;
+export default useGetIsUserLoggedIn;

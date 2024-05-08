@@ -14,8 +14,9 @@ import PeopleIcon from "@mui/icons-material/People";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { Container } from "@component-library/index";
 import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
-import useLogin, { LoginUserType } from "@/hooks/useLogin";
 import logger from "@/hooks/useLogger";
+import useMockedLogin from "@/api/Login/Mutation/useMockedLogin";
+import useLogin, { LoginUserType } from "@/api/Login/Mutation/useLogin";
 
 interface Props {
   path?: string;
@@ -28,7 +29,8 @@ type State = {
 const Login: React.FC<Props> = (props) => {
   const { t } = useTranslation();
 
-  const { login, mockedLogin } = useLogin();
+  const login = useLogin();
+  const mockedLogin = useMockedLogin();
   const navigate = useNavigate();
   const [queryParameters] = useSearchParams();
   const redirectURL = queryParameters.get("redirectURL");
@@ -37,7 +39,7 @@ const Login: React.FC<Props> = (props) => {
     userType: "user" | "organization",
     register: boolean
   ) => {
-    login({
+    login.mutate({
       userType: userType,
       register: register,
       path: redirectURL !== null ? redirectURL : undefined,
@@ -57,7 +59,7 @@ const Login: React.FC<Props> = (props) => {
     handleLogin("user", true);
   };
   const handleOnClickButtonMockedLogin = (type: LoginUserType) => {
-    mockedLogin(type);
+    mockedLogin.mutate(type);
   };
 
   return (

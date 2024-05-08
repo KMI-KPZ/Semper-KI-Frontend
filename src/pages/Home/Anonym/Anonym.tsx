@@ -14,7 +14,6 @@ import LoginIcon from "@mui/icons-material/Login";
 import HomeImgCarousel from "./components/ImgCarousel";
 import { useProject } from "@/pages/Projects/hooks/useProject";
 import { useNavigate } from "react-router-dom";
-import useLogin from "@/hooks/useLogin";
 import { Button } from "@component-library/index";
 import BMWKdeURL from "@images/BMWK_de.png";
 import BMWKenURL from "@images/BMWE_en.png";
@@ -22,18 +21,19 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import PersonIcon from "@mui/icons-material/Person";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import useLogin from "@/api/Login/Mutation/useLogin";
 
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props) => {
   const {} = props;
   const { t, i18n } = useTranslation();
-  const { login } = useLogin();
+  const login = useLogin();
   const { createProject } = useProject();
   const navigate = useNavigate();
 
   const handleOnClickButton = () => {
-    login({ userType: "user", register: true });
+    login.mutate({ userType: "user", register: true });
   };
 
   const handleOnClickButtonDemonstrator = () => {

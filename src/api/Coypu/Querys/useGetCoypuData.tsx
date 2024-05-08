@@ -1,11 +1,7 @@
-import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
+import { authorizedCustomAxios } from "@/api/customAxios";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import DOMPurify from "dompurify";
-
-interface useCoypuQuerysReturnProps {
-  coypuQuery: UseQueryResult<CoypuProps[], Error>;
-}
 
 const convertHTML = (_html: string): string => {
   let html = _html;
@@ -23,14 +19,14 @@ export interface CoypuProps {
   url: string;
 }
 
-const useCoypuQuerys = (): useCoypuQuerysReturnProps => {
-  const coypuQuery = useQuery<CoypuProps[], Error>({
-    queryKey: ["coypu"],
-    queryFn: async () => {
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/coypu/`;
-      return authorizedCustomAxios.get(apiUrl).then((response) => {
-        logger("useCoypu | ✅ |", response.data);
-        const coypu = response.data
+const useGetCoypuData = () => {
+  const queryClient = useQueryClient();
+  const getCoypuData = async () =>
+    authorizedCustomAxios
+      .get(`${process.env.VITE_HTTP_API_URL}/public/coypu/`)
+      .then((response) => {
+        const responseData = response.data;
+        const data: CoypuProps[] = response.data
           .filter((data: any) => data.rawhtml.url !== "")
           .map((data: any) => ({
             ...data,
@@ -48,13 +44,16 @@ const useCoypuQuerys = (): useCoypuQuerysReturnProps => {
             }
             return 0;
           });
-        return coypu;
+
+        logger("useGetCoypuData | getCoypuData ✅ |", response);
+        return data;
       });
-    },
+
+  return useQuery<CoypuProps[], Error>({
+    queryKey: ["coypu"],
+    queryFn: getCoypuData,
     staleTime: 1000 * 60 * 1, // 24 hours
   });
-
-  return { coypuQuery };
 };
 
-export default useCoypuQuerys;
+export default useGetCoypuData;

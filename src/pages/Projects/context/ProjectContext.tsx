@@ -10,8 +10,8 @@ import { ProjectProps, useProject } from "../hooks/useProject";
 import { AppLoadingSuspense, LoadingAnimation } from "@component-library/index";
 import { Query, UseQueryResult } from "@tanstack/react-query";
 import useProjectQuerys from "@/api/Project/useProjectQuerys";
-import useAdminQuerys from "@/api/Admin/useAdminQuerys";
 import useUser, { UserType } from "@/hooks/useUser";
+import useGetAdminProject from "@/api/Admin/Querys/useGetAdminProject";
 
 interface ProjectOutletProps {}
 
@@ -42,7 +42,7 @@ const ProjectContextProvider: React.FC<ProjectOutletProps> = (props) => {
   const { t } = useTranslation();
   const { user } = useUser();
   const { projectQuery: userProjectQuery } = useProjectQuerys();
-  const { adminProjectQuery } = useAdminQuerys();
+  const adminProjectQuery = useGetAdminProject();
   const projectQuery =
     user.usertype === UserType.ADMIN ? adminProjectQuery : userProjectQuery;
   const [checkedProcesses, setCheckedProcesses] = useState<string[]>([]);

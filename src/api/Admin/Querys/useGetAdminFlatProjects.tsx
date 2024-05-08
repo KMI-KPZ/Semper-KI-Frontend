@@ -14,7 +14,7 @@ const useGetAdminFlatProjects = () => {
       )
       .then((response) => {
         const responseData = response.data;
-        const data: FlatProjectProps = responseData.map((project: any) => ({
+        const data: FlatProjectProps[] = responseData.map((project: any) => ({
           ...project,
           accessedWhen: new Date(project.accessedWhen),
           createdWhen: new Date(project.createdWhen),
@@ -25,7 +25,7 @@ const useGetAdminFlatProjects = () => {
         return data;
       });
 
-  return useQuery<FlatProjectProps, Error>({
+  return useQuery<FlatProjectProps[], Error>({
     queryKey: ["admin", "flatProjects"],
     queryFn: getAdminFlatProjects,
     enabled: user.usertype === UserType.ADMIN,

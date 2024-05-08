@@ -12,9 +12,9 @@ import { Container } from "@component-library/index";
 import useFlatProjectQuerys, {
   FlatProjectProps,
 } from "@/api/Project/useFlatProjectQuerys";
-import useAdminQuerys from "@/api/Admin/useAdminQuerys";
 import ProjectsCards from "./components/Cards";
 import useSearch from "@/hooks/useSearch";
+import useGetAdminFlatProjects from "@/api/Admin/Querys/useGetAdminFlatProjects";
 
 interface ProjectsProps {}
 
@@ -22,7 +22,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
   const { t } = useTranslation();
   const { user } = useUser();
   const { flatProjectsQuery: userFlatProjectsQuery } = useFlatProjectQuerys();
-  const { adminFlatProjectsQuery } = useAdminQuerys();
+  const adminFlatProjectsQuery = useGetAdminFlatProjects();
   const flatProjectsQuery =
     user.usertype === UserType.ADMIN
       ? adminFlatProjectsQuery

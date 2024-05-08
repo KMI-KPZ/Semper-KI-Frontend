@@ -3,7 +3,6 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { ProcessModel } from "./Model/Model";
 import { ProcessMaterial } from "./Material/Material";
 import { ProcessPostProcessing } from "./PostProcessing/PostProcessing";
-import useFilterQuerys from "../../../api/Filter/useFilterQuerys";
 import ProcessHeader from "./Header/Header";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
@@ -52,7 +51,7 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
     initialServiceManufacturingState
   );
   const { grid, filterOpen, searchText } = state;
-  const { filtersQuery, updateFilterMutation } = useFilter();
+  const { filtersQuery, updateFilters } = useFilter();
   const { process } = useProcess();
 
   const setSearchInput = (name: string): void => {
@@ -61,7 +60,7 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
   };
   const applyFilters = (filterItemList: FilterItemProps[]): void => {
     // logger("Process | applyFilters |", filterItemList);
-    updateFilterMutation.mutate(filterItemList);
+    updateFilters.mutate(filterItemList);
   };
   const setGrid = (grid: boolean): void => {
     setState((prevState) => ({ ...prevState, grid }));

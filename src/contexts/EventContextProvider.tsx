@@ -1,5 +1,5 @@
-import useEventsQuerys from "@/api/Events/useEventsQuerys";
-import { useEventsWebsocket } from "@/api/Events/useEventsWebsocket";
+import useGetMissedEvents from "@/api/Events/Querys/useGetMissedEvents";
+import { useEventsWebsocket } from "@/api/Events/Websocket/useEventsWebsocket";
 import useUser, { UserType } from "@/hooks/useUser";
 import { Event } from "@/pages/App/types";
 import { AppLoadingSuspense } from "@component-library/index";
@@ -24,7 +24,7 @@ const EventContextProvider: React.FC<
 > = (props) => {
   const { children } = props;
   const { user } = useUser();
-  const { missedEventsQuery } = useEventsQuerys();
+  const missedEventsQuery = useGetMissedEvents();
   const { socket } = useEventsWebsocket();
   const [events, setEvents] = useState<Event[]>(
     missedEventsQuery.data !== undefined ? missedEventsQuery.data : []

@@ -7,8 +7,9 @@ import { useTranslation } from "react-i18next";
 import * as yup from "yup";
 import SearchIcon from "@mui/icons-material/Search";
 import { LoadingSuspense } from "@component-library/index";
-import useOntologyMaterialQuerys from "../../../../api/Ontology/useOntologyMaterialQuerys";
 import logger from "@/hooks/useLogger";
+import useGetOntologyMaterial from "@/api/Ontology/Querys/useGetOntologyMaterial";
+import useGetFlatOntologyMaterials from "@/api/Ontology/Querys/useGetFlatOntologyMaterials";
 
 interface ResourcesMaterialsFormProps {}
 
@@ -18,7 +19,7 @@ const ResourcesMaterialsForm: React.FC<ResourcesMaterialsFormProps> = (
   const {} = props;
   const { t } = useTranslation();
   const [materialID, setMaterialID] = useState<string>("");
-  const { materialsQuery, materialQuery } = useOntologyMaterialQuerys({});
+  const materialsQuery = useGetFlatOntologyMaterials();
 
   const schema = yup
     .object({

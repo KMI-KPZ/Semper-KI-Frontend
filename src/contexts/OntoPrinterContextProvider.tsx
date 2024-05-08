@@ -1,4 +1,4 @@
-import useOntologyPrinterQuerys from "@/api/Ontology/useOntologyPrinterQuerys";
+import useGetFlatOntologyPrinters from "@/api/Ontology/Querys/useGetFlatOntologyPrinters";
 import { OntoPrinter, OntoPrinterFlat } from "@/pages/Resources/types/types";
 import { AppLoadingSuspense, LoadingSuspense } from "@component-library/index";
 import React, { PropsWithChildren, createContext } from "react";
@@ -21,7 +21,7 @@ const OntoPrinterContextProvider: React.FC<
 > = (props) => {
   const { children } = props;
   const { t } = useTranslation();
-  const { printersQuery } = useOntologyPrinterQuerys({});
+  const printersQuery = useGetFlatOntologyPrinters();
 
   if (printersQuery.isFetched && printersQuery.data !== undefined)
     return (

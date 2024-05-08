@@ -11,12 +11,11 @@ import {
 } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import useOntologyPrinterQuerys from "@/api/Ontology/useOntologyPrinterQuerys";
 import useOntoPrinters from "@/hooks/useOntoPrinters";
 import logger from "@/hooks/useLogger";
 import Card from "@component-library/Card/Card";
 import useSearch from "@/hooks/useSearch";
+import useGetOntologyPrinter from "@/api/Ontology/Querys/useGetOntologyPrinter";
 
 interface ResourcesPrintersAddSearchProps {
   printer?: OntoPrinter;
@@ -34,7 +33,7 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
     printer !== undefined ? printer.title : ""
   );
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
-  const { printerMutation } = useOntologyPrinterQuerys({});
+  const printerPropertys = useGetOntologyPrinter();
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<OntoPrinterFlat>();
 

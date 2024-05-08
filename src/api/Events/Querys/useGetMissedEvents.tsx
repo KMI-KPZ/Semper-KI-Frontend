@@ -19,7 +19,7 @@ const useGetMissedEvents = () => {
       });
 
   return useQuery<Event[], Error>({
-    queryKey: ["key"],
+    queryKey: ["missedEvents"],
     queryFn: getMissedEvents,
     enabled: user.usertype !== UserType.ANONYM,
   });

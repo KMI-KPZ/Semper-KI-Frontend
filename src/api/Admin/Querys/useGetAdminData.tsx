@@ -37,7 +37,7 @@ const useGetAdminData = () => {
       });
 
   return useQuery<AdminProps, Error>({
-    queryKey: ["admin"],
+    queryKey: ["admin", "data"],
     queryFn: getAdminData,
     enabled: user.usertype === UserType.ADMIN,
   });

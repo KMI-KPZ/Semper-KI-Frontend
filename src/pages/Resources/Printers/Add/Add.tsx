@@ -1,7 +1,6 @@
 import { Button, Heading, Modal } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import useOntologyPrinterQuerys from "../../../../api/Ontology/useOntologyPrinterQuerys";
 import ResourcesPrintersAddSearch from "./components/Search";
 import EditIcon from "@mui/icons-material/Edit";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -12,10 +11,10 @@ import {
   OntoPrinterType,
 } from "../../types/types";
 import PrintersAddForm from "./components/Form";
-import useOntologyPrinterMutations from "@/api/Ontology/useOntologyPrinterMutations";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { useNavigate } from "react-router-dom";
+import useAddOntologyPrinter from "@/api/Ontology/Mutations/useAddOntologyPrinter";
 
 interface ResourcesPrintersAddProps {}
 
@@ -25,7 +24,7 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
   const { user } = useAuthorizedUser();
   const [printer, setPrinter] = useState<OntoPrinter | NewOntoPrinter>();
   const [edit, setEdit] = useState<boolean>(false);
-  const { addPrinterMutation } = useOntologyPrinterMutations();
+  const addPrinterMutation = useAddOntologyPrinter();
   const navigate = useNavigate();
 
   const handleOnClickButtonEdit = () => {

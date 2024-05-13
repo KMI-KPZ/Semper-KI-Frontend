@@ -4,6 +4,7 @@ import useOrganizationMutations, {
   InvitationProps,
 } from "@/api/Organization/useOrganizationMutations";
 import useOrganizationQuerys from "@/api/Organization/useOrganizationQuerys";
+import { UpdateOrgaInfoProps } from "@/api/Organization/Mutations/useUpdateOrganizationInfos";
 
 interface useOrganizationsReturnProps {
   userQuery: UseQueryResult<OrganizationsUser[], Error>;
@@ -38,15 +39,6 @@ export type OrganizationsUser = {
   name: string;
   picture: string;
   roles: RoleProps[];
-};
-
-export type RoleProps = {
-  id: string;
-} & CreateRoleProps;
-
-export type CreateRoleProps = {
-  name: string;
-  description: string;
 };
 
 export type PermissionNameTranslationType =
@@ -96,14 +88,6 @@ export interface OrganizationInfoProps {
   supportedServices: ServiceType[];
   hashedID: string;
   name: string;
-}
-
-export interface UpdateOrgaInfoProps {
-  email: string;
-  address: string;
-  taxID: string;
-  name: string;
-  supportedServices: number[];
 }
 
 export interface EditRoleProps {

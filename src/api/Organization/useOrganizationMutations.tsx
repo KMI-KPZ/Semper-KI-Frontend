@@ -5,7 +5,6 @@ import {
   CreateRoleProps,
   EditRoleProps,
   SetPermissionProps,
-  UpdateOrgaInfoProps,
 } from "@/pages/Organization/hooks/useOrganizations";
 import { RegisterOrganizationFormData } from "@/pages/RegisterOrganization/RegisterOrganization";
 import {
@@ -14,6 +13,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useState } from "react";
+import { UpdateOrgaInfoProps } from "./Mutations/useUpdateOrganizationInfos";
 
 interface useOrganizationMutationsReturnProps {
   updateOrganizationInfo: UseMutationResult<
@@ -44,102 +44,97 @@ interface useOrganizationMutationsReturnProps {
   >;
 }
 
-export type InvitationProps = {
-  email: string;
-  roleID: string;
-};
-
 const useOrganizationMutations = (): useOrganizationMutationsReturnProps => {
   const queryClient = useQueryClient();
   const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/organizations/`;
   const [showLogger, setShowLogger] = useState<boolean>(true);
 
-  const updateOrganizationInfo = useMutation<
-    string,
-    Error,
-    UpdateOrgaInfoProps
-  >({
-    mutationFn: async (props) => {
-      const { name, email, address: adress, taxID, supportedServices } = props;
-      return authorizedCustomAxios
-        .patch(
-          `${process.env.VITE_HTTP_API_URL}/public/updateOrganizationDetails/`,
-          {
-            data: {
-              content: {
-                supportedServices,
-                details: { email, adress, taxID },
-              },
-            },
-          }
-        )
-        .then((response) => {
-          if (showLogger)
-            logger(
-              "useOrganizations | updateOrganizationInfo ✅ |",
-              response.data
-            );
-          return response.data;
-        });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["organizations", "info"]);
-    },
-  });
+  // const updateOrganizationInfo = useMutation<
+  //   string,
+  //   Error,
+  //   UpdateOrgaInfoProps
+  // >({
+  //   mutationFn: async (props) => {
+  //     const { name, email, address: adress, taxID, supportedServices } = props;
+  //     return authorizedCustomAxios
+  //       .patch(
+  //         `${process.env.VITE_HTTP_API_URL}/public/updateOrganizationDetails/`,
+  //         {
+  //           data: {
+  //             content: {
+  //               supportedServices,
+  //               details: { email, adress, taxID },
+  //             },
+  //           },
+  //         }
+  //       )
+  //       .then((response) => {
+  //         if (showLogger)
+  //           logger(
+  //             "useOrganizations | updateOrganizationInfo ✅ |",
+  //             response.data
+  //           );
+  //         return response.data;
+  //       });
+  //   },
+  //   onSuccess() {
+  //     queryClient.invalidateQueries(["organizations", "info"]);
+  //   },
+  // });
 
-  const inviteLinkMutation = useMutation<string, Error, string>({
-    mutationFn: async (email: string) => {
-      return authorizedCustomAxios
-        .post(apiUrl + "getInviteLink/", {
-          data: { content: { email: email } },
-        })
-        .then((response) => {
-          if (showLogger)
-            logger("useOrganizations | getInviteLink ✅ |", response.data);
-          return response.data;
-        });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["organizations", "users"]);
-    },
-  });
+  // const inviteLinkMutation = useMutation<string, Error, string>({
+  //   mutationFn: async (email: string) => {
+  //     return authorizedCustomAxios
+  //       .post(apiUrl + "getInviteLink/", {
+  //         data: { content: { email: email } },
+  //       })
+  //       .then((response) => {
+  //         if (showLogger)
+  //           logger("useOrganizations | getInviteLink ✅ |", response.data);
+  //         return response.data;
+  //       });
+  //   },
+  //   onSuccess() {
+  //     queryClient.invalidateQueries(["organizations", "users"]);
+  //   },
+  // });
 
-  const inviteUserMutation = useMutation<any, Error, InvitationProps>({
-    mutationFn: async (props) => {
-      return authorizedCustomAxios
-        .post(apiUrl + "addUser/", {
-          data: { content: props },
-        })
-        .then((response) => {
-          if (showLogger)
-            logger("useOrganizations | addUser ✅ |", response.data);
-          return response.data;
-        });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["organizations", "users"]);
-    },
-  });
+  // const inviteUserMutation = useMutation<any, Error, InvitationProps>({
+  //   mutationFn: async (props) => {
+  //     return authorizedCustomAxios
+  //       .post(apiUrl + "addUser/", {
+  //         data: { content: props },
+  //       })
+  //       .then((response) => {
+  //         if (showLogger)
+  //           logger("useOrganizations | addUser ✅ |", response.data);
+  //         return response.data;
+  //       });
+  //   },
+  //   onSuccess() {
+  //     queryClient.invalidateQueries(["organizations", "users"]);
+  //   },
+  // });
 
-  const createRoleMutation = useMutation<any, Error, CreateRoleProps>({
-    mutationFn: async (props) => {
-      const { description, name } = props;
-      return authorizedCustomAxios
-        .post(apiUrl + "createRole/", {
-          data: {
-            content: { roleName: name, roleDescription: description },
-          },
-        })
-        .then((response) => {
-          if (showLogger)
-            logger("useOrganizations | createRole ✅ |", response.data);
-          return response.data;
-        });
-    },
-    onSuccess() {
-      queryClient.invalidateQueries(["organizations", "roles"]);
-    },
-  });
+  // const createRoleMutation = useMutation<any, Error, CreateRoleProps>({
+  //   mutationFn: async (props) => {
+  //     const { description, name } = props;
+  //     return authorizedCustomAxios
+  //       .post(apiUrl + "createRole/", {
+  //         data: {
+  //           content: { roleName: name, roleDescription: description },
+  //         },
+  //       })
+  //       .then((response) => {
+  //         if (showLogger)
+  //           logger("useOrganizations | createRole ✅ |", response.data);
+  //         return response.data;
+  //       });
+  //   },
+  //   onSuccess() {
+  //     queryClient.invalidateQueries(["organizations", "roles"]);
+  //   },
+  // });
 
   const editRoleMutation = useMutation<any, Error, EditRoleProps>({
     mutationFn: async (props) => {

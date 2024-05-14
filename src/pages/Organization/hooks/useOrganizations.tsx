@@ -1,10 +1,14 @@
 import { UseMutationResult, UseQueryResult } from "@tanstack/react-query";
 import { ServiceType } from "@/pages/Service/hooks/useService";
-import useOrganizationMutations, {
-  InvitationProps,
-} from "@/api/Organization/useOrganizationMutations";
 import useOrganizationQuerys from "@/api/Organization/useOrganizationQuerys";
 import { UpdateOrgaInfoProps } from "@/api/Organization/Mutations/useUpdateOrganizationInfos";
+import { EditRoleProps } from "@/api/Organization/Mutations/useEditRole";
+import {
+  CreateRoleProps,
+  RoleProps,
+} from "@/api/Organization/Mutations/useCreateRole";
+import { InvitationProps } from "@/api/Organization/Mutations/useInviteUser";
+import useAssignRole from "@/api/Organization/Mutations/useAssignRole";
 
 interface useOrganizationsReturnProps {
   userQuery: UseQueryResult<OrganizationsUser[], Error>;
@@ -12,73 +16,7 @@ interface useOrganizationsReturnProps {
   permissionsQuery: UseQueryResult<PermissionProps[], Error>;
   rolePermissionsQuery: UseQueryResult<PermissionProps[], Error>;
   organizationInfoQuery: UseQueryResult<OrganizationInfoProps, Error>;
-  inviteLinkMutation: UseMutationResult<string, Error, string, unknown>;
-  inviteUserMutation: UseMutationResult<any, Error, InvitationProps, unknown>;
-  createRoleMutation: UseMutationResult<any, Error, CreateRoleProps, unknown>;
-  deleteRoleMutation: UseMutationResult<any, Error, string, unknown>;
-  updatePermissionForRoleMutation: UseMutationResult<
-    any,
-    Error,
-    SetPermissionProps,
-    unknown
-  >;
-  assignRoleMutation: UseMutationResult<any, Error, AssignRoleProps, unknown>;
-  removeRoleMutation: UseMutationResult<any, Error, AssignRoleProps, unknown>;
-  deleteUserMutation: UseMutationResult<any, Error, string, unknown>;
-  updateOrganizationInfo: UseMutationResult<
-    string,
-    Error,
-    UpdateOrgaInfoProps,
-    unknown
-  >;
-  editRoleMutation: UseMutationResult<any, Error, EditRoleProps, unknown>;
 }
-
-export type OrganizationsUser = {
-  email: string;
-  name: string;
-  picture: string;
-  roles: RoleProps[];
-};
-
-export type PermissionNameTranslationType =
-  | "orga:read"
-  | "resources:edit"
-  | "resources:read"
-  | "orga:delete"
-  | "processes:read"
-  | "processes:messages"
-  | "processes:edit"
-  | "processes:delete"
-  | "processes:files";
-export type PermissionContextTranslationType =
-  | "resources"
-  | "orga"
-  | "processes";
-export type PermissionTypeTranslationType =
-  | "read"
-  | "edit"
-  | "delete"
-  | "messages"
-  | "delete"
-  | "files";
-
-export type PermissionProps = {
-  permission_name: PermissionNameTranslationType;
-  context: PermissionContextTranslationType;
-  permissionType: PermissionTypeTranslationType;
-  description: string;
-};
-
-export type SetPermissionProps = {
-  roleID: string;
-  permissionIDs: string[];
-};
-
-export type AssignRoleProps = {
-  email: string;
-  roleID: string;
-};
 
 export interface OrganizationInfoProps {
   accessedWhen: Date;
@@ -90,12 +28,6 @@ export interface OrganizationInfoProps {
   name: string;
 }
 
-export interface EditRoleProps {
-  roleID: string;
-  name: string;
-  description: string;
-}
-
 const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
   const {
     organizationInfoQuery,
@@ -104,19 +36,7 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     rolesQuery,
     userQuery,
   } = useOrganizationQuerys(roleID);
-
-  const {
-    assignRoleMutation,
-    createRoleMutation,
-    deleteRoleMutation,
-    deleteUserMutation,
-    editRoleMutation,
-    inviteLinkMutation,
-    inviteUserMutation,
-    removeRoleMutation,
-    updateOrganizationInfo,
-    updatePermissionForRoleMutation,
-  } = useOrganizationMutations();
+  const assignRole = useAssignRole();
 
   return {
     organizationInfoQuery,
@@ -124,16 +44,6 @@ const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
     rolesQuery,
     userQuery,
     rolePermissionsQuery,
-    editRoleMutation,
-    inviteLinkMutation,
-    inviteUserMutation,
-    createRoleMutation,
-    deleteRoleMutation,
-    updatePermissionForRoleMutation,
-    assignRoleMutation,
-    removeRoleMutation,
-    deleteUserMutation,
-    updateOrganizationInfo,
   };
 };
 

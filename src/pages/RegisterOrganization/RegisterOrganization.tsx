@@ -8,20 +8,16 @@ import { useTranslation } from "react-i18next";
 import * as yup from "yup";
 import { type } from "os";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useOrganizationMutations from "@/api/Organization/useOrganizationMutations";
+import useRegisterOrganization from "@/api/Organization/Mutations/useRegisterOrganization";
 
 interface RegisterOrganizationProps {}
-export type RegisterOrganizationFormData = {
-  email: string;
-  display_name: string;
-};
 
 const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const [success, setSuccess] = React.useState(false);
 
-  const { registerOrganizationMutation } = useOrganizationMutations();
+  const registerOrganization = useRegisterOrganization();
   const schema = yup
     .object()
     .shape({
@@ -51,7 +47,7 @@ const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
   });
 
   const onSubmit = (data: RegisterOrganizationFormData) => {
-    registerOrganizationMutation.mutate(data, {
+    registerOrganization.mutate(data, {
       onSuccess: () => setSuccess(true),
     });
   };

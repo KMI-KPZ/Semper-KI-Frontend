@@ -1,17 +1,17 @@
-import usePingQuerys from "@/api/Ping/usePingQuerys";
+import useIsMagazinUp from "@/api/Ping/Querys/useIsMagazinUp";
 
 interface ReturnProps {
   isMagazineUp(): boolean;
 }
 
 const usePing = (): ReturnProps => {
-  const { pingQuery } = usePingQuerys();
+  const isMagazinUp = useIsMagazinUp();
 
   const isMagazineUp = (): boolean => {
     return (
-      pingQuery.isFetched &&
-      pingQuery.data !== undefined &&
-      pingQuery.data === true
+      isMagazinUp.isFetched &&
+      isMagazinUp.data !== undefined &&
+      isMagazinUp.data === true
     );
   };
 

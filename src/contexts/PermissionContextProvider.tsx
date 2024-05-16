@@ -1,14 +1,12 @@
 import React, { PropsWithChildren, createContext, useContext } from "react";
-import { useTranslation } from "react-i18next";
-import { UserContext } from "./UserContextProvider";
-import usePermissions, {
-  Permission,
-  PermissionGateType,
-} from "@/hooks/usePermissions";
-import { Outlet } from "react-router-dom";
 import { AppLoadingSuspense } from "@component-library/index";
 import useUser, { UserType } from "@/hooks/useUser";
-import usePermissionQuerys from "@/api/Permissions/usePermissionsQuerys";
+import useGetPermissions, {
+  Permission,
+} from "@/api/Permissions/Querys/useGetPermissions";
+import useGetPermissionGates, {
+  PermissionGateType,
+} from "@/api/Permissions/Querys/useGetPermissionGates";
 
 interface PermissionContextProviderProps {}
 
@@ -27,22 +25,22 @@ const PermissionContextProvider: React.FC<
 > = (props) => {
   const { children } = props;
   const { user } = useUser();
-  const { permissionGatesQuery, permissionsQuery } = usePermissionQuerys();
+  const permissions = useGetPermissions();
+  const permissionGates = useGetPermissionGates();
 
-  const permissionGatesAreLoaded = (): boolean =>
-    permissionGatesQuery.isFetched;
-  const permissionsAreLoaded = (): boolean => permissionsQuery.isFetched;
+  const permissionGatesAreLoaded = (): boolean => permissionGates.isFetched;
+  const permissionsAreLoaded = (): boolean => permissions.isFetched;
 
   return (user.usertype !== UserType.ANONYM &&
     permissionGatesAreLoaded() &&
-    permissionGatesQuery.data !== undefined &&
+    permissionGates.data !== undefined &&
     permissionsAreLoaded() &&
-    permissionsQuery.data !== undefined) ||
+    permissions.data !== undefined) ||
     user.usertype === UserType.ANONYM ? (
     <PermissionContext.Provider
       value={{
-        permissions: permissionsQuery.data,
-        permissionGates: permissionGatesQuery.data,
+        permissions: permissions.data,
+        permissionGates: permissionGates.data,
       }}
     >
       {children}

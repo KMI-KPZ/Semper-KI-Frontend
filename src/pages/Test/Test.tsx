@@ -14,12 +14,13 @@ import useEvents from "@/hooks/useEvents/useEvents";
 import useTest, { TestDynamicProps } from "@/api/Test/useTest";
 import logger from "@/hooks/useLogger";
 import ExampleForm from "@/components/Form/ExampleForm";
+import useReloadPermissions from "@/api/Permissions/Mutations/useReloadPermissions";
 
 interface Props {}
 export const Test: React.FC<Props> = (props) => {
   const { socket, events } = useEvents();
   const [open, setOpen] = useState(false);
-  const { reloadPermissions } = usePermissions();
+  const reloadPermissions = useReloadPermissions();
 
   const { saveProjectsQuery, testDynamicQuery, dynamicButtonMutation } =
     useTest();
@@ -106,7 +107,12 @@ export const Test: React.FC<Props> = (props) => {
       <Button title="open" onClick={openMenu}>
         Open
       </Button>
-      <Button title="reloadPermissions" onClick={reloadPermissions} />
+      <Button
+        title="reloadPermissions"
+        onClick={() => {
+          reloadPermissions;
+        }}
+      />
       <PermissionGate element={"ProjectButtonSave"}>
         <Button
           size="sm"

@@ -9,12 +9,6 @@ import { useContext } from "react";
 import { ManufacturingServiceProps } from "@/pages/Service/Manufacturing/types/types";
 import { ModelingServiceProps } from "@/pages/Service/Modelling/Modelling";
 import { ProcessContext } from "../context/ProcessContext";
-import {
-  DownloadFileMutationProps,
-  DownloadZIPMutationProps,
-  StatusButtonRequestMutationProps,
-  UpdateProcessMutationProps,
-} from "@/api/Process/useProcessMutations";
 import useGeneralProcess from "./useGeneralProcess";
 import { useNavigate } from "react-router-dom";
 import { UserAddressProps } from "@/hooks/useUser";
@@ -22,6 +16,7 @@ import {
   StatusButtonActionRequestProps,
   StatusButtonPropsExtern,
 } from "../Project/hooks/useStatusButtons";
+import { UpdateProcessMutationProps } from "@/api/Process/Mutations/useUpdateProcess";
 
 interface ReturnProps {
   process: ProcessProps;
@@ -34,11 +29,11 @@ interface ReturnProps {
   uploadFiles: (files: File[]) => void;
   downloadFile: (
     fileID: string,
-    options?: MutateOptions<Blob, Error, DownloadFileMutationProps, unknown>
+    options?: MutateOptions<Blob, Error, DownloadFileProps, unknown>
   ) => void;
   downloadZIP: (
     fileIDs: string[],
-    options?: MutateOptions<Blob, Error, DownloadZIPMutationProps, unknown>
+    options?: MutateOptions<Blob, Error, DownloadFilesZIPProps, unknown>
   ) => void;
   deleteFile: (fileID: string) => void;
   getNavigationPrefix: () => string;
@@ -234,14 +229,14 @@ const useProcess = (): ReturnProps => {
 
   const downloadFile = (
     fileID: string,
-    options?: MutateOptions<Blob, Error, DownloadFileMutationProps, unknown>
+    options?: MutateOptions<Blob, Error, DownloadFileProps, unknown>
   ) => {
     _downloadFile({ processID: process.processID, fileID }, options);
   };
 
   const downloadZIP = (
     fileIDs: string[],
-    options?: MutateOptions<Blob, Error, DownloadZIPMutationProps, unknown>
+    options?: MutateOptions<Blob, Error, DownloadFilesZIPProps, unknown>
   ) => {
     _downloadZIP({ processID: process.processID, fileIDs }, options);
   };

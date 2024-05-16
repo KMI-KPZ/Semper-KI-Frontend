@@ -1,6 +1,3 @@
-import useProcessQuerys, {
-  ProcessHistoryType,
-} from "@/api/Process/useProcessQuerys";
 import useProcess from "@/pages/Projects/hooks/useProcess";
 import { Container } from "@component-library/index";
 import { Modal } from "@component-library/index";
@@ -13,6 +10,9 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ProcessHistoryItem from "./components/Item";
+import useGetProcessHistory, {
+  ProcessHistoryType,
+} from "@/api/Process/Querys/useGetProcessHistory";
 
 interface ProcessHistoryProps {}
 
@@ -20,9 +20,9 @@ const ProcessHistory: React.FC<ProcessHistoryProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { processHistoryQuery } = useProcessQuerys();
+  const processHistory = useGetProcessHistory();
 
-  if (processHistoryQuery.isLoading) return <LoadingAnimation />;
+  if (processHistory.isLoading) return <LoadingAnimation />;
 
   return (
     <Modal
@@ -32,13 +32,13 @@ const ProcessHistory: React.FC<ProcessHistoryProps> = (props) => {
         navigate("..");
       }}
     >
-      {processHistoryQuery.data !== undefined ? (
+      {processHistory.data !== undefined ? (
         <Container
           direction="col"
           className="h-full overflow-auto"
           justify="start"
         >
-          {processHistoryQuery.data
+          {processHistory.data
             .sort((a, b) => (a.createdWhen < b.createdWhen ? 1 : -1))
             .map((historyItem, index_) => (
               <Container

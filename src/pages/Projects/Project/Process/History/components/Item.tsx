@@ -1,7 +1,3 @@
-import {
-  HistoryProps,
-  ProcessHistoryType,
-} from "@/api/Process/useProcessQuerys";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { ProcessStatusType } from "@/pages/Service/Manufacturing/Header/types";
 import { Container } from "@component-library/index";
@@ -11,6 +7,10 @@ import { useTranslation } from "react-i18next";
 import ProcessHistoryTextItem from "./TextItem";
 import logger from "@/hooks/useLogger";
 import ProcessHistoryServiceText from "./ServiceText";
+import {
+  HistoryProps,
+  ProcessHistoryType,
+} from "@/api/Process/Querys/useGetProcessHistory";
 
 interface ProcessHistoryItemProps {
   item: HistoryProps;

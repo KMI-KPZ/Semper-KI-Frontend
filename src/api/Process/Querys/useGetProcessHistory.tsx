@@ -1,19 +1,10 @@
-import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
-import ProcessHistory from "@/pages/Projects/Project/Process/History/History";
-import {
-  ChatMessageProps,
-  FileProps,
-  FilesDescriptionProps,
-} from "@/pages/Projects/hooks/useProcess";
+import { authorizedCustomAxios } from "@/api/customAxios";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { ChatMessageProps, FileProps } from "@/pages/Projects/hooks/useProcess";
 import { ProcessStatusType } from "@/pages/Service/Manufacturing/Header/types";
-import { ServiceProps } from "@/pages/Service/hooks/useService";
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-
-interface useProcessQuerysReturnProps {
-  processHistoryQuery: UseQueryResult<HistoryProps[], Error>;
-}
+import { ServiceProps } from "@/pages/Service/hooks/useService";
 
 export enum ProcessHistoryType {
   CREATION = 1,
@@ -67,30 +58,34 @@ export type ProcessHistoryOTHER = {
   data: any;
 };
 
-const useProcessQuerys = (): useProcessQuerysReturnProps => {
+const useGetProcessHistory = () => {
+  const queryClient = useQueryClient();
   const { projectID, processID } = useParams();
 
-  const processHistoryQuery = useQuery<HistoryProps[], Error>({
+  const getProcessHistory = async () =>
+    authorizedCustomAxios
+      .get(
+        `${process.env.VITE_HTTP_API_URL}/public/getProcessHistory/${processID}`
+      )
+      .then((response) => {
+        const responseData = response.data;
+        const history: HistoryProps[] = responseData.history.map(
+          (historyItem: any) => ({
+            createdBy: historyItem.createdBy,
+            createdWhen: new Date(historyItem.createdWhen),
+            type: historyItem.type,
+            data: historyItem.data,
+          })
+        );
+        logger("useGetProcessHistory | getProcessHistory ✅ |", response);
+        return history;
+      });
+
+  return useQuery<HistoryProps[], Error>({
     queryKey: ["project", projectID, processID, "history"],
-    queryFn: async (props) =>
-      authorizedCustomAxios
-        .get(
-          `${process.env.VITE_HTTP_API_URL}/public/getProcessHistory/${processID}`
-        )
-        .then((response) => {
-          const history: HistoryProps[] = response.data.history.map(
-            (historyItem: any) => ({
-              createdBy: historyItem.createdBy,
-              createdWhen: new Date(historyItem.createdWhen),
-              type: historyItem.type,
-              data: historyItem.data,
-            })
-          );
-          logger("useProcessQuerys | processHistoryQuery ✅ |", history);
-          return history;
-        }),
+    queryFn: getProcessHistory,
+    enabled: processID !== undefined && projectID !== undefined,
   });
-  return { processHistoryQuery };
 };
 
-export default useProcessQuerys;
+export default useGetProcessHistory;

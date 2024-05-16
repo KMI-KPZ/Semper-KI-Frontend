@@ -7,12 +7,9 @@ import { Button } from "@component-library/index";
 import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 import ProjectCheckoutItem from "./components/Item";
-import logger from "@/hooks/useLogger";
 import { ProcessProps, ProcessStatus } from "../../hooks/useProcess";
 import { useProject } from "../../hooks/useProject";
 import { ProjectContext } from "../../context/ProjectContext";
-import useProcessMutations from "@/api/Process/useProcessMutations";
-import useProjectMutations from "@/api/Project/useProjectMutations";
 
 interface ProjectCheckoutProps {}
 

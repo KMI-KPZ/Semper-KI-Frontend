@@ -28,7 +28,7 @@ const useCreateRole = () => {
         logger("useCreateRole | createRole ❌ |", error);
       });
 
-  return useMutation<void, Error, CreateRoleProps>({
+  return useMutation<any, Error, CreateRoleProps>({
     mutationFn: createRole,
     onSuccess: () => {
       queryClient.invalidateQueries(["organizations", "roles"]);

@@ -17,7 +17,7 @@ const useCreateInviteLink = () => {
         logger("useCreateInviteLink | createInviteLink ❌ |", error);
       });
 
-  return useMutation<void, Error, string>({
+  return useMutation<string, Error, string>({
     mutationFn: createInviteLink,
     onSuccess: () => {
       queryClient.invalidateQueries(["organizations", "users"]);

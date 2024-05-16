@@ -13,7 +13,7 @@ interface OrganizationInfoProps {}
 const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { organizationInfoQuery } = useOrganizations();
+  const { organizationQuery: organizationInfoQuery } = useOrganizations();
   const [edit, setEdit] = useState<boolean>(false);
 
   const closeEdit = () => {

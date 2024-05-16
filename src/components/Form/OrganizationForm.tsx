@@ -11,11 +11,11 @@ import useServiceQuerys from "@/api/Service/useServiceQuerys";
 import TextInput from "@component-library/Form/Inputs/TextInput";
 import useOrganizations, {
   OrganizationInfoProps,
-  UpdateOrgaInfoProps,
 } from "@/pages/Organization/hooks/useOrganizations";
 import { LoadingAnimation } from "@component-library/index";
 import { Container } from "@component-library/index";
 import useGeneralInput from "@component-library/Form/hooks/useGeneralInput";
+import useUpdateOrganizationInfos from "@/api/Organization/Mutations/useUpdateOrganizationInfos";
 
 interface OrganizationFormProps {
   closeEdit: () => void;
@@ -33,7 +33,7 @@ interface OrganizationFormValues {
 const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
   const { organizationInfo, closeEdit } = props;
   const { t } = useTranslation();
-  const { updateOrganizationInfo } = useOrganizations();
+  const updateOrganizationInfo = useUpdateOrganizationInfos();
   const { servicesQuery } = useServiceQuerys();
   const { getMaxLabelWidth } = useGeneralInput();
 

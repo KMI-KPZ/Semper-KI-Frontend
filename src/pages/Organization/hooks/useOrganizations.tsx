@@ -1,21 +1,23 @@
 import { UseMutationResult, UseQueryResult } from "@tanstack/react-query";
 import { ServiceType } from "@/pages/Service/hooks/useService";
-import useOrganizationQuerys from "@/api/Organization/useOrganizationQuerys";
-import { UpdateOrgaInfoProps } from "@/api/Organization/Mutations/useUpdateOrganizationInfos";
-import { EditRoleProps } from "@/api/Organization/Mutations/useEditRole";
-import {
-  CreateRoleProps,
-  RoleProps,
-} from "@/api/Organization/Mutations/useCreateRole";
-import { InvitationProps } from "@/api/Organization/Mutations/useInviteUser";
+import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
 import useAssignRole from "@/api/Organization/Mutations/useAssignRole";
+import useGetOrganizationUsers, {
+  OrganizationsUser,
+} from "@/api/Organization/Querys/useGetOrganizationUsers";
+import useGetOrganizationPermissions, {
+  PermissionProps,
+} from "@/api/Organization/Querys/useGetOrganizationPermissions";
+import useGetOrganization from "@/api/Organization/Querys/useGetOrganization";
+import useGetOrganizationRolePermissions from "@/api/Organization/Querys/useGetOrganizationRolePermissions";
+import useGetOrganizationRoles from "@/api/Organization/Querys/useGetOrganizationRoles";
 
 interface useOrganizationsReturnProps {
   userQuery: UseQueryResult<OrganizationsUser[], Error>;
   rolesQuery: UseQueryResult<RoleProps[], Error>;
   permissionsQuery: UseQueryResult<PermissionProps[], Error>;
   rolePermissionsQuery: UseQueryResult<PermissionProps[], Error>;
-  organizationInfoQuery: UseQueryResult<OrganizationInfoProps, Error>;
+  organizationQuery: UseQueryResult<OrganizationInfoProps, Error>;
 }
 
 export interface OrganizationInfoProps {
@@ -29,17 +31,14 @@ export interface OrganizationInfoProps {
 }
 
 const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {
-  const {
-    organizationInfoQuery,
-    permissionsQuery,
-    rolePermissionsQuery,
-    rolesQuery,
-    userQuery,
-  } = useOrganizationQuerys(roleID);
-  const assignRole = useAssignRole();
+  const organizationQuery = useGetOrganization();
+  const permissionsQuery = useGetOrganizationPermissions();
+  const rolePermissionsQuery = useGetOrganizationRolePermissions(roleID);
+  const rolesQuery = useGetOrganizationRoles();
+  const userQuery = useGetOrganizationUsers();
 
   return {
-    organizationInfoQuery,
+    organizationQuery,
     permissionsQuery,
     rolesQuery,
     userQuery,

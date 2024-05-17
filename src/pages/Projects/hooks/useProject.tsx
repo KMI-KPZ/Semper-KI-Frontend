@@ -14,16 +14,6 @@ interface ReturnProps {
   sendProject(props: SendProjectProps): void;
 }
 
-export interface ProjectProps {
-  projectID: string;
-  projectStatus: ProcessStatus;
-  projectDetails: ProjectDetailsProps;
-  client: string;
-  createdWhen: Date;
-  updatedWhen: Date;
-  processes: ProcessProps[];
-}
-
 export interface ProjectDetailsProps {
   title?: string;
 }

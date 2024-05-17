@@ -1,13 +1,9 @@
-import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
+import { authorizedCustomAxios } from "@/api/customAxios";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useUser, { UserType } from "@/hooks/useUser";
-import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
-
-interface useFlatProjectQuerysReturnProps {
-  flatProjectsQuery: UseQueryResult<FlatProjectProps[], Error>;
-}
+import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 
 export interface FlatProjectProps {
   projectID: string;
@@ -43,15 +39,15 @@ export const isFlatProject = (project: any): project is FlatProjectProps => {
   );
 };
 
-const useFlatProjectQuerys = (): useFlatProjectQuerysReturnProps => {
+const useGetFlatProjects = () => {
   const { user } = useUser();
-  const flatProjectsQuery = useQuery<FlatProjectProps[], Error>({
-    queryKey: ["flatProjects"],
-    queryFn: async () => {
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getFlatProjects/`; //TODO change when path changes
-      return authorizedCustomAxios.get(apiUrl).then((response) => {
-        logger("useFlatProjects | flatProjectsQuery ✅ |", response.data);
-        return response.data.projects.map(
+  const queryClient = useQueryClient();
+  const getFlatProjects = async () =>
+    authorizedCustomAxios
+      .get(`${process.env.VITE_HTTP_API_URL}/public/getFlatProjects/`)
+      .then((response) => {
+        const responseData = response.data;
+        const flatProjects: FlatProjectProps[] = responseData.projects.map(
           (project: any, index: number): FlatProjectProps => ({
             client: project.client,
             projectID: project.projectID,
@@ -62,11 +58,16 @@ const useFlatProjectQuerys = (): useFlatProjectQuerysReturnProps => {
             updatedWhen: new Date(project.updatedWhen),
           })
         );
+
+        logger("useGetFlatProjects | getFlatProjects ✅ |", response);
+        return flatProjects;
       });
-    },
+
+  return useQuery<FlatProjectProps[], Error>({
+    queryKey: ["flatProjects"],
+    queryFn: getFlatProjects,
     enabled: user.usertype !== UserType.ADMIN,
   });
-  return { flatProjectsQuery };
 };
 
-export default useFlatProjectQuerys;
+export default useGetFlatProjects;

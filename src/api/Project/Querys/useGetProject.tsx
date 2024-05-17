@@ -1,21 +1,23 @@
-import { authorizedCustomAxios } from "@/api/customAxios";
 import logger from "@/hooks/useLogger";
+import { authorizedCustomAxios } from "@/api/customAxios";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 import useUser, { UserType } from "@/hooks/useUser";
 import {
-  FileProps,
   FilesDescriptionProps,
   ProcessProps,
   ProcessStatus,
 } from "@/pages/Projects/hooks/useProcess";
-import {
-  ProjectDetailsProps,
-  ProjectProps,
-} from "@/pages/Projects/hooks/useProject";
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";
 
-interface useProjectQuerysReturnProps {
-  projectQuery: UseQueryResult<ProjectProps, Error>;
+export interface ProjectProps {
+  projectID: string;
+  projectStatus: ProcessStatus;
+  projectDetails: ProjectDetailsProps;
+  client: string;
+  createdWhen: Date;
+  updatedWhen: Date;
+  processes: ProcessProps[];
 }
 
 export const getProjectFiles = (
@@ -29,15 +31,14 @@ export const getProjectFiles = (
   return files;
 };
 
-const useProjectQuerys = (): useProjectQuerysReturnProps => {
-  const { user } = useUser();
+const useGetProject = () => {
+  const queryClient = useQueryClient();
   const { projectID } = useParams();
-
-  const projectQuery = useQuery<ProjectProps, Error>(
-    ["project", projectID],
-    async () => {
-      const apiUrl = `${process.env.VITE_HTTP_API_URL}/public/getProject/${projectID}/`;
-      return authorizedCustomAxios.get(apiUrl).then((response) => {
+  const { user } = useUser();
+  const getProject = async () =>
+    authorizedCustomAxios
+      .get(`${process.env.VITE_HTTP_API_URL}/public/getProject/${projectID}/`)
+      .then((response) => {
         const project: ProjectProps = {
           client: response.data.client,
           projectID: response.data.projectID,
@@ -63,16 +64,15 @@ const useProjectQuerys = (): useProjectQuerysReturnProps => {
             })
           ),
         };
-        logger("useProjectQuerys | projectQuery ✅ |", project);
+        logger("useGetProject | getProject ✅ |", response);
         return project;
       });
-    },
-    {
-      enabled: projectID !== undefined && user.usertype !== UserType.ADMIN,
-    }
-  );
 
-  return { projectQuery };
+  return useQuery<ProjectProps, Error>({
+    queryKey: ["project", projectID],
+    queryFn: getProject,
+    enabled: projectID !== undefined && user.usertype !== UserType.ADMIN,
+  });
 };
 
-export default useProjectQuerys;
+export default useGetProject;

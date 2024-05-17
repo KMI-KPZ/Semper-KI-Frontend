@@ -20,7 +20,7 @@ import logger from "@/hooks/useLogger";
 import useSearch from "@/hooks/useSearch";
 import { useProject } from "@/pages/Projects/hooks/useProject";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
-import { FlatProjectProps } from "@/api/Project/useFlatProjectQuerys";
+import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 
 interface Props {}
 
@@ -57,10 +57,10 @@ const AdminProjects: React.FC<Props> = (props) => {
           <TableBody>
             {flatProjects.length > 0
               ? flatProjects
-                  .filter((project: FlatProjectProps) =>
+                  .filter((project: FlatProject) =>
                     filterDataBySearchInput(project)
                   )
-                  .map((project: FlatProjectProps, index: number) => (
+                  .map((project: FlatProject, index: number) => (
                     <TableRow
                       key={index}
                       sx={{

@@ -5,17 +5,17 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Outlet } from "react-router-dom";
 import { OrganizationProps } from "@/pages/Admin/hooks/useAdmin";
 import { LoadingAnimation } from "@component-library/index";
-import { FlatProjectProps } from "@/api/Project/useFlatProjectQuerys";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useGetAdminFlatProjects from "@/api/Admin/Querys/useGetAdminFlatProjects";
 import useGetAdminData from "@/api/Admin/Querys/useGetAdminData";
+import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 
 interface Props {}
 
 export type AdminContext = {
   users: AuthorizedUserProps[];
   organizations: OrganizationProps[];
-  flatProjects: FlatProjectProps[];
+  flatProjects: FlatProject[];
 };
 
 export const AdminContext = createContext<AdminContext>({

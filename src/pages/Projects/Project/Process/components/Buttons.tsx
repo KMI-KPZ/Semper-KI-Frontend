@@ -12,7 +12,7 @@ import { ProcessEventItem, ProjectEventItem } from "@/pages/App/types";
 import { Badge } from "@component-library/Badge/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 import useProcess, {
-  ProcessProps,
+  Process,
   ProcessStatus,
 } from "@/pages/Projects/hooks/useProcess";
 import { ProcessComponentState } from "../Process";
@@ -25,7 +25,7 @@ import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 interface ProcessButtonsProps {
   user: UserProps;
   projectID: string;
-  process: ProcessProps;
+  process: Process;
   updateStatus: (status: ProcessStatus) => void;
   setState: Dispatch<SetStateAction<ProcessComponentState>>;
 }

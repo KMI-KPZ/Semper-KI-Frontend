@@ -1,17 +1,22 @@
 import { UseQueryResult } from "@tanstack/react-query";
-import { ProcessProps, ProcessStatus } from "./useProcess";
+import { Process, ProcessStatus } from "./useProcess";
 import { useContext } from "react";
 import { ProjectContext } from "../context/ProjectContext";
-import useProjectMutations from "@/api/Project/useProjectMutations";
+import { Project } from "@/api/Project/Querys/useGetProject";
+import useCreateProject from "@/api/Project/Mutations/useCreateProject";
+import useDeleteProject from "@/api/Project/Mutations/useDeleteProject";
+import useUpdateProject from "@/api/Project/Mutations/useUpdateProject";
+import useSendProject from "@/api/Project/Mutations/useSendProject";
+import useVerifyProject from "@/api/Project/Mutations/useVerifyProject";
 
 interface ReturnProps {
-  project: ProjectProps;
-  projectQuery: UseQueryResult<ProjectProps, Error>;
+  project: Project;
+  projectQuery: UseQueryResult<Project, Error>;
   createProject(): void;
   updateProject(updateProps: UpdateProjectProps): void;
   deleteProject(projectIDs: string[]): void;
   verifyProject(props: VerifyProjectProps): void;
-  sendProject(props: SendProjectProps): void;
+  sendProject(processIDs: string[]): void;
 }
 
 export interface ProjectDetailsProps {
@@ -37,37 +42,32 @@ export interface VerifyProjectProps {
   send: boolean;
 }
 
-export interface SendProjectProps {
-  processIDs: string[];
-}
-
 export const useProject = (): ReturnProps => {
   const { project, projectQuery } = useContext(ProjectContext);
-  const {
-    createProjectMutation,
-    deleteProjectMutation,
-    updateProjectMutation,
-    sendProjectMutation,
-    verifyProjectMutation,
-  } = useProjectMutations();
+
+  const _createProject = useCreateProject();
+  const _deleteProject = useDeleteProject();
+  const _updateProject = useUpdateProject();
+  const _sendProject = useSendProject();
+  const _verifyProject = useVerifyProject();
 
   const createProject = () => {
-    createProjectMutation.mutate();
+    _createProject.mutate();
   };
 
   const updateProject = (updateProps: UpdateProjectProps) => {
-    updateProjectMutation.mutate(updateProps);
+    _updateProject.mutate(updateProps);
   };
   const deleteProject = (projectIDs: string[]) => {
-    deleteProjectMutation.mutate(projectIDs);
+    _deleteProject.mutate(projectIDs);
   };
 
-  const sendProject = (props: SendProjectProps) => {
-    sendProjectMutation.mutate(props);
+  const sendProject = (processIDs: string[]) => {
+    _sendProject.mutate(processIDs);
   };
 
   const verifyProject = (props: VerifyProjectProps) => {
-    verifyProjectMutation.mutate(props);
+    _verifyProject.mutate(props);
   };
 
   return {

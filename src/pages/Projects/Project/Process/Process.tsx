@@ -12,10 +12,7 @@ import ProcessButtons from "./components/Buttons";
 import ProcessInfo from "./components/Info";
 import { Container } from "@component-library/index";
 import ProjectTitleForm from "../components/TitleForm";
-import useProcess, {
-  ProcessProps,
-  ProcessStatus,
-} from "../../hooks/useProcess";
+import useProcess, { Process, ProcessStatus } from "../../hooks/useProcess";
 import { getTitleFromProcess } from "@/pages/Service/Overview/components/Item";
 import ProjectFile from "./components/ProcessFile";
 import ProcessStatusButtons from "./components/StatusButtons";
@@ -28,7 +25,7 @@ import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useUploadFiles from "@/api/Process/Mutations/useUploadFiles";
 
 interface Props {
-  process: ProcessProps;
+  process: Process;
   projectID: string;
   checked: boolean;
 }
@@ -40,7 +37,7 @@ export interface ProcessComponentState {
   statusCountReset: boolean;
 }
 
-const Process: React.FC<Props> = (props) => {
+const ProcessPage: React.FC<Props> = (props) => {
   const { process, projectID, checked } = props;
   const { user } = useUser();
   const { t } = useTranslation();
@@ -174,4 +171,4 @@ const Process: React.FC<Props> = (props) => {
   );
 };
 
-export default Process;
+export default ProcessPage;

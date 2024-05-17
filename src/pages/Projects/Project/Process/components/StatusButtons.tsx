@@ -1,13 +1,13 @@
 import { Button } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
+import { Process } from "@/pages/Projects/hooks/useProcess";
 import React from "react";
 import useStatusButtons from "../../hooks/useStatusButtons";
 import { ProcessPostProcessing } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
 
 interface ProcessStatusButtonsProps {
-  process: ProcessProps;
+  process: Process;
 }
 
 const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {

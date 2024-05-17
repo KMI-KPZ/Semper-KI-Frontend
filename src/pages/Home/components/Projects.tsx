@@ -11,7 +11,7 @@ import useProcess from "@/pages/Projects/hooks/useProcess";
 import { UserContext } from "@/contexts/UserContextProvider";
 import useUser, { UserType } from "@/hooks/useUser";
 import { ContentBox } from "@component-library/index";
-import useFlatProjectQuerys from "@/api/Project/useFlatProjectQuerys";
+import useGetFlatProjects from "@/api/Project/Querys/useGetFlatProjects";
 
 interface HomeProjectsProps {}
 
@@ -20,7 +20,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const { t } = useTranslation();
   const { user } = useUser();
 
-  const { flatProjectsQuery } = useFlatProjectQuerys();
+  const flatProjects = useGetFlatProjects();
   const { createProject } = useProject();
 
   const handleOnClickButtonNew = () => {
@@ -36,9 +36,9 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
         <Heading variant="h2">{t("Home.components.Projects.title")}</Heading>
         {user.usertype === UserType.ANONYM ? (
           <Container>
-            {flatProjectsQuery.isFetched &&
-            flatProjectsQuery.data !== undefined &&
-            flatProjectsQuery.data.length > 0 ? (
+            {flatProjects.isFetched &&
+            flatProjects.data !== undefined &&
+            flatProjects.data.length > 0 ? (
               <>
                 <Button
                   title={t("Home.components.Projects.button.new")}
@@ -47,7 +47,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
                 />
                 <Button
                   title={t("Home.components.Projects.button.continue")}
-                  to={`/projects/${flatProjectsQuery.data[0].projectID}`}
+                  to={`/projects/${flatProjects.data[0].projectID}`}
                 />
                 <Button
                   title={t("Home.components.Projects.button.projects")}

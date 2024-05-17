@@ -1,8 +1,8 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { FlatProjectProps } from "@/api/Project/useFlatProjectQuerys";
 import useUser, { UserType } from "@/hooks/useUser";
+import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 
 const useGetAdminFlatProjects = () => {
   const queryClient = useQueryClient();
@@ -14,7 +14,7 @@ const useGetAdminFlatProjects = () => {
       )
       .then((response) => {
         const responseData = response.data;
-        const data: FlatProjectProps[] = responseData.map((project: any) => ({
+        const data: FlatProject[] = responseData.map((project: any) => ({
           ...project,
           accessedWhen: new Date(project.accessedWhen),
           createdWhen: new Date(project.createdWhen),
@@ -25,7 +25,7 @@ const useGetAdminFlatProjects = () => {
         return data;
       });
 
-  return useQuery<FlatProjectProps[], Error>({
+  return useQuery<FlatProject[], Error>({
     queryKey: ["admin", "flatProjects"],
     queryFn: getAdminFlatProjects,
     enabled: user.usertype === UserType.ADMIN,

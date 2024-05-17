@@ -1,4 +1,3 @@
-import { FlatProjectProps } from "@/api/Project/useFlatProjectQuerys";
 import logger from "@/hooks/useLogger";
 import useUser, { UserType } from "@/hooks/useUser";
 import { Container } from "@component-library/index";
@@ -7,14 +6,15 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import ProjectsCard from "./Card";
 import { Divider } from "@component-library/index";
+import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 
 interface ProjectsCardsProps {
-  flatProjects: FlatProjectProps[];
+  flatProjects: FlatProject[];
   selectedProjects: string[];
   setSelectedProjects: React.Dispatch<React.SetStateAction<string[]>>;
   filterDataBySearchInput: (
-    data: FlatProjectProps,
-    _keys?: (keyof FlatProjectProps)[] | undefined
+    data: FlatProject,
+    _keys?: (keyof FlatProject)[] | undefined
   ) => boolean;
 }
 
@@ -28,11 +28,11 @@ const ProjectsCards: React.FC<ProjectsCardsProps> = (props) => {
   const { t } = useTranslation();
   const { user } = useUser();
 
-  const ownProjects: FlatProjectProps[] =
+  const ownProjects: FlatProject[] =
     user.usertype !== UserType.ANONYM && user.usertype === UserType.ORGANIZATION
       ? flatProjects.filter((project) => user.organization === project.client)
       : flatProjects;
-  const recievedProjects: FlatProjectProps[] =
+  const recievedProjects: FlatProject[] =
     user.usertype === UserType.ORGANIZATION
       ? flatProjects.filter((project) => user.organization !== project.client)
       : [];

@@ -5,7 +5,7 @@ import useUser, { UserType } from "@/hooks/useUser";
 import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";
 import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 
-export interface FlatProjectProps {
+export interface FlatProject {
   projectID: string;
   client: string;
   projectStatus: ProcessStatus;
@@ -15,7 +15,7 @@ export interface FlatProjectProps {
   processesCount: number;
 }
 
-export const isFlatProject = (project: any): project is FlatProjectProps => {
+export const isFlatProject = (project: any): project is FlatProject => {
   return (
     "projectID" in project &&
     project.projectID !== undefined &&
@@ -47,8 +47,8 @@ const useGetFlatProjects = () => {
       .get(`${process.env.VITE_HTTP_API_URL}/public/getFlatProjects/`)
       .then((response) => {
         const responseData = response.data;
-        const flatProjects: FlatProjectProps[] = responseData.projects.map(
-          (project: any, index: number): FlatProjectProps => ({
+        const flatProjects: FlatProject[] = responseData.projects.map(
+          (project: any, index: number): FlatProject => ({
             client: project.client,
             projectID: project.projectID,
             projectStatus: project.projectStatus,
@@ -63,7 +63,7 @@ const useGetFlatProjects = () => {
         return flatProjects;
       });
 
-  return useQuery<FlatProjectProps[], Error>({
+  return useQuery<FlatProject[], Error>({
     queryKey: ["flatProjects"],
     queryFn: getFlatProjects,
     enabled: user.usertype !== UserType.ADMIN,

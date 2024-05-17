@@ -6,11 +6,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Heading, Text } from "@component-library/index";
 import useService, { ServiceType } from "@/pages/Service/hooks/useService";
-import useContractor from "../../../../api/Project/useContractorQuerys";
-import useProcess, {
-  ProcessProps,
-  ProcessStatus,
-} from "../../hooks/useProcess";
+import useProcess, { Process, ProcessStatus } from "../../hooks/useProcess";
 import { useProject } from "../../hooks/useProject";
 import { useForm } from "react-hook-form";
 import { ProjectContext } from "../../context/ProjectContext";
@@ -31,7 +27,7 @@ interface Props {}
 
 export interface ContractorSelectionFormData {
   processes: {
-    process: ProcessProps;
+    process: Process;
     contractorID: string;
   }[];
 }

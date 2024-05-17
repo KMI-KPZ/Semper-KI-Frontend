@@ -7,12 +7,12 @@ import { Heading } from "@component-library/index";
 import { Divider } from "@component-library/index";
 import ServiceSelect from "@/pages/Service/Select/Select";
 import logger from "@/hooks/useLogger";
-import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
+import { Process } from "@/pages/Projects/hooks/useProcess";
 import { ManufacturingServiceProps } from "@/pages/Service/Manufacturing/types/types";
 import ProcessServiceSelect from "./components/Select";
 
 interface ProcessServicePreviewProps {
-  process: ProcessProps;
+  process: Process;
 }
 
 const ProcessServicePreview: React.FC<ProcessServicePreviewProps> = (props) => {

@@ -15,6 +15,7 @@ import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import ProcessHistory from "@/pages/Projects/Project/Process/History/History";
 import ProcessChat from "@/pages/Projects/Project/Process/Chat/Chat";
 import Redirect from "@/pages/Redirect/Redirect";
+import ProjectPage from "@/pages/Projects/Project/Project";
 
 interface ProjectsRoutesProps {}
 
@@ -37,7 +38,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
           index
           element={
             <PermissionGate element="Projects">
-              <Project />
+              <ProjectPage />
             </PermissionGate>
           }
         />
@@ -74,7 +75,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
               path="history"
               element={
                 <>
-                  <Project />
+                  <ProjectPage />
                   <ProcessHistory />
                 </>
               }
@@ -83,7 +84,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
               path="chat"
               element={
                 <>
-                  <Project />
+                  <ProjectPage />
                   <ProcessChat />
                 </>
               }
@@ -102,7 +103,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
             path="service/*"
             element={
               <>
-                <Project />
+                <ProjectPage />
                 <ServiceRoutes />
               </>
             }

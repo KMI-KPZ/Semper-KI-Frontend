@@ -1,10 +1,10 @@
+import { Project } from "@/api/Project/Querys/useGetProject";
 import { Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { ProjectProps } from "../../hooks/useProject";
 
 interface ProjectInfoProps {
-  project: ProjectProps;
+  project: Project;
 }
 
 const ProjectInfo: React.FC<ProjectInfoProps> = (props) => {

@@ -6,18 +6,17 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Outlet } from "react-router-dom";
-import { ProjectProps, useProject } from "../hooks/useProject";
 import { AppLoadingSuspense, LoadingAnimation } from "@component-library/index";
 import { Query, UseQueryResult } from "@tanstack/react-query";
-import useProjectQuerys from "@/api/Project/useProjectQuerys";
 import useUser, { UserType } from "@/hooks/useUser";
 import useGetAdminProject from "@/api/Admin/Querys/useGetAdminProject";
+import useGetProject, { Project } from "@/api/Project/Querys/useGetProject";
 
 interface ProjectOutletProps {}
 
 export interface ProjectContextProps {
-  project: ProjectProps;
-  projectQuery: UseQueryResult<ProjectProps, Error>;
+  project: Project;
+  projectQuery: UseQueryResult<Project, Error>;
   checkedProcesses: string[];
   setCheckedProcesses: Dispatch<React.SetStateAction<string[]>>;
 }
@@ -32,7 +31,7 @@ export const ProjectContext = React.createContext<ProjectContextProps>({
     updatedWhen: new Date(),
     projectStatus: 0,
   },
-  projectQuery: {} as UseQueryResult<ProjectProps, Error>,
+  projectQuery: {} as UseQueryResult<Project, Error>,
   checkedProcesses: [],
   setCheckedProcesses: () => {},
 });
@@ -41,19 +40,19 @@ const ProjectContextProvider: React.FC<ProjectOutletProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { user } = useUser();
-  const { projectQuery: userProjectQuery } = useProjectQuerys();
+  const _project = useGetProject();
   const adminProjectQuery = useGetAdminProject();
-  const projectQuery =
-    user.usertype === UserType.ADMIN ? adminProjectQuery : userProjectQuery;
+  const project =
+    user.usertype === UserType.ADMIN ? adminProjectQuery : _project;
   const [checkedProcesses, setCheckedProcesses] = useState<string[]>([]);
 
-  if (projectQuery.isLoading) return <LoadingAnimation className="py-40" />;
-  if (projectQuery.isFetched && projectQuery.data !== undefined)
+  if (project.isLoading) return <LoadingAnimation className="py-40" />;
+  if (project.isFetched && project.data !== undefined)
     return (
       <ProjectContext.Provider
         value={{
-          project: projectQuery.data,
-          projectQuery: projectQuery,
+          project: project.data,
+          projectQuery: project,
           checkedProcesses,
           setCheckedProcesses,
         }}

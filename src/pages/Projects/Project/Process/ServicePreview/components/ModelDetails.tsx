@@ -3,7 +3,7 @@ import { useManufacturingModelDetailsQuerys } from "@/api/Service/Manufacturing/
 import {
   FilesDescriptionProps,
   ManufactoringProcessProps,
-  ProcessProps,
+  Process,
 } from "@/pages/Projects/hooks/useProcess";
 import ModelPreview from "@/pages/Test/STLViewer";
 import {

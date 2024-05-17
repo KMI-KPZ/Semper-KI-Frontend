@@ -6,7 +6,7 @@ import ServiceOverviewItem from "./components/Item";
 import { Heading } from "@component-library/index";
 import { Button } from "@component-library/index";
 import { useProject } from "@/pages/Projects/hooks/useProject";
-import useProcess, { ProcessProps } from "@/pages/Projects/hooks/useProcess";
+import useProcess, { Process } from "@/pages/Projects/hooks/useProcess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 
@@ -47,7 +47,7 @@ const ServiceOverview: React.FC<Props> = (props) => {
         projectQuery.data.processes !== undefined &&
         projectQuery.data.processes.length > 0
           ? projectQuery.data.processes.map(
-              (process: ProcessProps, index: number) => (
+              (process: Process, index: number) => (
                 <ServiceOverviewItem key={index} process={process} />
               )
             )

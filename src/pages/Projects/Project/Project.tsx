@@ -10,7 +10,7 @@ import {
   LoadingSuspense,
 } from "@component-library/index";
 import ProjectButtons from "./components/StatusButtons";
-import { ProjectProps, useProject } from "../hooks/useProject";
+import { useProject } from "../hooks/useProject";
 import { Container } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import AddIcon from "@mui/icons-material/Add";
@@ -26,12 +26,14 @@ import { ProjectContext } from "../context/ProjectContext";
 import useScrollToProcess from "./hooks/useScrollToProcess";
 import OwnerGate from "@/components/OwnerGate/OwnerGate";
 import useCreateProcess from "@/api/Process/Mutations/useCreateProcess";
+import { Project as Project } from "@/api/Project/Querys/useGetProject";
+import ProcessPage from "./Process/Process";
 
 interface Props {
-  adminProject?: ProjectProps;
+  adminProject?: Project;
 }
 
-const Project: React.FC<Props> = (props) => {
+const ProjectPage: React.FC<Props> = (props) => {
   const { adminProject } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -40,7 +42,7 @@ const Project: React.FC<Props> = (props) => {
   const { user } = useUser();
 
   const { project: _project } = useContext(ProjectContext);
-  const project: ProjectProps =
+  const project: Project =
     user.usertype === UserType.ADMIN && adminProject !== undefined
       ? adminProject
       : _project;
@@ -194,7 +196,7 @@ const Project: React.FC<Props> = (props) => {
             processA.createdWhen > processB.createdWhen ? -1 : 1
           )
           .map((process, index) => (
-            <Process
+            <ProcessPage
               key={index}
               process={process}
               projectID={project.projectID}
@@ -231,4 +233,4 @@ const Project: React.FC<Props> = (props) => {
   );
 };
 
-export default Project;
+export default ProjectPage;

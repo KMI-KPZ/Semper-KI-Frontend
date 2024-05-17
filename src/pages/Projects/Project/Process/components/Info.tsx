@@ -1,10 +1,10 @@
-import { ProcessProps, ProcessStatus } from "@/pages/Projects/hooks/useProcess";
+import { Process, ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 interface ProcessInfoProps {
-  process: ProcessProps;
+  process: Process;
 }
 
 const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {

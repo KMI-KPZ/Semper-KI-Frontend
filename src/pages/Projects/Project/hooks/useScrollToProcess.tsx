@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { ProcessProps } from "../../hooks/useProcess";
+import { Process } from "../../hooks/useProcess";
 
 const useScrollToProcess = (processID: string | undefined) => {
   useEffect(() => {

@@ -1,11 +1,11 @@
+import { Project } from "@/api/Project/Querys/useGetProject";
 import { UseQueryResult } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { ProjectProps } from "../../hooks/useProject";
 
 interface ReturnProps {}
 
 const useProjectsState = (
-  projectsQuery: UseQueryResult<ProjectProps[], Error>,
+  projectsQuery: UseQueryResult<Project[], Error>,
   state: boolean[],
   setState: React.Dispatch<React.SetStateAction<boolean[]>>
 ): ReturnProps => {

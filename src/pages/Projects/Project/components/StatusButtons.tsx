@@ -2,12 +2,12 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { ProjectProps } from "../../hooks/useProject";
-import { ProcessProps } from "../../hooks/useProcess";
+import { Process } from "../../hooks/useProcess";
 import useStatusButtons from "../hooks/useStatusButtons";
+import { Project } from "@/api/Project/Querys/useGetProject";
 
 interface ProjectButtonsProps {
-  project: ProjectProps;
+  project: Project;
   checkedProcesses: string[];
 }
 
@@ -17,7 +17,7 @@ const ProjectButtons: React.FC<ProjectButtonsProps> = (props) => {
   const { getProjectStatusButtons, handleOnClickButtonCount } =
     useStatusButtons();
 
-  const getSelectedProcesses = (): ProcessProps[] => {
+  const getSelectedProcesses = (): Process[] => {
     return project.processes.filter((process) =>
       checkedProcesses.includes(process.processID)
     );

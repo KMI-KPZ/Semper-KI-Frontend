@@ -5,19 +5,19 @@ import { useParams } from "react-router-dom";
 import useUser, { UserType } from "@/hooks/useUser";
 import {
   FilesDescriptionProps,
-  ProcessProps,
+  Process,
   ProcessStatus,
 } from "@/pages/Projects/hooks/useProcess";
 import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";
 
-export interface ProjectProps {
+export interface Project {
   projectID: string;
   projectStatus: ProcessStatus;
   projectDetails: ProjectDetailsProps;
   client: string;
   createdWhen: Date;
   updatedWhen: Date;
-  processes: ProcessProps[];
+  processes: Process[];
 }
 
 export const getProjectFiles = (
@@ -39,7 +39,7 @@ const useGetProject = () => {
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/getProject/${projectID}/`)
       .then((response) => {
-        const project: ProjectProps = {
+        const project: Project = {
           client: response.data.client,
           projectID: response.data.projectID,
           projectStatus: response.data.projectStatus,
@@ -47,7 +47,7 @@ const useGetProject = () => {
           createdWhen: new Date(response.data.createdWhen),
           updatedWhen: new Date(response.data.updatedWhen),
           processes: response.data.processes.map(
-            (process: any): ProcessProps => ({
+            (process: any): Process => ({
               client: process.client,
               processDetails: process.processDetails,
               processID: process.processID,
@@ -68,7 +68,7 @@ const useGetProject = () => {
         return project;
       });
 
-  return useQuery<ProjectProps, Error>({
+  return useQuery<Project, Error>({
     queryKey: ["project", projectID],
     queryFn: getProject,
     enabled: projectID !== undefined && user.usertype !== UserType.ADMIN,

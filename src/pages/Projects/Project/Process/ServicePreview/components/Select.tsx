@@ -7,14 +7,14 @@ import FactoryIcon from "@mui/icons-material/Factory";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import { ServiceType } from "@/pages/Service/hooks/useService";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
-import { ProcessProps, ProcessStatus } from "@/pages/Projects/hooks/useProcess";
+import { Process, ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import logger from "@/hooks/useLogger";
 import useServiceQuerys from "@/api/Service/useServiceQuerys";
 import Card from "@component-library/Card/Card";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 
 interface ProcessServiceSelectProps {
-  process: ProcessProps;
+  process: Process;
 }
 
 const ProcessServiceSelect: React.FC<ProcessServiceSelectProps> = (props) => {

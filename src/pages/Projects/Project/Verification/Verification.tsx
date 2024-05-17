@@ -10,13 +10,13 @@ import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import logger from "@/hooks/useLogger";
 import { useForm } from "react-hook-form";
 import { queryByTestId } from "@testing-library/react";
-import { ProcessProps, ProcessStatus } from "../../hooks/useProcess";
+import { Process, ProcessStatus } from "../../hooks/useProcess";
 import { useProject } from "../../hooks/useProject";
 import { ProjectContext } from "../../context/ProjectContext";
 
 interface Props {}
 export interface VerifyFormData {
-  processes: { process: ProcessProps; checked: boolean }[];
+  processes: { process: Process; checked: boolean }[];
 }
 
 const ProcessVerification: React.FC<Props> = (props) => {
@@ -25,7 +25,7 @@ const ProcessVerification: React.FC<Props> = (props) => {
   const { verifyProject } = useProject();
 
   const { projectQuery } = useContext(ProjectContext);
-  const processes: ProcessProps[] =
+  const processes: Process[] =
     projectQuery.data === undefined
       ? []
       : projectQuery.data.processes.filter(

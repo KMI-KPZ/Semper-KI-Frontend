@@ -9,27 +9,25 @@ import { useProject } from "./hooks/useProject";
 import DeleteIcon from "@mui/icons-material/Delete";
 import logger from "@/hooks/useLogger";
 import { Container } from "@component-library/index";
-import useFlatProjectQuerys, {
-  FlatProjectProps,
-} from "@/api/Project/useFlatProjectQuerys";
 import ProjectsCards from "./components/Cards";
 import useSearch from "@/hooks/useSearch";
 import useGetAdminFlatProjects from "@/api/Admin/Querys/useGetAdminFlatProjects";
+import useGetFlatProjects, {
+  FlatProject,
+} from "@/api/Project/Querys/useGetFlatProjects";
 
 interface ProjectsProps {}
 
 const Projects: React.FC<ProjectsProps> = (props) => {
   const { t } = useTranslation();
   const { user } = useUser();
-  const { flatProjectsQuery: userFlatProjectsQuery } = useFlatProjectQuerys();
+  const _flatProjects = useGetFlatProjects();
   const adminFlatProjectsQuery = useGetAdminFlatProjects();
   const flatProjectsQuery =
-    user.usertype === UserType.ADMIN
-      ? adminFlatProjectsQuery
-      : userFlatProjectsQuery;
+    user.usertype === UserType.ADMIN ? adminFlatProjectsQuery : _flatProjects;
   const { createProject, deleteProject } = useProject();
   const { filterDataBySearchInput, handleSearchInputChange } =
-    useSearch<FlatProjectProps>();
+    useSearch<FlatProject>();
 
   const [selectedProjects, setSelectedProjects] = React.useState<string[]>([]);
 
@@ -47,8 +45,8 @@ const Projects: React.FC<ProjectsProps> = (props) => {
   };
 
   const sortProjectByUpdatedDate = (
-    project1: FlatProjectProps,
-    project2: FlatProjectProps
+    project1: FlatProject,
+    project2: FlatProject
   ) => {
     if (project1.updatedWhen > project2.updatedWhen) {
       return 1;

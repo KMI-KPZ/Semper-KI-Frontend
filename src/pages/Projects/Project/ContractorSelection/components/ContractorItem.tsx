@@ -5,13 +5,13 @@ import { twMerge } from "tailwind-merge";
 import ProcessInfoCard from "../../components/ProcessInfoCard";
 import { Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
-import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
+import { Process } from "@/pages/Projects/hooks/useProcess";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { ContractorSelectionFormData } from "../ContractorSelection";
-import useContractorsQuerys from "../../../../../api/Project/useContractorQuerys";
+import useGetContractors from "@/api/Project/Querys/useGetContractors";
 
 interface ProjectContractorSelectionItemProps {
-  process: ProcessProps;
+  process: Process;
   index: number;
   register: UseFormRegister<ContractorSelectionFormData>;
   errors: FieldErrors<ContractorSelectionFormData>;
@@ -23,7 +23,7 @@ const ProjectContractorSelectionItem: React.FC<
   const { register, errors, index, process } = props;
   const { t } = useTranslation();
   const { checkedProcesses } = useCheckedProcesses();
-  const { contractorsQuery } = useContractorsQuerys(process.processID);
+  const contractors = useGetContractors(process.processID);
 
   return (
     <div
@@ -45,9 +45,8 @@ const ProjectContractorSelectionItem: React.FC<
             "Projects.Project.ContractorSelection.ContractorSelection.contractor"
           )}
         </Heading>
-        {contractorsQuery.data !== undefined &&
-        contractorsQuery.data.length > 0 ? (
-          contractorsQuery.data.map((manufacturer, _index) => (
+        {contractors.data !== undefined && contractors.data.length > 0 ? (
+          contractors.data.map((manufacturer, _index) => (
             <label
               className="flex w-full flex-row items-center justify-center gap-10 p-3 shadow-card"
               key={_index}

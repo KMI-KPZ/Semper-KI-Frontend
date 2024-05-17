@@ -6,11 +6,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { ServiceType } from "../../hooks/useService";
 import { useTranslation } from "react-i18next";
-import useProcess, { ProcessProps } from "@/pages/Projects/hooks/useProcess";
+import useProcess, { Process } from "@/pages/Projects/hooks/useProcess";
 import { TFunction } from "i18next";
 
 interface Props {
-  process: ProcessProps;
+  process: Process;
 }
 
 interface State {
@@ -19,7 +19,7 @@ interface State {
 }
 
 export const getTitleFromProcess = (
-  process: ProcessProps,
+  process: Process,
   t: TFunction<"translation", undefined>
 ): string => {
   return process.processDetails.title !== undefined

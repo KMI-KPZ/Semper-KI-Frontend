@@ -5,11 +5,11 @@ import { useTranslation } from "react-i18next";
 import { ServiceType } from "@/pages/Service/hooks/useService";
 import { UseFormRegister } from "react-hook-form";
 import { CheckoutFormData } from "../Checkout";
-import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
+import { Process } from "@/pages/Projects/hooks/useProcess";
 
 type Props = {
   index: number;
-  process: ProcessProps;
+  process: Process;
   register: UseFormRegister<CheckoutFormData>;
 };
 

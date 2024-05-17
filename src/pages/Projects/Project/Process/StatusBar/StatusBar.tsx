@@ -10,7 +10,7 @@ import StatusItemConnector from "./components/ItemConnector";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import { ServiceType } from "@/pages/Service/hooks/useService";
-import { ProcessProps, ProcessStatus } from "@/pages/Projects/hooks/useProcess";
+import { Process, ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import DescriptionIcon from "@mui/icons-material/Description";
 import ModeIcon from "@mui/icons-material/Mode";
 import useEvents from "@/hooks/useEvents/useEvents";

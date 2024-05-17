@@ -2,10 +2,9 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { getProjectFiles } from "@/api/Project/useProjectQuerys";
-import { ProjectProps } from "@/pages/Projects/hooks/useProject";
 import useUser, { UserType } from "@/hooks/useUser";
-import { ProcessProps } from "@/pages/Projects/hooks/useProcess";
+import { Process } from "@/pages/Projects/hooks/useProcess";
+import { Project, getProjectFiles } from "@/api/Project/Querys/useGetProject";
 
 const useGetAdminProject = () => {
   const queryClient = useQueryClient();
@@ -18,7 +17,7 @@ const useGetAdminProject = () => {
       )
       .then((response) => {
         const responseData = response.data;
-        const project: ProjectProps = {
+        const project: Project = {
           client: responseData.client,
           projectID: responseData.projectID,
           projectStatus: responseData.status,
@@ -26,7 +25,7 @@ const useGetAdminProject = () => {
           createdWhen: new Date(responseData.createdWhen),
           updatedWhen: new Date(responseData.updatedWhen),
           processes: responseData.processes.map(
-            (process: any): ProcessProps => ({
+            (process: any): Process => ({
               client: process.client,
               processDetails: process.processDetails,
               processID: process.processID,
@@ -47,7 +46,7 @@ const useGetAdminProject = () => {
         return project;
       });
 
-  return useQuery<ProjectProps, Error>({
+  return useQuery<Project, Error>({
     queryKey: ["admin", "project", projectID],
     queryFn: getSpecificProject,
     enabled: projectID !== undefined && user.usertype === UserType.ADMIN,

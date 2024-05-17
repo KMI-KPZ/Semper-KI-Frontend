@@ -1,4 +1,3 @@
-import { FlatProjectProps } from "@/api/Project/useFlatProjectQuerys";
 import { Container } from "@component-library/index";
 import { Text } from "@component-library/index";
 import React from "react";
@@ -12,9 +11,10 @@ import { useProject } from "../hooks/useProject";
 import logger from "@/hooks/useLogger";
 import { Badge } from "@component-library/Badge/Badge";
 import useEvents from "@/hooks/useEvents/useEvents";
+import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 
 interface ProjectsCardProps {
-  flatProject: FlatProjectProps;
+  flatProject: FlatProject;
   selectedProjects: string[];
   setSelectedProjects: React.Dispatch<React.SetStateAction<string[]>>;
 }

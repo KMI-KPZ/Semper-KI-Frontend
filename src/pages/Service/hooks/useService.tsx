@@ -6,14 +6,14 @@ import {
 } from "../Manufacturing/types/types";
 import logger from "@/hooks/useLogger";
 import useProcess, {
-  ProcessProps,
+  Process,
   ProcessStatus,
 } from "@/pages/Projects/hooks/useProcess";
 import { ModelingServiceProps } from "../Modelling/Modelling";
-import { ProjectProps } from "@/pages/Projects/hooks/useProject";
 import { useContext } from "react";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
+import { Project } from "@/api/Project/Querys/useGetProject";
 
 interface ReturnProps {
   isServiceComplete: (
@@ -48,7 +48,7 @@ export interface UpdateServiceUndefinedProps {
 
 interface ServiceQueryProps {
   service: ServiceProps;
-  projectQuery: UseQueryResult<ProjectProps, Error>;
+  projectQuery: UseQueryResult<Project, Error>;
 }
 
 const useService = (): ReturnProps => {

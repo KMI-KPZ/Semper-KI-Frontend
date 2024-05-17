@@ -7,7 +7,7 @@ import { Divider } from "@component-library/index";
 import useProcess, {
   FileProps,
   FilesDescriptionProps,
-  ProcessProps,
+  Process,
 } from "@/pages/Projects/hooks/useProcess";
 import { Container } from "@component-library/index";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -18,7 +18,7 @@ import useDownloadFiles from "@/api/Process/Mutations/useDownloadFiles";
 import useDeleteFile from "@/api/Process/Mutations/useDeleteFile";
 
 interface Props {
-  process: ProcessProps;
+  process: Process;
   projectID: string;
 }
 

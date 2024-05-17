@@ -1,5 +1,4 @@
 import { MutateOptions, UseQueryResult } from "@tanstack/react-query";
-import { ProjectProps } from "./useProject";
 import {
   ServiceProps,
   GerneralUpdateServiceProps,
@@ -27,9 +26,10 @@ import useStatusButtonRequest from "@/api/Process/Mutations/useStatusButtonReque
 import useDeleteFile from "@/api/Process/Mutations/useDeleteFile";
 import useDeleteModel from "@/api/Process/Mutations/useDeleteModel";
 import useCreateProcess from "@/api/Process/Mutations/useCreateProcess";
+import { Project } from "@/api/Project/Querys/useGetProject";
 
 interface ReturnProps {
-  process: ProcessProps;
+  process: Process;
   createProcess: () => void;
   updateProcess: (
     updates: UpdateProcessProps,
@@ -58,7 +58,7 @@ export interface ProcessDetailsProps {
   amount: number;
 }
 
-export type ProcessProps =
+export type Process =
   | NoServiceProcessProps
   | ManufactoringProcessProps
   | ModelingProcessProps;
@@ -193,11 +193,11 @@ export enum ProcessStatus {
 }
 
 interface ProcessQueryProps {
-  process: ProcessProps | undefined;
-  query: UseQueryResult<ProjectProps, Error>;
+  process: Process | undefined;
+  query: UseQueryResult<Project, Error>;
 }
 
-export const isProcessAtServiceStatus = (process: ProcessProps): boolean => {
+export const isProcessAtServiceStatus = (process: Process): boolean => {
   return (
     process.processStatus >= ProcessStatus.SERVICE_READY &&
     process.processStatus <= ProcessStatus.SERVICE_COMPLICATION

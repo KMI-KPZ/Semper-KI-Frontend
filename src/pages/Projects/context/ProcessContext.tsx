@@ -1,15 +1,15 @@
 import React, { useDebugValue } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Outlet, useParams } from "react-router-dom";
-import useProcess, { ProcessProps } from "../hooks/useProcess";
 import logger from "@/hooks/useLogger";
 import { LoadingAnimation } from "@component-library/index";
 import { useProject } from "../hooks/useProject";
+import { Process } from "../hooks/useProcess";
 
 interface ProcessContextProviderProps {}
 
 export interface ProcessContextProps {
-  process: ProcessProps;
+  process: Process;
 }
 
 export const ProcessContext = React.createContext<ProcessContextProps>({

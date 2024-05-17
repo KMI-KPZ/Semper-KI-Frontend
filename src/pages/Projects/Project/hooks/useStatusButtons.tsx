@@ -1,8 +1,5 @@
 import { ReactNode } from "react";
-import useProcess, {
-  ProcessProps,
-  ProcessStatus,
-} from "../../hooks/useProcess";
+import useProcess, { Process, ProcessStatus } from "../../hooks/useProcess";
 import useUser, { UserType } from "@/hooks/useUser";
 import { useNavigate } from "react-router-dom";
 import useCheckedProcesses from "./useCheckedProcesses";
@@ -34,10 +31,8 @@ import useDeleteProcess from "@/api/Process/Mutations/useDeleteProcess";
 import useStatusButtonRequest from "@/api/Process/Mutations/useStatusButtonRequest";
 
 interface UseStatusButtonsReturnProps {
-  getProjectStatusButtons: (
-    processes: ProcessProps[]
-  ) => StatusButtonProcessProps[];
-  getProcessStatusButtons: (process: ProcessProps) => StatusButtonProps[];
+  getProjectStatusButtons: (processes: Process[]) => StatusButtonProcessProps[];
+  getProcessStatusButtons: (process: Process) => StatusButtonProps[];
   handleOnClickButtonCount: (button: StatusButtonProcessProps) => void;
   handleOnClickButton: (button: StatusButtonProps, processID: string) => void;
 }
@@ -122,7 +117,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   const statusButtonRequest = useStatusButtonRequest();
 
   const getStatusButtons = (
-    process: ProcessProps,
+    process: Process,
     showIn: StatusButtonShowInType
   ): StatusButtonProps[] => {
     if (process.processStatusButtons !== undefined) {
@@ -220,7 +215,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   };
 
   const filterButtonByUser = (
-    process: ProcessProps,
+    process: Process,
     button: StatusButtonProps
   ): boolean => {
     if (button.user === undefined) return true;
@@ -248,7 +243,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   };
 
   const filterButtonByStatus = (
-    process: ProcessProps,
+    process: Process,
     button: StatusButtonProps
   ): boolean => {
     return button.allowedStates === undefined
@@ -264,7 +259,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   };
 
   const filterLocalButtons = (
-    process: ProcessProps,
+    process: Process,
     buttons: StatusButtonProps[],
     showIn: StatusButtonShowInType
   ): StatusButtonProps[] => {
@@ -282,14 +277,12 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
     return buttons.filter((button) => filterButtonByShowIn(button, showIn));
   };
 
-  const getProcessStatusButtons = (
-    process: ProcessProps
-  ): StatusButtonProps[] => {
+  const getProcessStatusButtons = (process: Process): StatusButtonProps[] => {
     return getStatusButtons(process, "process");
   };
 
   const getProjectStatusButtons = (
-    processes: ProcessProps[]
+    processes: Process[]
   ): StatusButtonProcessProps[] => {
     const buttonGroups = processes.map((process) => ({
       process,
@@ -384,7 +377,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
               send: false,
             });
           } else if (button.action.data.localTestDataStatus === "REQUESTED") {
-            sendProject({ processIDs });
+            sendProject(processIDs);
           } else {
             const processStatusString = button.action.data
               .localTestDataStatus as string;

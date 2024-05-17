@@ -6,13 +6,15 @@ import { Modal } from "@component-library/index";
 import { Text } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ManufactoringProcessProps } from "@/pages/Projects/hooks/useProcess";
-import useGeneralProcess, {
+import {
+  ManufactoringProcessProps,
   isProcessAtServiceStatus,
-} from "@/pages/Projects/hooks/useGeneralProcess";
+} from "@/pages/Projects/hooks/useProcess";
 import Card from "@component-library/Card/Card";
 import { useNavigate } from "react-router-dom";
 import ModelDetails from "./ModelDetails";
+import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 
 interface ProcessServiceManufacturingProps {
   process: ManufactoringProcessProps;
@@ -25,7 +27,8 @@ const ProcessServiceManufacturing: React.FC<
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [open, setOpen] = useState<boolean>(false);
-  const { getNavigationPrefix, updateProcess } = useGeneralProcess();
+  const { getNavigationPrefix } = useGeneralProcess();
+  const updateProcess = useUpdateProcess();
 
   const closeModal = () => {
     setOpen(false);
@@ -42,7 +45,7 @@ const ProcessServiceManufacturing: React.FC<
     const inputNumber = Math.max(isNaN(inputValue) ? 1 : inputValue, 1);
 
     if (process.processDetails.amount !== inputNumber)
-      updateProcess({
+      updateProcess.mutate({
         processIDs: [process.processID],
         updates: {
           changes: {

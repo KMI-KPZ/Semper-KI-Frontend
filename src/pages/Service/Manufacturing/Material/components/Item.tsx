@@ -3,8 +3,9 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/index";
 import { MaterialProps } from "../Material";
 import { Heading } from "@component-library/index";
-import useProcess from "@/pages/Projects/hooks/useProcess";
-import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
+import useProcess, {
+  isProcessAtServiceStatus,
+} from "@/pages/Projects/hooks/useProcess";
 
 interface Props {
   material: MaterialProps;

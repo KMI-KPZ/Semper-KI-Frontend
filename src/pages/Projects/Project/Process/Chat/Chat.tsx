@@ -8,11 +8,11 @@ import logger from "@/hooks/useLogger";
 import useProcess, {
   ChatMessageProps,
 } from "@/pages/Projects/hooks/useProcess";
-import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "@component-library/index";
 import { useProject } from "@/pages/Projects/hooks/useProject";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 
 interface ProcessChatProps {}
 
@@ -28,7 +28,7 @@ const ProcessChat: React.FC<ProcessChatProps> = (props) => {
   const { user } = useAuthorizedUser();
   const [state, setState] = useState<State>({});
   const { height, messageText } = state;
-  const { updateProcess } = useGeneralProcess();
+  const updateProcess = useUpdateProcess();
   const navigate = useNavigate();
 
   const handleOnChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -41,7 +41,7 @@ const ProcessChat: React.FC<ProcessChatProps> = (props) => {
 
   const handleOnClickButtonSend = () => {
     if (messageText !== undefined && messageText !== "")
-      updateProcess(
+      updateProcess.mutate(
         {
           processIDs: [process.processID],
           updates: {

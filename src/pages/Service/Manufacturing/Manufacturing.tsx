@@ -17,8 +17,10 @@ import {
 import { Error } from "@/pages/Error/Error";
 import { ServiceContext } from "../context/ServiceContext";
 import useFilter from "@/hooks/useFilter";
-import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
-import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
+import useProcess, {
+  ProcessStatus,
+  isProcessAtServiceStatus,
+} from "@/pages/Projects/hooks/useProcess";
 
 interface Props {}
 

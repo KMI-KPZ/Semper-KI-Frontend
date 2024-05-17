@@ -10,8 +10,8 @@ import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import { ProcessProps, ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import logger from "@/hooks/useLogger";
 import useServiceQuerys from "@/api/Service/useServiceQuerys";
-import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 import Card from "@component-library/Card/Card";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 
 interface ProcessServiceSelectProps {
   process: ProcessProps;
@@ -21,7 +21,7 @@ const ProcessServiceSelect: React.FC<ProcessServiceSelectProps> = (props) => {
   const { process } = props;
   const { t } = useTranslation();
   const { servicesQuery } = useServiceQuerys();
-  const { updateProcess } = useGeneralProcess();
+  const updateProcess = useUpdateProcess();
 
   const getIcon = (serviceType: ServiceType) => {
     switch (serviceType) {
@@ -39,7 +39,7 @@ const ProcessServiceSelect: React.FC<ProcessServiceSelectProps> = (props) => {
     serviceType: ServiceType
   ) => {
     e.preventDefault();
-    updateProcess({
+    updateProcess.mutate({
       processIDs: [process.processID],
       updates: {
         changes: {

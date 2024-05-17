@@ -9,11 +9,13 @@ import { LoadingSuspense } from "@component-library/index";
 import { FilterItemProps } from "../Filter/Filter";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
-import useProcess, { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
+import useProcess, {
+  ProcessStatus,
+  isProcessAtServiceStatus,
+} from "@/pages/Projects/hooks/useProcess";
 import useService from "../../hooks/useService";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import { useManufacturingPostProcessingQuerys } from "@/api/Service/Manufacturing/useManufacturingQuerys";
-import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
 import useModal from "@/hooks/useModal";
 
 interface Props {

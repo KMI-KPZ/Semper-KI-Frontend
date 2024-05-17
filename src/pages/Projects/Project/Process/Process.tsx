@@ -9,8 +9,6 @@ import { Modal } from "@component-library/index";
 import ProcessServicePreview from "./ServicePreview/ServicePreview";
 import { Divider } from "@component-library/index";
 import ProcessButtons from "./components/Buttons";
-import EditIcon from "@mui/icons-material/Edit";
-import CheckIcon from "@mui/icons-material/Check";
 import ProcessInfo from "./components/Info";
 import { Container } from "@component-library/index";
 import ProjectTitleForm from "../components/TitleForm";
@@ -18,20 +16,16 @@ import useProcess, {
   ProcessProps,
   ProcessStatus,
 } from "../../hooks/useProcess";
-import { ProcessEventItem, ProjectEventItem } from "@/pages/App/types";
 import { getTitleFromProcess } from "@/pages/Service/Overview/components/Item";
 import ProjectFile from "./components/ProcessFile";
 import ProcessStatusButtons from "./components/StatusButtons";
 import { Upload } from "@/components/Upload";
-import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
-import { UserContext } from "@/contexts/UserContextProvider";
+import useUser from "@/hooks/useUser";
 import useCheckedProcesses from "../hooks/useCheckedProcesses";
-import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
-import useGeneralProcess from "../../hooks/useGeneralProcess";
-import logger from "@/hooks/useLogger";
 import useEvents from "@/hooks/useEvents/useEvents";
-import AddressForm from "@/components/Form/AddressForm";
 import ProcessAddress from "./components/Address";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import useUploadFiles from "@/api/Process/Mutations/useUploadFiles";
 
 interface Props {
   process: ProcessProps;
@@ -57,7 +51,8 @@ const Process: React.FC<Props> = (props) => {
     statusCountReset: false,
   });
   const { handleOnChangeCheckboxSelect } = useCheckedProcesses();
-  const { updateProcess, uploadFiles } = useGeneralProcess();
+  const updateProcess = useUpdateProcess();
+  const uploadFiles = useUploadFiles();
   const { deleteEvent, getProcessEventItem } = useEvents();
 
   const updateStatus = (status: ProcessStatus) => {
@@ -69,7 +64,7 @@ const Process: React.FC<Props> = (props) => {
   };
 
   const updateProcessTitle = (title: string) => {
-    updateProcess({
+    updateProcess.mutate({
       processIDs: [process.processID],
       updates: {
         changes: { processDetails: { title: title } },
@@ -85,7 +80,7 @@ const Process: React.FC<Props> = (props) => {
   };
 
   const uploadFilesMutation = (files: File[]) => {
-    uploadFiles({
+    uploadFiles.mutate({
       processID: process.processID,
       files: files,
     });

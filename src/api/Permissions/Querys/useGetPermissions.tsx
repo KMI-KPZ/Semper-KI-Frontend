@@ -17,9 +17,7 @@ const useGetPermissions = () => {
       .get(`${process.env.VITE_HTTP_API_URL}/public/getPermissions/`)
       .then((response) => {
         const responseData = response.data;
-        const permissions: Permission[] = {
-          ...responseData,
-        };
+        const permissions: Permission[] = responseData;
 
         logger("useGetPermissions | getPermissions ✅ |", response);
         return permissions;

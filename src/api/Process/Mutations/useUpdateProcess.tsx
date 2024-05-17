@@ -17,7 +17,7 @@ const useUpdateProcess = () => {
     updates,
   }: UpdateProcessMutationProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
+      .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProcess/`, {
         projectID,
         processIDs,
         changes: updates.changes,

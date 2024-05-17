@@ -7,7 +7,6 @@ import useUser, { UserType } from "@/hooks/useUser";
 import { useNavigate } from "react-router-dom";
 import useCheckedProcesses from "./useCheckedProcesses";
 import { useProject } from "../../hooks/useProject";
-import useGeneralProcess from "../../hooks/useGeneralProcess";
 import { useTranslation } from "react-i18next";
 import logger from "@/hooks/useLogger";
 import { externalStatusButtonData } from "./externalStatusButtonData";
@@ -30,6 +29,9 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { ServiceType } from "@/pages/Service/hooks/useService";
 import ReportIcon from "@mui/icons-material/Report";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import useDeleteProcess from "@/api/Process/Mutations/useDeleteProcess";
+import useStatusButtonRequest from "@/api/Process/Mutations/useStatusButtonRequest";
 
 interface UseStatusButtonsReturnProps {
   getProjectStatusButtons: (
@@ -115,8 +117,9 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   const navigate = useNavigate();
   const { setCheckedProcesses } = useCheckedProcesses();
   const { project, sendProject, verifyProject } = useProject();
-  const { updateProcess, deleteProcess, statusButtonRequest } =
-    useGeneralProcess();
+  const updateProcess = useUpdateProcess();
+  const deleteProcess = useDeleteProcess();
+  const statusButtonRequest = useStatusButtonRequest();
 
   const getStatusButtons = (
     process: ProcessProps,
@@ -316,7 +319,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   };
 
   const updateProcessStatus = (status: ProcessStatus, processIDs: string[]) => {
-    updateProcess({
+    updateProcess.mutate({
       processIDs,
       updates: {
         changes: {
@@ -357,13 +360,16 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
       case "function":
         switch (button.action.function.type) {
           case "deleteProcess":
-            deleteProcess({ processIDs });
+            deleteProcess.mutate({ processIDs });
             break;
         }
         break;
       case "request":
         if (button.action.data.localTestDataStatus === undefined) {
-          statusButtonRequest({ processIDs, button: button.action.data });
+          statusButtonRequest.mutate({
+            processIDs,
+            button: button.action.data,
+          });
         } else {
           if (
             button.action.data.localTestDataStatus === "VERIFYING_AND_REQUESTED"

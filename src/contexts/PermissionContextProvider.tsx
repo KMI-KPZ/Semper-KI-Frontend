@@ -7,6 +7,7 @@ import useGetPermissions, {
 import useGetPermissionGates, {
   PermissionGateType,
 } from "@/api/Permissions/Querys/useGetPermissionGates";
+import logger from "@/hooks/useLogger";
 
 interface PermissionContextProviderProps {}
 

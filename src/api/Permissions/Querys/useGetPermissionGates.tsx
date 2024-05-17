@@ -17,11 +17,13 @@ const useGetPermissionGates = () => {
       .get(`${process.env.VITE_HTTP_API_URL}/public/getPermissionMask/`)
       .then((response) => {
         const responseData = response.data;
-        const permissionGates: PermissionGateType[] = {
-          ...responseData,
-        };
+        const permissionGates: PermissionGateType[] = responseData.Rights;
 
-        logger("useGetPermissionGates | getPermissionGates ✅ |", response);
+        logger(
+          "useGetPermissionGates | getPermissionGates ✅ |",
+          response,
+          permissionGates
+        );
         return permissionGates;
       });
 

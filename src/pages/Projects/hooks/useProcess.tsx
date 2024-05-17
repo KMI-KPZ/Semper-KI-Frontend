@@ -10,13 +10,23 @@ import { ManufacturingServiceProps } from "@/pages/Service/Manufacturing/types/t
 import { ModelingServiceProps } from "@/pages/Service/Modelling/Modelling";
 import { ProcessContext } from "../context/ProcessContext";
 import useGeneralProcess from "./useGeneralProcess";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UserAddressProps } from "@/hooks/useUser";
 import {
   StatusButtonActionRequestProps,
   StatusButtonPropsExtern,
 } from "../Project/hooks/useStatusButtons";
-import { UpdateProcessMutationProps } from "@/api/Process/Mutations/useUpdateProcess";
+import useUpdateProcess, {
+  UpdateProcessMutationProps,
+} from "@/api/Process/Mutations/useUpdateProcess";
+import useDownloadFiles from "@/api/Process/Mutations/useDownloadFiles";
+import useDownloadFile from "@/api/Process/Mutations/useDownloadFile";
+import useUploadFiles from "@/api/Process/Mutations/useUploadFiles";
+import useDeleteProcess from "@/api/Process/Mutations/useDeleteProcess";
+import useStatusButtonRequest from "@/api/Process/Mutations/useStatusButtonRequest";
+import useDeleteFile from "@/api/Process/Mutations/useDeleteFile";
+import useDeleteModel from "@/api/Process/Mutations/useDeleteModel";
+import useCreateProcess from "@/api/Process/Mutations/useCreateProcess";
 
 interface ReturnProps {
   process: ProcessProps;
@@ -187,27 +197,36 @@ interface ProcessQueryProps {
   query: UseQueryResult<ProjectProps, Error>;
 }
 
+export const isProcessAtServiceStatus = (process: ProcessProps): boolean => {
+  return (
+    process.processStatus >= ProcessStatus.SERVICE_READY &&
+    process.processStatus <= ProcessStatus.SERVICE_COMPLICATION
+  );
+};
+
 const useProcess = (): ReturnProps => {
   const { process } = useContext(ProcessContext);
   const navigate = useNavigate();
-  const {
-    createProcess,
-    updateProcess: _updateProcess,
-    deleteProcess: _deleteProcess,
-    uploadFiles: _uploadFiles,
-    downloadFile: _downloadFile,
-    downloadZIP: _downloadZIP,
-    deleteFile: _deleteFile,
-    getNavigationPrefix: _getNavigationPrefix,
-    deleteModel: _deleteModel,
-    statusButtonRequest: _statusButtonRequest,
-  } = useGeneralProcess();
+  const { getNavigationPrefix: _getNavigationPrefix } = useGeneralProcess();
+  const _updateProcess = useUpdateProcess();
+  const _deleteProcess = useDeleteProcess();
+  const _uploadFiles = useUploadFiles();
+  const _downloadFile = useDownloadFile();
+  const _downloadFiles = useDownloadFiles();
+  const _deleteFile = useDeleteFile();
+  const _deleteModel = useDeleteModel();
+  const _statusButtonRequest = useStatusButtonRequest();
+  const _createProcess = useCreateProcess();
+
+  const createProcess = () => {
+    _createProcess.mutate();
+  };
 
   const updateProcess = (
     updates: UpdateProcessProps,
     options?: MutateOptions<string, Error, UpdateProcessMutationProps, unknown>
   ) => {
-    _updateProcess(
+    _updateProcess.mutate(
       {
         processIDs: [process.processID],
         updates,
@@ -217,11 +236,11 @@ const useProcess = (): ReturnProps => {
   };
 
   const deleteProcess = () => {
-    _deleteProcess({ processIDs: [process.processID] });
+    _deleteProcess.mutate({ processIDs: [process.processID] });
   };
 
   const uploadFiles = (files: File[]) => {
-    _uploadFiles({
+    _uploadFiles.mutate({
       processID: process.processID,
       files,
     });
@@ -231,18 +250,18 @@ const useProcess = (): ReturnProps => {
     fileID: string,
     options?: MutateOptions<Blob, Error, DownloadFileProps, unknown>
   ) => {
-    _downloadFile({ processID: process.processID, fileID }, options);
+    _downloadFile.mutate({ processID: process.processID, fileID }, options);
   };
 
   const downloadZIP = (
     fileIDs: string[],
     options?: MutateOptions<Blob, Error, DownloadFilesZIPProps, unknown>
   ) => {
-    _downloadZIP({ processID: process.processID, fileIDs }, options);
+    _downloadFiles.mutate({ processID: process.processID, fileIDs }, options);
   };
 
   const deleteFile = (fileID: string) => {
-    _deleteFile({ processID: process.processID, fileID });
+    _deleteFile.mutate({ processID: process.processID, fileID });
   };
 
   const getNavigationPrefix = (): string => {
@@ -250,17 +269,17 @@ const useProcess = (): ReturnProps => {
   };
 
   const deleteModel = () => {
-    _deleteModel({ processID: process.processID });
+    _deleteModel.mutate({ processID: process.processID });
   };
 
   const statusButtonRequest = (button: StatusButtonActionRequestProps) => {
-    _statusButtonRequest({ processIDs: [process.processID], button });
+    _statusButtonRequest.mutate({ processIDs: [process.processID], button });
   };
 
   return {
+    process,
     statusButtonRequest,
     getNavigationPrefix,
-    process,
     createProcess,
     deleteFile,
     deleteProcess,

@@ -4,8 +4,9 @@ import { Button } from "@component-library/index";
 import { getModelURI } from "@/services/utils";
 import { ModelProps } from "../types";
 import { Heading } from "@component-library/index";
-import useProcess from "@/pages/Projects/hooks/useProcess";
-import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
+import useProcess, {
+  isProcessAtServiceStatus,
+} from "@/pages/Projects/hooks/useProcess";
 
 interface Props {
   model: ModelProps;

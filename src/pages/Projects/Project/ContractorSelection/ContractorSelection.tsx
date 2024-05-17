@@ -18,7 +18,6 @@ import ProcessInfoCard from "../components/ProcessInfoCard";
 import { Container } from "@component-library/index";
 import useCheckedProcesses from "../hooks/useCheckedProcesses";
 import { twMerge } from "tailwind-merge";
-import useGeneralProcess from "../../hooks/useGeneralProcess";
 import ProjectContractorSelectionItem from "./components/ContractorItem";
 import logger from "@/hooks/useLogger";
 import AddressForm from "@/components/Form/AddressForm";
@@ -26,6 +25,7 @@ import { Modal } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { UserAddressProps } from "@/hooks/useUser";
 import AddressCard from "@/components/Address/AddressCard";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 
 interface Props {}
 
@@ -43,7 +43,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { isServiceComplete } = useService();
   const { user } = useAuthorizedUser();
-  const { updateProcess } = useGeneralProcess();
+  const updateProcess = useUpdateProcess();
 
   const [edit, setEdit] = useState(false);
   const [deliverAddress, setDeliverAddress] = useState(
@@ -81,7 +81,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
     data.processes
       .filter((process) => checkedProcesses.includes(process.process.processID))
       .forEach((process, index, allProcesses) => {
-        updateProcess({
+        updateProcess.mutate({
           processIDs: [process.process.processID],
           updates: {
             changes: {

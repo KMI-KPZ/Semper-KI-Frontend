@@ -16,12 +16,11 @@ import useProcess, {
   ProcessStatus,
 } from "@/pages/Projects/hooks/useProcess";
 import { ProcessComponentState } from "../Process";
-import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 import useEvents from "@/hooks/useEvents/useEvents";
-import { EventContext } from "@/contexts/EventContextProvider";
-import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 import HistoryIcon from "@mui/icons-material/History";
 import { useNavigate, useParams } from "react-router-dom";
+import useDeleteProcess from "@/api/Process/Mutations/useDeleteProcess";
+import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 
 interface ProcessButtonsProps {
   user: UserProps;
@@ -35,7 +34,8 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
   const { projectID, process, user, updateStatus, setState } = props;
   const { t } = useTranslation();
   const { deleteEvent, getProcessEventItemCount } = useEvents();
-  const { deleteProcess, getNavigationPrefix } = useGeneralProcess();
+  const { getNavigationPrefix } = useGeneralProcess();
+  const deleteProcess = useDeleteProcess();
   const navigate = useNavigate();
 
   const shouldRenderFor = (type: "CLIENT" | "CONTRACTOR"): boolean => {
@@ -59,7 +59,7 @@ const ProcessButtons: React.FC<ProcessButtonsProps> = (props) => {
         t("Projects.Project.Process.components.Buttons.confirm.cancel")
       )
     ) {
-      deleteProcess({ processIDs: [process.processID] });
+      deleteProcess.mutate({ processIDs: [process.processID] });
     }
   };
   const handleOnClickButtonReProject = () => {

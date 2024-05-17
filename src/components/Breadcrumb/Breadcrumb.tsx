@@ -190,6 +190,7 @@ export const Breadcrumb: React.FC<Props> = () => {
         ? items.map((item: BreadcrumbItem, index: number) =>
             index === 0 ? (
               <Button
+                key={index}
                 size="sm"
                 variant="breadcrumb"
                 title={

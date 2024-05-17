@@ -12,8 +12,10 @@ import useProcess, {
 import { Container } from "@component-library/index";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { createDownload } from "@/services/utils";
-import useGeneralProcess from "@/pages/Projects/hooks/useGeneralProcess";
 import OwnerGate from "@/components/OwnerGate/OwnerGate";
+import useDownloadFile from "@/api/Process/Mutations/useDownloadFile";
+import useDownloadFiles from "@/api/Process/Mutations/useDownloadFiles";
+import useDeleteFile from "@/api/Process/Mutations/useDeleteFile";
 
 interface Props {
   process: ProcessProps;
@@ -27,15 +29,17 @@ const ProjectFile: React.FC<Props> = (props) => {
   const [downloadFilesZIPIsLoading, setDownloadFilesZIPIsLoading] =
     useState<boolean>(false);
 
-  const { downloadFile, downloadZIP, deleteFile } = useGeneralProcess();
+  const downloadFile = useDownloadFile();
+  const downloadFiles = useDownloadFiles();
+  const deleteFile = useDeleteFile();
 
   const handleOnClickButtonDelete = (file: FileProps) => {
-    deleteFile({ processID: process.processID, fileID: file.id });
+    deleteFile.mutate({ processID: process.processID, fileID: file.id });
   };
 
   const handleOnClickButtonDownloadFile = (file: FileProps) => {
     setLoadingFileID(file.id);
-    downloadFile(
+    downloadFile.mutate(
       { processID: process.processID, fileID: file.id },
       {
         onSettled(data) {
@@ -49,7 +53,7 @@ const ProjectFile: React.FC<Props> = (props) => {
   };
   const handleOnClickButtonDownloadZip = () => {
     setDownloadFilesZIPIsLoading(true);
-    downloadZIP(
+    downloadFiles.mutate(
       {
         processID: process.processID,
         fileIDs: process.files.map((file) => file.id),

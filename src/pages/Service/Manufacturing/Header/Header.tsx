@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
-import { ServiceManufacturingContext } from "../Manufacturing";
+import React from "react";
 import ProcessHeaderSearch from "./Search/Search";
 import { ServiceManufacturingWizard } from "./Wizard/Wizard";
-import { Heading } from "@component-library/index";
-import { useLocation } from "react-router-dom";
-import useProcess from "@/pages/Projects/hooks/useProcess";
-import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
+import useProcess, {
+  isProcessAtServiceStatus,
+} from "@/pages/Projects/hooks/useProcess";
 
 const ProcessHeader: React.FC = () => {
   const { process } = useProcess();

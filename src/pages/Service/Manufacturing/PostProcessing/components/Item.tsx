@@ -6,8 +6,9 @@ import {
 } from "../PostProcessing";
 import { Heading } from "@component-library/index";
 import { Button } from "@component-library/index";
-import useProcess from "@/pages/Projects/hooks/useProcess";
-import { isProcessAtServiceStatus } from "@/pages/Projects/hooks/useGeneralProcess";
+import useProcess, {
+  isProcessAtServiceStatus,
+} from "@/pages/Projects/hooks/useProcess";
 
 interface Props<Item> {
   item: Item;

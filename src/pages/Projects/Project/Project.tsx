@@ -22,16 +22,10 @@ import { Modal } from "@component-library/index";
 import useProcess, { ProcessStatus } from "../hooks/useProcess";
 import Process from "./Process/Process";
 import useCheckedProcesses from "./hooks/useCheckedProcesses";
-import {
-  ProjectEvents,
-  ProjectEventItem,
-  ProcessEventItem,
-} from "@/pages/App/types";
 import { ProjectContext } from "../context/ProjectContext";
 import useScrollToProcess from "./hooks/useScrollToProcess";
-import useGeneralProcess from "../hooks/useGeneralProcess";
 import OwnerGate from "@/components/OwnerGate/OwnerGate";
-import AddressForm from "@/components/Form/AddressForm";
+import useCreateProcess from "@/api/Process/Mutations/useCreateProcess";
 
 interface Props {
   adminProject?: ProjectProps;
@@ -51,7 +45,7 @@ const Project: React.FC<Props> = (props) => {
       ? adminProject
       : _project;
   const { deleteProject, updateProject } = useProject();
-  const { createProcess } = useGeneralProcess();
+  const createProcess = useCreateProcess();
   const { checkedProcesses, handleOnChangeCheckboxSelectAll } =
     useCheckedProcesses();
   const [infoOpen, setInfoOpen] = useState<boolean>(false);
@@ -67,7 +61,7 @@ const Project: React.FC<Props> = (props) => {
   };
 
   const onButtonClickCreateProcess = () => {
-    createProcess();
+    createProcess.mutate();
   };
 
   const updateProjectTitle = (title: string) => {

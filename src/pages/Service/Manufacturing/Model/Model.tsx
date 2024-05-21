@@ -14,7 +14,7 @@ import { Modal } from "@component-library/index";
 import { ModelProps } from "./types";
 import { select } from "d3";
 import { ProcessModelUpload } from "./components/Upload/Upload";
-import { useManufacturingModelQuerys } from "@/api/Service/Manufacturing/useManufacturingQuerys";
+import useGetModels from "@/api/Service/Manufacturing/Querys/useGetModels";
 
 interface Props {
   filters: FilterItemProps[];
@@ -36,7 +36,7 @@ export const ProcessModel: React.FC<Props> = (props) => {
     modalOpen: false,
     model: undefined,
   });
-  const { modelsQuery } = useManufacturingModelQuerys(filters);
+  const modelsQuery = useGetModels(filters);
   const openModelView = (model: ModelProps) => {
     setState((prevState) => ({ ...prevState, modalOpen: true, model }));
   };

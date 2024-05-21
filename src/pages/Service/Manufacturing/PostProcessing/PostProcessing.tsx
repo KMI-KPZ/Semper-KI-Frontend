@@ -14,9 +14,8 @@ import useProcess, {
   isProcessAtServiceStatus,
 } from "@/pages/Projects/hooks/useProcess";
 import useService from "../../hooks/useService";
-import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
-import { useManufacturingPostProcessingQuerys } from "@/api/Service/Manufacturing/useManufacturingQuerys";
 import useModal from "@/hooks/useModal";
+import useGetPostProcessigns from "@/api/Service/Manufacturing/Querys/useGetPostProcessigns";
 
 interface Props {
   processState: ServiceManufacturingState;
@@ -44,7 +43,7 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { processState, filters, postProcessings } = props;
   const { grid, searchText } = processState;
-  const { postProcessingQuery } = useManufacturingPostProcessingQuerys(filters);
+  const postProcessingQuery = useGetPostProcessigns(filters);
   const { updatedService } = useService();
   const { process } = useProcess();
 

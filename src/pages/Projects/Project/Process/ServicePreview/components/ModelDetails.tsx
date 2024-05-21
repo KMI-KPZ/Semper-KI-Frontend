@@ -1,5 +1,5 @@
 import useDownloadFile from "@/api/Process/Mutations/useDownloadFile";
-import { useManufacturingModelDetailsQuerys } from "@/api/Service/Manufacturing/useManufacturingQuerys";
+import useGetModelDetails from "@/api/Service/Manufacturing/Querys/useGetModelDetails";
 import {
   FilesDescriptionProps,
   ManufactoringProcessProps,
@@ -24,9 +24,7 @@ const ModelDetails: React.FC<ModelDetailsProps> = (props) => {
   const { t } = useTranslation();
 
   const downloadFile = useDownloadFile();
-  const { modelDetailsQuery } = useManufacturingModelDetailsQuerys(
-    process.processID
-  );
+  const modelDetailsQuery = useGetModelDetails(process.processID);
   const [fileUrl, setFileUrl] = React.useState<string>("");
 
   useEffect(() => {

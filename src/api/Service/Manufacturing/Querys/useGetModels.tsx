@@ -1,0 +1,29 @@
+import logger from "@/hooks/useLogger";
+import { authorizedCustomAxios } from "@/api/customAxios";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
+import { FilterItemProps } from "@/pages/Service/Manufacturing/Filter/Filter";
+
+const useGetModels = (filters: FilterItemProps[]) => {
+  const queryClient = useQueryClient();
+  const getModels = async () =>
+    authorizedCustomAxios
+      .post(`${process.env.VITE_HTTP_API_URL}/public/getModels/`, {
+        filters,
+      })
+      .then((response) => {
+        const models: ModelProps[] = response.data.models;
+
+        logger("useGetModels | getModels ✅ |", response);
+        return models;
+      });
+
+  return useQuery<ModelProps[], Error>({
+    queryKey: ["models"],
+    queryFn: getModels,
+    enabled: false,
+    initialData: [],
+  });
+};
+
+export default useGetModels;

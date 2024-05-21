@@ -7,7 +7,7 @@ import { ProcessMaterialPreView } from "./components/PreView";
 import { ProcessMaterialItem } from "./components/Item";
 import { FilterItemProps } from "../Filter/Filter";
 import { Modal } from "@component-library/index";
-import { useManufacturingMaterialQuerys } from "../../../../api/Service/Manufacturing/useManufacturingQuerys";
+import useGetMaterials from "@/api/Service/Manufacturing/Querys/useGetMaterials";
 
 interface Props {
   processState: ServiceManufacturingState;
@@ -35,7 +35,7 @@ export const ProcessMaterial: React.FC<Props> = (props) => {
     modalOpen: false,
     material: undefined,
   });
-  const { materialsQuery } = useManufacturingMaterialQuerys(filters);
+  const materialsQuery = useGetMaterials(filters);
   const openMaterialView = (material: MaterialProps) => {
     setState((prevState) => ({ ...prevState, modalOpen: true, material }));
   };

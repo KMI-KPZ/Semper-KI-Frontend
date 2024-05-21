@@ -7,11 +7,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import logger from "@/hooks/useLogger";
 import { Button } from "@component-library/index";
-import useManufacturingMutations from "../../../../../../../api/Service/Manufacturing/useManufacturingMutations";
 import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
 import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 import ModelPreview from "@/pages/Test/STLViewer";
 import { StlViewer } from "react-stl-viewer";
+import useUploadModel from "@/api/Service/Manufacturing/Mutations/useUploadModel";
 
 interface ManufacturingModelUploadFormProps {
   file: File;
@@ -22,7 +22,7 @@ const ManufacturingModelUploadForm: React.FC<
 > = (props) => {
   const { file } = props;
   const { t } = useTranslation();
-  const { uploadModelMutation: uploadModel } = useManufacturingMutations();
+  const uploadModel = useUploadModel();
   const { status, error } = uploadModel;
   const { project } = useContext(ProjectContext);
   const { process } = useContext(ProcessContext);
@@ -141,7 +141,7 @@ const ManufacturingModelUploadForm: React.FC<
           />
         </div>
         <Button
-        loading={uploadModel.isLoading}
+          loading={uploadModel.isLoading}
           variant="primary"
           title={t(
             `Service.Manufacturing.Model.Upload.components.Form.button.send`

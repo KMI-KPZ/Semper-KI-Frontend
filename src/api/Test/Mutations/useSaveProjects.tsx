@@ -1,0 +1,27 @@
+import logger from "@/hooks/useLogger";
+import { authorizedCustomAxios } from "@/api/customAxios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+const useSaveProjects = () => {
+  const queryClient = useQueryClient();
+  const saveProjects = async () =>
+    authorizedCustomAxios
+      .get(`${process.env.VITE_HTTP_API_URL}/public/saveProjects/`)
+      .then((response) => {
+        logger("useSaveProjects | saveProjects ✅ |", response);
+        return response.data;
+      })
+      .catch((error) => {
+        logger("useSaveProjects | saveProjects ❌ |", error);
+      });
+
+  return useMutation<string, Error, void>({
+    mutationFn: saveProjects,
+    onSuccess: (data, projectID, context) => {
+      queryClient.invalidateQueries(["project", projectID]);
+      queryClient.invalidateQueries(["flatProjects"]);
+    },
+  });
+};
+
+export default useSaveProjects;

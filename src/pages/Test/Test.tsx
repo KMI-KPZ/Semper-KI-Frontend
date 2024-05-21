@@ -11,10 +11,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import usePermissions from "@/hooks/usePermissions";
 import useEvents from "@/hooks/useEvents/useEvents";
-import useTest, { TestDynamicProps } from "@/api/Test/useTest";
 import logger from "@/hooks/useLogger";
 import ExampleForm from "@/components/Form/ExampleForm";
 import useReloadPermissions from "@/api/Permissions/Mutations/useReloadPermissions";
+import useSaveProjects from "@/api/Test/Mutations/useSaveProjects";
+import useDynamicButtonRequest from "@/api/Test/Mutations/useDynamicButtonRequest";
+import useGetDynamicTestButtons, {
+  TestDynamicProps,
+} from "@/api/Test/Querys/useGetDynamicTestButtons";
 
 interface Props {}
 export const Test: React.FC<Props> = (props) => {
@@ -22,8 +26,10 @@ export const Test: React.FC<Props> = (props) => {
   const [open, setOpen] = useState(false);
   const reloadPermissions = useReloadPermissions();
 
-  const { saveProjectsQuery, testDynamicQuery, dynamicButtonMutation } =
-    useTest();
+  const saveProjects = useSaveProjects();
+  const dynamicButtonRequest = useDynamicButtonRequest();
+  const testDynamicQuery = useGetDynamicTestButtons();
+
   const openMenu = () => {
     setOpen(true);
   };
@@ -34,11 +40,11 @@ export const Test: React.FC<Props> = (props) => {
     socket?.close();
   };
   const handleOnClickButtonSave = () => {
-    saveProjectsQuery.mutate();
+    saveProjects.mutate();
   };
 
   const handleOnButtonClick = (props: TestDynamicProps) => {
-    dynamicButtonMutation.mutate(props);
+    dynamicButtonRequest.mutate(props);
   };
 
   const getButtonIcon = (icon: string): ReactNode => {

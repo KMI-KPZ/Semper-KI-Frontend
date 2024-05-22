@@ -7,6 +7,7 @@ import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 
 export interface FlatProject {
   projectID: string;
+  projectTitle: string;
   client: string;
   projectStatus: ProcessStatus;
   createdWhen: Date;
@@ -55,6 +56,10 @@ const useGetFlatProjects = () => {
             projectDetails: project.projectDetails,
             processesCount: project.processesCount,
             createdWhen: new Date(project.createdWhen),
+            projectTitle:
+              project.projectDetails.title === undefined
+                ? "Projekt ohne Titel"
+                : project.projectDetails.title,
             updatedWhen: new Date(project.updatedWhen),
           })
         );

@@ -6,6 +6,8 @@ import { useProject } from "../hooks/useProject";
 import logger from "@/hooks/useLogger";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useNavigate } from "react-router-dom";
 
 interface ProjectsTableProps {
   projects: FlatProject[];
@@ -15,6 +17,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
   const { projects } = props;
   const { t } = useTranslation();
   const { deleteProject } = useProject();
+  const navigate = useNavigate();
 
   const handleOnClickButtonDelete = (projectID: string) => {
     window.confirm(t("Projects.components.Table.deleteConfirm")) === true
@@ -68,7 +71,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
   }, [projects, sortColumn, sortOrder]);
 
   return (
-    <table className="w-full border-separate border-spacing-x-0 border-spacing-y-4">
+    <table className="w-full border-separate border-spacing-x-0 border-spacing-y-2">
       <thead>
         <tr>
           <th className="">
@@ -151,22 +154,20 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
             <td className="border-b-2 border-t-2 text-center">
               {flatProject.processesCount}
             </td>
-            <td className="rounded-xl rounded-l-none border-2 border-l-0">
-              <div className="flex h-full w-full flex-col items-center justify-center p-2">
-                <Button
-                  title={t("Projects.components.Table.button.detail")}
-                  variant="primary"
-                  size="sm"
-                  to={`${flatProject.projectID}`}
-                />
-                <Button
-                  title={t("Projects.components.Table.button.delete")}
-                  variant="text"
-                  size="sm"
-                  onClick={() =>
-                    handleOnClickButtonDelete(flatProject.projectID)
-                  }
-                />
+            <td className="flex flex-row items-center justify-center gap-5 overflow-clip rounded-xl rounded-l-none border-2 border-l-0 p-0">
+              <Button
+                title={t("Projects.components.Table.button.delete")}
+                variant="text"
+                size="sm"
+                width="full"
+                onClick={() => handleOnClickButtonDelete(flatProject.projectID)}
+              />
+              <div
+                onClick={() => navigate(`${flatProject.projectID}`)}
+                className="flex h-10 w-full  items-center justify-center overflow-clip bg-blau-button
+                 text-white duration-300 hover:cursor-pointer hover:bg-ultramarinblau hover:ring-1"
+              >
+                <ArrowForwardIosIcon />
               </div>
             </td>
           </tr>

@@ -177,7 +177,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
         getClassNameWidth(),
         getClassNameDirection(),
         getClassNameVariant(),
-        `focus:shadow-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500`,
+        // `focus-within:shadow-orange-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-orange-500`,
         className
       )}
       onClick={handleOnClickButton}

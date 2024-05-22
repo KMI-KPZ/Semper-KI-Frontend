@@ -2,7 +2,7 @@ import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 import { Button, Text } from "@component-library/index";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useProject } from "../hooks/useProject";
+import { useProject } from "../../../hooks/Project/useProject";
 import logger from "@/hooks/useLogger";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";

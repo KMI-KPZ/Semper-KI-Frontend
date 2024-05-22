@@ -1,21 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import ProcessPostProcessCatalog from "./components/Catalog";
-import {
-  ManufacturingServiceProps,
-  ServiceManufacturingState,
-} from "../types/types";
+import { ServiceManufacturingState } from "../types/types";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
 import { FilterItemProps } from "../Filter/Filter";
-import { useNavigate } from "react-router-dom";
-import logger from "@/hooks/useLogger";
-import useProcess, {
-  ProcessStatus,
-  isProcessAtServiceStatus,
-} from "@/pages/Projects/hooks/useProcess";
 import useService from "../../hooks/useService";
-import useModal from "@/hooks/useModal";
 import useGetPostProcessigns from "@/api/Service/Manufacturing/Querys/useGetPostProcessigns";
+import useProcess, {
+  isProcessAtServiceStatus,
+} from "@/hooks/Process/useProcess";
 
 interface Props {
   processState: ServiceManufacturingState;

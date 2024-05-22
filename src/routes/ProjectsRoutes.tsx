@@ -1,21 +1,18 @@
-import React from "react";
+import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import ProcessContextProvider from "@/contexts/ProcessContext";
+import ProjectContextProvider from "@/contexts/ProjectContext";
+import ProcessChat from "@/pages/Process/Chat/Chat";
+import ProcessHistory from "@/pages/Process/History/History";
+import ProjectCheckout from "@/pages/Project/Checkout/Checkout";
+import ProjectContractorSelection from "@/pages/Project/ContractorSelection/ContractorSelection";
+import ProjectPage from "@/pages/Project/Project";
+import ProcessVerification from "@/pages/Project/Verification/Verification";
+import Projects from "@/pages/Projects/Projects";
+import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
-import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import Projects from "@/pages/Projects/Projects";
-import ProjectContextProvider from "@/pages/Projects/context/ProjectContext";
-import Project from "@/pages/Projects/Project/Project";
-import ProjectContractorSelection from "@/pages/Projects/Project/ContractorSelection/ContractorSelection";
-import ProjectCheckout from "@/pages/Projects/Project/Checkout/Checkout";
-import ProcessVerification from "@/pages/Projects/Project/Verification/Verification";
-import ProcessContextProvider from "@/pages/Projects/context/ProcessContext";
-import { Error } from "@/pages/Error/Error";
 import ServiceRoutes from "./ServiceRoutes";
-import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
-import ProcessHistory from "@/pages/Projects/Project/Process/History/History";
-import ProcessChat from "@/pages/Projects/Project/Process/Chat/Chat";
-import Redirect from "@/pages/Redirect/Redirect";
-import ProjectPage from "@/pages/Projects/Project/Project";
+import { Error } from "@/pages/Error/Error";
 
 interface ProjectsRoutesProps {}
 
@@ -69,7 +66,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
           />
         </Route>
         <Route path=":processID/*" element={<ProcessContextProvider />}>
-          <Route index element={<Project />} />
+          <Route index element={<ProjectCheckout />} />
           <Route element={<AuthorizedUserRouteOutlet />}>
             <Route
               path="history"

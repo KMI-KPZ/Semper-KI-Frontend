@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
-import { useProject } from "../hooks/useProject";
+import { useProject } from "../../../hooks/Project/useProject";
 
 interface ProjectsTableRowProps {
   flatProject: FlatProject;

@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useState } from "react";
-import useProcess from "@/pages/Projects/hooks/useProcess";
+import React, { createContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { ServiceProps } from "../hooks/useService";
-import { useProject } from "@/pages/Projects/hooks/useProject";
 import { LoadingAnimation } from "@component-library/index";
+import { useProject } from "@/hooks/Project/useProject";
+import useProcess from "@/hooks/Process/useProcess";
 
 type ServiceContextType = {
   serviceDetails: ServiceProps;

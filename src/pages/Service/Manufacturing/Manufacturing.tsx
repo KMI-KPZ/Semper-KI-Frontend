@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { ProcessModel } from "./Model/Model";
 import { ProcessMaterial } from "./Material/Material";
 import { ProcessPostProcessing } from "./PostProcessing/PostProcessing";
@@ -7,7 +7,6 @@ import ProcessHeader from "./Header/Header";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
 import ProcessFilter, { FilterItemProps } from "./Filter/Filter";
-import { ProcessModelUpload } from "./Model/components/Upload/Upload";
 import logger from "@/hooks/useLogger";
 import {
   ServiceManufacturingContextReturnProps,
@@ -18,9 +17,8 @@ import { Error } from "@/pages/Error/Error";
 import { ServiceContext } from "../context/ServiceContext";
 import useFilter from "@/hooks/useFilter";
 import useProcess, {
-  ProcessStatus,
   isProcessAtServiceStatus,
-} from "@/pages/Projects/hooks/useProcess";
+} from "@/hooks/Process/useProcess";
 
 interface Props {}
 

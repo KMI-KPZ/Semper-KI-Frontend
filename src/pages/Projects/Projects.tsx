@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
-import { useProject } from "./hooks/useProject";
+import { useProject } from "../../hooks/Project/useProject";
 import { Container } from "@component-library/index";
 import useSearch from "@/hooks/useSearch";
 import useGetAdminFlatProjects from "@/api/Admin/Querys/useGetAdminFlatProjects";

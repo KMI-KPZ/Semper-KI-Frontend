@@ -6,7 +6,7 @@ import { getModelURI } from "@/services/utils";
 import { ModelProps } from "../types";
 import { Heading } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
-import useProcess from "@/pages/Projects/hooks/useProcess";
+import useProcess from "@/hooks/Process/useProcess";
 
 interface Props {
   model: ModelProps;

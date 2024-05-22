@@ -5,7 +5,7 @@ import { MaterialProps } from "../Material";
 import { Heading } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import useProcess from "@/pages/Projects/hooks/useProcess";
+import useProcess from "@/hooks/Process/useProcess";
 
 interface Props {
   material: MaterialProps;

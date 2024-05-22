@@ -1,18 +1,12 @@
 import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
-import useProcess from "@/pages/Projects/hooks/useProcess";
 import { useTranslation } from "react-i18next";
 import { ServiceManufacturingContext } from "../../Manufacturing";
-import { Text } from "@component-library/index";
-import { Container } from "@component-library/index";
-import useService from "@/pages/Service/hooks/useService";
 import ManufacturingWizardItem from "./components/Item";
-import { Button } from "@component-library/index";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import BrushIcon from "@mui/icons-material/Brush";
 import DoneAllOutlinedIcon from "@mui/icons-material/DoneAllOutlined";
-import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 interface Props {}
 
 export const ServiceManufacturingWizard: React.FC<Props> = (props) => {

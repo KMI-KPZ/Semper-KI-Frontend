@@ -12,7 +12,6 @@ import { ContentBox } from "@component-library/index";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import LoginIcon from "@mui/icons-material/Login";
 import HomeImgCarousel from "./components/ImgCarousel";
-import { useProject } from "@/pages/Projects/hooks/useProject";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@component-library/index";
 import BMWKdeURL from "@images/BMWK_de.png";
@@ -22,6 +21,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import useLogin from "@/api/Login/Mutation/useLogin";
+import { useProject } from "@/hooks/Project/useProject";
 
 interface HomeProps {}
 

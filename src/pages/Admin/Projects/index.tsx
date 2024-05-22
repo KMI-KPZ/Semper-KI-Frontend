@@ -9,18 +9,16 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
-import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import useAdmin, { AdminFlatProjectProps } from "../hooks/useAdmin";
+import useAdmin from "../hooks/useAdmin";
 import { Button } from "@component-library/index";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Container } from "@component-library/index";
-import logger from "@/hooks/useLogger";
-import useSearch from "@/hooks/useSearch";
-import { useProject } from "@/pages/Projects/hooks/useProject";
-import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
 import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
+import { useProject } from "@/hooks/Project/useProject";
+import useSearch from "@/hooks/useSearch";
+import { ProcessStatus } from "@/hooks/Process/useProcess";
 
 interface Props {}
 

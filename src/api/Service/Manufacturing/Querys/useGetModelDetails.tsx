@@ -2,7 +2,7 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ModelDetailsProps } from "@/pages/Service/Manufacturing/Model/types";
-import { useProject } from "@/pages/Projects/hooks/useProject";
+import { useProject } from "@/hooks/Project/useProject";
 
 const useGetModelDetails = (processID: string) => {
   const queryClient = useQueryClient();

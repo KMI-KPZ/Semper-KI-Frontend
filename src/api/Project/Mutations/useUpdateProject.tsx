@@ -1,8 +1,8 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { UpdateProjectProps } from "@/pages/Projects/hooks/useProject";
 import { useParams } from "react-router-dom";
+import { UpdateProjectProps } from "@/hooks/Project/useProject";
 
 const useUpdateProject = () => {
   const queryClient = useQueryClient();

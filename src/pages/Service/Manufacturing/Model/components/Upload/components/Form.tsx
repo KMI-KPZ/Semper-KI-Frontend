@@ -7,11 +7,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import logger from "@/hooks/useLogger";
 import { Button } from "@component-library/index";
-import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
-import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 import ModelPreview from "@/pages/Test/STLViewer";
-import { StlViewer } from "react-stl-viewer";
 import useUploadModel from "@/api/Service/Manufacturing/Mutations/useUploadModel";
+import { ProjectContext } from "@/contexts/ProjectContext";
+import { ProcessContext } from "@/contexts/ProcessContext";
 
 interface ManufacturingModelUploadFormProps {
   file: File;
@@ -23,7 +22,6 @@ const ManufacturingModelUploadForm: React.FC<
   const { file } = props;
   const { t } = useTranslation();
   const uploadModel = useUploadModel();
-  const { status, error } = uploadModel;
   const { project } = useContext(ProjectContext);
   const { process } = useContext(ProcessContext);
   const url = URL.createObjectURL(file);

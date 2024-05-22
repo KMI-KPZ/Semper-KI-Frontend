@@ -1,13 +1,16 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { DownloadFilesZIPProps } from "@/pages/Projects/hooks/useProcess";
 import { useParams } from "react-router-dom";
+export interface DownloadFilesProps {
+  processID: string;
+  fileIDs: string[];
+}
 
 const useDownloadFiles = () => {
   const queryClient = useQueryClient();
   const { projectID } = useParams();
-  const downloadFiles = async ({ fileIDs, processID }: DownloadFilesZIPProps) =>
+  const downloadFiles = async ({ fileIDs, processID }: DownloadFilesProps) =>
     authorizedCustomAxios
       .get(
         `${
@@ -25,7 +28,7 @@ const useDownloadFiles = () => {
         logger("useDownloadFiles | downloadFiles ❌ |", error);
       });
 
-  return useMutation<Blob, Error, DownloadFilesZIPProps>({
+  return useMutation<Blob, Error, DownloadFilesProps>({
     mutationFn: downloadFiles,
     onSuccess: () => {},
   });

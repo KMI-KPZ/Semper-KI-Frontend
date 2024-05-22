@@ -1,12 +1,9 @@
-import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
-import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
-import ServiceEdit from "@/pages/Service/Edit/Edit";
+import { ProcessContext } from "@/contexts/ProcessContext";
+import { ProjectContext } from "@/contexts/ProjectContext";
 import { ServiceManufacturing } from "@/pages/Service/Manufacturing/Manufacturing";
 import ServiceModeling from "@/pages/Service/Modelling/Modelling";
-import ServiceSelect from "@/pages/Service/Select/Select";
 import Service from "@/pages/Service/Service";
 import { ServiceContextProvider } from "@/pages/Service/context/ServiceContext";
-import { ServiceType } from "@/pages/Service/hooks/useService";
 import { Modal } from "@component-library/index";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";

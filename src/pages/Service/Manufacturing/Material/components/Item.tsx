@@ -5,7 +5,7 @@ import { MaterialProps } from "../Material";
 import { Heading } from "@component-library/index";
 import useProcess, {
   isProcessAtServiceStatus,
-} from "@/pages/Projects/hooks/useProcess";
+} from "@/hooks/Process/useProcess";
 
 interface Props {
   material: MaterialProps;

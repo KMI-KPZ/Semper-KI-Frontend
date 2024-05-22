@@ -1,9 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import useService, { ServiceType } from "./useService";
 import { useNavigate } from "react-router-dom";
-import { ServiceContext } from "../context/ServiceContext";
-import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
-import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
+import { ProcessContext } from "@/contexts/ProcessContext";
+import { ProjectContext } from "@/contexts/ProjectContext";
 
 const useServiceEdit = () => {
   const { process } = useContext(ProcessContext);

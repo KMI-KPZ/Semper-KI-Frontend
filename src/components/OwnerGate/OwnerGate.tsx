@@ -1,6 +1,6 @@
+import { useProject } from "@/hooks/Project/useProject";
 import logger from "@/hooks/useLogger";
 import useUser, { UserType } from "@/hooks/useUser";
-import { useProject } from "@/pages/Projects/hooks/useProject";
 import React, { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 

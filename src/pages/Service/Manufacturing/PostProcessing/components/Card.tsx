@@ -2,7 +2,7 @@ import { Heading } from "@component-library/index";
 import { PostProcessingProps } from "../PostProcessing";
 import useProcess, {
   isProcessAtServiceStatus,
-} from "@/pages/Projects/hooks/useProcess";
+} from "@/hooks/Process/useProcess";
 
 interface Props<Item> {
   item: Item;

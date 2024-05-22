@@ -1,9 +1,17 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { UpdateProcessProps } from "@/pages/Projects/hooks/useProcess";
 import { useParams } from "react-router-dom";
 import { MultipleProcessMutationProps } from "../types";
+import {
+  ProcessChangesProps,
+  ProcessDeletionsProps,
+} from "@/hooks/Process/useProcess";
+
+export interface UpdateProcessProps {
+  changes?: ProcessChangesProps;
+  deletions?: ProcessDeletionsProps;
+}
 
 export type UpdateProcessMutationProps = {
   updates: UpdateProcessProps;

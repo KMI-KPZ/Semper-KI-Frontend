@@ -1,9 +1,9 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useProject } from "@/pages/Projects/hooks/useProject";
 import { useParams } from "react-router-dom";
 import { SingleProcessMutationProps } from "../types";
+import { useProject } from "@/hooks/Project/useProject";
 
 export type UploadFilesProps = {
   files: File[];

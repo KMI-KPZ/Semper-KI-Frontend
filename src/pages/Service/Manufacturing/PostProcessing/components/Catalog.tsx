@@ -6,10 +6,10 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ProcessPostProcessingCard from "./Card";
 import { PostProcessingProps } from "../PostProcessing";
 import { Modal } from "@component-library/index";
+import useModal from "@/hooks/useModal";
 import useProcess, {
   isProcessAtServiceStatus,
-} from "@/pages/Projects/hooks/useProcess";
-import useModal from "@/hooks/useModal";
+} from "@/hooks/Process/useProcess";
 
 interface Props<Item> {
   grid: boolean;

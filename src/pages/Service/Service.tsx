@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { LoadingAnimation } from "@component-library/index";
 import useService, { ServiceType } from "./hooks/useService";
-import useProcess from "../Projects/hooks/useProcess";
+import useProcess from "../../hooks/Process/useProcess";
 import { Navigate } from "react-router-dom";
-import { useProject } from "../Projects/hooks/useProject";
+import { useProject } from "../../hooks/Project/useProject";
 
 interface ServiceProps {}
 

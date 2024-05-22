@@ -5,9 +5,9 @@ import useAdminDeleteUser, {
   AdminDeleteUserProps,
 } from "@/api/Admin/Mutations/useAdminDeleteUser";
 import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
+import { ProcessStatus } from "@/hooks/Process/useProcess";
+import { ProjectDetailsProps as ProjectDetails } from "@/hooks/Project/useProject";
 import { AuthorizedUserProps } from "@/hooks/useUser";
-import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
-import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";
 import { AdminContext } from "@/routeOutlets/AdminOutlet";
 import { UseMutationResult } from "@tanstack/react-query";
 import { useContext } from "react";
@@ -50,7 +50,7 @@ export interface AdminFlatProjectProps {
   client: string;
   clientName: string;
   createdWhen: Date;
-  details: ProjectDetailsProps;
+  details: ProjectDetails;
   processesCount: number;
   projectID: string;
   status: ProcessStatus;

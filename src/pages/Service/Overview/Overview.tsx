@@ -5,10 +5,9 @@ import AddIcon from "@mui/icons-material/Add";
 import ServiceOverviewItem from "./components/Item";
 import { Heading } from "@component-library/index";
 import { Button } from "@component-library/index";
-import { useProject } from "@/pages/Projects/hooks/useProject";
-import useProcess, { Process } from "@/pages/Projects/hooks/useProcess";
+import { ProjectContext } from "@/contexts/ProjectContext";
+import useProcess, { Process } from "@/hooks/Process/useProcess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
 
 interface Props {}
 

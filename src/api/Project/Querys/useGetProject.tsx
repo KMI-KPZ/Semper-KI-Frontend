@@ -7,8 +7,8 @@ import {
   FilesDescriptionProps,
   Process,
   ProcessStatus,
-} from "@/pages/Projects/hooks/useProcess";
-import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";
+} from "@/hooks/Process/useProcess";
+import { ProjectDetailsProps } from "@/hooks/Project/useProject";
 
 export interface Project {
   projectID: string;

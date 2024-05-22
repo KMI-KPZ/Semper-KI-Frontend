@@ -13,9 +13,7 @@ import { JSONIsParseable, JSONSafeParse } from "@/services/utils";
 import logger from "@/hooks/useLogger";
 import useProjectEvent from "./hooks/useProjectEvent";
 import { toast } from "@/hooks/useToast";
-import usePermissions from "../usePermissions";
 import { EventContext } from "@/contexts/EventContextProvider";
-import Project from "@/pages/Projects/Project/Project";
 import useReloadPermissions from "@/api/Permissions/Mutations/useReloadPermissions";
 
 interface ReturnProps {

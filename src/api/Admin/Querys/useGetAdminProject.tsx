@@ -3,8 +3,8 @@ import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useUser, { UserType } from "@/hooks/useUser";
-import { Process } from "@/pages/Projects/hooks/useProcess";
 import { Project, getProjectFiles } from "@/api/Project/Querys/useGetProject";
+import { Process } from "@/hooks/Process/useProcess";
 
 const useGetAdminProject = () => {
   const queryClient = useQueryClient();

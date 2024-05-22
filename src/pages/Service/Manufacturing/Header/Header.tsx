@@ -3,7 +3,7 @@ import ProcessHeaderSearch from "./Search/Search";
 import { ServiceManufacturingWizard } from "./Wizard/Wizard";
 import useProcess, {
   isProcessAtServiceStatus,
-} from "@/pages/Projects/hooks/useProcess";
+} from "@/hooks/Process/useProcess";
 
 const ProcessHeader: React.FC = () => {
   const { process } = useProcess();

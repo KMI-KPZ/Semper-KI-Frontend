@@ -6,8 +6,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { ServiceType } from "../../hooks/useService";
 import { useTranslation } from "react-i18next";
-import useProcess, { Process } from "@/pages/Projects/hooks/useProcess";
 import { TFunction } from "i18next";
+import useProcess, { Process } from "@/hooks/Process/useProcess";
 
 interface Props {
   process: Process;

@@ -1,19 +1,14 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { useLocation, useParams } from "react-router-dom";
+import { Project } from "@/api/Project/Querys/useGetProject";
 import {
   ManufacturingServiceProps,
   UpdateServiceManufacturingProps,
 } from "../Manufacturing/types/types";
-import logger from "@/hooks/useLogger";
-import useProcess, {
-  Process,
-  ProcessStatus,
-} from "@/pages/Projects/hooks/useProcess";
 import { ModelingServiceProps } from "../Modelling/Modelling";
+import { ProjectContext } from "@/contexts/ProjectContext";
+import { ProcessContext } from "@/contexts/ProcessContext";
+import useProcess, { ProcessStatus } from "@/hooks/Process/useProcess";
 import { useContext } from "react";
-import { ProcessContext } from "@/pages/Projects/context/ProcessContext";
-import { ProjectContext } from "@/pages/Projects/context/ProjectContext";
-import { Project } from "@/api/Project/Querys/useGetProject";
 
 interface ReturnProps {
   isServiceComplete: (

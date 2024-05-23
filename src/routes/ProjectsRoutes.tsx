@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import ServiceRoutes from "./ServiceRoutes";
 import { Error } from "@/pages/Error/Error";
+import ProjectPage2 from "@/pages/Project/ProjectPage";
 
 interface ProjectsRoutesProps {}
 
@@ -35,7 +36,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = (props) => {
           index
           element={
             <PermissionGate element="Projects">
-              <ProjectPage />
+              <ProjectPage2 />
             </PermissionGate>
           }
         />

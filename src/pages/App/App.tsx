@@ -33,6 +33,7 @@ import { Background, Breadcrumb } from "@/components/index";
 import Advantages from "../Advantages/Advantages";
 import Chatbot from "@/components/Chatbot/Chatbot";
 import Profile from "../Profile/Proflle";
+import Projects from "../Projects/Projects";
 
 export type AppState = {
   guideFilter: FilterItemProps[];

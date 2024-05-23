@@ -9,6 +9,8 @@ import {
   ProcessStatus,
 } from "@/hooks/Process/useProcess";
 import { ProjectDetailsProps } from "@/hooks/Project/useProject";
+import { ServiceType } from "@/pages/Service/hooks/useService";
+import TestImg from "@images/Test.png";
 
 export interface Project {
   projectID: string;
@@ -17,8 +19,27 @@ export interface Project {
   client: string;
   createdWhen: Date;
   updatedWhen: Date;
-  processes: Process[];
+  processes: FlatProcess[];
 }
+
+export interface FlatProcess {
+  title: string;
+  processID: string;
+  serviceType: ServiceType;
+  updatedWhen: Date;
+  createdWhen: Date;
+  flatProcessStatus: FlatProcessStatus;
+  amount: number;
+  img: string;
+}
+
+export type FlatProcessStatus =
+  | "ACTION_REQUIRED"
+  | "WAITING_CONTRACTOR"
+  | "WAITING_CLIENT"
+  | "WAITING_PROCESS"
+  | "IN_PROGRESS"
+  | "COMPLETED";
 
 export const getProjectFiles = (
   filesObject: Object
@@ -36,6 +57,33 @@ const useGetProject = () => {
   const { projectID } = useParams();
   const { user } = useUser();
   const getProject = async () =>
+    authorizedCustomAxios
+      .get(`${process.env.VITE_HTTP_API_URL}/public/getProject/${projectID}/`)
+      .then((response) => {
+        const project: Project = {
+          client: response.data.client,
+          projectID: response.data.projectID,
+          projectStatus: response.data.projectStatus,
+          projectDetails: response.data.projectDetails,
+          createdWhen: new Date(response.data.createdWhen),
+          updatedWhen: new Date(response.data.updatedWhen),
+          processes: response.data.processes.map(
+            (process: any): FlatProcess => ({
+              title: process.processDetails.title,
+              processID: process.processID,
+              flatProcessStatus: process.processStatus,
+              serviceType: process.serviceType,
+              createdWhen: new Date(process.createdWhen),
+              updatedWhen: new Date(process.updatedWhen),
+              amount: process.processDetails.amount,
+              img: TestImg,
+            })
+          ),
+        };
+        logger("useGetProject | getProject ✅ |", response);
+        return project;
+      });
+  const getProjectOld = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/getProject/${projectID}/`)
       .then((response) => {

@@ -25,7 +25,7 @@ const useCreateProcess = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries(["flatProjects"]);
       queryClient.invalidateQueries(["project", projectID]);
-      navigate(`${processID === undefined ? "" : "../"}${data}`);
+      // navigate(`${processID === undefined ? "" : "../"}${data}`);
     },
   });
 };

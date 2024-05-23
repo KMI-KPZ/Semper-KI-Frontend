@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import useCheckedProcesses from "../../../../hooks/Project/useCheckedProcesses";
 import { twMerge } from "tailwind-merge";
-import ProcessInfoCard from "../../components/ProcessInfoCard";
+import ProcessInfoCard from "../../components/FlatProcessCard";
 import { Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
@@ -35,7 +35,7 @@ const ProjectContractorSelectionItem: React.FC<
           : "bg-slate-100"
       )}
     >
-      <ProcessInfoCard process={process} />
+      <ProcessInfoCard flatProcess={process} />
       <Container
         direction="col"
         className="grow md:max-w-2xl md:items-start md:justify-start"

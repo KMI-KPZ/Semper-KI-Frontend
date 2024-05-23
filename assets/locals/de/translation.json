@@ -153,6 +153,14 @@
       "delete": "Löschen",
       "messages": "Nachrichten",
       "files": "Dateien"
+    },
+    "FlatProjectStatus": {
+      "ACTION_REQUIRED": "Aktion erforderlich",
+      "WAITING_CONTRACTOR": "Warten auf Auftragnehmer",
+      "WAITING_CLIENT": "Warten auf Kunde",
+      "WAITING_PROCESS": "Warten auf Prozess",
+      "IN_PROGRESS": "in Bearbeitung",
+      "COMPLETED": "Abgeschlossen"
     }
   },
   "component-library": {
@@ -867,6 +875,55 @@
           "address": "Adresse benötigt"
         }
       }
+    }
+  },
+  "Project": {
+    "components": {
+      "Processes": {
+        "sort": {
+          "title": "Titel",
+          "processID": "Prozess-ID",
+          "serviceType": "Service",
+          "updatedWhen": "Aktualisiert",
+          "createdWhen": "Erstellt",
+          "flatProcessStatus": "Status",
+          "amount": "Anzahl",
+          "img": "Bild",
+          "order": "Reihenfolge"
+        },
+        "noProcess": "Keine Prozesse vorhanden",
+        "button": {
+          "new": "Neuer Prozess",
+          "create": "weiteren Prozess anlegen",
+          "sort": "Sortieren nach:"
+        }
+      },
+      "ProcessCard": {
+        "serviceType": "Service Typ:",
+        "status": "Status:",
+        "updated": "letzte Aktualisierung:",
+        "count": "Anzahl:",
+        "button": {
+          "continue": "Fortfahren",
+          "delete": "Löschen"
+        }
+      },
+      "Info": {
+        "name": "Name:",
+        "updated": "letzte Aktualisierung:",
+        "created": "Erstellt am:",
+        "count": "Anzahl Prozesse:",
+        "inProgess": "davon in Bearbeitung:",
+        "finished": "davon Abgeschlossen:",
+        "button": {
+          "menu": "Informationen Menu",
+          "expand": "Mehr Anzeigen",
+          "collapse": "Weniger Anzeigen"
+        }
+      }
+    },
+    "ProjectPage": {
+      "header": "Projektübersicht"
     }
   },
   "Projects": {

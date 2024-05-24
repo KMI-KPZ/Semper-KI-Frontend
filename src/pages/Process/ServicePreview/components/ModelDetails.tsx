@@ -1,6 +1,6 @@
 import useDownloadFile from "@/api/Process/Mutations/useDownloadFile";
+import { ManufactoringProcessProps } from "@/api/Process/Querys/useGetProcess";
 import useGetModelDetails from "@/api/Service/Manufacturing/Querys/useGetModelDetails";
-import { ManufactoringProcessProps } from "@/hooks/Process/useProcess";
 import ModelPreview from "@/pages/Test/STLViewer";
 import {
   Container,

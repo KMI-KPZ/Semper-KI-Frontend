@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Text } from "@component-library/index";
-import { Process, ProcessStatus } from "@/hooks/Process/useProcess";
 import TestImg from "@images/Test.png";
-import { ServiceType } from "@/pages/Service/hooks/useService";
 import { FlatProcess } from "@/api/Project/Querys/useGetProject";
+import { useNavigate } from "react-router-dom";
+import useDeleteProcess from "@/api/Process/Mutations/useDeleteProcess";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
 
 interface FlatProcessCardProps {
   flatProcess: FlatProcess;
@@ -13,6 +14,8 @@ interface FlatProcessCardProps {
 const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
   const { flatProcess: process } = props;
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const deleteProcess = useDeleteProcess();
   const getRingColor = (): string => {
     switch (process.flatProcessStatus) {
       case "ACTION_REQUIRED":
@@ -23,6 +26,15 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
         return "ring-green-500";
       default:
         return "ring-gray-500";
+    }
+  };
+
+  const handleOnClickButtonContinue = () => {
+    navigate(`${process.processID}`);
+  };
+  const handleOnClickButtonDelete = () => {
+    if (window.confirm(t("Project.components.FlatProcessCard.confirm"))) {
+      deleteProcess.mutate({ processIDs: [process.processID] });
     }
   };
 
@@ -38,10 +50,10 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
         <Container direction="row" align="start">
           <Container direction="col" align="start" gap={3}>
             <Text variant="strong">
-              {t("Project.components.ProcessCard.serviceType")}
+              {t("Project.components.FlatProcessCard.serviceType")}
             </Text>
             <Text variant="strong">
-              {t("Project.components.ProcessCard.status")}
+              {t("Project.components.FlatProcessCard.status")}
             </Text>
           </Container>
           <Container direction="col" align="start" gap={3}>
@@ -60,10 +72,10 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
         <Container direction="row" align="start">
           <Container direction="col" align="start" gap={3}>
             <Text variant="strong">
-              {t("Project.components.ProcessCard.updated")}
+              {t("Project.components.FlatProcessCard.updated")}
             </Text>
             <Text variant="strong">
-              {t("Project.components.ProcessCard.count")}
+              {t("Project.components.FlatProcessCard.count")}
             </Text>
           </Container>
           <Container direction="col" align="start" gap={3}>
@@ -73,14 +85,16 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
         </Container>
         <Container direction="col" gap={3}>
           <Button
+            onClick={handleOnClickButtonContinue}
             size="sm"
             variant="primary"
-            title={t("Project.components.ProcessCard.button.continue")}
+            title={t("Project.components.FlatProcessCard.button.continue")}
           />
           <Button
+            onClick={handleOnClickButtonDelete}
             size="sm"
             variant="text"
-            title={t("Project.components.ProcessCard.button.delete")}
+            title={t("Project.components.FlatProcessCard.button.delete")}
           />
         </Container>
       </Container>

@@ -14,8 +14,6 @@ import Legal from "../Legal/Legal";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import "react-toastify/dist/ReactToastify.css";
 import CookieBanner from "@/components/CookieBanner/CookieBanner";
-import useCookieConsent from "@/components/CookieBanner/hooks/useCookieConsent";
-import { Modal } from "@component-library/index";
 import { FilterItemProps } from "../Service/Manufacturing/Filter/Filter";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import EmailVerification from "../EmailVerification/EmailVerification";
@@ -23,7 +21,6 @@ import ResKriVer from "../ResKriVer/ResKriVer";
 import { OrganizationRouteOutlet } from "@/routeOutlets/OrganizationOutlet";
 import { AdminRouteOutlet } from "@/routeOutlets/AdminOutlet";
 import { ToastContainer } from "react-toastify";
-import ProjectsRoutes from "@/routes/ProjectsRoutes";
 import AdminRoutes from "@/routes/AdminRoutes";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import { ContentBox } from "@component-library/index";
@@ -34,6 +31,13 @@ import Advantages from "../Advantages/Advantages";
 import Chatbot from "@/components/Chatbot/Chatbot";
 import Profile from "../Profile/Proflle";
 import Projects from "../Projects/Projects";
+import ProjectOutlet from "@/routeOutlets/ProjectOutlet";
+import ProjectPage from "../Project/ProjectPage";
+import ProcessOutlet from "@/routeOutlets/ProcessOutlet";
+import ProjectCheckout from "../Process/Checkout/Checkout";
+import ProcessHistory from "../Process/History/History";
+import ProcessChat from "../Process/Chat/Chat";
+import ServiceRoutes from "@/routes/ServiceRoutes";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -167,14 +171,70 @@ const App: React.FC = () => {
               }
             />
             <Route path="demo/*" element={<Navigate to="/project/new" />} />
-            <Route
-              path="projects/*"
-              element={
-                <ContentBox>
-                  <ProjectsRoutes />
-                </ContentBox>
-              }
-            />
+            <Route path="projects/*">
+              <Route
+                index
+                element={
+                  <PermissionGate element="Projects">
+                    <Projects />
+                  </PermissionGate>
+                }
+              />
+              <Route path=":projectID/*" element={<ProjectOutlet />}>
+                <Route
+                  index
+                  element={
+                    <PermissionGate element="Projects">
+                      <ProjectPage />
+                    </PermissionGate>
+                  }
+                />
+                <Route path=":processID/*" element={<ProcessOutlet />}>
+                  <Route index element={<ProjectCheckout />} />
+                  <Route element={<AuthorizedUserRouteOutlet />}>
+                    <Route
+                      path="history"
+                      element={
+                        <>
+                          <ProjectPage />
+                          <ProcessHistory />
+                        </>
+                      }
+                    />
+                    <Route
+                      path="chat"
+                      element={
+                        <>
+                          <ProjectPage />
+                          <ProcessChat />
+                        </>
+                      }
+                    />
+                    <Route
+                      path="checkout"
+                      element={<Navigate to="../../checkout" />}
+                    />
+                    <Route
+                      path="verification"
+                      element={<Navigate to="../../verification" />}
+                    />
+                    <Route
+                      path="contractorSelection"
+                      element={<Navigate to="../../contractorSelection" />}
+                    />
+                  </Route>
+                  <Route
+                    path="service/*"
+                    element={
+                      <>
+                        <ProjectPage />
+                        <ServiceRoutes />
+                      </>
+                    }
+                  />
+                </Route>
+              </Route>
+            </Route>
             <Route element={<AuthorizedUserRouteOutlet />}>
               <Route
                 path="test"

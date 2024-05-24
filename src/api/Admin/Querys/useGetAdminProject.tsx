@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useUser, { UserType } from "@/hooks/useUser";
 import { Project, getProjectFiles } from "@/api/Project/Querys/useGetProject";
-import { Process } from "@/hooks/Process/useProcess";
+import { Process } from "@/api/Process/Querys/useGetProcess";
 
 const useGetAdminProject = () => {
   const queryClient = useQueryClient();

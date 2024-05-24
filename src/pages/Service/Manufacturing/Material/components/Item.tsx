@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/index";
 import { MaterialProps } from "../Material";
 import { Heading } from "@component-library/index";
-import useProcess, {
-  isProcessAtServiceStatus,
-} from "@/hooks/Process/useProcess";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import useProcess from "@/hooks/Process/useProcess";
+import { isProcessAtServiceStatus } from "@/api/Process/Querys/useGetProcess";
 
 interface Props {
   material: MaterialProps;
@@ -14,10 +14,13 @@ interface Props {
 export const ProcessMaterialItem: React.FC<Props> = (props) => {
   const { material } = props;
   const { t } = useTranslation();
-  const { process, updateProcess } = useProcess();
-
+  const { process } = useProcess();
+  const updateProcess = useUpdateProcess();
   const handleOnClickButtonDeselect = () => {
-    updateProcess({ deletions: { serviceDetails: ["material"] } });
+    updateProcess.mutate({
+      processIDs: [process.processID],
+      updates: { deletions: { serviceDetails: ["material"] } },
+    });
   };
 
   return (

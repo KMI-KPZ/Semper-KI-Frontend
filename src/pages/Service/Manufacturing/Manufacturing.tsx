@@ -8,17 +8,17 @@ import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
 import ProcessFilter, { FilterItemProps } from "./Filter/Filter";
 import logger from "@/hooks/useLogger";
-import {
-  ServiceManufacturingContextReturnProps,
-  ManufacturingServiceProps,
-  ServiceManufacturingState,
-} from "./types/types";
+
 import { Error } from "@/pages/Error/Error";
-import { ServiceContext } from "../context/ServiceContext";
+import { ServiceContext } from "../../../contexts/ServiceContext";
 import useFilter from "@/hooks/useFilter";
-import useProcess, {
-  isProcessAtServiceStatus,
-} from "@/hooks/Process/useProcess";
+import useProcess from "@/hooks/Process/useProcess";
+import {
+  ManufacturingServiceProps,
+  ServiceManufacturingContextReturnProps,
+  ServiceManufacturingState,
+} from "@/api/Service/Querys/useGetServices";
+import { isProcessAtServiceStatus } from "@/api/Process/Querys/useGetProcess";
 
 interface Props {}
 

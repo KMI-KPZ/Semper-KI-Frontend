@@ -898,11 +898,12 @@
           "sort": "Sortieren nach:"
         }
       },
-      "ProcessCard": {
+      "FlatProcessCard": {
         "serviceType": "Service Typ:",
         "status": "Status:",
         "updated": "letzte Aktualisierung:",
         "count": "Anzahl:",
+        "confirm": "Prozess wirklich löschen?",
         "button": {
           "continue": "Fortfahren",
           "delete": "Löschen"

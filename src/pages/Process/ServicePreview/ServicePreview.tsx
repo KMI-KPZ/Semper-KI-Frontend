@@ -1,12 +1,12 @@
-import { ServiceType } from "@/pages/Service/hooks/useService";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProcessServiceManufacturing from "./components/Manufacturing";
 import ProcessServiceModelling from "./components/Modelling";
 import { Heading } from "@component-library/index";
 import { Divider } from "@component-library/index";
-import { Process } from "@/hooks/Process/useProcess";
 import ProcessServiceSelect from "./components/Select";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
+import { Process } from "@/api/Process/Querys/useGetProcess";
 
 interface ProcessServicePreviewProps {
   process: Process;

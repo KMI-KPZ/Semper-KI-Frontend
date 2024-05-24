@@ -2,16 +2,17 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import useCheckedProcesses from "../../../../hooks/Project/useCheckedProcesses";
 import { twMerge } from "tailwind-merge";
-import ProcessInfoCard from "../../components/FlatProcessCard";
+import ProcessInfoCard from "../../../Project/components/FlatProcessCard";
 import { Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { ContractorSelectionFormData } from "../ContractorSelection";
 import useGetContractors from "@/api/Project/Querys/useGetContractors";
-import { Process } from "@/hooks/Process/useProcess";
+import { Process } from "@/api/Process/Querys/useGetProcess";
+import { FlatProcess } from "@/api/Project/Querys/useGetProject";
 
 interface ProjectContractorSelectionItemProps {
-  process: Process;
+  process: FlatProcess;
   index: number;
   register: UseFormRegister<ContractorSelectionFormData>;
   errors: FieldErrors<ContractorSelectionFormData>;

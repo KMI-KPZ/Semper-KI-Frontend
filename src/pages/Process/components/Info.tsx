@@ -1,4 +1,4 @@
-import { Process, ProcessStatus } from "@/hooks/Process/useProcess";
+import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";

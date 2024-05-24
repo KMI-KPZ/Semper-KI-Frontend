@@ -1,4 +1,4 @@
-import { ProjectContext } from "@/contexts/ProjectContext";
+import { ProjectContext } from "@/routeOutlets/ProjectOutlet";
 import React, { useContext, useState } from "react";
 
 interface useCheckedProcessesReturnProps {

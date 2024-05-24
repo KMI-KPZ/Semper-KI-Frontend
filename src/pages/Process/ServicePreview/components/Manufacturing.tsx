@@ -14,7 +14,7 @@ import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import {
   ManufactoringProcessProps,
   isProcessAtServiceStatus,
-} from "@/hooks/Process/useProcess";
+} from "@/api/Process/Querys/useGetProcess";
 
 interface ProcessServiceManufacturingProps {
   process: ManufactoringProcessProps;

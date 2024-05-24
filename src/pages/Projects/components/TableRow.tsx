@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
-import { useProject } from "../../../hooks/Project/useProject";
+import useDeleteProject from "@/api/Project/Mutations/useDeleteProject";
 
 interface ProjectsTableRowProps {
   flatProject: FlatProject;
@@ -14,12 +14,12 @@ interface ProjectsTableRowProps {
 const ProjectsTableRow: React.FC<ProjectsTableRowProps> = (props) => {
   const { flatProject } = props;
   const { t } = useTranslation();
-  const { deleteProject } = useProject();
+  const deleteProject = useDeleteProject();
   const navigate = useNavigate();
 
   const handleOnClickButtonDelete = (projectID: string) => {
     window.confirm(t("Projects.components.Table.deleteConfirm")) === true
-      ? deleteProject([projectID])
+      ? deleteProject.mutate([projectID])
       : logger("delete canceled");
   };
 

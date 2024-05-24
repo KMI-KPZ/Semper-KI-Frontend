@@ -3,14 +3,17 @@ import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useUser, { UserType } from "@/hooks/useUser";
+import { ServiceType } from "@/pages/Service/hooks/useService";
+import TestImg from "@images/Test.png";
 import {
   FilesDescriptionProps,
   Process,
   ProcessStatus,
-} from "@/hooks/Process/useProcess";
-import { ProjectDetailsProps } from "@/hooks/Project/useProject";
-import { ServiceType } from "@/pages/Service/hooks/useService";
-import TestImg from "@images/Test.png";
+} from "@/api/Process/Querys/useGetProcess";
+
+export interface ProjectDetailsProps {
+  title?: string;
+}
 
 export interface Project {
   projectID: string;

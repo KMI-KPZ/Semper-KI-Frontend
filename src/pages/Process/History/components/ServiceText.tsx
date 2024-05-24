@@ -1,9 +1,11 @@
-import { ServiceProps } from "@/pages/Service/hooks/useService";
-import {Container} from "@component-library/index";
+import { Container } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProcessHistoryTextItem from "./TextItem";
-import { instanceOfManufacturingServiceProps } from "@/pages/Service/Manufacturing/types/types";
+import {
+  ServiceProps,
+  instanceOfManufacturingServiceProps,
+} from "@/api/Service/Querys/useGetServices";
 
 interface ProcessHistoryServiceTextProps {
   service: ServiceProps;

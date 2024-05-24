@@ -7,9 +7,8 @@ import { Heading } from "@component-library/index";
 import ScheduleSendIcon from "@mui/icons-material/ScheduleSend";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import { useForm } from "react-hook-form";
-import { Process, ProcessStatus } from "@/hooks/Process/useProcess";
-import { ProjectContext } from "@/contexts/ProjectContext";
-import { useProject } from "@/hooks/Project/useProject";
+import useVerifyProject from "@/api/Project/Mutations/useVerifyProject";
+import { Process } from "@/api/Process/Querys/useGetProcess";
 
 interface Props {}
 export interface VerifyFormData {
@@ -19,16 +18,15 @@ export interface VerifyFormData {
 const ProcessVerification: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { verifyProject } = useProject();
+  const verifyProject = useVerifyProject();
 
-  const { projectQuery } = useContext(ProjectContext);
-  const processes: Process[] =
-    projectQuery.data === undefined
-      ? []
-      : projectQuery.data.processes.filter(
-          (process) =>
-            process.processStatus === ProcessStatus.CONTRACTOR_SELECTED
-        );
+  const processes: Process[] = [];
+  // projectQuery.data === undefined
+  //   ? []
+  //   : projectQuery.data.processes.filter(
+  //       (process) =>
+  //         process.processStatus === ProcessStatus.CONTRACTOR_SELECTED
+  //     );
 
   const {
     register,
@@ -43,25 +41,21 @@ const ProcessVerification: React.FC<Props> = (props) => {
   const navigate = useNavigate();
 
   const handleOnClickButtonVerify = (data: VerifyFormData) => {
-    if (projectQuery.data !== undefined) {
-      verifyProject({
-        processIDs: data.processes
-          .filter((process) => process.checked === true)
-          .map((process) => process.process.processID),
-        send: false,
-      });
-    }
+    verifyProject.mutate({
+      processIDs: data.processes
+        .filter((process) => process.checked === true)
+        .map((process) => process.process.processID),
+      send: false,
+    });
   };
 
   const handleOnClickButtonRequest = (data: VerifyFormData) => {
-    if (projectQuery.data !== undefined) {
-      verifyProject({
-        processIDs: data.processes
-          .filter((process) => process.checked === true)
-          .map((process) => process.process.processID),
-        send: true,
-      });
-    }
+    verifyProject.mutate({
+      processIDs: data.processes
+        .filter((process) => process.checked === true)
+        .map((process) => process.process.processID),
+      send: true,
+    });
   };
 
   return (

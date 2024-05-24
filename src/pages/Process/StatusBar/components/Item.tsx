@@ -3,7 +3,7 @@ import { StatusData } from "../StatusBar";
 import { Text } from "@component-library/index";
 import { Badge } from "@component-library/Badge/Badge";
 import useEvents from "@/hooks/useEvents/useEvents";
-import { ProcessStatus } from "@/hooks/Process/useProcess";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 
 type StatusItemType = {
   item: StatusData;

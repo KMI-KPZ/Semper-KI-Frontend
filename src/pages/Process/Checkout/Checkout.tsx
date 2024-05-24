@@ -8,7 +8,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 import ProjectCheckoutItem from "./components/Item";
 import { Process, ProcessStatus } from "@/hooks/Process/useProcess";
-import { ProjectContext } from "@/contexts/ProjectContext";
+import { ProjectContext } from "@/routeOutlets/ProjectOutlet";
 import { useProject } from "@/hooks/Project/useProject";
 
 interface ProjectCheckoutProps {}

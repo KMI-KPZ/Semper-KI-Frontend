@@ -2,8 +2,8 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useUser, { UserType } from "@/hooks/useUser";
-import { ProcessStatus } from "@/hooks/Process/useProcess";
-import { ProjectDetailsProps } from "@/hooks/Project/useProject";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import { ProjectDetailsProps } from "./useGetProject";
 
 export interface FlatProject {
   projectID: string;

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ModelProps } from "../types";
 import { Heading } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
-import useService from "@/pages/Service/hooks/useService";
+import useService from "@/hooks/useService";
 
 interface Props {
   model: ModelProps;

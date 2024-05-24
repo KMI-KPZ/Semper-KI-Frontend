@@ -1,12 +1,9 @@
-import React, { useDebugValue } from "react";
-import { useTranslation } from "react-i18next";
-import { Navigate, Outlet, useParams } from "react-router-dom";
-import logger from "@/hooks/useLogger";
-import { LoadingAnimation } from "@component-library/index";
-import { useProject } from "../hooks/Project/useProject";
-import { Process } from "../hooks/Process/useProcess";
+import React, { PropsWithChildren } from "react";
+import { Process } from "@/api/Process/Querys/useGetProcess";
 
-interface ProcessContextProviderProps {}
+interface ProcessContextProviderProps {
+  process: Process;
+}
 
 export interface ProcessContextProps {
   process: Process;
@@ -29,29 +26,15 @@ export const ProcessContext = React.createContext<ProcessContextProps>({
   },
 });
 
-const ProcessContextProvider: React.FC<ProcessContextProviderProps> = (
-  props
-) => {
-  const {} = props;
-  const { t } = useTranslation();
-  const { project, projectQuery } = useProject();
-  const { processID } = useParams();
-
-  const process = project.processes.find(
-    (process) => process.processID === processID
+const ProcessContextProvider: React.FC<
+  PropsWithChildren<ProcessContextProviderProps>
+> = (props) => {
+  const { process, children } = props;
+  return (
+    <ProcessContext.Provider value={{ process }}>
+      {children}
+    </ProcessContext.Provider>
   );
-
-  if (projectQuery.isLoading) return <LoadingAnimation />;
-
-  if (process !== undefined && projectQuery.isFetched)
-    return (
-      <ProcessContext.Provider value={{ process }}>
-        <Outlet />
-      </ProcessContext.Provider>
-    );
-
-  if (projectQuery.isRefetching) return <LoadingAnimation />;
-  return <Navigate to={`/projects/${project.projectID}`} />;
 };
 
 export default ProcessContextProvider;

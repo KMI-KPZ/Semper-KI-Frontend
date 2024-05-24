@@ -1,13 +1,13 @@
 import { Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { ServiceType } from "../hooks/useService";
 import FactoryIcon from "@mui/icons-material/Factory";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import ServiceSelectItem, { ServiceSelectItemProps } from "./components/Item";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { Button } from "@component-library/index";
 import useProcess from "@/hooks/Process/useProcess";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
 
 interface ServiceSelectProps {}
 

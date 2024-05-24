@@ -6,7 +6,7 @@ import { MultipleProcessMutationProps } from "../types";
 import {
   ProcessChangesProps,
   ProcessDeletionsProps,
-} from "@/hooks/Process/useProcess";
+} from "../Querys/useGetProcess";
 
 export interface UpdateProcessProps {
   changes?: ProcessChangesProps;

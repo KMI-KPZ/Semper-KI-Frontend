@@ -1,29 +1,26 @@
-import React, { useContext, useEffect } from "react";
-import useService, { ServiceType } from "./useService";
 import { useNavigate } from "react-router-dom";
-import { ProcessContext } from "@/contexts/ProcessContext";
-import { ProjectContext } from "@/contexts/ProjectContext";
+import useProcess from "@/hooks/Process/useProcess";
+import { useEffect } from "react";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
 
 const useServiceEdit = () => {
-  const { process } = useContext(ProcessContext);
-  const { projectQuery } = useContext(ProjectContext);
+  const { process } = useProcess();
   const navigate = useNavigate();
   useEffect(() => {
-    if (!projectQuery.isRefetching && projectQuery.isFetched)
-      if (process.serviceType === undefined) navigate("service");
-      else
-        switch (process.serviceType) {
-          case ServiceType.MANUFACTURING:
-            navigate("../manufacturing");
-            break;
-          case ServiceType.MODELING:
-            navigate("../modelling");
-            break;
-          case ServiceType.NONE:
-            navigate("..");
-            break;
-        }
-  }, [process, projectQuery]);
+    if (process.serviceType === undefined) navigate("service");
+    else
+      switch (process.serviceType) {
+        case ServiceType.MANUFACTURING:
+          navigate("../manufacturing");
+          break;
+        case ServiceType.MODELING:
+          navigate("../modelling");
+          break;
+        case ServiceType.NONE:
+          navigate("..");
+          break;
+      }
+  }, [process]);
 };
 
 export default useServiceEdit;

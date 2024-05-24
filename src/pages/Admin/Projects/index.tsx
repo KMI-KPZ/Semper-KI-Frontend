@@ -18,7 +18,7 @@ import { Container } from "@component-library/index";
 import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 import { useProject } from "@/hooks/Project/useProject";
 import useSearch from "@/hooks/useSearch";
-import { ProcessStatus } from "@/hooks/Process/useProcess";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 
 interface Props {}
 

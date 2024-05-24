@@ -1,9 +1,8 @@
 import React from "react";
 import ProcessHeaderSearch from "./Search/Search";
 import { ServiceManufacturingWizard } from "./Wizard/Wizard";
-import useProcess, {
-  isProcessAtServiceStatus,
-} from "@/hooks/Process/useProcess";
+import useProcess from "@/hooks/Process/useProcess";
+import { isProcessAtServiceStatus } from "@/api/Process/Querys/useGetProcess";
 
 const ProcessHeader: React.FC = () => {
   const { process } = useProcess();

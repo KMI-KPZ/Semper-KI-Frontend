@@ -5,7 +5,7 @@ import useAdminDeleteUser, {
   AdminDeleteUserProps,
 } from "@/api/Admin/Mutations/useAdminDeleteUser";
 import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
-import { ProcessStatus } from "@/hooks/Process/useProcess";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { ProjectDetailsProps as ProjectDetails } from "@/hooks/Project/useProject";
 import { AuthorizedUserProps } from "@/hooks/useUser";
 import { AdminContext } from "@/routeOutlets/AdminOutlet";

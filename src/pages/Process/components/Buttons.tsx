@@ -9,13 +9,13 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import InfoIcon from "@mui/icons-material/Info";
 import { Badge } from "@component-library/Badge/Badge";
 import MailIcon from "@mui/icons-material/Mail";
-import { ProcessComponentState } from "../Process";
+import { ProcessComponentState } from "../ProcessPage";
 import useEvents from "@/hooks/useEvents/useEvents";
 import HistoryIcon from "@mui/icons-material/History";
 import { useNavigate, useParams } from "react-router-dom";
 import useDeleteProcess from "@/api/Process/Mutations/useDeleteProcess";
-import { Process, ProcessStatus } from "@/hooks/Process/useProcess";
 import useGeneralProcess from "@/hooks/Process/useGeneralProcess";
+import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 
 interface ProcessButtonsProps {
   user: UserProps;

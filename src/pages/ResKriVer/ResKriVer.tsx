@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import SendIcon from "@mui/icons-material/Send";
 import SemperKILogo from "@images/Logo-Semper.png";
 import ResKriVerLogo from "@images/ResKriVer_Logo.svg";
+import useCreateProject from "@/api/Project/Mutations/useCreateProject";
 
 interface ResKriVerProps {}
 
@@ -27,7 +28,7 @@ const ResKriVer: React.FC<ResKriVerProps> = (props) => {
   const { t } = useTranslation();
   let [searchParams] = useSearchParams();
   const entries = searchParams.entries();
-  const { createProject } = useProject();
+  const createProject = useCreateProject();
   const { setAppState } = useContext(AppContext);
 
   let data_: SearchParamProps[] = [];
@@ -36,7 +37,7 @@ const ResKriVer: React.FC<ResKriVerProps> = (props) => {
   }
 
   const handleOnClickButton = () => {
-    createProject();
+    createProject.mutate();
   };
 
   const { register, handleSubmit, formState } = useForm({

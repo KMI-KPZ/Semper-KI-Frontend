@@ -2,7 +2,23 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { UpdateProjectProps } from "@/hooks/Project/useProject";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import { ProjectDetailsProps } from "../Querys/useGetProject";
+
+export interface UpdateProjectProps {
+  changes?: ProjectChangesProps;
+  deletions?: ProjectDeletionsProps;
+}
+
+export interface ProjectChangesProps {
+  projectStatus?: ProcessStatus;
+  projectDetails?: ProjectDetailsProps;
+}
+
+export interface ProjectDeletionsProps {
+  projectDetails?: { title?: "" };
+  projectStatus?: "";
+}
 
 const useUpdateProject = () => {
   const queryClient = useQueryClient();

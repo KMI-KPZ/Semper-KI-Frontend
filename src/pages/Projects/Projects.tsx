@@ -13,6 +13,9 @@ import useGetFlatProjects, {
   FlatProject,
 } from "@/api/Project/Querys/useGetFlatProjects";
 import ProjectsTable from "./components/Table";
+import AddIcon from "@mui/icons-material/Add";
+import useCreateProject from "@/api/Project/Mutations/useCreateProject";
+import useDeleteProject from "@/api/Project/Mutations/useDeleteProject";
 
 interface ProjectsProps {}
 
@@ -23,12 +26,12 @@ const Projects: React.FC<ProjectsProps> = (props) => {
   const adminFlatProjects = useGetAdminFlatProjects();
   const flatProjects =
     user.usertype === UserType.ADMIN ? adminFlatProjects : _flatProjects;
-  const { createProject, deleteProject } = useProject();
+  const createProject = useCreateProject();
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<FlatProject>();
 
   const onButtonClickCreateProject = () => {
-    createProject();
+    createProject.mutate();
   };
 
   const ownProjects: FlatProject[] =
@@ -59,6 +62,8 @@ const Projects: React.FC<ProjectsProps> = (props) => {
               variant="primary"
               title={t("Projects.Projects.button.create")}
               onClick={onButtonClickCreateProject}
+              size="sm"
+              startIcon={<AddIcon />}
             />
           </PermissionGate>
         </Container>

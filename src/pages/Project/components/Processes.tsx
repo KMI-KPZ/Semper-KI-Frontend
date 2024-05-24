@@ -1,4 +1,3 @@
-import { Process } from "@/hooks/Process/useProcess";
 import { Button, Container, Divider, Text } from "@component-library/index";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -88,9 +87,8 @@ const ProjectProcesses: React.FC<ProjectProcessesProps> = (props) => {
           variant="primary"
           title={t("Project.components.Processes.button.create")}
         />
-        <Container className="gap-1">
-          <select
-            className={` bezier group flex
+        <Container
+          className={` bezier group flex
           h-fit flex-wrap
           items-center justify-center 
           gap-3 break-words 
@@ -106,37 +104,40 @@ const ProjectProcesses: React.FC<ProjectProcessesProps> = (props) => {
           hover:brightness-95 
           md:flex-nowrap md:whitespace-nowrap
           `}
+          onClick={() =>
+            setSortOrder((prevState) => (prevState === "asc" ? "desc" : "asc"))
+          }
+        >
+          <select
+            className="h-full w-full rounded-xl p-1 ring-2 ring-slate-300"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
           >
-            {keyList.map((key) => (
-              <option className="text-center" onClick={() => handleSort(key)}>
+            {keyList.map((key, index) => (
+              <option
+                key={index}
+                className="text-center"
+                onClick={() => handleSort(key)}
+              >
                 {t(`Project.components.Processes.sort.${key}`)}
-                <KeyboardArrowUpIcon />
               </option>
             ))}
           </select>
-          <Button
-            onClick={() =>
-              setSortOrder((prevState) =>
-                prevState === "asc" ? "desc" : "asc"
-              )
-            }
-            size="xs"
-            title={t("Project.components.Processes.sort.order")}
+          <a
+            href="#"
+            className={`duration-300 ${
+              sortOrder === "asc" ? "rotate-0" : "rotate-180"
+            }`}
           >
-            <div
-              className={`duration-300 ${
-                sortOrder === "asc" ? "rotate-0" : "rotate-180"
-              }`}
-            >
-              <KeyboardArrowDownIcon />
-            </div>
-          </Button>
+            <KeyboardArrowDownIcon />
+          </a>
         </Container>
       </Container>
       <Divider />
       {sortedProcesses.length > 0 ? (
         sortedProcesses.map((process) => (
-          <FlatProcessCard flatProcess={process} />
+          <FlatProcessCard flatProcess={process} key={process.processID} />
         ))
       ) : (
         <Text>{t("Project.components.Processes.noProcess")}</Text>

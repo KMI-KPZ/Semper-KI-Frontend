@@ -9,12 +9,11 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import ProjectInfo from "./components/Info";
 import useGetProject from "@/api/Project/Querys/useGetProject";
-import FlatProcessCard from "./components/FlatProcessCard";
 import ProjectProcesses from "./components/Processes";
 
 interface ProjectPageProps {}
 
-const ProjectPage2: React.FC<ProjectPageProps> = (props) => {
+const ProjectPage: React.FC<ProjectPageProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const project = useGetProject();
@@ -32,4 +31,4 @@ const ProjectPage2: React.FC<ProjectPageProps> = (props) => {
   );
 };
 
-export default ProjectPage2;
+export default ProjectPage;

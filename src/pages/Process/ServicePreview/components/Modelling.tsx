@@ -1,4 +1,4 @@
-import { Process } from "@/hooks/Process/useProcess";
+import { Process } from "@/api/Process/Querys/useGetProcess";
 import { Container } from "@component-library/index";
 import { Text } from "@component-library/index";
 import React from "react";

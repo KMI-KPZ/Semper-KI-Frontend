@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { ServiceManufacturingState } from "../types/types";
 import { ProcessModelCard } from "./components/Card";
 import { Button } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +14,7 @@ import { ModelProps } from "./types";
 import { select } from "d3";
 import { ProcessModelUpload } from "./components/Upload/Upload";
 import useGetModels from "@/api/Service/Manufacturing/Querys/useGetModels";
+import { ServiceManufacturingState } from "@/api/Service/Querys/useGetServices";
 
 interface Props {
   filters: FilterItemProps[];

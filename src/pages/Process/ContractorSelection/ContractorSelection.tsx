@@ -5,7 +5,6 @@ import { Button, Divider } from "@component-library/index";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Heading, Text } from "@component-library/index";
-import useService from "@/pages/Service/hooks/useService";
 import { useForm } from "react-hook-form";
 import { Container } from "@component-library/index";
 import ProjectContractorSelectionItem from "./components/ContractorItem";
@@ -16,8 +15,9 @@ import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { UserAddressProps } from "@/hooks/useUser";
 import AddressCard from "@/components/Address/AddressCard";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
-import { ProjectContext } from "@/contexts/ProjectContext";
-import { Process, ProcessStatus } from "@/hooks/Process/useProcess";
+import { Process } from "@/api/Process/Querys/useGetProcess";
+import { useProject } from "@/hooks/Project/useProject";
+import useService, { isServiceComplete } from "@/hooks/useService";
 
 interface Props {}
 
@@ -31,9 +31,8 @@ export interface ContractorSelectionFormData {
 const ProjectContractorSelection: React.FC<Props> = (props) => {
   const {} = props;
   const navigate = useNavigate();
-  const { project, checkedProcesses } = useContext(ProjectContext);
+  const { project } = useProject();
   const { t } = useTranslation();
-  const { isServiceComplete } = useService();
   const { user } = useAuthorizedUser();
   const updateProcess = useUpdateProcess();
 

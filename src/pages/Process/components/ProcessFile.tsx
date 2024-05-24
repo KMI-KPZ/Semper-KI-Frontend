@@ -11,7 +11,7 @@ import OwnerGate from "@/components/OwnerGate/OwnerGate";
 import useDownloadFile from "@/api/Process/Mutations/useDownloadFile";
 import useDownloadFiles from "@/api/Process/Mutations/useDownloadFiles";
 import useDeleteFile from "@/api/Process/Mutations/useDeleteFile";
-import { FileProps, Process } from "@/hooks/Process/useProcess";
+import { FileProps, Process } from "@/api/Process/Querys/useGetProcess";
 
 interface Props {
   process: Process;

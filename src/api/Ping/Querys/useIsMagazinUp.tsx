@@ -25,6 +25,7 @@ const useIsMagazinUp = () => {
   return useQuery<boolean, Error>({
     queryKey: ["ping"],
     queryFn: isMagazinUp,
+    enabled: false,
   });
 };
 

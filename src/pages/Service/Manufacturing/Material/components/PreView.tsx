@@ -6,6 +6,7 @@ import { Heading } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import useProcess from "@/hooks/Process/useProcess";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 
 interface Props {
   material: MaterialProps;
@@ -16,10 +17,14 @@ export const ProcessMaterialPreView: React.FC<Props> = (props) => {
   const { closeMaterialView, material } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { updateProcess } = useProcess();
+  const { process } = useProcess();
+  const updateProcess = useUpdateProcess();
 
   const handleOnClickButtonSelect = () => {
-    updateProcess({ changes: { serviceDetails: { material } } });
+    updateProcess.mutate({
+      processIDs: [process.processID],
+      updates: { changes: { serviceDetails: { material } } },
+    });
     navigate("../postprocessing");
   };
 

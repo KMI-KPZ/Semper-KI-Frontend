@@ -4,7 +4,7 @@ import { Button } from "@component-library/index";
 import { MaterialProps } from "../Material";
 import { Heading } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
-import useService from "@/pages/Service/hooks/useService";
+import useService from "@/hooks/useService";
 
 interface Props {
   material: MaterialProps;

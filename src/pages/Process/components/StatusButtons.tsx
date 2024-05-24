@@ -2,7 +2,7 @@ import { Button } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import useStatusButtons from "@/hooks/Project/useStatusButtons";
-import { Process } from "@/hooks/Process/useProcess";
+import { Process } from "@/api/Process/Querys/useGetProcess";
 
 interface ProcessStatusButtonsProps {
   process: Process;

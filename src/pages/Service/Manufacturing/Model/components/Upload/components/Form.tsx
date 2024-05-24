@@ -9,8 +9,8 @@ import logger from "@/hooks/useLogger";
 import { Button } from "@component-library/index";
 import ModelPreview from "@/pages/Test/STLViewer";
 import useUploadModel from "@/api/Service/Manufacturing/Mutations/useUploadModel";
-import { ProjectContext } from "@/contexts/ProjectContext";
-import { ProcessContext } from "@/contexts/ProcessContext";
+import { useProject } from "@/hooks/Project/useProject";
+import useProcess from "@/hooks/Process/useProcess";
 
 interface ManufacturingModelUploadFormProps {
   file: File;
@@ -22,8 +22,8 @@ const ManufacturingModelUploadForm: React.FC<
   const { file } = props;
   const { t } = useTranslation();
   const uploadModel = useUploadModel();
-  const { project } = useContext(ProjectContext);
-  const { process } = useContext(ProcessContext);
+  const { project } = useProject();
+  const { process } = useProcess();
   const url = URL.createObjectURL(file);
 
   const schema = yup

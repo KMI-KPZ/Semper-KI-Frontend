@@ -1,14 +1,13 @@
 import React from "react";
 import ProcessPostProcessCatalog from "./components/Catalog";
-import { ServiceManufacturingState } from "../types/types";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
 import { FilterItemProps } from "../Filter/Filter";
-import useService from "../../hooks/useService";
+import useService from "../../../../hooks/useService";
 import useGetPostProcessigns from "@/api/Service/Manufacturing/Querys/useGetPostProcessigns";
-import useProcess, {
-  isProcessAtServiceStatus,
-} from "@/hooks/Process/useProcess";
+import useProcess from "@/hooks/Process/useProcess";
+import { ServiceManufacturingState } from "@/api/Service/Querys/useGetServices";
+import { isProcessAtServiceStatus } from "@/api/Process/Querys/useGetProcess";
 
 interface Props {
   processState: ServiceManufacturingState;

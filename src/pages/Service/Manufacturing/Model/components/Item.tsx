@@ -4,9 +4,9 @@ import { Button } from "@component-library/index";
 import { getModelURI } from "@/services/utils";
 import { ModelProps } from "../types";
 import { Heading } from "@component-library/index";
-import useProcess, {
-  isProcessAtServiceStatus,
-} from "@/hooks/Process/useProcess";
+import useProcess from "@/hooks/Process/useProcess";
+import useDeleteModel from "@/api/Process/Mutations/useDeleteModel";
+import { isProcessAtServiceStatus } from "@/api/Process/Querys/useGetProcess";
 
 interface Props {
   model: ModelProps;
@@ -15,7 +15,8 @@ interface Props {
 const ProcessModelItem: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { model } = props;
-  const { process, deleteModel } = useProcess();
+  const { process } = useProcess();
+  const deleteModel = useDeleteModel();
 
   const getDate = (): string => {
     let date: Date = new Date(model.date);
@@ -30,7 +31,7 @@ const ProcessModelItem: React.FC<Props> = (props) => {
   };
 
   const handleOnClickButtonDeselect = () => {
-    deleteModel();
+    deleteModel.mutate({ processID: process.processID });
   };
 
   return (

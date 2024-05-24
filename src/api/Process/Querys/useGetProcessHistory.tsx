@@ -3,8 +3,8 @@ import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ProcessStatusType } from "@/pages/Service/Manufacturing/Header/types";
 import { useParams } from "react-router-dom";
-import { ServiceProps } from "@/pages/Service/hooks/useService";
-import { ChatMessageProps, FileProps } from "@/hooks/Process/useProcess";
+import { ChatMessageProps, FileProps } from "./useGetProcess";
+import { ServiceProps } from "@/api/Service/Querys/useGetServices";
 
 export enum ProcessHistoryType {
   CREATION = 1,

@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { ServiceType } from "../hooks/useService";
 import { Container } from "@component-library/index";
 import { Heading } from "@component-library/index";
 

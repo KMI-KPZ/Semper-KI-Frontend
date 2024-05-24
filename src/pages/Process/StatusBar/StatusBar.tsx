@@ -9,10 +9,10 @@ import StatusItem from "./components/Item";
 import StatusItemConnector from "./components/ItemConnector";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
-import { ServiceType } from "@/pages/Service/hooks/useService";
 import DescriptionIcon from "@mui/icons-material/Description";
 import ModeIcon from "@mui/icons-material/Mode";
-import { ProcessStatus } from "@/hooks/Process/useProcess";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 
 interface StatusViewProps {
   status: ProcessStatus;

@@ -3,13 +3,12 @@ import { Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProcessHistoryTextItem from "./TextItem";
-import logger from "@/hooks/useLogger";
 import ProcessHistoryServiceText from "./ServiceText";
 import {
   HistoryProps,
   ProcessHistoryType,
 } from "@/api/Process/Querys/useGetProcessHistory";
-import { ProcessStatus } from "@/hooks/Process/useProcess";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 
 interface ProcessHistoryItemProps {
   item: HistoryProps;

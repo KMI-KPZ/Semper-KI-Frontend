@@ -1,9 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@component-library/index";
-import { ServiceType } from "../../hooks/useService";
 import { useNavigate, useParams } from "react-router-dom";
-import useProcess, { ProcessStatus } from "@/hooks/Process/useProcess";
+import useProcess from "@/hooks/Process/useProcess";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 
 export interface ServiceSelectItemProps {
   serviceType: ServiceType;
@@ -15,9 +17,9 @@ export interface ServiceSelectItemProps {
 const ServiceSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
   const { active, icon, serviceType, serviceSelected } = props;
   const { t } = useTranslation();
-  const { updateProcess } = useProcess();
+  const updateProcess = useUpdateProcess();
   const navigate = useNavigate();
-  const { processID } = useParams();
+  const { process } = useProcess();
 
   const handleOnClickCard = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -26,11 +28,14 @@ const ServiceSelectItem: React.FC<ServiceSelectItemProps> = (props) => {
     if (active) {
       navigateToService();
     } else {
-      updateProcess(
+      updateProcess.mutate(
         {
-          changes: {
-            serviceType,
-            processStatus: ProcessStatus.SERVICE_IN_PROGRESS,
+          processIDs: [process.processID],
+          updates: {
+            changes: {
+              serviceType,
+              processStatus: ProcessStatus.SERVICE_IN_PROGRESS,
+            },
           },
         },
         {

@@ -8,8 +8,6 @@ import { Divider } from "@component-library/index";
 import ProcessButtons from "./components/Buttons";
 import ProcessInfo from "./components/Info";
 import { Container } from "@component-library/index";
-import { Process, ProcessStatus } from "../../hooks/Process/useProcess";
-import { getTitleFromProcess } from "@/pages/Service/Overview/components/Item";
 import ProjectFile from "./components/ProcessFile";
 import ProcessStatusButtons from "./components/StatusButtons";
 import { Upload } from "@/components/Upload";
@@ -20,6 +18,24 @@ import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useUploadFiles from "@/api/Process/Mutations/useUploadFiles";
 import useCheckedProcesses from "@/hooks/Project/useCheckedProcesses";
 import ProjectTitleForm from "../Project/components/TitleForm";
+import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
+import { TFunction } from "i18next";
+
+export const getTitleFromProcess = (
+  process: Process,
+  t: TFunction<"translation", undefined>
+): string => {
+  return process.processDetails.title !== undefined
+    ? process.processDetails.title
+    : process.serviceType !== undefined
+    ? t(
+        `enum.ServiceType.${
+          ServiceType[process.serviceType] as keyof typeof ServiceType
+        }`
+      )
+    : t("Service.Overview.components.Item.titleEmpty");
+};
 
 interface Props {
   process: Process;

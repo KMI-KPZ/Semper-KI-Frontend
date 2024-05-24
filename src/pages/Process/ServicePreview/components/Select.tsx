@@ -5,13 +5,13 @@ import { LoadingAnimation, Text } from "@component-library/index";
 import { Error } from "@/pages/Error/Error";
 import FactoryIcon from "@mui/icons-material/Factory";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
-import { ServiceType } from "@/pages/Service/hooks/useService";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
-import logger from "@/hooks/useLogger";
 import Card from "@component-library/Card/Card";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
-import useGetServices from "@/api/Service/Querys/useGetServices";
-import { Process, ProcessStatus } from "@/hooks/Process/useProcess";
+import useGetServices, {
+  ServiceType,
+} from "@/api/Service/Querys/useGetServices";
+import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 
 interface ProcessServiceSelectProps {
   process: Process;

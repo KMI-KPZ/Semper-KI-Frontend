@@ -7,6 +7,7 @@ import { ModelProps } from "../types";
 import { Heading } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
 import useProcess from "@/hooks/Process/useProcess";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 
 interface Props {
   model: ModelProps;
@@ -17,14 +18,18 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { model, closeModelView } = props;
   const navigate = useNavigate();
-  const { updateProcess } = useProcess();
+  const { process } = useProcess();
+  const updateProcess = useUpdateProcess();
   const getDate = (): string => {
     let date: Date = new Date(model.date);
     return date.toLocaleDateString("uk-Uk");
   };
   const handleOnClickButtonSelect = () => {
     closeModelView();
-    updateProcess({ changes: { serviceDetails: { model } } });
+    updateProcess.mutate({
+      processIDs: [process.processID],
+      updates: { changes: { serviceDetails: { model } } },
+    });
     navigate("../material");
   };
   return (

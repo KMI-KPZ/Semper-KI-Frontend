@@ -7,9 +7,8 @@ import ProcessPostProcessingCard from "./Card";
 import { PostProcessingProps } from "../PostProcessing";
 import { Modal } from "@component-library/index";
 import useModal from "@/hooks/useModal";
-import useProcess, {
-  isProcessAtServiceStatus,
-} from "@/hooks/Process/useProcess";
+import useProcess from "@/hooks/Process/useProcess";
+import { isProcessAtServiceStatus } from "@/api/Process/Querys/useGetProcess";
 
 interface Props<Item> {
   grid: boolean;

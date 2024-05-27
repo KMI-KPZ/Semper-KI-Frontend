@@ -19,6 +19,7 @@ import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 import { useProject } from "@/hooks/Project/useProject";
 import useSearch from "@/hooks/useSearch";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import useDeleteProject from "@/api/Project/Mutations/useDeleteProject";
 
 interface Props {}
 
@@ -26,11 +27,12 @@ const AdminProjects: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { flatProjects } = useAdmin();
-  const { deleteProject } = useProject();
+  const deleteProject = useDeleteProject();
   const { filterDataBySearchInput, handleSearchInputChange } = useSearch();
 
   const handleOnClickButtonDelete = (projectID: string) => {
-    if (window.confirm(t("Admin.Projects.confirm"))) deleteProject([projectID]);
+    if (window.confirm(t("Admin.Projects.confirm")))
+      deleteProject.mutate([projectID]);
   };
 
   return (

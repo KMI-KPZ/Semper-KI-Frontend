@@ -2,7 +2,7 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { OrganizationInfoProps } from "@/pages/Organization/hooks/useOrganizations";
-import { ServiceType } from "@/pages/Service/hooks/useService";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
 
 const useGetOrganization = () => {
   const queryClient = useQueryClient();

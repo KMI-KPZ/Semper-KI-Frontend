@@ -1,11 +1,10 @@
-import { LoadingAnimation } from "@component-library/index";
 import { Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { ServiceType } from "@/pages/Service/hooks/useService";
 import { UseFormRegister } from "react-hook-form";
 import { CheckoutFormData } from "../Checkout";
-import { Process } from "@/hooks/Process/useProcess";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
+import { Process } from "@/api/Process/Querys/useGetProcess";
 
 type Props = {
   index: number;

@@ -22,6 +22,7 @@ import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import useLogin from "@/api/Login/Mutation/useLogin";
 import { useProject } from "@/hooks/Project/useProject";
+import useCreateProject from "@/api/Project/Mutations/useCreateProject";
 
 interface HomeProps {}
 
@@ -29,7 +30,7 @@ const Home: React.FC<HomeProps> = (props) => {
   const {} = props;
   const { t, i18n } = useTranslation();
   const login = useLogin();
-  const { createProject } = useProject();
+  const createProject = useCreateProject();
   const navigate = useNavigate();
 
   const handleOnClickButton = () => {
@@ -37,7 +38,7 @@ const Home: React.FC<HomeProps> = (props) => {
   };
 
   const handleOnClickButtonDemonstrator = () => {
-    createProject();
+    createProject.mutate();
   };
 
   return (

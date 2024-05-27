@@ -5,8 +5,8 @@ import { Button, LoadingSuspense, Text } from "@component-library/index";
 import { Modal } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { Container } from "@component-library/index";
-import { ServiceType } from "@/pages/Service/hooks/useService";
 import OrganizationForm from "@/components/Form/OrganizationForm";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
 
 interface OrganizationInfoProps {}
 

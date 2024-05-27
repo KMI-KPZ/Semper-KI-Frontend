@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Process } from "../Process/useProcess";
 
 const useScrollToProcess = (processID: string | undefined) => {
   useEffect(() => {

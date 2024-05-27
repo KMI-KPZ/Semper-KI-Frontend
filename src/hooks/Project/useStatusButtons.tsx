@@ -1,11 +1,8 @@
 import { ReactNode } from "react";
-import useProcess, { Process, ProcessStatus } from "../Process/useProcess";
 import useUser, { UserType } from "@/hooks/useUser";
 import { useNavigate } from "react-router-dom";
-import useCheckedProcesses from "./useCheckedProcesses";
 import { useProject } from "./useProject";
 import { useTranslation } from "react-i18next";
-import logger from "@/hooks/useLogger";
 import { externalStatusButtonData } from "./externalStatusButtonData";
 import CancelIcon from "@mui/icons-material/Cancel";
 import FactoryIcon from "@mui/icons-material/Factory";
@@ -23,12 +20,13 @@ import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import ScheduleSendIcon from "@mui/icons-material/ScheduleSend";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { ServiceType } from "@/pages/Service/hooks/useService";
 import ReportIcon from "@mui/icons-material/Report";
-import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useDeleteProcess from "@/api/Process/Mutations/useDeleteProcess";
 import useStatusButtonRequest from "@/api/Process/Mutations/useStatusButtonRequest";
+import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import useSendProject from "@/api/Project/Mutations/useSendProject";
+import useVerifyProject from "@/api/Project/Mutations/useVerifyProject";
 
 interface UseStatusButtonsReturnProps {
   getProjectStatusButtons: (processes: Process[]) => StatusButtonProcessProps[];
@@ -110,8 +108,9 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   const { user } = useUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { setCheckedProcesses } = useCheckedProcesses();
-  const { project, sendProject, verifyProject } = useProject();
+  const { project } = useProject();
+  const sendProject = useSendProject();
+  const verifyProject = useVerifyProject();
   const updateProcess = useUpdateProcess();
   const deleteProcess = useDeleteProcess();
   const statusButtonRequest = useStatusButtonRequest();
@@ -338,7 +337,6 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
     button: StatusButtonProps,
     processID: string
   ) => {
-    setCheckedProcesses([processID]);
     handleButtonAction(button, [processID]);
   };
 
@@ -367,17 +365,17 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
           if (
             button.action.data.localTestDataStatus === "VERIFYING_AND_REQUESTED"
           ) {
-            verifyProject({
+            verifyProject.mutate({
               processIDs,
               send: true,
             });
           } else if (button.action.data.localTestDataStatus === "VERIFYING") {
-            verifyProject({
+            verifyProject.mutate({
               processIDs,
               send: false,
             });
           } else if (button.action.data.localTestDataStatus === "REQUESTED") {
-            sendProject(processIDs);
+            sendProject.mutate(processIDs);
           } else {
             const processStatusString = button.action.data
               .localTestDataStatus as string;

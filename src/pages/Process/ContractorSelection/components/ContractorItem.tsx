@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useCheckedProcesses from "../../../../hooks/Project/useCheckedProcesses";
 import { twMerge } from "tailwind-merge";
 import ProcessInfoCard from "../../../Project/components/FlatProcessCard";
 import { Container } from "@component-library/index";
@@ -23,18 +22,12 @@ const ProjectContractorSelectionItem: React.FC<
 > = (props) => {
   const { register, errors, index, process } = props;
   const { t } = useTranslation();
-  const { checkedProcesses } = useCheckedProcesses();
   const contractors = useGetContractors(process.processID);
 
   return (
     <div
       key={index}
-      className={twMerge(
-        `flex w-full flex-col items-center justify-center gap-20  p-5 md:flex-row md:items-start md:justify-between`,
-        checkedProcesses.includes(process.processID)
-          ? "bg-white"
-          : "bg-slate-100"
-      )}
+      className={`flex w-full flex-col items-center justify-center gap-20  bg-white p-5 md:flex-row md:items-start md:justify-between `}
     >
       <ProcessInfoCard flatProcess={process} />
       <Container
@@ -54,10 +47,7 @@ const ProjectContractorSelectionItem: React.FC<
             >
               <input
                 type="radio"
-                {...register(`processes.${index}.contractorID`, {
-                  required: checkedProcesses.includes(process.processID),
-                  disabled: !checkedProcesses.includes(process.processID),
-                })}
+                {...register(`processes.${index}.contractorID`)}
                 value={manufacturer.hashedID}
               />
               <Container direction="col" align="start">

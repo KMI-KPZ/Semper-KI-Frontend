@@ -1,6 +1,6 @@
-import { ProcessStatus } from "../Process/useProcess";
 import { UserType } from "@/hooks/useUser";
 import { StatusButtonPropsExtern } from "./useStatusButtons";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 
 export const externalStatusButtonData: StatusButtonPropsExtern[] = [
   {

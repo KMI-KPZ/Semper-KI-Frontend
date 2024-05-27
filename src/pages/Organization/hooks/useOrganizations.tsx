@@ -1,7 +1,5 @@
 import { UseMutationResult, UseQueryResult } from "@tanstack/react-query";
-import { ServiceType } from "@/pages/Service/hooks/useService";
 import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
-import useAssignRole from "@/api/Organization/Mutations/useAssignRole";
 import useGetOrganizationUsers, {
   OrganizationsUser,
 } from "@/api/Organization/Querys/useGetOrganizationUsers";
@@ -11,6 +9,7 @@ import useGetOrganizationPermissions, {
 import useGetOrganization from "@/api/Organization/Querys/useGetOrganization";
 import useGetOrganizationRolePermissions from "@/api/Organization/Querys/useGetOrganizationRolePermissions";
 import useGetOrganizationRoles from "@/api/Organization/Querys/useGetOrganizationRoles";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
 
 interface useOrganizationsReturnProps {
   userQuery: UseQueryResult<OrganizationsUser[], Error>;

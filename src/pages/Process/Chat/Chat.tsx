@@ -7,8 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { Modal } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
-import useProcess, { ChatMessageProps } from "@/hooks/Process/useProcess";
+import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
+import { ChatMessageProps } from "@/api/Process/Querys/useGetProcess";
 
 interface ProcessChatProps {}
 

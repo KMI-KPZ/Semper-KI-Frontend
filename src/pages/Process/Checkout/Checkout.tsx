@@ -7,9 +7,9 @@ import { Button } from "@component-library/index";
 import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 import ProjectCheckoutItem from "./components/Item";
-import { Process, ProcessStatus } from "@/hooks/Process/useProcess";
-import { ProjectContext } from "@/routeOutlets/ProjectOutlet";
 import { useProject } from "@/hooks/Project/useProject";
+import useSendProject from "@/api/Project/Mutations/useSendProject";
+import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 
 interface ProjectCheckoutProps {}
 
@@ -20,15 +20,15 @@ export interface CheckoutFormData {
 const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { sendProject } = useProject();
+  const sendProject = useSendProject();
 
-  const { projectQuery: query } = useContext(ProjectContext);
+  const { project } = useProject();
   const processes: Process[] =
-    query.data !== undefined &&
-    query.data.processes.filter(
+    project.data !== undefined &&
+    project.data.processes.filter(
       (process) => process.processStatus === ProcessStatus.VERIFIED
     ).length > 0
-      ? query.data.processes.filter(
+      ? project.data.processes.filter(
           (process) => process.processStatus === ProcessStatus.VERIFIED
         )
       : [];

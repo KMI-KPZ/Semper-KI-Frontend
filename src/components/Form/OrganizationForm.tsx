@@ -6,7 +6,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
-import { ServiceType } from "@/pages/Service/hooks/useService";
 import TextInput from "@component-library/Form/Inputs/TextInput";
 import useOrganizations, {
   OrganizationInfoProps,
@@ -15,7 +14,9 @@ import { LoadingAnimation } from "@component-library/index";
 import { Container } from "@component-library/index";
 import useGeneralInput from "@component-library/Form/hooks/useGeneralInput";
 import useUpdateOrganizationInfos from "@/api/Organization/Mutations/useUpdateOrganizationInfos";
-import useGetServices from "@/api/Service/Querys/useGetServices";
+import useGetServices, {
+  ServiceType,
+} from "@/api/Service/Querys/useGetServices";
 
 interface OrganizationFormProps {
   closeEdit: () => void;

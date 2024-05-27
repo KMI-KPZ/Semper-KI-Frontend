@@ -7,15 +7,15 @@ import {
 } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { Project, getProjectFiles } from "@/api/Project/Querys/useGetProject";
-import {
-  GerneralUpdateServiceProps,
-  ServiceProps,
-  ServiceType,
-} from "@/pages/Service/hooks/useService";
-import { ManufacturingServiceProps } from "@/pages/Service/Manufacturing/types/types";
 import { ModelingServiceProps } from "@/pages/Service/Modelling/Modelling";
 import { UserAddressProps } from "@/hooks/useUser";
 import { StatusButtonPropsExtern } from "@/hooks/Project/useStatusButtons";
+import {
+  GerneralUpdateServiceProps,
+  ManufacturingServiceProps,
+  ServiceProps,
+  ServiceType,
+} from "@/api/Service/Querys/useGetServices";
 
 export interface ProcessDetailsProps {
   provisionalContractor?: string;

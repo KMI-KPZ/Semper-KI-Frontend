@@ -1,4 +1,4 @@
-import { ProcessStatus } from "../Process/useProcess";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { StatusButtonPropsExtern } from "./useStatusButtons";
 
 export const exampleRemoteStatusButtonData: StatusButtonPropsExtern[] = [

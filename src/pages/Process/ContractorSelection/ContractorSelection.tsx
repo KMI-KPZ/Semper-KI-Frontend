@@ -15,7 +15,7 @@ import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { UserAddressProps } from "@/hooks/useUser";
 import AddressCard from "@/components/Address/AddressCard";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
-import { Process } from "@/api/Process/Querys/useGetProcess";
+import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { useProject } from "@/hooks/Project/useProject";
 import useService, { isServiceComplete } from "@/hooks/useService";
 
@@ -232,7 +232,8 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
                     isServiceComplete(
                       process.serviceType,
                       process.serviceDetails
-                    ) && process.processStatus === ProcessStatus.SERVICE_READY
+                    ) &&
+                    process.flatProcessStatus === ProcessStatus.SERVICE_READY
                 )
                 .map((process, index) => (
                   <ProjectContractorSelectionItem

@@ -8,6 +8,7 @@ import useUser, { UserType } from "@/hooks/useUser";
 import { ContentBox } from "@component-library/index";
 import useGetFlatProjects from "@/api/Project/Querys/useGetFlatProjects";
 import { useProject } from "@/hooks/Project/useProject";
+import useCreateProject from "@/api/Project/Mutations/useCreateProject";
 
 interface HomeProjectsProps {}
 
@@ -17,13 +18,13 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const { user } = useUser();
 
   const flatProjects = useGetFlatProjects();
-  const { createProject } = useProject();
+  const createProject = useCreateProject();
 
   const handleOnClickButtonNew = () => {
-    createProject();
+    createProject.mutate();
   };
   const handleOnClickButtonDemo = () => {
-    createProject();
+    createProject.mutate();
   };
 
   return (

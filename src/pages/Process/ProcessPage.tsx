@@ -16,7 +16,6 @@ import useEvents from "@/hooks/useEvents/useEvents";
 import ProcessAddress from "./components/Address";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useUploadFiles from "@/api/Process/Mutations/useUploadFiles";
-import useCheckedProcesses from "@/hooks/Project/useCheckedProcesses";
 import ProjectTitleForm from "../Project/components/TitleForm";
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
@@ -60,7 +59,6 @@ const ProcessPage: React.FC<Props> = (props) => {
     statusCountAction: "still",
     statusCountReset: false,
   });
-  const { handleOnChangeCheckboxSelect } = useCheckedProcesses();
   const updateProcess = useUpdateProcess();
   const uploadFiles = useUploadFiles();
   const { deleteEvent, getProcessEventItem } = useEvents();
@@ -129,17 +127,6 @@ const ProcessPage: React.FC<Props> = (props) => {
     >
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row lg:justify-between">
         <Container direction="row" gap={3} className="flex-wrap md:flex-nowrap">
-          <input
-            id={`selectProcess${process.processID}`}
-            type="checkbox"
-            className="h-6 w-6"
-            name={t("Projects.Project.Project.label.selectProcess")}
-            value={t("Projects.Project.Process.Process.label.selectProcess", {
-              name: process.processDetails.title,
-            })}
-            checked={checked}
-            onChange={(e) => handleOnChangeCheckboxSelect(e, process.processID)}
-          />
           <ProjectTitleForm
             forId={`selectProcess${process.processID}`}
             title={getTitleFromProcess(process, t)}

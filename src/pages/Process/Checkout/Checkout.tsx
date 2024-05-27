@@ -10,11 +10,12 @@ import ProjectCheckoutItem from "./components/Item";
 import { useProject } from "@/hooks/Project/useProject";
 import useSendProject from "@/api/Project/Mutations/useSendProject";
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import { FlatProcess } from "@/api/Project/Querys/useGetProject";
 
 interface ProjectCheckoutProps {}
 
 export interface CheckoutFormData {
-  processes: { process: Process; checked: boolean }[];
+  processes: { process: FlatProcess; checked: boolean }[];
 }
 
 const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
@@ -23,15 +24,7 @@ const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
   const sendProject = useSendProject();
 
   const { project } = useProject();
-  const processes: Process[] =
-    project.data !== undefined &&
-    project.data.processes.filter(
-      (process) => process.processStatus === ProcessStatus.VERIFIED
-    ).length > 0
-      ? project.data.processes.filter(
-          (process) => process.processStatus === ProcessStatus.VERIFIED
-        )
-      : [];
+  const processes: FlatProcess[] = [];
 
   const {
     register,
@@ -49,13 +42,11 @@ const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
   const navigate = useNavigate();
 
   const handleOnClickButtonSend = (data: CheckoutFormData) => {
-    if (query.data !== undefined) {
-      sendProject(
-        data.processes
-          .filter((process) => process.checked === true)
-          .map((process) => process.process.processID)
-      );
-    }
+    sendProject.mutate(
+      data.processes
+        .filter((process) => process.checked === true)
+        .map((process) => process.process.processID)
+    );
   };
 
   return (

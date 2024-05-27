@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Outlet } from "react-router-dom";
-import {  LoadingAnimation } from "@component-library/index";
+import { ContentBox, LoadingAnimation } from "@component-library/index";
 import useUser, { UserType } from "@/hooks/useUser";
 import useGetAdminProject from "@/api/Admin/Querys/useGetAdminProject";
 import useGetProject from "@/api/Project/Querys/useGetProject";

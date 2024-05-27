@@ -52,42 +52,28 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
     formState: { errors },
   } = useForm<ContractorSelectionFormData>({
     defaultValues: async () => ({
-      processes:
-        project.processes.length === 0
-          ? []
-          : project.processes
-              .filter((process) =>
-                isServiceComplete(process.serviceType, process.serviceDetails)
-              )
-              .map((process) => {
-                return {
-                  process: process,
-                  contractorID: "",
-                };
-              }),
+      processes: [],
     }),
   });
 
   const onSubmit = (data: ContractorSelectionFormData) => {
-    data.processes
-      .filter((process) => checkedProcesses.includes(process.process.processID))
-      .forEach((process, index, allProcesses) => {
-        updateProcess.mutate({
-          processIDs: [process.process.processID],
-          updates: {
-            changes: {
-              processStatus: ProcessStatus.CONTRACTOR_SELECTED,
-              provisionalContractor: process.contractorID,
-              processDetails: {
-                clientDeliverAddress: deliverAddress,
-                clientBillingAddress: addressesEqual
-                  ? deliverAddress
-                  : billingAddress,
-              },
+    data.processes.forEach((process, index, allProcesses) => {
+      updateProcess.mutate({
+        processIDs: [process.process.processID],
+        updates: {
+          changes: {
+            processStatus: ProcessStatus.CONTRACTOR_SELECTED,
+            provisionalContractor: process.contractorID,
+            processDetails: {
+              clientDeliverAddress: deliverAddress,
+              clientBillingAddress: addressesEqual
+                ? deliverAddress
+                : billingAddress,
             },
           },
-        });
+        },
       });
+    });
     navigate("..");
   };
 
@@ -226,24 +212,15 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
 
         <div className="flex w-full flex-col items-center justify-start gap-5">
           {project.processes.length > 0
-            ? project.processes
-                .filter(
-                  (process) =>
-                    isServiceComplete(
-                      process.serviceType,
-                      process.serviceDetails
-                    ) &&
-                    process.flatProcessStatus === ProcessStatus.SERVICE_READY
-                )
-                .map((process, index) => (
-                  <ProjectContractorSelectionItem
-                    key={index}
-                    process={process}
-                    index={index}
-                    register={register}
-                    errors={errors}
-                  />
-                ))
+            ? project.processes.map((process, index) => (
+                <ProjectContractorSelectionItem
+                  key={index}
+                  process={process}
+                  index={index}
+                  register={register}
+                  errors={errors}
+                />
+              ))
             : null}
         </div>
         <Container className="bg-white p-5" width="full">

@@ -5,10 +5,11 @@ import { UseFormRegister } from "react-hook-form";
 import { CheckoutFormData } from "../Checkout";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import { Process } from "@/api/Process/Querys/useGetProcess";
+import { FlatProcess } from "@/api/Project/Querys/useGetProject";
 
 type Props = {
   index: number;
-  process: Process;
+  process: FlatProcess;
   register: UseFormRegister<CheckoutFormData>;
 };
 
@@ -23,7 +24,7 @@ const ProjectCheckoutItem: React.FC<Props> = (props) => {
         type="checkbox"
         {...register(`processes.${index}.checked`)}
       />
-      <Heading variant="h2">{process.processDetails.title}</Heading>
+      <Heading variant="h2">{process.title}</Heading>
       <Heading variant="h2">{ServiceType[process.serviceType]}</Heading>
     </label>
   );

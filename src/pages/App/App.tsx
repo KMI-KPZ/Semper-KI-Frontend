@@ -176,11 +176,20 @@ const App: React.FC = () => {
                 index
                 element={
                   <PermissionGate element="Projects">
-                    <Projects />
+                    <ContentBox>
+                      <Projects />
+                    </ContentBox>
                   </PermissionGate>
                 }
               />
-              <Route path=":projectID/*" element={<ProjectOutlet />}>
+              <Route
+                path=":projectID/*"
+                element={
+                  <ContentBox>
+                    <ProjectOutlet />
+                  </ContentBox>
+                }
+              >
                 <Route
                   index
                   element={

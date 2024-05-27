@@ -65,7 +65,7 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
               )}
             </Text>
             <Text>
-              {t(`types.FlatProjectStatus.${process.flatProcessStatus}`)}
+              {t(`types.FlatProcessStatus.${process.flatProcessStatus}`)}
             </Text>
           </Container>
         </Container>

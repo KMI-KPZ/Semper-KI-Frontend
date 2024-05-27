@@ -1,5 +1,5 @@
 import { Project } from "@/api/Project/Querys/useGetProject";
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, createContext } from "react";
 
 interface ProjectOutletProps {
   project: Project;
@@ -9,7 +9,7 @@ export interface ProjectContextProps {
   project: Project;
 }
 
-export const ProjectContext = React.createContext<ProjectContextProps>({
+export const ProjectContext = createContext<ProjectContextProps>({
   project: {
     client: "",
     createdWhen: new Date(),

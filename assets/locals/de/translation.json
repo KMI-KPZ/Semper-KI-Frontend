@@ -154,7 +154,7 @@
       "messages": "Nachrichten",
       "files": "Dateien"
     },
-    "FlatProjectStatus": {
+    "FlatProcessStatus": {
       "ACTION_REQUIRED": "Aktion erforderlich",
       "WAITING_CONTRACTOR": "Warten auf Auftragnehmer",
       "WAITING_CLIENT": "Warten auf Kunde",

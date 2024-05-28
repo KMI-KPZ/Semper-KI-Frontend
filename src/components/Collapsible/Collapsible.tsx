@@ -1,5 +1,5 @@
 import { Button, Container, Text } from "@component-library/index";
-import React, { PropsWithChildren, useState } from "react";
+import React, { PropsWithChildren, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { twMerge } from "tailwind-merge";
@@ -11,27 +11,34 @@ interface CollapsibleProps {
 const Collapsible: React.FC<PropsWithChildren<CollapsibleProps>> = (props) => {
   const { children, className } = props;
   const { t } = useTranslation();
+  const collapsibleRef = useRef<null | HTMLDivElement>(null);
   const [expand, setExpand] = useState<boolean>(false);
+
+  const handleOnClickButton = () => {
+    if (collapsibleRef !== null && collapsibleRef.current !== null) {
+      collapsibleRef.current.style.maxHeight = expand
+        ? "0px"
+        : collapsibleRef.current.scrollHeight + "px";
+      setExpand(!expand);
+    } else return;
+  };
 
   return (
     <>
-      <Container
-        direction="col"
-        width="full"
+      <div
+        ref={collapsibleRef}
         className={twMerge(
-          `gap-2 overflow-clip duration-300 ${
-            expand ? " max-h-40" : " max-h-0 "
-          }`,
+          ` flex max-h-0 w-full flex-col gap-2 overflow-hidden  duration-300`,
           className
         )}
       >
         {children}
-      </Container>
+      </div>
       <Button
         title={t(
           `Process.components.Info.button.${expand ? "collapse" : "expand"}`
         )}
-        onClick={() => setExpand(!expand)}
+        onClick={handleOnClickButton}
         variant="text"
         className="gap-2"
       >

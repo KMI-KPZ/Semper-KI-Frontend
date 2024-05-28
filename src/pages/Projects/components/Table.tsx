@@ -2,12 +2,8 @@ import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 import { Button, Text } from "@component-library/index";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useProject } from "../../../hooks/Project/useProject";
-import logger from "@/hooks/useLogger";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { useNavigate } from "react-router-dom";
 import ProjectsTableRow from "./TableRow";
 
 interface ProjectsTableProps {
@@ -43,25 +39,19 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
     return <div className="h-6 w-6" />;
   };
 
-  // Sort the projects based on the sortColumn and sortOrder
-  const sortedProjects = useMemo(() => {
+  const sortProjects = (a: FlatProject, b: FlatProject) => {
     if (sortColumn) {
-      const sorted = [...projects].sort((a, b) => {
-        const valueA = a[sortColumn];
-        const valueB = b[sortColumn];
-        logger(valueA, valueB);
-        if (valueA < valueB) {
-          return sortOrder === "asc" ? -1 : 1;
-        }
-        if (valueA > valueB) {
-          return sortOrder === "asc" ? 1 : -1;
-        }
-        return 0;
-      });
-      return sorted;
+      const valueA = a[sortColumn];
+      const valueB = b[sortColumn];
+      if (valueA < valueB) {
+        return sortOrder === "asc" ? -1 : 1;
+      }
+      if (valueA > valueB) {
+        return sortOrder === "asc" ? 1 : -1;
+      }
     }
-    return projects;
-  }, [projects, sortColumn, sortOrder]);
+    return 0;
+  };
 
   return (
     <table className="w-full border-separate border-spacing-x-0 border-spacing-y-2">
@@ -133,7 +123,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
         </tr>
       </thead>
       <tbody>
-        {sortedProjects.map((flatProject) => (
+        {projects.sort(sortProjects).map((flatProject) => (
           <ProjectsTableRow
             key={flatProject.projectID}
             flatProject={flatProject}

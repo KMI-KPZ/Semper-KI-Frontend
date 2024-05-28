@@ -41,6 +41,7 @@ export type DefaultProcessProps = {
   serviceDetails: ServiceProps;
   createdWhen: Date;
   updatedWhen: Date;
+  accessedWhen: Date;
   files: FilesDescriptionProps[];
   messages: ChatMessageProps[];
 };
@@ -167,43 +168,23 @@ const useGetProcess = () => {
   const { projectID, processID } = useParams();
   const getProcess = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/getProcess/${processID}`)
+      .get(
+        `${process.env.VITE_HTTP_API_URL}/public/getProcess/${projectID}/${processID}`
+      )
       .then((response) => {
-        const data: Process = response.data;
-
-        logger("useGetProcess | getProcess ✅ |", response);
-        return data;
-      });
-
-  const getProcessMock = async () =>
-    authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/getProject/${projectID}/`)
-      .then((response) => {
-        const _process: any = response.data.processes.find(
-          (process: any) => process.processID === processID
-        );
         const process: Process = {
-          client: _process.client,
-          processDetails: _process.processDetails,
-          processID: _process.processID,
-          processStatus: _process.processStatus,
-          serviceDetails: _process.serviceDetails,
-          serviceStatus: _process.serviceStatus,
-          processStatusButtons: _process.processStatusButtons,
-          serviceType: _process.serviceType,
-          messages: _process.messages.messages,
-          contractor: _process.contractor,
-          createdWhen: new Date(_process.createdWhen),
-          updatedWhen: new Date(_process.updatedWhen),
-          files: getProjectFiles(_process.files),
+          ...response.data,
+          updatedWhen: new Date(response.data.updatedWhen),
+          createdWhen: new Date(response.data.createdWhen),
+          accessedWhen: new Date(response.data.accessedWhen),
         };
-        logger("useGetProject | getProject ✅ |", response);
+        logger("useGetProcess | getProcess ✅ |", response, process);
         return process;
       });
 
   return useQuery<Process, Error>({
     queryKey: ["project", projectID, processID],
-    queryFn: getProcessMock,
+    queryFn: getProcess,
   });
 };
 

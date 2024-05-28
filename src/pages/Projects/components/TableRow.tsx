@@ -26,7 +26,7 @@ const ProjectsTableRow: React.FC<ProjectsTableRowProps> = (props) => {
   return (
     <tr
       key={flatProject.projectID}
-      className="hover:ring- group rounded-xl ring-0 duration-300 hover:cursor-pointer hover:ring-2 hover:ring-blau-button"
+      className="group rounded-xl ring-0 duration-300 hover:cursor-pointer hover:ring-2 hover:ring-blau-button "
       onClick={() => navigate(`${flatProject.projectID}`)}
     >
       <td className=" rounded-xl rounded-e-none border-2 border-r-0 text-center">

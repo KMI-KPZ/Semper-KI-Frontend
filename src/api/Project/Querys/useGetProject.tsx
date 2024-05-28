@@ -41,7 +41,7 @@ export interface FlatProcess {
   createdWhen: Date;
   flatProcessStatus: FlatProcessStatus;
   amount: number;
-  img: string;
+  imgPath: string;
 }
 
 export const getProjectFiles = (
@@ -72,46 +72,14 @@ const useGetProject = () => {
           updatedWhen: new Date(response.data.updatedWhen),
           processes: response.data.processes.map(
             (process: any): FlatProcess => ({
-              title: process.processDetails.title,
+              title: process.title,
               processID: process.processID,
-              flatProcessStatus: process.processStatus,
+              flatProcessStatus: process.flatProcessStatus,
               serviceType: process.serviceType,
               createdWhen: new Date(process.createdWhen),
               updatedWhen: new Date(process.updatedWhen),
-              amount: process.processDetails.amount,
-              img: TestImg,
-            })
-          ),
-        };
-        logger("useGetProject | getProject ✅ |", response);
-        return project;
-      });
-  const getProjectOld = async () =>
-    authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/getProject/${projectID}/`)
-      .then((response) => {
-        const project: Project = {
-          client: response.data.client,
-          projectID: response.data.projectID,
-          projectStatus: response.data.projectStatus,
-          projectDetails: response.data.projectDetails,
-          createdWhen: new Date(response.data.createdWhen),
-          updatedWhen: new Date(response.data.updatedWhen),
-          processes: response.data.processes.map(
-            (process: any): Process => ({
-              client: process.client,
-              processDetails: process.processDetails,
-              processID: process.processID,
-              processStatus: process.processStatus,
-              serviceDetails: process.serviceDetails,
-              serviceStatus: process.serviceStatus,
-              processStatusButtons: process.processStatusButtons,
-              serviceType: process.serviceType,
-              messages: process.messages.messages,
-              contractor: process.contractor,
-              createdWhen: new Date(process.createdWhen),
-              updatedWhen: new Date(process.updatedWhen),
-              files: getProjectFiles(process.files),
+              amount: process.amount,
+              imgPath: process.imgPath === "" ? TestImg : process.imgPath,
             })
           ),
         };

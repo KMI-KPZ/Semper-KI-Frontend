@@ -43,7 +43,8 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
       width="full"
       direction="row"
       justify="between"
-      className={`overflow-clip rounded-xl ring-2 ${getRingColor()}`}
+      className={`overflow-clip rounded-xl ring-2 ${getRingColor()} duration-300 hover:cursor-pointer hover:shadow-md hover:ring-4 hover:ring-opacity-50`}
+      onClick={handleOnClickButtonContinue}
     >
       <img src={TestImg} alt="" className="h-full " />
       <Container width="full" direction="row" justify="between" className="p-5">

@@ -7,10 +7,13 @@ import useCreateProcess from "@/api/Process/Mutations/useCreateProcess";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { FlatProcess } from "@/api/Project/Querys/useGetProject";
+import logger from "@/hooks/useLogger";
 
 interface ProjectProcessesProps {
   processes: FlatProcess[];
 }
+
+type SortOrder = "asc" | "desc";
 
 const ProjectProcesses: React.FC<ProjectProcessesProps> = (props) => {
   const { processes } = props;
@@ -21,52 +24,26 @@ const ProjectProcesses: React.FC<ProjectProcessesProps> = (props) => {
     createProcess.mutate();
   };
 
-  const [sortMenuOpen, setSortMenuOpen] = useState<boolean>(false); // State variable to keep track of the sort menu open/close
-  const [sortColumn, setSortColumn] =
-    useState<keyof FlatProcess>("updatedWhen"); // State variable to keep track of the column to sort
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc"); // State variable to keep track of the sorting order
+  const [sort, setSort] = useState<{
+    column: keyof FlatProcess;
+    order: SortOrder;
+  }>({ column: "updatedWhen", order: "asc" });
 
-  const handleSort = (column: keyof FlatProcess) => {
-    if (sortColumn === column) {
-      // If the same column is clicked, toggle the sorting order
-      setSortOrder((prevState) => (prevState === "asc" ? "desc" : "asc"));
-    } else {
-      // If a different column is clicked, set the new column and reset the sorting order to ascending
-      setSortColumn(column);
-      setSortOrder("asc");
-      setSortMenuOpen(false);
-    }
+  const handleSort = (column: keyof FlatProcess, order: SortOrder) => {
+    setSort({ column, order });
   };
 
-  const getSortIcon = (column: keyof FlatProcess): React.ReactNode => {
-    if (sortColumn === column) {
-      return sortOrder === "asc" ? (
-        <KeyboardArrowUpIcon />
-      ) : (
-        <KeyboardArrowDownIcon />
-      );
+  const sortFlatProcess = (a: FlatProcess, b: FlatProcess) => {
+    const valueA = a[sort.column] ?? "";
+    const valueB = b[sort.column] ?? "";
+    if (valueA < valueB) {
+      return sort.order === "asc" ? -1 : 1;
     }
-    return <div className="h-6 w-6" />;
+    if (valueA > valueB) {
+      return sort.order === "asc" ? 1 : -1;
+    }
+    return 0;
   };
-
-  // Sort the projects based on the sortColumn and sortOrder
-  const sortedProcesses = useMemo(() => {
-    if (sortColumn) {
-      const sorted = [...processes].sort((a, b) => {
-        const valueA = a[sortColumn] ?? "";
-        const valueB = b[sortColumn] ?? "";
-        if (valueA < valueB) {
-          return sortOrder === "asc" ? -1 : 1;
-        }
-        if (valueA > valueB) {
-          return sortOrder === "asc" ? 1 : -1;
-        }
-        return 0;
-      });
-      return sorted;
-    }
-    return processes;
-  }, [processes, sortColumn, sortOrder]);
 
   const keyList: (keyof FlatProcess)[] = [
     "title",
@@ -87,58 +64,64 @@ const ProjectProcesses: React.FC<ProjectProcessesProps> = (props) => {
           variant="primary"
           title={t("Project.components.Processes.button.create")}
         />
-        <Container
-          className={` bezier group flex
-          h-fit flex-wrap
-          items-center justify-center 
-          gap-3 break-words 
-          rounded-lg border-2    
-          border-slate-500
-          bg-slate-50 p-2
-          text-center text-black 
-          shadow-button-secondary brightness-100
-          transition 
-          duration-200 
-          hover:cursor-pointer 
-          hover:shadow-button-inner-secondary
-          hover:brightness-95 
-          md:flex-nowrap md:whitespace-nowrap
-          `}
-          onClick={() =>
-            setSortOrder((prevState) => (prevState === "asc" ? "desc" : "asc"))
-          }
+
+        <select
+          className="bezier group flex
+            h-fit flex-wrap
+            items-center justify-center 
+            gap-3 break-words 
+            rounded-lg border-2    
+            border-slate-500
+            bg-slate-50 p-2
+            text-center text-black 
+            shadow-button-secondary brightness-100
+            transition 
+            duration-200 
+            hover:cursor-pointer 
+            hover:shadow-button-inner-secondary
+            hover:brightness-95 
+            md:flex-nowrap md:whitespace-nowrap"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          value={sort.column}
+          onChange={(e) => {
+            const value = e.target.value;
+            const [column, order] = value.split(".");
+            handleSort(column as keyof FlatProcess, order as SortOrder);
+          }}
         >
-          <select
-            className="h-full w-full rounded-xl p-1 ring-2 ring-slate-300"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            {keyList.map((key, index) => (
+          {keyList.map((key, index) => (
+            <React.Fragment key={index}>
               <option
-                key={index}
+                key={index + "asc"}
                 className="text-center"
-                onClick={() => handleSort(key)}
+                value={`${key}.asc`}
               >
                 {t(`Project.components.Processes.sort.${key}`)}
+                {":    "}
+                {t(`Project.components.Processes.sort.asc`)}
               </option>
-            ))}
-          </select>
-          <a
-            href="#"
-            className={`duration-300 ${
-              sortOrder === "asc" ? "rotate-0" : "rotate-180"
-            }`}
-          >
-            <KeyboardArrowDownIcon />
-          </a>
-        </Container>
+              <option
+                key={index + "desc"}
+                className="text-center"
+                value={`${key}.dsc`}
+              >
+                {t(`Project.components.Processes.sort.${key}`)}
+                {":    "}
+                {t(`Project.components.Processes.sort.dsc`)}
+              </option>
+            </React.Fragment>
+          ))}
+        </select>
       </Container>
       <Divider />
-      {sortedProcesses.length > 0 ? (
-        sortedProcesses.map((process) => (
-          <FlatProcessCard flatProcess={process} key={process.processID} />
-        ))
+      {processes.length > 0 ? (
+        processes
+          .sort(sortFlatProcess)
+          .map((process) => (
+            <FlatProcessCard key={process.processID} flatProcess={process} />
+          ))
       ) : (
         <Text>{t("Project.components.Processes.noProcess")}</Text>
       )}

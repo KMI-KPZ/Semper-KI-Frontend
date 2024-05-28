@@ -888,8 +888,10 @@
           "createdWhen": "Erstellt",
           "flatProcessStatus": "Status",
           "amount": "Anzahl",
-          "img": "Bild",
-          "order": "Reihenfolge"
+          "imgPath": "Bild",
+          "order": "Reihenfolge",
+          "asc": "Aufsteigend",
+          "dsc": "Absteigend"
         },
         "noProcess": "Keine Prozesse vorhanden",
         "button": {

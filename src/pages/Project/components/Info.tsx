@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Collapsible from "@/components/Collapsible/Collapsible";
 
 interface ProjectInfoProps {
   project: Project;
@@ -42,13 +43,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = (props) => {
           <Text>{project.updatedWhen.toLocaleString()}</Text>
         </Container>
       </Container>
-      <Container
-        direction="col"
-        width="full"
-        className={`gap-2 overflow-clip duration-300 ${
-          expand ? " max-h-40" : " max-h-0 "
-        }`}
-      >
+      <Collapsible>
         <Container
           direction="row"
           justify="start"
@@ -94,24 +89,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = (props) => {
             <Text>{project.processes.length}</Text>
           </Container>
         </Container>
-      </Container>
-      <Button
-        title={t(
-          `Project.components.Info.button.${expand ? "collapse" : "expand"}`
-        )}
-        onClick={() => setExpand(!expand)}
-        variant="text"
-        className="gap-2"
-      >
-        <Text variant="body">
-          {t(
-            `Project.components.Info.button.${expand ? "collapse" : "expand"}`
-          )}
-        </Text>
-        <div className={`duration-300  ${expand ? "rotate-180" : "rotate-0"}`}>
-          <ExpandMoreIcon />
-        </div>
-      </Button>
+      </Collapsible>
     </Container>
   );
 };

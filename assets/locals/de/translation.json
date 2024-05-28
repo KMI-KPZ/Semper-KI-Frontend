@@ -877,6 +877,24 @@
       }
     }
   },
+  "Process": {
+    "components": {
+      "Info": {
+        "name": "Name:",
+        "updated": "letzte Aktualisierung:",
+        "created": "Erstellt am:",
+        "status": "Prozessstatus:",
+        "button": {
+          "menu": "Informationen Menu",
+          "expand": "Mehr Anzeigen",
+          "collapse": "Weniger Anzeigen"
+        }
+      }
+    },
+    "ProcessPage": {
+      "heading": "Prozessdetails"
+    }
+  },
   "Project": {
     "components": {
       "Processes": {
@@ -926,7 +944,7 @@
       }
     },
     "ProjectPage": {
-      "header": "Projektübersicht"
+      "header": "Projektdetails"
     }
   },
   "Projects": {

@@ -38,6 +38,8 @@ import ProjectCheckout from "../Process/Checkout/Checkout";
 import ProcessHistory from "../Process/History/History";
 import ProcessChat from "../Process/Chat/Chat";
 import ServiceRoutes from "@/routes/ServiceRoutes";
+import ProcessPage2 from "../Process/ProcessPage2";
+import ProcessPage from "../Process/ProcessPage";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -199,7 +201,7 @@ const App: React.FC = () => {
                   }
                 />
                 <Route path=":processID/*" element={<ProcessOutlet />}>
-                  <Route index element={<ProjectCheckout />} />
+                  <Route index element={<ProcessPage2 />} />
                   <Route element={<AuthorizedUserRouteOutlet />}>
                     <Route
                       path="history"

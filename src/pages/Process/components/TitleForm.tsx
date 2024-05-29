@@ -60,7 +60,7 @@ const ProcessTitleForm: React.FC<ProcessTitleFormProps> = (props) => {
   };
 
   return (
-    <Container direction="row" gap={3} className="flex-wrap md:flex-nowrap">
+    <Container direction="row" gap={3} className="flex-wrap md:flex-nowrap ">
       <Heading variant={"h2"} className="md:whitespace-nowrap">
         {t("Project.components.TitleForm.name")}
       </Heading>

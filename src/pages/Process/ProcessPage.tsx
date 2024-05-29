@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import ProcessInfo from "./components/Info";
 import useProcess from "@/hooks/Process/useProcess";
 
-interface ProcessPage2Props {}
+interface ProcessPageProps {}
 
-const ProcessPage: React.FC<ProcessPage2Props> = (props) => {
+const ProcessPage: React.FC<ProcessPageProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { process } = useProcess();

@@ -38,7 +38,6 @@ import ProjectCheckout from "../Process/Checkout/Checkout";
 import ProcessHistory from "../Process/History/History";
 import ProcessChat from "../Process/Chat/Chat";
 import ServiceRoutes from "@/routes/ServiceRoutes";
-import ProcessPage from "../Process/ProcessPage2";
 import ProcessPage from "../Process/ProcessPage";
 
 export type AppState = {

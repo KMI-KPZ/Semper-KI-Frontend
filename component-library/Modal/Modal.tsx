@@ -137,9 +137,7 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
         md:max-h-[90vh]
         md:max-w-7xl
         md:rounded-xl
-        md:bg-transparent
       md:bg-white
-        md:bg-opacity-70
      `
       )}
       onKeyDown={onKeyDown}
@@ -150,7 +148,7 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
     >
       <div
         className={twMerge(
-          `fixed  left-0 top-0 flex h-screen w-screen items-center justify-center  md:relative md:left-auto md:top-auto md:h-full md:w-full md:p-10`,
+          `fixed  left-0 top-0 flex h-screen w-screen items-center justify-center md:relative md:left-auto md:top-auto md:h-full md:w-full md:p-10`,
           className
         )}
         onClick={handleOnClickChildren}

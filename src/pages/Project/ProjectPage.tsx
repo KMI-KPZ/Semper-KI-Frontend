@@ -3,6 +3,7 @@ import {
   Container,
   Heading,
   LoadingAnimation,
+  Modal,
   Text,
 } from "@component-library/index";
 import React from "react";
@@ -10,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import ProjectInfo from "./components/Info";
 import useGetProject from "@/api/Project/Querys/useGetProject";
 import ProjectProcesses from "./components/Processes";
+import ProjectTitleForm from "./components/TitleForm";
 
 interface ProjectPageProps {}
 

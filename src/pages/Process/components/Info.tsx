@@ -1,11 +1,13 @@
 import { Project } from "@/api/Project/Querys/useGetProject";
-import { Button, Container, Text } from "@component-library/index";
+import { Button, Container, Modal, Text } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 import { Process } from "@/api/Process/Querys/useGetProcess";
 import Collapsible from "@/components/Collapsible/Collapsible";
+import CardMenu from "@/components/CardMenu/CardMenu";
+import ProcessTitleForm from "./TitleForm";
 
 interface ProcessInfoProps {
   process: Process;
@@ -14,6 +16,11 @@ interface ProcessInfoProps {
 const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
   const { process } = props;
   const { t } = useTranslation();
+  const [titleEdit, setTitleEdit] = React.useState<boolean>(false);
+
+  const handleOnClickButtonEditTitle = () => {
+    setTitleEdit(!titleEdit);
+  };
 
   return (
     <Container
@@ -21,14 +28,15 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
       direction="col"
       className="relative gap-2 bg-white p-5"
     >
-      <Button
-        className="absolute right-3 top-3"
-        width="fit"
-        title={t("Process.components.Info.button.menu")}
-        variant="text"
-      >
-        <MoreHorizIcon />
-      </Button>
+      <CardMenu title={t("Project.components.Info.button.menu")}>
+        <Button
+          stopPropagation={false}
+          title={t("Process.components.Info.button.editTitle")}
+          variant="secondary"
+          size="sm"
+          onClick={handleOnClickButtonEditTitle}
+        />
+      </CardMenu>
       <Container direction="row" width="full" justify="start" className="gap-0">
         <Container className="w-1/3 md:w-1/3" justify="start">
           <Text variant="strong" className="w-40">
@@ -64,6 +72,21 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
           </Container>
         </Container>
       </Collapsible>
+      <Modal
+        modalKey="processTitleEdit"
+        open={titleEdit}
+        closeModal={() => {
+          setTitleEdit(false);
+        }}
+      >
+        <ProcessTitleForm
+          title={process.processDetails.title}
+          close={() => {
+            setTitleEdit(false);
+          }}
+          processID={process.processID}
+        />
+      </Modal>
     </Container>
   );
 };

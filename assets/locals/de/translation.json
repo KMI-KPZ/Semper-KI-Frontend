@@ -338,6 +338,9 @@
     "PermissionGate": {
       "message": "Diese Funktion ist mit ihren Rechten nicht nutzbar"
     },
+    "PMenu": {
+      "button": { "open": "Menu Öffnen", "close": "Menu Schließen" }
+    },
     "Switch": {},
     "Table": {},
     "Upload": {
@@ -880,14 +883,15 @@
   "Process": {
     "components": {
       "Info": {
-        "name": "Name:",
+        "name": "Prozessname:",
         "updated": "letzte Aktualisierung:",
         "created": "Erstellt am:",
         "status": "Prozessstatus:",
         "button": {
           "menu": "Informationen Menu",
           "expand": "Mehr Anzeigen",
-          "collapse": "Weniger Anzeigen"
+          "collapse": "Weniger Anzeigen",
+          "editTitle": "Prozessname bearbeiten"
         }
       }
     },
@@ -930,7 +934,7 @@
         }
       },
       "Info": {
-        "name": "Name:",
+        "name": "Projektname:",
         "updated": "letzte Aktualisierung:",
         "created": "Erstellt am:",
         "count": "Anzahl Prozesse:",
@@ -939,8 +943,12 @@
         "button": {
           "menu": "Informationen Menu",
           "expand": "Mehr Anzeigen",
-          "collapse": "Weniger Anzeigen"
+          "collapse": "Weniger Anzeigen",
+          "editTitle": "Projektname bearbeiten"
         }
+      },
+      "TitleForm": {
+        "name": "Projektname:"
       }
     },
     "ProjectPage": {

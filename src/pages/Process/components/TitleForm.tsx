@@ -9,22 +9,26 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { boolean } from "yup";
 import OwnerGate from "@/components/OwnerGate/OwnerGate";
 import useUpdateProject from "@/api/Project/Mutations/useUpdateProject";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import { useParams } from "react-router-dom";
 
-interface ProjectTitleFormProps {
+interface ProcessTitleFormProps {
   title?: string;
   close: () => void;
+  processID: string;
 }
 
-const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
-  const { title, close } = props;
+const ProcessTitleForm: React.FC<ProcessTitleFormProps> = (props) => {
+  const { title, close, processID } = props;
   const { t } = useTranslation();
   const [state, setState] = useState<string>(title !== undefined ? title : "");
-  const updatedProject = useUpdateProject();
+  const updateProcess = useUpdateProcess();
 
   const updatedTitle = () => {
-    updatedProject.mutate(
+    updateProcess.mutate(
       {
-        changes: { projectDetails: { title: state } },
+        processIDs: [processID],
+        updates: { changes: { processDetails: { title: state } } },
       },
       {
         onSuccess: () => {
@@ -84,4 +88,4 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
   );
 };
 
-export default ProjectTitleForm;
+export default ProcessTitleForm;

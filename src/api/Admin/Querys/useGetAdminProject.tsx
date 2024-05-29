@@ -38,6 +38,8 @@ const useGetAdminProject = () => {
               createdWhen: new Date(process.createdWhen),
               updatedWhen: new Date(process.updatedWhen),
               files: getProjectFiles(process.files),
+              accessedWhen: new Date(process.accessedWhen),
+              processStatusButtons: process.processStatusButtons,
             })
           ),
         };

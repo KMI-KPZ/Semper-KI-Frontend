@@ -6,7 +6,7 @@ import useProcess from "@/hooks/Process/useProcess";
 
 interface ProcessPage2Props {}
 
-const ProcessPage2: React.FC<ProcessPage2Props> = (props) => {
+const ProcessPage: React.FC<ProcessPage2Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { process } = useProcess();
@@ -21,4 +21,4 @@ const ProcessPage2: React.FC<ProcessPage2Props> = (props) => {
   );
 };
 
-export default ProcessPage2;
+export default ProcessPage;

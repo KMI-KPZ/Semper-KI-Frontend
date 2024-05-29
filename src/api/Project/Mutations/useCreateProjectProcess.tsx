@@ -13,7 +13,7 @@ const useCreateProjectProcess = () => {
       )
       .then((response) => {
         logger("useCreateProjectProcess | createProjectProcess ✅ |", response);
-        return response.data;
+        return response.data.processID;
       })
       .catch((error) => {
         logger("useCreateProjectProcess | createProjectProcess ❌ |", error);

@@ -19,6 +19,7 @@ interface ButtonProps {
   extern?: boolean;
   testid?: string;
   target?: "_blank" | "_self" | "_parent" | "_top";
+  stopPropagation?: boolean;
 }
 type ButtonSize = "xs" | "sm" | "md" | "lg";
 type ButtonVariant =
@@ -42,6 +43,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     testid = "button",
     extern = false,
     target = "_self",
+    stopPropagation = true,
     onClick,
     title,
     children,
@@ -56,7 +58,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
   ) => {
     if (!extern) {
       e.preventDefault();
-      e.stopPropagation();
+      if (stopPropagation === true) e.stopPropagation();
       if (onClick !== undefined && active && !loading) {
         onClick(e);
       }

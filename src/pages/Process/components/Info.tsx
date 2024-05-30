@@ -16,7 +16,12 @@ interface ProcessInfoProps {
 const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
   const { process } = props;
   const { t } = useTranslation();
-  const [titleEdit, setTitleEdit] = React.useState<boolean>(false);
+  const [titleEdit, setTitleEdit] = React.useState<boolean>(
+    process.processDetails.title === undefined ||
+      process.processDetails.title === ""
+      ? true
+      : false
+  );
 
   const handleOnClickButtonEditTitle = () => {
     setTitleEdit(!titleEdit);

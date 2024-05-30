@@ -15,7 +15,12 @@ interface ProjectInfoProps {
 const ProjectInfo: React.FC<ProjectInfoProps> = (props) => {
   const { project } = props;
   const { t } = useTranslation();
-  const [titleEdit, setTitleEdit] = React.useState<boolean>(false);
+  const [titleEdit, setTitleEdit] = React.useState<boolean>(
+    project.projectDetails.title === undefined ||
+      project.projectDetails.title === ""
+      ? true
+      : false
+  );
 
   const handleOnClickButtonEditTitle = () => {
     setTitleEdit(!titleEdit);

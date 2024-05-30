@@ -893,6 +893,12 @@
           "collapse": "Weniger Anzeigen",
           "editTitle": "Prozessname bearbeiten"
         }
+      },
+      "TitleForm": {
+        "name": "Prozessname:",
+        "button": {
+          "save": "Speichern"
+        }
       }
     },
     "ProcessPage": {

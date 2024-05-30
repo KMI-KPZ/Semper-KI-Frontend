@@ -62,7 +62,7 @@ const ProcessTitleForm: React.FC<ProcessTitleFormProps> = (props) => {
   return (
     <Container direction="row" gap={3} className="flex-wrap md:flex-nowrap ">
       <Heading variant={"h2"} className="md:whitespace-nowrap">
-        {t("Project.components.TitleForm.name")}
+        {t("Process.components.TitleForm.name")}
       </Heading>
       <input
         autoFocus
@@ -77,7 +77,7 @@ const ProcessTitleForm: React.FC<ProcessTitleFormProps> = (props) => {
           <Button
             onClick={handleOnClickEditCheckButton}
             variant="secondary"
-            title={t("Projects.Project.components.TitleForm.button.edit")}
+            title={t("Process.components.TitleForm.button.save")}
             size="xs"
             width="fit"
             children={<CheckIcon fontSize="small" />}

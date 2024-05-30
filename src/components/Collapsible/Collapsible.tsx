@@ -42,7 +42,7 @@ const Collapsible: React.FC<PropsWithChildren<CollapsibleProps>> = (props) => {
       <div
         ref={collapsibleRef}
         className={twMerge(
-          ` flex max-h-0 w-full flex-col gap-2 overflow-hidden duration-300 `,
+          `max-h-0 w-full flex-col gap-2 overflow-hidden duration-300 ease-in-out `,
           className
         )}
       >

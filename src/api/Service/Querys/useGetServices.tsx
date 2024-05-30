@@ -6,10 +6,18 @@ import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessin
 import { ModelingServiceProps } from "@/pages/Service/Modelling/Modelling";
 import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
 import { MaterialProps } from "@/pages/Service/Manufacturing/Material/Material";
+import Service from "@/pages/Service/Service";
 
 export interface ServiceItemProps {
   name: string;
   identifier: ServiceType;
+}
+
+export interface DisplayService {
+  title: string;
+  imgPath: string;
+  description: string;
+  type: ServiceType;
 }
 
 export enum ServiceType {

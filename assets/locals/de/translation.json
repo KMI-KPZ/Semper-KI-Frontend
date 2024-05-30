@@ -901,6 +901,11 @@
         }
       }
     },
+    "Service": {
+      "Service": {
+        "title": "Entwurf"
+      }
+    },
     "ProcessPage": {
       "heading": "Prozessdetails"
     }

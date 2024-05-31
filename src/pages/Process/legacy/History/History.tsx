@@ -5,7 +5,7 @@ import {
   LoadingSuspense,
   Text,
 } from "@component-library/index";
-import React from "react";
+import React, { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ProcessHistoryItem from "./components/Item";

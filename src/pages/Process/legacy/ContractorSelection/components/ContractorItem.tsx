@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
-import ProcessInfoCard from "../../../Project/components/FlatProcessCard";
+import ProcessInfoCard from "../../../../Project/components/FlatProcessCard";
 import { Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
 import { FieldErrors, UseFormRegister } from "react-hook-form";

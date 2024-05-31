@@ -34,9 +34,9 @@ import Projects from "../Projects/Projects";
 import ProjectOutlet from "@/routeOutlets/ProjectOutlet";
 import ProjectPage from "../Project/ProjectPage";
 import ProcessOutlet from "@/routeOutlets/ProcessOutlet";
-import ProjectCheckout from "../Process/Checkout/Checkout";
-import ProcessHistory from "../Process/History/History";
-import ProcessChat from "../Process/Chat/Chat";
+import ProjectCheckout from "../Process/legacy/Checkout/Checkout";
+import ProcessHistory from "../Process/legacy/History/History";
+import ProcessChat from "../Process/legacy/Chat/Chat";
 import ServiceRoutes from "@/routes/ServiceRoutes";
 import ProcessPage from "../Process/ProcessPage";
 

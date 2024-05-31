@@ -924,6 +924,25 @@
         }
       }
     },
+    "StatusWizard": {
+      "components": {},
+      "StatusWizard": {
+        "item": {
+          "draft": "Entwurf",
+          "service": "Service",
+          "contractorSelected": "Auftragnehmer",
+          "verified": "Überprüfung",
+          "requested": "Anfrage",
+          "clarification": "Rückfragen",
+          "offer": "Angebot",
+          "client": "Bestätigung",
+          "confirmed": "Bestätigt",
+          "production": "Produktion",
+          "delivery": "Lieferung",
+          "finished": "Abgeschlossen"
+        }
+      }
+    },
     "ProcessPage": {
       "heading": "Prozessdetails"
     }

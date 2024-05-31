@@ -6,11 +6,12 @@ import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessin
 import { ModelingServiceProps } from "@/pages/Service/Modelling/Modelling";
 import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
 import { MaterialProps } from "@/pages/Service/Manufacturing/Material/Material";
-import Service from "@/pages/Service/Service";
+import TestImg from "@images/Test2.png";
 
 export interface ServiceItemProps {
   name: string;
-  identifier: ServiceType;
+  type: ServiceType;
+  imgPath: string;
 }
 
 export interface DisplayService {
@@ -91,9 +92,21 @@ const useGetServices = () => {
       .then((response) => {
         const services: ServiceItemProps[] = objectToArray<ServiceItemProps>(
           response.data
-        ).filter((service) => service.identifier !== 0);
+        ).filter((service) => service.type !== 0);
         logger("useGetServices | getServices ✅ |", response);
-        return services;
+        const mockedServices: ServiceItemProps[] = [
+          {
+            name: "Manufacturing",
+            type: ServiceType.MANUFACTURING,
+            imgPath: TestImg,
+          },
+          {
+            name: "Modeling",
+            type: ServiceType.MODELING,
+            imgPath: TestImg,
+          },
+        ];
+        return mockedServices;
       });
 
   return useQuery<ServiceItemProps[], Error>({

@@ -902,8 +902,26 @@
       }
     },
     "Service": {
+      "components": {
+        "ServiceCard": {
+          "title": {
+            "MANUFACTURING": "3D-Modell Herstellen lassen",
+            "MODELING": "3D-Modell Entwerfen lassen",
+            "NONE": "error"
+          },
+          "description": {
+            "MANUFACTURING": "Lassen Sie Ihr individuelles 3D-Modell professionell drucken. Wir vermitteln sie auf Grund ihrer Anforderungen zu dem am besten passenden Herstellern.",
+            "MODELING": "Beauftragen Sie einen Experten, ein individuelles 3D-Modell für Sie zu entwerfen.",
+            "NONE": "error"
+          }
+        }
+      },
       "Service": {
-        "title": "Entwurf"
+        "title": "Entwurf",
+        "noType": "kein Service ausgewählt",
+        "button": {
+          "editType": "Service Typ bearbeiten"
+        }
       }
     },
     "ProcessPage": {

@@ -145,15 +145,13 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
                     <input
                       className={`h-6 w-6 bg-slate-100`}
                       type="checkbox"
-                      value={service.identifier}
+                      value={service.type}
                       {...register(`supportedServices`)}
                     />
                     <Text variant={`body`}>
                       {t(
                         `enum.ServiceType.${
-                          ServiceType[
-                            service.identifier
-                          ] as keyof typeof ServiceType
+                          ServiceType[service.type] as keyof typeof ServiceType
                         }`
                       )}
                     </Text>

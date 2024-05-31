@@ -35,8 +35,8 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
     >
       <CardMenu title={t("Project.components.Info.button.menu")}>
         <Button
-          stopPropagation={false}
           title={t("Process.components.Info.button.editTitle")}
+          stopPropagation={false}
           variant="secondary"
           size="sm"
           onClick={handleOnClickButtonEditTitle}

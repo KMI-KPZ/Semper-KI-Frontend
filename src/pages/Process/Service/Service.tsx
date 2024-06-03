@@ -1,11 +1,12 @@
 import { Process } from "@/api/Process/Querys/useGetProcess";
 import CardMenu from "@/components/CardMenu/CardMenu";
-import { Button, Container, Heading } from "@component-library/index";
+import { Button, Container, Divider, Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ServiceCards from "./components/ServiceCards";
+import ServiceSelection from "./ServiceSelection/ServiceSelection";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import ServiceDetails from "./ServiceDetails/ServiceDetails";
 
 interface ServiceProps {
   process: Process;
@@ -49,9 +50,14 @@ const Service: React.FC<ServiceProps> = (props) => {
           }`}
         </Heading>
       </Container>
+      <Divider />
       {process.serviceType === undefined ||
       process.serviceType === ServiceType.NONE ? (
-        <ServiceCards />
+        <ServiceSelection />
+      ) : null}
+      {process.serviceType !== undefined &&
+      process.serviceType !== ServiceType.NONE ? (
+        <ServiceDetails process={process} />
       ) : null}
     </Container>
   );

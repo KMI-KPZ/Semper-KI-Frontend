@@ -94,7 +94,7 @@ const ProcessServiceManufacturing: React.FC<
         <Container direction="col" className="w-full md:w-fit">
           <Card
             className={`w-full flex-row flex-wrap md:w-fit ${
-              process.serviceDetails.model === undefined
+              process.serviceDetails.models === undefined
                 ? "border-yellow-500"
                 : "border-green-500"
             }`}
@@ -106,14 +106,14 @@ const ProcessServiceManufacturing: React.FC<
               )}
             </Text>
             <Text variant="body">
-              {process.serviceDetails.model === undefined
+              {process.serviceDetails.models === undefined
                 ? t(
                     "Projects.Project.Process.ServicePreview.components.Manufacturing.notSelected"
                   )
-                : process.serviceDetails.model.fileName}
+                : process.serviceDetails.models.fileName}
             </Text>
           </Card>
-          {process.serviceDetails.model !== undefined ? (
+          {process.serviceDetails.models !== undefined ? (
             <PermissionGate element={"ProcessButtonModelPreView"}>
               <Button
                 size="sm"

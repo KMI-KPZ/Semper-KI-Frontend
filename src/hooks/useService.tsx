@@ -28,7 +28,7 @@ export const isServiceComplete = (
     case ServiceType.MANUFACTURING:
       const manufacturingService = service as ManufacturingServiceProps;
       return (
-        manufacturingService.model !== undefined &&
+        manufacturingService.models !== undefined &&
         manufacturingService.material !== undefined
       );
     case ServiceType.MODELING:

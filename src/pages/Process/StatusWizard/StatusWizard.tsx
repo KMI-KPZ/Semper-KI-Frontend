@@ -104,13 +104,12 @@ const StatusWizard: React.FC<StatusWizardProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <Container direction="col" className="bg-white p-5">
+    <Container direction="col" className="sticky top-0 bg-white p-5">
       {statusWizardItems.map((item) => {
         return (
           <StatusWizardCard key={item.text} item={item} process={process} />
         );
       })}
-      ;
     </Container>
   );
 };

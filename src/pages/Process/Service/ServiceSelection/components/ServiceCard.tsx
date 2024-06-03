@@ -30,7 +30,7 @@ const ServiceCard: React.FC<ServiceCardProps> = (props) => {
     >
       <Heading variant="h3">
         {t(
-          `Process.Service.components.ServiceCard.title.${
+          `Process.Service.ServiceSelection.components.ServiceCard.title.${
             ServiceType[service.type] as keyof typeof ServiceType
           }`
         )}
@@ -38,7 +38,7 @@ const ServiceCard: React.FC<ServiceCardProps> = (props) => {
       <img src={service.imgPath} alt="" />
       <Text>
         {t(
-          `Process.Service.components.ServiceCard.description.${
+          `Process.Service.ServiceSelection.components.ServiceCard.description.${
             ServiceType[service.type] as keyof typeof ServiceType
           }`
         )}

@@ -32,12 +32,12 @@ const ProcessHistoryServiceText: React.FC<ProcessHistoryServiceTextProps> = (
   const renderModel = () => {
     return service !== undefined &&
       instanceOfManufacturingServiceProps(service) &&
-      service.model !== undefined ? (
+      service.models !== undefined ? (
       <ProcessHistoryTextItem
         name={t(
           "Projects.Project.Process.History.components.ServiceText.manufacturing.model"
         )}
-        data={service.model.fileName}
+        data={service.models.fileName}
       />
     ) : null;
   };

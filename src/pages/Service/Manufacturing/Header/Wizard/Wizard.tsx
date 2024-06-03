@@ -16,7 +16,7 @@ export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
   const getCount = (): [number, number] => {
     let count = 0;
     let total = 0;
-    if (service.model !== undefined) {
+    if (service.models !== undefined) {
       count++;
     }
     if (service.material !== undefined) {
@@ -50,7 +50,7 @@ export const ServiceManufacturingWizard: React.FC<Props> = (props) => {
       /> */}
       <ManufacturingWizardItem
         title={t("Service.Manufacturing.Header.Wizard.Wizard.model")}
-        completed={service.model !== undefined}
+        completed={service.models !== undefined}
         icon={<ViewInArIcon />}
         active={location.pathname.includes("model")}
         to="model"

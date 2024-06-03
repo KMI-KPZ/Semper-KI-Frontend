@@ -25,18 +25,18 @@ const ModelDetails: React.FC<ModelDetailsProps> = (props) => {
 
   useEffect(() => {
     if (
-      process.serviceDetails.model !== undefined &&
+      process.serviceDetails.models !== undefined &&
       process.files.length > 0 &&
       process.files.find(
         (file) =>
-          process.serviceDetails.model !== undefined &&
-          file.id === process.serviceDetails.model.id
+          process.serviceDetails.models !== undefined &&
+          file.id === process.serviceDetails.models.id
       ) !== undefined
     ) {
       downloadFile.mutate(
         {
           processID: process.processID,
-          fileID: process.serviceDetails.model.id,
+          fileID: process.serviceDetails.models.id,
         },
         {
           onSuccess(data) {

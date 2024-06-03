@@ -97,7 +97,7 @@ export const ServiceManufacturing: React.FC<Props> = (props) => {
                 path="model"
                 element={
                   <ProcessModel
-                    model={service !== undefined ? service.model : undefined}
+                    model={service !== undefined ? service.models : undefined}
                     processState={state}
                     filters={filtersQuery.data}
                   />

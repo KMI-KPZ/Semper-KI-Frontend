@@ -4,14 +4,14 @@ import useGetServices, {
 import { Container, LoadingAnimation } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ServiceCard from "./ServiceCard";
+import ServiceCard from "./components/ServiceCard";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useProcess from "@/hooks/Process/useProcess";
 import logger from "@/hooks/useLogger";
 
-interface ServiceCardsProps {}
+interface ServiceSelectionProps {}
 
-const ServiceCards: React.FC<ServiceCardsProps> = (props) => {
+const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
 
@@ -49,4 +49,4 @@ const ServiceCards: React.FC<ServiceCardsProps> = (props) => {
   );
 };
 
-export default ServiceCards;
+export default ServiceSelection;

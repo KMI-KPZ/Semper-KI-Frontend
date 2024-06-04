@@ -29,21 +29,20 @@ const useUploadModels = () => {
     processID,
     projectID,
   }: ModelsUpload) => {
-    const models: FormData[] = _models.map((model) => {
+    const formData = new FormData();
+    _models.forEach((model, index) => {
       const { details, file } = model;
-      const formData = new FormData();
       formData.append(file.name, file);
-      formData.append("file", file);
-      formData.append("tags", details.tags.join(","));
-      formData.append("licenses", details.licenses.join(","));
-      formData.append("certificates", details.certificates.join(","));
-      return formData;
+      formData.append(file.name, JSON.stringify(details));
     });
+
+    formData.append("projectID", projectID);
+    formData.append("processID", processID);
 
     return authorizedCustomAxios
       .post(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/upload/`,
-        { models, projectID, processID },
+        formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
         }

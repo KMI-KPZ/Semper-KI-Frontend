@@ -28,7 +28,7 @@ const useUpdateProject = () => {
     deletions = {},
   }: UpdateProjectProps) =>
     authorizedCustomAxios
-      .patch(`${process.env.VITE_HTTP_API_URL}/public/updateProject/`, {
+      .patch(`${process.env.VITE_HTTP_API_URL}/public/project/update/`, {
         projectID,
         changes,
         deletions,

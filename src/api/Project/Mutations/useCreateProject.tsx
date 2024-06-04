@@ -9,7 +9,7 @@ const useCreateProject = () => {
 
   const createProject = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/createProjectID/`)
+      .post(`${process.env.VITE_HTTP_API_URL}/public/project/create/`)
       .then((response) => {
         logger("useCreateProject | createProject ✅ |", response);
         return response.data.projectID;

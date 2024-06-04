@@ -6,11 +6,9 @@ const useDeleteProject = () => {
   const queryClient = useQueryClient();
   const deleteProject = async (projectIDs: string[]) =>
     authorizedCustomAxios
-      .delete(
-        `${
-          process.env.VITE_HTTP_API_URL
-        }/public/deleteProjects/?projectIDs=${projectIDs.join(",")}`
-      )
+      .delete(`${process.env.VITE_HTTP_API_URL}/public/project/delete/`, {
+        data: { projectIDs },
+      })
       .then((response) => {
         logger("useDeleteProject | deleteProject ✅ |", response);
         return response.data;

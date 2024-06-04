@@ -61,7 +61,7 @@ const useGetProject = () => {
   const { user } = useUser();
   const getProject = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/getProject/${projectID}/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/project/get/${projectID}/`)
       .then((response) => {
         const project: Project = {
           client: response.data.client,

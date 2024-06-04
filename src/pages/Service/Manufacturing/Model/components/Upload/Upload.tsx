@@ -2,10 +2,12 @@ import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as UploadIcon } from "@icons/Upload.svg";
-import { Heading } from "@component-library/index";
+import { Button, Container, Heading, Text } from "@component-library/index";
 import { Modal } from "@component-library/index";
 import logger from "@/hooks/useLogger";
-import ManufacturingModelUploadForm from "./components/Form";
+import useUploadModels from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUploadModels";
+import useProcess from "@/hooks/Process/useProcess";
+import { useProject } from "@/hooks/Project/useProject";
 
 interface Props {}
 
@@ -14,9 +16,29 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
-  const [file, setFile] = useState<File>();
+  const [files, setFiles] = useState<File[]>([]);
 
   const [formOpen, setFormOpen] = useState<boolean>(false);
+
+  const { process } = useProcess();
+  const { project } = useProject();
+  const uploadModels = useUploadModels();
+  const sendFiles = () => {
+    uploadModels.mutate({
+      processID: process.processID,
+      projectID: project.projectID,
+      models: files.map((file) => ({
+        file: file,
+        details: {
+          tags: [],
+          licenses: [],
+          certificates: [],
+          date: new Date(),
+        },
+      })),
+    });
+    setFormOpen(false);
+  };
 
   const dataTypes: string[] = [
     ".STEP",
@@ -36,8 +58,8 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   ];
 
   const handleChangeHiddenInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      addFile(e.target.files[0]);
+    if (e.target.files !== null && e.target.files.length > 0) {
+      addFiles(Array.from(e.target.files));
     }
   };
 
@@ -67,16 +89,16 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    const newFile: File = e.dataTransfer.files[0];
-    addFile(newFile);
+    const files: File[] = Array.from(e.dataTransfer.files);
+    addFiles(files);
   };
 
   const deleteFile = (e: React.MouseEvent<SVGSVGElement, MouseEvent>): void => {
-    setFile(undefined);
+    setFiles([]);
   };
 
-  const addFile = (inputFile: File): void => {
-    setFile(inputFile);
+  const addFiles = (inputFiles: File[]): void => {
+    setFiles(inputFiles);
     setFormOpen(true);
   };
 
@@ -113,18 +135,18 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
         ref={hiddenFileInput}
         onChange={handleChangeHiddenInput}
         className="hidden"
+        multiple
       />
-      {formOpen ? (
-        <Modal
-          modalKey="ManufacturingModelUploadForm"
-          open={formOpen}
-          closeModal={closeForm}
-          children={
-            file === undefined ? null : (
-              <ManufacturingModelUploadForm file={file} />
-            )
-          }
-        />
+      {formOpen && files.length > 0 ? (
+        <Modal modalKey="ManufacturingModelUploadForm" open={formOpen}>
+          <Container direction="col">
+            {files.map((file: File, index) => (
+              <Text key={index}>{file.name}</Text>
+            ))}
+          </Container>
+          <Button title="send" onClick={sendFiles} />
+          {/* <ManufacturingModelUploadForms files={files} /> */}
+        </Modal>
       ) : null}
     </>
   );

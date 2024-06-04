@@ -1698,12 +1698,15 @@
         "types": {},
         "Upload": {
           "components": {
+            "Forms": {
+              "title": "Datei Informationen hinzufügen"
+            },
             "Form": {
               "name": "Name:",
               "size": "Größe:",
               "type": "Dateityp:",
               "date": "Datum:",
-              "title": "Datei Informationen hinzufügen",
+
               "tags": "Tags",
               "tagsPH": "Tag1, Tag2, ...",
               "certificate": "Eventuelle Zertifikate",

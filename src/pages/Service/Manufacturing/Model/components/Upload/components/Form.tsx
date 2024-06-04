@@ -10,7 +10,7 @@ import { Button } from "@component-library/index";
 import ModelPreview from "@/pages/Test/STLViewer";
 import { useProject } from "@/hooks/Project/useProject";
 import useProcess from "@/hooks/Process/useProcess";
-import useUploadModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUploadModel";
+import useUploadModels from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUploadModel";
 
 interface ManufacturingModelUploadFormProps {
   file: File;
@@ -21,7 +21,7 @@ const ManufacturingModelUploadForm: React.FC<
 > = (props) => {
   const { file } = props;
   const { t } = useTranslation();
-  const uploadModel = useUploadModel();
+  const uploadModel = useUploadModels();
   const { project } = useProject();
   const { process } = useProcess();
   const url = URL.createObjectURL(file);
@@ -76,9 +76,6 @@ const ManufacturingModelUploadForm: React.FC<
 
   return (
     <form className="flex h-full w-full flex-col items-start gap-5 overflow-auto bg-white p-5 md:max-w-4xl">
-      <Heading variant="h1" className="px-10">
-        {t("Service.Manufacturing.Model.Upload.components.Form.title")}
-      </Heading>
       <Container width="full" direction="col" align="center" justify="center">
         <Text variant="body">{`${t(
           `Service.Manufacturing.Model.Upload.components.Form.name`

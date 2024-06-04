@@ -15,34 +15,36 @@ interface UploadModel {
   file: File;
 }
 
-interface ModelUpload {
+interface ModelsUpload {
   projectID: string;
   processID: string;
   models: UploadModel[];
 }
 
-const useUploadModel = () => {
+const useUploadModels = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const uploadModel = async ({
     models: _models,
     processID,
     projectID,
-  }: ModelUpload) => {
-    const models: FormData[] = _models.map((model) => {
+  }: ModelsUpload) => {
+    const formData = new FormData();
+    _models.forEach((model, index) => {
       const { details, file } = model;
-      const formData = new FormData();
-      formData.append(file.name, file);
-      formData.append("tags", details.tags.join(","));
-      formData.append("licenses", details.licenses.join(","));
-      formData.append("certificates", details.certificates.join(","));
-      return formData;
+      formData.append(`models[${index}]`, file);
+      formData.append(`tags[${index}]`, details.tags.join(","));
+      formData.append(`licenses[${index}]`, details.licenses.join(","));
+      formData.append(`certificates[${index}]`, details.certificates.join(","));
     });
+
+    formData.append("projectID", projectID);
+    formData.append("processID", processID);
 
     return authorizedCustomAxios
       .post(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/upload/`,
-        { models, projectID, processID },
+        formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
         }
@@ -56,7 +58,7 @@ const useUploadModel = () => {
       });
   };
 
-  return useMutation<string, Error, ModelUpload>({
+  return useMutation<string, Error, ModelsUpload>({
     mutationFn: uploadModel,
     onSuccess: (data, modelUploadProps, context) => {
       navigate("../material");
@@ -65,4 +67,4 @@ const useUploadModel = () => {
   });
 };
 
-export default useUploadModel;
+export default useUploadModels;

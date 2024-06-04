@@ -8,6 +8,7 @@ import logger from "@/hooks/useLogger";
 import useUploadModels from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUploadModels";
 import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
+import ManufacturingModelUploadForms from "./components/Forms";
 
 interface Props {}
 
@@ -139,13 +140,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
       />
       {formOpen && files.length > 0 ? (
         <Modal modalKey="ManufacturingModelUploadForm" open={formOpen}>
-          <Container direction="col">
-            {files.map((file: File, index) => (
-              <Text key={index}>{file.name}</Text>
-            ))}
-          </Container>
-          <Button title="send" onClick={sendFiles} />
-          {/* <ManufacturingModelUploadForms files={files} /> */}
+          <ManufacturingModelUploadForms files={files} />
         </Modal>
       ) : null}
     </>

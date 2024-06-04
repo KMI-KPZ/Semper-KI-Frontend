@@ -14,7 +14,7 @@ const ServiceDetailsCard: React.FC<
     <Container
       direction="row"
       width="full"
-      className=" overflow-clip rounded-xl border-2 shadow-lg"
+      className=" overflow-clip rounded-xl border-2 p-5 shadow-lg"
     >
       {children}
     </Container>

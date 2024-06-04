@@ -1,17 +1,15 @@
-import {
-  ManufactoringProcessProps,
-  Process,
-} from "@/api/Process/Querys/useGetProcess";
-import { ManufacturingServiceProps } from "@/api/Service/Querys/useGetServices";
+import { ManufactoringProcessProps } from "@/api/Process/Querys/useGetProcess";
 import { Button, Container, Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ServiceDetailsCard from "./Card";
 import TestImg from "@images/Test2.png";
 import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
-import { MaterialProps } from "@/pages/Service/Manufacturing/Material/Material";
 import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
 import AddIcon from "@mui/icons-material/Add";
+import { useNavigate } from "react-router-dom";
+import useDeleteModel from "@/api/Process/Mutations/useDeleteModel";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 
 interface ServiceManufacturingDetailsProps {
   process: ManufactoringProcessProps;
@@ -22,6 +20,7 @@ const ServiceManufacturingDetails: React.FC<
 > = (props) => {
   const { process } = props;
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const models: ModelProps[] =
     process.serviceDetails.models !== undefined
       ? process.serviceDetails.models
@@ -30,6 +29,36 @@ const ServiceManufacturingDetails: React.FC<
     process.serviceDetails.postProcessings !== undefined
       ? process.serviceDetails.postProcessings
       : [];
+  const updateProcess = useUpdateProcess();
+
+  const handleOnButtonClickModel = () => {
+    navigate("service/manufacturing/model");
+  };
+  const handleOnButtonClickMaterial = () => {
+    navigate("service/manufacturing/material");
+  };
+  const handleOnButtonClickPostProcessing = () => {
+    navigate("service/manufacturing/postprocessing");
+  };
+
+  const handleOnButtonClickDeleteModel = () => {
+    // updateProcess.mutate({
+    //   processIDs: [process.processID],
+    //   updates: {
+    //     changes: {
+    //       serviceDetails: {
+    //         models: [],
+    //       },
+    //     },
+    //   },
+    // });
+  };
+  const handleOnButtonClickDeleteMaterial = () => {
+    navigate("service/manufacturing/postprocessing");
+  };
+  const handleOnButtonClickDeletePostProcessing = () => {
+    navigate("service/manufacturing/postprocessing");
+  };
 
   return (
     <Container
@@ -40,7 +69,7 @@ const ServiceManufacturingDetails: React.FC<
       className="p-5"
     >
       <Container direction="row" justify="between" width="full">
-        <Container align="center">
+        <Container align="end">
           <Heading variant="h3">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.model.heading"
@@ -61,7 +90,7 @@ const ServiceManufacturingDetails: React.FC<
             )}
             size="sm"
             variant="primary"
-            onClick={() => {}}
+            onClick={handleOnButtonClickModel}
             startIcon={<AddIcon />}
             children={t(
               "Process.Service.ServiceDetails.components.manufacturing.button.add"
@@ -113,12 +142,56 @@ const ServiceManufacturingDetails: React.FC<
                   <Text>-- mm³</Text>
                 </Container>
               </Container>
+              <Container
+                direction="col"
+                justify="center"
+                width="fit"
+                gap={3}
+                className="p-5"
+              >
+                <Button
+                  title={t(
+                    "Process.Service.ServiceDetails.components.manufacturing.button.editModel"
+                  )}
+                  size="sm"
+                  variant="secondary"
+                  onClick={handleOnButtonClickModel}
+                  children={t(
+                    "Process.Service.ServiceDetails.components.manufacturing.button.edit"
+                  )}
+                />
+                <Button
+                  title={t(
+                    "Process.Service.ServiceDetails.components.manufacturing.button.deleteModel"
+                  )}
+                  size="sm"
+                  variant="text"
+                  onClick={handleOnButtonClickDeleteModel}
+                  children={t(
+                    "Process.Service.ServiceDetails.components.manufacturing.button.delete"
+                  )}
+                />
+              </Container>
             </ServiceDetailsCard>
           ))
         : null}
+      {models.length > 0 ? (
+        <Button
+          title={t(
+            "Process.Service.ServiceDetails.components.manufacturing.button.addModel"
+          )}
+          size="sm"
+          variant="primary"
+          onClick={handleOnButtonClickModel}
+          startIcon={<AddIcon />}
+          children={t(
+            "Process.Service.ServiceDetails.components.manufacturing.button.add"
+          )}
+        />
+      ) : null}
 
       <Container direction="row" justify="between" width="full">
-        <Container align="center">
+        <Container align="end">
           <Heading variant="h3">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.material.heading"
@@ -134,14 +207,14 @@ const ServiceManufacturingDetails: React.FC<
                 )}
           </Text>
         </Container>
-        {models.length === 0 ? (
+        {process.serviceDetails.material === undefined ? (
           <Button
             title={t(
               "Process.Service.ServiceDetails.components.manufacturing.button.addMaterial"
             )}
             size="sm"
             variant="primary"
-            onClick={() => {}}
+            onClick={handleOnButtonClickMaterial}
             startIcon={<AddIcon />}
             children={t(
               "Process.Service.ServiceDetails.components.manufacturing.button.add"
@@ -156,6 +229,7 @@ const ServiceManufacturingDetails: React.FC<
             alt={t(
               "Process.Service.ServiceDetails.components.manufacturing.material.img"
             )}
+            className="w-full object-cover"
           />
           <Container direction="col" width="full" className="" gap={3}>
             <Container direction="row" justify="between" width="full">
@@ -191,11 +265,41 @@ const ServiceManufacturingDetails: React.FC<
               )}
             </ul>
           </Container>
+          <Container
+            direction="col"
+            justify="center"
+            width="fit"
+            gap={3}
+            className="p-5"
+          >
+            <Button
+              title={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.editMaterial"
+              )}
+              size="sm"
+              variant="secondary"
+              onClick={handleOnButtonClickMaterial}
+              children={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.edit"
+              )}
+            />
+            <Button
+              title={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.deleteMaterial"
+              )}
+              size="sm"
+              variant="text"
+              onClick={handleOnButtonClickDeleteMaterial}
+              children={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.delete"
+              )}
+            />
+          </Container>
         </ServiceDetailsCard>
       ) : null}
 
       <Container direction="row" justify="between" width="full">
-        <Container align="center">
+        <Container align="end">
           <Heading variant="h3">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.postProcessing.heading"
@@ -216,7 +320,7 @@ const ServiceManufacturingDetails: React.FC<
             )}
             size="sm"
             variant="primary"
-            onClick={() => {}}
+            onClick={handleOnButtonClickPostProcessing}
             startIcon={<AddIcon />}
             children={t(
               "Process.Service.ServiceDetails.components.manufacturing.button.add"
@@ -261,9 +365,53 @@ const ServiceManufacturingDetails: React.FC<
                   <Text>{}</Text>
                 </Container>
               </Container>
+              <Container
+                direction="col"
+                justify="center"
+                width="fit"
+                gap={3}
+                className="p-5"
+              >
+                <Button
+                  title={t(
+                    "Process.Service.ServiceDetails.components.manufacturing.button.editPostProcessing"
+                  )}
+                  size="sm"
+                  variant="secondary"
+                  onClick={handleOnButtonClickPostProcessing}
+                  children={t(
+                    "Process.Service.ServiceDetails.components.manufacturing.button.edit"
+                  )}
+                />
+                <Button
+                  title={t(
+                    "Process.Service.ServiceDetails.components.manufacturing.button.deletePostProcessing"
+                  )}
+                  size="sm"
+                  variant="text"
+                  onClick={handleOnButtonClickDeletePostProcessing}
+                  children={t(
+                    "Process.Service.ServiceDetails.components.manufacturing.button.delete"
+                  )}
+                />
+              </Container>
             </ServiceDetailsCard>
           ))
         : null}
+      {postProcessings.length > 0 ? (
+        <Button
+          title={t(
+            "Process.Service.ServiceDetails.components.manufacturing.button.addPostProcessing"
+          )}
+          size="sm"
+          variant="primary"
+          onClick={handleOnButtonClickPostProcessing}
+          startIcon={<AddIcon />}
+          children={t(
+            "Process.Service.ServiceDetails.components.manufacturing.button.add"
+          )}
+        />
+      ) : null}
     </Container>
   );
 };

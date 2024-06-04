@@ -8,9 +8,9 @@ import { useForm } from "react-hook-form";
 import logger from "@/hooks/useLogger";
 import { Button } from "@component-library/index";
 import ModelPreview from "@/pages/Test/STLViewer";
-import useUploadModel from "@/api/Service/Manufacturing/Mutations/useUploadModel";
 import { useProject } from "@/hooks/Project/useProject";
 import useProcess from "@/hooks/Process/useProcess";
+import useUploadModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUploadModel";
 
 interface ManufacturingModelUploadFormProps {
   file: File;

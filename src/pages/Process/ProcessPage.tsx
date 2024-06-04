@@ -19,7 +19,12 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
         <Heading variant="h1">{t("Process.ProcessPage.heading")}</Heading>
       </Container>
       <ProcessInfo process={process} />
-      <Container width="full" direction="row" align="start">
+      <Container
+        width="full"
+        direction="row"
+        align="start"
+        className="relative"
+      >
         <StatusWizard process={process} />
         <Container direction="col" width="full">
           <Service process={process} />

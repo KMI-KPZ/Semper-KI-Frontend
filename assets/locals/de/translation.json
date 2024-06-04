@@ -948,10 +948,18 @@
               "describtion": "Beschreibung"
             },
             "button": {
-              "addModel": "Modell hinzufügen",
               "add": "Hinzufügen",
+              "addModel": "Modell hinzufügen",
               "addMaterial": "Material hinzufügen",
-              "addPostProcessing": "Nachbearbeitung hinzufügen"
+              "addPostProcessing": "Nachbearbeitung hinzufügen",
+              "edit": "Bearbeiten",
+              "editModel": "Modell bearbeiten",
+              "editMaterial": "Material bearbeiten",
+              "editPostProcessing": "Nachbearbeitung bearbeiten",
+              "delete": "Löschen",
+              "deleteModel": "Modell löschen",
+              "deleteMaterial": "Material löschen",
+              "deletePostProcessing": "Nachbearbeitung löschen"
             }
           }
         }

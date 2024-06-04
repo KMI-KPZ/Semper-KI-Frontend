@@ -199,27 +199,18 @@ const App: React.FC = () => {
                     </PermissionGate>
                   }
                 />
-                <Route path=":processID/*" element={<ProcessOutlet />}>
-                  <Route index element={<ProcessPage />} />
+                <Route
+                  path=":processID/*"
+                  element={
+                    <ProcessOutlet>
+                      <ProcessPage />
+                    </ProcessOutlet>
+                  }
+                >
+                  <Route path="service/*" element={<ServiceRoutes />} />
                   <Route element={<AuthorizedUserRouteOutlet />}>
-                    <Route
-                      path="history"
-                      element={
-                        <>
-                          <ProjectPage />
-                          <ProcessHistory />
-                        </>
-                      }
-                    />
-                    <Route
-                      path="chat"
-                      element={
-                        <>
-                          <ProjectPage />
-                          <ProcessChat />
-                        </>
-                      }
-                    />
+                    <Route path="history" element={<ProcessHistory />} />
+                    <Route path="chat" element={<ProcessChat />} />
                     <Route
                       path="checkout"
                       element={<Navigate to="../../checkout" />}

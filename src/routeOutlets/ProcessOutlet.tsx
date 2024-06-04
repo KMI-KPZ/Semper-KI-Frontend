@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { Navigate, Outlet, useParams } from "react-router-dom";
 import { LoadingAnimation } from "@component-library/index";
 import useGetProcess from "@/api/Process/Querys/useGetProcess";
@@ -6,8 +6,10 @@ import ProcessContextProvider from "@/contexts/ProcessContext";
 
 interface ProcessOutletProps {}
 
-const ProcessOutlet: React.FC<ProcessOutletProps> = (props) => {
-  const {} = props;
+const ProcessOutlet: React.FC<PropsWithChildren<ProcessOutletProps>> = (
+  props
+) => {
+  const { children } = props;
   const process = useGetProcess();
   const { projectID } = useParams();
 
@@ -16,6 +18,7 @@ const ProcessOutlet: React.FC<ProcessOutletProps> = (props) => {
   if (process.isFetched && process.data !== undefined)
     return (
       <ProcessContextProvider process={process.data}>
+        {children}
         <Outlet />
       </ProcessContextProvider>
     );

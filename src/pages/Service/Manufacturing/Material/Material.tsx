@@ -6,7 +6,7 @@ import { ProcessMaterialPreView } from "./components/PreView";
 import { ProcessMaterialItem } from "./components/Item";
 import { FilterItemProps } from "../Filter/Filter";
 import { Modal } from "@component-library/index";
-import useGetMaterials from "@/api/Service/Manufacturing/Querys/useGetMaterials";
+import useGetMaterials from "@/api/Service/AdditiveManufacturing/Querys/useGetMaterials";
 import { ServiceManufacturingState } from "@/api/Service/Querys/useGetServices";
 
 interface Props {

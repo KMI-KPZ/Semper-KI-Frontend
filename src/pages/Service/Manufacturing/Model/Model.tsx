@@ -13,7 +13,7 @@ import { Modal } from "@component-library/index";
 import { ModelProps } from "./types";
 import { select } from "d3";
 import { ProcessModelUpload } from "./components/Upload/Upload";
-import useGetModels from "@/api/Service/Manufacturing/Querys/useGetModels";
+import useGetModels from "@/api/Service/AdditiveManufacturing/Model/Querys/useGetModels";
 import { ServiceManufacturingState } from "@/api/Service/Querys/useGetServices";
 
 interface Props {

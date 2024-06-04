@@ -10,7 +10,7 @@ import { Button } from "@component-library/index";
 import ModelPreview from "@/pages/Test/STLViewer";
 import { useProject } from "@/hooks/Project/useProject";
 import useProcess from "@/hooks/Process/useProcess";
-import useUploadModels from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUploadModel";
+import useUploadModels from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUploadModels";
 
 interface ManufacturingModelUploadFormProps {
   file: File;

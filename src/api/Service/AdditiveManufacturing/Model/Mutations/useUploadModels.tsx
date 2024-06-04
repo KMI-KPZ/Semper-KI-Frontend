@@ -30,14 +30,13 @@ const useUploadModels = () => {
     projectID,
   }: ModelsUpload) => {
     const formData = new FormData();
+    let detailList: { details: ModelUploadDetails; fileName: string }[] = [];
     _models.forEach((model, index) => {
       const { details, file } = model;
-      formData.append(`models[${index}]`, file);
-      formData.append(`tags[${index}]`, details.tags.join(","));
-      formData.append(`licenses[${index}]`, details.licenses.join(","));
-      formData.append(`certificates[${index}]`, details.certificates.join(","));
+      formData.append(file.name, file);
+      detailList.push({ details, fileName: file.name });
     });
-
+    formData.append("details", JSON.stringify(detailList));
     formData.append("projectID", projectID);
     formData.append("processID", processID);
 

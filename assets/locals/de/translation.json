@@ -1709,6 +1709,7 @@
 
               "tags": "Tags",
               "tagsPH": "Tag1, Tag2, ...",
+              "selectLicense": "Lizenz auswählen",
               "certificate": "Eventuelle Zertifikate",
               "certificatePH": "Zertifikate1, Zertifikate2, ...",
               "license": "Lizenz der Datei",

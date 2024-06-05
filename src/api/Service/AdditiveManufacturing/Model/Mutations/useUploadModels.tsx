@@ -10,7 +10,7 @@ interface ModelUploadDetails {
   certificates: string[];
 }
 
-interface UploadModel {
+export interface UploadModel {
   details: ModelUploadDetails;
   file: File;
 }

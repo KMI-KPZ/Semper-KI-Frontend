@@ -16,6 +16,7 @@ import {
   ServiceProps,
   ServiceType,
 } from "@/api/Service/Querys/useGetServices";
+import { objectToArray } from "@/services/utils";
 
 export interface ProcessDetailsProps {
   provisionalContractor?: string;
@@ -177,8 +178,15 @@ const useGetProcess = () => {
           updatedWhen: new Date(response.data.updatedWhen),
           createdWhen: new Date(response.data.createdWhen),
           accessedWhen: new Date(response.data.accessedWhen),
+          files: Object.values(response.data.files),
+          // files: objectToArray<File>(response.data.files),
         };
-        logger("useGetProcess | getProcess ✅ |", response, process);
+        logger("useGetProcess | getProcess ✅ |", response.data, process);
+        logger(
+          "useGetProcess | getProcess Test ✅ |",
+          Object.values(response.data.files),
+          objectToArray<File>(response.data.files)
+        );
         return process;
       });
 

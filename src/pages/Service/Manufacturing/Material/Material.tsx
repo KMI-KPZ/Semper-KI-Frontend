@@ -10,8 +10,8 @@ import useGetMaterials from "@/api/Service/AdditiveManufacturing/Querys/useGetMa
 import { ServiceManufacturingState } from "@/api/Service/Querys/useGetServices";
 
 interface Props {
-  processState: ServiceManufacturingState;
-  material: MaterialProps | undefined;
+  materials: MaterialProps[] | undefined;
+  searchText: string;
   filters: FilterItemProps[];
 }
 
@@ -27,10 +27,9 @@ export interface MaterialProps {
   URI: string;
 }
 
-export const ProcessMaterial: React.FC<Props> = (props) => {
+export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { filters, processState, material: material } = props;
-  const { grid, searchText } = processState;
+  const { filters, materials, searchText: searchInput } = props;
   const [state, setState] = useState<State>({
     modalOpen: false,
     material: undefined,

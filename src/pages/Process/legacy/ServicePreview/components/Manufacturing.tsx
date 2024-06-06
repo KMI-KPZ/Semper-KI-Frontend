@@ -127,7 +127,7 @@ const ProcessServiceManufacturing: React.FC<
         </Container>
         <Card
           className={`w-full flex-row flex-wrap md:w-fit ${
-            process.serviceDetails.material === undefined
+            process.serviceDetails.materials === undefined
               ? "border-yellow-500"
               : "border-green-500"
           }`}
@@ -139,11 +139,11 @@ const ProcessServiceManufacturing: React.FC<
             )}
           </Text>
           <Text variant="body">
-            {process.serviceDetails.material === undefined
+            {process.serviceDetails.materials === undefined
               ? t(
                   "Projects.Project.Process.ServicePreview.components.Manufacturing.notSelected"
                 )
-              : process.serviceDetails.material.title}
+              : process.serviceDetails.materials.title}
           </Text>
         </Card>
         <Card

@@ -8,13 +8,13 @@ import useService from "@/hooks/useService";
 
 interface Props {
   model: ModelProps;
-  grid: boolean;
   openModelView(model: ModelProps): void;
 }
 
 export const ProcessModelCard: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { model, grid, openModelView } = props;
+  const { model, openModelView } = props;
+  const grid = true;
   const navigate = useNavigate();
   const { updatedService } = useService();
 

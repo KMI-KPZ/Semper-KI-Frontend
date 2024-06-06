@@ -46,7 +46,7 @@ export interface UpdateServiceUndefinedProps {
 
 export type ManufacturingServiceProps = {
   models?: ModelProps[];
-  material?: MaterialProps;
+  materials?: MaterialProps[];
   postProcessings?: PostProcessingProps[];
   manufacturerID?: string;
 };
@@ -66,9 +66,7 @@ export interface ServiceManufacturingState {
 }
 
 export interface ServiceManufacturingContextReturnProps {
-  processState: ServiceManufacturingState;
-  setGrid(grid: boolean): void;
-  setFilter(open: boolean): void;
+  searchInput: string;
   setSearchInput(name: string): void;
   service: ManufacturingServiceProps;
 }

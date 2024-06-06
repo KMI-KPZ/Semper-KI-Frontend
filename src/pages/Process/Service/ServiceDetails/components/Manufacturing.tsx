@@ -10,6 +10,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import useDeleteModel from "@/api/Process/Mutations/useDeleteModel";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import { MaterialProps } from "@/pages/Service/Manufacturing/Material/Material";
 
 interface ServiceManufacturingDetailsProps {
   process: ManufactoringProcessProps;
@@ -29,6 +30,9 @@ const ServiceManufacturingDetails: React.FC<
     process.serviceDetails.postProcessings !== undefined
       ? process.serviceDetails.postProcessings
       : [];
+  const materials: MaterialProps[] = process.serviceDetails.materials
+    ? process.serviceDetails.materials
+    : [];
   const updateProcess = useUpdateProcess();
 
   const handleOnButtonClickModel = () => {
@@ -198,16 +202,14 @@ const ServiceManufacturingDetails: React.FC<
             )}
           </Heading>
           <Text>
-            {process.serviceDetails.material !== undefined
-              ? t(
-                  "Process.Service.ServiceDetails.components.manufacturing.material.selected"
-                )
+            {materials.length > 0
+              ? materials.length
               : t(
                   "Process.Service.ServiceDetails.components.manufacturing.material.noMaterial"
                 )}
           </Text>
         </Container>
-        {process.serviceDetails.material === undefined ? (
+        {materials.length === 0 ? (
           <Button
             title={t(
               "Process.Service.ServiceDetails.components.manufacturing.button.addMaterial"
@@ -222,81 +224,83 @@ const ServiceManufacturingDetails: React.FC<
           />
         ) : null}
       </Container>
-      {process.serviceDetails.material !== undefined ? (
-        <ServiceDetailsCard>
-          <img
-            src={TestImg}
-            alt={t(
-              "Process.Service.ServiceDetails.components.manufacturing.material.img"
-            )}
-            className="w-full object-cover"
-          />
-          <Container direction="col" width="full" className="" gap={3}>
-            <Container direction="row" justify="between" width="full">
-              <Text>
-                {t(
-                  "Process.Service.ServiceDetails.components.manufacturing.material.name"
+      {materials.length > 0
+        ? materials.map((material, index) => (
+            <ServiceDetailsCard>
+              <img
+                src={TestImg}
+                alt={t(
+                  "Process.Service.ServiceDetails.components.manufacturing.material.img"
                 )}
-              </Text>
-              <Text>{process.serviceDetails.material.title}</Text>
-            </Container>
-            <Container direction="row" justify="between" width="full">
-              <Text>
-                {t(
-                  "Process.Service.ServiceDetails.components.manufacturing.material.type"
-                )}
-              </Text>
-              <Text>---</Text>
-            </Container>
-            <Container direction="row" justify="between" width="full">
-              <Text>
-                {t(
-                  "Process.Service.ServiceDetails.components.manufacturing.material.properties"
-                )}
-              </Text>
-            </Container>
-            <ul className="flex w-full list-inside list-disc flex-col items-start justify-start pl-3">
-              {process.serviceDetails.material.propList.length > 0 ? (
-                process.serviceDetails.material.propList.map((prop, index) => (
-                  <li key={index}>{prop}</li>
-                ))
-              ) : (
-                <li>---</li>
-              )}
-            </ul>
-          </Container>
-          <Container
-            direction="col"
-            justify="center"
-            width="fit"
-            gap={3}
-            className="p-5"
-          >
-            <Button
-              title={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.editMaterial"
-              )}
-              size="sm"
-              variant="secondary"
-              onClick={handleOnButtonClickMaterial}
-              children={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.edit"
-              )}
-            />
-            <Button
-              title={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.deleteMaterial"
-              )}
-              size="sm"
-              variant="text"
-              onClick={handleOnButtonClickDeleteMaterial}
-              children={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.delete"
-              )}
-            />
-          </Container>
-        </ServiceDetailsCard>
-      ) : null}
+                className="w-full object-cover"
+              />
+              <Container direction="col" width="full" className="" gap={3}>
+                <Container direction="row" justify="between" width="full">
+                  <Text>
+                    {t(
+                      "Process.Service.ServiceDetails.components.manufacturing.material.name"
+                    )}
+                  </Text>
+                  <Text>{material.title}</Text>
+                </Container>
+                <Container direction="row" justify="between" width="full">
+                  <Text>
+                    {t(
+                      "Process.Service.ServiceDetails.components.manufacturing.material.type"
+                    )}
+                  </Text>
+                  <Text>---</Text>
+                </Container>
+                <Container direction="row" justify="between" width="full">
+                  <Text>
+                    {t(
+                      "Process.Service.ServiceDetails.components.manufacturing.material.properties"
+                    )}
+                  </Text>
+                </Container>
+                <ul className="flex w-full list-inside list-disc flex-col items-start justify-start pl-3">
+                  {material.propList.length > 0 ? (
+                    material.propList.map((prop, index) => (
+                      <li key={index}>{prop}</li>
+                    ))
+                  ) : (
+                    <li>---</li>
+                  )}
+                </ul>
+              </Container>
+              <Container
+                direction="col"
+                justify="center"
+                width="fit"
+                gap={3}
+                className="p-5"
+              >
+                <Button
+                  title={t(
+                    "Process.Service.ServiceDetails.components.manufacturing.button.editMaterial"
+                  )}
+                  size="sm"
+                  variant="secondary"
+                  onClick={handleOnButtonClickMaterial}
+                  children={t(
+                    "Process.Service.ServiceDetails.components.manufacturing.button.edit"
+                  )}
+                />
+                <Button
+                  title={t(
+                    "Process.Service.ServiceDetails.components.manufacturing.button.deleteMaterial"
+                  )}
+                  size="sm"
+                  variant="text"
+                  onClick={handleOnButtonClickDeleteMaterial}
+                  children={t(
+                    "Process.Service.ServiceDetails.components.manufacturing.button.delete"
+                  )}
+                />
+              </Container>
+            </ServiceDetailsCard>
+          ))
+        : null}
 
       <Container direction="row" justify="between" width="full">
         <Container align="end">

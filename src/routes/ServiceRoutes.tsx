@@ -32,7 +32,7 @@ const ServiceRoutes: React.FC<ServiceRoutesProps> = (props) => {
       modalKey="ServiceRoutes"
       open={true}
       closeModal={closeModal}
-      className="bg-gray-100 md:max-w-7xl"
+      className=" bg-gray-100 md:max-w-7xl"
     >
       <Routes>
         <Route element={<ServiceOutlet />}>

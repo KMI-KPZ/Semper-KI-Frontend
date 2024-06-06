@@ -11,7 +11,6 @@ import useProcess from "@/hooks/Process/useProcess";
 import { isProcessAtServiceStatus } from "@/api/Process/Querys/useGetProcess";
 
 interface Props<Item> {
-  grid: boolean;
   items: Item[];
   checkItem(item: Item): void;
   searchText: string;
@@ -27,7 +26,8 @@ const ProcessPostProcessingCatalog = <Item extends PostProcessingProps>(
 ) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { items, checkItem, grid, searchText } = props;
+  const { items, checkItem, searchText } = props;
+  const grid = true;
   const [state, setState] = useState<State<Item>>({
     modalOpen: false,
     itemOpen: undefined,

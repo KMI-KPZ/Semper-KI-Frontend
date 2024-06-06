@@ -10,7 +10,7 @@ import { ServiceManufacturingState } from "@/api/Service/Querys/useGetServices";
 import { isProcessAtServiceStatus } from "@/api/Process/Querys/useGetProcess";
 
 interface Props {
-  processState: ServiceManufacturingState;
+  searchText: string;
   filters: FilterItemProps[];
   postProcessings: PostProcessingProps[] | undefined;
 }
@@ -31,10 +31,9 @@ export enum EPostProcessingOptionType {
   "text",
 }
 
-export const ProcessPostProcessing: React.FC<Props> = (props) => {
+export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { processState, filters, postProcessings } = props;
-  const { grid, searchText } = processState;
+  const { searchText, filters, postProcessings } = props;
   const postProcessingQuery = useGetPostProcessigns(filters);
   const { updatedService } = useService();
   const { process } = useProcess();
@@ -89,7 +88,6 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
       {postProcessingQuery.data !== undefined ? (
         <div className="flex max-h-[60vh] flex-col gap-y-5 overflow-x-auto overflow-y-scroll">
           <ProcessPostProcessCatalog
-            grid={grid}
             searchText={searchText}
             items={hydratePostProcessings(
               postProcessingQuery.data,
@@ -107,7 +105,6 @@ export const ProcessPostProcessing: React.FC<Props> = (props) => {
   ) : postProcessings !== undefined ? (
     <div className="flex max-h-[60vh] flex-col gap-y-5 overflow-x-auto overflow-y-scroll">
       <ProcessPostProcessCatalog
-        grid={grid}
         searchText={searchText}
         items={postProcessings}
         checkItem={checkPostProcessing}

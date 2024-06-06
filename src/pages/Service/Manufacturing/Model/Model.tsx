@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ProcessModelCard } from "./components/Card";
-import { Button } from "@component-library/index";
+import { Button, Container, Text } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
@@ -12,14 +12,14 @@ import { Heading } from "@component-library/index";
 import { Modal } from "@component-library/index";
 import { ModelProps } from "./types";
 import { select } from "d3";
-import { ProcessModelUpload } from "./components/Upload/Upload";
+import { ProcessModelUpload } from "./Upload/Upload";
 import useGetModels from "@/api/Service/AdditiveManufacturing/Model/Querys/useGetModels";
 import { ServiceManufacturingState } from "@/api/Service/Querys/useGetServices";
 
 interface Props {
   filters: FilterItemProps[];
-  processState: ServiceManufacturingState;
-  model: ModelProps | undefined;
+  models: ModelProps[] | undefined;
+  searchText: string;
 }
 
 interface State {
@@ -27,16 +27,16 @@ interface State {
   model: ModelProps | undefined;
 }
 
-export const ProcessModel: React.FC<Props> = (props) => {
+export const ManufacturingModels: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { filters, processState, model } = props;
-  const { grid, searchText } = processState;
+  const { models, searchText, filters } = props;
   const navigate = useNavigate();
+  const modelsQuery = useGetModels(filters);
   const [state, setState] = useState<State>({
     modalOpen: false,
     model: undefined,
   });
-  const modelsQuery = useGetModels(filters);
+
   const openModelView = (model: ModelProps) => {
     setState((prevState) => ({ ...prevState, modalOpen: true, model }));
   };
@@ -47,6 +47,7 @@ export const ProcessModel: React.FC<Props> = (props) => {
       model: undefined,
     }));
   };
+
   const filterBySearch = (model: ModelProps): boolean => {
     if (searchText === "") {
       return true;
@@ -66,33 +67,46 @@ export const ProcessModel: React.FC<Props> = (props) => {
     return false;
   };
 
-  return model === undefined ? (
-    <div
-      className={`flex max-h-[60vh] gap-y-5 overflow-x-auto overflow-y-auto ${
-        grid === true
-          ? "flex-row flex-wrap justify-between"
-          : "flex-col flex-nowrap "
-      }`}
-    >
+  return (
+    <Container direction="col" width="full">
+      {models !== undefined && models.length > 0 ? (
+        <Container direction="col" width="full">
+          <Heading variant="h2" className="w-full text-left">
+            {t("Service.Manufacturing.Model.Model.selected")}
+          </Heading>
+        </Container>
+      ) : null}
+
+      <Container width="full" direction="col">
+        <Heading variant="h2" className="w-full text-left">
+          {t("Service.Manufacturing.Model.Model.upload.title")}
+        </Heading>
+      </Container>
       <ProcessModelUpload />
-      <LoadingSuspense query={modelsQuery}>
-        {modelsQuery.data !== undefined && modelsQuery.data.length > 0 ? (
-          <>
-            {modelsQuery.data
-              .filter((model, index) => filterBySearch(model))
-              .map((model: ModelProps, index: number) => (
-                <ProcessModelCard
-                  grid={processState.grid}
-                  model={model}
-                  key={index}
-                  openModelView={openModelView}
-                />
-              ))}
-          </>
-        ) : (
-          t("Service.Manufacturing.Model.Model.error.noModels")
-        )}
-      </LoadingSuspense>
+      <Container width="full" direction="col">
+        <Heading variant="h2" className="w-full text-left">
+          {t("Service.Manufacturing.Model.Model.available")}
+        </Heading>
+        <LoadingSuspense query={modelsQuery}>
+          {modelsQuery.data !== undefined && modelsQuery.data.length > 0 ? (
+            <>
+              {modelsQuery.data
+                .filter((model, index) => filterBySearch(model))
+                .map((model: ModelProps, index: number) => (
+                  <ProcessModelCard
+                    model={model}
+                    key={index}
+                    openModelView={openModelView}
+                  />
+                ))}
+            </>
+          ) : (
+            <Text className="w-full text-center">
+              {t("Service.Manufacturing.Model.Model.error.noModels")}
+            </Text>
+          )}
+        </LoadingSuspense>
+      </Container>
       {state.modalOpen === true && state.model !== undefined ? (
         <Modal
           modalKey="ProcessModelPreView"
@@ -107,8 +121,6 @@ export const ProcessModel: React.FC<Props> = (props) => {
           ) : null}
         </Modal>
       ) : null}
-    </div>
-  ) : (
-    <ProcessModelItem model={model} />
+    </Container>
   );
 };

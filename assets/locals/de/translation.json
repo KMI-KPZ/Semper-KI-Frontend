@@ -1715,23 +1715,32 @@
               "license": "Lizenz der Datei",
               "licensePH": "Lizenz1, Lizenz2 ...",
               "button": {
-                "send": "Modell Hochladen"
+                "save": "Speichern"
               }
             }
           },
           "Upload": {
-            "error": "Fehler beim Hochladen",
+            "error": {
+              "tags": "Error Tags",
+              "licenses": "keine Lizenz angegeben",
+              "certificates": "Error Certificates",
+              "file": "Error File"
+            },
             "loading": "Model wird hochgeladen",
             "card": {
               "title": "Modell Hochladen",
               "text": "per Drag & Drop oder Klick"
             },
             "button": {
-              "upload": "Hochladen"
+              "upload": "Modelle Hochladen",
+              "delete": "Löschen",
+              "edit": "Bearbeiten"
             }
           }
         },
         "Model": {
+          "selected": "Ausgewählte Modelle",
+          "available": "Verfügbare Modelle",
           "upload": {
             "img": "Modell Hochladen",
             "title": "Modell Hochladen",

@@ -1096,6 +1096,14 @@
         "adminProjects": "Alle Projekte",
         "ownProjects": "Eigene Projekte",
         "receivedProjects": "Erhaltene Projekte"
+      },
+      "TitleForm": {
+        "heading": "Geben sie Ihrem Prokjet einen Namen",
+        "name": "Projektname",
+        "button": {
+          "create": "Projekt anlegen"
+        },
+        "error": "Bitte geben Sie einen Namen ein"
       }
     },
     "context": {

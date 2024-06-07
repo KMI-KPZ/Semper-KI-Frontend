@@ -13,25 +13,29 @@ import useUpdateProject from "@/api/Project/Mutations/useUpdateProject";
 interface ProjectTitleFormProps {
   title?: string;
   close: () => void;
+  onSubmit?: (title: string) => void;
 }
 
 const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
-  const { title, close } = props;
+  const { title, close, onSubmit } = props;
   const { t } = useTranslation();
   const [state, setState] = useState<string>(title !== undefined ? title : "");
   const updatedProject = useUpdateProject();
 
   const updatedTitle = () => {
-    updatedProject.mutate(
-      {
-        changes: { projectDetails: { title: state } },
-      },
-      {
-        onSuccess: () => {
-          close();
+    if (onSubmit !== undefined) onSubmit(state);
+    else {
+      updatedProject.mutate(
+        {
+          changes: { projectDetails: { title: state } },
         },
-      }
-    );
+        {
+          onSuccess: () => {
+            close();
+          },
+        }
+      );
+    }
   };
 
   const handleOnClickEditCheckButton = (

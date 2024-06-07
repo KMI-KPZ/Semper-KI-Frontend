@@ -1,4 +1,4 @@
-import { Button, Search } from "@component-library/index";
+import { Button, Modal, Search } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,8 +15,7 @@ import useGetFlatProjects, {
 import ProjectsTable from "./components/Table";
 import AddIcon from "@mui/icons-material/Add";
 import useCreateProject from "@/api/Project/Mutations/useCreateProject";
-import useDeleteProject from "@/api/Project/Mutations/useDeleteProject";
-
+import CreateProjectTitleForm from "./components/TitleForm";
 interface ProjectsProps {}
 
 const Projects: React.FC<ProjectsProps> = (props) => {
@@ -24,6 +23,8 @@ const Projects: React.FC<ProjectsProps> = (props) => {
   const { user } = useUser();
   const _flatProjects = useGetFlatProjects();
   const adminFlatProjects = useGetAdminFlatProjects();
+  const [createProjectTitleFormOpen, setCreateProjectTitleFormOpen] =
+    React.useState<boolean>(false);
   const flatProjects =
     user.usertype === UserType.ADMIN ? adminFlatProjects : _flatProjects;
   const createProject = useCreateProject();
@@ -31,7 +32,11 @@ const Projects: React.FC<ProjectsProps> = (props) => {
     useSearch<FlatProject>();
 
   const onButtonClickCreateProject = () => {
-    createProject.mutate();
+    setCreateProjectTitleFormOpen(true);
+  };
+
+  const onSubmit = (title: string) => {
+    createProject.mutate(title);
   };
 
   const ownProjects: FlatProject[] =
@@ -97,6 +102,20 @@ const Projects: React.FC<ProjectsProps> = (props) => {
           </LoadingSuspense>
         </>
       ) : null}
+      <Modal
+        modalKey="CreateProjectTitleEdit"
+        open={createProjectTitleFormOpen}
+        closeModal={() => {
+          setCreateProjectTitleFormOpen(false);
+        }}
+      >
+        <CreateProjectTitleForm
+          close={() => {
+            setCreateProjectTitleFormOpen(false);
+          }}
+          onSubmit={onSubmit}
+        />
+      </Modal>
     </div>
   );
 };

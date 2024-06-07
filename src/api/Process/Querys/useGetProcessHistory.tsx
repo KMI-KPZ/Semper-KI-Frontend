@@ -1,7 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ProcessStatusType } from "@/pages/Service/Manufacturing/Header/types";
 import { useParams } from "react-router-dom";
 import { ChatMessageProps, FileProps } from "./useGetProcess";
 import { ServiceProps } from "@/api/Service/Querys/useGetServices";

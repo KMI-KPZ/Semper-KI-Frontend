@@ -7,9 +7,11 @@ const useCreateProject = () => {
   const queryClient = useQueryClient();
   const createProjectProcess = useCreateProjectProcess();
 
-  const createProject = async () =>
+  const createProject = async (title: string) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/project/create/`)
+      .post(`${process.env.VITE_HTTP_API_URL}/public/project/create/`, {
+        title,
+      })
       .then((response) => {
         logger("useCreateProject | createProject ✅ |", response);
         return response.data.projectID;
@@ -18,7 +20,7 @@ const useCreateProject = () => {
         logger("useCreateProject | createProject ❌ |", error);
       });
 
-  return useMutation<string, Error, void>({
+  return useMutation<string, Error, string>({
     mutationFn: createProject,
     onSuccess: (projectID, variables, context) => {
       createProjectProcess.mutate(projectID);

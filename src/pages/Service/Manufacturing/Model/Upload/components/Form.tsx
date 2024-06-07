@@ -4,23 +4,44 @@ import React, { useContext } from "react";
 import ModelPreview from "@/pages/Test/STLViewer";
 import { useProject } from "@/hooks/Project/useProject";
 import useProcess from "@/hooks/Process/useProcess";
-import { ManufacturingModelUploadFormData } from "../Upload";
+import { ManufacturingModelUploadData } from "../Upload";
 import { useTranslation } from "react-i18next";
-import { FieldArrayWithId, UseFormRegister } from "react-hook-form";
+import {
+  FieldArrayWithId,
+  UseFieldArrayUpdate,
+  UseFormRegister,
+  useForm,
+} from "react-hook-form";
 
 interface ManufacturingModelUploadFormProps {
-  item: FieldArrayWithId<ManufacturingModelUploadFormData, "models", "id">;
-  register: UseFormRegister<ManufacturingModelUploadFormData>;
+  item: ManufacturingModelUploadData;
   index: number;
-  close: () => void;
+  updateModel: (
+    index: number,
+    model: ManufacturingModelUploadData,
+    all: boolean
+  ) => void;
+}
+
+interface FormData {
+  item: ManufacturingModelUploadData;
+  all: boolean;
 }
 
 const ManufacturingModelUploadForm: React.FC<
   ManufacturingModelUploadFormProps
 > = (props) => {
-  const { item, register, index, close } = props;
+  const { index, item, updateModel } = props;
   const { t } = useTranslation();
   const url = URL.createObjectURL(item.file);
+
+  const { register, handleSubmit } = useForm<FormData>({
+    defaultValues: { item, all: false },
+  });
+
+  const onSubmit = (data: FormData) => {
+    updateModel(index, data.item, data.all);
+  };
 
   return (
     <div className="flex h-full w-full flex-col items-start gap-5 overflow-auto bg-white p-5 md:max-w-4xl">
@@ -53,7 +74,7 @@ const ManufacturingModelUploadForm: React.FC<
             placeholder={t(
               "Service.Manufacturing.Model.Upload.components.Form.certificatePH"
             )}
-            {...register(`models.${index}.certificates`, {})}
+            {...register(`item.certificates`, {})}
           />
         </div>
         <div className={`flex w-full flex-col items-center gap-5 md:flex-row`}>
@@ -61,7 +82,7 @@ const ManufacturingModelUploadForm: React.FC<
             {t(`Service.Manufacturing.Model.Upload.components.Form.license`)}
           </Text>
           <select
-            {...register(`models.${index}.licenses`, { required: true })}
+            {...register(`item.licenses`, { required: true })}
             className="flex w-full rounded-xl border-2 p-3"
           >
             <option value="" disabled selected>
@@ -87,12 +108,27 @@ const ManufacturingModelUploadForm: React.FC<
             placeholder={t(
               "Service.Manufacturing.Model.Upload.components.Form.tagsPH"
             )}
-            {...register(`models.${index}.tags`)}
+            {...register(`item.tags`)}
           />
         </div>
+        <div className={`flex w-full flex-col items-center gap-5 md:flex-row`}>
+          <Text variant="body" className="md:min-w-[150px]">
+            {t(`Service.Manufacturing.Model.Upload.components.Form.all`)}
+          </Text>
+          <input
+            type="checkbox"
+            className={`flex h-8 w-full rounded-xl border-2 p-3
+            ${false ? "border-red-500 bg-red-500" : ""}}`}
+            placeholder={t(
+              "Service.Manufacturing.Model.Upload.components.Form.all"
+            )}
+            {...register(`all`)}
+          />
+        </div>
+
         <Button
           variant="primary"
-          onClick={close}
+          onClick={handleSubmit(onSubmit)}
           title={t(
             "Service.Manufacturing.Model.Upload.components.Form.button.save"
           )}

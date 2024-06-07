@@ -1707,12 +1707,13 @@
               "type": "Dateityp:",
               "date": "Datum:",
 
-              "tags": "Tags",
+              "all": "Auf alle anwenden:",
+              "tags": "Tags:",
               "tagsPH": "Tag1, Tag2, ...",
               "selectLicense": "Lizenz auswählen",
-              "certificate": "Eventuelle Zertifikate",
+              "certificate": "Eventuelle Zertifikate:",
               "certificatePH": "Zertifikate1, Zertifikate2, ...",
-              "license": "Lizenz der Datei",
+              "license": "Lizenz der Datei:",
               "licensePH": "Lizenz1, Lizenz2 ...",
               "button": {
                 "save": "Speichern"
@@ -1722,7 +1723,7 @@
           "Upload": {
             "error": {
               "tags": "Error Tags",
-              "licenses": "keine Lizenz angegeben",
+              "licenses": "keine Lizenz(en) angegeben",
               "certificates": "Error Certificates",
               "file": "Error File"
             },

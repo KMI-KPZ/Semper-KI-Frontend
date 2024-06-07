@@ -20,13 +20,11 @@ import ModelPreview from "@/pages/Test/STLViewer";
 
 interface Props {}
 
-export interface ManufacturingModelUploadFormData {
-  models: {
-    tags: string;
-    licenses: string;
-    certificates: string;
-    file: File;
-  }[];
+export interface ManufacturingModelUploadData {
+  tags?: string;
+  licenses?: string;
+  certificates?: string;
+  file: File;
 }
 
 export const ProcessModelUpload: React.FC<Props> = (props) => {
@@ -41,26 +39,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     undefined
   );
   const uploadModels = useUploadModels();
-  const {
-    reset,
-    register,
-    watch,
-    handleSubmit,
-    control,
-    trigger,
-    formState: { errors },
-  } = useForm<ManufacturingModelUploadFormData>({
-    defaultValues: {
-      models: [],
-    },
-  });
-
-  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
-    {
-      control, // control props comes from useForm (optional: if you are using FormProvider)
-      name: "models", // unique name for your Field Array
-    }
-  );
+  const [models, setModels] = useState<ManufacturingModelUploadData[]>([]);
 
   const dataTypes: string[] = [
     ".STEP",
@@ -116,22 +95,18 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   };
 
   const addFiles = (inputFiles: File[]): void => {
-    inputFiles.map((file) => {
-      append({
-        file,
-        certificates: "",
-        licenses: "",
-        tags: "",
-      });
-    });
+    setModels((prevState) => [
+      ...prevState,
+      ...inputFiles.map((file): ManufacturingModelUploadData => ({ file })),
+    ]);
   };
 
-  const onSubmit = (data: ManufacturingModelUploadFormData) => {
+  const handleSubmit = () => {
     // logger("onSubmit", data);
     uploadModels.mutate({
       processID: process.processID,
       projectID: project.projectID,
-      models: data.models.map((item) => ({
+      models: models.map((item) => ({
         file: item.file,
         details: {
           date: new Date(),
@@ -152,11 +127,44 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     });
   };
 
+  const hasError = (): boolean => {
+    return (
+      models.filter(
+        (item) => item.licenses === undefined || item.licenses === ""
+      ).length > 0
+    );
+  };
+
   const handleOnButtonClickEdit = (index: number) => {
     setOpenIndex(index);
   };
   const handleOnButtonClickDelete = (index: number) => {
-    remove(index);
+    setModels((prevState) => [
+      ...prevState.filter((item, _index) => _index < index),
+      ...prevState.filter((item, _index) => _index > index),
+    ]);
+  };
+
+  const updateModel = (
+    index: number,
+    item: ManufacturingModelUploadData,
+    all: boolean
+  ) => {
+    setModels((prevState) =>
+      all
+        ? [
+            ...prevState.filter((_item, _index) => _index < index),
+            item,
+            ...prevState.filter((_item, _index) => _index > index),
+          ].map((_item) => ({ ...item, file: _item.file }))
+        : [
+            ...prevState.filter((_item, _index) => _index < index),
+            item,
+            ...prevState.filter((_item, _index) => _index > index),
+          ]
+    );
+
+    setOpenIndex(undefined);
   };
 
   return (
@@ -190,10 +198,10 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
           className="hidden"
           multiple
         />
-        {fields.length > 0 ? (
+        {models.length > 0 ? (
           <Container width="full" direction="col">
             <Container width="full" direction="row" wrap="wrap">
-              {fields.map((item, index) => {
+              {models.map((item, index) => {
                 const url = URL.createObjectURL(item.file);
                 return (
                   <Container
@@ -209,7 +217,11 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                     <Container direction="col" className="p-5">
                       <Heading variant="h3">{item.file.name}</Heading>
                       <Container direction="row" width="full" align="start">
-                        <Container direction="col" justify="start">
+                        <Container
+                          direction="col"
+                          justify="start"
+                          align="start"
+                        >
                           <Text>{`${t(
                             `Service.Manufacturing.Model.Upload.components.Form.size`
                           )}`}</Text>
@@ -232,7 +244,11 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                             )}`}
                           </Text>
                         </Container>
-                        <Container direction="col" justify="start">
+                        <Container
+                          direction="col"
+                          justify="start"
+                          align="start"
+                        >
                           <Text>{item.file.size}</Text>
                           <Text>{new Date().toLocaleDateString()}</Text>
                           <Text>{item.certificates}</Text>
@@ -262,7 +278,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                 );
               })}
             </Container>
-            {errors.models !== undefined ? (
+            {hasError() ? (
               <Text variant="body" className="text-red-500">
                 {t(`Service.Manufacturing.Model.Upload.Upload.error.licenses`)}
               </Text>
@@ -273,8 +289,8 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
               title={t(
                 `Service.Manufacturing.Model.Upload.Upload.button.upload`
               )}
-              onClick={handleSubmit(onSubmit)}
-              active={errors.models === undefined}
+              onClick={handleSubmit}
+              active={!hasError()}
             />
           </Container>
         ) : null}
@@ -285,14 +301,11 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
             setOpenIndex(undefined);
           }}
         >
-          {openIndex !== undefined && fields[openIndex] !== undefined ? (
+          {openIndex !== undefined && models[openIndex] !== undefined ? (
             <ManufacturingModelUploadForm
-              close={() => {
-                setOpenIndex(undefined);
-              }}
-              register={register}
               index={openIndex}
-              item={fields[openIndex]}
+              item={models[openIndex]}
+              updateModel={updateModel}
             />
           ) : null}
         </Modal>

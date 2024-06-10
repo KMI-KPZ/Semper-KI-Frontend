@@ -40,6 +40,7 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
   const openModelView = (model: ModelProps) => {
     setState((prevState) => ({ ...prevState, modalOpen: true, model }));
   };
+
   const closeModelView = () => {
     setState((prevState) => ({
       ...prevState,
@@ -67,6 +68,14 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
     return false;
   };
 
+  const handleOnButtonClickEdit = (index: number) => {
+    navigate(
+      `edit/${
+        models !== undefined && models.length > 0 ? models[index].id : ""
+      }`
+    );
+  };
+
   return (
     <Container direction="col" width="full">
       {models !== undefined && models.length > 0 ? (
@@ -74,6 +83,31 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
           <Heading variant="h2" className="w-full text-left">
             {t("Service.Manufacturing.Model.Model.selected")}
           </Heading>
+          <Container width="full" wrap="wrap">
+            {models.length > 0
+              ? models
+                  .filter((model, index) => filterBySearch(model))
+                  .map((model: ModelProps, index: number) => {
+                    return (
+                      <ProcessModelCard
+                        model={model}
+                        key={index}
+                        openModelView={openModelView}
+                      >
+                        <Container direction="row">
+                          <Button
+                            variant="secondary"
+                            onClick={() => handleOnButtonClickEdit(index)}
+                            title={t(
+                              "Service.Manufacturing.Model.Upload.Upload.button.edit"
+                            )}
+                          />
+                        </Container>
+                      </ProcessModelCard>
+                    );
+                  })
+              : null}
+          </Container>
         </Container>
       ) : null}
 

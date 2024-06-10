@@ -8,11 +8,13 @@ import {
   URL_Datenschutz,
   URL_Impressum,
   URL_Instagram,
+  URL_LinkedIn,
   URL_Mastodon,
 } from "@/config/constants";
 import { Button, Modal } from "@component-library/index";
 import usePing from "@/hooks/usePing";
 import ContactForm from "../Form/ContactForm";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 interface Props {}
 
@@ -75,10 +77,10 @@ const Footer: React.FC<Props> = (props) => {
             <div className="flex flex-row items-center justify-center gap-2">
               <Button
                 title={t("components.Footer.Footer.instagram")}
-                to={URL_Instagram}
+                to={URL_LinkedIn}
                 variant="tertiary"
                 extern
-                children={<InstagramIcon />}
+                children={<LinkedInIcon />}
                 className="text-white hover:bg-slate-700 "
               />
               <Button

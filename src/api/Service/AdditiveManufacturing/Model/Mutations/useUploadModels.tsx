@@ -60,7 +60,7 @@ const useUploadModels = () => {
   return useMutation<string, Error, ModelsUpload>({
     mutationFn: uploadModel,
     onSuccess: (data, modelUploadProps, context) => {
-      navigate("../material");
+      // navigate("../material");
       queryClient.invalidateQueries(["project", modelUploadProps.projectID]);
     },
   });

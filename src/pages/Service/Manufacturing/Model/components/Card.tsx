@@ -1,22 +1,34 @@
-import React, { useContext } from "react";
-import { Button } from "@component-library/index";
+import React, { PropsWithChildren, useContext } from "react";
+import {
+  Button,
+  Container,
+  Divider,
+  LoadingAnimation,
+  Text,
+} from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import { ModelProps } from "../types";
 import { Heading } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
 import useService from "@/hooks/useService";
+import ModelPreview from "@/pages/Test/STLViewer";
+import useGetModelFile from "@/api/Process/Querys/useGetModelFile";
 
 interface Props {
   model: ModelProps;
   openModelView(model: ModelProps): void;
 }
 
-export const ProcessModelCard: React.FC<Props> = (props) => {
+export const ProcessModelCard: React.FC<PropsWithChildren<Props>> = (props) => {
   const { t } = useTranslation();
-  const { model, openModelView } = props;
+  const { model, openModelView, children } = props;
   const grid = true;
   const navigate = useNavigate();
   const { updatedService } = useService();
+  const modelFile = useGetModelFile(model.id);
+  const getFileURL = (blob: Blob) => {
+    return URL.createObjectURL(blob);
+  };
 
   const handleOnClickSelect = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -33,85 +45,57 @@ export const ProcessModelCard: React.FC<Props> = (props) => {
     e.preventDefault();
     openModelView(model);
   };
-  if (grid === true)
-    return (
-      <div
-        className="flex w-full basis-[48%] flex-col items-center justify-start overflow-hidden bg-white
-        hover:cursor-pointer hover:bg-gray-300 
-        sm:basis-[32%] md:basis-[23.5%]"
-        onClick={handleOnClickCard}
-      >
-        <img
-          className="h-44 max-h-44 w-44 min-w-full max-w-[200%] object-contain "
-          src={model.URI}
-          alt="Model"
-        />
-        <div className="flex h-full flex-col items-center justify-around gap-2 p-3 md:justify-between ">
-          <Heading variant="h2">{model.fileName}</Heading>
-          <div className="hidden flex-row flex-wrap  items-center justify-center gap-2 md:flex ">
-            {model.tags.map((title: string, index: number) => (
-              <div key={index} className="rounded-lg bg-gray-200 px-2 py-1">
-                {title}
-              </div>
-            ))}
-          </div>
-          <div
-            className={`flex  flex-wrap gap-2 ${
-              grid === true ? "flex-row" : "flex-col"
-            }`}
-          >
-            <Button
-              onClick={handleOnClickSelect}
-              title={t(
-                "Service.Manufacturing.Model.components.Card.button.select"
-              )}
-            />
-          </div>
-        </div>
-      </div>
-    );
-
   return (
-    <div
-      className="flex w-full flex-col items-center justify-start overflow-hidden bg-white hover:cursor-pointer hover:bg-gray-300 sm:flex-row"
-      onClick={handleOnClickCard}
+    <Container
+      className="w-fit min-w-[350px] max-w-[50%] gap-0 rounded-xl border-2 bg-white"
+      direction="col"
     >
-      <img
-        className="max-h-44 min-h-full w-44 object-cover "
-        src={model.URI}
-        alt="Model"
-      />
-      <div className="flex h-full w-full flex-col items-center justify-around gap-5 p-3 sm:flex-row md:justify-between">
-        <Heading variant="h2">{model.fileName}</Heading>
-        <div className="hidden flex-col  flex-wrap items-center justify-center gap-2 md:flex">
-          {model.tags.map((title: string, index: number) => (
-            <div key={index} className="rounded-lg bg-gray-200 px-2 py-1">
-              {title}
-            </div>
-          ))}
-        </div>
+      {modelFile.isLoading || modelFile.data === undefined ? (
+        <LoadingAnimation />
+      ) : (
+        <ModelPreview
+          interactive={false}
+          file={getFileURL(modelFile.data)}
+          className="h-40 w-fit rounded-b-none border-0"
+        />
+      )}
+      <Divider />
+      <Container direction="col" className="p-5">
+        <Heading variant="h3">{model.fileName}</Heading>
+        <Container direction="row" width="full" align="start">
+          <Container direction="col" justify="start" align="start">
+            <Text>{`${t(
+              `Service.Manufacturing.Model.Upload.components.Form.size`
+            )}`}</Text>
+            <Text>{`${t(
+              `Service.Manufacturing.Model.Upload.components.Form.date`
+            )}`}</Text>
+            <Text>
+              {`${t(
+                `Service.Manufacturing.Model.Upload.components.Form.certificate`
+              )}`}
+            </Text>
+            <Text>
+              {`${t(
+                `Service.Manufacturing.Model.Upload.components.Form.license`
+              )}`}
+            </Text>
+            <Text>
+              {`${t(
+                `Service.Manufacturing.Model.Upload.components.Form.tags`
+              )}`}
+            </Text>
+          </Container>
+          <Container direction="col" justify="start" align="start">
+            <Text>{new Date().toLocaleDateString()}</Text>
+            <Text>{model.certificates}</Text>
+            <Text>{model.licenses}</Text>
+            <Text>{model.tags}</Text>
+          </Container>
+        </Container>
 
-        <div className="hidden flex-col items-center justify-center gap-2 md:flex">
-          <div>
-            {t("Service.Manufacturing.Model.components.Card.license")}:{" "}
-            {model.licenses}
-          </div>
-          <div>
-            {t("Service.Manufacturing.Model.components.Card.certificates")}:
-          </div>
-          {model.certificates.map((title: string, index: number) => (
-            <div key={index}>{title}</div>
-          ))}
-        </div>
-        <div className="flex  flex-col flex-wrap gap-2 ">
-          <Button
-            onClick={handleOnClickSelect}
-            title={t(
-              "Service.Manufacturing.Model.components.Card.button.select"
-            )}
-          />
-        </div>
-      </div>
-    </div>
+        {children}
+      </Container>
+    </Container>
   );
 };

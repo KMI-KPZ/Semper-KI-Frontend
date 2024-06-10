@@ -180,14 +180,20 @@ const useGetProcess = () => {
           accessedWhen: new Date(response.data.accessedWhen),
           files: Object.values(response.data.files),
           serviceDetails: {
-            materials: Object.values(response.data.serviceDetails.materials),
-            models: Object.values(response.data.serviceDetails.models),
-            postProcessings: Object.values(
-              response.data.serviceDetails.postProcessings
-            ),
+            materials:
+              response.data.serviceDetails.materials !== undefined
+                ? Object.values(response.data.serviceDetails.materials)
+                : undefined,
+            models:
+              response.data.serviceDetails.models !== undefined
+                ? Object.values(response.data.serviceDetails.models)
+                : undefined,
+            postProcessings:
+              response.data.serviceDetails.postProcessings !== undefined
+                ? Object.values(response.data.serviceDetails.postProcessings)
+                : undefined,
             manufacturerID: response.data.serviceDetails.manufacturerID,
           },
-          // files: objectToArray<File>(response.data.files),
         };
         logger("useGetProcess | getProcess ✅ |", response.data, process);
         logger(

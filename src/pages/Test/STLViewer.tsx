@@ -64,8 +64,12 @@ const CameraControls = () => {
   );
 };
 
-const ModelPreview = (props: { file?: string; className?: string }) => {
-  const { file, className: _className } = props;
+const ModelPreview = (props: {
+  file?: string;
+  className?: string;
+  interactive?: boolean;
+}) => {
+  const { file, className: _className, interactive = true } = props;
 
   const className = twMerge(
     "overflow-clip w-full h-full rounded-xl border-2 max-h-[600px] max-w-[1000px] h-[300px] w-[500px] ",
@@ -77,7 +81,7 @@ const ModelPreview = (props: { file?: string; className?: string }) => {
     <StlViewer
       className={className}
       url={file}
-      orbitControls
+      orbitControls={interactive}
       shadows
       showAxes
       modelProps={{ color: "red", scale: 1.5 }}

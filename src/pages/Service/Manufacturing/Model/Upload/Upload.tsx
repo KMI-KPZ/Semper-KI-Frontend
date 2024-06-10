@@ -210,6 +210,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                     direction="col"
                   >
                     <ModelPreview
+                      interactive={false}
                       file={url}
                       className="h-40 w-fit rounded-b-none border-0"
                     />

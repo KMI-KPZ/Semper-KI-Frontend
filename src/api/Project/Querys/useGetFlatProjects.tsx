@@ -46,7 +46,7 @@ const useGetFlatProjects = () => {
   const getFlatProjects = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/project/getFlat/`, {
-        headers: { Accept: "application/json, version=0.3" },
+        headers: { Accept: "application/json; version=0.3" },
       })
       .then((response) => {
         const responseData = response.data;

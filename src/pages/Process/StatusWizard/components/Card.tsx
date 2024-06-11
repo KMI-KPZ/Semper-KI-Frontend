@@ -70,7 +70,7 @@ const StatusWizardCard: React.FC<StatusWizardCardProps> = (props) => {
       className={`rounded-xl border-2 p-2 hover:cursor-pointer hover:border-orange-100 hover:bg-gray-50 ${
         active ? "border-orange-200 " : "border-slate-100"
       }
-      ${inView ? "ring-2" : "ring-0"}`}
+      ${inView ? "ring-2 ring-ultramarinblau ring-offset-2" : "ring-0"}`}
     >
       {item.icon}
       <Text>{t(`Process.StatusWizard.StatusWizard.item.${item.text}`)}</Text>

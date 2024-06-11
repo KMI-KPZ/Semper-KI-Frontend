@@ -34,7 +34,7 @@ const CSRFToken = (): string => {
 const axiosAuthorized = axios.create({
   baseURL: `${process.env.VITE_HTTP_API_URL}/`,
   headers: {
-    Accept: "application/json",
+    Accept: "application/json, version=0.3",
     "X-CSRFToken": CSRFToken(),
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",

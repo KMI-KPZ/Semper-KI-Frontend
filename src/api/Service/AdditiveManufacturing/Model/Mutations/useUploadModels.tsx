@@ -61,7 +61,11 @@ const useUploadModels = () => {
     mutationFn: uploadModel,
     onSuccess: (data, modelUploadProps, context) => {
       // navigate("../material");
-      queryClient.invalidateQueries(["project", modelUploadProps.projectID]);
+      queryClient.invalidateQueries([
+        "project",
+        modelUploadProps.projectID,
+        modelUploadProps.processID,
+      ]);
     },
   });
 };

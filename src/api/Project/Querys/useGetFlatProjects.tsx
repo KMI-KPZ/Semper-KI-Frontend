@@ -45,7 +45,9 @@ const useGetFlatProjects = () => {
   const queryClient = useQueryClient();
   const getFlatProjects = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/project/getFlat/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/project/getFlat/`, {
+        headers: { Accept: "application/json, version=0.3" },
+      })
       .then((response) => {
         const responseData = response.data;
         const flatProjects: FlatProject[] = responseData.projects.map(

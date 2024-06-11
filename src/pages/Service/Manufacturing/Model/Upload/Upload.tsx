@@ -103,28 +103,35 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
 
   const handleSubmit = () => {
     // logger("onSubmit", data);
-    uploadModels.mutate({
-      processID: process.processID,
-      projectID: project.projectID,
-      models: models.map((item) => ({
-        file: item.file,
-        details: {
-          date: new Date(),
-          certificates:
-            item.certificates === undefined
-              ? []
-              : item.certificates.split(",").map((item) => item.trim()),
-          licenses:
-            item.licenses === undefined
-              ? []
-              : item.licenses.split(",").map((item) => item.trim()),
-          tags:
-            item.tags === undefined
-              ? []
-              : item.tags.split(",").map((item) => item.trim()),
+    uploadModels.mutate(
+      {
+        processID: process.processID,
+        projectID: project.projectID,
+        models: models.map((item) => ({
+          file: item.file,
+          details: {
+            date: new Date(),
+            certificates:
+              item.certificates === undefined
+                ? []
+                : item.certificates.split(",").map((item) => item.trim()),
+            licenses:
+              item.licenses === undefined
+                ? []
+                : item.licenses.split(",").map((item) => item.trim()),
+            tags:
+              item.tags === undefined
+                ? []
+                : item.tags.split(",").map((item) => item.trim()),
+          },
+        })),
+      },
+      {
+        onSuccess(data, variables, context) {
+          setModels([]);
         },
-      })),
-    });
+      }
+    );
   };
 
   const hasError = (): boolean => {

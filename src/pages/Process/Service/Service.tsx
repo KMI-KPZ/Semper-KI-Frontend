@@ -25,7 +25,12 @@ const Service: React.FC<ServiceProps> = (props) => {
   };
 
   return (
-    <Container direction="col" width="full" className="relative bg-white p-3">
+    <Container
+      direction="col"
+      width="full"
+      className="relative bg-white p-3"
+      id="draft"
+    >
       <CardMenu title={t("Project.components.Info.button.menu")}>
         <Button
           title={t("Process.Service.Service.button.editType")}

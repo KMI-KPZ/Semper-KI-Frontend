@@ -14,16 +14,18 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import ModeIcon from "@mui/icons-material/Mode";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import StatusWizardCard from "./components/Card";
+import InfoIcon from "@mui/icons-material/Info";
 
 interface StatusWizardProps {
   process: Process;
 }
 
 export type StatusWizardItem = {
-  startStatus: ProcessStatus;
+  startStatus?: ProcessStatus;
   endStatus?: ProcessStatus;
   icon: ReactNode;
   text:
+    | "header"
     | "draft"
     | "service"
     | "contractorSelected"
@@ -38,6 +40,10 @@ export type StatusWizardItem = {
 };
 
 const statusWizardItems: StatusWizardItem[] = [
+  {
+    icon: <InfoIcon />,
+    text: "header",
+  },
   {
     startStatus: ProcessStatus.DRAFT,
     icon: <DesignServicesIcon />,

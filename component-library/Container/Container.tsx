@@ -11,6 +11,7 @@ interface ContainerProps {
   height?: "full" | "fit";
   gap?: 3 | 5;
   className?: string;
+  id?: string;
   onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
@@ -28,6 +29,7 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
     height,
     className,
     onClick,
+    id,
   } = props;
 
   const getAlign = () => {
@@ -69,6 +71,7 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
 
   return (
     <div
+      id={id}
       className={twMerge(
         "flex",
         getAlign(),

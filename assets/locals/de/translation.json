@@ -976,6 +976,7 @@
       "components": {},
       "StatusWizard": {
         "item": {
+          "header": "Übersicht",
           "draft": "Entwurf",
           "service": "Service",
           "contractorSelected": "Auftragnehmer",

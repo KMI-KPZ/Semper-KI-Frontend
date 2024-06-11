@@ -34,6 +34,7 @@ export const Header: React.FC<Props> = (props) => {
 
   return (
     <header
+      id="header"
       data-testid="header"
       className="flex w-full flex-row items-center justify-between bg-white p-1 shadow-lg"
     >

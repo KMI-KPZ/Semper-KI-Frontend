@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { ProcessMaterialCard } from "./components/Card";
 import { useTranslation } from "react-i18next";
-import { LoadingSuspense } from "@component-library/index";
-import { ProcessMaterialPreView } from "./components/PreView";
-import { ProcessMaterialItem } from "./components/Item";
 import { FilterItemProps } from "../Filter/Filter";
-import { Modal } from "@component-library/index";
-import useGetMaterials from "@/api/Service/AdditiveManufacturing/Querys/useGetMaterials";
-import { ServiceManufacturingState } from "@/api/Service/Querys/useGetServices";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useGetMaterials from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
+import {
+  Container,
+  Heading,
+  LoadingSuspense,
+  Text,
+} from "@component-library/index";
+import { ProcessMaterialCard } from "./components/Card";
 
 interface Props {
+  filters: FilterItemProps[];
   materials: MaterialProps[] | undefined;
   searchText: string;
-  filters: FilterItemProps[];
 }
 
 interface State {
@@ -29,11 +31,12 @@ export interface MaterialProps {
 
 export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { filters, materials, searchText: searchInput } = props;
+  const { filters, materials, searchText } = props;
   const [state, setState] = useState<State>({
     modalOpen: false,
     material: undefined,
   });
+  const navigate = useNavigate();
   const materialsQuery = useGetMaterials(filters);
   const openMaterialView = (material: MaterialProps) => {
     setState((prevState) => ({ ...prevState, modalOpen: true, material }));
@@ -59,49 +62,68 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
     return false;
   };
 
+  const handleOnButtonClickEdit = (index: number) => {
+    navigate(
+      `edit/${
+        materials !== undefined && materials.length > 0
+          ? materials[index].id
+          : ""
+      }`
+    );
+  };
+
   const selectMaterial = () => {};
   const deselectMaterial = () => {};
 
-  return material === undefined ? (
-    <LoadingSuspense query={materialsQuery}>
-      <div
-        className={`flex gap-y-5 md:max-h-[60vh] md:overflow-x-auto md:overflow-y-scroll ${
-          grid === true
-            ? "flex-row flex-wrap justify-between"
-            : "flex-col flex-nowrap "
-        }`}
-      >
-        {materialsQuery.data !== undefined && materialsQuery.data.length > 0 ? (
-          <>
-            {materialsQuery.data
-              .filter((material) => filterBySearch(material))
-              .map((material: MaterialProps, index: number) => (
-                <ProcessMaterialCard
-                  grid={grid}
-                  openMaterialView={openMaterialView}
-                  material={material}
-                  key={index}
-                />
-              ))}
-            <Modal
-              modalKey="ProcessMaterialPreView"
-              open={state.modalOpen === true && state.material !== undefined}
-              closeModal={closeMaterialView}
-            >
-              {state.material !== undefined ? (
-                <ProcessMaterialPreView
-                  material={state.material}
-                  closeMaterialView={closeMaterialView}
-                />
-              ) : null}
-            </Modal>
-          </>
-        ) : (
-          t("Service.Manufacturing.Material.Material.error.noMaterials")
-        )}
-      </div>
-    </LoadingSuspense>
-  ) : (
-    <ProcessMaterialItem material={material} />
+  return (
+    <Container direction="col" width="full">
+      {materials !== undefined && materials.length > 0 ? (
+        <Container direction="col" width="full">
+          <Heading variant="h2" className="w-full text-left">
+            {t("Service.Manufacturing.Material.Material.selected")}
+          </Heading>
+          <Container width="full" wrap="wrap">
+            {materials.length > 0
+              ? materials
+                  .filter((material, index) => filterBySearch(material))
+                  .map((material: MaterialProps, index: number) => {
+                    return (
+                      <ProcessMaterialCard
+                        material={material}
+                        key={index}
+                        openMaterialView={openMaterialView}
+                      />
+                    );
+                  })
+              : null}
+          </Container>
+        </Container>
+      ) : null}
+      <Container width="full" direction="col">
+        <Heading variant="h2" className="w-full text-left">
+          {t("Service.Manufacturing.Material.Material.available")}
+        </Heading>
+        <LoadingSuspense query={materialsQuery}>
+          {materialsQuery.data !== undefined &&
+          materialsQuery.data.length > 0 ? (
+            <>
+              {materialsQuery.data
+                .filter((material, index) => filterBySearch(material))
+                .map((material: MaterialProps, index: number) => (
+                  <ProcessMaterialCard
+                    material={material}
+                    key={index}
+                    openMaterialView={openMaterialView}
+                  />
+                ))}
+            </>
+          ) : (
+            <Text className="w-full text-center">
+              {t("Service.Manufacturing.Material.Material.error.noMaterials")}
+            </Text>
+          )}
+        </LoadingSuspense>
+      </Container>
+    </Container>
   );
 };

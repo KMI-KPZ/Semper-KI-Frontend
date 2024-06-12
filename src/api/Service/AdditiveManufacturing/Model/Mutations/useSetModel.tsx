@@ -2,30 +2,30 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-interface AddModelProps {
+interface SetModelProps {
   projectID: string;
   processID: string;
   modelID: string;
 }
 
-const useAddModel = () => {
+const useSetModel = () => {
   const queryClient = useQueryClient();
-  const addModel = async (props: AddModelProps) =>
+  const setModel = async (props: SetModelProps) =>
     authorizedCustomAxios
       .patch(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/add/`,
+        `${process.env.VITE_HTTP_API_URL}/public/service/setitive-manufacturing/model/set/`,
         props
       )
       .then((response) => {
-        logger("useAddModel | addModel ✅ |", response);
+        logger("useSetModel | setModel ✅ |", response);
         return response.data;
       })
       .catch((error) => {
-        logger("useAddModel | addModel ❌ |", error);
+        logger("useSetModel | setModel ❌ |", error);
       });
 
-  return useMutation<string, Error, AddModelProps>({
-    mutationFn: addModel,
+  return useMutation<string, Error, SetModelProps>({
+    mutationFn: setModel,
     onSuccess: (data, props, context) => {
       queryClient.invalidateQueries([
         "project",
@@ -36,4 +36,4 @@ const useAddModel = () => {
   });
 };
 
-export default useAddModel;
+export default useSetModel;

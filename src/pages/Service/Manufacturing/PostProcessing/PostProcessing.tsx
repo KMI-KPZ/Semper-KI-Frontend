@@ -4,10 +4,9 @@ import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
 import { FilterItemProps } from "../Filter/Filter";
 import useService from "../../../../hooks/useService";
-import useGetPostProcessigns from "@/api/Service/AdditiveManufacturing/Querys/useGetPostProcessigns";
 import useProcess from "@/hooks/Process/useProcess";
-import { ServiceManufacturingState } from "@/api/Service/Querys/useGetServices";
 import { isProcessAtServiceStatus } from "@/api/Process/Querys/useGetProcess";
+import useGetPostProcessigns from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 
 interface Props {
   searchText: string;

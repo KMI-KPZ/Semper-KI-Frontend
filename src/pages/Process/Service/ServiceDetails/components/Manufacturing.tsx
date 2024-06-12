@@ -7,10 +7,14 @@ import TestImg from "@images/Test2.png";
 import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
 import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
 import AddIcon from "@mui/icons-material/Add";
-import { useNavigate } from "react-router-dom";
-import useDeleteModel from "@/api/Process/Mutations/useDeleteModel";
+import { useNavigate, useParams } from "react-router-dom";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { MaterialProps } from "@/pages/Service/Manufacturing/Material/Material";
+import useSetModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useSetModel";
+import useDeleteModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useDeleteModel";
+import { useProject } from "@/hooks/Project/useProject";
+import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
+import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
 
 interface ServiceManufacturingDetailsProps {
   process: ManufactoringProcessProps;
@@ -20,6 +24,7 @@ const ServiceManufacturingDetails: React.FC<
   ServiceManufacturingDetailsProps
 > = (props) => {
   const { process } = props;
+  const { project } = useProject();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const models: ModelProps[] =
@@ -34,6 +39,10 @@ const ServiceManufacturingDetails: React.FC<
     ? process.serviceDetails.materials
     : [];
   const updateProcess = useUpdateProcess();
+  const deleteModel = useDeleteModel();
+  const deleteMaterial = useDeleteMaterial();
+  const deletePostProcessing = useDeletePostProcessing();
+  const setModel = useSetModel();
 
   const handleOnButtonClickModel = () => {
     navigate("service/manufacturing/model");
@@ -45,23 +54,28 @@ const ServiceManufacturingDetails: React.FC<
     navigate("service/manufacturing/postprocessing");
   };
 
-  const handleOnButtonClickDeleteModel = () => {
-    // updateProcess.mutate({
-    //   processIDs: [process.processID],
-    //   updates: {
-    //     changes: {
-    //       serviceDetails: {
-    //         models: [],
-    //       },
-    //     },
-    //   },
-    // });
+  const handleOnButtonClickDeleteModel = (modelID: string) => {
+    deleteModel.mutate({
+      processID: process.processID,
+      projectID: project.projectID,
+      modelID,
+    });
   };
-  const handleOnButtonClickDeleteMaterial = () => {
-    navigate("service/manufacturing/postprocessing");
+  const handleOnButtonClickDeleteMaterial = (materialID: string) => {
+    deleteMaterial.mutate({
+      processID: process.processID,
+      projectID: project.projectID,
+      materialID,
+    });
   };
-  const handleOnButtonClickDeletePostProcessing = () => {
-    navigate("service/manufacturing/postprocessing");
+  const handleOnButtonClickDeletePostProcessing = (
+    postProcessingID: string
+  ) => {
+    deletePostProcessing.mutate({
+      processID: process.processID,
+      projectID: project.projectID,
+      postProcessingID,
+    });
   };
 
   return (
@@ -171,7 +185,7 @@ const ServiceManufacturingDetails: React.FC<
                     )}
                     size="sm"
                     variant="text"
-                    onClick={handleOnButtonClickDeleteModel}
+                    onClick={() => handleOnButtonClickDeleteModel(model.id)}
                     children={t(
                       "Process.Service.ServiceDetails.components.manufacturing.button.delete"
                     )}
@@ -295,7 +309,9 @@ const ServiceManufacturingDetails: React.FC<
                     )}
                     size="sm"
                     variant="text"
-                    onClick={handleOnButtonClickDeleteMaterial}
+                    onClick={() =>
+                      handleOnButtonClickDeleteMaterial(material.id)
+                    }
                     children={t(
                       "Process.Service.ServiceDetails.components.manufacturing.button.delete"
                     )}
@@ -412,7 +428,9 @@ const ServiceManufacturingDetails: React.FC<
                     )}
                     size="sm"
                     variant="text"
-                    onClick={handleOnButtonClickDeletePostProcessing}
+                    onClick={() =>
+                      handleOnButtonClickDeletePostProcessing(postProcessing.id)
+                    }
                     children={t(
                       "Process.Service.ServiceDetails.components.manufacturing.button.delete"
                     )}

@@ -2,30 +2,32 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-interface UpdateModelProps {
-  modelID: string;
+interface SetMaterialProps {
+  materialID: string;
   processID: string;
   projectID: string;
 }
 
-const useUpdateModel = () => {
+const useSetMaterial = () => {
   const queryClient = useQueryClient();
-  const updateModel = async (props: UpdateModelProps) =>
+  const setMaterial = async (props: SetMaterialProps) =>
     authorizedCustomAxios
       .patch(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/update/`,
-        props
+        `${process.env.VITE_HTTP_API_URL}/public/service/setitive-manufacturing/material/set/`,
+        {
+          props,
+        }
       )
       .then((response) => {
-        logger("useUpdateModel | updateModel ✅ |", response);
+        logger("useSetMaterial | setMaterial ✅ |", response);
         return response.data;
       })
       .catch((error) => {
-        logger("useUpdateModel | updateModel ❌ |", error);
+        logger("useSetMaterial | setMaterial ❌ |", error);
       });
 
-  return useMutation<string, Error, UpdateModelProps>({
-    mutationFn: updateModel,
+  return useMutation<string, Error, SetMaterialProps>({
+    mutationFn: setMaterial,
     onSuccess: (data, props, context) => {
       queryClient.invalidateQueries([
         "project",
@@ -36,4 +38,4 @@ const useUpdateModel = () => {
   });
 };
 
-export default useUpdateModel;
+export default useSetMaterial;

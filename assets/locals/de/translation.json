@@ -1646,6 +1646,7 @@
       "Material": {
         "components": {
           "Card": {
+            "props": "Eigenschaften",
             "button": {
               "select": "Auswählen"
             }
@@ -1663,6 +1664,8 @@
         },
         "hooks": {},
         "Material": {
+          "available": "Verfügbare Materialien",
+          "selected": "Ausgewählte Materialien",
           "error": {
             "noMaterials": "keine Materialien gefunden"
           }

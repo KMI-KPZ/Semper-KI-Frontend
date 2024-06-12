@@ -8,9 +8,12 @@ const useGetModels = (filters: FilterItemProps[]) => {
   const queryClient = useQueryClient();
   const getModels = async () =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/getModels/`, {
-        filters,
-      })
+      .post(
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/get/`,
+        {
+          filters,
+        }
+      )
       .then((response) => {
         const models: ModelProps[] = response.data.models;
 

@@ -1668,6 +1668,9 @@
           "selected": "Ausgewählte Materialien",
           "error": {
             "noMaterials": "keine Materialien gefunden"
+          },
+          "button": {
+            "select": "Auswählen"
           }
         }
       },
@@ -1771,7 +1774,11 @@
       },
       "PostProcessing": {
         "components": {
-          "Card": {},
+          "Card": {
+            "value": "Wert:",
+            "valueList": "Werteliste:",
+            "type": "Typ:"
+          },
           "Catalog": {
             "button": {
               "overview": "zur Übersicht"
@@ -1791,9 +1798,14 @@
           "usePostProcessing": {}
         },
         "PostProcessing": {
+          "available": "Verfügbare Nachbearbeitungen",
+          "selected": "Ausgewählte Nachbearbeitungen",
           "error": {
             "noPostProcessings": "keine Nachbearbeitungen gefunden",
             "noPostProcessingsSelected": "keine Nachbearbeitungen ausgewählt"
+          },
+          "button": {
+            "select": "Auswählen"
           }
         }
       },

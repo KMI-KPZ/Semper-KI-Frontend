@@ -13,7 +13,7 @@ const useSetModel = () => {
   const setModel = async (props: SetModelProps) =>
     authorizedCustomAxios
       .patch(
-        `${process.env.VITE_HTTP_API_URL}/public/service/setitive-manufacturing/model/set/`,
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/set/`,
         props
       )
       .then((response) => {

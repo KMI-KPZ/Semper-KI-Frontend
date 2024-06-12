@@ -13,7 +13,7 @@ const useSetPostProcessing = () => {
   const setPostProcessing = async (props: SetPostProcessingProps) =>
     authorizedCustomAxios
       .patch(
-        `${process.env.VITE_HTTP_API_URL}/public/service/setitive-manufacturing/post-processing/set/`,
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/post-processing/set/`,
         {
           props,
         }

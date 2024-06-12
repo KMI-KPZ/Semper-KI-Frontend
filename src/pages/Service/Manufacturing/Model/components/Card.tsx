@@ -56,7 +56,7 @@ export const ProcessModelCard: React.FC<PropsWithChildren<Props>> = (props) => {
         <ModelPreview
           interactive={false}
           file={getFileURL(modelFile.data)}
-          className="h-40 w-fit rounded-b-none border-0"
+          className="h-60 w-full border-0"
         />
       )}
       <Divider />

@@ -4,12 +4,16 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useGetMaterials from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 import {
+  Button,
   Container,
   Heading,
   LoadingSuspense,
   Text,
 } from "@component-library/index";
 import { ProcessMaterialCard } from "./components/Card";
+import useSetMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useSetMaterial";
+import useProcess from "@/hooks/Process/useProcess";
+import { useProject } from "@/hooks/Project/useProject";
 
 interface Props {
   filters: FilterItemProps[];
@@ -26,7 +30,7 @@ export interface MaterialProps {
   id: string;
   title: string;
   propList: string[];
-  URI: string;
+  imgPath: string;
 }
 
 export const ManufacturingMaterials: React.FC<Props> = (props) => {
@@ -37,7 +41,10 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
     material: undefined,
   });
   const navigate = useNavigate();
+  const { process } = useProcess();
+  const { project } = useProject();
   const materialsQuery = useGetMaterials(filters);
+  const setMaterial = useSetMaterial();
   const openMaterialView = (material: MaterialProps) => {
     setState((prevState) => ({ ...prevState, modalOpen: true, material }));
   };
@@ -62,14 +69,12 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
     return false;
   };
 
-  const handleOnButtonClickEdit = (index: number) => {
-    navigate(
-      `edit/${
-        materials !== undefined && materials.length > 0
-          ? materials[index].id
-          : ""
-      }`
-    );
+  const handleOnButtonClickSelect = (materialID: string) => {
+    setMaterial.mutate({
+      projectID: project.projectID,
+      processID: process.processID,
+      materialID,
+    });
   };
 
   const selectMaterial = () => {};
@@ -106,7 +111,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
         <LoadingSuspense query={materialsQuery}>
           {materialsQuery.data !== undefined &&
           materialsQuery.data.length > 0 ? (
-            <>
+            <Container width="full" wrap="wrap" direction="row" align="start">
               {materialsQuery.data
                 .filter((material, index) => filterBySearch(material))
                 .map((material: MaterialProps, index: number) => (
@@ -114,9 +119,19 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
                     material={material}
                     key={index}
                     openMaterialView={openMaterialView}
-                  />
+                  >
+                    <Container direction="row">
+                      <Button
+                        variant="secondary"
+                        onClick={() => handleOnButtonClickSelect(material.id)}
+                        title={t(
+                          "Service.Manufacturing.Material.Material.button.select"
+                        )}
+                      />
+                    </Container>
+                  </ProcessMaterialCard>
                 ))}
-            </>
+            </Container>
           ) : (
             <Text className="w-full text-center">
               {t("Service.Manufacturing.Material.Material.error.noMaterials")}

@@ -30,7 +30,7 @@ export class MaterialBuilder {
             id: this.id,
             title: this.title,
             propList: this.propList,
-            URI: this.URI,
+            imgPath: this.URI,
         }
     }
 }

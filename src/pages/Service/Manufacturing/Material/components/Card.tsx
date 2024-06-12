@@ -36,10 +36,14 @@ export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
   };
   return (
     <Container
-      className="w-fit min-w-[350px] max-w-[50%] gap-0 rounded-xl border-2 bg-white"
+      className="w-fit min-w-[350px] max-w-[32%] gap-0 overflow-clip rounded-xl border-2 bg-white"
       direction="col"
     >
-      <img src={material.URI} alt={material.title} />
+      <img
+        src={material.imgPath}
+        alt={material.title}
+        className="h-60 w-full object-cover"
+      />
       <Divider />
       <Container direction="col" className="p-5">
         <Heading variant="h3">{material.title}</Heading>

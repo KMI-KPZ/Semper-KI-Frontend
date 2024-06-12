@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import ServiceDetailsCard from "./Card";
 import TestImg from "@images/Test2.png";
 import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
-import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate, useParams } from "react-router-dom";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
@@ -15,6 +14,7 @@ import useDeleteModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/
 import { useProject } from "@/hooks/Project/useProject";
 import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
 import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
+import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 
 interface ServiceManufacturingDetailsProps {
   process: ManufactoringProcessProps;

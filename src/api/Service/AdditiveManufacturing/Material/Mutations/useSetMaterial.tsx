@@ -13,7 +13,7 @@ const useSetMaterial = () => {
   const setMaterial = async (props: SetMaterialProps) =>
     authorizedCustomAxios
       .patch(
-        `${process.env.VITE_HTTP_API_URL}/public/service/setitive-manufacturing/material/set/`,
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/material/set/`,
         {
           props,
         }

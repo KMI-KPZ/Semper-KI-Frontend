@@ -39,7 +39,7 @@ export const ProcessMaterialPreView: React.FC<Props> = (props) => {
         </div>
       </div>
       <Heading variant="h2">{material.title}</Heading>
-      <img className="w-full xl:max-w-xl" src={material.URI} alt="Model" />
+      <img className="w-full xl:max-w-xl" src={material.imgPath} alt="Model" />
       <div className="model-view-tags">
         {material.propList.map((title: string, index: number) => (
           <div key={index} className="model-view-tag">

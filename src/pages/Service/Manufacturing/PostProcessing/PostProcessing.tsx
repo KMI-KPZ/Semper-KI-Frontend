@@ -1,41 +1,52 @@
 import React from "react";
 import ProcessPostProcessCatalog from "./components/Catalog";
 import { useTranslation } from "react-i18next";
-import { LoadingSuspense } from "@component-library/index";
+import {
+  Button,
+  Container,
+  Heading,
+  LoadingSuspense,
+  Text,
+} from "@component-library/index";
 import { FilterItemProps } from "../Filter/Filter";
 import useService from "../../../../hooks/useService";
 import useProcess from "@/hooks/Process/useProcess";
-import { isProcessAtServiceStatus } from "@/api/Process/Querys/useGetProcess";
-import useGetPostProcessigns from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
+import ProcessPostProcessingCard from "./components/Card";
+import useGetPostProcessigns, {
+  PostProcessingProps,
+} from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
+import useSetPostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useSetPostProcessing";
+import { useProject } from "@/hooks/Project/useProject";
 
 interface Props {
-  searchText: string;
   filters: FilterItemProps[];
   postProcessings: PostProcessingProps[] | undefined;
-}
-
-export interface PostProcessingProps {
-  id: string;
-  title: string;
-  checked: boolean;
-  value: string;
-  valueList: string[];
-  type: EPostProcessingOptionType;
-  URI: string;
-}
-
-export enum EPostProcessingOptionType {
-  "selection",
-  "number",
-  "text",
+  searchText: string;
 }
 
 export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { searchText, filters, postProcessings } = props;
-  const postProcessingQuery = useGetPostProcessigns(filters);
+  const postProcessingsQuery = useGetPostProcessigns(filters);
   const { updatedService } = useService();
   const { process } = useProcess();
+  const { project } = useProject();
+  const setPostProcessing = useSetPostProcessing();
+
+  const filterBySearch = (postProcessing: PostProcessingProps): boolean => {
+    if (searchText === "") {
+      return true;
+    }
+    if (
+      postProcessing.title.toLocaleLowerCase().includes(searchText) ||
+      postProcessing.valueList.filter((value) =>
+        value.toLocaleLowerCase().includes(searchText)
+      ).length > 0
+    ) {
+      return true;
+    }
+    return false;
+  };
 
   const checkPostProcessing = (postProcessing: PostProcessingProps) => {
     let newPostProcessings: PostProcessingProps[] = [];
@@ -82,36 +93,93 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
     return hydratedPostProcessings;
   };
 
-  return isProcessAtServiceStatus(process) ? (
-    <LoadingSuspense query={postProcessingQuery}>
-      {postProcessingQuery.data !== undefined ? (
-        <div className="flex max-h-[60vh] flex-col gap-y-5 overflow-x-auto overflow-y-scroll">
-          <ProcessPostProcessCatalog
-            searchText={searchText}
-            items={hydratePostProcessings(
-              postProcessingQuery.data,
-              postProcessings
-            )}
-            checkItem={checkPostProcessing}
-          />
-        </div>
-      ) : (
-        t(
-          "Service.Manufacturing.PostProcessing.PostProcessing.error.noPostProcessings"
-        )
-      )}
-    </LoadingSuspense>
-  ) : postProcessings !== undefined ? (
-    <div className="flex max-h-[60vh] flex-col gap-y-5 overflow-x-auto overflow-y-scroll">
-      <ProcessPostProcessCatalog
-        searchText={searchText}
-        items={postProcessings}
-        checkItem={checkPostProcessing}
-      />
-    </div>
-  ) : (
-    t(
-      "Service.Manufacturing.PostProcessing.PostProcessing.error.noPostProcessingsSelected"
-    )
+  const handleOnButtonClickSelect = (postProcessingID: string) => {
+    setPostProcessing.mutate({
+      processID: process.processID,
+      projectID: project.projectID,
+      postProcessingID,
+    });
+  };
+
+  return (
+    <Container direction="col" width="full">
+      {postProcessings !== undefined && postProcessings.length > 0 ? (
+        <Container direction="col" width="full">
+          <Heading variant="h2" className="w-full text-left">
+            {t("Service.Manufacturing.PostProcessing.PostProcessing.selected")}
+          </Heading>
+          <Container width="full" wrap="wrap">
+            {postProcessings.length > 0
+              ? postProcessings
+                  .filter((postProcessing, index) =>
+                    filterBySearch(postProcessing)
+                  )
+                  .map((postProcessing: PostProcessingProps, index: number) => {
+                    return (
+                      <ProcessPostProcessingCard
+                        key={index}
+                        item={postProcessing}
+                        openItemView={() => {}}
+                      >
+                        <Container direction="row">
+                          <Button
+                            variant="secondary"
+                            onClick={() =>
+                              handleOnButtonClickSelect(postProcessing.id)
+                            }
+                            title={t(
+                              "Service.Manufacturing.PostProcessing.PostProcessing.button.select"
+                            )}
+                          />
+                        </Container>
+                      </ProcessPostProcessingCard>
+                    );
+                  })
+              : null}
+          </Container>
+        </Container>
+      ) : null}
+      <Container width="full" direction="col">
+        <Heading variant="h2" className="w-full text-left">
+          {t("Service.Manufacturing.PostProcessing.PostProcessing.available")}
+        </Heading>
+        <LoadingSuspense query={postProcessingsQuery}>
+          {postProcessingsQuery.data !== undefined &&
+          postProcessingsQuery.data.length > 0 ? (
+            <Container width="full" wrap="wrap" direction="row" align="start">
+              {postProcessingsQuery.data
+                .filter((postProcessing, index) =>
+                  filterBySearch(postProcessing)
+                )
+                .map((postProcessing: PostProcessingProps, index: number) => (
+                  <ProcessPostProcessingCard
+                    key={index}
+                    item={postProcessing}
+                    openItemView={() => {}}
+                  >
+                    <Container direction="row">
+                      <Button
+                        variant="secondary"
+                        onClick={() =>
+                          handleOnButtonClickSelect(postProcessing.id)
+                        }
+                        title={t(
+                          "Service.Manufacturing.PostProcessing.PostProcessing.button.select"
+                        )}
+                      />
+                    </Container>
+                  </ProcessPostProcessingCard>
+                ))}
+            </Container>
+          ) : (
+            <Text className="w-full text-center">
+              {t(
+                "Service.Manufacturing.PostProcessing.PostProcessing.error.noPostProcessings"
+              )}
+            </Text>
+          )}
+        </LoadingSuspense>
+      </Container>
+    </Container>
   );
 };

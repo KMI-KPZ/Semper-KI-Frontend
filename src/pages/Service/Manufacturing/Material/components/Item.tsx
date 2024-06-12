@@ -26,7 +26,7 @@ export const ProcessMaterialItem: React.FC<Props> = (props) => {
   return (
     <div className="flex h-fit w-full flex-col items-center justify-start gap-5 bg-white p-5">
       <Heading variant="h2">{material.title}</Heading>
-      <img className="w-full max-w-xs" src={material.URI} alt="Model" />
+      <img className="w-full max-w-xs" src={material.imgPath} alt="Model" />
       <div className="model-view-tags">
         {material.propList.map((title: string, index: number) => (
           <div key={index} className="model-view-tag">

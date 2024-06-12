@@ -1,28 +1,32 @@
-import { Heading } from "@component-library/index";
-import { PostProcessingProps } from "../PostProcessing";
+import {
+  Container,
+  Heading,
+  LoadingAnimation,
+  Text,
+} from "@component-library/index";
 import useProcess from "@/hooks/Process/useProcess";
-import { isProcessAtServiceStatus } from "@/api/Process/Querys/useGetProcess";
+import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
+import useSetPostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useSetPostProcessing";
+import { Divider } from "@mui/material";
+import React, { PropsWithChildren } from "react";
+import { useTranslation } from "react-i18next";
+import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 
 interface Props<Item> {
   item: Item;
-  grid: boolean;
-  checkItem(item: Item): void;
   openItemView(item: Item): void;
+  children?: React.ReactNode;
 }
 
 const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
   props: Props<Item>
 ) => {
-  const { grid, item, openItemView, checkItem } = props;
+  const { item, openItemView, children } = props;
   const { process } = useProcess();
+  const { t } = useTranslation();
 
-  const handleOnClickSelect = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
-    checkItem(item);
-  };
+  const deletePostProcessing = useDeletePostProcessing();
+  const setPostProcessing = useSetPostProcessing();
 
   const handleOnClickCard = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -31,49 +35,47 @@ const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
     openItemView(item);
   };
 
-  const handleOnClickCheckbox = (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>
-  ) => {
-    e.stopPropagation();
-    checkItem(item);
-  };
-  const handleOnChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {};
-
   return (
-    <div
-      className={`flex items-center justify-start overflow-hidden bg-white hover:cursor-pointer hover:bg-gray-300 ${
-        grid === true
-          ? "basis-[48%] flex-col sm:basis-[32%] md:basis-[23.5%]"
-          : "w-full flex-row"
-      }`}
-      onClick={handleOnClickCard}
+    <Container
+      className="w-fit min-w-[350px] max-w-[32%] gap-0 overflow-clip rounded-xl border-2 bg-white"
+      direction="col"
     >
       <img
-        className={`object-cover ${
-          grid === true
-            ? "h-44 min-w-full max-w-[200%]"
-            : "max-h-44 min-h-full w-44 "
-        }`}
-        src={item.URI}
-        alt="PostProcessing"
+        src={item.imgPath}
+        alt="post-processing"
+        className="h-60 w-full object-cover"
       />
-      <div
-        className={`flex h-full items-center justify-around gap-2 p-3  md:justify-between ${
-          grid === true ? "flex-col " : "w-full flex-row gap-5"
-        }`}
-      >
-        <Heading variant="h2">{item.title}</Heading>
-        {isProcessAtServiceStatus(process) ? (
-          <input
-            type="checkbox"
-            className="h-10 w-10 checked:accent-türkis"
-            checked={item.checked}
-            onClick={handleOnClickCheckbox}
-            onChange={handleOnChangeCheckbox}
-          />
-        ) : null}
-      </div>
-    </div>
+      <Divider />
+      <Container direction="col" className="p-5">
+        <Heading variant="h3">{item.title}</Heading>
+        <Container direction="row" width="full" align="start">
+          <Container direction="col" justify="start" align="start">
+            <Text>
+              {`${t(
+                `Service.Manufacturing.PostProcessing.components.Card.type`
+              )}`}
+            </Text>
+            <Text>
+              {`${t(
+                `Service.Manufacturing.PostProcessing.components.Card.value`
+              )}`}
+            </Text>
+            <Text>
+              {`${t(
+                `Service.Manufacturing.PostProcessing.components.Card.value`
+              )}`}
+            </Text>
+          </Container>
+          <Container direction="col" justify="start" align="start">
+            <Text>{item.type}</Text>
+            <Text>{item.value}</Text>
+            <Text>{item.valueList}</Text>
+          </Container>
+        </Container>
+
+        {children}
+      </Container>
+    </Container>
   );
 };
 

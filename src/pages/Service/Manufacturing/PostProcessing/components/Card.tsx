@@ -11,6 +11,7 @@ import { Divider } from "@mui/material";
 import React, { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
+import { useProject } from "@/hooks/Project/useProject";
 
 interface Props<Item> {
   item: Item;
@@ -22,11 +23,8 @@ const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
   props: Props<Item>
 ) => {
   const { item, openItemView, children } = props;
-  const { process } = useProcess();
-  const { t } = useTranslation();
 
-  const deletePostProcessing = useDeletePostProcessing();
-  const setPostProcessing = useSetPostProcessing();
+  const { t } = useTranslation();
 
   const handleOnClickCard = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>

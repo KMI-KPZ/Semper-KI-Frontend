@@ -17,6 +17,7 @@ import useGetPostProcessigns, {
 } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 import useSetPostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useSetPostProcessing";
 import { useProject } from "@/hooks/Project/useProject";
+import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
 
 interface Props {
   filters: FilterItemProps[];
@@ -31,7 +32,24 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
   const { updatedService } = useService();
   const { process } = useProcess();
   const { project } = useProject();
+  const deletePostProcessing = useDeletePostProcessing();
   const setPostProcessing = useSetPostProcessing();
+
+  const handleOnClickButtonSelect = (postProcessingID: string) => {
+    setPostProcessing.mutate({
+      projectID: project.projectID,
+      processID: process.processID,
+      postProcessingID,
+    });
+  };
+
+  const handleOnClickButtonDelete = (postProcessingID: string) => {
+    deletePostProcessing.mutate({
+      projectID: project.projectID,
+      processID: process.processID,
+      postProcessingID,
+    });
+  };
 
   const filterBySearch = (postProcessing: PostProcessingProps): boolean => {
     if (searchText === "") {
@@ -125,10 +143,10 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
                           <Button
                             variant="secondary"
                             onClick={() =>
-                              handleOnButtonClickSelect(postProcessing.id)
+                              handleOnClickButtonDelete(postProcessing.id)
                             }
                             title={t(
-                              "Service.Manufacturing.PostProcessing.PostProcessing.button.select"
+                              "Service.Manufacturing.PostProcessing.PostProcessing.button.delete"
                             )}
                           />
                         </Container>

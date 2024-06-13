@@ -16,7 +16,7 @@ export interface PostProcessingProps {
 export enum EPostProcessingOptionType {
   "selection",
   "number",
-  "text",
+  "string",
 }
 
 const useGetPostProcessigns = (filters: FilterItemProps[]) => {

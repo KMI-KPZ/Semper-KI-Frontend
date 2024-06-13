@@ -16,6 +16,7 @@ import { ProcessMaterialCard } from "./components/Card";
 import useSetMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useSetMaterial";
 import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
+import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
 
 interface Props {
   filters: FilterItemProps[];
@@ -40,6 +41,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const { project } = useProject();
   const materialsQuery = useGetMaterials(filters);
   const setMaterial = useSetMaterial();
+  const deleteMaterial = useDeleteMaterial();
   const openMaterialView = (material: MaterialProps) => {
     setState((prevState) => ({ ...prevState, modalOpen: true, material }));
   };
@@ -71,9 +73,13 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
       material,
     });
   };
-
-  const selectMaterial = () => {};
-  const deselectMaterial = () => {};
+  const handleOnButtonClickDelete = (materialID: string) => {
+    deleteMaterial.mutate({
+      projectID: project.projectID,
+      processID: process.processID,
+      materialID,
+    });
+  };
 
   return (
     <Container direction="col" width="full">
@@ -92,7 +98,19 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
                         material={material}
                         key={index}
                         openMaterialView={openMaterialView}
-                      />
+                      >
+                        <Container direction="row">
+                          <Button
+                            variant="secondary"
+                            onClick={() =>
+                              handleOnButtonClickDelete(material.id)
+                            }
+                            title={t(
+                              "Service.Manufacturing.Material.Material.button.delete"
+                            )}
+                          />
+                        </Container>
+                      </ProcessMaterialCard>
                     );
                   })
               : null}

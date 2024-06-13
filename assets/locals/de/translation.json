@@ -1670,7 +1670,8 @@
             "noMaterials": "keine Materialien gefunden"
           },
           "button": {
-            "select": "Auswählen"
+            "select": "Auswählen",
+            "delete": "Löschen"
           }
         }
       },

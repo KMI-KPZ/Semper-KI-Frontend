@@ -1,4 +1,5 @@
-import { MaterialProps } from "@/pages/Service/Manufacturing/Material/Material";
+import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
+
 
 
 export class MaterialBuilder {

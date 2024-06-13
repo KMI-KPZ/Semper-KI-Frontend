@@ -8,13 +8,13 @@ import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate, useParams } from "react-router-dom";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
-import { MaterialProps } from "@/pages/Service/Manufacturing/Material/Material";
 import useSetModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useSetModel";
 import useDeleteModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useDeleteModel";
 import { useProject } from "@/hooks/Project/useProject";
 import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
 import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
 import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
+import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 
 interface ServiceManufacturingDetailsProps {
   process: ManufactoringProcessProps;

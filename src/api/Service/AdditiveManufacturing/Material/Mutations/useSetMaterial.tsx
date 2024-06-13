@@ -1,9 +1,10 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { MaterialProps } from "../Querys/useGetMaterials";
 
 interface SetMaterialProps {
-  materialID: string;
+  material: MaterialProps;
   processID: string;
   projectID: string;
 }
@@ -14,9 +15,7 @@ const useSetMaterial = () => {
     authorizedCustomAxios
       .patch(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/material/set/`,
-        {
-          props,
-        }
+        props
       )
       .then((response) => {
         logger("useSetMaterial | setMaterial ✅ |", response);

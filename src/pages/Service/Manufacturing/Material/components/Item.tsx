@@ -1,11 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/index";
-import { MaterialProps } from "../Material";
 import { Heading } from "@component-library/index";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useProcess from "@/hooks/Process/useProcess";
 import { isProcessAtServiceStatus } from "@/api/Process/Querys/useGetProcess";
+import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 
 interface Props {
   material: MaterialProps;

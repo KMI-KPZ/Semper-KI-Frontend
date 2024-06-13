@@ -15,6 +15,12 @@ export enum ProcessHistoryType {
   OTHER = 7,
 }
 
+export enum ProcessStatusType {
+  "OK",
+  "ERROR",
+  "MISSING",
+}
+
 export type HistoryProps = {
   createdBy: string;
   createdWhen: Date;

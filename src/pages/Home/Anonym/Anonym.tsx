@@ -38,7 +38,7 @@ const Home: React.FC<HomeProps> = (props) => {
   };
 
   const handleOnClickButtonDemonstrator = () => {
-    createProject.mutate();
+    createProject.mutate("test");
   };
 
   return (

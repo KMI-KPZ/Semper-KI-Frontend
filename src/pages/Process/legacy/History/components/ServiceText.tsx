@@ -25,7 +25,11 @@ const ProcessHistoryServiceText: React.FC<ProcessHistoryServiceTextProps> = (
         name={t(
           "Projects.Project.Process.History.components.ServiceText.manufacturing.material"
         )}
-        data={service.materials.title}
+        data={service.materials
+          .map((material) => {
+            return material.title;
+          })
+          .join(", ")}
       />
     ) : null;
   };
@@ -37,7 +41,7 @@ const ProcessHistoryServiceText: React.FC<ProcessHistoryServiceTextProps> = (
         name={t(
           "Projects.Project.Process.History.components.ServiceText.manufacturing.model"
         )}
-        data={service.models.fileName}
+        data={service.models.map((model) => model.fileName).join(", ")}
       />
     ) : null;
   };

@@ -2,11 +2,11 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { objectToArray } from "@/services/utils";
-import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
 import { ModelingServiceProps } from "@/pages/Service/Modelling/Modelling";
 import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
-import { MaterialProps } from "@/pages/Service/Manufacturing/Material/Material";
 import TestImg from "@images/Test2.png";
+import { PostProcessingProps } from "../AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
+import { MaterialProps } from "../AdditiveManufacturing/Material/Querys/useGetMaterials";
 
 export interface ServiceItemProps {
   name: string;

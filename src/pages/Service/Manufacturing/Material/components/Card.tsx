@@ -1,10 +1,10 @@
 import React, { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Divider, Text } from "@component-library/index";
-import { MaterialProps } from "../Material";
 import { Heading } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
 import useService from "@/hooks/useService";
+import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 
 interface Props {
   material: MaterialProps;

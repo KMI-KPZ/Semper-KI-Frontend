@@ -1,13 +1,14 @@
 import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "react-i18next";
-import {
-  EPostProcessingOptionType,
-  PostProcessingProps,
-} from "../PostProcessing";
+
 import { Heading } from "@component-library/index";
 import { Button } from "@component-library/index";
 import useProcess from "@/hooks/Process/useProcess";
 import { isProcessAtServiceStatus } from "@/api/Process/Querys/useGetProcess";
+import {
+  EPostProcessingOptionType,
+  PostProcessingProps,
+} from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 interface Props<Item> {
   item: Item;
   checkItem(item: Item): void;
@@ -65,7 +66,7 @@ const ProcessPostProcessingItem = <Item extends PostProcessingProps>(
         </div>
       </div>
       <Heading variant="h2">{item.title}</Heading>
-      <img className="w-full xl:max-w-xl" src={item.URI} alt="Model" />
+      <img className="w-full xl:max-w-xl" src={item.imgPath} alt="Model" />
       <Heading variant="h3">{item.type}</Heading>
       {item.value !== "" ? (
         <div className="flex flex-row items-center justify-center">

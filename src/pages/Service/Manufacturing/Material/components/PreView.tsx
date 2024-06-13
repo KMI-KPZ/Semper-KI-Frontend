@@ -1,12 +1,12 @@
 import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { Button } from "@component-library/index";
-import { MaterialProps } from "../Material";
 import { Heading } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import useProcess from "@/hooks/Process/useProcess";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 
 interface Props {
   material: MaterialProps;

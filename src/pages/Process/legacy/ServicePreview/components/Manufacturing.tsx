@@ -1,5 +1,4 @@
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
 import { Button } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { Modal } from "@component-library/index";
@@ -15,6 +14,8 @@ import {
   ManufactoringProcessProps,
   isProcessAtServiceStatus,
 } from "@/api/Process/Querys/useGetProcess";
+import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
+import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 
 interface ProcessServiceManufacturingProps {
   process: ManufactoringProcessProps;
@@ -110,7 +111,9 @@ const ProcessServiceManufacturing: React.FC<
                 ? t(
                     "Projects.Project.Process.ServicePreview.components.Manufacturing.notSelected"
                   )
-                : process.serviceDetails.models.fileName}
+                : process.serviceDetails.models
+                    .map((model: ModelProps) => model.fileName)
+                    .join(", ")}
             </Text>
           </Card>
           {process.serviceDetails.models !== undefined ? (
@@ -143,7 +146,9 @@ const ProcessServiceManufacturing: React.FC<
               ? t(
                   "Projects.Project.Process.ServicePreview.components.Manufacturing.notSelected"
                 )
-              : process.serviceDetails.materials.title}
+              : process.serviceDetails.materials.map(
+                  (material) => material.title
+                )}
           </Text>
         </Card>
         <Card

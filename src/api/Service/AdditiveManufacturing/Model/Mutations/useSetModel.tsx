@@ -1,11 +1,12 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { ModelProps } from "react-stl-viewer";
 
 interface SetModelProps {
   projectID: string;
   processID: string;
-  modelID: string;
+  model: ModelProps;
 }
 
 const useSetModel = () => {

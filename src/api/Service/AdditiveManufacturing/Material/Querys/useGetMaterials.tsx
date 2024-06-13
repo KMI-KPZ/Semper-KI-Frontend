@@ -1,8 +1,14 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { MaterialProps } from "@/pages/Service/Manufacturing/Material/Material";
 import { FilterItemProps } from "@/pages/Service/Manufacturing/Filter/Filter";
+
+export interface MaterialProps {
+  id: string;
+  title: string;
+  propList: string[];
+  imgPath: string;
+}
 
 const useGetMaterials = (filters: FilterItemProps[]) => {
   const queryClient = useQueryClient();

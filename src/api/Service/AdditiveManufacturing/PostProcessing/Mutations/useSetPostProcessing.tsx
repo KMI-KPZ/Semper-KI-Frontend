@@ -1,11 +1,12 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { PostProcessingProps } from "../Querys/useGetPostProcessigns";
 
 interface SetPostProcessingProps {
-  postProcessingID: string;
   processID: string;
   projectID: string;
+  postProcessing: PostProcessingProps;
 }
 
 const useSetPostProcessing = () => {
@@ -14,9 +15,7 @@ const useSetPostProcessing = () => {
     authorizedCustomAxios
       .patch(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/post-processing/set/`,
-        {
-          props,
-        }
+        props
       )
       .then((response) => {
         logger("useSetPostProcessing | setPostProcessing ✅ |", response);

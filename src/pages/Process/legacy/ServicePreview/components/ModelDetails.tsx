@@ -1,6 +1,6 @@
 import useDownloadFile from "@/api/Process/Mutations/useDownloadFile";
 import { ManufactoringProcessProps } from "@/api/Process/Querys/useGetProcess";
-import useGetModelDetails from "@/api/Service/AdditiveManufacturing/Querys/useGetModelDetails";
+import useGetModelDetails from "@/api/Service/AdditiveManufacturing/Model/Querys/useGetModelDetails";
 import ModelPreview from "@/pages/Test/STLViewer";
 import {
   Container,
@@ -23,30 +23,30 @@ const ModelDetails: React.FC<ModelDetailsProps> = (props) => {
   const modelDetailsQuery = useGetModelDetails(process.processID);
   const [fileUrl, setFileUrl] = React.useState<string>("");
 
-  useEffect(() => {
-    if (
-      process.serviceDetails.models !== undefined &&
-      process.files.length > 0 &&
-      process.files.find(
-        (file) =>
-          process.serviceDetails.models !== undefined &&
-          file.id === process.serviceDetails.models.id
-      ) !== undefined
-    ) {
-      downloadFile.mutate(
-        {
-          processID: process.processID,
-          fileID: process.serviceDetails.models.id,
-        },
-        {
-          onSuccess(data) {
-            const url = window.URL.createObjectURL(data);
-            setFileUrl(url);
-          },
-        }
-      );
-    }
-  }, [process]);
+  // useEffect(() => {
+  //   if (
+  //     process.serviceDetails.models !== undefined &&
+  //     process.files.length > 0 &&
+  //     process.files.find(
+  //       (file) =>
+  //         process.serviceDetails.models !== undefined &&
+  //         file.id === process.serviceDetails.models.id
+  //     ) !== undefined
+  //   ) {
+  //     downloadFile.mutate(
+  //       {
+  //         processID: process.processID,
+  //         fileID: process.serviceDetails.models.id,
+  //       },
+  //       {
+  //         onSuccess(data) {
+  //           const url = window.URL.createObjectURL(data);
+  //           setFileUrl(url);
+  //         },
+  //       }
+  //     );
+  //   }
+  // }, [process]);
 
   return (
     <Container direction="col" width="full">

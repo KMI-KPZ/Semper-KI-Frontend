@@ -21,10 +21,10 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const createProject = useCreateProject();
 
   const handleOnClickButtonNew = () => {
-    createProject.mutate();
+    createProject.mutate("test");
   };
   const handleOnClickButtonDemo = () => {
-    createProject.mutate();
+    createProject.mutate("test");
   };
 
   return (

@@ -5,8 +5,9 @@ import { getModelURI } from "@/services/utils";
 import { ModelProps } from "../types";
 import { Heading } from "@component-library/index";
 import useProcess from "@/hooks/Process/useProcess";
-import useDeleteModel from "@/api/Process/Mutations/useDeleteModel";
 import { isProcessAtServiceStatus } from "@/api/Process/Querys/useGetProcess";
+import useDeleteModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useDeleteModel";
+import { useProject } from "@/hooks/Project/useProject";
 
 interface Props {
   model: ModelProps;
@@ -16,6 +17,7 @@ const ProcessModelItem: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { model } = props;
   const { process } = useProcess();
+  const { project } = useProject();
   const deleteModel = useDeleteModel();
 
   const getDate = (): string => {
@@ -30,8 +32,12 @@ const ProcessModelItem: React.FC<Props> = (props) => {
     return base64;
   };
 
-  const handleOnClickButtonDeselect = () => {
-    deleteModel.mutate({ processID: process.processID });
+  const handleOnClickButtonDeselect = (modelID: string) => {
+    deleteModel.mutate({
+      processID: process.processID,
+      projectID: project.projectID,
+      modelID,
+    });
   };
 
   return (
@@ -66,7 +72,7 @@ const ProcessModelItem: React.FC<Props> = (props) => {
       </div>
       {isProcessAtServiceStatus(process) ? (
         <Button
-          onClick={handleOnClickButtonDeselect}
+          onClick={() => handleOnClickButtonDeselect(model.id)}
           title={t("Service.Manufacturing.Model.components.Item.button.change")}
         />
       ) : null}

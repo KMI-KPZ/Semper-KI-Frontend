@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import ProcessPostProcessingItem from "./Item";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ProcessPostProcessingCard from "./Card";
-import { PostProcessingProps } from "../PostProcessing";
 import { Modal } from "@component-library/index";
 import useModal from "@/hooks/useModal";
 import useProcess from "@/hooks/Process/useProcess";
 import { isProcessAtServiceStatus } from "@/api/Process/Querys/useGetProcess";
+import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 
 interface Props<Item> {
   items: Item[];
@@ -86,10 +86,8 @@ const ProcessPostProcessingCatalog = <Item extends PostProcessingProps>(
             .filter((item) => filterBySearch(item))
             .map((item: Item, index: number) => (
               <ProcessPostProcessingCard
-                grid={grid}
                 item={item}
                 openItemView={openItemView}
-                checkItem={checkItem}
                 key={index}
               />
             ))}

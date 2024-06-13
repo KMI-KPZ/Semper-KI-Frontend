@@ -35,11 +35,11 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
   const deletePostProcessing = useDeletePostProcessing();
   const setPostProcessing = useSetPostProcessing();
 
-  const handleOnClickButtonSelect = (postProcessingID: string) => {
+  const handleOnClickButtonSelect = (postProcessing: PostProcessingProps) => {
     setPostProcessing.mutate({
       projectID: project.projectID,
       processID: process.processID,
-      postProcessingID,
+      postProcessing,
     });
   };
 
@@ -111,14 +111,6 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
     return hydratedPostProcessings;
   };
 
-  const handleOnButtonClickSelect = (postProcessingID: string) => {
-    setPostProcessing.mutate({
-      processID: process.processID,
-      projectID: project.projectID,
-      postProcessingID,
-    });
-  };
-
   return (
     <Container direction="col" width="full">
       {postProcessings !== undefined && postProcessings.length > 0 ? (
@@ -179,7 +171,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
                       <Button
                         variant="secondary"
                         onClick={() =>
-                          handleOnButtonClickSelect(postProcessing.id)
+                          handleOnClickButtonSelect(postProcessing)
                         }
                         title={t(
                           "Service.Manufacturing.PostProcessing.PostProcessing.button.select"

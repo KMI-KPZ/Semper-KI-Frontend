@@ -2,7 +2,9 @@ import { useTranslation } from "react-i18next";
 import { FilterItemProps } from "../Filter/Filter";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useGetMaterials from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
+import useGetMaterials, {
+  MaterialProps,
+} from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 import {
   Button,
   Container,
@@ -24,13 +26,6 @@ interface Props {
 interface State {
   modalOpen: boolean;
   material: MaterialProps | undefined;
-}
-
-export interface MaterialProps {
-  id: string;
-  title: string;
-  propList: string[];
-  imgPath: string;
 }
 
 export const ManufacturingMaterials: React.FC<Props> = (props) => {
@@ -69,11 +64,11 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
     return false;
   };
 
-  const handleOnButtonClickSelect = (materialID: string) => {
+  const handleOnButtonClickSelect = (material: MaterialProps) => {
     setMaterial.mutate({
       projectID: project.projectID,
       processID: process.processID,
-      materialID,
+      material,
     });
   };
 
@@ -123,7 +118,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
                     <Container direction="row">
                       <Button
                         variant="secondary"
-                        onClick={() => handleOnButtonClickSelect(material.id)}
+                        onClick={() => handleOnButtonClickSelect(material)}
                         title={t(
                           "Service.Manufacturing.Material.Material.button.select"
                         )}

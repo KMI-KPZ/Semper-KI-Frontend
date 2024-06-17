@@ -1,5 +1,5 @@
-import { Process } from "@/api/Process/Querys/useGetProcess";
-import CardMenu from "@/components/CardMenu/CardMenu";
+import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import ProcessMenu from "@/components/Process/Menu";
 import { Button, Container, Divider, Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -7,6 +7,8 @@ import ServiceSelection from "./ServiceSelection/ServiceSelection";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import ServiceDetails from "./ServiceDetails/ServiceDetails";
+import ProcessStatusButtons from "../StatusButtons";
+import ProcessContainer from "@/components/Process/Container";
 
 interface ServiceProps {
   process: Process;
@@ -24,14 +26,18 @@ const Service: React.FC<ServiceProps> = (props) => {
     });
   };
 
+  const handleOnClickButtonComplete = () => {
+    updateProcess.mutate({
+      processIDs: [process.processID],
+      updates: {
+        changes: { processStatus: ProcessStatus.CONTRACTOR_SELECTED },
+      },
+    });
+  };
+
   return (
-    <Container
-      direction="col"
-      width="full"
-      className="relative bg-white p-3"
-      id="draft"
-    >
-      <CardMenu title={t("Project.components.Info.button.menu")}>
+    <ProcessContainer id="draft">
+      <ProcessMenu title={t("Project.components.Info.button.menu")}>
         <Button
           title={t("Process.Service.Service.button.editType")}
           stopPropagation={false}
@@ -39,7 +45,7 @@ const Service: React.FC<ServiceProps> = (props) => {
           size="sm"
           onClick={handleOnClickButtonEditType}
         />
-      </CardMenu>
+      </ProcessMenu>
       <Container width="full" justify="start">
         <Heading variant="h2">
           {t("Process.Service.Service.title")}
@@ -59,12 +65,22 @@ const Service: React.FC<ServiceProps> = (props) => {
       {process.serviceType === undefined ||
       process.serviceType === ServiceType.NONE ? (
         <ServiceSelection />
-      ) : null}
-      {process.serviceType !== undefined &&
-      process.serviceType !== ServiceType.NONE ? (
+      ) : (
         <ServiceDetails process={process} />
+      )}
+      {process.processStatus < ProcessStatus.CONTRACTOR_SELECTED ? (
+        <>
+          <Divider />
+          <ProcessStatusButtons process={process} />
+          {/* <Button
+            active={process.processStatus === ProcessStatus.SERVICE_READY}
+            variant="primary"
+            title={t("Process.Service.Service.button.complete")}
+            onClick={handleOnClickButtonComplete}
+          /> */}
+        </>
       ) : null}
-    </Container>
+    </ProcessContainer>
   );
 };
 

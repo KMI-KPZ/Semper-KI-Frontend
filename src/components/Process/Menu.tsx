@@ -5,11 +5,11 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Collapsible from "../Collapsible/Collapsible";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
-interface CardMenuButtonProps {
+interface ProcessMenuProps {
   title?: string;
 }
 
-const CardMenu: React.FC<PropsWithChildren<CardMenuButtonProps>> = (props) => {
+const ProcessMenu: React.FC<PropsWithChildren<ProcessMenuProps>> = (props) => {
   const { title, children } = props;
   const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = React.useState<boolean>(false);
@@ -53,4 +53,4 @@ const CardMenu: React.FC<PropsWithChildren<CardMenuButtonProps>> = (props) => {
   );
 };
 
-export default CardMenu;
+export default ProcessMenu;

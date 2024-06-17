@@ -6,7 +6,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Collapsible from "@/components/Collapsible/Collapsible";
 import ProjectTitleForm from "./TitleForm";
-import CardMenu from "@/components/CardMenu/CardMenu";
+import ProcessMenu from "@/components/Process/Menu";
 
 interface ProjectInfoProps {
   project: Project;
@@ -32,7 +32,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = (props) => {
       direction="col"
       className="relative gap-2 bg-white p-5"
     >
-      <CardMenu title={t("Project.components.Info.button.menu")}>
+      <ProcessMenu title={t("Project.components.Info.button.menu")}>
         <Button
           stopPropagation={false}
           title={t("Project.components.Info.button.editTitle")}
@@ -40,7 +40,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = (props) => {
           size="sm"
           onClick={handleOnClickButtonEditTitle}
         />
-      </CardMenu>
+      </ProcessMenu>
       <Container direction="row" width="full" justify="start" className="gap-0">
         <Container className="w-1/3 md:w-1/3" justify="start">
           <Text variant="strong" className="w-40">

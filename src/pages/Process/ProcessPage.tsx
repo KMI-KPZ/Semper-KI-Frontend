@@ -3,8 +3,11 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ProcessInfo from "./components/Info";
 import useProcess from "@/hooks/Process/useProcess";
-import Service from "./Service/Service";
-import StatusWizard from "./StatusWizard/StatusWizard";
+import Service from "./components/Service/Service";
+import StatusWizard from "./components/StatusWizard/StatusWizard";
+import ContractorSelection from "./components/ContractorSelection/ContractorSelection";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import ProcessStatusButtons from "./components/StatusButtons";
 
 interface ProcessPageProps {}
 
@@ -23,6 +26,9 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
         <StatusWizard process={process} />
         <Container direction="col" width="full">
           <Service process={process} />
+          {process.processStatus >= ProcessStatus.CONTRACTOR_SELECTED ? (
+            <ContractorSelection process={process} />
+          ) : null}
         </Container>
       </Container>
     </Container>

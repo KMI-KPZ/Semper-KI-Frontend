@@ -899,6 +899,17 @@
         "button": {
           "save": "Speichern"
         }
+      },
+      "ContractorSelection": {
+        "ContractorSelection": {
+          "heading": {
+            "main": "Auftragnehmer auswählen",
+            "sub1": "Auftragnehmer",
+            "sub2": "Addresse"
+          },
+          "noContractor": "Kein Auftragnehmer ausgewählt",
+          "button": { "menu": "Hersteller Menu" }
+        }
       }
     },
     "Service": {
@@ -968,7 +979,8 @@
         "title": "Entwurf",
         "noType": "kein Service ausgewählt",
         "button": {
-          "editType": "Service Typ bearbeiten"
+          "editType": "Service Typ bearbeiten",
+          "complete": "Service abschließen"
         }
       }
     },

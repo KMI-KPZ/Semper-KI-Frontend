@@ -6,7 +6,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 import { Process } from "@/api/Process/Querys/useGetProcess";
 import Collapsible from "@/components/Collapsible/Collapsible";
-import CardMenu from "@/components/CardMenu/CardMenu";
+import ProcessMenu from "@/components/Process/Menu";
 import ProcessTitleForm from "./TitleForm";
 
 interface ProcessInfoProps {
@@ -33,7 +33,7 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
       direction="col"
       className="relative gap-2 bg-white p-5"
     >
-      <CardMenu title={t("Project.components.Info.button.menu")}>
+      <ProcessMenu title={t("Project.components.Info.button.menu")}>
         <Button
           title={t("Process.components.Info.button.editTitle")}
           stopPropagation={false}
@@ -41,7 +41,7 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
           size="sm"
           onClick={handleOnClickButtonEditTitle}
         />
-      </CardMenu>
+      </ProcessMenu>
       <Container direction="row" width="full" justify="start" className="gap-0">
         <Container className="w-1/3 md:w-1/3" justify="start">
           <Text variant="strong" className="w-40">

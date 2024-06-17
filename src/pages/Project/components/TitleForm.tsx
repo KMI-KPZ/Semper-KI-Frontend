@@ -69,7 +69,7 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
         onKeyDown={handelOnKeyDown}
         type="text"
         value={state}
-        className="w-full bg-slate-100 p-2 md:w-fit"
+        className="w-fit rounded-xl border-2 bg-gray-100 p-2"
         onChange={handleOnChangeInput}
       />
       <OwnerGate>

@@ -1099,7 +1099,9 @@
         "receivedProjects": "Erhaltene Projekte"
       },
       "TitleForm": {
-        "heading": "Geben sie Ihrem Prokjet einen Namen",
+        "heading": "Projekt anlegen",
+        "subheading": "Geben sie ihrem Projekt einen Namen. So können Sie es später leichter wiederfinden",
+        "subheading2": "Ein Projekt ist eine Sammlung von Prozessen und ein Prozess ist ein Auftrag für einen Dienstleister/Hersteller.",
         "name": "Projektname",
         "button": {
           "create": "Projekt anlegen"

@@ -10,10 +10,11 @@ import { boolean } from "yup";
 import OwnerGate from "@/components/OwnerGate/OwnerGate";
 import useUpdateProject from "@/api/Project/Mutations/useUpdateProject";
 import { useForm } from "react-hook-form";
+import useCreateProject from "@/api/Project/Mutations/useCreateProject";
+import logger from "@/hooks/useLogger";
 
 interface CreateProjectTitleFormProps {
   close: () => void;
-  onSubmit: (title: string) => void;
 }
 
 interface FormData {
@@ -23,9 +24,9 @@ interface FormData {
 const CreateProjectTitleForm: React.FC<CreateProjectTitleFormProps> = (
   props
 ) => {
-  const { close, onSubmit } = props;
+  const { close } = props;
   const { t } = useTranslation();
-  const buttonRef = useRef<HTMLAnchorElement>();
+  const createProject = useCreateProject();
 
   const {
     register,
@@ -33,31 +34,33 @@ const CreateProjectTitleForm: React.FC<CreateProjectTitleFormProps> = (
     formState: { errors },
   } = useForm<FormData>();
 
-  const triggerButtonClick = () => {
-    buttonRef.current?.click();
+  const onSubmit = (
+    data: FormData,
+    e?: React.BaseSyntheticEvent<object, any, any>
+  ) => {
+    e?.preventDefault();
+    createProject.mutate(data.name);
   };
-
-  const handelOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      event.preventDefault();
-      triggerButtonClick();
+      event.preventDefault(); // Prevent default form submission
+      handleSubmit(onSubmit)();
     }
-  };
-
-  const onSubmitForm = (data: FormData) => {
-    onSubmit(data.name);
   };
 
   return (
     <form>
       <Container direction="col">
-        <Heading variant="h2">
+        <Heading variant="h1">
           {t("Projects.components.TitleForm.heading")}
         </Heading>
+        <Text>{t("Projects.components.TitleForm.subheading")}</Text>
+        <Text>{t("Projects.components.TitleForm.subheading2")}</Text>
         <Container direction="col" gap={3} className="flex-wrap md:flex-nowrap">
           <input
             autoFocus
             {...register("name", { required: true })}
+            onKeyDown={handleKeyDown}
             placeholder={t("Projects.components.TitleForm.name")}
             className="w-fit rounded-xl border-2 bg-gray-100 p-2"
           />
@@ -69,7 +72,7 @@ const CreateProjectTitleForm: React.FC<CreateProjectTitleFormProps> = (
           <OwnerGate>
             <PermissionGate element="ProjectButtonEditName">
               <Button
-                onClick={handleSubmit(onSubmitForm)}
+                onClick={handleSubmit(onSubmit)}
                 variant="primary"
                 title={t("Projects.components.TitleForm.button.create")}
                 size="sm"

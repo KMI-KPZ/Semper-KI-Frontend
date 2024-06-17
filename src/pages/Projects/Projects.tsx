@@ -27,16 +27,12 @@ const Projects: React.FC<ProjectsProps> = (props) => {
     React.useState<boolean>(false);
   const flatProjects =
     user.usertype === UserType.ADMIN ? adminFlatProjects : _flatProjects;
-  const createProject = useCreateProject();
+
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<FlatProject>();
 
   const onButtonClickCreateProject = () => {
     setCreateProjectTitleFormOpen(true);
-  };
-
-  const onSubmit = (title: string) => {
-    createProject.mutate(title);
   };
 
   const ownProjects: FlatProject[] =
@@ -62,15 +58,15 @@ const Projects: React.FC<ProjectsProps> = (props) => {
       <div className="flex w-full flex-col gap-2 md:flex-row md:justify-between">
         <Heading variant="h1">{t("Projects.Projects.title")}</Heading>
         <Container className="md:justify-end">
-          <PermissionGate element={"ProjectsButtonNew"}>
-            <Button
-              variant="primary"
-              title={t("Projects.Projects.button.create")}
-              onClick={onButtonClickCreateProject}
-              size="sm"
-              startIcon={<AddIcon />}
-            />
-          </PermissionGate>
+          {/* <PermissionGate element={"ProjectsButtonNew"}> */}
+          <Button
+            variant="primary"
+            title={t("Projects.Projects.button.create")}
+            onClick={onButtonClickCreateProject}
+            size="sm"
+            startIcon={<AddIcon />}
+          />
+          {/* </PermissionGate> */}
         </Container>
       </div>
       <Search handleSearchInputChange={handleSearchInputChange} />
@@ -113,7 +109,6 @@ const Projects: React.FC<ProjectsProps> = (props) => {
           close={() => {
             setCreateProjectTitleFormOpen(false);
           }}
-          onSubmit={onSubmit}
         />
       </Modal>
     </div>

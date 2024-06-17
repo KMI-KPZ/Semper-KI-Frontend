@@ -11,13 +11,13 @@ interface DeletePostProcessingProps {
 const useDeletePostProcessing = () => {
   const queryClient = useQueryClient();
   const deletePostProcessing = async ({
-    postProcessingID,
-    processID,
     projectID,
+    processID,
+    postProcessingID,
   }: DeletePostProcessingProps) =>
     authorizedCustomAxios
       .delete(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/delete/${projectID}/${processID}/${postProcessingID}/`
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/post-processing/delete/${projectID}/${processID}/${postProcessingID}/`
       )
       .then((response) => {
         logger("useDeletePostProcessing | deletePostProcessing ✅ |", response);

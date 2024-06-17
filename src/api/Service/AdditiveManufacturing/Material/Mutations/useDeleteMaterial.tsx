@@ -17,7 +17,7 @@ const useDeleteMaterial = () => {
   }: DeleteMaterialProps) =>
     authorizedCustomAxios
       .delete(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/delete/${projectID}/${processID}/${materialID}/`
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/material/delete/${projectID}/${processID}/${materialID}/`
       )
       .then((response) => {
         logger("useDeleteMaterial | deleteMaterial ✅ |", response);

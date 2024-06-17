@@ -195,12 +195,8 @@ const useGetProcess = () => {
             manufacturerID: response.data.serviceDetails.manufacturerID,
           },
         };
-        logger("useGetProcess | getProcess ✅ |", response.data, process);
-        logger(
-          "useGetProcess | getProcess Test ✅ |",
-          Object.values(response.data.files),
-          objectToArray<File>(response.data.files)
-        );
+        logger("useGetProcess | getProcess ✅ |", process);
+
         return process;
       });
 

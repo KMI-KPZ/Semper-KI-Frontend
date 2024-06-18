@@ -8,6 +8,7 @@ import { Process } from "@/api/Process/Querys/useGetProcess";
 import Collapsible from "@/components/Collapsible/Collapsible";
 import ProcessMenu from "@/components/Process/Menu";
 import ProcessTitleForm from "./TitleForm";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 
 interface ProcessInfoProps {
   process: Process;
@@ -22,6 +23,21 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
       ? true
       : false
   );
+  const updateProcess = useUpdateProcess();
+
+  const onTitleSubmit = (title: string) => {
+    updateProcess.mutate(
+      {
+        processIDs: [process.processID],
+        updates: { changes: { processDetails: { title } } },
+      },
+      {
+        onSuccess: () => {
+          close();
+        },
+      }
+    );
+  };
 
   const handleOnClickButtonEditTitle = () => {
     setTitleEdit(!titleEdit);

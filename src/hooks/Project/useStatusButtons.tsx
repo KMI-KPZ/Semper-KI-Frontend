@@ -36,25 +36,11 @@ interface UseStatusButtonsReturnProps {
 }
 
 export type StatusButtonTitleType =
-  | "BACK"
-  | "SELECT_SERVICE"
-  | "EDIT"
   | "DELETE"
-  | "CONTRACTOR_SELECTED"
-  | "VERIFYING_AND_REQUESTED"
-  | "VERIFYING"
-  | "REQUESTED"
-  | "CLARIFICATION"
-  | "CONFIRMED_BY_CONTRACTOR"
-  | "REJECTED_BY_CONTRACTOR"
-  | "CONFIRMED_BY_CLIENT"
-  | "REJECTED_BY_CLIENT"
-  | "PRODUCTION"
-  | "DELIVERY"
-  | "COMPLETED"
-  | "REPROJECT"
-  | "SERVICE_IN_PROGRESS"
-  | "NONE";
+  | "BACK-TO-DRAFT"
+  | "FORWARD-TO-SERVICE_COMPLETED"
+  | "BACK-TO-SERVICE_IN_PROGRESS"
+  | "FORWARD-TO-CONTRACTOR_SELECTED";
 
 export type StatusButtonPropsGeneric = {
   title: string;
@@ -181,36 +167,21 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
         return <ReportIcon />;
     }
   };
-  const tranformTitle = (title: string): StatusButtonTitleType => {
-    let typedTitel: StatusButtonTitleType = "NONE";
-
+  const tranformTitle = (title: string): string => {
     const validStatusButtonTitles: StatusButtonTitleType[] = [
-      "BACK",
-      "SERVICE_IN_PROGRESS",
-      "SELECT_SERVICE",
-      "EDIT",
       "DELETE",
-      "SERVICE_IN_PROGRESS",
-      "CONTRACTOR_SELECTED",
-      "VERIFYING_AND_REQUESTED",
-      "VERIFYING",
-      "REQUESTED",
-      "CLARIFICATION",
-      "CONFIRMED_BY_CONTRACTOR",
-      "REJECTED_BY_CONTRACTOR",
-      "CONFIRMED_BY_CLIENT",
-      "REJECTED_BY_CLIENT",
-      "PRODUCTION",
-      "DELIVERY",
-      "COMPLETED",
-      "REPROJECT",
+      "BACK-TO-SERVICE_IN_PROGRESS",
+      "FORWARD-TO-CONTRACTOR_SELECTED",
+      "FORWARD-TO-SERVICE_COMPLETED",
+      "BACK-TO-DRAFT",
     ];
-
-    if (validStatusButtonTitles.includes(title as StatusButtonTitleType)) {
-      typedTitel = title as StatusButtonTitleType;
-    } else typedTitel = "NONE";
-
-    return t(`Projects.Project.hooks.useStatusButtons.${typedTitel}`);
+    return validStatusButtonTitles.includes(title as StatusButtonTitleType)
+      ? t(
+          `Projects.Project.hooks.useStatusButtons.${
+            title as StatusButtonTitleType
+          }`
+        )
+      : title;
   };
 
   const filterButtonByUser = (

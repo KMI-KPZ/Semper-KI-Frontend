@@ -81,6 +81,13 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
     });
   };
 
+  // const filterSelectedMaterial = (material: MaterialProps) => {
+  //   return (
+  //     process.serviceDetails.materials?.find((m) => m.id === material.id) !==
+  //     undefined
+  //   );
+  // };
+
   return (
     <Container direction="col" width="full">
       {materials !== undefined && materials.length > 0 ? (

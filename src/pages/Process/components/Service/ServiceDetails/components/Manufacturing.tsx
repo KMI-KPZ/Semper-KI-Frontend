@@ -243,7 +243,7 @@ const ServiceManufacturingDetails: React.FC<
       <Container width="full" direction="col">
         {materials.length > 0
           ? materials.map((material, index) => (
-              <ServiceDetailsCard>
+              <ServiceDetailsCard key={index}>
                 <img
                   src={TestImg}
                   alt={t(

@@ -1,9 +1,10 @@
-import { Process } from "@/api/Process/Querys/useGetProcess";
+import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessContainer from "@/components/Process/Container";
 import ProcessMenu from "@/components/Process/Menu";
 import { Container, Divider, Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import ProcessStatusButtons from "../StatusButtons";
 
 interface ContractorSelectionProps {
   process: Process;
@@ -14,7 +15,7 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <ProcessContainer id="contractorSelection">
+    <ProcessContainer id="contractorSelected">
       <ProcessMenu
         title={t(
           "Process.components.ContractorSelection.ContractorSelection.button.menu"
@@ -61,6 +62,10 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
           </Heading>
         </Container>
       </Container>
+      <ProcessStatusButtons
+        start={ProcessStatus.SERVICE_COMPLETED}
+        end={ProcessStatus.CONTRACTOR_SELECTED}
+      />
     </ProcessContainer>
   );
 };

@@ -68,18 +68,11 @@ const Service: React.FC<ServiceProps> = (props) => {
       ) : (
         <ServiceDetails process={process} />
       )}
-      {process.processStatus < ProcessStatus.CONTRACTOR_SELECTED ? (
-        <>
-          <Divider />
-          <ProcessStatusButtons process={process} />
-          {/* <Button
-            active={process.processStatus === ProcessStatus.SERVICE_READY}
-            variant="primary"
-            title={t("Process.Service.Service.button.complete")}
-            onClick={handleOnClickButtonComplete}
-          /> */}
-        </>
-      ) : null}
+
+      <ProcessStatusButtons
+        start={ProcessStatus.DRAFT}
+        end={ProcessStatus.SERVICE_COMPLICATION}
+      />
     </ProcessContainer>
   );
 };

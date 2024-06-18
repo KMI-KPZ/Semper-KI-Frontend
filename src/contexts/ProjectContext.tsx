@@ -1,5 +1,6 @@
 import { Project } from "@/api/Project/Querys/useGetProject";
 import React, { PropsWithChildren, createContext } from "react";
+import { Outlet } from "react-router-dom";
 
 interface ProjectOutletProps {
   project: Project;

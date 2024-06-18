@@ -46,14 +46,9 @@ const statusWizardItems: StatusWizardItem[] = [
   },
   {
     startStatus: ProcessStatus.DRAFT,
+    endStatus: ProcessStatus.SERVICE_COMPLICATION,
     icon: <DesignServicesIcon />,
     text: "draft",
-  },
-  {
-    startStatus: ProcessStatus.SERVICE_READY,
-    endStatus: ProcessStatus.SERVICE_COMPLICATION,
-    icon: <ModeIcon />,
-    text: "service",
   },
   {
     startStatus: ProcessStatus.CONTRACTOR_SELECTED,

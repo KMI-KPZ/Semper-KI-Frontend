@@ -25,10 +25,9 @@ export interface ProcessDetailsProps {
   amount: number;
 }
 
-export type Process =
-  | NoServiceProcessProps
-  | ManufactoringProcessProps
-  | ModelingProcessProps;
+export type Process = NoServiceProcessProps | DefinedProcess;
+
+export type DefinedProcess = ManufactoringProcessProps | ModelingProcessProps;
 
 export type DefaultProcessProps = {
   client: string;
@@ -135,6 +134,7 @@ export enum ProcessStatus {
   "SERVICE_READY" = 200,
   "SERVICE_IN_PROGRESS" = 201,
   "SERVICE_COMPLICATION" = 202,
+  "SERVICE_COMPLETED" = 203,
   "CONTRACTOR_SELECTED" = 300,
   "VERIFYING" = 400,
   "VERIFIED" = 500,

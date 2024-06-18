@@ -111,6 +111,16 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
     return hydratedPostProcessings;
   };
 
+  // const filterSelectedPostProcessing = (
+  //   postProcessing: PostProcessingProps
+  // ) => {
+  //   return (
+  //     process.serviceDetails.postProcessings?.find(
+  //       (m) => m.id === postProcessing.id
+  //     ) !== undefined
+  //   );
+  // };
+
   return (
     <Container direction="col" width="full">
       {postProcessings !== undefined && postProcessings.length > 0 ? (

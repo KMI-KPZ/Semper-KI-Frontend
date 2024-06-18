@@ -1,15 +1,14 @@
 import React, { PropsWithChildren, createContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { LoadingAnimation } from "@component-library/index";
 import { useProject } from "@/hooks/Project/useProject";
 import useProcess from "@/hooks/Process/useProcess";
-import { ServiceContextProvider } from "@/contexts/ServiceContext";
+import { DefinedProcessContextProvider } from "@/contexts/DefinedProcessContext";
 
-interface ServiceOutletProps {}
+interface DefinedProcessOutletProps {}
 
-export const ServiceOutlet: React.FC<PropsWithChildren<ServiceOutletProps>> = (
-  props
-) => {
+export const DefinedProcessOutlet: React.FC<
+  PropsWithChildren<DefinedProcessOutletProps>
+> = (props) => {
   const {} = props;
   const { project } = useProject();
   const { process } = useProcess();
@@ -20,9 +19,9 @@ export const ServiceOutlet: React.FC<PropsWithChildren<ServiceOutletProps>> = (
     process.serviceType !== 0
   )
     return (
-      <ServiceContextProvider process={process}>
+      <DefinedProcessContextProvider process={process}>
         <Outlet />
-      </ServiceContextProvider>
+      </DefinedProcessContextProvider>
     );
   else
     return (

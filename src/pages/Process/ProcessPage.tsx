@@ -7,7 +7,6 @@ import Service from "./components/Service/Service";
 import StatusWizard from "./components/StatusWizard/StatusWizard";
 import ContractorSelection from "./components/ContractorSelection/ContractorSelection";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import ProcessStatusButtons from "./components/StatusButtons";
 
 interface ProcessPageProps {}
 
@@ -26,7 +25,7 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
         <StatusWizard process={process} />
         <Container direction="col" width="full">
           <Service process={process} />
-          {process.processStatus >= ProcessStatus.CONTRACTOR_SELECTED ? (
+          {process.processStatus >= ProcessStatus.SERVICE_COMPLETED ? (
             <ContractorSelection process={process} />
           ) : null}
         </Container>

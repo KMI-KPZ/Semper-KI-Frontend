@@ -27,10 +27,11 @@ export enum ServiceType {
   "MODELING",
 }
 
-export type ServiceProps =
+export type ServiceProps = DefinedServiceProps | undefined;
+
+export type DefinedServiceProps =
   | ManufacturingServiceProps
-  | ModelingServiceProps
-  | undefined;
+  | ModelingServiceProps;
 
 export interface UpdateServiceProps {
   type?: ServiceType;

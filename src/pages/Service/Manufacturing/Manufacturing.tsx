@@ -1,5 +1,4 @@
 import { ManufacturingServiceProps } from "@/api/Service/Querys/useGetServices";
-import { ServiceContext } from "@/contexts/ServiceContext";
 import useFilter from "@/hooks/useFilter";
 import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,14 +9,17 @@ import { ManufacturingMaterials } from "./Material/Material";
 import { ManufacturingPostProcessings } from "./PostProcessing/PostProcessing";
 import { Error } from "@/pages/Error/Error";
 import { Container, Heading } from "@component-library/index";
+import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
+import logger from "@/hooks/useLogger";
 
 export const ServiceManufacturing: React.FC = () => {
   const { t } = useTranslation();
-  const { serviceDetails: service_ } = useContext(ServiceContext);
-  const service = service_ as ManufacturingServiceProps;
+  const { process } = useManufacturingProcess();
+
   const [searchText, setSearchText] = useState<string>("");
   const { filtersQuery } = useFilter();
 
+  logger("ServiceManufacturing", process);
   return (
     <Container
       width="none"
@@ -33,7 +35,7 @@ export const ServiceManufacturing: React.FC = () => {
           element={
             <ManufacturingModels
               searchText={searchText}
-              models={service.models}
+              models={process.serviceDetails.models}
               filters={filtersQuery.data}
             />
           }
@@ -42,7 +44,7 @@ export const ServiceManufacturing: React.FC = () => {
           path="material"
           element={
             <ManufacturingMaterials
-              materials={service.materials}
+              materials={process.serviceDetails.materials}
               filters={filtersQuery.data}
               searchText={searchText}
             />
@@ -52,7 +54,7 @@ export const ServiceManufacturing: React.FC = () => {
           path="postprocessing"
           element={
             <ManufacturingPostProcessings
-              postProcessings={service.postProcessings}
+              postProcessings={process.serviceDetails.postProcessings}
               searchText={searchText}
               filters={filtersQuery.data}
             />

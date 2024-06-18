@@ -7,7 +7,7 @@ import {
   Modal,
   Text,
 } from "@component-library/index";
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 import AddressForm from "../Form/AddressForm";
 
@@ -19,8 +19,8 @@ interface AddressCardProps {
   };
 }
 
-const AddressCard: React.FC<AddressCardProps> = (props) => {
-  const { address, select } = props;
+const AddressCard: React.FC<PropsWithChildren<AddressCardProps>> = (props) => {
+  const { address, select, children } = props;
   const { deleteAddress } = useAuthorizedUser();
   const [edit, setEdit] = React.useState(false);
   const { t } = useTranslation();
@@ -106,18 +106,24 @@ const AddressCard: React.FC<AddressCardProps> = (props) => {
         align="start"
       >
         <Container width="full" gap={3}>
-          <Button
-            variant="text"
-            size="sm"
-            title={t("components.Address.AddressCard.buttons.edit")}
-            onClick={handleOnButtonClickEdit}
-          />
-          <Button
-            variant="text"
-            size="sm"
-            title={t("components.Address.AddressCard.buttons.delete")}
-            onClick={handleOnButtonClickDelete}
-          />
+          {children === undefined ? (
+            <>
+              <Button
+                variant="text"
+                size="sm"
+                title={t("components.Address.AddressCard.buttons.edit")}
+                onClick={handleOnButtonClickEdit}
+              />
+              <Button
+                variant="text"
+                size="sm"
+                title={t("components.Address.AddressCard.buttons.delete")}
+                onClick={handleOnButtonClickDelete}
+              />
+            </>
+          ) : (
+            children
+          )}
         </Container>
       </Container>
       <Modal

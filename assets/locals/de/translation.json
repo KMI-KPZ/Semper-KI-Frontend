@@ -902,14 +902,31 @@
         }
       },
       "ContractorSelection": {
+        "components": {
+          "AddressSelection": {
+            "heading": "Addresse auswählen",
+            "button": {
+              "select": "Auswählen",
+              "new": "neue Adresse anlegen"
+            }
+          }
+        },
         "ContractorSelection": {
           "heading": {
             "main": "Auftragnehmer auswählen",
             "sub1": "Auftragnehmer",
-            "sub2": "Addresse"
+            "billingDelivery": "Liefer- und Rechnungsadresse",
+            "billing": "Rechnungsadresse",
+            "delivery": "Lieferadresse"
           },
+          "noAddress": "keine Adresse ausgewählt",
           "noContractor": "Kein Auftragnehmer ausgewählt",
-          "button": { "menu": "Hersteller Menu" }
+          "button": {
+            "menu": "Hersteller Menu",
+            "selectAddress": "Adresse auswählen",
+            "editAddress": "Adresse ändern",
+            "resetAddress": "Adresse zurücksetzen"
+          }
         }
       }
     },

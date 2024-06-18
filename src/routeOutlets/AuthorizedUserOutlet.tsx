@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { PropsWithChildren, createContext } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import useUser, {
   AuthorizedUserProps,
@@ -13,6 +13,7 @@ import useDeleteAddress from "@/api/User/Mutations/useDeleteAddress";
 import useDeleteUser from "@/api/User/Mutations/useDeleteUser";
 import useUpdateAddress from "@/api/User/Mutations/useUpdateAddress";
 import useUpdateUserDetails from "@/api/User/Mutations/useUpdateUserDetails";
+import logger from "@/hooks/useLogger";
 
 interface AuthorizedUserOutletProps {}
 
@@ -61,10 +62,10 @@ export const AuthorizedUserContext = createContext<AuthorizedUserContext>({
   >,
 });
 
-const AuthorizedUserRouteOutlet: React.FC<AuthorizedUserOutletProps> = (
-  props
-) => {
-  const {} = props;
+const AuthorizedUserRouteOutlet: React.FC<
+  PropsWithChildren<AuthorizedUserOutletProps>
+> = (props) => {
+  const { children } = props;
   const { pathname } = useLocation();
   const { user } = useUser();
   const deleteUser = useDeleteUser();
@@ -72,6 +73,7 @@ const AuthorizedUserRouteOutlet: React.FC<AuthorizedUserOutletProps> = (
   const createAddress = useCreateAddress();
   const deleteAddress = useDeleteAddress();
   const updateAddress = useUpdateAddress();
+  logger("AuthorizedUserRouteOutlet | user", user);
 
   return user.usertype !== UserType.ANONYM ? (
     <AuthorizedUserContext.Provider
@@ -84,6 +86,7 @@ const AuthorizedUserRouteOutlet: React.FC<AuthorizedUserOutletProps> = (
         updateAddress,
       }}
     >
+      {children}
       <Outlet />
     </AuthorizedUserContext.Provider>
   ) : (

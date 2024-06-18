@@ -28,11 +28,14 @@ interface Props {
 
 export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { searchText, filters, postProcessings } = props;
-  const postProcessingsQuery = useGetPostProcessigns(filters);
-  const { updatedService } = useService();
-  const { process } = useManufacturingProcess();
+  const {
+    searchText,
+    filters,
+    postProcessings: selectedPostProcessings,
+  } = props;
   const { project } = useProject();
+  const { process } = useManufacturingProcess();
+  const postProcessings = useGetPostProcessigns(filters);
   const deletePostProcessing = useDeletePostProcessing();
   const setPostProcessing = useSetPostProcessing();
 
@@ -67,51 +70,6 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
     return false;
   };
 
-  const checkPostProcessing = (postProcessing: PostProcessingProps) => {
-    let newPostProcessings: PostProcessingProps[] = [];
-    if (postProcessings === undefined) {
-      newPostProcessings.push({ ...postProcessing, checked: true });
-    } else {
-      const isPostProcessingAlreadyChecked: boolean =
-        postProcessings.find((item) => item.id === postProcessing.id) !==
-        undefined;
-      if (isPostProcessingAlreadyChecked) {
-        newPostProcessings = postProcessings.filter(
-          (item) => item.id !== postProcessing.id
-        );
-      } else {
-        newPostProcessings = [
-          ...postProcessings,
-          { ...postProcessing, checked: true },
-        ];
-      }
-    }
-    updatedService({ postProcessings: newPostProcessings });
-  };
-
-  const hydratePostProcessings = (
-    initialPostProcessings: PostProcessingProps[],
-    checkedPostprocessings: PostProcessingProps[] | undefined
-  ): PostProcessingProps[] => {
-    let initialIdList: string[] = initialPostProcessings.map((item) => item.id);
-    let filteredPostprocessings: PostProcessingProps[] =
-      checkedPostprocessings === undefined
-        ? []
-        : checkedPostprocessings.filter((item) =>
-            initialIdList.includes(item.id)
-          );
-    let hydratedPostProcessings: PostProcessingProps[] = [];
-    initialPostProcessings.forEach((initialPostProcessing) => {
-      let postprocessing: PostProcessingProps = initialPostProcessing;
-      filteredPostprocessings.forEach((filteredPostprocessing) => {
-        if (initialPostProcessing.id === filteredPostprocessing.id)
-          postprocessing = filteredPostprocessing;
-      });
-      hydratedPostProcessings.push(postprocessing);
-    });
-    return hydratedPostProcessings;
-  };
-
   const filterSelectedPostProcessing = (
     postProcessing: PostProcessingProps
   ) => {
@@ -124,39 +82,36 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
 
   return (
     <Container direction="col" width="full">
-      {postProcessings !== undefined && postProcessings.length > 0 ? (
+      {selectedPostProcessings !== undefined &&
+      selectedPostProcessings.length > 0 ? (
         <Container direction="col" width="full">
           <Heading variant="h2" className="w-full text-left">
             {t("Service.Manufacturing.PostProcessing.PostProcessing.selected")}
           </Heading>
           <Container width="full" wrap="wrap">
-            {postProcessings.length > 0
-              ? postProcessings
-                  .filter((postProcessing, index) =>
-                    filterBySearch(postProcessing)
-                  )
-                  .map((postProcessing: PostProcessingProps, index: number) => {
-                    return (
-                      <ProcessPostProcessingCard
-                        key={index}
-                        item={postProcessing}
-                        openItemView={() => {}}
-                      >
-                        <Container direction="row">
-                          <Button
-                            variant="secondary"
-                            onClick={() =>
-                              handleOnClickButtonDelete(postProcessing.id)
-                            }
-                            title={t(
-                              "Service.Manufacturing.PostProcessing.PostProcessing.button.delete"
-                            )}
-                          />
-                        </Container>
-                      </ProcessPostProcessingCard>
-                    );
-                  })
-              : null}
+            {selectedPostProcessings
+              .filter(filterBySearch)
+              .map((postProcessing: PostProcessingProps, index: number) => {
+                return (
+                  <ProcessPostProcessingCard
+                    key={index}
+                    item={postProcessing}
+                    openItemView={() => {}}
+                  >
+                    <Container direction="row">
+                      <Button
+                        variant="secondary"
+                        onClick={() =>
+                          handleOnClickButtonDelete(postProcessing.id)
+                        }
+                        title={t(
+                          "Service.Manufacturing.PostProcessing.PostProcessing.button.delete"
+                        )}
+                      />
+                    </Container>
+                  </ProcessPostProcessingCard>
+                );
+              })}
           </Container>
         </Container>
       ) : null}
@@ -164,11 +119,11 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
         <Heading variant="h2" className="w-full text-left">
           {t("Service.Manufacturing.PostProcessing.PostProcessing.available")}
         </Heading>
-        <LoadingSuspense query={postProcessingsQuery}>
-          {postProcessingsQuery.data !== undefined &&
-          postProcessingsQuery.data.length > 0 ? (
+        <LoadingSuspense query={postProcessings}>
+          {postProcessings.data !== undefined &&
+          postProcessings.data.length > 0 ? (
             <Container width="full" wrap="wrap" direction="row" align="start">
-              {postProcessingsQuery.data
+              {postProcessings.data
                 .filter(filterSelectedPostProcessing)
                 .filter(filterBySearch)
                 .map((postProcessing: PostProcessingProps, index: number) => (

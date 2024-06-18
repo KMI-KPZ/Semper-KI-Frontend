@@ -34,7 +34,7 @@ export const ServiceManufacturing: React.FC = () => {
           path="model"
           element={
             <ManufacturingModels
-              searchText={searchText}
+              searchText={searchText.toLocaleLowerCase()}
               models={process.serviceDetails.models}
               filters={filtersQuery.data}
             />
@@ -46,7 +46,7 @@ export const ServiceManufacturing: React.FC = () => {
             <ManufacturingMaterials
               materials={process.serviceDetails.materials}
               filters={filtersQuery.data}
-              searchText={searchText}
+              searchText={searchText.toLocaleLowerCase()}
             />
           }
         />
@@ -55,7 +55,7 @@ export const ServiceManufacturing: React.FC = () => {
           element={
             <ManufacturingPostProcessings
               postProcessings={process.serviceDetails.postProcessings}
-              searchText={searchText}
+              searchText={searchText.toLocaleLowerCase()}
               filters={filtersQuery.data}
             />
           }

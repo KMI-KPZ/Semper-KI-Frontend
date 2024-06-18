@@ -18,6 +18,7 @@ import useGetPostProcessigns, {
 import useSetPostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useSetPostProcessing";
 import { useProject } from "@/hooks/Project/useProject";
 import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
+import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 
 interface Props {
   filters: FilterItemProps[];
@@ -30,7 +31,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
   const { searchText, filters, postProcessings } = props;
   const postProcessingsQuery = useGetPostProcessigns(filters);
   const { updatedService } = useService();
-  const { process } = useProcess();
+  const { process } = useManufacturingProcess();
   const { project } = useProject();
   const deletePostProcessing = useDeletePostProcessing();
   const setPostProcessing = useSetPostProcessing();
@@ -111,15 +112,15 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
     return hydratedPostProcessings;
   };
 
-  // const filterSelectedPostProcessing = (
-  //   postProcessing: PostProcessingProps
-  // ) => {
-  //   return (
-  //     process.serviceDetails.postProcessings?.find(
-  //       (m) => m.id === postProcessing.id
-  //     ) !== undefined
-  //   );
-  // };
+  const filterSelectedPostProcessing = (
+    postProcessing: PostProcessingProps
+  ) => {
+    return (
+      process.serviceDetails.postProcessings?.find(
+        (m) => m.id === postProcessing.id
+      ) === undefined
+    );
+  };
 
   return (
     <Container direction="col" width="full">
@@ -168,9 +169,8 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
           postProcessingsQuery.data.length > 0 ? (
             <Container width="full" wrap="wrap" direction="row" align="start">
               {postProcessingsQuery.data
-                .filter((postProcessing, index) =>
-                  filterBySearch(postProcessing)
-                )
+                .filter(filterSelectedPostProcessing)
+                .filter(filterBySearch)
                 .map((postProcessing: PostProcessingProps, index: number) => (
                   <ProcessPostProcessingCard
                     key={index}

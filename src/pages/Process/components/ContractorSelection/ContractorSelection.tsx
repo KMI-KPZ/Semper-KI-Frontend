@@ -57,7 +57,7 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
         >
           <Heading variant="h3">
             {t(
-              "Process.components.ContractorSelection.ContractorSelection.heading.sub1"
+              "Process.components.ContractorSelection.ContractorSelection.heading.sub2"
             )}
           </Heading>
         </Container>

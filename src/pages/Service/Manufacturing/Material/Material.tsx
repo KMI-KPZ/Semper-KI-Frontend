@@ -17,6 +17,7 @@ import useSetMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutatio
 import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
 import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
+import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 
 interface Props {
   filters: FilterItemProps[];
@@ -37,7 +38,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
     material: undefined,
   });
   const navigate = useNavigate();
-  const { process } = useProcess();
+  const { process } = useManufacturingProcess();
   const { project } = useProject();
   const materialsQuery = useGetMaterials(filters);
   const setMaterial = useSetMaterial();
@@ -51,19 +52,6 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
       modalOpen: false,
       material: undefined,
     }));
-  };
-  const filterBySearch = (material: MaterialProps): boolean => {
-    if (searchText === "") {
-      return true;
-    }
-    if (
-      material.title.toLocaleLowerCase().includes(searchText) ||
-      material.propList.filter((prop) =>
-        prop.toLocaleLowerCase().includes(searchText)
-      ).length > 0
-    )
-      return true;
-    return false;
   };
 
   const handleOnButtonClickSelect = (material: MaterialProps) => {
@@ -81,12 +69,26 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
     });
   };
 
-  // const filterSelectedMaterial = (material: MaterialProps) => {
-  //   return (
-  //     process.serviceDetails.materials?.find((m) => m.id === material.id) !==
-  //     undefined
-  //   );
-  // };
+  const filterSelectedMaterial = (material: MaterialProps) => {
+    return (
+      process.serviceDetails.materials?.find((m) => m.id === material.id) ===
+      undefined
+    );
+  };
+
+  const filterBySearch = (material: MaterialProps): boolean => {
+    if (searchText === "") {
+      return true;
+    }
+    if (
+      material.title.toLocaleLowerCase().includes(searchText) ||
+      material.propList.filter((prop) =>
+        prop.toLocaleLowerCase().includes(searchText)
+      ).length > 0
+    )
+      return true;
+    return false;
+  };
 
   return (
     <Container direction="col" width="full">
@@ -133,7 +135,8 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
           materialsQuery.data.length > 0 ? (
             <Container width="full" wrap="wrap" direction="row" align="start">
               {materialsQuery.data
-                .filter((material, index) => filterBySearch(material))
+                .filter(filterSelectedMaterial)
+                .filter(filterBySearch)
                 .map((material: MaterialProps, index: number) => (
                   <ProcessMaterialCard
                     material={material}

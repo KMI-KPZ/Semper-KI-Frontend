@@ -15,62 +15,75 @@ import {
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ContractorCard from "./ContractorCard";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { UseQueryResult } from "@tanstack/react-query";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 
 interface ProcessContractorListProps {
   contractors: UseQueryResult<ContractorProps[], Error>;
+  process: Process;
+  closeModal: () => void;
 }
 
 export interface ContractorSelectionFormData {
-  processes: {
-    process: Process;
-    contractorID: string;
-  }[];
+  process: Process;
+  contractorID: string;
 }
 
 const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
-  const { contractors } = props;
+  const { contractors, process, closeModal } = props;
   const { t } = useTranslation();
+  const updateProcess = useUpdateProcess();
+  const [contractorID, setContractorID] = React.useState<string | undefined>(
+    undefined
+  );
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<ContractorSelectionFormData>({
-    defaultValues: async () => ({
-      processes: [],
-    }),
-  });
+  const saveContractor = () => {
+    updateProcess.mutate(
+      {
+        processIDs: [process.processID],
+        updates: {
+          changes: {
+            provisionalContractor: contractorID,
+          },
+        },
+      },
+      {
+        onSuccess(data, variables, context) {
+          closeModal();
+        },
+      }
+    );
+  };
 
-  // const onSubmit = (data: ContractorSelectionFormData) => {
-  //   data.processes.forEach((process, index, allProcesses) => {
-  //     updateProcess.mutate({
-  //       processIDs: [process.process.processID],
-  //       updates: {
-  //         changes: {
-  //           processStatus: ProcessStatus.CONTRACTOR_SELECTED,
-  //           provisionalContractor: process.contractorID,
-  //           processDetails: {
-  //             clientDeliverAddress: deliverAddress,
-  //             clientBillingAddress: addressesEqual
-  //               ? deliverAddress
-  //               : billingAddress,
-  //           },
-  //         },
-  //       },
-  //     });
-  //   });
-  // };
+  const selectContractor = (contractorID: string) => {
+    setContractorID(contractorID);
+  };
 
   if (contractors.isLoading) return <LoadingAnimation />;
   return (
     <Container width="full" direction="col">
       {contractors.data !== undefined && contractors.data.length > 0 ? (
-        contractors.data.map((contractor, index) => (
-          <ContractorCard key={index} contractor={contractor} />
-        ))
+        <form className="flex flex-col items-center justify-start gap-5">
+          <Container direction="col" width="full">
+            {contractors.data.map((contractor, index) => (
+              <ContractorCard
+                selectContractor={selectContractor}
+                key={index}
+                contractor={contractor}
+                process={process}
+                selected={contractorID === contractor.hashedID}
+              />
+            ))}
+          </Container>
+          <Button
+            onClick={saveContractor}
+            variant="primary"
+            title={t(
+              "Process.components.ContractorSelection.components.ContractorList.button.save"
+            )}
+          />
+        </form>
       ) : (
         <Text>
           {t(

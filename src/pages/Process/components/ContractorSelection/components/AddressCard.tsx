@@ -59,11 +59,7 @@ const ContractorSelectionAddressCard: React.FC<
   };
 
   return (
-    <Container
-      width="full"
-      direction="col"
-      className="gap-0 overflow-clip rounded-xl border-2 p-5 shadow-lg"
-    >
+    <Container width="full" direction="col" className="card gap-0">
       <Heading variant="h3">
         {t(
           `Process.components.ContractorSelection.ContractorSelection.heading.${

@@ -914,7 +914,8 @@
           "ContractorList": {
             "noContractorFound": "Kein Auftragnehmer gefunden",
             "button": {
-              "select": "Auftragnehmer auswählen"
+              "select": "Auftragnehmer auswählen",
+              "save": "Speichern"
             }
           }
         },

@@ -108,7 +108,7 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
           width="full"
           justify="start"
           direction="col"
-          className=" overflow-clip rounded-xl border-2 p-5 shadow-lg"
+          className=" card"
         >
           <Heading variant="h3">
             {t(
@@ -168,7 +168,11 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
         modalKey="ProcessContractorList"
         closeModal={closeEditContractor}
       >
-        <ProcessContractorList contractors={contractors} />
+        <ProcessContractorList
+          contractors={contractors}
+          process={process}
+          closeModal={closeEditContractor}
+        />
       </Modal>
     </ProcessContainer>
   );

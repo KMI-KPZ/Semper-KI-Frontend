@@ -11,11 +11,7 @@ const ServiceDetailsCard: React.FC<
   const { t } = useTranslation();
 
   return (
-    <Container
-      direction="row"
-      width="full"
-      className=" overflow-clip rounded-xl border-2 p-5 shadow-lg"
-    >
+    <Container direction="row" width="full" className=" card">
       {children}
     </Container>
   );

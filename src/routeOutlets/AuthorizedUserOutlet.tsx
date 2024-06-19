@@ -73,7 +73,6 @@ const AuthorizedUserRouteOutlet: React.FC<
   const createAddress = useCreateAddress();
   const deleteAddress = useDeleteAddress();
   const updateAddress = useUpdateAddress();
-  logger("AuthorizedUserRouteOutlet | user", user);
 
   return user.usertype !== UserType.ANONYM ? (
     <AuthorizedUserContext.Provider

@@ -9,7 +9,7 @@ interface DefinedProcessOutletProps {}
 export const DefinedProcessOutlet: React.FC<
   PropsWithChildren<DefinedProcessOutletProps>
 > = (props) => {
-  const {} = props;
+  const { children } = props;
   const { project } = useProject();
   const { process } = useProcess();
 
@@ -21,6 +21,7 @@ export const DefinedProcessOutlet: React.FC<
     return (
       <DefinedProcessContextProvider process={process}>
         <Outlet />
+        {children}
       </DefinedProcessContextProvider>
     );
   else

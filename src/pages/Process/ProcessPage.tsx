@@ -7,10 +7,8 @@ import Service from "./components/Service/Service";
 import StatusWizard from "./components/StatusWizard/StatusWizard";
 import ContractorSelection from "./components/ContractorSelection/ContractorSelection";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import ProjectContractorSelection from "./legacy/ContractorSelection/ContractorSelection";
-import AuthorizedUserRouteOutlet, {
-  AuthorizedUserContext,
-} from "@/routeOutlets/AuthorizedUserOutlet";
+import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
+import { DefinedProcessOutlet } from "@/routeOutlets/DefinedProcessOutlet";
 
 interface ProcessPageProps {}
 
@@ -30,9 +28,11 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
         <Container direction="col" width="full">
           <Service process={process} />
           <AuthorizedUserRouteOutlet>
-            {process.processStatus >= ProcessStatus.SERVICE_COMPLETED ? (
-              <ContractorSelection process={process} />
-            ) : null}
+            <DefinedProcessOutlet>
+              {process.processStatus >= ProcessStatus.SERVICE_COMPLETED ? (
+                <ContractorSelection />
+              ) : null}
+            </DefinedProcessOutlet>
           </AuthorizedUserRouteOutlet>
         </Container>
       </Container>

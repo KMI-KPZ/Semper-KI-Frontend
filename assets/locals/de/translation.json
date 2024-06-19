@@ -906,8 +906,15 @@
           "AddressSelection": {
             "heading": "Addresse auswählen",
             "button": {
+              "edit": "Bearbeiten",
               "select": "Auswählen",
               "new": "neue Adresse anlegen"
+            }
+          },
+          "ContractorList": {
+            "noContractorFound": "Kein Auftragnehmer gefunden",
+            "button": {
+              "select": "Auftragnehmer auswählen"
             }
           }
         },
@@ -921,6 +928,7 @@
           },
           "noAddress": "keine Adresse ausgewählt",
           "noContractor": "Kein Auftragnehmer ausgewählt",
+
           "button": {
             "menu": "Hersteller Menu",
             "selectAddress": "Adresse auswählen",

@@ -15,7 +15,8 @@ const AddressSelection: React.FC<AddressSelectionProps> = (props) => {
   const { closeModal, selectAddress } = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
-  const [create, setCreate] = useState<boolean>(false);
+  const [formOpen, setFormOpen] = useState<boolean>(false);
+  const [editAddress, setEditAddress] = useState<UserAddressProps>();
 
   const handleOnClickButtonSelect = (address: UserAddressProps) => {
     selectAddress(address);
@@ -23,7 +24,17 @@ const AddressSelection: React.FC<AddressSelectionProps> = (props) => {
   };
 
   const handleOnClickButtonNew = () => {
-    setCreate(true);
+    setFormOpen(true);
+  };
+
+  const handleOnClickButtonEdit = (address: UserAddressProps) => {
+    setFormOpen(true);
+    setEditAddress(address);
+  };
+
+  const closeModalAndReset = () => {
+    setFormOpen(false);
+    setEditAddress(undefined);
   };
 
   return (
@@ -37,6 +48,17 @@ const AddressSelection: React.FC<AddressSelectionProps> = (props) => {
         {user.details.addresses.map((address) => (
           <AddressCard address={address}>
             <Button
+              size="sm"
+              variant="text"
+              title={t(
+                "Process.components.ContractorSelection.components.AddressSelection.button.edit"
+              )}
+              onClick={() => {
+                handleOnClickButtonEdit(address);
+              }}
+            />
+            <Button
+              size="sm"
               title={t(
                 "Process.components.ContractorSelection.components.AddressSelection.button.select"
               )}
@@ -49,6 +71,7 @@ const AddressSelection: React.FC<AddressSelectionProps> = (props) => {
       </Container>
       <Container width="full">
         <Button
+          variant="primary"
           title={t(
             "Process.components.ContractorSelection.components.AddressSelection.button.new"
           )}
@@ -57,15 +80,12 @@ const AddressSelection: React.FC<AddressSelectionProps> = (props) => {
       </Container>
       <Modal
         modalKey="ProcessCreateNewAddress"
-        open={create}
-        closeModal={() => {
-          setCreate(false);
-        }}
+        open={formOpen}
+        closeModal={closeModalAndReset}
       >
         <AddressForm
-          closeModal={() => {
-            setCreate(false);
-          }}
+          initialAddress={editAddress}
+          closeModal={closeModalAndReset}
         />
       </Modal>
     </Container>

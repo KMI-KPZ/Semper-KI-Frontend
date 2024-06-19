@@ -1,4 +1,8 @@
-import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import {
+  ManufactoringProcessProps,
+  Process,
+  ProcessStatus,
+} from "@/api/Process/Querys/useGetProcess";
 import ProcessContainer from "@/components/Process/Container";
 import ProcessMenu from "@/components/Process/Menu";
 import {
@@ -6,6 +10,8 @@ import {
   Container,
   Divider,
   Heading,
+  LoadingAnimation,
+  Modal,
   Text,
 } from "@component-library/index";
 import React, { useState } from "react";
@@ -17,28 +23,30 @@ import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { useForm } from "react-hook-form";
 import ContractorSelectionAddressCard from "./components/AddressCard";
 import logger from "@/hooks/useLogger";
+import ProcessContractorList from "./components/ContractorList";
+import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
+import ContractorCard from "./components/ContractorCard";
+import useGetContractors from "@/api/Project/Querys/useGetContractors";
 
-interface ContractorSelectionProps {
-  process: Process;
-}
+interface ContractorSelectionProps {}
 
 export type ProcessAddressType = "billing" | "delivery";
 
-export interface ContractorSelectionFormData {
-  processes: {
-    process: Process;
-    contractorID: string;
-  }[];
-}
-
 const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
-  const { process } = props;
+  const {} = props;
   const { t } = useTranslation();
+  const { process } = useDefinedProcess();
   const { user } = useAuthorizedUser();
-  const updateProcess = useUpdateProcess();
+  const contractors = useGetContractors(process.processID);
+
   const standardAddress: UserAddressProps | undefined =
     user.details.addresses.find((address) => address.standard === true);
+  const currentContractor = contractors.data?.find(
+    (contractor) =>
+      contractor.hashedID === process.processDetails.provisionalContractor
+  );
 
+  const [editContractor, setEditContractor] = useState(false);
   const [deliverAddress, setDeliverAddress] = useState(standardAddress);
   const [billingAddress, setBillingAddress] = useState(standardAddress);
   const [addressesEqual, setAddressesEqual] = useState(true);
@@ -57,43 +65,20 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
     }
   };
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<ContractorSelectionFormData>({
-    defaultValues: async () => ({
-      processes: [],
-    }),
-  });
-
-  const onSubmit = (data: ContractorSelectionFormData) => {
-    data.processes.forEach((process, index, allProcesses) => {
-      updateProcess.mutate({
-        processIDs: [process.process.processID],
-        updates: {
-          changes: {
-            processStatus: ProcessStatus.CONTRACTOR_SELECTED,
-            provisionalContractor: process.contractorID,
-            processDetails: {
-              clientDeliverAddress: deliverAddress,
-              clientBillingAddress: addressesEqual
-                ? deliverAddress
-                : billingAddress,
-            },
-          },
-        },
-      });
-    });
-  };
-
   const resetAddress = (type: ProcessAddressType) => {
     if (type === "billing") {
       setBillingAddress(standardAddress);
     } else {
       setDeliverAddress(standardAddress);
     }
+  };
+
+  const handleOnClickButtonEditContractor = () => {
+    setEditContractor(true);
+  };
+
+  const closeEditContractor = () => {
+    setEditContractor(false);
   };
 
   return (
@@ -130,6 +115,28 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
               "Process.components.ContractorSelection.ContractorSelection.heading.sub1"
             )}
           </Heading>
+          {process.processDetails.provisionalContractor === undefined ? (
+            <Container width="full" direction="col">
+              <Button
+                size="sm"
+                onClick={handleOnClickButtonEditContractor}
+                variant="primary"
+                title={t(
+                  "Process.components.ContractorSelection.components.ContractorList.button.select"
+                )}
+              />
+            </Container>
+          ) : contractors.isLoading ? (
+            <LoadingAnimation />
+          ) : currentContractor === undefined ? (
+            <Text>
+              {t(
+                "Process.components.ContractorSelection.components.ContractorList.noContractorFound"
+              )}
+            </Text>
+          ) : (
+            <ContractorCard contractor={currentContractor} />
+          )}
         </Container>
         <Container direction="col" width="full">
           <ContractorSelectionAddressCard
@@ -156,6 +163,13 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
         start={ProcessStatus.SERVICE_COMPLETED}
         end={ProcessStatus.CONTRACTOR_SELECTED}
       />
+      <Modal
+        open={editContractor}
+        modalKey="ProcessContractorList"
+        closeModal={closeEditContractor}
+      >
+        <ProcessContractorList contractors={contractors} />
+      </Modal>
     </ProcessContainer>
   );
 };

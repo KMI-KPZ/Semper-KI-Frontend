@@ -23,24 +23,24 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
       <Divider />
       <Container width="full" direction="row">
         {getProcessStatusButtons(process).map((button, index) => (
-          <PermissionGate
-            element={
-              button.action.type === "function" &&
-              button.action.function.type === "deleteProcess"
-                ? "ProjectButtonDelete"
-                : `ProjectStatusButtons`
-            }
+          // <PermissionGate
+          //   element={
+          //     button.action.type === "function" &&
+          //     button.action.function.type === "deleteProcess"
+          //       ? "ProjectButtonDelete"
+          //       : `ProjectStatusButtons`
+          //   }
+          //   key={index}
+          // >
+          <Button
             key={index}
-          >
-            <Button
-              key={index}
-              variant={button.buttonVariant}
-              size="sm"
-              startIcon={button.icon}
-              onClick={() => handleOnClickButton(button, process.processID)}
-              title={button.title}
-            />
-          </PermissionGate>
+            variant={button.buttonVariant}
+            size="sm"
+            startIcon={button.icon}
+            onClick={() => handleOnClickButton(button, process.processID)}
+            title={button.title}
+          />
+          // </PermissionGate>
         ))}
       </Container>
     </Container>

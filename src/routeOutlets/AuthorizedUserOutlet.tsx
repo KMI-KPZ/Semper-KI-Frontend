@@ -14,6 +14,8 @@ import useDeleteUser from "@/api/User/Mutations/useDeleteUser";
 import useUpdateAddress from "@/api/User/Mutations/useUpdateAddress";
 import useUpdateUserDetails from "@/api/User/Mutations/useUpdateUserDetails";
 import logger from "@/hooks/useLogger";
+import { Button, Container } from "@component-library/index";
+import { useTranslation } from "react-i18next";
 
 interface AuthorizedUserOutletProps {}
 
@@ -65,6 +67,7 @@ export const AuthorizedUserContext = createContext<AuthorizedUserContext>({
 const AuthorizedUserRouteOutlet: React.FC<
   PropsWithChildren<AuthorizedUserOutletProps>
 > = (props) => {
+  const { t } = useTranslation();
   const { children } = props;
   const { pathname } = useLocation();
   const { user } = useUser();
@@ -88,8 +91,17 @@ const AuthorizedUserRouteOutlet: React.FC<
       {children}
       <Outlet />
     </AuthorizedUserContext.Provider>
-  ) : (
+  ) : children === undefined ? (
     <Navigate to={`/login?redirectURL=${pathname}`} />
+  ) : (
+    <Container direction="col" className="bg-white p-5" width="full">
+      <h1>{t("routeOutlets.AuthorizedUserOutlet.login")}</h1>
+      <Button
+        title={t("routeOutlets.AuthorizedUserOutlet.button.login")}
+        variant="primary"
+        to={`/login?redirectURL=${pathname}`}
+      />
+    </Container>
   );
 };
 

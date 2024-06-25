@@ -45,6 +45,7 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
 
   return (
     <Container
+      id="processInfo"
       width="full"
       direction="col"
       className="relative gap-2 bg-white p-5"

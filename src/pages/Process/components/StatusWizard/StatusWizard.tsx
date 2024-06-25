@@ -24,7 +24,9 @@ export type StatusWizardItem = {
   startStatus?: ProcessStatus;
   endStatus?: ProcessStatus;
   icon: ReactNode;
+  id?: string;
   text:
+    | "processInfo"
     | "header"
     | "draft"
     | "service"
@@ -42,7 +44,8 @@ export type StatusWizardItem = {
 const statusWizardItems: StatusWizardItem[] = [
   {
     icon: <InfoIcon />,
-    text: "header",
+    text: "processInfo",
+    id: "header",
   },
   {
     startStatus: ProcessStatus.DRAFT,

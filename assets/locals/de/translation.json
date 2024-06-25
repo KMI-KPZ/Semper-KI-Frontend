@@ -359,6 +359,14 @@
       "completeUserData": "Bitte vervollständigen Sie ihre Benutzerdaten"
     }
   },
+  "routeOutlets": {
+    "AuthorizedUserOutlet": {
+      "login": "Bitte Anmelden um fortzufahren",
+      "button": {
+        "login": "Zur Anmeldung"
+      }
+    }
+  },
   "Admin": {
     "hooks": {
       "useAdmin": {}
@@ -1015,6 +1023,7 @@
       "components": {},
       "StatusWizard": {
         "item": {
+          "processInfo": "Übersicht",
           "header": "Übersicht",
           "draft": "Entwurf",
           "service": "Service",

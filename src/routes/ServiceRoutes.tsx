@@ -1,7 +1,7 @@
 import logger from "@/hooks/useLogger";
-import { ServiceManufacturing } from "@/pages/Service/Manufacturing/Manufacturing";
-import ServiceModeling from "@/pages/Service/Modelling/Modelling";
-import Service from "@/pages/Service/Service";
+import { ServiceManufacturing } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Manufacturing";
+import ServiceModeling from "@/pages/Process/components/Service/ServiceEdit/Modelling/Modelling";
+import ServiceEdit from "@/pages/Process/components/Service/ServiceEdit/ServiceEdit";
 import { DefinedProcessOutlet } from "@/routeOutlets/DefinedProcessOutlet";
 import ManufacturingProcessOutlet from "@/routeOutlets/ManufacturingProcessOutlet";
 import { Modal } from "@component-library/index";
@@ -36,7 +36,7 @@ const ServiceRoutes: React.FC<ServiceRoutesProps> = (props) => {
     >
       <Routes>
         <Route element={<DefinedProcessOutlet />}>
-          <Route index element={<Service />} />
+          <Route index element={<ServiceEdit />} />
           <Route
             path="manufacturing/*"
             element={

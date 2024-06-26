@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { Project, getProjectFiles } from "@/api/Project/Querys/useGetProject";
-import { ModelingServiceProps } from "@/pages/Service/Modelling/Modelling";
+import { ModelingServiceProps } from "@/pages/Process/components/Service/ServiceEdit/Modelling/Modelling";
 import { UserAddressProps } from "@/hooks/useUser";
 import { StatusButtonPropsExtern } from "@/hooks/Project/useStatusButtons";
 import {

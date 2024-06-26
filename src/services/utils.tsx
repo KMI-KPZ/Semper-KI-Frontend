@@ -1,6 +1,6 @@
 import { Address, UserType } from "@/hooks/useUser";
 import logger from "@/hooks/useLogger";
-import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
+import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
 
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;

@@ -8,7 +8,7 @@ import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
 import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
 import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
-import ManufacturingModelUploadForm from "@/pages/Service/Manufacturing/Model/Upload/components/Form";
+import ManufacturingModelUploadForm from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/Upload/components/Form";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessStatusGate from "@/pages/Process/components/StatusGate";
 

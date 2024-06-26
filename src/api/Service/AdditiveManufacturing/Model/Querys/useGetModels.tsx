@@ -1,8 +1,8 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
-import { FilterItemProps } from "@/pages/Service/Manufacturing/Filter/Filter";
+import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
+import { FilterItemProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Filter/Filter";
 
 const useGetModels = (filters: FilterItemProps[]) => {
   const queryClient = useQueryClient();

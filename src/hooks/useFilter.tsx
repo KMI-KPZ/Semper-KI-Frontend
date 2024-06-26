@@ -1,6 +1,6 @@
 import useUpdateFilters from "@/api/Filter/Mutations/useUpdateFilters";
 import useGetFilters from "@/api/Filter/Querys/useGetFilters";
-import { FilterItemProps } from "@/pages/Service/Manufacturing/Filter/Filter";
+import { FilterItemProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Filter/Filter";
 import {
   DefinedUseQueryResult,
   UseMutationResult,

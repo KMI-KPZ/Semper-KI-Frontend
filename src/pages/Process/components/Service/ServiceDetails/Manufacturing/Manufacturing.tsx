@@ -5,7 +5,7 @@ import {
 import { Button, Container, Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
+import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import { useProject } from "@/hooks/Project/useProject";

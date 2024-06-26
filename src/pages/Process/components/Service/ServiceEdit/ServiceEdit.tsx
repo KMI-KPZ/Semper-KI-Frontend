@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { LoadingAnimation } from "@component-library/index";
-import useProcess from "../../hooks/Process/useProcess";
+import useProcess from "../../../../../hooks/Process/useProcess";
 import { Navigate } from "react-router-dom";
-import { useProject } from "../../hooks/Project/useProject";
+import { useProject } from "../../../../../hooks/Project/useProject";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 
-interface ServiceProps {}
+interface ServiceEditProps {}
 
-const Service: React.FC<ServiceProps> = (props) => {
+const ServiceEdit: React.FC<ServiceEditProps> = (props) => {
   const {} = props;
   const { project } = useProject();
   const { process } = useProcess();
@@ -26,4 +26,4 @@ const Service: React.FC<ServiceProps> = (props) => {
   return <LoadingAnimation />;
 };
 
-export default Service;
+export default ServiceEdit;

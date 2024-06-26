@@ -9,6 +9,8 @@ import ContractorSelection from "./components/ContractorSelection/ContractorSele
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import { DefinedProcessOutlet } from "@/routeOutlets/DefinedProcessOutlet";
+import ProcessVerify from "./components/Verify/Verify";
+import ProcessStatusGate from "./components/StatusGate";
 
 interface ProcessPageProps {}
 
@@ -29,9 +31,12 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
           <Service process={process} />
           <AuthorizedUserRouteOutlet>
             <DefinedProcessOutlet>
-              {process.processStatus >= ProcessStatus.SERVICE_COMPLETED ? (
+              <ProcessStatusGate start={ProcessStatus.SERVICE_COMPLETED}>
                 <ContractorSelection />
-              ) : null}
+              </ProcessStatusGate>
+              <ProcessStatusGate start={ProcessStatus.CONTRACTOR_SELECTED}>
+                <ProcessVerify />
+              </ProcessStatusGate>
             </DefinedProcessOutlet>
           </AuthorizedUserRouteOutlet>
         </Container>

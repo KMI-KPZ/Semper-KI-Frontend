@@ -82,7 +82,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
 
   return (
     <Container direction="col" width="full">
-      {selectedPostProcessings !== undefined &&
+      {/* {selectedPostProcessings !== undefined &&
       selectedPostProcessings.length > 0 ? (
         <Container direction="col" width="full">
           <Heading variant="h2" className="w-full text-left">
@@ -114,7 +114,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
               })}
           </Container>
         </Container>
-      ) : null}
+      ) : null} */}
       <Container width="full" direction="col">
         <Heading variant="h2" className="w-full text-left">
           {t("Service.Manufacturing.PostProcessing.PostProcessing.available")}

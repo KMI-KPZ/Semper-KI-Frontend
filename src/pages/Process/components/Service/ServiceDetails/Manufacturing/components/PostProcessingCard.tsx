@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ServiceDetailsCard from "./Card";
+import ServiceDetailsCard from "../../components/Card";
 import TestImg from "@images/Test2.png";
 import { Button, Container, Text } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,8 @@ import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Muta
 import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import ProcessStatusGate from "@/pages/Process/components/StatusGate";
 
 interface ProcessSericePostProcessingCardProps {
   postProcessing: PostProcessingProps;
@@ -80,30 +82,32 @@ const ProcessSericePostProcessingCard: React.FC<
         gap={3}
         className="p-5"
       >
-        <Button
-          title={t(
-            "Process.Service.ServiceDetails.components.manufacturing.button.editPostProcessing"
-          )}
-          size="sm"
-          variant="secondary"
-          onClick={handleOnButtonClickPostProcessing}
-          children={t(
-            "Process.Service.ServiceDetails.components.manufacturing.button.edit"
-          )}
-        />
-        <Button
-          title={t(
-            "Process.Service.ServiceDetails.components.manufacturing.button.deletePostProcessing"
-          )}
-          size="sm"
-          variant="text"
-          onClick={() =>
-            handleOnButtonClickDeletePostProcessing(postProcessing.id)
-          }
-          children={t(
-            "Process.Service.ServiceDetails.components.manufacturing.button.delete"
-          )}
-        />
+        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+          <Button
+            title={t(
+              "Process.Service.ServiceDetails.components.manufacturing.button.editPostProcessing"
+            )}
+            size="sm"
+            variant="secondary"
+            onClick={handleOnButtonClickPostProcessing}
+            children={t(
+              "Process.Service.ServiceDetails.components.manufacturing.button.edit"
+            )}
+          />
+          <Button
+            title={t(
+              "Process.Service.ServiceDetails.components.manufacturing.button.deletePostProcessing"
+            )}
+            size="sm"
+            variant="text"
+            onClick={() =>
+              handleOnButtonClickDeletePostProcessing(postProcessing.id)
+            }
+            children={t(
+              "Process.Service.ServiceDetails.components.manufacturing.button.delete"
+            )}
+          />
+        </ProcessStatusGate>
       </Container>
     </ServiceDetailsCard>
   );

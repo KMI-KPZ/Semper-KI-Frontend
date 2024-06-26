@@ -92,7 +92,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
 
   return (
     <Container direction="col" width="full">
-      {materials !== undefined && materials.length > 0 ? (
+      {/* {materials !== undefined && materials.length > 0 ? (
         <Container direction="col" width="full">
           <Heading variant="h2" className="w-full text-left">
             {t("Service.Manufacturing.Material.Material.selected")}
@@ -125,7 +125,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
               : null}
           </Container>
         </Container>
-      ) : null}
+      ) : null} */}
       <Container width="full" direction="col">
         <Heading variant="h2" className="w-full text-left">
           {t("Service.Manufacturing.Material.Material.available")}

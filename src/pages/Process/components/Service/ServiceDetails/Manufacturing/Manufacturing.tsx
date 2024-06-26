@@ -1,4 +1,7 @@
-import { ManufactoringProcessProps } from "@/api/Process/Querys/useGetProcess";
+import {
+  ManufactoringProcessProps,
+  ProcessStatus,
+} from "@/api/Process/Querys/useGetProcess";
 import { Button, Container, Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -10,9 +13,10 @@ import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Muta
 import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
 import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
-import ProcessServiceModelCard from "./ModellCard";
-import ProcessServiceMaterialCard from "./MaterialCard";
-import ProcessSericePostProcessingCard from "./PostProcessingCard";
+import ProcessServiceModelCard from "./components/ModellCard";
+import ProcessServiceMaterialCard from "./components/MaterialCard";
+import ProcessSericePostProcessingCard from "./components/PostProcessingCard";
+import ProcessStatusGate from "../../../StatusGate";
 
 interface ServiceManufacturingDetailsProps {
   process: ManufactoringProcessProps;
@@ -36,8 +40,6 @@ const ServiceManufacturingDetails: React.FC<
   const materials: MaterialProps[] = process.serviceDetails.materials
     ? process.serviceDetails.materials
     : [];
-  const deleteMaterial = useDeleteMaterial();
-  const deletePostProcessing = useDeletePostProcessing();
 
   const handleOnButtonClickMaterial = () => {
     navigate("service/manufacturing/material");
@@ -72,20 +74,22 @@ const ServiceManufacturingDetails: React.FC<
                 )}
           </Text>
         </Container>
-        {models.length === 0 ? (
-          <Button
-            title={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.addModel"
-            )}
-            size="sm"
-            variant="primary"
-            onClick={handleOnButtonClickModel}
-            startIcon={<AddIcon />}
-            children={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.add"
-            )}
-          />
-        ) : null}
+        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+          {models.length === 0 ? (
+            <Button
+              title={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.addModel"
+              )}
+              size="sm"
+              variant="primary"
+              onClick={handleOnButtonClickModel}
+              startIcon={<AddIcon />}
+              children={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.add"
+              )}
+            />
+          ) : null}
+        </ProcessStatusGate>
       </Container>
       <Container width="full" direction="col">
         {models.length > 0
@@ -93,20 +97,22 @@ const ServiceManufacturingDetails: React.FC<
               <ProcessServiceModelCard model={model} key={index} />
             ))
           : null}
-        {models.length > 0 ? (
-          <Button
-            title={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.addModel"
-            )}
-            size="sm"
-            variant="primary"
-            onClick={handleOnButtonClickModel}
-            startIcon={<AddIcon />}
-            children={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.add"
-            )}
-          />
-        ) : null}
+        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+          {models.length > 0 ? (
+            <Button
+              title={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.addModel"
+              )}
+              size="sm"
+              variant="primary"
+              onClick={handleOnButtonClickModel}
+              startIcon={<AddIcon />}
+              children={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.add"
+              )}
+            />
+          ) : null}
+        </ProcessStatusGate>
       </Container>
 
       <Container direction="row" justify="between" width="full">
@@ -124,20 +130,22 @@ const ServiceManufacturingDetails: React.FC<
                 )}
           </Text>
         </Container>
-        {materials.length === 0 ? (
-          <Button
-            title={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.addMaterial"
-            )}
-            size="sm"
-            variant="primary"
-            onClick={handleOnButtonClickMaterial}
-            startIcon={<AddIcon />}
-            children={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.add"
-            )}
-          />
-        ) : null}
+        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+          {materials.length === 0 ? (
+            <Button
+              title={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.addMaterial"
+              )}
+              size="sm"
+              variant="primary"
+              onClick={handleOnButtonClickMaterial}
+              startIcon={<AddIcon />}
+              children={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.add"
+              )}
+            />
+          ) : null}
+        </ProcessStatusGate>
       </Container>
       <Container width="full" direction="col">
         {materials.length > 0
@@ -145,20 +153,22 @@ const ServiceManufacturingDetails: React.FC<
               <ProcessServiceMaterialCard material={material} key={index} />
             ))
           : null}
-        {materials.length > 0 ? (
-          <Button
-            title={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.addMaterial"
-            )}
-            size="sm"
-            variant="primary"
-            onClick={handleOnButtonClickMaterial}
-            startIcon={<AddIcon />}
-            children={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.add"
-            )}
-          />
-        ) : null}
+        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+          {materials.length > 0 ? (
+            <Button
+              title={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.addMaterial"
+              )}
+              size="sm"
+              variant="primary"
+              onClick={handleOnButtonClickMaterial}
+              startIcon={<AddIcon />}
+              children={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.add"
+              )}
+            />
+          ) : null}
+        </ProcessStatusGate>
       </Container>
 
       <Container direction="row" justify="between" width="full">
@@ -176,20 +186,22 @@ const ServiceManufacturingDetails: React.FC<
                 )}
           </Text>
         </Container>
-        {postProcessings.length === 0 ? (
-          <Button
-            title={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.addPostProcessing"
-            )}
-            size="sm"
-            variant="primary"
-            onClick={handleOnButtonClickPostProcessing}
-            startIcon={<AddIcon />}
-            children={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.add"
-            )}
-          />
-        ) : null}
+        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+          {postProcessings.length === 0 ? (
+            <Button
+              title={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.addPostProcessing"
+              )}
+              size="sm"
+              variant="primary"
+              onClick={handleOnButtonClickPostProcessing}
+              startIcon={<AddIcon />}
+              children={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.add"
+              )}
+            />
+          ) : null}
+        </ProcessStatusGate>
       </Container>
       <Container width="full" direction="col">
         {postProcessings.length > 0
@@ -200,20 +212,22 @@ const ServiceManufacturingDetails: React.FC<
               />
             ))
           : null}
-        {postProcessings.length > 0 ? (
-          <Button
-            title={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.addPostProcessing"
-            )}
-            size="sm"
-            variant="primary"
-            onClick={handleOnButtonClickPostProcessing}
-            startIcon={<AddIcon />}
-            children={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.add"
-            )}
-          />
-        ) : null}
+        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+          {postProcessings.length > 0 ? (
+            <Button
+              title={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.addPostProcessing"
+              )}
+              size="sm"
+              variant="primary"
+              onClick={handleOnButtonClickPostProcessing}
+              startIcon={<AddIcon />}
+              children={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.add"
+              )}
+            />
+          ) : null}
+        </ProcessStatusGate>
       </Container>
     </Container>
   );

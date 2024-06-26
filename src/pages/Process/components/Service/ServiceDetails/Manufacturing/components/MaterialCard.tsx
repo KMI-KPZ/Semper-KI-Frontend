@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import ServiceDetailsCard from "./Card";
+import ServiceDetailsCard from "../../components/Card";
 import TestImg from "@images/Test2.png";
-import { Button, Container, Text } from "@component-library/index";
+import { Button, Container, Modal, Text } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
 import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
 import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
 import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
+import ManufacturingModelUploadForm from "@/pages/Service/Manufacturing/Model/Upload/components/Form";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import ProcessStatusGate from "@/pages/Process/components/StatusGate";
 
 interface ProcessServiceMaterialCardProps {
   material: MaterialProps;
@@ -25,6 +28,8 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
   const handleOnButtonClickMaterial = () => {
     navigate("service/manufacturing/material");
   };
+
+  const [edit, setEdit] = useState<MaterialProps | undefined>(undefined);
   const handleOnButtonClickDeleteMaterial = (materialID: string) => {
     deleteMaterial.mutate({
       processID: process.processID,
@@ -81,29 +86,36 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
         gap={3}
         className="p-5"
       >
-        <Button
-          title={t(
-            "Process.Service.ServiceDetails.components.manufacturing.button.editMaterial"
-          )}
-          size="sm"
-          variant="secondary"
-          onClick={handleOnButtonClickMaterial}
-          children={t(
-            "Process.Service.ServiceDetails.components.manufacturing.button.edit"
-          )}
-        />
-        <Button
-          title={t(
-            "Process.Service.ServiceDetails.components.manufacturing.button.deleteMaterial"
-          )}
-          size="sm"
-          variant="text"
-          onClick={() => handleOnButtonClickDeleteMaterial(material.id)}
-          children={t(
-            "Process.Service.ServiceDetails.components.manufacturing.button.delete"
-          )}
-        />
+        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+          <Button
+            title={t(
+              "Process.Service.ServiceDetails.components.manufacturing.button.editMaterial"
+            )}
+            size="sm"
+            variant="secondary"
+            onClick={handleOnButtonClickMaterial}
+            children={t(
+              "Process.Service.ServiceDetails.components.manufacturing.button.edit"
+            )}
+          />
+          <Button
+            title={t(
+              "Process.Service.ServiceDetails.components.manufacturing.button.deleteMaterial"
+            )}
+            size="sm"
+            variant="text"
+            onClick={() => handleOnButtonClickDeleteMaterial(material.id)}
+            children={t(
+              "Process.Service.ServiceDetails.components.manufacturing.button.delete"
+            )}
+          />
+        </ProcessStatusGate>
       </Container>
+      <Modal
+        open={edit !== undefined}
+        closeModal={() => setEdit(undefined)}
+        modalKey="editProcessServiceMaterial"
+      ></Modal>
     </ServiceDetailsCard>
   );
 };

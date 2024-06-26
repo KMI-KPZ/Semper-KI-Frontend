@@ -78,7 +78,7 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
 
   return (
     <Container direction="col" width="full">
-      {models !== undefined && models.length > 0 ? (
+      {/* {models !== undefined && models.length > 0 ? (
         <Container direction="col" width="full">
           <Heading variant="h2" className="w-full text-left">
             {t("Service.Manufacturing.Model.Model.selected")}
@@ -109,7 +109,7 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
               : null}
           </Container>
         </Container>
-      ) : null}
+      ) : null} */}
 
       <Container width="full" direction="col">
         <Heading variant="h2" className="w-full text-left">

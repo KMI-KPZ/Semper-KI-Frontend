@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
-import { Process } from "@/api/Process/Querys/useGetProcess";
+import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import Collapsible from "@/components/Collapsible/Collapsible";
 import ProcessMenu from "@/components/Process/Menu";
 import ProcessTitleForm from "./TitleForm";
@@ -84,7 +84,16 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
             <Text variant="strong" className="w-40">
               {t("Process.components.Info.status")}
             </Text>
-            <Text>{process.processStatus}</Text>
+            <Text>
+              {t(
+                `enum.ProcessStatus.${
+                  ProcessStatus[
+                    process.processStatus
+                  ] as keyof typeof ProcessStatus
+                }`
+              )}
+              {` (${process.processStatus})`}
+            </Text>
           </Container>
           <Container className="w-1/3 md:w-1/3" justify="start">
             <Text variant="strong" className="w-40">

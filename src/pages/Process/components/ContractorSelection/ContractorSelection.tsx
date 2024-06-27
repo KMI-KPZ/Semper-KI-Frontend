@@ -38,18 +38,19 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
   const { process } = useDefinedProcess();
   const { user } = useAuthorizedUser();
   const contractors = useGetContractors(process.processID);
+  const updateProcess = useUpdateProcess();
 
   const standardAddress: UserAddressProps | undefined =
     user.details.addresses.find((address) => address.standard === true);
+
+  const [editContractor, setEditContractor] = useState(false);
+  const [addressesEqual, setAddressesEqual] = useState(true);
+  const [deliverAddress, setDeliverAddress] = useState(standardAddress);
+  const [billingAddress, setBillingAddress] = useState(standardAddress);
   const currentContractor = contractors.data?.find(
     (contractor) =>
       contractor.hashedID === process.processDetails.provisionalContractor
   );
-
-  const [editContractor, setEditContractor] = useState(false);
-  const [deliverAddress, setDeliverAddress] = useState(standardAddress);
-  const [billingAddress, setBillingAddress] = useState(standardAddress);
-  const [addressesEqual, setAddressesEqual] = useState(true);
 
   const handleOnChangeAddressEqual = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -72,7 +73,24 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
       setDeliverAddress(standardAddress);
     }
   };
+  const saveAddresses = () => {
+    updateProcess.mutate({
+      processIDs: [process.processID],
+      updates: {
+        changes: {
+          processDetails: {
+            clientBillingAddress: billingAddress,
+            clientDeliverAddress:
+              deliverAddress === undefined ? billingAddress : deliverAddress,
+          },
+        },
+      },
+    });
+  };
 
+  const handleOnClickButtonSelectContractor = () => {
+    setEditContractor(true);
+  };
   const handleOnClickButtonEditContractor = () => {
     setEditContractor(true);
   };
@@ -119,7 +137,7 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
             <Container width="full" direction="col">
               <Button
                 size="sm"
-                onClick={handleOnClickButtonEditContractor}
+                onClick={handleOnClickButtonSelectContractor}
                 variant="primary"
                 title={t(
                   "Process.components.ContractorSelection.components.ContractorList.button.select"
@@ -135,7 +153,17 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
               )}
             </Text>
           ) : (
-            <ContractorCard contractor={currentContractor} />
+            <Container width="full" direction="col">
+              <ContractorCard contractor={currentContractor} />
+              <Button
+                size="sm"
+                onClick={handleOnClickButtonEditContractor}
+                variant="secondary"
+                title={t(
+                  "Process.components.ContractorSelection.components.ContractorList.button.edit"
+                )}
+              />
+            </Container>
           )}
         </Container>
         <Container direction="col" width="full">

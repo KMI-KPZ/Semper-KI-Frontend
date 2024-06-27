@@ -17,12 +17,13 @@ interface Props<Item> {
   item: Item;
   openItemView(item: Item): void;
   children?: React.ReactNode;
+  selected: boolean;
 }
 
 const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
   props: Props<Item>
 ) => {
-  const { item, openItemView, children } = props;
+  const { item, openItemView, children, selected } = props;
 
   const { t } = useTranslation();
 
@@ -35,7 +36,9 @@ const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
 
   return (
     <Container
-      className="w-fit min-w-[350px] max-w-[32%] gap-0 overflow-clip rounded-xl border-2 bg-white"
+      className={`w-fit min-w-[350px] max-w-[32%] gap-0 overflow-clip rounded-xl border-2 bg-white ${
+        selected ? "border-blau-500" : ""
+      }`}
       direction="col"
     >
       <img

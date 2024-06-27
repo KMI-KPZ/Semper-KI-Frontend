@@ -18,6 +18,7 @@ import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
 import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
 import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
+import useModal from "@/hooks/useModal";
 
 interface Props {
   filters: FilterItemProps[];
@@ -41,11 +42,11 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const { process } = useManufacturingProcess();
   const { project } = useProject();
   const [selectedMaterials, setSelectedMaterials] = useState<MaterialProps[]>(
-    process.serviceDetails.materials || []
+    materials || []
   );
+  const { deleteModal } = useModal();
   const materialsQuery = useGetMaterials(filters);
   const setMaterial = useSetMaterial();
-  const deleteMaterial = useDeleteMaterial();
 
   const openMaterialView = (material: MaterialProps) => {
     setState((prevState) => ({ ...prevState, modalOpen: true, material }));
@@ -60,12 +61,18 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
   };
 
   const handleOnClickButtonSave = () => {
-    setMaterial.mutate({
-      projectID: project.projectID,
-      processID: process.processID,
-      materials: selectedMaterials,
-    });
-    navigate("../../..");
+    setMaterial.mutate(
+      {
+        projectID: project.projectID,
+        processID: process.processID,
+        materials: selectedMaterials,
+      },
+      {
+        onSuccess(data, variables, context) {
+          deleteModal("ServiceRoutes");
+        },
+      }
+    );
   };
 
   const handleOnButtonClickSelect = (material: MaterialProps) => {

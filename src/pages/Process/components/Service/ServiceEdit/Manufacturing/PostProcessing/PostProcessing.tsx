@@ -20,6 +20,9 @@ import { useProject } from "@/hooks/Project/useProject";
 import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
 import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import { Navigate, useNavigate } from "react-router-dom";
+import logger from "@/hooks/useLogger";
+import { is } from "@react-three/fiber/dist/declarations/src/core/utils";
+import useModal from "@/hooks/useModal";
 
 interface Props {
   filters: FilterItemProps[];
@@ -35,9 +38,10 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const [selectedPostProcessing, setSelectedPostProcessing] = useState<
     PostProcessingProps[]
-  >(process.serviceDetails.postProcessings || []);
+  >(postProcessings || []);
   const loadedPostProcessings = useGetPostProcessigns(filters);
   const setPostProcessing = useSetPostProcessing();
+  const { deleteModal } = useModal();
 
   const handleOnClickButtonSave = () => {
     setPostProcessing.mutate(
@@ -47,8 +51,8 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
         postProcessings: selectedPostProcessing,
       },
       {
-        onSuccess: () => {
-          navigate("../../..");
+        onSuccess(data, variables, context) {
+          deleteModal("ServiceRoutes");
         },
       }
     );
@@ -60,7 +64,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
 
   const handleOnClickButtonDeselect = (postProcessing: PostProcessingProps) => {
     setSelectedPostProcessing(
-      selectedPostProcessing.filter((item) => item !== postProcessing)
+      selectedPostProcessing.filter((item) => item.id !== postProcessing.id)
     );
   };
 
@@ -83,18 +87,26 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
     a: PostProcessingProps,
     b: PostProcessingProps
   ) => {
-    if (selectedPostProcessing.includes(a)) {
+    if (isPostProcessingSelected(a)) {
       return -1;
     }
-    if (selectedPostProcessing.includes(b)) {
+    if (isPostProcessingSelected(b)) {
       return 1;
     }
     return 0;
   };
 
   const isPostProcessingSelected = (postProcessing: PostProcessingProps) => {
-    return selectedPostProcessing.includes(postProcessing);
+    return (
+      selectedPostProcessing.find((m) => m.id === postProcessing.id) !==
+      undefined
+    );
   };
+
+  logger(
+    "ManufacturingPostProcessings | selectedPostProcessing |",
+    selectedPostProcessing
+  );
 
   return (
     <Container direction="col" width="full">
@@ -120,6 +132,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
                 .sort(sortSelectedPostProcessingsFirst)
                 .map((postProcessing: PostProcessingProps, index: number) => (
                   <ProcessPostProcessingCard
+                    selected={isPostProcessingSelected(postProcessing)}
                     key={index}
                     item={postProcessing}
                     openItemView={() => {}}

@@ -18,6 +18,7 @@ import { useFieldArray, useForm } from "react-hook-form";
 import ManufacturingModelUploadForm from "./components/Form";
 import ModelPreview from "@/pages/Test/STLViewer";
 import { Navigate, useNavigate } from "react-router-dom";
+import useModal from "@/hooks/useModal";
 
 interface Props {}
 
@@ -34,6 +35,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
   const navigate = useNavigate();
+  const { deleteModal } = useModal();
 
   const { process } = useProcess();
   const { project } = useProject();
@@ -130,8 +132,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
       },
       {
         onSuccess(data, variables, context) {
-          setModels([]);
-          navigate("../../..");
+          deleteModal("ServiceRoutes");
         },
       }
     );

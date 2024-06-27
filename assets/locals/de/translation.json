@@ -923,7 +923,8 @@
             "noContractorFound": "Kein Auftragnehmer gefunden",
             "button": {
               "select": "Auftragnehmer auswählen",
-              "save": "Speichern"
+              "save": "Speichern",
+              "edit": "Auftragnehmer bearbeiten"
             }
           }
         },

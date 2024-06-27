@@ -23,20 +23,13 @@ const StatusWizardCard: React.FC<StatusWizardCardProps> = (props) => {
   const { item, process } = props;
   const { t } = useTranslation();
 
-  const [inView, setInView] = useState(isCardInView(item));
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // const newInView = isCardInView(item);
-      // if (item.text === "header" || item.text === "draft")
-      //   logger("handleScroll", item.text, newInView, inView);
-
-      // if (newInView !== inView) {
-      //   logger("change", item.text, newInView, inView);
-      // setInView(newInView);
       setInView(isCardInView(item));
-      // }
     };
+    setInView(isCardInView(item));
 
     window.addEventListener("scroll", handleScroll);
 

@@ -1791,7 +1791,9 @@
             "button": {
               "upload": "Modelle Hochladen",
               "delete": "Löschen",
-              "edit": "Bearbeiten"
+              "edit": "Bearbeiten",
+              "save": "Speichern",
+              "saveAll": "Auf alle Modelle anwenden"
             }
           }
         },

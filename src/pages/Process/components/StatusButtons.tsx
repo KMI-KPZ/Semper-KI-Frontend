@@ -39,6 +39,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
             startIcon={button.icon}
             onClick={() => handleOnClickButton(button, process.processID)}
             title={button.title}
+            active={button.active}
           />
           // </PermissionGate>
         ))}

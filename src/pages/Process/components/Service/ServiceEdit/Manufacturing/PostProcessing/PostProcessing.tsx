@@ -129,7 +129,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
             <Container width="full" wrap="wrap" direction="row" align="start">
               {loadedPostProcessings.data
                 .filter(filterBySearch)
-                .sort(sortSelectedPostProcessingsFirst)
+                // .sort(sortSelectedPostProcessingsFirst)
                 .map((postProcessing: PostProcessingProps, index: number) => (
                   <ProcessPostProcessingCard
                     selected={isPostProcessingSelected(postProcessing)}

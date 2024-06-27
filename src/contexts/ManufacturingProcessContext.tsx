@@ -24,7 +24,7 @@ export const ManufacturingProcessContextProvider: React.FC<
 > = (props) => {
   const { process, children } = props;
 
-  logger("ManufacturingProcessContextProvider", process, children);
+  // logger("ManufacturingProcessContextProvider", process, children);
 
   return (
     <ManufacturingProcessContext.Provider value={{ process }}>

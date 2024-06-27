@@ -18,7 +18,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
 
   const show = process.processStatus >= start && process.processStatus < end;
 
-  return show ? (
+  return show && getProcessStatusButtons(process).length > 0 ? (
     <Container width="full" direction="col">
       <Divider />
       <Container width="full" direction="row">

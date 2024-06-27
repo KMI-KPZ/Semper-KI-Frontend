@@ -37,6 +37,7 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
       align="start"
       justify="center"
       wrap="wrap"
+      className="pb-5"
     >
       {services.data.map((service, index) => (
         <ServiceCard

@@ -6,7 +6,7 @@ import { PostProcessingProps } from "../Querys/useGetPostProcessigns";
 interface SetPostProcessingProps {
   processID: string;
   projectID: string;
-  postProcessing: PostProcessingProps;
+  postProcessings: PostProcessingProps[];
 }
 
 const useSetPostProcessing = () => {

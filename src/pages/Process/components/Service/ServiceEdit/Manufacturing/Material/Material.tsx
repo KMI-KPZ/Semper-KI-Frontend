@@ -40,12 +40,17 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const { process } = useManufacturingProcess();
   const { project } = useProject();
+  const [selectedMaterials, setSelectedMaterials] = useState<MaterialProps[]>(
+    process.serviceDetails.materials || []
+  );
   const materialsQuery = useGetMaterials(filters);
   const setMaterial = useSetMaterial();
   const deleteMaterial = useDeleteMaterial();
+
   const openMaterialView = (material: MaterialProps) => {
     setState((prevState) => ({ ...prevState, modalOpen: true, material }));
   };
+
   const closeMaterialView = () => {
     setState((prevState) => ({
       ...prevState,
@@ -54,25 +59,22 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
     }));
   };
 
-  const handleOnButtonClickSelect = (material: MaterialProps) => {
+  const handleOnClickButtonSave = () => {
     setMaterial.mutate({
       projectID: project.projectID,
       processID: process.processID,
-      material,
+      materials: selectedMaterials,
     });
-  };
-  const handleOnButtonClickDelete = (materialID: string) => {
-    deleteMaterial.mutate({
-      projectID: project.projectID,
-      processID: process.processID,
-      materialID,
-    });
+    navigate("../../..");
   };
 
-  const filterSelectedMaterial = (material: MaterialProps) => {
-    return (
-      process.serviceDetails.materials?.find((m) => m.id === material.id) ===
-      undefined
+  const handleOnButtonClickSelect = (material: MaterialProps) => {
+    setSelectedMaterials((prevState) => [...prevState, material]);
+  };
+
+  const handleOnButtonClickDeselect = (materialID: string) => {
+    setSelectedMaterials((prevState) =>
+      prevState.filter((material) => material.id !== materialID)
     );
   };
 
@@ -90,67 +92,67 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
     return false;
   };
 
+  const isMaterialSelected = (material: MaterialProps): boolean => {
+    return selectedMaterials.find((m) => m.id === material.id) !== undefined;
+  };
+
+  const sortSelectedMaterialsFirst = (a: MaterialProps, b: MaterialProps) => {
+    if (isMaterialSelected(a)) {
+      return -1;
+    }
+    if (isMaterialSelected(b)) {
+      return 1;
+    }
+    return 0;
+  };
+
   return (
     <Container direction="col" width="full">
-      {/* {materials !== undefined && materials.length > 0 ? (
-        <Container direction="col" width="full">
-          <Heading variant="h2" className="w-full text-left">
-            {t("Service.Manufacturing.Material.Material.selected")}
-          </Heading>
-          <Container width="full" wrap="wrap">
-            {materials.length > 0
-              ? materials
-                  .filter((material, index) => filterBySearch(material))
-                  .map((material: MaterialProps, index: number) => {
-                    return (
-                      <ProcessMaterialCard
-                        material={material}
-                        key={index}
-                        openMaterialView={openMaterialView}
-                      >
-                        <Container direction="row">
-                          <Button
-                            variant="secondary"
-                            onClick={() =>
-                              handleOnButtonClickDelete(material.id)
-                            }
-                            title={t(
-                              "Service.Manufacturing.Material.Material.button.delete"
-                            )}
-                          />
-                        </Container>
-                      </ProcessMaterialCard>
-                    );
-                  })
-              : null}
-          </Container>
-        </Container>
-      ) : null} */}
       <Container width="full" direction="col">
-        <Heading variant="h2" className="w-full text-left">
-          {t("Service.Manufacturing.Material.Material.available")}
-        </Heading>
+        <Container direction="row" width="full" justify="between">
+          <Heading variant="h2">
+            {t("Service.Manufacturing.Material.Material.available")}
+          </Heading>
+          <Button
+            variant="primary"
+            onClick={handleOnClickButtonSave}
+            title={t("Service.Manufacturing.Material.Material.button.save")}
+          />
+        </Container>
         <LoadingSuspense query={materialsQuery}>
           {materialsQuery.data !== undefined &&
           materialsQuery.data.length > 0 ? (
             <Container width="full" wrap="wrap" direction="row" align="start">
               {materialsQuery.data
-                .filter(filterSelectedMaterial)
                 .filter(filterBySearch)
+                .sort(sortSelectedMaterialsFirst)
                 .map((material: MaterialProps, index: number) => (
                   <ProcessMaterialCard
                     material={material}
                     key={index}
                     openMaterialView={openMaterialView}
+                    selected={isMaterialSelected(material)}
                   >
                     <Container direction="row">
-                      <Button
-                        variant="secondary"
-                        onClick={() => handleOnButtonClickSelect(material)}
-                        title={t(
-                          "Service.Manufacturing.Material.Material.button.select"
-                        )}
-                      />
+                      {isMaterialSelected(material) ? (
+                        <Button
+                          variant="primary"
+                          onClick={() =>
+                            handleOnButtonClickDeselect(material.id)
+                          }
+                          title={t(
+                            "Service.Manufacturing.Material.Material.button.deselect"
+                          )}
+                        />
+                      ) : (
+                        <Button
+                          variant="secondary"
+                          onClick={() => handleOnButtonClickSelect(material)}
+                          title={t(
+                            "Service.Manufacturing.Material.Material.button.select"
+                          )}
+                        />
+                      )}
                     </Container>
                   </ProcessMaterialCard>
                 ))}

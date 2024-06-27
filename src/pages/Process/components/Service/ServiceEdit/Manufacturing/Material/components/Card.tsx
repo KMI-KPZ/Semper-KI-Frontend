@@ -9,12 +9,13 @@ import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Quer
 interface Props {
   material: MaterialProps;
   openMaterialView(material: MaterialProps): void;
+  selected: boolean;
 }
 
 export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
   props
 ) => {
-  const { material, openMaterialView, children } = props;
+  const { material, openMaterialView, children, selected } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { updatedService } = useService();
@@ -36,7 +37,9 @@ export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
   };
   return (
     <Container
-      className="w-fit min-w-[350px] max-w-[32%] gap-0 overflow-clip rounded-xl border-2 bg-white"
+      className={`w-fit min-w-[350px] max-w-[32%] gap-0 overflow-clip rounded-xl border-2 bg-white ${
+        selected ? "border-blau-500" : ""
+      }`}
       direction="col"
     >
       <img

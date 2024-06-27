@@ -19,7 +19,6 @@ export const ServiceManufacturing: React.FC = () => {
   const [searchText, setSearchText] = useState<string>("");
   const { filtersQuery } = useFilter();
 
-  logger("ServiceManufacturing", process);
   return (
     <Container
       width="none"

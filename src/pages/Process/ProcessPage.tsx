@@ -29,16 +29,18 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
         <StatusWizard process={process} />
         <Container direction="col" width="full">
           <Service process={process} />
-          <AuthorizedUserRouteOutlet>
-            <DefinedProcessOutlet>
-              <ProcessStatusGate start={ProcessStatus.SERVICE_COMPLETED}>
-                <ContractorSelection />
-              </ProcessStatusGate>
-              <ProcessStatusGate start={ProcessStatus.CONTRACTOR_SELECTED}>
-                <ProcessVerify />
-              </ProcessStatusGate>
-            </DefinedProcessOutlet>
-          </AuthorizedUserRouteOutlet>
+          <ProcessStatusGate start={ProcessStatus.SERVICE_COMPLETED}>
+            <AuthorizedUserRouteOutlet>
+              <DefinedProcessOutlet>
+                <ProcessStatusGate start={ProcessStatus.SERVICE_COMPLETED}>
+                  <ContractorSelection />
+                </ProcessStatusGate>
+                <ProcessStatusGate start={ProcessStatus.CONTRACTOR_SELECTED}>
+                  <ProcessVerify />
+                </ProcessStatusGate>
+              </DefinedProcessOutlet>
+            </AuthorizedUserRouteOutlet>
+          </ProcessStatusGate>
         </Container>
       </Container>
     </Container>

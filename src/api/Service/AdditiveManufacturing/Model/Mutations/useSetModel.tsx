@@ -6,7 +6,7 @@ import { ModelProps } from "react-stl-viewer";
 interface SetModelProps {
   projectID: string;
   processID: string;
-  model: ModelProps;
+  models: ModelProps[];
 }
 
 const useSetModel = () => {

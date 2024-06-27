@@ -17,6 +17,7 @@ import { useProject } from "@/hooks/Project/useProject";
 import { useFieldArray, useForm } from "react-hook-form";
 import ManufacturingModelUploadForm from "./components/Form";
 import ModelPreview from "@/pages/Test/STLViewer";
+import { Navigate, useNavigate } from "react-router-dom";
 
 interface Props {}
 
@@ -32,6 +33,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
+  const navigate = useNavigate();
 
   const { process } = useProcess();
   const { project } = useProject();
@@ -129,6 +131,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
       {
         onSuccess(data, variables, context) {
           setModels([]);
+          navigate("../../..");
         },
       }
     );

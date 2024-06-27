@@ -68,13 +68,13 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
     return false;
   };
 
-  const handleOnButtonClickEdit = (index: number) => {
-    navigate(
-      `edit/${
-        models !== undefined && models.length > 0 ? models[index].id : ""
-      }`
-    );
-  };
+  // const handleOnButtonClickEdit = (index: number) => {
+  //   navigate(
+  //     `edit/${
+  //       models !== undefined && models.length > 0 ? models[index].id : ""
+  //     }`
+  //   );
+  // };
 
   return (
     <Container direction="col" width="full">

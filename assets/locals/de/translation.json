@@ -1708,7 +1708,9 @@
           },
           "button": {
             "select": "Auswählen",
-            "delete": "Löschen"
+            "deselect": "Abwählen",
+            "delete": "Löschen",
+            "save": "Speichern"
           }
         }
       },
@@ -1782,7 +1784,7 @@
             },
             "loading": "Model wird hochgeladen",
             "card": {
-              "title": "Modell Hochladen",
+              "title": "Modelle Hochladen",
               "text": "per Drag & Drop oder Klick"
             },
             "button": {
@@ -1796,8 +1798,8 @@
           "selected": "Ausgewählte Modelle",
           "available": "Verfügbare Modelle",
           "upload": {
-            "img": "Modell Hochladen",
-            "title": "Modell Hochladen",
+            "img": "Modelle Hochladen",
+            "title": "Modelle Hochladen",
             "button": "zum Upload"
           },
           "error": {
@@ -1844,7 +1846,9 @@
           },
           "button": {
             "delete": "Entfernen",
-            "select": "Auswählen"
+            "deselect": "Abwählen",
+            "select": "Auswählen",
+            "save": "Speichern"
           }
         }
       },

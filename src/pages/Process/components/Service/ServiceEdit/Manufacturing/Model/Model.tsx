@@ -78,44 +78,6 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
 
   return (
     <Container direction="col" width="full">
-      {/* {models !== undefined && models.length > 0 ? (
-        <Container direction="col" width="full">
-          <Heading variant="h2" className="w-full text-left">
-            {t("Service.Manufacturing.Model.Model.selected")}
-          </Heading>
-          <Container width="full" wrap="wrap">
-            {models.length > 0
-              ? models
-                  .filter((model, index) => filterBySearch(model))
-                  .map((model: ModelProps, index: number) => {
-                    return (
-                      <ProcessModelCard
-                        model={model}
-                        key={index}
-                        openModelView={openModelView}
-                      >
-                        <Container direction="row">
-                          <Button
-                            variant="secondary"
-                            onClick={() => handleOnButtonClickEdit(index)}
-                            title={t(
-                              "Service.Manufacturing.Model.Upload.Upload.button.edit"
-                            )}
-                          />
-                        </Container>
-                      </ProcessModelCard>
-                    );
-                  })
-              : null}
-          </Container>
-        </Container>
-      ) : null} */}
-
-      <Container width="full" direction="col">
-        <Heading variant="h2" className="w-full text-left">
-          {t("Service.Manufacturing.Model.Model.upload.title")}
-        </Heading>
-      </Container>
       <ProcessModelUpload />
       <Container width="full" direction="col">
         <Heading variant="h2" className="w-full text-left">

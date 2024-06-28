@@ -16,9 +16,7 @@ const useGetUser = (useUserIsLoggedInQuery: UseQueryResult<boolean, Error>) => {
           organization: userData.organization,
           details: {
             email: userData.details.email,
-            addresses: [
-              { ...userData.details.address, standard: true, id: "1" },
-            ],
+            addresses: [...userData.details.addresses],
           },
           accessedWhen: new Date(userData.accessedWhen),
           createdWhen: new Date(userData.createdWhen),

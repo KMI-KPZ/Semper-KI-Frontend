@@ -3,6 +3,7 @@ import { UseMutationResult } from "@tanstack/react-query";
 import { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "./useToast";
+import { NewUserAddressProps } from "@/api/User/Mutations/useCreateAddress";
 
 interface ReturnProps {
   isLoggedIn: boolean;
@@ -34,18 +35,6 @@ export interface UserDetailsProps {
 
 export interface UpdateUserProps {
   address?: UserAddressProps;
-}
-
-export interface NewUserAddressProps {
-  firstName: string;
-  lastName: string;
-  company?: string;
-  street: string;
-  houseNumber: number;
-  zipcode: string;
-  city: string;
-  country: string;
-  standard: boolean;
 }
 
 export type UserAddressProps = {

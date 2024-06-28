@@ -45,8 +45,8 @@ const AddressSelection: React.FC<AddressSelectionProps> = (props) => {
         )}
       </Heading>
       <Container width="full" direction="row" wrap="wrap">
-        {user.details.addresses.map((address) => (
-          <AddressCard address={address}>
+        {user.details.addresses.map((address, index) => (
+          <AddressCard address={address} key={index}>
             <Button
               size="sm"
               variant="text"

@@ -1,14 +1,25 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { NewUserAddressProps } from "@/hooks/useUser";
+
+export interface NewUserAddressProps {
+  standard: boolean;
+  country: string;
+  city: string;
+  zipcode: string;
+  houseNumber: number;
+  street: string;
+  company?: string;
+  lastName: string;
+  firstName: string;
+}
 
 const useCreateAddress = () => {
   const queryClient = useQueryClient();
   const createAddress = async (address: NewUserAddressProps) =>
     authorizedCustomAxios
       .post(`${process.env.VITE_HTTP_API_URL}/public/createAddress/`, {
-        address,
+        ...address,
       })
       .then((response) => {
         logger("useCreateAddress | createAddress ✅ |", response);

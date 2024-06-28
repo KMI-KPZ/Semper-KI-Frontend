@@ -42,7 +42,7 @@ const Profile: React.FC<Props> = (props) => {
   };
 
   return (
-    <Container className="md:max-w-2xl" direction="col" width="full">
+    <Container className="" direction="col" width="full">
       <Heading
         variant="h1"
         className="flex w-full items-center justify-center bg-white  p-5"
@@ -96,7 +96,7 @@ const Profile: React.FC<Props> = (props) => {
         ) : null}
         <Heading variant="h2">{t("Profile.address.header")}</Heading>
         <Divider />
-        <Container width="full" justify="start" align="center">
+        <Container width="full" justify="start" align="start" wrap="wrap">
           {user.details.addresses.length > 0 ? (
             user.details.addresses.map((address, index) => (
               <AddressCard key={index} address={address} />

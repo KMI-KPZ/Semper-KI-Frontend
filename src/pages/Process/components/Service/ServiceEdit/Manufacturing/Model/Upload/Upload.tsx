@@ -16,9 +16,6 @@ import { Navigate, useNavigate } from "react-router-dom";
 import useModal from "@/hooks/useModal";
 import UploadModelCard from "./components/ModelCard";
 import { FieldArrayWithId, useFieldArray, useForm } from "react-hook-form";
-import logger from "@/hooks/useLogger";
-import { watch } from "fs";
-
 interface Props {}
 
 export interface ProcessModelUploadFormProps {
@@ -37,7 +34,6 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
-  const navigate = useNavigate();
   const { deleteModal } = useModal();
 
   const { process } = useProcess();
@@ -173,8 +169,54 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   };
 
   return (
-    <form className="w-full">
+    <form className="flex w-full flex-col items-center justify-start gap-5">
+      <Container width="full" direction="row" justify="between">
+        <Heading variant="h2" className="w-full text-left">
+          {t("Service.Manufacturing.Model.Model.upload.title")}
+        </Heading>
+        {fields.length > 0 ? (
+          <Container
+            width="full"
+            direction="row"
+            justify="end"
+            // className="justify-end"
+          >
+            {errors.models !== undefined ? (
+              <Text variant="body" className="text-red-500">
+                {t(`Service.Manufacturing.Model.Upload.Upload.error.licenses`)}
+              </Text>
+            ) : null}
+            <Button
+              loading={uploadModels.isLoading}
+              variant="primary"
+              title={t(
+                `Service.Manufacturing.Model.Upload.Upload.button.upload`
+              )}
+              onClick={handleSubmit(sendModels)}
+            />
+          </Container>
+        ) : null}
+      </Container>
       <Container width="full" direction="col">
+        {fields.length > 0 ? (
+          <Container width="full" direction="col">
+            <Container width="full" direction="row" wrap="wrap">
+              {fields.map((model, index) => {
+                return (
+                  <UploadModelCard
+                    errors={errors}
+                    deleteModel={deleteModel}
+                    saveForAll={saveForAll}
+                    key={model.id}
+                    index={index}
+                    model={model}
+                    register={register}
+                  />
+                );
+              })}
+            </Container>
+          </Container>
+        ) : null}
         <a
           className={`flex w-full grow flex-col items-center justify-center gap-2  rounded-xl border-2
         bg-white p-2 text-black transition
@@ -203,38 +245,6 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
           className="hidden"
           multiple
         />
-        {fields.length > 0 ? (
-          <Container width="full" direction="col">
-            <Container width="full" direction="row" wrap="wrap">
-              {fields.map((model, index) => {
-                return (
-                  <UploadModelCard
-                    errors={errors}
-                    deleteModel={deleteModel}
-                    saveForAll={saveForAll}
-                    key={model.id}
-                    index={index}
-                    model={model}
-                    register={register}
-                  />
-                );
-              })}
-            </Container>
-            {errors.models !== undefined ? (
-              <Text variant="body" className="text-red-500">
-                {t(`Service.Manufacturing.Model.Upload.Upload.error.licenses`)}
-              </Text>
-            ) : null}
-            <Button
-              loading={uploadModels.isLoading}
-              variant="primary"
-              title={t(
-                `Service.Manufacturing.Model.Upload.Upload.button.upload`
-              )}
-              onClick={handleSubmit(sendModels)}
-            />
-          </Container>
-        ) : null}
       </Container>
     </form>
   );

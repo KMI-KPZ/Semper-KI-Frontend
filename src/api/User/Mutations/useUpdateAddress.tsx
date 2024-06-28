@@ -7,8 +7,8 @@ const useUpdateAddress = () => {
   const queryClient = useQueryClient();
   const updateAddress = async (address: UserAddressProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/updateAddress/`, {
-        address,
+      .patch(`${process.env.VITE_HTTP_API_URL}/public/updateAddress/`, {
+        ...address,
       })
       .then((response) => {
         logger("useUpdateAddress | updateAddress ✅ |", response);

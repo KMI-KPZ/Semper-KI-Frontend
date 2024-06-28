@@ -52,7 +52,7 @@ const AddressCard: React.FC<PropsWithChildren<AddressCardProps>> = (props) => {
     <Container
       width="fit"
       direction="col"
-      className="gap-0 overflow-clip rounded-lg border-2"
+      className="gap-0 overflow-clip rounded-lg border-2 bg-white"
     >
       {select !== undefined ? (
         <>

@@ -17,75 +17,40 @@ import {
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ProcessStatusButtons from "../StatusButtons";
-import useUser, { UserAddressProps } from "@/hooks/useUser";
-import useAuthorizedUser from "@/hooks/useAuthorizedUser";
-import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
-import { useForm } from "react-hook-form";
-import ContractorSelectionAddressCard from "./components/AddressCard";
-import logger from "@/hooks/useLogger";
+import { UserAddressProps } from "@/hooks/useUser";
 import ProcessContractorList from "./components/ContractorList";
 import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 import ContractorCard from "./components/ContractorCard";
 import useGetContractors from "@/api/Project/Querys/useGetContractors";
+import ContractorSelectionAddressCard from "./components/AddressCard";
 
 interface ContractorSelectionProps {}
 
 export type ProcessAddressType = "billing" | "delivery";
 
+export interface ProcessAddressFormData {
+  deliverAddress: UserAddressProps;
+  billingAddress: UserAddressProps;
+}
+
 const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { process } = useDefinedProcess();
-  const { user } = useAuthorizedUser();
   const contractors = useGetContractors(process.processID);
-  const updateProcess = useUpdateProcess();
-
-  const standardAddress: UserAddressProps | undefined =
-    user.details.addresses.find((address) => address.standard === true);
 
   const [editContractor, setEditContractor] = useState(false);
-  const [addressesEqual, setAddressesEqual] = useState(true);
-  const [deliverAddress, setDeliverAddress] = useState(standardAddress);
-  const [billingAddress, setBillingAddress] = useState(standardAddress);
+
   const currentContractor = contractors.data?.find(
     (contractor) =>
       contractor.hashedID === process.processDetails.provisionalContractor
   );
 
-  const handleOnChangeAddressEqual = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setAddressesEqual(event.target.checked);
-  };
+  const [showDeliveryAddress, setShowDeliveryAddress] =
+    useState<boolean>(false);
 
-  const setAddress = (type: ProcessAddressType, address: UserAddressProps) => {
-    if (type === "billing") {
-      setBillingAddress(address);
-    } else {
-      setDeliverAddress(address);
-    }
-  };
-
-  const resetAddress = (type: ProcessAddressType) => {
-    if (type === "billing") {
-      setBillingAddress(standardAddress);
-    } else {
-      setDeliverAddress(standardAddress);
-    }
-  };
-  const saveAddresses = () => {
-    updateProcess.mutate({
-      processIDs: [process.processID],
-      updates: {
-        changes: {
-          processDetails: {
-            clientBillingAddress: billingAddress,
-            clientDeliverAddress:
-              deliverAddress === undefined ? billingAddress : deliverAddress,
-          },
-        },
-      },
-    });
+  const onChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShowDeliveryAddress(!e.target.checked);
   };
 
   const handleOnClickButtonSelectContractor = () => {
@@ -168,21 +133,15 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
         </Container>
         <Container direction="col" width="full">
           <ContractorSelectionAddressCard
-            resetAddress={resetAddress}
-            address={billingAddress}
-            setAddress={setAddress}
+            onChangeCheckBox={onChangeCheckBox}
+            showDeliveryAddress={showDeliveryAddress}
             type={"billing"}
-            addressesEqual={addressesEqual}
-            handleOnChangeAddressEqual={handleOnChangeAddressEqual}
           />
-          {!addressesEqual ? (
+          {showDeliveryAddress ? (
             <ContractorSelectionAddressCard
-              resetAddress={resetAddress}
-              setAddress={setAddress}
-              address={deliverAddress}
+              onChangeCheckBox={onChangeCheckBox}
+              showDeliveryAddress={showDeliveryAddress}
               type={"delivery"}
-              addressesEqual={addressesEqual}
-              handleOnChangeAddressEqual={handleOnChangeAddressEqual}
             />
           ) : null}
         </Container>

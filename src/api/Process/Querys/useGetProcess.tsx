@@ -21,7 +21,8 @@ import { objectToArray } from "@/services/utils";
 export interface ProcessDetailsProps {
   provisionalContractor?: string;
   title?: string;
-  clientAddress?: UserAddressProps;
+  clientBillingAddress?: UserAddressProps;
+  clientDeliverAddress?: UserAddressProps;
   amount: number;
 }
 

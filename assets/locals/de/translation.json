@@ -1229,7 +1229,7 @@
         },
         "ContractorSelection": {
           "address": {
-            "sameAddress": "Rechnungsadresse gleich Lieferadresse",
+            "sameAddress": "Lieferadresse gleich Rechnungsadresse",
             "title": "Liefer und Rechungsadresse",
             "titleDeliver": "Lieferadresse",
             "titleBilling": "Rechnungsadresse",

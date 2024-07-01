@@ -27,6 +27,9 @@ const ProjectContextProvider: React.FC<
 > = (props) => {
   const { project, children } = props;
 
+  console.log("ProjectContextProvider: ");
+  console.log(props);
+
   return (
     <ProjectContext.Provider
       value={{

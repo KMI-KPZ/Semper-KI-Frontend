@@ -40,6 +40,9 @@ const Home: React.FC<HomeProps> = (props) => {
   const handleOnClickButtonDemonstrator = () => {
     createProject.mutate("test");
   };
+  // useChatbot({
+  //   topic: [ t("chatbot.home.evaluate")]
+  // })
 
   return (
     <div

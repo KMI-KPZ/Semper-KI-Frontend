@@ -20,6 +20,8 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
 
   const services = useGetServices();
 
+  const chatbot = useChatbot();
+
   const handleOnClickCard = (type: ServiceType) => {
     // logger("ServiceCards.tsx", "handleOnClickCard", "type", type);
     updateProcess.mutate({

@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import { Process } from "@/api/Process/Querys/useGetProcess";
+import * as process from "process";
 
 interface ProcessContextProviderProps {
   process: Process;
@@ -32,6 +33,10 @@ const ProcessContextProvider: React.FC<
   PropsWithChildren<ProcessContextProviderProps>
 > = (props) => {
   const { process, children } = props;
+
+  console.log("ProcessContext: ");
+  console.log(process)
+  console.log(children)
   return (
     <ProcessContext.Provider value={{ process }}>
       {children}

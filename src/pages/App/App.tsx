@@ -21,7 +21,6 @@ import ResKriVer from "../ResKriVer/ResKriVer";
 import { OrganizationRouteOutlet } from "@/routeOutlets/OrganizationOutlet";
 import { AdminRouteOutlet } from "@/routeOutlets/AdminOutlet";
 import { ToastContainer } from "react-toastify";
-import AdminRoutes from "@/routes/AdminRoutes";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import { ContentBox } from "@component-library/index";
 import RedirectLogin from "../Login/RedirectLogin";
@@ -34,11 +33,13 @@ import Projects from "../Projects/Projects";
 import ProjectOutlet from "@/routeOutlets/ProjectOutlet";
 import ProjectPage from "../Project/ProjectPage";
 import ProcessOutlet from "@/routeOutlets/ProcessOutlet";
-import ProjectCheckout from "../Process/legacy/Checkout/Checkout";
 import ProcessHistory from "../Process/legacy/History/History";
 import ProcessChat from "../Process/legacy/Chat/Chat";
 import ServiceRoutes from "@/routes/ServiceRoutes";
 import ProcessPage from "../Process/ProcessPage";
+import Admin from "../Admin/Admin";
+import AdminUser from "../Admin/User/User";
+import AdminOrganization from "../Admin/Organization/Organization";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -294,7 +295,15 @@ const App: React.FC = () => {
                   path="admin/*"
                   element={
                     <ContentBox>
-                      <AdminRoutes />
+                      <Routes>
+                        <Route index element={<Admin />} />
+                        <Route path="user" element={<AdminUser />} />
+                        <Route
+                          path="organization"
+                          element={<AdminOrganization />}
+                        />
+                        {/* <Route path="projects/*" element={<ProjectsRoutes />} /> */}
+                      </Routes>
                     </ContentBox>
                   }
                 />

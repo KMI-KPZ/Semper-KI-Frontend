@@ -950,6 +950,7 @@
       "Verify": {
         "components": {
           "VerifyCard": {
+            "error": "Ursache:",
             "title": {
               "PRINTABILITY": "Druckbarkeit",
               "DRAFT": "Entwurfsprüfung",
@@ -968,7 +969,7 @@
             "STARTED": "Gestartet",
             "ONGOING": "Läuft",
             "COMPLETED": "Erfolgreich",
-            "FAILED": "Probleme"
+            "FAILED": "Fehler"
           }
         },
         "Verify": {
@@ -981,6 +982,9 @@
       "Request": {
         "Request": {
           "title": "Anfrage",
+          "ready": "Ihr Prozess ist bereit zur Anfrage",
+          "sendedClient": "Der Auftragnehmer hat den Entwurf erhalten und wird sich in Kürze bei ihnen melden.",
+          "recievedContractor": "Sie haben einen Anfrage erhalten",
           "button": {
             "menu": "Anfragemenu"
           }
@@ -1305,7 +1309,7 @@
           "BACK-TO-SERVICE_COMPLETED": "Zurück zur Auftragnehmerauswahl",
           "FORWARD-TO-VERIFYING": "Überprüfen Starten",
           "BACK-TO-CONTRACTOR_SELECTED": "Zurück zur Überprüfung",
-          "FORWARD-TO-REQUESTED": "Weiter zur Anfrage",
+          "FORWARD-TO-REQUESTED": "Anfrage senden",
           "buttons": {
             "confirmAll": "Wollen Sie wirklich alle betroffene Prozesse {{title}}?"
           }

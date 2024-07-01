@@ -948,6 +948,29 @@
         }
       },
       "Verify": {
+        "components": {
+          "VerifyCard": {
+            "title": {
+              "PRINTABILITY": "Druckbarkeit",
+              "DRAFT": "Entwurfsprüfung",
+              "CAPACITY": "Kapazitätsprüfung",
+              "STABILITY": "Stabilitätsprüfung"
+            },
+            "description": {
+              "PRINTABILITY": "Überprüfung der Druckbarkeit ihres 3D-Modells mit Hilfe von KI",
+              "DRAFT": "Überprüfung der Machbarkeit ihres Entwurfes ",
+              "CAPACITY": "Überprüfung der Kapazität des Herstellers",
+              "STABILITY": "Überprüfung der Stabilität des 3D-Modellentwurfs"
+            }
+          },
+          "VerifyStatus": {
+            "READY": "Bereit",
+            "STARTED": "Gestartet",
+            "ONGOING": "Läuft",
+            "COMPLETED": "Erfolgreich",
+            "FAILED": "Probleme"
+          }
+        },
         "Verify": {
           "title": "Prozess Überprüfen",
           "button": {
@@ -1280,7 +1303,7 @@
           "BACK-TO-DRAFT": "Zurück zur Serviceauswahl",
           "FORWARD-TO-SERVICE_COMPLETED": "Weiter zur Auftragnehmerauswahl",
           "BACK-TO-SERVICE_COMPLETED": "Zurück zur Auftragnehmerauswahl",
-          "FORWARD-TO-VERIFYING": "Auftrag Überprüfen",
+          "FORWARD-TO-VERIFYING": "Überprüfen Starten",
           "BACK-TO-CONTRACTOR_SELECTED": "Zurück zur Überprüfung",
           "FORWARD-TO-REQUESTED": "Weiter zur Anfrage",
           "buttons": {

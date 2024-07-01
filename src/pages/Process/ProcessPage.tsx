@@ -11,6 +11,7 @@ import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import { DefinedProcessOutlet } from "@/routeOutlets/DefinedProcessOutlet";
 import ProcessVerify from "./components/Verify/Verify";
 import ProcessStatusGate from "./components/StatusGate";
+import ProcessRequest from "./components/Request/Request";
 
 interface ProcessPageProps {}
 
@@ -37,6 +38,9 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
                 </ProcessStatusGate>
                 <ProcessStatusGate start={ProcessStatus.CONTRACTOR_SELECTED}>
                   <ProcessVerify />
+                </ProcessStatusGate>
+                <ProcessStatusGate start={ProcessStatus.VERIFIED}>
+                  <ProcessRequest />
                 </ProcessStatusGate>
               </DefinedProcessOutlet>
             </AuthorizedUserRouteOutlet>

@@ -36,11 +36,16 @@ interface UseStatusButtonsReturnProps {
 }
 
 export type StatusButtonTitleType =
+  | "NONE"
   | "DELETE"
+  | "FORWARD-TO-CONTRACTOR_SELECTED"
+  | "BACK-TO-SERVICE_READY"
   | "BACK-TO-DRAFT"
   | "FORWARD-TO-SERVICE_COMPLETED"
-  | "BACK-TO-SERVICE_IN_PROGRESS"
-  | "FORWARD-TO-CONTRACTOR_SELECTED";
+  | "BACK-TO-SERVICE_COMPLETED"
+  | "FORWARD-TO-VERIFYING"
+  | "BACK-TO-CONTRACTOR_SELECTED"
+  | "FORWARD-TO-REQUESTED";
 
 export type StatusButtonPropsGeneric = {
   title: string;
@@ -92,7 +97,7 @@ export interface StatusButtonProcessProps extends StatusButtonProps {
 
 const useStatusButtons = (): UseStatusButtonsReturnProps => {
   const { user } = useUser();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { project } = useProject();
   const sendProject = useSendProject();
@@ -124,7 +129,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   ): StatusButtonProps[] => {
     return externalStatusButtons.map((button) => ({
       ...button,
-      title: tranformTitle(button.title),
+      title: transformTitle(button.title),
       icon: transformIcon(button.icon),
     }));
   };
@@ -167,14 +172,21 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
         return <ReportIcon />;
     }
   };
-  const tranformTitle = (title: string): string => {
+
+  const transformTitle = (title: string): string => {
     const validStatusButtonTitles: StatusButtonTitleType[] = [
+      "NONE",
       "DELETE",
-      "BACK-TO-SERVICE_IN_PROGRESS",
       "FORWARD-TO-CONTRACTOR_SELECTED",
-      "FORWARD-TO-SERVICE_COMPLETED",
+      "BACK-TO-SERVICE_READY",
       "BACK-TO-DRAFT",
+      "FORWARD-TO-SERVICE_COMPLETED",
+      "BACK-TO-SERVICE_COMPLETED",
+      "FORWARD-TO-VERIFYING",
+      "BACK-TO-CONTRACTOR_SELECTED",
+      "FORWARD-TO-REQUESTED",
     ];
+    const isValidStatusButtonTitle = title as StatusButtonTitleType;
     return validStatusButtonTitles.includes(title as StatusButtonTitleType)
       ? t(
           `Projects.Project.hooks.useStatusButtons.${

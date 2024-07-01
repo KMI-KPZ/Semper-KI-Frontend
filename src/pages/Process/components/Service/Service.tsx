@@ -9,6 +9,7 @@ import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import ServiceDetails from "./ServiceDetails/ServiceDetails";
 import ProcessStatusButtons from "../StatusButtons";
 import ProcessContainer from "@/components/Process/Container";
+import ProcessHeader from "@/components/Process/Header";
 
 interface ServiceProps {
   process: Process;
@@ -37,7 +38,19 @@ const Service: React.FC<ServiceProps> = (props) => {
 
   return (
     <ProcessContainer id="draft">
-      <ProcessMenu title={t("Project.components.Info.button.menu")}>
+      <ProcessHeader
+        menuTitle={t("Project.components.Info.button.menu")}
+        pageTitle={`${t("Process.Service.Service.title")}: ${
+          process.serviceType === undefined ||
+          process.serviceType === ServiceType.NONE
+            ? t("Process.Service.Service.noType")
+            : t(
+                `enum.ServiceType.${
+                  ServiceType[process.serviceType] as keyof typeof ServiceType
+                }`
+              )
+        }`}
+      >
         <Button
           title={t("Process.Service.Service.button.editType")}
           stopPropagation={false}
@@ -45,23 +58,8 @@ const Service: React.FC<ServiceProps> = (props) => {
           size="sm"
           onClick={handleOnClickButtonEditType}
         />
-      </ProcessMenu>
-      <Container width="full" justify="start">
-        <Heading variant="h2">
-          {t("Process.Service.Service.title")}
-          {`: ${
-            process.serviceType === undefined ||
-            process.serviceType === ServiceType.NONE
-              ? t("Process.Service.Service.noType")
-              : t(
-                  `enum.ServiceType.${
-                    ServiceType[process.serviceType] as keyof typeof ServiceType
-                  }`
-                )
-          }`}
-        </Heading>
-      </Container>
-      <Divider />
+      </ProcessHeader>
+
       {process.serviceType === undefined ||
       process.serviceType === ServiceType.NONE ? (
         <ServiceSelection />

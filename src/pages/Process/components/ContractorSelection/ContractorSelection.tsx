@@ -23,6 +23,7 @@ import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 import ContractorCard from "./components/ContractorCard";
 import useGetContractors from "@/api/Project/Querys/useGetContractors";
 import ContractorSelectionAddressCard from "./components/AddressCard";
+import ProcessHeader from "@/components/Process/Header";
 
 interface ContractorSelectionProps {}
 
@@ -66,26 +67,20 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
 
   return (
     <ProcessContainer id="contractorSelected">
-      <ProcessMenu
-        title={t(
+      <ProcessHeader
+        menuTitle={t(
           "Process.components.ContractorSelection.ContractorSelection.button.menu"
         )}
-      ></ProcessMenu>
-      <Container width="full" justify="start">
-        <Heading variant="h2">
-          {t(
-            "Process.components.ContractorSelection.ContractorSelection.heading.main"
-          )}
-          {`: ${
-            process.contractor === ""
-              ? t(
-                  "Process.components.ContractorSelection.ContractorSelection.noContractor"
-                )
-              : process.contractor
-          }`}
-        </Heading>
-      </Container>
-      <Divider />
+        pageTitle={`${t(
+          "Process.components.ContractorSelection.ContractorSelection.heading.main"
+        )}: ${
+          process.contractor === ""
+            ? t(
+                "Process.components.ContractorSelection.ContractorSelection.noContractor"
+              )
+            : process.contractor
+        }`}
+      ></ProcessHeader>
       <Container width="full" justify="center" align="start" direction="auto">
         <Container
           width="full"

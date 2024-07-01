@@ -946,6 +946,22 @@
             "resetAddress": "Adresse zurücksetzen"
           }
         }
+      },
+      "Verify": {
+        "Verify": {
+          "title": "Prozess Überprüfen",
+          "button": {
+            "menu": "Überprüfungsmenu"
+          }
+        }
+      },
+      "Request": {
+        "Request": {
+          "title": "Anfrage",
+          "button": {
+            "menu": "Anfragemenu"
+          }
+        }
       }
     },
     "Service": {
@@ -1259,10 +1275,14 @@
         "useStatusButtons": {
           "NONE": "Translation error",
           "DELETE": "Prozess löschen",
-          "BACK-TO-SERVICE_IN_PROGRESS": "Zurück zu Service vervollständigen",
-          "FORWARD-TO-CONTRACTOR_SELECTED": "Weiter zu Auftragnehmer auswählen",
+          "FORWARD-TO-CONTRACTOR_SELECTED": "Weiter zu Überprüfung",
+          "BACK-TO-SERVICE_READY": "Zurück zur Servicebearbeitung",
           "BACK-TO-DRAFT": "Zurück zur Serviceauswahl",
-          "FORWARD-TO-SERVICE_COMPLETED": "Weiter zu Service vervollständigen",
+          "FORWARD-TO-SERVICE_COMPLETED": "Weiter zur Auftragnehmerauswahl",
+          "BACK-TO-SERVICE_COMPLETED": "Zurück zur Auftragnehmerauswahl",
+          "FORWARD-TO-VERIFYING": "Auftrag Überprüfen",
+          "BACK-TO-CONTRACTOR_SELECTED": "Zurück zur Überprüfung",
+          "FORWARD-TO-REQUESTED": "Weiter zur Anfrage",
           "buttons": {
             "confirmAll": "Wollen Sie wirklich alle betroffene Prozesse {{title}}?"
           }

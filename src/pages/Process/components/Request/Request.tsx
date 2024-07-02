@@ -48,7 +48,7 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
   };
 
   return (
-    <ProcessContainer id="request">
+    <ProcessContainer id="requested">
       <ProcessHeader
         menuTitle={t("Process.components.Request.Request.button.menu")}
         pageTitle={`${t(

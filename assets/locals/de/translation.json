@@ -982,9 +982,12 @@
       "Request": {
         "Request": {
           "title": "Anfrage",
-          "ready": "Ihr Prozess ist bereit zur Anfrage",
-          "sendedClient": "Der Auftragnehmer hat den Entwurf erhalten und wird sich in Kürze bei ihnen melden.",
-          "recievedContractor": "Sie haben einen Anfrage erhalten",
+          "clientVerified": "Ihr Prozess ist bereit zur Anfrage",
+          "clientRequested": "Der Auftragnehmer hat den Entwurf erhalten und wird sich in Kürze bei ihnen melden.",
+          "contractorRecieved": "Sie haben einen Anfrage erhalten",
+          "clientVerifiedTitle": "Bereit",
+          "clientRequestedTitle": "Übermittelt",
+          "contractorRecievedTitle": "Erhalten",
           "button": {
             "menu": "Anfragemenu"
           }

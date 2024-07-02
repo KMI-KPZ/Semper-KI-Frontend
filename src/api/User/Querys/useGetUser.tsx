@@ -2,7 +2,7 @@ import logger from "@/hooks/useLogger";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { getAuthorizedUserType } from "@/services/utils";
-import { AuthorizedUserProps } from "@/hooks/useUser";
+import { AuthorizedUserProps, UserAddressProps } from "@/hooks/useUser";
 
 const useGetUser = (useUserIsLoggedInQuery: UseQueryResult<boolean, Error>) => {
   const fetchUser = async () =>
@@ -10,13 +10,19 @@ const useGetUser = (useUserIsLoggedInQuery: UseQueryResult<boolean, Error>) => {
       .get(`${process.env.VITE_HTTP_API_URL}/public/getUser/`)
       .then((response) => {
         const userData = response.data;
+        const addresses: UserAddressProps[] =
+          userData.details.addresses !== undefined
+            ? userData.details.addresses
+            : userData.details.address
+            ? [userData.details.address]
+            : [];
         const newUser: AuthorizedUserProps = {
           hashedID: userData.hashedID,
           name: userData.name,
           organization: userData.organization,
           details: {
             email: userData.details.email,
-            addresses: [...userData.details.addresses],
+            addresses,
           },
           accessedWhen: new Date(userData.accessedWhen),
           createdWhen: new Date(userData.createdWhen),

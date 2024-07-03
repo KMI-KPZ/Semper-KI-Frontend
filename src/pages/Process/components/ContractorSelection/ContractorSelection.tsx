@@ -25,7 +25,7 @@ import useGetContractors from "@/api/Project/Querys/useGetContractors";
 import ContractorSelectionAddressCard from "./components/AddressCard";
 import ProcessHeader from "@/components/Process/Header";
 
-interface ContractorSelectionProps {}
+interface ProcessContractorSelectionProps {}
 
 export type ProcessAddressType = "billing" | "delivery";
 
@@ -34,7 +34,9 @@ export interface ProcessAddressFormData {
   billingAddress: UserAddressProps;
 }
 
-const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
+const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
+  props
+) => {
   const {} = props;
   const { t } = useTranslation();
   const { process } = useDefinedProcess();
@@ -65,22 +67,27 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
     setEditContractor(false);
   };
 
+  const menuButtonTitle = t(
+    "Process.components.ContractorSelection.ContractorSelection.button.menu"
+  );
+  const pageTitle = `${t(
+    "Process.components.ContractorSelection.ContractorSelection.heading.main"
+  )}: ${
+    process.contractor === ""
+      ? t(
+          "Process.components.ContractorSelection.ContractorSelection.noContractor"
+        )
+      : process.contractor
+  }`;
+
   return (
-    <ProcessContainer id="contractorSelected">
-      <ProcessHeader
-        menuTitle={t(
-          "Process.components.ContractorSelection.ContractorSelection.button.menu"
-        )}
-        pageTitle={`${t(
-          "Process.components.ContractorSelection.ContractorSelection.heading.main"
-        )}: ${
-          process.contractor === ""
-            ? t(
-                "Process.components.ContractorSelection.ContractorSelection.noContractor"
-              )
-            : process.contractor
-        }`}
-      ></ProcessHeader>
+    <ProcessContainer
+      id="contractorSelected"
+      pageTitle={pageTitle}
+      menuButtonTitle={menuButtonTitle}
+      start={ProcessStatus.SERVICE_COMPLETED}
+      end={ProcessStatus.CONTRACTOR_SELECTED}
+    >
       <Container width="full" justify="center" align="start" direction="auto">
         <Container
           width="full"
@@ -141,10 +148,7 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
           ) : null}
         </Container>
       </Container>
-      <ProcessStatusButtons
-        start={ProcessStatus.SERVICE_COMPLETED}
-        end={ProcessStatus.CONTRACTOR_SELECTED}
-      />
+
       <Modal
         open={editContractor}
         modalKey="ProcessContractorList"
@@ -160,4 +164,4 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
   );
 };
 
-export default ContractorSelection;
+export default ProcessContractorSelection;

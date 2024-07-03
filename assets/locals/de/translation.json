@@ -992,6 +992,16 @@
             "menu": "Anfragemenu"
           }
         }
+      },
+      "Clarify": {
+        "Clarify": {
+          "title": "Rückfragen",
+          "messages": "Nachrichten",
+          "noMessages": "Keine Nachrichten vorhanden",
+          "button": {
+            "menu": "Rückfragenmenu"
+          }
+        }
       }
     },
     "Service": {

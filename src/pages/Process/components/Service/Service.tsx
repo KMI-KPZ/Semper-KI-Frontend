@@ -36,21 +36,26 @@ const Service: React.FC<ServiceProps> = (props) => {
     });
   };
 
+  const menuButtonTitle = t("Project.components.Info.button.menu");
+  const pageTitle = `${t("Process.Service.Service.title")}: ${
+    process.serviceType === undefined ||
+    process.serviceType === ServiceType.NONE
+      ? t("Process.Service.Service.noType")
+      : t(
+          `enum.ServiceType.${
+            ServiceType[process.serviceType] as keyof typeof ServiceType
+          }`
+        )
+  }`;
+
   return (
-    <ProcessContainer id="draft">
-      <ProcessHeader
-        menuTitle={t("Project.components.Info.button.menu")}
-        pageTitle={`${t("Process.Service.Service.title")}: ${
-          process.serviceType === undefined ||
-          process.serviceType === ServiceType.NONE
-            ? t("Process.Service.Service.noType")
-            : t(
-                `enum.ServiceType.${
-                  ServiceType[process.serviceType] as keyof typeof ServiceType
-                }`
-              )
-        }`}
-      >
+    <ProcessContainer
+      id="draft"
+      start={ProcessStatus.DRAFT}
+      end={ProcessStatus.SERVICE_COMPLICATION}
+      menuButtonTitle={menuButtonTitle}
+      pageTitle={pageTitle}
+      menuChildren={
         <Button
           title={t("Process.Service.Service.button.editType")}
           stopPropagation={false}
@@ -58,19 +63,14 @@ const Service: React.FC<ServiceProps> = (props) => {
           size="sm"
           onClick={handleOnClickButtonEditType}
         />
-      </ProcessHeader>
-
+      }
+    >
       {process.serviceType === undefined ||
       process.serviceType === ServiceType.NONE ? (
         <ServiceSelection />
       ) : (
         <ServiceDetails process={process} />
       )}
-
-      <ProcessStatusButtons
-        start={ProcessStatus.DRAFT}
-        end={ProcessStatus.SERVICE_COMPLICATION}
-      />
     </ProcessContainer>
   );
 };

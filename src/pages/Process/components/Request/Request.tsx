@@ -47,14 +47,19 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
     return "nix gefunden ProcessRequest";
   };
 
+  const menuButtonTitle = t("Process.components.Request.Request.button.menu");
+  const pageTitle = `${t(
+    "Process.components.Request.Request.title"
+  )}: ${getTitle()}`;
+
   return (
-    <ProcessContainer id="requested">
-      <ProcessHeader
-        menuTitle={t("Process.components.Request.Request.button.menu")}
-        pageTitle={`${t(
-          "Process.components.Request.Request.title"
-        )}: ${getTitle()}`}
-      ></ProcessHeader>
+    <ProcessContainer
+      id="requested"
+      menuButtonTitle={menuButtonTitle}
+      pageTitle={pageTitle}
+      start={ProcessStatus.VERIFIED}
+      end={ProcessStatus.REQUESTED}
+    >
       <Container width="fit" direction="col" className="card">
         {clientVerified ? (
           <CheckIcon style={{ height: 60, width: 60 }} />
@@ -64,10 +69,6 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
         ) : null}
         <Text variant="strong">{getText()}</Text>
       </Container>
-      <ProcessStatusButtons
-        start={ProcessStatus.VERIFIED}
-        end={ProcessStatus.REQUESTED}
-      />
     </ProcessContainer>
   );
 };

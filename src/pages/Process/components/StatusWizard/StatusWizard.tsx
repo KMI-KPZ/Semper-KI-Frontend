@@ -16,7 +16,7 @@ import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import StatusWizardCard from "./components/Card";
 import InfoIcon from "@mui/icons-material/Info";
 
-interface StatusWizardProps {
+interface ProcessStatusWizardProps {
   process: Process;
 }
 
@@ -109,7 +109,7 @@ const statusWizardItems: StatusWizardItem[] = [
   },
 ];
 
-const StatusWizard: React.FC<StatusWizardProps> = (props) => {
+const ProcessStatusWizard: React.FC<ProcessStatusWizardProps> = (props) => {
   const { process } = props;
   const { t } = useTranslation();
 
@@ -124,4 +124,4 @@ const StatusWizard: React.FC<StatusWizardProps> = (props) => {
   );
 };
 
-export default StatusWizard;
+export default ProcessStatusWizard;

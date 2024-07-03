@@ -21,7 +21,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   return show && getProcessStatusButtons(process).length > 0 ? (
     <Container width="full" direction="col">
       <Divider />
-      <Container width="full" direction="row">
+      <Container width="full" direction="row" wrap="wrap">
         {getProcessStatusButtons(process).map((button, index) => (
           // <PermissionGate
           //   element={

@@ -32,7 +32,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = (props) => {
       direction="col"
       className="relative gap-2 bg-white p-5"
     >
-      <ProcessMenu title={t("Project.components.Info.button.menu")}>
+      <ProcessMenu buttonTitle={t("Project.components.Info.button.menu")}>
         <Button
           stopPropagation={false}
           title={t("Project.components.Info.button.editTitle")}

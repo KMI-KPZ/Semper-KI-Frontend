@@ -193,8 +193,23 @@ const useGetProcess = () => {
               response.data.serviceDetails.postProcessings !== undefined
                 ? Object.values(response.data.serviceDetails.postProcessings)
                 : undefined,
+
             manufacturerID: response.data.serviceDetails.manufacturerID,
           },
+          processDetails: {
+            ...response.data.processDetails,
+            clientBillingAddress:
+              response.data.processDetails.clientBillingAddress.undefined !==
+              undefined
+                ? undefined
+                : response.data.processDetails.clientBillingAddress,
+            clientDeliverAddress:
+              response.data.processDetails.clientDeliverAddress.undefined !==
+              undefined
+                ? undefined
+                : response.data.processDetails.clientDeliverAddress,
+          },
+          messages: response.data.messages.messages,
         };
         logger("useGetProcess | getProcess ✅ |", process);
 

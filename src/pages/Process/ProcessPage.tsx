@@ -4,14 +4,15 @@ import { useTranslation } from "react-i18next";
 import ProcessInfo from "./components/Info";
 import useProcess from "@/hooks/Process/useProcess";
 import Service from "./components/Service/Service";
-import StatusWizard from "./components/StatusWizard/StatusWizard";
-import ContractorSelection from "./components/ContractorSelection/ContractorSelection";
+import ProcessStatusWizard from "./components/StatusWizard/StatusWizard";
+import ProcessContractorSelection from "./components/ContractorSelection/ContractorSelection";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import { DefinedProcessOutlet } from "@/routeOutlets/DefinedProcessOutlet";
 import ProcessVerify from "./components/Verify/Verify";
 import ProcessStatusGate from "./components/StatusGate";
 import ProcessRequest from "./components/Request/Request";
+import ProcessClarify from "./components/Clarify/Clarify";
 
 interface ProcessPageProps {}
 
@@ -27,20 +28,23 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
       </Container>
       <ProcessInfo process={process} />
       <Container width="full" direction="row" align="start">
-        <StatusWizard process={process} />
+        <ProcessStatusWizard process={process} />
         <Container direction="col" width="full">
           <Service process={process} />
           <ProcessStatusGate start={ProcessStatus.SERVICE_COMPLETED}>
             <AuthorizedUserRouteOutlet>
               <DefinedProcessOutlet>
                 <ProcessStatusGate start={ProcessStatus.SERVICE_COMPLETED}>
-                  <ContractorSelection />
+                  <ProcessContractorSelection />
                 </ProcessStatusGate>
                 <ProcessStatusGate start={ProcessStatus.CONTRACTOR_SELECTED}>
                   <ProcessVerify />
                 </ProcessStatusGate>
                 <ProcessStatusGate start={ProcessStatus.VERIFIED}>
                   <ProcessRequest />
+                </ProcessStatusGate>
+                <ProcessStatusGate start={ProcessStatus.REQUESTED}>
+                  <ProcessClarify />
                 </ProcessStatusGate>
               </DefinedProcessOutlet>
             </AuthorizedUserRouteOutlet>

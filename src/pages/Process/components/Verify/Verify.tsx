@@ -28,11 +28,13 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
   };
 
   return (
-    <ProcessContainer id="verified">
-      <ProcessHeader
-        menuTitle={t("Process.components.Verify.Verify.button.menu")}
-        pageTitle={t("Process.components.Verify.Verify.title")}
-      ></ProcessHeader>
+    <ProcessContainer
+      id="verified"
+      start={ProcessStatus.CONTRACTOR_SELECTED}
+      end={ProcessStatus.VERIFIED}
+      menuButtonTitle={t("Process.components.Verify.Verify.button.menu")}
+      pageTitle={t("Process.components.Verify.Verify.title")}
+    >
       <Container
         width="full"
         direction="row"
@@ -48,10 +50,6 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
           errorMsg="Die Scheiße hat nicht funktioniert Junge!!!"
         />
       </Container>
-      <ProcessStatusButtons
-        start={ProcessStatus.CONTRACTOR_SELECTED}
-        end={ProcessStatus.VERIFIED}
-      />
     </ProcessContainer>
   );
 };

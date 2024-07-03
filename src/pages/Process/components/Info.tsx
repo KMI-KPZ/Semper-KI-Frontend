@@ -50,7 +50,7 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
       direction="col"
       className="relative gap-2 bg-white p-5"
     >
-      <ProcessMenu title={t("Project.components.Info.button.menu")}>
+      <ProcessMenu buttonTitle={t("Project.components.Info.button.menu")}>
         <Button
           title={t("Process.components.Info.button.editTitle")}
           stopPropagation={false}

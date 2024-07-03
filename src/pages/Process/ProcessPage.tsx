@@ -13,6 +13,7 @@ import ProcessVerify from "./components/Verify/Verify";
 import ProcessStatusGate from "./components/StatusGate";
 import ProcessRequest from "./components/Request/Request";
 import ProcessClarify from "./components/Clarify/Clarify";
+import ProcessContract from "./components/Contract/Contract";
 
 interface ProcessPageProps {}
 
@@ -43,8 +44,13 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
                 <ProcessStatusGate start={ProcessStatus.VERIFIED}>
                   <ProcessRequest />
                 </ProcessStatusGate>
-                <ProcessStatusGate start={ProcessStatus.REQUESTED}>
+                <ProcessStatusGate start={ProcessStatus.CLARIFICATION}>
                   <ProcessClarify />
+                </ProcessStatusGate>
+                <ProcessStatusGate
+                  start={ProcessStatus.CONFIRMED_BY_CONTRACTOR}
+                >
+                  <ProcessContract />
                 </ProcessStatusGate>
               </DefinedProcessOutlet>
             </AuthorizedUserRouteOutlet>

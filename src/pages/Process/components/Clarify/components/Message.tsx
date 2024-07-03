@@ -6,10 +6,11 @@ import { Container } from "@component-library/index";
 
 interface ClarifyMessageProps {
   message: ChatMessageProps;
+  sameAuthor?: boolean;
 }
 
 const ClarifyMessage: React.FC<ClarifyMessageProps> = (props) => {
-  const { message } = props;
+  const { message, sameAuthor = false } = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
 
@@ -21,7 +22,7 @@ const ClarifyMessage: React.FC<ClarifyMessageProps> = (props) => {
       align={message.userID === user?.hashedID ? "end" : "start"}
       className="min-w-[200px]"
     >
-      <span className="px-2">{message.userName}</span>
+      {sameAuthor ? null : <span className="px-2">{message.userName}</span>}
       <Container
         direction="row"
         className={`

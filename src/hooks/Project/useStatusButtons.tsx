@@ -45,7 +45,12 @@ export type StatusButtonTitleType =
   | "BACK-TO-SERVICE_COMPLETED"
   | "FORWARD-TO-VERIFYING"
   | "BACK-TO-CONTRACTOR_SELECTED"
-  | "FORWARD-TO-REQUESTED";
+  | "FORWARD-TO-REQUESTED"
+  | "FORWARD-TO-CLARIFICATION"
+  | "FORWARD-TO-CONFIRMED_BY_CONTRACTOR"
+  | "FORWARD-TO-REJECTED_BY_CONTRACTOR"
+  | "FORWARD-TO-CONFIRMED_BY_CLIENT"
+  | "FORWARD-TO-REJECTED_BY_CLIENT";
 
 export type StatusButtonPropsGeneric = {
   title: string;
@@ -185,6 +190,11 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
       "FORWARD-TO-VERIFYING",
       "BACK-TO-CONTRACTOR_SELECTED",
       "FORWARD-TO-REQUESTED",
+      "FORWARD-TO-CLARIFICATION",
+      "FORWARD-TO-CONFIRMED_BY_CONTRACTOR",
+      "FORWARD-TO-REJECTED_BY_CONTRACTOR",
+      "FORWARD-TO-CONFIRMED_BY_CLIENT",
+      "FORWARD-TO-REJECTED_BY_CLIENT",
     ];
     const isValidStatusButtonTitle = title as StatusButtonTitleType;
     return validStatusButtonTitles.includes(title as StatusButtonTitleType)

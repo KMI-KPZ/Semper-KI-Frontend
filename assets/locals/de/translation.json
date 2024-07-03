@@ -1002,6 +1002,14 @@
             "menu": "Rückfragenmenu"
           }
         }
+      },
+      "Contract": {
+        "Contract": {
+          "title": "Angebot",
+          "button": {
+            "menu": "Angebotsmenu"
+          }
+        }
       }
     },
     "Service": {
@@ -1324,6 +1332,11 @@
           "FORWARD-TO-VERIFYING": "Überprüfen Starten",
           "BACK-TO-CONTRACTOR_SELECTED": "Zurück zur Überprüfung",
           "FORWARD-TO-REQUESTED": "Anfrage senden",
+          "FORWARD-TO-CLARIFICATION": "Rückfragen stellen",
+          "FORWARD-TO-CONFIRMED_BY_CONTRACTOR": "Anfrage bestätigen und Angebot erstellen",
+          "FORWARD-TO-REJECTED_BY_CONTRACTOR": "Anfrage ablehnen",
+          "FORWARD-TO-CONFIRMED_BY_CLIENT": "Angebot bestätigen",
+          "FORWARD-TO-REJECTED_BY_CLIENT": "Angebot ablehnen",
           "buttons": {
             "confirmAll": "Wollen Sie wirklich alle betroffene Prozesse {{title}}?"
           }

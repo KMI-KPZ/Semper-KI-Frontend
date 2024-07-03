@@ -58,7 +58,7 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
       menuButtonTitle={menuButtonTitle}
       pageTitle={pageTitle}
       start={ProcessStatus.VERIFIED}
-      end={ProcessStatus.REQUESTED}
+      end={ProcessStatus.CLARIFICATION}
     >
       <Container width="fit" direction="col" className="card">
         {clientVerified ? (

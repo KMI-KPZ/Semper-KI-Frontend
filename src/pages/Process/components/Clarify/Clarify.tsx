@@ -15,15 +15,13 @@ const ProcessClarify: React.FC<ProcessClarifyProps> = (props) => {
   const { t } = useTranslation();
   const { process } = useProcess();
 
-  logger("ProcessClarify", process.messages);
-
   return (
     <ProcessContainer
-      id="requested"
+      id="clarification"
       menuButtonTitle={t("Process.components.Clarify.Clarify.button.menu")}
       pageTitle={`${t("Process.components.Clarify.Clarify.title")}:`}
       start={ProcessStatus.REQUESTED}
-      end={ProcessStatus.CLARIFICATION}
+      end={ProcessStatus.CONFIRMED_BY_CONTRACTOR}
     >
       {process.messages.length === 0 ? (
         <Container width="full" direction="col" className="card">
@@ -36,9 +34,18 @@ const ProcessClarify: React.FC<ProcessClarifyProps> = (props) => {
           justify="start"
           className={`max-h-96 flex-col-reverse overflow-x-auto p-5`}
         >
-          {[...process.messages].reverse().map((message, index) => (
-            <ClarifyMessage key={index} message={message} />
-          ))}
+          {[...process.messages]
+            .reverse()
+            .map((message, index, allMessages) => (
+              <ClarifyMessage
+                key={index}
+                message={message}
+                sameAuthor={
+                  allMessages[index + 1] !== undefined &&
+                  allMessages[index + 1].userName === message.userName
+                }
+              />
+            ))}
         </Container>
       )}
       <ClarifyTextInput />

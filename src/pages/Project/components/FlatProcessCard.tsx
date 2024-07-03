@@ -19,9 +19,9 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
   const getRingColor = (): string => {
     switch (process.flatProcessStatus) {
       case "ACTION_REQUIRED":
-        return "ring-yellow-500";
+        return "ring-yellow-300";
       case "IN_PROGRESS":
-        return "ring-yellow-500";
+        return "ring-yellow-300";
       case "COMPLETED":
         return "ring-green-500";
       default:

@@ -1,5 +1,5 @@
 import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
-import { Button, Text } from "@component-library/index";
+import { Button, Container, Text } from "@component-library/index";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -52,6 +52,13 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
     }
     return 0;
   };
+
+  if (projects.length === 0)
+    return (
+      <Container width="full">
+        <Text>{t("Projects.components.Table.noProjects")}</Text>
+      </Container>
+    );
 
   return (
     <table className="w-full border-separate border-spacing-x-0 border-spacing-y-2">

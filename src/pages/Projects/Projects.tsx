@@ -1,4 +1,4 @@
-import { Button, Modal, Search } from "@component-library/index";
+import { Button, Divider, Modal, Search } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -70,7 +70,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
         </Container>
       </div>
       <Search handleSearchInputChange={handleSearchInputChange} />
-      <div className="flex w-full flex-col items-start">
+      <Container direction="col" justify="start" align="start" width="full">
         <Heading variant="h2">
           {user.usertype === UserType.ADMIN
             ? t("Projects.components.Cards.adminProjects")
@@ -83,19 +83,22 @@ const Projects: React.FC<ProjectsProps> = (props) => {
             )}
           />
         </LoadingSuspense>
-      </div>
+      </Container>
       {user.usertype === UserType.ORGANIZATION ? (
         <>
-          <Heading variant="h2">
-            {t("Projects.components.Cards.receivedProjects")}
-          </Heading>
-          <LoadingSuspense query={flatProjects}>
-            <ProjectsTable
-              projects={recievedProjects.filter((flatProject) =>
-                filterDataBySearchInput(flatProject)
-              )}
-            />
-          </LoadingSuspense>
+          <Divider />
+          <Container direction="col" justify="start" align="start" width="full">
+            <Heading variant="h2">
+              {t("Projects.components.Cards.receivedProjects")}
+            </Heading>
+            <LoadingSuspense query={flatProjects}>
+              <ProjectsTable
+                projects={recievedProjects.filter((flatProject) =>
+                  filterDataBySearchInput(flatProject)
+                )}
+              />
+            </LoadingSuspense>
+          </Container>
         </>
       ) : null}
       <Modal

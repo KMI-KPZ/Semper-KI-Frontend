@@ -2,13 +2,14 @@ import React, { PropsWithChildren, createContext } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import useUser, {
   AuthorizedUserProps,
-  NewUserAddressProps,
   UpdateUserProps,
   UserAddressProps,
   UserType,
 } from "@/hooks/useUser";
 import { UseMutationResult } from "@tanstack/react-query";
-import useCreateAddress from "@/api/User/Mutations/useCreateAddress";
+import useCreateAddress, {
+  NewUserAddressProps,
+} from "@/api/User/Mutations/useCreateAddress";
 import useDeleteAddress from "@/api/User/Mutations/useDeleteAddress";
 import useDeleteUser from "@/api/User/Mutations/useDeleteUser";
 import useUpdateAddress from "@/api/User/Mutations/useUpdateAddress";

@@ -7,7 +7,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { boolean } from "yup";
-import OwnerGate from "@/components/OwnerGate/OwnerGate";
+import ProjectOwnerGate from "@/components/OwnerGate/OwnerGate";
 import useUpdateProject from "@/api/Project/Mutations/useUpdateProject";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { useParams } from "react-router-dom";
@@ -72,7 +72,7 @@ const ProcessTitleForm: React.FC<ProcessTitleFormProps> = (props) => {
         className="w-fit rounded-xl border-2 bg-gray-100 p-2"
         onChange={handleOnChangeInput}
       />
-      <OwnerGate>
+      <ProjectOwnerGate>
         <PermissionGate element="ProjectButtonEditName">
           <Button
             onClick={handleOnClickEditCheckButton}
@@ -83,7 +83,7 @@ const ProcessTitleForm: React.FC<ProcessTitleFormProps> = (props) => {
             children={<CheckIcon fontSize="small" />}
           />
         </PermissionGate>
-      </OwnerGate>
+      </ProjectOwnerGate>
     </Container>
   );
 };

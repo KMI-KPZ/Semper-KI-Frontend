@@ -1150,6 +1150,7 @@
   "Projects": {
     "components": {
       "Table": {
+        "noProjects": "Keine Projekte vorhanden",
         "label": {
           "selectProject": "Projekt {{name}} auswählen",
           "selectAllProjects": "Alle Projekte auswählen"

@@ -5,10 +5,7 @@ import { useTranslation } from "react-i18next";
 import TextInput from "../../../component-library/Form/Inputs/TextInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useUser, {
-  NewUserAddressProps,
-  UserAddressProps,
-} from "@/hooks/useUser";
+import useUser, { UserAddressProps } from "@/hooks/useUser";
 import { Heading, Text } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useGeneralInput from "@component-library/Form/hooks/useGeneralInput";
@@ -16,6 +13,7 @@ import {
   GeneralInput,
   InputLabelProps,
 } from "@component-library/Form/GeneralInput";
+import { NewUserAddressProps } from "@/api/User/Mutations/useCreateAddress";
 
 interface AddressFormProps {
   closeModal?(): void;

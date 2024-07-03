@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ProcessPostProcessCatalog from "./components/Catalog";
 import { useTranslation } from "react-i18next";
 import {
   Button,
@@ -9,19 +8,15 @@ import {
   Text,
 } from "@component-library/index";
 import { FilterItemProps } from "../Filter/Filter";
-import useService from "../../../../../../../hooks/useService";
-import useProcess from "@/hooks/Process/useProcess";
 import ProcessPostProcessingCard from "./components/Card";
 import useGetPostProcessigns, {
   PostProcessingProps,
 } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 import useSetPostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useSetPostProcessing";
 import { useProject } from "@/hooks/Project/useProject";
-import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
 import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
-import { is } from "@react-three/fiber/dist/declarations/src/core/utils";
 import useModal from "@/hooks/useModal";
 
 interface Props {
@@ -102,11 +97,6 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
       undefined
     );
   };
-
-  logger(
-    "ManufacturingPostProcessings | selectedPostProcessing |",
-    selectedPostProcessing
-  );
 
   return (
     <Container direction="col" width="full">

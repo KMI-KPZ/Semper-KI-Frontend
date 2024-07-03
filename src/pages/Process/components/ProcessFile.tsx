@@ -7,11 +7,11 @@ import { Divider } from "@component-library/index";
 import { Container } from "@component-library/index";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { createDownload } from "@/services/utils";
-import OwnerGate from "@/components/OwnerGate/OwnerGate";
 import useDownloadFile from "@/api/Process/Mutations/useDownloadFile";
 import useDownloadFiles from "@/api/Process/Mutations/useDownloadFiles";
 import useDeleteFile from "@/api/Process/Mutations/useDeleteFile";
 import { FileProps, Process } from "@/api/Process/Querys/useGetProcess";
+import OwnerGate from "@/components/OwnerGate/OwnerGate";
 
 interface Props {
   process: Process;

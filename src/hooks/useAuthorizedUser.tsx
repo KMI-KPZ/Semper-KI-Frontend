@@ -2,7 +2,6 @@ import { AuthorizedUserContext } from "@/routeOutlets/AuthorizedUserOutlet";
 import { useContext, useEffect } from "react";
 import {
   AuthorizedUserProps,
-  NewUserAddressProps,
   UpdateUserProps,
   UserAddressProps,
   UserType,
@@ -10,6 +9,7 @@ import {
 import { UseMutationResult } from "@tanstack/react-query";
 import { toast } from "./useToast";
 import { useTranslation } from "react-i18next";
+import { NewUserAddressProps } from "@/api/User/Mutations/useCreateAddress";
 
 interface useAuthorizedUserReturnProps {
   user: AuthorizedUserProps;

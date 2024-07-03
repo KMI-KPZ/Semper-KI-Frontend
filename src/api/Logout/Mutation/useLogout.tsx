@@ -18,7 +18,7 @@ const useLogout = () => {
   return useMutation<string, Error, void>({
     mutationFn: logout,
     onSuccess: (data) => {
-      window.location.href = data;
+      if (data !== undefined) window.location.href = data;
     },
   });
 };

@@ -342,6 +342,13 @@
     "PMenu": {
       "button": { "open": "Menu Öffnen", "close": "Menu Schließen" }
     },
+    "Process": {
+      "UploadCard": {
+        "title": "Datei/en hochladen",
+        "subTitle": "Per Drag & Drop oder Klick",
+        "button": "Datei auswählen"
+      }
+    },
     "Switch": {},
     "Table": {},
     "Upload": {
@@ -1004,8 +1011,29 @@
         }
       },
       "Contract": {
+        "components": {
+          "FileRow": { "button": { "delete": "Löschen" } },
+          "FileTable": {
+            "noFiles": "Keine Dateien vorhanden",
+            "name": "Name",
+            "type": "Typ",
+            "size": "Größe",
+            "date": "Datum",
+            "author": "Autor",
+            "actions": "Aktionen",
+            "uploadFilesTitle": "Dateien hochladen",
+            "currentFilesTitle": "Aktuelle Dateien",
+            "button": {
+              "delete": "Löschen",
+              "upload": "Dateien Hochladen",
+              "downloadAll": "Alle Dateien Herunterladen"
+            }
+          }
+        },
         "Contract": {
           "title": "Angebot",
+          "text": "Laden sie hier ihr Angebot und zugehörige Dateien hoch",
+
           "button": {
             "menu": "Angebotsmenu"
           }

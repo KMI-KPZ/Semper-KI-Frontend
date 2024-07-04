@@ -209,7 +209,7 @@ const App: React.FC = () => {
                   }
                 >
                   <Route path="service/*" element={<ServiceRoutes />} />
-                  <Route element={<AuthorizedUserRouteOutlet />}>
+                  {/* <Route element={<AuthorizedUserRouteOutlet />}>
                     <Route path="history" element={<ProcessHistory />} />
                     <Route path="chat" element={<ProcessChat />} />
                     <Route
@@ -233,7 +233,7 @@ const App: React.FC = () => {
                         <ServiceRoutes />
                       </>
                     }
-                  />
+                  /> */}
                 </Route>
               </Route>
             </Route>

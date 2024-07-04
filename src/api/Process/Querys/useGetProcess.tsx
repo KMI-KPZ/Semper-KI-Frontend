@@ -43,7 +43,7 @@ export type DefaultProcessProps = {
   createdWhen: Date;
   updatedWhen: Date;
   accessedWhen: Date;
-  files: FilesDescriptionProps[];
+  files: ModelFileDescriptionProps[];
   messages: ChatMessageProps[];
 };
 
@@ -70,7 +70,7 @@ export type FileProps = {
   path: string;
 };
 
-export interface FilesDescriptionProps {
+export interface ModelFileDescriptionProps {
   createdBy: string;
   id: string;
   title: string;

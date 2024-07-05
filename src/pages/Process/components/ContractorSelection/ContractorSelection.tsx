@@ -21,9 +21,9 @@ import { UserAddressProps } from "@/hooks/useUser";
 import ProcessContractorList from "./components/ContractorList";
 import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 import ContractorCard from "./components/ContractorCard";
-import useGetContractors from "@/api/Project/Querys/useGetContractors";
 import ContractorSelectionAddressCard from "./components/AddressCard";
 import ProcessHeader from "@/components/Process/Header";
+import useGetContractors from "@/api/Process/Querys/useGetContractors";
 
 interface ProcessContractorSelectionProps {}
 

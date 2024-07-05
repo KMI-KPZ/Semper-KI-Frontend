@@ -2,7 +2,7 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { ChatMessageProps, FileProps } from "./useGetProcess";
+import { ChatMessageProps, FileProps } from "../../Querys/useGetProcess";
 import { ServiceProps } from "@/api/Service/Querys/useGetServices";
 
 export enum ProcessHistoryType {
@@ -70,7 +70,7 @@ const useGetProcessHistory = () => {
   const getProcessHistory = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/getProcessHistory/${processID}`
+        `${process.env.VITE_HTTP_API_URL}/public/files/download/history/${processID}/`
       )
       .then((response) => {
         const responseData = response.data;

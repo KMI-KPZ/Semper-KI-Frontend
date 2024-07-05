@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import ProcessHistoryItem from "./components/Item";
 import useGetProcessHistory, {
   ProcessHistoryType,
-} from "@/api/Process/Querys/useGetProcessHistory";
+} from "@/api/Process/Files/Querys/useGetProcessHistory";
 
 interface ProcessHistoryProps {}
 

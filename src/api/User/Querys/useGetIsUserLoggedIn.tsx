@@ -5,7 +5,7 @@ import { authorizedCustomAxios } from "@/api/customAxios";
 const useGetIsUserLoggedIn = () => {
   const fetchIsLoggedIn = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/isLoggedIn/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/auth/isLoggedIn/`)
       .then((response) => {
         logger("useGetIsUserLoggedIn | isLoggedIn ✅ |", response.data);
         return response.data === "Success" ? true : false;

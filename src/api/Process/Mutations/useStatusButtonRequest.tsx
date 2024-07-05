@@ -17,7 +17,7 @@ const useStatusButtonRequest = () => {
     processIDs,
   }: StatusButtonRequestProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/statusButtonRequest/`, {
+      .post(`${process.env.VITE_HTTP_API_URL}/public/states/buttons/get/`, {
         projectID,
         processIDs,
         buttonData: { ...button },

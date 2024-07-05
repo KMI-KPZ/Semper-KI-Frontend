@@ -11,11 +11,14 @@ const useRemoveRole = () => {
   const queryClient = useQueryClient();
   const removeRole = async ({ email, roleID }: RemoveRoleProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/removeRole/`, {
-        data: {
-          content: { email, roleID },
-        },
-      })
+      .post(
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/roles/remove/`,
+        {
+          data: {
+            content: { email, roleID },
+          },
+        }
+      )
       .then((response) => {
         logger("useRemoveRole | removeRole ✅ |", response);
         return response.data;

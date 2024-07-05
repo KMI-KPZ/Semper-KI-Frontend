@@ -14,7 +14,7 @@ const useGetPermissionGates = () => {
   const { user } = useUser();
   const getPermissionGates = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/getPermissionMask/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/auth/permissionMask/get/`)
       .then((response) => {
         const responseData = response.data;
         const permissionGates: PermissionGateType[] = responseData.Rights;

@@ -11,11 +11,14 @@ const useAssignRole = () => {
   const queryClient = useQueryClient();
   const assignRole = async ({ email, roleID }: AssignRoleProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/assignRole/`, {
-        data: {
-          content: { email, roleID },
-        },
-      })
+      .post(
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/roles/assign/`,
+        {
+          data: {
+            content: { email, roleID },
+          },
+        }
+      )
       .then((response) => {
         logger("useAssignRole | assignRole ✅ |", response);
         return response.data;

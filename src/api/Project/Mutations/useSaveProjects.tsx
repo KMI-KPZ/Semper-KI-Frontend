@@ -6,7 +6,7 @@ const useSaveProjects = () => {
   const queryClient = useQueryClient();
   const saveProjects = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/saveProjects/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/project/save/`)
       .then((response) => {
         logger("useSaveProjects | saveProjects ✅ |", response);
         return response.data;

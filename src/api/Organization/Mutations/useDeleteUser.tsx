@@ -6,11 +6,14 @@ const useDeleteUser = () => {
   const queryClient = useQueryClient();
   const deleteUser = async (email: string) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/deleteUser/`, {
-        data: {
-          content: { email },
-        },
-      })
+      .post(
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/users/delete/`,
+        {
+          data: {
+            content: { email },
+          },
+        }
+      )
       .then((response) => {
         logger("useDeleteUser | deleteUser ✅ |", response);
         return response.data;

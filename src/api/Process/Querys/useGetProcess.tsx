@@ -171,7 +171,7 @@ const useGetProcess = () => {
   const getProcess = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/getProcess/${projectID}/${processID}/`
+        `${process.env.VITE_HTTP_API_URL}/public/process/get/${projectID}/${processID}/`
       )
       .then((response) => {
         const process: Process = {

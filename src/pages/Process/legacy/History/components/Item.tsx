@@ -7,7 +7,7 @@ import ProcessHistoryServiceText from "./ServiceText";
 import {
   HistoryProps,
   ProcessHistoryType,
-} from "@/api/Process/Querys/useGetProcessHistory";
+} from "@/api/Process/Files/Querys/useGetProcessHistory";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 
 interface ProcessHistoryItemProps {

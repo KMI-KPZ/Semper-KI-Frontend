@@ -9,7 +9,7 @@ const useGetAdminData = () => {
   const { user } = useUser();
   const getAdminData = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/admin/getAll/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/admin/all/get/`)
       .then((response) => {
         const responseData = response.data;
         const data: AdminProps = {

@@ -3,9 +3,7 @@ import {
   ManufactoringProcessProps,
   Process,
 } from "@/api/Process/Querys/useGetProcess";
-import useGetContractors, {
-  ContractorProps,
-} from "@/api/Project/Querys/useGetContractors";
+
 import {
   Button,
   Container,
@@ -15,9 +13,9 @@ import {
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ContractorCard from "./ContractorCard";
-import { Controller, useForm } from "react-hook-form";
 import { UseQueryResult } from "@tanstack/react-query";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import { ContractorProps } from "@/api/Process/Querys/useGetContractors";
 
 interface ProcessContractorListProps {
   contractors: UseQueryResult<ContractorProps[], Error>;

@@ -2,7 +2,7 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { SingleProcessMutationProps } from "../types";
+import { SingleProcessMutationProps } from "../../types";
 
 export type DownloadFileProps = {
   fileID: string;
@@ -14,7 +14,7 @@ const useDownloadFile = () => {
   const downloadFile = async ({ fileID, processID }: DownloadFileProps) =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/downloadFile/${projectID}/${processID}/${fileID}`,
+        `${process.env.VITE_HTTP_API_URL}/public/files/download/file/${projectID}/${processID}/${fileID}/`,
         { responseType: "blob" }
       )
       .then((response) => {

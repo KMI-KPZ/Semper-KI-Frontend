@@ -7,7 +7,7 @@ const useUpdateUserDetails = () => {
   const queryClient = useQueryClient();
   const updateUserDetails = async (details: UpdateUserProps) =>
     authorizedCustomAxios
-      .patch(`${process.env.VITE_HTTP_API_URL}/public/updateUserDetails/`, {
+      .patch(`${process.env.VITE_HTTP_API_URL}/public/profile/user/update/`, {
         details,
       })
       .then((response) => {

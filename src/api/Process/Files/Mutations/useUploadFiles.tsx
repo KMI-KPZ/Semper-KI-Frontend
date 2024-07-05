@@ -2,7 +2,7 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { SingleProcessMutationProps } from "../types";
+import { SingleProcessMutationProps } from "../../types";
 import { useProject } from "@/hooks/Project/useProject";
 
 export type UploadFilesProps = {
@@ -20,7 +20,7 @@ const useUploadFiles = () => {
     formData.append("processID", processID);
     formData.append("projectID", project.projectID);
     return authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/uploadFiles/`, formData, {
+      .post(`${process.env.VITE_HTTP_API_URL}/public/files/upload/`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((response) => {

@@ -15,11 +15,14 @@ const useCreateRole = () => {
   const queryClient = useQueryClient();
   const createRole = async ({ description, name }: CreateRoleProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/createRole/`, {
-        data: {
-          content: { roleName: name, roleDescription: description },
-        },
-      })
+      .post(
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/roles/create/`,
+        {
+          data: {
+            content: { roleName: name, roleDescription: description },
+          },
+        }
+      )
       .then((response) => {
         logger("useCreateRole | createRole ✅ |", response);
         return response.data;

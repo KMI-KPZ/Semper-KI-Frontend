@@ -6,7 +6,7 @@ const useLogout = () => {
   const queryClient = useQueryClient();
   const logout = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/logout/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/auth/logout/`)
       .then((response) => {
         logger("useLogout | logout ✅ |", response);
         return response.data;

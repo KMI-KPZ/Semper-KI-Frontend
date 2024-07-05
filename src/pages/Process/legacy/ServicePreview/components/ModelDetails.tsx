@@ -1,4 +1,4 @@
-import useDownloadFile from "@/api/Process/Mutations/useDownloadFile";
+import useDownloadFile from "@/api/Process/Files/Mutations/useDownloadFile";
 import { ManufactoringProcessProps } from "@/api/Process/Querys/useGetProcess";
 import useGetModelDetails from "@/api/Service/AdditiveManufacturing/Model/Querys/useGetModelDetails";
 import ModelPreview from "@/pages/Test/STLViewer";

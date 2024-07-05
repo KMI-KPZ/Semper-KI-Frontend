@@ -14,7 +14,7 @@ import useCreateRole, {
 } from "@/api/Organization/Mutations/useCreateRole";
 import useOrganizations from "../../hooks/useOrganizations";
 import useUpdateRolePermissions from "@/api/Organization/Mutations/useUpdateRolePermissions";
-import useEditRole from "@/api/Organization/Mutations/useEditRole";
+import useUpdateRole from "@/api/Organization/Mutations/useUpdateRole";
 
 interface OrganizationRolesFormProps {
   allPermissions: PermissionProps[];
@@ -37,7 +37,7 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
   const { rolePermissionsQuery } = useOrganizations(role?.id);
   const createRole = useCreateRole();
   const updateRolePermission = useUpdateRolePermissions();
-  const editRole = useEditRole();
+  const updateRole = useUpdateRole();
   const [loading, setLoading] = useState<boolean>(false);
 
   const {
@@ -108,7 +108,7 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
         }
       );
     } else {
-      editRole.mutate(
+      updateRole.mutate(
         { roleID: role.id, name: data.name, description: data.description },
         {
           onSuccess() {

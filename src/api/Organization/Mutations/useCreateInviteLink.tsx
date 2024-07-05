@@ -6,9 +6,12 @@ const useCreateInviteLink = () => {
   const queryClient = useQueryClient();
   const createInviteLink = async (email: string) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/getInviteLink/`, {
-        data: { content: { email: email } },
-      })
+      .post(
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/users/inviteLink/`,
+        {
+          data: { content: { email: email } },
+        }
+      )
       .then((response) => {
         logger("useCreateInviteLink | createInviteLink ✅ |", response);
         return response.data;

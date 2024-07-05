@@ -6,9 +6,9 @@ import { Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { ContractorSelectionFormData } from "../ContractorSelection";
-import useGetContractors from "@/api/Project/Querys/useGetContractors";
 import { Process } from "@/api/Process/Querys/useGetProcess";
 import { FlatProcess } from "@/api/Project/Querys/useGetProject";
+import useGetContractors from "@/api/Process/Querys/useGetContractors";
 
 interface ProjectContractorSelectionItemProps {
   process: FlatProcess;

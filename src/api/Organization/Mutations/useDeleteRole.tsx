@@ -6,11 +6,14 @@ const useDeleteRole = () => {
   const queryClient = useQueryClient();
   const deleteRole = async (roleID: string) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/deleteRole/`, {
-        data: {
-          content: { roleID },
-        },
-      })
+      .post(
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/roles/delete/`,
+        {
+          data: {
+            content: { roleID },
+          },
+        }
+      )
       .then((response) => {
         logger("useDeleteRole | deleteRole ✅ |", response);
         return response.data;

@@ -6,7 +6,7 @@ const useGetCSRFToken = () => {
   const queryClient = useQueryClient();
   const getCSRFToken = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/csrfCookie/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/auth/csrfCookie/`)
       .then((response) => {
         const responseData = response.data;
 

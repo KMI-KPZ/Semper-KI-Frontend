@@ -7,9 +7,9 @@ import { Divider } from "@component-library/index";
 import { Container } from "@component-library/index";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { createDownload } from "@/services/utils";
-import useDownloadFile from "@/api/Process/Mutations/useDownloadFile";
-import useDownloadFiles from "@/api/Process/Mutations/useDownloadFiles";
-import useDeleteFile from "@/api/Process/Mutations/useDeleteFile";
+import useDownloadFile from "@/api/Process/Files/Mutations/useDownloadFile";
+import useDownloadZIP from "@/api/Process/Files/Mutations/useDownloadZIP";
+import useDeleteFile from "@/api/Process/Files/Mutations/useDeleteFile";
 import { FileProps, Process } from "@/api/Process/Querys/useGetProcess";
 import OwnerGate from "@/components/OwnerGate/OwnerGate";
 
@@ -26,7 +26,7 @@ const ProjectFile: React.FC<Props> = (props) => {
     useState<boolean>(false);
 
   const downloadFile = useDownloadFile();
-  const downloadFiles = useDownloadFiles();
+  const downloadFiles = useDownloadZIP();
   const deleteFile = useDeleteFile();
 
   const handleOnClickButtonDelete = (file: FileProps) => {

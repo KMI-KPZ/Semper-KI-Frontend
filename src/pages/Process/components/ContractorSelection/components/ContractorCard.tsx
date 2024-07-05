@@ -1,13 +1,9 @@
-import useGetContractors, {
-  ContractorProps,
-} from "@/api/Project/Querys/useGetContractors";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import TestIMG from "@images/Test2.png";
 import { Container, Text } from "@component-library/index";
 import { Process } from "@/api/Process/Querys/useGetProcess";
-import { UseFormRegister } from "react-hook-form";
-import { ContractorSelectionFormData } from "./ContractorList";
+import { ContractorProps } from "@/api/Process/Querys/useGetContractors";
 
 interface ContractorCardProps {
   contractor: ContractorProps;

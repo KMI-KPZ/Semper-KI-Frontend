@@ -14,7 +14,7 @@ const useGetPermissions = () => {
 
   const getPermissions = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/getPermissions/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/auth/permissions/get/`)
       .then((response) => {
         const responseData = response.data;
         const permissions: Permission[] = responseData;

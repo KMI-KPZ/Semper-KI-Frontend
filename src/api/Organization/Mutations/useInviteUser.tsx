@@ -11,9 +11,12 @@ const useInviteUser = () => {
   const queryClient = useQueryClient();
   const inviteUser = async (props: InvitationProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/addUser/`, {
-        data: { content: props },
-      })
+      .post(
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/users/add/`,
+        {
+          data: { content: props },
+        }
+      )
       .then((response) => {
         logger("useInviteUser | inviteUser ✅ |", response);
         return response.data;

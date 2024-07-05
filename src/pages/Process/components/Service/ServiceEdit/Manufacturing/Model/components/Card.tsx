@@ -12,7 +12,7 @@ import { Heading } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
 import useService from "@/hooks/useService";
 import ModelPreview from "@/pages/Test/STLViewer";
-import useGetModelFile from "@/api/Process/Querys/useGetModelFile";
+import useGetModelFile from "@/api/Process/Files/Querys/useGetFile";
 
 interface Props {
   model: ModelProps;

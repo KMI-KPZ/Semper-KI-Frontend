@@ -34,7 +34,7 @@ const useLogin = () => {
 
   const login = async (data: LoginMutationProps) =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/login/`, {
+      .get(`${process.env.VITE_HTTP_API_URL}/public/auth/login/`, {
         headers: {
           Usertype: data.userType,
           Path: data.path === undefined ? "/" : data.path,

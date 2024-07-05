@@ -13,7 +13,7 @@ const useGetOrganizationRolePermissions = (roleID?: string) => {
   const getOrganizationRolePermissions = async () =>
     authorizedCustomAxios
       .post(
-        `${process.env.VITE_HTTP_API_URL}/public/organization/getPermissionsForRole/`,
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/permissions/role/get/`,
         {
           data: {
             content: { roleID: roleID },

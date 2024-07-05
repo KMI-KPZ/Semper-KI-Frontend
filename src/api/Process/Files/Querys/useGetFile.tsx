@@ -9,7 +9,7 @@ const useGetModelFile = (fileID: string) => {
   const getModel = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/downloadFile/${projectID}/${processID}/${fileID}`,
+        `${process.env.VITE_HTTP_API_URL}/public/files/download/file/${projectID}/${processID}/${fileID}/`,
         { responseType: "blob" }
       )
       .then((response) => {

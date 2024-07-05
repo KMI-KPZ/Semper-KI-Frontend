@@ -8,7 +8,7 @@ const useMockedLogin = () => {
   const queryClient = useQueryClient();
   const mockedLogin = async (userType: LoginUserType) =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/login/`, {
+      .get(`${process.env.VITE_HTTP_API_URL}/public/auth/login/`, {
         headers: {
           userType,
         },

@@ -6,7 +6,7 @@ const useReloadPermissions = () => {
   const queryClient = useQueryClient();
   const reloadPermissions = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/getNewPermissions/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/auth/newPermissions/get/`)
       .then((response) => {
         logger("useReloadPermissions | reloadPermissions ✅ |", response);
         return response.data;

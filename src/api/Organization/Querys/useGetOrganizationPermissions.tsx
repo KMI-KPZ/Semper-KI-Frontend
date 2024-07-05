@@ -36,7 +36,7 @@ const useGetOrganizationPermissions = () => {
   const getOrganizationPermissions = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/organization/getPermissions/`
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/permissions/get/`
       )
       .then((response) => {
         const responseData = response.data;

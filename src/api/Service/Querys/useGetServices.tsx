@@ -87,7 +87,7 @@ const useGetServices = () => {
   const queryClient = useQueryClient();
   const getServices = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/getServices/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/services/get/`)
       .then((response) => {
         const services: ServiceItemProps[] = objectToArray<ServiceItemProps>(
           response.data

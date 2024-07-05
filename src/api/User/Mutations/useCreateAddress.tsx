@@ -18,7 +18,7 @@ const useCreateAddress = () => {
   const queryClient = useQueryClient();
   const createAddress = async (address: NewUserAddressProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/createAddress/`, {
+      .post(`${process.env.VITE_HTTP_API_URL}/public/profile/address/create/`, {
         ...address,
       })
       .then((response) => {

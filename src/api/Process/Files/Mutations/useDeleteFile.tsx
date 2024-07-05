@@ -2,7 +2,7 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { SingleProcessMutationProps } from "../types";
+import { SingleProcessMutationProps } from "../../types";
 
 export type DeleteFileProps = {
   fileID: string;
@@ -14,7 +14,7 @@ const useDeleteFile = () => {
   const deleteFile = async ({ fileID, processID }: DeleteFileProps) =>
     authorizedCustomAxios
       .delete(
-        `${process.env.VITE_HTTP_API_URL}/public/deleteFile/${processID}/${fileID}`
+        `${process.env.VITE_HTTP_API_URL}/public/files/delete/${projectID}/${processID}/${fileID}/`
       )
       .then((response) => {
         logger("useDeleteFile | deleteFile ✅ |", response);

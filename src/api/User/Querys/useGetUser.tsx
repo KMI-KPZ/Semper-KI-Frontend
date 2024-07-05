@@ -7,7 +7,7 @@ import { AuthorizedUserProps, UserAddressProps } from "@/hooks/useUser";
 const useGetUser = (useUserIsLoggedInQuery: UseQueryResult<boolean, Error>) => {
   const fetchUser = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/getUser/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/profile/user/get/`)
       .then((response) => {
         const userData = response.data;
         const addresses: UserAddressProps[] =

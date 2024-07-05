@@ -9,7 +9,7 @@ const useGetMissedEvents = () => {
   const { user } = useUser();
   const getMissedEvents = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/getMissedEvents/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/events/get/missed/`)
       .then((response) => {
         const responseData = response.data;
         const events: Event[] = responseData.events;

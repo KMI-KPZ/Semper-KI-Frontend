@@ -14,11 +14,14 @@ const useUpdateRolePermissions = () => {
     roleID,
   }: SetPermissionProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/setPermissionsForRole/`, {
-        data: {
-          content: { roleID, permissionIDs },
-        },
-      })
+      .post(
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/permissions/role/set/`,
+        {
+          data: {
+            content: { roleID, permissionIDs },
+          },
+        }
+      )
       .then((response) => {
         logger(
           "useUpdateRolePermissions | updateRolePermissions ✅ |",

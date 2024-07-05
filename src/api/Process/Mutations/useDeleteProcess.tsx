@@ -13,7 +13,7 @@ const useDeleteProcess = () => {
       .delete(
         `${
           process.env.VITE_HTTP_API_URL
-        }/public/deleteProcesses/${projectID}/?processIDs=${processIDs.join(
+        }/public/process/delete/${projectID}/?processIDs=${processIDs.join(
           ","
         )}`
       )

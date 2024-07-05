@@ -10,7 +10,7 @@ const useCreateProcess = () => {
   const createProcess = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/createProcessID/${projectID}/`
+        `${process.env.VITE_HTTP_API_URL}/public/process/create/${projectID}/`
       )
       .then((response) => {
         logger("useCreateProcess | createProcess ✅ |", response);

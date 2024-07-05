@@ -14,9 +14,7 @@ const useGetOrganizationUsers = () => {
   const queryClient = useQueryClient();
   const getOrganizationUsers = async () =>
     authorizedCustomAxios
-      .get(
-        `${process.env.VITE_HTTP_API_URL}/public/getOrganization/fetchUsers/`
-      )
+      .get(`${process.env.VITE_HTTP_API_URL}/public/organizations/users/get/`)
       .then((response) => {
         const responseData = response.data;
         const users: OrganizationsUser[] = {

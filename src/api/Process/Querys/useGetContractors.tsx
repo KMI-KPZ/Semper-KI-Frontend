@@ -15,7 +15,7 @@ const useGetContractors = (processID: string) => {
   const getContractors = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/getContractors/${processID}/`
+        `${process.env.VITE_HTTP_API_URL}/public/process/contractors/get/${processID}/`
       )
       .then((response) => {
         const responseData = response.data;

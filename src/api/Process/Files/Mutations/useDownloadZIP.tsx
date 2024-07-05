@@ -2,20 +2,20 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-export interface DownloadFilesProps {
+export interface DownloadZIPProps {
   processID: string;
   fileIDs: string[];
 }
 
-const useDownloadFiles = () => {
+const useDownloadZIP = () => {
   const queryClient = useQueryClient();
   const { projectID } = useParams();
-  const downloadFiles = async ({ fileIDs, processID }: DownloadFilesProps) =>
+  const downloadZIP = async ({ fileIDs, processID }: DownloadZIPProps) =>
     authorizedCustomAxios
       .get(
         `${
           process.env.VITE_HTTP_API_URL
-        }/public/downloadFilesAsZip/${projectID}/${processID}?fileIDs=${fileIDs.join(
+        }/public/files/download/zip/${projectID}/${processID}?fileIDs=${fileIDs.join(
           ","
         )}`,
         { responseType: "blob" }
@@ -28,10 +28,10 @@ const useDownloadFiles = () => {
         logger("useDownloadFiles | downloadFiles ❌ |", error);
       });
 
-  return useMutation<Blob, Error, DownloadFilesProps>({
-    mutationFn: downloadFiles,
+  return useMutation<Blob, Error, DownloadZIPProps>({
+    mutationFn: downloadZIP,
     onSuccess: () => {},
   });
 };
 
-export default useDownloadFiles;
+export default useDownloadZIP;

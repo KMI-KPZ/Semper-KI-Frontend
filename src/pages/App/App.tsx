@@ -40,6 +40,7 @@ import ProcessPage from "../Process/ProcessPage";
 import Admin from "../Admin/Admin";
 import AdminUser from "../Admin/User/User";
 import AdminOrganization from "../Admin/Organization/Organization";
+import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
 
 export type AppState = {
   guideFilter: FilterItemProps[];

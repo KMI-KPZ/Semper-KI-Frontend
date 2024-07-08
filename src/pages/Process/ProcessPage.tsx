@@ -14,6 +14,7 @@ import ProcessStatusGate from "./components/StatusGate";
 import ProcessRequest from "./components/Request/Request";
 import ProcessClarify from "./components/Clarify/Clarify";
 import ProcessContract from "./components/Contract/Contract";
+import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
 
 interface ProcessPageProps {}
 
@@ -21,6 +22,7 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { process } = useProcess();
+  useScrollIntoView();
 
   return (
     <Container direction="col" width="full">

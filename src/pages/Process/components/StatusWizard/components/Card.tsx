@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { StatusWizardItem } from "../StatusWizard";
 import { Process } from "@/api/Process/Querys/useGetProcess";
 import logger from "@/hooks/useLogger";
+import { Navigate, useNavigate } from "react-router-dom";
 
 interface StatusWizardCardProps {
   process: Process;
@@ -22,6 +23,7 @@ const isCardInView = (item: StatusWizardItem): boolean => {
 const StatusWizardCard: React.FC<StatusWizardCardProps> = (props) => {
   const { item, process } = props;
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const [inView, setInView] = useState(false);
 
@@ -54,7 +56,7 @@ const StatusWizardCard: React.FC<StatusWizardCardProps> = (props) => {
       item.id !== undefined ? item.id : item.text
     );
     if (element && reachable) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      navigate(`#${item.id !== undefined ? item.id : item.text}`);
     }
   };
 

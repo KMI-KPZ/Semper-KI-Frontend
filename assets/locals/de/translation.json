@@ -1021,6 +1021,7 @@
             "date": "Datum",
             "author": "Autor",
             "actions": "Aktionen",
+            "userFilesTitle": "Dateien zum Angebot",
             "uploadFilesTitle": "Dateien hochladen",
             "currentFilesTitle": "Aktuelle Dateien",
             "button": {
@@ -1036,6 +1037,42 @@
 
           "button": {
             "menu": "Angebotsmenu"
+          }
+        }
+      },
+      "Confirmation": {
+        "Confirmation": {
+          "title": "Bestätigung des Angebots",
+
+          "button": {
+            "menu": "Bestätigungsmenu"
+          }
+        }
+      },
+      "Production": {
+        "Production": {
+          "title": "Produktion",
+
+          "button": {
+            "menu": "Produktionsmenu"
+          }
+        }
+      },
+      "Delivery": {
+        "Delivery": {
+          "title": "Lieferung",
+
+          "button": {
+            "menu": "Lieferungsmenu"
+          }
+        }
+      },
+      "Completed": {
+        "Completed": {
+          "title": "Abgeschlossen",
+
+          "button": {
+            "menu": "Abgeschlossenmenu"
           }
         }
       }
@@ -1125,11 +1162,11 @@
           "requested": "Anfrage",
           "clarification": "Rückfragen",
           "offer": "Angebot",
-          "client": "Bestätigung",
+          "confirmation": "Bestätigung",
           "confirmed": "Bestätigt",
           "production": "Produktion",
           "delivery": "Lieferung",
-          "finished": "Abgeschlossen"
+          "completed": "Abgeschlossen"
         }
       }
     },

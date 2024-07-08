@@ -15,6 +15,10 @@ import ProcessRequest from "./components/Request/Request";
 import ProcessClarify from "./components/Clarify/Clarify";
 import ProcessContract from "./components/Contract/Contract";
 import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
+import ProcessConfirmation from "./components/Confirmation/Confirmation";
+import ProcessProduction from "./components/Production/Production";
+import ProcessDelivery from "./components/Delivery/Delivery";
+import ProcessCompleted from "./components/Completed/Completed";
 
 interface ProcessPageProps {}
 
@@ -22,7 +26,6 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { process } = useProcess();
-  useScrollIntoView();
 
   return (
     <Container direction="col" width="full">
@@ -49,10 +52,22 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
                 <ProcessStatusGate start={ProcessStatus.CLARIFICATION}>
                   <ProcessClarify />
                 </ProcessStatusGate>
+                <ProcessStatusGate start={ProcessStatus.CLARIFICATION}>
+                  <ProcessContract />
+                </ProcessStatusGate>
                 <ProcessStatusGate
                   start={ProcessStatus.CONFIRMED_BY_CONTRACTOR}
                 >
-                  <ProcessContract />
+                  <ProcessConfirmation />
+                </ProcessStatusGate>
+                <ProcessStatusGate start={ProcessStatus.PRODUCTION}>
+                  <ProcessProduction />
+                </ProcessStatusGate>
+                <ProcessStatusGate start={ProcessStatus.DELIVERY}>
+                  <ProcessDelivery />
+                </ProcessStatusGate>
+                <ProcessStatusGate start={ProcessStatus.COMPLETED}>
+                  <ProcessCompleted />
                 </ProcessStatusGate>
               </DefinedProcessOutlet>
             </AuthorizedUserRouteOutlet>

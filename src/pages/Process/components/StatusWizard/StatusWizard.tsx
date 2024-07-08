@@ -15,6 +15,7 @@ import ModeIcon from "@mui/icons-material/Mode";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import StatusWizardCard from "./components/Card";
 import InfoIcon from "@mui/icons-material/Info";
+import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
 
 interface ProcessStatusWizardProps {
   process: Process;
@@ -35,10 +36,10 @@ export type StatusWizardItem = {
     | "requested"
     | "clarification"
     | "offer"
-    | "client"
+    | "confirmation"
     | "production"
     | "delivery"
-    | "finished";
+    | "completed";
 };
 
 const statusWizardItems: StatusWizardItem[] = [
@@ -78,7 +79,7 @@ const statusWizardItems: StatusWizardItem[] = [
     text: "clarification",
   },
   {
-    startStatus: ProcessStatus.CONFIRMED_BY_CONTRACTOR,
+    startStatus: ProcessStatus.CLARIFICATION,
     endStatus: ProcessStatus.REJECTED_BY_CONTRACTOR,
     icon: <DescriptionIcon />,
     text: "offer",
@@ -87,7 +88,7 @@ const statusWizardItems: StatusWizardItem[] = [
     startStatus: ProcessStatus.CONFIRMED_BY_CLIENT,
     endStatus: ProcessStatus.REJECTED_BY_CLIENT,
     icon: <CheckIcon />,
-    text: "client",
+    text: "confirmation",
   },
   {
     startStatus: ProcessStatus.PRODUCTION,
@@ -105,13 +106,27 @@ const statusWizardItems: StatusWizardItem[] = [
     startStatus: ProcessStatus.COMPLETED,
     endStatus: ProcessStatus.COMPLETED,
     icon: <DoneAllIcon />,
-    text: "finished",
+    text: "completed",
   },
 ];
 
 const ProcessStatusWizard: React.FC<ProcessStatusWizardProps> = (props) => {
   const { process } = props;
   const { t } = useTranslation();
+  const newestStatusItem = statusWizardItems.find(
+    (item) =>
+      item.startStatus !== undefined &&
+      process.processStatus >= item.startStatus &&
+      item.endStatus !== undefined &&
+      process.processStatus <= item.endStatus
+  );
+  const newestStatusID =
+    newestStatusItem === undefined
+      ? ""
+      : newestStatusItem.id !== undefined
+      ? newestStatusItem.id
+      : newestStatusItem.text;
+  useScrollIntoView(newestStatusID);
 
   return (
     <Container direction="col" className="sticky top-5 bg-white p-5">

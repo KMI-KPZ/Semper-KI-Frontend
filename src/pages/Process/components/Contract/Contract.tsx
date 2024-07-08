@@ -45,7 +45,7 @@ const ProcessContract: React.FC<ProcessContractProps> = (props) => {
       id="offer"
       menuButtonTitle={t("Process.components.Contract.Contract.button.menu")}
       pageTitle={`${t("Process.components.Contract.Contract.title")}:`}
-      start={ProcessStatus.CONFIRMED_BY_CONTRACTOR}
+      start={ProcessStatus.CLARIFICATION}
       end={ProcessStatus.REJECTED_BY_CONTRACTOR}
     >
       <OwnerGate type="organization">
@@ -54,8 +54,10 @@ const ProcessContract: React.FC<ProcessContractProps> = (props) => {
         </Container>
         <ProcessFileTable files={process.files} type="current" />
         <ProcessFileTable files={convertFiles(files)} type="upload" />
-
         <ProcessUploadCard addFiles={addFiles} />
+      </OwnerGate>
+      <OwnerGate type="user">
+        <ProcessFileTable files={process.files} type="user" />
       </OwnerGate>
     </ProcessContainer>
   );

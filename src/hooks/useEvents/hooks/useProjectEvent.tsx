@@ -265,7 +265,7 @@ const useProjectEvent = (): ReturnProps => {
     ) {
       toast(
         t("App.hooks.useEvents.hooks.useProjectEvent.toast.status"),
-        `/projects/${projectEventItem.projectID}/${processEventItem.processID}`
+        `/projects/${projectEventItem.projectID}/${processEventItem.processID}#newest`
       );
     }
   };

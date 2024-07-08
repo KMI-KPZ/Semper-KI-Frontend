@@ -14,7 +14,7 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 
 interface ProcessFileTableProps {
   files: ModelFileDescriptionProps[];
-  type: "current" | "upload";
+  type: "current" | "upload" | "user";
 }
 
 const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
@@ -22,6 +22,14 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
   const { t } = useTranslation();
 
   if (files.length === 0 && type === "upload") return null;
+  if (files.length === 0 && type === "user")
+    return (
+      <Container className="rounded-xl border-2 p-5">
+        <Text>
+          {t("Process.components.Contract.components.FileTable.noFiles")}
+        </Text>
+      </Container>
+    );
   if (files.length === 0 && type === "current")
     return (
       <Container className="rounded-xl border-2 p-5">
@@ -33,7 +41,9 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
   return (
     <Container width="full" direction="col" className="rounded-xl border-2 p-5">
       <Heading variant="h3">
-        {type === "current"
+        {type === "user"
+          ? t("Process.components.Contract.components.FileTable.userFilesTitle")
+          : type === "current"
           ? t(
               "Process.components.Contract.components.FileTable.currentFilesTitle"
             )
@@ -65,12 +75,12 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
           </tr>
         </thead>
         <tbody>
-          {files.map((file) => (
-            <ProcessFileRow file={file} />
+          {files.map((file, index) => (
+            <ProcessFileRow file={file} key={index} />
           ))}
         </tbody>
       </table>
-      {type === "current" ? (
+      {type === "current" || type === "user" ? (
         <Button
           size="sm"
           variant="primary"

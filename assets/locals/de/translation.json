@@ -1402,6 +1402,11 @@
           "FORWARD-TO-REJECTED_BY_CONTRACTOR": "Anfrage ablehnen",
           "FORWARD-TO-CONFIRMED_BY_CLIENT": "Angebot bestätigen",
           "FORWARD-TO-REJECTED_BY_CLIENT": "Angebot ablehnen",
+          "FORWARD-TO-PRODUCTION": "Produktion starten",
+          "FORWARD-TO-DELIVERY": "Lieferung starten",
+          "FORWARD-TO-FAILED": "Prozess fehlgeschlagen",
+          "FORWARD-TO-COMPLETED": "Prozess abschließen",
+          "FORWARD-TO-DISPUTE": "Streitfall melden",
           "buttons": {
             "confirmAll": "Wollen Sie wirklich alle betroffene Prozesse {{title}}?"
           }

@@ -2,15 +2,16 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
+import { useProject } from "@/hooks/Project/useProject";
 
 const useCreateProcess = () => {
   const queryClient = useQueryClient();
-  const { projectID, processID } = useParams();
+  const { project } = useProject();
   const navigate = useNavigate();
   const createProcess = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/process/create/${projectID}/`
+        `${process.env.VITE_HTTP_API_URL}/public/process/create/${project.projectID}/`
       )
       .then((response) => {
         logger("useCreateProcess | createProcess ✅ |", response);
@@ -24,8 +25,8 @@ const useCreateProcess = () => {
     mutationFn: createProcess,
     onSuccess: (data) => {
       queryClient.invalidateQueries(["flatProjects"]);
-      queryClient.invalidateQueries(["project", projectID]);
-      // navigate(`${processID === undefined ? "" : "../"}${data}`);
+      queryClient.invalidateQueries(["project", project.projectID]);
+      navigate(`/projects/${project.projectID}/${data}`);
     },
   });
 };

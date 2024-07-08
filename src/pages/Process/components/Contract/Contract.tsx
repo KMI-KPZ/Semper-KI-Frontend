@@ -46,7 +46,7 @@ const ProcessContract: React.FC<ProcessContractProps> = (props) => {
       menuButtonTitle={t("Process.components.Contract.Contract.button.menu")}
       pageTitle={`${t("Process.components.Contract.Contract.title")}:`}
       start={ProcessStatus.CLARIFICATION}
-      end={ProcessStatus.REJECTED_BY_CONTRACTOR}
+      end={ProcessStatus.CONFIRMED_BY_CONTRACTOR}
     >
       <OwnerGate type="organization">
         <Container width="full" direction="col">

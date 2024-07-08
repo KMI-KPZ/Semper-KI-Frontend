@@ -79,7 +79,7 @@ const statusWizardItems: StatusWizardItem[] = [
     text: "clarification",
   },
   {
-    startStatus: ProcessStatus.CLARIFICATION,
+    startStatus: ProcessStatus.CONFIRMED_BY_CONTRACTOR,
     endStatus: ProcessStatus.REJECTED_BY_CONTRACTOR,
     icon: <DescriptionIcon />,
     text: "offer",

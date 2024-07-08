@@ -60,13 +60,13 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
                 >
                   <ProcessConfirmation />
                 </ProcessStatusGate>
-                <ProcessStatusGate start={ProcessStatus.PRODUCTION}>
+                <ProcessStatusGate start={ProcessStatus.CONFIRMED_BY_CLIENT}>
                   <ProcessProduction />
                 </ProcessStatusGate>
-                <ProcessStatusGate start={ProcessStatus.DELIVERY}>
+                <ProcessStatusGate start={ProcessStatus.PRODUCTION}>
                   <ProcessDelivery />
                 </ProcessStatusGate>
-                <ProcessStatusGate start={ProcessStatus.COMPLETED}>
+                <ProcessStatusGate start={ProcessStatus.DELIVERY}>
                   <ProcessCompleted />
                 </ProcessStatusGate>
               </DefinedProcessOutlet>

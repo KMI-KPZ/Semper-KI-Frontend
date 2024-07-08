@@ -21,6 +21,7 @@ const OwnerGate: React.FC<PropsWithChildren<OwnerGateProps>> = (props) => {
     project.client !== user.organization;
 
   if (user.usertype === UserType.ADMIN) return children;
+  if (user.usertype === UserType.ANONYM) return children;
   if (type === "user" && ownProject) return children;
   if (type === "organization" && recievedProject) return children;
   return null;

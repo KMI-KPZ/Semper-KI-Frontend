@@ -2,9 +2,9 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-const useGetCSRFToken = () => {
+const useGetCsrfCookie = () => {
   const queryClient = useQueryClient();
-  const getCSRFToken = async () =>
+  const getCsrfCookie = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/auth/csrfCookie/`)
       .then((response) => {
@@ -16,9 +16,9 @@ const useGetCSRFToken = () => {
 
   return useQuery<string, Error>({
     queryKey: ["csrf"],
-    queryFn: getCSRFToken,
+    queryFn: getCsrfCookie,
     staleTime: 1000 * 60 * 24,
   });
 };
 
-export default useGetCSRFToken;
+export default useGetCsrfCookie;

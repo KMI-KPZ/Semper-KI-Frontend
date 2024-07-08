@@ -50,26 +50,20 @@ const ContractorSelectionAddressCard: React.FC<
     setEdit(true);
   };
 
-  const setBillingAddress = (address: UserAddressProps | undefined) => {
+  const setAddress = (
+    address: UserAddressProps | undefined,
+    equal?: boolean
+  ) => {
     updateProcess.mutate({
       processIDs: [process.processID],
       updates: {
         changes: {
           processDetails: {
-            clientBillingAddress: address,
-          },
-        },
-      },
-    });
-  };
-
-  const setDeliveryAddress = (address: UserAddressProps | undefined) => {
-    updateProcess.mutate({
-      processIDs: [process.processID],
-      updates: {
-        changes: {
-          processDetails: {
-            clientDeliverAddress: address,
+            clientBillingAddress: type === "billing" ? address : undefined,
+            clientDeliverAddress:
+              type === "delivery" || !showDeliveryAddress || equal
+                ? address
+                : undefined,
           },
         },
       },
@@ -77,27 +71,17 @@ const ContractorSelectionAddressCard: React.FC<
   };
 
   const handleOnButtonClickReset = () => {
-    if (type === "billing") {
-      setBillingAddress(standardAddress);
-    }
-    if (type === "delivery" || !showDeliveryAddress) {
-      setDeliveryAddress(standardAddress);
-    }
+    setAddress(standardAddress);
   };
 
   const selectAddress = (address: UserAddressProps) => {
-    if (type === "billing") {
-      setBillingAddress(address);
-    }
-    if (type === "delivery" || !showDeliveryAddress) {
-      setDeliveryAddress(address);
-    }
+    setAddress(address);
   };
 
   const handleOnChangeAddressEqual = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setDeliveryAddress(process.processDetails.clientBillingAddress);
+    setAddress(process.processDetails.clientBillingAddress, true);
     onChangeCheckBox(event);
   };
 

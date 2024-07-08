@@ -1,4 +1,4 @@
-import useLogin from "@/api/Login/Mutation/useLogin";
+import useLogin from "@/api/Authentification/Querys/useLogin";
 import { LoadingAnimation, LoadingSuspense } from "@component-library/index";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";

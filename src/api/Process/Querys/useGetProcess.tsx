@@ -199,11 +199,13 @@ const useGetProcess = () => {
           processDetails: {
             ...response.data.processDetails,
             clientBillingAddress:
+              response.data.processDetails.clientBillingAddress === undefined ||
               Object.keys(response.data.processDetails.clientBillingAddress)
                 .length === 0
                 ? undefined
                 : response.data.processDetails.clientBillingAddress,
             clientDeliverAddress:
+              response.data.processDetails.clientDeliverAddress === undefined ||
               Object.keys(response.data.processDetails.clientDeliverAddress)
                 .length === 0
                 ? undefined

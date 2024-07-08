@@ -1,5 +1,4 @@
-import useLogin from "@/api/Login/Mutation/useLogin";
-import useLogout from "@/api/Logout/Mutation/useLogout";
+import useLogout from "@/api/Authentification/Querys/useLogout";
 import { Container } from "@component-library/index";
 import { LoadingAnimation } from "@component-library/index";
 import { Heading } from "@component-library/index";

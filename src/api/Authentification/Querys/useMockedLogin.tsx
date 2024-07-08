@@ -1,7 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { UserType } from "@/hooks/useUser";
 import { LoginUserType } from "./useLogin";
 
 const useMockedLogin = () => {

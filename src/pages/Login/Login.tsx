@@ -15,9 +15,10 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { Container } from "@component-library/index";
 import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import logger from "@/hooks/useLogger";
-import useMockedLogin from "@/api/Login/Mutation/useMockedLogin";
-import useLogin, { LoginUserType } from "@/api/Login/Mutation/useLogin";
-
+import useLogin, {
+  LoginUserType,
+} from "@/api/Authentification/Querys/useLogin";
+import useMockedLogin from "@/api/Authentification/Querys/useMockedLogin";
 interface Props {
   path?: string;
   userType?: UserType;

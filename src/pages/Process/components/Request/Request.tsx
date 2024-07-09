@@ -54,7 +54,7 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
 
   return (
     <ProcessContainer
-      id="requested"
+      id="Request"
       menuButtonTitle={menuButtonTitle}
       pageTitle={pageTitle}
       start={ProcessStatus.VERIFIED}

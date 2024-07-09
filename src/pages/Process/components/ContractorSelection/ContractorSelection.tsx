@@ -82,7 +82,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
 
   return (
     <ProcessContainer
-      id="contractorSelected"
+      id="Contractor"
       pageTitle={pageTitle}
       menuButtonTitle={menuButtonTitle}
       start={ProcessStatus.SERVICE_COMPLETED}

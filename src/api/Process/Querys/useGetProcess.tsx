@@ -153,6 +153,18 @@ export enum ProcessStatus {
   "CANCELED" = 1500,
 }
 
+export type ProcessContext =
+  | "Service"
+  | "Contractor"
+  | "Verification"
+  | "Request"
+  | "Clarification"
+  | "Contract"
+  | "Confirmation"
+  | "Production"
+  | "Delivery"
+  | "Completed";
+
 interface ProcessQueryProps {
   process: Process | undefined;
   query: UseQueryResult<Project, Error>;

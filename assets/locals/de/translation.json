@@ -164,6 +164,15 @@
       "COMPLETED": "Abgeschlossen"
     }
   },
+  "api": {
+    "Process": {
+      "Files": {
+        "useDownloadZIP": {
+          "contract": "Angebot"
+        }
+      }
+    }
+  },
   "component-library": {
     "Badege": {},
     "Button": {},

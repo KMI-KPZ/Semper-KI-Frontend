@@ -38,7 +38,7 @@ const ProjectFile: React.FC<Props> = (props) => {
     downloadFile.mutate(
       { processID: process.processID, fileID: file.id },
       {
-        onSettled(data) {
+        onSuccess(data) {
           if (data) {
             createDownload(data, file.fileName);
             setLoadingFileID("");
@@ -49,20 +49,7 @@ const ProjectFile: React.FC<Props> = (props) => {
   };
   const handleOnClickButtonDownloadZip = () => {
     setDownloadFilesZIPIsLoading(true);
-    downloadFiles.mutate(
-      {
-        processID: process.processID,
-        fileIDs: process.files.map((file) => file.id),
-      },
-      {
-        onSettled(data) {
-          if (data) {
-            createDownload(data, "files.zip");
-            setDownloadFilesZIPIsLoading(false);
-          }
-        },
-      }
-    );
+    downloadFiles.mutate(process.files.map((file) => file.id));
   };
 
   return (

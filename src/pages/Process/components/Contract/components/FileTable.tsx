@@ -11,6 +11,8 @@ import ProcessFileRow from "./FileRow";
 import { ModelFileDescriptionProps } from "@/api/Process/Querys/useGetProcess";
 import DownloadIcon from "@mui/icons-material/Download";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
+import useDownloadZIP from "@/api/Process/Files/Mutations/useDownloadZIP";
+import useUploadFiles from "@/api/Process/Files/Mutations/useUploadFiles";
 
 interface ProcessFileTableProps {
   files: ModelFileDescriptionProps[];
@@ -20,6 +22,13 @@ interface ProcessFileTableProps {
 const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
   const { files, type } = props;
   const { t } = useTranslation();
+  const downloadZIP = useDownloadZIP();
+  const uploadFiles = useUploadFiles();
+
+  const handleOnButtonClickUpload = () => {};
+  const handleOnButtonClickDownload = () => {
+    downloadZIP.mutate(files.map((file) => file.id));
+  };
 
   if (files.length === 0 && type === "upload") return null;
   if (files.length === 0 && type === "user")
@@ -88,6 +97,7 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
             "Process.components.Contract.components.FileTable.button.downloadAll"
           )}
           startIcon={<DownloadIcon />}
+          onClick={handleOnButtonClickDownload}
         />
       ) : (
         <Button
@@ -97,6 +107,7 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
             "Process.components.Contract.components.FileTable.button.upload"
           )}
           startIcon={<FileUploadIcon />}
+          onClick={handleOnButtonClickUpload}
         />
       )}
     </Container>

@@ -12,7 +12,7 @@ const ProcessConfirmation: React.FC<ProcessConfirmationProps> = (props) => {
 
   return (
     <ProcessContainer
-      id="confirmation"
+      id="Confirmation"
       menuButtonTitle={t(
         "Process.components.Confirmation.Confirmation.button.menu"
       )}

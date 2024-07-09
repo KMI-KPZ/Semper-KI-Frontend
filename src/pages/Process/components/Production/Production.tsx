@@ -12,7 +12,7 @@ const ProcessProduction: React.FC<ProcessProductionProps> = (props) => {
 
   return (
     <ProcessContainer
-      id="production"
+      id="Production"
       menuButtonTitle={t(
         "Process.components.Production.Production.button.menu"
       )}

@@ -52,11 +52,9 @@ const StatusWizardCard: React.FC<StatusWizardCardProps> = (props) => {
     item.startStatus === undefined;
 
   const handleOnClickCard = () => {
-    const element = document.getElementById(
-      item.id !== undefined ? item.id : item.text
-    );
+    const element = document.getElementById(item.targetID);
     if (element && reachable) {
-      navigate(`#${item.id !== undefined ? item.id : item.text}`);
+      navigate(`#${item.targetID}`);
     }
   };
 

@@ -50,7 +50,7 @@ const Service: React.FC<ServiceProps> = (props) => {
 
   return (
     <ProcessContainer
-      id="draft"
+      id="Service"
       start={ProcessStatus.DRAFT}
       end={ProcessStatus.SERVICE_COMPLICATION}
       menuButtonTitle={menuButtonTitle}

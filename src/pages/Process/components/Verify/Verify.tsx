@@ -29,7 +29,7 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
 
   return (
     <ProcessContainer
-      id="verified"
+      id="Verification"
       start={ProcessStatus.CONTRACTOR_SELECTED}
       end={ProcessStatus.VERIFIED}
       menuButtonTitle={t("Process.components.Verify.Verify.button.menu")}

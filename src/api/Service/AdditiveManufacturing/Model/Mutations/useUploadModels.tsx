@@ -30,6 +30,7 @@ const useUploadModels = () => {
     models: _models,
     processID,
     projectID,
+    origin,
   }: ModelsUpload) => {
     const formData = new FormData();
     let detailList: { details: ModelUploadDetails; fileName: string }[] = [];

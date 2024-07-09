@@ -22,11 +22,12 @@ export type ProcessFileTableProps =
 type UploadFileTableProps = {
   files: File[];
   type: "upload";
+  resetUploadFiles: () => void;
 };
 
 type CurrentFileTableProps = {
   files: ProcessFile[];
-  type: "current" | "user";
+  type: "current";
 };
 
 const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
@@ -36,21 +37,17 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
   const uploadFiles = useUploadFiles();
 
   const handleOnButtonClickUpload = () => {
-    if (type === "upload") uploadFiles.mutate({ files, origin: "Contract" });
+    if (type === "upload")
+      uploadFiles.mutate(
+        { files, origin: "Contract" },
+        { onSuccess: () => props.resetUploadFiles() }
+      );
   };
   const handleOnButtonClickDownload = () => {
     if (type !== "upload") downloadZIP.mutate(files.map((file) => file.id));
   };
 
   if (files.length === 0 && type === "upload") return null;
-  if (files.length === 0 && type === "user")
-    return (
-      <Container className="rounded-xl border-2 p-5">
-        <Text>
-          {t("Process.components.Contract.components.FileTable.noFiles")}
-        </Text>
-      </Container>
-    );
   if (files.length === 0 && type === "current")
     return (
       <Container className="rounded-xl border-2 p-5">
@@ -62,9 +59,7 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
   return (
     <Container width="full" direction="col" className="rounded-xl border-2 p-5">
       <Heading variant="h3">
-        {type === "user"
-          ? t("Process.components.Contract.components.FileTable.userFilesTitle")
-          : type === "current"
+        {type === "current"
           ? t(
               "Process.components.Contract.components.FileTable.currentFilesTitle"
             )

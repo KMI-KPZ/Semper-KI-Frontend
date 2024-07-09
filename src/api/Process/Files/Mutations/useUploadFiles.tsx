@@ -43,7 +43,7 @@ const useUploadFiles = () => {
   return useMutation<void, Error, UploadFilesProps>({
     mutationFn: uploadFile,
     onSuccess: () => {
-      queryClient.invalidateQueries(["project", projectID]);
+      queryClient.invalidateQueries(["project", projectID, processID]);
     },
   });
 };

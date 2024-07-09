@@ -2,6 +2,7 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
 
 interface ModelUploadDetails {
   tags: string[];
@@ -18,6 +19,7 @@ export interface UploadModel {
 interface ModelsUpload {
   projectID: string;
   processID: string;
+  origin: ProcessOrigin;
   models: UploadModel[];
 }
 
@@ -39,6 +41,7 @@ const useUploadModels = () => {
     formData.append("details", JSON.stringify(detailList));
     formData.append("projectID", projectID);
     formData.append("processID", processID);
+    formData.append("origin", origin);
 
     return authorizedCustomAxios
       .post(

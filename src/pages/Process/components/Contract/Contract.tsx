@@ -8,6 +8,7 @@ import useProcess from "@/hooks/Process/useProcess";
 import OwnerGate from "@/components/OwnerGate/OwnerGate";
 import ProcessFileTable from "./components/FileTable";
 import ProcessUploadCard from "@/components/Process/UploadCard";
+import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 
 interface ProcessContractProps {}
 
@@ -15,10 +16,16 @@ const ProcessContract: React.FC<ProcessContractProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const [files, setFiles] = React.useState<File[]>([]);
+  const { user } = useAuthorizedUser();
+
   const { process } = useProcess();
 
   const addFiles = (newFiles: File[]) => {
     setFiles((prevState) => [...prevState, ...newFiles]);
+  };
+
+  const resetUploadFiles = () => {
+    setFiles([]);
   };
 
   return (
@@ -29,17 +36,23 @@ const ProcessContract: React.FC<ProcessContractProps> = (props) => {
       start={ProcessStatus.CLARIFICATION}
       end={ProcessStatus.CONFIRMED_BY_CONTRACTOR}
     >
-      <OwnerGate type="organization">
-        <Container width="full" direction="col">
-          <Text>{t("Process.components.Contract.Contract.text")}</Text>
-        </Container>
-        <ProcessFileTable files={process.files} type="current" />
-        <ProcessFileTable files={files} type="upload" />
-        <ProcessUploadCard addFiles={addFiles} />
-      </OwnerGate>
-      <OwnerGate type="user">
-        <ProcessFileTable files={process.files} type="user" />
-      </OwnerGate>
+      <Container width="full" direction="col">
+        <Text>
+          {t(
+            process.client === user.hashedID ||
+              process.client === user.organization
+              ? "Process.components.Contract.Contract.user"
+              : "Process.components.Contract.Contract.orga"
+          )}
+        </Text>
+      </Container>
+      <ProcessFileTable files={process.files} type="current" />
+      <ProcessFileTable
+        files={files}
+        type="upload"
+        resetUploadFiles={resetUploadFiles}
+      />
+      <ProcessUploadCard addFiles={addFiles} />
     </ProcessContainer>
   );
 };

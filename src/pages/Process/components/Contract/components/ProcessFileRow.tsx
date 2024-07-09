@@ -2,9 +2,9 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Text } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
-import { ModelFileDescriptionProps } from "@/api/Process/Querys/useGetProcess";
+import { ProcessFile } from "@/api/Process/Querys/useGetProcess";
 interface ProcessFileRowProps {
-  file: ModelFileDescriptionProps;
+  file: ProcessFile;
 }
 
 const ProcessFileRow: React.FC<ProcessFileRowProps> = (props) => {

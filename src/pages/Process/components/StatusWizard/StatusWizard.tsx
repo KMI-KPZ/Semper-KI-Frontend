@@ -1,4 +1,4 @@
-import { Process, ProcessContext } from "@/api/Process/Querys/useGetProcess";
+import { Process, ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
 import { Container } from "@component-library/index";
 import React, { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
@@ -25,7 +25,7 @@ export type StatusWizardItem = {
   startStatus?: ProcessStatus;
   endStatus?: ProcessStatus;
   icon: ReactNode;
-  targetID: ProcessContext | string;
+  targetID: ProcessOrigin | string;
   text:
     | "processInfo"
     | "header"

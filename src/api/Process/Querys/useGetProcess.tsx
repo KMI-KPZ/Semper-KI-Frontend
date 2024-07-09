@@ -6,7 +6,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { Project, getProjectFiles } from "@/api/Project/Querys/useGetProject";
+import { Project, getProcessFiles } from "@/api/Project/Querys/useGetProject";
 import { ModelingServiceProps } from "@/pages/Process/components/Service/ServiceEdit/Modelling/Modelling";
 import { UserAddressProps } from "@/hooks/useUser";
 import { StatusButtonPropsExtern } from "@/hooks/Project/useStatusButtons";
@@ -43,7 +43,7 @@ export type DefaultProcessProps = {
   createdWhen: Date;
   updatedWhen: Date;
   accessedWhen: Date;
-  files: ModelFileDescriptionProps[];
+  files: ProcessFile[];
   messages: ChatMessageProps[];
 };
 
@@ -70,18 +70,42 @@ export type FileProps = {
   path: string;
 };
 
-export interface ModelFileDescriptionProps {
-  createdBy: string;
+export type ProcessFile = DefaultProcessFile | ModelProcessFile;
+
+export interface GenericProcessFile {
   id: string;
-  title: string;
-  path: string;
   fileName: string;
-  tags: string[];
+  imgPath: string;
   date: Date;
+  createdBy: string;
+  size: number;
+  type: ProcessFileType;
+  origin: ProcessOrigin;
+}
+export type ProcessFileType = "Model" | "File";
+
+export type ProcessOrigin =
+  | "Service"
+  | "Contractor"
+  | "Verification"
+  | "Request"
+  | "Clarification"
+  | "Contract"
+  | "Confirmation"
+  | "Production"
+  | "Delivery"
+  | "Completed";
+
+export type DefaultProcessFile = {
+  type: "File";
+} & GenericProcessFile;
+
+export type ModelProcessFile = {
+  type: "Model";
+  tags: string[];
   licenses: string[];
   certificates: string[];
-  URI: string;
-}
+} & GenericProcessFile;
 
 export interface ChatMessageProps {
   userID: string;
@@ -152,18 +176,6 @@ export enum ProcessStatus {
   "FAILED" = 1400,
   "CANCELED" = 1500,
 }
-
-export type ProcessContext =
-  | "Service"
-  | "Contractor"
-  | "Verification"
-  | "Request"
-  | "Clarification"
-  | "Contract"
-  | "Confirmation"
-  | "Production"
-  | "Delivery"
-  | "Completed";
 
 interface ProcessQueryProps {
   process: Process | undefined;

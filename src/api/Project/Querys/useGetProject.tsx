@@ -5,8 +5,8 @@ import { useParams } from "react-router-dom";
 import useUser, { UserType } from "@/hooks/useUser";
 import TestImg from "@images/Test.png";
 import {
-  ModelFileDescriptionProps,
   Process,
+  ProcessFile,
   ProcessStatus,
 } from "@/api/Process/Querys/useGetProcess";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
@@ -44,14 +44,10 @@ export interface FlatProcess {
   imgPath: string;
 }
 
-export const getProjectFiles = (
-  filesObject: Object
-): ModelFileDescriptionProps[] => {
-  let files: ModelFileDescriptionProps[] = Object.entries(filesObject).map(
-    ([key, value]) => {
-      return { ...value } as ModelFileDescriptionProps;
-    }
-  );
+export const getProcessFiles = (filesObject: Object): ProcessFile[] => {
+  let files: ProcessFile[] = Object.entries(filesObject).map(([key, value]) => {
+    return { ...value } as ProcessFile;
+  });
   return files;
 };
 

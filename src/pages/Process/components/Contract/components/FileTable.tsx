@@ -7,17 +7,27 @@ import {
   Heading,
   Text,
 } from "@component-library/index";
-import ProcessFileRow from "./FileRow";
-import { ModelFileDescriptionProps } from "@/api/Process/Querys/useGetProcess";
+import ProcessFileRow from "./ProcessFileRow";
 import DownloadIcon from "@mui/icons-material/Download";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import useDownloadZIP from "@/api/Process/Files/Mutations/useDownloadZIP";
 import useUploadFiles from "@/api/Process/Files/Mutations/useUploadFiles";
+import { ProcessFile } from "@/api/Process/Querys/useGetProcess";
+import RawProcessFileRow from "./RawFileRow";
 
-interface ProcessFileTableProps {
-  files: ModelFileDescriptionProps[];
-  type: "current" | "upload" | "user";
-}
+export type ProcessFileTableProps =
+  | UploadFileTableProps
+  | CurrentFileTableProps;
+
+type UploadFileTableProps = {
+  files: File[];
+  type: "upload";
+};
+
+type CurrentFileTableProps = {
+  files: ProcessFile[];
+  type: "current" | "user";
+};
 
 const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
   const { files, type } = props;
@@ -25,9 +35,11 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
   const downloadZIP = useDownloadZIP();
   const uploadFiles = useUploadFiles();
 
-  const handleOnButtonClickUpload = () => {};
+  const handleOnButtonClickUpload = () => {
+    if (type === "upload") uploadFiles.mutate({ files, origin: "Contract" });
+  };
   const handleOnButtonClickDownload = () => {
-    downloadZIP.mutate(files.map((file) => file.id));
+    if (type !== "upload") downloadZIP.mutate(files.map((file) => file.id));
   };
 
   if (files.length === 0 && type === "upload") return null;
@@ -84,22 +96,16 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
           </tr>
         </thead>
         <tbody>
-          {files.map((file, index) => (
-            <ProcessFileRow file={file} key={index} />
-          ))}
+          {type === "upload"
+            ? files.map((file, index) => (
+                <RawProcessFileRow file={file} key={index} />
+              ))
+            : files.map((file, index) => (
+                <ProcessFileRow file={file} key={index} />
+              ))}
         </tbody>
       </table>
-      {type === "current" || type === "user" ? (
-        <Button
-          size="sm"
-          variant="primary"
-          title={t(
-            "Process.components.Contract.components.FileTable.button.downloadAll"
-          )}
-          startIcon={<DownloadIcon />}
-          onClick={handleOnButtonClickDownload}
-        />
-      ) : (
+      {type === "upload" ? (
         <Button
           size="sm"
           variant="primary"
@@ -108,6 +114,16 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
           )}
           startIcon={<FileUploadIcon />}
           onClick={handleOnButtonClickUpload}
+        />
+      ) : (
+        <Button
+          size="sm"
+          variant="primary"
+          title={t(
+            "Process.components.Contract.components.FileTable.button.downloadAll"
+          )}
+          startIcon={<DownloadIcon />}
+          onClick={handleOnButtonClickDownload}
         />
       )}
     </Container>

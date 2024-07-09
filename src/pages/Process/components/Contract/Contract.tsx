@@ -2,10 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Text } from "@component-library/index";
 import ProcessContainer from "@/components/Process/Container";
-import {
-  ModelFileDescriptionProps,
-  ProcessStatus,
-} from "@/api/Process/Querys/useGetProcess";
+import { ProcessFile, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 
 import useProcess from "@/hooks/Process/useProcess";
 import OwnerGate from "@/components/OwnerGate/OwnerGate";
@@ -24,22 +21,6 @@ const ProcessContract: React.FC<ProcessContractProps> = (props) => {
     setFiles((prevState) => [...prevState, ...newFiles]);
   };
 
-  const convertFiles = (files: File[]): ModelFileDescriptionProps[] =>
-    files.map(
-      (file): ModelFileDescriptionProps => ({
-        fileName: file.name,
-        date: new Date(),
-        createdBy: "User",
-        certificates: [],
-        id: "",
-        licenses: [],
-        path: "",
-        tags: [],
-        title: "",
-        URI: "",
-      })
-    );
-
   return (
     <ProcessContainer
       id="Contract"
@@ -53,7 +34,7 @@ const ProcessContract: React.FC<ProcessContractProps> = (props) => {
           <Text>{t("Process.components.Contract.Contract.text")}</Text>
         </Container>
         <ProcessFileTable files={process.files} type="current" />
-        <ProcessFileTable files={convertFiles(files)} type="upload" />
+        <ProcessFileTable files={files} type="upload" />
         <ProcessUploadCard addFiles={addFiles} />
       </OwnerGate>
       <OwnerGate type="user">

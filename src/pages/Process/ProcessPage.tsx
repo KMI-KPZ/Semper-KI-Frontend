@@ -37,41 +37,37 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
         <ProcessStatusWizard process={process} />
         <Container direction="col" width="full">
           <Service process={process} />
-          <ProcessStatusGate start={ProcessStatus.SERVICE_COMPLETED}>
-            <AuthorizedUserRouteOutlet>
-              <DefinedProcessOutlet>
-                <ProcessStatusGate start={ProcessStatus.SERVICE_COMPLETED}>
-                  <ProcessContractorSelection />
-                </ProcessStatusGate>
-                <ProcessStatusGate start={ProcessStatus.CONTRACTOR_SELECTED}>
-                  <ProcessVerify />
-                </ProcessStatusGate>
-                <ProcessStatusGate start={ProcessStatus.VERIFIED}>
-                  <ProcessRequest />
-                </ProcessStatusGate>
-                <ProcessStatusGate start={ProcessStatus.CLARIFICATION}>
-                  <ProcessClarify />
-                </ProcessStatusGate>
-                <ProcessStatusGate start={ProcessStatus.CLARIFICATION}>
-                  <ProcessContract />
-                </ProcessStatusGate>
-                <ProcessStatusGate
-                  start={ProcessStatus.CONFIRMED_BY_CONTRACTOR}
-                >
-                  <ProcessConfirmation />
-                </ProcessStatusGate>
-                <ProcessStatusGate start={ProcessStatus.CONFIRMED_BY_CLIENT}>
-                  <ProcessProduction />
-                </ProcessStatusGate>
-                <ProcessStatusGate start={ProcessStatus.PRODUCTION}>
-                  <ProcessDelivery />
-                </ProcessStatusGate>
-                <ProcessStatusGate start={ProcessStatus.DELIVERY}>
-                  <ProcessCompleted />
-                </ProcessStatusGate>
-              </DefinedProcessOutlet>
-            </AuthorizedUserRouteOutlet>
-          </ProcessStatusGate>
+          <AuthorizedUserRouteOutlet>
+            <DefinedProcessOutlet>
+              <ProcessStatusGate start={ProcessStatus.SERVICE_COMPLETED}>
+                <ProcessContractorSelection />
+              </ProcessStatusGate>
+              <ProcessStatusGate start={ProcessStatus.CONTRACTOR_SELECTED}>
+                <ProcessVerify />
+              </ProcessStatusGate>
+              <ProcessStatusGate start={ProcessStatus.VERIFIED}>
+                <ProcessRequest />
+              </ProcessStatusGate>
+              <ProcessStatusGate start={ProcessStatus.CLARIFICATION}>
+                <ProcessClarify />
+              </ProcessStatusGate>
+              <ProcessStatusGate start={ProcessStatus.CLARIFICATION}>
+                <ProcessContract />
+              </ProcessStatusGate>
+              <ProcessStatusGate start={ProcessStatus.CONFIRMED_BY_CONTRACTOR}>
+                <ProcessConfirmation />
+              </ProcessStatusGate>
+              <ProcessStatusGate start={ProcessStatus.CONFIRMED_BY_CLIENT}>
+                <ProcessProduction />
+              </ProcessStatusGate>
+              <ProcessStatusGate start={ProcessStatus.PRODUCTION}>
+                <ProcessDelivery />
+              </ProcessStatusGate>
+              <ProcessStatusGate start={ProcessStatus.DELIVERY}>
+                <ProcessCompleted />
+              </ProcessStatusGate>
+            </DefinedProcessOutlet>
+          </AuthorizedUserRouteOutlet>
         </Container>
       </Container>
     </Container>

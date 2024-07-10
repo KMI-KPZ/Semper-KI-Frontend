@@ -9,18 +9,24 @@ import useUser, { UserAddressProps } from "@/hooks/useUser";
 import { Heading, Text } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useGeneralInput from "@component-library/Form/hooks/useGeneralInput";
+import {
+  GeneralInput,
+  InputLabelProps,
+} from "@component-library/Form/GeneralInput";
+import { NewUserAddressProps } from "@/api/User/Mutations/useCreateAddress";
 
 interface AddressFormProps {
   closeModal?(): void;
+  title?: string;
   initialAddress?: UserAddressProps;
-  customSubmit?(data: UserAddressProps): void;
 }
 
 const AddressForm: React.FC<AddressFormProps> = (props) => {
-  const { closeModal, customSubmit, initialAddress } = props;
+  const { closeModal, initialAddress, title } = props;
   const { t } = useTranslation();
-  const { user, updateUserDetails } = useAuthorizedUser();
+  const { updateAddress, createAddress } = useAuthorizedUser();
   const { getMaxLabelWidth } = useGeneralInput();
+  const existingAddressID = initialAddress?.id;
 
   const schema = yup.object().shape({
     firstName: yup.string().required(t("yup.required")),
@@ -34,40 +40,43 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
     zipcode: yup.string().required(t("yup.required")),
     city: yup.string().required(t("yup.required")),
     country: yup.string().required(t("yup.required")),
+    standard: yup.boolean().required(t("yup.required")),
   });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<UserAddressProps>({
+  } = useForm<NewUserAddressProps>({
     resolver: yupResolver(schema),
-    defaultValues:
-      initialAddress !== undefined ? initialAddress : user.details.address,
+    defaultValues: initialAddress !== undefined ? initialAddress : undefined,
   });
 
-  const onSubmit = (data: UserAddressProps) => {
-    if (customSubmit !== undefined) {
-      customSubmit(data);
+  const onSubmit = (data: NewUserAddressProps) => {
+    if (existingAddressID !== undefined) {
+      updateAddress.mutate({ ...data, id: existingAddressID });
     } else {
-      updateUserDetails({ address: data });
+      createAddress.mutate(data);
     }
     closeModal !== undefined ? closeModal() : null;
   };
 
-  const labels: (keyof UserAddressProps)[] = [
-    "firstName",
-    "lastName",
-    "company",
-    "street",
-    "houseNumber",
-    "zipcode",
-    "city",
-    "country",
+  const labelItems: InputLabelProps<NewUserAddressProps>[] = [
+    { label: "firstName", type: "text" },
+    { label: "lastName", type: "text" },
+    { label: "company", type: "text" },
+    { label: "street", type: "text" },
+    { label: "houseNumber", type: "text" },
+    { label: "zipcode", type: "text" },
+    { label: "city", type: "text" },
+    { label: "country", type: "text" },
+    { label: "standard", type: "checkbox" },
   ];
 
   const maxLength = getMaxLabelWidth(
-    labels.map((label) => t(`components.Form.AddressForm.labels.${label}`))
+    labelItems.map((labelItem) =>
+      t(`components.Form.AddressForm.labels.${labelItem.label}`)
+    )
   );
 
   return (
@@ -75,15 +84,18 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
       onSubmit={handleSubmit(onSubmit)}
       className={`flex h-full w-full flex-col items-center justify-start gap-5 overflow-auto bg-white p-5 md:justify-center`}
     >
-      <Heading variant="h1">{t("components.Form.AddressForm.header")}</Heading>
-      {labels.map((label) => (
-        <TextInput
-          labelText={t(`components.Form.AddressForm.labels.${label}`)}
-          label={label}
+      <Heading variant="h1">
+        {title !== undefined ? title : t("components.Form.AddressForm.header")}
+      </Heading>
+      {labelItems.map((labelItem, index) => (
+        <GeneralInput
+          key={index}
+          label={labelItem.label}
+          labelText={t(`components.Form.AddressForm.labels.${labelItem.label}`)}
+          type={labelItem.type}
           register={register}
-          error={errors[label]}
+          error={errors[labelItem.label]}
           labelMaxWidth={maxLength}
-          key={label}
         />
       ))}
       <Text>{t("components.Form.AddressForm.hint")}</Text>

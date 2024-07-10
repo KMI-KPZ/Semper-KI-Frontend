@@ -256,7 +256,7 @@ const useProjectEvent = (): ReturnProps => {
     ) {
       toast(
         t("App.hooks.useEvents.hooks.useProjectEvent.toast.message"),
-        `/projects/${projectEventItem.projectID}/${processEventItem.processID}/chat`
+        `/projects/${projectEventItem.projectID}/${processEventItem.processID}#clarification`
       );
     }
     if (
@@ -265,7 +265,7 @@ const useProjectEvent = (): ReturnProps => {
     ) {
       toast(
         t("App.hooks.useEvents.hooks.useProjectEvent.toast.status"),
-        `/projects/${projectEventItem.projectID}/${processEventItem.processID}`
+        `/projects/${projectEventItem.projectID}/${processEventItem.processID}#newest`
       );
     }
   };

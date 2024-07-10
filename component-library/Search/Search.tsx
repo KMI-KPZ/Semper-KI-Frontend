@@ -22,7 +22,7 @@ export const Search: React.FC<SearchProps> = (props) => {
         onKeyDown={handleOnKeyDown}
         onChange={handleOnChange}
         defaultValue=""
-        className="flex w-full bg-slate-100 p-3"
+        className="flex w-full rounded-xl border-2 p-3"
         type="search"
         placeholder={t("Admin.User.search")}
       />

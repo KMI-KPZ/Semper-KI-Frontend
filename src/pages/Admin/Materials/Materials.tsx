@@ -1,4 +1,4 @@
-import { MaterialProps } from "@/pages/Service/Manufacturing/Material/Material";
+import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 import { Heading } from "@component-library/index";
 import {
   Paper,

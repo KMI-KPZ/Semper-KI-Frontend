@@ -1,99 +1,119 @@
-import { Button, Search } from "@component-library/index";
+import { Button, Divider, Modal, Search } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
-import { useProject } from "./hooks/useProject";
-import DeleteIcon from "@mui/icons-material/Delete";
-import logger from "@/hooks/useLogger";
+import { useProject } from "../../hooks/Project/useProject";
 import { Container } from "@component-library/index";
-import useFlatProjectQuerys, {
-  FlatProjectProps,
-} from "@/api/Project/useFlatProjectQuerys";
-import useAdminQuerys from "@/api/Admin/useAdminQuerys";
-import ProjectsCards from "./components/Cards";
 import useSearch from "@/hooks/useSearch";
-
+import useGetAdminFlatProjects from "@/api/Admin/Querys/useGetAdminFlatProjects";
+import useGetFlatProjects, {
+  FlatProject,
+} from "@/api/Project/Querys/useGetFlatProjects";
+import ProjectsTable from "./components/Table";
+import AddIcon from "@mui/icons-material/Add";
+import useCreateProject from "@/api/Project/Mutations/useCreateProject";
+import CreateProjectTitleForm from "./components/TitleForm";
 interface ProjectsProps {}
 
 const Projects: React.FC<ProjectsProps> = (props) => {
   const { t } = useTranslation();
   const { user } = useUser();
-  const { flatProjectsQuery: userFlatProjectsQuery } = useFlatProjectQuerys();
-  const { adminFlatProjectsQuery } = useAdminQuerys();
-  const flatProjectsQuery =
-    user.usertype === UserType.ADMIN
-      ? adminFlatProjectsQuery
-      : userFlatProjectsQuery;
-  const { createProject, deleteProject } = useProject();
-  const { filterDataBySearchInput, handleSearchInputChange } =
-    useSearch<FlatProjectProps>();
+  const _flatProjects = useGetFlatProjects();
+  const adminFlatProjects = useGetAdminFlatProjects();
+  const [createProjectTitleFormOpen, setCreateProjectTitleFormOpen] =
+    React.useState<boolean>(false);
+  const flatProjects =
+    user.usertype === UserType.ADMIN ? adminFlatProjects : _flatProjects;
 
-  const [selectedProjects, setSelectedProjects] = React.useState<string[]>([]);
+  const { filterDataBySearchInput, handleSearchInputChange } =
+    useSearch<FlatProject>();
 
   const onButtonClickCreateProject = () => {
-    createProject();
+    setCreateProjectTitleFormOpen(true);
   };
 
-  const handleOnClickButtonDeleteSelected = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    if (window.confirm(t("Projects.Projects.deleteSelectedConfirm")) === true) {
-      deleteProject(selectedProjects);
-      setSelectedProjects([]);
-    } else logger("delete canceled");
-  };
-
-  const sortProjectByUpdatedDate = (
-    project1: FlatProjectProps,
-    project2: FlatProjectProps
-  ) => {
-    if (project1.updatedWhen > project2.updatedWhen) {
-      return 1;
-    }
-    if (project1.updatedWhen < project2.updatedWhen) {
-      return -1;
-    }
-    return 0;
-  };
+  const ownProjects: FlatProject[] =
+    flatProjects.data === undefined
+      ? []
+      : user.usertype !== UserType.ANONYM &&
+        user.usertype === UserType.ORGANIZATION
+      ? flatProjects.data.filter(
+          (project) => user.organization === project.client
+        )
+      : flatProjects.data;
+  const recievedProjects: FlatProject[] =
+    flatProjects.data === undefined
+      ? []
+      : user.usertype === UserType.ORGANIZATION
+      ? flatProjects.data.filter(
+          (project) => user.organization !== project.client
+        )
+      : [];
 
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
       <div className="flex w-full flex-col gap-2 md:flex-row md:justify-between">
         <Heading variant="h1">{t("Projects.Projects.title")}</Heading>
         <Container className="md:justify-end">
-          {selectedProjects.length > 0 ? (
-            <PermissionGate element={"ProjectsButtonDeleteSelected"}>
-              <Button
-                variant="secondary"
-                startIcon={<DeleteIcon />}
-                onClick={handleOnClickButtonDeleteSelected}
-                title={t("Projects.Projects.button.deleteSelected")}
-              />
-            </PermissionGate>
-          ) : null}
-          <PermissionGate element={"ProjectsButtonNew"}>
-            <Button
-              variant="primary"
-              title={t("Projects.Projects.button.create")}
-              onClick={onButtonClickCreateProject}
-            />
-          </PermissionGate>
+          {/* <PermissionGate element={"ProjectsButtonNew"}> */}
+          <Button
+            variant="primary"
+            title={t("Projects.Projects.button.create")}
+            onClick={onButtonClickCreateProject}
+            size="sm"
+            startIcon={<AddIcon />}
+          />
+          {/* </PermissionGate> */}
         </Container>
       </div>
       <Search handleSearchInputChange={handleSearchInputChange} />
-      <LoadingSuspense query={flatProjectsQuery}>
-        <ProjectsCards
-          filterDataBySearchInput={filterDataBySearchInput}
-          flatProjects={
-            flatProjectsQuery.data === undefined ? [] : flatProjectsQuery.data
-          }
-          selectedProjects={selectedProjects}
-          setSelectedProjects={setSelectedProjects}
+      <Container direction="col" justify="start" align="start" width="full">
+        <Heading variant="h2">
+          {user.usertype === UserType.ADMIN
+            ? t("Projects.components.Cards.adminProjects")
+            : t("Projects.components.Cards.ownProjects")}
+        </Heading>
+        <LoadingSuspense query={flatProjects}>
+          <ProjectsTable
+            projects={ownProjects.filter((flatProject) =>
+              filterDataBySearchInput(flatProject)
+            )}
+          />
+        </LoadingSuspense>
+      </Container>
+      {user.usertype === UserType.ORGANIZATION ? (
+        <>
+          <Divider />
+          <Container direction="col" justify="start" align="start" width="full">
+            <Heading variant="h2">
+              {t("Projects.components.Cards.receivedProjects")}
+            </Heading>
+            <LoadingSuspense query={flatProjects}>
+              <ProjectsTable
+                projects={recievedProjects.filter((flatProject) =>
+                  filterDataBySearchInput(flatProject)
+                )}
+              />
+            </LoadingSuspense>
+          </Container>
+        </>
+      ) : null}
+      <Modal
+        modalKey="CreateProjectTitleEdit"
+        open={createProjectTitleFormOpen}
+        closeModal={() => {
+          setCreateProjectTitleFormOpen(false);
+        }}
+      >
+        <CreateProjectTitleForm
+          close={() => {
+            setCreateProjectTitleFormOpen(false);
+          }}
         />
-      </LoadingSuspense>
+      </Modal>
     </div>
   );
 };

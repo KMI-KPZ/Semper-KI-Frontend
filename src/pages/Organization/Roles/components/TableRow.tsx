@@ -1,10 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useOrganizations, {
-  PermissionProps,
-  RoleProps,
-} from "../../hooks/useOrganizations";
-import logger from "@/hooks/useLogger";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
@@ -12,6 +7,10 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { getGroupedPermissions, sortPermissions } from "../Roles";
+import useOrganizations from "../../hooks/useOrganizations";
+import useDeleteRole from "@/api/Organization/Mutations/useDeleteRole";
+import { PermissionProps } from "@/api/Organization/Querys/useGetOrganizationPermissions";
+import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
 
 interface OrganizationRolesTableRowProps {
   role: RoleProps;
@@ -24,13 +23,12 @@ const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
 ) => {
   const { role, allPermissions, editRole } = props;
   const { t } = useTranslation();
-  const { rolePermissionsQuery, deleteRoleMutation } = useOrganizations(
-    role.id
-  );
+  const deleteRole = useDeleteRole();
+  const { rolePermissionsQuery } = useOrganizations(role.id);
 
   const handleOnClickButtonDelete = () => {
     if (window.confirm(t("Organization.Roles.components.Item.alert")))
-      deleteRoleMutation.mutate(role.id);
+      deleteRole.mutate(role.id);
   };
   const handleOnClickButtonEdit = () => {
     editRole(role);

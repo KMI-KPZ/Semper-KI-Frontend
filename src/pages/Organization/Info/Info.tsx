@@ -5,15 +5,15 @@ import { Button, LoadingSuspense, Text } from "@component-library/index";
 import { Modal } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { Container } from "@component-library/index";
-import { ServiceType } from "@/pages/Service/hooks/useService";
 import OrganizationForm from "@/components/Form/OrganizationForm";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
 
 interface OrganizationInfoProps {}
 
 const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { organizationInfoQuery } = useOrganizations();
+  const { organizationQuery: organizationInfoQuery } = useOrganizations();
   const [edit, setEdit] = useState<boolean>(false);
 
   const closeEdit = () => {
@@ -93,7 +93,7 @@ const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
           <Modal
             open={edit}
             closeModal={closeEdit}
-            title="OrganizationInfoForm"
+            modalKey="OrganizationInfoForm"
           >
             <OrganizationForm
               closeEdit={closeEdit}

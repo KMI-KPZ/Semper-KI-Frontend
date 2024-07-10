@@ -6,16 +6,17 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
-import { ServiceType } from "@/pages/Service/hooks/useService";
-import useServiceQuerys from "@/api/Service/useServiceQuerys";
 import TextInput from "@component-library/Form/Inputs/TextInput";
 import useOrganizations, {
   OrganizationInfoProps,
-  UpdateOrgaInfoProps,
 } from "@/pages/Organization/hooks/useOrganizations";
 import { LoadingAnimation } from "@component-library/index";
 import { Container } from "@component-library/index";
 import useGeneralInput from "@component-library/Form/hooks/useGeneralInput";
+import useUpdateOrganizationInfos from "@/api/Organization/Mutations/useUpdateOrganizationInfos";
+import useGetServices, {
+  ServiceType,
+} from "@/api/Service/Querys/useGetServices";
 
 interface OrganizationFormProps {
   closeEdit: () => void;
@@ -33,8 +34,8 @@ interface OrganizationFormValues {
 const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
   const { organizationInfo, closeEdit } = props;
   const { t } = useTranslation();
-  const { updateOrganizationInfo } = useOrganizations();
-  const { servicesQuery } = useServiceQuerys();
+  const updateOrganizationInfo = useUpdateOrganizationInfos();
+  const servicesQuery = useGetServices();
   const { getMaxLabelWidth } = useGeneralInput();
 
   const schema = yup
@@ -144,16 +145,13 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
                     <input
                       className={`h-6 w-6 bg-slate-100`}
                       type="checkbox"
-                      value={service.identifier}
+                      value={service.type}
                       {...register(`supportedServices`)}
-                      style={{}}
                     />
                     <Text variant={`body`}>
                       {t(
                         `enum.ServiceType.${
-                          ServiceType[
-                            service.identifier
-                          ] as keyof typeof ServiceType
+                          ServiceType[service.type] as keyof typeof ServiceType
                         }`
                       )}
                     </Text>

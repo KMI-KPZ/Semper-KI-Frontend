@@ -4,8 +4,8 @@ import { Divider, LoadingSuspense } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useOntologyMaterialQuerys from "../../../../api/Ontology/useOntologyMaterialQuerys";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import useGetFlatOntologyMaterials from "@/api/Ontology/Querys/useGetFlatOntologyMaterials";
 
 interface ResourcesMaterialsTableProps {}
 
@@ -14,7 +14,7 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
 ) => {
   const {} = props;
   const { t } = useTranslation();
-  const { materialsQuery } = useOntologyMaterialQuerys({});
+  const materialsQuery = useGetFlatOntologyMaterials();
 
   const handleOnClickDelete = (materialID: string) => {};
 

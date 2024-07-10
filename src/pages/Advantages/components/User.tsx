@@ -1,18 +1,18 @@
-import useLogin from "@/hooks/useLogin";
 import { Button, Container, Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import LoginIcon from "@mui/icons-material/Login";
+import useLogin from "@/api/Authentification/Querys/useLogin";
 
 interface AdvantagesUserProps {}
 
 const AdvantagesUser: React.FC<AdvantagesUserProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { login } = useLogin();
+  const login = useLogin();
 
   const handleOnClickButton = () => {
-    login({ userType: "user", register: true });
+    login.mutate({ userType: "user", register: true });
   };
 
   return (

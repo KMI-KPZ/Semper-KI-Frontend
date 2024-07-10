@@ -9,30 +9,38 @@ import Login from "../Login/Login";
 import Logout from "../Logout/Logout";
 import Organization from "../Organization/Organization";
 import Portfolio from "../Portfolio/Portfolio";
-import Profile from "../Profile/Proflle";
 import Resouces from "../Resources/Resources";
 import Legal from "../Legal/Legal";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import "react-toastify/dist/ReactToastify.css";
 import CookieBanner from "@/components/CookieBanner/CookieBanner";
-import useCookieConsent from "@/components/CookieBanner/hooks/useCookieConsent";
-import { Modal } from "@component-library/index";
-import { FilterItemProps } from "../Service/Manufacturing/Filter/Filter";
+import { FilterItemProps } from "../Process/components/Service/ServiceEdit/Manufacturing/Filter/Filter";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import EmailVerification from "../EmailVerification/EmailVerification";
 import ResKriVer from "../ResKriVer/ResKriVer";
 import { OrganizationRouteOutlet } from "@/routeOutlets/OrganizationOutlet";
 import { AdminRouteOutlet } from "@/routeOutlets/AdminOutlet";
 import { ToastContainer } from "react-toastify";
-import ProjectsRoutes from "@/routes/ProjectsRoutes";
-import AdminRoutes from "@/routes/AdminRoutes";
 import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import { ContentBox } from "@component-library/index";
 import RedirectLogin from "../Login/RedirectLogin";
 import Menu from "@/components/Menu";
-import { Background } from "@/components/index";
+import { Background, Breadcrumb } from "@/components/index";
 import Advantages from "../Advantages/Advantages";
 import Chatbot from "@/components/Chatbot/Chatbot";
+import Profile from "../Profile/Proflle";
+import Projects from "../Projects/Projects";
+import ProjectOutlet from "@/routeOutlets/ProjectOutlet";
+import ProjectPage from "../Project/ProjectPage";
+import ProcessOutlet from "@/routeOutlets/ProcessOutlet";
+import ProcessHistory from "../Process/legacy/History/History";
+import ProcessChat from "../Process/legacy/Chat/Chat";
+import ServiceRoutes from "@/routes/ServiceRoutes";
+import ProcessPage from "../Process/ProcessPage";
+import Admin from "../Admin/Admin";
+import AdminUser from "../Admin/User/User";
+import AdminOrganization from "../Admin/Organization/Organization";
+import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -57,7 +65,8 @@ export const AppContext = createContext<AppContext>({
 
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(initialAppState);
-  const { rejectCookies, acceptCookies, cookieConsent } = useCookieConsent();
+
+  //test
 
   return (
     <AppContext.Provider
@@ -67,13 +76,13 @@ const App: React.FC = () => {
       }}
     >
       <div
-        className={`flex min-h-screen flex-col items-center justify-center overflow-x-auto font-ptsans text-base`}
+        className={`flex min-h-screen flex-col items-center justify-center  font-ptsans text-base`}
         data-testid="app"
         id="app"
       >
         <Header />
         <main className="flex h-full w-full flex-grow flex-col items-center justify-start">
-          {/* <Breadcrumb /> */}
+          <Breadcrumb />
           <Routes data-testid="routes">
             <Route index element={<Home />} />
             <Route
@@ -165,14 +174,70 @@ const App: React.FC = () => {
               }
             />
             <Route path="demo/*" element={<Navigate to="/project/new" />} />
-            <Route
-              path="projects/*"
-              element={
-                <ContentBox>
-                  <ProjectsRoutes />
-                </ContentBox>
-              }
-            />
+            <Route path="projects/*">
+              <Route
+                index
+                element={
+                  <PermissionGate element="Projects">
+                    <ContentBox>
+                      <Projects />
+                    </ContentBox>
+                  </PermissionGate>
+                }
+              />
+              <Route
+                path=":projectID/*"
+                element={
+                  <ContentBox>
+                    <ProjectOutlet />
+                  </ContentBox>
+                }
+              >
+                <Route
+                  index
+                  element={
+                    <PermissionGate element="Projects">
+                      <ProjectPage />
+                    </PermissionGate>
+                  }
+                />
+                <Route
+                  path=":processID/*"
+                  element={
+                    <ProcessOutlet>
+                      <ProcessPage />
+                    </ProcessOutlet>
+                  }
+                >
+                  <Route path="service/*" element={<ServiceRoutes />} />
+                  {/* <Route element={<AuthorizedUserRouteOutlet />}>
+                    <Route path="history" element={<ProcessHistory />} />
+                    <Route path="chat" element={<ProcessChat />} />
+                    <Route
+                      path="checkout"
+                      element={<Navigate to="../../checkout" />}
+                    />
+                    <Route
+                      path="verification"
+                      element={<Navigate to="../../verification" />}
+                    />
+                    <Route
+                      path="contractorSelection"
+                      element={<Navigate to="../../contractorSelection" />}
+                    />
+                  </Route>
+                  <Route
+                    path="service/*"
+                    element={
+                      <>
+                        <ProjectPage />
+                        <ServiceRoutes />
+                      </>
+                    }
+                  /> */}
+                </Route>
+              </Route>
+            </Route>
             <Route element={<AuthorizedUserRouteOutlet />}>
               <Route
                 path="test"
@@ -231,7 +296,15 @@ const App: React.FC = () => {
                   path="admin/*"
                   element={
                     <ContentBox>
-                      <AdminRoutes />
+                      <Routes>
+                        <Route index element={<Admin />} />
+                        <Route path="user" element={<AdminUser />} />
+                        <Route
+                          path="organization"
+                          element={<AdminOrganization />}
+                        />
+                        {/* <Route path="projects/*" element={<ProjectsRoutes />} /> */}
+                      </Routes>
                     </ContentBox>
                   }
                 />
@@ -247,17 +320,7 @@ const App: React.FC = () => {
             />
           </Routes>
         </main>
-        <Modal
-          open={cookieConsent === undefined}
-          locked={cookieConsent === undefined}
-          noIcon
-          title="CookieBanner"
-        >
-          <CookieBanner
-            acceptCookies={acceptCookies}
-            rejectCookies={rejectCookies}
-          />
-        </Modal>
+        <CookieBanner />
         <Menu />
         <Footer />
       </div>

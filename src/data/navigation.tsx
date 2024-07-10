@@ -15,6 +15,7 @@ import { UserType } from "@/hooks/useUser";
 import { NavigationItemPreferredType } from "@/components/Header";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { DataNaviagtionTranlationType } from "@/components";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 
 export type INavigationItem = {
   title: DataNaviagtionTranlationType;
@@ -37,25 +38,9 @@ export const NavigationItemData: INavigationItem[] = [
   {
     title: "demonstrator",
     link: "/projects",
-    icon: <ScienceIcon fontSize="large" />,
+    icon: <RocketLaunchIcon fontSize="large" />,
     extern: false,
     preferred: ["header", "home"],
-    userTypes: [UserType.ANONYM],
-  },
-  {
-    title: "logout",
-    link: "/logout",
-    icon: <LogoutIcon fontSize="large" />,
-    extern: false,
-    preferred: ["menu"],
-    userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
-  },
-  {
-    title: "login",
-    link: "/login",
-    icon: <LoginIcon fontSize="large" />,
-    extern: false,
-    preferred: ["header"],
     userTypes: [UserType.ANONYM],
   },
 
@@ -92,14 +77,14 @@ export const NavigationItemData: INavigationItem[] = [
     userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
   },
 
-  {
-    title: "test",
-    link: "/test",
-    icon: <BugReportIcon fontSize="large" />,
-    extern: false,
-    preferred: ["menu"],
-    userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
-  },
+  // {
+  //   title: "test",
+  //   link: "/test",
+  //   icon: <BugReportIcon fontSize="large" />,
+  //   extern: false,
+  //   preferred: ["menu"],
+  //   userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
+  // },
   {
     userTypes: [UserType.ADMIN],
     title: "user",
@@ -139,5 +124,21 @@ export const NavigationItemData: INavigationItem[] = [
     icon: <PrintIcon fontSize="large" />,
     preferred: ["home"],
     extern: false,
+  },
+  {
+    title: "logout",
+    link: "/logout",
+    icon: <LogoutIcon fontSize="large" />,
+    extern: false,
+    preferred: ["menu"],
+    userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
+  },
+  {
+    title: "login",
+    link: "/login",
+    icon: <LoginIcon fontSize="large" />,
+    extern: false,
+    preferred: ["header"],
+    userTypes: [UserType.ANONYM],
   },
 ];

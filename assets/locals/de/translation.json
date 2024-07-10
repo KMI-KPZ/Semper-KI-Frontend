@@ -8,12 +8,12 @@
   },
   "data": {
     "NavigationItem": {
-      "demonstrator": "Demonstrator",
+      "demonstrator": "Loslegen",
       "edit": "Bearbeiten",
       "home": "Startseite",
       "process": "Prozess",
       "model": "Modell",
-      "upload": "Modell Hochladen",
+      "upload": "Modell hochladen",
       "material": "Material",
       "postprocessing": "Nachbearbeitung",
       "cart": "Warenkorb",
@@ -22,16 +22,16 @@
       "guide": "Wegweiser",
       "order": "Auftragsdetails",
       "orders": "Meine Aufträge",
-      "account": "Konto",
+      "account": "Profil",
       "test": "Test",
       "service": "Service",
       "use": "In Anspruch nehmen",
-      "provide": "Service Anbieten",
+      "provide": "Service anbieten",
       "portfolio": "Portfolio",
       "use-service": "Service in Anspruch nehmen",
       "provide-service": "Service bereitstellen",
-      "continue": "Auftrag Fortsetzen",
-      "new-contract": "neuer Auftrag",
+      "continue": "Auftrag fortsetzen",
+      "new-contract": "Neuer Auftrag",
       "proceedings": "Verfahren",
       "company": "Unternehmen",
       "user": "Benutzer",
@@ -70,13 +70,14 @@
       "DRAFT": "Entwurf",
       "WAITING_FOR_OTHER_PROCESS": "Warten auf andere Prozesse",
       "SERVICE_READY": "Service bereit",
-      "SERVICE_IN_PROGRESS": "Service in bearbeitung",
+      "SERVICE_IN_PROGRESS": "Service in Bearbeitung",
       "SERVICE_COMPLICATION": "Service Komplikation",
+      "SERVICE_COMPLETED": "Service abgeschlossen",
       "CONTRACTOR_SELECTED": "Auftragnehmer ausgewählt",
-      "VERIFYING": "Überprüfen",
+      "VERIFYING": "Überprüfen lassen",
       "VERIFIED": "Überprüft",
       "REQUESTED": "Angefragt",
-      "CLARIFICATION": "Rückfragen",
+      "CLARIFICATION": "Rückfragen vom Auftragnehmer",
       "CONFIRMED_BY_CONTRACTOR": "Bestätigt durch Auftragnehmer",
       "REJECTED_BY_CONTRACTOR": "Abgelehnt durch Auftragnehmer",
       "CONFIRMED_BY_CLIENT": "Bestätigt durch Kunde",
@@ -89,8 +90,8 @@
       "CANCELED": "Abgebrochen"
     },
     "ServiceType": {
-      "MANUFACTURING": "Modell Herstellen lassen",
-      "MODELING": "Modell Entwerfen lassen",
+      "MANUFACTURING": "Modell 3D-drucken lassen",
+      "MODELING": "Modell entwerfen lassen",
       "NONE": "Service auswahl"
     },
     "ProcessStatusType": {
@@ -153,6 +154,23 @@
       "delete": "Löschen",
       "messages": "Nachrichten",
       "files": "Dateien"
+    },
+    "FlatProcessStatus": {
+      "ACTION_REQUIRED": "Aktion erforderlich",
+      "WAITING_CONTRACTOR": "Warten auf Auftragnehmer",
+      "WAITING_CLIENT": "Warten auf Kunde",
+      "WAITING_PROCESS": "Warten auf Prozess",
+      "IN_PROGRESS": "in Bearbeitung",
+      "COMPLETED": "Abgeschlossen"
+    }
+  },
+  "api": {
+    "Process": {
+      "Files": {
+        "useDownloadZIP": {
+          "contract": "Angebot"
+        }
+      }
     }
   },
   "component-library": {
@@ -187,6 +205,25 @@
     "Typography": {}
   },
   "components": {
+    "Address": {
+      "AddressCard": {
+        "yes": "Ja",
+        "no": "Nein",
+        "confirmDelete": "Möchten Sie die Adresse wirklich löschen?",
+        "company": "Firma:",
+        "name": "Name:",
+        "street": "Straße:",
+        "city": "Stadt:",
+        "country": "Land:",
+        "selected": "Ausgewählt",
+        "notSelected": "nicht ausgewählt",
+        "standard": "Standard-Adresse:",
+        "buttons": {
+          "edit": "Bearbeiten",
+          "delete": "Adresse löschen"
+        }
+      }
+    },
     "Form": {
       "AddressForm": {
         "header": "Adresse bearbeiten",
@@ -198,7 +235,8 @@
           "houseNumber": "Hausnummer *",
           "zipcode": "Postleitzahl *",
           "city": "Stadt *",
-          "country": "Land *"
+          "country": "Land *",
+          "standard": "als Standardadresse verwenden"
         },
         "hint": "* Pflichtfeld",
         "buttons": {
@@ -214,6 +252,18 @@
         "supportedServices": "Services die Sie anbieten",
         "button": {
           "safe": "Speichern"
+        }
+      },
+      "ExampleForm": {
+        "title": "Organisationinformationen bearbeiten",
+        "text": "Text",
+        "count": "Anzahl",
+        "email": "Email",
+        "area": "Bereich",
+        "isTrue": "Ist Wahr",
+        "button": {
+          "reset": "Zurücksetzen",
+          "submit": "Senden"
         }
       }
     },
@@ -298,16 +348,39 @@
     "PermissionGate": {
       "message": "Diese Funktion ist mit ihren Rechten nicht nutzbar"
     },
+    "PMenu": {
+      "button": { "open": "Menu Öffnen", "close": "Menu Schließen" }
+    },
+    "Process": {
+      "UploadCard": {
+        "title": "neue Datei/en hochladen",
+        "subTitle": "Per Drag & Drop oder Klick",
+        "button": "Datei auswählen"
+      }
+    },
     "Switch": {},
     "Table": {},
     "Upload": {
-      "title_one": "Datei hochladen",
-      "title_other": "Dateien hochladen",
+      "title_one": "Weitere Datei hochladen",
+      "title_other": "Weitere Dateien hochladen",
       "subTitle": "Per Drag & Drop oder Klick"
     },
     "UserSwitch": {
       "client": "Einzelnutzer",
       "organization": "Organisation"
+    }
+  },
+  "contexts": {
+    "UserContextProvider": {
+      "completeUserData": "Bitte vervollständigen Sie ihre Benutzerdaten"
+    }
+  },
+  "routeOutlets": {
+    "AuthorizedUserOutlet": {
+      "login": "Bitte Anmelden um fortzufahren",
+      "button": {
+        "login": "Zur Anmeldung"
+      }
     }
   },
   "Admin": {
@@ -333,7 +406,7 @@
     },
     "Organization": {
       "title": "Organisationsverwaltung",
-      "empty": "keine Organisation gefunden",
+      "empty": "Keine Organisation gefunden",
       "name": "Name",
       "created": "Created",
       "accessed": "Accessed",
@@ -368,10 +441,10 @@
       "title": "Benutzerverwaltung",
       "name": "Name",
       "email": "Email",
-      "created": "Created",
-      "accessed": "Accessed",
-      "updated": "Updated",
-      "lastSeen": "letzte Anmeldung",
+      "created": "Erstellt",
+      "accessed": "Zugriff",
+      "updated": "Aktualisiert",
+      "lastSeen": "Letzte Anmeldung",
       "actions": "Aktionen",
       "search": "Suchen...",
       "button": {
@@ -392,7 +465,7 @@
   "Advantages": {
     "components": {
       "User": {
-        "heading": "Vorteile für Einzelpersonen",
+        "heading": "Vorteile für Privatpersonen",
         "text": "Unser Ziel ist, 3D-Druck zugänglicher zu machen. Dafür setzen wir auf Technologien Künstlicher Intelligenz. Sie sind speziell für die Additive Fertigung entwickelt. In unser Wissensnetz speisen wir verfügbare Informationen über 3D-Druck-Prozesse, Materialien und Akteure am Markt ein.",
         "subHeading": "Optimiertes Matching",
         "fact1": "Einfaches Onboarding u.a. unterstützt durch einen Chatbot",
@@ -449,7 +522,7 @@
     "App": {}
   },
   "EmailVerification": {
-    "title": "Email Verifizieren",
+    "title": "Email verifizieren",
     "text": "Bitte bestätigen Sie ihre Email Adresse, indem Sie auf den Link in der Email klicken, die Auth0 Ihnen gesendet hat.",
     "text2": "Dies ist notwendig um die Registrierung abzuschließen und um Semper-KI nutzen zu können.",
     "text3": "Vielen Dank für ihr Verständnis"
@@ -473,10 +546,15 @@
         "visionTitle2": "Mit KI zum 3D-Druck",
         "vision1": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. Dazu gehören vorgelagerte Services wie Modellerstellung und Materialberatung genauso wie die Vermittlung von Nachbearbeitung oder Rechtsberatung. Der Druck findet beim optimalen Partner statt. Für all das setzen wir auf KI-Technologien. Gefördert vom Bundesministerium für Wirtschaft und Klimaschutz.",
         "vision2": "Kern unserer Plattform sind Künstliche Intelligenzen. Diese Technologien haben wir speziell für die Vernetzung von Kunden mit der 3D-Druck-Branche entwickelt. Unsere KI ist ein semantisches Netz. In dieses Netz speisen wir Informationen über alle verfügbaren 3D-Druck-Prozesse ein. In Kombination mit den Anfragen, die auf der Plattform eingehen, ermitteln unsere KI-Technologien daraus die optimale Produktionsstrategie.",
-        "partner": "Innovation klappt nur als Team. Wir arbeiten eng zusammen und freuen uns über neue Partner in Forschung und Entwicklung. Gefördert vom BMWK.",
-        "demonstrator": "Demonstrator ausprobieren",
+        "partner": "Unsere Projektpartner",
+        "partnertext": "Innovation klappt nur als Team. Wir arbeiten eng zusammen und freuen uns über neue Partner in Forschung und Entwicklung. Gefördert vom BMWK.",
+        "demonstrator": {
+          "title": "Einfach ausprobieren",
+          "subTitle": "Projekte werden bei späterer Registrierung übernommen"
+        },
         "buttons": {
-          "demonstrator": "Zum Demonstrator"
+          "demonstrator": "Loslegen",
+          "magazin": "Zur Projektseite"
         }
       }
     },
@@ -494,10 +572,10 @@
         }
       },
       "ClientInfo": {
-        "title": "Als Einzelperson anmelden",
-        "subTitle": "Um Services ausschließlich nutzen zu können",
-        "advantage": "Ihre Vorteile",
-        "register": "Registrieren"
+        "title": "Als Privatperson anmelden",
+        "subTitle": "Um Services nutzen zu können",
+        "advantage": "Ihre Vorteile als Privatperson",
+        "register": "Als Privatperson Registrieren"
       },
       "Container": {},
       "Coypu": {
@@ -510,7 +588,7 @@
         }
       },
       "Header": {
-        "title": "Semper-KI - Einfach 3D drucken.",
+        "title": "Semper-KI - Einfach 3D-drucken.",
         "claim1": "Geben Sie Ihre Idee in Auftrag",
         "claim2": "Von der Idee zum Modell",
         "claim3": "Vom Modell zum Prototyp",
@@ -523,9 +601,9 @@
       },
       "OrgaInfo": {
         "title": "Als Organisation anmelden",
-        "subTitle": "Um Services anbieten und nutzen zu können",
-        "advantage": "Ihre Vorteile",
-        "register": "Registrieren"
+        "subTitle": "Um Services nutzen und anbieten zu können",
+        "advantage": "Ihre Vorteile als Organisation",
+        "register": "Als Organisation Registrieren"
       },
       "Organization": {
         "title": "Organisation",
@@ -590,16 +668,17 @@
   "Login": {
     "Login": {
       "header": "Anmeldung",
-      "user": "Benutzer",
-      "orga": "Organisation",
+      "client": "Als Privatperson anmelden",
+      "orga": "Als Organisation anmelden",
       "admin": "Mocked Anmeldungen",
       "headerPath": "Für die gewünschte Seite müssen sie sich anmelden",
       "buttons": {
         "login": "Anmelden",
         "register": "Registieren",
-        "user": "Einzelnutzer",
-        "orga": "Organisation",
-        "admin": "Admin"
+
+        "testuser": "Einzelnutzer",
+        "testorga": "Organisation",
+        "testadmin": "Admin"
       }
     }
   },
@@ -656,7 +735,7 @@
           "orga": "Organisation",
           "processes": "Projekte",
           "data": "Daten",
-          "files": "Dateien",
+          "files": "Weitere Dateien",
           "resources": "Ressourcen",
           "read": "ansehen",
           "edit": "bearbeiten",
@@ -788,22 +867,17 @@
     "header": "Account",
     "general": {
       "header": "Allgemein",
-      "name": "Name",
-      "email": "E-Mail",
-      "type": "Benutzertyp"
+      "name": "Name:",
+      "email": "E-Mail: ",
+      "type": "Benutzertyp: "
     },
     "company": {
       "header": "Organisation",
       "name": "Name"
     },
     "address": {
-      "header": "Adresse",
-      "name": "Name",
-      "company": "Firma",
-      "street": "Straße",
-      "city": "Stadt",
-      "zipcode": "Postleitzahl",
-      "country": "Land"
+      "header": "Adressen",
+      "noAddress": "Keine Adresse vorhanden"
     },
     "time": {
       "header": "Zugriffe",
@@ -812,10 +886,12 @@
       "updated": "Aktualisiert am"
     },
     "button": {
-      "edit": "Bearbeiten",
-      "selectChange": "Organisation wählen",
-      "delete": "Account Löschen"
+      "delete": "Account Löschen",
+      "addAddress": "Adresse hinzufügen"
     },
+    "existingAddressTitle": "Adresse bearbeiten",
+    "newAddressTitle": "Neue Adresse anlegen",
+    "confirmDelete": "Möchten Sie ihren Account wirklich unwiederuflich löschen?",
     "components": {
       "Form": {
         "title": "Account bearbeiten",
@@ -829,9 +905,347 @@
       }
     }
   },
+  "Process": {
+    "components": {
+      "Info": {
+        "name": "Prozessname:",
+        "updated": "letzte Aktualisierung:",
+        "created": "Erstellt am:",
+        "status": "Prozessstatus:",
+        "button": {
+          "menu": "Informationen Menu",
+          "expand": "Mehr Anzeigen",
+          "collapse": "Weniger Anzeigen",
+          "editTitle": "Prozessname bearbeiten"
+        }
+      },
+      "TitleForm": {
+        "name": "Prozessname:",
+        "button": {
+          "save": "Speichern"
+        }
+      },
+      "ContractorSelection": {
+        "components": {
+          "AddressSelection": {
+            "heading": "Addresse auswählen",
+            "button": {
+              "edit": "Bearbeiten",
+              "select": "Auswählen",
+              "new": "neue Adresse anlegen"
+            }
+          },
+          "ContractorList": {
+            "noContractorFound": "Kein Auftragnehmer gefunden",
+            "button": {
+              "select": "Auftragnehmer auswählen",
+              "save": "Speichern",
+              "edit": "Auftragnehmer bearbeiten"
+            }
+          }
+        },
+        "ContractorSelection": {
+          "heading": {
+            "main": "Auftragnehmer auswählen",
+            "sub1": "Auftragnehmer",
+            "billingDelivery": "Liefer- und Rechnungsadresse",
+            "billing": "Rechnungsadresse",
+            "delivery": "Lieferadresse"
+          },
+          "noAddress": "keine Adresse ausgewählt",
+          "noContractor": "Kein Auftragnehmer ausgewählt",
+
+          "button": {
+            "menu": "Hersteller Menu",
+            "selectAddress": "Adresse auswählen",
+            "editAddress": "Adresse ändern",
+            "resetAddress": "Adresse zurücksetzen"
+          }
+        }
+      },
+      "Verify": {
+        "components": {
+          "VerifyCard": {
+            "error": "Ursache:",
+            "title": {
+              "PRINTABILITY": "Druckbarkeit",
+              "DRAFT": "Entwurfsprüfung",
+              "CAPACITY": "Kapazitätsprüfung",
+              "STABILITY": "Stabilitätsprüfung"
+            },
+            "description": {
+              "PRINTABILITY": "Überprüfung der Druckbarkeit ihres 3D-Modells mit Hilfe von KI",
+              "DRAFT": "Überprüfung der Machbarkeit ihres Entwurfes ",
+              "CAPACITY": "Überprüfung der Kapazität des Herstellers",
+              "STABILITY": "Überprüfung der Stabilität des 3D-Modellentwurfs"
+            }
+          },
+          "VerifyStatus": {
+            "READY": "Bereit",
+            "STARTED": "Gestartet",
+            "ONGOING": "Läuft",
+            "COMPLETED": "Erfolgreich",
+            "FAILED": "Fehler"
+          }
+        },
+        "Verify": {
+          "title": "Prozess Überprüfen",
+          "button": {
+            "menu": "Überprüfungsmenu"
+          }
+        }
+      },
+      "Request": {
+        "Request": {
+          "title": "Anfrage",
+          "clientVerified": "Ihr Prozess ist bereit zur Anfrage",
+          "clientRequested": "Der Auftragnehmer hat den Entwurf erhalten und wird sich in Kürze bei ihnen melden.",
+          "contractorRecieved": "Sie haben einen Anfrage erhalten",
+          "clientVerifiedTitle": "Bereit",
+          "clientRequestedTitle": "Übermittelt",
+          "contractorRecievedTitle": "Erhalten",
+          "button": {
+            "menu": "Anfragemenu",
+            "showFiles": "zusätzliche Dateien Anzeigen/Hochladen",
+            "hideFiles": "Dateien Verbergen"
+          }
+        }
+      },
+      "Clarify": {
+        "Clarify": {
+          "title": "Rückfragen",
+          "messages": "Nachrichten",
+          "noMessages": "Keine Nachrichten vorhanden",
+          "button": {
+            "menu": "Rückfragenmenu"
+          }
+        }
+      },
+      "Contract": {
+        "components": {
+          "FileRow": { "button": { "delete": "Löschen" } },
+          "FileTable": {
+            "noFiles": "Keine Dateien vorhanden",
+            "name": "Name",
+            "type": "Typ",
+            "size": "Größe",
+            "date": "Datum",
+            "author": "Autor",
+            "actions": "Aktionen",
+            "userFilesTitle": "Dateien zum Angebot",
+            "uploadFilesTitle": "Dateien hochladen",
+            "currentFilesTitle": "Aktuelle Dateien",
+            "button": {
+              "delete": "Löschen",
+              "upload": "Dateien Hochladen",
+              "downloadAll": "Alle Dateien Herunterladen"
+            }
+          }
+        },
+        "Contract": {
+          "title": "Angebot",
+          "orga": "Laden sie hier ihr Angebot und zugehörige Dateien hoch",
+          "user": "Laden sie hier zusätzliche Dateien hoch",
+
+          "button": {
+            "menu": "Angebotsmenu"
+          }
+        }
+      },
+      "Confirmation": {
+        "Confirmation": {
+          "title": "Bestätigung des Angebots",
+
+          "button": {
+            "menu": "Bestätigungsmenu"
+          }
+        }
+      },
+      "Production": {
+        "Production": {
+          "title": "Produktion",
+
+          "button": {
+            "menu": "Produktionsmenu"
+          }
+        }
+      },
+      "Delivery": {
+        "Delivery": {
+          "title": "Lieferung",
+
+          "button": {
+            "menu": "Lieferungsmenu"
+          }
+        }
+      },
+      "Completed": {
+        "Completed": {
+          "title": "Abgeschlossen",
+
+          "button": {
+            "menu": "Abgeschlossenmenu"
+          }
+        }
+      }
+    },
+    "Service": {
+      "ServiceSelection": {
+        "components": {
+          "ServiceCard": {
+            "title": {
+              "MANUFACTURING": "3D-Modell Herstellen lassen",
+              "MODELING": "3D-Modell Entwerfen lassen",
+              "NONE": "error"
+            },
+            "description": {
+              "MANUFACTURING": "Lassen Sie Ihr individuelles 3D-Modell professionell drucken. Wir vermitteln sie auf Grund ihrer Anforderungen zu dem am besten passenden Herstellern.",
+              "MODELING": "Beauftragen Sie einen Experten, ein individuelles 3D-Modell für Sie zu entwerfen.",
+              "NONE": "error"
+            }
+          }
+        }
+      },
+      "ServiceDetails": {
+        "components": {
+          "manufacturing": {
+            "model": {
+              "heading": "Modelle:",
+              "noModels": "keine Modelle vorhanden",
+              "img": "Modelbild",
+              "name": "Name:",
+              "dimensions": "Maße",
+              "surface": "Oberfläche",
+              "volume": "Volumen"
+            },
+            "material": {
+              "heading": "Material:",
+              "noMaterial": "kein Material ausgewählt",
+              "selected": "Ausgewählt",
+              "img": "Materialbild",
+              "name": "Name:",
+              "type": "Typ:",
+              "properties": "Eigenschaften:"
+            },
+            "postProcessing": {
+              "heading": "Nachbearbeitungen:",
+              "noPostProcessings": "keine Nachbearbeitungen ausgewählt",
+              "name": "name",
+              "img": "Nachbearbeitungsbild",
+              "type": "Typ:",
+              "describtion": "Beschreibung"
+            },
+            "button": {
+              "add": "Hinzufügen",
+              "addModel": "Modell hinzufügen",
+              "addMaterial": "Material hinzufügen",
+              "addPostProcessing": "Nachbearbeitung hinzufügen",
+              "edit": "Bearbeiten",
+              "editModel": "Modell bearbeiten",
+              "editMaterial": "Material bearbeiten",
+              "editPostProcessing": "Nachbearbeitung bearbeiten",
+              "delete": "Löschen",
+              "deleteModel": "Modell löschen",
+              "deleteMaterial": "Material löschen",
+              "deletePostProcessing": "Nachbearbeitung löschen"
+            }
+          }
+        }
+      },
+      "Service": {
+        "title": "Entwurf",
+        "noType": "kein Service ausgewählt",
+        "button": {
+          "editType": "Service Typ bearbeiten",
+          "complete": "Service abschließen"
+        }
+      }
+    },
+    "StatusWizard": {
+      "components": {},
+      "StatusWizard": {
+        "item": {
+          "processInfo": "Übersicht",
+          "header": "Übersicht",
+          "draft": "Entwurf",
+          "service": "Service",
+          "contractorSelected": "Auftragnehmer",
+          "verified": "Überprüfung",
+          "requested": "Anfrage",
+          "clarification": "Rückfragen",
+          "offer": "Angebot",
+          "confirmation": "Bestätigung",
+          "confirmed": "Bestätigt",
+          "production": "Produktion",
+          "delivery": "Lieferung",
+          "completed": "Abgeschlossen"
+        }
+      }
+    },
+    "ProcessPage": {
+      "heading": "Prozessdetails"
+    }
+  },
+  "Project": {
+    "components": {
+      "Processes": {
+        "sort": {
+          "title": "Titel",
+          "processID": "Prozess-ID",
+          "serviceType": "Service",
+          "updatedWhen": "Aktualisiert",
+          "createdWhen": "Erstellt",
+          "flatProcessStatus": "Status",
+          "amount": "Anzahl",
+          "imgPath": "Bild",
+          "order": "Reihenfolge",
+          "asc": "Aufsteigend",
+          "dsc": "Absteigend"
+        },
+        "noProcess": "Keine Prozesse vorhanden",
+        "button": {
+          "new": "Neuer Prozess",
+          "create": "weiteren Prozess anlegen",
+          "sort": "Sortieren nach:"
+        }
+      },
+      "FlatProcessCard": {
+        "serviceType": "Service Typ:",
+        "status": "Status:",
+        "updated": "letzte Aktualisierung:",
+        "count": "Anzahl:",
+        "confirm": "Prozess wirklich löschen?",
+        "button": {
+          "continue": "Fortfahren",
+          "delete": "Löschen"
+        }
+      },
+      "Info": {
+        "name": "Projektname:",
+        "updated": "letzte Aktualisierung:",
+        "created": "Erstellt am:",
+        "count": "Anzahl Prozesse:",
+        "inProgess": "davon in Bearbeitung:",
+        "finished": "davon Abgeschlossen:",
+        "button": {
+          "menu": "Informationen Menu",
+          "expand": "Mehr Anzeigen",
+          "collapse": "Weniger Anzeigen",
+          "editTitle": "Projektname bearbeiten"
+        }
+      },
+      "TitleForm": {
+        "name": "Projektname:"
+      }
+    },
+    "ProjectPage": {
+      "header": "Projektdetails"
+    }
+  },
   "Projects": {
     "components": {
       "Table": {
+        "noProjects": "Keine Projekte vorhanden",
         "label": {
           "selectProject": "Projekt {{name}} auswählen",
           "selectAllProjects": "Alle Projekte auswählen"
@@ -874,6 +1288,16 @@
         "adminProjects": "Alle Projekte",
         "ownProjects": "Eigene Projekte",
         "receivedProjects": "Erhaltene Projekte"
+      },
+      "TitleForm": {
+        "heading": "Projekt anlegen",
+        "subheading": "Geben sie ihrem Projekt einen Namen. So können Sie es später leichter wiederfinden",
+        "subheading2": "Ein Projekt ist eine Sammlung von Prozessen und ein Prozess ist ein Auftrag für einen Dienstleister/Hersteller.",
+        "name": "Projektname",
+        "button": {
+          "create": "Projekt anlegen"
+        },
+        "error": "Bitte geben Sie einen Namen ein"
       }
     },
     "context": {
@@ -935,7 +1359,7 @@
         "TitleForm": {
           "name": "Name: ",
           "button": {
-            "edit": "Name Bearbeiten"
+            "edit": "Name bearbeiten"
           }
         }
       },
@@ -947,13 +1371,13 @@
         },
         "ContractorSelection": {
           "address": {
-            "title": "Liefer und Rechnungsadresse",
-            "name": "Name",
-            "company": "Firma",
-            "address": "Addresse",
+            "sameAddress": "Lieferadresse gleich Rechnungsadresse",
+            "title": "Liefer und Rechungsadresse",
+            "titleDeliver": "Lieferadresse",
+            "titleBilling": "Rechnungsadresse",
+            "noAddress": "keine Adressen vorhanden",
             "button": {
-              "edit": "Bearbeiten",
-              "reset": "Auf Standard-Adresse zurücksetzen"
+              "new": "neue Adresse anlegen"
             }
           },
           "contractor": "Auftagnehmer",
@@ -975,23 +1399,26 @@
         "useProjectState": {},
         "useScrollToProcess": {},
         "useStatusButtons": {
-          "SELECT_SERVICE": "Service auswählen",
-          "EDIT": "Service vervollständigen",
-          "DELETE": "Löschen",
-          "SERVICE_IN_PROGRESS": "Service in bearbeitung",
-          "CONTRACTOR_SELECTED": "Auftragnehmer auswählen",
-          "VERIFYING": "Überprüfen",
-          "VERIFYING_AND_REQUESTED": "Überprüfen und automatisch Anfragen",
-          "REQUESTED": "Anfragen",
-          "CLARIFICATION": "Rückfragen",
-          "CONFIRMED_BY_CONTRACTOR": "Angebot erstellen",
-          "REJECTED_BY_CONTRACTOR": "Anfage ablehnen",
-          "CONFIRMED_BY_CLIENT": "Angebot bestätigen",
-          "REJECTED_BY_CLIENT": "Angebot ablehnen",
-          "PRODUCTION": "Produktion starten",
-          "DELIVERY": "Lieferung starten",
-          "COMPLETED": "Auftrag abschließen",
-          "REPROJECT": "erneut Bestellen",
+          "NONE": "Translation error",
+          "DELETE": "Prozess löschen",
+          "FORWARD-TO-CONTRACTOR_SELECTED": "Weiter zu Überprüfung",
+          "BACK-TO-SERVICE_READY": "Zurück zur Servicebearbeitung",
+          "BACK-TO-DRAFT": "Zurück zur Serviceauswahl",
+          "FORWARD-TO-SERVICE_COMPLETED": "Weiter zur Auftragnehmerauswahl",
+          "BACK-TO-SERVICE_COMPLETED": "Zurück zur Auftragnehmerauswahl",
+          "FORWARD-TO-VERIFYING": "Überprüfen Starten",
+          "BACK-TO-CONTRACTOR_SELECTED": "Zurück zur Überprüfung",
+          "FORWARD-TO-REQUESTED": "Anfrage senden",
+          "FORWARD-TO-CLARIFICATION": "Rückfragen stellen",
+          "FORWARD-TO-CONFIRMED_BY_CONTRACTOR": "Anfrage bestätigen und Angebot erstellen",
+          "FORWARD-TO-REJECTED_BY_CONTRACTOR": "Anfrage ablehnen",
+          "FORWARD-TO-CONFIRMED_BY_CLIENT": "Angebot bestätigen",
+          "FORWARD-TO-REJECTED_BY_CLIENT": "Angebot ablehnen",
+          "FORWARD-TO-PRODUCTION": "Produktion starten",
+          "FORWARD-TO-DELIVERY": "Lieferung starten",
+          "FORWARD-TO-FAILED": "Prozess fehlgeschlagen",
+          "FORWARD-TO-COMPLETED": "Prozess abschließen",
+          "FORWARD-TO-DISPUTE": "Streitfall melden",
           "buttons": {
             "confirmAll": "Wollen Sie wirklich alle betroffene Prozesse {{title}}?"
           }
@@ -1042,7 +1469,7 @@
             "status": "Prozessstatus:"
           },
           "ProcessFile": {
-            "title": "Dateien",
+            "title": "Weitere Dateien",
             "empty": "keine Dateien gefunden",
             "button": {
               "delete": "Löschen",
@@ -1099,7 +1526,7 @@
             }
           },
           "History": {
-            "noHistory": "kein Verlauf vorhanden",
+            "noHistory": "Kein Verlauf vorhanden",
             "createdBy": "Erstellt von:",
             "createdWhen": "Erstellt am:",
             "data": "Daten:",
@@ -1125,8 +1552,8 @@
               "filename": "Dateiname:",
               "volume": "Volumen:",
               "surfaceArea": "Oberfläche:",
-              "mbbDimensions": "MBB Dimensionen:",
-              "mbbVolume": "MBB Volumen:"
+              "mbbDimensions": "Modell Hüllkörper Dimensionen:",
+              "mbbVolume": "Modell Hüllkörper Volumen:"
             },
             "Modelling": {
               "title": "Modell entwerfen lasssen"
@@ -1224,25 +1651,13 @@
       "login": "Zur Anmeldung"
     },
     "form": {
-      "name": "Anmeldename",
-      "display_name": "Anzeigename",
-      "logo_url": "Logo URL",
-      "primary_color": "Primärfarbe",
-      "background_color": "Hintergrundfarbe",
+      "display_name": "Organisationsname",
       "email": "E-Mail",
       "button": {
         "submit": "Registrieren"
       },
       "error": {
-        "name": {
-          "required": "Anmeldename wird benötigt",
-          "regex": "Darf nur Kleinbuchstaben, Zahlen, Unterstriche (_) und Bindestriche (-) enthalten und mit einem Kleinbuchstaben oder Zahl beginnen",
-          "length": "Muss zwischen 3 und 50 Zeichen lang sein"
-        },
-        "display_name": "Anzeigename wird benötigt",
-        "logo_url": "Logo URL wird benötigt",
-        "primary_color": "Primärfarbe wird benötigt",
-        "background_color": "Hintergrundfarbe wird benötigt",
+        "display_name": "Organisationsname wird benötigt",
         "email": {
           "required": "E-Mail wird benötigt",
           "email": "E-Mail muss eine gültige E-Mail sein"
@@ -1425,6 +1840,7 @@
       "Material": {
         "components": {
           "Card": {
+            "props": "Eigenschaften",
             "button": {
               "select": "Auswählen"
             }
@@ -1442,8 +1858,16 @@
         },
         "hooks": {},
         "Material": {
+          "available": "Verfügbare Materialien",
+          "selected": "Ausgewählte Materialien",
           "error": {
             "noMaterials": "keine Materialien gefunden"
+          },
+          "button": {
+            "select": "Auswählen",
+            "deselect": "Abwählen",
+            "delete": "Löschen",
+            "save": "Speichern"
           }
         }
       },
@@ -1486,39 +1910,55 @@
         "types": {},
         "Upload": {
           "components": {
+            "Forms": {
+              "title": "Datei Informationen hinzufügen"
+            },
             "Form": {
               "name": "Name:",
               "size": "Größe:",
               "type": "Dateityp:",
               "date": "Datum:",
-              "title": "Datei Informationen hinzufügen",
-              "tags": "Tags",
+
+              "all": "Auf alle anwenden:",
+              "tags": "Tags:",
               "tagsPH": "Tag1, Tag2, ...",
-              "certificate": "Zertifikate",
+              "selectLicense": "Lizenz auswählen",
+              "certificate": "Eventuelle Zertifikate:",
               "certificatePH": "Zertifikate1, Zertifikate2, ...",
-              "license": "Lizenz",
+              "license": "Lizenz der Datei:",
               "licensePH": "Lizenz1, Lizenz2 ...",
               "button": {
-                "send": "Modell Hochladen"
+                "save": "Speichern"
               }
             }
           },
           "Upload": {
-            "error": "Fehler beim Hochladen",
+            "error": {
+              "tags": "Error Tags",
+              "licenses": "keine Lizenz(en) angegeben",
+              "certificates": "Error Certificates",
+              "file": "Error File"
+            },
             "loading": "Model wird hochgeladen",
             "card": {
-              "title": "Modell Hochladen",
+              "title": "Modelle Hochladen",
               "text": "per Drag & Drop oder Klick"
             },
             "button": {
-              "upload": "Hochladen"
+              "upload": "Modelle Hochladen",
+              "delete": "Löschen",
+              "edit": "Bearbeiten",
+              "save": "Speichern",
+              "saveAll": "Auf alle Modelle anwenden"
             }
           }
         },
         "Model": {
+          "selected": "Ausgewählte Modelle",
+          "available": "Verfügbare Modelle",
           "upload": {
-            "img": "Modell Hochladen",
-            "title": "Modell Hochladen",
+            "img": "Modelle Hochladen",
+            "title": "Modelle Hochladen",
             "button": "zum Upload"
           },
           "error": {
@@ -1533,7 +1973,11 @@
       },
       "PostProcessing": {
         "components": {
-          "Card": {},
+          "Card": {
+            "value": "Wert:",
+            "valueList": "Werteliste:",
+            "type": "Typ:"
+          },
           "Catalog": {
             "button": {
               "overview": "zur Übersicht"
@@ -1553,9 +1997,17 @@
           "usePostProcessing": {}
         },
         "PostProcessing": {
+          "available": "Verfügbare Nachbearbeitungen",
+          "selected": "Ausgewählte Nachbearbeitungen",
           "error": {
             "noPostProcessings": "keine Nachbearbeitungen gefunden",
             "noPostProcessingsSelected": "keine Nachbearbeitungen ausgewählt"
+          },
+          "button": {
+            "delete": "Entfernen",
+            "deselect": "Abwählen",
+            "select": "Auswählen",
+            "save": "Speichern"
           }
         }
       },

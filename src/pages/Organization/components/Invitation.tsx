@@ -7,6 +7,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Heading } from "@component-library/index";
 import logger from "@/hooks/useLogger";
+import useCreateInviteLink from "@/api/Organization/Mutations/useCreateInviteLink";
+import useInviteUser from "@/api/Organization/Mutations/useInviteUser";
 
 interface InvitationProps {}
 
@@ -24,8 +26,9 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   const { t } = useTranslation();
   const [links, setLinks] = useState<InviteLink[]>([]);
   const [showLoadedIn, setShowLoadedIn] = useState<boolean>(false);
-  const { inviteLinkMutation, inviteUserMutation, rolesQuery } =
-    useOrganizations();
+  const createInviteLink = useCreateInviteLink();
+  const inviteUser = useInviteUser();
+  const { rolesQuery } = useOrganizations();
 
   const schema = yup
     .object({
@@ -47,13 +50,13 @@ const Invitation: React.FC<InvitationProps> = (props) => {
 
   const onSubmitInvite = (data: FormData) => {
     // logger("onSubmitInvite", data);
-    inviteUserMutation.mutate(data);
+    inviteUser.mutate(data);
   };
 
   const onSubmitLink = (data: FormData) => {
     logger("onSubmitLink", data);
     setShowLoadedIn(true);
-    inviteLinkMutation.mutate(data.email, {
+    createInviteLink.mutate(data.email, {
       onSuccess(data, variables, context) {
         setLinks((prevState) => [
           ...prevState,

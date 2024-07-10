@@ -3,10 +3,7 @@ import { useTranslation } from "react-i18next";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button } from "@component-library/index";
-import useOrganizations, {
-  OrganizationsUser,
-  RoleProps,
-} from "../hooks/useOrganizations";
+import useOrganizations from "../hooks/useOrganizations";
 import { LoadingSuspense } from "@component-library/index";
 import CheckIcon from "@mui/icons-material/Check";
 import { Heading } from "@component-library/index";
@@ -14,6 +11,11 @@ import { AppContext } from "@/pages/App/App";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { UserContext } from "@/contexts/UserContextProvider";
 import useUser, { UserType } from "@/hooks/useUser";
+import useAssignRole from "@/api/Organization/Mutations/useAssignRole";
+import useRemoveRole from "@/api/Organization/Mutations/useRemoveRole";
+import useDeleteUser from "@/api/Organization/Mutations/useDeleteUser";
+import { OrganizationsUser } from "@/api/Organization/Querys/useGetOrganizationUsers";
+import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
 
 interface OrganizationTableProps {}
 
@@ -99,15 +101,15 @@ const OrganizationtableRow: React.FC<{
       : roles[0]
   );
 
-  const { assignRoleMutation, removeRoleMutation, deleteUserMutation } =
-    useOrganizations();
-
+  const assignRole = useAssignRole();
+  const removeRole = useRemoveRole();
+  const deleteUser = useDeleteUser();
   const handleOnClickEdit = () => {
     if (edit === true && newRole !== undefined) {
       roles.forEach((role) => {
-        removeRoleMutation.mutate({ email, roleID: role.id });
+        removeRole.mutate({ email, roleID: role.id });
       });
-      assignRoleMutation.mutate({ email, roleID: newRole.id });
+      assignRole.mutate({ email, roleID: newRole.id });
     } else {
       setNewRole(
         roles === undefined || (roles !== undefined && roles.length === 0)
@@ -121,7 +123,7 @@ const OrganizationtableRow: React.FC<{
     if (
       window.confirm(t("Organization.components.table.confirmDelete")) === true
     )
-      deleteUserMutation.mutate(email);
+      deleteUser.mutate(email);
   };
   const handleOnChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (allRoles !== undefined) {

@@ -6,9 +6,10 @@ import { ProcessFile, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 
 import useProcess from "@/hooks/Process/useProcess";
 import OwnerGate from "@/components/OwnerGate/OwnerGate";
-import ProcessFileTable from "./components/FileTable";
-import ProcessUploadCard from "@/components/Process/UploadCard";
+import ProcessFileTable from "../../../../components/Process/File/components/FileTable";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
+import ProcessUploadCard from "@/components/Process/File/components/UploadCard";
+import ProcessFileView from "@/components/Process/File/FileView";
 
 interface ProcessContractProps {}
 
@@ -36,23 +37,7 @@ const ProcessContract: React.FC<ProcessContractProps> = (props) => {
       start={ProcessStatus.CLARIFICATION}
       end={ProcessStatus.CONFIRMED_BY_CONTRACTOR}
     >
-      <Container width="full" direction="col">
-        <Text>
-          {t(
-            process.client === user.hashedID ||
-              process.client === user.organization
-              ? "Process.components.Contract.Contract.user"
-              : "Process.components.Contract.Contract.orga"
-          )}
-        </Text>
-      </Container>
-      <ProcessFileTable files={process.files} type="current" />
-      <ProcessFileTable
-        files={files}
-        type="upload"
-        resetUploadFiles={resetUploadFiles}
-      />
-      <ProcessUploadCard addFiles={addFiles} />
+      <ProcessFileView origin="Contract" />
     </ProcessContainer>
   );
 };

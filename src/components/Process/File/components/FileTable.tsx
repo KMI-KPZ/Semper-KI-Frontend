@@ -12,7 +12,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import useDownloadZIP from "@/api/Process/Files/Mutations/useDownloadZIP";
 import useUploadFiles from "@/api/Process/Files/Mutations/useUploadFiles";
-import { ProcessFile } from "@/api/Process/Querys/useGetProcess";
+import { ProcessFile, ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
 import RawProcessFileRow from "./RawFileRow";
 
 export type ProcessFileTableProps =
@@ -23,15 +23,18 @@ type UploadFileTableProps = {
   files: File[];
   type: "upload";
   resetUploadFiles: () => void;
-};
+} & GenericFileTableProps;
 
 type CurrentFileTableProps = {
   files: ProcessFile[];
   type: "current";
-};
+} & GenericFileTableProps;
 
+type GenericFileTableProps = {
+  origin: ProcessOrigin;
+};
 const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
-  const { files, type } = props;
+  const { files, type, origin } = props;
   const { t } = useTranslation();
   const downloadZIP = useDownloadZIP();
   const uploadFiles = useUploadFiles();
@@ -39,7 +42,7 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
   const handleOnButtonClickUpload = () => {
     if (type === "upload")
       uploadFiles.mutate(
-        { files, origin: "Contract" },
+        { files, origin },
         { onSuccess: () => props.resetUploadFiles() }
       );
   };
@@ -108,6 +111,7 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
             "Process.components.Contract.components.FileTable.button.upload"
           )}
           startIcon={<FileUploadIcon />}
+          loading={uploadFiles.isLoading}
           onClick={handleOnButtonClickUpload}
         />
       ) : (
@@ -117,6 +121,7 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
           title={t(
             "Process.components.Contract.components.FileTable.button.downloadAll"
           )}
+          loading={downloadZIP.isLoading}
           startIcon={<DownloadIcon />}
           onClick={handleOnButtonClickDownload}
         />

@@ -187,7 +187,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     >
       {loading === true ? (
         <div className="animate-spin">
-          <LoopIcon />
+          <LoopIcon className="scale-x-[-1]" />
         </div>
       ) : (
         <>

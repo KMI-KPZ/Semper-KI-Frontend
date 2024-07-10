@@ -353,7 +353,7 @@
     },
     "Process": {
       "UploadCard": {
-        "title": "Datei/en hochladen",
+        "title": "neue Datei/en hochladen",
         "subTitle": "Per Drag & Drop oder Klick",
         "button": "Datei auswählen"
       }
@@ -1005,7 +1005,9 @@
           "clientRequestedTitle": "Übermittelt",
           "contractorRecievedTitle": "Erhalten",
           "button": {
-            "menu": "Anfragemenu"
+            "menu": "Anfragemenu",
+            "showFiles": "zusätzliche Dateien Anzeigen/Hochladen",
+            "hideFiles": "Dateien Verbergen"
           }
         }
       },

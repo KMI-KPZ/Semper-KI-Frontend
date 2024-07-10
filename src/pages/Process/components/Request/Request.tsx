@@ -4,12 +4,13 @@ import { useTranslation } from "react-i18next";
 import ProcessStatusButtons from "../StatusButtons";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessHeader from "@/components/Process/Header";
-import { Container, Text } from "@component-library/index";
+import { Button, Container, Text } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useProcess from "@/hooks/Process/useProcess";
 
 import CheckIcon from "@mui/icons-material/Check";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import ProcessFileView from "@/components/Process/File/FileView";
 
 interface ProcessRequestProps {}
 
@@ -18,6 +19,7 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
   const { process } = useProcess();
+  const [showFiles, setShowFiles] = React.useState<boolean>(false);
 
   const isClient = user.hashedID === process.client;
   const clientVerified =
@@ -52,6 +54,10 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
     "Process.components.Request.Request.title"
   )}: ${getTitle()}`;
 
+  const handleOnButtonClickFile = () => {
+    setShowFiles((prevState) => !prevState);
+  };
+
   return (
     <ProcessContainer
       id="Request"
@@ -69,6 +75,17 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
         ) : null}
         <Text variant="strong">{getText()}</Text>
       </Container>
+
+      {showFiles ? <ProcessFileView origin="Request" /> : null}
+      <Button
+        size="sm"
+        title={t(
+          showFiles
+            ? "Process.components.Request.Request.button.hideFiles"
+            : "Process.components.Request.Request.button.showFiles"
+        )}
+        onClick={handleOnButtonClickFile}
+      />
     </ProcessContainer>
   );
 };

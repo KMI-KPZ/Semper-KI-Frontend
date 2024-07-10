@@ -29,6 +29,7 @@ const useDeleteFile = () => {
     onSuccess: () => {
       queryClient.invalidateQueries(["project", projectID]);
     },
+    
   });
 };
 

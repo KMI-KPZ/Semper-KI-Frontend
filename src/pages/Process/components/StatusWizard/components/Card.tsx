@@ -12,7 +12,7 @@ interface StatusWizardCardProps {
 }
 
 const isCardInView = (item: StatusWizardItem): boolean => {
-  const element = document.getElementById(item.text);
+  const element = document.getElementById(item.targetID);
   if (element) {
     const rect = element.getBoundingClientRect();
     return rect.bottom >= 0 && rect.top <= window.innerHeight;

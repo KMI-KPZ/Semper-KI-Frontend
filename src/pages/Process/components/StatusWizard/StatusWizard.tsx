@@ -131,11 +131,7 @@ const ProcessStatusWizard: React.FC<ProcessStatusWizardProps> = (props) => {
       process.processStatus <= item.endStatus
   );
   const newestStatusID =
-    newestStatusItem === undefined
-      ? ""
-      : newestStatusItem.targetID !== undefined
-      ? newestStatusItem.targetID
-      : newestStatusItem.text;
+    newestStatusItem === undefined ? "" : newestStatusItem.targetID;
   useScrollIntoView(newestStatusID);
 
   return (

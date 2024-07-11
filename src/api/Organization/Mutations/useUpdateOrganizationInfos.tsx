@@ -20,17 +20,14 @@ const useUpdateOrganizationInfos = () => {
     supportedServices,
   }: UpdateOrgaInfoProps) =>
     authorizedCustomAxios
-      .patch(
-        `${process.env.VITE_HTTP_API_URL}/public/updateOrganizationDetails/`,
-        {
-          data: {
-            content: {
-              supportedServices,
-              details: { email, adress, taxID },
-            },
+      .patch(`${process.env.VITE_HTTP_API_URL}/public/organization/update/`, {
+        data: {
+          content: {
+            supportedServices,
+            details: { email, adress, taxID },
           },
-        }
-      )
+        },
+      })
       .then((response) => {
         logger("useUpdateOrganizationInfos | updateOrgaInfo ✅ |", response);
         return response.data;

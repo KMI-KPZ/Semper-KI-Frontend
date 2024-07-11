@@ -59,5 +59,8 @@ Allow: /$
 User-agent: yahoo-blogs/v3.9
 Allow: /$
 
+User-agent: Seobility
+Allow: /$
+
 User-agent: *
 Disallow: /

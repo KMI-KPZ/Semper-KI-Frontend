@@ -8,7 +8,7 @@ const useGetOrganization = () => {
   const queryClient = useQueryClient();
   const getOrganization = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/organization/get/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/organizations/get/`)
       .then((response) => {
         const responseData = response.data;
         const organization: OrganizationInfoProps = {

@@ -50,7 +50,7 @@ export const NavigationItemData: INavigationItem[] = [
     icon: <DescriptionIcon fontSize="large" />,
     extern: false,
     preferred: ["header", "home"],
-    userTypes: [UserType.USER, UserType.ORGANIZATION],
+    userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ANONYM],
   },
   {
     title: "organization",

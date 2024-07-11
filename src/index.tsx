@@ -14,6 +14,7 @@ import EventContextProvider from "./contexts/EventContextProvider";
 import BodyScrollContextProvider from "./contexts/BodyScrollContextProvider";
 import ModalContextProvider from "./contexts/ModalContextProvider";
 import CSRFOutlet from "./outlets/CSRFOutlet";
+import { TopicsProvider} from "@/contexts/ChatbotContextProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -40,18 +41,20 @@ root.render(
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
           <CSRFOutlet>
-            <UserContextProvider>
-              <PermissionContextProvider>
-                <EventContextProvider>
-                  <BodyScrollContextProvider>
-                    <ModalContextProvider>
-                      <App />
-                      <ReactQueryDevtools />
-                    </ModalContextProvider>
-                  </BodyScrollContextProvider>
-                </EventContextProvider>
-              </PermissionContextProvider>
-            </UserContextProvider>
+            <TopicsProvider>
+              <UserContextProvider>
+                <PermissionContextProvider>
+                  <EventContextProvider>
+                    <BodyScrollContextProvider>
+                      <ModalContextProvider>
+                        <App />
+                        <ReactQueryDevtools />
+                      </ModalContextProvider>
+                    </BodyScrollContextProvider>
+                  </EventContextProvider>
+                </PermissionContextProvider>
+              </UserContextProvider>
+            </TopicsProvider>
           </CSRFOutlet>
         </QueryClientProvider>
       </BrowserRouter>

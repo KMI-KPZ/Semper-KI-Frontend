@@ -12,6 +12,8 @@ import ProjectInfo from "./components/Info";
 import useGetProject from "@/api/Project/Querys/useGetProject";
 import ProjectProcesses from "./components/Processes";
 import ProjectTitleForm from "./components/TitleForm";
+import { useTopics } from "@/contexts/ChatbotContextProvider";
+import { useEffect}  from "react";
 
 interface ProjectPageProps {}
 
@@ -19,7 +21,15 @@ const ProjectPage: React.FC<ProjectPageProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const project = useGetProject();
+  const { topics, maintopic, addTopics, removeTopics, setMainTopic } = useTopics();
+    useEffect(() => {
+        return () => {
+            removeTopics(["Projektdetails"]);
+        }
+    }, []);
 
+  addTopics(["Projektdetails"]);
+  setMainTopic("Projektdetailseite - Übersicht der einzelnen Vorgänge im aktuellen Projekt");
   if (project.data === undefined) return <LoadingAnimation />;
 
   return (

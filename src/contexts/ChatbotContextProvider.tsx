@@ -1,35 +1,48 @@
-import useGetMissedEvents from "@/api/Events/Querys/useGetMissedEvents";
-import { useEventsWebsocket } from "@/api/Events/Websocket/useEventsWebsocket";
-import useUser, { UserType } from "@/hooks/useUser";
-import { Event } from "@/pages/App/types";
-import { AppLoadingSuspense } from "@component-library/index";
-import React, { PropsWithChildren, useState } from "react";
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-interface ChatbotContextProviderProps {}
+interface TopicsContextType {
+  topics: string[];
+  maintopic: string;
+  addTopics: (newTopics: string[]) => void;
+  removeTopics: (topicsToRemove: string[]) => void;
+  setMainTopic: (topic: string) => void;
+}
 
-export type ChatbotContext = {
-  setTopics(topics: string[]):void,
-  topics: string[],
-};
+const TopicsContext = createContext<TopicsContextType | undefined>(undefined);
 
-export const ChatbotContext = React.createContext<ChatbotContext>({
-  topics: [],
-  setTopics: () => {},
-});
+const TopicsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [topics, setTopics] = useState<string[]>(["Semper-KI"]);
+  const [maintopic, setMaintopic] = useState<string>("Semper-KI");
+  const addTopics = (newTopics: string[]) => {
+    setTopics((prevTopics) => {
+      // merge prev topics and new topics uniquely and return the old array if nothing changed, the new one otherwise
+        const mergedTopics = Array.from(new Set([...prevTopics, ...newTopics]));
+        return mergedTopics.length === prevTopics.length ? prevTopics : mergedTopics;
+    });
+  };
 
-const ChatbotContextProvider: React.FC<
-  PropsWithChildren<ChatbotContextProviderProps>
-> = (props) => {
-  const { children } = props;
-  const [topics, setTopics] = useState<String[]>([]);
+  const removeTopics = (topicsToRemove: string[]) => {
+    setTopics((prevTopics) => prevTopics.filter(topic => !topicsToRemove.includes(topic)));
+    // Hintergrundoperationen hier hinzufügen
+  };
+
+  const setMainTopic = (topic: string) => {
+    setMaintopic(topic);
+  }
 
   return (
-      <ChatbotContext.Provider
-          value={{topics, setTopic: setTopics}}
-        >
+      <TopicsContext.Provider value={{ topics, maintopic, addTopics, removeTopics, setMainTopic }}>
         {children}
-      </ChatbotContext.Provider>
-    );
+      </TopicsContext.Provider>
+  );
 };
 
-export default ChatbotContextProvider
+const useTopics = (): TopicsContextType => {
+  const context = useContext(TopicsContext);
+  if (context === undefined) {
+    throw new Error('useTopics must be used within a TopicsProvider');
+  }
+  return context;
+};
+
+export { TopicsProvider, useTopics };

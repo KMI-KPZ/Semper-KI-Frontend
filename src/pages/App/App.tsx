@@ -39,6 +39,8 @@ import ProcessHistory from "../Process/legacy/History/History";
 import ProcessChat from "../Process/legacy/Chat/Chat";
 import ServiceRoutes from "@/routes/ServiceRoutes";
 import ProcessPage from "../Process/ProcessPage";
+import { useTopics } from '@/contexts/ChatbotContextProvider';
+
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -63,8 +65,9 @@ export const AppContext = createContext<AppContext>({
 
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(initialAppState);
+  const { topics, addTopics, removeTopics } = useTopics();
+    addTopics(["APP"]);
 
-  //test
 
   return (
     <AppContext.Provider

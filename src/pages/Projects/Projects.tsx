@@ -16,6 +16,9 @@ import ProjectsTable from "./components/Table";
 import AddIcon from "@mui/icons-material/Add";
 import useCreateProject from "@/api/Project/Mutations/useCreateProject";
 import CreateProjectTitleForm from "./components/TitleForm";
+import { useTopics} from "@/contexts/ChatbotContextProvider";
+import { useEffect}  from "react";
+
 interface ProjectsProps {}
 
 const Projects: React.FC<ProjectsProps> = (props) => {
@@ -52,6 +55,16 @@ const Projects: React.FC<ProjectsProps> = (props) => {
           (project) => user.organization !== project.client
         )
       : [];
+
+  const { topics, maintopic, addTopics, removeTopics, setMainTopic } = useTopics();
+    useEffect(() => {
+        return () => {
+        removeTopics(["Projektübersicht"]);
+        }
+    }, []);
+
+    addTopics(["Projektübersicht"]);
+    setMainTopic("Projektübersicht - Übersicht der Projekte");
 
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">

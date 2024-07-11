@@ -8,10 +8,23 @@ import ServiceCard from "./components/ServiceCard";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useProcess from "@/hooks/Process/useProcess";
 import logger from "@/hooks/useLogger";
+import useChatbot from "@/hooks/useChatbot";
+import {useTopics} from "@/contexts/ChatbotContextProvider";
+import {useEffect} from "react";
 
 interface ServiceSelectionProps {}
 
 const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
+
+  const {topics, maintopic, addTopics, removeTopics, setMainTopic} = useTopics();
+
+  useEffect(() => {
+    return () => {
+      removeTopics(["ServiceSelection"]);
+    }
+  }, []);
+
+
   const {} = props;
   const { t } = useTranslation();
 
@@ -20,7 +33,7 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
 
   const services = useGetServices();
 
-  const chatbot = useChatbot();
+
 
   const handleOnClickCard = (type: ServiceType) => {
     // logger("ServiceCards.tsx", "handleOnClickCard", "type", type);
@@ -32,6 +45,9 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
 
   if (services.isLoading || services.data === undefined)
     return <LoadingAnimation />;
+
+    addTopics(["ServiceSelection"]);
+    setMainTopic("Serviceselection: 3D Modell drucken oder 3D Modell entwerfen?");
   return (
     <Container
       width="full"

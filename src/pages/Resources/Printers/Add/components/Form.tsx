@@ -11,10 +11,8 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import CheckIcon from "@mui/icons-material/Check";
 import logger from "@/hooks/useLogger";
 import { NewOntoPrinter, OntoPrinter } from "@/pages/Resources/types/types";
-import useOntologyMaterialQuerys from "@/api/Ontology/useOntologyMaterialQuerys";
-import useOntologyPrinterQuerys from "@/api/Ontology/useOntologyPrinterQuerys";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import useOntoPrinters from "@/hooks/useOntoPrinters";
+import useGetFlatOntologyPrinters from "@/api/Ontology/Querys/useGetFlatOntologyPrinters";
 interface PrintersAddFormProps {
   printer: OntoPrinter | NewOntoPrinter;
   setPrinter(printer: OntoPrinter | NewOntoPrinter): void;
@@ -24,14 +22,16 @@ interface PrintersAddFormProps {
 const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
   const { printer, setPrinter, setEdit } = props;
   const { t } = useTranslation();
-  const { allPrinters } = useOntoPrinters();
+  const printersQuery = useGetFlatOntologyPrinters();
 
   const schema = yup
     .object({
       printerName: yup
         .string()
         .notOneOf(
-          [...allPrinters.map((printer) => printer.title)],
+          printersQuery.data !== undefined
+            ? [...printersQuery.data.map((printer) => printer.title)]
+            : [],
           t("Resources.Printers.form.yup.notSamePrinterName")
         )
         .required(

@@ -1,7 +1,6 @@
 import { Button, Heading, Modal } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import useOntologyPrinterQuerys from "../../../../api/Ontology/useOntologyPrinterQuerys";
 import ResourcesPrintersAddSearch from "./components/Search";
 import EditIcon from "@mui/icons-material/Edit";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -12,24 +11,43 @@ import {
   OntoPrinterType,
 } from "../../types/types";
 import PrintersAddForm from "./components/Form";
-import useOntologyPrinterMutations from "@/api/Ontology/useOntologyPrinterMutations";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import useAuthorizedUser from "@/hooks/useAuthorizedUser";
+import { useNavigate } from "react-router-dom";
+import useAddOntologyPrinter from "@/api/Ontology/Mutations/useAddOntologyPrinter";
 
 interface ResourcesPrintersAddProps {}
 
 const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
+  const { user } = useAuthorizedUser();
   const [printer, setPrinter] = useState<OntoPrinter | NewOntoPrinter>();
   const [edit, setEdit] = useState<boolean>(false);
-  const { addPrinterMutation } = useOntologyPrinterMutations();
+  const addPrinterMutation = useAddOntologyPrinter();
+  const navigate = useNavigate();
 
   const handleOnClickButtonEdit = () => {
     setEdit(true);
   };
 
-  const handleOnClickButtonSubmit = () => {
-    if (printer !== undefined) addPrinterMutation.mutate({ printer });
+  const handleOnClickButtonSubmit = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    if (printer !== undefined)
+      addPrinterMutation.mutate(
+        {
+          organizationID:
+            user.organization !== undefined ? user.organization : "",
+          printer,
+        },
+        {
+          onSuccess(data, variables, context) {
+            navigate("/resources/printers");
+          },
+        }
+      );
   };
 
   const handleOnClickButtonBack = () => {

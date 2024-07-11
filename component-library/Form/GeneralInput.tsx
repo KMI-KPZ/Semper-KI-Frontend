@@ -8,8 +8,10 @@ import {
 } from "react-hook-form";
 import TextInput from "./Inputs/TextInput";
 import TextAreaInput from "./Inputs/TextAreaInput";
+import NumberInput from "./Inputs/NumberInput";
+import CheckBoxInput from "./Inputs/CheckBoxInput";
 
-export type InputType = "text" | "textarea";
+export type InputType = "text" | "textarea" | "number" | "checkbox";
 
 export interface InputLabelProps<T extends FieldValues> {
   type: InputType;
@@ -39,5 +41,9 @@ export const GeneralInput = <T extends FieldValues>(
       return <TextInput {...props} />;
     case "textarea":
       return <TextAreaInput {...props} />;
+    case "number":
+      return <NumberInput {...props} />;
+    case "checkbox":
+      return <CheckBoxInput {...props} />;
   }
 };

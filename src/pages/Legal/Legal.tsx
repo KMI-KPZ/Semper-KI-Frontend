@@ -3,9 +3,7 @@ import {
   URL_Datenschutz,
   URL_Impressum,
 } from "@/config/constants";
-import usePing from "@/hooks/usePing";
 import { Button } from "@component-library/index";
-import { LoadingSuspense } from "@component-library/index";
 import { Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -19,7 +17,6 @@ interface LegalProps {}
 const Legal: React.FC<LegalProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { isMagazineUp } = usePing();
 
   return (
     <div
@@ -35,21 +32,9 @@ const Legal: React.FC<LegalProps> = (props) => {
               data-testid="legalButton"
               className="flex w-full flex-col items-center justify-center gap-5 md:flex-row"
             >
-              <Button
-                title={t("Legal.Legal.imprint")}
-                extern={isMagazineUp()}
-                to={isMagazineUp() ? URL_Impressum : "/legal/imprint"}
-              />
-              <Button
-                title={t("Legal.Legal.privacy")}
-                extern={isMagazineUp()}
-                to={isMagazineUp() ? URL_Datenschutz : "/legal/privacy"}
-              />
-              <Button
-                title={t("Legal.Legal.contact")}
-                extern={isMagazineUp()}
-                to={isMagazineUp() ? URL_Contact : "/legal/contact"}
-              />
+              <Button title={t("Legal.Legal.imprint")} to={"/legal/imprint"} />
+              <Button title={t("Legal.Legal.privacy")} to={"/legal/privacy"} />
+              <Button title={t("Legal.Legal.contact")} to={"/legal/contact"} />
             </div>
           }
         />

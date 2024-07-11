@@ -1,28 +1,21 @@
-import useFilterMutations from "@/api/Filter/useFilterMutations";
-import useFilterQuerys from "@/api/Filter/useFilterQuerys";
-import { authorizedCustomAxios } from "@/api/customAxios";
-import { FilterItemProps } from "@/pages/Service/Manufacturing/Filter/Filter";
+import useUpdateFilters from "@/api/Filter/Mutations/useUpdateFilters";
+import useGetFilters from "@/api/Filter/Querys/useGetFilters";
+import { FilterItemProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Filter/Filter";
 import {
   DefinedUseQueryResult,
   UseMutationResult,
 } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
 
 interface useFilterReturnProps {
   filtersQuery: DefinedUseQueryResult<FilterItemProps[], Error>;
-  updateFilterMutation: UseMutationResult<
-    AxiosResponse<any, any>,
-    Error,
-    FilterItemProps[],
-    unknown
-  >;
+  updateFilters: UseMutationResult<void, Error, FilterItemProps[]>;
 }
 
 const useFilter = (): useFilterReturnProps => {
-  const { filtersQuery } = useFilterQuerys();
-  const { updateFilterMutation } = useFilterMutations();
+  const filtersQuery = useGetFilters();
+  const updateFilters = useUpdateFilters();
 
-  return { filtersQuery, updateFilterMutation };
+  return { filtersQuery, updateFilters };
 };
 
 export default useFilter;

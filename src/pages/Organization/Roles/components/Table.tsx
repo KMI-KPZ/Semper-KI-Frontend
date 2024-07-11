@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useOrganizations, { RoleProps } from "../../hooks/useOrganizations";
+import useOrganizations from "../../hooks/useOrganizations";
 import {
   getGroupedPermissions,
   getPermissinContextTranslations,
@@ -8,6 +8,7 @@ import {
 } from "../Roles";
 import { LoadingSuspense } from "@component-library/index";
 import OrganizationRolesTableRow from "./TableRow";
+import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
 
 interface OrganizationRolesTableProps {
   roles: RoleProps[];

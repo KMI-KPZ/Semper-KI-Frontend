@@ -1,12 +1,13 @@
-import useUserMutations from "@/api/User/useUserMutations";
 import { UserContext } from "@/contexts/UserContextProvider";
-import { useContext } from "react";
+import { UseMutationResult } from "@tanstack/react-query";
+import { useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "./useToast";
+import { NewUserAddressProps } from "@/api/User/Mutations/useCreateAddress";
 
 interface ReturnProps {
   isLoggedIn: boolean;
   user: UserProps;
-  deleteUser(): void;
-  updateUserDetails(details: UpdateUserProps): void;
 }
 
 export type UserProps = AnonymUser | AuthorizedUserProps;
@@ -29,23 +30,16 @@ export interface AuthorizedUserProps {
 
 export interface UserDetailsProps {
   email: string;
-  address?: UserAddressProps;
+  addresses: UserAddressProps[];
 }
 
 export interface UpdateUserProps {
   address?: UserAddressProps;
 }
 
-export interface UserAddressProps {
-  firstName: string;
-  lastName: string;
-  company?: string;
-  street: string;
-  houseNumber: number;
-  zipcode: string;
-  city: string;
-  country: string;
-}
+export type UserAddressProps = {
+  id: string;
+} & NewUserAddressProps;
 
 export enum UserType {
   "USER",
@@ -64,19 +58,10 @@ export interface Address {
 
 const useUser = (): ReturnProps => {
   const { isLoggedIn, user } = useContext(UserContext);
-  const { deleteUserMutation, updateUserDetailsMutation } = useUserMutations();
-
-  const deleteUser = () => {
-    deleteUserMutation.mutate();
-  };
-  const updateUserDetails = (details: UpdateUserProps) => {
-    updateUserDetailsMutation.mutate(details);
-  };
+  const { t } = useTranslation();
 
   return {
-    deleteUser,
     isLoggedIn,
-    updateUserDetails,
     user,
   };
 };

@@ -1,24 +1,44 @@
-import { authorizedCustomAxios } from "@/api/customAxios";
 import { AuthorizedUserContext } from "@/routeOutlets/AuthorizedUserOutlet";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {
   AuthorizedUserProps,
   UpdateUserProps,
-  UserDetailsProps,
+  UserAddressProps,
+  UserType,
 } from "./useUser";
+import { UseMutationResult } from "@tanstack/react-query";
+import { toast } from "./useToast";
+import { useTranslation } from "react-i18next";
+import { NewUserAddressProps } from "@/api/User/Mutations/useCreateAddress";
 
 interface useAuthorizedUserReturnProps {
   user: AuthorizedUserProps;
-  deleteUser: () => void;
-  updateUserDetails: (details: UpdateUserProps) => void;
+  deleteUser: UseMutationResult<void, Error, void, unknown>;
+  updateUserDetails: UseMutationResult<void, Error, UpdateUserProps, unknown>;
+  createAddress: UseMutationResult<void, Error, NewUserAddressProps, unknown>;
+  deleteAddress: UseMutationResult<void, Error, string, unknown>;
+  updateAddress: UseMutationResult<void, Error, UserAddressProps, unknown>;
 }
 
 const useAuthorizedUser = (): useAuthorizedUserReturnProps => {
-  const { user, deleteUser, updateUserDetails } = useContext(
-    AuthorizedUserContext
-  );
+  const {
+    user,
+    deleteUser,
+    updateUserDetails,
+    createAddress,
+    deleteAddress,
+    updateAddress,
+  } = useContext(AuthorizedUserContext);
+  const { t } = useTranslation();
 
-  return { deleteUser, updateUserDetails, user };
+  return {
+    deleteUser,
+    updateUserDetails,
+    user,
+    createAddress,
+    deleteAddress,
+    updateAddress,
+  };
 };
 
 export default useAuthorizedUser;

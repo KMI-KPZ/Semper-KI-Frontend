@@ -8,11 +8,12 @@ import {
   URL_Datenschutz,
   URL_Impressum,
   URL_Instagram,
+  URL_LinkedIn,
   URL_Mastodon,
 } from "@/config/constants";
 import { Button, Modal } from "@component-library/index";
-import usePing from "@/hooks/usePing";
 import ContactForm from "../Form/ContactForm";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 interface Props {}
 
@@ -21,7 +22,6 @@ const Footer: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [open, setOpen] = useState<boolean>(false);
-  const { isMagazineUp } = usePing();
 
   const handleOnClickContact = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -36,7 +36,11 @@ const Footer: React.FC<Props> = (props) => {
 
   return (
     <>
-      <Modal open={open} closeModal={() => setOpen(false)} title="ContactForm">
+      <Modal
+        open={open}
+        closeModal={() => setOpen(false)}
+        modalKey="ContactForm"
+      >
         <ContactForm closeEdit={() => setOpen(false)} />
       </Modal>
       <footer className="w-full bg-slate-800 text-white shadow-inner ">
@@ -45,8 +49,7 @@ const Footer: React.FC<Props> = (props) => {
             <Button
               variant="tertiary"
               title={t("components.Footer.Footer.imprint")}
-              extern={isMagazineUp()}
-              to={isMagazineUp() ? URL_Impressum : "/legal/imprint"}
+              to={"/legal/imprint"}
               className=" text-white  hover:bg-slate-700 "
             />
           </li>
@@ -54,8 +57,7 @@ const Footer: React.FC<Props> = (props) => {
             <Button
               variant="tertiary"
               title={t("components.Footer.Footer.privacy")}
-              extern={isMagazineUp()}
-              to={isMagazineUp() ? URL_Datenschutz : "/legal/privacy"}
+              to={"/legal/privacy"}
               className="text-white hover:bg-slate-700 "
             />
           </li>
@@ -71,10 +73,10 @@ const Footer: React.FC<Props> = (props) => {
             <div className="flex flex-row items-center justify-center gap-2">
               <Button
                 title={t("components.Footer.Footer.instagram")}
-                to={URL_Instagram}
+                to={URL_LinkedIn}
                 variant="tertiary"
                 extern
-                children={<InstagramIcon />}
+                children={<LinkedInIcon />}
                 className="text-white hover:bg-slate-700 "
               />
               <Button

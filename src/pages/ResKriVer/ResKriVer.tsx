@@ -6,14 +6,15 @@ import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import useProcess from "../Projects/hooks/useProcess";
-import { useProject } from "../Projects/hooks/useProject";
+import useProcess from "../../hooks/Process/useProcess";
+import { useProject } from "../../hooks/Project/useProject";
 import { AppContext } from "../App/App";
 import { ContentBox } from "@component-library/index";
 import { useForm } from "react-hook-form";
 import SendIcon from "@mui/icons-material/Send";
 import SemperKILogo from "@images/Logo-Semper.png";
 import ResKriVerLogo from "@images/ResKriVer_Logo.svg";
+import useCreateProject from "@/api/Project/Mutations/useCreateProject";
 
 interface ResKriVerProps {}
 
@@ -27,7 +28,7 @@ const ResKriVer: React.FC<ResKriVerProps> = (props) => {
   const { t } = useTranslation();
   let [searchParams] = useSearchParams();
   const entries = searchParams.entries();
-  const { createProject } = useProject();
+  const createProject = useCreateProject();
   const { setAppState } = useContext(AppContext);
 
   let data_: SearchParamProps[] = [];
@@ -36,7 +37,7 @@ const ResKriVer: React.FC<ResKriVerProps> = (props) => {
   }
 
   const handleOnClickButton = () => {
-    createProject();
+    createProject.mutate("test");
   };
 
   const { register, handleSubmit, formState } = useForm({

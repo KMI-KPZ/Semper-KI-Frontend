@@ -9,18 +9,17 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
-import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import useAdmin, { AdminFlatProjectProps } from "../hooks/useAdmin";
+import useAdmin from "../hooks/useAdmin";
 import { Button } from "@component-library/index";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Container } from "@component-library/index";
-import logger from "@/hooks/useLogger";
+import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
+import { useProject } from "@/hooks/Project/useProject";
 import useSearch from "@/hooks/useSearch";
-import { useProject } from "@/pages/Projects/hooks/useProject";
-import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
-import { FlatProjectProps } from "@/api/Project/useFlatProjectQuerys";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import useDeleteProject from "@/api/Project/Mutations/useDeleteProject";
 
 interface Props {}
 
@@ -28,11 +27,12 @@ const AdminProjects: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { flatProjects } = useAdmin();
-  const { deleteProject } = useProject();
+  const deleteProject = useDeleteProject();
   const { filterDataBySearchInput, handleSearchInputChange } = useSearch();
 
   const handleOnClickButtonDelete = (projectID: string) => {
-    if (window.confirm(t("Admin.Projects.confirm"))) deleteProject([projectID]);
+    if (window.confirm(t("Admin.Projects.confirm")))
+      deleteProject.mutate([projectID]);
   };
 
   return (
@@ -57,10 +57,10 @@ const AdminProjects: React.FC<Props> = (props) => {
           <TableBody>
             {flatProjects.length > 0
               ? flatProjects
-                  .filter((project: FlatProjectProps) =>
+                  .filter((project: FlatProject) =>
                     filterDataBySearchInput(project)
                   )
-                  .map((project: FlatProjectProps, index: number) => (
+                  .map((project: FlatProject, index: number) => (
                     <TableRow
                       key={index}
                       sx={{

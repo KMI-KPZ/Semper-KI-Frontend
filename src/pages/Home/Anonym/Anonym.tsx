@@ -12,26 +12,33 @@ import { ContentBox } from "@component-library/index";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import LoginIcon from "@mui/icons-material/Login";
 import HomeImgCarousel from "./components/ImgCarousel";
-import { useProject } from "@/pages/Projects/hooks/useProject";
 import { useNavigate } from "react-router-dom";
-import useLogin from "@/hooks/useLogin";
 import { Button } from "@component-library/index";
+import BMWKdeURL from "@images/BMWK_de.png";
+import BMWKenURL from "@images/BMWE_en.png";
+import LaunchIcon from "@mui/icons-material/Launch";
+import PersonIcon from "@mui/icons-material/Person";
+import CorporateFareIcon from "@mui/icons-material/CorporateFare";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import { useProject } from "@/hooks/Project/useProject";
+import useCreateProject from "@/api/Project/Mutations/useCreateProject";
+import useLogin from "@/api/Authentification/Querys/useLogin";
 
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props) => {
   const {} = props;
   const { t, i18n } = useTranslation();
-  const { login } = useLogin();
-  const { createProject } = useProject();
+  const login = useLogin();
+  const createProject = useCreateProject();
   const navigate = useNavigate();
 
   const handleOnClickButton = () => {
-    login({ userType: "user", register: true });
+    login.mutate({ userType: "user", register: true });
   };
 
   const handleOnClickButtonDemonstrator = () => {
-    createProject();
+    createProject.mutate("test");
   };
 
   return (
@@ -95,10 +102,19 @@ const Home: React.FC<HomeProps> = (props) => {
       </HomeContainer>
       <HomeContainer className="h-fit min-h-[25vh] bg-ultramarinblau-dark">
         <ContentBox className="justify-between py-5">
-          <Heading variant="h2" className="text-3xl text-white">
-            {t("Home.Anonym.Anonym.demonstrator")}
-          </Heading>
+          <Container direction="col" align="start">
+            <Container>
+              <RocketLaunchIcon fontSize="large" />
+              <Heading variant="h2" className="text-3xl text-white">
+                {t("Home.Anonym.Anonym.demonstrator.title")}
+              </Heading>
+            </Container>
+            <Heading variant="h3" className="pl-16 text-white">
+              {t("Home.Anonym.Anonym.demonstrator.subTitle")}
+            </Heading>
+          </Container>
           <Button
+            startIcon={<RocketLaunchIcon fontSize="large" />}
             title={t("Home.Anonym.Anonym.buttons.demonstrator")}
             onClick={() => navigate("/projects")}
             variant="secondary"
@@ -111,14 +127,17 @@ const Home: React.FC<HomeProps> = (props) => {
       >
         <ContentBox className="flex w-full flex-col gap-5 md:flex-row md:justify-between md:gap-40">
           <div className="flex flex-col items-start justify-center gap-5">
-            <Heading variant="h2" className="text-white">
-              {t("Home.components.OrgaInfo.title")}
-            </Heading>
-            <Heading variant="h3" className="pl-5 text-white">
+            <Container>
+              <CorporateFareIcon fontSize="large" />
+              <Heading variant="h2" className="text-white">
+                {t("Home.components.OrgaInfo.title")}
+              </Heading>
+            </Container>
+            <Heading variant="h3" className="pl-16 text-white">
               {t("Home.components.OrgaInfo.subTitle")}
             </Heading>
           </div>
-          <div className="flex w-full flex-col items-start justify-center gap-5 md:w-auto">
+          <div className="flex w-full flex-row items-start justify-center gap-5 md:w-auto">
             <Button
               startIcon={<AutoAwesomeIcon fontSize="large" />}
               title={t("Home.components.OrgaInfo.advantage")}
@@ -137,14 +156,17 @@ const Home: React.FC<HomeProps> = (props) => {
       <HomeContainer className="h-fit min-h-[25vh] bg-ultramarinblau-dark">
         <ContentBox className="flex w-full  flex-col gap-5 md:flex-row md:justify-between md:gap-40">
           <div className="flex flex-col items-start justify-center gap-5">
-            <Heading variant="h2" className="text-white">
-              {t("Home.components.ClientInfo.title")}
-            </Heading>
-            <Heading variant="h3" className="pl-5 text-white">
+            <Container>
+              <PersonIcon fontSize="large" />
+              <Heading variant="h2" className="text-white">
+                {t("Home.components.ClientInfo.title")}
+              </Heading>
+            </Container>
+            <Heading variant="h3" className="pl-16 text-white">
               {t("Home.components.ClientInfo.subTitle")}
             </Heading>
           </div>
-          <div className="flex w-full flex-col items-start justify-center gap-5 md:w-auto">
+          <div className="flex w-full flex-row items-start justify-center gap-5 md:w-auto">
             <Button
               startIcon={<AutoAwesomeIcon fontSize="large" />}
               title={t("Home.components.ClientInfo.advantage")}
@@ -161,11 +183,36 @@ const Home: React.FC<HomeProps> = (props) => {
         </ContentBox>
       </HomeContainer>
       <HomeContainer className={`bg-white`}>
-        <ContentBox>
-          <Heading variant="h2" className="basis-1/3 hyphens-auto text-black">
+        <ContentBox className="flex flex-col md:flex-col">
+          <Heading variant="h2" className="w-full hyphens-auto text-black">
             {t("Home.Anonym.Anonym.partner")}
           </Heading>
           <HomeImgCarousel />
+          <Container className="flex-col md:flex-row">
+            <a
+              href={"https://www.bmwk.de/"}
+              title={"BMWK"}
+              className="flex w-60 items-center justify-center"
+            >
+              <img
+                alt={"BMWK"}
+                className="w-40 duration-300 hover:scale-105"
+                src={i18n.language === "de" ? BMWKdeURL : BMWKenURL}
+              />
+            </a>
+            <Text variant="body" className="text-black md:text-xl">
+              {t("Home.Anonym.Anonym.partnertext")}
+            </Text>
+            <Button
+              title={t("Home.Anonym.Anonym.buttons.magazin")}
+              endIcon={<LaunchIcon />}
+              extern
+              target="_blank"
+              to="https://magazin.semper-ki.org/"
+              onClick={() => navigate("/magazin")}
+              variant="primary"
+            />
+          </Container>
         </ContentBox>
       </HomeContainer>
     </div>

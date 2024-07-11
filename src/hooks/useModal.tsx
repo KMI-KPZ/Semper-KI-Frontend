@@ -7,6 +7,7 @@ import logger from "./useLogger";
 interface useModalReturnProps {
   registerModal(modal: string, ref: RefObject<HTMLDialogElement>): void;
   deleteModal(modal: string): void;
+  closeAllModals(): void;
 }
 
 const useModal = (): useModalReturnProps => {
@@ -43,10 +44,19 @@ const useModal = (): useModalReturnProps => {
   };
   const deleteModal = (modal: string) => {
     // logger("useModal", "deleteModal", modal, modals);
+    modals.find((item) => item.title === modal)?.ref.current?.close();
     setModals((prevState) => prevState.filter((item) => item.title !== modal));
   };
 
-  return { deleteModal, registerModal };
+  const closeAllModals = () => {
+    // logger("useModal", "closeAllModals", modals);
+    modals.forEach((modal) => {
+      modal.ref.current?.close();
+    });
+    setModals([]);
+  };
+
+  return { deleteModal, registerModal, closeAllModals };
 };
 
 export default useModal;

@@ -14,12 +14,7 @@ describe.skip("CookieBanner", () => {
     const acceptCookies = jest.fn();
     const rejectCookies = jest.fn();
 
-    const { getByText } = render(
-      <CookieBanner
-        acceptCookies={acceptCookies}
-        rejectCookies={rejectCookies}
-      />
-    );
+    const { getByText } = render(<CookieBanner />);
 
     expect(getByText("Cookie Banner Heading")).toBeInTheDocument();
     expect(getByText("Cookie Banner Message")).toBeInTheDocument();
@@ -35,12 +30,7 @@ describe.skip("CookieBanner", () => {
     const acceptCookies = jest.fn();
     const rejectCookies = jest.fn();
 
-    const { getByText } = render(
-      <CookieBanner
-        acceptCookies={acceptCookies}
-        rejectCookies={rejectCookies}
-      />
-    );
+    const { getByText } = render(<CookieBanner />);
 
     fireEvent.click(getByText("Accept"));
 
@@ -51,12 +41,7 @@ describe.skip("CookieBanner", () => {
     const acceptCookies = jest.fn();
     const rejectCookies = jest.fn();
 
-    const { getByText } = render(
-      <CookieBanner
-        acceptCookies={acceptCookies}
-        rejectCookies={rejectCookies}
-      />
-    );
+    const { getByText } = render(<CookieBanner />);
 
     fireEvent.click(getByText("Reject"));
 
@@ -67,12 +52,7 @@ describe.skip("CookieBanner", () => {
     const acceptCookies = jest.fn();
     const rejectCookies = jest.fn();
 
-    const { getByText } = render(
-      <CookieBanner
-        acceptCookies={acceptCookies}
-        rejectCookies={rejectCookies}
-      />
-    );
+    const { getByText } = render(<CookieBanner />);
 
     fireEvent.click(getByText("Show Settings"));
 

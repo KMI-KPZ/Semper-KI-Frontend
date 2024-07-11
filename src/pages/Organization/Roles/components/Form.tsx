@@ -4,14 +4,17 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "@component-library/index";
-import useOrganizations, {
-  PermissionProps,
-  RoleProps,
-} from "../../hooks/useOrganizations";
 import logger from "@/hooks/useLogger";
 import { Heading, Text } from "@component-library/index";
 import { sortPermissions } from "../Roles";
 import { LoadingAnimation } from "@component-library/index";
+import { PermissionProps } from "@/api/Organization/Querys/useGetOrganizationPermissions";
+import useCreateRole, {
+  RoleProps,
+} from "@/api/Organization/Mutations/useCreateRole";
+import useOrganizations from "../../hooks/useOrganizations";
+import useUpdateRolePermissions from "@/api/Organization/Mutations/useUpdateRolePermissions";
+import useUpdateRole from "@/api/Organization/Mutations/useUpdateRole";
 
 interface OrganizationRolesFormProps {
   allPermissions: PermissionProps[];
@@ -31,12 +34,10 @@ interface FormData {
 const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
   const { role, allPermissions, resetForm } = props;
   const { t } = useTranslation();
-  const {
-    rolePermissionsQuery,
-    createRoleMutation,
-    updatePermissionForRoleMutation,
-    editRoleMutation,
-  } = useOrganizations(role?.id);
+  const { rolePermissionsQuery } = useOrganizations(role?.id);
+  const createRole = useCreateRole();
+  const updateRolePermission = useUpdateRolePermissions();
+  const updateRole = useUpdateRole();
   const [loading, setLoading] = useState<boolean>(false);
 
   const {
@@ -84,11 +85,11 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
     logger("onSubmitInvite", data, role);
     setLoading(true);
     if (role === undefined) {
-      createRoleMutation.mutate(
+      createRole.mutate(
         { name: data.name, description: data.description },
         {
           onSuccess(_data, variables, context) {
-            updatePermissionForRoleMutation.mutate(
+            updateRolePermission.mutate(
               {
                 roleID: _data.id,
                 permissionIDs: data.permissions
@@ -107,11 +108,11 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
         }
       );
     } else {
-      editRoleMutation.mutate(
+      updateRole.mutate(
         { roleID: role.id, name: data.name, description: data.description },
         {
           onSuccess() {
-            updatePermissionForRoleMutation.mutate({
+            updateRolePermission.mutate({
               roleID: role.id,
               permissionIDs: data.permissions
                 .filter((permission) => permission.checked)

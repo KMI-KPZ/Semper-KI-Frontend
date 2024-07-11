@@ -1,11 +1,5 @@
 import { Heading, Text } from "@component-library/index";
 import { useTranslation } from "react-i18next";
-import useOrganizations, {
-  PermissionContextTranslationType,
-  PermissionProps,
-  PermissionTypeTranslationType,
-  RoleProps,
-} from "../hooks/useOrganizations";
 import OrganizationRolesForm from "./components/Form";
 import { Button, Divider, LoadingSuspense } from "@component-library/index";
 import OrganizationRolesItem from "./components/Item";
@@ -13,6 +7,13 @@ import { Fragment, useState } from "react";
 import OrganizationRolesTable from "./components/Table";
 import { Modal } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import {
+  PermissionContextTranslationType,
+  PermissionProps,
+  PermissionTypeTranslationType,
+} from "@/api/Organization/Querys/useGetOrganizationPermissions";
+import useOrganizations from "../hooks/useOrganizations";
+import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
 
 interface OrganizationRolesProps {}
 
@@ -127,7 +128,7 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
         )}
       </LoadingSuspense>
       <Modal
-        title="OrganizationRolesForm"
+        modalKey="OrganizationRolesForm"
         open={edit}
         closeModal={() => {
           setEdit(false), setRole(undefined);

@@ -11,17 +11,25 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import usePermissions from "@/hooks/usePermissions";
 import useEvents from "@/hooks/useEvents/useEvents";
-import useTest, { TestDynamicProps } from "@/api/Test/useTest";
 import logger from "@/hooks/useLogger";
+import ExampleForm from "@/components/Form/ExampleForm";
+import useReloadPermissions from "@/api/Permissions/Mutations/useReloadPermissions";
+import useDynamicButtonRequest from "@/api/Test/Mutations/useDynamicButtonRequest";
+import useGetDynamicTestButtons, {
+  TestDynamicProps,
+} from "@/api/Test/Querys/useGetDynamicTestButtons";
+import useSaveProjects from "@/api/Project/Mutations/useSaveProjects";
 
 interface Props {}
 export const Test: React.FC<Props> = (props) => {
   const { socket, events } = useEvents();
   const [open, setOpen] = useState(false);
-  const { reloadPermissions } = usePermissions();
+  const reloadPermissions = useReloadPermissions();
 
-  const { saveProjectsQuery, testDynamicQuery, dynamicButtonMutation } =
-    useTest();
+  const saveProjects = useSaveProjects();
+  const dynamicButtonRequest = useDynamicButtonRequest();
+  const testDynamicQuery = useGetDynamicTestButtons();
+
   const openMenu = () => {
     setOpen(true);
   };
@@ -32,11 +40,11 @@ export const Test: React.FC<Props> = (props) => {
     socket?.close();
   };
   const handleOnClickButtonSave = () => {
-    saveProjectsQuery.mutate();
+    saveProjects.mutate();
   };
 
   const handleOnButtonClick = (props: TestDynamicProps) => {
-    dynamicButtonMutation.mutate(props);
+    dynamicButtonRequest.mutate(props);
   };
 
   const getButtonIcon = (icon: string): ReactNode => {
@@ -53,7 +61,11 @@ export const Test: React.FC<Props> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5">
       <Container direction="col" className="bg-white p-5">
-        <Heading variant="h1">Events</Heading>
+        <Heading variant="h1">TestPage</Heading>
+      </Container>
+
+      <Container direction="col" className="bg-white p-5">
+        <Heading variant="h2">Events</Heading>
         {events.length > 0
           ? events.map((event, index) => (
               <Container
@@ -101,7 +113,12 @@ export const Test: React.FC<Props> = (props) => {
       <Button title="open" onClick={openMenu}>
         Open
       </Button>
-      <Button title="reloadPermissions" onClick={reloadPermissions} />
+      <Button
+        title="reloadPermissions"
+        onClick={() => {
+          reloadPermissions;
+        }}
+      />
       <PermissionGate element={"ProjectButtonSave"}>
         <Button
           size="sm"
@@ -110,11 +127,12 @@ export const Test: React.FC<Props> = (props) => {
           onClick={handleOnClickButtonSave}
         />
       </PermissionGate>
+
       <Container
         direction="row"
-        className=" max-w-md flex-wrap rounded-xl border-2 border-white bg-white p-5"
+        className="  flex-wrap rounded-xl border-2 border-white bg-white p-5"
       >
-        <div className="bg-red-500 p-5 backdrop-brightness-50">ergwerg</div>
+        <ExampleForm />
       </Container>
       <Container
         direction="row"

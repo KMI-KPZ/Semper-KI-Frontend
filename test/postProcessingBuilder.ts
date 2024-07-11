@@ -1,5 +1,4 @@
-import { EPostProcessingOptionType, PostProcessingProps } from "@/pages/Service/Manufacturing/PostProcessing/PostProcessing";
-
+import { EPostProcessingOptionType, PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 
 
 export class PostProcessingBuilder {
@@ -9,7 +8,7 @@ export class PostProcessingBuilder {
     value: string = "value";
     valueList: string[]= ["value1", "value2"];
     type: EPostProcessingOptionType = EPostProcessingOptionType.number;
-    URI: string = "https://test.test.png";
+    imgPath: string = "https://test.test.png";
 
     withId(id:string):PostProcessingBuilder {
         this.id = id;
@@ -35,8 +34,8 @@ export class PostProcessingBuilder {
         this.type = type;
         return this;
     }
-    withURI(URI:string):PostProcessingBuilder {
-        this.URI = URI;
+    withImgPath(imgPath:string):PostProcessingBuilder {
+        this.imgPath = imgPath;
         return this;
     }
 
@@ -49,7 +48,7 @@ export class PostProcessingBuilder {
             value: this.value,
             valueList: this.valueList,
             type: this.type,
-            URI: this.URI,
+            imgPath: this.imgPath,
         }
     }
 }

@@ -6,38 +6,20 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
-import { type } from "os";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useOrganizationMutations from "@/api/Organization/useOrganizationMutations";
+import useCreateOrganization from "@/api/Organization/Mutations/useCreateOrganization";
 
 interface RegisterOrganizationProps {}
-export type RegisterOrganizationFormData = {
-  name: string;
-  email: string;
-  display_name: string;
-  logo_url: string;
-  primary_color: string;
-  background_color: string;
-};
 
 const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const [success, setSuccess] = React.useState(false);
 
-  const { registerOrganizationMutation } = useOrganizationMutations();
+  const createOrganization = useCreateOrganization();
   const schema = yup
     .object()
     .shape({
-      name: yup
-        .string()
-        .required(t(`RegisterOrganization.form.error.name.required`))
-        .min(3, t(`RegisterOrganization.form.error.name.length`))
-        .max(50, t(`RegisterOrganization.form.error.name.length`))
-        .matches(
-          /^(?=[a-z0-9])[a-z0-9_-]{2,49}$/,
-          t("RegisterOrganization.form.error.name.regex")
-        ),
       display_name: yup
         .string()
         .required(t(`RegisterOrganization.form.error.display_name`)),
@@ -45,15 +27,6 @@ const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
         .string()
         .email(t(`RegisterOrganization.form.error.email.email`))
         .required(t(`RegisterOrganization.form.error.email.required`)),
-      logo_url: yup
-        .string()
-        .required(t(`RegisterOrganization.form.error.logo_url`)),
-      primary_color: yup
-        .string()
-        .required(t(`RegisterOrganization.form.error.primary_color`)),
-      background_color: yup
-        .string()
-        .required(t(`RegisterOrganization.form.error.background_color`)),
     })
     .required()
     .defined();
@@ -67,17 +40,13 @@ const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
   } = useForm<RegisterOrganizationFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
-      name: "",
       email: "",
       display_name: "",
-      logo_url: "",
-      primary_color: "#000000",
-      background_color: "#FFFFFF",
     },
   });
 
   const onSubmit = (data: RegisterOrganizationFormData) => {
-    registerOrganizationMutation.mutate(data, {
+    createOrganization.mutate(data, {
       onSuccess: () => setSuccess(true),
     });
   };

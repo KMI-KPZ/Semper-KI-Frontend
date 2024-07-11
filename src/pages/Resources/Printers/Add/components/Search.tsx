@@ -11,12 +11,12 @@ import {
 } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import useOntologyPrinterQuerys from "@/api/Ontology/useOntologyPrinterQuerys";
 import useOntoPrinters from "@/hooks/useOntoPrinters";
 import logger from "@/hooks/useLogger";
 import Card from "@component-library/Card/Card";
 import useSearch from "@/hooks/useSearch";
+import useGetOntologyPrinter from "@/api/Ontology/Querys/useGetOntologyPrinter";
+import useLoadOntologyPrinter from "@/api/Ontology/Mutations/useLoadOntologyPrinter";
 
 interface ResourcesPrintersAddSearchProps {
   printer?: OntoPrinter;
@@ -34,7 +34,7 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
     printer !== undefined ? printer.title : ""
   );
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
-  const { printerMutation } = useOntologyPrinterQuerys({});
+  const loadPrinter = useLoadOntologyPrinter();
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<OntoPrinterFlat>();
 
@@ -46,14 +46,9 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
   const handleOnClickCardPrinter = (printer: OntoPrinterFlat) => {
     setShowDropdown(false);
     setPrinterName(printer.title);
-    printerMutation.mutate(printer.URI, {
-      onSuccess(data, variables, context) {
-        setPrinter({
-          URI: printer.URI,
-          properties: data,
-          title: printer.title,
-          type: "existing",
-        });
+    loadPrinter.mutate(printer.URI, {
+      onSuccess(loadedPrinter, variables, context) {
+        setPrinter(loadedPrinter);
       },
     });
   };

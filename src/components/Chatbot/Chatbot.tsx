@@ -6,7 +6,7 @@ interface ChatbotProps {}
 const Chatbot: React.FC<ChatbotProps> = (props) => {
   const {} = props;
 
-  const isChatbotEnabled = false;
+  const isChatbotEnabled = process.env.NODE_ENV === "production";
   useEffect(() => {
     if (isChatbotEnabled) {
       const script = document.createElement("script");

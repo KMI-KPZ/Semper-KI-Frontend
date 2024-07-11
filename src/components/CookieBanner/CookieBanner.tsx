@@ -39,7 +39,7 @@ const CookieBanner: React.FC<CookieBannerProps> = (props) => {
       `}
       >
         <div className="flex w-full items-center justify-center gap-5">
-          <Heading variant="h1">{t("components.CookieBanner.heading")}</Heading>
+          <Heading variant="h2">{t("components.CookieBanner.heading")}</Heading>
         </div>
         <div className="flex w-full items-center justify-center gap-5">
           <Text variant="body">{t("components.CookieBanner.message")}</Text>

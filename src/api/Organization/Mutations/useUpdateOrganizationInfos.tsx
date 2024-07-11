@@ -20,7 +20,7 @@ const useUpdateOrganizationInfos = () => {
     supportedServices,
   }: UpdateOrgaInfoProps) =>
     authorizedCustomAxios
-      .patch(`${process.env.VITE_HTTP_API_URL}/public/organization/update/`, {
+      .patch(`${process.env.VITE_HTTP_API_URL}/public/organizations/update/`, {
         data: {
           content: {
             supportedServices,

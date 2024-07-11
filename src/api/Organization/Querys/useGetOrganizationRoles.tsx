@@ -7,7 +7,7 @@ const useGetOrganizationRoles = () => {
   const queryClient = useQueryClient();
   const getOrganizationRoles = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/organizations/roles/edit/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/organizations/roles/get/`)
       .then((response) => {
         const responseData = response.data;
         const data: RoleProps[] = {

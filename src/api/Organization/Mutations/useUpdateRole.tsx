@@ -13,7 +13,7 @@ const useUpdateRole = () => {
   const updateRole = async ({ description, name, roleID }: UpdateRoleProps) =>
     authorizedCustomAxios
       .post(
-        `${process.env.VITE_HTTP_API_URL}/public/organizations/roles/update/`,
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/roles/edit/`,
         {
           data: {
             content: { roleID, roleName: name, roleDescription: description },

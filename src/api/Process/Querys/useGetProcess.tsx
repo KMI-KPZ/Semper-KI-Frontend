@@ -78,6 +78,7 @@ export interface GenericProcessFile {
   imgPath: string;
   date: Date;
   createdBy: string;
+  createdByID: string;
   size: number;
   type: ProcessFileType;
   origin: ProcessOrigin;

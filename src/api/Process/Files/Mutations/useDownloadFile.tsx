@@ -3,15 +3,18 @@ import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { SingleProcessMutationProps } from "../../types";
-
-export type DownloadFileProps = {
-  fileID: string;
-} & SingleProcessMutationProps;
+import { useProject } from "@/hooks/Project/useProject";
+import useProcess from "@/hooks/Process/useProcess";
 
 const useDownloadFile = () => {
   const queryClient = useQueryClient();
-  const { projectID } = useParams();
-  const downloadFile = async ({ fileID, processID }: DownloadFileProps) =>
+  const {
+    project: { projectID },
+  } = useProject();
+  const {
+    process: { processID },
+  } = useProcess();
+  const downloadFile = async (fileID: string) =>
     authorizedCustomAxios
       .get(
         `${process.env.VITE_HTTP_API_URL}/public/files/download/file/${projectID}/${processID}/${fileID}/`,
@@ -25,7 +28,7 @@ const useDownloadFile = () => {
         logger("useDownloadFile | downloadFile ❌ |", error);
       });
 
-  return useMutation<Blob, Error, DownloadFileProps>({
+  return useMutation<Blob, Error, string>({
     mutationFn: downloadFile,
     onSuccess: () => {},
   });

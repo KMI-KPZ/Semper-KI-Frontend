@@ -1023,7 +1023,9 @@
       },
       "Contract": {
         "components": {
-          "FileRow": { "button": { "delete": "Löschen" } },
+          "FileRow": {
+            "button": { "delete": "Löschen", "download": "Herunterladen" }
+          },
           "FileTable": {
             "noFiles": "Keine Dateien vorhanden",
             "name": "Name",

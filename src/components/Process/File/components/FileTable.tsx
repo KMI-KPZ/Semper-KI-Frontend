@@ -23,6 +23,7 @@ type UploadFileTableProps = {
   files: File[];
   type: "upload";
   resetUploadFiles: () => void;
+  deleteFile: (fileIndex: number) => void;
 } & GenericFileTableProps;
 
 type CurrentFileTableProps = {
@@ -96,7 +97,12 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
         <tbody>
           {type === "upload"
             ? files.map((file, index) => (
-                <RawProcessFileRow file={file} key={index} />
+                <RawProcessFileRow
+                  file={file}
+                  key={index}
+                  deleteFile={props.deleteFile}
+                  index={index}
+                />
               ))
             : files.map((file, index) => (
                 <ProcessFileRow file={file} key={index} />

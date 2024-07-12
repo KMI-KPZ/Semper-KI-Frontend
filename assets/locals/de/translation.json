@@ -920,9 +920,12 @@
         }
       },
       "TitleForm": {
-        "name": "Prozessname:",
+        "title": "Prozessname",
+        "describtion": "Geben Sie ihrem Prozess einen Namen. Ein Prozess ist ein Auftrag für einen Hersteller/Auftragnehmer.",
+        "name": "Prozessname",
+        "error": "Bitte geben Sie einen Namen ein",
         "button": {
-          "save": "Speichern"
+          "save": "Name Speichern"
         }
       },
       "ContractorSelection": {
@@ -1212,6 +1215,7 @@
         }
       },
       "FlatProcessCard": {
+        "serviceName": "Name:",
         "serviceType": "Service Typ:",
         "status": "Status:",
         "updated": "letzte Aktualisierung:",

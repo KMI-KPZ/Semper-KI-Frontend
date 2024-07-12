@@ -1,4 +1,4 @@
-import { Button } from "@component-library/index";
+import { Button, Text } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { Heading } from "@component-library/index";
 import React, { useState } from "react";
@@ -11,11 +11,16 @@ import ProjectOwnerGate from "@/components/OwnerGate/OwnerGate";
 import useUpdateProject from "@/api/Project/Mutations/useUpdateProject";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 interface ProcessTitleFormProps {
   title?: string;
   close: () => void;
   processID: string;
+}
+
+interface FormData {
+  name: string;
 }
 
 const ProcessTitleForm: React.FC<ProcessTitleFormProps> = (props) => {
@@ -24,11 +29,23 @@ const ProcessTitleForm: React.FC<ProcessTitleFormProps> = (props) => {
   const [state, setState] = useState<string>(title !== undefined ? title : "");
   const updateProcess = useUpdateProcess();
 
-  const updatedTitle = () => {
+  const isNew = title === undefined || title === "";
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({ defaultValues: { name: title } });
+
+  const onSubmit = (
+    data: FormData,
+    e?: React.BaseSyntheticEvent<object, any, any>
+  ) => {
+    e?.preventDefault();
     updateProcess.mutate(
       {
         processIDs: [processID],
-        updates: { changes: { processDetails: { title: state } } },
+        updates: { changes: { processDetails: { title: data.name } } },
       },
       {
         onSuccess: () => {
@@ -38,53 +55,48 @@ const ProcessTitleForm: React.FC<ProcessTitleFormProps> = (props) => {
     );
   };
 
-  const handleOnClickEditCheckButton = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
-    updatedTitle();
-  };
-
-  const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setState((prevState) => e.target.value);
-  };
-
-  const handelOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      event.preventDefault();
-      updatedTitle();
+      event.preventDefault(); // Prevent default form submission
+      handleSubmit(onSubmit)();
     }
   };
 
   return (
-    <Container direction="row" gap={3} className="flex-wrap md:flex-nowrap ">
-      <Heading variant={"h2"} className="md:whitespace-nowrap">
-        {t("Process.components.TitleForm.name")}
-      </Heading>
-      <input
-        autoFocus
-        onKeyDown={handelOnKeyDown}
-        type="text"
-        value={state}
-        className="w-fit rounded-xl border-2 bg-gray-100 p-2"
-        onChange={handleOnChangeInput}
-      />
-      <ProjectOwnerGate>
-        <PermissionGate element="ProjectButtonEditName">
-          <Button
-            onClick={handleOnClickEditCheckButton}
-            variant="secondary"
-            title={t("Process.components.TitleForm.button.save")}
-            size="xs"
-            width="fit"
-            children={<CheckIcon fontSize="small" />}
+    <form>
+      <Container direction="col">
+        <Heading variant="h1">
+          {t("Process.components.TitleForm.title")}
+        </Heading>
+        {isNew ? (
+          <Text>{t("Process.components.TitleForm.describtion")}</Text>
+        ) : null}
+        <Container direction="col" gap={3} className="flex-wrap md:flex-nowrap">
+          <input
+            autoFocus
+            {...register("name", { required: true })}
+            onKeyDown={handleKeyDown}
+            placeholder={t("Process.components.TitleForm.name")}
+            className="w-fit rounded-xl border-2 bg-gray-100 p-2"
           />
-        </PermissionGate>
-      </ProjectOwnerGate>
-    </Container>
+
+          {errors.name ? (
+            <Text variant="error">
+              {t("Process.components.TitleForm.error")}
+            </Text>
+          ) : null}
+          <PermissionGate element="ProjectButtonEditName">
+            <Button
+              onClick={handleSubmit(onSubmit)}
+              variant="primary"
+              title={t("Process.components.TitleForm.button.save")}
+              size="sm"
+              width="fit"
+            />
+          </PermissionGate>
+        </Container>
+      </Container>
+    </form>
   );
 };
 

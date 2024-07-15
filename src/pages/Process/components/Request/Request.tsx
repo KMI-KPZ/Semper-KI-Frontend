@@ -23,11 +23,11 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
 
   const isClient = user.hashedID === process.client;
   const clientVerified =
-    isClient && process.processStatus === ProcessStatus.VERIFIED;
+    isClient && process.processStatus === ProcessStatus.VERIFYING_COMPLETED;
   const clientRequested =
-    isClient && process.processStatus >= ProcessStatus.REQUESTED;
+    isClient && process.processStatus >= ProcessStatus.REQUEST_COMPLETED;
   const contractorRecieved =
-    !isClient && process.processStatus >= ProcessStatus.REQUESTED;
+    !isClient && process.processStatus >= ProcessStatus.REQUEST_COMPLETED;
 
   const getText = (): string => {
     if (clientVerified)
@@ -63,8 +63,8 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
       id="Request"
       menuButtonTitle={menuButtonTitle}
       pageTitle={pageTitle}
-      start={ProcessStatus.VERIFIED}
-      end={ProcessStatus.CLARIFICATION}
+      start={ProcessStatus.VERIFYING_COMPLETED}
+      end={ProcessStatus.REQUEST_COMPLETED}
     >
       <Container width="fit" direction="col" className="card">
         {clientVerified ? (

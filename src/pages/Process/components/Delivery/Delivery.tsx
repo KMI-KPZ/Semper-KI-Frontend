@@ -15,8 +15,8 @@ const ProcessDelivery: React.FC<ProcessDeliveryProps> = (props) => {
       id="Delivery"
       menuButtonTitle={t("Process.components.Delivery.Delivery.button.menu")}
       pageTitle={`${t("Process.components.Delivery.Delivery.title")}:`}
-      start={ProcessStatus.PRODUCTION}
-      end={ProcessStatus.DELIVERY}
+      start={ProcessStatus.PRODUCTION_COMPLETED}
+      end={ProcessStatus.DELIVERY_COMPLETED}
     ></ProcessContainer>
   );
 };

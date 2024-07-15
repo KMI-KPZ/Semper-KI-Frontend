@@ -15,7 +15,7 @@ const ProcessCompleted: React.FC<ProcessCompletedProps> = (props) => {
       id="Completed"
       menuButtonTitle={t("Process.components.Completed.Completed.button.menu")}
       pageTitle={`${t("Process.components.Completed.Completed.title")}:`}
-      start={ProcessStatus.DELIVERY}
+      start={ProcessStatus.DELIVERY_COMPLETED}
       end={ProcessStatus.COMPLETED}
     ></ProcessContainer>
   );

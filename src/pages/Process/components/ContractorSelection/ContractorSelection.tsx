@@ -86,7 +86,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
       pageTitle={pageTitle}
       menuButtonTitle={menuButtonTitle}
       start={ProcessStatus.SERVICE_COMPLETED}
-      end={ProcessStatus.CONTRACTOR_SELECTED}
+      end={ProcessStatus.CONTRACTOR_COMPLETED}
     >
       <Container width="full" justify="center" align="start" direction="auto">
         <Container

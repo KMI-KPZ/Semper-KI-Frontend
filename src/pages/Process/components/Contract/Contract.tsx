@@ -34,9 +34,10 @@ const ProcessContract: React.FC<ProcessContractProps> = (props) => {
       id="Contract"
       menuButtonTitle={t("Process.components.Contract.Contract.button.menu")}
       pageTitle={`${t("Process.components.Contract.Contract.title")}:`}
-      start={ProcessStatus.CLARIFICATION}
-      end={ProcessStatus.CONFIRMED_BY_CONTRACTOR}
+      start={ProcessStatus.REQUEST_COMPLETED}
+      end={ProcessStatus.OFFER_COMPLETED}
     >
+      {/* <Process */}
       <ProcessFileView origin="Contract" />
     </ProcessContainer>
   );

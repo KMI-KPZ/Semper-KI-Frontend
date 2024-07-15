@@ -161,21 +161,22 @@ export enum ProcessStatus {
   "SERVICE_IN_PROGRESS" = 201,
   "SERVICE_COMPLICATION" = 202,
   "SERVICE_COMPLETED" = 203,
-  "CONTRACTOR_SELECTED" = 300,
-  "VERIFYING" = 400,
-  "VERIFIED" = 500,
-  "REQUESTED" = 600,
-  "CLARIFICATION" = 700,
-  "CONFIRMED_BY_CONTRACTOR" = 800,
-  "REJECTED_BY_CONTRACTOR" = 801,
-  "CONFIRMED_BY_CLIENT" = 900,
-  "REJECTED_BY_CLIENT" = 901,
-  "PRODUCTION" = 1000,
-  "DELIVERY" = 1100,
-  "DISPUTE" = 1200,
-  "COMPLETED" = 1300,
-  "FAILED" = 1400,
-  "CANCELED" = 1500,
+  "CONTRACTOR_COMPLETED" = 301,
+  "VERIFYING_IN_PROGRESS" = 401,
+  "VERIFYING_COMPLETED" = 402,
+  "REQUEST_COMPLETED" = 501,
+  "OFFER_COMPLETED" = 701,
+  "OFFER_REJECTED" = 702,
+  "CONFIRMATION_COMPLETED" = 801,
+  "CONFIRMATION_REJECTED" = 802,
+  "PRODUCTION_IN_PROGRESS" = 901,
+  "PRODUCTION_COMPLETED" = 902,
+  "DELIVERY_IN_PROGRESS" = 1001,
+  "DELIVERY_COMPLETED" = 1002,
+  "DISPUTE" = 1100,
+  "COMPLETED" = 1200,
+  "FAILED" = 1300,
+  "CANCELED" = 1400,
 }
 
 interface ProcessQueryProps {
@@ -236,7 +237,7 @@ const useGetProcess = () => {
                 ? undefined
                 : response.data.processDetails.clientDeliverAddress,
           },
-          messages: response.data.messages.messages,
+          messages: response.data.messages.production,
         };
         logger("useGetProcess | getProcess ✅ |", process);
 

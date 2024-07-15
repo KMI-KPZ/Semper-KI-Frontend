@@ -7,11 +7,14 @@ import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { useNavigate } from "react-router-dom";
 import SendIcon from "@mui/icons-material/Send";
+import { ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
 
-interface ClarifyTextInputProps {}
+interface ProcessTextInputProps {
+  origin: ProcessOrigin;
+}
 
-const ClarifyTextInput: React.FC<ClarifyTextInputProps> = (props) => {
-  const {} = props;
+const ProcessTextInput: React.FC<ProcessTextInputProps> = (props) => {
+  const { origin } = props;
   const { t } = useTranslation();
   const { process } = useProcess();
   const { project } = useProject();
@@ -36,6 +39,7 @@ const ClarifyTextInput: React.FC<ClarifyTextInputProps> = (props) => {
                 text: message,
                 userID: user.hashedID,
                 userName: user.name,
+                origin: origin,
               },
             },
           },
@@ -79,4 +83,4 @@ const ClarifyTextInput: React.FC<ClarifyTextInputProps> = (props) => {
   );
 };
 
-export default ClarifyTextInput;
+export default ProcessTextInput;

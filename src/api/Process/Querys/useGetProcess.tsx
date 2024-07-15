@@ -237,7 +237,7 @@ const useGetProcess = () => {
                 ? undefined
                 : response.data.processDetails.clientDeliverAddress,
           },
-          messages: response.data.messages.production,
+          messages: response.data.messages.messages,
         };
         logger("useGetProcess | getProcess ✅ |", process);
 

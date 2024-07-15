@@ -76,7 +76,7 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
         <PermissionGate element="ProjectButtonEditName">
           <Button
             onClick={handleOnClickEditCheckButton}
-            variant="secondary"
+            variant="primary"
             title={t("Projects.Project.components.TitleForm.button.edit")}
             size="xs"
             width="fit"

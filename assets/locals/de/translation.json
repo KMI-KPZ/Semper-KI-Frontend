@@ -920,9 +920,12 @@
         }
       },
       "TitleForm": {
-        "name": "Prozessname:",
+        "title": "Prozessname",
+        "describtion": "Geben Sie ihrem Prozess einen Namen. Ein Prozess ist ein Auftrag für einen Hersteller/Auftragnehmer.",
+        "name": "Prozessname",
+        "error": "Bitte geben Sie einen Namen ein",
         "button": {
-          "save": "Speichern"
+          "save": "Name Speichern"
         }
       },
       "ContractorSelection": {
@@ -1023,7 +1026,9 @@
       },
       "Contract": {
         "components": {
-          "FileRow": { "button": { "delete": "Löschen" } },
+          "FileRow": {
+            "button": { "delete": "Löschen", "download": "Herunterladen" }
+          },
           "FileTable": {
             "noFiles": "Keine Dateien vorhanden",
             "name": "Name",
@@ -1210,6 +1215,7 @@
         }
       },
       "FlatProcessCard": {
+        "serviceName": "Name:",
         "serviceType": "Service Typ:",
         "status": "Status:",
         "updated": "letzte Aktualisierung:",

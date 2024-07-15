@@ -114,7 +114,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
         className = `${
           active
             ? "p-1 text-black hover:cursor-pointer hover:text-ultramarinblau underline "
-            : "p-1 text-black underline "
+            : "p-1 text-black underline hover:cursor-default"
         }`;
         break;
     }

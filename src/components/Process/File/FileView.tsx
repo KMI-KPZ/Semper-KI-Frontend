@@ -27,6 +27,12 @@ const ProcessFileView: React.FC<ProcessFileViewProps> = (props) => {
     setFiles([]);
   };
 
+  const deleteFile = (fileIndex: number) => {
+    setFiles((prevState) =>
+      prevState.filter((_, index) => index !== fileIndex)
+    );
+  };
+
   return (
     <Container width="full" direction="col">
       {/* <Container width="full" direction="col">
@@ -45,6 +51,7 @@ const ProcessFileView: React.FC<ProcessFileViewProps> = (props) => {
         files={files}
         type="upload"
         resetUploadFiles={resetUploadFiles}
+        deleteFile={deleteFile}
       />
       <ProcessUploadCard addFiles={addFiles} />
     </Container>

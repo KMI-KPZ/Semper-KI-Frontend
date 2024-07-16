@@ -113,6 +113,7 @@ export interface ChatMessageProps {
   userName: string;
   date: string;
   text: string;
+  origin?: ProcessOrigin;
 }
 
 export interface ProcessChangesProps {
@@ -238,6 +239,10 @@ const useGetProcess = () => {
                 : response.data.processDetails.clientDeliverAddress,
           },
           messages: response.data.messages.messages,
+          // messages: {
+          //   clarification: response.data.messages.messages.clarification,
+          //   production: response.data.messages.messages.production,
+          // }, // Akshar
         };
         logger("useGetProcess | getProcess ✅ |", process);
 

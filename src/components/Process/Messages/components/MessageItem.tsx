@@ -4,12 +4,12 @@ import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { ChatMessageProps } from "@/api/Process/Querys/useGetProcess";
 import { Container } from "@component-library/index";
 
-interface ClarifyMessageProps {
+interface ProcessMessageItemProps {
   message: ChatMessageProps;
   sameAuthor?: boolean;
 }
 
-const ClarifyMessage: React.FC<ClarifyMessageProps> = (props) => {
+const ProcessMessageItem: React.FC<ProcessMessageItemProps> = (props) => {
   const { message, sameAuthor = false } = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
@@ -40,4 +40,4 @@ const ClarifyMessage: React.FC<ClarifyMessageProps> = (props) => {
   );
 };
 
-export default ClarifyMessage;
+export default ProcessMessageItem;

@@ -18,7 +18,7 @@ const ProcessConfirmation: React.FC<ProcessConfirmationProps> = (props) => {
       )}
       pageTitle={`${t("Process.components.Confirmation.Confirmation.title")}:`}
       start={ProcessStatus.OFFER_COMPLETED}
-      end={ProcessStatus.CONFIRMATION_COMPLETED}
+      end={ProcessStatus.OFFER_REJECTED}
     ></ProcessContainer>
   );
 };

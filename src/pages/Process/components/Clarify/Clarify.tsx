@@ -21,7 +21,7 @@ const ProcessClarify: React.FC<ProcessClarifyProps> = (props) => {
       menuButtonTitle={t("Process.components.Clarify.Clarify.button.menu")}
       pageTitle={`${t("Process.components.Clarify.Clarify.title")}:`}
       start={ProcessStatus.VERIFYING_COMPLETED}
-      end={ProcessStatus.REQUEST_COMPLETED}
+      end={ProcessStatus.VERIFYING_COMPLETED}
     >
       {process.messages.length === 0 ? (
         <Container width="full" direction="col" className="card">

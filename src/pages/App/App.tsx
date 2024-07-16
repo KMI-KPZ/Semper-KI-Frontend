@@ -13,7 +13,7 @@ import Resouces from "../Resources/Resources";
 import Legal from "../Legal/Legal";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import "react-toastify/dist/ReactToastify.css";
-import CookieBanner from "@/components/CookieBanner/CookieBanner";
+import CkBanner from "@/components/CookieBanner/CookieBanner";
 import { FilterItemProps } from "../Process/components/Service/ServiceEdit/Manufacturing/Filter/Filter";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import EmailVerification from "../EmailVerification/EmailVerification";
@@ -320,7 +320,7 @@ const App: React.FC = () => {
             />
           </Routes>
         </main>
-        <CookieBanner />
+        <CkBanner />
         <Menu />
         <Footer />
       </div>

@@ -18,7 +18,7 @@ const ProcessProduction: React.FC<ProcessProductionProps> = (props) => {
       )}
       pageTitle={`${t("Process.components.Production.Production.title")}:`}
       start={ProcessStatus.CONFIRMATION_COMPLETED}
-      end={ProcessStatus.PRODUCTION_COMPLETED}
+      end={ProcessStatus.PRODUCTION_IN_PROGRESS}
     ></ProcessContainer>
   );
 };

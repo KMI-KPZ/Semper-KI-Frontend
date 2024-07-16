@@ -87,7 +87,19 @@
       "DISPUTE": "Streitfall",
       "COMPLETED": "Abgeschlossen",
       "FAILED": "Fehlgeschlagen",
-      "CANCELED": "Abgebrochen"
+      "CANCELED": "Abgebrochen",
+      "CONTRACTOR_COMPLETED": "Auftragnehmer ausgewählt",
+      "VERIFYING_IN_PROGRESS": "Überprüfung läuft",
+      "VERIFYING_COMPLETED": "Überprüfung abgeschlossen",
+      "REQUEST_COMPLETED": "Anfrage absendet",
+      "OFFER_COMPLETED": "Angebot gesendet",
+      "OFFER_REJECTED": "Anfrage abgelehnt",
+      "CONFIRMATION_COMPLETED": "Bestätigung gesendet",
+      "CONFIRMATION_REJECTED": "Bestätigung abgelehnt",
+      "PRODUCTION_IN_PROGRESS": "Produktion läuft",
+      "PRODUCTION_COMPLETED": "Produktion abgeschlossen",
+      "DELIVERY_IN_PROGRESS": "Lieferung läuft",
+      "DELIVERY_COMPLETED": "Lieferung abgeschlossen"
     },
     "ServiceType": {
       "MANUFACTURING": "Modell 3D-drucken lassen",

@@ -156,27 +156,28 @@ export interface DeleteFileProps {
 }
 
 export enum ProcessStatus {
-  "DRAFT" = 0,
-  "WAITING_FOR_OTHER_PROCESS" = 100,
-  "SERVICE_READY" = 200,
-  "SERVICE_IN_PROGRESS" = 201,
-  "SERVICE_COMPLICATION" = 202,
-  "SERVICE_COMPLETED" = 203,
-  "CONTRACTOR_SELECTED" = 300,
-  "VERIFYING" = 400,
-  "VERIFIED" = 500,
-  "REQUESTED" = 600,
-  "CLARIFICATION" = 700,
-  "CONFIRMED_BY_CONTRACTOR" = 800,
-  "REJECTED_BY_CONTRACTOR" = 801,
-  "CONFIRMED_BY_CLIENT" = 900,
-  "REJECTED_BY_CLIENT" = 901,
-  "PRODUCTION" = 1000,
-  "DELIVERY" = 1100,
-  "DISPUTE" = 1200,
-  "COMPLETED" = 1300,
-  "FAILED" = 1400,
-  "CANCELED" = 1500,
+  "DRAFT" = 0, //kein Service Ausgewählt
+  "WAITING_FOR_OTHER_PROCESS" = 100, //warten auf anderen Prozess
+  "SERVICE_READY" = 200, //Service bereit
+  "SERVICE_IN_PROGRESS" = 201, //Service in Bearbeitung
+  "SERVICE_COMPLICATION" = 202, //Service Komplikation
+  "SERVICE_COMPLETED" = 203, //Service abgeschlossen
+  "CONTRACTOR_COMPLETED" = 300, //auftragnehmer ausgewählt
+  "VERIFYING_IN_PROGRESS" = 400, //verifizierung in bearbeitung
+  "VERIFYING_COMPLETED" = 401, //verifizierung abgeschlossen
+  "REQUEST_COMPLETED" = 500, //auftrag raus
+  "OFFER_COMPLETED" = 600, //angebot raus
+  "OFFER_REJECTED" = 601, //angebot abgelehnt
+  "CONFIRMATION_COMPLETED" = 700, //bestätigung raus
+  "CONFIRMATION_REJECTED" = 701, //bestätigung abgelehnt
+  "PRODUCTION_IN_PROGRESS" = 800, //produktion in bearbeitung
+  "PRODUCTION_COMPLETED" = 801, //produktion abgeschlossen
+  "DELIVERY_IN_PROGRESS" = 900, //lieferung in bearbeitung
+  "DELIVERY_COMPLETED" = 901, //lieferung abgeschlossen
+  "DISPUTE" = 1000, //streitfall
+  "COMPLETED" = 1100, //abgeschlossen
+  "FAILED" = 1200, //fehlgeschlagen
+  "CANCELED" = 1300, //abgebrochen
 }
 
 interface ProcessQueryProps {

@@ -20,12 +20,12 @@ const ProcessProduction: React.FC<ProcessProductionProps> = (props) => {
         "Process.components.Production.Production.button.menu"
       )}
       pageTitle={`${t("Process.components.Production.Production.title")}:`}
-      start={ProcessStatus.CONFIRMED_BY_CONTRACTOR}
-      end={ProcessStatus.PRODUCTION}
+      start={ProcessStatus.CONFIRMATION_COMPLETED}
+      end={ProcessStatus.PRODUCTION_IN_PROGRESS}
     >
       <ProcessMessages messages={process.messages} origin="Production" />
       {/* <ProcessMessages messages={process.messages.production} origin="Production" />   Akshay */}
-    </ProcessContainer>
+
   );
 };
 

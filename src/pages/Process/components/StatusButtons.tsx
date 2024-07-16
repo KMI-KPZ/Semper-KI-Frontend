@@ -16,7 +16,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { t } = useTranslation();
   const { getProcessStatusButtons, handleOnClickButton } = useStatusButtons();
 
-  const show = process.processStatus >= start && process.processStatus < end;
+  const show = process.processStatus >= start && process.processStatus <= end;
 
   return show && getProcessStatusButtons(process).length > 0 ? (
     <Container width="full" direction="col">

@@ -17,8 +17,8 @@ const ProcessClarify: React.FC<ProcessClarifyProps> = (props) => {
       id="Clarification"
       menuButtonTitle={t("Process.components.Clarify.Clarify.button.menu")}
       pageTitle={`${t("Process.components.Clarify.Clarify.title")}:`}
-      start={ProcessStatus.REQUESTED}
-      end={ProcessStatus.CLARIFICATION}
+      start={ProcessStatus.VERIFYING_COMPLETED}
+      end={ProcessStatus.VERIFYING_COMPLETED}
     >
       <ProcessMessages messages={process.messages} origin="Clarification" />
       {/* <ProcessMessages messages={process.messages.clarification} origin="Clarification" /> //Akshay */}

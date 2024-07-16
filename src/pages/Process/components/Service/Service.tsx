@@ -31,7 +31,7 @@ const Service: React.FC<ServiceProps> = (props) => {
     updateProcess.mutate({
       processIDs: [process.processID],
       updates: {
-        changes: { processStatus: ProcessStatus.CONTRACTOR_SELECTED },
+        changes: { processStatus: ProcessStatus.CONTRACTOR_COMPLETED },
       },
     });
   };

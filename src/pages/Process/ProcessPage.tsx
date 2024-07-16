@@ -42,28 +42,28 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
               <ProcessStatusGate start={ProcessStatus.SERVICE_COMPLETED}>
                 <ProcessContractorSelection />
               </ProcessStatusGate>
-              <ProcessStatusGate start={ProcessStatus.CONTRACTOR_SELECTED}>
+              <ProcessStatusGate start={ProcessStatus.CONFIRMATION_COMPLETED}>
                 <ProcessVerify />
               </ProcessStatusGate>
-              <ProcessStatusGate start={ProcessStatus.VERIFIED}>
+              <ProcessStatusGate start={ProcessStatus.VERIFYING_COMPLETED}>
                 <ProcessRequest />
               </ProcessStatusGate>
-              <ProcessStatusGate start={ProcessStatus.CLARIFICATION}>
+              {/* <ProcessStatusGate start={ProcessStatus.CLARIFICATION}>
                 <ProcessClarify />
-              </ProcessStatusGate>
-              <ProcessStatusGate start={ProcessStatus.CLARIFICATION}>
+              </ProcessStatusGate> */}
+              <ProcessStatusGate start={ProcessStatus.REQUEST_COMPLETED}>
                 <ProcessContract />
               </ProcessStatusGate>
-              <ProcessStatusGate start={ProcessStatus.CONFIRMED_BY_CONTRACTOR}>
+              <ProcessStatusGate start={ProcessStatus.OFFER_COMPLETED}>
                 <ProcessConfirmation />
               </ProcessStatusGate>
-              <ProcessStatusGate start={ProcessStatus.CONFIRMED_BY_CLIENT}>
+              <ProcessStatusGate start={ProcessStatus.CONFIRMATION_COMPLETED}>
                 <ProcessProduction />
               </ProcessStatusGate>
-              <ProcessStatusGate start={ProcessStatus.PRODUCTION}>
+              <ProcessStatusGate start={ProcessStatus.PRODUCTION_COMPLETED}>
                 <ProcessDelivery />
               </ProcessStatusGate>
-              <ProcessStatusGate start={ProcessStatus.DELIVERY}>
+              <ProcessStatusGate start={ProcessStatus.DELIVERY_COMPLETED}>
                 <ProcessCompleted />
               </ProcessStatusGate>
             </DefinedProcessOutlet>

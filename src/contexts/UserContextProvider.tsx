@@ -1,3 +1,4 @@
+import useSendUserLocals from "@/api/Authentification/Mutations/useSendUserLocals";
 import useGetIsLoggedIn from "@/api/Authentification/Querys/useGetIsLoggedIn";
 import useGetUser from "@/api/User/Querys/useGetUser";
 import { toast } from "@/hooks/useToast";
@@ -30,6 +31,7 @@ const UserContextProvider: React.FC<
   const { t } = useTranslation();
   const userIsLoggedInQuery = useGetIsLoggedIn();
   const userQuery = useGetUser(userIsLoggedInQuery);
+
   const [userReminder, setUserReminder] = useState(false);
 
   const isLoggedInIsLoaded: boolean =

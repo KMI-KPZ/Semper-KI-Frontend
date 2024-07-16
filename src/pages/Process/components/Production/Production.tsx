@@ -25,7 +25,7 @@ const ProcessProduction: React.FC<ProcessProductionProps> = (props) => {
     >
       <ProcessMessages messages={process.messages} origin="Production" />
       {/* <ProcessMessages messages={process.messages.production} origin="Production" />   Akshay */}
-
+    </ProcessContainer>
   );
 };
 

@@ -13,7 +13,7 @@ import Resouces from "../Resources/Resources";
 import Legal from "../Legal/Legal";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import "react-toastify/dist/ReactToastify.css";
-import CkBanner from "@/components/CookieBanner/CookieBanner";
+import CkBanner from "@/components/CookieBanner/CkBanner";
 import { FilterItemProps } from "../Process/components/Service/ServiceEdit/Manufacturing/Filter/Filter";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import EmailVerification from "../EmailVerification/EmailVerification";

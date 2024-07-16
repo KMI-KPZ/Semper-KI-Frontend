@@ -13,6 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import AddressForm from "@/components/Form/AddressForm";
 import AddressCard from "@/components/Address/AddressCard";
+import ProfileNotifications from "./components/Notifications";
 
 interface Props {}
 
@@ -61,9 +62,9 @@ const Profile: React.FC<Props> = (props) => {
             className="p-3"
             gap={3}
           >
-            <Text>{t("Profile.general.name")}</Text>
-            <Text>{t("Profile.general.type")}</Text>
-            <Text>{t("Profile.general.email")}</Text>
+            <Text className="break-all">{t("Profile.general.name")}</Text>
+            <Text className="break-all">{t("Profile.general.type")}</Text>
+            <Text className="break-all">{t("Profile.general.email")}</Text>
           </Container>
           <Container
             direction="col"
@@ -73,15 +74,15 @@ const Profile: React.FC<Props> = (props) => {
             className="p-3"
             gap={3}
           >
-            <Text>{user.name}</Text>
-            <Text>
+            <Text className="break-all">{user.name}</Text>
+            <Text className="break-all">
               {t(
                 `enum.UserType.${
                   UserType[user.usertype] as keyof typeof UserType
                 }`
               )}
             </Text>
-            <Text>{user.details.email}</Text>
+            <Text className="break-all">{user.details.email}</Text>
           </Container>
         </Container>
 
@@ -104,16 +105,15 @@ const Profile: React.FC<Props> = (props) => {
           ) : (
             <Text>{t("Profile.address.noAddress")}</Text>
           )}
-        </Container>
-        <Container width="full" align="center" justify="center">
-          <Button
-            size="sm"
-            variant="secondary"
-            startIcon={<AddIcon />}
+          <div
+            className="hover-card flex flex-col items-center justify-center gap-5 p-10"
             onClick={handleOnClickButtonAddAddress}
-            title={t("Profile.button.addAddress")}
-          />
+          >
+            <AddIcon />
+            <Text>{t("Profile.button.addAddress")}</Text>
+          </div>
         </Container>
+
         <Heading variant="h2">{t("Profile.time.header")}</Heading>
         <Divider />
         <Container width="full" direction="row" align="start" justify="start">
@@ -125,9 +125,9 @@ const Profile: React.FC<Props> = (props) => {
             className="p-3"
             gap={3}
           >
-            <Text>{t("Profile.time.created")}</Text>
-            <Text>{t("Profile.time.accessed")}</Text>
-            <Text>{t("Profile.time.updated")}</Text>
+            <Text className="break-all">{t("Profile.time.created")}</Text>
+            <Text className="break-all">{t("Profile.time.accessed")}</Text>
+            <Text className="break-all">{t("Profile.time.updated")}</Text>
           </Container>
           <Container
             direction="col"
@@ -137,12 +137,19 @@ const Profile: React.FC<Props> = (props) => {
             className="p-3"
             gap={3}
           >
-            <Text>{user.createdWhen.toLocaleString()}</Text>
-            <Text>{user.accessedWhen.toLocaleString()}</Text>
-            <Text>{user.updatedWhen.toLocaleString()}</Text>
+            <Text className="break-all">
+              {user.createdWhen.toLocaleString()}
+            </Text>
+            <Text className="break-all">
+              {user.accessedWhen.toLocaleString()}
+            </Text>
+            <Text className="break-all">
+              {user.updatedWhen.toLocaleString()}
+            </Text>
           </Container>
         </Container>
-
+        <ProfileNotifications user={user} />
+        <Divider />
         <Container width="full">
           <Button
             className="border-2 border-red-800 bg-red-700"

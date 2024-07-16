@@ -30,7 +30,19 @@ export interface AuthorizedUserProps {
 
 export interface UserDetailsProps {
   email: string;
+  locale: string;
   addresses: UserAddressProps[];
+  statistics: {
+    lastLogin: string;
+    numberOfLoginsTotal: number;
+    locationOfLastLogin: string;
+  };
+  notificationSettings: {
+    newsletter: {
+      event: boolean;
+      email: boolean;
+    };
+  };
 }
 
 export interface UpdateUserProps {

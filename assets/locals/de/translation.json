@@ -901,6 +901,11 @@
       "delete": "Account Löschen",
       "addAddress": "Adresse hinzufügen"
     },
+    "notifications": {
+      "header": "Benachrichtigungenverwaltung",
+      "newsletter_email": "Newsletter E-Mail",
+      "newsletter_event": "Newsletter Event"
+    },
     "existingAddressTitle": "Adresse bearbeiten",
     "newAddressTitle": "Neue Adresse anlegen",
     "confirmDelete": "Möchten Sie ihren Account wirklich unwiederuflich löschen?",

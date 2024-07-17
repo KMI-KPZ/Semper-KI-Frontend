@@ -53,48 +53,48 @@ const statusData: StatusData[] = [
     text: "service",
   },
   {
-    startStatus: ProcessStatus.CONTRACTOR_SELECTED,
+    startStatus: ProcessStatus.CONTRACTOR_COMPLETED,
     icon: <FactoryIcon />,
     text: "contractorSelected",
   },
   {
-    startStatus: ProcessStatus.VERIFYING,
-    endStatus: ProcessStatus.VERIFIED,
+    startStatus: ProcessStatus.VERIFYING_IN_PROGRESS,
+    endStatus: ProcessStatus.VERIFYING_COMPLETED,
     icon: <AssignmentTurnedInIcon />,
     text: "verified",
   },
   {
-    startStatus: ProcessStatus.REQUESTED,
+    startStatus: ProcessStatus.REQUEST_COMPLETED,
     icon: <EmailIcon />,
     text: "requested",
   },
-  {
-    startStatus: ProcessStatus.CLARIFICATION,
-    icon: <QuestionMarkIcon />,
-    text: "clarification",
-  },
-  {
-    startStatus: ProcessStatus.CONFIRMED_BY_CONTRACTOR,
-    endStatus: ProcessStatus.REJECTED_BY_CONTRACTOR,
-    icon: <DescriptionIcon />,
-    text: "offer",
-  },
-  {
-    startStatus: ProcessStatus.CONFIRMED_BY_CLIENT,
-    endStatus: ProcessStatus.REJECTED_BY_CLIENT,
-    icon: <CheckIcon />,
-    text: "client",
-  },
-  {
-    startStatus: ProcessStatus.PRODUCTION,
-    icon: <FactoryIcon />,
-    text: "production",
-  },
-  {
-    startStatus: ProcessStatus.DELIVERY,
-    icon: <LocalShippingIcon />,
-    text: "delivery",
-  },
+  // {
+  //   startStatus: ProcessStatus.CLARIFICATION,
+  //   icon: <QuestionMarkIcon />,
+  //   text: "clarification",
+  // },
+  // {
+  //   startStatus: ProcessStatus.CONFIRMED_BY_CONTRACTOR,
+  //   endStatus: ProcessStatus.REJECTED_BY_CONTRACTOR,
+  //   icon: <DescriptionIcon />,
+  //   text: "offer",
+  // },
+  // {
+  //   startStatus: ProcessStatus.CONFIRMED_BY_CLIENT,
+  //   endStatus: ProcessStatus.REJECTED_BY_CLIENT,
+  //   icon: <CheckIcon />,
+  //   text: "client",
+  // },
+  // {
+  //   startStatus: ProcessStatus.PRODUCTION,
+  //   icon: <FactoryIcon />,
+  //   text: "production",
+  // },
+  // {
+  //   startStatus: ProcessStatus.DELIVERY,
+  //   icon: <LocalShippingIcon />,
+  //   text: "delivery",
+  // },
   {
     startStatus: ProcessStatus.COMPLETED,
     icon: <DoneAllIcon />,
@@ -107,13 +107,13 @@ const StatusBar: React.FC<StatusViewProps> = (props) => {
     props;
 
   const getItems = (): StatusData[] => {
-    if (status < ProcessStatus.REQUESTED)
+    if (status < ProcessStatus.REQUEST_COMPLETED)
       return statusData.filter(
-        (data) => data.startStatus <= ProcessStatus.REQUESTED
+        (data) => data.startStatus <= ProcessStatus.REQUEST_COMPLETED
       );
     else
       return statusData.filter(
-        (data) => data.startStatus >= ProcessStatus.REQUESTED
+        (data) => data.startStatus >= ProcessStatus.REQUEST_COMPLETED
       );
   };
 

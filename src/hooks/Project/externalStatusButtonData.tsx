@@ -19,9 +19,9 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
       ProcessStatus.WAITING_FOR_OTHER_PROCESS,
       ProcessStatus.SERVICE_READY,
       ProcessStatus.SERVICE_COMPLICATION,
-      ProcessStatus.CONTRACTOR_SELECTED,
-      ProcessStatus.VERIFYING,
-      ProcessStatus.VERIFIED,
+      ProcessStatus.CONTRACTOR_COMPLETED,
+      ProcessStatus.VERIFYING_COMPLETED,
+      ProcessStatus.VERIFYING_IN_PROGRESS,
     ],
   },
   {
@@ -50,7 +50,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     buttonVariant: "secondary",
     showIn: "both",
     user: UserType.USER,
-    allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
+    allowedStates: [ProcessStatus.CONTRACTOR_COMPLETED],
   },
   {
     title: "VERIFYING_AND_REQUESTED",
@@ -65,7 +65,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     buttonVariant: "primary",
     showIn: "both",
     user: UserType.USER,
-    allowedStates: [ProcessStatus.CONTRACTOR_SELECTED],
+    allowedStates: [ProcessStatus.CONTRACTOR_COMPLETED],
   },
   {
     title: "REQUESTED",
@@ -80,7 +80,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     buttonVariant: "primary",
     showIn: "both",
     user: UserType.USER,
-    allowedStates: [ProcessStatus.VERIFIED],
+    allowedStates: [ProcessStatus.VERIFYING_COMPLETED],
   },
   {
     title: "CLARIFICATION",
@@ -95,7 +95,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     buttonVariant: "secondary",
     showIn: "both",
     user: UserType.ORGANIZATION,
-    allowedStates: [ProcessStatus.REQUESTED],
+    allowedStates: [ProcessStatus.REQUEST_COMPLETED],
   },
   {
     title: "CONFIRMED_BY_CONTRACTOR",
@@ -110,7 +110,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     buttonVariant: "primary",
     showIn: "both",
     user: UserType.ORGANIZATION,
-    allowedStates: [ProcessStatus.REQUESTED, ProcessStatus.CLARIFICATION],
+    allowedStates: [ProcessStatus.REQUEST_COMPLETED],
   },
   {
     title: "REJECTED_BY_CONTRACTOR",
@@ -125,7 +125,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     buttonVariant: "secondary",
     showIn: "both",
     user: UserType.ORGANIZATION,
-    allowedStates: [ProcessStatus.REQUESTED, ProcessStatus.CLARIFICATION],
+    allowedStates: [ProcessStatus.REQUEST_COMPLETED],
   },
   {
     title: "CONFIRMED_BY_CLIENT",
@@ -140,7 +140,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     buttonVariant: "primary",
     showIn: "both",
     user: UserType.USER,
-    allowedStates: [ProcessStatus.CONFIRMED_BY_CONTRACTOR],
+    allowedStates: [ProcessStatus.OFFER_COMPLETED],
   },
   {
     title: "REJECTED_BY_CLIENT",
@@ -155,7 +155,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     buttonVariant: "secondary",
     showIn: "both",
     user: UserType.USER,
-    allowedStates: [ProcessStatus.CONFIRMED_BY_CONTRACTOR],
+    allowedStates: [ProcessStatus.OFFER_COMPLETED],
   },
   {
     title: "PRODUCTION",
@@ -170,7 +170,7 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     buttonVariant: "primary",
     showIn: "both",
     user: UserType.ORGANIZATION,
-    allowedStates: [ProcessStatus.CONFIRMED_BY_CLIENT],
+    allowedStates: [ProcessStatus.CONFIRMATION_COMPLETED],
   },
   {
     title: "DELIVERY",
@@ -185,7 +185,10 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     buttonVariant: "primary",
     showIn: "both",
     user: UserType.ORGANIZATION,
-    allowedStates: [ProcessStatus.PRODUCTION],
+    allowedStates: [
+      ProcessStatus.PRODUCTION_IN_PROGRESS,
+      ProcessStatus.PRODUCTION_COMPLETED,
+    ],
   },
   {
     title: "COMPLETED",
@@ -200,7 +203,10 @@ export const externalStatusButtonData: StatusButtonPropsExtern[] = [
     buttonVariant: "primary",
     showIn: "both",
     user: UserType.USER,
-    allowedStates: [ProcessStatus.DELIVERY],
+    allowedStates: [
+      ProcessStatus.DELIVERY_IN_PROGRESS,
+      ProcessStatus.DELIVERY_IN_PROGRESS,
+    ],
   },
   {
     title: "REPROJECT",

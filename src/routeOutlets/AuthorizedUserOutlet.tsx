@@ -30,19 +30,7 @@ export type AuthorizedUserContext = {
 };
 
 export const AuthorizedUserContext = createContext<AuthorizedUserContext>({
-  user: {
-    accessedWhen: new Date(),
-    createdWhen: new Date(),
-    details: {
-      email: "",
-      addresses: [],
-    },
-    hashedID: "",
-    lastSeen: new Date(),
-    name: "",
-    updatedWhen: new Date(),
-    usertype: 0,
-  },
+  user: {} as AuthorizedUserProps,
   deleteUser: {} as UseMutationResult<void, Error, void, unknown>,
   updateUserDetails: {} as UseMutationResult<
     void,

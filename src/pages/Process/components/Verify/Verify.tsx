@@ -16,10 +16,10 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
   const { process } = useProcess();
 
   const getVerifyStatus = (): VerifyStatus => {
-    if (process.processStatus === ProcessStatus.CONTRACTOR_SELECTED) {
+    if (process.processStatus === ProcessStatus.CONTRACTOR_COMPLETED) {
       return VerifyStatus.READY;
     }
-    if (process.processStatus === ProcessStatus.VERIFYING) {
+    if (process.processStatus === ProcessStatus.VERIFYING_IN_PROGRESS) {
       return VerifyStatus.STARTED;
     }
     {
@@ -30,8 +30,8 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
   return (
     <ProcessContainer
       id="Verification"
-      start={ProcessStatus.CONTRACTOR_SELECTED}
-      end={ProcessStatus.VERIFIED}
+      start={ProcessStatus.CONTRACTOR_COMPLETED}
+      end={ProcessStatus.VERIFYING_COMPLETED}
       menuButtonTitle={t("Process.components.Verify.Verify.button.menu")}
       pageTitle={t("Process.components.Verify.Verify.title")}
     >

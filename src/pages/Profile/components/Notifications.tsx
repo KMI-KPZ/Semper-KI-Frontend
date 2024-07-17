@@ -1,6 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Container, Divider, Heading, Text } from "@component-library/index";
+import {
+  Button,
+  Container,
+  Divider,
+  Heading,
+  Text,
+} from "@component-library/index";
 import { AuthorizedUserProps, UserProps } from "@/hooks/useUser";
 import { GeneralInput } from "@component-library/Form/GeneralInput";
 import { useForm } from "react-hook-form";
@@ -23,10 +29,20 @@ const ProfileNotifications: React.FC<ProfileNotificationsProps> = (props) => {
   const [edit, setEdit] = React.useState(false);
   // const updateUser = useUpdateUser
 
-  const { register, handleSubmit } = useForm<FormData>();
+  const { register, handleSubmit } = useForm<FormData>({
+    defaultValues: {
+      newsletter_email: user.details.notificationSettings.newsletter.email,
+      newsletter_event: user.details.notificationSettings.newsletter.event,
+    },
+  });
 
   const onSubmit = (data: FormData) => {
     console.log(data);
+    setEdit(false);
+  };
+
+  const handleOnCLickButtonEdit = () => {
+    setEdit((prevState) => !prevState);
   };
 
   return (
@@ -47,6 +63,11 @@ const ProfileNotifications: React.FC<ProfileNotificationsProps> = (props) => {
             register={register}
             type="checkbox"
           />
+          <Button
+            variant="primary"
+            title={t("Profile.notifications.buttons.save")}
+            onClick={handleSubmit(onSubmit)}
+          />
         </Container>
       ) : (
         <Container width="full" direction="col">
@@ -66,6 +87,10 @@ const ProfileNotifications: React.FC<ProfileNotificationsProps> = (props) => {
               <CloseIcon />
             )}
           </Text>
+          <Button
+            title={t("Profile.notifications.buttons.edit")}
+            onClick={handleOnCLickButtonEdit}
+          />
         </Container>
       )}
     </Container>

@@ -904,7 +904,11 @@
     "notifications": {
       "header": "Benachrichtigungenverwaltung",
       "newsletter_email": "Newsletter E-Mail",
-      "newsletter_event": "Newsletter Event"
+      "newsletter_event": "Newsletter Event",
+      "buttons": {
+        "save": "Speichern",
+        "edit": "Bearbeiten"
+      }
     },
     "existingAddressTitle": "Adresse bearbeiten",
     "newAddressTitle": "Neue Adresse anlegen",

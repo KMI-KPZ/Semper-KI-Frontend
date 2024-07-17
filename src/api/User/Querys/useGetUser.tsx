@@ -23,6 +23,9 @@ const useGetUser = (useUserIsLoggedInQuery: UseQueryResult<boolean, Error>) => {
           details: {
             email: userData.details.email,
             addresses,
+            notificationSettings: userData.details.notificationSettings,
+            locale: userData.details.locale,
+            statistics: userData.details.statistics,
           },
           accessedWhen: new Date(userData.accessedWhen),
           createdWhen: new Date(userData.createdWhen),

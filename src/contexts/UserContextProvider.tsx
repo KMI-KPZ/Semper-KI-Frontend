@@ -53,7 +53,8 @@ const UserContextProvider: React.FC<
     if (
       userReminder === false &&
       user.usertype !== UserType.ANONYM &&
-      user.details.addresses.length === 0
+      (user.details.addresses === undefined ||
+        user.details.addresses.length === 0)
       // user.details.email === undefined ||
       // user.details.email === "")
     ) {

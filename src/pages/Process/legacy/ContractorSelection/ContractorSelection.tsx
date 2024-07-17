@@ -38,10 +38,14 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
 
   const [edit, setEdit] = useState(false);
   const [deliverAddress, setDeliverAddress] = useState(
-    user.details.addresses.find((address) => address.standard === true)
+    user.details.addresses === undefined
+      ? undefined
+      : user.details.addresses.find((address) => address.standard === true)
   );
   const [billingAddress, setBillingAddress] = useState(
-    user.details.addresses.find((address) => address.standard === true)
+    user.details.addresses === undefined
+      ? undefined
+      : user.details.addresses.find((address) => address.standard === true)
   );
   const [addressesEqual, setAddressesEqual] = useState(true);
 
@@ -147,7 +151,8 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
           </Container>
           <Divider />
           <Container direction="row" width="full">
-            {user.details.addresses.length > 0 ? (
+            {user.details.addresses !== undefined &&
+            user.details.addresses.length > 0 ? (
               user.details.addresses.map((address, index) => (
                 <AddressCard
                   key={index}
@@ -189,7 +194,8 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
               </Container>
             </Container>
             <Divider />
-            {user.details.addresses.length > 0 ? (
+            {user.details.addresses !== undefined &&
+            user.details.addresses.length > 0 ? (
               user.details.addresses.map((address, index) => (
                 <AddressCard
                   key={index}

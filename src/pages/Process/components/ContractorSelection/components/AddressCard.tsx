@@ -38,7 +38,9 @@ const ContractorSelectionAddressCard: React.FC<
 
   const { user } = useAuthorizedUser();
   const standardAddress: UserAddressProps | undefined =
-    user.details.addresses.find((address) => address.standard === true);
+    user.details.addresses === undefined
+      ? undefined
+      : user.details.addresses.find((address) => address.standard === true);
 
   const updateProcess = useUpdateProcess();
   const [edit, setEdit] = React.useState(false);

@@ -98,7 +98,8 @@ const Profile: React.FC<Props> = (props) => {
         <Heading variant="h2">{t("Profile.address.header")}</Heading>
         <Divider />
         <Container width="full" justify="start" align="start" wrap="wrap">
-          {user.details.addresses.length > 0 ? (
+          {user.details.addresses !== undefined &&
+          user.details.addresses.length > 0 ? (
             user.details.addresses.map((address, index) => (
               <AddressCard key={index} address={address} />
             ))

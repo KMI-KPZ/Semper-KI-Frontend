@@ -29,15 +29,15 @@ export interface AuthorizedUserProps {
 }
 
 export interface UserDetailsProps {
-  email: string;
-  locale: string;
-  addresses: UserAddressProps[];
-  statistics: {
+  email?: string;
+  locale?: string;
+  addresses?: UserAddressProps[];
+  statistics?: {
     lastLogin: string;
     numberOfLoginsTotal: number;
     locationOfLastLogin: string;
   };
-  notificationSettings: {
+  notificationSettings?: {
     newsletter: {
       event: boolean;
       email: boolean;

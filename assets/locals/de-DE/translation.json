@@ -907,6 +907,10 @@
     "locals": {
       "header": "Spracheinstellungen",
       "language": "Sprache:",
+      "languages": {
+        "en-US": "Englisch",
+        "de-DE": "Deutsch"
+      },
       "button": {
         "edit": "Bearbeiten",
         "save": "Speichern"

@@ -26,20 +26,21 @@ const ProfileLocals: React.FC<ProfileLocalsProps> = (props) => {
   const { user } = props;
   const { t, i18n } = useTranslation();
   const [edit, setEdit] = React.useState(false);
-  const [codeBackend, setCodeBackend] = useState(user.details.locale);
+  const [lngCode, setLngCode] = useState(user.details.locale);
   const updateUser = useUpdateUser();
 
   const handleOnChangeLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCodeBackend(e.target.value);
+    setLngCode(e.target.value);
   };
   const handleOnClickButton = () => {
     setEdit(!edit);
-    if (edit && i18n.language !== codeBackend) {
+    logger(i18n.language, lngCode);
+    if (edit && i18n.language !== lngCode) {
       updateUser.mutate(
-        { changes: { locale: codeBackend } },
+        { changes: { locale: lngCode } },
         {
           onSuccess: () => {
-            i18n.changeLanguage(codeBackend);
+            i18n.changeLanguage(lngCode);
           },
         }
       );
@@ -55,13 +56,19 @@ const ProfileLocals: React.FC<ProfileLocalsProps> = (props) => {
 
         {!edit ? (
           <Text className="break-all">
-            {user.details.locale === undefined ? "---" : user.details.locale}
+            {user.details.locale === undefined
+              ? "---"
+              : t(`Profile.locals.languages.${user.details.locale}`)}
           </Text>
         ) : (
-          <select onChange={handleOnChangeLanguage} value={codeBackend}>
+          <select
+            onChange={handleOnChangeLanguage}
+            value={lngCode}
+            className="rounded-lg border-2 p-2"
+          >
             {app_languages.map((language: Language, index) => (
-              <option value={language.code_backend} key={index}>
-                {language.name}
+              <option value={language.code} key={index}>
+                {t(`Profile.locals.languages.${language.code}`)}
               </option>
             ))}
           </select>

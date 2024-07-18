@@ -6,24 +6,21 @@ import { useTranslation } from "react-i18next";
 interface MenuLanguageMenuProps {}
 
 export interface Language {
-  code: string;
   name: string;
   country_code: "de" | "gb";
-  code_backend: "de-DE" | "en-US";
+  code: "de-DE" | "en-US";
 }
 
 export const app_languages: Language[] = [
   {
-    code: "de",
-    name: "Deutsch",
+    name: "german",
     country_code: "de",
-    code_backend: "de-DE",
+    code: "de-DE",
   },
   {
-    code: "en",
-    name: "English",
+    name: "english",
     country_code: "gb",
-    code_backend: "en-US",
+    code: "en-US",
   },
 ];
 

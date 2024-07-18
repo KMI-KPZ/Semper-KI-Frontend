@@ -2,14 +2,14 @@ import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import Backend from "i18next-http-backend";
-import translationEN from "@locals/en/translation.json";
-import translationDE from "@locals/de/translation.json";
+import translationEN from "@locals/en-US/translation.json";
+import translationDE from "@locals/de-DE/translation.json";
 
 export const resources = { 
-  de:  {
+  "de-DE":  {
     translation: translationDE
   },
-  en: { translation: translationEN },
+  "en-US": { translation: translationEN },
 };
 
 i18next
@@ -25,9 +25,9 @@ i18next
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    supportedLngs: ["de","en"],
-    lng: "de",
-    fallbackLng: "de",
+    supportedLngs: ["de-DE","en-US"],
+    lng: "de-DE",
+    fallbackLng: "de-DE",
     detection: {
         order: ["cookie", "htmlTag", "localStorage", "path", "subdomain"],
         caches: ["cookie"],

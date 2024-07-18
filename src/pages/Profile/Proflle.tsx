@@ -15,6 +15,7 @@ import AddressForm from "@/components/Form/AddressForm";
 import AddressCard from "@/components/Address/AddressCard";
 import ProfileNotifications from "./components/Notifications";
 import ProfileStatistics from "./components/Statistics";
+import ProfileLocals from "./components/Locals";
 
 interface Props {}
 
@@ -115,6 +116,7 @@ const Profile: React.FC<Props> = (props) => {
             <Text>{t("Profile.button.addAddress")}</Text>
           </div>
         </Container>
+        <ProfileLocals user={user} />
         <ProfileStatistics user={user} />
         <ProfileNotifications user={user} />
         <Divider />

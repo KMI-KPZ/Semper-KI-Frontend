@@ -28,7 +28,7 @@ const useUpdateUser = () => {
   const updateUser = async (props: UpdateUser) =>
     authorizedCustomAxios
       .patch(`${process.env.VITE_HTTP_API_URL}/public/profile/user/update/`, {
-        props,
+        ...props,
       })
       .then((response) => {
         logger("useUpdateUser | updateUser ✅ |", response);

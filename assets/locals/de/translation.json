@@ -891,15 +891,26 @@
       "header": "Adressen",
       "noAddress": "Keine Adresse vorhanden"
     },
-    "time": {
-      "header": "Zugriffe",
+    "stats": {
+      "header": "Statistiken",
       "created": "Erstellt am",
       "accessed": "letzter Zugegriff am",
-      "updated": "Aktualisiert am"
+      "updated": "Aktualisiert am",
+      "lastLogin": "Letzte Anmeldung am",
+      "lastLoginLocation": "Ort der letzten Anmeldung",
+      "lastLoginNumber": "Anzahl der Letzten Anmeldungen"
     },
     "button": {
       "delete": "Account Löschen",
       "addAddress": "Adresse hinzufügen"
+    },
+    "locals": {
+      "header": "Spracheinstellungen",
+      "language": "Sprache:",
+      "button": {
+        "edit": "Bearbeiten",
+        "save": "Speichern"
+      }
     },
     "notifications": {
       "header": "Benachrichtigungenverwaltung",

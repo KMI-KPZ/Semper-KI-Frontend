@@ -38,9 +38,9 @@ export interface UserDetailsProps {
     locationOfLastLogin: string;
   };
   notificationSettings?: {
-    newsletter: {
-      event: boolean;
-      email: boolean;
+    newsletter?: {
+      event?: boolean;
+      email?: boolean;
     };
   };
 }

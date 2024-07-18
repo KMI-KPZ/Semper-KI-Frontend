@@ -5,22 +5,25 @@ import { useTranslation } from "react-i18next";
 
 interface MenuLanguageMenuProps {}
 
-interface Language {
+export interface Language {
   code: string;
   name: string;
   country_code: "de" | "gb";
+  code_backend: "de-DE" | "en-US";
 }
 
-const languages: Language[] = [
+export const app_languages: Language[] = [
   {
     code: "de",
     name: "Deutsch",
     country_code: "de",
+    code_backend: "de-DE",
   },
   {
     code: "en",
     name: "English",
     country_code: "gb",
+    code_backend: "en-US",
   },
 ];
 
@@ -44,7 +47,7 @@ const MenuLanguageMenu: React.FC<MenuLanguageMenuProps> = (props) => {
 
   const getFlagButtonClassName = (): string => {
     let returnString: string = "";
-    languages.forEach((language: Language) =>
+    app_languages.forEach((language: Language) =>
       language.code === i18n.language
         ? (returnString = language.country_code)
         : null
@@ -73,7 +76,7 @@ const MenuLanguageMenu: React.FC<MenuLanguageMenuProps> = (props) => {
               className="absolute z-30 flex translate-y-14 flex-col gap-3 bg-slate-50"
               data-testid="dropdown"
             >
-              {languages
+              {app_languages
                 .filter(({ code, country_code }) => code !== i18n.language)
                 .map(({ code, country_code }: Language, index) => (
                   <Button

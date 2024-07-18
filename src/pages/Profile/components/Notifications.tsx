@@ -8,11 +8,6 @@ import {
   Text,
 } from "@component-library/index";
 import { AuthorizedUserProps, UserProps } from "@/hooks/useUser";
-import { GeneralInput } from "@component-library/Form/GeneralInput";
-import { useForm } from "react-hook-form";
-import CheckIcon from "@mui/icons-material/Check";
-import CloseIcon from "@mui/icons-material/Close";
-import useUpdateAddress from "@/api/User/Mutations/useUpdateAddress";
 import ProcessNotification from "./Notification";
 
 interface ProfileNotificationsProps {

@@ -911,6 +911,10 @@
         "edit": "Bearbeiten"
       }
     },
+    "notification": {
+      "email": "Email",
+      "event": "Event"
+    },
     "existingAddressTitle": "Adresse bearbeiten",
     "newAddressTitle": "Neue Adresse anlegen",
     "confirmDelete": "Möchten Sie ihren Account wirklich unwiederuflich löschen?",

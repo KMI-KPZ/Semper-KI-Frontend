@@ -35,7 +35,7 @@ const ProfileNotifications: React.FC<ProfileNotificationsProps> = (props) => {
         align="start"
         className="gap-10"
       >
-        <ProcessNotification key="newsletter" />
+        <ProcessNotification type="newsletter" />
       </Container>
     </Container>
   );

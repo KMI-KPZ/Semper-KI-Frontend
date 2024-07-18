@@ -13,7 +13,7 @@ import useUpdateUser from "@/api/User/Mutations/useUpdateUser";
 import logger from "@/hooks/useLogger";
 
 interface ProcessNotificationProps {
-  key: "newsletter";
+  type: "newsletter";
   values?: {
     email: boolean;
     event: boolean;
@@ -21,20 +21,14 @@ interface ProcessNotificationProps {
 }
 
 const ProcessNotification = (props: ProcessNotificationProps) => {
-  const { key, values = { email: false, event: false } } = props;
+  const { type, values = { email: false, event: false } } = props;
   const { t } = useTranslation();
   const updateUser = useUpdateUser();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // logger(
-    //   "ProcessNotification",
-    //   "handleOnChange",
-    //   e.target.id,
-    //   e.target.checked
-    // );
     updateUser.mutate({
       changes: {
-        notifications: { [key]: { [e.target.id]: e.target.checked } },
+        notifications: { [type]: { [e.target.id]: e.target.checked } },
       },
     });
   };
@@ -57,7 +51,7 @@ const ProcessNotification = (props: ProcessNotificationProps) => {
             className="h-6 w-6 rounded-lg"
             onChange={handleOnChange}
           />
-          <Text>{t("Profile.notifications.newsletter_email")}</Text>
+          <Text>{t("Profile.notification.email")}</Text>
         </label>
         <label className="flex w-full flex-row items-center justify-start gap-5">
           <input
@@ -67,7 +61,7 @@ const ProcessNotification = (props: ProcessNotificationProps) => {
             className="h-6 w-6 rounded-lg"
             onChange={handleOnChange}
           />
-          <Text>{t("Profile.notifications.newsletter_event")}</Text>
+          <Text>{t("Profile.notification.event")}</Text>
         </label>
       </Container>
     </Container>

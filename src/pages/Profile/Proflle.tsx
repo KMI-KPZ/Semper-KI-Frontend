@@ -14,6 +14,7 @@ import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import AddressForm from "@/components/Form/AddressForm";
 import AddressCard from "@/components/Address/AddressCard";
 import ProfileNotifications from "./components/Notifications";
+import ProfileStatistics from "./components/Statistics";
 
 interface Props {}
 
@@ -114,41 +115,7 @@ const Profile: React.FC<Props> = (props) => {
             <Text>{t("Profile.button.addAddress")}</Text>
           </div>
         </Container>
-
-        <Heading variant="h2">{t("Profile.time.header")}</Heading>
-        <Divider />
-        <Container width="full" direction="row" align="start" justify="start">
-          <Container
-            direction="col"
-            width="fit"
-            justify="start"
-            align="start"
-            className="p-3"
-            gap={3}
-          >
-            <Text className="break-all">{t("Profile.time.created")}</Text>
-            <Text className="break-all">{t("Profile.time.accessed")}</Text>
-            <Text className="break-all">{t("Profile.time.updated")}</Text>
-          </Container>
-          <Container
-            direction="col"
-            width="fit"
-            justify="start"
-            align="start"
-            className="p-3"
-            gap={3}
-          >
-            <Text className="break-all">
-              {user.createdWhen.toLocaleString()}
-            </Text>
-            <Text className="break-all">
-              {user.accessedWhen.toLocaleString()}
-            </Text>
-            <Text className="break-all">
-              {user.updatedWhen.toLocaleString()}
-            </Text>
-          </Container>
-        </Container>
+        <ProfileStatistics user={user} />
         <ProfileNotifications user={user} />
         <Divider />
         <Container width="full">

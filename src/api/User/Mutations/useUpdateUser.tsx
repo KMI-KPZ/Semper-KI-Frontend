@@ -9,6 +9,7 @@ export interface UpdateUser {
 }
 export interface UpdateUserChanges {
   displayName?: string;
+  email?: string;
   address?: UserAddressProps[];
   locale?: string;
   notifications?: {

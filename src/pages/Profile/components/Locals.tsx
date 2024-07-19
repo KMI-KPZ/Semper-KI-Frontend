@@ -34,7 +34,7 @@ const ProfileLocals: React.FC<ProfileLocalsProps> = (props) => {
   };
   const handleOnClickButton = () => {
     setEdit(!edit);
-    logger(i18n.language, lngCode);
+    // logger(i18n.language, lngCode);
     if (edit && i18n.language !== lngCode) {
       updateUser.mutate(
         { changes: { locale: lngCode } },

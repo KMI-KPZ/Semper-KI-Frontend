@@ -25,10 +25,11 @@ i18next
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
+    
     supportedLngs: ["de-DE","en-US"],
     lng: "de-DE",
     fallbackLng: "de-DE",
-    detection: {
+    detection    : {
         order: ["cookie", "htmlTag", "localStorage", "path", "subdomain"],
         caches: ["cookie"],
       },

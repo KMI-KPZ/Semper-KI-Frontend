@@ -27,7 +27,9 @@ const ProfileLocals: React.FC<ProfileLocalsProps> = (props) => {
   const { user } = props;
   const { t, i18n } = useTranslation();
   const [edit, setEdit] = React.useState(false);
-  const [lngCode, setLngCode] = useState(user.details.locale);
+  const [lngCode, setLngCode] = useState<string | undefined>(
+    user.details.locale
+  );
   const updateUser = useUpdateUser();
 
   const handleOnChangeLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {

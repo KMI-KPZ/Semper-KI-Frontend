@@ -29,7 +29,7 @@ export interface AuthorizedUserProps {
 
 export interface UserDetailsProps {
   email?: string;
-  locale?: string;
+  locale?: AppLanguage;
   addresses?: UserAddressProps[];
   statistics?: {
     lastLogin: string;
@@ -43,6 +43,8 @@ export interface UserDetailsProps {
     };
   };
 }
+
+export type AppLanguage = "de-DE" | "en-US";
 
 export interface UpdateUserProps {
   address?: UserAddressProps;

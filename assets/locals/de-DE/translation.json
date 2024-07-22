@@ -256,13 +256,23 @@
         }
       },
       "OrganizationForm": {
-        "title": "Organisationinformationen bearbeiten",
-        "name": "Organisationsname",
-        "taxID": "Steuernummer",
+        "displayName": "Organisationsname",
         "email": "Email",
-        "address": "Addresse",
+        "locale": "Sprache",
+        "notifications": "Benachrichtigungen",
         "supportedServices": "Services die Sie anbieten",
+        "branding_logo_url": "Logo URL",
+        "branding_colors_primary": "Primärfarbe",
+        "branding_colors_page_background": "Hintergrundfarbe",
+        "title": "Organisationinformationen bearbeiten",
+        "taxID": "Steuernummer",
+        "address": "Addresse",
+        "languages": {
+          "en-US": "English",
+          "de-DE": "Deutsch"
+        },
         "button": {
+          "cancel": "Abbrechen",
           "safe": "Speichern"
         }
       },
@@ -909,7 +919,7 @@
       "header": "Spracheinstellungen",
       "language": "Sprache:",
       "languages": {
-        "en-US": "Englisch",
+        "en-US": "English",
         "de-DE": "Deutsch"
       },
       "button": {

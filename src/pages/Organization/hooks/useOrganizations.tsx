@@ -6,7 +6,9 @@ import useGetOrganizationUsers, {
 import useGetOrganizationPermissions, {
   PermissionProps,
 } from "@/api/Organization/Querys/useGetOrganizationPermissions";
-import useGetOrganization from "@/api/Organization/Querys/useGetOrganization";
+import useGetOrganization, {
+  Organization,
+} from "@/api/Organization/Querys/useGetOrganization";
 import useGetOrganizationRolePermissions from "@/api/Organization/Querys/useGetOrganizationRolePermissions";
 import useGetOrganizationRoles from "@/api/Organization/Querys/useGetOrganizationRoles";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
@@ -16,17 +18,7 @@ interface useOrganizationsReturnProps {
   rolesQuery: UseQueryResult<RoleProps[], Error>;
   permissionsQuery: UseQueryResult<PermissionProps[], Error>;
   rolePermissionsQuery: UseQueryResult<PermissionProps[], Error>;
-  organizationQuery: UseQueryResult<OrganizationInfoProps, Error>;
-}
-
-export interface OrganizationInfoProps {
-  accessedWhen: Date;
-  createdWhen: Date;
-  updatedWhen: Date;
-  details: { taxID: string; adress: string; email: string };
-  supportedServices: ServiceType[];
-  hashedID: string;
-  name: string;
+  organizationQuery: UseQueryResult<Organization, Error>;
 }
 
 const useOrganizations = (roleID?: string): useOrganizationsReturnProps => {

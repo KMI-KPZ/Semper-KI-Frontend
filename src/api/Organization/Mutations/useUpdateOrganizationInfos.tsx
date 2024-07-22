@@ -1,42 +1,58 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { UserAddressProps } from "@/hooks/useUser";
+import { NewUserAddressProps } from "@/api/User/Mutations/useUpdateUser";
 
-export interface UpdateOrgaInfoProps {
-  email: string;
-  address: string;
-  taxID: string;
-  name: string;
-  supportedServices: number[];
+export interface UpdateOrgaProps {
+  changes?: UpdateOrgaChanges;
+  deletions?: UpdateOrgaDeletions;
 }
 
-const useUpdateOrganizationInfos = () => {
+export interface UpdateOrgaChanges {
+  displayName?: string;
+  email?: string;
+  address?: UserAddressProps[] | NewUserAddressProps[];
+  locale?: string;
+  notifications?: {
+    newsletter?: {
+      event?: boolean;
+      email?: boolean;
+    };
+  };
+  supportedServices?: number[];
+  branding?: {
+    logo_url: string;
+    colors: {
+      primary: string;
+      page_background: string;
+    };
+  };
+  taxID?: string;
+  priorities?: {};
+}
+
+export interface UpdateOrgaDeletions {
+  address?: string;
+  services?: string[];
+}
+
+const useUpdateOrganization = () => {
   const queryClient = useQueryClient();
-  const updateOrgaInfo = async ({
-    name,
-    email,
-    address: adress,
-    taxID,
-    supportedServices,
-  }: UpdateOrgaInfoProps) =>
+  const updateOrgaInfo = async (props: UpdateOrgaProps) =>
     authorizedCustomAxios
       .patch(`${process.env.VITE_HTTP_API_URL}/public/organizations/update/`, {
-        data: {
-          content: {
-            supportedServices,
-            details: { email, adress, taxID },
-          },
-        },
+        props,
       })
       .then((response) => {
-        logger("useUpdateOrganizationInfos | updateOrgaInfo ✅ |", response);
+        logger("useUpdateOrganization | updateOrga ✅ |", response);
         return response.data;
       })
       .catch((error) => {
-        logger("useUpdateOrganizationInfos | updateOrgaInfo ❌ |", error);
+        logger("useUpdateOrganization | updateOrga ❌ |", error);
       });
 
-  return useMutation<void, Error, UpdateOrgaInfoProps>({
+  return useMutation<void, Error, UpdateOrgaProps>({
     mutationFn: updateOrgaInfo,
     onSuccess: () => {
       queryClient.invalidateQueries(["organizations", "info"]);
@@ -44,4 +60,4 @@ const useUpdateOrganizationInfos = () => {
   });
 };
 
-export default useUpdateOrganizationInfos;
+export default useUpdateOrganization;

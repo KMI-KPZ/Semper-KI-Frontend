@@ -45,6 +45,7 @@ const ProfileAddress: React.FC<ProfileAddressProps> = (props) => {
         )}
         <div
           className="hover-card flex flex-col items-center justify-center gap-5 p-10"
+          tabIndex={0}
           onClick={handleOnClickButtonAddAddress}
         >
           <AddIcon />

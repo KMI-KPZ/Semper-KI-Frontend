@@ -7,7 +7,7 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 
-interface TextInputProps<T extends FieldValues> {
+interface ColorInputProps<T extends FieldValues> {
   label: Path<T>;
   register: UseFormRegister<T>;
   labelText?: string;
@@ -20,7 +20,7 @@ interface TextInputProps<T extends FieldValues> {
     | undefined;
 }
 
-const TextInput = <T extends FieldValues>(props: TextInputProps<T>) => {
+const ColorInput = <T extends FieldValues>(props: ColorInputProps<T>) => {
   const {
     label,
     register,
@@ -32,9 +32,9 @@ const TextInput = <T extends FieldValues>(props: TextInputProps<T>) => {
   } = props;
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-3">
+    <div className="flex w-full flex-col items-start justify-center gap-3">
       <div
-        className="flex w-full flex-wrap items-center justify-start gap-5 md:w-fit md:flex-nowrap"
+        className="flex w-full flex-wrap items-start justify-start gap-5 md:w-fit"
         key={label}
       >
         <label
@@ -46,10 +46,10 @@ const TextInput = <T extends FieldValues>(props: TextInputProps<T>) => {
           {labelText !== undefined ? labelText : label}
         </label>
         <input
-          type="text"
+          type="color"
           id={label.toLowerCase()}
           {...register(label, { ...registerOptions, required })}
-          className={`grow rounded-md border border-gray-300 p-2 md:min-w-[600px] ${
+          className={` w-32  rounded-md border border-gray-300 bg-slate-100 ${
             error !== undefined ? "border-2 border-red-500" : ""
           }`}
         />
@@ -61,4 +61,4 @@ const TextInput = <T extends FieldValues>(props: TextInputProps<T>) => {
   );
 };
 
-export default TextInput;
+export default ColorInput;

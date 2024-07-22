@@ -5,9 +5,10 @@ import {
   Container,
   Divider,
   Heading,
+  LoadingAnimation,
   Text,
 } from "@component-library/index";
-import { AuthorizedUserProps, UserType } from "@/hooks/useUser";
+import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 import { preProcessFile } from "typescript";
 import CheckIcon from "@mui/icons-material/Check";
 import EditIcon from "@mui/icons-material/Edit";
@@ -41,6 +42,7 @@ const ProfileGeneral: React.FC<ProfileGeneralProps> = (props) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
@@ -58,12 +60,21 @@ const ProfileGeneral: React.FC<ProfileGeneralProps> = (props) => {
     setEdit((prevState) => !prevState);
   };
 
+  const handleOnClickButtonCancel = () => {
+    reset();
+    setEdit((prevState) => !prevState);
+  };
+
+  const maxLength = 70;
+
   return (
     <form className="w-full">
       <Container width="full" direction="col">
         <Heading variant="h2">{t("Profile.general.header")}</Heading>
         <Divider />
-        {edit ? (
+        {updateUser.isLoading ? (
+          <LoadingAnimation variant="circel" />
+        ) : edit ? (
           <Container
             width="full"
             direction="col"
@@ -74,15 +85,32 @@ const ProfileGeneral: React.FC<ProfileGeneralProps> = (props) => {
               register={register}
               label="displayName"
               error={errors.displayName}
+              labelText={t("Profile.general.name")}
+              labelMaxWidth={maxLength}
             />
-            <TextInput register={register} label="email" error={errors.email} />
+            <TextInput
+              register={register}
+              label="email"
+              error={errors.email}
+              labelText={t("Profile.general.email")}
+              labelMaxWidth={maxLength}
+            />
+            <Text className="text-red-500">{t("Profile.general.hint")}</Text>
+            <Container>
+              <Button
+                variant="text"
+                size="sm"
+                title={t("Profile.locals.button.cancel")}
+                onClick={handleOnClickButtonCancel}
+              />
 
-            <Button
-              variant="secondary"
-              size="sm"
-              title={t("Profile.locals.button.save")}
-              onClick={handleSubmit(handleOnClickButtonSave)}
-            />
+              <Button
+                variant="primary"
+                size="sm"
+                title={t("Profile.locals.button.save")}
+                onClick={handleSubmit(handleOnClickButtonSave)}
+              />
+            </Container>
           </Container>
         ) : (
           <>

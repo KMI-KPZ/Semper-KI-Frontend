@@ -19,6 +19,7 @@ import ProfileLocals from "./components/Locals";
 import ProfileGeneral from "./components/General";
 import ProfileAddress from "./components/Address";
 import ProfileOrganization from "./components/Organization";
+import useDeleteUser from "@/api/User/Mutations/useDeleteUser";
 
 interface Props {}
 
@@ -30,7 +31,8 @@ interface EditState {
 const Profile: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const {} = props;
-  const { user, deleteUser } = useAuthorizedUser();
+  const { user } = useAuthorizedUser();
+  const deleteUser = useDeleteUser();
 
   const handleOnClickButtonDelete = () => {
     if (t("Profile.confirmDelete")) {

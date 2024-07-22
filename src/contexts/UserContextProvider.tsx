@@ -1,9 +1,9 @@
-import useSendUserLocals from "@/api/Authentification/Mutations/useSendUserLocals";
 import useGetIsLoggedIn from "@/api/Authentification/Querys/useGetIsLoggedIn";
 import useGetUser from "@/api/User/Querys/useGetUser";
 import { toast } from "@/hooks/useToast";
-import { UserProps, UserType } from "@/hooks/useUser";
+import { AuthorizedUserProps, UserProps, UserType } from "@/hooks/useUser";
 import { AppLoadingSuspense } from "@component-library/index";
+import { UseQueryResult } from "@tanstack/react-query";
 import React, {
   PropsWithChildren,
   createContext,
@@ -15,12 +15,14 @@ import { useTranslation } from "react-i18next";
 interface UserContextProviderProps {}
 
 export type UserContext = {
+  query: UseQueryResult<AuthorizedUserProps, Error>;
   user: UserProps;
   isLoggedIn: boolean;
 };
 
 export const UserContext = createContext<UserContext>({
-  user: { usertype: 3 },
+  query: {} as UseQueryResult<AuthorizedUserProps, Error>,
+  user: {} as UserProps,
   isLoggedIn: false,
 });
 
@@ -68,6 +70,7 @@ const UserContextProvider: React.FC<
       value={{
         user,
         isLoggedIn,
+        query: userQuery,
       }}
     >
       {children}

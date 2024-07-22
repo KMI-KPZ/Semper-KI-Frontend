@@ -5,6 +5,7 @@ import {
   Container,
   Divider,
   Heading,
+  LoadingAnimation,
   Text,
 } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
@@ -54,7 +55,9 @@ const ProfileLocals: React.FC<ProfileLocalsProps> = (props) => {
       <Container width="full" direction="row" align="center" justify="center">
         <Text className="break-all">{t("Profile.locals.language")}</Text>
 
-        {!edit ? (
+        {updateUser.isLoading ? (
+          <LoadingAnimation variant="circel" />
+        ) : !edit ? (
           <Text className="break-all">
             {user.details.locale === undefined
               ? "---"

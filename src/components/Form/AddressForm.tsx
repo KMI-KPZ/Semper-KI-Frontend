@@ -13,7 +13,9 @@ import {
   GeneralInput,
   InputLabelProps,
 } from "@component-library/Form/GeneralInput";
-import { NewUserAddressProps } from "@/api/User/Mutations/useCreateAddress";
+import useUpdateUser, {
+  NewUserAddressProps,
+} from "@/api/User/Mutations/useUpdateUser";
 
 interface AddressFormProps {
   closeModal?(): void;
@@ -24,7 +26,7 @@ interface AddressFormProps {
 const AddressForm: React.FC<AddressFormProps> = (props) => {
   const { closeModal, initialAddress, title } = props;
   const { t } = useTranslation();
-  const { updateAddress, createAddress } = useAuthorizedUser();
+  const updateUser = useUpdateUser();
   const { getMaxLabelWidth } = useGeneralInput();
   const existingAddressID = initialAddress?.id;
 
@@ -54,9 +56,13 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
 
   const onSubmit = (data: NewUserAddressProps) => {
     if (existingAddressID !== undefined) {
-      updateAddress.mutate({ ...data, id: existingAddressID });
+      // updateAddress.mutate({ ...data, id: existingAddressID });
+      updateUser.mutate({
+        changes: { address: [{ ...data, id: existingAddressID }] },
+      });
     } else {
-      createAddress.mutate(data);
+      // createAddress.mutate(data);
+      updateUser.mutate({ changes: { address: [data] } });
     }
     closeModal !== undefined ? closeModal() : null;
   };

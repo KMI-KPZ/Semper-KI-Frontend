@@ -1,8 +1,7 @@
 import React, { PropsWithChildren, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Container } from "@component-library/index";
-import useSendUserLocals from "@/api/Authentification/Mutations/useSendUserLocals";
 import useUser, { UserType } from "@/hooks/useUser";
+import useSendUserInfos from "@/api/Authentification/Mutations/useSendUserInfos";
 
 interface UserLocalsOutletProps {}
 
@@ -12,7 +11,7 @@ const UserLocalsOutlet: React.FC<PropsWithChildren<UserLocalsOutletProps>> = (
   const { children } = props;
   const { t } = useTranslation();
   const { user } = useUser();
-  const sendUserLocals = useSendUserLocals();
+  const sendUserLocals = useSendUserInfos();
 
   useEffect(() => {
     // if (user.usertype !== UserType.ANONYM)

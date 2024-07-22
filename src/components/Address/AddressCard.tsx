@@ -10,6 +10,7 @@ import {
 import React, { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 import AddressForm from "../Form/AddressForm";
+import useUpdateUser from "@/api/User/Mutations/useUpdateUser";
 
 interface AddressCardProps {
   address: UserAddressProps;
@@ -21,7 +22,7 @@ interface AddressCardProps {
 
 const AddressCard: React.FC<PropsWithChildren<AddressCardProps>> = (props) => {
   const { address, select, children } = props;
-  const { deleteAddress } = useAuthorizedUser();
+  const updateUser = useUpdateUser();
   const [edit, setEdit] = React.useState(false);
   const { t } = useTranslation();
 
@@ -44,7 +45,7 @@ const AddressCard: React.FC<PropsWithChildren<AddressCardProps>> = (props) => {
   ) => {
     e.stopPropagation();
     if (window.confirm(t("components.Address.AddressCard.confirmDelete"))) {
-      deleteAddress.mutate(address.id);
+      updateUser.mutate({ deletions: { address: [address.id] } });
     }
   };
 

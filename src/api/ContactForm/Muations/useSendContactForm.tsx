@@ -5,8 +5,8 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import { toast } from "@/hooks/useToast";
 
 export type ContactFormData = {
   email: string;

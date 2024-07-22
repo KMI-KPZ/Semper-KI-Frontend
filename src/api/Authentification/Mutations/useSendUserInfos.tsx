@@ -24,30 +24,30 @@ const serializeNavigator = (navigator: Navigator): SerializableNavigator => {
   return serialized;
 };
 
-const useSendUserLocals = () => {
+const useSendUserInfos = () => {
   const queryClient = useQueryClient();
 
   const navigatorData = serializeNavigator(navigator);
 
-  const sendUserLocals = async () =>
+  const sendUserInfos = async () =>
     authorizedCustomAxios
       .post(`${process.env.VITE_HTTP_API_URL}/public/auth/localeOfUser/set/`, {
         ...navigatorData,
       })
       .then((response) => {
-        logger("useSendUserLocals | setLocalOfUser ✅ |", response);
+        logger("useSendUserInfos | sendUserInfos ✅ |", response);
         return response.data;
       })
       .catch((error) => {
-        logger("useSendUserLocals | setLocalOfUser ❌ |", error);
+        logger("useSendUserInfos | sendUserInfos ❌ |", error);
       });
 
   return useMutation<string, Error, void>({
-    mutationFn: sendUserLocals,
+    mutationFn: sendUserInfos,
     onSuccess: (data, props, context) => {
       queryClient.invalidateQueries(["user"]);
     },
   });
 };
 
-export default useSendUserLocals;
+export default useSendUserInfos;

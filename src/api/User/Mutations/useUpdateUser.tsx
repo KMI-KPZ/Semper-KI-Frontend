@@ -10,7 +10,7 @@ export interface UpdateUser {
 export interface UpdateUserChanges {
   displayName?: string;
   email?: string;
-  address?: UserAddressProps[];
+  address?: UserAddressProps[] | NewUserAddressProps[];
   locale?: string;
   notifications?: {
     newsletter?: {
@@ -18,6 +18,18 @@ export interface UpdateUserChanges {
       email?: boolean;
     };
   };
+}
+
+export interface NewUserAddressProps {
+  standard: boolean;
+  country: string;
+  city: string;
+  zipcode: string;
+  houseNumber: number;
+  street: string;
+  company?: string;
+  lastName: string;
+  firstName: string;
 }
 
 export interface UpdateUserDeletions {

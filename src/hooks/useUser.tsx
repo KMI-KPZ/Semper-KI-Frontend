@@ -1,13 +1,12 @@
+import { NewUserAddressProps } from "@/api/User/Mutations/useUpdateUser";
 import { UserContext } from "@/contexts/UserContextProvider";
-import { UseMutationResult } from "@tanstack/react-query";
-import { useContext, useEffect } from "react";
+import { UseQueryResult } from "@tanstack/react-query";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { toast } from "./useToast";
-import { NewUserAddressProps } from "@/api/User/Mutations/useCreateAddress";
-
 interface ReturnProps {
   isLoggedIn: boolean;
   user: UserProps;
+  query: UseQueryResult<AuthorizedUserProps, Error>;
 }
 
 export type UserProps = AnonymUser | AuthorizedUserProps;
@@ -69,12 +68,13 @@ export interface Address {
 }
 
 const useUser = (): ReturnProps => {
-  const { isLoggedIn, user } = useContext(UserContext);
+  const { isLoggedIn, user, query } = useContext(UserContext);
   const { t } = useTranslation();
 
   return {
     isLoggedIn,
     user,
+    query,
   };
 };
 

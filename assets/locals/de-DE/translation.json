@@ -881,7 +881,8 @@
       "header": "Allgemein",
       "name": "Name:",
       "email": "E-Mail: ",
-      "type": "Benutzertyp: "
+      "type": "Benutzertyp: ",
+      "hint": "Nach dem ändern der Email muss diese erneut verifiziert werden. Zudem ist dann die Anmeldung mit der alten Email nicht mehr möglich."
     },
     "company": {
       "header": "Organisation",
@@ -913,7 +914,8 @@
       },
       "button": {
         "edit": "Bearbeiten",
-        "save": "Speichern"
+        "save": "Speichern",
+        "cancel": "Abbrechen"
       }
     },
     "notifications": {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import useOrganizations from "../../../hooks/useOrganizations";
+import useOrganization from "../../../hooks/useOrganization";
 import {
   Button,
   Divider,
@@ -14,13 +14,15 @@ import { Container } from "@component-library/index";
 import OrganizationForm from "@/components/Form/OrganizationForm";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import OrganizationInfoPreView from "./View";
+import { Organization } from "@/api/Organization/Querys/useGetOrganization";
 
-interface OrganizationInfoProps {}
+interface OrganizationInfoProps {
+  organization: Organization;
+}
 
 const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
-  const {} = props;
+  const { organization } = props;
   const { t } = useTranslation();
-  const { organizationQuery } = useOrganizations();
   const [edit, setEdit] = useState<boolean>(false);
 
   const closeEdit = () => {
@@ -30,21 +32,14 @@ const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
   const openEdit = () => {
     setEdit(true);
   };
-  if (organizationQuery.isLoading) return <LoadingAnimation variant="circel" />;
-  if (organizationQuery.isError || organizationQuery.data === undefined)
-    return <Text>ERROR LOADING</Text>;
 
   return (
-    <Container width="full" direction="col">
-      <Divider />
+    <Container className={`shadow-card`} width="full">
       {edit ? (
-        <OrganizationForm
-          organizationInfo={organizationQuery.data}
-          closeEdit={closeEdit}
-        />
+        <OrganizationForm organization={organization} closeEdit={closeEdit} />
       ) : (
         <OrganizationInfoPreView
-          orga={organizationQuery.data}
+          organization={organization}
           openEdit={openEdit}
         />
       )}

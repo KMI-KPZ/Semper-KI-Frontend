@@ -31,7 +31,7 @@ const OrganizationAddress: React.FC<OrganizationAddressProps> = (props) => {
   };
 
   return (
-    <Container width="full" direction="col">
+    <Container width="full" direction="col" className="p-5 shadow-card">
       <Heading variant="h2">{t("Profile.address.header")}</Heading>
       <Divider />
       <Container width="full" justify="start" align="start" wrap="wrap">

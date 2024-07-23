@@ -7,7 +7,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { getGroupedPermissions, sortPermissions } from "../Roles";
-import useOrganizations from "../../../../hooks/useOrganizations";
+import useOrganization from "../../../../hooks/useOrganization";
 import useDeleteRole from "@/api/Organization/Mutations/useDeleteRole";
 import { PermissionProps } from "@/api/Organization/Querys/useGetOrganizationPermissions";
 import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";

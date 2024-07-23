@@ -12,7 +12,7 @@ import { PermissionProps } from "@/api/Organization/Querys/useGetOrganizationPer
 import useCreateRole, {
   RoleProps,
 } from "@/api/Organization/Mutations/useCreateRole";
-import useOrganizations from "../../../../hooks/useOrganizations";
+import useOrganization from "../../../../hooks/useOrganization";
 import useUpdateRolePermissions from "@/api/Organization/Mutations/useUpdateRolePermissions";
 import useUpdateRole from "@/api/Organization/Mutations/useUpdateRole";
 import useGetOrganizationRolePermissions from "@/api/Organization/Querys/useGetOrganizationRolePermissions";

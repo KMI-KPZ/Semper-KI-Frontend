@@ -1,7 +1,7 @@
 import { Button } from "@component-library/index";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import useOrganizations from "../../../hooks/useOrganizations";
+import useOrganization from "../../../hooks/useOrganization";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";

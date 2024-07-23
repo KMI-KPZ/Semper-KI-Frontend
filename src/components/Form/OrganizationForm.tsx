@@ -19,7 +19,7 @@ import { Language, app_languages } from "../Menu/components/LanguageMenu";
 
 interface OrganizationFormProps {
   closeEdit: () => void;
-  organizationInfo: Organization;
+  organization: Organization;
 }
 
 interface OrganizationFormValues {
@@ -40,7 +40,7 @@ interface OrganizationFormValues {
 }
 
 const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
-  const { organizationInfo, closeEdit } = props;
+  const { organization, closeEdit } = props;
   const { t } = useTranslation();
   const updateOrganizationInfo = useUpdateOrganization();
   const servicesQuery = useGetServices();
@@ -108,16 +108,16 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
   } = useForm<OrganizationFormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
-      displayName: organizationInfo.name,
-      email: organizationInfo.details.email,
-      taxID: organizationInfo.details.taxID,
+      displayName: organization.name,
+      email: organization.details.email,
+      taxID: organization.details.taxID,
       branding_colors_page_background: "",
       // organizationInfo.details.branding.colors.page_background,
       branding_colors_primary: "", // organizationInfo.details.branding.colors.primary,
       branding_logo_url: "", //organizationInfo.details.branding.logo_url,
-      locale: organizationInfo.details.locale,
-      notifications: organizationInfo.details.notificationSettings,
-      supportedServices: organizationInfo.supportedServices.map((service) =>
+      locale: organization.details.locale,
+      notifications: organization.details.notificationSettings,
+      supportedServices: organization.supportedServices.map((service) =>
         service.toString()
       ),
     },
@@ -154,7 +154,7 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
 
   return (
     <form
-      className={`flex h-full w-full flex-col items-center justify-start gap-5  bg-white p-5 md:justify-center`}
+      className={`flex  w-full flex-col items-center justify-start gap-5  bg-white p-5 md:justify-center`}
     >
       <Heading variant={`h1`}>
         {t("Organization.Info.components.form.title")}

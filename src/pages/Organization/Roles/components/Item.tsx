@@ -6,7 +6,7 @@ import { PermissionGroupProps, getGroupedPermissions } from "../Roles";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import useDeleteRole from "@/api/Organization/Mutations/useDeleteRole";
-import useOrganizations from "../../../../hooks/useOrganizations";
+import useOrganization from "../../../../hooks/useOrganization";
 import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
 import useGetOrganizationRolePermissions from "@/api/Organization/Querys/useGetOrganizationRolePermissions";
 

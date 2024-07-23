@@ -17,39 +17,87 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
   const { t } = useTranslation();
 
   return (
-    <div className="realtive flex w-full flex-col items-center gap-5 p-5">
-      <div className="flex w-full flex-col justify-between gap-x-14 gap-y-5 md:flex-row md:flex-wrap">
-        <Text variant="body">
-          {`${t(`Organization.Info.accessed`)}: `}
-          {organization.accessedWhen.toLocaleDateString()}
-        </Text>
-        <Text variant="body">
-          s{`${t(`Organization.Info.created`)}: `}
-          {organization.createdWhen.toLocaleDateString()}
-        </Text>
-        <Text variant="body">
-          {`${t(`Organization.Info.updated`)}: `}
-          {organization.updatedWhen.toLocaleDateString()}
-        </Text>
-        <Text variant="body">
-          {`${t(`Organization.Info.name`)}: `}
-          {organization.name}
-        </Text>
-        <Text variant="body" className="break-all">
-          {`${t(`Organization.Info.id`)}: `}
-          {organization.hashedID}
-        </Text>
-      </div>
-      <div className="flex w-full flex-col justify-between gap-x-14 gap-y-5 md:flex-row md:flex-wrap">
-        <Text variant="body">
-          {`${t(`Organization.Info.email`)}: `}
-          {organization.details.email}
-        </Text>
-        <Text variant="body">
-          {`${t(`Organization.Info.taxID`)}: `}
-          {organization.details.taxID}
-        </Text>
-      </div>
+    <Container width="full" direction="col" className="p-5">
+      <table className="w-full table-auto border-separate border-spacing-3 ">
+        <tbody>
+          <tr>
+            <td>{t(`Organization.Info.accessed`)}</td>
+            <td>{organization.accessedWhen.toLocaleDateString()}</td>
+          </tr>
+          <tr>
+            <td>{t(`Organization.Info.created`)}</td>
+            <td>{organization.createdWhen.toLocaleDateString()}</td>
+          </tr>
+          <tr>
+            <td>{t(`Organization.Info.updated`)}</td>
+            <td>{organization.updatedWhen.toLocaleDateString()}</td>
+          </tr>
+          <tr>
+            <td>{t(`Organization.Info.name`)}</td>
+            <td>{organization.name}</td>
+          </tr>
+          <tr>
+            <td className="align-text-top">{t(`Organization.Info.id`)}</td>
+            <td className="break-all">{organization.hashedID}</td>
+          </tr>
+          <tr>
+            <td>{t(`Organization.Info.email`)}</td>
+            <td>{organization.details.email}</td>
+          </tr>
+          <tr>
+            <td>{t(`Organization.Info.taxID`)}</td>
+            <td>{organization.details.taxID}</td>
+          </tr>
+          <tr>
+            <td className="whitespace-nowrap">
+              {t(`Organization.Info.services`)}
+            </td>
+            <td>
+              {organization.supportedServices.length > 0 ? (
+                organization.supportedServices.map((service, index) => (
+                  <Text key={index}>
+                    {t(
+                      `enum.ServiceType.${
+                        ServiceType[service] as keyof typeof ServiceType
+                      }`
+                    )}
+                  </Text>
+                ))
+              ) : (
+                <Text>{t("Organization.Info.noService")}</Text>
+              )}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      {/* <Text variant="body">
+        {`${t(`Organization.Info.accessed`)}: `}
+        {organization.accessedWhen.toLocaleDateString()}
+      </Text>
+      <Text variant="body">
+        {`${t(`Organization.Info.created`)}: `}
+        {organization.createdWhen.toLocaleDateString()}
+      </Text>
+      <Text variant="body">
+        {`${t(`Organization.Info.updated`)}: `}
+        {organization.updatedWhen.toLocaleDateString()}
+      </Text>
+      <Text variant="body">
+        {`${t(`Organization.Info.name`)}: `}
+        {organization.name}
+      </Text>
+      <Text variant="body" className="break-all">
+        {`${t(`Organization.Info.id`)}: `}
+        {organization.hashedID}
+      </Text>
+      <Text variant="body">
+        {`${t(`Organization.Info.email`)}: `}
+        {organization.details.email}
+      </Text>
+      <Text variant="body">
+        {`${t(`Organization.Info.taxID`)}: `}
+        {organization.details.taxID}
+      </Text>
       <Container width="full" justify="start" align="start">
         <Text variant="body">{`${t(`Organization.Info.services`)}: `}</Text>
         <Container>
@@ -67,11 +115,11 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
             <Text>{t("Organization.Info.noService")}</Text>
           )}
         </Container>
-      </Container>
+      </Container> */}
       <PermissionGate element="OrganizationButtonEditOrga">
         <Button title={t(`Organization.Info.button.edit`)} onClick={openEdit} />
       </PermissionGate>
-    </div>
+    </Container>
   );
 };
 

@@ -11,6 +11,7 @@ import React, { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 import AddressForm from "../Form/AddressForm";
 import useUpdateUser from "@/api/User/Mutations/useUpdateUser";
+import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganizationInfos";
 
 interface AddressCardProps {
   address: UserAddressProps;
@@ -18,11 +19,13 @@ interface AddressCardProps {
     checked: boolean;
     handleOnClickCard: (address: UserAddressProps) => void;
   };
+  type?: "user" | "organization";
 }
 
 const AddressCard: React.FC<PropsWithChildren<AddressCardProps>> = (props) => {
-  const { address, select, children } = props;
+  const { address, select, children, type = "user" } = props;
   const updateUser = useUpdateUser();
+  const updateOrganization = useUpdateOrganization();
   const [edit, setEdit] = React.useState(false);
   const { t } = useTranslation();
 
@@ -40,12 +43,18 @@ const AddressCard: React.FC<PropsWithChildren<AddressCardProps>> = (props) => {
     setEdit(true);
   };
 
+  const deleteAddress = (addressID: string) => {
+    if (type === "user")
+      updateUser.mutate({ deletions: { address: [addressID] } });
+    else updateOrganization.mutate({ deletions: { address: addressID } });
+  };
+
   const handleOnButtonClickDelete = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.stopPropagation();
     if (window.confirm(t("components.Address.AddressCard.confirmDelete"))) {
-      updateUser.mutate({ deletions: { address: [address.id] } });
+      deleteAddress(address.id);
     }
   };
 
@@ -137,6 +146,7 @@ const AddressCard: React.FC<PropsWithChildren<AddressCardProps>> = (props) => {
         }}
       >
         <AddressForm
+          type={type}
           initialAddress={address}
           closeModal={() => {
             setEdit(false);

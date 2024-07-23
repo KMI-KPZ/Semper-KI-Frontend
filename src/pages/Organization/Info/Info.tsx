@@ -36,14 +36,12 @@ const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
 
   return (
     <Container width="full" direction="col">
+      <Divider />
       {edit ? (
-        <>
-          <Divider />
-          <OrganizationForm
-            organizationInfo={organizationQuery.data}
-            closeEdit={closeEdit}
-          />
-        </>
+        <OrganizationForm
+          organizationInfo={organizationQuery.data}
+          closeEdit={closeEdit}
+        />
       ) : (
         <OrganizationInfoPreView
           orga={organizationQuery.data}

@@ -16,17 +16,20 @@ import {
 import useUpdateUser, {
   NewUserAddressProps,
 } from "@/api/User/Mutations/useUpdateUser";
+import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganizationInfos";
 
 interface AddressFormProps {
   closeModal?(): void;
+  type?: "user" | "organization";
   title?: string;
   initialAddress?: UserAddressProps;
 }
 
 const AddressForm: React.FC<AddressFormProps> = (props) => {
-  const { closeModal, initialAddress, title } = props;
+  const { closeModal, initialAddress, title, type = "user" } = props;
   const { t } = useTranslation();
   const updateUser = useUpdateUser();
+  const updateOrganization = useUpdateOrganization();
   const { getMaxLabelWidth } = useGeneralInput();
   const existingAddressID = initialAddress?.id;
 
@@ -54,16 +57,26 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
     defaultValues: initialAddress !== undefined ? initialAddress : undefined,
   });
 
-  const onSubmit = (data: NewUserAddressProps) => {
-    if (existingAddressID !== undefined) {
-      // updateAddress.mutate({ ...data, id: existingAddressID });
+  const updateAddress = (data: NewUserAddressProps) => {
+    if (type === "user") updateUser.mutate({ changes: { address: [data] } });
+    else updateOrganization.mutate({ changes: { address: [data] } });
+  };
+
+  const createAddress = (data: NewUserAddressProps, id: string) => {
+    if (type === "user")
       updateUser.mutate({
-        changes: { address: [{ ...data, id: existingAddressID }] },
+        changes: { address: [{ ...data, id }] },
       });
-    } else {
-      // createAddress.mutate(data);
-      updateUser.mutate({ changes: { address: [data] } });
-    }
+    else
+      updateOrganization.mutate({
+        changes: { address: [{ ...data, id }] },
+      });
+  };
+
+  const onSubmit = (data: NewUserAddressProps) => {
+    if (existingAddressID !== undefined) createAddress(data, existingAddressID);
+    else updateAddress(data);
+
     closeModal !== undefined ? closeModal() : null;
   };
 

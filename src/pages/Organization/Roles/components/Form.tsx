@@ -12,9 +12,10 @@ import { PermissionProps } from "@/api/Organization/Querys/useGetOrganizationPer
 import useCreateRole, {
   RoleProps,
 } from "@/api/Organization/Mutations/useCreateRole";
-import useOrganizations from "../../hooks/useOrganizations";
+import useOrganizations from "../../../../hooks/useOrganizations";
 import useUpdateRolePermissions from "@/api/Organization/Mutations/useUpdateRolePermissions";
 import useUpdateRole from "@/api/Organization/Mutations/useUpdateRole";
+import useGetOrganizationRolePermissions from "@/api/Organization/Querys/useGetOrganizationRolePermissions";
 
 interface OrganizationRolesFormProps {
   allPermissions: PermissionProps[];
@@ -34,7 +35,7 @@ interface FormData {
 const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
   const { role, allPermissions, resetForm } = props;
   const { t } = useTranslation();
-  const { rolePermissionsQuery } = useOrganizations(role?.id);
+  const rolePermissionsQuery = useGetOrganizationRolePermissions(role?.id);
   const createRole = useCreateRole();
   const updateRolePermission = useUpdateRolePermissions();
   const updateRole = useUpdateRole();

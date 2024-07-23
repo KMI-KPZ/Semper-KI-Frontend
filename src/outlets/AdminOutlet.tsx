@@ -24,7 +24,7 @@ export const AdminContext = createContext<AdminContext>({
   flatProjects: [],
 });
 
-export const AdminRouteOutlet: React.FC<Props> = (props) => {
+export const AdminOutlet: React.FC<Props> = (props) => {
   const { user } = useAuthorizedUser();
   const { t } = useTranslation();
   const adminFlatProjectsQuery = useGetAdminFlatProjects();

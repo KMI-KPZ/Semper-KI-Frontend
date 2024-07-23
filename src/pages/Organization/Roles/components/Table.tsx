@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useOrganizations from "../../hooks/useOrganizations";
+import useOrganizations from "../../../../hooks/useOrganizations";
 import {
   getGroupedPermissions,
   getPermissinContextTranslations,
@@ -9,6 +9,7 @@ import {
 import { LoadingSuspense } from "@component-library/index";
 import OrganizationRolesTableRow from "./TableRow";
 import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
+import useGetOrganizationPermissions from "@/api/Organization/Querys/useGetOrganizationPermissions";
 
 interface OrganizationRolesTableProps {
   roles: RoleProps[];
@@ -20,7 +21,7 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
 ) => {
   const { roles, editRole } = props;
   const { t } = useTranslation();
-  const { permissionsQuery } = useOrganizations();
+  const permissionsQuery = useGetOrganizationPermissions();
 
   return (
     <div className="hidden w-full overflow-auto md:flex ">

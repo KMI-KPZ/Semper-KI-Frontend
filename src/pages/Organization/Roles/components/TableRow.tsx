@@ -7,10 +7,11 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { getGroupedPermissions, sortPermissions } from "../Roles";
-import useOrganizations from "../../hooks/useOrganizations";
+import useOrganizations from "../../../../hooks/useOrganizations";
 import useDeleteRole from "@/api/Organization/Mutations/useDeleteRole";
 import { PermissionProps } from "@/api/Organization/Querys/useGetOrganizationPermissions";
 import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
+import useGetOrganizationRolePermissions from "@/api/Organization/Querys/useGetOrganizationRolePermissions";
 
 interface OrganizationRolesTableRowProps {
   role: RoleProps;
@@ -24,7 +25,7 @@ const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
   const { role, allPermissions, editRole } = props;
   const { t } = useTranslation();
   const deleteRole = useDeleteRole();
-  const { rolePermissionsQuery } = useOrganizations(role.id);
+  const rolePermissionsQuery = useGetOrganizationRolePermissions(role.id);
 
   const handleOnClickButtonDelete = () => {
     if (window.confirm(t("Organization.Roles.components.Item.alert")))

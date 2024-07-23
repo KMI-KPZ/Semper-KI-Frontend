@@ -7,13 +7,14 @@ import { Fragment, useState } from "react";
 import OrganizationRolesTable from "./components/Table";
 import { Modal } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import {
+import useGetOrganizationPermissions, {
   PermissionContextTranslationType,
   PermissionProps,
   PermissionTypeTranslationType,
 } from "@/api/Organization/Querys/useGetOrganizationPermissions";
-import useOrganizations from "../hooks/useOrganizations";
+import useOrganizations from "../../../hooks/useOrganizations";
 import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
+import useGetOrganizationRoles from "@/api/Organization/Querys/useGetOrganizationRoles";
 
 interface OrganizationRolesProps {}
 
@@ -82,7 +83,8 @@ export const getPermissinContextTranslations = (
 const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { rolesQuery, permissionsQuery } = useOrganizations();
+  const rolesQuery = useGetOrganizationRoles();
+  const permissionsQuery = useGetOrganizationPermissions();
   const [edit, setEdit] = useState<boolean>(false);
   const [role, setRole] = useState<RoleProps | undefined>();
 

@@ -18,10 +18,8 @@ import { FilterItemProps } from "../Process/components/Service/ServiceEdit/Manuf
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import EmailVerification from "../EmailVerification/EmailVerification";
 import ResKriVer from "../ResKriVer/ResKriVer";
-import { OrganizationRouteOutlet } from "@/routeOutlets/OrganizationOutlet";
-import { AdminRouteOutlet } from "@/routeOutlets/AdminOutlet";
+import { OrganizationOutlet } from "@/outlets/OrganizationOutlet";
 import { ToastContainer } from "react-toastify";
-import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
 import { ContentBox } from "@component-library/index";
 import RedirectLogin from "../Login/RedirectLogin";
 import Menu from "@/components/Menu";
@@ -30,9 +28,9 @@ import Advantages from "../Advantages/Advantages";
 import Chatbot from "@/components/Chatbot/Chatbot";
 import Profile from "../Profile/Proflle";
 import Projects from "../Projects/Projects";
-import ProjectOutlet from "@/routeOutlets/ProjectOutlet";
+import ProjectOutlet from "@/outlets/ProjectOutlet";
 import ProjectPage from "../Project/ProjectPage";
-import ProcessOutlet from "@/routeOutlets/ProcessOutlet";
+import ProcessOutlet from "@/outlets/ProcessOutlet";
 import ProcessHistory from "../Process/legacy/History/History";
 import ProcessChat from "../Process/legacy/Chat/Chat";
 import ServiceRoutes from "@/routes/ServiceRoutes";
@@ -41,6 +39,8 @@ import Admin from "../Admin/Admin";
 import AdminUser from "../Admin/User/User";
 import AdminOrganization from "../Admin/Organization/Organization";
 import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
+import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
+import { AdminOutlet } from "@/outlets/AdminOutlet";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -238,7 +238,7 @@ const App: React.FC = () => {
                 </Route>
               </Route>
             </Route>
-            <Route element={<AuthorizedUserRouteOutlet />}>
+            <Route element={<AuthorizedUserOutlet />}>
               <Route
                 path="test"
                 element={
@@ -258,7 +258,7 @@ const App: React.FC = () => {
               <Route
                 element={
                   <ContentBox>
-                    <OrganizationRouteOutlet />
+                    <OrganizationOutlet />
                   </ContentBox>
                 }
               >
@@ -291,7 +291,7 @@ const App: React.FC = () => {
                   }
                 />
               </Route>
-              <Route element={<AdminRouteOutlet />}>
+              <Route element={<AdminOutlet />}>
                 <Route
                   path="admin/*"
                   element={

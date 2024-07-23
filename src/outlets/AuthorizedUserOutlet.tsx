@@ -17,7 +17,7 @@ export const AuthorizedUserContext = createContext<AuthorizedUserContext>({
   query: {} as UseQueryResult<AuthorizedUserProps, Error>,
 });
 
-const AuthorizedUserRouteOutlet: React.FC<
+const AuthorizedUserOutlet: React.FC<
   PropsWithChildren<AuthorizedUserOutletProps>
 > = (props) => {
   const { t } = useTranslation();
@@ -50,4 +50,4 @@ const AuthorizedUserRouteOutlet: React.FC<
   );
 };
 
-export default AuthorizedUserRouteOutlet;
+export default AuthorizedUserOutlet;

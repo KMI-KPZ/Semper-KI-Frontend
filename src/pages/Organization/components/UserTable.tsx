@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button } from "@component-library/index";
-import useOrganizations from "../hooks/useOrganizations";
+import useOrganizations from "../../../hooks/useOrganizations";
 import { LoadingSuspense } from "@component-library/index";
 import CheckIcon from "@mui/icons-material/Check";
 import { Heading } from "@component-library/index";
@@ -14,8 +14,11 @@ import useUser, { UserType } from "@/hooks/useUser";
 import useAssignRole from "@/api/Organization/Mutations/useAssignRole";
 import useRemoveRole from "@/api/Organization/Mutations/useRemoveRole";
 import useDeleteUser from "@/api/Organization/Mutations/useDeleteUser";
-import { OrganizationsUser } from "@/api/Organization/Querys/useGetOrganizationUsers";
+import useGetOrganizationUsers, {
+  OrganizationsUser,
+} from "@/api/Organization/Querys/useGetOrganizationUsers";
 import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
+import useGetOrganizationRoles from "@/api/Organization/Querys/useGetOrganizationRoles";
 
 interface OrganizationTableProps {}
 
@@ -23,8 +26,8 @@ const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { user } = useUser();
-  const { userQuery, rolesQuery } = useOrganizations();
-
+  const rolesQuery = useGetOrganizationRoles();
+  const userQuery = useGetOrganizationUsers();
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 p-5 shadow-card ">
       <Heading variant="h2">

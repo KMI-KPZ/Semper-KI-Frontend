@@ -1,7 +1,7 @@
 import { Button } from "@component-library/index";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import useOrganizations from "../hooks/useOrganizations";
+import useOrganizations from "../../../hooks/useOrganizations";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -9,6 +9,7 @@ import { Heading } from "@component-library/index";
 import logger from "@/hooks/useLogger";
 import useCreateInviteLink from "@/api/Organization/Mutations/useCreateInviteLink";
 import useInviteUser from "@/api/Organization/Mutations/useInviteUser";
+import useGetOrganizationRoles from "@/api/Organization/Querys/useGetOrganizationRoles";
 
 interface InvitationProps {}
 
@@ -28,7 +29,7 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   const [showLoadedIn, setShowLoadedIn] = useState<boolean>(false);
   const createInviteLink = useCreateInviteLink();
   const inviteUser = useInviteUser();
-  const { rolesQuery } = useOrganizations();
+  const rolesQuery = useGetOrganizationRoles();
 
   const schema = yup
     .object({

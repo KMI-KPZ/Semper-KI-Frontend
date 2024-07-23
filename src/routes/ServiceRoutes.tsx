@@ -2,8 +2,7 @@ import logger from "@/hooks/useLogger";
 import { ServiceManufacturing } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Manufacturing";
 import ServiceModeling from "@/pages/Process/components/Service/ServiceEdit/Modelling/Modelling";
 import ServiceEdit from "@/pages/Process/components/Service/ServiceEdit/ServiceEdit";
-import { DefinedProcessOutlet } from "@/routeOutlets/DefinedProcessOutlet";
-import ManufacturingProcessOutlet from "@/routeOutlets/ManufacturingProcessOutlet";
+import ManufacturingProcessOutlet from "@/outlets/ManufacturingProcessOutlet";
 import { Modal } from "@component-library/index";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,6 +13,7 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
+import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
 
 interface ServiceRoutesProps {}
 

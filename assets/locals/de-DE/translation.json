@@ -174,6 +174,18 @@
       "WAITING_PROCESS": "Warten auf Prozess",
       "IN_PROGRESS": "in Bearbeitung",
       "COMPLETED": "Abgeschlossen"
+    },
+    "NotificationSettingsType": {
+      "verification": "Verifizierung",
+      "processSent": "Prozess gesendet",
+      "responseFromContractor": "Antwort vom Auftragnehmer",
+      "statusChange": "Statusänderung",
+      "newMessage": "Neue Nachricht",
+      "actionReminder": "Aktionserinnerung",
+      "errorOccurred": "Fehler aufgetreten",
+      "newsletter": "Newsletter",
+      "processReceived": "Prozess erhalten",
+      "responseFromClient": "Antwort vom Kunden"
     }
   },
   "api": {
@@ -260,6 +272,10 @@
         "email": "Email",
         "locale": "Sprache",
         "notifications": "Benachrichtigungen",
+        "notifictionTypes": {
+          "email": "Email",
+          "event": "Event"
+        },
         "supportedServices": "Services die Sie anbieten",
         "branding_logo_url": "Logo URL",
         "branding_colors_primary": "Primärfarbe",
@@ -267,6 +283,7 @@
         "title": "Organisationinformationen bearbeiten",
         "taxID": "Steuernummer",
         "address": "Addresse",
+
         "languages": {
           "en-US": "English",
           "de-DE": "Deutsch"
@@ -929,10 +946,9 @@
       }
     },
     "notifications": {
-      "header": "Benachrichtigungenverwaltung",
-      "newsletter_header": "Newsletter",
-      "newsletter_email": "E-Mail",
-      "newsletter_event": "Event",
+      "header": "Benachrichtungen",
+      "email": "E-Mail",
+      "event": "Event",
       "buttons": {
         "save": "Speichern",
         "edit": "Bearbeiten"

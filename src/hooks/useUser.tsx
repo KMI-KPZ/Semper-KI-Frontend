@@ -37,12 +37,41 @@ export interface UserDetailsProps {
     locationOfLastLogin: string;
   };
   notificationSettings?: {
-    newsletter?: {
-      event?: boolean;
-      email?: boolean;
-    };
+    user: UserNotificationSetting[];
+    organization: OrgaNotificationSetting[];
   };
 }
+
+export type GeneralNotificationSettings = {
+  event: boolean;
+  email: boolean;
+};
+
+export type UserNotificationSetting = {
+  type: UserNotificationSettingsType;
+} & GeneralNotificationSettings;
+
+export type OrgaNotificationSetting = {
+  type: OrgaNotificationSettingsType;
+} & GeneralNotificationSettings;
+
+export type UserNotificationSettingsType =
+  | "verification"
+  | "processSent"
+  | "responseFromContractor"
+  | "statusChange"
+  | "newMessage"
+  | "actionReminder"
+  | "errorOccurred"
+  | "newsletter";
+
+export type OrgaNotificationSettingsType =
+  | "processReceived"
+  | "responseFromClient"
+  | "statusChange"
+  | "newMessage"
+  | "actionReminder"
+  | "errorOccurred";
 
 export type AppLanguage = "de-DE" | "en-US";
 

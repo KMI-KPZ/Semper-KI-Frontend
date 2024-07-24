@@ -25,7 +25,7 @@ const useDeleteUser = () => {
   return useMutation<void, Error, string>({
     mutationFn: deleteUser,
     onSuccess: () => {
-      queryClient.invalidateQueries(["organizations", "users"]);
+      queryClient.invalidateQueries(["organization", "users"]);
     },
   });
 };

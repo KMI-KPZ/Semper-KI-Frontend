@@ -10,12 +10,20 @@ export interface UpdateUser {
 export interface UpdateUserChanges {
   displayName?: string;
   email?: string;
-  address?: UserAddressProps[] | NewUserAddressProps[];
+  address?: UserAddressProps | NewUserAddressProps;
   locale?: string;
   notifications?: {
-    newsletter?: {
-      event?: boolean;
-      email?: boolean;
+    user?: {
+      [key: string]: {
+        event?: boolean;
+        email?: boolean;
+      };
+    };
+    organization?: {
+      [key: string]: {
+        event?: boolean;
+        email?: boolean;
+      };
     };
   };
 }

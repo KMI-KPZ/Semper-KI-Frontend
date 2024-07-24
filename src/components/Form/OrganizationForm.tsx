@@ -26,16 +26,10 @@ interface OrganizationFormValues {
   displayName: string;
   email: string;
   locale: string;
-  notifications: {
-    newsletter: {
-      event: boolean;
-      email: boolean;
-    };
-  };
   supportedServices: string[];
-  branding_logo_url: string;
-  branding_colors_primary: string;
-  branding_colors_page_background: string;
+  branding_logo_url?: string;
+  branding_colors_primary?: string;
+  branding_colors_page_background?: string;
   taxID: string;
 }
 
@@ -66,29 +60,16 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
           name: t(`components.Form.OrganizationForm.locale`),
         })
       ),
-      notifications: yup.object({
-        newsletter: yup.object({
-          event: yup.boolean().required(),
-          email: yup.boolean().required(),
-        }),
-      }),
-      branding_logo_url: yup.string().required(
-        t("yup.requiredName", {
-          name: t("components.Form.OrganizationForm.branding_logo_url"),
+      notifications: yup.array().of(
+        yup.object({
+          type: yup.string(),
+          event: yup.boolean(),
+          email: yup.boolean(),
         })
       ),
-      branding_colors_primary: yup.string().required(
-        t("yup.requiredName", {
-          name: t("components.Form.OrganizationForm.branding_colors_primary"),
-        })
-      ),
-      branding_colors_page_background: yup.string().required(
-        t("yup.requiredName", {
-          name: t(
-            "components.Form.OrganizationForm.branding_colors_page_background"
-          ),
-        })
-      ),
+      branding_logo_url: yup.string(),
+      branding_colors_primary: yup.string(),
+      branding_colors_page_background: yup.string(),
       supportedServices: yup.array().of(yup.string().required()).required(),
       taxID: yup
         .string()
@@ -116,7 +97,6 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
       branding_colors_primary: "", // organizationInfo.details.branding.colors.primary,
       branding_logo_url: "", //organizationInfo.details.branding.logo_url,
       locale: organization.details.locale,
-      notifications: organization.details.notificationSettings,
       supportedServices: organization.supportedServices.map((service) =>
         service.toString()
       ),
@@ -152,6 +132,8 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
     labels.map((label) => t(`components.Form.OrganizationForm.${label[0]}`))
   );
 
+  // logger("OrganizationForm", errors);
+
   return (
     <form
       className={`flex  w-full flex-col items-center justify-start gap-5  bg-white p-5 md:justify-center`}
@@ -166,7 +148,7 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
             labelText={t(`components.Form.OrganizationForm.${label[0]}`)}
             label={label[0]}
             register={register}
-            error={errors[label[0]]}
+            // error={errors[label[0]]}
             labelMaxWidth={maxLength}
             key={label[0]}
           />
@@ -194,11 +176,14 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
               </option>
             ))}
           </select>
+          {errors.locale !== undefined ? (
+            <span className="text-red-500">{errors.locale.message}</span>
+          ) : null}
         </Container>
         <Container
           direction="row"
           justify="start"
-          align="start"
+          align="center"
           className="flex-wrap"
         >
           <Text
@@ -207,9 +192,9 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
               width: maxLength !== undefined ? `${maxLength}px` : "",
             }}
           >
-            {t(`Organization.Info.components.form.services`)}
+            {t(`components.Form.OrganizationForm.supportedServices`)}
           </Text>
-          <Container className="w-fit">
+          <Container className="w-fit" direction="col" align="start">
             {servicesQuery.data !== undefined
               ? servicesQuery.data.map((service, index) => (
                   <label key={index} className={`flex items-center gap-5`}>

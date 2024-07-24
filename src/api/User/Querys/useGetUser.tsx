@@ -2,7 +2,14 @@ import logger from "@/hooks/useLogger";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { getAuthorizedUserType } from "@/services/utils";
-import { AuthorizedUserProps, UserAddressProps } from "@/hooks/useUser";
+import {
+  AuthorizedUserProps,
+  OrgaNotificationSetting,
+  OrgaNotificationSettingsType,
+  UserAddressProps,
+  UserNotificationSetting,
+  UserNotificationSettingsType,
+} from "@/hooks/useUser";
 
 const useGetUser = (useUserIsLoggedInQuery: UseQueryResult<boolean, Error>) => {
   const fetchUser = async () =>
@@ -16,6 +23,40 @@ const useGetUser = (useUserIsLoggedInQuery: UseQueryResult<boolean, Error>) => {
             : userData.details.address
             ? [userData.details.address]
             : [];
+        const userNotificationSettings: UserNotificationSetting[] =
+          userData.details.notificationSettings !== undefined &&
+          userData.details.notificationSettings.user !== undefined
+            ? Object.keys(userData.details.notificationSettings.user).map(
+                (key: string) => {
+                  return {
+                    type: key as UserNotificationSettingsType,
+                    event:
+                      userData.details.notificationSettings.user[key].event,
+                    email:
+                      userData.details.notificationSettings.user[key].email,
+                  };
+                }
+              )
+            : [];
+
+        const orgaNotificationSettings: OrgaNotificationSetting[] =
+          userData.details.notificationSettings !== undefined &&
+          userData.details.notificationSettings.organization !== undefined
+            ? Object.keys(
+                userData.details.notificationSettings.organization
+              ).map((key: string) => {
+                return {
+                  type: key as OrgaNotificationSettingsType,
+                  event:
+                    userData.details.notificationSettings.organization[key]
+                      .event,
+                  email:
+                    userData.details.notificationSettings.organization[key]
+                      .email,
+                };
+              })
+            : [];
+
         const newUser: AuthorizedUserProps = {
           hashedID: userData.hashedID,
           name: userData.name,
@@ -23,6 +64,10 @@ const useGetUser = (useUserIsLoggedInQuery: UseQueryResult<boolean, Error>) => {
           details: {
             ...userData.details,
             addresses,
+            notificationSettings: {
+              user: userNotificationSettings,
+              organization: orgaNotificationSettings,
+            },
           },
           accessedWhen: new Date(userData.accessedWhen),
           createdWhen: new Date(userData.createdWhen),

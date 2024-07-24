@@ -9,6 +9,8 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import OrganizationInfo from "./Info/Info";
 import OrganizationAddress from "./components/Address";
 import useOrganization from "@/hooks/useOrganization";
+import ProfileNotifications from "@/components/Form/Notifications/Notifications";
+import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 
 interface OrganizationViewProps {}
 
@@ -16,6 +18,7 @@ const Organization: React.FC<OrganizationViewProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { organization } = useOrganization();
+  const { user } = useAuthorizedUser();
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
@@ -23,6 +26,10 @@ const Organization: React.FC<OrganizationViewProps> = (props) => {
       <Divider />
       <OrganizationInfo organization={organization} />
       <OrganizationAddress organization={organization} />
+      <ProfileNotifications
+        type="orga"
+        settings={organization.details.notificationSettings?.organization}
+      />
       <PermissionGate element="OrganizationInvitation">
         <Invitation />
       </PermissionGate>

@@ -30,7 +30,7 @@ const useRemoveRole = () => {
   return useMutation<void, Error, RemoveRoleProps>({
     mutationFn: removeRole,
     onSuccess: () => {
-      queryClient.invalidateQueries(["organizations", "users"]);
+      queryClient.invalidateQueries(["organization", "users"]);
     },
   });
 };

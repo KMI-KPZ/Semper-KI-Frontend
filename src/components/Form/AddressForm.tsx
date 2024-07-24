@@ -58,18 +58,18 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
   });
 
   const updateAddress = (data: NewUserAddressProps) => {
-    if (type === "user") updateUser.mutate({ changes: { address: [data] } });
-    else updateOrganization.mutate({ changes: { address: [data] } });
+    if (type === "user") updateUser.mutate({ changes: { address: data } });
+    else updateOrganization.mutate({ changes: { address: data } });
   };
 
   const createAddress = (data: NewUserAddressProps, id: string) => {
     if (type === "user")
       updateUser.mutate({
-        changes: { address: [{ ...data, id }] },
+        changes: { address: { ...data, id } },
       });
     else
       updateOrganization.mutate({
-        changes: { address: [{ ...data, id }] },
+        changes: { address: { ...data, id } },
       });
   };
 

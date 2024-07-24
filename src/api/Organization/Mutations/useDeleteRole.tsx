@@ -25,7 +25,7 @@ const useDeleteRole = () => {
   return useMutation<void, Error, string>({
     mutationFn: deleteRole,
     onSuccess: () => {
-      queryClient.invalidateQueries(["organizations", "roles"]);
+      queryClient.invalidateQueries(["organization", "roles"]);
     },
   });
 };

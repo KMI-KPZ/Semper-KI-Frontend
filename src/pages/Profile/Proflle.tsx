@@ -13,7 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import AddressForm from "@/components/Form/AddressForm";
 import AddressCard from "@/components/Address/AddressCard";
-import ProfileNotifications from "./components/Notifications";
+import ProfileNotifications from "../../components/Form/Notifications/Notifications";
 import ProfileStatistics from "./components/Statistics";
 import ProfileLocals from "./components/Locals";
 import ProfileGeneral from "./components/General";
@@ -54,7 +54,14 @@ const Profile: React.FC<Props> = (props) => {
         <ProfileAddress user={user} />
         <ProfileLocals user={user} />
         <ProfileStatistics user={user} />
-        <ProfileNotifications user={user} />
+        <ProfileNotifications
+          type="user"
+          settings={
+            user.usertype === UserType.USER
+              ? user.details.notificationSettings?.user
+              : user.details.notificationSettings?.organization
+          }
+        />
         <Divider />
         <Container width="full">
           <Button

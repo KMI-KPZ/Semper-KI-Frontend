@@ -19,7 +19,7 @@ const useGetOrganizationRoles = () => {
       });
 
   return useQuery<RoleProps[], Error>({
-    queryKey: ["organizations", "roles"],
+    queryKey: ["organization", "roles"],
     queryFn: getOrganizationRoles,
     staleTime: 1000 * 60 * 5, // 5 minutes
   });

@@ -30,7 +30,7 @@ const useAssignRole = () => {
   return useMutation<void, Error, AssignRoleProps>({
     mutationFn: assignRole,
     onSuccess: () => {
-      queryClient.invalidateQueries(["organizations", "users"]);
+      queryClient.invalidateQueries(["organization", "users"]);
     },
   });
 };

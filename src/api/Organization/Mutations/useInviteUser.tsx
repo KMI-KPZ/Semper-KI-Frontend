@@ -28,7 +28,7 @@ const useInviteUser = () => {
   return useMutation<void, Error, InvitationProps>({
     mutationFn: inviteUser,
     onSuccess: () => {
-      queryClient.invalidateQueries(["organizations", "users"]);
+      queryClient.invalidateQueries(["organization", "users"]);
     },
   });
 };

@@ -23,7 +23,7 @@ const useCreateInviteLink = () => {
   return useMutation<string, Error, string>({
     mutationFn: createInviteLink,
     onSuccess: () => {
-      queryClient.invalidateQueries(["organizations", "users"]);
+      queryClient.invalidateQueries(["organization", "users"]);
     },
   });
 };

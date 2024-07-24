@@ -48,7 +48,7 @@ const useGetOrganizationRolePermissions = (roleID?: string) => {
       });
 
   return useQuery<PermissionProps[], Error>({
-    queryKey: ["organizations", "roles", roleID, "permissions"],
+    queryKey: ["organization", "roles", roleID, "permissions"],
     queryFn: getOrganizationRolePermissions,
     staleTime: 300000, // 5 minutes
     enabled: roleID !== undefined && roleID !== "",

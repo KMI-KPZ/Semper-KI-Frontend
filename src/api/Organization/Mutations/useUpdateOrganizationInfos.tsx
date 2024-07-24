@@ -12,12 +12,14 @@ export interface UpdateOrgaProps {
 export interface UpdateOrgaChanges {
   displayName?: string;
   email?: string;
-  address?: UserAddressProps[] | NewUserAddressProps[];
+  address?: UserAddressProps | NewUserAddressProps;
   locale?: string;
   notifications?: {
-    newsletter?: {
-      event?: boolean;
-      email?: boolean;
+    organization?: {
+      [key: string]: {
+        event?: boolean;
+        email?: boolean;
+      };
     };
   };
   supportedServices?: number[];
@@ -55,7 +57,7 @@ const useUpdateOrganization = () => {
   return useMutation<void, Error, UpdateOrgaProps>({
     mutationFn: updateOrgaInfo,
     onSuccess: () => {
-      queryClient.invalidateQueries(["organizations", "info"]);
+      queryClient.invalidateQueries(["organization", "info"]);
     },
   });
 };

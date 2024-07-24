@@ -1,16 +1,18 @@
 import React, { useRef, Suspense, PropsWithChildren } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import {
-  OrbitControls,
-  Loader,
-  PerspectiveCamera,
-  OrbitControlsProps,
-} from "@react-three/drei";
-import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
+// import {
+//   OrbitControls,
+//   Loader,
+//   PerspectiveCamera,
+//   OrbitControlsProps,
+// } from "@react-three/drei";
 import * as THREE from "three";
 import { twMerge } from "tailwind-merge";
-import { StlViewer } from "react-stl-viewer";
 import { LoadingAnimation } from "@component-library/index";
+
+import * as OV from 'online-3d-viewer';
+import ModelViewer from "@/components/ModelViewer";
+import ViewerWithUrls from "@/pages/Test/Basic3DViewer";
 
 const Model: React.FC<{ fileURL: string }> = (props) => {
   const { fileURL } = props;
@@ -21,12 +23,6 @@ const Model: React.FC<{ fileURL: string }> = (props) => {
       modelRef.current.rotation.z += 0.01;
       // modelRef.current.rotation.y = -1;
     }
-  });
-  const loader = new STLLoader();
-  loader.load(fileURL, (geometry) => {
-    const material = new THREE.MeshStandardMaterial({ color: 0x9686d9 });
-    const mesh = new THREE.Mesh(geometry, material);
-    modelRef.current?.add(mesh);
   });
 
   return <group ref={modelRef} />;
@@ -41,28 +37,28 @@ const Loading = () => {
   );
 };
 
-const CameraControls = () => {
-  const cameraRef = useRef<THREE.PerspectiveCamera>(null);
-  const orbitRef = useRef(null);
-
-  return (
-    <>
-      <PerspectiveCamera
-        makeDefault
-        fov={75}
-        // position={[-0.5, 50, 38]}
-        position={[-0.5, -90, 38]}
-        ref={cameraRef}
-      />
-      <OrbitControls
-        ref={orbitRef}
-        // rotation={[0, 0, 0]} // Set the initial rotation
-        // position={[1, 5, 1]} // Set the initial position of the camera
-        // target={[0, 0, 0]} // Set the initial target or look-at point
-      />
-    </>
-  );
-};
+// const CameraControls = () => {
+//   const cameraRef = useRef<THREE.PerspectiveCamera>(null);
+//   const orbitRef = useRef(null);
+//
+//   return (
+//     <>
+//       <PerspectiveCamera
+//         makeDefault
+//         fov={75}
+//         // position={[-0.5, 50, 38]}
+//         position={[-0.5, -90, 38]}
+//         ref={cameraRef}
+//       />
+//       <OrbitControls
+//         ref={orbitRef}
+//         // rotation={[0, 0, 0]} // Set the initial rotation
+//         // position={[1, 5, 1]} // Set the initial position of the camera
+//         // target={[0, 0, 0]} // Set the initial target or look-at point
+//       />
+//     </>
+//   );
+// };
 
 const ModelPreview = (props: {
   file?: string;
@@ -77,15 +73,22 @@ const ModelPreview = (props: {
   );
 
   if (file === undefined) return <LoadingAnimation />;
+
+  console.log("FileURL für STLPreview: ", file);
+
   return (
-    <StlViewer
-      className={className}
-      url={file}
-      orbitControls={interactive}
-      shadows
-      showAxes
-      modelProps={{ color: "red", scale: 1.5 }}
-    />
+      <ViewerWithUrls  url={file} loadModel={true}/>
+    // <ModelViewer
+    //   // className={className}
+    //   url={file}
+    //   // orbitControls={interactive}
+    //   // shadows
+    //   //
+    //   //
+    //   // showAxes
+    //   // crossOrigin={""}
+    //   modelProps={{ color: "red", scale: 1.5 }}
+    //  props={{}}/>
   );
   // return (
   //   <div

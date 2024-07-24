@@ -56,7 +56,7 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
       direction="col"
     >
       <ModelPreview
-        interactive={false}
+        interactive={true}
         file={url}
         className="h-40 w-fit rounded-b-none border-0"
       />

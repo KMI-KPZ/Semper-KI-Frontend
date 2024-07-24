@@ -3,13 +3,15 @@ import { useTranslation } from "react-i18next";
 import ServiceDetailsCard from "../../components/Card";
 import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
 import TestImg from "@images/Test2.png";
-import { Button, Container, Text } from "@component-library/index";
+import {Button, Container, LoadingAnimation, Text} from "@component-library/index";
 import { useNavigate } from "react-router-dom";
 import useDeleteModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useDeleteModel";
 import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessStatusGate from "@/pages/Process/components/StatusGate";
+import ModelPreview from "@/pages/Test/STLViewer";
+import useGetModelDetails from "@/api/Service/AdditiveManufacturing/Model/Querys/useGetModelDetails";
 
 interface ProcessServiceModelCardProps {
   model: ModelProps;
@@ -24,6 +26,13 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
   const { project } = useProject();
   const navigate = useNavigate();
   const deleteModel = useDeleteModel();
+  // const modelDetailsQuery = useGetModelDetails(process.processID);
+
+  console.log(model);
+  console.log("ProcessID + ProjectID + ModelID: ", process.processID, project.projectID, model.id);
+  const fileUrl = "http://127.0.0.1:8000/public/files/download/file/" + project.projectID + "/" + process.processID + "/" + model.id;
+
+  console.log("FileURL: ", fileUrl);
 
   const handleOnButtonClickModel = () => {
     navigate("service/manufacturing/model");
@@ -36,15 +45,21 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
     });
   };
 
+
   return (
     <ServiceDetailsCard>
-      <img
-        src={TestImg}
-        className=""
-        alt={t(
-          "Process.Service.ServiceDetails.components.manufacturing.model.img"
-        )}
-      />
+      {fileUrl !== "" ? (
+          <ModelPreview className="h-[300px] w-[500px]" file={fileUrl} interactive={true}  />
+      ) : (
+          <LoadingAnimation />
+      )}
+      {/*<img*/}
+      {/*  src={TestImg}*/}
+      {/*  className=""*/}
+      {/*  alt={t(*/}
+      {/*    "Process.Service.ServiceDetails.components.manufacturing.model.img"*/}
+      {/*  )}*/}
+      {/*/>*/}
       <Container direction="col" width="full" className="" gap={3}>
         <Container direction="row" justify="between" width="full">
           <Text>

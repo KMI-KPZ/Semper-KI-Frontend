@@ -186,6 +186,14 @@
       "newsletter": "Newsletter",
       "processReceived": "Prozess erhalten",
       "responseFromClient": "Antwort vom Kunden"
+    },
+    "OrganizationPriorityType": {
+      "cost": "Kosten",
+      "time": "Zeit",
+      "quality": "Qualität",
+      "quantity": "Menge",
+      "resilience": "Widerstandsfähigkeit",
+      "sustainability": "Nachhaltigkeit"
     }
   },
   "api": {
@@ -304,6 +312,15 @@
           "reset": "Zurücksetzen",
           "submit": "Senden"
         }
+      },
+      "PrioritiesForm": {
+        "header": "Prioritäten",
+        "type": "Priorität",
+        "value": "Wichtigkeit",
+        "points": "Freie Punkte: {{freePoints}}",
+        "low": "Niedrig",
+        "medium": "Mittel",
+        "high": "Hoch"
       }
     },
     "Background": {},

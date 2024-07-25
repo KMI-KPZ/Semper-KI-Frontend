@@ -11,6 +11,7 @@ import OrganizationAddress from "./components/Address";
 import useOrganization from "@/hooks/useOrganization";
 import NotificationForm from "@/components/Form/Notifications/NotificationForm";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
+import PrioritiesForm from "@/components/Form/Priorities/PrioritiesForm";
 
 interface OrganizationViewProps {}
 
@@ -33,6 +34,9 @@ const Organization: React.FC<OrganizationViewProps> = (props) => {
           type="orga"
           settings={organization.details.notificationSettings?.organization}
         />
+      </Container>
+      <Container className="p-5 shadow-card" width="full">
+        <PrioritiesForm priorities={organization.details.priorities} />
       </Container>
       <PermissionGate element="OrganizationInvitation">
         <Invitation />

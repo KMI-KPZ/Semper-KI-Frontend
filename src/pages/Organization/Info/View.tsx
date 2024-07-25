@@ -1,6 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Text } from "@component-library/index";
+import {
+  Button,
+  Container,
+  Divider,
+  Heading,
+  Text,
+} from "@component-library/index";
 import { Organization } from "@/api/Organization/Querys/useGetOrganization";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
@@ -18,8 +24,50 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
 
   return (
     <Container width="full" direction="col" className="p-5">
+      <Heading variant="h2">{t("Organization.Info.header")}</Heading>
+      <Divider />
       <table className="w-full table-auto border-separate border-spacing-3 ">
         <tbody>
+          <tr>
+            <td>{t(`Organization.Info.name`)}</td>
+            <td>{organization.name}</td>
+          </tr>
+          <tr>
+            <td>{t(`Organization.Info.email`)}</td>
+            <td>{organization.details.email}</td>
+          </tr>
+          <tr>
+            <td>{t(`Organization.Info.taxID`)}</td>
+            <td>{organization.details.taxID}</td>
+          </tr>
+
+          <tr>
+            <td className="align-text-top">{t(`Organization.Info.id`)}</td>
+            <td className="break-all">{organization.hashedID}</td>
+          </tr>
+          <tr>
+            <td className="whitespace-nowrap align-text-top">
+              {t(`Organization.Info.services`)}
+            </td>
+            <td>
+              <Container direction="col" align="start" gap={3}>
+                {organization.supportedServices.length > 0 ? (
+                  organization.supportedServices.map((service, index) => (
+                    <Text key={index}>
+                      {"• "}
+                      {t(
+                        `enum.ServiceType.${
+                          ServiceType[service] as keyof typeof ServiceType
+                        }`
+                      )}
+                    </Text>
+                  ))
+                ) : (
+                  <Text>{t("Organization.Info.noService")}</Text>
+                )}
+              </Container>
+            </td>
+          </tr>
           <tr>
             <td>{t(`Organization.Info.accessed`)}</td>
             <td>{organization.accessedWhen.toLocaleDateString()}</td>
@@ -31,42 +79,6 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
           <tr>
             <td>{t(`Organization.Info.updated`)}</td>
             <td>{organization.updatedWhen.toLocaleDateString()}</td>
-          </tr>
-          <tr>
-            <td>{t(`Organization.Info.name`)}</td>
-            <td>{organization.name}</td>
-          </tr>
-          <tr>
-            <td className="align-text-top">{t(`Organization.Info.id`)}</td>
-            <td className="break-all">{organization.hashedID}</td>
-          </tr>
-          <tr>
-            <td>{t(`Organization.Info.email`)}</td>
-            <td>{organization.details.email}</td>
-          </tr>
-          <tr>
-            <td>{t(`Organization.Info.taxID`)}</td>
-            <td>{organization.details.taxID}</td>
-          </tr>
-          <tr>
-            <td className="whitespace-nowrap">
-              {t(`Organization.Info.services`)}
-            </td>
-            <td>
-              {organization.supportedServices.length > 0 ? (
-                organization.supportedServices.map((service, index) => (
-                  <Text key={index}>
-                    {t(
-                      `enum.ServiceType.${
-                        ServiceType[service] as keyof typeof ServiceType
-                      }`
-                    )}
-                  </Text>
-                ))
-              ) : (
-                <Text>{t("Organization.Info.noService")}</Text>
-              )}
-            </td>
           </tr>
         </tbody>
       </table>

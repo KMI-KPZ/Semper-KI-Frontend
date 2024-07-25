@@ -13,12 +13,12 @@ import useUser, {
 import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganizationInfos";
 import useOrganization from "@/hooks/useOrganization";
 
-interface ProcessNotificationProps {
+interface NotificationFormItemProps {
   notification: UserNotificationSetting | OrgaNotificationSetting;
   type: "user" | "orga";
 }
 
-const ProcessNotification = (props: ProcessNotificationProps) => {
+const NotificationFormItem = (props: NotificationFormItemProps) => {
   const { notification, type } = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
@@ -62,36 +62,28 @@ const ProcessNotification = (props: ProcessNotificationProps) => {
       <td>{t(`types.NotificationSettingsType.${notification.type}`)}</td>
       <td>
         <Container width="full">
-          {updateUser.isLoading && loadingID === "email" ? (
-            <LoadingAnimation variant="circel" />
-          ) : (
-            <input
-              type="checkbox"
-              id="email"
-              checked={notification.email}
-              className="h-6 w-6 rounded-lg"
-              onChange={handleOnChange}
-            />
-          )}
+          <input
+            type="checkbox"
+            id="email"
+            checked={notification.email}
+            className="h-6 w-6 rounded-lg"
+            onChange={handleOnChange}
+          />
         </Container>
       </td>
       <td>
         <Container width="full">
-          {updateUser.isLoading && loadingID === "event" ? (
-            <LoadingAnimation variant="circel" />
-          ) : (
-            <input
-              type="checkbox"
-              id="event"
-              checked={notification.event}
-              className="h-6 w-6 rounded-lg"
-              onChange={handleOnChange}
-            />
-          )}
+          <input
+            type="checkbox"
+            id="event"
+            checked={notification.event}
+            className="h-6 w-6 rounded-lg"
+            onChange={handleOnChange}
+          />
         </Container>
       </td>
     </tr>
   );
 };
 
-export default ProcessNotification;
+export default NotificationFormItem;

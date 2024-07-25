@@ -44,7 +44,7 @@ const useUpdateOrganization = () => {
   const updateOrgaInfo = async (props: UpdateOrgaProps) =>
     authorizedCustomAxios
       .patch(`${process.env.VITE_HTTP_API_URL}/public/organizations/update/`, {
-        props,
+        ...props,
       })
       .then((response) => {
         logger("useUpdateOrganization | updateOrga ✅ |", response);

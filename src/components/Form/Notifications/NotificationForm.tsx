@@ -14,9 +14,9 @@ import {
   UserProps,
   UserType,
 } from "@/hooks/useUser";
-import ProcessNotification from "./Notification";
+import NotificationFormItem from "./NotificationFormItem";
 
-type ProfileNotificationsProps =
+type NotificationFormProps =
   | {
       type: "user";
       settings:
@@ -29,7 +29,7 @@ type ProfileNotificationsProps =
       settings: OrgaNotificationSetting[] | undefined;
     };
 
-const ProfileNotifications: React.FC<ProfileNotificationsProps> = (props) => {
+const NotificationForm: React.FC<NotificationFormProps> = (props) => {
   const { type, settings } = props;
   const { t } = useTranslation();
 
@@ -57,7 +57,7 @@ const ProfileNotifications: React.FC<ProfileNotificationsProps> = (props) => {
             </thead>
             <tbody>
               {settings?.map((notification, index) => (
-                <ProcessNotification
+                <NotificationFormItem
                   key={index}
                   type={type}
                   notification={notification}
@@ -71,4 +71,4 @@ const ProfileNotifications: React.FC<ProfileNotificationsProps> = (props) => {
   );
 };
 
-export default ProfileNotifications;
+export default NotificationForm;

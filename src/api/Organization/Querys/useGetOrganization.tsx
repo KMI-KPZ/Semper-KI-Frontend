@@ -24,8 +24,20 @@ export interface OrganizationDetails {
   addresses?: UserAddressProps[];
   locale?: string;
   notificationSettings?: { organization?: OrgaNotificationSetting[] };
-  priorities?: {};
+  priorities?: OrganizationPriority[];
 }
+
+export interface OrganizationPriority {
+  type: OrganizationPriorityType;
+  value: number;
+}
+export type OrganizationPriorityType =
+  | "cost"
+  | "time"
+  | "quality"
+  | "quantity"
+  | "resilience"
+  | "sustainability";
 
 const useGetOrganization = () => {
   const queryClient = useQueryClient();
@@ -52,6 +64,17 @@ const useGetOrganization = () => {
                 };
               })
             : [];
+        const priorities: OrganizationPriority[] =
+          responseData.details.priorities !== undefined
+            ? Object.keys(responseData.details.priorities).map(
+                (key: string) => {
+                  return {
+                    type: key as OrganizationPriorityType,
+                    value: responseData.details.priorities[key].value,
+                  };
+                }
+              )
+            : [];
 
         const organization: Organization = {
           ...responseData,
@@ -61,6 +84,7 @@ const useGetOrganization = () => {
           details: {
             ...responseData.details,
             notificationSettings: { organization: orgaNotificationSettings },
+            priorities,
           },
           supportedServices: responseData.supportedServices.filter(
             (serviceType: ServiceType) => serviceType !== 0

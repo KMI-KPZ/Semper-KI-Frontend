@@ -726,7 +726,7 @@
   },
   "Organization": {
     "index": {
-      "header": "Organisationsübersicht"
+      "header": "Organisation"
     },
     "Roles": {
       "Roles": {
@@ -793,6 +793,7 @@
       }
     },
     "Info": {
+      "header": "Allgemeine Informationen",
       "accessed": "letzter Zugegriff am",
       "created": "Erstellt am",
       "updated": "Aktualisiert am",

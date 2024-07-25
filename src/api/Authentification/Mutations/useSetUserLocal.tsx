@@ -2,14 +2,16 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const useSetUserLocal = () => {
   const queryClient = useQueryClient();
+  const { i18n } = useTranslation();
 
-  const setUserLocal = async (local: string) =>
+  const setUserLocal = async (lngCode: string) =>
     authorizedCustomAxios
       .post(`${process.env.VITE_HTTP_API_URL}/public/auth/localeOfUser/set/`, {
-        local,
+        locale: lngCode,
       })
       .then((response) => {
         logger("useSetUserLocal | setUserLocal ✅ |", response);
@@ -22,6 +24,7 @@ const useSetUserLocal = () => {
   return useMutation<string, Error, string>({
     mutationFn: setUserLocal,
     onSuccess: (data, props, context) => {
+      i18n.changeLanguage(props);
       queryClient.invalidateQueries(["user"]);
     },
   });

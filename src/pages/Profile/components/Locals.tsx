@@ -18,6 +18,7 @@ import {
 } from "@/components/Menu/components/LanguageMenu";
 import logger from "@/hooks/useLogger";
 import useUpdateUser from "@/api/User/Mutations/useUpdateUser";
+import useSetUserLocal from "@/api/Authentification/Mutations/useSetUserLocal";
 
 interface ProfileLocalsProps {
   user: AuthorizedUserProps;
@@ -30,6 +31,8 @@ const ProfileLocals: React.FC<ProfileLocalsProps> = (props) => {
   const [lngCode, setLngCode] = useState<string | undefined>(
     user.details.locale
   );
+  const setUserLocal = useSetUserLocal();
+
   const updateUser = useUpdateUser();
 
   const handleOnChangeLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -38,15 +41,8 @@ const ProfileLocals: React.FC<ProfileLocalsProps> = (props) => {
   const handleOnClickButton = () => {
     setEdit(!edit);
     // logger(i18n.language, lngCode);
-    if (edit && i18n.language !== lngCode) {
-      updateUser.mutate(
-        { changes: { locale: lngCode } },
-        {
-          onSuccess: () => {
-            i18n.changeLanguage(lngCode);
-          },
-        }
-      );
+    if (edit && lngCode !== undefined) {
+      setUserLocal.mutate(lngCode);
     }
   };
 

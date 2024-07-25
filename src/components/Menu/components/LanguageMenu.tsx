@@ -1,3 +1,4 @@
+import useSetUserLocal from "@/api/Authentification/Mutations/useSetUserLocal";
 import { Button } from "@component-library/index";
 import { ClickAwayListener } from "@mui/material";
 import React, { useState } from "react";
@@ -28,6 +29,7 @@ const MenuLanguageMenu: React.FC<MenuLanguageMenuProps> = (props) => {
   const {} = props;
   const { t, i18n } = useTranslation();
   const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const setUserLocal = useSetUserLocal();
 
   const closeLanguageMenu = () => {
     setLangMenuOpen(false);
@@ -39,7 +41,12 @@ const MenuLanguageMenu: React.FC<MenuLanguageMenuProps> = (props) => {
 
   const changeLanguage = (code: string) => () => {
     closeLanguageMenu();
-    if (i18n.language !== code) i18n.changeLanguage(code);
+    if (i18n.language !== code)
+      setUserLocal.mutate(code, {
+        onSuccess(data, variables, context) {
+          i18n.changeLanguage(variables);
+        },
+      });
   };
 
   const getFlagButtonClassName = (): string => {

@@ -9,14 +9,16 @@ const UserLocalsOutlet: React.FC<PropsWithChildren<UserLocalsOutletProps>> = (
   props
 ) => {
   const { children } = props;
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { user } = useUser();
   const sendUserLocals = useSendUserInfos();
 
   useEffect(() => {
-    // if (user.usertype !== UserType.ANONYM)
-    sendUserLocals.mutate();
-  }, []);
+    if (user.usertype !== UserType.ANONYM && user.details.locale !== undefined)
+      i18n.changeLanguage(user.details.locale);
+
+    // sendUserLocals.mutate();
+  }, [user]);
 
   return children;
 };

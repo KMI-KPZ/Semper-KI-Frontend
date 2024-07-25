@@ -1,17 +1,14 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { Container, LoadingAnimation, Text } from "@component-library/index";
+import { Container } from "@component-library/index";
 import useUpdateUser from "@/api/User/Mutations/useUpdateUser";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
-import useGetUser from "@/api/User/Querys/useGetUser";
-import useUser, {
+import {
   OrgaNotificationSetting,
   UserNotificationSetting,
-  UserNotificationSettingsType,
   UserType,
 } from "@/hooks/useUser";
 import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganizationInfos";
-import useOrganization from "@/hooks/useOrganization";
 
 interface NotificationFormItemProps {
   notification: UserNotificationSetting | OrgaNotificationSetting;

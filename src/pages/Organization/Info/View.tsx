@@ -69,6 +69,15 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
             </td>
           </tr>
           <tr>
+            <td className="align-text-top">{t(`Organization.Info.img`)}</td>
+            <td>
+              <img
+                src={organization.details.branding?.logo_url}
+                className="h-40 w-fit object-contain"
+              />
+            </td>
+          </tr>
+          <tr>
             <td>{t(`Organization.Info.accessed`)}</td>
             <td>{organization.accessedWhen.toLocaleDateString()}</td>
           </tr>

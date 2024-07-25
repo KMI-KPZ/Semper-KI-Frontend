@@ -109,16 +109,16 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
       email: organization.details.email,
       taxID: organization.details.taxID,
       branding_colors_page_background:
-        organization.branding !== undefined
-          ? organization.branding.colors.page_background
+        organization.details.branding !== undefined
+          ? organization.details.branding.colors.page_background
           : "#FFFFFF",
       branding_colors_primary:
-        organization.branding !== undefined
-          ? organization.branding.colors.primary
+        organization.details.branding !== undefined
+          ? organization.details.branding.colors.primary
           : "#000000",
       branding_logo_url:
-        organization.branding !== undefined
-          ? organization.branding.logo_url
+        organization.details.branding !== undefined
+          ? organization.details.branding.logo_url
           : "",
       locale: organization.details.locale,
       supportedServices: organization.supportedServices.map((service) =>
@@ -154,9 +154,9 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
     ["displayName", "text"],
     ["email", "text"],
     ["taxID", "text"],
-    ["branding_logo_url", "text"],
     ["branding_colors_primary", "color"],
     ["branding_colors_page_background", "color"],
+    ["branding_logo_url", "text"],
   ];
 
   const maxLength = getMaxLabelWidth(
@@ -184,6 +184,12 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
             key={label[0]}
           />
         ))}
+        <Container width="full">
+          <img
+            src={watch("branding_logo_url")}
+            className="h-60 w-full object-contain"
+          />
+        </Container>
         <Container
           direction="row"
           justify="start"

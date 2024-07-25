@@ -16,7 +16,6 @@ export interface Organization {
   createdWhen: Date;
   updatedWhen: Date;
   supportedServices: ServiceType[];
-  branding?: OrganizationBranding;
 }
 
 export interface OrganizationBranding {
@@ -34,6 +33,7 @@ export interface OrganizationDetails {
   locale?: string;
   notificationSettings?: { organization?: OrgaNotificationSetting[] };
   priorities?: OrganizationPriority[];
+  branding?: OrganizationBranding;
 }
 
 export interface OrganizationPriority {

@@ -34,24 +34,35 @@ const ProfileAddress: React.FC<ProfileAddressProps> = (props) => {
     <Container width="full" direction="col">
       <Heading variant="h2">{t("Profile.address.header")}</Heading>
       <Divider />
-      <Container width="full" justify="start" align="start" wrap="wrap">
-        {user.details.addresses !== undefined &&
-        user.details.addresses.length > 0 ? (
-          user.details.addresses.map((address, index) => (
+      {user.details.addresses !== undefined &&
+      user.details.addresses.length > 0 ? (
+        <Container width="full" justify="start" align="start" wrap="wrap">
+          {user.details.addresses.map((address, index) => (
             <AddressCard key={index} address={address} />
-          ))
-        ) : (
+          ))}
+          <div
+            className="hover-card flex flex-col items-center justify-center gap-5 p-10"
+            tabIndex={0}
+            onClick={handleOnClickButtonAddAddress}
+          >
+            <AddIcon />
+            <Text>{t("Profile.button.addAddress")}</Text>
+          </div>
+        </Container>
+      ) : (
+        <Container width="full" direction="col">
           <Text>{t("Profile.address.noAddress")}</Text>
-        )}
-        <div
-          className="hover-card flex flex-col items-center justify-center gap-5 p-10"
-          tabIndex={0}
-          onClick={handleOnClickButtonAddAddress}
-        >
-          <AddIcon />
-          <Text>{t("Profile.button.addAddress")}</Text>
-        </div>
-      </Container>
+          <div
+            className="hover-card flex w-full flex-col items-center justify-center gap-5 p-10"
+            tabIndex={0}
+            onClick={handleOnClickButtonAddAddress}
+          >
+            <AddIcon />
+            <Text>{t("Profile.button.addAddress")}</Text>
+          </div>
+        </Container>
+      )}
+
       <Modal
         open={newAddress}
         closeModal={closeModalAddress}

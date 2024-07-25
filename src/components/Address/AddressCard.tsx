@@ -45,7 +45,7 @@ const AddressCard: React.FC<PropsWithChildren<AddressCardProps>> = (props) => {
 
   const deleteAddress = (addressID: string) => {
     if (type === "user")
-      updateUser.mutate({ deletions: { address: [addressID] } });
+      updateUser.mutate({ deletions: { address: addressID } });
     else updateOrganization.mutate({ deletions: { address: addressID } });
   };
 

@@ -41,7 +41,7 @@ export interface NewUserAddressProps {
 }
 
 export interface UpdateUserDeletions {
-  address?: string[];
+  address?: string;
 }
 
 const useUpdateUser = () => {

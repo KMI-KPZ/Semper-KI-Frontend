@@ -351,7 +351,7 @@
     },
     "Header": {
       "Header": {
-        "title": "SEMPER AI",
+        "title": "SEMPER KI",
         "button": {
           "close": "Close menu",
           "open": "Open menu"
@@ -520,7 +520,7 @@
         "heading": "Benefits for organizations",
         "text": "Our goal is to make 3D printing more accessible. ",
         "subHeading": "You determine the parameters",
-        "subHeading2": "The Semper AI determines the best possible matching.",
+        "subHeading2": "The Semper KI determines the best possible matching.",
         "fact1": "Self-created cost function",
         "fact2": "AI-supported infrastructure for all steps of the ordering process",
         "fact3": "Automated testing services",
@@ -532,7 +532,7 @@
   "App": {
     "components": {
       "LoadingSuspense": {
-        "title": "Semper AI",
+        "title": "Semper KI",
         "loading": "Load..."
       }
     },
@@ -576,7 +576,7 @@
   "Home": {
     "Anonym": {
       "Anonym": {
-        "title": "SEMPER AI",
+        "title": "SEMPER KI",
         "subTitle": "WE MAKE 3D PRINTING SMART",
         "alt": {
           "subtitle": "We make 3D printing smart",
@@ -629,7 +629,7 @@
         }
       },
       "Header": {
-        "title": "Semper AI - Simply 3D print.",
+        "title": "Semper KI - Simply 3D print.",
         "claim1": "Commission your idea",
         "claim2": "From idea to model",
         "claim3": "From model to prototype",

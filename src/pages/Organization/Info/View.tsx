@@ -50,22 +50,22 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
               {t(`Organization.Info.services`)}
             </td>
             <td>
-              <Container direction="col" align="start" gap={3}>
+              <ul>
                 {organization.supportedServices.length > 0 ? (
                   organization.supportedServices.map((service, index) => (
-                    <Text key={index}>
+                    <li key={index}>
                       {"• "}
                       {t(
                         `enum.ServiceType.${
                           ServiceType[service] as keyof typeof ServiceType
                         }`
                       )}
-                    </Text>
+                    </li>
                   ))
                 ) : (
-                  <Text>{t("Organization.Info.noService")}</Text>
+                  <li>{t("Organization.Info.noService")}</li>
                 )}
-              </Container>
+              </ul>
             </td>
           </tr>
           <tr>

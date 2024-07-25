@@ -27,9 +27,9 @@ interface OrganizationFormValues {
   email: string;
   locale: string;
   supportedServices: string[];
-  branding_logo_url?: string;
-  branding_colors_primary?: string;
-  branding_colors_page_background?: string;
+  branding_logo_url: string;
+  branding_colors_primary: string;
+  branding_colors_page_background: string;
   taxID: string;
 }
 
@@ -67,9 +67,25 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
           email: yup.boolean(),
         })
       ),
-      branding_logo_url: yup.string(),
-      branding_colors_primary: yup.string(),
-      branding_colors_page_background: yup.string(),
+      branding_logo_url: yup.string().required(
+        t("yup.requiredName", {
+          name: t("components.Form.OrganizationForm.branding_logo_url"),
+        })
+      ),
+
+      branding_colors_primary: yup.string().required(
+        t("yup.requiredName", {
+          name: t("components.Form.OrganizationForm.branding_colors_primary"),
+        })
+      ),
+
+      branding_colors_page_background: yup.string().required(
+        t("yup.requiredName", {
+          name: t(
+            "components.Form.OrganizationForm.branding_colors_page_background"
+          ),
+        })
+      ),
       supportedServices: yup.array().of(yup.string().required()).required(),
       taxID: yup
         .string()
@@ -92,10 +108,18 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
       displayName: organization.name,
       email: organization.details.email,
       taxID: organization.details.taxID,
-      branding_colors_page_background: "",
-      // organizationInfo.details.branding.colors.page_background,
-      branding_colors_primary: "", // organizationInfo.details.branding.colors.primary,
-      branding_logo_url: "", //organizationInfo.details.branding.logo_url,
+      branding_colors_page_background:
+        organization.branding !== undefined
+          ? organization.branding.colors.page_background
+          : "#FFFFFF",
+      branding_colors_primary:
+        organization.branding !== undefined
+          ? organization.branding.colors.primary
+          : "#000000",
+      branding_logo_url:
+        organization.branding !== undefined
+          ? organization.branding.logo_url
+          : "",
       locale: organization.details.locale,
       supportedServices: organization.supportedServices.map((service) =>
         service.toString()
@@ -112,6 +136,13 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
     updateOrganizationInfo.mutate({
       changes: {
         ...data,
+        branding: {
+          colors: {
+            page_background: data.branding_colors_page_background,
+            primary: data.branding_colors_primary,
+          },
+          logo_url: data.branding_logo_url,
+        },
         supportedServices: data.supportedServices.map((service) =>
           parseInt(service)
         ),

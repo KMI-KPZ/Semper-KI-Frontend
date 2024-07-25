@@ -16,6 +16,15 @@ export interface Organization {
   createdWhen: Date;
   updatedWhen: Date;
   supportedServices: ServiceType[];
+  branding?: OrganizationBranding;
+}
+
+export interface OrganizationBranding {
+  logo_url: string;
+  colors: {
+    primary: string;
+    page_background: string;
+  };
 }
 
 export interface OrganizationDetails {

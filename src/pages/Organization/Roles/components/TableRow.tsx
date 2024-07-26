@@ -68,13 +68,17 @@ const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
         <div className="flex w-full flex-row items-center justify-center gap-5">
           <PermissionGate element="OrganizationButtonEditRole">
             <Button
+              size="sm"
               title={t(`Organization.components.table.button.edit`)}
               onClick={handleOnClickButtonEdit}
               children={<EditIcon fontSize="small" />}
+              variant="text"
             />
           </PermissionGate>
           <PermissionGate element="OrganizationButtonDeleteRole">
             <Button
+              size="sm"
+              variant="text"
               onClick={handleOnClickButtonDelete}
               children={<DeleteForeverIcon fontSize="small" />}
               title={t("Organization.components.table.button.delete")}

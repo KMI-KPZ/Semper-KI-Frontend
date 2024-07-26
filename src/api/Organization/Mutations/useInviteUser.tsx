@@ -13,9 +13,7 @@ const useInviteUser = () => {
     authorizedCustomAxios
       .post(
         `${process.env.VITE_HTTP_API_URL}/public/organizations/users/add/`,
-        {
-          data: { content: props },
-        }
+        props
       )
       .then((response) => {
         logger("useInviteUser | inviteUser ✅ |", response);
@@ -29,6 +27,7 @@ const useInviteUser = () => {
     mutationFn: inviteUser,
     onSuccess: () => {
       queryClient.invalidateQueries(["organization", "users"]);
+      queryClient.invalidateQueries(["organization", "invites"]);
     },
   });
 };

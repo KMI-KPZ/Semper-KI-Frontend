@@ -9,7 +9,7 @@ import { Heading, Text } from "@component-library/index";
 import TextInput from "@component-library/Form/Inputs/TextInput";
 import { Container } from "@component-library/index";
 import useGeneralInput from "@component-library/Form/hooks/useGeneralInput";
-import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganizationInfos";
+import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganization";
 import useGetServices, {
   ServiceType,
 } from "@/api/Service/Querys/useGetServices";

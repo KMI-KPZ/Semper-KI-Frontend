@@ -47,9 +47,10 @@ const useUpdateOrganization = () => {
   const queryClient = useQueryClient();
   const updateOrgaInfo = async (props: UpdateOrgaProps) =>
     authorizedCustomAxios
-      .patch(`${process.env.VITE_HTTP_API_URL}/public/organizations/update/`, {
-        ...props,
-      })
+      .patch(
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/update/`,
+        props
+      )
       .then((response) => {
         logger("useUpdateOrganization | updateOrga ✅ |", response);
         return response.data;

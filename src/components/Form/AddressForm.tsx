@@ -16,7 +16,7 @@ import {
 import useUpdateUser, {
   NewUserAddressProps,
 } from "@/api/User/Mutations/useUpdateUser";
-import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganizationInfos";
+import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganization";
 
 interface AddressFormProps {
   closeModal?(): void;

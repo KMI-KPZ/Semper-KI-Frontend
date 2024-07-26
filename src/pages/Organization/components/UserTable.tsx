@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { Button } from "@component-library/index";
+import { Button, Divider } from "@component-library/index";
 import useOrganization from "../../../hooks/useOrganization";
 import { LoadingSuspense } from "@component-library/index";
 import CheckIcon from "@mui/icons-material/Check";
@@ -29,10 +29,11 @@ const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
   const rolesQuery = useGetOrganizationRoles();
   const userQuery = useGetOrganizationUsers();
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5 p-5 shadow-card ">
+    <div className="card flex w-full flex-col items-center justify-center gap-5 p-5 ">
       <Heading variant="h2">
         {t("Organization.components.table.header")}
       </Heading>
+      <Divider />
       <LoadingSuspense
         query={userQuery}
         errorText={t("Organization.components.table.error.empty")}
@@ -175,9 +176,11 @@ const OrganizationtableRow: React.FC<{
         )}
       </td>
       <td>
-        <div className="flex h-full flex-row items-center justify-center gap-3 p-3">
+        <div className="flex h-full flex-row items-center justify-center gap-5 p-3">
           <PermissionGate element="OrganizationButtonEditUser">
             <Button
+              size="sm"
+              variant="text"
               title={t(
                 `Organization.components.table.button.${
                   edit === true ? "safe" : "edit"
@@ -195,6 +198,8 @@ const OrganizationtableRow: React.FC<{
           </PermissionGate>
           <PermissionGate element="OrganizationButtonDeleteUser">
             <Button
+              variant="text"
+              size="sm"
               onClick={handleOnClickDelete}
               children={<DeleteForeverIcon fontSize="small" />}
               title={t("Organization.Roles.components.Table.button.delete")}

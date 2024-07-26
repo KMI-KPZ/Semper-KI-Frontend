@@ -31,10 +31,10 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
             <table className="w-full table-auto">
               <thead>
                 <tr>
-                  <th rowSpan={2} className="p-2" align="center">
+                  <th rowSpan={2} className="p-2 align-text-top" align="center">
                     {t("Organization.Roles.components.Table.name")}
                   </th>
-                  <th rowSpan={2} className="p-2" align="center">
+                  <th rowSpan={2} className="p-2 align-text-top" align="center">
                     {t("Organization.Roles.components.Table.description")}
                   </th>
                   {getPermissinContextTranslations(permissionsQuery.data).map(
@@ -51,7 +51,10 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
                       </th>
                     )
                   )}
-                  <th rowSpan={2} className="border-l-2 p-2 text-center">
+                  <th
+                    rowSpan={2}
+                    className="border-l-2 p-2 text-center align-text-top"
+                  >
                     {t("Organization.Roles.components.Table.actions")}
                   </th>
                 </tr>

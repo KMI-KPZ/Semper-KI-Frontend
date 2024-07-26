@@ -12,13 +12,8 @@ const useGetOrganizationRolePermissions = (roleID?: string) => {
   const queryClient = useQueryClient();
   const getOrganizationRolePermissions = async () =>
     authorizedCustomAxios
-      .post(
-        `${process.env.VITE_HTTP_API_URL}/public/organizations/permissions/role/get/`,
-        {
-          data: {
-            content: { roleID: roleID },
-          },
-        }
+      .get(
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/permissions/role/get/${roleID}/`
       )
       .then((response) => {
         const responseData = response.data;

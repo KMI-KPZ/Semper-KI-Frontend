@@ -8,7 +8,7 @@ import {
   UserNotificationSetting,
   UserType,
 } from "@/hooks/useUser";
-import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganizationInfos";
+import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganization";
 
 interface NotificationFormItemProps {
   notification: UserNotificationSetting | OrgaNotificationSetting;

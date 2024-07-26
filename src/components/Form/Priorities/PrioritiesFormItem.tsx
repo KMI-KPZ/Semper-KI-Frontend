@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Container, Text } from "@component-library/index";
 import { OrganizationPriority } from "@/api/Organization/Querys/useGetOrganization";
-import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganizationInfos";
+import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganization";
 import logger from "@/hooks/useLogger";
 
 interface PrioritiesFormItemProps {

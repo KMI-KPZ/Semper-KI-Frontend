@@ -11,7 +11,7 @@ import React, { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 import AddressForm from "../Form/AddressForm";
 import useUpdateUser from "@/api/User/Mutations/useUpdateUser";
-import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganizationInfos";
+import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganization";
 
 interface AddressCardProps {
   address: UserAddressProps;

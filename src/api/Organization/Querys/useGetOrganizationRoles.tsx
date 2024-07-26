@@ -10,9 +10,7 @@ const useGetOrganizationRoles = () => {
       .get(`${process.env.VITE_HTTP_API_URL}/public/organizations/roles/get/`)
       .then((response) => {
         const responseData = response.data;
-        const data: RoleProps[] = {
-          ...responseData,
-        };
+        const data: RoleProps[] = responseData;
 
         logger("useGetOrganizationRoles | getOrganizationRoles ✅ |", response);
         return data;

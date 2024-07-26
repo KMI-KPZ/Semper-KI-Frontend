@@ -12,6 +12,8 @@ import useOrganization from "@/hooks/useOrganization";
 import NotificationForm from "@/components/Form/Notifications/NotificationForm";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import PrioritiesForm from "@/components/Form/Priorities/PrioritiesForm";
+import useGetOrganizationRoles from "@/api/Organization/Querys/useGetOrganizationRoles";
+import useGetOrganizationInvites from "@/api/Organization/Querys/useGetOrganizationInvites";
 
 interface OrganizationViewProps {}
 
@@ -20,6 +22,8 @@ const Organization: React.FC<OrganizationViewProps> = (props) => {
   const { t } = useTranslation();
   const { organization } = useOrganization();
   const { user } = useAuthorizedUser();
+  const rolesQuery = useGetOrganizationRoles();
+  const invitesQuery = useGetOrganizationInvites();
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
@@ -29,17 +33,21 @@ const Organization: React.FC<OrganizationViewProps> = (props) => {
 
       <OrganizationInfo organization={organization} />
       <OrganizationAddress organization={organization} />
-      <Container className="p-5 shadow-card" width="full">
+      <Container className="card p-5" width="full">
         <NotificationForm
           type="orga"
           settings={organization.details.notificationSettings?.organization}
         />
       </Container>
-      <Container className="p-5 shadow-card" width="full">
+      <Container className="card p-5" width="full">
         <PrioritiesForm priorities={organization.details.priorities} />
       </Container>
       <PermissionGate element="OrganizationInvitation">
-        <Invitation />
+        {rolesQuery.isLoading || invitesQuery.isLoading ? (
+          <LoadingAnimation variant="circel" />
+        ) : (
+          <Invitation roles={rolesQuery.data} invites={invitesQuery.data} />
+        )}
       </PermissionGate>
       <PermissionGate element="OrganizationRoles">
         <OrganizationRoles />

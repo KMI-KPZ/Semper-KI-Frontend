@@ -102,8 +102,9 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5 p-5 shadow-card">
+    <div className="card flex w-full flex-col items-center justify-center gap-5 p-5">
       <Heading variant="h2">{t("Organization.Roles.Roles.header")}</Heading>
+      <Divider />
       <LoadingSuspense query={rolesQuery}>
         {rolesQuery.data !== undefined && rolesQuery.data.length > 0 ? (
           <>

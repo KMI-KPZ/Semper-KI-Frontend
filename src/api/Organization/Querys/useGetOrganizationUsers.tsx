@@ -17,10 +17,7 @@ const useGetOrganizationUsers = () => {
       .get(`${process.env.VITE_HTTP_API_URL}/public/organizations/users/get/`)
       .then((response) => {
         const responseData = response.data;
-        const users: OrganizationsUser[] = {
-          ...responseData,
-        };
-
+        const users: OrganizationsUser[] = responseData;
         logger("useGetOrganizationUsers | getOrganizationUsers ✅ |", response);
         return users;
       });

@@ -69,14 +69,39 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
             </td>
           </tr>
           <tr>
-            <td className="align-text-top">{t(`Organization.Info.img`)}</td>
+            <td>{t(`Organization.Info.img`)}</td>
             <td>
               <img
                 src={organization.details.branding?.logo_url}
-                className="h-40 w-fit object-contain"
+                className="h-40 w-fit rounded-lg border-2 object-contain p-2 "
               />
             </td>
           </tr>
+          <tr>
+            <td>{t(`Organization.Info.primary-color`)}</td>
+            <td>
+              <div
+                className={`h-10 w-40 rounded-xl border-2 `}
+                style={{
+                  backgroundColor:
+                    organization.details.branding?.colors.primary,
+                }}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>{t(`Organization.Info.background-color`)}</td>
+            <td>
+              <div
+                className={`h-10 w-40 rounded-xl border-2`}
+                style={{
+                  backgroundColor:
+                    organization.details.branding?.colors.page_background,
+                }}
+              />
+            </td>
+          </tr>
+
           <tr>
             <td>{t(`Organization.Info.accessed`)}</td>
             <td>{organization.accessedWhen.toLocaleDateString()}</td>

@@ -29,7 +29,7 @@ const OrganizationRolesItem: React.FC<OrganizationRolesItemProps> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5 p-5 shadow-card md:flex-row">
+    <div className="card flex w-full flex-col items-center justify-center gap-5 p-5 md:flex-row">
       <div className="flex w-full flex-row items-center justify-between gap-5 ">
         <Text variant="body">
           {t("Organization.Roles.components.Item.name")}

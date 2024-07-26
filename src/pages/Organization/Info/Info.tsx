@@ -34,7 +34,7 @@ const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
   };
 
   return (
-    <Container className={`shadow-card`} width="full">
+    <Container className={`card p-0`} width="full">
       {edit ? (
         <OrganizationForm organization={organization} closeEdit={closeEdit} />
       ) : (

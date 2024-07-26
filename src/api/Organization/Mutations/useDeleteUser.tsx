@@ -7,12 +7,7 @@ const useDeleteUser = () => {
   const deleteUser = async (email: string) =>
     authorizedCustomAxios
       .post(
-        `${process.env.VITE_HTTP_API_URL}/public/organizations/users/delete/`,
-        {
-          data: {
-            content: { email },
-          },
-        }
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/users/delete/${email}/`
       )
       .then((response) => {
         logger("useDeleteUser | deleteUser ✅ |", response);

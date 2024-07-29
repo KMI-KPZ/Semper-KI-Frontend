@@ -4,7 +4,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { Button } from "@component-library/index";
+import { Button, LoadingAnimation } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import { getGroupedPermissions, sortPermissions } from "../Roles";
 import useOrganization from "../../../../hooks/useOrganization";
@@ -52,11 +52,14 @@ const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
                 index === 0 || index === 3 || index === 8 ? "border-l-2" : ""
               }`}
             >
-              {rolePermissionsQuery.data.find((permission) => {
-                return (
-                  permission.permission_name === _permission.permission_name
-                );
-              }) !== undefined ? (
+              {rolePermissionsQuery.isRefetching ||
+              rolePermissionsQuery.isFetching ? (
+                <LoadingAnimation variant="circel" />
+              ) : rolePermissionsQuery.data.find((permission) => {
+                  return (
+                    permission.permission_name === _permission.permission_name
+                  );
+                }) !== undefined ? (
                 <CheckIcon />
               ) : (
                 <CloseIcon />

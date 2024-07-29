@@ -39,8 +39,8 @@ export const LoadingAnimation: React.FC<LoadingAnimationProps> = (props) => {
     );
   if (variant === "circel")
     return (
-      <div className="animate-spin">
-        <LoopIcon className="scale-x-[-1]" />
+      <div className="h-fit w-fit animate-spin overflow-hidden">
+        <LoopIcon className="scale-x-[-1]   " />
       </div>
     );
 

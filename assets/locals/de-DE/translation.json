@@ -869,8 +869,8 @@
           "invite": "Einladen",
           "send": "Gesendet!",
           "link": "Einladungslink erstellen",
-          "copy": "Kopieren",
-          "delete": "Löschen"
+          "delete": "Löschen",
+          "copy": "Kopieren"
         }
       }
     }

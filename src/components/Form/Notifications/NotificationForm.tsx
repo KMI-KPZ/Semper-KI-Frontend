@@ -51,7 +51,9 @@ const NotificationForm: React.FC<NotificationFormProps> = (props) => {
                 <th className="text-start">
                   {t("Profile.notifications.header")}
                 </th>
-                <th>{t("Profile.notifications.email")}</th>
+                <th className="whitespace-nowrap">
+                  {t("Profile.notifications.email")}
+                </th>
                 <th>{t("Profile.notifications.event")}</th>
               </tr>
             </thead>

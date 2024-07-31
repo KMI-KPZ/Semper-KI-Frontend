@@ -108,7 +108,7 @@ const Invitation: React.FC<InvitationProps> = (props) => {
       </Heading>
       <Divider />
       <form
-        className="flex w-full flex-col flex-wrap items-center justify-center gap-5 md:flex-row"
+        className="flex w-full flex-col flex-wrap items-center justify-center gap-5 rounded-xl border-2 p-3 md:flex-row"
         onSubmit={handleSubmit(onSubmitInvite)}
       >
         <input
@@ -162,7 +162,7 @@ const Invitation: React.FC<InvitationProps> = (props) => {
         <Container direction="col" width="full">
           {invites.map((invite, index) => (
             <div
-              className="relative flex w-full flex-col items-center justify-center gap-5  md:flex-row"
+              className="relative flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2  p-3 md:flex-row md:border-0 md:p-0 "
               key={index}
             >
               <span className="">{invite.invitee.email}</span>
@@ -173,20 +173,22 @@ const Invitation: React.FC<InvitationProps> = (props) => {
                 value={invite.invitation_url}
                 className="w-full flex-grow select-all rounded-xl border-2 px-5 py-2"
               />
-              <Button
-                size="sm"
-                variant="text"
-                children={<ContentPasteIcon />}
-                onClick={() => handleOnClickButtonCopy(invite.invitation_url)}
-                title={t("Organization.components.invitation.button.copy")}
-              />
-              <Button
-                size="sm"
-                variant="text"
-                children={<DeleteForeverIcon />}
-                onClick={() => handleOnClickButtonDelete(invite.id)}
-                title={t("Organization.components.invitation.button.delete")}
-              />
+              <Container direction="row" width="fit">
+                <Button
+                  size="sm"
+                  variant="text"
+                  children={<ContentPasteIcon />}
+                  onClick={() => handleOnClickButtonCopy(invite.invitation_url)}
+                  title={t("Organization.components.invitation.button.copy")}
+                />
+                <Button
+                  size="sm"
+                  variant="text"
+                  children={<DeleteForeverIcon />}
+                  onClick={() => handleOnClickButtonDelete(invite.id)}
+                  title={t("Organization.components.invitation.button.delete")}
+                />
+              </Container>
             </div>
           ))}
         </Container>

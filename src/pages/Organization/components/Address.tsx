@@ -41,7 +41,7 @@ const OrganizationAddress: React.FC<OrganizationAddressProps> = (props) => {
             <AddressCard key={index} address={address} type="organization" />
           ))}
           <div
-            className="hover-card flex flex-col items-center justify-center gap-5 p-10"
+            className="hover-card flex w-full flex-col items-center justify-center gap-5 p-10 md:w-fit"
             tabIndex={0}
             onClick={handleOnClickButtonAddAddress}
           >

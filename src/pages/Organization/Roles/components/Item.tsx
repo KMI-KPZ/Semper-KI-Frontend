@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Text } from "@component-library/index";
+import { Container, Text } from "@component-library/index";
 import { Button, Divider, LoadingSuspense } from "@component-library/index";
 import { PermissionGroupProps, getGroupedPermissions } from "../Roles";
 import EditIcon from "@mui/icons-material/Edit";
@@ -18,7 +18,7 @@ interface OrganizationRolesItemProps {
 const OrganizationRolesItem: React.FC<OrganizationRolesItemProps> = (props) => {
   const { role, editRole } = props;
   const { t } = useTranslation();
-  const rolePermissionsQuery = useGetOrganizationRolePermissions();
+  const rolePermissionsQuery = useGetOrganizationRolePermissions(role.id);
   const deleteRole = useDeleteRole();
   const handleOnClickButtonEdit = () => {
     editRole(role);
@@ -46,31 +46,42 @@ const OrganizationRolesItem: React.FC<OrganizationRolesItemProps> = (props) => {
       <LoadingSuspense query={rolePermissionsQuery}>
         {rolePermissionsQuery.data !== undefined &&
         rolePermissionsQuery.data.length > 0 ? (
-          <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row ">
+          <table className="w-full table-auto border-collapse">
             {getGroupedPermissions(rolePermissionsQuery.data).map(
               (permission: PermissionGroupProps, index) => (
-                <div
-                  className="flex w-full flex-row justify-between gap-5 "
-                  key={index}
-                >
-                  <Text variant="body">{permission.context}:</Text>
-                  <Text variant="body" className="whitespace-nowrap">
-                    {permission.permissionTypes.join(", ")}
-                  </Text>
-                </div>
+                <tr key={index} className=" [&:not(:last-child)]:border-b-2 ">
+                  <td className="p-2 align-text-top">
+                    <Text variant="body">
+                      {t(`types.permissionContext.${permission.context}`)}:
+                    </Text>
+                  </td>
+                  <td>
+                    <ul className="list-disc p-2">
+                      {permission.permissionTypes.map(
+                        (permissionType, _index, allPermissionTypes) => (
+                          <li key={_index}>
+                            {t(`types.permissionType.${permissionType}`)}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </td>
+                </tr>
               )
             )}
-          </div>
+          </table>
         ) : (
           <Text variant="body">{t("Organization.Roles.Roles.empty")}</Text>
         )}
       </LoadingSuspense>
       <Button
+        size="sm"
         title={t(`Organization.components.table.button.edit`)}
         onClick={handleOnClickButtonEdit}
         startIcon={<EditIcon fontSize="small" />}
       />
       <Button
+        size="sm"
         onClick={handleOnClickButtonDelete}
         startIcon={<DeleteForeverIcon fontSize="small" />}
         title={t("Organization.components.table.button.delete")}

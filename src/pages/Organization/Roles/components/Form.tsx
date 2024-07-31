@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
-import { Button } from "@component-library/index";
+import { Button, Container } from "@component-library/index";
 import logger from "@/hooks/useLogger";
 import { Heading, Text } from "@component-library/index";
 import { sortPermissions } from "../Roles";
@@ -82,6 +82,7 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
   });
 
   const onSubmit = (data: FormData) => {
+    logger("OrganizationRolesForm | onSubmit | data", data);
     if (role === undefined) {
       createRole.mutate(
         { name: data.name, description: data.description },
@@ -112,6 +113,26 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
         }
       );
     }
+  };
+
+  const groupPermissions = (
+    permissions: PermissionProps[]
+  ): PermissionProps[][] => {
+    const permissionsGrouped: PermissionProps[][] = [];
+    permissions.forEach((permission) => {
+      if (
+        permissionsGrouped.find(
+          (group) => group[0].context === permission.context
+        ) === undefined
+      ) {
+        permissionsGrouped.push([permission]);
+      } else {
+        permissionsGrouped
+          .find((group) => group[0].context === permission.context)
+          ?.push(permission);
+      }
+    });
+    return permissionsGrouped;
   };
 
   return (
@@ -164,31 +185,64 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
             <Heading variant="h2">
               {t("Organization.Roles.components.Form.permissions")}
             </Heading>
-            <div className="flex w-full flex-row flex-wrap gap-5">
-              {allPermissions
-                .sort((p1, p2) => sortPermissions(p1, p2))
-                .map((permission, index) => (
-                  <label
-                    key={index}
-                    className="flex flex-col items-center justify-center gap-2"
+            <Container className="w-full gap-0">
+              {groupPermissions(allPermissions)
+                // .sort((p1, p2) => sortPermissions(p1, p2))
+
+                .map((permissionArray, _index, allPermissions) => (
+                  <Container
+                    direction="col"
+                    className={`${
+                      _index < allPermissions.length - 1 ? "md:border-r-2" : ""
+                    } `}
                   >
-                    <Text variant="body">
-                      {t(`types.permissionName.${permission.permission_name}`)}
+                    <Text>
+                      {t(
+                        `types.permissionContext.${permissionArray[0].context}`
+                      )}
                     </Text>
-                    <input
-                      type="hidden"
-                      {...register(`permissions.${index}.name`)}
-                      value={permission.permission_name}
-                      className="w-full bg-slate-100 px-5 py-2 "
-                    />
-                    <input
-                      type="checkbox"
-                      {...register(`permissions.${index}.checked`)}
-                      className="h-8 w-8  bg-slate-100 px-5 py-2"
-                    />
-                  </label>
+                    <Container
+                      direction="row"
+                      className="flex-wrap border-t-2 p-5"
+                    >
+                      {permissionArray.map((permission, index) => (
+                        <label
+                          key={index}
+                          className="flex flex-col items-center justify-center gap-2"
+                        >
+                          <Text variant="body">
+                            {t(
+                              `types.permissionType.${permission.permissionType}`
+                            )}
+                          </Text>
+                          <input
+                            type="checkbox"
+                            {...register(
+                              `permissions.${
+                                // (allPermissions[_index - 1] === undefined
+                                //   ? 0
+                                //   : allPermissions[_index - 1].length)
+                                allPermissions
+                                  .filter(
+                                    (_permissionArray, __index) =>
+                                      __index <= _index
+                                  )
+                                  .map((_permissionArray, __index): number =>
+                                    allPermissions[__index - 1] !== undefined
+                                      ? allPermissions[__index - 1].length
+                                      : 0
+                                  )
+                                  .reduce((acc, curr) => acc + curr, 0) + index
+                              }.checked`
+                            )}
+                            className="h-6 w-6  bg-slate-100 px-5 py-2"
+                          />
+                        </label>
+                      ))}
+                    </Container>
+                  </Container>
                 ))}
-            </div>
+            </Container>
           </>
         ) : null}
         {errors.description !== undefined || errors.name !== undefined ? (

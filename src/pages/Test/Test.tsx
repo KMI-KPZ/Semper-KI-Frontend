@@ -59,7 +59,7 @@ export const Test: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-start gap-5">
+    <div className="flex w-full snap-mandatory flex-col items-center justify-start gap-5">
       <Container direction="col" className="bg-white p-5">
         <Heading variant="h1">TestPage</Heading>
       </Container>
@@ -130,13 +130,13 @@ export const Test: React.FC<Props> = (props) => {
 
       <Container
         direction="row"
-        className="  flex-wrap rounded-xl border-2 border-white bg-white p-5"
+        className="h-screen snap-center flex-wrap rounded-xl border-2 border-white bg-white p-5"
       >
         <ExampleForm />
       </Container>
       <Container
         direction="row"
-        className=" max-w-md flex-wrap rounded-xl border-2 border-white bg-white p-5"
+        className="h-screen max-w-md snap-center snap-always flex-wrap rounded-xl border-2 border-white bg-white p-5"
       >
         <Text className="text-bold w-full px-3 text-center">ButtonTest</Text>
         <Button title="Primary Active" variant="primary" active />
@@ -164,6 +164,18 @@ export const Test: React.FC<Props> = (props) => {
             : null}
         </Container>
       </LoadingSuspense>
+      <div className="flex h-96 snap-y flex-col gap-5 overflow-auto">
+        <div className="h-60 w-96 shrink-0 snap-center bg-red-500 "></div>
+        <div className="h-60 w-80 shrink-0 snap-center bg-blue-500">2</div>
+        <div className="h-60 w-80 shrink-0 snap-center  bg-green-500">3</div>
+        <div className="h-60 w-80 shrink-0 snap-center  bg-yellow-500">4</div>
+        <div className="h-60 w-80 shrink-0 snap-center  bg-purple-500">5</div>
+        <div className="h-60 w-80 shrink-0 snap-center  bg-red-500">1</div>
+        <div className="h-60 w-80 shrink-0 snap-center  bg-blue-500">2</div>
+        <div className="h-60 w-80 shrink-0 snap-center  bg-green-500">3</div>
+        <div className="h-60 w-80 shrink-0 snap-center  bg-yellow-500">4</div>
+        <div className="h-60 w-80 shrink-0 snap-center  bg-purple-500">5</div>
+      </div>
     </div>
   );
 };

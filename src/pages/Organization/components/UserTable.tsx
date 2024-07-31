@@ -19,6 +19,7 @@ import useGetOrganizationUsers, {
 } from "@/api/Organization/Querys/useGetOrganizationUsers";
 import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
 import useGetOrganizationRoles from "@/api/Organization/Querys/useGetOrganizationRoles";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface OrganizationTableProps {}
 
@@ -49,16 +50,18 @@ const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
                 <thead>
                   <tr>
                     <th>{""}</th>
-                    <th className="text-left">
+                    <th className="px-3 text-left">
                       {t("Organization.components.table.name")}
                     </th>
-                    <th className="text-left">
+                    <th className="px-3 text-left">
                       {t("Organization.components.table.email")}
                     </th>
-                    <th className="text-left">
+                    <th className="px-3 text-left">
                       {t("Organization.components.table.role")}
                     </th>
-                    <th>{t("Organization.components.table.actions")}</th>
+                    <th className="px-3">
+                      {t("Organization.components.table.actions")}
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -150,9 +153,9 @@ const OrganizationtableRow: React.FC<{
           <img src={picture} />
         </div>
       </td>
-      <td>{name}</td>
-      <td>{email}</td>
-      <td>
+      <td className="p-3">{name}</td>
+      <td className="p-3">{email}</td>
+      <td className="p-3">
         {edit === false ? (
           roles.length > 0 ? (
             roles[0].name
@@ -175,7 +178,7 @@ const OrganizationtableRow: React.FC<{
           </select>
         )}
       </td>
-      <td>
+      <td className="p-3">
         <div className="flex h-full flex-row items-center justify-center gap-5 p-3">
           <PermissionGate element="OrganizationButtonEditUser">
             <Button

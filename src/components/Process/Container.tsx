@@ -34,7 +34,7 @@ const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
     <Container
       direction="col"
       width="full"
-      className={twMerge("relative bg-white p-3", className)}
+      className={twMerge("relative  bg-white p-3", className)}
       id={id}
     >
       <ProcessHeader menuButtonTitle={menuButtonTitle} pageTitle={pageTitle}>

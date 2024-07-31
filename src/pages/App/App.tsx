@@ -41,6 +41,7 @@ import AdminOrganization from "../Admin/Organization/Organization";
 import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
 import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
 import { AdminOutlet } from "@/outlets/AdminOutlet";
+import ToTopButton from "@component-library/ToTopButton/ToTopButton";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -322,6 +323,7 @@ const App: React.FC = () => {
         </main>
         <CkBanner />
         <Menu />
+        <ToTopButton />
         <Footer />
       </div>
       <Chatbot />

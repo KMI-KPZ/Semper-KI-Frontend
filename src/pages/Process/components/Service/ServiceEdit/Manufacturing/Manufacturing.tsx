@@ -24,7 +24,7 @@ export const ServiceManufacturing: React.FC = () => {
       width="none"
       direction="col"
       justify="start"
-      className="h-full w-screen max-w-6xl p-5 pt-14 md:p-0"
+      className="h-full w-screen max-w-6xl overflow-auto p-5 pt-14 md:p-0"
     >
       <ServiceSearch searchText={searchText} setSearchText={setSearchText} />
       <Routes>

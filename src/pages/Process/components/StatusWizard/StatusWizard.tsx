@@ -135,7 +135,7 @@ const ProcessStatusWizard: React.FC<ProcessStatusWizardProps> = (props) => {
   useScrollIntoView(newestStatusID);
 
   return (
-    <Container direction="col" className="sticky top-5 bg-white p-5">
+    <Container direction="col" className="top-5 bg-white p-5 md:sticky">
       {statusWizardItems.map((item) => {
         return (
           <StatusWizardCard key={item.text} item={item} process={process} />

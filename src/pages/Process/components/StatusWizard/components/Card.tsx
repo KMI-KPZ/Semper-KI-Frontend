@@ -62,8 +62,9 @@ const StatusWizardCard: React.FC<StatusWizardCardProps> = (props) => {
     <Container
       width="full"
       justify="start"
+      direction="row"
       onClick={handleOnClickCard}
-      className={`rounded-xl border-2 border-slate-100 p-2 duration-300 hover:bg-gray-100   ${
+      className={`justify-center rounded-xl border-2 border-slate-100 p-2 duration-300 hover:bg-gray-100 md:justify-start   ${
         active ? "text-orange-600" : ""
       }
       ${reachable ? "hover:cursor-pointer hover:border-ultramarinblau " : ""}

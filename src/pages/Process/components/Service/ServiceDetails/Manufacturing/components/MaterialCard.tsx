@@ -44,7 +44,7 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
         alt={t(
           "Process.Service.ServiceDetails.components.manufacturing.material.img"
         )}
-        className="w-full object-cover"
+        className="max-h-40 w-full object-contain md:w-fit"
       />
       <Container direction="col" width="full" className="" gap={3}>
         <Container direction="row" justify="between" width="full">
@@ -83,7 +83,7 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
         justify="center"
         width="fit"
         gap={3}
-        className="p-5"
+        className="flex-row p-5 md:flex-col"
       >
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
           <Button

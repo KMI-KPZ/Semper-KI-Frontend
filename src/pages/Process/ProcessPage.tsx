@@ -29,7 +29,7 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
 
   return (
     <Container direction="col" width="full">
-      <Container width="full" className="bg-white p-2">
+      <Container width="full" className="rounded-xl bg-white p-2">
         <Heading variant="h1">{t("Process.ProcessPage.heading")}</Heading>
       </Container>
       <ProcessInfo process={process} />

@@ -57,10 +57,10 @@ const ServiceManufacturingDetails: React.FC<
       justify="center"
       align="start"
       width="full"
-      className="p-5"
+      className="p-2 md:p-5"
     >
-      <Container direction="row" justify="between" width="full">
-        <Container align="end">
+      <Container justify="between" width="full" gap={5}>
+        <Container direction="row" width="full" justify="start" wrap="wrap">
           <Heading variant="h3">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.model.heading"
@@ -115,8 +115,8 @@ const ServiceManufacturingDetails: React.FC<
         </ProcessStatusGate>
       </Container>
 
-      <Container direction="row" justify="between" width="full">
-        <Container align="end">
+      <Container justify="between" width="full">
+        <Container direction="row" width="full" justify="start" wrap="wrap">
           <Heading variant="h3">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.material.heading"
@@ -171,8 +171,8 @@ const ServiceManufacturingDetails: React.FC<
         </ProcessStatusGate>
       </Container>
 
-      <Container direction="row" justify="between" width="full">
-        <Container align="end">
+      <Container justify="between" width="full">
+        <Container direction="row" width="full" justify="start" wrap="wrap">
           <Heading variant="h3">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.postProcessing.heading"

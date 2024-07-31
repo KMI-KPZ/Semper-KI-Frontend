@@ -9,6 +9,7 @@ import Collapsible from "@/components/Collapsible/Collapsible";
 import ProcessMenu from "@/components/Process/Menu";
 import ProcessTitleForm from "./TitleForm";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import EditIcon from "@mui/icons-material/Edit";
 
 interface ProcessInfoProps {
   process: Process;
@@ -17,27 +18,7 @@ interface ProcessInfoProps {
 const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
   const { process } = props;
   const { t } = useTranslation();
-  const [titleEdit, setTitleEdit] = React.useState<boolean>(
-    process.processDetails.title === undefined ||
-      process.processDetails.title === ""
-      ? true
-      : false
-  );
-  const updateProcess = useUpdateProcess();
-
-  const onTitleSubmit = (title: string) => {
-    updateProcess.mutate(
-      {
-        processIDs: [process.processID],
-        updates: { changes: { processDetails: { title } } },
-      },
-      {
-        onSuccess: () => {
-          close();
-        },
-      }
-    );
-  };
+  const [titleEdit, setTitleEdit] = React.useState<boolean>(false);
 
   const handleOnClickButtonEditTitle = () => {
     setTitleEdit(!titleEdit);
@@ -48,23 +29,25 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
       id="processInfo"
       width="full"
       direction="col"
-      className="relative gap-2 bg-white p-5"
+      className="relative gap-2 rounded-xl bg-white p-5"
     >
-      <ProcessMenu buttonTitle={t("Project.components.Info.button.menu")}>
-        <Button
-          title={t("Process.components.Info.button.editTitle")}
-          stopPropagation={false}
-          variant="secondary"
-          size="sm"
-          onClick={handleOnClickButtonEditTitle}
-        />
-      </ProcessMenu>
+      <ProcessMenu
+        buttonTitle={t("Project.components.Info.button.menu")}
+      ></ProcessMenu>
       <Container direction="row" width="full" justify="start" className="gap-0">
         <Container className="w-1/3 md:w-1/3" justify="start">
           <Text variant="strong" className="w-40">
             {t("Process.components.Info.name")}
           </Text>
           <Text>{process.processDetails.title}</Text>
+          <Button
+            title={t("Process.components.Info.button.editTitle")}
+            stopPropagation={false}
+            variant="secondary"
+            size="xs"
+            onClick={handleOnClickButtonEditTitle}
+            children={<EditIcon />}
+          />
         </Container>
         <Container className="w-1/3 md:w-1/3" justify="start">
           <Text variant="strong" className="w-40">

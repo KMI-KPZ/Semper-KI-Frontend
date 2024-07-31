@@ -11,7 +11,7 @@ const ServiceDetailsCard: React.FC<
   const { t } = useTranslation();
 
   return (
-    <Container direction="row" width="full" className=" card">
+    <Container width="full" className="card" justify="center">
       {children}
     </Container>
   );

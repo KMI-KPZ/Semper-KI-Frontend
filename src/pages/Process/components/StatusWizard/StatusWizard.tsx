@@ -1,5 +1,5 @@
 import { Process, ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
-import { Container } from "@component-library/index";
+import { Container, Heading } from "@component-library/index";
 import React, { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
@@ -135,7 +135,14 @@ const ProcessStatusWizard: React.FC<ProcessStatusWizardProps> = (props) => {
   useScrollIntoView(newestStatusID);
 
   return (
-    <Container direction="col" className="top-5 bg-white p-5 md:sticky">
+    <Container
+      direction="col"
+      justify="start"
+      className="top-5 max-h-60  overflow-y-auto rounded-xl bg-white p-5 md:sticky md:max-h-fit md:overflow-y-visible"
+    >
+      <Heading variant="h2">
+        {t("Process.StatusWizard.StatusWizard.header")}
+      </Heading>
       {statusWizardItems.map((item) => {
         return (
           <StatusWizardCard key={item.text} item={item} process={process} />

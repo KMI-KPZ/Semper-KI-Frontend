@@ -1260,6 +1260,7 @@
     "StatusWizard": {
       "components": {},
       "StatusWizard": {
+        "header": "Fortschritt",
         "item": {
           "processInfo": "Übersicht",
           "header": "Übersicht",

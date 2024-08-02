@@ -44,7 +44,7 @@ export type DefaultProcessProps = {
   updatedWhen: Date;
   accessedWhen: Date;
   files: ProcessFile[];
-  messages: ChatMessageProps[];
+  messages: { [key: string]: ChatMessageProps[] };
 };
 
 export type NoServiceProcessProps = {
@@ -238,11 +238,10 @@ const useGetProcess = () => {
                 ? undefined
                 : response.data.processDetails.clientDeliverAddress,
           },
-          messages: response.data.messages.messages,
-          // messages: {
-          //   clarification: response.data.messages.messages.clarification,
-          //   production: response.data.messages.messages.production,
-          // }, // Akshar
+          messages:
+            Object.keys(response.data.messages).length === 0
+              ? []
+              : response.data.messages,
         };
         logger("useGetProcess | getProcess ✅ |", process);
 

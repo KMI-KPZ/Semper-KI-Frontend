@@ -32,9 +32,9 @@ const ProcessContract: React.FC<ProcessContractProps> = (props) => {
       menuButtonTitle={t("Process.components.Contract.Contract.button.menu")}
       pageTitle={`${t("Process.components.Contract.Contract.title")}:`}
       start={ProcessStatus.REQUEST_COMPLETED}
-      end={ProcessStatus.REQUEST_COMPLETED}
+      end={ProcessStatus.OFFER_REJECTED}
     >
-      <ProcessMessages messages={process.messages} origin="Production" />
+      <ProcessMessages messages={process.messages.Contract} origin="Contract" />
       <ProcessFileView origin="Contract" />
     </ProcessContainer>
   );

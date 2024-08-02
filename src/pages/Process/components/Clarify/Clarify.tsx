@@ -20,7 +20,10 @@ const ProcessClarify: React.FC<ProcessClarifyProps> = (props) => {
       start={ProcessStatus.VERIFYING_COMPLETED}
       end={ProcessStatus.VERIFYING_COMPLETED}
     >
-      <ProcessMessages messages={process.messages} origin="Clarification" />
+      <ProcessMessages
+        messages={process.messages.Clarification}
+        origin="Clarification"
+      />
       {/* <ProcessMessages messages={process.messages.clarification} origin="Clarification" /> //Akshay */}
     </ProcessContainer>
   );

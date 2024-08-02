@@ -31,7 +31,7 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
     <ProcessContainer
       id="Verification"
       start={ProcessStatus.CONTRACTOR_COMPLETED}
-      end={ProcessStatus.VERIFYING_COMPLETED}
+      end={ProcessStatus.VERIFYING_IN_PROGRESS}
       menuButtonTitle={t("Process.components.Verify.Verify.button.menu")}
       pageTitle={t("Process.components.Verify.Verify.title")}
     >

@@ -9,12 +9,12 @@ import ProcessMessageItem from "@/components/Process/Messages/components/Message
 import ProcessTextInput from "@/components/Process/Messages/components/TextInput";
 
 interface ProcessMessagesProps {
-  messages: ChatMessageProps[];
+  messages: ChatMessageProps[] | undefined;
   origin: ProcessOrigin;
 }
 
 const ProcessMessages: React.FC<ProcessMessagesProps> = (props) => {
-  const { messages, origin } = props;
+  const { messages = [], origin } = props;
   const { t } = useTranslation();
 
   return (

@@ -1,4 +1,4 @@
-import { Container, Heading } from "@component-library/index";
+import { Button, Container, Heading } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ProcessInfo from "./components/Info";
@@ -19,6 +19,7 @@ import ProcessCompleted from "./components/Completed/Completed";
 import ProcessProduction from "./components/Production/Production";
 import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
 import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 interface ProcessPageProps {}
 
@@ -29,7 +30,15 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
 
   return (
     <Container direction="col" width="full">
-      <Container width="full" className="rounded-xl bg-white p-2">
+      <Container width="full" className="relative rounded-xl bg-white p-2">
+        <Button
+          to=".."
+          title={t("Process.ProcessPage.button.back")}
+          variant="text"
+          className="absolute left-5"
+        >
+          <ArrowBackIosIcon />
+        </Button>
         <Heading variant="h1">{t("Process.ProcessPage.heading")}</Heading>
       </Container>
       <ProcessInfo process={process} />
@@ -54,9 +63,9 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
               <ProcessStatusGate start={ProcessStatus.REQUEST_COMPLETED}>
                 <ProcessContract />
               </ProcessStatusGate>
-              <ProcessStatusGate start={ProcessStatus.OFFER_COMPLETED}>
+              {/* <ProcessStatusGate start={ProcessStatus.OFFER_COMPLETED}>
                 <ProcessConfirmation />
-              </ProcessStatusGate>
+              </ProcessStatusGate> */}
               <ProcessStatusGate start={ProcessStatus.CONFIRMATION_COMPLETED}>
                 <ProcessProduction />
               </ProcessStatusGate>

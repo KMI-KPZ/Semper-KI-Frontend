@@ -2,8 +2,6 @@ import { Process, ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
 import { Container, Heading } from "@component-library/index";
 import React, { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import CheckIcon from "@mui/icons-material/Check";
 import FactoryIcon from "@mui/icons-material/Factory";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import EmailIcon from "@mui/icons-material/Email";
@@ -90,13 +88,13 @@ const statusWizardItems: StatusWizardItem[] = [
     text: "offer",
     targetID: "Contract",
   },
-  {
-    startStatus: ProcessStatus.CONFIRMATION_COMPLETED,
-    endStatus: ProcessStatus.CONFIRMATION_REJECTED,
-    icon: <CheckIcon />,
-    text: "confirmation",
-    targetID: "Confirmation",
-  },
+  // {
+  //   startStatus: ProcessStatus.CONFIRMATION_COMPLETED,
+  //   endStatus: ProcessStatus.CONFIRMATION_REJECTED,
+  //   icon: <CheckIcon />,
+  //   text: "confirmation",
+  //   targetID: "Confirmation",
+  // },
   {
     startStatus: ProcessStatus.PRODUCTION_IN_PROGRESS,
     endStatus: ProcessStatus.PRODUCTION_COMPLETED,

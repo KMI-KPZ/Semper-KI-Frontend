@@ -1280,7 +1280,10 @@
       }
     },
     "ProcessPage": {
-      "heading": "Prozessdetails"
+      "heading": "Prozessdetails",
+      "button": {
+        "back": "Zurück"
+      }
     }
   },
   "Project": {
@@ -1499,21 +1502,24 @@
         "useStatusButtons": {
           "NONE": "Translation error",
           "DELETE": "Prozess löschen",
-          "FORWARD-TO-CONTRACTOR_SELECTED": "Weiter zu Überprüfung",
           "BACK-TO-SERVICE_READY": "Zurück zur Servicebearbeitung",
           "BACK-TO-DRAFT": "Zurück zur Serviceauswahl",
-          "FORWARD-TO-SERVICE_COMPLETED": "Weiter zur Auftragnehmerauswahl",
           "BACK-TO-SERVICE_COMPLETED": "Zurück zur Auftragnehmerauswahl",
+          "BACK-TO-CONTRACTOR_COMPLETED": "Zurück zur Überprüfung",
+          "FORWARD-TO-SERVICE_COMPLETED": "Weiter zur Auftragnehmerauswahl",
+          "FORWARD-TO-CONTRACTOR_COMPLETED": "Weiter zur Überprüfung",
           "FORWARD-TO-VERIFYING": "Überprüfen Starten",
-          "BACK-TO-CONTRACTOR_SELECTED": "Zurück zur Überprüfung",
-          "FORWARD-TO-REQUESTED": "Anfrage senden",
+          "FORWARD-TO-VERIFICATION_COMPLETED": "Überprüfung abschließen",
+          "FORWARD-TO-REQUEST_COMPLETED": "Anfrage senden",
           "FORWARD-TO-CLARIFICATION": "Rückfragen stellen",
-          "FORWARD-TO-CONFIRMED_BY_CONTRACTOR": "Anfrage bestätigen und Angebot erstellen",
-          "FORWARD-TO-REJECTED_BY_CONTRACTOR": "Anfrage ablehnen",
-          "FORWARD-TO-CONFIRMED_BY_CLIENT": "Angebot bestätigen",
-          "FORWARD-TO-REJECTED_BY_CLIENT": "Angebot ablehnen",
-          "FORWARD-TO-PRODUCTION": "Produktion starten",
-          "FORWARD-TO-DELIVERY": "Lieferung starten",
+          "FORWARD-TO-OFFER_COMPLETED": "Anfrage bestätigen und Angebot erstellen",
+          "FORWARD-TO-OFFER_REJECTED": "Anfrage ablehnen",
+          "FORWARD-TO-CONFIRMATION_COMPLETED": "Angebot bestätigen",
+          "FORWARD-TO-CONFIRMATION_REJECTED": "Angebot ablehnen",
+          "FORWARD-TO-PRODUCTION_IN_PROGRESS": "Produktion starten",
+          "FORWARD-TO-PRODUCTION_COMPLETED": "Produktion abschließen",
+          "FORWARD-TO-DELIVERY_IN_PROGRESS": "Lieferung starten",
+          "FORWARD-TO-DELIVERY_COMPLETED": "Lieferung abschließen",
           "FORWARD-TO-FAILED": "Prozess fehlgeschlagen",
           "FORWARD-TO-COMPLETED": "Prozess abschließen",
           "FORWARD-TO-DISPUTE": "Streitfall melden",

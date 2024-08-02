@@ -23,7 +23,10 @@ const ProcessProduction: React.FC<ProcessProductionProps> = (props) => {
       start={ProcessStatus.CONFIRMATION_COMPLETED}
       end={ProcessStatus.PRODUCTION_IN_PROGRESS}
     >
-      <ProcessMessages messages={process.messages} origin="Production" />
+      <ProcessMessages
+        messages={process.messages.Production}
+        origin="Production"
+      />
       {/* <ProcessMessages messages={process.messages.production} origin="Production" />   Akshay */}
     </ProcessContainer>
   );

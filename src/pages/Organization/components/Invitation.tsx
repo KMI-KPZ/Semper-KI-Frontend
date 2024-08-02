@@ -102,7 +102,7 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   };
 
   return (
-    <div className="card flex w-full flex-col items-center gap-5 p-5">
+    <Container direction="col" className="container" width="full">
       <Heading variant="h2" className="whitespace-nowrap">
         {t("Organization.components.invitation.header")}
       </Heading>
@@ -193,7 +193,7 @@ const Invitation: React.FC<InvitationProps> = (props) => {
           ))}
         </Container>
       ) : null}
-    </div>
+    </Container>
   );
 };
 

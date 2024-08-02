@@ -26,20 +26,20 @@ const Organization: React.FC<OrganizationViewProps> = (props) => {
   const invitesQuery = useGetOrganizationInvites();
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
-      <Heading variant="h1" className="py-3">
+    <div className="flex w-full flex-col items-center justify-center gap-5">
+      <Heading variant="h1" className="container text-center">
         {t("Organization.index.header")}
       </Heading>
 
       <OrganizationInfo organization={organization} />
       <OrganizationAddress organization={organization} />
-      <Container className="card p-5" width="full">
+      <Container className="container" width="full">
         <NotificationForm
           type="orga"
           settings={organization.details.notificationSettings?.organization}
         />
       </Container>
-      <Container className="card p-5" width="full">
+      <Container className="container" width="full">
         <PrioritiesForm priorities={organization.details.priorities} />
       </Container>
       <PermissionGate element="OrganizationInvitation">

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { Button, Divider } from "@component-library/index";
+import { Button, Container, Divider } from "@component-library/index";
 import useOrganization from "../../../hooks/useOrganization";
 import { LoadingSuspense } from "@component-library/index";
 import CheckIcon from "@mui/icons-material/Check";
@@ -30,7 +30,7 @@ const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
   const rolesQuery = useGetOrganizationRoles();
   const userQuery = useGetOrganizationUsers();
   return (
-    <div className="card flex w-full flex-col items-center justify-center gap-5 p-5 ">
+    <Container className="container" width="full" direction="col">
       <Heading variant="h2">
         {t("Organization.components.table.header")}
       </Heading>
@@ -86,7 +86,7 @@ const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
           </div>
         </LoadingSuspense>
       </LoadingSuspense>
-    </div>
+    </Container>
   );
 };
 

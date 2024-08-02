@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useEffect, useState } from "react";
+import { ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { Button } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
@@ -29,6 +29,7 @@ export const Test: React.FC<Props> = (props) => {
   const saveProjects = useSaveProjects();
   const dynamicButtonRequest = useDynamicButtonRequest();
   const testDynamicQuery = useGetDynamicTestButtons();
+  const horizontalScroll = useRef<HTMLDivElement>(null);
 
   const openMenu = () => {
     setOpen(true);
@@ -55,6 +56,32 @@ export const Test: React.FC<Props> = (props) => {
         return <DeleteIcon />;
       default:
         return;
+    }
+  };
+
+  const handleOnButtonClickScrollLeft = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    scroll("left");
+  };
+  const handleOnButtonClickScrollRight = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    scroll("right");
+  };
+
+  const scroll = (dir: "left" | "right") => {
+    if (horizontalScroll.current !== null) {
+      if (dir === "left") {
+        logger("scroll", horizontalScroll.current);
+        horizontalScroll.current.scrollLeft =
+          horizontalScroll.current.scrollLeft - 300;
+      } else {
+        horizontalScroll.current.scrollLeft =
+          horizontalScroll.current.scrollLeft + 300;
+      }
     }
   };
 
@@ -136,7 +163,7 @@ export const Test: React.FC<Props> = (props) => {
       </Container>
       <Container
         direction="row"
-        className="h-screen max-w-md snap-center snap-always flex-wrap rounded-xl border-2 border-white bg-white p-5"
+        className="h-screen max-w-md snap-center  flex-wrap rounded-xl border-2 border-white bg-white p-5"
       >
         <Text className="text-bold w-full px-3 text-center">ButtonTest</Text>
         <Button title="Primary Active" variant="primary" active />
@@ -164,17 +191,88 @@ export const Test: React.FC<Props> = (props) => {
             : null}
         </Container>
       </LoadingSuspense>
-      <div className="flex h-96 snap-y flex-col gap-5 overflow-auto">
-        <div className="h-60 w-96 shrink-0 snap-center bg-red-500 "></div>
-        <div className="h-60 w-80 shrink-0 snap-center bg-blue-500">2</div>
-        <div className="h-60 w-80 shrink-0 snap-center  bg-green-500">3</div>
-        <div className="h-60 w-80 shrink-0 snap-center  bg-yellow-500">4</div>
-        <div className="h-60 w-80 shrink-0 snap-center  bg-purple-500">5</div>
-        <div className="h-60 w-80 shrink-0 snap-center  bg-red-500">1</div>
-        <div className="h-60 w-80 shrink-0 snap-center  bg-blue-500">2</div>
-        <div className="h-60 w-80 shrink-0 snap-center  bg-green-500">3</div>
-        <div className="h-60 w-80 shrink-0 snap-center  bg-yellow-500">4</div>
-        <div className="h-60 w-80 shrink-0 snap-center  bg-purple-500">5</div>
+      <div className="relative flex h-fit w-full  items-center justify-start">
+        <a
+          href="#"
+          onClick={handleOnButtonClickScrollLeft}
+          className="invisible absolute left-5 flex h-8 w-8 flex-row items-center justify-center rounded-full border-2 bg-white p-5 md:visible"
+        >
+          {" < "}
+        </a>
+        <a
+          href="#"
+          onClick={handleOnButtonClickScrollRight}
+          className="invisible absolute right-5 flex h-8 w-8 flex-row items-center justify-center rounded-full border-2 bg-white p-5 md:visible"
+        >
+          {" > "}
+        </a>
+        <div
+          ref={horizontalScroll}
+          className="flex h-fit w-full snap-x snap-mandatory flex-row items-center justify-start gap-5 overflow-auto scroll-smooth px-5 md:overflow-hidden"
+        >
+          <div className="flex h-80 w-80 shrink-0 snap-center  items-center justify-center  bg-red-500 ">
+            vrtvrtvrt
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center  items-center justify-center bg-blue-500">
+            2vtthvrvhtsr
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center  items-center justify-center  bg-green-500">
+            kzukzukzu3
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center  items-center justify-center bg-yellow-500">
+            zukzukw34tbej 4
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center  items-center justify-center bg-purple-500">
+            etzje546je56j5
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center  items-center justify-center bg-red-500">
+            14w4w5z q36e7k67kj
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-blue-500">
+            2435vhjmzf8ki687i
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-green-500">
+            34jhd bgzerbh gizuhaoergh 3
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-yellow-500">
+            4iurwenoiengnuizhmoidtnmz
+          </div>
+          <div className="  flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-purple-500">
+            5oiwjuienntusö
+          </div>
+        </div>
+      </div>
+      <div className="flex h-96 w-fit snap-y snap-mandatory flex-col items-center justify-start gap-5 overflow-auto px-5 md:overflow-clip">
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center  bg-red-500 ">
+          vrtvrtvrt
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-blue-500">
+          2vtthvrvhtsr
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center  bg-green-500">
+          kzukzukzu3
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-yellow-500">
+          zukzukw34tbej 4
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-purple-500">
+          etzje546je56j5
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-red-500">
+          14w4w5z q36e7k67kj
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-blue-500">
+          2435vhjmzf8ki687i
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-green-500">
+          34jhd bgzerbh gizuhaoergh 3
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-yellow-500">
+          4iurwenoiengnuizhmoidtnmz
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-purple-500">
+          5oiwjuienntusö
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { Heading, Text } from "@component-library/index";
+import { Container, Heading, Text } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import OrganizationRolesForm from "./components/Form";
 import { Button, Divider, LoadingSuspense } from "@component-library/index";
@@ -102,7 +102,7 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
   };
 
   return (
-    <div className="card flex w-full flex-col items-center justify-center gap-5 p-5">
+    <Container className="container" width="full" direction="col">
       <Heading variant="h2">{t("Organization.Roles.Roles.header")}</Heading>
       <Divider />
       <LoadingSuspense query={rolesQuery}>
@@ -147,7 +147,7 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
           ) : null}
         </LoadingSuspense>
       </Modal>
-    </div>
+    </Container>
   );
 };
 

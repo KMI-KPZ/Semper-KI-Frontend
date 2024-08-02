@@ -26,7 +26,7 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
     <Container width="full" direction="col" className="p-5">
       <Heading variant="h2">{t("Organization.Info.header")}</Heading>
       <Divider />
-      <table className="w-full table-auto border-separate border-spacing-3 ">
+      <table className=" w-full table-auto border-separate border-spacing-3 ">
         <tbody>
           <tr>
             <td>{t(`Organization.Info.name`)}</td>

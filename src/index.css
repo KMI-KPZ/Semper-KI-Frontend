@@ -42,6 +42,9 @@
     .active-card {
         @apply overflow-clip rounded-xl border-2 p-5 shadow-lg border-ultramarinblau duration-300;
     }
+    .container {
+        @apply rounded-xl bg-white p-5 border-2  shadow-lg;
+    }
 }
 
 @layer utilities {

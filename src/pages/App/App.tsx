@@ -31,17 +31,20 @@ import Projects from "../Projects/Projects";
 import ProjectOutlet from "@/outlets/ProjectOutlet";
 import ProjectPage from "../Project/ProjectPage";
 import ProcessOutlet from "@/outlets/ProcessOutlet";
-import ProcessHistory from "../Process/legacy/History/History";
-import ProcessChat from "../Process/legacy/Chat/Chat";
-import ServiceRoutes from "@/routes/ServiceRoutes";
 import ProcessPage from "../Process/ProcessPage";
 import Admin from "../Admin/Admin";
 import AdminUser from "../Admin/User/User";
 import AdminOrganization from "../Admin/Organization/Organization";
-import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
 import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
 import { AdminOutlet } from "@/outlets/AdminOutlet";
 import ToTopButton from "@component-library/ToTopButton/ToTopButton";
+import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
+import ServiceEdit from "../Process/components/Service/ServiceEdit/ServiceEdit";
+import ManufacturingProcessOutlet from "@/outlets/ManufacturingProcessOutlet";
+import ServiceModeling from "../Process/components/Service/ServiceEdit/Modelling/Modelling";
+import { ManufacturingModels } from "../Process/components/Service/ServiceEdit/Manufacturing/Model/Model";
+import { ManufacturingMaterials } from "../Process/components/Service/ServiceEdit/Manufacturing/Material/Material";
+import { ManufacturingPostProcessings } from "../Process/components/Service/ServiceEdit/Manufacturing/PostProcessing/PostProcessing";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -210,32 +213,27 @@ const App: React.FC = () => {
                     </ProcessOutlet>
                   }
                 >
-                  <Route path="service/*" element={<ServiceRoutes />} />
-                  {/* <Route element={<AuthorizedUserRouteOutlet />}>
-                    <Route path="history" element={<ProcessHistory />} />
-                    <Route path="chat" element={<ProcessChat />} />
+                  <Route path="service/*" element={<DefinedProcessOutlet />}>
+                    <Route index element={<ServiceEdit />} />
                     <Route
-                      path="checkout"
-                      element={<Navigate to="../../checkout" />}
-                    />
-                    <Route
-                      path="verification"
-                      element={<Navigate to="../../verification" />}
-                    />
-                    <Route
-                      path="contractorSelection"
-                      element={<Navigate to="../../contractorSelection" />}
-                    />
+                      path="manufacturing/*"
+                      element={<ManufacturingProcessOutlet />}
+                    >
+                      <Route index element={<Navigate to="model" />} />
+                      <Route path="model" element={<ManufacturingModels />} />
+                      <Route
+                        path="material"
+                        element={<ManufacturingMaterials />}
+                      />
+                      <Route
+                        path="postprocessing"
+                        element={<ManufacturingPostProcessings />}
+                      />
+                      <Route path="*" element={<Error />} />
+                    </Route>
+                    <Route path="modeling/*" element={<ServiceModeling />} />
+                    <Route path="*" element={<Navigate to="." />} />
                   </Route>
-                  <Route
-                    path="service/*"
-                    element={
-                      <>
-                        <ProjectPage />
-                        <ServiceRoutes />
-                      </>
-                    }
-                  /> */}
                 </Route>
               </Route>
             </Route>

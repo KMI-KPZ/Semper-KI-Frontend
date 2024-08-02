@@ -19,6 +19,7 @@ const ManufacturingProcessOutlet: React.FC<
     return (
       <ManufacturingProcessContextProvider process={process}>
         {children}
+        <Outlet />
       </ManufacturingProcessContextProvider>
     );
   else

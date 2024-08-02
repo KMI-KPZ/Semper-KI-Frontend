@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ProcessModelCard } from "./components/Card";
 import { Button, Container, Text } from "@component-library/index";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
 import { FilterItemProps } from "../Filter/Filter";
@@ -15,12 +15,12 @@ import { select } from "d3";
 import { ProcessModelUpload } from "./Upload/Upload";
 import useGetModels from "@/api/Service/AdditiveManufacturing/Model/Querys/useGetModels";
 import { ServiceManufacturingState } from "@/api/Service/Querys/useGetServices";
+import ServiceSearch from "../Search/Search";
+import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
+import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
+import useFilter from "@/hooks/useFilter";
 
-interface Props {
-  filters: FilterItemProps[];
-  models: ModelProps[] | undefined;
-  searchText: string;
-}
+interface Props {}
 
 interface State {
   modalOpen: boolean;
@@ -29,13 +29,22 @@ interface State {
 
 export const ManufacturingModels: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { models, searchText, filters } = props;
+  const {} = props;
+  const { process } = useManufacturingProcess();
   const navigate = useNavigate();
-  const modelsQuery = useGetModels(filters);
+
+  const modelsQuery = useGetModels();
+  const [searchText, setSearchText] = useState<string>("");
   const [state, setState] = useState<State>({
     modalOpen: false,
     model: undefined,
   });
+
+  const { projectID, processID } = useParams();
+
+  const closeModal = () => {
+    navigate(`/projects/${projectID}/${processID}`);
+  };
 
   const openModelView = (model: ModelProps) => {
     setState((prevState) => ({ ...prevState, modalOpen: true, model }));
@@ -77,46 +86,61 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
   // };
 
   return (
-    <Container direction="col" width="full">
-      <ProcessModelUpload />
-      <Container width="full" direction="col">
-        <Heading variant="h2" className="w-full text-left">
-          {t("Service.Manufacturing.Model.Model.available")}
-        </Heading>
-        <LoadingSuspense query={modelsQuery}>
-          {modelsQuery.data !== undefined && modelsQuery.data.length > 0 ? (
-            <>
-              {modelsQuery.data
-                .filter((model, index) => filterBySearch(model))
-                .map((model: ModelProps, index: number) => (
-                  <ProcessModelCard
-                    model={model}
-                    key={index}
-                    openModelView={openModelView}
-                  />
-                ))}
-            </>
-          ) : (
-            <Text className="w-full text-center">
-              {t("Service.Manufacturing.Model.Model.error.noModels")}
-            </Text>
-          )}
-        </LoadingSuspense>
-      </Container>
-      {state.modalOpen === true && state.model !== undefined ? (
-        <Modal
-          modalKey="ProcessModelPreView"
-          open={state.modalOpen === true && state.model !== undefined}
-          closeModal={closeModelView}
-        >
-          {state.model !== undefined ? (
-            <ProcessModelPreView
-              model={state.model}
-              closeModelView={closeModelView}
-            />
+    <Modal
+      modalKey="ServiceRoutesManufacturingModels"
+      open={true}
+      closeModal={closeModal}
+      className=" bg-gray-100 md:max-w-7xl"
+    >
+      <Container
+        width="none"
+        direction="col"
+        justify="start"
+        className="h-full w-screen max-w-6xl overflow-auto p-5 pt-14 md:p-0"
+      >
+        <ServiceSearch searchText={searchText} setSearchText={setSearchText} />
+        <Container direction="col" width="full">
+          <ProcessModelUpload />
+          <Container width="full" direction="col">
+            <Heading variant="h2" className="w-full text-left">
+              {t("Service.Manufacturing.Model.Model.available")}
+            </Heading>
+            <LoadingSuspense query={modelsQuery}>
+              {modelsQuery.data !== undefined && modelsQuery.data.length > 0 ? (
+                <>
+                  {modelsQuery.data
+                    .filter((model, index) => filterBySearch(model))
+                    .map((model: ModelProps, index: number) => (
+                      <ProcessModelCard
+                        model={model}
+                        key={index}
+                        openModelView={openModelView}
+                      />
+                    ))}
+                </>
+              ) : (
+                <Text className="w-full text-center">
+                  {t("Service.Manufacturing.Model.Model.error.noModels")}
+                </Text>
+              )}
+            </LoadingSuspense>
+          </Container>
+          {state.modalOpen === true && state.model !== undefined ? (
+            <Modal
+              modalKey="ProcessModelPreView"
+              open={state.modalOpen === true && state.model !== undefined}
+              closeModal={closeModelView}
+            >
+              {state.model !== undefined ? (
+                <ProcessModelPreView
+                  model={state.model}
+                  closeModelView={closeModelView}
+                />
+              ) : null}
+            </Modal>
           ) : null}
-        </Modal>
-      ) : null}
-    </Container>
+        </Container>
+      </Container>
+    </Modal>
   );
 };

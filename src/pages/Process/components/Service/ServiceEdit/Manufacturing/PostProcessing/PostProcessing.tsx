@@ -5,6 +5,7 @@ import {
   Container,
   Heading,
   LoadingSuspense,
+  Modal,
   Text,
 } from "@component-library/index";
 import { FilterItemProps } from "../Filter/Filter";
@@ -15,28 +16,32 @@ import useGetPostProcessigns, {
 import useSetPostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useSetPostProcessing";
 import { useProject } from "@/hooks/Project/useProject";
 import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 import useModal from "@/hooks/useModal";
+import ServiceSearch from "../Search/Search";
 
-interface Props {
-  filters: FilterItemProps[];
-  postProcessings: PostProcessingProps[] | undefined;
-  searchText: string;
-}
+interface Props {}
 
 export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
   const { t } = useTranslation();
-  const { searchText, filters, postProcessings } = props;
+  const {} = props;
   const { project } = useProject();
   const { process } = useManufacturingProcess();
+  const { projectID, processID } = useParams();
+  const { deleteModal } = useModal();
+  const loadedPostProcessings = useGetPostProcessigns();
+  const setPostProcessing = useSetPostProcessing();
   const navigate = useNavigate();
+
   const [selectedPostProcessing, setSelectedPostProcessing] = useState<
     PostProcessingProps[]
-  >(postProcessings || []);
-  const loadedPostProcessings = useGetPostProcessigns(filters);
-  const setPostProcessing = useSetPostProcessing();
-  const { deleteModal } = useModal();
+  >(process.serviceDetails.postProcessings || []);
+  const [searchText, setSearchText] = useState<string>("");
+
+  const closeModal = () => {
+    navigate(`/projects/${projectID}/${processID}`);
+  };
 
   const handleOnClickButtonSave = () => {
     setPostProcessing.mutate(
@@ -99,69 +104,93 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
   };
 
   return (
-    <Container direction="col" width="full">
-      <Container width="full" direction="col">
-        <Container direction="row" width="full" justify="between">
-          <Heading variant="h2">
-            {t("Service.Manufacturing.PostProcessing.PostProcessing.available")}
-          </Heading>
-          <Button
-            variant="primary"
-            onClick={handleOnClickButtonSave}
-            title={t(
-              "Service.Manufacturing.PostProcessing.PostProcessing.button.save"
-            )}
-          />
-        </Container>
-        <LoadingSuspense query={loadedPostProcessings}>
-          {loadedPostProcessings.data !== undefined &&
-          loadedPostProcessings.data.length > 0 ? (
-            <Container width="full" wrap="wrap" direction="row" align="start">
-              {loadedPostProcessings.data
-                .filter(filterBySearch)
-                // .sort(sortSelectedPostProcessingsFirst)
-                .map((postProcessing: PostProcessingProps, index: number) => (
-                  <ProcessPostProcessingCard
-                    selected={isPostProcessingSelected(postProcessing)}
-                    key={index}
-                    item={postProcessing}
-                    openItemView={() => {}}
-                  >
-                    <Container direction="row">
-                      {isPostProcessingSelected(postProcessing) ? (
-                        <Button
-                          variant="primary"
-                          onClick={() =>
-                            handleOnClickButtonDeselect(postProcessing)
-                          }
-                          title={t(
-                            "Service.Manufacturing.PostProcessing.PostProcessing.button.deselect"
-                          )}
-                        />
-                      ) : (
-                        <Button
-                          variant="secondary"
-                          onClick={() =>
-                            handleOnClickButtonSelect(postProcessing)
-                          }
-                          title={t(
-                            "Service.Manufacturing.PostProcessing.PostProcessing.button.select"
-                          )}
-                        />
-                      )}
-                    </Container>
-                  </ProcessPostProcessingCard>
-                ))}
+    <Modal
+      modalKey="ServiceRouteManufacturingPostProcessings"
+      open={true}
+      closeModal={closeModal}
+      className=" bg-gray-100 md:max-w-7xl"
+    >
+      <Container
+        width="none"
+        direction="col"
+        justify="start"
+        className="h-full w-screen max-w-6xl overflow-auto p-5 pt-14 md:p-0"
+      >
+        <ServiceSearch searchText={searchText} setSearchText={setSearchText} />
+        <Container direction="col" width="full">
+          <Container width="full" direction="col">
+            <Container direction="row" width="full" justify="between">
+              <Heading variant="h2">
+                {t(
+                  "Service.Manufacturing.PostProcessing.PostProcessing.available"
+                )}
+              </Heading>
+              <Button
+                variant="primary"
+                onClick={handleOnClickButtonSave}
+                title={t(
+                  "Service.Manufacturing.PostProcessing.PostProcessing.button.save"
+                )}
+              />
             </Container>
-          ) : (
-            <Text className="w-full text-center">
-              {t(
-                "Service.Manufacturing.PostProcessing.PostProcessing.error.noPostProcessings"
+            <LoadingSuspense query={loadedPostProcessings}>
+              {loadedPostProcessings.data !== undefined &&
+              loadedPostProcessings.data.length > 0 ? (
+                <Container
+                  width="full"
+                  wrap="wrap"
+                  direction="row"
+                  align="start"
+                >
+                  {loadedPostProcessings.data
+                    .filter(filterBySearch)
+                    // .sort(sortSelectedPostProcessingsFirst)
+                    .map(
+                      (postProcessing: PostProcessingProps, index: number) => (
+                        <ProcessPostProcessingCard
+                          selected={isPostProcessingSelected(postProcessing)}
+                          key={index}
+                          item={postProcessing}
+                          openItemView={() => {}}
+                        >
+                          <Container direction="row">
+                            {isPostProcessingSelected(postProcessing) ? (
+                              <Button
+                                variant="primary"
+                                onClick={() =>
+                                  handleOnClickButtonDeselect(postProcessing)
+                                }
+                                title={t(
+                                  "Service.Manufacturing.PostProcessing.PostProcessing.button.deselect"
+                                )}
+                              />
+                            ) : (
+                              <Button
+                                variant="secondary"
+                                onClick={() =>
+                                  handleOnClickButtonSelect(postProcessing)
+                                }
+                                title={t(
+                                  "Service.Manufacturing.PostProcessing.PostProcessing.button.select"
+                                )}
+                              />
+                            )}
+                          </Container>
+                        </ProcessPostProcessingCard>
+                      )
+                    )}
+                </Container>
+              ) : (
+                <Text className="w-full text-center">
+                  {t(
+                    "Service.Manufacturing.PostProcessing.PostProcessing.error.noPostProcessings"
+                  )}
+                </Text>
               )}
-            </Text>
-          )}
-        </LoadingSuspense>
+            </LoadingSuspense>
+          </Container>
+        </Container>
       </Container>
-    </Container>
+    </Modal>
   );
 };

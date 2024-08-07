@@ -19,6 +19,10 @@ import useGetDynamicTestButtons, {
   TestDynamicProps,
 } from "@/api/Test/Querys/useGetDynamicTestButtons";
 import useSaveProjects from "@/api/Project/Mutations/useSaveProjects";
+import NetworkGraph, {
+  Edge,
+  Node,
+} from "../../components/NetworkGraph/GraphViewer";
 
 interface Props {}
 export const Test: React.FC<Props> = (props) => {
@@ -85,13 +89,103 @@ export const Test: React.FC<Props> = (props) => {
     }
   };
 
+  const testNodes: Node[] = [
+    {
+      id: "iFx2a59pT0pyLjmP84HFLGhQ3V3zkyHVuHmIbBZCe_w",
+      name: "Remove Support",
+    },
+    {
+      id: "aV36b8g-v0nZFnqjgkfVCPcX0ErtxOE1QG5YArmNr1g",
+      name: "Snapmaker Artisan 2.0",
+    },
+    {
+      id: "FFLXrILQ3S-WDs2JY2sHPoE_HvcPDvNu2fbi9gOt77Y",
+      name: "PLA - Black",
+    },
+    {
+      id: "_4xIHYkZhxil2Gs7f4TgcFqx2MTry9Q0-Y5NC_G_DIU",
+      name: "PLA",
+    },
+    {
+      id: "8Am_lJPpejYIPt7yA2tTtJvnLTsZrFA_KbMR8b_LwtU",
+      name: "InfAI e.V.",
+    },
+  ];
+  const testEdges: Edge[] = [
+    {
+      source: "iFx2a59pT0pyLjmP84HFLGhQ3V3zkyHVuHmIbBZCe_w",
+      target: "8Am_lJPpejYIPt7yA2tTtJvnLTsZrFA_KbMR8b_LwtU",
+    },
+    {
+      source: "aV36b8g-v0nZFnqjgkfVCPcX0ErtxOE1QG5YArmNr1g",
+      target: "_4xIHYkZhxil2Gs7f4TgcFqx2MTry9Q0-Y5NC_G_DIU",
+    },
+    {
+      source: "aV36b8g-v0nZFnqjgkfVCPcX0ErtxOE1QG5YArmNr1g",
+      target: "8Am_lJPpejYIPt7yA2tTtJvnLTsZrFA_KbMR8b_LwtU",
+    },
+    {
+      source: "FFLXrILQ3S-WDs2JY2sHPoE_HvcPDvNu2fbi9gOt77Y",
+      target: "_4xIHYkZhxil2Gs7f4TgcFqx2MTry9Q0-Y5NC_G_DIU",
+    },
+    {
+      source: "_4xIHYkZhxil2Gs7f4TgcFqx2MTry9Q0-Y5NC_G_DIU",
+      target: "aV36b8g-v0nZFnqjgkfVCPcX0ErtxOE1QG5YArmNr1g",
+    },
+    {
+      source: "_4xIHYkZhxil2Gs7f4TgcFqx2MTry9Q0-Y5NC_G_DIU",
+      target: "FFLXrILQ3S-WDs2JY2sHPoE_HvcPDvNu2fbi9gOt77Y",
+    },
+    {
+      source: "8Am_lJPpejYIPt7yA2tTtJvnLTsZrFA_KbMR8b_LwtU",
+      target: "iFx2a59pT0pyLjmP84HFLGhQ3V3zkyHVuHmIbBZCe_w",
+    },
+    {
+      source: "8Am_lJPpejYIPt7yA2tTtJvnLTsZrFA_KbMR8b_LwtU",
+      target: "aV36b8g-v0nZFnqjgkfVCPcX0ErtxOE1QG5YArmNr1g",
+    },
+  ];
+
   return (
     <div className="flex w-full snap-mandatory flex-col items-center justify-start gap-5">
       <Container direction="col" className="bg-white p-5">
         <Heading variant="h1">TestPage</Heading>
       </Container>
 
-      <Container direction="col" className="bg-white p-5">
+      <NetworkGraph edges={testEdges} nodes={testNodes} />
+
+      <div className="container relative  h-[400px] w-[400px] bg-slate-500 ">
+        <div
+          className="peer/big absolute left-1/2 top-1/2 z-10 flex h-40 w-40 -translate-x-20 -translate-y-20 items-center justify-center rounded-full border-2 bg-blue-500 duration-300 hover:cursor-pointer hover:border-orange-500 active:border-green-500 active:bg-green-300"
+          onClick={() => logger("big")}
+        >
+          Hover Here
+        </div>
+        <div
+          className=" absolute left-20 top-20 h-20 w-20 rounded-full bg-white duration-300 hover:cursor-pointer hover:bg-gray-500 active:border-red-500 active:bg-red-300 peer-hover/big:animate-pulse peer-hover/big:bg-orange-500"
+          onClick={() => logger("small lt")}
+        />
+        <div
+          className=" absolute right-20 top-20 h-20  w-20 rounded-full bg-white duration-300 hover:cursor-pointer hover:bg-gray-500 active:border-red-500  active:bg-red-300 peer-hover/big:animate-ping  peer-hover/big:bg-orange-500"
+          onClick={() => logger("small rt")}
+        />
+        <div
+          className=" absolute bottom-20 right-20  h-20 w-20 rounded-full bg-white duration-300 hover:cursor-pointer hover:bg-gray-500 active:border-red-500 active:bg-red-300 peer-hover/big:animate-bounce  peer-hover/big:bg-orange-500"
+          onClick={() => logger("small rb")}
+        />
+        <div
+          className=" absolute bottom-20 left-20 flex h-20 w-20  items-center justify-center rounded-full bg-white duration-300 hover:cursor-pointer hover:bg-gray-500 active:border-red-500 active:bg-red-300 peer-hover/big:animate-spin  peer-hover/big:bg-orange-500"
+          onClick={() => logger("small lb")}
+        >
+          LOL
+        </div>
+      </div>
+
+      <Container
+        direction="col"
+        width="full"
+        className="container bg-white p-5"
+      >
         <Heading variant="h2">Events</Heading>
         {events.length > 0
           ? events.map((event, index) => (

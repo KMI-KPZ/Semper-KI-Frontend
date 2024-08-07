@@ -125,11 +125,11 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
       ref={modalRef}
       className={twMerge(
         `
-        h-fit
+         h-fit
         w-fit 
         backdrop:fixed
-        backdrop:bottom-0 
-        backdrop:left-0
+        backdrop:bottom-0
+        backdrop:left-0 
         backdrop:right-0
         backdrop:top-0
         backdrop:bg-black

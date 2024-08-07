@@ -144,6 +144,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
     }
   }, [nodes, edges]);
 
+  //
   // useEffect(() => {
   //   if (edges.length > 0 && nodes.length > 0) {
   //     const svg = d3.select(svgRef.current);

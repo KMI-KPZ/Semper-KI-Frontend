@@ -27,6 +27,7 @@ const useGetDynamicTestButtons = () => {
   return useQuery<TestDynamicProps[], Error>({
     queryKey: ["testDynamicQuery"],
     queryFn: getDynamicTestButtons,
+    enabled: false,
   });
 };
 

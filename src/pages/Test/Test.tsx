@@ -19,10 +19,8 @@ import useGetDynamicTestButtons, {
   TestDynamicProps,
 } from "@/api/Test/Querys/useGetDynamicTestButtons";
 import useSaveProjects from "@/api/Project/Mutations/useSaveProjects";
-import NetworkGraph, {
-  Edge,
-  Node,
-} from "../../components/NetworkGraph/GraphViewer";
+import useGetGraph from "@/api/Graph/Querys/useGetGraph";
+import NetworkGraph from "@/components/NetworkGraph/GraphViewer";
 
 interface Props {}
 export const Test: React.FC<Props> = (props) => {
@@ -33,6 +31,7 @@ export const Test: React.FC<Props> = (props) => {
   const saveProjects = useSaveProjects();
   const dynamicButtonRequest = useDynamicButtonRequest();
   const testDynamicQuery = useGetDynamicTestButtons();
+  const graph = useGetGraph();
   const horizontalScroll = useRef<HTMLDivElement>(null);
 
   const openMenu = () => {
@@ -89,70 +88,17 @@ export const Test: React.FC<Props> = (props) => {
     }
   };
 
-  const testNodes: Node[] = [
-    {
-      id: "iFx2a59pT0pyLjmP84HFLGhQ3V3zkyHVuHmIbBZCe_w",
-      name: "Remove Support",
-    },
-    {
-      id: "aV36b8g-v0nZFnqjgkfVCPcX0ErtxOE1QG5YArmNr1g",
-      name: "Snapmaker Artisan 2.0",
-    },
-    {
-      id: "FFLXrILQ3S-WDs2JY2sHPoE_HvcPDvNu2fbi9gOt77Y",
-      name: "PLA - Black",
-    },
-    {
-      id: "_4xIHYkZhxil2Gs7f4TgcFqx2MTry9Q0-Y5NC_G_DIU",
-      name: "PLA",
-    },
-    {
-      id: "8Am_lJPpejYIPt7yA2tTtJvnLTsZrFA_KbMR8b_LwtU",
-      name: "InfAI e.V.",
-    },
-  ];
-  const testEdges: Edge[] = [
-    {
-      source: "iFx2a59pT0pyLjmP84HFLGhQ3V3zkyHVuHmIbBZCe_w",
-      target: "8Am_lJPpejYIPt7yA2tTtJvnLTsZrFA_KbMR8b_LwtU",
-    },
-    {
-      source: "aV36b8g-v0nZFnqjgkfVCPcX0ErtxOE1QG5YArmNr1g",
-      target: "_4xIHYkZhxil2Gs7f4TgcFqx2MTry9Q0-Y5NC_G_DIU",
-    },
-    {
-      source: "aV36b8g-v0nZFnqjgkfVCPcX0ErtxOE1QG5YArmNr1g",
-      target: "8Am_lJPpejYIPt7yA2tTtJvnLTsZrFA_KbMR8b_LwtU",
-    },
-    {
-      source: "FFLXrILQ3S-WDs2JY2sHPoE_HvcPDvNu2fbi9gOt77Y",
-      target: "_4xIHYkZhxil2Gs7f4TgcFqx2MTry9Q0-Y5NC_G_DIU",
-    },
-    {
-      source: "_4xIHYkZhxil2Gs7f4TgcFqx2MTry9Q0-Y5NC_G_DIU",
-      target: "aV36b8g-v0nZFnqjgkfVCPcX0ErtxOE1QG5YArmNr1g",
-    },
-    {
-      source: "_4xIHYkZhxil2Gs7f4TgcFqx2MTry9Q0-Y5NC_G_DIU",
-      target: "FFLXrILQ3S-WDs2JY2sHPoE_HvcPDvNu2fbi9gOt77Y",
-    },
-    {
-      source: "8Am_lJPpejYIPt7yA2tTtJvnLTsZrFA_KbMR8b_LwtU",
-      target: "iFx2a59pT0pyLjmP84HFLGhQ3V3zkyHVuHmIbBZCe_w",
-    },
-    {
-      source: "8Am_lJPpejYIPt7yA2tTtJvnLTsZrFA_KbMR8b_LwtU",
-      target: "aV36b8g-v0nZFnqjgkfVCPcX0ErtxOE1QG5YArmNr1g",
-    },
-  ];
-
   return (
     <div className="flex w-full snap-mandatory flex-col items-center justify-start gap-5">
       <Container direction="col" className="bg-white p-5">
         <Heading variant="h1">TestPage</Heading>
       </Container>
 
-      <NetworkGraph edges={testEdges} nodes={testNodes} />
+      {graph.isFetched && graph.data !== undefined ? (
+        <NetworkGraph edges={graph.data.edges} nodes={graph.data.nodes} />
+      ) : (
+        <LoadingAnimation />
+      )}
 
       <div className="container relative  h-[400px] w-[400px] bg-slate-500 ">
         <div

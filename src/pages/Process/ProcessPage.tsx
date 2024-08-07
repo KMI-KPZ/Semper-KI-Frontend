@@ -35,6 +35,7 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
           to=".."
           title={t("Process.ProcessPage.button.back")}
           variant="text"
+          width="fit"
           className="absolute left-5"
         >
           <ArrowBackIosIcon />

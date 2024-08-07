@@ -43,7 +43,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
             .id((d: any) => d.id)
             .distance(100)
         )
-        .force("charge", d3.forceManyBody().strength(-300))
+        .force("charge", d3.forceManyBody().strength(-500))
         .force("center", d3.forceCenter(width / 2, height / 2))
         .force("x", d3.forceX(width / 2).strength(0.05)) // Add centering force on X axis
         .force("y", d3.forceY(height / 2).strength(0.05)) // Add centering force on Y axis

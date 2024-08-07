@@ -125,8 +125,6 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
       ref={modalRef}
       className={twMerge(
         `
-         h-fit
-        w-fit 
         backdrop:fixed
         backdrop:bottom-0
         backdrop:left-0 
@@ -134,10 +132,7 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
         backdrop:top-0
         backdrop:bg-black
         backdrop:opacity-30
-        md:max-h-[90vh]
-        md:max-w-7xl
-        md:rounded-xl
-     `
+        `
       )}
       onKeyDown={onKeyDown}
       onClose={closeModal}
@@ -147,7 +142,18 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
     >
       <div
         className={twMerge(
-          `fixed left-0 top-0 flex h-screen w-screen items-center justify-center  bg-white md:relative md:left-auto md:top-auto md:h-full md:w-full md:p-10`,
+          `
+              fixed right-0
+                  top-0 flex h-full w-full
+                  flex-col items-center
+                  justify-center overflow-x-hidden
+                  bg-white 
+                  md:right-1/2 md:top-1/2 
+                  md:max-h-[90vh]  md:max-w-6xl 
+                   md:-translate-y-1/2 md:translate-x-1/2
+                   md:rounded-xl
+                   md:bg-gray-100`,
+
           className
         )}
         onClick={handleOnClickChildren}

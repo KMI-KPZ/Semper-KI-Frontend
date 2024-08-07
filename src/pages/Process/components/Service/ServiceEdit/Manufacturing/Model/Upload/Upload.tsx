@@ -163,7 +163,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
       },
       {
         onSuccess(data, variables, context) {
-          deleteModal("ServiceRoutes");
+          deleteModal("ServiceRoutesManufacturingModels");
         },
       }
     );
@@ -194,31 +194,32 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                   />
                 );
               })}
-              {fields.length > 0 ? (
-                <Container
-                  width="full"
-                  className="fixed bottom-10 z-10 rounded-xl border-2 bg-white p-5 md:sticky md:right-10"
-                >
-                  {errors.models !== undefined ? (
-                    <Text variant="body" className="text-red-500">
-                      {t(
-                        `Service.Manufacturing.Model.Upload.Upload.error.licenses`
-                      )}
-                    </Text>
-                  ) : null}
-                  <Button
-                    width="fit"
-                    loading={uploadModels.isLoading}
-                    variant="primary"
-                    title={t(
-                      `Service.Manufacturing.Model.Upload.Upload.button.upload`
-                    )}
-                    onClick={handleSubmit(sendModels)}
-                    // className="fixed bottom-10 z-10 md:sticky md:right-10 "
-                  />
-                </Container>
-              ) : null}
             </Container>
+            {fields.length > 0 ? (
+              <Container
+                width="fit"
+                direction="col"
+                className="fixed bottom-10 z-10 rounded-xl border-2 bg-white p-5 md:sticky md:right-10"
+              >
+                {errors.models !== undefined ? (
+                  <Text variant="body" className="text-red-500">
+                    {t(
+                      `Service.Manufacturing.Model.Upload.Upload.error.licenses`
+                    )}
+                  </Text>
+                ) : null}
+                <Button
+                  width="fit"
+                  loading={uploadModels.isLoading}
+                  variant="primary"
+                  title={t(
+                    `Service.Manufacturing.Model.Upload.Upload.button.upload`
+                  )}
+                  onClick={handleSubmit(sendModels)}
+                  // className="fixed bottom-10 z-10 md:sticky md:right-10 "
+                />
+              </Container>
+            ) : null}
           </Container>
         ) : null}
         <a

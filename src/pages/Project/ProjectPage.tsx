@@ -28,6 +28,7 @@ const ProjectPage: React.FC<ProjectPageProps> = (props) => {
     <Container width="full" direction="col">
       <Container width="full" className="relative  bg-white p-2">
         <Button
+          width="fit"
           to=".."
           title={t("Process.ProcessPage.button.back")}
           variant="text"

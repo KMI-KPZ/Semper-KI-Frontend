@@ -34,8 +34,13 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
       <ProcessMenu
         buttonTitle={t("Project.components.Info.button.menu")}
       ></ProcessMenu>
-      <Container direction="row" width="full" justify="start" className="gap-0">
-        <Container className="w-1/3 md:w-1/3" justify="start">
+      <Container
+        direction="auto"
+        width="full"
+        justify="start"
+        className="gap-0"
+      >
+        <Container direction="row" className="w-1/3 md:w-1/3" justify="start">
           <Text variant="strong" className="w-40">
             {t("Process.components.Info.name")}
           </Text>

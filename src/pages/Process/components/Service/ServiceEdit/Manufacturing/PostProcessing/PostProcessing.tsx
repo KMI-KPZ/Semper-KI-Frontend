@@ -52,7 +52,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
       },
       {
         onSuccess(data, variables, context) {
-          deleteModal("ServiceRoutes");
+          deleteModal("ServiceRouteManufacturingPostProcessings");
         },
       }
     );
@@ -108,13 +108,13 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
       modalKey="ServiceRouteManufacturingPostProcessings"
       open={true}
       closeModal={closeModal}
-      className=" bg-gray-100 md:max-w-7xl"
+      className=" "
     >
       <Container
         width="none"
         direction="col"
         justify="start"
-        className="h-full w-screen max-w-6xl overflow-auto p-5 pt-14 md:p-0"
+        className="h-full w-screen max-w-6xl p-5 pt-14"
       >
         <ServiceSearch searchText={searchText} setSearchText={setSearchText} />
         <Container direction="col" width="full">
@@ -125,13 +125,6 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
                   "Service.Manufacturing.PostProcessing.PostProcessing.available"
                 )}
               </Heading>
-              <Button
-                variant="primary"
-                onClick={handleOnClickButtonSave}
-                title={t(
-                  "Service.Manufacturing.PostProcessing.PostProcessing.button.save"
-                )}
-              />
             </Container>
             <LoadingSuspense query={loadedPostProcessings}>
               {loadedPostProcessings.data !== undefined &&
@@ -189,6 +182,19 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
               )}
             </LoadingSuspense>
           </Container>
+        </Container>
+        <Container
+          width="fit"
+          direction="col"
+          className="fixed bottom-10 z-10 rounded-xl border-2 bg-white px-5 py-3 md:sticky md:right-10"
+        >
+          <Button
+            variant="primary"
+            onClick={handleOnClickButtonSave}
+            title={t(
+              "Service.Manufacturing.PostProcessing.PostProcessing.button.save"
+            )}
+          />
         </Container>
       </Container>
     </Modal>

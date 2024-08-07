@@ -74,7 +74,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
       },
       {
         onSuccess(data, variables, context) {
-          deleteModal("ServiceRoutes");
+          deleteModal("ServiceRoutesManufacturingMaterials");
         },
       }
     );
@@ -128,7 +128,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
         width="none"
         direction="col"
         justify="start"
-        className=" h-full w-screen max-w-6xl p-5 pt-14 md:p-0"
+        className="h-full w-screen max-w-6xl p-5 pt-14"
       >
         <ServiceSearch searchText={searchText} setSearchText={setSearchText} />
         <Container direction="col" width="full">
@@ -193,14 +193,20 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
             </LoadingSuspense>
           </Container>
         </Container>
+        <Container
+          width="fit"
+          direction="col"
+          className="fixed bottom-10 z-10 rounded-xl border-2 bg-white px-5 py-3 md:sticky md:right-10"
+        >
+          <Button
+            className=""
+            variant="primary"
+            width="fit"
+            onClick={handleOnClickButtonSave}
+            title={t("Service.Manufacturing.Material.Material.button.save")}
+          />
+        </Container>
       </Container>
-      <Button
-        className="fixed bottom-10 z-10 md:sticky md:right-10 "
-        variant="primary"
-        width="fit"
-        onClick={handleOnClickButtonSave}
-        title={t("Service.Manufacturing.Material.Material.button.save")}
-      />
     </Modal>
   );
 };

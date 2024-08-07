@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 import { Edge, Node } from "@/api/Graph/Querys/useGetGraph";
-import { Text } from "@component-library/index";
+import { Button, Text } from "@component-library/index";
 import logger from "@/hooks/useLogger";
 
 interface NetworkGraphProps {
@@ -347,7 +347,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
 
   return (
     <div
-      className={`flex h-fit w-fit items-center justify-center overflow-clip rounded-xl border-2 bg-white`}
+      className={`relative flex h-fit w-fit items-center justify-center overflow-clip rounded-xl border-2 bg-white`}
     >
       {edges.length > 0 && nodes.length > 0 ? (
         <svg ref={svgRef} width={width} height={height} />

@@ -90,13 +90,13 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
       modalKey="ServiceRoutesManufacturingModels"
       open={true}
       closeModal={closeModal}
-      className=" bg-gray-100 md:max-w-7xl"
+      className=" relative bg-gray-100 md:max-w-7xl"
     >
       <Container
         width="none"
         direction="col"
         justify="start"
-        className="h-full w-screen max-w-6xl overflow-auto p-5 pt-14 md:p-0"
+        className="h-full w-screen max-w-6xl p-5 pt-14 md:p-0"
       >
         <ServiceSearch searchText={searchText} setSearchText={setSearchText} />
         <Container direction="col" width="full">

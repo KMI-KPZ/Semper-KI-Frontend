@@ -123,13 +123,12 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
       modalKey="ServiceRoutesManufacturingMaterials"
       open={true}
       closeModal={closeModal}
-      className=" bg-gray-100 md:max-w-7xl"
     >
       <Container
         width="none"
         direction="col"
         justify="start"
-        className="h-full w-screen max-w-6xl overflow-auto p-5 pt-14 md:p-0"
+        className=" h-full w-screen max-w-6xl p-5 pt-14 md:p-0"
       >
         <ServiceSearch searchText={searchText} setSearchText={setSearchText} />
         <Container direction="col" width="full">
@@ -138,11 +137,6 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
               <Heading variant="h2">
                 {t("Service.Manufacturing.Material.Material.available")}
               </Heading>
-              <Button
-                variant="primary"
-                onClick={handleOnClickButtonSave}
-                title={t("Service.Manufacturing.Material.Material.button.save")}
-              />
             </Container>
             <LoadingSuspense query={materialsQuery}>
               {materialsQuery.data !== undefined &&
@@ -200,6 +194,13 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
           </Container>
         </Container>
       </Container>
+      <Button
+        className="fixed bottom-10 z-10 md:sticky md:right-10 "
+        variant="primary"
+        width="fit"
+        onClick={handleOnClickButtonSave}
+        title={t("Service.Manufacturing.Material.Material.button.save")}
+      />
     </Modal>
   );
 };

@@ -16,7 +16,7 @@ export const ProcessContext = React.createContext<ProcessContextProps>({
     createdWhen: new Date(),
     processDetails: { amount: 1 },
     files: [],
-    messages: [],
+    messages: {},
     processID: "",
     serviceDetails: undefined,
     serviceStatus: 0,

@@ -1,4 +1,5 @@
-import useGetFlatOntologyPrinters from "@/api/Ontology/Querys/useGetFlatOntologyPrinters";
+import useGetOntoNodeNeighbors from "@/api/Resources/Ontology/Querys/useGetOntoNodeNeighbors";
+import useGetOntoNodes from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { OntoPrinter, OntoPrinterFlat } from "@/pages/Resources/types/types";
 import { AppLoadingSuspense, LoadingSuspense } from "@component-library/index";
 import React, { PropsWithChildren, createContext } from "react";
@@ -21,14 +22,18 @@ const OntoPrinterContextProvider: React.FC<
 > = (props) => {
   const { children } = props;
   const { t } = useTranslation();
-  const printersQuery = useGetFlatOntologyPrinters();
+  const ontoPrinters = useGetOntoNodes("printer");
+  const orgaPrinter = useGetOntoNodeNeighbors({
+    nodeID: "",
+    nodeType: "printer",
+  });
 
-  if (printersQuery.isFetched && printersQuery.data !== undefined)
+  if (ontoPrinters.isFetched && ontoPrinters.data !== undefined && orgaPrinter.isFetched && orgaPrinter.data !== undefined) {
     return (
       <OntoPrinterContext.Provider
         value={{
-          allPrinters: printersQuery.data,
-          ownPrinters: printersQuery.data,
+          allPrinters: ontoPrinters,
+          ownPrinters: orgaPrinter,
         }}
       >
         {children}

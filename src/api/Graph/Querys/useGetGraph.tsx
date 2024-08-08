@@ -21,16 +21,11 @@ const useGetGraph = () => {
   const queryClient = useQueryClient();
   const getGraph = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/private/graph/get/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/graph/get/`)
       .then((response) => {
         const data: ReturnDataType = {
-          nodes: response.data.nodes.map((node: any) => ({
-            id: node.nodeID,
-            name: node.nodeName,
-          })),
-          edges: response.data.edges.map(
-            (edge: any): Edge => ({ source: edge[0], target: edge[1] })
-          ),
+          nodes: response.data.Nodes,
+          edges: response.data.Edges,
         };
 
         logger("useGetGraph | getGraph ✅ |", response);

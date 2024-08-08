@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import * as d3 from "d3";
 import { Edge, Node } from "@/api/Graph/Querys/useGetGraph";
 import { Button, Text } from "@component-library/index";
@@ -14,6 +14,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
   edges = [],
 }) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
+  const [initialTick, setInitialTick] = useState<boolean>(true);
 
   const width = 1200;
   const height = 800;
@@ -47,8 +48,8 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
         .force("center", d3.forceCenter(width / 2, height / 2))
         .force("x", d3.forceX(width / 2).strength(0.05)) // Add centering force on X axis
         .force("y", d3.forceY(height / 2).strength(0.05)) // Add centering force on Y axis
-        .on("tick", ticked)
-        .on("end", onEnd); // Added an end event to handle scaling
+        .on("tick", ticked);
+      // .on("end", reScale); // Added an end event to handle scaling
 
       const link = container
         .append("g")
@@ -98,7 +99,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
         labels.attr("x", (d) => d.x as number).attr("y", (d) => d.y as number);
       }
 
-      function onEnd() {
+      const reScale = () => {
         // Calculate the bounding box of the graph after the simulation
         const xValues = nodes.map((node) => node.x || 0);
         const yValues = nodes.map((node) => node.y || 0);
@@ -106,22 +107,19 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
         const maxX = Math.max(...xValues);
         const minY = Math.min(...yValues);
         const maxY = Math.max(...yValues);
-
         const graphWidth = maxX - minX || 1; // Avoid division by zero
         const graphHeight = maxY - minY || 1; // Avoid division by zero
-
         // Calculate scaling factors
         const scaleX = width / graphWidth;
         const scaleY = height / graphHeight;
-        const scale = Math.min(scaleX, scaleY) * 0.8; // Apply some padding
-
+        const scale = Math.min(scaleX, scaleY) * 0.6; // Apply some padding
         container.attr(
           "transform",
           `translate(${width / 2}, ${height / 2}) scale(${scale}) translate(${
             -minX - graphWidth / 2
           }, ${-minY - graphHeight / 2})`
         );
-      }
+      };
 
       function drag(simulation: d3.Simulation<Node, undefined>) {
         return d3

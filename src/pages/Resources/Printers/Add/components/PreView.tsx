@@ -1,12 +1,10 @@
+import { OntoNodePrinter } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import logger from "@/hooks/useLogger";
-import { NewOntoPrinter, OntoPrinter } from "@/pages/Resources/types/types";
-import Card from "@component-library/Card/Card";
 
 interface ResourcesPrintersAddPreViewProps {
-  printer: OntoPrinter | NewOntoPrinter;
+  printer: OntoNodePrinter;
 }
 
 const ResourcesPrintersAddPreView: React.FC<
@@ -18,10 +16,10 @@ const ResourcesPrintersAddPreView: React.FC<
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
       <Heading variant="h2">
-        {`${t("Resources.Printers.view.name")} : ${printer.title}`}
+        {`${t("Resources.Printers.view.name")} : ${printer.nodeName}`}
       </Heading>
       <Heading variant="h3">{t("Resources.Printers.view.properties")}</Heading>
-      {printer.properties !== undefined && printer.properties.length > 0 ? (
+      {/* {printer.properties !== undefined && printer.properties.length > 0 ? (
         printer.properties.map((prop, propertyIndex) => (
           <div
             className="flex w-full flex-col items-start justify-center gap-5 px-10 md:flex-row"
@@ -41,7 +39,7 @@ const ResourcesPrintersAddPreView: React.FC<
         ))
       ) : (
         <Text variant="body">{t("Resources.Printers.form.emptyProps")}</Text>
-      )}
+      )} */}
     </div>
   );
 };

@@ -5,7 +5,9 @@ import { Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import useGetFlatOntologyMaterials from "@/api/Ontology/Querys/useGetFlatOntologyMaterials";
+import useGetOntoNodes, {
+  OntoNodeMaterial,
+} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 
 interface ResourcesMaterialsTableProps {}
 
@@ -14,7 +16,9 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
 ) => {
   const {} = props;
   const { t } = useTranslation();
-  const materialsQuery = useGetFlatOntologyMaterials();
+  const materialsQuery = useGetOntoNodes("material");
+  const materials: OntoNodeMaterial[] =
+    materialsQuery.data as OntoNodeMaterial[];
 
   const handleOnClickDelete = (materialID: string) => {};
 
@@ -45,8 +49,8 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
                 {t("Resources.Materials.table.actions")}
               </Heading>,
             ]}
-            rows={materialsQuery.data.map((material, index) => [
-              <Text variant="body">{material.title}</Text>,
+            rows={materials.map((material, index) => [
+              <Text variant="body">{material.nodeName}</Text>,
               <div className="flex flex-row items-center justify-center gap-5">
                 <Button title={t("Resources.Materials.table.button.delete")} />
               </div>,

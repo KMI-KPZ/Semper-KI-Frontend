@@ -9,39 +9,34 @@ export type OntoNodeType =
   | "additionalRequirement"
   | "color";
 
-export type GeneralOntoNode = {
+export type OntoNodeGeneral = {
   nodeName: string;
   context: string;
+  nodeID?: string;
 };
 
-export type OntoNode = (
-  | OrganizationOntoNode
-  | PrinterOntoNode
-  | MaterialOntoNode
-  | AdditionalRequirementOntoNode
-  | ColorOntoNode
-) &
-  GeneralOntoNode;
+export type OntoNode =
+  | OntoNodeOrganization
+  | OntoNodePrinter
+  | OntoNodeMaterial
+  | OntoNodeAdditionalRequirement
+  | OntoNodeColor;
 
-export type ExistingOntoNode = {
-  nodeID: string;
-} & OntoNode;
-
-export type OrganizationOntoNode = {
+export type OntoNodeOrganization = {
   nodetype: "organization";
   properties: {};
-};
+} & OntoNodeGeneral;
 
-export type PrinterOntoNode = {
+export type OntoNodePrinter = {
   nodetype: "printer";
   properties: {
     imgPath: string;
     buildVolume: string;
     technology: string;
   };
-};
+} & OntoNodeGeneral;
 
-export type MaterialOntoNode = {
+export type OntoNodeMaterial = {
   nodetype: "material";
   properties: {
     imgPath: string;
@@ -52,25 +47,25 @@ export type MaterialOntoNode = {
     eModul: string;
     poissonRatio: string;
   };
-};
+} & OntoNodeGeneral;
 
-export type AdditionalRequirementOntoNode = {
+export type OntoNodeAdditionalRequirement = {
   nodetype: "additionalRequirement";
   properties: {
     imgPath: string;
     heatResistant: string;
     smooth: string;
   };
-};
+} & OntoNodeGeneral;
 
-export type ColorOntoNode = {
+export type OntoNodeColor = {
   nodetype: "color";
   properties: {
     imgPath: string;
     foodSafe: string;
     color: string;
   };
-};
+} & OntoNodeGeneral;
 
 const useGetOntoNodes = (nodeType: OntoNodeType) => {
   const queryClient = useQueryClient();

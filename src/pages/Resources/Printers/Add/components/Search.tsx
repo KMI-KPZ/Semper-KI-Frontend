@@ -1,26 +1,14 @@
-import {
-  NewOntoPrinter,
-  OntoPrinter,
-  OntoPrinterFlat,
-} from "@/pages/Resources/types/types";
-import {
-  Button,
-  Container,
-  LoadingSuspense,
-  Text,
-} from "@component-library/index";
+import { Button, Container, Text } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import useOntoPrinters from "@/hooks/useOntoPrinters";
-import logger from "@/hooks/useLogger";
 import Card from "@component-library/Card/Card";
 import useSearch from "@/hooks/useSearch";
-import useGetOntologyPrinter from "@/api/Ontology/Querys/useGetOntologyPrinter";
-import useLoadOntologyPrinter from "@/api/Ontology/Mutations/useLoadOntologyPrinter";
+import { OntoNodePrinter } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 
 interface ResourcesPrintersAddSearchProps {
-  printer?: OntoPrinter;
-  setPrinter(printer: OntoPrinter): void;
+  printer?: OntoNodePrinter;
+  setPrinter(printer: OntoNodePrinter): void;
 }
 
 const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
@@ -29,32 +17,31 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
   const { setPrinter, printer } = props;
 
   const { t } = useTranslation();
-  const { allPrinters } = useOntoPrinters();
   const [printerName, setPrinterName] = useState<string>(
-    printer !== undefined ? printer.title : ""
+    printer !== undefined ? printer.nodeName : ""
   );
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
-  const loadPrinter = useLoadOntologyPrinter();
+  const { allPrinters, ownPrinters } = useOntoPrinters();
   const { filterDataBySearchInput, handleSearchInputChange } =
-    useSearch<OntoPrinterFlat>();
+    useSearch<OntoNodePrinter>();
 
   const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPrinterName(e.target.value);
     handleSearchInputChange(e.target.value);
   };
 
-  const handleOnClickCardPrinter = (printer: OntoPrinterFlat) => {
+  const handleOnClickCardPrinter = (printer: OntoNodePrinter) => {
     setShowDropdown(false);
-    setPrinterName(printer.title);
-    loadPrinter.mutate(printer.URI, {
-      onSuccess(loadedPrinter, variables, context) {
-        setPrinter(loadedPrinter);
-      },
-    });
+    setPrinter(printer);
   };
 
   const handleOnClickButtonNew = () => {
-    setPrinter({ properties: [], title: printerName, type: "new" });
+    setPrinter({
+      properties: { buildVolume: "", imgPath: "", technology: "" },
+      nodeName: printerName,
+      nodetype: "printer",
+      context: "",
+    });
     setShowDropdown(false);
   };
 
@@ -87,7 +74,7 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
           .filter((printer) => filterDataBySearchInput(printer))
           .map((printer, index) => (
             <Card key={index} onClick={() => handleOnClickCardPrinter(printer)}>
-              <Text>{printer.title}</Text>
+              <Text>{printer.nodeName}</Text>
             </Card>
           ))}
       </Container>

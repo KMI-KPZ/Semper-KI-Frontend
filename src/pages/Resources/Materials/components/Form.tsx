@@ -8,8 +8,9 @@ import * as yup from "yup";
 import SearchIcon from "@mui/icons-material/Search";
 import { LoadingSuspense } from "@component-library/index";
 import logger from "@/hooks/useLogger";
-import useGetOntologyMaterial from "@/api/Ontology/Querys/useGetOntologyMaterial";
-import useGetFlatOntologyMaterials from "@/api/Ontology/Querys/useGetFlatOntologyMaterials";
+import useGetOntoNodes, {
+  OntoNodeMaterial,
+} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 
 interface ResourcesMaterialsFormProps {}
 
@@ -19,7 +20,9 @@ const ResourcesMaterialsForm: React.FC<ResourcesMaterialsFormProps> = (
   const {} = props;
   const { t } = useTranslation();
   const [materialID, setMaterialID] = useState<string>("");
-  const materialsQuery = useGetFlatOntologyMaterials();
+  const materialsQuery = useGetOntoNodes("material");
+  const materials: OntoNodeMaterial[] =
+    materialsQuery.data as OntoNodeMaterial[];
 
   const schema = yup
     .object({
@@ -70,13 +73,13 @@ const ResourcesMaterialsForm: React.FC<ResourcesMaterialsFormProps> = (
       >
         {materialsQuery.data !== undefined && materialsQuery.data.length > 0 ? (
           <div className="flex w-full flex-col items-center justify-center gap-5">
-            {materialsQuery.data.map((material, index) => (
+            {materials.map((material, index) => (
               <div
                 key={index}
                 className="flex w-full flex-row items-center justify-between"
               >
-                <Text variant="body">{material.title}</Text>
-                <Text variant="body">{material.URI}</Text>
+                <Text variant="body">{material.nodeName}</Text>
+                <Text variant="body">{material.context}</Text>
               </div>
             ))}
           </div>

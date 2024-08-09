@@ -1,11 +1,10 @@
-import { authorizedCustomAxios } from "@/api/customAxios";
+import { OntoNodePrinter } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { OntoPrinterContext } from "@/contexts/OntoPrinterContextProvider";
-import { OntoPrinterFlat } from "@/pages/Resources/types/types";
 import { useContext } from "react";
 
 interface useOntoPrintersReturnProps {
-  allPrinters: OntoPrinterFlat[];
-  ownPrinters: OntoPrinterFlat[];
+  allPrinters: OntoNodePrinter[];
+  ownPrinters: OntoNodePrinter[];
 }
 
 const useOntoPrinters = (): useOntoPrintersReturnProps => {

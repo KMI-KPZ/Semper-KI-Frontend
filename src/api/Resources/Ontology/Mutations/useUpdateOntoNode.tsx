@@ -1,11 +1,11 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { ExistingOntoNode, OntoNode } from "../Querys/useGetOntoNodes";
+import { OntoNode } from "../Querys/useGetOntoNodes";
 
 const useUpdateOntoNode = () => {
   const queryClient = useQueryClient();
-  const updateOntoNode = async (node: ExistingOntoNode) =>
+  const updateOntoNode = async (node: OntoNode) =>
     authorizedCustomAxios
       .post(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/admin/nodes/update/`,
@@ -19,7 +19,7 @@ const useUpdateOntoNode = () => {
         logger("useUpdateNode | updateNode ❌ |", error);
       });
 
-  return useMutation<string, Error, ExistingOntoNode>({
+  return useMutation<string, Error, OntoNode>({
     mutationFn: updateOntoNode,
     onSuccess: (data, props, context) => {
       queryClient.invalidateQueries(["resources", "onto"]);

@@ -5,7 +5,7 @@ import { Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import useGetFlatOntologyPrinters from "@/api/Ontology/Querys/useGetFlatOntologyPrinters";
+import useOntoPrinters from "@/hooks/useOntoPrinters";
 
 interface ResourcesPrintersTableProps {}
 
@@ -14,7 +14,7 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
 ) => {
   const {} = props;
   const { t } = useTranslation();
-  const printersQuery = useGetFlatOntologyPrinters();
+  const { allPrinters, ownPrinters } = useOntoPrinters();
 
   const handleOnClickDelete = (materialID: string) => {};
 
@@ -30,39 +30,62 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
           />
         </div>
       </PermissionGate>
-      <LoadingSuspense
-        query={printersQuery}
-        errorText={t("Resources.Printers.table.empty")}
-      >
-        <Divider />
-        {printersQuery.data !== undefined && printersQuery.data.length > 0 ? (
-          <Table
-            header={[
-              <Heading variant="h3">
-                {t("Resources.Printers.table.name")}
-              </Heading>,
-              <Heading variant="h3">
-                {t("Resources.Printers.table.actions")}
-              </Heading>,
-            ]}
-            rows={printersQuery.data.map((material, index) => [
-              <Text variant="body">{material.title}</Text>,
-              <div className="flex flex-row items-center justify-center gap-5">
-                <Button
-                  size="sm"
-                  title={t("Resources.Printers.table.button.delete")}
-                />
-                <Button
-                  size="sm"
-                  title={t("Resources.Printers.table.button.edit")}
-                />
-              </div>,
-            ])}
-          />
-        ) : (
-          t("Resources.Printers.table.empty")
-        )}
-      </LoadingSuspense>
+      <Divider />
+      {ownPrinters.length > 0 ? (
+        <Table
+          header={[
+            <Heading variant="h3">
+              {t("Resources.Printers.table.name")}
+            </Heading>,
+            <Heading variant="h3">
+              {t("Resources.Printers.table.actions")}
+            </Heading>,
+          ]}
+          rows={ownPrinters.map((printer, index) => [
+            <Text variant="body">{printer.nodeName}</Text>,
+            <div className="flex flex-row items-center justify-center gap-5">
+              <Button
+                size="sm"
+                title={t("Resources.Printers.table.button.delete")}
+              />
+              <Button
+                size="sm"
+                title={t("Resources.Printers.table.button.edit")}
+              />
+            </div>,
+          ])}
+        />
+      ) : (
+        t("Resources.Printers.table.empty")
+      )}
+      <Divider />
+      {allPrinters.length > 0 ? (
+        <Table
+          header={[
+            <Heading variant="h3">
+              {t("Resources.Printers.table.name")}
+            </Heading>,
+            <Heading variant="h3">
+              {t("Resources.Printers.table.actions")}
+            </Heading>,
+          ]}
+          rows={allPrinters.map((printer, index) => [
+            <Text variant="body">{printer.nodeName}</Text>,
+            <div className="flex flex-row items-center justify-center gap-5">
+              <Button
+                size="sm"
+                title={t("Resources.Printers.table.button.delete")}
+              />
+              <Button
+                size="sm"
+                title={t("Resources.Printers.table.button.edit")}
+              />
+            </div>,
+          ])}
+        />
+      ) : (
+        t("Resources.Printers.table.empty")
+      )}
     </div>
   );
 };

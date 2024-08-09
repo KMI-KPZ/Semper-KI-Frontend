@@ -1,6 +1,8 @@
 import useGetOntoNodeNeighbors from "@/api/Resources/Ontology/Querys/useGetOntoNodeNeighbors";
-import useGetOntoNodes from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
-import { OntoPrinter, OntoPrinterFlat } from "@/pages/Resources/types/types";
+import useGetOntoNodes, {
+  OntoNodePrinter,
+} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { AppLoadingSuspense, LoadingSuspense } from "@component-library/index";
 import React, { PropsWithChildren, createContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,8 +10,8 @@ import { useTranslation } from "react-i18next";
 interface OntoPrinterContextProviderProps {}
 
 export type OntoPrinterContext = {
-  allPrinters: OntoPrinterFlat[];
-  ownPrinters: OntoPrinterFlat[];
+  allPrinters: OntoNodePrinter[];
+  ownPrinters: OntoNodePrinter[];
 };
 
 export const OntoPrinterContext = createContext<OntoPrinterContext>({
@@ -23,22 +25,29 @@ const OntoPrinterContextProvider: React.FC<
   const { children } = props;
   const { t } = useTranslation();
   const ontoPrinters = useGetOntoNodes("printer");
+  const { user } = useAuthorizedUser();
   const orgaPrinter = useGetOntoNodeNeighbors({
-    nodeID: "",
+    nodeID: user.organization === undefined ? "" : user.organization,
     nodeType: "printer",
   });
 
-  if (ontoPrinters.isFetched && ontoPrinters.data !== undefined && orgaPrinter.isFetched && orgaPrinter.data !== undefined) {
+  if (
+    ontoPrinters.isFetched &&
+    ontoPrinters.data !== undefined &&
+    orgaPrinter.isFetched &&
+    orgaPrinter.data !== undefined
+  )
     return (
       <OntoPrinterContext.Provider
         value={{
-          allPrinters: ontoPrinters,
-          ownPrinters: orgaPrinter,
+          allPrinters: ontoPrinters.data as OntoNodePrinter[],
+          ownPrinters: orgaPrinter.data as OntoNodePrinter[],
         }}
       >
         {children}
       </OntoPrinterContext.Provider>
     );
+
   return <AppLoadingSuspense />;
 };
 

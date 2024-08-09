@@ -1,9 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
-import ResourcesPrintersAdd from "./Add/Add";
 import ResourcesPrintersTable from "./Table/Table";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import ResourcesPrintersAdd from "./Add/Add";
 
 interface ResourcesPrintersProps {}
 

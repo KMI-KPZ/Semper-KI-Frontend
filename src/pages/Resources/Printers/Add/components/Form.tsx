@@ -9,29 +9,26 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import ReplayIcon from "@mui/icons-material/Replay";
 import CheckIcon from "@mui/icons-material/Check";
-import logger from "@/hooks/useLogger";
-import { NewOntoPrinter, OntoPrinter } from "@/pages/Resources/types/types";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import useGetFlatOntologyPrinters from "@/api/Ontology/Querys/useGetFlatOntologyPrinters";
+import { OntoNodePrinter } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import useOntoPrinters from "@/hooks/useOntoPrinters";
 interface PrintersAddFormProps {
-  printer: OntoPrinter | NewOntoPrinter;
-  setPrinter(printer: OntoPrinter | NewOntoPrinter): void;
+  printer: OntoNodePrinter;
+  setPrinter(printer: OntoNodePrinter): void;
   setEdit(edit: boolean): void;
 }
 
 const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
   const { printer, setPrinter, setEdit } = props;
   const { t } = useTranslation();
-  const printersQuery = useGetFlatOntologyPrinters();
+  const { allPrinters, ownPrinters } = useOntoPrinters();
 
   const schema = yup
     .object({
       printerName: yup
         .string()
         .notOneOf(
-          printersQuery.data !== undefined
-            ? [...printersQuery.data.map((printer) => printer.title)]
-            : [],
+          [...allPrinters.map((printer) => printer.nodeName)],
           t("Resources.Printers.form.yup.notSamePrinterName")
         )
         .required(
@@ -71,15 +68,15 @@ const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
-    defaultValues: {
-      printerName: printer !== undefined ? printer.title : "",
-      properties:
-        printer !== undefined
-          ? printer.properties.map((property) => ({
-              ...property,
-            }))
-          : [],
-    },
+    // defaultValues: {
+    //   printerName: printer !== undefined ? printer.title : "",
+    //   properties:
+    //     printer !== undefined
+    //       ? printer.properties.map((property) => ({
+    //           ...property,
+    //         }))
+    //       : [],
+    // },
   });
 
   const { fields, append, remove, update } = useFieldArray({
@@ -88,21 +85,21 @@ const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
   });
 
   const onSubmit = (data: FormData) => {
-    setPrinter(
-      printer.type === "existing"
-        ? {
-            title: data.printerName,
-            properties: data.properties,
-            type: "variant",
-            lastURI: printer.URI,
-          }
-        : {
-            title: data.printerName,
-            properties: data.properties,
-            type: "new",
-          }
-    );
-    setEdit(false);
+    // setPrinter(
+    //   printer.type === "existing"
+    //     ? {
+    //         title: data.printerName,
+    //         properties: data.properties,
+    //         type: "variant",
+    //         lastURI: printer.URI,
+    //       }
+    //     : {
+    //         title: data.printerName,
+    //         properties: data.properties,
+    //         type: "new",
+    //       }
+    // );
+    // setEdit(false);
   };
 
   const handleOnClickButtonAddProperty = () => {
@@ -136,13 +133,13 @@ const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
   };
 
   const handleOnClickButtonReset = () => {
-    setValue("printerName", printer.title);
-    setValue(
-      "properties",
-      printer.properties.map((property) => ({
-        ...property,
-      }))
-    );
+    // setValue("printerName", printer.title);
+    // setValue(
+    //   "properties",
+    //   printer.properties.map((property) => ({
+    //     ...property,
+    //   }))
+    // );
   };
 
   const handleOnClickButtonBack = () => {

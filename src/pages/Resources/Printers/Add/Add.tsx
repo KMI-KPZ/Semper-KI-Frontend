@@ -5,16 +5,15 @@ import ResourcesPrintersAddSearch from "./components/Search";
 import EditIcon from "@mui/icons-material/Edit";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ResourcesPrintersAddPreView from "./components/PreView";
-import {
-  NewOntoPrinter,
-  OntoPrinter,
-  OntoPrinterType,
-} from "../../types/types";
+
 import PrintersAddForm from "./components/Form";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { useNavigate } from "react-router-dom";
-import useAddOntologyPrinter from "@/api/Ontology/Mutations/useAddOntologyPrinter";
+import { OntoNodePrinter } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import useCreateOntoNode from "@/api/Resources/Ontology/Mutations/useCreateOntoNode";
+import useCreateOrgaNode from "@/api/Resources/Organization/Mutations/useCreateOrgaNode";
+import useCreateOrgaEdge from "@/api/Resources/Organization/Mutations/useCreateOrgaEdge";
 
 interface ResourcesPrintersAddProps {}
 
@@ -22,9 +21,10 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
-  const [printer, setPrinter] = useState<OntoPrinter | NewOntoPrinter>();
+  const [printer, setPrinter] = useState<OntoNodePrinter>();
   const [edit, setEdit] = useState<boolean>(false);
-  const addPrinterMutation = useAddOntologyPrinter();
+  const createOrgaEdge = useCreateOrgaEdge();
+  const createOrgaNode = useCreateOrgaNode();
   const navigate = useNavigate();
 
   const handleOnClickButtonEdit = () => {
@@ -35,19 +35,19 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
-    if (printer !== undefined)
-      addPrinterMutation.mutate(
-        {
-          organizationID:
-            user.organization !== undefined ? user.organization : "",
-          printer,
-        },
-        {
-          onSuccess(data, variables, context) {
-            navigate("/resources/printers");
-          },
-        }
-      );
+    // if (printer !== undefined)
+    // addPrinterMutation.mutate(
+    //   {
+    //     organizationID:
+    //       user.organization !== undefined ? user.organization : "",
+    //     printer,
+    //   },
+    //   {
+    //     onSuccess(data, variables, context) {
+    //       navigate("/resources/printers");
+    //     },
+    //   }
+    // );
   };
 
   const handleOnClickButtonBack = () => {
@@ -81,7 +81,7 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
                   <Button
                     startIcon={<EditIcon />}
                     title={t(
-                      `Resources.Printers.form.button.edit.${printer.type}`
+                      `Resources.Printers.form.button.edit.existing` //${printer.type}`
                     )}
                     onClick={handleOnClickButtonEdit}
                   />

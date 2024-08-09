@@ -27,6 +27,7 @@ const useGetOntoNodeNeighbors = ({
   return useQuery<OntoNode[], Error>({
     queryKey: ["resources", "onto", "nodes", nodeID, nodeType],
     queryFn: getOntoNodeNeighbors,
+    enabled: nodeID !== "",
   });
 };
 

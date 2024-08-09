@@ -31,6 +31,7 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
         </div>
       </PermissionGate>
       <Divider />
+      <Heading variant="h3">{t("Resources.Printers.table.ownPrinter")}</Heading>
       {ownPrinters.length > 0 ? (
         <Table
           header={[
@@ -59,6 +60,7 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
         t("Resources.Printers.table.empty")
       )}
       <Divider />
+      <Heading variant="h3">{t("Resources.Printers.table.allPrinter")}</Heading>
       {allPrinters.length > 0 ? (
         <Table
           header={[

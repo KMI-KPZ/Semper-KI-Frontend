@@ -1813,6 +1813,8 @@
     },
     "Printers": {
       "table": {
+        "ownPrinter": "Eigene Drucker",
+        "allPrinter": "Alle Drucker",
         "header": "3D-Drucker",
         "name": "Name",
         "actions": "Aktionen",

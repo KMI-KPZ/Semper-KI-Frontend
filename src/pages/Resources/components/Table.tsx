@@ -37,9 +37,17 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
   };
   const handleOnClickButtonDelete = (node: T) => {
     if (node.nodeID === undefined) return;
-    deleteOrgaEdge.mutate({
-      entityID: node.nodeID,
-    });
+    if (
+      window.confirm(
+        t("Resources.components.Table.confirmDelete", {
+          name: node.nodeName,
+        })
+      )
+    ) {
+      deleteOrgaEdge.mutate({
+        entityID: node.nodeID,
+      });
+    }
   };
 
   return (

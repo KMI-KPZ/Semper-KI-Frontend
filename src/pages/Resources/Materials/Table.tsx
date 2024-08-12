@@ -31,8 +31,10 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
 
   return (
     <Container direction="col" width="full">
-      <Heading variant="h2">{t("Resources.Materials.table.header")}</Heading>
-      <PermissionGate element="ResourcesButtonAddMaterial">
+      <Container width="full" direction="row">
+        <Heading variant="h2">{t("Resources.Materials.table.header")}</Heading>
+      </Container>
+      {/* <PermissionGate element="ResourcesButtonAddMaterial">
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-col">
           <Button
             title={t("Resources.Materials.table.button.add")}
@@ -41,13 +43,22 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
             size="sm"
           />
         </div>
-      </PermissionGate>
+      </PermissionGate> */}
       <Divider />
-      <Heading variant="h3">{t("Resources.Materials.table.own")}</Heading>
+      <Container width="full" justify="start" direction="row">
+        <Heading variant="h3">{t("Resources.Materials.table.own")}</Heading>
+      </Container>
+
       <ResourceTable nodes={ownMaterials.data} nodeType="material" />
       <Divider />
-      <Heading variant="h3">{t("Resources.Materials.table.all")}</Heading>
-      <ResourceTable nodes={allMaterials.data} nodeType="material" />
+      <Container width="full" justify="start" direction="row">
+        <Heading variant="h3">{t("Resources.Materials.table.all")}</Heading>
+      </Container>
+      <ResourceTable
+        nodes={allMaterials.data}
+        nodeType="material"
+        actionType="all"
+      />
     </Container>
   );
 };

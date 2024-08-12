@@ -37,24 +37,31 @@ const ResourcesPostProcessings: React.FC<ResourcesPostProcessingsProps> = (
     return <LoadingAnimation />;
   return (
     <Container direction="col" width="full">
-      <Heading variant="h2">{t("Resources.PostProcessings.header")}</Heading>
-      <Button
+      <Container width="full" direction="row">
+        <Heading variant="h2">{t("Resources.PostProcessings.header")}</Heading>
+      </Container>
+      {/* <Button
         title={t("Resources.PostProcessings.add")}
         to="/resources/materials/add"
         variant="secondary"
         size="sm"
-      />
+      /> */}
       <Divider />
-      <Heading variant="h3">{t("Resources.PostProcessings.own")}</Heading>
+      <Container width="full" justify="start" direction="row">
+        <Heading variant="h3">{t("Resources.PostProcessings.own")}</Heading>
+      </Container>
       <ResourceTable
         nodes={ownAdditionalRequirements.data}
         nodeType="additionalRequirement"
       />
       <Divider />
-      <Heading variant="h3">{t("Resources.PostProcessings.all")}</Heading>
+      <Container width="full" justify="start" direction="row">
+        <Heading variant="h3">{t("Resources.PostProcessings.all")}</Heading>
+      </Container>
       <ResourceTable
         nodes={allAdditionalrequirements.data}
         nodeType="additionalRequirement"
+        actionType="all"
       />
     </Container>
   );

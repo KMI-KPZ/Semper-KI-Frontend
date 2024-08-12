@@ -1801,7 +1801,8 @@
         "noItems": "keine Einträge vorhanden",
         "buttons": {
           "edit": "Bearbeiten",
-          "delete": "Löschen"
+          "delete": "Löschen",
+          "add": "Hinzufügen"
         }
       }
     },

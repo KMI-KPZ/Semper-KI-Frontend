@@ -7,18 +7,40 @@ import {
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
+import useCreateOrgaEdge from "@/api/Resources/Organization/Mutations/useCreateOrgaEdge";
+import useDeleteOrgaEdge from "@/api/Resources/Organization/Mutations/useDeleteOrgaEdge";
 
 interface ResourceTableProps<T extends OntoNode> {
   nodes: T[] | undefined;
   nodeType: OntoNodeType;
+  actionType?: "own" | "all";
 }
 
 const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
-  const { nodes = [], nodeType } = props;
+  const { nodes = [], nodeType, actionType = "own" } = props;
   const { t } = useTranslation();
+
+  const createOrgaEdge = useCreateOrgaEdge();
+  const deleteOrgaEdge = useDeleteOrgaEdge();
 
   const { filterDataBySearchInput, handleSearchInputChange } = useSearch<T>();
   const { getSortIcon, handleSort, sortItems } = useSort<T>();
+
+  const handleOnClickButtonAdd = (node: T) => {
+    if (node.nodeID === undefined) return;
+    createOrgaEdge.mutate({
+      entityIDs: [node.nodeID],
+    });
+  };
+  const handleOnClickButtonEdit = (node: T) => {
+    console.log("Edit node: ", node);
+  };
+  const handleOnClickButtonDelete = (node: T) => {
+    if (node.nodeID === undefined) return;
+    deleteOrgaEdge.mutate({
+      entityID: node.nodeID,
+    });
+  };
 
   return (
     <Container width="full" direction="col">
@@ -54,14 +76,30 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
                     <td className="text-center">{node.nodeName}</td>
                     <td>
                       <Container width="full">
-                        <Button
-                          variant="text"
-                          title={t("Resources.components.Table.buttons.edit")}
-                        />
-                        <Button
-                          variant="text"
-                          title={t("Resources.components.Table.buttons.delete")}
-                        />
+                        {actionType === "all" ? (
+                          <Button
+                            variant="text"
+                            title={t("Resources.components.Table.buttons.add")}
+                            onClick={() => handleOnClickButtonAdd(node)}
+                          />
+                        ) : (
+                          <>
+                            <Button
+                              variant="text"
+                              title={t(
+                                "Resources.components.Table.buttons.edit"
+                              )}
+                              onClick={() => handleOnClickButtonEdit(node)}
+                            />
+                            <Button
+                              variant="text"
+                              title={t(
+                                "Resources.components.Table.buttons.delete"
+                              )}
+                              onClick={() => handleOnClickButtonDelete(node)}
+                            />
+                          </>
+                        )}
                       </Container>
                     </td>
                   </tr>

@@ -32,8 +32,10 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
 
   return (
     <Container direction="col" width="full">
-      <Heading variant="h2">{t("Resources.Printers.table.header")}</Heading>
-      <PermissionGate element="ResourcesButtonAddPrinter">
+      <Container width="full" direction="row">
+        <Heading variant="h2">{t("Resources.Printers.table.header")}</Heading>
+      </Container>
+      {/* <PermissionGate element="ResourcesButtonAddPrinter">
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-col">
           <Button
             title={t("Resources.Printers.table.button.add")}
@@ -42,13 +44,21 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
             size="sm"
           />
         </div>
-      </PermissionGate>
+      </PermissionGate> */}
       <Divider />
-      <Heading variant="h3">{t("Resources.Printers.table.own")}</Heading>
+      <Container width="full" justify="start" direction="row">
+        <Heading variant="h3">{t("Resources.Printers.table.own")}</Heading>
+      </Container>
       <ResourceTable nodes={ownPrinters.data} nodeType="printer" />
       <Divider />
-      <Heading variant="h3">{t("Resources.Printers.table.all")}</Heading>
-      <ResourceTable nodes={allPrinters.data} nodeType="printer" />
+      <Container width="full" justify="start" direction="row">
+        <Heading variant="h3">{t("Resources.Printers.table.all")}</Heading>
+      </Container>
+      <ResourceTable
+        nodes={allPrinters.data}
+        nodeType="printer"
+        actionType="all"
+      />
     </Container>
   );
 };

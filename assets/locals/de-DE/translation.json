@@ -194,6 +194,13 @@
       "quantity": "Menge",
       "resilience": "Widerstandsfähigkeit",
       "sustainability": "Nachhaltigkeit"
+    },
+    "OntoNodeType": {
+      "organization": "Organisation",
+      "printer": "3D-Drucker",
+      "material": "Materialien",
+      "additionalRequirement": "Zusätzliche Anforderungen",
+      "color": "Farben"
     }
   },
   "api": {
@@ -1787,6 +1794,15 @@
         "materials": "Materialien",
         "printers": "3D-Drucker",
         "postProcessings": "Nachbearbeitung"
+      },
+      "Table": {
+        "action": "Aktionen",
+        "name": "Name",
+        "noItems": "keine Einträge vorhanden",
+        "buttons": {
+          "edit": "Bearbeiten",
+          "delete": "Löschen"
+        }
       }
     },
     "Overview": {
@@ -1794,6 +1810,8 @@
     },
     "Materials": {
       "table": {
+        "own": "Eigene Materialien",
+        "all": "Alle Materialien",
         "header": "Materialien",
         "name": "Name",
         "actions": "Aktionen",
@@ -1813,8 +1831,8 @@
     },
     "Printers": {
       "table": {
-        "ownPrinter": "Eigene Drucker",
-        "allPrinter": "Alle Drucker",
+        "own": "Eigene Drucker",
+        "all": "Alle Drucker",
         "header": "3D-Drucker",
         "name": "Name",
         "actions": "Aktionen",
@@ -1871,7 +1889,10 @@
       }
     },
     "PostProcessings": {
-      "header": "Nachbearbeitungen"
+      "header": "Nachbearbeitungen",
+      "own": "Eigene Nachbearbeitungen",
+      "all": "Alle Nachbearbeitungen",
+      "add": "Zusätzliche Anforderung Hinzufügen"
     }
   },
   "Routes": {},

@@ -39,7 +39,7 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
     setPrinter({
       properties: { buildVolume: "", imgPath: "", technology: "" },
       nodeName: printerName,
-      nodetype: "printer",
+      nodeType: "printer",
       context: "",
     });
     setShowDropdown(false);

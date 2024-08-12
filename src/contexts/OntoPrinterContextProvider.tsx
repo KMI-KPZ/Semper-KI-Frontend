@@ -6,6 +6,7 @@ import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { AppLoadingSuspense, LoadingSuspense } from "@component-library/index";
 import React, { PropsWithChildren, createContext } from "react";
 import { useTranslation } from "react-i18next";
+import { Outlet } from "react-router-dom";
 
 interface OntoPrinterContextProviderProps {}
 
@@ -45,6 +46,7 @@ const OntoPrinterContextProvider: React.FC<
         }}
       >
         {children}
+        <Outlet />
       </OntoPrinterContext.Provider>
     );
 

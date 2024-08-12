@@ -23,12 +23,12 @@ export type OntoNode =
   | OntoNodeColor;
 
 export type OntoNodeOrganization = {
-  nodetype: "organization";
+  nodeType: "organization";
   properties: {};
 } & OntoNodeGeneral;
 
 export type OntoNodePrinter = {
-  nodetype: "printer";
+  nodeType: "printer";
   properties: {
     imgPath: string;
     buildVolume: string;
@@ -37,7 +37,7 @@ export type OntoNodePrinter = {
 } & OntoNodeGeneral;
 
 export type OntoNodeMaterial = {
-  nodetype: "material";
+  nodeType: "material";
   properties: {
     imgPath: string;
     foodSafe: string;
@@ -50,7 +50,7 @@ export type OntoNodeMaterial = {
 } & OntoNodeGeneral;
 
 export type OntoNodeAdditionalRequirement = {
-  nodetype: "additionalRequirement";
+  nodeType: "additionalRequirement";
   properties: {
     imgPath: string;
     heatResistant: string;
@@ -59,7 +59,7 @@ export type OntoNodeAdditionalRequirement = {
 } & OntoNodeGeneral;
 
 export type OntoNodeColor = {
-  nodetype: "color";
+  nodeType: "color";
   properties: {
     imgPath: string;
     foodSafe: string;
@@ -67,7 +67,7 @@ export type OntoNodeColor = {
   };
 } & OntoNodeGeneral;
 
-const useGetOntoNodes = (nodeType: OntoNodeType) => {
+const useGetOntoNodes = <T extends OntoNode>(nodeType: OntoNodeType) => {
   const queryClient = useQueryClient();
   const getOntoNodes = async () =>
     authorizedCustomAxios
@@ -75,12 +75,12 @@ const useGetOntoNodes = (nodeType: OntoNodeType) => {
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/nodes/get/${nodeType}/`
       )
       .then((response) => {
-        const data: OntoNode[] = response.data;
+        const data: T[] = response.data;
         logger("useGetOntoNodes | getOntoNodes ✅ |", response);
         return data;
       });
 
-  return useQuery<OntoNode[], Error>({
+  return useQuery<T[], Error>({
     queryKey: ["resources", "onto", "nodes", nodeType],
     queryFn: getOntoNodes,
   });

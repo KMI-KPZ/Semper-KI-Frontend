@@ -8,7 +8,7 @@ interface useGetOntoNodeNeighborsProps {
   nodeType: OntoNodeType;
 }
 
-const useGetOntoNodeNeighbors = ({
+const useGetOntoNodeNeighbors = <T extends OntoNode>({
   nodeID,
   nodeType,
 }: useGetOntoNodeNeighborsProps) => {
@@ -19,12 +19,12 @@ const useGetOntoNodeNeighbors = ({
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/nodes/neighbors/get/${nodeID}/${nodeType}/`
       )
       .then((response) => {
-        const data: OntoNode[] = response.data;
+        const data: T[] = response.data;
         logger("useGetOntoNodeNeighbors | getOntoNodeNeighbors ✅ |", response);
         return data;
       });
 
-  return useQuery<OntoNode[], Error>({
+  return useQuery<T[], Error>({
     queryKey: ["resources", "onto", "nodes", nodeID, nodeType],
     queryFn: getOntoNodeNeighbors,
     enabled: nodeID !== "",

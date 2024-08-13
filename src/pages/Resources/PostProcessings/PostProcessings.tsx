@@ -1,6 +1,4 @@
-import useGetOntoNodes, {
-  OntoNodeAdditionalRequirement,
-} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import useGetOntoNodes from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import {
   Button,
   Container,
@@ -22,13 +20,11 @@ const ResourcesPostProcessings: React.FC<ResourcesPostProcessingsProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
-  const allAdditionalrequirements =
-    useGetOntoNodes<OntoNodeAdditionalRequirement>("additionalRequirement");
-  const ownAdditionalRequirements =
-    useGetOntoNodeNeighbors<OntoNodeAdditionalRequirement>({
-      nodeID: user.organization === undefined ? "" : user.organization,
-      nodeType: "additionalRequirement",
-    });
+  const allAdditionalrequirements = useGetOntoNodes("additionalRequirement");
+  const ownAdditionalRequirements = useGetOntoNodeNeighbors({
+    nodeID: user.organization === undefined ? "" : user.organization,
+    nodeType: "additionalRequirement",
+  });
 
   if (
     allAdditionalrequirements.isLoading ||

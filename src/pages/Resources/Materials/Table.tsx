@@ -6,7 +6,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import useGetOntoNodes, {
-  OntoNodeMaterial,
+  OntoNode,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import ResourceTable from "../components/Table";
 import useGetOntoNodeNeighbors from "@/api/Resources/Ontology/Querys/useGetOntoNodeNeighbors";
@@ -20,8 +20,8 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
-  const allMaterials = useGetOntoNodes<OntoNodeMaterial>("material");
-  const ownMaterials = useGetOntoNodeNeighbors<OntoNodeMaterial>({
+  const allMaterials = useGetOntoNodes("material");
+  const ownMaterials = useGetOntoNodeNeighbors({
     nodeID: user.organization === undefined ? "" : user.organization,
     nodeType: "material",
   });

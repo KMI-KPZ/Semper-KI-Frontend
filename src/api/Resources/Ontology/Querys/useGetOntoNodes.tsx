@@ -9,65 +9,43 @@ export type OntoNodeType =
   | "additionalRequirement"
   | "color";
 
-export type OntoNodeGeneral = {
+export interface OntoNodeNew {
   nodeName: string;
   context: string;
-  nodeID?: string;
-};
+  nodeType: OntoNodeType;
+  properties: OntoNodeProperty[];
+}
 
-export type OntoNode =
-  | OntoNodeOrganization
-  | OntoNodePrinter
-  | OntoNodeMaterial
-  | OntoNodeAdditionalRequirement
-  | OntoNodeColor;
+export interface OntoNode extends OntoNodeNew {
+  createdBy: string;
+  nodeID: string;
+}
 
-export type OntoNodeOrganization = {
-  nodeType: "organization";
-  properties: {};
-} & OntoNodeGeneral;
+export type OntoNodeProperty = OntoNodePropertyText | OntoNodePropertyNumber;
+export type OntoNodePropertyType = "text" | "number" | "date" | "boolean";
+export interface OntoNodePropertyGeneral {
+  name: string;
+  value: any;
+  type: OntoNodePropertyType;
+}
+export interface OntoNodePropertyText extends OntoNodePropertyGeneral {
+  type: "text";
+  value: string;
+}
+export interface OntoNodePropertyNumber extends OntoNodePropertyGeneral {
+  type: "number";
+  value: number;
+}
+export interface OntoNodePropertyDate extends OntoNodePropertyGeneral {
+  type: "date";
+  value: Date;
+}
+export interface OntoNodePropertyBoolean extends OntoNodePropertyGeneral {
+  type: "boolean";
+  value: boolean;
+}
 
-export type OntoNodePrinter = {
-  nodeType: "printer";
-  properties: {
-    imgPath: string;
-    buildVolume: string;
-    technology: string;
-  };
-} & OntoNodeGeneral;
-
-export type OntoNodeMaterial = {
-  nodeType: "material";
-  properties: {
-    imgPath: string;
-    foodSafe: string;
-    heatResistant: string;
-    flexible: string;
-    smooth: string;
-    eModul: string;
-    poissonRatio: string;
-  };
-} & OntoNodeGeneral;
-
-export type OntoNodeAdditionalRequirement = {
-  nodeType: "additionalRequirement";
-  properties: {
-    imgPath: string;
-    heatResistant: string;
-    smooth: string;
-  };
-} & OntoNodeGeneral;
-
-export type OntoNodeColor = {
-  nodeType: "color";
-  properties: {
-    imgPath: string;
-    foodSafe: string;
-    color: string;
-  };
-} & OntoNodeGeneral;
-
-const useGetOntoNodes = <T extends OntoNode>(nodeType: OntoNodeType) => {
+const useGetOntoNodes = (nodeType: OntoNodeType) => {
   const queryClient = useQueryClient();
   const getOntoNodes = async () =>
     authorizedCustomAxios
@@ -75,12 +53,12 @@ const useGetOntoNodes = <T extends OntoNode>(nodeType: OntoNodeType) => {
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/nodes/get/${nodeType}/`
       )
       .then((response) => {
-        const data: T[] = response.data;
+        const data: OntoNode[] = response.data;
         logger("useGetOntoNodes | getOntoNodes ✅ |", response);
         return data;
       });
 
-  return useQuery<T[], Error>({
+  return useQuery<OntoNode[], Error>({
     queryKey: ["resources", "onto", "nodes", nodeType],
     queryFn: getOntoNodes,
   });

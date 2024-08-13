@@ -1,6 +1,6 @@
 import useGetOntoNodeNeighbors from "@/api/Resources/Ontology/Querys/useGetOntoNodeNeighbors";
 import useGetOntoNodes, {
-  OntoNodePrinter,
+  OntoNode,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { AppLoadingSuspense, LoadingSuspense } from "@component-library/index";
@@ -11,8 +11,8 @@ import { Outlet } from "react-router-dom";
 interface OntoPrinterContextProviderProps {}
 
 export type OntoPrinterContext = {
-  allPrinters: OntoNodePrinter[];
-  ownPrinters: OntoNodePrinter[];
+  allPrinters: OntoNode[];
+  ownPrinters: OntoNode[];
 };
 
 export const OntoPrinterContext = createContext<OntoPrinterContext>({
@@ -41,8 +41,8 @@ const OntoPrinterContextProvider: React.FC<
     return (
       <OntoPrinterContext.Provider
         value={{
-          allPrinters: ontoPrinters.data as OntoNodePrinter[],
-          ownPrinters: orgaPrinter.data as OntoNodePrinter[],
+          allPrinters: ontoPrinters.data as OntoNode[],
+          ownPrinters: orgaPrinter.data as OntoNode[],
         }}
       >
         {children}

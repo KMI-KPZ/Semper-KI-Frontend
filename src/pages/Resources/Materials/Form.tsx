@@ -9,7 +9,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { LoadingSuspense } from "@component-library/index";
 import logger from "@/hooks/useLogger";
 import useGetOntoNodes, {
-  OntoNodeMaterial,
+  OntoNode,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 
 interface ResourcesMaterialsFormProps {}
@@ -21,8 +21,7 @@ const ResourcesMaterialsForm: React.FC<ResourcesMaterialsFormProps> = (
   const { t } = useTranslation();
   const [materialID, setMaterialID] = useState<string>("");
   const materialsQuery = useGetOntoNodes("material");
-  const materials: OntoNodeMaterial[] =
-    materialsQuery.data as OntoNodeMaterial[];
+  const materials: OntoNode[] = materialsQuery.data as OntoNode[];
 
   const schema = yup
     .object({

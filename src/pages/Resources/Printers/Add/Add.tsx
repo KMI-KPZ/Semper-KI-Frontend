@@ -10,7 +10,10 @@ import PrintersAddForm from "./components/Form";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { useNavigate } from "react-router-dom";
-import { OntoNodePrinter } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import {
+  OntoNode,
+  OntoNodeNew,
+} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import useCreateOntoNode from "@/api/Resources/Ontology/Mutations/useCreateOntoNode";
 import useCreateOrgaNode from "@/api/Resources/Organization/Mutations/useCreateOrgaNode";
 import useCreateOrgaEdge from "@/api/Resources/Organization/Mutations/useCreateOrgaEdge";
@@ -21,7 +24,7 @@ const ResourcesPrintersAdd: React.FC<ResourcesPrintersAddProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
-  const [printer, setPrinter] = useState<OntoNodePrinter>();
+  const [printer, setPrinter] = useState<OntoNode | OntoNodeNew>();
   const [edit, setEdit] = useState<boolean>(false);
   const createOrgaEdge = useCreateOrgaEdge();
   const createOrgaNode = useCreateOrgaNode();

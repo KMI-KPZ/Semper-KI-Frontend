@@ -1803,8 +1803,12 @@
         "buttons": {
           "edit": "Bearbeiten",
           "delete": "Löschen",
-          "add": "Hinzufügen"
+          "add": "Hinzufügen",
+          "variant": "Variante erstellen"
         }
+      },
+      "Edit": {
+        "heading": "Bearbeiten"
       }
     },
     "Overview": {
@@ -1813,7 +1817,7 @@
     "Materials": {
       "table": {
         "own": "Eigene Materialien",
-        "all": "Alle Materialien",
+        "all": "Alle verfügbaren Materialien",
         "header": "Materialien",
         "name": "Name",
         "actions": "Aktionen",
@@ -1834,7 +1838,7 @@
     "Printers": {
       "table": {
         "own": "Eigene Drucker",
-        "all": "Alle Drucker",
+        "all": "Alle verfügbaren Drucker",
         "header": "3D-Drucker",
         "name": "Name",
         "actions": "Aktionen",
@@ -1842,7 +1846,9 @@
         "button": {
           "add": "Drucker Hinzufügen",
           "delete": "Löschen",
-          "edit": "Bearbeiten"
+          "edit": "Bearbeiten",
+          "createOwn": "Eigenen Drucker Anlegen",
+          "createVariant": "Druckervariante Anlegen"
         }
       },
       "view": {
@@ -1893,7 +1899,7 @@
     "PostProcessings": {
       "header": "Nachbearbeitungen",
       "own": "Eigene Nachbearbeitungen",
-      "all": "Alle Nachbearbeitungen",
+      "all": "Alle verfügbaren Nachbearbeitungen",
       "add": "Zusätzliche Anforderung Hinzufügen"
     }
   },

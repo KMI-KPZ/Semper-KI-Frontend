@@ -1,10 +1,13 @@
-import { OntoNodePrinter } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import {
+  OntoNode,
+  OntoNodeNew,
+} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 interface ResourcesPrintersAddPreViewProps {
-  printer: OntoNodePrinter;
+  printer: OntoNode | OntoNodeNew;
 }
 
 const ResourcesPrintersAddPreView: React.FC<

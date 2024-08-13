@@ -10,11 +10,14 @@ import AddIcon from "@mui/icons-material/Add";
 import ReplayIcon from "@mui/icons-material/Replay";
 import CheckIcon from "@mui/icons-material/Check";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { OntoNodePrinter } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import {
+  OntoNode,
+  OntoNodeNew,
+} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import useOntoPrinters from "@/hooks/useOntoPrinters";
 interface PrintersAddFormProps {
-  printer: OntoNodePrinter;
-  setPrinter(printer: OntoNodePrinter): void;
+  printer: OntoNode | OntoNodeNew;
+  setPrinter(printer: OntoNode | OntoNodeNew): void;
   setEdit(edit: boolean): void;
 }
 

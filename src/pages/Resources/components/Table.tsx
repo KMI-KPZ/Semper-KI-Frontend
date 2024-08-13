@@ -32,6 +32,9 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
       entityIDs: [node.nodeID],
     });
   };
+  const handleOnClickButtonCreateVariant = (node: T) => {
+    console.log("Create variant of node: ", node);
+  }
   const handleOnClickButtonEdit = (node: T) => {
     console.log("Edit node: ", node);
   };
@@ -85,11 +88,22 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
                     <td>
                       <Container width="full">
                         {actionType === "all" ? (
-                          <Button
-                            variant="text"
-                            title={t("Resources.components.Table.buttons.add")}
-                            onClick={() => handleOnClickButtonAdd(node)}
-                          />
+                          <>
+                            <Button
+                              variant="text"
+                              title={t(
+                                "Resources.components.Table.buttons.add"
+                              )}
+                              onClick={() => handleOnClickButtonAdd(node)}
+                            />
+                            <Button
+                              variant="text"
+                              title={t(
+                                "Resources.components.Table.buttons.variant"
+                              )}
+                              onClick={() => handleOnClickButtonCreateVariant(node)}
+                            />
+                          </>
                         ) : (
                           <>
                             <Button

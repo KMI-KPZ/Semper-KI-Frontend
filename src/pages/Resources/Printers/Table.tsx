@@ -4,14 +4,10 @@ import { Divider, LoadingSuspense } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import useOntoPrinters from "@/hooks/useOntoPrinters";
 import ResourceTable from "../components/Table";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
-import useGetOntoNodes, {
-  OntoNodePrinter,
-} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import useGetOntoNodeNeighbors from "@/api/Resources/Ontology/Querys/useGetOntoNodeNeighbors";
+import useGetOntoNodes from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 
 interface ResourcesPrintersTableProps {}
 
@@ -21,8 +17,8 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
-  const allPrinters = useGetOntoNodes<OntoNodePrinter>("printer");
-  const ownPrinters = useGetOntoNodeNeighbors<OntoNodePrinter>({
+  const allPrinters = useGetOntoNodes("printer");
+  const ownPrinters = useGetOntoNodeNeighbors({
     nodeID: user.organization === undefined ? "" : user.organization,
     nodeType: "printer",
   });
@@ -46,12 +42,17 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
         </div>
       </PermissionGate> */}
       <Divider />
-      <Container width="full" justify="start" direction="row">
+      <Container width="full" justify="between" direction="row">
         <Heading variant="h3">{t("Resources.Printers.table.own")}</Heading>
+        <Button
+          title={t("Resources.Printers.table.button.createOwn")}
+          variant="secondary"
+          size="sm"
+        />
       </Container>
       <ResourceTable nodes={ownPrinters.data} nodeType="printer" />
       <Divider />
-      <Container width="full" justify="start" direction="row">
+      <Container width="full" justify="between" direction="row">
         <Heading variant="h3">{t("Resources.Printers.table.all")}</Heading>
       </Container>
       <ResourceTable

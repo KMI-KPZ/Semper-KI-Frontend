@@ -4,11 +4,14 @@ import { useTranslation } from "react-i18next";
 import useOntoPrinters from "@/hooks/useOntoPrinters";
 import Card from "@component-library/Card/Card";
 import useSearch from "@/hooks/useSearch";
-import { OntoNodePrinter } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import {
+  OntoNode,
+  OntoNodeNew,
+} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 
 interface ResourcesPrintersAddSearchProps {
-  printer?: OntoNodePrinter;
-  setPrinter(printer: OntoNodePrinter): void;
+  printer?: OntoNode;
+  setPrinter(printer: OntoNode | OntoNodeNew): void;
 }
 
 const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
@@ -23,21 +26,21 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const { allPrinters, ownPrinters } = useOntoPrinters();
   const { filterDataBySearchInput, handleSearchInputChange } =
-    useSearch<OntoNodePrinter>();
+    useSearch<OntoNode>();
 
   const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPrinterName(e.target.value);
     handleSearchInputChange(e.target.value);
   };
 
-  const handleOnClickCardPrinter = (printer: OntoNodePrinter) => {
+  const handleOnClickCardPrinter = (printer: OntoNode) => {
     setShowDropdown(false);
     setPrinter(printer);
   };
 
   const handleOnClickButtonNew = () => {
     setPrinter({
-      properties: { buildVolume: "", imgPath: "", technology: "" },
+      properties: [],
       nodeName: printerName,
       nodeType: "printer",
       context: "",

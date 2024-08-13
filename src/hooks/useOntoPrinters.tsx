@@ -1,10 +1,10 @@
-import { OntoNodePrinter } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import { OntoNode } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { OntoPrinterContext } from "@/contexts/OntoPrinterContextProvider";
 import { useContext } from "react";
 
 interface useOntoPrintersReturnProps {
-  allPrinters: OntoNodePrinter[];
-  ownPrinters: OntoNodePrinter[];
+  allPrinters: OntoNode[];
+  ownPrinters: OntoNode[];
 }
 
 const useOntoPrinters = (): useOntoPrintersReturnProps => {

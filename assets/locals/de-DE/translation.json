@@ -1805,7 +1805,8 @@
         "overview": "Übersicht",
         "materials": "Materialien",
         "printers": "3D-Drucker",
-        "postProcessings": "Nachbearbeitung"
+        "postProcessings": "Nachbearbeitung",
+        "graph": "Graph"
       },
       "Table": {
         "action": "Aktionen",
@@ -1820,6 +1821,7 @@
         }
       },
       "Edit": {
+        "error": "Fehler beim Laden",
         "heading": {
           "edit": "Bearbeiten",
           "create": "Erstellen",

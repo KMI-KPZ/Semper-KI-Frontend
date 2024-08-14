@@ -13,6 +13,7 @@ import ResourcesPrintersAdd from "./Printers/Add/Add";
 import ResourcesMaterialsTable from "./Materials/Table";
 import ResourcesMaterialsForm from "./Materials/Form";
 import ResourcesNodeEdit from "./components/Edit";
+import Graph from "./components/Graph";
 
 interface ResoucesProps {}
 
@@ -96,6 +97,9 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
                 }
               />
             </Route>
+            {process.env.NODE_ENV === "development" ? (
+              <Route path="graph" element={<Graph />} />
+            ) : null}
           </Routes>
         </Container>
       </div>

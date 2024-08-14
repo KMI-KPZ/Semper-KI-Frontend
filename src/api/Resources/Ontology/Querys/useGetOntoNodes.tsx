@@ -19,6 +19,9 @@ export interface OntoNodeNew {
 export interface OntoNode extends OntoNodeNew {
   createdBy: string;
   nodeID: string;
+  createdWhen: Date;
+  updatedWhen: Date;
+  accessedWhen: Date;
 }
 
 export type OntoNodeProperty =
@@ -60,6 +63,14 @@ export interface OntoNodePropertyBoolean extends OntoNodePropertyGeneral {
   value: boolean;
 }
 
+export const parseOntoNode = (node: any): OntoNode => ({
+  ...node,
+  name: node.nodeName,
+  createdWhen: new Date(node.createdWhen),
+  updatedWhen: new Date(node.updatedWhen),
+  accessedWhen: new Date(node.accessedWhen),
+});
+
 const useGetOntoNodes = (nodeType: OntoNodeType) => {
   const queryClient = useQueryClient();
   const getOntoNodes = async () =>
@@ -68,10 +79,9 @@ const useGetOntoNodes = (nodeType: OntoNodeType) => {
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/nodes/get/by-type/${nodeType}/`
       )
       .then((response) => {
-        const data: OntoNode[] = response.data.map((node: any) => ({
-          ...node,
-          name: node.nodeName,
-        }));
+        const data: OntoNode[] = response.data.map((node: any) =>
+          parseOntoNode(node)
+        );
         logger("useGetOntoNodes | getOntoNodes ✅ |", response);
         return data;
       });

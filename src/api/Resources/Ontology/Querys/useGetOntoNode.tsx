@@ -1,7 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { OntoNode } from "./useGetOntoNodes";
+import { OntoNode, parseOntoNode } from "./useGetOntoNodes";
 import { useParams } from "react-router-dom";
 
 const useGetOntoNode = () => {
@@ -13,10 +13,7 @@ const useGetOntoNode = () => {
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/nodes/get/by-id/${nodeID}/`
       )
       .then((response) => {
-        const data: OntoNode = response.data.map((node: any) => ({
-          ...node,
-          name: node.nodeName,
-        }));
+        const data: OntoNode = parseOntoNode(response.data);
 
         logger("useGetOntoNode | getOntoNode ✅ |", response);
         return data;

@@ -1,4 +1,5 @@
 import { Button } from "@component-library/index";
+import { env } from "process";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
@@ -54,6 +55,14 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = (props) => {
           variant={isActive(resourcesMenuItem.to) ? "primary" : "secondary"}
         />
       ))}
+      {process.env.NODE_ENV === "development" && (
+        <Button
+          width="full"
+          testid="resources-menu-item"
+          title={t("Resources.components.Menu.graph")}
+          to={"/resources/graph"}
+        />
+      )}
     </nav>
   );
 };

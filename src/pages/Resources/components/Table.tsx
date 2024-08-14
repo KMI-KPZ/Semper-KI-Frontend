@@ -10,6 +10,7 @@ import useSort from "@/hooks/useSort";
 import useCreateOrgaEdge from "@/api/Resources/Organization/Mutations/useCreateOrgaEdge";
 import useDeleteOrgaEdge from "@/api/Resources/Organization/Mutations/useDeleteOrgaEdge";
 import { useNavigate } from "react-router-dom";
+import useOrganization from "@/hooks/useOrganization";
 
 interface ResourceTableProps<T extends OntoNode> {
   nodes: T[] | undefined;
@@ -21,6 +22,7 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
   const { nodes = [], nodeType, actionType = "own" } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { organization } = useOrganization();
 
   const createOrgaEdge = useCreateOrgaEdge();
   const deleteOrgaEdge = useDeleteOrgaEdge();
@@ -50,6 +52,14 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
     }
   };
 
+  const handleOnClickButtonEdit = (node: OntoNode) => {
+    if (node.createdBy === organization.hashedID) {
+      navigate(`edit/${node.nodeID}`);
+    } else {
+      navigate(`variant/${node.nodeID}`);
+    }
+  };
+
   return (
     <Container width="full" direction="col">
       {nodes.length > 0 ? (
@@ -72,6 +82,20 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
                     </Button>
                   </div>
                 </th>
+                <th>
+                  <div className="flex items-center justify-center">
+                    <Button
+                      variant="text"
+                      title={t(`Resources.components.Table.createdBy`)}
+                      onClick={() => handleSort("createdBy")}
+                    >
+                      <div className="ml-6 flex flex-row items-center justify-center">
+                        {t(`Resources.components.Table.createdBy`)}
+                        {getSortIcon("createdBy")}
+                      </div>
+                    </Button>
+                  </div>
+                </th>
                 <th>{t("Resources.components.Table.action")}</th>
               </tr>
             </thead>
@@ -82,6 +106,11 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
                 .map((node, index) => (
                   <tr key={index}>
                     <td className="text-center">{node.name}</td>
+                    <td className="text-center">
+                      {node.createdBy === organization.hashedID
+                        ? organization.name
+                        : "Sermper-KI"}
+                    </td>
                     <td>
                       <Container width="full">
                         {actionType === "all" ? (
@@ -106,9 +135,11 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
                             <Button
                               variant="text"
                               title={t(
-                                "Resources.components.Table.buttons.edit"
+                                node.createdBy === organization.hashedID
+                                  ? "Resources.components.Table.buttons.edit"
+                                  : "Resources.components.Table.buttons.variant"
                               )}
-                              to={`edit/${node.nodeID}`}
+                              onClick={() => handleOnClickButtonEdit(node)}
                             />
                             <Button
                               variant="text"

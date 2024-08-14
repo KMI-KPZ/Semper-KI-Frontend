@@ -1811,6 +1811,7 @@
       "Table": {
         "action": "Aktionen",
         "name": "Name",
+        "createdBy": "Erstellt von",
         "noItems": "keine Einträge vorhanden",
         "confirmDelete": "Möchten Sie \"{{name}}\" wirklich aus ihrer Organisation entfernen?",
         "buttons": {

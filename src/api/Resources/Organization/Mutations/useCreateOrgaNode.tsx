@@ -13,7 +13,7 @@ const useCreateOrgaNode = () => {
     authorizedCustomAxios
       .post(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/nodes/create/`,
-        node
+        { ...node, nodeName: node.name, name: undefined }
       )
       .then((response) => {
         logger("useCreateOrgaNode | createOrgaNode ✅ |", response);

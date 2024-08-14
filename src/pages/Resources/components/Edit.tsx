@@ -19,7 +19,7 @@ import * as yup from "yup";
 import { InputLabelProps } from "@mui/material";
 import { GeneralInput, InputType } from "@component-library/Form/GeneralInput";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useGetOntoNode from "@/api/Resources/Ontology/Querys/useGetOntoNode";
 import useGetNodeProperties from "@/api/Graph/Querys/useGetNodeProperties";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -58,6 +58,7 @@ const ResourcesNodeEdit: React.FC<ResourcesNodeEditProps> = (props) => {
   const nodeProperties = useGetNodeProperties(nodeType);
   const createOrgaNode = useCreateOrgaNode();
   const updateOrgaNode = useUpdateOrgaNode();
+  const navigate = useNavigate();
 
   // const schema = yup.object({
   //   context: yup.string().required(),
@@ -171,13 +172,34 @@ const ResourcesNodeEdit: React.FC<ResourcesNodeEditProps> = (props) => {
     logger("ResourcesNodeEdit | onSubmit |", data);
     switch (type) {
       case "edit":
-        updateOrgaNode.mutate({ node: data as OntoNode });
+        updateOrgaNode.mutate(
+          { node: data as OntoNode },
+          {
+            onSuccess: () => {
+              navigate("../..");
+            },
+          }
+        );
         break;
       case "create":
-        createOrgaNode.mutate({ node: data });
+        createOrgaNode.mutate(
+          { node: data },
+          {
+            onSuccess: () => {
+              navigate("..");
+            },
+          }
+        );
         break;
       case "variant":
-        createOrgaNode.mutate({ node: data });
+        createOrgaNode.mutate(
+          { node: data },
+          {
+            onSuccess: () => {
+              navigate("../..");
+            },
+          }
+        );
         break;
     }
   };

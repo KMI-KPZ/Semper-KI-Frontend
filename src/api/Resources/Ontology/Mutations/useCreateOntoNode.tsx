@@ -9,7 +9,7 @@ const useCreateOntoNode = () => {
     authorizedCustomAxios
       .post(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/admin/nodes/create/`,
-        node
+        { ...node, nodeName: node.name, name: undefined }
       )
       .then((response) => {
         logger("useCreateNode | createNode ✅ |", response);

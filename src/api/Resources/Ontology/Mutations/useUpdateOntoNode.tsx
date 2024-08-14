@@ -9,7 +9,7 @@ const useUpdateOntoNode = () => {
     authorizedCustomAxios
       .post(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/admin/nodes/update/`,
-        node
+        { ...node, nodeName: node.name, name: undefined }
       )
       .then((response) => {
         logger("useUpdateNode | updateNode ✅ |", response);

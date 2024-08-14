@@ -3,7 +3,11 @@ import useGetOntoNodes, {
   OntoNode,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
-import { AppLoadingSuspense, LoadingSuspense } from "@component-library/index";
+import {
+  AppLoadingSuspense,
+  LoadingAnimation,
+  LoadingSuspense,
+} from "@component-library/index";
 import React, { PropsWithChildren, createContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
@@ -50,7 +54,7 @@ const OntoPrinterContextProvider: React.FC<
       </OntoPrinterContext.Provider>
     );
 
-  return <AppLoadingSuspense />;
+  return <LoadingAnimation />;
 };
 
 export default OntoPrinterContextProvider;

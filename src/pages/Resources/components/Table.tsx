@@ -9,6 +9,7 @@ import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import useCreateOrgaEdge from "@/api/Resources/Organization/Mutations/useCreateOrgaEdge";
 import useDeleteOrgaEdge from "@/api/Resources/Organization/Mutations/useDeleteOrgaEdge";
+import { useNavigate } from "react-router-dom";
 
 interface ResourceTableProps<T extends OntoNode> {
   nodes: T[] | undefined;
@@ -19,6 +20,7 @@ interface ResourceTableProps<T extends OntoNode> {
 const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
   const { nodes = [], nodeType, actionType = "own" } = props;
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const createOrgaEdge = useCreateOrgaEdge();
   const deleteOrgaEdge = useDeleteOrgaEdge();
@@ -32,18 +34,13 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
       entityIDs: [node.nodeID],
     });
   };
-  const handleOnClickButtonCreateVariant = (node: T) => {
-    console.log("Create variant of node: ", node);
-  }
-  const handleOnClickButtonEdit = (node: T) => {
-    console.log("Edit node: ", node);
-  };
+
   const handleOnClickButtonDelete = (node: T) => {
     if (node.nodeID === undefined) return;
     if (
       window.confirm(
         t("Resources.components.Table.confirmDelete", {
-          name: node.nodeName,
+          name: node.name,
         })
       )
     ) {
@@ -66,11 +63,11 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
                     <Button
                       variant="text"
                       title={t(`Resources.components.Table.name`)}
-                      onClick={() => handleSort("nodeName")}
+                      onClick={() => handleSort("name")}
                     >
                       <div className="ml-6 flex flex-row items-center justify-center">
                         {t(`Resources.components.Table.name`)}
-                        {getSortIcon("nodeName")}
+                        {getSortIcon("name")}
                       </div>
                     </Button>
                   </div>
@@ -84,7 +81,7 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
                 .sort(sortItems)
                 .map((node, index) => (
                   <tr key={index}>
-                    <td className="text-center">{node.nodeName}</td>
+                    <td className="text-center">{node.name}</td>
                     <td>
                       <Container width="full">
                         {actionType === "all" ? (
@@ -101,7 +98,7 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
                               title={t(
                                 "Resources.components.Table.buttons.variant"
                               )}
-                              onClick={() => handleOnClickButtonCreateVariant(node)}
+                              to={`variant/${node.nodeID}`}
                             />
                           </>
                         ) : (
@@ -111,7 +108,7 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
                               title={t(
                                 "Resources.components.Table.buttons.edit"
                               )}
-                              onClick={() => handleOnClickButtonEdit(node)}
+                              to={`edit/${node.nodeID}`}
                             />
                             <Button
                               variant="text"

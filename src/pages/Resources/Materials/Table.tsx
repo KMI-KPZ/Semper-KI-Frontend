@@ -34,21 +34,19 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
       <Container width="full" direction="row">
         <Heading variant="h2">{t("Resources.Materials.table.header")}</Heading>
       </Container>
-      {/* <PermissionGate element="ResourcesButtonAddMaterial">
-        <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-col">
+
+      <Divider />
+      <Container width="full" justify="between" direction="row">
+        <Heading variant="h3">{t("Resources.Materials.table.own")}</Heading>
+        <PermissionGate element="ResourcesButtonAddMaterial">
           <Button
-            title={t("Resources.Materials.table.button.add")}
-            to="/resources/materials/add"
+            title={t("Resources.Materials.table.button.createOwn")}
+            to="create"
             variant="secondary"
             size="sm"
           />
-        </div>
-      </PermissionGate> */}
-      <Divider />
-      <Container width="full" justify="start" direction="row">
-        <Heading variant="h3">{t("Resources.Materials.table.own")}</Heading>
+        </PermissionGate>
       </Container>
-
       <ResourceTable nodes={ownMaterials.data} nodeType="material" />
       <Divider />
       <Container width="full" justify="start" direction="row">

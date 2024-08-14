@@ -19,7 +19,10 @@ const useGetOntoNodeNeighbors = ({
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/nodes/neighbors/get/${nodeID}/${nodeType}/`
       )
       .then((response) => {
-        const data: OntoNode[] = response.data;
+        const data: OntoNode[] = response.data.map((node: any) => ({
+          ...node,
+          name: node.nodeName,
+        }));
         logger("useGetOntoNodeNeighbors | getOntoNodeNeighbors ✅ |", response);
         return data;
       });

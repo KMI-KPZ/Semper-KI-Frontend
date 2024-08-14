@@ -21,7 +21,7 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
 
   const { t } = useTranslation();
   const [printerName, setPrinterName] = useState<string>(
-    printer !== undefined ? printer.nodeName : ""
+    printer !== undefined ? printer.name : ""
   );
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const { allPrinters, ownPrinters } = useOntoPrinters();
@@ -41,7 +41,7 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
   const handleOnClickButtonNew = () => {
     setPrinter({
       properties: [],
-      nodeName: printerName,
+      name: printerName,
       nodeType: "printer",
       context: "",
     });
@@ -77,7 +77,7 @@ const ResourcesPrintersAddSearch: React.FC<ResourcesPrintersAddSearchProps> = (
           .filter((printer) => filterDataBySearchInput(printer))
           .map((printer, index) => (
             <Card key={index} onClick={() => handleOnClickCardPrinter(printer)}>
-              <Text>{printer.nodeName}</Text>
+              <Text>{printer.name}</Text>
             </Card>
           ))}
       </Container>

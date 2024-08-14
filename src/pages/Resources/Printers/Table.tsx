@@ -31,16 +31,6 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
       <Container width="full" direction="row">
         <Heading variant="h2">{t("Resources.Printers.table.header")}</Heading>
       </Container>
-      {/* <PermissionGate element="ResourcesButtonAddPrinter">
-        <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-col">
-          <Button
-            title={t("Resources.Printers.table.button.add")}
-            to="/resources/printers/add"
-            variant="secondary"
-            size="sm"
-          />
-        </div>
-      </PermissionGate> */}
       <Divider />
       <Container width="full" justify="between" direction="row">
         <Heading variant="h3">{t("Resources.Printers.table.own")}</Heading>
@@ -48,6 +38,7 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
           title={t("Resources.Printers.table.button.createOwn")}
           variant="secondary"
           size="sm"
+          to="create"
         />
       </Container>
       <ResourceTable nodes={ownPrinters.data} nodeType="printer" />

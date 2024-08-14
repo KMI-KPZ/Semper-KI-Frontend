@@ -36,15 +36,16 @@ const ResourcesPostProcessings: React.FC<ResourcesPostProcessingsProps> = (
       <Container width="full" direction="row">
         <Heading variant="h2">{t("Resources.PostProcessings.header")}</Heading>
       </Container>
-      {/* <Button
-        title={t("Resources.PostProcessings.add")}
-        to="/resources/materials/add"
-        variant="secondary"
-        size="sm"
-      /> */}
+
       <Divider />
-      <Container width="full" justify="start" direction="row">
+      <Container width="full" justify="between" direction="row">
         <Heading variant="h3">{t("Resources.PostProcessings.own")}</Heading>
+        <Button
+          title={t("Resources.PostProcessings.button.createOwn")}
+          to="create"
+          variant="secondary"
+          size="sm"
+        />
       </Container>
       <ResourceTable
         nodes={ownAdditionalRequirements.data}

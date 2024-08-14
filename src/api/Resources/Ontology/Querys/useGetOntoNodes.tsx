@@ -10,7 +10,7 @@ export type OntoNodeType =
   | "color";
 
 export interface OntoNodeNew {
-  nodeName: string;
+  name: string;
   context: string;
   nodeType: OntoNodeType;
   properties: OntoNodeProperty[];
@@ -21,8 +21,23 @@ export interface OntoNode extends OntoNodeNew {
   nodeID: string;
 }
 
-export type OntoNodeProperty = OntoNodePropertyText | OntoNodePropertyNumber;
+export type OntoNodeProperty =
+  | OntoNodePropertyText
+  | OntoNodePropertyNumber
+  | OntoNodePropertyDate
+  | OntoNodePropertyBoolean;
 export type OntoNodePropertyType = "text" | "number" | "date" | "boolean";
+export type OntoNodePropertyName =
+  | "imgPath"
+  | "foodSafe"
+  | "heatResistant"
+  | "flexible"
+  | "smooth"
+  | "eModul"
+  | "poissonRatio"
+  | "color"
+  | "buildVolume"
+  | "technology";
 export interface OntoNodePropertyGeneral {
   name: string;
   value: any;
@@ -50,10 +65,13 @@ const useGetOntoNodes = (nodeType: OntoNodeType) => {
   const getOntoNodes = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/nodes/get/${nodeType}/`
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/nodes/get/by-type/${nodeType}/`
       )
       .then((response) => {
-        const data: OntoNode[] = response.data;
+        const data: OntoNode[] = response.data.map((node: any) => ({
+          ...node,
+          name: node.nodeName,
+        }));
         logger("useGetOntoNodes | getOntoNodes ✅ |", response);
         return data;
       });

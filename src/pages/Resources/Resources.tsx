@@ -12,6 +12,7 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import ResourcesPrintersAdd from "./Printers/Add/Add";
 import ResourcesMaterialsTable from "./Materials/Table";
 import ResourcesMaterialsForm from "./Materials/Form";
+import ResourcesNodeEdit from "./components/Edit";
 
 interface ResoucesProps {}
 
@@ -32,32 +33,69 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
             <Route path="printers/*" element={<OntoPrinterContextProvider />}>
               <Route index element={<ResourcesPrintersTable />} />
               <Route
-                path="add"
+                path="edit/:nodeID"
+                element={<ResourcesNodeEdit type="edit" nodeType="printer" />}
+              />
+              <Route
+                path="variant/:nodeID"
                 element={
-                  <PermissionGate
-                    children={<ResourcesPrintersAdd />}
-                    element="ResourcesPrintersAdd"
-                  />
+                  <ResourcesNodeEdit type="variant" nodeType="printer" />
                 }
+              />
+              <Route
+                path="create"
+                element={<ResourcesNodeEdit type="create" nodeType="printer" />}
               />
             </Route>
             <Route path="materials/*">
               <Route index element={<ResourcesMaterialsTable />} />
               <Route
-                path="add"
+                path="edit/:nodeID"
+                element={<ResourcesNodeEdit type="edit" nodeType="material" />}
+              />
+              <Route
+                path="variant/:nodeID"
                 element={
-                  <PermissionGate
-                    element="ResourcesMaterialsForm"
-                    showMessage
-                    children={<ResourcesMaterialsForm />}
+                  <ResourcesNodeEdit type="variant" nodeType="material" />
+                }
+              />
+              <Route
+                path="create"
+                element={
+                  <ResourcesNodeEdit type="create" nodeType="material" />
+                }
+              />
+            </Route>
+            <Route path="postprocessings/*">
+              <Route index element={<ResourcesPostProcessings />} />
+              <Route
+                path="edit/:nodeID"
+                element={
+                  <ResourcesNodeEdit
+                    type="edit"
+                    nodeType="additionalRequirement"
+                  />
+                }
+              />
+              <Route
+                path="variant/:nodeID"
+                element={
+                  <ResourcesNodeEdit
+                    type="variant"
+                    nodeType="additionalRequirement"
+                  />
+                }
+              />
+              <Route
+                path="create"
+                element={
+                  <ResourcesNodeEdit
+                    type="create"
+                    nodeType="additionalRequirement"
                   />
                 }
               />
             </Route>
-            <Route
-              path="postprocessings/*"
-              element={<ResourcesPostProcessings />}
-            />
           </Routes>
         </Container>
       </div>

@@ -31,7 +31,7 @@ const PrintersAddForm: React.FC<PrintersAddFormProps> = (props) => {
       printerName: yup
         .string()
         .notOneOf(
-          [...allPrinters.map((printer) => printer.nodeName)],
+          [...allPrinters.map((printer) => printer.name)],
           t("Resources.Printers.form.yup.notSamePrinterName")
         )
         .required(

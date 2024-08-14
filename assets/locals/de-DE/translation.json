@@ -201,6 +201,18 @@
       "material": "Materialien",
       "additionalRequirement": "Zusätzliche Anforderungen",
       "color": "Farben"
+    },
+    "OntoNodePropertyName": {
+      "imgPath": "Bildpfad",
+      "foodSafe": "Lebensmittelecht",
+      "heatResistant": "Hitzebeständig",
+      "flexible": "Flexibel",
+      "smooth": "Glatt",
+      "eModul": "E-Modul",
+      "poissonRatio": "Poisson-Verhältnis",
+      "color": "Farbe",
+      "buildVolume": "Bauvolumen",
+      "technology": "Technologie"
     }
   },
   "api": {
@@ -1808,7 +1820,29 @@
         }
       },
       "Edit": {
-        "heading": "Bearbeiten"
+        "heading": {
+          "edit": "Bearbeiten",
+          "create": "Erstellen",
+          "variant": "Variante Erstellen"
+        },
+        "nodeName": "Name",
+        "context": "Beschreibung",
+        "nodeType": "Typ",
+        "createdBy": "Erstellt von: ",
+        "nodeID": "ID",
+        "properties": {
+          "header": "Eigenschaften",
+          "name": "Name",
+          "type": "Typ",
+          "value": "Wert"
+        },
+        "button": {
+          "addProperty": "Eigenschaften Hinuzfügen",
+          "edit": "Speichern",
+          "create": "Erstellen",
+          "variant": "Variante Erstellen",
+          "removeProperty": "Eigenschaft entfernen"
+        }
       }
     },
     "Overview": {
@@ -1824,7 +1858,9 @@
         "empty": "keine Materialien gefunden",
         "button": {
           "add": "Material Hinzufügen",
-          "delete": "Löschen"
+          "delete": "Löschen",
+          "createOwn": "Eigenes Material Anlegen",
+          "createVariant": "Materialvariante Anlegen"
         }
       },
       "form": {
@@ -1900,7 +1936,11 @@
       "header": "Nachbearbeitungen",
       "own": "Eigene Nachbearbeitungen",
       "all": "Alle verfügbaren Nachbearbeitungen",
-      "add": "Zusätzliche Anforderung Hinzufügen"
+      "add": "Zusätzliche Anforderung Hinzufügen",
+      "button": {
+        "createOwn": "Eigene Nachbearbeitung Anlegen",
+        "createVariant": "Nachbearbeitungsvariante Anlegen"
+      }
     }
   },
   "Routes": {},

@@ -19,7 +19,7 @@ const ResourcesPrintersAddPreView: React.FC<
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
       <Heading variant="h2">
-        {`${t("Resources.Printers.view.name")} : ${printer.nodeName}`}
+        {`${t("Resources.Printers.view.name")} : ${printer.name}`}
       </Heading>
       <Heading variant="h3">{t("Resources.Printers.view.properties")}</Heading>
       {/* {printer.properties !== undefined && printer.properties.length > 0 ? (

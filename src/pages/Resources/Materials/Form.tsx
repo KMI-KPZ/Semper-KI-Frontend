@@ -77,7 +77,7 @@ const ResourcesMaterialsForm: React.FC<ResourcesMaterialsFormProps> = (
                 key={index}
                 className="flex w-full flex-row items-center justify-between"
               >
-                <Text variant="body">{material.nodeName}</Text>
+                <Text variant="body">{material.name}</Text>
                 <Text variant="body">{material.context}</Text>
               </div>
             ))}

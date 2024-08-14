@@ -1,10 +1,10 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { OntoNode } from "../../Ontology/Querys/useGetOntoNodes";
+import { OntoNode, OntoNodeNew } from "../../Ontology/Querys/useGetOntoNodes";
 
 interface useCreateOrgaNodeProps {
-  node: OntoNode;
+  node: OntoNodeNew;
 }
 
 const useCreateOrgaNode = () => {

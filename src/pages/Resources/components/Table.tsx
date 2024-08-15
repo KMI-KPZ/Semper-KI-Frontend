@@ -11,6 +11,7 @@ import useCreateOrgaEdge from "@/api/Resources/Organization/Mutations/useCreateO
 import useDeleteOrgaEdge from "@/api/Resources/Organization/Mutations/useDeleteOrgaEdge";
 import { useNavigate } from "react-router-dom";
 import useOrganization from "@/hooks/useOrganization";
+import useDeleteOrgaNode from "@/api/Resources/Organization/Mutations/useDeleteOrgaNode";
 
 interface ResourceTableProps<T extends OntoNode> {
   nodes: T[] | undefined;
@@ -26,6 +27,7 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
 
   const createOrgaEdge = useCreateOrgaEdge();
   const deleteOrgaEdge = useDeleteOrgaEdge();
+  const deleteOrgaNode = useDeleteOrgaNode();
 
   const { filterDataBySearchInput, handleSearchInputChange } = useSearch<T>();
   const { getSortIcon, handleSort, sortItems } = useSort<T>();
@@ -37,7 +39,7 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
     });
   };
 
-  const handleOnClickButtonDelete = (node: T) => {
+  const handleOnClickButtonDeleteEdge = (node: T) => {
     if (node.nodeID === undefined) return;
     if (
       window.confirm(
@@ -51,12 +53,18 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
       });
     }
   };
-
-  const handleOnClickButtonEdit = (node: OntoNode) => {
-    if (node.createdBy === organization.hashedID) {
-      navigate(`edit/${node.nodeID}`);
-    } else {
-      navigate(`variant/${node.nodeID}`);
+  const handleOnClickButtonDeleteNode = (node: T) => {
+    if (node.nodeID === undefined) return;
+    if (
+      window.confirm(
+        t("Resources.components.Table.confirmDelete", {
+          name: node.name,
+        })
+      )
+    ) {
+      deleteOrgaNode.mutate({
+        nodeID: node.nodeID,
+      });
     }
   };
 
@@ -100,60 +108,90 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
               </tr>
             </thead>
             <tbody>
-              {nodes
-                .filter((node) => filterDataBySearchInput(node))
-                .sort(sortItems)
-                .map((node, index) => (
-                  <tr key={index}>
-                    <td className="text-center">{node.name}</td>
-                    <td className="text-center">
-                      {node.createdBy === organization.hashedID
-                        ? organization.name
-                        : "Sermper-KI"}
-                    </td>
-                    <td>
-                      <Container width="full">
-                        {actionType === "all" ? (
-                          <>
-                            <Button
-                              variant="text"
-                              title={t(
-                                "Resources.components.Table.buttons.add"
-                              )}
-                              onClick={() => handleOnClickButtonAdd(node)}
-                            />
-                            <Button
-                              variant="text"
-                              title={t(
-                                "Resources.components.Table.buttons.variant"
-                              )}
-                              to={`variant/${node.nodeID}`}
-                            />
-                          </>
-                        ) : (
-                          <>
-                            <Button
-                              variant="text"
-                              title={t(
-                                node.createdBy === organization.hashedID
-                                  ? "Resources.components.Table.buttons.edit"
-                                  : "Resources.components.Table.buttons.variant"
-                              )}
-                              onClick={() => handleOnClickButtonEdit(node)}
-                            />
-                            <Button
-                              variant="text"
-                              title={t(
-                                "Resources.components.Table.buttons.delete"
-                              )}
-                              onClick={() => handleOnClickButtonDelete(node)}
-                            />
-                          </>
-                        )}
-                      </Container>
-                    </td>
-                  </tr>
-                ))}
+              {nodes.filter((node) => filterDataBySearchInput(node)).length >
+              0 ? (
+                nodes
+                  .filter((node) => filterDataBySearchInput(node))
+                  .sort(sortItems)
+                  .map((node, index) => (
+                    <tr key={index}>
+                      <td className="text-center">{node.name}</td>
+                      <td className="text-center">
+                        {node.createdBy === organization.hashedID
+                          ? organization.name
+                          : "Sermper-KI"}
+                      </td>
+                      <td>
+                        <Container width="full" direction="row">
+                          {actionType === "all" ? (
+                            <>
+                              <Button
+                                variant="text"
+                                title={t(
+                                  "Resources.components.Table.buttons.add"
+                                )}
+                                onClick={() => handleOnClickButtonAdd(node)}
+                              />
+                              <Button
+                                variant="text"
+                                title={t(
+                                  "Resources.components.Table.buttons.variant"
+                                )}
+                                to={`variant/${node.nodeID}`}
+                              />
+
+                              {node.createdBy === organization.hashedID ? (
+                                <Button
+                                  variant="text"
+                                  title={t(
+                                    "Resources.components.Table.buttons.delete"
+                                  )}
+                                  onClick={() =>
+                                    handleOnClickButtonDeleteNode(node)
+                                  }
+                                />
+                              ) : null}
+                            </>
+                          ) : (
+                            <>
+                              {node.createdBy === organization.hashedID ? (
+                                <Button
+                                  variant="text"
+                                  title={t(
+                                    "Resources.components.Table.buttons.edit"
+                                  )}
+                                  to={`edit/${node.nodeID}`}
+                                />
+                              ) : null}
+                              <Button
+                                variant="text"
+                                title={t(
+                                  "Resources.components.Table.buttons.variant"
+                                )}
+                                to={`variant/${node.nodeID}`}
+                              />
+                              <Button
+                                variant="text"
+                                title={t(
+                                  "Resources.components.Table.buttons.delete"
+                                )}
+                                onClick={() =>
+                                  handleOnClickButtonDeleteEdge(node)
+                                }
+                              />
+                            </>
+                          )}
+                        </Container>
+                      </td>
+                    </tr>
+                  ))
+              ) : (
+                <tr>
+                  <td colSpan={3} className="text-center">
+                    <Text>{t("Resources.components.Table.noItems")}</Text>
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </>

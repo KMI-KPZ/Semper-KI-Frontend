@@ -175,7 +175,7 @@ const ResourcesNodeEditForm: React.FC<ResourcesNodeEditPropsForm> = (props) => {
           { node: data as OntoNode },
           {
             onSuccess: () => {
-              navigate("../..");
+              navigate("..");
             },
           }
         );
@@ -195,7 +195,7 @@ const ResourcesNodeEditForm: React.FC<ResourcesNodeEditPropsForm> = (props) => {
           { node: data },
           {
             onSuccess: () => {
-              navigate("../..");
+              navigate("..");
             },
           }
         );

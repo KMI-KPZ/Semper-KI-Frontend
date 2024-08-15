@@ -12,7 +12,7 @@ import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import ResourcesPrintersAdd from "./Printers/Add/Add";
 import ResourcesMaterialsTable from "./Materials/Table";
 import ResourcesMaterialsForm from "./Materials/Form";
-import ResourcesNodeEdit from "./components/Edit";
+import ResourcesNode from "./components/Node";
 import Graph from "./components/Graph";
 
 interface ResoucesProps {}
@@ -35,36 +35,30 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
               <Route index element={<ResourcesPrintersTable />} />
               <Route
                 path="edit/:nodeID"
-                element={<ResourcesNodeEdit type="edit" nodeType="printer" />}
+                element={<ResourcesNode type="edit" nodeType="printer" />}
               />
               <Route
                 path="variant/:nodeID"
-                element={
-                  <ResourcesNodeEdit type="variant" nodeType="printer" />
-                }
+                element={<ResourcesNode type="variant" nodeType="printer" />}
               />
               <Route
                 path="create"
-                element={<ResourcesNodeEdit type="create" nodeType="printer" />}
+                element={<ResourcesNode type="create" nodeType="printer" />}
               />
             </Route>
             <Route path="materials/*">
               <Route index element={<ResourcesMaterialsTable />} />
               <Route
                 path="edit/:nodeID"
-                element={<ResourcesNodeEdit type="edit" nodeType="material" />}
+                element={<ResourcesNode type="edit" nodeType="material" />}
               />
               <Route
                 path="variant/:nodeID"
-                element={
-                  <ResourcesNodeEdit type="variant" nodeType="material" />
-                }
+                element={<ResourcesNode type="variant" nodeType="material" />}
               />
               <Route
                 path="create"
-                element={
-                  <ResourcesNodeEdit type="create" nodeType="material" />
-                }
+                element={<ResourcesNode type="create" nodeType="material" />}
               />
             </Route>
             <Route path="postprocessings/*">
@@ -72,16 +66,13 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
               <Route
                 path="edit/:nodeID"
                 element={
-                  <ResourcesNodeEdit
-                    type="edit"
-                    nodeType="additionalRequirement"
-                  />
+                  <ResourcesNode type="edit" nodeType="additionalRequirement" />
                 }
               />
               <Route
                 path="variant/:nodeID"
                 element={
-                  <ResourcesNodeEdit
+                  <ResourcesNode
                     type="variant"
                     nodeType="additionalRequirement"
                   />
@@ -90,7 +81,7 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
               <Route
                 path="create"
                 element={
-                  <ResourcesNodeEdit
+                  <ResourcesNode
                     type="create"
                     nodeType="additionalRequirement"
                   />

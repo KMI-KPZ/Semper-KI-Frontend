@@ -4,14 +4,14 @@ import { Container, LoadingAnimation } from "@component-library/index";
 import { OntoNodeType } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import useGetOntoNode from "@/api/Resources/Ontology/Querys/useGetOntoNode";
 import useGetNodeProperties from "@/api/Graph/Querys/useGetNodeProperties";
-import ResourcesNodeEditForm from "./EditForm";
+import ResourcesNodeForm from "./NodeForm";
 
-interface ResourcesNodeEditProps {
+interface ResourcesNodeProps {
   type: "edit" | "create" | "variant";
   nodeType: OntoNodeType;
 }
 
-const ResourcesNodeEdit: React.FC<ResourcesNodeEditProps> = (props) => {
+const ResourcesNode: React.FC<ResourcesNodeProps> = (props) => {
   const { nodeType, type } = props;
   const { t } = useTranslation();
   const node = useGetOntoNode();
@@ -29,7 +29,7 @@ const ResourcesNodeEdit: React.FC<ResourcesNodeEditProps> = (props) => {
     return <Container>{t("Resources.components.Edit.error")}</Container>;
 
   return (
-    <ResourcesNodeEditForm
+    <ResourcesNodeForm
       type={type}
       nodeType={nodeType}
       nodeProperties={nodeProperties.data}
@@ -38,4 +38,4 @@ const ResourcesNodeEdit: React.FC<ResourcesNodeEditProps> = (props) => {
   );
 };
 
-export default ResourcesNodeEdit;
+export default ResourcesNode;

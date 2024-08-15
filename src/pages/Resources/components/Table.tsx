@@ -73,127 +73,157 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
       {nodes.length > 0 ? (
         <>
           <Search handleSearchInputChange={handleSearchInputChange} />
-          <table className="w-full table-auto border-separate border-spacing-x-5 border-spacing-y-3">
-            <thead>
-              <tr>
-                <th>
-                  <div className="flex items-center justify-center">
-                    <Button
-                      variant="text"
-                      title={t(`Resources.components.Table.name`)}
-                      onClick={() => handleSort("name")}
-                    >
-                      <div className="ml-6 flex flex-row items-center justify-center">
-                        {t(`Resources.components.Table.name`)}
-                        {getSortIcon("name")}
-                      </div>
-                    </Button>
-                  </div>
-                </th>
-                <th>
-                  <div className="flex items-center justify-center">
-                    <Button
-                      variant="text"
-                      title={t(`Resources.components.Table.createdBy`)}
-                      onClick={() => handleSort("createdBy")}
-                    >
-                      <div className="ml-6 flex flex-row items-center justify-center">
-                        {t(`Resources.components.Table.createdBy`)}
-                        {getSortIcon("createdBy")}
-                      </div>
-                    </Button>
-                  </div>
-                </th>
-                <th>{t("Resources.components.Table.action")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {nodes.filter((node) => filterDataBySearchInput(node)).length >
-              0 ? (
-                nodes
-                  .filter((node) => filterDataBySearchInput(node))
-                  .sort(sortItems)
-                  .map((node, index) => (
-                    <tr key={index}>
-                      <td className="text-center">{node.name}</td>
-                      <td className="text-center">
-                        {node.createdBy === organization.hashedID
-                          ? organization.name
-                          : "Sermper-KI"}
-                      </td>
-                      <td>
-                        <Container width="full" direction="row">
-                          {actionType === "all" ? (
-                            <>
-                              <Button
-                                variant="text"
-                                title={t(
-                                  "Resources.components.Table.buttons.add"
-                                )}
-                                onClick={() => handleOnClickButtonAdd(node)}
-                              />
-                              <Button
-                                variant="text"
-                                title={t(
-                                  "Resources.components.Table.buttons.variant"
-                                )}
-                                to={`variant/${node.nodeID}`}
-                              />
+          <Container
+            width="full"
+            direction="row"
+            justify="start"
+            className="overflow-auto "
+          >
+            <table className="card w-full  table-auto border-separate border-spacing-x-0 p-0">
+              <thead>
+                <tr>
+                  <th className="bg-gray-50">
+                    <div className="flex items-center justify-center ">
+                      <Button
+                        variant="text"
+                        title={t(`Resources.components.Table.name`)}
+                        onClick={() => handleSort("name")}
+                        className="whitespace-nowrap"
+                      >
+                        <div className="ml-6 flex flex-row items-center justify-center">
+                          {t(`Resources.components.Table.name`)}
+                          {getSortIcon("name")}
+                        </div>
+                      </Button>
+                    </div>
+                  </th>
+                  <th className="bg-gray-50">
+                    <div className="flex items-center justify-center">
+                      <Button
+                        variant="text"
+                        title={t(`Resources.components.Table.createdBy`)}
+                        onClick={() => handleSort("createdBy")}
+                        className="whitespace-nowrap"
+                      >
+                        <div className="ml-6 flex flex-row items-center justify-center">
+                          {t(`Resources.components.Table.createdBy`)}
+                          {getSortIcon("createdBy")}
+                        </div>
+                      </Button>
+                    </div>
+                  </th>
+                  <th className="bg-gray-50">
+                    {t("Resources.components.Table.action")}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {nodes.filter((node) => filterDataBySearchInput(node)).length >
+                0 ? (
+                  nodes
+                    .filter((node) => filterDataBySearchInput(node))
+                    .sort(sortItems)
+                    .map((node, index) => (
+                      <tr key={index}>
+                        <td
+                          className={`border-t-2 p-3 text-center ${
+                            index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                          }`}
+                        >
+                          {node.name}
+                        </td>
+                        <td
+                          className={`border-t-2 p-3 text-center ${
+                            index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                          }`}
+                        >
+                          {node.createdBy === organization.hashedID
+                            ? organization.name
+                            : "Sermper-KI"}
+                        </td>
+                        <td
+                          className={`border-t-2 p-3 text-center ${
+                            index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                          }`}
+                        >
+                          <Container width="full" direction="row">
+                            {actionType === "all" ? (
+                              <>
+                                <Button
+                                  variant="text"
+                                  title={t(
+                                    "Resources.components.Table.buttons.add"
+                                  )}
+                                  onClick={() => handleOnClickButtonAdd(node)}
+                                />
+                                <Button
+                                  variant="text"
+                                  title={t(
+                                    "Resources.components.Table.buttons.variant"
+                                  )}
+                                  to={`variant/${node.nodeID}`}
+                                  className="whitespace-nowrap"
+                                />
 
-                              {node.createdBy === organization.hashedID ? (
+                                {node.createdBy === organization.hashedID ? (
+                                  <Button
+                                    variant="text"
+                                    title={t(
+                                      "Resources.components.Table.buttons.delete"
+                                    )}
+                                    onClick={() =>
+                                      handleOnClickButtonDeleteNode(node)
+                                    }
+                                    className="whitespace-nowrap"
+                                  />
+                                ) : null}
+                              </>
+                            ) : (
+                              <>
+                                {node.createdBy === organization.hashedID ? (
+                                  <Button
+                                    variant="text"
+                                    title={t(
+                                      "Resources.components.Table.buttons.edit"
+                                    )}
+                                    to={`edit/${node.nodeID}`}
+                                    className="whitespace-nowrap"
+                                  />
+                                ) : null}
+                                <Button
+                                  variant="text"
+                                  title={t(
+                                    "Resources.components.Table.buttons.variant"
+                                  )}
+                                  to={`variant/${node.nodeID}`}
+                                  className="whitespace-nowrap"
+                                />
                                 <Button
                                   variant="text"
                                   title={t(
                                     "Resources.components.Table.buttons.delete"
                                   )}
                                   onClick={() =>
-                                    handleOnClickButtonDeleteNode(node)
+                                    handleOnClickButtonDeleteEdge(node)
                                   }
+                                  className="whitespace-nowrap"
                                 />
-                              ) : null}
-                            </>
-                          ) : (
-                            <>
-                              {node.createdBy === organization.hashedID ? (
-                                <Button
-                                  variant="text"
-                                  title={t(
-                                    "Resources.components.Table.buttons.edit"
-                                  )}
-                                  to={`edit/${node.nodeID}`}
-                                />
-                              ) : null}
-                              <Button
-                                variant="text"
-                                title={t(
-                                  "Resources.components.Table.buttons.variant"
-                                )}
-                                to={`variant/${node.nodeID}`}
-                              />
-                              <Button
-                                variant="text"
-                                title={t(
-                                  "Resources.components.Table.buttons.delete"
-                                )}
-                                onClick={() =>
-                                  handleOnClickButtonDeleteEdge(node)
-                                }
-                              />
-                            </>
-                          )}
-                        </Container>
-                      </td>
-                    </tr>
-                  ))
-              ) : (
-                <tr>
-                  <td colSpan={3} className="text-center">
-                    <Text>{t("Resources.components.Table.noItems")}</Text>
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                              </>
+                            )}
+                          </Container>
+                        </td>
+                      </tr>
+                    ))
+                ) : (
+                  <tr>
+                    <td colSpan={3} className="text-center">
+                      <Text>{t("Resources.components.Table.noItems")}</Text>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </Container>
         </>
       ) : (
         <Text>{t("Resources.components.Table.noItems")}</Text>

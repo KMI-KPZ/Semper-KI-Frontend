@@ -29,16 +29,38 @@ import AddIcon from "@mui/icons-material/Add";
 import logger from "@/hooks/useLogger";
 import useCreateOrgaNode from "@/api/Resources/Organization/Mutations/useCreateOrgaNode";
 import useUpdateOrgaNode from "@/api/Resources/Organization/Mutations/useUpdateOrgaNode";
-import useCreateOrgaEdge from "@/api/Resources/Organization/Mutations/useCreateOrgaEdge";
+import ResourcesEdgeForm from "./EdgeForm";
 
-interface ResourcesNodeEditPropsForm {
+interface ResourcesNodePropsForm {
   type: "edit" | "create" | "variant";
   nodeType: OntoNodeType;
   node?: OntoNode;
   nodeProperties: OntoNodeProperty[];
 }
 
-const ResourcesNodeEditForm: React.FC<ResourcesNodeEditPropsForm> = (props) => {
+export interface ResourcesNodeFormEdges {
+  edges: {
+    nodeType: OntoNodeType;
+    nodeID: string;
+  }[];
+}
+
+const getMatchingEdges = (nodeType: OntoNodeType): OntoNodeType[] => {
+  switch (nodeType) {
+    case "organization":
+      return ["printer", "material", "additionalRequirement"];
+    case "printer":
+      return ["material", "additionalRequirement"];
+    case "material":
+      return ["printer", "additionalRequirement"];
+    case "additionalRequirement":
+      return ["printer", "material"];
+    default:
+      return [];
+  }
+};
+
+const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   const { type, nodeType, nodeProperties, node } = props;
   const { t } = useTranslation();
   const createOrgaNode = useCreateOrgaNode();
@@ -93,13 +115,20 @@ const ResourcesNodeEditForm: React.FC<ResourcesNodeEditPropsForm> = (props) => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<OntoNode | OntoNodeNew>({
-    defaultValues: node === undefined ? { nodeType: nodeType } : node,
+  } = useForm<(OntoNode | OntoNodeNew) & ResourcesNodeFormEdges>({
+    defaultValues:
+      node === undefined
+        ? { nodeType: nodeType, edges: getMatchingEdges() }
+        : { ...node, edges: getMatchingEdges() },
   });
 
   const { append, fields, remove, update } = useFieldArray({
     control,
     name: "properties",
+  });
+  const useEdgeArray = useFieldArray({
+    control,
+    name: "edges",
   });
 
   const handleOnClickButtonAddProperty = () => {
@@ -212,17 +241,19 @@ const ResourcesNodeEditForm: React.FC<ResourcesNodeEditPropsForm> = (props) => {
           register={register}
           type="text"
         /> */}
-        <Container width="full">
+        {/* <Container width="full">
           <Text>{t("Resources.components.Edit.nodeType")}</Text>
           <Text>{t(`types.OntoNodeType.${nodeType}`)}</Text>
-        </Container>
+        </Container> */}
         {/* <GeneralInput
           label="createdBy"
           labelText={t("Resources.components.Edit.createdBy")}
           register={register}
           type="text"
         /> */}
-        <Text>{t("Resources.components.Edit.properties.header")}</Text>
+        <Heading variant="h3">
+          {t("Resources.components.Edit.properties.header")}
+        </Heading>
         {fields.map((field, index) => (
           <Container
             key={index}
@@ -286,6 +317,10 @@ const ResourcesNodeEditForm: React.FC<ResourcesNodeEditPropsForm> = (props) => {
             children={<AddIcon />}
           />
         ) : null}
+        {getMatchingEdges(nodeType).map((edgeType) => (
+          <ResourcesEdgeForm nodeType={edgeType} />
+        ))}
+
         <Button
           title={t(`Resources.components.Edit.button.${type}`)}
           onClick={handleSubmit(onSubmit)}
@@ -295,4 +330,4 @@ const ResourcesNodeEditForm: React.FC<ResourcesNodeEditPropsForm> = (props) => {
   );
 };
 
-export default ResourcesNodeEditForm;
+export default ResourcesNodeForm;

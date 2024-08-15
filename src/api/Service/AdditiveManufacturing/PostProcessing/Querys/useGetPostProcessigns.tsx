@@ -3,13 +3,14 @@ import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { FilterItemProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Filter/Filter";
 import useGetFilters from "@/api/Filter/Querys/useGetFilters";
+import { OntoNodeProperty } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 
 export interface PostProcessingProps {
   id: string;
   title: string;
   checked: boolean;
   value: string;
-  valueList: string[];
+  valueList: OntoNodeProperty[];
   type: EPostProcessingOptionType;
   imgPath: string;
 }

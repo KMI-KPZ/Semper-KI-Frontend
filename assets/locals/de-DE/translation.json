@@ -1248,7 +1248,7 @@
               "name": "name",
               "img": "Nachbearbeitungsbild",
               "type": "Typ:",
-              "describtion": "Beschreibung"
+              "properties": "Eigenschaften:"
             },
             "button": {
               "add": "Hinzufügen",
@@ -2154,7 +2154,8 @@
           "Card": {
             "value": "Wert:",
             "valueList": "Werteliste:",
-            "type": "Typ:"
+            "type": "Typ:",
+            "props": "Eigenschaften"
           },
           "Catalog": {
             "button": {

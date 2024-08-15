@@ -12,6 +12,10 @@ import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostPro
 import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessStatusGate from "@/pages/Process/components/StatusGate";
+import {
+  OntoNodePropertyName,
+  isOntoNodePropertyName,
+} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 
 interface ProcessSericePostProcessingCardProps {
   postProcessing: PostProcessingProps;
@@ -68,13 +72,29 @@ const ProcessSericePostProcessingCard: React.FC<
         <Container direction="row" justify="between" width="full">
           <Text>
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.postProcessing.describtion"
+              "Process.Service.ServiceDetails.components.manufacturing.postProcessing.properties"
             )}
           </Text>
         </Container>
-        <Container direction="row" justify="between" width="full">
-          <Text>{}</Text>
-        </Container>
+        <ul className="flex w-full list-inside list-disc flex-col items-start justify-start pl-3">
+          {postProcessing.valueList.length > 0 ? (
+            postProcessing.valueList.map((prop, index) => (
+              <li key={index}>
+                {isOntoNodePropertyName(prop.name)
+                  ? t(
+                      `types.OntoNodePropertyName.${
+                        prop.name as OntoNodePropertyName
+                      }`
+                    )
+                  : prop.name}
+                {": "}
+                {prop.value.toString()}
+              </li>
+            ))
+          ) : (
+            <li>---</li>
+          )}
+        </ul>
       </Container>
       <Container
         direction="col"

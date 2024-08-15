@@ -14,6 +14,7 @@ import {
   OntoNodePropertyName,
   OntoNodePropertyType,
   OntoNodeType,
+  isOntoNodePropertyName,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -35,23 +36,6 @@ interface ResourcesNodeEditPropsForm {
   nodeType: OntoNodeType;
   node?: OntoNode;
   nodeProperties: OntoNodeProperty[];
-}
-
-export function isOntoNodePropertyName(
-  name: string
-): name is OntoNodePropertyName {
-  return [
-    "imgPath",
-    "foodSafe",
-    "heatResistant",
-    "flexible",
-    "smooth",
-    "eModul",
-    "poissonRatio",
-    "color",
-    "buildVolume",
-    "technology",
-  ].includes(name as OntoNodePropertyName);
 }
 
 const ResourcesNodeEditForm: React.FC<ResourcesNodeEditPropsForm> = (props) => {

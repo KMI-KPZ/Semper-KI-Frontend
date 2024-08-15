@@ -43,6 +43,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
             .forceLink(edges)
             .id((d: any) => d.id)
             .distance(100)
+            .strength(0.15) // Adjust the strength to minimize cutting edges
         )
         .force("charge", d3.forceManyBody().strength(-500))
         .force("center", d3.forceCenter(width / 2, height / 2))

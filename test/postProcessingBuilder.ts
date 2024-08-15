@@ -1,3 +1,4 @@
+import { OntoNodeProperty } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { EPostProcessingOptionType, PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 
 
@@ -6,7 +7,7 @@ export class PostProcessingBuilder {
     title: string ="postProcessingTitle";
     checked: boolean = false;
     value: string = "value";
-    valueList: string[]= ["value1", "value2"];
+    propList: OntoNodeProperty[]= [];
     type: EPostProcessingOptionType = EPostProcessingOptionType.number;
     imgPath: string = "https://test.test.png";
 
@@ -26,8 +27,8 @@ export class PostProcessingBuilder {
         this.value = value;
         return this;
     }
-    withValueList(valueList:string[]):PostProcessingBuilder {
-        this.valueList = valueList;
+    withPropList(propList:OntoNodeProperty[]):PostProcessingBuilder {
+        this.propList = propList;
         return this;
     }
     withType(type:EPostProcessingOptionType):PostProcessingBuilder {
@@ -46,7 +47,7 @@ export class PostProcessingBuilder {
             title: this.title,
             checked: this.checked,
             value: this.value,
-            valueList: this.valueList,
+            valueList: this.propList,
             type: this.type,
             imgPath: this.imgPath,
         }

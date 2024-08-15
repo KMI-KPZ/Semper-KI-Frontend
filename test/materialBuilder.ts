@@ -1,3 +1,4 @@
+import { OntoNodeProperty } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 
 
@@ -5,7 +6,7 @@ import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Quer
 export class MaterialBuilder {
     id: string="materialID";
     title: string="materialTitle";
-    propList: string[]=["prop"];
+    propList: OntoNodeProperty[]=[];
     URI: string="https://test.test.png";
 
     withId(id:string):MaterialBuilder {
@@ -16,7 +17,7 @@ export class MaterialBuilder {
         this.title = title;
         return this;
     }
-    withPropList(propList:string[]):MaterialBuilder {
+    withPropList(propList:OntoNodeProperty[]):MaterialBuilder {
         this.propList = propList;
         return this;
     }

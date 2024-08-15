@@ -21,6 +21,7 @@ import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Muta
 import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import useModal from "@/hooks/useModal";
 import ServiceSearch from "../Search/Search";
+import useSearch from "@/hooks/useSearch";
 
 interface Props {}
 
@@ -44,6 +45,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const materialsQuery = useGetMaterials();
   const setMaterial = useSetMaterial();
+  const {} = useSearch();
 
   const [selectedMaterials, setSelectedMaterials] = useState<MaterialProps[]>(
     process.serviceDetails.materials || []
@@ -96,8 +98,10 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
     }
     if (
       material.title.toLocaleLowerCase().includes(searchText) ||
-      material.propList.filter((prop) =>
-        prop.toLocaleLowerCase().includes(searchText)
+      material.propList.filter(
+        (prop) =>
+          prop.name.toLocaleLowerCase().includes(searchText) ||
+          prop.value.toString().toLocaleLowerCase().includes(searchText)
       ).length > 0
     )
       return true;
@@ -128,7 +132,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
         width="none"
         direction="col"
         justify="start"
-        className="h-full w-screen max-w-6xl p-5 pt-14"
+        className="h-full w-screen max-w-6xl gap-5 p-5 pt-14"
       >
         <ServiceSearch searchText={searchText} setSearchText={setSearchText} />
         <Container direction="col" width="full">
@@ -196,7 +200,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
         <Container
           width="fit"
           direction="col"
-          className="fixed bottom-10 z-10 rounded-xl border-2 bg-white px-5 py-3 md:sticky md:right-10"
+          className="fixed bottom-5 z-10 rounded-xl border-2 bg-white px-5 py-3 md:sticky md:right-10 md:mt-5"
         >
           <Button
             className=""

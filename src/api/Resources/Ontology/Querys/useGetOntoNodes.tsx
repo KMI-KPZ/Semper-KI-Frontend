@@ -71,6 +71,23 @@ export const parseOntoNode = (node: any): OntoNode => ({
   accessedWhen: new Date(node.accessedWhen),
 });
 
+export const isOntoNodePropertyName = (
+  name: string
+): name is OntoNodePropertyName => {
+  return [
+    "imgPath",
+    "foodSafe",
+    "heatResistant",
+    "flexible",
+    "smooth",
+    "eModul",
+    "poissonRatio",
+    "color",
+    "buildVolume",
+    "technology",
+  ].includes(name as OntoNodePropertyName);
+};
+
 const useGetOntoNodes = (nodeType: OntoNodeType) => {
   const queryClient = useQueryClient();
   const getOntoNodes = async () =>

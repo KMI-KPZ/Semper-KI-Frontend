@@ -5,6 +5,10 @@ import { Heading } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
 import useService from "@/hooks/useService";
 import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
+import {
+  OntoNodePropertyName,
+  isOntoNodePropertyName,
+} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 
 interface Props {
   material: MaterialProps;
@@ -37,7 +41,7 @@ export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
   };
   return (
     <Container
-      className={`w-fit min-w-[350px] max-w-[32%] gap-0 overflow-clip rounded-xl border-2 bg-white ${
+      className={`w-fit  gap-0 overflow-clip rounded-xl border-2 bg-white ${
         selected ? "border-blau-500" : ""
       }`}
       direction="col"
@@ -50,16 +54,28 @@ export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
       <Divider />
       <Container direction="col" className="p-5">
         <Heading variant="h3">{material.title}</Heading>
-        <Container direction="row" width="full" align="start">
-          <Container direction="col" justify="start" align="start">
-            <Text>{`${t(
-              `Service.Manufacturing.Material.components.Card.props`
-            )}`}</Text>
-          </Container>
-          <Container direction="col" justify="start" align="start">
-            <Text>{material.propList}</Text>
-          </Container>
+        <Container direction="col" justify="start" align="start">
+          <Text>{`${t(
+            `Service.Manufacturing.Material.components.Card.props`
+          )}`}</Text>
         </Container>
+        <table className="auto table border-separate border-spacing-2">
+          {material.propList.map((prop, index: number) => (
+            <tr key={index} className="model-view-tag">
+              <td>
+                {isOntoNodePropertyName(prop.name)
+                  ? t(
+                      `types.OntoNodePropertyName.${
+                        prop.name as OntoNodePropertyName
+                      }`
+                    )
+                  : prop.name}
+                {": "}
+              </td>
+              <td>{prop.value.toString()}</td>
+            </tr>
+          ))}
+        </table>
 
         {children}
       </Container>

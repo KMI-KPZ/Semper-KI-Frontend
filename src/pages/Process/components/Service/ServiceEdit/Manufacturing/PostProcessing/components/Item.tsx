@@ -29,8 +29,8 @@ const ProcessPostProcessingItem = <Item extends PostProcessingProps>(
   const renderSelectInput = () => (
     <select className="border">
       {item.valueList.map((title, index) => (
-        <option key={index} value={title}>
-          {title}
+        <option key={index} value={title.name}>
+          {title.name}
         </option>
       ))}
     </select>

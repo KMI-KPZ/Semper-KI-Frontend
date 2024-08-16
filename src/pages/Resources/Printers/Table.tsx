@@ -8,6 +8,7 @@ import ResourceTable from "../components/Table";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useGetOntoNodeNeighbors from "@/api/Resources/Ontology/Querys/useGetOntoNodeNeighbors";
 import useGetOntoNodes from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import useRessourcesTableItem from "@/hooks/useRessourcesTableItem";
 
 interface ResourcesPrintersTableProps {}
 
@@ -22,12 +23,13 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
     nodeID: user.organization === undefined ? "" : user.organization,
     nodeType: "printer",
   });
+  const { createRersourcesTableItem } = useRessourcesTableItem();
 
   if (allPrinters.isLoading || ownPrinters.isLoading)
     return <LoadingAnimation />;
 
   return (
-    <Container direction="col" width="full">
+    <Container direction="col" width="full" justify="start">
       <Container width="full" direction="row">
         <Heading variant="h2">{t("Resources.Printers.table.header")}</Heading>
       </Container>
@@ -41,8 +43,11 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
           to="create"
         />
       </Container>
-      <ResourceTable nodes={ownPrinters.data} nodeType="printer" />
-      <Divider />
+      <ResourceTable
+        nodes={createRersourcesTableItem(ownPrinters.data, allPrinters.data)}
+        nodeType="printer"
+      />
+      {/* <Divider />
       <Container width="full" justify="between" direction="row">
         <Heading variant="h3">{t("Resources.Printers.table.all")}</Heading>
       </Container>
@@ -50,7 +55,7 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
         nodes={allPrinters.data}
         nodeType="printer"
         actionType="all"
-      />
+      /> */}
     </Container>
   );
 };

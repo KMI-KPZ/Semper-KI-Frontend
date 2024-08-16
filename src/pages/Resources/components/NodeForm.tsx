@@ -1,12 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Button,
-  Container,
-  Heading,
-  LoadingAnimation,
-  Text,
-} from "@component-library/index";
+import { Button, Container, Heading } from "@component-library/index";
 import {
   OntoNode,
   OntoNodeNew,
@@ -18,18 +12,14 @@ import {
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { InputLabelProps } from "@mui/material";
 import { GeneralInput, InputType } from "@component-library/Form/GeneralInput";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate, useParams } from "react-router-dom";
-import useGetOntoNode from "@/api/Resources/Ontology/Querys/useGetOntoNode";
-import useGetNodeProperties from "@/api/Graph/Querys/useGetNodeProperties";
-import ClearIcon from "@mui/icons-material/Clear";
-import AddIcon from "@mui/icons-material/Add";
+import { useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 import useCreateOrgaNode from "@/api/Resources/Organization/Mutations/useCreateOrgaNode";
 import useUpdateOrgaNode from "@/api/Resources/Organization/Mutations/useUpdateOrgaNode";
 import ResourcesEdgeForm from "./EdgeForm";
+import ResourcesPropertyForm from "./PropertyForm";
+import ResourcesNodeDraft from "./NodeDraft";
 
 interface ResourcesNodePropsForm {
   type: "edit" | "create" | "variant";
@@ -40,8 +30,10 @@ interface ResourcesNodePropsForm {
 
 export interface ResourcesNodeFormEdges {
   edges: {
-    nodeType: OntoNodeType;
     nodeID: string;
+    nodeType: OntoNodeType;
+    nodeName: string;
+    createdBy: string;
   }[];
 }
 
@@ -114,15 +106,18 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     register,
     handleSubmit,
     control,
+    reset,
+    watch,
+
     formState: { errors },
   } = useForm<(OntoNode | OntoNodeNew) & ResourcesNodeFormEdges>({
     defaultValues:
       node === undefined
-        ? { nodeType: nodeType, edges: getMatchingEdges() }
-        : { ...node, edges: getMatchingEdges() },
+        ? { nodeType: nodeType, edges: [] }
+        : { ...node, edges: [] },
   });
 
-  const { append, fields, remove, update } = useFieldArray({
+  const usePropertyArray = useFieldArray({
     control,
     name: "properties",
   });
@@ -130,55 +125,6 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     control,
     name: "edges",
   });
-
-  const handleOnClickButtonAddProperty = () => {
-    append({
-      name: "",
-      type: "text",
-      value: "",
-    });
-  };
-
-  const handleOnChangePropertyType = (
-    e: React.ChangeEvent<HTMLSelectElement>,
-    index: number
-  ) => {
-    const propertyList = nodeProperties !== undefined ? nodeProperties : [];
-
-    const property = propertyList.find((node) => node.name === e.target.value);
-    if (property === undefined) return;
-    update(index, property);
-  };
-
-  const mapInputTypes = (type: OntoNodePropertyType): InputType => {
-    switch (type) {
-      case "text":
-        return "text";
-      case "number":
-        return "number";
-      case "date":
-        return "date";
-      case "boolean":
-        return "checkbox";
-      default:
-        return "text";
-    }
-  };
-
-  const propertyNameTranslation = (name: string) => {
-    return isOntoNodePropertyName(name)
-      ? t(`types.OntoNodePropertyName.${name as OntoNodePropertyName}`)
-      : name;
-  };
-
-  const propertyNameAlreadyUsed = (name: string): boolean => {
-    return fields.find((node) => node.name === name) !== undefined;
-  };
-
-  const freePropertyNamesAvailable = (): boolean => {
-    const propertyList = nodeProperties !== undefined ? nodeProperties : [];
-    return fields.length < propertyList.length;
-  };
 
   const onSubmit = (data: OntoNode | OntoNodeNew) => {
     logger("ResourcesNodeEdit | onSubmit |", data);
@@ -216,109 +162,80 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     }
   };
 
+  const nodeAlreadyFilled = watch("name") !== "" && watch("context") !== "";
+  const setFormToDraft = (node: OntoNode) => {
+    if (nodeAlreadyFilled) {
+      if (window.confirm(t("Resources.components.Edit.confirmDraft"))) {
+        reset({ ...node, edges: [] });
+      } else {
+        return;
+      }
+    }
+    reset({ ...node, edges: [] });
+  };
+
   return (
     <Container width="full" direction="col">
       <Heading variant="h2">
         {t(`types.OntoNodeType.${nodeType}`)}{" "}
         {t(`Resources.components.Edit.heading.${type}`)}
       </Heading>
-      <form className="flex w-full flex-col items-center justify-start gap-5 p-5">
-        <GeneralInput
-          label="name"
-          labelText={t("Resources.components.Edit.nodeName")}
-          register={register}
-          type="text"
+
+      {type === "create" ? (
+        <ResourcesNodeDraft
+          nodeType={nodeType}
+          setFormToDraft={setFormToDraft}
+          nodeAlreadyFilled={nodeAlreadyFilled}
         />
-        <GeneralInput
-          label="context"
-          labelText={t("Resources.components.Edit.context")}
-          register={register}
-          type="text"
-        />
-        {/* <GeneralInput
+      ) : null}
+
+      <form className="flex w-full flex-col items-center justify-start gap-5 ">
+        <Container width="full" direction="col" className="card">
+          <Heading variant="h3">
+            {t("Resources.components.Edit.general")}
+          </Heading>
+          <GeneralInput
+            label="name"
+            labelText={t("Resources.components.Edit.nodeName")}
+            register={register}
+            type="text"
+          />
+          <GeneralInput
+            label="context"
+            labelText={t("Resources.components.Edit.context")}
+            register={register}
+            type="text"
+          />
+          {/* <GeneralInput
           label="nodeType"
           labelText={t("Resources.components.Edit.nodeType")}
           register={register}
           type="text"
-        /> */}
-        {/* <Container width="full">
+          /> */}
+          {/* <Container width="full">
           <Text>{t("Resources.components.Edit.nodeType")}</Text>
           <Text>{t(`types.OntoNodeType.${nodeType}`)}</Text>
-        </Container> */}
-        {/* <GeneralInput
+          </Container> */}
+          {/* <GeneralInput
           label="createdBy"
           labelText={t("Resources.components.Edit.createdBy")}
           register={register}
           type="text"
-        /> */}
-        <Heading variant="h3">
-          {t("Resources.components.Edit.properties.header")}
-        </Heading>
-        {fields.map((field, index) => (
-          <Container
+          /> */}
+        </Container>
+        <ResourcesPropertyForm
+          register={register}
+          usePropertyArray={usePropertyArray}
+          nodeProperties={nodeProperties}
+        />
+
+        {getMatchingEdges(nodeType).map((edgeType, index) => (
+          <ResourcesEdgeForm
             key={index}
-            direction="col"
-            width="fit"
-            className="card relative min-w-full md:min-w-[300px]"
-          >
-            <Button
-              title={t("Resources.components.Edit.button.removeProperty")}
-              onClick={() => remove(index)}
-              className="absolute right-1 top-1"
-              size="sm"
-              variant="text"
-              children={<ClearIcon />}
-            />
-            {field.name === undefined || field.name === "" ? (
-              <Container width="full">
-                <Text>{t("Resources.components.Edit.properties.type")}</Text>
-                {
-                  <select
-                    className=" rounded-md border border-gray-300 p-2"
-                    {...register(`properties.${index}.name`, {
-                      onChange: (e) => handleOnChangePropertyType(e, index),
-                    })}
-                  >
-                    {nodeProperties.map((property) => (
-                      <option
-                        key={property.name}
-                        value={property.name}
-                        disabled={propertyNameAlreadyUsed(property.name)}
-                      >
-                        {propertyNameTranslation(property.name)}
-                      </option>
-                    ))}
-                  </select>
-                }
-              </Container>
-            ) : (
-              <>
-                <Container width="full">
-                  <Text>{t("Resources.components.Edit.properties.name")}</Text>
-                  <Text>{propertyNameTranslation(field.name)}</Text>
-                </Container>
-
-                <GeneralInput
-                  label={`properties.${index}.value`}
-                  labelText={t("Resources.components.Edit.properties.value")}
-                  register={register}
-                  type={mapInputTypes(field.type)}
-                />
-              </>
-            )}
-          </Container>
-        ))}
-
-        {freePropertyNamesAvailable() ? (
-          <Button
-            title={t("Resources.components.Edit.button.addProperty")}
-            onClick={handleOnClickButtonAddProperty}
-            variant="text"
-            children={<AddIcon />}
+            nodeType={edgeType}
+            useEdgeArray={useEdgeArray}
+            register={register}
           />
-        ) : null}
-        {getMatchingEdges(nodeType).map((edgeType) => (
-          <ResourcesEdgeForm nodeType={edgeType} />
         ))}
 
         <Button

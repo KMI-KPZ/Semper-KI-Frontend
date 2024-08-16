@@ -8,10 +8,7 @@ import ResourcesOverview from "./Overview/Overview";
 import ResourcesPostProcessings from "./PostProcessings/PostProcessings";
 import OntoPrinterContextProvider from "@/contexts/OntoPrinterContextProvider";
 import ResourcesPrintersTable from "./Printers/Table";
-import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import ResourcesPrintersAdd from "./Printers/Add/Add";
 import ResourcesMaterialsTable from "./Materials/Table";
-import ResourcesMaterialsForm from "./Materials/Form";
 import ResourcesNode from "./components/Node";
 import Graph from "./components/Graph";
 
@@ -28,7 +25,12 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
       </PageHeader>
       <div className="flex w-full flex-col gap-5 md:flex-row">
         <ResourcesMenu />
-        <Container direction="col" width="full" className="bg-white p-5">
+        <Container
+          direction="col"
+          width="full"
+          justify="start"
+          className="bg-white p-5"
+        >
           <Routes>
             <Route index element={<ResourcesOverview />} />
             <Route path="printers/*" element={<OntoPrinterContextProvider />}>

@@ -4,14 +4,16 @@ import { useTranslation } from "react-i18next";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { twMerge } from "tailwind-merge";
 import { use } from "i18next";
+import logger from "@/hooks/useLogger";
 
 interface CollapsibleProps {
   className?: string;
   open?: boolean;
+  initialOpen?: boolean;
 }
 
 const Collapsible: React.FC<PropsWithChildren<CollapsibleProps>> = (props) => {
-  const { children, className, open } = props;
+  const { children, className, open, initialOpen } = props;
   const { t } = useTranslation();
   const collapsibleRef = useRef<null | HTMLDivElement>(null);
   const [expand, setExpand] = useState<boolean>(false);
@@ -36,6 +38,19 @@ const Collapsible: React.FC<PropsWithChildren<CollapsibleProps>> = (props) => {
       setExpand(!expand);
     }
   }, [open]);
+
+  useEffect(() => {
+    if (
+      collapsibleRef !== null &&
+      collapsibleRef.current !== null &&
+      initialOpen !== undefined &&
+      initialOpen === true
+    ) {
+      collapsibleRef.current.style.maxHeight =
+        collapsibleRef.current.scrollHeight + "px";
+      setExpand(true);
+    }
+  }, [initialOpen]);
 
   return (
     <>

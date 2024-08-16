@@ -11,6 +11,7 @@ import useGetOntoNodes, {
 import ResourceTable from "../components/Table";
 import useGetOntoNodeNeighbors from "@/api/Resources/Ontology/Querys/useGetOntoNodeNeighbors";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
+import useRessourcesTableItem from "@/hooks/useRessourcesTableItem";
 
 interface ResourcesMaterialsTableProps {}
 
@@ -25,12 +26,13 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
     nodeID: user.organization === undefined ? "" : user.organization,
     nodeType: "material",
   });
+  const { createRersourcesTableItem } = useRessourcesTableItem();
 
   if (allMaterials.isLoading || ownMaterials.isLoading)
     return <LoadingAnimation />;
 
   return (
-    <Container direction="col" width="full">
+    <Container direction="col" width="full" justify="start">
       <Container width="full" direction="row">
         <Heading variant="h2">{t("Resources.Materials.table.header")}</Heading>
       </Container>
@@ -47,15 +49,9 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
           />
         </PermissionGate>
       </Container>
-      <ResourceTable nodes={ownMaterials.data} nodeType="material" />
-      <Divider />
-      <Container width="full" justify="start" direction="row">
-        <Heading variant="h3">{t("Resources.Materials.table.all")}</Heading>
-      </Container>
       <ResourceTable
-        nodes={allMaterials.data}
+        nodes={createRersourcesTableItem(ownMaterials.data, allMaterials.data)}
         nodeType="material"
-        actionType="all"
       />
     </Container>
   );

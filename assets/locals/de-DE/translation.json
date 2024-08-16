@@ -1811,7 +1811,7 @@
       "Table": {
         "action": "Aktionen",
         "name": "Name",
-        "createdBy": "Erstellt von",
+        "active": "Aktiv",
         "noItems": "keine Einträge vorhanden",
         "confirmDelete": "Möchten Sie \"{{name}}\" wirklich aus ihrer Organisation entfernen?",
         "buttons": {
@@ -1822,10 +1822,25 @@
         }
       },
       "Edge": {
-        "heading": "Zugehörige "
+        "heading": "Zugehörige ",
+        "table": {
+          "noItems": "keine Einträge vorhanden",
+          "caption": "Verfügbar",
+          "selected": "Ausgewählt",
+          "name": "Name",
+          "createdBy": "Erstellt von",
+          "actions": "Aktionen"
+        },
+        "button": {
+          "add": "Hinzufügen",
+          "delete": "Löschen"
+        }
       },
       "Edit": {
         "error": "Fehler beim Laden",
+        "draft": "Vorlage auswählen",
+        "confirmDraft": "Möchten Sie die Vorlage wirklich auswählen?\n Alle ungespeicherten Änderungen gehen verloren.",
+        "general": "Allgemeine Informationen",
         "heading": {
           "edit": "Bearbeiten",
           "create": "Erstellen",
@@ -1847,7 +1862,13 @@
           "edit": "Speichern",
           "create": "Erstellen",
           "variant": "Variante Erstellen",
-          "removeProperty": "Eigenschaft entfernen"
+          "removeProperty": "Eigenschaft entfernen",
+          "draft": "Vorlage auswählen"
+        },
+        "table": {
+          "name": "Name",
+          "createdBy": "Erstellt von",
+          "actions": "Aktionen"
         }
       }
     },
@@ -1865,7 +1886,7 @@
         "button": {
           "add": "Material Hinzufügen",
           "delete": "Löschen",
-          "createOwn": "Eigenes Material Anlegen",
+          "createOwn": "Material Anlegen",
           "createVariant": "Materialvariante Anlegen"
         }
       },
@@ -1889,7 +1910,7 @@
           "add": "Drucker Hinzufügen",
           "delete": "Löschen",
           "edit": "Bearbeiten",
-          "createOwn": "Eigenen Drucker Anlegen",
+          "createOwn": "Drucker Anlegen",
           "createVariant": "Druckervariante Anlegen"
         }
       },
@@ -1944,7 +1965,7 @@
       "all": "Alle verfügbaren Nachbearbeitungen",
       "add": "Zusätzliche Anforderung Hinzufügen",
       "button": {
-        "createOwn": "Eigene Nachbearbeitung Anlegen",
+        "createOwn": "Nachbearbeitung Anlegen",
         "createVariant": "Nachbearbeitungsvariante Anlegen"
       }
     }

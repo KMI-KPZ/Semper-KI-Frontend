@@ -36,6 +36,10 @@
     .card {
         @apply overflow-clip rounded-xl border-2 p-5 shadow-lg ;
     }
+
+    .card-container {
+        @apply overflow-clip rounded-xl border-2 p-5 ;
+    }
     .hover-card {
         @apply overflow-clip rounded-xl border-2 p-5 shadow-lg hover:cursor-pointer hover:border-ultramarinblau hover:shadow-xl duration-300;
     }

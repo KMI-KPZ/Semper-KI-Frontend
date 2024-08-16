@@ -12,15 +12,15 @@ import useDeleteOrgaEdge from "@/api/Resources/Organization/Mutations/useDeleteO
 import { useNavigate } from "react-router-dom";
 import useOrganization from "@/hooks/useOrganization";
 import useDeleteOrgaNode from "@/api/Resources/Organization/Mutations/useDeleteOrgaNode";
+import { ResourcesTableItem } from "@/hooks/useRessourcesTableItem";
 
-interface ResourceTableProps<T extends OntoNode> {
-  nodes: T[] | undefined;
+interface ResourceTableProps {
+  nodes: ResourcesTableItem[] | undefined;
   nodeType: OntoNodeType;
-  actionType?: "own" | "all";
 }
 
-const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
-  const { nodes = [], nodeType, actionType = "own" } = props;
+const ResourceTable = (props: ResourceTableProps) => {
+  const { nodes = [], nodeType } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { organization } = useOrganization();
@@ -29,31 +29,11 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
   const deleteOrgaEdge = useDeleteOrgaEdge();
   const deleteOrgaNode = useDeleteOrgaNode();
 
-  const { filterDataBySearchInput, handleSearchInputChange } = useSearch<T>();
-  const { getSortIcon, handleSort, sortItems } = useSort<T>();
+  const { filterDataBySearchInput, handleSearchInputChange } =
+    useSearch<ResourcesTableItem>();
+  const { getSortIcon, handleSort, sortItems } = useSort<ResourcesTableItem>();
 
-  const handleOnClickButtonAdd = (node: T) => {
-    if (node.nodeID === undefined) return;
-    createOrgaEdge.mutate({
-      entityIDs: [node.nodeID],
-    });
-  };
-
-  const handleOnClickButtonDeleteEdge = (node: T) => {
-    if (node.nodeID === undefined) return;
-    if (
-      window.confirm(
-        t("Resources.components.Table.confirmDelete", {
-          name: node.name,
-        })
-      )
-    ) {
-      deleteOrgaEdge.mutate({
-        entityID: node.nodeID,
-      });
-    }
-  };
-  const handleOnClickButtonDeleteNode = (node: T) => {
+  const handleOnClickButtonDeleteNode = (node: ResourcesTableItem) => {
     if (node.nodeID === undefined) return;
     if (
       window.confirm(
@@ -64,6 +44,22 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
     ) {
       deleteOrgaNode.mutate({
         nodeID: node.nodeID,
+      });
+    }
+  };
+
+  const handleOnChangeInputActive = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    item: ResourcesTableItem
+  ) => {
+    if (item.nodeID === undefined) return;
+    if (e.currentTarget.checked) {
+      createOrgaEdge.mutate({
+        entityIDs: [item.nodeID],
+      });
+    } else {
+      deleteOrgaEdge.mutate({
+        entityID: item.nodeID,
       });
     }
   };
@@ -79,7 +75,7 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
             justify="start"
             className="overflow-auto "
           >
-            <table className="card w-full  table-auto border-separate border-spacing-x-0 p-0">
+            <table className="card-container w-full  table-auto border-separate border-spacing-x-0 p-0">
               <thead>
                 <tr>
                   <th className="bg-gray-50">
@@ -101,13 +97,13 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
                     <div className="flex items-center justify-center">
                       <Button
                         variant="text"
-                        title={t(`Resources.components.Table.createdBy`)}
-                        onClick={() => handleSort("createdBy")}
+                        title={t(`Resources.components.Table.active`)}
+                        onClick={() => handleSort("active")}
                         className="whitespace-nowrap"
                       >
                         <div className="ml-6 flex flex-row items-center justify-center">
-                          {t(`Resources.components.Table.createdBy`)}
-                          {getSortIcon("createdBy")}
+                          {t(`Resources.components.Table.active`)}
+                          {getSortIcon("active")}
                         </div>
                       </Button>
                     </div>
@@ -137,9 +133,12 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
                             index % 2 === 1 ? "bg-gray-50" : "bg-white"
                           }`}
                         >
-                          {node.createdBy === organization.hashedID
-                            ? organization.name
-                            : "Sermper-KI"}
+                          <input
+                            type="checkbox"
+                            className="h-6 w-6"
+                            checked={node.active}
+                            onChange={(e) => handleOnChangeInputActive(e, node)}
+                          />
                         </td>
                         <td
                           className={`border-t-2 p-3 text-center ${
@@ -147,69 +146,34 @@ const ResourceTable = <T extends OntoNode>(props: ResourceTableProps<T>) => {
                           }`}
                         >
                           <Container width="full" direction="row">
-                            {actionType === "all" ? (
-                              <>
-                                <Button
-                                  variant="text"
-                                  title={t(
-                                    "Resources.components.Table.buttons.add"
-                                  )}
-                                  onClick={() => handleOnClickButtonAdd(node)}
-                                />
-                                <Button
-                                  variant="text"
-                                  title={t(
-                                    "Resources.components.Table.buttons.variant"
-                                  )}
-                                  to={`variant/${node.nodeID}`}
-                                  className="whitespace-nowrap"
-                                />
-
-                                {node.createdBy === organization.hashedID ? (
-                                  <Button
-                                    variant="text"
-                                    title={t(
-                                      "Resources.components.Table.buttons.delete"
-                                    )}
-                                    onClick={() =>
-                                      handleOnClickButtonDeleteNode(node)
-                                    }
-                                    className="whitespace-nowrap"
-                                  />
-                                ) : null}
-                              </>
-                            ) : (
-                              <>
-                                {node.createdBy === organization.hashedID ? (
-                                  <Button
-                                    variant="text"
-                                    title={t(
-                                      "Resources.components.Table.buttons.edit"
-                                    )}
-                                    to={`edit/${node.nodeID}`}
-                                    className="whitespace-nowrap"
-                                  />
-                                ) : null}
-                                <Button
-                                  variant="text"
-                                  title={t(
-                                    "Resources.components.Table.buttons.variant"
-                                  )}
-                                  to={`variant/${node.nodeID}`}
-                                  className="whitespace-nowrap"
-                                />
-                                <Button
-                                  variant="text"
-                                  title={t(
-                                    "Resources.components.Table.buttons.delete"
-                                  )}
-                                  onClick={() =>
-                                    handleOnClickButtonDeleteEdge(node)
-                                  }
-                                  className="whitespace-nowrap"
-                                />
-                              </>
-                            )}
+                            {node.createdBy === organization.hashedID ? (
+                              <Button
+                                variant="text"
+                                title={t(
+                                  "Resources.components.Table.buttons.edit"
+                                )}
+                                to={`edit/${node.nodeID}`}
+                                className="whitespace-nowrap"
+                              />
+                            ) : null}
+                            <Button
+                              variant="text"
+                              title={t(
+                                "Resources.components.Table.buttons.variant"
+                              )}
+                              to={`variant/${node.nodeID}`}
+                              className="whitespace-nowrap"
+                            />
+                            <Button
+                              variant="text"
+                              title={t(
+                                "Resources.components.Table.buttons.delete"
+                              )}
+                              onClick={() =>
+                                handleOnClickButtonDeleteNode(node)
+                              }
+                              className="whitespace-nowrap"
+                            />
                           </Container>
                         </td>
                       </tr>

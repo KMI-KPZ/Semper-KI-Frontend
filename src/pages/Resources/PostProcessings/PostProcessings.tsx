@@ -12,6 +12,8 @@ import ResourceTable from "../components/Table";
 import useGetOntoNodeNeighbors from "@/api/Resources/Ontology/Querys/useGetOntoNodeNeighbors";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useRessourcesTableItem from "@/hooks/useRessourcesTableItem";
+import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import useGetOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetOrgaNodeNeighbors";
 
 interface ResourcesPostProcessingsProps {}
 
@@ -21,8 +23,8 @@ const ResourcesPostProcessings: React.FC<ResourcesPostProcessingsProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
-  const allAdditionalrequirements = useGetOntoNodes("additionalRequirement");
-  const ownAdditionalRequirements = useGetOntoNodeNeighbors({
+  const allAdditionalrequirements = useGetOrgaNodes("additionalRequirement");
+  const ownAdditionalRequirements = useGetOrgaNodeNeighbors({
     nodeID: user.organization === undefined ? "" : user.organization,
     nodeType: "additionalRequirement",
   });

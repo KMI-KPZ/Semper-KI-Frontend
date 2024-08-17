@@ -1,30 +1,28 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-
-export type OrgaNode = {
-  resources: string[];
-};
+import { useParams } from "react-router-dom";
+import { OntoNode, parseOntoNode } from "../../Ontology/Querys/useGetOntoNodes";
 
 const useGetOrgaNode = () => {
   const queryClient = useQueryClient();
-  const getOrgaNode = async () =>
+  const { nodeID } = useParams();
+  const getOntoNode = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/get/`
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/nodes/get/by-id/${nodeID}/`
       )
       .then((response) => {
-        const data: OrgaNode = {
-          ...response.data,
-        };
+        const data: OntoNode = parseOntoNode(response.data);
 
-        logger("useGetOrgaNode | getOrgaNode ✅ |", response);
+        logger("useGetOntoNode | getOntoNode ✅ |", response);
         return data;
       });
 
-  return useQuery<OrgaNode, Error>({
-    queryKey: ["resources", "orga"],
-    queryFn: getOrgaNode,
+  return useQuery<OntoNode, Error>({
+    queryKey: ["resources", "onto", "node", nodeID],
+    enabled: nodeID !== undefined && nodeID !== "",
+    queryFn: getOntoNode,
   });
 };
 

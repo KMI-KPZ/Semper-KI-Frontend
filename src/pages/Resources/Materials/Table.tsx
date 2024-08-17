@@ -12,6 +12,8 @@ import ResourceTable from "../components/Table";
 import useGetOntoNodeNeighbors from "@/api/Resources/Ontology/Querys/useGetOntoNodeNeighbors";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useRessourcesTableItem from "@/hooks/useRessourcesTableItem";
+import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import useGetOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetOrgaNodeNeighbors";
 
 interface ResourcesMaterialsTableProps {}
 
@@ -21,8 +23,8 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
-  const allMaterials = useGetOntoNodes("material");
-  const ownMaterials = useGetOntoNodeNeighbors({
+  const allMaterials = useGetOrgaNodes("material");
+  const ownMaterials = useGetOrgaNodeNeighbors({
     nodeID: user.organization === undefined ? "" : user.organization,
     nodeType: "material",
   });

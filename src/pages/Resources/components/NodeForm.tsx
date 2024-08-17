@@ -20,6 +20,7 @@ import useUpdateOrgaNode from "@/api/Resources/Organization/Mutations/useUpdateO
 import ResourcesEdgeForm from "./EdgeForm";
 import ResourcesPropertyForm from "./PropertyForm";
 import ResourcesNodeDraft from "./NodeDraft";
+import useCreateOrgaEdge from "@/api/Resources/Organization/Mutations/useCreateOrgaEdge";
 
 interface ResourcesNodePropsForm {
   type: "edit" | "create" | "variant";
@@ -29,12 +30,13 @@ interface ResourcesNodePropsForm {
 }
 
 export interface ResourcesNodeFormEdges {
-  edges: {
-    nodeID: string;
-    nodeType: OntoNodeType;
-    nodeName: string;
-    createdBy: string;
-  }[];
+  edges: ResourcesNodeFormEdge[];
+}
+export interface ResourcesNodeFormEdge {
+  nodeID: string;
+  nodeType: OntoNodeType;
+  nodeName: string;
+  createdBy: string;
 }
 
 const getMatchingEdges = (nodeType: OntoNodeType): OntoNodeType[] => {
@@ -57,6 +59,8 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   const { t } = useTranslation();
   const createOrgaNode = useCreateOrgaNode();
   const updateOrgaNode = useUpdateOrgaNode();
+  const createOrgaEdge = useCreateOrgaEdge();
+
   const navigate = useNavigate();
 
   // const schema = yup.object({
@@ -126,15 +130,28 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     name: "edges",
   });
 
-  const onSubmit = (data: OntoNode | OntoNodeNew) => {
+  const updateOrgaEdges = (edges: ResourcesNodeFormEdge[]) => {
+    createOrgaEdge.mutate(
+      { entityIDs: edges.map((edge) => edge.nodeID) },
+      {
+        onSuccess: () => {
+          navigate("..");
+        },
+      }
+    );
+  };
+
+  const onSubmit = (
+    data: (OntoNode | OntoNodeNew) & ResourcesNodeFormEdges
+  ) => {
     logger("ResourcesNodeEdit | onSubmit |", data);
     switch (type) {
       case "edit":
         updateOrgaNode.mutate(
           { node: data as OntoNode },
           {
-            onSuccess: () => {
-              navigate("..");
+            onSuccess() {
+              updateOrgaEdges(data.edges);
             },
           }
         );
@@ -144,7 +161,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
           { node: data },
           {
             onSuccess: () => {
-              navigate("..");
+              updateOrgaEdges(data.edges);
             },
           }
         );
@@ -154,7 +171,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
           { node: data },
           {
             onSuccess: () => {
-              navigate("..");
+              updateOrgaEdges(data.edges);
             },
           }
         );

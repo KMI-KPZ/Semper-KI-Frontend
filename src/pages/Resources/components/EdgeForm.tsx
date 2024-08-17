@@ -20,13 +20,9 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import ClearIcon from "@mui/icons-material/Clear";
-import AddIcon from "@mui/icons-material/Add";
-import useGetOrgaNode from "@/api/Resources/Organization/Querys/useGetOrgaNode";
 import useOrganization from "@/hooks/useOrganization";
-import useFilter from "@/hooks/useFilter";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
-import logger from "@/hooks/useLogger";
 
 interface ResourcesEdgeFormProps {
   nodeType: OntoNodeType;

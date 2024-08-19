@@ -12,7 +12,7 @@ const useGetOrgaNodes = (nodeType: OntoNodeType) => {
   const getOntoNodes = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/nodes/get/by-type/${nodeType}/`
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/nodes/by-type/get/${nodeType}/`
       )
       .then((response) => {
         const data: OntoNode[] = response.data.map((node: any) =>
@@ -23,7 +23,7 @@ const useGetOrgaNodes = (nodeType: OntoNodeType) => {
       });
 
   return useQuery<OntoNode[], Error>({
-    queryKey: ["resources", "onto", "nodes", nodeType],
+    queryKey: ["resources", "orga", "nodes", nodeType],
     queryFn: getOntoNodes,
   });
 };

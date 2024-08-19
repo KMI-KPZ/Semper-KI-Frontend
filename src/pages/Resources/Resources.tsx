@@ -2,7 +2,7 @@ import { Container, PageHeader } from "@component-library/index";
 import { Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import ResourcesMenu from "./components/Menu";
 import ResourcesOverview from "./Overview/Overview";
 import ResourcesPostProcessings from "./PostProcessings/PostProcessings";
@@ -34,6 +34,8 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
             <Route index element={<ResourcesOverview />} />
             <Route path="printers/*">
               <Route index element={<ResourcesPrintersTable />} />
+              <Route path="edit" element={<Navigate to=".." />} />
+              <Route path="variant" element={<Navigate to=".." />} />
               <Route
                 path="edit/:nodeID"
                 element={<ResourcesNode type="edit" nodeType="printer" />}
@@ -49,6 +51,8 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
             </Route>
             <Route path="materials/*">
               <Route index element={<ResourcesMaterialsTable />} />
+              <Route path="edit" element={<Navigate to=".." />} />
+              <Route path="variant" element={<Navigate to=".." />} />
               <Route
                 path="edit/:nodeID"
                 element={<ResourcesNode type="edit" nodeType="material" />}
@@ -64,6 +68,8 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
             </Route>
             <Route path="postprocessings/*">
               <Route index element={<ResourcesPostProcessings />} />
+              <Route path="edit" element={<Navigate to=".." />} />
+              <Route path="variant" element={<Navigate to=".." />} />
               <Route
                 path="edit/:nodeID"
                 element={

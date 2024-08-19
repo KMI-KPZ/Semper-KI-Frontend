@@ -22,6 +22,7 @@ export interface OntoNode extends OntoNodeNew {
   createdWhen: Date;
   updatedWhen: Date;
   accessedWhen: Date;
+  active: boolean;
 }
 
 export type OntoNodeProperty =

@@ -12,7 +12,7 @@ export interface Edge {
   target: string;
 }
 
-export interface ReturnDataType {
+export interface Graph {
   nodes: Node[];
   edges: Edge[];
 }
@@ -23,7 +23,7 @@ const useGetGraph = () => {
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/private/graph/get/`)
       .then((response) => {
-        const data: ReturnDataType = {
+        const data: Graph = {
           nodes: response.data.Nodes,
           edges: response.data.Edges,
         };
@@ -32,7 +32,7 @@ const useGetGraph = () => {
         return data;
       });
 
-  return useQuery<ReturnDataType, Error>({
+  return useQuery<Graph, Error>({
     queryKey: ["graph"],
     queryFn: getGraph,
     enabled: process.env.NODE_ENV === "development",

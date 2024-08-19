@@ -6,8 +6,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import ResourceTable from "../components/Table";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
-import useGetOntoNodeNeighbors from "@/api/Resources/Ontology/Querys/useGetOntoNodeNeighbors";
-import useGetOntoNodes from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+
 import useRessourcesTableItem from "@/hooks/useRessourcesTableItem";
 import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import useGetOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetOrgaNodeNeighbors";

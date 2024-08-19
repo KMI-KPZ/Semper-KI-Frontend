@@ -1,7 +1,6 @@
-import useGetOntoNodeNeighbors from "@/api/Resources/Ontology/Querys/useGetOntoNodeNeighbors";
-import useGetOntoNodes, {
-  OntoNode,
-} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import { OntoNode } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import useGetOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetOrgaNodeNeighbors";
+import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import {
   AppLoadingSuspense,
@@ -29,9 +28,9 @@ const OntoPrinterContextProvider: React.FC<
 > = (props) => {
   const { children } = props;
   const { t } = useTranslation();
-  const ontoPrinters = useGetOntoNodes("printer");
+  const ontoPrinters = useGetOrgaNodes("printer");
   const { user } = useAuthorizedUser();
-  const orgaPrinter = useGetOntoNodeNeighbors({
+  const orgaPrinter = useGetOrgaNodeNeighbors({
     nodeID: user.organization === undefined ? "" : user.organization,
     nodeType: "printer",
   });

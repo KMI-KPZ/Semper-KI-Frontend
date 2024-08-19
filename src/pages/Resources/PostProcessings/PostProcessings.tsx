@@ -1,4 +1,3 @@
-import useGetOntoNodes from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import {
   Button,
   Container,
@@ -9,7 +8,7 @@ import {
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ResourceTable from "../components/Table";
-import useGetOntoNodeNeighbors from "@/api/Resources/Ontology/Querys/useGetOntoNodeNeighbors";
+
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useRessourcesTableItem from "@/hooks/useRessourcesTableItem";
 import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";

@@ -8,7 +8,7 @@ import {
   Search,
   Text,
 } from "@component-library/index";
-import useGetOntoNodes, {
+import {
   OntoNode,
   OntoNodeNew,
   OntoNodeType,
@@ -19,6 +19,7 @@ import useOrganization from "@/hooks/useOrganization";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import Collapsible from "@/components/Collapsible/Collapsible";
+import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 
 interface ResourcesNodeDraftProps {
   nodeType: OntoNodeType;
@@ -29,7 +30,7 @@ interface ResourcesNodeDraftProps {
 const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
   const { nodeType, setFormToDraft, nodeAlreadyFilled } = props;
   const { t } = useTranslation();
-  const nodes = useGetOntoNodes(nodeType);
+  const nodes = useGetOrgaNodes(nodeType);
   const { organization } = useOrganization();
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<OntoNode>();

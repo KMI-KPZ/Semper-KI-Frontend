@@ -8,7 +8,7 @@ import {
   Search,
   Text,
 } from "@component-library/index";
-import useGetOntoNodes, {
+import {
   OntoNode,
   OntoNodeNew,
   OntoNodeType,
@@ -23,6 +23,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import useOrganization from "@/hooks/useOrganization";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
+import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 
 interface ResourcesEdgeFormProps {
   nodeType: OntoNodeType;
@@ -37,7 +38,7 @@ interface ResourcesEdgeFormProps {
 const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
   const { nodeType, useEdgeArray, register } = props;
   const { t } = useTranslation();
-  const nodes = useGetOntoNodes(nodeType);
+  const nodes = useGetOrgaNodes(nodeType);
   const { organization } = useOrganization();
   const {
     getSortIcon: getSortIconAll,

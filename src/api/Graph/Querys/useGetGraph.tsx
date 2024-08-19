@@ -21,7 +21,7 @@ const useGetGraph = () => {
   const queryClient = useQueryClient();
   const getGraph = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/graph/get/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/private/graph/get/`)
       .then((response) => {
         const data: ReturnDataType = {
           nodes: response.data.Nodes,
@@ -35,6 +35,7 @@ const useGetGraph = () => {
   return useQuery<ReturnDataType, Error>({
     queryKey: ["graph"],
     queryFn: getGraph,
+    enabled: process.env.NODE_ENV === "development",
   });
 };
 

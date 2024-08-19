@@ -291,7 +291,6 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                         onClick={() => remove(index)}
                         size="sm"
                         variant="text"
-                        children={<ClearIcon />}
                       />
                     </td>
                   </tr>

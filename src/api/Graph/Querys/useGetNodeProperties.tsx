@@ -11,7 +11,7 @@ const useGetNodeProperties = (nodeType: OntoNodeType) => {
   const getNodeProperties = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/nodes/properties/get/by-type/${nodeType}/`
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/nodes/properties/get/by-type/${nodeType}/`
       )
       .then((response) => {
         const data: OntoNodeProperty[] = response.data;

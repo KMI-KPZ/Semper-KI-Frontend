@@ -41,6 +41,7 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
           title={t("Resources.Printers.table.button.createOwn")}
           variant="secondary"
           size="sm"
+          width="fit"
           to="create"
         />
       </Container>

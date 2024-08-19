@@ -46,6 +46,7 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
             to="create"
             variant="secondary"
             size="sm"
+            width="fit"
           />
         </PermissionGate>
       </Container>

@@ -44,6 +44,7 @@ const ResourcesPostProcessings: React.FC<ResourcesPostProcessingsProps> = (
         <Button
           title={t("Resources.PostProcessings.button.createOwn")}
           to="create"
+          width="fit"
           variant="secondary"
           size="sm"
         />

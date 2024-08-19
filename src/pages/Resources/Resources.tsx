@@ -6,7 +6,6 @@ import { Route, Routes } from "react-router-dom";
 import ResourcesMenu from "./components/Menu";
 import ResourcesOverview from "./Overview/Overview";
 import ResourcesPostProcessings from "./PostProcessings/PostProcessings";
-import OntoPrinterContextProvider from "@/contexts/OntoPrinterContextProvider";
 import ResourcesPrintersTable from "./Printers/Table";
 import ResourcesMaterialsTable from "./Materials/Table";
 import ResourcesNode from "./components/Node";
@@ -33,7 +32,7 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
         >
           <Routes>
             <Route index element={<ResourcesOverview />} />
-            <Route path="printers/*" element={<OntoPrinterContextProvider />}>
+            <Route path="printers/*">
               <Route index element={<ResourcesPrintersTable />} />
               <Route
                 path="edit/:nodeID"

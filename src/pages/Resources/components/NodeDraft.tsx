@@ -50,7 +50,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
             <Container
               width="full"
               direction="col"
-              className="overflow-auto"
+              className="mb-5 overflow-auto"
               justify="start"
               align="start"
             >

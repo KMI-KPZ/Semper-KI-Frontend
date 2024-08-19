@@ -3,8 +3,9 @@ import { useTranslation } from "react-i18next";
 import { Container, LoadingAnimation } from "@component-library/index";
 import { OntoNodeType } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import useGetNodeProperties from "@/api/Graph/Querys/useGetNodeProperties";
-import ResourcesNodeForm from "./NodeForm";
+import ResourcesNodeForm, { getMatchingEdges } from "./NodeForm";
 import useGetOrgaNode from "@/api/Resources/Organization/Querys/useGetOrgaNode";
+import useResourcesNodeEdges from "@/hooks/useResourcesNodeEdges";
 
 interface ResourcesNodeProps {
   type: "edit" | "create" | "variant";
@@ -16,10 +17,15 @@ const ResourcesNode: React.FC<ResourcesNodeProps> = (props) => {
   const { t } = useTranslation();
   const node = useGetOrgaNode();
   const nodeProperties = useGetNodeProperties(nodeType);
+  const { edges, isLoading: edgesAreLoading } = useResourcesNodeEdges({
+    nodeID: node.data?.nodeID ?? "",
+    types: getMatchingEdges(nodeType),
+  });
 
   if (
     (node.isLoading && (type === "edit" || type === "variant")) ||
-    nodeProperties.isLoading
+    nodeProperties.isLoading ||
+    edgesAreLoading
   )
     return <LoadingAnimation />;
   if (
@@ -34,6 +40,7 @@ const ResourcesNode: React.FC<ResourcesNodeProps> = (props) => {
       nodeType={nodeType}
       nodeProperties={nodeProperties.data}
       node={node.data}
+      edges={edges}
     />
   );
 };

@@ -166,9 +166,9 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
         }
       );
     });
-    // if (array.length === 0) {
-    //   navigate("..");
-    // }
+    if (newEdges.length === 0 && deleteEdges.length && array.length === 0) {
+      navigate("..");
+    }
   };
 
   const onSubmit = (

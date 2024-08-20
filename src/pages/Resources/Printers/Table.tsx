@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 import ResourceTable from "../components/Table";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 
-import useRessourcesTableItem from "@/hooks/useRessourcesTableItem";
 import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import useGetOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetOrgaNodeNeighbors";
 
@@ -19,15 +18,9 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
-  const allPrinters = useGetOrgaNodes("printer");
-  const ownPrinters = useGetOrgaNodeNeighbors({
-    nodeID: user.organization === undefined ? "" : user.organization,
-    nodeType: "printer",
-  });
-  const { createRersourcesTableItem } = useRessourcesTableItem();
+  const printers = useGetOrgaNodes("printer");
 
-  if (allPrinters.isLoading || ownPrinters.isLoading)
-    return <LoadingAnimation />;
+  if (printers.isLoading) return <LoadingAnimation />;
 
   return (
     <Container direction="col" width="full" justify="start">
@@ -46,7 +39,7 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
         />
       </Container>
       <ResourceTable
-        nodes={createRersourcesTableItem(ownPrinters.data, allPrinters.data)}
+        nodes={printers.data?.filter((node) => node.createdBy !== "SYSTEM")}
         nodeType="printer"
       />
       {/* <Divider />

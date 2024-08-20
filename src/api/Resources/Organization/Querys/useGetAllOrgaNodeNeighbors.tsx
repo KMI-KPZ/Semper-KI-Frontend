@@ -25,6 +25,7 @@ const useGetAllOrgaNodeNeighbors = (nodeID: string) => {
   return useQuery<OntoNode[], Error>({
     queryKey: ["resources", "orga", "nodes", nodeID, "all"],
     queryFn: getAllOrgaNodeNeighbors,
+    enabled: nodeID !== "",
   });
 };
 

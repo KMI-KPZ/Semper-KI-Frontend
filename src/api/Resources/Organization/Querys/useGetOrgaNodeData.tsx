@@ -18,7 +18,7 @@ const useGetOrgaNodeData = () => {
           ...response.data,
         };
 
-        logger("useGetOrgaNode | getOrgaNode ✅ |", response);
+        logger("useGetOrgaNodeData | getOrgaNode ✅ |", response);
         return data;
       });
 

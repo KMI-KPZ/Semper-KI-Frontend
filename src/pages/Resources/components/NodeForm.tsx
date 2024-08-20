@@ -5,23 +5,19 @@ import {
   OntoNode,
   OntoNodeNew,
   OntoNodeProperty,
-  OntoNodePropertyName,
-  OntoNodePropertyType,
   OntoNodeType,
-  isOntoNodePropertyName,
+  allOntoNodeTypes,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { useFieldArray, useForm } from "react-hook-form";
-import * as yup from "yup";
 import { GeneralInput, InputType } from "@component-library/Form/GeneralInput";
 import { useNavigate } from "react-router-dom";
-import logger from "@/hooks/useLogger";
 import useCreateOrgaNode from "@/api/Resources/Organization/Mutations/useCreateOrgaNode";
 import useUpdateOrgaNode from "@/api/Resources/Organization/Mutations/useUpdateOrgaNode";
 import ResourcesEdgeForm from "./EdgeForm";
 import ResourcesPropertyForm from "./PropertyForm";
 import ResourcesNodeDraft from "./NodeDraft";
-import useCreateOrgaEdge from "@/api/Resources/Organization/Mutations/useCreateOrgaEdge";
-import useDeleteOrgaEdge from "@/api/Resources/Organization/Mutations/useDeleteOrgaEdge";
+import useCreateOrgaEntitieEdge from "@/api/Resources/Organization/Mutations/useCreateOrgaEntitieEdge";
+import useDeleteOrgaEntitieEdge from "@/api/Resources/Organization/Mutations/useDeleteOrgaEntitieEdge";
 
 interface ResourcesNodePropsForm {
   type: "edit" | "create" | "variant";
@@ -34,6 +30,7 @@ interface ResourcesNodePropsForm {
 export interface ResourcesNodeFormEdges {
   edges: ResourcesNodeFormEdge[];
 }
+
 export interface ResourcesNodeFormEdge {
   nodeID: string;
   nodeType: OntoNodeType;
@@ -41,28 +38,14 @@ export interface ResourcesNodeFormEdge {
   createdBy: string;
 }
 
-export const getMatchingEdges = (nodeType: OntoNodeType): OntoNodeType[] => {
-  switch (nodeType) {
-    case "organization":
-      return ["printer", "material", "additionalRequirement"];
-    case "printer":
-      return ["material", "additionalRequirement"];
-    case "material":
-      return ["printer", "additionalRequirement"];
-    case "additionalRequirement":
-      return ["printer", "material"];
-    default:
-      return [];
-  }
-};
-
 const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   const { type, nodeType, nodeProperties, node, edges } = props;
   const { t } = useTranslation();
   const createOrgaNode = useCreateOrgaNode();
   const updateOrgaNode = useUpdateOrgaNode();
-  const createOrgaEdge = useCreateOrgaEdge();
-  const deleteOrgaEdge = useDeleteOrgaEdge();
+  const createOrgaEntitieEdge = useCreateOrgaEntitieEdge();
+  const deleteOrgaEntitieEdge = useDeleteOrgaEntitieEdge();
+  const [array, setArray] = React.useState<string[]>([]);
 
   const navigate = useNavigate();
 
@@ -131,7 +114,10 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     name: "edges",
   });
 
-  const updateOrgaEdges = (formEdges: ResourcesNodeFormEdge[]) => {
+  const updateOrgaEdges = (
+    nodeID: string,
+    formEdges: ResourcesNodeFormEdge[]
+  ) => {
     const newEdges: ResourcesNodeFormEdge[] = formEdges.filter(
       (edge) => !edges?.some((e) => e.nodeID === edge.nodeID)
     );
@@ -141,34 +127,68 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
         : edges.filter(
             (edge) => !formEdges.some((e) => e.nodeID === edge.nodeID)
           );
+    newEdges.forEach((edge) => {
+      setArray((prevState) => [...prevState, edge.nodeID]);
+      createOrgaEntitieEdge.mutate(
+        {
+          entity1ID: nodeID,
+          entity2ID: edge.nodeID,
+        },
+        {
+          onSuccess: () => {
+            setArray((prevState) =>
+              prevState.filter((id) => id !== edge.nodeID)
+            );
+            if (array.length === 0) {
+              navigate("..");
+            }
+          },
+        }
+      );
+    });
 
     deleteEdges.forEach((edge) => {
-      deleteOrgaEdge.mutate({ entityID: edge.nodeID });
+      setArray((prevState) => [...prevState, edge.nodeID]);
+      deleteOrgaEntitieEdge.mutate(
+        {
+          entity1ID: nodeID,
+          entity2ID: edge.nodeID,
+        },
+        {
+          onSuccess: () => {
+            setArray((prevState) =>
+              prevState.filter((id) => id !== edge.nodeID)
+            );
+            if (array.length === 0) {
+              navigate("..");
+            }
+          },
+        }
+      );
     });
-    createOrgaEdge.mutate({ entityIDs: newEdges.map((edge) => edge.nodeID) });
+    // if (array.length === 0) {
+    //   navigate("..");
+    // }
   };
 
   const onSubmit = (
     data: (OntoNode | OntoNodeNew) & ResourcesNodeFormEdges
   ) => {
-    logger("ResourcesNodeEdit | onSubmit |", data);
+    // logger("ResourcesNodeEdit | onSubmit |", data);
     switch (type) {
       case "edit":
-        updateOrgaNode.mutate(
-          { node: data as OntoNode },
-          {
-            onSuccess() {
-              updateOrgaEdges(data.edges);
-            },
-          }
-        );
+        updateOrgaNode.mutate(data as OntoNode, {
+          onSuccess() {
+            updateOrgaEdges((data as OntoNode).nodeID, data.edges);
+          },
+        });
         break;
       case "create":
         createOrgaNode.mutate(
           { node: data },
           {
-            onSuccess: () => {
-              updateOrgaEdges(data.edges);
+            onSuccess: (node) => {
+              updateOrgaEdges(node.nodeID, data.edges);
             },
           }
         );
@@ -178,7 +198,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
           { node: data },
           {
             onSuccess: () => {
-              updateOrgaEdges(data.edges);
+              updateOrgaEdges((data as OntoNode).nodeID, data.edges);
             },
           }
         );
@@ -237,18 +257,26 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
           nodeProperties={nodeProperties}
         />
 
-        {getMatchingEdges(nodeType).map((edgeType, index) => (
-          <ResourcesEdgeForm
-            key={index}
-            nodeType={edgeType}
-            useEdgeArray={useEdgeArray}
-            register={register}
-          />
-        ))}
+        {allOntoNodeTypes
+          .filter((_nodeType) => _nodeType !== nodeType)
+          .map((edgeType, index) => (
+            <ResourcesEdgeForm
+              key={index}
+              nodeType={edgeType}
+              useEdgeArray={useEdgeArray}
+              register={register}
+            />
+          ))}
 
         <Button
           title={t(`Resources.components.Edit.button.${type}`)}
           onClick={handleSubmit(onSubmit)}
+          loading={
+            createOrgaNode.isLoading ||
+            updateOrgaNode.isLoading ||
+            createOrgaEntitieEdge.isLoading ||
+            deleteOrgaEntitieEdge.isLoading
+          }
         />
       </form>
     </Container>

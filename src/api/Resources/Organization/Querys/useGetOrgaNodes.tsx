@@ -9,7 +9,7 @@ import {
 
 const useGetOrgaNodes = (nodeType: OntoNodeType) => {
   const queryClient = useQueryClient();
-  const getOntoNodes = async () =>
+  const getOrgaNodes = async () =>
     authorizedCustomAxios
       .get(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/nodes/by-type/get/${nodeType}/`
@@ -18,13 +18,13 @@ const useGetOrgaNodes = (nodeType: OntoNodeType) => {
         const data: OntoNode[] = response.data.map((node: any) =>
           parseOntoNode(node)
         );
-        logger("useGetOntoNodes | getOntoNodes ✅ |", response);
+        logger("useGetOrgaNodes | getOrgaNodes ✅|", response);
         return data;
       });
 
   return useQuery<OntoNode[], Error>({
     queryKey: ["resources", "orga", "nodes", nodeType],
-    queryFn: getOntoNodes,
+    queryFn: getOrgaNodes,
   });
 };
 

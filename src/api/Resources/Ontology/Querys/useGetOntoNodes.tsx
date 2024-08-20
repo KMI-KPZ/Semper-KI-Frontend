@@ -1,6 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { ResourcesNodeFormEdge } from "@/pages/Resources/components/NodeForm";
 
 export type OntoNodeType =
   | "organization"
@@ -8,6 +9,24 @@ export type OntoNodeType =
   | "material"
   | "additionalRequirement"
   | "color";
+
+export const allOntoNodeTypes: OntoNodeType[] = [
+  "printer",
+  "material",
+  "additionalRequirement",
+];
+export const parseOntoNodesToEdges = (
+  nodes: OntoNode[]
+): ResourcesNodeFormEdge[] => {
+  return nodes.map(
+    (node): ResourcesNodeFormEdge => ({
+      nodeID: node.nodeID,
+      nodeType: node.nodeType,
+      nodeName: node.name,
+      createdBy: node.createdBy,
+    })
+  );
+};
 
 export interface OntoNodeNew {
   name: string;
@@ -64,13 +83,16 @@ export interface OntoNodePropertyBoolean extends OntoNodePropertyGeneral {
   value: boolean;
 }
 
-export const parseOntoNode = (node: any): OntoNode => ({
-  ...node,
-  name: node.nodeName,
-  createdWhen: new Date(node.createdWhen),
-  updatedWhen: new Date(node.updatedWhen),
-  accessedWhen: new Date(node.accessedWhen),
-});
+export const parseOntoNode = (node: any): OntoNode => {
+  return {
+    ...node,
+    name: node.nodeName,
+    createdWhen: new Date(node.createdWhen),
+    updatedWhen: new Date(node.updatedWhen),
+    accessedWhen: new Date(node.accessedWhen),
+    active: node.active === "True" ? true : false,
+  };
+};
 
 export const isOntoNodePropertyName = (
   name: string
@@ -100,7 +122,7 @@ const useGetOntoNodes = (nodeType: OntoNodeType) => {
         const data: OntoNode[] = response.data.map((node: any) =>
           parseOntoNode(node)
         );
-        logger("useGetOntoNodes | getOntoNodes ✅ |", response);
+        logger("useGetOntoNodes | getOntoNodes ✅|", response, data);
         return data;
       });
 

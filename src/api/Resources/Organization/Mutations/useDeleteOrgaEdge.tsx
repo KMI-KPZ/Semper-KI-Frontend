@@ -2,16 +2,12 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-interface useDeleteOrgaEdgeProps {
-  entityID: string;
-}
-
 const useDeleteOrgaEdge = () => {
   const queryClient = useQueryClient();
-  const deleteOrgaEdge = async ({ entityID }: useDeleteOrgaEdgeProps) =>
+  const deleteOrgaEdge = async (entityID: string) =>
     authorizedCustomAxios
       .delete(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/edge/delete/${entityID}/`
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/edge/to-orga/delete/${entityID}/`
       )
       .then((response) => {
         logger("useDeleteOrgaEdge | deleteOrgaEdge ✅ |", response);
@@ -21,7 +17,7 @@ const useDeleteOrgaEdge = () => {
         logger("useDeleteOrgaEdge | deleteOrgaEdge ❌ |", error);
       });
 
-  return useMutation<string, Error, useDeleteOrgaEdgeProps>({
+  return useMutation<string, Error, string>({
     mutationFn: deleteOrgaEdge,
     onSuccess: (data, props, context) => {
       queryClient.invalidateQueries(["resources"]);

@@ -9,7 +9,6 @@ import { OntoNode } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import ResourceTable from "../components/Table";
 
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
-import useRessourcesTableItem from "@/hooks/useRessourcesTableItem";
 import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import useGetOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetOrgaNodeNeighbors";
 
@@ -21,15 +20,9 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
-  const allMaterials = useGetOrgaNodes("material");
-  const ownMaterials = useGetOrgaNodeNeighbors({
-    nodeID: user.organization === undefined ? "" : user.organization,
-    nodeType: "material",
-  });
-  const { createRersourcesTableItem } = useRessourcesTableItem();
+  const materials = useGetOrgaNodes("material");
 
-  if (allMaterials.isLoading || ownMaterials.isLoading)
-    return <LoadingAnimation />;
+  if (materials.isLoading) return <LoadingAnimation />;
 
   return (
     <Container direction="col" width="full" justify="start">
@@ -51,7 +44,7 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
         </PermissionGate>
       </Container>
       <ResourceTable
-        nodes={createRersourcesTableItem(ownMaterials.data, allMaterials.data)}
+        nodes={materials.data?.filter((node) => node.createdBy !== "SYSTEM")}
         nodeType="material"
       />
     </Container>

@@ -11,7 +11,7 @@ const useCreateOrgaEdge = () => {
   const createOrgaEdge = async (props: useCreateOrgaEdgeProps) =>
     authorizedCustomAxios
       .post(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/edge/create/`,
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/edge/to-orga/create/`,
         props
       )
       .then((response) => {

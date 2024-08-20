@@ -7,7 +7,7 @@ import { OntoNode, parseOntoNode } from "../../Ontology/Querys/useGetOntoNodes";
 const useGetOrgaNode = () => {
   const queryClient = useQueryClient();
   const { nodeID } = useParams();
-  const getOntoNode = async () =>
+  const getOrgaNode = async () =>
     authorizedCustomAxios
       .get(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/nodes/by-id/get/${nodeID}/`
@@ -15,14 +15,14 @@ const useGetOrgaNode = () => {
       .then((response) => {
         const data: OntoNode = parseOntoNode(response.data);
 
-        logger("useGetOntoNode | getOntoNode ✅ |", response);
+        logger("useGetOrgaNode | getOrgaNode ✅ |", data);
         return data;
       });
 
   return useQuery<OntoNode, Error>({
     queryKey: ["resources", "orga", "node", nodeID],
     enabled: nodeID !== undefined && nodeID !== "",
-    queryFn: getOntoNode,
+    queryFn: getOrgaNode,
   });
 };
 

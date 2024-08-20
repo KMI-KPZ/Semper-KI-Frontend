@@ -1,7 +1,11 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { OntoNode, OntoNodeNew } from "../../Ontology/Querys/useGetOntoNodes";
+import {
+  OntoNode,
+  OntoNodeNew,
+  parseOntoNode,
+} from "../../Ontology/Querys/useGetOntoNodes";
 
 interface useCreateOrgaNodeProps {
   node: OntoNodeNew;
@@ -17,13 +21,13 @@ const useCreateOrgaNode = () => {
       )
       .then((response) => {
         logger("useCreateOrgaNode | createOrgaNode ✅ |", response);
-        return response.data;
-      })
-      .catch((error) => {
-        logger("useCreateOrgaNode | createOrgaNode ❌ |", error);
+        return parseOntoNode(response.data);
       });
+  // .catch((error) => {
+  //   logger("useCreateOrgaNode | createOrgaNode ❌ |", error);
+  // });
 
-  return useMutation<string, Error, useCreateOrgaNodeProps>({
+  return useMutation<OntoNode, Error, useCreateOrgaNodeProps>({
     mutationFn: createOrgaNode,
     onSuccess: (data, props, context) => {
       queryClient.invalidateQueries(["resources"]);

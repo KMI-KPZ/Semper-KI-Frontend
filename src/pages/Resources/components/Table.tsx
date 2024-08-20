@@ -12,10 +12,11 @@ import useDeleteOrgaEdge from "@/api/Resources/Organization/Mutations/useDeleteO
 import { useNavigate } from "react-router-dom";
 import useOrganization from "@/hooks/useOrganization";
 import useDeleteOrgaNode from "@/api/Resources/Organization/Mutations/useDeleteOrgaNode";
-import { ResourcesTableItem } from "@/hooks/useRessourcesTableItem";
+import useUpdateOrgaNode from "@/api/Resources/Organization/Mutations/useUpdateOrgaNode";
+import logger from "@/hooks/useLogger";
 
 interface ResourceTableProps {
-  nodes: ResourcesTableItem[] | undefined;
+  nodes: OntoNode[] | undefined;
   nodeType: OntoNodeType;
 }
 
@@ -25,15 +26,14 @@ const ResourceTable = (props: ResourceTableProps) => {
   const navigate = useNavigate();
   const { organization } = useOrganization();
 
-  const createOrgaEdge = useCreateOrgaEdge();
-  const deleteOrgaEdge = useDeleteOrgaEdge();
+  const updateOrgaNode = useUpdateOrgaNode();
   const deleteOrgaNode = useDeleteOrgaNode();
 
   const { filterDataBySearchInput, handleSearchInputChange } =
-    useSearch<ResourcesTableItem>();
-  const { getSortIcon, handleSort, sortItems } = useSort<ResourcesTableItem>();
+    useSearch<OntoNode>();
+  const { getSortIcon, handleSort, sortItems } = useSort<OntoNode>();
 
-  const handleOnClickButtonDeleteNode = (node: ResourcesTableItem) => {
+  const handleOnClickButtonDeleteNode = (node: OntoNode) => {
     if (node.nodeID === undefined) return;
     if (
       window.confirm(
@@ -50,18 +50,18 @@ const ResourceTable = (props: ResourceTableProps) => {
 
   const handleOnChangeInputActive = (
     e: React.ChangeEvent<HTMLInputElement>,
-    item: ResourcesTableItem
+    item: OntoNode
   ) => {
     if (item.nodeID === undefined) return;
-    if (e.currentTarget.checked) {
-      createOrgaEdge.mutate({
-        entityIDs: [item.nodeID],
-      });
-    } else {
-      deleteOrgaEdge.mutate({
-        entityID: item.nodeID,
-      });
-    }
+    logger(
+      "ResourceTable | handleOnChangeInputActive |",
+      item,
+      e.target.checked
+    );
+    updateOrgaNode.mutate({
+      nodeID: item.nodeID,
+      active: e.target.checked,
+    });
   };
 
   return (

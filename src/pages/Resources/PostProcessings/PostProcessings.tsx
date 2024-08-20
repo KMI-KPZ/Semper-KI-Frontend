@@ -10,9 +10,7 @@ import { useTranslation } from "react-i18next";
 import ResourceTable from "../components/Table";
 
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
-import useRessourcesTableItem from "@/hooks/useRessourcesTableItem";
 import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
-import useGetOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetOrgaNodeNeighbors";
 
 interface ResourcesPostProcessingsProps {}
 
@@ -22,17 +20,8 @@ const ResourcesPostProcessings: React.FC<ResourcesPostProcessingsProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
-  const allAdditionalrequirements = useGetOrgaNodes("additionalRequirement");
-  const ownAdditionalRequirements = useGetOrgaNodeNeighbors({
-    nodeID: user.organization === undefined ? "" : user.organization,
-    nodeType: "additionalRequirement",
-  });
-  const { createRersourcesTableItem } = useRessourcesTableItem();
-  if (
-    allAdditionalrequirements.isLoading ||
-    ownAdditionalRequirements.isLoading
-  )
-    return <LoadingAnimation />;
+  const additionalrequirements = useGetOrgaNodes("additionalRequirement");
+  if (additionalrequirements.isLoading) return <LoadingAnimation />;
   return (
     <Container direction="col" width="full" justify="start">
       <Container width="full" direction="row">
@@ -50,9 +39,8 @@ const ResourcesPostProcessings: React.FC<ResourcesPostProcessingsProps> = (
         />
       </Container>
       <ResourceTable
-        nodes={createRersourcesTableItem(
-          ownAdditionalRequirements.data,
-          allAdditionalrequirements.data
+        nodes={additionalrequirements.data?.filter(
+          (node) => node.createdBy !== "SYSTEM"
         )}
         nodeType="additionalRequirement"
       />

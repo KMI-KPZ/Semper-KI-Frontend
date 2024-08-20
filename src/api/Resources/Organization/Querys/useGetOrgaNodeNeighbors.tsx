@@ -17,7 +17,7 @@ const useGetOrgaNodeNeighbors = ({
   nodeType,
 }: useGetOrgaNodeNeighborsProps) => {
   const queryClient = useQueryClient();
-  const getOntoNodeNeighbors = async () =>
+  const getOrgaNodeNeighbors = async () =>
     authorizedCustomAxios
       .get(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/nodes/neighbors/by-type/get/${nodeID}/${nodeType}/`
@@ -26,13 +26,13 @@ const useGetOrgaNodeNeighbors = ({
         const data: OntoNode[] = response.data.map((node: any) =>
           parseOntoNode(node)
         );
-        logger("useGetOntoNodeNeighbors | getOntoNodeNeighbors ✅ |", response);
+        logger("useGetOrgaNodeNeighbors | getOrgaNodeNeighbors ✅ |", response);
         return data;
       });
 
   return useQuery<OntoNode[], Error>({
     queryKey: ["resources", "orga", "nodes", nodeID, nodeType],
-    queryFn: getOntoNodeNeighbors,
+    queryFn: getOrgaNodeNeighbors,
     enabled: nodeID !== "",
   });
 };

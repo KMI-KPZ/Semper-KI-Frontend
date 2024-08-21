@@ -10,10 +10,11 @@ interface CollapsibleProps {
   className?: string;
   open?: boolean;
   initialOpen?: boolean;
+  showButton?: boolean;
 }
 
 const Collapsible: React.FC<PropsWithChildren<CollapsibleProps>> = (props) => {
-  const { children, className, open, initialOpen } = props;
+  const { children, className, open, initialOpen, showButton = false } = props;
   const { t } = useTranslation();
   const collapsibleRef = useRef<null | HTMLDivElement>(null);
   const [expand, setExpand] = useState<boolean>(false);
@@ -63,7 +64,7 @@ const Collapsible: React.FC<PropsWithChildren<CollapsibleProps>> = (props) => {
       >
         {children}
       </div>
-      {open !== undefined ? null : (
+      {showButton ? (
         <Button
           title={t(
             `Process.components.Info.button.${expand ? "collapse" : "expand"}`
@@ -83,7 +84,7 @@ const Collapsible: React.FC<PropsWithChildren<CollapsibleProps>> = (props) => {
             <ExpandMoreIcon />
           </div>
         </Button>
-      )}
+      ) : null}
     </>
   );
 };

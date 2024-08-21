@@ -60,7 +60,8 @@ export type OntoNodePropertyName =
   | "poissonRatio"
   | "color"
   | "buildVolume"
-  | "technology";
+  | "technology"
+  | "nozzleDiameter";
 export interface OntoNodePropertyGeneral {
   name: string;
   value: any;
@@ -108,6 +109,7 @@ export const isOntoNodePropertyName = (
     "color",
     "buildVolume",
     "technology",
+    "nozzleDiameter",
   ].includes(name as OntoNodePropertyName);
 };
 

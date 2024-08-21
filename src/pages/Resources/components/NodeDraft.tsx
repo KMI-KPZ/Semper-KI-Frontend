@@ -21,6 +21,8 @@ import useSort from "@/hooks/useSort";
 import Collapsible from "@/components/Collapsible/Collapsible";
 import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import { useNavigate } from "react-router-dom";
+import logger from "@/hooks/useLogger";
+import ResourcesNodeView from "./NodeView";
 
 interface ResourcesNodeDraftProps {
   nodeType: OntoNodeType;
@@ -36,15 +38,31 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<OntoNode>();
   const { getSortIcon, handleSort, sortItems } = useSort<OntoNode>();
-  const navigate = useNavigate();
+  const [detailsNodeID, setDetailsNodeID] = React.useState<string>("");
+
+  const handleOnButtonClickDraft = (node: OntoNode) => {
+    setFormToDraft(node);
+  };
+
+  const resetNodeID = () => {
+    setDetailsNodeID("");
+  };
 
   return (
     <Container width="full" direction="col" className="card gap-0">
       <Heading variant="h3" className="">
         {t("Resources.components.Edit.draft")}
       </Heading>
-      <Collapsible initialOpen={true} className="mt-5">
+      <Collapsible initialOpen showButton className="mt-5">
         <Container width="full" direction="col" className="p-y5">
+          <Container width="full" direction="col" gap={3}>
+            <Text className="text-center">
+              {t("Resources.components.Edit.draftDescription")}
+            </Text>
+            <Text className="text-center">
+              {t("Resources.components.Edit.draftDescription2")}
+            </Text>
+          </Container>
           <Search handleSearchInputChange={handleSearchInputChange} />
           {nodes.isLoading ? (
             <LoadingAnimation />
@@ -126,12 +144,29 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                               variant="text"
                               size="sm"
                               title={t(
+                                "Resources.components.Edit.button.details"
+                              )}
+                              onClick={() => {
+                                setDetailsNodeID(node.nodeID);
+                              }}
+                            />
+                            <Button
+                              variant="text"
+                              size="sm"
+                              title={t(
                                 "Resources.components.Edit.button.draft"
                               )}
                               onClick={() => {
-                                setFormToDraft(node);
-                                // navigate(`../variant/${node.nodeID}`);
+                                handleOnButtonClickDraft(node);
                               }}
+                            />
+                            <Button
+                              variant="text"
+                              size="sm"
+                              title={t(
+                                "Resources.components.Edit.button.variant"
+                              )}
+                              to={`../variant/${node.nodeID}`}
                             />
                           </Container>
                         </td>
@@ -145,6 +180,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
           )}
         </Container>
       </Collapsible>
+      <ResourcesNodeView nodeID={detailsNodeID} resetNodeID={resetNodeID} />
     </Container>
   );
 };

@@ -11,6 +11,7 @@ import ResourcesMaterialsTable from "./Materials/Table";
 import ResourcesNode from "./components/Node";
 import Graph from "./components/Graph";
 import AddIcon from "@mui/icons-material/Add";
+import ResourcesNodeView from "./components/NodeView";
 
 interface ResoucesProps {}
 
@@ -38,6 +39,16 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
               <Route index element={<ResourcesPrintersTable />} />
               <Route path="edit" element={<Navigate to=".." />} />
               <Route path="variant" element={<Navigate to=".." />} />
+              <Route path="details" element={<Navigate to=".." />} />
+              <Route
+                path="details/:nodeID"
+                element={
+                  <>
+                    <ResourcesPrintersTable />
+                    <ResourcesNodeView />
+                  </>
+                }
+              />
               <Route
                 path="edit/:nodeID"
                 element={<ResourcesNode type="edit" nodeType="printer" />}
@@ -55,6 +66,16 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
               <Route index element={<ResourcesMaterialsTable />} />
               <Route path="edit" element={<Navigate to=".." />} />
               <Route path="variant" element={<Navigate to=".." />} />
+              <Route path="details" element={<Navigate to=".." />} />
+              <Route
+                path="details/:nodeID"
+                element={
+                  <>
+                    <ResourcesMaterialsTable />
+                    <ResourcesNodeView />
+                  </>
+                }
+              />
               <Route
                 path="edit/:nodeID"
                 element={<ResourcesNode type="edit" nodeType="material" />}
@@ -72,6 +93,16 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
               <Route index element={<ResourcesPostProcessings />} />
               <Route path="edit" element={<Navigate to=".." />} />
               <Route path="variant" element={<Navigate to=".." />} />
+              <Route path="details" element={<Navigate to=".." />} />
+              <Route
+                path="details/:nodeID"
+                element={
+                  <>
+                    <ResourcesPostProcessings />
+                    <ResourcesNodeView />
+                  </>
+                }
+              />
               <Route
                 path="edit/:nodeID"
                 element={

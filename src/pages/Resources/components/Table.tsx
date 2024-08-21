@@ -146,16 +146,22 @@ const ResourceTable = (props: ResourceTableProps) => {
                           }`}
                         >
                           <Container width="full" direction="row">
-                            {node.createdBy === organization.hashedID ? (
-                              <Button
-                                variant="text"
-                                title={t(
-                                  "Resources.components.Table.buttons.edit"
-                                )}
-                                to={`edit/${node.nodeID}`}
-                                className="whitespace-nowrap"
-                              />
-                            ) : null}
+                            <Button
+                              variant="text"
+                              title={t(
+                                "Resources.components.Table.buttons.details"
+                              )}
+                              to={`details/${node.nodeID}`}
+                              className="whitespace-nowrap"
+                            />
+                            <Button
+                              variant="text"
+                              title={t(
+                                "Resources.components.Table.buttons.edit"
+                              )}
+                              to={`edit/${node.nodeID}`}
+                              className="whitespace-nowrap"
+                            />
                             <Button
                               variant="text"
                               title={t(

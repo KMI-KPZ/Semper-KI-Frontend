@@ -212,7 +212,8 @@
       "poissonRatio": "Poisson-Verhältnis",
       "color": "Farbe",
       "buildVolume": "Bauvolumen",
-      "technology": "Technologie"
+      "technology": "Technologie",
+      "nozzleDiameter": "Düsendurchmesser"
     }
   },
   "api": {
@@ -1801,6 +1802,17 @@
   "Resources": {
     "header": "Ressourcen",
     "components": {
+      "NodeView": {
+        "context": "Beschreibung:",
+        "createdBy": "Erstellt von:",
+        "createdWhen": "Erstellt am:",
+        "updatedWhen": "Aktualisiert am:",
+        "nodeType": "Typ:",
+        "properties": "Eigenschaften",
+        "general": "Allgemein",
+        "neighbors": "Zugehörige Ressourcen",
+        "noProperties": "keine Eigenschaften vorhanden"
+      },
       "Menu": {
         "overview": "Übersicht",
         "materials": "Materialien",
@@ -1818,7 +1830,8 @@
           "edit": "Bearbeiten",
           "delete": "Löschen",
           "add": "Hinzufügen",
-          "variant": "Variante erstellen"
+          "variant": "Variante erstellen",
+          "details": "Details"
         }
       },
       "Edge": {
@@ -1841,6 +1854,8 @@
       "Edit": {
         "error": "Fehler beim Laden",
         "draft": "Vorlage auswählen",
+        "draftDescription": "Wählen Sie eine Vorlage aus, um die Allegemeinen Informationen und Eigenschaften zu übernehmen.",
+        "draftDescription2": "Erstellen sie eine Variante um zusätzlich die Verbindung zu anderen Ressourcen zu übernehmen.",
         "confirmDraft": "Möchten Sie die Vorlage wirklich auswählen?\n Alle ungespeicherten Änderungen gehen verloren.",
         "general": "Allgemeine Informationen",
         "heading": {
@@ -1865,7 +1880,8 @@
           "create": "Erstellen",
           "variant": "Variante Erstellen",
           "removeProperty": "Eigenschaft entfernen",
-          "draft": "Vorlage auswählen"
+          "draft": "Vorlage auswählen",
+          "details": "Details"
         },
         "table": {
           "name": "Name",

@@ -4,9 +4,10 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { OntoNode, parseOntoNode } from "../../Ontology/Querys/useGetOntoNodes";
 
-const useGetOrgaNode = () => {
+const useGetOrgaNode = (optionalNodeID?: string) => {
   const queryClient = useQueryClient();
-  const { nodeID } = useParams();
+  const { nodeID: paramNodeID } = useParams();
+  const nodeID = optionalNodeID === undefined ? paramNodeID : optionalNodeID;
   const getOrgaNode = async () =>
     authorizedCustomAxios
       .get(

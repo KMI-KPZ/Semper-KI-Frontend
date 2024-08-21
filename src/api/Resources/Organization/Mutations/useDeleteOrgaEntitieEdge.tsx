@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 interface useDeleteOrgaEntitieEdgeProps {
   entity1ID: string;
   entity2ID: string;
+  invalidate?: boolean;
 }
 
 const useDeleteOrgaEntitieEdge = () => {
@@ -31,7 +32,11 @@ const useDeleteOrgaEntitieEdge = () => {
   return useMutation<string, Error, useDeleteOrgaEntitieEdgeProps>({
     mutationFn: deleteOrgaEntitieEdge,
     onSuccess: (data, props, context) => {
-      queryClient.invalidateQueries(["resources"]);
+      if (
+        props.invalidate === undefined ||
+        (props.invalidate !== undefined && props.invalidate === false)
+      )
+        queryClient.invalidateQueries(["resources"]);
     },
   });
 };

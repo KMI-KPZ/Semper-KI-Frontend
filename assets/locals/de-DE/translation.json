@@ -1833,7 +1833,9 @@
         },
         "button": {
           "add": "Hinzufügen",
-          "delete": "Löschen"
+          "delete": "Löschen",
+          "showMore": "Mehr anzeigen",
+          "showLess": "Weniger anzeigen"
         }
       },
       "Edit": {

@@ -18,6 +18,7 @@ import ResourcesPropertyForm from "./PropertyForm";
 import ResourcesNodeDraft from "./NodeDraft";
 import useCreateOrgaEntitieEdge from "@/api/Resources/Organization/Mutations/useCreateOrgaEntitieEdge";
 import useDeleteOrgaEntitieEdge from "@/api/Resources/Organization/Mutations/useDeleteOrgaEntitieEdge";
+import logger from "@/hooks/useLogger";
 
 interface ResourcesNodePropsForm {
   type: "edit" | "create" | "variant";
@@ -127,12 +128,14 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
         : edges.filter(
             (edge) => !formEdges.some((e) => e.nodeID === edge.nodeID)
           );
+
     newEdges.forEach((edge) => {
       setArray((prevState) => [...prevState, edge.nodeID]);
       createOrgaEntitieEdge.mutate(
         {
           entity1ID: nodeID,
           entity2ID: edge.nodeID,
+          invalidate: false,
         },
         {
           onSuccess: () => {
@@ -153,6 +156,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
         {
           entity1ID: nodeID,
           entity2ID: edge.nodeID,
+          invalidate: false,
         },
         {
           onSuccess: () => {
@@ -166,7 +170,12 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
         }
       );
     });
-    if (newEdges.length === 0 && deleteEdges.length && array.length === 0) {
+
+    if (
+      newEdges.length === 0 &&
+      deleteEdges.length === 0 &&
+      array.length === 0
+    ) {
       navigate("..");
     }
   };
@@ -175,10 +184,11 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     data: (OntoNode | OntoNodeNew) & ResourcesNodeFormEdges
   ) => {
     // logger("ResourcesNodeEdit | onSubmit |", data);
+
     switch (type) {
       case "edit":
         updateOrgaNode.mutate(data as OntoNode, {
-          onSuccess() {
+          onSuccess: () => {
             updateOrgaEdges((data as OntoNode).nodeID, data.edges);
           },
         });

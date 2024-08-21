@@ -11,6 +11,9 @@ import ResourceTable from "../components/Table";
 
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import useGetOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetOrgaNodeNeighbors";
+import useOrganization from "@/hooks/useOrganization";
+import logger from "@/hooks/useLogger";
 
 interface ResourcesPostProcessingsProps {}
 
@@ -20,7 +23,13 @@ const ResourcesPostProcessings: React.FC<ResourcesPostProcessingsProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
-  const additionalrequirements = useGetOrgaNodes("additionalRequirement");
+  // const additionalrequirements2 = useGetOrgaNodes("additionalRequirement");
+  const { organization } = useOrganization();
+  const additionalrequirements = useGetOrgaNodeNeighbors({
+    nodeID: organization.hashedID,
+    nodeType: "additionalRequirement",
+  });
+
   if (additionalrequirements.isLoading) return <LoadingAnimation />;
   return (
     <Container direction="col" width="full" justify="start">

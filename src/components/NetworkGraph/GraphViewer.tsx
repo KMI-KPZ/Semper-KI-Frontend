@@ -16,7 +16,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [initialTick, setInitialTick] = useState<boolean>(true);
 
-  const width = 1200;
+  const width = 800;
   const height = 800;
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
           d3
             .forceLink(edges)
             .id((d: any) => d.id)
-            .distance(100)
+            .distance(150)
             .strength(0.15) // Adjust the strength to minimize cutting edges
         )
         .force("charge", d3.forceManyBody().strength(-500))

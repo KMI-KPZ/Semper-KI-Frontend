@@ -19,7 +19,6 @@ import {
   UseFieldArrayReturn,
   UseFormRegister,
 } from "react-hook-form";
-import ClearIcon from "@mui/icons-material/Clear";
 import useOrganization from "@/hooks/useOrganization";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
@@ -35,6 +34,15 @@ interface ResourcesEdgeFormProps {
   register: UseFormRegister<(OntoNode | OntoNodeNew) & ResourcesNodeFormEdges>;
 }
 
+interface ResourcesEdgeFormItem
+  extends FieldArrayWithId<
+    (OntoNode | OntoNodeNew) & ResourcesNodeFormEdges,
+    "edges",
+    "id"
+  > {
+  index: number;
+}
+
 const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
   const { nodeType, useEdgeArray, register } = props;
   const { t } = useTranslation();
@@ -43,10 +51,12 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
   const {
     getSortIcon: getSortIconAll,
     handleSort: handleSortAll,
-    sortItems: sortItemsALl,
+    sortItems: sortItemsAll,
   } = useSort<OntoNode>();
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<OntoNode>();
+  const [paginationAll, setPaginationAll] = React.useState<number>(5);
+  const [paginationSelected, setPaginationSelected] = React.useState<number>(5);
 
   const {
     getSortIcon: getSortIconOwn,
@@ -73,7 +83,25 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
 
   const { fields, append, remove } = useEdgeArray;
 
-  const filteredEdges = fields.filter((edge) => edge.nodeType === nodeType);
+  const filteredEdges: ResourcesEdgeFormItem[] = fields
+    .map((edge, index) => ({ ...edge, index }))
+    .filter((edge) => edge.nodeType === nodeType)
+    .filter((node) => filterDataBySearchInputOwn(node))
+    .sort(sortItemsOwn);
+
+  const allEdges =
+    nodes.data === undefined
+      ? []
+      : nodes.data
+          .filter(
+            (node) =>
+              filteredEdges.find((edge) => edge.nodeID === node.nodeID) ===
+              undefined
+          )
+          .filter((node) => filterDataBySearchInput(node))
+          .sort(sortItemsAll);
+
+  const selectdEdges = fields;
 
   return (
     <Container width="full" direction="col" className="card">
@@ -133,28 +161,16 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="">
             {nodes.isLoading ? (
               <tr>
                 <td colSpan={3}>
                   <LoadingAnimation />
                 </td>
               </tr>
-            ) : nodes.data === undefined ? null : nodes.data.filter(
-                (node) =>
-                  filteredEdges.find((edge) => edge.nodeID === node.nodeID) ===
-                  undefined
-              ).length > 0 ? (
-              nodes.data
-                .filter(
-                  (node) =>
-                    filteredEdges.find(
-                      (edge) => edge.nodeID === node.nodeID
-                    ) === undefined
-                )
-                .filter((node) => filterDataBySearchInput(node))
-                .sort(sortItemsALl)
-                .map((node, index) => (
+            ) : allEdges.length > 0 ? (
+              <>
+                {allEdges.slice(0, paginationAll).map((node, index) => (
                   <tr key={index}>
                     <td
                       className={`border-t-2 p-3 text-left ${
@@ -195,7 +211,40 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                       </Container>
                     </td>
                   </tr>
-                ))
+                ))}
+                {allEdges.length > paginationAll || allEdges.length > 0 ? (
+                  <tr key="more">
+                    <td colSpan={3} className="border-t-2 p-3">
+                      <Container width="full">
+                        {allEdges.length > paginationAll ? (
+                          <Button
+                            onClick={() =>
+                              setPaginationAll((prevState) => prevState + 5)
+                            }
+                            title={t(
+                              "Resources.components.Edge.button.showMore"
+                            )}
+                            size="sm"
+                            variant="text"
+                          />
+                        ) : null}
+                        {paginationAll > 0 ? (
+                          <Button
+                            onClick={() =>
+                              setPaginationAll((prevState) => prevState - 5)
+                            }
+                            title={t(
+                              "Resources.components.Edge.button.showLess"
+                            )}
+                            size="sm"
+                            variant="text"
+                          />
+                        ) : null}
+                      </Container>
+                    </td>
+                  </tr>
+                ) : null}
+              </>
             ) : (
               <tr>
                 <td colSpan={3} className="border-t-2 p-3 text-center">
@@ -260,41 +309,38 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
           </thead>
           <tbody>
             {filteredEdges.length > 0 ? (
-              filteredEdges
-                .filter((node) => filterDataBySearchInputOwn(node))
-                .sort(sortItemsOwn)
-                .map((node, index) => (
-                  <tr key={index}>
-                    <td
-                      className={`border-t-2 p-3 text-center ${
-                        index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                      }`}
-                    >
-                      {node.nodeName}
-                    </td>
-                    <td
-                      className={`border-t-2 p-3 text-center ${
-                        index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                      }`}
-                    >
-                      {node.createdBy === organization.hashedID
-                        ? organization.name
-                        : "Sermper-KI"}
-                    </td>
-                    <td
-                      className={`border-t-2 p-3 text-center ${
-                        index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                      }`}
-                    >
-                      <Button
-                        title={t("Resources.components.Edge.button.delete")}
-                        onClick={() => remove(index)}
-                        size="sm"
-                        variant="text"
-                      />
-                    </td>
-                  </tr>
-                ))
+              filteredEdges.map((node, index) => (
+                <tr key={node.index}>
+                  <td
+                    className={`border-t-2 p-3 text-center ${
+                      index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                    }`}
+                  >
+                    {node.nodeName}
+                  </td>
+                  <td
+                    className={`border-t-2 p-3 text-center ${
+                      index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                    }`}
+                  >
+                    {node.createdBy === organization.hashedID
+                      ? organization.name
+                      : "Sermper-KI"}
+                  </td>
+                  <td
+                    className={`border-t-2 p-3 text-center ${
+                      index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                    }`}
+                  >
+                    <Button
+                      title={t("Resources.components.Edge.button.delete")}
+                      onClick={() => remove(node.index)}
+                      size="sm"
+                      variant="text"
+                    />
+                  </td>
+                </tr>
+              ))
             ) : (
               <tr>
                 <td colSpan={3} className="border-t-2 p-3 text-center">

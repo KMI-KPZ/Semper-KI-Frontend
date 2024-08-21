@@ -11,6 +11,7 @@ import ResourceTable from "../components/Table";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import useGetOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetOrgaNodeNeighbors";
+import useOrganization from "@/hooks/useOrganization";
 
 interface ResourcesMaterialsTableProps {}
 
@@ -20,7 +21,12 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
-  const materials = useGetOrgaNodes("material");
+  // const materials = useGetOrgaNodes("material");
+  const { organization } = useOrganization();
+  const materials = useGetOrgaNodeNeighbors({
+    nodeID: organization.hashedID,
+    nodeType: "material",
+  });
 
   if (materials.isLoading) return <LoadingAnimation />;
 

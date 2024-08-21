@@ -9,6 +9,7 @@ import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 
 import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import useGetOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetOrgaNodeNeighbors";
+import useOrganization from "@/hooks/useOrganization";
 
 interface ResourcesPrintersTableProps {}
 
@@ -18,7 +19,12 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
-  const printers = useGetOrgaNodes("printer");
+  // const printers = useGetOrgaNodes("printer");
+  const { organization } = useOrganization();
+  const printers = useGetOrgaNodeNeighbors({
+    nodeID: organization.hashedID,
+    nodeType: "printer",
+  });
 
   if (printers.isLoading) return <LoadingAnimation />;
 

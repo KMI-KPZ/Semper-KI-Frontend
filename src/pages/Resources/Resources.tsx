@@ -10,6 +10,7 @@ import ResourcesPrintersTable from "./Printers/Table";
 import ResourcesMaterialsTable from "./Materials/Table";
 import ResourcesNode from "./components/Node";
 import Graph from "./components/Graph";
+import AddIcon from "@mui/icons-material/Add";
 
 interface ResoucesProps {}
 
@@ -20,7 +21,8 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
       <PageHeader>
-        <Heading variant="h1">{t("Resources.header")}</Heading>
+        <Heading variant="h1">Matching Profil</Heading>
+        {/* <Heading variant="h1">{t("Resources.header")}</Heading> */}
       </PageHeader>
       <div className="flex w-full flex-col gap-5 md:flex-row">
         <ResourcesMenu />

@@ -20,6 +20,7 @@ import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import Collapsible from "@/components/Collapsible/Collapsible";
 import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import { useNavigate } from "react-router-dom";
 
 interface ResourcesNodeDraftProps {
   nodeType: OntoNodeType;
@@ -35,6 +36,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<OntoNode>();
   const { getSortIcon, handleSort, sortItems } = useSort<OntoNode>();
+  const navigate = useNavigate();
 
   return (
     <Container width="full" direction="col" className="card gap-0">
@@ -126,7 +128,10 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                               title={t(
                                 "Resources.components.Edit.button.draft"
                               )}
-                              onClick={() => setFormToDraft(node)}
+                              onClick={() => {
+                                setFormToDraft(node);
+                                // navigate(`../variant/${node.nodeID}`);
+                              }}
                             />
                           </Container>
                         </td>

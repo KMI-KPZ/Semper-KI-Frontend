@@ -10,6 +10,7 @@ import useGetNodeProperties from "@/api/Graph/Querys/useGetNodeProperties";
 import ResourcesNodeForm from "./NodeForm";
 import useGetOrgaNode from "@/api/Resources/Organization/Querys/useGetOrgaNode";
 import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetAllOrgaNodeNeighbors";
+import logger from "@/hooks/useLogger";
 
 interface ResourcesNodeProps {
   type: "edit" | "create" | "variant";
@@ -28,8 +29,9 @@ const ResourcesNode: React.FC<ResourcesNodeProps> = (props) => {
 
   if (
     (node.isLoading && (type === "edit" || type === "variant")) ||
-    nodeProperties.isLoading ||
-    allOrgaNodeNeighbors.isLoading
+    ((allOrgaNodeNeighbors.isLoading || allOrgaNodeNeighbors.isRefetching) &&
+      (type === "edit" || type === "variant")) ||
+    nodeProperties.isLoading
   )
     return <LoadingAnimation />;
   if (

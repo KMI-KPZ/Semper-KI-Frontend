@@ -15,7 +15,15 @@ const useSubmitOrgaNode = () => {
     authorizedCustomAxios
       .post(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/nodes/create-and-link/`,
-        props
+        {
+          ...props,
+          node: {
+            ...props.node,
+            nodeName: props.node.name,
+            name: undefined,
+            edges: undefined,
+          },
+        }
       )
       .then((response) => {
         logger("useSubmitOrgaNode | submitOrgaNode ✅ |", response);

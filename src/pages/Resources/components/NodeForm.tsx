@@ -195,12 +195,24 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
         : edges
             .filter((edge) => !data.edges.some((e) => e.nodeID === edge.nodeID))
             .map((edge) => edge.nodeID);
-    const node = { ...data, edges: undefined };
-    submitOrgaNodeForm.mutate({
-      node: node,
-      type: type === "edit" ? "update" : "create",
-      edges: { create: newEdges, delete: deleteEdges },
-    });
+    const node = {
+      ...data,
+      nodeName: data.name,
+      name: undefined,
+      edges: undefined,
+    };
+    submitOrgaNodeForm.mutate(
+      {
+        node: node,
+        type: type === "edit" ? "update" : "create",
+        edges: { create: newEdges, delete: deleteEdges },
+      },
+      {
+        onSuccess(data, variables, context) {
+          navigate("..");
+        },
+      }
+    );
 
     // switch (type) {
     //   case "edit":

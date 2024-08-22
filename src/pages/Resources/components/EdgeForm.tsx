@@ -23,6 +23,7 @@ import useOrganization from "@/hooks/useOrganization";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import Collapsible from "@/components/Collapsible/Collapsible";
 
 interface ResourcesEdgeFormProps {
   nodeType: OntoNodeType;
@@ -104,253 +105,265 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
   const selectdEdges = fields;
 
   return (
-    <Container width="full" direction="col" className="card">
+    <Container width="full" direction="col" className="card gap-0">
       <Heading variant="h3">
         {t("Resources.components.Edge.heading")}
         {t(`types.OntoNodeType.${nodeType}`)}
       </Heading>
-      <Search handleSearchInputChange={handleSearchInputChange} />
-      <Container
-        width="full"
-        direction="col"
-        className="overflow-auto"
-        justify="start"
-        align="start"
-      >
-        <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
-          <caption className=" pb-2 pl-5 text-left">
-            <Heading variant="h4">
-              {t("Resources.components.Edge.table.caption")}
-            </Heading>
-          </caption>
-          <thead className="">
-            <tr>
-              <th className="rounded-tl-xl bg-gray-50">
-                <div className="flex items-center justify-center ">
-                  <Button
-                    variant="text"
-                    title={t("Resources.components.Edge.table.name")}
-                    onClick={() => handleSortAll("name")}
-                    className="whitespace-nowrap"
-                  >
-                    <div className="ml-6 flex flex-row items-center justify-center">
-                      {t("Resources.components.Edge.table.name")}
-                      {getSortIconAll("name")}
+      <Collapsible initialOpen showButton className="mt-5">
+        <Container width="full" direction="col">
+          <Search handleSearchInputChange={handleSearchInputChange} />
+          <Container
+            width="full"
+            direction="col"
+            className="overflow-auto"
+            justify="start"
+            align="start"
+          >
+            <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
+              <caption className=" pb-2 pl-5 text-left">
+                <Heading variant="h4">
+                  {t("Resources.components.Edge.table.caption")}
+                </Heading>
+              </caption>
+              <thead className="">
+                <tr>
+                  <th className="rounded-tl-xl bg-gray-50">
+                    <div className="flex items-center justify-center ">
+                      <Button
+                        variant="text"
+                        title={t("Resources.components.Edge.table.name")}
+                        onClick={() => handleSortAll("name")}
+                        className="whitespace-nowrap"
+                      >
+                        <div className="ml-6 flex flex-row items-center justify-center">
+                          {t("Resources.components.Edge.table.name")}
+                          {getSortIconAll("name")}
+                        </div>
+                      </Button>
                     </div>
-                  </Button>
-                </div>
-              </th>
-              <th className="bg-gray-50">
-                <div className="flex items-center justify-center ">
-                  <Button
-                    variant="text"
-                    title={t("Resources.components.Edge.table.createdBy")}
-                    onClick={() => handleSortAll("createdBy")}
-                    className="whitespace-nowrap"
-                  >
-                    <div className="ml-6 flex flex-row items-center justify-center">
-                      {t("Resources.components.Edge.table.createdBy")}
-                      {getSortIconAll("createdBy")}
+                  </th>
+                  <th className="bg-gray-50">
+                    <div className="flex items-center justify-center ">
+                      <Button
+                        variant="text"
+                        title={t("Resources.components.Edge.table.createdBy")}
+                        onClick={() => handleSortAll("createdBy")}
+                        className="whitespace-nowrap"
+                      >
+                        <div className="ml-6 flex flex-row items-center justify-center">
+                          {t("Resources.components.Edge.table.createdBy")}
+                          {getSortIconAll("createdBy")}
+                        </div>
+                      </Button>
                     </div>
-                  </Button>
-                </div>
-              </th>
+                  </th>
 
-              <th className="rounded-tr-xl bg-gray-50 p-3 text-left">
-                {t("Resources.components.Edge.table.actions")}
-              </th>
-            </tr>
-          </thead>
-          <tbody className="">
-            {nodes.isLoading ? (
-              <tr>
-                <td colSpan={3}>
-                  <LoadingAnimation />
-                </td>
-              </tr>
-            ) : allEdges.length > 0 ? (
-              <>
-                {allEdges.slice(0, paginationAll).map((node, index) => (
-                  <tr key={index}>
-                    <td
-                      className={`border-t-2 p-3 text-left ${
-                        index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                      }`}
-                    >
-                      {node.name}
+                  <th className="rounded-tr-xl bg-gray-50 p-3 text-left">
+                    {t("Resources.components.Edge.table.actions")}
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="">
+                {nodes.isLoading ? (
+                  <tr>
+                    <td colSpan={3}>
+                      <LoadingAnimation />
                     </td>
-                    <td
-                      className={`border-t-2 p-3 text-left ${
-                        index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                      }`}
-                    >
-                      {node.createdBy === organization.hashedID
-                        ? organization.name
-                        : "Sermper-KI"}
+                  </tr>
+                ) : allEdges.length > 0 ? (
+                  <>
+                    {allEdges.slice(0, paginationAll).map((node, index) => (
+                      <tr key={index}>
+                        <td
+                          className={`border-t-2 p-3 text-left ${
+                            index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                          }`}
+                        >
+                          {node.name}
+                        </td>
+                        <td
+                          className={`border-t-2 p-3 text-left ${
+                            index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                          }`}
+                        >
+                          {node.createdBy === organization.hashedID
+                            ? organization.name
+                            : "Sermper-KI"}
+                        </td>
+                        <td
+                          className={`border-t-2 p-3 text-left ${
+                            index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                          }`}
+                        >
+                          <Container
+                            width="full"
+                            direction="row"
+                            justify="start"
+                          >
+                            <Button
+                              title={t("Resources.components.Edge.button.add")}
+                              onClick={() => {
+                                append({
+                                  nodeID: node.nodeID,
+                                  nodeType: nodeType,
+                                  nodeName: node.name,
+                                  createdBy: node.createdBy,
+                                });
+                              }}
+                              className="w-full"
+                              size="sm"
+                              variant="text"
+                            />
+                          </Container>
+                        </td>
+                      </tr>
+                    ))}
+                    {allEdges.length > paginationAll || allEdges.length > 0 ? (
+                      <tr key="more">
+                        <td colSpan={3} className="border-t-2 p-3">
+                          <Container width="full">
+                            {allEdges.length > paginationAll ? (
+                              <Button
+                                onClick={() =>
+                                  setPaginationAll((prevState) => prevState + 5)
+                                }
+                                title={t(
+                                  "Resources.components.Edge.button.showMore"
+                                )}
+                                size="sm"
+                                variant="text"
+                              />
+                            ) : null}
+                            {paginationAll > 0 ? (
+                              <Button
+                                onClick={() =>
+                                  setPaginationAll((prevState) => prevState - 5)
+                                }
+                                title={t(
+                                  "Resources.components.Edge.button.showLess"
+                                )}
+                                size="sm"
+                                variant="text"
+                              />
+                            ) : null}
+                          </Container>
+                        </td>
+                      </tr>
+                    ) : null}
+                  </>
+                ) : (
+                  <tr>
+                    <td colSpan={3} className="border-t-2 p-3 text-center">
+                      <Text>
+                        {t("Resources.components.Edge.table.noItems")}
+                      </Text>
                     </td>
-                    <td
-                      className={`border-t-2 p-3 text-left ${
-                        index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                      }`}
-                    >
-                      <Container width="full" direction="row" justify="start">
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </Container>
+          <Search handleSearchInputChange={handleSearchInputChangeOwn} />
+          <Container
+            width="full"
+            direction="col"
+            className="overflow-auto"
+            justify="start"
+            align="start"
+          >
+            <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
+              <caption className=" pb-2 pl-5 text-left">
+                <Heading variant="h4">
+                  {t("Resources.components.Edge.table.selected")}
+                </Heading>
+              </caption>
+              <thead className="">
+                <tr>
+                  <th className="rounded-tl-xl bg-gray-50">
+                    <div className="flex items-center justify-center ">
+                      <Button
+                        variant="text"
+                        title={t("Resources.components.Edge.table.name")}
+                        onClick={() => handleSortOwn("nodeName")}
+                        className="whitespace-nowrap"
+                      >
+                        <div className="ml-6 flex flex-row items-center justify-center">
+                          {t("Resources.components.Edge.table.name")}
+                          {getSortIconOwn("nodeName")}
+                        </div>
+                      </Button>
+                    </div>
+                  </th>
+                  <th className="bg-gray-50">
+                    <div className="flex items-center justify-center ">
+                      <Button
+                        variant="text"
+                        title={t("Resources.components.Edge.table.createdBy")}
+                        onClick={() => handleSortOwn("createdBy")}
+                        className="whitespace-nowrap"
+                      >
+                        <div className="ml-6 flex flex-row items-center justify-center">
+                          {t("Resources.components.Edge.table.createdBy")}
+                          {getSortIconOwn("createdBy")}
+                        </div>
+                      </Button>
+                    </div>
+                  </th>
+
+                  <th className="rounded-tr-xl bg-gray-50 p-3 text-left">
+                    {t("Resources.components.Edge.table.actions")}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredEdges.length > 0 ? (
+                  filteredEdges.map((node, index) => (
+                    <tr key={node.index}>
+                      <td
+                        className={`border-t-2 p-3 text-center ${
+                          index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                        }`}
+                      >
+                        {node.nodeName}
+                      </td>
+                      <td
+                        className={`border-t-2 p-3 text-center ${
+                          index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                        }`}
+                      >
+                        {node.createdBy === organization.hashedID
+                          ? organization.name
+                          : "Sermper-KI"}
+                      </td>
+                      <td
+                        className={`border-t-2 p-3 text-center ${
+                          index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                        }`}
+                      >
                         <Button
-                          title={t("Resources.components.Edge.button.add")}
-                          onClick={() => {
-                            append({
-                              nodeID: node.nodeID,
-                              nodeType: nodeType,
-                              nodeName: node.name,
-                              createdBy: node.createdBy,
-                            });
-                          }}
-                          className="w-full"
+                          title={t("Resources.components.Edge.button.delete")}
+                          onClick={() => remove(node.index)}
                           size="sm"
                           variant="text"
                         />
-                      </Container>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={3} className="border-t-2 p-3 text-center">
+                      <Text>
+                        {t("Resources.components.Edge.table.noItems")}
+                      </Text>
                     </td>
                   </tr>
-                ))}
-                {allEdges.length > paginationAll || allEdges.length > 0 ? (
-                  <tr key="more">
-                    <td colSpan={3} className="border-t-2 p-3">
-                      <Container width="full">
-                        {allEdges.length > paginationAll ? (
-                          <Button
-                            onClick={() =>
-                              setPaginationAll((prevState) => prevState + 5)
-                            }
-                            title={t(
-                              "Resources.components.Edge.button.showMore"
-                            )}
-                            size="sm"
-                            variant="text"
-                          />
-                        ) : null}
-                        {paginationAll > 0 ? (
-                          <Button
-                            onClick={() =>
-                              setPaginationAll((prevState) => prevState - 5)
-                            }
-                            title={t(
-                              "Resources.components.Edge.button.showLess"
-                            )}
-                            size="sm"
-                            variant="text"
-                          />
-                        ) : null}
-                      </Container>
-                    </td>
-                  </tr>
-                ) : null}
-              </>
-            ) : (
-              <tr>
-                <td colSpan={3} className="border-t-2 p-3 text-center">
-                  <Text>{t("Resources.components.Edge.table.noItems")}</Text>
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </Container>
-      <Search handleSearchInputChange={handleSearchInputChangeOwn} />
-      <Container
-        width="full"
-        direction="col"
-        className="overflow-auto"
-        justify="start"
-        align="start"
-      >
-        <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
-          <caption className=" pb-2 pl-5 text-left">
-            <Heading variant="h4">
-              {t("Resources.components.Edge.table.selected")}
-            </Heading>
-          </caption>
-          <thead className="">
-            <tr>
-              <th className="rounded-tl-xl bg-gray-50">
-                <div className="flex items-center justify-center ">
-                  <Button
-                    variant="text"
-                    title={t("Resources.components.Edge.table.name")}
-                    onClick={() => handleSortOwn("nodeName")}
-                    className="whitespace-nowrap"
-                  >
-                    <div className="ml-6 flex flex-row items-center justify-center">
-                      {t("Resources.components.Edge.table.name")}
-                      {getSortIconOwn("nodeName")}
-                    </div>
-                  </Button>
-                </div>
-              </th>
-              <th className="bg-gray-50">
-                <div className="flex items-center justify-center ">
-                  <Button
-                    variant="text"
-                    title={t("Resources.components.Edge.table.createdBy")}
-                    onClick={() => handleSortOwn("createdBy")}
-                    className="whitespace-nowrap"
-                  >
-                    <div className="ml-6 flex flex-row items-center justify-center">
-                      {t("Resources.components.Edge.table.createdBy")}
-                      {getSortIconOwn("createdBy")}
-                    </div>
-                  </Button>
-                </div>
-              </th>
-
-              <th className="rounded-tr-xl bg-gray-50 p-3 text-left">
-                {t("Resources.components.Edge.table.actions")}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredEdges.length > 0 ? (
-              filteredEdges.map((node, index) => (
-                <tr key={node.index}>
-                  <td
-                    className={`border-t-2 p-3 text-center ${
-                      index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                    }`}
-                  >
-                    {node.nodeName}
-                  </td>
-                  <td
-                    className={`border-t-2 p-3 text-center ${
-                      index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                    }`}
-                  >
-                    {node.createdBy === organization.hashedID
-                      ? organization.name
-                      : "Sermper-KI"}
-                  </td>
-                  <td
-                    className={`border-t-2 p-3 text-center ${
-                      index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                    }`}
-                  >
-                    <Button
-                      title={t("Resources.components.Edge.button.delete")}
-                      onClick={() => remove(node.index)}
-                      size="sm"
-                      variant="text"
-                    />
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={3} className="border-t-2 p-3 text-center">
-                  <Text>{t("Resources.components.Edge.table.noItems")}</Text>
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </Container>
+                )}
+              </tbody>
+            </table>
+          </Container>
+        </Container>
+      </Collapsible>
     </Container>
   );
 };

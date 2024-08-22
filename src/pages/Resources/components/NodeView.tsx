@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Children, PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 import {
+  Button,
   Container,
   Heading,
   LoadingAnimation,
@@ -19,11 +20,13 @@ import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useG
 
 interface ResourcesNodeViewProps {
   nodeID?: string;
-  resetNodeID?: () => void;
+  closeModal?: () => void;
 }
 
-const ResourcesNodeView: React.FC<ResourcesNodeViewProps> = (props) => {
-  const { nodeID, resetNodeID } = props;
+const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
+  props
+) => {
+  const { nodeID, closeModal, children } = props;
   const { t } = useTranslation();
   const node = useGetOrgaNode(nodeID);
   const navigate = useNavigate();
@@ -32,8 +35,8 @@ const ResourcesNodeView: React.FC<ResourcesNodeViewProps> = (props) => {
     node.data?.nodeID ?? ""
   );
 
-  const closeModal = () => {
-    if (nodeID !== undefined && resetNodeID !== undefined) resetNodeID();
+  const oncloseModal = () => {
+    if (nodeID !== undefined && closeModal !== undefined) closeModal();
     else navigate("..");
   };
 
@@ -46,14 +49,14 @@ const ResourcesNodeView: React.FC<ResourcesNodeViewProps> = (props) => {
   return (
     <Modal
       className="justify-start"
-      modalKey={`${node.data?.nodeType}`}
+      modalKey={`nodeView`}
       open={
         nodeID === undefined ||
-        (nodeID !== undefined && nodeID !== "" && resetNodeID !== undefined)
+        (nodeID !== undefined && nodeID !== "" && closeModal !== undefined)
           ? true
           : false
       }
-      closeModal={closeModal}
+      closeModal={oncloseModal}
     >
       {node.isLoading ? (
         <LoadingAnimation />
@@ -176,6 +179,7 @@ const ResourcesNodeView: React.FC<ResourcesNodeViewProps> = (props) => {
                   )}
             </tbody>
           </table>
+          {children}
         </Container>
       )}
     </Modal>

@@ -73,7 +73,7 @@ const ResourceTable = (props: ResourceTableProps) => {
             width="full"
             direction="row"
             justify="start"
-            className="overflow-auto "
+            className="overflow-auto md:overflow-auto"
           >
             <table className="card-container w-full  table-auto border-separate border-spacing-x-0 p-0">
               <thead>

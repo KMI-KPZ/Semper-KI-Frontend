@@ -1,7 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Heading, Text } from "@component-library/index";
-import { UseFieldArrayReturn, UseFormRegister } from "react-hook-form";
+import {
+  FieldArrayWithId,
+  UseFieldArrayReturn,
+  UseFormRegister,
+} from "react-hook-form";
 import {
   OntoNode,
   OntoNodeNew,
@@ -14,6 +18,9 @@ import { ResourcesNodeFormEdges } from "./NodeForm";
 import ClearIcon from "@mui/icons-material/Clear";
 import AddIcon from "@mui/icons-material/Add";
 import { GeneralInput, InputType } from "@component-library/Form/GeneralInput";
+import useSearch from "@/hooks/useSearch";
+import useSort from "@/hooks/useSort";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 interface ResourcesPropertyFormProps {
   usePropertyArray: UseFieldArrayReturn<
@@ -29,6 +36,14 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
   const { register, usePropertyArray, nodeProperties } = props;
   const { t } = useTranslation();
   const { fields, append, remove, update } = usePropertyArray;
+  const { getSortIcon, handleSort, sortItems } =
+    useSort<
+      FieldArrayWithId<
+        (OntoNode | OntoNodeNew) & ResourcesNodeFormEdges,
+        "properties",
+        "id"
+      >
+    >();
 
   const handleOnClickButtonAddProperty = () => {
     append({
@@ -94,60 +109,141 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
           />
         ) : null}
       </Container>
-      {fields.map((field, index) => (
-        <Container
-          key={index}
-          direction="col"
-          width="fit"
-          className="card relative min-w-full md:min-w-[300px]"
-        >
-          <Button
-            title={t("Resources.components.Edit.button.removeProperty")}
-            onClick={() => remove(index)}
-            className="absolute right-1 top-1"
-            size="sm"
-            variant="text"
-            children={<ClearIcon />}
-          />
-          {field.name === undefined || field.name === "" ? (
-            <Container width="full">
-              <Text>{t("Resources.components.Edit.properties.type")}</Text>
-              {
-                <select
-                  className=" rounded-md border border-gray-300 p-2"
-                  {...register(`properties.${index}.name`, {
-                    onChange: (e) => handleOnChangePropertyType(e, index),
-                  })}
-                >
-                  {nodeProperties.map((property) => (
-                    <option
-                      key={property.name}
-                      value={property.name}
-                      disabled={propertyNameAlreadyUsed(property.name)}
-                    >
-                      {propertyNameTranslation(property.name)}
-                    </option>
-                  ))}
-                </select>
-              }
-            </Container>
-          ) : (
-            <>
-              <Container width="full">
-                <Text>{t("Resources.components.Edit.properties.name")}</Text>
-                <Text>{propertyNameTranslation(field.name)}</Text>
-              </Container>
+      <Container
+        width="full"
+        className="overflow-auto"
+        justify="start"
+        align="start"
+      >
+        <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
+          <thead className="">
+            <tr>
+              <th className="rounded-tl-xl bg-gray-50 p-3">
+                <div className="m-0 flex items-center justify-start ">
+                  <Button
+                    variant="text"
+                    title={t("Resources.components.Edge.table.name")}
+                    onClick={() => handleSort("name")}
+                    className="whitespace-nowrap p-0"
+                  >
+                    <div className="ml-6 flex flex-row items-center justify-center">
+                      {t("Resources.components.Edge.table.name")}
+                      {getSortIcon("name")}
+                    </div>
+                  </Button>
+                </div>
+              </th>
+              <th className="bg-gray-50">
+                <div className="flex items-center justify-start ">
+                  <Button
+                    variant="text"
+                    title={t("Resources.components.Edit.table.value")}
+                    onClick={() => handleSort("value")}
+                    className="whitespace-nowrap"
+                  >
+                    <div className="ml-6 flex flex-row items-center justify-center">
+                      {t("Resources.components.Edit.table.value")}
+                      {getSortIcon("value")}
+                    </div>
+                  </Button>
+                </div>
+              </th>
 
-              <GeneralInput
-                label={`properties.${index}.value`}
-                labelText={t("Resources.components.Edit.properties.value")}
-                register={register}
-                type={mapInputTypes(field.type)}
-              />
-            </>
-          )}
-        </Container>
-      ))}
+              <th className="rounded-tr-xl bg-gray-50 p-3 text-left">
+                {t("Resources.components.Edge.table.actions")}
+              </th>
+            </tr>
+          </thead>
+          <tbody className="">
+            {fields.length > 0 ? (
+              fields.sort(sortItems).map((propField, index) =>
+                propField.name === undefined || propField.name === "" ? (
+                  <tr>
+                    <td
+                      colSpan={3}
+                      className={`border-t-2 p-3 text-left ${
+                        index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                      }`}
+                    >
+                      <Container width="full">
+                        <Text>
+                          {t("Resources.components.Edit.properties.type")}
+                        </Text>
+                        {
+                          <select
+                            className=" rounded-md border border-gray-300 p-2"
+                            {...register(`properties.${index}.name`, {
+                              onChange: (e) =>
+                                handleOnChangePropertyType(e, index),
+                            })}
+                          >
+                            {nodeProperties.map((property) => (
+                              <option
+                                key={property.name}
+                                value={property.name}
+                                disabled={propertyNameAlreadyUsed(
+                                  property.name
+                                )}
+                              >
+                                {propertyNameTranslation(property.name)}
+                              </option>
+                            ))}
+                          </select>
+                        }
+                      </Container>
+                    </td>
+                  </tr>
+                ) : (
+                  <tr key={index}>
+                    <td
+                      className={`border-t-2 p-3 text-left ${
+                        index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                      }`}
+                    >
+                      {propField.name}
+                    </td>
+                    <td
+                      className={`border-t-2 p-3 text-left ${
+                        index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                      }`}
+                    >
+                      <GeneralInput
+                        label={`properties.${index}.value`}
+                        labelText={""}
+                        register={register}
+                        type={mapInputTypes(propField.type)}
+                      />
+                    </td>
+                    <td
+                      className={`border-t-2 p-3 text-left ${
+                        index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                      }`}
+                    >
+                      <Container width="full" direction="row" justify="start">
+                        <Button
+                          title={t(
+                            "Resources.components.Edit.button.removeProperty"
+                          )}
+                          onClick={() => remove(index)}
+                          size="sm"
+                          variant="text"
+                          children={<DeleteOutlineOutlinedIcon />}
+                        />
+                      </Container>
+                    </td>
+                  </tr>
+                )
+              )
+            ) : (
+              <tr>
+                <td colSpan={3} className="border-t-2 p-3 text-center">
+                  <Text>{t("Resources.components.Edge.table.noItems")}</Text>
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </Container>
     </Container>
   );
 };

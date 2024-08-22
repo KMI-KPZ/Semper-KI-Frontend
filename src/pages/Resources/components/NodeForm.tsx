@@ -19,6 +19,7 @@ import ResourcesNodeDraft from "./NodeDraft";
 import useCreateOrgaEntitieEdge from "@/api/Resources/Organization/Mutations/useCreateOrgaEntitieEdge";
 import useDeleteOrgaEntitieEdge from "@/api/Resources/Organization/Mutations/useDeleteOrgaEntitieEdge";
 import logger from "@/hooks/useLogger";
+import useSubmitOrgaNode from "@/api/Resources/Organization/Mutations/useSubmitOrgaNode";
 
 interface ResourcesNodePropsForm {
   type: "edit" | "create" | "variant";
@@ -46,6 +47,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   const updateOrgaNode = useUpdateOrgaNode();
   const createOrgaEntitieEdge = useCreateOrgaEntitieEdge();
   const deleteOrgaEntitieEdge = useDeleteOrgaEntitieEdge();
+  const submitOrgaNodeForm = useSubmitOrgaNode();
   const [array, setArray] = React.useState<string[]>([]);
 
   const navigate = useNavigate();
@@ -184,36 +186,51 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     data: (OntoNode | OntoNodeNew) & ResourcesNodeFormEdges
   ) => {
     // logger("ResourcesNodeEdit | onSubmit |", data);
+    const newEdges: string[] = data.edges
+      .filter((edge) => !edges?.some((e) => e.nodeID === edge.nodeID))
+      .map((edge) => edge.nodeID);
+    const deleteEdges: string[] =
+      edges === undefined
+        ? []
+        : edges
+            .filter((edge) => !data.edges.some((e) => e.nodeID === edge.nodeID))
+            .map((edge) => edge.nodeID);
+    const node = { ...data, edges: undefined };
+    submitOrgaNodeForm.mutate({
+      node: node,
+      type: type === "edit" ? "update" : "create",
+      edges: { create: newEdges, delete: deleteEdges },
+    });
 
-    switch (type) {
-      case "edit":
-        updateOrgaNode.mutate(data as OntoNode, {
-          onSuccess: () => {
-            updateOrgaEdges((data as OntoNode).nodeID, data.edges);
-          },
-        });
-        break;
-      case "create":
-        createOrgaNode.mutate(
-          { node: data },
-          {
-            onSuccess: (node) => {
-              updateOrgaEdges(node.nodeID, data.edges);
-            },
-          }
-        );
-        break;
-      case "variant":
-        createOrgaNode.mutate(
-          { node: data },
-          {
-            onSuccess: () => {
-              updateOrgaEdges((data as OntoNode).nodeID, data.edges);
-            },
-          }
-        );
-        break;
-    }
+    // switch (type) {
+    //   case "edit":
+    //     updateOrgaNode.mutate(data as OntoNode, {
+    //       onSuccess: () => {
+    //         updateOrgaEdges((data as OntoNode).nodeID, data.edges);
+    //       },
+    //     });
+    //     break;
+    //   case "create":
+    //     createOrgaNode.mutate(
+    //       { node: data },
+    //       {
+    //         onSuccess: (node) => {
+    //           updateOrgaEdges(node.nodeID, data.edges);
+    //         },
+    //       }
+    //     );
+    //     break;
+    //   case "variant":
+    //     createOrgaNode.mutate(
+    //       { node: data },
+    //       {
+    //         onSuccess: () => {
+    //           updateOrgaEdges((data as OntoNode).nodeID, data.edges);
+    //         },
+    //       }
+    //     );
+    //     break;
+    // }
   };
 
   const nodeAlreadyFilled = watch("name") !== "" && watch("context") !== "";

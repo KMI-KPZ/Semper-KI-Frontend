@@ -1811,7 +1811,11 @@
         "properties": "Eigenschaften",
         "general": "Allgemein",
         "neighbors": "Zugehörige Ressourcen",
-        "noProperties": "keine Eigenschaften vorhanden"
+        "noProperties": "keine Eigenschaften vorhanden",
+        "button": {
+          "draft": "Vorlage auswählen",
+          "variant": "Variante erstellen"
+        }
       },
       "Menu": {
         "overview": "Übersicht",
@@ -1885,8 +1889,10 @@
         },
         "table": {
           "name": "Name",
+          "value": "Wert",
           "createdBy": "Erstellt von",
-          "actions": "Aktionen"
+          "actions": "Aktionen",
+          "caption": "Eigenschaften"
         }
       }
     },

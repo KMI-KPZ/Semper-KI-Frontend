@@ -20,9 +20,10 @@ import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import Collapsible from "@/components/Collapsible/Collapsible";
 import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import logger from "@/hooks/useLogger";
 import ResourcesNodeView from "./NodeView";
+import useModal from "@/hooks/useModal";
 
 interface ResourcesNodeDraftProps {
   nodeType: OntoNodeType;
@@ -38,14 +39,24 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<OntoNode>();
   const { getSortIcon, handleSort, sortItems } = useSort<OntoNode>();
+  const navigate = useNavigate();
   const [detailsNodeID, setDetailsNodeID] = React.useState<string>("");
+  const { deleteModal } = useModal();
 
-  const handleOnButtonClickDraft = (node: OntoNode) => {
+  const handleOnClickButtonDraft = (node: OntoNode) => {
     setFormToDraft(node);
   };
 
   const resetNodeID = () => {
     setDetailsNodeID("");
+  };
+
+  const handleOnClickModalButtonDraft = (nodeID: string) => {
+    const node = nodes.data?.find((node) => node.nodeID === nodeID);
+    if (node !== undefined) {
+      setFormToDraft(node);
+    }
+    resetNodeID();
   };
 
   return (
@@ -54,7 +65,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
         {t("Resources.components.Edit.draft")}
       </Heading>
       <Collapsible initialOpen showButton className="mt-5">
-        <Container width="full" direction="col" className="p-y5">
+        <Container width="full" direction="col" className="">
           <Container width="full" direction="col" gap={3}>
             <Text className="text-center">
               {t("Resources.components.Edit.draftDescription")}
@@ -74,7 +85,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
               justify="start"
               align="start"
             >
-              <table className="card-container w-full   table-auto border-separate border-spacing-x-0 p-0">
+              <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
                 <thead>
                   <tr>
                     <th className="bg-gray-50">
@@ -157,7 +168,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                                 "Resources.components.Edit.button.draft"
                               )}
                               onClick={() => {
-                                handleOnButtonClickDraft(node);
+                                handleOnClickButtonDraft(node);
                               }}
                             />
                             <Button
@@ -180,7 +191,30 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
           )}
         </Container>
       </Collapsible>
-      <ResourcesNodeView nodeID={detailsNodeID} resetNodeID={resetNodeID} />
+      <ResourcesNodeView nodeID={detailsNodeID} closeModal={resetNodeID}>
+        <Container
+          width="fit"
+          className="card sticky bottom-5 bg-white px-4 py-2"
+        >
+          <Button
+            variant="text"
+            size="sm"
+            title={t("Resources.components.Edit.button.draft")}
+            onClick={() => {
+              handleOnClickModalButtonDraft(detailsNodeID);
+            }}
+          />
+          <Button
+            variant="text"
+            size="sm"
+            title={t("Resources.components.Edit.button.variant")}
+            onClick={() => {
+              deleteModal("nodeView");
+              navigate(`../variant/${detailsNodeID}`);
+            }}
+          />
+        </Container>
+      </ResourcesNodeView>
     </Container>
   );
 };

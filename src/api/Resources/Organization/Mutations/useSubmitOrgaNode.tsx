@@ -13,7 +13,10 @@ const useSubmitOrgaNode = () => {
   const queryClient = useQueryClient();
   const submitOrgaNode = async (props: useSubmitOrgaNodeProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/submitOrgaNode/`, props)
+      .post(
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/nodes/create-and-link/`,
+        props
+      )
       .then((response) => {
         logger("useSubmitOrgaNode | submitOrgaNode ✅ |", response);
         return response.data;

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import * as d3 from "d3";
-import { Edge, Node } from "@/api/Graph/Querys/useGetGraph";
+import { Edge, Node } from "@/api/Graph/Querys/useGetPrivateGraph";
 import { Button, Text } from "@component-library/index";
 import logger from "@/hooks/useLogger";
 

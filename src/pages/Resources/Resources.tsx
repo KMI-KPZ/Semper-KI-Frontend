@@ -9,9 +9,10 @@ import ResourcesPostProcessings from "./PostProcessings/PostProcessings";
 import ResourcesPrintersTable from "./Printers/Table";
 import ResourcesMaterialsTable from "./Materials/Table";
 import ResourcesNode from "./components/Node";
-import Graph from "./components/Graph";
+import OrgaGraph from "./components/OrgaGraph";
 import AddIcon from "@mui/icons-material/Add";
 import ResourcesNodeView from "./components/NodeView";
+import PrivateGraph from "./components/PrivateGraph";
 
 interface ResoucesProps {}
 
@@ -128,8 +129,9 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
                 }
               />
             </Route>
+            <Route path="graph" element={<OrgaGraph />} />
             {process.env.NODE_ENV === "development" ? (
-              <Route path="graph" element={<Graph />} />
+              <Route path="private-graph" element={<PrivateGraph />} />
             ) : null}
           </Routes>
         </Container>

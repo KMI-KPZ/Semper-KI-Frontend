@@ -33,6 +33,10 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = (props) => {
       title: t("Resources.components.Menu.postProcessings"),
       to: "/resources/postprocessings",
     },
+    {
+      title: t("Resources.components.Menu.graph"),
+      to: "/resources/graph",
+    },
   ];
 
   const isActive = (to: string) => {
@@ -59,8 +63,8 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = (props) => {
         <Button
           width="full"
           testid="resources-menu-item"
-          title={t("Resources.components.Menu.graph")}
-          to={"/resources/graph"}
+          title={t("Resources.components.Menu.privat-graph")}
+          to={"/resources/private-graph"}
         />
       )}
     </nav>

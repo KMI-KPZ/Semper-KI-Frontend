@@ -1822,7 +1822,8 @@
         "materials": "Materialien",
         "printers": "3D-Drucker",
         "postProcessings": "Nachbearbeitung",
-        "graph": "Graph"
+        "graph": "Graph",
+        "privat-graph": "Private Graph"
       },
       "Table": {
         "action": "Aktionen",

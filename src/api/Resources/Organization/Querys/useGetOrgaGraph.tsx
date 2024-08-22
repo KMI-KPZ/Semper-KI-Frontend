@@ -1,7 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Graph } from "@/api/Graph/Querys/useGetGraph";
+import { Graph } from "@/api/Graph/Querys/useGetPrivateGraph";
 
 const useGetOrgaGraph = () => {
   const queryClient = useQueryClient();

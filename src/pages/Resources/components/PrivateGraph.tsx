@@ -1,15 +1,16 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Container, LoadingAnimation } from "@component-library/index";
-import useGetGraph from "@/api/Graph/Querys/useGetGraph";
+import useGetPrivateGraph from "@/api/Graph/Querys/useGetPrivateGraph";
 import NetworkGraph from "@/components/NetworkGraph/GraphViewer";
+import useGetOrgaGraph from "@/api/Resources/Organization/Querys/useGetOrgaGraph";
 
-interface GraphProps {}
+interface PrivateGraphProps {}
 
-const Graph: React.FC<GraphProps> = (props) => {
+const PrivateGraph: React.FC<PrivateGraphProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const graph = useGetGraph();
+  const graph = useGetPrivateGraph();
 
   return (
     <Container>
@@ -22,4 +23,4 @@ const Graph: React.FC<GraphProps> = (props) => {
   );
 };
 
-export default Graph;
+export default PrivateGraph;

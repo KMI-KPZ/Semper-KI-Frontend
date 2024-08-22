@@ -19,7 +19,7 @@ import useGetDynamicTestButtons, {
   TestDynamicProps,
 } from "@/api/Test/Querys/useGetDynamicTestButtons";
 import useSaveProjects from "@/api/Project/Mutations/useSaveProjects";
-import useGetGraph from "@/api/Graph/Querys/useGetGraph";
+import useGetPrivateGraph from "@/api/Graph/Querys/useGetPrivateGraph";
 import NetworkGraph from "@/components/NetworkGraph/GraphViewer";
 
 interface Props {}
@@ -31,7 +31,7 @@ export const Test: React.FC<Props> = (props) => {
   const saveProjects = useSaveProjects();
   const dynamicButtonRequest = useDynamicButtonRequest();
   const testDynamicQuery = useGetDynamicTestButtons();
-  const graph = useGetGraph();
+  const graph = useGetPrivateGraph();
   const horizontalScroll = useRef<HTMLDivElement>(null);
 
   const openMenu = () => {

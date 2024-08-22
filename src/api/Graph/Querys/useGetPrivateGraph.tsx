@@ -17,7 +17,7 @@ export interface Graph {
   edges: Edge[];
 }
 
-const useGetGraph = () => {
+const useGetPrivateGraph = () => {
   const queryClient = useQueryClient();
   const getGraph = async () =>
     authorizedCustomAxios
@@ -33,10 +33,10 @@ const useGetGraph = () => {
       });
 
   return useQuery<Graph, Error>({
-    queryKey: ["graph"],
+    queryKey: ["graph", "private"],
     queryFn: getGraph,
     enabled: process.env.NODE_ENV === "development",
   });
 };
 
-export default useGetGraph;
+export default useGetPrivateGraph;

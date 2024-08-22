@@ -117,78 +117,13 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     name: "edges",
   });
 
-  const updateOrgaEdges = (
-    nodeID: string,
-    formEdges: ResourcesNodeFormEdge[]
-  ) => {
-    const newEdges: ResourcesNodeFormEdge[] = formEdges.filter(
-      (edge) => !edges?.some((e) => e.nodeID === edge.nodeID)
-    );
-    const deleteEdges: ResourcesNodeFormEdge[] =
-      edges === undefined
-        ? []
-        : edges.filter(
-            (edge) => !formEdges.some((e) => e.nodeID === edge.nodeID)
-          );
-
-    newEdges.forEach((edge) => {
-      setArray((prevState) => [...prevState, edge.nodeID]);
-      createOrgaEntitieEdge.mutate(
-        {
-          entity1ID: nodeID,
-          entity2ID: edge.nodeID,
-          invalidate: false,
-        },
-        {
-          onSuccess: () => {
-            setArray((prevState) =>
-              prevState.filter((id) => id !== edge.nodeID)
-            );
-            if (array.length === 0) {
-              navigate("..");
-            }
-          },
-        }
-      );
-    });
-
-    deleteEdges.forEach((edge) => {
-      setArray((prevState) => [...prevState, edge.nodeID]);
-      deleteOrgaEntitieEdge.mutate(
-        {
-          entity1ID: nodeID,
-          entity2ID: edge.nodeID,
-          invalidate: false,
-        },
-        {
-          onSuccess: () => {
-            setArray((prevState) =>
-              prevState.filter((id) => id !== edge.nodeID)
-            );
-            if (array.length === 0) {
-              navigate("..");
-            }
-          },
-        }
-      );
-    });
-
-    if (
-      newEdges.length === 0 &&
-      deleteEdges.length === 0 &&
-      array.length === 0
-    ) {
-      navigate("..");
-    }
-  };
-
   const onSubmit = (
     data: (OntoNode | OntoNodeNew) & ResourcesNodeFormEdges
   ) => {
-    // logger("ResourcesNodeEdit | onSubmit |", data);
     const newEdges: string[] = data.edges
       .filter((edge) => !edges?.some((e) => e.nodeID === edge.nodeID))
       .map((edge) => edge.nodeID);
+
     const deleteEdges: string[] =
       edges === undefined
         ? []
@@ -208,36 +143,6 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
         },
       }
     );
-
-    // switch (type) {
-    //   case "edit":
-    //     updateOrgaNode.mutate(data as OntoNode, {
-    //       onSuccess: () => {
-    //         updateOrgaEdges((data as OntoNode).nodeID, data.edges);
-    //       },
-    //     });
-    //     break;
-    //   case "create":
-    //     createOrgaNode.mutate(
-    //       { node: data },
-    //       {
-    //         onSuccess: (node) => {
-    //           updateOrgaEdges(node.nodeID, data.edges);
-    //         },
-    //       }
-    //     );
-    //     break;
-    //   case "variant":
-    //     createOrgaNode.mutate(
-    //       { node: data },
-    //       {
-    //         onSuccess: () => {
-    //           updateOrgaEdges((data as OntoNode).nodeID, data.edges);
-    //         },
-    //       }
-    //     );
-    //     break;
-    // }
   };
 
   const nodeAlreadyFilled = watch("name") !== "" && watch("context") !== "";

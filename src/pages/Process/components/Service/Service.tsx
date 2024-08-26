@@ -7,9 +7,8 @@ import ServiceSelection from "./ServiceSelection/ServiceSelection";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import ServiceDetails from "./ServiceDetails/ServiceDetails";
-import ProcessStatusButtons from "../StatusButtons";
 import ProcessContainer from "@/components/Process/Container";
-import ProcessHeader from "@/components/Process/Header";
+import ProcessFilter from "./Filter/Filter";
 
 interface ServiceProps {
   process: Process;
@@ -65,6 +64,7 @@ const Service: React.FC<ServiceProps> = (props) => {
         />
       }
     >
+      <ProcessFilter />
       {process.serviceType === undefined ||
       process.serviceType === ServiceType.NONE ? (
         <ServiceSelection />

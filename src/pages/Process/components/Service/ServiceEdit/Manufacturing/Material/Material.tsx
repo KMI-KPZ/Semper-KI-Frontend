@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { FilterItemProps } from "../Filter/Filter";
+import { FilterItemProps } from "../../../Filter/MaufacturingFilter/Filter";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetMaterials, {

@@ -5,8 +5,9 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useTranslation } from "react-i18next";
 import ProcessFilterItem from "./Item";
 import { CategoryProps, FilterItemProps } from "../Filter";
-import { Heading } from "@component-library/index";
+import { Container, Heading } from "@component-library/index";
 import { Button } from "@component-library/index";
+import Collapsible from "@/components/Collapsible/Collapsible";
 
 interface Props {
   category: CategoryProps;
@@ -37,8 +38,12 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="bg-gray-100 p-3">
-      <div className="flex flex-row items-center justify-between">
+    <Container
+      width="full"
+      direction="col"
+      className="rounded-xl bg-gray-100 p-2"
+    >
+      <Container width="full" justify="start" className="px-5">
         <Heading variant="h3">
           {`${t(
             `enum.FilterCategoryType.${category.title}`
@@ -53,17 +58,17 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
             category.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />
           }
         />
-      </div>
-      {category.open
-        ? filterItemList.map((filterItem: FilterItemProps, index: number) => (
-            <ProcessFilterItem
-              key={index}
-              filterItem={filterItem}
-              setFilterItem={setFilterItem}
-            />
-          ))
-        : null}
-    </div>
+      </Container>
+      <Collapsible open={category.open}>
+        {filterItemList.map((filterItem: FilterItemProps, index: number) => (
+          <ProcessFilterItem
+            key={index}
+            filterItem={filterItem}
+            setFilterItem={setFilterItem}
+          />
+        ))}
+      </Collapsible>
+    </Container>
   );
 };
 

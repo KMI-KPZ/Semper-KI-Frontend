@@ -1018,6 +1018,12 @@
   },
   "Process": {
     "components": {
+      "Filter": {
+        "Filter": {
+          "menuButtonTitle": "Filter Menu",
+          "pageTitle": "Vorgaben"
+        }
+      },
       "Info": {
         "name": "Prozessname:",
         "updated": "letzte Aktualisierung:",

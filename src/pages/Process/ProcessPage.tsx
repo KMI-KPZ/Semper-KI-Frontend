@@ -20,6 +20,7 @@ import ProcessProduction from "./components/Production/Production";
 import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
 import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ProcessFilter from "./components/Service/Filter/Filter";
 
 interface ProcessPageProps {}
 

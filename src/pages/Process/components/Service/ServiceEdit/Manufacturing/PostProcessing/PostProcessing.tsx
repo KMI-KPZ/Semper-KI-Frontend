@@ -8,7 +8,7 @@ import {
   Modal,
   Text,
 } from "@component-library/index";
-import { FilterItemProps } from "../Filter/Filter";
+import { FilterItemProps } from "../../../Filter/MaufacturingFilter/Filter";
 import ProcessPostProcessingCard from "./components/Card";
 import useGetPostProcessigns, {
   PostProcessingProps,

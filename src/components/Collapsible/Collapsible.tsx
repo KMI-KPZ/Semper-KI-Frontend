@@ -44,6 +44,19 @@ const Collapsible: React.FC<PropsWithChildren<CollapsibleProps>> = (props) => {
     if (
       collapsibleRef !== null &&
       collapsibleRef.current !== null &&
+      open !== undefined &&
+      expand === true
+    ) {
+      collapsibleRef.current.style.maxHeight =
+        collapsibleRef.current.scrollHeight + "px";
+      setExpand(!expand);
+    }
+  }, [collapsibleRef]);
+
+  useEffect(() => {
+    if (
+      collapsibleRef !== null &&
+      collapsibleRef.current !== null &&
       initialOpen !== undefined &&
       initialOpen === true
     ) {

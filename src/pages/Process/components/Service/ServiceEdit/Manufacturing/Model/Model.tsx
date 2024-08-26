@@ -4,7 +4,7 @@ import { Button, Container, Text } from "@component-library/index";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
-import { FilterItemProps } from "../Filter/Filter";
+import { FilterItemProps } from "../../../Filter/MaufacturingFilter/Filter";
 import { ProcessModelPreView } from "./components/PreView";
 import ProcessModelItem from "./components/Item";
 import IconUpload from "@icons/Upload.svg";

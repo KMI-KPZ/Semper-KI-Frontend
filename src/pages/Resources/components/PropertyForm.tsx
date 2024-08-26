@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Button, Container, Heading, Text } from "@component-library/index";
 import {
   FieldArrayWithId,
+  FieldErrors,
   UseFieldArrayReturn,
   UseFormRegister,
 } from "react-hook-form";
@@ -21,6 +22,7 @@ import { GeneralInput, InputType } from "@component-library/Form/GeneralInput";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import logger from "@/hooks/useLogger";
 
 interface ResourcesPropertyFormProps {
   usePropertyArray: UseFieldArrayReturn<
@@ -30,10 +32,11 @@ interface ResourcesPropertyFormProps {
   >;
   register: UseFormRegister<(OntoNode | OntoNodeNew) & ResourcesNodeFormEdges>;
   nodeProperties: OntoNodeProperty[];
+  errors?: FieldErrors<(OntoNode | OntoNodeNew) & ResourcesNodeFormEdges>;
 }
 
 const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
-  const { register, usePropertyArray, nodeProperties } = props;
+  const { register, usePropertyArray, nodeProperties, errors } = props;
   const { t } = useTranslation();
   const { fields, append, remove, update } = usePropertyArray;
   const { getSortIcon, handleSort, sortItems } =
@@ -100,14 +103,14 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
         <Heading variant="h3">
           {t("Resources.components.Edit.properties.header")}
         </Heading>
-        {freePropertyNamesAvailable() ? (
+        {/* {freePropertyNamesAvailable() ? (
           <Button
             title={t("Resources.components.Edit.button.addProperty")}
             onClick={handleOnClickButtonAddProperty}
             variant="text"
             children={<AddIcon />}
           />
-        ) : null}
+        ) : null} */}
       </Container>
       <Container
         width="full"
@@ -212,6 +215,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                         labelText={""}
                         register={register}
                         type={mapInputTypes(propField.type)}
+                        error={errors?.properties?.[index]?.value}
                       />
                     </td>
                     <td
@@ -241,6 +245,27 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                 </td>
               </tr>
             )}
+            {freePropertyNamesAvailable() ? (
+              <tr>
+                <td
+                  colSpan={3}
+                  className={`border-t-2 p-3 text-left ${
+                    fields.length % 2 === 1 ? "bg-gray-50" : "bg-white"
+                  }`}
+                >
+                  <Container width="full" height="full">
+                    <Button
+                      width="full"
+                      className="h-full w-full"
+                      title={t("Resources.components.Edit.button.addProperty")}
+                      onClick={handleOnClickButtonAddProperty}
+                      variant="text"
+                      children={<AddIcon />}
+                    />
+                  </Container>
+                </td>
+              </tr>
+            ) : null}
           </tbody>
         </table>
       </Container>

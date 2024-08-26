@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import CloseIcon from "@mui/icons-material/Close";
-import { Button } from "@component-library/index";
+import { Button, Container } from "@component-library/index";
 import ProcessFilterCard from "./components/Card";
 import { AppContext } from "@/pages/App/App";
 import { Heading } from "@component-library/index";
@@ -106,7 +106,7 @@ const hydrateFilter = (
   return filteritems;
 };
 
-const ProcessFilter: React.FC<Props> = (props) => {
+const ManufacturingProcessFilter: React.FC<Props> = (props) => {
   const {
     applyFilters,
     filters,
@@ -214,25 +214,14 @@ const ProcessFilter: React.FC<Props> = (props) => {
   }, []);
 
   return (
-    <div
-      className={`h-fit flex-col justify-between gap-10 bg-white p-5 2xl:flex ${
-        filterOpen === true
-          ? "absolute left-0 right-0 top-0 flex h-fit w-screen flex-col justify-between gap-10 overflow-x-hidden overflow-y-scroll bg-white p-5"
-          : "hidden"
-      }`}
-    >
-      <div className="flex flex-col justify-start gap-2 overflow-x-hidden">
-        <div className="flex w-full flex-row-reverse xl:hidden">
-          <div
-            className="p-3 hover:cursor-pointer hover:bg-gray-300"
-            onClick={handleOnClickCloseButton}
-          >
-            <CloseIcon fontSize="large" />
-          </div>
-        </div>
-        <Heading variant="h2">
-          {t("Service.Manufacturing.Filter.Filter.header")}
-        </Heading>
+    <Container width="full" direction="col">
+      <Container
+        width="full"
+        justify="start"
+        direction="col"
+        align="center"
+        wrap="wrap"
+      >
         {categoryList.map((category: CategoryProps, categoryIndex: number) => (
           <ProcessFilterCard
             category={category}
@@ -246,8 +235,8 @@ const ProcessFilter: React.FC<Props> = (props) => {
             key={categoryIndex}
           />
         ))}
-      </div>
-      <div className="flex flex-col justify-center gap-2 text-white xl:flex-row">
+      </Container>
+      <Container width="full">
         <Button
           size="sm"
           onClick={handleOnClickResetButton}
@@ -258,9 +247,10 @@ const ProcessFilter: React.FC<Props> = (props) => {
           onClick={handleOnClickApplyButton}
           title={t("Service.Manufacturing.Filter.Filter.button.apply")}
         />
-      </div>
-    </div>
+      </Container>
+    </Container>
+    // </div>
   );
 };
 
-export default ProcessFilter;
+export default ManufacturingProcessFilter;

@@ -51,7 +51,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = (props) => {
           <Text>{project.updatedWhen.toLocaleString()}</Text>
         </Container>
       </Container>
-      <Collapsible>
+      <Collapsible showButton logName="Project">
         <Container
           direction="row"
           justify="start"

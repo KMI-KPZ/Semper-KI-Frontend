@@ -21,7 +21,7 @@ const ProcessFilter: React.FC<ProcessFilterProps> = (props) => {
           {t("Process.components.Filter.Filter.pageTitle")}
         </Heading>
       </Container>
-      <Collapsible initialOpen showButton>
+      <Collapsible initialOpen showButton logName="Filter" animation={false}>
         <Container width="full" direction="col" className="my-5">
           {filters.isLoading ? (
             <LoadingAnimation />

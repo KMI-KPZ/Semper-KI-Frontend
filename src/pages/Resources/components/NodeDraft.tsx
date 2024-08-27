@@ -183,6 +183,29 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                         </td>
                       </tr>
                     ))}
+                  <tr>
+                    <td
+                      colSpan={3}
+                      className={`border-t-2 p-3 text-center ${
+                        nodes.data
+                          .filter((node) => filterDataBySearchInput(node))
+                          .sort(sortItems).length %
+                          2 ===
+                        1
+                          ? "bg-gray-50"
+                          : "bg-white"
+                      }`}
+                    >
+                      <Container width="full">
+                        <Text>{t("Resources.components.Edit.notFound")}</Text>
+                        <Button
+                          variant="text"
+                          size="sm"
+                          title={t("Resources.components.Edit.button.search")}
+                        />
+                      </Container>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </Container>

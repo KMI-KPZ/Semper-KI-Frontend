@@ -61,7 +61,7 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
           <Text>{process.updatedWhen.toLocaleString()}</Text>
         </Container>
       </Container>
-      <Collapsible>
+      <Collapsible showButton logName="Process">
         <Container
           direction="row"
           justify="start"

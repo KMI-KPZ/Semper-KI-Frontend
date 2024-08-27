@@ -124,7 +124,6 @@ const ManufacturingProcessFilter: React.FC<Props> = (props) => {
   });
   const { categoryList, filterList } = state;
   const { t } = useTranslation();
-  const { setBodyScroll } = useBodyScroll();
   const callApplyFilters = () => {
     applyFilters(
       filterList.map((filterItem: FilterItemProps) => {
@@ -134,11 +133,6 @@ const ManufacturingProcessFilter: React.FC<Props> = (props) => {
       })
     );
   };
-  const setFilterOpen = (open: boolean) => {
-    parentSetFilterOpen(open);
-    setBodyScroll(open);
-  };
-
   const setFilterItem = (newFilterItem: FilterItemProps) => {
     setState((prevState) => ({
       ...prevState,
@@ -167,14 +161,12 @@ const ManufacturingProcessFilter: React.FC<Props> = (props) => {
         return newFilterItem;
       }),
     }));
-    setFilterOpen(false);
   };
   const handleOnClickApplyButton = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
     callApplyFilters();
-    setFilterOpen(false);
   };
   const handleOnClickMenuOpen = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -197,21 +189,6 @@ const ManufacturingProcessFilter: React.FC<Props> = (props) => {
       ],
     }));
   };
-  const handleOnClickCloseButton = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    setFilterOpen(false);
-  };
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 1536) setFilterOpen(false);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <Container width="full" direction="col">

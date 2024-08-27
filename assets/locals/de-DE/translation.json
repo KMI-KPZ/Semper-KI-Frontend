@@ -1869,6 +1869,7 @@
         "draftDescription2": "Erstellen sie eine Variante um zusätzlich die Verbindung zu anderen Ressourcen zu übernehmen.",
         "confirmDraft": "Möchten Sie die Vorlage wirklich auswählen?\n Alle ungespeicherten Änderungen gehen verloren.",
         "general": "Allgemeine Informationen",
+        "notFound": "Nicht das passenden Gefunden?",
         "heading": {
           "edit": "Bearbeiten",
           "create": "Erstellen",
@@ -1886,6 +1887,7 @@
           "value": "Wert"
         },
         "button": {
+          "search": "Erweiterung beantragen",
           "addProperty": "Eigenschaften Hinuzfügen",
           "edit": "Speichern",
           "create": "Erstellen",

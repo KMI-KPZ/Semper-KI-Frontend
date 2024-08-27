@@ -59,7 +59,7 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
           }
         />
       </Container>
-      <Collapsible open={category.open}>
+      <Collapsible expand={category.open}>
         {filterItemList.map((filterItem: FilterItemProps, index: number) => (
           <ProcessFilterItem
             key={index}

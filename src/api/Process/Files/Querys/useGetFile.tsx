@@ -1,10 +1,9 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
 const useGetModelFile = (fileID: string) => {
-  const queryClient = useQueryClient();
   const { projectID, processID } = useParams();
   const getModel = async () =>
     authorizedCustomAxios

@@ -27,7 +27,7 @@ const useSetPostProcessing = () => {
 
   return useMutation<string, Error, SetPostProcessingProps>({
     mutationFn: setPostProcessing,
-    onSuccess: (data, props, context) => {
+    onSuccess: (_, props) => {
       queryClient.invalidateQueries([
         "project",
         props.projectID,

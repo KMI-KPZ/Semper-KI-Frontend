@@ -1,13 +1,12 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import {
   OntoNodeProperty,
   OntoNodeType,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 
 const useGetNodeProperties = (nodeType: OntoNodeType) => {
-  const queryClient = useQueryClient();
   const getNodeProperties = async () =>
     authorizedCustomAxios
       .get(

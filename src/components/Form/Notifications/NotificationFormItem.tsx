@@ -21,36 +21,28 @@ const NotificationFormItem = (props: NotificationFormItemProps) => {
   const { user } = useAuthorizedUser();
   const updateUser = useUpdateUser();
   const updateOrga = useUpdateOrganization();
-  const [loadingID, setLoadingID] = React.useState<string | null>(null);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoadingID(e.target.id);
     if (type === "user") {
-      updateUser.mutate(
-        {
-          changes: {
-            notifications: {
-              [user.usertype === UserType.USER ? "user" : "organization"]: {
-                [notification.type]: { [e.target.id]: e.target.checked },
-              },
+      updateUser.mutate({
+        changes: {
+          notifications: {
+            [user.usertype === UserType.USER ? "user" : "organization"]: {
+              [notification.type]: { [e.target.id]: e.target.checked },
             },
           },
         },
-        { onSuccess: () => setLoadingID(null) }
-      );
+      });
     } else {
-      updateOrga.mutate(
-        {
-          changes: {
-            notifications: {
-              organization: {
-                [notification.type]: { [e.target.id]: e.target.checked },
-              },
+      updateOrga.mutate({
+        changes: {
+          notifications: {
+            organization: {
+              [notification.type]: { [e.target.id]: e.target.checked },
             },
           },
         },
-        { onSuccess: () => setLoadingID(null) }
-      );
+      });
     }
   };
 

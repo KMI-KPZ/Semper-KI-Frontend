@@ -1,6 +1,4 @@
-import { IconButton } from "@mui/material";
 import React from "react";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useTranslation } from "react-i18next";
 import ProcessFilterItem from "./Item";

@@ -1,8 +1,7 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 import { Edge, Node } from "@/api/Graph/Querys/useGetPrivateGraph";
-import { Button, Text } from "@component-library/index";
-import logger from "@/hooks/useLogger";
+import { Text } from "@component-library/index";
 
 interface NetworkGraphProps {
   nodes: Node[];
@@ -14,7 +13,6 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
   edges = [],
 }) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
-  const [initialTick, setInitialTick] = useState<boolean>(true);
 
   const width = 800;
   const height = 800;
@@ -100,27 +98,27 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
         labels.attr("x", (d) => d.x as number).attr("y", (d) => d.y as number);
       }
 
-      const reScale = () => {
-        // Calculate the bounding box of the graph after the simulation
-        const xValues = nodes.map((node) => node.x || 0);
-        const yValues = nodes.map((node) => node.y || 0);
-        const minX = Math.min(...xValues);
-        const maxX = Math.max(...xValues);
-        const minY = Math.min(...yValues);
-        const maxY = Math.max(...yValues);
-        const graphWidth = maxX - minX || 1; // Avoid division by zero
-        const graphHeight = maxY - minY || 1; // Avoid division by zero
-        // Calculate scaling factors
-        const scaleX = width / graphWidth;
-        const scaleY = height / graphHeight;
-        const scale = Math.min(scaleX, scaleY) * 0.6; // Apply some padding
-        container.attr(
-          "transform",
-          `translate(${width / 2}, ${height / 2}) scale(${scale}) translate(${
-            -minX - graphWidth / 2
-          }, ${-minY - graphHeight / 2})`
-        );
-      };
+      // const reScale = () => {
+      //   // Calculate the bounding box of the graph after the simulation
+      //   const xValues = nodes.map((node) => node.x || 0);
+      //   const yValues = nodes.map((node) => node.y || 0);
+      //   const minX = Math.min(...xValues);
+      //   const maxX = Math.max(...xValues);
+      //   const minY = Math.min(...yValues);
+      //   const maxY = Math.max(...yValues);
+      //   const graphWidth = maxX - minX || 1; // Avoid division by zero
+      //   const graphHeight = maxY - minY || 1; // Avoid division by zero
+      //   // Calculate scaling factors
+      //   const scaleX = width / graphWidth;
+      //   const scaleY = height / graphHeight;
+      //   const scale = Math.min(scaleX, scaleY) * 0.6; // Apply some padding
+      //   container.attr(
+      //     "transform",
+      //     `translate(${width / 2}, ${height / 2}) scale(${scale}) translate(${
+      //       -minX - graphWidth / 2
+      //     }, ${-minY - graphHeight / 2})`
+      //   );
+      // };
 
       function drag(simulation: d3.Simulation<Node, undefined>) {
         return d3

@@ -10,7 +10,7 @@ const useDeleteUser = () => {
   const deleteUser = async () =>
     authorizedCustomAxios
       .delete(`${process.env.VITE_HTTP_API_URL}/public/profile/user/delete/`)
-      .then((response) => {
+      .then(() => {
         logger("useUser | profileDeleteUser ✅ |");
         navigate("/logout");
       })

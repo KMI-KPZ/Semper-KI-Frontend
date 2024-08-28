@@ -1,8 +1,3 @@
-import {
-  URL_Contact,
-  URL_Datenschutz,
-  URL_Impressum,
-} from "@/config/constants";
 import { Button } from "@component-library/index";
 import { Heading } from "@component-library/index";
 import React from "react";

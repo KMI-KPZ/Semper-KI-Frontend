@@ -5,15 +5,12 @@ import {
   Search,
   Text,
 } from "@component-library/index";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import FlatProcessCard from "./FlatProcessCard";
 import AddIcon from "@mui/icons-material/Add";
 import useCreateProcess from "@/api/Process/Mutations/useCreateProcess";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { FlatProcess } from "@/api/Project/Querys/useGetProject";
-import logger from "@/hooks/useLogger";
 import useSearch from "@/hooks/useSearch";
 
 interface ProjectProcessesProps {

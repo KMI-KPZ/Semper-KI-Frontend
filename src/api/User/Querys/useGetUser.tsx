@@ -10,11 +10,8 @@ import {
   UserNotificationSetting,
   UserNotificationSettingsType,
 } from "@/hooks/useUser";
-import { useTranslation } from "react-i18next";
 
 const useGetUser = (useUserIsLoggedInQuery: UseQueryResult<boolean, Error>) => {
-  const { i18n } = useTranslation();
-
   const fetchUser = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/profile/user/get/`)

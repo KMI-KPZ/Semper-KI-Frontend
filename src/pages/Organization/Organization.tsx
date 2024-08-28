@@ -1,4 +1,4 @@
-import { Container, Divider, LoadingAnimation } from "@component-library/index";
+import { Container, LoadingAnimation } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Invitation from "./components/Invitation";
@@ -10,7 +10,6 @@ import OrganizationInfo from "./Info/Info";
 import OrganizationAddress from "./components/Address";
 import useOrganization from "@/hooks/useOrganization";
 import NotificationForm from "@/components/Form/Notifications/NotificationForm";
-import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import PrioritiesForm from "@/components/Form/Priorities/PrioritiesForm";
 import useGetOrganizationRoles from "@/api/Organization/Querys/useGetOrganizationRoles";
 import useGetOrganizationInvites from "@/api/Organization/Querys/useGetOrganizationInvites";
@@ -21,7 +20,6 @@ const Organization: React.FC<OrganizationViewProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { organization } = useOrganization();
-  const { user } = useAuthorizedUser();
   const rolesQuery = useGetOrganizationRoles();
   const invitesQuery = useGetOrganizationInvites();
 

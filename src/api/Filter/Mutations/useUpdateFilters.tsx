@@ -1,8 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { FilterItemProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Filter/Filter";
-import { AxiosResponse } from "axios";
+import { FilterItemProps } from "@/pages/Process/components/Service/Filter/MaufacturingFilter/Filter";
 
 const useUpdateFilters = () => {
   const queryClient = useQueryClient();

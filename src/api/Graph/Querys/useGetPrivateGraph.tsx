@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export interface Node extends d3.SimulationNodeDatum {
   id: string;
@@ -18,7 +18,6 @@ export interface Graph {
 }
 
 const useGetPrivateGraph = () => {
-  const queryClient = useQueryClient();
   const getGraph = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/private/graph/get/`)

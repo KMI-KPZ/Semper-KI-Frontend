@@ -1,18 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Container, Divider, Heading } from "@component-library/index";
 import {
-  Button,
-  Container,
-  Divider,
-  Heading,
-  Text,
-} from "@component-library/index";
-import {
-  AuthorizedUserProps,
   OrgaNotificationSetting,
   UserNotificationSetting,
-  UserProps,
-  UserType,
 } from "@/hooks/useUser";
 import NotificationFormItem from "./NotificationFormItem";
 

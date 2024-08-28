@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "@component-library/index";
-import { Heading, Text } from "@component-library/index";
+import { Heading } from "@component-library/index";
 import {
   GeneralInput,
   InputLabelProps,
@@ -57,9 +57,7 @@ const ContactForm: React.FC<ContactFormProps> = (props) => {
     .required();
 
   const {
-    reset,
     register,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<ContactFormDataProps>({

@@ -1,7 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 
 interface SerializableNavigator {
   [key: string]: any;
@@ -44,7 +43,7 @@ const useSendUserInfos = () => {
 
   return useMutation<string, Error, void>({
     mutationFn: sendUserInfos,
-    onSuccess: (data, props, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["user"]);
     },
   });

@@ -1,12 +1,10 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
-import useGetFilters from "@/api/Filter/Querys/useGetFilters";
 import useProcess from "@/hooks/Process/useProcess";
 
 const useGetModels = () => {
-  const queryClient = useQueryClient();
   const { filters } = useProcess();
   const getModels = async () =>
     authorizedCustomAxios

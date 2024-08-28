@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import {
   OrgaNotificationSetting,
@@ -49,7 +49,6 @@ export type OrganizationPriorityType =
   | "sustainability";
 
 const useGetOrganization = () => {
-  const queryClient = useQueryClient();
   const getOrganization = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/organizations/get/`)

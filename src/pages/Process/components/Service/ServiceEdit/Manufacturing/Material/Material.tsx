@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { FilterItemProps } from "../../../Filter/MaufacturingFilter/Filter";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetMaterials, {
@@ -15,9 +14,7 @@ import {
 } from "@component-library/index";
 import { ProcessMaterialCard } from "./components/Card";
 import useSetMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useSetMaterial";
-import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
-import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
 import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import useModal from "@/hooks/useModal";
 import ServiceSearch from "../Search/Search";
@@ -25,18 +22,18 @@ import useSearch from "@/hooks/useSearch";
 
 interface Props {}
 
-interface State {
-  modalOpen: boolean;
-  material: MaterialProps | undefined;
-}
+// interface State {
+//   modalOpen: boolean;
+//   material: MaterialProps | undefined;
+// }
 
 export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const {} = props;
-  const [state, setState] = useState<State>({
-    modalOpen: false,
-    material: undefined,
-  });
+  // const [state, setState] = useState<State>({
+  //   modalOpen: false,
+  //   material: undefined,
+  // });
   const [searchText, setSearchText] = useState<string>("");
   const { process } = useManufacturingProcess();
   const { project } = useProject();
@@ -56,16 +53,17 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
   };
 
   const openMaterialView = (material: MaterialProps) => {
-    setState((prevState) => ({ ...prevState, modalOpen: true, material }));
+    const {} = material;
+    // setState((prevState) => ({ ...prevState, modalOpen: true, material }));
   };
 
-  const closeMaterialView = () => {
-    setState((prevState) => ({
-      ...prevState,
-      modalOpen: false,
-      material: undefined,
-    }));
-  };
+  // const closeMaterialView = () => {
+  //   setState((prevState) => ({
+  //     ...prevState,
+  //     modalOpen: false,
+  //     material: undefined,
+  //   }));
+  // };
 
   const handleOnClickButtonSave = () => {
     setMaterial.mutate(
@@ -75,7 +73,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
         materials: selectedMaterials,
       },
       {
-        onSuccess(data, variables, context) {
+        onSuccess() {
           deleteModal("ServiceRoutesManufacturingMaterials");
         },
       }

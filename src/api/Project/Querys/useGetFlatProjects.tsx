@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import useUser, { UserType } from "@/hooks/useUser";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { ProjectDetailsProps } from "./useGetProject";
@@ -42,7 +42,6 @@ export const isFlatProject = (project: any): project is FlatProject => {
 
 const useGetFlatProjects = () => {
   const { user } = useUser();
-  const queryClient = useQueryClient();
   const getFlatProjects = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/project/getFlat/`, {
@@ -51,7 +50,7 @@ const useGetFlatProjects = () => {
       .then((response) => {
         const responseData = response.data;
         const flatProjects: FlatProject[] = responseData.projects.map(
-          (project: any, index: number): FlatProject => ({
+          (project: any): FlatProject => ({
             client: project.client,
             projectID: project.projectID,
             projectStatus: project.projectStatus,

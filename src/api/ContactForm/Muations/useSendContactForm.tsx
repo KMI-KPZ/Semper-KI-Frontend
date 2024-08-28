@@ -1,10 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import {
-  UseMutationResult,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { toast } from "@/hooks/useToast";
 
@@ -16,7 +12,6 @@ export type ContactFormData = {
 };
 
 const useSendContactForm = () => {
-  const queryClient = useQueryClient();
   const { t } = useTranslation();
   const sendContactForm = async (data: ContactFormData) =>
     authorizedCustomAxios

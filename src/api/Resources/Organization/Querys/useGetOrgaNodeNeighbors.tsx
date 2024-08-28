@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import {
   OntoNode,
   OntoNodeType,
@@ -16,7 +16,6 @@ const useGetOrgaNodeNeighbors = ({
   nodeID,
   nodeType,
 }: useGetOrgaNodeNeighborsProps) => {
-  const queryClient = useQueryClient();
   const getOrgaNodeNeighbors = async () =>
     authorizedCustomAxios
       .get(

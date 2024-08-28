@@ -2,11 +2,8 @@ import React, { ChangeEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container } from "@component-library/index";
 import useProcess from "@/hooks/Process/useProcess";
-import { useProject } from "@/hooks/Project/useProject";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
-import { useNavigate } from "react-router-dom";
-import SendIcon from "@mui/icons-material/Send";
 import { ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
 
 interface ProcessTextInputProps {
@@ -17,14 +14,12 @@ const ProcessTextInput: React.FC<ProcessTextInputProps> = (props) => {
   const { origin } = props;
   const { t } = useTranslation();
   const { process } = useProcess();
-  const { project } = useProject();
   const { user } = useAuthorizedUser();
   const [message, setMessage] = useState<string>();
   const updateProcess = useUpdateProcess();
-  const navigate = useNavigate();
 
   const handleOnChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage((prevState) => e.target.value);
+    setMessage(e.target.value);
   };
 
   const handleOnClickButtonSend = () => {
@@ -45,8 +40,8 @@ const ProcessTextInput: React.FC<ProcessTextInputProps> = (props) => {
           },
         },
         {
-          onSuccess(data, variables, context) {
-            setMessage((prevState) => "");
+          onSuccess() {
+            setMessage("");
           },
         }
       );

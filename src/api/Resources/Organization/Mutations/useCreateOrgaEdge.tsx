@@ -24,7 +24,7 @@ const useCreateOrgaEdge = () => {
 
   return useMutation<string, Error, useCreateOrgaEdgeProps>({
     mutationFn: createOrgaEdge,
-    onSuccess: (data, props, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["resources"]);
     },
   });

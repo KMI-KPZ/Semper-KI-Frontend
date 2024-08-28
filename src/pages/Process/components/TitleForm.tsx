@@ -1,16 +1,10 @@
 import { Button, Text } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { Heading } from "@component-library/index";
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import EditIcon from "@mui/icons-material/Edit";
-import CheckIcon from "@mui/icons-material/Check";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { boolean } from "yup";
-import ProjectOwnerGate from "@/components/OwnerGate/OwnerGate";
-import useUpdateProject from "@/api/Project/Mutations/useUpdateProject";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
-import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 interface ProcessTitleFormProps {
@@ -26,7 +20,6 @@ interface FormData {
 const ProcessTitleForm: React.FC<ProcessTitleFormProps> = (props) => {
   const { title, close, processID } = props;
   const { t } = useTranslation();
-  const [state, setState] = useState<string>(title !== undefined ? title : "");
   const updateProcess = useUpdateProcess();
 
   const isNew = title === undefined || title === "";

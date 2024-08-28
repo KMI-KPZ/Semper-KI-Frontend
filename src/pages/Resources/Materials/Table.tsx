@@ -1,17 +1,12 @@
-import Table from "@/components/Table";
 import { Button, Container, LoadingAnimation } from "@component-library/index";
-import { Divider, LoadingSuspense } from "@component-library/index";
-import { Heading, Text } from "@component-library/index";
+import { Divider } from "@component-library/index";
+import { Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { OntoNode } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
-import ResourceTable from "../components/Table";
-
-import useAuthorizedUser from "@/hooks/useAuthorizedUser";
-import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import useGetOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetOrgaNodeNeighbors";
 import useOrganization from "@/hooks/useOrganization";
+import ResourceTable from "../components/Table";
 
 interface ResourcesMaterialsTableProps {}
 
@@ -20,8 +15,6 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
 ) => {
   const {} = props;
   const { t } = useTranslation();
-  const { user } = useAuthorizedUser();
-  // const materials = useGetOrgaNodes("material");
   const { organization } = useOrganization();
   const materials = useGetOrgaNodeNeighbors({
     nodeID: organization.hashedID,

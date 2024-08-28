@@ -1,11 +1,9 @@
 import { Button, Divider, Modal, Search } from "@component-library/index";
-import { Heading, Text } from "@component-library/index";
-import React, { useContext } from "react";
+import { Heading } from "@component-library/index";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
-import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
-import { useProject } from "../../hooks/Project/useProject";
+import useUser, { UserType } from "@/hooks/useUser";
 import { Container } from "@component-library/index";
 import useSearch from "@/hooks/useSearch";
 import useGetAdminFlatProjects from "@/api/Admin/Querys/useGetAdminFlatProjects";
@@ -14,11 +12,11 @@ import useGetFlatProjects, {
 } from "@/api/Project/Querys/useGetFlatProjects";
 import ProjectsTable from "./components/Table";
 import AddIcon from "@mui/icons-material/Add";
-import useCreateProject from "@/api/Project/Mutations/useCreateProject";
 import CreateProjectTitleForm from "./components/TitleForm";
 interface ProjectsProps {}
 
 const Projects: React.FC<ProjectsProps> = (props) => {
+  const {} = props;
   const { t } = useTranslation();
   const { user } = useUser();
   const _flatProjects = useGetFlatProjects();

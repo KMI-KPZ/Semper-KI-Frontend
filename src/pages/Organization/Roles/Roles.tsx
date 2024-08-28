@@ -12,7 +12,6 @@ import useGetOrganizationPermissions, {
   PermissionProps,
   PermissionTypeTranslationType,
 } from "@/api/Organization/Querys/useGetOrganizationPermissions";
-import useOrganization from "../../../hooks/useOrganization";
 import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
 import useGetOrganizationRoles from "@/api/Organization/Querys/useGetOrganizationRoles";
 
@@ -109,7 +108,7 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
         {rolesQuery.data !== undefined && rolesQuery.data.length > 0 ? (
           <>
             <div className="flex w-full flex-col items-center justify-center gap-5 md:hidden">
-              {rolesQuery.data.map((role, index, roles) => (
+              {rolesQuery.data.map((role, index) => (
                 <Fragment key={index}>
                   <OrganizationRolesItem editRole={editRole} role={role} />
                 </Fragment>

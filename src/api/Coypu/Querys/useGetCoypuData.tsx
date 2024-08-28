@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import DOMPurify from "dompurify";
 
 const convertHTML = (_html: string): string => {
@@ -20,12 +20,10 @@ export interface CoypuProps {
 }
 
 const useGetCoypuData = () => {
-  const queryClient = useQueryClient();
   const getCoypuData = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/coypu/`)
       .then((response) => {
-        const responseData = response.data;
         const data: CoypuProps[] = response.data
           .filter((data: any) => data.rawhtml.url !== "")
           .map((data: any) => ({

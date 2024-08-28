@@ -29,7 +29,7 @@ const useDeleteModel = () => {
 
   return useMutation<string, Error, DeleteModelProps>({
     mutationFn: deleteModel,
-    onSuccess: (data, props, context) => {
+    onSuccess: (_, props) => {
       queryClient.invalidateQueries([
         "project",
         props.projectID,

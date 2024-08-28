@@ -1,12 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Container, Heading, LoadingAnimation } from "@component-library/index";
+import { Container, Heading } from "@component-library/index";
 import Collapsible from "@/components/Collapsible/Collapsible";
 import ManufacturingProcessFilter, {
   FilterItemProps,
 } from "./MaufacturingFilter/Filter";
 import useProcess from "@/hooks/Process/useProcess";
-import logger from "@/hooks/useLogger";
 
 interface ProcessFilterProps {}
 

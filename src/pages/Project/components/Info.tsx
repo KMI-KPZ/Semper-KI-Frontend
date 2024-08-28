@@ -1,6 +1,6 @@
 import { Project } from "@/api/Project/Querys/useGetProject";
 import { Button, Container, Modal, Text } from "@component-library/index";
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import Collapsible from "@/components/Collapsible/Collapsible";
 import ProjectTitleForm from "./TitleForm";

@@ -1,10 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useOrganization from "../../../../hooks/useOrganization";
 import {
   getGroupedPermissions,
   getPermissinContextTranslations,
-  sortPermissions,
 } from "../Roles";
 import { LoadingSuspense } from "@component-library/index";
 import OrganizationRolesTableRow from "./TableRow";

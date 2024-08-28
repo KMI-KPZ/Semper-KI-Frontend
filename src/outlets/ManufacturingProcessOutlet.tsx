@@ -2,7 +2,6 @@ import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import { ManufacturingProcessContextProvider } from "@/contexts/ManufacturingProcessContext";
 import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 import { useProject } from "@/hooks/Project/useProject";
-import logger from "@/hooks/useLogger";
 import React, { PropsWithChildren } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 

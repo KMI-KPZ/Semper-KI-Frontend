@@ -1,7 +1,6 @@
 import { Container, PageHeader } from "@component-library/index";
 import { Heading } from "@component-library/index";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes } from "react-router-dom";
 import ResourcesMenu from "./components/Menu";
 import ResourcesOverview from "./Overview/Overview";
@@ -10,7 +9,6 @@ import ResourcesPrintersTable from "./Printers/Table";
 import ResourcesMaterialsTable from "./Materials/Table";
 import ResourcesNode from "./components/Node";
 import OrgaGraph from "./components/OrgaGraph";
-import AddIcon from "@mui/icons-material/Add";
 import ResourcesNodeView from "./components/NodeView";
 import PrivateGraph from "./components/PrivateGraph";
 
@@ -18,7 +16,6 @@ interface ResoucesProps {}
 
 const Resouces: React.FC<ResoucesProps> = (props) => {
   const {} = props;
-  const { t } = useTranslation();
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">

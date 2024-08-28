@@ -1,8 +1,5 @@
-import useGetOrganization, {
-  Organization,
-} from "@/api/Organization/Querys/useGetOrganization";
+import { Organization } from "@/api/Organization/Querys/useGetOrganization";
 import { OrganizationContext } from "@/contexts/OrganisationContext";
-import { UseQueryResult } from "@tanstack/react-query";
 import { useContext } from "react";
 
 interface useOrganizationReturnProps {

@@ -25,7 +25,7 @@ const useUpdateOrgaEdge = () => {
 
   return useMutation<string, Error, useUpdateOrgaEdgeProps>({
     mutationFn: updateOrgaEdge,
-    onSuccess: (data, props, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["resources"]);
     },
   });

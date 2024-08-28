@@ -8,7 +8,6 @@ import {
   LoadingAnimation,
   Text,
 } from "@component-library/index";
-import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { AuthorizedUserProps } from "@/hooks/useUser";
 import CheckIcon from "@mui/icons-material/Check";
 import EditIcon from "@mui/icons-material/Edit";
@@ -16,7 +15,6 @@ import {
   Language,
   app_languages,
 } from "@/components/Menu/components/LanguageMenu";
-import logger from "@/hooks/useLogger";
 import useUpdateUser from "@/api/User/Mutations/useUpdateUser";
 import useSetUserLocal from "@/api/Authentification/Mutations/useSetUserLocal";
 
@@ -26,7 +24,7 @@ interface ProfileLocalsProps {
 
 const ProfileLocals: React.FC<ProfileLocalsProps> = (props) => {
   const { user } = props;
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [edit, setEdit] = React.useState(false);
   const [lngCode, setLngCode] = useState<string | undefined>(
     user.details.locale

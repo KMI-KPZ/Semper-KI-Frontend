@@ -35,7 +35,7 @@ const useSubmitOrgaNode = () => {
 
   return useMutation<string, Error, useSubmitOrgaNodeProps>({
     mutationFn: submitOrgaNode,
-    onSuccess: (data, props, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["resources"]);
     },
   });

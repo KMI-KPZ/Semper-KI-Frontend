@@ -1,10 +1,9 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { RoleProps } from "../Mutations/useCreateRole";
 
 const useGetOrganizationRoles = () => {
-  const queryClient = useQueryClient();
   const getOrganizationRoles = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/organizations/roles/get/`)

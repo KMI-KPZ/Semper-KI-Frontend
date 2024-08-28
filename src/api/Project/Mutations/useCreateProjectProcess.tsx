@@ -21,7 +21,7 @@ const useCreateProjectProcess = () => {
 
   return useMutation<string, Error, string>({
     mutationFn: createProjectProcess,
-    onSuccess: (newProcessID, projectID, contex) => {
+    onSuccess: (newProcessID, projectID) => {
       queryClient.invalidateQueries(["flatProjects"]);
       queryClient.invalidateQueries(["project", projectID]);
       navigate(`/projects/${projectID}/${newProcessID}`);

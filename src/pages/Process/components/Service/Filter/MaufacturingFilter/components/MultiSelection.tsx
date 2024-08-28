@@ -85,13 +85,13 @@ const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
           <div className="f-input-multiselect-options">
             <div
               className="f-input-multiselect-option unselectable"
-              onClick={(e) => toggleAllValues()}
+              onClick={toggleAllValues}
             >
               <input
                 type="checkbox"
                 checked={allChecked}
-                onChange={(e) => toggleAllValues()}
-                onClick={(e) => toggleAllValues()}
+                onChange={toggleAllValues}
+                onClick={toggleAllValues}
               />
               {allChecked
                 ? t(
@@ -108,14 +108,14 @@ const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
               .map((name, index) => (
                 <div
                   className="f-input-multiselect-option unselectable"
-                  onClick={(e) => handleSelectOption(name)}
+                  onClick={() => handleSelectOption(name)}
                   key={index}
                 >
                   <input
                     type="checkbox"
                     checked={values.includes(name)}
-                    onChange={(e) => handleSelectOption(name)}
-                    onClick={(e) => handleSelectOption(name)}
+                    onChange={() => handleSelectOption(name)}
+                    onClick={() => handleSelectOption(name)}
                   />
                   {name}
                 </div>

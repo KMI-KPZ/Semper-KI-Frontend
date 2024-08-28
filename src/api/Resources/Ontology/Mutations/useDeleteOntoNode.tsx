@@ -23,7 +23,7 @@ const useDeleteOntoNode = () => {
 
   return useMutation<string, Error, useDeleteOntoNodeProps>({
     mutationFn: deleteOntoNode,
-    onSuccess: (data, props, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["resources", "onto"]);
     },
   });

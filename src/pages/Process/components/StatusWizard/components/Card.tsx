@@ -1,10 +1,9 @@
 import { Container, Text } from "@component-library/index";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { StatusWizardItem } from "../StatusWizard";
 import { Process } from "@/api/Process/Querys/useGetProcess";
-import logger from "@/hooks/useLogger";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface StatusWizardCardProps {
   process: Process;

@@ -19,7 +19,7 @@ const useDeleteInvite = () => {
 
   return useMutation<string, Error, string>({
     mutationFn: deleteInvite,
-    onSuccess: (data, props, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["organization", "invites"]);
     },
   });

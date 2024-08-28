@@ -16,13 +16,10 @@ import {
   isOntoNodePropertyName,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { ResourcesNodeFormEdges } from "./NodeForm";
-import ClearIcon from "@mui/icons-material/Clear";
 import AddIcon from "@mui/icons-material/Add";
 import { GeneralInput, InputType } from "@component-library/Form/GeneralInput";
-import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import logger from "@/hooks/useLogger";
 
 interface ResourcesPropertyFormProps {
   usePropertyArray: UseFieldArrayReturn<

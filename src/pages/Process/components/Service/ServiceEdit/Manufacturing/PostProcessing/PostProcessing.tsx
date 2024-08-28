@@ -8,7 +8,6 @@ import {
   Modal,
   Text,
 } from "@component-library/index";
-import { FilterItemProps } from "../../../Filter/MaufacturingFilter/Filter";
 import ProcessPostProcessingCard from "./components/Card";
 import useGetPostProcessigns, {
   PostProcessingProps,
@@ -17,7 +16,6 @@ import useSetPostProcessing from "@/api/Service/AdditiveManufacturing/PostProces
 import { useProject } from "@/hooks/Project/useProject";
 import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import { useNavigate, useParams } from "react-router-dom";
-import logger from "@/hooks/useLogger";
 import useModal from "@/hooks/useModal";
 import ServiceSearch from "../Search/Search";
 
@@ -51,7 +49,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
         postProcessings: selectedPostProcessing,
       },
       {
-        onSuccess(data, variables, context) {
+        onSuccess() {
           deleteModal("ServiceRouteManufacturingPostProcessings");
         },
       }
@@ -83,19 +81,6 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
       return true;
     }
     return false;
-  };
-
-  const sortSelectedPostProcessingsFirst = (
-    a: PostProcessingProps,
-    b: PostProcessingProps
-  ) => {
-    if (isPostProcessingSelected(a)) {
-      return -1;
-    }
-    if (isPostProcessingSelected(b)) {
-      return 1;
-    }
-    return 0;
   };
 
   const isPostProcessingSelected = (postProcessing: PostProcessingProps) => {

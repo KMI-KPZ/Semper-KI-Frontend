@@ -1,20 +1,12 @@
-import {
-  Button,
-  Container,
-  Divider,
-  LoadingAnimation,
-} from "@component-library/index";
-import React, { useRef, useState } from "react";
+import { Button, Container, Divider } from "@component-library/index";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import useOrganization from "../../../hooks/useOrganization";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Heading } from "@component-library/index";
-import logger from "@/hooks/useLogger";
 import useCreateInviteLink from "@/api/Organization/Mutations/useCreateInviteLink";
 import useInviteUser from "@/api/Organization/Mutations/useInviteUser";
-import useGetOrganizationRoles from "@/api/Organization/Querys/useGetOrganizationRoles";
 import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import { OrganizationInvite } from "@/api/Organization/Querys/useGetOrganizationInvites";
@@ -26,19 +18,9 @@ interface InvitationProps {
   invites: OrganizationInvite[] | undefined;
 }
 
-type Inputs = {
-  email: string;
-};
-
-type InviteLink = {
-  email: string;
-  link: string;
-};
-
 const Invitation: React.FC<InvitationProps> = (props) => {
   const { roles = [], invites = [] } = props;
   const { t } = useTranslation();
-  const [links, setLinks] = useState<InviteLink[]>([]);
   const [showLoadedIn, setShowLoadedIn] = useState<boolean>(false);
   const createInviteLink = useCreateInviteLink();
   const deleteInvite = useDeleteInvite();
@@ -76,11 +58,7 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   const onSubmitLink = (data: FormData) => {
     setShowLoadedIn(true);
     createInviteLink.mutate(data, {
-      onSuccess(data, variables, context) {
-        setLinks((prevState) => [
-          ...prevState,
-          { email: variables.email, link: data },
-        ]);
+      onSuccess() {
         setShowLoadedIn(false);
         reset();
       },

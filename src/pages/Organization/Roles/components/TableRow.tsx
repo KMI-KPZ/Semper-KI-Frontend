@@ -6,8 +6,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button, LoadingAnimation } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { getGroupedPermissions, sortPermissions } from "../Roles";
-import useOrganization from "../../../../hooks/useOrganization";
 import useDeleteRole from "@/api/Organization/Mutations/useDeleteRole";
 import { PermissionProps } from "@/api/Organization/Querys/useGetOrganizationPermissions";
 import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";

@@ -1,13 +1,9 @@
-import Table from "@/components/Table";
 import { Button, Container, LoadingAnimation } from "@component-library/index";
-import { Divider, LoadingSuspense } from "@component-library/index";
-import { Heading, Text } from "@component-library/index";
+import { Divider } from "@component-library/index";
+import { Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ResourceTable from "../components/Table";
-import useAuthorizedUser from "@/hooks/useAuthorizedUser";
-
-import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import useGetOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetOrgaNodeNeighbors";
 import useOrganization from "@/hooks/useOrganization";
 
@@ -18,8 +14,6 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
 ) => {
   const {} = props;
   const { t } = useTranslation();
-  const { user } = useAuthorizedUser();
-  // const printers = useGetOrgaNodes("printer");
   const { organization } = useOrganization();
   const printers = useGetOrgaNodeNeighbors({
     nodeID: organization.hashedID,

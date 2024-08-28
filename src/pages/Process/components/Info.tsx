@@ -1,14 +1,10 @@
-import { Project } from "@/api/Project/Querys/useGetProject";
 import { Button, Container, Modal, Text } from "@component-library/index";
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import Collapsible from "@/components/Collapsible/Collapsible";
 import ProcessMenu from "@/components/Process/Menu";
 import ProcessTitleForm from "./TitleForm";
-import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import EditIcon from "@mui/icons-material/Edit";
 
 interface ProcessInfoProps {

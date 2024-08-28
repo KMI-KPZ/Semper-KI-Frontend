@@ -1,11 +1,10 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import useUser, { UserType } from "@/hooks/useUser";
 import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 
 const useGetAdminFlatProjects = () => {
-  const queryClient = useQueryClient();
   const { user } = useUser();
   const getAdminFlatProjects = async () =>
     authorizedCustomAxios

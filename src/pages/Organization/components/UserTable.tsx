@@ -1,15 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button, Container, Divider } from "@component-library/index";
-import useOrganization from "../../../hooks/useOrganization";
 import { LoadingSuspense } from "@component-library/index";
 import CheckIcon from "@mui/icons-material/Check";
 import { Heading } from "@component-library/index";
-import { AppContext } from "@/pages/App/App";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { UserContext } from "@/contexts/UserContextProvider";
 import useUser, { UserType } from "@/hooks/useUser";
 import useAssignRole from "@/api/Organization/Mutations/useAssignRole";
 import useRemoveRole from "@/api/Organization/Mutations/useRemoveRole";
@@ -19,7 +16,6 @@ import useGetOrganizationUsers, {
 } from "@/api/Organization/Querys/useGetOrganizationUsers";
 import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
 import useGetOrganizationRoles from "@/api/Organization/Querys/useGetOrganizationRoles";
-import CloseIcon from "@mui/icons-material/Close";
 
 interface OrganizationTableProps {}
 

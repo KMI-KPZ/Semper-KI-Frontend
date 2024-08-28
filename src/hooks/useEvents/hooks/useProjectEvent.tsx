@@ -6,14 +6,10 @@ import {
   ProjectEventType,
   ProcessEventItem,
 } from "@/pages/App/types";
-import { splitArray, splitFindArray } from "@/services/utils";
-import { Dispatch, SetStateAction, useContext } from "react";
+import { Dispatch, SetStateAction } from "react";
 import logger from "@/hooks/useLogger";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import useUser, { UserDetailsProps, UserType } from "@/hooks/useUser";
-import { AppContext } from "@/pages/App/App";
-import { UserContext } from "@/contexts/UserContextProvider";
 import { toast } from "@/hooks/useToast";
 
 export const getProjectEventAmount = (

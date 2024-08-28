@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import useUser, { UserType } from "@/hooks/useUser";
 import { useNavigate } from "react-router-dom";
-import { useProject } from "./useProject";
 import { useTranslation } from "react-i18next";
 import { externalStatusButtonData } from "./externalStatusButtonData";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -111,9 +110,8 @@ export interface StatusButtonProcessProps extends StatusButtonProps {
 
 const useStatusButtons = (): UseStatusButtonsReturnProps => {
   const { user } = useUser();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
-  const { project } = useProject();
   const sendProject = useSendProject();
   const verifyProject = useVerifyProject();
   const updateProcess = useUpdateProcess();
@@ -213,7 +211,6 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
       "FORWARD-TO-COMPLETED",
       "FORWARD-TO-DISPUTE",
     ];
-    const isValidStatusButtonTitle = title as StatusButtonTitleType;
     return validStatusButtonTitles.includes(title as StatusButtonTitleType)
       ? t(
           `Projects.Project.hooks.useStatusButtons.${

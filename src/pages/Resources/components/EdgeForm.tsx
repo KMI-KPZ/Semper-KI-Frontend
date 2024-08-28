@@ -45,7 +45,7 @@ interface ResourcesEdgeFormItem
 }
 
 const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
-  const { nodeType, useEdgeArray, register } = props;
+  const { nodeType, useEdgeArray } = props;
   const { t } = useTranslation();
   const nodes = useGetOrgaNodes(nodeType);
   const { organization } = useOrganization();
@@ -57,7 +57,6 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<OntoNode>();
   const [paginationAll, setPaginationAll] = React.useState<number>(5);
-  const [paginationSelected, setPaginationSelected] = React.useState<number>(5);
 
   const {
     getSortIcon: getSortIconOwn,
@@ -101,8 +100,6 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
           )
           .filter((node) => filterDataBySearchInput(node))
           .sort(sortItemsAll);
-
-  const selectdEdges = fields;
 
   return (
     <Container width="full" direction="col" className="card gap-0">

@@ -107,7 +107,7 @@ const ProcessFilterItem: React.FC<Props> = (props) => {
     }
   };
 
-  const handleChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCheckbox = () => {
     setFilterItem({
       ...filterItem,
       isChecked: !filterItem.isChecked,

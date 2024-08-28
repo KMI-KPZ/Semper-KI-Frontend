@@ -1,11 +1,8 @@
-import { Button, Container, Text } from "@component-library/index";
+import { Button, Text } from "@component-library/index";
 import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { twMerge } from "tailwind-merge";
-import { use } from "i18next";
-import logger from "@/hooks/useLogger";
-import { fabClasses } from "@mui/material";
 
 interface CollapsibleProps {
   className?: string;
@@ -25,7 +22,6 @@ const Collapsible: React.FC<PropsWithChildren<CollapsibleProps>> = (props) => {
     setExpand: setOutsideExpand,
     initialOpen = false,
     showButton = false,
-    logName,
     animation = true,
   } = props;
   const { t } = useTranslation();
@@ -33,19 +29,6 @@ const Collapsible: React.FC<PropsWithChildren<CollapsibleProps>> = (props) => {
   const [localExpand, setLocalExpand] = useState<boolean>(initialOpen);
 
   const expand = outsideExpand !== undefined ? outsideExpand : localExpand;
-
-  // if (logName !== undefined)
-  //   logger(
-  //     logName,
-  //     "expand",
-  //     expand,
-  //     "outsideExpand",
-  //     outsideExpand,
-  //     "localExpand",
-  //     localExpand,
-  //     "initialOpen",
-  //     initialOpen
-  //   );
 
   const toggleExpand = (expand: boolean) => {
     if (setOutsideExpand !== undefined) {

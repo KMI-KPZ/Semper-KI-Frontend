@@ -19,7 +19,7 @@ const useDeleteOrgaEdge = () => {
 
   return useMutation<string, Error, string>({
     mutationFn: deleteOrgaEdge,
-    onSuccess: (data, props, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["resources"]);
     },
   });

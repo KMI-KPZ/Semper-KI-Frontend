@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export interface OrganizationInvite {
   id: string;
@@ -17,7 +17,6 @@ export interface OrganizationInvite {
 }
 
 const useGetOrganizationInvites = () => {
-  const queryClient = useQueryClient();
   const getOrganizationInvites = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/organizations/invites/get/`)

@@ -26,7 +26,7 @@ const useUpdateRole = () => {
 
   return useMutation<void, Error, UpdateRoleProps>({
     mutationFn: updateRole,
-    onSuccess(data, variables, context) {
+    onSuccess(_, variables) {
       queryClient.invalidateQueries([
         "organization",
         "roles",

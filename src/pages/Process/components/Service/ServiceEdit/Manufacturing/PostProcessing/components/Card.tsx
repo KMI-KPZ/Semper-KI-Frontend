@@ -1,17 +1,8 @@
-import {
-  Container,
-  Heading,
-  LoadingAnimation,
-  Text,
-} from "@component-library/index";
-import useProcess from "@/hooks/Process/useProcess";
-import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
-import useSetPostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useSetPostProcessing";
+import { Container, Heading } from "@component-library/index";
 import { Divider } from "@mui/material";
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
-import { useProject } from "@/hooks/Project/useProject";
 import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
@@ -27,16 +18,9 @@ interface Props<Item> {
 const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
   props: Props<Item>
 ) => {
-  const { item, openItemView, children, selected } = props;
+  const { item, children, selected } = props;
 
   const { t } = useTranslation();
-
-  const handleOnClickCard = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    openItemView(item);
-  };
 
   return (
     <Container

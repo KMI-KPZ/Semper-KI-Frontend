@@ -1,15 +1,11 @@
 import React, { Fragment, ReactNode } from "react";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import CheckIcon from "@mui/icons-material/Check";
 import FactoryIcon from "@mui/icons-material/Factory";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import EmailIcon from "@mui/icons-material/Email";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import StatusItem from "./components/Item";
 import StatusItemConnector from "./components/ItemConnector";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
-import DescriptionIcon from "@mui/icons-material/Description";
 import ModeIcon from "@mui/icons-material/Mode";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
@@ -103,8 +99,7 @@ const statusData: StatusData[] = [
 ];
 
 const StatusBar: React.FC<StatusViewProps> = (props) => {
-  const { serviceType, status, processID, projectID, statusCountAction } =
-    props;
+  const { status, processID, projectID, statusCountAction } = props;
 
   const getItems = (): StatusData[] => {
     if (status < ProcessStatus.REQUEST_COMPLETED)

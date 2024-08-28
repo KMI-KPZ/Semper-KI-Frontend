@@ -1,14 +1,8 @@
-import {
-  ManufactoringProcessProps,
-  Process,
-  ProcessStatus,
-} from "@/api/Process/Querys/useGetProcess";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessContainer from "@/components/Process/Container";
-import ProcessMenu from "@/components/Process/Menu";
 import {
   Button,
   Container,
-  Divider,
   Heading,
   LoadingAnimation,
   Modal,
@@ -16,13 +10,11 @@ import {
 } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import ProcessStatusButtons from "../StatusButtons";
 import { UserAddressProps } from "@/hooks/useUser";
 import ProcessContractorList from "./components/ContractorList";
 import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 import ContractorCard from "./components/ContractorCard";
 import ContractorSelectionAddressCard from "./components/AddressCard";
-import ProcessHeader from "@/components/Process/Header";
 import useGetContractors from "@/api/Process/Querys/useGetContractors";
 
 interface ProcessContractorSelectionProps {}

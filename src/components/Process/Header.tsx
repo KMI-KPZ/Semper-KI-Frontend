@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from "react";
-import { useTranslation } from "react-i18next";
 import ProcessMenu from "./Menu";
 import { Container, Divider, Heading } from "@component-library/index";
 

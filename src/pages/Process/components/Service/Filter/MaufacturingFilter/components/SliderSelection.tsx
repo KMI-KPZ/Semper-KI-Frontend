@@ -59,6 +59,7 @@ const ProcessFilterSliderSelection: React.FC<Props> = (props) => {
   }, [value, unit]);
 
   const handleChangeSlider = (event: Event, newValue: number | number[]) => {
+    const {} = event;
     setValue(newValue as number[]);
   };
 

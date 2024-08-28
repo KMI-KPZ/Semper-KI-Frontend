@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { ResourcesNodeFormEdge } from "@/pages/Resources/components/NodeForm";
 
 export type OntoNodeType =
@@ -114,7 +114,6 @@ export const isOntoNodePropertyName = (
 };
 
 const useGetOntoNodes = (nodeType: OntoNodeType) => {
-  const queryClient = useQueryClient();
   const getOntoNodes = async () =>
     authorizedCustomAxios
       .get(

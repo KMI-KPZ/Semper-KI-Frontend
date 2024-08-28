@@ -1,9 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Divider, Text } from "@component-library/index";
+import { Container, Divider, Text } from "@component-library/index";
 import { Heading } from "@component-library/index";
-import { useNavigate } from "react-router-dom";
-import useService from "@/hooks/useService";
 import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 import {
   OntoNodePropertyName,
@@ -19,26 +17,9 @@ interface Props {
 export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
   props
 ) => {
-  const { material, openMaterialView, children, selected } = props;
+  const { material, children, selected } = props;
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const { updatedService } = useService();
 
-  const handleOnClickSelect = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
-    navigate("../postprocessing");
-    updatedService({ material });
-  };
-
-  const handleOnClickCard = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    openMaterialView(material);
-  };
   return (
     <Container
       className={`w-fit  gap-0 overflow-clip rounded-xl border-2 bg-white ${

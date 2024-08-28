@@ -2,12 +2,10 @@ import { Button } from "@component-library/index";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import TextInput from "../../../component-library/Form/Inputs/TextInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useUser, { UserAddressProps } from "@/hooks/useUser";
+import { UserAddressProps } from "@/hooks/useUser";
 import { Heading, Text } from "@component-library/index";
-import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useGeneralInput from "@component-library/Form/hooks/useGeneralInput";
 import {
   GeneralInput,

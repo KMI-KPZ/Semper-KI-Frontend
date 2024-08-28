@@ -1,12 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Button,
-  Container,
-  Divider,
-  Heading,
-  Text,
-} from "@component-library/index";
+import { Button, Container, Heading, Text } from "@component-library/index";
 import ProcessFileRow from "./ProcessFileRow";
 import DownloadIcon from "@mui/icons-material/Download";
 import FileUploadIcon from "@mui/icons-material/FileUpload";

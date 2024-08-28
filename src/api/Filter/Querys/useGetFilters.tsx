@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import _FilterItems from "@/hooks/Data/FilterQuestions.json";
 import { FilterItemProps } from "@/pages/Process/components/Service/Filter/MaufacturingFilter/Filter";
 const FilterItems = _FilterItems as FilterItemProps[];
@@ -29,7 +29,6 @@ export enum FilterCategoryType {
 }
 
 const useGetFilters = () => {
-  const queryClient = useQueryClient();
   const getFilters = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/getFilters/`)

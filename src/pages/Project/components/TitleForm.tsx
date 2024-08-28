@@ -3,10 +3,8 @@ import { Container } from "@component-library/index";
 import { Heading } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { boolean } from "yup";
 import ProjectOwnerGate from "@/components/OwnerGate/OwnerGate";
 import useUpdateProject from "@/api/Project/Mutations/useUpdateProject";
 
@@ -49,7 +47,7 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
   const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    setState((prevState) => e.target.value);
+    setState(() => e.target.value);
   };
 
   const handelOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {

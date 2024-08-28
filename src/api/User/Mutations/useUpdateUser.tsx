@@ -61,7 +61,7 @@ const useUpdateUser = () => {
 
   return useMutation<string, Error, UpdateUser>({
     mutationFn: updateUser,
-    onSuccess: (data, props, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["user"]);
     },
   });

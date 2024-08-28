@@ -29,7 +29,7 @@ const useCreateOrgaNode = () => {
 
   return useMutation<OntoNode, Error, useCreateOrgaNodeProps>({
     mutationFn: createOrgaNode,
-    onSuccess: (data, props, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["resources"]);
     },
   });

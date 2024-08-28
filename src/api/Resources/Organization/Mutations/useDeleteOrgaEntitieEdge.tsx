@@ -31,7 +31,7 @@ const useDeleteOrgaEntitieEdge = () => {
 
   return useMutation<string, Error, useDeleteOrgaEntitieEdgeProps>({
     mutationFn: deleteOrgaEntitieEdge,
-    onSuccess: (data, props, context) => {
+    onSuccess: (_, props) => {
       if (
         props.invalidate === undefined ||
         (props.invalidate !== undefined && props.invalidate === false)

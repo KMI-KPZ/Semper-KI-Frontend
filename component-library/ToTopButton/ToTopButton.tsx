@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { Container } from "@component-library/index";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
@@ -7,7 +6,6 @@ interface ToTopButtonProps {}
 
 const ToTopButton: React.FC<ToTopButtonProps> = (props) => {
   const {} = props;
-  const { t } = useTranslation();
 
   const [scrolled, setScrolled] = React.useState(false);
 

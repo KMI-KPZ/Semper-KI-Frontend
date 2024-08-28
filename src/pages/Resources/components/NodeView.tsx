@@ -1,7 +1,6 @@
-import React, { Children, PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 import {
-  Button,
   Container,
   Heading,
   LoadingAnimation,

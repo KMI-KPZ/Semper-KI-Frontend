@@ -25,7 +25,7 @@ const useCreateOntoEdge = () => {
 
   return useMutation<string, Error, useCreateOntoEdgeProps>({
     mutationFn: createOntoEdge,
-    onSuccess: (data, props, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["resources", "onto"]);
     },
   });

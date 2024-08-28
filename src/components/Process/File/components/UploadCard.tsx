@@ -95,7 +95,7 @@ const ProcessUploadCard: React.FC<ProcessUploadCardProps> = (props) => {
         {subTitle}
       </a>
       <input
-        // accept={dataTypes.map((type: string) => type).join(",")}
+        accept={dataTypes.map((type: string) => type).join(",")}
         type="file"
         ref={hiddenFileInput}
         onChange={handleChangeHiddenInput}

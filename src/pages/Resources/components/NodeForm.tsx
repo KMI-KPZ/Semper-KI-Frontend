@@ -9,7 +9,7 @@ import {
   allOntoNodeTypes,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { useFieldArray, useForm } from "react-hook-form";
-import { GeneralInput, InputType } from "@component-library/Form/GeneralInput";
+import { GeneralInput } from "@component-library/Form/GeneralInput";
 import { useNavigate } from "react-router-dom";
 import useCreateOrgaNode from "@/api/Resources/Organization/Mutations/useCreateOrgaNode";
 import useUpdateOrgaNode from "@/api/Resources/Organization/Mutations/useUpdateOrgaNode";
@@ -18,7 +18,6 @@ import ResourcesPropertyForm from "./PropertyForm";
 import ResourcesNodeDraft from "./NodeDraft";
 import useCreateOrgaEntitieEdge from "@/api/Resources/Organization/Mutations/useCreateOrgaEntitieEdge";
 import useDeleteOrgaEntitieEdge from "@/api/Resources/Organization/Mutations/useDeleteOrgaEntitieEdge";
-import logger from "@/hooks/useLogger";
 import useSubmitOrgaNode from "@/api/Resources/Organization/Mutations/useSubmitOrgaNode";
 
 interface ResourcesNodePropsForm {
@@ -48,7 +47,6 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   const createOrgaEntitieEdge = useCreateOrgaEntitieEdge();
   const deleteOrgaEntitieEdge = useDeleteOrgaEntitieEdge();
   const submitOrgaNodeForm = useSubmitOrgaNode();
-  const [array, setArray] = React.useState<string[]>([]);
 
   const navigate = useNavigate();
 
@@ -95,15 +93,9 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   //     .required(),
   // });
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    reset,
-    watch,
-
-    formState: { errors },
-  } = useForm<(OntoNode | OntoNodeNew) & ResourcesNodeFormEdges>({
+  const { register, handleSubmit, control, reset, watch } = useForm<
+    (OntoNode | OntoNodeNew) & ResourcesNodeFormEdges
+  >({
     defaultValues:
       node === undefined ? { nodeType: nodeType, edges } : { ...node, edges },
   });
@@ -138,7 +130,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
         edges: { create: newEdges, delete: deleteEdges },
       },
       {
-        onSuccess(data, variables, context) {
+        onSuccess() {
           navigate("..");
         },
       }

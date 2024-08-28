@@ -24,7 +24,7 @@ const useDeleteOntoEdge = () => {
 
   return useMutation<string, Error, useDeleteOntoEdgeProps>({
     mutationFn: deleteOntoEdge,
-    onSuccess: (data, props, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["resources", "onto"]);
     },
   });

@@ -4,42 +4,22 @@ import { useTranslation } from "react-i18next";
 import { Container } from "@component-library/index";
 import Hero from "@images/Hero_16_9.png";
 import HomeContainer from "../components/Container";
-import SemperKI from "@images/Semper-KI.png";
-import WirMachen3DDruck from "@images/Wir-machen-3D-Druck.png";
-import ButtonIcon from "@images/OnButton.png";
 import SemperLogo from "@images/Logo-Semper.png";
 import { ContentBox } from "@component-library/index";
-import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
-import LoginIcon from "@mui/icons-material/Login";
 import HomeImgCarousel from "./components/ImgCarousel";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@component-library/index";
 import BMWKdeURL from "@images/BMWK_de.png";
 import BMWKenURL from "@images/BMWE_en.png";
 import LaunchIcon from "@mui/icons-material/Launch";
-import PersonIcon from "@mui/icons-material/Person";
-import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
-import { useProject } from "@/hooks/Project/useProject";
-import useCreateProject from "@/api/Project/Mutations/useCreateProject";
-import useLogin from "@/api/Authentification/Querys/useLogin";
 
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props) => {
   const {} = props;
   const { t, i18n } = useTranslation();
-  const login = useLogin();
-  const createProject = useCreateProject();
   const navigate = useNavigate();
-
-  const handleOnClickButton = () => {
-    login.mutate({ userType: "user", register: true });
-  };
-
-  const handleOnClickButtonDemonstrator = () => {
-    createProject.mutate("test");
-  };
 
   return (
     <div

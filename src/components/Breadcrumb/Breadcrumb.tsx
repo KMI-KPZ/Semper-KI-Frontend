@@ -1,9 +1,8 @@
 import { Button } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
-import logger from "@/hooks/useLogger";
 
 interface Props {}
 
@@ -121,8 +120,7 @@ export function isDataNaviagtionTranlationType(
 }
 
 export const Breadcrumb: React.FC<Props> = () => {
-  const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { pathname } = useLocation();
 
   const generateBreadcrumbItems = (): BreadcrumbItem[] => {

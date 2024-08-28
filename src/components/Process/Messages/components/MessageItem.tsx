@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { ChatMessageProps } from "@/api/Process/Querys/useGetProcess";
 import { Container } from "@component-library/index";
@@ -11,7 +10,6 @@ interface ProcessMessageItemProps {
 
 const ProcessMessageItem: React.FC<ProcessMessageItemProps> = (props) => {
   const { message, sameAuthor = false } = props;
-  const { t } = useTranslation();
   const { user } = useAuthorizedUser();
 
   return (

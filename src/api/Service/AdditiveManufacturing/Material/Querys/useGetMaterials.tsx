@@ -1,7 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import useGetFilters from "@/api/Filter/Querys/useGetFilters";
+import { useQuery } from "@tanstack/react-query";
 import { OntoNodeProperty } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import useProcess from "@/hooks/Process/useProcess";
 
@@ -13,7 +12,6 @@ export interface MaterialProps {
 }
 
 const useGetMaterials = () => {
-  const queryClient = useQueryClient();
   const { filters } = useProcess();
   const getMaterials = async () =>
     authorizedCustomAxios

@@ -43,7 +43,7 @@ const MenuLanguageMenu: React.FC<MenuLanguageMenuProps> = (props) => {
     closeLanguageMenu();
     if (i18n.language !== code)
       setUserLocal.mutate(code, {
-        onSuccess(data, variables, context) {
+        onSuccess(_, variables) {
           i18n.changeLanguage(variables);
         },
       });
@@ -81,7 +81,7 @@ const MenuLanguageMenu: React.FC<MenuLanguageMenuProps> = (props) => {
               data-testid="dropdown"
             >
               {app_languages
-                .filter(({ code, country_code }) => code !== i18n.language)
+                .filter(({ code }) => code !== i18n.language)
                 .map(({ code, country_code }: Language, index) => (
                   <Button
                     title={t(

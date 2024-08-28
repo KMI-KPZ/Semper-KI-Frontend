@@ -14,8 +14,7 @@ interface LoadingAnimationProps {
 }
 
 export const LoadingAnimation: React.FC<LoadingAnimationProps> = (props) => {
-  const { color, text, className, variant = "semper" } = props;
-  const { t } = useTranslation();
+  const { text, className, variant = "semper" } = props;
   const [state, setState] = useState<number>(0);
 
   useEffect(() => {
@@ -26,6 +25,7 @@ export const LoadingAnimation: React.FC<LoadingAnimationProps> = (props) => {
 
       return () => clearInterval(intervalId);
     }
+    return;
   }, []);
 
   if (text)

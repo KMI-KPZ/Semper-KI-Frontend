@@ -1,7 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const useSetUserLocal = () => {
@@ -23,7 +22,7 @@ const useSetUserLocal = () => {
 
   return useMutation<string, Error, string>({
     mutationFn: setUserLocal,
-    onSuccess: (data, props, context) => {
+    onSuccess: (_, props) => {
       i18n.changeLanguage(props);
       queryClient.invalidateQueries(["user"]);
     },

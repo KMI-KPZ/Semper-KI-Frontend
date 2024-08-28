@@ -1,18 +1,14 @@
-import { Header } from "@/components/Header";
 import {
   Button,
   Container,
   Heading,
   LoadingAnimation,
-  Modal,
-  Text,
 } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProjectInfo from "./components/Info";
 import useGetProject from "@/api/Project/Querys/useGetProject";
 import ProjectProcesses from "./components/Processes";
-import ProjectTitleForm from "./components/TitleForm";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 interface ProjectPageProps {}

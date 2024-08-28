@@ -1,4 +1,3 @@
-import React from "react";
 import { render } from "@test/render";
 import { PageHeader } from "./PageHeader";
 

@@ -2,7 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Container, LoadingAnimation } from "@component-library/index";
 import {
-  OntoNode,
   OntoNodeType,
   parseOntoNodesToEdges,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
@@ -10,7 +9,6 @@ import useGetNodeProperties from "@/api/Graph/Querys/useGetNodeProperties";
 import ResourcesNodeForm from "./NodeForm";
 import useGetOrgaNode from "@/api/Resources/Organization/Querys/useGetOrgaNode";
 import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetAllOrgaNodeNeighbors";
-import logger from "@/hooks/useLogger";
 
 interface ResourcesNodeProps {
   type: "edit" | "create" | "variant";

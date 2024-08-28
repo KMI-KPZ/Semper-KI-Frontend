@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, createContext } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
-import { Button, Container, LoadingAnimation } from "@component-library/index";
+import { Button, Container } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import { UseQueryResult } from "@tanstack/react-query";
 

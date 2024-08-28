@@ -10,18 +10,14 @@ import {
 } from "@component-library/index";
 import {
   OntoNode,
-  OntoNodeNew,
   OntoNodeType,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
-import { ResourcesNodeFormEdges } from "./NodeForm";
-import { UseFormReset } from "react-hook-form";
 import useOrganization from "@/hooks/useOrganization";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import Collapsible from "@/components/Collapsible/Collapsible";
 import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
-import { Navigate, useNavigate } from "react-router-dom";
-import logger from "@/hooks/useLogger";
+import { useNavigate } from "react-router-dom";
 import ResourcesNodeView from "./NodeView";
 import useModal from "@/hooks/useModal";
 
@@ -32,7 +28,7 @@ interface ResourcesNodeDraftProps {
 }
 
 const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
-  const { nodeType, setFormToDraft, nodeAlreadyFilled } = props;
+  const { nodeType, setFormToDraft } = props;
   const { t } = useTranslation();
   const nodes = useGetOrgaNodes(nodeType);
   const { organization } = useOrganization();

@@ -1,14 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import CloseIcon from "@mui/icons-material/Close";
 import { Button, Container } from "@component-library/index";
 import ProcessFilterCard from "./components/Card";
-import { AppContext } from "@/pages/App/App";
-import { Heading } from "@component-library/index";
-import useBodyScroll from "@/hooks/useBodyScroll";
-import logger from "@/hooks/useLogger";
-import useProcess from "@/hooks/Process/useProcess";
-
 interface Props {
   filters: FilterItemProps[];
   applyFilters(filters: FilterItemProps[]): void;
@@ -172,13 +165,11 @@ const ManufacturingProcessFilter: React.FC<Props> = (props) => {
       ...prevState,
       categoryList: [
         ...prevState.categoryList.filter(
-          (category: CategoryProps, categoryIndex: number) =>
-            categoryIndex < index
+          (_, categoryIndex: number) => categoryIndex < index
         ),
         { title: category.title, open: !category.open },
         ...prevState.categoryList.filter(
-          (category: CategoryProps, categoryIndex: number) =>
-            categoryIndex > index
+          (_, categoryIndex: number) => categoryIndex > index
         ),
       ],
     }));

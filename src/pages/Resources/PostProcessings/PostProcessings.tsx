@@ -8,12 +8,8 @@ import {
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ResourceTable from "../components/Table";
-
-import useAuthorizedUser from "@/hooks/useAuthorizedUser";
-import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import useGetOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetOrgaNodeNeighbors";
 import useOrganization from "@/hooks/useOrganization";
-import logger from "@/hooks/useLogger";
 
 interface ResourcesPostProcessingsProps {}
 
@@ -22,8 +18,6 @@ const ResourcesPostProcessings: React.FC<ResourcesPostProcessingsProps> = (
 ) => {
   const {} = props;
   const { t } = useTranslation();
-  const { user } = useAuthorizedUser();
-  // const additionalrequirements2 = useGetOrgaNodes("additionalRequirement");
   const { organization } = useOrganization();
   const additionalrequirements = useGetOrgaNodeNeighbors({
     nodeID: organization.hashedID,

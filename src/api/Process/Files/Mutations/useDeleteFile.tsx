@@ -1,8 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
-import { SingleProcessMutationProps } from "../../types";
 import { useProject } from "@/hooks/Project/useProject";
 import useProcess from "@/hooks/Process/useProcess";
 

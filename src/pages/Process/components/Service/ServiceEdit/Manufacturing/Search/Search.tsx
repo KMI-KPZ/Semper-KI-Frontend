@@ -1,11 +1,5 @@
 import SearchIcon from "@mui/icons-material/Search";
-import {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface ServiceSearchProps {

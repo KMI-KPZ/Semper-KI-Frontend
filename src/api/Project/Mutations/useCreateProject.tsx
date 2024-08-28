@@ -1,10 +1,9 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import useCreateProjectProcess from "./useCreateProjectProcess";
 
 const useCreateProject = () => {
-  const queryClient = useQueryClient();
   const createProjectProcess = useCreateProjectProcess();
 
   const createProject = async (title: string) =>
@@ -22,7 +21,7 @@ const useCreateProject = () => {
 
   return useMutation<string, Error, string>({
     mutationFn: createProject,
-    onSuccess: (projectID, variables, context) => {
+    onSuccess: (projectID) => {
       createProjectProcess.mutate(projectID);
     },
   });

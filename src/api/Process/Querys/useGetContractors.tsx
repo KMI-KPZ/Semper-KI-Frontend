@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export interface ContractorProps {
   name: string;
@@ -11,7 +11,6 @@ export interface ContractorProps {
 }
 
 const useGetContractors = (processID: string) => {
-  const queryClient = useQueryClient();
   const getContractors = async () =>
     authorizedCustomAxios
       .get(

@@ -3,8 +3,6 @@ import { Navigate, Outlet, useParams } from "react-router-dom";
 import { LoadingAnimation } from "@component-library/index";
 import useGetProcess from "@/api/Process/Querys/useGetProcess";
 import ProcessContextProvider from "@/contexts/ProcessContext";
-import useGetFilters from "@/api/Filter/Querys/useGetFilters";
-import { FilterSharp } from "@mui/icons-material";
 import { FilterItemProps } from "@/pages/Process/components/Service/Filter/MaufacturingFilter/Filter";
 import _FilterItems from "@/hooks/Data/FilterQuestions.json";
 const FilterItems = _FilterItems as FilterItemProps[];

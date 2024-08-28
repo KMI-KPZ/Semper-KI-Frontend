@@ -21,7 +21,7 @@ const useCreateOntoNode = () => {
 
   return useMutation<string, Error, OntoNode>({
     mutationFn: createOntoNode,
-    onSuccess: (data, props, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["resources", "onto"]);
     },
   });

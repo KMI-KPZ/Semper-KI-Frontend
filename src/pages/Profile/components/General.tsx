@@ -8,16 +8,12 @@ import {
   LoadingAnimation,
   Text,
 } from "@component-library/index";
-import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
-import { preProcessFile } from "typescript";
-import CheckIcon from "@mui/icons-material/Check";
-import EditIcon from "@mui/icons-material/Edit";
+import { AuthorizedUserProps, UserType } from "@/hooks/useUser";
 import TextInput from "@component-library/Form/Inputs/TextInput";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useUpdateUser from "@/api/User/Mutations/useUpdateUser";
-import logger from "@/hooks/useLogger";
 
 interface ProfileGeneralProps {
   user: AuthorizedUserProps;

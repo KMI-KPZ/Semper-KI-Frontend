@@ -1,5 +1,5 @@
 import { Organization } from "@/api/Organization/Querys/useGetOrganization";
-import React, { PropsWithChildren, RefObject, useState } from "react";
+import React, { PropsWithChildren } from "react";
 
 interface OrganizationContextProviderProps {
   organization: Organization;

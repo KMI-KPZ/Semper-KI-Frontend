@@ -1,9 +1,4 @@
-import {
-  DefinedProcess,
-  ManufactoringProcessProps,
-  Process,
-} from "@/api/Process/Querys/useGetProcess";
-
+import { Process } from "@/api/Process/Querys/useGetProcess";
 import {
   Button,
   Container,
@@ -47,7 +42,7 @@ const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
         },
       },
       {
-        onSuccess(data, variables, context) {
+        onSuccess() {
           closeModal();
         },
       }

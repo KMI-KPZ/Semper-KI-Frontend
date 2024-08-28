@@ -1,4 +1,3 @@
-import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { UserAddressProps } from "@/hooks/useUser";
 import {
   Button,
@@ -30,9 +29,6 @@ const AddressCard: React.FC<PropsWithChildren<AddressCardProps>> = (props) => {
   const { t } = useTranslation();
 
   const handleOnClickCheckbox = () => {
-    select?.handleOnClickCard(address);
-  };
-  const handleOnClickLabel = () => {
     select?.handleOnClickCard(address);
   };
 

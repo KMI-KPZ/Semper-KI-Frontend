@@ -1,15 +1,12 @@
-import { ReactNode, useContext, useEffect, useRef, useState } from "react";
+import { ReactNode, useRef } from "react";
 import { Button } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import SaveIcon from "@mui/icons-material/Save";
-import { EventContext } from "@/contexts/EventContextProvider";
-import { PermissionContext } from "@/contexts/PermissionContextProvider";
 import { LoadingAnimation, LoadingSuspense } from "@component-library/index";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import usePermissions from "@/hooks/usePermissions";
 import useEvents from "@/hooks/useEvents/useEvents";
 import logger from "@/hooks/useLogger";
 import ExampleForm from "@/components/Form/ExampleForm";
@@ -24,8 +21,8 @@ import NetworkGraph from "@/components/NetworkGraph/GraphViewer";
 
 interface Props {}
 export const Test: React.FC<Props> = (props) => {
+  const {} = props;
   const { socket, events } = useEvents();
-  const [open, setOpen] = useState(false);
   const reloadPermissions = useReloadPermissions();
 
   const saveProjects = useSaveProjects();
@@ -34,12 +31,6 @@ export const Test: React.FC<Props> = (props) => {
   const graph = useGetPrivateGraph();
   const horizontalScroll = useRef<HTMLDivElement>(null);
 
-  const openMenu = () => {
-    setOpen(true);
-  };
-  const closeMenu = () => {
-    setOpen(false);
-  };
   const closeSocket = () => {
     socket?.close();
   };
@@ -177,9 +168,7 @@ export const Test: React.FC<Props> = (props) => {
           : "No Events"}
       </Container>
       <Button title="Close WebSocket" onClick={closeSocket} />
-      <Button title="open" onClick={openMenu}>
-        Open
-      </Button>
+
       <Button
         title="reloadPermissions"
         onClick={() => {

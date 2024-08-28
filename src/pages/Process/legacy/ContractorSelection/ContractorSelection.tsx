@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Button, Divider } from "@component-library/index";
@@ -17,7 +17,6 @@ import AddressCard from "@/components/Address/AddressCard";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { useProject } from "@/hooks/Project/useProject";
-import useService, { isServiceComplete } from "@/hooks/useService";
 
 interface Props {}
 
@@ -52,7 +51,6 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<ContractorSelectionFormData>({
     defaultValues: async () => ({
@@ -61,7 +59,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   });
 
   const onSubmit = (data: ContractorSelectionFormData) => {
-    data.processes.forEach((process, index, allProcesses) => {
+    data.processes.forEach((process) => {
       updateProcess.mutate({
         processIDs: [process.process.processID],
         updates: {

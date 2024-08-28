@@ -1,19 +1,14 @@
-import logger from "@/hooks/useLogger";
 import {
   KeyboardEvent,
   MouseEvent,
   PropsWithChildren,
-  SyntheticEvent,
-  useContext,
   useEffect,
   useRef,
 } from "react";
 import { Button } from "..";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "react-i18next";
-import { BodyScrollContext } from "@/contexts/BodyScrollContextProvider";
 import { twMerge } from "tailwind-merge";
-import { ModalContext } from "@/contexts/ModalContextProvider";
 import useModal from "@/hooks/useModal";
 
 type ModelProps = {
@@ -55,14 +50,12 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   };
 
   // Eventlistener: trigger onclose when cancel detected
-  const handleOnCancel = (e: SyntheticEvent<HTMLDialogElement, Event>) => {
+  const handleOnCancel = () => {
     closeModalWithScroll();
   };
 
   // Eventlistener: trigger onclose when click outside
-  const handleOnClick = (
-    e: MouseEvent<HTMLDialogElement, globalThis.MouseEvent>
-  ) => {
+  const handleOnClick = () => {
     // const dialogDimensions = modalRef.current?.getBoundingClientRect();
     // if (dialogDimensions !== undefined)
     //   logger(

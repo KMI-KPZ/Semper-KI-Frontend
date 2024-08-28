@@ -9,7 +9,6 @@ import DoneAllIcon from "@mui/icons-material/DoneAll";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import DescriptionIcon from "@mui/icons-material/Description";
-import ModeIcon from "@mui/icons-material/Mode";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import StatusWizardCard from "./components/Card";
 import InfoIcon from "@mui/icons-material/Info";

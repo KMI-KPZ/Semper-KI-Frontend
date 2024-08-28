@@ -2,9 +2,7 @@ import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { Container } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ProcessStatusButtons from "../StatusButtons";
 import ProcessContainer from "@/components/Process/Container";
-import ProcessHeader from "@/components/Process/Header";
 import ProcessVerifyCard, { VerifyStatus } from "./components/VerifyCard";
 import useProcess from "@/hooks/Process/useProcess";
 

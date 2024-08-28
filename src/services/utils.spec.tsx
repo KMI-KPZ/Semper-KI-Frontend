@@ -14,11 +14,7 @@ import {
   splitArray,
 } from "./utils";
 
-import {
-  ModelBuilder,
-  MaterialBuilder,
-  PostProcessingBuilder,
-} from "@test/builder";
+import { ModelBuilder } from "@test/builder";
 
 describe("Utils", () => {
   describe("Test getFileSizeAsString", () => {

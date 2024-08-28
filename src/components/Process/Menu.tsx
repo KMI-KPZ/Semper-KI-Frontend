@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Collapsible from "../Collapsible/Collapsible";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import logger from "@/hooks/useLogger";
 
 interface ProcessMenuProps {
   buttonTitle?: string;

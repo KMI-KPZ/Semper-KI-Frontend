@@ -31,7 +31,7 @@ const useUpdateRolePermissions = () => {
 
   return useMutation<void, Error, SetPermissionProps>({
     mutationFn: updateRolePermissions,
-    onSuccess(data, variables, context) {
+    onSuccess(_, variables) {
       queryClient.invalidateQueries([
         "organization",
         "roles",

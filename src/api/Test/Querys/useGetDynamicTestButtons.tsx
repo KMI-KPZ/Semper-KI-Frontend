@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export interface TestDynamicProps {
   title: string;
@@ -10,7 +10,6 @@ export interface TestDynamicProps {
 }
 
 const useGetDynamicTestButtons = () => {
-  const queryClient = useQueryClient();
   const getDynamicTestButtons = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/dynamic/`)

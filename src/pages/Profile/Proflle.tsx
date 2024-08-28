@@ -1,18 +1,10 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Divider, Text } from "@component-library/index";
-import useUser, {
-  AuthorizedUserProps,
-  UserAddressProps,
-  UserType,
-} from "@/hooks/useUser";
+import { Button, Container, Divider } from "@component-library/index";
+import { UserType } from "@/hooks/useUser";
 import { Heading } from "@component-library/index";
-import AddIcon from "@mui/icons-material/Add";
-import { Modal } from "@component-library/index";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
-import AddressForm from "@/components/Form/AddressForm";
-import AddressCard from "@/components/Address/AddressCard";
 import NotificationForm from "../../components/Form/Notifications/NotificationForm";
 import ProfileStatistics from "./components/Statistics";
 import ProfileLocals from "./components/Locals";
@@ -22,11 +14,6 @@ import ProfileOrganization from "./components/Organization";
 import useDeleteUser from "@/api/User/Mutations/useDeleteUser";
 
 interface Props {}
-
-interface EditState {
-  edit: boolean;
-  address: UserAddressProps | undefined;
-}
 
 const Profile: React.FC<Props> = (props) => {
   const { t } = useTranslation();

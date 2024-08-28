@@ -1,5 +1,5 @@
 import { Button, Container, Heading } from "@component-library/index";
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import ProcessInfo from "./components/Info";
 import useProcess from "@/hooks/Process/useProcess";
@@ -10,17 +10,13 @@ import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessVerify from "./components/Verify/Verify";
 import ProcessStatusGate from "./components/StatusGate";
 import ProcessRequest from "./components/Request/Request";
-import ProcessClarify from "./components/Clarify/Clarify";
 import ProcessContract from "./components/Contract/Contract";
-import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
-import ProcessConfirmation from "./components/Confirmation/Confirmation";
 import ProcessDelivery from "./components/Delivery/Delivery";
 import ProcessCompleted from "./components/Completed/Completed";
 import ProcessProduction from "./components/Production/Production";
 import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
 import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ProcessFilter from "./components/Service/Filter/Filter";
 
 interface ProcessPageProps {}
 

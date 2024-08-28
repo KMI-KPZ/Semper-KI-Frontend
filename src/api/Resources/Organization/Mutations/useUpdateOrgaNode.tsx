@@ -30,7 +30,7 @@ const useUpdateOrgaNode = () => {
 
   return useMutation<string, Error, UpdateOrgaNode>({
     mutationFn: updateOrgaNode,
-    onSuccess: (data, props, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["resources"]);
     },
   });

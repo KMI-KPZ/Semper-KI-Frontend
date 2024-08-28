@@ -7,10 +7,6 @@ import {
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
-import useCreateOrgaEdge from "@/api/Resources/Organization/Mutations/useCreateOrgaEdge";
-import useDeleteOrgaEdge from "@/api/Resources/Organization/Mutations/useDeleteOrgaEdge";
-import { useNavigate } from "react-router-dom";
-import useOrganization from "@/hooks/useOrganization";
 import useDeleteOrgaNode from "@/api/Resources/Organization/Mutations/useDeleteOrgaNode";
 import useUpdateOrgaNode from "@/api/Resources/Organization/Mutations/useUpdateOrgaNode";
 import logger from "@/hooks/useLogger";
@@ -21,10 +17,8 @@ interface ResourceTableProps {
 }
 
 const ResourceTable = (props: ResourceTableProps) => {
-  const { nodes = [], nodeType } = props;
+  const { nodes = [] } = props;
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const { organization } = useOrganization();
 
   const updateOrgaNode = useUpdateOrgaNode();
   const deleteOrgaNode = useDeleteOrgaNode();

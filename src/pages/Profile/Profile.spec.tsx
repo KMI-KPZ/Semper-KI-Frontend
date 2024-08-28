@@ -1,7 +1,5 @@
 import { render, screen, fireEvent } from "@test/render";
 import Profile from "./Proflle";
-import { UserType } from "@/hooks/useUser";
-import { UserBuilder } from "@test/builder";
 
 const mockedDeleteUser = jest.fn();
 const mockedUpdateUser = jest.fn();

@@ -1,11 +1,10 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { OntoNode, parseOntoNode } from "./useGetOntoNodes";
 import { useParams } from "react-router-dom";
 
 const useGetOntoNode = () => {
-  const queryClient = useQueryClient();
   const { nodeID } = useParams();
   const getOntoNode = async () =>
     authorizedCustomAxios

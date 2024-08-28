@@ -1,12 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Container, Text } from "@component-library/index";
+import { Text } from "@component-library/index";
 import { Button, Divider, LoadingSuspense } from "@component-library/index";
 import { PermissionGroupProps, getGroupedPermissions } from "../Roles";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import useDeleteRole from "@/api/Organization/Mutations/useDeleteRole";
-import useOrganization from "../../../../hooks/useOrganization";
 import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
 import useGetOrganizationRolePermissions from "@/api/Organization/Querys/useGetOrganizationRolePermissions";
 
@@ -58,7 +57,7 @@ const OrganizationRolesItem: React.FC<OrganizationRolesItemProps> = (props) => {
                   <td>
                     <ul className="list-disc p-2">
                       {permission.permissionTypes.map(
-                        (permissionType, _index, allPermissionTypes) => (
+                        (permissionType, _index) => (
                           <li key={_index}>
                             {t(`types.permissionType.${permissionType}`)}
                           </li>

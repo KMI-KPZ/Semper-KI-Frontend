@@ -1,7 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { invalidate } from "@react-three/fiber";
 
 interface useCreateOrgaEntitieEdgeProps {
   entity1ID: string;
@@ -30,7 +29,7 @@ const useCreateOrgaEntitieEdge = () => {
 
   return useMutation<string, Error, useCreateOrgaEntitieEdgeProps>({
     mutationFn: createOrgaEntitieEdge,
-    onSuccess: (data, props, context) => {
+    onSuccess: (_, props) => {
       if (
         props.invalidate === undefined ||
         (props.invalidate !== undefined && props.invalidate === false)

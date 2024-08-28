@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ProcessModelCard } from "./components/Card";
-import { Button, Container, Text } from "@component-library/index";
+import { Container, Text } from "@component-library/index";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
-import { FilterItemProps } from "../../../Filter/MaufacturingFilter/Filter";
 import { ProcessModelPreView } from "./components/PreView";
-import ProcessModelItem from "./components/Item";
-import IconUpload from "@icons/Upload.svg";
 import { Heading } from "@component-library/index";
 import { Modal } from "@component-library/index";
 import { ModelProps } from "./types";
-import { select } from "d3";
 import { ProcessModelUpload } from "./Upload/Upload";
 import useGetModels from "@/api/Service/AdditiveManufacturing/Model/Querys/useGetModels";
-import { ServiceManufacturingState } from "@/api/Service/Querys/useGetServices";
 import ServiceSearch from "../Search/Search";
-import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
-import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
-import useFilter from "@/hooks/useFilter";
 
 interface Props {}
 
@@ -30,7 +22,6 @@ interface State {
 export const ManufacturingModels: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const {} = props;
-  const { process } = useManufacturingProcess();
   const navigate = useNavigate();
 
   const modelsQuery = useGetModels();
@@ -109,7 +100,7 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
               {modelsQuery.data !== undefined && modelsQuery.data.length > 0 ? (
                 <>
                   {modelsQuery.data
-                    .filter((model, index) => filterBySearch(model))
+                    .filter((model) => filterBySearch(model))
                     .map((model: ModelProps, index: number) => (
                       <ProcessModelCard
                         model={model}

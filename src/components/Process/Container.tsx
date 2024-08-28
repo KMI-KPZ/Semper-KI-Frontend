@@ -2,7 +2,6 @@ import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessStatusButtons from "@/pages/Process/components/StatusButtons";
 import { Container } from "@component-library/index";
 import React, { PropsWithChildren, ReactNode } from "react";
-import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 import ProcessHeader from "./Header";
 

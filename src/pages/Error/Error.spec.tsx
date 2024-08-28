@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@test/render";
+import { render } from "@test/render";
 import { Error } from "./Error";
 
 describe("<Error>", () => {

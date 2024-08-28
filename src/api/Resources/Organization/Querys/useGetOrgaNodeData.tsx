@@ -1,13 +1,12 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export type OrgaNode = {
   resources: string[];
 };
 
 const useGetOrgaNodeData = () => {
-  const queryClient = useQueryClient();
   const getOrgaNode = async () =>
     authorizedCustomAxios
       .get(

@@ -1,12 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import logger from "@/hooks/useLogger";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
-import TextInput from "@component-library/Form/Inputs/TextInput";
 import { Container } from "@component-library/index";
 import useGeneralInput from "@component-library/Form/hooks/useGeneralInput";
 import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganization";
@@ -96,7 +94,6 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
     .required();
 
   const {
-    getValues,
     reset,
     register,
     watch,

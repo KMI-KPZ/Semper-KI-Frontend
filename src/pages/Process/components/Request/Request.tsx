@@ -1,13 +1,10 @@
 import ProcessContainer from "@/components/Process/Container";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ProcessStatusButtons from "../StatusButtons";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import ProcessHeader from "@/components/Process/Header";
 import { Button, Container, Text } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useProcess from "@/hooks/Process/useProcess";
-
 import CheckIcon from "@mui/icons-material/Check";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ProcessFileView from "@/components/Process/File/FileView";

@@ -1,4 +1,4 @@
-import { render, screen } from "@test/render";
+import { render } from "@test/render";
 import { Breadcrumb } from "@/components/Breadcrumb/Breadcrumb";
 
 describe("Breadcrumb", () => {

@@ -1,21 +1,13 @@
-import ViewInArIcon from "@mui/icons-material/ViewInAr";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as UploadIcon } from "@icons/Upload.svg";
-import {
-  Button,
-  Container,
-  Divider,
-  Heading,
-  Text,
-} from "@component-library/index";
+import { Button, Container, Heading, Text } from "@component-library/index";
 import useUploadModels from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUploadModels";
 import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
-import { Navigate, useNavigate } from "react-router-dom";
 import useModal from "@/hooks/useModal";
 import UploadModelCard from "./components/ModelCard";
-import { FieldArrayWithId, useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 interface Props {}
 
 export interface ProcessModelUploadFormProps {
@@ -38,9 +30,6 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
 
   const { process } = useProcess();
   const { project } = useProject();
-  const [openIndex, setOpenIndex] = React.useState<number | undefined>(
-    undefined
-  );
   const uploadModels = useUploadModels();
   const {
     register,
@@ -162,7 +151,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
         })),
       },
       {
-        onSuccess(data, variables, context) {
+        onSuccess() {
           deleteModal("ServiceRoutesManufacturingModels");
         },
       }

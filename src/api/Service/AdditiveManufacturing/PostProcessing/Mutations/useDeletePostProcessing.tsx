@@ -29,7 +29,7 @@ const useDeletePostProcessing = () => {
 
   return useMutation<string, Error, DeletePostProcessingProps>({
     mutationFn: deletePostProcessing,
-    onSuccess: (data, props, context) => {
+    onSuccess: (_, props) => {
       queryClient.invalidateQueries([
         "project",
         props.projectID,

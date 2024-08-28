@@ -1,18 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Button, Container } from "@component-library/index";
 import logger from "@/hooks/useLogger";
 import { Heading, Text } from "@component-library/index";
-import { sortPermissions } from "../Roles";
-import { LoadingAnimation } from "@component-library/index";
 import { PermissionProps } from "@/api/Organization/Querys/useGetOrganizationPermissions";
 import useCreateRole, {
   RoleProps,
 } from "@/api/Organization/Mutations/useCreateRole";
-import useOrganization from "../../../../hooks/useOrganization";
 import useUpdateRolePermissions from "@/api/Organization/Mutations/useUpdateRolePermissions";
 import useUpdateRole from "@/api/Organization/Mutations/useUpdateRole";
 import useGetOrganizationRolePermissions from "@/api/Organization/Querys/useGetOrganizationRolePermissions";
@@ -87,7 +82,7 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
       createRole.mutate(
         { name: data.name, description: data.description },
         {
-          onSuccess(data, variables, context) {
+          onSuccess() {
             resetForm();
             reset();
           },

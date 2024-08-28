@@ -1,12 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Button,
-  Container,
-  Divider,
-  Heading,
-  Text,
-} from "@component-library/index";
+import { Button, Container, Divider, Heading } from "@component-library/index";
 import { Organization } from "@/api/Organization/Querys/useGetOrganization";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";

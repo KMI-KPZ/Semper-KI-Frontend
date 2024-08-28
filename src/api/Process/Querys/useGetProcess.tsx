@@ -1,12 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import {
-  UseQueryResult,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { Project, getProcessFiles } from "@/api/Project/Querys/useGetProject";
 import { ModelingServiceProps } from "@/pages/Process/components/Service/ServiceEdit/Modelling/Modelling";
 import { UserAddressProps } from "@/hooks/useUser";
 import { StatusButtonPropsExtern } from "@/hooks/Project/useStatusButtons";
@@ -16,7 +11,6 @@ import {
   ServiceProps,
   ServiceType,
 } from "@/api/Service/Querys/useGetServices";
-import { objectToArray } from "@/services/utils";
 
 export interface ProcessDetailsProps {
   provisionalContractor?: string;
@@ -180,11 +174,6 @@ export enum ProcessStatus {
   "CANCELED" = 1300, //abgebrochen
 }
 
-interface ProcessQueryProps {
-  process: Process | undefined;
-  query: UseQueryResult<Project, Error>;
-}
-
 export const isProcessAtServiceStatus = (process: Process): boolean => {
   return (
     process.processStatus >= ProcessStatus.SERVICE_READY &&
@@ -193,7 +182,6 @@ export const isProcessAtServiceStatus = (process: Process): boolean => {
 };
 
 const useGetProcess = () => {
-  const queryClient = useQueryClient();
   const { projectID, processID } = useParams();
   const getProcess = async () =>
     authorizedCustomAxios

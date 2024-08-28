@@ -23,7 +23,7 @@ const useDeleteOrgaNode = () => {
 
   return useMutation<string, Error, useDeleteOrgaNodeProps>({
     mutationFn: deleteOrgaNode,
-    onSuccess: (data, props, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["resources"]);
     },
   });

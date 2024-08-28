@@ -2,7 +2,7 @@ import { NewUserAddressProps } from "@/api/User/Mutations/useUpdateUser";
 import { UserContext } from "@/contexts/UserContextProvider";
 import { UseQueryResult } from "@tanstack/react-query";
 import { useContext } from "react";
-import { useTranslation } from "react-i18next";
+
 interface ReturnProps {
   isLoggedIn: boolean;
   user: UserProps;
@@ -100,7 +100,6 @@ export interface Address {
 
 const useUser = (): ReturnProps => {
   const { isLoggedIn, user, query } = useContext(UserContext);
-  const { t } = useTranslation();
 
   return {
     isLoggedIn,

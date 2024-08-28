@@ -1,6 +1,5 @@
-import React, { PropsWithChildren, useContext } from "react";
+import React, { PropsWithChildren } from "react";
 import {
-  Button,
   Container,
   Divider,
   LoadingAnimation,
@@ -9,8 +8,6 @@ import {
 import { useTranslation } from "react-i18next";
 import { ModelProps } from "../types";
 import { Heading } from "@component-library/index";
-import { useNavigate } from "react-router-dom";
-import useService from "@/hooks/useService";
 import ModelPreview from "@/pages/Test/STLViewer";
 import useGetModelFile from "@/api/Process/Files/Querys/useGetFile";
 
@@ -21,30 +18,12 @@ interface Props {
 
 export const ProcessModelCard: React.FC<PropsWithChildren<Props>> = (props) => {
   const { t } = useTranslation();
-  const { model, openModelView, children } = props;
-  const grid = true;
-  const navigate = useNavigate();
-  const { updatedService } = useService();
+  const { model, children } = props;
   const modelFile = useGetModelFile(model.id);
   const getFileURL = (blob: Blob) => {
     return URL.createObjectURL(blob);
   };
 
-  const handleOnClickSelect = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
-    updatedService({ model });
-    navigate("../material");
-  };
-
-  const handleOnClickCard = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    openModelView(model);
-  };
   return (
     <Container
       className="w-fit min-w-[350px] max-w-[50%] gap-0 rounded-xl border-2 bg-white"

@@ -1,7 +1,6 @@
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useProcess from "@/hooks/Process/useProcess";
 import React, { PropsWithChildren } from "react";
-import { useTranslation } from "react-i18next";
 
 interface ProcessStatusGateProps {
   start?: ProcessStatus;

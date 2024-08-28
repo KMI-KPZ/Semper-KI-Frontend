@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Container } from "@component-library/index";
 import ProcessContainer from "@/components/Process/Container";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessMessages from "@/components/Process/Messages/Messages";

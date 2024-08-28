@@ -31,7 +31,7 @@ const useVerifyProject = () => {
 
   return useMutation<any, Error, VerifyProjectMutationProps>({
     mutationFn: verifyProject,
-    onSuccess: (data, props, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["project", projectID]);
     },
   });

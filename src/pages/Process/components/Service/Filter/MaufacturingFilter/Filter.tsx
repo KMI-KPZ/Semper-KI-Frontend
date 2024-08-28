@@ -7,12 +7,11 @@ import { AppContext } from "@/pages/App/App";
 import { Heading } from "@component-library/index";
 import useBodyScroll from "@/hooks/useBodyScroll";
 import logger from "@/hooks/useLogger";
+import useProcess from "@/hooks/Process/useProcess";
 
 interface Props {
-  filterOpen: boolean;
-  setFilterOpen(open: boolean): void;
   filters: FilterItemProps[];
-  applyFilters(filterItemList: FilterItemProps[]): void;
+  applyFilters(filters: FilterItemProps[]): void;
 }
 
 interface State {
@@ -107,12 +106,7 @@ const hydrateFilter = (
 };
 
 const ManufacturingProcessFilter: React.FC<Props> = (props) => {
-  const {
-    applyFilters,
-    filters,
-    filterOpen,
-    setFilterOpen: parentSetFilterOpen,
-  } = props;
+  const { applyFilters, filters } = props;
   const guideAnswers: FilterItemProps[] = [];
   const hydratedFilterList: FilterItemProps[] = hydrateFilter(
     filters,

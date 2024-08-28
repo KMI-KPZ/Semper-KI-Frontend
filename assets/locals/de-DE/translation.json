@@ -214,6 +214,25 @@
       "buildVolume": "Bauvolumen",
       "technology": "Technologie",
       "nozzleDiameter": "Düsendurchmesser"
+    },
+    "FilterCategoryType": {
+      "costs": "Kosten",
+      "deliverTime": "Lieferzeit",
+      "amount": "Menge",
+      "categorys": "Kategorien",
+      "boxSize": "Kastengröße",
+      "materialcategory": "Materialkategorie",
+      "volume": "Volumen",
+      "materialCategory": "Materialkategorie",
+      "proceeding": "Verfahren",
+      "manufacturer": "Hersteller",
+      "postProcessing": "Nachbearbeitung",
+      "date": "Datum",
+      "text": "Text",
+      "textarea": "Textfeld",
+      "color": "Farbe",
+      "number": "Zahl",
+      "multiselection": "Mehrfachauswahl"
     }
   },
   "api": {

@@ -55,7 +55,13 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
           title={t("Service.Manufacturing.Filter.components.Card.buttons.open")}
           onClick={(e) => handleOnClickMenuOpen(e, category, categoryIndex)}
           children={
-            category.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />
+            <div
+              className={`duration-300 ${
+                category.open === true ? "rotate-0" : "rotate-180"
+              }`}
+            >
+              <KeyboardArrowUpIcon />
+            </div>
           }
         />
       </Container>

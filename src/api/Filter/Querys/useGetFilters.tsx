@@ -45,7 +45,7 @@ const useGetFilters = () => {
     queryKey: ["filters"],
     queryFn: getFilters,
     initialData: FilterItems,
-    enabled: false,
+    // enabled: false,
   });
 };
 

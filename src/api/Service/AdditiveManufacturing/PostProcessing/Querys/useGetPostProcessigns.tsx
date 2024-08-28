@@ -3,6 +3,7 @@ import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useGetFilters from "@/api/Filter/Querys/useGetFilters";
 import { OntoNodeProperty } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import useProcess from "@/hooks/Process/useProcess";
 
 export interface PostProcessingProps {
   id: string;
@@ -22,13 +23,13 @@ export enum EPostProcessingOptionType {
 
 const useGetPostProcessigns = () => {
   const queryClient = useQueryClient();
-  const getFilters = useGetFilters();
+  const { filters } = useProcess();
   const getPostProcessigns = async () =>
     authorizedCustomAxios
       .post(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/post-processing/get/`,
         {
-          filters: getFilters.data,
+          filters,
         }
       )
       .then((response) => {
@@ -42,7 +43,6 @@ const useGetPostProcessigns = () => {
   return useQuery<PostProcessingProps[], Error>({
     queryKey: ["postProcessigns"],
     queryFn: getPostProcessigns,
-    enabled: true || (getFilters.isFetched && getFilters.data !== undefined),
   });
 };
 

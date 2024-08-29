@@ -62,7 +62,7 @@ const ProcessFilterItem: React.FC<Props> = (props) => {
             setFilterItem={setFilterItem}
           />
         );
-      case "MUILTISELECT":
+      case "MULTISELECTION":
         return (
           <ProcessFilterMultiSelection
             filterItem={filterItem}

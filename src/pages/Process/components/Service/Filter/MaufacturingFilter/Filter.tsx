@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container } from "@component-library/index";
+import { Badge, Button, Container, Text } from "@component-library/index";
 import ProcessFilterCard from "./components/Card";
 interface Props {
   filters: FilterItemProps[];
@@ -31,7 +31,7 @@ export type FilterType =
   | "SLIDER"
   | "SLIDERSELECTION"
   | "SELECTION"
-  | "MUILTISELECT";
+  | "MULTISELECTION";
 
 export interface CategoryProps {
   title: FilterCategoryType;
@@ -76,7 +76,10 @@ const generateCategoryList = (
   });
   let categoryList: CategoryProps[] = [];
   stringList.forEach((category) => {
-    categoryList.push({ title: category, open: false });
+    categoryList.push({
+      title: category,
+      open: category === "GENERAL" ? true : false,
+    });
   });
   return categoryList;
 };
@@ -175,8 +178,30 @@ const ManufacturingProcessFilter: React.FC<Props> = (props) => {
     }));
   };
 
+  const getCountOfChecktItems = (title: string): number => {
+    // return Math.floor(Math.random() * 10000);
+    return filterList
+      .filter(
+        (filterItem: FilterItemProps) => filterItem.question.category === title
+      )
+      .filter((filterItem: FilterItemProps) => filterItem.isChecked).length;
+  };
+
   return (
     <Container width="full" direction="col">
+      <Container direction="row" wrap="wrap" className="">
+        {categoryList.map((category, index) => (
+          <Badge count={getCountOfChecktItems(category.title)}>
+            <Button
+              key={index}
+              title={t(`enum.FilterCategoryType.${category.title}`)}
+              size="sm"
+              variant={category.open ? "primary" : "secondary"}
+              onClick={(e) => handleOnClickMenuOpen(e, category, index)}
+            />
+          </Badge>
+        ))}
+      </Container>
       <Container
         width="full"
         justify="start"
@@ -184,19 +209,27 @@ const ManufacturingProcessFilter: React.FC<Props> = (props) => {
         align="center"
         wrap="wrap"
       >
-        {categoryList.map((category: CategoryProps, categoryIndex: number) => (
-          <ProcessFilterCard
-            category={category}
-            categoryIndex={categoryIndex}
-            filterItemList={filterList.filter(
-              (filterItem: FilterItemProps) =>
-                filterItem.question.category === category.title
-            )}
-            handleOnClickMenuOpen={handleOnClickMenuOpen}
-            setFilterItem={setFilterItem}
-            key={categoryIndex}
-          />
-        ))}
+        {categoryList.filter((category) => category.open).length > 0 ? (
+          categoryList
+            .filter((category) => category.open)
+            .map((category: CategoryProps, categoryIndex: number) => (
+              <ProcessFilterCard
+                category={category}
+                categoryIndex={categoryIndex}
+                filterItemList={filterList.filter(
+                  (filterItem: FilterItemProps) =>
+                    filterItem.question.category === category.title
+                )}
+                handleOnClickMenuOpen={handleOnClickMenuOpen}
+                setFilterItem={setFilterItem}
+                key={categoryIndex}
+              />
+            ))
+        ) : (
+          <Container width="full" className="rounded-xl border-2 p-5">
+            <Text>{t("Service.Manufacturing.Filter.Filter.noCategory")}</Text>
+          </Container>
+        )}
       </Container>
       <Container width="full">
         <Button

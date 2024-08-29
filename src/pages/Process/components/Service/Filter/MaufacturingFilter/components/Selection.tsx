@@ -38,7 +38,7 @@ const ProcessFilterSelection: React.FC<Props> = (props) => {
     <select
       onChange={handleSelectOption}
       value={value}
-      className="f-input-select"
+      className="rounded-xl border-2 px-5 py-3"
     >
       <option value="default" className="f-input-select-option" disabled>
         ---

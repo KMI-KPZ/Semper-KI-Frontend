@@ -1040,7 +1040,7 @@
       "Filter": {
         "Filter": {
           "menuButtonTitle": "Filter Menu",
-          "pageTitle": "Vorgaben"
+          "pageTitle": "Ihre Vorgaben"
         }
       },
       "Info": {
@@ -2061,6 +2061,7 @@
         },
         "Filter": {
           "header": "Vorgabenfilter",
+          "noCategory": "keine Vorgabenkategorie geöffnet",
           "button": {
             "reset": "Zurücksetzen",
             "apply": "Anwenden"

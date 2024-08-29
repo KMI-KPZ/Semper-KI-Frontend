@@ -20,12 +20,17 @@ const ProcessFilter: React.FC<ProcessFilterProps> = (props) => {
   };
 
   return (
-    <Container width="full" direction="col" className="card gap-0">
+    <Container
+      width="full"
+      direction="col"
+      className="gap-0 rounded-xl border-2 p-5"
+    >
       <Container width="full" justify="start">
         <Heading variant="h3">
           {t("Process.components.Filter.Filter.pageTitle")}
         </Heading>
       </Container>
+
       <Collapsible initialOpen showButton logName="Filter" animation={false}>
         <Container width="full" direction="col" className="my-5">
           <ManufacturingProcessFilter

@@ -36,32 +36,13 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
   };
 
   return (
-    <Container
-      width="full"
-      direction="col"
-      className="rounded-xl bg-gray-100 p-2"
-    >
+    <Container width="full" direction="col" className="rounded-xl border-2 p-2">
       <Container width="full" justify="start" className="px-5">
         <Heading variant="h3">
           {`${t(
             `enum.FilterCategoryType.${category.title}`
           )} ${getCountOfChecktItems()}`}
         </Heading>
-        <Button
-          variant="tertiary"
-          size="sm"
-          title={t("Service.Manufacturing.Filter.components.Card.buttons.open")}
-          onClick={(e) => handleOnClickMenuOpen(e, category, categoryIndex)}
-          children={
-            <div
-              className={`duration-300 ${
-                category.open === true ? "rotate-0" : "rotate-180"
-              }`}
-            >
-              <KeyboardArrowUpIcon />
-            </div>
-          }
-        />
       </Container>
       <Collapsible expand={category.open}>
         {filterItemList.map((filterItem: FilterItemProps, index: number) => (

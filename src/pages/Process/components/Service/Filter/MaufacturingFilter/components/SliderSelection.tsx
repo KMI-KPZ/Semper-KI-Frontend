@@ -2,6 +2,7 @@ import * as React from "react";
 import Slider from "@mui/material/Slider";
 import { Stack } from "@mui/system";
 import { FilterItemProps, RangeMinMaxProps } from "../Filter";
+import { Container } from "@component-library/index";
 
 function valuetext(value: number) {
   return `${value}°C`;
@@ -101,33 +102,24 @@ const ProcessFilterSliderSelection: React.FC<Props> = (props) => {
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
       />
-      <Stack
-        width="80%"
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
+      <Container direction="row">
         <input
-          className="f-slider-input-number"
+          className="w-40  rounded-xl border-2 px-5 py-3"
           type="number"
           value={value[0]}
-          style={{
-            width: `${(value[0].toString().length + 3) * 8}px`,
-          }}
           onChange={(e) => handleChangeInput(e, 0)}
         />
         -
         <input
-          className="f-slider-input-number"
+          className="w-40 rounded-xl border-2 px-5 py-3"
           type="number"
           value={value[1]}
-          style={{ width: `${(value[1].toString().length + 3) * 8}px` }}
           onChange={(e) => handleChangeInput(e, 1)}
         />
         <select
           onChange={handleSelectOption}
           value={unit}
-          className="f-slider-input-select"
+          className="rounded-xl border-2 px-5 py-3"
         >
           <option
             value="default"
@@ -145,7 +137,7 @@ const ProcessFilterSliderSelection: React.FC<Props> = (props) => {
               ))
             : ""}
         </select>
-      </Stack>
+      </Container>
     </Stack>
   );
 };

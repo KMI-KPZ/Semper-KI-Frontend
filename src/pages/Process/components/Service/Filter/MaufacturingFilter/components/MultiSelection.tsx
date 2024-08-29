@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { FilterItemProps } from "../Filter";
 import { useTranslation } from "react-i18next";
+import logger from "@/hooks/useLogger";
+import useSearch from "@/hooks/useSearch";
+import { Search } from "@component-library/index";
 
 interface Props {
   filterItem: FilterItemProps;
@@ -17,11 +18,11 @@ const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
       ? filterItem.question.values
       : ["default"];
   const [values, setValues] = useState<string[]>([]);
-  const [dropdown, setDropdown] = useState<boolean>(false);
-  const [search, setSearch] = useState<string>("");
   const allChecked = options.length === values.length;
+  const { filterDataBySearchInput, handleSearchInputChange } =
+    useSearch<string>();
 
-  useEffect(() => {
+  const setParentFilterItem = (values: string[]) => {
     setFilterItem({
       ...filterItem,
       answer: {
@@ -29,119 +30,84 @@ const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
         value: values,
       },
     });
-  }, [values]);
+  };
 
-  useEffect(() => {
-    if (dropdown === false) setSearch("");
-  }, [dropdown]);
+  // useEffect(() => {
+  //   setFilterItem({
+  //     ...filterItem,
+  //     answer: {
+  //       unit: null,
+  //       value: values,
+  //     },
+  //   });
+  // }, [values]);
 
   const handleSelectOption = (value: string) => {
     toggleValue(value);
   };
 
-  const handleOnClickTag = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    value: string
-  ) => {
-    e.preventDefault();
-    toggleValue(value);
-  };
-
   const toggleValue = (value: string) => {
-    setValues((prevState) =>
-      prevState.includes(value)
-        ? [...prevState.filter((_value) => _value !== value)]
-        : [...prevState, value]
+    logger(
+      "toggleValue",
+      value,
+      values.includes(value)
+        ? values.filter((v) => v !== value)
+        : [...values, value]
     );
+    setParentFilterItem(
+      values.includes(value)
+        ? values.filter((v) => v !== value)
+        : [...values, value]
+    );
+    // setValues((prevState) =>
+    //   prevState.includes(value)
+    //     ? [...prevState.filter((_value) => _value !== value)]
+    //     : [...prevState, value]
+    // );
   };
 
   const toggleAllValues = () => {
     setValues(allChecked ? [] : options);
   };
 
-  const toggleDropdown = (value?: boolean) => {
-    setDropdown((prevState) => (value === undefined ? !prevState : value));
-  };
-
-  const handleOnChangeSearchInput = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setSearch(e.currentTarget.value);
-  };
-
   return (
     <div className="f-input-multiselect">
       <div className="f-input-multiselect-dropdown">
-        <input
-          className="f-input-multiselect"
-          value={search}
-          type="search"
-          onChange={handleOnChangeSearchInput}
-          onFocus={() => setDropdown(true)}
-          placeholder="Suche..."
-        />
+        <Search handleSearchInputChange={handleSearchInputChange} />
 
-        {dropdown === true ? (
-          <div className="f-input-multiselect-options">
-            <div
-              className="f-input-multiselect-option unselectable"
-              onClick={toggleAllValues}
-            >
-              <input
-                type="checkbox"
-                checked={allChecked}
-                onChange={toggleAllValues}
-                onClick={toggleAllValues}
-              />
-              {allChecked
-                ? t(
-                    "Service.Manufacturing.Filter.components.MultiSelection.button.unCheckAll"
-                  )
-                : t(
-                    "Service.Manufacturing.Filter.components.MultiSelection.button.checkAll"
-                  )}
-            </div>
-            {options
-              .filter((name) =>
-                name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-              )
-              .map((name, index) => (
-                <div
-                  className="f-input-multiselect-option unselectable"
-                  onClick={() => handleSelectOption(name)}
-                  key={index}
-                >
-                  <input
-                    type="checkbox"
-                    checked={values.includes(name)}
-                    onChange={() => handleSelectOption(name)}
-                    onClick={() => handleSelectOption(name)}
-                  />
-                  {name}
-                </div>
-              ))}
-            <div
-              className={`f-input-multiselect-option ${
-                dropdown === true ? "expanded" : null
-              }`}
-              onClick={() => toggleDropdown()}
-            >
-              <ExpandMoreIcon />
-            </div>
-          </div>
-        ) : null}
-      </div>
-      <div className="f-input-multiselect-tags">
-        {values.map((value, index) => (
-          <div
-            key={index}
-            className="f-input-multiselect-tag"
-            onClick={(e) => handleOnClickTag(e, value)}
-          >
-            {value}
-            <CloseIcon />
-          </div>
-        ))}
+        <div className={``}>
+          <label className="flex flex-row items-center justify-start gap-3">
+            <input
+              type="checkbox"
+              className="h-4 w-4"
+              checked={allChecked}
+              onChange={toggleAllValues}
+            />
+            {allChecked
+              ? t(
+                  "Service.Manufacturing.Filter.components.MultiSelection.button.unCheckAll"
+                )
+              : t(
+                  "Service.Manufacturing.Filter.components.MultiSelection.button.checkAll"
+                )}
+          </label>
+          {options
+            .filter((name) => filterDataBySearchInput(name))
+            .map((name, index) => (
+              <label
+                className="flex flex-row items-center justify-start gap-3"
+                key={index}
+              >
+                <input
+                  type="checkbox"
+                  className="h-4 w-4"
+                  checked={values.includes(name)}
+                  onChange={() => handleSelectOption(name)}
+                />
+                {name}
+              </label>
+            ))}
+        </div>
       </div>
     </div>
   );

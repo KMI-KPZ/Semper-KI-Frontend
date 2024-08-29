@@ -36,7 +36,7 @@ const ProcessFilterTextInput: React.FC<Props> = (props) => {
   return (
     <input
       type="text"
-      className="f-input-text"
+      className="rounded-xl border-2 px-5 py-3"
       onChange={handleChangeInput}
       value={state.text}
     />

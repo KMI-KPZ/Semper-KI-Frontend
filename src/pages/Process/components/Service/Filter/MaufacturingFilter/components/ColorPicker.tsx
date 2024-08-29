@@ -36,7 +36,7 @@ const ProcessFilterColorPicker: React.FC<Props> = (props) => {
   return (
     <input
       type="color"
-      className="f-input-color"
+      className="h-8 w-20"
       onChange={handleChangeInput}
       value={state.text}
     />

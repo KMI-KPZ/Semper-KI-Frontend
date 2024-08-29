@@ -33,7 +33,7 @@ const ProcessFilterTextArea: React.FC<Props> = (props) => {
   };
   return (
     <textarea
-      className="f-input-textarea"
+      className="rounded-xl border-2 px-5 py-3"
       onChange={handleChangeInput}
       value={state.text}
     />

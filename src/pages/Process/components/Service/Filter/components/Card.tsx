@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import ProcessFilterItem from "./Item";
 import { CategoryProps, FilterItemProps } from "../Filter";
-import { Container, Heading } from "@component-library/index";
+import { Container, Heading, Text } from "@component-library/index";
 
 interface Props {
   category: CategoryProps;
@@ -29,13 +29,23 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
           )} ${getCountOfChecktItems()}`}
         </Heading>
       </Container>
-      {filterItemList.map((filterItem: FilterItemProps, index: number) => (
-        <ProcessFilterItem
-          key={index}
-          filterItem={filterItem}
-          setFilterItem={setFilterItem}
-        />
-      ))}
+      {filterItemList.length > 0 ? (
+        filterItemList.map((filterItem: FilterItemProps, index: number) => (
+          <ProcessFilterItem
+            key={index}
+            filterItem={filterItem}
+            setFilterItem={setFilterItem}
+          />
+        ))
+      ) : (
+        <Container width="full" className="pb-3" direction="col" align="start">
+          <Text>
+            {category.title === "SELECTED"
+              ? t("Process.Service.Filter.components.Card.noSelectedFitlers")
+              : t("Process.Service.Filter.components.Card.noFilters")}
+          </Text>
+        </Container>
+      )}
     </Container>
   );
 };

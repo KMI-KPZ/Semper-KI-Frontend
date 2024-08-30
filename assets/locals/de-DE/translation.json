@@ -1235,6 +1235,14 @@
       }
     },
     "Service": {
+      "Filter": {
+        "components": {
+          "Card": {
+            "noFilters": "keine Vorgaben vorhanden",
+            "noSelectedFitlers": "keine Vorgaben ausgewählt"
+          }
+        }
+      },
       "ServiceSelection": {
         "components": {
           "ServiceCard": {

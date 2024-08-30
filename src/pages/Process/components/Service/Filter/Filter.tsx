@@ -76,7 +76,7 @@ const generateCategoryList = (
     if (!stringList.includes(filterItem.question.category))
       stringList.push(filterItem.question.category);
   });
-  let categoryList: CategoryProps[] = [{ open: true, title: "SELECTED" }];
+  let categoryList: CategoryProps[] = [{ open: false, title: "SELECTED" }];
   stringList.forEach((category) => {
     categoryList.push({
       title: category,

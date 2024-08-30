@@ -123,6 +123,7 @@
       "MUILTISELECT": "Mehrfachauswahl"
     },
     "FilterCategoryType": {
+      "SELECTED": "Ausgewählt",
       "GENERAL": "Allgemein",
       "MODEL": "Modell",
       "MATERIAL": "Material",
@@ -1040,7 +1041,10 @@
       "Filter": {
         "Filter": {
           "menuButtonTitle": "Filter Menu",
-          "pageTitle": "Ihre Vorgaben"
+          "pageTitle": "Ihre Vorgaben",
+          "button": {
+            "selected": "Ausgewählt"
+          }
         }
       },
       "Info": {
@@ -2064,6 +2068,7 @@
           "noCategory": "keine Vorgabenkategorie geöffnet",
           "button": {
             "reset": "Zurücksetzen",
+            "cancel": "Abbrechen",
             "apply": "Anwenden"
           }
         }

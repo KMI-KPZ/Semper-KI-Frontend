@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useState } from "react";
 import { Process } from "@/api/Process/Querys/useGetProcess";
-import { FilterItemProps } from "@/pages/Process/components/Service/Filter/MaufacturingFilter/Filter";
+import { FilterItemProps } from "@/pages/Process/components/Service/Filter/Filter";
 
 interface ProcessContextProviderProps {
   process: Process;
@@ -11,6 +11,9 @@ export interface ProcessContextProps {
   process: Process;
   filters: FilterItemProps[];
   setFilters: React.Dispatch<React.SetStateAction<FilterItemProps[]>>;
+  editFilters: FilterItemProps[];
+  setEditFilters: React.Dispatch<React.SetStateAction<FilterItemProps[]>>;
+  loadedFilter: FilterItemProps[];
 }
 
 export const ProcessContext = React.createContext<ProcessContextProps>({
@@ -32,6 +35,9 @@ export const ProcessContext = React.createContext<ProcessContextProps>({
   },
   filters: [],
   setFilters: () => {},
+  editFilters: [],
+  setEditFilters: () => {},
+  loadedFilter: [],
 });
 
 const ProcessContextProvider: React.FC<
@@ -40,9 +46,20 @@ const ProcessContextProvider: React.FC<
   const { process, children, filters: loadedFilter } = props;
 
   const [filters, setFilters] = useState<FilterItemProps[]>(loadedFilter);
+  const [editFilters, setEditFilters] =
+    useState<FilterItemProps[]>(loadedFilter);
 
   return (
-    <ProcessContext.Provider value={{ process, filters, setFilters }}>
+    <ProcessContext.Provider
+      value={{
+        process,
+        filters,
+        setFilters,
+        editFilters,
+        setEditFilters,
+        loadedFilter,
+      }}
+    >
       {children}
     </ProcessContext.Provider>
   );

@@ -2,7 +2,7 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import _FilterItems from "@/hooks/Data/FilterQuestions.json";
-import { FilterItemProps } from "@/pages/Process/components/Service/Filter/MaufacturingFilter/Filter";
+import { FilterItemProps } from "@/pages/Process/components/Service/Filter/Filter";
 const FilterItems = _FilterItems as FilterItemProps[];
 
 export enum FilterType {

@@ -35,7 +35,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { Test } from "../Test/Test";
-import { FilterItemProps } from "../Process/components/Service/Filter/MaufacturingFilter/Filter";
+import { FilterItemProps } from "../Process/components/Service/Filter/Filter";
 import { OrganizationOutlet } from "@/outlets/OrganizationOutlet";
 import { ToastContainer } from "react-toastify";
 import { ContentBox } from "@component-library/index";

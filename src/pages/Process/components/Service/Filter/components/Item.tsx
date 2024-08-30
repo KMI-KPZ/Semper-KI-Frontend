@@ -8,7 +8,7 @@ import ProcessFilterColorPicker from "./ColorPicker";
 import ProcessFilterNumberInput from "./NumberInput";
 import ProcessFilterMultiSelection from "./MultiSelection";
 import { FilterItemProps } from "../Filter";
-import { Heading } from "@component-library/index";
+import { Container, Heading } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 
 interface Props {
@@ -142,8 +142,14 @@ const ProcessFilterItem: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="flex flex-row items-center justify-start gap-2 pl-2">
+    <Container
+      direction="col"
+      justify="start"
+      width="full"
+      align="start"
+      gap={3}
+    >
+      <Container>
         <label className="flex flex-row items-center justify-center gap-5">
           <input
             type="checkbox"
@@ -155,11 +161,11 @@ const ProcessFilterItem: React.FC<Props> = (props) => {
             {translateTitle(filterItem.question.title)}
           </Heading>
         </label>
-      </div>
-      <div className="flex justify-center">
-        {filterItem.isChecked ? displayInput() : ""}
-      </div>
-    </div>
+      </Container>
+      {filterItem.isChecked ? (
+        <Container width="full">{displayInput()}</Container>
+      ) : null}
+    </Container>
   );
 };
 

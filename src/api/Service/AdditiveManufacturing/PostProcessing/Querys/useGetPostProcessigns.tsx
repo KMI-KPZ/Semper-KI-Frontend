@@ -2,7 +2,7 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import { OntoNodeProperty } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
-import useProcess from "@/hooks/Process/useProcess";
+import useFilter from "@/hooks/useFilter";
 
 export interface PostProcessingProps {
   id: string;
@@ -21,13 +21,13 @@ export enum EPostProcessingOptionType {
 }
 
 const useGetPostProcessigns = () => {
-  const { filters } = useProcess();
+  const { activeFilters } = useFilter();
   const getPostProcessigns = async () =>
     authorizedCustomAxios
       .post(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/post-processing/get/`,
         {
-          filters,
+          filters: activeFilters,
         }
       )
       .then((response) => {

@@ -2,7 +2,7 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import { OntoNodeProperty } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
-import useProcess from "@/hooks/Process/useProcess";
+import useFilter from "@/hooks/useFilter";
 
 export interface MaterialProps {
   id: string;
@@ -12,13 +12,13 @@ export interface MaterialProps {
 }
 
 const useGetMaterials = () => {
-  const { filters } = useProcess();
+  const { activeFilters } = useFilter();
   const getMaterials = async () =>
     authorizedCustomAxios
       .post(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/material/get/`,
         {
-          filters,
+          filters: activeFilters,
         }
       )
       .then((response) => {

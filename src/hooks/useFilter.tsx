@@ -21,6 +21,7 @@ const hydrateInternFilter = (
 };
 
 interface useFilterReturnProps {
+  activeFilters: FilterItemProps[];
   editFilters: FilterItemProps[];
   differenzCount: number;
   applyFilters: () => void;
@@ -67,6 +68,7 @@ const useFilter = (): useFilterReturnProps => {
   ).length;
 
   return {
+    activeFilters: filters,
     editFilters,
     differenzCount,
     setEditFilters,

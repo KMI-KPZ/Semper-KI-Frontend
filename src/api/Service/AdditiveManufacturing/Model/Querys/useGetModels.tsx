@@ -2,16 +2,16 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
-import useProcess from "@/hooks/Process/useProcess";
+import useFilter from "@/hooks/useFilter";
 
 const useGetModels = () => {
-  const { filters } = useProcess();
+  const { activeFilters } = useFilter();
   const getModels = async () =>
     authorizedCustomAxios
       .post(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/get/`,
         {
-          filters,
+          filters: activeFilters,
         }
       )
       .then((response) => {

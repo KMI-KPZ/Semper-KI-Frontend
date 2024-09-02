@@ -120,6 +120,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
 
   const handleOnClickApplyButton = () => {
     applyFilters();
+    setCategoryList(prev => prev.map(category => ({...category, open: category.title === "SELECTED" ? true: false})));
   };
 
   const handleOnClickCancelButton = () => {

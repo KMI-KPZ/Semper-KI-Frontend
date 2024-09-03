@@ -198,7 +198,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                           variant="text"
                           size="sm"
                           title={t("Resources.components.Edit.button.search")}
-                          to={`../../request?type=${nodeType}`}
+                          to={`../../request/new?type=${nodeType}`}
                         />
                       </Container>
                     </td>

@@ -20,8 +20,6 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
     nodeType: "printer",
   });
 
-  if (printers.isLoading) return <LoadingAnimation />;
-
   return (
     <Container direction="col" width="full" justify="start">
       <Container width="full" direction="row">
@@ -38,10 +36,14 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
           to="create"
         />
       </Container>
-      <ResourceTable
-        nodes={printers.data?.filter((node) => node.createdBy !== "SYSTEM")}
-        nodeType="printer"
-      />
+      {printers.isLoading ? (
+        <LoadingAnimation />
+      ) : (
+        <ResourceTable
+          nodes={printers.data?.filter((node) => node.createdBy !== "SYSTEM")}
+          nodeType="printer"
+        />
+      )}
       {/* <Divider />
       <Container width="full" justify="between" direction="row">
         <Heading variant="h3">{t("Resources.Printers.table.all")}</Heading>

@@ -24,7 +24,6 @@ const ResourcesPostProcessings: React.FC<ResourcesPostProcessingsProps> = (
     nodeType: "additionalRequirement",
   });
 
-  if (additionalrequirements.isLoading) return <LoadingAnimation />;
   return (
     <Container direction="col" width="full" justify="start">
       <Container width="full" direction="row">
@@ -41,12 +40,16 @@ const ResourcesPostProcessings: React.FC<ResourcesPostProcessingsProps> = (
           size="sm"
         />
       </Container>
-      <ResourceTable
-        nodes={additionalrequirements.data?.filter(
-          (node) => node.createdBy !== "SYSTEM"
-        )}
-        nodeType="additionalRequirement"
-      />
+      {additionalrequirements.isLoading ? (
+        <LoadingAnimation />
+      ) : (
+        <ResourceTable
+          nodes={additionalrequirements.data?.filter(
+            (node) => node.createdBy !== "SYSTEM"
+          )}
+          nodeType="additionalRequirement"
+        />
+      )}
       {/* <Divider />
       <Container width="full" justify="start" direction="row">
         <Heading variant="h3">{t("Resources.PostProcessings.all")}</Heading>

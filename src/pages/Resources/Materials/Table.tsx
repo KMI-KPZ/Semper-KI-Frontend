@@ -21,8 +21,6 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
     nodeType: "material",
   });
 
-  if (materials.isLoading) return <LoadingAnimation />;
-
   return (
     <Container direction="col" width="full" justify="start">
       <Container width="full" direction="row">
@@ -42,10 +40,14 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
           />
         </PermissionGate>
       </Container>
-      <ResourceTable
-        nodes={materials.data?.filter((node) => node.createdBy !== "SYSTEM")}
-        nodeType="material"
-      />
+      {materials.isLoading ? (
+        <LoadingAnimation />
+      ) : (
+        <ResourceTable
+          nodes={materials.data?.filter((node) => node.createdBy !== "SYSTEM")}
+          nodeType="material"
+        />
+      )}
     </Container>
   );
 };

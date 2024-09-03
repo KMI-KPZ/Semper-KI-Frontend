@@ -48,6 +48,19 @@ export type OrganizationPriorityType =
   | "resilience"
   | "sustainability";
 
+export const parseOrganizationPrioritise = (
+  priorities?: any
+): OrganizationPriority[] => {
+  return priorities !== undefined
+    ? Object.keys(priorities).map((key: string) => {
+        return {
+          type: key as OrganizationPriorityType,
+          value: priorities[key].value,
+        };
+      })
+    : [];
+};
+
 const useGetOrganization = () => {
   const getOrganization = async () =>
     authorizedCustomAxios
@@ -72,17 +85,6 @@ const useGetOrganization = () => {
                 };
               })
             : [];
-        const priorities: OrganizationPriority[] =
-          responseData.details.priorities !== undefined
-            ? Object.keys(responseData.details.priorities).map(
-                (key: string) => {
-                  return {
-                    type: key as OrganizationPriorityType,
-                    value: responseData.details.priorities[key].value,
-                  };
-                }
-              )
-            : [];
 
         const organization: Organization = {
           ...responseData,
@@ -92,7 +94,9 @@ const useGetOrganization = () => {
           details: {
             ...responseData.details,
             notificationSettings: { organization: orgaNotificationSettings },
-            priorities,
+            priorities: parseOrganizationPrioritise(
+              responseData.details.priorities
+            ),
           },
           supportedServices: responseData.supportedServices.filter(
             (serviceType: ServiceType) => serviceType !== 0

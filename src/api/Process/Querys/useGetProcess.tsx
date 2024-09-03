@@ -11,6 +11,10 @@ import {
   ServiceProps,
   ServiceType,
 } from "@/api/Service/Querys/useGetServices";
+import {
+  OrganizationPriority,
+  parseOrganizationPrioritise,
+} from "@/api/Organization/Querys/useGetOrganization";
 
 export interface ProcessDetailsProps {
   provisionalContractor?: string;
@@ -39,6 +43,7 @@ export type DefaultProcessProps = {
   accessedWhen: Date;
   files: ProcessFile[];
   messages: { [key: string]: ChatMessageProps[] };
+  priorities?: OrganizationPriority[];
 };
 
 export type NoServiceProcessProps = {
@@ -230,6 +235,7 @@ const useGetProcess = () => {
             Object.keys(response.data.messages).length === 0
               ? []
               : response.data.messages,
+          priorities: parseOrganizationPrioritise(response.data.priorities),
         };
         logger("useGetProcess | getProcess ✅ |", process);
 

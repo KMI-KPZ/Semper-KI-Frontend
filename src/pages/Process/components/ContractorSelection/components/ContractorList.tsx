@@ -13,6 +13,7 @@ import ContractorCard from "./ContractorCard";
 import { UseQueryResult } from "@tanstack/react-query";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { ContractorProps } from "@/api/Process/Querys/useGetContractors";
+import PrioritiesForm from "@/components/Form/Priorities/PrioritiesForm";
 
 interface ProcessContractorListProps {
   contractors: UseQueryResult<ContractorProps[], Error>;
@@ -58,12 +59,15 @@ const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
   if (contractors.isLoading) return <LoadingAnimation />;
   return (
     <Container width="full" justify="start" direction="col">
-      <Heading variant="h2">
+      <Heading variant="h1">
         {t(
           "Process.components.ContractorSelection.components.ContractorList.heading"
         )}
       </Heading>
       <Divider />
+      <PrioritiesForm priorities={[]} />
+      <Divider />
+
       {contractors.data !== undefined && contractors.data.length > 0 ? (
         <form className="flex flex-col items-center justify-start gap-5">
           <Container direction="col" width="full">

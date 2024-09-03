@@ -47,7 +47,7 @@ export class PostProcessingBuilder {
             title: this.title,
             checked: this.checked,
             value: this.value,
-            valueList: this.propList,
+            propList: this.propList,
             type: this.type,
             imgPath: this.imgPath,
         }

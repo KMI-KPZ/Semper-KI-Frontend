@@ -76,19 +76,21 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
         </Container>
         <ul className="flex w-full list-inside list-disc flex-col items-start justify-start pl-3">
           {material.propList.length > 0 ? (
-            material.propList.map((prop, index) => (
-              <li key={index}>
-                {isOntoNodePropertyName(prop.name)
-                  ? t(
-                      `types.OntoNodePropertyName.${
-                        prop.name as OntoNodePropertyName
-                      }`
-                    )
-                  : prop.name}
-                {": "}
-                {prop.value.toString()}
-              </li>
-            ))
+            material.propList
+              .filter((item) => item.name !== "imgPath")
+              .map((prop, index) => (
+                <li key={index}>
+                  {isOntoNodePropertyName(prop.name)
+                    ? t(
+                        `types.OntoNodePropertyName.${
+                          prop.name as OntoNodePropertyName
+                        }`
+                      )
+                    : prop.name}
+                  {": "}
+                  {prop.value.toString()}
+                </li>
+              ))
           ) : (
             <li>---</li>
           )}

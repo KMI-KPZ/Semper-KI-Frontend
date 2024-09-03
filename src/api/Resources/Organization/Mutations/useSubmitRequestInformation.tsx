@@ -8,7 +8,7 @@ const useSubmitRequestInformation = () => {
   const submitNodeRequest = async (props: NodeRequestInformation) =>
     authorizedCustomAxios
       .post(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/request/`,
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/request/post/`,
         props
       )
       .then((response) => {

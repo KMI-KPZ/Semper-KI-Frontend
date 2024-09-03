@@ -5,7 +5,9 @@ import { useQuery } from "@tanstack/react-query";
 const useGetRequestInformation = () => {
   const getRequestInformation = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/getRequestInformation/`)
+      .get(
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/request/get/`
+      )
       .then((response) => {
         const data: any = {
           ...response.data,

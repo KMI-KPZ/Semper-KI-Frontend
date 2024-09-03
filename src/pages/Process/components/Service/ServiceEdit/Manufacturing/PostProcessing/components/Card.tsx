@@ -39,39 +39,47 @@ const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
         <Heading variant="h3">{item.title}</Heading>
 
         <table className="auto table border-separate border-spacing-2">
-          <tr>
-            <td>
-              {t(`Service.Manufacturing.PostProcessing.components.Card.type`)}
-            </td>
-            <td>{item.type}</td>
-          </tr>
-          <tr>
-            <td>
-              {t(`Service.Manufacturing.PostProcessing.components.Card.value`)}
-            </td>
-            <td>{item.value}</td>
-          </tr>
-          <tr>
-            <td colSpan={2}>
-              {t(`Service.Manufacturing.PostProcessing.components.Card.props`)}
-            </td>
-          </tr>
-
-          {item.valueList.map((prop, index: number) => (
-            <tr key={index} className="model-view-tag">
+          <tbody>
+            <tr>
               <td>
-                {isOntoNodePropertyName(prop.name)
-                  ? t(
-                      `types.OntoNodePropertyName.${
-                        prop.name as OntoNodePropertyName
-                      }`
-                    )
-                  : prop.name}
-                {": "}
+                {t(`Service.Manufacturing.PostProcessing.components.Card.type`)}
               </td>
-              <td>{prop.value.toString()}</td>
+              <td>{item.type}</td>
             </tr>
-          ))}
+            <tr>
+              <td>
+                {t(
+                  `Service.Manufacturing.PostProcessing.components.Card.value`
+                )}
+              </td>
+              <td>{item.value}</td>
+            </tr>
+            <tr>
+              <td colSpan={2}>
+                {t(
+                  `Service.Manufacturing.PostProcessing.components.Card.props`
+                )}
+              </td>
+            </tr>
+
+            {item.propList
+              .filter((item) => item.name !== "imgPath")
+              .map((prop, index: number) => (
+                <tr key={index} className="model-view-tag">
+                  <td>
+                    {isOntoNodePropertyName(prop.name)
+                      ? t(
+                          `types.OntoNodePropertyName.${
+                            prop.name as OntoNodePropertyName
+                          }`
+                        )
+                      : prop.name}
+                    {": "}
+                  </td>
+                  <td>{prop.value.toString()}</td>
+                </tr>
+              ))}
+          </tbody>
         </table>
 
         {children}

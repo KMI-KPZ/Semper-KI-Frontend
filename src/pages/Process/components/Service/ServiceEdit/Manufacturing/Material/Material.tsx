@@ -125,6 +125,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
       modalKey="ServiceRoutesManufacturingMaterials"
       open={true}
       closeModal={closeModal}
+      className="justify-start"
     >
       <Container
         width="none"

@@ -75,20 +75,22 @@ const ProcessSericePostProcessingCard: React.FC<
           </Text>
         </Container>
         <ul className="flex w-full list-inside list-disc flex-col items-start justify-start pl-3">
-          {postProcessing.valueList.length > 0 ? (
-            postProcessing.valueList.map((prop, index) => (
-              <li key={index}>
-                {isOntoNodePropertyName(prop.name)
-                  ? t(
-                      `types.OntoNodePropertyName.${
-                        prop.name as OntoNodePropertyName
-                      }`
-                    )
-                  : prop.name}
-                {": "}
-                {prop.value.toString()}
-              </li>
-            ))
+          {postProcessing.propList.length > 0 ? (
+            postProcessing.propList
+              .filter((item) => item.name !== "imgPath")
+              .map((prop, index) => (
+                <li key={index}>
+                  {isOntoNodePropertyName(prop.name)
+                    ? t(
+                        `types.OntoNodePropertyName.${
+                          prop.name as OntoNodePropertyName
+                        }`
+                      )
+                    : prop.name}
+                  {": "}
+                  {prop.value.toString()}
+                </li>
+              ))
           ) : (
             <li>---</li>
           )}

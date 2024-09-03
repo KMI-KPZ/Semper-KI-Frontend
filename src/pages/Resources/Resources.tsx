@@ -39,7 +39,6 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
               <Route index element={<RequestInformation />} />
               <Route path="new" element={<RequestInformationForm />} />
             </Route>
-
             <Route path="printers/*">
               <Route index element={<ResourcesPrintersTable />} />
               <Route path="edit" element={<Navigate to=".." />} />

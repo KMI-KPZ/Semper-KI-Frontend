@@ -72,7 +72,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
     }
     if (
       postProcessing.title.toLocaleLowerCase().includes(searchText) ||
-      postProcessing.valueList.filter(
+      postProcessing.propList.filter(
         (prop) =>
           prop.name.toLocaleLowerCase().includes(searchText) ||
           prop.value.toString().toLocaleLowerCase().includes(searchText)

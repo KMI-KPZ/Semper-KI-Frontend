@@ -41,21 +41,25 @@ export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
           )}`}</Text>
         </Container>
         <table className="auto table border-separate border-spacing-2">
-          {material.propList.map((prop, index: number) => (
-            <tr key={index} className="model-view-tag">
-              <td>
-                {isOntoNodePropertyName(prop.name)
-                  ? t(
-                      `types.OntoNodePropertyName.${
-                        prop.name as OntoNodePropertyName
-                      }`
-                    )
-                  : prop.name}
-                {": "}
-              </td>
-              <td>{prop.value.toString()}</td>
-            </tr>
-          ))}
+          <tbody>
+            {material.propList
+              .filter((item) => item.name !== "imgPath")
+              .map((prop, index: number) => (
+                <tr key={index} className="model-view-tag">
+                  <td>
+                    {isOntoNodePropertyName(prop.name)
+                      ? t(
+                          `types.OntoNodePropertyName.${
+                            prop.name as OntoNodePropertyName
+                          }`
+                        )
+                      : prop.name}
+                    {": "}
+                  </td>
+                  <td>{prop.value.toString()}</td>
+                </tr>
+              ))}
+          </tbody>
         </table>
 
         {children}

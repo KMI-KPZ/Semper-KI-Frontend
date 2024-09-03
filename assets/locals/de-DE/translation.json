@@ -1079,6 +1079,7 @@
             }
           },
           "ContractorList": {
+            "heading": "Auftragnehmerauswahl",
             "noContractorFound": "Kein Auftragnehmer gefunden",
             "button": {
               "select": "Auftragnehmer auswählen",
@@ -1870,7 +1871,7 @@
         "materials": "Materialien",
         "printers": "3D-Drucker",
         "postProcessings": "Nachbearbeitung",
-        "request": "Grunddatenerweiterung",
+        "request": "Datenerweiterung",
         "graph": "Graph",
         "privat-graph": "Private Graph"
       },

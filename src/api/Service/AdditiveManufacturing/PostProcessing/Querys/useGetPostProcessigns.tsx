@@ -9,7 +9,7 @@ export interface PostProcessingProps {
   title: string;
   checked: boolean;
   value: string;
-  valueList: OntoNodeProperty[];
+  propList: OntoNodeProperty[];
   type: EPostProcessingOptionType;
   imgPath: string;
 }

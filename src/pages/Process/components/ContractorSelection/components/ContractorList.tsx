@@ -2,6 +2,8 @@ import { Process } from "@/api/Process/Querys/useGetProcess";
 import {
   Button,
   Container,
+  Divider,
+  Heading,
   LoadingAnimation,
   Text,
 } from "@component-library/index";
@@ -56,6 +58,12 @@ const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
   if (contractors.isLoading) return <LoadingAnimation />;
   return (
     <Container width="full" justify="start" direction="col">
+      <Heading variant="h2">
+        {t(
+          "Process.components.ContractorSelection.components.ContractorList.heading"
+        )}
+      </Heading>
+      <Divider />
       {contractors.data !== undefined && contractors.data.length > 0 ? (
         <form className="flex flex-col items-center justify-start gap-5">
           <Container direction="col" width="full">

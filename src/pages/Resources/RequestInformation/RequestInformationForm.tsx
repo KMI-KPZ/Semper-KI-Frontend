@@ -1,11 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Heading } from "@component-library/index";
-import { useSearchParams } from "react-router-dom";
+import { Button, Container, Divider, Heading } from "@component-library/index";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { OntoNodeType } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { useForm } from "react-hook-form";
 import { GeneralInput } from "@component-library/Form/GeneralInput";
 import useSubmitRequestInformation from "@/api/Resources/Organization/Mutations/useSubmitRequestInformation";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import logger from "@/hooks/useLogger";
 
 interface RequestInformationFormProps {}
 
@@ -36,6 +38,7 @@ const RequestInformationForm: React.FC<RequestInformationFormProps> = (
   const [searchParams, _] = useSearchParams();
   const { t } = useTranslation();
   const submitRequestInformation = useSubmitRequestInformation();
+  const navigate = useNavigate();
 
   const selectedType: OntoNodeType = parseOntoNodeType(
     searchParams.get("type")
@@ -46,15 +49,33 @@ const RequestInformationForm: React.FC<RequestInformationFormProps> = (
   });
 
   const onSubmit = (data: NodeRequestInformation) => {
-    submitRequestInformation.mutate(data);
+    submitRequestInformation.mutate(data, {
+      onSuccess: () => {
+        logger("RequestInformationForm", "onSubmit", "success");
+        navigate("..");
+      },
+    });
   };
 
   return (
     <Container width="full" direction="col">
-      <form className="flex flex-col items-center justify-start gap-5">
-        <Heading variant="h1">
+      <Container width="full" className="relative ">
+        <Button
+          to=".."
+          title={t("Process.ProcessPage.button.back")}
+          variant="text"
+          width="fit"
+          size="sm"
+          className="absolute left-5"
+        >
+          <ArrowBackIosIcon />
+        </Button>
+        <Heading variant="h2">
           {t("Resources.components.RequestInformationForm.header")}
         </Heading>
+      </Container>
+      <form className="flex w-full flex-col items-center justify-start gap-5">
+        <Divider />
         <select
           className="rounded-xl border-2 p-3 text-center"
           {...register("type")}
@@ -65,10 +86,26 @@ const RequestInformationForm: React.FC<RequestInformationFormProps> = (
             </option>
           ))}
         </select>
-        <GeneralInput register={register} label="name" type="text" />
-        <GeneralInput register={register} label="url" type="text" />
-        <GeneralInput register={register} label="manufacturer" type="text" />
+        <GeneralInput
+          register={register}
+          required={false}
+          label="name"
+          type="text"
+        />
+        <GeneralInput
+          register={register}
+          required={false}
+          label="url"
+          type="text"
+        />
+        <GeneralInput
+          register={register}
+          required={false}
+          label="manufacturer"
+          type="text"
+        />
         <Button
+          loading={submitRequestInformation.isLoading}
           size="sm"
           variant="primary"
           title={t("Resources.components.RequestInformationForm.button.send")}

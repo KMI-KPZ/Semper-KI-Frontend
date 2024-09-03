@@ -1,9 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
-import _FilterItems from "@/hooks/Data/FilterQuestions.json";
 import { FilterItemProps } from "@/pages/Process/components/Service/Filter/Filter";
-const FilterItems = _FilterItems as FilterItemProps[];
 
 export enum FilterType {
   "TEXT",
@@ -31,10 +29,12 @@ export enum FilterCategoryType {
 const useGetFilters = () => {
   const getFilters = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/getFilters/`)
+      .get(
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/filters/get/`
+      )
       .then((response) => {
         const responseData = response.data;
-        const filters: FilterItemProps[] = responseData;
+        const filters: FilterItemProps[] = responseData.filters;
 
         logger("useGetFilters | getFilters ✅ |", response);
         return filters;
@@ -43,8 +43,6 @@ const useGetFilters = () => {
   return useQuery<FilterItemProps[], Error>({
     queryKey: ["filters"],
     queryFn: getFilters,
-    initialData: FilterItems,
-    // enabled: false,
   });
 };
 

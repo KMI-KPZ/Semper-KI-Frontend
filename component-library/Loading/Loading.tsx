@@ -14,7 +14,7 @@ interface LoadingAnimationProps {
 }
 
 export const LoadingAnimation: React.FC<LoadingAnimationProps> = (props) => {
-  const { text, className, variant = "semper" } = props;
+  const { text, className, variant = "circel" } = props;
   const [state, setState] = useState<number>(0);
 
   useEffect(() => {

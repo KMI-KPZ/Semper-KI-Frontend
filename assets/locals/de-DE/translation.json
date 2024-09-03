@@ -1841,7 +1841,8 @@
     "components": {
       "RequestInformation": {
         "header": "Anfragen zu Datenerweiterung",
-        "button": {}
+        "noItems": "keine Anfragen vorhanden",
+        "button": { "new": "neue Anfrage" }
       },
       "RequestInformationForm": {
         "header": "Daten erweitern lassen",
@@ -2068,6 +2069,7 @@
           "Item": {},
           "MultiSelection": {
             "button": {
+              "all": "Alle",
               "checkAll": "Alle Auswählen",
               "unCheckAll": "Alle Abwählen"
             }

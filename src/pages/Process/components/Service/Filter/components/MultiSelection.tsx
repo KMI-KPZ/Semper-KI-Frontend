@@ -2,7 +2,7 @@ import React from "react";
 import { FilterItemProps } from "../Filter";
 import { useTranslation } from "react-i18next";
 import useSearch from "@/hooks/useSearch";
-import { Search } from "@component-library/index";
+import { Container, Search } from "@component-library/index";
 
 interface Props {
   filterItem: FilterItemProps;
@@ -31,8 +31,8 @@ const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
     });
   };
 
-  const handleSelectOption = (e: React.ChangeEvent<HTMLInputElement>) => {
-    toggleValue(e.currentTarget.value);
+  const handleSelectOption = (value: string) => {
+    toggleValue(value);
   };
 
   const toggleValue = (value: string) => {
@@ -48,45 +48,68 @@ const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="f-input-multiselect">
-      <div className="f-input-multiselect-dropdown">
-        <Search handleSearchInputChange={handleSearchInputChange} />
-        <div>
-          <label className="flex flex-row items-center justify-start gap-3">
-            <input
-              type="checkbox"
-              className="h-4 w-4"
-              checked={allChecked}
-              onChange={toggleAllValues}
-            />
-            {allChecked
-              ? t(
-                  "Service.Manufacturing.Filter.components.MultiSelection.button.unCheckAll"
-                )
-              : t(
-                  "Service.Manufacturing.Filter.components.MultiSelection.button.checkAll"
-                )}
-          </label>
-          {options
-            .filter((name) => filterDataBySearchInput(name))
-            .map((name, index) => (
-              <label
-                className="flex flex-row items-center justify-start gap-3"
-                key={index}
-              >
-                <input
-                  value={name}
-                  type="checkbox"
-                  className="h-4 w-4"
-                  checked={values.includes(name)}
-                  onChange={handleSelectOption}
-                />
-                {name}
-              </label>
-            ))}
-        </div>
-      </div>
-    </div>
+    <Container width="full" direction="col" gap={3} className="pb-3">
+      <Search handleSearchInputChange={handleSearchInputChange} />
+      <Container
+        className="rounded-xl border-2 p-5"
+        direction="row"
+        wrap="wrap"
+      >
+        <label
+          className={`flex flex-row items-center 
+            justify-start gap-3 rounded-full border-2
+              px-3 py-1 duration-300 
+             ${
+               allChecked
+                 ? "border-blue-900 bg-blue-100 hover:cursor-pointer hover:border-gray-200"
+                 : "hover:ultramarinblau border-gray-200 hover:cursor-pointer"
+             }`}
+          onClick={toggleAllValues}
+        >
+          {/* <input
+            type="checkbox"
+            className="h-4 w-4"
+            checked={allChecked}
+            onChange={toggleAllValues}
+          /> */}
+          {/* {allChecked
+            ? t(
+                "Service.Manufacturing.Filter.components.MultiSelection.button.unCheckAll"
+              )
+            : t(
+                "Service.Manufacturing.Filter.components.MultiSelection.button.checkAll"
+              )} */}
+          {t(
+            "Service.Manufacturing.Filter.components.MultiSelection.button.all"
+          )}
+        </label>
+        {options
+          .filter((name) => filterDataBySearchInput(name))
+          .map((name, index) => (
+            <label
+              className={`flex flex-row items-center 
+              justify-start gap-3 rounded-full border-2
+                px-3 py-1 duration-300 
+               ${
+                 values.includes(name)
+                   ? "border-blue-900 bg-blue-100 hover:cursor-pointer hover:border-gray-200"
+                   : "hover:ultramarinblau border-gray-200 hover:cursor-pointer"
+               }`}
+              key={index}
+              onClick={() => handleSelectOption(name)}
+            >
+              {/* <input
+                value={name}
+                type="checkbox"
+                className="h-4 w-4"
+                checked={values.includes(name)}
+                onChange={handleSelectOption}
+              /> */}
+              {name}
+            </label>
+          ))}
+      </Container>
+    </Container>
   );
 };
 

@@ -1839,6 +1839,16 @@
   "Resources": {
     "header": "Ressourcen",
     "components": {
+      "RequestInformation": {
+        "header": "Anfragen zu Datenerweiterung",
+        "button": {}
+      },
+      "RequestInformationForm": {
+        "header": "Daten erweitern lassen",
+        "button": {
+          "send": "Anfragen"
+        }
+      },
       "NodeView": {
         "context": "Beschreibung:",
         "createdBy": "Erstellt von:",
@@ -1859,6 +1869,7 @@
         "materials": "Materialien",
         "printers": "3D-Drucker",
         "postProcessings": "Nachbearbeitung",
+        "request": "Grunddatenerweiterung",
         "graph": "Graph",
         "privat-graph": "Private Graph"
       },

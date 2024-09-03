@@ -9,6 +9,7 @@ import useGetNodeProperties from "@/api/Graph/Querys/useGetNodeProperties";
 import ResourcesNodeForm from "./NodeForm";
 import useGetOrgaNode from "@/api/Resources/Organization/Querys/useGetOrgaNode";
 import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetAllOrgaNodeNeighbors";
+import useOrganization from "@/hooks/useOrganization";
 
 interface ResourcesNodeProps {
   type: "edit" | "create" | "variant";
@@ -20,10 +21,18 @@ const ResourcesNode: React.FC<ResourcesNodeProps> = (props) => {
   const { t } = useTranslation();
   const node = useGetOrgaNode();
   const nodeProperties = useGetNodeProperties(nodeType);
+  const { organization } = useOrganization();
 
   const allOrgaNodeNeighbors = useGetAllOrgaNodeNeighbors(
     node.data?.nodeID ?? ""
   );
+
+  const edges =
+    allOrgaNodeNeighbors.data !== undefined && node.data !== undefined
+      ? allOrgaNodeNeighbors.data.filter(
+          (edgeNode) => edgeNode.nodeID !== organization.hashedID
+        )
+      : [];
 
   if (
     (node.isLoading && (type === "edit" || type === "variant")) ||
@@ -44,7 +53,7 @@ const ResourcesNode: React.FC<ResourcesNodeProps> = (props) => {
       nodeType={nodeType}
       nodeProperties={nodeProperties.data}
       node={node.data}
-      edges={parseOntoNodesToEdges(allOrgaNodeNeighbors.data ?? [])}
+      edges={parseOntoNodesToEdges(edges)}
     />
   );
 };

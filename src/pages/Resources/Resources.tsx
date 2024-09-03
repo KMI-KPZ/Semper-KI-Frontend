@@ -11,6 +11,8 @@ import ResourcesNode from "./components/Node";
 import OrgaGraph from "./components/OrgaGraph";
 import ResourcesNodeView from "./components/NodeView";
 import PrivateGraph from "./components/PrivateGraph";
+import RequestInformationForm from "./RequestInformation/RequestInformationForm";
+import RequestInformation from "./RequestInformation/RequestInformation";
 
 interface ResoucesProps {}
 
@@ -33,6 +35,11 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
         >
           <Routes>
             <Route index element={<ResourcesOverview />} />
+            <Route path="request">
+              <Route index element={<RequestInformation />} />
+              <Route path="new" element={<RequestInformationForm />} />
+            </Route>
+
             <Route path="printers/*">
               <Route index element={<ResourcesPrintersTable />} />
               <Route path="edit" element={<Navigate to=".." />} />

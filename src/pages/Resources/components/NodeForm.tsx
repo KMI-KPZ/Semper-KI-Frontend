@@ -112,12 +112,15 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   const onSubmit = (
     data: (OntoNode | OntoNodeNew) & ResourcesNodeFormEdges
   ) => {
-    const newEdges: string[] = data.edges
-      .filter((edge) => !edges?.some((e) => e.nodeID === edge.nodeID))
-      .map((edge) => edge.nodeID);
+    const newEdges: string[] =
+      type === "create" || type === "variant"
+        ? data.edges.map((edge) => edge.nodeID)
+        : data.edges
+            .filter((edge) => !edges?.some((e) => e.nodeID === edge.nodeID))
+            .map((edge) => edge.nodeID);
 
     const deleteEdges: string[] =
-      edges === undefined
+      edges === undefined || type === "create" || type === "variant"
         ? []
         : edges
             .filter((edge) => !data.edges.some((e) => e.nodeID === edge.nodeID))

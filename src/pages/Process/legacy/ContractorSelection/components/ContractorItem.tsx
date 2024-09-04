@@ -20,7 +20,7 @@ const ProjectContractorSelectionItem: React.FC<
 > = (props) => {
   const { register, errors, index, process } = props;
   const { t } = useTranslation();
-  const contractors = useGetContractors(process.processID);
+  const contractors = useGetContractors();
 
   return (
     <div

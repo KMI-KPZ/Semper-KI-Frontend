@@ -5,7 +5,6 @@ import { OrganizationPriority } from "@/api/Organization/Querys/useGetOrganizati
 import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganization";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useProcess from "@/hooks/Process/useProcess";
-import { useQueryClient } from "@tanstack/react-query";
 
 interface PrioritiesFormItemProps {
   freePoints: number;
@@ -15,7 +14,6 @@ interface PrioritiesFormItemProps {
 
 const PrioritiesFormItem: React.FC<PrioritiesFormItemProps> = (props) => {
   const { priority, freePoints, type } = props;
-  const { invalidateQueries } = useQueryClient();
   const { t } = useTranslation();
   const updateOrganization = useUpdateOrganization();
   const { process } = useProcess();

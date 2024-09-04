@@ -186,9 +186,10 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
             </Container>
             {fields.length > 0 ? (
               <Container
-                width="fit"
-                direction="col"
-                className="fixed bottom-10 z-10 rounded-xl border-2 bg-white p-5 md:sticky md:right-10"
+                width="full"
+                direction="row"
+                justify="end"
+                className="fixed bottom-10 z-10  md:sticky md:right-10"
               >
                 {errors.models !== undefined ? (
                   <Text variant="body" className="text-red-500">

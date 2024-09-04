@@ -171,9 +171,10 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
           </Container>
         </Container>
         <Container
-          width="fit"
-          direction="col"
-          className="fixed bottom-10 z-10 rounded-xl border-2 bg-white px-5 py-3 md:sticky md:right-10"
+          width="full"
+          direction="row"
+          justify="end"
+          className="fixed bottom-10 z-10  pr-5 md:sticky md:right-10"
         >
           <Button
             variant="primary"

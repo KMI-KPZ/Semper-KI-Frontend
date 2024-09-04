@@ -139,7 +139,7 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
               fixed right-0
               top-0 flex h-full w-full
               flex-col items-center
-              justify-center overflow-x-hidden
+              justify-start overflow-x-hidden
               bg-white 
               md:right-1/2 md:top-1/2 
               md:h-fit  md:max-h-[90vh] 

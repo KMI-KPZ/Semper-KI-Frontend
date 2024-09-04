@@ -2223,7 +2223,7 @@
             },
             "loading": "Model wird hochgeladen",
             "card": {
-              "title": "Modelle Hochladen",
+              "title": "Eigene Modelle Hochladen",
               "text": "per Drag & Drop oder Klick"
             },
             "button": {
@@ -2240,11 +2240,14 @@
           "available": "Verfügbare Modelle",
           "upload": {
             "img": "Modelle Hochladen",
-            "title": "Modelle Hochladen",
+            "title": "Eigene Modelle Hochladen",
             "button": "zum Upload"
           },
           "error": {
             "noModels": "keine Modelle gefunden"
+          },
+          "button": {
+            "select": "Auswählen"
           }
         }
       },

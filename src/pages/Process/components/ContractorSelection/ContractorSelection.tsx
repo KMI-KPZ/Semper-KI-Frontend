@@ -32,7 +32,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { process } = useDefinedProcess();
-  const contractors = useGetContractors(process.processID);
+  const contractors = useGetContractors();
 
   const [editContractor, setEditContractor] = useState(false);
 

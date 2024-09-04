@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { ProcessModelCard } from "./components/Card";
-import { Container, Text } from "@component-library/index";
+import { Button, Container, Search, Text } from "@component-library/index";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { LoadingSuspense } from "@component-library/index";
 import { ProcessModelPreView } from "./components/PreView";
 import { Heading } from "@component-library/index";
 import { Modal } from "@component-library/index";
 import { ModelProps } from "./types";
 import { ProcessModelUpload } from "./Upload/Upload";
-import useGetModels from "@/api/Service/AdditiveManufacturing/Model/Querys/useGetModels";
-import ServiceSearch from "../Search/Search";
+import useGetModels, {
+  RepositoryModel,
+} from "@/api/Service/AdditiveManufacturing/Model/Querys/useGetModels";
+import useSearch from "@/hooks/useSearch";
+import useDownloadFile from "@/api/Process/Files/Mutations/useDownloadFile";
+// import useUploadModels from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUploadModels";
+// import useDownloadExternalFile from "@/api/Process/Files/Mutations/useDownloadExternalFile";
 
 interface Props {}
 
@@ -25,11 +29,17 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
   const navigate = useNavigate();
 
   const modelsQuery = useGetModels();
-  const [searchText, setSearchText] = useState<string>("");
+  // const uploadModel = useUploadModels();
   const [state, setState] = useState<State>({
     modalOpen: false,
     model: undefined,
   });
+
+  const { filterDataBySearchInput, handleSearchInputChange } =
+    useSearch<RepositoryModel>();
+
+  const downloadFile = useDownloadFile();
+  // const downloadExternalFile = useDownloadExternalFile();
 
   const { projectID, processID } = useParams();
 
@@ -49,32 +59,26 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
     }));
   };
 
-  const filterBySearch = (model: ModelProps): boolean => {
-    if (searchText === "") {
-      return true;
-    }
-    if (
-      model.fileName.toLocaleLowerCase().includes(searchText) ||
-      model.tags.filter((tag) => tag.toLocaleLowerCase().includes(searchText))
-        .length > 0 ||
-      model.certificates.filter((certificate) =>
-        certificate.toLocaleLowerCase().includes(searchText)
-      ).length > 0 ||
-      model.licenses.filter((certificate) =>
-        certificate.toLocaleLowerCase().includes(searchText)
-      ).length > 0
-    )
-      return true;
-    return false;
+  const handleOnClickButtonSelect = (file: string) => {
+    downloadFile.mutate(
+      file
+      //{
+      // onSuccess(data) {
+      //   uploadModel.mutate({
+      //     projectID,
+      //     processID,
+      //     origin: "Service",
+      //     models: [
+      //       {
+      //         file: data,
+      //         details: { certificates: [], licenses: [], tags: [] },
+      //       },
+      //     ],
+      //   });
+      // },
+      // }
+    );
   };
-
-  // const handleOnButtonClickEdit = (index: number) => {
-  //   navigate(
-  //     `edit/${
-  //       models !== undefined && models.length > 0 ? models[index].id : ""
-  //     }`
-  //   );
-  // };
 
   return (
     <Modal
@@ -89,24 +93,34 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
         justify="start"
         className="h-full w-screen max-w-6xl p-5 pt-14 "
       >
-        <ServiceSearch searchText={searchText} setSearchText={setSearchText} />
+        {/* <ServiceSearch searchText={searchText} setSearchText={setSearchText} /> */}
+        <Search handleSearchInputChange={handleSearchInputChange} />
         <Container direction="col" width="full">
           <ProcessModelUpload />
           <Container width="full" direction="col">
             <Heading variant="h2" className="w-full text-left">
               {t("Service.Manufacturing.Model.Model.available")}
             </Heading>
-            <LoadingSuspense query={modelsQuery}>
+            <Container direction="row" wrap="wrap" width="full">
               {modelsQuery.data !== undefined && modelsQuery.data.length > 0 ? (
                 <>
                   {modelsQuery.data
-                    .filter((model) => filterBySearch(model))
-                    .map((model: ModelProps, index: number) => (
+                    .filter((model) => filterDataBySearchInput(model))
+                    .map((model: RepositoryModel, index: number) => (
                       <ProcessModelCard
                         model={model}
                         key={index}
                         openModelView={openModelView}
-                      />
+                      >
+                        <Button
+                          title={t(
+                            "Service.Manufacturing.Model.Model.button.select"
+                          )}
+                          variant="primary"
+                          size="sm"
+                          onClick={() => handleOnClickButtonSelect(model.file)}
+                        />
+                      </ProcessModelCard>
                     ))}
                 </>
               ) : (
@@ -114,7 +128,7 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
                   {t("Service.Manufacturing.Model.Model.error.noModels")}
                 </Text>
               )}
-            </LoadingSuspense>
+            </Container>
           </Container>
           {state.modalOpen === true && state.model !== undefined ? (
             <Modal

@@ -1,30 +1,46 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
+import { objectToArray } from "@/services/utils";
 import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
-import useFilter from "@/hooks/useFilter";
+
+export interface RepositoryModel {
+  name: string;
+  license: string;
+  preview: string;
+  file: string;
+}
 
 const useGetModels = () => {
-  const { activeFilters } = useFilter();
   const getModels = async () =>
     authorizedCustomAxios
-      .post(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/get/`,
-        {
-          filters: activeFilters,
-        }
+      .get(
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/repository/get/`
       )
       .then((response) => {
-        const models: ModelProps[] = response.data.models;
+        const models: RepositoryModel[] = objectToArray(
+          response.data.repository
+        );
+        const parseModels = models.map(
+          (model: RepositoryModel): ModelProps => ({
+            id: "",
+            fileName: model.name,
+            tags: [],
+            date: new Date().toISOString(),
+            licenses: [model.license],
+            certificates: [],
+            URI: model.preview,
+            createdBy: "",
+          })
+        );
 
-        logger("useGetModels | getModels ✅ |", response);
-        return models;
+        logger("useGetModels | getModels ✅ |", models);
+        return parseModels;
       });
 
   return useQuery<ModelProps[], Error>({
     queryKey: ["models"],
     queryFn: getModels,
-    initialData: [],
   });
 };
 

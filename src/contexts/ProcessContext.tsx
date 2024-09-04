@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useState } from "react";
 import { Process } from "@/api/Process/Querys/useGetProcess";
-import { FilterItemProps } from "@/pages/Process/components/Service/Filter/Filter";
+import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 
 interface ProcessContextProviderProps {
   process: Process;

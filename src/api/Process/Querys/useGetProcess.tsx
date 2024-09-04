@@ -15,6 +15,7 @@ import {
   OrganizationPriority,
   parseOrganizationPrioritise,
 } from "@/api/Organization/Querys/useGetOrganization";
+import { UpdatePriorities } from "@/api/Organization/Mutations/useUpdateOrganization";
 
 export interface ProcessDetailsProps {
   provisionalContractor?: string;
@@ -22,6 +23,7 @@ export interface ProcessDetailsProps {
   clientBillingAddress?: UserAddressProps;
   clientDeliverAddress?: UserAddressProps;
   amount: number;
+  priorities: OrganizationPriority[];
 }
 
 export type Process = NoServiceProcessProps | DefinedProcess;
@@ -43,7 +45,6 @@ export type DefaultProcessProps = {
   accessedWhen: Date;
   files: ProcessFile[];
   messages: { [key: string]: ChatMessageProps[] };
-  priorities?: OrganizationPriority[];
 };
 
 export type NoServiceProcessProps = {
@@ -132,6 +133,7 @@ export interface UpdateProcessDetailsProps {
   clientDeliverAddress?: UserAddressProps;
   clientBillingAddress?: UserAddressProps;
   amount?: number;
+  priorities?: UpdatePriorities;
 }
 
 export interface ProcessDeletionsProps {
@@ -230,12 +232,14 @@ const useGetProcess = () => {
                 .length === 0
                 ? undefined
                 : response.data.processDetails.clientDeliverAddress,
+            priorities: parseOrganizationPrioritise(
+              response.data.processDetails.priorities
+            ),
           },
           messages:
             Object.keys(response.data.messages).length === 0
               ? []
               : response.data.messages,
-          priorities: parseOrganizationPrioritise(response.data.priorities),
         };
         logger("useGetProcess | getProcess ✅ |", process);
 

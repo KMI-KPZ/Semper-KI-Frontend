@@ -38,7 +38,10 @@ const Organization: React.FC<OrganizationViewProps> = (props) => {
         />
       </Container>
       <Container className="container" width="full">
-        <PrioritiesForm priorities={organization.details.priorities} />
+        <PrioritiesForm
+          priorities={organization.details.priorities}
+          type="orga"
+        />
       </Container>
       <PermissionGate element="OrganizationInvitation">
         {rolesQuery.isLoading || invitesQuery.isLoading ? (

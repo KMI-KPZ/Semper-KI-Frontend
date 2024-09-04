@@ -3,16 +3,21 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@component-library/index";
 import { OrganizationPriority } from "@/api/Organization/Querys/useGetOrganization";
 import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganization";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import useProcess from "@/hooks/Process/useProcess";
 
 interface PrioritiesFormItemProps {
   freePoints: number;
   priority: OrganizationPriority;
+  type: "orga" | "process";
 }
 
 const PrioritiesFormItem: React.FC<PrioritiesFormItemProps> = (props) => {
-  const { priority, freePoints } = props;
+  const { priority, freePoints, type } = props;
   const { t } = useTranslation();
   const updateOrganization = useUpdateOrganization();
+  const { process } = useProcess();
+  const updateProcess = useUpdateProcess();
 
   const length = 7;
 
@@ -24,13 +29,29 @@ const PrioritiesFormItem: React.FC<PrioritiesFormItemProps> = (props) => {
       freePoints + priority.value - parsedValue >= 0
         ? parsedValue
         : freePoints + priority.value;
-    updateOrganization.mutate({
-      changes: {
-        priorities: {
-          [priority.type]: { value },
+
+    if (type === "orga")
+      updateOrganization.mutate({
+        changes: {
+          priorities: {
+            [priority.type]: { value },
+          },
         },
-      },
-    });
+      });
+    else {
+      updateProcess.mutate({
+        processIDs: [process.processID],
+        updates: {
+          changes: {
+            processDetails: {
+              priorities: {
+                [priority.type]: { value },
+              },
+            },
+          },
+        },
+      });
+    }
   };
 
   return (

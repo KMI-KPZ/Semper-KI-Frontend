@@ -65,7 +65,10 @@ const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
         )}
       </Heading>
       <Divider />
-      <PrioritiesForm priorities={[]} />
+      <PrioritiesForm
+        priorities={process.processDetails.priorities}
+        type="process"
+      />
       <Divider />
 
       {contractors.data !== undefined && contractors.data.length > 0 ? (

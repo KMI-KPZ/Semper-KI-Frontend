@@ -31,10 +31,12 @@ export interface UpdateOrgaChanges {
     };
   };
   taxID?: string;
-  priorities?: {
-    [key: string]: {
-      value: number;
-    };
+  priorities?: UpdatePriorities;
+}
+
+export interface UpdatePriorities {
+  [key: string]: {
+    value: number;
   };
 }
 

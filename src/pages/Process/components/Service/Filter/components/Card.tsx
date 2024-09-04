@@ -1,8 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProcessFilterItem from "./Item";
-import { CategoryProps, FilterItemProps } from "../Filter";
+import { CategoryProps } from "../Filter";
 import { Container, Heading, Text } from "@component-library/index";
+import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 
 interface Props {
   category: CategoryProps;

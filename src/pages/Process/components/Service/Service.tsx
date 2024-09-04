@@ -63,12 +63,14 @@ const Service: React.FC<ServiceProps> = (props) => {
         />
       }
     >
-      <ProcessFilter />
       {process.serviceType === undefined ||
       process.serviceType === ServiceType.NONE ? (
         <ServiceSelection />
       ) : (
-        <ServiceDetails process={process} />
+        <>
+          <ProcessFilter />
+          <ServiceDetails process={process} />
+        </>
       )}
     </ProcessContainer>
   );

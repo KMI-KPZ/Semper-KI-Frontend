@@ -35,7 +35,6 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { Test } from "../Test/Test";
-import { FilterItemProps } from "../Process/components/Service/Filter/Filter";
 import { OrganizationOutlet } from "@/outlets/OrganizationOutlet";
 import { ToastContainer } from "react-toastify";
 import { ContentBox } from "@component-library/index";
@@ -45,6 +44,7 @@ import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
 import { ManufacturingModels } from "../Process/components/Service/ServiceEdit/Manufacturing/Model/Model";
 import { ManufacturingMaterials } from "../Process/components/Service/ServiceEdit/Manufacturing/Material/Material";
 import { ManufacturingPostProcessings } from "../Process/components/Service/ServiceEdit/Manufacturing/PostProcessing/PostProcessing";
+import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 
 export type AppState = {
   guideFilter: FilterItemProps[];

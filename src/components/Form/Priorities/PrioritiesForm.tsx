@@ -5,11 +5,12 @@ import { OrganizationPriority } from "@/api/Organization/Querys/useGetOrganizati
 import PrioritiesFormItem from "./PrioritiesFormItem";
 
 interface PrioritiesFormProps {
+  type: "orga" | "process";
   priorities: OrganizationPriority[] | undefined;
 }
 
 const PrioritiesForm: React.FC<PrioritiesFormProps> = (props) => {
-  const { priorities = [] } = props;
+  const { priorities = [], type } = props;
   const { t } = useTranslation();
 
   const usedPoints = priorities.reduce(
@@ -62,6 +63,7 @@ const PrioritiesForm: React.FC<PrioritiesFormProps> = (props) => {
           <tbody>
             {priorities.map((priority: OrganizationPriority, index) => (
               <PrioritiesFormItem
+                type={type}
                 priority={priority}
                 key={index}
                 freePoints={freePoints}

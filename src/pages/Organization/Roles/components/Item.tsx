@@ -46,28 +46,30 @@ const OrganizationRolesItem: React.FC<OrganizationRolesItemProps> = (props) => {
         {rolePermissionsQuery.data !== undefined &&
         rolePermissionsQuery.data.length > 0 ? (
           <table className="w-full table-auto border-collapse">
-            {getGroupedPermissions(rolePermissionsQuery.data).map(
-              (permission: PermissionGroupProps, index) => (
-                <tr key={index} className=" [&:not(:last-child)]:border-b-2 ">
-                  <td className="p-2 align-text-top">
-                    <Text variant="body">
-                      {t(`types.permissionContext.${permission.context}`)}:
-                    </Text>
-                  </td>
-                  <td>
-                    <ul className="list-disc p-2">
-                      {permission.permissionTypes.map(
-                        (permissionType, _index) => (
-                          <li key={_index}>
-                            {t(`types.permissionType.${permissionType}`)}
-                          </li>
-                        )
-                      )}
-                    </ul>
-                  </td>
-                </tr>
-              )
-            )}
+            <tbody>
+              {getGroupedPermissions(rolePermissionsQuery.data).map(
+                (permission: PermissionGroupProps, index) => (
+                  <tr key={index} className=" [&:not(:last-child)]:border-b-2 ">
+                    <td className="p-2 align-text-top">
+                      <Text variant="body">
+                        {t(`types.permissionContext.${permission.context}`)}:
+                      </Text>
+                    </td>
+                    <td>
+                      <ul className="list-disc p-2">
+                        {permission.permissionTypes.map(
+                          (permissionType, _index) => (
+                            <li key={_index}>
+                              {t(`types.permissionType.${permissionType}`)}
+                            </li>
+                          )
+                        )}
+                      </ul>
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
           </table>
         ) : (
           <Text variant="body">{t("Organization.Roles.Roles.empty")}</Text>

@@ -11,61 +11,15 @@ import {
 import ProcessFilterCard from "./components/Card";
 import useFilter from "@/hooks/useFilter";
 import Collapsible from "@/components/Collapsible/Collapsible";
+import {
+  FilterCategoryType,
+  FilterItemProps,
+} from "@/api/Filter/Querys/useGetFilters";
 interface Props {}
-
-export type FilterCategoryType =
-  | "SELECTED"
-  | "GENERAL"
-  | "MODEL"
-  | "MATERIAL"
-  | "PROCEEDING"
-  | "MANUFACTURER"
-  | "POSTPROCESSING"
-  | "ADDITIVE"
-  | "TEST";
-
-export type FilterType =
-  | "TEXT"
-  | "TEXTAREA"
-  | "NUMBER"
-  | "DATE"
-  | "COLOR"
-  | "SLIDER"
-  | "SLIDERSELECTION"
-  | "SELECTION"
-  | "MULTISELECTION";
 
 export interface CategoryProps {
   title: FilterCategoryType;
   open: boolean;
-}
-
-export interface FilterItemProps {
-  id: number;
-  isChecked: boolean;
-  isOpen: boolean;
-  question: FilterQuestionProps;
-  answer: FilterAnswerProps | null;
-}
-
-export interface FilterQuestionProps {
-  isSelectable: boolean;
-  title: string;
-  category: FilterCategoryType;
-  type: FilterType;
-  values: string[] | null;
-  range: number[] | null;
-  units: string[] | string | null;
-}
-
-export interface FilterAnswerProps {
-  unit: string | null;
-  value: string | string[] | number | RangeMinMaxProps;
-}
-
-export interface RangeMinMaxProps {
-  min: number;
-  max: number;
 }
 
 const generateCategoryList = (
@@ -77,10 +31,10 @@ const generateCategoryList = (
       stringList.push(filterItem.question.category);
   });
   let categoryList: CategoryProps[] = [{ open: false, title: "SELECTED" }];
-  stringList.forEach((category) => {
+  stringList.forEach((category, index) => {
     categoryList.push({
       title: category,
-      open: category === "GENERAL" ? true : false,
+      open: index === 0 ? true : false,
     });
   });
   return categoryList;
@@ -97,6 +51,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
     resetFilters,
     setEditFilters,
   } = useFilter();
+
   const [categoryList, setCategoryList] = useState<CategoryProps[]>(
     generateCategoryList(editFilters)
   );
@@ -120,7 +75,12 @@ const ProcessFilter: React.FC<Props> = (props) => {
 
   const handleOnClickApplyButton = () => {
     applyFilters();
-    setCategoryList(prev => prev.map(category => ({...category, open: category.title === "SELECTED" ? true: false})));
+    setCategoryList((prev) =>
+      prev.map((category) => ({
+        ...category,
+        open: category.title === "SELECTED" ? true : false,
+      }))
+    );
   };
 
   const handleOnClickCancelButton = () => {
@@ -158,7 +118,11 @@ const ProcessFilter: React.FC<Props> = (props) => {
   };
 
   return (
-    <Container width="full" direction="col" className="gap-0 p-5">
+    <Container
+      width="full"
+      direction="col"
+      className="gap-0 rounded-xl border-2 p-5"
+    >
       <Container width="full" justify="start">
         <Heading variant="h3">
           {t("Process.components.Filter.Filter.pageTitle")}
@@ -190,7 +154,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
               direction="col"
               align="center"
               wrap="wrap"
-              className="gap-3 rounded-xl border-2 p-5"
+              className="gap-3   rounded-xl border-2 p-5"
             >
               {categoryList.filter((category) => category.open).length > 0 ? (
                 categoryList

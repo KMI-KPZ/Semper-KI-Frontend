@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FilterItemProps } from "../Filter";
+import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 
 interface Props {
   filterItem: FilterItemProps;

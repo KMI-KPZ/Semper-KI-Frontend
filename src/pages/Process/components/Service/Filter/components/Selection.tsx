@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { FilterItemProps } from "../Filter";
+import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 
 interface Props {
   filterItem: FilterItemProps;
   setFilterItem(filterItem: FilterItemProps): void;
 }
 
+export const parseFilterSelectionValue = (value: any): string => {
+  if (
+    value !== null &&
+    value !== undefined &&
+    typeof value === "object" &&
+    value.id !== undefined &&
+    value.name !== undefined
+  ) {
+    return value.id;
+  } else return "default";
+};
+
 const ProcessFilterSelection: React.FC<Props> = (props) => {
   const { filterItem, setFilterItem } = props;
+
   const [value, setValue] = useState<string>(
-    filterItem.answer !== null &&
-      typeof filterItem.answer.value === "string" &&
-      filterItem.question.values?.includes(filterItem.answer.value)
-      ? filterItem.answer.value
-      : filterItem.question.values !== null &&
-        filterItem.question.values.length > 0
-      ? filterItem.question.values[0]
-      : "default"
+    parseFilterSelectionValue(filterItem.answer)
   );
 
   useEffect(() => {
@@ -44,9 +50,13 @@ const ProcessFilterSelection: React.FC<Props> = (props) => {
         ---
       </option>
       {filterItem.question.values !== null
-        ? filterItem.question.values.map((title: string, index: number) => (
-            <option key={index} value={title} className="f-input-select-option">
-              {title}
+        ? filterItem.question.values.map((value, index: number) => (
+            <option
+              key={index}
+              value={value.id}
+              className="f-input-select-option"
+            >
+              {value.name}
             </option>
           ))
         : ""}

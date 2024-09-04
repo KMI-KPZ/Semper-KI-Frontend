@@ -1,5 +1,8 @@
 import React from "react";
-import { FilterItemProps } from "../Filter";
+import {
+  FilterItemProps,
+  FilterSelectionValue,
+} from "@/api/Filter/Querys/useGetFilters";
 import { useTranslation } from "react-i18next";
 import useSearch from "@/hooks/useSearch";
 import { Container, Search } from "@component-library/index";
@@ -12,10 +15,10 @@ interface Props {
 const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { filterItem, setFilterItem } = props;
-  const options: string[] =
+  const options: FilterSelectionValue[] =
     filterItem.question.values !== null && filterItem.question.values.length > 0
       ? filterItem.question.values
-      : ["default"];
+      : [];
   const values: string[] = (filterItem.answer?.value as string[]) || [];
   const allChecked = options.length === values.length;
   const { filterDataBySearchInput, handleSearchInputChange } =
@@ -44,7 +47,7 @@ const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
   };
 
   const toggleAllValues = () => {
-    setParentFilterItem(allChecked ? [] : options);
+    setParentFilterItem(allChecked ? [] : options.map((option) => option.id));
   };
 
   return (
@@ -84,19 +87,19 @@ const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
           )}
         </label>
         {options
-          .filter((name) => filterDataBySearchInput(name))
-          .map((name, index) => (
+          .filter((value) => filterDataBySearchInput(value.name))
+          .map((value, index) => (
             <label
               className={`flex flex-row items-center 
               justify-start gap-3 rounded-full border-2
                 px-3 py-1 duration-300 
                ${
-                 values.includes(name)
+                 values.includes(value.name)
                    ? "border-blue-900 bg-blue-100 hover:cursor-pointer hover:border-gray-200"
                    : "hover:ultramarinblau border-gray-200 hover:cursor-pointer"
                }`}
               key={index}
-              onClick={() => handleSelectOption(name)}
+              onClick={() => handleSelectOption(value.id)}
             >
               {/* <input
                 value={name}
@@ -105,7 +108,7 @@ const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
                 checked={values.includes(name)}
                 onChange={handleSelectOption}
               /> */}
-              {name}
+              {value.name}
             </label>
           ))}
       </Container>

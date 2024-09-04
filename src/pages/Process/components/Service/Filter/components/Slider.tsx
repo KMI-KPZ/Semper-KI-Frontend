@@ -1,8 +1,11 @@
 import * as React from "react";
 import Slider from "@mui/material/Slider";
 import { Stack } from "@mui/system";
-import { FilterItemProps, RangeMinMaxProps } from "../Filter";
 import { Container } from "@component-library/index";
+import {
+  FilterItemProps,
+  RangeMinMaxProps,
+} from "@/api/Filter/Querys/useGetFilters";
 
 function valuetext(value: number) {
   return `${value}°C`;

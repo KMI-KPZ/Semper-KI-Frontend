@@ -1,5 +1,5 @@
+import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 import { ProcessContext } from "@/contexts/ProcessContext";
-import { FilterItemProps } from "@/pages/Process/components/Service/Filter/Filter";
 import _FilterItems from "@/hooks/Data/FilterQuestions.json";
 import { useContext } from "react";
 

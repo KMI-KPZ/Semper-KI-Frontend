@@ -7,9 +7,9 @@ import ProcessFilterTextArea from "./TextArea";
 import ProcessFilterColorPicker from "./ColorPicker";
 import ProcessFilterNumberInput from "./NumberInput";
 import ProcessFilterMultiSelection from "./MultiSelection";
-import { FilterItemProps } from "../Filter";
 import { Container, Heading } from "@component-library/index";
 import { useTranslation } from "react-i18next";
+import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 
 interface Props {
   filterItem: FilterItemProps;

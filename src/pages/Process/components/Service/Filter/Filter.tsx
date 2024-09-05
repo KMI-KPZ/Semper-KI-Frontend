@@ -151,7 +151,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
                       size="sm"
                       variant={category.open ? "primary" : "secondary"}
                       onClick={() => handleOnClickMenuOpen(category, index)}
-                      className={`rounded-none border-2 border-b-0 shadow-none
+                      className={`rounded-none border-2 border-b-0 border-gray-400 shadow-none
                         ${index === 0 ? " rounded-tl-xl border-r-0" : ""} 
                       ${
                         index === allCategorys.length - 1
@@ -168,7 +168,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
                 direction="col"
                 align="center"
                 wrap="wrap"
-                className="gap-3  rounded-xl border-2 p-5"
+                className="gap-3  rounded-xl border-2 border-gray-400 p-5"
               >
                 {categoryList.filter((category) => category.open).length > 0 ? (
                   categoryList
@@ -193,10 +193,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
                       </Fragment>
                     ))
                 ) : (
-                  <Container
-                    width="full"
-                    // className="rounded-xl border-2 p-5"
-                  >
+                  <Container width="full">
                     <Text>
                       {t("Service.Manufacturing.Filter.Filter.noCategory")}
                     </Text>

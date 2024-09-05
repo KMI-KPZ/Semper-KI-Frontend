@@ -39,7 +39,13 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
           />
         ))
       ) : (
-        <Container width="full" className="pb-3" direction="col" align="start">
+        <Container
+          width="full"
+          className="pb-3"
+          direction="col"
+          align="center"
+          justify="center"
+        >
           <Text>
             {category.title === "SELECTED"
               ? t("Process.Service.Filter.components.Card.noSelectedFitlers")

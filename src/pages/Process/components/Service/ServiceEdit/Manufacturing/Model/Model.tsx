@@ -94,13 +94,13 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
         className="h-full w-screen max-w-6xl p-5 pt-14 "
       >
         {/* <ServiceSearch searchText={searchText} setSearchText={setSearchText} /> */}
-        <Search handleSearchInputChange={handleSearchInputChange} />
         <Container direction="col" width="full">
           <ProcessModelUpload />
           <Container width="full" direction="col">
             <Heading variant="h2" className="w-full text-left">
               {t("Service.Manufacturing.Model.Model.available")}
             </Heading>
+            <Search handleSearchInputChange={handleSearchInputChange} />
             <Container direction="row" wrap="wrap" width="full">
               {modelsQuery.data !== undefined && modelsQuery.data.length > 0 ? (
                 <>

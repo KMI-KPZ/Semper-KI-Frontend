@@ -55,25 +55,25 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
     resetNodeID();
   };
 
-  return (
-    <Container width="full" direction="col" className="card gap-0">
-      <Heading variant="h3" className="">
-        {t("Resources.components.Edit.draft")}
-      </Heading>
-      <Collapsible initialOpen showButton className="mt-5">
-        <Container width="full" direction="col" className="">
-          <Container width="full" direction="col" gap={3}>
-            <Text className="text-center">
-              {t("Resources.components.Edit.draftDescription")}
-            </Text>
-            <Text className="text-center">
-              {t("Resources.components.Edit.draftDescription2")}
-            </Text>
-          </Container>
-          <Search handleSearchInputChange={handleSearchInputChange} />
-          {nodes.isLoading ? (
-            <LoadingAnimation />
-          ) : nodes.data !== undefined ? (
+  if (nodes.isLoading) return <LoadingAnimation />;
+  if (nodes.data !== undefined)
+    return (
+      <Container width="full" direction="col" className="card gap-0">
+        <Heading variant="h3" className="">
+          {t("Resources.components.Edit.draft")}
+        </Heading>
+        <Collapsible initialOpen showButton className="mt-5">
+          <Container width="full" direction="col" className="">
+            <Container width="full" direction="col" gap={3}>
+              <Text className="text-center">
+                {t("Resources.components.Edit.draftDescription")}
+              </Text>
+              <Text className="text-center">
+                {t("Resources.components.Edit.draftDescription2")}
+              </Text>
+            </Container>
+            <Search handleSearchInputChange={handleSearchInputChange} />
+
             <Container
               width="full"
               direction="col"
@@ -206,37 +206,35 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                 </tbody>
               </table>
             </Container>
-          ) : (
-            <Text>{t("Resources.components.Edit.error")}</Text>
-          )}
-        </Container>
-      </Collapsible>
-      <ResourcesNodeView nodeID={detailsNodeID} closeModal={resetNodeID}>
-        <Container
-          width="fit"
-          className="card sticky bottom-5 bg-white px-4 py-2"
-        >
-          <Button
-            variant="text"
-            size="sm"
-            title={t("Resources.components.Edit.button.draft")}
-            onClick={() => {
-              handleOnClickModalButtonDraft(detailsNodeID);
-            }}
-          />
-          <Button
-            variant="text"
-            size="sm"
-            title={t("Resources.components.Edit.button.variant")}
-            onClick={() => {
-              deleteModal("nodeView");
-              navigate(`../variant/${detailsNodeID}`);
-            }}
-          />
-        </Container>
-      </ResourcesNodeView>
-    </Container>
-  );
+          </Container>
+        </Collapsible>
+        <ResourcesNodeView nodeID={detailsNodeID} closeModal={resetNodeID}>
+          <Container
+            width="fit"
+            className="card sticky bottom-5 bg-white px-4 py-2"
+          >
+            <Button
+              variant="text"
+              size="sm"
+              title={t("Resources.components.Edit.button.draft")}
+              onClick={() => {
+                handleOnClickModalButtonDraft(detailsNodeID);
+              }}
+            />
+            <Button
+              variant="text"
+              size="sm"
+              title={t("Resources.components.Edit.button.variant")}
+              onClick={() => {
+                deleteModal("nodeView");
+                navigate(`../variant/${detailsNodeID}`);
+              }}
+            />
+          </Container>
+        </ResourcesNodeView>
+      </Container>
+    );
+  return <Text>{t("Resources.components.Edit.error")}</Text>;
 };
 
 export default ResourcesNodeDraft;

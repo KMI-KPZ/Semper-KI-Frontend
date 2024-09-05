@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import ProcessFilterItem from "./Item";
 import { CategoryProps } from "../Filter";
-import { Container, Heading, Text } from "@component-library/index";
+import { Container, Text } from "@component-library/index";
 import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 
 interface Props {
@@ -14,22 +14,22 @@ interface Props {
 const ProcessFilterCard: React.FC<Props> = (props) => {
   const { category, filterItemList, setFilterItem } = props;
   const { t } = useTranslation();
-  const getCountOfChecktItems = (): string => {
-    const count = filterItemList.filter(
-      (filterItem: FilterItemProps) => filterItem.isChecked
-    ).length;
-    return count > 0 ? `(${count})` : "";
-  };
+  // const getCountOfChecktItems = (): string => {
+  //   const count = filterItemList.filter(
+  //     (filterItem: FilterItemProps) => filterItem.isChecked
+  //   ).length;
+  //   return count > 0 ? `(${count})` : "";
+  // };
 
   return (
     <Container width="full" direction="col" align="start" className="gap-0 p-0">
-      <Container width="full" justify="start" className="px-3 pb-2">
+      {/* <Container width="full" justify="start" className="px-3 pb-2">
         <Heading variant="h3">
           {`${t(
             `enum.FilterCategoryType.${category.title}`
           )} ${getCountOfChecktItems()}`}
         </Heading>
-      </Container>
+      </Container> */}
       {filterItemList.length > 0 ? (
         filterItemList.map((filterItem: FilterItemProps, index: number) => (
           <ProcessFilterItem

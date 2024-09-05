@@ -123,7 +123,7 @@
       "MUILTISELECT": "Mehrfachauswahl"
     },
     "FilterCategoryType": {
-      "SELECTED": "Ausgewählt",
+      "SELECTED": "Ausgewählte Vorgaben",
       "GENERAL": "Allgemein",
       "MODEL": "Modell",
       "MATERIAL": "Material",
@@ -1080,6 +1080,7 @@
           },
           "ContractorList": {
             "heading": "Auftragnehmerauswahl",
+            "contractors": "Auftragnehmer sortiert nach ihren Prioritäten",
             "noContractorFound": "Kein Auftragnehmer gefunden",
             "button": {
               "select": "Auftragnehmer auswählen",

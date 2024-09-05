@@ -70,6 +70,11 @@ const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
         type="process"
       />
       <Divider />
+      <Heading variant="h2">
+        {t(
+          "Process.components.ContractorSelection.components.ContractorList.contractors"
+        )}
+      </Heading>
 
       {contractors.data !== undefined && contractors.data.length > 0 ? (
         <form className="flex flex-col items-center justify-start gap-5">

@@ -132,85 +132,98 @@ const ProcessFilter: React.FC<Props> = (props) => {
       <Collapsible initialOpen showButton logName="Filter" animation={false}>
         <Container width="full" direction="col" className="my-5">
           <Container width="full" direction="col">
-            <Container direction="row" wrap="wrap" className="">
-              {categoryList.map((category, index) => (
-                <Badge
-                  count={getCountOfChecktItems(category.title)}
-                  key={index}
-                >
-                  <Button
+            <Container width="full" direction="col" className="gap-0 p-0">
+              <Container
+                direction="row"
+                width="full"
+                wrap="wrap"
+                justify="start"
+                className="gap-0 pl-5"
+              >
+                {categoryList.map((category, index, allCategorys) => (
+                  <Badge
+                    count={getCountOfChecktItems(category.title)}
                     key={index}
-                    title={t(`enum.FilterCategoryType.${category.title}`)}
-                    size="sm"
-                    variant={category.open ? "primary" : "secondary"}
-                    onClick={() => handleOnClickMenuOpen(category, index)}
-                  />
-                </Badge>
-              ))}
-            </Container>
-            <Container
-              width="full"
-              justify="start"
-              direction="col"
-              align="center"
-              wrap="wrap"
-              className="gap-3   rounded-xl border-2 p-5"
-            >
-              {categoryList.filter((category) => category.open).length > 0 ? (
-                categoryList
-                  .filter((category) => category.open)
-                  .map((category: CategoryProps, categoryIndex: number) => (
-                    <Fragment key={categoryIndex}>
-                      {categoryIndex !== 0 ? <Divider /> : null}
-                      <ProcessFilterCard
-                        category={category}
-                        filterItemList={
-                          category.title === "SELECTED"
-                            ? getAllCheckFilterItems()
-                            : editFilters.filter(
-                                (filterItem: FilterItemProps) =>
-                                  filterItem.question.category ===
-                                  category.title
-                              )
-                        }
-                        setFilterItem={setFilterItem}
-                        key={categoryIndex}
-                      />
-                    </Fragment>
-                  ))
-              ) : (
-                <Container
-                  width="full"
-                  // className="rounded-xl border-2 p-5"
-                >
-                  <Text>
-                    {t("Service.Manufacturing.Filter.Filter.noCategory")}
-                  </Text>
-                </Container>
-              )}
-              <Container width="full">
-                <Button
-                  size="sm"
-                  onClick={handleOnClickResetButton}
-                  title={t("Service.Manufacturing.Filter.Filter.button.reset")}
-                />
-                <Button
-                  size="sm"
-                  active={differenzCount > 0}
-                  onClick={handleOnClickCancelButton}
-                  title={t("Service.Manufacturing.Filter.Filter.button.cancel")}
-                />
-                <Badge count={differenzCount}>
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    onClick={handleOnClickApplyButton}
-                    title={t(
-                      "Service.Manufacturing.Filter.Filter.button.apply"
-                    )}
-                  />
-                </Badge>
+                  >
+                    <Button
+                      key={index}
+                      title={t(`enum.FilterCategoryType.${category.title}`)}
+                      size="sm"
+                      variant={category.open ? "primary" : "secondary"}
+                      onClick={() => handleOnClickMenuOpen(category, index)}
+                      className={`rounded-none border-2 border-b-0 shadow-none
+                        ${index === 0 ? " rounded-tl-xl border-r-0" : ""} 
+                      ${
+                        index === allCategorys.length - 1
+                          ? "rounded-tr-xl  border-l-0"
+                          : ""
+                      }`}
+                    />
+                  </Badge>
+                ))}
               </Container>
+              <Container
+                width="full"
+                justify="start"
+                direction="col"
+                align="center"
+                wrap="wrap"
+                className="gap-3  rounded-xl border-2 p-5"
+              >
+                {categoryList.filter((category) => category.open).length > 0 ? (
+                  categoryList
+                    .filter((category) => category.open)
+                    .map((category: CategoryProps, categoryIndex: number) => (
+                      <Fragment key={categoryIndex}>
+                        {categoryIndex !== 0 ? <Divider /> : null}
+                        <ProcessFilterCard
+                          category={category}
+                          filterItemList={
+                            category.title === "SELECTED"
+                              ? getAllCheckFilterItems()
+                              : editFilters.filter(
+                                  (filterItem: FilterItemProps) =>
+                                    filterItem.question.category ===
+                                    category.title
+                                )
+                          }
+                          setFilterItem={setFilterItem}
+                          key={categoryIndex}
+                        />
+                      </Fragment>
+                    ))
+                ) : (
+                  <Container
+                    width="full"
+                    // className="rounded-xl border-2 p-5"
+                  >
+                    <Text>
+                      {t("Service.Manufacturing.Filter.Filter.noCategory")}
+                    </Text>
+                  </Container>
+                )}
+              </Container>
+            </Container>
+            <Container width="full">
+              <Button
+                size="sm"
+                onClick={handleOnClickResetButton}
+                title={t("Service.Manufacturing.Filter.Filter.button.reset")}
+              />
+              <Button
+                size="sm"
+                active={differenzCount > 0}
+                onClick={handleOnClickCancelButton}
+                title={t("Service.Manufacturing.Filter.Filter.button.cancel")}
+              />
+              <Badge count={differenzCount}>
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={handleOnClickApplyButton}
+                  title={t("Service.Manufacturing.Filter.Filter.button.apply")}
+                />
+              </Badge>
             </Container>
           </Container>
         </Container>

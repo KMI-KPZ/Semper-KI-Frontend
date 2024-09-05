@@ -1,9 +1,7 @@
-import { Heading, Text } from "@component-library/index";
+import { Text } from "@component-library/index";
 import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { ReactComponent as UploadIcon } from "@icons/Upload.svg";
 import { useTranslation } from "react-i18next";
-import logger from "@/hooks/useLogger";
-import { Button } from "@component-library/index";
 
 interface Props {
   multiple?: boolean;
@@ -23,7 +21,6 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
   const { t } = useTranslation();
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
-  const [fileList, setFileList] = useState<File[]>([]);
   const [error, setError] = useState<boolean>(false);
 
   const handleChangeHiddenInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,14 +30,6 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
   };
 
   const handleClickUploadCard = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    if (hiddenFileInput.current !== null) {
-      hiddenFileInput.current.click();
-    }
-  };
-  const handleClickUploadButton = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
@@ -70,10 +59,6 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       addFiles(Array.from(e.dataTransfer.files));
     }
-  };
-
-  const showError = () => {
-    setError(true);
   };
 
   const addFiles = (files: File[]): void => {

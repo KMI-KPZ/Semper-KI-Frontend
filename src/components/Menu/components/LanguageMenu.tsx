@@ -1,3 +1,4 @@
+import useSetUserLocal from "@/api/Authentification/Mutations/useSetUserLocal";
 import { Button } from "@component-library/index";
 import { ClickAwayListener } from "@mui/material";
 import React, { useState } from "react";
@@ -5,22 +6,22 @@ import { useTranslation } from "react-i18next";
 
 interface MenuLanguageMenuProps {}
 
-interface Language {
-  code: string;
+export interface Language {
   name: string;
   country_code: "de" | "gb";
+  code: "de-DE" | "en-US";
 }
 
-const languages: Language[] = [
+export const app_languages: Language[] = [
   {
-    code: "de",
-    name: "Deutsch",
+    name: "german",
     country_code: "de",
+    code: "de-DE",
   },
   {
-    code: "en",
-    name: "English",
+    name: "english",
     country_code: "gb",
+    code: "en-US",
   },
 ];
 
@@ -28,6 +29,7 @@ const MenuLanguageMenu: React.FC<MenuLanguageMenuProps> = (props) => {
   const {} = props;
   const { t, i18n } = useTranslation();
   const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const setUserLocal = useSetUserLocal();
 
   const closeLanguageMenu = () => {
     setLangMenuOpen(false);
@@ -39,12 +41,17 @@ const MenuLanguageMenu: React.FC<MenuLanguageMenuProps> = (props) => {
 
   const changeLanguage = (code: string) => () => {
     closeLanguageMenu();
-    if (i18n.language !== code) i18n.changeLanguage(code);
+    if (i18n.language !== code)
+      setUserLocal.mutate(code, {
+        onSuccess(_, variables) {
+          i18n.changeLanguage(variables);
+        },
+      });
   };
 
   const getFlagButtonClassName = (): string => {
     let returnString: string = "";
-    languages.forEach((language: Language) =>
+    app_languages.forEach((language: Language) =>
       language.code === i18n.language
         ? (returnString = language.country_code)
         : null
@@ -73,8 +80,8 @@ const MenuLanguageMenu: React.FC<MenuLanguageMenuProps> = (props) => {
               className="absolute z-30 flex translate-y-14 flex-col gap-3 bg-slate-50"
               data-testid="dropdown"
             >
-              {languages
-                .filter(({ code, country_code }) => code !== i18n.language)
+              {app_languages
+                .filter(({ code }) => code !== i18n.language)
                 .map(({ code, country_code }: Language, index) => (
                   <Button
                     title={t(

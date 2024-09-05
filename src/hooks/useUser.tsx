@@ -1,12 +1,12 @@
-import useUserMutations from "@/api/User/useUserMutations";
+import { NewUserAddressProps } from "@/api/User/Mutations/useUpdateUser";
 import { UserContext } from "@/contexts/UserContextProvider";
+import { UseQueryResult } from "@tanstack/react-query";
 import { useContext } from "react";
 
 interface ReturnProps {
   isLoggedIn: boolean;
   user: UserProps;
-  deleteUser(): void;
-  updateUserDetails(details: UpdateUserProps): void;
+  query: UseQueryResult<AuthorizedUserProps, Error>;
 }
 
 export type UserProps = AnonymUser | AuthorizedUserProps;
@@ -28,24 +28,60 @@ export interface AuthorizedUserProps {
 }
 
 export interface UserDetailsProps {
-  email: string;
-  address?: UserAddressProps;
+  email?: string;
+  locale?: AppLanguage;
+  addresses?: UserAddressProps[];
+  statistics?: {
+    lastLogin: string;
+    numberOfLoginsTotal: number;
+    locationOfLastLogin: string;
+  };
+  notificationSettings?: {
+    user: UserNotificationSetting[];
+    organization: OrgaNotificationSetting[];
+  };
 }
+
+export type GeneralNotificationSettings = {
+  event: boolean;
+  email: boolean;
+};
+
+export type UserNotificationSetting = {
+  type: UserNotificationSettingsType;
+} & GeneralNotificationSettings;
+
+export type OrgaNotificationSetting = {
+  type: OrgaNotificationSettingsType;
+} & GeneralNotificationSettings;
+
+export type UserNotificationSettingsType =
+  | "verification"
+  | "processSent"
+  | "responseFromContractor"
+  | "statusChange"
+  | "newMessage"
+  | "actionReminder"
+  | "errorOccurred"
+  | "newsletter";
+
+export type OrgaNotificationSettingsType =
+  | "processReceived"
+  | "responseFromClient"
+  | "statusChange"
+  | "newMessage"
+  | "actionReminder"
+  | "errorOccurred";
+
+export type AppLanguage = "de-DE" | "en-US";
 
 export interface UpdateUserProps {
   address?: UserAddressProps;
 }
 
-export interface UserAddressProps {
-  firstName: string;
-  lastName: string;
-  company?: string;
-  street: string;
-  houseNumber: number;
-  zipcode: string;
-  city: string;
-  country: string;
-}
+export type UserAddressProps = {
+  id: string;
+} & NewUserAddressProps;
 
 export enum UserType {
   "USER",
@@ -63,21 +99,12 @@ export interface Address {
 }
 
 const useUser = (): ReturnProps => {
-  const { isLoggedIn, user } = useContext(UserContext);
-  const { deleteUserMutation, updateUserDetailsMutation } = useUserMutations();
-
-  const deleteUser = () => {
-    deleteUserMutation.mutate();
-  };
-  const updateUserDetails = (details: UpdateUserProps) => {
-    updateUserDetailsMutation.mutate(details);
-  };
+  const { isLoggedIn, user, query } = useContext(UserContext);
 
   return {
-    deleteUser,
     isLoggedIn,
-    updateUserDetails,
     user,
+    query,
   };
 };
 

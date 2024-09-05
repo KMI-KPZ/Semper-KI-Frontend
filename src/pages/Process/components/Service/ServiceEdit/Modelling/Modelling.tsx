@@ -1,0 +1,19 @@
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { Container } from "@component-library/index";
+import { Heading } from "@component-library/index";
+
+export type ModelingServiceProps = {};
+
+const ServiceModeling: React.FC<ModelingServiceProps> = (props) => {
+  const {} = props;
+  const { t } = useTranslation();
+
+  return (
+    <Container>
+      <Heading variant="h1">{t("Service.Modeling.Modeling.title")}</Heading>
+    </Container>
+  );
+};
+
+export default ServiceModeling;

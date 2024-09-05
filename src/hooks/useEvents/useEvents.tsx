@@ -6,16 +6,15 @@ import {
   ProjectEvents,
 } from "@/pages/App/types";
 import { useQueryClient } from "@tanstack/react-query";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import useOrgaEvent from "./hooks/useOrgaEvent";
 import { JSONIsParseable, JSONSafeParse } from "@/services/utils";
 import logger from "@/hooks/useLogger";
 import useProjectEvent from "./hooks/useProjectEvent";
 import { toast } from "@/hooks/useToast";
-import usePermissions from "../usePermissions";
 import { EventContext } from "@/contexts/EventContextProvider";
-import Project from "@/pages/Projects/Project/Project";
+import useReloadPermissions from "@/api/Permissions/Mutations/useReloadPermissions";
 
 interface ReturnProps {
   deleteEvent: (event: DeleteEvent) => void;
@@ -36,7 +35,7 @@ interface ReturnProps {
 
 const useEvents = (): ReturnProps => {
   const { events, socket, setEvents } = useContext(EventContext);
-  const { reloadPermissions } = usePermissions();
+  const reloadPermissions = useReloadPermissions();
 
   const queryClient = useQueryClient();
   const { handleNewProjectEvent, deleteProjectEvent } = useProjectEvent();
@@ -79,7 +78,7 @@ const useEvents = (): ReturnProps => {
         break;
       case "permissionEvent":
         queryClient.invalidateQueries(["organizations", "users"]);
-        reloadPermissions();
+        reloadPermissions.mutate();
         toast(
           t("App.hooks.useEvents.useEvents.toast.permission"),
           "/organization"

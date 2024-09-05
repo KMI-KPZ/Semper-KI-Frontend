@@ -4,13 +4,13 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "@component-library/index";
-import { Heading, Text } from "@component-library/index";
-import useContactFormMutations from "@/api/ContactForm/useContactFormMutations";
+import { Heading } from "@component-library/index";
 import {
   GeneralInput,
   InputLabelProps,
 } from "@component-library/Form/GeneralInput";
 import useGeneralInput from "@component-library/Form/hooks/useGeneralInput";
+import useSendContactForm from "@/api/ContactForm/Muations/useSendContactForm";
 
 interface ContactFormProps {
   closeEdit: () => void;
@@ -26,7 +26,7 @@ export interface ContactFormDataProps {
 const ContactForm: React.FC<ContactFormProps> = (props) => {
   const { closeEdit } = props;
   const { t } = useTranslation();
-  const { sendContactFormMutation } = useContactFormMutations();
+  const sendContactForm = useSendContactForm();
   const { getMaxLabelWidth } = useGeneralInput();
 
   const schema = yup
@@ -57,9 +57,7 @@ const ContactForm: React.FC<ContactFormProps> = (props) => {
     .required();
 
   const {
-    reset,
     register,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<ContactFormDataProps>({
@@ -73,7 +71,7 @@ const ContactForm: React.FC<ContactFormProps> = (props) => {
   });
 
   const onSubmit = (data: ContactFormDataProps) => {
-    sendContactFormMutation.mutate(data);
+    sendContactForm.mutate(data);
     closeEdit();
   };
 

@@ -1,17 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { Heading } from "@component-library/index";
+import { Container, Heading } from "@component-library/index";
 import { Button } from "@component-library/index";
-import { useProject } from "@/pages/Projects/hooks/useProject";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import HomeContainer from "./Container";
-import { AppContext } from "@/pages/App/App";
-import { Container } from "@component-library/index";
-import useProcess from "@/pages/Projects/hooks/useProcess";
-import { UserContext } from "@/contexts/UserContextProvider";
 import useUser, { UserType } from "@/hooks/useUser";
 import { ContentBox } from "@component-library/index";
-import useFlatProjectQuerys from "@/api/Project/useFlatProjectQuerys";
+import useGetFlatProjects from "@/api/Project/Querys/useGetFlatProjects";
+import useCreateProject from "@/api/Project/Mutations/useCreateProject";
 
 interface HomeProjectsProps {}
 
@@ -20,14 +16,14 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const { t } = useTranslation();
   const { user } = useUser();
 
-  const { flatProjectsQuery } = useFlatProjectQuerys();
-  const { createProject } = useProject();
+  const flatProjects = useGetFlatProjects();
+  const createProject = useCreateProject();
 
   const handleOnClickButtonNew = () => {
-    createProject();
+    createProject.mutate("test");
   };
   const handleOnClickButtonDemo = () => {
-    createProject();
+    createProject.mutate("test");
   };
 
   return (
@@ -36,9 +32,9 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
         <Heading variant="h2">{t("Home.components.Projects.title")}</Heading>
         {user.usertype === UserType.ANONYM ? (
           <Container>
-            {flatProjectsQuery.isFetched &&
-            flatProjectsQuery.data !== undefined &&
-            flatProjectsQuery.data.length > 0 ? (
+            {flatProjects.isFetched &&
+            flatProjects.data !== undefined &&
+            flatProjects.data.length > 0 ? (
               <>
                 <Button
                   title={t("Home.components.Projects.button.new")}
@@ -47,7 +43,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
                 />
                 <Button
                   title={t("Home.components.Projects.button.continue")}
-                  to={`/projects/${flatProjectsQuery.data[0].projectID}`}
+                  to={`/projects/${flatProjects.data[0].projectID}`}
                 />
                 <Button
                   title={t("Home.components.Projects.button.projects")}

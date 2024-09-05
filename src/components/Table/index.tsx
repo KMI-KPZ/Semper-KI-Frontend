@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 interface TableProps {
   header: React.ReactElement[];
@@ -8,7 +7,6 @@ interface TableProps {
 
 const Table: React.FC<TableProps> = (props) => {
   const { header, rows } = props;
-  const { t } = useTranslation();
 
   return (
     <table className="w-full table-auto">

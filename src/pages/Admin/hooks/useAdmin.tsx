@@ -1,18 +1,28 @@
-import useAdminMutations from "@/api/Admin/useAdminMutations";
-import { FlatProjectProps } from "@/api/Project/useFlatProjectQuerys";
+import useAdminDeleteOrganization, {
+  AdminDeleteOrgaProps,
+} from "@/api/Admin/Mutations/useAdminDeleteOrganization";
+import useAdminDeleteUser, {
+  AdminDeleteUserProps,
+} from "@/api/Admin/Mutations/useAdminDeleteUser";
+import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { AuthorizedUserProps } from "@/hooks/useUser";
-import { ProcessStatus } from "@/pages/Projects/hooks/useProcess";
-import { ProjectDetailsProps } from "@/pages/Projects/hooks/useProject";
-import { AdminContext } from "@/routeOutlets/AdminOutlet";
 import { UseMutationResult } from "@tanstack/react-query";
 import { useContext } from "react";
+import { ProjectDetailsProps } from "@/api/Project/Querys/useGetProject";
+import { AdminContext } from "@/outlets/AdminOutlet";
 
 interface ReturnProps {
   users: AuthorizedUserProps[];
   organizations: OrganizationProps[];
-  flatProjects: FlatProjectProps[];
-  deleteUser: UseMutationResult<any, Error, DeleteUserProps, unknown>;
-  deleteOrganization: UseMutationResult<any, Error, DeleteUserProps, unknown>;
+  flatProjects: FlatProject[];
+  deleteUser: UseMutationResult<void, Error, AdminDeleteUserProps, unknown>;
+  deleteOrganization: UseMutationResult<
+    void,
+    Error,
+    AdminDeleteOrgaProps,
+    unknown
+  >;
 }
 
 export interface DeleteUserProps {
@@ -49,11 +59,13 @@ export interface AdminFlatProjectProps {
 
 const useAdmin = (): ReturnProps => {
   const { flatProjects, organizations, users } = useContext(AdminContext);
-  const { deleteOrganization, deleteUser } = useAdminMutations();
+  // const { deleteOrganization, deleteUser } = useAdminMutations();
+  const deleteUser = useAdminDeleteUser();
+  const deleteOrganization = useAdminDeleteOrganization();
 
   return {
-    deleteUser,
     deleteOrganization,
+    deleteUser,
     flatProjects,
     organizations,
     users,

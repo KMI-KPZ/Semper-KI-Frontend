@@ -17,15 +17,15 @@ export const Search: React.FC<SearchProps> = (props) => {
     handleSearchInputChange(event.target.value);
   };
   return (
-    <form className="flex w-full flex-col gap-5 md:flex-row">
+    <div className="flex w-full flex-col gap-5 md:flex-row">
       <input
         onKeyDown={handleOnKeyDown}
         onChange={handleOnChange}
         defaultValue=""
-        className="flex w-full bg-slate-100 p-3"
+        className="flex w-full rounded-xl border-2 p-3"
         type="search"
         placeholder={t("Admin.User.search")}
       />
-    </form>
+    </div>
   );
 };

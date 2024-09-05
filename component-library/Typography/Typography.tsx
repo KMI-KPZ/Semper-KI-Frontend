@@ -182,20 +182,4 @@ const Text: React.FC<PropsWithChildren<TextProps>> = ({
   }
 };
 
-type LinkProps = {
-  className?: string;
-  href: string;
-};
-const Link: React.FC<PropsWithChildren<LinkProps>> = ({
-  children,
-  className = "",
-  href,
-}) => {
-  return (
-    <a className={` ${className}`} href={href}>
-      {children}
-    </a>
-  );
-};
-
 export { Heading, Text };

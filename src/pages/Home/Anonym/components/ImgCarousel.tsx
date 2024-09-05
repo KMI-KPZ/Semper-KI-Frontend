@@ -1,7 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import BMWKdeURL from "@images/BMWK_de.png";
-import BMWKenURL from "@images/BMWE_en.png";
 import DATEV from "@images/partner/DATEV.svg";
 import InfAi from "@images/partner/InfAI.png";
 import IWU from "@images/partner/IWU.png";
@@ -12,7 +9,6 @@ import trilogIQa from "@images/partner/trilogIQa.svg";
 import TUC from "@images/partner/TUC.png";
 import USU from "@images/partner/USU.svg";
 import WHZ from "@images/partner/WHZ.svg";
-import logger from "@/hooks/useLogger";
 
 interface HomeImgCarouselProps {}
 
@@ -24,14 +20,13 @@ interface HomeImgItemProps {
 
 const HomeImgCarousel: React.FC<HomeImgCarouselProps> = (props) => {
   const {} = props;
-  const { t, i18n } = useTranslation();
 
   const partners: HomeImgItemProps[] = [
-    {
-      img: i18n.language === "de" ? BMWKdeURL : BMWKenURL,
-      href: "https://www.bmwk.de/",
-      title: "BMWK",
-    },
+    // {
+    //   img: i18n.language === "de" ? BMWKdeURL : BMWKenURL,
+    //   href: "https://www.bmwk.de/",
+    //   title: "BMWK",
+    // },
     {
       img: DATEV,
       href: "https://www.datev.de/",
@@ -116,6 +111,7 @@ const HomeImgCarousel: React.FC<HomeImgCarouselProps> = (props) => {
             key={index}
             href={partner.href}
             title={partner.title}
+            target="_blank"
             className="flex w-60 items-center justify-center"
           >
             <img

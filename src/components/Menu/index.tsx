@@ -1,12 +1,5 @@
 import { Button } from "@component-library/index";
-import React, {
-  KeyboardEvent,
-  MouseEvent,
-  SyntheticEvent,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { KeyboardEvent, MouseEvent, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -17,9 +10,6 @@ import { twMerge } from "tailwind-merge";
 import { NavigationItemData } from "@/data/navigation";
 import useUser from "@/hooks/useUser";
 import HeaderItem from "../Header/components/Item";
-import useEvents from "@/hooks/useEvents/useEvents";
-import { getProjectEventAmount } from "@/hooks/useEvents/hooks/useProjectEvent";
-import logger from "@/hooks/useLogger";
 import useBadge from "@/hooks/useBadge";
 
 interface MenuProps {}
@@ -51,13 +41,11 @@ const Menu: React.FC<MenuProps> = (props) => {
     }
   };
 
-  const handleOnCancel = (e: SyntheticEvent<HTMLDialogElement, Event>) => {
+  const handleOnCancel = () => {
     closeModalWithScroll();
   };
 
-  const handleOnClick = (
-    e: MouseEvent<HTMLDialogElement, globalThis.MouseEvent>
-  ) => {
+  const handleOnClick = () => {
     closeModalWithScroll();
   };
 
@@ -143,6 +131,7 @@ const Menu: React.FC<MenuProps> = (props) => {
           </ul>
         </div>
         <Button
+          className="md:hidden"
           title={t(`components.Header.Header.button.close`)}
           onClick={closeMenu}
           children={<ExpandLessIcon className="md:rotate-90" />}

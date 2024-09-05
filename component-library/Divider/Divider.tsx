@@ -1,6 +1,4 @@
-import logger from "@/hooks/useLogger";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 
 type DividerProps = {
@@ -10,7 +8,6 @@ type DividerProps = {
 
 export const Divider: React.FC<DividerProps> = (props) => {
   const { type = "horizontal", className } = props;
-  const { t } = useTranslation();
   const additionalClassNames = className ?? "";
 
   switch (type) {

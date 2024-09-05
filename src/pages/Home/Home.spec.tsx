@@ -1,7 +1,5 @@
 import { render, screen } from "@test/render";
 import { Home } from "./Home";
-import { UserType } from "@/hooks/useUser";
-import { UserBuilder } from "@test/userBuilder";
 
 describe.skip("<Home>", () => {
   it("should render", () => {
@@ -18,12 +16,10 @@ describe.skip("<Home>", () => {
   });
   it.todo("should render homecards for anonym user with items in cart");
   it("should render homecards for USER", () => {
-    const user = new UserBuilder().withType(UserType.USER).build();
     render(<Home />);
     expect(screen.getByTestId("home-authorized")).toBeInTheDocument();
   });
   it("should render homecards for manufacturer user", () => {
-    const user = new UserBuilder().withType(UserType.ORGANIZATION).build();
     render(<Home />);
     expect(screen.getByTestId("home-authorized")).toBeInTheDocument();
   });

@@ -1,4 +1,3 @@
-import logger from "@/hooks/useLogger";
 import { Button } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
@@ -7,17 +6,15 @@ import { useTranslation } from "react-i18next";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import useCoypuQuerys from "@/api/Coypu/useCoypuQuerys";
+import useGetCoypuData from "@/api/Coypu/Querys/useGetCoypuData";
 
 interface CoypuProps {}
 
 const Coypu: React.FC<CoypuProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { coypuQuery } = useCoypuQuerys();
+  const coypuDataQuery = useGetCoypuData();
   const [expanded, setExpanded] = useState<boolean>(false);
-
-  const getCoypu = () => {};
 
   return (
     <Container direction="col" width="full">
@@ -25,9 +22,9 @@ const Coypu: React.FC<CoypuProps> = (props) => {
         <Heading variant="h2">{t("Home.components.Coypu.title")}</Heading>
         <Heading variant="h3">{t("Home.components.Coypu.title2")}</Heading>
       </Container>
-      {coypuQuery.data !== undefined && coypuQuery.data.length > 0 ? (
+      {coypuDataQuery.data !== undefined && coypuDataQuery.data.length > 0 ? (
         <ul className="flex h-fit w-full flex-row flex-wrap items-start justify-center gap-5">
-          {coypuQuery.data
+          {coypuDataQuery.data
             .slice(0, expanded === false ? 9 : undefined)
             .map((coypu, index) => (
               <li

@@ -1,0 +1,28 @@
+import logger from "@/hooks/useLogger";
+import { authorizedCustomAxios } from "@/api/customAxios";
+import { useQuery } from "@tanstack/react-query";
+import { OntoNode, parseOntoNode } from "./useGetOntoNodes";
+import { useParams } from "react-router-dom";
+
+const useGetOntoNode = () => {
+  const { nodeID } = useParams();
+  const getOntoNode = async () =>
+    authorizedCustomAxios
+      .get(
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/nodes/get/by-id/${nodeID}/`
+      )
+      .then((response) => {
+        const data: OntoNode = parseOntoNode(response.data);
+
+        logger("useGetOntoNode | getOntoNode ✅ |", response);
+        return data;
+      });
+
+  return useQuery<OntoNode, Error>({
+    queryKey: ["resources", "onto", "node", nodeID],
+    enabled: nodeID !== undefined && nodeID !== "",
+    queryFn: getOntoNode,
+  });
+};
+
+export default useGetOntoNode;

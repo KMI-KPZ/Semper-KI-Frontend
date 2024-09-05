@@ -3,18 +3,17 @@ import PersonIcon from "@mui/icons-material/Person";
 import DescriptionIcon from "@mui/icons-material/Description";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import BugReportIcon from "@mui/icons-material/BugReport";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import PrintIcon from "@mui/icons-material/Print";
-import ScienceIcon from "@mui/icons-material/Science";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import FactoryIcon from "@mui/icons-material/Factory";
 import { UserType } from "@/hooks/useUser";
 import { NavigationItemPreferredType } from "@/components/Header";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { DataNaviagtionTranlationType } from "@/components";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 
 export type INavigationItem = {
   title: DataNaviagtionTranlationType;
@@ -37,25 +36,9 @@ export const NavigationItemData: INavigationItem[] = [
   {
     title: "demonstrator",
     link: "/projects",
-    icon: <ScienceIcon fontSize="large" />,
+    icon: <RocketLaunchIcon fontSize="large" />,
     extern: false,
     preferred: ["header", "home"],
-    userTypes: [UserType.ANONYM],
-  },
-  {
-    title: "logout",
-    link: "/logout",
-    icon: <LogoutIcon fontSize="large" />,
-    extern: false,
-    preferred: ["menu"],
-    userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
-  },
-  {
-    title: "login",
-    link: "/login",
-    icon: <LoginIcon fontSize="large" />,
-    extern: false,
-    preferred: ["header"],
     userTypes: [UserType.ANONYM],
   },
 
@@ -65,7 +48,7 @@ export const NavigationItemData: INavigationItem[] = [
     icon: <DescriptionIcon fontSize="large" />,
     extern: false,
     preferred: ["header", "home"],
-    userTypes: [UserType.USER, UserType.ORGANIZATION],
+    userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ANONYM],
   },
   {
     title: "organization",
@@ -92,14 +75,14 @@ export const NavigationItemData: INavigationItem[] = [
     userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
   },
 
-  {
-    title: "test",
-    link: "/test",
-    icon: <BugReportIcon fontSize="large" />,
-    extern: false,
-    preferred: ["menu"],
-    userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
-  },
+  // {
+  //   title: "test",
+  //   link: "/test",
+  //   icon: <BugReportIcon fontSize="large" />,
+  //   extern: false,
+  //   preferred: ["menu"],
+  //   userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
+  // },
   {
     userTypes: [UserType.ADMIN],
     title: "user",
@@ -139,5 +122,21 @@ export const NavigationItemData: INavigationItem[] = [
     icon: <PrintIcon fontSize="large" />,
     preferred: ["home"],
     extern: false,
+  },
+  {
+    title: "logout",
+    link: "/logout",
+    icon: <LogoutIcon fontSize="large" />,
+    extern: false,
+    preferred: ["menu"],
+    userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
+  },
+  {
+    title: "login",
+    link: "/login",
+    icon: <LoginIcon fontSize="large" />,
+    extern: false,
+    preferred: ["header"],
+    userTypes: [UserType.ANONYM],
   },
 ];

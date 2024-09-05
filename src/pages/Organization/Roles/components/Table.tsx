@@ -1,13 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useOrganizations, { RoleProps } from "../../hooks/useOrganizations";
 import {
   getGroupedPermissions,
   getPermissinContextTranslations,
-  sortPermissions,
 } from "../Roles";
 import { LoadingSuspense } from "@component-library/index";
 import OrganizationRolesTableRow from "./TableRow";
+import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
+import useGetOrganizationPermissions from "@/api/Organization/Querys/useGetOrganizationPermissions";
 
 interface OrganizationRolesTableProps {
   roles: RoleProps[];
@@ -19,7 +19,7 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
 ) => {
   const { roles, editRole } = props;
   const { t } = useTranslation();
-  const { permissionsQuery } = useOrganizations();
+  const permissionsQuery = useGetOrganizationPermissions();
 
   return (
     <div className="hidden w-full overflow-auto md:flex ">
@@ -29,10 +29,10 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
             <table className="w-full table-auto">
               <thead>
                 <tr>
-                  <th rowSpan={2} className="p-2" align="center">
+                  <th rowSpan={2} className="p-2 align-text-top" align="center">
                     {t("Organization.Roles.components.Table.name")}
                   </th>
-                  <th rowSpan={2} className="p-2" align="center">
+                  <th rowSpan={2} className="p-2 align-text-top" align="center">
                     {t("Organization.Roles.components.Table.description")}
                   </th>
                   {getPermissinContextTranslations(permissionsQuery.data).map(
@@ -49,7 +49,10 @@ const OrganizationRolesTable: React.FC<OrganizationRolesTableProps> = (
                       </th>
                     )
                   )}
-                  <th rowSpan={2} className="border-l-2 p-2 text-center">
+                  <th
+                    rowSpan={2}
+                    className="border-l-2 p-2 text-center align-text-top"
+                  >
                     {t("Organization.Roles.components.Table.actions")}
                   </th>
                 </tr>

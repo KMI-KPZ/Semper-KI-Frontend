@@ -14,6 +14,27 @@ To download the Semper-KI Frontend, follow these steps:
 
 1. Clone the repository: `git clone git@github.com:KMI-KPZ/Frontend.git`
 
+## Installaion
+
+Things that need to be installed on your machine:
+
+- Node 18.12.0
+- Yarn 1.22.19
+- npm 8.19.2
+
+VSCode extensions
+
+- wsl extensions
+  - Tailwind CSS IntelliSense v0.10.5
+  - Prettier - Code formatter v10.1.0
+  - Jest v5.2.3
+  - Docker v1.28.0
+  - GitHub Copilot v1.156.0
+- local extensions
+  - Tailwind CSS IntelliSense v0.10.5
+  - WSL v0.81.9
+  - WSL v0.81.9
+
 ## Local Development Server
 
 To run the Semper-KI Frontend locally in development mode, use the following commands:

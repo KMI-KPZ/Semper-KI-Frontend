@@ -2,7 +2,6 @@ import { Button } from "@component-library/index";
 import { Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import FactoryIcon from "@mui/icons-material/Factory";
 import NoteIcon from "@mui/icons-material/Note";

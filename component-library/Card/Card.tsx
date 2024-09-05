@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from "react";
-import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 
 interface CardProps {
@@ -10,7 +9,6 @@ interface CardProps {
 
 const Card: React.FC<PropsWithChildren<CardProps>> = (props) => {
   const { children, className, onClick, hoverEffects = true } = props;
-  const { t } = useTranslation();
 
   return (
     <a

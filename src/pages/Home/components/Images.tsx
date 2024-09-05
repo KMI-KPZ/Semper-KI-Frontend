@@ -2,8 +2,9 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import BMWKdeURL from "@images/BMWK_de.png";
 import BMWKenURL from "@images/BMWE_en.png";
-import { Heading, Text } from "@component-library/index";
+import { Heading } from "@component-library/index";
 import HomeContainer from "./Container";
+import { twMerge } from "tailwind-merge";
 
 interface Props {
   className?: string;
@@ -15,7 +16,7 @@ const HomeImages: React.FC<Props> = (props) => {
   const { i18n } = useTranslation();
 
   return (
-    <HomeContainer className={`bg-slate-500`}>
+    <HomeContainer className={twMerge(`bg-slate-500`, additionalClassNames)}>
       <Heading variant="h2" className="text-violet basis-1/3">
         Innovation klappt nur als Team. Wir arbeiten eng zusammen und freuen uns
         über neue Partner in Forschung und Entwicklung.

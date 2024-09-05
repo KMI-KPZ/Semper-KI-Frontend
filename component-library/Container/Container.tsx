@@ -6,10 +6,12 @@ interface ContainerProps {
   justify?: "start" | "end" | "center" | "between" | "around" | "evenly";
   align?: "start" | "end" | "center" | "stretch" | "baseline";
   wrap?: "nowrap" | "wrap" | "wrap-reverse";
-  width?: "full" | "fit" | "auto";
+  width?: "full" | "fit" | "auto" | "none";
   height?: "full" | "fit";
   gap?: 3 | 5;
   className?: string;
+  id?: string;
+  onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
@@ -25,6 +27,8 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
     width = "auto",
     height,
     className,
+    onClick,
+    id,
   } = props;
 
   const getAlign = () => {
@@ -49,7 +53,7 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
   };
 
   const getWidth = () => {
-    if (width === undefined) return "";
+    if (width === undefined || width === "none") return "";
     if (width === "auto") return "w-full md:w-fit";
     return `w-${width}`;
   };
@@ -66,6 +70,7 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
 
   return (
     <div
+      id={id}
       className={twMerge(
         "flex",
         getAlign(),
@@ -77,6 +82,7 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
         getGap(),
         className
       )}
+      onClick={onClick}
     >
       {children}
     </div>

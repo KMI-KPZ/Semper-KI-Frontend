@@ -1,11 +1,5 @@
-import { Heading, Text } from "@component-library/index";
+import { Container, Heading, Text } from "@component-library/index";
 import { useTranslation } from "react-i18next";
-import useOrganizations, {
-  PermissionContextTranslationType,
-  PermissionProps,
-  PermissionTypeTranslationType,
-  RoleProps,
-} from "../hooks/useOrganizations";
 import OrganizationRolesForm from "./components/Form";
 import { Button, Divider, LoadingSuspense } from "@component-library/index";
 import OrganizationRolesItem from "./components/Item";
@@ -13,6 +7,13 @@ import { Fragment, useState } from "react";
 import OrganizationRolesTable from "./components/Table";
 import { Modal } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import useGetOrganizationPermissions, {
+  PermissionContextTranslationType,
+  PermissionProps,
+  PermissionTypeTranslationType,
+} from "@/api/Organization/Querys/useGetOrganizationPermissions";
+import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
+import useGetOrganizationRoles from "@/api/Organization/Querys/useGetOrganizationRoles";
 
 interface OrganizationRolesProps {}
 
@@ -81,7 +82,8 @@ export const getPermissinContextTranslations = (
 const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { rolesQuery, permissionsQuery } = useOrganizations();
+  const rolesQuery = useGetOrganizationRoles();
+  const permissionsQuery = useGetOrganizationPermissions();
   const [edit, setEdit] = useState<boolean>(false);
   const [role, setRole] = useState<RoleProps | undefined>();
 
@@ -99,13 +101,14 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5 p-5 shadow-card">
+    <Container className="container" width="full" direction="col">
       <Heading variant="h2">{t("Organization.Roles.Roles.header")}</Heading>
+      <Divider />
       <LoadingSuspense query={rolesQuery}>
         {rolesQuery.data !== undefined && rolesQuery.data.length > 0 ? (
           <>
             <div className="flex w-full flex-col items-center justify-center gap-5 md:hidden">
-              {rolesQuery.data.map((role, index, roles) => (
+              {rolesQuery.data.map((role, index) => (
                 <Fragment key={index}>
                   <OrganizationRolesItem editRole={editRole} role={role} />
                 </Fragment>
@@ -127,7 +130,7 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
         )}
       </LoadingSuspense>
       <Modal
-        title="OrganizationRolesForm"
+        modalKey="OrganizationRolesForm"
         open={edit}
         closeModal={() => {
           setEdit(false), setRole(undefined);
@@ -143,7 +146,7 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
           ) : null}
         </LoadingSuspense>
       </Modal>
-    </div>
+    </Container>
   );
 };
 

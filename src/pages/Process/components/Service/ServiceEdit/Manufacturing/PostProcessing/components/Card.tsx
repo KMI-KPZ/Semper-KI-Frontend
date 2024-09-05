@@ -1,17 +1,12 @@
-import {
-  Container,
-  Heading,
-  LoadingAnimation,
-  Text,
-} from "@component-library/index";
-import useProcess from "@/hooks/Process/useProcess";
-import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
-import useSetPostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useSetPostProcessing";
+import { Container, Heading } from "@component-library/index";
 import { Divider } from "@mui/material";
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
-import { useProject } from "@/hooks/Project/useProject";
+import {
+  OntoNodePropertyName,
+  isOntoNodePropertyName,
+} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 
 interface Props<Item> {
   item: Item;
@@ -23,16 +18,9 @@ interface Props<Item> {
 const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
   props: Props<Item>
 ) => {
-  const { item, openItemView, children, selected } = props;
+  const { item, children, selected } = props;
 
   const { t } = useTranslation();
-
-  const handleOnClickCard = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    openItemView(item);
-  };
 
   return (
     <Container
@@ -49,30 +37,50 @@ const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
       <Divider />
       <Container direction="col" className="p-5">
         <Heading variant="h3">{item.title}</Heading>
-        <Container direction="row" width="full" align="start">
-          <Container direction="col" justify="start" align="start">
-            <Text>
-              {`${t(
-                `Service.Manufacturing.PostProcessing.components.Card.type`
-              )}`}
-            </Text>
-            <Text>
-              {`${t(
-                `Service.Manufacturing.PostProcessing.components.Card.value`
-              )}`}
-            </Text>
-            <Text>
-              {`${t(
-                `Service.Manufacturing.PostProcessing.components.Card.value`
-              )}`}
-            </Text>
-          </Container>
-          <Container direction="col" justify="start" align="start">
-            <Text>{item.type}</Text>
-            <Text>{item.value}</Text>
-            <Text>{item.valueList}</Text>
-          </Container>
-        </Container>
+
+        <table className="auto table border-separate border-spacing-2">
+          <tbody>
+            <tr>
+              <td>
+                {t(`Service.Manufacturing.PostProcessing.components.Card.type`)}
+              </td>
+              <td>{item.type}</td>
+            </tr>
+            <tr>
+              <td>
+                {t(
+                  `Service.Manufacturing.PostProcessing.components.Card.value`
+                )}
+              </td>
+              <td>{item.value}</td>
+            </tr>
+            <tr>
+              <td colSpan={2}>
+                {t(
+                  `Service.Manufacturing.PostProcessing.components.Card.props`
+                )}
+              </td>
+            </tr>
+
+            {item.propList
+              .filter((item) => item.name !== "imgPath")
+              .map((prop, index: number) => (
+                <tr key={index} className="model-view-tag">
+                  <td>
+                    {isOntoNodePropertyName(prop.name)
+                      ? t(
+                          `types.OntoNodePropertyName.${
+                            prop.name as OntoNodePropertyName
+                          }`
+                        )
+                      : prop.name}
+                    {": "}
+                  </td>
+                  <td>{prop.value.toString()}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
 
         {children}
       </Container>

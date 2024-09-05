@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Text } from "@component-library/index";
 import TestImg from "@images/Test.png";
@@ -51,6 +51,9 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
         <Container direction="row" align="start">
           <Container direction="col" align="start" gap={3}>
             <Text variant="strong">
+              {t("Project.components.FlatProcessCard.serviceName")}
+            </Text>
+            <Text variant="strong">
               {t("Project.components.FlatProcessCard.serviceType")}
             </Text>
             <Text variant="strong">
@@ -58,6 +61,7 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
             </Text>
           </Container>
           <Container direction="col" align="start" gap={3}>
+            <Text>{process.title}</Text>
             <Text>
               {t(
                 `enum.ServiceType.${

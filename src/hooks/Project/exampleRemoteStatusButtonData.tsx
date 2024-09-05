@@ -87,7 +87,7 @@ export const exampleRemoteStatusButtonData: StatusButtonPropsExtern[] = [
       type: "request",
       data: {
         type: "backstepStatus",
-        targetStatus: ProcessStatus.CONTRACTOR_SELECTED,
+        targetStatus: ProcessStatus.CONTRACTOR_COMPLETED,
       },
     },
     active: true,

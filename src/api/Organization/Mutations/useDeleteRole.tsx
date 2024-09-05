@@ -6,13 +6,8 @@ const useDeleteRole = () => {
   const queryClient = useQueryClient();
   const deleteRole = async (roleID: string) =>
     authorizedCustomAxios
-      .post(
-        `${process.env.VITE_HTTP_API_URL}/public/organizations/roles/delete/`,
-        {
-          data: {
-            content: { roleID },
-          },
-        }
+      .delete(
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/roles/delete/${roleID}/`
       )
       .then((response) => {
         logger("useDeleteRole | deleteRole ✅ |", response);
@@ -25,7 +20,7 @@ const useDeleteRole = () => {
   return useMutation<void, Error, string>({
     mutationFn: deleteRole,
     onSuccess: () => {
-      queryClient.invalidateQueries(["organizations", "roles"]);
+      queryClient.invalidateQueries(["organization", "roles"]);
     },
   });
 };

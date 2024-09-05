@@ -1,8 +1,6 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
-import { Container, Text } from "@component-library/index";
+import { Container } from "@component-library/index";
 import { ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
-import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useProcess from "@/hooks/Process/useProcess";
 import ProcessFileTable from "./components/FileTable";
 import ProcessUploadCard from "./components/UploadCard";
@@ -13,9 +11,7 @@ interface ProcessFileViewProps {
 
 const ProcessFileView: React.FC<ProcessFileViewProps> = (props) => {
   const { origin } = props;
-  const { t } = useTranslation();
   const [files, setFiles] = React.useState<File[]>([]);
-  const { user } = useAuthorizedUser();
 
   const { process } = useProcess();
 
@@ -25,6 +21,12 @@ const ProcessFileView: React.FC<ProcessFileViewProps> = (props) => {
 
   const resetUploadFiles = () => {
     setFiles([]);
+  };
+
+  const deleteFile = (fileIndex: number) => {
+    setFiles((prevState) =>
+      prevState.filter((_, index) => index !== fileIndex)
+    );
   };
 
   return (
@@ -45,6 +47,7 @@ const ProcessFileView: React.FC<ProcessFileViewProps> = (props) => {
         files={files}
         type="upload"
         resetUploadFiles={resetUploadFiles}
+        deleteFile={deleteFile}
       />
       <ProcessUploadCard addFiles={addFiles} />
     </Container>

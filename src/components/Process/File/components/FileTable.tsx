@@ -1,12 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Button,
-  Container,
-  Divider,
-  Heading,
-  Text,
-} from "@component-library/index";
+import { Button, Container, Heading, Text } from "@component-library/index";
 import ProcessFileRow from "./ProcessFileRow";
 import DownloadIcon from "@mui/icons-material/Download";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
@@ -23,6 +17,7 @@ type UploadFileTableProps = {
   files: File[];
   type: "upload";
   resetUploadFiles: () => void;
+  deleteFile: (fileIndex: number) => void;
 } & GenericFileTableProps;
 
 type CurrentFileTableProps = {
@@ -96,7 +91,12 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
         <tbody>
           {type === "upload"
             ? files.map((file, index) => (
-                <RawProcessFileRow file={file} key={index} />
+                <RawProcessFileRow
+                  file={file}
+                  key={index}
+                  deleteFile={props.deleteFile}
+                  index={index}
+                />
               ))
             : files.map((file, index) => (
                 <ProcessFileRow file={file} key={index} />

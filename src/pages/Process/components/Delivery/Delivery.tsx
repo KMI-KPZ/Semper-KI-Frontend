@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Container } from "@component-library/index";
 import ProcessContainer from "@/components/Process/Container";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 
@@ -15,8 +14,8 @@ const ProcessDelivery: React.FC<ProcessDeliveryProps> = (props) => {
       id="Delivery"
       menuButtonTitle={t("Process.components.Delivery.Delivery.button.menu")}
       pageTitle={`${t("Process.components.Delivery.Delivery.title")}:`}
-      start={ProcessStatus.PRODUCTION}
-      end={ProcessStatus.DELIVERY}
+      start={ProcessStatus.PRODUCTION_COMPLETED}
+      end={ProcessStatus.DELIVERY_IN_PROGRESS}
     ></ProcessContainer>
   );
 };

@@ -1,5 +1,5 @@
 import { Heading } from "@component-library/index";
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/index";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";

@@ -1,16 +1,23 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Text } from "@component-library/index";
+import { Button, Container } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
+import DeleteIcon from "@mui/icons-material/Delete";
 interface RawProcessFileRowProps {
   file: File;
+  deleteFile: (fileIndex: number) => void;
+  index: number;
 }
 
 const RawProcessFileRow: React.FC<RawProcessFileRowProps> = (props) => {
-  const { file } = props;
+  const { file, deleteFile, index } = props;
   const { t } = useTranslation();
 
   const { user } = useAuthorizedUser();
+
+  const handleOnClickButtonDelete = () => {
+    deleteFile(index);
+  };
 
   return (
     <tr className="font-normal">
@@ -26,6 +33,8 @@ const RawProcessFileRow: React.FC<RawProcessFileRowProps> = (props) => {
             title={t(
               "Process.components.Contract.components.FileRow.button.delete"
             )}
+            children={<DeleteIcon />}
+            onClick={handleOnClickButtonDelete}
           />
         </Container>
       </td>

@@ -28,9 +28,9 @@ const ProcessPostProcessingItem = <Item extends PostProcessingProps>(
   const renderTextInput = () => <input className="border" type="text" />;
   const renderSelectInput = () => (
     <select className="border">
-      {item.valueList.map((title, index) => (
-        <option key={index} value={title}>
-          {title}
+      {item.propList.map((title, index) => (
+        <option key={index} value={title.name}>
+          {title.name}
         </option>
       ))}
     </select>

@@ -1,10 +1,9 @@
 import { Container, Text } from "@component-library/index";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { StatusWizardItem } from "../StatusWizard";
 import { Process } from "@/api/Process/Querys/useGetProcess";
-import logger from "@/hooks/useLogger";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface StatusWizardCardProps {
   process: Process;
@@ -62,8 +61,9 @@ const StatusWizardCard: React.FC<StatusWizardCardProps> = (props) => {
     <Container
       width="full"
       justify="start"
+      direction="row"
       onClick={handleOnClickCard}
-      className={`rounded-xl border-2 border-slate-100 p-2 duration-300 hover:bg-gray-100   ${
+      className={`justify-center rounded-xl border-2 border-slate-100 p-2 duration-300 hover:bg-gray-100 md:justify-start   ${
         active ? "text-orange-600" : ""
       }
       ${reachable ? "hover:cursor-pointer hover:border-ultramarinblau " : ""}

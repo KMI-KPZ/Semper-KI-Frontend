@@ -2,29 +2,32 @@ import { Button } from "@component-library/index";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import TextInput from "../../../component-library/Form/Inputs/TextInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useUser, { UserAddressProps } from "@/hooks/useUser";
+import { UserAddressProps } from "@/hooks/useUser";
 import { Heading, Text } from "@component-library/index";
-import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useGeneralInput from "@component-library/Form/hooks/useGeneralInput";
 import {
   GeneralInput,
   InputLabelProps,
 } from "@component-library/Form/GeneralInput";
-import { NewUserAddressProps } from "@/api/User/Mutations/useCreateAddress";
+import useUpdateUser, {
+  NewUserAddressProps,
+} from "@/api/User/Mutations/useUpdateUser";
+import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganization";
 
 interface AddressFormProps {
   closeModal?(): void;
+  type?: "user" | "organization";
   title?: string;
   initialAddress?: UserAddressProps;
 }
 
 const AddressForm: React.FC<AddressFormProps> = (props) => {
-  const { closeModal, initialAddress, title } = props;
+  const { closeModal, initialAddress, title, type = "user" } = props;
   const { t } = useTranslation();
-  const { updateAddress, createAddress } = useAuthorizedUser();
+  const updateUser = useUpdateUser();
+  const updateOrganization = useUpdateOrganization();
   const { getMaxLabelWidth } = useGeneralInput();
   const existingAddressID = initialAddress?.id;
 
@@ -52,12 +55,26 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
     defaultValues: initialAddress !== undefined ? initialAddress : undefined,
   });
 
+  const updateAddress = (data: NewUserAddressProps) => {
+    if (type === "user") updateUser.mutate({ changes: { address: data } });
+    else updateOrganization.mutate({ changes: { address: data } });
+  };
+
+  const createAddress = (data: NewUserAddressProps, id: string) => {
+    if (type === "user")
+      updateUser.mutate({
+        changes: { address: { ...data, id } },
+      });
+    else
+      updateOrganization.mutate({
+        changes: { address: { ...data, id } },
+      });
+  };
+
   const onSubmit = (data: NewUserAddressProps) => {
-    if (existingAddressID !== undefined) {
-      updateAddress.mutate({ ...data, id: existingAddressID });
-    } else {
-      createAddress.mutate(data);
-    }
+    if (existingAddressID !== undefined) createAddress(data, existingAddressID);
+    else updateAddress(data);
+
     closeModal !== undefined ? closeModal() : null;
   };
 

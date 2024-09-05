@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/index";
 import { useSearchParams } from "react-router-dom";

@@ -1,11 +1,10 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
 
 const useCheckModel = () => {
-  const queryClient = useQueryClient();
   const { process: _process } = useProcess();
   const { project } = useProject();
   const checkModel = async (fileID: string) =>
@@ -23,7 +22,6 @@ const useCheckModel = () => {
 
   return useMutation<string, Error, string>({
     mutationFn: checkModel,
-    onSuccess: (data, fileID, context) => {},
   });
 };
 

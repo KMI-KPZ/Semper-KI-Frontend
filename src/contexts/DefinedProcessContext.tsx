@@ -1,6 +1,5 @@
 import { DefinedProcess } from "@/api/Process/Querys/useGetProcess";
 import { PropsWithChildren, createContext } from "react";
-import { Outlet } from "react-router-dom";
 
 type DefinedProcessContextType = {
   process: DefinedProcess;

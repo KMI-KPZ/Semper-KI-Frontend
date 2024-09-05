@@ -16,7 +16,6 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Container } from "@component-library/index";
 import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
-import { useProject } from "@/hooks/Project/useProject";
 import useSearch from "@/hooks/useSearch";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useDeleteProject from "@/api/Project/Mutations/useDeleteProject";

@@ -1,34 +1,30 @@
-import { Button } from "@component-library/index";
-import React, { useRef, useState } from "react";
+import { Button, Container, Divider } from "@component-library/index";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import useOrganizations from "../hooks/useOrganizations";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Heading } from "@component-library/index";
-import logger from "@/hooks/useLogger";
 import useCreateInviteLink from "@/api/Organization/Mutations/useCreateInviteLink";
 import useInviteUser from "@/api/Organization/Mutations/useInviteUser";
+import { RoleProps } from "@/api/Organization/Mutations/useCreateRole";
+import ContentPasteIcon from "@mui/icons-material/ContentPaste";
+import { OrganizationInvite } from "@/api/Organization/Querys/useGetOrganizationInvites";
+import useDeleteInvite from "@/api/Organization/Mutations/useDeleteInvite";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-interface InvitationProps {}
-
-type Inputs = {
-  email: string;
-};
-
-type InviteLink = {
-  email: string;
-  link: string;
-};
+interface InvitationProps {
+  roles: RoleProps[] | undefined;
+  invites: OrganizationInvite[] | undefined;
+}
 
 const Invitation: React.FC<InvitationProps> = (props) => {
-  const {} = props;
+  const { roles = [], invites = [] } = props;
   const { t } = useTranslation();
-  const [links, setLinks] = useState<InviteLink[]>([]);
   const [showLoadedIn, setShowLoadedIn] = useState<boolean>(false);
   const createInviteLink = useCreateInviteLink();
+  const deleteInvite = useDeleteInvite();
   const inviteUser = useInviteUser();
-  const { rolesQuery } = useOrganizations();
 
   const schema = yup
     .object({
@@ -41,12 +37,18 @@ const Invitation: React.FC<InvitationProps> = (props) => {
     .required();
   type FormData = yup.InferType<typeof schema>;
 
+  const defaultRoleID =
+    roles !== undefined && roles[0] !== undefined ? roles[0].id : "";
+
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({ resolver: yupResolver(schema) });
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
+    defaultValues: { roleID: defaultRoleID },
+  });
 
   const onSubmitInvite = (data: FormData) => {
     // logger("onSubmitInvite", data);
@@ -54,14 +56,9 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   };
 
   const onSubmitLink = (data: FormData) => {
-    logger("onSubmitLink", data);
     setShowLoadedIn(true);
-    createInviteLink.mutate(data.email, {
-      onSuccess(data, variables, context) {
-        setLinks((prevState) => [
-          ...prevState,
-          { email: variables, link: data },
-        ]);
+    createInviteLink.mutate(data, {
+      onSuccess() {
         setShowLoadedIn(false);
         reset();
       },
@@ -74,30 +71,35 @@ const Invitation: React.FC<InvitationProps> = (props) => {
     e.currentTarget.select();
   };
 
-  const handleOnClickButton = (index: number) => {
-    navigator.clipboard.writeText(links[index].link);
+  const handleOnClickButtonCopy = (url: string) => {
+    navigator.clipboard.writeText(url);
+  };
+
+  const handleOnClickButtonDelete = (invitationID: string) => {
+    deleteInvite.mutate(invitationID);
   };
 
   return (
-    <div className="flex w-full flex-col items-center gap-5 p-5 shadow-card">
+    <Container direction="col" className="container" width="full">
       <Heading variant="h2" className="whitespace-nowrap">
         {t("Organization.components.invitation.header")}
       </Heading>
+      <Divider />
       <form
-        className="flex w-full flex-col flex-wrap items-center justify-center gap-5 md:flex-row"
+        className="flex w-full flex-col flex-wrap items-center justify-center gap-5 rounded-xl border-2 p-3 md:flex-row"
         onSubmit={handleSubmit(onSubmitInvite)}
       >
         <input
-          className="w-full bg-slate-100 px-5 py-2 md:w-fit md:flex-grow"
+          className="w-full rounded-xl border-2 px-5 py-2 md:w-fit md:flex-grow"
           placeholder={t("Organization.components.invitation.placeholder")}
           {...register("email")}
         />
         <select
-          className="shadow-button rounded-xl bg-grau-50 p-3"
+          className="shadow-button rounded-xl border-2  px-3 py-2 "
           {...register("roleID")}
         >
-          {rolesQuery.data !== undefined && rolesQuery.data.length > 0 ? (
-            rolesQuery.data.map((_role, index) => (
+          {roles !== undefined && roles.length > 0 ? (
+            roles.map((_role, index) => (
               <option key={index} value={_role.id}>
                 {_role.name}
               </option>
@@ -110,10 +112,15 @@ const Invitation: React.FC<InvitationProps> = (props) => {
         </select>
         <Button
           onClick={handleSubmit(onSubmitInvite)}
+          loading={inviteUser.isLoading}
+          variant="primary"
+          size="sm"
           title={t("Organization.components.invitation.button.invite")}
         />
         <Button
+          size="sm"
           onClick={handleSubmit(onSubmitLink)}
+          loading={createInviteLink.isLoading}
           title={t("Organization.components.invitation.button.link")}
         />
       </form>
@@ -129,27 +136,42 @@ const Invitation: React.FC<InvitationProps> = (props) => {
           ) : null}
         </div>
       ) : null}
-      {links.length > 0 ? (
-        <div className="flex w-full flex-col items-center justify-center md:flex-row">
-          {links.map((inviteLink, index) => (
-            <div className="relative flex w-full flex-col items-center justify-center gap-5  md:flex-row">
-              <span className="">{inviteLink.email}</span>
+      {invites.length > 0 ? (
+        <Container direction="col" width="full">
+          {invites.map((invite, index) => (
+            <div
+              className="relative flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2  p-3 md:flex-row md:border-0 md:p-0 "
+              key={index}
+            >
+              <span className="">{invite.invitee.email}</span>
               <input
                 readOnly
                 onClick={handleOnClickInput}
                 type="text"
-                value={inviteLink.link}
-                className="w-full flex-grow select-all bg-slate-100 px-5 py-2"
+                value={invite.invitation_url}
+                className="w-full flex-grow select-all rounded-xl border-2 px-5 py-2"
               />
-              <Button
-                onClick={() => handleOnClickButton(index)}
-                title={t("Organization.components.invitation.button.copy")}
-              />
+              <Container direction="row" width="fit">
+                <Button
+                  size="sm"
+                  variant="text"
+                  children={<ContentPasteIcon />}
+                  onClick={() => handleOnClickButtonCopy(invite.invitation_url)}
+                  title={t("Organization.components.invitation.button.copy")}
+                />
+                <Button
+                  size="sm"
+                  variant="text"
+                  children={<DeleteForeverIcon />}
+                  onClick={() => handleOnClickButtonDelete(invite.id)}
+                  title={t("Organization.components.invitation.button.delete")}
+                />
+              </Container>
             </div>
           ))}
-        </div>
+        </Container>
       ) : null}
-    </div>
+    </Container>
   );
 };
 

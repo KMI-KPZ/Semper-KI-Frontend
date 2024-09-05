@@ -1,4 +1,3 @@
-import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 import ModelPreview from "@/pages/Test/STLViewer";
 import {
   Button,
@@ -7,20 +6,13 @@ import {
   Heading,
   Text,
 } from "@component-library/index";
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  ManufacturingModelUploadData,
-  ProcessModelUploadFormProps,
-} from "../Upload";
+import { ProcessModelUploadFormProps } from "../Upload";
 import {
   FieldArrayWithId,
-  FieldError,
   FieldErrors,
-  FieldErrorsImpl,
-  Merge,
   UseFormRegister,
-  useForm,
 } from "react-hook-form";
 
 interface UploadModelCardProps {

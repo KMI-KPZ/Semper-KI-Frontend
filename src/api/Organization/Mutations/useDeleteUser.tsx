@@ -7,12 +7,7 @@ const useDeleteUser = () => {
   const deleteUser = async (email: string) =>
     authorizedCustomAxios
       .post(
-        `${process.env.VITE_HTTP_API_URL}/public/organizations/users/delete/`,
-        {
-          data: {
-            content: { email },
-          },
-        }
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/users/delete/${email}/`
       )
       .then((response) => {
         logger("useDeleteUser | deleteUser ✅ |", response);
@@ -25,7 +20,7 @@ const useDeleteUser = () => {
   return useMutation<void, Error, string>({
     mutationFn: deleteUser,
     onSuccess: () => {
-      queryClient.invalidateQueries(["organizations", "users"]);
+      queryClient.invalidateQueries(["organization", "users"]);
     },
   });
 };

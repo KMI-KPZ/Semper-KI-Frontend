@@ -2,9 +2,7 @@ import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { Container } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ProcessStatusButtons from "../StatusButtons";
 import ProcessContainer from "@/components/Process/Container";
-import ProcessHeader from "@/components/Process/Header";
 import ProcessVerifyCard, { VerifyStatus } from "./components/VerifyCard";
 import useProcess from "@/hooks/Process/useProcess";
 
@@ -16,10 +14,10 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
   const { process } = useProcess();
 
   const getVerifyStatus = (): VerifyStatus => {
-    if (process.processStatus === ProcessStatus.CONTRACTOR_SELECTED) {
+    if (process.processStatus === ProcessStatus.CONTRACTOR_COMPLETED) {
       return VerifyStatus.READY;
     }
-    if (process.processStatus === ProcessStatus.VERIFYING) {
+    if (process.processStatus === ProcessStatus.VERIFYING_IN_PROGRESS) {
       return VerifyStatus.STARTED;
     }
     {
@@ -30,8 +28,8 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
   return (
     <ProcessContainer
       id="Verification"
-      start={ProcessStatus.CONTRACTOR_SELECTED}
-      end={ProcessStatus.VERIFIED}
+      start={ProcessStatus.CONTRACTOR_COMPLETED}
+      end={ProcessStatus.VERIFYING_IN_PROGRESS}
       menuButtonTitle={t("Process.components.Verify.Verify.button.menu")}
       pageTitle={t("Process.components.Verify.Verify.title")}
     >

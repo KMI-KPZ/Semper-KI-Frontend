@@ -1,6 +1,5 @@
 import { render } from "@test/render";
 import { fireEvent, screen } from "@testing-library/react";
-import React from "react";
 import TextInput from "./TextInput";
 
 const mockedRegister = jest.fn();

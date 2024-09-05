@@ -32,6 +32,18 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = (props) => {
       title: t("Resources.components.Menu.postProcessings"),
       to: "/resources/postprocessings",
     },
+    {
+      title: t("Resources.components.Menu.request"),
+      to: "/resources/request",
+    },
+    {
+      title: t("Resources.components.Menu.graph"),
+      to: "/resources/graph",
+    },
+    {
+      title: t("Resources.components.Menu.privat-graph"),
+      to: "/resources/private-graph",
+    },
   ];
 
   const isActive = (to: string) => {
@@ -44,16 +56,23 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = (props) => {
       className="flex h-fit flex-col gap-5 bg-white p-3"
       data-testid="resources-menu"
     >
-      {resourcesMenuItems.map((resourcesMenuItem, index) => (
-        <Button
-          width="full"
-          testid="resources-menu-item"
-          key={index}
-          title={`${resourcesMenuItem.title}`}
-          to={resourcesMenuItem.to}
-          variant={isActive(resourcesMenuItem.to) ? "primary" : "secondary"}
-        />
-      ))}
+      {resourcesMenuItems
+        .filter(
+          (item) =>
+            (process.env.NODE_ENV === "development" &&
+              item.to === "/resources/private-graph") ||
+            item.to !== "/resources/private-graph"
+        )
+        .map((resourcesMenuItem, index) => (
+          <Button
+            width="full"
+            testid="resources-menu-item"
+            key={index}
+            title={`${resourcesMenuItem.title}`}
+            to={resourcesMenuItem.to}
+            variant={isActive(resourcesMenuItem.to) ? "primary" : "secondary"}
+          />
+        ))}
     </nav>
   );
 };

@@ -6,9 +6,11 @@ const useDeleteProject = () => {
   const queryClient = useQueryClient();
   const deleteProject = async (projectIDs: string[]) =>
     authorizedCustomAxios
-      .delete(`${process.env.VITE_HTTP_API_URL}/public/project/delete/`, {
-        data: { projectIDs },
-      })
+      .delete(
+        `${
+          process.env.VITE_HTTP_API_URL
+        }/public/project/delete/?projectIDs=${projectIDs.join(",")}`
+      )
       .then((response) => {
         logger("useDeleteProject | deleteProject ✅ |", response);
         return response.data;
@@ -19,7 +21,7 @@ const useDeleteProject = () => {
 
   return useMutation<string, Error, string[]>({
     mutationFn: deleteProject,
-    onSuccess: (data, projectIDs, context) => {
+    onSuccess: (_, projectIDs) => {
       projectIDs.map((projectID) => {
         queryClient.invalidateQueries(["project", projectID]);
       });

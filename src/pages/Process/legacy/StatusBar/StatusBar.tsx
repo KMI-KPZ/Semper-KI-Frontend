@@ -1,15 +1,11 @@
 import React, { Fragment, ReactNode } from "react";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import CheckIcon from "@mui/icons-material/Check";
 import FactoryIcon from "@mui/icons-material/Factory";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import EmailIcon from "@mui/icons-material/Email";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import StatusItem from "./components/Item";
 import StatusItemConnector from "./components/ItemConnector";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
-import DescriptionIcon from "@mui/icons-material/Description";
 import ModeIcon from "@mui/icons-material/Mode";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
@@ -53,48 +49,48 @@ const statusData: StatusData[] = [
     text: "service",
   },
   {
-    startStatus: ProcessStatus.CONTRACTOR_SELECTED,
+    startStatus: ProcessStatus.CONTRACTOR_COMPLETED,
     icon: <FactoryIcon />,
     text: "contractorSelected",
   },
   {
-    startStatus: ProcessStatus.VERIFYING,
-    endStatus: ProcessStatus.VERIFIED,
+    startStatus: ProcessStatus.VERIFYING_IN_PROGRESS,
+    endStatus: ProcessStatus.VERIFYING_COMPLETED,
     icon: <AssignmentTurnedInIcon />,
     text: "verified",
   },
   {
-    startStatus: ProcessStatus.REQUESTED,
+    startStatus: ProcessStatus.REQUEST_COMPLETED,
     icon: <EmailIcon />,
     text: "requested",
   },
-  {
-    startStatus: ProcessStatus.CLARIFICATION,
-    icon: <QuestionMarkIcon />,
-    text: "clarification",
-  },
-  {
-    startStatus: ProcessStatus.CONFIRMED_BY_CONTRACTOR,
-    endStatus: ProcessStatus.REJECTED_BY_CONTRACTOR,
-    icon: <DescriptionIcon />,
-    text: "offer",
-  },
-  {
-    startStatus: ProcessStatus.CONFIRMED_BY_CLIENT,
-    endStatus: ProcessStatus.REJECTED_BY_CLIENT,
-    icon: <CheckIcon />,
-    text: "client",
-  },
-  {
-    startStatus: ProcessStatus.PRODUCTION,
-    icon: <FactoryIcon />,
-    text: "production",
-  },
-  {
-    startStatus: ProcessStatus.DELIVERY,
-    icon: <LocalShippingIcon />,
-    text: "delivery",
-  },
+  // {
+  //   startStatus: ProcessStatus.CLARIFICATION,
+  //   icon: <QuestionMarkIcon />,
+  //   text: "clarification",
+  // },
+  // {
+  //   startStatus: ProcessStatus.CONFIRMED_BY_CONTRACTOR,
+  //   endStatus: ProcessStatus.REJECTED_BY_CONTRACTOR,
+  //   icon: <DescriptionIcon />,
+  //   text: "offer",
+  // },
+  // {
+  //   startStatus: ProcessStatus.CONFIRMED_BY_CLIENT,
+  //   endStatus: ProcessStatus.REJECTED_BY_CLIENT,
+  //   icon: <CheckIcon />,
+  //   text: "client",
+  // },
+  // {
+  //   startStatus: ProcessStatus.PRODUCTION,
+  //   icon: <FactoryIcon />,
+  //   text: "production",
+  // },
+  // {
+  //   startStatus: ProcessStatus.DELIVERY,
+  //   icon: <LocalShippingIcon />,
+  //   text: "delivery",
+  // },
   {
     startStatus: ProcessStatus.COMPLETED,
     icon: <DoneAllIcon />,
@@ -103,17 +99,16 @@ const statusData: StatusData[] = [
 ];
 
 const StatusBar: React.FC<StatusViewProps> = (props) => {
-  const { serviceType, status, processID, projectID, statusCountAction } =
-    props;
+  const { status, processID, projectID, statusCountAction } = props;
 
   const getItems = (): StatusData[] => {
-    if (status < ProcessStatus.REQUESTED)
+    if (status < ProcessStatus.REQUEST_COMPLETED)
       return statusData.filter(
-        (data) => data.startStatus <= ProcessStatus.REQUESTED
+        (data) => data.startStatus <= ProcessStatus.REQUEST_COMPLETED
       );
     else
       return statusData.filter(
-        (data) => data.startStatus >= ProcessStatus.REQUESTED
+        (data) => data.startStatus >= ProcessStatus.REQUEST_COMPLETED
       );
   };
 

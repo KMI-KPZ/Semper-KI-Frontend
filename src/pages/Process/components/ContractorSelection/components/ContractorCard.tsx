@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import TestIMG from "@images/Test2.png";
 import { Container, Text } from "@component-library/index";
 import { Process } from "@/api/Process/Querys/useGetProcess";
@@ -13,8 +12,7 @@ interface ContractorCardProps {
 }
 
 const ContractorCard: React.FC<ContractorCardProps> = (props) => {
-  const { contractor, selected, process, selectContractor } = props;
-  const { t } = useTranslation();
+  const { contractor, selected, selectContractor } = props;
 
   return (
     <Container

@@ -1,56 +1,31 @@
-import React, { PropsWithChildren, useContext } from "react";
-import {
-  Button,
-  Container,
-  Divider,
-  LoadingAnimation,
-  Text,
-} from "@component-library/index";
+import React, { PropsWithChildren } from "react";
+import { Container, Divider, Text } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import { ModelProps } from "../types";
 import { Heading } from "@component-library/index";
-import { useNavigate } from "react-router-dom";
-import useService from "@/hooks/useService";
-import ModelPreview from "@/pages/Test/STLViewer";
-import useGetModelFile from "@/api/Process/Files/Querys/useGetFile";
+// import ModelPreview from "@/pages/Test/STLViewer";
+// import useGetModelFile from "@/api/Process/Files/Querys/useGetFile";
+import { RepositoryModel } from "@/api/Service/AdditiveManufacturing/Model/Querys/useGetModels";
 
 interface Props {
-  model: ModelProps;
+  model: RepositoryModel;
   openModelView(model: ModelProps): void;
 }
 
 export const ProcessModelCard: React.FC<PropsWithChildren<Props>> = (props) => {
   const { t } = useTranslation();
-  const { model, openModelView, children } = props;
-  const grid = true;
-  const navigate = useNavigate();
-  const { updatedService } = useService();
-  const modelFile = useGetModelFile(model.id);
-  const getFileURL = (blob: Blob) => {
-    return URL.createObjectURL(blob);
-  };
+  const { model, children } = props;
+  // const modelFile = useGetModelFile(model.id);
+  // const getFileURL = (blob: Blob) => {
+  //   return URL.createObjectURL(blob);
+  // };
 
-  const handleOnClickSelect = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    e.stopPropagation();
-    updatedService({ model });
-    navigate("../material");
-  };
-
-  const handleOnClickCard = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    openModelView(model);
-  };
   return (
     <Container
-      className="w-fit min-w-[350px] max-w-[50%] gap-0 rounded-xl border-2 bg-white"
+      className="w-fit min-w-[350px] max-w-[45%] gap-0 rounded-xl border-2 bg-white"
       direction="col"
     >
-      {modelFile.isLoading || modelFile.data === undefined ? (
+      {/* {modelFile.isLoading || modelFile.data === undefined ? (
         <LoadingAnimation />
       ) : (
         <ModelPreview
@@ -58,13 +33,14 @@ export const ProcessModelCard: React.FC<PropsWithChildren<Props>> = (props) => {
           file={getFileURL(modelFile.data)}
           className="h-60 w-full border-0"
         />
-      )}
+      )} */}
+      <img src={model.preview} className="h-fit w-full object-contain" />
       <Divider />
       <Container direction="col" className="p-5">
-        <Heading variant="h3">{model.fileName}</Heading>
+        <Heading variant="h3">{model.name}</Heading>
         <Container direction="row" width="full" align="start">
           <Container direction="col" justify="start" align="start">
-            <Text>{`${t(
+            {/* <Text>{`${t(
               `Service.Manufacturing.Model.Upload.components.Form.size`
             )}`}</Text>
             <Text>{`${t(
@@ -74,23 +50,23 @@ export const ProcessModelCard: React.FC<PropsWithChildren<Props>> = (props) => {
               {`${t(
                 `Service.Manufacturing.Model.Upload.components.Form.certificate`
               )}`}
-            </Text>
+            </Text> */}
             <Text>
               {`${t(
                 `Service.Manufacturing.Model.Upload.components.Form.license`
               )}`}
             </Text>
-            <Text>
+            {/* <Text>
               {`${t(
                 `Service.Manufacturing.Model.Upload.components.Form.tags`
               )}`}
-            </Text>
+            </Text> */}
           </Container>
           <Container direction="col" justify="start" align="start">
-            <Text>{new Date().toLocaleDateString()}</Text>
-            <Text>{model.certificates}</Text>
-            <Text>{model.licenses}</Text>
-            <Text>{model.tags}</Text>
+            {/* <Text>{new Date().toLocaleDateString()}</Text>
+            <Text>{model.certificates}</Text> */}
+            <Text>{model.license}</Text>
+            {/* <Text>{model.tags}</Text> */}
           </Container>
         </Container>
 

@@ -22,6 +22,9 @@ const ResourcesOverview: React.FC<ResourcesOverviewProps> = (props) => {
       to: "/resources/postprocessings",
     },
   ];
+  // kriterien (gewichtung)
+  // Portfolio (graph, material, printer, postprocessing)
+  // Qualität Management (referenzbauteil, maturity level)
 
   return (
     <div

@@ -1,0 +1,37 @@
+import React, { PropsWithChildren } from "react";
+import { Navigate, Outlet, useParams } from "react-router-dom";
+import useGetProcess from "@/api/Process/Querys/useGetProcess";
+import useGetFilters from "@/api/Filter/Querys/useGetFilters";
+import { LoadingAnimation } from "@component-library/index";
+import ProcessContextProvider from "@/contexts/ProcessContext";
+
+interface ProcessOutletProps {}
+
+const ProcessOutlet: React.FC<PropsWithChildren<ProcessOutletProps>> = (
+  props
+) => {
+  const { children } = props;
+  const process = useGetProcess();
+  const filter = useGetFilters();
+  const { projectID } = useParams();
+
+  if (process.isLoading || filter.isLoading) return <LoadingAnimation />;
+
+  if (
+    process.isFetched &&
+    process.data !== undefined &&
+    filter.isFetched &&
+    filter.data !== undefined
+  )
+    return (
+      <ProcessContextProvider process={process.data} filters={filter.data}>
+        {children}
+        <Outlet />
+      </ProcessContextProvider>
+    );
+
+  if (process.isRefetching) return <LoadingAnimation />;
+  return <Navigate to={`/projects/${projectID}`} />;
+};
+
+export default ProcessOutlet;

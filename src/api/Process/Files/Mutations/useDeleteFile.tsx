@@ -1,17 +1,18 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
-import { SingleProcessMutationProps } from "../../types";
-
-export type DeleteFileProps = {
-  fileID: string;
-} & SingleProcessMutationProps;
+import { useProject } from "@/hooks/Project/useProject";
+import useProcess from "@/hooks/Process/useProcess";
 
 const useDeleteFile = () => {
   const queryClient = useQueryClient();
-  const { projectID } = useParams();
-  const deleteFile = async ({ fileID, processID }: DeleteFileProps) =>
+  const {
+    project: { projectID },
+  } = useProject();
+  const {
+    process: { processID },
+  } = useProcess();
+  const deleteFile = async (fileID: string) =>
     authorizedCustomAxios
       .delete(
         `${process.env.VITE_HTTP_API_URL}/public/files/delete/${projectID}/${processID}/${fileID}/`
@@ -24,12 +25,11 @@ const useDeleteFile = () => {
         logger("useDeleteFile | deleteFile ❌ |", error);
       });
 
-  return useMutation<string, Error, DeleteFileProps>({
+  return useMutation<string, Error, string>({
     mutationFn: deleteFile,
     onSuccess: () => {
       queryClient.invalidateQueries(["project", projectID]);
     },
-    
   });
 };
 

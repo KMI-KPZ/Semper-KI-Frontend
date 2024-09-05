@@ -1,14 +1,10 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useUser, { UserType } from "@/hooks/useUser";
 import TestImg from "@images/Test.png";
-import {
-  Process,
-  ProcessFile,
-  ProcessStatus,
-} from "@/api/Process/Querys/useGetProcess";
+import { ProcessFile, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 
 export interface ProjectDetailsProps {
@@ -45,14 +41,13 @@ export interface FlatProcess {
 }
 
 export const getProcessFiles = (filesObject: Object): ProcessFile[] => {
-  let files: ProcessFile[] = Object.entries(filesObject).map(([key, value]) => {
+  let files: ProcessFile[] = Object.entries(filesObject).map(([_, value]) => {
     return { ...value } as ProcessFile;
   });
   return files;
 };
 
 const useGetProject = () => {
-  const queryClient = useQueryClient();
   const { projectID } = useParams();
   const { user } = useUser();
   const getProject = async () =>

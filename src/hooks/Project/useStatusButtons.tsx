@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import useUser, { UserType } from "@/hooks/useUser";
 import { useNavigate } from "react-router-dom";
-import { useProject } from "./useProject";
 import { useTranslation } from "react-i18next";
 import { externalStatusButtonData } from "./externalStatusButtonData";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -38,21 +37,25 @@ interface UseStatusButtonsReturnProps {
 export type StatusButtonTitleType =
   | "NONE"
   | "DELETE"
-  | "FORWARD-TO-CONTRACTOR_SELECTED"
   | "BACK-TO-SERVICE_READY"
   | "BACK-TO-DRAFT"
-  | "FORWARD-TO-SERVICE_COMPLETED"
   | "BACK-TO-SERVICE_COMPLETED"
+  | "BACK-TO-CONTRACTOR_COMPLETED"
+  | "FORWARD-TO-CONTRACTOR_COMPLETED"
+  | "FORWARD-TO-SERVICE_COMPLETED"
+  | "FORWARD-TO-CONTRACTOR_COMPLETED"
   | "FORWARD-TO-VERIFYING"
-  | "BACK-TO-CONTRACTOR_SELECTED"
-  | "FORWARD-TO-REQUESTED"
+  | "FORWARD-TO-VERIFICATION_COMPLETED"
+  | "FORWARD-TO-REQUEST_COMPLETED"
   | "FORWARD-TO-CLARIFICATION"
-  | "FORWARD-TO-CONFIRMED_BY_CONTRACTOR"
-  | "FORWARD-TO-REJECTED_BY_CONTRACTOR"
-  | "FORWARD-TO-CONFIRMED_BY_CLIENT"
-  | "FORWARD-TO-REJECTED_BY_CLIENT"
-  | "FORWARD-TO-PRODUCTION"
-  | "FORWARD-TO-DELIVERY"
+  | "FORWARD-TO-OFFER_COMPLETED"
+  | "FORWARD-TO-OFFER_REJECTED"
+  | "FORWARD-TO-CONFIRMATION_COMPLETED"
+  | "FORWARD-TO-CONFIRMATION_REJECTED"
+  | "FORWARD-TO-PRODUCTION_IN_PROGRESS"
+  | "FORWARD-TO-PRODUCTION_COMPLETED"
+  | "FORWARD-TO-DELIVERY_IN_PROGRESS"
+  | "FORWARD-TO-DELIVERY_COMPLETED"
   | "FORWARD-TO-FAILED"
   | "FORWARD-TO-COMPLETED"
   | "FORWARD-TO-DISPUTE";
@@ -107,9 +110,8 @@ export interface StatusButtonProcessProps extends StatusButtonProps {
 
 const useStatusButtons = (): UseStatusButtonsReturnProps => {
   const { user } = useUser();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
-  const { project } = useProject();
   const sendProject = useSendProject();
   const verifyProject = useVerifyProject();
   const updateProcess = useUpdateProcess();
@@ -187,26 +189,28 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
     const validStatusButtonTitles: StatusButtonTitleType[] = [
       "NONE",
       "DELETE",
-      "FORWARD-TO-CONTRACTOR_SELECTED",
       "BACK-TO-SERVICE_READY",
       "BACK-TO-DRAFT",
-      "FORWARD-TO-SERVICE_COMPLETED",
       "BACK-TO-SERVICE_COMPLETED",
+      "FORWARD-TO-CONTRACTOR_COMPLETED",
+      "BACK-TO-CONTRACTOR_COMPLETED",
+      "FORWARD-TO-SERVICE_COMPLETED",
+      "FORWARD-TO-CONTRACTOR_COMPLETED",
       "FORWARD-TO-VERIFYING",
-      "BACK-TO-CONTRACTOR_SELECTED",
-      "FORWARD-TO-REQUESTED",
-      "FORWARD-TO-CLARIFICATION",
-      "FORWARD-TO-CONFIRMED_BY_CONTRACTOR",
-      "FORWARD-TO-REJECTED_BY_CONTRACTOR",
-      "FORWARD-TO-CONFIRMED_BY_CLIENT",
-      "FORWARD-TO-REJECTED_BY_CLIENT",
-      "FORWARD-TO-PRODUCTION",
-      "FORWARD-TO-DELIVERY",
+      "FORWARD-TO-VERIFICATION_COMPLETED",
+      "FORWARD-TO-REQUEST_COMPLETED",
+      "FORWARD-TO-OFFER_COMPLETED",
+      "FORWARD-TO-OFFER_REJECTED",
+      "FORWARD-TO-CONFIRMATION_COMPLETED",
+      "FORWARD-TO-CONFIRMATION_REJECTED",
+      "FORWARD-TO-PRODUCTION_IN_PROGRESS",
+      "FORWARD-TO-PRODUCTION_COMPLETED",
+      "FORWARD-TO-DELIVERY_IN_PROGRESS",
+      "FORWARD-TO-DELIVERY_COMPLETED",
       "FORWARD-TO-FAILED",
       "FORWARD-TO-COMPLETED",
       "FORWARD-TO-DISPUTE",
     ];
-    const isValidStatusButtonTitle = title as StatusButtonTitleType;
     return validStatusButtonTitles.includes(title as StatusButtonTitleType)
       ? t(
           `Projects.Project.hooks.useStatusButtons.${

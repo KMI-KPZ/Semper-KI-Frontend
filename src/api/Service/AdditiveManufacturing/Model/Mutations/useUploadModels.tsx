@@ -1,7 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
 import { ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
 
 interface ModelUploadDetails {
@@ -25,7 +24,6 @@ interface ModelsUpload {
 
 const useUploadModels = () => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
   const uploadModel = async ({
     models: _models,
     processID,
@@ -34,7 +32,7 @@ const useUploadModels = () => {
   }: ModelsUpload) => {
     const formData = new FormData();
     let detailList: { details: ModelUploadDetails; fileName: string }[] = [];
-    _models.forEach((model, index) => {
+    _models.forEach((model) => {
       const { details, file } = model;
       formData.append(file.name, file);
       detailList.push({ details, fileName: file.name });
@@ -63,7 +61,7 @@ const useUploadModels = () => {
 
   return useMutation<string, Error, ModelsUpload>({
     mutationFn: uploadModel,
-    onSuccess: (data, modelUploadProps, context) => {
+    onSuccess: (_, modelUploadProps) => {
       // navigate("../material");
       queryClient.invalidateQueries([
         "project",

@@ -1,13 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { redirect, useLocation } from "react-router-dom";
-
-interface useLoginReturnProps {
-  login: (data: LoginMutationProps) => void;
-  mockedLogin: (userType: LoginUserType) => void;
-  logout: () => void;
-}
 
 export interface LoginMutationProps {
   userType: LoginUserType;
@@ -25,7 +19,6 @@ export type LoginUserType =
   | "fakeAdmin";
 
 const useLogin = () => {
-  const queryClient = useQueryClient();
   const { search } = useLocation();
 
   const getReplacedSearchParam = () => {

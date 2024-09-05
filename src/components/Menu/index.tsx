@@ -1,11 +1,5 @@
 import { Button } from "@component-library/index";
-import React, {
-  KeyboardEvent,
-  MouseEvent,
-  SyntheticEvent,
-  useEffect,
-  useRef,
-} from "react";
+import React, { KeyboardEvent, MouseEvent, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -47,13 +41,11 @@ const Menu: React.FC<MenuProps> = (props) => {
     }
   };
 
-  const handleOnCancel = (e: SyntheticEvent<HTMLDialogElement, Event>) => {
+  const handleOnCancel = () => {
     closeModalWithScroll();
   };
 
-  const handleOnClick = (
-    e: MouseEvent<HTMLDialogElement, globalThis.MouseEvent>
-  ) => {
+  const handleOnClick = () => {
     closeModalWithScroll();
   };
 

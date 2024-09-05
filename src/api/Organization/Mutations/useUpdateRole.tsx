@@ -12,13 +12,9 @@ const useUpdateRole = () => {
   const queryClient = useQueryClient();
   const updateRole = async ({ description, name, roleID }: UpdateRoleProps) =>
     authorizedCustomAxios
-      .post(
+      .patch(
         `${process.env.VITE_HTTP_API_URL}/public/organizations/roles/edit/`,
-        {
-          data: {
-            content: { roleID, roleName: name, roleDescription: description },
-          },
-        }
+        { roleID, roleName: name, roleDescription: description }
       )
       .then((response) => {
         logger("useUpdateRole | updateRole ✅ |", response);
@@ -30,8 +26,12 @@ const useUpdateRole = () => {
 
   return useMutation<void, Error, UpdateRoleProps>({
     mutationFn: updateRole,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["organizations", "roles"]);
+    onSuccess(_, variables) {
+      queryClient.invalidateQueries([
+        "organization",
+        "roles",
+        variables.roleID,
+      ]);
     },
   });
 };

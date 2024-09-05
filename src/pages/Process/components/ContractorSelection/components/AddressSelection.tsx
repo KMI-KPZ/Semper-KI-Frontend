@@ -45,29 +45,32 @@ const AddressSelection: React.FC<AddressSelectionProps> = (props) => {
         )}
       </Heading>
       <Container width="full" direction="row" wrap="wrap">
-        {user.details.addresses.map((address, index) => (
-          <AddressCard address={address} key={index}>
-            <Button
-              size="sm"
-              variant="text"
-              title={t(
-                "Process.components.ContractorSelection.components.AddressSelection.button.edit"
-              )}
-              onClick={() => {
-                handleOnClickButtonEdit(address);
-              }}
-            />
-            <Button
-              size="sm"
-              title={t(
-                "Process.components.ContractorSelection.components.AddressSelection.button.select"
-              )}
-              onClick={() => {
-                handleOnClickButtonSelect(address);
-              }}
-            />
-          </AddressCard>
-        ))}
+        {user.details.addresses !== undefined &&
+        user.details.addresses.length > 0
+          ? user.details.addresses.map((address, index) => (
+              <AddressCard address={address} key={index}>
+                <Button
+                  size="sm"
+                  variant="text"
+                  title={t(
+                    "Process.components.ContractorSelection.components.AddressSelection.button.edit"
+                  )}
+                  onClick={() => {
+                    handleOnClickButtonEdit(address);
+                  }}
+                />
+                <Button
+                  size="sm"
+                  title={t(
+                    "Process.components.ContractorSelection.components.AddressSelection.button.select"
+                  )}
+                  onClick={() => {
+                    handleOnClickButtonSelect(address);
+                  }}
+                />
+              </AddressCard>
+            ))
+          : null}
       </Container>
       <Container width="full">
         <Button

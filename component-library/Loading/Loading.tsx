@@ -4,16 +4,17 @@ import LogoURL from "@images/logo192.png";
 import { DefinedUseQueryResult, UseQueryResult } from "@tanstack/react-query";
 import { Heading } from "..";
 import { twMerge } from "tailwind-merge";
+import LoopIcon from "@mui/icons-material/Loop";
 
 interface LoadingAnimationProps {
   color?: string;
   text?: boolean;
   className?: string;
+  variant?: "semper" | "circel";
 }
 
 export const LoadingAnimation: React.FC<LoadingAnimationProps> = (props) => {
-  const { color, text, className } = props;
-  const { t } = useTranslation();
+  const { text, className, variant = "circel" } = props;
   const [state, setState] = useState<number>(0);
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export const LoadingAnimation: React.FC<LoadingAnimationProps> = (props) => {
 
       return () => clearInterval(intervalId);
     }
+    return;
   }, []);
 
   if (text)
@@ -35,6 +37,13 @@ export const LoadingAnimation: React.FC<LoadingAnimationProps> = (props) => {
         <div className={` ${state > 2 ? "" : "invisible"}`}>.</div>
       </div>
     );
+  if (variant === "circel")
+    return (
+      <div className="h-fit w-fit animate-spin overflow-hidden">
+        <LoopIcon className="scale-x-[-1]   " />
+      </div>
+    );
+
   return (
     <div className={twMerge("mt-6 p-20", className)}>
       <div className="h-24 w-24 animate-bounce">

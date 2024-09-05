@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Button, Divider } from "@component-library/index";
@@ -17,7 +17,6 @@ import AddressCard from "@/components/Address/AddressCard";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { useProject } from "@/hooks/Project/useProject";
-import useService, { isServiceComplete } from "@/hooks/useService";
 
 interface Props {}
 
@@ -38,17 +37,20 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
 
   const [edit, setEdit] = useState(false);
   const [deliverAddress, setDeliverAddress] = useState(
-    user.details.addresses.find((address) => address.standard === true)
+    user.details.addresses === undefined
+      ? undefined
+      : user.details.addresses.find((address) => address.standard === true)
   );
   const [billingAddress, setBillingAddress] = useState(
-    user.details.addresses.find((address) => address.standard === true)
+    user.details.addresses === undefined
+      ? undefined
+      : user.details.addresses.find((address) => address.standard === true)
   );
   const [addressesEqual, setAddressesEqual] = useState(true);
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<ContractorSelectionFormData>({
     defaultValues: async () => ({
@@ -57,12 +59,12 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   });
 
   const onSubmit = (data: ContractorSelectionFormData) => {
-    data.processes.forEach((process, index, allProcesses) => {
+    data.processes.forEach((process) => {
       updateProcess.mutate({
         processIDs: [process.process.processID],
         updates: {
           changes: {
-            processStatus: ProcessStatus.CONTRACTOR_SELECTED,
+            processStatus: ProcessStatus.CONTRACTOR_COMPLETED,
             provisionalContractor: process.contractorID,
             processDetails: {
               clientDeliverAddress: deliverAddress,
@@ -147,7 +149,8 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
           </Container>
           <Divider />
           <Container direction="row" width="full">
-            {user.details.addresses.length > 0 ? (
+            {user.details.addresses !== undefined &&
+            user.details.addresses.length > 0 ? (
               user.details.addresses.map((address, index) => (
                 <AddressCard
                   key={index}
@@ -189,7 +192,8 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
               </Container>
             </Container>
             <Divider />
-            {user.details.addresses.length > 0 ? (
+            {user.details.addresses !== undefined &&
+            user.details.addresses.length > 0 ? (
               user.details.addresses.map((address, index) => (
                 <AddressCard
                   key={index}

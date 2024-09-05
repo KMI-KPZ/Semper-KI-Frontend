@@ -1,4 +1,3 @@
-
 import { Process } from "@/api/Process/Querys/useGetProcess";
 import { ProcessContext } from "@/contexts/ProcessContext";
 import { useContext } from "react";
@@ -11,7 +10,7 @@ const useProcess = (): ReturnProps => {
   const { process } = useContext(ProcessContext);
 
   return {
-    process
+    process,
   };
 };
 

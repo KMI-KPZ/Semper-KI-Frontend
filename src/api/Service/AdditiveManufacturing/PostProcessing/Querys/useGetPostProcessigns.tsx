@@ -1,14 +1,15 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { FilterItemProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Filter/Filter";
+import { useQuery } from "@tanstack/react-query";
+import { OntoNodeProperty } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import useFilter from "@/hooks/useFilter";
 
 export interface PostProcessingProps {
   id: string;
   title: string;
   checked: boolean;
   value: string;
-  valueList: string[];
+  propList: OntoNodeProperty[];
   type: EPostProcessingOptionType;
   imgPath: string;
 }
@@ -19,14 +20,14 @@ export enum EPostProcessingOptionType {
   "string",
 }
 
-const useGetPostProcessigns = (filters: FilterItemProps[]) => {
-  const queryClient = useQueryClient();
+const useGetPostProcessigns = () => {
+  const { activeFilters } = useFilter();
   const getPostProcessigns = async () =>
     authorizedCustomAxios
       .post(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/post-processing/get/`,
         {
-          filters,
+          filters: activeFilters,
         }
       )
       .then((response) => {

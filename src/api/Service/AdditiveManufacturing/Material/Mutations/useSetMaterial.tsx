@@ -27,7 +27,7 @@ const useSetMaterial = () => {
 
   return useMutation<string, Error, SetMaterialProps>({
     mutationFn: setMaterial,
-    onSuccess: (data, props, context) => {
+    onSuccess: (_, props) => {
       queryClient.invalidateQueries([
         "project",
         props.projectID,

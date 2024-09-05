@@ -1,6 +1,6 @@
 import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 import { Button, Container, Text } from "@component-library/index";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";

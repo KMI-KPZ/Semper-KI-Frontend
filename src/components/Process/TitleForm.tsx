@@ -1,4 +1,3 @@
-import useCreateProject from "@/api/Project/Mutations/useCreateProject";
 import { Button, Container, Heading, Text } from "@component-library/index";
 import { PropsWithChildren } from "react";
 import { useForm } from "react-hook-form";
@@ -21,7 +20,6 @@ interface FormData {
 
 const TitleForm: React.FC<PropsWithChildren<TitleFormProps>> = (props) => {
   const {
-    close,
     heading,
     children,
     buttonTitle,

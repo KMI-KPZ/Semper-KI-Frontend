@@ -1,4 +1,3 @@
-import logger from "@/hooks/useLogger";
 import { Button } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
@@ -16,8 +15,6 @@ const Coypu: React.FC<CoypuProps> = (props) => {
   const { t } = useTranslation();
   const coypuDataQuery = useGetCoypuData();
   const [expanded, setExpanded] = useState<boolean>(false);
-
-  const getCoypu = () => {};
 
   return (
     <Container direction="col" width="full">

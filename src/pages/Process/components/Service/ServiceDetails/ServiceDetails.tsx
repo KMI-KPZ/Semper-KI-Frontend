@@ -1,7 +1,6 @@
 import { Process } from "@/api/Process/Querys/useGetProcess";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import ServiceManufacturingView from "./Manufacturing/Manufacturing";
 
 interface ServiceProps {
@@ -10,7 +9,6 @@ interface ServiceProps {
 
 const ServiceDetails: React.FC<ServiceProps> = (props) => {
   const { process } = props;
-  const { t } = useTranslation();
 
   switch (process.serviceType) {
     case ServiceType.MANUFACTURING:

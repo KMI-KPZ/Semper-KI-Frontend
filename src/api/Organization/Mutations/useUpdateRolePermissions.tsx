@@ -14,13 +14,9 @@ const useUpdateRolePermissions = () => {
     roleID,
   }: SetPermissionProps) =>
     authorizedCustomAxios
-      .post(
+      .patch(
         `${process.env.VITE_HTTP_API_URL}/public/organizations/permissions/role/set/`,
-        {
-          data: {
-            content: { roleID, permissionIDs },
-          },
-        }
+        { roleID, permissionIDs }
       )
       .then((response) => {
         logger(
@@ -35,8 +31,13 @@ const useUpdateRolePermissions = () => {
 
   return useMutation<void, Error, SetPermissionProps>({
     mutationFn: updateRolePermissions,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["organizations", "roles"]);
+    onSuccess(_, variables) {
+      queryClient.invalidateQueries([
+        "organization",
+        "roles",
+        variables.roleID,
+        "permissions",
+      ]);
     },
   });
 };

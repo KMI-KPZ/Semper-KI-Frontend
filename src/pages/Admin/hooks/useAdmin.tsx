@@ -7,10 +7,10 @@ import useAdminDeleteUser, {
 import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { AuthorizedUserProps } from "@/hooks/useUser";
-import { AdminContext } from "@/routeOutlets/AdminOutlet";
 import { UseMutationResult } from "@tanstack/react-query";
 import { useContext } from "react";
 import { ProjectDetailsProps } from "@/api/Project/Querys/useGetProject";
+import { AdminContext } from "@/outlets/AdminOutlet";
 
 interface ReturnProps {
   users: AuthorizedUserProps[];

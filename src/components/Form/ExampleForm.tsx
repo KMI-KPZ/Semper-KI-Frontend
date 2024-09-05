@@ -1,8 +1,7 @@
-import { Button, Container, Heading, Text } from "@component-library/index";
+import { Button, Container, Heading } from "@component-library/index";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import TextInput from "../../../component-library/Form/Inputs/TextInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGeneralInput from "@component-library/Form/hooks/useGeneralInput";

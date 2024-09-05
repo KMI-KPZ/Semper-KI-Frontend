@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/index";
 import { getModelURI } from "@/services/utils";
@@ -25,12 +25,12 @@ const ProcessModelItem: React.FC<Props> = (props) => {
     return date.toLocaleDateString("uk-Uk");
   };
 
-  const convertStringForImage = (input: string): string => {
-    let base64 = input;
-    base64 = base64.slice(2);
-    base64 = base64.slice(0, -1);
-    return base64;
-  };
+  // const convertStringForImage = (input: string): string => {
+  //   let base64 = input;
+  //   base64 = base64.slice(2);
+  //   base64 = base64.slice(0, -1);
+  //   return base64;
+  // };
 
   const handleOnClickButtonDeselect = (modelID: string) => {
     deleteModel.mutate({

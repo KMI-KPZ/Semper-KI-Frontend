@@ -1,33 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/index";
 import LoginIcon from "@mui/icons-material/Login";
 import CreateIcon from "@mui/icons-material/Create";
 import { UserType } from "@/hooks/useUser";
-import { Heading, Text } from "@component-library/index";
-import Switch from "@/components/Switch";
+import { Heading } from "@component-library/index";
 import PersonIcon from "@mui/icons-material/Person";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
-import GroupIcon from "@mui/icons-material/Group";
-import { UserSwitch } from "@/components/UserSwitch";
-import PeopleIcon from "@mui/icons-material/People";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { Container } from "@component-library/index";
-import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
-import logger from "@/hooks/useLogger";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import useLogin, {
   LoginUserType,
 } from "@/api/Authentification/Querys/useLogin";
 import useMockedLogin from "@/api/Authentification/Querys/useMockedLogin";
+
 interface Props {
   path?: string;
   userType?: UserType;
 }
-type State = {
-  orga: boolean;
-};
 
 const Login: React.FC<Props> = (props) => {
+  const {} = props;
   const { t } = useTranslation();
 
   const login = useLogin();

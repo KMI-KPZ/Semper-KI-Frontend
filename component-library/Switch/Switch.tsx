@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 interface SwitchProps {
   onChange: (value: boolean) => void;
@@ -8,8 +7,7 @@ interface SwitchProps {
 }
 
 export const Switch: React.FC<SwitchProps> = (props) => {
-  const { onChange, value, variant = "one" } = props;
-  const { t } = useTranslation();
+  const { onChange, value } = props;
 
   const handelOnClick = () => {
     onChange(!value);

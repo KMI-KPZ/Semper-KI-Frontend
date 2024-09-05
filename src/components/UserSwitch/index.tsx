@@ -12,7 +12,7 @@ export const UserSwitch: React.FC<Props> = (props) => {
   const { onClick, userType } = props;
   const { t } = useTranslation();
 
-  const handleOnClickSwitch = (value: boolean) => {
+  const handleOnClickSwitch = () => {
     onClick(userType === UserType.USER ? UserType.ORGANIZATION : UserType.USER);
   };
 

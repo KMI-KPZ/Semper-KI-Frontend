@@ -27,7 +27,7 @@ const HeaderHomeButton: React.FC<HeaderHomeButtonProps> = (props) => {
         src={LogoURL}
         alt="Kiss Logo"
       />
-      <div className=" flex flex-col items-end justify-start text-inherit">
+      <div className="  flex flex-col items-end justify-start text-inherit">
         <Text
           variant="custom"
           className="text-2xl font-bold text-[#263652] xs:text-3xl md:text-4xl"

@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import InstagramIcon from "@mui/icons-material/Instagram";
 import { ReactComponent as MastodonIcon } from "@icons/Mastodon.svg";
-import {
-  URL_Contact,
-  URL_Datenschutz,
-  URL_Impressum,
-  URL_Instagram,
-  URL_LinkedIn,
-  URL_Mastodon,
-} from "@/config/constants";
+import { URL_LinkedIn, URL_Mastodon } from "@/config/constants";
 import { Button, Modal } from "@component-library/index";
 import ContactForm from "../Form/ContactForm";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -20,15 +11,7 @@ interface Props {}
 const Footer: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const [open, setOpen] = useState<boolean>(false);
-
-  const handleOnClickContact = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    navigate("/contact");
-  };
 
   const contactOnClick = function () {
     setOpen((prevState) => !prevState);

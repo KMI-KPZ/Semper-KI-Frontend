@@ -1,7 +1,6 @@
 import { DefinedProcess } from "@/api/Process/Querys/useGetProcess";
 import { DefinedProcessContext } from "@/contexts/DefinedProcessContext";
-import React, { useContext } from "react";
-import { useTranslation } from "react-i18next";
+import { useContext } from "react";
 
 interface useDefinedProcessReturnProps {
   process: DefinedProcess;

@@ -1,14 +1,8 @@
-import {
-  ManufactoringProcessProps,
-  Process,
-  ProcessStatus,
-} from "@/api/Process/Querys/useGetProcess";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessContainer from "@/components/Process/Container";
-import ProcessMenu from "@/components/Process/Menu";
 import {
   Button,
   Container,
-  Divider,
   Heading,
   LoadingAnimation,
   Modal,
@@ -16,13 +10,11 @@ import {
 } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import ProcessStatusButtons from "../StatusButtons";
 import { UserAddressProps } from "@/hooks/useUser";
 import ProcessContractorList from "./components/ContractorList";
 import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 import ContractorCard from "./components/ContractorCard";
 import ContractorSelectionAddressCard from "./components/AddressCard";
-import ProcessHeader from "@/components/Process/Header";
 import useGetContractors from "@/api/Process/Querys/useGetContractors";
 
 interface ProcessContractorSelectionProps {}
@@ -40,7 +32,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { process } = useDefinedProcess();
-  const contractors = useGetContractors(process.processID);
+  const contractors = useGetContractors();
 
   const [editContractor, setEditContractor] = useState(false);
 
@@ -86,7 +78,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
       pageTitle={pageTitle}
       menuButtonTitle={menuButtonTitle}
       start={ProcessStatus.SERVICE_COMPLETED}
-      end={ProcessStatus.CONTRACTOR_SELECTED}
+      end={ProcessStatus.SERVICE_COMPLETED}
     >
       <Container width="full" justify="center" align="start" direction="auto">
         <Container

@@ -12,7 +12,7 @@ const useProjectsState = (
   useEffect(() => {
     if (projectsQuery.data !== undefined && state.length === 0)
       setState(
-        projectsQuery.data.map((open, index) => (index === 0 ? true : false))
+        projectsQuery.data.map((_, index) => (index === 0 ? true : false))
       );
   }, [projectsQuery.data]);
 

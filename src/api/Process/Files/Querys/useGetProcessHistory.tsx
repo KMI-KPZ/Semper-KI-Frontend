@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { ChatMessageProps, FileProps } from "../../Querys/useGetProcess";
 import { ServiceProps } from "@/api/Service/Querys/useGetServices";
@@ -64,7 +64,6 @@ export type ProcessHistoryOTHER = {
 };
 
 const useGetProcessHistory = () => {
-  const queryClient = useQueryClient();
   const { projectID, processID } = useParams();
 
   const getProcessHistory = async () =>

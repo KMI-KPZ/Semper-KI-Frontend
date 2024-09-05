@@ -29,7 +29,7 @@ const useDeleteMaterial = () => {
 
   return useMutation<string, Error, DeleteMaterialProps>({
     mutationFn: deleteMaterial,
-    onSuccess: (data, props, context) => {
+    onSuccess: (_, props) => {
       queryClient.invalidateQueries([
         "project",
         props.projectID,

@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Text } from "@component-library/index";
+import { Button, Container } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import DeleteIcon from "@mui/icons-material/Delete";
 interface RawProcessFileRowProps {

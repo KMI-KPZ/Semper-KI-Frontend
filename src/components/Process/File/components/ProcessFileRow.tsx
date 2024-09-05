@@ -1,13 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Text } from "@component-library/index";
+import { Button, Container } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import { ProcessFile } from "@/api/Process/Querys/useGetProcess";
 import useDeleteFile from "@/api/Process/Files/Mutations/useDeleteFile";
 import useDownloadFile from "@/api/Process/Files/Mutations/useDownloadFile";
 import { createDownload } from "@/services/utils";
-import useProcess from "@/hooks/Process/useProcess";
-import OwnerGate from "@/components/OwnerGate/OwnerGate";
 import { UserType } from "@/hooks/useUser";
 import DownloadIcon from "@mui/icons-material/Download";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -21,11 +19,10 @@ const ProcessFileRow: React.FC<ProcessFileRowProps> = (props) => {
   const deleteFile = useDeleteFile();
   const downloadFile = useDownloadFile();
   const { user } = useAuthorizedUser();
-  const { process } = useProcess();
 
   const handleOnButtonClickDownload = () => {
     downloadFile.mutate(file.id, {
-      onSuccess(data, variables, context) {
+      onSuccess(data) {
         createDownload(data, file.fileName);
       },
     });

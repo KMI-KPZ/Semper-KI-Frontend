@@ -1,5 +1,4 @@
-import React from "react";
-import { queryByText, render, screen } from "@test/render";
+import { render, screen } from "@test/render";
 import { Badge, IconBadge } from "./Badge";
 
 describe("Badge", () => {

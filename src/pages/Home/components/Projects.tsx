@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Container, Heading } from "@component-library/index";
 import { Button } from "@component-library/index";
@@ -7,7 +7,6 @@ import HomeContainer from "./Container";
 import useUser, { UserType } from "@/hooks/useUser";
 import { ContentBox } from "@component-library/index";
 import useGetFlatProjects from "@/api/Project/Querys/useGetFlatProjects";
-import { useProject } from "@/hooks/Project/useProject";
 import useCreateProject from "@/api/Project/Mutations/useCreateProject";
 
 interface HomeProjectsProps {}

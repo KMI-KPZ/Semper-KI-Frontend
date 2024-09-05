@@ -43,7 +43,7 @@ const useUpdateProject = () => {
 
   return useMutation<void, Error, UpdateProjectProps>({
     mutationFn: updateProject,
-    onSuccess: (data, variables, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["project", projectID]);
       queryClient.invalidateQueries(["flatProjects"]);
     },

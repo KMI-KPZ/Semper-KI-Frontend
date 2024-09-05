@@ -1,54 +1,83 @@
-import { Button, Container, Text } from "@component-library/index";
+import { Button, Text } from "@component-library/index";
 import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { twMerge } from "tailwind-merge";
-import { use } from "i18next";
 
 interface CollapsibleProps {
   className?: string;
-  open?: boolean;
+  expand?: boolean;
+  setExpand?: (expand: boolean) => void;
+  initialOpen?: boolean;
+  showButton?: boolean;
+  logName?: string;
+  animation?: boolean;
 }
 
 const Collapsible: React.FC<PropsWithChildren<CollapsibleProps>> = (props) => {
-  const { children, className, open } = props;
+  const {
+    children,
+    className,
+    expand: outsideExpand,
+    setExpand: setOutsideExpand,
+    initialOpen = false,
+    showButton = false,
+    animation = true,
+  } = props;
   const { t } = useTranslation();
   const collapsibleRef = useRef<null | HTMLDivElement>(null);
-  const [expand, setExpand] = useState<boolean>(false);
+  const [localExpand, setLocalExpand] = useState<boolean>(initialOpen);
+
+  const expand = outsideExpand !== undefined ? outsideExpand : localExpand;
+
+  const toggleExpand = (expand: boolean) => {
+    if (setOutsideExpand !== undefined) {
+      setOutsideExpand(!expand);
+    } else {
+      setLocalExpand(expand);
+    }
+  };
 
   const handleOnClickButton = () => {
-    if (collapsibleRef !== null && collapsibleRef.current !== null) {
-      collapsibleRef.current.style.maxHeight = expand
-        ? "0px"
-        : collapsibleRef.current.scrollHeight + "px";
-      setExpand(!expand);
-    } else return;
+    toggleExpand(!expand);
   };
 
   useEffect(() => {
-    if (
-      collapsibleRef !== null &&
-      collapsibleRef.current !== null &&
-      open !== undefined
-    ) {
-      collapsibleRef.current.style.maxHeight =
-        open === false ? "0px" : collapsibleRef.current.scrollHeight + "px";
-      setExpand(!expand);
+    if (outsideExpand !== undefined) {
+      toggleExpand(outsideExpand);
     }
-  }, [open]);
+  }, [outsideExpand]);
+
+  useEffect(() => {
+    if (initialOpen !== undefined && initialOpen === true) {
+      toggleExpand(true);
+    }
+  }, [initialOpen]);
+
+  const refScrollHeight =
+    collapsibleRef.current !== null ? collapsibleRef.current.scrollHeight : 0;
 
   return (
     <>
       <div
         ref={collapsibleRef}
+        style={{
+          maxHeight:
+            expand === false
+              ? "0px"
+              : animation === true
+              ? refScrollHeight
+              : undefined,
+        }}
         className={twMerge(
-          `max-h-0 w-full flex-col gap-2 overflow-hidden duration-300 ease-in-out `,
+          ` w-full flex-col gap-2 overflow-hidden `,
+          animation === true ? "max-h-0 duration-300 ease-in-out" : "",
           className
         )}
       >
         {children}
       </div>
-      {open !== undefined ? null : (
+      {showButton ? (
         <Button
           title={t(
             `Process.components.Info.button.${expand ? "collapse" : "expand"}`
@@ -68,7 +97,7 @@ const Collapsible: React.FC<PropsWithChildren<CollapsibleProps>> = (props) => {
             <ExpandMoreIcon />
           </div>
         </Button>
-      )}
+      ) : null}
     </>
   );
 };

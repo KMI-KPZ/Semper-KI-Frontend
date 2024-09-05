@@ -1,13 +1,12 @@
+import { NewUserAddressProps } from "@/api/User/Mutations/useUpdateUser";
 import { UserContext } from "@/contexts/UserContextProvider";
-import { UseMutationResult } from "@tanstack/react-query";
-import { useContext, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { toast } from "./useToast";
-import { NewUserAddressProps } from "@/api/User/Mutations/useCreateAddress";
+import { UseQueryResult } from "@tanstack/react-query";
+import { useContext } from "react";
 
 interface ReturnProps {
   isLoggedIn: boolean;
   user: UserProps;
+  query: UseQueryResult<AuthorizedUserProps, Error>;
 }
 
 export type UserProps = AnonymUser | AuthorizedUserProps;
@@ -29,9 +28,52 @@ export interface AuthorizedUserProps {
 }
 
 export interface UserDetailsProps {
-  email: string;
-  addresses: UserAddressProps[];
+  email?: string;
+  locale?: AppLanguage;
+  addresses?: UserAddressProps[];
+  statistics?: {
+    lastLogin: string;
+    numberOfLoginsTotal: number;
+    locationOfLastLogin: string;
+  };
+  notificationSettings?: {
+    user: UserNotificationSetting[];
+    organization: OrgaNotificationSetting[];
+  };
 }
+
+export type GeneralNotificationSettings = {
+  event: boolean;
+  email: boolean;
+};
+
+export type UserNotificationSetting = {
+  type: UserNotificationSettingsType;
+} & GeneralNotificationSettings;
+
+export type OrgaNotificationSetting = {
+  type: OrgaNotificationSettingsType;
+} & GeneralNotificationSettings;
+
+export type UserNotificationSettingsType =
+  | "verification"
+  | "processSent"
+  | "responseFromContractor"
+  | "statusChange"
+  | "newMessage"
+  | "actionReminder"
+  | "errorOccurred"
+  | "newsletter";
+
+export type OrgaNotificationSettingsType =
+  | "processReceived"
+  | "responseFromClient"
+  | "statusChange"
+  | "newMessage"
+  | "actionReminder"
+  | "errorOccurred";
+
+export type AppLanguage = "de-DE" | "en-US";
 
 export interface UpdateUserProps {
   address?: UserAddressProps;
@@ -57,12 +99,12 @@ export interface Address {
 }
 
 const useUser = (): ReturnProps => {
-  const { isLoggedIn, user } = useContext(UserContext);
-  const { t } = useTranslation();
+  const { isLoggedIn, user, query } = useContext(UserContext);
 
   return {
     isLoggedIn,
     user,
+    query,
   };
 };
 

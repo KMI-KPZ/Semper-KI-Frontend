@@ -1,13 +1,10 @@
 import ProcessContainer from "@/components/Process/Container";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ProcessStatusButtons from "../StatusButtons";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import ProcessHeader from "@/components/Process/Header";
 import { Button, Container, Text } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useProcess from "@/hooks/Process/useProcess";
-
 import CheckIcon from "@mui/icons-material/Check";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ProcessFileView from "@/components/Process/File/FileView";
@@ -23,11 +20,11 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
 
   const isClient = user.hashedID === process.client;
   const clientVerified =
-    isClient && process.processStatus === ProcessStatus.VERIFIED;
+    isClient && process.processStatus === ProcessStatus.VERIFYING_COMPLETED;
   const clientRequested =
-    isClient && process.processStatus >= ProcessStatus.REQUESTED;
+    isClient && process.processStatus >= ProcessStatus.REQUEST_COMPLETED;
   const contractorRecieved =
-    !isClient && process.processStatus >= ProcessStatus.REQUESTED;
+    !isClient && process.processStatus >= ProcessStatus.REQUEST_COMPLETED;
 
   const getText = (): string => {
     if (clientVerified)
@@ -63,8 +60,8 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
       id="Request"
       menuButtonTitle={menuButtonTitle}
       pageTitle={pageTitle}
-      start={ProcessStatus.VERIFIED}
-      end={ProcessStatus.CLARIFICATION}
+      start={ProcessStatus.VERIFYING_COMPLETED}
+      end={ProcessStatus.VERIFYING_COMPLETED}
     >
       <Container width="fit" direction="col" className="card">
         {clientVerified ? (

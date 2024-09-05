@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 export type CreateOrganizationFormData = {
   email: string;
@@ -8,7 +8,6 @@ export type CreateOrganizationFormData = {
 };
 
 const useCreateOrganization = () => {
-  const queryClient = useQueryClient();
   const createOrganization = async (props: CreateOrganizationFormData) =>
     authorizedCustomAxios
       .post(`${process.env.VITE_HTTP_API_URL}/public/organizations/create/`, {

@@ -17,7 +17,7 @@ const useSaveProjects = () => {
 
   return useMutation<string, Error, void>({
     mutationFn: saveProjects,
-    onSuccess: (data, projectID, context) => {
+    onSuccess: (_, projectID) => {
       queryClient.invalidateQueries(["project", projectID]);
       queryClient.invalidateQueries(["flatProjects"]);
     },

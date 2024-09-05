@@ -1,5 +1,4 @@
 import {
-  QueriesResults,
   UseQueryOptions,
   UseQueryResult,
   useQuery,

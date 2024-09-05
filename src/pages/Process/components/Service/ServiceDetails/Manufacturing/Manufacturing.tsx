@@ -8,9 +8,6 @@ import { useTranslation } from "react-i18next";
 import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
-import { useProject } from "@/hooks/Project/useProject";
-import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
-import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
 import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 import ProcessServiceModelCard from "./components/ModellCard";
@@ -26,7 +23,6 @@ const ServiceManufacturingDetails: React.FC<
   ServiceManufacturingDetailsProps
 > = (props) => {
   const { process } = props;
-  const { project } = useProject();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const models: ModelProps[] =
@@ -57,10 +53,10 @@ const ServiceManufacturingDetails: React.FC<
       justify="center"
       align="start"
       width="full"
-      className="p-5"
+      className="p-2 md:p-5"
     >
-      <Container direction="row" justify="between" width="full">
-        <Container align="end">
+      <Container justify="between" width="full" gap={5}>
+        <Container direction="row" width="full" justify="start" wrap="wrap">
           <Heading variant="h3">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.model.heading"
@@ -115,8 +111,8 @@ const ServiceManufacturingDetails: React.FC<
         </ProcessStatusGate>
       </Container>
 
-      <Container direction="row" justify="between" width="full">
-        <Container align="end">
+      <Container justify="between" width="full">
+        <Container direction="row" width="full" justify="start" wrap="wrap">
           <Heading variant="h3">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.material.heading"
@@ -171,8 +167,8 @@ const ServiceManufacturingDetails: React.FC<
         </ProcessStatusGate>
       </Container>
 
-      <Container direction="row" justify="between" width="full">
-        <Container align="end">
+      <Container justify="between" width="full">
+        <Container direction="row" width="full" justify="start" wrap="wrap">
           <Heading variant="h3">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.postProcessing.heading"

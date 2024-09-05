@@ -1,41 +1,77 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { FilterItemProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Filter/Filter";
-import _FilterItems from "@/hooks/Data/FilterQuestions.json";
-const FilterItems = _FilterItems as FilterItemProps[];
+import { useQuery } from "@tanstack/react-query";
 
-export enum FilterType {
-  "TEXT",
-  "TEXTAREA",
-  "NUMBER",
-  "DATE",
-  "COLOR",
-  "SLIDER",
-  "SLIDERSELECTION",
-  "SELECTION",
-  "MUILTISELECT",
+export type FilterCategoryType =
+  | "SELECTED"
+  | "GENERAL"
+  | "MODEL"
+  | "MATERIAL"
+  | "PROCEEDING"
+  | "MANUFACTURER"
+  | "POSTPROCESSING"
+  | "ADDITIVE"
+  | "TEST";
+
+export type FilterType =
+  | "TEXT"
+  | "TEXTAREA"
+  | "NUMBER"
+  | "DATE"
+  | "COLOR"
+  | "SLIDER"
+  | "SLIDERSELECTION"
+  | "SELECTION"
+  | "MULTISELECTION";
+
+export interface FilterItemProps {
+  id: number;
+  isChecked: boolean;
+  isOpen: boolean;
+  question: FilterQuestionProps;
+  answer: FilterAnswerProps | null;
 }
 
-export enum FilterCategoryType {
-  "GENERAL",
-  "MODEL",
-  "MATERIAL",
-  "PROCEEDING",
-  "MANUFACTURER",
-  "POSTPROCESSING",
-  "ADDITIVE",
-  "TEST",
+export interface FilterQuestionProps {
+  isSelectable: boolean;
+  title: string;
+  category: FilterCategoryType;
+  type: FilterType;
+  values: FilterSelectionValue[] | null;
+  range: number[] | null;
+  units: string[] | string | null;
+}
+
+export interface FilterSelectionValue {
+  name: string;
+  id: string;
+}
+
+export interface FilterAnswerProps {
+  unit: string | null;
+  value:
+    | string
+    | string[]
+    | number
+    | RangeMinMaxProps
+    | FilterSelectionValue
+    | FilterSelectionValue[];
+}
+
+export interface RangeMinMaxProps {
+  min: number;
+  max: number;
 }
 
 const useGetFilters = () => {
-  const queryClient = useQueryClient();
   const getFilters = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/getFilters/`)
+      .get(
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/filters/get/`
+      )
       .then((response) => {
         const responseData = response.data;
-        const filters: FilterItemProps[] = responseData;
+        const filters: FilterItemProps[] = responseData.filters;
 
         logger("useGetFilters | getFilters ✅ |", response);
         return filters;
@@ -44,8 +80,6 @@ const useGetFilters = () => {
   return useQuery<FilterItemProps[], Error>({
     queryKey: ["filters"],
     queryFn: getFilters,
-    initialData: FilterItems,
-    enabled: false,
   });
 };
 

@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from "react";
-import { useTranslation } from "react-i18next";
 import ProcessMenu from "./Menu";
 import { Container, Divider, Heading } from "@component-library/index";
 
@@ -15,7 +14,9 @@ const ProcessHeader: React.FC<PropsWithChildren<ProcessHeaderProps>> = (
 
   return (
     <>
-      <ProcessMenu buttonTitle={menuButtonTitle}>{children}</ProcessMenu>
+      {children !== undefined ? (
+        <ProcessMenu buttonTitle={menuButtonTitle}>{children}</ProcessMenu>
+      ) : null}
       <Container width="full" justify="start">
         <Heading variant="h2">{pageTitle}</Heading>
       </Container>

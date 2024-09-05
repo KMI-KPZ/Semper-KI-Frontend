@@ -1,10 +1,8 @@
 import { Heading } from "@component-library/index";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { UseFormRegister } from "react-hook-form";
 import { CheckoutFormData } from "../Checkout";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
-import { Process } from "@/api/Process/Querys/useGetProcess";
 import { FlatProcess } from "@/api/Project/Querys/useGetProject";
 
 type Props = {
@@ -15,7 +13,6 @@ type Props = {
 
 const ProjectCheckoutItem: React.FC<Props> = (props) => {
   const { process, register, index } = props;
-  const { t } = useTranslation();
 
   return (
     <label className="flex w-full flex-col items-center justify-center gap-2 bg-white p-2 md:flex-row">

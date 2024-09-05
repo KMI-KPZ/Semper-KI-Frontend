@@ -21,7 +21,7 @@ const useDeleteProject = () => {
 
   return useMutation<string, Error, string[]>({
     mutationFn: deleteProject,
-    onSuccess: (data, projectIDs, context) => {
+    onSuccess: (_, projectIDs) => {
       projectIDs.map((projectID) => {
         queryClient.invalidateQueries(["project", projectID]);
       });

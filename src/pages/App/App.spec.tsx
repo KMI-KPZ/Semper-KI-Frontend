@@ -1,9 +1,3 @@
-import { render } from "@test/render";
-import useUser from "@/hooks/useUser";
-import { UserBuilder } from "@test/builder";
-import { UserType } from "@/hooks/useUser";
-import App from "./App";
-
 describe.skip("<App>", () => {
   it.skip("should render without crashing", () => {
     // render(<App />);

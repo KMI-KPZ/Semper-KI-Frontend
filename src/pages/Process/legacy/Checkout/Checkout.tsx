@@ -1,15 +1,11 @@
-import { Container } from "@component-library/index";
 import { Heading } from "@component-library/index";
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { Button } from "@component-library/index";
 import SendIcon from "@mui/icons-material/Send";
-import { useNavigate } from "react-router-dom";
 import ProjectCheckoutItem from "./components/Item";
-import { useProject } from "@/hooks/Project/useProject";
 import useSendProject from "@/api/Project/Mutations/useSendProject";
-import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { FlatProcess } from "@/api/Project/Querys/useGetProject";
 
 interface ProjectCheckoutProps {}
@@ -23,14 +19,9 @@ const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
   const { t } = useTranslation();
   const sendProject = useSendProject();
 
-  const { project } = useProject();
   const processes: FlatProcess[] = [];
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CheckoutFormData>({
+  const { register, handleSubmit } = useForm<CheckoutFormData>({
     defaultValues: async () => ({
       processes: processes.map((process) => ({
         process,
@@ -38,8 +29,6 @@ const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
       })),
     }),
   });
-
-  const navigate = useNavigate();
 
   const handleOnClickButtonSend = (data: CheckoutFormData) => {
     sendProject.mutate(

@@ -1,8 +1,6 @@
-import { RefObject, useContext, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { RefObject, useContext, useEffect } from "react";
 import useBodyScroll from "./useBodyScroll";
 import { ModalContext } from "@/contexts/ModalContextProvider";
-import logger from "./useLogger";
 
 interface useModalReturnProps {
   registerModal(modal: string, ref: RefObject<HTMLDialogElement>): void;
@@ -11,7 +9,6 @@ interface useModalReturnProps {
 }
 
 const useModal = (): useModalReturnProps => {
-  const { t } = useTranslation();
   const { setBodyScroll } = useBodyScroll();
   const { modals, setModals } = useContext(ModalContext);
 

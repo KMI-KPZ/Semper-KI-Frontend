@@ -1,0 +1,43 @@
+import React, { useEffect, useState } from "react";
+import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
+
+interface Props {
+  filterItem: FilterItemProps;
+  setFilterItem(filterItem: FilterItemProps): void;
+}
+
+interface State {
+  text: string;
+}
+
+const ProcessFilterTextArea: React.FC<Props> = (props) => {
+  const { filterItem, setFilterItem } = props;
+  const [state, setState] = useState<State>({ text: "" });
+
+  useEffect(() => {
+    setFilterItem({
+      ...filterItem,
+      answer:
+        state.text === ""
+          ? null
+          : {
+              unit: null,
+              value: state.text,
+            },
+    });
+  }, [state]);
+
+  const handleChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const text: string = e.target.value;
+    setState({ text });
+  };
+  return (
+    <textarea
+      className="rounded-xl border-2 px-5 py-3"
+      onChange={handleChangeInput}
+      value={state.text}
+    />
+  );
+};
+
+export default ProcessFilterTextArea;

@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import ProcessVerificationItem from "./components/Item";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/index";
 import { Heading } from "@component-library/index";
@@ -28,17 +27,11 @@ const ProcessVerification: React.FC<Props> = (props) => {
   //         process.processStatus === ProcessStatus.CONTRACTOR_SELECTED
   //     );
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<VerifyFormData>({
+  const { register, handleSubmit } = useForm<VerifyFormData>({
     defaultValues: async () => ({
       processes: processes.map((process) => ({ process, checked: true })),
     }),
   });
-
-  const navigate = useNavigate();
 
   const handleOnClickButtonVerify = (data: VerifyFormData) => {
     verifyProject.mutate({

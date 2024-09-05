@@ -1,8 +1,6 @@
 import { Button, Container, Divider } from "@component-library/index";
-import { useTranslation } from "react-i18next";
-import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import useStatusButtons from "@/hooks/Project/useStatusButtons";
-import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useProcess from "@/hooks/Process/useProcess";
 
 interface ProcessStatusButtonsProps {
@@ -13,10 +11,9 @@ interface ProcessStatusButtonsProps {
 const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { end, start } = props;
   const { process } = useProcess();
-  const { t } = useTranslation();
   const { getProcessStatusButtons, handleOnClickButton } = useStatusButtons();
 
-  const show = process.processStatus >= start && process.processStatus < end;
+  const show = process.processStatus >= start && process.processStatus <= end;
 
   return show && getProcessStatusButtons(process).length > 0 ? (
     <Container width="full" direction="col">

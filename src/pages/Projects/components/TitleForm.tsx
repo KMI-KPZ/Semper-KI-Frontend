@@ -18,7 +18,7 @@ interface FormData {
 const CreateProjectTitleForm: React.FC<CreateProjectTitleFormProps> = (
   props
 ) => {
-  const { close } = props;
+  const {} = props;
   const { t } = useTranslation();
   const createProject = useCreateProject();
 

@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/index";
 
@@ -8,7 +7,6 @@ interface Props {
 
 export const Error: React.FC<Props> = (props) => {
   const { text } = props;
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
   return (

@@ -1,9 +1,7 @@
 import { Process, ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
-import { Container } from "@component-library/index";
+import { Container, Heading } from "@component-library/index";
 import React, { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import CheckIcon from "@mui/icons-material/Check";
 import FactoryIcon from "@mui/icons-material/Factory";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import EmailIcon from "@mui/icons-material/Email";
@@ -11,7 +9,6 @@ import DoneAllIcon from "@mui/icons-material/DoneAll";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import DescriptionIcon from "@mui/icons-material/Description";
-import ModeIcon from "@mui/icons-material/Mode";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import StatusWizardCard from "./components/Card";
 import InfoIcon from "@mui/icons-material/Info";
@@ -63,50 +60,50 @@ const statusWizardItems: StatusWizardItem[] = [
     targetID: "Contractor",
   },
   {
-    startStatus: ProcessStatus.CONTRACTOR_SELECTED,
-    endStatus: ProcessStatus.VERIFYING,
+    startStatus: ProcessStatus.CONTRACTOR_COMPLETED,
+    endStatus: ProcessStatus.VERIFYING_IN_PROGRESS,
     icon: <AssignmentTurnedInIcon />,
     text: "verified",
     targetID: "Verification",
   },
   {
-    startStatus: ProcessStatus.VERIFIED,
-    endStatus: ProcessStatus.REQUESTED,
+    startStatus: ProcessStatus.VERIFYING_COMPLETED,
+    endStatus: ProcessStatus.REQUEST_COMPLETED,
     icon: <EmailIcon />,
     text: "requested",
     targetID: "Request",
   },
+  // {
+  //   startStatus: ProcessStatus.CLARIFICATION,
+  //   endStatus: ProcessStatus.CLARIFICATION,
+  //   icon: <QuestionMarkIcon />,
+  //   text: "clarification",
+  //   targetID: "Clarification",
+  // },
   {
-    startStatus: ProcessStatus.CLARIFICATION,
-    endStatus: ProcessStatus.CLARIFICATION,
-    icon: <QuestionMarkIcon />,
-    text: "clarification",
-    targetID: "Clarification",
-  },
-  {
-    startStatus: ProcessStatus.CONFIRMED_BY_CONTRACTOR,
-    endStatus: ProcessStatus.REJECTED_BY_CONTRACTOR,
+    startStatus: ProcessStatus.OFFER_COMPLETED,
+    endStatus: ProcessStatus.OFFER_REJECTED,
     icon: <DescriptionIcon />,
     text: "offer",
     targetID: "Contract",
   },
+  // {
+  //   startStatus: ProcessStatus.CONFIRMATION_COMPLETED,
+  //   endStatus: ProcessStatus.CONFIRMATION_REJECTED,
+  //   icon: <CheckIcon />,
+  //   text: "confirmation",
+  //   targetID: "Confirmation",
+  // },
   {
-    startStatus: ProcessStatus.CONFIRMED_BY_CLIENT,
-    endStatus: ProcessStatus.REJECTED_BY_CLIENT,
-    icon: <CheckIcon />,
-    text: "confirmation",
-    targetID: "Confirmation",
-  },
-  {
-    startStatus: ProcessStatus.PRODUCTION,
-    endStatus: ProcessStatus.PRODUCTION,
+    startStatus: ProcessStatus.PRODUCTION_IN_PROGRESS,
+    endStatus: ProcessStatus.PRODUCTION_COMPLETED,
     icon: <FactoryIcon />,
     text: "production",
     targetID: "Production",
   },
   {
-    startStatus: ProcessStatus.DELIVERY,
-    endStatus: ProcessStatus.DELIVERY,
+    startStatus: ProcessStatus.DELIVERY_IN_PROGRESS,
+    endStatus: ProcessStatus.DELIVERY_COMPLETED,
     icon: <LocalShippingIcon />,
     text: "delivery",
     targetID: "Delivery",
@@ -135,7 +132,14 @@ const ProcessStatusWizard: React.FC<ProcessStatusWizardProps> = (props) => {
   useScrollIntoView(newestStatusID);
 
   return (
-    <Container direction="col" className="sticky top-5 bg-white p-5">
+    <Container
+      direction="col"
+      justify="start"
+      className="top-5 max-h-60  overflow-y-auto rounded-xl bg-white p-5 md:sticky md:max-h-fit md:overflow-y-visible"
+    >
+      <Heading variant="h2">
+        {t("Process.StatusWizard.StatusWizard.header")}
+      </Heading>
       {statusWizardItems.map((item) => {
         return (
           <StatusWizardCard key={item.text} item={item} process={process} />

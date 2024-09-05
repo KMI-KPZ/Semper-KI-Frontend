@@ -167,10 +167,11 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
         ` bezier group flex
           h-fit flex-wrap
           items-center justify-center 
-          gap-3 break-words 
+          gap-3  
           rounded-lg text-center    
           transition duration-200 
           md:flex-nowrap md:whitespace-nowrap
+          
          `,
         getClassNameSize(),
         getClassNameWidth(),
@@ -180,10 +181,10 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
         className
       )}
       onClick={handleOnClickButton}
-      href={to !== undefined ? to : title}
+      href={to !== undefined ? to : undefined}
       data-testid={testid}
       target={target}
-      tabIndex={active ? undefined : -1}
+      tabIndex={active ? 0 : -1}
     >
       {loading === true ? (
         <div className="animate-spin">

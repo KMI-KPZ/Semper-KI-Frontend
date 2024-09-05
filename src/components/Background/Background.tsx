@@ -2,7 +2,7 @@ import React from "react";
 interface Props {}
 
 export const Background: React.FC<Props> = (props) => {
-  const showFancyBG = false;
+  const {} = props;
 
   return (
     <div

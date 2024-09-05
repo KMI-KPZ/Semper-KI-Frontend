@@ -1,9 +1,4 @@
-import { Header } from "@/components/Header";
-import { createContext, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { Error } from "../Error/Error";
-import { Home } from "../Home/Home";
-import { Test } from "../Test/Test";
+import "react-toastify/dist/ReactToastify.css";
 import Footer from "@/components/Footer";
 import Login from "../Login/Login";
 import Logout from "../Logout/Logout";
@@ -12,35 +7,44 @@ import Portfolio from "../Portfolio/Portfolio";
 import Resouces from "../Resources/Resources";
 import Legal from "../Legal/Legal";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import "react-toastify/dist/ReactToastify.css";
-import CookieBanner from "@/components/CookieBanner/CookieBanner";
-import { FilterItemProps } from "../Process/components/Service/ServiceEdit/Manufacturing/Filter/Filter";
+import CkBanner from "@/components/CookieBanner/CkBanner";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import EmailVerification from "../EmailVerification/EmailVerification";
 import ResKriVer from "../ResKriVer/ResKriVer";
-import { OrganizationRouteOutlet } from "@/routeOutlets/OrganizationOutlet";
-import { AdminRouteOutlet } from "@/routeOutlets/AdminOutlet";
-import { ToastContainer } from "react-toastify";
-import AuthorizedUserRouteOutlet from "@/routeOutlets/AuthorizedUserOutlet";
-import { ContentBox } from "@component-library/index";
 import RedirectLogin from "../Login/RedirectLogin";
 import Menu from "@/components/Menu";
-import { Background, Breadcrumb } from "@/components/index";
 import Advantages from "../Advantages/Advantages";
 import Chatbot from "@/components/Chatbot/Chatbot";
 import Profile from "../Profile/Proflle";
 import Projects from "../Projects/Projects";
-import ProjectOutlet from "@/routeOutlets/ProjectOutlet";
+import ProjectOutlet from "@/outlets/ProjectOutlet";
 import ProjectPage from "../Project/ProjectPage";
-import ProcessOutlet from "@/routeOutlets/ProcessOutlet";
-import ProcessHistory from "../Process/legacy/History/History";
-import ProcessChat from "../Process/legacy/Chat/Chat";
-import ServiceRoutes from "@/routes/ServiceRoutes";
+import ProcessOutlet from "@/outlets/ProcessOutlet";
 import ProcessPage from "../Process/ProcessPage";
 import Admin from "../Admin/Admin";
 import AdminUser from "../Admin/User/User";
 import AdminOrganization from "../Admin/Organization/Organization";
-import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
+import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
+import ToTopButton from "@component-library/ToTopButton/ToTopButton";
+import ServiceEdit from "../Process/components/Service/ServiceEdit/ServiceEdit";
+import ManufacturingProcessOutlet from "@/outlets/ManufacturingProcessOutlet";
+import ServiceModeling from "../Process/components/Service/ServiceEdit/Modelling/Modelling";
+import { Header } from "@/components/Header";
+import { createContext, useState } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { Error } from "../Error/Error";
+import { Home } from "../Home/Home";
+import { Test } from "../Test/Test";
+import { OrganizationOutlet } from "@/outlets/OrganizationOutlet";
+import { ToastContainer } from "react-toastify";
+import { ContentBox } from "@component-library/index";
+import { Background, Breadcrumb } from "@/components/index";
+import { AdminOutlet } from "@/outlets/AdminOutlet";
+import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
+import { ManufacturingModels } from "../Process/components/Service/ServiceEdit/Manufacturing/Model/Model";
+import { ManufacturingMaterials } from "../Process/components/Service/ServiceEdit/Manufacturing/Material/Material";
+import { ManufacturingPostProcessings } from "../Process/components/Service/ServiceEdit/Manufacturing/PostProcessing/PostProcessing";
+import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -76,7 +80,7 @@ const App: React.FC = () => {
       }}
     >
       <div
-        className={`flex min-h-screen flex-col items-center justify-center  font-ptsans text-base`}
+        className={`flex min-h-screen flex-col items-center justify-center font-ptsans text-base`}
         data-testid="app"
         id="app"
       >
@@ -209,36 +213,31 @@ const App: React.FC = () => {
                     </ProcessOutlet>
                   }
                 >
-                  <Route path="service/*" element={<ServiceRoutes />} />
-                  {/* <Route element={<AuthorizedUserRouteOutlet />}>
-                    <Route path="history" element={<ProcessHistory />} />
-                    <Route path="chat" element={<ProcessChat />} />
+                  <Route path="service/*" element={<DefinedProcessOutlet />}>
+                    <Route index element={<ServiceEdit />} />
                     <Route
-                      path="checkout"
-                      element={<Navigate to="../../checkout" />}
-                    />
-                    <Route
-                      path="verification"
-                      element={<Navigate to="../../verification" />}
-                    />
-                    <Route
-                      path="contractorSelection"
-                      element={<Navigate to="../../contractorSelection" />}
-                    />
+                      path="manufacturing/*"
+                      element={<ManufacturingProcessOutlet />}
+                    >
+                      <Route index element={<Navigate to="model" />} />
+                      <Route path="model" element={<ManufacturingModels />} />
+                      <Route
+                        path="material"
+                        element={<ManufacturingMaterials />}
+                      />
+                      <Route
+                        path="postprocessing"
+                        element={<ManufacturingPostProcessings />}
+                      />
+                      <Route path="*" element={<Error />} />
+                    </Route>
+                    <Route path="modeling/*" element={<ServiceModeling />} />
+                    <Route path="*" element={<Navigate to="." />} />
                   </Route>
-                  <Route
-                    path="service/*"
-                    element={
-                      <>
-                        <ProjectPage />
-                        <ServiceRoutes />
-                      </>
-                    }
-                  /> */}
                 </Route>
               </Route>
             </Route>
-            <Route element={<AuthorizedUserRouteOutlet />}>
+            <Route element={<AuthorizedUserOutlet />}>
               <Route
                 path="test"
                 element={
@@ -258,7 +257,7 @@ const App: React.FC = () => {
               <Route
                 element={
                   <ContentBox>
-                    <OrganizationRouteOutlet />
+                    <OrganizationOutlet />
                   </ContentBox>
                 }
               >
@@ -291,7 +290,7 @@ const App: React.FC = () => {
                   }
                 />
               </Route>
-              <Route element={<AdminRouteOutlet />}>
+              <Route element={<AdminOutlet />}>
                 <Route
                   path="admin/*"
                   element={
@@ -320,8 +319,9 @@ const App: React.FC = () => {
             />
           </Routes>
         </main>
-        <CookieBanner />
+        <CkBanner />
         <Menu />
+        <ToTopButton />
         <Footer />
       </div>
       <Chatbot />

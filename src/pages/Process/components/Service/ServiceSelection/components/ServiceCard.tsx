@@ -1,7 +1,5 @@
 import {
-  DisplayService,
   ServiceItemProps,
-  ServiceProps,
   ServiceType,
 } from "@/api/Service/Querys/useGetServices";
 import { Container, Heading, Text } from "@component-library/index";

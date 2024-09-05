@@ -40,7 +40,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
     <ServiceDetailsCard>
       <img
         src={TestImg}
-        className=""
+        className="max-h-40 w-full object-contain md:w-fit"
         alt={t(
           "Process.Service.ServiceDetails.components.manufacturing.model.img"
         )}
@@ -84,7 +84,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
         justify="center"
         width="fit"
         gap={3}
-        className="p-5"
+        className="flex-row p-5 md:flex-col"
       >
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
           <Button

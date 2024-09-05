@@ -6,12 +6,14 @@ import { Button, Container, Text } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
 import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
-import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
-import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessStatusGate from "@/pages/Process/components/StatusGate";
+import {
+  OntoNodePropertyName,
+  isOntoNodePropertyName,
+} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 
 interface ProcessSericePostProcessingCardProps {
   postProcessing: PostProcessingProps;
@@ -46,6 +48,7 @@ const ProcessSericePostProcessingCard: React.FC<
         alt={t(
           "Process.Service.ServiceDetails.components.manufacturing.postProcessing.img"
         )}
+        className="max-h-40 w-full object-contain md:w-fit"
       />
       <Container direction="col" width="full" className="" gap={3}>
         <Container direction="row" justify="between" width="full">
@@ -67,20 +70,38 @@ const ProcessSericePostProcessingCard: React.FC<
         <Container direction="row" justify="between" width="full">
           <Text>
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.postProcessing.describtion"
+              "Process.Service.ServiceDetails.components.manufacturing.postProcessing.properties"
             )}
           </Text>
         </Container>
-        <Container direction="row" justify="between" width="full">
-          <Text>{}</Text>
-        </Container>
+        <ul className="flex w-full list-inside list-disc flex-col items-start justify-start pl-3">
+          {postProcessing.propList.length > 0 ? (
+            postProcessing.propList
+              .filter((item) => item.name !== "imgPath")
+              .map((prop, index) => (
+                <li key={index}>
+                  {isOntoNodePropertyName(prop.name)
+                    ? t(
+                        `types.OntoNodePropertyName.${
+                          prop.name as OntoNodePropertyName
+                        }`
+                      )
+                    : prop.name}
+                  {": "}
+                  {prop.value.toString()}
+                </li>
+              ))
+          ) : (
+            <li>---</li>
+          )}
+        </ul>
       </Container>
       <Container
         direction="col"
         justify="center"
         width="fit"
         gap={3}
-        className="p-5"
+        className="flex-row p-5 md:flex-col"
       >
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
           <Button

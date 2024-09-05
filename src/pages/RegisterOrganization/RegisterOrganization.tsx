@@ -1,4 +1,3 @@
-import logger from "@/hooks/useLogger";
 import { Button } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
@@ -36,7 +35,6 @@ const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm<RegisterOrganizationFormData>({
     resolver: yupResolver(schema),
     defaultValues: {

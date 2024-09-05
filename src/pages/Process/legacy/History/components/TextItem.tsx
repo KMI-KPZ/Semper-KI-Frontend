@@ -1,7 +1,6 @@
 import { Container } from "@component-library/index";
 import { Text } from "@component-library/index";
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 interface ProcessHistoryTextItemProps {
   name: string;

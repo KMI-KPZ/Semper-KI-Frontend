@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
-import { OrbitControls } from "@react-three/drei";
 
 interface ProcessServiceManufacturingModelPreviewProps {
   modelUrl: string;

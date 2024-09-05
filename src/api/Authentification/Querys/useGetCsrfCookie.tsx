@@ -1,9 +1,8 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 const useGetCsrfCookie = () => {
-  const queryClient = useQueryClient();
   const getCsrfCookie = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/auth/csrfCookie/`)

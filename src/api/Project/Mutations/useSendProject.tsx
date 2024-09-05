@@ -23,7 +23,7 @@ const useSendProject = () => {
 
   return useMutation<any, Error, string[]>({
     mutationFn: sendProject,
-    onSuccess: (data, processIDs, context) => {
+    onSuccess: (_, processIDs) => {
       queryClient.invalidateQueries(["project", projectID]);
       navigate(`/projects/${projectID}/${processIDs[0]}`);
     },

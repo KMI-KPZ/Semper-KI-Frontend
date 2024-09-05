@@ -1,5 +1,3 @@
-import { on } from "events";
-
 type StatusItemConnector = {
   active: boolean;
   onGoing: boolean;

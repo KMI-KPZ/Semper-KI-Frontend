@@ -1,7 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { objectToArray } from "@/services/utils";
+import { useQuery } from "@tanstack/react-query";
 import { ModelingServiceProps } from "@/pages/Process/components/Service/ServiceEdit/Modelling/Modelling";
 import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
 import TestImg from "@images/Test2.png";
@@ -84,14 +83,13 @@ export const instanceOfManufacturingServiceProps = (
 };
 
 const useGetServices = () => {
-  const queryClient = useQueryClient();
   const getServices = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/services/get/`)
       .then((response) => {
-        const services: ServiceItemProps[] = objectToArray<ServiceItemProps>(
-          response.data
-        ).filter((service) => service.type !== 0);
+        // const services: ServiceItemProps[] = objectToArray<ServiceItemProps>(
+        //   response.data
+        // ).filter((service) => service.type !== 0);
         logger("useGetServices | getServices ✅ |", response);
         const mockedServices: ServiceItemProps[] = [
           {

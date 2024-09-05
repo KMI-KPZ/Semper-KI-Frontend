@@ -189,7 +189,7 @@ export const createDownload = (blob: Blob, title: string) => {
 };
 
 export const objectToArray = <T,>(object: Object): T[] => {
-  let array: T[] = Object.entries(object).map(([key, value]) => {
+  let array: T[] = Object.entries(object).map(([, value]) => {
     return { ...value } as T;
   });
   return array;

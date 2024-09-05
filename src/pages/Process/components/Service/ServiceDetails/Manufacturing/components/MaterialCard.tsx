@@ -10,6 +10,10 @@ import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Muta
 import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessStatusGate from "@/pages/Process/components/StatusGate";
+import {
+  OntoNodePropertyName,
+  isOntoNodePropertyName,
+} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 
 interface ProcessServiceMaterialCardProps {
   material: MaterialProps;
@@ -44,7 +48,7 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
         alt={t(
           "Process.Service.ServiceDetails.components.manufacturing.material.img"
         )}
-        className="w-full object-cover"
+        className="max-h-40 w-full object-contain md:w-fit"
       />
       <Container direction="col" width="full" className="" gap={3}>
         <Container direction="row" justify="between" width="full">
@@ -72,7 +76,21 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
         </Container>
         <ul className="flex w-full list-inside list-disc flex-col items-start justify-start pl-3">
           {material.propList.length > 0 ? (
-            material.propList.map((prop, index) => <li key={index}>{prop}</li>)
+            material.propList
+              .filter((item) => item.name !== "imgPath")
+              .map((prop, index) => (
+                <li key={index}>
+                  {isOntoNodePropertyName(prop.name)
+                    ? t(
+                        `types.OntoNodePropertyName.${
+                          prop.name as OntoNodePropertyName
+                        }`
+                      )
+                    : prop.name}
+                  {": "}
+                  {prop.value.toString()}
+                </li>
+              ))
           ) : (
             <li>---</li>
           )}
@@ -83,7 +101,7 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
         justify="center"
         width="fit"
         gap={3}
-        className="p-5"
+        className="flex-row p-5 md:flex-col"
       >
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
           <Button

@@ -3,17 +3,14 @@ import useGetServices, {
 } from "@/api/Service/Querys/useGetServices";
 import { Container, LoadingAnimation } from "@component-library/index";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import ServiceCard from "./components/ServiceCard";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useProcess from "@/hooks/Process/useProcess";
-import logger from "@/hooks/useLogger";
 
 interface ServiceSelectionProps {}
 
 const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
   const {} = props;
-  const { t } = useTranslation();
 
   const updateProcess = useUpdateProcess();
   const { process } = useProcess();

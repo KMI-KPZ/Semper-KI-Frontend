@@ -7,6 +7,10 @@ import { useNavigate } from "react-router-dom";
 import useProcess from "@/hooks/Process/useProcess";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
+import {
+  OntoNodePropertyName,
+  isOntoNodePropertyName,
+} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 
 interface Props {
   material: MaterialProps;
@@ -41,9 +45,16 @@ export const ProcessMaterialPreView: React.FC<Props> = (props) => {
       <Heading variant="h2">{material.title}</Heading>
       <img className="w-full xl:max-w-xl" src={material.imgPath} alt="Model" />
       <div className="model-view-tags">
-        {material.propList.map((title: string, index: number) => (
+        {material.propList.map((prop, index: number) => (
           <div key={index} className="model-view-tag">
-            {title}
+            {isOntoNodePropertyName(prop.name)
+              ? t(
+                  `types.OntoNodePropertyName.${
+                    prop.name as OntoNodePropertyName
+                  }`
+                )
+              : prop.name}
+            :{prop.value.toString()}
           </div>
         ))}
       </div>

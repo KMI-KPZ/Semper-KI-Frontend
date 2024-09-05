@@ -1,6 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
 export interface ContractorProps {
   name: string;
@@ -10,8 +11,8 @@ export interface ContractorProps {
   };
 }
 
-const useGetContractors = (processID: string) => {
-  const queryClient = useQueryClient();
+const useGetContractors = () => {
+  const { projectID, processID } = useParams();
   const getContractors = async () =>
     authorizedCustomAxios
       .get(
@@ -27,7 +28,7 @@ const useGetContractors = (processID: string) => {
       });
 
   return useQuery<ContractorProps[], Error>({
-    queryKey: ["contractors", processID],
+    queryKey: ["project", projectID, processID, "contractors"],
     queryFn: getContractors,
     enabled: processID !== undefined && processID !== "",
   });

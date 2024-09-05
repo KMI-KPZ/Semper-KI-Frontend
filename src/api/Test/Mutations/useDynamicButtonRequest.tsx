@@ -18,7 +18,7 @@ const useDynamicButtonRequest = () => {
 
   return useMutation<string, Error, TestDynamicProps>({
     mutationFn: dynamicButtonRequest,
-    onSuccess: (data, { action, icon, payload, title }, context) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["testDynamicQuery"]);
     },
   });

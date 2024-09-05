@@ -83,7 +83,7 @@ export const LoadingSuspense = <T,>(
     return (
       <div className="flex flex-col items-center justify-center pt-5">
         {animation !== undefined && animation === true ? (
-          <LoadingAnimation />
+          <LoadingAnimation variant="circel" />
         ) : null}
         {text === true ? <Heading variant="h1">{loadingText}</Heading> : null}
       </div>

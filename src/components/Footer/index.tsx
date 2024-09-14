@@ -27,7 +27,7 @@ const Footer: React.FC<Props> = (props) => {
     const navigate = useNavigate();
     const [open, setOpen] = useState<boolean>(false);
     const {isMagazineUp} = usePing();
-    const {topics, addTopics, removeTopics} = useTopics();
+    const {topics, maintopic, response , setTopics} = useTopics();
     // addTopics(["Hauptseite"]);
 
     const handleOnClickContact = (
@@ -104,11 +104,11 @@ const Footer: React.FC<Props> = (props) => {
                 </ul>
                 <ul className="flex flex-col items-left md:flex-row md:justify-items-end">
                     <h3>topics:</h3>
-                    {topics.map((topic, index) => (
+                    {Array.from(topics.entries()).map(([key, value]: [string, string], index: number) => (
                         <li key={index} className="p-2">
                             <Button
                                 variant="tertiary"
-                                title={topic}
+                                title={value}
                                 className="text-white hover:bg-slate-700 "
                             />
                         </li>

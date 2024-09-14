@@ -65,8 +65,8 @@ export const AppContext = createContext<AppContext>({
 
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(initialAppState);
-  const { topics, addTopics, removeTopics } = useTopics();
-    addTopics(["APP"]);
+  const { topics, maintopic, response,choices, setTopics } = useTopics();
+    // setTopics(["APP"], "APP", "{\"response\":{3d-print|3d-dev}\"}", ["info"]);
 
 
   return (

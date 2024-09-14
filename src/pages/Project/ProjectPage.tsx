@@ -21,15 +21,16 @@ const ProjectPage: React.FC<ProjectPageProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const project = useGetProject();
-  const { topics, maintopic, addTopics, removeTopics, setMainTopic } = useTopics();
-    useEffect(() => {
-        return () => {
-            removeTopics(["Projektdetails"]);
-        }
-    }, []);
+    const {topics, maintopic, response: string, choices,userChoice, setTopics, setUserChoice, closeChatbot, removeTopics} = useTopics();
+    // useEffect(() => {
+    //     return () => {
+    //         removeTopics(["Projektdetails"]);
+    //     }
+    // }, []);
 
-  addTopics(["Projektdetails"]);
-  setMainTopic("Projektdetailseite - Übersicht der einzelnen Vorgänge im aktuellen Projekt");
+    // setMainTopic("Projektdetailseite - Übersicht der einzelnen Vorgänge im aktuellen Projekt");
+    setTopics(new Map<string,string>([["Projektdetails","Details zum aktuell ausgewählten Projekt"]]),
+        "Projektdetails", "",[]);
   if (project.data === undefined) return <LoadingAnimation />;
 
   return (

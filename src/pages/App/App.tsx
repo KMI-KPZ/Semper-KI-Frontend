@@ -71,7 +71,7 @@ export const AppContext = createContext<AppContext>({
 
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(initialAppState);
-  const { topics, maintopic, response,choices, setTopics } = useTopics();
+  const { topics, maintopic, response: string, choices,userChoice, setTopics, setUserChoice, closeChatbot,removeTopics} = useTopics();
     // setTopics(["APP"], "APP", "{\"response\":{3d-print|3d-dev}\"}", ["info"]);
 
   //test

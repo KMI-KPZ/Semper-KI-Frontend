@@ -1,9 +1,6 @@
 import React, {useEffect, useRef} from "react";
-import {useTranslation} from "react-i18next";
 import {useTopics} from "@/contexts/ChatbotContextProvider";
-import {boolean} from "yup";
-import {Button, Container} from "@component-library/index";
-import ChatIcon from "@mui/icons-material/AutoAwesome";
+import {Button} from "@component-library/index";
 import {MessageSharp} from "@mui/icons-material";
 
 interface ChatbotProps {
@@ -14,13 +11,13 @@ function decodeHTMLEntities(text: string): string {
     return doc.documentElement.textContent || "";
 }
 
-function formatTopics(topics: Map<string, string>): Array<{ key: string, help_intro: string }> {
-    const formattedTopics: Array<{ key: string, help_intro: string }> = [];
-    topics.forEach((value, key) => {
-        formattedTopics.push({key, help_intro: value});
-    });
-    return formattedTopics;
-}
+// function formatTopics(topics: Map<string, string>): Array<{ key: string, help_intro: string }> {
+//     const formattedTopics: Array<{ key: string, help_intro: string }> = [];
+//     topics.forEach((value, key) => {
+//         formattedTopics.push({key, help_intro: value});
+//     });
+//     return formattedTopics;
+// }
 
 function formatTopicsToJSON(topics: Map<string, string>): string {
     const formattedTopics: Array<{ key: string, help_intro: string }> = [];
@@ -142,6 +139,11 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
             console.log("Chatbotresponse: ", chatbotResponse);
 
             if (chatbotResponse.eventType === 'responseFromChatbot') {
+                if (chatbotResponse.action === 'runCommand' && chatbotResponse.response?.response?.shouldEndSession === true) {
+                    botAlreadyOpenend.current = false;
+                    console.log("Chatbot session ended");
+                }
+
                 const botResponse = chatbotResponse.response;
                 console.log("Chatbot things: ", botResponse.response?.payload?.[0]?.conversation?.bubbles?.[0]?.content);
                 try {

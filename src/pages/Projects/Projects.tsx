@@ -1,6 +1,6 @@
 import { Button, Divider, Modal, Search } from "@component-library/index";
 import { Heading } from "@component-library/index";
-import React, {useContext, useEffect} from "react";
+import React, { useEffect} from "react";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
 import useUser, { UserType } from "@/hooks/useUser";
@@ -71,7 +71,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
             ownProjects.reduce((acc,item, index) => {
                 acc[(index + 1).toString()] = "Projekt \"" +item.projectTitle + "\" anschauen";
                 return acc;}, initialAccumulator)
-        );
+        ,null);
         console.log("flat projects: ",ownProjects)
         if(userChoice){
             console.log("userChoice: ", userChoice);

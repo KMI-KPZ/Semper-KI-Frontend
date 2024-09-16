@@ -26,8 +26,8 @@ const ProjectPage: React.FC<ProjectPageProps> = (props) => {
     // }, []);
 
     // setMainTopic("Projektdetailseite - Übersicht der einzelnen Vorgänge im aktuellen Projekt");
-    setTopics(new Map<string,string>([["Projektdetails","Details zum aktuell ausgewählten Projekt"]]),
-        "Projektdetails", "",[]);
+    setTopics(new Map<string,string>([["projektdetails","Detailübersicht zum aktuell ausgewählten Projekt"]]),
+        "Projektdetails", "",[],new Map<string,string>([["projektdetails","Detailübersicht zum aktuell ausgewählten Projekt wo die einzelnen Vorgänge (Prozesse) des Projekts aufgelistet sind."]]));
   if (project.data === undefined) return <LoadingAnimation />;
 
   return (

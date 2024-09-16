@@ -21,7 +21,7 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
       // Perform actions based on the user choice
       console.log(`User made a choice: ${userChoice}`);
       debugger
-      if (userChoice == "0") {
+      if (userChoice == "2") {
         handleOnClickCard(ServiceType.MANUFACTURING);
       }
       if (userChoice == "1") {
@@ -59,7 +59,7 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
         ["3d-dev", "Der Nutzer kann hier ein 3D Modell entwerfen lassen. Dazu wird ein Designer beauftragt, der das Modell erstellt. Der Nutzer kann dann das Modell begutachten und ggf. Änderungen anfordern."]]),
         "ServiceSelection",
         "",
-        {"0":"3d-print","1":"3d-dev"});
+        {"1":"3d-dev","2": "3d-print"},null);
   return (
     <Container
       width="full"

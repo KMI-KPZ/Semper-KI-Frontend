@@ -63,6 +63,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
     let botAlreadyLoaded = useRef(false);
     let botAlreadyOpenend = useRef(false);
     let eventListenerAttached: boolean = false;
+    const detailedHelpRef = useRef(detailedHelp);
 
     const sendDetailedHelp = (helpKey: string) => {
         debugger;
@@ -71,7 +72,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
         if (bot == undefined || ! botAlreadyOpenend.current) {
             return;
         }
-        const helpText = detailedHelp.get(helpKey);
+        const helpText = detailedHelpRef.current.get(helpKey);
         if (helpText) {
             if (bot !== undefined && botAlreadyOpenend.current) {
                 bot.eventsBus.emit('askChatbot', {query: '__[detailed help for topic "' + helpKey + '": ' + helpText + ']__'});
@@ -87,6 +88,9 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
     const isChatbotEnabled = true;
     // process.env.NODE_ENV === "production";
     useEffect(() => {
+
+        detailedHelpRef.current = detailedHelp;
+
         if (isChatbotEnabled && !botAlreadyLoaded.current) {
             const script = document.createElement("script");
             botAlreadyLoaded.current = true;
@@ -130,7 +134,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
         }
 
 
-    }, [topics, closeChatbot, setTopics, maintopic, choices]);
+    }, [topics, closeChatbot, setTopics, maintopic, choices, detailedHelp]);
 
     window.addEventListener('message', (e) => {
         // console.log("Message received: "); console.log(e.data);

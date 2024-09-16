@@ -21,12 +21,18 @@ interface ServiceManufacturingDetailsProps {
   process: ManufactoringProcessProps;
 }
 
-function extractMaterialProps(materials: MaterialProps[]): string[] {
+interface MaterialInfo {
+    title: string;
+    props: string;
+
+}
+
+function extractMaterialProps(materials: MaterialProps[]): MaterialInfo[] {
     return materials.map((material) => {
-      return "Material \""+ material.title + "\" mit Eigenschaften: " + material.propList.reduce((acc, prop) => {
+      return {title: material.title , props : material.propList.reduce((acc, prop) => {
         acc += prop.name + ": " + prop.value + ";\n";
         return acc;
-      },"");
+      }, "")};
     });
 }
 
@@ -54,7 +60,7 @@ const ServiceManufacturingDetails: React.FC<
   useEffect(() => {
     if(process || materialsQuery.data){
       let currentToDo = "choose-postprocessing";
-      let materialProps: string[] = [];
+      let materialProps: MaterialInfo[] = [];
       let materialChoices: any = {};
       let addToDetailedHelp: Map<string,string> =  new Map<string, string>([["manufacturing-details", "Details für den 3D-Druck-Prozess, hier wird/werden das/die digitale/n 3D-Modell/e, welche(s) gedruckt werden soll(en) hochgeladen unter der Abteilung Modelle." +
       "des Weiteren werden die Materialien bei Material ausgewählt und die Druckparameter festgelegt. Ebenso können hier die Nachbearbeitungsschritte festgelegt werden."],
@@ -72,8 +78,8 @@ const ServiceManufacturingDetails: React.FC<
 
             // loop over materialProps and add them to detailedHelp with key help_material_[Index]
             materialProps.forEach((materialProp, index) => {
-              addToDetailedHelp.set("material_" + index, materialProp);
-              topics.set("material_" + index, "Material " + (index ));
+              addToDetailedHelp.set("material_" + index, materialProp.props);
+              topics.set("material_" + index, "Material \""+ materialProp.title + "\" Eigenschaften" +  materialProp.props);
               materialChoices[index] = "material_" + index;
             });
         }

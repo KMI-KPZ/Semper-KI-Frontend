@@ -1,25 +1,15 @@
-import { authorizedCustomAxios } from "@/api/customAxios";
 import useEvents from "./useEvents/useEvents";
 import { getProjectEventAmount } from "./useEvents/hooks/useProjectEvent";
-import logger from "./useLogger";
 import { getOrgaEventAmount } from "./useEvents/hooks/useOrgaEvent";
 
 interface useBadgeReturnProps {
-  calcBadge: (
-    title: string,
-    projectID?: string,
-    processID?: string
-  ) => number | undefined;
+  calcBadge: (title: string) => number | undefined;
 }
 
 export const useBadge = (): useBadgeReturnProps => {
   const { events } = useEvents();
 
-  const calcBadge = (
-    title: string,
-    projectID?: string,
-    processID?: string
-  ): number | undefined => {
+  const calcBadge = (title: string): number | undefined => {
     switch (title) {
       case "projects":
         // logger("useBadge | calcBadge | projects", events);

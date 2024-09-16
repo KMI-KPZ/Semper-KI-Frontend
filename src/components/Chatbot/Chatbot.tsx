@@ -88,6 +88,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
     }
 
     const isChatbotEnabled = true;
+    // process.env.NODE_ENV === "production";
     useEffect(() => {
         if (isChatbotEnabled && !botAlreadyLoaded.current) {
             const script = document.createElement("script");

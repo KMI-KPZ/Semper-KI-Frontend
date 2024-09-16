@@ -1,10 +1,5 @@
-import {
-  DefinedProcess,
-  ManufactoringProcessProps,
-} from "@/api/Process/Querys/useGetProcess";
-import logger from "@/hooks/useLogger";
+import { ManufactoringProcessProps } from "@/api/Process/Querys/useGetProcess";
 import { PropsWithChildren, createContext } from "react";
-import { Outlet } from "react-router-dom";
 
 type ManufacturingProcessContextType = {
   process: ManufactoringProcessProps;
@@ -24,7 +19,7 @@ export const ManufacturingProcessContextProvider: React.FC<
 > = (props) => {
   const { process, children } = props;
 
-  logger("ManufacturingProcessContextProvider", process, children);
+  // logger("ManufacturingProcessContextProvider", process, children);
 
   return (
     <ManufacturingProcessContext.Provider value={{ process }}>

@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import useUser, { UserType } from "@/hooks/useUser";
 import { useNavigate } from "react-router-dom";
-import { useProject } from "./useProject";
 import { useTranslation } from "react-i18next";
 import { externalStatusButtonData } from "./externalStatusButtonData";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -36,11 +35,30 @@ interface UseStatusButtonsReturnProps {
 }
 
 export type StatusButtonTitleType =
+  | "NONE"
   | "DELETE"
+  | "BACK-TO-SERVICE_READY"
   | "BACK-TO-DRAFT"
+  | "BACK-TO-SERVICE_COMPLETED"
+  | "BACK-TO-CONTRACTOR_COMPLETED"
+  | "FORWARD-TO-CONTRACTOR_COMPLETED"
   | "FORWARD-TO-SERVICE_COMPLETED"
-  | "BACK-TO-SERVICE_IN_PROGRESS"
-  | "FORWARD-TO-CONTRACTOR_SELECTED";
+  | "FORWARD-TO-CONTRACTOR_COMPLETED"
+  | "FORWARD-TO-VERIFYING"
+  | "FORWARD-TO-VERIFICATION_COMPLETED"
+  | "FORWARD-TO-REQUEST_COMPLETED"
+  | "FORWARD-TO-CLARIFICATION"
+  | "FORWARD-TO-OFFER_COMPLETED"
+  | "FORWARD-TO-OFFER_REJECTED"
+  | "FORWARD-TO-CONFIRMATION_COMPLETED"
+  | "FORWARD-TO-CONFIRMATION_REJECTED"
+  | "FORWARD-TO-PRODUCTION_IN_PROGRESS"
+  | "FORWARD-TO-PRODUCTION_COMPLETED"
+  | "FORWARD-TO-DELIVERY_IN_PROGRESS"
+  | "FORWARD-TO-DELIVERY_COMPLETED"
+  | "FORWARD-TO-FAILED"
+  | "FORWARD-TO-COMPLETED"
+  | "FORWARD-TO-DISPUTE";
 
 export type StatusButtonPropsGeneric = {
   title: string;
@@ -94,7 +112,6 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   const { user } = useUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { project } = useProject();
   const sendProject = useSendProject();
   const verifyProject = useVerifyProject();
   const updateProcess = useUpdateProcess();
@@ -124,7 +141,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   ): StatusButtonProps[] => {
     return externalStatusButtons.map((button) => ({
       ...button,
-      title: tranformTitle(button.title),
+      title: transformTitle(button.title),
       icon: transformIcon(button.icon),
     }));
   };
@@ -167,13 +184,32 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
         return <ReportIcon />;
     }
   };
-  const tranformTitle = (title: string): string => {
+
+  const transformTitle = (title: string): string => {
     const validStatusButtonTitles: StatusButtonTitleType[] = [
+      "NONE",
       "DELETE",
-      "BACK-TO-SERVICE_IN_PROGRESS",
-      "FORWARD-TO-CONTRACTOR_SELECTED",
-      "FORWARD-TO-SERVICE_COMPLETED",
+      "BACK-TO-SERVICE_READY",
       "BACK-TO-DRAFT",
+      "BACK-TO-SERVICE_COMPLETED",
+      "FORWARD-TO-CONTRACTOR_COMPLETED",
+      "BACK-TO-CONTRACTOR_COMPLETED",
+      "FORWARD-TO-SERVICE_COMPLETED",
+      "FORWARD-TO-CONTRACTOR_COMPLETED",
+      "FORWARD-TO-VERIFYING",
+      "FORWARD-TO-VERIFICATION_COMPLETED",
+      "FORWARD-TO-REQUEST_COMPLETED",
+      "FORWARD-TO-OFFER_COMPLETED",
+      "FORWARD-TO-OFFER_REJECTED",
+      "FORWARD-TO-CONFIRMATION_COMPLETED",
+      "FORWARD-TO-CONFIRMATION_REJECTED",
+      "FORWARD-TO-PRODUCTION_IN_PROGRESS",
+      "FORWARD-TO-PRODUCTION_COMPLETED",
+      "FORWARD-TO-DELIVERY_IN_PROGRESS",
+      "FORWARD-TO-DELIVERY_COMPLETED",
+      "FORWARD-TO-FAILED",
+      "FORWARD-TO-COMPLETED",
+      "FORWARD-TO-DISPUTE",
     ];
     return validStatusButtonTitles.includes(title as StatusButtonTitleType)
       ? t(

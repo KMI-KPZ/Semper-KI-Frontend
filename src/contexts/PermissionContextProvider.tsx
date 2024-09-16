@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, createContext, useContext } from "react";
+import React, { PropsWithChildren, createContext } from "react";
 import { AppLoadingSuspense } from "@component-library/index";
 import useUser, { UserType } from "@/hooks/useUser";
 import useGetPermissions, {
@@ -7,7 +7,6 @@ import useGetPermissions, {
 import useGetPermissionGates, {
   PermissionGateType,
 } from "@/api/Permissions/Querys/useGetPermissionGates";
-import logger from "@/hooks/useLogger";
 
 interface PermissionContextProviderProps {}
 

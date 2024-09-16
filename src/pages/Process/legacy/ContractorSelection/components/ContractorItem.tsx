@@ -1,14 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { twMerge } from "tailwind-merge";
 import ProcessInfoCard from "../../../../Project/components/FlatProcessCard";
 import { Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { ContractorSelectionFormData } from "../ContractorSelection";
-import useGetContractors from "@/api/Project/Querys/useGetContractors";
-import { Process } from "@/api/Process/Querys/useGetProcess";
 import { FlatProcess } from "@/api/Project/Querys/useGetProject";
+import useGetContractors from "@/api/Process/Querys/useGetContractors";
 
 interface ProjectContractorSelectionItemProps {
   process: FlatProcess;
@@ -22,7 +20,7 @@ const ProjectContractorSelectionItem: React.FC<
 > = (props) => {
   const { register, errors, index, process } = props;
   const { t } = useTranslation();
-  const contractors = useGetContractors(process.processID);
+  const contractors = useGetContractors();
 
   return (
     <div

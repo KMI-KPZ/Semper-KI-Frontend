@@ -1,7 +1,7 @@
 import { Button } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 
 interface Props {}
@@ -120,13 +120,13 @@ export function isDataNaviagtionTranlationType(
 }
 
 export const Breadcrumb: React.FC<Props> = () => {
-  const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { pathname } = useLocation();
 
   const generateBreadcrumbItems = (): BreadcrumbItem[] => {
     let breadcrumbItems: BreadcrumbItem[] = [];
     let splittet: string[] = pathname.split("/");
+
     if (splittet[0] === "" && splittet[1] === "") {
       splittet.splice(0, 1);
     }
@@ -189,6 +189,7 @@ export const Breadcrumb: React.FC<Props> = () => {
         ? items.map((item: BreadcrumbItem, index: number) =>
             index === 0 ? (
               <Button
+                testid="breadcrumb-home-button"
                 key={index}
                 size="sm"
                 variant="breadcrumb"
@@ -205,6 +206,7 @@ export const Breadcrumb: React.FC<Props> = () => {
                 <span>{" > "}</span>
                 <Button
                   size="sm"
+                  testid="breadcrumb-button"
                   variant="breadcrumb"
                   title={
                     item.tname !== undefined

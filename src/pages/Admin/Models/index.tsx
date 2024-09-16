@@ -1,4 +1,4 @@
-import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
+import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
 import { Heading } from "@component-library/index";
 import {
   Paper,

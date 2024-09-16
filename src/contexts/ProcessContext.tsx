@@ -1,13 +1,19 @@
 import React, { PropsWithChildren } from "react";
 import { Process } from "@/api/Process/Querys/useGetProcess";
-import * as process from "process";
+import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 
 interface ProcessContextProviderProps {
   process: Process;
+  filters: FilterItemProps[];
 }
 
 export interface ProcessContextProps {
   process: Process;
+  filters: FilterItemProps[];
+  setFilters: React.Dispatch<React.SetStateAction<FilterItemProps[]>>;
+  editFilters: FilterItemProps[];
+  setEditFilters: React.Dispatch<React.SetStateAction<FilterItemProps[]>>;
+  loadedFilter: FilterItemProps[];
 }
 
 export const ProcessContext = React.createContext<ProcessContextProps>({
@@ -15,9 +21,9 @@ export const ProcessContext = React.createContext<ProcessContextProps>({
     client: "",
     contractor: "",
     createdWhen: new Date(),
-    processDetails: { amount: 1 },
+    processDetails: { amount: 1, priorities: [] },
     files: [],
-    messages: [],
+    messages: {},
     processID: "",
     serviceDetails: undefined,
     serviceStatus: 0,
@@ -27,18 +33,33 @@ export const ProcessContext = React.createContext<ProcessContextProps>({
     accessedWhen: new Date(),
     processStatusButtons: [],
   },
+  filters: [],
+  setFilters: () => {},
+  editFilters: [],
+  setEditFilters: () => {},
+  loadedFilter: [],
 });
 
 const ProcessContextProvider: React.FC<
   PropsWithChildren<ProcessContextProviderProps>
 > = (props) => {
-  const { process, children } = props;
+  const { process, children, filters: loadedFilter } = props;
 
-  console.log("ProcessContext: ");
-  console.log(process)
-  console.log(children)
+  const [filters, setFilters] = useState<FilterItemProps[]>(loadedFilter);
+  const [editFilters, setEditFilters] =
+    useState<FilterItemProps[]>(loadedFilter);
+
   return (
-    <ProcessContext.Provider value={{ process }}>
+    <ProcessContext.Provider
+      value={{
+        process,
+        filters,
+        setFilters,
+        editFilters,
+        setEditFilters,
+        loadedFilter,
+      }}
+    >
       {children}
     </ProcessContext.Provider>
   );

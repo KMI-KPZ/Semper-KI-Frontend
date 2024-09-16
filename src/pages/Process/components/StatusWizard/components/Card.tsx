@@ -1,9 +1,9 @@
 import { Container, Text } from "@component-library/index";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { StatusWizardItem } from "../StatusWizard";
 import { Process } from "@/api/Process/Querys/useGetProcess";
-import logger from "@/hooks/useLogger";
+import { useNavigate } from "react-router-dom";
 
 interface StatusWizardCardProps {
   process: Process;
@@ -11,7 +11,7 @@ interface StatusWizardCardProps {
 }
 
 const isCardInView = (item: StatusWizardItem): boolean => {
-  const element = document.getElementById(item.text);
+  const element = document.getElementById(item.targetID);
   if (element) {
     const rect = element.getBoundingClientRect();
     return rect.bottom >= 0 && rect.top <= window.innerHeight;
@@ -22,21 +22,15 @@ const isCardInView = (item: StatusWizardItem): boolean => {
 const StatusWizardCard: React.FC<StatusWizardCardProps> = (props) => {
   const { item, process } = props;
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
-  const [inView, setInView] = useState(isCardInView(item));
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // const newInView = isCardInView(item);
-      // if (item.text === "header" || item.text === "draft")
-      //   logger("handleScroll", item.text, newInView, inView);
-
-      // if (newInView !== inView) {
-      //   logger("change", item.text, newInView, inView);
-      // setInView(newInView);
       setInView(isCardInView(item));
-      // }
     };
+    setInView(isCardInView(item));
 
     window.addEventListener("scroll", handleScroll);
 
@@ -46,21 +40,20 @@ const StatusWizardCard: React.FC<StatusWizardCardProps> = (props) => {
   }, []);
 
   const active =
+    item.startStatus !== undefined &&
+    process.processStatus >= item.startStatus &&
+    item.endStatus !== undefined &&
+    process.processStatus <= item.endStatus;
+
+  const reachable =
     (item.startStatus !== undefined &&
-      process.processStatus >= item.startStatus &&
-      item.endStatus === undefined) ||
-    (item.endStatus !== undefined && process.processStatus > item.endStatus);
-  const onGoing =
-    (process.processStatus === item.startStatus &&
-      item.endStatus === undefined) ||
-    (item.endStatus !== undefined && process.processStatus === item.endStatus);
+      process.processStatus >= item.startStatus) ||
+    item.startStatus === undefined;
 
   const handleOnClickCard = () => {
-    const element = document.getElementById(
-      item.id !== undefined ? item.id : item.text
-    );
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    const element = document.getElementById(item.targetID);
+    if (element && reachable) {
+      navigate(`#${item.targetID}`);
     }
   };
 
@@ -68,10 +61,12 @@ const StatusWizardCard: React.FC<StatusWizardCardProps> = (props) => {
     <Container
       width="full"
       justify="start"
+      direction="row"
       onClick={handleOnClickCard}
-      className={`rounded-xl border-2 p-2 hover:cursor-pointer hover:border-orange-100 hover:bg-gray-50 ${
-        active ? "border-orange-500" : "border-slate-100"
+      className={`justify-center rounded-xl border-2 border-slate-100 p-2 duration-300 hover:bg-gray-100 md:justify-start   ${
+        active ? "text-orange-600" : ""
       }
+      ${reachable ? "hover:cursor-pointer hover:border-ultramarinblau " : ""}
       ${inView ? "ring-2 ring-ultramarinblau " : "ring-0"}`}
     >
       {item.icon}

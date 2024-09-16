@@ -18,8 +18,7 @@ export const getOrgaEventAmount = (events: Event[] | undefined) => {
   let count = 0;
   events
     .filter((event) => event.eventType === "orgaEvent")
-    .forEach((_orgaEvent) => {
-      const orgaEvent = _orgaEvent as OrgaEvents;
+    .forEach((_) => {
       count += 1;
     });
   return count > 0 ? count : undefined;
@@ -32,17 +31,14 @@ const useOrgaEvent = (): ReturnProps => {
     newProjectEvent: OrgaEvents,
     events: Event[]
   ): Event[] => {
-    const noneOrgaEvents: Event[] = events.filter(
-      (event) => event.eventType !== "projectEvent"
-    );
     const orgaEvents: OrgaEvents[] = events.filter(
       (event) => event.eventType === "projectEvent"
     ) as OrgaEvents[];
-    return [...orgaEvents];
+    return [...orgaEvents, newProjectEvent];
   };
 
   const deleteOrgaEvent = (event: DeleteOrgaEvent, events: Event[]) => {
-    return events;
+    return events.filter((e) => e.eventType !== event.eventType);
   };
 
   const handleNewOrgaEvent = (

@@ -1,23 +1,24 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { FilterItemProps } from "@/pages/Service/Manufacturing/Filter/Filter";
+import { useQuery } from "@tanstack/react-query";
+import { OntoNodeProperty } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import useFilter from "@/hooks/useFilter";
 
 export interface MaterialProps {
   id: string;
   title: string;
-  propList: string[];
+  propList: OntoNodeProperty[];
   imgPath: string;
 }
 
-const useGetMaterials = (filters: FilterItemProps[]) => {
-  const queryClient = useQueryClient();
+const useGetMaterials = () => {
+  const { activeFilters } = useFilter();
   const getMaterials = async () =>
     authorizedCustomAxios
       .post(
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/material/get/`,
         {
-          filters,
+          filters: activeFilters,
         }
       )
       .then((response) => {

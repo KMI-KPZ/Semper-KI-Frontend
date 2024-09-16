@@ -1,19 +1,14 @@
-import logger from "@/hooks/useLogger";
 import {
   KeyboardEvent,
   MouseEvent,
   PropsWithChildren,
-  SyntheticEvent,
-  useContext,
   useEffect,
   useRef,
 } from "react";
 import { Button } from "..";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "react-i18next";
-import { BodyScrollContext } from "@/contexts/BodyScrollContextProvider";
 import { twMerge } from "tailwind-merge";
-import { ModalContext } from "@/contexts/ModalContextProvider";
 import useModal from "@/hooks/useModal";
 
 type ModelProps = {
@@ -55,14 +50,12 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
   };
 
   // Eventlistener: trigger onclose when cancel detected
-  const handleOnCancel = (e: SyntheticEvent<HTMLDialogElement, Event>) => {
+  const handleOnCancel = () => {
     closeModalWithScroll();
   };
 
   // Eventlistener: trigger onclose when click outside
-  const handleOnClick = (
-    e: MouseEvent<HTMLDialogElement, globalThis.MouseEvent>
-  ) => {
+  const handleOnClick = () => {
     // const dialogDimensions = modalRef.current?.getBoundingClientRect();
     // if (dialogDimensions !== undefined)
     //   logger(
@@ -125,20 +118,14 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
       ref={modalRef}
       className={twMerge(
         `
-        h-fit
-        w-fit 
-        backdrop:fixed 
-        backdrop:bottom-0 
-        backdrop:left-0
-        backdrop:right-0 
+        backdrop:fixed
+        backdrop:bottom-0
+        backdrop:left-0 
+        backdrop:right-0
         backdrop:top-0
         backdrop:bg-black
         backdrop:opacity-30
-        md:max-h-[90vh]
-        md:max-w-7xl
-        md:rounded-xl
-      md:bg-white
-     `
+        `
       )}
       onKeyDown={onKeyDown}
       onClose={closeModal}
@@ -148,7 +135,20 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
     >
       <div
         className={twMerge(
-          `fixed  left-0 top-0 flex h-screen w-screen items-center justify-center md:relative md:left-auto md:top-auto md:h-full md:w-full md:p-10`,
+          `
+              fixed right-0
+              top-0 flex h-full w-full
+              flex-col items-center
+              justify-start overflow-x-hidden
+              bg-white 
+              md:right-1/2 md:top-1/2 
+              md:h-fit  md:max-h-[90vh] 
+              md:max-w-6xl
+              md:-translate-y-1/2
+              md:translate-x-1/2 md:rounded-xl
+              md:bg-gray-100
+              md:p-5`,
+
           className
         )}
         onClick={handleOnClickChildren}

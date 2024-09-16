@@ -14,11 +14,10 @@ const useUpdateRolePermissions = () => {
     roleID,
   }: SetPermissionProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/setPermissionsForRole/`, {
-        data: {
-          content: { roleID, permissionIDs },
-        },
-      })
+      .patch(
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/permissions/role/set/`,
+        { roleID, permissionIDs }
+      )
       .then((response) => {
         logger(
           "useUpdateRolePermissions | updateRolePermissions ✅ |",
@@ -32,8 +31,13 @@ const useUpdateRolePermissions = () => {
 
   return useMutation<void, Error, SetPermissionProps>({
     mutationFn: updateRolePermissions,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["organizations", "roles"]);
+    onSuccess(_, variables) {
+      queryClient.invalidateQueries([
+        "organization",
+        "roles",
+        variables.roleID,
+        "permissions",
+      ]);
     },
   });
 };

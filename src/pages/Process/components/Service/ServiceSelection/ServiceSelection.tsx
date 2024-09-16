@@ -3,12 +3,10 @@ import useGetServices, {
 } from "@/api/Service/Querys/useGetServices";
 import { Container, LoadingAnimation } from "@component-library/index";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import ServiceCard from "./components/ServiceCard";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useProcess from "@/hooks/Process/useProcess";
-import logger from "@/hooks/useLogger";
-import useChatbot from "@/hooks/useChatbot";
+
 import {useTopics} from "@/contexts/ChatbotContextProvider";
 import {useEffect} from "react";
 
@@ -37,7 +35,6 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
 
 
   const {} = props;
-  const { t } = useTranslation();
 
   const updateProcess = useUpdateProcess();
   const { process } = useProcess();
@@ -70,6 +67,7 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
       align="start"
       justify="center"
       wrap="wrap"
+      className="pb-5"
     >
       {services.data.map((service, index) => (
         <ServiceCard

@@ -8,9 +8,12 @@ const useAdminDeleteOrganization = () => {
   const queryClient = useQueryClient();
   const deleteOrganization = async (data: AdminDeleteOrgaProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/deleteOrganization/`, {
-        data,
-      })
+      .delete(
+        `${process.env.VITE_HTTP_API_URL}/public/admin/organization/delete/`,
+        {
+          data,
+        }
+      )
       .then((response) => {
         logger(
           "useAdminDeleteOrganization | deleteOrganization ✅ |",

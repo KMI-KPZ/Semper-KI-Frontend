@@ -11,11 +11,10 @@ const useRemoveRole = () => {
   const queryClient = useQueryClient();
   const removeRole = async ({ email, roleID }: RemoveRoleProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/removeRole/`, {
-        data: {
-          content: { email, roleID },
-        },
-      })
+      .patch(
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/roles/remove/`,
+        { email, roleID }
+      )
       .then((response) => {
         logger("useRemoveRole | removeRole ✅ |", response);
         return response.data;
@@ -27,7 +26,7 @@ const useRemoveRole = () => {
   return useMutation<void, Error, RemoveRoleProps>({
     mutationFn: removeRole,
     onSuccess: () => {
-      queryClient.invalidateQueries(["organizations", "users"]);
+      queryClient.invalidateQueries(["organization", "users"]);
     },
   });
 };

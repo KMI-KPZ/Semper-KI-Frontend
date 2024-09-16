@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { useTranslation } from "react-i18next";
+import { useContext } from "react";
 import { ManufactoringProcessProps } from "../../api/Process/Querys/useGetProcess";
 import { ManufacturingProcessContext } from "@/contexts/ManufacturingProcessContext";
 

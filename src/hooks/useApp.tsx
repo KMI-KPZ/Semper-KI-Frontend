@@ -1,4 +1,3 @@
-import { authorizedCustomAxios } from "@/api/customAxios";
 import { AppContext, AppState } from "@/pages/App/App";
 import { useContext } from "react";
 

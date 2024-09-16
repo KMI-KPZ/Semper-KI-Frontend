@@ -1,4 +1,3 @@
-import React from "react";
 import { render } from "@test/render";
 import { Background } from "./Background";
 

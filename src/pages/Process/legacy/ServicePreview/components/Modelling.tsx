@@ -11,7 +11,7 @@ interface ProcessServiceModellingProps {
 const ProcessServiceModelling: React.FC<ProcessServiceModellingProps> = (
   props
 ) => {
-  const { process } = props;
+  const {} = props;
   const { t } = useTranslation();
 
   return (

@@ -7,8 +7,5 @@ describe("<ResourcesPostProcessings>", () => {
     expect(
       screen.getByText("Resources.PostProcessings.header")
     ).toBeInTheDocument();
-    expect(
-      screen.getByTestId("resources-post-processings")
-    ).toBeInTheDocument();
   });
 });

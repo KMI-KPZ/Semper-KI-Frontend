@@ -10,8 +10,16 @@ import TextInput from "./Inputs/TextInput";
 import TextAreaInput from "./Inputs/TextAreaInput";
 import NumberInput from "./Inputs/NumberInput";
 import CheckBoxInput from "./Inputs/CheckBoxInput";
+import ColorInput from "./Inputs/ColorInput";
+import DateInput from "./Inputs/DateInput";
 
-export type InputType = "text" | "textarea" | "number" | "checkbox";
+export type InputType =
+  | "text"
+  | "textarea"
+  | "number"
+  | "checkbox"
+  | "color"
+  | "date";
 
 export interface InputLabelProps<T extends FieldValues> {
   type: InputType;
@@ -45,5 +53,9 @@ export const GeneralInput = <T extends FieldValues>(
       return <NumberInput {...props} />;
     case "checkbox":
       return <CheckBoxInput {...props} />;
+    case "color":
+      return <ColorInput {...props} />;
+    case "date":
+      return <DateInput {...props} />;
   }
 };

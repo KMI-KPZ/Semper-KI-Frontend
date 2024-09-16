@@ -9,7 +9,7 @@ const useCreateProjectProcess = () => {
   const createProjectProcess = async (projectID: string) =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/createProcessID/${projectID}/`
+        `${process.env.VITE_HTTP_API_URL}/public/process/create/${projectID}/`
       )
       .then((response) => {
         logger("useCreateProjectProcess | createProjectProcess ✅ |", response);
@@ -21,7 +21,7 @@ const useCreateProjectProcess = () => {
 
   return useMutation<string, Error, string>({
     mutationFn: createProjectProcess,
-    onSuccess: (newProcessID, projectID, contex) => {
+    onSuccess: (newProcessID, projectID) => {
       queryClient.invalidateQueries(["flatProjects"]);
       queryClient.invalidateQueries(["project", projectID]);
       navigate(`/projects/${projectID}/${newProcessID}`);

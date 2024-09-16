@@ -1,7 +1,4 @@
-import { Tty } from "@mui/icons-material";
-import { type } from "os";
 import { useState } from "react";
-import logger from "./useLogger";
 
 interface ReturnProps<T> {
   handleSearchInputChange: (search: string) => void;

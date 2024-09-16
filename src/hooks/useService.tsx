@@ -1,7 +1,4 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { Project } from "@/api/Project/Querys/useGetProject";
 import useProcess from "@/hooks/Process/useProcess";
-import { useProject } from "@/hooks/Project/useProject";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import {
@@ -13,11 +10,6 @@ import {
 
 interface ReturnProps {
   updatedService: (updateServiceProps: UpdateServiceManufacturingProps) => void;
-}
-
-interface ServiceQueryProps {
-  service: ServiceProps;
-  projectQuery: UseQueryResult<Project, Error>;
 }
 
 export const isServiceComplete = (

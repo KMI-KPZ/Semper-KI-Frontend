@@ -1,41 +1,36 @@
-import { ReactNode, useContext, useEffect, useState } from "react";
+import { ReactNode, useRef } from "react";
 import { Button } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import SaveIcon from "@mui/icons-material/Save";
-import { EventContext } from "@/contexts/EventContextProvider";
-import { PermissionContext } from "@/contexts/PermissionContextProvider";
 import { LoadingAnimation, LoadingSuspense } from "@component-library/index";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import usePermissions from "@/hooks/usePermissions";
 import useEvents from "@/hooks/useEvents/useEvents";
 import logger from "@/hooks/useLogger";
 import ExampleForm from "@/components/Form/ExampleForm";
 import useReloadPermissions from "@/api/Permissions/Mutations/useReloadPermissions";
-import useSaveProjects from "@/api/Test/Mutations/useSaveProjects";
 import useDynamicButtonRequest from "@/api/Test/Mutations/useDynamicButtonRequest";
 import useGetDynamicTestButtons, {
   TestDynamicProps,
 } from "@/api/Test/Querys/useGetDynamicTestButtons";
+import useSaveProjects from "@/api/Project/Mutations/useSaveProjects";
+import useGetPrivateGraph from "@/api/Graph/Querys/useGetPrivateGraph";
+import NetworkGraph from "@/components/NetworkGraph/GraphViewer";
 
 interface Props {}
 export const Test: React.FC<Props> = (props) => {
+  const {} = props;
   const { socket, events } = useEvents();
-  const [open, setOpen] = useState(false);
   const reloadPermissions = useReloadPermissions();
 
   const saveProjects = useSaveProjects();
   const dynamicButtonRequest = useDynamicButtonRequest();
   const testDynamicQuery = useGetDynamicTestButtons();
+  const graph = useGetPrivateGraph();
+  const horizontalScroll = useRef<HTMLDivElement>(null);
 
-  const openMenu = () => {
-    setOpen(true);
-  };
-  const closeMenu = () => {
-    setOpen(false);
-  };
   const closeSocket = () => {
     socket?.close();
   };
@@ -58,13 +53,76 @@ export const Test: React.FC<Props> = (props) => {
     }
   };
 
+  const handleOnButtonClickScrollLeft = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    scroll("left");
+  };
+  const handleOnButtonClickScrollRight = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    scroll("right");
+  };
+
+  const scroll = (dir: "left" | "right") => {
+    if (horizontalScroll.current !== null) {
+      if (dir === "left") {
+        logger("scroll", horizontalScroll.current);
+        horizontalScroll.current.scrollLeft =
+          horizontalScroll.current.scrollLeft - 300;
+      } else {
+        horizontalScroll.current.scrollLeft =
+          horizontalScroll.current.scrollLeft + 300;
+      }
+    }
+  };
+
   return (
-    <div className="flex w-full flex-col items-center justify-start gap-5">
+    <div className="flex w-full snap-mandatory flex-col items-center justify-start gap-5">
       <Container direction="col" className="bg-white p-5">
         <Heading variant="h1">TestPage</Heading>
       </Container>
 
-      <Container direction="col" className="bg-white p-5">
+      {graph.isFetched && graph.data !== undefined ? (
+        <NetworkGraph edges={graph.data.edges} nodes={graph.data.nodes} />
+      ) : (
+        <LoadingAnimation />
+      )}
+
+      <div className="container relative  h-[400px] w-[400px] bg-slate-500 ">
+        <div
+          className="peer/big absolute left-1/2 top-1/2 z-10 flex h-40 w-40 -translate-x-20 -translate-y-20 items-center justify-center rounded-full border-2 bg-blue-500 duration-300 hover:cursor-pointer hover:border-orange-500 active:border-green-500 active:bg-green-300"
+          onClick={() => logger("big")}
+        >
+          Hover Here
+        </div>
+        <div
+          className=" absolute left-20 top-20 h-20 w-20 rounded-full bg-white duration-300 hover:cursor-pointer hover:bg-gray-500 active:border-red-500 active:bg-red-300 peer-hover/big:animate-pulse peer-hover/big:bg-orange-500"
+          onClick={() => logger("small lt")}
+        />
+        <div
+          className=" absolute right-20 top-20 h-20  w-20 rounded-full bg-white duration-300 hover:cursor-pointer hover:bg-gray-500 active:border-red-500  active:bg-red-300 peer-hover/big:animate-ping  peer-hover/big:bg-orange-500"
+          onClick={() => logger("small rt")}
+        />
+        <div
+          className=" absolute bottom-20 right-20  h-20 w-20 rounded-full bg-white duration-300 hover:cursor-pointer hover:bg-gray-500 active:border-red-500 active:bg-red-300 peer-hover/big:animate-bounce  peer-hover/big:bg-orange-500"
+          onClick={() => logger("small rb")}
+        />
+        <div
+          className=" absolute bottom-20 left-20 flex h-20 w-20  items-center justify-center rounded-full bg-white duration-300 hover:cursor-pointer hover:bg-gray-500 active:border-red-500 active:bg-red-300 peer-hover/big:animate-spin  peer-hover/big:bg-orange-500"
+          onClick={() => logger("small lb")}
+        >
+          LOL
+        </div>
+      </div>
+
+      <Container
+        direction="col"
+        width="full"
+        className="container bg-white p-5"
+      >
         <Heading variant="h2">Events</Heading>
         {events.length > 0
           ? events.map((event, index) => (
@@ -110,9 +168,7 @@ export const Test: React.FC<Props> = (props) => {
           : "No Events"}
       </Container>
       <Button title="Close WebSocket" onClick={closeSocket} />
-      <Button title="open" onClick={openMenu}>
-        Open
-      </Button>
+
       <Button
         title="reloadPermissions"
         onClick={() => {
@@ -130,13 +186,13 @@ export const Test: React.FC<Props> = (props) => {
 
       <Container
         direction="row"
-        className="  flex-wrap rounded-xl border-2 border-white bg-white p-5"
+        className="h-screen snap-center flex-wrap rounded-xl border-2 border-white bg-white p-5"
       >
         <ExampleForm />
       </Container>
       <Container
         direction="row"
-        className=" max-w-md flex-wrap rounded-xl border-2 border-white bg-white p-5"
+        className="h-screen max-w-md snap-center  flex-wrap rounded-xl border-2 border-white bg-white p-5"
       >
         <Text className="text-bold w-full px-3 text-center">ButtonTest</Text>
         <Button title="Primary Active" variant="primary" active />
@@ -164,6 +220,89 @@ export const Test: React.FC<Props> = (props) => {
             : null}
         </Container>
       </LoadingSuspense>
+      <div className="relative flex h-fit w-full  items-center justify-start">
+        <a
+          href="#"
+          onClick={handleOnButtonClickScrollLeft}
+          className="invisible absolute left-5 flex h-8 w-8 flex-row items-center justify-center rounded-full border-2 bg-white p-5 md:visible"
+        >
+          {" < "}
+        </a>
+        <a
+          href="#"
+          onClick={handleOnButtonClickScrollRight}
+          className="invisible absolute right-5 flex h-8 w-8 flex-row items-center justify-center rounded-full border-2 bg-white p-5 md:visible"
+        >
+          {" > "}
+        </a>
+        <div
+          ref={horizontalScroll}
+          className="flex h-fit w-full snap-x snap-mandatory flex-row items-center justify-start gap-5 overflow-auto scroll-smooth px-5 md:overflow-hidden"
+        >
+          <div className="flex h-80 w-80 shrink-0 snap-center  items-center justify-center  bg-red-500 ">
+            vrtvrtvrt
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center  items-center justify-center bg-blue-500">
+            2vtthvrvhtsr
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center  items-center justify-center  bg-green-500">
+            kzukzukzu3
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center  items-center justify-center bg-yellow-500">
+            zukzukw34tbej 4
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center  items-center justify-center bg-purple-500">
+            etzje546je56j5
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center  items-center justify-center bg-red-500">
+            14w4w5z q36e7k67kj
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-blue-500">
+            2435vhjmzf8ki687i
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-green-500">
+            34jhd bgzerbh gizuhaoergh 3
+          </div>
+          <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-yellow-500">
+            4iurwenoiengnuizhmoidtnmz
+          </div>
+          <div className="  flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-purple-500">
+            5oiwjuienntusö
+          </div>
+        </div>
+      </div>
+      <div className="flex h-96 w-fit snap-y snap-mandatory flex-col items-center justify-start gap-5 overflow-auto px-5 md:overflow-clip">
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center  bg-red-500 ">
+          vrtvrtvrt
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-blue-500">
+          2vtthvrvhtsr
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center  bg-green-500">
+          kzukzukzu3
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-yellow-500">
+          zukzukw34tbej 4
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-purple-500">
+          etzje546je56j5
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-red-500">
+          14w4w5z q36e7k67kj
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-blue-500">
+          2435vhjmzf8ki687i
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-green-500">
+          34jhd bgzerbh gizuhaoergh 3
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-yellow-500">
+          4iurwenoiengnuizhmoidtnmz
+        </div>
+        <div className="flex h-80 w-80 shrink-0 snap-center items-center justify-center bg-purple-500">
+          5oiwjuienntusö
+        </div>
+      </div>
     </div>
   );
 };

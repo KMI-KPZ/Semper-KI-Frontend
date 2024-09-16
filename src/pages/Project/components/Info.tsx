@@ -1,12 +1,11 @@
 import { Project } from "@/api/Project/Querys/useGetProject";
 import { Button, Container, Modal, Text } from "@component-library/index";
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Collapsible from "@/components/Collapsible/Collapsible";
 import ProjectTitleForm from "./TitleForm";
 import ProcessMenu from "@/components/Process/Menu";
+import EditIcon from "@mui/icons-material/Edit";
 
 interface ProjectInfoProps {
   project: Project;
@@ -15,12 +14,7 @@ interface ProjectInfoProps {
 const ProjectInfo: React.FC<ProjectInfoProps> = (props) => {
   const { project } = props;
   const { t } = useTranslation();
-  const [titleEdit, setTitleEdit] = React.useState<boolean>(
-    project.projectDetails.title === undefined ||
-      project.projectDetails.title === ""
-      ? true
-      : false
-  );
+  const [titleEdit, setTitleEdit] = React.useState<boolean>(false);
 
   const handleOnClickButtonEditTitle = () => {
     setTitleEdit(!titleEdit);
@@ -32,21 +26,23 @@ const ProjectInfo: React.FC<ProjectInfoProps> = (props) => {
       direction="col"
       className="relative gap-2 bg-white p-5"
     >
-      <ProcessMenu title={t("Project.components.Info.button.menu")}>
-        <Button
-          stopPropagation={false}
-          title={t("Project.components.Info.button.editTitle")}
-          variant="secondary"
-          size="sm"
-          onClick={handleOnClickButtonEditTitle}
-        />
-      </ProcessMenu>
+      <ProcessMenu
+        buttonTitle={t("Project.components.Info.button.menu")}
+      ></ProcessMenu>
       <Container direction="row" width="full" justify="start" className="gap-0">
         <Container className="w-1/3 md:w-1/3" justify="start">
           <Text variant="strong" className="w-40">
             {t("Project.components.Info.name")}
           </Text>
           <Text>{project.projectDetails.title}</Text>
+          <Button
+            stopPropagation={false}
+            title={t("Project.components.Info.button.editTitle")}
+            variant="secondary"
+            size="xs"
+            onClick={handleOnClickButtonEditTitle}
+            children={<EditIcon />}
+          />
         </Container>
         <Container className="w-1/3 md:w-1/3" justify="start">
           <Text variant="strong" className="w-40">
@@ -55,7 +51,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = (props) => {
           <Text>{project.updatedWhen.toLocaleString()}</Text>
         </Container>
       </Container>
-      <Collapsible>
+      <Collapsible showButton logName="Project">
         <Container
           direction="row"
           justify="start"

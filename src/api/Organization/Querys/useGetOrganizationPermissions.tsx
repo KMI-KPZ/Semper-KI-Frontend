@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export type PermissionProps = {
   permission_name: PermissionNameTranslationType;
@@ -32,11 +32,10 @@ export type PermissionTypeTranslationType =
   | "files";
 
 const useGetOrganizationPermissions = () => {
-  const queryClient = useQueryClient();
   const getOrganizationPermissions = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/organization/getPermissions/`
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/permissions/get/`
       )
       .then((response) => {
         const responseData = response.data;

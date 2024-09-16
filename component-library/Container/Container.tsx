@@ -1,4 +1,3 @@
-import logger from "@/hooks/useLogger";
 import React, {PropsWithChildren, useEffect} from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -68,15 +67,6 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
     if (gap === undefined) return "";
     return `gap-${gap}`;
   };
-
-  if (id) {
-    console.log("Container: " + id);
-    // get all headings in this container
-    const headings = document.querySelectorAll(`#${id} h1, #${id} h2, #${id} h3, #${id} h4, #${id} h5, #${id} h6`);
-    headings.forEach((heading) => {
-      console.log(heading.textContent);
-      });
-  }
 
   return (
     <div

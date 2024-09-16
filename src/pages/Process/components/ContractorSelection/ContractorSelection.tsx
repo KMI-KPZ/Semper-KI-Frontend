@@ -1,14 +1,8 @@
-import {
-  ManufactoringProcessProps,
-  Process,
-  ProcessStatus,
-} from "@/api/Process/Querys/useGetProcess";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessContainer from "@/components/Process/Container";
-import ProcessMenu from "@/components/Process/Menu";
 import {
   Button,
   Container,
-  Divider,
   Heading,
   LoadingAnimation,
   Modal,
@@ -16,63 +10,47 @@ import {
 } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import ProcessStatusButtons from "../StatusButtons";
-import useUser, { UserAddressProps } from "@/hooks/useUser";
-import useAuthorizedUser from "@/hooks/useAuthorizedUser";
-import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
-import { useForm } from "react-hook-form";
-import ContractorSelectionAddressCard from "./components/AddressCard";
-import logger from "@/hooks/useLogger";
+import { UserAddressProps } from "@/hooks/useUser";
 import ProcessContractorList from "./components/ContractorList";
 import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 import ContractorCard from "./components/ContractorCard";
-import useGetContractors from "@/api/Project/Querys/useGetContractors";
+import ContractorSelectionAddressCard from "./components/AddressCard";
+import useGetContractors from "@/api/Process/Querys/useGetContractors";
 
-interface ContractorSelectionProps {}
+interface ProcessContractorSelectionProps {}
 
 export type ProcessAddressType = "billing" | "delivery";
 
-const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
+export interface ProcessAddressFormData {
+  deliverAddress: UserAddressProps;
+  billingAddress: UserAddressProps;
+}
+
+const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
+  props
+) => {
   const {} = props;
   const { t } = useTranslation();
   const { process } = useDefinedProcess();
-  const { user } = useAuthorizedUser();
-  const contractors = useGetContractors(process.processID);
+  const contractors = useGetContractors();
 
-  const standardAddress: UserAddressProps | undefined =
-    user.details.addresses.find((address) => address.standard === true);
+  const [editContractor, setEditContractor] = useState(false);
+
   const currentContractor = contractors.data?.find(
     (contractor) =>
       contractor.hashedID === process.processDetails.provisionalContractor
   );
 
-  const [editContractor, setEditContractor] = useState(false);
-  const [deliverAddress, setDeliverAddress] = useState(standardAddress);
-  const [billingAddress, setBillingAddress] = useState(standardAddress);
-  const [addressesEqual, setAddressesEqual] = useState(true);
+  const [showDeliveryAddress, setShowDeliveryAddress] =
+    useState<boolean>(false);
 
-  const handleOnChangeAddressEqual = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setAddressesEqual(event.target.checked);
+  const onChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShowDeliveryAddress(!e.target.checked);
   };
 
-  const setAddress = (type: ProcessAddressType, address: UserAddressProps) => {
-    if (type === "billing") {
-      setBillingAddress(address);
-    } else {
-      setDeliverAddress(address);
-    }
+  const handleOnClickButtonSelectContractor = () => {
+    setEditContractor(true);
   };
-
-  const resetAddress = (type: ProcessAddressType) => {
-    if (type === "billing") {
-      setBillingAddress(standardAddress);
-    } else {
-      setDeliverAddress(standardAddress);
-    }
-  };
-
   const handleOnClickButtonEditContractor = () => {
     setEditContractor(true);
   };
@@ -81,28 +59,27 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
     setEditContractor(false);
   };
 
+  const menuButtonTitle = t(
+    "Process.components.ContractorSelection.ContractorSelection.button.menu"
+  );
+  const pageTitle = `${t(
+    "Process.components.ContractorSelection.ContractorSelection.heading.main"
+  )}: ${
+    process.contractor === ""
+      ? t(
+          "Process.components.ContractorSelection.ContractorSelection.noContractor"
+        )
+      : process.contractor
+  }`;
+
   return (
-    <ProcessContainer id="contractorSelected">
-      <ProcessMenu
-        title={t(
-          "Process.components.ContractorSelection.ContractorSelection.button.menu"
-        )}
-      ></ProcessMenu>
-      <Container width="full" justify="start">
-        <Heading variant="h2">
-          {t(
-            "Process.components.ContractorSelection.ContractorSelection.heading.main"
-          )}
-          {`: ${
-            process.contractor === ""
-              ? t(
-                  "Process.components.ContractorSelection.ContractorSelection.noContractor"
-                )
-              : process.contractor
-          }`}
-        </Heading>
-      </Container>
-      <Divider />
+    <ProcessContainer
+      id="Contractor"
+      pageTitle={pageTitle}
+      menuButtonTitle={menuButtonTitle}
+      start={ProcessStatus.SERVICE_COMPLETED}
+      end={ProcessStatus.SERVICE_COMPLETED}
+    >
       <Container width="full" justify="center" align="start" direction="auto">
         <Container
           width="full"
@@ -119,7 +96,7 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
             <Container width="full" direction="col">
               <Button
                 size="sm"
-                onClick={handleOnClickButtonEditContractor}
+                onClick={handleOnClickButtonSelectContractor}
                 variant="primary"
                 title={t(
                   "Process.components.ContractorSelection.components.ContractorList.button.select"
@@ -135,34 +112,35 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
               )}
             </Text>
           ) : (
-            <ContractorCard contractor={currentContractor} />
+            <Container width="full" direction="col">
+              <ContractorCard contractor={currentContractor} />
+              <Button
+                size="sm"
+                onClick={handleOnClickButtonEditContractor}
+                variant="secondary"
+                title={t(
+                  "Process.components.ContractorSelection.components.ContractorList.button.edit"
+                )}
+              />
+            </Container>
           )}
         </Container>
         <Container direction="col" width="full">
           <ContractorSelectionAddressCard
-            resetAddress={resetAddress}
-            address={billingAddress}
-            setAddress={setAddress}
+            onChangeCheckBox={onChangeCheckBox}
+            showDeliveryAddress={showDeliveryAddress}
             type={"billing"}
-            addressesEqual={addressesEqual}
-            handleOnChangeAddressEqual={handleOnChangeAddressEqual}
           />
-          {!addressesEqual ? (
+          {showDeliveryAddress ? (
             <ContractorSelectionAddressCard
-              resetAddress={resetAddress}
-              setAddress={setAddress}
-              address={deliverAddress}
+              onChangeCheckBox={onChangeCheckBox}
+              showDeliveryAddress={showDeliveryAddress}
               type={"delivery"}
-              addressesEqual={addressesEqual}
-              handleOnChangeAddressEqual={handleOnChangeAddressEqual}
             />
           ) : null}
         </Container>
       </Container>
-      <ProcessStatusButtons
-        start={ProcessStatus.SERVICE_COMPLETED}
-        end={ProcessStatus.CONTRACTOR_SELECTED}
-      />
+
       <Modal
         open={editContractor}
         modalKey="ProcessContractorList"
@@ -178,4 +156,4 @@ const ContractorSelection: React.FC<ContractorSelectionProps> = (props) => {
   );
 };
 
-export default ContractorSelection;
+export default ProcessContractorSelection;

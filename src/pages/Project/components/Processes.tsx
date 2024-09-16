@@ -1,13 +1,17 @@
-import { Button, Container, Divider, Text } from "@component-library/index";
-import React, { useMemo, useState } from "react";
+import {
+  Button,
+  Container,
+  Divider,
+  Search,
+  Text,
+} from "@component-library/index";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import FlatProcessCard from "./FlatProcessCard";
 import AddIcon from "@mui/icons-material/Add";
 import useCreateProcess from "@/api/Process/Mutations/useCreateProcess";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { FlatProcess } from "@/api/Project/Querys/useGetProject";
-import logger from "@/hooks/useLogger";
+import useSearch from "@/hooks/useSearch";
 
 interface ProjectProcessesProps {
   processes: FlatProcess[];
@@ -19,6 +23,8 @@ const ProjectProcesses: React.FC<ProjectProcessesProps> = (props) => {
   const { processes } = props;
   const { t } = useTranslation();
   const createProcess = useCreateProcess();
+  const { filterDataBySearchInput, handleSearchInputChange } =
+    useSearch<FlatProcess>();
 
   const handleOnClickButton = () => {
     createProcess.mutate();
@@ -64,7 +70,7 @@ const ProjectProcesses: React.FC<ProjectProcessesProps> = (props) => {
           variant="primary"
           title={t("Project.components.Processes.button.create")}
         />
-
+        <Search handleSearchInputChange={handleSearchInputChange} />
         <select
           className="bezier group flex
             h-fit flex-wrap
@@ -118,6 +124,7 @@ const ProjectProcesses: React.FC<ProjectProcessesProps> = (props) => {
       <Divider />
       {processes.length > 0 ? (
         processes
+          .filter((flatProcess) => filterDataBySearchInput(flatProcess))
           .sort(sortFlatProcess)
           .map((process) => (
             <FlatProcessCard key={process.processID} flatProcess={process} />

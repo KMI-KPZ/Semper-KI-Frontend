@@ -1,8 +1,5 @@
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
-import AddressCard from "@/components/Address/AddressCard";
-import AddressForm from "@/components/Form/AddressForm";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
-import logger from "@/hooks/useLogger";
 import { UserAddressProps } from "@/hooks/useUser";
 import {
   Button,
@@ -16,32 +13,34 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { ProcessAddressType } from "../ContractorSelection";
 import AddressSelection from "./AddressSelection";
+import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 
 interface ContractorSelectionAddressCardProps {
-  addressesEqual: boolean;
+  showDeliveryAddress: boolean;
   type: ProcessAddressType;
-  address?: UserAddressProps;
-  resetAddress: (type: ProcessAddressType) => void;
-
-  handleOnChangeAddressEqual: (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => void;
-  setAddress: (type: ProcessAddressType, address: UserAddressProps) => void;
+  onChangeCheckBox: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const ContractorSelectionAddressCard: React.FC<
   ContractorSelectionAddressCardProps
 > = (props) => {
-  const {
-    address,
-    handleOnChangeAddressEqual,
-    type,
-    addressesEqual,
-    resetAddress,
-    setAddress,
-  } = props;
-  const [edit, setEdit] = React.useState(false);
+  const { type, showDeliveryAddress, onChangeCheckBox } = props;
   const { t } = useTranslation();
+
+  const { process } = useDefinedProcess();
+  const address =
+    type === "delivery"
+      ? process.processDetails.clientDeliverAddress
+      : process.processDetails.clientBillingAddress;
+
+  const { user } = useAuthorizedUser();
+  const standardAddress: UserAddressProps | undefined =
+    user.details.addresses === undefined
+      ? undefined
+      : user.details.addresses.find((address) => address.standard === true);
+
+  const updateProcess = useUpdateProcess();
+  const [edit, setEdit] = React.useState(false);
 
   const handleOnButtonClickEdit = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
@@ -50,12 +49,39 @@ const ContractorSelectionAddressCard: React.FC<
     setEdit(true);
   };
 
+  const setAddress = (
+    address: UserAddressProps | undefined,
+    equal?: boolean
+  ) => {
+    updateProcess.mutate({
+      processIDs: [process.processID],
+      updates: {
+        changes: {
+          processDetails: {
+            clientBillingAddress: type === "billing" ? address : undefined,
+            clientDeliverAddress:
+              type === "delivery" || !showDeliveryAddress || equal
+                ? address
+                : undefined,
+          },
+        },
+      },
+    });
+  };
+
   const handleOnButtonClickReset = () => {
-    resetAddress(type);
+    setAddress(standardAddress);
   };
 
   const selectAddress = (address: UserAddressProps) => {
-    setAddress(type, address);
+    setAddress(address);
+  };
+
+  const handleOnChangeAddressEqual = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setAddress(process.processDetails.clientBillingAddress, true);
+    onChangeCheckBox(event);
   };
 
   return (
@@ -63,7 +89,7 @@ const ContractorSelectionAddressCard: React.FC<
       <Heading variant="h3">
         {t(
           `Process.components.ContractorSelection.ContractorSelection.heading.${
-            addressesEqual ? "billingDelivery" : type
+            !showDeliveryAddress ? "billingDelivery" : type
           }`
         )}
       </Heading>
@@ -112,28 +138,25 @@ const ContractorSelectionAddressCard: React.FC<
         className="gap-1 p-5"
         align="center"
       >
-        {(!addressesEqual && type === "delivery") ||
-        (addressesEqual && type === "billing") ? (
-          <Container>
-            <label
-              htmlFor="addressEqual"
-              className="flex flex-row items-center justify-center gap-3 hover:cursor-pointer"
-            >
-              <input
-                type="checkbox"
-                id="addressEqual"
-                checked={addressesEqual}
-                className="h-4 w-4"
-                onChange={handleOnChangeAddressEqual}
-              />
-              <Text>
-                {t(
-                  "Projects.Project.ContractorSelection.ContractorSelection.address.sameAddress"
-                )}
-              </Text>
-            </label>
-          </Container>
-        ) : null}
+        <Container>
+          <label
+            htmlFor="addressEqual"
+            className="flex flex-row items-center justify-center gap-3 hover:cursor-pointer"
+          >
+            <input
+              type="checkbox"
+              id="addressEqual"
+              checked={!showDeliveryAddress}
+              className="h-4 w-4"
+              onChange={handleOnChangeAddressEqual}
+            />
+            <Text>
+              {t(
+                "Projects.Project.ContractorSelection.ContractorSelection.address.sameAddress"
+              )}
+            </Text>
+          </label>
+        </Container>
         <Container width="full" gap={3}>
           <Button
             variant="text"

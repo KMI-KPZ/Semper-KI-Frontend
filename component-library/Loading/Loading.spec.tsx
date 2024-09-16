@@ -1,10 +1,5 @@
 import { render } from "@test/render";
-import {
-  LoadingAnimation,
-  LoadingSuspense,
-  AppLoadingSuspense,
-} from "./Loading";
-import { DefinedUseQueryResult, UseQueryResult } from "@tanstack/react-query";
+import { LoadingAnimation, AppLoadingSuspense } from "./Loading";
 
 describe("LoadingAnimation", () => {
   it("renders without error", () => {

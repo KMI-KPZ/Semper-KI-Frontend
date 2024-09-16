@@ -1,4 +1,3 @@
-import logger from "@/hooks/useLogger";
 import { Button } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
@@ -6,9 +5,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import * as yup from "yup";
-import { type } from "os";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useRegisterOrganization from "@/api/Organization/Mutations/useRegisterOrganization";
+import useCreateOrganization from "@/api/Organization/Mutations/useCreateOrganization";
 
 interface RegisterOrganizationProps {}
 
@@ -17,7 +15,7 @@ const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
   const { t } = useTranslation();
   const [success, setSuccess] = React.useState(false);
 
-  const registerOrganization = useRegisterOrganization();
+  const createOrganization = useCreateOrganization();
   const schema = yup
     .object()
     .shape({
@@ -37,7 +35,6 @@ const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm<RegisterOrganizationFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -47,7 +44,7 @@ const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
   });
 
   const onSubmit = (data: RegisterOrganizationFormData) => {
-    registerOrganization.mutate(data, {
+    createOrganization.mutate(data, {
       onSuccess: () => setSuccess(true),
     });
   };

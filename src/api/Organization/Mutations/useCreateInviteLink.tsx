@@ -2,13 +2,19 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+interface useCreateInviteLinkProps {
+  email: string;
+  roleID: string;
+}
+
 const useCreateInviteLink = () => {
   const queryClient = useQueryClient();
-  const createInviteLink = async (email: string) =>
+  const createInviteLink = async (props: useCreateInviteLinkProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/getInviteLink/`, {
-        data: { content: { email: email } },
-      })
+      .post(
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/users/inviteLink/`,
+        props
+      )
       .then((response) => {
         logger("useCreateInviteLink | createInviteLink ✅ |", response);
         return response.data;
@@ -17,10 +23,10 @@ const useCreateInviteLink = () => {
         logger("useCreateInviteLink | createInviteLink ❌ |", error);
       });
 
-  return useMutation<string, Error, string>({
+  return useMutation<string, Error, useCreateInviteLinkProps>({
     mutationFn: createInviteLink,
     onSuccess: () => {
-      queryClient.invalidateQueries(["organizations", "users"]);
+      queryClient.invalidateQueries(["organization", "invites"]);
     },
   });
 };

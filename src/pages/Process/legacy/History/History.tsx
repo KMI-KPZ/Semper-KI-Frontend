@@ -1,17 +1,13 @@
 import { Container } from "@component-library/index";
 import { Modal } from "@component-library/index";
-import {
-  LoadingAnimation,
-  LoadingSuspense,
-  Text,
-} from "@component-library/index";
-import React, { ReactNode } from "react";
+import { LoadingAnimation, Text } from "@component-library/index";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ProcessHistoryItem from "./components/Item";
 import useGetProcessHistory, {
   ProcessHistoryType,
-} from "@/api/Process/Querys/useGetProcessHistory";
+} from "@/api/Process/Files/Querys/useGetProcessHistory";
 
 interface ProcessHistoryProps {}
 

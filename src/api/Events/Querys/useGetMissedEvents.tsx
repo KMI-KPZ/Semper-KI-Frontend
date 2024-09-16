@@ -1,15 +1,14 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Event } from "@/pages/App/types";
 import useUser, { UserType } from "@/hooks/useUser";
 
 const useGetMissedEvents = () => {
-  const queryClient = useQueryClient();
   const { user } = useUser();
   const getMissedEvents = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/getMissedEvents/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/events/missed/get/`)
       .then((response) => {
         const responseData = response.data;
         const events: Event[] = responseData.events;

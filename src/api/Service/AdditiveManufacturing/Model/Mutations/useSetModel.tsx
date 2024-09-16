@@ -6,7 +6,7 @@ import { ModelProps } from "react-stl-viewer";
 interface SetModelProps {
   projectID: string;
   processID: string;
-  model: ModelProps;
+  models: ModelProps[];
 }
 
 const useSetModel = () => {
@@ -27,7 +27,7 @@ const useSetModel = () => {
 
   return useMutation<string, Error, SetModelProps>({
     mutationFn: setModel,
-    onSuccess: (data, props, context) => {
+    onSuccess: (_, props) => {
       queryClient.invalidateQueries([
         "project",
         props.projectID,

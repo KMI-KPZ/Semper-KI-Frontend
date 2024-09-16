@@ -1,6 +1,6 @@
 import { Address, UserType } from "@/hooks/useUser";
 import logger from "@/hooks/useLogger";
-import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
+import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
 
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;
@@ -189,7 +189,7 @@ export const createDownload = (blob: Blob, title: string) => {
 };
 
 export const objectToArray = <T,>(object: Object): T[] => {
-  let array: T[] = Object.entries(object).map(([key, value]) => {
+  let array: T[] = Object.entries(object).map(([, value]) => {
     return { ...value } as T;
   });
   return array;

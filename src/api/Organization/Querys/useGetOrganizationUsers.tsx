@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { RoleProps } from "../Mutations/useCreateRole";
 
 export type OrganizationsUser = {
@@ -11,18 +11,12 @@ export type OrganizationsUser = {
 };
 
 const useGetOrganizationUsers = () => {
-  const queryClient = useQueryClient();
   const getOrganizationUsers = async () =>
     authorizedCustomAxios
-      .get(
-        `${process.env.VITE_HTTP_API_URL}/public/getOrganization/fetchUsers/`
-      )
+      .get(`${process.env.VITE_HTTP_API_URL}/public/organizations/users/get/`)
       .then((response) => {
         const responseData = response.data;
-        const users: OrganizationsUser[] = {
-          ...responseData,
-        };
-
+        const users: OrganizationsUser[] = responseData;
         logger("useGetOrganizationUsers | getOrganizationUsers ✅ |", response);
         return users;
       });

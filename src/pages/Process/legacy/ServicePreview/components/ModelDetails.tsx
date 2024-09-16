@@ -1,4 +1,3 @@
-import useDownloadFile from "@/api/Process/Mutations/useDownloadFile";
 import { ManufactoringProcessProps } from "@/api/Process/Querys/useGetProcess";
 import useGetModelDetails from "@/api/Service/AdditiveManufacturing/Model/Querys/useGetModelDetails";
 import ModelPreview from "@/pages/Test/STLViewer";
@@ -8,7 +7,7 @@ import {
   LoadingAnimation,
   Text,
 } from "@component-library/index";
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 interface ModelDetailsProps {
@@ -18,10 +17,8 @@ interface ModelDetailsProps {
 const ModelDetails: React.FC<ModelDetailsProps> = (props) => {
   const { process } = props;
   const { t } = useTranslation();
-
-  const downloadFile = useDownloadFile();
   const modelDetailsQuery = useGetModelDetails(process.processID);
-  const [fileUrl, setFileUrl] = React.useState<string>("");
+  const [fileUrl] = React.useState<string>("");
 
   // useEffect(() => {
   //   if (

@@ -1,10 +1,7 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { NavigationItemData } from "@/data/navigation";
 import HeaderItem from "./Item";
 import useUser from "@/hooks/useUser";
-import useEvents from "@/hooks/useEvents/useEvents";
-import { getProjectEventAmount } from "@/hooks/useEvents/hooks/useProjectEvent";
 import useApp from "@/hooks/useApp";
 import useBadge from "@/hooks/useBadge";
 
@@ -12,7 +9,6 @@ interface HeaderItemsProps {}
 
 const HeaderItems: React.FC<HeaderItemsProps> = (props) => {
   const {} = props;
-  const { t } = useTranslation();
   const { user } = useUser();
   const { setMenu } = useApp();
   const { calcBadge } = useBadge();

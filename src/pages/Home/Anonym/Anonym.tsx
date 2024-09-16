@@ -4,49 +4,26 @@ import { useTranslation } from "react-i18next";
 import { Container } from "@component-library/index";
 import Hero from "@images/Hero_16_9.png";
 import HomeContainer from "../components/Container";
-import SemperKI from "@images/Semper-KI.png";
-import WirMachen3DDruck from "@images/Wir-machen-3D-Druck.png";
-import ButtonIcon from "@images/OnButton.png";
 import SemperLogo from "@images/Logo-Semper.png";
 import { ContentBox } from "@component-library/index";
-import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
-import LoginIcon from "@mui/icons-material/Login";
 import HomeImgCarousel from "./components/ImgCarousel";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@component-library/index";
 import BMWKdeURL from "@images/BMWK_de.png";
 import BMWKenURL from "@images/BMWE_en.png";
 import LaunchIcon from "@mui/icons-material/Launch";
-import PersonIcon from "@mui/icons-material/Person";
-import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
-import useLogin from "@/api/Login/Mutation/useLogin";
-import { useProject } from "@/hooks/Project/useProject";
-import useCreateProject from "@/api/Project/Mutations/useCreateProject";
 
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props) => {
   const {} = props;
   const { t, i18n } = useTranslation();
-  const login = useLogin();
-  const createProject = useCreateProject();
   const navigate = useNavigate();
-
-  const handleOnClickButton = () => {
-    login.mutate({ userType: "user", register: true });
-  };
-
-  const handleOnClickButtonDemonstrator = () => {
-    createProject.mutate("test");
-  };
-  // useChatbot({
-  //   topic: [ t("chatbot.home.evaluate")]
-  // })
 
   return (
     <div
-      className={`flex w-full flex-col items-center justify-center bg-cover bg-fixed bg-center bg-no-repeat text-white`}
+      className={`flex  w-full snap-y snap-mandatory flex-col  overflow-auto bg-cover bg-fixed bg-center bg-no-repeat text-white`}
       style={{ backgroundImage: `url(${Hero})` }}
       data-testid="home-anonym"
     >
@@ -57,7 +34,7 @@ const Home: React.FC<HomeProps> = (props) => {
           </Text>
         </Container>
       ) : null}
-      <HomeContainer className="h-fit min-h-screen bg-black bg-opacity-70">
+      <HomeContainer className="  bg-black bg-opacity-70">
         <ContentBox className="flex-wrap justify-center">
           <img src={SemperLogo} className="w-[300px]" alt="" />
           <Heading
@@ -76,7 +53,7 @@ const Home: React.FC<HomeProps> = (props) => {
           </Heading>
         </ContentBox>
       </HomeContainer>
-      <HomeContainer className="h-fit min-h-[30vh]  bg-gradient-to-b from-[#064EA1]/80  via-[#2773BB]/80 to-[#43BBC2]/80 md:bg-gradient-to-r">
+      <HomeContainer className="    bg-gradient-to-b from-[#064EA1]/80  via-[#2773BB]/80 to-[#43BBC2]/80 md:bg-gradient-to-r">
         {/* <HomeContainer className="h-fit min-h-[30vh]  bg-gradient-to-b from-violet-800/80  via-orange-800/80 to-türkis-800/80 md:bg-gradient-to-r"> */}
         <ContentBox className="h-fit items-start justify-between gap-10">
           <Container direction="col" gap={5} width="full" align="start">
@@ -103,7 +80,7 @@ const Home: React.FC<HomeProps> = (props) => {
           </Container>
         </ContentBox>
       </HomeContainer>
-      <HomeContainer className="h-fit min-h-[25vh] bg-ultramarinblau-dark">
+      <HomeContainer className="      bg-ultramarinblau-dark">
         <ContentBox className="justify-between py-5">
           <Container direction="col" align="start">
             <Container>
@@ -124,8 +101,8 @@ const Home: React.FC<HomeProps> = (props) => {
           />
         </ContentBox>
       </HomeContainer>
-      <HomeContainer
-        className="h-fit min-h-[25vh] bg-slate-700"
+      {/* <HomeContainer
+        className="      bg-slate-700"
         data-testid="home-anonym-orga"
       >
         <ContentBox className="flex w-full flex-col gap-5 md:flex-row md:justify-between md:gap-40">
@@ -156,7 +133,7 @@ const Home: React.FC<HomeProps> = (props) => {
           </div>
         </ContentBox>
       </HomeContainer>
-      <HomeContainer className="h-fit min-h-[25vh] bg-ultramarinblau-dark">
+      <HomeContainer className="     bg-ultramarinblau-dark">
         <ContentBox className="flex w-full  flex-col gap-5 md:flex-row md:justify-between md:gap-40">
           <div className="flex flex-col items-start justify-center gap-5">
             <Container>
@@ -184,8 +161,8 @@ const Home: React.FC<HomeProps> = (props) => {
             />
           </div>
         </ContentBox>
-      </HomeContainer>
-      <HomeContainer className={`bg-white`}>
+      </HomeContainer> */}
+      <HomeContainer className={`   bg-white`}>
         <ContentBox className="flex flex-col md:flex-col">
           <Heading variant="h2" className="w-full hyphens-auto text-black">
             {t("Home.Anonym.Anonym.partner")}

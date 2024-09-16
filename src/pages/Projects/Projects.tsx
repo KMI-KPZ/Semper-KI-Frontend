@@ -1,11 +1,9 @@
-import { Button, Modal, Search } from "@component-library/index";
-import { Heading, Text } from "@component-library/index";
+import { Button, Divider, Modal, Search } from "@component-library/index";
+import { Heading } from "@component-library/index";
 import React, {useContext, useEffect} from "react";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
-import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
-import { useProject } from "../../hooks/Project/useProject";
+import useUser, { UserType } from "@/hooks/useUser";
 import { Container } from "@component-library/index";
 import useSearch from "@/hooks/useSearch";
 import useGetAdminFlatProjects from "@/api/Admin/Querys/useGetAdminFlatProjects";
@@ -14,7 +12,6 @@ import useGetFlatProjects, {
 } from "@/api/Project/Querys/useGetFlatProjects";
 import ProjectsTable from "./components/Table";
 import AddIcon from "@mui/icons-material/Add";
-import useCreateProject from "@/api/Project/Mutations/useCreateProject";
 import CreateProjectTitleForm from "./components/TitleForm";
 import { useTopics} from "@/contexts/ChatbotContextProvider";
 
@@ -22,6 +19,7 @@ import { useTopics} from "@/contexts/ChatbotContextProvider";
 interface ProjectsProps {}
 
 const Projects: React.FC<ProjectsProps> = (props) => {
+  const {} = props;
   const { t } = useTranslation();
   const { user } = useUser();
   const _flatProjects = useGetFlatProjects();
@@ -98,7 +96,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
         </Container>
       </div>
       <Search handleSearchInputChange={handleSearchInputChange} />
-      <div className="flex w-full flex-col items-start">
+      <Container direction="col" justify="start" align="start" width="full">
         <Heading variant="h2">
           {user.usertype === UserType.ADMIN
             ? t("Projects.components.Cards.adminProjects")
@@ -111,19 +109,22 @@ const Projects: React.FC<ProjectsProps> = (props) => {
             )}
           />
         </LoadingSuspense>
-      </div>
+      </Container>
       {user.usertype === UserType.ORGANIZATION ? (
         <>
-          <Heading variant="h2">
-            {t("Projects.components.Cards.receivedProjects")}
-          </Heading>
-          <LoadingSuspense query={flatProjects}>
-            <ProjectsTable
-              projects={recievedProjects.filter((flatProject) =>
-                filterDataBySearchInput(flatProject)
-              )}
-            />
-          </LoadingSuspense>
+          <Divider />
+          <Container direction="col" justify="start" align="start" width="full">
+            <Heading variant="h2">
+              {t("Projects.components.Cards.receivedProjects")}
+            </Heading>
+            <LoadingSuspense query={flatProjects}>
+              <ProjectsTable
+                projects={recievedProjects.filter((flatProject) =>
+                  filterDataBySearchInput(flatProject)
+                )}
+              />
+            </LoadingSuspense>
+          </Container>
         </>
       ) : null}
       <Modal

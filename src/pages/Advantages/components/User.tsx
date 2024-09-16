@@ -2,7 +2,7 @@ import { Button, Container, Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import LoginIcon from "@mui/icons-material/Login";
-import useLogin from "@/api/Login/Mutation/useLogin";
+import useLogin from "@/api/Authentification/Querys/useLogin";
 
 interface AdvantagesUserProps {}
 

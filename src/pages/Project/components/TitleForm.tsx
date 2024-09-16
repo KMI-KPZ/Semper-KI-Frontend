@@ -3,11 +3,9 @@ import { Container } from "@component-library/index";
 import { Heading } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { boolean } from "yup";
-import OwnerGate from "@/components/OwnerGate/OwnerGate";
+import ProjectOwnerGate from "@/components/OwnerGate/OwnerGate";
 import useUpdateProject from "@/api/Project/Mutations/useUpdateProject";
 
 interface ProjectTitleFormProps {
@@ -49,7 +47,7 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
   const handleOnChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    setState((prevState) => e.target.value);
+    setState(() => e.target.value);
   };
 
   const handelOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -72,18 +70,18 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
         className="w-fit rounded-xl border-2 bg-gray-100 p-2"
         onChange={handleOnChangeInput}
       />
-      <OwnerGate>
+      <ProjectOwnerGate>
         <PermissionGate element="ProjectButtonEditName">
           <Button
             onClick={handleOnClickEditCheckButton}
-            variant="secondary"
+            variant="primary"
             title={t("Projects.Project.components.TitleForm.button.edit")}
             size="xs"
             width="fit"
             children={<CheckIcon fontSize="small" />}
           />
         </PermissionGate>
-      </OwnerGate>
+      </ProjectOwnerGate>
     </Container>
   );
 };

@@ -6,7 +6,7 @@ import { PostProcessingProps } from "../Querys/useGetPostProcessigns";
 interface SetPostProcessingProps {
   processID: string;
   projectID: string;
-  postProcessing: PostProcessingProps;
+  postProcessings: PostProcessingProps[];
 }
 
 const useSetPostProcessing = () => {
@@ -27,7 +27,7 @@ const useSetPostProcessing = () => {
 
   return useMutation<string, Error, SetPostProcessingProps>({
     mutationFn: setPostProcessing,
-    onSuccess: (data, props, context) => {
+    onSuccess: (_, props) => {
       queryClient.invalidateQueries([
         "project",
         props.projectID,

@@ -11,11 +11,10 @@ const useAssignRole = () => {
   const queryClient = useQueryClient();
   const assignRole = async ({ email, roleID }: AssignRoleProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/assignRole/`, {
-        data: {
-          content: { email, roleID },
-        },
-      })
+      .patch(
+        `${process.env.VITE_HTTP_API_URL}/public/organizations/roles/assign/`,
+        { email, roleID }
+      )
       .then((response) => {
         logger("useAssignRole | assignRole ✅ |", response);
         return response.data;
@@ -27,7 +26,7 @@ const useAssignRole = () => {
   return useMutation<void, Error, AssignRoleProps>({
     mutationFn: assignRole,
     onSuccess: () => {
-      queryClient.invalidateQueries(["organizations", "users"]);
+      queryClient.invalidateQueries(["organization", "users"]);
     },
   });
 };

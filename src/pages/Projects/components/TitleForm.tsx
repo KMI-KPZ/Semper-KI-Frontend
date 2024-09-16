@@ -1,17 +1,11 @@
 import { Button, Text } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { Heading } from "@component-library/index";
-import React, { useRef, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import EditIcon from "@mui/icons-material/Edit";
-import CheckIcon from "@mui/icons-material/Check";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { boolean } from "yup";
-import OwnerGate from "@/components/OwnerGate/OwnerGate";
-import useUpdateProject from "@/api/Project/Mutations/useUpdateProject";
 import { useForm } from "react-hook-form";
 import useCreateProject from "@/api/Project/Mutations/useCreateProject";
-import logger from "@/hooks/useLogger";
 
 interface CreateProjectTitleFormProps {
   close: () => void;
@@ -24,7 +18,7 @@ interface FormData {
 const CreateProjectTitleForm: React.FC<CreateProjectTitleFormProps> = (
   props
 ) => {
-  const { close } = props;
+  const {} = props;
   const { t } = useTranslation();
   const createProject = useCreateProject();
 
@@ -69,17 +63,15 @@ const CreateProjectTitleForm: React.FC<CreateProjectTitleFormProps> = (
               {t("Projects.components.TitleForm.error")}
             </Text>
           ) : null}
-          <OwnerGate>
-            <PermissionGate element="ProjectButtonEditName">
-              <Button
-                onClick={handleSubmit(onSubmit)}
-                variant="primary"
-                title={t("Projects.components.TitleForm.button.create")}
-                size="sm"
-                width="fit"
-              />
-            </PermissionGate>
-          </OwnerGate>
+          <PermissionGate element="ProjectButtonEditName">
+            <Button
+              onClick={handleSubmit(onSubmit)}
+              variant="primary"
+              title={t("Projects.components.TitleForm.button.create")}
+              size="sm"
+              width="fit"
+            />
+          </PermissionGate>
         </Container>
       </Container>
     </form>

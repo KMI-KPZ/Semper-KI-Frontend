@@ -1,4 +1,3 @@
-import React from "react";
 import { render, fireEvent } from "@test/render";
 import { Search } from "./Search";
 

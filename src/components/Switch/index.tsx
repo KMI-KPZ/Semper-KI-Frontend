@@ -1,6 +1,4 @@
-import { Container } from "@component-library/index";
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 interface SwitchProps {
   leftChildren: React.ReactNode;
@@ -11,7 +9,6 @@ interface SwitchProps {
 
 const Switch: React.FC<SwitchProps> = (props) => {
   const { leftChildren, onClick, rightChildren, value } = props;
-  const { t } = useTranslation();
 
   const handleOnClickSwitch = () => {
     onClick();

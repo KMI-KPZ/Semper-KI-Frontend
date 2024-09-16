@@ -1,6 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import useUser, { UserType } from "@/hooks/useUser";
 
 export interface Permission {
@@ -9,12 +9,11 @@ export interface Permission {
 }
 
 const useGetPermissions = () => {
-  const queryClient = useQueryClient();
   const { user } = useUser();
 
   const getPermissions = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/getPermissions/`)
+      .get(`${process.env.VITE_HTTP_API_URL}/public/auth/permissions/get/`)
       .then((response) => {
         const responseData = response.data;
         const permissions: Permission[] = responseData;

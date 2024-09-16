@@ -1,13 +1,10 @@
 import { Heading, Text } from "@component-library/index";
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 interface PrivacyProps {}
 
 const Privacy: React.FC<PrivacyProps> = (props) => {
   const {} = props;
-  const { t } = useTranslation();
-
   return (
     <article
       data-testid="privacy"

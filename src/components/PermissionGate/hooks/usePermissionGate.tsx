@@ -1,5 +1,4 @@
 import { PermissionGateType } from "@/api/Permissions/Querys/useGetPermissionGates";
-import logger from "@/hooks/useLogger";
 import usePermissions from "@/hooks/usePermissions";
 import useUser, { UserType } from "@/hooks/useUser";
 interface ReturnProps {

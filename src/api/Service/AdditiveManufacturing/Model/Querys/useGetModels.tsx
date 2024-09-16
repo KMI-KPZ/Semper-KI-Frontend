@@ -1,31 +1,33 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
-import { FilterItemProps } from "@/pages/Service/Manufacturing/Filter/Filter";
+import { useQuery } from "@tanstack/react-query";
+import { objectToArray } from "@/services/utils";
 
-const useGetModels = (filters: FilterItemProps[]) => {
-  const queryClient = useQueryClient();
+export interface RepositoryModel {
+  name: string;
+  license: string;
+  preview: string;
+  file: string;
+}
+
+const useGetModels = () => {
   const getModels = async () =>
     authorizedCustomAxios
-      .post(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/get/`,
-        {
-          filters,
-        }
+      .get(
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/repository/get/`
       )
       .then((response) => {
-        const models: ModelProps[] = response.data.models;
+        const models: RepositoryModel[] = objectToArray(
+          response.data.repository
+        );
 
-        logger("useGetModels | getModels ✅ |", response);
+        logger("useGetModels | getModels ✅ |", models);
         return models;
       });
 
-  return useQuery<ModelProps[], Error>({
+  return useQuery<RepositoryModel[], Error>({
     queryKey: ["models"],
     queryFn: getModels,
-    enabled: false,
-    initialData: [],
   });
 };
 

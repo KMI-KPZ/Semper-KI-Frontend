@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MaterialProps } from "../Querys/useGetMaterials";
 
 interface SetMaterialProps {
-  material: MaterialProps;
+  materials: MaterialProps[];
   processID: string;
   projectID: string;
 }
@@ -27,7 +27,7 @@ const useSetMaterial = () => {
 
   return useMutation<string, Error, SetMaterialProps>({
     mutationFn: setMaterial,
-    onSuccess: (data, props, context) => {
+    onSuccess: (_, props) => {
       queryClient.invalidateQueries([
         "project",
         props.projectID,

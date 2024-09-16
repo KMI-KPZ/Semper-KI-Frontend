@@ -14,7 +14,7 @@ import {
   ManufactoringProcessProps,
   isProcessAtServiceStatus,
 } from "@/api/Process/Querys/useGetProcess";
-import { ModelProps } from "@/pages/Service/Manufacturing/Model/types";
+import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
 import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 
 interface ProcessServiceManufacturingProps {

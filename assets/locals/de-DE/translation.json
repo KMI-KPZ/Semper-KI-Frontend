@@ -477,6 +477,13 @@
       "button": {
         "login": "Zur Anmeldung"
       }
+    },
+    "ResourcesOutlet": {
+      "notSelected": "Der Service Herstellen ist im Organiationsprofil nicht ausgewählt",
+      "subText": "Bitte wählen Sie den Service Herstellen in den Organisationseinstellungen aus, um fortzufahren",
+      "button": {
+        "toOrgaProfile": "Zu den Organisationseinstellungen"
+      }
     }
   },
   "Admin": {

@@ -3,13 +3,19 @@ import { useTranslation } from "react-i18next";
 import ServiceDetailsCard from "../../components/Card";
 import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
 import TestImg from "@images/Test2.png";
-import { Button, Container, Text } from "@component-library/index";
+import {
+  Button,
+  Container,
+  LoadingAnimation,
+  Text,
+} from "@component-library/index";
 import { useNavigate } from "react-router-dom";
 import useDeleteModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useDeleteModel";
 import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessStatusGate from "@/pages/Process/components/StatusGate";
+import useGetCheckModel from "@/api/Process/Querys/useGetCheckModel";
 
 interface ProcessServiceModelCardProps {
   model: ModelProps;
@@ -24,6 +30,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
   const { project } = useProject();
   const navigate = useNavigate();
   const deleteModel = useDeleteModel();
+  const checkModel = useGetCheckModel(model.id);
 
   const handleOnButtonClickModel = () => {
     navigate("service/manufacturing/model");
@@ -36,83 +43,107 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
     });
   };
 
-  return (
-    <ServiceDetailsCard>
-      <img
-        src={TestImg}
-        className="max-h-40 w-full object-contain md:w-fit"
-        alt={t(
-          "Process.Service.ServiceDetails.components.manufacturing.model.img"
-        )}
-      />
-      <Container direction="col" width="full" className="" gap={3}>
-        <Container direction="row" justify="between" width="full">
-          <Text>
-            {t(
-              "Process.Service.ServiceDetails.components.manufacturing.model.name"
-            )}
-          </Text>
-          <Text>{model.fileName}</Text>
+  const roundNumberWithDecimals = (number: number, decimals: number) => {
+    return Math.round(number * Math.pow(10, decimals)) / Math.pow(10, decimals);
+  };
+
+  if (checkModel.isLoading) return <LoadingAnimation />;
+  if (checkModel.data !== undefined)
+    return (
+      <ServiceDetailsCard>
+        <img
+          src={TestImg}
+          className="max-h-40 w-full object-contain md:w-fit"
+          alt={t(
+            "Process.Service.ServiceDetails.components.manufacturing.model.img"
+          )}
+        />
+        <Container direction="col" width="full" className="" gap={3}>
+          <Container direction="row" justify="between" width="full">
+            <Text>
+              {t(
+                "Process.Service.ServiceDetails.components.manufacturing.model.name"
+              )}
+            </Text>
+            <Text>{model.fileName}</Text>
+          </Container>
+          <Container direction="row" justify="between" width="full">
+            <Text>
+              {t(
+                "Process.Service.ServiceDetails.components.manufacturing.model.dimensions"
+              )}
+            </Text>
+            <Text>{`${roundNumberWithDecimals(
+              checkModel.data.measurements.mbbDimensions._1,
+              2
+            )} x ${roundNumberWithDecimals(
+              checkModel.data.measurements.mbbDimensions._2,
+              2
+            )} x ${roundNumberWithDecimals(
+              checkModel.data.measurements.mbbDimensions._3,
+              2
+            )} mm`}</Text>
+          </Container>
+          <Container direction="row" justify="between" width="full">
+            <Text>
+              {t(
+                "Process.Service.ServiceDetails.components.manufacturing.model.surface"
+              )}
+            </Text>
+            <Text>
+              {`${roundNumberWithDecimals(
+                checkModel.data.measurements.surfaceArea,
+                2
+              )} mm²`}
+            </Text>
+          </Container>
+          <Container direction="row" justify="between" width="full">
+            <Text>
+              {t(
+                "Process.Service.ServiceDetails.components.manufacturing.model.volume"
+              )}
+            </Text>
+            <Text>{`${roundNumberWithDecimals(
+              checkModel.data.measurements.volume,
+              2
+            )} mm³`}</Text>
+          </Container>
         </Container>
-        <Container direction="row" justify="between" width="full">
-          <Text>
-            {t(
-              "Process.Service.ServiceDetails.components.manufacturing.model.dimensions"
-            )}
-          </Text>
-          <Text>--x--x-- mm</Text>
+        <Container
+          direction="col"
+          justify="center"
+          width="fit"
+          gap={3}
+          className="flex-row p-5 md:flex-col"
+        >
+          <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+            <Button
+              title={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.editModel"
+              )}
+              size="sm"
+              variant="secondary"
+              onClick={handleOnButtonClickModel}
+              children={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.edit"
+              )}
+            />
+            <Button
+              title={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.deleteModel"
+              )}
+              size="sm"
+              variant="text"
+              onClick={() => handleOnButtonClickDeleteModel(model.id)}
+              children={t(
+                "Process.Service.ServiceDetails.components.manufacturing.button.delete"
+              )}
+            />
+          </ProcessStatusGate>
         </Container>
-        <Container direction="row" justify="between" width="full">
-          <Text>
-            {t(
-              "Process.Service.ServiceDetails.components.manufacturing.model.surface"
-            )}
-          </Text>
-          <Text>-- mm²</Text>
-        </Container>
-        <Container direction="row" justify="between" width="full">
-          <Text>
-            {t(
-              "Process.Service.ServiceDetails.components.manufacturing.model.volume"
-            )}
-          </Text>
-          <Text>-- mm³</Text>
-        </Container>
-      </Container>
-      <Container
-        direction="col"
-        justify="center"
-        width="fit"
-        gap={3}
-        className="flex-row p-5 md:flex-col"
-      >
-        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
-          <Button
-            title={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.editModel"
-            )}
-            size="sm"
-            variant="secondary"
-            onClick={handleOnButtonClickModel}
-            children={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.edit"
-            )}
-          />
-          <Button
-            title={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.deleteModel"
-            )}
-            size="sm"
-            variant="text"
-            onClick={() => handleOnButtonClickDeleteModel(model.id)}
-            children={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.delete"
-            )}
-          />
-        </ProcessStatusGate>
-      </Container>
-    </ServiceDetailsCard>
-  );
+      </ServiceDetailsCard>
+    );
+  return "";
 };
 
 export default ProcessServiceModelCard;

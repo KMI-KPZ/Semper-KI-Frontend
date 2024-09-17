@@ -43,9 +43,17 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
         <ProcessVerifyCard status={getVerifyStatus()} type="DRAFT" />
         <ProcessVerifyCard status={getVerifyStatus()} type="CAPACITY" />
         <ProcessVerifyCard
-          status={VerifyStatus.FAILED}
+          status={
+            getVerifyStatus() === VerifyStatus.COMPLETED
+              ? VerifyStatus.FAILED
+              : getVerifyStatus()
+          }
           type="STABILITY"
-          errorMsg="Die Scheiße hat nicht funktioniert Junge!!!"
+          errorMsg={
+            getVerifyStatus() === VerifyStatus.COMPLETED
+              ? "Stützkonstruktion nicht ausreichend"
+              : undefined
+          }
         />
       </Container>
     </ProcessContainer>

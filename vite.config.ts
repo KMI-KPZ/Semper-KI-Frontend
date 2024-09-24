@@ -11,6 +11,9 @@ export default defineConfig({
     port: 3000,
     // host: '127.0.0.1',
     host: '0.0.0.0',
+    headers: {
+      'Content-Security-Policy': "frame-ancestors 'self' http://127.0.0.1:3000 http://127.0.0.1:38080",
+    },
   },
   build:{
     outDir: 'build',

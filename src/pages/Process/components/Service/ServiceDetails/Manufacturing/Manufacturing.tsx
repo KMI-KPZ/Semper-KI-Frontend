@@ -15,6 +15,8 @@ import ProcessServiceMaterialCard from "./components/MaterialCard";
 import ProcessSericePostProcessingCard from "./components/PostProcessingCard";
 import ProcessStatusGate from "../../../StatusGate";
 import {useTopics}  from "@/contexts/ChatbotContextProvider";
+import useSetMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useSetMaterial";
+import {useProject} from "@/hooks/Project/useProject";
 
 
 interface ServiceManufacturingDetailsProps {
@@ -53,9 +55,22 @@ const ServiceManufacturingDetails: React.FC<
   const materials: MaterialProps[] = process.serviceDetails.materials
     ? process.serviceDetails.materials
     : [];
+  const setMaterial = useSetMaterial();
+  const { project } = useProject();
 
   const materialsQuery = useGetMaterials()
   const {topics, maintopic, response: string, choices, userChoice, setTopics, setUserChoice, closeChatbot} = useTopics();
+
+  const saveMaterial = (selectedMaterial : MaterialProps) => {
+    setMaterial.mutate(
+        {
+          projectID: project.projectID,
+          processID: process.processID,
+          materials: [selectedMaterial],
+        },
+    );
+  };
+
 
   useEffect(() => {
     if(process || materialsQuery.data){
@@ -79,8 +94,8 @@ const ServiceManufacturingDetails: React.FC<
             // loop over materialProps and add them to detailedHelp with key help_material_[Index]
             materialProps.forEach((materialProp, index) => {
               addToDetailedHelp.set("material_" + index, materialProp.props);
-              topics.set("material_" + index, "Material \""+ materialProp.title + "\" Eigenschaften" +  materialProp.props);
-              materialChoices[index] = "material_" + index;
+              topics.set("material_" + (index +1 ), "Material \""+ materialProp.title + "\" Eigenschaften" +  materialProp.props);
+              materialChoices[index + 1] = "material_" + (index + 1);
             });
         }
       }
@@ -95,8 +110,15 @@ const ServiceManufacturingDetails: React.FC<
             ["choose-postprocessing", "Nachbearbeitungsschritte festlegen"]]),
           currentToDo, "",materialChoices,addToDetailedHelp
          );
+
+      if(userChoice){
+        alert("User choice: " + userChoice);
+        const material = materialsQuery.data && materialsQuery.data[(parseInt(userChoice) - 1)] ? materialsQuery.data[(parseInt(userChoice) - 1)] : [];
+        saveMaterial(material);
+        setUserChoice(null);
+      }
     }
-  }, [process, materialsQuery.data]);
+  }, [process, materialsQuery.data, userChoice]);
 
 
 

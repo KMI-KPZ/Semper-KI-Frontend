@@ -119,7 +119,7 @@ const TopicsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   const setUserChoice = (choice: string|null) => {
     if (choice === null || choices.hasOwnProperty(choice)) {
-      debugger
+
       setUserChoiceState(choice);
       // setCloseChatbot(true);
     } else {

@@ -464,6 +464,11 @@
     "UserSwitch": {
       "client": "Einzelnutzer",
       "organization": "Organisation"
+    },
+    "Chatbot": {
+      "button": {
+        "open": "Assistent"
+      }
     }
   },
   "contexts": {

@@ -20,30 +20,34 @@ export const useEventsWebsocket =
 
     useEffect(() => {
       const createWebSocket = () => {
-        const ws = new WebSocket(
-          `${process.env.VITE_WS_API_URL}/ws/generalWebsocket/`
-        );
+        // try {
+        //   const ws = new WebSocket(
+        //       `${process.env.VITE_WS_API_URL}/ws/generalWebsocket/`
+        //   );
+        //   ws.onopen = () => {
+        //     setState("connected");
+        //     logger("useEventsWebsocket | connected");
+        //   };
+        //
+        //   ws.onerror = () => {
+        //     setState("error");
+        //     logger("useEventsWebsocket | error");
+        //     // Attempt to reconnect after a delay
+        //     scheduleReconnect();
+        //   };
+        //
+        //   ws.onclose = () => {
+        //     setState("disconnected");
+        //     logger("useEventsWebsocket | disconnected");
+        //     // Attempt to reconnect after a delay
+        //     scheduleReconnect();
+        //   };
+        //
+        //   setSocket(ws);
+        // }catch (error) {
+        //   return;
+        // }
 
-        ws.onopen = () => {
-          setState("connected");
-          logger("useEventsWebsocket | connected");
-        };
-
-        ws.onerror = () => {
-          setState("error");
-          logger("useEventsWebsocket | error");
-          // Attempt to reconnect after a delay
-          scheduleReconnect();
-        };
-
-        ws.onclose = () => {
-          setState("disconnected");
-          logger("useEventsWebsocket | disconnected");
-          // Attempt to reconnect after a delay
-          scheduleReconnect();
-        };
-
-        setSocket(ws);
       };
 
       const scheduleReconnect = () => {

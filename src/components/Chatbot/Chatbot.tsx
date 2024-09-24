@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { MessageSharp } from "@mui/icons-material";
 import { useTopics } from "@/contexts/ChatbotContextProvider";
 import { Button } from "@component-library/index";
+import { useTranslation } from "react-i18next";
+import ThreePIcon from "@mui/icons-material/ThreeP";
 
 declare global {
   interface Window {
@@ -274,16 +276,18 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
     }
   };
 
+  const { t } = useTranslation();
+
   return (
-    <div className="fixed bottom-4 right-4 z-50 bg-white">
-      <Button
-        width="fit"
-        title={"CHATBOT"}
-        variant="text"
-        onClick={handleOnClickButton}
-        startIcon={<MessageSharp fontSize="large" />}
-      />
-    </div>
+    <Button
+      className="fixed bottom-20 right-4 z-auto bg-white"
+      width="fit"
+      title={t("components.Chatbot.button.open")}
+      variant="secondary"
+      size="sm"
+      onClick={handleOnClickButton}
+      startIcon={<ThreePIcon />}
+    />
   );
   // <script src="https://chat.semper-ki.org/kbot-widget/bots/preview/Uf50Hf6LKvI3iE88WxT7Hysp8n50N0BU0ih9AsnlLvQ=/widget.js"></script>
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Button, Divider } from "@component-library/index";
@@ -8,7 +8,6 @@ import { Heading, Text } from "@component-library/index";
 import { useForm } from "react-hook-form";
 import { Container } from "@component-library/index";
 import ProjectContractorSelectionItem from "./components/ContractorItem";
-import logger from "@/hooks/useLogger";
 import AddressForm from "@/components/Form/AddressForm";
 import { Modal } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
@@ -27,6 +26,74 @@ export interface ContractorSelectionFormData {
   }[];
 }
 
+type ContractorSelectionReducerActionType =
+  | "SET_DELIVER_ADDRESS"
+  | "SET_BILLING_ADDRESS"
+  | "SET_ADDRESSES_EQUAL"
+  | "SET_EDIT";
+
+interface ActionTemplate<T extends ContractorSelectionReducerActionType, P> {
+  type: T;
+  payload: P;
+}
+
+type SetDeliverAddressAction = ActionTemplate<
+  "SET_DELIVER_ADDRESS",
+  { address: UserAddressProps }
+>;
+type SetBillingAddressAction = ActionTemplate<
+  "SET_BILLING_ADDRESS",
+  { address: UserAddressProps }
+>;
+type SetAddressesEqualAction = ActionTemplate<
+  "SET_ADDRESSES_EQUAL",
+  { addressesEqual: boolean }
+>;
+type SetEditAction = ActionTemplate<"SET_EDIT", { edit: boolean }>;
+
+type ContractorSelectionAction =
+  | SetDeliverAddressAction
+  | SetBillingAddressAction
+  | SetAddressesEqualAction
+  | SetEditAction;
+
+interface ContractorSelectionState {
+  deliverAddress: UserAddressProps | undefined;
+  billingAddress: UserAddressProps | undefined;
+  addressesEqual: boolean;
+  edit: boolean;
+}
+
+const stateReducer = (
+  state: ContractorSelectionState,
+  action: ContractorSelectionAction
+): ContractorSelectionState => {
+  switch (action.type) {
+    case "SET_DELIVER_ADDRESS":
+      return {
+        ...state,
+        deliverAddress: action.payload.address,
+      };
+    case "SET_BILLING_ADDRESS":
+      return {
+        ...state,
+        billingAddress: action.payload.address,
+      };
+    case "SET_ADDRESSES_EQUAL":
+      return {
+        ...state,
+        addressesEqual: action.payload.addressesEqual,
+      };
+    case "SET_EDIT":
+      return {
+        ...state,
+        edit: action.payload.edit,
+      };
+    default:
+      return state;
+  }
+};
+
 const ProjectContractorSelection: React.FC<Props> = (props) => {
   const {} = props;
   const navigate = useNavigate();
@@ -35,18 +102,21 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   const { user } = useAuthorizedUser();
   const updateProcess = useUpdateProcess();
 
-  const [edit, setEdit] = useState(false);
-  const [deliverAddress, setDeliverAddress] = useState(
-    user.details.addresses === undefined
-      ? undefined
-      : user.details.addresses.find((address) => address.standard === true)
-  );
-  const [billingAddress, setBillingAddress] = useState(
-    user.details.addresses === undefined
-      ? undefined
-      : user.details.addresses.find((address) => address.standard === true)
-  );
-  const [addressesEqual, setAddressesEqual] = useState(true);
+  const initialState: ContractorSelectionState = {
+    deliverAddress:
+      user.details.addresses === undefined
+        ? undefined
+        : user.details.addresses.find((address) => address.standard === true),
+    billingAddress:
+      user.details.addresses === undefined
+        ? undefined
+        : user.details.addresses.find((address) => address.standard === true),
+    addressesEqual: true,
+    edit: false,
+  };
+
+  const [{ addressesEqual, billingAddress, deliverAddress, edit }, dispatch] =
+    useReducer(stateReducer, initialState);
 
   const {
     register,
@@ -80,19 +150,32 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
   };
 
   const handleOnClickCardDeliverAddress = (address: UserAddressProps) => {
-    logger("Delivery", address);
-    setDeliverAddress(address);
+    dispatch({
+      type: "SET_DELIVER_ADDRESS",
+      payload: {
+        address: address,
+      },
+    });
   };
 
   const handleOnClickCardBillingAddress = (address: UserAddressProps) => {
-    logger("Billing", address);
-    setBillingAddress(address);
+    dispatch({
+      type: "SET_BILLING_ADDRESS",
+      payload: {
+        address: address,
+      },
+    });
   };
 
   const handleOnChangeAddressEqual = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setAddressesEqual(event.target.checked);
+    dispatch({
+      type: "SET_ADDRESSES_EQUAL",
+      payload: {
+        addressesEqual: event.target.checked,
+      },
+    });
   };
 
   return (
@@ -137,7 +220,12 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
             <Container direction="auto">
               <Button
                 onClick={() => {
-                  setEdit(true);
+                  dispatch({
+                    type: "SET_EDIT",
+                    payload: {
+                      edit: true,
+                    },
+                  });
                 }}
                 size="sm"
                 variant="secondary"
@@ -181,7 +269,12 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
               <Container direction="auto">
                 <Button
                   onClick={() => {
-                    setEdit(true);
+                    dispatch({
+                      type: "SET_EDIT",
+                      payload: {
+                        edit: true,
+                      },
+                    });
                   }}
                   size="sm"
                   variant="secondary"
@@ -249,12 +342,22 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
         modalKey="ProjectInfo"
         open={edit}
         closeModal={() => {
-          setEdit(false);
+          dispatch({
+            type: "SET_EDIT",
+            payload: {
+              edit: false,
+            },
+          });
         }}
       >
         <AddressForm
           closeModal={() => {
-            setEdit(false);
+            dispatch({
+              type: "SET_EDIT",
+              payload: {
+                edit: false,
+              },
+            });
           }}
         />
       </Modal>

@@ -8,7 +8,8 @@ interface ReturnProps {
 
 const useProcess = (): ReturnProps => {
   const { process } = useContext(ProcessContext);
-
+  console.log("useProcess: ");
+  console.log(process)
   return {
     process,
   };

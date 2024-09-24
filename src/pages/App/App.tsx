@@ -25,7 +25,6 @@ import Admin from "../Admin/Admin";
 import AdminUser from "../Admin/User/User";
 import AdminOrganization from "../Admin/Organization/Organization";
 import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
-import ToTopButton from "@component-library/ToTopButton/ToTopButton";
 import ServiceEdit from "../Process/components/Service/ServiceEdit/ServiceEdit";
 import ManufacturingProcessOutlet from "@/outlets/ManufacturingProcessOutlet";
 import ServiceModeling from "../Process/components/Service/ServiceEdit/Modelling/Modelling";
@@ -69,8 +68,6 @@ export const AppContext = createContext<AppContext>({
 
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(initialAppState);
-
-  //test
 
   return (
     <AppContext.Provider
@@ -321,7 +318,7 @@ const App: React.FC = () => {
         </main>
         <CkBanner />
         <Menu />
-        <ToTopButton />
+        {/* <ToTopButton /> */}
         <Footer />
       </div>
       <Chatbot />

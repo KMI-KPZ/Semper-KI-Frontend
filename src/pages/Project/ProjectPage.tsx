@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import ProjectInfo from "./components/Info";
 import useGetProject from "@/api/Project/Querys/useGetProject";
 import ProjectProcesses from "./components/Processes";
+import { useTopics } from "@/contexts/ChatbotContextProvider";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 interface ProjectPageProps {}
@@ -17,7 +18,22 @@ const ProjectPage: React.FC<ProjectPageProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const project = useGetProject();
+  const { setTopics } = useTopics();
 
+  setTopics(
+    new Map<string, string>([
+      ["projektdetails", "Detailübersicht zum aktuell ausgewählten Projekt"],
+    ]),
+    "Projektdetails",
+    "",
+    [],
+    new Map<string, string>([
+      [
+        "projektdetails",
+        "Detailübersicht zum aktuell ausgewählten Projekt wo die einzelnen Vorgänge (Prozesse) des Projekts aufgelistet sind.",
+      ],
+    ])
+  );
   if (project.data === undefined) return <LoadingAnimation />;
 
   return (

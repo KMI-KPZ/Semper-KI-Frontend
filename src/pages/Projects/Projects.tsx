@@ -1,6 +1,6 @@
 import { Button, Divider, Modal, Search } from "@component-library/index";
 import { Heading } from "@component-library/index";
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { LoadingSuspense } from "@component-library/index";
 import useUser, { UserType } from "@/hooks/useUser";
@@ -13,6 +13,8 @@ import useGetFlatProjects, {
 import ProjectsTable from "./components/Table";
 import AddIcon from "@mui/icons-material/Add";
 import CreateProjectTitleForm from "./components/TitleForm";
+import { useTopics } from "@/contexts/ChatbotContextProvider";
+
 interface ProjectsProps {}
 
 const Projects: React.FC<ProjectsProps> = (props) => {
@@ -50,6 +52,36 @@ const Projects: React.FC<ProjectsProps> = (props) => {
           (project) => user.organization !== project.client
         )
       : [];
+
+  const { userChoice, setTopics, setUserChoice } = useTopics();
+
+  useEffect(() => {
+    console.log("running project page");
+    const initialAccumulator: { [key: string]: string } = {
+      "0": "Neues Projekt erstellen",
+    };
+
+    setTopics(
+      new Map<string, string>([
+        [
+          "Projektübersicht",
+          "Übersicht der Projekte - Auswahl einzelner Projekte sowie Erstellung neuer Projekte möglich | Ein Projekt beinhaltet die Möglichkeit verschiedene Anfragen in Auftrag zu geben und in Prozessschritten durchzuführen wie z.B. erst das Entwerfen eines 3D Modells welches dann gedruckt werden kann.",
+        ],
+      ]),
+      "Projektübersicht",
+      "",
+      ownProjects.reduce((acc, item, index) => {
+        acc[(index + 1).toString()] =
+          'Projekt "' + item.projectTitle + '" anschauen';
+        return acc;
+      }, initialAccumulator),
+      null
+    );
+    console.log("flat projects: ", ownProjects);
+    if (userChoice) {
+      console.log("userChoice: ", userChoice);
+    }
+  }, [ownProjects, setTopics, userChoice, setUserChoice]);
 
   return (
     <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">

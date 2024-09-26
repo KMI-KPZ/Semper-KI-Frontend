@@ -277,6 +277,13 @@
     "Typography": {}
   },
   "components": {
+    "Pagination": {
+      "next": "Weiter",
+      "previous": "Zurück"
+    },
+    "BackButton": {
+      "back": "Zurück"
+    },
     "Address": {
       "AddressCard": {
         "yes": "Ja",
@@ -566,7 +573,8 @@
       "buttons": {
         "orga": "Organisationen verwalten",
         "user": "Benutzer verwalten",
-        "projects": "Projekte verwalten"
+        "projects": "Projekte verwalten",
+        "resources": "Ressourcen verwalten"
       }
     }
   },

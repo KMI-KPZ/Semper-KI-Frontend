@@ -6,8 +6,8 @@ import { OntoNodeType } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { useForm } from "react-hook-form";
 import { GeneralInput } from "@component-library/Form/GeneralInput";
 import useSubmitRequestInformation from "@/api/Resources/Organization/Mutations/useSubmitRequestInformation";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import logger from "@/hooks/useLogger";
+import BackButtonContainer from "@/components/BackButtonContainer/BackButtonContainer";
 
 interface RequestInformationFormProps {}
 
@@ -59,21 +59,12 @@ const RequestInformationForm: React.FC<RequestInformationFormProps> = (
 
   return (
     <Container width="full" direction="col">
-      <Container width="full" className="relative ">
-        <Button
-          to=".."
-          title={t("Process.ProcessPage.button.back")}
-          variant="text"
-          width="fit"
-          size="sm"
-          className="absolute left-5"
-        >
-          <ArrowBackIosIcon />
-        </Button>
+      <BackButtonContainer>
         <Heading variant="h2">
           {t("Resources.components.RequestInformationForm.header")}
         </Heading>
-      </Container>
+      </BackButtonContainer>
+
       <form className="flex w-full flex-col items-center justify-start gap-5">
         <Divider />
         <select

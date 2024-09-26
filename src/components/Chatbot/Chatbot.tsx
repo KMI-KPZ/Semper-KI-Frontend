@@ -287,8 +287,10 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
         size="sm"
         onClick={handleOnClickButton}
         children={<ThreePIcon />}
+        active={isChatbotEnabled && !botAlreadyLoaded.current}
       />
       <Button
+        active={isChatbotEnabled && !botAlreadyLoaded.current}
         className="hidden rounded-full md:flex"
         width="fit"
         title={t("components.Chatbot.button.open")}

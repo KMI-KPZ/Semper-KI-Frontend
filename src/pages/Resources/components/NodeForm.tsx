@@ -19,7 +19,7 @@ import ResourcesNodeDraft from "./NodeDraft";
 import useCreateOrgaEntitieEdge from "@/api/Resources/Organization/Mutations/useCreateOrgaEntitieEdge";
 import useDeleteOrgaEntitieEdge from "@/api/Resources/Organization/Mutations/useDeleteOrgaEntitieEdge";
 import useSubmitOrgaNode from "@/api/Resources/Organization/Mutations/useSubmitOrgaNode";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import BackButtonContainer from "@/components/BackButtonContainer/BackButtonContainer";
 
 interface ResourcesNodePropsForm {
   type: "edit" | "create" | "variant";
@@ -155,22 +155,12 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
 
   return (
     <Container width="full" direction="col">
-      <Container width="full" className="relative ">
-        <Button
-          to=".."
-          title={t("Process.ProcessPage.button.back")}
-          variant="text"
-          width="fit"
-          size="sm"
-          className="absolute left-5"
-        >
-          <ArrowBackIosIcon />
-        </Button>
+      <BackButtonContainer>
         <Heading variant="h2">
           {t(`types.OntoNodeType.${nodeType}`)}{" "}
           {t(`Resources.components.Edit.heading.${type}`)}
         </Heading>
-      </Container>
+      </BackButtonContainer>
 
       {type === "create" ? (
         <ResourcesNodeDraft

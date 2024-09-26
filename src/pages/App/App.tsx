@@ -44,6 +44,7 @@ import { ManufacturingModels } from "../Process/components/Service/ServiceEdit/M
 import { ManufacturingMaterials } from "../Process/components/Service/ServiceEdit/Manufacturing/Material/Material";
 import { ManufacturingPostProcessings } from "../Process/components/Service/ServiceEdit/Manufacturing/PostProcessing/PostProcessing";
 import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
+import AdminProjects from "../Admin/Projects/Projects";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -299,7 +300,7 @@ const App: React.FC = () => {
                           path="organization"
                           element={<AdminOrganization />}
                         />
-                        {/* <Route path="projects/*" element={<ProjectsRoutes />} /> */}
+                        <Route path="projects/*" element={<AdminProjects />} />
                       </Routes>
                     </ContentBox>
                   }

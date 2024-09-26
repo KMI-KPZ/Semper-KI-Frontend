@@ -1,4 +1,4 @@
-import { Button, Container, Heading } from "@component-library/index";
+import { Container, Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProcessInfo from "./components/Info";
@@ -16,7 +16,7 @@ import ProcessCompleted from "./components/Completed/Completed";
 import ProcessProduction from "./components/Production/Production";
 import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
 import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import BackButtonContainer from "@/components/BackButtonContainer/BackButtonContainer";
 
 interface ProcessPageProps {}
 
@@ -27,18 +27,9 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
 
   return (
     <Container direction="col" width="full">
-      <Container width="full" className="relative rounded-xl bg-white p-2">
-        <Button
-          to=".."
-          title={t("Process.ProcessPage.button.back")}
-          variant="text"
-          width="fit"
-          className="absolute left-5"
-        >
-          <ArrowBackIosIcon />
-        </Button>
+      <BackButtonContainer>
         <Heading variant="h1">{t("Process.ProcessPage.heading")}</Heading>
-      </Container>
+      </BackButtonContainer>
       <ProcessInfo process={process} />
       <Container width="full" align="start">
         <ProcessStatusWizard process={process} />

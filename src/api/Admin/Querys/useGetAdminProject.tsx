@@ -20,7 +20,7 @@ const useGetAdminProject = () => {
           client: responseData.client,
           projectID: responseData.projectID,
           projectStatus: responseData.status,
-          projectDetails: responseData.details,
+          projectDetails: responseData.projectDetails,
           createdWhen: new Date(responseData.createdWhen),
           updatedWhen: new Date(responseData.updatedWhen),
           processes: responseData.processes.map(

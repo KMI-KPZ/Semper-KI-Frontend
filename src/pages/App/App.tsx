@@ -45,6 +45,7 @@ import { ManufacturingMaterials } from "../Process/components/Service/ServiceEdi
 import { ManufacturingPostProcessings } from "../Process/components/Service/ServiceEdit/Manufacturing/PostProcessing/PostProcessing";
 import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 import AdminProjects from "../Admin/Projects/Projects";
+import AdminProject from "../Admin/Projects/Project";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -289,22 +290,45 @@ const App: React.FC = () => {
                 />
               </Route>
               <Route element={<AdminOutlet />}>
-                <Route
-                  path="admin/*"
-                  element={
-                    <ContentBox>
-                      <Routes>
-                        <Route index element={<Admin />} />
-                        <Route path="user" element={<AdminUser />} />
-                        <Route
-                          path="organization"
-                          element={<AdminOrganization />}
-                        />
-                        <Route path="projects/*" element={<AdminProjects />} />
-                      </Routes>
-                    </ContentBox>
-                  }
-                />
+                <Route path="admin/*">
+                  <Route>
+                    <Route
+                      index
+                      element={
+                        <ContentBox>
+                          <Admin />
+                        </ContentBox>
+                      }
+                    />
+                    <Route
+                      path="user"
+                      element={
+                        <ContentBox>
+                          <AdminUser />
+                        </ContentBox>
+                      }
+                    />
+                    <Route
+                      path="organization"
+                      element={
+                        <ContentBox>
+                          <AdminOrganization />
+                        </ContentBox>
+                      }
+                    />
+                    <Route path="projects/*">
+                      <Route
+                        index
+                        element={
+                          <ContentBox>
+                            <AdminProjects />
+                          </ContentBox>
+                        }
+                      />
+                      <Route path=":projectID" element={<AdminProject />} />
+                    </Route>
+                  </Route>
+                </Route>
               </Route>
             </Route>
             <Route

@@ -1,19 +1,22 @@
-import { Container, Heading, LoadingAnimation } from "@component-library/index";
+import { Container, Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProjectInfo from "./components/Info";
-import useGetProject from "@/api/Project/Querys/useGetProject";
 import ProjectProcesses from "./components/Processes";
 import { useTopics } from "@/contexts/ChatbotContextProvider";
 import BackButtonContainer from "@/components/BackButtonContainer/BackButtonContainer";
+import logger from "@/hooks/useLogger";
+import { useProject } from "@/hooks/Project/useProject";
 
 interface ProjectPageProps {}
 
 const ProjectPage: React.FC<ProjectPageProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const project = useGetProject();
+  const { project } = useProject();
   const { setTopics } = useTopics();
+
+  logger("ProjectPage", "render", project);
 
   setTopics(
     new Map<string, string>([
@@ -29,15 +32,14 @@ const ProjectPage: React.FC<ProjectPageProps> = (props) => {
       ],
     ])
   );
-  if (project.data === undefined) return <LoadingAnimation />;
 
   return (
     <Container width="full" direction="col">
       <BackButtonContainer>
         <Heading variant="h1">{t("Project.ProjectPage.header")}</Heading>
       </BackButtonContainer>
-      <ProjectInfo project={project.data} />
-      <ProjectProcesses processes={project.data.processes} />
+      <ProjectInfo project={project} />
+      <ProjectProcesses processes={project.processes} />
     </Container>
   );
 };

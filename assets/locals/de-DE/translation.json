@@ -571,6 +571,7 @@
     "Admin": {
       "title": "Adminbereich",
       "buttons": {
+        "dashboard": "Dashboard",
         "orga": "Organisationen verwalten",
         "user": "Benutzer verwalten",
         "projects": "Projekte verwalten",

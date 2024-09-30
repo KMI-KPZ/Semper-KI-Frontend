@@ -22,8 +22,6 @@ import ProjectPage from "../Project/ProjectPage";
 import ProcessOutlet from "@/outlets/ProcessOutlet";
 import ProcessPage from "../Process/ProcessPage";
 import Admin from "../Admin/Admin";
-import AdminUser from "../Admin/User/User";
-import AdminOrganization from "../Admin/Organization/Organization";
 import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
 import ServiceEdit from "../Process/components/Service/ServiceEdit/ServiceEdit";
 import ManufacturingProcessOutlet from "@/outlets/ManufacturingProcessOutlet";
@@ -44,8 +42,6 @@ import { ManufacturingModels } from "../Process/components/Service/ServiceEdit/M
 import { ManufacturingMaterials } from "../Process/components/Service/ServiceEdit/Manufacturing/Material/Material";
 import { ManufacturingPostProcessings } from "../Process/components/Service/ServiceEdit/Manufacturing/PostProcessing/PostProcessing";
 import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
-import AdminProjects from "../Admin/Projects/Projects";
-import AdminProject from "../Admin/Projects/Project";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -290,45 +286,14 @@ const App: React.FC = () => {
                 />
               </Route>
               <Route element={<AdminOutlet />}>
-                <Route path="admin/*">
-                  <Route>
-                    <Route
-                      index
-                      element={
-                        <ContentBox>
-                          <Admin />
-                        </ContentBox>
-                      }
-                    />
-                    <Route
-                      path="user"
-                      element={
-                        <ContentBox>
-                          <AdminUser />
-                        </ContentBox>
-                      }
-                    />
-                    <Route
-                      path="organization"
-                      element={
-                        <ContentBox>
-                          <AdminOrganization />
-                        </ContentBox>
-                      }
-                    />
-                    <Route path="projects/*">
-                      <Route
-                        index
-                        element={
-                          <ContentBox>
-                            <AdminProjects />
-                          </ContentBox>
-                        }
-                      />
-                      <Route path=":projectID" element={<AdminProject />} />
-                    </Route>
-                  </Route>
-                </Route>
+                <Route
+                  path="admin/*"
+                  element={
+                    <ContentBox>
+                      <Admin />
+                    </ContentBox>
+                  }
+                />
               </Route>
             </Route>
             <Route

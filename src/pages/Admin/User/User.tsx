@@ -1,5 +1,5 @@
 import { AuthorizedUserProps } from "@/hooks/useUser";
-import { Heading, Search, Text } from "@component-library/index";
+import { Container, Heading, Search, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import useAdmin from "../hooks/useAdmin";
@@ -41,7 +41,7 @@ const AdminUser: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-normal gap-5 bg-white p-5">
+    <Container width="full" direction="col">
       <BackButtonContainer>
         <Heading variant="h1">{t("Admin.User.title")}</Heading>
       </BackButtonContainer>
@@ -142,7 +142,7 @@ const AdminUser: React.FC<Props> = (props) => {
         </Table>
       </TableContainer>
       <Pagination handlePageChange={handlePageChange} totalPages={totalPages} />
-    </div>
+    </Container>
   );
 };
 

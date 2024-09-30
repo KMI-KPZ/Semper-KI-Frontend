@@ -56,7 +56,7 @@
   
 
     .table-normal {
-        @apply overflow-clip rounded-xl w-full table-auto border-separate border-spacing-x-0 p-0;
+        @apply  rounded-xl w-full table-auto border-separate border-spacing-x-0 p-0;
 
         & thead th {
             @apply bg-gray-50 ;
@@ -76,7 +76,7 @@
        
     }
     .table-fixed-last-row {
-        @apply overflow-clip rounded-xl w-full table-auto border-separate border-spacing-x-0 p-0;
+        @apply  rounded-xl w-full table-auto border-separate border-spacing-x-0 p-0;
 
         & thead th {
             @apply bg-gray-50  text-center;

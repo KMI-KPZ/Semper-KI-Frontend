@@ -12,13 +12,15 @@ import TableContainer from "@/components/Table/TableContainer";
 import Table from "@/components/Table/Table";
 import usePagination from "@/hooks/usePagination";
 import Pagination from "@/components/Table/Pagination";
+import useAdminDeleteUser from "@/api/Admin/Mutations/useAdminDeleteUser";
 
 interface Props {}
 
 const AdminUser: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { deleteUser, users } = useAdmin();
+  const { users } = useAdmin();
+  const deleteUser = useAdminDeleteUser();
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<AuthorizedUserProps>();
   const {

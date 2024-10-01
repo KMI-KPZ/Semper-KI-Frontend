@@ -6,6 +6,7 @@ import AdminUser from "./User/User";
 import AdminOrganization from "./Organization/Organization";
 import AdminProjects from "./Projects/Projects";
 import AdminProject from "./Projects/Project";
+import AdminResources from "./Resources/Resources";
 // import AdminMenu from "./Menu/Menu";
 
 interface AdminProps {}
@@ -36,6 +37,7 @@ const Admin: React.FC<AdminProps> = (props) => {
           <Route index element={<AdminProjects />} />
           <Route path=":projectID" element={<AdminProject />} />
         </Route>
+        <Route path="resources" element={<AdminResources />} />
       </Routes>
       {/* </Container> */}
     </Container>

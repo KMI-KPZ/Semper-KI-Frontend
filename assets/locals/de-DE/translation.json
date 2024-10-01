@@ -499,6 +499,22 @@
     }
   },
   "Admin": {
+    "Resources": {
+      "title": "Ressourcenverwaltung",
+      "name": "Name",
+      "nodeType": "Knotentyp",
+      "createdBy": "Erstellt von",
+      "createdWhen": "Erstellt am",
+      "nodeID": "Knoten-ID",
+      "properties": "Eigenschaften",
+      "context": "Kontext",
+      "accessedWhen": "Zugegriffen am",
+      "updatedWhen": "Aktualisiert am",
+      "active": "Aktiv",
+      "actions": "Aktionen",
+      "empty": "keine Ressourcen gefunden",
+      "button": { "delete": "Löschen" }
+    },
     "hooks": {
       "useAdmin": {}
     },

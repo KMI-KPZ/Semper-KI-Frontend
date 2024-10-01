@@ -13,13 +13,15 @@ import TableContainer from "@/components/Table/TableContainer";
 import Table from "@/components/Table/Table";
 import usePagination from "@/hooks/usePagination";
 import Pagination from "@/components/Table/Pagination";
+import useAdminDeleteOrganization from "@/api/Admin/Mutations/useAdminDeleteOrganization";
 
 interface AdminOrganizationProps {}
 
 const AdminOrganization: React.FC<AdminOrganizationProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { deleteOrganization, organizations } = useAdmin();
+  const { organizations } = useAdmin();
+  const deleteOrganization = useAdminDeleteOrganization();
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<OrganizationProps>();
   const { getSortIcon, handleSort, sortItems } = useSort<OrganizationProps>();
@@ -114,7 +116,7 @@ const AdminOrganization: React.FC<AdminOrganizationProps> = (props) => {
               ))
             ) : (
               <tr>
-                <td rowSpan={6}>
+                <td colSpan={6}>
                   <Text variant="body">{t("Admin.Organization.empty")}</Text>
                 </td>
               </tr>

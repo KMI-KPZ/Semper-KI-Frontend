@@ -138,7 +138,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
                 width="full"
                 wrap="wrap"
                 justify="start"
-                className="gap-0 pl-5"
+                className="gap-0 px-5 md:pl-5"
               >
                 {categoryList.map((category, index, allCategorys) => (
                   <Badge
@@ -152,10 +152,14 @@ const ProcessFilter: React.FC<Props> = (props) => {
                       variant={category.open ? "primary" : "secondary"}
                       onClick={() => handleOnClickMenuOpen(category, index)}
                       className={`rounded-none border-2 border-b-0 border-gray-400 shadow-none
-                        ${index === 0 ? " rounded-tl-xl border-r-0" : ""} 
+                        ${
+                          index === 0
+                            ? "rounded-t-xl md:rounded-tl-xl md:rounded-tr-none md:border-r-0"
+                            : ""
+                        } 
                       ${
                         index === allCategorys.length - 1
-                          ? "rounded-tr-xl  border-l-0"
+                          ? "md:rounded-tr-xl  md:border-l-0 "
                           : ""
                       }`}
                     />

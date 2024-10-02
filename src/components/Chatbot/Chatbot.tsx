@@ -283,7 +283,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <Container width="fit" className="fixed bottom-4 right-4 z-auto">
+    <Container width="fit" className="fixed bottom-4 right-4 z-50">
       <Button
         className="rounded-full p-3 md:hidden"
         width="fit"

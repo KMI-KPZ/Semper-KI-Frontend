@@ -20,7 +20,7 @@ export default {
         },
         'türkis': {
           'button':'#56BDBE',
-          DEFAULT: '#7DBCBC',
+          DEFAULT: '#21FEFE',
           50: '#F6FAFA',
           100: '#E9F4F4',
           200: '#CEE6E6',

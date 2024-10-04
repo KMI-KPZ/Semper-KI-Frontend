@@ -9,6 +9,10 @@ import trilogIQa from "@images/partner/trilogIQa.svg";
 import TUC from "@images/partner/TUC.png";
 import USU from "@images/partner/USU.svg";
 import WHZ from "@images/partner/WHZ.svg";
+import BMWKdeURL from "@images/BMWK_de.png";
+import BMWKenURL from "@images/BMWE_en.png";
+import KMILogo from "@images/partner/KMI_Logo.svg";
+import { useTranslation } from "react-i18next";
 
 interface HomeImgCarouselProps {}
 
@@ -20,22 +24,28 @@ interface HomeImgItemProps {
 
 const HomeImgCarousel: React.FC<HomeImgCarouselProps> = (props) => {
   const {} = props;
+  const { i18n } = useTranslation();
 
   const partners: HomeImgItemProps[] = [
-    // {
-    //   img: i18n.language === "de" ? BMWKdeURL : BMWKenURL,
-    //   href: "https://www.bmwk.de/",
-    //   title: "BMWK",
-    // },
     {
-      img: DATEV,
-      href: "https://www.datev.de/",
-      title: "DATEV",
+      img: i18n.language === "de-DE" ? BMWKdeURL : BMWKenURL,
+      href: "https://www.bmwk.de/",
+      title: "BMWK",
+    },
+    {
+      img: KMILogo,
+      href: "https://kmi-leipzig.de/",
+      title: "KMI",
     },
     {
       img: InfAi,
       href: "https://infai.org/",
       title: "InfAi",
+    },
+    {
+      img: DATEV,
+      href: "https://www.datev.de/",
+      title: "DATEV",
     },
     {
       img: IWU,

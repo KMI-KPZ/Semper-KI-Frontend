@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Container, Heading, Text } from "@component-library/index";
 import HomeHeader from "./Header";
 import YouTube from "react-youtube";
+import ContactSupportIcon from "@mui/icons-material/ContactSupport";
+import HomeButton from "./Button";
 
 interface HomeTutorialProps {}
 
@@ -103,6 +105,17 @@ const HomeTutorial: React.FC<HomeTutorialProps> = (props) => {
             </Text>
           </Container>
         ))}
+      </Container>
+      <Container
+        width="full"
+        justify="center"
+        className=" lg:pr-30 justify-center md:justify-end md:pr-20"
+        direction="row"
+      >
+        <HomeButton
+          text={t("Home.Anonym.Anonym.Tutorial.button")}
+          icon={<ContactSupportIcon />}
+        />
       </Container>
     </Container>
   );

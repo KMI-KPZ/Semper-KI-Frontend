@@ -1,21 +1,32 @@
 import { useState, useEffect } from "react";
 
+export enum TWBreakpoint {
+  default = 0,
+  xs = 475,
+  sm = 640,
+  md = 768,
+  lg = 1024,
+  xl = 1280,
+}
+
 export const useBreakpoint = () => {
-  const getBreakpoint = () => {
-    if (window.matchMedia("(min-width: 1280px)").matches) {
-      return "xl";
-    } else if (window.matchMedia("(min-width: 1024px)").matches) {
-      return "lg";
-    } else if (window.matchMedia("(min-width: 768px)").matches) {
-      return "md";
-    } else if (window.matchMedia("(min-width: 640px)").matches) {
-      return "sm";
+  const getBreakpoint = (): TWBreakpoint => {
+    if (window.matchMedia(`(min-width: ${TWBreakpoint.xl}px)`).matches) {
+      return TWBreakpoint.xl;
+    } else if (window.matchMedia(`(min-width: ${TWBreakpoint.lg}px)`).matches) {
+      return TWBreakpoint.lg;
+    } else if (window.matchMedia(`(min-width: ${TWBreakpoint.md}px)`).matches) {
+      return TWBreakpoint.md;
+    } else if (window.matchMedia(`(min-width: ${TWBreakpoint.sm}px)`).matches) {
+      return TWBreakpoint.sm;
+    } else if (window.matchMedia(`(min-width: ${TWBreakpoint.xs}px)`).matches) {
+      return TWBreakpoint.xs;
     } else {
-      return "default";
+      return TWBreakpoint.default;
     }
   };
 
-  const [breakpoint, setBreakpoint] = useState(getBreakpoint);
+  const [breakpoint, setBreakpoint] = useState<TWBreakpoint>(getBreakpoint);
 
   useEffect(() => {
     const handleResize = () => {

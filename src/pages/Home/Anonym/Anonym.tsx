@@ -1,13 +1,13 @@
 import { Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import HomeContainer from "../components/Container";
 import HomeIntroduction from "./components/Introduction";
 import HomeServices from "./components/Services";
 import HomePrototypeAlert from "./components/PrototypeAlert";
 import HomeBackground from "./components/Background";
 import HomeTutorial from "./components/Tutorial";
 import HomeTeam from "./components/Team";
+import AnonymHomeContainer from "../components/AnonymContainer";
 
 interface HomeProps {}
 
@@ -21,7 +21,7 @@ const Home: React.FC<HomeProps> = (props) => {
       data-testid="home-anonym"
     >
       <HomeBackground />
-      <HomeContainer>
+      <AnonymHomeContainer>
         <HomePrototypeAlert />
         <Heading
           variant="h1"
@@ -32,10 +32,10 @@ const Home: React.FC<HomeProps> = (props) => {
         <HomeIntroduction />
         <HomeServices />
         <HomeTutorial />
-      </HomeContainer>
-      <HomeContainer className="bg-white">
+      </AnonymHomeContainer>
+      <AnonymHomeContainer className="bg-white">
         <HomeTeam />
-      </HomeContainer>
+      </AnonymHomeContainer>
     </div>
   );
 };

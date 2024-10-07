@@ -103,6 +103,7 @@ const HomeServices: React.FC<HomeServicesProps> = (props) => {
         <HomeButton
           text={t("Home.Anonym.Anonym.buttons.testModel")}
           icon={<UploadIcon />}
+          to="/projects"
         />
       </Container>
     </Container>

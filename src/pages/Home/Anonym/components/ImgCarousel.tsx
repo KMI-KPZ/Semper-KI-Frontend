@@ -112,21 +112,21 @@ const HomeImgCarousel: React.FC<HomeImgCarouselProps> = (props) => {
 
   return (
     <div
-      className="flex w-full flex-grow basis-2/3 items-center justify-start overflow-x-hidden scroll-smooth"
+      className=" flex w-full flex-grow basis-2/3 items-center justify-start overflow-x-hidden scroll-smooth"
       ref={carouselRef}
     >
-      <div className="flex h-fit w-fit flex-row items-center justify-center gap-5 py-5">
+      <div className=" flex h-fit w-fit flex-row items-center justify-center gap-5 py-5">
         {partners.map((partner, index) => (
           <a
             key={index}
             href={partner.href}
             title={partner.title}
             target="_blank"
-            className="flex w-60 items-center justify-center"
+            className="group flex h-60 w-60 items-center justify-center rounded-lg border-2 p-5"
           >
             <img
               alt={partner.title}
-              className="w-60 duration-300 hover:scale-105"
+              className="w-60 duration-300 group-hover:scale-105"
               src={partner.img}
             />
           </a>

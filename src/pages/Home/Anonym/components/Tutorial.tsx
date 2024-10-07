@@ -115,6 +115,7 @@ const HomeTutorial: React.FC<HomeTutorialProps> = (props) => {
         <HomeButton
           text={t("Home.Anonym.Anonym.Tutorial.button")}
           icon={<ContactSupportIcon />}
+          to="/projects"
         />
       </Container>
     </Container>

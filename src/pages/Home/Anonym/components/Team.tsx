@@ -8,7 +8,7 @@ interface HomeTeamProps {}
 
 const HomeTeam: React.FC<HomeTeamProps> = (props) => {
   const {} = props;
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Container width="full" className="" align="start" direction="col">

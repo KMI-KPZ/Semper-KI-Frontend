@@ -62,12 +62,13 @@ const HomeIntroduction: React.FC<HomeIntroductionProps> = (props) => {
       <Container
         width="full"
         justify="center"
-        className=" lg:pr-30 justify-center md:justify-end md:pr-20"
+        className="lg:pr-30 justify-center md:justify-end md:pr-20"
         direction="row"
       >
         <HomeButton
           text={t("Home.Anonym.Anonym.buttons.testModel")}
           icon={<UploadIcon />}
+          to="/projects"
         />
       </Container>
     </Container>

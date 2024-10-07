@@ -5,7 +5,7 @@ interface HomeContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-const HomeContainer: React.FC<PropsWithChildren<HomeContainerProps>> = (
+const AnonymHomeContainer: React.FC<PropsWithChildren<HomeContainerProps>> = (
   props
 ) => {
   const { children, className, ...restProps } = props;
@@ -13,7 +13,7 @@ const HomeContainer: React.FC<PropsWithChildren<HomeContainerProps>> = (
     <div
       {...restProps}
       className={twMerge(
-        "relative z-10 flex w-full flex-col items-center justify-normal gap-20 p-10  text-white ",
+        "relative z-10 flex w-full flex-col items-center justify-normal gap-20 p-10  text-white md:p-20  lg:p-40",
         className
       )}
     >
@@ -22,4 +22,4 @@ const HomeContainer: React.FC<PropsWithChildren<HomeContainerProps>> = (
   );
 };
 
-export default HomeContainer;
+export default AnonymHomeContainer;

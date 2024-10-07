@@ -1,16 +1,29 @@
 import React from "react";
 import { Container, Text } from "@component-library/index";
+import { useNavigate } from "react-router-dom";
 
 interface HomeButtonProps {
   text: string;
   icon: React.ReactNode;
+  to?: string;
+  onClick?: () => void;
 }
 
 const HomeButton: React.FC<HomeButtonProps> = (props) => {
-  const { icon, text } = props;
+  const { icon, text, onClick, to } = props;
+  const navigate = useNavigate();
+
+  const handleOnClick = () => {
+    if (to) {
+      navigate(to);
+    } else if (onClick) {
+      onClick();
+    }
+  };
 
   return (
     <a
+      onClick={handleOnClick}
       className="group flex w-fit flex-row items-center justify-center whitespace-nowrap rounded-md border-2 border-white bg-ultramarinblau-dark text-white  hover:cursor-pointer"
       tabIndex={0}
     >

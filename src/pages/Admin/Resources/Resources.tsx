@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Button,
@@ -14,9 +14,16 @@ import Table from "@/components/Table/Table";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import usePagination from "@/hooks/usePagination";
-import { OntoNode } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import {
+  OntoNode,
+  OntoNodeType,
+  adminNodeTypes,
+} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import Pagination from "@/components/Table/Pagination";
 import useAdmin from "../hooks/useAdmin";
+import useGetAdminNodes from "@/api/Resources/Admin/Querys/useGetAdminNodes";
+import { useNavigate } from "react-router-dom";
+import useDeleteAdminNode from "@/api/Resources/Admin/Mutations/useDeleteAdminNode";
 
 interface AdminResourcesProps {}
 
@@ -24,21 +31,45 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const {} = useAdmin();
+  const navigate = useNavigate();
+
+  const [nodeType, setNodeType] = useState<OntoNodeType>("printer");
+
+  const adminNodes = useGetAdminNodes(nodeType);
+  const deleteAdminNode = useDeleteAdminNode();
 
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<OntoNode>();
   const { getSortIcon, handleSort, sortItems } = useSort<OntoNode>();
   const { handlePageChange, paginatedItems, totalPages } =
     usePagination<OntoNode>({
-      items: [].filter((orga) => filterDataBySearchInput(orga)).sort(sortItems),
+      items:
+        adminNodes.data !== undefined
+          ? adminNodes.data
+              .filter((orga) => filterDataBySearchInput(orga))
+              .sort(sortItems)
+          : [],
     });
 
   const handleOnClickButtonDelete = (hashedID: string, name: string) => {
-    console.log("Delete", hashedID, name);
+    if (window.confirm(t("Admin.Resources.confirmDelete", { name: name }))) {
+      deleteAdminNode.mutate({ nodeID: hashedID });
+    }
+  };
+
+  const handleOnClickButtonEdit = (hashedID: string) => {
+    navigate(`${hashedID}/edit`);
+  };
+  const handleOnClickButtonDetails = (hashedID: string) => {
+    navigate(`${hashedID}`);
   };
 
   const handleOnChangeActive = (hashedID: string) => {
     console.log("Active", hashedID);
+  };
+
+  const handleOnClickNodeType = (nodeType: OntoNodeType) => {
+    setNodeType(nodeType);
   };
 
   return (
@@ -46,6 +77,18 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
       <BackButtonContainer>
         <Heading variant="h1">{t("Admin.Resources.title")}</Heading>
       </BackButtonContainer>
+      <Container width="full">
+        {adminNodeTypes.map((_nodeType, index) => (
+          <Button
+            key={index}
+            title={t(`types.OntoNodeType.${_nodeType}`)}
+            size="sm"
+            variant={_nodeType === nodeType ? "primary" : "secondary"}
+            onClick={() => handleOnClickNodeType(_nodeType)}
+          />
+        ))}
+      </Container>
+
       <Search handleSearchInputChange={handleSearchInputChange} />
       <TableContainer>
         <Table type="fixed_last_row">
@@ -116,12 +159,17 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
             </tr>
           </thead>
           <tbody>
-            {paginatedItems.length > 0 ? (
+            {adminNodes.isLoading ? (
+              <tr>
+                <td colSpan={11}>
+                  <Text variant="body">{t("Admin.Resources.loading")}</Text>
+                </td>
+              </tr>
+            ) : paginatedItems.length > 0 ? (
               paginatedItems.map((node: OntoNode, index: number) => (
                 <tr key={index}>
-                  <td>{node.name}</td>
+                  <td className="whitespace-nowrap">{node.name}</td>
                   <td className="whitespace-nowrap">{node.nodeType}</td>
-                  <td className="whitespace-nowrap">{node.createdBy}</td>
                   <td className="whitespace-nowrap">
                     <input
                       type="checkbox"
@@ -129,12 +177,22 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
                       onChange={() => handleOnChangeActive(node.nodeID)}
                     />
                   </td>
+                  <td className="whitespace-nowrap">{node.createdBy}</td>
                   <td className="whitespace-nowrap">
                     {new Date(node.createdWhen).toLocaleString()}
                   </td>
                   <td className="whitespace-nowrap">{node.nodeID}</td>
-                  <td className="whitespace-nowrap">
-                    {node.properties.join(", ")}
+                  <td className="">
+                    <Container
+                      direction="col"
+                      width="fit"
+                      align="start"
+                      className="p-3"
+                    >
+                      {node.properties.map((prop) => (
+                        <Text className="whitespace-nowrap">{`${prop.name}: ${prop.value}`}</Text>
+                      ))}
+                    </Container>
                   </td>
                   <td className="whitespace-nowrap">{node.context}</td>
                   <td className="whitespace-nowrap">
@@ -145,6 +203,16 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
                   </td>
                   <td>
                     <div className="flex w-full flex-row items-center justify-center gap-3 p-2">
+                      <Button
+                        title={t("Admin.Resources.button.details")}
+                        onClick={() => handleOnClickButtonDetails(node.nodeID)}
+                        variant="text"
+                      />
+                      <Button
+                        title={t("Admin.Resources.button.edit")}
+                        onClick={() => handleOnClickButtonEdit(node.nodeID)}
+                        variant="text"
+                      />
                       <Button
                         title={t("Admin.Resources.button.delete")}
                         onClick={() =>

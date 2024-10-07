@@ -6,7 +6,7 @@ import {
   OntoNodeNew,
   OntoNodeProperty,
   OntoNodeType,
-  allOntoNodeTypes,
+  clientNodeTypes,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { useFieldArray, useForm } from "react-hook-form";
 import { GeneralInput } from "@component-library/Form/GeneralInput";
@@ -194,7 +194,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
           nodeProperties={nodeProperties}
         />
 
-        {allOntoNodeTypes
+        {clientNodeTypes
           .filter((_nodeType) => _nodeType !== nodeType)
           .map((edgeType, index) => (
             <ResourcesEdgeForm

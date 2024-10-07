@@ -10,10 +10,17 @@ export type OntoNodeType =
   | "additionalRequirement"
   | "color";
 
-export const allOntoNodeTypes: OntoNodeType[] = [
+export const clientNodeTypes: OntoNodeType[] = [
   "printer",
   "material",
   "additionalRequirement",
+];
+export const adminNodeTypes: OntoNodeType[] = [
+  "organization",
+  "printer",
+  "material",
+  "additionalRequirement",
+  "color",
 ];
 export const parseOntoNodesToEdges = (
   nodes: OntoNode[]

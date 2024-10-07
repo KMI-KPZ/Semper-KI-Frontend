@@ -17,14 +17,14 @@ import {
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetAllOrgaNodeNeighbors";
 
-interface ResourcesNodeViewProps {
+interface AdminResourcesNodeViewProps {
   nodeID?: string;
   closeModal?: () => void;
 }
 
-const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
-  props
-) => {
+const AdminResourcesNodeView: React.FC<
+  PropsWithChildren<AdminResourcesNodeViewProps>
+> = (props) => {
   const { nodeID, closeModal, children } = props;
   const { t } = useTranslation();
   const node = useGetOrgaNode(nodeID);
@@ -185,4 +185,4 @@ const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
   );
 };
 
-export default ResourcesNodeView;
+export default AdminResourcesNodeView;

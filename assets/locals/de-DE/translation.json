@@ -518,7 +518,8 @@
       "button": {
         "delete": "Löschen",
         "edit": "Bearbeiten",
-        "details": "Details"
+        "details": "Details",
+        "add": "Hinzufügen"
       }
     },
     "hooks": {

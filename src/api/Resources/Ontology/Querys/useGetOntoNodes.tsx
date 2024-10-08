@@ -16,8 +16,8 @@ export const clientNodeTypes: OntoNodeType[] = [
   "additionalRequirement",
 ];
 export const adminNodeTypes: OntoNodeType[] = [
-  "organization",
   "printer",
+  "organization",
   "material",
   "additionalRequirement",
   "color",

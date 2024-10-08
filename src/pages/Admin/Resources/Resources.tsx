@@ -88,8 +88,10 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
           />
         ))}
       </Container>
-
       <Search handleSearchInputChange={handleSearchInputChange} />
+      <Container width="full" justify="end">
+        <Button title={t("Admin.Resources.button.add")} size="sm" />
+      </Container>
       <TableContainer>
         <Table type="fixed_last_row">
           <thead>
@@ -100,17 +102,19 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
                 title={t("Admin.Resources.name")}
                 objectKey="name"
               />
-              <TableHeaderButton
-                handleSort={handleSort}
-                getSortIcon={getSortIcon}
-                title={t("Admin.Resources.nodeType")}
-                objectKey="nodeType"
-              />
+
               <TableHeaderButton
                 handleSort={handleSort}
                 getSortIcon={getSortIcon}
                 title={t("Admin.Resources.active")}
                 objectKey="active"
+              />
+
+              <TableHeaderButton
+                handleSort={handleSort}
+                getSortIcon={getSortIcon}
+                title={t("Admin.Resources.context")}
+                objectKey="context"
               />
               <TableHeaderButton
                 handleSort={handleSort}
@@ -118,11 +122,12 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
                 title={t("Admin.Resources.createdBy")}
                 objectKey="createdBy"
               />
+
               <TableHeaderButton
                 handleSort={handleSort}
                 getSortIcon={getSortIcon}
-                title={t("Admin.Resources.createdWhen")}
-                objectKey="createdWhen"
+                title={t("Admin.Resources.properties")}
+                objectKey="properties"
               />
               <TableHeaderButton
                 handleSort={handleSort}
@@ -133,14 +138,14 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
               <TableHeaderButton
                 handleSort={handleSort}
                 getSortIcon={getSortIcon}
-                title={t("Admin.Resources.properties")}
-                objectKey="properties"
+                title={t("Admin.Resources.nodeType")}
+                objectKey="nodeType"
               />
               <TableHeaderButton
                 handleSort={handleSort}
                 getSortIcon={getSortIcon}
-                title={t("Admin.Resources.context")}
-                objectKey="context"
+                title={t("Admin.Resources.createdWhen")}
+                objectKey="createdWhen"
               />
               <TableHeaderButton
                 handleSort={handleSort}
@@ -169,7 +174,7 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
               paginatedItems.map((node: OntoNode, index: number) => (
                 <tr key={index}>
                   <td className="whitespace-nowrap">{node.name}</td>
-                  <td className="whitespace-nowrap">{node.nodeType}</td>
+
                   <td className="whitespace-nowrap">
                     <input
                       type="checkbox"
@@ -177,11 +182,9 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
                       onChange={() => handleOnChangeActive(node.nodeID)}
                     />
                   </td>
+                  <td className="whitespace-nowrap">{node.context}</td>
                   <td className="whitespace-nowrap">{node.createdBy}</td>
-                  <td className="whitespace-nowrap">
-                    {new Date(node.createdWhen).toLocaleString()}
-                  </td>
-                  <td className="whitespace-nowrap">{node.nodeID}</td>
+
                   <td className="">
                     <Container
                       direction="col"
@@ -189,20 +192,28 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
                       align="start"
                       className="p-3"
                     >
-                      {node.properties.map((prop) => (
-                        <Text className="whitespace-nowrap">{`${prop.name}: ${prop.value}`}</Text>
+                      {node.properties.map((prop, index) => (
+                        <Text
+                          key={index}
+                          className="whitespace-nowrap"
+                        >{`${prop.name}: ${prop.value}`}</Text>
                       ))}
                     </Container>
                   </td>
-                  <td className="whitespace-nowrap">{node.context}</td>
+                  <td className="whitespace-nowrap">{node.nodeID}</td>
+                  <td className="whitespace-nowrap">{node.nodeType}</td>
+                  <td className="whitespace-nowrap">
+                    {new Date(node.createdWhen).toLocaleString()}
+                  </td>
                   <td className="whitespace-nowrap">
                     {new Date(node.accessedWhen).toLocaleString()}
                   </td>
                   <td className="whitespace-nowrap">
                     {new Date(node.updatedWhen).toLocaleString()}
                   </td>
+
                   <td>
-                    <div className="flex w-full flex-row items-center justify-center gap-3 p-2">
+                    <Container direction="col">
                       <Button
                         title={t("Admin.Resources.button.details")}
                         onClick={() => handleOnClickButtonDetails(node.nodeID)}
@@ -220,7 +231,7 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
                         }
                         variant="text"
                       />
-                    </div>
+                    </Container>
                   </td>
                 </tr>
               ))

@@ -7,7 +7,7 @@ const useGetAPIToken = () => {
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/auth/api-key/get/`)
       .then((response) => {
-        const data: string = response.data;
+        const data: string = response.data.token;
 
         logger("useGetAPIToken | getAPIToken ✅ |", response);
         return data;

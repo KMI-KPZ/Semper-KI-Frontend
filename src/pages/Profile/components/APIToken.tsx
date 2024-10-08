@@ -67,21 +67,8 @@ const ProfileAPIToken: React.FC<ProfileAPITokenProps> = (props) => {
         </Container>
       ) : (
         <Container width="full">
-          <input
-            readOnly
-            onClick={handleOnClickInput}
-            type="text"
-            value={shortApiToken.data}
-            className="w-full flex-grow select-all rounded-xl border-2 px-5 py-2"
-          />
+          <Text className="rounded-lg border-2 p-2">{shortApiToken.data}</Text>
           <Container direction="row" width="fit">
-            <Button
-              size="sm"
-              variant="secondary"
-              children={<ContentPasteIcon />}
-              onClick={() => handleOnClickButtonCopy(shortApiToken.data)}
-              title={t("Profile.APIToken.button.copy")}
-            />
             <Button
               size="sm"
               variant="secondary"
@@ -120,8 +107,8 @@ const ProfileAPIToken: React.FC<ProfileAPITokenProps> = (props) => {
                 readOnly
                 onClick={handleOnClickInput}
                 type="text"
-                value={shortApiToken.data}
-                className="w-full flex-grow select-all rounded-xl border-2 px-5 py-2"
+                value={createApiToken.data}
+                className="w-[430px] select-all rounded-xl border-2 px-5 py-2 text-center"
               />
               <Button
                 size="sm"

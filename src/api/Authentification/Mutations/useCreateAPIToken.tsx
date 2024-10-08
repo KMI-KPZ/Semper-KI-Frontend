@@ -9,7 +9,7 @@ const useCreateAPIToken = () => {
       .post(`${process.env.VITE_HTTP_API_URL}/public/auth/api-key/create/`)
       .then((response) => {
         logger("useCreateAPIToken | createAPIToken ✅ |", response);
-        return response.data;
+        return response.data.token;
       })
       .catch((error) => {
         logger("useCreateAPIToken | createAPIToken ❌ |", error);

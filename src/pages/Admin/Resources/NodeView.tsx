@@ -7,7 +7,6 @@ import {
   Modal,
   Text,
 } from "@component-library/index";
-import useGetOrgaNode from "@/api/Resources/Organization/Querys/useGetOrgaNode";
 import { useNavigate } from "react-router-dom";
 import useOrganization from "@/hooks/useOrganization";
 import {
@@ -16,6 +15,7 @@ import {
   isOntoNodePropertyName,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetAllOrgaNodeNeighbors";
+import useGetAdminNode from "@/api/Resources/Admin/Querys/useGetAdminNode";
 
 interface AdminResourcesNodeViewProps {
   nodeID?: string;
@@ -27,7 +27,7 @@ const AdminResourcesNodeView: React.FC<
 > = (props) => {
   const { nodeID, closeModal, children } = props;
   const { t } = useTranslation();
-  const node = useGetOrgaNode(nodeID);
+  const node = useGetAdminNode(nodeID);
   const navigate = useNavigate();
   const { organization } = useOrganization();
   const allOrgaNodeNeighbors = useGetAllOrgaNodeNeighbors(

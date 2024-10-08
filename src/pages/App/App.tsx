@@ -4,7 +4,7 @@ import Login from "../Login/Login";
 import Logout from "../Logout/Logout";
 import Organization from "../Organization/Organization";
 import Portfolio from "../Portfolio/Portfolio";
-import Resouces from "../Resources/Resources";
+import Resources from "../Resources/Resources";
 import Legal from "../Legal/Legal";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import CkBanner from "@/components/CookieBanner/CkBanner";
@@ -282,7 +282,7 @@ const App: React.FC = () => {
                     <PermissionGate
                       children={
                         <ContentBox>
-                          <Resouces />
+                          <Resources />
                         </ContentBox>
                       }
                       element="Resources"

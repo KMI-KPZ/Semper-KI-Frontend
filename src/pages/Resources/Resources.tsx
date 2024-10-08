@@ -15,9 +15,9 @@ import RequestInformationForm from "./RequestInformation/RequestInformationForm"
 import RequestInformation from "./RequestInformation/RequestInformation";
 import ResourcesOutlet from "@/outlets/ResourcesOutlet";
 
-interface ResoucesProps {}
+interface ResourcesProps {}
 
-const Resouces: React.FC<ResoucesProps> = (props) => {
+const Resources: React.FC<ResourcesProps> = (props) => {
   const {} = props;
 
   return (
@@ -149,4 +149,4 @@ const Resouces: React.FC<ResoucesProps> = (props) => {
   );
 };
 
-export default Resouces;
+export default Resources;

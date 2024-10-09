@@ -47,9 +47,11 @@ const ProjectsTableRow: React.FC<ProjectsTableRowProps> = (props) => {
           variant="text"
           size="sm"
           width="full"
+
           onClick={() => handleOnClickButtonDelete(flatProject.projectID)}
         />
         <a
+            data-project-id={flatProject.projectID}
           onClick={() => navigate(`${flatProject.projectID}`)}
           className="hover group relative flex h-10  w-full transform flex-row
       items-center  overflow-clip bg-blau-button

@@ -143,7 +143,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
       console.log("topics for chatbot: " + formatTopicsToJSON(topics));
       const bot = window.ChatbotIframe;
       if (bot !== undefined && botAlreadyOpenend.current) {
-        alert("Chatbot is already open");
+        // alert("Chatbot is already open");
         // bot.eventsBus.emit('openChatbot', {query: '__[++ {topics: "' + topics.join(",") + '", maintopic: {"' + maintopic+ '"}}, currentChoices: '+ JSON.stringify(choices)+ ']__'});
 
         bot.eventsBus.emit(

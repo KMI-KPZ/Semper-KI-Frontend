@@ -16,6 +16,8 @@ import ModalContextProvider from "./contexts/ModalContextProvider";
 import CSRFOutlet from "./outlets/CSRFOutlet";
 import UserLocalsOutlet from "./outlets/UserLocalsOutlet";
 import {TopicsProvider} from "@/contexts/ChatbotContextProvider";
+import {DevSupport} from "@react-buddy/ide-toolbox";
+import {ComponentPreviews, useInitial} from "@/dev";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
@@ -49,7 +51,11 @@ root.render(
                                         <EventContextProvider>
                                             <BodyScrollContextProvider>
                                                 <ModalContextProvider>
-                                                    <App/>
+                                                    <DevSupport ComponentPreviews={ComponentPreviews}
+                                                                useInitialHook={useInitial}
+                                                    >
+                                                        <App/>
+                                                    </DevSupport>
                                                     <ReactQueryDevtools/>
                                                 </ModalContextProvider>
                                             </BodyScrollContextProvider>

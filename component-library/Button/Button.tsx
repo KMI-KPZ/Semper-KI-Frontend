@@ -20,6 +20,7 @@ interface ButtonProps {
   testid?: string;
   target?: "_blank" | "_self" | "_parent" | "_top";
   stopPropagation?: boolean;
+  dataButtonId?: string;
 }
 type ButtonSize = "xs" | "sm" | "md" | "lg";
 type ButtonVariant =
@@ -50,6 +51,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     to,
     endIcon,
     startIcon,
+    dataButtonId = "",
   } = props;
   const navigate = useNavigate();
 
@@ -185,6 +187,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       data-testid={testid}
       target={target}
       tabIndex={active ? 0 : -1}
+      data-button-id={dataButtonId === undefined ? undefined : dataButtonId}
     >
       {loading === true ? (
         <div className="animate-spin">

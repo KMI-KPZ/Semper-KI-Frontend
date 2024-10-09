@@ -58,7 +58,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
   useEffect(() => {
     console.log("running project page");
     const initialAccumulator: { [key: string]: string } = {
-      "0": "Neues Projekt erstellen",
+      "1": "Neues Projekt erstellen",
     };
 
     setTopics(
@@ -79,7 +79,14 @@ const Projects: React.FC<ProjectsProps> = (props) => {
     );
     console.log("flat projects: ", ownProjects);
     if (userChoice) {
+      // get project-id from ownProjects[userChoice - 1]
+        const projectID = ownProjects[userChoice - 1].projectID;
+        // get <a> from DOM having data-project-id=projectID
+        const projectLink = document.querySelector(`a[data-project-id="${projectID}"]`);
+        // click on the projectLink
       console.log("userChoice: ", userChoice);
+      setUserChoice(null);
+        projectLink?.click();
     }
   }, [ownProjects, setTopics, userChoice, setUserChoice]);
 

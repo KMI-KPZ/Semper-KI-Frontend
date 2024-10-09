@@ -93,6 +93,7 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
             onClick={handleOnClickButtonContinue}
             size="sm"
             variant="primary"
+            dataButtonId={process.processID}
             title={t("Project.components.FlatProcessCard.button.continue")}
           />
           <Button

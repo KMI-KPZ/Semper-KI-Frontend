@@ -146,7 +146,7 @@ const ServiceManufacturingDetails: React.FC<
       );
 
       if (userChoice) {
-        alert("User choice: " + userChoice);
+        // alert("User choice: " + userChoice);
         const material: MaterialProps | undefined =
           materialsQuery.data !== undefined &&
           materialsQuery.data[parseInt(userChoice) - 1] !== undefined

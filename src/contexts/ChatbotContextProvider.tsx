@@ -86,7 +86,7 @@ const TopicsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [topics, setTopicsState] = useState<Map<string, string>>(
     new Map([["semper-ki", "Plattform für additive Fertigung"]])
   );
-  const [maintopic, setMaintopicState] = useState<string>("Semper-KI");
+  const [maintopic, setMaintopicState] = useState<string>("semper-ki");
   const [response, setResponseStructureState] = useState<string>("{}");
   const [choices, setChoices] = useState<object>({});
   const [userChoice, setUserChoiceState] = useState<string | null>(null);

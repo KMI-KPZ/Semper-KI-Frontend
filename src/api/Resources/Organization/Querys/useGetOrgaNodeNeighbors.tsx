@@ -9,7 +9,7 @@ import {
 
 interface useGetOrgaNodeNeighborsProps {
   nodeID: string;
-  nodeType: OntoNodeType;
+  nodeType?: OntoNodeType;
 }
 
 const useGetOrgaNodeNeighbors = ({
@@ -32,7 +32,7 @@ const useGetOrgaNodeNeighbors = ({
   return useQuery<OntoNode[], Error>({
     queryKey: ["resources", "orga", "nodes", nodeID, nodeType],
     queryFn: getOrgaNodeNeighbors,
-    enabled: nodeID !== "",
+    enabled: nodeID !== "" && nodeID !== undefined,
   });
 };
 

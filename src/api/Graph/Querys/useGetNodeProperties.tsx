@@ -6,7 +6,7 @@ import {
   OntoNodeType,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 
-const useGetNodeProperties = (nodeType: OntoNodeType) => {
+const useGetNodeProperties = (nodeType?: OntoNodeType) => {
   const getNodeProperties = async () =>
     authorizedCustomAxios
       .get(
@@ -22,6 +22,7 @@ const useGetNodeProperties = (nodeType: OntoNodeType) => {
   return useQuery<OntoNodeProperty[], Error>({
     queryKey: ["node", "properties", nodeType],
     queryFn: getNodeProperties,
+    enabled: nodeType !== undefined,
   });
 };
 

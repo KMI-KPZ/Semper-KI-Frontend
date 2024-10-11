@@ -7,11 +7,8 @@ import AdminOrganization from "./Organization/Organization";
 import AdminProjects from "./Projects/Projects";
 import AdminProject from "./Projects/Project";
 import AdminResources from "./Resources/Resources";
-import RequestInformation from "../Resources/RequestInformation/RequestInformation";
-import RequestInformationForm from "../Resources/RequestInformation/RequestInformationForm";
-import AdminResourcesNode from "./Resources/Node";
-import AdminResourcesNodeView from "./Resources/NodeView";
-// import AdminMenu from "./Menu/Menu";
+import ResourcesNodeForm from "@/components/Resources/NodeForm";
+import ResourcesNodeView from "@/components/Resources/NodeView";
 
 interface AdminProps {}
 
@@ -26,13 +23,6 @@ const Admin: React.FC<AdminProps> = (props) => {
       justify="center"
       className="bg-white p-5"
     >
-      {/* <AdminMenu /> */}
-      {/* <Container
-        width="full"
-        direction="col"
-        className=" grow bg-white p-5"
-        justify="start"
-      > */}
       <Routes>
         <Route index element={<AdminDashboard />} />
         <Route path="user" element={<AdminUser />} />
@@ -43,25 +33,13 @@ const Admin: React.FC<AdminProps> = (props) => {
         </Route>
         <Route path="resources/*">
           <Route index element={<AdminResources />} />
-          <Route path="request">
-            <Route index element={<RequestInformation />} />
-            <Route path="new" element={<RequestInformationForm />} />
-          </Route>
+          <Route path="create" element={<ResourcesNodeForm type="create" />} />
           <Route path=":nodeID">
-            <Route
-              index
-              element={
-                <>
-                  <AdminResources />
-                  <AdminResourcesNodeView />
-                </>
-              }
-            />
-            <Route path="edit" element={<AdminResourcesNode type="edit" />} />
+            <Route index element={<ResourcesNodeView />} />
+            <Route path="edit" element={<ResourcesNodeForm type="edit" />} />
           </Route>
         </Route>
       </Routes>
-      {/* </Container> */}
     </Container>
   );
 };

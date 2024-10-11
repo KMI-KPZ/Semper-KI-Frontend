@@ -1,6 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Heading, Text } from "@component-library/index";
+import {
+  Button,
+  Container,
+  Heading,
+  LoadingAnimation,
+  Text,
+} from "@component-library/index";
 import {
   FieldArrayWithId,
   FieldErrors,
@@ -10,16 +16,18 @@ import {
 import {
   OntoNode,
   OntoNodeNew,
-  OntoNodeProperty,
   OntoNodePropertyName,
   OntoNodePropertyType,
+  OntoNodeType,
   isOntoNodePropertyName,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
-import { ResourcesNodeFormEdges } from "./NodeForm";
 import AddIcon from "@mui/icons-material/Add";
 import { GeneralInput, InputType } from "@component-library/Form/GeneralInput";
 import useSort from "@/hooks/useSort";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { ResourcesNodeFormEdges } from "./NodeForm";
+import useGetNodeProperties from "@/api/Graph/Querys/useGetNodeProperties";
+import { Navigate } from "react-router-dom";
 
 interface ResourcesPropertyFormProps {
   usePropertyArray: UseFieldArrayReturn<
@@ -28,12 +36,14 @@ interface ResourcesPropertyFormProps {
     "id"
   >;
   register: UseFormRegister<(OntoNode | OntoNodeNew) & ResourcesNodeFormEdges>;
-  nodeProperties: OntoNodeProperty[];
   errors?: FieldErrors<(OntoNode | OntoNodeNew) & ResourcesNodeFormEdges>;
+  nodeType: OntoNodeType;
 }
 
 const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
-  const { register, usePropertyArray, nodeProperties, errors } = props;
+  const { register, usePropertyArray, errors, nodeType } = props;
+  const nodeProperties = useGetNodeProperties(nodeType);
+
   const { t } = useTranslation();
   const { fields, append, remove, update } = usePropertyArray;
   const { getSortIcon, handleSort, sortItems } =
@@ -57,7 +67,8 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
     e: React.ChangeEvent<HTMLSelectElement>,
     index: number
   ) => {
-    const propertyList = nodeProperties !== undefined ? nodeProperties : [];
+    const propertyList =
+      nodeProperties.data !== undefined ? nodeProperties.data : [];
 
     const property = propertyList.find((node) => node.name === e.target.value);
     if (property === undefined) return;
@@ -75,7 +86,8 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
   };
 
   const freePropertyNamesAvailable = (): boolean => {
-    const propertyList = nodeProperties !== undefined ? nodeProperties : [];
+    const propertyList =
+      nodeProperties.data !== undefined ? nodeProperties.data : [];
     return fields.length < propertyList.length;
   };
 
@@ -94,6 +106,8 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
     }
   };
 
+  if (nodeProperties.isError) return <Navigate to=".." />;
+  if (nodeProperties.isLoading) return <LoadingAnimation />;
   return (
     <Container width="full" direction="col" className="card">
       <Container width="full">
@@ -177,7 +191,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                                 handleOnChangePropertyType(e, index),
                             })}
                           >
-                            {nodeProperties.map((property) => (
+                            {nodeProperties.data.map((property) => (
                               <option
                                 key={property.name}
                                 value={property.name}

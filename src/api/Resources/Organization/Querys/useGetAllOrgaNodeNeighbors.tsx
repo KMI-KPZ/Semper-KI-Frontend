@@ -3,7 +3,7 @@ import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import { OntoNode, parseOntoNode } from "../../Ontology/Querys/useGetOntoNodes";
 
-const useGetAllOrgaNodeNeighbors = (nodeID: string) => {
+const useGetAllOrgaNodeNeighbors = (nodeID?: string) => {
   const getAllOrgaNodeNeighbors = async () =>
     authorizedCustomAxios
       .get(
@@ -24,7 +24,7 @@ const useGetAllOrgaNodeNeighbors = (nodeID: string) => {
   return useQuery<OntoNode[], Error>({
     queryKey: ["resources", "orga", "nodes", nodeID, "all"],
     queryFn: getAllOrgaNodeNeighbors,
-    enabled: nodeID !== "",
+    enabled: nodeID !== undefined && nodeID !== "",
   });
 };
 

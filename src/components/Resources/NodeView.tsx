@@ -7,32 +7,34 @@ import {
   Modal,
   Text,
 } from "@component-library/index";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useOrganization from "@/hooks/useOrganization";
 import {
   OntoNodePropertyName,
   clientNodeTypes,
   isOntoNodePropertyName,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import useGetOrgaNode from "@/api/Resources/Organization/Querys/useGetOrgaNode";
 import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetAllOrgaNodeNeighbors";
-import useGetAdminNode from "@/api/Resources/Admin/Querys/useGetAdminNode";
 
-interface AdminResourcesNodeViewProps {
+interface ResourcesNodeViewProps {
   nodeID?: string;
   closeModal?: () => void;
 }
 
-const AdminResourcesNodeView: React.FC<
-  PropsWithChildren<AdminResourcesNodeViewProps>
-> = (props) => {
-  const { nodeID, closeModal, children } = props;
+const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
+  props
+) => {
+  const { nodeID: argNodeID, closeModal, children } = props;
+  const { nodeID: paramNodeID } = useParams();
+  const nodeID = paramNodeID !== undefined ? paramNodeID : argNodeID;
+
+  const node = useGetOrgaNode(nodeID);
+  const nodeNeighbors = useGetAllOrgaNodeNeighbors(nodeID);
+
   const { t } = useTranslation();
-  const node = useGetAdminNode(nodeID);
   const navigate = useNavigate();
   const { organization } = useOrganization();
-  const allOrgaNodeNeighbors = useGetAllOrgaNodeNeighbors(
-    node.data?.nodeID ?? ""
-  );
 
   const oncloseModal = () => {
     if (nodeID !== undefined && closeModal !== undefined) closeModal();
@@ -49,18 +51,13 @@ const AdminResourcesNodeView: React.FC<
     <Modal
       className="justify-start"
       modalKey={`nodeView`}
-      open={
-        nodeID === undefined ||
-        (nodeID !== undefined && nodeID !== "" && closeModal !== undefined)
-          ? true
-          : false
-      }
+      open={nodeID !== undefined && nodeID !== ""}
       closeModal={oncloseModal}
     >
-      {node.isLoading ? (
+      {node.isError || nodeNeighbors.isError ? (
+        <Text>Error Loading</Text>
+      ) : node.isLoading || nodeNeighbors.isLoading ? (
         <LoadingAnimation />
-      ) : node.data === undefined ? (
-        <Text>Loading Error</Text>
       ) : (
         <Container width="full" direction="col" justify="start" className="p-5">
           <Heading variant="h1">{node.data.name}</Heading>
@@ -141,29 +138,21 @@ const AdminResourcesNodeView: React.FC<
                 ))
               )}
 
-              {allOrgaNodeNeighbors.isLoading ? (
-                <tr>
-                  <td colSpan={2} className={`border-t-2 p-3`}>
-                    <LoadingAnimation />
-                  </td>
-                </tr>
-              ) : null}
-              {allOrgaNodeNeighbors.data === undefined ||
-              allOrgaNodeNeighbors.data.length === 0
+              {nodeNeighbors.data.length === 0
                 ? null
-                : clientNodeTypes.map((nodeType) =>
-                    allOrgaNodeNeighbors.data.filter(
+                : clientNodeTypes.map((nodeType, index) =>
+                    nodeNeighbors.data.filter(
                       (node) => node.nodeType === nodeType
                     ).length > 0 ? (
                       <>
-                        <tr key={nodeType}>
+                        <tr key={index}>
                           <td colSpan={2} className={`border-t-2 p-3`}>
                             <Heading variant="h2">
                               {t(`types.OntoNodeType.${nodeType}`)}
                             </Heading>
                           </td>
                         </tr>
-                        {allOrgaNodeNeighbors.data
+                        {nodeNeighbors.data
                           .filter((node) => node.nodeType === nodeType)
                           .map((node, index) => (
                             <tr key={index}>
@@ -185,4 +174,4 @@ const AdminResourcesNodeView: React.FC<
   );
 };
 
-export default AdminResourcesNodeView;
+export default ResourcesNodeView;

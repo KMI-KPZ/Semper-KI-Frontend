@@ -1,7 +1,6 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
-import { ResourcesNodeFormEdge } from "@/pages/Resources/components/NodeForm";
 
 export type OntoNodeType =
   | "organization"
@@ -9,6 +8,16 @@ export type OntoNodeType =
   | "material"
   | "additionalRequirement"
   | "color";
+
+export const isOntoNodeType = (type: string): type is OntoNodeType => {
+  return [
+    "organization",
+    "printer",
+    "material",
+    "additionalRequirement",
+    "color",
+  ].includes(type as OntoNodeType);
+};
 
 export const clientNodeTypes: OntoNodeType[] = [
   "printer",
@@ -22,18 +31,6 @@ export const adminNodeTypes: OntoNodeType[] = [
   "additionalRequirement",
   "color",
 ];
-export const parseOntoNodesToEdges = (
-  nodes: OntoNode[]
-): ResourcesNodeFormEdge[] => {
-  return nodes.map(
-    (node): ResourcesNodeFormEdge => ({
-      nodeID: node.nodeID,
-      nodeType: node.nodeType,
-      nodeName: node.name,
-      createdBy: node.createdBy,
-    })
-  );
-};
 
 export interface OntoNodeNew {
   name: string;

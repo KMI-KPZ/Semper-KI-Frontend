@@ -1,33 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Heading } from "@component-library/index";
+import {
+  Button,
+  Container,
+  Heading,
+  LoadingAnimation,
+} from "@component-library/index";
 import {
   OntoNode,
   OntoNodeNew,
-  OntoNodeProperty,
   OntoNodeType,
   clientNodeTypes,
+  isOntoNodeType,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import { useFieldArray, useForm } from "react-hook-form";
 import { GeneralInput } from "@component-library/Form/GeneralInput";
-import { useNavigate } from "react-router-dom";
-import useCreateOrgaNode from "@/api/Resources/Organization/Mutations/useCreateOrgaNode";
-import useUpdateOrgaNode from "@/api/Resources/Organization/Mutations/useUpdateOrgaNode";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import ResourcesEdgeForm from "./EdgeForm";
 import ResourcesPropertyForm from "./PropertyForm";
 import ResourcesNodeDraft from "./NodeDraft";
-import useCreateOrgaEntitieEdge from "@/api/Resources/Organization/Mutations/useCreateOrgaEntitieEdge";
-import useDeleteOrgaEntitieEdge from "@/api/Resources/Organization/Mutations/useDeleteOrgaEntitieEdge";
 import useSubmitOrgaNode from "@/api/Resources/Organization/Mutations/useSubmitOrgaNode";
 import BackButtonContainer from "@/components/BackButtonContainer/BackButtonContainer";
+import useOrganization from "@/hooks/useOrganization";
+import useGetOrgaNode from "@/api/Resources/Organization/Querys/useGetOrgaNode";
+import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetAllOrgaNodeNeighbors";
+import { Organization } from "@/api/Organization/Querys/useGetOrganization";
 
 interface ResourcesNodePropsForm {
-  type: "edit" | "create" | "variant";
-  nodeType: OntoNodeType;
-  node?: OntoNode;
-  nodeProperties: OntoNodeProperty[];
-  edges?: ResourcesNodeFormEdge[];
+  type: ResourcesAction;
 }
+export type ResourcesAction = "create" | "edit";
 
 export interface ResourcesNodeFormEdges {
   edges: ResourcesNodeFormEdge[];
@@ -40,59 +42,67 @@ export interface ResourcesNodeFormEdge {
   createdBy: string;
 }
 
+export const parseOntoNodesToEdges = (
+  nodes: OntoNode[]
+): ResourcesNodeFormEdge[] => {
+  return nodes.map(
+    (node): ResourcesNodeFormEdge => ({
+      nodeID: node.nodeID,
+      nodeType: node.nodeType,
+      nodeName: node.name,
+      createdBy: node.createdBy,
+    })
+  );
+};
+
+const getNodeID = (
+  type: ResourcesAction,
+  paramNodeID: string | undefined,
+  variantNodeID: string
+) => {
+  if (type === "edit") {
+    return paramNodeID;
+  } else if (type === "create") {
+    return variantNodeID;
+  }
+};
+
+const getNodeType = (unsafeNodeType: string | undefined) => {
+  return unsafeNodeType !== undefined && isOntoNodeType(unsafeNodeType)
+    ? unsafeNodeType
+    : undefined;
+};
+
+const getEdges = (
+  organization: Organization,
+  nodes?: OntoNode[]
+): ResourcesNodeFormEdge[] =>
+  parseOntoNodesToEdges(
+    nodes === undefined
+      ? []
+      : nodes.filter((edgeNode) => edgeNode.nodeID !== organization.hashedID)
+  );
+
 const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
-  const { type, nodeType, nodeProperties, node, edges } = props;
+  const { type } = props;
   const { t } = useTranslation();
-  const createOrgaNode = useCreateOrgaNode();
-  const updateOrgaNode = useUpdateOrgaNode();
-  const createOrgaEntitieEdge = useCreateOrgaEntitieEdge();
-  const deleteOrgaEntitieEdge = useDeleteOrgaEntitieEdge();
-  const submitOrgaNodeForm = useSubmitOrgaNode();
-
   const navigate = useNavigate();
+  const submitOrgaNodeForm = useSubmitOrgaNode();
+  const { organization } = useOrganization();
+  const [variantNodeID, setVariantNodeID] = useState<string>("");
 
-  // const schema = yup.object({
-  //   context: yup.string().required(),
-  //   createdBy: yup.string().required(),
-  //   nodeID: yup.string().required(),
-  //   nodeName: yup.string().required(),
-  //   nodeType: yup
-  //     .mixed<OntoNodeType>()
-  //     .oneOf([
-  //       "organization",
-  //       "printer",
-  //       "material",
-  //       "additionalRequirement",
-  //       "color",
-  //     ])
-  //     .required(),
-  //   properties: yup
-  //     .array()
-  //     .of(
-  //       yup.object({
-  //         name: yup.string().required(),
-  //         type: yup
-  //           .mixed<OntoNodePropertyType>()
-  //           .oneOf(["text", "number", "date", "boolean"])
-  //           .required(),
-  //         value: yup.lazy((value, options) => {
-  //           switch (options.parent.type) {
-  //             case "text":
-  //               return yup.string().required();
-  //             case "number":
-  //               return yup.number().required();
-  //             case "date":
-  //               return yup.date().required();
-  //             case "boolean":
-  //               return yup.boolean().required();
-  //             default:
-  //               return yup.mixed().required();
-  //           }
-  //         }),
-  //       })
-  //     )
-  //     .required(),
-  // });
+  const { nodeType: unsafeNodeType, nodeID: paramNodeID } = useParams();
+  const nodeID: string | undefined = getNodeID(
+    type,
+    paramNodeID,
+    variantNodeID
+  );
+  const nodeType: OntoNodeType | undefined = getNodeType(unsafeNodeType);
+
+  const node = useGetOrgaNode(nodeID);
+  const allOrgaNodeNeighbors = useGetAllOrgaNodeNeighbors(nodeID);
+
+  const edges = getEdges(organization, allOrgaNodeNeighbors.data);
 
   const { register, handleSubmit, control, reset, watch } = useForm<
     (OntoNode | OntoNodeNew) & ResourcesNodeFormEdges
@@ -114,14 +124,14 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     data: (OntoNode | OntoNodeNew) & ResourcesNodeFormEdges
   ) => {
     const newEdges: string[] =
-      type === "create" || type === "variant"
+      type === "create"
         ? data.edges.map((edge) => edge.nodeID)
         : data.edges
             .filter((edge) => !edges?.some((e) => e.nodeID === edge.nodeID))
             .map((edge) => edge.nodeID);
 
     const deleteEdges: string[] =
-      edges === undefined || type === "create" || type === "variant"
+      edges === undefined || type === "create"
         ? []
         : edges
             .filter((edge) => !data.edges.some((e) => e.nodeID === edge.nodeID))
@@ -142,16 +152,45 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   };
 
   const nodeAlreadyFilled = watch("name") !== "" && watch("context") !== "";
-  const setFormToDraft = (node: OntoNode) => {
+
+  const setFormToDraft = (nodeID: string) => {
     if (nodeAlreadyFilled) {
       if (window.confirm(t("Resources.components.Edit.confirmDraft"))) {
         reset({ ...node, edges: [] });
+        setVariantNodeID(nodeID);
       } else {
         return;
       }
     }
     reset({ ...node, edges: [] });
+    setVariantNodeID(nodeID);
   };
+
+  useEffect(() => {
+    if (nodeID !== undefined) {
+      reset({
+        ...node.data,
+        edges: getEdges(organization, allOrgaNodeNeighbors.data),
+      });
+    }
+  }, [node.data, allOrgaNodeNeighbors.data]);
+
+  const editIsLoading =
+    type === "edit" && (node.isLoading || allOrgaNodeNeighbors.isLoading);
+  const editIsError =
+    type === "edit" && (node.isError || allOrgaNodeNeighbors.isError);
+  const variantIsLoading =
+    type === "create" &&
+    variantNodeID !== "" &&
+    (node.isLoading || allOrgaNodeNeighbors.isLoading);
+  const variantIsError =
+    type === "create" &&
+    variantNodeID !== "" &&
+    (node.isError || allOrgaNodeNeighbors.isError);
+
+  if (editIsError || variantIsLoading || nodeType === undefined)
+    return <Navigate to=".." />;
+  if (variantIsError || editIsLoading) return <LoadingAnimation />;
 
   return (
     <Container width="full" direction="col">
@@ -191,7 +230,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
         <ResourcesPropertyForm
           register={register}
           usePropertyArray={usePropertyArray}
-          nodeProperties={nodeProperties}
+          nodeType={nodeType}
         />
 
         {clientNodeTypes
@@ -208,12 +247,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
         <Button
           title={t(`Resources.components.Edit.button.${type}`)}
           onClick={handleSubmit(onSubmit)}
-          loading={
-            createOrgaNode.isLoading ||
-            updateOrgaNode.isLoading ||
-            createOrgaEntitieEdge.isLoading ||
-            deleteOrgaEntitieEdge.isLoading
-          }
+          loading={submitOrgaNodeForm.isLoading}
         />
       </form>
     </Container>

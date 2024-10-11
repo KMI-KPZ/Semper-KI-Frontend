@@ -13,7 +13,6 @@ import {
   OntoNodeNew,
   OntoNodeType,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
-import { ResourcesNodeFormEdges } from "./NodeForm";
 import {
   FieldArrayWithId,
   UseFieldArrayReturn,
@@ -24,6 +23,7 @@ import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import Collapsible from "@/components/Collapsible/Collapsible";
+import { ResourcesNodeFormEdges } from "./NodeForm";
 
 interface ResourcesEdgeFormProps {
   nodeType: OntoNodeType;

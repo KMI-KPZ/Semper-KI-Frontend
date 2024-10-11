@@ -17,13 +17,12 @@ import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import Collapsible from "@/components/Collapsible/Collapsible";
 import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
-import { useNavigate } from "react-router-dom";
 import ResourcesNodeView from "./NodeView";
 import useModal from "@/hooks/useModal";
 
 interface ResourcesNodeDraftProps {
   nodeType: OntoNodeType;
-  setFormToDraft(node: OntoNode): void;
+  setFormToDraft(nodeID: string): void;
   nodeAlreadyFilled: boolean;
 }
 
@@ -35,12 +34,11 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<OntoNode>();
   const { getSortIcon, handleSort, sortItems } = useSort<OntoNode>();
-  const navigate = useNavigate();
   const [detailsNodeID, setDetailsNodeID] = React.useState<string>("");
   const { deleteModal } = useModal();
 
-  const handleOnClickButtonDraft = (node: OntoNode) => {
-    setFormToDraft(node);
+  const handleOnClickButtonDraft = (nodeID: string) => {
+    setFormToDraft(nodeID);
   };
 
   const resetNodeID = () => {
@@ -48,11 +46,8 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
   };
 
   const handleOnClickModalButtonDraft = (nodeID: string) => {
-    const node = nodes.data?.find((node) => node.nodeID === nodeID);
-    if (node !== undefined) {
-      setFormToDraft(node);
-    }
-    resetNodeID();
+    setFormToDraft(nodeID);
+    deleteModal("nodeView");
   };
 
   if (nodes.isLoading) return <LoadingAnimation />;
@@ -164,16 +159,8 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                                 "Resources.components.Edit.button.draft"
                               )}
                               onClick={() => {
-                                handleOnClickButtonDraft(node);
+                                handleOnClickButtonDraft(node.nodeID);
                               }}
-                            />
-                            <Button
-                              variant="text"
-                              size="sm"
-                              title={t(
-                                "Resources.components.Edit.button.variant"
-                              )}
-                              to={`../variant/${node.nodeID}`}
                             />
                           </Container>
                         </td>
@@ -219,15 +206,6 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
               title={t("Resources.components.Edit.button.draft")}
               onClick={() => {
                 handleOnClickModalButtonDraft(detailsNodeID);
-              }}
-            />
-            <Button
-              variant="text"
-              size="sm"
-              title={t("Resources.components.Edit.button.variant")}
-              onClick={() => {
-                deleteModal("nodeView");
-                navigate(`../variant/${detailsNodeID}`);
               }}
             />
           </Container>

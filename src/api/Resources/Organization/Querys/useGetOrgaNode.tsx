@@ -2,7 +2,10 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { OntoNode, parseOntoNode } from "../../Ontology/Querys/useGetOntoNodes";
+import {
+  OntoNode,
+  parseOntoNode,
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 
 const useGetOrgaNode = (optionalNodeID?: string) => {
   const { nodeID: paramNodeID } = useParams();

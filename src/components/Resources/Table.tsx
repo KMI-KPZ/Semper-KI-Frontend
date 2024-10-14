@@ -5,7 +5,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import ResourceTable from "../../pages/Resources/components/Table";
 import { Navigate, useParams } from "react-router-dom";
-import { isOntoNodeType } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import { isOntoNodeType } from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import useOrganization from "@/hooks/useOrganization";
 import useGetOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetOrgaNodeNeighbors";
 

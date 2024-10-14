@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Divider, Heading } from "@component-library/index";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { OntoNodeType } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import { OntoNodeType } from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import { useForm } from "react-hook-form";
 import { GeneralInput } from "@component-library/Form/GeneralInput";
 import useSubmitRequestInformation from "@/api/Resources/Organization/Mutations/useSubmitRequestInformation";

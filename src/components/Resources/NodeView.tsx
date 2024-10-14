@@ -13,7 +13,7 @@ import {
   OntoNodePropertyName,
   clientNodeTypes,
   isOntoNodePropertyName,
-} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import useGetOrgaNode from "@/api/Resources/Organization/Querys/useGetOrgaNode";
 import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetAllOrgaNodeNeighbors";
 

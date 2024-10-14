@@ -42,7 +42,6 @@ import { ManufacturingModels } from "../Process/components/Service/ServiceEdit/M
 import { ManufacturingMaterials } from "../Process/components/Service/ServiceEdit/Manufacturing/Material/Material";
 import { ManufacturingPostProcessings } from "../Process/components/Service/ServiceEdit/Manufacturing/PostProcessing/PostProcessing";
 import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
-import useUser, { UserType } from "@/hooks/useUser";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -67,7 +66,6 @@ export const AppContext = createContext<AppContext>({
 
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(initialAppState);
-  const { user } = useUser();
 
   return (
     <AppContext.Provider

@@ -11,7 +11,7 @@ import {
 import {
   OntoNode,
   OntoNodeType,
-} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import useOrganization from "@/hooks/useOrganization";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";

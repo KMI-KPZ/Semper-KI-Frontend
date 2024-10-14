@@ -12,7 +12,7 @@ import {
   OntoNodeType,
   clientNodeTypes,
   isOntoNodeType,
-} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import { useFieldArray, useForm } from "react-hook-form";
 import { GeneralInput } from "@component-library/Form/GeneralInput";
 import { Navigate, useNavigate, useParams } from "react-router-dom";

@@ -4,7 +4,7 @@ import { Button, Container } from "@component-library/index";
 import {
   OntoNodeType,
   adminNodeTypes,
-} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 
 interface AdminResourcesButtonsProps {
   nodeType?: OntoNodeType;

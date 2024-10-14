@@ -12,7 +12,7 @@ import {
   OntoNode,
   OntoNodeNew,
   OntoNodeType,
-} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import {
   FieldArrayWithId,
   UseFieldArrayReturn,

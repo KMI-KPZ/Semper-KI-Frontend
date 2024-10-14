@@ -1,7 +1,10 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { OntoNode, OntoNodeNew } from "../../Ontology/Querys/useGetOntoNodes";
+import {
+  OntoNode,
+  OntoNodeNew,
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 
 interface useSubmitOrgaNodeProps {
   type: "update" | "create";

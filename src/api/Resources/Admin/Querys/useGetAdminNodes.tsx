@@ -5,7 +5,7 @@ import {
   OntoNode,
   OntoNodeType,
   parseOntoNode,
-} from "../../Ontology/Querys/useGetOntoNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 
 const useGetAdminNodes = (nodeType: OntoNodeType) => {
   const getAdminNodes = async () =>

@@ -165,7 +165,9 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                 {nodes.isLoading ? (
                   <tr>
                     <td colSpan={3}>
-                      <LoadingAnimation />
+                      <Container width="full">
+                        <LoadingAnimation />
+                      </Container>
                     </td>
                   </tr>
                 ) : allEdges.length > 0 ? (

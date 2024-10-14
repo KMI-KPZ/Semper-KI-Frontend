@@ -179,15 +179,15 @@ const App: React.FC = () => {
               <Route
                 index
                 element={
-                  user.usertype === UserType.ADMIN ? (
-                    <Navigate to="/admin/projects" />
-                  ) : (
-                    <PermissionGate element="Projects">
-                      <ContentBox>
-                        <Projects />
-                      </ContentBox>
-                    </PermissionGate>
-                  )
+                  // user.usertype === UserType.ADMIN ? (
+                  //   <Navigate to="/admin/projects" />
+                  // ) : (
+                  <PermissionGate element="Projects">
+                    <ContentBox>
+                      <Projects />
+                    </ContentBox>
+                  </PermissionGate>
+                  // )
                 }
               />
               <Route

@@ -9,6 +9,7 @@ import AdminProject from "./Projects/Project";
 import AdminResources from "./Resources/Resources";
 import ResourcesNodeForm from "@/components/Resources/NodeForm";
 import ResourcesNodeView from "@/components/Resources/NodeView";
+import AdminResourcesOverView from "./Resources/OverView";
 
 interface AdminProps {}
 
@@ -31,13 +32,34 @@ const Admin: React.FC<AdminProps> = (props) => {
           <Route index element={<AdminProjects />} />
           <Route path=":projectID" element={<AdminProject />} />
         </Route>
+
         <Route path="resources/*">
-          <Route index element={<AdminResources />} />
+          <Route index element={<AdminResourcesOverView />} />
+          <Route path=":nodeType">
+            <Route index element={<AdminResources />} />
+            <Route
+              path="create"
+              element={<ResourcesNodeForm type="create" />}
+            />
+            <Route path=":nodeID">
+              <Route
+                index
+                element={
+                  <>
+                    <AdminResources />
+                    <ResourcesNodeView />
+                  </>
+                }
+              />
+              <Route path="edit" element={<ResourcesNodeForm type="edit" />} />
+            </Route>
+          </Route>
+          {/* <Route index element={<AdminResources />} />
           <Route path="create" element={<ResourcesNodeForm type="create" />} />
           <Route path=":nodeID">
             <Route index element={<ResourcesNodeView />} />
             <Route path="edit" element={<ResourcesNodeForm type="edit" />} />
-          </Route>
+          </Route> */}
         </Route>
       </Routes>
     </Container>

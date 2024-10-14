@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   Button,
@@ -16,14 +16,14 @@ import useSort from "@/hooks/useSort";
 import usePagination from "@/hooks/usePagination";
 import {
   OntoNode,
-  OntoNodeType,
-  adminNodeTypes,
+  isOntoNodeType,
 } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
 import Pagination from "@/components/Table/Pagination";
 import useAdmin from "../hooks/useAdmin";
 import useGetAdminNodes from "@/api/Resources/Admin/Querys/useGetAdminNodes";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useDeleteAdminNode from "@/api/Resources/Admin/Mutations/useDeleteAdminNode";
+import AdminResourcesButtons from "./Buttons";
 
 interface AdminResourcesProps {}
 
@@ -32,8 +32,11 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
   const { t } = useTranslation();
   const {} = useAdmin();
   const navigate = useNavigate();
-
-  const [nodeType, setNodeType] = useState<OntoNodeType>("printer");
+  const { nodeType: unsafeNodeType } = useParams();
+  const nodeType =
+    unsafeNodeType !== undefined && isOntoNodeType(unsafeNodeType)
+      ? unsafeNodeType
+      : "printer";
 
   const adminNodes = useGetAdminNodes(nodeType);
   const deleteAdminNode = useDeleteAdminNode();
@@ -68,29 +71,15 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
     console.log("Active", hashedID);
   };
 
-  const handleOnClickNodeType = (nodeType: OntoNodeType) => {
-    setNodeType(nodeType);
-  };
-
   return (
     <Container width="full" direction="col">
       <BackButtonContainer>
         <Heading variant="h1">{t("Admin.Resources.title")}</Heading>
       </BackButtonContainer>
-      <Container width="full">
-        {adminNodeTypes.map((_nodeType, index) => (
-          <Button
-            key={index}
-            title={t(`types.OntoNodeType.${_nodeType}`)}
-            size="sm"
-            variant={_nodeType === nodeType ? "primary" : "secondary"}
-            onClick={() => handleOnClickNodeType(_nodeType)}
-          />
-        ))}
-      </Container>
+      <AdminResourcesButtons nodeType={nodeType} />
       <Search handleSearchInputChange={handleSearchInputChange} />
       <Container width="full" justify="end">
-        <Button title={t("Admin.Resources.button.add")} size="sm" />
+        <Button title={t("Admin.Resources.button.add")} size="sm" to="create" />
       </Container>
       <TableContainer>
         <Table type="fixed_last_row">

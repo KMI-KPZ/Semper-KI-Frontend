@@ -500,6 +500,9 @@
   },
   "Admin": {
     "Resources": {
+      "OverView": {
+        "title": "Ressourcenverwaltung"
+      },
       "loading": "Laden...",
       "confirmDelete": "Möchten Sie den Knoten \"{{name}}\" wirklich entfernen?",
       "title": "Ressourcenverwaltung",

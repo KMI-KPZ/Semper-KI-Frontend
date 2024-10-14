@@ -503,6 +503,9 @@
       "OverView": {
         "title": "Ressourcenverwaltung"
       },
+      "Buttons": {
+        "graph": "Graph"
+      },
       "loading": "Laden...",
       "confirmDelete": "Möchten Sie den Knoten \"{{name}}\" wirklich entfernen?",
       "title": "Ressourcenverwaltung",

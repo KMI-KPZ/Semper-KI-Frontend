@@ -144,7 +144,7 @@ const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
                     nodeNeighbors.data.filter(
                       (node) => node.nodeType === nodeType
                     ).length > 0 ? (
-                      <>
+                      <React.Fragment key={`nodeType-${index}`}>
                         <tr key={index}>
                           <td colSpan={2} className={`border-t-2 p-3`}>
                             <Heading variant="h2">
@@ -154,15 +154,15 @@ const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
                         </tr>
                         {nodeNeighbors.data
                           .filter((node) => node.nodeType === nodeType)
-                          .map((node, index) => (
-                            <tr key={index}>
+                          .map((node, _index) => (
+                            <tr key={index + _index}>
                               <td className={`border-t-2 p-3`}>{node.name}</td>
                               <td className={`border-t-2 p-3`}>
                                 {node.context}
                               </td>
                             </tr>
                           ))}
-                      </>
+                      </React.Fragment>
                     ) : null
                   )}
             </tbody>

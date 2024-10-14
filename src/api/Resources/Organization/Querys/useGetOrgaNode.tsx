@@ -6,14 +6,18 @@ import {
   OntoNode,
   parseOntoNode,
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import useUser, { UserType } from "@/hooks/useUser";
 
 const useGetOrgaNode = (optionalNodeID?: string) => {
   const { nodeID: paramNodeID } = useParams();
+  const { user } = useUser();
   const nodeID = optionalNodeID === undefined ? paramNodeID : optionalNodeID;
   const getOrgaNode = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/nodes/by-id/get/${nodeID}/`
+        user.usertype === UserType.ADMIN
+          ? `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/admin/nodes/by-id/get/${nodeID}/`
+          : `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/nodes/by-id/get/${nodeID}/`
       )
       .then((response) => {
         const data: OntoNode = parseOntoNode(response.data);

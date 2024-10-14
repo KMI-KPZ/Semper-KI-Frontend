@@ -1,6 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
+import useUser, { UserType } from "@/hooks/useUser";
 
 export type OntoNodeType =
   | "organization"
@@ -118,10 +119,13 @@ export const isOntoNodePropertyName = (
 };
 
 const useGetOrgaNodes = (nodeType: OntoNodeType) => {
+  const { user } = useUser();
   const getOrgaNodes = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/nodes/by-type/get/${nodeType}/`
+        user.usertype === UserType.ADMIN
+          ? `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/admin/nodes/by-type/get/${nodeType}/`
+          : `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/nodes/by-type/get/${nodeType}/`
       )
       .then((response) => {
         const data: OntoNode[] = response.data.map((node: any) =>

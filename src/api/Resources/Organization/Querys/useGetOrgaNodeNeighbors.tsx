@@ -6,6 +6,7 @@ import {
   OntoNodeType,
   parseOntoNode,
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import useUser, { UserType } from "@/hooks/useUser";
 
 interface useGetOrgaNodeNeighborsProps {
   nodeID: string;
@@ -16,10 +17,13 @@ const useGetOrgaNodeNeighbors = ({
   nodeID,
   nodeType,
 }: useGetOrgaNodeNeighborsProps) => {
+  const { user } = useUser();
   const getOrgaNodeNeighbors = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/nodes/neighbors/by-type/get/${nodeID}/${nodeType}/`
+        user.usertype === UserType.ADMIN
+          ? `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/onto/admin/nodes/neighbors/get/${nodeID}/${nodeType}/`
+          : `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/resources/orga/nodes/neighbors/by-type/get/${nodeID}/${nodeType}/`
       )
       .then((response) => {
         const data: OntoNode[] = response.data.map((node: any) =>

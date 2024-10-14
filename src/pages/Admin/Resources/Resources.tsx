@@ -1,13 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Button,
-  Container,
-  Heading,
-  Search,
-  Text,
-} from "@component-library/index";
-import BackButtonContainer from "@/components/BackButtonContainer/BackButtonContainer";
+import { Button, Container, Search, Text } from "@component-library/index";
 import TableContainer from "@/components/Table/TableContainer";
 import TableHeaderButton from "@/components/Table/TableHeaderButton";
 import Table from "@/components/Table/Table";
@@ -23,7 +16,7 @@ import useAdmin from "../hooks/useAdmin";
 import useGetAdminNodes from "@/api/Resources/Admin/Querys/useGetAdminNodes";
 import { useNavigate, useParams } from "react-router-dom";
 import useDeleteAdminNode from "@/api/Resources/Admin/Mutations/useDeleteAdminNode";
-import AdminResourcesButtons from "./Buttons";
+import AdminResourcesOverView from "./OverView";
 
 interface AdminResourcesProps {}
 
@@ -73,10 +66,7 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
 
   return (
     <Container width="full" direction="col">
-      <BackButtonContainer>
-        <Heading variant="h1">{t("Admin.Resources.title")}</Heading>
-      </BackButtonContainer>
-      <AdminResourcesButtons nodeType={nodeType} />
+      <AdminResourcesOverView />
       <Search handleSearchInputChange={handleSearchInputChange} />
       <Container width="full" justify="end">
         <Button title={t("Admin.Resources.button.add")} size="sm" to="create" />

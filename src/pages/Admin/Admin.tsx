@@ -10,6 +10,7 @@ import AdminResources from "./Resources/Resources";
 import ResourcesNodeForm from "@/components/Resources/NodeForm";
 import ResourcesNodeView from "@/components/Resources/NodeView";
 import AdminResourcesOverView from "./Resources/OverView";
+import OrgaGraph from "../Resources/components/OrgaGraph";
 
 interface AdminProps {}
 
@@ -35,6 +36,7 @@ const Admin: React.FC<AdminProps> = (props) => {
 
         <Route path="resources/*">
           <Route index element={<AdminResourcesOverView />} />
+          <Route path="graph" element={<OrgaGraph />} />
           <Route path=":nodeType">
             <Route index element={<AdminResources />} />
             <Route

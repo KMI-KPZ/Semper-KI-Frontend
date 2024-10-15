@@ -5,7 +5,6 @@ import AdminDashboard from "./Dashboard/Dashboard";
 import AdminUser from "./User/User";
 import AdminOrganization from "./Organization/Organization";
 import AdminProjects from "./Projects/Projects";
-import AdminProject from "./Projects/Project";
 import AdminResources from "./Resources/Resources";
 import ResourcesNodeForm from "@/components/Resources/NodeForm";
 import ResourcesNodeView from "@/components/Resources/NodeView";

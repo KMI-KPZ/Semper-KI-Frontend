@@ -34,7 +34,7 @@ const Admin: React.FC<AdminProps> = (props) => {
       direction="row"
       align="start"
       justify="center"
-      className="bg-white p-5"
+      className=" "
     >
       <Routes>
         <Route index element={<AdminDashboard />} />

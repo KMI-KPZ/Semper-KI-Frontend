@@ -46,7 +46,7 @@ const AdminProjects: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-normal gap-5 overflow-auto bg-white p-5">
+    <div className="flex w-full flex-col items-center justify-normal gap-5 overflow-auto p-5">
       <BackButtonContainer>
         <Heading variant="h1">{t("Admin.Projects.header")}</Heading>
       </BackButtonContainer>

@@ -26,10 +26,10 @@ const ProjectsTableRow: React.FC<ProjectsTableRowProps> = (props) => {
   return (
     <tr
       key={flatProject.projectID}
-      className="group rounded-xl ring-0 duration-300 hover:cursor-pointer hover:ring-2 hover:ring-blau-button "
+      className="group rounded-md ring-0 duration-300 hover:cursor-pointer hover:ring-2 hover:ring-blau-button "
       onClick={() => navigate(`${flatProject.projectID}`)}
     >
-      <td className=" rounded-xl rounded-e-none border-2 border-r-0 text-center">
+      <td className=" rounded-md rounded-e-none border-2 border-r-0 text-center">
         {flatProject.projectDetails.title}
       </td>
       <td className="border-b-2 border-t-2  text-center">
@@ -41,7 +41,7 @@ const ProjectsTableRow: React.FC<ProjectsTableRowProps> = (props) => {
       <td className="border-b-2 border-t-2 text-center">
         {flatProject.processesCount}
       </td>
-      <td className="flex flex-row items-center justify-center gap-5 overflow-clip rounded-xl rounded-l-none border-2 border-l-0 p-0">
+      <td className="flex flex-row items-center justify-center gap-5 overflow-clip rounded-md rounded-l-none border-2 border-l-0 p-0">
         <Button
           title={t("Projects.components.Table.button.delete")}
           variant="text"

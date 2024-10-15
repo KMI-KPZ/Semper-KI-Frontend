@@ -596,7 +596,8 @@
         "delete": "Löschen",
         "search": "Suchen"
       },
-      "confirm": "User wirklich löschen?"
+      "confirm": "User wirklich löschen?",
+      "details": { "title": "Benutzerdetails" }
     },
     "Admin": {
       "title": "Adminbereich",

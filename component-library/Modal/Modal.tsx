@@ -145,7 +145,7 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
               md:h-fit  md:max-h-[90vh] 
               md:max-w-6xl
               md:-translate-y-1/2
-              md:translate-x-1/2 md:rounded-xl
+              md:translate-x-1/2 
               md:bg-gray-100
               md:p-5`,
 

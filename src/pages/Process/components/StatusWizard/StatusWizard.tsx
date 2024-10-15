@@ -135,7 +135,7 @@ const ProcessStatusWizard: React.FC<ProcessStatusWizardProps> = (props) => {
     <Container
       direction="col"
       justify="start"
-      className="top-5 max-h-60  overflow-y-auto rounded-xl bg-white p-5 md:sticky md:max-h-fit md:overflow-y-visible"
+      className="top-5 max-h-60  overflow-y-auto bg-white p-5 md:sticky md:max-h-fit md:overflow-y-visible"
     >
       <Heading variant="h2">
         {t("Process.StatusWizard.StatusWizard.header")}

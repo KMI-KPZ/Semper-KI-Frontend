@@ -1,8 +1,11 @@
-import { AuthorizedUserProps, UserType } from "@/hooks/useUser";
+import { UserType } from "@/hooks/useUser";
 import { Error } from "@/pages/Error/Error";
 import { createContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { OrganizationProps } from "@/pages/Admin/hooks/useAdmin";
+import {
+  AdminUserProps,
+  OrganizationProps,
+} from "@/pages/Admin/hooks/useAdmin";
 import { LoadingAnimation } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useGetAdminFlatProjects from "@/api/Admin/Querys/useGetAdminFlatProjects";
@@ -12,7 +15,7 @@ import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 interface Props {}
 
 export type AdminContext = {
-  users: AuthorizedUserProps[];
+  users: AdminUserProps[];
   organizations: OrganizationProps[];
   flatProjects: FlatProject[];
 };

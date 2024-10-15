@@ -22,6 +22,7 @@ const useGetAdminData = () => {
           user: response.data.user.map(
             (user: any): AuthorizedUserProps => ({
               ...user,
+              organizationNames: user.organizationNames.toString().split(","),
               organization: user.organizations,
               accessedWhen: new Date(user.accessedWhen),
               createdWhen: new Date(user.createdWhen),

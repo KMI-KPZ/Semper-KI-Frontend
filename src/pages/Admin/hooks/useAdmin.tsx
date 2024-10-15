@@ -6,7 +6,7 @@ import { ProjectDetailsProps } from "@/api/Project/Querys/useGetProject";
 import { AdminContext } from "@/outlets/AdminOutlet";
 
 interface ReturnProps {
-  users: AuthorizedUserProps[];
+  users: AdminUserProps[];
   organizations: OrganizationProps[];
   flatProjects: FlatProject[];
 }
@@ -17,8 +17,12 @@ export interface DeleteUserProps {
 }
 
 export interface AdminProps {
-  user: AuthorizedUserProps[];
+  user: AdminUserProps[];
   organizations: OrganizationProps[];
+}
+
+export interface AdminUserProps extends AuthorizedUserProps {
+  organizationNames: string[];
 }
 
 export interface OrganizationProps {

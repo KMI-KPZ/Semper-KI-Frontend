@@ -1,8 +1,14 @@
 import { AuthorizedUserProps } from "@/hooks/useUser";
-import { Container, Heading, Search, Text } from "@component-library/index";
-import React from "react";
+import {
+  Container,
+  Heading,
+  Modal,
+  Search,
+  Text,
+} from "@component-library/index";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import useAdmin from "../hooks/useAdmin";
+import useAdmin, { AdminUserProps } from "../hooks/useAdmin";
 import { Button } from "@component-library/index";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
@@ -13,6 +19,7 @@ import Table from "@/components/Table/Table";
 import usePagination from "@/hooks/usePagination";
 import Pagination from "@/components/Table/Pagination";
 import useAdminDeleteUser from "@/api/Admin/Mutations/useAdminDeleteUser";
+import AdminUserDetails from "./UserDetails";
 
 interface Props {}
 
@@ -21,6 +28,10 @@ const AdminUser: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { users } = useAdmin();
   const deleteUser = useAdminDeleteUser();
+
+  const [detailedUser, setDetailedUserID] = useState<
+    AdminUserProps | undefined
+  >(undefined);
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<AuthorizedUserProps>();
   const {
@@ -40,6 +51,14 @@ const AdminUser: React.FC<Props> = (props) => {
   const handleOnClickButtonDelete = (hashedID: string, name: string) => {
     if (window.confirm(t("Admin.User.confirm")))
       deleteUser.mutate({ hashedID, name });
+  };
+
+  const handleOnClickButtonDetails = (hashedID: string) => {
+    setDetailedUserID(users.find((user) => user.hashedID === hashedID));
+  };
+
+  const handleOnClickButtonEdit = (hashedID: string) => {
+    console.log("Edit User", hashedID);
   };
 
   return (
@@ -121,15 +140,27 @@ const AdminUser: React.FC<Props> = (props) => {
                     {new Date(user.lastSeen).toLocaleString()}
                   </td>
                   <td>
-                    <div className="flex w-full flex-row items-center justify-center gap-3 p-2">
+                    <Container direction="col">
                       <Button
-                        title={t("Admin.User.button.delete")}
+                        title={t("Admin.Resources.button.details")}
+                        onClick={() =>
+                          handleOnClickButtonDetails(user.hashedID)
+                        }
+                        variant="text"
+                      />
+                      <Button
+                        title={t("Admin.Resources.button.edit")}
+                        onClick={() => handleOnClickButtonEdit(user.hashedID)}
+                        variant="text"
+                      />
+                      <Button
+                        title={t("Admin.Resources.button.delete")}
                         onClick={() =>
                           handleOnClickButtonDelete(user.hashedID, user.name)
                         }
                         variant="text"
                       />
-                    </div>
+                    </Container>
                   </td>
                 </tr>
               ))
@@ -144,6 +175,15 @@ const AdminUser: React.FC<Props> = (props) => {
         </Table>
       </TableContainer>
       <Pagination handlePageChange={handlePageChange} totalPages={totalPages} />
+      <Modal
+        open={detailedUser !== undefined}
+        closeModal={() => setDetailedUserID(undefined)}
+        modalKey="adminUserDetails"
+      >
+        {detailedUser !== undefined ? (
+          <AdminUserDetails user={detailedUser} />
+        ) : null}
+      </Modal>
     </Container>
   );
 };

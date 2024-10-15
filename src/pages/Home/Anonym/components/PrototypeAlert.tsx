@@ -9,7 +9,7 @@ const HomePrototypeAlert: React.FC<HomePrototypeAlertProps> = (props) => {
   const { t } = useTranslation();
 
   return process.env.NODE_ENV === "production" ? (
-    <Container width="full" className="bg-white p-5">
+    <Container width="full" className="z-20 bg-white p-5">
       <Text variant="body" className="text-5xl font-bold text-red-500">
         {t("Home.Anonym.Anonym.prototype")}
       </Text>

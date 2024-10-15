@@ -21,8 +21,8 @@ const Home: React.FC<HomeProps> = (props) => {
       data-testid="home-anonym"
     >
       <HomeBackground />
+      <HomePrototypeAlert />
       <AnonymHomeContainer>
-        <HomePrototypeAlert />
         <Heading
           variant="h1"
           className="pt-32 text-center text-4xl font-black tracking-wide text-white  md:text-7xl"

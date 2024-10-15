@@ -28,7 +28,7 @@ import ManufacturingProcessOutlet from "@/outlets/ManufacturingProcessOutlet";
 import ServiceModeling from "../Process/components/Service/ServiceEdit/Modelling/Modelling";
 import { Header } from "@/components/Header";
 import { createContext, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { Test } from "../Test/Test";
@@ -85,229 +85,114 @@ const App: React.FC = () => {
           <Routes data-testid="routes">
             <Route index element={<Home />} />
             <Route
-              path="advantages/user"
               element={
                 <ContentBox>
-                  <Advantages type="user" />
+                  <Outlet />
                 </ContentBox>
               }
-            />
-            <Route
-              path="advantages/organization"
-              element={
-                <ContentBox>
-                  <Advantages type="organization" />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="registerOrganization"
-              element={
-                <ContentBox>
-                  <RegisterOrganization />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="reskriver"
-              element={
-                <ContentBox>
-                  <ResKriVer />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="logout"
-              element={
-                <ContentBox>
-                  <Logout />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="portfolio"
-              element={
-                <ContentBox>
-                  <Portfolio />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="verifyEMail"
-              element={
-                <ContentBox>
-                  <EmailVerification />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="login"
-              element={
-                <ContentBox>
-                  <Login />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="login/redirect"
-              element={
-                <ContentBox>
-                  <RedirectLogin />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="register"
-              element={
-                <ContentBox>
-                  <Login />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="legal/*"
-              element={
-                <ContentBox>
-                  <Legal />
-                </ContentBox>
-              }
-            />
-            <Route path="demo/*" element={<Navigate to="/project/new" />} />
-            <Route path="projects/*">
+            >
               <Route
-                index
-                element={
-                  // user.usertype === UserType.ADMIN ? (
-                  //   <Navigate to="/admin/projects" />
-                  // ) : (
-                  <PermissionGate element="Projects">
-                    <ContentBox>
-                      <Projects />
-                    </ContentBox>
-                  </PermissionGate>
-                  // )
-                }
+                path="advantages/user"
+                element={<Advantages type="user" />}
               />
               <Route
-                path=":projectID/*"
-                element={
-                  <ContentBox>
-                    <ProjectOutlet />
-                  </ContentBox>
-                }
-              >
+                path="advantages/organization"
+                element={<Advantages type="organization" />}
+              />
+              <Route
+                path="registerOrganization"
+                element={<RegisterOrganization />}
+              />
+              <Route path="reskriver" element={<ResKriVer />} />
+              <Route path="logout" element={<Logout />} />
+              <Route path="portfolio" element={<Portfolio />} />
+              <Route path="verifyEMail" element={<EmailVerification />} />
+              <Route path="login" element={<Login />} />
+              <Route path="login/redirect" element={<RedirectLogin />} />
+              <Route path="register" element={<Login />} />
+              <Route path="legal/*" element={<Legal />} />
+              <Route path="demo/*" element={<Navigate to="/project/new" />} />
+              <Route path="projects/*">
                 <Route
                   index
                   element={
                     <PermissionGate element="Projects">
-                      <ProjectPage />
+                      <Projects />
                     </PermissionGate>
                   }
                 />
-                <Route
-                  path=":processID/*"
-                  element={
-                    <ProcessOutlet>
-                      <ProcessPage />
-                    </ProcessOutlet>
-                  }
-                >
-                  <Route path="service/*" element={<DefinedProcessOutlet />}>
-                    <Route index element={<ServiceEdit />} />
-                    <Route
-                      path="manufacturing/*"
-                      element={<ManufacturingProcessOutlet />}
-                    >
-                      <Route index element={<Navigate to="model" />} />
-                      <Route path="model" element={<ManufacturingModels />} />
+                <Route path=":projectID/*" element={<ProjectOutlet />}>
+                  <Route
+                    index
+                    element={
+                      <PermissionGate element="Projects">
+                        <ProjectPage />
+                      </PermissionGate>
+                    }
+                  />
+                  <Route
+                    path=":processID/*"
+                    element={
+                      <ProcessOutlet>
+                        <ProcessPage />
+                      </ProcessOutlet>
+                    }
+                  >
+                    <Route path="service/*" element={<DefinedProcessOutlet />}>
+                      <Route index element={<ServiceEdit />} />
                       <Route
-                        path="material"
-                        element={<ManufacturingMaterials />}
-                      />
-                      <Route
-                        path="postprocessing"
-                        element={<ManufacturingPostProcessings />}
-                      />
-                      <Route path="*" element={<Error />} />
+                        path="manufacturing/*"
+                        element={<ManufacturingProcessOutlet />}
+                      >
+                        <Route index element={<Navigate to="model" />} />
+                        <Route path="model" element={<ManufacturingModels />} />
+                        <Route
+                          path="material"
+                          element={<ManufacturingMaterials />}
+                        />
+                        <Route
+                          path="postprocessing"
+                          element={<ManufacturingPostProcessings />}
+                        />
+                        <Route path="*" element={<Error />} />
+                      </Route>
+                      <Route path="modeling/*" element={<ServiceModeling />} />
+                      <Route path="*" element={<Navigate to="." />} />
                     </Route>
-                    <Route path="modeling/*" element={<ServiceModeling />} />
-                    <Route path="*" element={<Navigate to="." />} />
                   </Route>
                 </Route>
               </Route>
-            </Route>
-            <Route element={<AuthorizedUserOutlet />}>
-              <Route
-                path="test"
-                element={
-                  <ContentBox>
-                    <Test />
-                  </ContentBox>
-                }
-              />
-              <Route
-                path="account"
-                element={
-                  <ContentBox>
-                    <Profile />
-                  </ContentBox>
-                }
-              />
-              <Route
-                element={
-                  <ContentBox>
-                    <OrganizationOutlet />
-                  </ContentBox>
-                }
-              >
-                <Route
-                  path="organization"
-                  element={
-                    <PermissionGate
-                      element="Organization"
-                      showMessage
-                      children={
-                        <ContentBox>
-                          <Organization />
-                        </ContentBox>
-                      }
-                    />
-                  }
-                />
-                <Route
-                  path="resources/*"
-                  element={
-                    <PermissionGate
-                      children={
-                        <ContentBox>
-                          <Resources />
-                        </ContentBox>
-                      }
-                      element="Resources"
-                      showMessage
-                    />
-                  }
-                />
+              <Route element={<AuthorizedUserOutlet />}>
+                <Route path="test" element={<Test />} />
+                <Route path="account" element={<Profile />} />
+                <Route element={<OrganizationOutlet />}>
+                  <Route
+                    path="organization"
+                    element={
+                      <PermissionGate
+                        element="Organization"
+                        showMessage
+                        children={<Organization />}
+                      />
+                    }
+                  />
+                  <Route
+                    path="resources/*"
+                    element={
+                      <PermissionGate
+                        children={<Resources />}
+                        element="Resources"
+                        showMessage
+                      />
+                    }
+                  />
+                </Route>
+                <Route element={<AdminOutlet />}>
+                  <Route path="admin/*" element={<Admin />} />
+                </Route>
               </Route>
-              <Route element={<AdminOutlet />}>
-                <Route
-                  path="admin/*"
-                  element={
-                    <ContentBox>
-                      <Admin />
-                    </ContentBox>
-                  }
-                />
-              </Route>
+              <Route path="*" element={<Error />} />
             </Route>
-            <Route
-              path="*"
-              element={
-                <ContentBox>
-                  <Error />
-                </ContentBox>
-              }
-            />
           </Routes>
         </main>
         <CkBanner />

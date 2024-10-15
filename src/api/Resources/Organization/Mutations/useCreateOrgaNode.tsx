@@ -5,7 +5,7 @@ import {
   OntoNode,
   OntoNodeNew,
   parseOntoNode,
-} from "../../Ontology/Querys/useGetOntoNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 
 interface useCreateOrgaNodeProps {
   node: OntoNodeNew;

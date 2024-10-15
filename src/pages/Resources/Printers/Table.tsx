@@ -14,6 +14,7 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
 ) => {
   const {} = props;
   const { t } = useTranslation();
+
   const { organization } = useOrganization();
   const printers = useGetOrgaNodeNeighbors({
     nodeID: organization.hashedID,

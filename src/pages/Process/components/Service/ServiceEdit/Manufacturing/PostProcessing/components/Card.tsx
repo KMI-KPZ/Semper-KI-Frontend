@@ -6,7 +6,7 @@ import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostPro
 import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
-} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 
 interface Props<Item> {
   item: Item;

@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from "react";
 import { Navigate, Outlet, useParams } from "react-router-dom";
 import useGetProcess from "@/api/Process/Querys/useGetProcess";
 import useGetFilters from "@/api/Filter/Querys/useGetFilters";
-import { LoadingAnimation } from "@component-library/index";
+import { Container, LoadingAnimation } from "@component-library/index";
 import ProcessContextProvider from "@/contexts/ProcessContext";
 
 interface ProcessOutletProps {}
@@ -15,7 +15,12 @@ const ProcessOutlet: React.FC<PropsWithChildren<ProcessOutletProps>> = (
   const filter = useGetFilters();
   const { projectID } = useParams();
 
-  if (process.isLoading || filter.isLoading) return <LoadingAnimation />;
+  if (process.isLoading || filter.isLoading)
+    return (
+      <Container width="full" className="h-80 bg-white">
+        <LoadingAnimation />
+      </Container>
+    );
 
   if (
     process.isFetched &&

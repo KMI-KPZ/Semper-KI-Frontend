@@ -65,6 +65,7 @@ function formatDynamicPrompt(
 
 const Chatbot: React.FC<ChatbotProps> = (props) => {
   const {} = props;
+  const logger: boolean = false;
   const {
     topics,
     maintopic,
@@ -116,7 +117,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
     if (isChatbotEnabled && !botAlreadyLoaded.current) {
       const script = document.createElement("script");
       botAlreadyLoaded.current = true;
-      console.log("Chatbot will be loaded");
+      if (logger) console.log("Chatbot will be loaded");
       script.src =
         "http://localhost:38080/kbot-widget/bots/preview/w4_MnnyqE2tAZJPHr_0jTB0ZfJaI77N6_GAgnVr_1FQ=/widget.js";
 
@@ -140,7 +141,8 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
     }
 
     if (topics) {
-      console.log("topics for chatbot: " + formatTopicsToJSON(topics));
+      if (logger)
+        console.log("topics for chatbot: " + formatTopicsToJSON(topics));
       const bot = window.ChatbotIframe;
       if (bot !== undefined && botAlreadyOpenend.current) {
         alert("Chatbot is already open");
@@ -150,16 +152,17 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
           "askChatbot",
           formatDynamicPrompt(topics, maintopic, choices)
         );
-        console.log(
-          "query: ",
-          '__[++ {topics: "' +
-            formatTopicsToJSON(topics) +
-            '", maintopic: {"' +
-            maintopic +
-            '"}}, currentChoices: ' +
-            JSON.stringify(choices) +
-            "__"
-        );
+        if (logger)
+          console.log(
+            "query: ",
+            '__[++ {topics: "' +
+              formatTopicsToJSON(topics) +
+              '", maintopic: {"' +
+              maintopic +
+              '"}}, currentChoices: ' +
+              JSON.stringify(choices) +
+              "__"
+          );
       }
 
       if (closeChatbot === true) {
@@ -169,10 +172,10 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
   }, [topics, closeChatbot, setTopics, maintopic, choices, detailedHelp]);
 
   window.addEventListener("message", (e) => {
-    // console.log("Message received: "); console.log(e.data);
+    // if(logger)console.log("Message received: "); if(logger)console.log(e.data);
     try {
       const chatbotResponse = JSON.parse(e.data);
-      console.log("Chatbotresponse: ", chatbotResponse);
+      if (logger) console.log("Chatbotresponse: ", chatbotResponse);
 
       if (chatbotResponse.eventType === "responseFromChatbot") {
         if (
@@ -180,21 +183,22 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
           chatbotResponse.response?.response?.shouldEndSession === true
         ) {
           botAlreadyOpenend.current = false;
-          console.log("Chatbot session ended");
+          if (logger) console.log("Chatbot session ended");
         }
 
         const botResponse = chatbotResponse.response;
-        console.log(
-          "Chatbot things: ",
-          botResponse.response?.payload?.[0]?.conversation?.bubbles?.[0]
-            ?.content
-        );
+        if (logger)
+          console.log(
+            "Chatbot things: ",
+            botResponse.response?.payload?.[0]?.conversation?.bubbles?.[0]
+              ?.content
+          );
         try {
           const parsedObject = extractAndParseJSON(
             botResponse.response?.payload?.[0]?.conversation?.bubbles?.[0]
               ?.content
           );
-          console.log("Chatbot JSON", parsedObject);
+          if (logger) console.log("Chatbot JSON", parsedObject);
 
           if (parsedObject.empty) {
             lastAnswer.current = "";
@@ -210,12 +214,12 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
             sendDetailedHelp(parsedObject.more_help);
           }
         } catch (error) {
-          // console.log("Chatbot JSON parsing error: ", error);
+          // if(logger)console.log("Chatbot JSON parsing error: ", error);
         }
       }
 
       if (chatbotResponse.eventType === "startSession") {
-        console.log("Chatbot session started");
+        if (logger) console.log("Chatbot session started");
         // bot.eventsBus.emit('openChatbot', {query: '__[++ {topics: "' + topics.join(",") + '", maintopic: {"' + maintopic+ '"}}, currentChoices: '+ JSON.stringify(choices)+ ']__'});
       }
     } catch {}
@@ -239,7 +243,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
   //   return headers.join(',');
   // };
 
-  // console.log("Überschriften: " + getHeadersText());
+  // if(logger)console.log("Überschriften: " + getHeadersText());
 
   // obtain ChatbotIframe from global browser window object
 
@@ -257,9 +261,10 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
           "]__",
       });
       botAlreadyOpenend.current = true;
-      console.log(
-        "query: '__[++ (Seitenthemen: " + formatTopicsToJSON(topics) + ")]__'"
-      );
+      if (logger)
+        console.log(
+          "query: '__[++ (Seitenthemen: " + formatTopicsToJSON(topics) + ")]__'"
+        );
     }
     if (bot !== undefined && botAlreadyOpenend.current) {
       bot.eventsBus.emit("askChatbot", {
@@ -278,7 +283,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <Container width="fit" className="fixed bottom-4 right-4 z-auto">
+    <Container width="fit" className="fixed bottom-4 right-4 z-50">
       <Button
         className="rounded-full p-3 md:hidden"
         width="fit"
@@ -287,8 +292,10 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
         size="sm"
         onClick={handleOnClickButton}
         children={<ThreePIcon />}
+        active={isChatbotEnabled && !botAlreadyLoaded.current}
       />
       <Button
+        active={isChatbotEnabled && !botAlreadyLoaded.current}
         className="hidden rounded-full md:flex"
         width="fit"
         title={t("components.Chatbot.button.open")}

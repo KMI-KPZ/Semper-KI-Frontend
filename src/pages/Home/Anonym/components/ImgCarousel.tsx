@@ -9,6 +9,10 @@ import trilogIQa from "@images/partner/trilogIQa.svg";
 import TUC from "@images/partner/TUC.png";
 import USU from "@images/partner/USU.svg";
 import WHZ from "@images/partner/WHZ.svg";
+import BMWKdeURL from "@images/BMWK_de.png";
+import BMWKenURL from "@images/BMWE_en.png";
+import KMILogo from "@images/partner/KMI_Logo.svg";
+import { useTranslation } from "react-i18next";
 
 interface HomeImgCarouselProps {}
 
@@ -20,22 +24,28 @@ interface HomeImgItemProps {
 
 const HomeImgCarousel: React.FC<HomeImgCarouselProps> = (props) => {
   const {} = props;
+  const { i18n } = useTranslation();
 
   const partners: HomeImgItemProps[] = [
-    // {
-    //   img: i18n.language === "de" ? BMWKdeURL : BMWKenURL,
-    //   href: "https://www.bmwk.de/",
-    //   title: "BMWK",
-    // },
     {
-      img: DATEV,
-      href: "https://www.datev.de/",
-      title: "DATEV",
+      img: i18n.language === "de-DE" ? BMWKdeURL : BMWKenURL,
+      href: "https://www.bmwk.de/",
+      title: "BMWK",
+    },
+    {
+      img: KMILogo,
+      href: "https://kmi-leipzig.de/",
+      title: "KMI",
     },
     {
       img: InfAi,
       href: "https://infai.org/",
       title: "InfAi",
+    },
+    {
+      img: DATEV,
+      href: "https://www.datev.de/",
+      title: "DATEV",
     },
     {
       img: IWU,
@@ -102,21 +112,21 @@ const HomeImgCarousel: React.FC<HomeImgCarouselProps> = (props) => {
 
   return (
     <div
-      className="flex w-full flex-grow basis-2/3 items-center justify-start overflow-x-hidden scroll-smooth"
+      className=" flex w-full flex-grow basis-2/3 items-center justify-start overflow-x-hidden scroll-smooth"
       ref={carouselRef}
     >
-      <div className="flex h-fit w-fit flex-row items-center justify-center gap-5 py-5">
+      <div className=" flex h-fit w-fit flex-row items-center justify-center gap-5 py-5">
         {partners.map((partner, index) => (
           <a
             key={index}
             href={partner.href}
             title={partner.title}
             target="_blank"
-            className="flex w-60 items-center justify-center"
+            className="group flex h-60 w-60 items-center justify-center rounded-lg border-2 p-5"
           >
             <img
               alt={partner.title}
-              className="w-60 duration-300 hover:scale-105"
+              className="w-60 duration-300 group-hover:scale-105"
               src={partner.img}
             />
           </a>

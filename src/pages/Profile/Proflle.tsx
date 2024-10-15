@@ -12,6 +12,7 @@ import ProfileGeneral from "./components/General";
 import ProfileAddress from "./components/Address";
 import ProfileOrganization from "./components/Organization";
 import useDeleteUser from "@/api/User/Mutations/useDeleteUser";
+import ProfileAPIToken from "./components/APIToken";
 
 interface Props {}
 
@@ -49,6 +50,8 @@ const Profile: React.FC<Props> = (props) => {
               : user.details.notificationSettings?.organization
           }
         />
+        <Divider />
+        <ProfileAPIToken />
         <Divider />
         <Container width="full">
           <Button

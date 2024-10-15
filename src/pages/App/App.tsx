@@ -4,7 +4,7 @@ import Login from "../Login/Login";
 import Logout from "../Logout/Logout";
 import Organization from "../Organization/Organization";
 import Portfolio from "../Portfolio/Portfolio";
-import Resouces from "../Resources/Resources";
+import Resources from "../Resources/Resources";
 import Legal from "../Legal/Legal";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import CkBanner from "@/components/CookieBanner/CkBanner";
@@ -22,8 +22,6 @@ import ProjectPage from "../Project/ProjectPage";
 import ProcessOutlet from "@/outlets/ProcessOutlet";
 import ProcessPage from "../Process/ProcessPage";
 import Admin from "../Admin/Admin";
-import AdminUser from "../Admin/User/User";
-import AdminOrganization from "../Admin/Organization/Organization";
 import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
 import ServiceEdit from "../Process/components/Service/ServiceEdit/ServiceEdit";
 import ManufacturingProcessOutlet from "@/outlets/ManufacturingProcessOutlet";
@@ -179,11 +177,15 @@ const App: React.FC = () => {
               <Route
                 index
                 element={
+                  // user.usertype === UserType.ADMIN ? (
+                  //   <Navigate to="/admin/projects" />
+                  // ) : (
                   <PermissionGate element="Projects">
                     <ContentBox>
                       <Projects />
                     </ContentBox>
                   </PermissionGate>
+                  // )
                 }
               />
               <Route
@@ -278,7 +280,7 @@ const App: React.FC = () => {
                     <PermissionGate
                       children={
                         <ContentBox>
-                          <Resouces />
+                          <Resources />
                         </ContentBox>
                       }
                       element="Resources"
@@ -292,15 +294,7 @@ const App: React.FC = () => {
                   path="admin/*"
                   element={
                     <ContentBox>
-                      <Routes>
-                        <Route index element={<Admin />} />
-                        <Route path="user" element={<AdminUser />} />
-                        <Route
-                          path="organization"
-                          element={<AdminOrganization />}
-                        />
-                        {/* <Route path="projects/*" element={<ProjectsRoutes />} /> */}
-                      </Routes>
+                      <Admin />
                     </ContentBox>
                   }
                 />

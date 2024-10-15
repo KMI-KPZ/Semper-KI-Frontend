@@ -56,7 +56,6 @@ const Projects: React.FC<ProjectsProps> = (props) => {
   const { userChoice, setTopics, setUserChoice } = useTopics();
 
   useEffect(() => {
-    console.log("running project page");
     const initialAccumulator: { [key: string]: string } = {
       "0": "Neues Projekt erstellen",
     };
@@ -77,10 +76,6 @@ const Projects: React.FC<ProjectsProps> = (props) => {
       }, initialAccumulator),
       null
     );
-    console.log("flat projects: ", ownProjects);
-    if (userChoice) {
-      console.log("userChoice: ", userChoice);
-    }
   }, [ownProjects, setTopics, userChoice, setUserChoice]);
 
   return (

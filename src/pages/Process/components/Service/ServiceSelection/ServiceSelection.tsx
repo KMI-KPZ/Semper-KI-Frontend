@@ -18,8 +18,7 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
   useEffect(() => {
     if (userChoice) {
       // Perform actions based on the user choice
-      console.log(`User made a choice: ${userChoice}`);
-      debugger;
+
       if (userChoice == "2") {
         handleOnClickCard(ServiceType.MANUFACTURING);
       }
@@ -48,7 +47,6 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
 
   if (services.isLoading || services.data === undefined)
     return <LoadingAnimation />;
-  console.log("running service selection");
   setTopics(
     new Map([
       [

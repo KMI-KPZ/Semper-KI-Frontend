@@ -1,13 +1,6 @@
-import useAdminDeleteOrganization, {
-  AdminDeleteOrgaProps,
-} from "@/api/Admin/Mutations/useAdminDeleteOrganization";
-import useAdminDeleteUser, {
-  AdminDeleteUserProps,
-} from "@/api/Admin/Mutations/useAdminDeleteUser";
 import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { AuthorizedUserProps } from "@/hooks/useUser";
-import { UseMutationResult } from "@tanstack/react-query";
 import { useContext } from "react";
 import { ProjectDetailsProps } from "@/api/Project/Querys/useGetProject";
 import { AdminContext } from "@/outlets/AdminOutlet";
@@ -16,13 +9,6 @@ interface ReturnProps {
   users: AuthorizedUserProps[];
   organizations: OrganizationProps[];
   flatProjects: FlatProject[];
-  deleteUser: UseMutationResult<void, Error, AdminDeleteUserProps, unknown>;
-  deleteOrganization: UseMutationResult<
-    void,
-    Error,
-    AdminDeleteOrgaProps,
-    unknown
-  >;
 }
 
 export interface DeleteUserProps {
@@ -59,13 +45,8 @@ export interface AdminFlatProjectProps {
 
 const useAdmin = (): ReturnProps => {
   const { flatProjects, organizations, users } = useContext(AdminContext);
-  // const { deleteOrganization, deleteUser } = useAdminMutations();
-  const deleteUser = useAdminDeleteUser();
-  const deleteOrganization = useAdminDeleteOrganization();
 
   return {
-    deleteOrganization,
-    deleteUser,
     flatProjects,
     organizations,
     users,

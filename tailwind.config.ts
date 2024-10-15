@@ -20,7 +20,7 @@ export default {
         },
         'türkis': {
           'button':'#56BDBE',
-          DEFAULT: '#7DBCBC',
+          DEFAULT: '#21FEFE',
           50: '#F6FAFA',
           100: '#E9F4F4',
           200: '#CEE6E6',
@@ -110,6 +110,7 @@ export default {
         'button-secondary':       '0px 0px 3px 1px rgba(0,0,0,0.3) , inset 0px 0px 0px 0px rgba(0,0,0,0)',
         'button-inner-secondary': '0px 0px 0px 0px rgba(0,0,0,0) , inset 0px 0px 3px 1px rgba(0,0,0,0.3)',
         'glow':'0 0px 20px rgba(255,255, 255, 0.35), 0 0px 65px rgba(255, 255,255, 0.2)',
+        'table':'-5px 0px 10px 3px rgba(0, 0, 0, 0.1)',
       },
       textShadow: {
         'button-tertiary': '0 0px 3px rgba(0,0,0,0.2)',

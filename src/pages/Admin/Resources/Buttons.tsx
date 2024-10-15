@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { Button, Container } from "@component-library/index";
 import { adminNodeTypes } from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import { useLocation, useParams } from "react-router-dom";
-import logger from "@/hooks/useLogger";
 
 interface AdminResourcesButtonsProps {}
 
@@ -11,13 +10,6 @@ const AdminResourcesButtons: React.FC<AdminResourcesButtonsProps> = () => {
   const { nodeType } = useParams();
   const { t } = useTranslation();
   const { pathname } = useLocation();
-
-  logger(
-    "AdminResourcesButtons",
-    nodeType,
-    pathname,
-    pathname.includes("graph")
-  );
 
   return (
     <Container width="full">

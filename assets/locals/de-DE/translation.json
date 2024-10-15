@@ -201,7 +201,8 @@
       "printer": "3D-Drucker",
       "material": "Materialien",
       "additionalRequirement": "Zusätzliche Anforderungen",
-      "color": "Farben"
+      "color": "Farben",
+      "materialCategory": "Materialkategorie"
     },
     "OntoNodePropertyName": {
       "imgPath": "Bildpfad",

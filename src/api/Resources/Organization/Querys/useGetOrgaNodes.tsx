@@ -8,7 +8,8 @@ export type OntoNodeType =
   | "printer"
   | "material"
   | "additionalRequirement"
-  | "color";
+  | "color"
+  | "materialCategory";
 
 export const isOntoNodeType = (type: string): type is OntoNodeType => {
   return [
@@ -17,6 +18,7 @@ export const isOntoNodeType = (type: string): type is OntoNodeType => {
     "material",
     "additionalRequirement",
     "color",
+    "materialCategory",
   ].includes(type as OntoNodeType);
 };
 

@@ -277,6 +277,13 @@
     "Typography": {}
   },
   "components": {
+    "Pagination": {
+      "next": "Weiter",
+      "previous": "Zurück"
+    },
+    "BackButton": {
+      "back": "Zurück"
+    },
     "Address": {
       "AddressCard": {
         "yes": "Ja",
@@ -492,6 +499,35 @@
     }
   },
   "Admin": {
+    "Resources": {
+      "OverView": {
+        "title": "Ressourcenverwaltung"
+      },
+      "Buttons": {
+        "graph": "Graph"
+      },
+      "loading": "Laden...",
+      "confirmDelete": "Möchten Sie den Knoten \"{{name}}\" wirklich entfernen?",
+      "title": "Ressourcenverwaltung",
+      "name": "Name",
+      "nodeType": "Knotentyp",
+      "createdBy": "Erstellt von",
+      "createdWhen": "Erstellt am",
+      "nodeID": "Knoten-ID",
+      "properties": "Eigenschaften",
+      "context": "Kontext",
+      "accessedWhen": "Zugegriffen am",
+      "updatedWhen": "Aktualisiert am",
+      "active": "Aktiv",
+      "actions": "Aktionen",
+      "empty": "keine Ressourcen gefunden",
+      "button": {
+        "delete": "Löschen",
+        "edit": "Bearbeiten",
+        "details": "Details",
+        "add": "Hinzufügen"
+      }
+    },
     "hooks": {
       "useAdmin": {}
     },
@@ -564,9 +600,11 @@
     "Admin": {
       "title": "Adminbereich",
       "buttons": {
+        "dashboard": "Dashboard",
         "orga": "Organisationen verwalten",
         "user": "Benutzer verwalten",
-        "projects": "Projekte verwalten"
+        "projects": "Projekte verwalten",
+        "resources": "Ressourcen verwalten"
       }
     }
   },
@@ -643,26 +681,70 @@
   "Home": {
     "Anonym": {
       "Anonym": {
-        "title": "SEMPER-KI",
-        "subTitle": "WIR MACHEN 3D-DRUCK INTELLIGENT",
-        "alt": {
-          "subtitle": "Wir machen 3D-Druck intelligent",
-          "buttonToDemonstrator": "Zum Demonstrator"
+        "title": "Wir machen 3D-Druck Intelligent",
+        "Introduction": {
+          "title": "3D-Druck Vernetzt",
+          "text": "Mit Semper-KI ermitteln wir das passende Netzwerk für Ihre Produktion. Semper-KI setzt dabei auf einen eigens konzipierten Wissensgraph spezifisch für die Branche 3D-Druck.",
+          "item1": "Benutzerfreundliche Bedienung",
+          "item2": "Existensicherndes Netzwerk",
+          "item3": "Produktionsbereite Infrastruktur"
         },
+        "Services": {
+          "title": "Unser Service",
+          "items": {
+            "matching": {
+              "title": "Matching",
+              "text": "3D-Druck ist eine digitale und hochindividuelle Technologie. Mit einer Kombination aus Simulationsverfahren und Machine Learning ermitteln wir Ihren optimalen Partner – ob als Auftraggeber oder als Auftragnehmer. "
+            },
+            "questionnaire": {
+              "title": "Einfache Fragebögen",
+              "text": "Wir haben die Expertise, die Sie brauchen. Auf Basis unserer eigens entwickelten Ontologie für 3D-Druck führen wir Sie automatisiert durch die Plattform – das gilt für die Produkt-Beauftragung wie für die Angabe des eigenen Leistungsspektrums. "
+            },
+            "benchmarking": {
+              "title": "Anonymes Benchmarking",
+              "text": "Im 3D-Druck kommt es auf die Feinheiten an. Mittels unseres eigens konstruierten Charakterisierungsbauteils stellen wir zum einen sicher, dass Qualitätsversprechen stimmen. Zum anderen haben Sie damit die Chance, sich in einem Spezialgebiet zu profilieren. "
+            },
+            "resilience": {
+              "title": "Resilienz-Check",
+              "text": "Belastbare Liefernetzwerke sind das Fundament von gutem 3D-Druck. Mit unserem Fragebogen finden Sie heraus, wie Ihre Firma aufgestellt ist. "
+            }
+          }
+        },
+        "Tutorial": {
+          "title": "So Nutzen Sie unsere Plattform",
+          "subTitle": "Erfassen Sie Ihren Bedarf durch unsere nutzerfreundlichen Fragebögen.",
+          "items": {
+            "0": {
+              "title": "Anmeldung",
+              "text": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. "
+            },
+            "1": {
+              "title": "Bauteil Hochladen",
+              "text": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. "
+            },
+            "2": {
+              "title": "Fertigung wählen",
+              "text": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. "
+            },
+            "3": {
+              "title": "Veredelung wählen",
+              "text": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. "
+            }
+          },
+          "button": "Fragen? Wir haben Antworten."
+        },
+
         "prototype": "Diese Seite ist ein Prototyp und wird fortlaufend bearbeitet",
-        "visionTitle1": "Wir vermitteln, was Sie brauchen",
-        "visionTitle2": "Mit KI zum 3D-Druck",
-        "vision1": "Wir machen 3D-Druck für alle nutzbar. Unser Ziel ist, Kunden zu vernetzen - so früh wie nötig und so gut wie möglich. Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. Dazu gehören vorgelagerte Services wie Modellerstellung und Materialberatung genauso wie die Vermittlung von Nachbearbeitung oder Rechtsberatung. Der Druck findet beim optimalen Partner statt. Für all das setzen wir auf KI-Technologien. Gefördert vom Bundesministerium für Wirtschaft und Klimaschutz.",
-        "vision2": "Kern unserer Plattform sind Künstliche Intelligenzen. Diese Technologien haben wir speziell für die Vernetzung von Kunden mit der 3D-Druck-Branche entwickelt. Unsere KI ist ein semantisches Netz. In dieses Netz speisen wir Informationen über alle verfügbaren 3D-Druck-Prozesse ein. In Kombination mit den Anfragen, die auf der Plattform eingehen, ermitteln unsere KI-Technologien daraus die optimale Produktionsstrategie.",
         "partner": "Unsere Projektpartner",
-        "partnertext": "Innovation klappt nur als Team. Wir arbeiten eng zusammen und freuen uns über neue Partner in Forschung und Entwicklung. Gefördert vom BMWK.",
+        "partnertext": "Für jedes Produkt erzeugen wir eine individuell angepasste Produktionsstrategie. Dazu gehören vorgelagerte Services wie Modellerstellung und Materialberatung genauso wie die Vermittlung von Nachbearbeitung oder Rechtsberatung. ",
         "demonstrator": {
           "title": "Einfach ausprobieren",
           "subTitle": "Projekte werden bei späterer Registrierung übernommen"
         },
         "buttons": {
           "demonstrator": "Loslegen",
-          "magazin": "Zur Projektseite"
+          "magazin": "Zur Projektseite",
+          "testModel": "Testen Sie ihr Bauteil"
         }
       }
     },
@@ -977,6 +1059,17 @@
     }
   },
   "Profile": {
+    "APIToken": {
+      "title": "API Token",
+      "subTitle": "Erstellen Sie einen neuen API Token für den Zugriff auf die Semper-KI API",
+      "subTitle2": "Der Token wird nur einmal angezeigt und kann nicht wiederhergestellt werden.\n Sie können jedoch jederzeit einen neuen Token erstellen.",
+      "button": {
+        "copy": "Kopieren",
+        "create": "Erstellen",
+        "reCreate": "Neu erstellen",
+        "delete": "Löschen"
+      }
+    },
     "header": "Account",
     "general": {
       "header": "Allgemein",
@@ -2058,6 +2151,9 @@
         "createOwn": "Nachbearbeitung Anlegen",
         "createVariant": "Nachbearbeitungsvariante Anlegen"
       }
+    },
+    "Table": {
+      "subHeading": "Eigene {{name}}"
     }
   },
   "Routes": {},

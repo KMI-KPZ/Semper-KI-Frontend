@@ -40,15 +40,74 @@
     .card-container {
         @apply overflow-clip rounded-xl border-2 p-5 ;
     }
+
     .hover-card {
         @apply overflow-clip rounded-xl border-2 p-5 shadow-lg hover:cursor-pointer hover:border-ultramarinblau hover:shadow-xl duration-300;
     }
+
     .active-card {
         @apply overflow-clip rounded-xl border-2 p-5 shadow-lg border-ultramarinblau duration-300;
     }
+
     .container {
-        @apply rounded-xl bg-white p-5 border-2  shadow-lg;
+        @apply rounded-xl bg-white p-5 border-2 shadow-lg;
     }
+
+  
+
+    .table-normal {
+        @apply  rounded-xl w-full table-auto border-separate border-spacing-x-0 p-0;
+
+        & thead th {
+            @apply bg-gray-50 ;
+        }
+
+        & tbody tr:nth-child(even) {
+            @apply bg-gray-50;
+        }
+
+        & tbody tr:nth-child(odd) {
+            @apply bg-white;
+        }
+
+        & tbody td {
+            @apply border-t-2 p-3 text-left;
+        }
+       
+    }
+    .table-fixed-last-row {
+        @apply  rounded-xl w-full table-auto border-separate border-spacing-x-0 p-0;
+
+        & thead th {
+            @apply bg-gray-50  text-center;
+        }
+
+        & thead tr th:last-child {
+            @apply sticky -right-1 top-0 shadow-table text-center border-l-2 ;
+        }
+
+        & tbody tr:nth-child(even) {
+            @apply bg-gray-50;
+        }
+
+        & tbody tr:nth-child(odd) {
+            @apply bg-white;
+        }
+
+        & tbody td {
+            @apply border-t-2 p-3 text-center ;
+        }
+
+        & tbody tr td:last-child {
+            @apply sticky -right-1 shadow-table  bg-inherit border-l-2;
+        }
+
+        & tbody tr:last-child td:last-child {
+            @apply sticky -right-1 bg-inherit border-l-2  rounded-br-xl;
+        }
+       
+    }
+  
 }
 
 @layer utilities {

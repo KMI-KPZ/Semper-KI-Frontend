@@ -13,7 +13,7 @@ const HomeContainer: React.FC<PropsWithChildren<HomeContainerProps>> = (
     <div
       {...restProps}
       className={twMerge(
-        "flex h-fit w-full shrink-0 snap-center flex-col items-center justify-center p-5 ",
+        "relative z-10 flex w-full flex-col items-center justify-normal gap-20 p-10  text-white ",
         className
       )}
     >

@@ -4,7 +4,7 @@ import { Button, Container, Search, Text } from "@component-library/index";
 import {
   OntoNode,
   OntoNodeType,
-} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import useDeleteOrgaNode from "@/api/Resources/Organization/Mutations/useDeleteOrgaNode";
@@ -145,7 +145,7 @@ const ResourceTable = (props: ResourceTableProps) => {
                               title={t(
                                 "Resources.components.Table.buttons.details"
                               )}
-                              to={`details/${node.nodeID}`}
+                              to={`${node.nodeID}`}
                               className="whitespace-nowrap"
                             />
                             <Button
@@ -154,14 +154,6 @@ const ResourceTable = (props: ResourceTableProps) => {
                                 "Resources.components.Table.buttons.edit"
                               )}
                               to={`edit/${node.nodeID}`}
-                              className="whitespace-nowrap"
-                            />
-                            <Button
-                              variant="text"
-                              title={t(
-                                "Resources.components.Table.buttons.variant"
-                              )}
-                              to={`variant/${node.nodeID}`}
                               className="whitespace-nowrap"
                             />
                             <Button

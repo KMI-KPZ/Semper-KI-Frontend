@@ -4,7 +4,7 @@ import React from "react";
 import HomeProjects from "../components/Projects";
 import HomeOrganization from "../components/Organization";
 import HomeResources from "../components/Resources";
-import HomeAdmin from "../components/Admin";
+import { Navigate } from "react-router-dom";
 
 interface AuthorizedPropsHome {
   user: AuthorizedUserProps;
@@ -33,7 +33,7 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
           </PermissionGate>
         </>
       ) : null}
-      {user.usertype === UserType.ADMIN ? <HomeAdmin /> : null}
+      {user.usertype === UserType.ADMIN ? <Navigate to="admin" /> : null}
     </div>
   );
 };

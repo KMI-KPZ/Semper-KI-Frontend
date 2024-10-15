@@ -10,6 +10,7 @@ import {
   Heading,
   LoadingSuspense,
   Modal,
+  Search,
   Text,
 } from "@component-library/index";
 import { ProcessMaterialCard } from "./components/Card";
@@ -17,7 +18,6 @@ import useSetMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutatio
 import { useProject } from "@/hooks/Project/useProject";
 import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import useModal from "@/hooks/useModal";
-import ServiceSearch from "../Search/Search";
 import useSearch from "@/hooks/useSearch";
 
 interface Props {}
@@ -30,11 +30,9 @@ interface Props {}
 export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const {} = props;
-  // const [state, setState] = useState<State>({
-  //   modalOpen: false,
-  //   material: undefined,
-  // });
-  const [searchText, setSearchText] = useState<string>("");
+
+  const { filterDataBySearchInput, handleSearchInputChange } =
+    useSearch<MaterialProps>();
   const { process } = useManufacturingProcess();
   const { project } = useProject();
   const { projectID, processID } = useParams();
@@ -90,22 +88,6 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
     );
   };
 
-  const filterBySearch = (material: MaterialProps): boolean => {
-    if (searchText === "") {
-      return true;
-    }
-    if (
-      material.title.toLocaleLowerCase().includes(searchText) ||
-      material.propList.filter(
-        (prop) =>
-          prop.name.toLocaleLowerCase().includes(searchText) ||
-          prop.value.toString().toLocaleLowerCase().includes(searchText)
-      ).length > 0
-    )
-      return true;
-    return false;
-  };
-
   const isMaterialSelected = (material: MaterialProps): boolean => {
     return selectedMaterials.find((m) => m.id === material.id) !== undefined;
   };
@@ -133,7 +115,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
         justify="start"
         className="h-full w-screen max-w-6xl gap-5 p-5 pt-14"
       >
-        <ServiceSearch searchText={searchText} setSearchText={setSearchText} />
+        <Search handleSearchInputChange={handleSearchInputChange} />
         <Container direction="col" width="full">
           <Container width="full" direction="col">
             <Container direction="row" width="full" justify="between">
@@ -151,7 +133,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
                   align="start"
                 >
                   {materialsQuery.data
-                    .filter(filterBySearch)
+                    .filter((material) => filterDataBySearchInput(material))
                     .sort(sortSelectedMaterialsFirst)
                     .map((material: MaterialProps, index: number) => (
                       <ProcessMaterialCard

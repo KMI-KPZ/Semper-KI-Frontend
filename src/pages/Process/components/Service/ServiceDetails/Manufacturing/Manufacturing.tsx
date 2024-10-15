@@ -104,7 +104,6 @@ const ServiceManufacturingDetails: React.FC<
         currentToDo = "choose-material";
 
         if (materialsQuery.data !== undefined && materialsQuery.isFetched) {
-          console.log("materialsQuery.data: ", materialsQuery.data);
           materialProps = extractMaterialProps(materialsQuery.data);
 
           // loop over materialProps and add them to detailedHelp with key help_material_[Index]
@@ -125,7 +124,6 @@ const ServiceManufacturingDetails: React.FC<
         currentToDo = "upload-model";
       }
 
-      console.log("currentToDo: ", currentToDo);
       setTopics(
         new Map<string, string>([
           [

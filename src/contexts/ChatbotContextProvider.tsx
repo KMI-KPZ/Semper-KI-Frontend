@@ -83,6 +83,7 @@ function formatTopicsToJSON(topics: Map<string, string>): string {
 const TopicsContext = createContext<TopicsContextType | undefined>(undefined);
 
 const TopicsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const logger: boolean = false;
   const [topics, setTopicsState] = useState<Map<string, string>>(
     new Map([["semper-ki", "Plattform für additive Fertigung"]])
   );
@@ -116,18 +117,19 @@ const TopicsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         ...Array.from(prevTopics.entries()),
         ...Array.from(newTopics.entries()),
       ]);
-      console.log("mergedTopics: ", formatTopicsToJSON(mergedTopics));
-      console.log("prevTopics: ", formatTopicsToJSON(prevTopics));
+      if (logger)
+        console.log("mergedTopics: ", formatTopicsToJSON(mergedTopics));
+      if (logger) console.log("prevTopics: ", formatTopicsToJSON(prevTopics));
       return mergedTopics.size === prevTopics.size ? prevTopics : mergedTopics;
     });
     setMaintopicState(newMainTopic);
     setResponseStructureState(responseStructure);
-    console.log("choices: " + newChoices);
+    if (logger) console.log("choices: " + newChoices);
     setChoices((prevChoices) => {
       if (!newChoices) {
         newChoices = {};
       }
-      console.log("newChoices: " + newChoices);
+      if (logger) console.log("newChoices: " + newChoices);
       return objectsEqual(newChoices, prevChoices) ? prevChoices : newChoices;
     });
     setDetailedHelp((prevHelp) => {
@@ -142,7 +144,7 @@ const TopicsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       mergedHelp.forEach((value, key) => {
         mergedHelp.set(key.toLowerCase(), value);
       });
-      console.log("mergedHelp: ", mergedHelp);
+      if (logger) console.log("mergedHelp: ", mergedHelp);
       return mergedHelp.size === prevHelp.size ? prevHelp : mergedHelp;
     });
   };

@@ -229,7 +229,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
 
   return (
     <div
-      className={`relative flex h-fit w-fit items-center justify-center overflow-clip rounded-xl border-2 bg-white`}
+      className={`relative flex h-fit w-fit items-center justify-center overflow-clip rounded-md border-2 bg-white`}
     >
       {edges.length > 0 && nodes.length > 0 ? (
         <svg ref={svgRef} width={width} height={height} />

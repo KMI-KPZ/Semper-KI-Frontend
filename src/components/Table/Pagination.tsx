@@ -17,7 +17,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   return totalPages > 1 ? (
     <ReactPaginate
-      className="flex w-fit flex-row items-center justify-center gap-3 rounded-xl border-2 bg-white p-3 "
+      className="flex w-fit flex-row items-center justify-center gap-3 rounded-md border-2 bg-white p-3 "
       breakLabel="..."
       nextLabel={t("components.Pagination.next") + "  >"}
       nextClassName=" flex items-center justify-center  grow"

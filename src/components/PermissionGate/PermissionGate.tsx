@@ -18,7 +18,7 @@ const PermissionGate: React.FC<PropsWithChildren<PermissionProps>> = (
   if (true) return <>{children}</>;
   if (inDebugMode)
     return (
-      <div className="w-fit overflow-clip rounded-xl border-2 border-red-500 ">
+      <div className="w-fit overflow-clip rounded-md border-2 border-red-500 ">
         {children}
       </div>
     );

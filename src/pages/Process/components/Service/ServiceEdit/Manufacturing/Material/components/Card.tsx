@@ -22,7 +22,7 @@ export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
 
   return (
     <Container
-      className={`w-fit  gap-0 overflow-clip rounded-xl border-2 bg-white ${
+      className={`w-fit  gap-0 overflow-clip rounded-md border-2 bg-white ${
         selected ? "border-blau-500" : ""
       }`}
       direction="col"

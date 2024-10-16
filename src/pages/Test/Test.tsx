@@ -186,13 +186,13 @@ export const Test: React.FC<Props> = (props) => {
 
       <Container
         direction="row"
-        className="h-screen snap-center flex-wrap rounded-xl border-2 border-white bg-white p-5"
+        className="h-screen snap-center flex-wrap rounded-md border-2 border-white bg-white p-5"
       >
         <ExampleForm />
       </Container>
       <Container
         direction="row"
-        className="h-screen max-w-md snap-center  flex-wrap rounded-xl border-2 border-white bg-white p-5"
+        className="h-screen max-w-md snap-center  flex-wrap rounded-md border-2 border-white bg-white p-5"
       >
         <Text className="text-bold w-full px-3 text-center">ButtonTest</Text>
         <Button title="Primary Active" variant="primary" active />
@@ -205,7 +205,7 @@ export const Test: React.FC<Props> = (props) => {
       <LoadingSuspense query={testDynamicQuery}>
         <Container
           direction="row"
-          className="max-w-4xl flex-wrap overflow-clip rounded-xl border-2 border-white p-5"
+          className="max-w-4xl flex-wrap overflow-clip rounded-md border-2 border-white p-5"
         >
           {testDynamicQuery.data !== undefined
             ? testDynamicQuery.data.map((item, index) => (

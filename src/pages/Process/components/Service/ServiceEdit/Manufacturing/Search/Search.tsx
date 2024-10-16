@@ -32,7 +32,7 @@ const ServiceSearch: React.FC<ServiceSearchProps> = (
       <div className=" flex w-full flex-row ">
         <input
           type="search"
-          className="w-full  rounded-xl rounded-r-none border-2 p-3"
+          className="w-full  rounded-md rounded-r-none border-2 p-3"
           placeholder={t(
             "Service.Manufacturing.Header.Search.Search.placeholder"
           )}
@@ -41,7 +41,7 @@ const ServiceSearch: React.FC<ServiceSearchProps> = (
           onChange={handleOnChangeInput}
         />
         <div
-          className=" flex h-full  flex-row items-center justify-center overflow-clip rounded-xl rounded-l-none bg-gray-200 p-3  text-white hover:cursor-pointer hover:bg-gray-300"
+          className=" flex h-full  flex-row items-center justify-center overflow-clip rounded-md rounded-l-none bg-gray-200 p-3  text-white hover:cursor-pointer hover:bg-gray-300"
           onClick={handleOnClickSearchButton}
           tabIndex={0}
         >

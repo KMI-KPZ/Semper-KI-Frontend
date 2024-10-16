@@ -65,7 +65,7 @@ const TitleForm: React.FC<PropsWithChildren<TitleFormProps>> = (props) => {
               {...register("title", { required: true })}
               onKeyDown={handleKeyDown}
               placeholder={inputPlaceholder}
-              className="w-fit rounded-xl border-2 bg-gray-100 p-2"
+              className="w-fit rounded-md border-2 bg-gray-100 p-2"
             />
             {errors.title ? (
               <Text variant="error">

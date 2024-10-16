@@ -24,7 +24,7 @@ const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
 
   return (
     <Container
-      className={`w-fit min-w-[350px] max-w-[32%] gap-0 overflow-clip rounded-xl border-2 bg-white ${
+      className={`w-fit min-w-[350px] max-w-[32%] gap-0 overflow-clip rounded-md border-2 bg-white ${
         selected ? "border-blau-500" : ""
       }`}
       direction="col"

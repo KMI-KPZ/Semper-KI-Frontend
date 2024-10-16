@@ -56,7 +56,7 @@ const ProcessFilterDatePicker: React.FC<Props> = (props) => {
   return (
     <input
       type="date"
-      className="rounded-xl border-2 px-5 py-3"
+      className="rounded-md border-2 px-5 py-3"
       onChange={handleChangeDate}
       value={getDate()}
     />

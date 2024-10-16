@@ -121,7 +121,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
     <Container
       width="full"
       direction="col"
-      className="gap-0 rounded-xl border-2 p-5"
+      className="gap-0 rounded-md border-2 p-5"
     >
       <Container width="full" justify="start">
         <Heading variant="h3">
@@ -172,7 +172,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
                 direction="col"
                 align="center"
                 wrap="wrap"
-                className="gap-3  rounded-xl border-2 border-gray-400 p-5"
+                className="gap-3  rounded-md border-2 border-gray-400 p-5"
               >
                 {categoryList.filter((category) => category.open).length > 0 ? (
                   categoryList

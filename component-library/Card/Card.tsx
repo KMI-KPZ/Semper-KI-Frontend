@@ -20,7 +20,7 @@ const Card: React.FC<PropsWithChildren<CardProps>> = (props) => {
         items-center
         justify-center
         gap-5
-        rounded-xl 
+        rounded-md 
         border-2 
         border-blau-button
         p-5

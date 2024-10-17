@@ -12,7 +12,9 @@ const AdminDashboard: React.FC<AdminDashboardProps> = (props) => {
 
   return (
     <Container width="full" direction="col" className="bg-white p-5">
-      <Heading variant="h1">{t("Admin.Admin.title")}</Heading>
+      <Heading variant="h1" className="p-2">
+        {t("Admin.Admin.title")}
+      </Heading>
       <Container>
         {adminMenuButtons.map((button, index) => (
           <Button

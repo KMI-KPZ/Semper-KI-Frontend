@@ -1,8 +1,13 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
-import { AdminProps, OrganizationProps } from "@/pages/Admin/hooks/useAdmin";
+import { AdminProps } from "@/pages/Admin/hooks/useAdmin";
 import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
+import { parseAuthorizedUser } from "@/api/User/Querys/useGetUser";
+import {
+  Organization,
+  parseOrganization,
+} from "@/api/Organization/Querys/useGetOrganization";
 
 const useGetAdminData = () => {
   const { user } = useUser();
@@ -12,22 +17,11 @@ const useGetAdminData = () => {
       .then((response) => {
         const data: AdminProps = {
           organizations: response.data.organizations.map(
-            (organization: any): OrganizationProps => ({
-              ...organization,
-              accessedWhen: new Date(organization.accessedWhen),
-              createdWhen: new Date(organization.createdWhen),
-              updatedWhen: new Date(organization.updatedWhen),
-            })
+            (organization: any): Organization => parseOrganization(organization)
           ),
           user: response.data.user.map(
-            (user: any): AuthorizedUserProps => ({
-              ...user,
-              organizationNames: user.organizationNames.toString().split(","),
-              organization: user.organizations,
-              accessedWhen: new Date(user.accessedWhen),
-              createdWhen: new Date(user.createdWhen),
-              updatedWhen: new Date(user.updatedWhen),
-            })
+            (user: any): AuthorizedUserProps =>
+              parseAuthorizedUser(user, "Admin")
           ),
         };
 

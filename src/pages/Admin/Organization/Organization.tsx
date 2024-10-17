@@ -1,10 +1,8 @@
 import { Container, Heading, Search, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useAdmin, { OrganizationProps } from "../hooks/useAdmin";
+import useAdmin from "../hooks/useAdmin";
 import { Button } from "@component-library/index";
-import ClearIcon from "@mui/icons-material/Clear";
-import CheckIcon from "@mui/icons-material/Check";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import TableHeaderButton from "@/components/Table/TableHeaderButton";
@@ -14,31 +12,43 @@ import Table from "@/components/Table/Table";
 import usePagination from "@/hooks/usePagination";
 import Pagination from "@/components/Table/Pagination";
 import useAdminDeleteOrganization from "@/api/Admin/Mutations/useAdminDeleteOrganization";
+import { useNavigate } from "react-router-dom";
+import { Organization } from "@/api/Organization/Querys/useGetOrganization";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
 
-interface AdminOrganizationProps {}
+interface AdminOrganization {}
 
-const AdminOrganization: React.FC<AdminOrganizationProps> = (props) => {
+const AdminOrganization: React.FC<AdminOrganization> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { organizations } = useAdmin();
   const deleteOrganization = useAdminDeleteOrganization();
+  const navigate = useNavigate();
   const { filterDataBySearchInput, handleSearchInputChange } =
-    useSearch<OrganizationProps>();
-  const { getSortIcon, handleSort, sortItems } = useSort<OrganizationProps>();
+    useSearch<Organization>();
+  const { getSortIcon, handleSort, sortItems } = useSort<Organization>();
   const { handlePageChange, paginatedItems, totalPages } =
-    usePagination<OrganizationProps>({
+    usePagination<Organization>({
       items: organizations
         .filter((orga) => filterDataBySearchInput(orga))
         .sort(sortItems),
     });
 
   const handleOnClickButtonDelete = (hashedID: string, name: string) => {
-    if (window.confirm(t("Admin.Organization.confirm")))
+    if (window.confirm(t("Admin.Organization.confirm", { name: name })))
       deleteOrganization.mutate({ hashedID, name });
   };
 
+  const handleOnClickButtonDetails = (hashedID: string) => {
+    navigate(hashedID);
+  };
+
+  const handleOnClickButtonEdit = (hashedID: string) => {
+    navigate(hashedID + "/edit");
+  };
+
   return (
-    <Container width="full" direction="col">
+    <Container width="full" direction="col" className="bg-white p-5">
       <BackButtonContainer>
         <Heading variant="h1">{t("Admin.Organization.title")}</Heading>
       </BackButtonContainer>
@@ -56,8 +66,8 @@ const AdminOrganization: React.FC<AdminOrganizationProps> = (props) => {
               <TableHeaderButton
                 handleSort={handleSort}
                 getSortIcon={getSortIcon}
-                title={t("Admin.Organization.canManufacturer")}
-                objectKey="canManufacture"
+                title={t("Admin.Organization.ServiceType")}
+                objectKey="supportedServices"
               />
               <TableHeaderButton
                 handleSort={handleSort}
@@ -82,15 +92,23 @@ const AdminOrganization: React.FC<AdminOrganizationProps> = (props) => {
           </thead>
           <tbody>
             {paginatedItems.length > 0 ? (
-              paginatedItems.map((orga: OrganizationProps, index: number) => (
+              paginatedItems.map((orga: Organization, index: number) => (
                 <tr key={index}>
                   <td>{orga.name}</td>
                   <td>
-                    {orga.canManufacture === true ? (
-                      <CheckIcon />
-                    ) : (
-                      <ClearIcon />
-                    )}
+                    <Container width="full" direction="col">
+                      {orga.supportedServices.map((serviceType, index) => (
+                        <Text key={index} variant="body">
+                          {t(
+                            `enum.ServiceType.${
+                              ServiceType[
+                                serviceType
+                              ] as keyof typeof ServiceType
+                            }`
+                          )}
+                        </Text>
+                      ))}
+                    </Container>
                   </td>
                   <td className="whitespace-nowrap">
                     {new Date(orga.createdWhen).toLocaleString()}
@@ -102,15 +120,27 @@ const AdminOrganization: React.FC<AdminOrganizationProps> = (props) => {
                     {new Date(orga.updatedWhen).toLocaleString()}
                   </td>
                   <td>
-                    <div className="flex w-full flex-row items-center justify-center gap-3 p-2">
+                    <Container direction="col" width="full">
                       <Button
-                        title={t("Admin.Organization.button.delete")}
+                        title={t("Admin.Resources.button.details")}
+                        onClick={() =>
+                          handleOnClickButtonDetails(orga.hashedID)
+                        }
+                        variant="text"
+                      />
+                      <Button
+                        title={t("Admin.Resources.button.edit")}
+                        onClick={() => handleOnClickButtonEdit(orga.hashedID)}
+                        variant="text"
+                      />
+                      <Button
+                        title={t("Admin.Resources.button.delete")}
                         onClick={() =>
                           handleOnClickButtonDelete(orga.hashedID, orga.name)
                         }
                         variant="text"
                       />
-                    </div>
+                    </Container>
                   </td>
                 </tr>
               ))

@@ -22,6 +22,9 @@ import { ManufacturingMaterials } from "../Process/components/Service/ServiceEdi
 import { ManufacturingPostProcessings } from "../Process/components/Service/ServiceEdit/Manufacturing/PostProcessing/PostProcessing";
 import { Error } from "../Error/Error";
 import ServiceModeling from "../Process/components/Service/ServiceEdit/Modelling/Modelling";
+import AdminUserDetails from "./User/UserDetails";
+import AdminUserForm from "./User/UserForm";
+import AdminOrganizationDetails from "./Organization/OrganizationDetails";
 
 interface AdminProps {}
 
@@ -38,28 +41,36 @@ const Admin: React.FC<AdminProps> = (props) => {
     >
       <Routes>
         <Route index element={<AdminDashboard />} />
-        <Route path="user" element={<AdminUser />} />
-        <Route path="organization" element={<AdminOrganization />} />
-        {/* <Route path="projects/*">
+        <Route path="user">
+          <Route index element={<AdminUser />} />
+          <Route path=":userID">
+            <Route index element={<AdminUserDetails />} />
+            <Route path="edit" element={<AdminUserForm />} />
+          </Route>
+        </Route>
+        <Route path="organization">
+          <Route index element={<AdminOrganization />} />
+          <Route path=":organizationID">
+            <Route index element={<AdminOrganizationDetails />} />
+            <Route path="edit" element={<Navigate to="." />} />
+          </Route>
+        </Route>
+        <Route path="projects">
           <Route index element={<AdminProjects />} />
-          <Route path=":projectID" element={<AdminProject />} />
-        </Route> */}
-        <Route path="projects/*">
-          <Route index element={<AdminProjects />} />
-          <Route path=":projectID/*" element={<ProjectOutlet />}>
+          <Route path=":projectID" element={<ProjectOutlet />}>
             <Route index element={<ProjectPage />} />
             <Route
-              path=":processID/*"
+              path=":processID"
               element={
                 <ProcessOutlet>
                   <ProcessPage />
                 </ProcessOutlet>
               }
             >
-              <Route path="service/*" element={<DefinedProcessOutlet />}>
+              <Route path="service" element={<DefinedProcessOutlet />}>
                 <Route index element={<ServiceEdit />} />
                 <Route
-                  path="manufacturing/*"
+                  path="manufacturing"
                   element={<ManufacturingProcessOutlet />}
                 >
                   <Route index element={<Navigate to="model" />} />
@@ -71,14 +82,13 @@ const Admin: React.FC<AdminProps> = (props) => {
                   />
                   <Route path="*" element={<Error />} />
                 </Route>
-                <Route path="modeling/*" element={<ServiceModeling />} />
+                <Route path="modeling" element={<ServiceModeling />} />
                 <Route path="*" element={<Navigate to="." />} />
               </Route>
             </Route>
           </Route>
         </Route>
-
-        <Route path="resources/*">
+        <Route path="resources">
           <Route index element={<AdminResourcesOverView />} />
           <Route path="graph" element={<OrgaGraph />} />
           <Route path=":nodeType">
@@ -100,12 +110,6 @@ const Admin: React.FC<AdminProps> = (props) => {
               <Route path="edit" element={<ResourcesNodeForm type="edit" />} />
             </Route>
           </Route>
-          {/* <Route index element={<AdminResources />} />
-          <Route path="create" element={<ResourcesNodeForm type="create" />} />
-          <Route path=":nodeID">
-            <Route index element={<ResourcesNodeView />} />
-            <Route path="edit" element={<ResourcesNodeForm type="edit" />} />
-          </Route> */}
         </Route>
       </Routes>
     </Container>

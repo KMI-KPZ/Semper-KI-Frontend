@@ -61,6 +61,42 @@ export const parseOrganizationPrioritise = (
     : [];
 };
 
+export const parseOrganization = (responseData: any): Organization => {
+  const orgaNotificationSettings: OrgaNotificationSetting[] =
+    responseData.details.notificationSettings !== undefined &&
+    responseData.details.notificationSettings.organization !== undefined
+      ? Object.keys(responseData.details.notificationSettings.organization).map(
+          (key: string) => {
+            return {
+              type: key as OrgaNotificationSettingsType,
+              event:
+                responseData.details.notificationSettings.organization[key]
+                  .event,
+              email:
+                responseData.details.notificationSettings.organization[key]
+                  .email,
+            };
+          }
+        )
+      : [];
+
+  const organization: Organization = {
+    ...responseData,
+    accessedWhen: new Date(responseData.accessedWhen),
+    createdWhen: new Date(responseData.createdWhen),
+    updatedWhen: new Date(responseData.updatedWhen),
+    details: {
+      ...responseData.details,
+      notificationSettings: { organization: orgaNotificationSettings },
+      priorities: parseOrganizationPrioritise(responseData.details.priorities),
+    },
+    supportedServices: responseData.supportedServices.filter(
+      (serviceType: ServiceType) => serviceType !== 0
+    ),
+  };
+  return organization;
+};
+
 const useGetOrganization = () => {
   const getOrganization = async () =>
     authorizedCustomAxios
@@ -68,43 +104,9 @@ const useGetOrganization = () => {
       .then((response) => {
         const responseData = response.data;
 
-        const orgaNotificationSettings: OrgaNotificationSetting[] =
-          responseData.details.notificationSettings !== undefined &&
-          responseData.details.notificationSettings.organization !== undefined
-            ? Object.keys(
-                responseData.details.notificationSettings.organization
-              ).map((key: string) => {
-                return {
-                  type: key as OrgaNotificationSettingsType,
-                  event:
-                    responseData.details.notificationSettings.organization[key]
-                      .event,
-                  email:
-                    responseData.details.notificationSettings.organization[key]
-                      .email,
-                };
-              })
-            : [];
-
-        const organization: Organization = {
-          ...responseData,
-          accessedWhen: new Date(responseData.accessedWhen),
-          createdWhen: new Date(responseData.createdWhen),
-          updatedWhen: new Date(responseData.updatedWhen),
-          details: {
-            ...responseData.details,
-            notificationSettings: { organization: orgaNotificationSettings },
-            priorities: parseOrganizationPrioritise(
-              responseData.details.priorities
-            ),
-          },
-          supportedServices: responseData.supportedServices.filter(
-            (serviceType: ServiceType) => serviceType !== 0
-          ),
-        };
-
         logger("useGetOrganization | getOrganization ✅ |", response);
-        return organization;
+
+        return parseOrganization(responseData);
       });
 
   return useQuery<Organization, Error>({

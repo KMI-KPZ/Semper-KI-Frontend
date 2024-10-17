@@ -1,12 +1,5 @@
-import { AuthorizedUserProps } from "@/hooks/useUser";
-import {
-  Container,
-  Heading,
-  Modal,
-  Search,
-  Text,
-} from "@component-library/index";
-import React, { useState } from "react";
+import { Container, Heading, Search, Text } from "@component-library/index";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import useAdmin, { AdminUserProps } from "../hooks/useAdmin";
 import { Button } from "@component-library/index";
@@ -19,7 +12,7 @@ import Table from "@/components/Table/Table";
 import usePagination from "@/hooks/usePagination";
 import Pagination from "@/components/Table/Pagination";
 import useAdminDeleteUser from "@/api/Admin/Mutations/useAdminDeleteUser";
-import AdminUserDetails from "./UserDetails";
+import { useNavigate } from "react-router-dom";
 
 interface Props {}
 
@@ -28,21 +21,19 @@ const AdminUser: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { users } = useAdmin();
   const deleteUser = useAdminDeleteUser();
+  const navigate = useNavigate();
 
-  const [detailedUser, setDetailedUserID] = useState<
-    AdminUserProps | undefined
-  >(undefined);
   const { filterDataBySearchInput, handleSearchInputChange } =
-    useSearch<AuthorizedUserProps>();
+    useSearch<AdminUserProps>();
   const {
     getSortIcon,
     handleSort,
     sortItems,
     getNestedSortIcon,
     handleNestedSort,
-  } = useSort<AuthorizedUserProps>();
+  } = useSort<AdminUserProps>();
   const { handlePageChange, paginatedItems, totalPages } =
-    usePagination<AuthorizedUserProps>({
+    usePagination<AdminUserProps>({
       items: users
         .filter((user) => filterDataBySearchInput(user))
         .sort(sortItems),
@@ -54,15 +45,15 @@ const AdminUser: React.FC<Props> = (props) => {
   };
 
   const handleOnClickButtonDetails = (hashedID: string) => {
-    setDetailedUserID(users.find((user) => user.hashedID === hashedID));
+    navigate(hashedID);
   };
 
   const handleOnClickButtonEdit = (hashedID: string) => {
-    console.log("Edit User", hashedID);
+    navigate(hashedID + "/edit");
   };
 
   return (
-    <Container width="full" direction="col">
+    <Container width="full" direction="col" className="bg-white p-5">
       <BackButtonContainer>
         <Heading variant="h1">{t("Admin.User.title")}</Heading>
       </BackButtonContainer>
@@ -118,13 +109,13 @@ const AdminUser: React.FC<Props> = (props) => {
           </thead>
           <tbody>
             {paginatedItems.length > 0 ? (
-              paginatedItems.map((user: AuthorizedUserProps, index: number) => (
+              paginatedItems.map((user: AdminUserProps, index: number) => (
                 <tr key={index}>
                   <td>{user.name}</td>
                   <td>{user.details.email}</td>
                   <td>
-                    {user.organization !== undefined
-                      ? user.organization.toString().split(",").join(", ")
+                    {user.organizationNames !== undefined
+                      ? user.organizationNames.join(", ")
                       : "---"}
                   </td>
                   <td className="whitespace-nowrap">
@@ -140,7 +131,7 @@ const AdminUser: React.FC<Props> = (props) => {
                     {new Date(user.lastSeen).toLocaleString()}
                   </td>
                   <td>
-                    <Container direction="col">
+                    <Container direction="col" width="full">
                       <Button
                         title={t("Admin.Resources.button.details")}
                         onClick={() =>
@@ -175,15 +166,6 @@ const AdminUser: React.FC<Props> = (props) => {
         </Table>
       </TableContainer>
       <Pagination handlePageChange={handlePageChange} totalPages={totalPages} />
-      <Modal
-        open={detailedUser !== undefined}
-        closeModal={() => setDetailedUserID(undefined)}
-        modalKey="adminUserDetails"
-      >
-        {detailedUser !== undefined ? (
-          <AdminUserDetails user={detailedUser} />
-        ) : null}
-      </Modal>
     </Container>
   );
 };

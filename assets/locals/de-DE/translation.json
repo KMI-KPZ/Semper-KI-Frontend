@@ -558,10 +558,41 @@
       "updated": "Updated",
       "actions": "Aktionen",
       "canManufacturer": "Hersteller",
+      "ServiceType": "Services",
       "button": {
         "delete": "Löschen"
       },
-      "confirm": "Organisation wirklich löschen?"
+      "confirm": "Organisation {{name}} wirklich löschen?",
+      "details": {
+        "title": "Organisationdetails",
+        "general": "Allgemeine Informationen",
+        "hashedID": "Hashed ID",
+        "name": "Name",
+        "details": "Details",
+        "createdWhen": "Erstellt am",
+        "updatedWhen": "Aktualisiert am",
+        "accessedWhen": "Zugegriffen am",
+        "services": "Services",
+        "priorities": "Prioritäten",
+        "notificationSettings": "Benachrichtigungseinstellungen",
+        "empty": "Leer",
+        "email": "Email",
+        "created": "Erstellt",
+        "accessed": "Zugegriffen",
+        "updated": "Aktualisiert",
+        "actions": "Aktionen",
+        "canManufacturer": "Hersteller",
+        "confirm": "Bestätigen",
+        "locale": "Sprache",
+        "branding": "Branding",
+        "adresses": "Adressen",
+        "dates": "Daten",
+        "taxID": "Steuernummer",
+        "primaryColor": "Primärfarbe",
+        "pageBackground": "Hintergrundfarbe",
+        "event": "Event",
+        "button": { "edit": "Bearbeiten" }
+      }
     },
     "Projects": {
       "header": "Projekte",
@@ -578,7 +609,7 @@
         "show": "Anzeigen",
         "delete": "Löschen"
       },
-      "confirm": "Auftrag wirklich löschen?"
+      "confirm": "Den Auftrag {{name}} wirklich löschen?"
     },
     "User": {
       "orga": "Organisationen",
@@ -592,12 +623,23 @@
       "lastSeen": "Letzte Anmeldung",
       "actions": "Aktionen",
       "search": "Suchen...",
+      "userType": "Benutzertyp",
+      "locale": "Sprache",
+      "lastLogin": "Letzte Anmeldung am",
+      "locationOfLastLogin": "Standort der letzten Anmeldung",
+      "numberOfLoginsTotal": "Anzahl der Anmeldungen insgesamt",
+      "general": "Allgemeine Informationen",
+      "statistics": "Statistiken",
+      "dates": "Daten",
+      "adresses": "Adressen",
       "button": {
         "delete": "Löschen",
-        "search": "Suchen"
+        "search": "Suchen",
+        "edit": "Bearbeiten"
       },
       "confirm": "User wirklich löschen?",
-      "details": { "title": "Benutzerdetails" }
+      "details": { "title": "Benutzerdetails" },
+      "form": { "title": "Benutzer bearbeiten" }
     },
     "Admin": {
       "title": "Adminbereich",

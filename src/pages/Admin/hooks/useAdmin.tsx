@@ -4,10 +4,11 @@ import { AuthorizedUserProps } from "@/hooks/useUser";
 import { useContext } from "react";
 import { ProjectDetailsProps } from "@/api/Project/Querys/useGetProject";
 import { AdminContext } from "@/outlets/AdminOutlet";
+import { Organization } from "@/api/Organization/Querys/useGetOrganization";
 
 interface ReturnProps {
   users: AdminUserProps[];
-  organizations: OrganizationProps[];
+  organizations: Organization[];
   flatProjects: FlatProject[];
 }
 
@@ -18,21 +19,11 @@ export interface DeleteUserProps {
 
 export interface AdminProps {
   user: AdminUserProps[];
-  organizations: OrganizationProps[];
+  organizations: Organization[];
 }
 
 export interface AdminUserProps extends AuthorizedUserProps {
   organizationNames: string[];
-}
-
-export interface OrganizationProps {
-  hashedID: string;
-  name: string;
-  canManufacture: boolean;
-  details: any;
-  createdWhen: Date;
-  updatedWhen: Date;
-  accessedWhen: Date;
 }
 
 export interface AdminFlatProjectProps {

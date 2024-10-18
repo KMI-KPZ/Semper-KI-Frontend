@@ -592,7 +592,8 @@
         "pageBackground": "Hintergrundfarbe",
         "event": "Event",
         "button": { "edit": "Bearbeiten" }
-      }
+      },
+      "form": { "title": "Organisationinformationen bearbeiten" }
     },
     "Projects": {
       "header": "Projekte",

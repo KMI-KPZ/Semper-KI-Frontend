@@ -146,7 +146,6 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
               md:max-w-6xl
               md:-translate-y-1/2
               md:translate-x-1/2 
-              md:bg-gray-100
               md:p-5`,
 
           className

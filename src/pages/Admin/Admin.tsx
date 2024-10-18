@@ -25,6 +25,7 @@ import ServiceModeling from "../Process/components/Service/ServiceEdit/Modelling
 import AdminUserDetails from "./User/UserDetails";
 import AdminUserForm from "./User/UserForm";
 import AdminOrganizationDetails from "./Organization/OrganizationDetails";
+import AdminOrganizationForm from "./Organization/OrganiaztionForm";
 
 interface AdminProps {}
 
@@ -44,15 +45,31 @@ const Admin: React.FC<AdminProps> = (props) => {
         <Route path="user">
           <Route index element={<AdminUser />} />
           <Route path=":userID">
-            <Route index element={<AdminUserDetails />} />
+            <Route
+              index
+              element={
+                <>
+                  <AdminUser />
+                  <AdminUserDetails />
+                </>
+              }
+            />
             <Route path="edit" element={<AdminUserForm />} />
           </Route>
         </Route>
         <Route path="organization">
           <Route index element={<AdminOrganization />} />
           <Route path=":organizationID">
-            <Route index element={<AdminOrganizationDetails />} />
-            <Route path="edit" element={<Navigate to="." />} />
+            <Route
+              index
+              element={
+                <>
+                  <AdminOrganization />
+                  <AdminOrganizationDetails />
+                </>
+              }
+            />
+            <Route path="edit" element={<AdminOrganizationForm />} />
           </Route>
         </Route>
         <Route path="projects">

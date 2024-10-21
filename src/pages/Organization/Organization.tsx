@@ -13,7 +13,6 @@ import NotificationForm from "@/components/Form/Notifications/NotificationForm";
 import PrioritiesForm from "@/components/Form/Priorities/PrioritiesForm";
 import useGetOrganizationRoles from "@/api/Organization/Querys/useGetOrganizationRoles";
 import useGetOrganizationInvites from "@/api/Organization/Querys/useGetOrganizationInvites";
-import { useLocation } from "react-router-dom";
 import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
 
 interface OrganizationViewProps {}
@@ -24,10 +23,8 @@ const Organization: React.FC<OrganizationViewProps> = (props) => {
   const { organization } = useOrganization();
   const rolesQuery = useGetOrganizationRoles();
   const invitesQuery = useGetOrganizationInvites();
-  const location = useLocation();
 
-  const hash = location.hash;
-  useScrollIntoView(hash);
+  useScrollIntoView();
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">

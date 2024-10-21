@@ -3,13 +3,13 @@ import logger from "../useLogger";
 
 interface useScrollIntoViewReturnProps {}
 
-const useScrollIntoView = (newestID: string): useScrollIntoViewReturnProps => {
+const useScrollIntoView = (newestID?: string): useScrollIntoViewReturnProps => {
   useEffect(() => {
     const hash = window.location.hash;
     const elementId = hash.slice(1);
     if (elementId) {
       const element = document.getElementById(
-        elementId === "newest" ? newestID : elementId
+        elementId === "newest" && newestID !== undefined ? newestID : elementId
       );
       logger("useScrollIntoView | useEffect | id", element, newestID);
       if (element) {

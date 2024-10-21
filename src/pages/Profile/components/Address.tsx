@@ -31,7 +31,7 @@ const ProfileAddress: React.FC<ProfileAddressProps> = (props) => {
   };
 
   return (
-    <Container width="full" direction="col">
+    <Container width="full" direction="col" id="ProfileAddress">
       <Heading variant="h2">{t("Profile.address.header")}</Heading>
       <Divider />
       {user.details.addresses !== undefined &&

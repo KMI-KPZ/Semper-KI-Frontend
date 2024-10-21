@@ -1,13 +1,13 @@
-import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { UserProps, UserType } from "@/hooks/useUser";
+import { AuthorizedUser, UserType } from "@/hooks/useUser";
 import React from "react";
 import HomeProjects from "../components/Projects";
-import HomeOrganization from "../components/Organization";
-import HomeResources from "../components/Resources";
+import HomeOrgaResources from "../components/Resources";
 import { Navigate } from "react-router-dom";
+import HomeUserProgress from "../components/UserProgress";
+import HomeOrgaAccountProgress from "../components/OrgaProgress";
 
 interface AuthorizedPropsHome {
-  user: UserProps;
+  user: AuthorizedUser;
 }
 
 const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
@@ -18,21 +18,11 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
       className="flex w-full flex-col items-center justify-center gap-10"
       data-testid="home-authorized"
     >
-      {user.usertype !== UserType.ADMIN ? (
-        <PermissionGate element={"HomeAuthorizedProject"}>
-          <HomeProjects />
-        </PermissionGate>
-      ) : null}
-      {user.usertype === UserType.ORGANIZATION ? (
-        <>
-          <PermissionGate element={"HomeAuthorizedOrganization"}>
-            <HomeOrganization />
-          </PermissionGate>
-          <PermissionGate element={"HomeAuthorizedResources"}>
-            <HomeResources />
-          </PermissionGate>
-        </>
-      ) : null}
+      <HomeUserProgress user={user} />
+      <HomeOrgaAccountProgress />
+      <HomeProjects />
+      <HomeOrgaResources />
+
       {user.usertype === UserType.ADMIN ? <Navigate to="admin" /> : null}
     </div>
   );

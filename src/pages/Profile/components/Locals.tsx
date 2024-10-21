@@ -45,7 +45,7 @@ const ProfileLocals: React.FC<ProfileLocalsProps> = (props) => {
   };
 
   return (
-    <Container width="full" direction="col">
+    <Container width="full" direction="col" id="ProfileLocals">
       <Heading variant="h2">{t("Profile.locals.header")}</Heading>
       <Divider />
       <Container width="full" direction="row" align="center" justify="center">

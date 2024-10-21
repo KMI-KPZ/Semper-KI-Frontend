@@ -812,6 +812,39 @@
         "advantage": "Ihre Vorteile als Privatperson",
         "register": "Als Privatperson Registrieren"
       },
+      "HomeUserProgress": {
+        "progress": "Fortschritt {{count}} von {{total}}",
+        "todo": "Einrichtung des Profils",
+        "finished": "Einrichtung abgeschlossen",
+        "items": {
+          "general": "Allgemeine Informationen hinzufügen",
+          "notificationSettings": "Benachrichtigungseinstellungen festlegen",
+          "adresses": "Adressen hinzufügen",
+          "lang": "Sprache festlegen"
+        },
+        "button": {
+          "orga": "Profil"
+        }
+      },
+      "HomeOrgaAccountProgress": {
+        "progress": "Fortschritt {{count}} von {{total}}",
+        "todo": "Einrichtung der Organisation",
+        "finished": "Einrichtung abgeschlossen",
+        "items": {
+          "general": "Allgemeine Informationen hinzufügen",
+          "services": "Services auswählen",
+          "resources": "Ressourcen hinzufügen",
+          "priorities": "Prioritäten setzen",
+          "notificationSettings": "Benachrichtigungseinstellungen festlegen",
+          "branding": "Branding festlegen",
+          "adresses": "Adressen hinzufügen",
+          "user": "Benutzer hinzufügen",
+          "lang": "Sprache festlegen"
+        },
+        "button": {
+          "orga": "Organisation"
+        }
+      },
       "Container": {},
       "Coypu": {
         "title": "Coypu News",
@@ -842,18 +875,7 @@
       },
       "Organization": {
         "title": "Organisation",
-        "todo": "Einrichtung der Organisation",
-        "progress": "Fortschritt {{count}} von {{total}}",
-        "items": {
-          "general": "Allgemeine Informationen hinzufügen",
-          "services": "Services auswählen",
-          "resources": "Ressourcen hinzufügen",
-          "priorities": "Prioritäten setzen",
-          "notificationSettings": "Benachrichtigungseinstellungen festlegen",
-          "branding": "Branding festlegen",
-          "adresses": "Adressen hinzufügen",
-          "user": "Benutzer hinzufügen"
-        },
+
         "button": {
           "edit": "Oragnisation verwalten"
         }

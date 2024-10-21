@@ -64,7 +64,7 @@ const ProfileGeneral: React.FC<ProfileGeneralProps> = (props) => {
   const maxLength = 70;
 
   return (
-    <form className="w-full">
+    <form className="w-full" id="ProfileGeneral">
       <Container width="full" direction="col">
         <Heading variant="h2">{t("Profile.general.header")}</Heading>
         <Divider />

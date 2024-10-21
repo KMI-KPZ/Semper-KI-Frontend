@@ -1,12 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Button,
-  Container,
-  Divider,
-  Heading,
-  Text,
-} from "@component-library/index";
+import { Button, Container, Heading, Text } from "@component-library/index";
 import HomeProgressItem, { HomeProgressItemData } from "./ProgressItem";
 import { AuthorizedUser } from "@/hooks/useUser";
 import HomeContainer from "./Container";
@@ -52,7 +46,6 @@ const HomeUserProgress: React.FC<HomeUserProgressProps> = (props) => {
       <Heading variant="h2">
         {t("Home.components.HomeUserProgress.todo")}
       </Heading>
-      <Divider />
 
       <Container width="full" direction="col">
         <Text className="text-black">

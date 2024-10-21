@@ -1,8 +1,7 @@
-import { AuthorizedUser, UserType } from "@/hooks/useUser";
+import { AuthorizedUser } from "@/hooks/useUser";
 import React from "react";
 import HomeProjects from "../components/Projects";
 import HomeOrgaResources from "../components/Resources";
-import { Navigate } from "react-router-dom";
 import HomeUserProgress from "../components/UserProgress";
 import HomeOrgaAccountProgress from "../components/OrgaProgress";
 
@@ -22,8 +21,6 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
       <HomeOrgaAccountProgress />
       <HomeProjects />
       <HomeOrgaResources />
-
-      {user.usertype === UserType.ADMIN ? <Navigate to="admin" /> : null}
     </div>
   );
 };

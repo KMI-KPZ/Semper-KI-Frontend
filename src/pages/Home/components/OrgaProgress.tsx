@@ -1,12 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Button,
-  Container,
-  Divider,
-  Heading,
-  Text,
-} from "@component-library/index";
+import { Button, Container, Heading, Text } from "@component-library/index";
 import useOrganization from "@/hooks/useOrganization";
 import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetAllOrgaNodeNeighbors";
 import useGetOrganizationUsers from "@/api/Organization/Querys/useGetOrganizationUsers";
@@ -96,7 +90,6 @@ const HomeOrgaAccountProgress: React.FC<HomeOrgaAccountProgressProps> = (
       <Heading variant="h2">
         {t("Home.components.HomeOrgaAccountProgress.todo")}
       </Heading>
-      <Divider />
       <Container width="full" direction="col">
         <Text className="text-black">
           {t("Home.components.HomeOrgaAccountProgress.progress", {

@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { AuthorizedUserProps } from "./useUser";
+import { AuthorizedUser } from "./useUser";
 import { UseQueryResult } from "@tanstack/react-query";
 import { AuthorizedUserContext } from "@/outlets/AuthorizedUserOutlet";
 
 interface useAuthorizedUserReturnProps {
-  user: AuthorizedUserProps;
-  query: UseQueryResult<AuthorizedUserProps, Error>;
+  user: AuthorizedUser;
+  query: UseQueryResult<AuthorizedUser, Error>;
 }
 
 const useAuthorizedUser = (): useAuthorizedUserReturnProps => {

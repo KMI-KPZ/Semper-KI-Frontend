@@ -1,6 +1,6 @@
 import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import { AuthorizedUserProps } from "@/hooks/useUser";
+import { DefaultUser } from "@/hooks/useUser";
 import { useContext } from "react";
 import { ProjectDetailsProps } from "@/api/Project/Querys/useGetProject";
 import { AdminContext } from "@/outlets/AdminOutlet";
@@ -22,7 +22,7 @@ export interface AdminProps {
   organizations: Organization[];
 }
 
-export interface AdminUserProps extends AuthorizedUserProps {
+export interface AdminUserProps extends DefaultUser {
   organizationNames: string[];
 }
 

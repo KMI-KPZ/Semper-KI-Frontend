@@ -7,13 +7,13 @@ import {
   Modal,
   Text,
 } from "@component-library/index";
-import { AuthorizedUserProps } from "@/hooks/useUser";
+import { AuthorizedUser } from "@/hooks/useUser";
 import AddressCard from "@/components/Address/AddressCard";
 import AddIcon from "@mui/icons-material/Add";
 import AddressForm from "@/components/Form/AddressForm";
 
 interface ProfileAddressProps {
-  user: AuthorizedUserProps;
+  user: AuthorizedUser;
 }
 
 const ProfileAddress: React.FC<ProfileAddressProps> = (props) => {

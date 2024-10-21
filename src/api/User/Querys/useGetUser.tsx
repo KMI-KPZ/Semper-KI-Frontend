@@ -3,7 +3,8 @@ import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { getAuthorizedUserType } from "@/services/utils";
 import {
-  AuthorizedUserProps,
+  AuthorizedUser,
+  DefaultUser,
   OrgaNotificationSetting,
   OrgaNotificationSettingsType,
   UserAddressProps,
@@ -15,7 +16,7 @@ import { AdminUserProps } from "@/pages/Admin/hooks/useAdmin";
 export const parseAuthorizedUser = (
   userData: any,
   type: "Admin" | "Client"
-): AuthorizedUserProps | AdminUserProps => {
+): AuthorizedUser | AdminUserProps => {
   const addresses: UserAddressProps[] =
     userData.details.addresses !== undefined
       ? userData.details.addresses
@@ -95,7 +96,7 @@ export const parseAuthorizedUser = (
         updatedWhen: new Date(userData.updatedWhen),
         lastSeen: new Date(userData.lastSeen),
         usertype: getAuthorizedUserType(userData.usertype),
-      } as AuthorizedUserProps);
+      } as AuthorizedUser);
 };
 
 const useGetUser = (useUserIsLoggedInQuery: UseQueryResult<boolean, Error>) => {
@@ -110,7 +111,7 @@ const useGetUser = (useUserIsLoggedInQuery: UseQueryResult<boolean, Error>) => {
         const newUser = parseAuthorizedUser(userData, "Client");
         return newUser;
       });
-  return useQuery<AuthorizedUserProps, Error>({
+  return useQuery<AuthorizedUser, Error>({
     queryKey: ["user"],
     queryFn: fetchUser,
     enabled:

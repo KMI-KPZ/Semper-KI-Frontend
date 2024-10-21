@@ -1,5 +1,5 @@
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { AuthorizedUserProps, UserType } from "@/hooks/useUser";
+import { DefaultUser, UserProps, UserType } from "@/hooks/useUser";
 import React from "react";
 import HomeProjects from "../components/Projects";
 import HomeOrganization from "../components/Organization";
@@ -7,7 +7,7 @@ import HomeResources from "../components/Resources";
 import { Navigate } from "react-router-dom";
 
 interface AuthorizedPropsHome {
-  user: AuthorizedUserProps;
+  user: UserProps;
 }
 
 const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {

@@ -842,6 +842,17 @@
       },
       "Organization": {
         "title": "Organisation",
+        "todo": "Einrichtung der Organisation",
+        "progress": "Fortschritt {{count}}",
+        "items": {
+          "general": "Allgemeine Informationen",
+          "services": "Services",
+          "resources": "Ressourcen",
+          "priorities": "Prioritäten",
+          "notificationSettings": "Benachrichtigungseinstellungen",
+          "branding": "Branding",
+          "adresses": "Adressen"
+        },
         "button": {
           "edit": "Oragnisation verwalten"
         }

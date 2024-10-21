@@ -8,7 +8,7 @@ import {
   LoadingAnimation,
   Text,
 } from "@component-library/index";
-import { AuthorizedUserProps } from "@/hooks/useUser";
+import { AuthorizedUser } from "@/hooks/useUser";
 import CheckIcon from "@mui/icons-material/Check";
 import EditIcon from "@mui/icons-material/Edit";
 import {
@@ -19,7 +19,7 @@ import useUpdateUser from "@/api/User/Mutations/useUpdateUser";
 import useSetUserLocal from "@/api/Authentification/Mutations/useSetUserLocal";
 
 interface ProfileLocalsProps {
-  user: AuthorizedUserProps;
+  user: AuthorizedUser;
 }
 
 const ProfileLocals: React.FC<ProfileLocalsProps> = (props) => {

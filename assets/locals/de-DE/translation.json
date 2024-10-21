@@ -843,15 +843,16 @@
       "Organization": {
         "title": "Organisation",
         "todo": "Einrichtung der Organisation",
-        "progress": "Fortschritt {{count}}",
+        "progress": "Fortschritt {{count}} von {{total}}",
         "items": {
-          "general": "Allgemeine Informationen",
-          "services": "Services",
-          "resources": "Ressourcen",
-          "priorities": "Prioritäten",
-          "notificationSettings": "Benachrichtigungseinstellungen",
-          "branding": "Branding",
-          "adresses": "Adressen"
+          "general": "Allgemeine Informationen hinzufügen",
+          "services": "Services auswählen",
+          "resources": "Ressourcen hinzufügen",
+          "priorities": "Prioritäten setzen",
+          "notificationSettings": "Benachrichtigungseinstellungen festlegen",
+          "branding": "Branding festlegen",
+          "adresses": "Adressen hinzufügen",
+          "user": "Benutzer hinzufügen"
         },
         "button": {
           "edit": "Oragnisation verwalten"

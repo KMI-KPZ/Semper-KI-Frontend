@@ -32,7 +32,6 @@ import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { Test } from "../Test/Test";
-import { OrganizationOutlet } from "@/outlets/OrganizationOutlet";
 import { ToastContainer } from "react-toastify";
 import { ContentBox } from "@component-library/index";
 import { Background, Breadcrumb } from "@/components/index";
@@ -165,28 +164,26 @@ const App: React.FC = () => {
               <Route element={<AuthorizedUserOutlet />}>
                 <Route path="test" element={<Test />} />
                 <Route path="account" element={<Profile />} />
-                <Route element={<OrganizationOutlet />}>
-                  <Route
-                    path="organization"
-                    element={
-                      <PermissionGate
-                        element="Organization"
-                        showMessage
-                        children={<Organization />}
-                      />
-                    }
-                  />
-                  <Route
-                    path="resources/*"
-                    element={
-                      <PermissionGate
-                        children={<Resources />}
-                        element="Resources"
-                        showMessage
-                      />
-                    }
-                  />
-                </Route>
+                <Route
+                  path="organization"
+                  element={
+                    <PermissionGate
+                      element="Organization"
+                      showMessage
+                      children={<Organization />}
+                    />
+                  }
+                />
+                <Route
+                  path="resources/*"
+                  element={
+                    <PermissionGate
+                      children={<Resources />}
+                      element="Resources"
+                      showMessage
+                    />
+                  }
+                />
                 <Route element={<AdminOutlet />}>
                   <Route path="admin/*" element={<Admin />} />
                 </Route>

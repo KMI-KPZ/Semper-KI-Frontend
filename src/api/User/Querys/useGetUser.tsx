@@ -4,19 +4,14 @@ import { authorizedCustomAxios } from "@/api/customAxios";
 import { getAuthorizedUserType } from "@/services/utils";
 import {
   AuthorizedUser,
-  DefaultUser,
   OrgaNotificationSetting,
   OrgaNotificationSettingsType,
   UserAddressProps,
   UserNotificationSetting,
   UserNotificationSettingsType,
 } from "@/hooks/useUser";
-import { AdminUserProps } from "@/pages/Admin/hooks/useAdmin";
 
-export const parseAuthorizedUser = (
-  userData: any,
-  type: "Admin" | "Client"
-): AuthorizedUser | AdminUserProps => {
+export const parseAuthorizedUser = (userData: any): AuthorizedUser => {
   const addresses: UserAddressProps[] =
     userData.details.addresses !== undefined
       ? userData.details.addresses
@@ -53,50 +48,24 @@ export const parseAuthorizedUser = (
         )
       : [];
 
-  return type === "Admin"
-    ? ({
-        hashedID: userData.hashedID,
-        name: userData.name,
-        organizationNames:
-          userData.organizationNames !== ""
-            ? userData.organizationNames.toString().split(",")
-            : undefined,
-        organization:
-          userData.organizations !== ""
-            ? userData.organizations.toString().split(",")
-            : undefined,
-        details: {
-          ...userData.details,
-          addresses,
-          notificationSettings: {
-            user: userNotificationSettings,
-            organization: orgaNotificationSettings,
-          },
-        },
-        accessedWhen: new Date(userData.accessedWhen),
-        createdWhen: new Date(userData.createdWhen),
-        updatedWhen: new Date(userData.updatedWhen),
-        lastSeen: new Date(userData.lastSeen),
-        usertype: getAuthorizedUserType(userData.usertype),
-      } as AdminUserProps)
-    : ({
-        hashedID: userData.hashedID,
-        name: userData.name,
-        organization: userData.organization,
-        details: {
-          ...userData.details,
-          addresses,
-          notificationSettings: {
-            user: userNotificationSettings,
-            organization: orgaNotificationSettings,
-          },
-        },
-        accessedWhen: new Date(userData.accessedWhen),
-        createdWhen: new Date(userData.createdWhen),
-        updatedWhen: new Date(userData.updatedWhen),
-        lastSeen: new Date(userData.lastSeen),
-        usertype: getAuthorizedUserType(userData.usertype),
-      } as AuthorizedUser);
+  return {
+    hashedID: userData.hashedID,
+    name: userData.name,
+    organization: userData.organization,
+    details: {
+      ...userData.details,
+      addresses,
+      notificationSettings: {
+        user: userNotificationSettings,
+        organization: orgaNotificationSettings,
+      },
+    },
+    accessedWhen: new Date(userData.accessedWhen),
+    createdWhen: new Date(userData.createdWhen),
+    updatedWhen: new Date(userData.updatedWhen),
+    lastSeen: new Date(userData.lastSeen),
+    usertype: getAuthorizedUserType(userData.usertype),
+  } as AuthorizedUser;
 };
 
 const useGetUser = (useUserIsLoggedInQuery: UseQueryResult<boolean, Error>) => {
@@ -108,7 +77,7 @@ const useGetUser = (useUserIsLoggedInQuery: UseQueryResult<boolean, Error>) => {
 
         logger("useGetUser | fetchUser ✅ |", response);
 
-        const newUser = parseAuthorizedUser(userData, "Client");
+        const newUser = parseAuthorizedUser(userData);
         return newUser;
       });
   return useQuery<AuthorizedUser, Error>({

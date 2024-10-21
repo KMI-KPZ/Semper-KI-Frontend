@@ -25,7 +25,7 @@ const NotificationForm: React.FC<NotificationFormProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <Container direction="col" width="full">
+    <Container direction="col" width="full" id="NotificationForm">
       <Heading variant="h2">{t("Profile.notifications.header")}</Heading>
       <Divider />
       <Container>

@@ -97,7 +97,7 @@ export const parseOrganization = (responseData: any): Organization => {
   return organization;
 };
 
-const useGetOrganization = () => {
+const useGetOrganization = (loading: boolean) => {
   const getOrganization = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/organizations/get/`)
@@ -112,6 +112,7 @@ const useGetOrganization = () => {
   return useQuery<Organization, Error>({
     queryKey: ["organization", "info"],
     queryFn: getOrganization,
+    enabled: loading,
     staleTime: 300000, // 5 minutes
   });
 };

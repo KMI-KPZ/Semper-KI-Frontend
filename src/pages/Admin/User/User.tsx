@@ -1,7 +1,7 @@
 import { Container, Heading, Search, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useAdmin, { AdminUserProps } from "../hooks/useAdmin";
+import useAdmin, { AdminDataUser } from "../hooks/useAdmin";
 import { Button } from "@component-library/index";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
@@ -24,16 +24,16 @@ const AdminUser: React.FC<Props> = (props) => {
   const navigate = useNavigate();
 
   const { filterDataBySearchInput, handleSearchInputChange } =
-    useSearch<AdminUserProps>();
+    useSearch<AdminDataUser>();
   const {
     getSortIcon,
     handleSort,
     sortItems,
     getNestedSortIcon,
     handleNestedSort,
-  } = useSort<AdminUserProps>();
+  } = useSort<AdminDataUser>();
   const { handlePageChange, paginatedItems, totalPages } =
-    usePagination<AdminUserProps>({
+    usePagination<AdminDataUser>({
       items: users
         .filter((user) => filterDataBySearchInput(user))
         .sort(sortItems),
@@ -78,7 +78,7 @@ const AdminUser: React.FC<Props> = (props) => {
                 handleSort={handleSort}
                 getSortIcon={getSortIcon}
                 title={t("Admin.User.orga")}
-                objectKey="organization"
+                objectKey="organizationNames"
               />
               <TableHeaderButton
                 handleSort={handleSort}
@@ -109,7 +109,7 @@ const AdminUser: React.FC<Props> = (props) => {
           </thead>
           <tbody>
             {paginatedItems.length > 0 ? (
-              paginatedItems.map((user: AdminUserProps, index: number) => (
+              paginatedItems.map((user: AdminDataUser, index: number) => (
                 <tr key={index}>
                   <td>{user.name}</td>
                   <td>{user.details.email}</td>

@@ -13,12 +13,14 @@ import { OrganizationInvite } from "@/api/Organization/Querys/useGetOrganization
 import useDeleteInvite from "@/api/Organization/Mutations/useDeleteInvite";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-interface InvitationProps {
+interface OrganizationInvitationProps {
   roles: RoleProps[] | undefined;
   invites: OrganizationInvite[] | undefined;
 }
 
-const Invitation: React.FC<InvitationProps> = (props) => {
+const OrganizationInvitation: React.FC<OrganizationInvitationProps> = (
+  props
+) => {
   const { roles = [], invites = [] } = props;
   const { t } = useTranslation();
   const [showLoadedIn, setShowLoadedIn] = useState<boolean>(false);
@@ -80,7 +82,12 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   };
 
   return (
-    <Container direction="col" className="container" width="full">
+    <Container
+      direction="col"
+      className="container"
+      width="full"
+      id="OrganizationInvitation"
+    >
       <Heading variant="h2" className="whitespace-nowrap">
         {t("Organization.components.invitation.header")}
       </Heading>
@@ -175,4 +182,4 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   );
 };
 
-export default Invitation;
+export default OrganizationInvitation;

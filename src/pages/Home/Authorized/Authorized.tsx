@@ -1,5 +1,5 @@
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import { DefaultUser, UserProps, UserType } from "@/hooks/useUser";
+import { UserProps, UserType } from "@/hooks/useUser";
 import React from "react";
 import HomeProjects from "../components/Projects";
 import HomeOrganization from "../components/Organization";

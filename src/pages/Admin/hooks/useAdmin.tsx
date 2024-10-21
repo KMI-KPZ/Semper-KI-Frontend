@@ -7,7 +7,7 @@ import { AdminContext } from "@/outlets/AdminOutlet";
 import { Organization } from "@/api/Organization/Querys/useGetOrganization";
 
 interface ReturnProps {
-  users: AdminUserProps[];
+  users: AdminDataUser[];
   organizations: Organization[];
   flatProjects: FlatProject[];
 }
@@ -18,11 +18,11 @@ export interface DeleteUserProps {
 }
 
 export interface AdminProps {
-  user: AdminUserProps[];
+  user: AdminDataUser[];
   organizations: Organization[];
 }
 
-export interface AdminUserProps extends DefaultUser {
+export interface AdminDataUser extends DefaultUser {
   organizationNames: string[];
 }
 

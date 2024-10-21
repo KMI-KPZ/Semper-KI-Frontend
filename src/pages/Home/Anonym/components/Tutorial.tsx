@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Container, Heading, Text } from "@component-library/index";
 import HomeHeader from "./Header";
-import YouTube, { YouTubePlayer } from "react-youtube";
+import YouTube from "react-youtube";
 import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import HomeButton from "./Button";
 

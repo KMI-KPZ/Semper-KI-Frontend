@@ -105,13 +105,13 @@ const AdminUserDetails: React.FC<AdminUserDetailsProps> = (props) => {
                       {orgaName}
                     </td>
                   </tr>
-                  <tr>
+                  {/* <tr>
                     <td colSpan={2} className="border-b-2 px-5 py-2">
                       {user.organization !== undefined
                         ? user.organization[index]
                         : "---"}
                     </td>
-                  </tr>
+                  </tr> */}
                 </React.Fragment>
               ))
             )}

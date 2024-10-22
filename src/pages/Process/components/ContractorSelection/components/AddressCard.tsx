@@ -85,7 +85,11 @@ const ContractorSelectionAddressCard: React.FC<
   };
 
   return (
-    <Container width="full" direction="col" className="card gap-0">
+    <Container
+      width="full"
+      direction="col"
+      className="card h-full gap-0 self-stretch"
+    >
       <Heading variant="h3">
         {t(
           `Process.components.ContractorSelection.ContractorSelection.heading.${

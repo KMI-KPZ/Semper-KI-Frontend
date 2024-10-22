@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Text } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 interface HomeProgressItemProps {
   item: HomeProgressItemData;
@@ -23,14 +23,14 @@ const HomeProgressItem: React.FC<HomeProgressItemProps> = (props) => {
       width="full"
       direction="row"
       onClick={() => navigate(item.link)}
-      className={`flex     justify-start rounded-md border-2 p-3 text-black duration-300 hover:scale-105  hover:cursor-pointer md:h-full md:w-[calc(50%-10px)] ${
-        item.finished ? "border-green-500" : "border-red-500"
+      className={`flex justify-start self-stretch rounded-md border-2 p-3 text-black duration-300 hover:scale-105  hover:cursor-pointer  md:w-[calc(50%-10px)] ${
+        item.finished ? "border-green-500" : "border-orange-500"
       }`}
     >
       {item.finished ? (
         <CheckCircleOutlineIcon className="text-green-500" />
       ) : (
-        <RemoveCircleOutlineIcon className="text-red-500" />
+        <HelpOutlineIcon className="text-orange-500" />
       )}
       <Text>{item.title}</Text>
     </Container>

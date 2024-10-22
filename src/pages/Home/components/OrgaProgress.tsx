@@ -83,7 +83,8 @@ const HomeOrgaAccountProgress: React.FC<HomeOrgaAccountProgressProps> = (
 
   const allFinished = items.every((item) => item.finished);
 
-  if (allFinished) return null;
+  if (getAllNodeNeighbours.isLoading || userQuery.isLoading || allFinished)
+    return null;
 
   return (
     <HomeContainer>

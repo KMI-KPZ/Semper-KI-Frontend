@@ -2,6 +2,8 @@ import { Button, Container, Divider } from "@component-library/index";
 import useStatusButtons from "@/hooks/Project/useStatusButtons";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useProcess from "@/hooks/Process/useProcess";
+import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
+import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 
 interface ProcessStatusButtonsProps {
   start: ProcessStatus;
@@ -16,8 +18,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const show = process.processStatus >= start && process.processStatus <= end;
 
   return show && getProcessStatusButtons(process).length > 0 ? (
-    <Container width="full" direction="col">
-      <Divider />
+    <Container width="full" direction="col" className="bg-white p-5">
       <Container width="full" direction="row" wrap="wrap">
         {getProcessStatusButtons(process).map((button, index) => (
           // <PermissionGate
@@ -33,7 +34,16 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
             key={index}
             variant={button.buttonVariant}
             size="sm"
-            startIcon={button.icon}
+            startIcon={
+              button.buttonVariant === "secondary" ? (
+                <ArrowBackOutlinedIcon />
+              ) : undefined
+            }
+            endIcon={
+              button.buttonVariant === "primary" ? (
+                <ArrowForwardOutlinedIcon />
+              ) : undefined
+            }
             onClick={() => handleOnClickButton(button, process.processID)}
             title={button.title}
             active={button.active}

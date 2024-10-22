@@ -85,7 +85,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
           width="full"
           justify="start"
           direction="col"
-          className=" card"
+          className="card self-stretch"
         >
           <Heading variant="h3">
             {t(
@@ -93,7 +93,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
             )}
           </Heading>
           {process.processDetails.provisionalContractor === undefined ? (
-            <Container width="full" direction="col">
+            <Container width="full" height="full" direction="col">
               <Button
                 size="sm"
                 onClick={handleOnClickButtonSelectContractor}
@@ -125,7 +125,12 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
             </Container>
           )}
         </Container>
-        <Container direction="col" width="full">
+        <Container
+          direction="col"
+          width="full"
+          justify="start"
+          className="self-stretch"
+        >
           <ContractorSelectionAddressCard
             onChangeCheckBox={onChangeCheckBox}
             showDeliveryAddress={showDeliveryAddress}

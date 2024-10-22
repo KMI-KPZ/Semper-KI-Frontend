@@ -48,7 +48,7 @@ const HomeUserProgress: React.FC<HomeUserProgressProps> = (props) => {
       </Heading>
 
       <Container width="full" direction="col">
-        <Text className="text-black">
+        <Text className="text-center text-black">
           {t("Home.components.HomeUserProgress.progress", {
             count: items.filter((item) => item.finished).length,
             total: items.length,

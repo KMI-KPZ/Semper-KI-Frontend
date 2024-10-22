@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import logger from "../useLogger";
 
 interface useScrollIntoViewReturnProps {}
 
@@ -11,7 +10,7 @@ const useScrollIntoView = (newestID?: string): useScrollIntoViewReturnProps => {
       const element = document.getElementById(
         elementId === "newest" && newestID !== undefined ? newestID : elementId
       );
-      logger("useScrollIntoView | useEffect | id", element, newestID);
+      // logger("useScrollIntoView | useEffect | id", element, newestID);
       if (element) {
         element.scrollIntoView({ behavior: "smooth", block: "start" });
       }

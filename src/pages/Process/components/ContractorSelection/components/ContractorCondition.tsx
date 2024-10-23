@@ -13,8 +13,11 @@ const ContractorCondition: React.FC<ContractorConditionProps> = (props) => {
   return (
     <Container direction="col" align="center" className={`gap-0 `}>
       <Heading variant="h2" className="whitespace-nowrap">
-        {t(`Process.Service.ServiceDetails.components.manufacturing.`)}
+        {t(
+          `Process.components.ContractorSelection.components.ContractorCondition.heading`
+        )}
       </Heading>
+      {/* {process.} */}
     </Container>
   );
 };

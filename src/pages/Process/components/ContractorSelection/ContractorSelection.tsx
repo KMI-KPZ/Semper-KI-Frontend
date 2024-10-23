@@ -16,6 +16,7 @@ import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 import ContractorCard from "./components/ContractorCard";
 import ContractorSelectionAddressCard from "./components/AddressCard";
 import useGetContractors from "@/api/Process/Querys/useGetContractors";
+import ContractorCondition from "./components/ContractorCondition";
 
 interface ProcessContractorSelectionProps {}
 
@@ -80,9 +81,9 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
       start={ProcessStatus.SERVICE_COMPLETED}
       end={ProcessStatus.SERVICE_COMPLETED}
       condition={
-        process.processStatus !== ProcessStatus.CONTRACTOR_COMPLETED
-          ? undefined
-          : undefined
+        process.processStatus !== ProcessStatus.CONTRACTOR_COMPLETED ? (
+          <ContractorCondition />
+        ) : undefined
       }
     >
       <Container width="full" justify="center" align="start" direction="auto">

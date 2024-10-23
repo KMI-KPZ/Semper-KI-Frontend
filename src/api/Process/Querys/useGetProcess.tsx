@@ -26,6 +26,13 @@ export interface ProcessDetailsProps {
   priorities: OrganizationPriority[];
 }
 
+export type ProcessError =
+  | "ServiceManufacturingModel"
+  | "ServiceManufacturingMaterial"
+  | "ServiceManufacturingPostProcessing"
+  | "Contractor"
+  | "Address";
+
 export type Process = NoServiceProcessProps | DefinedProcess;
 
 export type DefinedProcess = ManufactoringProcessProps | ModelingProcessProps;
@@ -37,6 +44,7 @@ export type DefaultProcessProps = {
   processStatus: ProcessStatus;
   processStatusButtons?: StatusButtonPropsExtern[];
   processDetails: ProcessDetailsProps;
+  processErrors: ProcessError[];
   serviceType: ServiceType;
   serviceStatus: number;
   serviceDetails: ServiceProps;

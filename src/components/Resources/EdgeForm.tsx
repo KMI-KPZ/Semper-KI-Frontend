@@ -188,7 +188,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                         >
                           {node.createdBy === organization.hashedID
                             ? organization.name
-                            : "Sermper-KI"}
+                            : "Semper-KI"}
                         </td>
                         <td
                           className={`border-t-2 p-3 text-left ${
@@ -333,7 +333,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                       >
                         {node.createdBy === organization.hashedID
                           ? organization.name
-                          : "Sermper-KI"}
+                          : "Semper-KI"}
                       </td>
                       <td
                         className={`border-t-2 p-3 text-center ${

@@ -1254,6 +1254,11 @@
       },
       "ContractorSelection": {
         "components": {
+          "ContractorCondition": {
+            "heading": "Angaben Unvollständig",
+            "noContractor": "Kein Auftragnehmer ausgewählt",
+            "noAddress": "keine Adressen ausgewählt"
+          },
           "AddressSelection": {
             "heading": "Addresse auswählen",
             "button": {

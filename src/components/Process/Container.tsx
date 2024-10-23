@@ -13,6 +13,7 @@ interface ProcessContainerProps {
   pageTitle: string;
   start: ProcessStatus;
   end: ProcessStatus;
+  condition?: ReactNode;
 }
 
 const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
@@ -27,6 +28,7 @@ const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
     pageTitle,
     start,
     menuChildren,
+    condition,
   } = props;
 
   return (
@@ -42,7 +44,7 @@ const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
         </ProcessHeader>
         {children}
       </Container>
-      <ProcessStatusButtons start={start} end={end} />
+      <ProcessStatusButtons start={start} end={end} condition={condition} />
     </>
   );
 };

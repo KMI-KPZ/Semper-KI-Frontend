@@ -7,6 +7,7 @@ interface ButtonProps {
   title: string;
   to?: string;
   onClick?(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
+  onClickError?(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
   size?: ButtonSize;
   variant?: ButtonVariant;
   width?: ButtonWidth;
@@ -45,6 +46,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     target = "_self",
     stopPropagation = true,
     onClick,
+    onClickError,
     title,
     children,
     to,
@@ -59,6 +61,9 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     if (!extern) {
       e.preventDefault();
       if (stopPropagation === true) e.stopPropagation();
+      if (onClickError !== undefined && !active) {
+        onClickError(e);
+      }
       if (onClick !== undefined && active && !loading) {
         onClick(e);
       }

@@ -46,15 +46,11 @@ const ServiceCondition: React.FC<ServiceConditionProps> = (props) => {
 
   return (
     <Container direction="col" align="center" className={`gap-0 `}>
-      <Container width="fit" direction="row" className="p-4">
-        <Heading variant="h2" className="whitespace-nowrap">
-          {t(
-            `Process.Service.ServiceDetails.components.manufacturing.${
-              allFinished ? "complete" : "incomplete"
-            }`
-          )}
-        </Heading>
-      </Container>
+      <Heading variant="h2" className="whitespace-nowrap">
+        {t(
+          `Process.Service.ServiceDetails.components.manufacturing.incomplete`
+        )}
+      </Heading>
       <Container
         width="fit"
         direction="row"

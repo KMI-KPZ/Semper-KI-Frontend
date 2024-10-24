@@ -8,7 +8,6 @@ import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import ServiceDetails from "./ServiceDetails/ServiceDetails";
 import ProcessContainer from "@/components/Process/Container";
 import ProcessFilter from "./Filter/Filter";
-import ServiceCondition from "./components/ServiceCondition";
 
 interface ServiceProps {
   process: Process;
@@ -66,11 +65,6 @@ const Service: React.FC<ServiceProps> = (props) => {
           size="sm"
           onClick={handleOnClickButtonEditType}
         />
-      }
-      condition={
-        process.processStatus !== ProcessStatus.SERVICE_READY ? (
-          <ServiceCondition />
-        ) : undefined
       }
     >
       {noServiceSelected ? (

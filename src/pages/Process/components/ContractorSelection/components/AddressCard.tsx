@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import { ProcessAddressType } from "../ContractorSelection";
 import AddressSelection from "./AddressSelection";
 import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
+import ProcessConditionIcon from "@/components/Process/ConditionIcon";
 
 interface ContractorSelectionAddressCardProps {
   showDeliveryAddress: boolean;
@@ -89,14 +90,28 @@ const ContractorSelectionAddressCard: React.FC<
       width="full"
       direction="col"
       className="card h-full gap-0 self-stretch"
+      id={type === "billing" ? "BillingAddress" : "DeliveryAddress"}
     >
-      <Heading variant="h3">
-        {t(
-          `Process.components.ContractorSelection.ContractorSelection.heading.${
-            !showDeliveryAddress ? "billingDelivery" : type
-          }`
-        )}
-      </Heading>
+      <Container width="fit" className={`gap-2 p-0 `}>
+        <ProcessConditionIcon
+          error={
+            (process.processDetails.clientBillingAddress === undefined &&
+              type === "billing") ||
+            (process.processDetails.clientDeliverAddress === undefined &&
+              type === "delivery") ||
+            (process.processDetails.clientDeliverAddress === undefined &&
+              showDeliveryAddress)
+          }
+        />
+
+        <Heading variant="h3">
+          {t(
+            `Process.components.ContractorSelection.ContractorSelection.heading.${
+              !showDeliveryAddress ? "billingDelivery" : type
+            }`
+          )}
+        </Heading>
+      </Container>
       {address === undefined ? (
         <Container
           direction="row"

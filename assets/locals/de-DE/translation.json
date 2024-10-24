@@ -235,6 +235,13 @@
       "color": "Farbe",
       "number": "Zahl",
       "multiselection": "Mehrfachauswahl"
+    },
+    "ProcessError": {
+      "ServiceManufacturingModel": "Bitte ein Modell auswählen/hochladen",
+      "ServiceManufacturingMaterial": "Bitte ein Material auswählen",
+      "ServiceManufacturingPostProcessing": "Bitte eine Nachbearbeitung auswählen",
+      "Contractor": "Bitte einen Auftragnehmer auswählen",
+      "Address": "Bitte eine Adresse auswählen"
     }
   },
   "api": {

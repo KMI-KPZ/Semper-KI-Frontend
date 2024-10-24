@@ -4,16 +4,16 @@ import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useProcess from "@/hooks/Process/useProcess";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import ProcessConditionItem from "./ConditionItem";
 
 interface ProcessStatusButtonsProps {
   start: ProcessStatus;
   end: ProcessStatus;
-  condition?: ReactNode;
 }
 
 const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
-  const { end, start, condition } = props;
+  const { end, start } = props;
   const { process } = useProcess();
   const { getProcessStatusButtons, handleOnClickButton } = useStatusButtons();
   const [error, setError] = useState(false);
@@ -34,7 +34,8 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
 
   return show && getProcessStatusButtons(process).length > 0 ? (
     <Container width="full" direction="col" className="bg-white p-5">
-      {condition === undefined ? null : (
+      {process.processErrors === undefined ||
+      process.processErrors.length === 0 ? null : (
         <Container
           direction="col"
           align="center"
@@ -42,7 +43,9 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
             error ? "border-red-500" : ""
           }`}
         >
-          {condition}
+          {process.processErrors.map((error, index) => (
+            <ProcessConditionItem key={index} error={error} />
+          ))}
         </Container>
       )}
       <Container width="full" direction="row" wrap="wrap">

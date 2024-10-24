@@ -25,8 +25,7 @@ import ProcessStatusGate from "../../../StatusGate";
 import { useTopics } from "@/contexts/ChatbotContextProvider";
 import useSetMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useSetMaterial";
 import { useProject } from "@/hooks/Project/useProject";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import ProcessConditionIcon from "@/components/Process/ConditionIcon";
 
 interface ServiceManufacturingDetailsProps {
   process: ManufactoringProcessProps;
@@ -197,11 +196,7 @@ const ServiceManufacturingDetails: React.FC<
         id="ServiceManufacturingModels"
       >
         <Container width="fit" className={`gap-2 rounded-md p-0 pt-2 `}>
-          {models.length === 0 ? (
-            <CancelOutlinedIcon className="text-orange-500" />
-          ) : (
-            <CheckCircleOutlineIcon className="text-green-500" />
-          )}
+          <ProcessConditionIcon error={models.length === 0} />
           <Heading variant="h3">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.model.heading"
@@ -247,11 +242,7 @@ const ServiceManufacturingDetails: React.FC<
         id="ServiceManufacturingMaterials"
       >
         <Container width="fit" className={`gap-2 rounded-md  p-0 pt-2`}>
-          {materials.length === 0 ? (
-            <CancelOutlinedIcon className="text-orange-500" />
-          ) : (
-            <CheckCircleOutlineIcon className="text-green-500" />
-          )}
+          <ProcessConditionIcon error={materials.length === 0} />
           <Heading variant="h3">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.material.heading"
@@ -296,8 +287,8 @@ const ServiceManufacturingDetails: React.FC<
         className="p-5"
         id="ServiceManufacturingPostProcessings"
       >
-        <Container width="fit" className={`gap-2 rounded-md p-0 pt-2`}>
-          <CheckCircleOutlineIcon className="text-green-500" />
+        <Container width="fit" className={`gap-2 p-0 pt-2`}>
+          <ProcessConditionIcon error={false} />
           <Heading variant="h3" className="whitespace-nowrap ">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.postProcessing.heading"

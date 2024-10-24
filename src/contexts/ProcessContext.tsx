@@ -32,6 +32,7 @@ export const ProcessContext = React.createContext<ProcessContextProps>({
     serviceType: 0,
     accessedWhen: new Date(),
     processStatusButtons: [],
+    processErrors: [],
   },
   filters: [],
   setFilters: () => {},

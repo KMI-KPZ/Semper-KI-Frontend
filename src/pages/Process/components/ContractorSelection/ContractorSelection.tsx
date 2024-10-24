@@ -16,7 +16,7 @@ import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 import ContractorCard from "./components/ContractorCard";
 import ContractorSelectionAddressCard from "./components/AddressCard";
 import useGetContractors from "@/api/Process/Querys/useGetContractors";
-import ContractorCondition from "./components/ContractorCondition";
+import ProcessConditionIcon from "@/components/Process/ConditionIcon";
 
 interface ProcessContractorSelectionProps {}
 
@@ -80,24 +80,29 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
       menuButtonTitle={menuButtonTitle}
       start={ProcessStatus.SERVICE_COMPLETED}
       end={ProcessStatus.SERVICE_COMPLETED}
-      condition={
-        process.processStatus !== ProcessStatus.CONTRACTOR_COMPLETED ? (
-          <ContractorCondition />
-        ) : undefined
-      }
     >
       <Container width="full" justify="center" align="start" direction="auto">
         <Container
           width="full"
           justify="start"
           direction="col"
-          className="card self-stretch"
+          className={`card ${!showDeliveryAddress ? "self-stretch" : ""}`}
+          id="Contractor"
         >
-          <Heading variant="h3">
-            {t(
-              "Process.components.ContractorSelection.ContractorSelection.heading.sub1"
-            )}
-          </Heading>
+          <Container width="fit" className={`gap-2 p-0 `}>
+            <ProcessConditionIcon
+              error={
+                process.processDetails.provisionalContractor === undefined ||
+                process.processDetails.provisionalContractor === ""
+              }
+            />
+
+            <Heading variant="h3">
+              {t(
+                "Process.components.ContractorSelection.ContractorSelection.heading.sub1"
+              )}
+            </Heading>
+          </Container>
           {process.processDetails.provisionalContractor === undefined ? (
             <Container width="full" height="full" direction="col">
               <Button

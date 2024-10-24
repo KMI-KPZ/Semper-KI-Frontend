@@ -193,7 +193,7 @@ const ServiceManufacturingDetails: React.FC<
         direction="col"
         gap={5}
         className="p-5"
-        id="ServiceManufacturingModels"
+        id="Service-ADDITIVE_MANUFACTURING-models"
       >
         <Container width="fit" className={`gap-2 rounded-md p-0 pt-2 `}>
           <ProcessConditionIcon error={models.length === 0} />
@@ -239,7 +239,7 @@ const ServiceManufacturingDetails: React.FC<
         width="full"
         direction="col"
         className="p-5"
-        id="ServiceManufacturingMaterials"
+        id="Service-ADDITIVE_MANUFACTURING-materials"
       >
         <Container width="fit" className={`gap-2 rounded-md  p-0 pt-2`}>
           <ProcessConditionIcon error={materials.length === 0} />

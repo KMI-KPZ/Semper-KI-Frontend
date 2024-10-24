@@ -17,6 +17,7 @@ import ContractorCard from "./components/ContractorCard";
 import ContractorSelectionAddressCard from "./components/AddressCard";
 import useGetContractors from "@/api/Process/Querys/useGetContractors";
 import ProcessConditionIcon from "@/components/Process/ConditionIcon";
+import ProcessStatusGate from "../StatusGate";
 
 interface ProcessContractorSelectionProps {}
 
@@ -125,14 +126,16 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
           ) : (
             <Container width="full" direction="col">
               <ContractorCard contractor={currentContractor} />
-              <Button
-                size="sm"
-                onClick={handleOnClickButtonEditContractor}
-                variant="secondary"
-                title={t(
-                  "Process.components.ContractorSelection.components.ContractorList.button.edit"
-                )}
-              />
+              <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+                <Button
+                  size="sm"
+                  onClick={handleOnClickButtonEditContractor}
+                  variant="secondary"
+                  title={t(
+                    "Process.components.ContractorSelection.components.ContractorList.button.edit"
+                  )}
+                />
+              </ProcessStatusGate>
             </Container>
           )}
         </Container>

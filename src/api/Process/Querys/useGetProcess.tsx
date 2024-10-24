@@ -27,11 +27,12 @@ export interface ProcessDetailsProps {
 }
 
 export type ProcessError =
-  | "ServiceManufacturingModel"
-  | "ServiceManufacturingMaterial"
+  | "Service-ADDITIVE_MANUFACTURING-models"
+  | "Service-ADDITIVE_MANUFACTURING-materials"
   | "ServiceManufacturingPostProcessing"
-  | "Contractor"
-  | "Address";
+  | "Process-Contractor"
+  | "Process-Address-Billing"
+  | "Process-Address-Deliver";
 
 export type Process = NoServiceProcessProps | DefinedProcess;
 

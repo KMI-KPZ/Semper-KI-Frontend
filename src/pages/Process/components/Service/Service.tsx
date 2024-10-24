@@ -8,6 +8,7 @@ import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import ServiceDetails from "./ServiceDetails/ServiceDetails";
 import ProcessContainer from "@/components/Process/Container";
 import ProcessFilter from "./Filter/Filter";
+import ProcessStatusGate from "../StatusGate";
 
 interface ServiceProps {
   process: Process;
@@ -71,7 +72,9 @@ const Service: React.FC<ServiceProps> = (props) => {
         <ServiceSelection />
       ) : (
         <>
-          <ProcessFilter />
+          <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+            <ProcessFilter />
+          </ProcessStatusGate>
           <ServiceDetails process={process} />
         </>
       )}

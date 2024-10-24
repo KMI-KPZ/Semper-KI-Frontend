@@ -30,12 +30,7 @@ const EventContextProvider: React.FC<
     missedEventsQuery.data !== undefined ? missedEventsQuery.data : []
   );
 
-  if (
-    (user.usertype !== UserType.ANONYM &&
-      missedEventsQuery.isFetched &&
-      missedEventsQuery.data !== undefined) ||
-    user.usertype === UserType.ANONYM
-  ) {
+  if (user.usertype !== UserType.ANONYM || user.usertype === UserType.ANONYM) {
     return (
       <EventContext.Provider
         value={{

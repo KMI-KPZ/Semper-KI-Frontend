@@ -237,11 +237,12 @@
       "multiselection": "Mehrfachauswahl"
     },
     "ProcessError": {
-      "ServiceManufacturingModel": "Bitte ein Modell auswählen/hochladen",
-      "ServiceManufacturingMaterial": "Bitte ein Material auswählen",
+      "Service-ADDITIVE_MANUFACTURING-models": "Bitte ein Modell auswählen/hochladen",
+      "Service-ADDITIVE_MANUFACTURING-materials": "Bitte ein Material auswählen",
       "ServiceManufacturingPostProcessing": "Bitte eine Nachbearbeitung auswählen",
-      "Contractor": "Bitte einen Auftragnehmer auswählen",
-      "Address": "Bitte eine Adresse auswählen"
+      "Process-Contractor": "Bitte einen Auftragnehmer auswählen",
+      "Process-Address-Billing": "Bitte eine Rechnungsadresse auswählen",
+      "Process-Address-Deliver": "Bitte eine Lieferadresse auswählen"
     }
   },
   "api": {

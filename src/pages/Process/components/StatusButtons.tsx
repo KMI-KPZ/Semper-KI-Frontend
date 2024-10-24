@@ -37,9 +37,9 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
       {process.processErrors === undefined ||
       process.processErrors.length === 0 ? null : (
         <Container
-          direction="col"
           align="center"
-          className={`gap-0 rounded-md border-2 px-10 md:min-w-[500px] ${
+          wrap="wrap"
+          className={`gap-5 rounded-md border-2 px-10 py-5 md:min-w-[500px] ${
             error ? "border-red-500" : ""
           }`}
         >

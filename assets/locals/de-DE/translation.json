@@ -1233,6 +1233,8 @@
       "Filter": {
         "Filter": {
           "menuButtonTitle": "Filter Menu",
+          "pageDescription1": "Hier können Sie ihre Vorgaben für den Prozess festlegen.",
+          "pageDescription2": "Dies hilft ihnen die Auswahl zu vereinfachen.",
           "pageTitle": "Ihre Vorgaben",
           "button": {
             "selected": "Ausgewählt"
@@ -1462,6 +1464,8 @@
         "components": {
           "manufacturing": {
             "heading": "Ihre Auswahl",
+            "pageDescription1": "Wählen sie die gewünschten Modelle, Materialien und Nachbearbeitungen aus.",
+            "pageDescription2": "Diese Auswahl wird verwendet um die passenden Hersteller zu finden.",
             "complete": "Auswahl Vollständig",
             "incomplete": "Auswahl Unvollständig",
             "model": {
@@ -1550,6 +1554,9 @@
       "button": {
         "back": "Zurück"
       }
+    },
+    "StatusButtons": {
+      "heading": "Todos"
     }
   },
   "Project": {

@@ -1,4 +1,4 @@
-import { Button, Container } from "@component-library/index";
+import { Button, Container, Heading } from "@component-library/index";
 import useStatusButtons from "@/hooks/Project/useStatusButtons";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useProcess from "@/hooks/Process/useProcess";
@@ -6,6 +6,7 @@ import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 import { useEffect, useState } from "react";
 import ProcessConditionItem from "./ConditionItem";
+import { useTranslation } from "react-i18next";
 
 interface ProcessStatusButtonsProps {
   start: ProcessStatus;
@@ -17,6 +18,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { process } = useProcess();
   const { getProcessStatusButtons, handleOnClickButton } = useStatusButtons();
   const [error, setError] = useState(false);
+  const { t } = useTranslation();
 
   const handleOnClickButtonError = () => {
     setError(true);
@@ -38,11 +40,13 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
       process.processErrors.length === 0 ? null : (
         <Container
           align="center"
+          direction="col"
           wrap="wrap"
           className={`gap-5 rounded-md border-2 px-10 py-5 md:min-w-[500px] ${
             error ? "border-red-500" : ""
           }`}
         >
+          <Heading variant="h2">{t("Process.StatusButtons.heading")}</Heading>
           {process.processErrors.map((error, index) => (
             <ProcessConditionItem key={index} error={error} />
           ))}

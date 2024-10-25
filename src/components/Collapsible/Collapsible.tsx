@@ -84,7 +84,7 @@ const Collapsible: React.FC<PropsWithChildren<CollapsibleProps>> = (props) => {
           )}
           onClick={handleOnClickButton}
           variant="text"
-          className="gap-2"
+          className="gap-2 pt-3"
         >
           <Text variant="body">
             {t(

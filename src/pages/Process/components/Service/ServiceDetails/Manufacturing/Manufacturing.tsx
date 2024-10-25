@@ -181,10 +181,27 @@ const ServiceManufacturingDetails: React.FC<
       width="full"
       className="gap-0 rounded-md border-2 p-0"
     >
-      <Container width="fit" direction="row" justify="start" className="p-5">
-        <Heading variant="h2">
+      <Container
+        width="fit"
+        direction="row"
+        justify="start"
+        className="p-5 pb-2"
+      >
+        <Heading variant="h3">
           {t("Process.Service.ServiceDetails.components.manufacturing.heading")}
         </Heading>
+      </Container>
+      <Container width="full" direction="col" className="gap-0 p-2">
+        <Text>
+          {t(
+            "Process.Service.ServiceDetails.components.manufacturing.pageDescription1"
+          )}
+        </Text>
+        <Text>
+          {t(
+            "Process.Service.ServiceDetails.components.manufacturing.pageDescription2"
+          )}
+        </Text>
       </Container>
       <Divider />
       <Container
@@ -197,7 +214,7 @@ const ServiceManufacturingDetails: React.FC<
       >
         <Container width="fit" className={`gap-2 rounded-md p-0 pt-2 `}>
           <ProcessConditionIcon error={models.length === 0} />
-          <Heading variant="h3">
+          <Heading variant="h4" className="text-xl">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.model.heading"
             )}
@@ -243,7 +260,7 @@ const ServiceManufacturingDetails: React.FC<
       >
         <Container width="fit" className={`gap-2 rounded-md  p-0 pt-2`}>
           <ProcessConditionIcon error={materials.length === 0} />
-          <Heading variant="h3">
+          <Heading variant="h4" className="text-xl">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.material.heading"
             )}
@@ -289,7 +306,7 @@ const ServiceManufacturingDetails: React.FC<
       >
         <Container width="fit" className={`gap-2 p-0 pt-2`}>
           <ProcessConditionIcon error={false} />
-          <Heading variant="h3" className="whitespace-nowrap ">
+          <Heading variant="h4" className="whitespace-nowrap text-xl">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.postProcessing.heading"
             )}

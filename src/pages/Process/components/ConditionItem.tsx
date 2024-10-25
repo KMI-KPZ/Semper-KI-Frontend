@@ -17,7 +17,7 @@ const ProcessConditionItem: React.FC<ProcessConditionItemProps> = (props) => {
 
   return (
     <Container
-      width="fit"
+      width="full"
       justify="start"
       direction="row"
       className={`min-w-[calc(50%-10px)] self-stretch rounded-md border-2 border-orange-500 p-2 hover:cursor-pointer hover:bg-gray-50`}
@@ -27,7 +27,9 @@ const ProcessConditionItem: React.FC<ProcessConditionItemProps> = (props) => {
       tabIndex
     >
       <ProcessConditionIcon error={true} />
-      <Text>{t(`types.ProcessError.${error}`)}</Text>
+      <Text className="w-full text-center">
+        {t(`types.ProcessError.${error}`)}
+      </Text>
     </Container>
   );
 };

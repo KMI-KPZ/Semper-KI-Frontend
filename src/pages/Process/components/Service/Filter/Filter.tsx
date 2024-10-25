@@ -121,16 +121,21 @@ const ProcessFilter: React.FC<Props> = (props) => {
     <Container
       width="full"
       direction="col"
-      className="gap-0 rounded-md border-2 p-5"
+      className="gap-0 rounded-md border-2 p-0 pb-5"
     >
-      <Container width="full" justify="start">
+      <Container width="full" justify="start" className="p-5 pb-2">
         <Heading variant="h3">
           {t("Process.components.Filter.Filter.pageTitle")}
         </Heading>
       </Container>
+      <Container width="full" direction="col" className="gap-0 p-2">
+        <Text>{t("Process.components.Filter.Filter.pageDescription1")}</Text>
+        <Text>{t("Process.components.Filter.Filter.pageDescription2")}</Text>
+      </Container>
+      <Divider />
 
       <Collapsible initialOpen showButton logName="Filter" animation={false}>
-        <Container width="full" direction="col" className="my-5">
+        <Container width="full" direction="col" className="p-5">
           <Container width="full" direction="col">
             <Container width="full" direction="col" className="gap-0 p-0">
               <Container
@@ -228,6 +233,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
             </Container>
           </Container>
         </Container>
+        <Divider />
       </Collapsible>
     </Container>
   );

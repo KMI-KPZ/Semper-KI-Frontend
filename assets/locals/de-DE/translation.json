@@ -2078,7 +2078,8 @@
         "noProperties": "keine Eigenschaften vorhanden",
         "button": {
           "draft": "Vorlage auswählen",
-          "variant": "Variante erstellen"
+          "variant": "Variante erstellen",
+          "edit": "Bearbeiten"
         }
       },
       "Menu": {

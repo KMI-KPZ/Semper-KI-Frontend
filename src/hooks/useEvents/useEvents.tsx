@@ -1,10 +1,4 @@
-import {
-  DeleteEvent,
-  Event,
-  ProcessEventItem,
-  ProjectEventItem,
-  ProjectEvents,
-} from "@/pages/App/types";
+import { Event, ProcessEventItem, ProjectEventItem } from "@/pages/App/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,9 +9,9 @@ import useProjectEvent from "./hooks/useProjectEvent";
 import { toast } from "@/hooks/useToast";
 import { EventContext } from "@/contexts/EventContextProvider";
 import useReloadPermissions from "@/api/Permissions/Mutations/useReloadPermissions";
+import useDeleteEvent from "@/api/Events/Mutations/useDeleteEvent";
 
 interface ReturnProps {
-  deleteEvent: (event: DeleteEvent) => void;
   socket: WebSocket | null;
   events: Event[];
   getProjectEventItem: (projectID: string) => ProjectEventItem | undefined;
@@ -34,12 +28,12 @@ interface ReturnProps {
 }
 
 const useEvents = (): ReturnProps => {
-  const { events, socket, setEvents } = useContext(EventContext);
+  const { events, socket } = useContext(EventContext);
   const reloadPermissions = useReloadPermissions();
 
   const queryClient = useQueryClient();
-  const { handleNewProjectEvent, deleteProjectEvent } = useProjectEvent();
-  const { handleNewOrgaEvent, deleteOrgaEvent } = useOrgaEvent();
+  const { handleNewProjectEvent } = useProjectEvent();
+  const { handleNewOrgaEvent } = useOrgaEvent();
   const { t } = useTranslation();
 
   if (socket !== null) {
@@ -87,14 +81,15 @@ const useEvents = (): ReturnProps => {
     }
   };
 
-  const deleteEvent = (event: DeleteEvent) => {
+  const _deleteEvent = (event: DeleteEvent) => {
     logger("useEvents | deleteEvent | event", event);
     switch (event.eventType) {
       case "projectEvent":
-        setEvents((prevState) => deleteProjectEvent(event, prevState));
+        // setEvents((prevState) => deleteProjectEvent(event, prevState));
+        // deleteEvent(event.)
         break;
       case "orgaEvent":
-        setEvents((prevState) => deleteOrgaEvent(event, prevState));
+        // setEvents((prevState) => deleteOrgaEvent(event, prevState));
         break;
     }
   };
@@ -157,7 +152,7 @@ const useEvents = (): ReturnProps => {
 
   return {
     socket,
-    deleteEvent,
+    deleteEvent: _deleteEvent,
     events,
     getProjectEventItem,
     getProjectEventCount,

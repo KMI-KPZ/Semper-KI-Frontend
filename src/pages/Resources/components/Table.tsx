@@ -153,7 +153,7 @@ const ResourceTable = (props: ResourceTableProps) => {
                               title={t(
                                 "Resources.components.Table.buttons.edit"
                               )}
-                              to={`edit/${node.nodeID}`}
+                              to={`${node.nodeID}/edit`}
                               className="whitespace-nowrap"
                             />
                             <Button

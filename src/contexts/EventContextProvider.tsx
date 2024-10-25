@@ -1,22 +1,20 @@
-import useGetMissedEvents from "@/api/Events/Querys/useGetMissedEvents";
+import useGetEvents from "@/api/Events/Querys/useGetEvents";
 import { useEventsWebsocket } from "@/api/Events/Websocket/useEventsWebsocket";
 import useUser, { UserType } from "@/hooks/useUser";
 import { Event } from "@/pages/App/types";
 import { AppLoadingSuspense } from "@component-library/index";
-import React, { PropsWithChildren, useState } from "react";
+import React, { PropsWithChildren } from "react";
 
 interface EventContextProviderProps {}
 
 export type EventContext = {
   socket: WebSocket | null;
   events: Event[];
-  setEvents: React.Dispatch<React.SetStateAction<Event[]>>;
 };
 
 export const EventContext = React.createContext<EventContext>({
   socket: null,
   events: [],
-  setEvents: () => {},
 });
 
 const EventContextProvider: React.FC<
@@ -24,19 +22,16 @@ const EventContextProvider: React.FC<
 > = (props) => {
   const { children } = props;
   const { user } = useUser();
-  const missedEventsQuery = useGetMissedEvents();
+  const events = useGetEvents();
   const { socket } = useEventsWebsocket();
-  const [events, setEvents] = useState<Event[]>(
-    missedEventsQuery.data !== undefined ? missedEventsQuery.data : []
-  );
 
-  if (user.usertype !== UserType.ANONYM || user.usertype === UserType.ANONYM) {
+  if (user.usertype === UserType.ANONYM) return children;
+  if (events.isFetched && events.data !== undefined) {
     return (
       <EventContext.Provider
         value={{
           socket,
-          events,
-          setEvents,
+          events: events.data,
         }}
       >
         {children}

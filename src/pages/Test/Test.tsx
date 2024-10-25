@@ -1,4 +1,4 @@
-import { ReactNode, useRef } from "react";
+import React, { ReactNode, useRef } from "react";
 import { Button } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
@@ -130,36 +130,71 @@ export const Test: React.FC<Props> = (props) => {
                 direction="col"
                 justify="start"
                 align="start"
+                className="card"
+                width="full"
                 key={index}
               >
-                <Text>{event.eventType}</Text>
-                {event.eventType === "projectEvent"
-                  ? event.events.map((projectEventItem, _index) => (
+                <table className="auto border-separate border-spacing-3">
+                  <tbody>
+                    <tr>
+                      <th>UserHashedID</th>
+                      <th className="whitespace-pre-wrap break-words">
+                        {event.userHashedID}
+                      </th>
+                    </tr>
+                    <tr>
+                      <td>EventID</td>
+                      <td>{event.eventID}</td>
+                    </tr>
+                    <tr>
+                      <td>CreatedWhen</td>
+                      <td>{event.createdWhen.toLocaleString()}</td>
+                    </tr>
+                    <tr>
+                      <td>EventType</td>
+                      <td>{event.event.eventType}</td>
+                    </tr>
+                    <tr>
+                      <td>TriggerEvent</td>
+                      <td>{event.event.triggerEvent}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                {event.event.eventType === "projectEvent"
+                  ? event.event.events.map((projectEventItem, _index) => (
                       <Container
                         direction="col"
                         justify="start"
                         align="start"
+                        className="card"
                         key={_index}
                       >
-                        <Text> ProjektID: {projectEventItem.projectID}</Text>
-                        {projectEventItem.processes.map(
-                          (processEventItem, __index) => (
-                            <Container
-                              direction="col"
-                              justify="start"
-                              align="start"
-                              key={__index}
-                            >
-                              <Text>
-                                ProcessID: {processEventItem.processID}
-                              </Text>
-                              <Text>
-                                Status: {processEventItem.processStatus}
-                              </Text>
-                              <Text>Messages: {processEventItem.messages}</Text>
-                            </Container>
-                          )
-                        )}
+                        <table className="auto border-separate border-spacing-3">
+                          <tbody>
+                            <tr>
+                              <th>ProjectID</th>
+                              <th>{projectEventItem.projectID}</th>
+                            </tr>
+                            {projectEventItem.processes.map(
+                              (processEventItem, __index) => (
+                                <React.Fragment key={__index}>
+                                  <tr>
+                                    <td>ProcessID</td>
+                                    <td>{processEventItem.processID}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Status:</td>
+                                    <td>{processEventItem.processStatus}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Files:</td>
+                                    <td>{processEventItem.files}</td>
+                                  </tr>
+                                </React.Fragment>
+                              )
+                            )}
+                          </tbody>
+                        </table>
                       </Container>
                     ))
                   : null}

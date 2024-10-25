@@ -1,9 +1,9 @@
-import { AuthorizedUser } from "@/hooks/useUser";
+import { AuthorizedUser, UserType } from "@/hooks/useUser";
 import React from "react";
 import HomeProjects from "../components/Projects";
 import HomeOrgaResources from "../components/Resources";
 import HomeUserProgress from "../components/UserProgress";
-import HomeOrgaAccountProgress from "../components/OrgaProgress";
+import HomeOrgaProgress from "../components/OrgaProgress";
 
 interface AuthorizedPropsHome {
   user: AuthorizedUser;
@@ -18,7 +18,7 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
       data-testid="home-authorized"
     >
       <HomeUserProgress user={user} />
-      <HomeOrgaAccountProgress />
+      {user.usertype === UserType.ORGANIZATION ? <HomeOrgaProgress /> : null}
       <HomeProjects />
       <HomeOrgaResources />
     </div>

@@ -9,9 +9,7 @@ import HomeContainer from "./Container";
 
 interface HomeOrgaAccountProgressProps {}
 
-const HomeOrgaAccountProgress: React.FC<HomeOrgaAccountProgressProps> = (
-  props
-) => {
+const HomeOrgaProgress: React.FC<HomeOrgaAccountProgressProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { organization } = useOrganization();
@@ -117,4 +115,4 @@ const HomeOrgaAccountProgress: React.FC<HomeOrgaAccountProgressProps> = (
   );
 };
 
-export default HomeOrgaAccountProgress;
+export default HomeOrgaProgress;

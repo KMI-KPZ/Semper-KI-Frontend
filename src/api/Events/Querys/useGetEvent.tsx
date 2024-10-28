@@ -1,12 +1,14 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
-import { Event } from "@/pages/App/types";
+import { Event } from "@/hooks/useEvents/EventTypes";
 
 export const parseEvent = (data: any): Event => {
   const event: Event = {
     ...data,
     createdWhen: new Date(data.createdWhen),
+    eventType: data.event.eventType,
+    triggerEvent: data.event.triggerEvent,
   };
 
   return event;

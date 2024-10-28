@@ -1,7 +1,7 @@
 import useGetEvents from "@/api/Events/Querys/useGetEvents";
 import { useEventsWebsocket } from "@/api/Events/Websocket/useEventsWebsocket";
 import useUser, { UserType } from "@/hooks/useUser";
-import { Event } from "@/pages/App/types";
+import { Event } from "@/hooks/useEvents/EventTypes";
 import { AppLoadingSuspense } from "@component-library/index";
 import React, { PropsWithChildren } from "react";
 

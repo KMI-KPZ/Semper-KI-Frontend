@@ -1,7 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Event } from "@/pages/App/types";
+import { Event } from "@/hooks/useEvents/EventTypes";
 
 const useCreateEvent = () => {
   const queryClient = useQueryClient();

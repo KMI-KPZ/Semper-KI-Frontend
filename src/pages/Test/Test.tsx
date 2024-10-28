@@ -152,52 +152,47 @@ export const Test: React.FC<Props> = (props) => {
                     </tr>
                     <tr>
                       <td>EventType</td>
-                      <td>{event.event.eventType}</td>
+                      <td>{event.eventType}</td>
                     </tr>
                     <tr>
                       <td>TriggerEvent</td>
-                      <td>{event.event.triggerEvent}</td>
+                      <td>{event.triggerEvent === true ? "True" : "False"}</td>
                     </tr>
                   </tbody>
                 </table>
-                {event.event.eventType === "projectEvent"
-                  ? event.event.events.map((projectEventItem, _index) => (
-                      <Container
-                        direction="col"
-                        justify="start"
-                        align="start"
-                        className="card"
-                        key={_index}
-                      >
-                        <table className="auto border-separate border-spacing-3">
-                          <tbody>
+                {event.eventType === "projectEvent" ? (
+                  <Container
+                    direction="col"
+                    justify="start"
+                    align="start"
+                    className="card"
+                  >
+                    <table className="auto border-separate border-spacing-3">
+                      <tbody>
+                        <tr>
+                          <th>ProjectID</th>
+                          <th>{event.projectID}</th>
+                        </tr>
+                        {event.processEvents.map((processEvent, index) => (
+                          <React.Fragment key={index}>
                             <tr>
-                              <th>ProjectID</th>
-                              <th>{projectEventItem.projectID}</th>
+                              <td>ProcessID</td>
+                              <td>{processEvent.processID}</td>
                             </tr>
-                            {projectEventItem.processes.map(
-                              (processEventItem, __index) => (
-                                <React.Fragment key={__index}>
-                                  <tr>
-                                    <td>ProcessID</td>
-                                    <td>{processEventItem.processID}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Status:</td>
-                                    <td>{processEventItem.processStatus}</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Files:</td>
-                                    <td>{processEventItem.files}</td>
-                                  </tr>
-                                </React.Fragment>
-                              )
-                            )}
-                          </tbody>
-                        </table>
-                      </Container>
-                    ))
-                  : null}
+                            <tr>
+                              <td>Status:</td>
+                              <td>{processEvent.processStatus}</td>
+                            </tr>
+                            <tr>
+                              <td>Files:</td>
+                              <td>{processEvent.files}</td>
+                            </tr>
+                          </React.Fragment>
+                        ))}
+                      </tbody>
+                    </table>
+                  </Container>
+                ) : null}
               </Container>
             ))
           : "No Events"}

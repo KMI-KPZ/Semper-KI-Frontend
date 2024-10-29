@@ -243,6 +243,21 @@
       "Process-Contractor": "Bitte einen Auftragnehmer auswählen",
       "Process-Address-Billing": "Bitte eine Rechnungsadresse auswählen",
       "Process-Address-Deliver": "Bitte eine Lieferadresse auswählen"
+    },
+    "EventDataReason": {
+      "messages": "Nachricht",
+      "files": "Dateie",
+      "serviceDetails": "Service Details",
+      "serviceType": "Service Typ",
+      "serviceStatus": "Service Status",
+      "processDetails": "Prozess Details",
+      "processStatus": "Prozess Status",
+      "provisionalContractor": "Vorläufiger Auftragnehmer",
+      "dependenciesIn": "Abhängigkeiten Eingehend",
+      "dependenciesOut": "Abhängigkeiten Ausgehend",
+      "test": "Test",
+      "roleChanged": "Rolle Geändert",
+      "userDeleted": "Benutzer Gelöscht"
     }
   },
   "api": {
@@ -428,7 +443,8 @@
         "title": "SEMPER-KI",
         "button": {
           "close": "Menu Schließen",
-          "open": "Menu Öffnen"
+          "open": "Menu Öffnen",
+          "events": "Benachrichtigungen"
         }
       },
       "HeaderData": {
@@ -444,7 +460,14 @@
         "test": "Test",
         "guide": "Wegweiser"
       },
-      "HeaderItem": {}
+      "HeaderItem": {},
+      "HeaderInvoice": {
+        "title": "Benachrichtigungen",
+        "noEvents": "Keine Benachrichtigungen",
+        "close": "Schließen",
+        "delete": "Löschen",
+        "deleteAll": "Alle Löschen"
+      }
     },
     "Menu": {
       "components": {

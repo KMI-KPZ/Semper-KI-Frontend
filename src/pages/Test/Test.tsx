@@ -202,7 +202,11 @@ export const Test: React.FC<Props> = (props) => {
                         </tr>
                         <tr>
                           <td>Content</td>
-                          <td>{event.eventData.content}</td>
+                          <td>
+                            {event.eventData.content === undefined
+                              ? "undefined"
+                              : event.eventData.content}
+                          </td>
                         </tr>
                       </tbody>
                     </table>

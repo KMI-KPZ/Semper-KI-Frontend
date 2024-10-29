@@ -6,6 +6,7 @@ import useProjectEvent from "./hooks/useProjectEvent";
 import { EventContext } from "@/contexts/EventContextProvider";
 import { Event, ProcessEvent, ProjectEvent } from "./EventTypes";
 import useProcessEvent from "./hooks/useProcessEvent";
+import { parseEvent } from "@/api/Events/Querys/useGetEvent";
 
 interface ReturnProps {
   socket: WebSocket | null;
@@ -53,8 +54,9 @@ const useEvents = (): ReturnProps => {
           ? newEvent
           : `JSONSafeParse failed | ${event.data}`
       );
-      if (newEvent !== undefined) {
-        handleNewEvent(newEvent);
+      const parsedEvent = parseEvent(newEvent);
+      if (newEvent !== undefined && parsedEvent !== undefined) {
+        handleNewEvent(parsedEvent);
       }
     } else {
       logger(
@@ -78,8 +80,7 @@ const useEvents = (): ReturnProps => {
     }
   };
 
-  const totalEventCount =
-    totalProjectEventCount + totalOrgaEventCount + totalProcessEventCount;
+  const totalEventCount = totalProjectEventCount + totalOrgaEventCount;
 
   const getEvent = useMemo(() => {
     return (eventID: string) =>

@@ -2,16 +2,12 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-interface useDeleteEventProps {
-  eventID: string;
-}
-
 const useDeleteEvent = () => {
   const queryClient = useQueryClient();
-  const deleteEvent = async (props: useDeleteEventProps) =>
+  const deleteEvent = async (eventID: string) =>
     authorizedCustomAxios
       .delete(
-        `${process.env.VITE_HTTP_API_URL}/public/events/delete/${props.eventID}/`
+        `${process.env.VITE_HTTP_API_URL}/public/events/delete/${eventID}/`
       )
       .then((response) => {
         logger("useDeleteEvent | deleteEvent ✅ |", response);
@@ -21,7 +17,7 @@ const useDeleteEvent = () => {
         logger("useDeleteEvent | deleteEvent ❌ |", error);
       });
 
-  return useMutation<string, Error, useDeleteEventProps>({
+  return useMutation<string, Error, string>({
     mutationFn: deleteEvent,
     onSuccess: () => {
       queryClient.invalidateQueries(["events"]);

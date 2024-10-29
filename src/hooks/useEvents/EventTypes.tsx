@@ -17,27 +17,49 @@ export type OrgaEvent = {
   eventData: OrgaEventData;
 } & GeneralEvent;
 
-export type OrgaEventData = {
-  orgaID: string;
-  reason: "roleChanged" | "userDeleted";
-  content: string;
-};
-
 export type ProjectEvent = {
   eventType: "projectEvent";
   eventData: ProjectEventData;
 } & GeneralEvent;
-
-export interface ProjectEventData {
-  projectID: string;
-}
 
 export type ProcessEvent = {
   eventType: "processEvent";
   eventData: ProcessEventData;
 } & GeneralEvent;
 
-export interface ProcessEventData {
+export type EventDataReason =
+  | "messages"
+  | "files"
+  | "serviceDetails"
+  | "serviceType"
+  | "serviceStatus"
+  | "processDetails"
+  | "processStatus"
+  | "provisionalContractor"
+  | "dependenciesIn"
+  | "dependenciesOut"
+  | "test"
+  | "roleChanged"
+  | "userDeleted";
+
+export type GeneralEventData = {
+  reason: EventDataReason;
+  content: string;
+};
+
+export type ProjectEventData = {
+  projectID: string;
+  reason: "test";
+  content: string;
+} & GeneralEventData;
+
+export type OrgaEventData = {
+  orgaID: string;
+  reason: "roleChanged" | "userDeleted";
+  content: string;
+} & GeneralEventData;
+
+export type ProcessEventData = {
   projectID: string;
   processID: string;
   reason:
@@ -52,4 +74,4 @@ export interface ProcessEventData {
     | "dependenciesIn"
     | "dependenciesOut";
   content: string;
-}
+} & GeneralEventData;

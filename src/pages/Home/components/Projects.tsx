@@ -15,7 +15,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { user } = useUser();
-  const { totalProjectEventCount, totalProcessEventCount } = useEvents();
+  const { totalProjectEventCount } = useEvents();
 
   const flatProjects = useGetFlatProjects();
   const createProject = useCreateProject();
@@ -69,7 +69,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
             />
           </PermissionGate>
           <PermissionGate element={"ProjectsButton"}>
-            <Badge count={totalProjectEventCount + totalProcessEventCount}>
+            <Badge count={totalProjectEventCount}>
               <Button
                 title={t("Home.components.Projects.button.projects")}
                 to="/projects"

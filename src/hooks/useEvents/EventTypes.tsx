@@ -1,4 +1,4 @@
-export type Event = OrgaEvent | ProjectEvent|ProcessEvent;
+export type Event = OrgaEvent | ProjectEvent | ProcessEvent;
 
 export interface GeneralEvent {
   eventID: string;
@@ -9,24 +9,24 @@ export interface GeneralEvent {
   eventData: EventData;
 }
 
-export type EventType = "projectEvent"| "orgaEvent"|"processEvent";
-export type EventData = OrgaEventData | ProjectEventData|ProcessEventData;
+export type EventType = "projectEvent" | "orgaEvent" | "processEvent";
+export type EventData = OrgaEventData | ProjectEventData | ProcessEventData;
 
 export type OrgaEvent = {
   eventType: "orgaEvent";
   eventData: OrgaEventData;
 } & GeneralEvent;
 
-
 export type OrgaEventData = {
   orgaID: string;
-}
+  reason: "roleChanged" | "userDeleted";
+  content: string;
+};
 
 export type ProjectEvent = {
   eventType: "projectEvent";
   eventData: ProjectEventData;
 } & GeneralEvent;
-
 
 export interface ProjectEventData {
   projectID: string;
@@ -37,12 +37,19 @@ export type ProcessEvent = {
   eventData: ProcessEventData;
 } & GeneralEvent;
 
-
 export interface ProcessEventData {
   projectID: string;
   processID: string;
-  reason: "Message" | "File" | "Status";
-  reasonValue:number;
+  reason:
+    | "messages"
+    | "files"
+    | "serviceDetails"
+    | "serviceType"
+    | "serviceStatus"
+    | "processDetails"
+    | "processStatus"
+    | "provisionalContractor"
+    | "dependenciesIn"
+    | "dependenciesOut";
+  content: string;
 }
-
-

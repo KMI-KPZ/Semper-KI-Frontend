@@ -4,7 +4,8 @@ import { JSONIsParseable, JSONSafeParse } from "@/services/utils";
 import logger from "@/hooks/useLogger";
 import useProjectEvent from "./hooks/useProjectEvent";
 import { EventContext } from "@/contexts/EventContextProvider";
-import { Event, ProcessEvent } from "./EventTypes";
+import { Event, ProcessEvent, ProjectEvent } from "./EventTypes";
+import useProcessEvent from "./hooks/useProcessEvent";
 
 interface ReturnProps {
   socket: WebSocket | null;
@@ -12,13 +13,12 @@ interface ReturnProps {
   totalEventCount: number;
   totalProjectEventCount: number;
   totalOrgaEventCount: number;
+  totalProcessEventCount: number;
   getEvent: (eventID: string) => Event | undefined;
   getProjectEventCount: (projectID: string) => number;
-  getProcessEventCount: (projectID: string, processID: string) => number;
-  getProcessEvent: (
-    projectID: string,
-    processID: string
-  ) => ProcessEvent | undefined;
+  getProcessEventCount: (processID: string) => number;
+  getProcessEvent: (processID: string) => ProcessEvent | undefined;
+  getProjectEvent: (projectID: string) => ProjectEvent | undefined;
 }
 
 const useEvents = (): ReturnProps => {
@@ -27,10 +27,15 @@ const useEvents = (): ReturnProps => {
   const {
     handleNewProjectEvent,
     getProjectEventCount,
+    totalProjectEventCount,
+    getProjectEvent,
+  } = useProjectEvent(events);
+  const {
     getProcessEvent,
     getProcessEventCount,
-    totalProjectEventCount,
-  } = useProjectEvent(events);
+    handleNewProcessEvent,
+    totalProcessEventCount,
+  } = useProcessEvent(events);
   const { handleNewOrgaEvent, totalOrgaEventCount } = useOrgaEvent(events);
 
   if (socket !== null) {
@@ -67,10 +72,14 @@ const useEvents = (): ReturnProps => {
       case "orgaEvent":
         handleNewOrgaEvent(newEvent);
         break;
+      case "processEvent":
+        handleNewProcessEvent(newEvent);
+        break;
     }
   };
 
-  const totalEventCount = totalProjectEventCount + totalOrgaEventCount;
+  const totalEventCount =
+    totalProjectEventCount + totalOrgaEventCount + totalProcessEventCount;
 
   const getEvent = useMemo(() => {
     return (eventID: string) =>
@@ -83,9 +92,11 @@ const useEvents = (): ReturnProps => {
     totalEventCount,
     totalProjectEventCount,
     totalOrgaEventCount,
+    totalProcessEventCount,
     getEvent,
     getProcessEvent,
     getProcessEventCount,
+    getProjectEvent,
     getProjectEventCount,
   };
 };

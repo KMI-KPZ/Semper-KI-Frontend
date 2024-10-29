@@ -1,12 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Container, Heading } from "@component-library/index";
+import { Badge, Container, Heading } from "@component-library/index";
 import { Button } from "@component-library/index";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import HomeContainer from "./Container";
 import useUser, { UserType } from "@/hooks/useUser";
 import useGetFlatProjects from "@/api/Project/Querys/useGetFlatProjects";
 import useCreateProject from "@/api/Project/Mutations/useCreateProject";
+import useEvents from "@/hooks/useEvents/useEvents";
 
 interface HomeProjectsProps {}
 
@@ -14,6 +15,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { user } = useUser();
+  const { totalProjectEventCount, totalProcessEventCount } = useEvents();
 
   const flatProjects = useGetFlatProjects();
   const createProject = useCreateProject();
@@ -67,10 +69,12 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
             />
           </PermissionGate>
           <PermissionGate element={"ProjectsButton"}>
-            <Button
-              title={t("Home.components.Projects.button.projects")}
-              to="/projects"
-            />
+            <Badge count={totalProjectEventCount + totalProcessEventCount}>
+              <Button
+                title={t("Home.components.Projects.button.projects")}
+                to="/projects"
+              />
+            </Badge>
           </PermissionGate>
         </div>
       )}

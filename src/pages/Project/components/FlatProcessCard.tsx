@@ -1,11 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Text } from "@component-library/index";
+import { Badge, Button, Container, Text } from "@component-library/index";
 import TestImg from "@images/Test.png";
 import { FlatProcess } from "@/api/Project/Querys/useGetProject";
 import { useNavigate } from "react-router-dom";
 import useDeleteProcess from "@/api/Process/Mutations/useDeleteProcess";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
+import useEvents from "@/hooks/useEvents/useEvents";
 
 interface FlatProcessCardProps {
   flatProcess: FlatProcess;
@@ -16,6 +17,7 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const deleteProcess = useDeleteProcess();
+  const { getProcessEventCount } = useEvents();
   const getRingColor = (): string => {
     switch (process.flatProcessStatus) {
       case "ACTION_REQUIRED":
@@ -89,12 +91,14 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
           </Container>
         </Container>
         <Container direction="col" gap={3}>
-          <Button
-            onClick={handleOnClickButtonContinue}
-            size="sm"
-            variant="primary"
-            title={t("Project.components.FlatProcessCard.button.continue")}
-          />
+          <Badge count={getProcessEventCount(process.processID)}>
+            <Button
+              onClick={handleOnClickButtonContinue}
+              size="sm"
+              variant="primary"
+              title={t("Project.components.FlatProcessCard.button.continue")}
+            />
+          </Badge>
           <Button
             onClick={handleOnClickButtonDelete}
             size="sm"

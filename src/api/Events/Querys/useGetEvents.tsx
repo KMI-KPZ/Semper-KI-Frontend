@@ -13,7 +13,7 @@ const useGetEvents = () => {
           parseEvent(event)
         );
 
-        logger("useGetEvents | getEvents ✅ |", response);
+        logger("useGetEvents | getEvents ✅ |", data);
         return data;
       });
 

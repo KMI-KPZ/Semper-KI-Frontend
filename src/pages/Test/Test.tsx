@@ -166,29 +166,44 @@ export const Test: React.FC<Props> = (props) => {
                     justify="start"
                     align="start"
                     className="card"
+                    width="full"
                   >
-                    <table className="auto border-separate border-spacing-3">
+                    <table className="auto w-full border-separate border-spacing-3">
                       <tbody>
                         <tr>
                           <th>ProjectID</th>
-                          <th>{event.projectID}</th>
+                          <th>{event.eventData.projectID}</th>
                         </tr>
-                        {event.processEvents.map((processEvent, index) => (
-                          <React.Fragment key={index}>
-                            <tr>
-                              <td>ProcessID</td>
-                              <td>{processEvent.processID}</td>
-                            </tr>
-                            <tr>
-                              <td>Status:</td>
-                              <td>{processEvent.processStatus}</td>
-                            </tr>
-                            <tr>
-                              <td>Files:</td>
-                              <td>{processEvent.files}</td>
-                            </tr>
-                          </React.Fragment>
-                        ))}
+                      </tbody>
+                    </table>
+                  </Container>
+                ) : null}
+                {event.eventType === "processEvent" ? (
+                  <Container
+                    direction="col"
+                    justify="start"
+                    align="start"
+                    width="full"
+                    className="card"
+                  >
+                    <table className="auto w-full border-separate border-spacing-3">
+                      <tbody>
+                        <tr>
+                          <th>ProjectID</th>
+                          <th>{event.eventData.projectID}</th>
+                        </tr>
+                        <tr>
+                          <td>ProcessID</td>
+                          <td>{event.eventData.processID}</td>
+                        </tr>
+                        <tr>
+                          <td>Reason</td>
+                          <td>{event.eventData.reason}</td>
+                        </tr>
+                        <tr>
+                          <td>Content</td>
+                          <td>{event.eventData.content}</td>
+                        </tr>
                       </tbody>
                     </table>
                   </Container>

@@ -7,11 +7,8 @@ import { useMemo } from "react";
 interface ReturnProps {
   handleNewProcessEvent: (newEvent: ProcessEvent) => void;
   totalProcessEventCount: number;
-  getProcessEventCount: (projectID: string, processID: string) => number;
-  getProcessEvent: (
-    projectID: string,
-    processID: string
-  ) => ProcessEvent | undefined;
+  getProcessEventCount: (processID: string) => number;
+  getProcessEvent: (processID: string) => ProcessEvent | undefined;
 }
 
 const useProcessEvent = (events: Event[]): ReturnProps => {
@@ -31,90 +28,34 @@ const useProcessEvent = (events: Event[]): ReturnProps => {
   };
 
   const totalProcessEventCount = useMemo((): number => {
-    return events
-      .filter(
-        (event): event is ProcessEvent => event.eventType === "projectEvent"
-      )
-      .reduce((count, event) => {
-        return (
-          count +
-          event.processEvents.reduce((processCount, processEvent) => {
-            return (
-              processCount +
-              (processEvent.files ?? 0) +
-              (processEvent.messages ?? 0) +
-              (processEvent.processStatus ?? 0)
-            );
-          }, 0)
-        );
-      }, 0);
+    return events.filter(
+      (event): event is ProcessEvent => event.eventType === "processEvent"
+    ).length;
   }, [events]);
 
   const getProcessEventCount = useMemo(() => {
-    return (projectID: string): number => {
-      let count = 0;
-      events
+    return (processID: string): number => {
+      return events
         .filter(
-          (event): event is ProcessEvent => event.eventType === "projectEvent"
+          (event): event is ProcessEvent => event.eventType === "processEvent"
         )
-        .filter((event) => event.projectID === projectID)
-        .forEach((event: ProcessEvent) => {
-          event.processEvents.forEach((processEvents) => {
-            count +=
-              (processEvents.files ?? 0) +
-              (processEvents.messages ?? 0) +
-              (processEvents.processStatus ?? 0);
-          });
-        });
-      return count > 0 ? count : 0;
-    };
-  }, [events]);
-
-  const getProcessEventCount = useMemo(() => {
-    return (projectID: string, processID: string): number => {
-      let count = 0;
-      events
-        .filter(
-          (event): event is ProcessEvent => event.eventType === "projectEvent"
-        )
-        .filter((event) => event.projectID === projectID)
-        .forEach((event: ProcessEvent) => {
-          event.processEvents
-            .filter((processEvent) => processEvent.processID === processID)
-            .forEach((processEvents) => {
-              count +=
-                (processEvents.files ?? 0) +
-                (processEvents.messages ?? 0) +
-                (processEvents.processStatus ?? 0);
-            });
-        });
-      return count > 0 ? count : 0;
+        .filter((event) => event.eventData.processID === processID).length;
     };
   }, [events]);
 
   const getProcessEvent = useMemo(() => {
-    return (projectID: string, processID: string): ProcessEvent | undefined => {
-      let processEvent: ProcessEvent | undefined = undefined;
-      events
+    return (processID: string): ProcessEvent | undefined => {
+      return events
         .filter(
-          (event): event is ProcessEvent => event.eventType === "projectEvent"
+          (event): event is ProcessEvent => event.eventType === "processEvent"
         )
-        .filter((event) => event.projectID === projectID)
-        .forEach((event: ProcessEvent) => {
-          event.processEvents
-            .filter((processEvent) => processEvent.processID === processID)
-            .forEach((processEvents) => {
-              processEvent = processEvents;
-            });
-        });
-      return processEvent;
+        .find((event) => event.eventData.processID === processID);
     };
   }, [events]);
 
   return {
     totalProcessEventCount,
     handleNewProcessEvent,
-    getProcessEventCount,
     getProcessEventCount,
     getProcessEvent,
   };

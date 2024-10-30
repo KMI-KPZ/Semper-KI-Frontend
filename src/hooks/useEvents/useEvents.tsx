@@ -7,6 +7,9 @@ import { EventContext } from "@/contexts/EventContextProvider";
 import { Event, ProcessEvent, ProjectEvent } from "./EventTypes";
 import useProcessEvent from "./hooks/useProcessEvent";
 import { parseEvent } from "@/api/Events/Querys/useGetEvent";
+import { useQueryClient } from "@tanstack/react-query";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import { useTranslation } from "react-i18next";
 
 interface ReturnProps {
   socket: WebSocket | null;
@@ -16,6 +19,7 @@ interface ReturnProps {
   totalOrgaEventCount: number;
   totalProcessEventCount: number;
   getEvent: (eventID: string) => Event | undefined;
+  getEventContent: (event: Event) => string;
   getProjectEventCount: (projectID: string) => number;
   getProcessEventCount: (processID: string) => number;
   getProcessEvent: (processID: string) => ProcessEvent | undefined;
@@ -24,6 +28,8 @@ interface ReturnProps {
 
 const useEvents = (): ReturnProps => {
   const { events, socket } = useContext(EventContext);
+  const { t } = useTranslation();
+  const queryClient = useQueryClient();
 
   const {
     handleNewProjectEvent,
@@ -67,6 +73,7 @@ const useEvents = (): ReturnProps => {
   };
 
   const handleNewEvent = (newEvent: Event) => {
+    queryClient.invalidateQueries(["events"]);
     switch (newEvent.eventType) {
       case "projectEvent":
         handleNewProjectEvent(newEvent);
@@ -87,6 +94,43 @@ const useEvents = (): ReturnProps => {
       events.find((event) => event.eventID === eventID);
   }, [events]);
 
+  const getEventContent = (event: Event): string => {
+    switch (event.eventData.reason) {
+      case "test":
+        return event.eventData.content;
+      case "files":
+        return event.eventData.content;
+      case "messages":
+        return `"` + event.eventData.content + `"`;
+      case "serviceDetails":
+        return event.eventData.content;
+      case "serviceType":
+        return event.eventData.content;
+      case "serviceStatus":
+        return event.eventData.content;
+      case "processDetails":
+        return event.eventData.content;
+      case "processStatus":
+        return t(
+          `enum.ProcessStatus.${
+            ProcessStatus[
+              Number(event.eventData.content)
+            ] as keyof typeof ProcessStatus
+          }`
+        );
+      case "provisionalContractor":
+        return event.eventData.content;
+      case "dependenciesIn":
+        return event.eventData.content;
+      case "dependenciesOut":
+        return event.eventData.content;
+      case "roleChanged":
+        return event.eventData.content;
+      case "userDeleted":
+        return event.eventData.content;
+    }
+  };
+
   return {
     socket,
     events,
@@ -95,6 +139,7 @@ const useEvents = (): ReturnProps => {
     totalOrgaEventCount,
     totalProcessEventCount,
     getEvent,
+    getEventContent,
     getProcessEvent,
     getProcessEventCount,
     getProjectEvent,

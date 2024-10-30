@@ -42,6 +42,22 @@ export type EventDataReason =
   | "roleChanged"
   | "userDeleted";
 
+export type ProcessEventDataReason =
+  | "messages"
+  | "files"
+  | "serviceDetails"
+  | "serviceType"
+  | "serviceStatus"
+  | "processDetails"
+  | "processStatus"
+  | "provisionalContractor"
+  | "dependenciesIn"
+  | "dependenciesOut";
+
+export type OrgaEventDataReason = "roleChanged" | "userDeleted";
+
+export type ProjectEventDataReason = "test";
+
 export type GeneralEventData = {
   reason: EventDataReason;
   content: string;
@@ -49,29 +65,19 @@ export type GeneralEventData = {
 
 export type ProjectEventData = {
   projectID: string;
-  reason: "test";
+  reason: ProjectEventDataReason;
   content: string;
 } & GeneralEventData;
 
 export type OrgaEventData = {
   orgaID: string;
-  reason: "roleChanged" | "userDeleted";
+  reason: OrgaEventDataReason;
   content: string;
 } & GeneralEventData;
 
 export type ProcessEventData = {
   projectID: string;
   processID: string;
-  reason:
-    | "messages"
-    | "files"
-    | "serviceDetails"
-    | "serviceType"
-    | "serviceStatus"
-    | "processDetails"
-    | "processStatus"
-    | "provisionalContractor"
-    | "dependenciesIn"
-    | "dependenciesOut";
+  reason: ProcessEventDataReason;
   content: string;
 } & GeneralEventData;

@@ -8,7 +8,6 @@ import useDeleteEvents from "@/api/Events/Mutations/useDeleteEvents";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { Event } from "@/hooks/useEvents/EventTypes";
 import { useNavigate } from "react-router-dom";
-import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 
 interface HeaderInvoiceProps {
   closeInvoice: () => void;
@@ -17,7 +16,7 @@ interface HeaderInvoiceProps {
 const HeaderInvoice: React.FC<HeaderInvoiceProps> = (props) => {
   const { closeInvoice } = props;
   const { t } = useTranslation();
-  const { events } = useEvents();
+  const { events, getEventContent } = useEvents();
   const deleteEvent = useDeleteEvent();
   const deleteEvents = useDeleteEvents();
   const navigate = useNavigate();
@@ -28,6 +27,7 @@ const HeaderInvoice: React.FC<HeaderInvoiceProps> = (props) => {
 
   const handleOnClickButtonDeleteEvents = () => {
     deleteEvents.mutate();
+    closeInvoice();
   };
 
   const handleOnClickButtonEvent = (event: Event) => {
@@ -49,43 +49,6 @@ const HeaderInvoice: React.FC<HeaderInvoiceProps> = (props) => {
         navigate(`organization`);
         deleteEvent.mutate(event.eventID);
         break;
-    }
-  };
-
-  const getEventContent = (event: Event): string => {
-    switch (event.eventData.reason) {
-      case "test":
-        return event.eventData.content;
-      case "files":
-        return event.eventData.content;
-      case "messages":
-        return `"` + event.eventData.content + `"`;
-      case "serviceDetails":
-        return event.eventData.content;
-      case "serviceType":
-        return event.eventData.content;
-      case "serviceStatus":
-        return event.eventData.content;
-      case "processDetails":
-        return event.eventData.content;
-      case "processStatus":
-        return t(
-          `enum.ProcessStatus.${
-            ProcessStatus[
-              Number(event.eventData.content)
-            ] as keyof typeof ProcessStatus
-          }`
-        );
-      case "provisionalContractor":
-        return event.eventData.content;
-      case "dependenciesIn":
-        return event.eventData.content;
-      case "dependenciesOut":
-        return event.eventData.content;
-      case "roleChanged":
-        return event.eventData.content;
-      case "userDeleted":
-        return event.eventData.content;
     }
   };
 
@@ -134,6 +97,7 @@ const HeaderInvoice: React.FC<HeaderInvoiceProps> = (props) => {
                 className=" relative gap-2 rounded-md border-2 p-3 duration-300 hover:cursor-pointer hover:border-gray-300 hover:bg-gray-50"
                 width="full"
                 align="start"
+                tabIndex
                 direction="col"
                 onClick={() => handleOnClickButtonEvent(event)}
               >

@@ -3,6 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "@/hooks/useToast";
 import { Event, ProcessEvent } from "../EventTypes";
 import { useMemo } from "react";
+import useEvents from "../useEvents";
 
 interface ReturnProps {
   handleNewProcessEvent: (newEvent: ProcessEvent) => void;
@@ -21,7 +22,7 @@ const useProcessEvent = (events: Event[]): ReturnProps => {
 
     if (newProcessEvent.triggerEvent === true) {
       toast(
-        t("App.hooks.useEvents.hooks.useProjectEvent.toast.status"),
+        t(`types.EventDataReason.${newProcessEvent.eventData.reason}`),
         `/projects/${newProcessEvent.eventData.projectID}/${newProcessEvent.eventData.processID}#newest`
       );
     }

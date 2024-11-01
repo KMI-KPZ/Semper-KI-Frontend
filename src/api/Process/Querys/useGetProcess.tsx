@@ -40,7 +40,7 @@ export type DefinedProcess = ManufactoringProcessProps | ModelingProcessProps;
 
 export type DefaultProcessProps = {
   client: string;
-  contractor: string;
+  contractor: { name: string; hashedID: string };
   processID: string;
   processStatus: ProcessStatus;
   processStatusButtons?: StatusButtonPropsExtern[];

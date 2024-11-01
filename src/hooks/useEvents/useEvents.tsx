@@ -20,10 +20,9 @@ interface ReturnProps {
   totalProcessEventCount: number;
   getEvent: (eventID: string) => Event | undefined;
   getEventContent: (event: Event) => string;
-  getProjectEventCount: (projectID: string) => number;
-  getProcessEventCount: (processID: string) => number;
-  getProcessEvent: (processID: string) => ProcessEvent | undefined;
-  getProjectEvent: (projectID: string) => ProjectEvent | undefined;
+  getProcessEvents: (processID: string) => ProcessEvent[];
+  getProjectEvents: (projectID: string) => ProjectEvent[];
+  getTotalProjectEventCount: (projectID: string) => number;
 }
 
 const useEvents = (): ReturnProps => {
@@ -32,17 +31,13 @@ const useEvents = (): ReturnProps => {
   const queryClient = useQueryClient();
 
   const {
-    handleNewProjectEvent,
-    getProjectEventCount,
     totalProjectEventCount,
-    getProjectEvent,
+    handleNewProjectEvent,
+    getProjectEvents,
+    getTotalProjectEventCount,
   } = useProjectEvent(events);
-  const {
-    getProcessEvent,
-    getProcessEventCount,
-    handleNewProcessEvent,
-    totalProcessEventCount,
-  } = useProcessEvent(events);
+  const { getProcessEvents, handleNewProcessEvent, totalProcessEventCount } =
+    useProcessEvent(events);
   const { handleNewOrgaEvent, totalOrgaEventCount } = useOrgaEvent(events);
 
   if (socket !== null) {
@@ -98,6 +93,8 @@ const useEvents = (): ReturnProps => {
     switch (event.eventData.reason) {
       case "test":
         return event.eventData.content;
+      case "file":
+        return event.eventData.content;
       case "files":
         return event.eventData.content;
       case "messages":
@@ -140,10 +137,9 @@ const useEvents = (): ReturnProps => {
     totalProcessEventCount,
     getEvent,
     getEventContent,
-    getProcessEvent,
-    getProcessEventCount,
-    getProjectEvent,
-    getProjectEventCount,
+    getProcessEvents,
+    getProjectEvents,
+    getTotalProjectEventCount,
   };
 };
 

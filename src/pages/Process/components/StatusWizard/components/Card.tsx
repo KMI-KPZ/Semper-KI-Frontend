@@ -1,9 +1,10 @@
-import { Container, Text } from "@component-library/index";
+import { Badge, Container, Text } from "@component-library/index";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { StatusWizardItem } from "../StatusWizard";
 import { Process } from "@/api/Process/Querys/useGetProcess";
 import { useNavigate } from "react-router-dom";
+import useEvents from "@/hooks/useEvents/useEvents";
 
 interface StatusWizardCardProps {
   process: Process;
@@ -23,6 +24,13 @@ const StatusWizardCard: React.FC<StatusWizardCardProps> = (props) => {
   const { item, process } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { getProcessEvents } = useEvents();
+
+  const originEvents = getProcessEvents(process.processID).filter(
+    (event) =>
+      event.eventData.additionalInformation !== undefined &&
+      event.eventData.additionalInformation.origin === item.targetID
+  );
 
   const [inView, setInView] = useState(false);
 
@@ -58,20 +66,22 @@ const StatusWizardCard: React.FC<StatusWizardCardProps> = (props) => {
   };
 
   return (
-    <Container
-      width="full"
-      justify="start"
-      direction="row"
-      onClick={handleOnClickCard}
-      className={`justify-center rounded-md border-2 border-slate-100 p-2 duration-300 hover:bg-gray-100 md:justify-start   ${
-        active ? "text-orange-600" : ""
-      }
+    <Badge count={originEvents.length} containerClassName="w-full">
+      <Container
+        width="full"
+        justify="start"
+        direction="row"
+        onClick={handleOnClickCard}
+        className={`justify-center rounded-md border-2 border-slate-100 p-2 duration-300 hover:bg-gray-100 md:justify-start   ${
+          active ? "text-orange-600" : ""
+        }
       ${reachable ? "hover:cursor-pointer hover:border-ultramarinblau " : ""}
       ${inView ? "ring-2 ring-ultramarinblau " : "ring-0"}`}
-    >
-      {item.icon}
-      <Text>{t(`Process.StatusWizard.StatusWizard.item.${item.text}`)}</Text>
-    </Container>
+      >
+        {item.icon}
+        <Text>{t(`Process.StatusWizard.StatusWizard.item.${item.text}`)}</Text>
+      </Container>
+    </Badge>
   );
 };
 

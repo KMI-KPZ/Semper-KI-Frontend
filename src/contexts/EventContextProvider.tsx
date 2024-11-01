@@ -22,7 +22,7 @@ const EventContextProvider: React.FC<
 > = (props) => {
   const { children } = props;
   const { user } = useUser();
-  const events = useGetEvents();
+  const events = useGetEvents(user.usertype !== UserType.ANONYM);
   const { socket } = useEventsWebsocket();
 
   if (user.usertype === UserType.ANONYM) return children;

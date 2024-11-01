@@ -17,7 +17,7 @@ const ProjectsTableRow: React.FC<ProjectsTableRowProps> = (props) => {
   const { t } = useTranslation();
   const deleteProject = useDeleteProject();
   const navigate = useNavigate();
-  const { getProjectEventCount } = useEvents();
+  const { getTotalProjectEventCount } = useEvents();
 
   const handleOnClickButtonDelete = (projectID: string) => {
     window.confirm(t("Projects.components.Table.deleteConfirm")) === true
@@ -52,7 +52,7 @@ const ProjectsTableRow: React.FC<ProjectsTableRowProps> = (props) => {
             width="full"
             onClick={() => handleOnClickButtonDelete(flatProject.projectID)}
           />
-          <Badge count={getProjectEventCount(flatProject.projectID)}>
+          <Badge count={getTotalProjectEventCount(flatProject.projectID)}>
             <a
               onClick={() => navigate(`${flatProject.projectID}`)}
               className="hover group relative flex h-10  w-20 transform flex-row

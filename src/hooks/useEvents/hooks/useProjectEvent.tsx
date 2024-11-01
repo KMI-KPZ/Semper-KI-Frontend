@@ -7,8 +7,8 @@ import { useMemo } from "react";
 interface ReturnProps {
   handleNewProjectEvent: (newEvent: ProjectEvent) => void;
   totalProjectEventCount: number;
-  getProjectEventCount: (projectID: string) => number;
-  getProjectEvent: (projectID: string) => ProjectEvent | undefined;
+  getProjectEvents: (projectID: string) => ProjectEvent[];
+  getTotalProjectEventCount: (projectID: string) => number;
 }
 
 const useProjectEvent = (events: Event[]): ReturnProps => {
@@ -27,7 +27,7 @@ const useProjectEvent = (events: Event[]): ReturnProps => {
     }
   };
 
-  const getProjectEventCount = useMemo(() => {
+  const getTotalProjectEventCount = useMemo(() => {
     return (projectID: string): number => {
       return events
         .filter(
@@ -39,13 +39,13 @@ const useProjectEvent = (events: Event[]): ReturnProps => {
     };
   }, [events]);
 
-  const getProjectEvent = useMemo(() => {
-    return (projectID: string): ProjectEvent | undefined => {
+  const getProjectEvents = useMemo(() => {
+    return (projectID: string): ProjectEvent[] => {
       return events
         .filter(
           (event): event is ProjectEvent => event.eventType === "projectEvent"
         )
-        .find((event) => event.eventData.projectID === projectID);
+        .filter((event) => event.eventData.projectID === projectID);
     };
   }, [events]);
 
@@ -59,8 +59,8 @@ const useProjectEvent = (events: Event[]): ReturnProps => {
   return {
     totalProjectEventCount,
     handleNewProjectEvent,
-    getProjectEventCount,
-    getProjectEvent,
+    getTotalProjectEventCount,
+    getProjectEvents,
   };
 };
 

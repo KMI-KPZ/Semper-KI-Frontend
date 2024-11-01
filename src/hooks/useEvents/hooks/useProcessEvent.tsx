@@ -3,13 +3,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "@/hooks/useToast";
 import { Event, ProcessEvent } from "../EventTypes";
 import { useMemo } from "react";
-import useEvents from "../useEvents";
 
 interface ReturnProps {
   handleNewProcessEvent: (newEvent: ProcessEvent) => void;
   totalProcessEventCount: number;
-  getProcessEventCount: (processID: string) => number;
-  getProcessEvent: (processID: string) => ProcessEvent | undefined;
+  getProcessEvents: (processID: string) => ProcessEvent[];
 }
 
 const useProcessEvent = (events: Event[]): ReturnProps => {
@@ -23,7 +21,14 @@ const useProcessEvent = (events: Event[]): ReturnProps => {
     if (newProcessEvent.triggerEvent === true) {
       toast(
         t(`types.EventDataReason.${newProcessEvent.eventData.reason}`),
-        `/projects/${newProcessEvent.eventData.projectID}/${newProcessEvent.eventData.processID}#newest`
+
+        `/projects/${newProcessEvent.eventData.projectID}/${
+          newProcessEvent.eventData.processID
+        }#${
+          newProcessEvent.eventData.additionalInformation === undefined
+            ? "newest"
+            : newProcessEvent.eventData.additionalInformation.origin
+        }`
       );
     }
   };
@@ -34,31 +39,20 @@ const useProcessEvent = (events: Event[]): ReturnProps => {
     ).length;
   }, [events]);
 
-  const getProcessEventCount = useMemo(() => {
-    return (processID: string): number => {
+  const getProcessEvents = useMemo(() => {
+    return (processID: string): ProcessEvent[] => {
       return events
         .filter(
           (event): event is ProcessEvent => event.eventType === "processEvent"
         )
-        .filter((event) => event.eventData.processID === processID).length;
-    };
-  }, [events]);
-
-  const getProcessEvent = useMemo(() => {
-    return (processID: string): ProcessEvent | undefined => {
-      return events
-        .filter(
-          (event): event is ProcessEvent => event.eventType === "processEvent"
-        )
-        .find((event) => event.eventData.processID === processID);
+        .filter((event) => event.eventData.processID === processID);
     };
   }, [events]);
 
   return {
     totalProcessEventCount,
     handleNewProcessEvent,
-    getProcessEventCount,
-    getProcessEvent,
+    getProcessEvents,
   };
 };
 

@@ -67,11 +67,11 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
   const pageTitle = `${t(
     "Process.components.ContractorSelection.ContractorSelection.heading.main"
   )}: ${
-    process.contractor === ""
+    process.contractor.name === ""
       ? t(
           "Process.components.ContractorSelection.ContractorSelection.noContractor"
         )
-      : process.contractor
+      : process.contractor.name
   }`;
 
   return (

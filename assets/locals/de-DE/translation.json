@@ -246,7 +246,8 @@
     },
     "EventDataReason": {
       "messages": "Nachricht",
-      "files": "neue Datei(en)",
+      "file": "neue Datei",
+      "files": "neue Dateien",
       "serviceDetails": "Service Details geändert",
       "serviceType": "Service Typ geändert",
       "serviceStatus": "Service Status geändert",

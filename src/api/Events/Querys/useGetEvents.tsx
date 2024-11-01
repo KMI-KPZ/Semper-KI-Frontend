@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Event } from "@/hooks/useEvents/EventTypes";
 import { parseEvent } from "./useGetEvent";
 
-const useGetEvents = () => {
+const useGetEvents = (load: boolean) => {
   const getEvents = async () =>
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/events/all/get/`)
@@ -20,6 +20,8 @@ const useGetEvents = () => {
   return useQuery<Event[], Error>({
     queryKey: ["events"],
     queryFn: getEvents,
+    enabled: load === true,
+    refetchInterval: 15000,
   });
 };
 

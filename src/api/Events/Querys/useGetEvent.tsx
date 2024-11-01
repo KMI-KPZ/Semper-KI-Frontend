@@ -36,6 +36,7 @@ export const parseEvent = (data: any): Event | undefined => {
           processID: data.eventData.secondaryID,
           reason: data.eventData.reason,
           content: data.eventData.content,
+          additionalInformation: data.eventData.additionalInformation,
         },
       };
       return processEvent;

@@ -17,7 +17,7 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const deleteProcess = useDeleteProcess();
-  const { getProcessEventCount } = useEvents();
+  const { getProcessEvents } = useEvents();
   const getRingColor = (): string => {
     switch (process.flatProcessStatus) {
       case "ACTION_REQUIRED":
@@ -91,7 +91,7 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
           </Container>
         </Container>
         <Container direction="col" gap={3}>
-          <Badge count={getProcessEventCount(process.processID)}>
+          <Badge count={getProcessEvents(process.processID).length}>
             <Button
               onClick={handleOnClickButtonContinue}
               size="sm"

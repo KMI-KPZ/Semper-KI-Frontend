@@ -7,6 +7,7 @@ interface BadgeProps {
   showNumber?: boolean;
   position?: "small" | "medium" | "large";
   className?: string;
+  containerClassName?: string;
 }
 
 export const Badge: React.FC<BadgeProps> = (props) => {
@@ -16,12 +17,13 @@ export const Badge: React.FC<BadgeProps> = (props) => {
     position = "medium",
     showNumber = true,
     className,
+    containerClassName,
   } = props;
 
   if (count === 0) return <>{children}</>;
 
   return (
-    <div className="relative h-fit w-fit">
+    <div className={twMerge("relative h-fit w-fit", containerClassName)}>
       <div
         className={twMerge(
           `

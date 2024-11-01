@@ -1,3 +1,5 @@
+import { ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
+
 export type Event = OrgaEvent | ProjectEvent | ProcessEvent;
 
 export interface GeneralEvent {
@@ -29,6 +31,7 @@ export type ProcessEvent = {
 
 export type EventDataReason =
   | "messages"
+  | "file"
   | "files"
   | "serviceDetails"
   | "serviceType"
@@ -44,6 +47,7 @@ export type EventDataReason =
 
 export type ProcessEventDataReason =
   | "messages"
+  | "file"
   | "files"
   | "serviceDetails"
   | "serviceType"
@@ -80,4 +84,10 @@ export type ProcessEventData = {
   processID: string;
   reason: ProcessEventDataReason;
   content: string;
+  additionalInformation?: ProcessEventDataAdditionalInformation;
 } & GeneralEventData;
+
+export type ProcessEventDataAdditionalInformation = {
+  origin: ProcessOrigin;
+  createdBy: string;
+};

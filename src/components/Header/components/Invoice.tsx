@@ -40,7 +40,13 @@ const HeaderInvoice: React.FC<HeaderInvoiceProps> = (props) => {
       case "processEvent":
         closeInvoice();
         navigate(
-          `/projects/${event.eventData.projectID}/${event.eventData.processID}`
+          `/projects/${event.eventData.projectID}/${
+            event.eventData.processID
+          }#${
+            event.eventData.additionalInformation === undefined
+              ? "newest"
+              : event.eventData.additionalInformation.origin
+          }`
         );
         deleteEvent.mutate(event.eventID);
         break;

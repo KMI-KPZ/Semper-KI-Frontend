@@ -40,17 +40,17 @@ const ContactForm: React.FC<ContactFormProps> = (props) => {
         ),
       subject: yup.string().required(
         t("yup.requiredName", {
-          name: t("components.Footer.ContactForm.subject"),
+          name: t("components.Form.ContactForm.subject"),
         })
       ),
       name: yup.string().required(
         t("yup.requiredName", {
-          name: t("components.Footer.ContactForm.name"),
+          name: t("components.Form.ContactForm.name"),
         })
       ),
       message: yup.string().required(
         t("yup.requiredName", {
-          name: t("components.Footer.ContactForm.message"),
+          name: t("components.Form.ContactForm.message"),
         })
       ),
     })
@@ -84,7 +84,7 @@ const ContactForm: React.FC<ContactFormProps> = (props) => {
 
   const maxLength = getMaxLabelWidth(
     labelItems.map((labelItem) =>
-      t(`components.Footer.ContactForm.${labelItem.label}`)
+      t(`components.Form.ContactForm.${labelItem.label}`)
     )
   );
 
@@ -93,14 +93,14 @@ const ContactForm: React.FC<ContactFormProps> = (props) => {
       className={`flex h-full w-full flex-col items-center justify-start gap-5 overflow-auto bg-white p-5 md:justify-center`}
     >
       <Heading variant="h2" className={`p-5 text-center`}>
-        {t("components.Footer.ContactForm.title")}
+        {t("components.Form.ContactForm.heading")}
       </Heading>
       {labelItems.map((label, index) => {
         return (
           <GeneralInput
             key={index}
             label={label.label}
-            labelText={t(`components.Footer.ContactForm.${label.label}`)}
+            labelText={t(`components.Form.ContactForm.${label.label}`)}
             type={label.type}
             register={register}
             error={errors[label.label]}
@@ -109,7 +109,7 @@ const ContactForm: React.FC<ContactFormProps> = (props) => {
         );
       })}
       <Button
-        title={t(`components.Footer.ContactForm.button`)}
+        title={t(`components.Form.ContactForm.button.send`)}
         onClick={handleSubmit(onSubmit)}
       />
     </form>

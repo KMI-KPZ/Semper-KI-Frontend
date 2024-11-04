@@ -261,27 +261,12 @@
       "userDeleted": "Benutzer Gelöscht"
     }
   },
-  "api": {
-    "Process": {
-      "Files": {
-        "useDownloadZIP": {
-          "contract": "Angebot"
-        }
-      }
-    }
-  },
   "component-library": {
-    "Badege": {},
-    "Button": {},
-    "Container": {},
-    "Divider": {},
     "Error": {
       "incomplete": "Bitte {{name}} vervollständigen.",
       "empty": "Keine {{name}} vorhanden",
       "incorrect": "{{name}} ist nicht vorhanden"
     },
-    "Form": {},
-    "Input": {},
     "Loading": {
       "LoadingSuspense": {
         "loading": "Laden...",
@@ -296,19 +281,31 @@
         "close": "Schließen"
       }
     },
-    "Page": {},
-    "Search": {},
-    "Swicht": {},
-    "Typography": {}
+    "Search": {
+      "placeholder": "Suchen..."
+    },
+    "ToTopButton": {
+      "button": { "toTop": "Zum Anfang" }
+    }
+  },
+  "api": {
+    "Process": {
+      "Files": {
+        "useDownloadZIP": {
+          "contract": "Angebot"
+        }
+      }
+    },
+    "ContactForm": {
+      "Mutation": {
+        "useSendContactForm": {
+          "error": "Fehler beim Senden der Nachricht",
+          "success": "Nachricht erfolgreich gesendet"
+        }
+      }
+    }
   },
   "components": {
-    "Pagination": {
-      "next": "Weiter",
-      "previous": "Zurück"
-    },
-    "BackButton": {
-      "back": "Zurück"
-    },
     "Address": {
       "AddressCard": {
         "yes": "Ja",
@@ -322,81 +319,26 @@
         "selected": "Ausgewählt",
         "notSelected": "nicht ausgewählt",
         "standard": "Standard-Adresse:",
-        "buttons": {
+        "button": {
           "edit": "Bearbeiten",
           "delete": "Adresse löschen"
         }
       }
     },
-    "Form": {
-      "AddressForm": {
-        "header": "Adresse bearbeiten",
-        "labels": {
-          "firstName": "Vorname *",
-          "lastName": "Nachname *",
-          "company": "Firma",
-          "street": "Straße *",
-          "houseNumber": "Hausnummer *",
-          "zipcode": "Postleitzahl *",
-          "city": "Stadt *",
-          "country": "Land *",
-          "standard": "als Standardadresse verwenden"
-        },
-        "hint": "* Pflichtfeld",
-        "buttons": {
-          "save": "Speichern"
-        }
-      },
-      "OrganizationForm": {
-        "displayName": "Organisationsname",
-        "email": "Email",
-        "locale": "Sprache",
-        "notifications": "Benachrichtigungen",
-        "notifictionTypes": {
-          "email": "Email",
-          "event": "Event"
-        },
-        "supportedServices": "Services die Sie anbieten",
-        "branding_logo_url": "Logo URL",
-        "branding_colors_primary": "Primärfarbe",
-        "branding_colors_page_background": "Hintergrundfarbe",
-        "title": "Organisationinformationen bearbeiten",
-        "taxID": "Steuernummer",
-        "address": "Addresse",
-
-        "languages": {
-          "en-US": "English",
-          "de-DE": "Deutsch"
-        },
-        "button": {
-          "cancel": "Abbrechen",
-          "safe": "Speichern"
-        }
-      },
-      "ExampleForm": {
-        "title": "Organisationinformationen bearbeiten",
-        "text": "Text",
-        "count": "Anzahl",
-        "email": "Email",
-        "area": "Bereich",
-        "isTrue": "Ist Wahr",
-        "button": {
-          "reset": "Zurücksetzen",
-          "submit": "Senden"
-        }
-      },
-      "PrioritiesForm": {
-        "header": "Prioritäten",
-        "type": "Priorität",
-        "value": "Wichtigkeit",
-        "points": "Freie Punkte: {{freePoints}}",
-        "low": "Niedrig",
-        "medium": "Mittel",
-        "high": "Hoch"
+    "BackButtonContainer": {
+      "button": { "back": "Zurück" }
+    },
+    "Chatbot": {
+      "button": {
+        "open": "Assistent"
       }
     },
-    "Background": {},
-    "Breadcrumb": {},
+    "Collapsible": {
+      "button": {
+        "expand": "Mehr Anzeigen",
+        "collapse": "Weniger Anzeigen"
+      }
+    },
     "CookieBanner": {
       "heading": "Cookie-Zustimmung verwalten",
       "message": "Um dir ein optimales Erlebnis zu bieten, verwenden wir Technologien wie Cookies, um Geräteinformationen zu speichern und/oder darauf zuzugreifen. Wenn du diesen Technologien zustimmst, können wir Daten wie das Surfverhalten oder eindeutige IDs auf dieser Website verarbeiten. Wenn du deine Zustimmung nicht erteilst oder zurückziehst, können bestimmte Merkmale und Funktionen beeinträchtigt werden.",
@@ -420,49 +362,107 @@
       }
     },
     "Footer": {
-      "Footer": {
-        "imprint": "Impressum",
-        "privacy": "Datenschutzerklärung",
-        "contact": "Kontakt",
-        "data-protection": "Datenschutzerklärung",
-        "instagram": "Instagram",
-        "mastodon": "Mastodon"
+      "imprint": "Impressum",
+      "privacy": "Datenschutzerklärung",
+      "contact": "Kontakt",
+      "data-protection": "Datenschutzerklärung",
+      "instagram": "Instagram",
+      "mastodon": "Mastodon"
+    },
+    "Form": {
+      "NotificationForm": {
+        "heading": "Benachrichtungen",
+        "email": "E-Mail",
+        "event": "Event",
+        "button": {
+          "save": "Speichern",
+          "edit": "Bearbeiten"
+        }
+      },
+      "PrioritiesForm": {
+        "header": "Prioritäten",
+        "type": "Priorität",
+        "value": "Wichtigkeit",
+        "points": "Freie Punkte: {{freePoints}}",
+        "low": "Niedrig",
+        "medium": "Mittel",
+        "high": "Hoch"
+      },
+      "AddressForm": {
+        "header": "Adresse bearbeiten",
+        "labels": {
+          "firstName": "Vorname *",
+          "lastName": "Nachname *",
+          "company": "Firma",
+          "street": "Straße *",
+          "houseNumber": "Hausnummer *",
+          "zipcode": "Postleitzahl *",
+          "city": "Stadt *",
+          "country": "Land *",
+          "standard": "als Standardadresse verwenden"
+        },
+        "hint": "* Pflichtfeld",
+        "button": {
+          "save": "Speichern"
+        }
       },
       "ContactForm": {
-        "title": "Kontaktformular",
+        "heading": "Kontaktformular",
         "subject": "Betreff",
         "message": "Nachricht",
-        "button": "Senden",
         "name": "Name",
         "email": "E-Mail-Adresse",
-        "error": "Fehler beim Senden der Nachricht",
-        "success": "Nachricht erfolgreich gesendet"
+        "button": { "send": "Senden" }
+      },
+      "ExampleForm": {
+        "heading": "Organisationinformationen bearbeiten",
+        "text": "Text",
+        "count": "Anzahl",
+        "email": "Email",
+        "area": "Bereich",
+        "isTrue": "Ist Wahr",
+        "button": {
+          "reset": "Zurücksetzen",
+          "submit": "Senden"
+        }
+      },
+      "OrganizationForm": {
+        "heading": "Organisationinformationen bearbeiten",
+        "displayName": "Organisationsname",
+        "email": "Email",
+        "name": "Name der Organisation",
+        "adress": "Addresse der Organisation",
+        "services": "Services die Sie anbieten",
+        "locale": "Sprache",
+        "supportedServices": "Services die Sie anbieten",
+        "branding_logo_url": "Logo URL",
+        "branding_colors_primary": "Primärfarbe",
+        "branding_colors_page_background": "Hintergrundfarbe",
+        "taxID": "Steuernummer",
+        "address": "Addresse",
+        "notifications": "Benachrichtigungen",
+        "notifictionTypes": {
+          "email": "Email",
+          "event": "Event"
+        },
+        "languages": {
+          "en-US": "English",
+          "de-DE": "Deutsch"
+        },
+        "button": {
+          "cancel": "Abbrechen",
+          "safe": "Speichern"
+        }
       }
     },
     "Header": {
-      "Header": {
-        "title": "SEMPER-KI",
-        "button": {
-          "close": "Menu Schließen",
-          "open": "Menu Öffnen",
-          "events": "Benachrichtigungen"
-        }
+      "button": {
+        "home": "SEMPER-KI",
+        "close": "Menu Schließen",
+        "open": "Menu Öffnen",
+        "events": "Benachrichtigungen"
       },
-      "HeaderData": {
-        "about-us": "Über uns",
-        "login": "Anmelden",
-        "register": "Registrieren",
-        "continue": "Fortfahren",
-        "cart": "Warenkorb",
-        "logout": "Abmelden",
-        "orders": "Aufträge",
-        "contracts": "Verträge",
-        "account": "Konto",
-        "test": "Test",
-        "guide": "Wegweiser"
-      },
-      "HeaderItem": {},
-      "HeaderInvoice": {
+      "Invoice": {
         "title": "Benachrichtigungen",
         "noEvents": "Keine Benachrichtigungen",
         "close": "Schließen",
@@ -471,6 +471,7 @@
       }
     },
     "Menu": {
+      "button": { "close": "Menu Schließen" },
       "components": {
         "LanguageMenu": {
           "button": {
@@ -484,6 +485,7 @@
     "PermissionGate": {
       "message": "Diese Funktion ist mit ihren Rechten nicht nutzbar"
     },
+
     "PMenu": {
       "button": { "open": "Menu Öffnen", "close": "Menu Schließen" }
     },
@@ -494,8 +496,6 @@
         "button": "Datei auswählen"
       }
     },
-    "Switch": {},
-    "Table": {},
     "Upload": {
       "title_one": "Weitere Datei hochladen",
       "title_other": "Weitere Dateien hochladen",
@@ -505,10 +505,10 @@
       "client": "Einzelnutzer",
       "organization": "Organisation"
     },
-    "Chatbot": {
-      "button": {
-        "open": "Assistent"
-      }
+
+    "Pagination": {
+      "next": "Weiter",
+      "previous": "Zurück"
     }
   },
   "contexts": {
@@ -655,7 +655,6 @@
       "updated": "Aktualisiert",
       "lastSeen": "Letzte Anmeldung",
       "actions": "Aktionen",
-      "search": "Suchen...",
       "userType": "Benutzertyp",
       "locale": "Sprache",
       "lastLogin": "Letzte Anmeldung am",
@@ -1071,19 +1070,6 @@
       "noService": "keine Services ",
       "button": {
         "edit": "Bearbeiten"
-      },
-      "components": {
-        "form": {
-          "title": "Organisationinformationen bearbeiten",
-          "name": "Name der Organisation",
-          "taxID": "Steuernummer der Organisation",
-          "email": "Email der Organisation",
-          "adress": "Addresse der Organisation",
-          "services": "Services die Sie anbieten",
-          "button": {
-            "safe": "Speichern"
-          }
-        }
       }
     },
     "components": {
@@ -1223,15 +1209,7 @@
         "cancel": "Abbrechen"
       }
     },
-    "notifications": {
-      "header": "Benachrichtungen",
-      "email": "E-Mail",
-      "event": "Event",
-      "buttons": {
-        "save": "Speichern",
-        "edit": "Bearbeiten"
-      }
-    },
+
     "notification": {
       "email": "Email",
       "event": "Event"
@@ -1272,8 +1250,7 @@
         "status": "Prozessstatus:",
         "button": {
           "menu": "Informationen Menu",
-          "expand": "Mehr Anzeigen",
-          "collapse": "Weniger Anzeigen",
+
           "editTitle": "Prozessname bearbeiten"
         }
       },

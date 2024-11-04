@@ -31,7 +31,7 @@ const Footer: React.FC<Props> = (props) => {
           <li className="p-2">
             <Button
               variant="tertiary"
-              title={t("components.Footer.Footer.imprint")}
+              title={t("components.Footer.imprint")}
               to={"/legal/imprint"}
               className=" text-white  hover:bg-slate-700 "
             />
@@ -39,7 +39,7 @@ const Footer: React.FC<Props> = (props) => {
           <li className="p-2">
             <Button
               variant="tertiary"
-              title={t("components.Footer.Footer.privacy")}
+              title={t("components.Footer.privacy")}
               to={"/legal/privacy"}
               className="text-white hover:bg-slate-700 "
             />
@@ -48,14 +48,14 @@ const Footer: React.FC<Props> = (props) => {
             <Button
               variant="tertiary"
               onClick={contactOnClick}
-              title={t("components.Footer.Footer.contact")}
+              title={t("components.Footer.contact")}
               className="text-white hover:bg-slate-700 "
             />
           </li>
           <li className="flex flex-col items-center justify-center xs:flex-row xs:gap-2 xs:p-2">
             <div className="flex flex-row items-center justify-center gap-2">
               <Button
-                title={t("components.Footer.Footer.instagram")}
+                title={t("components.Footer.instagram")}
                 to={URL_LinkedIn}
                 variant="tertiary"
                 extern
@@ -63,7 +63,7 @@ const Footer: React.FC<Props> = (props) => {
                 className="text-white hover:bg-slate-700 "
               />
               <Button
-                title={t("components.Footer.Footer.mastodon")}
+                title={t("components.Footer.mastodon")}
                 to={URL_Mastodon}
                 variant="tertiary"
                 extern

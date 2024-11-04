@@ -72,11 +72,9 @@ const HeaderInvoice: React.FC<HeaderInvoiceProps> = (props) => {
         justify="between"
         className="sticky top-0 z-50 border-b-2 bg-white p-5"
       >
-        <Heading variant="h2">
-          {t("components.Header.HeaderInvoice.title")}
-        </Heading>
+        <Heading variant="h2">{t("components.Header.Invoice.title")}</Heading>
         <Button
-          title={t("components.Header.HeaderInvoice.close")}
+          title={t("components.Header.Invoice.close")}
           children={<CloseIcon />}
           size="sm"
           variant="text"
@@ -86,11 +84,11 @@ const HeaderInvoice: React.FC<HeaderInvoiceProps> = (props) => {
 
       <Container width="full" direction="col" className="gap-3 p-3">
         {events.length === 0 ? (
-          <Text>{t("components.Header.HeaderInvoice.noEvents")}</Text>
+          <Text>{t("components.Header.Invoice.noEvents")}</Text>
         ) : (
           <>
             <Button
-              title={t("components.Header.HeaderInvoice.deleteAll")}
+              title={t("components.Header.Invoice.deleteAll")}
               startIcon={<DeleteOutlineOutlinedIcon />}
               size="sm"
               variant="secondary"
@@ -108,7 +106,7 @@ const HeaderInvoice: React.FC<HeaderInvoiceProps> = (props) => {
                 onClick={() => handleOnClickButtonEvent(event)}
               >
                 <Button
-                  title={t("components.Header.HeaderInvoice.delete")}
+                  title={t("components.Header.Invoice.delete")}
                   children={<DeleteOutlineOutlinedIcon />}
                   size="sm"
                   variant="text"

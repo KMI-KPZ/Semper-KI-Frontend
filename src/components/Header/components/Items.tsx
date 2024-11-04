@@ -38,7 +38,7 @@ const HeaderItems: React.FC<HeaderItemsProps> = (props) => {
               <HeaderInvoice closeInvoice={handleOnClickButtonInvoice} />
             ) : null}
             <Button
-              title={t(`components.Header.Header.button.events`)}
+              title={t(`components.Header.button.events`)}
               className="text-xl"
               size="sm"
               variant="tertiary"
@@ -48,7 +48,7 @@ const HeaderItems: React.FC<HeaderItemsProps> = (props) => {
                 <NotificationsIcon fontSize="large" />
               </Badge>
               <span className="hidden text-xl md:flex">
-                {t(`components.Header.Header.button.events`)}
+                {t(`components.Header.button.events`)}
               </span>
             </Button>
           </>
@@ -73,7 +73,7 @@ const HeaderItems: React.FC<HeaderItemsProps> = (props) => {
               <HeaderInvoice closeInvoice={handleOnClickButtonInvoice} />
             ) : null}
             <Button
-              title={t(`components.Header.Header.button.events`)}
+              title={t(`components.Header.button.events`)}
               className="text-xl"
               size="sm"
               variant="tertiary"
@@ -83,7 +83,7 @@ const HeaderItems: React.FC<HeaderItemsProps> = (props) => {
                 <NotificationsIcon fontSize="large" />
               </Badge>
               <span className="hidden text-xl md:flex">
-                {t(`components.Header.Header.button.events`)}
+                {t(`components.Header.button.events`)}
               </span>
             </Button>
           </>

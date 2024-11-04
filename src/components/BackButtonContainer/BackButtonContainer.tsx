@@ -16,7 +16,7 @@ const BackButtonContainer: React.FC<
       <Button
         width="fit"
         to=".."
-        title={t("components.BackButton.back")}
+        title={t("components.BackButtonContainer.button.back")}
         variant="text"
         className="absolute left-5"
       >

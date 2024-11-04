@@ -11,7 +11,7 @@ import useCookieConsent from "./hooks/useCookieConsent";
 
 interface CookieBannerProps {}
 
-const CkBanner: React.FC<CookieBannerProps> = (props) => {
+const CookieBanner: React.FC<CookieBannerProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const [showSettings, setShowSettings] = useState(false);
@@ -109,4 +109,4 @@ const CkBanner: React.FC<CookieBannerProps> = (props) => {
   );
 };
 
-export default CkBanner;
+export default CookieBanner;

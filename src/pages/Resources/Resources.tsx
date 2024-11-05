@@ -10,7 +10,7 @@ import PrivateGraph from "./components/PrivateGraph";
 import RequestInformationForm from "./RequestInformation/RequestInformationForm";
 import RequestInformation from "./RequestInformation/RequestInformation";
 import ResourcesOutlet from "@/outlets/ResourcesOutlet";
-import ResourcesNodeTable from "../../components/Resources/Table";
+import ResourcesNodeTable from "../../components/Resources/NodeTable";
 import ResourcesNodeForm from "@/components/Resources/NodeForm";
 import { useTranslation } from "react-i18next";
 
@@ -54,7 +54,7 @@ const Resources: React.FC<ResourcesProps> = (props) => {
                       <ResourcesNodeView>
                         <Button
                           size="sm"
-                          title={t("Resources.components.NodeView.button.edit")}
+                          title={t("Resources.button.edit")}
                           to="edit"
                         />
                       </ResourcesNodeView>

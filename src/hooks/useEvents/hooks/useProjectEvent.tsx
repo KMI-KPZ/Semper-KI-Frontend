@@ -21,7 +21,7 @@ const useProjectEvent = (events: Event[]): ReturnProps => {
 
     if (newProjectEvent.triggerEvent === true) {
       toast(
-        t("App.hooks.useEvents.hooks.useProjectEvent.toast.status"),
+        t("hooks.useProjectEvent.toast.status"),
         `/projects/${newProjectEvent.eventData.projectID}`
       );
     }

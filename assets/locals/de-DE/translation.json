@@ -485,15 +485,156 @@
     "PermissionGate": {
       "message": "Diese Funktion ist mit ihren Rechten nicht nutzbar"
     },
-
-    "PMenu": {
-      "button": { "open": "Menu Öffnen", "close": "Menu Schließen" }
-    },
     "Process": {
-      "UploadCard": {
-        "title": "neue Datei/en hochladen",
-        "subTitle": "Per Drag & Drop oder Klick",
-        "button": "Datei auswählen"
+      "File": {
+        "components": {
+          "FileTable": {
+            "noFiles": "Keine Dateien vorhanden",
+            "name": "Name",
+            "type": "Typ",
+            "size": "Größe",
+            "date": "Datum",
+            "author": "Autor",
+            "actions": "Aktionen",
+            "userFilesTitle": "Dateien zum Angebot",
+            "uploadFilesTitle": "Dateien hochladen",
+            "currentFilesTitle": "Aktuelle Dateien",
+            "button": {
+              "delete": "Löschen",
+              "upload": "Dateien Hochladen",
+              "downloadAll": "Alle Dateien Herunterladen"
+            }
+          },
+          "FileRow": {
+            "button": { "delete": "Löschen", "download": "Herunterladen" }
+          },
+          "UploadCard": {
+            "title": "neue Datei/en hochladen",
+            "subTitle": "Per Drag & Drop oder Klick",
+            "button": "Datei auswählen"
+          }
+        }
+      },
+      "Messages": {
+        "noMessages": "Keine Nachrichten vorhanden",
+        "components": {
+          "TextInput": {
+            "placeholder": "Nachricht...",
+            "button": {
+              "send": "Nachricht Senden"
+            }
+          }
+        }
+      },
+      "Menu": {
+        "button": { "open": "Menu Öffnen", "close": "Menu Schließen" }
+      },
+      "TitleForm": {
+        "error": "Bitte geben Sie einen Namen ein"
+      }
+    },
+    "Resources": {
+      "EdgeForm": {
+        "heading": "Zugehörige ",
+        "table": {
+          "noItems": "keine Einträge vorhanden",
+          "caption": "Verfügbar",
+          "selected": "Ausgewählt",
+          "name": "Name",
+          "createdBy": "Erstellt von",
+          "actions": "Aktionen"
+        },
+        "button": {
+          "add": "Hinzufügen",
+          "delete": "Löschen",
+          "showMore": "Mehr anzeigen",
+          "showLess": "Weniger anzeigen"
+        }
+      },
+      "NodeDraft": {
+        "error": "Fehler beim Laden",
+        "draft": "Vorlage auswählen",
+        "draftDescription": "Wählen Sie eine Vorlage aus, um die Allegemeinen Informationen und Eigenschaften zu übernehmen.",
+        "draftDescription2": "Erstellen sie eine Variante um zusätzlich die Verbindung zu anderen Ressourcen zu übernehmen.",
+
+        "notFound": "Nicht das passenden Gefunden?",
+        "nodeType": "Typ",
+        "createdBy": "Erstellt von: ",
+        "nodeID": "ID",
+
+        "button": {
+          "search": "Erweiterung beantragen",
+
+          "variant": "Variante Erstellen",
+          "draft": "Vorlage auswählen",
+          "details": "Details"
+        },
+        "table": {
+          "name": "Name",
+          "value": "Wert",
+          "createdBy": "Erstellt von",
+          "actions": "Aktionen",
+          "caption": "Eigenschaften"
+        }
+      },
+      "NodeForm": {
+        "heading": {
+          "edit": "Bearbeiten",
+          "create": "Erstellen",
+          "variant": "Variante Erstellen"
+        },
+        "general": "Allgemeine Informationen",
+        "nodeName": "Name",
+        "context": "Beschreibung",
+        "confirmDraft": "Möchten Sie die Vorlage wirklich auswählen?\n Alle ungespeicherten Änderungen gehen verloren.",
+        "button": { "edit": "Speichern", "create": "Erstellen" }
+      },
+      "NodeTable": {
+        "subHeading": "Eigene {{name}}",
+        "button": { "createOwn": "Drucker Anlegen" }
+      },
+      "NodeView": {
+        "context": "Beschreibung:",
+        "createdBy": "Erstellt von:",
+        "createdWhen": "Erstellt am:",
+        "updatedWhen": "Aktualisiert am:",
+        "nodeType": "Typ:",
+        "properties": "Eigenschaften",
+        "general": "Allgemein",
+        "neighbors": "Zugehörige Ressourcen",
+        "noProperties": "keine Eigenschaften vorhanden",
+        "button": {
+          "draft": "Vorlage auswählen",
+          "variant": "Variante erstellen",
+          "edit": "Bearbeiten"
+        }
+      },
+      "PropertyForm": {
+        "properties": {
+          "header": "Eigenschaften",
+          "name": "Name",
+          "type": "Typ",
+          "value": "Wert"
+        },
+        "table": {
+          "noItems": "keine Einträge vorhanden",
+          "caption": "Verfügbar",
+          "selected": "Ausgewählt",
+          "name": "Name",
+          "createdBy": "Erstellt von",
+          "actions": "Aktionen",
+          "value": "Wert"
+        },
+        "button": {
+          "removeProperty": "Eigenschaft entfernen",
+          "addProperty": "Eigenschaften Hinuzfügen"
+        }
+      }
+    },
+    "Table": {
+      "Pagination": {
+        "next": "Weiter",
+        "previous": "Zurück"
       }
     },
     "Upload": {
@@ -504,11 +645,6 @@
     "UserSwitch": {
       "client": "Einzelnutzer",
       "organization": "Organisation"
-    },
-
-    "Pagination": {
-      "next": "Weiter",
-      "previous": "Zurück"
     }
   },
   "contexts": {
@@ -516,7 +652,55 @@
       "completeUserData": "Bitte vervollständigen Sie ihre Benutzerdaten"
     }
   },
-  "routeOutlets": {
+  "hooks": {
+    "useStatusButtons": {
+      "NONE": "Translation error",
+      "DELETE": "Prozess löschen",
+      "BACK-TO-SERVICE_READY": "Zurück",
+      "BACK-TO-DRAFT": "Zurück",
+      "BACK-TO-SERVICE_COMPLETED": "Zurück",
+      "BACK-TO-CONTRACTOR_COMPLETED": "Zurück",
+      "FORWARD-TO-SERVICE_COMPLETED": "Weiter",
+      "FORWARD-TO-CONTRACTOR_COMPLETED": "Weiter",
+      "FORWARD-TO-VERIFYING": "Überprüfen Starten",
+      "FORWARD-TO-VERIFICATION_COMPLETED": "Überprüfung abschließen",
+      "FORWARD-TO-REQUEST_COMPLETED": "Anfrage senden",
+      "FORWARD-TO-CLARIFICATION": "Rückfragen stellen",
+      "FORWARD-TO-OFFER_COMPLETED": "Anfrage bestätigen und Angebot erstellen",
+      "FORWARD-TO-OFFER_REJECTED": "Anfrage ablehnen",
+      "FORWARD-TO-CONFIRMATION_COMPLETED": "Angebot bestätigen",
+      "FORWARD-TO-CONFIRMATION_REJECTED": "Angebot ablehnen",
+      "FORWARD-TO-PRODUCTION_IN_PROGRESS": "Produktion starten",
+      "FORWARD-TO-PRODUCTION_COMPLETED": "Produktion abschließen",
+      "FORWARD-TO-DELIVERY_IN_PROGRESS": "Lieferung starten",
+      "FORWARD-TO-DELIVERY_COMPLETED": "Lieferung abschließen",
+      "FORWARD-TO-FAILED": "Prozess fehlgeschlagen",
+      "FORWARD-TO-COMPLETED": "Prozess abschließen",
+      "FORWARD-TO-DISPUTE": "Streitfall melden",
+      "buttons": {
+        "confirmAll": "Wollen Sie wirklich alle betroffene Prozesse {{title}}?"
+      }
+    },
+    "useOrgaEvent": {
+      "toast": "Ihre Organisation wurde aktualisiert"
+    },
+    "useProjectEvent": {
+      "toast": {
+        "status": "Prozessstatus wurde aktualisiert",
+        "message": "Neue Nachricht"
+      }
+    },
+    "useAdminMenuButtons": {
+      "button": {
+        "dashboard": "Dashboard",
+        "orga": "Organisationen verwalten",
+        "user": "Benutzer verwalten",
+        "projects": "Projekte verwalten",
+        "resources": "Ressourcen verwalten"
+      }
+    }
+  },
+  "outlets": {
     "AuthorizedUserOutlet": {
       "login": "Bitte Anmelden um fortzufahren",
       "button": {
@@ -674,14 +858,7 @@
       "form": { "title": "Benutzer bearbeiten" }
     },
     "Admin": {
-      "title": "Adminbereich",
-      "buttons": {
-        "dashboard": "Dashboard",
-        "orga": "Organisationen verwalten",
-        "user": "Benutzer verwalten",
-        "projects": "Projekte verwalten",
-        "resources": "Ressourcen verwalten"
-      }
+      "title": "Adminbereich"
     }
   },
   "Advantages": {
@@ -716,32 +893,7 @@
         "title": "Semper-KI",
         "loading": "Laden..."
       }
-    },
-    "hooks": {
-      "useEvents": {
-        "hooks": {
-          "useMissedEvent": {},
-          "useOrgaEvent": {
-            "toast": "Ihre Organisation wurde aktualisiert"
-          },
-          "useProjectEvent": {
-            "toast": {
-              "status": "Prozessstatus wurde aktualisiert",
-              "message": "Neue Nachricht"
-            }
-          },
-          "useWebsocket": {}
-        },
-        "useEvents": {
-          "toast": {
-            "permission": "Ihre Rechte wurden aktualisiert"
-          }
-        }
-      },
-      "useBodyScroll": {},
-      "useToast": {}
-    },
-    "App": {}
+    }
   },
   "EmailVerification": {
     "title": "Email verifizieren",
@@ -1367,28 +1519,7 @@
         }
       },
       "Contract": {
-        "components": {
-          "FileRow": {
-            "button": { "delete": "Löschen", "download": "Herunterladen" }
-          },
-          "FileTable": {
-            "noFiles": "Keine Dateien vorhanden",
-            "name": "Name",
-            "type": "Typ",
-            "size": "Größe",
-            "date": "Datum",
-            "author": "Autor",
-            "actions": "Aktionen",
-            "userFilesTitle": "Dateien zum Angebot",
-            "uploadFilesTitle": "Dateien hochladen",
-            "currentFilesTitle": "Aktuelle Dateien",
-            "button": {
-              "delete": "Löschen",
-              "upload": "Dateien Hochladen",
-              "downloadAll": "Alle Dateien Herunterladen"
-            }
-          }
-        },
+        "components": {},
         "Contract": {
           "title": "Angebot",
           "orga": "Laden sie hier ihr Angebot und zugehörige Dateien hoch",
@@ -1772,35 +1903,7 @@
         "useProcessFile": {},
         "useProjectEventChange": {},
         "useProjectState": {},
-        "useScrollToProcess": {},
-        "useStatusButtons": {
-          "NONE": "Translation error",
-          "DELETE": "Prozess löschen",
-          "BACK-TO-SERVICE_READY": "Zurück",
-          "BACK-TO-DRAFT": "Zurück",
-          "BACK-TO-SERVICE_COMPLETED": "Zurück",
-          "BACK-TO-CONTRACTOR_COMPLETED": "Zurück",
-          "FORWARD-TO-SERVICE_COMPLETED": "Weiter",
-          "FORWARD-TO-CONTRACTOR_COMPLETED": "Weiter",
-          "FORWARD-TO-VERIFYING": "Überprüfen Starten",
-          "FORWARD-TO-VERIFICATION_COMPLETED": "Überprüfung abschließen",
-          "FORWARD-TO-REQUEST_COMPLETED": "Anfrage senden",
-          "FORWARD-TO-CLARIFICATION": "Rückfragen stellen",
-          "FORWARD-TO-OFFER_COMPLETED": "Anfrage bestätigen und Angebot erstellen",
-          "FORWARD-TO-OFFER_REJECTED": "Anfrage ablehnen",
-          "FORWARD-TO-CONFIRMATION_COMPLETED": "Angebot bestätigen",
-          "FORWARD-TO-CONFIRMATION_REJECTED": "Angebot ablehnen",
-          "FORWARD-TO-PRODUCTION_IN_PROGRESS": "Produktion starten",
-          "FORWARD-TO-PRODUCTION_COMPLETED": "Produktion abschließen",
-          "FORWARD-TO-DELIVERY_IN_PROGRESS": "Lieferung starten",
-          "FORWARD-TO-DELIVERY_COMPLETED": "Lieferung abschließen",
-          "FORWARD-TO-FAILED": "Prozess fehlgeschlagen",
-          "FORWARD-TO-COMPLETED": "Prozess abschließen",
-          "FORWARD-TO-DISPUTE": "Streitfall melden",
-          "buttons": {
-            "confirmAll": "Wollen Sie wirklich alle betroffene Prozesse {{title}}?"
-          }
-        }
+        "useScrollToProcess": {}
       },
       "Process": {
         "components": {
@@ -2054,6 +2157,7 @@
     }
   },
   "Resources": {
+    "button": { "edit": "Bearbeiten" },
     "header": "Ressourcen",
     "components": {
       "RequestInformation": {
@@ -2067,22 +2171,7 @@
           "send": "Anfragen"
         }
       },
-      "NodeView": {
-        "context": "Beschreibung:",
-        "createdBy": "Erstellt von:",
-        "createdWhen": "Erstellt am:",
-        "updatedWhen": "Aktualisiert am:",
-        "nodeType": "Typ:",
-        "properties": "Eigenschaften",
-        "general": "Allgemein",
-        "neighbors": "Zugehörige Ressourcen",
-        "noProperties": "keine Eigenschaften vorhanden",
-        "button": {
-          "draft": "Vorlage auswählen",
-          "variant": "Variante erstellen",
-          "edit": "Bearbeiten"
-        }
-      },
+
       "Menu": {
         "overview": "Übersicht",
         "materials": "Materialien",
@@ -2104,65 +2193,6 @@
           "add": "Hinzufügen",
           "variant": "Variante erstellen",
           "details": "Details"
-        }
-      },
-      "Edge": {
-        "heading": "Zugehörige ",
-        "table": {
-          "noItems": "keine Einträge vorhanden",
-          "caption": "Verfügbar",
-          "selected": "Ausgewählt",
-          "name": "Name",
-          "createdBy": "Erstellt von",
-          "actions": "Aktionen"
-        },
-        "button": {
-          "add": "Hinzufügen",
-          "delete": "Löschen",
-          "showMore": "Mehr anzeigen",
-          "showLess": "Weniger anzeigen"
-        }
-      },
-      "Edit": {
-        "error": "Fehler beim Laden",
-        "draft": "Vorlage auswählen",
-        "draftDescription": "Wählen Sie eine Vorlage aus, um die Allegemeinen Informationen und Eigenschaften zu übernehmen.",
-        "draftDescription2": "Erstellen sie eine Variante um zusätzlich die Verbindung zu anderen Ressourcen zu übernehmen.",
-        "confirmDraft": "Möchten Sie die Vorlage wirklich auswählen?\n Alle ungespeicherten Änderungen gehen verloren.",
-        "general": "Allgemeine Informationen",
-        "notFound": "Nicht das passenden Gefunden?",
-        "heading": {
-          "edit": "Bearbeiten",
-          "create": "Erstellen",
-          "variant": "Variante Erstellen"
-        },
-        "nodeName": "Name",
-        "context": "Beschreibung",
-        "nodeType": "Typ",
-        "createdBy": "Erstellt von: ",
-        "nodeID": "ID",
-        "properties": {
-          "header": "Eigenschaften",
-          "name": "Name",
-          "type": "Typ",
-          "value": "Wert"
-        },
-        "button": {
-          "search": "Erweiterung beantragen",
-          "addProperty": "Eigenschaften Hinuzfügen",
-          "edit": "Speichern",
-          "create": "Erstellen",
-          "variant": "Variante Erstellen",
-          "removeProperty": "Eigenschaft entfernen",
-          "draft": "Vorlage auswählen",
-          "details": "Details"
-        },
-        "table": {
-          "name": "Name",
-          "value": "Wert",
-          "createdBy": "Erstellt von",
-          "actions": "Aktionen",
-          "caption": "Eigenschaften"
         }
       }
     },

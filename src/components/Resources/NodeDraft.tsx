@@ -55,16 +55,16 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
     return (
       <Container width="full" direction="col" className="card gap-0">
         <Heading variant="h3" className="">
-          {t("Resources.components.Edit.draft")}
+          {t("components.Resources.NodeDraft.draft")}
         </Heading>
         <Collapsible initialOpen showButton className="mt-5">
           <Container width="full" direction="col" className="">
             <Container width="full" direction="col" gap={3}>
               <Text className="text-center">
-                {t("Resources.components.Edit.draftDescription")}
+                {t("components.Resources.NodeDraft.draftDescription")}
               </Text>
               <Text className="text-center">
-                {t("Resources.components.Edit.draftDescription2")}
+                {t("components.Resources.NodeDraft.draftDescription2")}
               </Text>
             </Container>
             <Search handleSearchInputChange={handleSearchInputChange} />
@@ -83,12 +83,12 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                       <div className="flex items-center justify-center ">
                         <Button
                           variant="text"
-                          title={t("Resources.components.Edit.table.name")}
+                          title={t("components.Resources.NodeDraft.table.name")}
                           onClick={() => handleSort("name")}
                           className="whitespace-nowrap"
                         >
                           <div className="ml-6 flex flex-row items-center justify-center">
-                            {t("Resources.components.Edit.table.name")}
+                            {t("components.Resources.NodeDraft.table.name")}
                             {getSortIcon("name")}
                           </div>
                         </Button>
@@ -98,19 +98,23 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                       <div className="flex items-center justify-center ">
                         <Button
                           variant="text"
-                          title={t("Resources.components.Edit.table.createdBy")}
+                          title={t(
+                            "components.Resources.NodeDraft.table.createdBy"
+                          )}
                           onClick={() => handleSort("createdBy")}
                           className="whitespace-nowrap"
                         >
                           <div className="ml-6 flex flex-row items-center justify-center">
-                            {t("Resources.components.Edit.table.createdBy")}
+                            {t(
+                              "components.Resources.NodeDraft.table.createdBy"
+                            )}
                             {getSortIcon("createdBy")}
                           </div>
                         </Button>
                       </div>
                     </th>
                     <th className="bg-gray-50">
-                      {t("Resources.components.Edit.table.actions")}
+                      {t("components.Resources.NodeDraft.table.actions")}
                     </th>
                   </tr>
                 </thead>
@@ -146,7 +150,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                               variant="text"
                               size="sm"
                               title={t(
-                                "Resources.components.Edit.button.details"
+                                "components.Resources.NodeDraft.button.details"
                               )}
                               onClick={() => {
                                 setDetailsNodeID(node.nodeID);
@@ -156,7 +160,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                               variant="text"
                               size="sm"
                               title={t(
-                                "Resources.components.Edit.button.draft"
+                                "components.Resources.NodeDraft.button.draft"
                               )}
                               onClick={() => {
                                 handleOnClickButtonDraft(node.nodeID);
@@ -180,11 +184,15 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                       }`}
                     >
                       <Container width="full">
-                        <Text>{t("Resources.components.Edit.notFound")}</Text>
+                        <Text>
+                          {t("components.Resources.NodeDraft.notFound")}
+                        </Text>
                         <Button
                           variant="text"
                           size="sm"
-                          title={t("Resources.components.Edit.button.search")}
+                          title={t(
+                            "components.Resources.NodeDraft.button.search"
+                          )}
                           to={`../../request/new?type=${nodeType}`}
                         />
                       </Container>
@@ -203,7 +211,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
             <Button
               variant="text"
               size="sm"
-              title={t("Resources.components.Edit.button.draft")}
+              title={t("components.Resources.NodeDraft.button.draft")}
               onClick={() => {
                 handleOnClickModalButtonDraft(detailsNodeID);
               }}
@@ -212,7 +220,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
         </ResourcesNodeView>
       </Container>
     );
-  return <Text>{t("Resources.components.Edit.error")}</Text>;
+  return <Text>{t("components.Resources.NodeDraft.error")}</Text>;
 };
 
 export default ResourcesNodeDraft;

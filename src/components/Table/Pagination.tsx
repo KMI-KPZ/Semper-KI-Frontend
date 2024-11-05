@@ -19,7 +19,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     <ReactPaginate
       className="flex w-fit flex-row items-center justify-center gap-3 rounded-md border-2 bg-white p-3 "
       breakLabel="..."
-      nextLabel={t("components.Pagination.next") + "  >"}
+      nextLabel={t("components.Table.Pagination.next") + "  >"}
       nextClassName=" flex items-center justify-center  grow"
       nextLinkClassName="hover:bg-gray-200 p-3 rounded-full border-2 bg-gray-100"
       onPageChange={handlePageChangeExtern}
@@ -29,7 +29,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       activeLinkClassName=" bg-ultramarinblau text-white hover:bg-gray-200 hover:text-black"
       pageClassName="flex items-center justify-center grow"
       pageLinkClassName="hover:bg-gray-200 p-3 px-5 rounded-full border-2"
-      previousLabel={"<  " + t("components.Pagination.previous")}
+      previousLabel={"<  " + t("components.Table.Pagination.previous")}
       previousClassName=" flex items-center justify-center grow"
       previousLinkClassName="hover:bg-gray-200 p-3 rounded-full border-2 bg-gray-100"
       renderOnZeroPageCount={null}

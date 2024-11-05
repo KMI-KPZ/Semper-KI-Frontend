@@ -104,7 +104,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
   return (
     <Container width="full" direction="col" className="card gap-0">
       <Heading variant="h3">
-        {t("Resources.components.Edge.heading")}
+        {t("components.Resources.EdgeForm.heading")}
         {t(`types.OntoNodeType.${nodeType}`)}
       </Heading>
       <Collapsible initialOpen showButton className="mt-5">
@@ -120,7 +120,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
             <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
               <caption className=" pb-2 pl-5 text-left">
                 <Heading variant="h4">
-                  {t("Resources.components.Edge.table.caption")}
+                  {t("components.Resources.EdgeForm.table.caption")}
                 </Heading>
               </caption>
               <thead className="">
@@ -129,12 +129,12 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                     <div className="flex items-center justify-center ">
                       <Button
                         variant="text"
-                        title={t("Resources.components.Edge.table.name")}
+                        title={t("components.Resources.EdgeForm.table.name")}
                         onClick={() => handleSortAll("name")}
                         className="whitespace-nowrap"
                       >
                         <div className="ml-6 flex flex-row items-center justify-center">
-                          {t("Resources.components.Edge.table.name")}
+                          {t("components.Resources.EdgeForm.table.name")}
                           {getSortIconAll("name")}
                         </div>
                       </Button>
@@ -144,12 +144,14 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                     <div className="flex items-center justify-center ">
                       <Button
                         variant="text"
-                        title={t("Resources.components.Edge.table.createdBy")}
+                        title={t(
+                          "components.Resources.EdgeForm.table.createdBy"
+                        )}
                         onClick={() => handleSortAll("createdBy")}
                         className="whitespace-nowrap"
                       >
                         <div className="ml-6 flex flex-row items-center justify-center">
-                          {t("Resources.components.Edge.table.createdBy")}
+                          {t("components.Resources.EdgeForm.table.createdBy")}
                           {getSortIconAll("createdBy")}
                         </div>
                       </Button>
@@ -157,7 +159,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                   </th>
 
                   <th className="rounded-tr-xl bg-gray-50 p-3 text-left">
-                    {t("Resources.components.Edge.table.actions")}
+                    {t("components.Resources.EdgeForm.table.actions")}
                   </th>
                 </tr>
               </thead>
@@ -201,7 +203,9 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                             justify="start"
                           >
                             <Button
-                              title={t("Resources.components.Edge.button.add")}
+                              title={t(
+                                "components.Resources.EdgeForm.button.add"
+                              )}
                               onClick={() => {
                                 append({
                                   nodeID: node.nodeID,
@@ -228,7 +232,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                                   setPaginationAll((prevState) => prevState + 5)
                                 }
                                 title={t(
-                                  "Resources.components.Edge.button.showMore"
+                                  "components.Resources.EdgeForm.button.showMore"
                                 )}
                                 size="sm"
                                 variant="text"
@@ -240,7 +244,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                                   setPaginationAll((prevState) => prevState - 5)
                                 }
                                 title={t(
-                                  "Resources.components.Edge.button.showLess"
+                                  "components.Resources.EdgeForm.button.showLess"
                                 )}
                                 size="sm"
                                 variant="text"
@@ -255,7 +259,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                   <tr>
                     <td colSpan={3} className="border-t-2 p-3 text-center">
                       <Text>
-                        {t("Resources.components.Edge.table.noItems")}
+                        {t("components.Resources.EdgeForm.table.noItems")}
                       </Text>
                     </td>
                   </tr>
@@ -274,7 +278,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
             <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
               <caption className=" pb-2 pl-5 text-left">
                 <Heading variant="h4">
-                  {t("Resources.components.Edge.table.selected")}
+                  {t("components.Resources.EdgeForm.table.selected")}
                 </Heading>
               </caption>
               <thead className="">
@@ -283,12 +287,12 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                     <div className="flex items-center justify-center ">
                       <Button
                         variant="text"
-                        title={t("Resources.components.Edge.table.name")}
+                        title={t("components.Resources.EdgeForm.table.name")}
                         onClick={() => handleSortOwn("nodeName")}
                         className="whitespace-nowrap"
                       >
                         <div className="ml-6 flex flex-row items-center justify-center">
-                          {t("Resources.components.Edge.table.name")}
+                          {t("components.Resources.EdgeForm.table.name")}
                           {getSortIconOwn("nodeName")}
                         </div>
                       </Button>
@@ -298,12 +302,14 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                     <div className="flex items-center justify-center ">
                       <Button
                         variant="text"
-                        title={t("Resources.components.Edge.table.createdBy")}
+                        title={t(
+                          "components.Resources.EdgeForm.table.createdBy"
+                        )}
                         onClick={() => handleSortOwn("createdBy")}
                         className="whitespace-nowrap"
                       >
                         <div className="ml-6 flex flex-row items-center justify-center">
-                          {t("Resources.components.Edge.table.createdBy")}
+                          {t("components.Resources.EdgeForm.table.createdBy")}
                           {getSortIconOwn("createdBy")}
                         </div>
                       </Button>
@@ -311,7 +317,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                   </th>
 
                   <th className="rounded-tr-xl bg-gray-50 p-3 text-left">
-                    {t("Resources.components.Edge.table.actions")}
+                    {t("components.Resources.EdgeForm.table.actions")}
                   </th>
                 </tr>
               </thead>
@@ -341,7 +347,9 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                         }`}
                       >
                         <Button
-                          title={t("Resources.components.Edge.button.delete")}
+                          title={t(
+                            "components.Resources.EdgeForm.button.delete"
+                          )}
                           onClick={() => remove(node.index)}
                           size="sm"
                           variant="text"
@@ -353,7 +361,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                   <tr>
                     <td colSpan={3} className="border-t-2 p-3 text-center">
                       <Text>
-                        {t("Resources.components.Edge.table.noItems")}
+                        {t("components.Resources.EdgeForm.table.noItems")}
                       </Text>
                     </td>
                   </tr>

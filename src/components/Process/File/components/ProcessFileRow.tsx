@@ -43,7 +43,7 @@ const ProcessFileRow: React.FC<ProcessFileRowProps> = (props) => {
             size="sm"
             variant="text"
             title={t(
-              "Process.components.Contract.components.FileRow.button.download"
+              "components.Process.File.components.FileRow.button.download"
             )}
             children={<DownloadIcon />}
             onClick={handleOnButtonClickDownload}
@@ -58,7 +58,7 @@ const ProcessFileRow: React.FC<ProcessFileRowProps> = (props) => {
               size="sm"
               variant="text"
               title={t(
-                "Process.components.Contract.components.FileRow.button.delete"
+                "components.Process.File.components.FileRow.button.delete"
               )}
               children={<DeleteIcon />}
               onClick={handleOnButtonClickDelete}

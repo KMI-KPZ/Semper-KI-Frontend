@@ -66,19 +66,19 @@ const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
               <tr>
                 <td colSpan={2} className={` p-3`}>
                   <Heading variant="h2">
-                    {t("Resources.components.NodeView.general")}
+                    {t("components.Resources.NodeView.general")}
                   </Heading>
                 </td>
               </tr>
               <tr>
                 <td className={` p-3`}>
-                  {t("Resources.components.NodeView.context")}
+                  {t("components.Resources.NodeView.context")}
                 </td>
                 <td className={` p-3`}>{node.data.context}</td>
               </tr>
               <tr>
                 <td className={`border-t-2 p-3`}>
-                  {t("Resources.components.NodeView.createdBy")}
+                  {t("components.Resources.NodeView.createdBy")}
                 </td>
                 <td className={`border-t-2 p-3`}>
                   {node.data.createdBy === organization.hashedID
@@ -88,7 +88,7 @@ const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
               </tr>
               <tr>
                 <td className={`border-t-2 p-3`}>
-                  {t("Resources.components.NodeView.updatedWhen")}
+                  {t("components.Resources.NodeView.updatedWhen")}
                 </td>
                 <td className={`border-t-2 p-3`}>
                   {node.data.updatedWhen.toLocaleDateString()}
@@ -96,7 +96,7 @@ const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
               </tr>
               <tr>
                 <td className={`border-t-2 p-3`}>
-                  {t("Resources.components.NodeView.createdWhen")}
+                  {t("components.Resources.NodeView.createdWhen")}
                 </td>
                 <td className={`border-t-2 p-3`}>
                   {node.data.createdWhen.toLocaleDateString()}
@@ -104,7 +104,7 @@ const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
               </tr>
               <tr>
                 <td className={`border-t-2 p-3`}>
-                  {t("Resources.components.NodeView.nodeType")}
+                  {t("components.Resources.NodeView.nodeType")}
                 </td>
                 <td className={`border-t-2 p-3`}>
                   {t(`types.OntoNodeType.${node.data.nodeType}`)}
@@ -113,7 +113,7 @@ const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
               <tr>
                 <td colSpan={2} className={`border-t-2 p-3`}>
                   <Heading variant="h2">
-                    {t("Resources.components.NodeView.properties")}
+                    {t("components.Resources.NodeView.properties")}
                   </Heading>
                 </td>
               </tr>
@@ -121,7 +121,7 @@ const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
                 <tr>
                   <td colSpan={2} className={`border-t-2 p-3`}>
                     <Text>
-                      {t("Resources.components.NodeView.noProperties")}
+                      {t("components.Resources.NodeView.noProperties")}
                     </Text>
                   </td>
                 </tr>

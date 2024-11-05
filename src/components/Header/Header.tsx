@@ -47,7 +47,7 @@ export const Header: React.FC<Props> = (props) => {
           className="mr-2"
           size="sm"
           variant="primary"
-          title={t(`components.Header.Header.button.open`)}
+          title={t(`components.Header.button.open`)}
           onClick={onClickButtonMenu}
           children={<MenuIcon />}
         />

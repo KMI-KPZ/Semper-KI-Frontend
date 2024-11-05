@@ -1,11 +1,13 @@
 import React from "react";
 import { Container } from "@component-library/index";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { useTranslation } from "react-i18next";
 
 interface ToTopButtonProps {}
 
 const ToTopButton: React.FC<ToTopButtonProps> = (props) => {
   const {} = props;
+  const { t } = useTranslation();
 
   const [scrolled, setScrolled] = React.useState(false);
 
@@ -38,6 +40,7 @@ const ToTopButton: React.FC<ToTopButtonProps> = (props) => {
       } fixed bottom-5 right-5 flex items-center justify-center rounded-full duration-300 md:bottom-3 md:right-3  `}
       href="#"
       onClick={handleOnClick}
+      title={t("component-library.ToTopButton.button.toTop")}
     >
       <Container className="rounded-full border-2 border-ultramarinblau-dark bg-white p-2 text-black duration-300 hover:bg-ultramarinblau hover:text-white md:p-3">
         <KeyboardArrowUpIcon className="" />

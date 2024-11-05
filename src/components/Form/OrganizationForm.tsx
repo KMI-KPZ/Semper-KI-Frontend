@@ -167,7 +167,7 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
       className={`flex  w-full flex-col items-center justify-start gap-5  bg-white p-5 md:justify-center`}
     >
       <Heading variant={`h1`}>
-        {t("Organization.Info.components.form.title")}
+        {t("components.Form.OrganizationForm.heading")}
       </Heading>
       <Container direction="col" align="start">
         {labels.map((label) => (

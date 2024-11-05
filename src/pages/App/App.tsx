@@ -1,5 +1,4 @@
 import "react-toastify/dist/ReactToastify.css";
-import Footer from "@/components/Footer";
 import Login from "../Login/Login";
 import Logout from "../Logout/Logout";
 import Organization from "../Organization/Organization";
@@ -7,12 +6,12 @@ import Portfolio from "../Portfolio/Portfolio";
 import Resources from "../Resources/Resources";
 import Legal from "../Legal/Legal";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import CkBanner from "@/components/CookieBanner/CkBanner";
+import CookieBanner from "@/components/CookieBanner/CookieBanner";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import EmailVerification from "../EmailVerification/EmailVerification";
 import ResKriVer from "../ResKriVer/ResKriVer";
 import RedirectLogin from "../Login/RedirectLogin";
-import Menu from "@/components/Menu";
+import Menu from "@/components/Menu/Menu";
 import Advantages from "../Advantages/Advantages";
 import Chatbot from "@/components/Chatbot/Chatbot";
 import Profile from "../Profile/Proflle";
@@ -26,7 +25,7 @@ import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
 import ServiceEdit from "../Process/components/Service/ServiceEdit/ServiceEdit";
 import ManufacturingProcessOutlet from "@/outlets/ManufacturingProcessOutlet";
 import ServiceModeling from "../Process/components/Service/ServiceEdit/Modelling/Modelling";
-import { Header } from "@/components/Header";
+import { Header } from "@/components/Header/Header";
 import { createContext, useState } from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
@@ -42,6 +41,7 @@ import { ManufacturingMaterials } from "../Process/components/Service/ServiceEdi
 import { ManufacturingPostProcessings } from "../Process/components/Service/ServiceEdit/Manufacturing/PostProcessing/PostProcessing";
 import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 import useUser, { UserType } from "@/hooks/useUser";
+import Footer from "@/components/Footer/Footer";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -189,7 +189,7 @@ const App: React.FC = () => {
             </Route>
           </Routes>
         </main>
-        <CkBanner />
+        <CookieBanner />
         <Menu />
         {/* <ToTopButton /> */}
         <Footer />

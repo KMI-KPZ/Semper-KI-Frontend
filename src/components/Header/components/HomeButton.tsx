@@ -32,7 +32,7 @@ const HeaderHomeButton: React.FC<HeaderHomeButtonProps> = (props) => {
           variant="custom"
           className="text-2xl font-bold text-[#263652] xs:text-3xl md:text-4xl"
         >
-          {t("components.Header.Header.title")}
+          {t("components.Header.button.home")}
         </Text>
       </div>
     </a>

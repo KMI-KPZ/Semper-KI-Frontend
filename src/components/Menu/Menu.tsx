@@ -109,7 +109,7 @@ const Menu: React.FC<MenuProps> = (props) => {
           <div className="flex flex-row-reverse gap-3">
             <Button
               children={<CloseIcon />}
-              title={t(`components.Header.Header.button.close`)}
+              title={t(`components.Menu.button.close`)}
               width="fit"
               size="sm"
               variant="primary"
@@ -132,7 +132,7 @@ const Menu: React.FC<MenuProps> = (props) => {
         </div>
         <Button
           className="md:hidden"
-          title={t(`components.Header.Header.button.close`)}
+          title={t(`components.Menu.button.close`)}
           onClick={closeMenu}
           children={<ExpandLessIcon className="md:rotate-90" />}
           variant="secondary"

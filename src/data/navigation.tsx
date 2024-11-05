@@ -8,7 +8,7 @@ import PrintIcon from "@mui/icons-material/Print";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import FactoryIcon from "@mui/icons-material/Factory";
 import { UserType } from "@/hooks/useUser";
-import { NavigationItemPreferredType } from "@/components/Header";
+import { NavigationItemPreferredType } from "@/components/Header/Header";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { DataNaviagtionTranlationType } from "@/components";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";

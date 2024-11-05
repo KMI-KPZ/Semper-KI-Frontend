@@ -48,14 +48,14 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
   if (files.length === 0 && type === "upload") return null;
   if (files.length === 0 && type === "current")
     return (
-      <Container className="rounded-xl border-2 p-5">
+      <Container className="rounded-md border-2 p-5">
         <Text>
           {t("Process.components.Contract.components.FileTable.noFiles")}
         </Text>
       </Container>
     );
   return (
-    <Container width="full" direction="col" className="rounded-xl border-2 p-5">
+    <Container width="full" direction="col" className="rounded-md border-2 p-5">
       <Heading variant="h3">
         {type === "current"
           ? t(

@@ -1,8 +1,7 @@
-import { AuthorizedUserProps } from "@/hooks/useUser";
 import { Container, Heading, Search, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useAdmin from "../hooks/useAdmin";
+import useAdmin, { AdminDataUser } from "../hooks/useAdmin";
 import { Button } from "@component-library/index";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
@@ -13,6 +12,7 @@ import Table from "@/components/Table/Table";
 import usePagination from "@/hooks/usePagination";
 import Pagination from "@/components/Table/Pagination";
 import useAdminDeleteUser from "@/api/Admin/Mutations/useAdminDeleteUser";
+import { useNavigate } from "react-router-dom";
 
 interface Props {}
 
@@ -21,17 +21,19 @@ const AdminUser: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { users } = useAdmin();
   const deleteUser = useAdminDeleteUser();
+  const navigate = useNavigate();
+
   const { filterDataBySearchInput, handleSearchInputChange } =
-    useSearch<AuthorizedUserProps>();
+    useSearch<AdminDataUser>();
   const {
     getSortIcon,
     handleSort,
     sortItems,
     getNestedSortIcon,
     handleNestedSort,
-  } = useSort<AuthorizedUserProps>();
+  } = useSort<AdminDataUser>();
   const { handlePageChange, paginatedItems, totalPages } =
-    usePagination<AuthorizedUserProps>({
+    usePagination<AdminDataUser>({
       items: users
         .filter((user) => filterDataBySearchInput(user))
         .sort(sortItems),
@@ -42,8 +44,16 @@ const AdminUser: React.FC<Props> = (props) => {
       deleteUser.mutate({ hashedID, name });
   };
 
+  const handleOnClickButtonDetails = (hashedID: string) => {
+    navigate(hashedID);
+  };
+
+  const handleOnClickButtonEdit = (hashedID: string) => {
+    navigate(hashedID + "/edit");
+  };
+
   return (
-    <Container width="full" direction="col">
+    <Container width="full" direction="col" className="bg-white p-5">
       <BackButtonContainer>
         <Heading variant="h1">{t("Admin.User.title")}</Heading>
       </BackButtonContainer>
@@ -68,7 +78,7 @@ const AdminUser: React.FC<Props> = (props) => {
                 handleSort={handleSort}
                 getSortIcon={getSortIcon}
                 title={t("Admin.User.orga")}
-                objectKey="organization"
+                objectKey="organizationNames"
               />
               <TableHeaderButton
                 handleSort={handleSort}
@@ -99,13 +109,13 @@ const AdminUser: React.FC<Props> = (props) => {
           </thead>
           <tbody>
             {paginatedItems.length > 0 ? (
-              paginatedItems.map((user: AuthorizedUserProps, index: number) => (
+              paginatedItems.map((user: AdminDataUser, index: number) => (
                 <tr key={index}>
                   <td>{user.name}</td>
                   <td>{user.details.email}</td>
                   <td>
-                    {user.organization !== undefined
-                      ? user.organization.toString().split(",").join(", ")
+                    {user.organizationNames !== undefined
+                      ? user.organizationNames.join(", ")
                       : "---"}
                   </td>
                   <td className="whitespace-nowrap">
@@ -121,15 +131,27 @@ const AdminUser: React.FC<Props> = (props) => {
                     {new Date(user.lastSeen).toLocaleString()}
                   </td>
                   <td>
-                    <div className="flex w-full flex-row items-center justify-center gap-3 p-2">
+                    <Container direction="col" width="full">
                       <Button
-                        title={t("Admin.User.button.delete")}
+                        title={t("Admin.Resources.button.details")}
+                        onClick={() =>
+                          handleOnClickButtonDetails(user.hashedID)
+                        }
+                        variant="text"
+                      />
+                      <Button
+                        title={t("Admin.Resources.button.edit")}
+                        onClick={() => handleOnClickButtonEdit(user.hashedID)}
+                        variant="text"
+                      />
+                      <Button
+                        title={t("Admin.Resources.button.delete")}
                         onClick={() =>
                           handleOnClickButtonDelete(user.hashedID, user.name)
                         }
                         variant="text"
                       />
-                    </div>
+                    </Container>
                   </td>
                 </tr>
               ))

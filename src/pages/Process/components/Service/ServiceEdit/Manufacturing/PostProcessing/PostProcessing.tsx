@@ -170,20 +170,14 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
             </LoadingSuspense>
           </Container>
         </Container>
-        <Container
-          width="full"
-          direction="row"
-          justify="end"
-          className="fixed bottom-10 z-10  pr-5 md:sticky md:right-10"
-        >
-          <Button
-            variant="primary"
-            onClick={handleOnClickButtonSave}
-            title={t(
-              "Service.Manufacturing.PostProcessing.PostProcessing.button.save"
-            )}
-          />
-        </Container>
+        <Button
+          variant="primary"
+          className="fixed bottom-5 z-10  w-fit self-center pr-5 md:sticky md:self-end"
+          onClick={handleOnClickButtonSave}
+          title={t(
+            "Service.Manufacturing.PostProcessing.PostProcessing.button.save"
+          )}
+        />
       </Container>
     </Modal>
   );

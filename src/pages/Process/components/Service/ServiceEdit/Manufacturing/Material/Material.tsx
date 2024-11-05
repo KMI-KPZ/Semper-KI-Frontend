@@ -178,20 +178,13 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
             </LoadingSuspense>
           </Container>
         </Container>
-        <Container
-          width="full"
-          direction="row"
-          justify="end"
-          className="fixed bottom-5 z-10 pr-5 md:sticky "
-        >
-          <Button
-            className=""
-            variant="primary"
-            width="fit"
-            onClick={handleOnClickButtonSave}
-            title={t("Service.Manufacturing.Material.Material.button.save")}
-          />
-        </Container>
+        <Button
+          className="fixed bottom-5 z-10  w-fit self-center pr-5 md:sticky md:self-end"
+          variant="primary"
+          width="fit"
+          onClick={handleOnClickButtonSave}
+          title={t("Service.Manufacturing.Material.Material.button.save")}
+        />
       </Container>
     </Modal>
   );

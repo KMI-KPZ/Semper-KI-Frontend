@@ -65,7 +65,7 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
   };
 
   return (
-    <Container width="full" direction="col">
+    <Container width="full" direction="col" className="bg-white p-5">
       <AdminResourcesOverView />
       <Search handleSearchInputChange={handleSearchInputChange} />
       <Container width="full" justify="end">

@@ -237,7 +237,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
         return isAnonmyAllowed || isClient || isOrgaAllowed;
       case UserType.ORGANIZATION:
         const orgaIsAllowed =
-          user.usertype !== UserType.ANONYM &&
+          user.usertype === UserType.ORGANIZATION &&
           user.organization !== undefined &&
           user.organization === process.processDetails.provisionalContractor;
         return orgaIsAllowed;

@@ -61,7 +61,7 @@ const ProcessTextInput: React.FC<ProcessTextInputProps> = (props) => {
   return (
     <Container width="full" direction="row" className="">
       <textarea
-        className={`min-h-[68px] w-full resize-y rounded-xl border-2 px-4 py-2`}
+        className={`min-h-[68px] w-full resize-y rounded-md border-2 px-4 py-2`}
         value={message}
         placeholder={t("Projects.Project.Process.components.Chat.placeholder")}
         onChange={handleOnChangeTextArea}

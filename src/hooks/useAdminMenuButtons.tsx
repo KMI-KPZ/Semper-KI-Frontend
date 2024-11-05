@@ -53,7 +53,7 @@ const useAdminMenuButtons = (): useAdminMenuButtonsReturnProps => {
     {
       icon: <FactoryIcon />,
       title: t("Admin.Admin.buttons.resources"),
-      to: "/admin/resources",
+      to: "/admin/resources/printer",
     },
   ];
 

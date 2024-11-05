@@ -14,6 +14,9 @@ import { useTranslation } from "react-i18next";
 import { ProcessAddressType } from "../ContractorSelection";
 import AddressSelection from "./AddressSelection";
 import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
+import ProcessConditionIcon from "@/components/Process/ConditionIcon";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import ProcessStatusGate from "../../StatusGate";
 
 interface ContractorSelectionAddressCardProps {
   showDeliveryAddress: boolean;
@@ -85,14 +88,36 @@ const ContractorSelectionAddressCard: React.FC<
   };
 
   return (
-    <Container width="full" direction="col" className="card gap-0">
-      <Heading variant="h3">
-        {t(
-          `Process.components.ContractorSelection.ContractorSelection.heading.${
-            !showDeliveryAddress ? "billingDelivery" : type
-          }`
-        )}
-      </Heading>
+    <Container
+      width="full"
+      direction="col"
+      className="card h-full gap-0 self-stretch"
+      id={
+        type === "billing"
+          ? "types.ProcessError.Process-Address-Billing"
+          : "types.ProcessError.Process-Address-Deliver"
+      }
+    >
+      <Container width="fit" className={`gap-2 p-0 `}>
+        <ProcessConditionIcon
+          error={
+            (process.processDetails.clientBillingAddress === undefined &&
+              type === "billing") ||
+            (process.processDetails.clientDeliverAddress === undefined &&
+              type === "delivery") ||
+            (process.processDetails.clientDeliverAddress === undefined &&
+              showDeliveryAddress)
+          }
+        />
+
+        <Heading variant="h3">
+          {t(
+            `Process.components.ContractorSelection.ContractorSelection.heading.${
+              !showDeliveryAddress ? "billingDelivery" : type
+            }`
+          )}
+        </Heading>
+      </Container>
       {address === undefined ? (
         <Container
           direction="row"
@@ -148,6 +173,9 @@ const ContractorSelectionAddressCard: React.FC<
               id="addressEqual"
               checked={!showDeliveryAddress}
               className="h-4 w-4"
+              disabled={
+                process.processStatus >= ProcessStatus.CONTRACTOR_COMPLETED
+              }
               onChange={handleOnChangeAddressEqual}
             />
             <Text>
@@ -157,24 +185,26 @@ const ContractorSelectionAddressCard: React.FC<
             </Text>
           </label>
         </Container>
-        <Container width="full" gap={3}>
-          <Button
-            variant="text"
-            size="sm"
-            title={t(
-              "Process.components.ContractorSelection.ContractorSelection.button.editAddress"
-            )}
-            onClick={handleOnButtonClickEdit}
-          />
-          <Button
-            variant="text"
-            size="sm"
-            title={t(
-              "Process.components.ContractorSelection.ContractorSelection.button.resetAddress"
-            )}
-            onClick={handleOnButtonClickReset}
-          />
-        </Container>
+        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+          <Container width="full" gap={3}>
+            <Button
+              variant="text"
+              size="sm"
+              title={t(
+                "Process.components.ContractorSelection.ContractorSelection.button.editAddress"
+              )}
+              onClick={handleOnButtonClickEdit}
+            />
+            <Button
+              variant="text"
+              size="sm"
+              title={t(
+                "Process.components.ContractorSelection.ContractorSelection.button.resetAddress"
+              )}
+              onClick={handleOnButtonClickReset}
+            />
+          </Container>
+        </ProcessStatusGate>
       </Container>
       <Modal
         modalKey="ContractorSelectionAddressSelection"

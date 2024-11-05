@@ -16,6 +16,7 @@ import useSort from "@/hooks/useSort";
 import TableHeaderButton from "@/components/Table/TableHeaderButton";
 import usePagination from "@/hooks/usePagination";
 import Pagination from "@/components/Table/Pagination";
+import { useNavigate } from "react-router-dom";
 
 interface Props {}
 
@@ -23,6 +24,7 @@ const AdminProjects: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { flatProjects } = useAdmin();
+  const navigate = useNavigate();
   const deleteProject = useDeleteProject();
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<FlatProject>();
@@ -40,13 +42,24 @@ const AdminProjects: React.FC<Props> = (props) => {
         .sort(sortItems),
     });
 
-  const handleOnClickButtonDelete = (projectID: string) => {
-    if (window.confirm(t("Admin.Projects.confirm")))
+  const handleOnClickButtonDelete = (
+    projectID: string,
+    projectTitle: string | undefined = ""
+  ) => {
+    if (window.confirm(t("Admin.Projects.confirm", { name: projectTitle })))
       deleteProject.mutate([projectID]);
   };
 
+  const handleOnClickButtonDetails = (projectID: string) => {
+    navigate(projectID);
+  };
+
+  // const handleOnClickButtonEdit = (projectID: string) => {
+  //   navigate(projectID);
+  // };
+
   return (
-    <div className="flex w-full flex-col items-center justify-normal gap-5 overflow-auto bg-white p-5">
+    <Container width="full" direction="col" className="bg-white p-5">
       <BackButtonContainer>
         <Heading variant="h1">{t("Admin.Projects.header")}</Heading>
       </BackButtonContainer>
@@ -129,18 +142,30 @@ const AdminProjects: React.FC<Props> = (props) => {
                       {project.updatedWhen.toLocaleString()}
                     </td>
                     <td>
-                      <Container>
+                      <Container direction="col" width="full">
                         <Button
-                          title={t("Admin.Projects.buttons.show")}
-                          variant="text"
-                          to={`/admin/projects/${project.projectID}`}
-                        />
-                        <Button
-                          title={t("Admin.Projects.buttons.delete")}
-                          variant="text"
+                          title={t("Admin.Resources.button.details")}
                           onClick={() =>
-                            handleOnClickButtonDelete(project.projectID)
+                            handleOnClickButtonDetails(project.projectID)
                           }
+                          variant="text"
+                        />
+                        {/* <Button
+                          title={t("Admin.Resources.button.edit")}
+                          onClick={() =>
+                            handleOnClickButtonEdit(project.projectID)
+                          }
+                          variant="text"
+                        /> */}
+                        <Button
+                          title={t("Admin.Resources.button.delete")}
+                          onClick={() =>
+                            handleOnClickButtonDelete(
+                              project.projectID,
+                              project.projectDetails.title
+                            )
+                          }
+                          variant="text"
                         />
                       </Container>
                     </td>
@@ -151,7 +176,7 @@ const AdminProjects: React.FC<Props> = (props) => {
         </Table>
       </TableContainer>
       <Pagination handlePageChange={handlePageChange} totalPages={totalPages} />
-    </div>
+    </Container>
   );
 };
 

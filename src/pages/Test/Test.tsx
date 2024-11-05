@@ -1,4 +1,4 @@
-import { ReactNode, useRef } from "react";
+import React, { ReactNode, useRef } from "react";
 import { Button } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { Heading, Text } from "@component-library/index";
@@ -130,39 +130,88 @@ export const Test: React.FC<Props> = (props) => {
                 direction="col"
                 justify="start"
                 align="start"
+                className="card"
+                width="full"
                 key={index}
               >
-                <Text>{event.eventType}</Text>
-                {event.eventType === "projectEvent"
-                  ? event.events.map((projectEventItem, _index) => (
-                      <Container
-                        direction="col"
-                        justify="start"
-                        align="start"
-                        key={_index}
-                      >
-                        <Text> ProjektID: {projectEventItem.projectID}</Text>
-                        {projectEventItem.processes.map(
-                          (processEventItem, __index) => (
-                            <Container
-                              direction="col"
-                              justify="start"
-                              align="start"
-                              key={__index}
-                            >
-                              <Text>
-                                ProcessID: {processEventItem.processID}
-                              </Text>
-                              <Text>
-                                Status: {processEventItem.processStatus}
-                              </Text>
-                              <Text>Messages: {processEventItem.messages}</Text>
-                            </Container>
-                          )
-                        )}
-                      </Container>
-                    ))
-                  : null}
+                <table className="auto border-separate border-spacing-3">
+                  <tbody>
+                    <tr>
+                      <th>UserHashedID</th>
+                      <th className="whitespace-pre-wrap break-words">
+                        {event.userHashedID}
+                      </th>
+                    </tr>
+                    <tr>
+                      <td>EventID</td>
+                      <td>{event.eventID}</td>
+                    </tr>
+                    <tr>
+                      <td>CreatedWhen</td>
+                      <td>{event.createdWhen.toLocaleString()}</td>
+                    </tr>
+                    <tr>
+                      <td>EventType</td>
+                      <td>{event.eventType}</td>
+                    </tr>
+                    <tr>
+                      <td>TriggerEvent</td>
+                      <td>{event.triggerEvent === true ? "True" : "False"}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                {event.eventType === "projectEvent" ? (
+                  <Container
+                    direction="col"
+                    justify="start"
+                    align="start"
+                    className="card"
+                    width="full"
+                  >
+                    <table className="auto w-full border-separate border-spacing-3">
+                      <tbody>
+                        <tr>
+                          <th>ProjectID</th>
+                          <th>{event.eventData.projectID}</th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </Container>
+                ) : null}
+                {event.eventType === "processEvent" ? (
+                  <Container
+                    direction="col"
+                    justify="start"
+                    align="start"
+                    width="full"
+                    className="card"
+                  >
+                    <table className="auto w-full border-separate border-spacing-3">
+                      <tbody>
+                        <tr>
+                          <th>ProjectID</th>
+                          <th>{event.eventData.projectID}</th>
+                        </tr>
+                        <tr>
+                          <td>ProcessID</td>
+                          <td>{event.eventData.processID}</td>
+                        </tr>
+                        <tr>
+                          <td>Reason</td>
+                          <td>{event.eventData.reason}</td>
+                        </tr>
+                        <tr>
+                          <td>Content</td>
+                          <td>
+                            {event.eventData.content === undefined
+                              ? "undefined"
+                              : event.eventData.content}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </Container>
+                ) : null}
               </Container>
             ))
           : "No Events"}
@@ -186,13 +235,13 @@ export const Test: React.FC<Props> = (props) => {
 
       <Container
         direction="row"
-        className="h-screen snap-center flex-wrap rounded-xl border-2 border-white bg-white p-5"
+        className="h-screen snap-center flex-wrap rounded-md border-2 border-white bg-white p-5"
       >
         <ExampleForm />
       </Container>
       <Container
         direction="row"
-        className="h-screen max-w-md snap-center  flex-wrap rounded-xl border-2 border-white bg-white p-5"
+        className="h-screen max-w-md snap-center  flex-wrap rounded-md border-2 border-white bg-white p-5"
       >
         <Text className="text-bold w-full px-3 text-center">ButtonTest</Text>
         <Button title="Primary Active" variant="primary" active />
@@ -205,7 +254,7 @@ export const Test: React.FC<Props> = (props) => {
       <LoadingSuspense query={testDynamicQuery}>
         <Container
           direction="row"
-          className="max-w-4xl flex-wrap overflow-clip rounded-xl border-2 border-white p-5"
+          className="max-w-4xl flex-wrap overflow-clip rounded-md border-2 border-white p-5"
         >
           {testDynamicQuery.data !== undefined
             ? testDynamicQuery.data.map((item, index) => (

@@ -66,7 +66,7 @@
 //             {process.files.map((file, index) => (
 //               <div
 //                 key={index}
-//                 className="flex flex-col items-center justify-center rounded-xl  p-2 shadow-md"
+//                 className="flex flex-col items-center justify-center rounded-md  p-2 shadow-md"
 //               >
 //                 <span className="p-2">{file.fileName}</span>
 //                 <Container>

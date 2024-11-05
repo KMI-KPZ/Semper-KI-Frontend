@@ -3,9 +3,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import DescriptionIcon from "@mui/icons-material/Description";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
-import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import PrintIcon from "@mui/icons-material/Print";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import FactoryIcon from "@mui/icons-material/Factory";
@@ -86,39 +84,23 @@ export const NavigationItemData: INavigationItem[] = [
   {
     userTypes: [UserType.ADMIN],
     title: "user",
-    link: "/user",
+    link: "/admin/user",
     icon: <PersonIcon fontSize="large" />,
     preferred: ["home"],
     extern: false,
   },
   {
     userTypes: [UserType.ADMIN],
-    title: "model",
-    link: "/model",
-    icon: <ViewInArIcon fontSize="large" />,
-    preferred: ["home"],
-    extern: false,
-  },
-  {
-    userTypes: [UserType.ADMIN],
     title: "material",
-    link: "/material",
+    link: "/admin/resources/material",
     icon: <HomeRepairServiceIcon fontSize="large" />,
     preferred: ["home"],
     extern: false,
   },
   {
     userTypes: [UserType.ADMIN],
-    title: "procedure",
-    link: "/procedure",
-    icon: <SyncAltIcon fontSize="large" />,
-    preferred: ["home"],
-    extern: false,
-  },
-  {
-    userTypes: [UserType.ADMIN],
     title: "printer",
-    link: "/printer",
+    link: "/admin/resources/printer",
     icon: <PrintIcon fontSize="large" />,
     preferred: ["home"],
     extern: false,

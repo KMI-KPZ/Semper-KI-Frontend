@@ -68,7 +68,7 @@ const statusWizardItems: StatusWizardItem[] = [
   },
   {
     startStatus: ProcessStatus.VERIFYING_COMPLETED,
-    endStatus: ProcessStatus.REQUEST_COMPLETED,
+    endStatus: ProcessStatus.VERIFYING_COMPLETED,
     icon: <EmailIcon />,
     text: "requested",
     targetID: "Request",
@@ -81,7 +81,7 @@ const statusWizardItems: StatusWizardItem[] = [
   //   targetID: "Clarification",
   // },
   {
-    startStatus: ProcessStatus.OFFER_COMPLETED,
+    startStatus: ProcessStatus.REQUEST_COMPLETED,
     endStatus: ProcessStatus.OFFER_REJECTED,
     icon: <DescriptionIcon />,
     text: "offer",
@@ -95,21 +95,21 @@ const statusWizardItems: StatusWizardItem[] = [
   //   targetID: "Confirmation",
   // },
   {
-    startStatus: ProcessStatus.PRODUCTION_IN_PROGRESS,
-    endStatus: ProcessStatus.PRODUCTION_COMPLETED,
+    startStatus: ProcessStatus.CONFIRMATION_COMPLETED,
+    endStatus: ProcessStatus.PRODUCTION_IN_PROGRESS,
     icon: <FactoryIcon />,
     text: "production",
     targetID: "Production",
   },
   {
-    startStatus: ProcessStatus.DELIVERY_IN_PROGRESS,
-    endStatus: ProcessStatus.DELIVERY_COMPLETED,
+    startStatus: ProcessStatus.PRODUCTION_COMPLETED,
+    endStatus: ProcessStatus.DELIVERY_IN_PROGRESS,
     icon: <LocalShippingIcon />,
     text: "delivery",
     targetID: "Delivery",
   },
   {
-    startStatus: ProcessStatus.COMPLETED,
+    startStatus: ProcessStatus.DELIVERY_COMPLETED,
     endStatus: ProcessStatus.COMPLETED,
     icon: <DoneAllIcon />,
     text: "completed",
@@ -135,7 +135,7 @@ const ProcessStatusWizard: React.FC<ProcessStatusWizardProps> = (props) => {
     <Container
       direction="col"
       justify="start"
-      className="top-5 max-h-60  overflow-y-auto rounded-xl bg-white p-5 md:sticky md:max-h-fit md:overflow-y-visible"
+      className="top-5 max-h-60  overflow-y-auto bg-white p-5 md:sticky md:max-h-fit md:overflow-y-visible"
     >
       <Heading variant="h2">
         {t("Process.StatusWizard.StatusWizard.header")}

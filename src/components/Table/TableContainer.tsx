@@ -8,7 +8,7 @@ const TableContainer: React.FC<PropsWithChildren<TableContainerProps>> = (
   const { children } = props;
 
   return (
-    <div className="flex w-full flex-col items-start justify-start overflow-auto rounded-xl border-2">
+    <div className="flex w-full flex-col items-start justify-start overflow-auto rounded-md border-2">
       {children}
     </div>
   );

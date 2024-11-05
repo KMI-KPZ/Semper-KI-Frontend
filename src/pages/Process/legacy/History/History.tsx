@@ -42,7 +42,7 @@ const ProcessHistory: React.FC<ProcessHistoryProps> = (props) => {
                 align="start"
                 justify="between"
                 width="full"
-                className="rounded-xl bg-white p-5"
+                className="rounded-md bg-white p-5"
               >
                 <Container align="start" direction="row" justify="between">
                   <Text className="md:min-w-[120px]">

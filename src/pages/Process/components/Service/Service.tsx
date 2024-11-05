@@ -8,6 +8,7 @@ import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import ServiceDetails from "./ServiceDetails/ServiceDetails";
 import ProcessContainer from "@/components/Process/Container";
 import ProcessFilter from "./Filter/Filter";
+import ProcessStatusGate from "../StatusGate";
 
 interface ServiceProps {
   process: Process;
@@ -46,6 +47,10 @@ const Service: React.FC<ServiceProps> = (props) => {
         )
   }`;
 
+  const noServiceSelected =
+    process.serviceType === undefined ||
+    process.serviceType === ServiceType.NONE;
+
   return (
     <ProcessContainer
       id="Service"
@@ -63,12 +68,13 @@ const Service: React.FC<ServiceProps> = (props) => {
         />
       }
     >
-      {process.serviceType === undefined ||
-      process.serviceType === ServiceType.NONE ? (
+      {noServiceSelected ? (
         <ServiceSelection />
       ) : (
         <>
-          <ProcessFilter />
+          <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+            <ProcessFilter />
+          </ProcessStatusGate>
           <ServiceDetails process={process} />
         </>
       )}

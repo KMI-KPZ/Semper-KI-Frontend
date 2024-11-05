@@ -1,7 +1,7 @@
 import { Container, LoadingAnimation } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Invitation from "./components/Invitation";
+import OrganizationInvitation from "./components/Invitation";
 import OrganizationRoles from "./Roles/Roles";
 import OrganizationTabel from "./components/UserTable";
 import { Heading } from "@component-library/index";
@@ -13,6 +13,7 @@ import NotificationForm from "@/components/Form/Notifications/NotificationForm";
 import PrioritiesForm from "@/components/Form/Priorities/PrioritiesForm";
 import useGetOrganizationRoles from "@/api/Organization/Querys/useGetOrganizationRoles";
 import useGetOrganizationInvites from "@/api/Organization/Querys/useGetOrganizationInvites";
+import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
 
 interface OrganizationViewProps {}
 
@@ -22,6 +23,8 @@ const Organization: React.FC<OrganizationViewProps> = (props) => {
   const { organization } = useOrganization();
   const rolesQuery = useGetOrganizationRoles();
   const invitesQuery = useGetOrganizationInvites();
+
+  useScrollIntoView();
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
@@ -47,7 +50,10 @@ const Organization: React.FC<OrganizationViewProps> = (props) => {
         {rolesQuery.isLoading || invitesQuery.isLoading ? (
           <LoadingAnimation variant="circel" />
         ) : (
-          <Invitation roles={rolesQuery.data} invites={invitesQuery.data} />
+          <OrganizationInvitation
+            roles={rolesQuery.data}
+            invites={invitesQuery.data}
+          />
         )}
       </PermissionGate>
       <PermissionGate element="OrganizationRoles">

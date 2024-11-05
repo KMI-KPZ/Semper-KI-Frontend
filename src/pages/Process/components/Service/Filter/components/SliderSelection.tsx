@@ -107,14 +107,14 @@ const ProcessFilterSliderSelection: React.FC<Props> = (props) => {
       />
       <Container direction="row">
         <input
-          className="w-40  rounded-xl border-2 px-5 py-3"
+          className="w-40  rounded-md border-2 px-5 py-3"
           type="number"
           value={value[0]}
           onChange={(e) => handleChangeInput(e, 0)}
         />
         -
         <input
-          className="w-40 rounded-xl border-2 px-5 py-3"
+          className="w-40 rounded-md border-2 px-5 py-3"
           type="number"
           value={value[1]}
           onChange={(e) => handleChangeInput(e, 1)}
@@ -122,7 +122,7 @@ const ProcessFilterSliderSelection: React.FC<Props> = (props) => {
         <select
           onChange={handleSelectOption}
           value={unit}
-          className="rounded-xl border-2 px-5 py-3"
+          className="rounded-md border-2 px-5 py-3"
         >
           <option
             value="default"

@@ -282,10 +282,29 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
 
   const { t } = useTranslation();
 
+  const [bounce, setBounce] = React.useState(true);
+
+  useEffect(() => {
+    const bounceTimeout = setTimeout(() => {
+      setBounce(false);
+    }, 5500);
+
+    const resetTimeout = setTimeout(() => {
+      setBounce(true);
+    }, 35000);
+
+    return () => {
+      clearTimeout(bounceTimeout);
+      clearTimeout(resetTimeout);
+    };
+  }, [bounce]);
+
   return (
     <Container width="fit" className="fixed bottom-4 right-4 z-50">
       <Button
-        className="rounded-full p-3 md:hidden"
+        className={` rounded-full p-3 duration-300 md:hidden ${
+          bounce ? "animate-bounce" : "animate-none"
+        }`}
         width="fit"
         title={t("components.Chatbot.button.open")}
         variant="secondary"
@@ -296,7 +315,9 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
       />
       <Button
         active={isChatbotEnabled && !botAlreadyLoaded.current}
-        className="hidden rounded-full md:flex"
+        className={`hidden rounded-full  duration-300 md:flex ${
+          bounce ? "animate-bounce " : "animate-none"
+        }`}
         width="fit"
         title={t("components.Chatbot.button.open")}
         variant="secondary"

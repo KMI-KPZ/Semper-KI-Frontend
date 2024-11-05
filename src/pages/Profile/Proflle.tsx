@@ -13,6 +13,7 @@ import ProfileAddress from "./components/Address";
 import ProfileOrganization from "./components/Organization";
 import useDeleteUser from "@/api/User/Mutations/useDeleteUser";
 import ProfileAPIToken from "./components/APIToken";
+import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
 
 interface Props {}
 
@@ -27,6 +28,8 @@ const Profile: React.FC<Props> = (props) => {
       deleteUser.mutate();
     }
   };
+
+  useScrollIntoView();
 
   return (
     <Container className="" direction="col" width="full">

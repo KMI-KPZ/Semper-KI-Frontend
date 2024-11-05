@@ -75,7 +75,7 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
             <td>{t(`Organization.Info.primary-color`)}</td>
             <td>
               <div
-                className={`h-10 w-40 rounded-xl border-2 `}
+                className={`h-10 w-40 rounded-md border-2 `}
                 style={{
                   backgroundColor:
                     organization.details.branding?.colors.primary,
@@ -87,7 +87,7 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
             <td>{t(`Organization.Info.background-color`)}</td>
             <td>
               <div
-                className={`h-10 w-40 rounded-xl border-2`}
+                className={`h-10 w-40 rounded-md border-2`}
                 style={{
                   backgroundColor:
                     organization.details.branding?.colors.page_background,

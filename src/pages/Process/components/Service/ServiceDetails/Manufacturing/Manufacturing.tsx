@@ -2,7 +2,13 @@ import {
   ManufactoringProcessProps,
   ProcessStatus,
 } from "@/api/Process/Querys/useGetProcess";
-import { Button, Container, Heading, Text } from "@component-library/index";
+import {
+  Button,
+  Container,
+  Divider,
+  Heading,
+  Text,
+} from "@component-library/index";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
@@ -19,6 +25,7 @@ import ProcessStatusGate from "../../../StatusGate";
 import { useTopics } from "@/contexts/ChatbotContextProvider";
 import useSetMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useSetMaterial";
 import { useProject } from "@/hooks/Project/useProject";
+import ProcessConditionIcon from "@/components/Process/ConditionIcon";
 
 interface ServiceManufacturingDetailsProps {
   process: ManufactoringProcessProps;
@@ -172,176 +179,170 @@ const ServiceManufacturingDetails: React.FC<
       justify="center"
       align="start"
       width="full"
-      className="p-2 md:p-5"
+      className="gap-0 rounded-md border-2 p-0"
     >
-      <Container justify="between" width="full" gap={5}>
-        <Container direction="row" width="full" justify="start" wrap="wrap">
-          <Heading variant="h3">
+      <Container
+        width="fit"
+        direction="row"
+        justify="start"
+        className="p-5 pb-2"
+      >
+        <Heading variant="h3">
+          {t("Process.Service.ServiceDetails.components.manufacturing.heading")}
+        </Heading>
+      </Container>
+      <Container width="full" direction="col" className="gap-0 p-2">
+        <Text>
+          {t(
+            "Process.Service.ServiceDetails.components.manufacturing.pageDescription1"
+          )}
+        </Text>
+        <Text>
+          {t(
+            "Process.Service.ServiceDetails.components.manufacturing.pageDescription2"
+          )}
+        </Text>
+      </Container>
+      <Divider />
+      <Container
+        justify="center"
+        width="full"
+        direction="col"
+        gap={5}
+        className="p-5"
+        id="Service-ADDITIVE_MANUFACTURING-models"
+      >
+        <Container width="fit" className={`gap-2 rounded-md p-0 pt-2 `}>
+          <ProcessConditionIcon error={models.length === 0} />
+          <Heading variant="h4" className="text-xl">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.model.heading"
             )}
           </Heading>
-          <Text>
-            {models.length > 0
-              ? models.length
-              : t(
-                  "Process.Service.ServiceDetails.components.manufacturing.model.noModels"
-                )}
-          </Text>
         </Container>
+        {models.length === 0 ? (
+          <Text className="">
+            {t(
+              "Process.Service.ServiceDetails.components.manufacturing.material.noMaterial"
+            )}
+          </Text>
+        ) : (
+          models.map((model, index) => (
+            <ProcessServiceModelCard model={model} key={index} />
+          ))
+        )}
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
-          {models.length === 0 ? (
-            <Button
-              title={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.addModel"
-              )}
-              size="sm"
-              variant="primary"
-              onClick={handleOnButtonClickModel}
-              startIcon={<AddIcon />}
-              children={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.add"
-              )}
-            />
-          ) : null}
+          <Button
+            title={t(
+              `Process.Service.ServiceDetails.components.manufacturing.button.${
+                models.length === 0 ? "addModel" : "addMore"
+              }`
+            )}
+            size={models.length === 0 ? "sm" : "xs"}
+            variant={models.length === 0 ? "primary" : "secondary"}
+            onClick={handleOnButtonClickModel}
+            startIcon={<AddIcon />}
+            children={t(
+              `Process.Service.ServiceDetails.components.manufacturing.button.${
+                models.length === 0 ? "addModel" : "addMore"
+              }`
+            )}
+          />
         </ProcessStatusGate>
       </Container>
-      <Container width="full" direction="col">
-        {models.length > 0
-          ? models.map((model, index) => (
-              <ProcessServiceModelCard model={model} key={index} />
-            ))
-          : null}
-        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
-          {models.length > 0 ? (
-            <Button
-              title={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.addModel"
-              )}
-              size="sm"
-              variant="primary"
-              onClick={handleOnButtonClickModel}
-              startIcon={<AddIcon />}
-              children={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.add"
-              )}
-            />
-          ) : null}
-        </ProcessStatusGate>
-      </Container>
-
-      <Container justify="between" width="full">
-        <Container direction="row" width="full" justify="start" wrap="wrap">
-          <Heading variant="h3">
+      <Divider />
+      <Container
+        justify="center"
+        width="full"
+        direction="col"
+        className="p-5"
+        id="Service-ADDITIVE_MANUFACTURING-materials"
+      >
+        <Container width="fit" className={`gap-2 rounded-md  p-0 pt-2`}>
+          <ProcessConditionIcon error={materials.length === 0} />
+          <Heading variant="h4" className="text-xl">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.material.heading"
             )}
           </Heading>
-          <Text>
-            {materials.length > 0
-              ? materials.length
-              : t(
-                  "Process.Service.ServiceDetails.components.manufacturing.material.noMaterial"
-                )}
-          </Text>
         </Container>
+        {materials.length === 0 ? (
+          <Text className="">
+            {t(
+              "Process.Service.ServiceDetails.components.manufacturing.material.noMaterial"
+            )}
+          </Text>
+        ) : (
+          materials.map((material, index) => (
+            <ProcessServiceMaterialCard material={material} key={index} />
+          ))
+        )}
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
-          {materials.length === 0 ? (
-            <Button
-              title={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.addMaterial"
-              )}
-              size="sm"
-              variant="primary"
-              onClick={handleOnButtonClickMaterial}
-              startIcon={<AddIcon />}
-              children={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.add"
-              )}
-            />
-          ) : null}
+          <Button
+            title={t(
+              `Process.Service.ServiceDetails.components.manufacturing.button.${
+                materials.length === 0 ? "addMaterial" : "addMore"
+              }`
+            )}
+            size={materials.length === 0 ? "sm" : "xs"}
+            variant={materials.length === 0 ? "primary" : "secondary"}
+            onClick={handleOnButtonClickMaterial}
+            startIcon={<AddIcon />}
+            children={t(
+              `Process.Service.ServiceDetails.components.manufacturing.button.${
+                materials.length === 0 ? "addMaterial" : "addMore"
+              }`
+            )}
+          />
         </ProcessStatusGate>
       </Container>
-      <Container width="full" direction="col">
-        {materials.length > 0
-          ? materials.map((material, index) => (
-              <ProcessServiceMaterialCard material={material} key={index} />
-            ))
-          : null}
-        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
-          {materials.length > 0 ? (
-            <Button
-              title={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.addMaterial"
-              )}
-              size="sm"
-              variant="primary"
-              onClick={handleOnButtonClickMaterial}
-              startIcon={<AddIcon />}
-              children={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.add"
-              )}
-            />
-          ) : null}
-        </ProcessStatusGate>
-      </Container>
-
-      <Container justify="between" width="full">
-        <Container direction="row" width="full" justify="start" wrap="wrap">
-          <Heading variant="h3">
+      <Divider />
+      <Container
+        justify="center"
+        width="full"
+        direction="col"
+        className="p-5"
+        id="ServiceManufacturingPostProcessings"
+      >
+        <Container width="fit" className={`gap-2 p-0 pt-2`}>
+          <ProcessConditionIcon error={false} />
+          <Heading variant="h4" className="whitespace-nowrap text-xl">
             {t(
               "Process.Service.ServiceDetails.components.manufacturing.postProcessing.heading"
             )}
           </Heading>
-          <Text>
-            {postProcessings.length > 0
-              ? postProcessings.length
-              : t(
-                  "Process.Service.ServiceDetails.components.manufacturing.postProcessing.noPostProcessings"
-                )}
-          </Text>
         </Container>
-        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
-          {postProcessings.length === 0 ? (
-            <Button
-              title={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.addPostProcessing"
-              )}
-              size="sm"
-              variant="primary"
-              onClick={handleOnButtonClickPostProcessing}
-              startIcon={<AddIcon />}
-              children={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.add"
-              )}
+        {postProcessings.length === 0 ? (
+          <Text className="">
+            {t(
+              "Process.Service.ServiceDetails.components.manufacturing.postProcessing.noPostProcessings"
+            )}
+          </Text>
+        ) : (
+          postProcessings.map((postProcessing, index) => (
+            <ProcessSericePostProcessingCard
+              postProcessing={postProcessing}
+              key={index}
             />
-          ) : null}
-        </ProcessStatusGate>
-      </Container>
-      <Container width="full" direction="col">
-        {postProcessings.length > 0
-          ? postProcessings.map((postProcessing, index) => (
-              <ProcessSericePostProcessingCard
-                postProcessing={postProcessing}
-                key={index}
-              />
-            ))
-          : null}
+          ))
+        )}
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
-          {postProcessings.length > 0 ? (
-            <Button
-              title={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.addPostProcessing"
-              )}
-              size="sm"
-              variant="primary"
-              onClick={handleOnButtonClickPostProcessing}
-              startIcon={<AddIcon />}
-              children={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.add"
-              )}
-            />
-          ) : null}
+          <Button
+            title={t(
+              `Process.Service.ServiceDetails.components.manufacturing.button.${
+                postProcessings.length === 0 ? "addPostProcessing" : "addMore"
+              }`
+            )}
+            size={postProcessings.length === 0 ? "sm" : "xs"}
+            variant={postProcessings.length === 0 ? "primary" : "secondary"}
+            onClick={handleOnButtonClickPostProcessing}
+            startIcon={<AddIcon />}
+            children={t(
+              `Process.Service.ServiceDetails.components.manufacturing.button.${
+                postProcessings.length === 0 ? "addPostProcessing" : "addMore"
+              }`
+            )}
+          />
         </ProcessStatusGate>
       </Container>
     </Container>

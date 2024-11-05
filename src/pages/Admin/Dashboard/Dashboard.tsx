@@ -11,8 +11,10 @@ const AdminDashboard: React.FC<AdminDashboardProps> = (props) => {
   const { adminMenuButtons } = useAdminMenuButtons();
 
   return (
-    <Container width="full" direction="col">
-      <Heading variant="h1">{t("Admin.Admin.title")}</Heading>
+    <Container width="full" direction="col" className="bg-white p-5">
+      <Heading variant="h1" className="p-2">
+        {t("Admin.Admin.title")}
+      </Heading>
       <Container>
         {adminMenuButtons.map((button, index) => (
           <Button

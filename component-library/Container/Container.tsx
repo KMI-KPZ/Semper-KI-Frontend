@@ -1,4 +1,4 @@
-import React, {PropsWithChildren} from "react";
+import React, { PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface ContainerProps {
@@ -11,6 +11,7 @@ interface ContainerProps {
   gap?: 3 | 5;
   className?: string;
   id?: string;
+  tabIndex?: boolean;
   onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
@@ -25,6 +26,7 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
     wrap,
     gap = 5,
     width = "auto",
+    tabIndex = false,
     height,
     className,
     onClick,
@@ -83,6 +85,7 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
         className
       )}
       onClick={onClick}
+      tabIndex={tabIndex === true ? 0 : undefined}
     >
       {children}
     </div>

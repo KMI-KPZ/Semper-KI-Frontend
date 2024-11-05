@@ -30,18 +30,20 @@ const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
   } = props;
 
   return (
-    <Container
-      direction="col"
-      width="full"
-      className={twMerge("relative  rounded-xl bg-white p-3", className)}
-      id={id}
-    >
-      <ProcessHeader menuButtonTitle={menuButtonTitle} pageTitle={pageTitle}>
-        {menuChildren}
-      </ProcessHeader>
-      {children}
+    <>
+      <Container
+        direction="col"
+        width="full"
+        className={twMerge("relative   bg-white p-3", className)}
+        id={id}
+      >
+        <ProcessHeader menuButtonTitle={menuButtonTitle} pageTitle={pageTitle}>
+          {menuChildren}
+        </ProcessHeader>
+        {children}
+      </Container>
       <ProcessStatusButtons start={start} end={end} />
-    </Container>
+    </>
   );
 };
 

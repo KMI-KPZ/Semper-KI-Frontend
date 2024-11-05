@@ -9,7 +9,9 @@ export const toast = (title: string, to?: string, onClick?: () => {}): void => {
       <Text variant="body">{title}</Text>
       {to !== undefined ? (
         <Button
-          variant="secondary"
+          variant="tertiary"
+          width="full"
+          size="sm"
           title={to}
           to={to}
           children={<ArrowForwardIcon />}

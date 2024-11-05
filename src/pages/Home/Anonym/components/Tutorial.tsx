@@ -58,8 +58,9 @@ const HomeTutorial: React.FC<HomeTutorialProps> = (props) => {
       <Text>{t("Home.Anonym.Anonym.Tutorial.subTitle")}</Text>
       <Container width="full">
         <YouTube
+          iframeClassName={`duraction-300 w-full md:max-w-[800px]  aspect-video`}
           videoId="8bHHlqdYds8"
-          className="flex w-full items-center justify-center"
+          className={`flex h-full w-full items-center justify-center`}
         />
       </Container>
       <Container

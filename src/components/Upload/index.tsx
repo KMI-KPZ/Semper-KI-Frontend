@@ -84,7 +84,7 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
       />
       <a
         className={`flex w-full grow flex-col items-center justify-center gap-2  
-      rounded-xl border-2 bg-white p-2 text-black transition duration-300
+      rounded-md border-2 bg-white p-2 text-black transition duration-300
       hover:cursor-pointer  hover:bg-türkis-200 
    ${dragActive ? "bg-türkis-200" : ""}
    

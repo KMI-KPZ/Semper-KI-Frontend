@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 import { Edge, Node } from "@/api/Graph/Querys/useGetPrivateGraph";
 import { Text } from "@component-library/index";
+import { useTranslation } from "react-i18next";
 
 interface NetworkGraphProps {
   nodes: Node[];
@@ -12,6 +13,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
   nodes = [],
   edges = [],
 }) => {
+  const { t } = useTranslation();
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   const width = 1000;
@@ -123,16 +125,36 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
 
       // Legend section
       const legendData = [
-        { label: "Organization", color: "#1f77b4", shape: d3.symbolSquare },
-        { label: "Printer", color: "#ff7f0e", shape: d3.symbolDiamond },
-        { label: "Material", color: "#2ca02c", shape: d3.symbolTriangle },
-        { label: "Material Category", color: "#17becf", shape: d3.symbolStar },
         {
-          label: "Additional Requirement",
+          label: t(`types.OntoNodeType.organization`),
+          color: "#1f77b4",
+          shape: d3.symbolSquare,
+        },
+        {
+          label: t(`types.OntoNodeType.printer`),
+          color: "#ff7f0e",
+          shape: d3.symbolDiamond,
+        },
+        {
+          label: t(`types.OntoNodeType.material`),
+          color: "#2ca02c",
+          shape: d3.symbolTriangle,
+        },
+        {
+          label: t(`types.OntoNodeType.materialCategory`),
+          color: "#17becf",
+          shape: d3.symbolStar,
+        },
+        {
+          label: t(`types.OntoNodeType.additionalRequirement`),
           color: "#d62728",
           shape: d3.symbolCross,
         },
-        { label: "Color", color: "#9467bd", shape: d3.symbolCircle },
+        {
+          label: t(`types.OntoNodeType.color`),
+          color: "#9467bd",
+          shape: d3.symbolCircle,
+        },
       ];
 
       const legend = svg
@@ -140,6 +162,18 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
         .attr("class", "legend")
         .attr("transform", `translate(${width - 200}, 50)`); // Position the legend
 
+      // Add a background rectangle for the legend
+      legend
+        .append("rect")
+        .attr("x", -20) // Add some padding around the legend
+        .attr("y", -20)
+        .attr("width", 200) // Adjust the width based on your content
+        .attr("height", legendData.length * 30 + 10) // Adjust the height dynamically based on number of legend items
+        .attr("fill", "lightgray") // Gray background color
+        .attr("rx", 10) // Optional: Rounded corners for the rectangle
+        .attr("ry", 10);
+
+      // Append the symbols to the legend
       legend
         .selectAll("path")
         .data(legendData)
@@ -149,12 +183,13 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
         .attr("fill", (d) => d.color)
         .attr("transform", (_, i) => `translate(0, ${i * 30})`); // Stack the legend items
 
+      // Append the labels to the legend
       legend
         .selectAll("text")
         .data(legendData)
         .enter()
         .append("text")
-        .attr("x", 20)
+        .attr("x", 20) // Position labels next to the symbols
         .attr("y", (_, i) => i * 30 + 5) // Align with symbols
         .attr("font-size", "12px")
         .text((d) => d.label);
@@ -194,7 +229,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
 
   return (
     <div
-      className={`relative flex h-fit w-fit items-center justify-center overflow-clip rounded-xl border-2 bg-white`}
+      className={`relative flex h-fit w-fit items-center justify-center overflow-clip rounded-md border-2 bg-white`}
     >
       {edges.length > 0 && nodes.length > 0 ? (
         <svg ref={svgRef} width={width} height={height} />

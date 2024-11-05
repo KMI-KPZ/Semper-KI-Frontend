@@ -1,10 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Container, Divider, Heading } from "@component-library/index";
-import { AuthorizedUserProps, UserType } from "@/hooks/useUser";
+import { AuthorizedUser, UserType } from "@/hooks/useUser";
 
 interface ProfileOrganizationProps {
-  user: AuthorizedUserProps;
+  user: AuthorizedUser;
 }
 
 const ProfileOrganization: React.FC<ProfileOrganizationProps> = (props) => {

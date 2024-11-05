@@ -123,7 +123,7 @@
       "MUILTISELECT": "Mehrfachauswahl"
     },
     "FilterCategoryType": {
-      "SELECTED": "Ausgewählte Vorgaben",
+      "SELECTED": "Alle Ausgewählte Vorgaben",
       "GENERAL": "Allgemein",
       "MODEL": "Modell",
       "MATERIAL": "Material",
@@ -235,6 +235,30 @@
       "color": "Farbe",
       "number": "Zahl",
       "multiselection": "Mehrfachauswahl"
+    },
+    "ProcessError": {
+      "Service-ADDITIVE_MANUFACTURING-models": "Bitte ein Modell auswählen/hochladen",
+      "Service-ADDITIVE_MANUFACTURING-materials": "Bitte ein Material auswählen",
+      "ServiceManufacturingPostProcessing": "Bitte eine Nachbearbeitung auswählen",
+      "Process-Contractor": "Bitte einen Auftragnehmer auswählen",
+      "Process-Address-Billing": "Bitte eine Rechnungsadresse auswählen",
+      "Process-Address-Deliver": "Bitte eine Lieferadresse auswählen"
+    },
+    "EventDataReason": {
+      "messages": "Nachricht",
+      "file": "neue Datei",
+      "files": "neue Dateien",
+      "serviceDetails": "Service Details geändert",
+      "serviceType": "Service Typ geändert",
+      "serviceStatus": "Service Status geändert",
+      "processDetails": "Prozess Details geändert",
+      "processStatus": "Prozess Status geändert",
+      "provisionalContractor": "Vorläufiger Auftragnehmer ausgewählt",
+      "dependenciesIn": "Abhängigkeiten Eingehend",
+      "dependenciesOut": "Abhängigkeiten Ausgehend",
+      "test": "Test",
+      "roleChanged": "Rolle Geändert",
+      "userDeleted": "Benutzer Gelöscht"
     }
   },
   "api": {
@@ -420,7 +444,8 @@
         "title": "SEMPER-KI",
         "button": {
           "close": "Menu Schließen",
-          "open": "Menu Öffnen"
+          "open": "Menu Öffnen",
+          "events": "Benachrichtigungen"
         }
       },
       "HeaderData": {
@@ -436,7 +461,14 @@
         "test": "Test",
         "guide": "Wegweiser"
       },
-      "HeaderItem": {}
+      "HeaderItem": {},
+      "HeaderInvoice": {
+        "title": "Benachrichtigungen",
+        "noEvents": "Keine Benachrichtigungen",
+        "close": "Schließen",
+        "delete": "Löschen",
+        "deleteAll": "Alle Löschen"
+      }
     },
     "Menu": {
       "components": {
@@ -558,10 +590,42 @@
       "updated": "Updated",
       "actions": "Aktionen",
       "canManufacturer": "Hersteller",
+      "ServiceType": "Services",
       "button": {
         "delete": "Löschen"
       },
-      "confirm": "Organisation wirklich löschen?"
+      "confirm": "Organisation {{name}} wirklich löschen?",
+      "details": {
+        "title": "Organisationdetails",
+        "general": "Allgemeine Informationen",
+        "hashedID": "Hashed ID",
+        "name": "Name",
+        "details": "Details",
+        "createdWhen": "Erstellt am",
+        "updatedWhen": "Aktualisiert am",
+        "accessedWhen": "Zugegriffen am",
+        "services": "Services",
+        "priorities": "Prioritäten",
+        "notificationSettings": "Benachrichtigungseinstellungen",
+        "empty": "Leer",
+        "email": "Email",
+        "created": "Erstellt",
+        "accessed": "Zugegriffen",
+        "updated": "Aktualisiert",
+        "actions": "Aktionen",
+        "canManufacturer": "Hersteller",
+        "confirm": "Bestätigen",
+        "locale": "Sprache",
+        "branding": "Branding",
+        "adresses": "Adressen",
+        "dates": "Daten",
+        "taxID": "Steuernummer",
+        "primaryColor": "Primärfarbe",
+        "pageBackground": "Hintergrundfarbe",
+        "event": "Event",
+        "button": { "edit": "Bearbeiten" }
+      },
+      "form": { "title": "Organisationinformationen bearbeiten" }
     },
     "Projects": {
       "header": "Projekte",
@@ -578,7 +642,7 @@
         "show": "Anzeigen",
         "delete": "Löschen"
       },
-      "confirm": "Auftrag wirklich löschen?"
+      "confirm": "Den Auftrag {{name}} wirklich löschen?"
     },
     "User": {
       "orga": "Organisationen",
@@ -592,11 +656,23 @@
       "lastSeen": "Letzte Anmeldung",
       "actions": "Aktionen",
       "search": "Suchen...",
+      "userType": "Benutzertyp",
+      "locale": "Sprache",
+      "lastLogin": "Letzte Anmeldung am",
+      "locationOfLastLogin": "Standort der letzten Anmeldung",
+      "numberOfLoginsTotal": "Anzahl der Anmeldungen insgesamt",
+      "general": "Allgemeine Informationen",
+      "statistics": "Statistiken",
+      "dates": "Daten",
+      "adresses": "Adressen",
       "button": {
         "delete": "Löschen",
-        "search": "Suchen"
+        "search": "Suchen",
+        "edit": "Bearbeiten"
       },
-      "confirm": "User wirklich löschen?"
+      "confirm": "User wirklich löschen?",
+      "details": { "title": "Benutzerdetails" },
+      "form": { "title": "Benutzer bearbeiten" }
     },
     "Admin": {
       "title": "Adminbereich",
@@ -768,6 +844,39 @@
         "advantage": "Ihre Vorteile als Privatperson",
         "register": "Als Privatperson Registrieren"
       },
+      "HomeUserProgress": {
+        "progress": "Fortschritt {{count}} von {{total}}",
+        "todo": "Einrichtung des Profils",
+        "finished": "Einrichtung abgeschlossen",
+        "items": {
+          "general": "Allgemeine Informationen hinzufügen",
+          "notificationSettings": "Benachrichtigungseinstellungen festlegen",
+          "adresses": "Adressen hinzufügen",
+          "lang": "Sprache festlegen"
+        },
+        "button": {
+          "orga": "Profil"
+        }
+      },
+      "HomeOrgaAccountProgress": {
+        "progress": "Fortschritt {{count}} von {{total}}",
+        "todo": "Einrichtung der Organisation",
+        "finished": "Einrichtung abgeschlossen",
+        "items": {
+          "general": "Allgemeine Informationen hinzufügen",
+          "services": "Services auswählen",
+          "resources": "Ressourcen hinzufügen",
+          "priorities": "Prioritäten setzen",
+          "notificationSettings": "Benachrichtigungseinstellungen festlegen",
+          "branding": "Branding festlegen",
+          "adresses": "Adressen hinzufügen",
+          "user": "Benutzer hinzufügen",
+          "lang": "Sprache festlegen"
+        },
+        "button": {
+          "orga": "Organisation"
+        }
+      },
       "Container": {},
       "Coypu": {
         "title": "Coypu News",
@@ -798,6 +907,7 @@
       },
       "Organization": {
         "title": "Organisation",
+
         "button": {
           "edit": "Oragnisation verwalten"
         }
@@ -1147,6 +1257,8 @@
       "Filter": {
         "Filter": {
           "menuButtonTitle": "Filter Menu",
+          "pageDescription1": "Hier können Sie ihre Vorgaben für den Prozess festlegen.",
+          "pageDescription2": "Dies hilft ihnen die Auswahl zu vereinfachen.",
           "pageTitle": "Ihre Vorgaben",
           "button": {
             "selected": "Ausgewählt"
@@ -1176,6 +1288,11 @@
       },
       "ContractorSelection": {
         "components": {
+          "ContractorCondition": {
+            "heading": "Angaben Unvollständig",
+            "noContractor": "Kein Auftragnehmer ausgewählt",
+            "noAddress": "keine Adressen ausgewählt"
+          },
           "AddressSelection": {
             "heading": "Addresse auswählen",
             "button": {
@@ -1370,8 +1487,15 @@
       "ServiceDetails": {
         "components": {
           "manufacturing": {
+            "heading": "Ihre Auswahl",
+            "pageDescription1": "Wählen sie die gewünschten Modelle, Materialien und Nachbearbeitungen aus.",
+            "pageDescription2": "Diese Auswahl wird verwendet um die passenden Hersteller zu finden.",
+            "complete": "Auswahl Vollständig",
+            "incomplete": "Auswahl Unvollständig",
             "model": {
-              "heading": "Modelle:",
+              "heading": "Modelle",
+              "complete": "Modell(e) Vollständig",
+              "incomplete": "Modell(e) Unvollständig",
               "noModels": "keine Modelle vorhanden",
               "img": "Modelbild",
               "name": "Name:",
@@ -1380,7 +1504,9 @@
               "volume": "Volumen"
             },
             "material": {
-              "heading": "Material:",
+              "heading": "Material",
+              "complete": "Material(en) Vollständig",
+              "incomplete": "Material(en) Unvollständig",
               "noMaterial": "kein Material ausgewählt",
               "selected": "Ausgewählt",
               "img": "Materialbild",
@@ -1389,7 +1515,9 @@
               "properties": "Eigenschaften:"
             },
             "postProcessing": {
-              "heading": "Nachbearbeitungen:",
+              "heading": "Nachbearbeitungen (Optional)",
+              "complete": "Nachbearbeitung(en) Vollständig",
+              "incomplete": "Nachbearbeitung(en) Unvollständig",
               "noPostProcessings": "keine Nachbearbeitungen ausgewählt",
               "name": "name",
               "img": "Nachbearbeitungsbild",
@@ -1398,6 +1526,7 @@
             },
             "button": {
               "add": "Hinzufügen",
+              "addMore": "Weitere hinzufügen",
               "addModel": "Modell hinzufügen",
               "addMaterial": "Material hinzufügen",
               "addPostProcessing": "Nachbearbeitung hinzufügen",
@@ -1449,6 +1578,9 @@
       "button": {
         "back": "Zurück"
       }
+    },
+    "StatusButtons": {
+      "heading": "Todos"
     }
   },
   "Project": {
@@ -1667,12 +1799,12 @@
         "useStatusButtons": {
           "NONE": "Translation error",
           "DELETE": "Prozess löschen",
-          "BACK-TO-SERVICE_READY": "Zurück zur Servicebearbeitung",
-          "BACK-TO-DRAFT": "Zurück zur Serviceauswahl",
-          "BACK-TO-SERVICE_COMPLETED": "Zurück zur Auftragnehmerauswahl",
-          "BACK-TO-CONTRACTOR_COMPLETED": "Zurück zur Überprüfung",
-          "FORWARD-TO-SERVICE_COMPLETED": "Weiter zur Auftragnehmerauswahl",
-          "FORWARD-TO-CONTRACTOR_COMPLETED": "Weiter zur Überprüfung",
+          "BACK-TO-SERVICE_READY": "Zurück",
+          "BACK-TO-DRAFT": "Zurück",
+          "BACK-TO-SERVICE_COMPLETED": "Zurück",
+          "BACK-TO-CONTRACTOR_COMPLETED": "Zurück",
+          "FORWARD-TO-SERVICE_COMPLETED": "Weiter",
+          "FORWARD-TO-CONTRACTOR_COMPLETED": "Weiter",
           "FORWARD-TO-VERIFYING": "Überprüfen Starten",
           "FORWARD-TO-VERIFICATION_COMPLETED": "Überprüfung abschließen",
           "FORWARD-TO-REQUEST_COMPLETED": "Anfrage senden",
@@ -1970,7 +2102,8 @@
         "noProperties": "keine Eigenschaften vorhanden",
         "button": {
           "draft": "Vorlage auswählen",
-          "variant": "Variante erstellen"
+          "variant": "Variante erstellen",
+          "edit": "Bearbeiten"
         }
       },
       "Menu": {

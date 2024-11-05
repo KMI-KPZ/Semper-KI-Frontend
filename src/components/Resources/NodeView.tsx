@@ -83,7 +83,7 @@ const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
                 <td className={`border-t-2 p-3`}>
                   {node.data.createdBy === organization.hashedID
                     ? organization.name
-                    : "Sermper-KI"}
+                    : "Semper-KI"}
                 </td>
               </tr>
               <tr>

@@ -32,7 +32,6 @@ import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { Test } from "../Test/Test";
-import { OrganizationOutlet } from "@/outlets/OrganizationOutlet";
 import { ToastContainer } from "react-toastify";
 import { ContentBox } from "@component-library/index";
 import { Background, Breadcrumb } from "@/components/index";
@@ -42,6 +41,7 @@ import { ManufacturingModels } from "../Process/components/Service/ServiceEdit/M
 import { ManufacturingMaterials } from "../Process/components/Service/ServiceEdit/Manufacturing/Material/Material";
 import { ManufacturingPostProcessings } from "../Process/components/Service/ServiceEdit/Manufacturing/PostProcessing/PostProcessing";
 import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
+import useUser, { UserType } from "@/hooks/useUser";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -66,6 +66,7 @@ export const AppContext = createContext<AppContext>({
 
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(initialAppState);
+  const { user } = useUser();
 
   return (
     <AppContext.Provider
@@ -83,7 +84,16 @@ const App: React.FC = () => {
         <main className="flex h-full w-full flex-grow flex-col items-center justify-start">
           <Breadcrumb />
           <Routes data-testid="routes">
-            <Route index element={<Home />} />
+            <Route
+              index
+              element={
+                user.usertype === UserType.ADMIN ? (
+                  <Navigate to="admin" />
+                ) : (
+                  <Home />
+                )
+              }
+            />
             <Route
               element={
                 <ContentBox>
@@ -113,23 +123,9 @@ const App: React.FC = () => {
               <Route path="legal/*" element={<Legal />} />
               <Route path="demo/*" element={<Navigate to="/project/new" />} />
               <Route path="projects/*">
-                <Route
-                  index
-                  element={
-                    <PermissionGate element="Projects">
-                      <Projects />
-                    </PermissionGate>
-                  }
-                />
+                <Route index element={<Projects />} />
                 <Route path=":projectID/*" element={<ProjectOutlet />}>
-                  <Route
-                    index
-                    element={
-                      <PermissionGate element="Projects">
-                        <ProjectPage />
-                      </PermissionGate>
-                    }
-                  />
+                  <Route index element={<ProjectPage />} />
                   <Route
                     path=":processID/*"
                     element={
@@ -165,28 +161,26 @@ const App: React.FC = () => {
               <Route element={<AuthorizedUserOutlet />}>
                 <Route path="test" element={<Test />} />
                 <Route path="account" element={<Profile />} />
-                <Route element={<OrganizationOutlet />}>
-                  <Route
-                    path="organization"
-                    element={
-                      <PermissionGate
-                        element="Organization"
-                        showMessage
-                        children={<Organization />}
-                      />
-                    }
-                  />
-                  <Route
-                    path="resources/*"
-                    element={
-                      <PermissionGate
-                        children={<Resources />}
-                        element="Resources"
-                        showMessage
-                      />
-                    }
-                  />
-                </Route>
+                <Route
+                  path="organization"
+                  element={
+                    <PermissionGate
+                      element="Organization"
+                      showMessage
+                      children={<Organization />}
+                    />
+                  }
+                />
+                <Route
+                  path="resources/*"
+                  element={
+                    <PermissionGate
+                      children={<Resources />}
+                      element="Resources"
+                      showMessage
+                    />
+                  }
+                />
                 <Route element={<AdminOutlet />}>
                   <Route path="admin/*" element={<Admin />} />
                 </Route>

@@ -8,15 +8,15 @@
   },
   "data": {
     "NavigationItem": {
-      "demonstrator": "Getting started",
+      "demonstrator": "Get started",
       "edit": "Edit",
       "home": "Home page",
       "process": "process",
       "model": "Model",
       "upload": "Upload model",
       "material": "material",
-      "postprocessing": "post processing",
-      "cart": "shopping cart",
+      "postprocessing": "Post-processing",
+      "cart": "Shopping cart",
       "manufacturer": "Manufacturer",
       "checkout": "Checkout",
       "guide": "signpost",
@@ -31,7 +31,7 @@
       "use-service": "Take advantage of the service",
       "provide-service": "Provide service",
       "continue": "Continue order",
-      "new-contract": "New Order",
+      "new-contract": "New order",
       "proceedings": "Proceedings",
       "company": "Pursue",
       "user": "user",
@@ -39,10 +39,10 @@
       "printer": "Printer",
       "about-us": "magazine",
       "login": "Register",
-      "register": "to register",
+      "register": "Register",
       "logout": "Log out",
       "organization": "organization",
-      "materials": "materials",
+      "materials": "Materials",
       "printers": "3D printer",
       "postprocessings": "Post-processing",
       "resources": "resources",
@@ -56,7 +56,7 @@
       "verifyEMail": "Verify email",
       "manufacturing": "Have it manufactured",
       "projects": "My projects",
-      "project": "Project"
+      "project": "project"
     }
   },
   "enum": {
@@ -87,7 +87,7 @@
       "DISPUTE": "dispute",
       "COMPLETED": "Completed",
       "FAILED": "Failed",
-      "CANCELED": "Canceled",
+      "CANCELED": "Aborted",
       "CONTRACTOR_COMPLETED": "Contractor selected",
       "VERIFYING_IN_PROGRESS": "Verification is ongoing",
       "VERIFYING_COMPLETED": "Review completed",
@@ -123,12 +123,13 @@
       "MUILTISELECT": "Multiple selection"
     },
     "FilterCategoryType": {
+      "SELECTED": "All Selected Presets",
       "GENERAL": "Generally",
       "MODEL": "Model",
       "MATERIAL": "material",
       "PROCEEDING": "Proceedings",
       "MANUFACTURER": "Manufacturer",
-      "POSTPROCESSING": "post processing",
+      "POSTPROCESSING": "Post-processing",
       "ADDITIVE": "Additives",
       "TEST": "test"
     },
@@ -183,9 +184,57 @@
       "newMessage": "New message",
       "actionReminder": "Action reminder",
       "errorOccurred": "Error occurred",
-      "newsletter": "Newsletter",
+      "newsletter": "newsletter",
       "processReceived": "process received",
       "responseFromClient": "Response from customer"
+    },
+    "OrganizationPriorityType": {
+      "cost": "Cost",
+      "time": "Time",
+      "quality": "Quality",
+      "quantity": "Crowd",
+      "resilience": "Resilience",
+      "sustainability": "sustainability"
+    },
+    "OntoNodeType": {
+      "organization": "organization",
+      "printer": "3D printer",
+      "material": "Materials",
+      "additionalRequirement": "Additional requirements",
+      "color": "Colors",
+      "materialCategory": "Material category"
+    },
+    "OntoNodePropertyName": {
+      "imgPath": "Image path",
+      "foodSafe": "Food safe",
+      "heatResistant": "Heat resistant",
+      "flexible": "Flexible",
+      "smooth": "Smooth",
+      "eModul": "E-modulus",
+      "poissonRatio": "Poisson ratio",
+      "color": "Color",
+      "buildVolume": "Construction volume",
+      "technology": "technology",
+      "nozzleDiameter": "Nozzle diameter"
+    },
+    "FilterCategoryType": {
+      "costs": "Cost",
+      "deliverTime": "Delivery time",
+      "amount": "Crowd",
+      "categorys": "Categories",
+      "boxSize": "Box size",
+      "materialcategory": "Material category",
+      "volume": "volume",
+      "materialCategory": "Material category",
+      "proceeding": "Proceedings",
+      "manufacturer": "Manufacturer",
+      "postProcessing": "Post-processing",
+      "date": "Date",
+      "text": "text",
+      "textarea": "Text field",
+      "color": "Color",
+      "number": "Number",
+      "multiselection": "Multiple selection"
     }
   },
   "api": {
@@ -203,9 +252,9 @@
     "Container": {},
     "Divider": {},
     "Error": {
-      "incomplete": "Please {{name}} to complete.",
+      "incomplete": "Please {{name}} complete.",
       "empty": "No {{name}} available",
-      "incorrect": "{{name}} is not present"
+      "incorrect": "{{name}} is not available"
     },
     "Form": {},
     "Input": {},
@@ -229,13 +278,20 @@
     "Typography": {}
   },
   "components": {
+    "Pagination": {
+      "next": "Further",
+      "previous": "Back"
+    },
+    "BackButton": {
+      "back": "Back"
+    },
     "Address": {
       "AddressCard": {
         "yes": "Yes",
         "no": "No",
         "confirmDelete": "Do you really want to delete the address?",
         "company": "Company:",
-        "name": "Surname:",
+        "name": "Name:",
         "street": "Street:",
         "city": "City:",
         "country": "Country:",
@@ -281,7 +337,7 @@
         "branding_colors_primary": "primary color",
         "branding_colors_page_background": "background color",
         "title": "Edit organization information",
-        "taxID": "tax number",
+        "taxID": "Tax number",
         "address": "Address",
         "languages": {
           "en-US": "English",
@@ -300,9 +356,18 @@
         "area": "Area",
         "isTrue": "Is true",
         "button": {
-          "reset": "Reset to default",
+          "reset": "Reset",
           "submit": "Send"
         }
+      },
+      "PrioritiesForm": {
+        "header": "Priorities",
+        "type": "priority",
+        "value": "importance",
+        "points": "Free points: {{freePoints}}",
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
       }
     },
     "Background": {},
@@ -321,37 +386,37 @@
         "accept": "Accept",
         "reject": "Refuse",
         "showSettings": "View settings",
-        "saveSettings": "save settings"
+        "saveSettings": "Save settings"
       },
       "link": {
         "cookiePolicy": "Cookie Policy",
-        "dataProtection": "Data protection",
+        "dataProtection": "Privacy Policy",
         "imprint": "imprint"
       }
     },
     "Footer": {
       "Footer": {
         "imprint": "imprint",
-        "privacy": "Data protection",
-        "contact": "Contact",
-        "data-protection": "Data protection",
+        "privacy": "Privacy Policy",
+        "contact": "contact",
+        "data-protection": "Privacy Policy",
         "instagram": "Instagram",
         "mastodon": "mastodon"
       },
       "ContactForm": {
-        "title": "contact form",
+        "title": "Contact form",
         "subject": "Regarding",
         "message": "News",
         "button": "Send",
-        "name": "Surname",
+        "name": "name",
         "email": "E-mail address",
         "error": "Error sending message",
-        "success": "message sent successfully"
+        "success": "Message sent successfully"
       }
     },
     "Header": {
       "Header": {
-        "title": "SEMPER KI",
+        "title": "SEMPER AI",
         "button": {
           "close": "Close menu",
           "open": "Open menu"
@@ -360,12 +425,12 @@
       "HeaderData": {
         "about-us": "About Us",
         "login": "Register",
-        "register": "to register",
+        "register": "Register",
         "continue": "Continue",
-        "cart": "shopping cart",
+        "cart": "Shopping cart",
         "logout": "Log out",
-        "orders": "assignments",
-        "contracts": "contracts",
+        "orders": "Orders",
+        "contracts": "Contracts",
         "account": "Account",
         "test": "test",
         "guide": "signpost"
@@ -396,7 +461,7 @@
       "UploadCard": {
         "title": "upload new file(s).",
         "subTitle": "By drag & drop or click",
-        "button": "Choose a file"
+        "button": "Select file"
       }
     },
     "Switch": {},
@@ -409,6 +474,11 @@
     "UserSwitch": {
       "client": "Single user",
       "organization": "organization"
+    },
+    "Chatbot": {
+      "button": {
+        "open": "assistant"
+      }
     }
   },
   "contexts": {
@@ -420,25 +490,61 @@
     "AuthorizedUserOutlet": {
       "login": "Please log in to continue",
       "button": {
-        "login": "For registration"
+        "login": "To register"
+      }
+    },
+    "ResourcesOutlet": {
+      "notSelected": "The Make service is not selected in the organization profile",
+      "subText": "Please select the Connect service in your organization settings to continue",
+      "button": {
+        "toOrgaProfile": "To the organization settings"
       }
     }
   },
   "Admin": {
+    "Resources": {
+      "OverView": {
+        "title": "Resource management"
+      },
+      "Buttons": {
+        "graph": "graph"
+      },
+      "loading": "Load...",
+      "confirmDelete": "Do you want the knot\"{{name}}\"Really remove it?",
+      "title": "Resource management",
+      "name": "name",
+      "nodeType": "Node type",
+      "createdBy": "Created by",
+      "createdWhen": "Created on",
+      "nodeID": "Node ID",
+      "properties": "Characteristics",
+      "context": "context",
+      "accessedWhen": "Accessed on",
+      "updatedWhen": "Updated on",
+      "active": "Active",
+      "actions": "Actions",
+      "empty": "no resources found",
+      "button": {
+        "delete": "Delete",
+        "edit": "Edit",
+        "details": "Details",
+        "add": "Add"
+      }
+    },
     "hooks": {
       "useAdmin": {}
     },
     "Materials": {
       "Materials": {
-        "header": "materials",
+        "header": "Materials",
         "material-id": "Material ID",
-        "name": "Surname",
+        "name": "name",
         "propList": "Properties list"
       }
     },
     "Models": {
       "header": "Models",
-      "name": "Surname",
+      "name": "name",
       "date": "Date",
       "license": "License",
       "tags": "tags",
@@ -448,16 +554,52 @@
     "Organization": {
       "title": "Organization management",
       "empty": "No organization found",
-      "name": "Surname",
+      "name": "name",
       "created": "Created",
       "accessed": "Accessed",
       "updated": "Updated",
       "actions": "Actions",
       "canManufacturer": "Manufacturer",
+      "ServiceType": "Services",
       "button": {
         "delete": "Delete"
       },
-      "confirm": "Really delete an organization?"
+      "confirm": "organization {{name}} really delete?",
+      "details": {
+        "title": "Organization details",
+        "general": "General information",
+        "hashedID": "Hashed ID",
+        "name": "name",
+        "details": "Details",
+        "createdWhen": "Created on",
+        "updatedWhen": "Updated on",
+        "accessedWhen": "Accessed on",
+        "services": "Services",
+        "priorities": "Priorities",
+        "notificationSettings": "Notification Settings",
+        "empty": "Empty",
+        "email": "E-mail",
+        "created": "Created",
+        "accessed": "Accessed",
+        "updated": "Updated",
+        "actions": "Actions",
+        "canManufacturer": "Manufacturer",
+        "confirm": "Confirm",
+        "locale": "Language",
+        "branding": "Branding",
+        "adresses": "Addresses",
+        "dates": "Data",
+        "taxID": "Tax number",
+        "primaryColor": "primary color",
+        "pageBackground": "background color",
+        "event": "event",
+        "button": {
+          "edit": "Edit"
+        }
+      },
+      "form": {
+        "title": "Edit organization information"
+      }
     },
     "Projects": {
       "header": "Projects",
@@ -474,32 +616,50 @@
         "show": "Show",
         "delete": "Delete"
       },
-      "confirm": "Really delete the order?"
+      "confirm": "The order {{name}} really delete?"
     },
     "User": {
       "orga": "Organizations",
       "empty": "no users found",
       "title": "User management",
-      "name": "Surname",
+      "name": "name",
       "email": "E-mail",
       "created": "Created",
       "accessed": "access",
       "updated": "Updated",
-      "lastSeen": "Last Login",
+      "lastSeen": "Last login",
       "actions": "Actions",
       "search": "Seek...",
+      "userType": "User type",
+      "locale": "Language",
+      "lastLogin": "Last registration on",
+      "locationOfLastLogin": "Location of last login",
+      "numberOfLoginsTotal": "Number of total registrations",
+      "general": "General information",
+      "statistics": "statistics",
+      "dates": "Data",
+      "adresses": "Addresses",
       "button": {
         "delete": "Delete",
-        "search": "Seek"
+        "search": "Seek",
+        "edit": "Edit"
       },
-      "confirm": "Really delete users?"
+      "confirm": "Really delete users?",
+      "details": {
+        "title": "User details"
+      },
+      "form": {
+        "title": "Edit user"
+      }
     },
     "Admin": {
       "title": "Admin area",
       "buttons": {
+        "dashboard": "Dashboard",
         "orga": "Manage organizations",
         "user": "Manage users",
-        "projects": "Manage projects"
+        "projects": "Manage projects",
+        "resources": "Manage resources"
       }
     }
   },
@@ -520,7 +680,7 @@
         "heading": "Benefits for organizations",
         "text": "Our goal is to make 3D printing more accessible. ",
         "subHeading": "You determine the parameters",
-        "subHeading2": "The Semper KI determines the best possible matching.",
+        "subHeading2": "The Semper AI determines the best possible matching.",
         "fact1": "Self-created cost function",
         "fact2": "AI-supported infrastructure for all steps of the ordering process",
         "fact3": "Automated testing services",
@@ -532,7 +692,7 @@
   "App": {
     "components": {
       "LoadingSuspense": {
-        "title": "Semper KI",
+        "title": "Semper AI",
         "loading": "Load..."
       }
     },
@@ -576,26 +736,69 @@
   "Home": {
     "Anonym": {
       "Anonym": {
-        "title": "SEMPER KI",
-        "subTitle": "WE MAKE 3D PRINTING SMART",
-        "alt": {
-          "subtitle": "We make 3D printing smart",
-          "buttonToDemonstrator": "To the demonstrator"
+        "title": "We make 3D printing intelligent",
+        "Introduction": {
+          "title": "3D Printing Connected",
+          "text": "With Semper-AI we determine the right network for your production. ",
+          "item1": "User-friendly operation",
+          "item2": "Securing your existence network",
+          "item3": "Production-ready infrastructure"
+        },
+        "Services": {
+          "title": "Our service",
+          "items": {
+            "matching": {
+              "title": "Matching",
+              "text": "3D printing is a digital and highly individual technology.  "
+            },
+            "questionnaire": {
+              "title": "Simple questionnaires",
+              "text": "We have the expertise you need.  "
+            },
+            "benchmarking": {
+              "title": "Anonymous benchmarking",
+              "text": "In 3D printing, the details matter.  "
+            },
+            "resilience": {
+              "title": "Resilience check",
+              "text": "Resilient delivery networks are the foundation of good 3D printing.  "
+            }
+          }
+        },
+        "Tutorial": {
+          "title": "How to use our platform",
+          "subTitle": "Record your needs using our user-friendly questionnaires.",
+          "items": {
+            "0": {
+              "title": "Registration",
+              "text": "We make 3D printing usable for everyone.  "
+            },
+            "1": {
+              "title": "Upload component",
+              "text": "We make 3D printing usable for everyone.  "
+            },
+            "2": {
+              "title": "Select manufacturing",
+              "text": "We make 3D printing usable for everyone.  "
+            },
+            "3": {
+              "title": "Choose finishing",
+              "text": "We make 3D printing usable for everyone.  "
+            }
+          },
+          "button": "Questions? "
         },
         "prototype": "This page is a prototype and is continually being edited",
-        "visionTitle1": "We convey what you need",
-        "visionTitle2": "Using AI for 3D printing",
-        "vision1": "We make 3D printing usable for everyone. ",
-        "vision2": "The core of our platform is artificial intelligence. ",
         "partner": "Our project partners",
-        "partnertext": "Innovation only works as a team. ",
+        "partnertext": "We create an individually tailored production strategy for each product.  ",
         "demonstrator": {
-          "title": "Just try",
+          "title": "Just try it out",
           "subTitle": "Projects will be taken over when you register later"
         },
         "buttons": {
-          "demonstrator": "Getting started",
-          "magazin": "To the project page"
+          "demonstrator": "Get started",
+          "magazin": "To the project page",
+          "testModel": "Test your component"
         }
       }
     },
@@ -618,18 +821,51 @@
         "advantage": "Your advantages as a private individual",
         "register": "Register as a private individual"
       },
+      "HomeUserProgress": {
+        "progress": "Progress {{count}} from {{total}}",
+        "todo": "Profile setup",
+        "finished": "Setup completed",
+        "items": {
+          "general": "Add general information",
+          "notificationSettings": "Set notification preferences",
+          "adresses": "Add addresses",
+          "lang": "Set language"
+        },
+        "button": {
+          "orga": "profile"
+        }
+      },
+      "HomeOrgaAccountProgress": {
+        "progress": "Progress {{count}} from {{total}}",
+        "todo": "Establishment of the organization",
+        "finished": "Setup completed",
+        "items": {
+          "general": "Add general information",
+          "services": "Select services",
+          "resources": "Add resources",
+          "priorities": "Set priorities",
+          "notificationSettings": "Set notification preferences",
+          "branding": "Set branding",
+          "adresses": "Add addresses",
+          "user": "Add user",
+          "lang": "Set language"
+        },
+        "button": {
+          "orga": "organization"
+        }
+      },
       "Container": {},
       "Coypu": {
         "title": "Coypu News",
         "title2": "use for research purposes only",
         "button": {
-          "link": "Go to Article",
-          "less": "show less",
-          "more": "show more"
+          "link": "To the article",
+          "less": "Show less",
+          "more": "Show more"
         }
       },
       "Header": {
-        "title": "Semper KI - Simply 3D print.",
+        "title": "Semper AI - Simply 3D print.",
         "claim1": "Commission your idea",
         "claim2": "From idea to model",
         "claim3": "From model to prototype",
@@ -667,7 +903,7 @@
         "button": {
           "overview": "Overview",
           "printer": "3D printer",
-          "materials": "materials",
+          "materials": "Materials",
           "postprocessing": "Post-processing"
         }
       }
@@ -677,14 +913,14 @@
   "Legal": {
     "Contact": {
       "Contact": {
-        "header": "Contact",
+        "header": "contact",
         "title": {
-          "name": "Surname",
+          "name": "name",
           "email": "e-mail",
           "message": "News"
         },
         "input": {
-          "name": "Surname...",
+          "name": "Name...",
           "email": "E-mail...",
           "message": "News..."
         },
@@ -702,8 +938,8 @@
     "Legal": {
       "title": "Legal",
       "imprint": "imprint",
-      "privacy": "Data protection",
-      "contact": "Contact"
+      "privacy": "Privacy Policy",
+      "contact": "contact"
     }
   },
   "Login": {
@@ -732,7 +968,7 @@
     "Roles": {
       "Roles": {
         "header": "Roles/Rights",
-        "name": "Surname",
+        "name": "name",
         "description": "Description",
         "empty": "no roles created",
         "button": {
@@ -741,7 +977,7 @@
       },
       "components": {
         "Form": {
-          "name": "Surname",
+          "name": "name",
           "permissions": "right",
           "description": "Description",
           "title": {
@@ -757,7 +993,7 @@
           }
         },
         "Item": {
-          "name": "Surname",
+          "name": "name",
           "description": "Description",
           "actions": "Actions",
           "empty": "no roles created",
@@ -769,13 +1005,13 @@
           "alert": "Really delete a role?"
         },
         "Table": {
-          "name": "Surname",
+          "name": "name",
           "description": "Description",
           "actions": "Actions",
           "orga": "organization",
           "processes": "Projects",
           "data": "Data",
-          "files": "Additional files",
+          "files": "More files",
           "resources": "resources",
           "read": "view",
           "edit": "edit",
@@ -800,10 +1036,13 @@
       "updated": "Updated on",
       "services": "Services you offer",
       "id": "OrganizationID",
-      "name": "Surname",
+      "img": "Picture",
+      "primary-color": "primary color",
+      "background-color": "background color",
+      "name": "name",
       "adress": "address",
       "email": "e-mail",
-      "taxID": "tax number",
+      "taxID": "Tax number",
       "noService": "no services ",
       "button": {
         "edit": "Edit"
@@ -826,7 +1065,7 @@
       "table": {
         "confirmDelete": "Are you sure you want to delete the user?",
         "header": "user",
-        "name": "User name",
+        "name": "user name",
         "picture": "Profile picture",
         "email": "e-mail",
         "role": "role",
@@ -848,8 +1087,9 @@
         "placeholder": "E-mail...",
         "button": {
           "invite": "Invite",
-          "send": "Posted!",
+          "send": "Sent!",
           "link": "Create invitation link",
+          "delete": "Delete",
           "copy": "Copy"
         }
       }
@@ -888,7 +1128,7 @@
       },
       "provide-produce": {
         "header": "Manufacture components",
-        "text": "Contractors who produce components contribute their expertise and resources to meet customers' production needs. "
+        "text": "Contractors who produce components bring their expertise and resources to meet customers' production needs. "
       },
       "provide-design": {
         "header": "Design models",
@@ -905,17 +1145,28 @@
     }
   },
   "Profile": {
+    "APIToken": {
+      "title": "API tokens",
+      "subTitle": "Create a new API token to access the Semper-KI API",
+      "subTitle2": "The token is only displayed once and cannot be restored.\n ",
+      "button": {
+        "copy": "Copy",
+        "create": "Create",
+        "reCreate": "Recreate",
+        "delete": "Delete"
+      }
+    },
     "header": "account",
     "general": {
       "header": "Generally",
-      "name": "Surname:",
+      "name": "Name:",
       "email": "E-mail: ",
       "type": "User type: ",
       "hint": "After changing the email, it must be verified again. "
     },
     "company": {
       "header": "organization",
-      "name": "Surname"
+      "name": "name"
     },
     "address": {
       "header": "Addresses",
@@ -932,10 +1183,10 @@
     },
     "button": {
       "delete": "Delete account",
-      "addAddress": "Add adress"
+      "addAddress": "Add address"
     },
     "locals": {
-      "header": "language settings",
+      "header": "Language settings",
       "language": "Language:",
       "languages": {
         "en-US": "English",
@@ -978,6 +1229,15 @@
   },
   "Process": {
     "components": {
+      "Filter": {
+        "Filter": {
+          "menuButtonTitle": "Filter menu",
+          "pageTitle": "Your specifications",
+          "button": {
+            "selected": "Selected"
+          }
+        }
+      },
       "Info": {
         "name": "Process name:",
         "updated": "last update:",
@@ -985,8 +1245,8 @@
         "status": "Process status:",
         "button": {
           "menu": "Information menu",
-          "expand": "Show more",
-          "collapse": "Show less",
+          "expand": "More ads",
+          "collapse": "Fewer ads",
           "editTitle": "Edit process name"
         }
       },
@@ -1006,10 +1266,12 @@
             "button": {
               "edit": "Edit",
               "select": "Choose",
-              "new": "Create new address"
+              "new": "create new address"
             }
           },
           "ContractorList": {
+            "heading": "Contractor selection",
+            "contractors": "Contractors sorted according to their priorities",
             "noContractorFound": "No contractor found",
             "button": {
               "select": "Select contractor",
@@ -1024,14 +1286,14 @@
             "sub1": "contractor",
             "billingDelivery": "Delivery and billing address",
             "billing": "Billing address",
-            "delivery": "delivery address"
+            "delivery": "Delivery address"
           },
           "noAddress": "no address selected",
           "noContractor": "No contractor selected",
           "button": {
             "menu": "Manufacturer Menu",
-            "selectAddress": "choose adress",
-            "editAddress": "Change Address",
+            "selectAddress": "Select address",
+            "editAddress": "Change address",
             "resetAddress": "Reset address"
           }
         }
@@ -1075,7 +1337,7 @@
           "clientRequested": "The contractor has received the draft and will get back to you shortly.",
           "contractorRecieved": "You have received a request",
           "clientVerifiedTitle": "Ready",
-          "clientRequestedTitle": "Transmitted",
+          "clientRequestedTitle": "Submitted",
           "contractorRecievedTitle": "Receive",
           "button": {
             "menu": "Inquiry menu",
@@ -1088,7 +1350,7 @@
         "Clarify": {
           "title": "Queries",
           "messages": "News",
-          "noMessages": "no messages found",
+          "noMessages": "No messages available",
           "button": {
             "menu": "Inquiry menu"
           }
@@ -1104,8 +1366,8 @@
           },
           "FileTable": {
             "noFiles": "No files available",
-            "name": "Surname",
-            "type": "Type",
+            "name": "name",
+            "type": "type",
             "size": "Size",
             "date": "Date",
             "author": "author",
@@ -1163,6 +1425,14 @@
       }
     },
     "Service": {
+      "Filter": {
+        "components": {
+          "Card": {
+            "noFilters": "no specifications available",
+            "noSelectedFitlers": "no defaults selected"
+          }
+        }
+      },
       "ServiceSelection": {
         "components": {
           "ServiceCard": {
@@ -1182,34 +1452,44 @@
       "ServiceDetails": {
         "components": {
           "manufacturing": {
+            "heading": "Your selection",
+            "complete": "Selection Complete",
+            "incomplete": "Selection Incomplete",
             "model": {
-              "heading": "Models:",
+              "heading": "Models",
+              "complete": "Model(s) Complete",
+              "incomplete": "Model(s) Incomplete",
               "noModels": "no models available",
               "img": "Model picture",
-              "name": "Surname:",
-              "dimensions": "Dimensions",
+              "name": "Name:",
+              "dimensions": "Mass",
               "surface": "surface",
               "volume": "volume"
             },
             "material": {
-              "heading": "Material:",
+              "heading": "material",
+              "complete": "Material(s) Complete",
+              "incomplete": "Material(s) Incomplete",
               "noMaterial": "no material selected",
               "selected": "Selected",
               "img": "Material image",
-              "name": "Surname:",
+              "name": "Name:",
               "type": "Type:",
               "properties": "Characteristics:"
             },
             "postProcessing": {
-              "heading": "Post-processing:",
+              "heading": "Post-processing (optional)",
+              "complete": "Post-processing(s) Complete",
+              "incomplete": "Post-processing(s) Incomplete",
               "noPostProcessings": "no post-processing selected",
-              "name": "Surname",
+              "name": "name",
               "img": "Post-processing image",
               "type": "Type:",
-              "describtion": "Description"
+              "properties": "Characteristics:"
             },
             "button": {
               "add": "Add",
+              "addMore": "Add more",
               "addModel": "Add model",
               "addMaterial": "Add material",
               "addPostProcessing": "Add post-processing",
@@ -1237,6 +1517,7 @@
     "StatusWizard": {
       "components": {},
       "StatusWizard": {
+        "header": "Progress",
         "item": {
           "processInfo": "Overview",
           "header": "Overview",
@@ -1256,7 +1537,10 @@
       }
     },
     "ProcessPage": {
-      "heading": "Process details"
+      "heading": "Process details",
+      "button": {
+        "back": "Back"
+      }
     }
   },
   "Project": {
@@ -1283,7 +1567,7 @@
         }
       },
       "FlatProcessCard": {
-        "serviceName": "Surname:",
+        "serviceName": "Name:",
         "serviceType": "Service Type:",
         "status": "Status:",
         "updated": "last update:",
@@ -1303,8 +1587,8 @@
         "finished": "of which completed:",
         "button": {
           "menu": "Information menu",
-          "expand": "Show more",
-          "collapse": "Show less",
+          "expand": "More ads",
+          "collapse": "Fewer ads",
           "editTitle": "Edit project name"
         }
       },
@@ -1321,12 +1605,12 @@
       "Table": {
         "noProjects": "No projects available",
         "label": {
-          "selectProject": "Project {{name}} choose",
+          "selectProject": "project {{name}} choose",
           "selectAllProjects": "Select all projects"
         },
         "deleteConfirm": "Are you sure you want to delete the project?",
         "grouping": "grouping",
-        "name": "Surname",
+        "name": "name",
         "status": "status",
         "created": "Created on",
         "updated": "Updated on",
@@ -1339,13 +1623,13 @@
           "detail": "Details"
         },
         "groups": {
-          "draft": "drafts",
-          "ongoing": "Constantly",
+          "draft": "Designs",
+          "ongoing": "Ongoing",
           "completed": "Completed"
         }
       },
       "Card": {
-        "name": "Surname:",
+        "name": "Name:",
         "status": "Status:",
         "count": "Number:",
         "created": "Created on:",
@@ -1354,7 +1638,7 @@
       },
       "Cards": {
         "label": {
-          "selectProject": "Project {{name}} choose",
+          "selectProject": "project {{name}} choose",
           "selectAllOwnProjects": "Select all your own projects",
           "selectAllRecievedProjects": "Select all received projects"
         },
@@ -1363,12 +1647,12 @@
         "receivedProjects": "Received projects"
       },
       "TitleForm": {
-        "heading": "Create Project",
+        "heading": "Create project",
         "subheading": "Give your project a name. ",
         "subheading2": "A project is a collection of processes and a process is an order for a service provider/manufacturer.",
         "name": "Project name",
         "button": {
-          "create": "Create Project"
+          "create": "Create project"
         },
         "error": "Please enter a name"
       }
@@ -1393,7 +1677,7 @@
         "Checkout": {
           "title": "Request orders",
           "button": {
-            "send": "Requests"
+            "send": "Inquiries"
           },
           "error": {
             "noItems": "no suitable processes found"
@@ -1403,11 +1687,11 @@
       "components": {
         "ProcessInfoCard": {
           "title": "Process information",
-          "name": "Surname:",
+          "name": "Name:",
           "service": "Service:",
           "model": "Model:",
           "material": "Material:",
-          "postProcessing": "Post processing:"
+          "postProcessing": "Post-processing:"
         },
         "StatusButtons": {
           "button": {
@@ -1418,7 +1702,7 @@
             "verify": "Check",
             "reject": "Refuse",
             "confirm": "Confirm",
-            "reProject": "re-order",
+            "reProject": "Order again",
             "expand": "Expand",
             "collapse": "Fold up",
             "delete": "Delete"
@@ -1430,7 +1714,7 @@
           "updated": "Updated on:"
         },
         "TitleForm": {
-          "name": "Surname: ",
+          "name": "Name: ",
           "button": {
             "edit": "Edit name"
           }
@@ -1445,11 +1729,11 @@
           "address": {
             "sameAddress": "Delivery address is the same as billing address",
             "title": "Delivery and billing address",
-            "titleDeliver": "delivery address",
+            "titleDeliver": "Delivery address",
             "titleBilling": "Billing address",
             "noAddress": "no addresses available",
             "button": {
-              "new": "Create new address"
+              "new": "create new address"
             }
           },
           "contractor": "Contractor",
@@ -1473,21 +1757,24 @@
         "useStatusButtons": {
           "NONE": "Translation error",
           "DELETE": "Delete process",
-          "FORWARD-TO-CONTRACTOR_SELECTED": "Go to review",
-          "BACK-TO-SERVICE_READY": "Back to service processing",
-          "BACK-TO-DRAFT": "Back to service selection",
-          "FORWARD-TO-SERVICE_COMPLETED": "Continue to contractor selection",
-          "BACK-TO-SERVICE_COMPLETED": "Back to contractor selection",
+          "BACK-TO-SERVICE_READY": "Back",
+          "BACK-TO-DRAFT": "Back",
+          "BACK-TO-SERVICE_COMPLETED": "Back",
+          "BACK-TO-CONTRACTOR_COMPLETED": "Back",
+          "FORWARD-TO-SERVICE_COMPLETED": "Further",
+          "FORWARD-TO-CONTRACTOR_COMPLETED": "Further",
           "FORWARD-TO-VERIFYING": "Check Start",
-          "BACK-TO-CONTRACTOR_SELECTED": "Back to review",
-          "FORWARD-TO-REQUESTED": "Send request",
+          "FORWARD-TO-VERIFICATION_COMPLETED": "Complete review",
+          "FORWARD-TO-REQUEST_COMPLETED": "Send request",
           "FORWARD-TO-CLARIFICATION": "Ask questions",
-          "FORWARD-TO-CONFIRMED_BY_CONTRACTOR": "Confirm your request and create an offer",
-          "FORWARD-TO-REJECTED_BY_CONTRACTOR": "deny request",
-          "FORWARD-TO-CONFIRMED_BY_CLIENT": "Confirm offer",
-          "FORWARD-TO-REJECTED_BY_CLIENT": "Reject offer",
-          "FORWARD-TO-PRODUCTION": "Start production",
-          "FORWARD-TO-DELIVERY": "Start delivery",
+          "FORWARD-TO-OFFER_COMPLETED": "Confirm your request and create an offer",
+          "FORWARD-TO-OFFER_REJECTED": "Decline request",
+          "FORWARD-TO-CONFIRMATION_COMPLETED": "Confirm offer",
+          "FORWARD-TO-CONFIRMATION_REJECTED": "Decline offer",
+          "FORWARD-TO-PRODUCTION_IN_PROGRESS": "Start production",
+          "FORWARD-TO-PRODUCTION_COMPLETED": "Complete production",
+          "FORWARD-TO-DELIVERY_IN_PROGRESS": "Start delivery",
+          "FORWARD-TO-DELIVERY_COMPLETED": "Complete delivery",
           "FORWARD-TO-FAILED": "Process failed",
           "FORWARD-TO-COMPLETED": "Complete process",
           "FORWARD-TO-DISPUTE": "Report a dispute",
@@ -1504,7 +1791,7 @@
               "history": "Course",
               "chat": "News",
               "cancel": "Cancel",
-              "reProject": "re-order",
+              "reProject": "Order again",
               "reject": "Refuse",
               "confirm": "Confirm",
               "verify": "Check"
@@ -1517,7 +1804,7 @@
           },
           "Address": {
             "title": "address",
-            "name": "Surname",
+            "name": "name",
             "company": "company",
             "address": "Address",
             "button": {
@@ -1527,7 +1814,7 @@
           },
           "Chat": {
             "title": "News",
-            "noMessages": "no messages found",
+            "noMessages": "No messages available",
             "placeholder": "News...",
             "button": {
               "close": "Close",
@@ -1541,8 +1828,8 @@
             "status": "Process status:"
           },
           "ProcessFile": {
-            "title": "Additional files",
-            "empty": "No files found",
+            "title": "More files",
+            "empty": "no files found",
             "button": {
               "delete": "Delete",
               "download": "Download",
@@ -1553,7 +1840,7 @@
             "service": "Complete service",
             "selectContractor": "Select contractor",
             "verify": "Check",
-            "request": "Requests",
+            "request": "Inquiries",
             "clarification": "Queries",
             "reject": "Refuse",
             "confirm": "Confirm",
@@ -1684,12 +1971,12 @@
           "projectName": "Project name",
           "processName": "Process name"
         },
-        "title": "Project",
+        "title": "project",
         "state": "Status: ",
         "selected": "{{count}} Selected",
         "processes": "Processes:",
         "noProcesses": "No partial orders available",
-        "selectAll": "select all",
+        "selectAll": "Select all",
         "label": {
           "selectProcess": "Select process",
           "selectAllProcesses": "Select all processes"
@@ -1710,7 +1997,7 @@
       "empty": "no projects created",
       "deleteSelectedConfirm": "Do you really want to delete all selected projects?",
       "button": {
-        "create": "Create Project",
+        "create": "Create project",
         "deleteSelected": "Delete selected projects"
       }
     }
@@ -1720,13 +2007,13 @@
     "title": "Organization Register",
     "success": "Organization successfully registered. ",
     "button": {
-      "login": "For registration"
+      "login": "To register"
     },
     "form": {
       "display_name": "Organization name",
       "email": "e-mail",
       "button": {
-        "submit": "to register"
+        "submit": "Register"
       },
       "error": {
         "display_name": "Organization name is required",
@@ -1750,11 +2037,115 @@
   "Resources": {
     "header": "resources",
     "components": {
+      "RequestInformation": {
+        "header": "Data Augmentation Requests",
+        "noItems": "no requests available",
+        "button": {
+          "new": "new request"
+        }
+      },
+      "RequestInformationForm": {
+        "header": "Allow data to be expanded",
+        "button": {
+          "send": "Inquiries"
+        }
+      },
+      "NodeView": {
+        "context": "Description:",
+        "createdBy": "Created by:",
+        "createdWhen": "Created on:",
+        "updatedWhen": "Updated on:",
+        "nodeType": "Type:",
+        "properties": "Characteristics",
+        "general": "Generally",
+        "neighbors": "Related resources",
+        "noProperties": "no properties available",
+        "button": {
+          "draft": "Select template",
+          "variant": "Create variant"
+        }
+      },
       "Menu": {
         "overview": "Overview",
-        "materials": "materials",
+        "materials": "Materials",
         "printers": "3D printer",
-        "postProcessings": "post processing"
+        "postProcessings": "Post-processing",
+        "request": "Data expansion",
+        "graph": "graph",
+        "privat-graph": "Private graph"
+      },
+      "Table": {
+        "action": "Actions",
+        "name": "name",
+        "active": "Active",
+        "noItems": "no entries available",
+        "confirmDelete": "Would you like \"{{name}}\"really remove them from your organization?",
+        "buttons": {
+          "edit": "Edit",
+          "delete": "Delete",
+          "add": "Add",
+          "variant": "Create variant",
+          "details": "Details"
+        }
+      },
+      "Edge": {
+        "heading": "Related ",
+        "table": {
+          "noItems": "no entries available",
+          "caption": "Available",
+          "selected": "Selected",
+          "name": "name",
+          "createdBy": "Created by",
+          "actions": "Actions"
+        },
+        "button": {
+          "add": "Add",
+          "delete": "Delete",
+          "showMore": "Show more",
+          "showLess": "Show less"
+        }
+      },
+      "Edit": {
+        "error": "Error loading",
+        "draft": "Select template",
+        "draftDescription": "Select a template to apply the general information and properties.",
+        "draftDescription2": "Create a variant to also take over the connection to other resources.",
+        "confirmDraft": "Are you sure you want to select the template?\n ",
+        "general": "General information",
+        "notFound": "Didn't find the right one?",
+        "heading": {
+          "edit": "Edit",
+          "create": "Create",
+          "variant": "Create variant"
+        },
+        "nodeName": "name",
+        "context": "Description",
+        "nodeType": "type",
+        "createdBy": "Created by: ",
+        "nodeID": "ID",
+        "properties": {
+          "header": "Characteristics",
+          "name": "name",
+          "type": "type",
+          "value": "Value"
+        },
+        "button": {
+          "search": "Apply for extension",
+          "addProperty": "Add properties",
+          "edit": "Save",
+          "create": "Create",
+          "variant": "Create variant",
+          "removeProperty": "Remove property",
+          "draft": "Select template",
+          "details": "Details"
+        },
+        "table": {
+          "name": "name",
+          "value": "Value",
+          "createdBy": "Created by",
+          "actions": "Actions",
+          "caption": "Characteristics"
+        }
       }
     },
     "Overview": {
@@ -1762,13 +2153,17 @@
     },
     "Materials": {
       "table": {
-        "header": "materials",
-        "name": "Surname",
+        "own": "Own materials",
+        "all": "All available materials",
+        "header": "Materials",
+        "name": "name",
         "actions": "Actions",
         "empty": "no materials found",
         "button": {
           "add": "Add material",
-          "delete": "Delete"
+          "delete": "Delete",
+          "createOwn": "Create material",
+          "createVariant": "Create material variant"
         }
       },
       "form": {
@@ -1781,14 +2176,18 @@
     },
     "Printers": {
       "table": {
+        "own": "Own printers",
+        "all": "All available printers",
         "header": "3D printer",
-        "name": "Surname",
+        "name": "name",
         "actions": "Actions",
         "empty": "no printers found",
         "button": {
-          "add": "Add Printer",
+          "add": "Add printer",
           "delete": "Delete",
-          "edit": "Edit"
+          "edit": "Edit",
+          "createOwn": "Create printer",
+          "createVariant": "Create printer variant"
         }
       },
       "view": {
@@ -1809,18 +2208,18 @@
             "variant": "Edit variant"
           },
           "safe": "Save",
-          "add": "Add Printer",
+          "add": "Add printer",
           "addValue": "Add value",
           "removeValue": "Remove value",
           "addProperty": "Add property",
           "removeProperty": "Remove property",
-          "reset": "Reset to default",
+          "reset": "Reset",
           "close": "Close",
           "back": "Back"
         },
         "yup": {
           "notSamePrinterName": "Printer name already taken",
-          "name": "Surname",
+          "name": "name",
           "propName": "Characteristic",
           "propNamerequired": "Property needed",
           "valueItemrequired": "Value needed",
@@ -1837,7 +2236,17 @@
       }
     },
     "PostProcessings": {
-      "header": "Post-processing"
+      "header": "Post-processing",
+      "own": "Own post-processing",
+      "all": "All available post-processing",
+      "add": "Add additional requirement",
+      "button": {
+        "createOwn": "Create post-processing",
+        "createVariant": "Create post-processing variant"
+      }
+    },
+    "Table": {
+      "subHeading": "Own {{name}}"
     }
   },
   "Routes": {},
@@ -1865,7 +2274,8 @@
           "Item": {},
           "MultiSelection": {
             "button": {
-              "checkAll": "Select all",
+              "all": "All",
+              "checkAll": "Select All",
               "unCheckAll": "Deselect all"
             }
           },
@@ -1881,8 +2291,10 @@
         },
         "Filter": {
           "header": "Preference filter",
+          "noCategory": "no presets category opened",
           "button": {
-            "reset": "Reset to default",
+            "reset": "Reset",
+            "cancel": "Cancel",
             "apply": "Apply"
           }
         }
@@ -1902,7 +2314,7 @@
             "empty": "---",
             "model": "Model",
             "material": "material",
-            "postprocessing": "post processing",
+            "postprocessing": "Post-processing",
             "overview": "to overview",
             "ready": "Complete",
             "notReady": "Incomplete"
@@ -1988,7 +2400,7 @@
               "title": "Add file information"
             },
             "Form": {
-              "name": "Surname:",
+              "name": "Name:",
               "size": "Size:",
               "type": "File type:",
               "date": "Date:",
@@ -2014,7 +2426,7 @@
             },
             "loading": "Model is being uploaded",
             "card": {
-              "title": "Upload models",
+              "title": "Upload your own models",
               "text": "via drag & drop or click"
             },
             "button": {
@@ -2031,11 +2443,14 @@
           "available": "Available models",
           "upload": {
             "img": "Upload models",
-            "title": "Upload models",
+            "title": "Upload your own models",
             "button": "to upload"
           },
           "error": {
             "noModels": "no models found"
+          },
+          "button": {
+            "select": "Choose"
           }
         }
       },
@@ -2049,7 +2464,8 @@
           "Card": {
             "value": "Value:",
             "valueList": "List of values:",
-            "type": "Type:"
+            "type": "Type:",
+            "props": "Characteristics"
           },
           "Catalog": {
             "button": {
@@ -2104,7 +2520,7 @@
         }
       },
       "Overview": {
-        "title": "Project",
+        "title": "project",
         "button": {
           "overview": "to overview",
           "expand": "Expand",

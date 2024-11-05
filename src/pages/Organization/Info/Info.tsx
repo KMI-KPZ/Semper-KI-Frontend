@@ -27,6 +27,7 @@ const OrganizationInfo: React.FC<OrganizationInfoProps> = (props) => {
       direction="row"
       className={twMerge("container", `card overflow-auto p-0`)}
       width="full"
+      id="OrganizationInfo"
     >
       {edit ? (
         <OrganizationForm organization={organization} closeEdit={closeEdit} />

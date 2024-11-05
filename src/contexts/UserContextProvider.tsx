@@ -1,7 +1,12 @@
 import useGetIsLoggedIn from "@/api/Authentification/Querys/useGetIsLoggedIn";
 import useGetUser from "@/api/User/Querys/useGetUser";
 import { toast } from "@/hooks/useToast";
-import { AuthorizedUserProps, UserProps, UserType } from "@/hooks/useUser";
+import {
+  AuthorizedUser,
+  DefaultUser,
+  UserProps,
+  UserType,
+} from "@/hooks/useUser";
 import { AppLoadingSuspense } from "@component-library/index";
 import { UseQueryResult } from "@tanstack/react-query";
 import React, {
@@ -15,13 +20,13 @@ import { useTranslation } from "react-i18next";
 interface UserContextProviderProps {}
 
 export type UserContext = {
-  query: UseQueryResult<AuthorizedUserProps, Error>;
+  query: UseQueryResult<AuthorizedUser, Error>;
   user: UserProps;
   isLoggedIn: boolean;
 };
 
 export const UserContext = createContext<UserContext>({
-  query: {} as UseQueryResult<AuthorizedUserProps, Error>,
+  query: {} as UseQueryResult<DefaultUser, Error>,
   user: {} as UserProps,
   isLoggedIn: false,
 });

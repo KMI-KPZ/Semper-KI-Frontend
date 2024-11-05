@@ -16,6 +16,8 @@ import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 import ContractorCard from "./components/ContractorCard";
 import ContractorSelectionAddressCard from "./components/AddressCard";
 import useGetContractors from "@/api/Process/Querys/useGetContractors";
+import ProcessConditionIcon from "@/components/Process/ConditionIcon";
+import ProcessStatusGate from "../StatusGate";
 
 interface ProcessContractorSelectionProps {}
 
@@ -65,11 +67,11 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
   const pageTitle = `${t(
     "Process.components.ContractorSelection.ContractorSelection.heading.main"
   )}: ${
-    process.contractor === ""
+    process.contractor.name === ""
       ? t(
           "Process.components.ContractorSelection.ContractorSelection.noContractor"
         )
-      : process.contractor
+      : process.contractor.name
   }`;
 
   return (
@@ -85,15 +87,25 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
           width="full"
           justify="start"
           direction="col"
-          className=" card"
+          className={`card ${!showDeliveryAddress ? "self-stretch" : ""}`}
+          id="Contractor"
         >
-          <Heading variant="h3">
-            {t(
-              "Process.components.ContractorSelection.ContractorSelection.heading.sub1"
-            )}
-          </Heading>
+          <Container width="fit" className={`gap-2 p-0 `}>
+            <ProcessConditionIcon
+              error={
+                process.processDetails.provisionalContractor === undefined ||
+                process.processDetails.provisionalContractor === ""
+              }
+            />
+
+            <Heading variant="h3">
+              {t(
+                "Process.components.ContractorSelection.ContractorSelection.heading.sub1"
+              )}
+            </Heading>
+          </Container>
           {process.processDetails.provisionalContractor === undefined ? (
-            <Container width="full" direction="col">
+            <Container width="full" height="full" direction="col">
               <Button
                 size="sm"
                 onClick={handleOnClickButtonSelectContractor}
@@ -114,18 +126,25 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
           ) : (
             <Container width="full" direction="col">
               <ContractorCard contractor={currentContractor} />
-              <Button
-                size="sm"
-                onClick={handleOnClickButtonEditContractor}
-                variant="secondary"
-                title={t(
-                  "Process.components.ContractorSelection.components.ContractorList.button.edit"
-                )}
-              />
+              <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+                <Button
+                  size="sm"
+                  onClick={handleOnClickButtonEditContractor}
+                  variant="secondary"
+                  title={t(
+                    "Process.components.ContractorSelection.components.ContractorList.button.edit"
+                  )}
+                />
+              </ProcessStatusGate>
             </Container>
           )}
         </Container>
-        <Container direction="col" width="full">
+        <Container
+          direction="col"
+          width="full"
+          justify="start"
+          className="self-stretch"
+        >
           <ContractorSelectionAddressCard
             onChangeCheckBox={onChangeCheckBox}
             showDeliveryAddress={showDeliveryAddress}

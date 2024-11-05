@@ -44,7 +44,7 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
 
   return (
     <Container
-      className="w-fit min-w-[350px] max-w-[50%] gap-0 rounded-xl border-2 bg-white"
+      className="w-fit min-w-[350px] max-w-[50%] gap-0 rounded-md border-2 bg-white"
       direction="col"
     >
       <ModelPreview
@@ -83,7 +83,7 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
             <Text>{model.file.size}</Text>
             <Text>{new Date().toLocaleDateString()}</Text>
             <input
-              className={`flex w-full rounded-xl border-2 p-3
+              className={`flex w-full rounded-md border-2 p-3
             ${false ? "border-red-500 bg-red-500" : ""}
           }`}
               placeholder={t(
@@ -93,7 +93,7 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
             />
             <select
               {...register(`models.${index}.licenses`, { required: true })}
-              className={`flex w-full rounded-xl border-2 p-3 ${
+              className={`flex w-full rounded-md border-2 p-3 ${
                 licenseError ? "border-red-500 " : ""
               }`}
             >
@@ -110,7 +110,7 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
               <option value="CC BY-NC-SA">CC BY-NC-SA</option>
             </select>
             <input
-              className={`flex w-full rounded-xl border-2 p-3
+              className={`flex w-full rounded-md border-2 p-3
             ${false ? "border-red-500 bg-red-500" : ""}}`}
               placeholder={t(
                 "Service.Manufacturing.Model.Upload.components.Form.tagsPH"

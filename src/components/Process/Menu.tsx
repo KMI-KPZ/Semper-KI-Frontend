@@ -40,7 +40,7 @@ const ProcessMenu: React.FC<PropsWithChildren<ProcessMenuProps>> = (props) => {
       <Collapsible expand={menuOpen && children !== undefined} logName="Menu">
         <Container
           onClick={handleOnClickCollapsible}
-          className=" gap-3 rounded-xl border-2 bg-white p-2"
+          className=" gap-3 rounded-md border-2 bg-white p-2"
           direction="col"
         >
           {children}

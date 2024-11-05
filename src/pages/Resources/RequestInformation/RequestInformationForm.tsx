@@ -68,7 +68,7 @@ const RequestInformationForm: React.FC<RequestInformationFormProps> = (
       <form className="flex w-full flex-col items-center justify-start gap-5">
         <Divider />
         <select
-          className="rounded-xl border-2 p-3 text-center"
+          className="rounded-md border-2 p-3 text-center"
           {...register("type")}
         >
           {allNodeTypes.map((type, index) => (

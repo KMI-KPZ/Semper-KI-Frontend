@@ -1,10 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Container, Divider, Heading, Text } from "@component-library/index";
-import { AuthorizedUserProps } from "@/hooks/useUser";
+import { AuthorizedUser } from "@/hooks/useUser";
 
 interface ProfileStatisticsProps {
-  user: AuthorizedUserProps;
+  user: AuthorizedUser;
 }
 
 const ProfileStatistics: React.FC<ProfileStatisticsProps> = (props) => {

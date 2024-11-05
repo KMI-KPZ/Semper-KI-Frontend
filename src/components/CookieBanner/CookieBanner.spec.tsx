@@ -1,5 +1,5 @@
 import { render, fireEvent } from "@test/render";
-import CkBanner from "./CkBanner";
+import CookieBanner from "./CookieBanner";
 
 const mockedUsedNavigate = jest.fn();
 
@@ -10,7 +10,7 @@ jest.mock("react-router-dom", () => ({
 
 describe.skip("CookieBanner", () => {
   it("renders correctly", () => {
-    const { getByText } = render(<CkBanner />);
+    const { getByText } = render(<CookieBanner />);
 
     expect(getByText("Cookie Banner Heading")).toBeInTheDocument();
     expect(getByText("Cookie Banner Message")).toBeInTheDocument();
@@ -25,7 +25,7 @@ describe.skip("CookieBanner", () => {
   it("calls acceptCookies when Accept button is clicked", () => {
     const acceptCookies = jest.fn();
 
-    const { getByText } = render(<CkBanner />);
+    const { getByText } = render(<CookieBanner />);
 
     fireEvent.click(getByText("Accept"));
 
@@ -35,7 +35,7 @@ describe.skip("CookieBanner", () => {
   it("calls rejectCookies when Reject button is clicked", () => {
     const rejectCookies = jest.fn();
 
-    const { getByText } = render(<CkBanner />);
+    const { getByText } = render(<CookieBanner />);
 
     fireEvent.click(getByText("Reject"));
 
@@ -43,7 +43,7 @@ describe.skip("CookieBanner", () => {
   });
 
   it("toggles showSettings when Show Settings button is clicked", () => {
-    const { getByText } = render(<CkBanner />);
+    const { getByText } = render(<CookieBanner />);
 
     fireEvent.click(getByText("Show Settings"));
 

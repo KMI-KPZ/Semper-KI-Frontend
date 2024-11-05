@@ -134,7 +134,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                         >
                           {node.createdBy === organization.hashedID
                             ? organization.name
-                            : "Sermper-KI"}
+                            : "Semper-KI"}
                         </td>
                         <td
                           className={`border-t-2 p-3 text-center ${

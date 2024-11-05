@@ -8,7 +8,7 @@ import {
   LoadingAnimation,
   Text,
 } from "@component-library/index";
-import { AuthorizedUserProps, UserType } from "@/hooks/useUser";
+import { AuthorizedUser, UserType } from "@/hooks/useUser";
 import TextInput from "@component-library/Form/Inputs/TextInput";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -16,7 +16,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useUpdateUser from "@/api/User/Mutations/useUpdateUser";
 
 interface ProfileGeneralProps {
-  user: AuthorizedUserProps;
+  user: AuthorizedUser;
 }
 
 interface FormData {
@@ -64,7 +64,7 @@ const ProfileGeneral: React.FC<ProfileGeneralProps> = (props) => {
   const maxLength = 70;
 
   return (
-    <form className="w-full">
+    <form className="w-full" id="ProfileGeneral">
       <Container width="full" direction="col">
         <Heading variant="h2">{t("Profile.general.header")}</Heading>
         <Divider />

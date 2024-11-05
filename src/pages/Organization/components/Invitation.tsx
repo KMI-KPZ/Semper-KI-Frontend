@@ -13,12 +13,14 @@ import { OrganizationInvite } from "@/api/Organization/Querys/useGetOrganization
 import useDeleteInvite from "@/api/Organization/Mutations/useDeleteInvite";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-interface InvitationProps {
+interface OrganizationInvitationProps {
   roles: RoleProps[] | undefined;
   invites: OrganizationInvite[] | undefined;
 }
 
-const Invitation: React.FC<InvitationProps> = (props) => {
+const OrganizationInvitation: React.FC<OrganizationInvitationProps> = (
+  props
+) => {
   const { roles = [], invites = [] } = props;
   const { t } = useTranslation();
   const [showLoadedIn, setShowLoadedIn] = useState<boolean>(false);
@@ -80,22 +82,27 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   };
 
   return (
-    <Container direction="col" className="container" width="full">
+    <Container
+      direction="col"
+      className="container"
+      width="full"
+      id="OrganizationInvitation"
+    >
       <Heading variant="h2" className="whitespace-nowrap">
         {t("Organization.components.invitation.header")}
       </Heading>
       <Divider />
       <form
-        className="flex w-full flex-col flex-wrap items-center justify-center gap-5 rounded-xl border-2 p-3 md:flex-row"
+        className="flex w-full flex-col flex-wrap items-center justify-center gap-5 rounded-md border-2 p-3 md:flex-row"
         onSubmit={handleSubmit(onSubmitInvite)}
       >
         <input
-          className="w-full rounded-xl border-2 px-5 py-2 md:w-fit md:flex-grow"
+          className="w-full rounded-md border-2 px-5 py-2 md:w-fit md:flex-grow"
           placeholder={t("Organization.components.invitation.placeholder")}
           {...register("email")}
         />
         <select
-          className="shadow-button rounded-xl border-2  px-3 py-2 "
+          className="shadow-button rounded-md border-2  px-3 py-2 "
           {...register("roleID")}
         >
           {roles !== undefined && roles.length > 0 ? (
@@ -140,7 +147,7 @@ const Invitation: React.FC<InvitationProps> = (props) => {
         <Container direction="col" width="full">
           {invites.map((invite, index) => (
             <div
-              className="relative flex w-full flex-col items-center justify-center gap-5 rounded-xl border-2  p-3 md:flex-row md:border-0 md:p-0 "
+              className="relative flex w-full flex-col items-center justify-center gap-5 rounded-md border-2  p-3 md:flex-row md:border-0 md:p-0 "
               key={index}
             >
               <span className="">{invite.invitee.email}</span>
@@ -149,7 +156,7 @@ const Invitation: React.FC<InvitationProps> = (props) => {
                 onClick={handleOnClickInput}
                 type="text"
                 value={invite.invitation_url}
-                className="w-full flex-grow select-all rounded-xl border-2 px-5 py-2"
+                className="w-full flex-grow select-all rounded-md border-2 px-5 py-2"
               />
               <Container direction="row" width="fit">
                 <Button
@@ -175,4 +182,4 @@ const Invitation: React.FC<InvitationProps> = (props) => {
   );
 };
 
-export default Invitation;
+export default OrganizationInvitation;

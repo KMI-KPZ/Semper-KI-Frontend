@@ -21,14 +21,14 @@ const useSendContactForm = () => {
       .then((response) => {
         logger("useSendContactForm | sendContactForm ✅ |", response);
         if (response.data.result === false) {
-          toast(t("components.Footer.ContactForm.error"));
+          toast(t("api.ContactForm.Mutation.useSendContactForm.error"));
           return;
         }
-        toast(t("components.Footer.ContactForm.success"));
+        toast(t("api.ContactForm.Mutation.useSendContactForm.success"));
       })
       .catch((error) => {
         logger("useSendContactForm | sendContactForm ❌ |", error);
-        toast(t("components.Footer.ContactForm.error"));
+        toast(t("api.ContactForm.Mutation.useSendContactForm.error"));
       });
 
   return useMutation<void, Error, ContactFormData>({

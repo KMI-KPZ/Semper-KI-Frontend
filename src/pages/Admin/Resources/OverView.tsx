@@ -14,7 +14,7 @@ const AdminResourcesOverView: React.FC<AdminResourcesOverViewProps> = (
   const { t } = useTranslation();
 
   return (
-    <Container width="full" direction="col">
+    <Container width="full" direction="col" className="bg-white p-5">
       <BackButtonContainer>
         <Heading variant="h1">{t("Admin.Resources.OverView.title")}</Heading>
       </BackButtonContainer>

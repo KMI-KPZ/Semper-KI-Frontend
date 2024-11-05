@@ -1,4 +1,4 @@
-import { Container, PageHeader } from "@component-library/index";
+import { Button, Container, PageHeader } from "@component-library/index";
 import { Heading } from "@component-library/index";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
@@ -12,11 +12,13 @@ import RequestInformation from "./RequestInformation/RequestInformation";
 import ResourcesOutlet from "@/outlets/ResourcesOutlet";
 import ResourcesNodeTable from "../../components/Resources/Table";
 import ResourcesNodeForm from "@/components/Resources/NodeForm";
+import { useTranslation } from "react-i18next";
 
 interface ResourcesProps {}
 
 const Resources: React.FC<ResourcesProps> = (props) => {
   const {} = props;
+  const { t } = useTranslation();
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
@@ -46,7 +48,18 @@ const Resources: React.FC<ResourcesProps> = (props) => {
                   element={<ResourcesNodeForm type="create" />}
                 />
                 <Route path=":nodeID">
-                  <Route index element={<ResourcesNodeView />} />
+                  <Route
+                    index
+                    element={
+                      <ResourcesNodeView>
+                        <Button
+                          size="sm"
+                          title={t("Resources.components.NodeView.button.edit")}
+                          to="edit"
+                        />
+                      </ResourcesNodeView>
+                    }
+                  />
                   <Route
                     path="edit"
                     element={<ResourcesNodeForm type="edit" />}

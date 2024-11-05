@@ -1,13 +1,14 @@
 import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import { AuthorizedUserProps } from "@/hooks/useUser";
+import { DefaultUser } from "@/hooks/useUser";
 import { useContext } from "react";
 import { ProjectDetailsProps } from "@/api/Project/Querys/useGetProject";
 import { AdminContext } from "@/outlets/AdminOutlet";
+import { Organization } from "@/api/Organization/Querys/useGetOrganization";
 
 interface ReturnProps {
-  users: AuthorizedUserProps[];
-  organizations: OrganizationProps[];
+  users: AdminDataUser[];
+  organizations: Organization[];
   flatProjects: FlatProject[];
 }
 
@@ -17,18 +18,12 @@ export interface DeleteUserProps {
 }
 
 export interface AdminProps {
-  user: AuthorizedUserProps[];
-  organizations: OrganizationProps[];
+  user: AdminDataUser[];
+  organizations: Organization[];
 }
 
-export interface OrganizationProps {
-  hashedID: string;
-  name: string;
-  canManufacture: boolean;
-  details: any;
-  createdWhen: Date;
-  updatedWhen: Date;
-  accessedWhen: Date;
+export interface AdminDataUser extends DefaultUser {
+  organizationNames: string[];
 }
 
 export interface AdminFlatProjectProps {

@@ -8,6 +8,7 @@ import useProcess from "@/hooks/Process/useProcess";
 import CheckIcon from "@mui/icons-material/Check";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ProcessFileView from "@/components/Process/File/FileView";
+import { UserType } from "@/hooks/useUser";
 
 interface ProcessRequestProps {}
 
@@ -18,7 +19,10 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
   const { process } = useProcess();
   const [showFiles, setShowFiles] = React.useState<boolean>(false);
 
-  const isClient = user.hashedID === process.client;
+  const isClient =
+    (user.hashedID === process.client && user.usertype === UserType.USER) ||
+    (user.usertype === UserType.ORGANIZATION &&
+      process.client === user.organization);
   const clientVerified =
     isClient && process.processStatus === ProcessStatus.VERIFYING_COMPLETED;
   const clientRequested =

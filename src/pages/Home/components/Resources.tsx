@@ -3,15 +3,19 @@ import { Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import HomeContainer from "./Container";
+import useUser, { UserType } from "@/hooks/useUser";
 
-interface HomeResourcesProps {}
+interface HomeOrgaResourcesProps {}
 
-const HomeResources: React.FC<HomeResourcesProps> = (props) => {
+const HomeOrgaResources: React.FC<HomeOrgaResourcesProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
+  const { user } = useUser();
+
+  if (user.usertype !== UserType.ORGANIZATION) return null;
 
   return (
-    <HomeContainer className="flex-row gap-5 bg-white p-10">
+    <HomeContainer>
       <Heading variant="h2">{t("Home.components.Resources.title")}</Heading>
       <Container width="full">
         <Button
@@ -35,4 +39,4 @@ const HomeResources: React.FC<HomeResourcesProps> = (props) => {
   );
 };
 
-export default HomeResources;
+export default HomeOrgaResources;

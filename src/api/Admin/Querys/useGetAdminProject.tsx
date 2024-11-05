@@ -39,6 +39,7 @@ const useGetAdminProject = () => {
               files: getProcessFiles(process.files),
               accessedWhen: new Date(process.accessedWhen),
               processStatusButtons: process.processStatusButtons,
+              processErrors: process.processErrors,
             })
           ),
         };

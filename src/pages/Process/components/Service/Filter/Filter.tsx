@@ -121,16 +121,21 @@ const ProcessFilter: React.FC<Props> = (props) => {
     <Container
       width="full"
       direction="col"
-      className="gap-0 rounded-xl border-2 p-5"
+      className="gap-0 rounded-md border-2 p-0 pb-5"
     >
-      <Container width="full" justify="start">
+      <Container width="full" justify="start" className="p-5 pb-2">
         <Heading variant="h3">
           {t("Process.components.Filter.Filter.pageTitle")}
         </Heading>
       </Container>
+      <Container width="full" direction="col" className="gap-0 p-2">
+        <Text>{t("Process.components.Filter.Filter.pageDescription1")}</Text>
+        <Text>{t("Process.components.Filter.Filter.pageDescription2")}</Text>
+      </Container>
+      <Divider />
 
       <Collapsible initialOpen showButton logName="Filter" animation={false}>
-        <Container width="full" direction="col" className="my-5">
+        <Container width="full" direction="col" className="p-5">
           <Container width="full" direction="col">
             <Container width="full" direction="col" className="gap-0 p-0">
               <Container
@@ -138,7 +143,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
                 width="full"
                 wrap="wrap"
                 justify="start"
-                className="gap-0 px-5 md:pl-5"
+                className="gap-0 "
               >
                 {categoryList.map((category, index, allCategorys) => (
                   <Badge
@@ -154,12 +159,12 @@ const ProcessFilter: React.FC<Props> = (props) => {
                       className={`rounded-none border-2 border-b-0 border-gray-400 shadow-none
                         ${
                           index === 0
-                            ? "rounded-t-xl md:rounded-tl-xl md:rounded-tr-none md:border-r-0"
+                            ? "rounded-t-md md:rounded-tl-md md:rounded-tr-none md:border-r-0"
                             : ""
                         } 
                       ${
                         index === allCategorys.length - 1
-                          ? "md:rounded-tr-xl  md:border-l-0 "
+                          ? "md:rounded-tr-md  md:border-l-0 "
                           : ""
                       }`}
                     />
@@ -172,7 +177,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
                 direction="col"
                 align="center"
                 wrap="wrap"
-                className="gap-3  rounded-xl border-2 border-gray-400 p-5"
+                className="gap-3  rounded-md rounded-tl-none border-2 border-gray-400 p-5"
               >
                 {categoryList.filter((category) => category.open).length > 0 ? (
                   categoryList
@@ -228,6 +233,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
             </Container>
           </Container>
         </Container>
+        <Divider />
       </Collapsible>
     </Container>
   );

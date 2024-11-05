@@ -21,7 +21,7 @@ const PrioritiesForm: React.FC<PrioritiesFormProps> = (props) => {
   const freePoints = maxPoints - usedPoints;
 
   return (
-    <Container width="full" direction="col">
+    <Container width="full" direction="col" id="PrioritiesForm">
       <Heading variant="h2">
         {t("components.Form.PrioritiesForm.header")}
       </Heading>

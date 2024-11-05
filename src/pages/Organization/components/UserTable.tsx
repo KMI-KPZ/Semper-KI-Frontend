@@ -26,7 +26,12 @@ const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
   const rolesQuery = useGetOrganizationRoles();
   const userQuery = useGetOrganizationUsers();
   return (
-    <Container className="container" width="full" direction="col">
+    <Container
+      className="container"
+      width="full"
+      direction="col"
+      id="OrganizationUserTable"
+    >
       <Heading variant="h2">
         {t("Organization.components.table.header")}
       </Heading>

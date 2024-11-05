@@ -22,7 +22,7 @@ export const ProcessModelCard: React.FC<PropsWithChildren<Props>> = (props) => {
 
   return (
     <Container
-      className="w-fit min-w-[350px] max-w-[45%] gap-0 rounded-xl border-2 bg-white"
+      className="w-fit min-w-[350px] max-w-[45%] gap-0 rounded-md border-2 bg-white"
       direction="col"
     >
       {/* {modelFile.isLoading || modelFile.data === undefined ? (

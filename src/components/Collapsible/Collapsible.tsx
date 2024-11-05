@@ -80,15 +80,15 @@ const Collapsible: React.FC<PropsWithChildren<CollapsibleProps>> = (props) => {
       {showButton ? (
         <Button
           title={t(
-            `Process.components.Info.button.${expand ? "collapse" : "expand"}`
+            `components.Collapsible.button.${expand ? "collapse" : "expand"}`
           )}
           onClick={handleOnClickButton}
           variant="text"
-          className="gap-2"
+          className="gap-2 pt-3"
         >
           <Text variant="body">
             {t(
-              `Process.components.Info.button.${expand ? "collapse" : "expand"}`
+              `components.Collapsible.button.${expand ? "collapse" : "expand"}`
             )}
           </Text>
           <div

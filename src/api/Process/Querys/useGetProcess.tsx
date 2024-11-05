@@ -26,17 +26,26 @@ export interface ProcessDetailsProps {
   priorities: OrganizationPriority[];
 }
 
+export type ProcessError =
+  | "Service-ADDITIVE_MANUFACTURING-models"
+  | "Service-ADDITIVE_MANUFACTURING-materials"
+  | "ServiceManufacturingPostProcessing"
+  | "Process-Contractor"
+  | "Process-Address-Billing"
+  | "Process-Address-Deliver";
+
 export type Process = NoServiceProcessProps | DefinedProcess;
 
 export type DefinedProcess = ManufactoringProcessProps | ModelingProcessProps;
 
 export type DefaultProcessProps = {
   client: string;
-  contractor: string;
+  contractor: { name: string; hashedID: string };
   processID: string;
   processStatus: ProcessStatus;
   processStatusButtons?: StatusButtonPropsExtern[];
   processDetails: ProcessDetailsProps;
+  processErrors: ProcessError[];
   serviceType: ServiceType;
   serviceStatus: number;
   serviceDetails: ServiceProps;

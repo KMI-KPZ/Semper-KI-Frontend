@@ -107,7 +107,7 @@ const ProfileAPIToken: React.FC<ProfileAPITokenProps> = (props) => {
                 onClick={handleOnClickInput}
                 type="text"
                 value={createApiToken.data}
-                className="w-[430px] select-all rounded-xl border-2 px-5 py-2 text-center"
+                className="w-[430px] select-all rounded-md border-2 px-5 py-2 text-center"
               />
               <Button
                 size="sm"

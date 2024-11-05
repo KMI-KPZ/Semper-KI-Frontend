@@ -123,7 +123,7 @@
       "MUILTISELECT": "Mehrfachauswahl"
     },
     "FilterCategoryType": {
-      "SELECTED": "Ausgewählte Vorgaben",
+      "SELECTED": "Alle Ausgewählte Vorgaben",
       "GENERAL": "Allgemein",
       "MODEL": "Modell",
       "MATERIAL": "Material",
@@ -235,29 +235,38 @@
       "color": "Farbe",
       "number": "Zahl",
       "multiselection": "Mehrfachauswahl"
-    }
-  },
-  "api": {
-    "Process": {
-      "Files": {
-        "useDownloadZIP": {
-          "contract": "Angebot"
-        }
-      }
+    },
+    "ProcessError": {
+      "Service-ADDITIVE_MANUFACTURING-models": "Bitte ein Modell auswählen/hochladen",
+      "Service-ADDITIVE_MANUFACTURING-materials": "Bitte ein Material auswählen",
+      "ServiceManufacturingPostProcessing": "Bitte eine Nachbearbeitung auswählen",
+      "Process-Contractor": "Bitte einen Auftragnehmer auswählen",
+      "Process-Address-Billing": "Bitte eine Rechnungsadresse auswählen",
+      "Process-Address-Deliver": "Bitte eine Lieferadresse auswählen"
+    },
+    "EventDataReason": {
+      "messages": "Nachricht",
+      "file": "neue Datei",
+      "files": "neue Dateien",
+      "serviceDetails": "Service Details geändert",
+      "serviceType": "Service Typ geändert",
+      "serviceStatus": "Service Status geändert",
+      "processDetails": "Prozess Details geändert",
+      "processStatus": "Prozess Status geändert",
+      "provisionalContractor": "Vorläufiger Auftragnehmer ausgewählt",
+      "dependenciesIn": "Abhängigkeiten Eingehend",
+      "dependenciesOut": "Abhängigkeiten Ausgehend",
+      "test": "Test",
+      "roleChanged": "Rolle Geändert",
+      "userDeleted": "Benutzer Gelöscht"
     }
   },
   "component-library": {
-    "Badege": {},
-    "Button": {},
-    "Container": {},
-    "Divider": {},
     "Error": {
       "incomplete": "Bitte {{name}} vervollständigen.",
       "empty": "Keine {{name}} vorhanden",
       "incorrect": "{{name}} ist nicht vorhanden"
     },
-    "Form": {},
-    "Input": {},
     "Loading": {
       "LoadingSuspense": {
         "loading": "Laden...",
@@ -272,19 +281,31 @@
         "close": "Schließen"
       }
     },
-    "Page": {},
-    "Search": {},
-    "Swicht": {},
-    "Typography": {}
+    "Search": {
+      "placeholder": "Suchen..."
+    },
+    "ToTopButton": {
+      "button": { "toTop": "Zum Anfang" }
+    }
+  },
+  "api": {
+    "Process": {
+      "Files": {
+        "useDownloadZIP": {
+          "contract": "Angebot"
+        }
+      }
+    },
+    "ContactForm": {
+      "Mutation": {
+        "useSendContactForm": {
+          "error": "Fehler beim Senden der Nachricht",
+          "success": "Nachricht erfolgreich gesendet"
+        }
+      }
+    }
   },
   "components": {
-    "Pagination": {
-      "next": "Weiter",
-      "previous": "Zurück"
-    },
-    "BackButton": {
-      "back": "Zurück"
-    },
     "Address": {
       "AddressCard": {
         "yes": "Ja",
@@ -298,81 +319,26 @@
         "selected": "Ausgewählt",
         "notSelected": "nicht ausgewählt",
         "standard": "Standard-Adresse:",
-        "buttons": {
+        "button": {
           "edit": "Bearbeiten",
           "delete": "Adresse löschen"
         }
       }
     },
-    "Form": {
-      "AddressForm": {
-        "header": "Adresse bearbeiten",
-        "labels": {
-          "firstName": "Vorname *",
-          "lastName": "Nachname *",
-          "company": "Firma",
-          "street": "Straße *",
-          "houseNumber": "Hausnummer *",
-          "zipcode": "Postleitzahl *",
-          "city": "Stadt *",
-          "country": "Land *",
-          "standard": "als Standardadresse verwenden"
-        },
-        "hint": "* Pflichtfeld",
-        "buttons": {
-          "save": "Speichern"
-        }
-      },
-      "OrganizationForm": {
-        "displayName": "Organisationsname",
-        "email": "Email",
-        "locale": "Sprache",
-        "notifications": "Benachrichtigungen",
-        "notifictionTypes": {
-          "email": "Email",
-          "event": "Event"
-        },
-        "supportedServices": "Services die Sie anbieten",
-        "branding_logo_url": "Logo URL",
-        "branding_colors_primary": "Primärfarbe",
-        "branding_colors_page_background": "Hintergrundfarbe",
-        "title": "Organisationinformationen bearbeiten",
-        "taxID": "Steuernummer",
-        "address": "Addresse",
-
-        "languages": {
-          "en-US": "English",
-          "de-DE": "Deutsch"
-        },
-        "button": {
-          "cancel": "Abbrechen",
-          "safe": "Speichern"
-        }
-      },
-      "ExampleForm": {
-        "title": "Organisationinformationen bearbeiten",
-        "text": "Text",
-        "count": "Anzahl",
-        "email": "Email",
-        "area": "Bereich",
-        "isTrue": "Ist Wahr",
-        "button": {
-          "reset": "Zurücksetzen",
-          "submit": "Senden"
-        }
-      },
-      "PrioritiesForm": {
-        "header": "Prioritäten",
-        "type": "Priorität",
-        "value": "Wichtigkeit",
-        "points": "Freie Punkte: {{freePoints}}",
-        "low": "Niedrig",
-        "medium": "Mittel",
-        "high": "Hoch"
+    "BackButtonContainer": {
+      "button": { "back": "Zurück" }
+    },
+    "Chatbot": {
+      "button": {
+        "open": "Assistent"
       }
     },
-    "Background": {},
-    "Breadcrumb": {},
+    "Collapsible": {
+      "button": {
+        "expand": "Mehr Anzeigen",
+        "collapse": "Weniger Anzeigen"
+      }
+    },
     "CookieBanner": {
       "heading": "Cookie-Zustimmung verwalten",
       "message": "Um dir ein optimales Erlebnis zu bieten, verwenden wir Technologien wie Cookies, um Geräteinformationen zu speichern und/oder darauf zuzugreifen. Wenn du diesen Technologien zustimmst, können wir Daten wie das Surfverhalten oder eindeutige IDs auf dieser Website verarbeiten. Wenn du deine Zustimmung nicht erteilst oder zurückziehst, können bestimmte Merkmale und Funktionen beeinträchtigt werden.",
@@ -396,49 +362,116 @@
       }
     },
     "Footer": {
-      "Footer": {
-        "imprint": "Impressum",
-        "privacy": "Datenschutzerklärung",
-        "contact": "Kontakt",
-        "data-protection": "Datenschutzerklärung",
-        "instagram": "Instagram",
-        "mastodon": "Mastodon"
+      "imprint": "Impressum",
+      "privacy": "Datenschutzerklärung",
+      "contact": "Kontakt",
+      "data-protection": "Datenschutzerklärung",
+      "instagram": "Instagram",
+      "mastodon": "Mastodon"
+    },
+    "Form": {
+      "NotificationForm": {
+        "heading": "Benachrichtungen",
+        "email": "E-Mail",
+        "event": "Event",
+        "button": {
+          "save": "Speichern",
+          "edit": "Bearbeiten"
+        }
+      },
+      "PrioritiesForm": {
+        "header": "Prioritäten",
+        "type": "Priorität",
+        "value": "Wichtigkeit",
+        "points": "Freie Punkte: {{freePoints}}",
+        "low": "Niedrig",
+        "medium": "Mittel",
+        "high": "Hoch"
+      },
+      "AddressForm": {
+        "header": "Adresse bearbeiten",
+        "labels": {
+          "firstName": "Vorname *",
+          "lastName": "Nachname *",
+          "company": "Firma",
+          "street": "Straße *",
+          "houseNumber": "Hausnummer *",
+          "zipcode": "Postleitzahl *",
+          "city": "Stadt *",
+          "country": "Land *",
+          "standard": "als Standardadresse verwenden"
+        },
+        "hint": "* Pflichtfeld",
+        "button": {
+          "save": "Speichern"
+        }
       },
       "ContactForm": {
-        "title": "Kontaktformular",
+        "heading": "Kontaktformular",
         "subject": "Betreff",
         "message": "Nachricht",
-        "button": "Senden",
         "name": "Name",
         "email": "E-Mail-Adresse",
-        "error": "Fehler beim Senden der Nachricht",
-        "success": "Nachricht erfolgreich gesendet"
+        "button": { "send": "Senden" }
+      },
+      "ExampleForm": {
+        "heading": "Organisationinformationen bearbeiten",
+        "text": "Text",
+        "count": "Anzahl",
+        "email": "Email",
+        "area": "Bereich",
+        "isTrue": "Ist Wahr",
+        "button": {
+          "reset": "Zurücksetzen",
+          "submit": "Senden"
+        }
+      },
+      "OrganizationForm": {
+        "heading": "Organisationinformationen bearbeiten",
+        "displayName": "Organisationsname",
+        "email": "Email",
+        "name": "Name der Organisation",
+        "adress": "Addresse der Organisation",
+        "services": "Services die Sie anbieten",
+        "locale": "Sprache",
+        "supportedServices": "Services die Sie anbieten",
+        "branding_logo_url": "Logo URL",
+        "branding_colors_primary": "Primärfarbe",
+        "branding_colors_page_background": "Hintergrundfarbe",
+        "taxID": "Steuernummer",
+        "address": "Addresse",
+        "notifications": "Benachrichtigungen",
+        "notifictionTypes": {
+          "email": "Email",
+          "event": "Event"
+        },
+        "languages": {
+          "en-US": "English",
+          "de-DE": "Deutsch"
+        },
+        "button": {
+          "cancel": "Abbrechen",
+          "safe": "Speichern"
+        }
       }
     },
     "Header": {
-      "Header": {
-        "title": "SEMPER-KI",
-        "button": {
-          "close": "Menu Schließen",
-          "open": "Menu Öffnen"
-        }
+      "button": {
+        "home": "SEMPER-KI",
+        "close": "Menu Schließen",
+        "open": "Menu Öffnen",
+        "events": "Benachrichtigungen"
       },
-      "HeaderData": {
-        "about-us": "Über uns",
-        "login": "Anmelden",
-        "register": "Registrieren",
-        "continue": "Fortfahren",
-        "cart": "Warenkorb",
-        "logout": "Abmelden",
-        "orders": "Aufträge",
-        "contracts": "Verträge",
-        "account": "Konto",
-        "test": "Test",
-        "guide": "Wegweiser"
-      },
-      "HeaderItem": {}
+      "Invoice": {
+        "title": "Benachrichtigungen",
+        "noEvents": "Keine Benachrichtigungen",
+        "close": "Schließen",
+        "delete": "Löschen",
+        "deleteAll": "Alle Löschen"
+      }
     },
     "Menu": {
+      "button": { "close": "Menu Schließen" },
       "components": {
         "LanguageMenu": {
           "button": {
@@ -452,6 +485,7 @@
     "PermissionGate": {
       "message": "Diese Funktion ist mit ihren Rechten nicht nutzbar"
     },
+
     "PMenu": {
       "button": { "open": "Menu Öffnen", "close": "Menu Schließen" }
     },
@@ -462,8 +496,6 @@
         "button": "Datei auswählen"
       }
     },
-    "Switch": {},
-    "Table": {},
     "Upload": {
       "title_one": "Weitere Datei hochladen",
       "title_other": "Weitere Dateien hochladen",
@@ -473,10 +505,10 @@
       "client": "Einzelnutzer",
       "organization": "Organisation"
     },
-    "Chatbot": {
-      "button": {
-        "open": "Assistent"
-      }
+
+    "Pagination": {
+      "next": "Weiter",
+      "previous": "Zurück"
     }
   },
   "contexts": {
@@ -558,10 +590,42 @@
       "updated": "Updated",
       "actions": "Aktionen",
       "canManufacturer": "Hersteller",
+      "ServiceType": "Services",
       "button": {
         "delete": "Löschen"
       },
-      "confirm": "Organisation wirklich löschen?"
+      "confirm": "Organisation {{name}} wirklich löschen?",
+      "details": {
+        "title": "Organisationdetails",
+        "general": "Allgemeine Informationen",
+        "hashedID": "Hashed ID",
+        "name": "Name",
+        "details": "Details",
+        "createdWhen": "Erstellt am",
+        "updatedWhen": "Aktualisiert am",
+        "accessedWhen": "Zugegriffen am",
+        "services": "Services",
+        "priorities": "Prioritäten",
+        "notificationSettings": "Benachrichtigungseinstellungen",
+        "empty": "Leer",
+        "email": "Email",
+        "created": "Erstellt",
+        "accessed": "Zugegriffen",
+        "updated": "Aktualisiert",
+        "actions": "Aktionen",
+        "canManufacturer": "Hersteller",
+        "confirm": "Bestätigen",
+        "locale": "Sprache",
+        "branding": "Branding",
+        "adresses": "Adressen",
+        "dates": "Daten",
+        "taxID": "Steuernummer",
+        "primaryColor": "Primärfarbe",
+        "pageBackground": "Hintergrundfarbe",
+        "event": "Event",
+        "button": { "edit": "Bearbeiten" }
+      },
+      "form": { "title": "Organisationinformationen bearbeiten" }
     },
     "Projects": {
       "header": "Projekte",
@@ -578,7 +642,7 @@
         "show": "Anzeigen",
         "delete": "Löschen"
       },
-      "confirm": "Auftrag wirklich löschen?"
+      "confirm": "Den Auftrag {{name}} wirklich löschen?"
     },
     "User": {
       "orga": "Organisationen",
@@ -591,12 +655,23 @@
       "updated": "Aktualisiert",
       "lastSeen": "Letzte Anmeldung",
       "actions": "Aktionen",
-      "search": "Suchen...",
+      "userType": "Benutzertyp",
+      "locale": "Sprache",
+      "lastLogin": "Letzte Anmeldung am",
+      "locationOfLastLogin": "Standort der letzten Anmeldung",
+      "numberOfLoginsTotal": "Anzahl der Anmeldungen insgesamt",
+      "general": "Allgemeine Informationen",
+      "statistics": "Statistiken",
+      "dates": "Daten",
+      "adresses": "Adressen",
       "button": {
         "delete": "Löschen",
-        "search": "Suchen"
+        "search": "Suchen",
+        "edit": "Bearbeiten"
       },
-      "confirm": "User wirklich löschen?"
+      "confirm": "User wirklich löschen?",
+      "details": { "title": "Benutzerdetails" },
+      "form": { "title": "Benutzer bearbeiten" }
     },
     "Admin": {
       "title": "Adminbereich",
@@ -768,6 +843,39 @@
         "advantage": "Ihre Vorteile als Privatperson",
         "register": "Als Privatperson Registrieren"
       },
+      "HomeUserProgress": {
+        "progress": "Fortschritt {{count}} von {{total}}",
+        "todo": "Einrichtung des Profils",
+        "finished": "Einrichtung abgeschlossen",
+        "items": {
+          "general": "Allgemeine Informationen hinzufügen",
+          "notificationSettings": "Benachrichtigungseinstellungen festlegen",
+          "adresses": "Adressen hinzufügen",
+          "lang": "Sprache festlegen"
+        },
+        "button": {
+          "orga": "Profil"
+        }
+      },
+      "HomeOrgaAccountProgress": {
+        "progress": "Fortschritt {{count}} von {{total}}",
+        "todo": "Einrichtung der Organisation",
+        "finished": "Einrichtung abgeschlossen",
+        "items": {
+          "general": "Allgemeine Informationen hinzufügen",
+          "services": "Services auswählen",
+          "resources": "Ressourcen hinzufügen",
+          "priorities": "Prioritäten setzen",
+          "notificationSettings": "Benachrichtigungseinstellungen festlegen",
+          "branding": "Branding festlegen",
+          "adresses": "Adressen hinzufügen",
+          "user": "Benutzer hinzufügen",
+          "lang": "Sprache festlegen"
+        },
+        "button": {
+          "orga": "Organisation"
+        }
+      },
       "Container": {},
       "Coypu": {
         "title": "Coypu News",
@@ -798,6 +906,7 @@
       },
       "Organization": {
         "title": "Organisation",
+
         "button": {
           "edit": "Oragnisation verwalten"
         }
@@ -961,19 +1070,6 @@
       "noService": "keine Services ",
       "button": {
         "edit": "Bearbeiten"
-      },
-      "components": {
-        "form": {
-          "title": "Organisationinformationen bearbeiten",
-          "name": "Name der Organisation",
-          "taxID": "Steuernummer der Organisation",
-          "email": "Email der Organisation",
-          "adress": "Addresse der Organisation",
-          "services": "Services die Sie anbieten",
-          "button": {
-            "safe": "Speichern"
-          }
-        }
       }
     },
     "components": {
@@ -1113,15 +1209,7 @@
         "cancel": "Abbrechen"
       }
     },
-    "notifications": {
-      "header": "Benachrichtungen",
-      "email": "E-Mail",
-      "event": "Event",
-      "buttons": {
-        "save": "Speichern",
-        "edit": "Bearbeiten"
-      }
-    },
+
     "notification": {
       "email": "Email",
       "event": "Event"
@@ -1147,6 +1235,8 @@
       "Filter": {
         "Filter": {
           "menuButtonTitle": "Filter Menu",
+          "pageDescription1": "Hier können Sie ihre Vorgaben für den Prozess festlegen.",
+          "pageDescription2": "Dies hilft ihnen die Auswahl zu vereinfachen.",
           "pageTitle": "Ihre Vorgaben",
           "button": {
             "selected": "Ausgewählt"
@@ -1160,8 +1250,7 @@
         "status": "Prozessstatus:",
         "button": {
           "menu": "Informationen Menu",
-          "expand": "Mehr Anzeigen",
-          "collapse": "Weniger Anzeigen",
+
           "editTitle": "Prozessname bearbeiten"
         }
       },
@@ -1176,6 +1265,11 @@
       },
       "ContractorSelection": {
         "components": {
+          "ContractorCondition": {
+            "heading": "Angaben Unvollständig",
+            "noContractor": "Kein Auftragnehmer ausgewählt",
+            "noAddress": "keine Adressen ausgewählt"
+          },
           "AddressSelection": {
             "heading": "Addresse auswählen",
             "button": {
@@ -1370,8 +1464,15 @@
       "ServiceDetails": {
         "components": {
           "manufacturing": {
+            "heading": "Ihre Auswahl",
+            "pageDescription1": "Wählen sie die gewünschten Modelle, Materialien und Nachbearbeitungen aus.",
+            "pageDescription2": "Diese Auswahl wird verwendet um die passenden Hersteller zu finden.",
+            "complete": "Auswahl Vollständig",
+            "incomplete": "Auswahl Unvollständig",
             "model": {
-              "heading": "Modelle:",
+              "heading": "Modelle",
+              "complete": "Modell(e) Vollständig",
+              "incomplete": "Modell(e) Unvollständig",
               "noModels": "keine Modelle vorhanden",
               "img": "Modelbild",
               "name": "Name:",
@@ -1380,7 +1481,9 @@
               "volume": "Volumen"
             },
             "material": {
-              "heading": "Material:",
+              "heading": "Material",
+              "complete": "Material(en) Vollständig",
+              "incomplete": "Material(en) Unvollständig",
               "noMaterial": "kein Material ausgewählt",
               "selected": "Ausgewählt",
               "img": "Materialbild",
@@ -1389,7 +1492,9 @@
               "properties": "Eigenschaften:"
             },
             "postProcessing": {
-              "heading": "Nachbearbeitungen:",
+              "heading": "Nachbearbeitungen (Optional)",
+              "complete": "Nachbearbeitung(en) Vollständig",
+              "incomplete": "Nachbearbeitung(en) Unvollständig",
               "noPostProcessings": "keine Nachbearbeitungen ausgewählt",
               "name": "name",
               "img": "Nachbearbeitungsbild",
@@ -1398,6 +1503,7 @@
             },
             "button": {
               "add": "Hinzufügen",
+              "addMore": "Weitere hinzufügen",
               "addModel": "Modell hinzufügen",
               "addMaterial": "Material hinzufügen",
               "addPostProcessing": "Nachbearbeitung hinzufügen",
@@ -1449,6 +1555,9 @@
       "button": {
         "back": "Zurück"
       }
+    },
+    "StatusButtons": {
+      "heading": "Todos"
     }
   },
   "Project": {
@@ -1667,12 +1776,12 @@
         "useStatusButtons": {
           "NONE": "Translation error",
           "DELETE": "Prozess löschen",
-          "BACK-TO-SERVICE_READY": "Zurück zur Servicebearbeitung",
-          "BACK-TO-DRAFT": "Zurück zur Serviceauswahl",
-          "BACK-TO-SERVICE_COMPLETED": "Zurück zur Auftragnehmerauswahl",
-          "BACK-TO-CONTRACTOR_COMPLETED": "Zurück zur Überprüfung",
-          "FORWARD-TO-SERVICE_COMPLETED": "Weiter zur Auftragnehmerauswahl",
-          "FORWARD-TO-CONTRACTOR_COMPLETED": "Weiter zur Überprüfung",
+          "BACK-TO-SERVICE_READY": "Zurück",
+          "BACK-TO-DRAFT": "Zurück",
+          "BACK-TO-SERVICE_COMPLETED": "Zurück",
+          "BACK-TO-CONTRACTOR_COMPLETED": "Zurück",
+          "FORWARD-TO-SERVICE_COMPLETED": "Weiter",
+          "FORWARD-TO-CONTRACTOR_COMPLETED": "Weiter",
           "FORWARD-TO-VERIFYING": "Überprüfen Starten",
           "FORWARD-TO-VERIFICATION_COMPLETED": "Überprüfung abschließen",
           "FORWARD-TO-REQUEST_COMPLETED": "Anfrage senden",
@@ -1970,7 +2079,8 @@
         "noProperties": "keine Eigenschaften vorhanden",
         "button": {
           "draft": "Vorlage auswählen",
-          "variant": "Variante erstellen"
+          "variant": "Variante erstellen",
+          "edit": "Bearbeiten"
         }
       },
       "Menu": {

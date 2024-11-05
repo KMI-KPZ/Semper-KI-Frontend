@@ -54,7 +54,7 @@ const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
     <Container width="full" direction="col" gap={3} className="pb-3">
       <Search handleSearchInputChange={handleSearchInputChange} />
       <Container
-        className="rounded-xl border-2 p-5"
+        className="rounded-md border-2 p-5"
         direction="row"
         wrap="wrap"
       >

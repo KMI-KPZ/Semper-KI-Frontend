@@ -56,7 +56,7 @@ const CreateProjectTitleForm: React.FC<CreateProjectTitleFormProps> = (
             {...register("name", { required: true })}
             onKeyDown={handleKeyDown}
             placeholder={t("Projects.components.TitleForm.name")}
-            className="w-fit rounded-xl border-2 bg-gray-100 p-2"
+            className="w-fit rounded-md border-2 bg-gray-100 p-2"
           />
           {errors.name ? (
             <Text variant="error">

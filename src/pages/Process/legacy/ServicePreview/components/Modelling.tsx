@@ -18,7 +18,7 @@ const ProcessServiceModelling: React.FC<ProcessServiceModellingProps> = (
     <Container>
       <Text variant="body">
         {t(
-          "Projects.Project.Process.ServicePreview.components.Modelling.title"
+          "Projects.Project.Process.ServicePreview.components.Modelling.heading"
         )}
       </Text>
     </Container>

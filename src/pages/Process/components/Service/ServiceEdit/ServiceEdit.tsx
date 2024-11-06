@@ -17,9 +17,9 @@ const ServiceEdit: React.FC<ServiceEditProps> = (props) => {
       return (
         <Navigate to={`/projects/${project.projectID}/${process.processID}`} />
       );
-    case ServiceType.MANUFACTURING:
+    case ServiceType.ADDITIVE_MANUFACTURING:
       return <Navigate to="manufacturing" />;
-    case ServiceType.MODELING:
+    case ServiceType.CREATE_MODEL:
       return <Navigate to="modeling" />;
   }
 

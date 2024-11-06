@@ -52,7 +52,7 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
 
   const menuButtonTitle = t("Process.components.Request.Request.button.menu");
   const pageTitle = `${t(
-    "Process.components.Request.Request.title"
+    "Process.components.Request.Request.heading"
   )}: ${getTitle()}`;
 
   const handleOnButtonClickFile = () => {

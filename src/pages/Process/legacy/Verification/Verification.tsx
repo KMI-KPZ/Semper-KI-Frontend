@@ -54,7 +54,7 @@ const ProcessVerification: React.FC<Props> = (props) => {
   return (
     <div className="flex w-full flex-col items-center gap-5">
       <Heading variant="h1">
-        {t("Projects.Project.Verification.Verification.title")}
+        {t("Projects.Project.Verification.Verification.heading")}
       </Heading>
       <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5 md:flex-row">
         <Button

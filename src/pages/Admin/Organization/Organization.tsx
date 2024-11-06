@@ -1,7 +1,7 @@
 import { Container, Heading, Search, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useAdmin from "../hooks/useAdmin";
+import useAdmin from "../../../hooks/useAdmin";
 import { Button } from "@component-library/index";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
@@ -50,7 +50,7 @@ const AdminOrganization: React.FC<AdminOrganization> = (props) => {
   return (
     <Container width="full" direction="col" className="bg-white p-5">
       <BackButtonContainer>
-        <Heading variant="h1">{t("Admin.Organization.title")}</Heading>
+        <Heading variant="h1">{t("Admin.Organization.heading")}</Heading>
       </BackButtonContainer>
       <Search handleSearchInputChange={handleSearchInputChange} />
       <TableContainer>

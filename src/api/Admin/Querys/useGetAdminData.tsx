@@ -1,13 +1,13 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
-import { AdminProps, AdminDataUser } from "@/pages/Admin/hooks/useAdmin";
 import useUser, { UserType } from "@/hooks/useUser";
 import { parseAuthorizedUser } from "@/api/User/Querys/useGetUser";
 import {
   Organization,
   parseOrganization,
 } from "@/api/Organization/Querys/useGetOrganization";
+import { AdminDataUser, AdminProps } from "@/hooks/useAdmin";
 
 const parseAdminUser = (userData: any): AdminDataUser => {
   const authorizedUser = parseAuthorizedUser(userData);

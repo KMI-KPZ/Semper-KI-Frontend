@@ -56,7 +56,7 @@ const ModelDetails: React.FC<ModelDetailsProps> = (props) => {
         <Container direction="col">
           <Heading variant="h1">
             {t(
-              "Projects.Project.Process.ServicePreview.components.ModelDetails.title"
+              "Projects.Project.Process.ServicePreview.components.ModelDetails.heading"
             )}
           </Heading>
           <Container direction="row" justify="between" width="full">

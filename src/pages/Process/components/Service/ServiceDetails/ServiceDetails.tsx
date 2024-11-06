@@ -2,6 +2,7 @@ import { Process } from "@/api/Process/Querys/useGetProcess";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import React from "react";
 import ServiceManufacturingView from "./Manufacturing/Manufacturing";
+import { Container, Text } from "@component-library/index";
 
 interface ServiceProps {
   process: Process;
@@ -11,14 +12,15 @@ const ServiceDetails: React.FC<ServiceProps> = (props) => {
   const { process } = props;
 
   switch (process.serviceType) {
-    case ServiceType.MANUFACTURING:
+    case ServiceType.ADDITIVE_MANUFACTURING:
       return <ServiceManufacturingView process={process} />;
-    case ServiceType.MODELING:
-      return <div>MODELING</div>;
-    case ServiceType.NONE:
-      return <div>NONE</div>;
     default:
-      return <div>default</div>;
+      return (
+        <Container direction="col">
+          <Text>Dummy Service</Text>
+          <Text>Service noch nicht angelegt</Text>
+        </Container>
+      );
   }
 };
 

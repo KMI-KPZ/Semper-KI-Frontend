@@ -14,7 +14,9 @@ const ResourcesOutlet: React.FC<PropsWithChildren<ResourcesOutletProps>> = (
   const { organization } = useOrganization();
   const { t } = useTranslation();
 
-  if (organization.supportedServices.includes(ServiceType.MANUFACTURING))
+  if (
+    organization.supportedServices.includes(ServiceType.ADDITIVE_MANUFACTURING)
+  )
     return (
       <>
         {children}

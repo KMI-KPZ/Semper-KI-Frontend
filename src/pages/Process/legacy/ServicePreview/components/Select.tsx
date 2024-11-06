@@ -25,9 +25,9 @@ const ProcessServiceSelect: React.FC<ProcessServiceSelectProps> = (props) => {
 
   const getIcon = (serviceType: ServiceType) => {
     switch (serviceType) {
-      case ServiceType.MANUFACTURING:
+      case ServiceType.ADDITIVE_MANUFACTURING:
         return <FactoryIcon />;
-      case ServiceType.MODELING:
+      case ServiceType.CREATE_MODEL:
         return <ViewInArIcon />;
       default:
         return <DesignServicesIcon />;

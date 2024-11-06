@@ -41,7 +41,7 @@ const ProjectCheckout: React.FC<ProjectCheckoutProps> = (props) => {
   return (
     <div className="flex w-full flex-col items-center gap-5">
       <Heading variant="h1">
-        {t("Projects.Project.Checkout.Checkout.title")}
+        {t("Projects.Project.Checkout.Checkout.heading")}
       </Heading>
       <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5 md:flex-row">
         <Button

@@ -7,7 +7,7 @@ import {
   Modal,
   Text,
 } from "@component-library/index";
-import useAdmin from "../hooks/useAdmin";
+import useAdmin from "../../../hooks/useAdmin";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import BackButtonContainer from "@/components/BackButtonContainer/BackButtonContainer";
 import { Organization } from "@/api/Organization/Querys/useGetOrganization";
@@ -68,7 +68,7 @@ const AdminOrganizationDetails: React.FC<AdminOrganizationDetailsProps> = (
       <Container width="full" direction="col" className="bg-white p-5">
         <BackButtonContainer>
           <Heading variant="h1">
-            {t("Admin.Organization.details.title")}
+            {t("Admin.Organization.details.heading")}
           </Heading>
         </BackButtonContainer>
         <table className="w-fit table-auto border-collapse border-spacing-x-4  border-spacing-y-1 rounded-md border-2">

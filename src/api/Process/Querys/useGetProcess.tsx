@@ -62,12 +62,12 @@ export type NoServiceProcessProps = {
 } & DefaultProcessProps;
 
 export type ManufactoringProcessProps = {
-  serviceType: ServiceType.MANUFACTURING;
+  serviceType: ServiceType.ADDITIVE_MANUFACTURING;
   serviceDetails: ManufacturingServiceProps;
 } & DefaultProcessProps;
 
 export type ModelingProcessProps = {
-  serviceType: ServiceType.MODELING;
+  serviceType: ServiceType.CREATE_MODEL;
   serviceDetails: ModelingServiceProps;
 } & DefaultProcessProps;
 

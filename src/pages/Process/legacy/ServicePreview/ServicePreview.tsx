@@ -20,9 +20,9 @@ const ProcessServicePreview: React.FC<ProcessServicePreviewProps> = (props) => {
     switch (process.serviceType) {
       case ServiceType.NONE:
         return <ProcessServiceSelect process={process} />;
-      case ServiceType.MANUFACTURING:
+      case ServiceType.ADDITIVE_MANUFACTURING:
         return <ProcessServiceManufacturing process={process} />;
-      case ServiceType.MODELING:
+      case ServiceType.CREATE_MODEL:
         return <ProcessServiceModelling process={process} />;
     }
   };
@@ -31,7 +31,7 @@ const ProcessServicePreview: React.FC<ProcessServicePreviewProps> = (props) => {
     <div className="flex w-full flex-col items-center justify-center gap-5 pt-5 md:p-0">
       <div className="flex w-full flex-col items-start gap-3 md:flex-row md:items-center">
         <Heading variant="h3" className="whitespace-nowrap">
-          {t("Projects.Project.Process.ServicePreview.ServicePreview.title")}{" "}
+          {t("Projects.Project.Process.ServicePreview.ServicePreview.heading")}{" "}
           {t(
             `enum.ServiceType.${
               ServiceType[process.serviceType] as keyof typeof ServiceType

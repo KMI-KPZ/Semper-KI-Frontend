@@ -62,18 +62,18 @@ const Login: React.FC<Props> = (props) => {
       <Container direction="col" className="bg-white p-5 md:px-20">
         <PersonIcon style={{ fontSize: "45px", color: "#263652" }} />
         <Container>
-          <Heading variant="h2">{t("Login.Login.client")}</Heading>
+          <Heading variant="h2">{t("Login.client")}</Heading>
         </Container>
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Button
             onClick={handleOnClickButtonLoginClient}
-            title={t("Login.Login.buttons.login")}
+            title={t("Login.button.login")}
             startIcon={<LoginIcon />}
             variant="primary"
           />
           <Button
             onClick={handleOnClickButtonRegisterClient}
-            title={t("Login.Login.buttons.register")}
+            title={t("Login.button.register")}
             startIcon={<CreateIcon />}
           />
         </div>
@@ -81,29 +81,29 @@ const Login: React.FC<Props> = (props) => {
       <Container direction="col" className="bg-white p-5 md:px-20">
         <CorporateFareIcon style={{ fontSize: "45px", color: "#263652" }} />
         <Container>
-          <Heading variant="h2">{t("Login.Login.orga")}</Heading>
+          <Heading variant="h2">{t("Login.orga")}</Heading>
         </Container>
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <Button
             onClick={handleOnClickButtonLoginOrga}
-            title={t("Login.Login.buttons.login")}
+            title={t("Login.button.login")}
             startIcon={<LoginIcon />}
             variant="primary"
           />
           <Button
             onClick={handleOnClickButtonRegisterOrga}
-            title={t("Login.Login.buttons.register")}
+            title={t("Login.button.register")}
             startIcon={<CreateIcon />}
           />
         </div>
       </Container>
       {process.env.NODE_ENV === "development" ? (
         <Container direction="col" className="bg-white p-5">
-          <Heading variant="h1">{t("Login.Login.admin")}</Heading>
+          <Heading variant="h1">{t("Login.admin")}</Heading>
           <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
             <Button
               onClick={() => handleOnClickButtonMockedLogin("fakeUser")}
-              title={t("Login.Login.buttons.testuser")}
+              title={t("Login.button.testuser")}
               variant="primary"
               startIcon={<PersonIcon />}
               className="bg-green-700"
@@ -111,14 +111,14 @@ const Login: React.FC<Props> = (props) => {
             <Button
               onClick={() => handleOnClickButtonMockedLogin("fakeOrganization")}
               variant="primary"
-              title={t("Login.Login.buttons.testorga")}
+              title={t("Login.button.testorga")}
               startIcon={<CorporateFareIcon />}
               className="bg-blue-700"
             />
             <Button
               onClick={() => handleOnClickButtonMockedLogin("fakeAdmin")}
               variant="primary"
-              title={t("Login.Login.buttons.testadmin")}
+              title={t("Login.button.testadmin")}
               startIcon={<AdminPanelSettingsIcon />}
               className="bg-red-700"
             />

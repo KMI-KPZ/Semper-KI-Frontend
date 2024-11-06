@@ -163,7 +163,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     <form className="flex h-full w-full flex-col items-center justify-start gap-5">
       <Container width="full" direction="row" justify="between">
         <Heading variant="h2" className="w-full text-left">
-          {t("Service.Manufacturing.Model.Model.upload.title")}
+          {t("Service.Manufacturing.Model.Model.upload.heading")}
         </Heading>
       </Container>
 
@@ -224,12 +224,12 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
           onDragLeave={handleDragOnUploadCard}
           onDragOver={handleDragOnUploadCard}
           onDrop={handleDropOnUploadCard}
-          title={t("Service.Manufacturing.Model.Upload.Upload.card.title")}
+          title={t("Service.Manufacturing.Model.Upload.Upload.card.heading")}
           href="#"
         >
           <UploadIcon className="h-32 w-32" />
           <Heading variant="h2">
-            {t("Service.Manufacturing.Model.Upload.Upload.card.title")}
+            {t("Service.Manufacturing.Model.Upload.Upload.card.heading")}
           </Heading>
           {t("Service.Manufacturing.Model.Upload.Upload.card.text")}
         </a>

@@ -52,7 +52,7 @@ const ResKriVer: React.FC<ResKriVerProps> = (props) => {
               variant="h1"
               className="absolute -left-8 -top-8 rounded-full border-2 bg-white p-3"
             >
-              {t("ResKriVer.ResKriVer.title")}
+              {t("ResKriVer.ResKriVer.heading")}
             </Heading>
             <img
               src={ResKriVerLogo}

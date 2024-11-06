@@ -16,7 +16,7 @@ const ProcessClarify: React.FC<ProcessClarifyProps> = (props) => {
     <ProcessContainer
       id="Clarification"
       menuButtonTitle={t("Process.components.Clarify.Clarify.button.menu")}
-      pageTitle={`${t("Process.components.Clarify.Clarify.title")}:`}
+      pageTitle={`${t("Process.components.Clarify.Clarify.heading")}:`}
       start={ProcessStatus.VERIFYING_COMPLETED}
       end={ProcessStatus.VERIFYING_COMPLETED}
     >

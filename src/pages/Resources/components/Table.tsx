@@ -143,7 +143,7 @@ const ResourceTable = (props: ResourceTableProps) => {
                             <Button
                               variant="text"
                               title={t(
-                                "Resources.components.Table.buttons.details"
+                                "Resources.components.Table.button.details"
                               )}
                               to={`${node.nodeID}`}
                               className="whitespace-nowrap"
@@ -151,7 +151,7 @@ const ResourceTable = (props: ResourceTableProps) => {
                             <Button
                               variant="text"
                               title={t(
-                                "Resources.components.Table.buttons.edit"
+                                "Resources.components.Table.button.edit"
                               )}
                               to={`${node.nodeID}/edit`}
                               className="whitespace-nowrap"
@@ -159,7 +159,7 @@ const ResourceTable = (props: ResourceTableProps) => {
                             <Button
                               variant="text"
                               title={t(
-                                "Resources.components.Table.buttons.delete"
+                                "Resources.components.Table.button.delete"
                               )}
                               onClick={() =>
                                 handleOnClickButtonDeleteNode(node)

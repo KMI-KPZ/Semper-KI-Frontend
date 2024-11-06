@@ -36,7 +36,7 @@ const Service: React.FC<ServiceProps> = (props) => {
   // };
 
   const menuButtonTitle = t("Project.components.Info.button.menu");
-  const pageTitle = `${t("Process.Service.Service.title")}: ${
+  const pageTitle = `${t("Process.Service.Service.heading")}: ${
     process.serviceType === undefined ||
     process.serviceType === ServiceType.NONE
       ? t("Process.Service.Service.noType")
@@ -72,9 +72,11 @@ const Service: React.FC<ServiceProps> = (props) => {
         <ServiceSelection />
       ) : (
         <>
-          <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
-            <ProcessFilter />
-          </ProcessStatusGate>
+          {process.serviceType === ServiceType.ADDITIVE_MANUFACTURING ? (
+            <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+              <ProcessFilter />
+            </ProcessStatusGate>
+          ) : null}
           <ServiceDetails process={process} />
         </>
       )}

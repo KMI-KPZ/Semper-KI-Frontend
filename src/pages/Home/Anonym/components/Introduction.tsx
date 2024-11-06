@@ -26,9 +26,9 @@ const HomeIntroduction: React.FC<HomeIntroductionProps> = (props) => {
         >
           <HomeHeader
             variant="h2"
-            title={t("Home.Anonym.Anonym.Introduction.title")}
+            title={t("Home.Anonym.Introduction.heading")}
           />
-          <Text>{t("Home.Anonym.Anonym.Introduction.text")}</Text>
+          <Text>{t("Home.Anonym.Introduction.text")}</Text>
           <Container
             width="full"
             className="md:mt-20"
@@ -37,15 +37,15 @@ const HomeIntroduction: React.FC<HomeIntroductionProps> = (props) => {
           >
             <Container direction="row" width="full" justify="start">
               <img src={SemperKIIcon} />
-              <Text>{t("Home.Anonym.Anonym.Introduction.item1")}</Text>
+              <Text>{t("Home.Anonym.Introduction.item1")}</Text>
             </Container>
             <Container direction="row" width="full" justify="start">
               <img src={SemperKIIcon} />
-              <Text>{t("Home.Anonym.Anonym.Introduction.item2")}</Text>
+              <Text>{t("Home.Anonym.Introduction.item2")}</Text>
             </Container>
             <Container direction="row" width="full" justify="start">
               <img src={SemperKIIcon} />
-              <Text>{t("Home.Anonym.Anonym.Introduction.item3")}</Text>
+              <Text>{t("Home.Anonym.Introduction.item3")}</Text>
             </Container>
           </Container>
         </Container>
@@ -66,7 +66,7 @@ const HomeIntroduction: React.FC<HomeIntroductionProps> = (props) => {
         direction="row"
       >
         <HomeButton
-          text={t("Home.Anonym.Anonym.buttons.testModel")}
+          text={t("Home.Anonym.button.testModel")}
           icon={<UploadIcon />}
           to="/projects"
         />

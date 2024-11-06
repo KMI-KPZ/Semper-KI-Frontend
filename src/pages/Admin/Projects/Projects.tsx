@@ -2,7 +2,7 @@ import { Heading, Search } from "@component-library/index";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useAdmin from "../hooks/useAdmin";
+import useAdmin from "../../../hooks/useAdmin";
 import { Button } from "@component-library/index";
 import { Container } from "@component-library/index";
 import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
@@ -144,7 +144,7 @@ const AdminProjects: React.FC<Props> = (props) => {
                     <td>
                       <Container direction="col" width="full">
                         <Button
-                          title={t("Admin.Resources.button.details")}
+                          title={t("Admin.Projects.button.details")}
                           onClick={() =>
                             handleOnClickButtonDetails(project.projectID)
                           }
@@ -158,7 +158,7 @@ const AdminProjects: React.FC<Props> = (props) => {
                           variant="text"
                         /> */}
                         <Button
-                          title={t("Admin.Resources.button.delete")}
+                          title={t("Admin.Projects.button.delete")}
                           onClick={() =>
                             handleOnClickButtonDelete(
                               project.projectID,

@@ -47,7 +47,7 @@ const ProfileAPIToken: React.FC<ProfileAPITokenProps> = (props) => {
 
   return (
     <Container width="full" direction="col">
-      <Heading variant="h2">{t("Profile.APIToken.title")}</Heading>
+      <Heading variant="h2">{t("Profile.APIToken.heading")}</Heading>
       <Container width="full" direction="col" className="gap-3">
         <Text>{t("Profile.APIToken.subTitle")}</Text>
         <Text className="whitespace-pre-line text-center">
@@ -90,7 +90,7 @@ const ProfileAPIToken: React.FC<ProfileAPITokenProps> = (props) => {
         closeModal={closeModal}
       >
         <Container width="full" direction="col">
-          <Heading variant="h2">{t("Profile.APIToken.title")}</Heading>
+          <Heading variant="h2">{t("Profile.APIToken.heading")}</Heading>
           <Container width="full" direction="col" className="gap-3">
             <Text className="whitespace-pre-line text-center text-red-500">
               {t("Profile.APIToken.subTitle2")}

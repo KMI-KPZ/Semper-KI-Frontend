@@ -12,7 +12,7 @@ import {
   isOntoNodeType,
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import Pagination from "@/components/Table/Pagination";
-import useAdmin from "../hooks/useAdmin";
+import useAdmin from "../../../hooks/useAdmin";
 import useGetAdminNodes from "@/api/Resources/Admin/Querys/useGetAdminNodes";
 import { useNavigate, useParams } from "react-router-dom";
 import useDeleteAdminNode from "@/api/Resources/Admin/Mutations/useDeleteAdminNode";

@@ -1,7 +1,7 @@
 import { Container, Heading, Search, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useAdmin, { AdminDataUser } from "../hooks/useAdmin";
+import useAdmin, { AdminDataUser } from "../../../hooks/useAdmin";
 import { Button } from "@component-library/index";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
@@ -55,7 +55,7 @@ const AdminUser: React.FC<Props> = (props) => {
   return (
     <Container width="full" direction="col" className="bg-white p-5">
       <BackButtonContainer>
-        <Heading variant="h1">{t("Admin.User.title")}</Heading>
+        <Heading variant="h1">{t("Admin.User.heading")}</Heading>
       </BackButtonContainer>
       <Search handleSearchInputChange={handleSearchInputChange} />
       <TableContainer>

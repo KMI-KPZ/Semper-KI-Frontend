@@ -11,7 +11,7 @@ const ServiceModeling: React.FC<ModelingServiceProps> = (props) => {
 
   return (
     <Container>
-      <Heading variant="h1">{t("Service.Modeling.Modeling.title")}</Heading>
+      <Heading variant="h1">{t("Service.Modeling.Modeling.heading")}</Heading>
     </Container>
   );
 };

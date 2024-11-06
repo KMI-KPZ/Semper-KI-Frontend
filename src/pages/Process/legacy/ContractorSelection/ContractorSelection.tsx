@@ -184,7 +184,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
         <div className="flex w-full flex-col items-center justify-start gap-5 bg-white p-5">
           <Heading variant="h1">
             {t(
-              "Projects.Project.ContractorSelection.ContractorSelection.title"
+              "Projects.Project.ContractorSelection.ContractorSelection.heading"
             )}
           </Heading>
         </div>
@@ -194,8 +194,8 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
             <Heading variant="h2">
               {t(
                 addressesEqual === true
-                  ? "Projects.Project.ContractorSelection.ContractorSelection.address.title"
-                  : "Projects.Project.ContractorSelection.ContractorSelection.address.titleDeliver"
+                  ? "Projects.Project.ContractorSelection.ContractorSelection.address.heading"
+                  : "Projects.Project.ContractorSelection.ContractorSelection.address.headingDeliver"
               )}
             </Heading>
             <Container>
@@ -263,7 +263,7 @@ const ProjectContractorSelection: React.FC<Props> = (props) => {
             <Container direction="auto" justify="between" width="full">
               <Heading variant="h2">
                 {t(
-                  "Projects.Project.ContractorSelection.ContractorSelection.address.titleBilling"
+                  "Projects.Project.ContractorSelection.ContractorSelection.address.headingBilling"
                 )}
               </Heading>
               <Container direction="auto">

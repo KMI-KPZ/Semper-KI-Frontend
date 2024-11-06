@@ -41,7 +41,7 @@ const AdvantagesOrganization: React.FC<AdvantagesOrganizationProps> = (
         to="/registerOrganization"
         variant="primary"
         startIcon={<LoginIcon fontSize="large" />}
-        title={t("Home.components.OrgaInfo.register")}
+        title={t("Advantages.components.Organization.button.register")}
         width="full"
       />
     </Container>

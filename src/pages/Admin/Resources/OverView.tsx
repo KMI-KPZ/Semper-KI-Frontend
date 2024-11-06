@@ -16,7 +16,7 @@ const AdminResourcesOverView: React.FC<AdminResourcesOverViewProps> = (
   return (
     <Container width="full" direction="col" className="bg-white p-5">
       <BackButtonContainer>
-        <Heading variant="h1">{t("Admin.Resources.OverView.title")}</Heading>
+        <Heading variant="h1">{t("Admin.Resources.OverView.heading")}</Heading>
       </BackButtonContainer>
       <AdminResourcesButtons />
     </Container>

@@ -17,15 +17,13 @@ export const isServiceComplete = (
   service: ServiceProps
 ): boolean => {
   switch (serviceType) {
-    case ServiceType.MANUFACTURING:
+    case ServiceType.ADDITIVE_MANUFACTURING:
       const manufacturingService = service as ManufacturingServiceProps;
       return (
         manufacturingService.models !== undefined &&
         manufacturingService.materials !== undefined
       );
-    case ServiceType.MODELING:
-      return true;
-    case ServiceType.NONE:
+    default:
       return false;
   }
 };
@@ -42,7 +40,7 @@ const useService = (): ReturnProps => {
       ...updateServiceProps,
     };
     const serviceIsComplete = isServiceComplete(
-      ServiceType.MANUFACTURING,
+      ServiceType.ADDITIVE_MANUFACTURING,
       newService
     );
     updateProcess.mutate({

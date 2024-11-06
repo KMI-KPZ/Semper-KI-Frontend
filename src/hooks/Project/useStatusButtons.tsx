@@ -327,7 +327,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   const handleOnClickButtonCount = (button: StatusButtonProcessProps) => {
     if (
       window.confirm(
-        t("hooks.useStatusButtons.buttons.confirmAll", {
+        t("hooks.useStatusButtons.button.confirmAll", {
           title: button.title,
         })
       )

@@ -122,7 +122,7 @@ const ProcessServiceManufacturing: React.FC<
                 size="sm"
                 onClick={handleOnClickButtonOpen}
                 title={t(
-                  "Projects.Project.Process.ServicePreview.components.Manufacturing.buttons.modelPreView"
+                  "Projects.Project.Process.ServicePreview.components.Manufacturing.button.modelPreView"
                 )}
               />
             </PermissionGate>

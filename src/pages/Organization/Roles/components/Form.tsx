@@ -134,7 +134,7 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
     <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
       <Heading variant="h1" className="px-10">
         {t(
-          `Organization.Roles.components.Form.title.${
+          `Organization.Roles.components.Form.heading.${
             role === undefined ? "create" : "edit"
           }`
         )}

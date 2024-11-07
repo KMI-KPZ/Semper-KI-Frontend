@@ -289,7 +289,8 @@
       "apply": "Anwenden",
       "open": "Öffnen",
       "close": "Schließen",
-      "change": "Ändern"
+      "change": "Ändern",
+      "copy": "Kopieren"
     }
   },
   "component-library": {
@@ -485,6 +486,13 @@
           "cancel": "Abbrechen",
           "safe": "Speichern"
         }
+      },
+      "ProfileForm": {
+        "header": "Allgemein",
+        "name": "Name:",
+        "email": "E-Mail: ",
+        "type": "Benutzertyp: ",
+        "hint": "Nach dem ändern der Email muss diese erneut verifiziert werden. Zudem ist dann die Anmeldung mit der alten Email nicht mehr möglich."
       }
     },
     "Header": {
@@ -1244,6 +1252,7 @@
       "Address": {
         "header": "Adressen",
         "newAddressTitle": "Neue Adresse anlegen",
+        "noAddress": "Keine Adresse vorhanden",
         "button": {
           "addAddress": "Adresse hinzufügen"
         }
@@ -1399,82 +1408,8 @@
       }
     }
   },
-  "Profile": {
-    "APIToken": {
-      "heading": "API Token",
-      "subTitle": "Erstellen Sie einen neuen API Token für den Zugriff auf die Semper-KI API",
-      "subTitle2": "Der Token wird nur einmal angezeigt und kann nicht wiederhergestellt werden.\n Sie können jedoch jederzeit einen neuen Token erstellen.",
-      "button": {
-        "copy": "Kopieren",
-        "create": "Erstellen",
-        "reCreate": "Neu erstellen",
-        "delete": "Löschen"
-      }
-    },
-    "header": "Account",
-    "general": {
-      "header": "Allgemein",
-      "name": "Name:",
-      "email": "E-Mail: ",
-      "type": "Benutzertyp: ",
-      "hint": "Nach dem ändern der Email muss diese erneut verifiziert werden. Zudem ist dann die Anmeldung mit der alten Email nicht mehr möglich."
-    },
-    "company": {
-      "header": "Organisation",
-      "name": "Name"
-    },
-    "address": {
-      "header": "Adressen",
-      "noAddress": "Keine Adresse vorhanden"
-    },
-    "stats": {
-      "header": "Statistiken",
-      "created": "Erstellt am",
-      "accessed": "letzter Zugegriff am",
-      "updated": "Aktualisiert am",
-      "lastLogin": "Letzte Anmeldung am",
-      "lastLoginLocation": "Ort der letzten Anmeldung",
-      "lastLoginNumber": "Anzahl der Letzten Anmeldungen"
-    },
-    "button": {
-      "delete": "Account Löschen",
-      "addAddress": "Adresse hinzufügen"
-    },
-    "locals": {
-      "header": "Spracheinstellungen",
-      "language": "Sprache:",
-      "languages": {
-        "en-US": "English",
-        "de-DE": "Deutsch"
-      },
-      "button": {
-        "edit": "Bearbeiten",
-        "save": "Speichern",
-        "cancel": "Abbrechen"
-      }
-    },
-
-    "notification": {
-      "email": "Email",
-      "event": "Event"
-    },
-    "existingAddressTitle": "Adresse bearbeiten",
-    "newAddressTitle": "Neue Adresse anlegen",
-    "confirmDelete": "Möchten Sie ihren Account wirklich unwiederuflich löschen?",
-    "components": {
-      "Form": {
-        "heading": "Account bearbeiten",
-        "address": "Adresse",
-        "button": {
-          "save": "Speichern"
-        },
-        "error": {
-          "address": "Adresse benötigt"
-        }
-      }
-    }
-  },
   "Process": {
+    "heading": "Prozessdetails",
     "components": {
       "Clarify": {
         "heading": "Rückfragen",
@@ -1773,27 +1708,30 @@
           }
         }
       },
-      "Info": {
-        "name": "Prozessname:",
-        "updated": "letzte Aktualisierung:",
-        "created": "Erstellt am:",
-        "status": "Prozessstatus:",
-        "button": {
-          "menu": "Informationen Menu",
-
-          "editTitle": "Prozessname bearbeiten"
-        }
-      },
-      "TitleForm": {
-        "heading": "Prozessname",
-        "describtion": "Geben Sie ihrem Prozess einen Namen. Ein Prozess ist ein Auftrag für einen Hersteller/Auftragnehmer.",
-        "name": "Prozessname",
-        "error": "Bitte geben Sie einen Namen ein",
-        "button": {
-          "save": "Name Speichern"
+      "StatusWizard": {
+        "header": "Fortschritt",
+        "Card": {
+          "processInfo": "Übersicht",
+          "header": "Übersicht",
+          "draft": "Entwurf",
+          "service": "Service",
+          "contractorSelected": "Auftragnehmer",
+          "verified": "Überprüfung",
+          "requested": "Anfrage",
+          "clarification": "Rückfragen",
+          "offer": "Angebot",
+          "confirmation": "Bestätigung",
+          "confirmed": "Bestätigt",
+          "production": "Produktion",
+          "delivery": "Lieferung",
+          "completed": "Abgeschlossen"
         }
       },
       "Verify": {
+        "heading": "Prozess Überprüfen",
+        "button": {
+          "menu": "Überprüfungsmenu"
+        },
         "components": {
           "VerifyCard": {
             "error": "Ursache:",
@@ -1817,45 +1755,73 @@
             "COMPLETED": "Erfolgreich",
             "FAILED": "Fehler"
           }
-        },
-        "Verify": {
-          "heading": "Prozess Überprüfen",
-          "button": {
-            "menu": "Überprüfungsmenu"
-          }
+        }
+      },
+      "Info": {
+        "name": "Prozessname:",
+        "updated": "letzte Aktualisierung:",
+        "created": "Erstellt am:",
+        "status": "Prozessstatus:",
+        "button": {
+          "menu": "Informationen Menu",
+          "editTitle": "Prozessname bearbeiten"
+        }
+      },
+      "StatusButtons": {
+        "heading": "Todos"
+      },
+      "TitleForm": {
+        "heading": "Prozessname",
+        "describtion": "Geben Sie ihrem Prozess einen Namen. Ein Prozess ist ein Auftrag für einen Hersteller/Auftragnehmer.",
+        "name": "Prozessname",
+        "error": "Bitte geben Sie einen Namen ein",
+        "button": {
+          "save": "Name Speichern"
         }
       }
+    }
+  },
+  "Profile": {
+    "header": "Account",
+    "button": {
+      "delete": "Account Löschen",
+      "addAddress": "Adresse hinzufügen"
     },
-    "StatusWizard": {
-      "components": {},
-      "StatusWizard": {
-        "header": "Fortschritt",
-        "item": {
-          "processInfo": "Übersicht",
-          "header": "Übersicht",
-          "draft": "Entwurf",
-          "service": "Service",
-          "contractorSelected": "Auftragnehmer",
-          "verified": "Überprüfung",
-          "requested": "Anfrage",
-          "clarification": "Rückfragen",
-          "offer": "Angebot",
-          "confirmation": "Bestätigung",
-          "confirmed": "Bestätigt",
-          "production": "Produktion",
-          "delivery": "Lieferung",
-          "completed": "Abgeschlossen"
-        }
-      }
+    "existingAddressTitle": "Adresse bearbeiten",
+    "newAddressTitle": "Neue Adresse anlegen",
+    "confirmDelete": "Möchten Sie ihren Account wirklich unwiederuflich löschen?",
+    "Address": {
+      "header": "Adressen",
+      "noAddress": "Keine Adresse vorhanden"
     },
-    "ProcessPage": {
-      "heading": "Prozessdetails",
+    "APIToken": {
+      "heading": "API Token",
+      "subTitle": "Erstellen Sie einen neuen API Token für den Zugriff auf die Semper-KI API",
+      "subTitle2": "Der Token wird nur einmal angezeigt und kann nicht wiederhergestellt werden.\n Sie können jedoch jederzeit einen neuen Token erstellen.",
       "button": {
-        "back": "Zurück"
+        "reCreate": "Neu erstellen"
       }
     },
-    "StatusButtons": {
-      "heading": "Todos"
+    "Locals": {
+      "header": "Spracheinstellungen",
+      "language": "Sprache:",
+      "languages": {
+        "en-US": "English",
+        "de-DE": "Deutsch"
+      }
+    },
+    "Organization": {
+      "header": "Organisation",
+      "name": "Name"
+    },
+    "Statistics": {
+      "header": "Statistiken",
+      "created": "Erstellt am",
+      "accessed": "letzter Zugegriff am",
+      "updated": "Aktualisiert am",
+      "lastLogin": "Letzte Anmeldung am",
+      "lastLoginLocation": "Ort der letzten Anmeldung",
+      "lastLoginNumber": "Anzahl der Letzten Anmeldungen"
     }
   },
   "Project": {
@@ -2291,7 +2257,6 @@
       }
     }
   },
-  "Redirect": {},
   "RegisterOrganization": {
     "heading": "Organisation Registrieren",
     "success": "Organisation erfolgreich registriert. Sie erhalten in Kürze eine Email mit einem Bestätigungslink.",

@@ -60,7 +60,7 @@ const OrganizationAddress: React.FC<OrganizationAddressProps> = (props) => {
         </Container>
       ) : (
         <Container width="full" direction="col">
-          <Text>{t("Profile.address.noAddress")}</Text>
+          <Text>{t("Organization.components.Address.noAddress")}</Text>
           <div
             className="hover-card flex w-full flex-col items-center justify-center gap-5 p-10"
             tabIndex={0}

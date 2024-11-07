@@ -8,9 +8,7 @@ describe("<Imprint>", () => {
   });
   it("should have correct default Text", () => {
     render(<Imprint />);
-    expect(screen.getByText("Legal.Imprint.title")).toBeInTheDocument();
-    expect(
-      screen.getByText(/Vertretungsberechtigter Vorstand:/)
-    ).toBeInTheDocument();
+    expect(screen.getByText("Legal.Imprint.heading.main")).toBeInTheDocument();
+    expect(screen.getByText("Legal.Imprint.heading.board")).toBeInTheDocument();
   });
 });

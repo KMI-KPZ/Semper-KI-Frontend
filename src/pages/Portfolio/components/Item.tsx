@@ -30,15 +30,13 @@ const PortfolioItem: React.FC<Props> = (props) => {
     >
       <div className="flex w-full flex-row items-center justify-between px-10">
         <Heading variant="h2">
-          {t(`Portfolio.PortfolioItem.${portfolioItem}.header`)}
+          {t(`Portfolio.Item.${portfolioItem}.header`)}
         </Heading>
         <Button
           testid="portfolio-item-button"
           onClick={handleOnClickButton}
           title={t(
-            `Portfolio.PortfolioItem.button.${
-              open === true ? "collapse" : "expand"
-            }`
+            `Portfolio.Item.button.${open === true ? "collapse" : "expand"}`
           )}
           children={
             <div
@@ -57,7 +55,7 @@ const PortfolioItem: React.FC<Props> = (props) => {
           className={`gap flex w-full flex-col overflow-clip transition-all duration-300 `}
         >
           <span className="px-5 py-2 text-left">
-            {t(`Portfolio.PortfolioItem.${portfolioItem}.text`)}
+            {t(`Portfolio.Item.${portfolioItem}.text`)}
           </span>
           <div className="w-full border-t-2" />
         </div>

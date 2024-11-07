@@ -77,13 +77,13 @@ const ProcessFilterMultiSelection: React.FC<Props> = (props) => {
           /> */}
           {/* {allChecked
             ? t(
-                "Service.Manufacturing.Filter.components.MultiSelection.button.unCheckAll"
+                "Process.components.Service.Filter.components.MultiSelection.button.unCheckAll"
               )
             : t(
-                "Service.Manufacturing.Filter.components.MultiSelection.button.checkAll"
+                "Process.components.Service.Filter.components.MultiSelection.button.checkAll"
               )} */}
           {t(
-            "Service.Manufacturing.Filter.components.MultiSelection.button.all"
+            "Process.components.Service.Filter.components.MultiSelection.button.all"
           )}
         </label>
         {options

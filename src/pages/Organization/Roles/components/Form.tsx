@@ -143,12 +143,10 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
         <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
           <label className="flex flex-col items-center justify-center gap-2">
             <Text variant="body">
-              {t("Organization.Roles.components.Table.name")}
+              {t("Organization.Roles.components.Form.name")}
             </Text>
             <input
-              placeholder={
-                t("Organization.Roles.components.Table.name") + "..."
-              }
+              placeholder={t("Organization.Roles.components.Form.name") + "..."}
               {...register("name", {
                 required: t(
                   "Organization.Roles.components.Form.validation.required"
@@ -159,12 +157,12 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
           </label>
           <label className="flex flex-col items-center justify-center gap-2">
             <Text variant="body">
-              {t("Organization.Roles.components.Table.description")}
+              {t("Organization.Roles.components.Form.description")}
             </Text>
 
             <input
               placeholder={
-                t("Organization.Roles.components.Table.description") + "..."
+                t("Organization.Roles.components.Form.description") + "..."
               }
               {...register("description", {
                 required: t(
@@ -262,7 +260,7 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
             updateRolePermission.isLoading
           }
           title={t(
-            `Organization.Roles.components.Form.button.${
+            `Organization.Roles.button.${
               role === undefined ? "create" : "safe"
             }`
           )}

@@ -120,7 +120,9 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
           <Container width="full" direction="col">
             <Container direction="row" width="full" justify="between">
               <Heading variant="h2">
-                {t("Service.Manufacturing.Material.Material.available")}
+                {t(
+                  "Process.components.Service.ServiceEdit.Manufacturing.Material.available"
+                )}
               </Heading>
             </Container>
             <LoadingSuspense query={materialsQuery}>
@@ -149,9 +151,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
                               onClick={() =>
                                 handleOnButtonClickDeselect(material.id)
                               }
-                              title={t(
-                                "Service.Manufacturing.Material.Material.button.deselect"
-                              )}
+                              title={t("general.button.deselect")}
                             />
                           ) : (
                             <Button
@@ -159,9 +159,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
                               onClick={() =>
                                 handleOnButtonClickSelect(material)
                               }
-                              title={t(
-                                "Service.Manufacturing.Material.Material.button.select"
-                              )}
+                              title={t("general.button.select")}
                             />
                           )}
                         </Container>
@@ -171,7 +169,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
               ) : (
                 <Text className="w-full text-center">
                   {t(
-                    "Service.Manufacturing.Material.Material.error.noMaterials"
+                    "Process.components.Service.ServiceEdit.Manufacturing.Material.error.noMaterials"
                   )}
                 </Text>
               )}
@@ -183,7 +181,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
           variant="primary"
           width="fit"
           onClick={handleOnClickButtonSave}
-          title={t("Service.Manufacturing.Material.Material.button.save")}
+          title={t("general.button.save")}
         />
       </Container>
     </Modal>

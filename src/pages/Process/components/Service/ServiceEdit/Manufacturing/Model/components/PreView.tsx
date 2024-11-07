@@ -56,15 +56,22 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
         ))}
       </div>
       <div className="model-view-date">
-        {t("Service.Manufacturing.Model.components.PreView.created")}:{" "}
-        {getDate()}
+        {t(
+          "Process.components.Service.ServiceEdit.Manufacturing.Model.components.PreView.created"
+        )}
+        : {getDate()}
       </div>
       <div className="model-view-licens">
-        {t("Service.Manufacturing.Model.components.PreView.license")}:{" "}
-        {model.licenses}
+        {t(
+          "Process.components.Service.ServiceEdit.Manufacturing.Model.components.PreView.license"
+        )}
+        : {model.licenses}
       </div>
       <div className="model-view-certificates">
-        {t("Service.Manufacturing.Model.components.PreView.certificates")}:
+        {t(
+          "Process.components.Service.ServiceEdit.Manufacturing.Model.components.PreView.certificates"
+        )}
+        :
         {model.certificates.length > 0
           ? model.certificates.map((title: string, index: number) => (
               <div className="model-view-certificate" key={index}>
@@ -72,14 +79,12 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
               </div>
             ))
           : t(
-              "Service.Manufacturing.Model.components.PreView.error.noCertificates"
+              "Process.components.Service.ServiceEdit.Manufacturing.Model.components.PreView.error.noCertificates"
             )}
       </div>
       <Button
         onClick={handleOnClickButtonSelect}
-        title={t(
-          "Service.Manufacturing.Model.components.PreView.button.select"
-        )}
+        title={t("general.button.select")}
       />
     </div>
   );

@@ -46,7 +46,7 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
       <img
         src={TestImg}
         alt={t(
-          "Process.Service.ServiceDetails.components.manufacturing.material.img"
+          "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.img"
         )}
         className="max-h-40 w-full object-contain md:w-fit"
       />
@@ -54,7 +54,7 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
         <Container direction="row" justify="between" width="full">
           <Text>
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.material.name"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.name"
             )}
           </Text>
           <Text>{material.title}</Text>
@@ -62,7 +62,7 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
         <Container direction="row" justify="between" width="full">
           <Text>
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.material.type"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.type"
             )}
           </Text>
           <Text>---</Text>
@@ -70,7 +70,7 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
         <Container direction="row" justify="between" width="full">
           <Text>
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.material.properties"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.properties"
             )}
           </Text>
         </Container>
@@ -106,25 +106,21 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
             title={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.editMaterial"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.button.editMaterial"
             )}
             size="sm"
             variant="secondary"
             onClick={handleOnButtonClickMaterial}
-            children={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.edit"
-            )}
+            children={t("general.button.edit")}
           />
           <Button
             title={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.deleteMaterial"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.button.deleteMaterial"
             )}
             size="sm"
             variant="text"
             onClick={() => handleOnButtonClickDeleteMaterial(material.id)}
-            children={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.delete"
-            )}
+            children={t("general.button.delete")}
           />
         </ProcessStatusGate>
       </Container>

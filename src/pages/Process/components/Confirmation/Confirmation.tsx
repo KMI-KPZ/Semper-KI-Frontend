@@ -12,12 +12,8 @@ const ProcessConfirmation: React.FC<ProcessConfirmationProps> = (props) => {
   return (
     <ProcessContainer
       id="Confirmation"
-      menuButtonTitle={t(
-        "Process.components.Confirmation.Confirmation.button.menu"
-      )}
-      pageTitle={`${t(
-        "Process.components.Confirmation.Confirmation.heading"
-      )}:`}
+      menuButtonTitle={t("Process.components.Confirmation.button.menu")}
+      pageTitle={`${t("Process.components.Confirmation.heading")}:`}
       start={ProcessStatus.OFFER_COMPLETED}
       end={ProcessStatus.OFFER_REJECTED}
     ></ProcessContainer>

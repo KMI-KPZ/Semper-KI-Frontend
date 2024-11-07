@@ -88,7 +88,9 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
       taxID: yup
         .string()
         .required(
-          t("yup.requiredName", { name: t("Organization.Info.taxID") })
+          t("yup.requiredName", {
+            name: t("components.Form.OrganizationForm.taxID"),
+          })
         ),
     })
     .required();

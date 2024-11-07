@@ -52,18 +52,14 @@ const AddressSelection: React.FC<AddressSelectionProps> = (props) => {
                 <Button
                   size="sm"
                   variant="text"
-                  title={t(
-                    "Process.components.ContractorSelection.components.AddressSelection.button.edit"
-                  )}
+                  title={t("general.button.edit")}
                   onClick={() => {
                     handleOnClickButtonEdit(address);
                   }}
                 />
                 <Button
                   size="sm"
-                  title={t(
-                    "Process.components.ContractorSelection.components.AddressSelection.button.select"
-                  )}
+                  title={t("general.button.select")}
                   onClick={() => {
                     handleOnClickButtonSelect(address);
                   }}

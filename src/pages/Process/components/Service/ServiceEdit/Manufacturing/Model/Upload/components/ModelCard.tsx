@@ -58,24 +58,24 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
         <Container direction="row" width="full" align="start">
           <Container direction="col" justify="start" align="start">
             <Text>{`${t(
-              `Service.Manufacturing.Model.Upload.components.Form.size`
+              `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.size`
             )}`}</Text>
             <Text>{`${t(
-              `Service.Manufacturing.Model.Upload.components.Form.date`
+              `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.date`
             )}`}</Text>
             <Text className="py-3">
               {`${t(
-                `Service.Manufacturing.Model.Upload.components.Form.certificate`
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.certificate`
               )}`}
             </Text>
             <Text className="py-3">
               {`${t(
-                `Service.Manufacturing.Model.Upload.components.Form.license`
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.license`
               )}`}
             </Text>
             <Text className="py-3">
               {`${t(
-                `Service.Manufacturing.Model.Upload.components.Form.tags`
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.tags`
               )}`}
             </Text>
           </Container>
@@ -87,7 +87,7 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
             ${false ? "border-red-500 bg-red-500" : ""}
           }`}
               placeholder={t(
-                "Service.Manufacturing.Model.Upload.components.Form.certificatePH"
+                "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.certificatePH"
               )}
               {...register(`models.${index}.certificates`)}
             />
@@ -99,7 +99,7 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
             >
               <option value="" disabled selected>
                 {t(
-                  `Service.Manufacturing.Model.Upload.components.Form.selectLicense`
+                  `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.selectLicense`
                 )}
               </option>
               <option value="CC BY">CC BY</option>
@@ -113,7 +113,7 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
               className={`flex w-full rounded-md border-2 p-3
             ${false ? "border-red-500 bg-red-500" : ""}}`}
               placeholder={t(
-                "Service.Manufacturing.Model.Upload.components.Form.tagsPH"
+                "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.tagsPH"
               )}
               {...register(`models.${index}.tags`)}
             />
@@ -123,14 +123,14 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
         <Container direction="row">
           <Button
             variant="text"
-            title={t("Service.Manufacturing.Model.Upload.Upload.button.delete")}
+            title={t("general.button.delete")}
             onClick={handleOnClickButtonDelete}
           />
           <Button
             variant="secondary"
             onClick={handleOnClickButtonSaveAll}
             title={t(
-              "Service.Manufacturing.Model.Upload.Upload.button.saveAll"
+              "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.button.saveAll"
             )}
           />
         </Container>

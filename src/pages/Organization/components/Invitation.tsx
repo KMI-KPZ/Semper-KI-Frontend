@@ -89,7 +89,7 @@ const OrganizationInvitation: React.FC<OrganizationInvitationProps> = (
       id="OrganizationInvitation"
     >
       <Heading variant="h2" className="whitespace-nowrap">
-        {t("Organization.components.invitation.header")}
+        {t("Organization.components.Invitation.header")}
       </Heading>
       <Divider />
       <form
@@ -98,7 +98,7 @@ const OrganizationInvitation: React.FC<OrganizationInvitationProps> = (
       >
         <input
           className="w-full rounded-md border-2 px-5 py-2 md:w-fit md:flex-grow"
-          placeholder={t("Organization.components.invitation.placeholder")}
+          placeholder={t("Organization.components.Invitation.placeholder")}
           {...register("email")}
         />
         <select
@@ -113,7 +113,7 @@ const OrganizationInvitation: React.FC<OrganizationInvitationProps> = (
             ))
           ) : (
             <option value="empty" disabled>
-              {t("Organization.components.table.empty")}
+              {t("Organization.components.Invitation.empty")}
             </option>
           )}
         </select>
@@ -122,20 +122,20 @@ const OrganizationInvitation: React.FC<OrganizationInvitationProps> = (
           loading={inviteUser.isLoading}
           variant="primary"
           size="sm"
-          title={t("Organization.components.invitation.button.invite")}
+          title={t("Organization.components.Invitation.button.invite")}
         />
         <Button
           size="sm"
           onClick={handleSubmit(onSubmitLink)}
           loading={createInviteLink.isLoading}
-          title={t("Organization.components.invitation.button.link")}
+          title={t("Organization.components.Invitation.button.link")}
         />
       </form>
       {showLoadedIn || errors.email !== undefined ? (
         <div className="flex w-full flex-col items-center justify-center md:flex-row">
           {showLoadedIn ? (
             <div className="">
-              {t("Organization.components.invitation.button.send")}
+              {t("Organization.components.Invitation.button.send")}
             </div>
           ) : null}
           {errors.email !== undefined ? (
@@ -164,14 +164,14 @@ const OrganizationInvitation: React.FC<OrganizationInvitationProps> = (
                   variant="text"
                   children={<ContentPasteIcon />}
                   onClick={() => handleOnClickButtonCopy(invite.invitation_url)}
-                  title={t("Organization.components.invitation.button.copy")}
+                  title={t("Organization.components.Invitation.button.copy")}
                 />
                 <Button
                   size="sm"
                   variant="text"
                   children={<DeleteForeverIcon />}
                   onClick={() => handleOnClickButtonDelete(invite.id)}
-                  title={t("Organization.components.invitation.button.delete")}
+                  title={t("Organization.components.Invitation.button.delete")}
                 />
               </Container>
             </div>

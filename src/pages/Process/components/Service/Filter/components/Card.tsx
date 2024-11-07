@@ -48,8 +48,12 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
         >
           <Text>
             {category.title === "SELECTED"
-              ? t("Process.Service.Filter.components.Card.noSelectedFitlers")
-              : t("Process.Service.Filter.components.Card.noFilters")}
+              ? t(
+                  "Process.components.Service.Filter.components.Card.noSelectedFitlers"
+                )
+              : t(
+                  "Process.components.Service.Filter.components.Card.noFilters"
+                )}
           </Text>
         </Container>
       )}

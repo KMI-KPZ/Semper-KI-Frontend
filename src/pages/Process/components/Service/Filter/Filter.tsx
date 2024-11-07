@@ -125,12 +125,12 @@ const ProcessFilter: React.FC<Props> = (props) => {
     >
       <Container width="full" justify="start" className="p-5 pb-2">
         <Heading variant="h3">
-          {t("Process.components.Filter.Filter.pageTitle")}
+          {t("Process.components.Service.Filter.heading")}
         </Heading>
       </Container>
       <Container width="full" direction="col" className="gap-0 p-2">
-        <Text>{t("Process.components.Filter.Filter.pageDescription1")}</Text>
-        <Text>{t("Process.components.Filter.Filter.pageDescription2")}</Text>
+        <Text>{t("Process.components.Service.Filter.pageDescription1")}</Text>
+        <Text>{t("Process.components.Service.Filter.pageDescription2")}</Text>
       </Container>
       <Divider />
 
@@ -204,7 +204,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
                 ) : (
                   <Container width="full">
                     <Text>
-                      {t("Service.Manufacturing.Filter.Filter.noCategory")}
+                      {t("Process.components.Service.Filter.noCategory")}
                     </Text>
                   </Container>
                 )}
@@ -214,20 +214,20 @@ const ProcessFilter: React.FC<Props> = (props) => {
               <Button
                 size="sm"
                 onClick={handleOnClickResetButton}
-                title={t("Service.Manufacturing.Filter.Filter.button.reset")}
+                title={t("general.button.reset")}
               />
               <Button
                 size="sm"
                 active={differenzCount > 0}
                 onClick={handleOnClickCancelButton}
-                title={t("Service.Manufacturing.Filter.Filter.button.cancel")}
+                title={t("general.button.cancel")}
               />
               <Badge count={differenzCount}>
                 <Button
                   variant="primary"
                   size="sm"
                   onClick={handleOnClickApplyButton}
-                  title={t("Service.Manufacturing.Filter.Filter.button.apply")}
+                  title={t("general.button.apply")}
                 />
               </Badge>
             </Container>

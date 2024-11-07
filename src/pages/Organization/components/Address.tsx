@@ -37,7 +37,9 @@ const OrganizationAddress: React.FC<OrganizationAddressProps> = (props) => {
       className="container"
       id="OrganizationAddress"
     >
-      <Heading variant="h2">{t("Profile.address.header")}</Heading>
+      <Heading variant="h2">
+        {t("Organization.components.Address.header")}
+      </Heading>
       <Divider />
       {organization.details.addresses !== undefined &&
       organization.details.addresses.length > 0 ? (
@@ -51,7 +53,9 @@ const OrganizationAddress: React.FC<OrganizationAddressProps> = (props) => {
             onClick={handleOnClickButtonAddAddress}
           >
             <AddIcon />
-            <Text>{t("Profile.button.addAddress")}</Text>
+            <Text>
+              {t("Organization.components.Address.button.addAddress")}
+            </Text>
           </div>
         </Container>
       ) : (
@@ -63,7 +67,9 @@ const OrganizationAddress: React.FC<OrganizationAddressProps> = (props) => {
             onClick={handleOnClickButtonAddAddress}
           >
             <AddIcon />
-            <Text>{t("Profile.button.addAddress")}</Text>
+            <Text>
+              {t("Organization.components.Address.button.addAddress")}
+            </Text>
           </div>
         </Container>
       )}
@@ -76,7 +82,7 @@ const OrganizationAddress: React.FC<OrganizationAddressProps> = (props) => {
         <AddressForm
           type="organization"
           closeModal={closeModalAddress}
-          title={t("Profile.newAddressTitle")}
+          title={t("Organization.components.Address.newAddressTitle")}
         />
       </Modal>
     </Container>

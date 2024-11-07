@@ -52,14 +52,22 @@ const ProcessModelItem: React.FC<Props> = (props) => {
         ))}
       </div>
       <div className="model-view-date">
-        {t("Service.Manufacturing.Model.components.Item.created")}: {getDate()}
+        {t(
+          "Process.components.Service.ServiceEdit.Manufacturing.Model.components.Item.created"
+        )}
+        : {getDate()}
       </div>
       <div className="model-view-licens">
-        {t("Service.Manufacturing.Model.components.Item.license")}:{" "}
-        {model.licenses}
+        {t(
+          "Process.components.Service.ServiceEdit.Manufacturing.Model.components.Item.license"
+        )}
+        : {model.licenses}
       </div>
       <div className="model-view-certificates">
-        {t("Service.Manufacturing.Model.components.Item.certificates")}:
+        {t(
+          "Process.components.Service.ServiceEdit.Manufacturing.Model.components.Item.certificates"
+        )}
+        :
         {model.certificates !== undefined && model.certificates.length > 0
           ? model.certificates.map((title: string, index: number) => (
               <div className="model-view-certificate" key={index}>
@@ -67,13 +75,13 @@ const ProcessModelItem: React.FC<Props> = (props) => {
               </div>
             ))
           : t(
-              "Service.Manufacturing.Model.components.Item.error.noCertificates"
+              "Process.components.Service.ServiceEdit.Manufacturing.Model.components.Item.error.noCertificates"
             )}
       </div>
       {isProcessAtServiceStatus(process) ? (
         <Button
           onClick={() => handleOnClickButtonDeselect(model.id)}
-          title={t("Service.Manufacturing.Model.components.Item.button.change")}
+          title={t("general.button.change")}
         />
       ) : null}
     </div>

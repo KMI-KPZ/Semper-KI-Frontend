@@ -267,6 +267,31 @@
       "userDeleted": "Benutzer Gelöscht"
     }
   },
+  "general": {
+    "email": "E-Mail",
+    "name": "Name",
+    "company": "Firma",
+    "street": "Straße",
+    "houseNumber": "Hausnummer",
+    "zipcode": "Postleitzahl",
+    "city": "Stadt",
+    "country": "Land",
+    "button": {
+      "select": "Auswählen",
+      "deselect": "Abwählen",
+      "selected": "Ausgewählt",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "create": "Erstellen",
+      "save": "Speichern",
+      "reset": "Zurücksetzen",
+      "cancel": "Abbrechen",
+      "apply": "Anwenden",
+      "open": "Öffnen",
+      "close": "Schließen",
+      "change": "Ändern"
+    }
+  },
   "component-library": {
     "Error": {
       "incomplete": "Bitte {{name}} vervollständigen.",
@@ -1214,32 +1239,87 @@
     "redirect": "Weiterleiten zur Abmeldung"
   },
   "Organization": {
-    "index": {
-      "header": "Organisation"
-    },
-    "Roles": {
-      "Roles": {
-        "header": "Rollen/Rechte",
-        "name": "Name",
-        "description": "Beschreibung",
+    "header": "Organisation",
+    "components": {
+      "Address": {
+        "header": "Adressen",
+        "newAddressTitle": "Neue Adresse anlegen",
+        "button": {
+          "addAddress": "Adresse hinzufügen"
+        }
+      },
+      "Invitation": {
+        "header": "Benutzer einladen",
+        "placeholder": "Email...",
         "empty": "keine Rollen angelegt",
         "button": {
-          "create": "Erstellen"
+          "invite": "Einladen",
+          "send": "Gesendet!",
+          "link": "Einladungslink erstellen",
+          "delete": "Löschen",
+          "copy": "Kopieren"
         }
+      },
+      "UserTable": {
+        "header": "Benutzer",
+        "confirmDelete": "Möchten Sie den Benutzer wirklich löschen?",
+        "name": "Benutzername",
+        "picture": "Profilbild",
+        "email": "E-Mail",
+        "role": "Rolle",
+        "created": "Erstellt am",
+        "accessed": "letzter Zugegriff am",
+        "actions": "Aktionen",
+        "empty": "keine Rollen angelegt",
+        "error": {
+          "empty": "keine Benutzer gefunden"
+        },
+        "button": {
+          "delete": "Löschen",
+          "edit": "Bearbeiten",
+          "safe": "Speichern"
+        }
+      }
+    },
+    "View": {
+      "Info": {
+        "header": "Allgemeine Informationen",
+        "accessed": "letzter Zugegriff am",
+        "created": "Erstellt am",
+        "updated": "Aktualisiert am",
+        "services": "Services die Sie anbieten",
+        "id": "OrganisationsID",
+        "img": "Bild",
+        "primary-color": "Primärfarbe",
+        "background-color": "Hintergrundfarbe",
+        "name": "Name",
+        "adress": "Adresse",
+        "email": "E-Mail",
+        "taxID": "Steuernummer",
+        "noService": "keine Services ",
+        "button": {
+          "edit": "Bearbeiten"
+        }
+      }
+    },
+    "Roles": {
+      "header": "Rollen/Rechte",
+      "empty": "keine Rollen angelegt",
+      "button": {
+        "create": "Erstellen",
+        "delete": "Löschen",
+        "edit": "Bearbeiten",
+        "safe": "Speichern"
       },
       "components": {
         "Form": {
-          "name": "Name",
-          "permissions": "Rechte",
-          "description": "Beschreibung",
           "heading": {
             "create": "Rolle anlegen",
             "edit": "Rolle bearbeiten"
           },
-          "button": {
-            "create": "Erstellen",
-            "safe": "Speichern"
-          },
+          "name": "Name",
+          "permissions": "Rechte",
+          "description": "Beschreibung",
           "validation": {
             "required": "wird benötigt"
           }
@@ -1249,11 +1329,6 @@
           "description": "Beschreibung",
           "actions": "Aktionen",
           "empty": "keine Rollen angelegt",
-          "button": {
-            "delete": "Löschen",
-            "edit": "Bearbeiten",
-            "safe": "Speichern"
-          },
           "alert": "Rolle wirklich löschen?"
         },
         "Table": {
@@ -1272,64 +1347,7 @@
           "delete": "löschen",
           "status": "Status bearbeiten",
           "messages": "beantworten",
-          "empty": "keine Rollen angelegt",
-          "button": {
-            "delete": "Löschen",
-            "edit": "Bearbeiten",
-            "safe": "Speichern"
-          }
-        }
-      }
-    },
-    "Info": {
-      "header": "Allgemeine Informationen",
-      "accessed": "letzter Zugegriff am",
-      "created": "Erstellt am",
-      "updated": "Aktualisiert am",
-      "services": "Services die Sie anbieten",
-      "id": "OrganisationsID",
-      "img": "Bild",
-      "primary-color": "Primärfarbe",
-      "background-color": "Hintergrundfarbe",
-      "name": "Name",
-      "adress": "Adresse",
-      "email": "E-Mail",
-      "taxID": "Steuernummer",
-      "noService": "keine Services ",
-      "button": {
-        "edit": "Bearbeiten"
-      }
-    },
-    "components": {
-      "table": {
-        "confirmDelete": "Möchten Sie den Benutzer wirklich löschen?",
-        "header": "Benutzer",
-        "name": "Benutzername",
-        "picture": "Profilbild",
-        "email": "E-Mail",
-        "role": "Rolle",
-        "created": "Erstellt am",
-        "accessed": "letzter Zugegriff am",
-        "actions": "Aktionen",
-        "empty": "keine Rollen angelegt",
-        "error": {
-          "empty": "keine Benutzer gefunden"
-        },
-        "button": {
-          "delete": "Löschen",
-          "edit": "Bearbeiten",
-          "safe": "Speichern"
-        }
-      },
-      "invitation": {
-        "header": "Benutzer einladen",
-        "placeholder": "Email...",
-        "button": {
-          "invite": "Einladen",
-          "send": "Gesendet!",
-          "link": "Einladungslink erstellen",
-          "delete": "Löschen",
-          "copy": "Kopieren"
+          "empty": "keine Rollen angelegt"
         }
       }
     }
@@ -1344,11 +1362,9 @@
     }
   },
   "Portfolio": {
-    "Portfolio": {
-      "header": "Unser Portfolio",
-      "back": "Nach Oben"
-    },
-    "PortfolioItem": {
+    "header": "Unser Portfolio",
+    "back": "Nach Oben",
+    "Item": {
       "use-information": {
         "header": "Informieren über 3D-Druck",
         "text": "Dieser Service ermöglicht es Kunden, auf wertvolle Informationen und Daten zuzugreifen, die für ihre Bedürfnisse relevant sind. Ob Marktforschung, Branchentrends oder spezifische Erkenntnisse - wir stellen umfassende Informationsressourcen zur Verfügung, um fundierte Entscheidungen zu treffen."
@@ -1460,14 +1476,300 @@
   },
   "Process": {
     "components": {
-      "Filter": {
+      "Clarify": {
+        "heading": "Rückfragen",
+        "button": {
+          "menu": "Rückfragenmenu"
+        }
+      },
+      "Completed": {
+        "heading": "Abgeschlossen",
+        "button": {
+          "menu": "Abgeschlossenmenu"
+        }
+      },
+      "Confirmation": {
+        "heading": "Bestätigung des Angebots",
+        "button": {
+          "menu": "Bestätigungsmenu"
+        }
+      },
+      "Contract": {
+        "heading": "Angebot",
+        "button": {
+          "menu": "Angebotsmenu"
+        }
+      },
+      "ContractorSelection": {
+        "heading": {
+          "main": "Auftragnehmer auswählen",
+          "sub1": "Auftragnehmer"
+        },
+        "noContractor": "Kein Auftragnehmer ausgewählt",
+        "noContractorFound": "Kein Auftragnehmer gefunden",
+        "button": {
+          "menu": "Hersteller Menu",
+          "selectAddress": "Adresse auswählen",
+          "select": "Auftragnehmer auswählen",
+          "edit": "Auftragnehmer bearbeiten"
+        },
+        "components": {
+          "AddressCard": {
+            "heading": {
+              "billingDelivery": "Liefer- und Rechnungsadresse",
+              "billing": "Rechnungsadresse",
+              "delivery": "Lieferadresse"
+            },
+            "sameAddress": "Lieferadresse gleich Rechnungsadresse",
+            "noAddress": "keine Adresse ausgewählt",
+            "button": {
+              "editAddress": "Adresse ändern",
+              "resetAddress": "Adresse zurücksetzen"
+            }
+          },
+          "AddressSelection": {
+            "heading": "Addresse auswählen",
+            "button": {
+              "new": "neue Adresse anlegen"
+            }
+          },
+          "ContractorList": {
+            "heading": "Auftragnehmerauswahl",
+            "contractors": "Auftragnehmer sortiert nach ihren Prioritäten",
+            "noContractorFound": "Kein Auftragnehmer gefunden"
+          }
+        }
+      },
+      "Delivery": {
+        "heading": "Lieferung",
+        "button": {
+          "menu": "Lieferungsmenu"
+        }
+      },
+      "Production": {
+        "heading": "Produktion",
+        "button": {
+          "menu": "Produktionsmenu"
+        }
+      },
+      "Request": {
+        "heading": "Anfrage",
+        "clientVerified": "Ihr Prozess ist bereit zur Anfrage",
+        "clientRequested": "Der Auftragnehmer hat den Entwurf erhalten und wird sich in Kürze bei ihnen melden.",
+        "contractorRecieved": "Sie haben einen Anfrage erhalten",
+        "clientVerifiedTitle": "Bereit",
+        "clientRequestedTitle": "Übermittelt",
+        "contractorRecievedTitle": "Erhalten",
+        "button": {
+          "menu": "Anfragemenu",
+          "showFiles": "zusätzliche Dateien Anzeigen/Hochladen",
+          "hideFiles": "Dateien Verbergen"
+        }
+      },
+      "Service": {
+        "heading": "Entwurf",
+        "noType": "kein Service ausgewählt",
+        "button": {
+          "editType": "Service Typ bearbeiten",
+          "complete": "Service abschließen",
+          "menu": "Informationen Menu"
+        },
         "Filter": {
+          "heading": "Ihre Vorgaben",
           "menuButtonTitle": "Filter Menu",
           "pageDescription1": "Hier können Sie ihre Vorgaben für den Prozess festlegen.",
           "pageDescription2": "Dies hilft ihnen die Auswahl zu vereinfachen.",
-          "pageTitle": "Ihre Vorgaben",
-          "button": {
-            "selected": "Ausgewählt"
+          "noCategory": "keine Vorgabenkategorie geöffnet",
+          "components": {
+            "Card": {
+              "noFilters": "keine Vorgaben vorhanden",
+              "noSelectedFitlers": "keine Vorgaben ausgewählt"
+            },
+            "MultiSelection": {
+              "button": {
+                "all": "Alle",
+                "checkAll": "Alle Auswählen",
+                "unCheckAll": "Alle Abwählen"
+              }
+            }
+          }
+        },
+        "ServiceDetails": {
+          "dummy": "Dummy Service",
+          "dummy2": "Service noch nicht angelegt",
+          "components": {
+            "Manufacturing": {
+              "heading": {
+                "main": "Ihre Auswahl",
+                "post-processing": "Nachbearbeitungen (Optional)",
+                "model": "Modelle",
+                "material": "Modelle"
+              },
+              "pageDescription1": "Wählen sie die gewünschten Modelle, Materialien und Nachbearbeitungen aus.",
+              "pageDescription2": "Diese Auswahl wird verwendet um die passenden Hersteller zu finden.",
+              "complete": "Auswahl Vollständig",
+              "incomplete": "Auswahl Unvollständig",
+              "noModels": "keine Modelle vorhanden",
+              "noPostProcessings": "keine Nachbearbeitungen ausgewählt",
+              "noMaterials": "keine Materialien ausgewählt",
+              "MaterialCard": {
+                "img": "Materialbild",
+                "name": "Name:",
+                "type": "Typ:",
+                "properties": "Eigenschaften:"
+              },
+              "ModelCard": {
+                "img": "Modelbild",
+                "name": "Name:",
+                "dimensions": "Maße",
+                "surface": "Oberfläche",
+                "volume": "Volumen"
+              },
+              "PostProcessingCard": {
+                "name": "name",
+                "img": "Nachbearbeitungsbild",
+                "type": "Typ:",
+                "properties": "Eigenschaften:"
+              },
+              "button": {
+                "addMore": "Weitere hinzufügen",
+                "addModel": "Modell hinzufügen",
+                "addMaterial": "Material hinzufügen",
+                "addPostProcessing": "Nachbearbeitung hinzufügen",
+                "editModel": "Modell bearbeiten",
+                "editMaterial": "Material bearbeiten",
+                "editPostProcessing": "Nachbearbeitung bearbeiten",
+                "deleteModel": "Modell löschen",
+                "deleteMaterial": "Material löschen",
+                "deletePostProcessing": "Nachbearbeitung löschen"
+              }
+            }
+          }
+        },
+        "ServiceEdit": {
+          "Manufacturing": {
+            "Material": {
+              "available": "Verfügbare Materialien",
+              "error": {
+                "noMaterials": "keine Materialien gefunden"
+              },
+              "components": {
+                "Card": {
+                  "props": "Eigenschaften"
+                }
+              }
+            },
+            "Model": {
+              "selected": "Ausgewählte Modelle",
+              "available": "Verfügbare Modelle",
+              "error": {
+                "noModels": "keine Modelle gefunden"
+              },
+              "components": {
+                "Card": {
+                  "license": "Lizenz"
+                },
+                "Item": {
+                  "created": "Erstellt am",
+                  "license": "Lizenz",
+                  "certificates": "Zertifikate",
+                  "error": {
+                    "noCertificates": "keine Zertifikate vorhanden"
+                  }
+                },
+                "PreView": {
+                  "created": "Erstellt am",
+                  "license": "Lizenz",
+                  "certificates": "Zertifikate",
+                  "error": {
+                    "noCertificates": "keine Zertifikate vorhanden"
+                  }
+                }
+              },
+              "Upload": {
+                "loading": "Model wird hochgeladen",
+                "heading": "Eigene Modelle Hochladen",
+                "text": "per Drag & Drop oder Klick",
+                "error": {
+                  "tags": "Error Tags",
+                  "licenses": "keine Lizenz(en) angegeben",
+                  "certificates": "Error Certificates",
+                  "file": "Error File"
+                },
+                "button": { "upload": "Modell hochladen" },
+                "components": {
+                  "Card": {
+                    "name": "Name:",
+                    "size": "Größe:",
+                    "type": "Dateityp:",
+                    "date": "Datum:",
+                    "all": "Auf alle anwenden:",
+                    "tags": "Tags:",
+                    "tagsPH": "Tag1, Tag2, ...",
+                    "selectLicense": "Lizenz auswählen",
+                    "certificate": "Eventuelle Zertifikate:",
+                    "certificatePH": "Zertifikate1, Zertifikate2, ...",
+                    "license": "Lizenz der Datei:",
+                    "licensePH": "Lizenz1, Lizenz2 ...",
+                    "button": {
+                      "saveAll": "Auf alle Modelle anwenden"
+                    }
+                  }
+                }
+              }
+            },
+            "NewItem": {
+              "heading": "Erstelle einen neuen Prozess..."
+            },
+            "PostProcessing": {
+              "heading": "Verfügbare Nachbearbeitungen",
+              "selected": "Ausgewählte Nachbearbeitungen",
+              "error": {
+                "noPostProcessings": "keine Nachbearbeitungen gefunden"
+              },
+              "components": {
+                "Card": {
+                  "value": "Wert:",
+                  "type": "Typ:",
+                  "props": "Eigenschaften"
+                }
+              }
+            },
+            "Search": {
+              "placeholder": "Suche ..."
+            }
+          },
+          "Modeling": {
+            "heading": "Modell entwerfen lasssen"
+          }
+        },
+        "ServiceSelection": {
+          "components": {
+            "ServiceCard": {
+              "heading": {
+                "NONE": "error",
+                "ADDITIVE_MANUFACTURING": "Modell 3D-drucken lassen",
+                "CREATE_MODEL": "Modell entwerfen lassen",
+                "DELIVERY": "Lieferung",
+                "POST_PROCESSING": "Nachbearbeitung",
+                "PACKAGING": "Verpackung",
+                "QUALITY_CONTROL": "Qualitätskontrolle",
+                "ASSEMBLY": "Montage",
+                "AFTER_SALES": "Kundendienst"
+              },
+              "description": {
+                "NONE": "error",
+                "ADDITIVE_MANUFACTURING": "Lassen Sie Ihr individuelles 3D-Modell professionell drucken. Wir vermitteln sie auf Grund ihrer Anforderungen zu dem am besten passenden Herstellern.",
+                "CREATE_MODEL": "Beauftragen Sie einen Experten, ein individuelles 3D-Modell für Sie zu entwerfen.",
+                "MODELING": "Beauftragen Sie einen Experten, ein individuelles 3D-Modell für Sie zu entwerfen.",
+                "DELIVERY": "Sicherer und schneller Transport Ihrer Produkte.",
+                "POST_PROCESSING": "Optimierung und Veredelung Ihrer 3D-gedruckten Teile.",
+                "PACKAGING": "Professionelle Verpackungslösungen für den sicheren Versand.",
+                "QUALITY_CONTROL": "Umfassende Qualitätsprüfungen zur Sicherstellung höchster Standards.",
+                "ASSEMBLY": "Fachgerechte Montage Ihrer Bauteile.",
+                "AFTER_SALES": "Kundendienst und Unterstützung nach dem Verkauf."
+              }
+            }
           }
         }
       },
@@ -1489,51 +1791,6 @@
         "error": "Bitte geben Sie einen Namen ein",
         "button": {
           "save": "Name Speichern"
-        }
-      },
-      "ContractorSelection": {
-        "components": {
-          "ContractorCondition": {
-            "heading": "Angaben Unvollständig",
-            "noContractor": "Kein Auftragnehmer ausgewählt",
-            "noAddress": "keine Adressen ausgewählt"
-          },
-          "AddressSelection": {
-            "heading": "Addresse auswählen",
-            "button": {
-              "edit": "Bearbeiten",
-              "select": "Auswählen",
-              "new": "neue Adresse anlegen"
-            }
-          },
-          "ContractorList": {
-            "heading": "Auftragnehmerauswahl",
-            "contractors": "Auftragnehmer sortiert nach ihren Prioritäten",
-            "noContractorFound": "Kein Auftragnehmer gefunden",
-            "button": {
-              "select": "Auftragnehmer auswählen",
-              "save": "Speichern",
-              "edit": "Auftragnehmer bearbeiten"
-            }
-          }
-        },
-        "ContractorSelection": {
-          "heading": {
-            "main": "Auftragnehmer auswählen",
-            "sub1": "Auftragnehmer",
-            "billingDelivery": "Liefer- und Rechnungsadresse",
-            "billing": "Rechnungsadresse",
-            "delivery": "Lieferadresse"
-          },
-          "noAddress": "keine Adresse ausgewählt",
-          "noContractor": "Kein Auftragnehmer ausgewählt",
-
-          "button": {
-            "menu": "Hersteller Menu",
-            "selectAddress": "Adresse auswählen",
-            "editAddress": "Adresse ändern",
-            "resetAddress": "Adresse zurücksetzen"
-          }
         }
       },
       "Verify": {
@@ -1566,185 +1823,6 @@
           "button": {
             "menu": "Überprüfungsmenu"
           }
-        }
-      },
-      "Request": {
-        "Request": {
-          "heading": "Anfrage",
-          "clientVerified": "Ihr Prozess ist bereit zur Anfrage",
-          "clientRequested": "Der Auftragnehmer hat den Entwurf erhalten und wird sich in Kürze bei ihnen melden.",
-          "contractorRecieved": "Sie haben einen Anfrage erhalten",
-          "clientVerifiedTitle": "Bereit",
-          "clientRequestedTitle": "Übermittelt",
-          "contractorRecievedTitle": "Erhalten",
-          "button": {
-            "menu": "Anfragemenu",
-            "showFiles": "zusätzliche Dateien Anzeigen/Hochladen",
-            "hideFiles": "Dateien Verbergen"
-          }
-        }
-      },
-      "Clarify": {
-        "Clarify": {
-          "heading": "Rückfragen",
-          "messages": "Nachrichten",
-          "noMessages": "Keine Nachrichten vorhanden",
-          "button": {
-            "menu": "Rückfragenmenu"
-          }
-        }
-      },
-      "Contract": {
-        "components": {},
-        "Contract": {
-          "heading": "Angebot",
-          "orga": "Laden sie hier ihr Angebot und zugehörige Dateien hoch",
-          "user": "Laden sie hier zusätzliche Dateien hoch",
-
-          "button": {
-            "menu": "Angebotsmenu"
-          }
-        }
-      },
-      "Confirmation": {
-        "Confirmation": {
-          "heading": "Bestätigung des Angebots",
-
-          "button": {
-            "menu": "Bestätigungsmenu"
-          }
-        }
-      },
-      "Production": {
-        "Production": {
-          "heading": "Produktion",
-
-          "button": {
-            "menu": "Produktionsmenu"
-          }
-        }
-      },
-      "Delivery": {
-        "Delivery": {
-          "heading": "Lieferung",
-
-          "button": {
-            "menu": "Lieferungsmenu"
-          }
-        }
-      },
-      "Completed": {
-        "Completed": {
-          "heading": "Abgeschlossen",
-
-          "button": {
-            "menu": "Abgeschlossenmenu"
-          }
-        }
-      }
-    },
-    "Service": {
-      "Filter": {
-        "components": {
-          "Card": {
-            "noFilters": "keine Vorgaben vorhanden",
-            "noSelectedFitlers": "keine Vorgaben ausgewählt"
-          }
-        }
-      },
-      "ServiceSelection": {
-        "components": {
-          "ServiceCard": {
-            "heading": {
-              "NONE": "error",
-              "ADDITIVE_MANUFACTURING": "Modell 3D-drucken lassen",
-              "CREATE_MODEL": "Modell entwerfen lassen",
-              "DELIVERY": "Lieferung",
-              "POST_PROCESSING": "Nachbearbeitung",
-              "PACKAGING": "Verpackung",
-              "QUALITY_CONTROL": "Qualitätskontrolle",
-              "ASSEMBLY": "Montage",
-              "AFTER_SALES": "Kundendienst"
-            },
-            "description": {
-              "NONE": "error",
-              "ADDITIVE_MANUFACTURING": "Lassen Sie Ihr individuelles 3D-Modell professionell drucken. Wir vermitteln sie auf Grund ihrer Anforderungen zu dem am besten passenden Herstellern.",
-              "CREATE_MODEL": "Beauftragen Sie einen Experten, ein individuelles 3D-Modell für Sie zu entwerfen.",
-              "MODELING": "Beauftragen Sie einen Experten, ein individuelles 3D-Modell für Sie zu entwerfen.",
-              "DELIVERY": "Sicherer und schneller Transport Ihrer Produkte.",
-              "POST_PROCESSING": "Optimierung und Veredelung Ihrer 3D-gedruckten Teile.",
-              "PACKAGING": "Professionelle Verpackungslösungen für den sicheren Versand.",
-              "QUALITY_CONTROL": "Umfassende Qualitätsprüfungen zur Sicherstellung höchster Standards.",
-              "ASSEMBLY": "Fachgerechte Montage Ihrer Bauteile.",
-              "AFTER_SALES": "Kundendienst und Unterstützung nach dem Verkauf."
-            }
-          }
-        }
-      },
-      "ServiceDetails": {
-        "components": {
-          "manufacturing": {
-            "heading": "Ihre Auswahl",
-            "pageDescription1": "Wählen sie die gewünschten Modelle, Materialien und Nachbearbeitungen aus.",
-            "pageDescription2": "Diese Auswahl wird verwendet um die passenden Hersteller zu finden.",
-            "complete": "Auswahl Vollständig",
-            "incomplete": "Auswahl Unvollständig",
-            "model": {
-              "heading": "Modelle",
-              "complete": "Modell(e) Vollständig",
-              "incomplete": "Modell(e) Unvollständig",
-              "noModels": "keine Modelle vorhanden",
-              "img": "Modelbild",
-              "name": "Name:",
-              "dimensions": "Maße",
-              "surface": "Oberfläche",
-              "volume": "Volumen"
-            },
-            "material": {
-              "heading": "Material",
-              "complete": "Material(en) Vollständig",
-              "incomplete": "Material(en) Unvollständig",
-              "noMaterial": "kein Material ausgewählt",
-              "selected": "Ausgewählt",
-              "img": "Materialbild",
-              "name": "Name:",
-              "type": "Typ:",
-              "properties": "Eigenschaften:"
-            },
-            "postProcessing": {
-              "heading": "Nachbearbeitungen (Optional)",
-              "complete": "Nachbearbeitung(en) Vollständig",
-              "incomplete": "Nachbearbeitung(en) Unvollständig",
-              "noPostProcessings": "keine Nachbearbeitungen ausgewählt",
-              "name": "name",
-              "img": "Nachbearbeitungsbild",
-              "type": "Typ:",
-              "properties": "Eigenschaften:"
-            },
-            "button": {
-              "add": "Hinzufügen",
-              "addMore": "Weitere hinzufügen",
-              "addModel": "Modell hinzufügen",
-              "addMaterial": "Material hinzufügen",
-              "addPostProcessing": "Nachbearbeitung hinzufügen",
-              "edit": "Bearbeiten",
-              "editModel": "Modell bearbeiten",
-              "editMaterial": "Material bearbeiten",
-              "editPostProcessing": "Nachbearbeitung bearbeiten",
-              "delete": "Löschen",
-              "deleteModel": "Modell löschen",
-              "deleteMaterial": "Material löschen",
-              "deletePostProcessing": "Nachbearbeitung löschen"
-            }
-          }
-        }
-      },
-      "Service": {
-        "heading": "Entwurf",
-        "noType": "kein Service ausgewählt",
-        "button": {
-          "editType": "Service Typ bearbeiten",
-          "complete": "Service abschließen"
         }
       }
     },
@@ -2385,296 +2463,5 @@
     "Table": {
       "subHeading": "Eigene {{name}}"
     }
-  },
-  "Routes": {},
-  "Service": {
-    "context": {
-      "SerivceContext": {}
-    },
-    "Edit": {
-      "Edit": {}
-    },
-    "hooks": {
-      "useServiceEdit": {},
-      "useService": {}
-    },
-    "Manufacturing": {
-      "Filter": {
-        "components": {
-          "Card": {
-            "button": { "open": "Öffnen" }
-          },
-          "ColorPicker": {},
-          "DatePicker": {},
-          "Item": {},
-          "MultiSelection": {
-            "button": {
-              "all": "Alle",
-              "checkAll": "Alle Auswählen",
-              "unCheckAll": "Alle Abwählen"
-            }
-          },
-          "NumberInput": {},
-          "Selection": {},
-          "Slider": {},
-          "SliderSelection": {},
-          "TextArea": {},
-          "TestInput": {}
-        },
-        "hooks": {
-          "useFilter": {}
-        },
-        "Filter": {
-          "header": "Vorgabenfilter",
-          "noCategory": "keine Vorgabenkategorie geöffnet",
-          "button": {
-            "reset": "Zurücksetzen",
-            "cancel": "Abbrechen",
-            "apply": "Anwenden"
-          }
-        }
-      },
-      "Header": {
-        "Search": {
-          "Search": {
-            "placeholder": "Suche ..."
-          }
-        },
-        "types": {},
-        "Wizard": {
-          "components": {
-            "Item": {}
-          },
-          "Wizard": {
-            "empty": "---",
-            "model": "Modell",
-            "material": "Material",
-            "postprocessing": "Nachbearbeitung",
-            "overview": "zur Übersicht",
-            "ready": "Vollständig",
-            "notReady": "Unvollständig"
-          }
-        },
-        "Header": {}
-      },
-      "hooks": {},
-      "Material": {
-        "components": {
-          "Card": {
-            "props": "Eigenschaften",
-            "button": {
-              "select": "Auswählen"
-            }
-          },
-          "Item": {
-            "button": {
-              "change": "Ändern"
-            }
-          },
-          "PreView": {
-            "button": {
-              "select": "Auswählen"
-            }
-          }
-        },
-        "hooks": {},
-        "Material": {
-          "available": "Verfügbare Materialien",
-          "selected": "Ausgewählte Materialien",
-          "error": {
-            "noMaterials": "keine Materialien gefunden"
-          },
-          "button": {
-            "select": "Auswählen",
-            "deselect": "Abwählen",
-            "delete": "Löschen",
-            "save": "Speichern"
-          }
-        }
-      },
-      "Model": {
-        "components": {
-          "Card": {
-            "license": "Lizenz",
-            "certificates": "Zertifikate",
-            "button": {
-              "select": "Auswählen"
-            }
-          },
-          "Item": {
-            "created": "Erstellt am",
-            "license": "Lizenz",
-            "certificates": "Zertifikate",
-            "error": {
-              "noCertificates": "keine Zertifikate vorhanden"
-            },
-            "button": {
-              "change": "Ändern"
-            }
-          },
-          "PreView": {
-            "created": "Erstellt am",
-            "license": "Lizenz",
-            "certificates": "Zertifikate",
-            "error": {
-              "noCertificates": "keine Zertifikate vorhanden"
-            },
-            "button": {
-              "select": "Auswählen"
-            }
-          }
-        },
-        "hooks": {
-          "useModel": {},
-          "useModelUpload": {}
-        },
-        "types": {},
-        "Upload": {
-          "components": {
-            "Forms": {
-              "heading": "Datei Informationen hinzufügen"
-            },
-            "Form": {
-              "name": "Name:",
-              "size": "Größe:",
-              "type": "Dateityp:",
-              "date": "Datum:",
-
-              "all": "Auf alle anwenden:",
-              "tags": "Tags:",
-              "tagsPH": "Tag1, Tag2, ...",
-              "selectLicense": "Lizenz auswählen",
-              "certificate": "Eventuelle Zertifikate:",
-              "certificatePH": "Zertifikate1, Zertifikate2, ...",
-              "license": "Lizenz der Datei:",
-              "licensePH": "Lizenz1, Lizenz2 ...",
-              "button": {
-                "save": "Speichern"
-              }
-            }
-          },
-          "Upload": {
-            "error": {
-              "tags": "Error Tags",
-              "licenses": "keine Lizenz(en) angegeben",
-              "certificates": "Error Certificates",
-              "file": "Error File"
-            },
-            "loading": "Model wird hochgeladen",
-            "card": {
-              "heading": "Eigene Modelle Hochladen",
-              "text": "per Drag & Drop oder Klick"
-            },
-            "button": {
-              "upload": "Modelle Hochladen",
-              "delete": "Löschen",
-              "edit": "Bearbeiten",
-              "save": "Speichern",
-              "saveAll": "Auf alle Modelle anwenden"
-            }
-          }
-        },
-        "Model": {
-          "selected": "Ausgewählte Modelle",
-          "available": "Verfügbare Modelle",
-          "upload": {
-            "img": "Modelle Hochladen",
-            "heading": "Eigene Modelle Hochladen",
-            "button": "zum Upload"
-          },
-          "error": {
-            "noModels": "keine Modelle gefunden"
-          },
-          "button": {
-            "select": "Auswählen"
-          }
-        }
-      },
-      "NewItem": {
-        "NewItem": {
-          "heading": "Erstelle einen neuen Prozess..."
-        }
-      },
-      "PostProcessing": {
-        "components": {
-          "Card": {
-            "value": "Wert:",
-            "valueList": "Werteliste:",
-            "type": "Typ:",
-            "props": "Eigenschaften"
-          },
-          "Catalog": {
-            "button": {
-              "overview": "zur Übersicht"
-            },
-            "error": {
-              "noPostProcessings": "keine Nachbearbeitungen gefunden"
-            }
-          },
-          "Item": {
-            "button": {
-              "select": "Auswählen",
-              "deselect": "Abwählen"
-            }
-          }
-        },
-        "hooks": {
-          "usePostProcessing": {}
-        },
-        "PostProcessing": {
-          "available": "Verfügbare Nachbearbeitungen",
-          "selected": "Ausgewählte Nachbearbeitungen",
-          "error": {
-            "noPostProcessings": "keine Nachbearbeitungen gefunden",
-            "noPostProcessingsSelected": "keine Nachbearbeitungen ausgewählt"
-          },
-          "button": {
-            "delete": "Entfernen",
-            "deselect": "Abwählen",
-            "select": "Auswählen",
-            "save": "Speichern"
-          }
-        }
-      },
-      "types": {
-        "types": {}
-      },
-      "Manufacturing": {}
-    },
-    "Modeling": {
-      "Modeling": {
-        "heading": "Modell entwerfen lasssen"
-      }
-    },
-    "Overview": {
-      "components": {
-        "Item": {
-          "confirm": {
-            "cancel": "Prozess wirklich löschen?"
-          },
-          "headingEmpty": "Prozess"
-        }
-      },
-      "Overview": {
-        "heading": "Projekt",
-        "button": {
-          "overview": "zur Übersicht",
-          "expand": "Ausklappen",
-          "collapse": "Zusammenklappen",
-          "new": "neuen Prozess anlegen"
-        }
-      }
-    },
-    "Select": {
-      "components": {
-        "Item": {}
-      },
-      "Select": {
-        "heading": "Service auswählen",
-        "continue": "Service Fortsetzen"
-      }
-    },
-    "Service": {}
-  },
-  "Test": {}
+  }
 }

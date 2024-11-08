@@ -133,19 +133,19 @@ const AdminUser: React.FC<Props> = (props) => {
                   <td>
                     <Container direction="col" width="full">
                       <Button
-                        title={t("Admin.Resources.button.details")}
+                        title={t("general.button.details")}
                         onClick={() =>
                           handleOnClickButtonDetails(user.hashedID)
                         }
                         variant="text"
                       />
                       <Button
-                        title={t("Admin.Resources.button.edit")}
+                        title={t("general.button.edit")}
                         onClick={() => handleOnClickButtonEdit(user.hashedID)}
                         variant="text"
                       />
                       <Button
-                        title={t("Admin.Resources.button.delete")}
+                        title={t("general.button.delete")}
                         onClick={() =>
                           handleOnClickButtonDelete(user.hashedID, user.name)
                         }

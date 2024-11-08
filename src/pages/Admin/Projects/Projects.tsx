@@ -144,7 +144,7 @@ const AdminProjects: React.FC<Props> = (props) => {
                     <td>
                       <Container direction="col" width="full">
                         <Button
-                          title={t("Admin.Projects.button.details")}
+                          title={t("general.button.details")}
                           onClick={() =>
                             handleOnClickButtonDetails(project.projectID)
                           }
@@ -158,7 +158,7 @@ const AdminProjects: React.FC<Props> = (props) => {
                           variant="text"
                         /> */}
                         <Button
-                          title={t("Admin.Projects.button.delete")}
+                          title={t("general.button.delete")}
                           onClick={() =>
                             handleOnClickButtonDelete(
                               project.projectID,

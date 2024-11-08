@@ -245,7 +245,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
           ))}
 
         <Button
-          title={t(`components.Resources.NodeForm.button.${type}`)}
+          title={t(`general.button.${type}`)}
           onClick={handleSubmit(onSubmit)}
           loading={submitOrgaNodeForm.isLoading}
         />

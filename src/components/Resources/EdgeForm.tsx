@@ -203,9 +203,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                             justify="start"
                           >
                             <Button
-                              title={t(
-                                "components.Resources.EdgeForm.button.add"
-                              )}
+                              title={t("general.button.add")}
                               onClick={() => {
                                 append({
                                   nodeID: node.nodeID,
@@ -231,9 +229,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                                 onClick={() =>
                                   setPaginationAll((prevState) => prevState + 5)
                                 }
-                                title={t(
-                                  "components.Resources.EdgeForm.button.showMore"
-                                )}
+                                title={t("general.button.showMore")}
                                 size="sm"
                                 variant="text"
                               />
@@ -243,9 +239,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                                 onClick={() =>
                                   setPaginationAll((prevState) => prevState - 5)
                                 }
-                                title={t(
-                                  "components.Resources.EdgeForm.button.showLess"
-                                )}
+                                title={t("general.button.showLess")}
                                 size="sm"
                                 variant="text"
                               />
@@ -347,9 +341,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                         }`}
                       >
                         <Button
-                          title={t(
-                            "components.Resources.EdgeForm.button.delete"
-                          )}
+                          title={t("general.button.delete")}
                           onClick={() => remove(node.index)}
                           size="sm"
                           variant="text"

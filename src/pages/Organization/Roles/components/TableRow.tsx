@@ -70,7 +70,7 @@ const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
           <PermissionGate element="OrganizationButtonEditRole">
             <Button
               size="sm"
-              title={t(`Organization.Roles.button.edit`)}
+              title={t(`general.button.edit`)}
               onClick={handleOnClickButtonEdit}
               children={<EditIcon fontSize="small" />}
               variant="text"
@@ -82,7 +82,7 @@ const OrganizationRolesTableRow: React.FC<OrganizationRolesTableRowProps> = (
               variant="text"
               onClick={handleOnClickButtonDelete}
               children={<DeleteForeverIcon fontSize="small" />}
-              title={t("Organization.Roles.button.delete")}
+              title={t("general.button.delete")}
             />
           </PermissionGate>
         </div>

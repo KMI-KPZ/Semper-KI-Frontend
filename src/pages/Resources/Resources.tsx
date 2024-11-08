@@ -7,7 +7,7 @@ import ResourcesOverview from "./Overview/Overview";
 import OrgaGraph from "./components/OrgaGraph";
 import ResourcesNodeView from "../../components/Resources/NodeView";
 import PrivateGraph from "./components/PrivateGraph";
-import RequestInformationForm from "./RequestInformation/RequestInformationForm";
+import RequestInformationForm from "../../components/Form/RequestInformationForm";
 import RequestInformation from "./RequestInformation/RequestInformation";
 import ResourcesOutlet from "@/outlets/ResourcesOutlet";
 import ResourcesNodeTable from "../../components/Resources/NodeTable";
@@ -23,8 +23,7 @@ const Resources: React.FC<ResourcesProps> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
       <PageHeader>
-        <Heading variant="h1">Matching Profil</Heading>
-        {/* <Heading variant="h1">{t("Resources.header")}</Heading> */}
+        <Heading variant="h1">{t("Resources.header")}</Heading>
       </PageHeader>
       <div className="flex w-full flex-col gap-5 md:flex-row">
         <ResourcesMenu />
@@ -54,7 +53,7 @@ const Resources: React.FC<ResourcesProps> = (props) => {
                       <ResourcesNodeView>
                         <Button
                           size="sm"
-                          title={t("Resources.button.edit")}
+                          title={t("general.button.edit")}
                           to="edit"
                         />
                       </ResourcesNodeView>

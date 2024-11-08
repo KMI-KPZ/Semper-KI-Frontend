@@ -85,13 +85,11 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
         })
       ),
       supportedServices: yup.array().of(yup.string().required()).required(),
-      taxID: yup
-        .string()
-        .required(
-          t("yup.requiredName", {
-            name: t("components.Form.OrganizationForm.taxID"),
-          })
-        ),
+      taxID: yup.string().required(
+        t("yup.requiredName", {
+          name: t("components.Form.OrganizationForm.taxID"),
+        })
+      ),
     })
     .required();
 
@@ -261,12 +259,12 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
       <Container width="full">
         <Button
           variant="text"
-          title={t(`components.Form.OrganizationForm.button.cancel`)}
+          title={t(`general.button.cancel`)}
           onClick={handleOnClickButtonCancel}
         />
         <Button
           variant="primary"
-          title={t(`components.Form.OrganizationForm.button.safe`)}
+          title={t(`general.button.save`)}
           onClick={handleSubmit(onSubmit)}
         />
       </Container>

@@ -157,10 +157,7 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
         </Container>
       </Container> */}
       <PermissionGate element="OrganizationButtonEditOrga">
-        <Button
-          title={t(`Organization.View.Info.button.edit`)}
-          onClick={openEdit}
-        />
+        <Button title={t(`general.button.edit`)} onClick={openEdit} />
       </PermissionGate>
     </Container>
   );

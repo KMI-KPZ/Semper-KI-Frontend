@@ -35,9 +35,7 @@ const PortfolioItem: React.FC<Props> = (props) => {
         <Button
           testid="portfolio-item-button"
           onClick={handleOnClickButton}
-          title={t(
-            `Portfolio.Item.button.${open === true ? "collapse" : "expand"}`
-          )}
+          title={t(`general.button.${open === true ? "collapse" : "expand"}`)}
           children={
             <div
               className={`transition-all duration-300 ${

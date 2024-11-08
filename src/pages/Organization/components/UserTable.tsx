@@ -186,11 +186,7 @@ const OrganizationtableRow: React.FC<{
             <Button
               size="sm"
               variant="text"
-              title={t(
-                `Organization.components.UserTable.button.${
-                  edit === true ? "safe" : "edit"
-                }`
-              )}
+              title={t(`general.button.${edit === true ? "save" : "edit"}`)}
               onClick={handleOnClickEdit}
               children={
                 edit === true ? (
@@ -207,7 +203,7 @@ const OrganizationtableRow: React.FC<{
               size="sm"
               onClick={handleOnClickDelete}
               children={<DeleteForeverIcon fontSize="small" />}
-              title={t("Organization.Roles.button.delete")}
+              title={t("general.button.delete")}
             />
           </PermissionGate>
         </div>

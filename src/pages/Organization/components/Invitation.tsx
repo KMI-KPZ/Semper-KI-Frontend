@@ -164,14 +164,14 @@ const OrganizationInvitation: React.FC<OrganizationInvitationProps> = (
                   variant="text"
                   children={<ContentPasteIcon />}
                   onClick={() => handleOnClickButtonCopy(invite.invitation_url)}
-                  title={t("Organization.components.Invitation.button.copy")}
+                  title={t("general.button.copy")}
                 />
                 <Button
                   size="sm"
                   variant="text"
                   children={<DeleteForeverIcon />}
                   onClick={() => handleOnClickButtonDelete(invite.id)}
-                  title={t("Organization.components.Invitation.button.delete")}
+                  title={t("general.button.delete")}
                 />
               </Container>
             </div>

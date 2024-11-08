@@ -79,7 +79,7 @@ const OrganizationRolesItem: React.FC<OrganizationRolesItemProps> = (props) => {
       </LoadingSuspense>
       <Button
         size="sm"
-        title={t(`Organization.Roles.button.edit`)}
+        title={t(`general.button.edit`)}
         onClick={handleOnClickButtonEdit}
         startIcon={<EditIcon fontSize="small" />}
       />
@@ -87,7 +87,7 @@ const OrganizationRolesItem: React.FC<OrganizationRolesItemProps> = (props) => {
         size="sm"
         onClick={handleOnClickButtonDelete}
         startIcon={<DeleteForeverIcon fontSize="small" />}
-        title={t("Organization.Roles.button.delete")}
+        title={t("general.button.delete")}
       />
     </div>
   );

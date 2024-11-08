@@ -54,7 +54,7 @@ const Coypu: React.FC<CoypuProps> = (props) => {
         variant="primary"
         startIcon={expanded === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
         onClick={() => setExpanded(!expanded)}
-        title={t(`Home.components.Coypu.button.${expanded ? "less" : "more"}`)}
+        title={t(`general.button.${expanded ? "showLess" : "showMore"}`)}
       />
     </Container>
   );

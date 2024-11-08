@@ -24,13 +24,13 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
   return (
     <Container direction="col" width="full" justify="start">
       <Container width="full" direction="row">
-        <Heading variant="h2">{t("Resources.Printers.table.header")}</Heading>
+        <Heading variant="h2">{t("Resources.Printers.header")}</Heading>
       </Container>
       <Divider />
       <Container width="full" justify="between" direction="row">
-        <Heading variant="h3">{t("Resources.Printers.table.own")}</Heading>
+        <Heading variant="h3">{t("Resources.Printers.own")}</Heading>
         <Button
-          title={t("Resources.Printers.table.button.createOwn")}
+          title={t("Resources.Printers.button.createOwn")}
           variant="secondary"
           size="sm"
           width="fit"
@@ -45,15 +45,6 @@ const ResourcesPrintersTable: React.FC<ResourcesPrintersTableProps> = (
           nodeType="printer"
         />
       )}
-      {/* <Divider />
-      <Container width="full" justify="between" direction="row">
-        <Heading variant="h3">{t("Resources.Printers.table.all")}</Heading>
-      </Container>
-      <ResourceTable
-        nodes={allPrinters.data}
-        nodeType="printer"
-        actionType="all"
-      /> */}
     </Container>
   );
 };

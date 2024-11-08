@@ -107,7 +107,7 @@ const ContactForm: React.FC<ContactFormProps> = (props) => {
         );
       })}
       <Button
-        title={t(`components.Form.ContactForm.button.send`)}
+        title={t(`general.button.send`)}
         onClick={handleSubmit(onSubmit)}
       />
     </form>

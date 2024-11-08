@@ -75,7 +75,7 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
           <Button
             onClick={handleOnClickEditCheckButton}
             variant="primary"
-            title={t("Projects.Project.components.TitleForm.button.edit")}
+            title={t("Project.components.TitleForm.button.edit")}
             size="xs"
             width="fit"
             children={<CheckIcon fontSize="small" />}

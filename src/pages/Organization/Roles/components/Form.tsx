@@ -259,11 +259,7 @@ const OrganizationRolesForm: React.FC<OrganizationRolesFormProps> = (props) => {
             updateRole.isLoading ||
             updateRolePermission.isLoading
           }
-          title={t(
-            `Organization.Roles.button.${
-              role === undefined ? "create" : "safe"
-            }`
-          )}
+          title={t(`general.button.${role === undefined ? "create" : "save"}`)}
         />
       </form>
     </div>

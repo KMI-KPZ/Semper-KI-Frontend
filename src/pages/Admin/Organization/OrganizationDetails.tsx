@@ -316,7 +316,7 @@ const AdminOrganizationDetails: React.FC<AdminOrganizationDetailsProps> = (
         <Button
           size="sm"
           variant="primary"
-          title={t("Admin.Organization.details.button.edit")}
+          title={t("general.button.edit")}
           to={"edit"}
         />
       </Container>

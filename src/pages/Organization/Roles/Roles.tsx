@@ -120,7 +120,7 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
             />
             <PermissionGate element="OrganizationButtonCreateRole">
               <Button
-                title={t("Organization.Roles.button.create")}
+                title={t("general.button.create")}
                 onClick={createNewRole}
               />
             </PermissionGate>

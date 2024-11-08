@@ -182,7 +182,7 @@ const AdminUserDetails: React.FC<AdminUserDetailsProps> = (props) => {
         <Button
           size="sm"
           variant="primary"
-          title={t("Admin.User.button.edit")}
+          title={t("general.button.edit")}
           to={"edit"}
         />
       </Container>

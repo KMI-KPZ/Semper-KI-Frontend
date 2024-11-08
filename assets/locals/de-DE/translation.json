@@ -1923,5 +1923,42 @@
       "noItems": "keine Anfragen vorhanden",
       "button": { "new": "neue Anfrage" }
     }
+  },
+  "Test": {
+    "UITest": {
+      "heading": "UI - Übersicht | H1 - Überschrift",
+      "h2": "H2 - Überschrift",
+      "h3": "H3 - Überschrift",
+      "h4": "H4 - Überschrift",
+      "subHeading": "subHeading - Untertitel",
+      "text": "Standard Text",
+      "button-heading": "Button-Übersicht",
+      "primary-buttons": "Primärer Buttons",
+      "secondary-buttons": "Sekundärer Buttons",
+      "tertiary-buttons": "Tertiärer Buttons",
+      "text-buttons": "Text Buttons",
+      "rows": {
+        "active": "Aktiv",
+        "inactive": "Inaktiv",
+        "starticon": "Start-Icon",
+        "endicon": "End-Icon",
+        "xs": "Extra Klein",
+        "sm": "Klein",
+        "md": "Mittel",
+        "lg": "Groß"
+      },
+      "button": {
+        "primary-active": "Primärer Button aktiv",
+        "primary-inactive": "Primärer Button inaktiv",
+        "secondary-active": "Sekundärer Button aktiv",
+        "secondary-inactive": "Sekundärer Button inaktiv",
+        "tertiary-active": "Tertiärer Button aktiv",
+        "tertiary-inactive": "Tertiärer Button inaktiv",
+        "text-active": "Text Button aktiv",
+        "text-inactive": "Text Button inaktiv"
+      },
+      "card-heading": "Card-Übersicht",
+      "table-heading": "Tabellen-Übersicht"
+    }
   }
 }

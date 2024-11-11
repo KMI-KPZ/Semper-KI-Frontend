@@ -102,14 +102,14 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
           </Container>
           {process.processDetails.provisionalContractor === undefined ? (
             <Container width="full" height="full" direction="col">
-              <Button
+              {/* <Button
                 size="sm"
                 onClick={handleOnClickButtonSelectContractor}
                 variant="primary"
                 title={t(
                   "Process.components.ContractorSelection.button.select"
-                )}
-              />
+                )} 
+              />*/}
             </Container>
           ) : contractors.isLoading ? (
             <LoadingAnimation />
@@ -120,14 +120,14 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
           ) : (
             <Container width="full" direction="col">
               <ContractorCard contractor={currentContractor} />
-              <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+              {/* <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
                 <Button
                   size="sm"
                   onClick={handleOnClickButtonEditContractor}
                   variant="secondary"
                   title={t("general.button.edit")}
                 />
-              </ProcessStatusGate>
+              </ProcessStatusGate> */}
             </Container>
           )}
         </Container>

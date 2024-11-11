@@ -14,6 +14,10 @@ export default {
     },
     extend: {
       colors: {
+        'nru': {
+          DEFAULT: '#005b8c',
+          'light': '#67aed5',
+        },	
         'ultramarinblau': {
           DEFAULT:'#00387B',
           dark:'#263652'

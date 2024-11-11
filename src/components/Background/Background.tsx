@@ -8,7 +8,7 @@ export const Background: React.FC<Props> = (props) => {
     <div
       className="fixed left-0 top-0 -z-10
      h-full min-h-[200px] w-full
-     bg-ultramarinblau-dark
+     bg-nru
      "
     ></div>
   );

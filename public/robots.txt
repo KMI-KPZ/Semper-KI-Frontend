@@ -1,4 +1,7 @@
 # https://www.robotstxt.org/robotstxt.html
+
+Sitemap: https://semper-ki.org/sitemap.xml
+
 User-agent: Googlebot
 Allow: /$
 

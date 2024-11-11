@@ -1617,13 +1617,13 @@
               "heading": {
                 "NONE": "error",
                 "ADDITIVE_MANUFACTURING": "Modell 3D-drucken lassen",
-                "CREATE_MODEL": "Modell entwerfen lassen",
-                "DELIVERY": "Lieferung",
-                "POST_PROCESSING": "Nachbearbeitung",
-                "PACKAGING": "Verpackung",
-                "QUALITY_CONTROL": "Qualitätskontrolle",
-                "ASSEMBLY": "Montage",
-                "AFTER_SALES": "Kundendienst"
+                "CREATE_MODEL": "Modell entwerfen lassen (Test)",
+                "DELIVERY": "Lieferung (Test)",
+                "POST_PROCESSING": "Nachbearbeitung (Test)",
+                "PACKAGING": "Verpackung (Test)",
+                "QUALITY_CONTROL": "Qualitätskontrolle (Test)",
+                "ASSEMBLY": "Montage (Test)",
+                "AFTER_SALES": "Kundendienst (Test)"
               },
               "description": {
                 "NONE": "error",

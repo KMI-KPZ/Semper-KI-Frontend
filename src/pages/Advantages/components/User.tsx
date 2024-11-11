@@ -42,7 +42,7 @@ const AdvantagesUser: React.FC<AdvantagesUserProps> = (props) => {
         variant="primary"
         onClick={handleOnClickButton}
         startIcon={<LoginIcon fontSize="large" />}
-        title={t("Home.components.ClientInfo.register")}
+        title={t("Advantages.components.User.button.register")}
         width="full"
       />
     </Container>

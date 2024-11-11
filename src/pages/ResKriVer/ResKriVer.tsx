@@ -52,7 +52,7 @@ const ResKriVer: React.FC<ResKriVerProps> = (props) => {
               variant="h1"
               className="absolute -left-8 -top-8 rounded-full border-2 bg-white p-3"
             >
-              {t("ResKriVer.ResKriVer.title")}
+              {t("ResKriVer.heading")}
             </Heading>
             <img
               src={ResKriVerLogo}
@@ -110,7 +110,7 @@ const ResKriVer: React.FC<ResKriVerProps> = (props) => {
               </Container>
             </Container>
             <Button
-              title={t("ResKriVer.ResKriVer.button.search")}
+              title={t("ResKriVer.button.search")}
               endIcon={<NavigateNextIcon />}
               onClick={handleSubmit(onSubmit)}
               className="absolute -bottom-5 right-20 rounded-full  bg-white"

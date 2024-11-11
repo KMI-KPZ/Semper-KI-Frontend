@@ -14,7 +14,9 @@ const ResourcesOutlet: React.FC<PropsWithChildren<ResourcesOutletProps>> = (
   const { organization } = useOrganization();
   const { t } = useTranslation();
 
-  if (organization.supportedServices.includes(ServiceType.MANUFACTURING))
+  if (
+    organization.supportedServices.includes(ServiceType.ADDITIVE_MANUFACTURING)
+  )
     return (
       <>
         {children}
@@ -25,11 +27,11 @@ const ResourcesOutlet: React.FC<PropsWithChildren<ResourcesOutletProps>> = (
     return (
       <Container direction="col" className="h-full w-full">
         <Heading variant="h2">
-          {t("routeOutlets.ResourcesOutlet.notSelected")}
+          {t("outlets.ResourcesOutlet.notSelected")}
         </Heading>
-        <Text>{t("routeOutlets.ResourcesOutlet.subText")}</Text>
+        <Text>{t("outlets.ResourcesOutlet.subText")}</Text>
         <Button
-          title={t("routeOutlets.ResourcesOutlet.button.toOrgaProfile")}
+          title={t("outlets.ResourcesOutlet.button.toOrgaProfile")}
           size="sm"
           variant="primary"
           to="/organization"

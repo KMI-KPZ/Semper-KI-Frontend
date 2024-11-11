@@ -18,7 +18,7 @@ import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostPro
 import useGetMaterials, {
   MaterialProps,
 } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
-import ProcessServiceModelCard from "./components/ModellCard";
+import ProcessServiceModelCard from "./components/ModelCard";
 import ProcessServiceMaterialCard from "./components/MaterialCard";
 import ProcessSericePostProcessingCard from "./components/PostProcessingCard";
 import ProcessStatusGate from "../../../StatusGate";
@@ -188,18 +188,20 @@ const ServiceManufacturingDetails: React.FC<
         className="p-5 pb-2"
       >
         <Heading variant="h3">
-          {t("Process.Service.ServiceDetails.components.manufacturing.heading")}
+          {t(
+            "Process.components.Service.ServiceDetails.components.Manufacturing.heading.main"
+          )}
         </Heading>
       </Container>
       <Container width="full" direction="col" className="gap-0 p-2">
         <Text>
           {t(
-            "Process.Service.ServiceDetails.components.manufacturing.pageDescription1"
+            "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription1"
           )}
         </Text>
         <Text>
           {t(
-            "Process.Service.ServiceDetails.components.manufacturing.pageDescription2"
+            "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription2"
           )}
         </Text>
       </Container>
@@ -216,14 +218,14 @@ const ServiceManufacturingDetails: React.FC<
           <ProcessConditionIcon error={models.length === 0} />
           <Heading variant="h4" className="text-xl">
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.model.heading"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.heading.model"
             )}
           </Heading>
         </Container>
         {models.length === 0 ? (
           <Text className="">
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.material.noMaterial"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.noModels"
             )}
           </Text>
         ) : (
@@ -234,7 +236,7 @@ const ServiceManufacturingDetails: React.FC<
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
             title={t(
-              `Process.Service.ServiceDetails.components.manufacturing.button.${
+              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
                 models.length === 0 ? "addModel" : "addMore"
               }`
             )}
@@ -243,7 +245,7 @@ const ServiceManufacturingDetails: React.FC<
             onClick={handleOnButtonClickModel}
             startIcon={<AddIcon />}
             children={t(
-              `Process.Service.ServiceDetails.components.manufacturing.button.${
+              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
                 models.length === 0 ? "addModel" : "addMore"
               }`
             )}
@@ -262,14 +264,14 @@ const ServiceManufacturingDetails: React.FC<
           <ProcessConditionIcon error={materials.length === 0} />
           <Heading variant="h4" className="text-xl">
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.material.heading"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.heading.material"
             )}
           </Heading>
         </Container>
         {materials.length === 0 ? (
           <Text className="">
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.material.noMaterial"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.noMaterials"
             )}
           </Text>
         ) : (
@@ -280,7 +282,7 @@ const ServiceManufacturingDetails: React.FC<
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
             title={t(
-              `Process.Service.ServiceDetails.components.manufacturing.button.${
+              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
                 materials.length === 0 ? "addMaterial" : "addMore"
               }`
             )}
@@ -289,7 +291,7 @@ const ServiceManufacturingDetails: React.FC<
             onClick={handleOnButtonClickMaterial}
             startIcon={<AddIcon />}
             children={t(
-              `Process.Service.ServiceDetails.components.manufacturing.button.${
+              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
                 materials.length === 0 ? "addMaterial" : "addMore"
               }`
             )}
@@ -308,14 +310,14 @@ const ServiceManufacturingDetails: React.FC<
           <ProcessConditionIcon error={false} />
           <Heading variant="h4" className="whitespace-nowrap text-xl">
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.postProcessing.heading"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.heading.post-processing"
             )}
           </Heading>
         </Container>
         {postProcessings.length === 0 ? (
           <Text className="">
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.postProcessing.noPostProcessings"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.noPostProcessings"
             )}
           </Text>
         ) : (
@@ -329,7 +331,7 @@ const ServiceManufacturingDetails: React.FC<
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
             title={t(
-              `Process.Service.ServiceDetails.components.manufacturing.button.${
+              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
                 postProcessings.length === 0 ? "addPostProcessing" : "addMore"
               }`
             )}
@@ -338,7 +340,7 @@ const ServiceManufacturingDetails: React.FC<
             onClick={handleOnButtonClickPostProcessing}
             startIcon={<AddIcon />}
             children={t(
-              `Process.Service.ServiceDetails.components.manufacturing.button.${
+              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
                 postProcessings.length === 0 ? "addPostProcessing" : "addMore"
               }`
             )}

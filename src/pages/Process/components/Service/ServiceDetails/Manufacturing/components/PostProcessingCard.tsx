@@ -46,7 +46,7 @@ const ProcessSericePostProcessingCard: React.FC<
       <img
         src={TestImg}
         alt={t(
-          "Process.Service.ServiceDetails.components.manufacturing.postProcessing.img"
+          "Process.components.Service.ServiceDetails.components.Manufacturing.PostProcessingCard.img"
         )}
         className="max-h-40 w-full object-contain md:w-fit"
       />
@@ -54,7 +54,7 @@ const ProcessSericePostProcessingCard: React.FC<
         <Container direction="row" justify="between" width="full">
           <Text>
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.postProcessing.name"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.PostProcessingCard.name"
             )}
           </Text>
           <Text>{postProcessing.title}</Text>
@@ -62,7 +62,7 @@ const ProcessSericePostProcessingCard: React.FC<
         <Container direction="row" justify="between" width="full">
           <Text>
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.postProcessing.type"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.PostProcessingCard.type"
             )}
           </Text>
           <Text>---</Text>
@@ -70,7 +70,7 @@ const ProcessSericePostProcessingCard: React.FC<
         <Container direction="row" justify="between" width="full">
           <Text>
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.postProcessing.properties"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.PostProcessingCard.properties"
             )}
           </Text>
         </Container>
@@ -106,27 +106,23 @@ const ProcessSericePostProcessingCard: React.FC<
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
             title={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.editPostProcessing"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.button.editPostProcessing"
             )}
             size="sm"
             variant="secondary"
             onClick={handleOnButtonClickPostProcessing}
-            children={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.edit"
-            )}
+            children={t("general.button.edit")}
           />
           <Button
             title={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.deletePostProcessing"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.button.deletePostProcessing"
             )}
             size="sm"
             variant="text"
             onClick={() =>
               handleOnButtonClickDeletePostProcessing(postProcessing.id)
             }
-            children={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.delete"
-            )}
+            children={t("general.button.delete")}
           />
         </ProcessStatusGate>
       </Container>

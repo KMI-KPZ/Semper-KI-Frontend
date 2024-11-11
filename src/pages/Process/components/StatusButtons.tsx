@@ -46,7 +46,9 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
             error ? "border-red-500" : ""
           }`}
         >
-          <Heading variant="h2">{t("Process.StatusButtons.heading")}</Heading>
+          <Heading variant="h2">
+            {t("Process.components.StatusButtons.heading")}
+          </Heading>
           {process.processErrors.map((error, index) => (
             <ProcessConditionItem key={index} error={error} />
           ))}

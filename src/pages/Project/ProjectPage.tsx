@@ -36,7 +36,7 @@ const ProjectPage: React.FC<ProjectPageProps> = (props) => {
   return (
     <Container width="full" direction="col">
       <BackButtonContainer>
-        <Heading variant="h1">{t("Project.ProjectPage.header")}</Heading>
+        <Heading variant="h1">{t("Project.header")}</Heading>
       </BackButtonContainer>
       <ProjectInfo project={project} />
       <ProjectProcesses processes={project.processes} />

@@ -35,11 +35,11 @@ const Service: React.FC<ServiceProps> = (props) => {
   //   });
   // };
 
-  const menuButtonTitle = t("Project.components.Info.button.menu");
-  const pageTitle = `${t("Process.Service.Service.title")}: ${
+  const menuButtonTitle = t("Process.components.Service.button.menu");
+  const pageTitle = `${t("Process.components.Service.heading")}: ${
     process.serviceType === undefined ||
     process.serviceType === ServiceType.NONE
-      ? t("Process.Service.Service.noType")
+      ? t("Process.components.Service.noType")
       : t(
           `enum.ServiceType.${
             ServiceType[process.serviceType] as keyof typeof ServiceType
@@ -60,7 +60,7 @@ const Service: React.FC<ServiceProps> = (props) => {
       pageTitle={pageTitle}
       menuChildren={
         <Button
-          title={t("Process.Service.Service.button.editType")}
+          title={t("Process.components.Service.button.editType")}
           stopPropagation={false}
           variant="secondary"
           size="sm"
@@ -72,9 +72,11 @@ const Service: React.FC<ServiceProps> = (props) => {
         <ServiceSelection />
       ) : (
         <>
-          <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
-            <ProcessFilter />
-          </ProcessStatusGate>
+          {process.serviceType === ServiceType.ADDITIVE_MANUFACTURING ? (
+            <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+              <ProcessFilter />
+            </ProcessStatusGate>
+          ) : null}
           <ServiceDetails process={process} />
         </>
       )}

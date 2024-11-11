@@ -98,7 +98,9 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
           <ProcessModelUpload />
           <Container width="full" direction="col">
             <Heading variant="h2" className="w-full text-left">
-              {t("Service.Manufacturing.Model.Model.available")}
+              {t(
+                "Process.components.Service.ServiceEdit.Manufacturing.Model.available"
+              )}
             </Heading>
             <Search handleSearchInputChange={handleSearchInputChange} />
             <Container direction="row" wrap="wrap" width="full">
@@ -113,9 +115,7 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
                         openModelView={openModelView}
                       >
                         <Button
-                          title={t(
-                            "Service.Manufacturing.Model.Model.button.select"
-                          )}
+                          title={t("general.button.select")}
                           variant="primary"
                           size="sm"
                           onClick={() => handleOnClickButtonSelect(model.file)}
@@ -125,7 +125,9 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
                 </>
               ) : (
                 <Text className="w-full text-center">
-                  {t("Service.Manufacturing.Model.Model.error.noModels")}
+                  {t(
+                    "Process.components.Service.ServiceEdit.Manufacturing.Model.error.noModels"
+                  )}
                 </Text>
               )}
             </Container>

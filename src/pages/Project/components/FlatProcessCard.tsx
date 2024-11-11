@@ -96,14 +96,14 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
               onClick={handleOnClickButtonContinue}
               size="sm"
               variant="primary"
-              title={t("Project.components.FlatProcessCard.button.continue")}
+              title={t("general.button.continue")}
             />
           </Badge>
           <Button
             onClick={handleOnClickButtonDelete}
             size="sm"
             variant="text"
-            title={t("Project.components.FlatProcessCard.button.delete")}
+            title={t("general.button.delete")}
           />
         </Container>
       </Container>

@@ -112,7 +112,7 @@ const ContractorSelectionAddressCard: React.FC<
 
         <Heading variant="h3">
           {t(
-            `Process.components.ContractorSelection.ContractorSelection.heading.${
+            `Process.components.ContractorSelection.components.AddressCard.heading.${
               !showDeliveryAddress ? "billingDelivery" : type
             }`
           )}
@@ -127,7 +127,7 @@ const ContractorSelectionAddressCard: React.FC<
         >
           <Text>
             {t(
-              "Process.components.ContractorSelection.ContractorSelection.noAddress"
+              "Process.components.ContractorSelection.components.AddressCard.noAddress"
             )}
           </Text>
         </Container>
@@ -139,13 +139,11 @@ const ContractorSelectionAddressCard: React.FC<
           className="p-5"
         >
           <Container width="fit" align="start" direction="col" gap={3}>
-            {address.company ? (
-              <Text>{t("components.Address.AddressCard.company")}</Text>
-            ) : null}
-            <Text>{t("components.Address.AddressCard.name")}</Text>
-            <Text>{t("components.Address.AddressCard.street")}</Text>
-            <Text>{t("components.Address.AddressCard.city")}</Text>
-            <Text>{t("components.Address.AddressCard.country")}</Text>
+            {address.company ? <Text>{t("general.company")}</Text> : null}
+            <Text>{t("general.name")}</Text>
+            <Text>{t("general.street")}</Text>
+            <Text>{t("general.city")}</Text>
+            <Text>{t("general.country")}</Text>
           </Container>
           <Container width="fit" align="start" direction="col" gap={3}>
             {address.company ? <Text>{address.company}</Text> : null}
@@ -180,7 +178,7 @@ const ContractorSelectionAddressCard: React.FC<
             />
             <Text>
               {t(
-                "Projects.Project.ContractorSelection.ContractorSelection.address.sameAddress"
+                "Process.components.ContractorSelection.components.AddressCard.sameAddress"
               )}
             </Text>
           </label>
@@ -191,7 +189,7 @@ const ContractorSelectionAddressCard: React.FC<
               variant="text"
               size="sm"
               title={t(
-                "Process.components.ContractorSelection.ContractorSelection.button.editAddress"
+                "Process.components.ContractorSelection.components.AddressCard.button.editAddress"
               )}
               onClick={handleOnButtonClickEdit}
             />
@@ -199,7 +197,7 @@ const ContractorSelectionAddressCard: React.FC<
               variant="text"
               size="sm"
               title={t(
-                "Process.components.ContractorSelection.ContractorSelection.button.resetAddress"
+                "Process.components.ContractorSelection.components.AddressCard.button.resetAddress"
               )}
               onClick={handleOnButtonClickReset}
             />

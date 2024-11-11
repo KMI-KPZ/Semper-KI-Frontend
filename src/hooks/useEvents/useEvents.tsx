@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import useOrgaEvent from "./hooks/useOrgaEvent";
 import { JSONIsParseable, JSONSafeParse } from "@/services/utils";
 import logger from "@/hooks/useLogger";
@@ -81,6 +81,14 @@ const useEvents = (): ReturnProps => {
         break;
     }
   };
+
+  useEffect(() => {
+    if (events.length > 0) {
+      events.forEach((event) => {
+        if (event.triggerEvent) handleNewEvent(event);
+      });
+    }
+  }, []);
 
   const totalEventCount = totalProjectEventCount + totalOrgaEventCount;
 

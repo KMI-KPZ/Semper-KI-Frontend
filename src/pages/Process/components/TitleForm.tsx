@@ -59,7 +59,7 @@ const ProcessTitleForm: React.FC<ProcessTitleFormProps> = (props) => {
     <form>
       <Container direction="col">
         <Heading variant="h1">
-          {t("Process.components.TitleForm.title")}
+          {t("Process.components.TitleForm.heading")}
         </Heading>
         {isNew ? (
           <Text>{t("Process.components.TitleForm.describtion")}</Text>

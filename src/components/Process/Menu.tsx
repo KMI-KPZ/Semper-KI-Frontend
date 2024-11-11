@@ -30,7 +30,7 @@ const ProcessMenu: React.FC<PropsWithChildren<ProcessMenuProps>> = (props) => {
         title={
           buttonTitle !== undefined
             ? buttonTitle
-            : t("components.PMenu.button.open")
+            : t("components.Process.Menu.button.open")
         }
         variant="text"
         onClick={handleOnClickButton}
@@ -45,7 +45,7 @@ const ProcessMenu: React.FC<PropsWithChildren<ProcessMenuProps>> = (props) => {
         >
           {children}
           <Button
-            title={t("components.PMenu.button.close")}
+            title={t("components.Process.Menu.button.close")}
             variant="text"
             size="sm"
             width="full"

@@ -61,7 +61,7 @@ const RequestInformationForm: React.FC<RequestInformationFormProps> = (
     <Container width="full" direction="col">
       <BackButtonContainer>
         <Heading variant="h2">
-          {t("Resources.components.RequestInformationForm.header")}
+          {t("components.Form.RequestInformationForm.header")}
         </Heading>
       </BackButtonContainer>
 
@@ -99,7 +99,7 @@ const RequestInformationForm: React.FC<RequestInformationFormProps> = (
           loading={submitRequestInformation.isLoading}
           size="sm"
           variant="primary"
-          title={t("Resources.components.RequestInformationForm.button.send")}
+          title={t("components.Form.RequestInformationForm.button.send")}
           onClick={handleSubmit(onSubmit)}
         />
       </form>

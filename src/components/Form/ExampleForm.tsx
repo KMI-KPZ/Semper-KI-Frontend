@@ -105,12 +105,12 @@ const ExampleForm: React.FC<ExampleFormProps> = (props) => {
       <Container>
         <Button
           variant="primary"
-          title={t("components.Form.ExampleForm.button.reset")}
+          title={t("general.button.reset")}
           onClick={handleOnClickButtonReset}
         />
         <Button
           variant="primary"
-          title={t("components.Form.ExampleForm.button.submit")}
+          title={t("general.button.submit")}
           onClick={handleSubmit(handleOnClickButtonSubmit)}
         />
       </Container>

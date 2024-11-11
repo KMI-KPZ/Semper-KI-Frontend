@@ -20,10 +20,10 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
       // Perform actions based on the user choice
 
       if (userChoice == "2") {
-        handleOnClickCard(ServiceType.MANUFACTURING);
+        handleOnClickCard(ServiceType.ADDITIVE_MANUFACTURING);
       }
       if (userChoice == "1") {
-        handleOnClickCard(ServiceType.MODELING);
+        handleOnClickCard(ServiceType.CREATE_MODEL);
       }
       // Reset user choice after handling
       setUserChoice(null);

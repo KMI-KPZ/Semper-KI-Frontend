@@ -8,7 +8,7 @@ import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import NotificationForm from "../../components/Form/Notifications/NotificationForm";
 import ProfileStatistics from "./components/Statistics";
 import ProfileLocals from "./components/Locals";
-import ProfileGeneral from "./components/General";
+import ProfileGeneral from "../../components/Form/ProfileForm";
 import ProfileAddress from "./components/Address";
 import ProfileOrganization from "./components/Organization";
 import useDeleteUser from "@/api/User/Mutations/useDeleteUser";

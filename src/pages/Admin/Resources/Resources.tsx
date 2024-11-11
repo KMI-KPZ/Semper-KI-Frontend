@@ -12,7 +12,7 @@ import {
   isOntoNodeType,
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
 import Pagination from "@/components/Table/Pagination";
-import useAdmin from "../hooks/useAdmin";
+import useAdmin from "../../../hooks/useAdmin";
 import useGetAdminNodes from "@/api/Resources/Admin/Querys/useGetAdminNodes";
 import { useNavigate, useParams } from "react-router-dom";
 import useDeleteAdminNode from "@/api/Resources/Admin/Mutations/useDeleteAdminNode";
@@ -69,7 +69,7 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
       <AdminResourcesOverView />
       <Search handleSearchInputChange={handleSearchInputChange} />
       <Container width="full" justify="end">
-        <Button title={t("Admin.Resources.button.add")} size="sm" to="create" />
+        <Button title={t("general.button.add")} size="sm" to="create" />
       </Container>
       <TableContainer>
         <Table type="fixed_last_row">
@@ -194,17 +194,17 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
                   <td>
                     <Container direction="col">
                       <Button
-                        title={t("Admin.Resources.button.details")}
+                        title={t("general.button.details")}
                         onClick={() => handleOnClickButtonDetails(node.nodeID)}
                         variant="text"
                       />
                       <Button
-                        title={t("Admin.Resources.button.edit")}
+                        title={t("general.button.edit")}
                         onClick={() => handleOnClickButtonEdit(node.nodeID)}
                         variant="text"
                       />
                       <Button
-                        title={t("Admin.Resources.button.delete")}
+                        title={t("general.button.delete")}
                         onClick={() =>
                           handleOnClickButtonDelete(node.nodeID, node.name)
                         }

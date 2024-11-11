@@ -31,7 +31,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
 
   return (
     <HomeContainer>
-      <Heading variant="h2">{t("Home.components.Projects.title")}</Heading>
+      <Heading variant="h2">{t("Home.components.Projects.heading")}</Heading>
       {user.usertype === UserType.ANONYM ? (
         <Container>
           {flatProjects.isFetched &&

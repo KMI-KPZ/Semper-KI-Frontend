@@ -163,7 +163,9 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     <form className="flex h-full w-full flex-col items-center justify-start gap-5">
       <Container width="full" direction="row" justify="between">
         <Heading variant="h2" className="w-full text-left">
-          {t("Service.Manufacturing.Model.Model.upload.title")}
+          {t(
+            "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.heading"
+          )}
         </Heading>
       </Container>
 
@@ -195,7 +197,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                 {errors.models !== undefined ? (
                   <Text variant="body" className="text-red-500">
                     {t(
-                      `Service.Manufacturing.Model.Upload.Upload.error.licenses`
+                      `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.error.licenses`
                     )}
                   </Text>
                 ) : null}
@@ -204,7 +206,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                   loading={uploadModels.isLoading}
                   variant="primary"
                   title={t(
-                    `Service.Manufacturing.Model.Upload.Upload.button.upload`
+                    `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.button.upload`
                   )}
                   onClick={handleSubmit(sendModels)}
                   // className="fixed bottom-10 z-10 md:sticky md:right-10 "
@@ -224,14 +226,20 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
           onDragLeave={handleDragOnUploadCard}
           onDragOver={handleDragOnUploadCard}
           onDrop={handleDropOnUploadCard}
-          title={t("Service.Manufacturing.Model.Upload.Upload.card.title")}
+          title={t(
+            "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.heading"
+          )}
           href="#"
         >
           <UploadIcon className="h-32 w-32" />
           <Heading variant="h2">
-            {t("Service.Manufacturing.Model.Upload.Upload.card.title")}
+            {t(
+              "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.heading"
+            )}
           </Heading>
-          {t("Service.Manufacturing.Model.Upload.Upload.card.text")}
+          {t(
+            "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.text"
+          )}
         </a>
         <input
           accept={dataTypes.map((type: string) => type).join(",")}

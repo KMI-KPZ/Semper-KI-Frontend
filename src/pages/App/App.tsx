@@ -42,6 +42,7 @@ import { ManufacturingPostProcessings } from "../Process/components/Service/Serv
 import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 import useUser, { UserType } from "@/hooks/useUser";
 import Footer from "@/components/Footer/Footer";
+import UITest from "../Test/UITest";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -160,6 +161,7 @@ const App: React.FC = () => {
               </Route>
               <Route element={<AuthorizedUserOutlet />}>
                 <Route path="test" element={<Test />} />
+                <Route path="ui" element={<UITest />} />
                 <Route path="account" element={<Profile />} />
                 <Route
                   path="organization"

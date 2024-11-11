@@ -29,7 +29,7 @@ const Organization: React.FC<OrganizationViewProps> = (props) => {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
       <Heading variant="h1" className="container text-center">
-        {t("Organization.index.header")}
+        {t("Organization.header")}
       </Heading>
 
       <OrganizationInfo organization={organization} />

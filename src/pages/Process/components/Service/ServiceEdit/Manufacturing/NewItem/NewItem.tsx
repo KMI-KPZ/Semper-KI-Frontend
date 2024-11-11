@@ -17,7 +17,9 @@ const ProcessNewItem: React.FC<Props> = (props) => {
   }, []);
   return (
     <Heading variant="h1">
-      {t("Service.Manufacturing.NewItem.NewItem.title")}
+      {t(
+        "Process.components.Service.ServiceEdit.Manufacturing.NewItem.heading"
+      )}
     </Heading>
   );
 };

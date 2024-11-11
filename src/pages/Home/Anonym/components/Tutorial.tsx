@@ -22,26 +22,26 @@ const HomeTutorial: React.FC<HomeTutorialProps> = (props) => {
     {
       id: 1,
       id2: 1,
-      title: t("Home.Anonym.Anonym.Tutorial.items.0.title"),
-      description: t("Home.Anonym.Anonym.Tutorial.items.0.text"),
+      title: t("Home.Anonym.Tutorial.items.0.heading"),
+      description: t("Home.Anonym.Tutorial.items.0.text"),
     },
     {
       id: 3,
       id2: 2,
-      title: t("Home.Anonym.Anonym.Tutorial.items.2.title"),
-      description: t("Home.Anonym.Anonym.Tutorial.items.2.text"),
+      title: t("Home.Anonym.Tutorial.items.2.heading"),
+      description: t("Home.Anonym.Tutorial.items.2.text"),
     },
     {
       id: 2,
       id2: 3,
-      title: t("Home.Anonym.Anonym.Tutorial.items.1.title"),
-      description: t("Home.Anonym.Anonym.Tutorial.items.1.text"),
+      title: t("Home.Anonym.Tutorial.items.1.heading"),
+      description: t("Home.Anonym.Tutorial.items.1.text"),
     },
     {
       id: 4,
       id2: 4,
-      title: t("Home.Anonym.Anonym.Tutorial.items.3.title"),
-      description: t("Home.Anonym.Anonym.Tutorial.items.3.text"),
+      title: t("Home.Anonym.Tutorial.items.3.heading"),
+      description: t("Home.Anonym.Tutorial.items.3.text"),
     },
   ];
 
@@ -54,8 +54,8 @@ const HomeTutorial: React.FC<HomeTutorialProps> = (props) => {
 
   return (
     <Container width="full" className="gap-10" align="start" direction="col">
-      <HomeHeader variant="h2" title={t("Home.Anonym.Anonym.Tutorial.title")} />
-      <Text>{t("Home.Anonym.Anonym.Tutorial.subTitle")}</Text>
+      <HomeHeader variant="h2" title={t("Home.Anonym.Tutorial.heading")} />
+      <Text>{t("Home.Anonym.Tutorial.subTitle")}</Text>
       <Container width="full">
         <YouTube
           iframeClassName={`duraction-300 w-full md:max-w-[800px]  aspect-video`}
@@ -114,7 +114,7 @@ const HomeTutorial: React.FC<HomeTutorialProps> = (props) => {
         direction="row"
       >
         <HomeButton
-          text={t("Home.Anonym.Anonym.Tutorial.button")}
+          text={t("Home.Anonym.Tutorial.button")}
           icon={<ContactSupportIcon />}
           to="/projects"
         />

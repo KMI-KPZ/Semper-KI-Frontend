@@ -69,7 +69,7 @@ const TitleForm: React.FC<PropsWithChildren<TitleFormProps>> = (props) => {
             />
             {errors.title ? (
               <Text variant="error">
-                {t("Projects.components.TitleForm.error")}
+                {t("components.Process.TitleForm.error")}
               </Text>
             ) : null}
             <PermissionGate element={buttonPermissionGate}>

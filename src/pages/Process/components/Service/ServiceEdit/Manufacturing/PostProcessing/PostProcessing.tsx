@@ -109,7 +109,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
             <Container direction="row" width="full" justify="between">
               <Heading variant="h2">
                 {t(
-                  "Service.Manufacturing.PostProcessing.PostProcessing.available"
+                  "Process.components.Service.ServiceEdit.Manufacturing.PostProcessing.heading"
                 )}
               </Heading>
             </Container>
@@ -140,9 +140,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
                                 onClick={() =>
                                   handleOnClickButtonDeselect(postProcessing)
                                 }
-                                title={t(
-                                  "Service.Manufacturing.PostProcessing.PostProcessing.button.deselect"
-                                )}
+                                title={t("general.button.deselect")}
                               />
                             ) : (
                               <Button
@@ -150,9 +148,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
                                 onClick={() =>
                                   handleOnClickButtonSelect(postProcessing)
                                 }
-                                title={t(
-                                  "Service.Manufacturing.PostProcessing.PostProcessing.button.select"
-                                )}
+                                title={t("general.button.select")}
                               />
                             )}
                           </Container>
@@ -163,7 +159,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
               ) : (
                 <Text className="w-full text-center">
                   {t(
-                    "Service.Manufacturing.PostProcessing.PostProcessing.error.noPostProcessings"
+                    "Process.components.Service.ServiceEdit.Manufacturing.PostProcessing.error.noPostProcessings"
                   )}
                 </Text>
               )}
@@ -174,9 +170,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
           variant="primary"
           className="fixed bottom-5 z-10  w-fit self-center pr-5 md:sticky md:self-end"
           onClick={handleOnClickButtonSave}
-          title={t(
-            "Service.Manufacturing.PostProcessing.PostProcessing.button.save"
-          )}
+          title={t("general.button.save")}
         />
       </Container>
     </Modal>

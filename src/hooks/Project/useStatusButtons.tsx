@@ -212,11 +212,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
       "FORWARD-TO-DISPUTE",
     ];
     return validStatusButtonTitles.includes(title as StatusButtonTitleType)
-      ? t(
-          `Projects.Project.hooks.useStatusButtons.${
-            title as StatusButtonTitleType
-          }`
-        )
+      ? t(`hooks.useStatusButtons.${title as StatusButtonTitleType}`)
       : title;
   };
 
@@ -331,7 +327,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   const handleOnClickButtonCount = (button: StatusButtonProcessProps) => {
     if (
       window.confirm(
-        t("Projects.Project.hooks.useStatusButtons.buttons.confirmAll", {
+        t("hooks.useStatusButtons.button.confirmAll", {
           title: button.title,
         })
       )

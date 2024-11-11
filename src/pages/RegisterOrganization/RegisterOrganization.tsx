@@ -51,7 +51,7 @@ const RegisterOrganization: React.FC<RegisterOrganizationProps> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
-      <Heading variant="h1">{t("RegisterOrganization.title")}</Heading>
+      <Heading variant="h1">{t("RegisterOrganization.heading")}</Heading>
       {success ? (
         <>
           <Heading variant="h1">{t("RegisterOrganization.success")}</Heading>

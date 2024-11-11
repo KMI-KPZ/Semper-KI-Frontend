@@ -1,7 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { NodeRequestInformation } from "@/pages/Resources/RequestInformation/RequestInformationForm";
+import { NodeRequestInformation } from "@/components/Form/RequestInformationForm";
 
 const useSubmitRequestInformation = () => {
   const queryClient = useQueryClient();

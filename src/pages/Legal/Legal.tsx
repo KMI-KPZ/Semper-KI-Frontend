@@ -18,7 +18,7 @@ const Legal: React.FC<LegalProps> = (props) => {
       className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5"
       data-testid="legal"
     >
-      <Heading variant="h1">{t("Legal.Legal.title")}</Heading>
+      <Heading variant="h1">{t("Legal.Legal.heading")}</Heading>
       <Routes>
         <Route
           index
@@ -27,9 +27,18 @@ const Legal: React.FC<LegalProps> = (props) => {
               data-testid="legalButton"
               className="flex w-full flex-col items-center justify-center gap-5 md:flex-row"
             >
-              <Button title={t("Legal.Legal.imprint")} to={"/legal/imprint"} />
-              <Button title={t("Legal.Legal.privacy")} to={"/legal/privacy"} />
-              <Button title={t("Legal.Legal.contact")} to={"/legal/contact"} />
+              <Button
+                title={t("Legal.Legal.button.imprint")}
+                to={"/legal/imprint"}
+              />
+              <Button
+                title={t("Legal.Legal.button.privacy")}
+                to={"/legal/privacy"}
+              />
+              <Button
+                title={t("Legal.Legal.button.contact")}
+                to={"/legal/contact"}
+              />
             </div>
           }
         />

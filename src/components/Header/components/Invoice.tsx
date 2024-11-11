@@ -72,7 +72,7 @@ const HeaderInvoice: React.FC<HeaderInvoiceProps> = (props) => {
         justify="between"
         className="sticky top-0 z-50 border-b-2 bg-white p-5"
       >
-        <Heading variant="h2">{t("components.Header.Invoice.title")}</Heading>
+        <Heading variant="h2">{t("components.Header.Invoice.heading")}</Heading>
         <Button
           title={t("components.Header.Invoice.close")}
           children={<CloseIcon />}

@@ -9,8 +9,10 @@ describe("<Privacy>", () => {
   it("should have correct default Text", () => {
     render(<Privacy />);
     expect(
-      screen.getByText(/Informationen zur Datenverarbeitung für die Webseite/)
+      screen.getByText("Legal.Privacy.privacy-policy")
     ).toBeInTheDocument();
-    expect(screen.getByText("Datenschutzerklärung")).toBeInTheDocument();
+    expect(
+      screen.getByText("Legal.Privacy.data-processing-info")
+    ).toBeInTheDocument();
   });
 });

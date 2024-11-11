@@ -62,15 +62,13 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
   };
 
   const menuButtonTitle = t(
-    "Process.components.ContractorSelection.ContractorSelection.button.menu"
+    "Process.components.ContractorSelection.button.menu"
   );
   const pageTitle = `${t(
-    "Process.components.ContractorSelection.ContractorSelection.heading.main"
+    "Process.components.ContractorSelection.heading.main"
   )}: ${
     process.contractor.name === ""
-      ? t(
-          "Process.components.ContractorSelection.ContractorSelection.noContractor"
-        )
+      ? t("Process.components.ContractorSelection.noContractor")
       : process.contractor.name
   }`;
 
@@ -99,9 +97,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
             />
 
             <Heading variant="h3">
-              {t(
-                "Process.components.ContractorSelection.ContractorSelection.heading.sub1"
-              )}
+              {t("Process.components.ContractorSelection.heading.sub1")}
             </Heading>
           </Container>
           {process.processDetails.provisionalContractor === undefined ? (
@@ -111,7 +107,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
                 onClick={handleOnClickButtonSelectContractor}
                 variant="primary"
                 title={t(
-                  "Process.components.ContractorSelection.components.ContractorList.button.select"
+                  "Process.components.ContractorSelection.button.select"
                 )}
               />
             </Container>
@@ -119,9 +115,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
             <LoadingAnimation />
           ) : currentContractor === undefined ? (
             <Text>
-              {t(
-                "Process.components.ContractorSelection.components.ContractorList.noContractorFound"
-              )}
+              {t("Process.components.ContractorSelection.noContractorFound")}
             </Text>
           ) : (
             <Container width="full" direction="col">
@@ -131,9 +125,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
                   size="sm"
                   onClick={handleOnClickButtonEditContractor}
                   variant="secondary"
-                  title={t(
-                    "Process.components.ContractorSelection.components.ContractorList.button.edit"
-                  )}
+                  title={t("general.button.edit")}
                 />
               </ProcessStatusGate>
             </Container>

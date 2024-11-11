@@ -32,7 +32,7 @@ const ProfileAddress: React.FC<ProfileAddressProps> = (props) => {
 
   return (
     <Container width="full" direction="col" id="ProfileAddress">
-      <Heading variant="h2">{t("Profile.address.header")}</Heading>
+      <Heading variant="h2">{t("Profile.Address.header")}</Heading>
       <Divider />
       {user.details.addresses !== undefined &&
       user.details.addresses.length > 0 ? (
@@ -51,7 +51,7 @@ const ProfileAddress: React.FC<ProfileAddressProps> = (props) => {
         </Container>
       ) : (
         <Container width="full" direction="col">
-          <Text>{t("Profile.address.noAddress")}</Text>
+          <Text>{t("Profile.Address.noAddress")}</Text>
           <div
             className="hover-card flex w-full flex-col items-center justify-center gap-5 p-10"
             tabIndex={0}

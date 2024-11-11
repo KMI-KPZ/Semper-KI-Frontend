@@ -95,7 +95,7 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
         onDragOver={handleDragOnUploadCard}
         onDrop={handleDropOnUploadCard}
         href="#"
-        title={t("components.Upload.title")}
+        title={t("components.Upload.heading")}
       >
         {icon === true ? (
           <UploadIcon className="h-10 w-10 md:h-24 md:w-24" />
@@ -103,7 +103,7 @@ export const Upload: React.FC<PropsWithChildren<Props>> = (props) => {
         {children === undefined ? (
           <>
             <Text>
-              {t("components.Upload.title", {
+              {t("components.Upload.heading", {
                 count: multiple === true ? 2 : 1,
               })}
             </Text>

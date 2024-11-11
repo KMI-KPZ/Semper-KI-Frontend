@@ -30,7 +30,7 @@ const ProcessVerifyCard: React.FC<ProcessVerifyCardProps> = (props) => {
       width="full"
     >
       <Heading variant="h3">
-        {t(`Process.components.Verify.components.VerifyCard.title.${type}`)}
+        {t(`Process.components.Verify.components.VerifyCard.heading.${type}`)}
       </Heading>
       <ProcessVerifyStatus status={status} />
       <Text>

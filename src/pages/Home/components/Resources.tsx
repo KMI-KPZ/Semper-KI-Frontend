@@ -16,7 +16,7 @@ const HomeOrgaResources: React.FC<HomeOrgaResourcesProps> = (props) => {
 
   return (
     <HomeContainer>
-      <Heading variant="h2">{t("Home.components.Resources.title")}</Heading>
+      <Heading variant="h2">{t("Home.components.Resources.heading")}</Heading>
       <Container width="full">
         <Button
           title={t("Home.components.Resources.button.overview")}

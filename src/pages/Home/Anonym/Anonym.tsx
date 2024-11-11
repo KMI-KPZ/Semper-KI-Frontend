@@ -27,7 +27,7 @@ const Home: React.FC<HomeProps> = (props) => {
           variant="h1"
           className="pt-32 text-center text-4xl font-black tracking-wide text-white  md:text-7xl"
         >
-          {t("Home.Anonym.Anonym.title")}
+          {t("Home.Anonym.heading")}
         </Heading>
         <HomeIntroduction />
         <HomeServices />

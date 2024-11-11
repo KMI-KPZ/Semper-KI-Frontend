@@ -38,7 +38,7 @@ export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
           <Heading variant="h3">{material.title}</Heading>
           <Container direction="col" justify="start" align="start">
             <Text>{`${t(
-              `Service.Manufacturing.Material.components.Card.props`
+              `Process.components.Service.ServiceEdit.Manufacturing.Material.components.Card.props`
             )}`}</Text>
           </Container>
           <table className="auto table border-separate border-spacing-2">

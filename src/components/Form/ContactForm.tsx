@@ -35,9 +35,7 @@ const ContactForm: React.FC<ContactFormProps> = (props) => {
       email: yup
         .string()
         .email(t("yup.email"))
-        .required(
-          t("yup.requiredName", { name: t("Organization.Info.email") })
-        ),
+        .required(t("yup.requiredName", { name: t("general.email") })),
       subject: yup.string().required(
         t("yup.requiredName", {
           name: t("components.Form.ContactForm.subject"),
@@ -109,7 +107,7 @@ const ContactForm: React.FC<ContactFormProps> = (props) => {
         );
       })}
       <Button
-        title={t(`components.Form.ContactForm.button.send`)}
+        title={t(`general.button.send`)}
         onClick={handleSubmit(onSubmit)}
       />
     </form>

@@ -12,7 +12,7 @@ const AdminOrganizationForm: React.FC<AdminOrganizationFormProps> = (props) => {
   return (
     <Container width="full" direction="col" className="bg-white p-5">
       <BackButtonContainer>
-        <Heading variant="h1">{t("Admin.Organization.form.title")}</Heading>
+        <Heading variant="h1">{t("Admin.Organization.form.heading")}</Heading>
       </BackButtonContainer>
       Todo
     </Container>

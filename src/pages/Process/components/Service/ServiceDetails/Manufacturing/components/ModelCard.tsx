@@ -55,14 +55,14 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
           src={TestImg}
           className="max-h-40 w-full object-contain md:w-fit"
           alt={t(
-            "Process.Service.ServiceDetails.components.manufacturing.model.img"
+            "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.img"
           )}
         />
         <Container direction="col" width="full" className="" gap={3}>
           <Container direction="row" justify="between" width="full">
             <Text>
               {t(
-                "Process.Service.ServiceDetails.components.manufacturing.model.name"
+                "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.name"
               )}
             </Text>
             <Text>{model.fileName}</Text>
@@ -70,7 +70,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
           <Container direction="row" justify="between" width="full">
             <Text>
               {t(
-                "Process.Service.ServiceDetails.components.manufacturing.model.dimensions"
+                "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.dimensions"
               )}
             </Text>
             <Text>{`${roundNumberWithDecimals(
@@ -87,7 +87,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
           <Container direction="row" justify="between" width="full">
             <Text>
               {t(
-                "Process.Service.ServiceDetails.components.manufacturing.model.surface"
+                "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.surface"
               )}
             </Text>
             <Text>
@@ -100,7 +100,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
           <Container direction="row" justify="between" width="full">
             <Text>
               {t(
-                "Process.Service.ServiceDetails.components.manufacturing.model.volume"
+                "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.volume"
               )}
             </Text>
             <Text>{`${roundNumberWithDecimals(
@@ -119,25 +119,21 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
           <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
             <Button
               title={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.editModel"
+                "Process.components.Service.ServiceDetails.components.Manufacturing.button.editModel"
               )}
               size="sm"
               variant="secondary"
               onClick={handleOnButtonClickModel}
-              children={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.edit"
-              )}
+              children={t("general.button.edit")}
             />
             <Button
               title={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.deleteModel"
+                "Process.components.Service.ServiceDetails.components.Manufacturing.button.deleteModel"
               )}
               size="sm"
               variant="text"
               onClick={() => handleOnButtonClickDeleteModel(model.id)}
-              children={t(
-                "Process.Service.ServiceDetails.components.manufacturing.button.delete"
-              )}
+              children={t("general.button.delete")}
             />
           </ProcessStatusGate>
         </Container>

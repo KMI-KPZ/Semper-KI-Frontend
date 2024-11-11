@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Heading, Modal } from "@component-library/index";
-import useAdmin from "../hooks/useAdmin";
+import useAdmin from "../../../hooks/useAdmin";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import BackButtonContainer from "@/components/BackButtonContainer/BackButtonContainer";
 
@@ -27,7 +27,7 @@ const AdminUserDetails: React.FC<AdminUserDetailsProps> = (props) => {
     >
       <Container width="full" direction="col" className="bg-white p-5">
         <BackButtonContainer>
-          <Heading variant="h1">{t("Admin.User.details.title")}</Heading>
+          <Heading variant="h1">{t("Admin.User.details.heading")}</Heading>
         </BackButtonContainer>
         <table className="w-fit table-auto border-collapse border-spacing-x-4  border-spacing-y-1 rounded-md border-2">
           <tbody>
@@ -182,7 +182,7 @@ const AdminUserDetails: React.FC<AdminUserDetailsProps> = (props) => {
         <Button
           size="sm"
           variant="primary"
-          title={t("Admin.User.button.edit")}
+          title={t("general.button.edit")}
           to={"edit"}
         />
       </Container>

@@ -2,13 +2,13 @@ import { UserType } from "@/hooks/useUser";
 import { Error } from "@/pages/Error/Error";
 import { createContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { AdminDataUser } from "@/pages/Admin/hooks/useAdmin";
 import { LoadingAnimation } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useGetAdminFlatProjects from "@/api/Admin/Querys/useGetAdminFlatProjects";
 import useGetAdminData from "@/api/Admin/Querys/useGetAdminData";
 import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
 import { Organization } from "@/api/Organization/Querys/useGetOrganization";
+import { AdminDataUser } from "@/hooks/useAdmin";
 
 interface Props {}
 

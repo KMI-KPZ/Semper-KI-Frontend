@@ -66,7 +66,9 @@ const ProfileGeneral: React.FC<ProfileGeneralProps> = (props) => {
   return (
     <form className="w-full" id="ProfileGeneral">
       <Container width="full" direction="col">
-        <Heading variant="h2">{t("Profile.general.header")}</Heading>
+        <Heading variant="h2">
+          {t("components.Form.ProfileForm.header")}
+        </Heading>
         <Divider />
         {updateUser.isLoading ? (
           <LoadingAnimation variant="circel" />
@@ -81,29 +83,31 @@ const ProfileGeneral: React.FC<ProfileGeneralProps> = (props) => {
               register={register}
               label="displayName"
               error={errors.displayName}
-              labelText={t("Profile.general.name")}
+              labelText={t("components.Form.ProfileForm.name")}
               labelMaxWidth={maxLength}
             />
             <TextInput
               register={register}
               label="email"
               error={errors.email}
-              labelText={t("Profile.general.email")}
+              labelText={t("components.Form.ProfileForm.email")}
               labelMaxWidth={maxLength}
             />
-            <Text className="text-red-500">{t("Profile.general.hint")}</Text>
+            <Text className="text-red-500">
+              {t("components.Form.ProfileForm.hint")}
+            </Text>
             <Container>
               <Button
                 variant="text"
                 size="sm"
-                title={t("Profile.locals.button.cancel")}
+                title={t("general.button.cancel")}
                 onClick={handleOnClickButtonCancel}
               />
 
               <Button
                 variant="primary"
                 size="sm"
-                title={t("Profile.locals.button.save")}
+                title={t("general.button.save")}
                 onClick={handleSubmit(handleOnClickButtonSave)}
               />
             </Container>
@@ -124,9 +128,15 @@ const ProfileGeneral: React.FC<ProfileGeneralProps> = (props) => {
                 className="p-3"
                 gap={3}
               >
-                <Text className="break-all">{t("Profile.general.name")}</Text>
-                <Text className="break-all">{t("Profile.general.type")}</Text>
-                <Text className="break-all">{t("Profile.general.email")}</Text>
+                <Text className="break-all">
+                  {t("components.Form.ProfileForm.name")}
+                </Text>
+                <Text className="break-all">
+                  {t("components.Form.ProfileForm.type")}
+                </Text>
+                <Text className="break-all">
+                  {t("components.Form.ProfileForm.email")}
+                </Text>
               </Container>
               <Container
                 direction="col"
@@ -154,7 +164,7 @@ const ProfileGeneral: React.FC<ProfileGeneralProps> = (props) => {
             <Button
               variant="text"
               size="sm"
-              title={t("Profile.locals.button.edit")}
+              title={t("general.button.edit")}
               onClick={handleOnClickButtonEdit}
             />
           </>

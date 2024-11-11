@@ -155,7 +155,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
 
   const setFormToDraft = (nodeID: string) => {
     if (nodeAlreadyFilled) {
-      if (window.confirm(t("Resources.components.Edit.confirmDraft"))) {
+      if (window.confirm(t("components.Resources.NodeForm.confirmDraft"))) {
         reset({ ...node, edges: [] });
         setVariantNodeID(nodeID);
       } else {
@@ -197,7 +197,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
       <BackButtonContainer>
         <Heading variant="h2">
           {t(`types.OntoNodeType.${nodeType}`)}{" "}
-          {t(`Resources.components.Edit.heading.${type}`)}
+          {t(`components.Resources.NodeForm.heading.${type}`)}
         </Heading>
       </BackButtonContainer>
 
@@ -212,17 +212,17 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
       <form className="flex w-full flex-col items-center justify-start gap-5 ">
         <Container width="full" direction="col" className="card">
           <Heading variant="h3">
-            {t("Resources.components.Edit.general")}
+            {t("components.Resources.NodeForm.general")}
           </Heading>
           <GeneralInput
             label="name"
-            labelText={t("Resources.components.Edit.nodeName")}
+            labelText={t("components.Resources.NodeForm.nodeName")}
             register={register}
             type="text"
           />
           <GeneralInput
             label="context"
-            labelText={t("Resources.components.Edit.context")}
+            labelText={t("components.Resources.NodeForm.context")}
             register={register}
             type="text"
           />
@@ -245,7 +245,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
           ))}
 
         <Button
-          title={t(`Resources.components.Edit.button.${type}`)}
+          title={t(`general.button.${type}`)}
           onClick={handleSubmit(onSubmit)}
           loading={submitOrgaNodeForm.isLoading}
         />

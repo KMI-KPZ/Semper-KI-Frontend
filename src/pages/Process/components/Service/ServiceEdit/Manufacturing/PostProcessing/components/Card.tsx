@@ -42,14 +42,16 @@ const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
           <tbody>
             <tr>
               <td>
-                {t(`Service.Manufacturing.PostProcessing.components.Card.type`)}
+                {t(
+                  `Process.components.Service.ServiceEdit.Manufacturing.PostProcessing.components.Card.type`
+                )}
               </td>
               <td>{item.type}</td>
             </tr>
             <tr>
               <td>
                 {t(
-                  `Service.Manufacturing.PostProcessing.components.Card.value`
+                  `Process.components.Service.ServiceEdit.Manufacturing.PostProcessing.components.Card.value`
                 )}
               </td>
               <td>{item.value}</td>
@@ -57,7 +59,7 @@ const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
             <tr>
               <td colSpan={2}>
                 {t(
-                  `Service.Manufacturing.PostProcessing.components.Card.props`
+                  `Process.components.Service.ServiceEdit.Manufacturing.PostProcessing.components.Card.props`
                 )}
               </td>
             </tr>

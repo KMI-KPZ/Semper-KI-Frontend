@@ -48,9 +48,7 @@ export const ProcessMaterialItem: React.FC<Props> = (props) => {
       {isProcessAtServiceStatus(process) ? (
         <Button
           onClick={handleOnClickButtonDeselect}
-          title={t(
-            "Service.Manufacturing.Material.components.Item.button.change"
-          )}
+          title={t("general.button.change")}
         />
       ) : null}
     </div>

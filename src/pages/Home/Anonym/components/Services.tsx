@@ -24,26 +24,26 @@ const HomeServices: React.FC<HomeServicesProps> = (props) => {
   const items: HomeServiceItem[] = [
     {
       id: 0,
-      title: t("Home.Anonym.Anonym.Services.items.matching.title"),
-      text: t("Home.Anonym.Anonym.Services.items.matching.text"),
+      title: t("Home.Anonym.Services.items.matching.heading"),
+      text: t("Home.Anonym.Services.items.matching.text"),
       image: MatchingIMG,
     },
     {
       id: 1,
-      title: t("Home.Anonym.Anonym.Services.items.questionnaire.title"),
-      text: t("Home.Anonym.Anonym.Services.items.questionnaire.text"),
+      title: t("Home.Anonym.Services.items.questionnaire.heading"),
+      text: t("Home.Anonym.Services.items.questionnaire.text"),
       image: QuestionnaireIMG,
     },
     {
       id: 2,
-      title: t("Home.Anonym.Anonym.Services.items.benchmarking.title"),
-      text: t("Home.Anonym.Anonym.Services.items.benchmarking.text"),
+      title: t("Home.Anonym.Services.items.benchmarking.heading"),
+      text: t("Home.Anonym.Services.items.benchmarking.text"),
       image: BenchmarkingIMG,
     },
     {
       id: 3,
-      title: t("Home.Anonym.Anonym.Services.items.resilience.title"),
-      text: t("Home.Anonym.Anonym.Services.items.resilience.text"),
+      title: t("Home.Anonym.Services.items.resilience.heading"),
+      text: t("Home.Anonym.Services.items.resilience.text"),
       image: ResilienceIMG,
     },
   ];
@@ -53,7 +53,7 @@ const HomeServices: React.FC<HomeServicesProps> = (props) => {
 
   return (
     <Container width="full" className="" align="start" direction="col">
-      <HomeHeader variant="h2" title={t("Home.Anonym.Anonym.Services.title")} />
+      <HomeHeader variant="h2" title={t("Home.Anonym.Services.heading")} />
       <Container width="full" direction="col">
         <Container
           width="full"
@@ -101,7 +101,7 @@ const HomeServices: React.FC<HomeServicesProps> = (props) => {
         direction="row"
       >
         <HomeButton
-          text={t("Home.Anonym.Anonym.buttons.testModel")}
+          text={t("Home.Anonym.button.testModel")}
           icon={<UploadIcon />}
           to="/projects"
         />

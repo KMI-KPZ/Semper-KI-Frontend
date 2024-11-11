@@ -31,29 +31,25 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
     !isClient && process.processStatus >= ProcessStatus.REQUEST_COMPLETED;
 
   const getText = (): string => {
-    if (clientVerified)
-      return t("Process.components.Request.Request.clientVerified");
-    if (clientRequested)
-      return t("Process.components.Request.Request.clientRequested");
+    if (clientVerified) return t("Process.components.Request.clientVerified");
+    if (clientRequested) return t("Process.components.Request.clientRequested");
     if (contractorRecieved)
-      return t("Process.components.Request.Request.contractorRecieved");
+      return t("Process.components.Request.contractorRecieved");
     return "nix gefunden ProcessRequest";
   };
 
   const getTitle = (): string => {
     if (clientVerified)
-      return t("Process.components.Request.Request.clientVerifiedTitle");
+      return t("Process.components.Request.clientVerifiedTitle");
     if (clientRequested)
-      return t("Process.components.Request.Request.clientRequestedTitle");
+      return t("Process.components.Request.clientRequestedTitle");
     if (contractorRecieved)
-      return t("Process.components.Request.Request.contractorRecievedTitle");
+      return t("Process.components.Request.contractorRecievedTitle");
     return "nix gefunden ProcessRequest";
   };
 
-  const menuButtonTitle = t("Process.components.Request.Request.button.menu");
-  const pageTitle = `${t(
-    "Process.components.Request.Request.title"
-  )}: ${getTitle()}`;
+  const menuButtonTitle = t("Process.components.Request.button.menu");
+  const pageTitle = `${t("Process.components.Request.heading")}: ${getTitle()}`;
 
   const handleOnButtonClickFile = () => {
     setShowFiles((prevState) => !prevState);
@@ -82,8 +78,8 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
         size="sm"
         title={t(
           showFiles
-            ? "Process.components.Request.Request.button.hideFiles"
-            : "Process.components.Request.Request.button.showFiles"
+            ? "Process.components.Request.button.hideFiles"
+            : "Process.components.Request.button.showFiles"
         )}
         onClick={handleOnButtonClickFile}
       />

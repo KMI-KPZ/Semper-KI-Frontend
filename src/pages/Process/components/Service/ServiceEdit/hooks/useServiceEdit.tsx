@@ -10,10 +10,10 @@ const useServiceEdit = () => {
     if (process.serviceType === undefined) navigate("service");
     else
       switch (process.serviceType) {
-        case ServiceType.MANUFACTURING:
+        case ServiceType.ADDITIVE_MANUFACTURING:
           navigate("../manufacturing");
           break;
-        case ServiceType.MODELING:
+        case ServiceType.CREATE_MODEL:
           navigate("../modelling");
           break;
         case ServiceType.NONE:

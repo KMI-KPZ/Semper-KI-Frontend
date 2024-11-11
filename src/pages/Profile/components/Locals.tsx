@@ -46,10 +46,10 @@ const ProfileLocals: React.FC<ProfileLocalsProps> = (props) => {
 
   return (
     <Container width="full" direction="col" id="ProfileLocals">
-      <Heading variant="h2">{t("Profile.locals.header")}</Heading>
+      <Heading variant="h2">{t("Profile.Locals.header")}</Heading>
       <Divider />
       <Container width="full" direction="row" align="center" justify="center">
-        <Text className="break-all">{t("Profile.locals.language")}</Text>
+        <Text className="break-all">{t("Profile.Locals.language")}</Text>
 
         {updateUser.isLoading ? (
           <LoadingAnimation variant="circel" />
@@ -57,7 +57,7 @@ const ProfileLocals: React.FC<ProfileLocalsProps> = (props) => {
           <Text className="break-all">
             {user.details.locale === undefined
               ? "---"
-              : t(`Profile.locals.languages.${user.details.locale}`)}
+              : t(`Profile.Locals.languages.${user.details.locale}`)}
           </Text>
         ) : (
           <select
@@ -67,7 +67,7 @@ const ProfileLocals: React.FC<ProfileLocalsProps> = (props) => {
           >
             {app_languages.map((language: Language, index) => (
               <option value={language.code} key={index}>
-                {t(`Profile.locals.languages.${language.code}`)}
+                {t(`Profile.Locals.languages.${language.code}`)}
               </option>
             ))}
           </select>
@@ -75,9 +75,7 @@ const ProfileLocals: React.FC<ProfileLocalsProps> = (props) => {
         <Button
           variant="text"
           size="sm"
-          title={t(
-            edit ? "Profile.locals.button.save" : "Profile.locals.button.edit"
-          )}
+          title={t(edit ? "general.button.save" : "general.button.edit")}
           onClick={handleOnClickButton}
         >
           {edit ? <CheckIcon /> : <EditIcon />}

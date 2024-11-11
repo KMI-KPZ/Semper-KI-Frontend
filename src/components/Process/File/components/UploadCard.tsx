@@ -30,8 +30,8 @@ const ProcessUploadCard: React.FC<ProcessUploadCardProps> = (props) => {
   const { t } = useTranslation();
   const {
     addFiles,
-    title = t("components.Process.UploadCard.title"),
-    subTitle = t("components.Process.UploadCard.subTitle"),
+    title = t("components.Process.File.components.UploadCard.heading"),
+    subTitle = t("components.Process.File.components.UploadCard.subHeading"),
   } = props;
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
@@ -87,7 +87,7 @@ const ProcessUploadCard: React.FC<ProcessUploadCardProps> = (props) => {
         onDragLeave={handleDragOnUploadCard}
         onDragOver={handleDragOnUploadCard}
         onDrop={handleDropOnUploadCard}
-        title={t("components.Process.UploadCard.title")}
+        title={t("components.Process.File.components.UploadCard.heading")}
         href="#"
       >
         <UploadIcon className="h-20 w-20" />

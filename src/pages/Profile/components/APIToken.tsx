@@ -47,7 +47,7 @@ const ProfileAPIToken: React.FC<ProfileAPITokenProps> = (props) => {
 
   return (
     <Container width="full" direction="col">
-      <Heading variant="h2">{t("Profile.APIToken.title")}</Heading>
+      <Heading variant="h2">{t("Profile.APIToken.heading")}</Heading>
       <Container width="full" direction="col" className="gap-3">
         <Text>{t("Profile.APIToken.subTitle")}</Text>
         <Text className="whitespace-pre-line text-center">
@@ -62,7 +62,7 @@ const ProfileAPIToken: React.FC<ProfileAPITokenProps> = (props) => {
             size="sm"
             variant="secondary"
             onClick={handleOnClickButtonCreate}
-            title={t("Profile.APIToken.button.create")}
+            title={t("general.button.create")}
           />
         </Container>
       ) : (
@@ -79,7 +79,7 @@ const ProfileAPIToken: React.FC<ProfileAPITokenProps> = (props) => {
               size="sm"
               variant="secondary"
               onClick={handleOnClickButtonDelete}
-              title={t("Profile.APIToken.button.delete")}
+              title={t("general.button.delete")}
             />
           </Container>
         </Container>
@@ -90,7 +90,7 @@ const ProfileAPIToken: React.FC<ProfileAPITokenProps> = (props) => {
         closeModal={closeModal}
       >
         <Container width="full" direction="col">
-          <Heading variant="h2">{t("Profile.APIToken.title")}</Heading>
+          <Heading variant="h2">{t("Profile.APIToken.heading")}</Heading>
           <Container width="full" direction="col" className="gap-3">
             <Text className="whitespace-pre-line text-center text-red-500">
               {t("Profile.APIToken.subTitle2")}
@@ -114,7 +114,7 @@ const ProfileAPIToken: React.FC<ProfileAPITokenProps> = (props) => {
                 variant="secondary"
                 children={<ContentPasteIcon />}
                 onClick={() => handleOnClickButtonCopy(createApiToken.data)}
-                title={t("Profile.APIToken.button.copy")}
+                title={t("general.button.copy")}
               />
             </Container>
           )}

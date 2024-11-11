@@ -34,7 +34,7 @@ const ServiceSearch: React.FC<ServiceSearchProps> = (
           type="search"
           className="w-full  rounded-md rounded-r-none border-2 p-3"
           placeholder={t(
-            "Service.Manufacturing.Header.Search.Search.placeholder"
+            "Process.components.Service.ServiceEdit.Manufacturing.Search.placeholder"
           )}
           autoFocus
           value={searchInput}

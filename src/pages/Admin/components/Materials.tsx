@@ -19,16 +19,16 @@ const AdminMaterials: React.FC<Props> = (props) => {
   const {} = props;
   return (
     <div className="admin-view">
-      <Heading variant="h1">{t("Admin.Materials.Materials.header")}</Heading>
+      <Heading variant="h1">{t("Admin.components.Materials.header")}</Heading>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 800 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>
-                {t("Admin.Materials.Materials.material-id")}
+                {t("Admin.components.Materials.material-id")}
               </TableCell>
-              <TableCell>{t("Admin.Materials.Materials.name")}</TableCell>
-              <TableCell>{t("Admin.Materials.Materials.propList")}</TableCell>
+              <TableCell>{t("Admin.components.Materials.name")}</TableCell>
+              <TableCell>{t("Admin.components.Materials.propList")}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

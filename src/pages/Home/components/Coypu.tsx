@@ -19,8 +19,8 @@ const Coypu: React.FC<CoypuProps> = (props) => {
   return (
     <Container direction="col" width="full">
       <Container className="bg-white p-5" gap={3} direction="col" width="full">
-        <Heading variant="h2">{t("Home.components.Coypu.title")}</Heading>
-        <Heading variant="h3">{t("Home.components.Coypu.title2")}</Heading>
+        <Heading variant="h2">{t("Home.components.Coypu.heading")}</Heading>
+        <Heading variant="h3">{t("Home.components.Coypu.heading2")}</Heading>
       </Container>
       {coypuDataQuery.data !== undefined && coypuDataQuery.data.length > 0 ? (
         <ul className="flex h-fit w-full flex-row flex-wrap items-start justify-center gap-5">
@@ -54,7 +54,7 @@ const Coypu: React.FC<CoypuProps> = (props) => {
         variant="primary"
         startIcon={expanded === false ? <ExpandMoreIcon /> : <ExpandLessIcon />}
         onClick={() => setExpanded(!expanded)}
-        title={t(`Home.components.Coypu.button.${expanded ? "less" : "more"}`)}
+        title={t(`general.button.${expanded ? "showLess" : "showMore"}`)}
       />
     </Container>
   );

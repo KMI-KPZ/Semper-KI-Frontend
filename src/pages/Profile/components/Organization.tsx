@@ -13,10 +13,10 @@ const ProfileOrganization: React.FC<ProfileOrganizationProps> = (props) => {
 
   return user.usertype === UserType.ORGANIZATION ? (
     <Container width="full" direction="col">
-      <Heading variant="h2">{t("Profile.company.header")}</Heading>
+      <Heading variant="h2">{t("Profile.Organization.header")}</Heading>
       <Divider />
       <span className="break-all">
-        {t("Profile.company.name")}: {user.organization}
+        {t("Profile.Organization.name")}: {user.organization}
       </span>
     </Container>
   ) : null;

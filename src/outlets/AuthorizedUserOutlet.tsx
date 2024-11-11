@@ -40,9 +40,9 @@ const AuthorizedUserOutlet: React.FC<
     <Navigate to={`/login?redirectURL=${pathname}`} />
   ) : (
     <Container direction="col" className=" bg-white p-5" width="full">
-      <h1>{t("routeOutlets.AuthorizedUserOutlet.login")}</h1>
+      <h1>{t("outlets.AuthorizedUserOutlet.login")}</h1>
       <Button
-        title={t("routeOutlets.AuthorizedUserOutlet.button.login")}
+        title={t("outlets.AuthorizedUserOutlet.button.login")}
         variant="primary"
         to={`/login?redirectURL=${pathname}`}
       />

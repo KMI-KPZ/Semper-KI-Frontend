@@ -112,11 +112,11 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
     <Container width="full" direction="col" className="card">
       <Container width="full">
         <Heading variant="h3">
-          {t("Resources.components.Edit.properties.header")}
+          {t("components.Resources.PropertyForm.properties.header")}
         </Heading>
         {/* {freePropertyNamesAvailable() ? (
           <Button
-            title={t("Resources.components.Edit.button.addProperty")}
+            title={t("components.Resources.PropertyForm.button.addProperty")}
             onClick={handleOnClickButtonAddProperty}
             variant="text"
             children={<AddIcon />}
@@ -136,12 +136,12 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                 <div className="m-0 flex items-center justify-start ">
                   <Button
                     variant="text"
-                    title={t("Resources.components.Edge.table.name")}
+                    title={t("components.Resources.PropertyForm.table.name")}
                     onClick={() => handleSort("name")}
                     className="whitespace-nowrap p-0"
                   >
                     <div className="ml-6 flex flex-row items-center justify-center">
-                      {t("Resources.components.Edge.table.name")}
+                      {t("components.Resources.PropertyForm.table.name")}
                       {getSortIcon("name")}
                     </div>
                   </Button>
@@ -151,12 +151,12 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                 <div className="flex items-center justify-start ">
                   <Button
                     variant="text"
-                    title={t("Resources.components.Edit.table.value")}
+                    title={t("components.Resources.PropertyForm.table.value")}
                     onClick={() => handleSort("value")}
                     className="whitespace-nowrap"
                   >
                     <div className="ml-6 flex flex-row items-center justify-center">
-                      {t("Resources.components.Edit.table.value")}
+                      {t("components.Resources.PropertyForm.table.value")}
                       {getSortIcon("value")}
                     </div>
                   </Button>
@@ -164,7 +164,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
               </th>
 
               <th className="rounded-tr-xl bg-gray-50 p-3 text-left">
-                {t("Resources.components.Edge.table.actions")}
+                {t("components.Resources.PropertyForm.table.actions")}
               </th>
             </tr>
           </thead>
@@ -181,7 +181,9 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                     >
                       <Container width="full">
                         <Text>
-                          {t("Resources.components.Edit.properties.type")}
+                          {t(
+                            "components.Resources.PropertyForm.properties.type"
+                          )}
                         </Text>
                         {
                           <select
@@ -237,7 +239,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                       <Container width="full" direction="row" justify="start">
                         <Button
                           title={t(
-                            "Resources.components.Edit.button.removeProperty"
+                            "components.Resources.PropertyForm.button.removeProperty"
                           )}
                           onClick={() => remove(index)}
                           size="sm"
@@ -252,7 +254,9 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
             ) : (
               <tr>
                 <td colSpan={3} className="border-t-2 p-3 text-center">
-                  <Text>{t("Resources.components.Edge.table.noItems")}</Text>
+                  <Text>
+                    {t("components.Resources.PropertyForm.table.noItems")}
+                  </Text>
                 </td>
               </tr>
             )}
@@ -268,7 +272,9 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                     <Button
                       width="full"
                       className="h-full w-full"
-                      title={t("Resources.components.Edit.button.addProperty")}
+                      title={t(
+                        "components.Resources.PropertyForm.button.addProperty"
+                      )}
                       onClick={handleOnClickButtonAddProperty}
                       variant="text"
                       children={<AddIcon />}

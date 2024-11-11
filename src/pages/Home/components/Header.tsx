@@ -14,7 +14,7 @@ const HomeHeader: React.FC<HomeHeaderProps> = (props) => {
       className="flex-col items-center gap-10 md:flex-row md:items-start md:gap-20"
       data-testid="home-anonym-header"
     >
-      <Heading variant="h1">{t("Home.components.Header.title")}</Heading>
+      <Heading variant="h1">{t("Home.components.Header.heading")}</Heading>
       <div className="flex flex-col items-center justify-center md:items-start">
         <Text variant="body">{t("Home.components.Header.claim1")}</Text>
         <br />

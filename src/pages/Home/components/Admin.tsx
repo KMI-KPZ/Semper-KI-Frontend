@@ -14,7 +14,7 @@ const HomeAdmin: React.FC<HomeAdminProps> = (props) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5">
-      <Heading variant="h1">{t("Home.components.Admin.title")}</Heading>
+      <Heading variant="h1">{t("Home.components.Admin.heading")}</Heading>
       <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row">
         <Button
           startIcon={<SupervisorAccountIcon />}

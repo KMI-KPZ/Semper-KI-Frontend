@@ -15,7 +15,7 @@ const useOrgaEvent = (events: Event[]): ReturnProps => {
 
   const handleNewOrgaEvent = (_: OrgaEvent) => {
     queryClient.invalidateQueries(["organizations"]);
-    toast(t("App.hooks.useEvents.hooks.useOrgaEvent.toast"), "/organization");
+    toast(t("hooks.useOrgaEvent.toast"), "/organization");
   };
 
   const totalOrgaEventCount = useMemo(() => {

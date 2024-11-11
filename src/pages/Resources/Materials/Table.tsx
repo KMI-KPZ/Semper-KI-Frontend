@@ -24,15 +24,15 @@ const ResourcesMaterialsTable: React.FC<ResourcesMaterialsTableProps> = (
   return (
     <Container direction="col" width="full" justify="start">
       <Container width="full" direction="row">
-        <Heading variant="h2">{t("Resources.Materials.table.header")}</Heading>
+        <Heading variant="h2">{t("Resources.Materials.header")}</Heading>
       </Container>
 
       <Divider />
       <Container width="full" justify="between" direction="row">
-        <Heading variant="h3">{t("Resources.Materials.table.own")}</Heading>
+        <Heading variant="h3">{t("Resources.Materials.own")}</Heading>
         <PermissionGate element="ResourcesButtonAddMaterial">
           <Button
-            title={t("Resources.Materials.table.button.createOwn")}
+            title={t("Resources.Materials.button.createOwn")}
             to="create"
             variant="secondary"
             size="sm"

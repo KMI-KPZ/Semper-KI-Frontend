@@ -40,12 +40,12 @@ const ResourcesNodeTable: React.FC<ResourcesNodeTableProps> = (props) => {
       <Divider />
       <Container width="full" justify="between" direction="row">
         <Heading variant="h3">
-          {t("Resources.Table.subHeading", {
+          {t("components.Resources.NodeTable.subHeading", {
             name: t(`types.OntoNodeType.${nodeType}`),
           })}
         </Heading>
         <Button
-          title={t("Resources.Printers.table.button.createOwn")}
+          title={t("components.Resources.NodeTable.button.createOwn")}
           variant="secondary"
           size="sm"
           width="fit"

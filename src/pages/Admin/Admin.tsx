@@ -1,7 +1,7 @@
 import { Container } from "@component-library/index";
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import AdminDashboard from "./Dashboard/Dashboard";
+import AdminDashboard from "./components/Dashboard";
 import AdminUser from "./User/User";
 import AdminOrganization from "./Organization/Organization";
 import AdminProjects from "./Projects/Projects";

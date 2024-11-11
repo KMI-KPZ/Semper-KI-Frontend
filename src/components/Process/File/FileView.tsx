@@ -31,16 +31,6 @@ const ProcessFileView: React.FC<ProcessFileViewProps> = (props) => {
 
   return (
     <Container width="full" direction="col">
-      {/* <Container width="full" direction="col">
-        <Text>
-          {t(
-            process.client === user.hashedID ||
-              process.client === user.organization
-              ? "Process.components.Contract.Contract.user"
-              : "Process.components.Contract.Contract.orga"
-          )}
-        </Text>
-      </Container> */}
       <ProcessFileTable files={process.files} type="current" origin={origin} />
       <ProcessFileTable
         origin={origin}

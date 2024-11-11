@@ -92,9 +92,7 @@ const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
           <Button
             onClick={saveContractor}
             variant="primary"
-            title={t(
-              "Process.components.ContractorSelection.components.ContractorList.button.save"
-            )}
+            title={t("general.button.save")}
           />
         </form>
       ) : (

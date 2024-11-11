@@ -20,7 +20,7 @@ const ProjectsTableRow: React.FC<ProjectsTableRowProps> = (props) => {
   const { getTotalProjectEventCount } = useEvents();
 
   const handleOnClickButtonDelete = (projectID: string) => {
-    window.confirm(t("Projects.components.Table.deleteConfirm")) === true
+    window.confirm(t("Projects.components.TableRow.deleteConfirm")) === true
       ? deleteProject.mutate([projectID])
       : logger("delete canceled");
   };
@@ -46,7 +46,7 @@ const ProjectsTableRow: React.FC<ProjectsTableRowProps> = (props) => {
       <td className="rounded-r-md border-2 border-l-0 p-0">
         <Container width="full" justify="between" direction="row">
           <Button
-            title={t("Projects.components.Table.button.delete")}
+            title={t("general.button.delete")}
             variant="text"
             size="sm"
             width="full"

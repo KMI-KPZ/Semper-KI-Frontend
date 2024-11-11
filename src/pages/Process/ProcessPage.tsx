@@ -28,7 +28,7 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
   return (
     <Container direction="col" width="full">
       <BackButtonContainer>
-        <Heading variant="h1">{t("Process.ProcessPage.heading")}</Heading>
+        <Heading variant="h1">{t("Process.heading")}</Heading>
       </BackButtonContainer>
       <ProcessInfo process={process} />
       <Container width="full" align="start">
@@ -47,15 +47,9 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
                 <ProcessStatusGate start={ProcessStatus.VERIFYING_COMPLETED}>
                   <ProcessRequest />
                 </ProcessStatusGate>
-                {/* <ProcessStatusGate start={ProcessStatus.CLARIFICATION}>
-                <ProcessClarify />
-              </ProcessStatusGate> */}
                 <ProcessStatusGate start={ProcessStatus.REQUEST_COMPLETED}>
                   <ProcessContract />
                 </ProcessStatusGate>
-                {/* <ProcessStatusGate start={ProcessStatus.OFFER_COMPLETED}>
-                <ProcessConfirmation />
-              </ProcessStatusGate> */}
                 <ProcessStatusGate start={ProcessStatus.CONFIRMATION_COMPLETED}>
                   <ProcessProduction />
                 </ProcessStatusGate>

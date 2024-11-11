@@ -32,27 +32,27 @@ const useAdminMenuButtons = (): useAdminMenuButtonsReturnProps => {
   const rawAdminMenuButtons: RawAdminMenuButton[] = [
     {
       icon: <HomeIcon />,
-      title: t("Admin.Admin.buttons.dashboard"),
+      title: t("hooks.useAdminMenuButtons.button.dashboard"),
       to: "/admin",
     },
     {
       icon: <SupervisorAccountIcon />,
-      title: t("Admin.Admin.buttons.user"),
+      title: t("hooks.useAdminMenuButtons.button.user"),
       to: "/admin/user",
     },
     {
       icon: <BusinessIcon />,
-      title: t("Admin.Admin.buttons.orga"),
+      title: t("hooks.useAdminMenuButtons.button.orga"),
       to: "/admin/organization",
     },
     {
       icon: <NoteIcon />,
-      title: t("Admin.Admin.buttons.projects"),
+      title: t("hooks.useAdminMenuButtons.button.projects"),
       to: "/admin/projects",
     },
     {
       icon: <FactoryIcon />,
-      title: t("Admin.Admin.buttons.resources"),
+      title: t("hooks.useAdminMenuButtons.button.resources"),
       to: "/admin/resources/printer",
     },
   ];

@@ -184,7 +184,7 @@ export const Breadcrumb: React.FC<Props> = () => {
   const items = generateBreadcrumbItems();
 
   return (
-    <nav className="hidden w-full flex-row items-center justify-start pl-10 text-left text-lg font-bold text-white md:flex">
+    <nav className="hidden w-full flex-row items-center justify-start pl-10 text-left text-lg font-bold text-black md:flex">
       {items.length > 1
         ? items.map((item: BreadcrumbItem, index: number) =>
             index === 0 ? (
@@ -200,11 +200,13 @@ export const Breadcrumb: React.FC<Props> = () => {
                 }
                 children={<HomeIcon />}
                 to={item.link}
+                className="text-black"
               />
             ) : (
               <React.Fragment key={index}>
                 <span>{" > "}</span>
                 <Button
+                  className="text-black"
                   size="sm"
                   testid="breadcrumb-button"
                   variant="breadcrumb"

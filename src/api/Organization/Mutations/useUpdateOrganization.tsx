@@ -3,6 +3,7 @@ import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { UserAddressProps } from "@/hooks/useUser";
 import { NewUserAddressProps } from "@/api/User/Mutations/useUpdateUser";
+import { OrganizationService } from "../Querys/useGetOrganization";
 
 export interface UpdateOrgaProps {
   changes?: UpdateOrgaChanges;
@@ -32,6 +33,7 @@ export interface UpdateOrgaChanges {
   };
   taxID?: string;
   priorities?: UpdatePriorities;
+  services?: OrganizationService;
 }
 
 export interface UpdatePriorities {

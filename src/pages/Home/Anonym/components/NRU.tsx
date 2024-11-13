@@ -14,7 +14,7 @@ const NRU: React.FC<NRUProps> = (props) => {
       direction="col"
     >
       <Heading variant="h1">3D-Druck (Additive Fertigung)</Heading>
-      <Text>
+      <Text className="text-center">
         Unsere interne Fertigung bietet eine breite Palette von über 20
         Materialvarianten im Bereich 3D-Druck. Sie profitieren von einer
         schnellen Lieferzeit ab 2 Werktagen sowie einer Fertigung ab Stückzahl

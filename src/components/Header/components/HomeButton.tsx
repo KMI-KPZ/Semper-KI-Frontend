@@ -12,7 +12,7 @@ const HeaderHomeButton: React.FC<HeaderHomeButtonProps> = (props) => {
   return (
     <a
       href="/"
-      className="group flex flex-row items-center gap-3 p-2 px-5 duration-300 hover:scale-95 hover:cursor-pointer hover:text-nru "
+      className="flex w-fit flex-row items-center gap-3 p-2 px-5 duration-300 hover:scale-95 hover:cursor-pointer hover:text-nru "
       onClick={(e) => {
         e.preventDefault();
         navigate("/");
@@ -25,7 +25,7 @@ const HeaderHomeButton: React.FC<HeaderHomeButtonProps> = (props) => {
         src={NRULOGO}
         alt="Home Button"
       />
-      <Text className="text-2xl ">Projektverwaltung</Text>
+      <Text className="hidden text-2xl md:flex ">Projektverwaltung</Text>
     </a>
   );
 };

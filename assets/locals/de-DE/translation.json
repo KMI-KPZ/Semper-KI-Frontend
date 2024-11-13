@@ -6,6 +6,13 @@
     "number": "Bitte Zahl eingeben",
     "email": "Bitte gültige Email angeben"
   },
+  "zod": {
+    "requiredName": "{{name}} wird benötigt",
+    "required": "wird benötigt",
+    "string": "Bitte Zeichenfolge eingeben",
+    "number": "Bitte Zahl eingeben",
+    "email": "Bitte gültige Email angeben"
+  },
   "data": {
     "NavigationItem": {
       "demonstrator": "Loslegen",
@@ -1471,7 +1478,7 @@
                 "main": "Ihre Auswahl",
                 "post-processing": "Nachbearbeitungen (Optional)",
                 "model": "Modelle",
-                "material": "Modelle"
+                "material": "Materialien"
               },
               "pageDescription1": "Wählen sie die gewünschten Modelle, Materialien und Nachbearbeitungen aus.",
               "pageDescription2": "Diese Auswahl wird verwendet um die passenden Hersteller zu finden.",
@@ -1878,6 +1885,7 @@
         "materials": "Materialien",
         "printers": "3D-Drucker",
         "postProcessings": "Nachbearbeitung",
+        "costing": "Kosten",
         "request": "Datenerweiterung",
         "graph": "Graph",
         "privat-graph": "Private Graph"
@@ -1893,6 +1901,17 @@
         }
       }
     },
+    "Costing": {
+      "heading": "Kosten",
+      "Form": {
+        "heading": "Kosten bearbeiten"
+      },
+      "name": "Name",
+      "value": "Wert",
+      "unit": "Einheit",
+      "noItems": "keine Kosten vorhanden",
+      "noItemsWithFilter": "keine Kosten vorhanden mit den gewählten Filtern"
+    },
     "Materials": {
       "header": "Materialien",
       "own": "Eigene Materialien",
@@ -1901,7 +1920,8 @@
       }
     },
     "Overview": {
-      "header": "Übersicht"
+      "header": "Übersicht",
+      "text": "Geben sie ihre Ressourcen ein um sie für die Prozessauswahl zu nutzen."
     },
     "PostProcessings": {
       "header": "Nachbearbeitungen",

@@ -34,6 +34,18 @@ export interface OrganizationDetails {
   notificationSettings?: { organization?: OrgaNotificationSetting[] };
   priorities?: OrganizationPriority[];
   branding?: OrganizationBranding;
+  services?: OrganizationService;
+}
+
+export type OrganizationService = {
+  [key in keyof typeof ServiceType]?: OrganizationServiceCostingItem[];
+};
+
+export interface OrganizationServiceCostingItem {
+  key: string;
+  name: string;
+  unit: string;
+  value: number;
 }
 
 export interface OrganizationPriority {
@@ -89,6 +101,36 @@ export const parseOrganization = (responseData: any): Organization => {
       ...responseData.details,
       notificationSettings: { organization: orgaNotificationSettings },
       priorities: parseOrganizationPrioritise(responseData.details.priorities),
+      services: {
+        ADDITIVE_MANUFACTURING: [
+          {
+            key: "Test",
+            name: "Test",
+            unit: "Test",
+            value: 1,
+          },
+          {
+            key: "Test2",
+            name: "Test2",
+            unit: "Test2",
+            value: 2,
+          },
+        ],
+        AFTER_SALES: [
+          {
+            key: "Test",
+            name: "Test",
+            unit: "Test",
+            value: 1,
+          },
+          {
+            key: "Test2",
+            name: "Test2",
+            unit: "Test2",
+            value: 2,
+          },
+        ],
+      },
     },
     supportedServices: responseData.supportedServices.filter(
       (serviceType: ServiceType) => serviceType !== 0

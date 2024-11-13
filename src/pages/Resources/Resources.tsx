@@ -13,6 +13,8 @@ import ResourcesOutlet from "@/outlets/ResourcesOutlet";
 import ResourcesNodeTable from "../../components/Resources/NodeTable";
 import ResourcesNodeForm from "@/components/Resources/NodeForm";
 import { useTranslation } from "react-i18next";
+import Costing from "./Costing/Costing";
+import CostingForm from "./Costing/Form";
 
 interface ResourcesProps {}
 
@@ -64,6 +66,10 @@ const Resources: React.FC<ResourcesProps> = (props) => {
                     element={<ResourcesNodeForm type="edit" />}
                   />
                 </Route>
+              </Route>
+              <Route path="costing">
+                <Route index element={<Costing />} />
+                <Route path=":serviceType" element={<CostingForm />} />
               </Route>
               <Route path="graph" element={<OrgaGraph />} />
               {process.env.NODE_ENV === "development" ? (

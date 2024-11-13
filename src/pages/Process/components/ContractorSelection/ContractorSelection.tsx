@@ -1,7 +1,6 @@
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessContainer from "@/components/Process/Container";
 import {
-  Button,
   Container,
   Heading,
   LoadingAnimation,
@@ -17,7 +16,6 @@ import ContractorCard from "./components/ContractorCard";
 import ContractorSelectionAddressCard from "./components/AddressCard";
 import useGetContractors from "@/api/Process/Querys/useGetContractors";
 import ProcessConditionIcon from "@/components/Process/ConditionIcon";
-import ProcessStatusGate from "../StatusGate";
 
 interface ProcessContractorSelectionProps {}
 
@@ -50,12 +48,12 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
     setShowDeliveryAddress(!e.target.checked);
   };
 
-  const handleOnClickButtonSelectContractor = () => {
-    setEditContractor(true);
-  };
-  const handleOnClickButtonEditContractor = () => {
-    setEditContractor(true);
-  };
+  // const handleOnClickButtonSelectContractor = () => {
+  //   setEditContractor(true);
+  // };
+  // const handleOnClickButtonEditContractor = () => {
+  //   setEditContractor(true);
+  // };
 
   const closeEditContractor = () => {
     setEditContractor(false);

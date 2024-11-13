@@ -12,7 +12,7 @@ const BackButtonContainer: React.FC<
   const { t } = useTranslation();
 
   return (
-    <Container width="full" className="relative  bg-white p-2">
+    <Container width="full" className="relative  bg-white">
       <Button
         width="fit"
         to=".."

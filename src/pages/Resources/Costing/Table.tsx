@@ -23,18 +23,11 @@ const CostingTable: React.FC<CostingTableProps> = (props) => {
     useSort<OrganizationServiceCostingItem>();
   const { organization } = useOrganization();
 
-  const costItems =
+  const costItems1 =
     organization.details.services !== undefined
       ? organization.details.services[serviceType]
       : [];
-  const filteredCostItems =
-    costItems !== undefined
-      ? costItems
-      : []
-          .filter((costingItem: OrganizationServiceCostingItem) =>
-            filterDataBySearchInput(costingItem)
-          )
-          .sort(sortItems);
+  const costItems2 = costItems1 !== undefined ? costItems1 : [];
 
   return (
     <Container width="full" direction="col">
@@ -74,25 +67,35 @@ const CostingTable: React.FC<CostingTableProps> = (props) => {
             </tr>
           </thead>
           <tbody>
-            {filteredCostItems.length > 0 ? (
-              filteredCostItems.map(
-                (service: OrganizationServiceCostingItem, index: number) => {
-                  return (
-                    <tr key={index}>
-                      <td className="text-center">{service.name}</td>
-                      <td className="text-center">{service.value}</td>
-                      <td className="text-center">{service.unit}</td>
-                    </tr>
-                  );
-                }
-              )
+            {costItems2.filter((costingItem: OrganizationServiceCostingItem) =>
+              filterDataBySearchInput(costingItem)
+            ).length > 0 ? (
+              costItems2
+                .filter((costingItem: OrganizationServiceCostingItem) =>
+                  filterDataBySearchInput(costingItem)
+                )
+                .sort(sortItems)
+                .map(
+                  (service: OrganizationServiceCostingItem, index: number) => {
+                    return (
+                      <tr key={index}>
+                        <td className="text-center">{service.name}</td>
+                        <td className="text-center">{service.value}</td>
+                        <td className="text-center">{service.unit}</td>
+                      </tr>
+                    );
+                  }
+                )
             ) : (
               <tr>
                 <td className="text-center" colSpan={3}>
                   {t(
                     `Resources.Costing.${
-                      costItems !== undefined &&
-                      costItems.length > filteredCostItems.length
+                      costItems2.length >
+                      costItems2.filter(
+                        (costingItem: OrganizationServiceCostingItem) =>
+                          filterDataBySearchInput(costingItem)
+                      ).length
                         ? "noItemsWithFilter"
                         : "noItems"
                     }`

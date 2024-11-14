@@ -44,9 +44,21 @@ export type OrganizationService = {
 export interface OrganizationServiceCostingItem {
   key: string;
   name: string;
-  unit: string;
+  unit: OrganizationServiceCostingItemUnit;
   value: number;
 }
+
+export type OrganizationServiceCostingItemUnit =
+  | "€/kWh"
+  | "€/h"
+  | "%"
+  | "€/kg"
+  | "€"
+  | "cm³/h"
+  | "mm"
+  | "cm³"
+  | "g/cm³"
+  | "€/(h*m²)";
 
 export interface OrganizationPriority {
   type: OrganizationPriorityType;
@@ -101,36 +113,39 @@ export const parseOrganization = (responseData: any): Organization => {
       ...responseData.details,
       notificationSettings: { organization: orgaNotificationSettings },
       priorities: parseOrganizationPrioritise(responseData.details.priorities),
-      services: {
-        ADDITIVE_MANUFACTURING: [
-          {
-            key: "Test",
-            name: "Test",
-            unit: "Test",
-            value: 1,
-          },
-          {
-            key: "Test2",
-            name: "Test2",
-            unit: "Test2",
-            value: 2,
-          },
-        ],
-        AFTER_SALES: [
-          {
-            key: "Test",
-            name: "Test",
-            unit: "Test",
-            value: 1,
-          },
-          {
-            key: "Test2",
-            name: "Test2",
-            unit: "Test2",
-            value: 2,
-          },
-        ],
-      },
+      services:
+        responseData.details.services === undefined
+          ? {
+              ADDITIVE_MANUFACTURING: [
+                {
+                  key: "Test",
+                  name: "Test",
+                  unit: "mm",
+                  value: 1,
+                },
+                {
+                  key: "Test2",
+                  name: "Test2",
+                  unit: "€",
+                  value: 2,
+                },
+              ],
+              AFTER_SALES: [
+                {
+                  key: "Test",
+                  name: "Test",
+                  unit: "cm³/h",
+                  value: 1,
+                },
+                {
+                  key: "Test2",
+                  name: "Test2",
+                  unit: "€/h",
+                  value: 2,
+                },
+              ],
+            }
+          : responseData.details.services,
     },
     supportedServices: responseData.supportedServices.filter(
       (serviceType: ServiceType) => serviceType !== 0

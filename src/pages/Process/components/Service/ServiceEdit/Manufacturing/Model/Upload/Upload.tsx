@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as UploadIcon } from "@icons/Upload.svg";
-import { Button, Container, Heading } from "@component-library/index";
+import { Button, Container, Heading, Text } from "@component-library/index";
 import useUploadModels from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUploadModels";
 import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
@@ -43,13 +43,28 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
       z.object({
         file: z.instanceof(File),
         tags: z.string().optional(),
-        licenses: z.string().min(1, t("zod.empty")),
+        licenses: z.string().min(
+          1,
+          t("zod.requiredName", {
+            name: t(
+              `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.license`
+            ),
+          })
+        ),
         certificates: z.string().optional(),
         quantity: z
           .number()
           .min(1, t("zod.numberMin", { min: 1 }))
           .max(10000000, t("zod.numberMax", { max: 10000000 })),
-        levelOfDetail: z.nativeEnum(ModelLevelOfDetail),
+        levelOfDetail: z.nativeEnum(ModelLevelOfDetail, {
+          errorMap: () => ({
+            message: t("zod.requiredName", {
+              name: t(
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.levelOfDetail`
+              ),
+            }),
+          }),
+        }),
       })
     ),
   });
@@ -175,20 +190,22 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     );
   };
 
-  // const getCompressedErrors = (): string[] => {
-  //   const errorsArray: string[] = [];
-  //   for (const key in errors) {
-  //     if (errors.hasOwnProperty(key)) {
-  //       const element = errors[key];
-  //       if (element !== undefined) {
-  //         errorsArray.push(element.message);
-  //       }
-  //     }
-  //   }
-  //   return errorsArray;
-  // };
+  const getCompressedErrors = (): string[] => {
+    const uniqueErrors = new Set<string>();
 
-  // logger("errors", errors);
+    // Iterate through the nested errors object
+    Object.values(errors.models || []).forEach((modelErrors) => {
+      if (modelErrors && typeof modelErrors === "object") {
+        Object.values(modelErrors).forEach((error) => {
+          if (error && "message" in error) {
+            uniqueErrors.add((error as { message: string }).message);
+          }
+        });
+      }
+    });
+
+    return Array.from(uniqueErrors);
+  };
 
   return (
     <form className="flex h-full w-full flex-col items-center justify-start gap-5">
@@ -223,18 +240,21 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                 width="full"
                 direction="row"
                 justify="end"
+                align="end"
                 className="fixed bottom-5 z-10  w-fit self-center pr-5 md:sticky md:self-end"
               >
-                {/* {errors !== undefined && getCompressedErrors.length > 0
-                  ? getCompressedErrors().map((error, index) => (
-                      <Text
-                        key={index}
-                        className="rounded-md border-2 bg-white p-3 text-red-500"
-                      >
+                {errors !== undefined && getCompressedErrors().length > 0 ? (
+                  <Container
+                    className="rounded-md border-2 bg-white p-3"
+                    direction="col"
+                  >
+                    {getCompressedErrors().map((error, index) => (
+                      <Text key={index} className=" text-red-500">
                         {error}
                       </Text>
-                    ))
-                  : null} */}
+                    ))}
+                  </Container>
+                ) : null}
                 <Button
                   width="fit"
                   loading={uploadModels.isLoading}

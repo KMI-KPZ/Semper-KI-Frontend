@@ -171,13 +171,13 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
             </tr>
             <tr>
               <th className="text-left">{`${t(
-                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.amount`
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.quantity`
               )}`}</th>
               <td>
                 <input
                   className={`flex w-full rounded-md border-2 p-2
-            ${modelErrors?.amount ? "border-red-500 bg-red-500" : ""}}`}
-                  {...register(`models.${index}.amount`, {
+            ${modelErrors?.quantity ? "border-red-500 bg-red-500" : ""}}`}
+                  {...register(`models.${index}.quantity`, {
                     valueAsNumber: true,
                   })}
                 />
@@ -186,7 +186,7 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
                 <Button
                   variant="tertiary"
                   size="xs"
-                  onClick={() => handleOnClickButtonSaveAll("amount")}
+                  onClick={() => handleOnClickButtonSaveAll("quantity")}
                   title={t(
                     "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.button.saveAll"
                   )}

@@ -2,12 +2,15 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
+import { ModelLevelOfDetail } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
 
 interface ModelUploadDetails {
   tags: string[];
   date: Date;
   licenses: string[];
   certificates: string[];
+  quantity: number;
+  levelOfDetail: ModelLevelOfDetail;
 }
 
 export interface UploadModel {

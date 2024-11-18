@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as UploadIcon } from "@icons/Upload.svg";
-import { Button, Container, Heading, Text } from "@component-library/index";
+import { Button, Container, Heading } from "@component-library/index";
 import useUploadModels from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUploadModels";
 import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
@@ -11,7 +11,6 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ModelLevelOfDetail } from "../types";
-import logger from "@/hooks/useLogger";
 
 interface Props {}
 
@@ -24,7 +23,7 @@ export interface ManufacturingModelUploadData {
   tags?: string;
   licenses?: string;
   certificates?: string;
-  amount?: number;
+  quantity?: number;
   levelOfDetail?: ModelLevelOfDetail;
 }
 
@@ -46,7 +45,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
         tags: z.string().optional(),
         licenses: z.string().min(1, t("zod.empty")),
         certificates: z.string().optional(),
-        amount: z
+        quantity: z
           .number()
           .min(1, t("zod.numberMin", { min: 1 }))
           .max(10000000, t("zod.numberMax", { max: 10000000 })),
@@ -77,7 +76,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
 
   const addFilesToForm = (files: File[]) => {
     files.forEach((file) => {
-      append({ file, amount: 1 });
+      append({ file, quantity: 1 });
     });
   };
 
@@ -160,6 +159,8 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
               item.tags === undefined
                 ? []
                 : item.tags.split(",").map((item) => item.trim()),
+            quantity: item.quantity,
+            levelOfDetail: item.levelOfDetail,
           },
         })),
       },

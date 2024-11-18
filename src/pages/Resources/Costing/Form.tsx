@@ -21,6 +21,10 @@ import useUpdateOrganization from "@/api/Organization/Mutations/useUpdateOrganiz
 
 interface CostingFormProps {}
 
+interface FormData {
+  items: OrganizationServiceCostingItem[];
+}
+
 const CostingForm: React.FC<CostingFormProps> = (props) => {
   const {} = props;
   const { serviceType: unsafeServiceType } = useParams();
@@ -47,10 +51,6 @@ const CostingForm: React.FC<CostingFormProps> = (props) => {
       })
     ),
   });
-
-  interface FormData {
-    items: OrganizationServiceCostingItem[];
-  }
 
   const {
     register,

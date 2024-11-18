@@ -140,8 +140,15 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
           },
           logo_url: data.branding_logo_url,
         },
-        supportedServices: data.supportedServices.map((service) =>
-          parseInt(service)
+        supportedServices: data.supportedServices
+          .map((service) => parseInt(service))
+          .filter(
+            (newService) => !organization.supportedServices.includes(newService)
+          ),
+      },
+      deletions: {
+        supportedServices: organization.supportedServices.filter(
+          (service) => !data.supportedServices.includes(service.toString())
         ),
       },
     });

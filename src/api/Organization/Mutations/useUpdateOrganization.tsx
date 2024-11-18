@@ -45,6 +45,7 @@ export interface UpdatePriorities {
 export interface UpdateOrgaDeletions {
   address?: string;
   services?: string[];
+  supportedServices?: number[];
 }
 
 const useUpdateOrganization = () => {

@@ -1,26 +1,26 @@
 import ModelPreview from "@/pages/Test/STLViewer";
-import {
-  Button,
-  Container,
-  Divider,
-  Heading,
-  Text,
-} from "@component-library/index";
+import { Button, Container, Divider, Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { ProcessModelUploadFormProps } from "../Upload";
+import {
+  ManufacturingModelUploadData,
+  ProcessModelUploadFormProps,
+} from "../Upload";
 import {
   FieldArrayWithId,
   FieldErrors,
   UseFormRegister,
 } from "react-hook-form";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { ModelLevelOfDetail } from "../../types";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface UploadModelCardProps {
   model: FieldArrayWithId<ProcessModelUploadFormProps, "models", "id">;
   index: number;
   register: UseFormRegister<ProcessModelUploadFormProps>;
   deleteModel: (index: number) => void;
-  saveForAll: (index: number) => void;
+  saveForAll: (index: number, key: keyof ManufacturingModelUploadData) => void;
   errors: FieldErrors<ProcessModelUploadFormProps>;
 }
 
@@ -33,14 +33,14 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
     deleteModel(index);
   };
 
-  const handleOnClickButtonSaveAll = () => {
-    saveForAll(index);
+  const handleOnClickButtonSaveAll = (
+    key: keyof ManufacturingModelUploadData
+  ) => {
+    saveForAll(index, key);
   };
 
-  const licenseError: boolean =
-    errors.models === undefined
-      ? false
-      : errors.models[index]?.licenses !== undefined;
+  const modelErrors =
+    errors.models === undefined ? undefined : errors.models[index];
 
   return (
     <Container
@@ -54,86 +54,196 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
       />
       <Divider />
       <Container direction="col" className="p-5">
-        <Heading variant="h3">{model.file.name}</Heading>
-        <Container direction="row" width="full" align="start">
-          <Container direction="col" justify="start" align="start">
-            <Text>{`${t(
-              `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.size`
-            )}`}</Text>
-            <Text>{`${t(
-              `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.date`
-            )}`}</Text>
-            <Text className="py-3">
-              {`${t(
-                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.certificate`
-              )}`}
-            </Text>
-            <Text className="py-3">
-              {`${t(
-                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.license`
-              )}`}
-            </Text>
-            <Text className="py-3">
-              {`${t(
-                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.tags`
-              )}`}
-            </Text>
-          </Container>
-          <Container direction="col" justify="start" align="start">
-            <Text>{model.file.size}</Text>
-            <Text>{new Date().toLocaleDateString()}</Text>
-            <input
-              className={`flex w-full rounded-md border-2 p-3
-            ${false ? "border-red-500 bg-red-500" : ""}
-          }`}
-              placeholder={t(
-                "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.certificatePH"
-              )}
-              {...register(`models.${index}.certificates`)}
-            />
-            <select
-              {...register(`models.${index}.licenses`, { required: true })}
-              className={`flex w-full rounded-md border-2 p-3 ${
-                licenseError ? "border-red-500 " : ""
-              }`}
-            >
-              <option value="" disabled selected>
-                {t(
-                  `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.selectLicense`
-                )}
-              </option>
-              <option value="CC BY">CC BY</option>
-              <option value="CC BY-NC">CC BY-NC</option>
-              <option value="CC BY-ND">CC BY-ND</option>
-              <option value="CC BY-SA">CC BY-SA</option>
-              <option value="CC BY-NC-ND">CC BY-NC-ND</option>
-              <option value="CC BY-NC-SA">CC BY-NC-SA</option>
-            </select>
-            <input
-              className={`flex w-full rounded-md border-2 p-3
-            ${false ? "border-red-500 bg-red-500" : ""}}`}
-              placeholder={t(
-                "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.tagsPH"
-              )}
-              {...register(`models.${index}.tags`)}
-            />
-          </Container>
-        </Container>
-
-        <Container direction="row">
+        <Container width="full" className="relative">
+          <Heading variant="h3">{model.file.name}</Heading>
           <Button
+            children={<DeleteIcon fontSize="medium" />}
+            className="absolute right-0 top-0"
             variant="text"
             title={t("general.button.delete")}
             onClick={handleOnClickButtonDelete}
           />
-          <Button
-            variant="secondary"
-            onClick={handleOnClickButtonSaveAll}
-            title={t(
-              "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.button.saveAll"
-            )}
-          />
         </Container>
+        <table className="w-full table-auto border-separate border-spacing-x-5 border-spacing-y-2">
+          <tbody>
+            <tr>
+              <th className="text-left">{`${t(
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.size`
+              )}`}</th>
+              <td>{model.file.size}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th className="text-left">{`${t(
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.date`
+              )}`}</th>
+              <td>{new Date().toLocaleDateString()}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th className="text-left">{`${t(
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.certificate`
+              )}`}</th>
+              <td>
+                <input
+                  className={`flex w-full rounded-md border-2 p-2
+            ${modelErrors?.certificates ? "border-red-500 bg-red-500" : ""}
+          }`}
+                  placeholder={t(
+                    "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.certificatePH"
+                  )}
+                  {...register(`models.${index}.certificates`)}
+                />
+              </td>
+              <td>
+                <Button
+                  variant="tertiary"
+                  size="xs"
+                  onClick={() => handleOnClickButtonSaveAll("certificates")}
+                  title={t(
+                    "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.button.saveAll"
+                  )}
+                  children={<ContentCopyIcon />}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th className="text-left">{`${t(
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.license`
+              )}`}</th>
+              <td>
+                <select
+                  {...register(`models.${index}.licenses`)}
+                  className={`flex w-full rounded-md border-2 p-2 ${
+                    modelErrors?.licenses ? "border-red-500 " : ""
+                  }`}
+                >
+                  <option value="" disabled selected>
+                    {t(
+                      `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.selectLicense`
+                    )}
+                  </option>
+                  <option value="CC BY">CC BY</option>
+                  <option value="CC BY-NC">CC BY-NC</option>
+                  <option value="CC BY-ND">CC BY-ND</option>
+                  <option value="CC BY-SA">CC BY-SA</option>
+                  <option value="CC BY-NC-ND">CC BY-NC-ND</option>
+                  <option value="CC BY-NC-SA">CC BY-NC-SA</option>
+                </select>
+              </td>
+              <td>
+                <Button
+                  variant="tertiary"
+                  size="xs"
+                  onClick={() => handleOnClickButtonSaveAll("licenses")}
+                  title={t(
+                    "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.button.saveAll"
+                  )}
+                  children={<ContentCopyIcon />}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th className="text-left ">{`${t(
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.tags`
+              )}`}</th>
+              <td>
+                <input
+                  className={`flex w-full rounded-md border-2 p-2
+            ${modelErrors?.tags ? "border-red-500 bg-red-500" : ""}}`}
+                  placeholder={t(
+                    "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.tagsPH"
+                  )}
+                  {...register(`models.${index}.tags`)}
+                />
+              </td>
+              <td>
+                <Button
+                  variant="tertiary"
+                  size="xs"
+                  onClick={() => handleOnClickButtonSaveAll("tags")}
+                  title={t(
+                    "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.button.saveAll"
+                  )}
+                  children={<ContentCopyIcon />}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th className="text-left">{`${t(
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.amount`
+              )}`}</th>
+              <td>
+                <input
+                  className={`flex w-full rounded-md border-2 p-2
+            ${modelErrors?.amount ? "border-red-500 bg-red-500" : ""}}`}
+                  {...register(`models.${index}.amount`, {
+                    valueAsNumber: true,
+                  })}
+                />
+              </td>
+              <td>
+                <Button
+                  variant="tertiary"
+                  size="xs"
+                  onClick={() => handleOnClickButtonSaveAll("amount")}
+                  title={t(
+                    "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.button.saveAll"
+                  )}
+                  children={<ContentCopyIcon />}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th className="text-left">{`${t(
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.levelOfDetail`
+              )}`}</th>
+              <td>
+                <select
+                  {...register(`models.${index}.levelOfDetail`, {
+                    valueAsNumber: true,
+                  })}
+                  className={`flex w-full rounded-md border-2 p-2 ${
+                    modelErrors?.levelOfDetail ? "border-red-500 " : ""
+                  }`}
+                >
+                  <option value="" disabled selected>
+                    {t(
+                      `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.selectLevelOfDetail`
+                    )}
+                  </option>
+                  <option value={ModelLevelOfDetail.LOW}>
+                    {t(`enum.ModelLevelOfDetail.LOW`)}
+                  </option>
+                  <option value={ModelLevelOfDetail.MEDIUM}>
+                    {t(`enum.ModelLevelOfDetail.MEDIUM`)}
+                  </option>
+                  <option value={ModelLevelOfDetail.HIGH}>
+                    {t(`enum.ModelLevelOfDetail.HIGH`)}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <Button
+                  variant="tertiary"
+                  size="xs"
+                  onClick={() => handleOnClickButtonSaveAll("levelOfDetail")}
+                  title={t(
+                    "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.button.saveAll"
+                  )}
+                  children={<ContentCopyIcon />}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={3} className="pt-2 ">
+                {t(
+                  "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.mandatory"
+                )}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </Container>
     </Container>
   );

@@ -7,6 +7,14 @@ export interface ModelProps {
   certificates: string[]; //
   URI: string; //X
   createdBy: string;
+  quantity: number;
+  levelOfDetail: ModelLevelOfDetail;
+}
+
+export enum ModelLevelOfDetail {
+  "LOW",
+  "MEDIUM",
+  "HIGH",
 }
 
 export interface ModelDetailsProps {

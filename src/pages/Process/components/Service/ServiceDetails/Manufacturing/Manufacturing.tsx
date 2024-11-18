@@ -250,6 +250,13 @@ const ServiceManufacturingDetails: React.FC<
               }`
             )}
           />
+          <Button
+            size="xs"
+            variant="text"
+            title={t(
+              "Process.components.Service.ServiceDetails.components.Manufacturing.button.noModel"
+            )}
+          />
         </ProcessStatusGate>
       </Container>
       <Divider />

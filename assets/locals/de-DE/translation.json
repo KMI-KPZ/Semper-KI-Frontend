@@ -11,7 +11,10 @@
     "required": "wird benötigt",
     "string": "Bitte Zeichenfolge eingeben",
     "number": "Bitte Zahl eingeben",
-    "email": "Bitte gültige Email angeben"
+    "email": "Bitte gültige Email angeben",
+    "empty": "Darf nicht leer sein",
+    "numberMax": "Darf nicht größer als {{max}} sein",
+    "numberMin": "Darf nicht kleiner als {{min}} sein"
   },
   "data": {
     "NavigationItem": {
@@ -154,6 +157,11 @@
       "DELETION": "Löschung",
       "DETAILS": "Prozessdetails",
       "OTHER": "Sonstiges"
+    },
+    "ModelLevelOfDetail": {
+      "LOW": "Niedrig",
+      "MEDIUM": "Mittel",
+      "HIGH": "Hoch"
     }
   },
   "types": {
@@ -1507,6 +1515,7 @@
                 "properties": "Eigenschaften:"
               },
               "button": {
+                "noModel": "Kein Modell? geben sie hier ihre Anforderungen ein",
                 "addMore": "Weitere hinzufügen",
                 "addModel": "Modell hinzufügen",
                 "addMaterial": "Material hinzufügen",
@@ -1574,18 +1583,23 @@
                 "button": { "upload": "Modell hochladen" },
                 "components": {
                   "Card": {
-                    "name": "Name:",
-                    "size": "Größe:",
-                    "type": "Dateityp:",
-                    "date": "Datum:",
+                    "name": "Name",
+                    "size": "Größe",
+                    "type": "Dateityp",
+                    "date": "Datum",
                     "all": "Auf alle anwenden:",
-                    "tags": "Tags:",
+                    "tags": "Tags",
                     "tagsPH": "Tag1, Tag2, ...",
+                    "amount": "Anzahl *",
+                    "levelOfDetail": "Detailgrad *",
+                    "levelOfDetailPH": "Detailgrad",
+                    "selectLevelOfDetail": "Detailgrad auswählen",
                     "selectLicense": "Lizenz auswählen",
                     "certificate": "Eventuelle Zertifikate:",
                     "certificatePH": "Zertifikate1, Zertifikate2, ...",
-                    "license": "Lizenz der Datei:",
+                    "license": "Lizenz der Datei *",
                     "licensePH": "Lizenz1, Lizenz2 ...",
+                    "mandatory": "* Pflichtfeld",
                     "button": {
                       "saveAll": "Auf alle Modelle anwenden"
                     }

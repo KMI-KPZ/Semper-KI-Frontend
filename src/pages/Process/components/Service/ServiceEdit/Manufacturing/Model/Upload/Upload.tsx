@@ -8,6 +8,10 @@ import { useProject } from "@/hooks/Project/useProject";
 import useModal from "@/hooks/useModal";
 import UploadModelCard from "./components/ModelCard";
 import { useFieldArray, useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ModelLevelOfDetail } from "../types";
+import logger from "@/hooks/useLogger";
 
 interface Props {}
 
@@ -16,10 +20,12 @@ export interface ProcessModelUploadFormProps {
 }
 
 export interface ManufacturingModelUploadData {
+  file: File;
   tags?: string;
   licenses?: string;
   certificates?: string;
-  file: File;
+  amount?: number;
+  levelOfDetail?: ModelLevelOfDetail;
 }
 
 export const ProcessModelUpload: React.FC<Props> = (props) => {
@@ -32,6 +38,23 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const { process } = useProcess();
   const { project } = useProject();
   const uploadModels = useUploadModels();
+
+  const formSchema = z.object({
+    models: z.array(
+      z.object({
+        file: z.instanceof(File),
+        tags: z.string().optional(),
+        licenses: z.string().min(1, t("zod.empty")),
+        certificates: z.string().optional(),
+        amount: z
+          .number()
+          .min(1, t("zod.numberMin", { min: 1 }))
+          .max(10000000, t("zod.numberMax", { max: 10000000 })),
+        levelOfDetail: z.nativeEnum(ModelLevelOfDetail),
+      })
+    ),
+  });
+
   const {
     register,
     handleSubmit,
@@ -39,35 +62,22 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     watch,
     formState: { errors },
   } = useForm<ProcessModelUploadFormProps>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       models: [],
     },
   });
+
   const { fields, remove, append, update } = useFieldArray({
     control,
     name: "models",
   });
 
-  const dataTypes: string[] = [
-    ".STEP",
-    ".STP",
-    ".SLDPRT",
-    ".STL",
-    ".SAT",
-    ".3DXML",
-    ".3MF",
-    ".PRT",
-    ".IPT",
-    ".CATPART",
-    ".X_T",
-    ".PTC",
-    ".X_B",
-    ".DXF",
-  ];
+  const dataTypes: string[] = [".STL"];
 
   const addFilesToForm = (files: File[]) => {
     files.forEach((file) => {
-      append({ file });
+      append({ file, amount: 1 });
     });
   };
 
@@ -112,15 +122,17 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     remove(index);
   };
 
-  const saveForAll = (index: number) => {
+  const saveForAll = (
+    index: number,
+    key: keyof ManufacturingModelUploadData
+  ) => {
     const overrideModel = watch(`models.${index}`);
-    fields.forEach((model, i) => {
+    const currentField = watch(`models`);
+    currentField.forEach((model, i) => {
       if (i !== index) {
         update(i, {
-          file: model.file,
-          certificates: overrideModel.certificates,
-          licenses: overrideModel.licenses,
-          tags: overrideModel.tags,
+          ...model,
+          [key]: overrideModel[key],
         });
       }
     });
@@ -159,6 +171,21 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     );
   };
 
+  // const getCompressedErrors = (): string[] => {
+  //   const errorsArray: string[] = [];
+  //   for (const key in errors) {
+  //     if (errors.hasOwnProperty(key)) {
+  //       const element = errors[key];
+  //       if (element !== undefined) {
+  //         errorsArray.push(element.message);
+  //       }
+  //     }
+  //   }
+  //   return errorsArray;
+  // };
+
+  // logger("errors", errors);
+
   return (
     <form className="flex h-full w-full flex-col items-center justify-start gap-5">
       <Container width="full" direction="row" justify="between">
@@ -192,15 +219,18 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                 width="full"
                 direction="row"
                 justify="end"
-                className="fixed bottom-10 z-10  md:sticky md:right-10"
+                className="fixed bottom-5 z-10  w-fit self-center pr-5 md:sticky md:self-end"
               >
-                {errors.models !== undefined ? (
-                  <Text variant="body" className="text-red-500">
-                    {t(
-                      `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.error.licenses`
-                    )}
-                  </Text>
-                ) : null}
+                {/* {errors !== undefined && getCompressedErrors.length > 0
+                  ? getCompressedErrors().map((error, index) => (
+                      <Text
+                        key={index}
+                        className="rounded-md border-2 bg-white p-3 text-red-500"
+                      >
+                        {error}
+                      </Text>
+                    ))
+                  : null} */}
                 <Button
                   width="fit"
                   loading={uploadModels.isLoading}

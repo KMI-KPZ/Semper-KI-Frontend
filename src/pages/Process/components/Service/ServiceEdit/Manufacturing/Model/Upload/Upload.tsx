@@ -159,8 +159,11 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
               item.tags === undefined
                 ? []
                 : item.tags.split(",").map((item) => item.trim()),
-            quantity: item.quantity,
-            levelOfDetail: item.levelOfDetail,
+            quantity: item.quantity !== undefined ? item.quantity : 1,
+            levelOfDetail:
+              item.levelOfDetail !== undefined
+                ? item.levelOfDetail
+                : ModelLevelOfDetail.MEDIUM,
           },
         })),
       },

@@ -142,7 +142,9 @@ const App: React.FC = () => {
                         element={<ManufacturingProcessOutlet />}
                       >
                         <Route index element={<Navigate to="model" />} />
-                        <Route path="model" element={<ManufacturingModels />} />
+                        <Route path="model">
+                          <Route index element={<ManufacturingModels />} />
+                        </Route>
                         <Route
                           path="material"
                           element={<ManufacturingMaterials />}

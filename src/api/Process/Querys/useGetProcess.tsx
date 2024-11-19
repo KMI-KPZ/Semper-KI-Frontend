@@ -79,16 +79,16 @@ export type FileProps = {
   path: string;
 };
 
-export type ProcessFile = DefaultProcessFile | ModelProcessFile;
+export type ProcessFile = DefaultProcessFile | ProcessModel;
 
 export interface GenericProcessFile {
   id: string;
+  date: Date;
+  size: number;
   fileName: string;
   imgPath: string;
-  date: Date;
   createdBy: string;
   createdByID: string;
-  size: number;
   type: ProcessFileType;
   origin: ProcessOrigin;
 }
@@ -110,12 +110,20 @@ export type DefaultProcessFile = {
   type: "File";
 } & GenericProcessFile;
 
-export type ModelProcessFile = {
+export type ProcessModel = {
   type: "Model";
   tags: string[];
   licenses: string[];
   certificates: string[];
+  quantity: number;
+  levelOfDetail: ModelLevelOfDetail;
 } & GenericProcessFile;
+
+export enum ModelLevelOfDetail {
+  "LOW",
+  "MEDIUM",
+  "HIGH",
+}
 
 export interface ChatMessageProps {
   userID: string;

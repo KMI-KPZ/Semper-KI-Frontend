@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ServiceDetailsCard from "../../components/Card";
-import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
 import TestImg from "@images/Test2.png";
 import {
   Button,
@@ -13,12 +12,15 @@ import { useNavigate } from "react-router-dom";
 import useDeleteModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useDeleteModel";
 import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
-import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import {
+  ProcessModel,
+  ProcessStatus,
+} from "@/api/Process/Querys/useGetProcess";
 import ProcessStatusGate from "@/pages/Process/components/StatusGate";
 import useGetCheckModel from "@/api/Process/Querys/useGetCheckModel";
 
 interface ProcessServiceModelCardProps {
-  model: ModelProps;
+  model: ProcessModel;
 }
 
 const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
@@ -33,7 +35,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
   const checkModel = useGetCheckModel(model.id);
 
   const handleOnButtonClickModel = () => {
-    navigate("service/manufacturing/model");
+    navigate("service/manufacturing/model/edit");
   };
   const handleOnButtonClickDeleteModel = (modelID: string) => {
     deleteModel.mutate({

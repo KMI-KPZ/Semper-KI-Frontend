@@ -1,6 +1,6 @@
 import { Address, UserType } from "@/hooks/useUser";
 import logger from "@/hooks/useLogger";
-import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
+import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
 
 export const getFileSizeAsString = (size: number): string => {
   let unit: string;
@@ -95,18 +95,18 @@ export const parseAddress = (unparsedAddress: string): Address => {
   return newAddress;
 };
 
-export const getModelURI = (model: ModelProps): string => {
+export const getModelURI = (model: ProcessModel): string => {
   const convertStringForImage = (input: string): string => {
     let base64 = input;
     base64 = base64.slice(2);
     base64 = base64.slice(0, -1);
     return base64;
   };
-  if (model.URI === undefined) return "";
+  if (model.imgPath === undefined) return "";
 
   return model.createdBy === "kiss"
-    ? model.URI
-    : `data:image/jpeg;base64,${convertStringForImage(model.URI)}`;
+    ? model.imgPath
+    : `data:image/jpeg;base64,${convertStringForImage(model.imgPath)}`;
 };
 
 export const isKey = <T extends object>(x: T, k: PropertyKey): k is keyof T => {

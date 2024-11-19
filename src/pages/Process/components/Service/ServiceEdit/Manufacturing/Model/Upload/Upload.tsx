@@ -3,14 +3,18 @@ import { useTranslation } from "react-i18next";
 import { ReactComponent as UploadIcon } from "@icons/Upload.svg";
 import { Button, Container, Heading, Text } from "@component-library/index";
 import useUploadModels from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUploadModels";
-import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
 import useModal from "@/hooks/useModal";
 import UploadModelCard from "./components/ModelCard";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ModelLevelOfDetail } from "../types";
+import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import {
+  ModelLevelOfDetail,
+  ProcessModel,
+} from "@/api/Process/Querys/useGetProcess";
 
 interface Props {}
 
@@ -19,7 +23,8 @@ export interface ProcessModelUploadFormProps {
 }
 
 export interface ManufacturingModelUploadData {
-  file: File;
+  modelID?: string;
+  file?: File;
   tags?: string;
   licenses?: string;
   certificates?: string;
@@ -34,14 +39,16 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const [dragActive, setDragActive] = useState(false);
   const { deleteModal } = useModal();
 
-  const { process } = useProcess();
+  const { process } = useManufacturingProcess();
   const { project } = useProject();
   const uploadModels = useUploadModels();
+  const updateProcess = useUpdateProcess();
 
   const formSchema = z.object({
     models: z.array(
       z.object({
-        file: z.instanceof(File),
+        modelID: z.string().optional(),
+        file: z.instanceof(File).optional(),
         tags: z.string().optional(),
         licenses: z.string().min(
           1,
@@ -78,7 +85,17 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   } = useForm<ProcessModelUploadFormProps>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      models: [],
+      models:
+        process.serviceDetails.models === undefined
+          ? []
+          : process.serviceDetails.models.map((model) => ({
+              modelID: model.id,
+              tags: model.tags.join(", "),
+              licenses: model.licenses.join(", "),
+              certificates: model.certificates.join(", "),
+              quantity: model.quantity,
+              levelOfDetail: model.levelOfDetail,
+            })),
     },
   });
 
@@ -153,37 +170,82 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   };
 
   const sendModels = (data: ProcessModelUploadFormProps) => {
+    const updatedModels: ProcessModel[] = data.models
+      .filter(
+        (model) => model.file === undefined && model.modelID !== undefined
+      )
+      .map((model) => ({
+        item: model,
+        model: process.serviceDetails.models?.find(
+          (existingModel) => existingModel.id === model.modelID
+        )!,
+      }))
+      .map(
+        (data): ProcessModel => ({
+          ...data.model,
+          certificates:
+            data.item.certificates === undefined
+              ? []
+              : data.item.certificates.split(",").map((item) => item.trim()),
+          licenses:
+            data.item.licenses === undefined
+              ? []
+              : data.item.licenses.split(",").map((item) => item.trim()),
+          tags:
+            data.item.tags === undefined
+              ? []
+              : data.item.tags.split(",").map((item) => item.trim()),
+          quantity: data.item.quantity !== undefined ? data.item.quantity : 1,
+          levelOfDetail:
+            data.item.levelOfDetail !== undefined
+              ? data.item.levelOfDetail
+              : ModelLevelOfDetail.MEDIUM,
+        })
+      );
+
     uploadModels.mutate(
       {
         processID: process.processID,
         projectID: project.projectID,
         origin: "Service",
-        models: data.models.map((item) => ({
-          file: item.file,
-          details: {
-            date: new Date(),
-            certificates:
-              item.certificates === undefined
-                ? []
-                : item.certificates.split(",").map((item) => item.trim()),
-            licenses:
-              item.licenses === undefined
-                ? []
-                : item.licenses.split(",").map((item) => item.trim()),
-            tags:
-              item.tags === undefined
-                ? []
-                : item.tags.split(",").map((item) => item.trim()),
-            quantity: item.quantity !== undefined ? item.quantity : 1,
-            levelOfDetail:
-              item.levelOfDetail !== undefined
-                ? item.levelOfDetail
-                : ModelLevelOfDetail.MEDIUM,
-          },
-        })),
+        models: data.models
+          .filter((model) => model.file !== undefined)
+          .map((item) => ({
+            file: item.file!,
+            details: {
+              date: new Date(),
+              certificates:
+                item.certificates === undefined
+                  ? []
+                  : item.certificates.split(",").map((item) => item.trim()),
+              licenses:
+                item.licenses === undefined
+                  ? []
+                  : item.licenses.split(",").map((item) => item.trim()),
+              tags:
+                item.tags === undefined
+                  ? []
+                  : item.tags.split(",").map((item) => item.trim()),
+              quantity: item.quantity !== undefined ? item.quantity : 1,
+              levelOfDetail:
+                item.levelOfDetail !== undefined
+                  ? item.levelOfDetail
+                  : ModelLevelOfDetail.MEDIUM,
+            },
+          })),
       },
       {
         onSuccess() {
+          updateProcess.mutate({
+            processIDs: [process.processID],
+            updates: {
+              changes: {
+                serviceDetails: {
+                  model: updatedModels,
+                },
+              },
+            },
+          });
           deleteModal("ServiceRoutesManufacturingModels");
         },
       }
@@ -230,6 +292,9 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                     key={model.id}
                     index={index}
                     model={model}
+                    existingModel={process.serviceDetails.models?.find(
+                      (existingModel) => existingModel.id === model.modelID
+                    )}
                     register={register}
                   />
                 );

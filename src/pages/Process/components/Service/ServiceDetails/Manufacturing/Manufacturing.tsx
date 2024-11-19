@@ -1,5 +1,6 @@
 import {
   ManufactoringProcessProps,
+  ProcessModel,
   ProcessStatus,
 } from "@/api/Process/Querys/useGetProcess";
 import {
@@ -11,7 +12,6 @@ import {
 } from "@component-library/index";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
@@ -54,7 +54,7 @@ const ServiceManufacturingDetails: React.FC<
   const { process } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const models: ModelProps[] =
+  const models: ProcessModel[] =
     process.serviceDetails.models !== undefined
       ? process.serviceDetails.models
       : [];

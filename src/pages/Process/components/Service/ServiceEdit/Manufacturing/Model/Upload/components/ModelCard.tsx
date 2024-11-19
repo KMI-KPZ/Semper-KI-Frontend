@@ -12,8 +12,11 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { ModelLevelOfDetail } from "../../types";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {
+  ModelLevelOfDetail,
+  ProcessModel,
+} from "@/api/Process/Querys/useGetProcess";
 
 interface UploadModelCardProps {
   model: FieldArrayWithId<ProcessModelUploadFormProps, "models", "id">;
@@ -22,12 +25,22 @@ interface UploadModelCardProps {
   deleteModel: (index: number) => void;
   saveForAll: (index: number, key: keyof ManufacturingModelUploadData) => void;
   errors: FieldErrors<ProcessModelUploadFormProps>;
+  existingModel?: ProcessModel;
 }
 
 const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
-  const { index, model, register, deleteModel, saveForAll, errors } = props;
+  const {
+    index,
+    model,
+    register,
+    deleteModel,
+    saveForAll,
+    errors,
+    existingModel,
+  } = props;
   const { t } = useTranslation();
-  const url = URL.createObjectURL(model.file);
+  const url =
+    model.file !== undefined ? URL.createObjectURL(model.file) : undefined;
 
   const handleOnClickButtonDelete = () => {
     deleteModel(index);
@@ -47,15 +60,26 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
       className="w-fit min-w-[350px] max-w-[50%] gap-0 rounded-md border-2 bg-white"
       direction="col"
     >
-      <ModelPreview
-        interactive={false}
-        file={url}
-        className="h-40 w-fit rounded-b-none border-0"
-      />
+      {url !== undefined ? (
+        <ModelPreview
+          interactive={false}
+          file={url}
+          className="h-40 w-fit rounded-b-none border-0"
+        />
+      ) : null}
+      {existingModel !== undefined ? (
+        <img
+          src={existingModel.imgPath}
+          className="object-containe w-ful h-40 "
+        />
+      ) : null}
       <Divider />
       <Container direction="col" className="p-5">
         <Container width="full" className="relative">
-          <Heading variant="h3">{model.file.name}</Heading>
+          <Heading variant="h3">
+            {existingModel !== undefined ? existingModel.fileName : null}
+            {model.file !== undefined ? model.file.name : null}
+          </Heading>
           <Button
             children={<DeleteIcon fontSize="medium" />}
             className="absolute right-0 top-0"
@@ -70,7 +94,10 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
               <th className="text-left">{`${t(
                 `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.size`
               )}`}</th>
-              <td>{model.file.size}</td>
+              <td>
+                {existingModel !== undefined ? "xxx" : null}
+                {model.file !== undefined ? model.file.size : null}
+              </td>
               <td></td>
             </tr>
             <tr>

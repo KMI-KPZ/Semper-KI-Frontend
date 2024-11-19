@@ -1,11 +1,12 @@
-import { ModelLevelOfDetail, ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
+import { ModelLevelOfDetail, ProcessModel } from "@/api/Process/Querys/useGetProcess";
+
 
 
 export class ModelBuilder {
     id: string ="modelID";
     title: string="modelTitle";
     tags: string[]=["Tag1"];
-    date: string="2023-02-01";
+    date: Date = new Date;
     licenses: string[]=["MIT"];
     certificate: string[]=["ISO"];
     URI: string="https://test.test.png";
@@ -25,7 +26,7 @@ export class ModelBuilder {
         this.tags = tags;
         return this;
     }
-    withDate(date:string):ModelBuilder {
+    withDate(date:Date):ModelBuilder {
         this.date = date;
         return this;
     }
@@ -54,7 +55,7 @@ export class ModelBuilder {
         return this;
     }
 
-    build():ModelProps {
+    build():ProcessModel {
         return {
             levelOfDetail:0,
             quantity:1,
@@ -64,8 +65,12 @@ export class ModelBuilder {
             date: this.date,
             licenses: this.licenses,
             certificates: this.certificate,
-            URI: this.URI,
             createdBy: this.createdBy,
+            createdByID: "1",
+            type: "Model",
+            origin: "Service",
+            size: 1,
+            imgPath:""
         }
     }
 }

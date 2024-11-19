@@ -3,14 +3,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Button } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import { getModelURI } from "@/services/utils";
-import { ModelProps } from "../types";
 import { Heading } from "@component-library/index";
 import { useNavigate } from "react-router-dom";
 import useProcess from "@/hooks/Process/useProcess";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
 
 interface Props {
-  model: ModelProps;
+  model: ProcessModel;
   closeModelView(): void;
 }
 
@@ -28,7 +28,7 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
     closeModelView();
     updateProcess.mutate({
       processIDs: [process.processID],
-      updates: { changes: { serviceDetails: { model } } },
+      updates: { changes: { serviceDetails: { model: [model] } } },
     });
     navigate("../material");
   };

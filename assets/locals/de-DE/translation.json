@@ -1420,6 +1420,9 @@
             "heading": "Auftragnehmerauswahl",
             "contractors": "Auftragnehmer sortiert nach ihren Prioritäten",
             "noContractorFound": "Kein Auftragnehmer gefunden"
+          },
+          "ContractorCard": {
+            "priceRange": "Preisspanne"
           }
         }
       },
@@ -1605,7 +1608,8 @@
                     }
                   }
                 }
-              }
+              },
+              "ModelEdit": { "heading": "Modelle bearbeiten" }
             },
             "NewItem": {
               "heading": "Erstelle einen neuen Prozess..."

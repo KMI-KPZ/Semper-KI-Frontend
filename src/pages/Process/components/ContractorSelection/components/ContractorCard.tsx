@@ -1,8 +1,8 @@
 import React from "react";
-import TestIMG from "@images/Test2.png";
-import { Container, Text } from "@component-library/index";
+import { Container } from "@component-library/index";
 import { Process } from "@/api/Process/Querys/useGetProcess";
 import { ContractorProps } from "@/api/Process/Querys/useGetContractors";
+import { useTranslation } from "react-i18next";
 
 interface ContractorCardProps {
   contractor: ContractorProps;
@@ -13,6 +13,7 @@ interface ContractorCardProps {
 
 const ContractorCard: React.FC<ContractorCardProps> = (props) => {
   const { contractor, selected, selectContractor } = props;
+  const { t } = useTranslation();
 
   return (
     <Container
@@ -20,18 +21,42 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
       direction="row"
       width="full"
       justify="start"
-      className={
-        selected === undefined
-          ? "card"
-          : selected
-          ? `active-card`
-          : `hover-card`
-      }
+      style={{
+        backgroundColor: contractor.details.branding.colors.page_background,
+        borderColor: contractor.details.branding.colors.primary,
+      }}
+      className={`
+        ${
+          selected === undefined
+            ? "card"
+            : selected
+            ? `active-card`
+            : `hover-card`
+        }
+        `}
     >
-      <img className="h-20" src={TestIMG} />
+      <img className="h-20" src={contractor.details.branding.logo_url} />
       <Container direction="col" justify="center" align="center">
-        <Text>{contractor.name}</Text>
-        <Text>{contractor.details.adress}</Text>
+        <table className="w-full table-auto border-separate border-spacing-3">
+          <tr>
+            <th colSpan={2} className="text-center">
+              {contractor.name}
+            </th>
+          </tr>
+          <tr>
+            <th>
+              {t(
+                "Process.components.ContractorSelection.components.ContractorCard.priceRange"
+              )}
+            </th>
+            <td>
+              {Math.round(contractor.price.pricePart[0] * 100) / 100}
+              {" - "}
+              {Math.round(contractor.price.pricePart[1] * 100) / 100}
+              {" €"}
+            </td>
+          </tr>
+        </table>
       </Container>
     </Container>
   );

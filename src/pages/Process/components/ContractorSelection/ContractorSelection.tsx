@@ -1,6 +1,7 @@
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessContainer from "@/components/Process/Container";
 import {
+  Button,
   Container,
   Heading,
   LoadingAnimation,
@@ -16,6 +17,7 @@ import ContractorCard from "./components/ContractorCard";
 import ContractorSelectionAddressCard from "./components/AddressCard";
 import useGetContractors from "@/api/Process/Querys/useGetContractors";
 import ProcessConditionIcon from "@/components/Process/ConditionIcon";
+import ProcessStatusGate from "../StatusGate";
 
 interface ProcessContractorSelectionProps {}
 
@@ -48,12 +50,12 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
     setShowDeliveryAddress(!e.target.checked);
   };
 
-  // const handleOnClickButtonSelectContractor = () => {
-  //   setEditContractor(true);
-  // };
-  // const handleOnClickButtonEditContractor = () => {
-  //   setEditContractor(true);
-  // };
+  const handleOnClickButtonSelectContractor = () => {
+    setEditContractor(true);
+  };
+  const handleOnClickButtonEditContractor = () => {
+    setEditContractor(true);
+  };
 
   const closeEditContractor = () => {
     setEditContractor(false);
@@ -100,14 +102,14 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
           </Container>
           {process.processDetails.provisionalContractor === undefined ? (
             <Container width="full" height="full" direction="col">
-              {/* <Button
+              <Button
                 size="sm"
                 onClick={handleOnClickButtonSelectContractor}
                 variant="primary"
                 title={t(
                   "Process.components.ContractorSelection.button.select"
-                )} 
-              />*/}
+                )}
+              />
             </Container>
           ) : contractors.isLoading ? (
             <LoadingAnimation />
@@ -118,14 +120,14 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
           ) : (
             <Container width="full" direction="col">
               <ContractorCard contractor={currentContractor} />
-              {/* <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+              <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
                 <Button
                   size="sm"
                   onClick={handleOnClickButtonEditContractor}
                   variant="secondary"
                   title={t("general.button.edit")}
                 />
-              </ProcessStatusGate> */}
+              </ProcessStatusGate>
             </Container>
           )}
         </Container>

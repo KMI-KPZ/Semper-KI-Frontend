@@ -27,7 +27,7 @@ export const ProcessMaterialPreView: React.FC<Props> = (props) => {
   const handleOnClickButtonSelect = () => {
     updateProcess.mutate({
       processIDs: [process.processID],
-      updates: { changes: { serviceDetails: { material } } },
+      updates: { changes: { serviceDetails: { material: [material] } } },
     });
     navigate("../postprocessing");
   };

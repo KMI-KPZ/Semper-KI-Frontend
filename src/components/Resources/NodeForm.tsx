@@ -200,7 +200,6 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
           {t(`components.Resources.NodeForm.heading.${type}`)}
         </Heading>
       </BackButtonContainer>
-
       {type === "create" ? (
         <ResourcesNodeDraft
           nodeType={nodeType}

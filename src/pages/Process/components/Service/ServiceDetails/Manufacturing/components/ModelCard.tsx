@@ -35,7 +35,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
   const checkModel = useGetCheckModel(model.id);
 
   const handleOnButtonClickModel = () => {
-    navigate("service/manufacturing/model/edit");
+    navigate("service/manufacturing/model");
   };
   const handleOnButtonClickDeleteModel = (modelID: string) => {
     deleteModel.mutate({

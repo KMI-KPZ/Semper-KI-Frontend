@@ -291,6 +291,17 @@
     "zipcode": "Postleitzahl",
     "city": "Stadt",
     "country": "Land",
+    "quantity": "Anzahl",
+    "width": "Breite",
+    "length": "Länge",
+    "height": "Höhe",
+    "volume": "Volumen",
+    "levelOfDetail": "Detailgrad",
+    "complexity": "Komplexität",
+    "tags": "Tags",
+    "easy": "Einfach",
+    "normal": "Normal",
+    "complex": "Komplex",
     "button": {
       "select": "Auswählen",
       "deselect": "Abwählen",
@@ -450,6 +461,20 @@
         "message": "Nachricht",
         "name": "Name",
         "email": "E-Mail-Adresse"
+      },
+      "DescriptiveModelForm": {
+        "heading": "Modell Beschreiben ohne Datei",
+        "mandatory": "* Pflichtfeld",
+        "placeholder": {
+          "name": "Modellname",
+          "quantity": "Anzahl",
+          "width": "Breite",
+          "length": "Länge",
+          "height": "Höhe",
+          "volume": "Volumen",
+          "complexity": "Komplexität",
+          "tags": "Tag1, Tag2, Tag3"
+        }
       },
       "ExampleForm": {
         "heading": "Organisationinformationen bearbeiten",

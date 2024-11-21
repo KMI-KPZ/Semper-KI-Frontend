@@ -43,6 +43,7 @@ import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 import useUser, { UserType } from "@/hooks/useUser";
 import Footer from "@/components/Footer/Footer";
 import UITest from "../Test/UITest";
+import DescriptiveModelForm from "@/components/Form/DescriptiveModelForm";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -144,6 +145,10 @@ const App: React.FC = () => {
                         <Route index element={<Navigate to="model" />} />
                         <Route path="model">
                           <Route index element={<ManufacturingModels />} />
+                          <Route
+                            path="descriptive"
+                            element={<DescriptiveModelForm />}
+                          />
                         </Route>
                         <Route
                           path="material"

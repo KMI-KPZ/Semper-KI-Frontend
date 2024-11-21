@@ -42,9 +42,13 @@ const CostingForm: React.FC<CostingFormProps> = (props) => {
   const costItemSchema = z.object({
     items: z.array(
       z.object({
-        value: z.number({
-          invalid_type_error: t("zod.number"),
-        }),
+        value: z
+          .number({
+            invalid_type_error: t("zod.number"),
+          })
+          .min(0, {
+            message: t("zod.numberMin", { min: 0 }),
+          }),
         key: z.string(),
         name: z.string(),
         unit: z.string(),
@@ -112,6 +116,7 @@ const CostingForm: React.FC<CostingFormProps> = (props) => {
                       <td>
                         <Container width="full" direction="col">
                           <input
+                            type="number"
                             className={`w-full rounded-md border-2 p-2 text-center ${
                               errors.items?.[index]?.value
                                 ? "border-red-500"

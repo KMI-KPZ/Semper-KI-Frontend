@@ -2,33 +2,15 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import {
-  OrganizationBranding,
-  OrganizationPriority,
-  OrganizationService,
-} from "@/api/Organization/Querys/useGetOrganization";
-import { OrgaNotificationSetting, UserAddressProps } from "@/hooks/useUser";
+import { OrganizationBranding } from "@/api/Organization/Querys/useGetOrganization";
 
 export interface ContractorProps {
   hashedID: string;
   name: string;
   details: {
-    email: string;
-    taxID: string;
-    locale: string;
     branding: OrganizationBranding;
-    services: OrganizationService;
-    addresses: UserAddressProps[];
-    priorities: OrganizationPriority[];
-    notificationSettings: {
-      organization: OrgaNotificationSetting[];
-    };
   };
-  price: {
-    pricePart: [number, number];
-    priceQuantity: [number, number];
-    priceBatch: [number, number];
-  };
+  priceRange: [number, number];
 }
 
 const useGetContractors = () => {

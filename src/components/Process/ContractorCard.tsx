@@ -3,16 +3,18 @@ import { Container } from "@component-library/index";
 import { Process } from "@/api/Process/Querys/useGetProcess";
 import { ContractorProps } from "@/api/Process/Querys/useGetContractors";
 import { useTranslation } from "react-i18next";
+import { twMerge } from "tailwind-merge";
 
 interface ContractorCardProps {
   contractor: ContractorProps;
   selectContractor?: (contractorID: string) => void;
   process?: Process;
   selected?: boolean;
+  className?: string;
 }
 
 const ContractorCard: React.FC<ContractorCardProps> = (props) => {
-  const { contractor, selected, selectContractor } = props;
+  const { contractor, selected, selectContractor, className = "" } = props;
   const { t } = useTranslation();
 
   return (
@@ -25,7 +27,8 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
         backgroundColor: contractor.details.branding.colors.page_background,
         borderColor: contractor.details.branding.colors.primary,
       }}
-      className={`
+      className={twMerge(
+        `
         ${
           selected === undefined
             ? "card"
@@ -33,7 +36,9 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
             ? `active-card`
             : `hover-card`
         }
-        `}
+        `,
+        className
+      )}
     >
       <img className="h-20" src={contractor.details.branding.logo_url} />
       <Container direction="col" justify="center" align="center">
@@ -44,15 +49,11 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
             </th>
           </tr>
           <tr>
-            <th>
-              {t(
-                "Process.components.ContractorSelection.components.ContractorCard.priceRange"
-              )}
-            </th>
+            <th>{t("components.Process.ContractorCard.priceRange")}</th>
             <td>
-              {Math.round(contractor.price.pricePart[0] * 100) / 100}
+              {Math.round(contractor.priceRange[0] * 100) / 100}
               {" - "}
-              {Math.round(contractor.price.pricePart[1] * 100) / 100}
+              {Math.round(contractor.priceRange[1] * 100) / 100}
               {" €"}
             </td>
           </tr>

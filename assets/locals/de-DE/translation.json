@@ -474,6 +474,7 @@
         "taxID": "Steuernummer",
         "address": "Addresse",
         "notifications": "Benachrichtigungen",
+        "contractorCard": "Auftragnehmerkarte",
         "notifictionTypes": {
           "email": "Email",
           "event": "Event"
@@ -563,6 +564,9 @@
             }
           }
         }
+      },
+      "ContractorCard": {
+        "priceRange": "Preisspanne"
       },
       "Menu": {
         "button": { "open": "Menu Öffnen", "close": "Menu Schließen" }
@@ -1266,7 +1270,8 @@
         "adress": "Adresse",
         "email": "E-Mail",
         "taxID": "Steuernummer",
-        "noService": "keine Services "
+        "noService": "keine Services ",
+        "contractorCard": "Auftragnehmerkarte"
       }
     },
     "Roles": {
@@ -1420,9 +1425,6 @@
             "heading": "Auftragnehmerauswahl",
             "contractors": "Auftragnehmer sortiert nach ihren Prioritäten",
             "noContractorFound": "Kein Auftragnehmer gefunden"
-          },
-          "ContractorCard": {
-            "priceRange": "Preisspanne"
           }
         }
       },

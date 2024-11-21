@@ -4,6 +4,7 @@ import { Button, Container, Divider, Heading } from "@component-library/index";
 import { Organization } from "@/api/Organization/Querys/useGetOrganization";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
+import ContractorCard from "@/components/Process/ContractorCard";
 
 interface OrganizationInfoPreViewProps {
   organization: Organization;
@@ -63,6 +64,18 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
             </td>
           </tr>
           <tr>
+            <td>{t(`Organization.View.Info.accessed`)}</td>
+            <td>{organization.accessedWhen.toLocaleDateString()}</td>
+          </tr>
+          <tr>
+            <td>{t(`Organization.View.Info.created`)}</td>
+            <td>{organization.createdWhen.toLocaleDateString()}</td>
+          </tr>
+          <tr>
+            <td>{t(`Organization.View.Info.updated`)}</td>
+            <td>{organization.updatedWhen.toLocaleDateString()}</td>
+          </tr>
+          <tr>
             <td>{t(`Organization.View.Info.img`)}</td>
             <td>
               <img
@@ -95,18 +108,24 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
               />
             </td>
           </tr>
-
           <tr>
-            <td>{t(`Organization.View.Info.accessed`)}</td>
-            <td>{organization.accessedWhen.toLocaleDateString()}</td>
-          </tr>
-          <tr>
-            <td>{t(`Organization.View.Info.created`)}</td>
-            <td>{organization.createdWhen.toLocaleDateString()}</td>
-          </tr>
-          <tr>
-            <td>{t(`Organization.View.Info.updated`)}</td>
-            <td>{organization.updatedWhen.toLocaleDateString()}</td>
+            <td>{t(`Organization.View.Info.contractorCard`)}</td>
+            <td>
+              <ContractorCard
+                className="w-fit"
+                contractor={{
+                  details: {
+                    branding: organization.details.branding ?? {
+                      colors: { page_background: "white", primary: "black" },
+                      logo_url: "",
+                    },
+                  },
+                  hashedID: organization.hashedID,
+                  name: organization.name,
+                  priceRange: [333, 666],
+                }}
+              />
+            </td>
           </tr>
         </tbody>
       </table>

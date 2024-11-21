@@ -9,7 +9,7 @@ import {
 } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ContractorCard from "./ContractorCard";
+import ContractorCard from "../../../../../components/Process/ContractorCard";
 import { UseQueryResult } from "@tanstack/react-query";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { ContractorProps } from "@/api/Process/Querys/useGetContractors";

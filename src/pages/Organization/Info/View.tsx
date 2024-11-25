@@ -114,15 +114,13 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
               <ContractorCard
                 className="w-fit"
                 contractor={{
-                  details: {
-                    branding: organization.details.branding ?? {
-                      colors: { page_background: "white", primary: "black" },
-                      logo_url: "",
-                    },
+                  branding: organization.details.branding ?? {
+                    colors: { page_background: "white", primary: "black" },
+                    logo_url: "",
                   },
                   hashedID: organization.hashedID,
                   name: organization.name,
-                  priceRange: [333, 666],
+                  price: { priceQuantity: [333, 666] },
                 }}
               />
             </td>

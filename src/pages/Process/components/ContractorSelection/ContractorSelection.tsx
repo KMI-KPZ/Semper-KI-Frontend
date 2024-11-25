@@ -62,9 +62,11 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
   const closeEditContractor = () => {
     setEditContractor(false);
   };
+
   useEffect(() => {
     if (
-      process.processDetails.provisionalContractor === "" &&
+      (process.processDetails.provisionalContractor === undefined ||
+        process.processDetails.provisionalContractor === "") &&
       contractors.data !== undefined &&
       contractors.data?.length > 0
     ) {

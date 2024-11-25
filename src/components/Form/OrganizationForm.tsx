@@ -200,18 +200,16 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
           <ContractorCard
             className="w-fit"
             contractor={{
-              details: {
-                branding: {
-                  colors: {
-                    page_background: watch("branding_colors_page_background"),
-                    primary: watch("branding_colors_primary"),
-                  },
-                  logo_url: watch("branding_logo_url"),
+              branding: {
+                colors: {
+                  page_background: watch("branding_colors_page_background"),
+                  primary: watch("branding_colors_primary"),
                 },
+                logo_url: watch("branding_logo_url"),
               },
               hashedID: organization.hashedID,
               name: organization.name,
-              priceRange: [333, 666],
+              price: { priceQuantity: [333, 666] },
             }}
           />
         </Container>

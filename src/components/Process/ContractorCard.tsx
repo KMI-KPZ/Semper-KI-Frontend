@@ -24,8 +24,8 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
       width="full"
       justify="start"
       style={{
-        backgroundColor: contractor.details.branding.colors.page_background,
-        borderColor: contractor.details.branding.colors.primary,
+        backgroundColor: contractor.branding.colors.page_background,
+        borderColor: contractor.branding.colors.primary,
       }}
       className={twMerge(
         `
@@ -40,23 +40,25 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
         className
       )}
     >
-      <img className="h-20" src={contractor.details.branding.logo_url} />
+      <img className="h-20" src={contractor.branding.logo_url} />
       <Container direction="col" justify="center" align="center">
         <table className="w-full table-auto border-separate border-spacing-3">
-          <tr>
-            <th colSpan={2} className="text-center">
-              {contractor.name}
-            </th>
-          </tr>
-          <tr>
-            <th>{t("components.Process.ContractorCard.priceRange")}</th>
-            <td>
-              {Math.round(contractor.priceRange[0] * 100) / 100}
-              {" - "}
-              {Math.round(contractor.priceRange[1] * 100) / 100}
-              {" €"}
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <th colSpan={2} className="text-center">
+                {contractor.name}
+              </th>
+            </tr>
+            <tr>
+              <th>{t("components.Process.ContractorCard.priceRange")}</th>
+              <td>
+                {Math.round(contractor.price.priceQuantity[0] * 100) / 100}
+                {" - "}
+                {Math.round(contractor.price.priceQuantity[1] * 100) / 100}
+                {" €"}
+              </td>
+            </tr>
+          </tbody>
         </table>
       </Container>
     </Container>

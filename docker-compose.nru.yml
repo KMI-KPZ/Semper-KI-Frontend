@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  frontend:
+    container_name: frontend-nru
+    image: frontend-nru
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - '127.0.0.1:3003:80'

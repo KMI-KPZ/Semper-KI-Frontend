@@ -25,6 +25,7 @@ import useOrganization from "@/hooks/useOrganization";
 import useGetOrgaNode from "@/api/Resources/Organization/Querys/useGetOrgaNode";
 import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetAllOrgaNodeNeighbors";
 import { Organization } from "@/api/Organization/Querys/useGetOrganization";
+import logger from "@/hooks/useLogger";
 
 interface ResourcesNodePropsForm {
   type: ResourcesAction;
@@ -89,6 +90,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   const navigate = useNavigate();
   const submitOrgaNodeForm = useSubmitOrgaNode();
   const { organization } = useOrganization();
+
   const [variantNodeID, setVariantNodeID] = useState<string>("");
 
   const { nodeType: unsafeNodeType, nodeID: paramNodeID } = useParams();
@@ -99,6 +101,8 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   );
   const nodeType: OntoNodeType | undefined = getNodeType(unsafeNodeType);
 
+  if (nodeType === undefined) return <Navigate to=".." />;
+
   const node = useGetOrgaNode(nodeID);
   const allOrgaNodeNeighbors = useGetAllOrgaNodeNeighbors(nodeID);
 
@@ -108,7 +112,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     (OntoNode | OntoNodeNew) & ResourcesNodeFormEdges
   >({
     defaultValues:
-      node === undefined ? { nodeType: nodeType, edges } : { ...node, edges },
+      nodeID === undefined ? { nodeType, edges } : { ...node.data, edges },
   });
 
   const usePropertyArray = useFieldArray({
@@ -139,13 +143,16 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
 
     submitOrgaNodeForm.mutate(
       {
-        node: { ...data },
+        node: { ...data, nodeType },
         type: type === "edit" ? "update" : "create",
         edges: { create: newEdges, delete: deleteEdges },
       },
       {
         onSuccess() {
           navigate("..");
+        },
+        onError() {
+          console.error("Error on submitOrgaNodeForm");
         },
       }
     );
@@ -167,7 +174,8 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   };
 
   useEffect(() => {
-    if (nodeID !== undefined) {
+    if (nodeID !== undefined && nodeID !== "") {
+      logger("UseEffect", nodeID);
       reset({
         ...node.data,
         edges: getEdges(organization, allOrgaNodeNeighbors.data),

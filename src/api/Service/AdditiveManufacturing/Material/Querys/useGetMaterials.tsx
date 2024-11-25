@@ -9,6 +9,7 @@ export interface MaterialProps {
   title: string;
   propList: OntoNodeProperty[];
   imgPath: string;
+  medianPrice: number;
 }
 
 const useGetMaterials = () => {

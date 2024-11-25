@@ -17,6 +17,7 @@ import CSRFOutlet from "./outlets/CSRFOutlet";
 import UserLocalsOutlet from "./outlets/UserLocalsOutlet";
 import { TopicsProvider } from "@/contexts/ChatbotContextProvider";
 import { OrganizationOutlet } from "./outlets/OrganizationOutlet";
+import PasswordAuthOutlet from "./outlets/PasswordAuthOutlet";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -42,26 +43,28 @@ root.render(
     <React.StrictMode>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <CSRFOutlet>
-            <TopicsProvider>
-              <UserContextProvider>
-                <OrganizationOutlet>
-                  <UserLocalsOutlet>
-                    <PermissionContextProvider>
-                      <EventContextProvider>
-                        <BodyScrollContextProvider>
-                          <ModalContextProvider>
-                            <App />
-                            <ReactQueryDevtools />
-                          </ModalContextProvider>
-                        </BodyScrollContextProvider>
-                      </EventContextProvider>
-                    </PermissionContextProvider>
-                  </UserLocalsOutlet>
-                </OrganizationOutlet>
-              </UserContextProvider>
-            </TopicsProvider>
-          </CSRFOutlet>
+          <PasswordAuthOutlet>
+            <CSRFOutlet>
+              <TopicsProvider>
+                <UserContextProvider>
+                  <OrganizationOutlet>
+                    <UserLocalsOutlet>
+                      <PermissionContextProvider>
+                        <EventContextProvider>
+                          <BodyScrollContextProvider>
+                            <ModalContextProvider>
+                              <App />
+                              <ReactQueryDevtools />
+                            </ModalContextProvider>
+                          </BodyScrollContextProvider>
+                        </EventContextProvider>
+                      </PermissionContextProvider>
+                    </UserLocalsOutlet>
+                  </OrganizationOutlet>
+                </UserContextProvider>
+              </TopicsProvider>
+            </CSRFOutlet>
+          </PasswordAuthOutlet>
         </QueryClientProvider>
       </BrowserRouter>
     </React.StrictMode>

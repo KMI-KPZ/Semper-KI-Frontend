@@ -8,6 +8,7 @@ export class MaterialBuilder {
     title: string="materialTitle";
     propList: OntoNodeProperty[]=[];
     URI: string="https://test.test.png";
+    medianPrice: number=0;
 
     withId(id:string):MaterialBuilder {
         this.id = id;
@@ -33,6 +34,7 @@ export class MaterialBuilder {
             title: this.title,
             propList: this.propList,
             imgPath: this.URI,
+            medianPrice: this.medianPrice
         }
     }
 }

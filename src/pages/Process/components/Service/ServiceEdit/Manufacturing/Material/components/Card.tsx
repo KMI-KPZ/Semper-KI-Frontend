@@ -34,14 +34,18 @@ export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
           className="h-60 w-full object-cover"
         />
         <Divider />
-        <Container direction="col" className="p-5">
+        <Container direction="col" className="grow p-5" width="full">
           <Heading variant="h3">{material.title}</Heading>
-          <Container direction="col" justify="start" align="start">
-            <Text>{`${t(
-              `Process.components.Service.ServiceEdit.Manufacturing.Material.components.Card.props`
-            )}`}</Text>
-          </Container>
-          <table className="auto table border-separate border-spacing-2">
+          <Heading variant="h2">
+            {material.medianPrice}
+            {" €"}
+          </Heading>
+          <table className="w-full grow table-auto  border-separate border-spacing-3 rounded-md border-2">
+            <caption>
+              <Text>{`${t(
+                `Process.components.Service.ServiceEdit.Manufacturing.Material.components.Card.props`
+              )}`}</Text>
+            </caption>
             <tbody>
               {material.propList
                 .filter((item) => item.name !== "imgPath")

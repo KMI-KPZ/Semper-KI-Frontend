@@ -13,6 +13,7 @@ import useDeleteModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/
 import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
 import {
+  ModelLevelOfDetail,
   ProcessModel,
   ProcessStatus,
 } from "@/api/Process/Querys/useGetProcess";
@@ -53,21 +54,40 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
   if (checkModel.data !== undefined)
     return (
       <ServiceDetailsCard>
-        <img
-          src={TestImg}
-          className="max-h-40 w-full object-contain md:w-fit"
-          alt={t(
-            "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.img"
-          )}
-        />
-        <Container direction="col" width="full" className="" gap={3}>
+        <Container direction="col" width="full" className="gap-2">
+          <Text variant="strong">{model.fileName}</Text>
+          <img
+            src={TestImg}
+            className="max-h-40 w-full object-contain md:w-fit"
+            alt={t(
+              "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.img"
+            )}
+          />
+        </Container>
+        <Container direction="col" width="full" className="gap-1">
           <Container direction="row" justify="between" width="full">
             <Text>
               {t(
-                "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.name"
+                "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.quantity"
               )}
             </Text>
-            <Text>{model.fileName}</Text>
+            <Text variant="strong">{model.quantity}</Text>
+          </Container>
+          <Container direction="row" justify="between" width="full">
+            <Text>
+              {t(
+                "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.levelOfDetail"
+              )}
+            </Text>
+            <Text>
+              {t(
+                `enum.ModelLevelOfDetail.${
+                  ModelLevelOfDetail[
+                    model.levelOfDetail
+                  ] as keyof typeof ModelLevelOfDetail
+                }`
+              )}
+            </Text>
           </Container>
           <Container direction="row" justify="between" width="full">
             <Text>

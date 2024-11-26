@@ -1529,10 +1529,13 @@
                 "img": "Materialbild",
                 "name": "Name:",
                 "type": "Typ:",
+                "cost": "Mittlere Anschaffungskosten:",
                 "properties": "Eigenschaften:"
               },
               "ModelCard": {
                 "img": "Modelbild",
+                "quantity": "Anzahl",
+                "levelOfDetail": "Detailgrad",
                 "name": "Name:",
                 "dimensions": "Maße",
                 "surface": "Oberfläche",

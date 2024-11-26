@@ -43,22 +43,18 @@ const ProcessSericePostProcessingCard: React.FC<
 
   return (
     <ServiceDetailsCard>
-      <img
-        src={TestImg}
-        alt={t(
-          "Process.components.Service.ServiceDetails.components.Manufacturing.PostProcessingCard.img"
-        )}
-        className="max-h-40 w-full object-contain md:w-fit"
-      />
+      <Container direction="col" width="full" className="gap-2">
+        <Text variant="strong">{postProcessing.title}</Text>
+        <img
+          src={TestImg}
+          alt={t(
+            "Process.components.Service.ServiceDetails.components.Manufacturing.PostProcessingCard.img"
+          )}
+          className="max-h-40 w-full object-contain md:w-fit"
+        />
+      </Container>
+
       <Container direction="col" width="full" className="" gap={3}>
-        <Container direction="row" justify="between" width="full">
-          <Text>
-            {t(
-              "Process.components.Service.ServiceDetails.components.Manufacturing.PostProcessingCard.name"
-            )}
-          </Text>
-          <Text>{postProcessing.title}</Text>
-        </Container>
         <Container direction="row" justify="between" width="full">
           <Text>
             {t(

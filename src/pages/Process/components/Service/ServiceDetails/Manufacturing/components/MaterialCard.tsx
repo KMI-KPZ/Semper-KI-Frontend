@@ -43,29 +43,27 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
 
   return (
     <ServiceDetailsCard>
-      <img
-        src={TestImg}
-        alt={t(
-          "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.img"
-        )}
-        className="max-h-40 w-full object-contain md:w-fit"
-      />
-      <Container direction="col" width="full" className="" gap={3}>
+      <Container direction="col" width="full" className="gap-2">
+        <Text variant="strong">{material.title}</Text>
+        <img
+          src={TestImg}
+          alt={t(
+            "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.img"
+          )}
+          className="max-h-40 w-full object-contain md:w-fit"
+        />
+      </Container>
+      <Container direction="col" width="full" className="gap-1">
         <Container direction="row" justify="between" width="full">
           <Text>
             {t(
-              "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.name"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.cost"
             )}
           </Text>
-          <Text>{material.title}</Text>
-        </Container>
-        <Container direction="row" justify="between" width="full">
-          <Text>
-            {t(
-              "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.type"
-            )}
+          <Text variant="strong">
+            {material.medianPrice}
+            {" €/KG"}
           </Text>
-          <Text>---</Text>
         </Container>
         <Container direction="row" justify="between" width="full">
           <Text>
@@ -87,7 +85,7 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
                         }`
                       )
                     : prop.name}
-                  {": "}
+                  {" :  "}
                   {prop.value.toString()}
                 </li>
               ))

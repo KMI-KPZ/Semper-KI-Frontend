@@ -56,22 +56,44 @@ export type OntoNodeProperty =
   | OntoNodePropertyNumber
   | OntoNodePropertyDate
   | OntoNodePropertyBoolean;
+
 export type OntoNodePropertyType = "text" | "number" | "date" | "boolean";
 export type OntoNodePropertyName =
   | "imgPath"
+  | "nozzleDiameter"
+  | "certificates"
+  | "lossOfMaterial"
+  | "fixedCosts"
+  | "machineBatchDistance"
+  | "fillRate"
+  | "chamberBuildHeight"
+  | "chamberBuildWidth"
+  | "chamberBuildLength"
+  | "buildRate"
+  | "averagePowerConsumption"
+  | "possibleLayerHeights"
+  | "machineUsageCosts"
+  | "machineSurfaceArea"
+  | "simpleMachineSetUp"
+  | "complexMachineSetUp"
+  | "machineHourlyRate"
+  | "costRatePersonalMachine"
+  | "coatingTime"
+  | "maxPrintingSpeed"
   | "foodSafe"
   | "heatResistant"
   | "flexible"
   | "smooth"
   | "eModul"
   | "poissonRatio"
-  | "color"
-  | "buildVolume"
-  | "technology"
-  | "nozzleDiameter";
+  | "density"
+  | "printingSpeed"
+  | "acquisitionCosts"
+  | "treatmentCosts";
 export interface OntoNodePropertyGeneral {
   name: string;
   value: any;
+  unit: string;
   type: OntoNodePropertyType;
 }
 export interface OntoNodePropertyText extends OntoNodePropertyGeneral {
@@ -106,17 +128,39 @@ export const isOntoNodePropertyName = (
   name: string
 ): name is OntoNodePropertyName => {
   return [
+    "buildVolume",
+    "technology",
     "imgPath",
+    "nozzleDiameter",
+    "certificates",
+    "lossOfMaterial",
+    "fixedCosts",
+    "machineBatchDistance",
+    "fillRate",
+    "chamberBuildHeight",
+    "chamberBuildWidth",
+    "chamberBuildLength",
+    "buildRate",
+    "averagePowerConsumption",
+    "possibleLayerHeights",
+    "machineUsageCosts",
+    "machineSurfaceArea",
+    "simpleMachineSetUp",
+    "complexMachineSetUp",
+    "machineHourlyRate",
+    "costRatePersonalMachine",
+    "coatingTime",
+    "maxPrintingSpeed",
     "foodSafe",
     "heatResistant",
     "flexible",
     "smooth",
     "eModul",
     "poissonRatio",
-    "color",
-    "buildVolume",
-    "technology",
-    "nozzleDiameter",
+    "density",
+    "printingSpeed",
+    "acquisitionCosts",
+    "treatmentCosts",
   ].includes(name as OntoNodePropertyName);
 };
 

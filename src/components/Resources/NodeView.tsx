@@ -132,7 +132,7 @@ const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
                       {propertyNameTranslation(property.name)}
                     </td>
                     <td className={`border-t-2 p-3`}>
-                      {property.value.toString()}
+                      {property.value.toString()} {property.unit}
                     </td>
                   </tr>
                 ))

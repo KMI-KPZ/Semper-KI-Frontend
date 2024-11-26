@@ -89,7 +89,8 @@ export type OntoNodePropertyName =
   | "density"
   | "printingSpeed"
   | "acquisitionCosts"
-  | "treatmentCosts";
+  | "treatmentCosts"
+  | "flexibility";
 export interface OntoNodePropertyGeneral {
   name: string;
   value: any;
@@ -161,6 +162,7 @@ export const isOntoNodePropertyName = (
     "printingSpeed",
     "acquisitionCosts",
     "treatmentCosts",
+    "flexibility",
   ].includes(name as OntoNodePropertyName);
 };
 

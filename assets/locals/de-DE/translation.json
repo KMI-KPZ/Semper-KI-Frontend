@@ -258,7 +258,8 @@
       "density": "Dichte",
       "printingSpeed": "Druckgeschwindigkeit",
       "acquisitionCosts": "Anschaffungskosten",
-      "treatmentCosts": "Behandlungskosten"
+      "treatmentCosts": "Behandlungskosten",
+      "flexibility": "Flexibilität"
     },
     "FilterCategoryType": {
       "costs": "Kosten",

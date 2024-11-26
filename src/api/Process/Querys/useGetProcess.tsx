@@ -122,11 +122,20 @@ export type ProcessModel = {
   width?: number;
   length?: number;
   height?: number;
+  complexity?: ModelComplexity;
 } & GenericProcessFile;
 
 export enum ModelLevelOfDetail {
   "LOW",
   "MEDIUM",
+  "HIGH",
+}
+
+export enum ModelComplexity {
+  "LOW",
+  "LOW_MEDIUM",
+  "MEDIUM",
+  "MEDIUM_HIGH",
   "HIGH",
 }
 

@@ -13,6 +13,7 @@ import useDeleteModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/
 import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
 import {
+  ModelComplexity,
   ModelLevelOfDetail,
   ProcessModel,
   ProcessStatus,
@@ -89,6 +90,24 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
               )}
             </Text>
           </Container>
+          {model.complexity !== undefined ? (
+            <Container direction="row" justify="between" width="full">
+              <Text>
+                {t(
+                  "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.complexity"
+                )}
+              </Text>
+              <Text>
+                {t(
+                  `enum.ModelComplexity.${
+                    ModelComplexity[
+                      model.complexity
+                    ] as keyof typeof ModelComplexity
+                  }`
+                )}
+              </Text>
+            </Container>
+          ) : null}
           <Container direction="row" justify="between" width="full">
             <Text>
               {t(

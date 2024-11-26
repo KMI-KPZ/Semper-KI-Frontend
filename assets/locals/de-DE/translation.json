@@ -162,6 +162,13 @@
       "LOW": "Niedrig",
       "MEDIUM": "Mittel",
       "HIGH": "Hoch"
+    },
+    "ModelComplexity": {
+      "LOW": "Niedrig",
+      "LOW_MEDIUM": "Niedrig-Mittel",
+      "MEDIUM": "Mittel",
+      "MEDIUM_HIGH": "Mittel-Hoch",
+      "HIGH": "Hoch"
     }
   },
   "types": {
@@ -1563,7 +1570,8 @@
                 "name": "Name:",
                 "dimensions": "Maße",
                 "surface": "Oberfläche",
-                "volume": "Volumen"
+                "volume": "Volumen",
+                "complexity": "Komplexität"
               },
               "PostProcessingCard": {
                 "name": "name",

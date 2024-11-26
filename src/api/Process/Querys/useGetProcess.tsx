@@ -117,6 +117,11 @@ export type ProcessModel = {
   certificates: string[];
   quantity: number;
   levelOfDetail: ModelLevelOfDetail;
+  isFile: boolean;
+  volume?: number;
+  width?: number;
+  length?: number;
+  height?: number;
 } & GenericProcessFile;
 
 export enum ModelLevelOfDetail {

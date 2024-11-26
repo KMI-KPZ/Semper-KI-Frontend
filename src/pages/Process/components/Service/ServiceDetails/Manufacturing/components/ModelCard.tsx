@@ -33,7 +33,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
   const { project } = useProject();
   const navigate = useNavigate();
   const deleteModel = useDeleteModel();
-  const checkModel = useGetCheckModel(model.id);
+  const checkModel = useGetCheckModel(model.isFile ? model.id : undefined);
 
   const handleOnButtonClickModel = () => {
     navigate("service/manufacturing/model");
@@ -50,8 +50,8 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
     return Math.round(number * Math.pow(10, decimals)) / Math.pow(10, decimals);
   };
 
-  if (checkModel.isLoading) return <LoadingAnimation />;
-  if (checkModel.data !== undefined)
+  if (checkModel.isLoading && model.isFile) return <LoadingAnimation />;
+  if ((checkModel.data !== undefined && model.isFile) || !model.isFile)
     return (
       <ServiceDetailsCard>
         <Container direction="col" width="full" className="gap-2">
@@ -96,29 +96,37 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
               )}
             </Text>
             <Text>{`${roundNumberWithDecimals(
-              checkModel.data.measurements.mbbDimensions._1,
+              checkModel.data !== undefined && model.isFile
+                ? checkModel.data.measurements.mbbDimensions._1
+                : model.height?.valueOf() ?? 0,
               2
             )} x ${roundNumberWithDecimals(
-              checkModel.data.measurements.mbbDimensions._2,
+              checkModel.data !== undefined && model.isFile
+                ? checkModel.data.measurements.mbbDimensions._2
+                : model.width?.valueOf() ?? 0,
               2
             )} x ${roundNumberWithDecimals(
-              checkModel.data.measurements.mbbDimensions._3,
+              checkModel.data !== undefined && model.isFile
+                ? checkModel.data.measurements.mbbDimensions._3
+                : model.length?.valueOf() ?? 0,
               2
             )} mm`}</Text>
           </Container>
-          <Container direction="row" justify="between" width="full">
-            <Text>
-              {t(
-                "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.surface"
-              )}
-            </Text>
-            <Text>
-              {`${roundNumberWithDecimals(
-                checkModel.data.measurements.surfaceArea,
-                2
-              )} mm²`}
-            </Text>
-          </Container>
+          {checkModel.data !== undefined ? (
+            <Container direction="row" justify="between" width="full">
+              <Text>
+                {t(
+                  "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.surface"
+                )}
+              </Text>
+              <Text>
+                {`${roundNumberWithDecimals(
+                  checkModel.data.measurements.surfaceArea,
+                  2
+                )} mm²`}
+              </Text>
+            </Container>
+          ) : null}
           <Container direction="row" justify="between" width="full">
             <Text>
               {t(
@@ -126,7 +134,9 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
               )}
             </Text>
             <Text>{`${roundNumberWithDecimals(
-              checkModel.data.measurements.volume,
+              checkModel.data !== undefined && model.isFile
+                ? checkModel.data.measurements.volume
+                : model.volume?.valueOf() ?? 0,
               2
             )} mm³`}</Text>
           </Container>

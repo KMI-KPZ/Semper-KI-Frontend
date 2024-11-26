@@ -25,7 +25,7 @@ const useUploadDescriptiveModel = () => {
   ) =>
     authorizedCustomAxios
       .post(
-        `${process.env.VITE_HTTP_API_URL}/public/uploadDescriptiveModel/`,
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/upload-wo-file/`,
         props
       )
       .then((response) => {

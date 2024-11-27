@@ -61,7 +61,10 @@ export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
                         : prop.name}
                       {": "}
                     </td>
-                    <td>{prop.value.toString()}</td>
+                    <td>
+                      {prop.value.toString()}
+                      {prop.unit}
+                    </td>
                   </tr>
                 ))}
             </tbody>

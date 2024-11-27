@@ -4,6 +4,7 @@ import { Process } from "@/api/Process/Querys/useGetProcess";
 import { ContractorProps } from "@/api/Process/Querys/useGetContractors";
 import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 interface ContractorCardProps {
   contractor: ContractorProps;
@@ -29,6 +30,7 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
       }}
       className={twMerge(
         `
+        relative
         ${
           selected === undefined
             ? "card"
@@ -40,6 +42,17 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
         className
       )}
     >
+      {selected ? (
+        <div className="absolute bottom-2 right-2 h-fit w-fit rounded-full ">
+          <CheckCircleOutlineIcon
+            style={{
+              color: "green",
+              backgroundColor: "white",
+              borderRadius: "50%",
+            }}
+          />
+        </div>
+      ) : null}
       <img className="h-20" src={contractor.branding.logo_url} />
       <Container direction="col" justify="center" align="center">
         <table className="w-full table-auto border-separate border-spacing-3">

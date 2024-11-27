@@ -161,6 +161,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   const nodeAlreadyFilled = watch("name") !== "" && watch("context") !== "";
 
   const setFormToDraft = (nodeID: string) => {
+    logger("setFormToDraft", nodeID, nodeAlreadyFilled.toString());
     if (nodeAlreadyFilled) {
       if (window.confirm(t("components.Resources.NodeForm.confirmDraft"))) {
         reset({ ...node, edges: [] });
@@ -196,9 +197,9 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     variantNodeID !== "" &&
     (node.isError || allOrgaNodeNeighbors.isError);
 
-  if (editIsError || variantIsLoading || nodeType === undefined)
+  if (editIsError || variantIsError || nodeType === undefined)
     return <Navigate to=".." />;
-  if (variantIsError || editIsLoading) return <LoadingAnimation />;
+  if (variantIsLoading || editIsLoading) return <LoadingAnimation />;
 
   return (
     <Container width="full" direction="col">

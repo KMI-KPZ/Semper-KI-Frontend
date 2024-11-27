@@ -188,7 +188,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
             {fields.length > 0 ? (
               fields.sort(sortItems).map((propField, index) =>
                 propField.name === undefined || propField.name === "" ? (
-                  <tr>
+                  <tr key={index}>
                     <td
                       colSpan={4}
                       className={`border-t-2 p-3 text-left ${

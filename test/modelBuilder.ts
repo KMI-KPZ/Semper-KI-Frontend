@@ -70,7 +70,8 @@ export class ModelBuilder {
             type: "Model",
             origin: "Service",
             size: 1,
-            imgPath:""
+            imgPath:"",
+            isFile: true,
         }
     }
 }

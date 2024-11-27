@@ -63,7 +63,10 @@ const HomeServices: React.FC<HomeServicesProps> = (props) => {
         >
           <img src={currentItem.image} className="object-cover md:w-3/5 " />
           <Container direction="col" align="start" className="md:w-2/5">
-            <Heading variant="h3" className=" transition-all duration-300 ">
+            <Heading
+              variant="h3"
+              className="text-white transition-all duration-300 "
+            >
               {currentItem.title}
             </Heading>
             <Text>{currentItem.text}</Text>

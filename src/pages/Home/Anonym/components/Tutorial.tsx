@@ -75,7 +75,7 @@ const HomeTutorial: React.FC<HomeTutorialProps> = (props) => {
             width="none"
             direction="col"
           >
-            <Heading variant="h3" className="w-full hyphens-auto ">
+            <Heading variant="h3" className="w-full hyphens-auto text-white">
               {item.title}
             </Heading>
             <Text>{item.description}</Text>
@@ -97,7 +97,7 @@ const HomeTutorial: React.FC<HomeTutorialProps> = (props) => {
             width="none"
             direction="col"
           >
-            <Heading variant="h3" className="w-full hyphens-auto ">
+            <Heading variant="h3" className="w-full hyphens-auto text-white">
               {item.title}
             </Heading>
             <Text>{item.description}</Text>

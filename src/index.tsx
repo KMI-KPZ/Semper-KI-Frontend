@@ -43,28 +43,26 @@ root.render(
     <React.StrictMode>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <PasswordAuthOutlet>
-            <CSRFOutlet>
-              <TopicsProvider>
-                <UserContextProvider>
-                  <OrganizationOutlet>
-                    <UserLocalsOutlet>
-                      <PermissionContextProvider>
-                        <EventContextProvider>
-                          <BodyScrollContextProvider>
-                            <ModalContextProvider>
-                              <App />
-                              <ReactQueryDevtools />
-                            </ModalContextProvider>
-                          </BodyScrollContextProvider>
-                        </EventContextProvider>
-                      </PermissionContextProvider>
-                    </UserLocalsOutlet>
-                  </OrganizationOutlet>
-                </UserContextProvider>
-              </TopicsProvider>
-            </CSRFOutlet>
-          </PasswordAuthOutlet>
+          <CSRFOutlet>
+            <TopicsProvider>
+              <UserContextProvider>
+                <OrganizationOutlet>
+                  <UserLocalsOutlet>
+                    <PermissionContextProvider>
+                      <EventContextProvider>
+                        <BodyScrollContextProvider>
+                          <ModalContextProvider>
+                            <App />
+                            <ReactQueryDevtools />
+                          </ModalContextProvider>
+                        </BodyScrollContextProvider>
+                      </EventContextProvider>
+                    </PermissionContextProvider>
+                  </UserLocalsOutlet>
+                </OrganizationOutlet>
+              </UserContextProvider>
+            </TopicsProvider>
+          </CSRFOutlet>
         </QueryClientProvider>
       </BrowserRouter>
     </React.StrictMode>

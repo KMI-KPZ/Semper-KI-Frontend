@@ -9,7 +9,9 @@ export type OntoNodeType =
   | "material"
   | "additionalRequirement"
   | "color"
-  | "materialCategory";
+  | "materialCategory"
+  | "technology"
+  | "materialType";
 
 export const isOntoNodeType = (type: string): type is OntoNodeType => {
   return [
@@ -19,6 +21,8 @@ export const isOntoNodeType = (type: string): type is OntoNodeType => {
     "additionalRequirement",
     "color",
     "materialCategory",
+    "technology",
+    "materialType",
   ].includes(type as OntoNodeType);
 };
 
@@ -121,7 +125,7 @@ export const parseOntoNode = (node: any): OntoNode => {
     createdWhen: new Date(node.createdWhen),
     updatedWhen: new Date(node.updatedWhen),
     accessedWhen: new Date(node.accessedWhen),
-    active: node.active === "True" ? true : false,
+    active: node.active,
   };
 };
 
@@ -166,9 +170,9 @@ export const isOntoNodePropertyName = (
   ].includes(name as OntoNodePropertyName);
 };
 
-const useGetOrgaNodes = (nodeType: OntoNodeType) => {
+const useGetOrgaNodesByType = (nodeType: OntoNodeType) => {
   const { user } = useUser();
-  const getOrgaNodes = async () =>
+  const getOrgaNodesByType = async () =>
     authorizedCustomAxios
       .get(
         user.usertype === UserType.ADMIN
@@ -185,8 +189,8 @@ const useGetOrgaNodes = (nodeType: OntoNodeType) => {
 
   return useQuery<OntoNode[], Error>({
     queryKey: ["resources", "orga", "nodes", nodeType],
-    queryFn: getOrgaNodes,
+    queryFn: getOrgaNodesByType,
   });
 };
 
-export default useGetOrgaNodes;
+export default useGetOrgaNodesByType;

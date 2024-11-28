@@ -26,7 +26,7 @@ const HomeMagazin: React.FC<Props> = (props) => {
     >
       <Heading
         variant="h2"
-        className="z-10 text-4xl tracking-widest  md:text-5xl md:font-bold"
+        className="z-10 text-4xl tracking-widest text-white md:text-5xl md:font-bold"
       >
         {t("Home.components.Magazin.heading")}
       </Heading>

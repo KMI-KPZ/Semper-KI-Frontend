@@ -1,7 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
-import { OntoNodeType } from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import { OntoNodeType } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 export interface Node extends d3.SimulationNodeDatum {
   id: string;

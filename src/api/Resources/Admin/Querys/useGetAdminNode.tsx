@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import {
   OntoNode,
   parseOntoNode,
-} from "../../Organization/Querys/useGetOrgaNodes";
+} from "../../Organization/Querys/useGetOrgaNodesByType";
 
 const useGetAdminNode = (optionalNodeID?: string) => {
   const { nodeID: paramNodeID } = useParams();

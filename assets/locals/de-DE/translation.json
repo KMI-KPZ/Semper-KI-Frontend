@@ -230,7 +230,9 @@
       "material": "Materialien",
       "additionalRequirement": "Zusätzliche Anforderungen",
       "color": "Farben",
-      "materialCategory": "Materialkategorie"
+      "materialCategory": "Materialkategorie",
+      "technology": "3D-Drucker Technologie",
+      "materialType": "Materialtyp"
     },
     "OntoNodePropertyName": {
       "technology": "Technologie",
@@ -673,6 +675,9 @@
           "create": "Erstellen",
           "variant": "Variante Erstellen"
         },
+        "technology": "Technologie",
+        "noTechnologies": "Keine Technologie gefunden",
+        "noTechnology": "Keine Technologie ausgewählt",
         "general": "Allgemeine Informationen",
         "nodeName": "Name",
         "context": "Beschreibung",

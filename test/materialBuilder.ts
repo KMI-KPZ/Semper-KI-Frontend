@@ -1,4 +1,4 @@
-import { OntoNodeProperty } from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import { OntoNodeProperty } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 
 

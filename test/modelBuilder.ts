@@ -71,7 +71,7 @@ export class ModelBuilder {
             origin: "Service",
             size: 1,
             imgPath:"",
-            isFile:true,
+            isFile: true,
         }
     }
 }

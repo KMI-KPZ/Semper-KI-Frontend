@@ -13,7 +13,7 @@ import ProcessStatusGate from "@/pages/Process/components/StatusGate";
 import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 interface ProcessServiceMaterialCardProps {
   material: MaterialProps;

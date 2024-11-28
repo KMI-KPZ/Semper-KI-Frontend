@@ -5,14 +5,15 @@ import {
   Container,
   Heading,
   LoadingAnimation,
+  Text,
 } from "@component-library/index";
-import {
+import useGetOrgaNodesByType, {
   OntoNode,
   OntoNodeNew,
   OntoNodeType,
   clientNodeTypes,
   isOntoNodeType,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import { useFieldArray, useForm } from "react-hook-form";
 import { GeneralInput } from "@component-library/Form/GeneralInput";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
@@ -31,6 +32,10 @@ interface ResourcesNodePropsForm {
   type: ResourcesAction;
 }
 export type ResourcesAction = "create" | "edit";
+
+export interface ResourcesPrinterTechnologyType {
+  technology?: string;
+}
 
 export interface ResourcesNodeFormEdges {
   edges: ResourcesNodeFormEdge[];
@@ -68,6 +73,10 @@ const getNodeID = (
   }
 };
 
+type FormData = (OntoNode | OntoNodeNew) &
+  ResourcesNodeFormEdges &
+  ResourcesPrinterTechnologyType;
+
 const getNodeType = (unsafeNodeType: string | undefined) => {
   return unsafeNodeType !== undefined && isOntoNodeType(unsafeNodeType)
     ? unsafeNodeType
@@ -83,6 +92,10 @@ const getEdges = (
       ? []
       : nodes.filter((edgeNode) => edgeNode.nodeID !== organization.hashedID)
   );
+
+const getTechnology = (nodes?: OntoNode[]): string | undefined => {
+  return nodes?.find((node) => node.nodeType === "technology")?.nodeID;
+};
 
 const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   const { type } = props;
@@ -105,12 +118,11 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
 
   const node = useGetOrgaNode(nodeID);
   const allOrgaNodeNeighbors = useGetAllOrgaNodeNeighbors(nodeID);
+  const printerTechnologies = useGetOrgaNodesByType("technology");
 
   const edges = getEdges(organization, allOrgaNodeNeighbors.data);
 
-  const { register, handleSubmit, control, reset, watch } = useForm<
-    (OntoNode | OntoNodeNew) & ResourcesNodeFormEdges
-  >({
+  const { register, handleSubmit, control, reset, watch } = useForm<FormData>({
     defaultValues:
       nodeID === undefined ? { nodeType, edges } : { ...node.data, edges },
   });
@@ -124,9 +136,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     name: "edges",
   });
 
-  const onSubmit = (
-    data: (OntoNode | OntoNodeNew) & ResourcesNodeFormEdges
-  ) => {
+  const onSubmit = (data: FormData) => {
     const newEdges: string[] =
       type === "create"
         ? data.edges.map((edge) => edge.nodeID)
@@ -140,16 +150,34 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
         : edges
             .filter((edge) => !data.edges.some((e) => e.nodeID === edge.nodeID))
             .map((edge) => edge.nodeID);
+    const newTechnology: string[] =
+      data.technology !== undefined &&
+      data.technology !== "" &&
+      nodeType === "printer"
+        ? [data.technology]
+        : [];
+
+    const deleteTechnology: string[] =
+      data.technology !== undefined &&
+      data.technology !== "" &&
+      nodeType === "printer"
+        ? edges
+            .filter((edge) => edge.nodeType === "technology")
+            .map((edge) => edge.nodeID)
+        : [];
 
     submitOrgaNodeForm.mutate(
       {
         node: { ...data, nodeType },
         type: type === "edit" ? "update" : "create",
-        edges: { create: newEdges, delete: deleteEdges },
+        edges: {
+          create: [...newEdges, ...newTechnology],
+          delete: [...deleteEdges, ...deleteTechnology],
+        },
       },
       {
         onSuccess() {
-          navigate("..");
+          navigate("../..");
         },
         onError() {
           console.error("Error on submitOrgaNodeForm");
@@ -161,6 +189,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   const nodeAlreadyFilled = watch("name") !== "" && watch("context") !== "";
 
   const setFormToDraft = (nodeID: string) => {
+    logger("setFormToDraft", nodeID, nodeAlreadyFilled.toString());
     if (nodeAlreadyFilled) {
       if (window.confirm(t("components.Resources.NodeForm.confirmDraft"))) {
         reset({ ...node, edges: [] });
@@ -178,6 +207,10 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
       logger("UseEffect", nodeID);
       reset({
         ...node.data,
+        technology:
+          nodeType === "printer"
+            ? getTechnology(allOrgaNodeNeighbors.data)
+            : undefined,
         edges: getEdges(organization, allOrgaNodeNeighbors.data),
       });
     }
@@ -191,18 +224,28 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     type === "create" &&
     variantNodeID !== "" &&
     (node.isLoading || allOrgaNodeNeighbors.isLoading);
+  const technologyIsLoading =
+    printerTechnologies.isLoading && nodeType === "printer";
+  const technologyIsError =
+    printerTechnologies.isError && nodeType === "printer";
   const variantIsError =
     type === "create" &&
     variantNodeID !== "" &&
     (node.isError || allOrgaNodeNeighbors.isError);
 
-  if (editIsError || variantIsLoading || nodeType === undefined)
+  if (
+    editIsError ||
+    variantIsError ||
+    nodeType === undefined ||
+    technologyIsError
+  )
     return <Navigate to=".." />;
-  if (variantIsError || editIsLoading) return <LoadingAnimation />;
+  if (variantIsLoading || editIsLoading || technologyIsLoading)
+    return <LoadingAnimation />;
 
   return (
     <Container width="full" direction="col">
-      <BackButtonContainer>
+      <BackButtonContainer backPath="../..">
         <Heading variant="h2">
           {t(`types.OntoNodeType.${nodeType}`)}{" "}
           {t(`components.Resources.NodeForm.heading.${type}`)}
@@ -233,6 +276,33 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
             register={register}
             type="text"
           />
+          {nodeType === "printer" ? (
+            <Container width="full" direction="row">
+              <Text>{t("components.Resources.NodeForm.technology")}</Text>
+              <select
+                className=" rounded-md border border-gray-300 p-2"
+                {...register(`technology`)}
+              >
+                {printerTechnologies.data !== undefined &&
+                printerTechnologies.data.length > 0 ? (
+                  <>
+                    <option value="" selected disabled>
+                      {t("components.Resources.NodeForm.noTechnology")}
+                    </option>
+                    {printerTechnologies.data?.map((technology) => (
+                      <option key={technology.nodeID} value={technology.nodeID}>
+                        {technology.name}
+                      </option>
+                    ))}
+                  </>
+                ) : (
+                  <option value="">
+                    {t("components.Resources.NodeForm.noTechnologies")}
+                  </option>
+                )}
+              </select>
+            </Container>
+          ) : null}
         </Container>
         <ResourcesPropertyForm
           register={register}

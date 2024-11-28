@@ -1,18 +1,20 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import NRULOGO from "@images/nru/NRU-logo.svg";
+import LogoURL from "@images/logo192.png";
 import { Text } from "@component-library/index";
+import { useTranslation } from "react-i18next";
 
 interface HeaderHomeButtonProps {}
 
 const HeaderHomeButton: React.FC<HeaderHomeButtonProps> = (props) => {
   const {} = props;
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <a
       href="/"
-      className="flex w-fit flex-row items-center gap-3 p-2 px-5 duration-300 hover:scale-95 hover:cursor-pointer hover:text-nru "
+      className="group flex flex-row items-center gap-3 p-2 duration-300 hover:cursor-pointer hover:text-türkis "
       onClick={(e) => {
         e.preventDefault();
         navigate("/");
@@ -20,12 +22,19 @@ const HeaderHomeButton: React.FC<HeaderHomeButtonProps> = (props) => {
       title="Startseite"
     >
       <img
-        className="h-10  md:h-12"
+        className="h-8 duration-300 group-hover:scale-110  md:h-10"
         data-testid="logo"
-        src={NRULOGO}
-        alt="Home Button"
+        src={LogoURL}
+        alt="Kiss Logo"
       />
-      <Text className="hidden text-2xl md:flex ">Projektverwaltung</Text>
+      <div className="  flex flex-col items-end justify-start text-inherit">
+        <Text
+          variant="custom"
+          className="text-2xl font-bold text-[#263652] xs:text-3xl md:text-4xl"
+        >
+          {t("components.Header.button.home")}
+        </Text>
+      </div>
     </a>
   );
 };

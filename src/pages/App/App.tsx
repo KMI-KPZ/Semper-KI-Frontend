@@ -78,7 +78,7 @@ const App: React.FC = () => {
       }}
     >
       <div
-        className={`flex min-h-screen flex-col items-center justify-center font-ptsans text-base text-black`}
+        className={`flex min-h-screen flex-col items-center justify-center font-ptsans text-base`}
         data-testid="app"
         id="app"
       >

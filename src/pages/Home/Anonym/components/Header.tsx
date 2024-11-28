@@ -31,7 +31,7 @@ const HomeHeader: React.FC<HomeHeaderProps> = (props) => {
         variant={variant}
         className={twMerge(
           "dotted-underline w-full hyphens-auto  ",
-          color === "dark" ? "" : "text-ultramarinblau-dark",
+          color === "dark" ? "text-white" : "text-ultramarinblau-dark",
           headerClassName
         )}
       >

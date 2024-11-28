@@ -33,7 +33,7 @@ interface ResourcesNodePropsForm {
 }
 export type ResourcesAction = "create" | "edit";
 
-export interface ResourcesPrinterTechnologyType {
+export interface OptionalProps {
   technology?: string;
 }
 
@@ -75,7 +75,7 @@ const getNodeID = (
 
 type FormData = (OntoNode | OntoNodeNew) &
   ResourcesNodeFormEdges &
-  ResourcesPrinterTechnologyType;
+  OptionalProps;
 
 const getNodeType = (unsafeNodeType: string | undefined) => {
   return unsafeNodeType !== undefined && isOntoNodeType(unsafeNodeType)

@@ -303,7 +303,9 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
     <Container width="fit" className="fixed bottom-4 right-4 z-50">
       <Button
         className={` rounded-full p-3 duration-300 md:hidden ${
-          bounce ? "animate-bounce" : "animate-none"
+          bounce && isChatbotEnabled && !botAlreadyLoaded.current
+            ? "animate-bounce"
+            : "animate-none"
         }`}
         width="fit"
         title={t("components.Chatbot.button.open")}

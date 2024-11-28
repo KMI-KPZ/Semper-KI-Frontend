@@ -1,7 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
-import { OntoNodeProperty } from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import { OntoNodeProperty } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import useFilter from "@/hooks/useFilter";
 
 export interface MaterialProps {

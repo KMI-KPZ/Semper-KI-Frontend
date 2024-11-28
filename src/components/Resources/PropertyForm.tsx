@@ -20,7 +20,7 @@ import {
   OntoNodePropertyType,
   OntoNodeType,
   isOntoNodePropertyName,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import AddIcon from "@mui/icons-material/Add";
 import { GeneralInput, InputType } from "@component-library/Form/GeneralInput";
 import useSort from "@/hooks/useSort";

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from "react";
+import { useContext, useMemo } from "react";
 import useOrgaEvent from "./hooks/useOrgaEvent";
 import { JSONIsParseable, JSONSafeParse } from "@/services/utils";
 import logger from "@/hooks/useLogger";
@@ -7,7 +7,6 @@ import { EventContext } from "@/contexts/EventContextProvider";
 import { Event, ProcessEvent, ProjectEvent } from "./EventTypes";
 import useProcessEvent from "./hooks/useProcessEvent";
 import { parseEvent } from "@/api/Events/Querys/useGetEvent";
-import { useQueryClient } from "@tanstack/react-query";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { useTranslation } from "react-i18next";
 
@@ -28,7 +27,6 @@ interface ReturnProps {
 const useEvents = (): ReturnProps => {
   const { events, socket } = useContext(EventContext);
   const { t } = useTranslation();
-  const queryClient = useQueryClient();
 
   const {
     totalProjectEventCount,
@@ -68,7 +66,6 @@ const useEvents = (): ReturnProps => {
   };
 
   const handleNewEvent = (newEvent: Event) => {
-    queryClient.invalidateQueries(["events"]);
     switch (newEvent.eventType) {
       case "projectEvent":
         handleNewProjectEvent(newEvent);
@@ -82,13 +79,14 @@ const useEvents = (): ReturnProps => {
     }
   };
 
-  useEffect(() => {
-    if (events.length > 0) {
-      events.forEach((event) => {
-        if (event.triggerEvent) handleNewEvent(event);
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   logger("useEvents | useEffect | events", events);
+  //   if (events.length > 0) {
+  //     events.forEach((event) => {
+  //       if (event.triggerEvent) handleNewEvent(event);
+  //     });
+  //   }
+  // }, []);
 
   const totalEventCount = totalProjectEventCount + totalOrgaEventCount;
 

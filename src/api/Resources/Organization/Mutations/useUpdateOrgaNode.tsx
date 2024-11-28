@@ -1,7 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { OntoNode } from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import { OntoNode } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 export interface UpdateOrgaNode extends Partial<OntoNode> {
   nodeID: string;

@@ -6,7 +6,7 @@ import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Quer
 import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 interface Props {
   material: MaterialProps;
@@ -61,7 +61,9 @@ export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
                         : prop.name}
                       {": "}
                     </td>
-                    <td>{prop.value.toString()}</td>
+                    <td>
+                      {prop.value.toString()} {prop.unit}
+                    </td>
                   </tr>
                 ))}
             </tbody>

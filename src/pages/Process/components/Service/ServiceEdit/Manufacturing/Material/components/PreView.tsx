@@ -10,7 +10,7 @@ import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Quer
 import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 interface Props {
   material: MaterialProps;

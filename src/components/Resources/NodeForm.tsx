@@ -276,9 +276,9 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
             register={register}
             type="text"
           />
-          <Container width="full" direction="row">
-            <Text>{t("components.Resources.NodeForm.technology")}</Text>
-            {nodeType === "printer" ? (
+          {nodeType === "printer" ? (
+            <Container width="full" direction="row">
+              <Text>{t("components.Resources.NodeForm.technology")}</Text>
               <select
                 className=" rounded-md border border-gray-300 p-2"
                 {...register(`technology`)}
@@ -301,8 +301,8 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
                   </option>
                 )}
               </select>
-            ) : null}
-          </Container>
+            </Container>
+          ) : null}
         </Container>
         <ResourcesPropertyForm
           register={register}

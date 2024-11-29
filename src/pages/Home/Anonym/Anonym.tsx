@@ -1,26 +1,26 @@
-import { Heading } from "@component-library/index";
-import HomeIntroduction from "./components/Introduction";
-import HomeServices from "./components/Services";
-import HomePrototypeAlert from "./components/PrototypeAlert";
-import HomeTutorial from "./components/Tutorial";
-import HomeTeam from "./components/Team";
-import { useTranslation } from "react-i18next";
-import HomeBackground from "./components/Background";
 import React from "react";
 import AnonymHomeContainer from "../components/AnonymContainer";
+import NRUHero from "@images/nru/KunststoffHero.jpg";
+import NRU from "./components/NRU";
 
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props) => {
   const {} = props;
-  const { t } = useTranslation();
 
   return (
     <div
       className={`relative  flex w-full   flex-col items-center justify-start`}
       data-testid="home-anonym"
     >
-      <HomeBackground />
+      <img
+        src={NRUHero}
+        className="absolute top-0  h-full w-full object-cover brightness-50"
+      />
+      <AnonymHomeContainer>
+        <NRU />
+      </AnonymHomeContainer>
+      {/* <HomeBackground />
       <HomePrototypeAlert />
       <AnonymHomeContainer>
         <Heading
@@ -35,7 +35,7 @@ const Home: React.FC<HomeProps> = (props) => {
       </AnonymHomeContainer>
       <AnonymHomeContainer className="bg-white">
         <HomeTeam />
-      </AnonymHomeContainer>
+      </AnonymHomeContainer> */}
     </div>
   );
 };

@@ -7,7 +7,7 @@ import {
   Modal,
   Text,
 } from "@component-library/index";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { UserAddressProps } from "@/hooks/useUser";
 import ProcessContractorList from "./components/ContractorList";
@@ -16,6 +16,7 @@ import ContractorCard from "../../../../components/Process/ContractorCard";
 import ContractorSelectionAddressCard from "./components/AddressCard";
 import useGetContractors from "@/api/Process/Querys/useGetContractors";
 import ProcessConditionIcon from "@/components/Process/ConditionIcon";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 // import ProcessStatusGate from "../StatusGate";
 
 interface ProcessContractorSelectionProps {}
@@ -34,6 +35,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
   const { t } = useTranslation();
   const { process } = useDefinedProcess();
   const contractors = useGetContractors();
+  const updateProcess = useUpdateProcess();
 
   const [editContractor, setEditContractor] = useState(false);
 
@@ -59,6 +61,24 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
   const closeEditContractor = () => {
     setEditContractor(false);
   };
+
+  useEffect(() => {
+    if (
+      (process.processDetails.provisionalContractor === undefined ||
+        process.processDetails.provisionalContractor === "") &&
+      contractors.data !== undefined &&
+      contractors.data?.length > 0
+    ) {
+      updateProcess.mutate({
+        processIDs: [process.processID],
+        updates: {
+          changes: {
+            provisionalContractor: contractors.data[0].hashedID,
+          },
+        },
+      });
+    }
+  }, [contractors.data]);
 
   const menuButtonTitle = t(
     "Process.components.ContractorSelection.button.menu"

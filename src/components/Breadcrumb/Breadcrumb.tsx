@@ -184,7 +184,7 @@ export const Breadcrumb: React.FC<Props> = () => {
   const items = generateBreadcrumbItems();
 
   return (
-    <nav className="hidden w-full flex-row items-center justify-start pl-10 text-left text-lg font-bold text-white md:flex">
+    <nav className="hidden w-full flex-row items-center justify-start pl-10 text-left text-lg font-bold text-black  md:flex">
       {items.length > 1
         ? items.map((item: BreadcrumbItem, index: number) =>
             index === 0 ? (
@@ -199,6 +199,7 @@ export const Breadcrumb: React.FC<Props> = () => {
                     : item.name
                 }
                 children={<HomeIcon />}
+                className="text-black"
                 to={item.link}
               />
             ) : (
@@ -214,6 +215,7 @@ export const Breadcrumb: React.FC<Props> = () => {
                       : item.name
                   }
                   to={item.link}
+                  className="text-black"
                 />
               </React.Fragment>
             )

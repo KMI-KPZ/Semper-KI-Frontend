@@ -79,15 +79,6 @@ const useEvents = (): ReturnProps => {
     }
   };
 
-  // useEffect(() => {
-  //   logger("useEvents | useEffect | events", events);
-  //   if (events.length > 0) {
-  //     events.forEach((event) => {
-  //       if (event.triggerEvent) handleNewEvent(event);
-  //     });
-  //   }
-  // }, []);
-
   const totalEventCount = totalProjectEventCount + totalOrgaEventCount;
 
   const getEvent = useMemo(() => {

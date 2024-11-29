@@ -53,8 +53,16 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
           />
         </div>
       ) : null}
-      <img className="h-20" src={contractor.branding.logo_url} />
-      <Container direction="col" justify="center" align="center">
+      <img
+        className="h-20 w-1/3 object-contain"
+        src={contractor.branding.logo_url}
+      />
+      <Container
+        direction="col"
+        justify="center"
+        align="center"
+        className="w-2/3"
+      >
         <table className="w-full table-auto border-separate border-spacing-3">
           <tbody>
             <tr>

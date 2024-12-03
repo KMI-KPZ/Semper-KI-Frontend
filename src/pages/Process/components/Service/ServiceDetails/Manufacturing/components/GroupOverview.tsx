@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container } from "@component-library/index";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
@@ -21,7 +21,20 @@ const ServiceManufacturingGroupOverview: React.FC<
   const groups: ManufacturingServiceProps[] = [
     process.serviceDetails,
     process.serviceDetails,
+    process.serviceDetails,
   ];
+
+  const buttonRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+
+  useEffect(() => {
+    if (buttonRefs.current[activeGroup]) {
+      buttonRefs.current[activeGroup].scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center",
+      });
+    }
+  }, [activeGroup]);
 
   const handleOnClickGroup = (group: number) => {
     changeActiveGroup(group);
@@ -30,8 +43,9 @@ const ServiceManufacturingGroupOverview: React.FC<
   const handleOnClickNextGroup = () => {
     changeActiveGroup((activeGroup + 1) % groups.length);
   };
+
   const handleOnClickPreviousGroup = () => {
-    changeActiveGroup((activeGroup - 1) % groups.length);
+    changeActiveGroup((activeGroup - 1 + groups.length) % groups.length); // Adding groups.length to prevent negative values
   };
 
   return (
@@ -45,9 +59,14 @@ const ServiceManufacturingGroupOverview: React.FC<
       >
         <KeyboardArrowLeftIcon />
       </Button>
-      <Container width="full" direction="row">
+      <Container
+        width="full"
+        direction="row"
+        className="max-w-4xl overflow-auto"
+      >
         {groups.map((group, index) => (
           <Button
+            ref={(el) => (buttonRefs.current[index] = el)}
             title={t(
               "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.item",
               {

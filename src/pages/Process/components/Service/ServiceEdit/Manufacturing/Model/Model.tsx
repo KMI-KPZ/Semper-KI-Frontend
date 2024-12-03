@@ -117,6 +117,7 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
                         <Button
                           title={t("general.button.select")}
                           variant="primary"
+                          active={false}
                           size="sm"
                           onClick={() => handleOnClickButtonSelect(model.file)}
                         />

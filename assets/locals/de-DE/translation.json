@@ -1524,10 +1524,11 @@
           "menu": "Informationen Menu"
         },
         "Filter": {
-          "heading": "Ihre Vorgaben",
+          "heading": "Ihre Anforderungen / Vorgaben",
           "menuButtonTitle": "Filter Menu",
-          "pageDescription1": "Hier können Sie ihre Vorgaben für den Prozess festlegen.",
-          "pageDescription2": "Dies hilft ihnen die Auswahl zu vereinfachen.",
+          "pageDescription1": "Hier können Sie ihre Anforderungen / Vorgaben für den Prozess festlegen.",
+          "pageDescription2": "Dies hilft ihnen die Auswahl zu vereinfachen und gibt den Herstellern mehr Informationen.",
+          "filtersApplied": "Vorgaben angewendet",
           "noCategory": "keine Vorgabenkategorie geöffnet",
           "components": {
             "Card": {
@@ -1567,6 +1568,12 @@
                 "type": "Typ:",
                 "cost": "Mittlere Anschaffungskosten:",
                 "properties": "Eigenschaften:"
+              },
+              "GroupOverview": {
+                "noModel": "kein Modell",
+                "nextGroup": "Nächste Gruppe",
+                "previousGroup": "Vorherige Gruppe",
+                "item": "Gruppe {{name}} öffnen"
               },
               "ModelCard": {
                 "img": "Modelbild",

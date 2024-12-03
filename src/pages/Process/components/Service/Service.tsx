@@ -7,8 +7,6 @@ import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import ServiceDetails from "./ServiceDetails/ServiceDetails";
 import ProcessContainer from "@/components/Process/Container";
-import ProcessFilter from "./Filter/Filter";
-import ProcessStatusGate from "../StatusGate";
 
 interface ServiceProps {
   process: Process;
@@ -71,14 +69,7 @@ const Service: React.FC<ServiceProps> = (props) => {
       {noServiceSelected ? (
         <ServiceSelection />
       ) : (
-        <>
-          {process.serviceType === ServiceType.ADDITIVE_MANUFACTURING ? (
-            <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
-              <ProcessFilter />
-            </ProcessStatusGate>
-          ) : null}
-          <ServiceDetails process={process} />
-        </>
+        <ServiceDetails process={process} />
       )}
     </ProcessContainer>
   );

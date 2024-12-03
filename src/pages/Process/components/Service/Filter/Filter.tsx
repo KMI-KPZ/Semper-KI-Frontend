@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Badge,
@@ -15,6 +15,7 @@ import {
   FilterCategoryType,
   FilterItemProps,
 } from "@/api/Filter/Querys/useGetFilters";
+
 interface Props {}
 
 export interface CategoryProps {
@@ -55,6 +56,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
   const [categoryList, setCategoryList] = useState<CategoryProps[]>(
     generateCategoryList(editFilters)
   );
+  const [showFilterApplied, setShowFilterApplied] = useState(false);
   const { t } = useTranslation();
 
   const setFilterItem = (newFilterItem: FilterItemProps) => {
@@ -75,6 +77,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
 
   const handleOnClickApplyButton = () => {
     applyFilters();
+    setShowFilterApplied(true);
     setCategoryList((prev) =>
       prev.map((category) => ({
         ...category,
@@ -116,6 +119,14 @@ const ProcessFilter: React.FC<Props> = (props) => {
   const getAllCheckFilterItems = (): FilterItemProps[] => {
     return editFilters.filter((item) => item.isChecked === true);
   };
+
+  useEffect(() => {
+    if (showFilterApplied) {
+      setTimeout(() => {
+        setShowFilterApplied(false);
+      }, 2000);
+    }
+  }, [showFilterApplied]);
 
   return (
     <Container
@@ -232,6 +243,13 @@ const ProcessFilter: React.FC<Props> = (props) => {
               </Badge>
             </Container>
           </Container>
+          {showFilterApplied ? (
+            <Container className="rounded-md border-2 border-green-500 p-2">
+              <Text>
+                {t("Process.components.Service.Filter.filtersApplied")}
+              </Text>
+            </Container>
+          ) : null}
         </Container>
         <Divider />
       </Collapsible>

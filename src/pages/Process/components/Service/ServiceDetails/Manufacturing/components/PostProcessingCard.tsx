@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import ServiceDetailsCard from "../../components/Card";
 import TestImg from "@images/Test2.png";
@@ -14,6 +14,7 @@ import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface ProcessSericePostProcessingCardProps {
   postProcessing: PostProcessingProps;
@@ -28,8 +29,9 @@ const ProcessSericePostProcessingCard: React.FC<
   const { project } = useProject();
   const navigate = useNavigate();
   const deletePostProcessing = useDeletePostProcessing();
+  const { groupID } = useContext(ManufacturingGroupContext);
   const handleOnButtonClickPostProcessing = () => {
-    navigate("service/manufacturing/postprocessing");
+    navigate(`service/manufacturing/${groupID}/postprocessing`);
   };
   const handleOnButtonClickDeletePostProcessing = (
     postProcessingID: string

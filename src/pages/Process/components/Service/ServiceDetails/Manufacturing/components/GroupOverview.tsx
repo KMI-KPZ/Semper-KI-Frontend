@@ -18,17 +18,13 @@ const ServiceManufacturingGroupOverview: React.FC<
   const { process, activeGroup, changeActiveGroup } = props;
   const { t } = useTranslation();
 
-  const groups: ManufacturingServiceProps[] = [
-    process.serviceDetails,
-    process.serviceDetails,
-    process.serviceDetails,
-  ];
-
+  const groups: ManufacturingServiceProps[] = process.serviceDetails;
   const buttonRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   useEffect(() => {
-    if (buttonRefs.current[activeGroup]) {
-      buttonRefs.current[activeGroup].scrollIntoView({
+    const currentActiveGroup = buttonRefs.current[activeGroup];
+    if (currentActiveGroup !== null) {
+      currentActiveGroup.scrollIntoView({
         behavior: "smooth",
         block: "center",
         inline: "center",
@@ -49,7 +45,12 @@ const ServiceManufacturingGroupOverview: React.FC<
   };
 
   return (
-    <Container width="full" direction="row">
+    <Container
+      width="full"
+      direction="row"
+      justify="between"
+      className="rounded-md border-2 p-3"
+    >
       <Button
         title={t(
           "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.previousGroup"
@@ -62,7 +63,8 @@ const ServiceManufacturingGroupOverview: React.FC<
       <Container
         width="full"
         direction="row"
-        className="max-w-4xl overflow-auto"
+        justify="start"
+        className="max-w-3xl overflow-auto "
       >
         {groups.map((group, index) => (
           <Button

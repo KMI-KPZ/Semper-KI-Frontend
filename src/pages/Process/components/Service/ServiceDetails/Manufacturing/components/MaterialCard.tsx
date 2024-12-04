@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ServiceDetailsCard from "../../components/Card";
 import TestImg from "@images/Test2.png";
@@ -14,6 +14,7 @@ import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface ProcessServiceMaterialCardProps {
   material: MaterialProps;
@@ -28,8 +29,9 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
   const { project } = useProject();
   const navigate = useNavigate();
   const deleteMaterial = useDeleteMaterial();
+  const { groupID } = useContext(ManufacturingGroupContext);
   const handleOnButtonClickMaterial = () => {
-    navigate("service/manufacturing/material");
+    navigate(`service/manufacturing/${groupID}/material`);
   };
 
   const [edit, setEdit] = useState<MaterialProps | undefined>(undefined);

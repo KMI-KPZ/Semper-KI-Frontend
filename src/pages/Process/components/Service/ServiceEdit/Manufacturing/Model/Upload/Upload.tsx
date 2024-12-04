@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as UploadIcon } from "@icons/Upload.svg";
 import { Button, Container, Heading, Text } from "@component-library/index";
@@ -15,6 +15,7 @@ import {
   ModelLevelOfDetail,
   ProcessModel,
 } from "@/api/Process/Querys/useGetProcess";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface Props {}
 
@@ -38,6 +39,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
   const { deleteModal } = useModal();
+  const { group } = useContext(ManufacturingGroupContext);
 
   const { process } = useManufacturingProcess();
   const { project } = useProject();
@@ -86,9 +88,9 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       models:
-        process.serviceDetails.models === undefined
+        group.models === undefined
           ? []
-          : process.serviceDetails.models.map((model) => ({
+          : group.models.map((model) => ({
               modelID: model.id,
               tags: model.tags.join(", "),
               licenses: model.licenses.join(", "),
@@ -176,7 +178,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
       )
       .map((model) => ({
         item: model,
-        model: process.serviceDetails.models?.find(
+        model: group.models?.find(
           (existingModel) => existingModel.id === model.modelID
         )!,
       }))
@@ -292,7 +294,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                     key={model.id}
                     index={index}
                     model={model}
-                    existingModel={process.serviceDetails.models?.find(
+                    existingModel={group.models?.find(
                       (existingModel) => existingModel.id === model.modelID
                     )}
                     register={register}

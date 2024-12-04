@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetMaterials, {
   MaterialProps,
@@ -19,6 +19,7 @@ import { useProject } from "@/hooks/Project/useProject";
 import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import useModal from "@/hooks/useModal";
 import useSearch from "@/hooks/useSearch";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface Props {}
 
@@ -41,9 +42,10 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const materialsQuery = useGetMaterials();
   const setMaterial = useSetMaterial();
   const {} = useSearch();
+  const { group } = useContext(ManufacturingGroupContext);
 
   const [selectedMaterials, setSelectedMaterials] = useState<MaterialProps[]>(
-    process.serviceDetails.materials || []
+    group.materials || []
   );
 
   const closeModal = () => {

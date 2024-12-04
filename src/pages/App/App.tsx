@@ -44,6 +44,7 @@ import useUser, { UserType } from "@/hooks/useUser";
 import Footer from "@/components/Footer/Footer";
 import UITest from "../Test/UITest";
 import DescriptiveModelForm from "@/components/Form/DescriptiveModelForm";
+import ManufacturingGroupOutlet from "@/outlets/ManufacturingGroupOutlet";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -142,23 +143,28 @@ const App: React.FC = () => {
                         path="manufacturing/*"
                         element={<ManufacturingProcessOutlet />}
                       >
-                        <Route index element={<Navigate to="model" />} />
-                        <Route path="model">
-                          <Route index element={<ManufacturingModels />} />
+                        <Route
+                          path=":groupID/*"
+                          element={<ManufacturingGroupOutlet />}
+                        >
+                          <Route index element={<Navigate to="model" />} />
+                          <Route path="model">
+                            <Route index element={<ManufacturingModels />} />
+                            <Route
+                              path="descriptive"
+                              element={<DescriptiveModelForm />}
+                            />
+                          </Route>
                           <Route
-                            path="descriptive"
-                            element={<DescriptiveModelForm />}
+                            path="material"
+                            element={<ManufacturingMaterials />}
                           />
+                          <Route
+                            path="postprocessing"
+                            element={<ManufacturingPostProcessings />}
+                          />
+                          <Route path="*" element={<Error />} />
                         </Route>
-                        <Route
-                          path="material"
-                          element={<ManufacturingMaterials />}
-                        />
-                        <Route
-                          path="postprocessing"
-                          element={<ManufacturingPostProcessings />}
-                        />
-                        <Route path="*" element={<Error />} />
                       </Route>
                       <Route path="modeling/*" element={<ServiceModeling />} />
                       <Route path="*" element={<Navigate to="." />} />

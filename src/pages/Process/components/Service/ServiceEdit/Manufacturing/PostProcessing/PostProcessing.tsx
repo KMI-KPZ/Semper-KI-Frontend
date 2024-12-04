@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Button,
@@ -18,6 +18,7 @@ import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import { useNavigate, useParams } from "react-router-dom";
 import useModal from "@/hooks/useModal";
 import ServiceSearch from "../Search/Search";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface Props {}
 
@@ -31,10 +32,11 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
   const loadedPostProcessings = useGetPostProcessigns();
   const setPostProcessing = useSetPostProcessing();
   const navigate = useNavigate();
+  const { group } = useContext(ManufacturingGroupContext);
 
   const [selectedPostProcessing, setSelectedPostProcessing] = useState<
     PostProcessingProps[]
-  >(process.serviceDetails.postProcessings || []);
+  >(group.postProcessings || []);
   const [searchText, setSearchText] = useState<string>("");
 
   const closeModal = () => {

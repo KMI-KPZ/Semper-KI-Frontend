@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import ServiceDetailsCard from "../../components/Card";
 import TestImg from "@images/Test2.png";
@@ -20,6 +20,7 @@ import {
 } from "@/api/Process/Querys/useGetProcess";
 import ProcessStatusGate from "@/pages/Process/components/StatusGate";
 import useGetCheckModel from "@/api/Process/Querys/useGetCheckModel";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface ProcessServiceModelCardProps {
   model: ProcessModel;
@@ -35,9 +36,10 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
   const navigate = useNavigate();
   const deleteModel = useDeleteModel();
   const checkModel = useGetCheckModel(model.isFile ? model.id : undefined);
+  const { groupID } = useContext(ManufacturingGroupContext);
 
   const handleOnButtonClickModel = () => {
-    navigate("service/manufacturing/model");
+    navigate(`service/manufacturing/${groupID}/model/`);
   };
   const handleOnButtonClickDeleteModel = (modelID: string) => {
     deleteModel.mutate({

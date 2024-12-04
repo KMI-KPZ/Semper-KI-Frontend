@@ -63,7 +63,7 @@ export type NoServiceProcessProps = {
 
 export type ManufactoringProcessProps = {
   serviceType: ServiceType.ADDITIVE_MANUFACTURING;
-  serviceDetails: ManufacturingServiceProps;
+  serviceDetails: ManufacturingServiceProps[];
 } & DefaultProcessProps;
 
 export type ModelingProcessProps = {
@@ -233,22 +233,23 @@ const useGetProcess = () => {
           createdWhen: new Date(response.data.createdWhen),
           accessedWhen: new Date(response.data.accessedWhen),
           files: Object.values(response.data.files),
-          serviceDetails: {
-            materials:
-              response.data.serviceDetails.materials !== undefined
-                ? Object.values(response.data.serviceDetails.materials)
-                : undefined,
-            models:
-              response.data.serviceDetails.models !== undefined
-                ? Object.values(response.data.serviceDetails.models)
-                : undefined,
-            postProcessings:
-              response.data.serviceDetails.postProcessings !== undefined
-                ? Object.values(response.data.serviceDetails.postProcessings)
-                : undefined,
-
-            manufacturerID: response.data.serviceDetails.manufacturerID,
-          },
+          serviceDetails: [
+            {
+              materials:
+                response.data.serviceDetails.materials !== undefined
+                  ? Object.values(response.data.serviceDetails.materials)
+                  : undefined,
+              models:
+                response.data.serviceDetails.models !== undefined
+                  ? Object.values(response.data.serviceDetails.models)
+                  : undefined,
+              postProcessings:
+                response.data.serviceDetails.postProcessings !== undefined
+                  ? Object.values(response.data.serviceDetails.postProcessings)
+                  : undefined,
+              manufacturerID: response.data.serviceDetails.manufacturerID,
+            },
+          ],
           processDetails: {
             ...response.data.processDetails,
             clientBillingAddress:

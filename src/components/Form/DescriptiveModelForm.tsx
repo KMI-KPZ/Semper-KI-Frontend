@@ -21,7 +21,7 @@ import useModal from "@/hooks/useModal";
 
 interface DescriptiveModelFormProps {}
 
-interface DescriptiveModelFormData {
+export interface DescriptiveModelFormData {
   name: string;
   quantity: number;
   width: number;

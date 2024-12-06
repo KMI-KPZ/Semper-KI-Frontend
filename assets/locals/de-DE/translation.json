@@ -334,6 +334,7 @@
     "easy": "Einfach",
     "normal": "Normal",
     "complex": "Komplex",
+    "modelID": "Modell ID",
     "button": {
       "select": "Auswählen",
       "deselect": "Abwählen",
@@ -1570,10 +1571,17 @@
                 "properties": "Eigenschaften:"
               },
               "GroupOverview": {
+                "heading": "Gruppenübersicht",
                 "noModel": "kein Modell",
+                "noMaterial": "kein Material",
+                "noPostProcessing": "keine Nachbearbeitung",
                 "nextGroup": "Nächste Gruppe",
                 "previousGroup": "Vorherige Gruppe",
-                "item": "Gruppe {{name}} öffnen"
+                "item": "Gruppe {{name}} öffnen",
+                "model": "Modell(e)",
+                "material": "Material",
+                "postProcessing": "Nachbearbeitung(en)",
+                "newGroup": "neue Gruppe"
               },
               "ModelCard": {
                 "img": "Modelbild",

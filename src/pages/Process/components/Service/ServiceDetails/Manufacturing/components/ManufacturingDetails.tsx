@@ -128,7 +128,7 @@ const ServiceManufacturingDetails: React.FC<
             title={t(
               "Process.components.Service.ServiceDetails.components.Manufacturing.button.noModel"
             )}
-            to="service/manufacturing/model/descriptive"
+            to={`service/manufacturing/${groupID}/model/descriptive`}
           />
         </ProcessStatusGate>
       </Container>

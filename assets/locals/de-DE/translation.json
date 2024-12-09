@@ -1655,6 +1655,9 @@
                   }
                 }
               },
+              "Edit": {
+                "heading": "Modell bearbeiten"
+              },
               "Upload": {
                 "loading": "Model wird hochgeladen",
                 "heading": "Eigene Modelle Hochladen",
@@ -1690,8 +1693,7 @@
                     }
                   }
                 }
-              },
-              "ModelEdit": { "heading": "Modelle bearbeiten" }
+              }
             },
             "NewItem": {
               "heading": "Erstelle einen neuen Prozess..."

@@ -16,19 +16,12 @@ import {
   ProcessModel,
 } from "@/api/Process/Querys/useGetProcess";
 import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
-import { DescriptiveModelFormData } from "@/components/Form/DescriptiveModelForm";
-import UploadDescriptiveModelCard from "./components/DescriptiveModelCard";
 
 interface Props {}
 
 export interface ProcessModelUploadFormProps {
   models: ManufacturingModelUploadData[];
-  descriptiveModels: DescriptiveModelFormEditData[];
 }
-
-export type DescriptiveModelFormEditData = DescriptiveModelFormData & {
-  modelID: string;
-};
 
 export interface ManufacturingModelUploadData {
   modelID?: string;
@@ -83,64 +76,6 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
         }),
       })
     ),
-    descriptiveModels: z.array(
-      z.object({
-        modelID: z.string().optional(),
-        name: z
-          .string({
-            required_error: t("zod.required"),
-            invalid_type_error: t("zod.string"),
-          })
-          .min(1, t("zod.required")),
-        quantity: z
-          .number({
-            required_error: t("zod.required"),
-            invalid_type_error: t("zod.number"),
-          })
-          .min(0, t("zod.numberMin", { min: 0 })),
-        width: z
-          .number({
-            required_error: t("zod.required"),
-            invalid_type_error: t("zod.number"),
-          })
-          .min(0, t("zod.numberMin", { min: 0 })),
-        length: z
-          .number({
-            required_error: t("zod.required"),
-            invalid_type_error: t("zod.number"),
-          })
-          .min(0, t("zod.numberMin", { min: 0 })),
-        height: z
-          .number({
-            required_error: t("zod.required"),
-            invalid_type_error: t("zod.number"),
-          })
-          .min(0, t("zod.numberMin", { min: 0 })),
-        volume: z.union([
-          z
-            .number({
-              required_error: t("zod.required"),
-              invalid_type_error: t("zod.number"),
-            })
-            .min(0, t("zod.numberMin", { min: 0 })),
-          z.nan(),
-        ]),
-        levelOfDetail: z
-          .number({
-            required_error: t("zod.required"),
-            invalid_type_error: t("zod.number"),
-          })
-          .min(0, t("zod.numberMin", { min: 0 })),
-        complexity: z
-          .number({
-            required_error: t("zod.required"),
-            invalid_type_error: t("zod.number"),
-          })
-          .min(1, t("zod.numberMin", { min: 0 }))
-          .max(4, t("zod.numberMax", { max: 4 })),
-        tags: z.string(),
-      })
-    ),
   });
 
   const {
@@ -148,53 +83,17 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     handleSubmit,
     control,
     watch,
-    setValue,
     formState: { errors },
   } = useForm<ProcessModelUploadFormProps>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      models:
-        group.models === undefined
-          ? []
-          : group.models
-              .filter((model) => model.isFile === true)
-              .map((model) => ({
-                modelID: model.id,
-                tags: model.tags.join(", "),
-                licenses: model.licenses.join(", "),
-                certificates: model.certificates.join(", "),
-                quantity: model.quantity,
-                levelOfDetail: model.levelOfDetail,
-              })),
-      descriptiveModels:
-        group.models === undefined
-          ? []
-          : group.models
-              .filter((model) => model.isFile === false)
-              .map(
-                (model): DescriptiveModelFormEditData => ({
-                  modelID: model.id,
-                  tags: model.tags.join(", "),
-                  quantity: model.quantity,
-                  levelOfDetail: model.levelOfDetail,
-                  name: model.fileName,
-                  complexity: model.complexity ?? 0,
-                  height: model.height ?? 0,
-                  length: model.length ?? 0,
-                  volume: model.volume ?? 0,
-                  width: model.width ?? 0,
-                })
-              ),
+      models: [],
     },
   });
 
   const { fields, remove, append, update } = useFieldArray({
     control,
     name: "models",
-  });
-  const { fields: d_fields } = useFieldArray({
-    control,
-    name: "descriptiveModels",
   });
 
   const dataTypes: string[] = [".STL"];
@@ -388,21 +287,6 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                     existingModel={group.models?.find(
                       (existingModel) => existingModel.id === model.modelID
                     )}
-                    register={register}
-                  />
-                );
-              })}
-              {d_fields.map((model, index) => {
-                return (
-                  <UploadDescriptiveModelCard
-                    errors={errors}
-                    deleteModel={deleteModel}
-                    key={model.id}
-                    model={model}
-                    index={index}
-                    setValue={setValue}
-                    watch={watch}
-                    control={control}
                     register={register}
                   />
                 );

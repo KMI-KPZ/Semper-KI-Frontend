@@ -124,7 +124,7 @@ const ServiceManufacturingGroupOverview: React.FC<
                         "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.model"
                       )}
                     </th>
-                    <td>
+                    <td className="whitespace-nowrap">
                       {group.models !== undefined && group.models.length > 0
                         ? group.models.map((model) => model.fileName).join(", ")
                         : t(
@@ -138,7 +138,7 @@ const ServiceManufacturingGroupOverview: React.FC<
                         "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.material"
                       )}
                     </th>
-                    <td>
+                    <td className="whitespace-nowrap">
                       {group.materials !== undefined &&
                       group.materials.length > 0
                         ? group.materials
@@ -155,7 +155,7 @@ const ServiceManufacturingGroupOverview: React.FC<
                         "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.postProcessing"
                       )}
                     </th>
-                    <td>
+                    <td className="whitespace-nowrap">
                       {group.postProcessings !== undefined &&
                       group.postProcessings.length > 0
                         ? group.postProcessings

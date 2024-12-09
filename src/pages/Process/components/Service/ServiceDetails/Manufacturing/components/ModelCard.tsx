@@ -39,7 +39,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
   const { groupID } = useContext(ManufacturingGroupContext);
 
   const handleOnButtonClickModel = () => {
-    navigate(`service/manufacturing/${groupID}/model/`);
+    navigate(`service/manufacturing/${groupID}/model/${model.id}`);
   };
   const handleOnButtonClickDeleteModel = (modelID: string) => {
     deleteModel.mutate({

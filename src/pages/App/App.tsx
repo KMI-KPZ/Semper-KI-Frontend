@@ -45,6 +45,8 @@ import Footer from "@/components/Footer/Footer";
 import UITest from "../Test/UITest";
 import DescriptiveModelForm from "@/components/Form/DescriptiveModelForm";
 import ManufacturingGroupOutlet from "@/outlets/ManufacturingGroupOutlet";
+import ManufacturingModelEdit from "../Process/components/Service/ServiceEdit/Manufacturing/Model/Edit/ManufacturingModelEdit";
+import ManufacturingModelOutlet from "@/outlets/ManufacturingModelOutlet";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -153,6 +155,14 @@ const App: React.FC = () => {
                             <Route
                               path="descriptive"
                               element={<DescriptiveModelForm />}
+                            />
+                            <Route
+                              path=":modelID"
+                              element={
+                                <ManufacturingModelOutlet>
+                                  <ManufacturingModelEdit />
+                                </ManufacturingModelOutlet>
+                              }
                             />
                           </Route>
                           <Route

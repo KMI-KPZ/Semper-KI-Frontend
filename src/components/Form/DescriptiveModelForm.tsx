@@ -18,8 +18,12 @@ import useProcess from "@/hooks/Process/useProcess";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import useModal from "@/hooks/useModal";
+import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 
-interface DescriptiveModelFormProps {}
+interface DescriptiveModelFormProps {
+  model?: ProcessModel;
+}
 
 export interface DescriptiveModelFormData {
   name: string;
@@ -34,7 +38,7 @@ export interface DescriptiveModelFormData {
 }
 
 const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
-  const {} = props;
+  const { model } = props;
   const { t } = useTranslation();
   const {
     project: { projectID },
@@ -46,6 +50,7 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
 
   const navigate = useNavigate();
   const uploadDescriptiveModel = useUploadDescriptiveModel();
+  const updateProcess = useUpdateProcess();
 
   const closeModal = () => {
     deleteModal("");
@@ -117,24 +122,60 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
     formState: { errors },
   } = useForm<DescriptiveModelFormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      quantity: 1,
-      levelOfDetail: 1,
-      complexity: 2,
-    },
+    defaultValues:
+      model !== undefined
+        ? {
+            ...model,
+            tags: model.tags.join(","),
+            quantity: model.quantity ?? 1,
+            levelOfDetail: model.levelOfDetail ?? 1,
+            complexity: model.complexity,
+            name: model.fileName,
+          }
+        : {
+            quantity: 1,
+            levelOfDetail: 1,
+            complexity: 2,
+          },
   });
 
   const onSubmit = (data: DescriptiveModelFormData) => {
-    uploadDescriptiveModel.mutate(
-      {
-        processID,
-        projectID,
-        origin: "Service",
-        ...data,
-        tags: data.tags.split(","),
-      },
-      { onSuccess: closeModal }
-    );
+    if (model === undefined) {
+      uploadDescriptiveModel.mutate(
+        {
+          processID,
+          projectID,
+          origin: "Service",
+          ...data,
+          tags: data.tags.split(","),
+        },
+        { onSuccess: closeModal }
+      );
+    } else {
+      updateProcess.mutate(
+        {
+          processIDs: [processID],
+          updates: {
+            changes: {
+              serviceDetails: {
+                model: [
+                  {
+                    ...model,
+                    ...data,
+                    tags:
+                      data.tags === undefined
+                        ? []
+                        : data.tags.split(",").map((item) => item.trim()),
+                    quantity: data.quantity !== undefined ? data.quantity : 1,
+                  },
+                ],
+              },
+            },
+          },
+        },
+        { onSuccess: closeModal }
+      );
+    }
   };
 
   const entries: {
@@ -193,138 +234,146 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
     }
   }, [watch("width"), watch("length"), watch("height")]);
 
-  return (
+  const form = (
+    <form className="flex w-full flex-col items-center justify-start gap-2">
+      {model === undefined ? (
+        <Heading variant="h1">
+          {t("components.Form.DescriptiveModelForm.heading")}
+        </Heading>
+      ) : null}
+      <table className="w-fit table-auto border-separate border-spacing-3">
+        <tbody>
+          {entries.map((entrie, index) => (
+            <tr key={index}>
+              <th className="text-left">
+                {t(`general.${entrie.key}`)}
+                {entrie.optional ? "" : " *"}
+              </th>
+              <td>
+                <Container width="full" direction="col" className="gap-2">
+                  <Container
+                    width="full"
+                    direction="row"
+                    justify="start"
+                    align="center"
+                  >
+                    <input
+                      type={entrie.type}
+                      placeholder={entrie.placeholder}
+                      className={twMerge(
+                        `w-full rounded-md border-2 p-2 md:min-w-[400px]`,
+                        errors[entrie.key] !== undefined
+                          ? "border-red-500"
+                          : "",
+                        entrie.type === "number" ? "text-center" : ""
+                      )}
+                      {...register(entrie.key, {
+                        valueAsNumber: entrie.type === "number",
+                      })}
+                    />
+                    {entrie.unit && <span>{entrie.unit}</span>}
+                  </Container>
+                  {errors[entrie.key] && (
+                    <span className="text-red-500">
+                      {errors[entrie.key]!.message}
+                    </span>
+                  )}
+                </Container>
+              </td>
+            </tr>
+          ))}
+          <tr>
+            <th className="text-left">
+              {t(`general.complexity`)}
+              {" *"}
+            </th>
+            <td>
+              <Container width="full" className="p-5">
+                <Controller
+                  name="complexity"
+                  control={control}
+                  render={({ field }) => (
+                    <Slider
+                      className="p-5"
+                      dots
+                      min={0}
+                      max={4}
+                      included={false}
+                      marks={{
+                        0: t(`enum.ModelLevelOfDetail.LOW`),
+                        2: t(`enum.ModelLevelOfDetail.MEDIUM`),
+                        4: t(`enum.ModelLevelOfDetail.HIGH`),
+                      }}
+                      defaultValue={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+                {errors.complexity && (
+                  <span className="text-red-500">
+                    {errors.complexity.message}
+                  </span>
+                )}
+              </Container>
+            </td>
+          </tr>
+          <tr>
+            <th className="text-left">
+              {t(`general.levelOfDetail`)}
+              {" *"}
+            </th>
+            <td>
+              <Container width="full" className="p-5">
+                <Controller
+                  name="levelOfDetail"
+                  control={control}
+                  render={({ field }) => (
+                    <Slider
+                      className="p-5"
+                      min={0}
+                      max={2}
+                      included={false}
+                      marks={{
+                        0: t(`enum.ModelLevelOfDetail.LOW`),
+                        1: t(`enum.ModelLevelOfDetail.MEDIUM`),
+                        2: t(`enum.ModelLevelOfDetail.HIGH`),
+                      }}
+                      defaultValue={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+                {errors.levelOfDetail && (
+                  <span className="text-red-500">
+                    {errors.levelOfDetail.message}
+                  </span>
+                )}
+              </Container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <Text>{t("components.Form.DescriptiveModelForm.mandatory")}</Text>
+      <Button
+        title={t("general.button.save")}
+        size="sm"
+        variant="primary"
+        onClick={handleSubmit(onSubmit)}
+      />
+    </form>
+  );
+
+  return model === undefined ? (
     <Modal
       modalKey="ServiceRoutesManufacturingModels"
       open={true}
       closeModal={closeModal}
       className=""
     >
-      <form className="flex w-full flex-col items-center justify-start gap-2">
-        <Heading variant="h1">
-          {t("components.Form.DescriptiveModelForm.heading")}
-        </Heading>
-        <table className="w-fit table-auto border-separate border-spacing-3">
-          <tbody>
-            {entries.map((entrie, index) => (
-              <tr key={index}>
-                <th className="text-left">
-                  {t(`general.${entrie.key}`)}
-                  {entrie.optional ? "" : " *"}
-                </th>
-                <td>
-                  <Container width="full" direction="col" className="gap-2">
-                    <Container
-                      width="full"
-                      direction="row"
-                      justify="start"
-                      align="center"
-                    >
-                      <input
-                        type={entrie.type}
-                        placeholder={entrie.placeholder}
-                        className={twMerge(
-                          `w-full rounded-md border-2 p-2 md:min-w-[400px]`,
-                          errors[entrie.key] !== undefined
-                            ? "border-red-500"
-                            : "",
-                          entrie.type === "number" ? "text-center" : ""
-                        )}
-                        {...register(entrie.key, {
-                          valueAsNumber: entrie.type === "number",
-                        })}
-                      />
-                      {entrie.unit && <span>{entrie.unit}</span>}
-                    </Container>
-                    {errors[entrie.key] && (
-                      <span className="text-red-500">
-                        {errors[entrie.key]!.message}
-                      </span>
-                    )}
-                  </Container>
-                </td>
-              </tr>
-            ))}
-            <tr>
-              <th className="text-left">
-                {t(`general.complexity`)}
-                {" *"}
-              </th>
-              <td>
-                <Container width="full" className="p-5">
-                  <Controller
-                    name="complexity"
-                    control={control}
-                    render={({ field }) => (
-                      <Slider
-                        className="p-5"
-                        dots
-                        min={0}
-                        max={4}
-                        included={false}
-                        marks={{
-                          0: t(`enum.ModelLevelOfDetail.LOW`),
-                          2: t(`enum.ModelLevelOfDetail.MEDIUM`),
-                          4: t(`enum.ModelLevelOfDetail.HIGH`),
-                        }}
-                        defaultValue={field.value}
-                        onChange={field.onChange}
-                      />
-                    )}
-                  />
-                  {errors.complexity && (
-                    <span className="text-red-500">
-                      {errors.complexity.message}
-                    </span>
-                  )}
-                </Container>
-              </td>
-            </tr>
-            <tr>
-              <th className="text-left">
-                {t(`general.levelOfDetail`)}
-                {" *"}
-              </th>
-              <td>
-                <Container width="full" className="p-5">
-                  <Controller
-                    name="levelOfDetail"
-                    control={control}
-                    render={({ field }) => (
-                      <Slider
-                        className="p-5"
-                        min={0}
-                        max={2}
-                        included={false}
-                        marks={{
-                          0: t(`enum.ModelLevelOfDetail.LOW`),
-                          1: t(`enum.ModelLevelOfDetail.MEDIUM`),
-                          2: t(`enum.ModelLevelOfDetail.HIGH`),
-                        }}
-                        defaultValue={field.value}
-                        onChange={field.onChange}
-                      />
-                    )}
-                  />
-                  {errors.levelOfDetail && (
-                    <span className="text-red-500">
-                      {errors.levelOfDetail.message}
-                    </span>
-                  )}
-                </Container>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <Text>{t("components.Form.DescriptiveModelForm.mandatory")}</Text>
-        <Button
-          title={t("general.button.save")}
-          size="sm"
-          variant="primary"
-          onClick={handleSubmit(onSubmit)}
-        />
-      </form>
+      {form}
     </Modal>
+  ) : (
+    form
   );
 };
 

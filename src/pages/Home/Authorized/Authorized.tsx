@@ -1,6 +1,6 @@
 import { AuthorizedUser, UserType } from "@/hooks/useUser";
 import React from "react";
-import HomeProjects from "../components/Projects";
+import HomeProjects from "../Projects/Projects";
 import HomeOrgaResources from "../components/Resources";
 import HomeUserProgress from "../components/UserProgress";
 import HomeOrgaProgress from "../components/OrgaProgress";

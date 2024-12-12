@@ -28,11 +28,13 @@ const ManufacturingModelEdit: React.FC<ManufacturingModelEditProps> = (
             "Process.components.Service.ServiceEdit.Manufacturing.Model.Edit.heading"
           )}
         </Heading>
-        {model.isFile ? (
-          <EditModelCard model={model} />
-        ) : (
-          <DescriptiveModelForm model={model} />
-        )}
+        <Container width="full" className="rounded-md border-2 p-5">
+          {model.isFile ? (
+            <EditModelCard model={model} />
+          ) : (
+            <DescriptiveModelForm model={model} />
+          )}
+        </Container>
       </Container>
     </Modal>
   );

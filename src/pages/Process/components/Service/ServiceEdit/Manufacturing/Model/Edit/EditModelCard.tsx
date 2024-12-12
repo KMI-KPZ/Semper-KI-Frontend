@@ -109,7 +109,7 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
   return (
     <form className="flex w-full flex-col items-center justify-start gap-0  bg-white">
       <img src={model.imgPath} className="h-40 w-full object-contain " />
-      <Container direction="col" width="full" className="p-5">
+      <Container direction="col" width="full" className="">
         <Container width="full" className="relative">
           <Heading variant="h3">{model.fileName}</Heading>
         </Container>

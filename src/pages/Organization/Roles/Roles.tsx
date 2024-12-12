@@ -118,17 +118,14 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
               roles={rolesQuery.data}
               editRole={editRole}
             />
-            <PermissionGate element="OrganizationButtonCreateRole">
-              <Button
-                title={t("general.button.create")}
-                onClick={createNewRole}
-              />
-            </PermissionGate>
           </>
         ) : (
           <Text variant="body">{t("Organization.Roles.empty")}</Text>
         )}
       </LoadingSuspense>
+      <PermissionGate element="OrganizationButtonCreateRole">
+        <Button title={t("general.button.create")} onClick={createNewRole} />
+      </PermissionGate>
       <Modal
         modalKey="OrganizationRolesForm"
         open={edit}

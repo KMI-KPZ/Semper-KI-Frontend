@@ -47,8 +47,11 @@ export const getProcessFiles = (filesObject: Object): ProcessFile[] => {
   return files;
 };
 
-const useGetProject = () => {
-  const { projectID } = useParams();
+const useGetProject = (customProjectID?: string) => {
+  const { projectID: paramProjectID } = useParams();
+
+  const projectID =
+    customProjectID !== undefined ? customProjectID : paramProjectID;
   const { user } = useUser();
   const getProject = async () =>
     authorizedCustomAxios
@@ -81,7 +84,9 @@ const useGetProject = () => {
   return useQuery<Project, Error>({
     queryKey: ["project", projectID],
     queryFn: getProject,
-    enabled: projectID !== undefined && user.usertype !== UserType.ADMIN,
+    enabled:
+      (paramProjectID !== undefined && user.usertype !== UserType.ADMIN) ||
+      customProjectID !== undefined,
   });
 };
 

@@ -219,8 +219,12 @@ export const isProcessAtServiceStatus = (process: Process): boolean => {
   );
 };
 
-const useGetProcess = () => {
-  const { projectID, processID } = useParams();
+const useGetProcess = (customProjectID?: string, customProcessID?: string) => {
+  const { projectID: paramsProjectID, processID: paramsProcessID } =
+    useParams();
+  const projectID = customProjectID ? customProjectID : paramsProjectID;
+  const processID = customProcessID ? customProcessID : paramsProcessID;
+
   const getProcess = async () =>
     authorizedCustomAxios
       .get(

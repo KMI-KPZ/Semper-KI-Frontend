@@ -7,11 +7,14 @@ import { useProject } from "@/hooks/Project/useProject";
 const useCreateProcess = () => {
   const queryClient = useQueryClient();
   const { project } = useProject();
+
   const navigate = useNavigate();
-  const createProcess = async () =>
+  const createProcess = async (customProjectID?: string | void) =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/process/create/${project.projectID}/`
+        `${process.env.VITE_HTTP_API_URL}/public/process/create/${
+          customProjectID ? customProjectID : project.projectID
+        }/`
       )
       .then((response) => {
         logger("useCreateProcess | createProcess ✅ |", response);
@@ -21,12 +24,17 @@ const useCreateProcess = () => {
         logger("useCreateProcess | createProcess ❌ |", error);
       });
 
-  return useMutation<string, Error, void>({
+  return useMutation<string, Error, void | string>({
     mutationFn: createProcess,
-    onSuccess: (data) => {
+    onSuccess(data: string, variables: void | string) {
       queryClient.invalidateQueries(["flatProjects"]);
-      queryClient.invalidateQueries(["project", project.projectID]);
-      navigate(`/projects/${project.projectID}/${data}`);
+      queryClient.invalidateQueries([
+        "project",
+        variables ? variables : project.projectID,
+      ]);
+      navigate(
+        `/projects/${variables ? variables : project.projectID}/${data}`
+      );
     },
   });
 };

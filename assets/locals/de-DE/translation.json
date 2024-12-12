@@ -1096,16 +1096,6 @@
           "orga": "Organisation"
         }
       },
-      "Projects": {
-        "heading": "Projekte",
-        "noProjects": "Keine Projekte vorhanden",
-        "button": {
-          "demo": "Ausprobieren",
-          "new": "Neues Projekt",
-          "continue": "Projekt Fortsetzen",
-          "projects": "Meine Projekte"
-        }
-      },
       "Resources": {
         "heading": "Ressourcen",
         "button": {
@@ -1128,6 +1118,32 @@
         "button": {
           "orga": "Profil"
         }
+      }
+    },
+    "Projects": {
+      "heading": "Projektübersicht",
+      "noProjects": "Keine Projekte vorhanden",
+      "name": "Name",
+      "updated": "Aktualisiert am",
+      "status": "Status",
+      "quantity": "Anzahl",
+      "actions": "Aktionen",
+      "button": {
+        "demo": "Ausprobieren",
+        "new": "Neues Projekt anlegen",
+        "filter": "Filter",
+        "continue": "Projekt Fortsetzen",
+        "projects": "Meine Projekte"
+      },
+      "Project": {
+        "deleteConfirm": "Möchten Sie den Prozess wirklich löschen?",
+        "name": "Prozessname",
+        "type": "Servicetyp",
+        "updated": "Aktualisiert am",
+        "groups": "Gruppen",
+        "quantity": "Anzahl",
+        "models": "Modelle",
+        "button": { "new": "Neuen Prozess anlegen" }
       }
     }
   },

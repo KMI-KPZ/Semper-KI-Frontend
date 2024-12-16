@@ -1,4 +1,4 @@
-import { Button, Container, Heading } from "@component-library/index";
+import { Button, Container, Heading, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -26,6 +26,7 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
   const formSchema = z.object({
     modelID: z.string().optional(),
     tags: z.string().optional(),
+    scalingFactor: z.number().min(1).max(100000).optional(),
     licenses: z.string().min(
       1,
       t("zod.requiredName", {
@@ -61,6 +62,8 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
       tags: model.tags.join(", "),
       licenses: model.licenses.join(", "),
       certificates: model.certificates.join(", "),
+      scalingFactor:
+        model.scalingFactor !== undefined ? model.scalingFactor : 100,
     },
   });
 
@@ -92,6 +95,8 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
                     data.levelOfDetail !== undefined
                       ? data.levelOfDetail
                       : ModelLevelOfDetail.MEDIUM,
+                  scalingFactor:
+                    data.scalingFactor !== undefined ? data.scalingFactor : 100,
                 },
               ],
             },
@@ -225,6 +230,25 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
                     {t(`enum.ModelLevelOfDetail.HIGH`)}
                   </option>
                 </select>
+              </td>
+            </tr>
+            <tr>
+              <th className="text-left">{`${t(
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.scalingFactor`
+              )}`}</th>
+              <td>
+                <Container direction="row">
+                  <input
+                    className={`flex w-full rounded-md border-2 p-2
+                    ${
+                      errors.scalingFactor ? "border-red-500 bg-red-500" : ""
+                    }}`}
+                    {...register(`scalingFactor`, {
+                      valueAsNumber: true,
+                    })}
+                  />
+                  <Text>%</Text>
+                </Container>
               </td>
             </tr>
             <tr>

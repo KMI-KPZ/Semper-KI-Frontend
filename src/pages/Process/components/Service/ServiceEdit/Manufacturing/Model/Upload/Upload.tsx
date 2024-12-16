@@ -31,6 +31,7 @@ export interface ManufacturingModelUploadData {
   certificates?: string;
   quantity?: number;
   levelOfDetail?: ModelLevelOfDetail;
+  scalingFactor?: number;
 }
 
 export const ProcessModelUpload: React.FC<Props> = (props) => {
@@ -52,6 +53,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
         modelID: z.string().optional(),
         file: z.instanceof(File).optional(),
         tags: z.string().optional(),
+        scalingFactor: z.number().min(1).max(100000).optional(),
         licenses: z.string().min(
           1,
           t("zod.requiredName", {
@@ -100,7 +102,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
 
   const addFilesToForm = (files: File[]) => {
     files.forEach((file) => {
-      append({ file, quantity: 1 });
+      append({ file, quantity: 1, scalingFactor: 100 });
     });
   };
 
@@ -192,6 +194,10 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
             data.item.levelOfDetail !== undefined
               ? data.item.levelOfDetail
               : ModelLevelOfDetail.MEDIUM,
+          scalingFactor:
+            data.item.scalingFactor !== undefined
+              ? data.item.scalingFactor
+              : 100,
         })
       );
 
@@ -223,6 +229,8 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                 item.levelOfDetail !== undefined
                   ? item.levelOfDetail
                   : ModelLevelOfDetail.MEDIUM,
+              scalingFactor:
+                item.scalingFactor !== undefined ? item.scalingFactor : 100,
             },
           })),
       },

@@ -122,6 +122,7 @@ export type ProcessModel = {
   width?: number;
   length?: number;
   height?: number;
+  scalingFactor?: number;
   complexity?: ModelComplexity;
 } & GenericProcessFile;
 

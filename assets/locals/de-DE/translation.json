@@ -1135,7 +1135,8 @@
         "continue": "Projekt Fortsetzen",
         "projects": "Meine Projekte"
       },
-      "Project": {
+      "Project": { "button": { "new": "Neuen Prozess anlegen" } },
+      "Process": {
         "deleteConfirm": "Möchten Sie den Prozess wirklich löschen?",
         "name": "Prozessname",
         "type": "Servicetyp",
@@ -1143,7 +1144,8 @@
         "groups": "Gruppen",
         "quantity": "Anzahl",
         "models": "Modelle",
-        "button": { "new": "Neuen Prozess anlegen" }
+        "contractor": "Auftragnehmer",
+        "noContractor": "Kein Auftragnehmer ausgewählt"
       }
     }
   },

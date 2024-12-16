@@ -19,7 +19,7 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
   const deleteProcess = useDeleteProcess();
 
   const handleOnClickButtonDelete = (processID: string) => {
-    if (window.confirm(t("Home.Projects.Project.deleteConfirm"))) {
+    if (window.confirm(t("Home.Projects.Process.deleteConfirm"))) {
       deleteProcess.mutate({ processIDs: [processID] });
     }
   };
@@ -36,11 +36,11 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
       <table className="w-fit table-auto border-separate border-spacing-x-2">
         <tbody>
           <tr>
-            <th className="text-left">{t("Home.Projects.Project.name")}</th>
+            <th className="text-left">{t("Home.Projects.Process.name")}</th>
             <td>{process.data.processDetails.title}</td>
           </tr>
           <tr>
-            <th className="text-left">{t("Home.Projects.Project.type")}</th>
+            <th className="text-left">{t("Home.Projects.Process.type")}</th>
             <td>
               {t(
                 `enum.ServiceType.${
@@ -52,9 +52,25 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
             </td>
           </tr>
           <tr>
-            <th className="text-left">{t("Home.Projects.Project.updated")}</th>
+            <th className="text-left">{t("Home.Projects.Process.updated")}</th>
             <td>{process.data.updatedWhen.toLocaleString()}</td>
           </tr>
+          <tr>
+            <th className="text-left">
+              {t("Home.Projects.Process.contractor")}
+            </th>
+            <td>
+              {process.data.contractor.name === undefined
+                ? t("Home.Projects.Process.noContractor")
+                : process.data.contractor.name}
+            </td>
+          </tr>
+          {process.data.serviceType === ServiceType.ADDITIVE_MANUFACTURING ? (
+            <tr>
+              <th className="text-left">{t("Home.Projects.Process.groups")}</th>
+              <td>{process.data.serviceDetails.length}</td>
+            </tr>
+          ) : null}
         </tbody>
       </table>
       <Container width="fit" direction="col">

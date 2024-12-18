@@ -295,7 +295,8 @@
       "ServiceManufacturingPostProcessing": "Bitte eine Nachbearbeitung auswählen",
       "Process-Contractor": "Bitte einen Auftragnehmer auswählen",
       "Process-Address-Billing": "Bitte eine Rechnungsadresse auswählen",
-      "Process-Address-Deliver": "Bitte eine Lieferadresse auswählen"
+      "Process-Address-Deliver": "Bitte eine Lieferadresse auswählen",
+      "Process-ServiceType": "Bitte einen Service auswählen"
     },
     "EventDataReason": {
       "messages": "Nachricht",

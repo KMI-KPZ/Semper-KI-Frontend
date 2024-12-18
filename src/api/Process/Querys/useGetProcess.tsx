@@ -32,7 +32,8 @@ export type ProcessError =
   | "ServiceManufacturingPostProcessing"
   | "Process-Contractor"
   | "Process-Address-Billing"
-  | "Process-Address-Deliver";
+  | "Process-Address-Deliver"
+  | "Process-ServiceType";
 
 export type Process = NoServiceProcessProps | DefinedProcess;
 

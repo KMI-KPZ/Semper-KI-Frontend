@@ -10,11 +10,8 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
-import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
-import {
-  ModelLevelOfDetail,
-  ProcessModel,
-} from "@/api/Process/Querys/useGetProcess";
+// import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import { ModelLevelOfDetail } from "@/api/Process/Querys/useGetProcess";
 import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface Props {}
@@ -45,7 +42,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const { process } = useManufacturingProcess();
   const { project } = useProject();
   const uploadModels = useUploadModels();
-  const updateProcess = useUpdateProcess();
+  // const updateProcess = useUpdateProcess();
 
   const formSchema = z.object({
     models: z.array(
@@ -164,42 +161,42 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   };
 
   const sendModels = (data: ProcessModelUploadFormProps) => {
-    const updatedModels: ProcessModel[] = data.models
-      .filter(
-        (model) => model.file === undefined && model.modelID !== undefined
-      )
-      .map((model) => ({
-        item: model,
-        model: group.models?.find(
-          (existingModel) => existingModel.id === model.modelID
-        )!,
-      }))
-      .map(
-        (data): ProcessModel => ({
-          ...data.model,
-          certificates:
-            data.item.certificates === undefined
-              ? []
-              : data.item.certificates.split(",").map((item) => item.trim()),
-          licenses:
-            data.item.licenses === undefined
-              ? []
-              : data.item.licenses.split(",").map((item) => item.trim()),
-          tags:
-            data.item.tags === undefined
-              ? []
-              : data.item.tags.split(",").map((item) => item.trim()),
-          quantity: data.item.quantity !== undefined ? data.item.quantity : 1,
-          levelOfDetail:
-            data.item.levelOfDetail !== undefined
-              ? data.item.levelOfDetail
-              : ModelLevelOfDetail.MEDIUM,
-          scalingFactor:
-            data.item.scalingFactor !== undefined
-              ? data.item.scalingFactor
-              : 100,
-        })
-      );
+    // const updatedModels: ProcessModel[] = data.models
+    //   .filter(
+    //     (model) => model.file === undefined && model.modelID !== undefined
+    //   )
+    //   .map((model) => ({
+    //     item: model,
+    //     model: group.models?.find(
+    //       (existingModel) => existingModel.id === model.modelID
+    //     )!,
+    //   }))
+    //   .map(
+    //     (data): ProcessModel => ({
+    //       ...data.model,
+    //       certificates:
+    //         data.item.certificates === undefined
+    //           ? []
+    //           : data.item.certificates.split(",").map((item) => item.trim()),
+    //       licenses:
+    //         data.item.licenses === undefined
+    //           ? []
+    //           : data.item.licenses.split(",").map((item) => item.trim()),
+    //       tags:
+    //         data.item.tags === undefined
+    //           ? []
+    //           : data.item.tags.split(",").map((item) => item.trim()),
+    //       quantity: data.item.quantity !== undefined ? data.item.quantity : 1,
+    //       levelOfDetail:
+    //         data.item.levelOfDetail !== undefined
+    //           ? data.item.levelOfDetail
+    //           : ModelLevelOfDetail.MEDIUM,
+    //       scalingFactor:
+    //         data.item.scalingFactor !== undefined
+    //           ? data.item.scalingFactor
+    //           : 100,
+    //     })
+    //   );
 
     uploadModels.mutate(
       {
@@ -236,16 +233,16 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
       },
       {
         onSuccess() {
-          updateProcess.mutate({
-            processIDs: [process.processID],
-            updates: {
-              changes: {
-                serviceDetails: {
-                  model: updatedModels,
-                },
-              },
-            },
-          });
+          // updateProcess.mutate({
+          //   processIDs: [process.processID],
+          //   updates: {
+          //     changes: {
+          //       serviceDetails: {
+          //         model: updatedModels,
+          //       },
+          //     },
+          //   },
+          // });
           deleteModal("ServiceRoutesManufacturingModels");
         },
       }

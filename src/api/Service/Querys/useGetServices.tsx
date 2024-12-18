@@ -57,6 +57,7 @@ export type ManufacturingServiceProps = {
 };
 
 export type UpdateServiceManufacturingProps = {
+  index: number;
   title?: string;
   model?: ProcessModel[];
   material?: MaterialProps[];

@@ -1,5 +1,5 @@
 import { Button, Container, Heading, Text } from "@component-library/index";
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ModelLevelOfDetail,
@@ -12,6 +12,7 @@ import { ManufacturingModelUploadData } from "../Upload/Upload";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import { useNavigate } from "react-router-dom";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface EditModelCardProps {
   model: ProcessModel;
@@ -22,6 +23,7 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
   const { process } = useManufacturingProcess();
   const updateProcess = useUpdateProcess();
   const navigate = useNavigate();
+  const { groupID } = useContext(ManufacturingGroupContext);
 
   const formSchema = z.object({
     modelID: z.string().optional(),
@@ -74,6 +76,7 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
         updates: {
           changes: {
             serviceDetails: {
+              index: groupID,
               model: [
                 {
                   ...model,
@@ -158,8 +161,9 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
                   className={`flex w-full rounded-md border-2 p-2 ${
                     errors.licenses ? "border-red-500 " : ""
                   }`}
+                  defaultValue=""
                 >
-                  <option value="" disabled selected>
+                  <option value="" disabled>
                     {t(
                       `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.selectLicense`
                     )}

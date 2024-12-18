@@ -1,4 +1,4 @@
-import React, { HTMLInputTypeAttribute, useEffect } from "react";
+import React, { HTMLInputTypeAttribute, useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Button,
@@ -20,6 +20,7 @@ import "rc-slider/assets/index.css";
 import useModal from "@/hooks/useModal";
 import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface DescriptiveModelFormProps {
   model?: ProcessModel;
@@ -51,6 +52,7 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
   const navigate = useNavigate();
   const uploadDescriptiveModel = useUploadDescriptiveModel();
   const updateProcess = useUpdateProcess();
+  const { groupID } = useContext(ManufacturingGroupContext);
 
   const closeModal = () => {
     deleteModal("");
@@ -158,6 +160,7 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
           updates: {
             changes: {
               serviceDetails: {
+                index: groupID,
                 model: [
                   {
                     ...model,

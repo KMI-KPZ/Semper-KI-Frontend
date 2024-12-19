@@ -16,7 +16,7 @@ const DynamicAxes = ({ size }: { size: THREE.Vector3 }) => {
     <>
       {/* X-Axis Measurement */}
       <Text
-        position={[size.x / 2, 0, 0]}
+        position={[size.x, 0, 0]}
         fontSize={fontSize}
         color="red"
         anchorX="center"
@@ -26,7 +26,7 @@ const DynamicAxes = ({ size }: { size: THREE.Vector3 }) => {
       </Text>
       {/* Y-Axis Measurement */}
       <Text
-        position={[0, size.y / 2, 0]}
+        position={[0, size.y, 0]}
         fontSize={fontSize}
         color="green"
         anchorX="center"
@@ -36,7 +36,7 @@ const DynamicAxes = ({ size }: { size: THREE.Vector3 }) => {
       </Text>
       {/* Z-Axis Measurement */}
       <Text
-        position={[0, 0, size.z / 2]}
+        position={[0, 0, size.z]}
         fontSize={fontSize}
         color="blue"
         anchorX="center"
@@ -93,13 +93,13 @@ const ModelPreview = (props: {
       <div
         style={{
           position: "absolute",
-          top: "10px",
-          right: "10px",
-          backgroundColor: "rgba(0, 0, 0, 0.7)",
-          color: "white",
-          padding: "10px",
+          top: "5px",
+          right: "0.5px",
+          backgroundColor: "rgba(0, 0, 0, 0.4)",
+          color: "black",
+          padding: "5px",
           borderRadius: "8px",
-          fontSize: "14px",
+          fontSize: "7px",
         }}
       >
         <div>
@@ -114,7 +114,7 @@ const ModelPreview = (props: {
       </div>
 
       <Canvas
-        camera={{ position: [modelSize.length(), modelSize.length(), modelSize.length()], fov: 75 }}
+        camera={{ position: [modelSize.length(), modelSize.length(), modelSize.length()], fov: 50 }}
         style={{
           width: "100%",
           height: "100%",

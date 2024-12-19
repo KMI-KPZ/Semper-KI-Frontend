@@ -5,6 +5,7 @@ import { MaterialProps } from "../Querys/useGetMaterials";
 
 interface SetMaterialProps {
   materials: MaterialProps[];
+  groupIndex: number;
   processID: string;
   projectID: string;
 }

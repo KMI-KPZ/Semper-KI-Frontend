@@ -23,6 +23,7 @@ const ManufacturingGroupOutlet: React.FC<
       <ManufacturingGroupContextProvider
         group={process.serviceDetails[groupIDNumber]}
         groupID={groupIDNumber}
+        allGroups={process.serviceDetails}
       >
         {children}
         <Outlet />

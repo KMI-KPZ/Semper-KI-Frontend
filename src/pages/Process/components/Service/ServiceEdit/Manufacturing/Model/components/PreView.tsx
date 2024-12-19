@@ -21,7 +21,7 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const { process } = useProcess();
   const updateProcess = useUpdateProcess();
-  const { groupID } = useContext(ManufacturingGroupContext);
+  const { prevGroups, nextGroups } = useContext(ManufacturingGroupContext);
   const getDate = (): string => {
     let date: Date = new Date(model.date);
     return date.toLocaleDateString("uk-Uk");
@@ -31,7 +31,11 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
     updateProcess.mutate({
       processIDs: [process.processID],
       updates: {
-        changes: { serviceDetails: { index: groupID, model: [model] } },
+        changes: {
+          serviceDetails: {
+            groups: [...prevGroups, { model: [model] }, ...nextGroups],
+          },
+        },
       },
     });
     navigate("../material");

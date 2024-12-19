@@ -24,13 +24,17 @@ export const ProcessMaterialPreView: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const { process } = useProcess();
   const updateProcess = useUpdateProcess();
-  const { groupID } = useContext(ManufacturingGroupContext);
+  const { prevGroups, nextGroups } = useContext(ManufacturingGroupContext);
 
   const handleOnClickButtonSelect = () => {
     updateProcess.mutate({
       processIDs: [process.processID],
       updates: {
-        changes: { serviceDetails: { index: groupID, material: [material] } },
+        changes: {
+          serviceDetails: {
+            groups: [...prevGroups, { material }, ...nextGroups],
+          },
+        },
       },
     });
     navigate("../postprocessing");

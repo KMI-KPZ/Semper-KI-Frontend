@@ -52,7 +52,7 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
   const navigate = useNavigate();
   const uploadDescriptiveModel = useUploadDescriptiveModel();
   const updateProcess = useUpdateProcess();
-  const { groupID } = useContext(ManufacturingGroupContext);
+  const { prevGroups, nextGroups } = useContext(ManufacturingGroupContext);
 
   const closeModal = () => {
     deleteModal("");
@@ -160,17 +160,23 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
           updates: {
             changes: {
               serviceDetails: {
-                index: groupID,
-                model: [
+                groups: [
+                  ...prevGroups,
                   {
-                    ...model,
-                    ...data,
-                    tags:
-                      data.tags === undefined
-                        ? []
-                        : data.tags.split(",").map((item) => item.trim()),
-                    quantity: data.quantity !== undefined ? data.quantity : 1,
+                    model: [
+                      {
+                        ...model,
+                        ...data,
+                        tags:
+                          data.tags === undefined
+                            ? []
+                            : data.tags.split(",").map((item) => item.trim()),
+                        quantity:
+                          data.quantity !== undefined ? data.quantity : 1,
+                      },
+                    ],
                   },
+                  ...nextGroups,
                 ],
               },
             },

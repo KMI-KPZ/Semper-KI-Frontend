@@ -23,7 +23,7 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
   const { process } = useManufacturingProcess();
   const updateProcess = useUpdateProcess();
   const navigate = useNavigate();
-  const { groupID } = useContext(ManufacturingGroupContext);
+  const { prevGroups, nextGroups } = useContext(ManufacturingGroupContext);
 
   const formSchema = z.object({
     modelID: z.string().optional(),
@@ -76,31 +76,40 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
         updates: {
           changes: {
             serviceDetails: {
-              index: groupID,
-              model: [
+              groups: [
+                ...prevGroups,
                 {
-                  ...model,
-                  ...data,
-                  certificates:
-                    data.certificates === undefined
-                      ? []
-                      : data.certificates.split(",").map((item) => item.trim()),
-                  licenses:
-                    data.licenses === undefined
-                      ? []
-                      : data.licenses.split(",").map((item) => item.trim()),
-                  tags:
-                    data.tags === undefined
-                      ? []
-                      : data.tags.split(",").map((item) => item.trim()),
-                  quantity: data.quantity !== undefined ? data.quantity : 1,
-                  levelOfDetail:
-                    data.levelOfDetail !== undefined
-                      ? data.levelOfDetail
-                      : ModelLevelOfDetail.MEDIUM,
-                  scalingFactor:
-                    data.scalingFactor !== undefined ? data.scalingFactor : 100,
+                  model: [
+                    {
+                      ...model,
+                      ...data,
+                      certificates:
+                        data.certificates === undefined
+                          ? []
+                          : data.certificates
+                              .split(",")
+                              .map((item) => item.trim()),
+                      licenses:
+                        data.licenses === undefined
+                          ? []
+                          : data.licenses.split(",").map((item) => item.trim()),
+                      tags:
+                        data.tags === undefined
+                          ? []
+                          : data.tags.split(",").map((item) => item.trim()),
+                      quantity: data.quantity !== undefined ? data.quantity : 1,
+                      levelOfDetail:
+                        data.levelOfDetail !== undefined
+                          ? data.levelOfDetail
+                          : ModelLevelOfDetail.MEDIUM,
+                      scalingFactor:
+                        data.scalingFactor !== undefined
+                          ? data.scalingFactor
+                          : 100,
+                    },
+                  ],
                 },
+                ...nextGroups,
               ],
             },
           },

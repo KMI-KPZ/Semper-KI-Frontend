@@ -1146,7 +1146,10 @@
         "quantity": "Anzahl",
         "models": "Modelle",
         "contractor": "Auftragnehmer",
-        "noContractor": "Kein Auftragnehmer ausgewählt"
+        "noContractor": "Kein Auftragnehmer ausgewählt",
+        "material": "Material",
+        "postProcessings": "Nachbearbeitungen",
+        "groupName": "Gruppe {{count}}"
       }
     }
   },

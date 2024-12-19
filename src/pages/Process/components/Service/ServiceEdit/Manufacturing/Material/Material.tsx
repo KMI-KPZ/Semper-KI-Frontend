@@ -42,7 +42,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const materialsQuery = useGetMaterials();
   const setMaterial = useSetMaterial();
   const {} = useSearch();
-  const { group } = useContext(ManufacturingGroupContext);
+  const { group, groupID } = useContext(ManufacturingGroupContext);
 
   const [selectedMaterials, setSelectedMaterials] = useState<MaterialProps[]>(
     group.materials || []
@@ -68,6 +68,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const handleOnClickButtonSave = () => {
     setMaterial.mutate(
       {
+        groupIndex: groupID,
         projectID: project.projectID,
         processID: process.processID,
         materials: selectedMaterials,

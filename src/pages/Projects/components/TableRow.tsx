@@ -1,4 +1,4 @@
-import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
+import { DashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
 import { Badge, Button, Container } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -9,7 +9,7 @@ import useDeleteProject from "@/api/Project/Mutations/useDeleteProject";
 import useEvents from "@/hooks/useEvents/useEvents";
 
 interface ProjectsTableRowProps {
-  flatProject: FlatProject;
+  flatProject: DashboardProject;
 }
 
 const ProjectsTableRow: React.FC<ProjectsTableRowProps> = (props) => {

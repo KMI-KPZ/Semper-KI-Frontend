@@ -1,4 +1,4 @@
-import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
+import { DashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { DefaultUser } from "@/hooks/useUser";
 import { useContext } from "react";
@@ -9,7 +9,7 @@ import { Organization } from "@/api/Organization/Querys/useGetOrganization";
 interface ReturnProps {
   users: AdminDataUser[];
   organizations: Organization[];
-  flatProjects: FlatProject[];
+  dashboardProject: DashboardProject[];
 }
 
 export interface DeleteUserProps {
@@ -39,10 +39,10 @@ export interface AdminFlatProjectProps {
 }
 
 const useAdmin = (): ReturnProps => {
-  const { flatProjects, organizations, users } = useContext(AdminContext);
+  const { dashboardProject, organizations, users } = useContext(AdminContext);
 
   return {
-    flatProjects,
+    dashboardProject,
     organizations,
     users,
   };

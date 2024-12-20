@@ -1,4 +1,4 @@
-import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
+import { DashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
 import { Button, Container, Text } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -7,17 +7,19 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ProjectsTableRow from "./TableRow";
 
 interface ProjectsTableProps {
-  projects: FlatProject[];
+  projects: DashboardProject[];
 }
 
 const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
   const { projects } = props;
   const { t } = useTranslation();
 
-  const [sortColumn, setSortColumn] = useState<keyof FlatProject | undefined>(); // State variable to keep track of the column to sort
+  const [sortColumn, setSortColumn] = useState<
+    keyof DashboardProject | undefined
+  >(); // State variable to keep track of the column to sort
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc"); // State variable to keep track of the sorting order
 
-  const handleSort = (column: keyof FlatProject) => {
+  const handleSort = (column: keyof DashboardProject) => {
     if (sortColumn === column) {
       // If the same column is clicked, toggle the sorting order
       setSortOrder((prevState) => (prevState === "asc" ? "desc" : "asc"));
@@ -28,7 +30,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
     }
   };
 
-  const getSortIcon = (column: keyof FlatProject): React.ReactNode => {
+  const getSortIcon = (column: keyof DashboardProject): React.ReactNode => {
     if (sortColumn === column) {
       return sortOrder === "asc" ? (
         <KeyboardArrowUpIcon />
@@ -39,7 +41,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
     return <div className="h-6 w-6" />;
   };
 
-  const sortProjects = (a: FlatProject, b: FlatProject) => {
+  const sortProjects = (a: DashboardProject, b: DashboardProject) => {
     if (sortColumn) {
       const valueA = a[sortColumn];
       const valueB = b[sortColumn];

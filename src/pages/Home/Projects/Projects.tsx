@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 import { Container, Heading, Search, Text } from "@component-library/index";
 import { Button } from "@component-library/index";
 import HomeContainer from "../components/Container";
-import useGetFlatProjects, {
-  FlatProject,
-} from "@/api/Project/Querys/useGetFlatProjects";
+import useGetDashboardProjects, {
+  DashboardProject,
+} from "@/api/Project/Querys/useGetDashboardProjects";
 import useCreateProject from "@/api/Project/Mutations/useCreateProject";
 import useEvents from "@/hooks/useEvents/useEvents";
 import useSearch from "@/hooks/useSearch";
@@ -23,11 +23,11 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const {} = useEvents();
   const [openProjects, setOpenProjects] = React.useState<string[]>([]);
 
-  const flatProjects = useGetFlatProjects();
+  const dashboardProject = useGetDashboardProjects();
   const createProject = useCreateProject();
   const { filterDataBySearchInput, handleSearchInputChange } =
-    useSearch<FlatProject>();
-  const { getSortIcon, handleSort, sortItems } = useSort<FlatProject>();
+    useSearch<DashboardProject>();
+  const { getSortIcon, handleSort, sortItems } = useSort<DashboardProject>();
 
   const handleOpen = (projectID: string) => {
     if (openProjects.includes(projectID)) {
@@ -87,11 +87,11 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
             </tr>
           </thead>
           <tbody>
-            {flatProjects.data !== undefined &&
-            flatProjects.data
+            {dashboardProject.data !== undefined &&
+            dashboardProject.data
               .filter((orga) => filterDataBySearchInput(orga))
               .sort(sortItems).length > 0 ? (
-              flatProjects.data
+              dashboardProject.data
                 .filter((orga) => filterDataBySearchInput(orga))
                 .sort(sortItems)
                 .map((project, index) => (

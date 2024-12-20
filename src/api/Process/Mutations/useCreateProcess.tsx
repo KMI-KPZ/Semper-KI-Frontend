@@ -27,7 +27,7 @@ const useCreateProcess = () => {
   return useMutation<string, Error, void | string>({
     mutationFn: createProcess,
     onSuccess(data: string, variables: void | string) {
-      queryClient.invalidateQueries(["flatProjects"]);
+      queryClient.invalidateQueries(["dashboardProject"]);
       queryClient.invalidateQueries([
         "project",
         variables ? variables : project.projectID,

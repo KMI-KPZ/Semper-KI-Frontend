@@ -5,7 +5,7 @@ import useUser, { UserType } from "@/hooks/useUser";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { ProjectDetailsProps } from "./useGetProject";
 
-export interface FlatProject {
+export interface DashboardProject {
   projectID: string;
   projectTitle: string;
   client: string;
@@ -16,7 +16,9 @@ export interface FlatProject {
   processesCount: number;
 }
 
-export const isFlatProject = (project: any): project is FlatProject => {
+export const isDashboardProject = (
+  project: any
+): project is DashboardProject => {
   return (
     "projectID" in project &&
     project.projectID !== undefined &&
@@ -40,17 +42,20 @@ export const isFlatProject = (project: any): project is FlatProject => {
   );
 };
 
-const useGetFlatProjects = () => {
+const useGetDashboardProjects = () => {
   const { user } = useUser();
-  const getFlatProjects = async () =>
+  const getDashboardProject = async () =>
     authorizedCustomAxios
-      .get(`${process.env.VITE_HTTP_API_URL}/public/project/getFlat/`, {
-        headers: { Accept: "application/json; version=0.3" },
-      })
+      .get(
+        `${process.env.VITE_HTTP_API_URL}/public/project/dashboard/all/get/`,
+        {
+          headers: { Accept: "application/json; version=0.3" },
+        }
+      )
       .then((response) => {
         const responseData = response.data;
-        const flatProjects: FlatProject[] = responseData.projects.map(
-          (project: any): FlatProject => ({
+        const DashboardProject: DashboardProject[] = responseData.projects.map(
+          (project: any): DashboardProject => ({
             client: project.client,
             projectID: project.projectID,
             projectStatus: project.projectStatus,
@@ -65,15 +70,15 @@ const useGetFlatProjects = () => {
           })
         );
 
-        logger("useGetFlatProjects | getFlatProjects ✅ |", response);
-        return flatProjects;
+        logger("useGetDashboardProject | getDashboardProject ✅ |", response);
+        return DashboardProject;
       });
 
-  return useQuery<FlatProject[], Error>({
-    queryKey: ["flatProjects"],
-    queryFn: getFlatProjects,
+  return useQuery<DashboardProject[], Error>({
+    queryKey: ["dashboardProject"],
+    queryFn: getDashboardProject,
     enabled: user.usertype !== UserType.ADMIN,
   });
 };
 
-export default useGetFlatProjects;
+export default useGetDashboardProjects;

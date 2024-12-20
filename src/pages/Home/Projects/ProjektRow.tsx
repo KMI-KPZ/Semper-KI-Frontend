@@ -4,11 +4,11 @@ import { Button, Container } from "@component-library/index";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
+import { DashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
 import HomeProject from "./Project";
 
 interface HomeProjektRowProps {
-  project: FlatProject;
+  project: DashboardProject;
   open: boolean;
   handleOpen: (projectID: string) => void;
 }

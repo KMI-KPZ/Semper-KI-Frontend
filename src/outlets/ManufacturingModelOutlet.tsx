@@ -15,7 +15,7 @@ const ManufacturingModelOutlet: React.FC<
   const { process } = useManufacturingProcess();
   const { groupID } = useContext(ManufacturingGroupContext);
   const { modelID } = useParams();
-  const model = process.serviceDetails[groupID].models?.find(
+  const model = process.serviceDetails.groups[groupID].models?.find(
     (model) => model.id === modelID
   );
 

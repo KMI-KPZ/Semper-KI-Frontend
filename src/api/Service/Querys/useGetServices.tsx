@@ -51,9 +51,9 @@ export interface UpdateServiceUndefinedProps {
 
 export type ManufacturingServiceProps = {
   name?: string;
-  models?: ProcessModel[];
-  material?: MaterialProps;
-  postProcessings?: PostProcessingProps[];
+  models: ProcessModel[];
+  material: MaterialProps | undefined;
+  postProcessings: PostProcessingProps[];
   manufacturerID?: string;
 };
 

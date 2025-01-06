@@ -140,7 +140,7 @@ const ServiceManufacturingView: React.FC<ServiceManufacturingViewProps> = (
       <ProcessFilter />
       <ServiceManufacturingDetails
         process={process}
-        service={process.serviceDetails[activeGroup]}
+        service={process.serviceDetails.groups[activeGroup]}
       />
     </Container>
   );

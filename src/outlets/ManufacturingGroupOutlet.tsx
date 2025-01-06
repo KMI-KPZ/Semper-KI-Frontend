@@ -17,13 +17,13 @@ const ManufacturingGroupOutlet: React.FC<
 
   if (
     groupID !== undefined &&
-    process.serviceDetails[groupIDNumber] !== undefined
+    process.serviceDetails.groups[groupIDNumber] !== undefined
   )
     return (
       <ManufacturingGroupContextProvider
-        group={process.serviceDetails[groupIDNumber]}
+        group={process.serviceDetails.groups[groupIDNumber]}
         groupID={groupIDNumber}
-        allGroups={process.serviceDetails}
+        allGroups={process.serviceDetails.groups}
       >
         {children}
         <Outlet />

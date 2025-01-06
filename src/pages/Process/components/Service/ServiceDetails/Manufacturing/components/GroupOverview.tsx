@@ -22,7 +22,7 @@ const ServiceManufacturingGroupOverview: React.FC<
   const { process, activeGroup, changeActiveGroup } = props;
   const { t } = useTranslation();
 
-  const groups: ManufacturingServiceProps[] = process.serviceDetails;
+  const groups: ManufacturingServiceProps[] = process.serviceDetails.groups;
   const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
   const updatedProcess = useUpdateProcess();
 

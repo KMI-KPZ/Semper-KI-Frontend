@@ -142,16 +142,14 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
                                 align="start"
                                 className="gap-0"
                               >
-                                {service.materials === undefined ? (
+                                {service.material === undefined ? (
                                   <Text className="w-full text-center">
                                     ---
                                   </Text>
                                 ) : (
-                                  service.materials.map((material, index) => (
-                                    <Text
-                                      key={index}
-                                    >{`•  ${material.title}`}</Text>
-                                  ))
+                                  <Text
+                                    key={index}
+                                  >{`•  ${service.material.title}`}</Text>
                                 )}
                               </Container>
                             </td>

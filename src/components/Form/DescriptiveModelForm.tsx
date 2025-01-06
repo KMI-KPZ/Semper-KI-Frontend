@@ -52,7 +52,9 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
   const navigate = useNavigate();
   const uploadDescriptiveModel = useUploadDescriptiveModel();
   const updateProcess = useUpdateProcess();
-  const { prevGroups, nextGroups } = useContext(ManufacturingGroupContext);
+  const { prevGroups, nextGroups, groupID } = useContext(
+    ManufacturingGroupContext
+  );
 
   const closeModal = () => {
     deleteModal("");
@@ -145,6 +147,7 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
     if (model === undefined) {
       uploadDescriptiveModel.mutate(
         {
+          groupIdx: groupID,
           processID,
           projectID,
           origin: "Service",

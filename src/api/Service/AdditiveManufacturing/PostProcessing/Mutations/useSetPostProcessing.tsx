@@ -7,6 +7,7 @@ interface SetPostProcessingProps {
   processID: string;
   projectID: string;
   postProcessings: PostProcessingProps[];
+  groupIdx: number;
 }
 
 const useSetPostProcessing = () => {

@@ -8,6 +8,7 @@ import { ManufactoringProcessProps } from "@/api/Process/Querys/useGetProcess";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import logger from "@/hooks/useLogger";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 
 interface ServiceManufacturingGroupOverviewProps {
   process: ManufactoringProcessProps;
@@ -23,6 +24,7 @@ const ServiceManufacturingGroupOverview: React.FC<
 
   const groups: ManufacturingServiceProps[] = process.serviceDetails;
   const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const updatedProcess = useUpdateProcess();
 
   useEffect(() => {
     const currentActiveGroup = buttonRefs.current[activeGroup];
@@ -48,7 +50,16 @@ const ServiceManufacturingGroupOverview: React.FC<
   };
 
   const handleOnClickNewGroup = () => {
-    logger("create new group");
+    updatedProcess.mutate({
+      processIDs: [process.processID],
+      updates: {
+        changes: {
+          serviceDetails: {
+            groups: [...groups, {}],
+          },
+        },
+      },
+    });
   };
 
   const handleOnClickDelete = (index: number) => {
@@ -139,11 +150,8 @@ const ServiceManufacturingGroupOverview: React.FC<
                       )}
                     </th>
                     <td className="whitespace-nowrap">
-                      {group.materials !== undefined &&
-                      group.materials.length > 0
-                        ? group.materials
-                            .map((material) => material.title)
-                            .join(", ")
+                      {group.material !== undefined
+                        ? group.material.title
                         : t(
                             "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.noMaterial"
                           )}

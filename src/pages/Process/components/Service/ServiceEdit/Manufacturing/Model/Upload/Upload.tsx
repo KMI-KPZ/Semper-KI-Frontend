@@ -37,7 +37,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
   const { deleteModal } = useModal();
-  const { group } = useContext(ManufacturingGroupContext);
+  const { group, groupID } = useContext(ManufacturingGroupContext);
 
   const { process } = useManufacturingProcess();
   const { project } = useProject();
@@ -202,6 +202,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
       {
         processID: process.processID,
         projectID: project.projectID,
+        groupIdx: groupID,
         origin: "Service",
         models: data.models
           .filter((model) => model.file !== undefined)

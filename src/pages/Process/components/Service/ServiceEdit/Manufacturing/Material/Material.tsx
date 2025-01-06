@@ -44,9 +44,9 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const {} = useSearch();
   const { group, groupID } = useContext(ManufacturingGroupContext);
 
-  const [selectedMaterials, setSelectedMaterials] = useState<MaterialProps[]>(
-    group.materials || []
-  );
+  const [selectedMaterial, setSelectedMaterial] = useState<
+    MaterialProps | undefined
+  >(group.material);
 
   const closeModal = () => {
     navigate(`/projects/${projectID}/${processID}`);
@@ -66,44 +66,44 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
   // };
 
   const handleOnClickButtonSave = () => {
-    setMaterial.mutate(
-      {
-        groupIndex: groupID,
-        projectID: project.projectID,
-        processID: process.processID,
-        materials: selectedMaterials,
-      },
-      {
-        onSuccess() {
-          deleteModal("ServiceRoutesManufacturingMaterials");
+    if (selectedMaterial !== undefined) {
+      setMaterial.mutate(
+        {
+          groupIndex: groupID,
+          projectID: project.projectID,
+          processID: process.processID,
+          material: selectedMaterial,
         },
-      }
-    );
+        {
+          onSuccess() {
+            deleteModal("ServiceRoutesManufacturingMaterials");
+          },
+        }
+      );
+    }
   };
 
   const handleOnButtonClickSelect = (material: MaterialProps) => {
-    setSelectedMaterials((prevState) => [...prevState, material]);
+    setSelectedMaterial(material);
   };
 
-  const handleOnButtonClickDeselect = (materialID: string) => {
-    setSelectedMaterials((prevState) =>
-      prevState.filter((material) => material.id !== materialID)
-    );
+  const handleOnButtonClickDeselect = () => {
+    setSelectedMaterial(undefined);
   };
 
   const isMaterialSelected = (material: MaterialProps): boolean => {
-    return selectedMaterials.find((m) => m.id === material.id) !== undefined;
+    return selectedMaterial?.id === material.id;
   };
 
-  const sortSelectedMaterialsFirst = (a: MaterialProps, b: MaterialProps) => {
-    if (isMaterialSelected(a)) {
-      return -1;
-    }
-    if (isMaterialSelected(b)) {
-      return 1;
-    }
-    return 0;
-  };
+  // const sortSelectedMaterialsFirst = (a: MaterialProps, b: MaterialProps) => {
+  //   if (isMaterialSelected(a)) {
+  //     return -1;
+  //   }
+  //   if (isMaterialSelected(b)) {
+  //     return 1;
+  //   }
+  //   return 0;
+  // };
 
   return (
     <Modal
@@ -139,7 +139,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
                 >
                   {materialsQuery.data
                     .filter((material) => filterDataBySearchInput(material))
-                    .sort(sortSelectedMaterialsFirst)
+                    // .sort(sortSelectedMaterialsFirst)
                     .map((material: MaterialProps, index: number) => (
                       <ProcessMaterialCard
                         material={material}
@@ -151,9 +151,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
                           {isMaterialSelected(material) ? (
                             <Button
                               variant="primary"
-                              onClick={() =>
-                                handleOnButtonClickDeselect(material.id)
-                              }
+                              onClick={() => handleOnButtonClickDeselect()}
                               title={t("general.button.deselect")}
                             />
                           ) : (

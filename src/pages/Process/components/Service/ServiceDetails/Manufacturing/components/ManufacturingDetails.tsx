@@ -30,7 +30,7 @@ const ServiceManufacturingDetails: React.FC<
   ServiceManufacturingDetailsProps
 > = (props) => {
   const { service } = props;
-  const { models = [], materials = [], postProcessings = [] } = service;
+  const { models = [], material, postProcessings = [] } = service;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { groupID } = useContext(ManufacturingGroupContext);
@@ -141,38 +141,36 @@ const ServiceManufacturingDetails: React.FC<
         id="Service-ADDITIVE_MANUFACTURING-materials"
       >
         <Container width="fit" className={`gap-2 rounded-md  p-0 pt-2`}>
-          <ProcessConditionIcon error={materials.length === 0} />
+          <ProcessConditionIcon error={material === undefined} />
           <Heading variant="h4" className="text-xl">
             {t(
               "Process.components.Service.ServiceDetails.components.Manufacturing.heading.material"
             )}
           </Heading>
         </Container>
-        {materials.length === 0 ? (
+        {material === undefined ? (
           <Text className="">
             {t(
               "Process.components.Service.ServiceDetails.components.Manufacturing.noMaterials"
             )}
           </Text>
         ) : (
-          materials.map((material, index) => (
-            <ProcessServiceMaterialCard material={material} key={index} />
-          ))
+          <ProcessServiceMaterialCard material={material} />
         )}
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
             title={t(
               `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
-                materials.length === 0 ? "addMaterial" : "addMore"
+                material === undefined ? "addMaterial" : "addMore"
               }`
             )}
-            size={materials.length === 0 ? "sm" : "xs"}
-            variant={materials.length === 0 ? "primary" : "secondary"}
+            size={material === undefined ? "sm" : "xs"}
+            variant={material === undefined ? "primary" : "secondary"}
             onClick={handleOnButtonClickMaterial}
             startIcon={<AddIcon />}
             children={t(
               `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
-                materials.length === 0 ? "addMaterial" : "addMore"
+                material === undefined ? "addMaterial" : "addMore"
               }`
             )}
           />

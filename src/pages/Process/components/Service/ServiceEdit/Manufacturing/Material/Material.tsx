@@ -69,7 +69,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
     if (selectedMaterial !== undefined) {
       setMaterial.mutate(
         {
-          groupIndex: groupID,
+          groupID: groupID,
           projectID: project.projectID,
           processID: process.processID,
           material: selectedMaterial,

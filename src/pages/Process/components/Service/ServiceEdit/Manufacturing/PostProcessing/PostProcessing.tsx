@@ -46,7 +46,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
   const handleOnClickButtonSave = () => {
     setPostProcessing.mutate(
       {
-        groupIdx: groupID,
+        groupID: groupID,
         projectID: project.projectID,
         processID: process.processID,
         postProcessings: selectedPostProcessing,

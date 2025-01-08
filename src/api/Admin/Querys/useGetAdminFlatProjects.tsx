@@ -2,7 +2,7 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import useUser, { UserType } from "@/hooks/useUser";
-import { DashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
+import { FlatDashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
 
 const useGetAdminDashboardProject = () => {
   const { user } = useUser();
@@ -13,12 +13,14 @@ const useGetAdminDashboardProject = () => {
       )
       .then((response) => {
         const responseData = response.data;
-        const data: DashboardProject[] = responseData.map((project: any) => ({
-          ...project,
-          accessedWhen: new Date(project.accessedWhen),
-          createdWhen: new Date(project.createdWhen),
-          updatedWhen: new Date(project.updatedWhen),
-        }));
+        const data: FlatDashboardProject[] = responseData.map(
+          (project: any) => ({
+            ...project,
+            accessedWhen: new Date(project.accessedWhen),
+            createdWhen: new Date(project.createdWhen),
+            updatedWhen: new Date(project.updatedWhen),
+          })
+        );
 
         logger(
           "useGetAdminDashboardProject | getAdminDashboardProject ✅ |",
@@ -27,7 +29,7 @@ const useGetAdminDashboardProject = () => {
         return data;
       });
 
-  return useQuery<DashboardProject[], Error>({
+  return useQuery<FlatDashboardProject[], Error>({
     queryKey: ["admin", "dashboardProject"],
     queryFn: getAdminDashboardProject,
     enabled: user.usertype === UserType.ADMIN,

@@ -9,7 +9,7 @@ import {
   Heading,
   Text,
 } from "@component-library/index";
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
@@ -19,30 +19,29 @@ import ProcessServiceModelCard from "./ModelCard";
 import ProcessStatusGate from "@/pages/Process/components/StatusGate";
 import ProcessServiceMaterialCard from "./MaterialCard";
 import ProcessSericePostProcessingCard from "./PostProcessingCard";
-import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface ServiceManufacturingDetailsProps {
   process: ManufactoringProcessProps;
   service: ManufacturingServiceProps;
+  activeGroup: number;
 }
 
 const ServiceManufacturingDetails: React.FC<
   ServiceManufacturingDetailsProps
 > = (props) => {
-  const { service } = props;
-  const { models = [], material, postProcessings = [] } = service;
+  const { service, activeGroup } = props;
+  const { models = [], material = undefined, postProcessings = [] } = service;
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { groupID } = useContext(ManufacturingGroupContext);
 
   const handleOnButtonClickMaterial = () => {
-    navigate(`service/manufacturing/${groupID}/material`);
+    navigate(`service/manufacturing/${activeGroup}/material`);
   };
   const handleOnButtonClickPostProcessing = () => {
-    navigate(`service/manufacturing/${groupID}/postprocessing`);
+    navigate(`service/manufacturing/${activeGroup}/postprocessing`);
   };
   const handleOnButtonClickModel = () => {
-    navigate(`service/manufacturing/${groupID}/model`);
+    navigate(`service/manufacturing/${activeGroup}/model`);
   };
 
   return (
@@ -128,7 +127,7 @@ const ServiceManufacturingDetails: React.FC<
             title={t(
               "Process.components.Service.ServiceDetails.components.Manufacturing.button.noModel"
             )}
-            to={`service/manufacturing/${groupID}/model/descriptive`}
+            to={`service/manufacturing/${activeGroup}/model/descriptive`}
           />
         </ProcessStatusGate>
       </Container>

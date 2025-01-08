@@ -23,7 +23,9 @@ export const ProcessMaterialItem: React.FC<Props> = (props) => {
   const handleOnClickButtonDeselect = () => {
     updateProcess.mutate({
       processIDs: [process.processID],
-      updates: { deletions: { serviceDetails: ["material"] } },
+      updates: {
+        deletions: { serviceDetails: { groups: [{}, { material }] } },
+      },
     });
   };
 

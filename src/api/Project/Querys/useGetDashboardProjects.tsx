@@ -5,7 +5,7 @@ import useUser, { UserType } from "@/hooks/useUser";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { ProjectDetailsProps } from "./useGetProject";
 
-export interface DashboardProject {
+export interface FlatDashboardProject {
   projectID: string;
   projectTitle: string;
   client: string;
@@ -18,7 +18,7 @@ export interface DashboardProject {
 
 export const isDashboardProject = (
   project: any
-): project is DashboardProject => {
+): project is FlatDashboardProject => {
   return (
     "projectID" in project &&
     project.projectID !== undefined &&
@@ -54,27 +54,28 @@ const useGetDashboardProjects = () => {
       )
       .then((response) => {
         const responseData = response.data;
-        const DashboardProject: DashboardProject[] = responseData.projects.map(
-          (project: any): DashboardProject => ({
-            client: project.client,
-            projectID: project.projectID,
-            projectStatus: project.projectStatus,
-            projectDetails: project.projectDetails,
-            processesCount: project.processesCount,
-            createdWhen: new Date(project.createdWhen),
-            projectTitle:
-              project.projectDetails.title === undefined
-                ? "Projekt ohne Titel"
-                : project.projectDetails.title,
-            updatedWhen: new Date(project.updatedWhen),
-          })
-        );
+        const DashboardProject: FlatDashboardProject[] =
+          responseData.projects.map(
+            (project: any): FlatDashboardProject => ({
+              client: project.client,
+              projectID: project.projectID,
+              projectStatus: project.projectStatus,
+              projectDetails: project.projectDetails,
+              processesCount: project.processesCount,
+              createdWhen: new Date(project.createdWhen),
+              projectTitle:
+                project.projectDetails.title === undefined
+                  ? "Projekt ohne Titel"
+                  : project.projectDetails.title,
+              updatedWhen: new Date(project.updatedWhen),
+            })
+          );
 
-        logger("useGetDashboardProject | getDashboardProject ✅ |", response);
+        logger("useGetDashboardProjects | getDashboardProjects ✅ |", response);
         return DashboardProject;
       });
 
-  return useQuery<DashboardProject[], Error>({
+  return useQuery<FlatDashboardProject[], Error>({
     queryKey: ["dashboardProject"],
     queryFn: getDashboardProject,
     enabled: user.usertype !== UserType.ADMIN,

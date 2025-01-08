@@ -7,7 +7,6 @@ import { ManufacturingServiceProps } from "@/api/Service/Querys/useGetServices";
 import { ManufactoringProcessProps } from "@/api/Process/Querys/useGetProcess";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import logger from "@/hooks/useLogger";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 
 interface ServiceManufacturingGroupOverviewProps {
@@ -63,7 +62,16 @@ const ServiceManufacturingGroupOverview: React.FC<
   };
 
   const handleOnClickDelete = (index: number) => {
-    logger("delete group", index);
+    updatedProcess.mutate({
+      processIDs: [process.processID],
+      updates: {
+        deletions: {
+          serviceDetails: {
+            groups: [{ manufacturerID: index }, {}],
+          },
+        },
+      },
+    });
   };
 
   return (

@@ -26,9 +26,14 @@ export interface ProcessDetailsProps {
   priorities: OrganizationPriority[];
 }
 
-export type ProcessError =
+export type ProcessError = {
+  key: ProcessErrorType;
+  groupID: number;
+};
+
+export type ProcessErrorType =
   | "Service-ADDITIVE_MANUFACTURING-models"
-  | "Service-ADDITIVE_MANUFACTURING-materials"
+  | "Service-ADDITIVE_MANUFACTURING-material"
   | "ServiceManufacturingPostProcessing"
   | "Process-Contractor"
   | "Process-Address-Billing"
@@ -55,6 +60,19 @@ export type DefaultProcessProps = {
   accessedWhen: Date;
   files: ProcessFile[];
   messages: { [key: string]: ChatMessageProps[] };
+  dependenciesIn: any[];
+  dependenciesOut: any[];
+  project: {
+    projectID: string;
+    projectStatus: number;
+    client: string;
+    projectDetails: {
+      title: string;
+    };
+    createdWhen: Date;
+    updatedWhen: Date;
+    accessedWhen: Date;
+  };
 };
 
 export type NoServiceProcessProps = {
@@ -171,7 +189,15 @@ export interface UpdateProcessDetailsProps {
 
 export interface ProcessDeletionsProps {
   processDetails?: "";
-  serviceDetails?: string[] | "";
+  serviceDetails?: {
+    groups?: {
+      title?: {};
+      model?: string[];
+      material?: {};
+      postProcessings?: string[];
+      manufacturerID?: {};
+    }[];
+  };
 }
 
 export interface UplaodFilesProps {
@@ -221,6 +247,95 @@ export const isProcessAtServiceStatus = (process: Process): boolean => {
   );
 };
 
+export const isTypeOfProcess = (process: any): process is Process => {
+  return (
+    process.processID !== undefined &&
+    typeof process.processID === "string" &&
+    process.project !== undefined &&
+    typeof process.project === "object" &&
+    process.serviceDetails !== undefined &&
+    typeof process.serviceDetails === "object" &&
+    process.processStatus !== undefined &&
+    typeof process.processStatus === "number" &&
+    process.serviceType !== undefined &&
+    typeof process.serviceType === "number" &&
+    process.serviceStatus !== undefined &&
+    typeof process.serviceStatus === "number" &&
+    process.processDetails !== undefined &&
+    typeof process.processDetails === "object" &&
+    process.dependenciesIn !== undefined &&
+    process.dependenciesOut !== undefined &&
+    process.client !== undefined &&
+    typeof process.client === "string" &&
+    process.files !== undefined &&
+    typeof process.files === "object" &&
+    process.messages !== undefined &&
+    typeof process.messages === "object" &&
+    process.contractor !== undefined &&
+    typeof process.contractor === "object" &&
+    process.createdWhen !== undefined &&
+    process.updatedWhen !== undefined &&
+    process.accessedWhen !== undefined &&
+    process.processStatusButtons !== undefined &&
+    typeof process.processStatusButtons === "object" &&
+    process.processErrors !== undefined &&
+    typeof process.processErrors === "object"
+  );
+};
+
+const parseProcess = (process: any): Process => {
+  const parsedProcess: Process = {
+    processID: process.processID,
+    project: process.project,
+    processStatus: process.processStatus,
+    serviceType: process.serviceType,
+    serviceStatus: process.serviceStatus,
+    serviceDetails:
+      process.serviceType === ServiceType.ADDITIVE_MANUFACTURING
+        ? {
+            groups: process.serviceDetails.groups.map((group: any) => ({
+              ...group,
+              material:
+                Object.keys(group.material).length === 0
+                  ? undefined
+                  : group.material,
+            })),
+          }
+        : process.serviceDetails,
+    processDetails: {
+      amount: process.processDetails.amount,
+      provisionalContractor: process.processDetails.provisionalContractor,
+      title: process.processDetails.title,
+      clientBillingAddress:
+        process.processDetails.clientBillingAddress === undefined ||
+        Object.keys(process.processDetails.clientBillingAddress).length === 0
+          ? undefined
+          : process.processDetails.clientBillingAddress,
+      clientDeliverAddress:
+        process.processDetails.clientDeliverAddress === undefined ||
+        Object.keys(process.processDetails.clientDeliverAddress).length === 0
+          ? undefined
+          : process.processDetails.clientDeliverAddress,
+      priorities: parseOrganizationPrioritise(
+        process.processDetails.priorities
+      ),
+    },
+    dependenciesIn: process.dependenciesIn,
+    dependenciesOut: process.dependenciesOut,
+    client: process.client,
+    files: process.files,
+    messages: process.messages,
+    contractor: process.contractor,
+    createdWhen: new Date(process.createdWhen),
+    updatedWhen: new Date(process.updatedWhen),
+    accessedWhen: new Date(process.accessedWhen),
+    processStatusButtons: process.processStatusButtons,
+    processErrors: process.processErrors,
+  };
+
+  return parsedProcess;
+};
+
 const useGetProcess = (customProjectID?: string, customProcessID?: string) => {
   const { projectID: paramsProjectID, processID: paramsProcessID } =
     useParams();
@@ -233,59 +348,43 @@ const useGetProcess = (customProjectID?: string, customProcessID?: string) => {
         `${process.env.VITE_HTTP_API_URL}/public/process/get/${projectID}/${processID}/`
       )
       .then((response) => {
-        const process: Process = {
-          ...response.data,
-          updatedWhen: new Date(response.data.updatedWhen),
-          createdWhen: new Date(response.data.createdWhen),
-          accessedWhen: new Date(response.data.accessedWhen),
-          files: Object.values(response.data.files),
-          serviceDetails: {
-            groups: [
-              {
-                materials:
-                  response.data.serviceDetails.materials !== undefined
-                    ? Object.values(response.data.serviceDetails.materials)
-                    : undefined,
-                models:
-                  response.data.serviceDetails.models !== undefined
-                    ? Object.values(response.data.serviceDetails.models)
-                    : undefined,
-                postProcessings:
-                  response.data.serviceDetails.postProcessings !== undefined
-                    ? Object.values(
-                        response.data.serviceDetails.postProcessings
-                      )
-                    : undefined,
-                manufacturerID: response.data.serviceDetails.manufacturerID,
-              },
-            ],
-          },
-          processDetails: {
-            ...response.data.processDetails,
-            clientBillingAddress:
-              response.data.processDetails.clientBillingAddress === undefined ||
-              Object.keys(response.data.processDetails.clientBillingAddress)
-                .length === 0
-                ? undefined
-                : response.data.processDetails.clientBillingAddress,
-            clientDeliverAddress:
-              response.data.processDetails.clientDeliverAddress === undefined ||
-              Object.keys(response.data.processDetails.clientDeliverAddress)
-                .length === 0
-                ? undefined
-                : response.data.processDetails.clientDeliverAddress,
-            priorities: parseOrganizationPrioritise(
-              response.data.processDetails.priorities
-            ),
-          },
-          messages:
-            Object.keys(response.data.messages).length === 0
-              ? []
-              : response.data.messages,
-        };
-        logger("useGetProcess | getProcess ✅ |", process);
+        // const process: Process = {
+        //   ...response.data,
+        //   updatedWhen: new Date(response.data.updatedWhen),
+        //   createdWhen: new Date(response.data.createdWhen),
+        //   accessedWhen: new Date(response.data.accessedWhen),
+        //   files: Object.values(response.data.files),
+        //   serviceDetails: response.data.serviceDetails,
+        //   processDetails: {
+        //     ...response.data.processDetails,
+        //     clientBillingAddress:
+        //       response.data.processDetails.clientBillingAddress === undefined ||
+        //       Object.keys(response.data.processDetails.clientBillingAddress)
+        //         .length === 0
+        //         ? undefined
+        //         : response.data.processDetails.clientBillingAddress,
+        //     clientDeliverAddress:
+        //       response.data.processDetails.clientDeliverAddress === undefined ||
+        //       Object.keys(response.data.processDetails.clientDeliverAddress)
+        //         .length === 0
+        //         ? undefined
+        //         : response.data.processDetails.clientDeliverAddress,
+        //     priorities: parseOrganizationPrioritise(
+        //       response.data.processDetails.priorities
+        //     ),
+        //   },
+        //   messages:
+        //     Object.keys(response.data.messages).length === 0
+        //       ? []
+        //       : response.data.messages,
+        // };
 
-        return process;
+        logger("useGetProcess | getProcess ✅ |", response.data);
+        if (isTypeOfProcess(response.data)) {
+          return parseProcess(response.data);
+        } else {
+          throw new Error("Process is not of type Process");
+        }
       });
 
   return useQuery<Process, Error>({

@@ -4,7 +4,7 @@ import { Container, Heading, Search, Text } from "@component-library/index";
 import { Button } from "@component-library/index";
 import HomeContainer from "../components/Container";
 import useGetDashboardProjects, {
-  DashboardProject,
+  FlatDashboardProject,
 } from "@/api/Project/Querys/useGetDashboardProjects";
 import useCreateProject from "@/api/Project/Mutations/useCreateProject";
 import useEvents from "@/hooks/useEvents/useEvents";
@@ -12,7 +12,6 @@ import useSearch from "@/hooks/useSearch";
 import TuneIcon from "@mui/icons-material/Tune";
 import TableHeaderButton from "@/components/Table/TableHeaderButton";
 import useSort from "@/hooks/useSort";
-
 import HomeProjektRow from "./ProjektRow";
 
 interface HomeProjectsProps {}
@@ -26,8 +25,9 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const dashboardProject = useGetDashboardProjects();
   const createProject = useCreateProject();
   const { filterDataBySearchInput, handleSearchInputChange } =
-    useSearch<DashboardProject>();
-  const { getSortIcon, handleSort, sortItems } = useSort<DashboardProject>();
+    useSearch<FlatDashboardProject>();
+  const { getSortIcon, handleSort, sortItems } =
+    useSort<FlatDashboardProject>();
 
   const handleOpen = (projectID: string) => {
     if (openProjects.includes(projectID)) {

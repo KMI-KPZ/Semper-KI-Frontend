@@ -141,6 +141,7 @@ const ServiceManufacturingView: React.FC<ServiceManufacturingViewProps> = (
       <ServiceManufacturingDetails
         process={process}
         service={process.serviceDetails.groups[activeGroup]}
+        activeGroup={activeGroup}
       />
     </Container>
   );

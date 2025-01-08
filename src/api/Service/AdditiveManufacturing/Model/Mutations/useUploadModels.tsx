@@ -23,7 +23,7 @@ export interface UploadModel {
 interface ModelsUpload {
   projectID: string;
   processID: string;
-  groupIdx: number;
+  groupID: number;
   origin: ProcessOrigin;
   models: UploadModel[];
 }
@@ -34,7 +34,7 @@ const useUploadModels = () => {
     models: _models,
     processID,
     projectID,
-    groupIdx,
+    groupID,
     origin,
   }: ModelsUpload) => {
     const formData = new FormData();
@@ -47,7 +47,7 @@ const useUploadModels = () => {
     formData.append("details", JSON.stringify(detailList));
     formData.append("projectID", projectID);
     formData.append("processID", processID);
-    formData.append("groupIdx", "" + groupIdx);
+    formData.append("groupID", "" + groupID);
     formData.append("origin", origin);
 
     return authorizedCustomAxios

@@ -16,7 +16,7 @@ interface useUploadDescriptiveModelProps {
   tags: string[];
   origin: ProcessOrigin;
   complexity: number;
-  groupIdx: number;
+  groupID: number;
 }
 
 const useUploadDescriptiveModel = () => {

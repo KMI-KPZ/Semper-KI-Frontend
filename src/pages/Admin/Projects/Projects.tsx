@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import useAdmin from "../../../hooks/useAdmin";
 import { Button } from "@component-library/index";
 import { Container } from "@component-library/index";
-import { DashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
+import { FlatDashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
 import useSearch from "@/hooks/useSearch";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useDeleteProject from "@/api/Project/Mutations/useDeleteProject";
@@ -27,18 +27,20 @@ const AdminProjects: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const deleteProject = useDeleteProject();
   const { filterDataBySearchInput, handleSearchInputChange } =
-    useSearch<DashboardProject>();
+    useSearch<FlatDashboardProject>();
   const {
     getSortIcon,
     handleSort,
     sortItems,
     getNestedSortIcon,
     handleNestedSort,
-  } = useSort<DashboardProject>();
+  } = useSort<FlatDashboardProject>();
   const { handlePageChange, paginatedItems, totalPages } =
-    usePagination<DashboardProject>({
+    usePagination<FlatDashboardProject>({
       items: dashboardProject
-        .filter((project: DashboardProject) => filterDataBySearchInput(project))
+        .filter((project: FlatDashboardProject) =>
+          filterDataBySearchInput(project)
+        )
         .sort(sortItems),
     });
 
@@ -117,7 +119,7 @@ const AdminProjects: React.FC<Props> = (props) => {
           <tbody>
             {paginatedItems.length > 0
               ? paginatedItems.map(
-                  (project: DashboardProject, index: number) => (
+                  (project: FlatDashboardProject, index: number) => (
                     <tr key={index}>
                       <td>{project.projectID}</td>
                       <td>{project.client}</td>

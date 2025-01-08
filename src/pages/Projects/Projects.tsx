@@ -7,7 +7,7 @@ import useUser, { UserType } from "@/hooks/useUser";
 import { Container } from "@component-library/index";
 import useSearch from "@/hooks/useSearch";
 import useGetDashboardProjects, {
-  DashboardProject,
+  FlatDashboardProject,
 } from "@/api/Project/Querys/useGetDashboardProjects";
 import ProjectsTable from "./components/Table";
 import AddIcon from "@mui/icons-material/Add";
@@ -31,13 +31,13 @@ const Projects: React.FC<ProjectsProps> = (props) => {
       : _dashboardProject;
 
   const { filterDataBySearchInput, handleSearchInputChange } =
-    useSearch<DashboardProject>();
+    useSearch<FlatDashboardProject>();
 
   const onButtonClickCreateProject = () => {
     setCreateProjectTitleFormOpen(true);
   };
 
-  const ownProjects: DashboardProject[] =
+  const ownProjects: FlatDashboardProject[] =
     dashboardProject.data === undefined
       ? []
       : user.usertype !== UserType.ANONYM &&
@@ -46,7 +46,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
           (project) => user.organization === project.client
         )
       : dashboardProject.data;
-  const recievedProjects: DashboardProject[] =
+  const recievedProjects: FlatDashboardProject[] =
     dashboardProject.data === undefined
       ? []
       : user.usertype === UserType.ORGANIZATION

@@ -5,7 +5,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { LoadingAnimation } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useGetAdminData from "@/api/Admin/Querys/useGetAdminData";
-import { DashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
+import { FlatDashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
 import { Organization } from "@/api/Organization/Querys/useGetOrganization";
 import { AdminDataUser } from "@/hooks/useAdmin";
 import useGetAdminDashboardProject from "@/api/Admin/Querys/useGetAdminFlatProjects";
@@ -15,7 +15,7 @@ interface Props {}
 export type AdminContext = {
   users: AdminDataUser[];
   organizations: Organization[];
-  dashboardProject: DashboardProject[];
+  dashboardProject: FlatDashboardProject[];
 };
 
 export const AdminContext = createContext<AdminContext>({

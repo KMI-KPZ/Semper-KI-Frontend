@@ -291,7 +291,7 @@
     },
     "ProcessError": {
       "Service-ADDITIVE_MANUFACTURING-models": "Bitte ein Modell auswählen/hochladen",
-      "Service-ADDITIVE_MANUFACTURING-materials": "Bitte ein Material auswählen",
+      "Service-ADDITIVE_MANUFACTURING-material": "Bitte ein Material auswählen",
       "ServiceManufacturingPostProcessing": "Bitte eine Nachbearbeitung auswählen",
       "Process-Contractor": "Bitte einen Auftragnehmer auswählen",
       "Process-Address-Billing": "Bitte eine Rechnungsadresse auswählen",
@@ -336,6 +336,7 @@
     "normal": "Normal",
     "complex": "Komplex",
     "modelID": "Modell ID",
+    "group": "Gruppe",
     "button": {
       "select": "Auswählen",
       "deselect": "Abwählen",

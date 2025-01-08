@@ -1,27 +1,20 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Button,
-  Container,
-  LoadingAnimation,
-  Text,
-} from "@component-library/index";
-import useGetProcess from "@/api/Process/Querys/useGetProcess";
+import { Button, Container, Text } from "@component-library/index";
+import { Process } from "@/api/Process/Querys/useGetProcess";
 import TestIMG from "@images/Test.png";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import useDeleteProcess from "@/api/Process/Mutations/useDeleteProcess";
-import { FlatProcess, Project } from "@/api/Project/Querys/useGetProject";
-// import Marquee from "react-fast-marquee";
+import { DashboardProject } from "@/api/Project/Querys/useGetDashboardProject";
 
 interface HomeProcessProps {
-  project: Project;
-  flatProcess: FlatProcess;
+  project: DashboardProject;
+  process: Process;
 }
 
 const HomeProcess: React.FC<HomeProcessProps> = (props) => {
-  const { project, flatProcess } = props;
+  const { project, process } = props;
   const { t } = useTranslation();
-  const process = useGetProcess(project.projectID, flatProcess.processID);
   const deleteProcess = useDeleteProcess();
 
   const handleOnClickButtonDelete = (processID: string) => {
@@ -30,7 +23,6 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
     }
   };
 
-  if (process.data === undefined) return <LoadingAnimation />;
   return (
     <Container
       width="full"
@@ -49,16 +41,14 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
           <tbody>
             <tr>
               <th className="text-left">{t("Home.Projects.Process.name")}</th>
-              <td>{process.data.processDetails.title}</td>
+              <td>{process.processDetails.title}</td>
             </tr>
             <tr>
               <th className="text-left">{t("Home.Projects.Process.type")}</th>
               <td>
                 {t(
                   `enum.ServiceType.${
-                    ServiceType[
-                      process.data.serviceType
-                    ] as keyof typeof ServiceType
+                    ServiceType[process.serviceType] as keyof typeof ServiceType
                   }`
                 )}
               </td>
@@ -67,154 +57,145 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
               <th className="text-left">
                 {t("Home.Projects.Process.updated")}
               </th>
-              <td>{process.data.updatedWhen.toLocaleString()}</td>
+              <td>{process.updatedWhen.toLocaleString()}</td>
             </tr>
             <tr>
               <th className="text-left">
                 {t("Home.Projects.Process.contractor")}
               </th>
               <td>
-                {process.data.contractor.name === undefined
+                {process.contractor.name === undefined
                   ? t("Home.Projects.Process.noContractor")
-                  : process.data.contractor.name}
+                  : process.contractor.name}
               </td>
             </tr>
-            {process.data.serviceType === ServiceType.ADDITIVE_MANUFACTURING ? (
+            {process.serviceType === ServiceType.ADDITIVE_MANUFACTURING ? (
               <tr>
                 <th className="text-left">
                   {t("Home.Projects.Process.groups")}
                 </th>
-                <td>{process.data.serviceDetails.groups.length}</td>
+                <td>{process.serviceDetails.groups.length}</td>
               </tr>
             ) : null}
-            {process.data.serviceType === ServiceType.ADDITIVE_MANUFACTURING &&
-            process.data.serviceDetails.groups.length > 0 ? (
+            {process.serviceType === ServiceType.ADDITIVE_MANUFACTURING &&
+            process.serviceDetails.groups.length > 0 ? (
               <tr>
                 <td colSpan={2}>
                   <table className="w-full table-auto border-collapse">
                     <tbody>
-                      {process.data.serviceDetails.groups.map(
-                        (service, index) => (
-                          <React.Fragment key={index}>
-                            <tr>
-                              <th className="" colSpan={2}>
-                                {service.name === undefined
-                                  ? t(`Home.Projects.Process.groupName`, {
-                                      count: index + 1,
-                                    })
-                                  : service.name}
-                              </th>
-                            </tr>
-                            <tr>
-                              <th className="text-left align-text-top">
-                                {t("Home.Projects.Process.models")}
-                              </th>
-                              <td>
-                                <Container
-                                  width="full"
-                                  direction="col"
-                                  justify="start"
-                                  align="start"
-                                  className="gap-0"
-                                >
-                                  {service.models === undefined ? (
-                                    <Text className="w-full text-center">
-                                      ---
-                                    </Text>
-                                  ) : (
-                                    service.models.map((model, index) => (
-                                      <Text
-                                        key={index}
-                                      >{`•  ${model.quantity}x ${model.fileName}`}</Text>
-                                    ))
-                                  )}
-                                </Container>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th className="text-left align-text-top">
-                                {t("Home.Projects.Process.material")}
-                              </th>
-                              <td>
-                                <Container
-                                  width="full"
-                                  direction="col"
-                                  justify="start"
-                                  align="start"
-                                  className="gap-0"
-                                >
-                                  {service.material === undefined ? (
-                                    <Text className="w-full text-center">
-                                      ---
-                                    </Text>
-                                  ) : (
+                      {process.serviceDetails.groups.map((service, index) => (
+                        <React.Fragment key={index}>
+                          <tr>
+                            <th className="" colSpan={2}>
+                              {service.name === undefined
+                                ? t(`Home.Projects.Process.groupName`, {
+                                    count: index + 1,
+                                  })
+                                : service.name}
+                            </th>
+                          </tr>
+                          <tr>
+                            <th className="text-left align-text-top">
+                              {t("Home.Projects.Process.models")}
+                            </th>
+                            <td>
+                              <Container
+                                width="full"
+                                direction="col"
+                                justify="start"
+                                align="start"
+                                className="gap-0"
+                              >
+                                {service.models === undefined ? (
+                                  <Text className="w-full text-center">
+                                    ---
+                                  </Text>
+                                ) : (
+                                  service.models.map((model, index) => (
                                     <Text
                                       key={index}
-                                    >{`•  ${service.material.title}`}</Text>
-                                  )}
-                                </Container>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th className="text-left align-text-top">
-                                {t("Home.Projects.Process.postProcessings")}
-                              </th>
-                              <td className="">
-                                <Container
-                                  width="full"
-                                  direction="col"
-                                  justify="start"
-                                  align="start"
-                                  className="gap-0"
-                                >
-                                  {service.postProcessings === undefined ? (
-                                    <Text className="w-full text-center">
-                                      ---
-                                    </Text>
-                                  ) : (
-                                    service.postProcessings.map(
-                                      (postProcessing, index) => (
-                                        <Text
-                                          key={index}
-                                        >{`•  ${postProcessing.title}`}</Text>
-                                      )
+                                    >{`•  ${model.quantity}x ${model.fileName}`}</Text>
+                                  ))
+                                )}
+                              </Container>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th className="text-left align-text-top">
+                              {t("Home.Projects.Process.material")}
+                            </th>
+                            <td>
+                              <Container
+                                width="full"
+                                direction="col"
+                                justify="start"
+                                align="start"
+                                className="gap-0"
+                              >
+                                {service.material === undefined ? (
+                                  <Text className="w-full text-center">
+                                    ---
+                                  </Text>
+                                ) : (
+                                  <Text
+                                    key={index}
+                                  >{`•  ${service.material.title}`}</Text>
+                                )}
+                              </Container>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th className="text-left align-text-top">
+                              {t("Home.Projects.Process.postProcessings")}
+                            </th>
+                            <td className="">
+                              <Container
+                                width="full"
+                                direction="col"
+                                justify="start"
+                                align="start"
+                                className="gap-0"
+                              >
+                                {service.postProcessings === undefined ? (
+                                  <Text className="w-full text-center">
+                                    ---
+                                  </Text>
+                                ) : (
+                                  service.postProcessings.map(
+                                    (postProcessing, index) => (
+                                      <Text
+                                        key={index}
+                                      >{`•  ${postProcessing.title}`}</Text>
                                     )
-                                  )}
-                                </Container>
-                              </td>
-                            </tr>
-                          </React.Fragment>
-                        )
-                      )}
+                                  )
+                                )}
+                              </Container>
+                            </td>
+                          </tr>
+                        </React.Fragment>
+                      ))}
                     </tbody>
                   </table>
                 </td>
               </tr>
             ) : null}
-            {process.data.processErrors.length > 0 ? (
+            {process.processErrors.length > 0 ? (
               <tr>
                 <td className="" colSpan={2}>
                   <Container direction="col" width="full">
-                    {process.data.processErrors.map((error, index) => (
+                    {process.processErrors.map((error, index) => (
                       <Container key={index} width="full" justify="between">
                         {/* <Marquee speed={50} className="w-full"> */}
                         <Button
-                          title={t(`types.ProcessError.${error}`)}
+                          title={
+                            t(`types.ProcessError.${error.key}`) +
+                            ` (${error.groupID + 1})`
+                          }
                           size="sm"
                           width="fit"
                           className="text-orange-500"
                           variant="text"
-                          to={`/projects/${project.projectID}/${process.data.processID}#${error}`}
-                        />
-                        {/* </Marquee> */}
-                        <Button
-                          title={""}
-                          size="sm"
-                          width="fit"
-                          variant="primary"
-                          className="bg-orange-500"
-                          children={`>`}
-                          to={`/projects/${project.projectID}/${process.data.processID}#${error}`}
+                          to={`/projects/${project.projectID}/${process.processID}#${error.key}`}
                         />
                       </Container>
                     ))}
@@ -230,13 +211,13 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
             title={t("general.button.open")}
             size="sm"
             variant="primary"
-            to={`/projects/${project.projectID}/${process.data.processID}`}
+            to={`/projects/${project.projectID}/${process.processID}`}
           />
           <Button
             title={t("general.button.delete")}
             size="sm"
             variant="text"
-            onClick={() => handleOnClickButtonDelete(process.data.processID)}
+            onClick={() => handleOnClickButtonDelete(process.processID)}
           />
         </Container>
       </Container>

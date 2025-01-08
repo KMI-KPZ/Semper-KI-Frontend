@@ -4,11 +4,11 @@ import { Button, Container } from "@component-library/index";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { DashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
 import HomeProject from "./Project";
+import { FlatDashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
 
 interface HomeProjektRowProps {
-  project: DashboardProject;
+  project: FlatDashboardProject;
   open: boolean;
   handleOpen: (projectID: string) => void;
 }
@@ -20,7 +20,7 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
   return (
     <>
       <tr className=" bg-gray-200">
-        <td className="text-center">{project.projectTitle}</td>
+        <td className="text-center">{project.projectDetails.title}</td>
         <td className="text-center">{project.updatedWhen.toLocaleString()}</td>
         <td className="text-center">{project.projectStatus}</td>
         <td className="flex flex-row items-center justify-center">

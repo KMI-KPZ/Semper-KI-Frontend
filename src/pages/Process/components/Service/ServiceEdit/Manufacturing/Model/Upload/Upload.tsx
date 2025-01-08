@@ -202,7 +202,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
       {
         processID: process.processID,
         projectID: project.projectID,
-        groupIdx: groupID,
+        groupID: groupID,
         origin: "Service",
         models: data.models
           .filter((model) => model.file !== undefined)

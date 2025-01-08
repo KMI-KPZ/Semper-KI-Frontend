@@ -147,7 +147,7 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
     if (model === undefined) {
       uploadDescriptiveModel.mutate(
         {
-          groupIdx: groupID,
+          groupID: groupID,
           processID,
           projectID,
           origin: "Service",

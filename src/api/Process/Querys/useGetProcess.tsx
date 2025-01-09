@@ -191,11 +191,11 @@ export interface ProcessDeletionsProps {
   processDetails?: "";
   serviceDetails?: {
     groups?: {
-      title?: {};
+      groupID: number;
+      title?: boolean;
       model?: string[];
       material?: {};
       postProcessings?: string[];
-      manufacturerID?: {};
     }[];
   };
 }

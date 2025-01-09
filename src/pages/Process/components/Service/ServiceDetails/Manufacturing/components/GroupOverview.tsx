@@ -67,7 +67,7 @@ const ServiceManufacturingGroupOverview: React.FC<
       updates: {
         deletions: {
           serviceDetails: {
-            groups: [{ manufacturerID: index }, {}],
+            groups: [{ groupID: index }],
           },
         },
       },

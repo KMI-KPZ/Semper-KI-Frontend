@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/index";
 import { Heading } from "@component-library/index";
@@ -10,6 +10,7 @@ import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface Props {
   material: MaterialProps;
@@ -20,11 +21,12 @@ export const ProcessMaterialItem: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { process } = useProcess();
   const updateProcess = useUpdateProcess();
+  const { groupID } = useContext(ManufacturingGroupContext);
   const handleOnClickButtonDeselect = () => {
     updateProcess.mutate({
       processIDs: [process.processID],
       updates: {
-        deletions: { serviceDetails: { groups: [{}, { material }] } },
+        deletions: { serviceDetails: { groups: [{ groupID, material }] } },
       },
     });
   };

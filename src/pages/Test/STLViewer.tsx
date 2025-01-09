@@ -2,6 +2,8 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Text } from "@react-three/drei";
 import { Suspense, useState } from "react";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import * as THREE from "three";
 import { useLoader } from "@react-three/fiber";
 import { LoadingAnimation } from "@component-library/index";
@@ -9,7 +11,6 @@ import { LoadingAnimation } from "@component-library/index";
 // Helper Component for Dynamic Axes with Measurements
 const DynamicAxes = ({ size }: { size: THREE.Vector3 }) => {
   const padding = size.length() * 0.1; // Small padding for visualization
-
   const fontSize = size.length() * 0.05; // Adjust label font size based on model size
 
   return (
@@ -51,29 +52,65 @@ const DynamicAxes = ({ size }: { size: THREE.Vector3 }) => {
   );
 };
 
+// Utility to process BufferGeometry for STL files
+const processGeometry = (geometry: THREE.BufferGeometry, setModelSize: (size: THREE.Vector3) => void) => {
+  geometry.computeVertexNormals();
+  geometry.computeBoundingBox();
+  geometry.computeBoundingSphere();
+
+  if (geometry.boundingBox) {
+    const center = geometry.boundingBox.getCenter(new THREE.Vector3());
+    geometry.translate(-center.x, -center.y, -center.z);
+    const size = geometry.boundingBox.getSize(new THREE.Vector3());
+    setModelSize(size);
+  }
+};
+
+// Utility to process Object3D for FBX and OBJ files
+const processObject = (object: THREE.Object3D, setModelSize: (size: THREE.Vector3) => void) => {
+  object.traverse((child) => {
+    if (child instanceof THREE.Mesh) {
+      const geometry = child.geometry as THREE.BufferGeometry;
+      processGeometry(geometry, setModelSize);
+    }
+  });
+
+  const boundingBox = new THREE.Box3().setFromObject(object);
+  const size = boundingBox.getSize(new THREE.Vector3());
+  setModelSize(size);
+};
+
 // STL Model Component
 const STLModel = (props: {
   file: string;
+  modelName: string;
   setModelSize: (size: THREE.Vector3) => void;
 }) => {
-  const geometry = useLoader(STLLoader, props.file);
+  const { file, modelName, setModelSize } = props;
+  const extension = modelName.split('.').pop()?.toLowerCase();
 
-  // Center the geometry and align it to the origin
-  geometry.computeBoundingBox();
-  const size = geometry.boundingBox?.getSize(new THREE.Vector3());
-  const min = geometry.boundingBox?.min;
+  let object: THREE.Object3D | THREE.BufferGeometry;
 
-  if (min) {
-    geometry.translate(-min.x, -min.y, -min.z); // Align minimum point to origin
+  if (extension === "stl") {
+    const geometry = useLoader(STLLoader, file);
+    processGeometry(geometry, setModelSize);
+    return (
+      <mesh geometry={geometry} scale={[1, 1, 1]}>
+        <meshStandardMaterial color="red" />
+      </mesh>
+    );
+  } else if (extension === "fbx") {
+    object = useLoader(FBXLoader, file);
+  } else if (extension === "obj") {
+    object = useLoader(OBJLoader, file);
+  } else {
+    throw new Error("Unsupported file format");
   }
 
-  if (size) props.setModelSize(size); // Pass size to parent for axes adjustment
+  // Process FBX and OBJ files
+  processObject(object, setModelSize);
 
-  return (
-    <mesh geometry={geometry} scale={[1, 1, 1]}>
-      <meshStandardMaterial color="red" />
-    </mesh>
-  );
+  return <primitive object={object} scale={[1, 1, 1]} />;
 };
 
 // Main Model Preview Component
@@ -81,8 +118,9 @@ const ModelPreview = (props: {
   file?: string;
   className?: string;
   interactive?: boolean;
+  modelName?: string;
 }) => {
-  const { file, className, interactive = true } = props;
+  const { file, className, interactive = true, modelName } = props;
   const [modelSize, setModelSize] = useState(new THREE.Vector3(1, 1, 1)); // Default size
 
   if (!file) return <LoadingAnimation />;
@@ -96,10 +134,10 @@ const ModelPreview = (props: {
           top: "5px",
           right: "0.5px",
           backgroundColor: "rgba(0, 0, 0, 0.4)",
-          color: "black",
+          color: "white",
           padding: "5px",
           borderRadius: "8px",
-          fontSize: "7px",
+          fontSize: "12px",
         }}
       >
         <div>
@@ -114,7 +152,13 @@ const ModelPreview = (props: {
       </div>
 
       <Canvas
-        camera={{ position: [modelSize.length(), modelSize.length(), modelSize.length()], fov: 50 }}
+        camera={{
+          position: [modelSize.length() * 2, modelSize.length() * 2, modelSize.length() * 2],
+          near: 0.1,
+          far: modelSize.length() * 10,
+          fov: 50,
+        }}
+        gl={{ antialias: true }}
         style={{
           width: "100%",
           height: "100%",
@@ -125,10 +169,10 @@ const ModelPreview = (props: {
         <Suspense fallback={null}>
           {/* Lighting */}
           <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 10]} intensity={1} />
+          <directionalLight position={[10, 10, 10]} intensity={1} shadow-bias={-0.001} />
 
           {/* STL Model */}
-          <STLModel file={file} setModelSize={setModelSize} />
+          <STLModel file={file} setModelSize={setModelSize} modelName={modelName} />
 
           {/* Dynamic Axes with Measurements */}
           <DynamicAxes size={modelSize} />

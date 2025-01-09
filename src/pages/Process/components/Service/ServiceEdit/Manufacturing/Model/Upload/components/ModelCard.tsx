@@ -65,6 +65,7 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
           interactive={true}
           file={url}
           className="h-40 w-fit rounded-b-none border-0"
+          modelName={model.file ? model.file.name : existingModel?.fileName}
         />
       ) : null}
       {existingModel !== undefined ? (

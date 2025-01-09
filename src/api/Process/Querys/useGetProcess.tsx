@@ -28,7 +28,7 @@ export interface ProcessDetailsProps {
 
 export type ProcessError = {
   key: ProcessErrorType;
-  groupID: number;
+  groupID?: number;
 };
 
 export type ProcessErrorType =

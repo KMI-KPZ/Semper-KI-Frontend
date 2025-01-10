@@ -42,16 +42,12 @@ const HomeProject: React.FC<HomeProjectProps> = (props) => {
           direction="col"
           className="border-2 border-t-0 p-0 "
         >
-          {project === undefined || project.data === undefined ? (
-            <LoadingAnimation />
-          ) : (
-            project.data.processes.map((process) => (
-              <React.Fragment key={process.processID}>
-                <HomeProcess project={project.data} process={process} />
-                <Divider />
-              </React.Fragment>
-            ))
-          )}
+          {project.data.processes.map((process) => (
+            <React.Fragment key={process.processID}>
+              <HomeProcess project={project.data} process={process} />
+              <Divider />
+            </React.Fragment>
+          ))}
           <Button
             title={t("Home.Projects.Project.button.new")}
             onClick={handleOnClickButtonNew}

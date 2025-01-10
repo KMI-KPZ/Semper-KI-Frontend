@@ -46,7 +46,7 @@ export type DefinedProcess = ManufactoringProcessProps | ModelingProcessProps;
 
 export type DefaultProcessProps = {
   client: string;
-  contractor: { name: string; hashedID: string };
+  contractor: { name?: string; hashedID?: string };
   processID: string;
   processStatus: ProcessStatus;
   processStatusButtons?: StatusButtonPropsExtern[];
@@ -191,7 +191,8 @@ export interface ProcessDeletionsProps {
   processDetails?: "";
   serviceDetails?: {
     groups?: {
-      groupID: number;
+      groupID?: number;
+      delete?: boolean;
       title?: boolean;
       model?: string[];
       material?: {};
@@ -276,14 +277,14 @@ export const isTypeOfProcess = (process: any): process is Process => {
     process.createdWhen !== undefined &&
     process.updatedWhen !== undefined &&
     process.accessedWhen !== undefined &&
-    process.processStatusButtons !== undefined &&
-    typeof process.processStatusButtons === "object" &&
+    // process.processStatusButtons !== undefined &&
+    // typeof process.processStatusButtons === "object" &&
     process.processErrors !== undefined &&
     typeof process.processErrors === "object"
   );
 };
 
-const parseProcess = (process: any): Process => {
+export const parseProcess = (process: any): Process => {
   const parsedProcess: Process = {
     processID: process.processID,
     project: process.project,

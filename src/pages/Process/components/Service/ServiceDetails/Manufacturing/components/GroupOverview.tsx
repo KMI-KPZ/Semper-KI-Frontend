@@ -27,7 +27,7 @@ const ServiceManufacturingGroupOverview: React.FC<
 
   useEffect(() => {
     const currentActiveGroup = buttonRefs.current[activeGroup];
-    if (currentActiveGroup !== null) {
+    if (currentActiveGroup !== null && buttonRefs.current.length > 0) {
       currentActiveGroup.scrollIntoView({
         behavior: "smooth",
         block: "center",
@@ -62,16 +62,39 @@ const ServiceManufacturingGroupOverview: React.FC<
   };
 
   const handleOnClickDelete = (index: number) => {
-    updatedProcess.mutate({
-      processIDs: [process.processID],
-      updates: {
-        deletions: {
-          serviceDetails: {
-            groups: [{ groupID: index }],
+    updatedProcess.mutate(
+      {
+        processIDs: [process.processID],
+        updates: {
+          deletions: {
+            serviceDetails: {
+              groups: [
+                ...groups.slice(0, index).map(() => ({})),
+                { delete: true },
+                ...groups.slice(index + 1).map(() => ({})),
+              ],
+            },
           },
         },
       },
-    });
+      {
+        onSuccess() {
+          if (groups.length === 1) {
+            changeActiveGroup(0);
+            updatedProcess.mutate({
+              processIDs: [process.processID],
+              updates: {
+                changes: {
+                  serviceDetails: {
+                    groups: [{}],
+                  },
+                },
+              },
+            });
+          }
+        },
+      }
+    );
   };
 
   return (
@@ -137,6 +160,11 @@ const ServiceManufacturingGroupOverview: React.FC<
             >
               <table className="w-fit table-auto border-separate border-spacing-1 border-spacing-x-2">
                 <tbody>
+                  <tr>
+                    <th className="text-center" colSpan={2}>
+                      {`${t("general.group")} ${index + 1}`}
+                    </th>
+                  </tr>
                   <tr>
                     <th className="text-left">
                       {t(

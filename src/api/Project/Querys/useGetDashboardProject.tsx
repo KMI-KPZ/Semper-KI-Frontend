@@ -3,7 +3,12 @@ import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useUser, { UserType } from "@/hooks/useUser";
-import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import {
+  isTypeOfProcess,
+  parseProcess,
+  Process,
+  ProcessStatus,
+} from "@/api/Process/Querys/useGetProcess";
 import { ProjectDetailsProps } from "./useGetProject";
 
 export interface DashboardProject {
@@ -37,30 +42,9 @@ const useGetDashboardProject = (customProjectID?: string) => {
           createdWhen: new Date(response.data.createdWhen),
           updatedWhen: new Date(response.data.updatedWhen),
           accessedWhen: new Date(response.data.accessedWhen),
-          processes: response.data.processes.map(
-            (process: any): Process => ({
-              ...process,
-              updatedWhen: new Date(process.updatedWhen),
-              createdWhen: new Date(process.createdWhen),
-              accessedWhen: new Date(process.accessedWhen),
-              files: Object.values(process.files),
-              serviceDetails: {
-                groups: [
-                  {
-                    material: process.serviceDetails.material,
-                    models: process.serviceDetails.models,
-                    postProcessings: process.serviceDetails.postProcessings,
-                    manufacturerID: process.serviceDetails.manufacturerID,
-                  },
-                ],
-              },
-              processDetails: process.processDetails,
-              messages:
-                Object.keys(process.messages).length === 0
-                  ? []
-                  : process.messages,
-            })
-          ),
+          processes: response.data.processes
+            .filter((process: any) => isTypeOfProcess(process))
+            .map((process: any): Process => parseProcess(process)),
         };
         logger("useGetDashboardProject | getDashboardProject ✅ |", response);
         return project;

@@ -25,7 +25,7 @@ const HomeProject: React.FC<HomeProjectProps> = (props) => {
     createProcess.mutate(projectID);
   };
 
-  if (project.isLoading || project.data === undefined)
+  if (project.isLoading || project.isRefetching || project.data === undefined)
     return (
       <tr className="m-0 p-0">
         <td colSpan={4} className="m-0  p-0">

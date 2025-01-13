@@ -86,12 +86,23 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
             process.serviceDetails.groups.length > 0 ? (
               <tr>
                 <td colSpan={2}>
-                  <Container width="full" direction="col">
-                    <table className="w-full table-auto border-collapse">
-                      <tbody>
-                        {process.serviceDetails.groups.map((service, index) => (
-                          <React.Fragment key={index}>
-                            <tr>
+                  <Container width="full" direction="col" className="gap-2">
+                    {process.serviceDetails.groups.map((service, index) => (
+                      <Container
+                        width="full"
+                        key={index}
+                        className="rounded-md border-2 p-1"
+                      >
+                        <table className="w-full table-auto border-collapse">
+                          {/* <caption>
+                            {service.name === undefined
+                              ? t(`Home.Projects.Process.groupName`, {
+                                  count: index + 1,
+                                })
+                              : service.name}
+                          </caption> */}
+                          <tbody>
+                            {/* <tr>
                               <th className="" colSpan={2}>
                                 {service.name === undefined
                                   ? t(`Home.Projects.Process.groupName`, {
@@ -99,12 +110,12 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
                                     })
                                   : service.name}
                               </th>
-                            </tr>
+                            </tr> */}
                             <tr>
-                              <th className="text-left align-text-top">
+                              <th className="px-2 text-left align-text-top">
                                 {t("Home.Projects.Process.models")}
                               </th>
-                              <td>
+                              <td className="px-2">
                                 <Container
                                   width="full"
                                   direction="col"
@@ -112,49 +123,45 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
                                   align="start"
                                   className="gap-0"
                                 >
-                                  {service.models === undefined ? (
-                                    <Text className="w-full text-center">
-                                      ---
-                                    </Text>
-                                  ) : (
+                                  {service.models.length > 0 &&
+                                  service.models !== undefined ? (
                                     service.models.map((model, index) => (
                                       <Text
                                         key={index}
                                       >{`•  ${model.quantity}x ${model.fileName}`}</Text>
                                     ))
-                                  )}
-                                </Container>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th className="text-left align-text-top">
-                                {t("Home.Projects.Process.material")}
-                              </th>
-                              <td>
-                                <Container
-                                  width="full"
-                                  direction="col"
-                                  justify="start"
-                                  align="start"
-                                  className="gap-0"
-                                >
-                                  {service.material === undefined ? (
+                                  ) : process.processErrors.find(
+                                      (error) =>
+                                        error.groupID !== undefined &&
+                                        error.groupID === index &&
+                                        error.key ===
+                                          "Service-ADDITIVE_MANUFACTURING-models"
+                                    ) !== undefined ? (
+                                    <Button
+                                      title={`
+                                              ${t(
+                                                `types.ProcessError.Service-ADDITIVE_MANUFACTURING-models`
+                                              )}
+                                            `}
+                                      size="sm"
+                                      width="fit"
+                                      className="text-orange-500"
+                                      variant="text"
+                                      to={`/projects/${project.projectID}/${process.processID}#Service-ADDITIVE_MANUFACTURING-models`}
+                                    />
+                                  ) : (
                                     <Text className="w-full text-center">
                                       ---
                                     </Text>
-                                  ) : (
-                                    <Text
-                                      key={index}
-                                    >{`•  ${service.material.title}`}</Text>
                                   )}
                                 </Container>
                               </td>
                             </tr>
                             <tr>
-                              <th className="text-left align-text-top">
-                                {t("Home.Projects.Process.postProcessings")}
+                              <th className="px-2 text-left align-text-top">
+                                {t("Home.Projects.Process.material")}
                               </th>
-                              <td className="">
+                              <td className="px-2">
                                 <Container
                                   width="full"
                                   direction="col"
@@ -162,7 +169,49 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
                                   align="start"
                                   className="gap-0"
                                 >
-                                  {service.postProcessings === undefined ? (
+                                  {service.material !== undefined ? (
+                                    <Text>{`•  ${service.material.title}`}</Text>
+                                  ) : process.processErrors.find(
+                                      (error) =>
+                                        error.groupID !== undefined &&
+                                        error.groupID === index &&
+                                        error.key ===
+                                          "Service-ADDITIVE_MANUFACTURING-material"
+                                    ) !== undefined ? (
+                                    <Button
+                                      title={`
+                                              ${t(
+                                                `types.ProcessError.Service-ADDITIVE_MANUFACTURING-material`
+                                              )}
+                                            `}
+                                      size="sm"
+                                      width="fit"
+                                      className="text-orange-500"
+                                      variant="text"
+                                      to={`/projects/${project.projectID}/${process.processID}#Service-ADDITIVE_MANUFACTURING-material`}
+                                    />
+                                  ) : (
+                                    <Text className="w-full text-center">
+                                      ---
+                                    </Text>
+                                  )}
+                                </Container>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th className="px-2 text-left align-text-top">
+                                {t("Home.Projects.Process.postProcessings")}
+                              </th>
+                              <td className="px-2 ">
+                                <Container
+                                  width="full"
+                                  direction="col"
+                                  justify="start"
+                                  align="start"
+                                  className="gap-0"
+                                >
+                                  {service.postProcessings.length === 0 ||
+                                  service.postProcessings === undefined ? (
                                     <Text className="w-full text-center">
                                       ---
                                     </Text>
@@ -178,79 +227,59 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
                                 </Container>
                               </td>
                             </tr>
-                            <tr>
-                              <td colSpan={2}>
-                                <Container direction="col" width="full">
-                                  {process.processErrors
-                                    .filter(
-                                      (error) =>
-                                        error.groupID !== undefined &&
-                                        error.groupID === index
-                                    )
-                                    .map((error, index) => (
-                                      <Container
-                                        key={index}
-                                        width="full"
-                                        justify="between"
-                                      >
-                                        {/* <Marquee speed={50} className="w-full"> */}
-                                        <Button
-                                          title={`
-                                            ${t(
-                                              `types.ProcessError.${error.key}`
-                                            )}
-                                            ${
-                                              error.groupID !== undefined
-                                                ? error.groupID + 1
-                                                : ""
-                                            }
-                                          `}
-                                          size="sm"
-                                          width="fit"
-                                          className="text-orange-500"
-                                          variant="text"
-                                          to={`/projects/${project.projectID}/${process.processID}#${error.key}`}
-                                        />
-                                      </Container>
-                                    ))}
-                                </Container>
-                              </td>
-                            </tr>
-                          </React.Fragment>
-                        ))}
-                      </tbody>
-                    </table>
+                          </tbody>
+                        </table>
+                      </Container>
+                    ))}
                   </Container>
                 </td>
               </tr>
             ) : null}
-            {/* {process.processErrors.length > 0 ? (
+            {process.processErrors.filter(
+              (error) =>
+                error.groupID === undefined &&
+                error.key !== "Service-ADDITIVE_MANUFACTURING-models" &&
+                error.key !== "Service-ADDITIVE_MANUFACTURING-material"
+            ).length > 0 ? (
               <tr>
-                <td className="" colSpan={2}>
+                <th className="text-left">
+                  {t("Home.Projects.Process.processErrors")}
+                </th>
+                <td className="px-2">
                   <Container direction="col" width="full">
-                    {process.processErrors.map((error, index) => (
-                      <Container key={index} width="full" justify="between">
-                        <Button
-                          title={`
+                    {process.processErrors
+                      .filter(
+                        (error) =>
+                          error.groupID === undefined &&
+                          error.key !==
+                            "Service-ADDITIVE_MANUFACTURING-models" &&
+                          error.key !==
+                            "Service-ADDITIVE_MANUFACTURING-material"
+                      )
+                      .map((error, index) => (
+                        <Container key={index} width="full" justify="between">
+                          {/* <Marquee speed={50} className="w-full"> */}
+                          <Button
+                            title={`
                             ${t(`types.ProcessError.${error.key}`)}
                             ${
                               error.groupID !== undefined
                                 ? error.groupID + 1
                                 : ""
                             }
-                            `}
-                          size="sm"
-                          width="fit"
-                          className="text-orange-500"
-                          variant="text"
-                          to={`/projects/${project.projectID}/${process.processID}#${error.key}`}
-                        />
-                      </Container>
-                    ))}
+                              `}
+                            size="sm"
+                            width="fit"
+                            className="text-orange-500"
+                            variant="text"
+                            to={`/projects/${project.projectID}/${process.processID}#${error.key}`}
+                          />
+                        </Container>
+                      ))}
                   </Container>
                 </td>
               </tr>
-            ) : null} */}
+            ) : null}
           </tbody>
         </table>
 

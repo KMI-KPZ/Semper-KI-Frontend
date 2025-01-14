@@ -28,8 +28,10 @@ const HomeProject: React.FC<HomeProjectProps> = (props) => {
   if (project.isLoading || project.isRefetching || project.data === undefined)
     return (
       <tr className="m-0 p-0">
-        <td colSpan={4} className="m-0  p-0">
-          <LoadingAnimation />
+        <td colSpan={4} className="m-0 p-0">
+          <Container width="full" direction="col" className=" p-2">
+            <LoadingAnimation />
+          </Container>
         </td>
       </tr>
     );

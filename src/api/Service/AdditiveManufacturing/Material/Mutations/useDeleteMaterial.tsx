@@ -3,7 +3,7 @@ import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface DeleteMaterialProps {
-  materialID: string;
+  groupID: number;
   processID: string;
   projectID: string;
 }
@@ -11,13 +11,13 @@ interface DeleteMaterialProps {
 const useDeleteMaterial = () => {
   const queryClient = useQueryClient();
   const deleteMaterial = async ({
-    materialID,
+    groupID,
     processID,
     projectID,
   }: DeleteMaterialProps) =>
     authorizedCustomAxios
       .delete(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/material/delete/${projectID}/${processID}/${materialID}/`
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/material/delete/${projectID}/${processID}/${groupID}/`
       )
       .then((response) => {
         logger("useDeleteMaterial | deleteMaterial ✅ |", response);

@@ -38,7 +38,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   };
 
   return (
-    <HomeContainer>
+    <HomeContainer className="">
       <Container width="full" direction="row" justify="between">
         <Heading variant="h2">{t("Home.Projects.heading")}</Heading>
         <Button

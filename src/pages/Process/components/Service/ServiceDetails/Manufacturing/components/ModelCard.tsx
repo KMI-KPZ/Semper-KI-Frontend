@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import ServiceDetailsCard from "../../components/Card";
 import TestImg from "@images/Test2.png";
@@ -20,23 +20,22 @@ import {
 } from "@/api/Process/Querys/useGetProcess";
 import ProcessStatusGate from "@/pages/Process/components/StatusGate";
 import useGetCheckModel from "@/api/Process/Querys/useGetCheckModel";
-import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface ProcessServiceModelCardProps {
   model: ProcessModel;
+  groupID: number;
 }
 
 const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
   props
 ) => {
-  const { model } = props;
+  const { model, groupID } = props;
   const { t } = useTranslation();
   const { process } = useProcess();
   const { project } = useProject();
   const navigate = useNavigate();
   const deleteModel = useDeleteModel();
   const checkModel = useGetCheckModel(model.id);
-  const { groupID } = useContext(ManufacturingGroupContext);
 
   const handleOnButtonClickModel = () => {
     navigate(`service/manufacturing/${groupID}/model/${model.id}`);
@@ -46,6 +45,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
       processID: process.processID,
       projectID: project.projectID,
       modelID,
+      groupID,
     });
   };
 

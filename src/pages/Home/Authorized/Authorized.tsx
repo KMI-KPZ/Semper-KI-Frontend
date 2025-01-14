@@ -14,7 +14,7 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
 
   return (
     <div
-      className="flex w-full flex-col items-center justify-center gap-5"
+      className="flex w-full flex-col items-center justify-center gap-5 "
       data-testid="home-authorized"
     >
       <HomeUserProgress user={user} />

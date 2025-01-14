@@ -54,7 +54,7 @@ const ServiceManufacturingGroupOverview: React.FC<
       updates: {
         changes: {
           serviceDetails: {
-            groups: [...groups, {}],
+            groups: [...groups.map(() => ({})), {}],
           },
         },
       },

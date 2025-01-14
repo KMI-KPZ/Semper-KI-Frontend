@@ -297,6 +297,7 @@ export const parseProcess = (process: any): Process => {
             groups: process.serviceDetails.groups.map((group: any) => ({
               ...group,
               material:
+                group.material === undefined ||
                 Object.keys(group.material).length === 0
                   ? undefined
                   : group.material,

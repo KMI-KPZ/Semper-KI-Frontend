@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/index";
 import { Heading } from "@component-library/index";
@@ -9,6 +9,7 @@ import {
 } from "@/api/Process/Querys/useGetProcess";
 import useDeleteModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useDeleteModel";
 import { useProject } from "@/hooks/Project/useProject";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface Props {
   model: ProcessModel;
@@ -20,6 +21,7 @@ const ProcessModelItem: React.FC<Props> = (props) => {
   const { process } = useProcess();
   const { project } = useProject();
   const deleteModel = useDeleteModel();
+  const { groupID } = useContext(ManufacturingGroupContext);
 
   const getDate = (): string => {
     let date: Date = new Date(model.date);
@@ -31,6 +33,7 @@ const ProcessModelItem: React.FC<Props> = (props) => {
       processID: process.processID,
       projectID: project.projectID,
       modelID,
+      groupID,
     });
   };
 

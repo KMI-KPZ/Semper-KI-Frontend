@@ -28,10 +28,11 @@ const ProcessConditionItem: React.FC<ProcessConditionItemProps> = (props) => {
     >
       <ProcessConditionIcon error={true} />
       <Text className="w-full text-center">
-        {t(`types.ProcessError.${error.key}`) +
-          ` (${t("general.group")} ${
-            error.groupID !== undefined ? error.groupID + 1 : ""
-          })`}
+        {`${t(`types.ProcessError.${error.key}`)}${
+          error.groupID !== undefined
+            ? " " + t("general.group") + ` ${error.groupID + 1}`
+            : ""
+        }`}
       </Text>
     </Container>
   );

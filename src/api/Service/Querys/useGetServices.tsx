@@ -55,6 +55,7 @@ export type ManufacturingServiceProps = {
   material: MaterialProps | undefined;
   postProcessings: PostProcessingProps[];
   manufacturerID?: string;
+  calculations?: any[];
 };
 
 export type UpdateServiceManufacturingProps = {

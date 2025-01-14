@@ -101,7 +101,11 @@ const ServiceManufacturingDetails: React.FC<
           </Text>
         ) : (
           models.map((model, index) => (
-            <ProcessServiceModelCard model={model} key={index} />
+            <ProcessServiceModelCard
+              model={model}
+              key={index}
+              groupID={activeGroup}
+            />
           ))
         )}
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
@@ -154,7 +158,10 @@ const ServiceManufacturingDetails: React.FC<
             )}
           </Text>
         ) : (
-          <ProcessServiceMaterialCard material={material} />
+          <ProcessServiceMaterialCard
+            material={material}
+            groupID={activeGroup}
+          />
         )}
         <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
@@ -200,6 +207,7 @@ const ServiceManufacturingDetails: React.FC<
         ) : (
           postProcessings.map((postProcessing, index) => (
             <ProcessSericePostProcessingCard
+              groupID={activeGroup}
               postProcessing={postProcessing}
               key={index}
             />

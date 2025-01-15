@@ -119,7 +119,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
       botAlreadyLoaded.current = true;
       if (logger) console.log("Chatbot will be loaded");
       script.src =
-        "http://localhost:38080/kbot-widget/bots/preview/w4_MnnyqE2tAZJPHr_0jTB0ZfJaI77N6_GAgnVr_1FQ=/widget.js";
+        "https://semper-ki.org:39080/kbot-widget/bots/preview/ZzAjLsdWDaYSjNNqFW7BlPNsi6yBVElvtgByNHoAJms=/widget.js";
 
       script.async = true;
 

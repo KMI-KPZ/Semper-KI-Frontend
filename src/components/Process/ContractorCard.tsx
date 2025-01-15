@@ -92,7 +92,7 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
               <th className="whitespace-nowrap">{t("general.min")}</th>
               <th className="whitespace-nowrap">{t("general.max")}</th>
             </tr>
-            {contractor.prices.map((group, groupID) => (
+            {contractor.prices.groupCosts.map((group, groupID) => (
               <tr key={groupID}>
                 <th className="whitespace-nowrap  text-left">{`${t(
                   "general.group"
@@ -112,11 +112,15 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
                 {t("general.total")}
               </th>
               <td className="whitespace-nowrap text-right">
-                {Math.round(usePriceSums(contractor.prices).minSum * 100) / 100}
+                {Math.round(
+                  usePriceSums(contractor.prices.groupCosts).minSum * 100
+                ) / 100}
                 {" €"}
               </td>
               <td className="whitespace-nowrap text-right">
-                {Math.round(usePriceSums(contractor.prices).maxSum * 100) / 100}
+                {Math.round(
+                  usePriceSums(contractor.prices.groupCosts).maxSum * 100
+                ) / 100}
                 {" €"}
               </td>
             </tr>

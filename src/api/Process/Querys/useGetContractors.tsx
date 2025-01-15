@@ -3,13 +3,12 @@ import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { OrganizationBranding } from "@/api/Organization/Querys/useGetOrganization";
-import { objectToArray } from "@/services/utils";
 
 export interface ContractorProps {
   hashedID: string;
   name: string;
   branding: OrganizationBranding;
-  prices: [number, number][];
+  prices: { groupCosts: [number, number][] };
 }
 
 const useGetContractors = () => {
@@ -22,13 +21,7 @@ const useGetContractors = () => {
       .then((response) => {
         const responseData = response.data;
 
-        const contractors: ContractorProps[] = responseData.map(
-          (contractor: any) => ({
-            ...contractor,
-            prices: objectToArray<[number, number]>(contractor.prices),
-          })
-        );
-
+        const contractors: ContractorProps[] = responseData;
         logger("useGetContractors | getContractors ✅ |", response);
         return contractors;
       });

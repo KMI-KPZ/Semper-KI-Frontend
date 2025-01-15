@@ -5,6 +5,7 @@ import { ModelingServiceProps } from "@/pages/Process/components/Service/Service
 import { PostProcessingProps } from "../AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 import { MaterialProps } from "../AdditiveManufacturing/Material/Querys/useGetMaterials";
 import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
+import { CheckModel } from "@/api/Process/Querys/useGetCheckModel";
 
 export interface ServiceItemProps {
   name: string;
@@ -55,7 +56,7 @@ export type ManufacturingServiceProps = {
   material: MaterialProps | undefined;
   postProcessings: PostProcessingProps[];
   manufacturerID?: string;
-  calculations?: any[];
+  calculations?: CheckModel[];
 };
 
 export type UpdateServiceManufacturingProps = {

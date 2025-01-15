@@ -209,7 +209,7 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
               },
               hashedID: organization.hashedID,
               name: organization.name,
-              prices: [[333, 666]],
+              prices: { groupCosts: [[333, 666]] },
             }}
           />
         </Container>

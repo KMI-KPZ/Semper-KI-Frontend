@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Container } from "@component-library/index";
 import { Process } from "@/api/Process/Querys/useGetProcess";
 import { ContractorProps } from "@/api/Process/Querys/useGetContractors";
@@ -17,6 +17,21 @@ interface ContractorCardProps {
 const ContractorCard: React.FC<ContractorCardProps> = (props) => {
   const { contractor, selected, selectContractor, className = "" } = props;
   const { t } = useTranslation();
+
+  const usePriceSums = (
+    prices: [number, number][]
+  ): { minSum: number; maxSum: number } =>
+    useMemo(() => {
+      let minSum = 0;
+      let maxSum = 0;
+
+      prices.forEach((price) => {
+        minSum += price[0];
+        maxSum += price[1];
+      });
+
+      return { minSum, maxSum };
+    }, [prices]);
 
   return (
     <Container
@@ -66,16 +81,42 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
         <table className="w-full table-auto border-separate border-spacing-3">
           <tbody>
             <tr>
-              <th colSpan={2} className="text-center">
+              <th colSpan={3} className="whitespace-nowrap">
                 {contractor.name}
               </th>
             </tr>
             <tr>
-              <th>{t("components.Process.ContractorCard.priceRange")}</th>
-              <td>
-                {Math.round(contractor.price.priceQuantity[0] * 100) / 100}
-                {" - "}
-                {Math.round(contractor.price.priceQuantity[1] * 100) / 100}
+              <th className="whitespace-nowrap  text-left">
+                {t("components.Process.ContractorCard.priceRange")}
+              </th>
+              <th className="whitespace-nowrap">{t("general.min")}</th>
+              <th className="whitespace-nowrap">{t("general.max")}</th>
+            </tr>
+            {contractor.prices.map((group, groupID) => (
+              <tr key={groupID}>
+                <th className="whitespace-nowrap  text-left">{`${t(
+                  "general.group"
+                )} ${groupID + 1}`}</th>
+                <td className="whitespace-nowrap text-right">
+                  {Math.round(group[0] * 100) / 100}
+                  {" €"}
+                </td>
+                <td className="whitespace-nowrap text-right">
+                  {Math.round(group[1] * 100) / 100}
+                  {" €"}
+                </td>
+              </tr>
+            ))}
+            <tr>
+              <th className="whitespace-nowrap text-left">
+                {t("general.total")}
+              </th>
+              <td className="whitespace-nowrap text-right">
+                {Math.round(usePriceSums(contractor.prices).minSum * 100) / 100}
+                {" €"}
+              </td>
+              <td className="whitespace-nowrap text-right">
+                {Math.round(usePriceSums(contractor.prices).maxSum * 100) / 100}
                 {" €"}
               </td>
             </tr>

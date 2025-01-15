@@ -10,7 +10,7 @@ const Logout = () => {
   const logout = useLogout();
 
   useEffect(() => {
-    logout.mutate();
+    if (!logout.isLoading) logout.mutate();
   }, []);
 
   return (

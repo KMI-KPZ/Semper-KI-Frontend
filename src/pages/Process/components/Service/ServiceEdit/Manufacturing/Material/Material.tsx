@@ -20,6 +20,7 @@ import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import useModal from "@/hooks/useModal";
 import useSearch from "@/hooks/useSearch";
 import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
+import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
 
 interface Props {}
 
@@ -41,6 +42,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const materialsQuery = useGetMaterials();
   const setMaterial = useSetMaterial();
+  const deleteMaterial = useDeleteMaterial();
   const {} = useSearch();
   const { group, groupID } = useContext(ManufacturingGroupContext);
 
@@ -73,6 +75,19 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
           projectID: project.projectID,
           processID: process.processID,
           material: selectedMaterial,
+        },
+        {
+          onSuccess() {
+            deleteModal("ServiceRoutesManufacturingMaterials");
+          },
+        }
+      );
+    } else {
+      deleteMaterial.mutate(
+        {
+          groupID: groupID,
+          projectID: project.projectID,
+          processID: process.processID,
         },
         {
           onSuccess() {

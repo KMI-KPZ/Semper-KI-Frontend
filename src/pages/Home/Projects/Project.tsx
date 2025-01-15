@@ -42,7 +42,7 @@ const HomeProject: React.FC<HomeProjectProps> = (props) => {
         <Container
           width="full"
           direction="col"
-          className="border-2 border-t-0 p-0 "
+          className="rounded-md  border-2 border-t-0 border-gray-300 p-0 "
         >
           {project.data.processes.map((process) => (
             <React.Fragment key={process.processID}>

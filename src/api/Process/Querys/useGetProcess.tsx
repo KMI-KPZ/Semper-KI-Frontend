@@ -16,6 +16,7 @@ import {
   parseOrganizationPrioritise,
 } from "@/api/Organization/Querys/useGetOrganization";
 import { UpdatePriorities } from "@/api/Organization/Mutations/useUpdateOrganization";
+import { objectToArray } from "@/services/utils";
 
 export interface ProcessDetailsProps {
   provisionalContractor?: string;
@@ -325,7 +326,7 @@ export const parseProcess = (process: any): Process => {
     dependenciesIn: process.dependenciesIn,
     dependenciesOut: process.dependenciesOut,
     client: process.client,
-    files: process.files,
+    files: objectToArray(process.files),
     messages: process.messages,
     contractor: process.contractor,
     createdWhen: new Date(process.createdWhen),

@@ -234,16 +234,6 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
       },
       {
         onSuccess() {
-          // updateProcess.mutate({
-          //   processIDs: [process.processID],
-          //   updates: {
-          //     changes: {
-          //       serviceDetails: {
-          //         model: updatedModels,
-          //       },
-          //     },
-          //   },
-          // });
           deleteModal("ServiceRoutesManufacturingModels");
         },
       }

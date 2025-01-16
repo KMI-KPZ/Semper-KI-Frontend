@@ -108,7 +108,7 @@ const ServiceManufacturingDetails: React.FC<
             />
           ))
         )}
-        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+        <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
             title={t(
               `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
@@ -163,7 +163,7 @@ const ServiceManufacturingDetails: React.FC<
             groupID={activeGroup}
           />
         )}
-        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+        <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
             title={t(
               `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
@@ -213,7 +213,7 @@ const ServiceManufacturingDetails: React.FC<
             />
           ))
         )}
-        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+        <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
             title={t(
               `Process.components.Service.ServiceDetails.components.Manufacturing.button.${

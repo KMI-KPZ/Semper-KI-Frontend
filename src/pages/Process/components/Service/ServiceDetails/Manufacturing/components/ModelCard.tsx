@@ -168,7 +168,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
         gap={3}
         className="flex-row p-5 md:flex-col"
       >
-        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+        <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
             title={t(
               "Process.components.Service.ServiceDetails.components.Manufacturing.button.editModel"

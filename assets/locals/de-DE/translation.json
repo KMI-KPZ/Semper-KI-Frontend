@@ -38,7 +38,7 @@
       "use": "In Anspruch nehmen @needed?",
       "provide": "Service anbieten",
       "portfolio": "Portfolio",
-      "use-service": "Service in Anspruch nehmen",
+      "use-service": "Service in Anspruch nehmen @needed?",
       "provide-service": "Service bereitstellen",
       "continue": "Auftrag fortsetzen",
       "new-contract": "Neuer Auftrag",

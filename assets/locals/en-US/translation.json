@@ -38,7 +38,7 @@
       "use": "Claim",
       "provide": "Offer service",
       "portfolio": "Portfolio",
-      "use-service": "Take advantage of the service",
+      "use-service": "Use service",
       "provide-service": "Provide service",
       "continue": "Continue order",
       "new-contract": "New order",

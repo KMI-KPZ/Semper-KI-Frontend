@@ -11,7 +11,9 @@
     "required": "is required",
     "string": "Please enter character string",
     "number": "Please enter number",
-    "email": "Please provide a valid email"
+    "email": "Please provide a valid email",
+    "numberMax": "Maximum of {{max}}",
+    "numberMin": "Minimum of {{min}}"
   },
   "data": {
     "NavigationItem": {

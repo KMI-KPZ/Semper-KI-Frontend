@@ -141,7 +141,7 @@ const ServiceManufacturingDetails: React.FC<
         width="full"
         direction="col"
         className="p-5"
-        id="Service-ADDITIVE_MANUFACTURING-materials"
+        id="Service-ADDITIVE_MANUFACTURING-material"
       >
         <Container width="fit" className={`gap-2 rounded-md  p-0 pt-2`}>
           <ProcessConditionIcon error={material === undefined} />

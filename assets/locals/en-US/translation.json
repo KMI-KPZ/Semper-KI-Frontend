@@ -251,7 +251,7 @@
     },
     "ProcessError": {
       "Service-ADDITIVE_MANUFACTURING-models": "Please select/upload a model",
-      "Service-ADDITIVE_MANUFACTURING-materials": "Please select a material",
+      "Service-ADDITIVE_MANUFACTURING-material": "Please select a material",
       "ServiceManufacturingPostProcessing": "Please select a post-processing option",
       "Process-Contractor": "Please select a contractor",
       "Process-Address-Billing": "Please select a billing address",

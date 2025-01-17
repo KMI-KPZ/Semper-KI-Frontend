@@ -15,9 +15,7 @@ import Menu from "@/components/Menu/Menu";
 import Advantages from "../Advantages/Advantages";
 import Chatbot from "@/components/Chatbot/Chatbot";
 import Profile from "../Profile/Proflle";
-import Projects from "../Projects/Projects";
 import ProjectOutlet from "@/outlets/ProjectOutlet";
-import ProjectPage from "../Project/ProjectPage";
 import ProcessOutlet from "@/outlets/ProcessOutlet";
 import ProcessPage from "../Process/ProcessPage";
 import Admin from "../Admin/Admin";
@@ -47,6 +45,8 @@ import DescriptiveModelForm from "@/components/Form/DescriptiveModelForm";
 import ManufacturingGroupOutlet from "@/outlets/ManufacturingGroupOutlet";
 import ManufacturingModelEdit from "../Process/components/Service/ServiceEdit/Manufacturing/Model/Edit/ManufacturingModelEdit";
 import ManufacturingModelOutlet from "@/outlets/ManufacturingModelOutlet";
+// import Projects from "../Projects/Projects";
+// import ProjectPage from "../Project/ProjectPage";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -128,9 +128,11 @@ const App: React.FC = () => {
               <Route path="legal/*" element={<Legal />} />
               <Route path="demo/*" element={<Navigate to="/project/new" />} />
               <Route path="projects/*">
-                <Route index element={<Projects />} />
+                <Route index element={<Navigate to="/" />} />
+                {/* <Route index element={<Projects />} /> */}
                 <Route path=":projectID/*" element={<ProjectOutlet />}>
-                  <Route index element={<ProjectPage />} />
+                  <Route index element={<Navigate to="/" />} />
+                  {/* <Route index element={<ProjectPage />} /> */}
                   <Route
                     path=":processID/*"
                     element={

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import {
   Container,
   Heading,
+  LoadingAnimation,
   Modal,
   Search,
   Text,
@@ -123,7 +124,18 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
             </tr>
           </thead>
           <tbody>
-            {filteredAndSortedProjects.length > 0 ? (
+            {dashboardProject.isLoading || dashboardProject.isRefetching ? (
+              <tr className="bg-gradient-to-br  from-white/60 to-white/20 text-center ">
+                <td
+                  colSpan={4}
+                  className="rounded-md border-2 border-ultramarinblau-dark border-opacity-20 p-2 text-center"
+                >
+                  <Container width="full" justify="center">
+                    <LoadingAnimation />
+                  </Container>
+                </td>
+              </tr>
+            ) : filteredAndSortedProjects.length > 0 ? (
               filteredAndSortedProjects.map((project, index) => (
                 <HomeProjektRow
                   key={index}

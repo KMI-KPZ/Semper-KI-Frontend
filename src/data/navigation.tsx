@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import PersonIcon from "@mui/icons-material/Person";
-import DescriptionIcon from "@mui/icons-material/Description";
+// import DescriptionIcon from "@mui/icons-material/Description";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
@@ -39,15 +39,14 @@ export const NavigationItemData: INavigationItem[] = [
     preferred: ["header", "home"],
     userTypes: [UserType.ANONYM],
   },
-
-  {
-    title: "projects",
-    link: "/projects",
-    icon: <DescriptionIcon fontSize="large" />,
-    extern: false,
-    preferred: ["header", "home"],
-    userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ANONYM],
-  },
+  // {
+  //   title: "projects",
+  //   link: "/projects",
+  //   icon: <DescriptionIcon fontSize="large" />,
+  //   extern: false,
+  //   preferred: ["header", "home"],
+  //   userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ANONYM],
+  // },
   {
     title: "organization",
     link: "/organization",

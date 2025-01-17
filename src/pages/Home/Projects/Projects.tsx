@@ -1,18 +1,25 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Container, Heading, Search, Text } from "@component-library/index";
+import {
+  Container,
+  Heading,
+  Modal,
+  Search,
+  Text,
+} from "@component-library/index";
 import { Button } from "@component-library/index";
 import HomeContainer from "../components/Container";
 import useGetDashboardProjects, {
   FlatDashboardProject,
 } from "@/api/Project/Querys/useGetDashboardProjects";
-import useCreateProject from "@/api/Project/Mutations/useCreateProject";
 import useEvents from "@/hooks/useEvents/useEvents";
 import useSearch from "@/hooks/useSearch";
 import TuneIcon from "@mui/icons-material/Tune";
 import TableHeaderButton from "@/components/Table/TableHeaderButton";
 import useSort from "@/hooks/useSort";
 import HomeProjektRow from "./ProjektRow";
+import CreateProjectTitleForm from "@/pages/Projects/components/TitleForm";
+import logger from "@/hooks/useLogger";
 
 interface HomeProjectsProps {}
 
@@ -23,11 +30,13 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const [openProjects, setOpenProjects] = React.useState<string[]>([]);
 
   const dashboardProject = useGetDashboardProjects();
-  const createProject = useCreateProject();
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<FlatDashboardProject>();
   const { getSortIcon, handleSort, sortItems } =
     useSort<FlatDashboardProject>();
+
+  const [createProjectTitleFormOpen, setCreateProjectTitleFormOpen] =
+    React.useState<boolean>(false);
 
   const handleOpen = (projectID: string) => {
     if (openProjects.includes(projectID)) {
@@ -45,6 +54,9 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
           title={t("Home.Projects.button.new")}
           size="sm"
           variant="primary"
+          onClick={() => {
+            setCreateProjectTitleFormOpen(true);
+          }}
         />
       </Container>
       <Container width="full" direction="row" justify="between">
@@ -54,7 +66,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
           size="sm"
           variant="text"
           onClick={() => {
-            createProject.mutate("test");
+            logger("info", "Filter button clicked");
           }}
           children={<TuneIcon />}
         />
@@ -112,6 +124,19 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
           </tbody>
         </table>
       </Container>
+      <Modal
+        modalKey="CreateProjectTitleEdit"
+        open={createProjectTitleFormOpen}
+        closeModal={() => {
+          setCreateProjectTitleFormOpen(false);
+        }}
+      >
+        <CreateProjectTitleForm
+          close={() => {
+            setCreateProjectTitleFormOpen(false);
+          }}
+        />
+      </Modal>
     </HomeContainer>
   );
 };

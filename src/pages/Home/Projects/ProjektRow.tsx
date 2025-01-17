@@ -1,11 +1,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container } from "@component-library/index";
+import { Button, Container, Modal } from "@component-library/index";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import HomeProject from "./Project";
 import { FlatDashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
+import useDeleteProject from "@/api/Project/Mutations/useDeleteProject";
+import logger from "@/hooks/useLogger";
+import ProjectTitleForm from "@/pages/Project/components/TitleForm";
 
 interface HomeProjektRowProps {
   project: FlatDashboardProject;
@@ -16,6 +19,20 @@ interface HomeProjektRowProps {
 const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
   const { project, open, handleOpen } = props;
   const { t } = useTranslation();
+
+  const deleteProject = useDeleteProject();
+
+  const [titleEdit, setTitleEdit] = React.useState<boolean>(false);
+
+  const handleOnClickButtonEditTitle = () => {
+    setTitleEdit(!titleEdit);
+  };
+
+  const handleOnClickButtonDelete = (projectID: string) => {
+    window.confirm(t("Projects.components.TableRow.deleteConfirm")) === true
+      ? deleteProject.mutate([projectID])
+      : logger("delete canceled");
+  };
 
   return (
     <>
@@ -36,12 +53,16 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
               size="sm"
               variant="text"
               children={<EditIcon />}
+              onClick={() => {
+                handleOnClickButtonEditTitle();
+              }}
             />
             <Button
               title={t("general.button.delete")}
               size="sm"
               variant="text"
               children={<DeleteIcon />}
+              onClick={() => handleOnClickButtonDelete(project.projectID)}
             />
             <Button
               title={t("general.button.expand")}
@@ -58,6 +79,21 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
                 </div>
               }
             />
+            <Modal
+              modalKey="projectTitleEdit"
+              open={titleEdit}
+              closeModal={() => {
+                setTitleEdit(false);
+              }}
+            >
+              <ProjectTitleForm
+                project={project}
+                title={project.projectDetails.title}
+                close={() => {
+                  setTitleEdit(false);
+                }}
+              />
+            </Modal>
           </Container>
         </td>
       </tr>

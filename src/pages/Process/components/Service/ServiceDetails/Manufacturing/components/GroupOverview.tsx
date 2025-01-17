@@ -66,6 +66,7 @@ const ServiceManufacturingGroupOverview: React.FC<
   };
 
   const handleOnClickDelete = (index: number) => {
+    changeActiveGroup(0);
     updatedProcess.mutate(
       {
         processIDs: [process.processID],

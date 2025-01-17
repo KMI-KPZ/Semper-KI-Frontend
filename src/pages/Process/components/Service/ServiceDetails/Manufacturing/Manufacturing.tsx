@@ -1,9 +1,13 @@
-import { ManufactoringProcessProps } from "@/api/Process/Querys/useGetProcess";
+import {
+  ManufactoringProcessProps,
+  ProcessStatus,
+} from "@/api/Process/Querys/useGetProcess";
 import { Container } from "@component-library/index";
 import React from "react";
 import ProcessFilter from "../../Filter/Filter";
 import ServiceManufacturingGroupOverview from "./components/GroupOverview";
 import ServiceManufacturingDetails from "./components/ManufacturingDetails";
+import ProcessStatusGate from "../../../StatusGate";
 
 interface ServiceManufacturingViewProps {
   process: ManufactoringProcessProps;
@@ -45,7 +49,9 @@ const ServiceManufacturingView: React.FC<ServiceManufacturingViewProps> = (
         activeGroup={activeGroup}
         changeActiveGroup={setActiveGroup}
       />
-      <ProcessFilter />
+      <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
+        <ProcessFilter />
+      </ProcessStatusGate>
       {process.serviceDetails.groups.length > 0 ? (
         <ServiceManufacturingDetails
           process={process}

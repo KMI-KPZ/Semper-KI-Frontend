@@ -1558,6 +1558,7 @@
           "pageDescription2": "Dies hilft ihnen die Auswahl zu vereinfachen und gibt den Herstellern mehr Informationen.",
           "filtersApplied": "Vorgaben angewendet",
           "noCategory": "keine Vorgabenkategorie geöffnet",
+          "FiterDetails": {},
           "components": {
             "Card": {
               "noFilters": "keine Vorgaben vorhanden",

@@ -9,6 +9,7 @@ import useProcessEvent from "./hooks/useProcessEvent";
 import { parseEvent } from "@/api/Events/Querys/useGetEvent";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { useTranslation } from "react-i18next";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface ReturnProps {
   socket: WebSocket | null;
@@ -27,6 +28,7 @@ interface ReturnProps {
 const useEvents = (): ReturnProps => {
   const { events, socket } = useContext(EventContext);
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
 
   const {
     totalProjectEventCount,
@@ -55,6 +57,7 @@ const useEvents = (): ReturnProps => {
       );
       const parsedEvent = parseEvent(newEvent);
       if (newEvent !== undefined && parsedEvent !== undefined) {
+        queryClient.invalidateQueries(["events"]);
         handleNewEvent(parsedEvent);
       }
     } else {

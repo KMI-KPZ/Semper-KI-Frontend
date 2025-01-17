@@ -19,7 +19,10 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
     >
       <HomeUserProgress user={user} />
       {user.usertype === UserType.ORGANIZATION ? <HomeOrgaProgress /> : null}
-      <HomeProjects />
+      <HomeProjects user={user} />
+      {user.usertype === UserType.ORGANIZATION ? (
+        <HomeProjects recievedProjects user={user} />
+      ) : null}
       <HomeOrgaResources />
     </div>
   );

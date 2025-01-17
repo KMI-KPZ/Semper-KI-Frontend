@@ -12,7 +12,6 @@ import HomeContainer from "../components/Container";
 import useGetDashboardProjects, {
   FlatDashboardProject,
 } from "@/api/Project/Querys/useGetDashboardProjects";
-import useEvents from "@/hooks/useEvents/useEvents";
 import useSearch from "@/hooks/useSearch";
 import TuneIcon from "@mui/icons-material/Tune";
 import TableHeaderButton from "@/components/Table/TableHeaderButton";
@@ -20,18 +19,22 @@ import useSort from "@/hooks/useSort";
 import HomeProjektRow from "./ProjektRow";
 import CreateProjectTitleForm from "@/pages/Projects/components/TitleForm";
 import logger from "@/hooks/useLogger";
+import { AuthorizedUser } from "@/hooks/useUser";
 
-interface HomeProjectsProps {}
+interface HomeProjectsProps {
+  recievedProjects?: boolean;
+  user: AuthorizedUser;
+}
 
 const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
-  const {} = props;
+  const { recievedProjects = false, user } = props;
   const { t } = useTranslation();
-  const {} = useEvents();
   const [openProjects, setOpenProjects] = React.useState<string[]>([]);
 
   const dashboardProject = useGetDashboardProjects();
-  const { filterDataBySearchInput, handleSearchInputChange } =
+  const { filterDataBySearchInput, handleSearchInputChange, searchInput } =
     useSearch<FlatDashboardProject>();
+
   const { getSortIcon, handleSort, sortItems } =
     useSort<FlatDashboardProject>();
 
@@ -46,10 +49,31 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
     }
   };
 
+  const filteredProjectsByRecieved =
+    dashboardProject.data !== undefined
+      ? dashboardProject.data.filter((project) => {
+          return (
+            (project.client === user.hashedID && !recievedProjects) ||
+            recievedProjects
+          );
+        })
+      : [];
+
+  const filteredProjectsBySearchInput = filteredProjectsByRecieved.filter(
+    (orga) => filterDataBySearchInput(orga)
+  );
+
+  const filteredAndSortedProjects =
+    filteredProjectsBySearchInput.sort(sortItems);
+
   return (
     <HomeContainer className="">
       <Container width="full" direction="row" justify="between">
-        <Heading variant="h2">{t("Home.Projects.heading")}</Heading>
+        <Heading variant="h2">
+          {recievedProjects
+            ? t("Home.Projects.heading")
+            : t("Home.Projects.receivedProjects")}
+        </Heading>
         <Button
           title={t("Home.Projects.button.new")}
           size="sm"
@@ -99,25 +123,36 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
             </tr>
           </thead>
           <tbody>
-            {dashboardProject.data !== undefined &&
-            dashboardProject.data
-              .filter((orga) => filterDataBySearchInput(orga))
-              .sort(sortItems).length > 0 ? (
-              dashboardProject.data
-                .filter((orga) => filterDataBySearchInput(orga))
-                .sort(sortItems)
-                .map((project, index) => (
-                  <HomeProjektRow
-                    key={index}
-                    project={project}
-                    open={openProjects.includes(project.projectID)}
-                    handleOpen={handleOpen}
-                  />
-                ))
-            ) : (
-              <tr>
-                <td colSpan={4}>
+            {filteredAndSortedProjects.length > 0 ? (
+              filteredAndSortedProjects.map((project, index) => (
+                <HomeProjektRow
+                  key={index}
+                  project={project}
+                  open={openProjects.includes(project.projectID)}
+                  handleOpen={handleOpen}
+                />
+              ))
+            ) : filteredProjectsByRecieved.length ===
+              filteredProjectsBySearchInput.length ? (
+              <tr className="bg-gradient-to-br  from-white/60 to-white/20 text-center ">
+                <td
+                  colSpan={4}
+                  className="rounded-md border-2 border-ultramarinblau-dark border-opacity-20 p-2 text-center"
+                >
                   <Text>{t("Home.Projects.noProjects")}</Text>
+                </td>
+              </tr>
+            ) : (
+              <tr className="bg-gradient-to-br  from-white/60 to-white/20 text-center ">
+                <td
+                  colSpan={4}
+                  className="rounded-md border-2 border-ultramarinblau-dark border-opacity-20 p-2 text-center"
+                >
+                  <Text>
+                    {t("Home.Projects.noProjectsSearch", {
+                      search: searchInput,
+                    })}
+                  </Text>
                 </td>
               </tr>
             )}

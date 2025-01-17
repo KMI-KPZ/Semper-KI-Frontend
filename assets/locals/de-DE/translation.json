@@ -1127,7 +1127,9 @@
     },
     "Projects": {
       "heading": "Projektübersicht",
+      "receivedProjects": "Erhaltene Projekte",
       "noProjects": "Keine Projekte vorhanden",
+      "noProjectsSearch": "Keine Projekte mit \"{{search}}\" gefunden",
       "name": "Name",
       "updated": "Aktualisiert am",
       "status": "Status",

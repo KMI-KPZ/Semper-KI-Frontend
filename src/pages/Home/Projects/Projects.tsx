@@ -71,8 +71,8 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
       <Container width="full" direction="row" justify="between">
         <Heading variant="h2">
           {recievedProjects
-            ? t("Home.Projects.heading")
-            : t("Home.Projects.receivedProjects")}
+            ? t("Home.Projects.receivedProjects")
+            : t("Home.Projects.heading")}
         </Heading>
         <Button
           title={t("Home.Projects.button.new")}

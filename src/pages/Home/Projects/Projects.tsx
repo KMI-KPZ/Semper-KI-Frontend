@@ -20,11 +20,11 @@ import useSort from "@/hooks/useSort";
 import HomeProjektRow from "./ProjektRow";
 import CreateProjectTitleForm from "@/pages/Projects/components/TitleForm";
 import logger from "@/hooks/useLogger";
-import { AuthorizedUser } from "@/hooks/useUser";
+import { AuthorizedUser, UserType } from "@/hooks/useUser";
 
 interface HomeProjectsProps {
   recievedProjects?: boolean;
-  user: AuthorizedUser;
+  user?: AuthorizedUser;
 }
 
 const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
@@ -53,9 +53,15 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const filteredProjectsByRecieved =
     dashboardProject.data !== undefined
       ? dashboardProject.data.filter((project) => {
+          const userIsOwner =
+            user?.usertype === UserType.ORGANIZATION
+              ? project.client === user?.organization
+              : project.client === user?.hashedID;
+
           return (
-            (project.client === user.hashedID && !recievedProjects) ||
-            recievedProjects
+            user === undefined ||
+            (userIsOwner && !recievedProjects) ||
+            (recievedProjects && !userIsOwner)
           );
         })
       : [];

@@ -30,7 +30,7 @@ import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { Test } from "../Test/Test";
 import { ToastContainer } from "react-toastify";
-import { ContentBox } from "@component-library/index";
+import { Container, ContentBox } from "@component-library/index";
 import { Background, Breadcrumb } from "@/components/index";
 import { AdminOutlet } from "@/outlets/AdminOutlet";
 import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
@@ -45,6 +45,8 @@ import DescriptiveModelForm from "@/components/Form/DescriptiveModelForm";
 import ManufacturingGroupOutlet from "@/outlets/ManufacturingGroupOutlet";
 import ManufacturingModelEdit from "../Process/components/Service/ServiceEdit/Manufacturing/Model/Edit/ManufacturingModelEdit";
 import ManufacturingModelOutlet from "@/outlets/ManufacturingModelOutlet";
+import Demo from "../Demo/Demo";
+import HomeProjects from "../Home/Projects/Projects";
 // import Projects from "../Projects/Projects";
 // import ProjectPage from "../Project/ProjectPage";
 
@@ -126,9 +128,20 @@ const App: React.FC = () => {
               <Route path="login/redirect" element={<RedirectLogin />} />
               <Route path="register" element={<Login />} />
               <Route path="legal/*" element={<Legal />} />
-              <Route path="demo/*" element={<Navigate to="/project/new" />} />
+              <Route path="demo/*" element={<Demo />} />
               <Route path="projects/*">
-                <Route index element={<Navigate to="/" />} />
+                <Route
+                  index
+                  element={
+                    user.usertype === UserType.ANONYM ? (
+                      <Container width="full">
+                        <HomeProjects />
+                      </Container>
+                    ) : (
+                      <Navigate to="/" />
+                    )
+                  }
+                />
                 {/* <Route index element={<Projects />} /> */}
                 <Route path=":projectID/*" element={<ProjectOutlet />}>
                   <Route index element={<Navigate to="/" />} />

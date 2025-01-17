@@ -69,7 +69,8 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
                 {t("Home.Projects.Process.contractor")}
               </th>
               <td>
-                {process.contractor.name === undefined
+                {process.contractor === undefined ||
+                process.contractor.name === undefined
                   ? t("Home.Projects.Process.noContractor")
                   : process.contractor.name}
               </td>

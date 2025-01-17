@@ -970,6 +970,7 @@
       }
     }
   },
+  "Demo": { "heading": "Projekt und Prozess wird erstellt" },
   "EmailVerification": {
     "heading": "Email verifizieren",
     "text": "Bitte bestätigen Sie ihre Email Adresse, indem Sie auf den Link in der Email klicken, die Auth0 Ihnen gesendet hat.",

@@ -1,7 +1,7 @@
 {
   "yup": {
     "requiredName": "{{name}} is required",
-    "required": "is required",
+    "required": "Is required",
     "string": "Please enter character string",
     "number": "Please enter number",
     "email": "Please provide a valid email"

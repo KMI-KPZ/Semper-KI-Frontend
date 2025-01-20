@@ -20,15 +20,15 @@ import useSort from "@/hooks/useSort";
 import HomeProjektRow from "./ProjektRow";
 import CreateProjectTitleForm from "@/pages/Projects/components/TitleForm";
 import logger from "@/hooks/useLogger";
-import { AuthorizedUser, UserType } from "@/hooks/useUser";
+import { AuthorizedUser } from "@/hooks/useUser";
 
 interface HomeProjectsProps {
-  recievedProjects?: boolean;
+  recieved?: boolean;
   user?: AuthorizedUser;
 }
 
 const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
-  const { recievedProjects = false, user } = props;
+  const { recieved = false, user } = props;
   const { t } = useTranslation();
   const [openProjects, setOpenProjects] = React.useState<string[]>([]);
 
@@ -52,18 +52,12 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
 
   const filteredProjectsByRecieved =
     dashboardProject.data !== undefined
-      ? dashboardProject.data.filter((project) => {
-          const userIsOwner =
-            user?.usertype === UserType.ORGANIZATION
-              ? project.client === user?.organization
-              : project.client === user?.hashedID;
-
-          return (
+      ? dashboardProject.data.filter(
+          (project) =>
             user === undefined ||
-            (userIsOwner && !recievedProjects) ||
-            (recievedProjects && !userIsOwner)
-          );
-        })
+            (project.owner && !recieved) ||
+            (!project.owner && recieved)
+        )
       : [];
 
   const filteredProjectsBySearchInput = filteredProjectsByRecieved.filter(
@@ -77,18 +71,20 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
     <HomeContainer className="">
       <Container width="full" direction="row" justify="between">
         <Heading variant="h2">
-          {recievedProjects
+          {recieved
             ? t("Home.Projects.receivedProjects")
             : t("Home.Projects.heading")}
         </Heading>
-        <Button
-          title={t("Home.Projects.button.new")}
-          size="sm"
-          variant="primary"
-          onClick={() => {
-            setCreateProjectTitleFormOpen(true);
-          }}
-        />
+        {!recieved ? (
+          <Button
+            title={t("Home.Projects.button.new")}
+            size="sm"
+            variant="primary"
+            onClick={() => {
+              setCreateProjectTitleFormOpen(true);
+            }}
+          />
+        ) : null}
       </Container>
       <Container width="full" direction="row" justify="between">
         <Search handleSearchInputChange={handleSearchInputChange} />
@@ -148,6 +144,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
                   project={project}
                   open={openProjects.includes(project.projectID)}
                   handleOpen={handleOpen}
+                  recieved={recieved}
                 />
               ))
             ) : filteredProjectsByRecieved.length ===

@@ -14,6 +14,7 @@ export interface FlatDashboardProject {
   updatedWhen: Date;
   projectDetails: ProjectDetailsProps;
   processesCount: number;
+  owner: boolean;
 }
 
 export const isDashboardProject = (
@@ -38,7 +39,9 @@ export const isDashboardProject = (
     project.status !== undefined &&
     "processesCount" in project &&
     project.processesCount !== undefined &&
-    typeof project.processesCount === "number"
+    typeof project.processesCount === "number" &&
+    "owner" in project &&
+    project.owner !== undefined
   );
 };
 
@@ -57,6 +60,7 @@ const useGetDashboardProjects = () => {
         const DashboardProject: FlatDashboardProject[] =
           responseData.projects.map(
             (project: any): FlatDashboardProject => ({
+              owner: project.owner,
               client: project.client,
               projectID: project.projectID,
               projectStatus: project.projectStatus,

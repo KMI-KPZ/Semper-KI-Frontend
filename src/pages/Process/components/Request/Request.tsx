@@ -73,7 +73,12 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
         <Text variant="strong">{getText()}</Text>
       </Container>
 
-      {showFiles ? <ProcessFileView origin="Request" /> : null}
+      {showFiles ? (
+        <ProcessFileView
+          origin="Request"
+          endStatus={ProcessStatus.REQUEST_COMPLETED}
+        />
+      ) : null}
       <Button
         size="sm"
         title={t(

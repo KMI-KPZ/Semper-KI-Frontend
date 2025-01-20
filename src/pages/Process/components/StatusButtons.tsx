@@ -1,4 +1,4 @@
-import { Button, Container, Heading } from "@component-library/index";
+import { Button, Container, Heading, Text } from "@component-library/index";
 import useStatusButtons from "@/hooks/Project/useStatusButtons";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useProcess from "@/hooks/Process/useProcess";
@@ -7,6 +7,7 @@ import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 import { useEffect, useState } from "react";
 import ProcessConditionItem from "./ConditionItem";
 import { useTranslation } from "react-i18next";
+import useUser, { UserType } from "@/hooks/useUser";
 
 interface ProcessStatusButtonsProps {
   start: ProcessStatus;
@@ -16,6 +17,7 @@ interface ProcessStatusButtonsProps {
 const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   const { end, start } = props;
   const { process } = useProcess();
+  const { user } = useUser();
   const { getProcessStatusButtons, handleOnClickButton } = useStatusButtons();
   const [error, setError] = useState(false);
   const { t } = useTranslation();
@@ -87,6 +89,24 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
           // </PermissionGate>
         ))}
       </Container>
+    </Container>
+  ) : show ? (
+    <Container width="full" direction="col" className="bg-white p-5">
+      <Text className="whi rounded-md border-2 border-green-500 p-5">
+        {t(
+          `Process.components.StatusButtons.${
+            user.usertype === UserType.ANONYM ||
+            (user.usertype === UserType.USER &&
+              user.hashedID === process.client) ||
+            (user.usertype === UserType.ORGANIZATION &&
+              user.organization === process.client)
+              ? "noButtonsClient"
+              : process.processStatus === ProcessStatus.COMPLETED
+              ? "finished"
+              : "noButtonsContractor"
+          }`
+        )}
+      </Text>
     </Container>
   ) : null;
 };

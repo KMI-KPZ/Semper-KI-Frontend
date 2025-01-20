@@ -9,15 +9,19 @@ import { FlatDashboardProject } from "@/api/Project/Querys/useGetDashboardProjec
 import useDeleteProject from "@/api/Project/Mutations/useDeleteProject";
 import logger from "@/hooks/useLogger";
 import ProjectTitleForm from "@/pages/Project/components/TitleForm";
+import useUser, { UserType } from "@/hooks/useUser";
 
 interface HomeProjektRowProps {
   project: FlatDashboardProject;
   open: boolean;
   handleOpen: (projectID: string) => void;
+  recieved?: boolean;
 }
 
 const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
-  const { project, open, handleOpen } = props;
+  const { project, open, handleOpen, recieved = false } = props;
+
+  const { user } = useUser();
   const { t } = useTranslation();
 
   const deleteProject = useDeleteProject();
@@ -36,7 +40,10 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
 
   return (
     <>
-      <tr className="bg-gradient-to-br from-white/60 to-white/20">
+      <tr
+        className="bg-gradient-to-br from-white/60 to-white/20 hover:cursor-pointer"
+        onClick={() => handleOpen(project.projectID)}
+      >
         <td className=" rounded-md rounded-br-none rounded-tr-none border-2 border-r-0 border-ultramarinblau-dark border-opacity-20 p-1 text-center">
           {project.projectDetails.title}
         </td>
@@ -48,22 +55,29 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
         </td>
         <td className="rounded-md rounded-bl-none rounded-tl-none border-2 border-l-0 border-ultramarinblau-dark border-opacity-20 p-1">
           <Container justify="center" width="full" direction="row">
-            <Button
-              title={t("general.button.edit")}
-              size="sm"
-              variant="text"
-              children={<EditIcon />}
-              onClick={() => {
-                handleOnClickButtonEditTitle();
-              }}
-            />
-            <Button
-              title={t("general.button.delete")}
-              size="sm"
-              variant="text"
-              children={<DeleteIcon />}
-              onClick={() => handleOnClickButtonDelete(project.projectID)}
-            />
+            {!recieved ||
+            (user.usertype === UserType.ORGANIZATION &&
+              user.organization !== undefined &&
+              user.organization === project.client) ? (
+              <>
+                <Button
+                  title={t("general.button.edit")}
+                  size="sm"
+                  variant="text"
+                  children={<EditIcon />}
+                  onClick={() => {
+                    handleOnClickButtonEditTitle();
+                  }}
+                />
+                <Button
+                  title={t("general.button.delete")}
+                  size="sm"
+                  variant="text"
+                  children={<DeleteIcon />}
+                  onClick={() => handleOnClickButtonDelete(project.projectID)}
+                />
+              </>
+            ) : null}
             <Button
               title={t("general.button.expand")}
               size="sm"

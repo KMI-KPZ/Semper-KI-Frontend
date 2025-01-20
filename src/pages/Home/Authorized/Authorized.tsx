@@ -21,7 +21,7 @@ const AuthorizedHome: React.FC<AuthorizedPropsHome> = (props) => {
       {user.usertype === UserType.ORGANIZATION ? <HomeOrgaProgress /> : null}
       <HomeProjects user={user} />
       {user.usertype === UserType.ORGANIZATION ? (
-        <HomeProjects recievedProjects user={user} />
+        <HomeProjects recieved user={user} />
       ) : null}
       <HomeOrgaResources />
     </div>

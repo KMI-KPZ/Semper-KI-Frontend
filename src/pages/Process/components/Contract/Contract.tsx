@@ -22,7 +22,10 @@ const ProcessContract: React.FC<ProcessContractProps> = (props) => {
       end={ProcessStatus.OFFER_REJECTED}
     >
       <ProcessMessages messages={process.messages.Contract} origin="Contract" />
-      <ProcessFileView origin="Contract" />
+      <ProcessFileView
+        origin="Contract"
+        endStatus={ProcessStatus.OFFER_COMPLETED}
+      />
     </ProcessContainer>
   );
 };

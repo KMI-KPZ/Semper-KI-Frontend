@@ -11,7 +11,10 @@
     "required": "is required",
     "string": "Please enter character string",
     "number": "Please enter number",
-    "email": "Please provide a valid email"
+    "email": "Please provide a valid email",
+    "empty": "Must not be empty",
+    "numberMax": "Must not be larger than {{max}} be",
+    "numberMin": "Must not be smaller than {{min}} be"
   },
   "data": {
     "NavigationItem": {
@@ -111,7 +114,7 @@
     "ServiceType": {
       "NONE": "Service selection",
       "ADDITIVE_MANUFACTURING": "Have the model 3D printed",
-      "CREATE_MODEL": "Have a model designed",
+      "CREATE_MODEL": "Have the model designed",
       "DELIVERY": "Delivery",
       "POST_PROCESSING": "Post-processing",
       "PACKAGING": "Packaging",
@@ -154,6 +157,18 @@
       "DELETION": "deletion",
       "DETAILS": "Process details",
       "OTHER": "Miscellaneous"
+    },
+    "ModelLevelOfDetail": {
+      "LOW": "Low",
+      "MEDIUM": "Medium",
+      "HIGH": "High"
+    },
+    "ModelComplexity": {
+      "LOW": "Low",
+      "LOW_MEDIUM": "Low-Medium",
+      "MEDIUM": "Medium",
+      "MEDIUM_HIGH": "Medium-High",
+      "HIGH": "High"
     }
   },
   "types": {
@@ -215,20 +230,45 @@
       "material": "Materials",
       "additionalRequirement": "Additional requirements",
       "color": "Colors",
-      "materialCategory": "Material category"
+      "materialCategory": "Material category",
+      "technology": "3D printer technology",
+      "materialType": "Material type"
     },
     "OntoNodePropertyName": {
+      "technology": "technology",
+      "buildVolume": "Installation space",
       "imgPath": "Image path",
+      "nozzleDiameter": "Nozzle diameter",
+      "certificates": "Certificates",
+      "lossOfMaterial": "Loss of material",
+      "fixedCosts": "Fixed costs",
+      "machineBatchDistance": "Machine clearance",
+      "fillRate": "Fill rate",
+      "chamberBuildHeight": "Building chamber height",
+      "chamberBuildWidth": "Building chamber width",
+      "chamberBuildLength": "Building chamber length",
+      "buildRate": "Build rate",
+      "averagePowerConsumption": "Average power consumption",
+      "possibleLayerHeights": "Possible layer heights",
+      "machineUsageCosts": "Machine usage costs",
+      "machineSurfaceArea": "machine area",
+      "simpleMachineSetUp": "Easy machine setup",
+      "complexMachineSetUp": "Complex machine setup",
+      "machineHourlyRate": "Machine hourly rate",
+      "costRatePersonalMachine": "Personnel cost rate machine",
+      "coatingTime": "Coating time",
+      "maxPrintingSpeed": "Maximum print speed",
       "foodSafe": "Food safe",
       "heatResistant": "Heat resistant",
       "flexible": "Flexible",
       "smooth": "Smooth",
       "eModul": "E-modulus",
-      "poissonRatio": "Poisson ratio",
-      "color": "Color",
-      "buildVolume": "Construction volume",
-      "technology": "technology",
-      "nozzleDiameter": "Nozzle diameter"
+      "poissonRatio": "Poisson's ratio",
+      "density": "density",
+      "printingSpeed": "Print speed",
+      "acquisitionCosts": "Acquisition costs",
+      "treatmentCosts": "Treatment costs",
+      "flexibility": "flexibility"
     },
     "FilterCategoryType": {
       "costs": "Cost",
@@ -255,7 +295,8 @@
       "ServiceManufacturingPostProcessing": "Please select a post-processing option",
       "Process-Contractor": "Please select a contractor",
       "Process-Address-Billing": "Please select a billing address",
-      "Process-Address-Deliver": "Please select a delivery address"
+      "Process-Address-Deliver": "Please select a delivery address",
+      "Process-ServiceType": "Please select a service"
     },
     "EventDataReason": {
       "messages": "News",
@@ -283,6 +324,22 @@
     "zipcode": "Postal code",
     "city": "City",
     "country": "country",
+    "quantity": "Number",
+    "width": "Width",
+    "length": "length",
+    "height": "Height",
+    "volume": "volume",
+    "levelOfDetail": "Level of detail",
+    "complexity": "complexity",
+    "tags": "tags",
+    "easy": "Simply",
+    "normal": "Normal",
+    "complex": "Complex",
+    "modelID": "Model ID",
+    "group": "group",
+    "total": "In total",
+    "min": "Min",
+    "max": "Max",
     "button": {
       "select": "Choose",
       "deselect": "Deselect",
@@ -445,6 +502,20 @@
         "name": "name",
         "email": "E-mail address"
       },
+      "DescriptiveModelForm": {
+        "heading": "Describe model without file",
+        "mandatory": "* Required field",
+        "placeholder": {
+          "name": "Model name",
+          "quantity": "Number",
+          "width": "Width",
+          "length": "length",
+          "height": "Height",
+          "volume": "volume",
+          "complexity": "complexity",
+          "tags": "Day1, Day2, Day3"
+        }
+      },
       "ExampleForm": {
         "heading": "Edit organization information",
         "text": "text",
@@ -468,6 +539,7 @@
         "taxID": "Tax number",
         "address": "Address",
         "notifications": "Notifications",
+        "contractorCard": "Contractor card",
         "notifictionTypes": {
           "email": "E-mail",
           "event": "event"
@@ -560,6 +632,9 @@
           }
         }
       },
+      "ContractorCard": {
+        "priceRange": "Price range"
+      },
       "Menu": {
         "button": {
           "open": "Open menu",
@@ -611,6 +686,9 @@
           "create": "Create",
           "variant": "Create variant"
         },
+        "technology": "technology",
+        "noTechnologies": "No technology found",
+        "noTechnology": "No technology selected",
         "general": "General information",
         "nodeName": "name",
         "context": "Description",
@@ -647,6 +725,7 @@
         "table": {
           "noItems": "no entries available",
           "caption": "Available",
+          "unit": "Unit",
           "selected": "Selected",
           "name": "name",
           "createdBy": "Created by",
@@ -904,6 +983,9 @@
       }
     }
   },
+  "Demo": {
+    "heading": "Project and process is created"
+  },
   "EmailVerification": {
     "heading": "Verify email",
     "text": "Please confirm your email address by clicking on the link in the email Auth0 sent you.",
@@ -1035,16 +1117,6 @@
           "orga": "organization"
         }
       },
-      "Projects": {
-        "heading": "Projects",
-        "noProjects": "No projects available",
-        "button": {
-          "demo": "Try",
-          "new": "New project",
-          "continue": "Project Continue",
-          "projects": "My projects"
-        }
-      },
       "Resources": {
         "heading": "resources",
         "button": {
@@ -1067,6 +1139,44 @@
         "button": {
           "orga": "profile"
         }
+      }
+    },
+    "Projects": {
+      "heading": "Project overview",
+      "receivedProjects": "Received projects",
+      "noProjects": "No projects available",
+      "noProjectsSearch": "No projects with \"{{search}}\" found",
+      "name": "name",
+      "updated": "Updated on",
+      "status": "status",
+      "quantity": "Number",
+      "actions": "Actions",
+      "button": {
+        "demo": "Try",
+        "new": "Create new project",
+        "filter": "filter",
+        "continue": "Project Continue",
+        "projects": "My projects"
+      },
+      "Project": {
+        "button": {
+          "new": "Create new process"
+        }
+      },
+      "Process": {
+        "deleteConfirm": "Do you really want to delete the process?",
+        "name": "Process name",
+        "type": "Service type",
+        "updated": "Updated on",
+        "groups": "groups",
+        "quantity": "Number",
+        "models": "Models",
+        "contractor": "contractor",
+        "noContractor": "No contractor selected",
+        "material": "material",
+        "postProcessings": "Post-processing",
+        "groupName": "group {{count}}",
+        "processErrors": "Notes"
       }
     }
   },
@@ -1112,7 +1222,7 @@
       "vat": " Sales tax identification number according to Section 27a of the Sales Tax Act:",
       "online-regulations": " Under applicable law, we are required to inform consumers of the existence of the European Online Dispute Resolution Platform, which can be used to resolve disputes without the need to go to court. ",
       "vsbg": "We are neither willing nor obliged to take part in dispute resolution proceedings before a consumer arbitration board.",
-      "gender-sensitive": " In order to make the texts easier to read, we randomly and evenly selected either the male or female form of personal nouns",
+      "gender-sensitive": " In order to make the texts easier to read, we randomly and evenly chose either the male or female form of personal nouns",
       "content-warning": "The free and freely accessible content of this website was created with the greatest possible care. ",
       "external-links": "This website contains links to third-party websites (“external links”). ",
       "copyright": " The content published on this website is subject to German copyright and ancillary copyright law. ",
@@ -1148,7 +1258,7 @@
       "authorized-details": "Prof. Dr. ",
       "management": "Management:",
       "management-details": "Andreas Heinecke, Prof. Dr. ",
-      "controller-description": "The responsible body is the natural or legal person who alone or jointly with others decides on the purposes and means of processing personal data (e.g. names, email addresses, etc.).",
+      "controller-description": "The responsible body is the natural or legal person who, alone or jointly with others, decides on the purposes and means of processing personal data (e.g. names, email addresses, etc.).",
       "consent-withdrawal": "Revocation of your consent to data processing",
       "consent-withdrawal-details": "Many data processing operations are only possible with your express consent. ",
       "objection-right": "Right to object to data collection in special cases and to direct advertising (Art. 21 GDPR)",
@@ -1163,7 +1273,7 @@
       "access-correction-details": "Within the framework of the applicable legal provisions, you have the right to free information at any time about your stored personal data, its origin and recipient and the purpose of data processing and, if necessary, a right to correct, block or delete this data. ",
       "processing-restriction": "Right to restriction of processing",
       "right-to-restrict-processing": "You have the right to request that the processing of your personal data be restricted. ",
-      "dispute-accuracy-of-data": "If you dispute the accuracy of your personal data held by us, we will generally need time to verify this. ",
+      "dispute-accuracy-of-data": "If you dispute the accuracy of the personal data we hold about you, we will generally need time to verify this. ",
       "objection-to-ad-emails": "Objection to advertising emails",
       "imprint-advertising-usage-disclaimer": "The use of contact details published as part of the imprint obligation to send unsolicited advertising and information materials is hereby objected to. ",
       "data-protection-officer": "3. Data protection officer",
@@ -1271,7 +1381,8 @@
         "adress": "address",
         "email": "e-mail",
         "taxID": "Tax number",
-        "noService": "no services "
+        "noService": "no services ",
+        "contractorCard": "Contractor card"
       }
     },
     "Roles": {
@@ -1340,7 +1451,7 @@
         "text": "This service allows customers to leverage our expertise and resources to efficiently achieve high-quality results. "
       },
       "use-design": {
-        "header": "Have a model designed",
+        "header": "Have the model designed",
         "text": "With our model design service, customers can access our creative skills to bring their vision to life. "
       },
       "use-accompany": {
@@ -1463,11 +1574,13 @@
           "menu": "Information menu"
         },
         "Filter": {
-          "heading": "Your specifications",
+          "heading": "Your requirements/specifications",
           "menuButtonTitle": "Filter menu",
-          "pageDescription1": "Here you can set your specifications for the process.",
-          "pageDescription2": "This helps make your selection easier.",
+          "pageDescription1": "Here you can specify your requirements/specifications for the process.",
+          "pageDescription2": "This helps simplify the selection and gives manufacturers more information.",
+          "filtersApplied": "Specifications applied",
           "noCategory": "no presets category opened",
+          "FiterDetails": {},
           "components": {
             "Card": {
               "noFilters": "no specifications available",
@@ -1504,14 +1617,31 @@
                 "img": "Material image",
                 "name": "Name:",
                 "type": "Type:",
+                "cost": "Average acquisition costs:",
                 "properties": "Characteristics:"
+              },
+              "GroupOverview": {
+                "heading": "Group overview",
+                "noModel": "no model",
+                "noMaterial": "no material",
+                "noPostProcessing": "no post-processing",
+                "nextGroup": "Next group",
+                "previousGroup": "Previous group",
+                "item": "group {{name}} open",
+                "model": "Model(s)",
+                "material": "material",
+                "postProcessing": "Post-processing(s)",
+                "newGroup": "new group"
               },
               "ModelCard": {
                 "img": "Model picture",
+                "quantity": "Number",
+                "levelOfDetail": "Level of detail",
                 "name": "Name:",
                 "dimensions": "Mass",
                 "surface": "surface",
-                "volume": "volume"
+                "volume": "volume",
+                "complexity": "complexity"
               },
               "PostProcessingCard": {
                 "name": "name",
@@ -1520,6 +1650,7 @@
                 "properties": "Characteristics:"
               },
               "button": {
+                "noModel": "No model? ",
                 "addMore": "Add more",
                 "addModel": "Add model",
                 "addMaterial": "Add material",
@@ -1574,6 +1705,9 @@
                   }
                 }
               },
+              "Edit": {
+                "heading": "Edit model"
+              },
               "Upload": {
                 "loading": "Model is being uploaded",
                 "heading": "Upload your own models",
@@ -1589,18 +1723,24 @@
                 },
                 "components": {
                   "Card": {
-                    "name": "Name:",
-                    "size": "Size:",
-                    "type": "File type:",
-                    "date": "Date:",
+                    "name": "name",
+                    "size": "Size",
+                    "type": "File type",
+                    "date": "Date",
                     "all": "Apply to all:",
-                    "tags": "Tags:",
+                    "tags": "tags",
                     "tagsPH": "Day1, Day2, ...",
+                    "quantity": "Number *",
+                    "levelOfDetail": "Level of detail *",
+                    "levelOfDetailPH": "Level of detail",
+                    "selectLevelOfDetail": "Select level of detail",
                     "selectLicense": "Select license",
                     "certificate": "Any certificates:",
                     "certificatePH": "Certificates1, Certificates2, ...",
-                    "license": "License of the file:",
+                    "scalingFactor": "Scaling",
+                    "license": "License of the file *",
                     "licensePH": "License1, License2...",
+                    "mandatory": "* Required field",
                     "button": {
                       "saveAll": "Apply to all models"
                     }
@@ -1723,7 +1863,10 @@
         }
       },
       "StatusButtons": {
-        "heading": "Todos"
+        "heading": "Todos",
+        "noButtonsClient": "No todos available. ",
+        "noButtonsContractor": "No todos available. ",
+        "finished": "Process Completed. "
       },
       "TitleForm": {
         "heading": "Process name",

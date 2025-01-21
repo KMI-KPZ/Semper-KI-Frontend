@@ -9,7 +9,7 @@ import { useProject } from "@/hooks/Project/useProject";
 import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import ProcessStatusGate from "@/pages/Process/components/StatusGate";
+import ProcessStatusGate from "@/components/Process/StatusGate";
 import {
   OntoNodePropertyName,
   isOntoNodePropertyName,

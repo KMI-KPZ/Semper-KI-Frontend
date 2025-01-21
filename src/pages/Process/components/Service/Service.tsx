@@ -1,12 +1,10 @@
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import { Button } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ServiceSelection from "./ServiceSelection/ServiceSelection";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
-import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import ServiceDetails from "./ServiceDetails/ServiceDetails";
-import ProcessContainer from "@/components/Process/Container";
+import ProcessContainer from "@/components/Process/Container/Container";
 
 interface ServiceProps {
   process: Process;
@@ -15,23 +13,6 @@ interface ServiceProps {
 const Service: React.FC<ServiceProps> = (props) => {
   const { process } = props;
   const { t } = useTranslation();
-  const updateProcess = useUpdateProcess();
-
-  const handleOnClickButtonEditType = () => {
-    updateProcess.mutate({
-      processIDs: [process.processID],
-      updates: { changes: { serviceType: ServiceType.NONE } },
-    });
-  };
-
-  // const handleOnClickButtonComplete = () => {
-  //   updateProcess.mutate({
-  //     processIDs: [process.processID],
-  //     updates: {
-  //       changes: { processStatus: ProcessStatus.CONTRACTOR_COMPLETED },
-  //     },
-  //   });
-  // };
 
   const menuButtonTitle = t("Process.components.Service.button.menu");
   const pageTitle = `${t("Process.components.Service.heading")}: ${
@@ -56,15 +37,6 @@ const Service: React.FC<ServiceProps> = (props) => {
       end={ProcessStatus.SERVICE_COMPLICATION}
       menuButtonTitle={menuButtonTitle}
       pageTitle={pageTitle}
-      menuChildren={
-        <Button
-          title={t("Process.components.Service.button.editType")}
-          stopPropagation={false}
-          variant="secondary"
-          size="sm"
-          onClick={handleOnClickButtonEditType}
-        />
-      }
     >
       {noServiceSelected ? (
         <ServiceSelection />

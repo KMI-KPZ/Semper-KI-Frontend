@@ -592,6 +592,18 @@
       "message": "Diese Funktion ist mit ihren Rechten nicht nutzbar"
     },
     "Process": {
+      "Container": {
+        "ActionContainer": {
+          "Failed": {
+            "heading": "Ihre Prozess ist fehlgeschlagen",
+            "reason": "Grund"
+          },
+          "heading": "Todos",
+          "noButtonsClient": "Keine Todos vorhanden. Der Auftragnehmer bearbeitet ihre Anfrage. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
+          "noButtonsContractor": "Keine Todos vorhanden. Der Kunde ist am Zug. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
+          "finished": "Prozess Abgeschlossen. Es gibt keine weiteren Todos."
+        }
+      },
       "File": {
         "components": {
           "FileTable": {
@@ -777,6 +789,7 @@
       "FORWARD-TO-FAILED": "Prozess fehlgeschlagen",
       "FORWARD-TO-COMPLETED": "Prozess abschließen",
       "FORWARD-TO-DISPUTE": "Streitfall melden",
+      "CLONE": "Prozess klonen",
       "button": {
         "confirmAll": "Wollen Sie wirklich alle betroffene Prozesse {{title}}?"
       }
@@ -1157,7 +1170,8 @@
         "material": "Material",
         "postProcessings": "Nachbearbeitungen",
         "groupName": "Gruppe {{count}}",
-        "processErrors": "Hinweise"
+        "processErrors": "Hinweise",
+        "noErrors": "Keine Interaktionen erforderlich"
       }
     }
   },
@@ -1526,6 +1540,7 @@
           "menu": "Lieferungsmenu"
         }
       },
+
       "Production": {
         "heading": "Produktion",
         "button": {
@@ -1839,21 +1854,15 @@
         "button": {
           "menu": "Informationen Menu",
           "editTitle": "Prozessname bearbeiten"
-        }
-      },
-      "StatusButtons": {
-        "heading": "Todos",
-        "noButtonsClient": "Keine Todos vorhanden. Der Auftragnehmer bearbeitet ihre Anfrage. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
-        "noButtonsContractor": "Keine Todos vorhanden. Der Kunde ist am Zug. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
-        "finished": "Prozess Abgeschlossen. Es gibt keine weiteren Todos."
-      },
-      "TitleForm": {
-        "heading": "Prozessname",
-        "describtion": "Geben Sie ihrem Prozess einen Namen. Ein Prozess ist ein Auftrag für einen Hersteller/Auftragnehmer.",
-        "name": "Prozessname",
-        "error": "Bitte geben Sie einen Namen ein",
-        "button": {
-          "save": "Name Speichern"
+        },
+        "TitleForm": {
+          "heading": "Prozessname",
+          "describtion": "Geben Sie ihrem Prozess einen Namen. Ein Prozess ist ein Auftrag für einen Hersteller/Auftragnehmer.",
+          "name": "Prozessname",
+          "error": "Bitte geben Sie einen Namen ein",
+          "button": {
+            "save": "Name Speichern"
+          }
         }
       }
     }

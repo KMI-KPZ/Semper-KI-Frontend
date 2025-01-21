@@ -1,14 +1,13 @@
 import { Container, Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ProcessInfo from "./components/Info";
 import useProcess from "@/hooks/Process/useProcess";
 import Service from "./components/Service/Service";
 import ProcessStatusWizard from "./components/StatusWizard/StatusWizard";
 import ProcessContractorSelection from "./components/ContractorSelection/ContractorSelection";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessVerify from "./components/Verify/Verify";
-import ProcessStatusGate from "./components/StatusGate";
+import ProcessStatusGate from "../../components/Process/StatusGate";
 import ProcessRequest from "./components/Request/Request";
 import ProcessContract from "./components/Contract/Contract";
 import ProcessDelivery from "./components/Delivery/Delivery";
@@ -17,6 +16,7 @@ import ProcessProduction from "./components/Production/Production";
 import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
 import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
 import BackButtonContainer from "@/components/BackButtonContainer/BackButtonContainer";
+import ProcessInfo from "./components/Info/Info";
 
 interface ProcessPageProps {}
 

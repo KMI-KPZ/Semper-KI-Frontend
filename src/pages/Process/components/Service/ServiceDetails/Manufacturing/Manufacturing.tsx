@@ -7,7 +7,7 @@ import React from "react";
 import ProcessFilter from "../../Filter/Filter";
 import ServiceManufacturingGroupOverview from "./components/GroupOverview";
 import ServiceManufacturingDetails from "./components/ManufacturingDetails";
-import ProcessStatusGate from "../../../StatusGate";
+import ProcessStatusGate from "../../../../../../components/Process/StatusGate";
 
 interface ServiceManufacturingViewProps {
   process: ManufactoringProcessProps;

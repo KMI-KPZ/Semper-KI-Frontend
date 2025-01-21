@@ -10,13 +10,11 @@ import {
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ContractorCard from "../../../../../components/Process/ContractorCard";
-import { UseQueryResult } from "@tanstack/react-query";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
-import { ContractorProps } from "@/api/Process/Querys/useGetContractors";
+import useGetContractors from "@/api/Process/Querys/useGetContractors";
 import PrioritiesForm from "@/components/Form/Priorities/PrioritiesForm";
 
 interface ProcessContractorListProps {
-  contractors: UseQueryResult<ContractorProps[], Error>;
   process: Process;
   closeModal: () => void;
 }
@@ -27,11 +25,12 @@ export interface ContractorSelectionFormData {
 }
 
 const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
-  const { contractors, process, closeModal } = props;
+  const { process, closeModal } = props;
+  const contractors = useGetContractors();
   const { t } = useTranslation();
   const updateProcess = useUpdateProcess();
   const [contractorID, setContractorID] = React.useState<string | undefined>(
-    undefined
+    process.processDetails?.provisionalContractor
   );
 
   const saveContractor = () => {

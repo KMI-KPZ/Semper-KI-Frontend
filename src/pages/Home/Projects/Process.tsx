@@ -280,6 +280,20 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
                   </Container>
                 </td>
               </tr>
+            ) : process.processErrors.length === 0 ? (
+              <tr>
+                <td colSpan={2}>
+                  <Container
+                    className="w-full py-2"
+                    justify="center"
+                    align="center"
+                  >
+                    <Text className="rounded-md border-2 border-green-500 p-2">
+                      {t("Home.Projects.Process.noErrors")}
+                    </Text>
+                  </Container>
+                </td>
+              </tr>
             ) : null}
           </tbody>
         </table>

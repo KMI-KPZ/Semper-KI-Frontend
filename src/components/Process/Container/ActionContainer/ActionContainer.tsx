@@ -8,17 +8,19 @@ import { useEffect, useState } from "react";
 import ProcessConditionItem from "./ConditionItem";
 import { useTranslation } from "react-i18next";
 import useUser, { UserType } from "@/hooks/useUser";
+import ProcessFailed, { isProcessFailed } from "./Failed";
 
-interface ProcessStatusButtonsProps {
+interface ActionContainerProps {
   start: ProcessStatus;
-  end: ProcessStatus;
+  end?: ProcessStatus;
 }
 
-const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
+const ActionContainer: React.FC<ActionContainerProps> = (props) => {
   const { end, start } = props;
   const { process } = useProcess();
   const { user } = useUser();
-  const { getProcessStatusButtons, handleOnClickButton } = useStatusButtons();
+  const { getStatusButtons: getProcessStatusButtons, handleOnClickButton } =
+    useStatusButtons();
   const [error, setError] = useState(false);
   const { t } = useTranslation();
 
@@ -34,9 +36,14 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
     }
   }, [error]);
 
-  const show = process.processStatus >= start && process.processStatus <= end;
+  const showDependingOnProcessStatus =
+    process.processStatus >= start &&
+    ((end !== undefined && process.processStatus <= end) || end === undefined);
 
-  return show && getProcessStatusButtons(process).length > 0 ? (
+  if (showDependingOnProcessStatus && isProcessFailed(process))
+    return <ProcessFailed />;
+  return showDependingOnProcessStatus &&
+    getProcessStatusButtons(process).length > 0 ? (
     <Container width="full" direction="col" className="bg-white p-5">
       {process.processErrors === undefined ||
       process.processErrors.length === 0 ? null : (
@@ -49,7 +56,7 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
           }`}
         >
           <Heading variant="h2">
-            {t("Process.components.StatusButtons.heading")}
+            {t("components.Process.Container.ActionContainer.heading")}
           </Heading>
           {process.processErrors.map((error, index) => (
             <ProcessConditionItem key={index} error={error} />
@@ -90,11 +97,11 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
         ))}
       </Container>
     </Container>
-  ) : show ? (
+  ) : showDependingOnProcessStatus ? (
     <Container width="full" direction="col" className="bg-white p-5">
-      <Text className="whi rounded-md border-2 border-green-500 p-5">
+      <Text className=" rounded-md border-2 border-green-500 p-5">
         {t(
-          `Process.components.StatusButtons.${
+          `components.Process.Container.ActionContainer.${
             user.usertype === UserType.ANONYM ||
             (user.usertype === UserType.USER &&
               user.hashedID === process.client) ||
@@ -111,4 +118,4 @@ const ProcessStatusButtons: React.FC<ProcessStatusButtonsProps> = (props) => {
   ) : null;
 };
 
-export default ProcessStatusButtons;
+export default ActionContainer;

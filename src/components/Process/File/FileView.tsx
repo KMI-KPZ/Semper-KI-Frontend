@@ -7,7 +7,7 @@ import {
 import useProcess from "@/hooks/Process/useProcess";
 import ProcessFileTable from "./components/FileTable";
 import ProcessUploadCard from "./components/UploadCard";
-import ProcessStatusGate from "@/pages/Process/components/StatusGate";
+import ProcessStatusGate from "@/components/Process/StatusGate";
 
 interface ProcessFileViewProps {
   origin: ProcessOrigin;

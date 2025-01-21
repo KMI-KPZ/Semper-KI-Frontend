@@ -1,4 +1,4 @@
-import ProcessContainer from "@/components/Process/Container";
+import ProcessContainer from "@/components/Process/Container/Container";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";

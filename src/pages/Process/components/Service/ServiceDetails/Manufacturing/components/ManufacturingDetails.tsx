@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import ProcessConditionIcon from "@/components/Process/ConditionIcon";
 import { ManufacturingServiceProps } from "@/api/Service/Querys/useGetServices";
 import ProcessServiceModelCard from "./ModelCard";
-import ProcessStatusGate from "@/pages/Process/components/StatusGate";
+import ProcessStatusGate from "@/components/Process/StatusGate";
 import ProcessServiceMaterialCard from "./MaterialCard";
 import ProcessSericePostProcessingCard from "./PostProcessingCard";
 

@@ -1,5 +1,5 @@
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import ProcessContainer from "@/components/Process/Container";
+import ProcessContainer from "@/components/Process/Container/Container";
 import {
   Button,
   Container,
@@ -17,7 +17,7 @@ import ContractorCard from "../../../../components/Process/ContractorCard";
 import ContractorSelectionAddressCard from "./components/AddressCard";
 import useGetContractors from "@/api/Process/Querys/useGetContractors";
 import ProcessConditionIcon from "@/components/Process/ConditionIcon";
-import ProcessStatusGate from "../StatusGate";
+import ProcessStatusGate from "../../../../components/Process/StatusGate";
 
 interface ProcessContractorSelectionProps {}
 
@@ -160,7 +160,6 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
         closeModal={closeEditContractor}
       >
         <ProcessContractorList
-          contractors={contractors}
           process={process}
           closeModal={closeEditContractor}
         />

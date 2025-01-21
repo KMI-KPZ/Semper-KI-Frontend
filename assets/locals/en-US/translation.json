@@ -767,7 +767,7 @@
       "BACK-TO-DRAFT": "Back",
       "BACK-TO-SERVICE_COMPLETED": "Back",
       "BACK-TO-CONTRACTOR_COMPLETED": "Back",
-      "FORWARD-TO-SERVICE_COMPLETED": "Further",
+      "FORWARD-TO-SERVICE_READY": "Further",
       "FORWARD-TO-CONTRACTOR_COMPLETED": "Further",
       "FORWARD-TO-VERIFYING": "Check Start",
       "FORWARD-TO-VERIFICATION_COMPLETED": "Complete review",

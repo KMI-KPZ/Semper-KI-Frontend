@@ -11,7 +11,9 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import ContractorCard from "../../../../../components/Process/ContractorCard";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
-import useGetContractors from "@/api/Process/Querys/useGetContractors";
+import useGetContractors, {
+  ContractorProps,
+} from "@/api/Process/Querys/useGetContractors";
 import PrioritiesForm from "@/components/Form/Priorities/PrioritiesForm";
 
 interface ProcessContractorListProps {
@@ -29,30 +31,33 @@ const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
   const contractors = useGetContractors();
   const { t } = useTranslation();
   const updateProcess = useUpdateProcess();
-  const [contractorID, setContractorID] = React.useState<string | undefined>(
-    process.processDetails?.provisionalContractor
-  );
+  const [selectedContractor, setSelectedContractor] = React.useState<
+    ContractorProps | undefined
+  >(process.processDetails?.provisionalContractor);
 
   const saveContractor = () => {
-    updateProcess.mutate(
-      {
-        processIDs: [process.processID],
-        updates: {
-          changes: {
-            provisionalContractor: contractorID,
+    if (selectedContractor !== undefined)
+      updateProcess.mutate(
+        {
+          processIDs: [process.processID],
+          updates: {
+            changes: {
+              processDetails: {
+                provisionalContractor: selectedContractor,
+              },
+            },
           },
         },
-      },
-      {
-        onSuccess() {
-          closeModal();
-        },
-      }
-    );
+        {
+          onSuccess() {
+            closeModal();
+          },
+        }
+      );
   };
 
-  const selectContractor = (contractorID: string) => {
-    setContractorID(contractorID);
+  const selectContractor = (contractor: ContractorProps) => {
+    setSelectedContractor(contractor);
   };
 
   if (contractors.isLoading) return <LoadingAnimation />;
@@ -84,13 +89,14 @@ const ProcessContractorList: React.FC<ProcessContractorListProps> = (props) => {
                 key={index}
                 contractor={contractor}
                 process={process}
-                selected={contractorID === contractor.hashedID}
+                selected={contractor.hashedID === selectedContractor?.hashedID}
               />
             ))}
           </Container>
           <Button
             onClick={saveContractor}
             variant="primary"
+            active={selectedContractor !== undefined}
             title={t("general.button.save")}
           />
         </form>

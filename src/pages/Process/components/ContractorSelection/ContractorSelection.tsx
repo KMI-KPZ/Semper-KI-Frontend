@@ -4,7 +4,6 @@ import {
   Button,
   Container,
   Heading,
-  LoadingAnimation,
   Modal,
   Text,
 } from "@component-library/index";
@@ -15,7 +14,6 @@ import ProcessContractorList from "./components/ContractorList";
 import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 import ContractorCard from "../../../../components/Process/ContractorCard";
 import ContractorSelectionAddressCard from "./components/AddressCard";
-import useGetContractors from "@/api/Process/Querys/useGetContractors";
 import ProcessConditionIcon from "@/components/Process/ConditionIcon";
 import ProcessStatusGate from "../../../../components/Process/StatusGate";
 
@@ -34,14 +32,10 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { process } = useDefinedProcess();
-  const contractors = useGetContractors();
 
   const [editContractor, setEditContractor] = useState(false);
 
-  const currentContractor = contractors.data?.find(
-    (contractor) =>
-      contractor.hashedID === process.processDetails.provisionalContractor
-  );
+  const currentContractor = process.processDetails.provisionalContractor;
 
   const [showDeliveryAddress, setShowDeliveryAddress] =
     useState<boolean>(false);
@@ -92,10 +86,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
         >
           <Container width="fit" className={`gap-2 p-0 `}>
             <ProcessConditionIcon
-              error={
-                process.processDetails.provisionalContractor === undefined ||
-                process.processDetails.provisionalContractor === ""
-              }
+              error={process.processDetails.provisionalContractor === undefined}
             />
 
             <Heading variant="h3">
@@ -113,8 +104,6 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
                 )}
               />
             </Container>
-          ) : contractors.isLoading ? (
-            <LoadingAnimation />
           ) : currentContractor === undefined ? (
             <Text>
               {t("Process.components.ContractorSelection.noContractorFound")}

@@ -8,7 +8,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 interface ContractorCardProps {
   contractor: ContractorProps;
-  selectContractor?: (contractorID: string) => void;
+  selectContractor?: (contractor: ContractorProps) => void;
   process?: Process;
   selected?: boolean;
   className?: string;
@@ -35,7 +35,7 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
 
   return (
     <Container
-      onClick={() => selectContractor && selectContractor(contractor.hashedID)}
+      onClick={() => selectContractor && selectContractor(contractor)}
       direction="row"
       width="full"
       justify="start"

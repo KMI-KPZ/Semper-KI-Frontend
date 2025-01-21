@@ -17,9 +17,10 @@ import {
 } from "@/api/Organization/Querys/useGetOrganization";
 import { UpdatePriorities } from "@/api/Organization/Mutations/useUpdateOrganization";
 import { objectToArray } from "@/services/utils";
+import { ContractorProps } from "./useGetContractors";
 
 export interface ProcessDetailsProps {
-  provisionalContractor?: string;
+  provisionalContractor?: ContractorProps;
   title?: string;
   clientBillingAddress?: UserAddressProps;
   clientDeliverAddress?: UserAddressProps;
@@ -171,7 +172,6 @@ export interface ChatMessageProps {
 export interface ProcessChangesProps {
   serviceStatus?: number;
   serviceType?: ServiceType;
-  provisionalContractor?: string;
   messages?: ChatMessageProps;
   processStatus?: ProcessStatus;
   files?: File[];
@@ -180,7 +180,7 @@ export interface ProcessChangesProps {
 }
 
 export interface UpdateProcessDetailsProps {
-  provisionalContractor?: string;
+  provisionalContractor?: ContractorProps;
   title?: string;
   clientDeliverAddress?: UserAddressProps;
   clientBillingAddress?: UserAddressProps;

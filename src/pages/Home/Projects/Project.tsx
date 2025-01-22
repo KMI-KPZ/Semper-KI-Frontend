@@ -12,10 +12,11 @@ import useGetDashboardProject from "@/api/Project/Querys/useGetDashboardProject"
 
 interface HomeProjectProps {
   projectID: string;
+  owner: boolean;
 }
 
 const HomeProject: React.FC<HomeProjectProps> = (props) => {
-  const { projectID } = props;
+  const { projectID, owner } = props;
   const { t } = useTranslation();
   // const project = useGetProject(projectID);
   const project = useGetDashboardProject(projectID);
@@ -46,7 +47,11 @@ const HomeProject: React.FC<HomeProjectProps> = (props) => {
         >
           {project.data.processes.map((process) => (
             <React.Fragment key={process.processID}>
-              <HomeProcess project={project.data} process={process} />
+              <HomeProcess
+                project={project.data}
+                process={process}
+                owner={owner}
+              />
               <Divider />
             </React.Fragment>
           ))}

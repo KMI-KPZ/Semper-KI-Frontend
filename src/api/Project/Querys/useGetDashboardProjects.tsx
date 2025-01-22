@@ -14,6 +14,7 @@ export interface FlatDashboardProject {
   updatedWhen: Date;
   projectDetails: ProjectDetailsProps;
   processesCount: number;
+  processIDs?: string[];
   owner: boolean;
 }
 
@@ -72,6 +73,7 @@ const useGetDashboardProjects = () => {
                   ? "Projekt ohne Titel"
                   : project.projectDetails.title,
               updatedWhen: new Date(project.updatedWhen),
+              processIDs: project.processIDs,
             })
           );
 

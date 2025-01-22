@@ -10,6 +10,8 @@ import useDeleteProject from "@/api/Project/Mutations/useDeleteProject";
 import logger from "@/hooks/useLogger";
 import ProjectTitleForm from "@/pages/Project/components/TitleForm";
 import useUser, { UserType } from "@/hooks/useUser";
+import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
+import useCloneProcess from "@/api/Process/Mutations/useCloneProcess";
 
 interface HomeProjektRowProps {
   project: FlatDashboardProject;
@@ -25,6 +27,7 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
   const { t } = useTranslation();
 
   const deleteProject = useDeleteProject();
+  const cloneProcess = useCloneProcess();
 
   const [titleEdit, setTitleEdit] = React.useState<boolean>(false);
 
@@ -32,10 +35,20 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
     setTitleEdit(!titleEdit);
   };
 
-  const handleOnClickButtonDelete = (projectID: string) => {
+  const handleOnClickButtonDelete = () => {
     window.confirm(t("Projects.components.TableRow.deleteConfirm")) === true
-      ? deleteProject.mutate([projectID])
+      ? deleteProject.mutate([project.projectID])
       : logger("delete canceled");
+  };
+
+  const handleOnClickButtonClone = () => {
+    if (project.processIDs)
+      window.confirm(t("Projects.components.TableRow.cloneConfirm")) === true
+        ? cloneProcess.mutate({
+            projectID: project.projectID,
+            processIDs: project.processIDs,
+          })
+        : logger("clone canceled");
   };
 
   return (
@@ -60,6 +73,17 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
               user.organization !== undefined &&
               user.organization === project.client) ? (
               <>
+                {project.owner ? (
+                  <Button
+                    title={t("general.button.clone")}
+                    size="sm"
+                    variant="text"
+                    children={<ControlPointDuplicateIcon />}
+                    onClick={() => {
+                      handleOnClickButtonClone();
+                    }}
+                  />
+                ) : null}
                 <Button
                   title={t("general.button.edit")}
                   size="sm"
@@ -74,7 +98,7 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
                   size="sm"
                   variant="text"
                   children={<DeleteIcon />}
-                  onClick={() => handleOnClickButtonDelete(project.projectID)}
+                  onClick={() => handleOnClickButtonDelete()}
                 />
               </>
             ) : null}
@@ -111,7 +135,9 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
           </Container>
         </td>
       </tr>
-      {open && <HomeProject projectID={project.projectID} />}
+      {open && (
+        <HomeProject projectID={project.projectID} owner={project.owner} />
+      )}
     </>
   );
 };

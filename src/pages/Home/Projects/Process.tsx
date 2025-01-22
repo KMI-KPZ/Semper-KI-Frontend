@@ -6,21 +6,34 @@ import TestIMG from "@images/Test.png";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import useDeleteProcess from "@/api/Process/Mutations/useDeleteProcess";
 import { DashboardProject } from "@/api/Project/Querys/useGetDashboardProject";
+import useCloneProcess from "@/api/Process/Mutations/useCloneProcess";
+import logger from "@/hooks/useLogger";
 
 interface HomeProcessProps {
   project: DashboardProject;
   process: Process;
+  owner: boolean;
 }
 
 const HomeProcess: React.FC<HomeProcessProps> = (props) => {
-  const { project, process } = props;
+  const { project, process, owner } = props;
   const { t } = useTranslation();
   const deleteProcess = useDeleteProcess();
+  const cloneProcess = useCloneProcess();
 
   const handleOnClickButtonDelete = (processID: string) => {
     if (window.confirm(t("Home.Projects.Process.deleteConfirm"))) {
       deleteProcess.mutate({ processIDs: [processID] });
     }
+  };
+
+  const handleOnClickButtonClone = () => {
+    window.confirm(t("Projects.components.TableRow.cloneConfirm")) === true
+      ? cloneProcess.mutate({
+          projectID: project.projectID,
+          processIDs: [process.processID],
+        })
+      : logger("clone canceled");
   };
 
   return (
@@ -311,6 +324,14 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
             variant="text"
             onClick={() => handleOnClickButtonDelete(process.processID)}
           />
+          {owner ? (
+            <Button
+              title={t("Home.Projects.Process.buttons.clone")}
+              size="sm"
+              variant="text"
+              onClick={() => handleOnClickButtonClone()}
+            />
+          ) : null}
         </Container>
       </Container>
     </Container>

@@ -37,6 +37,7 @@ const Service: React.FC<ServiceProps> = (props) => {
       end={ProcessStatus.SERVICE_COMPLICATION}
       menuButtonTitle={menuButtonTitle}
       pageTitle={pageTitle}
+      showActionContainer={!noServiceSelected}
     >
       {noServiceSelected ? (
         <ServiceSelection />

@@ -196,7 +196,7 @@
       "messages": "News",
       "files": "files"
     },
-    "FlatProcessStatus": {
+    "ProcessActionStatus": {
       "ACTION_REQUIRED": "Action required",
       "WAITING_CONTRACTOR": "Waiting for contractors",
       "WAITING_CLIENT": "Waiting for customer",
@@ -1952,7 +1952,7 @@
           "serviceType": "service",
           "updatedWhen": "Updated",
           "createdWhen": "Created",
-          "flatProcessStatus": "status",
+          "ProcessActionStatus": "status",
           "amount": "Number",
           "imgPath": "Picture",
           "order": "Series",

@@ -45,11 +45,13 @@ const ProjectsTable: React.FC<ProjectsTableProps> = (props) => {
     if (sortColumn) {
       const valueA = a[sortColumn];
       const valueB = b[sortColumn];
-      if (valueA < valueB) {
-        return sortOrder === "asc" ? -1 : 1;
-      }
-      if (valueA > valueB) {
-        return sortOrder === "asc" ? 1 : -1;
+      if (valueA !== undefined && valueB !== undefined) {
+        if (valueA < valueB) {
+          return sortOrder === "asc" ? -1 : 1;
+        }
+        if (valueA > valueB) {
+          return sortOrder === "asc" ? 1 : -1;
+        }
       }
     }
     return 0;

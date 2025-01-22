@@ -18,6 +18,7 @@ import {
 import { UpdatePriorities } from "@/api/Organization/Mutations/useUpdateOrganization";
 import { objectToArray } from "@/services/utils";
 import { ContractorProps } from "./useGetContractors";
+import { ProcessActionStatus } from "@/api/Project/Querys/useGetProject";
 
 export interface ProcessDetailsProps {
   provisionalContractor?: ContractorProps;
@@ -64,6 +65,7 @@ export type DefaultProcessProps = {
   messages: { [key: string]: ChatMessageProps[] };
   dependenciesIn: any[];
   dependenciesOut: any[];
+  actionStatus: ProcessActionStatus;
   project: {
     projectID: string;
     projectStatus: number;
@@ -262,12 +264,12 @@ export const isTypeOfProcess = (process: any): process is Process => {
     { key: "client", type: "string" },
     { key: "files", type: "object" },
     { key: "messages", type: "object" },
-    // { key: "contractor", type: "object" },
     { key: "createdWhen", type: "string" },
     { key: "updatedWhen", type: "string" },
     { key: "accessedWhen", type: "string" },
     { key: "processErrors", type: "object" },
     { key: "project", type: "object" },
+    { key: "flatProcessStatus", type: "string" },
   ];
 
   keysToCheck.forEach(({ key, type }) => {
@@ -333,6 +335,7 @@ export const parseProcess = (process: any): Process => {
     accessedWhen: new Date(process.accessedWhen),
     processStatusButtons: process.processStatusButtons,
     processErrors: process.processErrors,
+    actionStatus: process.flatProcessStatus,
   };
 
   return parsedProcess;

@@ -19,7 +19,7 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
   const deleteProcess = useDeleteProcess();
   const { getProcessEvents } = useEvents();
   const getRingColor = (): string => {
-    switch (process.flatProcessStatus) {
+    switch (process.actionStatus) {
       case "ACTION_REQUIRED":
         return "ring-yellow-300";
       case "IN_PROGRESS":
@@ -72,7 +72,7 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
               )}
             </Text>
             <Text>
-              {t(`types.FlatProcessStatus.${process.flatProcessStatus}`)}
+              {t(`types.ProcessActionStatus.${process.actionStatus}`)}
             </Text>
           </Container>
         </Container>

@@ -25,8 +25,12 @@ import useStatusButtonRequest from "@/api/Process/Mutations/useStatusButtonReque
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useSendProject from "@/api/Project/Mutations/useSendProject";
 import useVerifyProject from "@/api/Project/Mutations/useVerifyProject";
+
 interface UseStatusButtonsReturnProps {
-  getStatusButtons: (process: Process) => StatusButtonProps[];
+  getStatusButtons: (
+    process: Process,
+    includeDelete?: boolean
+  ) => StatusButtonProps[];
   handleOnClickButtonCount: (button: StatusButtonProcessProps) => void;
   handleOnClickButton: (button: StatusButtonProps, processID: string) => void;
 }
@@ -115,12 +119,19 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   const deleteProcess = useDeleteProcess();
   const statusButtonRequest = useStatusButtonRequest();
 
-  const getStatusButtons = (process: Process): StatusButtonProps[] => {
+  const getStatusButtons = (
+    process: Process,
+    includeDelete?: boolean
+  ): StatusButtonProps[] => {
+    const include = includeDelete === undefined ? false : includeDelete;
+
     return transformExternalStatusButtons(
-      process.processStatusButtons !== undefined
+      process.processStatusButtons !== undefined && include === false
         ? process.processStatusButtons.filter(
             (button) => button.title !== "DELETE"
           )
+        : process.processStatusButtons !== undefined && include === true
+        ? process.processStatusButtons
         : []
     );
   };

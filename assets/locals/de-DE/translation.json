@@ -197,13 +197,14 @@
       "messages": "Nachrichten",
       "files": "Dateien"
     },
-    "FlatProcessStatus": {
+    "ProcessActionStatus": {
       "ACTION_REQUIRED": "Aktion erforderlich",
       "WAITING_CONTRACTOR": "Warten auf Auftragnehmer",
       "WAITING_CLIENT": "Warten auf Kunde",
       "WAITING_PROCESS": "Warten auf Prozess",
       "IN_PROGRESS": "in Bearbeitung",
-      "COMPLETED": "Abgeschlossen"
+      "COMPLETED": "Abgeschlossen",
+      "FAILED": "Fehlgeschlagen"
     },
     "NotificationSettingsType": {
       "verification": "Verifizierung",
@@ -596,14 +597,16 @@
     "Process": {
       "Container": {
         "ActionContainer": {
-          "Failed": {
-            "heading": "Ihr Prozess ist fehlgeschlagen",
-            "reason": "Grund"
-          },
           "heading": "Todos",
           "noButtonsClient": "Keine Todos vorhanden. Der Auftragnehmer bearbeitet ihre Anfrage. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
           "noButtonsContractor": "Keine Todos vorhanden. Der Kunde ist am Zug. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
-          "finished": "Prozess Abgeschlossen. Es gibt keine weiteren Todos."
+          "finished": "Prozess Abgeschlossen. Es gibt keine weiteren Todos.",
+          "components": {
+            "ActionContainerWarpper": {
+              "heading": "Ihr Prozess ist fehlgeschlagen",
+              "reason": "Grund"
+            }
+          }
         }
       },
       "File": {
@@ -1172,8 +1175,9 @@
         "material": "Material",
         "postProcessings": "Nachbearbeitungen",
         "groupName": "Gruppe {{count}}",
-        "processErrors": "Hinweise",
+        "processErrors": "Todos",
         "noErrors": "Keine Interaktionen erforderlich",
+        "status": "Status",
         "buttons": {
           "clone": "Prozess in neues Projekt duplizieren"
         }
@@ -1945,7 +1949,7 @@
           "serviceType": "Service",
           "updatedWhen": "Aktualisiert",
           "createdWhen": "Erstellt",
-          "flatProcessStatus": "Status",
+          "actionStatus": "Status",
           "amount": "Anzahl",
           "imgPath": "Bild",
           "order": "Reihenfolge",

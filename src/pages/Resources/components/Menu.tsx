@@ -36,10 +36,10 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = (props) => {
       title: t("Resources.components.Menu.costing"),
       to: "/resources/costing",
     },
-    {
-      title: t("Resources.components.Menu.request"),
-      to: "/resources/request",
-    },
+    // {
+    //   title: t("Resources.components.Menu.request"),
+    //   to: "/resources/request",
+    // },
     {
       title: t("Resources.components.Menu.graph"),
       to: "/resources/graph",

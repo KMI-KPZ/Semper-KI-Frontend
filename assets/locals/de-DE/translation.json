@@ -66,7 +66,8 @@
       "verifyEMail": "E-Mail verifizieren",
       "manufacturing": "Herstellen lassen",
       "projects": "Meine Projekte",
-      "project": "Projekt"
+      "project": "Projekt",
+      "dashboard": "Dashboard"
     }
   },
   "enum": {

@@ -12,6 +12,7 @@ import { NavigationItemPreferredType } from "@/components/Header/Header";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { DataNaviagtionTranlationType } from "@/components";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 export type INavigationItem = {
   title: DataNaviagtionTranlationType;
@@ -38,6 +39,14 @@ export const NavigationItemData: INavigationItem[] = [
     extern: false,
     preferred: ["header", "home"],
     userTypes: [UserType.ANONYM],
+  },
+  {
+    title: "dashboard",
+    link: "/",
+    icon: <DashboardIcon fontSize="large" />,
+    extern: false,
+    preferred: ["header", "home"],
+    userTypes: [UserType.USER, UserType.ORGANIZATION, UserType.ADMIN],
   },
   {
     title: "projects",

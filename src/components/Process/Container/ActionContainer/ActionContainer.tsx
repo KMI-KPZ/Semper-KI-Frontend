@@ -1,5 +1,7 @@
 import { Button, Container, Heading } from "@component-library/index";
-import useStatusButtons from "@/hooks/Project/useStatusButtons";
+import useStatusButtons, {
+  StatusButtonProps,
+} from "@/hooks/Project/useStatusButtons";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useProcess from "@/hooks/Process/useProcess";
 import { useEffect, useState } from "react";
@@ -9,6 +11,7 @@ import ActionContainerWarpper, {
   isProcessFailed,
 } from "./components/FailedContainer";
 import ActionStatusCard from "../../ActionStatusCard";
+import logger from "@/hooks/useLogger";
 
 interface ActionContainerProps {
   start: ProcessStatus;
@@ -33,6 +36,24 @@ const ActionContainer: React.FC<ActionContainerProps> = (props) => {
       }, 3000);
     }
   }, [error]);
+
+  const handleOnClickButtonIntercept = (
+    button: StatusButtonProps,
+    processID: string
+  ) => {
+    if (
+      button.action.type === "request" &&
+      button.action.data.type === "deleteProcess"
+    ) {
+      window.confirm(
+        t("components.Process.Container.ActionContainer.deleteConfirm")
+      ) === true
+        ? handleOnClickButton(button, processID)
+        : logger("delete canceled");
+    } else {
+      handleOnClickButton(button, processID);
+    }
+  };
 
   const showDependingOnProcessStatus =
     process.processStatus >= start &&
@@ -81,7 +102,9 @@ const ActionContainer: React.FC<ActionContainerProps> = (props) => {
                 endIcon={
                   button.iconPosition === "right" ? button.icon : undefined
                 }
-                onClick={() => handleOnClickButton(button, process.processID)}
+                onClick={() =>
+                  handleOnClickButtonIntercept(button, process.processID)
+                }
                 onClickError={() => handleOnClickButtonError()}
                 title={button.title}
                 active={button.active}

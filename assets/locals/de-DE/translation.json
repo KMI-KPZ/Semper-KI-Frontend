@@ -601,6 +601,7 @@
           "noButtonsClient": "Keine Todos vorhanden. Der Auftragnehmer bearbeitet ihre Anfrage. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
           "noButtonsContractor": "Keine Todos vorhanden. Der Kunde ist am Zug. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
           "finished": "Prozess Abgeschlossen. Es gibt keine weiteren Todos.",
+          "deleteConfirm": "Möchten Sie den Prozess wirklich löschen?",
           "components": {
             "ActionContainerWarpper": {
               "heading": "Ihr Prozess ist fehlgeschlagen",

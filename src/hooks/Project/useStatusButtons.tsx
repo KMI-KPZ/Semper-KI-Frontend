@@ -264,9 +264,16 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
                   button.action.type === "request" &&
                   button.action.data.type === "cloneProcesses"
                 ) {
-                  navigate("/");
                   queryClient.invalidateQueries(["project"]);
                   queryClient.invalidateQueries(["dashboardProject"]);
+                  navigate("/");
+                } else if (
+                  button.action.type === "request" &&
+                  button.action.data.type === "deleteProcess"
+                ) {
+                  queryClient.invalidateQueries(["project"]);
+                  queryClient.invalidateQueries(["dashboardProject"]);
+                  navigate("/");
                 }
               },
             }

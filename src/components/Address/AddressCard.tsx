@@ -119,13 +119,13 @@ const AddressCard: React.FC<PropsWithChildren<AddressCardProps>> = (props) => {
               <Button
                 variant="text"
                 size="sm"
-                title={t("components.Address.AddressCard.buttons.edit")}
+                title={t("general.button.edit")}
                 onClick={handleOnButtonClickEdit}
               />
               <Button
                 variant="text"
                 size="sm"
-                title={t("components.Address.AddressCard.buttons.delete")}
+                title={t("general.button.delete")}
                 onClick={handleOnButtonClickDelete}
               />
             </>

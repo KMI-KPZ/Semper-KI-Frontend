@@ -23,9 +23,14 @@ const ProcessVerifyCard: React.FC<ProcessVerifyCardProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <Container direction="col" className="card" width="full" height="full">
+    <Container
+      direction="col"
+      className="card self-stretch"
+      justify="start"
+      width="full"
+    >
       <Heading variant="h3">
-        {t(`Process.components.Verify.components.VerifyCard.title.${type}`)}
+        {t(`Process.components.Verify.components.VerifyCard.heading.${type}`)}
       </Heading>
       <ProcessVerifyStatus status={status} />
       <Text>

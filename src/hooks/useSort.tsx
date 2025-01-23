@@ -4,14 +4,31 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 interface useSortReturnProps<T> {
   handleSort: (column: keyof T) => void;
   getSortIcon: (column: keyof T) => React.ReactNode;
+  handleNestedSort: (column: string) => void;
+  getNestedSortIcon: (column: string) => React.ReactNode;
   sortItems: (a: T, b: T) => 1 | -1 | 0;
 }
 
 const useSort = <T,>(): useSortReturnProps<T> => {
-  const [sortColumn, setSortColumn] = useState<keyof T | undefined>(); // State variable to keep track of the column to sort
+  const [sortColumn, setSortColumn] = useState<keyof T | string | undefined>(); // State variable to keep track of the column to sort
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc"); // State variable to keep track of the sorting order
 
   const handleSort = (column: keyof T) => {
+    if (sortColumn === column && sortOrder === "asc") {
+      // If the same column is clicked, toggle the sorting order
+      setSortOrder("desc");
+    } else if (sortColumn === column && sortOrder === "desc") {
+      // If the same column is clicked, toggle the sorting order
+      setSortOrder("asc");
+      setSortColumn(undefined);
+    } else {
+      // If a different column is clicked, set the new column and reset the sorting order to ascending
+      setSortColumn(column);
+      setSortOrder("asc");
+    }
+  };
+
+  const handleNestedSort = (column: string) => {
     if (sortColumn === column && sortOrder === "asc") {
       // If the same column is clicked, toggle the sorting order
       setSortOrder("desc");
@@ -51,10 +68,44 @@ const useSort = <T,>(): useSortReturnProps<T> => {
     );
   };
 
+  const getNestedSortIcon = (column: string): React.ReactNode => {
+    return (
+      <div
+        className={`duration-300 ${
+          sortColumn !== column
+            ? "invisible h-6 w-6 opacity-0"
+            : sortOrder === "asc"
+            ? "visible rotate-0 opacity-100"
+            : "visible rotate-180 opacity-100"
+        }`}
+      >
+        <KeyboardArrowUpIcon />
+      </div>
+    );
+  };
+
+  const getNestedValue = (obj: any, path: string) => {
+    return path.split(".").reduce((acc, part) => acc && acc[part], obj);
+  };
+
+  // const sortItems = (a: T, b: T) => {
+  //   if (sortColumn) {
+  //     const valueA = a[sortColumn];
+  //     const valueB = b[sortColumn];
+  //     if (valueA < valueB) {
+  //       return sortOrder === "asc" ? -1 : 1;
+  //     }
+  //     if (valueA > valueB) {
+  //       return sortOrder === "asc" ? 1 : -1;
+  //     }
+  //   }
+  //   return 0;
+  // };
+
   const sortItems = (a: T, b: T) => {
     if (sortColumn) {
-      const valueA = a[sortColumn];
-      const valueB = b[sortColumn];
+      const valueA = getNestedValue(a, sortColumn as string);
+      const valueB = getNestedValue(b, sortColumn as string);
       if (valueA < valueB) {
         return sortOrder === "asc" ? -1 : 1;
       }
@@ -65,7 +116,13 @@ const useSort = <T,>(): useSortReturnProps<T> => {
     return 0;
   };
 
-  return { getSortIcon, handleSort, sortItems };
+  return {
+    getSortIcon,
+    handleSort,
+    sortItems,
+    getNestedSortIcon,
+    handleNestedSort,
+  };
 };
 
 export default useSort;

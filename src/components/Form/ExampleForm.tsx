@@ -90,7 +90,7 @@ const ExampleForm: React.FC<ExampleFormProps> = (props) => {
       onSubmit={handleSubmit(handleOnClickButtonSubmit)}
       className={`flex h-full w-full flex-col items-center justify-start gap-5 overflow-auto bg-white p-5 md:justify-center`}
     >
-      <Heading variant="h1">{t("components.Form.ExampleForm.title")}</Heading>
+      <Heading variant="h1">{t("components.Form.ExampleForm.heading")}</Heading>
       {labelItems.map((label, index) => (
         <GeneralInput
           key={index}
@@ -105,12 +105,12 @@ const ExampleForm: React.FC<ExampleFormProps> = (props) => {
       <Container>
         <Button
           variant="primary"
-          title={t("components.Form.ExampleForm.button.reset")}
+          title={t("general.button.reset")}
           onClick={handleOnClickButtonReset}
         />
         <Button
           variant="primary"
-          title={t("components.Form.ExampleForm.button.submit")}
+          title={t("general.button.submit")}
           onClick={handleSubmit(handleOnClickButtonSubmit)}
         />
       </Container>

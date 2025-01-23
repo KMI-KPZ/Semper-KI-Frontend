@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@component-library/index";
 import { Heading } from "@component-library/index";
@@ -9,7 +9,8 @@ import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Quer
 import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
-} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface Props {
   material: MaterialProps;
@@ -20,10 +21,13 @@ export const ProcessMaterialItem: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const { process } = useProcess();
   const updateProcess = useUpdateProcess();
+  const { groupID } = useContext(ManufacturingGroupContext);
   const handleOnClickButtonDeselect = () => {
     updateProcess.mutate({
       processIDs: [process.processID],
-      updates: { deletions: { serviceDetails: ["material"] } },
+      updates: {
+        deletions: { serviceDetails: { groups: [{ groupID, material }] } },
+      },
     });
   };
 
@@ -48,9 +52,7 @@ export const ProcessMaterialItem: React.FC<Props> = (props) => {
       {isProcessAtServiceStatus(process) ? (
         <Button
           onClick={handleOnClickButtonDeselect}
-          title={t(
-            "Service.Manufacturing.Material.components.Item.button.change"
-          )}
+          title={t("general.button.change")}
         />
       ) : null}
     </div>

@@ -26,19 +26,24 @@ const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
   const rolesQuery = useGetOrganizationRoles();
   const userQuery = useGetOrganizationUsers();
   return (
-    <Container className="container" width="full" direction="col">
+    <Container
+      className="container"
+      width="full"
+      direction="col"
+      id="OrganizationUserTable"
+    >
       <Heading variant="h2">
-        {t("Organization.components.table.header")}
+        {t("Organization.components.UserTable.header")}
       </Heading>
       <Divider />
       <LoadingSuspense
         query={userQuery}
-        errorText={t("Organization.components.table.error.empty")}
+        errorText={t("Organization.components.UserTable.error.empty")}
         refetchLoading
       >
         <LoadingSuspense
           query={rolesQuery}
-          errorText={t("Organization.components.table.error.empty")}
+          errorText={t("Organization.components.UserTable.error.empty")}
         >
           <div className="w-full overflow-auto">
             <div className="w-full">
@@ -47,16 +52,16 @@ const OrganizationUserTable: React.FC<OrganizationTableProps> = (props) => {
                   <tr>
                     <th>{""}</th>
                     <th className="px-3 text-left">
-                      {t("Organization.components.table.name")}
+                      {t("Organization.components.UserTable.name")}
                     </th>
                     <th className="px-3 text-left">
-                      {t("Organization.components.table.email")}
+                      {t("Organization.components.UserTable.email")}
                     </th>
                     <th className="px-3 text-left">
-                      {t("Organization.components.table.role")}
+                      {t("Organization.components.UserTable.role")}
                     </th>
                     <th className="px-3">
-                      {t("Organization.components.table.actions")}
+                      {t("Organization.components.UserTable.actions")}
                     </th>
                   </tr>
                 </thead>
@@ -124,7 +129,8 @@ const OrganizationtableRow: React.FC<{
   };
   const handleOnClickDelete = () => {
     if (
-      window.confirm(t("Organization.components.table.confirmDelete")) === true
+      window.confirm(t("Organization.components.UserTable.confirmDelete")) ===
+      true
     )
       deleteUser.mutate(email);
   };
@@ -168,7 +174,7 @@ const OrganizationtableRow: React.FC<{
               ))
             ) : (
               <option value="empty" disabled>
-                {t("Organization.components.table.empty")}
+                {t("Organization.components.UserTable.empty")}
               </option>
             )}
           </select>
@@ -180,11 +186,7 @@ const OrganizationtableRow: React.FC<{
             <Button
               size="sm"
               variant="text"
-              title={t(
-                `Organization.components.table.button.${
-                  edit === true ? "safe" : "edit"
-                }`
-              )}
+              title={t(`general.button.${edit === true ? "save" : "edit"}`)}
               onClick={handleOnClickEdit}
               children={
                 edit === true ? (
@@ -201,7 +203,7 @@ const OrganizationtableRow: React.FC<{
               size="sm"
               onClick={handleOnClickDelete}
               children={<DeleteForeverIcon fontSize="small" />}
-              title={t("Organization.Roles.components.Table.button.delete")}
+              title={t("general.button.delete")}
             />
           </PermissionGate>
         </div>

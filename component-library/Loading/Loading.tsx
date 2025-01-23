@@ -118,10 +118,10 @@ export const AppLoadingSuspense: React.FC<AppLoadingSuspenseProps> = (
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-5 overflow-clip bg-white">
       <Heading variant="h1">
-        {t("App.components.LoadingSuspense.title")}
+        {t("component-library.Loading.LoadingSuspense.heading")}
       </Heading>
       <Heading variant="h2">
-        {t("App.components.LoadingSuspense.loading")}
+        {t("component-library.Loading.LoadingSuspense.loading")}
       </Heading>
     </div>
   );

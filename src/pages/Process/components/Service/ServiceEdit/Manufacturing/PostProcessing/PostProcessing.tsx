@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Button,
@@ -18,6 +18,7 @@ import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import { useNavigate, useParams } from "react-router-dom";
 import useModal from "@/hooks/useModal";
 import ServiceSearch from "../Search/Search";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface Props {}
 
@@ -31,10 +32,11 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
   const loadedPostProcessings = useGetPostProcessigns();
   const setPostProcessing = useSetPostProcessing();
   const navigate = useNavigate();
+  const { group, groupID } = useContext(ManufacturingGroupContext);
 
   const [selectedPostProcessing, setSelectedPostProcessing] = useState<
     PostProcessingProps[]
-  >(process.serviceDetails.postProcessings || []);
+  >(group.postProcessings || []);
   const [searchText, setSearchText] = useState<string>("");
 
   const closeModal = () => {
@@ -44,6 +46,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
   const handleOnClickButtonSave = () => {
     setPostProcessing.mutate(
       {
+        groupID: groupID,
         projectID: project.projectID,
         processID: process.processID,
         postProcessings: selectedPostProcessing,
@@ -109,7 +112,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
             <Container direction="row" width="full" justify="between">
               <Heading variant="h2">
                 {t(
-                  "Service.Manufacturing.PostProcessing.PostProcessing.available"
+                  "Process.components.Service.ServiceEdit.Manufacturing.PostProcessing.heading"
                 )}
               </Heading>
             </Container>
@@ -140,9 +143,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
                                 onClick={() =>
                                   handleOnClickButtonDeselect(postProcessing)
                                 }
-                                title={t(
-                                  "Service.Manufacturing.PostProcessing.PostProcessing.button.deselect"
-                                )}
+                                title={t("general.button.deselect")}
                               />
                             ) : (
                               <Button
@@ -150,9 +151,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
                                 onClick={() =>
                                   handleOnClickButtonSelect(postProcessing)
                                 }
-                                title={t(
-                                  "Service.Manufacturing.PostProcessing.PostProcessing.button.select"
-                                )}
+                                title={t("general.button.select")}
                               />
                             )}
                           </Container>
@@ -163,27 +162,19 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
               ) : (
                 <Text className="w-full text-center">
                   {t(
-                    "Service.Manufacturing.PostProcessing.PostProcessing.error.noPostProcessings"
+                    "Process.components.Service.ServiceEdit.Manufacturing.PostProcessing.error.noPostProcessings"
                   )}
                 </Text>
               )}
             </LoadingSuspense>
           </Container>
         </Container>
-        <Container
-          width="full"
-          direction="row"
-          justify="end"
-          className="fixed bottom-10 z-10  pr-5 md:sticky md:right-10"
-        >
-          <Button
-            variant="primary"
-            onClick={handleOnClickButtonSave}
-            title={t(
-              "Service.Manufacturing.PostProcessing.PostProcessing.button.save"
-            )}
-          />
-        </Container>
+        <Button
+          variant="primary"
+          className="fixed bottom-5 z-10  w-fit self-center pr-5 md:sticky md:self-end"
+          onClick={handleOnClickButtonSave}
+          title={t("general.button.save")}
+        />
       </Container>
     </Modal>
   );

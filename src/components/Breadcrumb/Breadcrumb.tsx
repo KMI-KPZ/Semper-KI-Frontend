@@ -55,6 +55,7 @@ export type DataNaviagtionTranlationType =
   | "manufacturing"
   | "projects"
   | "project"
+  | "dashboard"
   | "demonstrator";
 
 interface BreadcrumbItem {
@@ -115,6 +116,7 @@ export function isDataNaviagtionTranlationType(
     "manufacturing",
     "projects",
     "project",
+    "dashboard",
     "demonstrator",
   ].includes(input);
 }

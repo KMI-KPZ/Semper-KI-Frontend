@@ -31,8 +31,15 @@ const OrganizationAddress: React.FC<OrganizationAddressProps> = (props) => {
   };
 
   return (
-    <Container width="full" direction="col" className="container">
-      <Heading variant="h2">{t("Profile.address.header")}</Heading>
+    <Container
+      width="full"
+      direction="col"
+      className="container"
+      id="OrganizationAddress"
+    >
+      <Heading variant="h2">
+        {t("Organization.components.Address.header")}
+      </Heading>
       <Divider />
       {organization.details.addresses !== undefined &&
       organization.details.addresses.length > 0 ? (
@@ -46,19 +53,23 @@ const OrganizationAddress: React.FC<OrganizationAddressProps> = (props) => {
             onClick={handleOnClickButtonAddAddress}
           >
             <AddIcon />
-            <Text>{t("Profile.button.addAddress")}</Text>
+            <Text>
+              {t("Organization.components.Address.button.addAddress")}
+            </Text>
           </div>
         </Container>
       ) : (
         <Container width="full" direction="col">
-          <Text>{t("Profile.address.noAddress")}</Text>
+          <Text>{t("Organization.components.Address.noAddress")}</Text>
           <div
             className="hover-card flex w-full flex-col items-center justify-center gap-5 p-10"
             tabIndex={0}
             onClick={handleOnClickButtonAddAddress}
           >
             <AddIcon />
-            <Text>{t("Profile.button.addAddress")}</Text>
+            <Text>
+              {t("Organization.components.Address.button.addAddress")}
+            </Text>
           </div>
         </Container>
       )}
@@ -71,7 +82,7 @@ const OrganizationAddress: React.FC<OrganizationAddressProps> = (props) => {
         <AddressForm
           type="organization"
           closeModal={closeModalAddress}
-          title={t("Profile.newAddressTitle")}
+          title={t("Organization.components.Address.newAddressTitle")}
         />
       </Modal>
     </Container>

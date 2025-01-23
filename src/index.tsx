@@ -15,6 +15,8 @@ import BodyScrollContextProvider from "./contexts/BodyScrollContextProvider";
 import ModalContextProvider from "./contexts/ModalContextProvider";
 import CSRFOutlet from "./outlets/CSRFOutlet";
 import UserLocalsOutlet from "./outlets/UserLocalsOutlet";
+import { TopicsProvider } from "@/contexts/ChatbotContextProvider";
+import { OrganizationOutlet } from "./outlets/OrganizationOutlet";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -41,20 +43,24 @@ root.render(
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
           <CSRFOutlet>
-            <UserContextProvider>
-              <UserLocalsOutlet>
-                <PermissionContextProvider>
-                  <EventContextProvider>
-                    <BodyScrollContextProvider>
-                      <ModalContextProvider>
-                        <App />
-                        <ReactQueryDevtools />
-                      </ModalContextProvider>
-                    </BodyScrollContextProvider>
-                  </EventContextProvider>
-                </PermissionContextProvider>
-              </UserLocalsOutlet>
-            </UserContextProvider>
+            <TopicsProvider>
+              <UserContextProvider>
+                <OrganizationOutlet>
+                  <UserLocalsOutlet>
+                    <PermissionContextProvider>
+                      <EventContextProvider>
+                        <BodyScrollContextProvider>
+                          <ModalContextProvider>
+                            <App />
+                            <ReactQueryDevtools />
+                          </ModalContextProvider>
+                        </BodyScrollContextProvider>
+                      </EventContextProvider>
+                    </PermissionContextProvider>
+                  </UserLocalsOutlet>
+                </OrganizationOutlet>
+              </UserContextProvider>
+            </TopicsProvider>
           </CSRFOutlet>
         </QueryClientProvider>
       </BrowserRouter>

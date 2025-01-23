@@ -30,9 +30,7 @@ const RawProcessFileRow: React.FC<RawProcessFileRowProps> = (props) => {
           <Button
             size="sm"
             variant="text"
-            title={t(
-              "Process.components.Contract.components.FileRow.button.delete"
-            )}
+            title={t("general.button.delete")}
             children={<DeleteIcon />}
             onClick={handleOnClickButtonDelete}
           />

@@ -43,7 +43,7 @@ const useUpdateProcess = () => {
     mutationFn: updateProcess,
     onSuccess: () => {
       queryClient.invalidateQueries(["project", projectID]);
-      queryClient.invalidateQueries(["flatProjects"]);
+      queryClient.invalidateQueries(["dashboardProject"]);
     },
   });
 };

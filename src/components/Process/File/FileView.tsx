@@ -1,16 +1,21 @@
 import React from "react";
 import { Container } from "@component-library/index";
-import { ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
+import {
+  ProcessOrigin,
+  ProcessStatus,
+} from "@/api/Process/Querys/useGetProcess";
 import useProcess from "@/hooks/Process/useProcess";
 import ProcessFileTable from "./components/FileTable";
 import ProcessUploadCard from "./components/UploadCard";
+import ProcessStatusGate from "@/components/Process/StatusGate";
 
 interface ProcessFileViewProps {
   origin: ProcessOrigin;
+  endStatus: ProcessStatus;
 }
 
 const ProcessFileView: React.FC<ProcessFileViewProps> = (props) => {
-  const { origin } = props;
+  const { origin, endStatus } = props;
   const [files, setFiles] = React.useState<File[]>([]);
 
   const { process } = useProcess();
@@ -31,16 +36,6 @@ const ProcessFileView: React.FC<ProcessFileViewProps> = (props) => {
 
   return (
     <Container width="full" direction="col">
-      {/* <Container width="full" direction="col">
-        <Text>
-          {t(
-            process.client === user.hashedID ||
-              process.client === user.organization
-              ? "Process.components.Contract.Contract.user"
-              : "Process.components.Contract.Contract.orga"
-          )}
-        </Text>
-      </Container> */}
       <ProcessFileTable files={process.files} type="current" origin={origin} />
       <ProcessFileTable
         origin={origin}
@@ -49,7 +44,9 @@ const ProcessFileView: React.FC<ProcessFileViewProps> = (props) => {
         resetUploadFiles={resetUploadFiles}
         deleteFile={deleteFile}
       />
-      <ProcessUploadCard addFiles={addFiles} />
+      <ProcessStatusGate endExclude end={endStatus}>
+        <ProcessUploadCard addFiles={addFiles} />
+      </ProcessStatusGate>
     </Container>
   );
 };

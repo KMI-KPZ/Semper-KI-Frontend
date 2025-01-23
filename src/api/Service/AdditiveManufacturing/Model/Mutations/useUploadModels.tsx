@@ -1,13 +1,18 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
+import {
+  ModelLevelOfDetail,
+  ProcessOrigin,
+} from "@/api/Process/Querys/useGetProcess";
 
 interface ModelUploadDetails {
   tags: string[];
   date: Date;
   licenses: string[];
   certificates: string[];
+  quantity: number;
+  levelOfDetail: ModelLevelOfDetail;
 }
 
 export interface UploadModel {
@@ -18,6 +23,7 @@ export interface UploadModel {
 interface ModelsUpload {
   projectID: string;
   processID: string;
+  groupID: number;
   origin: ProcessOrigin;
   models: UploadModel[];
 }
@@ -28,6 +34,7 @@ const useUploadModels = () => {
     models: _models,
     processID,
     projectID,
+    groupID,
     origin,
   }: ModelsUpload) => {
     const formData = new FormData();
@@ -40,6 +47,7 @@ const useUploadModels = () => {
     formData.append("details", JSON.stringify(detailList));
     formData.append("projectID", projectID);
     formData.append("processID", processID);
+    formData.append("groupID", "" + groupID);
     formData.append("origin", origin);
 
     return authorizedCustomAxios

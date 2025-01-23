@@ -30,8 +30,8 @@ const ProcessUploadCard: React.FC<ProcessUploadCardProps> = (props) => {
   const { t } = useTranslation();
   const {
     addFiles,
-    title = t("components.Process.UploadCard.title"),
-    subTitle = t("components.Process.UploadCard.subTitle"),
+    title = t("components.Process.File.components.UploadCard.heading"),
+    subTitle = t("components.Process.File.components.UploadCard.subHeading"),
   } = props;
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
@@ -77,7 +77,7 @@ const ProcessUploadCard: React.FC<ProcessUploadCardProps> = (props) => {
     <Container width="full">
       <a
         className={`flex w-full grow flex-col items-center justify-center
-                    gap-2 rounded-xl  border-2 bg-white
+                    gap-2 rounded-md  border-2 bg-white
                     p-2 text-black transition duration-300
                     hover:cursor-pointer  hover:bg-türkis-200 md:max-w-xl
                     ${dragActive ? "bg-türkis-200" : ""}
@@ -87,7 +87,7 @@ const ProcessUploadCard: React.FC<ProcessUploadCardProps> = (props) => {
         onDragLeave={handleDragOnUploadCard}
         onDragOver={handleDragOnUploadCard}
         onDrop={handleDropOnUploadCard}
-        title={t("components.Process.UploadCard.title")}
+        title={t("components.Process.File.components.UploadCard.heading")}
         href="#"
       >
         <UploadIcon className="h-20 w-20" />

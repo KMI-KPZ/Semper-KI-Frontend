@@ -1,11 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Text } from "@component-library/index";
+import { Badge, Button, Container, Text } from "@component-library/index";
 import TestImg from "@images/Test.png";
 import { FlatProcess } from "@/api/Project/Querys/useGetProject";
 import { useNavigate } from "react-router-dom";
 import useDeleteProcess from "@/api/Process/Mutations/useDeleteProcess";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
+import useEvents from "@/hooks/useEvents/useEvents";
 
 interface FlatProcessCardProps {
   flatProcess: FlatProcess;
@@ -16,8 +17,9 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const deleteProcess = useDeleteProcess();
+  const { getProcessEvents } = useEvents();
   const getRingColor = (): string => {
-    switch (process.flatProcessStatus) {
+    switch (process.actionStatus) {
       case "ACTION_REQUIRED":
         return "ring-yellow-300";
       case "IN_PROGRESS":
@@ -43,7 +45,7 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
       width="full"
       direction="row"
       justify="between"
-      className={`overflow-clip rounded-xl ring-2 ${getRingColor()} duration-300 hover:cursor-pointer hover:shadow-md hover:ring-4 hover:ring-opacity-50`}
+      className={`overflow-clip rounded-md ring-2 ${getRingColor()} duration-300 hover:cursor-pointer hover:shadow-md hover:ring-4 hover:ring-opacity-50`}
       onClick={handleOnClickButtonContinue}
     >
       <img src={TestImg} alt="" className="h-full " />
@@ -70,7 +72,7 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
               )}
             </Text>
             <Text>
-              {t(`types.FlatProcessStatus.${process.flatProcessStatus}`)}
+              {t(`types.ProcessActionStatus.${process.actionStatus}`)}
             </Text>
           </Container>
         </Container>
@@ -89,17 +91,19 @@ const FlatProcessCard: React.FC<FlatProcessCardProps> = (props) => {
           </Container>
         </Container>
         <Container direction="col" gap={3}>
-          <Button
-            onClick={handleOnClickButtonContinue}
-            size="sm"
-            variant="primary"
-            title={t("Project.components.FlatProcessCard.button.continue")}
-          />
+          <Badge count={getProcessEvents(process.processID).length}>
+            <Button
+              onClick={handleOnClickButtonContinue}
+              size="sm"
+              variant="primary"
+              title={t("general.button.continue")}
+            />
+          </Badge>
           <Button
             onClick={handleOnClickButtonDelete}
             size="sm"
             variant="text"
-            title={t("Project.components.FlatProcessCard.button.delete")}
+            title={t("general.button.delete")}
           />
         </Container>
       </Container>

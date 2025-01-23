@@ -22,20 +22,24 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = (props) => {
     },
     {
       title: t("Resources.components.Menu.printers"),
-      to: "/resources/printers",
+      to: "/resources/printer",
     },
     {
       title: t("Resources.components.Menu.materials"),
-      to: "/resources/materials",
+      to: "/resources/material",
     },
     {
       title: t("Resources.components.Menu.postProcessings"),
-      to: "/resources/postprocessings",
+      to: "/resources/additionalRequirement",
     },
     {
-      title: t("Resources.components.Menu.request"),
-      to: "/resources/request",
+      title: t("Resources.components.Menu.costing"),
+      to: "/resources/costing",
     },
+    // {
+    //   title: t("Resources.components.Menu.request"),
+    //   to: "/resources/request",
+    // },
     {
       title: t("Resources.components.Menu.graph"),
       to: "/resources/graph",

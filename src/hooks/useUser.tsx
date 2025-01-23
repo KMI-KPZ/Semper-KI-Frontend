@@ -6,16 +6,17 @@ import { useContext } from "react";
 interface ReturnProps {
   isLoggedIn: boolean;
   user: UserProps;
-  query: UseQueryResult<AuthorizedUserProps, Error>;
+  query: UseQueryResult<AuthorizedUser, Error>;
 }
 
-export type UserProps = AnonymUser | AuthorizedUserProps;
+export type UserProps = AnonymUser | DefaultUser | AdminUser | OrgaUser;
+export type AuthorizedUser = DefaultUser | AdminUser | OrgaUser;
 
 export type AnonymUser = {
   usertype: UserType.ANONYM;
 };
 
-export interface AuthorizedUserProps {
+export type BaseUser = {
   hashedID: string;
   name: string;
   details: UserDetailsProps;
@@ -23,9 +24,20 @@ export interface AuthorizedUserProps {
   updatedWhen: Date;
   accessedWhen: Date;
   lastSeen: Date;
+};
+
+export type DefaultUser = {
+  usertype: UserType.USER;
+} & BaseUser;
+
+export type AdminUser = {
+  usertype: UserType.ADMIN;
+} & BaseUser;
+
+export type OrgaUser = {
   organization?: string;
-  usertype: UserType.USER | UserType.ORGANIZATION | UserType.ADMIN;
-}
+  usertype: UserType.ORGANIZATION;
+} & BaseUser;
 
 export interface UserDetailsProps {
   email?: string;

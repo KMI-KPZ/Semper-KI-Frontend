@@ -9,92 +9,95 @@ import { useProject } from "@/hooks/Project/useProject";
 import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
 import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Querys/useGetMaterials";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import ProcessStatusGate from "@/pages/Process/components/StatusGate";
+import ProcessStatusGate from "@/components/Process/StatusGate";
 import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
-} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 interface ProcessServiceMaterialCardProps {
   material: MaterialProps;
+  groupID: number;
 }
 
 const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
   props
 ) => {
-  const { material } = props;
+  const { material, groupID } = props;
   const { t } = useTranslation();
   const { process } = useProcess();
   const { project } = useProject();
   const navigate = useNavigate();
   const deleteMaterial = useDeleteMaterial();
   const handleOnButtonClickMaterial = () => {
-    navigate("service/manufacturing/material");
+    navigate(`service/manufacturing/${groupID}/material`);
   };
 
   const [edit, setEdit] = useState<MaterialProps | undefined>(undefined);
-  const handleOnButtonClickDeleteMaterial = (materialID: string) => {
+  const handleOnButtonClickDeleteMaterial = () => {
     deleteMaterial.mutate({
       processID: process.processID,
       projectID: project.projectID,
-      materialID,
+      groupID,
     });
   };
 
   return (
     <ServiceDetailsCard>
-      <img
-        src={TestImg}
-        alt={t(
-          "Process.Service.ServiceDetails.components.manufacturing.material.img"
-        )}
-        className="max-h-40 w-full object-contain md:w-fit"
-      />
-      <Container direction="col" width="full" className="" gap={3}>
+      <Container direction="col" width="full" className="gap-2">
+        <Text variant="strong">{material.title}</Text>
+        <img
+          src={TestImg}
+          alt={t(
+            "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.img"
+          )}
+          className="max-h-40 w-full object-contain md:w-fit"
+        />
+      </Container>
+      <Container direction="col" width="full" className="gap-1">
         <Container direction="row" justify="between" width="full">
           <Text>
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.material.name"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.cost"
             )}
           </Text>
-          <Text>{material.title}</Text>
+          <Text variant="strong">
+            {material.medianPrice}
+            {" €/KG"}
+          </Text>
         </Container>
         <Container direction="row" justify="between" width="full">
           <Text>
             {t(
-              "Process.Service.ServiceDetails.components.manufacturing.material.type"
-            )}
-          </Text>
-          <Text>---</Text>
-        </Container>
-        <Container direction="row" justify="between" width="full">
-          <Text>
-            {t(
-              "Process.Service.ServiceDetails.components.manufacturing.material.properties"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.properties"
             )}
           </Text>
         </Container>
-        <ul className="flex w-full list-inside list-disc flex-col items-start justify-start pl-3">
+        <Container width="full" direction="col" className="gap-0 px-3">
           {material.propList.length > 0 ? (
             material.propList
               .filter((item) => item.name !== "imgPath")
               .map((prop, index) => (
-                <li key={index}>
-                  {isOntoNodePropertyName(prop.name)
-                    ? t(
-                        `types.OntoNodePropertyName.${
-                          prop.name as OntoNodePropertyName
-                        }`
-                      )
-                    : prop.name}
-                  {": "}
-                  {prop.value.toString()}
-                </li>
+                <Container key={index} justify="between" width="full">
+                  <Text className="whitespace-nowrap">
+                    &bull;{" "}
+                    {isOntoNodePropertyName(prop.name)
+                      ? t(
+                          `types.OntoNodePropertyName.${
+                            prop.name as OntoNodePropertyName
+                          }`
+                        )
+                      : prop.name}
+                  </Text>
+                  <Text className="whitespace-nowrap">
+                    {prop.value.toString()} {prop.unit}
+                  </Text>
+                </Container>
               ))
           ) : (
-            <li>---</li>
+            <Text>---</Text>
           )}
-        </ul>
+        </Container>
       </Container>
       <Container
         direction="col"
@@ -103,28 +106,24 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
         gap={3}
         className="flex-row p-5 md:flex-col"
       >
-        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+        <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
             title={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.editMaterial"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.button.editMaterial"
             )}
             size="sm"
             variant="secondary"
             onClick={handleOnButtonClickMaterial}
-            children={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.edit"
-            )}
+            children={t("general.button.edit")}
           />
           <Button
             title={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.deleteMaterial"
+              "Process.components.Service.ServiceDetails.components.Manufacturing.button.deleteMaterial"
             )}
             size="sm"
             variant="text"
-            onClick={() => handleOnButtonClickDeleteMaterial(material.id)}
-            children={t(
-              "Process.Service.ServiceDetails.components.manufacturing.button.delete"
-            )}
+            onClick={() => handleOnButtonClickDeleteMaterial()}
+            children={t("general.button.delete")}
           />
         </ProcessStatusGate>
       </Container>

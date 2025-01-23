@@ -8,10 +8,12 @@ import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import NotificationForm from "../../components/Form/Notifications/NotificationForm";
 import ProfileStatistics from "./components/Statistics";
 import ProfileLocals from "./components/Locals";
-import ProfileGeneral from "./components/General";
+import ProfileGeneral from "../../components/Form/ProfileForm";
 import ProfileAddress from "./components/Address";
 import ProfileOrganization from "./components/Organization";
 import useDeleteUser from "@/api/User/Mutations/useDeleteUser";
+import ProfileAPIToken from "./components/APIToken";
+import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
 
 interface Props {}
 
@@ -26,6 +28,8 @@ const Profile: React.FC<Props> = (props) => {
       deleteUser.mutate();
     }
   };
+
+  useScrollIntoView();
 
   return (
     <Container className="" direction="col" width="full">
@@ -49,6 +53,8 @@ const Profile: React.FC<Props> = (props) => {
               : user.details.notificationSettings?.organization
           }
         />
+        <Divider />
+        <ProfileAPIToken />
         <Divider />
         <Container width="full">
           <Button

@@ -1,8 +1,30 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
-import { AdminProps, OrganizationProps } from "@/pages/Admin/hooks/useAdmin";
-import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
+import useUser, { UserType } from "@/hooks/useUser";
+import { parseAuthorizedUser } from "@/api/User/Querys/useGetUser";
+import {
+  Organization,
+  parseOrganization,
+} from "@/api/Organization/Querys/useGetOrganization";
+import { AdminDataUser, AdminProps } from "@/hooks/useAdmin";
+
+const parseAdminUser = (userData: any): AdminDataUser => {
+  const authorizedUser = parseAuthorizedUser(userData);
+
+  return {
+    ...authorizedUser,
+    usertype: UserType.USER,
+    organizationNames:
+      userData.organizationNames !== ""
+        ? userData.organizationNames.toString().split(",")
+        : [],
+    // organization:
+    //   userData.organizations !== ""
+    //     ? userData.organizations.toString().split(",")
+    //     : undefined,
+  };
+};
 
 const useGetAdminData = () => {
   const { user } = useUser();
@@ -12,21 +34,10 @@ const useGetAdminData = () => {
       .then((response) => {
         const data: AdminProps = {
           organizations: response.data.organizations.map(
-            (organization: any): OrganizationProps => ({
-              ...organization,
-              accessedWhen: new Date(organization.accessedWhen),
-              createdWhen: new Date(organization.createdWhen),
-              updatedWhen: new Date(organization.updatedWhen),
-            })
+            (organization: any): Organization => parseOrganization(organization)
           ),
           user: response.data.user.map(
-            (user: any): AuthorizedUserProps => ({
-              ...user,
-              organization: user.organizations,
-              accessedWhen: new Date(user.accessedWhen),
-              createdWhen: new Date(user.createdWhen),
-              updatedWhen: new Date(user.updatedWhen),
-            })
+            (user: any): AdminDataUser => parseAdminUser(user)
           ),
         };
 

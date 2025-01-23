@@ -102,7 +102,7 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
 
   return (
     <Container className="container" width="full" direction="col">
-      <Heading variant="h2">{t("Organization.Roles.Roles.header")}</Heading>
+      <Heading variant="h2">{t("Organization.Roles.header")}</Heading>
       <Divider />
       <LoadingSuspense query={rolesQuery}>
         {rolesQuery.data !== undefined && rolesQuery.data.length > 0 ? (
@@ -118,17 +118,14 @@ const OrganizationRoles: React.FC<OrganizationRolesProps> = (props) => {
               roles={rolesQuery.data}
               editRole={editRole}
             />
-            <PermissionGate element="OrganizationButtonCreateRole">
-              <Button
-                title={t("Organization.Roles.Roles.button.create")}
-                onClick={createNewRole}
-              />
-            </PermissionGate>
           </>
         ) : (
-          <Text variant="body">{t("Organization.Roles.Roles.empty")}</Text>
+          <Text variant="body">{t("Organization.Roles.empty")}</Text>
         )}
       </LoadingSuspense>
+      <PermissionGate element="OrganizationButtonCreateRole">
+        <Button title={t("general.button.create")} onClick={createNewRole} />
+      </PermissionGate>
       <Modal
         modalKey="OrganizationRolesForm"
         open={edit}

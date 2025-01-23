@@ -1,10 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Container, Divider, Heading, Text } from "@component-library/index";
-import { AuthorizedUserProps } from "@/hooks/useUser";
+import { AuthorizedUser } from "@/hooks/useUser";
 
 interface ProfileStatisticsProps {
-  user: AuthorizedUserProps;
+  user: AuthorizedUser;
 }
 
 const ProfileStatistics: React.FC<ProfileStatisticsProps> = (props) => {
@@ -13,7 +13,7 @@ const ProfileStatistics: React.FC<ProfileStatisticsProps> = (props) => {
 
   return (
     <Container width="full" direction="col">
-      <Heading variant="h2">{t("Profile.stats.header")}</Heading>
+      <Heading variant="h2">{t("Profile.Statistics.header")}</Heading>
       <Divider />
       <Container width="full" direction="auto">
         <Container width="full" direction="row" align="start" justify="start">
@@ -25,9 +25,11 @@ const ProfileStatistics: React.FC<ProfileStatisticsProps> = (props) => {
             className="p-3"
             gap={3}
           >
-            <Text className="break-all">{t("Profile.stats.created")}</Text>
-            <Text className="break-all">{t("Profile.stats.accessed")}</Text>
-            <Text className="break-all">{t("Profile.stats.updated")}</Text>
+            <Text className="break-all">{t("Profile.Statistics.created")}</Text>
+            <Text className="break-all">
+              {t("Profile.Statistics.accessed")}
+            </Text>
+            <Text className="break-all">{t("Profile.Statistics.updated")}</Text>
           </Container>
           <Container
             direction="col"
@@ -57,12 +59,11 @@ const ProfileStatistics: React.FC<ProfileStatisticsProps> = (props) => {
             className="p-3"
             gap={3}
           >
-            <Text className="break-all">{t("Profile.stats.lastLogin")}</Text>
             <Text className="break-all">
-              {t("Profile.stats.lastLoginLocation")}
+              {t("Profile.Statistics.lastLogin")}
             </Text>
             <Text className="break-all">
-              {t("Profile.stats.lastLoginNumber")}
+              {t("Profile.Statistics.lastLoginNumber")}
             </Text>
           </Container>
           <Container
@@ -79,12 +80,7 @@ const ProfileStatistics: React.FC<ProfileStatisticsProps> = (props) => {
                 ? new Date(user.details.statistics?.lastLogin).toLocaleString()
                 : "---"}
             </Text>
-            <Text className="break-all">
-              {user.details.statistics !== undefined &&
-              user.details.statistics.locationOfLastLogin !== undefined
-                ? user.details.statistics.locationOfLastLogin
-                : "---"}
-            </Text>
+
             <Text className="break-all">
               {user.details.statistics !== undefined &&
               user.details.statistics.numberOfLoginsTotal !== undefined

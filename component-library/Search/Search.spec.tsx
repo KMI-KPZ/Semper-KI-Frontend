@@ -7,7 +7,7 @@ describe("Search", () => {
     const { getByPlaceholderText } = render(
       <Search handleSearchInputChange={handleSearchInputChange} />
     );
-    const input = getByPlaceholderText("Admin.User.search");
+    const input = getByPlaceholderText("component-library.Search.placeholder");
     fireEvent.change(input, { target: { value: "example" } });
     expect(handleSearchInputChange).toHaveBeenCalledWith("example");
   });
@@ -17,7 +17,7 @@ describe("Search", () => {
     const { getByPlaceholderText } = render(
       <Search handleSearchInputChange={handleSearchInputChange} />
     );
-    const input = getByPlaceholderText("Admin.User.search");
+    const input = getByPlaceholderText("component-library.Search.placeholder");
     fireEvent.keyDown(input, { key: "Enter" });
     expect(handleSearchInputChange).not.toHaveBeenCalled();
   });

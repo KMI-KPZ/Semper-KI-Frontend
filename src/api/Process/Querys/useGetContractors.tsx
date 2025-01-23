@@ -2,13 +2,13 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import { OrganizationBranding } from "@/api/Organization/Querys/useGetOrganization";
 
 export interface ContractorProps {
-  name: string;
   hashedID: string;
-  details: {
-    adress: string;
-  };
+  name: string;
+  branding: OrganizationBranding;
+  prices: { groupCosts: [number, number][] };
 }
 
 const useGetContractors = () => {
@@ -20,9 +20,8 @@ const useGetContractors = () => {
       )
       .then((response) => {
         const responseData = response.data;
-        const contractors: ContractorProps[] =
-          responseData === "fu" ? [] : responseData;
 
+        const contractors: ContractorProps[] = responseData;
         logger("useGetContractors | getContractors ✅ |", response);
         return contractors;
       });

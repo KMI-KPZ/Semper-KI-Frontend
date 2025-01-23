@@ -20,11 +20,14 @@ const useGetAdminProject = () => {
           client: responseData.client,
           projectID: responseData.projectID,
           projectStatus: responseData.status,
-          projectDetails: responseData.details,
+          projectDetails: responseData.projectDetails,
           createdWhen: new Date(responseData.createdWhen),
           updatedWhen: new Date(responseData.updatedWhen),
           processes: responseData.processes.map(
             (process: any): Process => ({
+              dependenciesIn: process.dependenciesIn,
+              dependenciesOut: process.dependencies,
+              project: process.project,
               client: process.client,
               processDetails: process.processDetails,
               processID: process.processID,
@@ -39,6 +42,8 @@ const useGetAdminProject = () => {
               files: getProcessFiles(process.files),
               accessedWhen: new Date(process.accessedWhen),
               processStatusButtons: process.processStatusButtons,
+              processErrors: process.processErrors,
+              actionStatus: process.actionStatus,
             })
           ),
         };

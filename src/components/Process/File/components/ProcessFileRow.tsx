@@ -42,9 +42,7 @@ const ProcessFileRow: React.FC<ProcessFileRowProps> = (props) => {
           <Button
             size="sm"
             variant="text"
-            title={t(
-              "Process.components.Contract.components.FileRow.button.download"
-            )}
+            title={t("general.button.download")}
             children={<DownloadIcon />}
             onClick={handleOnButtonClickDownload}
             loading={downloadFile.isLoading}
@@ -57,9 +55,7 @@ const ProcessFileRow: React.FC<ProcessFileRowProps> = (props) => {
             <Button
               size="sm"
               variant="text"
-              title={t(
-                "Process.components.Contract.components.FileRow.button.delete"
-              )}
+              title={t("general.button.delete")}
               children={<DeleteIcon />}
               onClick={handleOnButtonClickDelete}
               loading={deleteFile.isLoading}

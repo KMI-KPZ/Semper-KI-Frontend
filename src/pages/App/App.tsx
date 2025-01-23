@@ -1,43 +1,36 @@
 import "react-toastify/dist/ReactToastify.css";
-import Footer from "@/components/Footer";
 import Login from "../Login/Login";
 import Logout from "../Logout/Logout";
 import Organization from "../Organization/Organization";
 import Portfolio from "../Portfolio/Portfolio";
-import Resouces from "../Resources/Resources";
+import Resources from "../Resources/Resources";
 import Legal from "../Legal/Legal";
 import PermissionGate from "@/components/PermissionGate/PermissionGate";
-import CkBanner from "@/components/CookieBanner/CkBanner";
+import CookieBanner from "@/components/CookieBanner/CookieBanner";
 import RegisterOrganization from "../RegisterOrganization/RegisterOrganization";
 import EmailVerification from "../EmailVerification/EmailVerification";
 import ResKriVer from "../ResKriVer/ResKriVer";
 import RedirectLogin from "../Login/RedirectLogin";
-import Menu from "@/components/Menu";
+import Menu from "@/components/Menu/Menu";
 import Advantages from "../Advantages/Advantages";
 import Chatbot from "@/components/Chatbot/Chatbot";
 import Profile from "../Profile/Proflle";
-import Projects from "../Projects/Projects";
 import ProjectOutlet from "@/outlets/ProjectOutlet";
-import ProjectPage from "../Project/ProjectPage";
 import ProcessOutlet from "@/outlets/ProcessOutlet";
 import ProcessPage from "../Process/ProcessPage";
 import Admin from "../Admin/Admin";
-import AdminUser from "../Admin/User/User";
-import AdminOrganization from "../Admin/Organization/Organization";
 import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
-import ToTopButton from "@component-library/ToTopButton/ToTopButton";
 import ServiceEdit from "../Process/components/Service/ServiceEdit/ServiceEdit";
 import ManufacturingProcessOutlet from "@/outlets/ManufacturingProcessOutlet";
 import ServiceModeling from "../Process/components/Service/ServiceEdit/Modelling/Modelling";
-import { Header } from "@/components/Header";
+import { Header } from "@/components/Header/Header";
 import { createContext, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { Test } from "../Test/Test";
-import { OrganizationOutlet } from "@/outlets/OrganizationOutlet";
 import { ToastContainer } from "react-toastify";
-import { ContentBox } from "@component-library/index";
+import { Container, ContentBox } from "@component-library/index";
 import { Background, Breadcrumb } from "@/components/index";
 import { AdminOutlet } from "@/outlets/AdminOutlet";
 import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
@@ -45,6 +38,17 @@ import { ManufacturingModels } from "../Process/components/Service/ServiceEdit/M
 import { ManufacturingMaterials } from "../Process/components/Service/ServiceEdit/Manufacturing/Material/Material";
 import { ManufacturingPostProcessings } from "../Process/components/Service/ServiceEdit/Manufacturing/PostProcessing/PostProcessing";
 import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
+import useUser, { UserType } from "@/hooks/useUser";
+import Footer from "@/components/Footer/Footer";
+import UITest from "../Test/UITest";
+import DescriptiveModelForm from "@/components/Form/DescriptiveModelForm";
+import ManufacturingGroupOutlet from "@/outlets/ManufacturingGroupOutlet";
+import ManufacturingModelEdit from "../Process/components/Service/ServiceEdit/Manufacturing/Model/Edit/ManufacturingModelEdit";
+import ManufacturingModelOutlet from "@/outlets/ManufacturingModelOutlet";
+import Demo from "../Demo/Demo";
+import HomeProjects from "../Home/Projects/Projects";
+// import Projects from "../Projects/Projects";
+// import ProjectPage from "../Project/ProjectPage";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -69,8 +73,7 @@ export const AppContext = createContext<AppContext>({
 
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(initialAppState);
-
-  //test
+  const { user } = useUser();
 
   return (
     <AppContext.Provider
@@ -88,190 +91,123 @@ const App: React.FC = () => {
         <main className="flex h-full w-full flex-grow flex-col items-center justify-start">
           <Breadcrumb />
           <Routes data-testid="routes">
-            <Route index element={<Home />} />
             <Route
-              path="advantages/user"
+              index
               element={
-                <ContentBox>
-                  <Advantages type="user" />
-                </ContentBox>
+                user.usertype === UserType.ADMIN ? (
+                  <Navigate to="admin" />
+                ) : (
+                  <Home />
+                )
               }
             />
             <Route
-              path="advantages/organization"
               element={
                 <ContentBox>
-                  <Advantages type="organization" />
+                  <Outlet />
                 </ContentBox>
               }
-            />
-            <Route
-              path="registerOrganization"
-              element={
-                <ContentBox>
-                  <RegisterOrganization />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="reskriver"
-              element={
-                <ContentBox>
-                  <ResKriVer />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="logout"
-              element={
-                <ContentBox>
-                  <Logout />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="portfolio"
-              element={
-                <ContentBox>
-                  <Portfolio />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="verifyEMail"
-              element={
-                <ContentBox>
-                  <EmailVerification />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="login"
-              element={
-                <ContentBox>
-                  <Login />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="login/redirect"
-              element={
-                <ContentBox>
-                  <RedirectLogin />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="register"
-              element={
-                <ContentBox>
-                  <Login />
-                </ContentBox>
-              }
-            />
-            <Route
-              path="legal/*"
-              element={
-                <ContentBox>
-                  <Legal />
-                </ContentBox>
-              }
-            />
-            <Route path="demo/*" element={<Navigate to="/project/new" />} />
-            <Route path="projects/*">
+            >
               <Route
-                index
-                element={
-                  <PermissionGate element="Projects">
-                    <ContentBox>
-                      <Projects />
-                    </ContentBox>
-                  </PermissionGate>
-                }
+                path="advantages/user"
+                element={<Advantages type="user" />}
               />
               <Route
-                path=":projectID/*"
-                element={
-                  <ContentBox>
-                    <ProjectOutlet />
-                  </ContentBox>
-                }
-              >
+                path="advantages/organization"
+                element={<Advantages type="organization" />}
+              />
+              <Route
+                path="registerOrganization"
+                element={<RegisterOrganization />}
+              />
+              <Route path="reskriver" element={<ResKriVer />} />
+              <Route path="logout" element={<Logout />} />
+              <Route path="portfolio" element={<Portfolio />} />
+              <Route path="verifyEMail" element={<EmailVerification />} />
+              <Route path="login" element={<Login />} />
+              <Route path="login/redirect" element={<RedirectLogin />} />
+              <Route path="register" element={<Login />} />
+              <Route path="legal/*" element={<Legal />} />
+              <Route path="demo/*" element={<Demo />} />
+              <Route path="projects/*">
                 <Route
                   index
                   element={
-                    <PermissionGate element="Projects">
-                      <ProjectPage />
-                    </PermissionGate>
+                    user.usertype === UserType.ANONYM ? (
+                      <Container width="full">
+                        <HomeProjects />
+                      </Container>
+                    ) : (
+                      <Navigate to="/" />
+                    )
                   }
                 />
-                <Route
-                  path=":processID/*"
-                  element={
-                    <ProcessOutlet>
-                      <ProcessPage />
-                    </ProcessOutlet>
-                  }
-                >
-                  <Route path="service/*" element={<DefinedProcessOutlet />}>
-                    <Route index element={<ServiceEdit />} />
-                    <Route
-                      path="manufacturing/*"
-                      element={<ManufacturingProcessOutlet />}
-                    >
-                      <Route index element={<Navigate to="model" />} />
-                      <Route path="model" element={<ManufacturingModels />} />
+                {/* <Route index element={<Projects />} /> */}
+                <Route path=":projectID/*" element={<ProjectOutlet />}>
+                  <Route index element={<Navigate to="/" />} />
+                  {/* <Route index element={<ProjectPage />} /> */}
+                  <Route
+                    path=":processID/*"
+                    element={
+                      <ProcessOutlet>
+                        <ProcessPage />
+                      </ProcessOutlet>
+                    }
+                  >
+                    <Route path="service/*" element={<DefinedProcessOutlet />}>
+                      <Route index element={<ServiceEdit />} />
                       <Route
-                        path="material"
-                        element={<ManufacturingMaterials />}
-                      />
-                      <Route
-                        path="postprocessing"
-                        element={<ManufacturingPostProcessings />}
-                      />
-                      <Route path="*" element={<Error />} />
+                        path="manufacturing/*"
+                        element={<ManufacturingProcessOutlet />}
+                      >
+                        <Route
+                          path=":groupID/*"
+                          element={<ManufacturingGroupOutlet />}
+                        >
+                          <Route index element={<Navigate to="model" />} />
+                          <Route path="model">
+                            <Route index element={<ManufacturingModels />} />
+                            <Route
+                              path="descriptive"
+                              element={<DescriptiveModelForm />}
+                            />
+                            <Route
+                              path=":modelID"
+                              element={
+                                <ManufacturingModelOutlet>
+                                  <ManufacturingModelEdit />
+                                </ManufacturingModelOutlet>
+                              }
+                            />
+                          </Route>
+                          <Route
+                            path="material"
+                            element={<ManufacturingMaterials />}
+                          />
+                          <Route
+                            path="postprocessing"
+                            element={<ManufacturingPostProcessings />}
+                          />
+                          <Route path="*" element={<Error />} />
+                        </Route>
+                      </Route>
+                      <Route path="modeling/*" element={<ServiceModeling />} />
+                      <Route path="*" element={<Navigate to="." />} />
                     </Route>
-                    <Route path="modeling/*" element={<ServiceModeling />} />
-                    <Route path="*" element={<Navigate to="." />} />
                   </Route>
                 </Route>
               </Route>
-            </Route>
-            <Route element={<AuthorizedUserOutlet />}>
-              <Route
-                path="test"
-                element={
-                  <ContentBox>
-                    <Test />
-                  </ContentBox>
-                }
-              />
-              <Route
-                path="account"
-                element={
-                  <ContentBox>
-                    <Profile />
-                  </ContentBox>
-                }
-              />
-              <Route
-                element={
-                  <ContentBox>
-                    <OrganizationOutlet />
-                  </ContentBox>
-                }
-              >
+              <Route element={<AuthorizedUserOutlet />}>
+                <Route path="test" element={<Test />} />
+                <Route path="ui" element={<UITest />} />
+                <Route path="account" element={<Profile />} />
                 <Route
                   path="organization"
                   element={
                     <PermissionGate
                       element="Organization"
                       showMessage
-                      children={
-                        <ContentBox>
-                          <Organization />
-                        </ContentBox>
-                      }
+                      children={<Organization />}
                     />
                   }
                 />
@@ -279,49 +215,23 @@ const App: React.FC = () => {
                   path="resources/*"
                   element={
                     <PermissionGate
-                      children={
-                        <ContentBox>
-                          <Resouces />
-                        </ContentBox>
-                      }
+                      children={<Resources />}
                       element="Resources"
                       showMessage
                     />
                   }
                 />
+                <Route element={<AdminOutlet />}>
+                  <Route path="admin/*" element={<Admin />} />
+                </Route>
               </Route>
-              <Route element={<AdminOutlet />}>
-                <Route
-                  path="admin/*"
-                  element={
-                    <ContentBox>
-                      <Routes>
-                        <Route index element={<Admin />} />
-                        <Route path="user" element={<AdminUser />} />
-                        <Route
-                          path="organization"
-                          element={<AdminOrganization />}
-                        />
-                        {/* <Route path="projects/*" element={<ProjectsRoutes />} /> */}
-                      </Routes>
-                    </ContentBox>
-                  }
-                />
-              </Route>
+              <Route path="*" element={<Error />} />
             </Route>
-            <Route
-              path="*"
-              element={
-                <ContentBox>
-                  <Error />
-                </ContentBox>
-              }
-            />
           </Routes>
         </main>
-        <CkBanner />
+        <CookieBanner />
         <Menu />
-        <ToTopButton />
+        {/* <ToTopButton /> */}
         <Footer />
       </div>
       <Chatbot />

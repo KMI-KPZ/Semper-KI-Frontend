@@ -5,7 +5,6 @@ import useUser, { UserType } from "@/hooks/useUser";
 import useGetAdminProject from "@/api/Admin/Querys/useGetAdminProject";
 import useGetProject from "@/api/Project/Querys/useGetProject";
 import ProjectContextProvider from "@/contexts/ProjectContext";
-
 interface ProjectOutletProps {}
 
 const ProjectOutlet: React.FC<PropsWithChildren<ProjectOutletProps>> = (

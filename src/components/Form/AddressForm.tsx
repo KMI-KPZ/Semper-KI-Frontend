@@ -118,7 +118,7 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
       <Text>{t("components.Form.AddressForm.hint")}</Text>
       <Button
         variant="primary"
-        title={t("components.Form.AddressForm.buttons.save")}
+        title={t("general.button.save")}
         onClick={handleSubmit(onSubmit)}
       />
     </form>

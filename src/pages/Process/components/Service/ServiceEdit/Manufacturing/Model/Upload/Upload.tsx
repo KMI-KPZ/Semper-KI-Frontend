@@ -1,13 +1,18 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as UploadIcon } from "@icons/Upload.svg";
 import { Button, Container, Heading, Text } from "@component-library/index";
 import useUploadModels from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUploadModels";
-import useProcess from "@/hooks/Process/useProcess";
 import { useProject } from "@/hooks/Project/useProject";
 import useModal from "@/hooks/useModal";
 import UploadModelCard from "./components/ModelCard";
 import { useFieldArray, useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
+// import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import { ModelLevelOfDetail } from "@/api/Process/Querys/useGetProcess";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface Props {}
 
@@ -16,10 +21,14 @@ export interface ProcessModelUploadFormProps {
 }
 
 export interface ManufacturingModelUploadData {
+  modelID?: string;
+  file?: File;
   tags?: string;
   licenses?: string;
   certificates?: string;
-  file: File;
+  quantity?: number;
+  levelOfDetail?: ModelLevelOfDetail;
+  scalingFactor?: number;
 }
 
 export const ProcessModelUpload: React.FC<Props> = (props) => {
@@ -28,10 +37,46 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
   const { deleteModal } = useModal();
+  const { group, groupID } = useContext(ManufacturingGroupContext);
 
-  const { process } = useProcess();
+  const { process } = useManufacturingProcess();
   const { project } = useProject();
   const uploadModels = useUploadModels();
+  // const updateProcess = useUpdateProcess();
+
+  const formSchema = z.object({
+    models: z.array(
+      z.object({
+        modelID: z.string().optional(),
+        file: z.instanceof(File).optional(),
+        tags: z.string().optional(),
+        scalingFactor: z.number().min(1).max(100000).optional(),
+        licenses: z.string().min(
+          1,
+          t("zod.requiredName", {
+            name: t(
+              `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.license`
+            ),
+          })
+        ),
+        certificates: z.string().optional(),
+        quantity: z
+          .number()
+          .min(1, t("zod.numberMin", { min: 1 }))
+          .max(10000000, t("zod.numberMax", { max: 10000000 })),
+        levelOfDetail: z.nativeEnum(ModelLevelOfDetail, {
+          errorMap: () => ({
+            message: t("zod.requiredName", {
+              name: t(
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.levelOfDetail`
+              ),
+            }),
+          }),
+        }),
+      })
+    ),
+  });
+
   const {
     register,
     handleSubmit,
@@ -39,35 +84,22 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     watch,
     formState: { errors },
   } = useForm<ProcessModelUploadFormProps>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       models: [],
     },
   });
+
   const { fields, remove, append, update } = useFieldArray({
     control,
     name: "models",
   });
 
-  const dataTypes: string[] = [
-    ".STEP",
-    ".STP",
-    ".SLDPRT",
-    ".STL",
-    ".SAT",
-    ".3DXML",
-    ".3MF",
-    ".PRT",
-    ".IPT",
-    ".CATPART",
-    ".X_T",
-    ".PTC",
-    ".X_B",
-    ".DXF",
-  ];
+  const dataTypes: string[] = [".STL"];
 
   const addFilesToForm = (files: File[]) => {
     files.forEach((file) => {
-      append({ file });
+      append({ file, quantity: 1, scalingFactor: 100 });
     });
   };
 
@@ -112,44 +144,93 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     remove(index);
   };
 
-  const saveForAll = (index: number) => {
+  const saveForAll = (
+    index: number,
+    key: keyof ManufacturingModelUploadData
+  ) => {
     const overrideModel = watch(`models.${index}`);
-    fields.forEach((model, i) => {
+    const currentField = watch(`models`);
+    currentField.forEach((model, i) => {
       if (i !== index) {
         update(i, {
-          file: model.file,
-          certificates: overrideModel.certificates,
-          licenses: overrideModel.licenses,
-          tags: overrideModel.tags,
+          ...model,
+          [key]: overrideModel[key],
         });
       }
     });
   };
 
   const sendModels = (data: ProcessModelUploadFormProps) => {
+    // const updatedModels: ProcessModel[] = data.models
+    //   .filter(
+    //     (model) => model.file === undefined && model.modelID !== undefined
+    //   )
+    //   .map((model) => ({
+    //     item: model,
+    //     model: group.models?.find(
+    //       (existingModel) => existingModel.id === model.modelID
+    //     )!,
+    //   }))
+    //   .map(
+    //     (data): ProcessModel => ({
+    //       ...data.model,
+    //       certificates:
+    //         data.item.certificates === undefined
+    //           ? []
+    //           : data.item.certificates.split(",").map((item) => item.trim()),
+    //       licenses:
+    //         data.item.licenses === undefined
+    //           ? []
+    //           : data.item.licenses.split(",").map((item) => item.trim()),
+    //       tags:
+    //         data.item.tags === undefined
+    //           ? []
+    //           : data.item.tags.split(",").map((item) => item.trim()),
+    //       quantity: data.item.quantity !== undefined ? data.item.quantity : 1,
+    //       levelOfDetail:
+    //         data.item.levelOfDetail !== undefined
+    //           ? data.item.levelOfDetail
+    //           : ModelLevelOfDetail.MEDIUM,
+    //       scalingFactor:
+    //         data.item.scalingFactor !== undefined
+    //           ? data.item.scalingFactor
+    //           : 100,
+    //     })
+    //   );
+
     uploadModels.mutate(
       {
         processID: process.processID,
         projectID: project.projectID,
+        groupID: groupID,
         origin: "Service",
-        models: data.models.map((item) => ({
-          file: item.file,
-          details: {
-            date: new Date(),
-            certificates:
-              item.certificates === undefined
-                ? []
-                : item.certificates.split(",").map((item) => item.trim()),
-            licenses:
-              item.licenses === undefined
-                ? []
-                : item.licenses.split(",").map((item) => item.trim()),
-            tags:
-              item.tags === undefined
-                ? []
-                : item.tags.split(",").map((item) => item.trim()),
-          },
-        })),
+        models: data.models
+          .filter((model) => model.file !== undefined)
+          .map((item) => ({
+            file: item.file!,
+            details: {
+              date: new Date(),
+              certificates:
+                item.certificates === undefined
+                  ? []
+                  : item.certificates.split(",").map((item) => item.trim()),
+              licenses:
+                item.licenses === undefined
+                  ? []
+                  : item.licenses.split(",").map((item) => item.trim()),
+              tags:
+                item.tags === undefined
+                  ? []
+                  : item.tags.split(",").map((item) => item.trim()),
+              quantity: item.quantity !== undefined ? item.quantity : 1,
+              levelOfDetail:
+                item.levelOfDetail !== undefined
+                  ? item.levelOfDetail
+                  : ModelLevelOfDetail.MEDIUM,
+              scalingFactor:
+                item.scalingFactor !== undefined ? item.scalingFactor : 100,
+            },
+          })),
       },
       {
         onSuccess() {
@@ -159,11 +240,30 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     );
   };
 
+  const getCompressedErrors = (): string[] => {
+    const uniqueErrors = new Set<string>();
+
+    // Iterate through the nested errors object
+    Object.values(errors.models || []).forEach((modelErrors) => {
+      if (modelErrors && typeof modelErrors === "object") {
+        Object.values(modelErrors).forEach((error) => {
+          if (error && "message" in error) {
+            uniqueErrors.add((error as { message: string }).message);
+          }
+        });
+      }
+    });
+
+    return Array.from(uniqueErrors);
+  };
+
   return (
     <form className="flex h-full w-full flex-col items-center justify-start gap-5">
       <Container width="full" direction="row" justify="between">
         <Heading variant="h2" className="w-full text-left">
-          {t("Service.Manufacturing.Model.Model.upload.title")}
+          {t(
+            "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.heading"
+          )}
         </Heading>
       </Container>
 
@@ -180,6 +280,9 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                     key={model.id}
                     index={index}
                     model={model}
+                    existingModel={group.models?.find(
+                      (existingModel) => existingModel.id === model.modelID
+                    )}
                     register={register}
                   />
                 );
@@ -190,21 +293,27 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                 width="full"
                 direction="row"
                 justify="end"
-                className="fixed bottom-10 z-10  md:sticky md:right-10"
+                align="end"
+                className="fixed bottom-5 z-10  w-fit self-center pr-5 md:sticky md:self-end"
               >
-                {errors.models !== undefined ? (
-                  <Text variant="body" className="text-red-500">
-                    {t(
-                      `Service.Manufacturing.Model.Upload.Upload.error.licenses`
-                    )}
-                  </Text>
+                {errors !== undefined && getCompressedErrors().length > 0 ? (
+                  <Container
+                    className="rounded-md border-2 bg-white p-3"
+                    direction="col"
+                  >
+                    {getCompressedErrors().map((error, index) => (
+                      <Text key={index} className=" text-red-500">
+                        {error}
+                      </Text>
+                    ))}
+                  </Container>
                 ) : null}
                 <Button
                   width="fit"
                   loading={uploadModels.isLoading}
                   variant="primary"
                   title={t(
-                    `Service.Manufacturing.Model.Upload.Upload.button.upload`
+                    `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.button.upload`
                   )}
                   onClick={handleSubmit(sendModels)}
                   // className="fixed bottom-10 z-10 md:sticky md:right-10 "
@@ -214,7 +323,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
           </Container>
         ) : null}
         <a
-          className={`flex w-full grow flex-col items-center justify-center gap-2  rounded-xl border-2
+          className={`flex w-full grow flex-col items-center justify-center gap-2  rounded-md border-2
         bg-white p-2 text-black transition
         duration-300  hover:cursor-pointer hover:bg-türkis-200
         ${dragActive ? "bg-türkis-200" : ""}
@@ -224,14 +333,20 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
           onDragLeave={handleDragOnUploadCard}
           onDragOver={handleDragOnUploadCard}
           onDrop={handleDropOnUploadCard}
-          title={t("Service.Manufacturing.Model.Upload.Upload.card.title")}
+          title={t(
+            "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.heading"
+          )}
           href="#"
         >
           <UploadIcon className="h-32 w-32" />
           <Heading variant="h2">
-            {t("Service.Manufacturing.Model.Upload.Upload.card.title")}
+            {t(
+              "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.heading"
+            )}
           </Heading>
-          {t("Service.Manufacturing.Model.Upload.Upload.card.text")}
+          {t(
+            "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.text"
+          )}
         </a>
         <input
           accept={dataTypes.map((type: string) => type).join(",")}

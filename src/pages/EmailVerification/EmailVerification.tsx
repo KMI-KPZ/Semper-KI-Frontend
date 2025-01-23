@@ -11,7 +11,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = (props) => {
 
   return (
     <Container className="bg-white p-5" width="full" direction="col">
-      <Heading variant="h1">{t("EmailVerification.title")}</Heading>
+      <Heading variant="h1">{t("EmailVerification.heading")}</Heading>
       <Text variant="body">{t("EmailVerification.text")}</Text>
       <Text variant="body">{t("EmailVerification.text2")}</Text>
       <Text variant="body">{t("EmailVerification.text3")}</Text>

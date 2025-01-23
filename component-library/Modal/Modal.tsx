@@ -145,8 +145,7 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
               md:h-fit  md:max-h-[90vh] 
               md:max-w-6xl
               md:-translate-y-1/2
-              md:translate-x-1/2 md:rounded-xl
-              md:bg-gray-100
+              md:translate-x-1/2 
               md:p-5`,
 
           className
@@ -156,7 +155,7 @@ export const Modal: React.FC<PropsWithChildren<ModelProps>> = ({
         {noIcon === true ? null : (
           <Button
             className="absolute right-1 top-1 z-10  "
-            title={t("component-library.Modal.button.close")}
+            title={t("general.button.close")}
             children={<CloseIcon />}
             variant="tertiary"
             width="fit"

@@ -1,168 +1,97 @@
-import {
-  DeleteEvent,
-  Event,
-  ProcessEventItem,
-  ProjectEventItem,
-  ProjectEvents,
-} from "@/pages/App/types";
-import { useQueryClient } from "@tanstack/react-query";
-import { useContext } from "react";
-import { useTranslation } from "react-i18next";
+import { useContext, useMemo } from "react";
 import useOrgaEvent from "./hooks/useOrgaEvent";
-import { JSONIsParseable, JSONSafeParse } from "@/services/utils";
-import logger from "@/hooks/useLogger";
 import useProjectEvent from "./hooks/useProjectEvent";
-import { toast } from "@/hooks/useToast";
 import { EventContext } from "@/contexts/EventContextProvider";
-import useReloadPermissions from "@/api/Permissions/Mutations/useReloadPermissions";
+import { Event, ProcessEvent, ProjectEvent } from "./EventTypes";
+import useProcessEvent from "./hooks/useProcessEvent";
+import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
+import { useTranslation } from "react-i18next";
 
 interface ReturnProps {
-  deleteEvent: (event: DeleteEvent) => void;
   socket: WebSocket | null;
   events: Event[];
-  getProjectEventItem: (projectID: string) => ProjectEventItem | undefined;
-  getProjectEventCount: (projectID: string) => number;
-  getProcessEventItem: (
-    projectID: string,
-    processID: string
-  ) => ProcessEventItem | undefined;
-  getProcessEventItemCount: (
-    projectID: string,
-    processID: string,
-    type: "messages" | "processStatus"
-  ) => number;
+  totalEventCount: number;
+  totalProjectEventCount: number;
+  totalOrgaEventCount: number;
+  totalProcessEventCount: number;
+  getEvent: (eventID: string) => Event | undefined;
+  getEventContent: (event: Event) => string;
+  getProcessEvents: (processID: string) => ProcessEvent[];
+  getProjectEvents: (projectID: string) => ProjectEvent[];
+  getTotalProjectEventCount: (projectID: string) => number;
 }
 
 const useEvents = (): ReturnProps => {
-  const { events, socket, setEvents } = useContext(EventContext);
-  const reloadPermissions = useReloadPermissions();
-
-  const queryClient = useQueryClient();
-  const { handleNewProjectEvent, deleteProjectEvent } = useProjectEvent();
-  const { handleNewOrgaEvent, deleteOrgaEvent } = useOrgaEvent();
+  const { events, socket } = useContext(EventContext);
   const { t } = useTranslation();
 
-  if (socket !== null) {
-    socket.onmessage = (event) => {
-      onWebsocktEvent(event);
-    };
-  }
+  const {
+    totalProjectEventCount,
 
-  const onWebsocktEvent = (event: MessageEvent) => {
-    if (event.data !== undefined && JSONIsParseable(event.data)) {
-      const newEvent = JSONSafeParse<Event>(event.data);
-      logger(
-        "useEvents | onWebsocktEvent | ",
-        newEvent !== undefined
-          ? newEvent
-          : `JSONSafeParse failed | ${event.data}`
-      );
-      if (newEvent !== undefined) {
-        handleNewEvent(newEvent);
-      }
-    } else {
-      logger(
-        "useEvents | onWebsocktEvent | JSONIsParseable failed",
-        event.data
-      );
-    }
-  };
+    getProjectEvents,
+    getTotalProjectEventCount,
+  } = useProjectEvent(events);
+  const { getProcessEvents, totalProcessEventCount } = useProcessEvent(events);
+  const { totalOrgaEventCount } = useOrgaEvent(events);
 
-  const handleNewEvent = (newEvent: Event) => {
-    switch (newEvent.eventType) {
-      case "projectEvent":
-        handleNewProjectEvent(newEvent, events, setEvents);
-        break;
-      case "orgaEvent":
-        handleNewOrgaEvent(newEvent, events, setEvents);
-        break;
-      case "permissionEvent":
-        queryClient.invalidateQueries(["organizations", "users"]);
-        reloadPermissions.mutate();
-        toast(
-          t("App.hooks.useEvents.useEvents.toast.permission"),
-          "/organization"
+  const totalEventCount = totalProjectEventCount + totalOrgaEventCount;
+
+  const getEvent = useMemo(() => {
+    return (eventID: string) =>
+      events.find((event) => event.eventID === eventID);
+  }, [events]);
+
+  const getEventContent = (event: Event): string => {
+    switch (event.eventData.reason) {
+      case "test":
+        return event.eventData.content;
+      case "file":
+        return event.eventData.content;
+      case "files":
+        return event.eventData.content;
+      case "messages":
+        return `"` + event.eventData.content + `"`;
+      case "serviceDetails":
+        return event.eventData.content;
+      case "serviceType":
+        return event.eventData.content;
+      case "serviceStatus":
+        return event.eventData.content;
+      case "processDetails":
+        return event.eventData.content;
+      case "processStatus":
+        return t(
+          `enum.ProcessStatus.${
+            ProcessStatus[
+              Number(event.eventData.content)
+            ] as keyof typeof ProcessStatus
+          }`
         );
-        break;
+      case "provisionalContractor":
+        return event.eventData.content;
+      case "dependenciesIn":
+        return event.eventData.content;
+      case "dependenciesOut":
+        return event.eventData.content;
+      case "roleChanged":
+        return event.eventData.content;
+      case "userDeleted":
+        return event.eventData.content;
     }
-  };
-
-  const deleteEvent = (event: DeleteEvent) => {
-    logger("useEvents | deleteEvent | event", event);
-    switch (event.eventType) {
-      case "projectEvent":
-        setEvents((prevState) => deleteProjectEvent(event, prevState));
-        break;
-      case "orgaEvent":
-        setEvents((prevState) => deleteOrgaEvent(event, prevState));
-        break;
-    }
-  };
-
-  const getProjectEventItem = (
-    projectID: string
-  ): ProjectEventItem | undefined => {
-    const projectEvent = events.find(
-      (event) => event.eventType === "projectEvent"
-    ) as ProjectEvents;
-    if (projectEvent === undefined) return undefined;
-
-    const projectEventItem = projectEvent.events.find(
-      (event) => event.projectID === projectID
-    );
-    if (projectEventItem === undefined) return undefined;
-    return projectEventItem;
-  };
-
-  const getProjectEventCount = (projectID: string): number => {
-    const projectEvent = getProjectEventItem(projectID);
-    if (projectEvent === undefined) return 0;
-    let count = 0;
-    projectEvent.processes.forEach((process) => {
-      count +=
-        (process.messages !== undefined ? process.messages : 0) +
-        (process.processStatus !== undefined ? process.processStatus : 0);
-    });
-    return count;
-  };
-
-  const getProcessEventItem = (
-    projectID: string,
-    processID: string
-  ): ProcessEventItem | undefined => {
-    const projectEvent = getProjectEventItem(projectID);
-    if (projectEvent === undefined) return undefined;
-    const processEventItem = projectEvent.processes.find(
-      (process) => process.processID === processID
-    );
-    if (processEventItem === undefined) return undefined;
-    return processEventItem;
-  };
-
-  const getProcessEventItemCount = (
-    projectID: string,
-    processID: string,
-    type: "messages" | "processStatus"
-  ): number => {
-    const processEventItem = getProcessEventItem(projectID, processID);
-    if (processEventItem === undefined) return 0;
-    return type === "messages"
-      ? processEventItem.messages !== undefined
-        ? processEventItem.messages
-        : 0
-      : processEventItem.processStatus !== undefined
-      ? processEventItem.processStatus
-      : 0;
   };
 
   return {
     socket,
-    deleteEvent,
     events,
-    getProjectEventItem,
-    getProjectEventCount,
-    getProcessEventItem,
-    getProcessEventItemCount,
+    totalEventCount,
+    totalProjectEventCount,
+    totalOrgaEventCount,
+    totalProcessEventCount,
+    getEvent,
+    getEventContent,
+    getProcessEvents,
+    getProjectEvents,
+    getTotalProjectEventCount,
   };
 };
 

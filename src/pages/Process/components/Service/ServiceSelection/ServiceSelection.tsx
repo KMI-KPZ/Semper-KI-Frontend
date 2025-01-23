@@ -7,9 +7,29 @@ import ServiceCard from "./components/ServiceCard";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useProcess from "@/hooks/Process/useProcess";
 
+import { useTopics } from "@/contexts/ChatbotContextProvider";
+import { useEffect } from "react";
+
 interface ServiceSelectionProps {}
 
 const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
+  const { userChoice, setTopics, setUserChoice } = useTopics();
+
+  useEffect(() => {
+    if (userChoice) {
+      // Perform actions based on the user choice
+
+      if (userChoice == "2") {
+        handleOnClickCard(ServiceType.ADDITIVE_MANUFACTURING);
+      }
+      if (userChoice == "1") {
+        handleOnClickCard(ServiceType.CREATE_MODEL);
+      }
+      // Reset user choice after handling
+      setUserChoice(null);
+    }
+  }, [userChoice, setUserChoice]);
+
   const {} = props;
 
   const updateProcess = useUpdateProcess();
@@ -27,6 +47,26 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
 
   if (services.isLoading || services.data === undefined)
     return <LoadingAnimation />;
+  setTopics(
+    new Map([
+      [
+        "ServiceSelection",
+        "Der Nutzer kann hier entscheiden ob er ein vorhandenes digitales 3D Modell drucken lassen will, oder erst einmal eins entwerfen lassen will z.B. aus einem pyhsischen Gegenstand. Sag ihm einfach die beiden Möglichkeiten und falls er fragt, gib mehr Details hinzu.",
+      ],
+      [
+        "3d-print",
+        "Ruft einige Parameter für die Rahmenbedingungen des Bauteils ab um dann diese mit den vorhandenen Herstellern und ihren Drucktechniken abzugleichen, so dass ein passender Hersteller gefunden wird. Der Nutzer kann dann den Druckauftrag erteilen.",
+      ],
+      [
+        "3d-dev",
+        "Der Nutzer kann hier ein 3D Modell entwerfen lassen. Dazu wird ein Designer beauftragt, der das Modell erstellt. Der Nutzer kann dann das Modell begutachten und ggf. Änderungen anfordern.",
+      ],
+    ]),
+    "ServiceSelection",
+    "",
+    { "1": "3d-dev", "2": "3d-print" },
+    null
+  );
   return (
     <Container
       width="full"
@@ -35,6 +75,7 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
       justify="center"
       wrap="wrap"
       className="pb-5"
+      id="Process-ServiceType"
     >
       {services.data.map((service, index) => (
         <ServiceCard

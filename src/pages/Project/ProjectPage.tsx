@@ -1,41 +1,45 @@
-import {
-  Button,
-  Container,
-  Heading,
-  LoadingAnimation,
-} from "@component-library/index";
+import { Container, Heading } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProjectInfo from "./components/Info";
-import useGetProject from "@/api/Project/Querys/useGetProject";
 import ProjectProcesses from "./components/Processes";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import BackButtonContainer from "@/components/BackButtonContainer/BackButtonContainer";
+import { useProject } from "@/hooks/Project/useProject";
+// import { useTopics } from "@/contexts/ChatbotContextProvider";
+// import logger from "@/hooks/useLogger";
 
 interface ProjectPageProps {}
 
 const ProjectPage: React.FC<ProjectPageProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const project = useGetProject();
+  const { project } = useProject();
+  // const { setTopics } = useTopics();
 
-  if (project.data === undefined) return <LoadingAnimation />;
+  // logger("ProjectPage", "render", project);
+
+  // setTopics(
+  //   new Map<string, string>([
+  //     ["projektdetails", "Detailübersicht zum aktuell ausgewählten Projekt"],
+  //   ]),
+  //   "Projektdetails",
+  //   "",
+  //   [],
+  //   new Map<string, string>([
+  //     [
+  //       "projektdetails",
+  //       "Detailübersicht zum aktuell ausgewählten Projekt wo die einzelnen Vorgänge (Prozesse) des Projekts aufgelistet sind.",
+  //     ],
+  //   ])
+  // );
 
   return (
     <Container width="full" direction="col">
-      <Container width="full" className="relative  bg-white p-2">
-        <Button
-          width="fit"
-          to=".."
-          title={t("Process.ProcessPage.button.back")}
-          variant="text"
-          className="absolute left-5"
-        >
-          <ArrowBackIosIcon />
-        </Button>
-        <Heading variant="h1">{t("Project.ProjectPage.header")}</Heading>
-      </Container>
-      <ProjectInfo project={project.data} />
-      <ProjectProcesses processes={project.data.processes} />
+      <BackButtonContainer>
+        <Heading variant="h1">{t("Project.header")}</Heading>
+      </BackButtonContainer>
+      <ProjectInfo project={project} />
+      <ProjectProcesses processes={project.processes} />
     </Container>
   );
 };

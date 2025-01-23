@@ -1,10 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Container, Divider, Heading } from "@component-library/index";
-import { AuthorizedUserProps, UserType } from "@/hooks/useUser";
+import { AuthorizedUser, UserType } from "@/hooks/useUser";
 
 interface ProfileOrganizationProps {
-  user: AuthorizedUserProps;
+  user: AuthorizedUser;
 }
 
 const ProfileOrganization: React.FC<ProfileOrganizationProps> = (props) => {
@@ -13,10 +13,10 @@ const ProfileOrganization: React.FC<ProfileOrganizationProps> = (props) => {
 
   return user.usertype === UserType.ORGANIZATION ? (
     <Container width="full" direction="col">
-      <Heading variant="h2">{t("Profile.company.header")}</Heading>
+      <Heading variant="h2">{t("Profile.Organization.header")}</Heading>
       <Divider />
       <span className="break-all">
-        {t("Profile.company.name")}: {user.organization}
+        {t("Profile.Organization.name")}: {user.organization}
       </span>
     </Container>
   ) : null;

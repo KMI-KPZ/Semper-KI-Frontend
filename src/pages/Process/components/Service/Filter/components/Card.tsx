@@ -1,9 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ProcessFilterItem from "./Item";
-import { CategoryProps } from "../Filter";
 import { Container, Text } from "@component-library/index";
 import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
+import { CategoryProps } from "./FilterEdit";
 
 interface Props {
   category: CategoryProps;
@@ -48,8 +48,12 @@ const ProcessFilterCard: React.FC<Props> = (props) => {
         >
           <Text>
             {category.title === "SELECTED"
-              ? t("Process.Service.Filter.components.Card.noSelectedFitlers")
-              : t("Process.Service.Filter.components.Card.noFilters")}
+              ? t(
+                  "Process.components.Service.Filter.components.Card.noSelectedFitlers"
+                )
+              : t(
+                  "Process.components.Service.Filter.components.Card.noFilters"
+                )}
           </Text>
         </Container>
       )}

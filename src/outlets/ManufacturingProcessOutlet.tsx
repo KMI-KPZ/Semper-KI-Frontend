@@ -14,7 +14,7 @@ const ManufacturingProcessOutlet: React.FC<
   const { project } = useProject();
   const { process } = useDefinedProcess();
 
-  if (process.serviceType === ServiceType.MANUFACTURING)
+  if (process.serviceType === ServiceType.ADDITIVE_MANUFACTURING)
     return (
       <ManufacturingProcessContextProvider process={process}>
         {children}

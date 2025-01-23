@@ -1,103 +1,161 @@
-import { Heading, Search, Text } from "@component-library/index";
+import { Container, Heading, Search, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useAdmin, { OrganizationProps } from "../hooks/useAdmin";
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
+import useAdmin from "../../../hooks/useAdmin";
 import { Button } from "@component-library/index";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ClearIcon from "@mui/icons-material/Clear";
-import CheckIcon from "@mui/icons-material/Check";
 import useSearch from "@/hooks/useSearch";
+import useSort from "@/hooks/useSort";
+import TableHeaderButton from "@/components/Table/TableHeaderButton";
+import BackButtonContainer from "@/components/BackButtonContainer/BackButtonContainer";
+import TableContainer from "@/components/Table/TableContainer";
+import Table from "@/components/Table/Table";
+import usePagination from "@/hooks/usePagination";
+import Pagination from "@/components/Table/Pagination";
+import useAdminDeleteOrganization from "@/api/Admin/Mutations/useAdminDeleteOrganization";
+import { useNavigate } from "react-router-dom";
+import { Organization } from "@/api/Organization/Querys/useGetOrganization";
+import { ServiceType } from "@/api/Service/Querys/useGetServices";
 
-interface AdminOrganizationProps {}
+interface AdminOrganization {}
 
-const AdminOrganization: React.FC<AdminOrganizationProps> = (props) => {
+const AdminOrganization: React.FC<AdminOrganization> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { deleteOrganization, organizations } = useAdmin();
-  const { filterDataBySearchInput, handleSearchInputChange } = useSearch();
+  const { organizations } = useAdmin();
+  const deleteOrganization = useAdminDeleteOrganization();
+  const navigate = useNavigate();
+  const { filterDataBySearchInput, handleSearchInputChange } =
+    useSearch<Organization>();
+  const { getSortIcon, handleSort, sortItems } = useSort<Organization>();
+  const { handlePageChange, paginatedItems, totalPages } =
+    usePagination<Organization>({
+      items: organizations
+        .filter((orga) => filterDataBySearchInput(orga))
+        .sort(sortItems),
+    });
 
   const handleOnClickButtonDelete = (hashedID: string, name: string) => {
-    if (window.confirm(t("Admin.Organization.confirm")))
+    if (window.confirm(t("Admin.Organization.confirm", { name: name })))
       deleteOrganization.mutate({ hashedID, name });
   };
 
+  const handleOnClickButtonDetails = (hashedID: string) => {
+    navigate(hashedID);
+  };
+
+  const handleOnClickButtonEdit = (hashedID: string) => {
+    navigate(hashedID + "/edit");
+  };
+
   return (
-    <div className="flex w-full flex-col items-center justify-normal gap-5 bg-white p-5">
-      <Heading variant="h1">{t("Admin.Organization.title")}</Heading>
+    <Container width="full" direction="col" className="bg-white p-5">
+      <BackButtonContainer>
+        <Heading variant="h1">{t("Admin.Organization.heading")}</Heading>
+      </BackButtonContainer>
       <Search handleSearchInputChange={handleSearchInputChange} />
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 800 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>{t("Admin.Organization.name")}</TableCell>
-              <TableCell>{t("Admin.Organization.canManufacturer")}</TableCell>
-              <TableCell>{t("Admin.Organization.created")}</TableCell>
-              <TableCell>{t("Admin.Organization.accessed")}</TableCell>
-              <TableCell>{t("Admin.Organization.updated")}</TableCell>
-              <TableCell>{t("Admin.Organization.actions")}</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {organizations !== undefined && organizations.length > 0 ? (
-              organizations
-                .filter((orga) => filterDataBySearchInput(orga))
-                .map((orga: OrganizationProps, index: number) => (
-                  <TableRow
-                    key={index}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {orga.name}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {orga.canManufacture === true ? (
-                        <CheckIcon />
-                      ) : (
-                        <ClearIcon />
-                      )}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {new Date(orga.createdWhen).toLocaleString()}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {new Date(orga.accessedWhen).toLocaleString()}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {new Date(orga.updatedWhen).toLocaleString()}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      <div className="flex w-full flex-row items-center justify-center gap-3 p-2">
-                        <Button
-                          title={t("Admin.Organization.button.delete")}
-                          onClick={() =>
-                            handleOnClickButtonDelete(orga.hashedID, orga.name)
-                          }
-                          children={<DeleteIcon />}
-                        />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))
+      <TableContainer>
+        <Table type="fixed_last_row">
+          <thead>
+            <tr>
+              <TableHeaderButton
+                handleSort={handleSort}
+                getSortIcon={getSortIcon}
+                title={t("Admin.Organization.name")}
+                objectKey="name"
+              />
+              <TableHeaderButton
+                handleSort={handleSort}
+                getSortIcon={getSortIcon}
+                title={t("Admin.Organization.ServiceType")}
+                objectKey="supportedServices"
+              />
+              <TableHeaderButton
+                handleSort={handleSort}
+                getSortIcon={getSortIcon}
+                title={t("Admin.Organization.created")}
+                objectKey="createdWhen"
+              />
+              <TableHeaderButton
+                handleSort={handleSort}
+                getSortIcon={getSortIcon}
+                title={t("Admin.Organization.accessed")}
+                objectKey="accessedWhen"
+              />
+              <TableHeaderButton
+                handleSort={handleSort}
+                getSortIcon={getSortIcon}
+                title={t("Admin.Organization.updated")}
+                objectKey="updatedWhen"
+              />
+              <th>{t("Admin.Organization.actions")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {paginatedItems.length > 0 ? (
+              paginatedItems.map((orga: Organization, index: number) => (
+                <tr key={index}>
+                  <td>{orga.name}</td>
+                  <td>
+                    <Container width="full" direction="col">
+                      {orga.supportedServices.map((serviceType, index) => (
+                        <Text key={index} variant="body">
+                          {t(
+                            `enum.ServiceType.${
+                              ServiceType[
+                                serviceType
+                              ] as keyof typeof ServiceType
+                            }`
+                          )}
+                        </Text>
+                      ))}
+                    </Container>
+                  </td>
+                  <td className="whitespace-nowrap">
+                    {new Date(orga.createdWhen).toLocaleString()}
+                  </td>
+                  <td className="whitespace-nowrap">
+                    {new Date(orga.accessedWhen).toLocaleString()}
+                  </td>
+                  <td className="whitespace-nowrap">
+                    {new Date(orga.updatedWhen).toLocaleString()}
+                  </td>
+                  <td>
+                    <Container direction="col" width="full">
+                      <Button
+                        title={t("general.button.details")}
+                        onClick={() =>
+                          handleOnClickButtonDetails(orga.hashedID)
+                        }
+                        variant="text"
+                      />
+                      <Button
+                        title={t("general.button.edit")}
+                        onClick={() => handleOnClickButtonEdit(orga.hashedID)}
+                        variant="text"
+                      />
+                      <Button
+                        title={t("general.button.delete")}
+                        onClick={() =>
+                          handleOnClickButtonDelete(orga.hashedID, orga.name)
+                        }
+                        variant="text"
+                      />
+                    </Container>
+                  </td>
+                </tr>
+              ))
             ) : (
-              <TableRow>
-                <TableCell rowSpan={6}>
+              <tr>
+                <td colSpan={6}>
                   <Text variant="body">{t("Admin.Organization.empty")}</Text>
-                </TableCell>
-              </TableRow>
+                </td>
+              </tr>
             )}
-          </TableBody>
+          </tbody>
         </Table>
       </TableContainer>
-    </div>
+      <Pagination handlePageChange={handlePageChange} totalPages={totalPages} />
+    </Container>
   );
 };
 

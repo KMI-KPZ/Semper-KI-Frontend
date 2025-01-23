@@ -72,12 +72,14 @@ const OrganizationRolesItem: React.FC<OrganizationRolesItemProps> = (props) => {
             </tbody>
           </table>
         ) : (
-          <Text variant="body">{t("Organization.Roles.Roles.empty")}</Text>
+          <Text variant="body">
+            {t("Organization.Roles.components.Item.empty")}
+          </Text>
         )}
       </LoadingSuspense>
       <Button
         size="sm"
-        title={t(`Organization.components.table.button.edit`)}
+        title={t(`general.button.edit`)}
         onClick={handleOnClickButtonEdit}
         startIcon={<EditIcon fontSize="small" />}
       />
@@ -85,7 +87,7 @@ const OrganizationRolesItem: React.FC<OrganizationRolesItemProps> = (props) => {
         size="sm"
         onClick={handleOnClickButtonDelete}
         startIcon={<DeleteForeverIcon fontSize="small" />}
-        title={t("Organization.components.table.button.delete")}
+        title={t("general.button.delete")}
       />
     </div>
   );

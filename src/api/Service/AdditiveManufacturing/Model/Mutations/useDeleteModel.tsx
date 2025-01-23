@@ -6,6 +6,7 @@ interface DeleteModelProps {
   processID: string;
   projectID: string;
   modelID: string;
+  groupID: number;
 }
 
 const useDeleteModel = () => {
@@ -14,10 +15,11 @@ const useDeleteModel = () => {
     modelID,
     processID,
     projectID,
+    groupID,
   }: DeleteModelProps) =>
     authorizedCustomAxios
       .delete(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/delete/${projectID}/${processID}/${modelID}/`
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/delete/${projectID}/${processID}/${groupID}/${modelID}/`
       )
       .then((response) => {
         logger("useDeleteModel | deleteModel ✅ |", response);

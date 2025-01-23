@@ -4,7 +4,7 @@ import Portfolio from "./Portfolio";
 describe("<Portfolio />", () => {
   it("should render", () => {
     render(<Portfolio />);
-    expect(screen.getByText("Portfolio.Portfolio.header")).toBeInTheDocument();
+    expect(screen.getByText("Portfolio.header")).toBeInTheDocument();
     expect(screen.getByTestId("portfolio")).toBeInTheDocument();
   });
   it("should render portfolio items", () => {

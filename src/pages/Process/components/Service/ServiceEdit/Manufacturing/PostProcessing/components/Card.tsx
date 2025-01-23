@@ -6,7 +6,7 @@ import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostPro
 import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
-} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 interface Props<Item> {
   item: Item;
@@ -24,7 +24,7 @@ const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
 
   return (
     <Container
-      className={`w-fit min-w-[350px] max-w-[32%] gap-0 overflow-clip rounded-xl border-2 bg-white ${
+      className={` w-full justify-between gap-0 self-stretch overflow-clip rounded-md border-2 bg-white md:w-[calc(50%-10px)] ${
         selected ? "border-blau-500" : ""
       }`}
       direction="col"
@@ -42,14 +42,16 @@ const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
           <tbody>
             <tr>
               <td>
-                {t(`Service.Manufacturing.PostProcessing.components.Card.type`)}
+                {t(
+                  `Process.components.Service.ServiceEdit.Manufacturing.PostProcessing.components.Card.type`
+                )}
               </td>
               <td>{item.type}</td>
             </tr>
             <tr>
               <td>
                 {t(
-                  `Service.Manufacturing.PostProcessing.components.Card.value`
+                  `Process.components.Service.ServiceEdit.Manufacturing.PostProcessing.components.Card.value`
                 )}
               </td>
               <td>{item.value}</td>
@@ -57,7 +59,7 @@ const ProcessPostProcessingCard = <Item extends PostProcessingProps>(
             <tr>
               <td colSpan={2}>
                 {t(
-                  `Service.Manufacturing.PostProcessing.components.Card.props`
+                  `Process.components.Service.ServiceEdit.Manufacturing.PostProcessing.components.Card.props`
                 )}
               </td>
             </tr>

@@ -2,10 +2,10 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import { ModelingServiceProps } from "@/pages/Process/components/Service/ServiceEdit/Modelling/Modelling";
-import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
-import TestImg from "@images/Test2.png";
 import { PostProcessingProps } from "../AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 import { MaterialProps } from "../AdditiveManufacturing/Material/Querys/useGetMaterials";
+import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
+import { CheckModel } from "@/api/Process/Querys/useGetCheckModel";
 
 export interface ServiceItemProps {
   name: string;
@@ -22,8 +22,14 @@ export interface DisplayService {
 
 export enum ServiceType {
   "NONE",
-  "MANUFACTURING",
-  "MODELING",
+  "ADDITIVE_MANUFACTURING",
+  "CREATE_MODEL",
+  "DELIVERY",
+  "POST_PROCESSING",
+  "PACKAGING",
+  "QUALITY_CONTROL",
+  "ASSEMBLY",
+  "AFTER_SALES",
 }
 
 export type ServiceProps = DefinedServiceProps | undefined;
@@ -45,18 +51,22 @@ export interface UpdateServiceUndefinedProps {
 }
 
 export type ManufacturingServiceProps = {
-  models?: ModelProps[];
-  materials?: MaterialProps[];
-  postProcessings?: PostProcessingProps[];
+  name?: string;
+  models: ProcessModel[];
+  material: MaterialProps | undefined;
+  postProcessings: PostProcessingProps[];
   manufacturerID?: string;
+  calculations?: CheckModel[];
 };
 
 export type UpdateServiceManufacturingProps = {
-  title?: string;
-  model?: ModelProps;
-  material?: MaterialProps;
-  postProcessings?: PostProcessingProps[];
-  manufacturerID?: string;
+  groups?: {
+    title?: string;
+    model?: ProcessModel[];
+    material?: MaterialProps | undefined;
+    postProcessings?: PostProcessingProps[];
+    manufacturerID?: string;
+  }[];
 };
 
 export interface ServiceManufacturingState {
@@ -87,23 +97,27 @@ const useGetServices = () => {
     authorizedCustomAxios
       .get(`${process.env.VITE_HTTP_API_URL}/public/services/get/`)
       .then((response) => {
-        // const services: ServiceItemProps[] = objectToArray<ServiceItemProps>(
-        //   response.data
-        // ).filter((service) => service.type !== 0);
+        const services: ServiceItemProps[] = response.data.map(
+          (service: ServiceItemProps) => ({
+            name: service.type,
+            type: ServiceType[service.type] as keyof typeof ServiceType,
+            imgPath: service.imgPath,
+          })
+        );
         logger("useGetServices | getServices ✅ |", response);
-        const mockedServices: ServiceItemProps[] = [
-          {
-            name: "Manufacturing",
-            type: ServiceType.MANUFACTURING,
-            imgPath: TestImg,
-          },
-          {
-            name: "Modeling",
-            type: ServiceType.MODELING,
-            imgPath: TestImg,
-          },
-        ];
-        return mockedServices;
+        // const mockedServices: ServiceItemProps[] = [
+        //   {
+        //     name: "Manufacturing",
+        //     type: ServiceType.ADDITIVE_MANUFACTURING,
+        //     imgPath: TestImg,
+        //   },
+        //   {
+        //     name: "Modeling",
+        //     type: ServiceType.CREATE_MODEL,
+        //     imgPath: TestImg,
+        //   },
+        // ];
+        return services;
       });
 
   return useQuery<ServiceItemProps[], Error>({

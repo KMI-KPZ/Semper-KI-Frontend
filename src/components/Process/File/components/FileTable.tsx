@@ -48,44 +48,36 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
   if (files.length === 0 && type === "upload") return null;
   if (files.length === 0 && type === "current")
     return (
-      <Container className="rounded-xl border-2 p-5">
-        <Text>
-          {t("Process.components.Contract.components.FileTable.noFiles")}
-        </Text>
+      <Container className="rounded-md border-2 p-5">
+        <Text>{t("components.Process.File.components.FileTable.noFiles")}</Text>
       </Container>
     );
   return (
-    <Container width="full" direction="col" className="rounded-xl border-2 p-5">
+    <Container width="full" direction="col" className="rounded-md border-2 p-5">
       <Heading variant="h3">
         {type === "current"
-          ? t(
-              "Process.components.Contract.components.FileTable.currentFilesTitle"
-            )
-          : t(
-              "Process.components.Contract.components.FileTable.uploadFilesTitle"
-            )}
+          ? t("components.Process.File.components.FileTable.currentFilesTitle")
+          : t("components.Process.File.components.FileTable.uploadFilesTitle")}
       </Heading>
       <table className="w-full border-separate border-spacing-x-0 border-spacing-y-2 ">
         <thead>
           <tr>
             <th className="text-left">
-              {t("Process.components.Contract.components.FileTable.name")}
+              {t("components.Process.File.components.FileTable.name")}
             </th>
             {/* <th className="text-left">
-              {t("Process.components.Contract.components.FileTable.size")}
+              {t("components.Process.File.components.FileTable.size")}
             </th> */}
             {/* <th className="text-left">
-              {t("Process.components.Contract.components.FileTable.type")}
+              {t("components.Process.File.components.FileTable.type")}
             </th> */}
             <th className="text-left">
-              {t("Process.components.Contract.components.FileTable.date")}
+              {t("components.Process.File.components.FileTable.date")}
             </th>
             <th className="text-left">
-              {t("Process.components.Contract.components.FileTable.author")}
+              {t("components.Process.File.components.FileTable.author")}
             </th>
-            <th>
-              {t("Process.components.Contract.components.FileTable.actions")}
-            </th>
+            <th>{t("components.Process.File.components.FileTable.actions")}</th>
           </tr>
         </thead>
         <tbody>
@@ -108,7 +100,7 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
           size="sm"
           variant="primary"
           title={t(
-            "Process.components.Contract.components.FileTable.button.upload"
+            "components.Process.File.components.FileTable.button.upload"
           )}
           startIcon={<FileUploadIcon />}
           loading={uploadFiles.isLoading}
@@ -119,7 +111,7 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
           size="sm"
           variant="primary"
           title={t(
-            "Process.components.Contract.components.FileTable.button.downloadAll"
+            "components.Process.File.components.FileTable.button.downloadAll"
           )}
           loading={downloadZIP.isLoading}
           startIcon={<DownloadIcon />}

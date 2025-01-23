@@ -1,8 +1,21 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
-import { ModelDetailsProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
 import { useProject } from "@/hooks/Project/useProject";
+
+export interface ModelDetailsProps {
+  filename: string;
+  measurements: {
+    volume: number;
+    surfaceArea: number;
+    mbbDimensions: {
+      _1: number;
+      _2: number;
+      _3: number;
+    };
+    mbbVolume: number;
+  };
+}
 
 const useGetModelDetails = (processID: string) => {
   const { project } = useProject();

@@ -1,108 +1,172 @@
-import { AuthorizedUserProps } from "@/hooks/useUser";
-import { Heading, Search, Text } from "@component-library/index";
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
+import { Container, Heading, Search, Text } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import useAdmin from "../hooks/useAdmin";
-import DeleteIcon from "@mui/icons-material/Delete";
+import useAdmin, { AdminDataUser } from "../../../hooks/useAdmin";
 import { Button } from "@component-library/index";
 import useSearch from "@/hooks/useSearch";
+import useSort from "@/hooks/useSort";
+import TableHeaderButton from "@/components/Table/TableHeaderButton";
+import BackButtonContainer from "@/components/BackButtonContainer/BackButtonContainer";
+import TableContainer from "@/components/Table/TableContainer";
+import Table from "@/components/Table/Table";
+import usePagination from "@/hooks/usePagination";
+import Pagination from "@/components/Table/Pagination";
+import useAdminDeleteUser from "@/api/Admin/Mutations/useAdminDeleteUser";
+import { useNavigate } from "react-router-dom";
 
 interface Props {}
 
 const AdminUser: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { deleteUser, users } = useAdmin();
-  const { filterDataBySearchInput, handleSearchInputChange } = useSearch();
+  const { users } = useAdmin();
+  const deleteUser = useAdminDeleteUser();
+  const navigate = useNavigate();
+
+  const { filterDataBySearchInput, handleSearchInputChange } =
+    useSearch<AdminDataUser>();
+  const {
+    getSortIcon,
+    handleSort,
+    sortItems,
+    getNestedSortIcon,
+    handleNestedSort,
+  } = useSort<AdminDataUser>();
+  const { handlePageChange, paginatedItems, totalPages } =
+    usePagination<AdminDataUser>({
+      items: users
+        .filter((user) => filterDataBySearchInput(user))
+        .sort(sortItems),
+    });
 
   const handleOnClickButtonDelete = (hashedID: string, name: string) => {
     if (window.confirm(t("Admin.User.confirm")))
       deleteUser.mutate({ hashedID, name });
   };
 
+  const handleOnClickButtonDetails = (hashedID: string) => {
+    navigate(hashedID);
+  };
+
+  const handleOnClickButtonEdit = (hashedID: string) => {
+    navigate(hashedID + "/edit");
+  };
+
   return (
-    <div className="flex w-full flex-col items-center justify-normal gap-5 bg-white p-5">
-      <Heading variant="h1">{t("Admin.User.title")}</Heading>
+    <Container width="full" direction="col" className="bg-white p-5">
+      <BackButtonContainer>
+        <Heading variant="h1">{t("Admin.User.heading")}</Heading>
+      </BackButtonContainer>
       <Search handleSearchInputChange={handleSearchInputChange} />
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 800 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>{t("Admin.User.name")}</TableCell>
-              <TableCell>{t("Admin.User.email")}</TableCell>
-              <TableCell>{t("Admin.User.orga")}</TableCell>
-              <TableCell>{t("Admin.User.created")}</TableCell>
-              <TableCell>{t("Admin.User.accessed")}</TableCell>
-              <TableCell>{t("Admin.User.updated")}</TableCell>
-              <TableCell>{t("Admin.User.lastSeen")}</TableCell>
-              <TableCell>{t("Admin.User.actions")}</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users.length > 0 ? (
-              users
-                .filter((user) => filterDataBySearchInput(user))
-                .map((user: AuthorizedUserProps, index: number) => (
-                  <TableRow
-                    key={index}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {user.name}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {user.details.email}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {user.organization !== undefined
-                        ? user.organization
-                        : "---"}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {new Date(user.createdWhen).toLocaleString()}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {new Date(user.accessedWhen).toLocaleString()}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {new Date(user.updatedWhen).toLocaleString()}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {new Date(user.lastSeen).toLocaleString()}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      <div className="flex w-full flex-row items-center justify-center gap-3 p-2">
-                        <Button
-                          title={t("Admin.User.button.delete")}
-                          onClick={() =>
-                            handleOnClickButtonDelete(user.hashedID, user.name)
-                          }
-                          children={<DeleteIcon />}
-                        />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))
+      <TableContainer>
+        <Table type="fixed_last_row">
+          <thead>
+            <tr>
+              <TableHeaderButton
+                handleSort={handleSort}
+                getSortIcon={getSortIcon}
+                title={t("Admin.User.name")}
+                objectKey="name"
+              />
+              <TableHeaderButton
+                handleSort={handleNestedSort}
+                getSortIcon={getNestedSortIcon}
+                title={t("Admin.User.email")}
+                objectKey="details.email"
+              />
+              <TableHeaderButton
+                handleSort={handleSort}
+                getSortIcon={getSortIcon}
+                title={t("Admin.User.orga")}
+                objectKey="organizationNames"
+              />
+              <TableHeaderButton
+                handleSort={handleSort}
+                getSortIcon={getSortIcon}
+                title={t("Admin.User.created")}
+                objectKey="createdWhen"
+              />
+              <TableHeaderButton
+                handleSort={handleSort}
+                getSortIcon={getSortIcon}
+                title={t("Admin.User.accessed")}
+                objectKey="accessedWhen"
+              />
+              <TableHeaderButton
+                handleSort={handleSort}
+                getSortIcon={getSortIcon}
+                title={t("Admin.User.updated")}
+                objectKey="updatedWhen"
+              />
+              <TableHeaderButton
+                handleSort={handleSort}
+                getSortIcon={getSortIcon}
+                title={t("Admin.User.lastSeen")}
+                objectKey="lastSeen"
+              />
+              <th>{t("Admin.User.actions")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {paginatedItems.length > 0 ? (
+              paginatedItems.map((user: AdminDataUser, index: number) => (
+                <tr key={index}>
+                  <td>{user.name}</td>
+                  <td>{user.details.email}</td>
+                  <td>
+                    {user.organizationNames !== undefined
+                      ? user.organizationNames.join(", ")
+                      : "---"}
+                  </td>
+                  <td className="whitespace-nowrap">
+                    {new Date(user.createdWhen).toLocaleString()}
+                  </td>
+                  <td className="whitespace-nowrap">
+                    {new Date(user.accessedWhen).toLocaleString()}
+                  </td>
+                  <td className="whitespace-nowrap">
+                    {new Date(user.updatedWhen).toLocaleString()}
+                  </td>
+                  <td className="whitespace-nowrap">
+                    {new Date(user.lastSeen).toLocaleString()}
+                  </td>
+                  <td>
+                    <Container direction="col" width="full">
+                      <Button
+                        title={t("general.button.details")}
+                        onClick={() =>
+                          handleOnClickButtonDetails(user.hashedID)
+                        }
+                        variant="text"
+                      />
+                      <Button
+                        title={t("general.button.edit")}
+                        onClick={() => handleOnClickButtonEdit(user.hashedID)}
+                        variant="text"
+                      />
+                      <Button
+                        title={t("general.button.delete")}
+                        onClick={() =>
+                          handleOnClickButtonDelete(user.hashedID, user.name)
+                        }
+                        variant="text"
+                      />
+                    </Container>
+                  </td>
+                </tr>
+              ))
             ) : (
-              <TableRow>
-                <TableCell rowSpan={6}>
+              <tr>
+                <td colSpan={8}>
                   <Text variant="body">{t("Admin.User.empty")}</Text>
-                </TableCell>
-              </TableRow>
+                </td>
+              </tr>
             )}
-          </TableBody>
+          </tbody>
         </Table>
       </TableContainer>
-    </div>
+      <Pagination handlePageChange={handlePageChange} totalPages={totalPages} />
+    </Container>
   );
 };
 

@@ -4,7 +4,7 @@ import { Button, Container, Search, Text } from "@component-library/index";
 import {
   OntoNode,
   OntoNodeType,
-} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import useDeleteOrgaNode from "@/api/Resources/Organization/Mutations/useDeleteOrgaNode";
@@ -142,33 +142,19 @@ const ResourceTable = (props: ResourceTableProps) => {
                           <Container width="full" direction="row">
                             <Button
                               variant="text"
-                              title={t(
-                                "Resources.components.Table.buttons.details"
-                              )}
-                              to={`details/${node.nodeID}`}
+                              title={t("general.button.details")}
+                              to={`${node.nodeID}`}
                               className="whitespace-nowrap"
                             />
                             <Button
                               variant="text"
-                              title={t(
-                                "Resources.components.Table.buttons.edit"
-                              )}
-                              to={`edit/${node.nodeID}`}
+                              title={t("general.button.edit")}
+                              to={`${node.nodeID}/edit`}
                               className="whitespace-nowrap"
                             />
                             <Button
                               variant="text"
-                              title={t(
-                                "Resources.components.Table.buttons.variant"
-                              )}
-                              to={`variant/${node.nodeID}`}
-                              className="whitespace-nowrap"
-                            />
-                            <Button
-                              variant="text"
-                              title={t(
-                                "Resources.components.Table.buttons.delete"
-                              )}
+                              title={t("general.button.delete")}
                               onClick={() =>
                                 handleOnClickButtonDeleteNode(node)
                               }

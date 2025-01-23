@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, createContext } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import useUser, { AuthorizedUserProps, UserType } from "@/hooks/useUser";
+import useUser, { AuthorizedUser, UserType } from "@/hooks/useUser";
 import { Button, Container } from "@component-library/index";
 import { useTranslation } from "react-i18next";
 import { UseQueryResult } from "@tanstack/react-query";
@@ -8,13 +8,13 @@ import { UseQueryResult } from "@tanstack/react-query";
 interface AuthorizedUserOutletProps {}
 
 export type AuthorizedUserContext = {
-  user: AuthorizedUserProps;
-  query: UseQueryResult<AuthorizedUserProps, Error>;
+  user: AuthorizedUser;
+  query: UseQueryResult<AuthorizedUser, Error>;
 };
 
 export const AuthorizedUserContext = createContext<AuthorizedUserContext>({
-  user: {} as AuthorizedUserProps,
-  query: {} as UseQueryResult<AuthorizedUserProps, Error>,
+  user: {} as AuthorizedUser,
+  query: {} as UseQueryResult<AuthorizedUser, Error>,
 });
 
 const AuthorizedUserOutlet: React.FC<
@@ -39,10 +39,10 @@ const AuthorizedUserOutlet: React.FC<
   ) : children === undefined ? (
     <Navigate to={`/login?redirectURL=${pathname}`} />
   ) : (
-    <Container direction="col" className="rounded-xl bg-white p-5" width="full">
-      <h1>{t("routeOutlets.AuthorizedUserOutlet.login")}</h1>
+    <Container direction="col" className=" bg-white p-5" width="full">
+      <h1>{t("outlets.AuthorizedUserOutlet.login")}</h1>
       <Button
-        title={t("routeOutlets.AuthorizedUserOutlet.button.login")}
+        title={t("outlets.AuthorizedUserOutlet.button.login")}
         variant="primary"
         to={`/login?redirectURL=${pathname}`}
       />

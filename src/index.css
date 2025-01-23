@@ -4,51 +4,105 @@
 @tailwind utilities;
 
 @layer base {
-    @font-face {
-        font-family: PTSans;
-        src: url(/assets/fonts/PTSans-Regular.ttf) format("truetype");
-    }
-    @font-face {
-        font-family: PTSans;
-        font-style: italic;
-        src: url(/assets/fonts/PTSans-Italic.ttf) format("truetype");
-    }
-    @font-face {
-        font-family: PTSans;
-        font-weight: 700;
-        src: url(/assets/fonts/PTSans-Bold.ttf) format("truetype");
-    }
-    @font-face {
-        font-family: PTSans;
-        font-weight: 700;
-        font-style: italic;
-        src: url(/assets/fonts/PTSans-BoldItalic.ttf) format("truetype");
-    }
-    .bezier {
-        transition-timing-function: cubic-bezier(.645,.045,.355,1);
-    }
-    body {
-        scrollbar-gutter: stable;
-    }
+  @font-face {
+    font-family: PTSans;
+    src: url(/assets/fonts/PTSans-Regular.ttf) format("truetype");
+  }
+  @font-face {
+    font-family: PTSans;
+    font-style: italic;
+    src: url(/assets/fonts/PTSans-Italic.ttf) format("truetype");
+  }
+  @font-face {
+    font-family: PTSans;
+    font-weight: 700;
+    src: url(/assets/fonts/PTSans-Bold.ttf) format("truetype");
+  }
+  @font-face {
+    font-family: PTSans;
+    font-weight: 700;
+    font-style: italic;
+    src: url(/assets/fonts/PTSans-BoldItalic.ttf) format("truetype");
+  }
+  .bezier {
+    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  body {
+    scrollbar-gutter: stable;
+  }
 }
 
 @layer components {
-    .card {
-        @apply overflow-clip rounded-xl border-2 p-5 shadow-lg ;
+  .card {
+    @apply overflow-clip rounded-md border-2 p-5 shadow-lg;
+  }
+
+  .card-container {
+    @apply overflow-clip rounded-md border-2 p-5;
+  }
+
+  .hover-card {
+    @apply overflow-clip rounded-md border-2 p-5 shadow-lg duration-300 hover:cursor-pointer hover:border-ultramarinblau hover:shadow-xl;
+  }
+
+  .active-card {
+    @apply overflow-clip rounded-md border-2 border-ultramarinblau p-5 shadow-lg duration-300;
+  }
+
+  .container {
+    @apply rounded-md border-2 bg-white p-5 shadow-lg;
+  }
+
+  .table-normal {
+    @apply w-full table-auto border-separate border-spacing-x-0 rounded-md p-0;
+
+    & thead th {
+      @apply bg-gray-50;
     }
 
-    .card-container {
-        @apply overflow-clip rounded-xl border-2 p-5 ;
+    & tbody tr:nth-child(even) {
+      @apply bg-gray-50;
     }
-    .hover-card {
-        @apply overflow-clip rounded-xl border-2 p-5 shadow-lg hover:cursor-pointer hover:border-ultramarinblau hover:shadow-xl duration-300;
+
+    & tbody tr:nth-child(odd) {
+      @apply bg-white;
     }
-    .active-card {
-        @apply overflow-clip rounded-xl border-2 p-5 shadow-lg border-ultramarinblau duration-300;
+
+    & tbody td {
+      @apply border-t-2 p-3 text-center;
     }
-    .container {
-        @apply rounded-xl bg-white p-5 border-2  shadow-lg;
+  }
+  .table-fixed-last-row {
+    @apply w-full table-auto border-separate border-spacing-x-0 rounded-md p-0;
+
+    & thead th {
+      @apply bg-gray-50  text-center;
     }
+
+    & thead tr th:last-child {
+      @apply sticky -right-1 top-0 border-l-2 text-center shadow-table;
+    }
+
+    & tbody tr:nth-child(even) {
+      @apply bg-gray-50;
+    }
+
+    & tbody tr:nth-child(odd) {
+      @apply bg-white;
+    }
+
+    & tbody td {
+      @apply border-t-2 p-3 text-center;
+    }
+
+    & tbody tr td:last-child {
+      @apply sticky -right-1 border-l-2  bg-inherit shadow-table;
+    }
+
+    & tbody tr:last-child td:last-child {
+      @apply sticky -right-1 rounded-br-xl border-l-2  bg-inherit;
+    }
+  }
 }
 
 @layer utilities {

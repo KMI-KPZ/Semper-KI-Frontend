@@ -21,7 +21,7 @@ const ProcessMessages: React.FC<ProcessMessagesProps> = (props) => {
     <Container width="full" direction="col">
       {messages.length === 0 ? (
         <Container width="full" direction="col" className="card">
-          <Text>{t("Process.components.Clarify.Clarify.noMessages")}</Text>
+          <Text>{t("components.Process.Messages.noMessages")}</Text>
         </Container>
       ) : (
         <Container

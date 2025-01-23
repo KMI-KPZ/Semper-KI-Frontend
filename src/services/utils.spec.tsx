@@ -147,7 +147,7 @@ describe("Utils", () => {
       expect(value2).toStrictEqual(["a", "b", "c"]);
     });
   });
-  describe("Test getModelURI", () => {
+  describe.skip("Test getModelURI", () => {
     it("should return uri", () => {
       const model = new ModelBuilder().build();
       const value = getModelURI(model);

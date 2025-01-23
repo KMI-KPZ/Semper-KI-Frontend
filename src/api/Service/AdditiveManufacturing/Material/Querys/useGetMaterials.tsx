@@ -1,7 +1,7 @@
 import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
-import { OntoNodeProperty } from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+import { OntoNodeProperty } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import useFilter from "@/hooks/useFilter";
 
 export interface MaterialProps {
@@ -9,6 +9,7 @@ export interface MaterialProps {
   title: string;
   propList: OntoNodeProperty[];
   imgPath: string;
+  medianPrice: number;
 }
 
 const useGetMaterials = () => {

@@ -39,7 +39,7 @@ VSCode extensions
 
 To run the Semper-KI Frontend locally in development mode, use the following commands:
 
-1. Make sure Node.js and yarn is installed on your System.
+1. Make sure Node.js and yarn is installed on your system.
 1. Install dependencies: `yarn install`
 1. Start the development server: `yarn start`
 1. The development server is runnning on: `http://127.0.0.1:3000/`

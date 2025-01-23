@@ -27,10 +27,10 @@ const HomeClientInfo: React.FC<HomeClientInfoProps> = (props) => {
         <div className="flex w-full  flex-col gap-5 md:flex-row md:justify-between md:gap-40">
           <div className="flex flex-col items-start justify-center gap-5">
             <Heading variant="h2">
-              {t("Home.components.ClientInfo.title")}
+              {t("Home.components.ClientInfo.heading")}
             </Heading>
             <Heading variant="subtitle" className="pl-5">
-              {t("Home.components.ClientInfo.subTitle")}
+              {t("Home.components.ClientInfo.subHeading")}
             </Heading>
           </div>
           <div className="flex w-full flex-col items-start justify-center gap-5 md:w-auto">

@@ -1,10 +1,9 @@
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import ProcessContainer from "@/components/Process/Container";
+import ProcessContainer from "@/components/Process/Container/Container";
 import {
   Button,
   Container,
   Heading,
-  LoadingAnimation,
   Modal,
   Text,
 } from "@component-library/index";
@@ -13,9 +12,10 @@ import { useTranslation } from "react-i18next";
 import { UserAddressProps } from "@/hooks/useUser";
 import ProcessContractorList from "./components/ContractorList";
 import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
-import ContractorCard from "./components/ContractorCard";
+import ContractorCard from "../../../../components/Process/ContractorCard";
 import ContractorSelectionAddressCard from "./components/AddressCard";
-import useGetContractors from "@/api/Process/Querys/useGetContractors";
+import ProcessConditionIcon from "@/components/Process/ConditionIcon";
+import ProcessStatusGate from "../../../../components/Process/StatusGate";
 
 interface ProcessContractorSelectionProps {}
 
@@ -32,14 +32,10 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
   const {} = props;
   const { t } = useTranslation();
   const { process } = useDefinedProcess();
-  const contractors = useGetContractors();
 
   const [editContractor, setEditContractor] = useState(false);
 
-  const currentContractor = contractors.data?.find(
-    (contractor) =>
-      contractor.hashedID === process.processDetails.provisionalContractor
-  );
+  const currentContractor = process.processDetails.provisionalContractor;
 
   const [showDeliveryAddress, setShowDeliveryAddress] =
     useState<boolean>(false);
@@ -60,16 +56,16 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
   };
 
   const menuButtonTitle = t(
-    "Process.components.ContractorSelection.ContractorSelection.button.menu"
+    "Process.components.ContractorSelection.button.menu"
   );
   const pageTitle = `${t(
-    "Process.components.ContractorSelection.ContractorSelection.heading.main"
+    "Process.components.ContractorSelection.heading.main"
   )}: ${
-    process.contractor === ""
-      ? t(
-          "Process.components.ContractorSelection.ContractorSelection.noContractor"
-        )
-      : process.contractor
+    process.contractor === undefined ||
+    process.contractor.name === undefined ||
+    process.contractor.name === ""
+      ? t("Process.components.ContractorSelection.noContractor")
+      : process.contractor.name
   }`;
 
   return (
@@ -85,47 +81,53 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
           width="full"
           justify="start"
           direction="col"
-          className=" card"
+          className={`card ${!showDeliveryAddress ? "self-stretch" : ""}`}
+          id="Contractor"
         >
-          <Heading variant="h3">
-            {t(
-              "Process.components.ContractorSelection.ContractorSelection.heading.sub1"
-            )}
-          </Heading>
+          <Container width="fit" className={`gap-2 p-0 `}>
+            <ProcessConditionIcon
+              error={process.processDetails.provisionalContractor === undefined}
+            />
+
+            <Heading variant="h3">
+              {t("Process.components.ContractorSelection.heading.sub1")}
+            </Heading>
+          </Container>
           {process.processDetails.provisionalContractor === undefined ? (
-            <Container width="full" direction="col">
+            <Container width="full" height="full" direction="col">
               <Button
                 size="sm"
                 onClick={handleOnClickButtonSelectContractor}
                 variant="primary"
                 title={t(
-                  "Process.components.ContractorSelection.components.ContractorList.button.select"
+                  "Process.components.ContractorSelection.button.select"
                 )}
               />
             </Container>
-          ) : contractors.isLoading ? (
-            <LoadingAnimation />
           ) : currentContractor === undefined ? (
             <Text>
-              {t(
-                "Process.components.ContractorSelection.components.ContractorList.noContractorFound"
-              )}
+              {t("Process.components.ContractorSelection.noContractorFound")}
             </Text>
           ) : (
             <Container width="full" direction="col">
               <ContractorCard contractor={currentContractor} />
-              <Button
-                size="sm"
-                onClick={handleOnClickButtonEditContractor}
-                variant="secondary"
-                title={t(
-                  "Process.components.ContractorSelection.components.ContractorList.button.edit"
-                )}
-              />
+              <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+                <Button
+                  size="sm"
+                  onClick={handleOnClickButtonEditContractor}
+                  variant="secondary"
+                  title={t("general.button.edit")}
+                />
+              </ProcessStatusGate>
             </Container>
           )}
         </Container>
-        <Container direction="col" width="full">
+        <Container
+          direction="col"
+          width="full"
+          justify="start"
+          className="self-stretch"
+        >
           <ContractorSelectionAddressCard
             onChangeCheckBox={onChangeCheckBox}
             showDeliveryAddress={showDeliveryAddress}
@@ -147,7 +149,6 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
         closeModal={closeEditContractor}
       >
         <ProcessContractorList
-          contractors={contractors}
           process={process}
           closeModal={closeEditContractor}
         />

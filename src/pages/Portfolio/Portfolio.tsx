@@ -40,7 +40,7 @@ const Portfolio: React.FC<Props> = (props) => {
       className="flex w-full flex-col items-center justify-center gap-5 bg-white p-5"
       data-testid="portfolio"
     >
-      <Heading variant="h1">{t("Portfolio.Portfolio.header")}</Heading>
+      <Heading variant="h1">{t("Portfolio.header")}</Heading>
       {PortfolioItems.map((portfolioItem, index) => {
         return (
           <PortfolioItem
@@ -53,7 +53,7 @@ const Portfolio: React.FC<Props> = (props) => {
       <Button
         testid="portfolio-button"
         onClick={handleOnClickButton}
-        title={t("Portfolio.Portfolio.back")}
+        title={t("Portfolio.back")}
       />
     </div>
   );

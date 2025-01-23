@@ -6,7 +6,7 @@ import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Quer
 import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
-} from "@/api/Resources/Ontology/Querys/useGetOntoNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 interface Props {
   material: MaterialProps;
@@ -22,46 +22,55 @@ export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
 
   return (
     <Container
-      className={`w-fit  gap-0 overflow-clip rounded-xl border-2 bg-white ${
+      className={` w-full justify-between gap-0 self-stretch overflow-clip rounded-md border-2 bg-white md:w-[calc(50%-10px)] ${
         selected ? "border-blau-500" : ""
       }`}
       direction="col"
     >
-      <img
-        src={material.imgPath}
-        alt={material.title}
-        className="h-60 w-full object-cover"
-      />
-      <Divider />
-      <Container direction="col" className="p-5">
-        <Heading variant="h3">{material.title}</Heading>
-        <Container direction="col" justify="start" align="start">
-          <Text>{`${t(
-            `Service.Manufacturing.Material.components.Card.props`
-          )}`}</Text>
+      <Container direction="col" width="full">
+        <img
+          src={material.imgPath}
+          alt={material.title}
+          className="h-60 w-full object-cover"
+        />
+        <Divider />
+        <Container direction="col" className="grow p-5" width="full">
+          <Heading variant="h3">{material.title}</Heading>
+          <Heading variant="h2">
+            {material.medianPrice}
+            {" €"}
+          </Heading>
+          <table className="w-full grow table-auto  border-separate border-spacing-3 rounded-md border-2">
+            <caption>
+              <Text>{`${t(
+                `Process.components.Service.ServiceEdit.Manufacturing.Material.components.Card.props`
+              )}`}</Text>
+            </caption>
+            <tbody>
+              {material.propList
+                .filter((item) => item.name !== "imgPath")
+                .map((prop, index: number) => (
+                  <tr key={index} className="model-view-tag">
+                    <td>
+                      {isOntoNodePropertyName(prop.name)
+                        ? t(
+                            `types.OntoNodePropertyName.${
+                              prop.name as OntoNodePropertyName
+                            }`
+                          )
+                        : prop.name}
+                      {": "}
+                    </td>
+                    <td>
+                      {prop.value.toString()} {prop.unit}
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
         </Container>
-        <table className="auto table border-separate border-spacing-2">
-          <tbody>
-            {material.propList
-              .filter((item) => item.name !== "imgPath")
-              .map((prop, index: number) => (
-                <tr key={index} className="model-view-tag">
-                  <td>
-                    {isOntoNodePropertyName(prop.name)
-                      ? t(
-                          `types.OntoNodePropertyName.${
-                            prop.name as OntoNodePropertyName
-                          }`
-                        )
-                      : prop.name}
-                    {": "}
-                  </td>
-                  <td>{prop.value.toString()}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-
+      </Container>
+      <Container width="full" direction="col" className="p-5">
         {children}
       </Container>
     </Container>

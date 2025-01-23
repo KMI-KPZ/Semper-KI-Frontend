@@ -36,7 +36,7 @@ const ProcessFilterNumberInput: React.FC<Props> = (props) => {
   return (
     <input
       type="number"
-      className="rounded-xl border-2 px-5 py-3 text-center"
+      className="rounded-md border-2 px-5 py-3 text-center"
       onChange={handleChangeInput}
       value={state.value}
     />

@@ -6,6 +6,7 @@ import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { ProjectDetailsProps } from "../Querys/useGetProject";
 
 export interface UpdateProjectProps {
+  projectID?: string;
   changes?: ProjectChangesProps;
   deletions?: ProjectDeletionsProps;
 }
@@ -24,12 +25,13 @@ const useUpdateProject = () => {
   const queryClient = useQueryClient();
   const { projectID } = useParams();
   const updateProject = async ({
+    projectID: customProjectID,
     changes = {},
     deletions = {},
   }: UpdateProjectProps) =>
     authorizedCustomAxios
       .patch(`${process.env.VITE_HTTP_API_URL}/public/project/update/`, {
-        projectID,
+        projectID: customProjectID !== undefined ? customProjectID : projectID,
         changes,
         deletions,
       })
@@ -45,7 +47,7 @@ const useUpdateProject = () => {
     mutationFn: updateProject,
     onSuccess: () => {
       queryClient.invalidateQueries(["project", projectID]);
-      queryClient.invalidateQueries(["flatProjects"]);
+      queryClient.invalidateQueries(["dashboardProject"]);
     },
   });
 };

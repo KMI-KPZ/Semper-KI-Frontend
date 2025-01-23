@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ProcessContainer from "@/components/Process/Container";
+import ProcessContainer from "@/components/Process/Container/Container";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useProcess from "@/hooks/Process/useProcess";
 import ProcessMessages from "@/components/Process/Messages/Messages";
@@ -15,8 +15,8 @@ const ProcessClarify: React.FC<ProcessClarifyProps> = (props) => {
   return (
     <ProcessContainer
       id="Clarification"
-      menuButtonTitle={t("Process.components.Clarify.Clarify.button.menu")}
-      pageTitle={`${t("Process.components.Clarify.Clarify.title")}:`}
+      menuButtonTitle={t("Process.components.Clarify.button.menu")}
+      pageTitle={`${t("Process.components.Clarify.heading")}:`}
       start={ProcessStatus.VERIFYING_COMPLETED}
       end={ProcessStatus.VERIFYING_COMPLETED}
     >

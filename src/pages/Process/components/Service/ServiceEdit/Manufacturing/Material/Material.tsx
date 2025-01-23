@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetMaterials, {
   MaterialProps,
@@ -10,6 +10,7 @@ import {
   Heading,
   LoadingSuspense,
   Modal,
+  Search,
   Text,
 } from "@component-library/index";
 import { ProcessMaterialCard } from "./components/Card";
@@ -17,8 +18,9 @@ import useSetMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutatio
 import { useProject } from "@/hooks/Project/useProject";
 import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import useModal from "@/hooks/useModal";
-import ServiceSearch from "../Search/Search";
 import useSearch from "@/hooks/useSearch";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
+import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
 
 interface Props {}
 
@@ -30,11 +32,9 @@ interface Props {}
 export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const { t } = useTranslation();
   const {} = props;
-  // const [state, setState] = useState<State>({
-  //   modalOpen: false,
-  //   material: undefined,
-  // });
-  const [searchText, setSearchText] = useState<string>("");
+
+  const { filterDataBySearchInput, handleSearchInputChange } =
+    useSearch<MaterialProps>();
   const { process } = useManufacturingProcess();
   const { project } = useProject();
   const { projectID, processID } = useParams();
@@ -42,11 +42,13 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const materialsQuery = useGetMaterials();
   const setMaterial = useSetMaterial();
+  const deleteMaterial = useDeleteMaterial();
   const {} = useSearch();
+  const { group, groupID } = useContext(ManufacturingGroupContext);
 
-  const [selectedMaterials, setSelectedMaterials] = useState<MaterialProps[]>(
-    process.serviceDetails.materials || []
-  );
+  const [selectedMaterial, setSelectedMaterial] = useState<
+    MaterialProps | undefined
+  >(group.material);
 
   const closeModal = () => {
     navigate(`/projects/${projectID}/${processID}`);
@@ -66,59 +68,57 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
   // };
 
   const handleOnClickButtonSave = () => {
-    setMaterial.mutate(
-      {
-        projectID: project.projectID,
-        processID: process.processID,
-        materials: selectedMaterials,
-      },
-      {
-        onSuccess() {
-          deleteModal("ServiceRoutesManufacturingMaterials");
+    if (selectedMaterial !== undefined) {
+      setMaterial.mutate(
+        {
+          groupID: groupID,
+          projectID: project.projectID,
+          processID: process.processID,
+          material: selectedMaterial,
         },
-      }
-    );
+        {
+          onSuccess() {
+            deleteModal("ServiceRoutesManufacturingMaterials");
+          },
+        }
+      );
+    } else {
+      deleteMaterial.mutate(
+        {
+          groupID: groupID,
+          projectID: project.projectID,
+          processID: process.processID,
+        },
+        {
+          onSuccess() {
+            deleteModal("ServiceRoutesManufacturingMaterials");
+          },
+        }
+      );
+    }
   };
 
   const handleOnButtonClickSelect = (material: MaterialProps) => {
-    setSelectedMaterials((prevState) => [...prevState, material]);
+    setSelectedMaterial(material);
   };
 
-  const handleOnButtonClickDeselect = (materialID: string) => {
-    setSelectedMaterials((prevState) =>
-      prevState.filter((material) => material.id !== materialID)
-    );
-  };
-
-  const filterBySearch = (material: MaterialProps): boolean => {
-    if (searchText === "") {
-      return true;
-    }
-    if (
-      material.title.toLocaleLowerCase().includes(searchText) ||
-      material.propList.filter(
-        (prop) =>
-          prop.name.toLocaleLowerCase().includes(searchText) ||
-          prop.value.toString().toLocaleLowerCase().includes(searchText)
-      ).length > 0
-    )
-      return true;
-    return false;
+  const handleOnButtonClickDeselect = () => {
+    setSelectedMaterial(undefined);
   };
 
   const isMaterialSelected = (material: MaterialProps): boolean => {
-    return selectedMaterials.find((m) => m.id === material.id) !== undefined;
+    return selectedMaterial?.id === material.id;
   };
 
-  const sortSelectedMaterialsFirst = (a: MaterialProps, b: MaterialProps) => {
-    if (isMaterialSelected(a)) {
-      return -1;
-    }
-    if (isMaterialSelected(b)) {
-      return 1;
-    }
-    return 0;
-  };
+  // const sortSelectedMaterialsFirst = (a: MaterialProps, b: MaterialProps) => {
+  //   if (isMaterialSelected(a)) {
+  //     return -1;
+  //   }
+  //   if (isMaterialSelected(b)) {
+  //     return 1;
+  //   }
+  //   return 0;
+  // };
 
   return (
     <Modal
@@ -133,12 +133,14 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
         justify="start"
         className="h-full w-screen max-w-6xl gap-5 p-5 pt-14"
       >
-        <ServiceSearch searchText={searchText} setSearchText={setSearchText} />
+        <Search handleSearchInputChange={handleSearchInputChange} />
         <Container direction="col" width="full">
           <Container width="full" direction="col">
             <Container direction="row" width="full" justify="between">
               <Heading variant="h2">
-                {t("Service.Manufacturing.Material.Material.available")}
+                {t(
+                  "Process.components.Service.ServiceEdit.Manufacturing.Material.available"
+                )}
               </Heading>
             </Container>
             <LoadingSuspense query={materialsQuery}>
@@ -151,8 +153,8 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
                   align="start"
                 >
                   {materialsQuery.data
-                    .filter(filterBySearch)
-                    .sort(sortSelectedMaterialsFirst)
+                    .filter((material) => filterDataBySearchInput(material))
+                    // .sort(sortSelectedMaterialsFirst)
                     .map((material: MaterialProps, index: number) => (
                       <ProcessMaterialCard
                         material={material}
@@ -164,12 +166,8 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
                           {isMaterialSelected(material) ? (
                             <Button
                               variant="primary"
-                              onClick={() =>
-                                handleOnButtonClickDeselect(material.id)
-                              }
-                              title={t(
-                                "Service.Manufacturing.Material.Material.button.deselect"
-                              )}
+                              onClick={() => handleOnButtonClickDeselect()}
+                              title={t("general.button.deselect")}
                             />
                           ) : (
                             <Button
@@ -177,9 +175,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
                               onClick={() =>
                                 handleOnButtonClickSelect(material)
                               }
-                              title={t(
-                                "Service.Manufacturing.Material.Material.button.select"
-                              )}
+                              title={t("general.button.select")}
                             />
                           )}
                         </Container>
@@ -189,27 +185,20 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
               ) : (
                 <Text className="w-full text-center">
                   {t(
-                    "Service.Manufacturing.Material.Material.error.noMaterials"
+                    "Process.components.Service.ServiceEdit.Manufacturing.Material.error.noMaterials"
                   )}
                 </Text>
               )}
             </LoadingSuspense>
           </Container>
         </Container>
-        <Container
-          width="full"
-          direction="row"
-          justify="end"
-          className="fixed bottom-5 z-10 pr-5 md:sticky "
-        >
-          <Button
-            className=""
-            variant="primary"
-            width="fit"
-            onClick={handleOnClickButtonSave}
-            title={t("Service.Manufacturing.Material.Material.button.save")}
-          />
-        </Container>
+        <Button
+          className="fixed bottom-5 z-10  w-fit self-center pr-5 md:sticky md:self-end"
+          variant="primary"
+          width="fit"
+          onClick={handleOnClickButtonSave}
+          title={t("general.button.save")}
+        />
       </Container>
     </Modal>
   );

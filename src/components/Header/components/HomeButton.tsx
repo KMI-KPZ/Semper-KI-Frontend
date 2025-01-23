@@ -1,15 +1,15 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import LogoURL from "@images/logo192.png";
 import { Text } from "@component-library/index";
+import { useTranslation } from "react-i18next";
 
 interface HeaderHomeButtonProps {}
 
 const HeaderHomeButton: React.FC<HeaderHomeButtonProps> = (props) => {
   const {} = props;
-  const { t } = useTranslation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <a
@@ -32,7 +32,7 @@ const HeaderHomeButton: React.FC<HeaderHomeButtonProps> = (props) => {
           variant="custom"
           className="text-2xl font-bold text-[#263652] xs:text-3xl md:text-4xl"
         >
-          {t("components.Header.Header.title")}
+          {t("components.Header.button.home")}
         </Text>
       </div>
     </a>

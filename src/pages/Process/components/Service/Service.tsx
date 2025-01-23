@@ -1,13 +1,10 @@
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import { Button } from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ServiceSelection from "./ServiceSelection/ServiceSelection";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
-import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import ServiceDetails from "./ServiceDetails/ServiceDetails";
-import ProcessContainer from "@/components/Process/Container";
-import ProcessFilter from "./Filter/Filter";
+import ProcessContainer from "@/components/Process/Container/Container";
 
 interface ServiceProps {
   process: Process;
@@ -16,35 +13,22 @@ interface ServiceProps {
 const Service: React.FC<ServiceProps> = (props) => {
   const { process } = props;
   const { t } = useTranslation();
-  const updateProcess = useUpdateProcess();
 
-  const handleOnClickButtonEditType = () => {
-    updateProcess.mutate({
-      processIDs: [process.processID],
-      updates: { changes: { serviceType: ServiceType.NONE } },
-    });
-  };
-
-  // const handleOnClickButtonComplete = () => {
-  //   updateProcess.mutate({
-  //     processIDs: [process.processID],
-  //     updates: {
-  //       changes: { processStatus: ProcessStatus.CONTRACTOR_COMPLETED },
-  //     },
-  //   });
-  // };
-
-  const menuButtonTitle = t("Project.components.Info.button.menu");
-  const pageTitle = `${t("Process.Service.Service.title")}: ${
+  const menuButtonTitle = t("Process.components.Service.button.menu");
+  const pageTitle = `${t("Process.components.Service.heading")}: ${
     process.serviceType === undefined ||
     process.serviceType === ServiceType.NONE
-      ? t("Process.Service.Service.noType")
+      ? t("Process.components.Service.noType")
       : t(
           `enum.ServiceType.${
             ServiceType[process.serviceType] as keyof typeof ServiceType
           }`
         )
   }`;
+
+  const noServiceSelected =
+    process.serviceType === undefined ||
+    process.serviceType === ServiceType.NONE;
 
   return (
     <ProcessContainer
@@ -53,24 +37,11 @@ const Service: React.FC<ServiceProps> = (props) => {
       end={ProcessStatus.SERVICE_COMPLICATION}
       menuButtonTitle={menuButtonTitle}
       pageTitle={pageTitle}
-      menuChildren={
-        <Button
-          title={t("Process.Service.Service.button.editType")}
-          stopPropagation={false}
-          variant="secondary"
-          size="sm"
-          onClick={handleOnClickButtonEditType}
-        />
-      }
     >
-      {process.serviceType === undefined ||
-      process.serviceType === ServiceType.NONE ? (
+      {noServiceSelected ? (
         <ServiceSelection />
       ) : (
-        <>
-          <ProcessFilter />
-          <ServiceDetails process={process} />
-        </>
+        <ServiceDetails process={process} />
       )}
     </ProcessContainer>
   );

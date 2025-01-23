@@ -21,13 +21,14 @@ export interface Project {
   processes: FlatProcess[];
 }
 
-export type FlatProcessStatus =
+export type ProcessActionStatus =
   | "ACTION_REQUIRED"
   | "WAITING_CONTRACTOR"
   | "WAITING_CLIENT"
   | "WAITING_PROCESS"
   | "IN_PROGRESS"
-  | "COMPLETED";
+  | "COMPLETED"
+  | "FAILED";
 
 export interface FlatProcess {
   title: string;
@@ -35,7 +36,7 @@ export interface FlatProcess {
   serviceType: ServiceType;
   updatedWhen: Date;
   createdWhen: Date;
-  flatProcessStatus: FlatProcessStatus;
+  actionStatus: ProcessActionStatus;
   amount: number;
   imgPath: string;
 }
@@ -47,8 +48,11 @@ export const getProcessFiles = (filesObject: Object): ProcessFile[] => {
   return files;
 };
 
-const useGetProject = () => {
-  const { projectID } = useParams();
+const useGetProject = (customProjectID?: string) => {
+  const { projectID: paramProjectID } = useParams();
+
+  const projectID =
+    customProjectID !== undefined ? customProjectID : paramProjectID;
   const { user } = useUser();
   const getProject = async () =>
     authorizedCustomAxios
@@ -65,7 +69,7 @@ const useGetProject = () => {
             (process: any): FlatProcess => ({
               title: process.title,
               processID: process.processID,
-              flatProcessStatus: process.flatProcessStatus,
+              actionStatus: process.ProcessActionStatus,
               serviceType: process.serviceType,
               createdWhen: new Date(process.createdWhen),
               updatedWhen: new Date(process.updatedWhen),
@@ -81,7 +85,9 @@ const useGetProject = () => {
   return useQuery<Project, Error>({
     queryKey: ["project", projectID],
     queryFn: getProject,
-    enabled: projectID !== undefined && user.usertype !== UserType.ADMIN,
+    enabled:
+      (paramProjectID !== undefined && user.usertype !== UserType.ADMIN) ||
+      customProjectID !== undefined,
   });
 };
 

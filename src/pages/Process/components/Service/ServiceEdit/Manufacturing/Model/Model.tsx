@@ -6,13 +6,13 @@ import { useTranslation } from "react-i18next";
 import { ProcessModelPreView } from "./components/PreView";
 import { Heading } from "@component-library/index";
 import { Modal } from "@component-library/index";
-import { ModelProps } from "./types";
 import { ProcessModelUpload } from "./Upload/Upload";
 import useGetModels, {
   RepositoryModel,
 } from "@/api/Service/AdditiveManufacturing/Model/Querys/useGetModels";
 import useSearch from "@/hooks/useSearch";
 import useDownloadFile from "@/api/Process/Files/Mutations/useDownloadFile";
+import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
 // import useUploadModels from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUploadModels";
 // import useDownloadExternalFile from "@/api/Process/Files/Mutations/useDownloadExternalFile";
 
@@ -20,7 +20,7 @@ interface Props {}
 
 interface State {
   modalOpen: boolean;
-  model: ModelProps | undefined;
+  model: ProcessModel | undefined;
 }
 
 export const ManufacturingModels: React.FC<Props> = (props) => {
@@ -47,7 +47,7 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
     navigate(`/projects/${projectID}/${processID}`);
   };
 
-  const openModelView = (model: ModelProps) => {
+  const openModelView = (model: ProcessModel) => {
     setState((prevState) => ({ ...prevState, modalOpen: true, model }));
   };
 
@@ -117,6 +117,7 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
                         <Button
                           title={t("general.button.select")}
                           variant="primary"
+                          active={false}
                           size="sm"
                           onClick={() => handleOnClickButtonSelect(model.file)}
                         />

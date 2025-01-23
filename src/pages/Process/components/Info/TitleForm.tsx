@@ -59,30 +59,30 @@ const ProcessTitleForm: React.FC<ProcessTitleFormProps> = (props) => {
     <form>
       <Container direction="col">
         <Heading variant="h1">
-          {t("Process.components.TitleForm.heading")}
+          {t("Process.components.Info.TitleForm.heading")}
         </Heading>
         {isNew ? (
-          <Text>{t("Process.components.TitleForm.describtion")}</Text>
+          <Text>{t("Process.components.Info.TitleForm.describtion")}</Text>
         ) : null}
         <Container direction="col" gap={3} className="flex-wrap md:flex-nowrap">
           <input
             autoFocus
             {...register("name", { required: true })}
             onKeyDown={handleKeyDown}
-            placeholder={t("Process.components.TitleForm.name")}
+            placeholder={t("Process.components.Info.TitleForm.name")}
             className="w-fit rounded-md border-2 bg-gray-100 p-2"
           />
 
           {errors.name ? (
             <Text variant="error">
-              {t("Process.components.TitleForm.error")}
+              {t("Process.components.Info.TitleForm.error")}
             </Text>
           ) : null}
           <PermissionGate element="ProjectButtonEditName">
             <Button
               onClick={handleSubmit(onSubmit)}
               variant="primary"
-              title={t("Process.components.TitleForm.button.save")}
+              title={t("Process.components.Info.TitleForm.button.save")}
               size="sm"
               width="fit"
             />

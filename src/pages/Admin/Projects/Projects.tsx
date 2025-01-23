@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import useAdmin from "../../../hooks/useAdmin";
 import { Button } from "@component-library/index";
 import { Container } from "@component-library/index";
-import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
+import { FlatDashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
 import useSearch from "@/hooks/useSearch";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useDeleteProject from "@/api/Project/Mutations/useDeleteProject";
@@ -23,22 +23,24 @@ interface Props {}
 const AdminProjects: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-  const { flatProjects } = useAdmin();
+  const { dashboardProject } = useAdmin();
   const navigate = useNavigate();
   const deleteProject = useDeleteProject();
   const { filterDataBySearchInput, handleSearchInputChange } =
-    useSearch<FlatProject>();
+    useSearch<FlatDashboardProject>();
   const {
     getSortIcon,
     handleSort,
     sortItems,
     getNestedSortIcon,
     handleNestedSort,
-  } = useSort<FlatProject>();
+  } = useSort<FlatDashboardProject>();
   const { handlePageChange, paginatedItems, totalPages } =
-    usePagination<FlatProject>({
-      items: flatProjects
-        .filter((project: FlatProject) => filterDataBySearchInput(project))
+    usePagination<FlatDashboardProject>({
+      items: dashboardProject
+        .filter((project: FlatDashboardProject) =>
+          filterDataBySearchInput(project)
+        )
         .sort(sortItems),
     });
 
@@ -116,61 +118,63 @@ const AdminProjects: React.FC<Props> = (props) => {
           </thead>
           <tbody>
             {paginatedItems.length > 0
-              ? paginatedItems.map((project: FlatProject, index: number) => (
-                  <tr key={index}>
-                    <td>{project.projectID}</td>
-                    <td>{project.client}</td>
-                    <td>
-                      {project.projectDetails.title === undefined
-                        ? "---"
-                        : project.projectDetails.title}
-                    </td>
-                    <td>{project.processesCount}</td>
-                    <td>
-                      {t(
-                        `enum.ProcessStatus.${
-                          ProcessStatus[
-                            project.projectStatus
-                          ] as keyof typeof ProcessStatus
-                        }`
-                      )}
-                    </td>
-                    <td className="whitespace-nowrap">
-                      {project.createdWhen.toLocaleString()}
-                    </td>
-                    <td className="whitespace-nowrap">
-                      {project.updatedWhen.toLocaleString()}
-                    </td>
-                    <td>
-                      <Container direction="col" width="full">
-                        <Button
-                          title={t("general.button.details")}
-                          onClick={() =>
-                            handleOnClickButtonDetails(project.projectID)
-                          }
-                          variant="text"
-                        />
-                        {/* <Button
+              ? paginatedItems.map(
+                  (project: FlatDashboardProject, index: number) => (
+                    <tr key={index}>
+                      <td>{project.projectID}</td>
+                      <td>{project.client}</td>
+                      <td>
+                        {project.projectDetails.title === undefined
+                          ? "---"
+                          : project.projectDetails.title}
+                      </td>
+                      <td>{project.processesCount}</td>
+                      <td>
+                        {t(
+                          `enum.ProcessStatus.${
+                            ProcessStatus[
+                              project.projectStatus
+                            ] as keyof typeof ProcessStatus
+                          }`
+                        )}
+                      </td>
+                      <td className="whitespace-nowrap">
+                        {project.createdWhen.toLocaleString()}
+                      </td>
+                      <td className="whitespace-nowrap">
+                        {project.updatedWhen.toLocaleString()}
+                      </td>
+                      <td>
+                        <Container direction="col" width="full">
+                          <Button
+                            title={t("general.button.details")}
+                            onClick={() =>
+                              handleOnClickButtonDetails(project.projectID)
+                            }
+                            variant="text"
+                          />
+                          {/* <Button
                           title={t("Admin.Resources.button.edit")}
                           onClick={() =>
                             handleOnClickButtonEdit(project.projectID)
                           }
                           variant="text"
                         /> */}
-                        <Button
-                          title={t("general.button.delete")}
-                          onClick={() =>
-                            handleOnClickButtonDelete(
-                              project.projectID,
-                              project.projectDetails.title
-                            )
-                          }
-                          variant="text"
-                        />
-                      </Container>
-                    </td>
-                  </tr>
-                ))
+                          <Button
+                            title={t("general.button.delete")}
+                            onClick={() =>
+                              handleOnClickButtonDelete(
+                                project.projectID,
+                                project.projectDetails.title
+                              )
+                            }
+                            variant="text"
+                          />
+                        </Container>
+                      </td>
+                    </tr>
+                  )
+                )
               : null}
           </tbody>
         </Table>

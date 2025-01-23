@@ -75,6 +75,7 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
       justify="center"
       wrap="wrap"
       className="pb-5"
+      id="Process-ServiceType"
     >
       {services.data.map((service, index) => (
         <ServiceCard

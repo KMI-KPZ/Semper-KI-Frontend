@@ -9,27 +9,28 @@ import { useProject } from "@/hooks/Project/useProject";
 import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import ProcessStatusGate from "@/pages/Process/components/StatusGate";
+import ProcessStatusGate from "@/components/Process/StatusGate";
 import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 interface ProcessSericePostProcessingCardProps {
   postProcessing: PostProcessingProps;
+  groupID: number;
 }
 
 const ProcessSericePostProcessingCard: React.FC<
   ProcessSericePostProcessingCardProps
 > = (props) => {
-  const { postProcessing } = props;
+  const { postProcessing, groupID } = props;
   const { t } = useTranslation();
   const { process } = useProcess();
   const { project } = useProject();
   const navigate = useNavigate();
   const deletePostProcessing = useDeletePostProcessing();
   const handleOnButtonClickPostProcessing = () => {
-    navigate("service/manufacturing/postprocessing");
+    navigate(`service/manufacturing/${groupID}/postprocessing`);
   };
   const handleOnButtonClickDeletePostProcessing = (
     postProcessingID: string
@@ -38,27 +39,24 @@ const ProcessSericePostProcessingCard: React.FC<
       processID: process.processID,
       projectID: project.projectID,
       postProcessingID,
+      groupID,
     });
   };
 
   return (
     <ServiceDetailsCard>
-      <img
-        src={TestImg}
-        alt={t(
-          "Process.components.Service.ServiceDetails.components.Manufacturing.PostProcessingCard.img"
-        )}
-        className="max-h-40 w-full object-contain md:w-fit"
-      />
+      <Container direction="col" width="full" className="gap-2">
+        <Text variant="strong">{postProcessing.title}</Text>
+        <img
+          src={TestImg}
+          alt={t(
+            "Process.components.Service.ServiceDetails.components.Manufacturing.PostProcessingCard.img"
+          )}
+          className="max-h-40 w-full object-contain md:w-fit"
+        />
+      </Container>
+
       <Container direction="col" width="full" className="" gap={3}>
-        <Container direction="row" justify="between" width="full">
-          <Text>
-            {t(
-              "Process.components.Service.ServiceDetails.components.Manufacturing.PostProcessingCard.name"
-            )}
-          </Text>
-          <Text>{postProcessing.title}</Text>
-        </Container>
         <Container direction="row" justify="between" width="full">
           <Text>
             {t(
@@ -103,7 +101,7 @@ const ProcessSericePostProcessingCard: React.FC<
         gap={3}
         className="flex-row p-5 md:flex-col"
       >
-        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+        <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
             title={t(
               "Process.components.Service.ServiceDetails.components.Manufacturing.button.editPostProcessing"

@@ -1,4 +1,4 @@
-import { OntoNode } from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import { OntoNode } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import useOrganization from "./useOrganization";
 
 interface useRessourcesTableItemReturnProps {

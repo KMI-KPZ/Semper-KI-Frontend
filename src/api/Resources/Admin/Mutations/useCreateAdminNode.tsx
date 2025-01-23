@@ -5,7 +5,7 @@ import {
   OntoNode,
   OntoNodeNew,
   parseOntoNode,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 interface useCreateAdminNodeProps {
   node: OntoNodeNew;

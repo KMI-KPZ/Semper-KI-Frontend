@@ -1,15 +1,15 @@
 import React, { PropsWithChildren } from "react";
 import { Container, Divider, Text } from "@component-library/index";
 import { useTranslation } from "react-i18next";
-import { ModelProps } from "../types";
 import { Heading } from "@component-library/index";
 // import ModelPreview from "@/pages/Test/STLViewer";
 // import useGetModelFile from "@/api/Process/Files/Querys/useGetFile";
 import { RepositoryModel } from "@/api/Service/AdditiveManufacturing/Model/Querys/useGetModels";
+import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
 
 interface Props {
   model: RepositoryModel;
-  openModelView(model: ModelProps): void;
+  openModelView(model: ProcessModel): void;
 }
 
 export const ProcessModelCard: React.FC<PropsWithChildren<Props>> = (props) => {

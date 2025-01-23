@@ -10,7 +10,7 @@ import usePagination from "@/hooks/usePagination";
 import {
   OntoNode,
   isOntoNodeType,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import Pagination from "@/components/Table/Pagination";
 import useAdmin from "../../../hooks/useAdmin";
 import useGetAdminNodes from "@/api/Resources/Admin/Querys/useGetAdminNodes";

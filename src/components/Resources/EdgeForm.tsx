@@ -12,7 +12,7 @@ import {
   OntoNode,
   OntoNodeNew,
   OntoNodeType,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import {
   FieldArrayWithId,
   UseFieldArrayReturn,
@@ -21,7 +21,7 @@ import {
 import useOrganization from "@/hooks/useOrganization";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
-import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import useGetOrgaNodesByType from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import Collapsible from "@/components/Collapsible/Collapsible";
 import { ResourcesNodeFormEdges } from "./NodeForm";
 
@@ -47,7 +47,7 @@ interface ResourcesEdgeFormItem
 const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
   const { nodeType, useEdgeArray } = props;
   const { t } = useTranslation();
-  const nodes = useGetOrgaNodes(nodeType);
+  const nodes = useGetOrgaNodesByType(nodeType);
   const { organization } = useOrganization();
   const {
     getSortIcon: getSortIconAll,

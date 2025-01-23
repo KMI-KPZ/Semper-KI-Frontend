@@ -1,4 +1,4 @@
-import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
+import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
 import { Heading } from "@component-library/index";
 import {
   Paper,
@@ -33,7 +33,7 @@ const AdminModels: React.FC<Props> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {[].map((model: ModelProps, index: number) => (
+            {[].map((model: ProcessModel, index: number) => (
               <TableRow
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -42,7 +42,7 @@ const AdminModels: React.FC<Props> = (props) => {
                   {model.fileName}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {model.date}
+                  {model.date.toLocaleString()}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {model.licenses}
@@ -55,7 +55,7 @@ const AdminModels: React.FC<Props> = (props) => {
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {/* <img src={model.URI} /> */}
-                  {model.URI}
+                  {model.imgPath}
                 </TableCell>
               </TableRow>
             ))}

@@ -19,7 +19,7 @@ const ServiceDetails: React.FC<ServiceProps> = (props) => {
     default:
       return (
         <Container direction="col">
-          <Text>{t("Process.components.Service.ServiceDetails.dummy")}</Text>
+          {/* <Text>{t("Process.components.Service.ServiceDetails.dummy")}</Text> */}
           <Text>{t("Process.components.Service.ServiceDetails.dummy2")}</Text>
         </Container>
       );

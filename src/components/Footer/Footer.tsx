@@ -26,7 +26,7 @@ const Footer: React.FC<Props> = (props) => {
       >
         <ContactForm closeEdit={() => setOpen(false)} />
       </Modal>
-      <footer className="w-full bg-slate-800 text-white shadow-inner ">
+      <footer className="z-20 w-full bg-slate-800 text-white shadow-inner">
         <ul className="flex flex-col items-center md:flex-row md:justify-around">
           <li className="p-2">
             <Button

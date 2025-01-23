@@ -6,6 +6,7 @@ interface DeletePostProcessingProps {
   postProcessingID: string;
   processID: string;
   projectID: string;
+  groupID: number;
 }
 
 const useDeletePostProcessing = () => {
@@ -14,10 +15,11 @@ const useDeletePostProcessing = () => {
     projectID,
     processID,
     postProcessingID,
+    groupID,
   }: DeletePostProcessingProps) =>
     authorizedCustomAxios
       .delete(
-        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/post-processing/delete/${projectID}/${processID}/${postProcessingID}/`
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/post-processing/delete/${projectID}/${processID}/${groupID}/${postProcessingID}/`
       )
       .then((response) => {
         logger("useDeletePostProcessing | deletePostProcessing ✅ |", response);

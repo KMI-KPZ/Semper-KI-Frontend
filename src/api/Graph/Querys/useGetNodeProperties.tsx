@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
   OntoNodeProperty,
   OntoNodeType,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 const useGetNodeProperties = (nodeType?: OntoNodeType) => {
   const getNodeProperties = async () =>

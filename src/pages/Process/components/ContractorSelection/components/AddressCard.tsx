@@ -16,7 +16,7 @@ import AddressSelection from "./AddressSelection";
 import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 import ProcessConditionIcon from "@/components/Process/ConditionIcon";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import ProcessStatusGate from "../../StatusGate";
+import ProcessStatusGate from "../../../../../components/Process/StatusGate";
 
 interface ContractorSelectionAddressCardProps {
   showDeliveryAddress: boolean;

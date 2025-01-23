@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container } from "@component-library/index";
-import { adminNodeTypes } from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import { adminNodeTypes } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import { useLocation, useParams } from "react-router-dom";
 
 interface AdminResourcesButtonsProps {}

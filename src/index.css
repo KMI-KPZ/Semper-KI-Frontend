@@ -69,7 +69,7 @@
     }
 
     & tbody td {
-      @apply border-t-2 p-3 text-left;
+      @apply border-t-2 p-3 text-center;
     }
   }
   .table-fixed-last-row {

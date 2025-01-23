@@ -13,7 +13,7 @@ import {
   OntoNodePropertyName,
   clientNodeTypes,
   isOntoNodePropertyName,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import useGetOrgaNode from "@/api/Resources/Organization/Querys/useGetOrgaNode";
 import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetAllOrgaNodeNeighbors";
 
@@ -132,7 +132,7 @@ const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
                       {propertyNameTranslation(property.name)}
                     </td>
                     <td className={`border-t-2 p-3`}>
-                      {property.value.toString()}
+                      {property.value.toString()} {property.unit}
                     </td>
                   </tr>
                 ))

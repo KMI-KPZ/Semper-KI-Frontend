@@ -1,4 +1,4 @@
-import ProcessContainer from "@/components/Process/Container";
+import ProcessContainer from "@/components/Process/Container/Container";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
@@ -73,7 +73,12 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
         <Text variant="strong">{getText()}</Text>
       </Container>
 
-      {showFiles ? <ProcessFileView origin="Request" /> : null}
+      {showFiles ? (
+        <ProcessFileView
+          origin="Request"
+          endStatus={ProcessStatus.REQUEST_COMPLETED}
+        />
+      ) : null}
       <Button
         size="sm"
         title={t(

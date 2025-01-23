@@ -11,12 +11,12 @@ import {
 import {
   OntoNode,
   OntoNodeType,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import useOrganization from "@/hooks/useOrganization";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import Collapsible from "@/components/Collapsible/Collapsible";
-import useGetOrgaNodes from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import useGetOrgaNodesByType from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import ResourcesNodeView from "./NodeView";
 import useModal from "@/hooks/useModal";
 
@@ -29,7 +29,7 @@ interface ResourcesNodeDraftProps {
 const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
   const { nodeType, setFormToDraft } = props;
   const { t } = useTranslation();
-  const nodes = useGetOrgaNodes(nodeType);
+  const nodes = useGetOrgaNodesByType(nodeType);
   const { organization } = useOrganization();
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<OntoNode>();

@@ -25,6 +25,9 @@ const useGetAdminProject = () => {
           updatedWhen: new Date(responseData.updatedWhen),
           processes: responseData.processes.map(
             (process: any): Process => ({
+              dependenciesIn: process.dependenciesIn,
+              dependenciesOut: process.dependencies,
+              project: process.project,
               client: process.client,
               processDetails: process.processDetails,
               processID: process.processID,
@@ -40,6 +43,7 @@ const useGetAdminProject = () => {
               accessedWhen: new Date(process.accessedWhen),
               processStatusButtons: process.processStatusButtons,
               processErrors: process.processErrors,
+              actionStatus: process.actionStatus,
             })
           ),
         };

@@ -1,12 +1,12 @@
 import { Heading } from "@component-library/index";
-import React from "react";
-import { useTranslation } from "react-i18next";
 import HomeIntroduction from "./components/Introduction";
 import HomeServices from "./components/Services";
 import HomePrototypeAlert from "./components/PrototypeAlert";
-import HomeBackground from "./components/Background";
 import HomeTutorial from "./components/Tutorial";
 import HomeTeam from "./components/Team";
+import { useTranslation } from "react-i18next";
+import HomeBackground from "./components/Background";
+import React from "react";
 import AnonymHomeContainer from "../components/AnonymContainer";
 
 interface HomeProps {}
@@ -17,7 +17,7 @@ const Home: React.FC<HomeProps> = (props) => {
 
   return (
     <div
-      className={`relative  flex  w-full flex-col items-center justify-start`}
+      className={`relative  flex w-full   flex-col items-center justify-start`}
       data-testid="home-anonym"
     >
       <HomeBackground />

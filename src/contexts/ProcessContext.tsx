@@ -17,26 +17,7 @@ export interface ProcessContextProps {
 }
 
 export const ProcessContext = React.createContext<ProcessContextProps>({
-  process: {
-    client: "",
-    contractor: {
-      hashedID: "",
-      name: "",
-    },
-    createdWhen: new Date(),
-    processDetails: { amount: 1, priorities: [] },
-    files: [],
-    messages: {},
-    processID: "",
-    serviceDetails: undefined,
-    serviceStatus: 0,
-    processStatus: 0,
-    updatedWhen: new Date(),
-    serviceType: 0,
-    accessedWhen: new Date(),
-    processStatusButtons: [],
-    processErrors: [],
-  },
+  process: {} as Process,
   filters: [],
   setFilters: () => {},
   editFilters: [],

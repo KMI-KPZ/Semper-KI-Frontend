@@ -4,7 +4,7 @@ import { Button, Container, Search, Text } from "@component-library/index";
 import {
   OntoNode,
   OntoNodeType,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
 import useDeleteOrgaNode from "@/api/Resources/Organization/Mutations/useDeleteOrgaNode";

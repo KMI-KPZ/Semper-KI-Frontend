@@ -1165,7 +1165,10 @@
         "clone": "Projekt Duplizieren",
         "createProcess": "neuen Prozess im Projekt {{name}} anlegen"
       },
-      "Project": { "button": { "new": "Neuen Prozess anlegen" } },
+      "Project": {
+        "noProcess": "Keine Prozesse vorhanden",
+        "button": { "new": "Neuen Prozess anlegen" }
+      },
       "Process": {
         "deleteConfirm": "Möchten Sie den Prozess wirklich löschen?",
         "name": "Prozessname",

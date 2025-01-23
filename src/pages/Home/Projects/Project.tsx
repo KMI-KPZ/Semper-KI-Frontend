@@ -5,6 +5,7 @@ import {
   Container,
   Divider,
   LoadingAnimation,
+  Text,
 } from "@component-library/index";
 import useCreateProcess from "@/api/Process/Mutations/useCreateProcess";
 import HomeProcess from "./Process";
@@ -43,22 +44,36 @@ const HomeProject: React.FC<HomeProjectProps> = (props) => {
         <Container
           width="full"
           direction="col"
-          className="rounded-md  border-2 border-t-0 border-gray-300 p-0 "
+          className="gap-0  rounded-md border-2 border-t-0 border-gray-300 p-0"
         >
-          {project.data.processes.map((process) => (
-            <React.Fragment key={process.processID}>
-              <HomeProcess
-                project={project.data}
-                process={process}
-                owner={owner}
-              />
+          {project.data.processes.length > 0 ? (
+            project.data.processes.map((process) => (
+              <React.Fragment key={process.processID}>
+                <HomeProcess
+                  project={project.data}
+                  process={process}
+                  owner={owner}
+                />
+                <Divider />
+              </React.Fragment>
+            ))
+          ) : (
+            <>
+              <Container
+                width="full"
+                direction="col"
+                justify="start"
+                className="m-0  py-5"
+              >
+                <Text>{t("Home.Projects.Project.noProcess")}</Text>
+              </Container>
               <Divider />
-            </React.Fragment>
-          ))}
+            </>
+          )}
           <Button
             title={t("Home.Projects.Project.button.new")}
             onClick={handleOnClickButtonNew}
-            className="mb-5"
+            className="my-5"
             size="sm"
             variant="primary"
           />

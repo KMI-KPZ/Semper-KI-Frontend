@@ -15,9 +15,7 @@ import Menu from "@/components/Menu/Menu";
 import Advantages from "../Advantages/Advantages";
 import Chatbot from "@/components/Chatbot/Chatbot";
 import Profile from "../Profile/Proflle";
-import Projects from "../Projects/Projects";
 import ProjectOutlet from "@/outlets/ProjectOutlet";
-import ProjectPage from "../Project/ProjectPage";
 import ProcessOutlet from "@/outlets/ProcessOutlet";
 import ProcessPage from "../Process/ProcessPage";
 import Admin from "../Admin/Admin";
@@ -32,7 +30,7 @@ import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { Test } from "../Test/Test";
 import { ToastContainer } from "react-toastify";
-import { ContentBox } from "@component-library/index";
+import { Container, ContentBox } from "@component-library/index";
 import { Background, Breadcrumb } from "@/components/index";
 import { AdminOutlet } from "@/outlets/AdminOutlet";
 import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
@@ -43,6 +41,14 @@ import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 import useUser, { UserType } from "@/hooks/useUser";
 import Footer from "@/components/Footer/Footer";
 import UITest from "../Test/UITest";
+import DescriptiveModelForm from "@/components/Form/DescriptiveModelForm";
+import ManufacturingGroupOutlet from "@/outlets/ManufacturingGroupOutlet";
+import ManufacturingModelEdit from "../Process/components/Service/ServiceEdit/Manufacturing/Model/Edit/ManufacturingModelEdit";
+import ManufacturingModelOutlet from "@/outlets/ManufacturingModelOutlet";
+import Demo from "../Demo/Demo";
+import HomeProjects from "../Home/Projects/Projects";
+// import Projects from "../Projects/Projects";
+// import ProjectPage from "../Project/ProjectPage";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -122,11 +128,24 @@ const App: React.FC = () => {
               <Route path="login/redirect" element={<RedirectLogin />} />
               <Route path="register" element={<Login />} />
               <Route path="legal/*" element={<Legal />} />
-              <Route path="demo/*" element={<Navigate to="/project/new" />} />
+              <Route path="demo/*" element={<Demo />} />
               <Route path="projects/*">
-                <Route index element={<Projects />} />
+                <Route
+                  index
+                  element={
+                    user.usertype === UserType.ANONYM ? (
+                      <Container width="full">
+                        <HomeProjects />
+                      </Container>
+                    ) : (
+                      <Navigate to="/" />
+                    )
+                  }
+                />
+                {/* <Route index element={<Projects />} /> */}
                 <Route path=":projectID/*" element={<ProjectOutlet />}>
-                  <Route index element={<ProjectPage />} />
+                  <Route index element={<Navigate to="/" />} />
+                  {/* <Route index element={<ProjectPage />} /> */}
                   <Route
                     path=":processID/*"
                     element={
@@ -141,17 +160,36 @@ const App: React.FC = () => {
                         path="manufacturing/*"
                         element={<ManufacturingProcessOutlet />}
                       >
-                        <Route index element={<Navigate to="model" />} />
-                        <Route path="model" element={<ManufacturingModels />} />
                         <Route
-                          path="material"
-                          element={<ManufacturingMaterials />}
-                        />
-                        <Route
-                          path="postprocessing"
-                          element={<ManufacturingPostProcessings />}
-                        />
-                        <Route path="*" element={<Error />} />
+                          path=":groupID/*"
+                          element={<ManufacturingGroupOutlet />}
+                        >
+                          <Route index element={<Navigate to="model" />} />
+                          <Route path="model">
+                            <Route index element={<ManufacturingModels />} />
+                            <Route
+                              path="descriptive"
+                              element={<DescriptiveModelForm />}
+                            />
+                            <Route
+                              path=":modelID"
+                              element={
+                                <ManufacturingModelOutlet>
+                                  <ManufacturingModelEdit />
+                                </ManufacturingModelOutlet>
+                              }
+                            />
+                          </Route>
+                          <Route
+                            path="material"
+                            element={<ManufacturingMaterials />}
+                          />
+                          <Route
+                            path="postprocessing"
+                            element={<ManufacturingPostProcessings />}
+                          />
+                          <Route path="*" element={<Error />} />
+                        </Route>
                       </Route>
                       <Route path="modeling/*" element={<ServiceModeling />} />
                       <Route path="*" element={<Navigate to="." />} />

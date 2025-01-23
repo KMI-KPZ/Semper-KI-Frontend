@@ -2,9 +2,10 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import { ModelingServiceProps } from "@/pages/Process/components/Service/ServiceEdit/Modelling/Modelling";
-import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
 import { PostProcessingProps } from "../AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 import { MaterialProps } from "../AdditiveManufacturing/Material/Querys/useGetMaterials";
+import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
+import { CheckModel } from "@/api/Process/Querys/useGetCheckModel";
 
 export interface ServiceItemProps {
   name: string;
@@ -50,18 +51,22 @@ export interface UpdateServiceUndefinedProps {
 }
 
 export type ManufacturingServiceProps = {
-  models?: ModelProps[];
-  materials?: MaterialProps[];
-  postProcessings?: PostProcessingProps[];
+  name?: string;
+  models: ProcessModel[];
+  material: MaterialProps | undefined;
+  postProcessings: PostProcessingProps[];
   manufacturerID?: string;
+  calculations?: CheckModel[];
 };
 
 export type UpdateServiceManufacturingProps = {
-  title?: string;
-  model?: ModelProps;
-  material?: MaterialProps;
-  postProcessings?: PostProcessingProps[];
-  manufacturerID?: string;
+  groups?: {
+    title?: string;
+    model?: ProcessModel[];
+    material?: MaterialProps | undefined;
+    postProcessings?: PostProcessingProps[];
+    manufacturerID?: string;
+  }[];
 };
 
 export interface ServiceManufacturingState {

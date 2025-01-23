@@ -1,35 +1,32 @@
 import { ReactNode } from "react";
-import useUser, { UserType } from "@/hooks/useUser";
+import { UserType } from "@/hooks/useUser";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { externalStatusButtonData } from "./externalStatusButtonData";
-import CancelIcon from "@mui/icons-material/Cancel";
-import FactoryIcon from "@mui/icons-material/Factory";
-import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import MailIcon from "@mui/icons-material/Mail";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import DescriptionIcon from "@mui/icons-material/Description";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import TaskIcon from "@mui/icons-material/Task";
-import ReplayIcon from "@mui/icons-material/Replay";
-import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
-import DesignServicesIcon from "@mui/icons-material/DesignServices";
-import ScheduleSendIcon from "@mui/icons-material/ScheduleSend";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ReportIcon from "@mui/icons-material/Report";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useDeleteProcess from "@/api/Process/Mutations/useDeleteProcess";
 import useStatusButtonRequest from "@/api/Process/Mutations/useStatusButtonRequest";
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useSendProject from "@/api/Project/Mutations/useSendProject";
 import useVerifyProject from "@/api/Project/Mutations/useVerifyProject";
+import logger from "../useLogger";
+import DoneIcon from "@mui/icons-material/Done";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useQueryClient } from "@tanstack/react-query";
+import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
+import BugReportIcon from "@mui/icons-material/BugReport";
 
 interface UseStatusButtonsReturnProps {
-  getProjectStatusButtons: (processes: Process[]) => StatusButtonProcessProps[];
-  getProcessStatusButtons: (process: Process) => StatusButtonProps[];
+  getStatusButtons: (
+    process: Process,
+    includeDelete?: boolean
+  ) => StatusButtonProps[];
   handleOnClickButtonCount: (button: StatusButtonProcessProps) => void;
   handleOnClickButton: (button: StatusButtonProps, processID: string) => void;
 }
@@ -58,7 +55,8 @@ export type StatusButtonTitleType =
   | "FORWARD-TO-DELIVERY_COMPLETED"
   | "FORWARD-TO-FAILED"
   | "FORWARD-TO-COMPLETED"
-  | "FORWARD-TO-DISPUTE";
+  | "FORWARD-TO-DISPUTE"
+  | "CLONE";
 
 export type StatusButtonPropsGeneric = {
   title: string;
@@ -68,6 +66,7 @@ export type StatusButtonPropsGeneric = {
   showIn: StatusButtonShowInType;
   user?: UserType;
   allowedStates?: ProcessStatus[];
+  iconPosition: "left" | "right";
 };
 
 export type StatusButtonShowInType = "project" | "process" | "both";
@@ -78,6 +77,7 @@ export type StatusButtonPropsExtern = {
 
 export type StatusButtonProps = {
   icon: ReactNode;
+  oldTitle: string;
 } & StatusButtonPropsGeneric;
 
 export type StatusButtonAction =
@@ -109,7 +109,6 @@ export interface StatusButtonProcessProps extends StatusButtonProps {
 }
 
 const useStatusButtons = (): UseStatusButtonsReturnProps => {
-  const { user } = useUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const sendProject = useSendProject();
@@ -117,23 +116,23 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   const updateProcess = useUpdateProcess();
   const deleteProcess = useDeleteProcess();
   const statusButtonRequest = useStatusButtonRequest();
+  const queryClient = useQueryClient();
 
   const getStatusButtons = (
     process: Process,
-    showIn: StatusButtonShowInType
+    includeDelete?: boolean
   ): StatusButtonProps[] => {
-    if (process.processStatusButtons !== undefined) {
-      return filterRemoteButtons(
-        transformExternalStatusButtons(process.processStatusButtons),
-        showIn
-      );
-    } else {
-      return filterLocalButtons(
-        process,
-        transformExternalStatusButtons(externalStatusButtonData),
-        showIn
-      );
-    }
+    const include = includeDelete === undefined ? false : includeDelete;
+
+    return transformExternalStatusButtons(
+      process.processStatusButtons !== undefined && include === false
+        ? process.processStatusButtons.filter(
+            (button) => button.title !== "DELETE"
+          )
+        : process.processStatusButtons !== undefined && include === true
+        ? process.processStatusButtons
+        : []
+    );
   };
 
   const transformExternalStatusButtons = (
@@ -141,6 +140,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   ): StatusButtonProps[] => {
     return externalStatusButtons.map((button) => ({
       ...button,
+      oldTitle: button.title,
       title: transformTitle(button.title),
       icon: transformIcon(button.icon),
     }));
@@ -150,22 +150,6 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
     switch (icon) {
       case "DeleteIcon":
         return <DeleteIcon />;
-      case "FactoryIcon":
-        return <FactoryIcon />;
-      case "TroubleshootIcon":
-        return <TroubleshootIcon />;
-      case "ScheduleSendIcon":
-        return <ScheduleSendIcon />;
-      case "EditIcon":
-        return <EditIcon />;
-      case "CancelIcon":
-        return <CancelIcon />;
-      case "ReplayIcon":
-        return <ReplayIcon />;
-      case "AssignmentTurnedInIcon":
-        return <AssignmentTurnedInIcon />;
-      case "MailIcon":
-        return <MailIcon />;
       case "QuestionAnswerIcon":
         return <QuestionAnswerIcon />;
       case "DescriptionIcon":
@@ -174,14 +158,18 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
         return <DoneAllIcon />;
       case "LocalShippingIcon":
         return <LocalShippingIcon />;
-      case "TaskIcon":
-        return <TaskIcon />;
-      case "DesignServicesIcon":
-        return <DesignServicesIcon />;
       case "ArrowBackIcon":
         return <ArrowBackIcon />;
+      case "ArrowForwardIcon":
+        return <ArrowForwardIcon />;
+      case "DoneIcon":
+        return <DoneIcon />;
+      case "CancelIcon":
+        return <CancelOutlinedIcon />;
+      case "CloneIcon":
+        return <ControlPointDuplicateIcon />;
       default:
-        return <ReportIcon />;
+        return <BugReportIcon />;
     }
   };
 
@@ -210,107 +198,11 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
       "FORWARD-TO-FAILED",
       "FORWARD-TO-COMPLETED",
       "FORWARD-TO-DISPUTE",
+      "CLONE",
     ];
     return validStatusButtonTitles.includes(title as StatusButtonTitleType)
       ? t(`hooks.useStatusButtons.${title as StatusButtonTitleType}`)
       : title;
-  };
-
-  const filterButtonByUser = (
-    process: Process,
-    button: StatusButtonProps
-  ): boolean => {
-    if (button.user === undefined) return true;
-    switch (button.user) {
-      case UserType.USER:
-        const isAnonmyAllowed = user.usertype === UserType.ANONYM;
-        const isClient =
-          user.usertype === UserType.USER && user.hashedID === process.client;
-        const isOrgaAllowed =
-          user.usertype === UserType.ORGANIZATION &&
-          user.organization !== undefined &&
-          user.organization === process.client;
-        return isAnonmyAllowed || isClient || isOrgaAllowed;
-      case UserType.ORGANIZATION:
-        const orgaIsAllowed =
-          user.usertype === UserType.ORGANIZATION &&
-          user.organization !== undefined &&
-          user.organization === process.processDetails.provisionalContractor;
-        return orgaIsAllowed;
-      case UserType.ADMIN:
-        return user.usertype === UserType.ADMIN;
-      case UserType.ANONYM:
-        return true;
-    }
-  };
-
-  const filterButtonByStatus = (
-    process: Process,
-    button: StatusButtonProps
-  ): boolean => {
-    return button.allowedStates === undefined
-      ? true
-      : button.allowedStates.includes(process.processStatus);
-  };
-
-  const filterButtonByShowIn = (
-    button: StatusButtonProps,
-    showIn: StatusButtonShowInType
-  ): boolean => {
-    return showIn === button.showIn || button.showIn === "both";
-  };
-
-  const filterLocalButtons = (
-    process: Process,
-    buttons: StatusButtonProps[],
-    showIn: StatusButtonShowInType
-  ): StatusButtonProps[] => {
-    if (user.usertype === UserType.ADMIN) return buttons;
-    return buttons
-      .filter((button) => filterButtonByShowIn(button, showIn))
-      .filter((button) => filterButtonByStatus(process, button))
-      .filter((button) => filterButtonByUser(process, button));
-  };
-
-  const filterRemoteButtons = (
-    buttons: StatusButtonProps[],
-    showIn: StatusButtonShowInType
-  ): StatusButtonProps[] => {
-    return buttons.filter((button) => filterButtonByShowIn(button, showIn));
-  };
-
-  const getProcessStatusButtons = (process: Process): StatusButtonProps[] => {
-    return getStatusButtons(process, "process");
-  };
-
-  const getProjectStatusButtons = (
-    processes: Process[]
-  ): StatusButtonProcessProps[] => {
-    const buttonGroups = processes.map((process) => ({
-      process,
-      buttons: getStatusButtons(process, "project"),
-    }));
-
-    let buttonsWithProcesses: StatusButtonProcessProps[] = [];
-    buttonGroups.forEach((buttonGroup) => {
-      buttonGroup.buttons.forEach((button) => {
-        const index = buttonsWithProcesses.findIndex(
-          (buttonWithProcess) => buttonWithProcess.title === button.title
-        );
-        if (index === -1) {
-          buttonsWithProcesses.push({
-            ...button,
-            processes: [buttonGroup.process.processID],
-          });
-        } else {
-          buttonsWithProcesses[index].processes.push(
-            buttonGroup.process.processID
-          );
-        }
-      });
-    });
-
-    return buttonsWithProcesses;
   };
 
   const updateProcessStatus = (status: ProcessStatus, processIDs: string[]) => {
@@ -360,10 +252,32 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
         break;
       case "request":
         if (button.action.data.localTestDataStatus === undefined) {
-          statusButtonRequest.mutate({
-            processIDs,
-            button: button.action.data,
-          });
+          statusButtonRequest.mutate(
+            {
+              processIDs,
+              button: button.action.data,
+            },
+            {
+              onSuccess(_, __, ___) {
+                logger("--------", button);
+                if (
+                  button.action.type === "request" &&
+                  button.action.data.type === "cloneProcesses"
+                ) {
+                  queryClient.invalidateQueries(["project"]);
+                  queryClient.invalidateQueries(["dashboardProject"]);
+                  navigate("/");
+                } else if (
+                  button.action.type === "request" &&
+                  button.action.data.type === "deleteProcess"
+                ) {
+                  queryClient.invalidateQueries(["project"]);
+                  queryClient.invalidateQueries(["dashboardProject"]);
+                  navigate("/");
+                }
+              },
+            }
+          );
         } else {
           if (
             button.action.data.localTestDataStatus === "VERIFYING_AND_REQUESTED"
@@ -392,8 +306,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   };
 
   return {
-    getProjectStatusButtons,
-    getProcessStatusButtons,
+    getStatusButtons,
     handleOnClickButton,
     handleOnClickButtonCount,
   };

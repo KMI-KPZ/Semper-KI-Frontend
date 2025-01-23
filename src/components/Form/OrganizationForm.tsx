@@ -14,6 +14,7 @@ import useGetServices, {
 import { Organization } from "@/api/Organization/Querys/useGetOrganization";
 import { GeneralInput, InputType } from "@component-library/Form/GeneralInput";
 import { Language, app_languages } from "../Menu/components/LanguageMenu";
+import ContractorCard from "../Process/ContractorCard";
 
 interface OrganizationFormProps {
   closeEdit: () => void;
@@ -140,8 +141,15 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
           },
           logo_url: data.branding_logo_url,
         },
-        supportedServices: data.supportedServices.map((service) =>
-          parseInt(service)
+        supportedServices: data.supportedServices
+          .map((service) => parseInt(service))
+          .filter(
+            (newService) => !organization.supportedServices.includes(newService)
+          ),
+      },
+      deletions: {
+        supportedServices: organization.supportedServices.filter(
+          (service) => !data.supportedServices.includes(service.toString())
         ),
       },
     });
@@ -185,6 +193,24 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
           <img
             src={watch("branding_logo_url")}
             className="h-60 w-full object-contain"
+          />
+        </Container>
+        <Container direction="row">
+          <Text>{t("components.Form.OrganizationForm.contractorCard")}</Text>
+          <ContractorCard
+            className="w-fit"
+            contractor={{
+              branding: {
+                colors: {
+                  page_background: watch("branding_colors_page_background"),
+                  primary: watch("branding_colors_primary"),
+                },
+                logo_url: watch("branding_logo_url"),
+              },
+              hashedID: organization.hashedID,
+              name: organization.name,
+              prices: { groupCosts: [[333, 666]] },
+            }}
           />
         </Container>
         <Container

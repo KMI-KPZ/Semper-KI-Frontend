@@ -1,15 +1,18 @@
-import { ModelProps } from "@/pages/Process/components/Service/ServiceEdit/Manufacturing/Model/types";
+import { ModelLevelOfDetail, ProcessModel } from "@/api/Process/Querys/useGetProcess";
+
 
 
 export class ModelBuilder {
     id: string ="modelID";
     title: string="modelTitle";
     tags: string[]=["Tag1"];
-    date: string="2023-02-01";
+    date: Date = new Date;
     licenses: string[]=["MIT"];
     certificate: string[]=["ISO"];
     URI: string="https://test.test.png";
     createdBy: string="kiss";
+    quantity:number = 1;
+    levelOfDetail:ModelLevelOfDetail = ModelLevelOfDetail.MEDIUM;
 
     withId(id:string):ModelBuilder {
         this.id = id;
@@ -23,7 +26,7 @@ export class ModelBuilder {
         this.tags = tags;
         return this;
     }
-    withDate(date:string):ModelBuilder {
+    withDate(date:Date):ModelBuilder {
         this.date = date;
         return this;
     }
@@ -43,18 +46,32 @@ export class ModelBuilder {
         this.createdBy = createdBy;
         return this;
     }
-    
+    withQuantity(quantity:number):ModelBuilder {
+        this.quantity = quantity
+        return this;
+    }
+    withLevelOfDetail(levelOfDetail:ModelLevelOfDetail) {
+        this.levelOfDetail = levelOfDetail;
+        return this;
+    }
 
-    build():ModelProps {
+    build():ProcessModel {
         return {
+            levelOfDetail:0,
+            quantity:1,
             id: this.id,
             fileName: this.title,
             tags: this.tags,
             date: this.date,
             licenses: this.licenses,
             certificates: this.certificate,
-            URI: this.URI,
             createdBy: this.createdBy,
+            createdByID: "1",
+            type: "Model",
+            origin: "Service",
+            size: 1,
+            imgPath:"",
+            isFile: true,
         }
     }
 }

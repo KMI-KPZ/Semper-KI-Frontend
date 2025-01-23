@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode } from "react";
+import React, { PropsWithChildren, ReactNode, forwardRef } from "react";
 import LoopIcon from "@mui/icons-material/Loop";
 import { useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
@@ -22,6 +22,7 @@ interface ButtonProps {
   target?: "_blank" | "_self" | "_parent" | "_top";
   stopPropagation?: boolean;
 }
+
 type ButtonSize = "xs" | "sm" | "md" | "lg";
 type ButtonVariant =
   | "primary"
@@ -32,7 +33,11 @@ type ButtonVariant =
 type ButtonWidth = "fit" | "full" | "auto";
 type ButtonDirection = "col" | "row";
 
-export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
+// Use forwardRef to allow ref to be passed
+export const Button = forwardRef<
+  HTMLAnchorElement,
+  PropsWithChildren<ButtonProps>
+>((props, ref) => {
   const {
     active = true,
     size = "md",
@@ -53,6 +58,7 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
     endIcon,
     startIcon,
   } = props;
+
   const navigate = useNavigate();
 
   const handleOnClickButton = (
@@ -167,22 +173,21 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
 
   return (
     <a
+      ref={ref} // Attach ref here
       title={getTitle()}
       className={twMerge(
         ` bezier group flex
-          h-fit flex-wrap
-          items-center justify-center 
-          gap-3  
-          rounded-md text-center    
-          transition duration-200 
-          md:flex-nowrap md:whitespace-nowrap
-          
-         `,
+            h-fit flex-wrap
+            items-center justify-center 
+            gap-3  
+            rounded-md text-center    
+            transition duration-200 
+            md:flex-nowrap md:whitespace-nowrap
+          `,
         getClassNameSize(),
         getClassNameWidth(),
         getClassNameDirection(),
         getClassNameVariant(),
-        // `focus-within:shadow-orange-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-orange-500`,
         className
       )}
       onClick={handleOnClickButton}
@@ -204,4 +209,6 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = (props) => {
       )}
     </a>
   );
-};
+});
+
+Button.displayName = "Button"; // Required for debugging in React DevTools

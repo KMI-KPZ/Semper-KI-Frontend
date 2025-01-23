@@ -6,6 +6,16 @@
     "number": "Bitte Zahl eingeben",
     "email": "Bitte gültige Email angeben"
   },
+  "zod": {
+    "requiredName": "{{name}} wird benötigt",
+    "required": "wird benötigt",
+    "string": "Bitte Zeichenfolge eingeben",
+    "number": "Bitte Zahl eingeben",
+    "email": "Bitte gültige Email angeben",
+    "empty": "Darf nicht leer sein",
+    "numberMax": "Darf nicht größer als {{max}} sein",
+    "numberMin": "Darf nicht kleiner als {{min}} sein"
+  },
   "data": {
     "NavigationItem": {
       "demonstrator": "Loslegen",
@@ -56,7 +66,8 @@
       "verifyEMail": "E-Mail verifizieren",
       "manufacturing": "Herstellen lassen",
       "projects": "Meine Projekte",
-      "project": "Projekt"
+      "project": "Projekt",
+      "dashboard": "Dashboard"
     }
   },
   "enum": {
@@ -147,6 +158,18 @@
       "DELETION": "Löschung",
       "DETAILS": "Prozessdetails",
       "OTHER": "Sonstiges"
+    },
+    "ModelLevelOfDetail": {
+      "LOW": "Niedrig",
+      "MEDIUM": "Mittel",
+      "HIGH": "Hoch"
+    },
+    "ModelComplexity": {
+      "LOW": "Niedrig",
+      "LOW_MEDIUM": "Niedrig-Mittel",
+      "MEDIUM": "Mittel",
+      "MEDIUM_HIGH": "Mittel-Hoch",
+      "HIGH": "Hoch"
     }
   },
   "types": {
@@ -174,13 +197,14 @@
       "messages": "Nachrichten",
       "files": "Dateien"
     },
-    "FlatProcessStatus": {
+    "ProcessActionStatus": {
       "ACTION_REQUIRED": "Aktion erforderlich",
       "WAITING_CONTRACTOR": "Warten auf Auftragnehmer",
       "WAITING_CLIENT": "Warten auf Kunde",
       "WAITING_PROCESS": "Warten auf Prozess",
       "IN_PROGRESS": "in Bearbeitung",
-      "COMPLETED": "Abgeschlossen"
+      "COMPLETED": "Abgeschlossen",
+      "FAILED": "Fehlgeschlagen"
     },
     "NotificationSettingsType": {
       "verification": "Verifizierung",
@@ -208,20 +232,45 @@
       "material": "Materialien",
       "additionalRequirement": "Zusätzliche Anforderungen",
       "color": "Farben",
-      "materialCategory": "Materialkategorie"
+      "materialCategory": "Materialkategorie",
+      "technology": "3D-Drucker Technologie",
+      "materialType": "Materialtyp"
     },
     "OntoNodePropertyName": {
+      "technology": "Technologie",
+      "buildVolume": "Bauraum",
       "imgPath": "Bildpfad",
+      "nozzleDiameter": "Düsendurchmesser",
+      "certificates": "Zertifikate",
+      "lossOfMaterial": "Materialverlust",
+      "fixedCosts": "Fixkosten",
+      "machineBatchDistance": "Maschinenabstand",
+      "fillRate": "Füllrate",
+      "chamberBuildHeight": "Baukammerhöhe",
+      "chamberBuildWidth": "Baukammerbreite",
+      "chamberBuildLength": "Baukammerlänge",
+      "buildRate": "Baurate",
+      "averagePowerConsumption": "Durchschnittlicher Stromverbrauch",
+      "possibleLayerHeights": "Mögliche Schichthöhen",
+      "machineUsageCosts": "Maschinennutzungskosten",
+      "machineSurfaceArea": "Maschinenfläche",
+      "simpleMachineSetUp": "Einfache Maschineneinrichtung",
+      "complexMachineSetUp": "Komplexe Maschineneinrichtung",
+      "machineHourlyRate": "Maschinenstundensatz",
+      "costRatePersonalMachine": "Personalkostenrate Maschine",
+      "coatingTime": "Beschichtungszeit",
+      "maxPrintingSpeed": "Maximale Druckgeschwindigkeit",
       "foodSafe": "Lebensmittelecht",
       "heatResistant": "Hitzebeständig",
       "flexible": "Flexibel",
       "smooth": "Glatt",
       "eModul": "E-Modul",
-      "poissonRatio": "Poisson-Verhältnis",
-      "color": "Farbe",
-      "buildVolume": "Bauvolumen",
-      "technology": "Technologie",
-      "nozzleDiameter": "Düsendurchmesser"
+      "poissonRatio": "Poissonzahl",
+      "density": "Dichte",
+      "printingSpeed": "Druckgeschwindigkeit",
+      "acquisitionCosts": "Anschaffungskosten",
+      "treatmentCosts": "Behandlungskosten",
+      "flexibility": "Flexibilität"
     },
     "FilterCategoryType": {
       "costs": "Kosten",
@@ -244,11 +293,12 @@
     },
     "ProcessError": {
       "Service-ADDITIVE_MANUFACTURING-models": "Bitte ein Modell auswählen/hochladen",
-      "Service-ADDITIVE_MANUFACTURING-materials": "Bitte ein Material auswählen",
+      "Service-ADDITIVE_MANUFACTURING-material": "Bitte ein Material auswählen",
       "ServiceManufacturingPostProcessing": "Bitte eine Nachbearbeitung auswählen",
       "Process-Contractor": "Bitte einen Auftragnehmer auswählen",
       "Process-Address-Billing": "Bitte eine Rechnungsadresse auswählen",
-      "Process-Address-Deliver": "Bitte eine Lieferadresse auswählen"
+      "Process-Address-Deliver": "Bitte eine Lieferadresse auswählen",
+      "Process-ServiceType": "Bitte einen Service auswählen"
     },
     "EventDataReason": {
       "messages": "Nachricht",
@@ -276,7 +326,24 @@
     "zipcode": "Postleitzahl",
     "city": "Stadt",
     "country": "Land",
+    "quantity": "Anzahl",
+    "width": "Breite",
+    "length": "Länge",
+    "height": "Höhe",
+    "volume": "Volumen",
+    "levelOfDetail": "Detailgrad",
+    "complexity": "Komplexität",
+    "tags": "Tags",
+    "easy": "Einfach",
+    "normal": "Normal",
+    "complex": "Komplex",
+    "modelID": "Modell ID",
+    "group": "Gruppe",
+    "total": "Gesamt",
+    "min": "Min",
+    "max": "Max",
     "button": {
+      "clone": "Duplizieren",
       "select": "Auswählen",
       "deselect": "Abwählen",
       "selected": "Ausgewählt",
@@ -436,6 +503,20 @@
         "name": "Name",
         "email": "E-Mail-Adresse"
       },
+      "DescriptiveModelForm": {
+        "heading": "Modell Beschreiben ohne Datei",
+        "mandatory": "* Pflichtfeld",
+        "placeholder": {
+          "name": "Modellname",
+          "quantity": "Anzahl",
+          "width": "Breite",
+          "length": "Länge",
+          "height": "Höhe",
+          "volume": "Volumen",
+          "complexity": "Komplexität",
+          "tags": "Tag1, Tag2, Tag3"
+        }
+      },
       "ExampleForm": {
         "heading": "Organisationinformationen bearbeiten",
         "text": "Text",
@@ -459,6 +540,7 @@
         "taxID": "Steuernummer",
         "address": "Addresse",
         "notifications": "Benachrichtigungen",
+        "contractorCard": "Auftragnehmerkarte",
         "notifictionTypes": {
           "email": "Email",
           "event": "Event"
@@ -513,6 +595,21 @@
       "message": "Diese Funktion ist mit ihren Rechten nicht nutzbar"
     },
     "Process": {
+      "Container": {
+        "ActionContainer": {
+          "heading": "Todos",
+          "noButtonsClient": "Keine Todos vorhanden. Der Auftragnehmer bearbeitet ihre Anfrage. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
+          "noButtonsContractor": "Keine Todos vorhanden. Der Kunde ist am Zug. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
+          "finished": "Prozess Abgeschlossen. Es gibt keine weiteren Todos.",
+          "deleteConfirm": "Möchten Sie den Prozess wirklich löschen?",
+          "components": {
+            "ActionContainerWarpper": {
+              "heading": "Ihr Prozess ist fehlgeschlagen",
+              "reason": "Grund"
+            }
+          }
+        }
+      },
       "File": {
         "components": {
           "FileTable": {
@@ -548,6 +645,9 @@
             }
           }
         }
+      },
+      "ContractorCard": {
+        "priceRange": "Preisspanne"
       },
       "Menu": {
         "button": { "open": "Menu Öffnen", "close": "Menu Schließen" }
@@ -599,6 +699,9 @@
           "create": "Erstellen",
           "variant": "Variante Erstellen"
         },
+        "technology": "Technologie",
+        "noTechnologies": "Keine Technologie gefunden",
+        "noTechnology": "Keine Technologie ausgewählt",
         "general": "Allgemeine Informationen",
         "nodeName": "Name",
         "context": "Beschreibung",
@@ -633,6 +736,7 @@
         "table": {
           "noItems": "keine Einträge vorhanden",
           "caption": "Verfügbar",
+          "unit": "Einheit",
           "selected": "Ausgewählt",
           "name": "Name",
           "createdBy": "Erstellt von",
@@ -691,6 +795,7 @@
       "FORWARD-TO-FAILED": "Prozess fehlgeschlagen",
       "FORWARD-TO-COMPLETED": "Prozess abschließen",
       "FORWARD-TO-DISPUTE": "Streitfall melden",
+      "CLONE": "Prozess klonen",
       "button": {
         "confirmAll": "Wollen Sie wirklich alle betroffene Prozesse {{title}}?"
       }
@@ -884,6 +989,7 @@
       }
     }
   },
+  "Demo": { "heading": "Projekt und Prozess wird erstellt" },
   "EmailVerification": {
     "heading": "Email verifizieren",
     "text": "Bitte bestätigen Sie ihre Email Adresse, indem Sie auf den Link in der Email klicken, die Auth0 Ihnen gesendet hat.",
@@ -1015,16 +1121,6 @@
           "orga": "Organisation"
         }
       },
-      "Projects": {
-        "heading": "Projekte",
-        "noProjects": "Keine Projekte vorhanden",
-        "button": {
-          "demo": "Ausprobieren",
-          "new": "Neues Projekt",
-          "continue": "Projekt Fortsetzen",
-          "projects": "Meine Projekte"
-        }
-      },
       "Resources": {
         "heading": "Ressourcen",
         "button": {
@@ -1046,6 +1142,51 @@
         },
         "button": {
           "orga": "Profil"
+        }
+      }
+    },
+    "Projects": {
+      "heading": "Projektübersicht",
+      "receivedProjects": "Erhaltene Projekte",
+      "noProjects": "Keine Projekte vorhanden",
+      "noProjectsSearch": "Keine Projekte mit \"{{search}}\" gefunden",
+      "name": "Name",
+      "processCount": "Anzahl Prozesse",
+      "updated": "Aktualisiert am",
+      "status": "Status",
+      "quantity": "Anzahl",
+      "actions": "Aktionen",
+      "button": {
+        "demo": "Ausprobieren",
+        "new": "Neues Projekt anlegen",
+        "filter": "Filter",
+        "continue": "Projekt Fortsetzen",
+        "projects": "Meine Projekte",
+        "clone": "Projekt Duplizieren",
+        "createProcess": "neuen Prozess im Projekt {{name}} anlegen"
+      },
+      "Project": {
+        "noProcess": "Keine Prozesse vorhanden",
+        "button": { "new": "Neuen Prozess anlegen" }
+      },
+      "Process": {
+        "deleteConfirm": "Möchten Sie den Prozess wirklich löschen?",
+        "name": "Prozessname",
+        "type": "Servicetyp",
+        "updated": "Aktualisiert am",
+        "groups": "Gruppen",
+        "quantity": "Anzahl",
+        "models": "Modelle",
+        "contractor": "Auftragnehmer",
+        "noContractor": "Kein Auftragnehmer ausgewählt",
+        "material": "Material",
+        "postProcessings": "Nachbearbeitungen",
+        "groupName": "Gruppe {{count}}",
+        "processErrors": "Todos",
+        "noErrors": "Keine Interaktionen erforderlich",
+        "status": "Status",
+        "button": {
+          "clone": "Prozess in neues Projekt duplizieren"
         }
       }
     }
@@ -1251,7 +1392,8 @@
         "adress": "Adresse",
         "email": "E-Mail",
         "taxID": "Steuernummer",
-        "noService": "keine Services "
+        "noService": "keine Services ",
+        "contractorCard": "Auftragnehmerkarte"
       }
     },
     "Roles": {
@@ -1414,6 +1556,7 @@
           "menu": "Lieferungsmenu"
         }
       },
+
       "Production": {
         "heading": "Produktion",
         "button": {
@@ -1443,11 +1586,13 @@
           "menu": "Informationen Menu"
         },
         "Filter": {
-          "heading": "Ihre Vorgaben",
+          "heading": "Ihre Anforderungen / Vorgaben",
           "menuButtonTitle": "Filter Menu",
-          "pageDescription1": "Hier können Sie ihre Vorgaben für den Prozess festlegen.",
-          "pageDescription2": "Dies hilft ihnen die Auswahl zu vereinfachen.",
+          "pageDescription1": "Hier können Sie ihre Anforderungen / Vorgaben für den Prozess festlegen.",
+          "pageDescription2": "Dies hilft ihnen die Auswahl zu vereinfachen und gibt den Herstellern mehr Informationen.",
+          "filtersApplied": "Vorgaben angewendet",
           "noCategory": "keine Vorgabenkategorie geöffnet",
+          "FiterDetails": {},
           "components": {
             "Card": {
               "noFilters": "keine Vorgaben vorhanden",
@@ -1471,7 +1616,7 @@
                 "main": "Ihre Auswahl",
                 "post-processing": "Nachbearbeitungen (Optional)",
                 "model": "Modelle",
-                "material": "Modelle"
+                "material": "Materialien"
               },
               "pageDescription1": "Wählen sie die gewünschten Modelle, Materialien und Nachbearbeitungen aus.",
               "pageDescription2": "Diese Auswahl wird verwendet um die passenden Hersteller zu finden.",
@@ -1484,14 +1629,31 @@
                 "img": "Materialbild",
                 "name": "Name:",
                 "type": "Typ:",
+                "cost": "Mittlere Anschaffungskosten:",
                 "properties": "Eigenschaften:"
+              },
+              "GroupOverview": {
+                "heading": "Gruppenübersicht",
+                "noModel": "kein Modell",
+                "noMaterial": "kein Material",
+                "noPostProcessing": "keine Nachbearbeitung",
+                "nextGroup": "Nächste Gruppe",
+                "previousGroup": "Vorherige Gruppe",
+                "item": "Gruppe {{name}} öffnen",
+                "model": "Modell(e)",
+                "material": "Material",
+                "postProcessing": "Nachbearbeitung(en)",
+                "newGroup": "neue Gruppe"
               },
               "ModelCard": {
                 "img": "Modelbild",
+                "quantity": "Anzahl",
+                "levelOfDetail": "Detailgrad",
                 "name": "Name:",
                 "dimensions": "Maße",
                 "surface": "Oberfläche",
-                "volume": "Volumen"
+                "volume": "Volumen",
+                "complexity": "Komplexität"
               },
               "PostProcessingCard": {
                 "name": "name",
@@ -1500,6 +1662,7 @@
                 "properties": "Eigenschaften:"
               },
               "button": {
+                "noModel": "Kein Modell? geben sie hier ihre Anforderungen ein",
                 "addMore": "Weitere hinzufügen",
                 "addModel": "Modell hinzufügen",
                 "addMaterial": "Material hinzufügen",
@@ -1554,6 +1717,9 @@
                   }
                 }
               },
+              "Edit": {
+                "heading": "Modell bearbeiten"
+              },
               "Upload": {
                 "loading": "Model wird hochgeladen",
                 "heading": "Eigene Modelle Hochladen",
@@ -1567,18 +1733,24 @@
                 "button": { "upload": "Modell hochladen" },
                 "components": {
                   "Card": {
-                    "name": "Name:",
-                    "size": "Größe:",
-                    "type": "Dateityp:",
-                    "date": "Datum:",
+                    "name": "Name",
+                    "size": "Größe",
+                    "type": "Dateityp",
+                    "date": "Datum",
                     "all": "Auf alle anwenden:",
-                    "tags": "Tags:",
+                    "tags": "Tags",
                     "tagsPH": "Tag1, Tag2, ...",
+                    "quantity": "Anzahl *",
+                    "levelOfDetail": "Detailgrad *",
+                    "levelOfDetailPH": "Detailgrad",
+                    "selectLevelOfDetail": "Detailgrad auswählen",
                     "selectLicense": "Lizenz auswählen",
                     "certificate": "Eventuelle Zertifikate:",
                     "certificatePH": "Zertifikate1, Zertifikate2, ...",
-                    "license": "Lizenz der Datei:",
+                    "scalingFactor": "Skalierung",
+                    "license": "Lizenz der Datei *",
                     "licensePH": "Lizenz1, Lizenz2 ...",
+                    "mandatory": "* Pflichtfeld",
                     "button": {
                       "saveAll": "Auf alle Modelle anwenden"
                     }
@@ -1617,13 +1789,13 @@
               "heading": {
                 "NONE": "error",
                 "ADDITIVE_MANUFACTURING": "Modell 3D-drucken lassen",
-                "CREATE_MODEL": "Modell entwerfen lassen",
-                "DELIVERY": "Lieferung",
-                "POST_PROCESSING": "Nachbearbeitung",
-                "PACKAGING": "Verpackung",
-                "QUALITY_CONTROL": "Qualitätskontrolle",
-                "ASSEMBLY": "Montage",
-                "AFTER_SALES": "Kundendienst"
+                "CREATE_MODEL": "Modell entwerfen lassen (Test)",
+                "DELIVERY": "Lieferung (Test)",
+                "POST_PROCESSING": "Nachbearbeitung (Test)",
+                "PACKAGING": "Verpackung (Test)",
+                "QUALITY_CONTROL": "Qualitätskontrolle (Test)",
+                "ASSEMBLY": "Montage (Test)",
+                "AFTER_SALES": "Kundendienst (Test)"
               },
               "description": {
                 "NONE": "error",
@@ -1698,18 +1870,15 @@
         "button": {
           "menu": "Informationen Menu",
           "editTitle": "Prozessname bearbeiten"
-        }
-      },
-      "StatusButtons": {
-        "heading": "Todos"
-      },
-      "TitleForm": {
-        "heading": "Prozessname",
-        "describtion": "Geben Sie ihrem Prozess einen Namen. Ein Prozess ist ein Auftrag für einen Hersteller/Auftragnehmer.",
-        "name": "Prozessname",
-        "error": "Bitte geben Sie einen Namen ein",
-        "button": {
-          "save": "Name Speichern"
+        },
+        "TitleForm": {
+          "heading": "Prozessname",
+          "describtion": "Geben Sie ihrem Prozess einen Namen. Ein Prozess ist ein Auftrag für einen Hersteller/Auftragnehmer.",
+          "name": "Prozessname",
+          "error": "Bitte geben Sie einen Namen ein",
+          "button": {
+            "save": "Name Speichern"
+          }
         }
       }
     }
@@ -1787,7 +1956,7 @@
           "serviceType": "Service",
           "updatedWhen": "Aktualisiert",
           "createdWhen": "Erstellt",
-          "flatProcessStatus": "Status",
+          "actionStatus": "Status",
           "amount": "Anzahl",
           "imgPath": "Bild",
           "order": "Reihenfolge",
@@ -1827,7 +1996,8 @@
         "actions": "Aktionen"
       },
       "TableRow": {
-        "deleteConfirm": "Möchten Sie das Projekt wirklich löschen?"
+        "deleteConfirm": "Möchten Sie das Projekt wirklich löschen?",
+        "cloneConfirm": "Möchten Sie das Projekt wirklich duplizieren?"
       },
       "TitleForm": {
         "heading": "Projekt anlegen",
@@ -1878,6 +2048,7 @@
         "materials": "Materialien",
         "printers": "3D-Drucker",
         "postProcessings": "Nachbearbeitung",
+        "costing": "Kosten",
         "request": "Datenerweiterung",
         "graph": "Graph",
         "privat-graph": "Private Graph"
@@ -1893,6 +2064,17 @@
         }
       }
     },
+    "Costing": {
+      "heading": "Kosten",
+      "Form": {
+        "heading": "Kosten bearbeiten"
+      },
+      "name": "Name",
+      "value": "Wert",
+      "unit": "Einheit",
+      "noItems": "keine Kosten vorhanden",
+      "noItemsWithFilter": "keine Kosten vorhanden mit den gewählten Filtern"
+    },
     "Materials": {
       "header": "Materialien",
       "own": "Eigene Materialien",
@@ -1901,7 +2083,8 @@
       }
     },
     "Overview": {
-      "header": "Übersicht"
+      "header": "Übersicht",
+      "text": "Geben sie ihre Ressourcen ein um sie für die Prozessauswahl zu nutzen."
     },
     "PostProcessings": {
       "header": "Nachbearbeitungen",

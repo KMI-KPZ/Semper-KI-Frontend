@@ -17,7 +17,7 @@ const useProjectEvent = (events: Event[]): ReturnProps => {
 
   const handleNewProjectEvent = (newProjectEvent: ProjectEvent) => {
     queryClient.invalidateQueries(["project"]);
-    queryClient.invalidateQueries(["flatProjects"]);
+    queryClient.invalidateQueries(["dashboardProject"]);
 
     if (newProjectEvent.triggerEvent === true) {
       toast(

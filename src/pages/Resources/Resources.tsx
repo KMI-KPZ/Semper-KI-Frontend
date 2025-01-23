@@ -13,12 +13,20 @@ import ResourcesOutlet from "@/outlets/ResourcesOutlet";
 import ResourcesNodeTable from "../../components/Resources/NodeTable";
 import ResourcesNodeForm from "@/components/Resources/NodeForm";
 import { useTranslation } from "react-i18next";
+import Costing from "./Costing/Costing";
+import CostingForm from "./Costing/Form";
+import useModal from "@/hooks/useModal";
 
 interface ResourcesProps {}
 
 const Resources: React.FC<ResourcesProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
+  const { deleteModal } = useModal();
+
+  const handleOnButtonClickEdit = () => {
+    deleteModal("nodeView");
+  };
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
@@ -54,6 +62,7 @@ const Resources: React.FC<ResourcesProps> = (props) => {
                         <Button
                           size="sm"
                           title={t("general.button.edit")}
+                          onClick={() => handleOnButtonClickEdit()}
                           to="edit"
                         />
                       </ResourcesNodeView>
@@ -64,6 +73,10 @@ const Resources: React.FC<ResourcesProps> = (props) => {
                     element={<ResourcesNodeForm type="edit" />}
                   />
                 </Route>
+              </Route>
+              <Route path="costing">
+                <Route index element={<Costing />} />
+                <Route path=":serviceType" element={<CostingForm />} />
               </Route>
               <Route path="graph" element={<OrgaGraph />} />
               {process.env.NODE_ENV === "development" ? (

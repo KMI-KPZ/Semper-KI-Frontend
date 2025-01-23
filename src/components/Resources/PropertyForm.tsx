@@ -20,7 +20,7 @@ import {
   OntoNodePropertyType,
   OntoNodeType,
   isOntoNodePropertyName,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import AddIcon from "@mui/icons-material/Add";
 import { GeneralInput, InputType } from "@component-library/Form/GeneralInput";
 import useSort from "@/hooks/useSort";
@@ -60,6 +60,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
       name: "",
       type: "text",
       value: "",
+      unit: "",
     });
   };
 
@@ -162,6 +163,21 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                   </Button>
                 </div>
               </th>
+              <th className="bg-gray-50">
+                <div className="flex items-center justify-start ">
+                  <Button
+                    variant="text"
+                    title={t("components.Resources.PropertyForm.table.unit")}
+                    onClick={() => handleSort("unit")}
+                    className="whitespace-nowrap"
+                  >
+                    <div className="ml-6 flex flex-row items-center justify-center">
+                      {t("components.Resources.PropertyForm.table.unit")}
+                      {getSortIcon("unit")}
+                    </div>
+                  </Button>
+                </div>
+              </th>
 
               <th className="rounded-tr-xl bg-gray-50 p-3 text-left">
                 {t("components.Resources.PropertyForm.table.actions")}
@@ -172,9 +188,9 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
             {fields.length > 0 ? (
               fields.sort(sortItems).map((propField, index) =>
                 propField.name === undefined || propField.name === "" ? (
-                  <tr>
+                  <tr key={index}>
                     <td
-                      colSpan={3}
+                      colSpan={4}
                       className={`border-t-2 p-3 text-left ${
                         index % 2 === 1 ? "bg-gray-50" : "bg-white"
                       }`}
@@ -216,7 +232,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                         index % 2 === 1 ? "bg-gray-50" : "bg-white"
                       }`}
                     >
-                      {propField.name}
+                      {propertyNameTranslation(propField.name)}
                     </td>
                     <td
                       className={`border-t-2 p-3 text-left ${
@@ -230,6 +246,13 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                         type={mapInputTypes(propField.type)}
                         error={errors?.properties?.[index]?.value}
                       />
+                    </td>
+                    <td
+                      className={`border-t-2 p-3 text-center ${
+                        index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                      }`}
+                    >
+                      <Text>{propField.unit}</Text>
                     </td>
                     <td
                       className={`border-t-2 p-3 text-left ${
@@ -253,7 +276,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
               )
             ) : (
               <tr>
-                <td colSpan={3} className="border-t-2 p-3 text-center">
+                <td colSpan={4} className="border-t-2 p-3 text-center">
                   <Text>
                     {t("components.Resources.PropertyForm.table.noItems")}
                   </Text>
@@ -263,7 +286,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
             {freePropertyNamesAvailable() ? (
               <tr>
                 <td
-                  colSpan={3}
+                  colSpan={4}
                   className={`border-t-2 p-3 text-left ${
                     fields.length % 2 === 1 ? "bg-gray-50" : "bg-white"
                   }`}

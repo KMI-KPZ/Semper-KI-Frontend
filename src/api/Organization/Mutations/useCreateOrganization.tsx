@@ -11,7 +11,7 @@ const useCreateOrganization = () => {
   const createOrganization = async (props: CreateOrganizationFormData) =>
     authorizedCustomAxios
       .post(`${process.env.VITE_HTTP_API_URL}/public/organizations/create/`, {
-        data: { content: props },
+        ...props,
       })
       .then((response) => {
         logger("useCreateOrganization | createOrganization ✅ |", response);

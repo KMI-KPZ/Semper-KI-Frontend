@@ -1,4 +1,4 @@
-import { OntoNodeProperty } from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+import { OntoNodeProperty } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import { EPostProcessingOptionType, PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 
 

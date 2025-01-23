@@ -38,10 +38,10 @@ export const Header: React.FC<Props> = (props) => {
       data-testid="header"
       className="flex w-full flex-row items-center justify-between bg-white p-1 shadow-lg"
     >
-      <nav>
+      <nav className="flex w-fit shrink-0 flex-col items-center justify-center">
         <HeaderHomeButton />
       </nav>
-      <nav className="flex flex-row items-center justify-center gap-3">
+      <nav className="flex w-fit flex-row items-center justify-center gap-3">
         <HeaderItems />
         <Button
           className="mr-2"

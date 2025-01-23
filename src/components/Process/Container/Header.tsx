@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from "react";
-import ProcessMenu from "./Menu";
+import ProcessMenu from "../Menu";
 import { Container, Divider, Heading } from "@component-library/index";
 
 interface ProcessHeaderProps {

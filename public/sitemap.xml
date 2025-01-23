@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main Pages -->
+  <url>
+    <loc>https://semper-ki.org/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/login</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/logout</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/organization</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/portfolio</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/resources</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/legal</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/registerOrganization</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/verifyEMail</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/login/redirect</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/register</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/reskriver</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/advantages/user</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/advantages/organization</loc>
+  </url>
+
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://semper-ki.org/legal/imprint</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/legal/privacy</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/legal/contact</loc>
+  </url>
+
+  <!-- Project Pages -->
+  <url>
+    <loc>https://semper-ki.org/projects</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/project/new</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/projects/:projectID</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/projects/:projectID/:processID</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/projects/:projectID/:processID/service</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/projects/:projectID/:processID/service/manufacturing</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/projects/:projectID/:processID/service/modeling</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/projects/:projectID/:processID/service/manufacturing/model</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/projects/:projectID/:processID/service/manufacturing/material</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/projects/:projectID/:processID/service/manufacturing/postprocessing</loc>
+  </url>
+
+  <!-- Resources Pages -->
+  <url>
+    <loc>https://semper-ki.org/resources/request</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/resources/request/new</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/resources/:nodeType</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/resources/:nodeType/create</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/resources/:nodeType/:nodeID</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/resources/:nodeType/:nodeID/edit</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/resources/graph</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/resources/private-graph</loc>
+  </url>
+
+  <!-- User and Test Pages -->
+  <url>
+    <loc>https://semper-ki.org/account</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/test</loc>
+  </url>
+  <url>
+    <loc>https://semper-ki.org/ui</loc>
+  </url>
+
+  <!-- Error Page -->
+  <url>
+    <loc>https://semper-ki.org/*</loc>
+  </url>
+
+</urlset>

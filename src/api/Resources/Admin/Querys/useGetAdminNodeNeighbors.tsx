@@ -5,7 +5,7 @@ import {
   OntoNode,
   OntoNodeType,
   parseOntoNode,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 interface useGetAdminNodeNeighborsProps {
   nodeID: string;

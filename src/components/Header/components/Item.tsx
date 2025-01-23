@@ -6,7 +6,7 @@ import { ReactComponent as LogoIcon } from "@icons/Logo.svg";
 import { INavigationItem } from "@/data/navigation";
 import { Button } from "@component-library/index";
 
-interface Props {
+interface Props extends React.HTMLProps<HTMLLIElement> {
   isMenuItem?: boolean;
   headeritem: INavigationItem;
   onlyIcon?: boolean;
@@ -14,7 +14,7 @@ interface Props {
   badge?: number;
 }
 
-const HeaderItem: React.FC<Props> = (props) => {
+const HeaderItem = React.forwardRef<HTMLLIElement, Props>((props, ref) => {
   const { headeritem, closeMenus, isMenuItem, badge, onlyIcon } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -49,11 +49,10 @@ const HeaderItem: React.FC<Props> = (props) => {
 
   return (
     <li
-      className={`group p-1 duration-300 hover:cursor-pointer hover:text-türkis ${
-        !isMenuItem ? "w-full" : "w-fit"
-      }`}
+      ref={ref}
       onClick={handleOnClickLi}
       title={headeritem.title}
+      className="hidden xs:block"
     >
       <Button
         className={`${
@@ -77,6 +76,6 @@ const HeaderItem: React.FC<Props> = (props) => {
       />
     </li>
   );
-};
+});
 
 export default HeaderItem;

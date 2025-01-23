@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import {
   OntoNode,
   parseOntoNode,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import useUser, { UserType } from "@/hooks/useUser";
 
 const useGetOrgaNode = (optionalNodeID?: string) => {

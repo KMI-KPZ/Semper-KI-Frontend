@@ -4,7 +4,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MaterialProps } from "../Querys/useGetMaterials";
 
 interface SetMaterialProps {
-  materials: MaterialProps[];
+  material: MaterialProps;
+  groupID: number;
   processID: string;
   projectID: string;
 }

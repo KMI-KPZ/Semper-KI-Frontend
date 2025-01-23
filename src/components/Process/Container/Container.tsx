@@ -1,5 +1,5 @@
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import ProcessStatusButtons from "@/pages/Process/components/StatusButtons";
+import ActionContainer from "@/components/Process/Container/ActionContainer/ActionContainer";
 import { Container } from "@component-library/index";
 import React, { PropsWithChildren, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
@@ -12,7 +12,8 @@ interface ProcessContainerProps {
   menuButtonTitle: string;
   pageTitle: string;
   start: ProcessStatus;
-  end: ProcessStatus;
+  end?: ProcessStatus;
+  showActionContainer?: boolean;
 }
 
 const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
@@ -42,7 +43,7 @@ const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
         </ProcessHeader>
         {children}
       </Container>
-      <ProcessStatusButtons start={start} end={end} />
+      <ActionContainer start={start} end={end} />
     </>
   );
 };

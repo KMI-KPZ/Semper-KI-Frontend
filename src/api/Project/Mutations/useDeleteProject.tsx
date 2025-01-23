@@ -25,8 +25,8 @@ const useDeleteProject = () => {
       projectIDs.map((projectID) => {
         queryClient.invalidateQueries(["project", projectID]);
       });
-      queryClient.invalidateQueries(["flatProjects"]);
-      queryClient.invalidateQueries(["admin, flatProjects"]);
+      queryClient.invalidateQueries(["dashboardProject"]);
+      queryClient.invalidateQueries(["admin, dashboardProject"]);
     },
   });
 };

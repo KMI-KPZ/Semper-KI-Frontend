@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
   OntoNode,
   parseOntoNode,
-} from "@/api/Resources/Organization/Querys/useGetOrgaNodes";
+} from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import useUser, { UserType } from "@/hooks/useUser";
 
 const useGetAllOrgaNodeNeighbors = (nodeID?: string) => {

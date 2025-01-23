@@ -12,6 +12,7 @@ interface ContainerProps {
   className?: string;
   id?: string;
   tabIndex?: boolean;
+  style?: React.CSSProperties;
   onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
@@ -31,6 +32,7 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
     className,
     onClick,
     id,
+    style,
   } = props;
 
   const getAlign = () => {
@@ -72,6 +74,7 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
 
   return (
     <div
+      style={style}
       id={id}
       className={twMerge(
         "flex",

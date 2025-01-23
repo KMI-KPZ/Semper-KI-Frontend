@@ -5,6 +5,6 @@ describe("<ResourcesOverview>", () => {
   it("should render", () => {
     render(<ResourcesOverview />);
     expect(screen.getByText("Resources.Overview.header")).toBeInTheDocument();
-    expect(screen.getByTestId("resources-overview")).toBeInTheDocument();
+    expect(screen.getByText("Resources.Overview.text")).toBeInTheDocument();
   });
 });

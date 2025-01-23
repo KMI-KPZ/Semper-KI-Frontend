@@ -117,8 +117,8 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
               <TableHeaderButton
                 handleSort={handleSort}
                 getSortIcon={getSortIcon}
-                title={t("Home.Projects.status")}
-                objectKey="projectStatus"
+                title={t("Home.Projects.processCount")}
+                objectKey="processesCount"
               />
               <th>
                 <Text className="font-bold">{t("Home.Projects.actions")}</Text>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Text } from "@component-library/index";
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
@@ -36,6 +36,16 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
         })
       : logger("clone canceled");
   };
+
+  const showDeleteButton = (): boolean =>
+    useMemo(() => {
+      return (
+        process.processStatusButtons !== undefined &&
+        process.processStatusButtons.find(
+          (button) => button.title === "DELETE"
+        ) !== undefined
+      );
+    }, [process]);
 
   return (
     <Container
@@ -312,16 +322,18 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
             variant="primary"
             to={`/projects/${project.projectID}/${process.processID}`}
           />
-          <Button
-            title={t("general.button.delete")}
-            size="sm"
-            width="fit"
-            variant="text"
-            onClick={() => handleOnClickButtonDelete(process.processID)}
-          />
+          {showDeleteButton() ? (
+            <Button
+              title={t("general.button.delete")}
+              size="sm"
+              width="fit"
+              variant="text"
+              onClick={() => handleOnClickButtonDelete(process.processID)}
+            />
+          ) : null}
           {owner ? (
             <Button
-              title={t("Home.Projects.Process.buttons.clone")}
+              title={t("Home.Projects.Process.button.clone")}
               size="sm"
               width="fit"
               variant="text"

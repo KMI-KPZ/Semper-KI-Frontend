@@ -1150,6 +1150,7 @@
       "noProjects": "Keine Projekte vorhanden",
       "noProjectsSearch": "Keine Projekte mit \"{{search}}\" gefunden",
       "name": "Name",
+      "processCount": "Anzahl Prozesse",
       "updated": "Aktualisiert am",
       "status": "Status",
       "quantity": "Anzahl",
@@ -1159,7 +1160,9 @@
         "new": "Neues Projekt anlegen",
         "filter": "Filter",
         "continue": "Projekt Fortsetzen",
-        "projects": "Meine Projekte"
+        "projects": "Meine Projekte",
+        "clone": "Projekt Duplizieren",
+        "createProcess": "neuen Prozess im Projekt {{name}} anlegen"
       },
       "Project": { "button": { "new": "Neuen Prozess anlegen" } },
       "Process": {
@@ -1178,7 +1181,7 @@
         "processErrors": "Todos",
         "noErrors": "Keine Interaktionen erforderlich",
         "status": "Status",
-        "buttons": {
+        "button": {
           "clone": "Prozess in neues Projekt duplizieren"
         }
       }

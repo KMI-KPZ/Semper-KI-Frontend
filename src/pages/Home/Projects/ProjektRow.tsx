@@ -12,6 +12,8 @@ import ProjectTitleForm from "@/pages/Project/components/TitleForm";
 import useUser, { UserType } from "@/hooks/useUser";
 import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
 import useCloneProcess from "@/api/Process/Mutations/useCloneProcess";
+import useCreateProcess from "@/api/Process/Mutations/useCreateProcess";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 interface HomeProjektRowProps {
   project: FlatDashboardProject;
@@ -28,6 +30,7 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
 
   const deleteProject = useDeleteProject();
   const cloneProcess = useCloneProcess();
+  const createProcess = useCreateProcess();
 
   const [titleEdit, setTitleEdit] = React.useState<boolean>(false);
 
@@ -51,6 +54,10 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
         : logger("clone canceled");
   };
 
+  const handleOnClickButtonCreateProcess = () => {
+    createProcess.mutate(project.projectID);
+  };
+
   return (
     <>
       <tr
@@ -64,7 +71,7 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
           {project.updatedWhen.toLocaleString()}
         </td>
         <td className="border-b-2 border-t-2 border-ultramarinblau-dark border-opacity-20 p-1 text-center">
-          {project.projectStatus}
+          {project.processesCount}
         </td>
         <td className="rounded-md rounded-bl-none rounded-tl-none border-2 border-l-0 border-ultramarinblau-dark border-opacity-20 p-1">
           <Container justify="center" width="full" direction="row">
@@ -75,7 +82,7 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
               <>
                 {project.owner ? (
                   <Button
-                    title={t("general.button.clone")}
+                    title={t("Home.Projects.button.clone")}
                     size="sm"
                     variant="text"
                     children={<ControlPointDuplicateIcon />}
@@ -84,6 +91,17 @@ const HomeProjektRow: React.FC<HomeProjektRowProps> = (props) => {
                     }}
                   />
                 ) : null}
+                <Button
+                  title={t("Home.Projects.button.createProcess", {
+                    name: project.projectDetails.title,
+                  })}
+                  size="sm"
+                  variant="text"
+                  children={<AddCircleOutlineIcon />}
+                  onClick={() => {
+                    handleOnClickButtonCreateProcess();
+                  }}
+                />
                 <Button
                   title={t("general.button.edit")}
                   size="sm"

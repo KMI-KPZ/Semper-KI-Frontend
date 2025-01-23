@@ -2,8 +2,6 @@ import { Button, Container, Heading } from "@component-library/index";
 import useStatusButtons from "@/hooks/Project/useStatusButtons";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useProcess from "@/hooks/Process/useProcess";
-import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
-import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 import { useEffect, useState } from "react";
 import ProcessConditionItem from "./components/ConditionItem";
 import { useTranslation } from "react-i18next";
@@ -78,14 +76,10 @@ const ActionContainer: React.FC<ActionContainerProps> = (props) => {
                 variant={button.buttonVariant}
                 size="sm"
                 startIcon={
-                  button.buttonVariant === "secondary" ? (
-                    <ArrowBackOutlinedIcon />
-                  ) : undefined
+                  button.iconPosition === "left" ? button.icon : undefined
                 }
                 endIcon={
-                  button.buttonVariant === "primary" ? (
-                    <ArrowForwardOutlinedIcon />
-                  ) : undefined
+                  button.iconPosition === "right" ? button.icon : undefined
                 }
                 onClick={() => handleOnClickButton(button, process.processID)}
                 onClickError={() => handleOnClickButtonError()}
@@ -94,9 +88,9 @@ const ActionContainer: React.FC<ActionContainerProps> = (props) => {
               />
             ))}
           </Container>
-        ) : (
+        ) : process.processStatus !== ProcessStatus.DRAFT ? (
           <ActionStatusCard process={process} className="w-fit" />
-        )}
+        ) : null}
       </ActionContainerWarpper>
     );
   return null;

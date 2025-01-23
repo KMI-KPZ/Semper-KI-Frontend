@@ -2,29 +2,25 @@ import { ReactNode } from "react";
 import { UserType } from "@/hooks/useUser";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import CancelIcon from "@mui/icons-material/Cancel";
-import FactoryIcon from "@mui/icons-material/Factory";
-import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import MailIcon from "@mui/icons-material/Mail";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import DescriptionIcon from "@mui/icons-material/Description";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import TaskIcon from "@mui/icons-material/Task";
-import ReplayIcon from "@mui/icons-material/Replay";
-import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
-import DesignServicesIcon from "@mui/icons-material/DesignServices";
-import ScheduleSendIcon from "@mui/icons-material/ScheduleSend";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ReportIcon from "@mui/icons-material/Report";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useDeleteProcess from "@/api/Process/Mutations/useDeleteProcess";
 import useStatusButtonRequest from "@/api/Process/Mutations/useStatusButtonRequest";
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useSendProject from "@/api/Project/Mutations/useSendProject";
 import useVerifyProject from "@/api/Project/Mutations/useVerifyProject";
+import logger from "../useLogger";
+import DoneIcon from "@mui/icons-material/Done";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useQueryClient } from "@tanstack/react-query";
+import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
+import BugReportIcon from "@mui/icons-material/BugReport";
 
 interface UseStatusButtonsReturnProps {
   getStatusButtons: (
@@ -70,6 +66,7 @@ export type StatusButtonPropsGeneric = {
   showIn: StatusButtonShowInType;
   user?: UserType;
   allowedStates?: ProcessStatus[];
+  iconPosition: "left" | "right";
 };
 
 export type StatusButtonShowInType = "project" | "process" | "both";
@@ -80,6 +77,7 @@ export type StatusButtonPropsExtern = {
 
 export type StatusButtonProps = {
   icon: ReactNode;
+  oldTitle: string;
 } & StatusButtonPropsGeneric;
 
 export type StatusButtonAction =
@@ -118,6 +116,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   const updateProcess = useUpdateProcess();
   const deleteProcess = useDeleteProcess();
   const statusButtonRequest = useStatusButtonRequest();
+  const queryClient = useQueryClient();
 
   const getStatusButtons = (
     process: Process,
@@ -141,6 +140,7 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
   ): StatusButtonProps[] => {
     return externalStatusButtons.map((button) => ({
       ...button,
+      oldTitle: button.title,
       title: transformTitle(button.title),
       icon: transformIcon(button.icon),
     }));
@@ -150,22 +150,6 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
     switch (icon) {
       case "DeleteIcon":
         return <DeleteIcon />;
-      case "FactoryIcon":
-        return <FactoryIcon />;
-      case "TroubleshootIcon":
-        return <TroubleshootIcon />;
-      case "ScheduleSendIcon":
-        return <ScheduleSendIcon />;
-      case "EditIcon":
-        return <EditIcon />;
-      case "CancelIcon":
-        return <CancelIcon />;
-      case "ReplayIcon":
-        return <ReplayIcon />;
-      case "AssignmentTurnedInIcon":
-        return <AssignmentTurnedInIcon />;
-      case "MailIcon":
-        return <MailIcon />;
       case "QuestionAnswerIcon":
         return <QuestionAnswerIcon />;
       case "DescriptionIcon":
@@ -174,14 +158,18 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
         return <DoneAllIcon />;
       case "LocalShippingIcon":
         return <LocalShippingIcon />;
-      case "TaskIcon":
-        return <TaskIcon />;
-      case "DesignServicesIcon":
-        return <DesignServicesIcon />;
       case "ArrowBackIcon":
         return <ArrowBackIcon />;
+      case "ArrowForwardIcon":
+        return <ArrowForwardIcon />;
+      case "DoneIcon":
+        return <DoneIcon />;
+      case "CancelIcon":
+        return <CancelOutlinedIcon />;
+      case "CloneIcon":
+        return <ControlPointDuplicateIcon />;
       default:
-        return <ReportIcon />;
+        return <BugReportIcon />;
     }
   };
 
@@ -264,10 +252,25 @@ const useStatusButtons = (): UseStatusButtonsReturnProps => {
         break;
       case "request":
         if (button.action.data.localTestDataStatus === undefined) {
-          statusButtonRequest.mutate({
-            processIDs,
-            button: button.action.data,
-          });
+          statusButtonRequest.mutate(
+            {
+              processIDs,
+              button: button.action.data,
+            },
+            {
+              onSuccess(_, __, ___) {
+                logger("--------", button);
+                if (
+                  button.action.type === "request" &&
+                  button.action.data.type === "cloneProcesses"
+                ) {
+                  navigate("/");
+                  queryClient.invalidateQueries(["project"]);
+                  queryClient.invalidateQueries(["dashboardProject"]);
+                }
+              },
+            }
+          );
         } else {
           if (
             button.action.data.localTestDataStatus === "VERIFYING_AND_REQUESTED"

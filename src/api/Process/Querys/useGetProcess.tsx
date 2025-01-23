@@ -353,37 +353,6 @@ const useGetProcess = (customProjectID?: string, customProcessID?: string) => {
         `${process.env.VITE_HTTP_API_URL}/public/process/get/${projectID}/${processID}/`
       )
       .then((response) => {
-        // const process: Process = {
-        //   ...response.data,
-        //   updatedWhen: new Date(response.data.updatedWhen),
-        //   createdWhen: new Date(response.data.createdWhen),
-        //   accessedWhen: new Date(response.data.accessedWhen),
-        //   files: Object.values(response.data.files),
-        //   serviceDetails: response.data.serviceDetails,
-        //   processDetails: {
-        //     ...response.data.processDetails,
-        //     clientBillingAddress:
-        //       response.data.processDetails.clientBillingAddress === undefined ||
-        //       Object.keys(response.data.processDetails.clientBillingAddress)
-        //         .length === 0
-        //         ? undefined
-        //         : response.data.processDetails.clientBillingAddress,
-        //     clientDeliverAddress:
-        //       response.data.processDetails.clientDeliverAddress === undefined ||
-        //       Object.keys(response.data.processDetails.clientDeliverAddress)
-        //         .length === 0
-        //         ? undefined
-        //         : response.data.processDetails.clientDeliverAddress,
-        //     priorities: parseOrganizationPrioritise(
-        //       response.data.processDetails.priorities
-        //     ),
-        //   },
-        //   messages:
-        //     Object.keys(response.data.messages).length === 0
-        //       ? []
-        //       : response.data.messages,
-        // };
-
         logger("useGetProcess | getProcess ✅ |", response.data);
         if (isTypeOfProcess(response.data)) {
           return parseProcess(response.data);

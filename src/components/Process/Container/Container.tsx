@@ -28,7 +28,6 @@ const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
     pageTitle,
     start,
     menuChildren,
-    showActionContainer = true,
   } = props;
 
   return (
@@ -44,7 +43,7 @@ const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
         </ProcessHeader>
         {children}
       </Container>
-      {showActionContainer ? <ActionContainer start={start} end={end} /> : null}
+      <ActionContainer start={start} end={end} />
     </>
   );
 };

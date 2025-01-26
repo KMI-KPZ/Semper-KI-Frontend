@@ -1426,7 +1426,7 @@
           },
           "ContractorList": {
             "heading": "Contractor selection",
-            "contractors": "Contractors sorted according to their priorities",
+            "contractors": "Contractors ranked by their priorities",
             "noContractorFound": "No contractor found"
           }
         }

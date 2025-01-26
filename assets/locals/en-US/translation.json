@@ -740,7 +740,7 @@
     },
     "ResourcesOutlet": {
       "notSelected": "The manufacturing service is not selected in the organization profile.",
-      "subText": "Please select the Connect service in your organization settings to continue",
+      "subText": "Please select the manufacturing service in the organization settings to continue.",
       "button": {
         "toOrgaProfile": "To the organization settings"
       }

@@ -404,7 +404,7 @@
       }
     },
     "Footer": {
-      "imprint": "imprint",
+      "imprint": "Imprint",
       "privacy": "Privacy Policy",
       "contact": "contact",
       "data-protection": "Privacy Policy",
@@ -415,12 +415,12 @@
       "NotificationForm": {
         "heading": "Notifications",
         "email": "Email",
-        "event": "event"
+        "event": "Event"
       },
       "PrioritiesForm": {
         "header": "Priorities",
-        "type": "priority",
-        "value": "importance",
+        "type": "Priority",
+        "value": "Importance",
         "points": "Free points: {{freePoints}}",
         "low": "Low",
         "medium": "Medium",
@@ -431,13 +431,13 @@
         "labels": {
           "firstName": "First name *",
           "lastName": "Last name *",
-          "company": "company",
+          "company": "Company",
           "street": "Street *",
           "houseNumber": "House number *",
           "zipcode": "Postal code *",
           "city": "City *",
           "country": "Country *",
-          "standard": "use as default address"
+          "standard": "Use as default address"
         },
         "hint": "* Required field"
       },
@@ -445,12 +445,12 @@
         "heading": "Contact form",
         "subject": "Regarding",
         "message": "News",
-        "name": "name",
+        "name": "Name",
         "email": "Email address"
       },
       "ExampleForm": {
         "heading": "Edit organization information",
-        "text": "text",
+        "text": "Text",
         "count": "Number",
         "email": "Email",
         "area": "Area",
@@ -466,14 +466,14 @@
         "locale": "Language",
         "supportedServices": "Services you offer",
         "branding_logo_url": "Logo URL",
-        "branding_colors_primary": "primary color",
-        "branding_colors_page_background": "background color",
+        "branding_colors_primary": "Primary color",
+        "branding_colors_page_background": "Background color",
         "taxID": "Tax number",
         "address": "Address",
         "notifications": "Notifications",
         "notifictionTypes": {
           "email": "Email",
-          "event": "event"
+          "event": "Event"
         },
         "languages": {
           "en-US": "English",

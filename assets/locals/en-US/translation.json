@@ -278,7 +278,7 @@
     }
   },
   "general": {
-    "email": "email",
+    "email": "Email",
     "name": "name",
     "company": "company",
     "street": "Street",
@@ -414,7 +414,7 @@
     "Form": {
       "NotificationForm": {
         "heading": "Notifications",
-        "email": "email",
+        "email": "Email",
         "event": "event"
       },
       "PrioritiesForm": {
@@ -446,20 +446,20 @@
         "subject": "Regarding",
         "message": "News",
         "name": "name",
-        "email": "email address"
+        "email": "Email address"
       },
       "ExampleForm": {
         "heading": "Edit organization information",
         "text": "text",
         "count": "Number",
-        "email": "email",
+        "email": "Email",
         "area": "Area",
         "isTrue": "Is true"
       },
       "OrganizationForm": {
         "heading": "Edit organization information",
         "displayName": "Organization name",
-        "email": "email",
+        "email": "Email",
         "name": "Organization name",
         "adress": "Address of the organization",
         "services": "Services you offer",
@@ -472,7 +472,7 @@
         "address": "Address",
         "notifications": "Notifications",
         "notifictionTypes": {
-          "email": "email",
+          "email": "Email",
           "event": "event"
         },
         "languages": {
@@ -483,7 +483,7 @@
       "ProfileForm": {
         "header": "Generally",
         "name": "Name:",
-        "email": "email: ",
+        "email": "Email: ",
         "type": "User type: ",
         "hint": "After changing the email, it must be verified again. "
       },
@@ -791,7 +791,7 @@
         "priorities": "Priorities",
         "notificationSettings": "Notification Settings",
         "empty": "Empty",
-        "email": "email",
+        "email": "Email",
         "created": "Created",
         "accessed": "Accessed",
         "updated": "Updated",
@@ -852,7 +852,7 @@
       "empty": "no users found",
       "heading": "User management",
       "name": "name",
-      "email": "email",
+      "email": "Email",
       "created": "Created",
       "accessed": "access",
       "updated": "Updated",
@@ -1083,7 +1083,7 @@
         "kmi": "KMI"
       },
       "tel": "Phone",
-      "email": "email",
+      "email": "Email",
       "funding-label": "Funding indicator",
       "infai-describtion": "Institute for Applied Informatics (InfAI) e.V. at the University of Leipzig, InfAI Infinity GmbH Goerdelerring 9 04109 Leipzig Germany",
       "kmi-describtion": "Artificial | "
@@ -1108,7 +1108,7 @@
       },
       "telefon": "Phone",
       "telefax": "Fax",
-      "email": "email",
+      "email": "Email",
       "chairman": "Chairman",
       "registry-court": "Registry court",
       "registry-number": "Register number",
@@ -1235,7 +1235,7 @@
       },
       "Invitation": {
         "header": "Invite users",
-        "placeholder": "email...",
+        "placeholder": "Email...",
         "empty": "No roles created",
         "button": {
           "invite": "Invite",
@@ -1248,7 +1248,7 @@
         "confirmDelete": "Are you sure you want to delete the user?",
         "name": "User name",
         "picture": "Profile picture",
-        "email": "email",
+        "email": "Email",
         "role": "Role",
         "created": "Created on",
         "accessed": "Last accessed on",
@@ -1272,7 +1272,7 @@
         "background-color": "Background color",
         "name": "Name",
         "adress": "Address",
-        "email": "email",
+        "email": "Email",
         "taxID": "Tax number",
         "noService": "No services "
       }
@@ -1874,14 +1874,14 @@
     },
     "form": {
       "display_name": "Organization name",
-      "email": "email",
+      "email": "Email",
       "button": {
         "submit": "Register"
       },
       "error": {
         "display_name": "Organization name is required",
         "email": {
-          "required": "email is required",
+          "required": "Email is required",
           "email": "Email must be a valid email"
         }
       }

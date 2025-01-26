@@ -516,7 +516,7 @@
       "components": {
         "LanguageMenu": {
           "button": {
-            "languageMenu": "Voice menu",
+            "languageMenu": "Select language",
             "de": "German",
             "gb": "English"
           }

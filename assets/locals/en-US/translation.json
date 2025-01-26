@@ -94,7 +94,7 @@
       "REJECTED_BY_CLIENT": "Rejected by customer",
       "PRODUCTION": "In production",
       "DELIVERY": "On the way",
-      "DISPUTE": "dispute",
+      "DISPUTE": "Dispute",
       "COMPLETED": "Completed",
       "FAILED": "Failed",
       "CANCELED": "Aborted",
@@ -147,14 +147,14 @@
       "MANUFACTURER": "Manufacturer",
       "POSTPROCESSING": "Post-processing",
       "ADDITIVE": "Additives",
-      "TEST": "test"
+      "TEST": "Test"
     },
     "ProcessHistoryType": {
       "CREATION": "Creation",
-      "STATUS": "status",
+      "STATUS": "Status",
       "MESSAGE": "News",
-      "FILE": "file",
-      "DELETION": "deletion",
+      "FILE": "File",
+      "DELETION": "Deletion",
       "DETAILS": "Process details",
       "OTHER": "Miscellaneous"
     }
@@ -173,16 +173,16 @@
       "processes:files": "Read process files"
     },
     "permissionContext": {
-      "orga": "organization",
+      "orga": "Organization",
       "processes": "Processes",
-      "resources": "resources"
+      "resources": "Resources"
     },
     "permissionType": {
       "read": "View",
       "edit": "Edit",
       "delete": "Delete",
       "messages": "News",
-      "files": "files"
+      "files": "Files"
     },
     "FlatProcessStatus": {
       "ACTION_REQUIRED": "Action required",
@@ -193,15 +193,15 @@
       "COMPLETED": "Completed"
     },
     "NotificationSettingsType": {
-      "verification": "verification",
+      "verification": "Verification",
       "processSent": "Process sent",
       "responseFromContractor": "Response from contractor",
       "statusChange": "Change of status",
       "newMessage": "New message",
       "actionReminder": "Action reminder",
       "errorOccurred": "Error occurred",
-      "newsletter": "newsletter",
-      "processReceived": "process received",
+      "newsletter": "Newsletter",
+      "processReceived": "Process received",
       "responseFromClient": "Response from customer"
     },
     "OrganizationPriorityType": {
@@ -240,13 +240,13 @@
       "categorys": "Categories",
       "boxSize": "Box size",
       "materialcategory": "Material category",
-      "volume": "volume",
+      "volume": "Volume",
       "materialCategory": "Material category",
       "proceeding": "Proceedings",
       "manufacturer": "Manufacturer",
       "postProcessing": "Post-processing",
       "date": "Date",
-      "text": "text",
+      "text": "Text",
       "textarea": "Text field",
       "color": "Color",
       "number": "Number",
@@ -262,8 +262,8 @@
     },
     "EventDataReason": {
       "messages": "News",
-      "file": "new file",
-      "files": "new files",
+      "file": "New file",
+      "files": "New files",
       "serviceDetails": "Service details changed",
       "serviceType": "Service type changed",
       "serviceStatus": "Service status changed",
@@ -272,17 +272,17 @@
       "provisionalContractor": "Interim contractor selected",
       "dependenciesIn": "Dependencies Inbound",
       "dependenciesOut": "Dependencies Outbound",
-      "test": "test",
+      "test": "Test",
       "roleChanged": "Role Changed",
       "userDeleted": "User Deleted"
     }
   },
   "general": {
     "email": "Email",
-    "name": "name",
-    "company": "company",
+    "name": "Name",
+    "company": "Company",
     "street": "Street",
-    "houseNumber": "house number",
+    "houseNumber": "House number",
     "zipcode": "Postal code",
     "city": "City",
     "country": "country",
@@ -369,7 +369,7 @@
         "city": "City:",
         "country": "Country:",
         "selected": "Selected",
-        "notSelected": "not selected",
+        "notSelected": "Not selected",
         "standard": "Standard address:",
         "button": {
           "delete": "Delete address"
@@ -378,7 +378,7 @@
     },
     "Chatbot": {
       "button": {
-        "open": "assistant"
+        "open": "Assistant"
       }
     },
     "CookieBanner": {

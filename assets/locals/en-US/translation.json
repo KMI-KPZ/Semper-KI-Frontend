@@ -1513,8 +1513,8 @@
                 "img": "Model picture",
                 "name": "Name:",
                 "dimensions": "Mass",
-                "surface": "surface",
-                "volume": "volume"
+                "surface": "Surface",
+                "volume": "Volume"
               },
               "PostProcessingCard": {
                 "name": "Name",
@@ -1542,7 +1542,7 @@
             "Material": {
               "available": "Available materials",
               "error": {
-                "noMaterials": "no materials found"
+                "noMaterials": "No materials found"
               },
               "components": {
                 "Card": {
@@ -1769,13 +1769,13 @@
       }
     },
     "Organization": {
-      "header": "organization",
-      "name": "name"
+      "header": "Organization",
+      "name": "Name"
     },
     "Statistics": {
-      "header": "statistics",
+      "header": "Statistics",
       "created": "Created on",
-      "accessed": "last accessed on",
+      "accessed": "Last accessed on",
       "updated": "Updated on",
       "lastLogin": "Last registration on",
       "lastLoginLocation": "Place of last registration",
@@ -1789,13 +1789,13 @@
         "serviceName": "Name:",
         "serviceType": "Service Type:",
         "status": "Status:",
-        "updated": "last update:",
+        "updated": "Last update:",
         "count": "Number:",
         "confirm": "Really delete process?"
       },
       "Info": {
         "name": "Project name:",
-        "updated": "last update:",
+        "updated": "Last update:",
         "created": "Created on:",
         "count": "Number of processes:",
         "inProgess": "of which in progress:",
@@ -1807,12 +1807,12 @@
       },
       "Processes": {
         "sort": {
-          "title": "title",
+          "title": "Title",
           "processID": "Process ID",
-          "serviceType": "service",
+          "serviceType": "Service",
           "updatedWhen": "Updated",
           "createdWhen": "Created",
-          "flatProcessStatus": "status",
+          "flatProcessStatus": "Status",
           "amount": "Number",
           "imgPath": "Picture",
           "order": "Series",
@@ -1822,7 +1822,7 @@
         "noProcess": "No processes exist",
         "button": {
           "new": "New process",
-          "create": "create another process",
+          "create": "Create another process",
           "sort": "Sort by:"
         }
       },
@@ -1845,9 +1845,9 @@
     "components": {
       "Table": {
         "noProjects": "No projects available",
-        "name": "name",
+        "name": "Name",
         "updated": "Updated on",
-        "status": "status",
+        "status": "Status",
         "count": "Number",
         "actions": "Actions"
       },
@@ -1874,7 +1874,7 @@
     },
     "form": {
       "display_name": "Organization name",
-      "email": "e-mail",
+      "email": "E-mail",
       "button": {
         "submit": "Register"
       },
@@ -1889,7 +1889,7 @@
   },
   "ResKriVer": {
     "heading": "Your order is being processed",
-    "loading": "load your data",
+    "loading": "Load your data",
     "data": "Transferred data from ResKriVer:",
     "button": {
       "search": "Continue"
@@ -1905,14 +1905,14 @@
         "postProcessings": "Post-processing",
         "costing": "Cost",
         "request": "Data expansion",
-        "graph": "graph",
+        "graph": "Graph",
         "privat-graph": "Private graph"
       },
       "Table": {
         "action": "Actions",
-        "name": "name",
+        "name": "Name",
         "active": "Active",
-        "noItems": "no entries available",
+        "noItems": "No entries available",
         "confirmDelete": "Would you like \"{{name}}\"really remove them from your organization?",
         "button": {
           "variant": "Create variant"
@@ -1924,10 +1924,10 @@
       "Form": {
         "heading": "Edit costs"
       },
-      "name": "name",
+      "name": "Name",
       "value": "Value",
       "unit": "Unit",
-      "noItems": "no costs available",
+      "noItems": "No costs available",
       "noItemsWithFilter": "There are no costs with the selected filters"
     },
     "Materials": {
@@ -1958,9 +1958,9 @@
     },
     "RequestInformation": {
       "header": "Data Augmentation Requests",
-      "noItems": "no requests available",
+      "noItems": "No requests available",
       "button": {
-        "new": "new request"
+        "new": "New request"
       }
     }
   },

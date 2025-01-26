@@ -617,7 +617,7 @@
         "general": "General information",
         "nodeName": "Name",
         "context": "Description",
-        "confirmDraft": "Are you sure you want to select the template?\n "
+        "confirmDraft": "Are you sure you want to select this template?\n "
       },
       "NodeTable": {
         "subHeading": "Own {{name}}",

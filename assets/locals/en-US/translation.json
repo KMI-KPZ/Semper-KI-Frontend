@@ -531,11 +531,11 @@
         "components": {
           "FileTable": {
             "noFiles": "No files available",
-            "name": "name",
-            "type": "type",
+            "name": "Name",
+            "type": "Type",
             "size": "Size",
             "date": "Date",
-            "author": "author",
+            "author": "Author",
             "actions": "Actions",
             "userFilesTitle": "Files for the offer",
             "uploadFilesTitle": "Upload files",
@@ -546,7 +546,7 @@
             }
           },
           "UploadCard": {
-            "heading": "upload new file(s).",
+            "heading": "Upload new file(s).",
             "subHeading": "By drag & drop or click",
             "button": "Select file"
           }
@@ -577,10 +577,10 @@
       "EdgeForm": {
         "heading": "Related ",
         "table": {
-          "noItems": "no entries available",
+          "noItems": "No entries available",
           "caption": "Available",
           "selected": "Selected",
-          "name": "name",
+          "name": "Name",
           "createdBy": "Created by",
           "actions": "Actions"
         }
@@ -591,7 +591,7 @@
         "draftDescription": "Select a template to apply the general information and properties.",
         "draftDescription2": "Create a variant to also take over the connection to other resources.",
         "notFound": "Didn't find the right one?",
-        "nodeType": "type",
+        "nodeType": "Type",
         "createdBy": "Created by: ",
         "nodeID": "ID",
         "button": {
@@ -601,7 +601,7 @@
           "details": "Details"
         },
         "table": {
-          "name": "name",
+          "name": "Name",
           "value": "Value",
           "createdBy": "Created by",
           "actions": "Actions",
@@ -615,7 +615,7 @@
           "variant": "Create variant"
         },
         "general": "General information",
-        "nodeName": "name",
+        "nodeName": "Name",
         "context": "Description",
         "confirmDraft": "Are you sure you want to select the template?\n "
       },

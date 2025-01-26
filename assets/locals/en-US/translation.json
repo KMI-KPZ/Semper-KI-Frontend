@@ -634,7 +634,7 @@
         "properties": "Characteristics",
         "general": "Generally",
         "neighbors": "Related resources",
-        "noProperties": "no properties available",
+        "noProperties": "No features available",
         "button": {
           "draft": "Select template",
           "variant": "Create variant"

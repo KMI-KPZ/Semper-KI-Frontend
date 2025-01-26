@@ -1517,7 +1517,7 @@
                 "volume": "volume"
               },
               "PostProcessingCard": {
-                "name": "name",
+                "name": "Name",
                 "img": "Post-processing image",
                 "type": "Type:",
                 "properties": "Characteristics:"

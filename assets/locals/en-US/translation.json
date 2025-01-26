@@ -643,15 +643,15 @@
       "PropertyForm": {
         "properties": {
           "header": "Characteristics",
-          "name": "name",
-          "type": "type",
+          "name": "Name",
+          "type": "Type",
           "value": "Value"
         },
         "table": {
-          "noItems": "no entries available",
+          "noItems": "No entries available",
           "caption": "Available",
           "selected": "Selected",
-          "name": "name",
+          "name": "Name",
           "createdBy": "Created by",
           "actions": "Actions",
           "value": "Value"
@@ -675,7 +675,7 @@
     },
     "UserSwitch": {
       "client": "Single user",
-      "organization": "organization"
+      "organization": "Organization"
     }
   },
   "contexts": {

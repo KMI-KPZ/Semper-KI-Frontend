@@ -278,7 +278,7 @@
     }
   },
   "general": {
-    "email": "e-mail",
+    "email": "email",
     "name": "name",
     "company": "company",
     "street": "Street",
@@ -414,7 +414,7 @@
     "Form": {
       "NotificationForm": {
         "heading": "Notifications",
-        "email": "e-mail",
+        "email": "email",
         "event": "event"
       },
       "PrioritiesForm": {
@@ -446,20 +446,20 @@
         "subject": "Regarding",
         "message": "News",
         "name": "name",
-        "email": "E-mail address"
+        "email": "email address"
       },
       "ExampleForm": {
         "heading": "Edit organization information",
         "text": "text",
         "count": "Number",
-        "email": "E-mail",
+        "email": "email",
         "area": "Area",
         "isTrue": "Is true"
       },
       "OrganizationForm": {
         "heading": "Edit organization information",
         "displayName": "Organization name",
-        "email": "E-mail",
+        "email": "email",
         "name": "Organization name",
         "adress": "Address of the organization",
         "services": "Services you offer",
@@ -472,7 +472,7 @@
         "address": "Address",
         "notifications": "Notifications",
         "notifictionTypes": {
-          "email": "E-mail",
+          "email": "email",
           "event": "event"
         },
         "languages": {
@@ -483,7 +483,7 @@
       "ProfileForm": {
         "header": "Generally",
         "name": "Name:",
-        "email": "E-mail: ",
+        "email": "email: ",
         "type": "User type: ",
         "hint": "After changing the email, it must be verified again. "
       },
@@ -791,7 +791,7 @@
         "priorities": "Priorities",
         "notificationSettings": "Notification Settings",
         "empty": "Empty",
-        "email": "E-mail",
+        "email": "email",
         "created": "Created",
         "accessed": "Accessed",
         "updated": "Updated",
@@ -852,7 +852,7 @@
       "empty": "no users found",
       "heading": "User management",
       "name": "name",
-      "email": "E-mail",
+      "email": "email",
       "created": "Created",
       "accessed": "access",
       "updated": "Updated",
@@ -1083,7 +1083,7 @@
         "kmi": "KMI"
       },
       "tel": "Phone",
-      "email": "E-mail",
+      "email": "email",
       "funding-label": "Funding indicator",
       "infai-describtion": "Institute for Applied Informatics (InfAI) e.V. at the University of Leipzig, InfAI Infinity GmbH Goerdelerring 9 04109 Leipzig Germany",
       "kmi-describtion": "Artificial | "
@@ -1108,7 +1108,7 @@
       },
       "telefon": "Phone",
       "telefax": "Fax",
-      "email": "E-mail",
+      "email": "email",
       "chairman": "Chairman",
       "registry-court": "Registry court",
       "registry-number": "Register number",
@@ -1135,7 +1135,7 @@
       "how-we-collect-details": "On the one hand, your data is collected when you provide it to us. ",
       "what-data-we-collect": "What data do we collect?",
       "collected-personal-data": "In order to be able to use the services offered and to process your orders properly, we collect the following personal data:",
-      "data-details": "Salutation, gender Surname, first name if applicable Company name Address Telephone number Email address Date of birth Nationality Account details IP address",
+      "data-details": "Salutation, gender Surname, first name if applicable Company name Address Telephone number email address Date of birth Nationality Account details IP address",
       "usage-purpose": "For what purposes do we use your data?",
       "data-usage-purpose": "We process the personal data you provide to carry out contractually agreed research and development tasks as well as administrative tasks, member and donor management and public relations. ",
       "your-rights": "What rights do you have regarding your data?",
@@ -1172,7 +1172,7 @@
       "data-protection-officer": "3. Data protection officer",
       "mandatory-data-protection-officer": "Statutory data protection officer We have appointed a data protection officer for our company.",
       "contact-info": "Institute for Applied Computer Science (InfAI) e. ",
-      "contact-details": "Telephone: +49 341 229037 0 Email: datenschutz@infai.org",
+      "contact-details": "Telephone: +49 341 229037 0 email: datenschutz@infai.org",
       "data-collection2": "4. Data collection on our website",
       "cookies": "Cookies",
       "cookie-info": "Some of the websites use so-called cookies. ",
@@ -1235,7 +1235,7 @@
       },
       "Invitation": {
         "header": "Invite users",
-        "placeholder": "E-mail...",
+        "placeholder": "email...",
         "empty": "No roles created",
         "button": {
           "invite": "Invite",
@@ -1248,7 +1248,7 @@
         "confirmDelete": "Are you sure you want to delete the user?",
         "name": "User name",
         "picture": "Profile picture",
-        "email": "E-mail",
+        "email": "email",
         "role": "Role",
         "created": "Created on",
         "accessed": "Last accessed on",
@@ -1272,7 +1272,7 @@
         "background-color": "Background color",
         "name": "Name",
         "adress": "Address",
-        "email": "E-mail",
+        "email": "email",
         "taxID": "Tax number",
         "noService": "No services "
       }
@@ -1874,14 +1874,14 @@
     },
     "form": {
       "display_name": "Organization name",
-      "email": "E-mail",
+      "email": "email",
       "button": {
         "submit": "Register"
       },
       "error": {
         "display_name": "Organization name is required",
         "email": {
-          "required": "Email is required",
+          "required": "email is required",
           "email": "Email must be a valid email"
         }
       }

@@ -1717,7 +1717,7 @@
       },
       "Info": {
         "name": "Process name:",
-        "updated": "last update:",
+        "updated": "Last update:",
         "created": "Created on:",
         "status": "Process status:",
         "button": {

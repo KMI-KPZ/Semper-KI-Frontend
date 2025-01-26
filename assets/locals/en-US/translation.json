@@ -739,7 +739,7 @@
       }
     },
     "ResourcesOutlet": {
-      "notSelected": "The Make service is not selected in the organization profile",
+      "notSelected": "The manufacturing service is not selected in the organization profile.",
       "subText": "Please select the Connect service in your organization settings to continue",
       "button": {
         "toOrgaProfile": "To the organization settings"

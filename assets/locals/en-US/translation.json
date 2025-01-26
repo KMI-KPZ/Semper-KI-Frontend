@@ -1003,7 +1003,7 @@
       },
       "Coypu": {
         "heading": "Coypu News",
-        "heading2": "use for research purposes only",
+        "heading2": "Use for research purposes only",
         "button": {
           "link": "To the article"
         }
@@ -1035,7 +1035,7 @@
           "lang": "Set language"
         },
         "button": {
-          "orga": "organization"
+          "orga": "Organization"
         }
       },
       "Projects": {
@@ -1049,7 +1049,7 @@
         }
       },
       "Resources": {
-        "heading": "resources",
+        "heading": "Resources",
         "button": {
           "overview": "Overview",
           "printer": "3D printer",
@@ -1068,7 +1068,7 @@
           "lang": "Set language"
         },
         "button": {
-          "orga": "profile"
+          "orga": "Profile"
         }
       }
     }
@@ -1076,21 +1076,21 @@
   "Legal": {
     "Contact": {
       "heading": {
-        "main": "contact",
+        "main": "Contact",
         "semper": "Semper AI",
         "kiss": "KISS project",
         "infai": "Infai",
         "kmi": "KMI"
       },
-      "tel": "phone",
-      "email": "e-mail",
+      "tel": "Phone",
+      "email": "E-mail",
       "funding-label": "Funding indicator",
       "infai-describtion": "Institute for Applied Informatics (InfAI) e.V. at the University of Leipzig, InfAI Infinity GmbH Goerdelerring 9 04109 Leipzig Germany",
       "kmi-describtion": "Artificial | "
     },
     "Imprint": {
       "heading": {
-        "main": "imprint",
+        "main": "Imprint",
         "disclaimer": "Disclaimer – legal information",
         "board": "Authorized board of directors:",
         "board-members": "Board member:",
@@ -1106,9 +1106,9 @@
         "copyright": "§3 Copyright and ancillary copyrights",
         "special-terms": "§4 Special terms of use"
       },
-      "telefon": "phone",
-      "telefax": "fax",
-      "email": "e-mail",
+      "telefon": "Phone",
+      "telefax": "Fax",
+      "email": "E-mail",
       "chairman": "Chairman",
       "registry-court": "Registry court",
       "registry-number": "Register number",
@@ -1199,9 +1199,9 @@
     "Legal": {
       "heading": "Legal",
       "button": {
-        "imprint": "imprint",
+        "imprint": "Imprint",
         "privacy": "Privacy Policy",
-        "contact": "contact"
+        "contact": "Contact"
       }
     }
   },
@@ -1215,7 +1215,7 @@
       "login": "Register",
       "register": "Register",
       "testuser": "Single user",
-      "testorga": "organization",
+      "testorga": "Organization",
       "testadmin": "Admin"
     }
   },
@@ -1223,7 +1223,7 @@
     "redirect": "Redirect to unsubscribe"
   },
   "Organization": {
-    "header": "organization",
+    "header": "Organization",
     "components": {
       "Address": {
         "header": "Addresses",
@@ -1236,7 +1236,7 @@
       "Invitation": {
         "header": "Invite users",
         "placeholder": "E-mail...",
-        "empty": "no roles created",
+        "empty": "No roles created",
         "button": {
           "invite": "Invite",
           "send": "Sent!",
@@ -1244,78 +1244,78 @@
         }
       },
       "UserTable": {
-        "header": "user",
+        "header": "User",
         "confirmDelete": "Are you sure you want to delete the user?",
-        "name": "user name",
+        "name": "User name",
         "picture": "Profile picture",
-        "email": "e-mail",
-        "role": "role",
+        "email": "E-mail",
+        "role": "Role",
         "created": "Created on",
-        "accessed": "last accessed on",
+        "accessed": "Last accessed on",
         "actions": "Actions",
-        "empty": "no roles created",
+        "empty": "No roles created",
         "error": {
-          "empty": "no users found"
+          "empty": "No users found"
         }
       }
     },
     "View": {
       "Info": {
         "header": "General information",
-        "accessed": "last accessed on",
+        "accessed": "Last accessed on",
         "created": "Created on",
         "updated": "Updated on",
         "services": "Services you offer",
         "id": "OrganizationID",
         "img": "Picture",
-        "primary-color": "primary color",
-        "background-color": "background color",
-        "name": "name",
-        "adress": "address",
-        "email": "e-mail",
+        "primary-color": "Primary color",
+        "background-color": "Background color",
+        "name": "Name",
+        "adress": "Address",
+        "email": "E-mail",
         "taxID": "Tax number",
-        "noService": "no services "
+        "noService": "No services "
       }
     },
     "Roles": {
       "header": "Roles/Rights",
-      "empty": "no roles created",
+      "empty": "No roles created",
       "components": {
         "Form": {
           "heading": {
             "create": "Create role",
             "edit": "Edit role"
           },
-          "name": "name",
-          "permissions": "right",
+          "name": "Name",
+          "permissions": "Right",
           "description": "Description",
           "validation": {
-            "required": "is required"
+            "required": "Is required"
           }
         },
         "Item": {
-          "name": "name",
+          "name": "Name",
           "description": "Description",
           "actions": "Actions",
-          "empty": "no roles created",
+          "empty": "No roles created",
           "alert": "Really delete a role?"
         },
         "Table": {
-          "name": "name",
+          "name": "Name",
           "description": "Description",
           "actions": "Actions",
-          "orga": "organization",
+          "orga": "Organization",
           "processes": "Projects",
           "data": "Data",
           "files": "More files",
-          "resources": "resources",
-          "read": "view",
-          "edit": "edit",
-          "create": "add",
-          "insert": "add",
-          "delete": "delete",
+          "resources": "Resources",
+          "read": "View",
+          "edit": "Edit",
+          "create": "Add",
+          "insert": "Add",
+          "delete": "Delete",
           "status": "Edit status",
-          "messages": "answer",
+          "messages": "Answer",
           "empty": "no roles created"
         }
       }
@@ -1394,7 +1394,7 @@
       "ContractorSelection": {
         "heading": {
           "main": "Select contractor",
-          "sub1": "contractor"
+          "sub1": "Contractor"
         },
         "noContractor": "No contractor selected",
         "noContractorFound": "No contractor found",
@@ -1412,7 +1412,7 @@
               "delivery": "Delivery address"
             },
             "sameAddress": "Delivery address is the same as billing address",
-            "noAddress": "no address selected",
+            "noAddress": "No address selected",
             "button": {
               "editAddress": "Change address",
               "resetAddress": "Reset address"
@@ -1438,7 +1438,7 @@
         }
       },
       "Production": {
-        "heading": "production",
+        "heading": "Production",
         "button": {
           "menu": "Production menu"
         }
@@ -1459,7 +1459,7 @@
       },
       "Service": {
         "heading": "Draft",
-        "noType": "no service selected",
+        "noType": "No service selected",
         "button": {
           "editType": "Edit service type",
           "complete": "Complete service",
@@ -1470,11 +1470,11 @@
           "menuButtonTitle": "Filter menu",
           "pageDescription1": "Here you can set your specifications for the process.",
           "pageDescription2": "This helps make your selection easier.",
-          "noCategory": "no presets category opened",
+          "noCategory": "No presets category opened",
           "components": {
             "Card": {
-              "noFilters": "no specifications available",
-              "noSelectedFitlers": "no defaults selected"
+              "noFilters": "No specifications available",
+              "noSelectedFitlers": "No defaults selected"
             },
             "MultiSelection": {
               "button": {
@@ -1500,9 +1500,9 @@
               "pageDescription2": "This selection is used to find the right manufacturers.",
               "complete": "Selection Complete",
               "incomplete": "Selection Incomplete",
-              "noModels": "no models available",
-              "noPostProcessings": "no post-processing selected",
-              "noMaterials": "no materials selected",
+              "noModels": "No models available",
+              "noPostProcessings": "No post-processing selected",
+              "noMaterials": "No materials selected",
               "MaterialCard": {
                 "img": "Material image",
                 "name": "Name:",

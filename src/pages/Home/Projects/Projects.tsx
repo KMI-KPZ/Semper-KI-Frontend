@@ -1,33 +1,46 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Container, Heading, Search, Text } from "@component-library/index";
+import {
+  Container,
+  Heading,
+  LoadingAnimation,
+  Modal,
+  Search,
+  Text,
+} from "@component-library/index";
 import { Button } from "@component-library/index";
 import HomeContainer from "../components/Container";
 import useGetDashboardProjects, {
   FlatDashboardProject,
 } from "@/api/Project/Querys/useGetDashboardProjects";
-import useCreateProject from "@/api/Project/Mutations/useCreateProject";
-import useEvents from "@/hooks/useEvents/useEvents";
 import useSearch from "@/hooks/useSearch";
 import TuneIcon from "@mui/icons-material/Tune";
 import TableHeaderButton from "@/components/Table/TableHeaderButton";
 import useSort from "@/hooks/useSort";
 import HomeProjektRow from "./ProjektRow";
+import CreateProjectTitleForm from "@/pages/Projects/components/TitleForm";
+import logger from "@/hooks/useLogger";
+import { AuthorizedUser } from "@/hooks/useUser";
 
-interface HomeProjectsProps {}
+interface HomeProjectsProps {
+  recieved?: boolean;
+  user?: AuthorizedUser;
+}
 
 const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
-  const {} = props;
+  const { recieved = false, user } = props;
   const { t } = useTranslation();
-  const {} = useEvents();
   const [openProjects, setOpenProjects] = React.useState<string[]>([]);
 
   const dashboardProject = useGetDashboardProjects();
-  const createProject = useCreateProject();
-  const { filterDataBySearchInput, handleSearchInputChange } =
+  const { filterDataBySearchInput, handleSearchInputChange, searchInput } =
     useSearch<FlatDashboardProject>();
+
   const { getSortIcon, handleSort, sortItems } =
     useSort<FlatDashboardProject>();
+
+  const [createProjectTitleFormOpen, setCreateProjectTitleFormOpen] =
+    React.useState<boolean>(false);
 
   const handleOpen = (projectID: string) => {
     if (openProjects.includes(projectID)) {
@@ -37,15 +50,41 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
     }
   };
 
+  const filteredProjectsByRecieved =
+    dashboardProject.data !== undefined
+      ? dashboardProject.data.filter(
+          (project) =>
+            user === undefined ||
+            (project.owner && !recieved) ||
+            (!project.owner && recieved)
+        )
+      : [];
+
+  const filteredProjectsBySearchInput = filteredProjectsByRecieved.filter(
+    (orga) => filterDataBySearchInput(orga)
+  );
+
+  const filteredAndSortedProjects =
+    filteredProjectsBySearchInput.sort(sortItems);
+
   return (
     <HomeContainer className="">
       <Container width="full" direction="row" justify="between">
-        <Heading variant="h2">{t("Home.Projects.heading")}</Heading>
-        <Button
-          title={t("Home.Projects.button.new")}
-          size="sm"
-          variant="primary"
-        />
+        <Heading variant="h2">
+          {recieved
+            ? t("Home.Projects.receivedProjects")
+            : t("Home.Projects.heading")}
+        </Heading>
+        {!recieved ? (
+          <Button
+            title={t("Home.Projects.button.new")}
+            size="sm"
+            variant="primary"
+            onClick={() => {
+              setCreateProjectTitleFormOpen(true);
+            }}
+          />
+        ) : null}
       </Container>
       <Container width="full" direction="row" justify="between">
         <Search handleSearchInputChange={handleSearchInputChange} />
@@ -54,7 +93,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
           size="sm"
           variant="text"
           onClick={() => {
-            createProject.mutate("test");
+            logger("info", "Filter button clicked");
           }}
           children={<TuneIcon />}
         />
@@ -78,8 +117,8 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
               <TableHeaderButton
                 handleSort={handleSort}
                 getSortIcon={getSortIcon}
-                title={t("Home.Projects.status")}
-                objectKey="projectStatus"
+                title={t("Home.Projects.processCount")}
+                objectKey="processesCount"
               />
               <th>
                 <Text className="font-bold">{t("Home.Projects.actions")}</Text>
@@ -87,31 +126,67 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
             </tr>
           </thead>
           <tbody>
-            {dashboardProject.data !== undefined &&
-            dashboardProject.data
-              .filter((orga) => filterDataBySearchInput(orga))
-              .sort(sortItems).length > 0 ? (
-              dashboardProject.data
-                .filter((orga) => filterDataBySearchInput(orga))
-                .sort(sortItems)
-                .map((project, index) => (
-                  <HomeProjektRow
-                    key={index}
-                    project={project}
-                    open={openProjects.includes(project.projectID)}
-                    handleOpen={handleOpen}
-                  />
-                ))
-            ) : (
-              <tr>
-                <td colSpan={4}>
+            {dashboardProject.isLoading || dashboardProject.isRefetching ? (
+              <tr className="bg-gradient-to-br  from-white/60 to-white/20 text-center ">
+                <td
+                  colSpan={4}
+                  className="rounded-md border-2 border-ultramarinblau-dark border-opacity-20 p-2 text-center"
+                >
+                  <Container width="full" justify="center">
+                    <LoadingAnimation />
+                  </Container>
+                </td>
+              </tr>
+            ) : filteredAndSortedProjects.length > 0 ? (
+              filteredAndSortedProjects.map((project, index) => (
+                <HomeProjektRow
+                  key={index}
+                  project={project}
+                  open={openProjects.includes(project.projectID)}
+                  handleOpen={handleOpen}
+                  recieved={recieved}
+                />
+              ))
+            ) : filteredProjectsByRecieved.length ===
+              filteredProjectsBySearchInput.length ? (
+              <tr className="bg-gradient-to-br  from-white/60 to-white/20 text-center ">
+                <td
+                  colSpan={4}
+                  className="rounded-md border-2 border-ultramarinblau-dark border-opacity-20 p-2 text-center"
+                >
                   <Text>{t("Home.Projects.noProjects")}</Text>
+                </td>
+              </tr>
+            ) : (
+              <tr className="bg-gradient-to-br  from-white/60 to-white/20 text-center ">
+                <td
+                  colSpan={4}
+                  className="rounded-md border-2 border-ultramarinblau-dark border-opacity-20 p-2 text-center"
+                >
+                  <Text>
+                    {t("Home.Projects.noProjectsSearch", {
+                      search: searchInput,
+                    })}
+                  </Text>
                 </td>
               </tr>
             )}
           </tbody>
         </table>
       </Container>
+      <Modal
+        modalKey="CreateProjectTitleEdit"
+        open={createProjectTitleFormOpen}
+        closeModal={() => {
+          setCreateProjectTitleFormOpen(false);
+        }}
+      >
+        <CreateProjectTitleForm
+          close={() => {
+            setCreateProjectTitleFormOpen(false);
+          }}
+        />
+      </Modal>
     </HomeContainer>
   );
 };

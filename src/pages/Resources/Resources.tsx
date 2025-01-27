@@ -15,12 +15,18 @@ import ResourcesNodeForm from "@/components/Resources/NodeForm";
 import { useTranslation } from "react-i18next";
 import Costing from "./Costing/Costing";
 import CostingForm from "./Costing/Form";
+import useModal from "@/hooks/useModal";
 
 interface ResourcesProps {}
 
 const Resources: React.FC<ResourcesProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
+  const { deleteModal } = useModal();
+
+  const handleOnButtonClickEdit = () => {
+    deleteModal("nodeView");
+  };
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
@@ -56,6 +62,7 @@ const Resources: React.FC<ResourcesProps> = (props) => {
                         <Button
                           size="sm"
                           title={t("general.button.edit")}
+                          onClick={() => handleOnButtonClickEdit()}
                           to="edit"
                         />
                       </ResourcesNodeView>

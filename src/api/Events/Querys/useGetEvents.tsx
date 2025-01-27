@@ -21,7 +21,7 @@ const useGetEvents = (load: boolean) => {
     queryKey: ["events"],
     queryFn: getEvents,
     enabled: load === true,
-    refetchInterval: 3600000, //1 hour
+    refetchInterval: 600000, //10 minutes
   });
 };
 

@@ -21,13 +21,14 @@ export interface Project {
   processes: FlatProcess[];
 }
 
-export type FlatProcessStatus =
+export type ProcessActionStatus =
   | "ACTION_REQUIRED"
   | "WAITING_CONTRACTOR"
   | "WAITING_CLIENT"
   | "WAITING_PROCESS"
   | "IN_PROGRESS"
-  | "COMPLETED";
+  | "COMPLETED"
+  | "FAILED";
 
 export interface FlatProcess {
   title: string;
@@ -35,7 +36,7 @@ export interface FlatProcess {
   serviceType: ServiceType;
   updatedWhen: Date;
   createdWhen: Date;
-  flatProcessStatus: FlatProcessStatus;
+  actionStatus: ProcessActionStatus;
   amount: number;
   imgPath: string;
 }
@@ -68,7 +69,7 @@ const useGetProject = (customProjectID?: string) => {
             (process: any): FlatProcess => ({
               title: process.title,
               processID: process.processID,
-              flatProcessStatus: process.flatProcessStatus,
+              actionStatus: process.ProcessActionStatus,
               serviceType: process.serviceType,
               createdWhen: new Date(process.createdWhen),
               updatedWhen: new Date(process.updatedWhen),

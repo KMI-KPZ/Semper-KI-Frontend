@@ -11,7 +11,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
-import ProcessStatusGate from "@/pages/Process/components/StatusGate";
+import ProcessStatusGate from "@/components/Process/StatusGate";
 
 interface ServiceManufacturingGroupOverviewProps {
   process: ManufactoringProcessProps;
@@ -66,6 +66,7 @@ const ServiceManufacturingGroupOverview: React.FC<
   };
 
   const handleOnClickDelete = (index: number) => {
+    changeActiveGroup(0);
     updatedProcess.mutate(
       {
         processIDs: [process.processID],

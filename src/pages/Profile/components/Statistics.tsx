@@ -63,9 +63,6 @@ const ProfileStatistics: React.FC<ProfileStatisticsProps> = (props) => {
               {t("Profile.Statistics.lastLogin")}
             </Text>
             <Text className="break-all">
-              {t("Profile.Statistics.lastLoginLocation")}
-            </Text>
-            <Text className="break-all">
               {t("Profile.Statistics.lastLoginNumber")}
             </Text>
           </Container>
@@ -83,12 +80,7 @@ const ProfileStatistics: React.FC<ProfileStatisticsProps> = (props) => {
                 ? new Date(user.details.statistics?.lastLogin).toLocaleString()
                 : "---"}
             </Text>
-            <Text className="break-all">
-              {user.details.statistics !== undefined &&
-              user.details.statistics.locationOfLastLogin !== undefined
-                ? user.details.statistics.locationOfLastLogin
-                : "---"}
-            </Text>
+
             <Text className="break-all">
               {user.details.statistics !== undefined &&
               user.details.statistics.numberOfLoginsTotal !== undefined

@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 interface ReturnProps<T> {
+  searchInput: string;
   handleSearchInputChange: (search: string) => void;
   filterDataBySearchInput: (
     data: T,
@@ -59,7 +60,7 @@ const useSearch = <T extends any>(): ReturnProps<T> => {
     );
   };
 
-  return { handleSearchInputChange, filterDataBySearchInput };
+  return { handleSearchInputChange, filterDataBySearchInput, searchInput };
 };
 
 export default useSearch;

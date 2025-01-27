@@ -12,7 +12,7 @@ import {
   ProcessModel,
   ProcessStatus,
 } from "@/api/Process/Querys/useGetProcess";
-import ProcessStatusGate from "@/pages/Process/components/StatusGate";
+import ProcessStatusGate from "@/components/Process/StatusGate";
 import useProcess from "@/hooks/Process/useProcess";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import { CheckModel } from "@/api/Process/Querys/useGetCheckModel";

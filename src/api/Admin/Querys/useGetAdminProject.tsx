@@ -43,6 +43,7 @@ const useGetAdminProject = () => {
               accessedWhen: new Date(process.accessedWhen),
               processStatusButtons: process.processStatusButtons,
               processErrors: process.processErrors,
+              actionStatus: process.actionStatus,
             })
           ),
         };

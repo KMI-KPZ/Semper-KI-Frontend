@@ -1,17 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Container, Heading } from "@component-library/index";
-import ServiceEdit from "../ServiceEdit/ServiceEdit";
-// import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-// import useProcess from "@/hooks/Process/useProcess";
+import FilterEdit from "./components/FilterEdit";
 
 interface Props {}
 
 const ProcessFilter: React.FC<Props> = (props) => {
   const {} = props;
   const { t } = useTranslation();
-
-  // const { process } = useProcess();
 
   return (
     <Container
@@ -24,9 +20,7 @@ const ProcessFilter: React.FC<Props> = (props) => {
           {t("Process.components.Service.Filter.heading")}
         </Heading>
       </Container>
-      {/* {process.processStatus < ProcessStatus.SERVICE_COMPLETED ? ( */}
-      <ServiceEdit />
-      {/* ) : null} */}
+      <FilterEdit />
     </Container>
   );
 };

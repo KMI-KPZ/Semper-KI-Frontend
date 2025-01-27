@@ -4,18 +4,20 @@ import { Heading } from "@component-library/index";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import CheckIcon from "@mui/icons-material/Check";
-import PermissionGate from "@/components/PermissionGate/PermissionGate";
 import ProjectOwnerGate from "@/components/OwnerGate/OwnerGate";
 import useUpdateProject from "@/api/Project/Mutations/useUpdateProject";
+import { Project } from "@/api/Project/Querys/useGetProject";
+import { FlatDashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
 
 interface ProjectTitleFormProps {
   title?: string;
   close: () => void;
   onSubmit?: (title: string) => void;
+  project: Project | FlatDashboardProject;
 }
 
 const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
-  const { title, close, onSubmit } = props;
+  const { title, close, onSubmit, project } = props;
   const { t } = useTranslation();
   const [state, setState] = useState<string>(title !== undefined ? title : "");
   const updatedProject = useUpdateProject();
@@ -25,6 +27,7 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
     else {
       updatedProject.mutate(
         {
+          projectID: project.projectID,
           changes: { projectDetails: { title: state } },
         },
         {
@@ -70,17 +73,15 @@ const ProjectTitleForm: React.FC<ProjectTitleFormProps> = (props) => {
         className="w-fit rounded-md border-2 bg-gray-100 p-2"
         onChange={handleOnChangeInput}
       />
-      <ProjectOwnerGate>
-        <PermissionGate element="ProjectButtonEditName">
-          <Button
-            onClick={handleOnClickEditCheckButton}
-            variant="primary"
-            title={t("Project.components.TitleForm.button.edit")}
-            size="xs"
-            width="fit"
-            children={<CheckIcon fontSize="small" />}
-          />
-        </PermissionGate>
+      <ProjectOwnerGate project={project}>
+        <Button
+          onClick={handleOnClickEditCheckButton}
+          variant="primary"
+          title={t("Project.components.TitleForm.button.edit")}
+          size="xs"
+          width="fit"
+          children={<CheckIcon fontSize="small" />}
+        />
       </ProjectOwnerGate>
     </Container>
   );

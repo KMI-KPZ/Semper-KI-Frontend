@@ -66,7 +66,8 @@
       "verifyEMail": "E-Mail verifizieren",
       "manufacturing": "Herstellen lassen",
       "projects": "Meine Projekte",
-      "project": "Projekt"
+      "project": "Projekt",
+      "dashboard": "Dashboard"
     }
   },
   "enum": {
@@ -196,13 +197,14 @@
       "messages": "Nachrichten",
       "files": "Dateien"
     },
-    "FlatProcessStatus": {
+    "ProcessActionStatus": {
       "ACTION_REQUIRED": "Aktion erforderlich",
       "WAITING_CONTRACTOR": "Warten auf Auftragnehmer",
       "WAITING_CLIENT": "Warten auf Kunde",
       "WAITING_PROCESS": "Warten auf Prozess",
       "IN_PROGRESS": "in Bearbeitung",
-      "COMPLETED": "Abgeschlossen"
+      "COMPLETED": "Abgeschlossen",
+      "FAILED": "Fehlgeschlagen"
     },
     "NotificationSettingsType": {
       "verification": "Verifizierung",
@@ -341,6 +343,7 @@
     "min": "Min",
     "max": "Max",
     "button": {
+      "clone": "Duplizieren",
       "select": "Auswählen",
       "deselect": "Abwählen",
       "selected": "Ausgewählt",
@@ -592,6 +595,21 @@
       "message": "Diese Funktion ist mit ihren Rechten nicht nutzbar"
     },
     "Process": {
+      "Container": {
+        "ActionContainer": {
+          "heading": "Todos",
+          "noButtonsClient": "Keine Todos vorhanden. Der Auftragnehmer bearbeitet ihre Anfrage. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
+          "noButtonsContractor": "Keine Todos vorhanden. Der Kunde ist am Zug. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
+          "finished": "Prozess Abgeschlossen. Es gibt keine weiteren Todos.",
+          "deleteConfirm": "Möchten Sie den Prozess wirklich löschen?",
+          "components": {
+            "ActionContainerWarpper": {
+              "heading": "Ihr Prozess ist fehlgeschlagen",
+              "reason": "Grund"
+            }
+          }
+        }
+      },
       "File": {
         "components": {
           "FileTable": {
@@ -777,6 +795,7 @@
       "FORWARD-TO-FAILED": "Prozess fehlgeschlagen",
       "FORWARD-TO-COMPLETED": "Prozess abschließen",
       "FORWARD-TO-DISPUTE": "Streitfall melden",
+      "CLONE": "Prozess klonen",
       "button": {
         "confirmAll": "Wollen Sie wirklich alle betroffene Prozesse {{title}}?"
       }
@@ -970,6 +989,7 @@
       }
     }
   },
+  "Demo": { "heading": "Projekt und Prozess wird erstellt" },
   "EmailVerification": {
     "heading": "Email verifizieren",
     "text": "Bitte bestätigen Sie ihre Email Adresse, indem Sie auf den Link in der Email klicken, die Auth0 Ihnen gesendet hat.",
@@ -1127,8 +1147,11 @@
     },
     "Projects": {
       "heading": "Projektübersicht",
+      "receivedProjects": "Erhaltene Projekte",
       "noProjects": "Keine Projekte vorhanden",
+      "noProjectsSearch": "Keine Projekte mit \"{{search}}\" gefunden",
       "name": "Name",
+      "processCount": "Anzahl Prozesse",
       "updated": "Aktualisiert am",
       "status": "Status",
       "quantity": "Anzahl",
@@ -1138,9 +1161,14 @@
         "new": "Neues Projekt anlegen",
         "filter": "Filter",
         "continue": "Projekt Fortsetzen",
-        "projects": "Meine Projekte"
+        "projects": "Meine Projekte",
+        "clone": "Projekt Duplizieren",
+        "createProcess": "neuen Prozess im Projekt {{name}} anlegen"
       },
-      "Project": { "button": { "new": "Neuen Prozess anlegen" } },
+      "Project": {
+        "noProcess": "Keine Prozesse vorhanden",
+        "button": { "new": "Neuen Prozess anlegen" }
+      },
       "Process": {
         "deleteConfirm": "Möchten Sie den Prozess wirklich löschen?",
         "name": "Prozessname",
@@ -1154,7 +1182,12 @@
         "material": "Material",
         "postProcessings": "Nachbearbeitungen",
         "groupName": "Gruppe {{count}}",
-        "processErrors": "Hinweise"
+        "processErrors": "Todos",
+        "noErrors": "Keine Interaktionen erforderlich",
+        "status": "Status",
+        "button": {
+          "clone": "Prozess in neues Projekt duplizieren"
+        }
       }
     }
   },
@@ -1523,6 +1556,7 @@
           "menu": "Lieferungsmenu"
         }
       },
+
       "Production": {
         "heading": "Produktion",
         "button": {
@@ -1558,6 +1592,7 @@
           "pageDescription2": "Dies hilft ihnen die Auswahl zu vereinfachen und gibt den Herstellern mehr Informationen.",
           "filtersApplied": "Vorgaben angewendet",
           "noCategory": "keine Vorgabenkategorie geöffnet",
+          "FiterDetails": {},
           "components": {
             "Card": {
               "noFilters": "keine Vorgaben vorhanden",
@@ -1835,18 +1870,15 @@
         "button": {
           "menu": "Informationen Menu",
           "editTitle": "Prozessname bearbeiten"
-        }
-      },
-      "StatusButtons": {
-        "heading": "Todos"
-      },
-      "TitleForm": {
-        "heading": "Prozessname",
-        "describtion": "Geben Sie ihrem Prozess einen Namen. Ein Prozess ist ein Auftrag für einen Hersteller/Auftragnehmer.",
-        "name": "Prozessname",
-        "error": "Bitte geben Sie einen Namen ein",
-        "button": {
-          "save": "Name Speichern"
+        },
+        "TitleForm": {
+          "heading": "Prozessname",
+          "describtion": "Geben Sie ihrem Prozess einen Namen. Ein Prozess ist ein Auftrag für einen Hersteller/Auftragnehmer.",
+          "name": "Prozessname",
+          "error": "Bitte geben Sie einen Namen ein",
+          "button": {
+            "save": "Name Speichern"
+          }
         }
       }
     }
@@ -1924,7 +1956,7 @@
           "serviceType": "Service",
           "updatedWhen": "Aktualisiert",
           "createdWhen": "Erstellt",
-          "flatProcessStatus": "Status",
+          "actionStatus": "Status",
           "amount": "Anzahl",
           "imgPath": "Bild",
           "order": "Reihenfolge",
@@ -1964,7 +1996,8 @@
         "actions": "Aktionen"
       },
       "TableRow": {
-        "deleteConfirm": "Möchten Sie das Projekt wirklich löschen?"
+        "deleteConfirm": "Möchten Sie das Projekt wirklich löschen?",
+        "cloneConfirm": "Möchten Sie das Projekt wirklich duplizieren?"
       },
       "TitleForm": {
         "heading": "Projekt anlegen",

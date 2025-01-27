@@ -1,6 +1,5 @@
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useProcess from "@/hooks/Process/useProcess";
-import logger from "@/hooks/useLogger";
 import React, { PropsWithChildren } from "react";
 
 interface ProcessStatusGateProps {
@@ -25,15 +24,6 @@ const ProcessStatusGate: React.FC<PropsWithChildren<ProcessStatusGateProps>> = (
   const isWithinRange = (status: ProcessStatus) => {
     const isAfterStart = startExclude ? status > start! : status >= start!;
     const isBeforeEnd = endExclude ? status < end! : status <= end!;
-
-    logger(
-      "isWithinRange",
-      ProcessStatus[status],
-      start,
-      isAfterStart,
-      end,
-      isBeforeEnd
-    );
 
     if (start !== undefined && end !== undefined) {
       return isAfterStart && isBeforeEnd;

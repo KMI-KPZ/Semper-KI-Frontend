@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import useUser, { UserType } from "@/hooks/useUser";
 import logger from "@/hooks/useLogger";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface useEventsWebsocketReturnProps {
   sendMessage(message: string): void;
@@ -17,6 +18,7 @@ export const useEventsWebsocket =
     const [socket, setSocket] = useState<WebSocket | null>(null);
     const [state, setState] = useState<WebSocketState>("disconnected");
     const reconnectTimeout = useRef<NodeJS.Timeout | null>(null);
+    const queryClient = useQueryClient();
 
     useEffect(() => {
       const createWebSocket = () => {
@@ -27,6 +29,10 @@ export const useEventsWebsocket =
           ws.onopen = () => {
             setState("connected");
             logger("useEventsWebsocket | connected");
+          };
+
+          ws.onmessage = () => {
+            queryClient.invalidateQueries(["events"]);
           };
 
           ws.onerror = () => {

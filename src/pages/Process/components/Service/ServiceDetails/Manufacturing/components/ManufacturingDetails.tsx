@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import ProcessConditionIcon from "@/components/Process/ConditionIcon";
 import { ManufacturingServiceProps } from "@/api/Service/Querys/useGetServices";
 import ProcessServiceModelCard from "./ModelCard";
-import ProcessStatusGate from "@/pages/Process/components/StatusGate";
+import ProcessStatusGate from "@/components/Process/StatusGate";
 import ProcessServiceMaterialCard from "./MaterialCard";
 import ProcessSericePostProcessingCard from "./PostProcessingCard";
 
@@ -141,7 +141,7 @@ const ServiceManufacturingDetails: React.FC<
         width="full"
         direction="col"
         className="p-5"
-        id="Service-ADDITIVE_MANUFACTURING-materials"
+        id="Service-ADDITIVE_MANUFACTURING-material"
       >
         <Container width="fit" className={`gap-2 rounded-md  p-0 pt-2`}>
           <ProcessConditionIcon error={material === undefined} />

@@ -268,8 +268,8 @@ export const isTypeOfProcess = (process: any): process is Process => {
     { key: "updatedWhen", type: "string" },
     { key: "accessedWhen", type: "string" },
     { key: "processErrors", type: "object" },
-    { key: "project", type: "object" },
     { key: "flatProcessStatus", type: "string" },
+    // { key: "project", type: "object" },
   ];
 
   keysToCheck.forEach(({ key, type }) => {
@@ -329,7 +329,7 @@ export const parseProcess = (process: any): Process => {
     client: process.client,
     files: objectToArray(process.files),
     messages: process.messages,
-    contractor: process.contractor,
+    contractor: process.contractor ? process.contractor : undefined,
     createdWhen: new Date(process.createdWhen),
     updatedWhen: new Date(process.updatedWhen),
     accessedWhen: new Date(process.accessedWhen),

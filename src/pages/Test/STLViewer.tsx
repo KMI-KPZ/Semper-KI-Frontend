@@ -51,18 +51,22 @@ const DynamicAxes = ({ size }) => {
 };
 
 // STL Model Component
-const STLModel = ({ file, setModelSize }) => {
-  const geometry = useLoader(STLLoader, file);
+const STLModel = (props: {
+  file: string;
+  setModelSize: (size: THREE.Vector3) => void;
+}) => {
+  const geometry = useLoader(STLLoader, props.file);
 
   // Center the geometry and align it to the origin
   geometry.computeBoundingBox();
-  if (geometry.boundingBox) {
-    const size = geometry.boundingBox.getSize(new THREE.Vector3());
-    const min = geometry.boundingBox.min;
+  const size = geometry.boundingBox?.getSize(new THREE.Vector3());
+  const min = geometry.boundingBox?.min;
 
+  if (min) {
     geometry.translate(-min.x, -min.y, -min.z); // Align minimum point to origin
-    setModelSize(size); // Pass size to parent
   }
+
+  if (size) props.setModelSize(size); // Pass size to parent for axes adjustment
 
   return (
     <mesh geometry={geometry} scale={[1, 1, 1]}>

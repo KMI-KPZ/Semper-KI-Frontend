@@ -1193,7 +1193,7 @@
         "groups": "Groups",
         "quantity": "Number",
         "models": "Models",
-        "contractor": "contractor",
+        "contractor": "Contractor",
         "noContractor": "No contractor selected",
         "material": "material",
         "postProcessings": "Post-processing",

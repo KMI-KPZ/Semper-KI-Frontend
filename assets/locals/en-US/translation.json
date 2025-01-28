@@ -1709,7 +1709,7 @@
               "selected": "Selected models",
               "available": "Available models",
               "error": {
-                "noModels": "no models found"
+                "noModels": "No models found"
               },
               "components": {
                 "Card": {

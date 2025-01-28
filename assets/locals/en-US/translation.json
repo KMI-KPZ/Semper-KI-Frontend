@@ -1782,7 +1782,7 @@
               "heading": "Available post -processing",
               "selected": "Selected post -processing",
               "error": {
-                "noPostProcessings": "no post-processing found"
+                "noPostProcessings": "No post-processing found"
               },
               "components": {
                 "Card": {

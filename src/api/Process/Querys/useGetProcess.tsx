@@ -32,6 +32,7 @@ export interface ProcessDetailsProps {
 export type ProcessError = {
   key: ProcessErrorType;
   groupID?: number;
+  processID?: string;
 };
 
 export type ProcessErrorType =
@@ -41,7 +42,8 @@ export type ProcessErrorType =
   | "Process-Contractor"
   | "Process-Address-Billing"
   | "Process-Address-Deliver"
-  | "Process-ServiceType";
+  | "Process-ServiceType"
+  | "Process-Dependency";
 
 export type Process = NoServiceProcessProps | DefinedProcess;
 
@@ -63,8 +65,8 @@ export type DefaultProcessProps = {
   accessedWhen: Date;
   files: ProcessFile[];
   messages: { [key: string]: ChatMessageProps[] };
-  dependenciesIn: any[];
-  dependenciesOut: any[];
+  dependenciesIn: string[];
+  dependenciesOut: string[];
   actionStatus: ProcessActionStatus;
   project: {
     projectID: string;
@@ -179,6 +181,8 @@ export interface ProcessChangesProps {
   files?: File[];
   processDetails?: UpdateProcessDetailsProps;
   serviceDetails?: GerneralUpdateServiceProps;
+  dependenciesIn?: string[];
+  dependenciesOut?: string[];
 }
 
 export interface UpdateProcessDetailsProps {
@@ -192,6 +196,8 @@ export interface UpdateProcessDetailsProps {
 
 export interface ProcessDeletionsProps {
   processDetails?: "";
+  dependenciesIn?: string[];
+  dependenciesOut?: string[];
   serviceDetails?: {
     groups?: {
       groupID?: number;
@@ -277,6 +283,8 @@ export const isTypeOfProcess = (process: any): process is Process => {
       logger(
         "error",
         `isTypeOfProcess | process is not of type Process | Key: ${key}`,
+        typeof process[key],
+        process[key],
         process
       );
       return false;

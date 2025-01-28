@@ -14,19 +14,22 @@ export interface UpdateProcessProps {
 }
 
 export type UpdateProcessMutationProps = {
+  projectID?: string;
   updates: UpdateProcessProps;
 } & MultipleProcessMutationProps;
 
 const useUpdateProcess = () => {
   const queryClient = useQueryClient();
-  const { projectID } = useParams();
+  const { projectID: paramProjectID } = useParams();
   const updateProcess = async ({
     processIDs,
+    projectID: customProjectID,
     updates,
   }: UpdateProcessMutationProps) =>
     authorizedCustomAxios
       .patch(`${process.env.VITE_HTTP_API_URL}/public/process/update/`, {
-        projectID,
+        projectID:
+          customProjectID !== undefined ? customProjectID : paramProjectID,
         processIDs,
         changes: updates.changes,
         deletions: updates.deletions,
@@ -41,8 +44,13 @@ const useUpdateProcess = () => {
 
   return useMutation<string, Error, UpdateProcessMutationProps>({
     mutationFn: updateProcess,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["project", projectID]);
+    onSuccess(_, variables) {
+      queryClient.invalidateQueries([
+        "project",
+        variables.projectID !== undefined
+          ? variables.projectID
+          : paramProjectID,
+      ]);
       queryClient.invalidateQueries(["dashboardProject"]);
     },
   });

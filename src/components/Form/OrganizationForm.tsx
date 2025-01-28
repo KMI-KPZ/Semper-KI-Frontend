@@ -210,6 +210,8 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
               hashedID: organization.hashedID,
               name: organization.name,
               prices: { groupCosts: [[333, 666]] },
+              contractorCoordinates: [0, 0],
+              distance: 0,
             }}
           />
         </Container>

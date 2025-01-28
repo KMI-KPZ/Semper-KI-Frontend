@@ -1649,16 +1649,16 @@
               },
               "GroupOverview": {
                 "heading": "Group overview",
-                "noModel": "no model",
-                "noMaterial": "no material",
-                "noPostProcessing": "no post-processing",
+                "noModel": "No model",
+                "noMaterial": "No material",
+                "noPostProcessing": "No post-processing",
                 "nextGroup": "Next group",
                 "previousGroup": "Previous group",
                 "item": "group {{name}} open",
                 "model": "Model (E)",
-                "material": "material",
+                "material": "Material",
                 "postProcessing": "Post-processing(s)",
-                "newGroup": "new group"
+                "newGroup": "New group"
               },
               "ModelCard": {
                 "img": "Fashion picture",

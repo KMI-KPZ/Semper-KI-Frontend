@@ -2101,6 +2101,9 @@
         "printers": "3D-Drucker",
         "postProcessings": "Nachbearbeitung",
         "costing": "Kosten",
+        "characterisation": "Verifizierung",
+        "maturity": "Reifegrad",
+        "resilience": "Resilienz",
         "request": "Datenerweiterung",
         "graph": "Graph",
         "privat-graph": "Private Graph"
@@ -2115,6 +2118,9 @@
           "variant": "Variante erstellen"
         }
       }
+    },
+    "Characterisation": {
+      "header": "Verifizierung von Drucker mit Materialien per Charakterisierungsbauteils"
     },
     "Costing": {
       "heading": "Kosten",
@@ -2133,6 +2139,9 @@
       "button": {
         "createOwn": "Material Anlegen"
       }
+    },
+    "Maturity": {
+      "header": "Reifegrad"
     },
     "Overview": {
       "header": "Übersicht",
@@ -2157,7 +2166,8 @@
       "header": "Anfragen zu Datenerweiterung",
       "noItems": "keine Anfragen vorhanden",
       "button": { "new": "neue Anfrage" }
-    }
+    },
+    "Resilience": { "header": "Resilienz-Wert" }
   },
   "Test": {
     "UITest": {

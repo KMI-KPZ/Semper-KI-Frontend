@@ -25,11 +25,15 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
   } = props;
   const { t } = useTranslation();
 
-  const contractorCoordinates = contractor.contractorCoordinates;
+  const contractorCoordinates: [number, number] =
+    contractor.contractorCoordinates !== undefined
+      ? contractor.contractorCoordinates
+      : [0, 0];
   const clientCoordinates: [number, number] =
     process !== undefined &&
     process.processDetails.clientBillingAddress !== undefined &&
-    process.processDetails.clientBillingAddress?.coordinates.length === 2
+    process.processDetails.clientBillingAddress.coordinates !== undefined &&
+    process.processDetails.clientBillingAddress.coordinates.length === 2
       ? process.processDetails.clientBillingAddress.coordinates
       : [0, 0];
 

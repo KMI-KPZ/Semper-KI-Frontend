@@ -36,6 +36,18 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = (props) => {
       title: t("Resources.components.Menu.costing"),
       to: "/resources/costing",
     },
+    {
+      title: t("Resources.components.Menu.characterisation"),
+      to: "/resources/characterisation",
+    },
+    {
+      title: t("Resources.components.Menu.maturity"),
+      to: "/resources/maturity",
+    },
+    {
+      title: t("Resources.components.Menu.resilience"),
+      to: "/resources/resilience",
+    },
     // {
     //   title: t("Resources.components.Menu.request"),
     //   to: "/resources/request",

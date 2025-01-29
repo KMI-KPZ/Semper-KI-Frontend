@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Heading, Text } from "@component-library/index";
+import { Button, Container, Heading } from "@component-library/index";
 import ProcessFileRow from "./ProcessFileRow";
 import DownloadIcon from "@mui/icons-material/Download";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
@@ -82,8 +82,8 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
           .length === 0))
   )
     return (
-      <Container className="rounded-md border-2 p-5">
-        <Text>{noFilesMessage}</Text>
+      <Container width="full" className="rounded-md border-2 p-5">
+        <Heading variant="h3">{noFilesMessage}</Heading>
       </Container>
     );
   return (

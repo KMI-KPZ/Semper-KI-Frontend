@@ -2,7 +2,7 @@ import ProcessContainer from "@/components/Process/Container/Container";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import { Button, Container, Text } from "@component-library/index";
+import { Container, Text } from "@component-library/index";
 import useAuthorizedUser from "@/hooks/useAuthorizedUser";
 import useProcess from "@/hooks/Process/useProcess";
 import CheckIcon from "@mui/icons-material/Check";
@@ -17,7 +17,6 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
   const { t } = useTranslation();
   const { user } = useAuthorizedUser();
   const { process } = useProcess();
-  const [showFiles, setShowFiles] = React.useState<boolean>(false);
 
   const isClient =
     (user.hashedID === process.client && user.usertype === UserType.USER) ||
@@ -51,10 +50,6 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
   const menuButtonTitle = t("Process.components.Request.button.menu");
   const pageTitle = `${t("Process.components.Request.heading")}: ${getTitle()}`;
 
-  const handleOnButtonClickFile = () => {
-    setShowFiles((prevState) => !prevState);
-  };
-
   return (
     <ProcessContainer
       id="Request"
@@ -73,20 +68,11 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
         <Text variant="strong">{getText()}</Text>
       </Container>
 
-      {showFiles ? (
-        <ProcessFileView
-          origin="Request"
-          endStatus={ProcessStatus.REQUEST_COMPLETED}
-        />
-      ) : null}
-      <Button
-        size="sm"
-        title={t(
-          showFiles
-            ? "Process.components.Request.button.hideFiles"
-            : "Process.components.Request.button.showFiles"
-        )}
-        onClick={handleOnButtonClickFile}
+      <ProcessFileView
+        origin="Request"
+        endStatus={ProcessStatus.REQUEST_COMPLETED}
+        collapsed
+        collapsible
       />
     </ProcessContainer>
   );

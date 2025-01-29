@@ -132,9 +132,11 @@ export type ProcessOrigin =
   | "Request"
   | "Clarification"
   | "Contract"
+  | "ContractFiles"
   | "Confirmation"
   | "Production"
   | "Delivery"
+  | "Recipe"
   | "Completed";
 
 export type DefaultProcessFile = {

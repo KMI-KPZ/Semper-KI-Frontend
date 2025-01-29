@@ -316,6 +316,20 @@
       "test": "Test",
       "roleChanged": "Rolle Geändert",
       "userDeleted": "Benutzer Gelöscht"
+    },
+    "ProcessOrigin": {
+      "Service": "Service",
+      "Contractor": "Auftragnehmer",
+      "Verification": "Überprüfung",
+      "Request": "Anfrage",
+      "Clarification": "Rückfragen",
+      "Contract": "Vertrag",
+      "ContractFiles": "Vertragsdateien",
+      "Confirmation": "Bestätigung",
+      "Production": "Produktion",
+      "Delivery": "Lieferung",
+      "Recipe": "Rechnung",
+      "Completed": "Abgeschlossen"
     }
   },
   "general": {
@@ -628,6 +642,7 @@
             "userFilesTitle": "Dateien zum Angebot",
             "uploadFilesTitle": "Dateien hochladen",
             "currentFilesTitle": "Aktuelle Dateien",
+            "origin": "Ursprung",
             "button": {
               "upload": "Dateien Hochladen",
               "downloadAll": "Alle Dateien Herunterladen"
@@ -1526,6 +1541,14 @@
         "heading": "Angebot",
         "button": {
           "menu": "Angebotsmenu"
+        },
+        "ContractUpload": {
+          "heading": "Vertrag hochladen",
+          "uploadedContracts": "Hochladene Verträge",
+          "noUploadedContracts": "Keine Verträge hochgeladen",
+          "button": {
+            "upload": "Vertrag hochladen"
+          }
         }
       },
       "ContractorSelection": {
@@ -1576,9 +1599,16 @@
         "heading": "Lieferung",
         "button": {
           "menu": "Lieferungsmenu"
+        },
+        "DeliveryUpload": {
+          "heading": "Rechnung hochladen",
+          "uploadedRecipes": "Hochladene Rechnung",
+          "noUploadedRecipes": "Keine Rechnung hochgeladen",
+          "button": {
+            "upload": "Rechnung hochladen"
+          }
         }
       },
-
       "Production": {
         "heading": "Produktion",
         "button": {

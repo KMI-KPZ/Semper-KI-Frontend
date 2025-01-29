@@ -343,6 +343,10 @@
     "total": "Gesamt",
     "min": "Min",
     "max": "Max",
+    "contractor": "Auftragnehmer",
+    "client": "Auftraggeber",
+    "manufacturer": "Hersteller",
+    "you": "Sie",
     "button": {
       "clone": "Duplizieren",
       "select": "Auswählen",

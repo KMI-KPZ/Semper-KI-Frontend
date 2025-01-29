@@ -52,7 +52,8 @@ const AddressForm: React.FC<AddressFormProps> = (props) => {
     formState: { errors },
   } = useForm<NewUserAddressProps>({
     resolver: yupResolver(schema),
-    defaultValues: initialAddress !== undefined ? initialAddress : undefined,
+    defaultValues:
+      initialAddress !== undefined ? { ...initialAddress } : undefined,
   });
 
   const updateAddress = (data: NewUserAddressProps) => {

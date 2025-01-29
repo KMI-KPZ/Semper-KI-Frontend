@@ -1539,7 +1539,8 @@
           "menu": "Hersteller Menu",
           "selectAddress": "Adresse auswählen",
           "select": "Auftragnehmer auswählen",
-          "edit": "Auftragnehmer bearbeiten"
+          "edit": "Auftragnehmer bearbeiten",
+          "costOverview": "Ihre Kostenaufstellung"
         },
         "components": {
           "AddressCard": {
@@ -1565,6 +1566,9 @@
             "heading": "Auftragnehmerauswahl",
             "contractors": "Auftragnehmer sortiert nach ihren Prioritäten",
             "noContractorFound": "Kein Auftragnehmer gefunden"
+          },
+          "Costs": {
+            "heading": "Kostenaufstellung"
           }
         }
       },

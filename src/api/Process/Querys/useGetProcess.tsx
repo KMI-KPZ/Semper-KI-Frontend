@@ -27,6 +27,12 @@ export interface ProcessDetailsProps {
   clientDeliverAddress?: UserAddressProps;
   amount: number;
   priorities: OrganizationPriority[];
+  prices?: ProcessPrices;
+}
+
+export interface ProcessPrices {
+  details?: any;
+  groupCosts: [number, number][];
 }
 
 export type ProcessError = {
@@ -331,6 +337,9 @@ export const parseProcess = (process: any): Process => {
       priorities: parseOrganizationPrioritise(
         process.processDetails.priorities
       ),
+      prices: process.processDetails.prices
+        ? process.processDetails.prices
+        : undefined,
     },
     dependenciesIn: process.dependenciesIn,
     dependenciesOut: process.dependenciesOut,

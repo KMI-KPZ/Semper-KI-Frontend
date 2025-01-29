@@ -65,6 +65,7 @@ export const parseAuthorizedUser = (userData: any): AuthorizedUser => {
     updatedWhen: new Date(userData.updatedWhen),
     lastSeen: new Date(userData.lastSeen),
     usertype: getAuthorizedUserType(userData.usertype),
+    coordinates: userData.coordinates,
   } as AuthorizedUser;
 };
 

@@ -1,10 +1,11 @@
 import React, { useMemo } from "react";
-import { Container } from "@component-library/index";
+import { Container, Text } from "@component-library/index";
 import { Process } from "@/api/Process/Querys/useGetProcess";
 import { ContractorProps } from "@/api/Process/Querys/useGetContractors";
 import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import ContractorMap from "./ContractorMap";
 
 interface ContractorCardProps {
   contractor: ContractorProps;
@@ -15,8 +16,22 @@ interface ContractorCardProps {
 }
 
 const ContractorCard: React.FC<ContractorCardProps> = (props) => {
-  const { contractor, selected, selectContractor, className = "" } = props;
+  const {
+    contractor,
+    selected,
+    process,
+    selectContractor,
+    className = "",
+  } = props;
   const { t } = useTranslation();
+
+  const contractorCoordinates = contractor.contractorCoordinates;
+  const clientCoordinates: [number, number] =
+    process !== undefined &&
+    process.processDetails.clientBillingAddress !== undefined &&
+    process.processDetails.clientBillingAddress?.coordinates.length === 2
+      ? process.processDetails.clientBillingAddress.coordinates
+      : [0, 0];
 
   const usePriceSums = (
     prices: [number, number][]
@@ -58,7 +73,7 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
       )}
     >
       {selected ? (
-        <div className="absolute bottom-2 right-2 h-fit w-fit rounded-full ">
+        <div className="absolute bottom-2 right-2 z-[2000000] h-fit w-fit rounded-full ">
           <CheckCircleOutlineIcon
             style={{
               color: "green",
@@ -127,6 +142,24 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
           </tbody>
         </table>
       </Container>
+      {process !== undefined ? (
+        <Container direction="col">
+          <Text>
+            {t("components.Process.ContractorCard.distance", {
+              distance: contractor.distance,
+            })}
+          </Text>
+          {clientCoordinates[0] !== 0 &&
+          clientCoordinates[1] !== 0 &&
+          contractorCoordinates[0] !== 0 &&
+          contractorCoordinates[1] !== 0 ? (
+            <ContractorMap
+              clientCoordinates={clientCoordinates}
+              contractorCoordinates={contractorCoordinates}
+            />
+          ) : null}
+        </Container>
+      ) : null}
     </Container>
   );
 };

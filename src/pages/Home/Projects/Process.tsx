@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Text } from "@component-library/index";
+import { Button, Container, Modal, Text } from "@component-library/index";
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import TestIMG from "@images/Test.png";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
@@ -9,6 +9,7 @@ import { DashboardProject } from "@/api/Project/Querys/useGetDashboardProject";
 import useCloneProcess from "@/api/Process/Mutations/useCloneProcess";
 import logger from "@/hooks/useLogger";
 import ActionStatusCard from "@/components/Process/ActionStatusCard";
+import DependenciesForm from "@/components/Form/DependenciesForm";
 
 interface HomeProcessProps {
   project: DashboardProject;
@@ -21,6 +22,8 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
   const { t } = useTranslation();
   const deleteProcess = useDeleteProcess();
   const cloneProcess = useCloneProcess();
+  const [addDependencieOpen, setAddDependencieOpen] =
+    React.useState<boolean>(false);
 
   const handleOnClickButtonDelete = (processID: string) => {
     if (window.confirm(t("Home.Projects.Process.deleteConfirm"))) {
@@ -35,6 +38,10 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
           processIDs: [process.processID],
         })
       : logger("clone canceled");
+  };
+
+  const handleOnClickButtonAddDependencie = () => {
+    setAddDependencieOpen(true);
   };
 
   const showDeleteButton = (): boolean =>
@@ -52,8 +59,27 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
       width="full"
       direction="col"
       justify="start"
-      className="m-0 px-5 py-2"
+      className="m-0 gap-0 px-5 py-2"
     >
+      <Container width="full" direction="row">
+        {process.dependenciesIn.length > 0 ? (
+          <Container className="rounded-md border-2 p-2 " align="start">
+            <Text>{t("Home.Projects.Process.dependenciesInHeading")}</Text>
+            <Container direction="col" className="gap-2" align="start">
+              {process.dependenciesIn.map((dep, index) => (
+                <Text key={index}>
+                  •{" "}
+                  {
+                    project.processes.find(
+                      (_process) => _process.processID === dep
+                    )?.processDetails.title
+                  }
+                </Text>
+              ))}
+            </Container>
+          </Container>
+        ) : null}
+      </Container>
       <Container
         width="full"
         direction="row"
@@ -111,7 +137,6 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
                   : process.contractor.name}
               </td>
             </tr>
-
             {process.serviceType === ServiceType.ADDITIVE_MANUFACTURING ? (
               <tr>
                 <th className="text-left">
@@ -332,16 +357,51 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
             />
           ) : null}
           {owner ? (
-            <Button
-              title={t("Home.Projects.Process.button.clone")}
-              size="sm"
-              width="fit"
-              variant="text"
-              onClick={() => handleOnClickButtonClone()}
-            />
+            <>
+              <Button
+                title={t("Home.Projects.Process.button.clone")}
+                size="sm"
+                width="fit"
+                variant="text"
+                onClick={() => handleOnClickButtonClone()}
+              />
+              <Button
+                title={t("Home.Projects.Process.button.addDependencie")}
+                size="sm"
+                width="fit"
+                variant="text"
+                onClick={() => handleOnClickButtonAddDependencie()}
+              />
+            </>
           ) : null}
         </Container>
       </Container>
+      <Container width="full" direction="row">
+        {process.dependenciesOut.length > 0 ? (
+          <Container className="rounded-md border-2 p-2 " align="start">
+            <Text>{t("Home.Projects.Process.dependenciesOutHeading")}</Text>
+            <Container direction="col" className="gap-2" align="start">
+              {process.dependenciesOut.map((dep, index) => (
+                <Text key={index}>
+                  •{" "}
+                  {
+                    project.processes.find(
+                      (_process) => _process.processID === dep
+                    )?.processDetails.title
+                  }
+                </Text>
+              ))}
+            </Container>
+          </Container>
+        ) : null}
+      </Container>
+      <Modal
+        open={addDependencieOpen}
+        closeModal={() => setAddDependencieOpen(false)}
+        modalKey="addDependencie"
+      >
+        <DependenciesForm process={process} project={project} />
+      </Modal>
     </Container>
   );
 };

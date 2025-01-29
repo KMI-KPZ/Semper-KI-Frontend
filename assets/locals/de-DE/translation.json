@@ -26,19 +26,19 @@
       "upload": "Modell hochladen",
       "material": "Material",
       "postprocessing": "Nachbearbeitung",
-      "cart": "Warenkorb",
+      "cart": "Warenkorb @needed?",
       "manufacturer": "Hersteller",
       "checkout": "Kasse",
-      "guide": "Wegweiser",
+      "guide": "Wegweiser @needed?",
       "order": "Auftragsdetails",
       "orders": "Meine Aufträge",
       "account": "Profil",
       "test": "Test",
       "service": "Service",
-      "use": "In Anspruch nehmen",
+      "use": "In Anspruch nehmen @needed?",
       "provide": "Service anbieten",
       "portfolio": "Portfolio",
-      "use-service": "Service in Anspruch nehmen",
+      "use-service": "Service in Anspruch nehmen @needed?",
       "provide-service": "Service bereitstellen",
       "continue": "Auftrag fortsetzen",
       "new-contract": "Neuer Auftrag",
@@ -47,7 +47,7 @@
       "user": "Benutzer",
       "procedure": "Verfahren",
       "printer": "Drucker",
-      "about-us": "Magazin",
+      "about-us": "Magazin @needed?",
       "login": "Anmelden",
       "register": "Registrieren",
       "logout": "Abmelden",
@@ -298,7 +298,8 @@
       "Process-Contractor": "Bitte einen Auftragnehmer auswählen",
       "Process-Address-Billing": "Bitte eine Rechnungsadresse auswählen",
       "Process-Address-Deliver": "Bitte eine Lieferadresse auswählen",
-      "Process-ServiceType": "Bitte einen Service auswählen"
+      "Process-ServiceType": "Bitte einen Service auswählen",
+      "Process-Dependency": "Prozess wartet auf andere Prozess(e)"
     },
     "EventDataReason": {
       "messages": "Nachricht",
@@ -342,6 +343,10 @@
     "total": "Gesamt",
     "min": "Min",
     "max": "Max",
+    "contractor": "Auftragnehmer",
+    "client": "Auftraggeber",
+    "manufacturer": "Hersteller",
+    "you": "Sie",
     "button": {
       "clone": "Duplizieren",
       "select": "Auswählen",
@@ -647,7 +652,8 @@
         }
       },
       "ContractorCard": {
-        "priceRange": "Preisspanne"
+        "priceRange": "Preisspanne",
+        "distance": "Entfernung: {{distance}} km"
       },
       "Menu": {
         "button": { "open": "Menu Öffnen", "close": "Menu Schließen" }
@@ -1185,8 +1191,20 @@
         "processErrors": "Todos",
         "noErrors": "Keine Interaktionen erforderlich",
         "status": "Status",
+        "addDependencie": "Abhängigkeit hinzufügen",
+        "dependenciesIn": "Eingehene Abhängigkeiten",
+        "dependenciesOut": "Ausgehende Abhängigkeiten",
+        "dependenciesInHeading": "Vorherige Prozesse:",
+        "dependenciesOutHeading": "Nachfolgende Prozesse:",
+        "dependenciesTable": {
+          "name": "Prozessname",
+          "serviceType": "Servicetyp",
+          "processStatus": "Prozessstatus",
+          "selected": "Ausgewählt"
+        },
         "button": {
-          "clone": "Prozess in neues Projekt duplizieren"
+          "clone": "Prozess in neues Projekt duplizieren",
+          "addDependencie": "Abhängigkeit hinzufügen"
         }
       }
     }

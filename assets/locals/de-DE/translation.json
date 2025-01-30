@@ -170,6 +170,12 @@
       "MEDIUM": "Mittel",
       "MEDIUM_HIGH": "Mittel-Hoch",
       "HIGH": "Hoch"
+    },
+    "CharacterisationStatus": {
+      "UNVERIFIED": "Unverifiziert",
+      "REQUESTED": "Angefragt",
+      "SEND": "Gesendet",
+      "VERIFIED": "Überprüft"
     }
   },
   "types": {
@@ -328,7 +334,7 @@
       "Confirmation": "Bestätigung",
       "Production": "Produktion",
       "Delivery": "Lieferung",
-      "Recipe": "Rechnung",
+      "PaymentFiles": "Rechnung",
       "Completed": "Abgeschlossen"
     }
   },
@@ -668,7 +674,8 @@
       },
       "ContractorCard": {
         "priceRange": "Preisspanne",
-        "distance": "Entfernung: {{distance}} km"
+        "distance": "Entfernung: {{distance}} km",
+        "noDistance": "nicht vorhanden"
       },
       "Menu": {
         "button": { "open": "Menu Öffnen", "close": "Menu Schließen" }
@@ -2120,7 +2127,20 @@
       }
     },
     "Characterisation": {
-      "header": "Verifizierung von Drucker mit Materialien per Charakterisierungsbauteils"
+      "header": "Verifizierung",
+      "describtion": "Hier können sie ihre Fähigkeiten verifizieren, indem sie ein Charakterisierungsbauteil drucken und zu unserem Partner (Frauenhofer) schicken. Sie erhalten dann eine Rückmeldung über die Qualität ihres Druckes und es wird in der Auswahl des Kunden angezeigt das sie Verfiziert sind. Die Verifizierung bezieht sich auf ein Paar von Drucker und Material.",
+      "printer": "3D-Drucker",
+      "material": "Material",
+      "verified": "Überprüfung",
+      "actions": "Aktionen",
+      "button": {
+        "verify": "Verifizieren",
+        "send": "Model abschicken",
+        "reverified": "Re-Verifizieren",
+        "downloadModel": "Modell herunterladen",
+        "downloadInstructions": "Anleitung herunterladen",
+        "downloadDetails": "Details herunterladen"
+      }
     },
     "Costing": {
       "heading": "Kosten",
@@ -2141,7 +2161,14 @@
       }
     },
     "Maturity": {
-      "header": "Reifegrad"
+      "header": "Reifegrad",
+      "describtion": "Das Reifegrad-Modell dient dazu, den Reifegrad ihres Unternehmen einzuschätzen um sie bei der Digitalisierung zu unterstützen und mit Patneren zu verbinden die ein änhliches Level haben wie sie. Voreteile auf der Plattform: genauere Kundenzuordnung und höhere Sichtbarkeit des Unternehmens",
+      "level": "Reifegrad:",
+      "noLevel": "noch nicht ermittelt",
+      "button": {
+        "calculate": "Reifegrad ermitteln",
+        "recalculate": "Reifegrad erneut ermitteln"
+      }
     },
     "Overview": {
       "header": "Übersicht",
@@ -2167,7 +2194,16 @@
       "noItems": "keine Anfragen vorhanden",
       "button": { "new": "neue Anfrage" }
     },
-    "Resilience": { "header": "Resilienz-Wert" }
+    "Resilience": {
+      "header": "Resilienz",
+      "describtion": "Der Resilienz-Wert gibt an wie gut ihr Unternehmen auf Krisen vorbereitet ist und wie schnell sie sich von Krisen erholen können.",
+      "level": "Resilienzwert:",
+      "noLevel": "noch nicht ermittelt",
+      "button": {
+        "calculate": "Resilienz ermitteln",
+        "recalculate": "Resilienz erneut ermitteln"
+      }
+    }
   },
   "Test": {
     "UITest": {

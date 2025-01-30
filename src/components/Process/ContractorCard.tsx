@@ -150,7 +150,10 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
         <Container direction="col">
           <Text>
             {t("components.Process.ContractorCard.distance", {
-              distance: contractor.distance,
+              distance:
+                contractor.distance === -1
+                  ? t("components.Process.ContractorCard.noDistance")
+                  : contractor.distance,
             })}
           </Text>
           {clientCoordinates[0] !== 0 &&

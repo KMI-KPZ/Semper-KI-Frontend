@@ -33,7 +33,7 @@ const DeliveryUpload: React.FC<DeliveryUploadProps> = (props) => {
   return (
     <Container width="full" direction="col">
       <ProcessFileTable
-        origin={"Recipe"}
+        origin={"PaymentFiles"}
         files={process.files}
         onlyFromOrigin
         type="current"
@@ -43,7 +43,7 @@ const DeliveryUpload: React.FC<DeliveryUploadProps> = (props) => {
         )}
       />
       <ProcessFileTable
-        origin={"Recipe"}
+        origin={"PaymentFiles"}
         files={files}
         type="upload"
         resetUploadFiles={resetUploadFiles}
@@ -55,7 +55,7 @@ const DeliveryUpload: React.FC<DeliveryUploadProps> = (props) => {
           icon={<UploadFileIcon style={{ height: "60px", width: "60px" }} />}
           addFiles={addFiles}
           title={t("Process.components.Delivery.DeliveryUpload.heading")}
-          fileTypes={[".pdf"]}
+          fileTypes={[".pdf", ".xml"]}
         />
       </OwnerGate>
     </Container>

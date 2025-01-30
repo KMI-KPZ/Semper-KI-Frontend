@@ -136,7 +136,7 @@ export type ProcessOrigin =
   | "Confirmation"
   | "Production"
   | "Delivery"
-  | "Recipe"
+  | "PaymentFiles"
   | "Completed";
 
 export type DefaultProcessFile = {

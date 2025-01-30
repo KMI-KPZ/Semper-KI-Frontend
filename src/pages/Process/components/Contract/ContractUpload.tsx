@@ -57,7 +57,7 @@ const ContractUpload: React.FC<ContractUploadProps> = (props) => {
           icon={<UploadFileIcon style={{ height: "60px", width: "60px" }} />}
           addFiles={addFiles}
           title={t("Process.components.Contract.ContractUpload.heading")}
-          fileTypes={[".pdf"]}
+          fileTypes={[".pdf", ".xml"]}
         />
       </OwnerGate>
     </Container>

@@ -27,7 +27,7 @@ const ModelPreview = ({ file, className, modelName }: ModelPreviewProps) => {
               const model = viewer.GetModel();
               const box = OV.GetBoundingBox(model); // Calculate bounding box
               setBoundingBox(box);
-              console.log("Bounding Box:", box);
+              // console.log("Bounding Box:", box);
             }
           },
         });
@@ -72,9 +72,9 @@ const ModelPreview = ({ file, className, modelName }: ModelPreviewProps) => {
         }}
       >
         <h4>Size</h4>
-        <p>X: {sizeX.toFixed(2)}</p>
-        <p>Y: {sizeY.toFixed(2)}</p>
-        <p>Z: {sizeZ.toFixed(2)}</p>
+        <p>X: {sizeX.toFixed(2)} mm</p>
+        <p>Y: {sizeY.toFixed(2)} mm</p>
+        <p>Z: {sizeZ.toFixed(2)} mm</p>
       </div>
     );
   };

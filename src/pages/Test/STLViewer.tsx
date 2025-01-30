@@ -52,7 +52,7 @@ const ModelPreview = ({ file, className, modelName }: ModelPreviewProps) => {
   }, [file, modelName]);
 
   // Render Axis Overlay using the bounding box
-  const renderAxes = () => {
+  const showSizes = () => {
     if (!boundingBox) return null;
 
     const sizeX = boundingBox.max.x - boundingBox.min.x;
@@ -88,7 +88,7 @@ const ModelPreview = ({ file, className, modelName }: ModelPreviewProps) => {
         height: "100%",
       }}
     >
-      {boundingBox && renderAxes()} {/* Render axes if bounding box is available */}
+      {boundingBox && showSizes()} {/* Render axes if bounding box is available */}
       <div
         ref={viewerRef}
         style={{

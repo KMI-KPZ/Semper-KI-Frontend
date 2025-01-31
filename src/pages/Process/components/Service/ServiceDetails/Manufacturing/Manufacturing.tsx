@@ -8,6 +8,7 @@ import ProcessFilter from "../../Filter/Filter";
 import ServiceManufacturingGroupOverview from "./components/GroupOverview";
 import ServiceManufacturingDetails from "./components/ManufacturingDetails";
 import ProcessStatusGate from "../../../../../../components/Process/StatusGate";
+import ServiceManufacturingFreeText from "./components/FreeText";
 
 interface ServiceManufacturingViewProps {
   process: ManufactoringProcessProps;
@@ -48,6 +49,10 @@ const ServiceManufacturingView: React.FC<ServiceManufacturingViewProps> = (
         process={process}
         activeGroup={activeGroup}
         changeActiveGroup={setActiveGroup}
+      />
+      <ServiceManufacturingFreeText
+        activeGroup={activeGroup}
+        process={process}
       />
       <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
         <ProcessFilter />

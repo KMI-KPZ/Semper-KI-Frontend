@@ -56,6 +56,7 @@ export type ManufacturingServiceProps = {
   material: MaterialProps | undefined;
   postProcessings: PostProcessingProps[];
   manufacturerID?: string;
+  context?: string;
   calculations?: CheckModel[];
 };
 
@@ -66,6 +67,7 @@ export type UpdateServiceManufacturingProps = {
     material?: MaterialProps | undefined;
     postProcessings?: PostProcessingProps[];
     manufacturerID?: string;
+    context?: string;
   }[];
 };
 

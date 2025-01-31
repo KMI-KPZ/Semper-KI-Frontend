@@ -7,6 +7,7 @@ interface useCreateVerificationProps {
   printerID: string;
   materialID: string;
   status: CharacterisationStatus;
+  details?: any;
 }
 
 const useCreateVerification = () => {

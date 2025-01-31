@@ -1720,6 +1720,10 @@
                 "type": "Typ:",
                 "properties": "Eigenschaften:"
               },
+              "FreeText": {
+                "heading": "Kommentar/Freitext Feld für zusätzliche Informationen",
+                "placeholder": "Hier können Sie zusätzliche Informationen für den Hersteller hinterlassen..."
+              },
               "button": {
                 "noModel": "Kein Modell? geben sie hier ihre Anforderungen ein",
                 "addMore": "Weitere hinzufügen",

@@ -44,7 +44,7 @@ export interface FilterQuestionProps {
 
 export interface FilterSelectionValue {
   name: string;
-  id: string;
+  id?: string;
 }
 
 export interface FilterAnswerProps {

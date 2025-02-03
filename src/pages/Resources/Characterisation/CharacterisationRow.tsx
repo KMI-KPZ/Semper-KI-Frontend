@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container } from "@component-library/index";
+import { Button, Container, Text } from "@component-library/index";
 
 import useCreateVerification from "@/api/Resources/Organization/Mutations/useCreateVerification";
 import useUpdateVerification from "@/api/Resources/Organization/Mutations/useUpdateVerification";
@@ -10,6 +10,8 @@ import {
 } from "@/api/Resources/Organization/Querys/useGetVerification";
 import logger from "@/hooks/useLogger";
 import useDeleteVerification from "@/api/Resources/Organization/Mutations/useDeleteVerification";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import { Tooltip } from "@mui/material";
 
 interface CharacterisationRowProps {
   index: number;
@@ -41,10 +43,6 @@ const CharacterisationRow: React.FC<CharacterisationRowProps> = (props) => {
         });
         break;
       case CharacterisationStatus.VERIFIED:
-        deleteVerification.mutate({
-          materialID: item.material.nodeID,
-          printerID: item.printer.nodeID,
-        });
         break;
     }
   };
@@ -58,17 +56,45 @@ const CharacterisationRow: React.FC<CharacterisationRowProps> = (props) => {
       case CharacterisationStatus.UNVERIFIED:
         return t("Resources.Characterisation.button.verify");
       case CharacterisationStatus.REQUESTED:
-      case CharacterisationStatus.SEND:
         return t("Resources.Characterisation.button.send");
       case CharacterisationStatus.VERIFIED:
         return t("general.button.delete");
+      case CharacterisationStatus.SEND:
+        return t("general.button.waiting");
     }
+  };
+
+  const handleOnButtonClickDelete = () => {
+    deleteVerification.mutate({
+      materialID: item.material.nodeID,
+      printerID: item.printer.nodeID,
+    });
   };
 
   return (
     <tr key={index}>
-      <td className="text-center">{item.printer.name}</td>
-      <td className="text-center">{item.material.name}</td>
+      <td className="text-center">
+        <Container width="full" className="gap-1">
+          <Text>{item.printer.name}</Text>
+          <Tooltip
+            title={item.printer.nodeID}
+            className="flex items-center justify-center"
+          >
+            <HelpOutlineIcon />
+          </Tooltip>
+        </Container>
+      </td>
+      <td className="text-center">
+        <Container width="full" className="gap-1">
+          <Text>{item.material.name}</Text>
+          <Tooltip
+            title={item.material.nodeID}
+            className="flex items-center justify-center"
+          >
+            <HelpOutlineIcon />
+          </Tooltip>
+        </Container>
+      </td>
       <td className="text-center">
         {t(
           `enum.CharacterisationStatus.${
@@ -79,11 +105,18 @@ const CharacterisationRow: React.FC<CharacterisationRowProps> = (props) => {
         )}
       </td>
       <td className="text-center">
-        <Container width="full" direction="row" justify="center">
+        <Container
+          width="full"
+          direction="col"
+          justify="center"
+          className="gap-2"
+        >
           <Button
             title={getButtonTitle()}
             variant="primary"
-            size="sm"
+            active={item.status !== CharacterisationStatus.SEND}
+            size="xs"
+            width="full"
             onClick={handleOnClickButton}
           />
           {item.status === CharacterisationStatus.REQUESTED ? (
@@ -92,15 +125,17 @@ const CharacterisationRow: React.FC<CharacterisationRowProps> = (props) => {
                 title={t(
                   "Resources.Characterisation.button.downloadInstructions"
                 )}
-                size="sm"
+                size="xs"
                 extern
+                width="full"
                 target="_blank"
                 to="https://kiss.fra1.cdn.digitaloceanspaces.com/kiss/Charakterisierungsbauteil/Dummy.pdf"
               />
               <Button
                 title={t("Resources.Characterisation.button.downloadModel")}
-                size="sm"
+                size="xs"
                 extern
+                width="full"
                 target="_blank"
                 to="https://kiss.fra1.cdn.digitaloceanspaces.com/kiss/Charakterisierungsbauteil/Testkoerper_Kiss_v5.stl"
               />
@@ -110,9 +145,21 @@ const CharacterisationRow: React.FC<CharacterisationRowProps> = (props) => {
             <>
               <Button
                 title={t("Resources.Characterisation.button.downloadDetails")}
-                size="sm"
+                size="xs"
+                width="full"
                 onClick={handleOnButtonClickDownloadDetails}
                 active={false}
+              />
+            </>
+          ) : null}
+          {item.status === CharacterisationStatus.VERIFIED ||
+          item.status === CharacterisationStatus.SEND ? (
+            <>
+              <Button
+                title={t("general.button.delete")}
+                size="xs"
+                width="full"
+                onClick={handleOnButtonClickDelete}
               />
             </>
           ) : null}

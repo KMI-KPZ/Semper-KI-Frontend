@@ -10,6 +10,17 @@ export interface CharacterisationItem {
   details?: any;
 }
 
+export interface CharacterisationItemFlat {
+  details: any;
+  materialID: string;
+  organizationID: string;
+  printerID: string;
+  status: CharacterisationStatus;
+  accessedWhen: string;
+  createdWhen: string;
+  updatedWhen: string;
+}
+
 export enum CharacterisationStatus {
   UNVERIFIED = 0,
   REQUESTED = 1,
@@ -24,13 +35,13 @@ const useGetVerification = () => {
         `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/verification/get/`
       )
       .then((response) => {
-        const data: CharacterisationItem[] = response.data;
+        const data: CharacterisationItemFlat[] = response.data;
 
         logger("useGetVerification | getVerification ✅ |", response);
         return data;
       });
 
-  return useQuery<CharacterisationItem[], Error>({
+  return useQuery<CharacterisationItemFlat[], Error>({
     queryKey: ["resources", "verification"],
     queryFn: getVerification,
   });

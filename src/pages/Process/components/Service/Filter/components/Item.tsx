@@ -33,7 +33,11 @@ type FilterTitleType =
   | "textarea"
   | "color"
   | "number"
-  | "multiselection";
+  | "multiselection"
+  | "tensileStrength"
+  | "density"
+  | "elongationAtBreak"
+  | "certificates";
 
 const ProcessFilterItem: React.FC<Props> = (props) => {
   const { filterItem, setFilterItem } = props;
@@ -133,6 +137,10 @@ const ProcessFilterItem: React.FC<Props> = (props) => {
       "color",
       "number",
       "multiselection",
+      "tensileStrength",
+      "density",
+      "elongationAtBreak",
+      "certificates",
     ];
     if (titles.includes(title as FilterTitleType)) {
       return t(`types.FilterCategoryType.${title as FilterTitleType}`);

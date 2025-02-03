@@ -295,7 +295,11 @@
       "textarea": "Textfeld",
       "color": "Farbe",
       "number": "Zahl",
-      "multiselection": "Mehrfachauswahl"
+      "multiselection": "Mehrfachauswahl",
+      "tensileStrength": "Zugfestigkeit",
+      "density": "Dichte",
+      "elongationAtBreak": "Bruchdehnung",
+      "certificates": "Zertifikate"
     },
     "ProcessError": {
       "Service-ADDITIVE_MANUFACTURING-models": "Bitte ein Modell auswählen/hochladen",
@@ -376,6 +380,8 @@
       "delete": "Löschen",
       "create": "Erstellen",
       "save": "Speichern",
+      "waiting": "Warten",
+      "saving": "Wird Gespeichert",
       "cancel": "Abbrechen",
       "apply": "Anwenden",
       "open": "Öffnen",
@@ -1721,7 +1727,7 @@
                 "properties": "Eigenschaften:"
               },
               "FreeText": {
-                "heading": "Kommentar/Freitext Feld für zusätzliche Informationen",
+                "heading": "Kommentar/Freitext für zusätzliche Informationen",
                 "placeholder": "Hier können Sie zusätzliche Informationen für den Hersteller hinterlassen..."
               },
               "button": {

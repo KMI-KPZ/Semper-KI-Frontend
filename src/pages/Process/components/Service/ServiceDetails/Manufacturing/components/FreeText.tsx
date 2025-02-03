@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Container, Divider, Heading } from "@component-library/index";
+import {
+  Container,
+  Divider,
+  Heading,
+  LoadingAnimation,
+  Text,
+} from "@component-library/index";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { ManufacturingServiceProps } from "@/api/Service/Querys/useGetServices";
 import { ManufactoringProcessProps } from "@/api/Process/Querys/useGetProcess";
@@ -19,6 +25,7 @@ const ServiceManufacturingFreeText: React.FC<
   const [text, setText] = useState(
     groups[activeGroup].context !== undefined ? groups[activeGroup].context : ""
   );
+  const [showSavingHint, setShowSavingHint] = useState(false);
   const updatedProcess = useUpdateProcess();
 
   useEffect(() => {
@@ -33,7 +40,15 @@ const ServiceManufacturingFreeText: React.FC<
     setText(e.target.value);
   };
 
+  const showHint = () => {
+    setShowSavingHint(true);
+    setTimeout(() => {
+      setShowSavingHint(false);
+    }, 800);
+  };
+
   const handleOnBlur = () => {
+    showHint();
     updatedProcess.mutate({
       processIDs: [process.processID],
       updates: {
@@ -70,7 +85,7 @@ const ServiceManufacturingFreeText: React.FC<
         </Heading>
       </Container>
       <Divider />
-      <Container className="p-5 pt-0" width="full" direction="col">
+      <Container className="gap-4 p-5 pt-0" width="full" direction="col">
         <textarea
           className="min-h-[100px] w-full rounded-md border-2 p-3"
           onChange={handleOnChange}
@@ -80,6 +95,12 @@ const ServiceManufacturingFreeText: React.FC<
             "Process.components.Service.ServiceDetails.components.Manufacturing.FreeText.placeholder"
           )}
         />
+        {showSavingHint ? (
+          <Container direction="row">
+            <LoadingAnimation />
+            <Text>{t("general.button.saving")}</Text>
+          </Container>
+        ) : null}
       </Container>
     </Container>
   );

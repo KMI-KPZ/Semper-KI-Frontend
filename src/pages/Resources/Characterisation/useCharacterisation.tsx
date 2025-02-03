@@ -51,8 +51,8 @@ const useCharacterisation = (
   const items = rawItems.map((item) => {
     const verificationItem = verification.data?.find(
       (vItem) =>
-        vItem.printer.nodeID === item.printer.nodeID &&
-        vItem.material.nodeID === item.material.nodeID
+        vItem.printerID === item.printer.nodeID &&
+        vItem.materialID === item.material.nodeID
     );
 
     if (verificationItem) {

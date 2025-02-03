@@ -10,8 +10,7 @@ import {
 } from "@/api/Resources/Organization/Querys/useGetVerification";
 import logger from "@/hooks/useLogger";
 import useDeleteVerification from "@/api/Resources/Organization/Mutations/useDeleteVerification";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import { Tooltip } from "@mui/material";
+import Hint from "@/components/Hint/Hint";
 
 interface CharacterisationRowProps {
   index: number;
@@ -76,23 +75,13 @@ const CharacterisationRow: React.FC<CharacterisationRowProps> = (props) => {
       <td className="text-center">
         <Container width="full" className="gap-1">
           <Text>{item.printer.name}</Text>
-          <Tooltip
-            title={item.printer.nodeID}
-            className="flex items-center justify-center"
-          >
-            <HelpOutlineIcon />
-          </Tooltip>
+          <Hint title={item.printer.nodeID} />
         </Container>
       </td>
       <td className="text-center">
         <Container width="full" className="gap-1">
           <Text>{item.material.name}</Text>
-          <Tooltip
-            title={item.material.nodeID}
-            className="flex items-center justify-center"
-          >
-            <HelpOutlineIcon />
-          </Tooltip>
+          <Hint title={item.material.nodeID} />
         </Container>
       </td>
       <td className="text-center">

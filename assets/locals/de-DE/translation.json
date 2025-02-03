@@ -67,7 +67,12 @@
       "manufacturing": "Herstellen lassen",
       "projects": "Meine Projekte",
       "project": "Projekt",
-      "dashboard": "Dashboard"
+      "dashboard": "Dashboard",
+      "additionalRequirement": "Zusätzliche Anforderungen",
+      "costing": "Kosten",
+      "characterisation": "Verifizierung",
+      "maturity": "Reifegrad",
+      "resilience": "Resilienz"
     }
   },
   "enum": {
@@ -2138,7 +2143,7 @@
     },
     "Characterisation": {
       "header": "Verifizierung",
-      "describtion": "Hier können sie ihre Fähigkeiten verifizieren, indem sie ein Charakterisierungsbauteil drucken und zu unserem Partner (Frauenhofer) schicken. Sie erhalten dann eine Rückmeldung über die Qualität ihres Druckes und es wird in der Auswahl des Kunden angezeigt das sie Verfiziert sind. Die Verifizierung bezieht sich auf ein Paar von Drucker und Material.",
+      "describtion": "Hier können sie ihre Fähigkeiten verifizieren, indem sie ein Charakterisierungsbauteil drucken und zu unserem Partner (Fraunhofer IWU) schicken. Sie erhalten dann eine Rückmeldung über die Qualität ihres Druckes und es wird in der Auswahl des Kunden angezeigt das sie Verfiziert sind. Die Verifizierung bezieht sich auf ein Paar von Drucker und Material.",
       "printer": "3D-Drucker",
       "material": "Material",
       "verified": "Überprüfung",

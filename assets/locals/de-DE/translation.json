@@ -1761,6 +1761,9 @@
               "components": {
                 "Card": {
                   "props": "Eigenschaften"
+                },
+                "Filter": {
+                  "heading": "Filter / Vorgaben"
                 }
               }
             },

@@ -11,7 +11,11 @@ const Hint: React.FC<PropsWithChildren<HintProps>> = (props) => {
 
   return (
     <Tooltip title={title} className="flex items-center justify-center">
-      {children !== undefined ? <>{children}</> : <HelpOutlineIcon />}
+      {children !== undefined ? (
+        <>{children}</>
+      ) : (
+        <HelpOutlineIcon style={{ height: "20px", width: "20px" }} />
+      )}
     </Tooltip>
   );
 };

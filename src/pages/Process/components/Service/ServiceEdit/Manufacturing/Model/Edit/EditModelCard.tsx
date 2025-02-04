@@ -79,7 +79,7 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
               groups: [
                 ...prevGroups,
                 {
-                  model: [
+                  models: [
                     {
                       ...model,
                       ...data,

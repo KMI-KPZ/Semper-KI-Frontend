@@ -338,7 +338,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
           )}
           href="#"
         >
-          <UploadIcon className="h-32 w-32" />
+          <UploadIcon className="h-20 w-20 " />
           <Heading variant="h2">
             {t(
               "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.heading"

@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import ProcessMenu from "../Menu";
-import { Container, Divider, Heading } from "@component-library/index";
+import { Container, Heading } from "@component-library/index";
 
 interface ProcessHeaderProps {
   menuButtonTitle: string;
@@ -20,7 +20,6 @@ const ProcessHeader: React.FC<PropsWithChildren<ProcessHeaderProps>> = (
       <Container width="full" justify="start">
         <Heading variant="h2">{pageTitle}</Heading>
       </Container>
-      <Divider />
     </>
   );
 };

@@ -29,8 +29,9 @@ const useGetMaterials = () => {
       });
 
   return useQuery<MaterialProps[], Error>({
-    queryKey: ["materials"],
+    queryKey: ["materials", activeFilters],
     queryFn: getMaterials,
+    enabled: !!activeFilters,
   });
 };
 

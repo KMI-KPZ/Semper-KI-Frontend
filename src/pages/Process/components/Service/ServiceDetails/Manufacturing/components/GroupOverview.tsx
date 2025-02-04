@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Divider, Heading } from "@component-library/index";
+import { Button, Container, Heading } from "@component-library/index";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { ManufacturingServiceProps } from "@/api/Service/Querys/useGetServices";
@@ -108,14 +108,14 @@ const ServiceManufacturingGroupOverview: React.FC<
       direction="col"
       justify="start"
       align="start"
-      className="rounded-md border-2 "
+      className="gap-0 rounded-md border-2"
     >
       <Container
         width="full"
         direction="col"
         justify="center"
         align="start"
-        className="p-3 pb-0"
+        className="p-3"
       >
         <Heading variant="h3">
           {t(
@@ -123,7 +123,6 @@ const ServiceManufacturingGroupOverview: React.FC<
           )}
         </Heading>
       </Container>
-      <Divider />
       <Container
         width="full"
         direction="row"

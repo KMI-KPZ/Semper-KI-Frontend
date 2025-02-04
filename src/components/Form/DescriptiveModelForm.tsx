@@ -166,7 +166,7 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
                 groups: [
                   ...prevGroups,
                   {
-                    model: [
+                    models: [
                       {
                         ...model,
                         ...data,

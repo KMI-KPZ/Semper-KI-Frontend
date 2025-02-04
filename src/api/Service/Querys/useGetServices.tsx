@@ -63,7 +63,7 @@ export type ManufacturingServiceProps = {
 export type UpdateServiceManufacturingProps = {
   groups?: {
     title?: string;
-    model?: ProcessModel[];
+    models?: ProcessModel[];
     material?: MaterialProps | undefined;
     postProcessings?: PostProcessingProps[];
     manufacturerID?: string;

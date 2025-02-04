@@ -22,7 +22,7 @@ export interface CategoryProps {
   open: boolean;
 }
 
-const generateCategoryList = (
+export const generateFilterCategoryList = (
   filterItemList: FilterItemProps[]
 ): CategoryProps[] => {
   let stringList: FilterCategoryType[] = [];
@@ -64,7 +64,7 @@ const FilterEdit: React.FC<FilterEditProps> = (props) => {
   } = useFilter();
 
   const [categoryList, setCategoryList] = useState<CategoryProps[]>(
-    generateCategoryList(editFilters)
+    generateFilterCategoryList(editFilters)
   );
 
   const setFilterItem = (newFilterItem: FilterItemProps) => {

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Container,
-  Divider,
   Heading,
   LoadingAnimation,
   Text,
@@ -68,7 +67,7 @@ const ServiceManufacturingFreeText: React.FC<
   return (
     <Container
       width="full"
-      className="rounded-md border-2"
+      className="gap-0 rounded-md border-2"
       direction="col"
       align="start"
     >
@@ -76,7 +75,7 @@ const ServiceManufacturingFreeText: React.FC<
         width="fit"
         direction="row"
         justify="start"
-        className="p-5 pb-2"
+        className="p-5 pb-1"
       >
         <Heading variant="h3">
           {t(
@@ -84,10 +83,9 @@ const ServiceManufacturingFreeText: React.FC<
           )}
         </Heading>
       </Container>
-      <Divider />
-      <Container className="gap-4 p-5 pt-0" width="full" direction="col">
+      <Container className="gap-4 p-3" width="full" direction="col">
         <textarea
-          className="min-h-[100px] w-full rounded-md border-2 p-3"
+          className="min-h-[100px] w-full rounded-md border-2 bg-gray-100 p-3 placeholder:text-black"
           onChange={handleOnChange}
           onBlur={handleOnBlur}
           value={text}

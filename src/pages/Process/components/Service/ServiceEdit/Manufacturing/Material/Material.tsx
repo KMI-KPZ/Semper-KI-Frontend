@@ -21,6 +21,7 @@ import useModal from "@/hooks/useModal";
 import useSearch from "@/hooks/useSearch";
 import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 import useDeleteMaterial from "@/api/Service/AdditiveManufacturing/Material/Mutations/useDeleteMaterial";
+import ProcessMaterialFilter from "./components/Filter";
 
 interface Props {}
 
@@ -134,6 +135,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
         className="h-full w-screen max-w-6xl gap-5 p-5 pt-14"
       >
         <Search handleSearchInputChange={handleSearchInputChange} />
+        <ProcessMaterialFilter />
         <Container direction="col" width="full">
           <Container width="full" direction="col">
             <Container direction="row" width="full" justify="between">

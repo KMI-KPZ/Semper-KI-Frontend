@@ -13,11 +13,14 @@ const useUpdateModel = () => {
   const queryClient = useQueryClient();
   const updateModel = async (props: useUpdateModelProps) =>
     authorizedCustomAxios
-      .post(`${process.env.VITE_HTTP_API_URL}/public/updateModel/`, {
-        projectID: props.projectID,
-        processID: props.processID,
-        ...props.model,
-      })
+      .post(
+        `${process.env.VITE_HTTP_API_URL}/public/service/additive-manufacturing/model/update/`,
+        {
+          projectID: props.projectID,
+          processID: props.processID,
+          ...props.model,
+        }
+      )
       .then((response) => {
         logger("useUpdateModel | updateModel ✅ |", response);
         return response.data;

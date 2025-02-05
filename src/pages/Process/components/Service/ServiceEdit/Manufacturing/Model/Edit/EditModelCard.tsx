@@ -1,5 +1,5 @@
 import { Button, Container, Heading, Text } from "@component-library/index";
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   ModelLevelOfDetail,
@@ -9,10 +9,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ManufacturingModelUploadData } from "../Upload/Upload";
-import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import { useNavigate } from "react-router-dom";
-import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
+import useUpdateModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUpdateModel";
 
 interface EditModelCardProps {
   model: ProcessModel;
@@ -21,9 +20,8 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
   const { model } = props;
   const { t } = useTranslation();
   const { process } = useManufacturingProcess();
-  const updateProcess = useUpdateProcess();
+  const updateModel = useUpdateModel();
   const navigate = useNavigate();
-  const { prevGroups, nextGroups } = useContext(ManufacturingGroupContext);
 
   const formSchema = z.object({
     modelID: z.string().optional(),
@@ -70,49 +68,32 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
   });
 
   const onSubmit = (data: ManufacturingModelUploadData) => {
-    updateProcess.mutate(
+    updateModel.mutate(
       {
-        processIDs: [process.processID],
-        updates: {
-          changes: {
-            serviceDetails: {
-              groups: [
-                ...prevGroups,
-                {
-                  models: [
-                    {
-                      ...model,
-                      ...data,
-                      certificates:
-                        data.certificates === undefined
-                          ? []
-                          : data.certificates
-                              .split(",")
-                              .map((item) => item.trim()),
-                      licenses:
-                        data.licenses === undefined
-                          ? []
-                          : data.licenses.split(",").map((item) => item.trim()),
-                      tags:
-                        data.tags === undefined
-                          ? []
-                          : data.tags.split(",").map((item) => item.trim()),
-                      quantity: data.quantity !== undefined ? data.quantity : 1,
-                      levelOfDetail:
-                        data.levelOfDetail !== undefined
-                          ? data.levelOfDetail
-                          : ModelLevelOfDetail.MEDIUM,
-                      scalingFactor:
-                        data.scalingFactor !== undefined
-                          ? data.scalingFactor
-                          : 100,
-                    },
-                  ],
-                },
-                ...nextGroups,
-              ],
-            },
-          },
+        processID: process.processID,
+        projectID: process.project.projectID,
+        model: {
+          ...model,
+          ...data,
+          certificates:
+            data.certificates === undefined
+              ? []
+              : data.certificates.split(",").map((item) => item.trim()),
+          licenses:
+            data.licenses === undefined
+              ? []
+              : data.licenses.split(",").map((item) => item.trim()),
+          tags:
+            data.tags === undefined
+              ? []
+              : data.tags.split(",").map((item) => item.trim()),
+          quantity: data.quantity !== undefined ? data.quantity : 1,
+          levelOfDetail:
+            data.levelOfDetail !== undefined
+              ? data.levelOfDetail
+              : ModelLevelOfDetail.MEDIUM,
+          scalingFactor:
+            data.scalingFactor !== undefined ? data.scalingFactor : 100,
         },
       },
       {

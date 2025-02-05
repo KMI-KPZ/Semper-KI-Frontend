@@ -19,8 +19,8 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import useModal from "@/hooks/useModal";
 import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
-import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
+import useUpdateModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUpdateModel";
 
 interface DescriptiveModelFormProps {
   model?: ProcessModel;
@@ -48,13 +48,11 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
     process: { processID },
   } = useProcess();
   const { deleteModal } = useModal();
+  const updateModel = useUpdateModel();
 
   const navigate = useNavigate();
   const uploadDescriptiveModel = useUploadDescriptiveModel();
-  const updateProcess = useUpdateProcess();
-  const { prevGroups, nextGroups, groupID } = useContext(
-    ManufacturingGroupContext
-  );
+  const { groupID } = useContext(ManufacturingGroupContext);
 
   const closeModal = () => {
     deleteModal("");
@@ -157,32 +155,18 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
         { onSuccess: closeModal }
       );
     } else {
-      updateProcess.mutate(
+      updateModel.mutate(
         {
-          processIDs: [processID],
-          updates: {
-            changes: {
-              serviceDetails: {
-                groups: [
-                  ...prevGroups,
-                  {
-                    models: [
-                      {
-                        ...model,
-                        ...data,
-                        tags:
-                          data.tags === undefined
-                            ? []
-                            : data.tags.split(",").map((item) => item.trim()),
-                        quantity:
-                          data.quantity !== undefined ? data.quantity : 1,
-                      },
-                    ],
-                  },
-                  ...nextGroups,
-                ],
-              },
-            },
+          projectID,
+          processID,
+          model: {
+            ...model,
+            ...data,
+            tags:
+              data.tags === undefined
+                ? []
+                : data.tags.split(",").map((item) => item.trim()),
+            quantity: data.quantity !== undefined ? data.quantity : 1,
           },
         },
         { onSuccess: closeModal }

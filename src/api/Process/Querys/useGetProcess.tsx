@@ -49,7 +49,9 @@ export type ProcessErrorType =
   | "Process-Address-Billing"
   | "Process-Address-Deliver"
   | "Process-ServiceType"
-  | "Process-Dependency";
+  | "Process-Dependency"
+  | "Process-ContractFiles"
+  | "Process-Payment";
 
 export type Process = NoServiceProcessProps | DefinedProcess;
 

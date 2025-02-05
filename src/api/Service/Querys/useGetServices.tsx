@@ -28,8 +28,8 @@ export enum ServiceType {
   "POST_PROCESSING",
   "PACKAGING",
   "QUALITY_CONTROL",
-  "ASSEMBLY",
   "AFTER_SALES",
+  "ASSEMBLY",
 }
 
 export type ServiceProps = DefinedServiceProps | undefined;

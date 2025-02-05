@@ -347,17 +347,17 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
             variant="primary"
             to={`/projects/${project.projectID}/${process.processID}`}
           />
-          {showDeleteButton() ? (
-            <Button
-              title={t("general.button.delete")}
-              size="sm"
-              width="fit"
-              variant="text"
-              onClick={() => handleOnClickButtonDelete(process.processID)}
-            />
-          ) : null}
           {owner ? (
             <>
+              {showDeleteButton() ? (
+                <Button
+                  title={t("general.button.delete")}
+                  size="sm"
+                  width="fit"
+                  variant="text"
+                  onClick={() => handleOnClickButtonDelete(process.processID)}
+                />
+              ) : null}
               <Button
                 title={t("Home.Projects.Process.button.clone")}
                 size="sm"

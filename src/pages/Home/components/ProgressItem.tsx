@@ -6,6 +6,7 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 interface HomeProgressItemProps {
   item: HomeProgressItemData;
+  index: number;
 }
 
 export interface HomeProgressItemData {
@@ -15,7 +16,7 @@ export interface HomeProgressItemData {
 }
 
 const HomeProgressItem: React.FC<HomeProgressItemProps> = (props) => {
-  const { item } = props;
+  const { item, index } = props;
   const navigate = useNavigate();
 
   return (
@@ -23,7 +24,7 @@ const HomeProgressItem: React.FC<HomeProgressItemProps> = (props) => {
       width="full"
       direction="row"
       onClick={() => navigate(item.link)}
-      className={`flex justify-start self-stretch rounded-md border-2 p-3 text-black duration-300 hover:scale-105  hover:cursor-pointer  md:w-[calc(50%-10px)] ${
+      className={`flex justify-start rounded-md border-2 p-3 text-black duration-300 hover:scale-105  hover:cursor-pointer  md:w-[calc(50%-10px)] ${
         item.finished ? "border-green-500" : "border-orange-500"
       }`}
     >
@@ -32,7 +33,7 @@ const HomeProgressItem: React.FC<HomeProgressItemProps> = (props) => {
       ) : (
         <HelpOutlineIcon className="text-orange-500" />
       )}
-      <Text>{item.title}</Text>
+      <Text>{index + ".  " + item.title}</Text>
     </Container>
   );
 };

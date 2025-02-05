@@ -314,7 +314,9 @@
       "Process-Address-Billing": "Bitte eine Rechnungsadresse auswählen",
       "Process-Address-Deliver": "Bitte eine Lieferadresse auswählen",
       "Process-ServiceType": "Bitte einen Service auswählen",
-      "Process-Dependency": "Prozess wartet auf andere Prozess(e)"
+      "Process-Dependency": "Prozess wartet auf andere Prozess(e)",
+      "Process-ContractFiles": "Bitte einen Vertrag hochladen",
+      "Process-Payment": "Bitte eine Rechnung hochladen"
     },
     "EventDataReason": {
       "messages": "Nachricht",
@@ -350,6 +352,7 @@
   "general": {
     "email": "E-Mail",
     "name": "Name",
+    "fileName": "Dateiname",
     "company": "Firma",
     "street": "Straße",
     "houseNumber": "Hausnummer",

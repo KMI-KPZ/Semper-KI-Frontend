@@ -4,8 +4,9 @@ import { Button, Container, Heading, Text } from "@component-library/index";
 import useOrganization from "@/hooks/useOrganization";
 import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetAllOrgaNodeNeighbors";
 import useGetOrganizationUsers from "@/api/Organization/Querys/useGetOrganizationUsers";
-import HomeProgressItem, { HomeProgressItemData } from "./ProgressItem";
+import { HomeProgressItemData } from "./ProgressItem";
 import HomeContainer from "./Container";
+import Flowchart from "./FlowChart";
 
 interface HomeOrgaAccountProgressProps {}
 
@@ -23,6 +24,28 @@ const HomeOrgaProgress: React.FC<HomeOrgaAccountProgressProps> = (props) => {
       title: t("Home.components.HomeOrgaAccountProgress.items.general"),
       finished: organization.name !== "",
       link: "organization#OrganizationInfo",
+    },
+    {
+      title: t("Home.components.HomeOrgaAccountProgress.items.branding"),
+      finished:
+        organization.details.branding !== undefined &&
+        organization.details.branding.logo_url !== undefined &&
+        organization.details.branding.logo_url !== "" &&
+        organization.details.branding.colors.page_background !== undefined &&
+        organization.details.branding.colors.page_background !== "",
+      link: "organization#OrganizationInfo",
+    },
+    {
+      title: t("Home.components.HomeOrgaAccountProgress.items.adresses"),
+      finished:
+        organization.details.addresses !== undefined &&
+        organization.details.addresses.length > 0,
+      link: "organization/#OrganizationAddress",
+    },
+    {
+      title: t("Home.components.HomeOrgaAccountProgress.items.user"),
+      finished: userQuery.data !== undefined && userQuery.data.length > 0,
+      link: "organization/#OrganizationUserTable",
     },
     {
       title: t("Home.components.HomeOrgaAccountProgress.items.services"),
@@ -55,28 +78,6 @@ const HomeOrgaProgress: React.FC<HomeOrgaAccountProgressProps> = (props) => {
         organization.details.notificationSettings.organization.length > 0,
       link: "organization#NotificationForm",
     },
-    {
-      title: t("Home.components.HomeOrgaAccountProgress.items.branding"),
-      finished:
-        organization.details.branding !== undefined &&
-        organization.details.branding.logo_url !== undefined &&
-        organization.details.branding.logo_url !== "" &&
-        organization.details.branding.colors.page_background !== undefined &&
-        organization.details.branding.colors.page_background !== "",
-      link: "organization#OrganizationInfo",
-    },
-    {
-      title: t("Home.components.HomeOrgaAccountProgress.items.adresses"),
-      finished:
-        organization.details.addresses !== undefined &&
-        organization.details.addresses.length > 0,
-      link: "organization/#OrganizationAddress",
-    },
-    {
-      title: t("Home.components.HomeOrgaAccountProgress.items.user"),
-      finished: userQuery.data !== undefined && userQuery.data.length > 0,
-      link: "organization/#OrganizationUserTable",
-    },
   ];
 
   const allFinished = items.every((item) => item.finished);
@@ -96,20 +97,13 @@ const HomeOrgaProgress: React.FC<HomeOrgaAccountProgressProps> = (props) => {
             total: items.length,
           })}
         </Text>
-        <Container
-          width="full"
-          direction="row"
-          className="max-w-4xl flex-wrap gap-3"
-        >
-          {items.map((item, index) => (
-            <HomeProgressItem key={index} item={item} />
-          ))}
-        </Container>
+        <Flowchart items={items} />
       </Container>
       <Button
         title={t("Home.components.HomeOrgaAccountProgress.button.orga")}
         size="sm"
         to="organization"
+        variant="primary"
       />
     </HomeContainer>
   );

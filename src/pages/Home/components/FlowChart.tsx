@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import "reactflow/dist/style.css";
 import { Container } from "@component-library/index";
 import HomeProgressItem from "./ProgressItem";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";

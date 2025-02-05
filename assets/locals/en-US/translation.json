@@ -265,11 +265,11 @@
       "smooth": "Smooth",
       "eModul": "E-modulus",
       "poissonRatio": "Poisson's ratio",
-      "density": "density",
+      "density": "Density",
       "printingSpeed": "Print speed",
       "acquisitionCosts": "Acquisition costs",
       "treatmentCosts": "Treatment costs",
-      "flexibility": "flexibility"
+      "flexibility": "Flexibility"
     },
     "FilterCategoryType": {
       "costs": "Cost",

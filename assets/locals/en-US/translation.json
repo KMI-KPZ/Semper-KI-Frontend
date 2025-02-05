@@ -1758,7 +1758,7 @@
                     "tags": "tags",
                     "tagsPH": "Tag1, Tag2, ...",
                     "quantity": "Number *",
-                    "levelOfDetail": "Degree of detail *",
+                    "levelOfDetail": "Level of detail *",
                     "levelOfDetailPH": "Level of detail",
                     "selectLevelOfDetail": "Select level of detail",
                     "selectLicense": "Select license",

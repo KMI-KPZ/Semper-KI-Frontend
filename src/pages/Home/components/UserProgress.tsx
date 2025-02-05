@@ -38,30 +38,40 @@ const HomeUserProgress: React.FC<HomeUserProgressProps> = (props) => {
   ];
 
   const allFinished = items.every((item) => item.finished);
+  const [showFlow, setShowMore] = React.useState(!allFinished);
 
-  if (allFinished) return null;
+  const handleOnButtonClickShow = () => {
+    setShowMore((prev) => !prev);
+  };
 
   return (
     <HomeContainer>
       <Heading variant="h2">
         {t("Home.components.HomeUserProgress.todo")}
       </Heading>
-
-      <Container width="full" direction="col">
-        <Text className="text-center text-black">
-          {t("Home.components.HomeUserProgress.progress", {
-            count: items.filter((item) => item.finished).length,
-            total: items.length,
-          })}
-        </Text>
-        <Flowchart items={items} />
+      <Text className="text-center text-black">
+        {t("Home.components.HomeUserProgress.progress", {
+          count: items.filter((item) => item.finished).length,
+          total: items.length,
+        })}
+      </Text>
+      {showFlow ? <Flowchart items={items} /> : null}
+      <Container width="full" direction="row" justify="center">
+        <Button
+          title={t("Home.components.HomeUserProgress.button.orga")}
+          size="sm"
+          variant="primary"
+        />
+        <Button
+          title={
+            showFlow === true
+              ? t("general.button.showLess")
+              : t("general.button.showMore")
+          }
+          onClick={handleOnButtonClickShow}
+          size="sm"
+        />
       </Container>
-      <Button
-        title={t("Home.components.HomeUserProgress.button.orga")}
-        size="sm"
-        to="account"
-        variant="primary"
-      />
     </HomeContainer>
   );
 };

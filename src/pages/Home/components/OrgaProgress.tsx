@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Heading, Text } from "@component-library/index";
 import useOrganization from "@/hooks/useOrganization";
@@ -81,30 +81,46 @@ const HomeOrgaProgress: React.FC<HomeOrgaAccountProgressProps> = (props) => {
   ];
 
   const allFinished = items.every((item) => item.finished);
+  const [showFlow, setShowMore] = React.useState(!allFinished);
 
-  if (getAllNodeNeighbours.isLoading || userQuery.isLoading || allFinished)
-    return null;
+  useEffect(() => {
+    if (showFlow) {
+      setShowMore(false);
+    }
+  }, [allFinished]);
+
+  const handleOnButtonClickShow = () => {
+    setShowMore((prev) => !prev);
+  };
 
   return (
     <HomeContainer>
       <Heading variant="h2">
         {t("Home.components.HomeOrgaAccountProgress.todo")}
       </Heading>
-      <Container width="full" direction="col">
-        <Text className="text-black">
-          {t("Home.components.HomeOrgaAccountProgress.progress", {
-            count: items.filter((item) => item.finished).length,
-            total: items.length,
-          })}
-        </Text>
-        <Flowchart items={items} />
+      <Text className="text-black">
+        {t("Home.components.HomeOrgaAccountProgress.progress", {
+          count: items.filter((item) => item.finished).length,
+          total: items.length,
+        })}
+      </Text>
+      {showFlow ? <Flowchart items={items} /> : null}
+      <Container width="full" direction="row" justify="center">
+        <Button
+          title={t("Home.components.HomeOrgaAccountProgress.button.orga")}
+          size="sm"
+          variant="primary"
+        />
+        <Button
+          title={
+            showFlow === true
+              ? t("general.button.showLess")
+              : t("general.button.showMore")
+          }
+          onClick={handleOnButtonClickShow}
+          size="sm"
+        />
       </Container>
-      <Button
-        title={t("Home.components.HomeOrgaAccountProgress.button.orga")}
-        size="sm"
-        to="organization"
-        variant="primary"
-      />
     </HomeContainer>
   );
 };

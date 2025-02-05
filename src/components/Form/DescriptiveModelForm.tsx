@@ -159,6 +159,7 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
         {
           projectID,
           processID,
+          groupID: groupID.toString(),
           model: {
             ...model,
             ...data,

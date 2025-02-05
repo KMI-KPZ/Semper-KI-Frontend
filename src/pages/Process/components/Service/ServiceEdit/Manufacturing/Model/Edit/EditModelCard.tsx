@@ -1,5 +1,5 @@
 import { Button, Container, Heading, Text } from "@component-library/index";
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ModelLevelOfDetail,
@@ -12,6 +12,7 @@ import { ManufacturingModelUploadData } from "../Upload/Upload";
 import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import { useNavigate } from "react-router-dom";
 import useUpdateModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUpdateModel";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface EditModelCardProps {
   model: ProcessModel;
@@ -22,6 +23,7 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
   const { process } = useManufacturingProcess();
   const updateModel = useUpdateModel();
   const navigate = useNavigate();
+  const { groupID } = useContext(ManufacturingGroupContext);
 
   const formSchema = z.object({
     modelID: z.string().optional(),
@@ -72,6 +74,7 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
       {
         processID: process.processID,
         projectID: process.project.projectID,
+        groupID: groupID.toString(),
         model: {
           ...model,
           ...data,

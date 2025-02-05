@@ -113,7 +113,7 @@
     },
     "ServiceType": {
       "NONE": "Service selection",
-      "ADDITIVE_MANUFACTURING": "Leave the 3D printing model",
+      "ADDITIVE_MANUFACTURING": "Draft: Have a 3D Model Printed",
       "CREATE_MODEL": "Let the model design",
       "DELIVERY": "Delivery",
       "POST_PROCESSING": "Post-processing",

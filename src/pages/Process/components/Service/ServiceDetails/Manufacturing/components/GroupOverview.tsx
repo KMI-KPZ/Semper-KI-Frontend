@@ -158,7 +158,7 @@ const ServiceManufacturingGroupOverview: React.FC<
               )}
               onClick={() => handleOnClickGroup(index)}
               key={index}
-              className={`flex flex-row items-center  rounded-md border-2 p-2 hover:cursor-pointer hover:bg-slate-50 ${
+              className={`flex flex-row items-center rounded-md border-2 bg-gray-100 p-2 hover:cursor-pointer hover:bg-slate-50 ${
                 activeGroup === index ? "border-blau-button " : ""
               }`}
             >

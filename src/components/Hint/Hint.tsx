@@ -3,7 +3,7 @@ import { Tooltip } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 interface HintProps {
-  title: string;
+  title: string | React.ReactNode;
 }
 
 const Hint: React.FC<PropsWithChildren<HintProps>> = (props) => {

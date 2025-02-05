@@ -19,6 +19,7 @@ import ProcessServiceModelCard from "./ModelCard";
 import ProcessStatusGate from "@/components/Process/StatusGate";
 import ProcessServiceMaterialCard from "./MaterialCard";
 import ProcessSericePostProcessingCard from "./PostProcessingCard";
+import Hint from "@/components/Hint/Hint";
 
 interface ServiceManufacturingDetailsProps {
   process: ManufactoringProcessProps;
@@ -63,18 +64,22 @@ const ServiceManufacturingDetails: React.FC<
             "Process.components.Service.ServiceDetails.components.Manufacturing.heading.main"
           )}
         </Heading>
-      </Container>
-      <Container width="full" direction="col" className="gap-0 p-2">
-        <Text>
-          {t(
-            "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription1"
-          )}
-        </Text>
-        <Text>
-          {t(
-            "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription2"
-          )}
-        </Text>
+        <Hint
+          title={
+            <Container width="full" direction="col" className="gap-0 p-2">
+              <Text>
+                {t(
+                  "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription1"
+                )}
+              </Text>
+              <Text>
+                {t(
+                  "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription2"
+                )}
+              </Text>
+            </Container>
+          }
+        />
       </Container>
       <Divider />
       <Container

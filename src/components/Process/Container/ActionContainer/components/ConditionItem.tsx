@@ -20,7 +20,7 @@ const ProcessConditionItem: React.FC<ProcessConditionItemProps> = (props) => {
       width="full"
       justify="start"
       direction="row"
-      className={`min-w-[calc(50%-10px)] self-stretch rounded-md border-2 border-orange-500 p-2 hover:cursor-pointer hover:bg-gray-50`}
+      className={`min-w-[calc(50%-10px)] self-stretch rounded-md border-2 border-orange-500 bg-white p-2 hover:cursor-pointer hover:bg-gray-50`}
       onClick={() => {
         navigate("#" + error.key);
       }}

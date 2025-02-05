@@ -856,7 +856,7 @@
         "name": "name",
         "date": "Date",
         "license": "License",
-        "tags": "tags",
+        "tags": "Tags",
         "certificates": "Certificates",
         "URI": "Uri"
       }
@@ -1755,7 +1755,7 @@
                     "type": "File type",
                     "date": "Date",
                     "all": "Apply to all:",
-                    "tags": "tags",
+                    "tags": "Tags",
                     "tagsPH": "Tag1, Tag2, ...",
                     "quantity": "Number *",
                     "levelOfDetail": "Level of detail *",

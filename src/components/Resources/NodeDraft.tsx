@@ -53,7 +53,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
   if (nodes.isLoading) return <LoadingAnimation />;
   if (nodes.data !== undefined)
     return (
-      <Container width="full" direction="col" className="card gap-0">
+      <Container width="full" direction="col" className="card gap-0 bg-white">
         <Heading variant="h3" className="">
           {t("components.Resources.NodeDraft.draft")}
         </Heading>

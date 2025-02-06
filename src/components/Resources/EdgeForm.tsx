@@ -102,7 +102,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
           .sort(sortItemsAll);
 
   return (
-    <Container width="full" direction="col" className="card gap-0">
+    <Container width="full" direction="col" className="card gap-0 bg-white">
       <Heading variant="h3">
         {t("components.Resources.EdgeForm.heading")}
         {t(`types.OntoNodeType.${nodeType}`)}

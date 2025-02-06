@@ -110,7 +110,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
   if (nodeProperties.isError) return <Navigate to=".." />;
   if (nodeProperties.isLoading) return <LoadingAnimation />;
   return (
-    <Container width="full" direction="col" className="card">
+    <Container width="full" direction="col" className="card bg-white">
       <Container width="full">
         <Heading variant="h3">
           {t("components.Resources.PropertyForm.properties.header")}

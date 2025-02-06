@@ -260,7 +260,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
       ) : null}
 
       <form className="flex w-full flex-col items-center justify-start gap-5 ">
-        <Container width="full" direction="col" className="card">
+        <Container width="full" direction="col" className="card bg-white">
           <Heading variant="h3">
             {t("components.Resources.NodeForm.general")}
           </Heading>
@@ -322,8 +322,9 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
           ))}
 
         <Button
-          title={t(`general.button.${type}`)}
+          title={t(`general.button.${type === "create" ? "create" : "save"}`)}
           onClick={handleSubmit(onSubmit)}
+          variant="primary"
           loading={submitOrgaNodeForm.isLoading}
         />
       </form>

@@ -145,7 +145,7 @@
       "MATERIAL": "Material",
       "PROCEEDING": "Proceedings",
       "MANUFACTURER": "Manufacturer",
-      "POSTPROCESSING": "Post -processing",
+      "POSTPROCESSING": "Post-processing",
       "ADDITIVE": "Additives",
       "TEST": "Test"
     },
@@ -282,7 +282,7 @@
       "materialCategory": "Material category",
       "proceeding": "Proceedings",
       "manufacturer": "Manufacturer",
-      "postProcessing": "Post -processing",
+      "postProcessing": "Post-processing",
       "date": "Date",
       "text": "Text",
       "textarea": "Text field",
@@ -1141,7 +1141,7 @@
           "overview": "Overview",
           "printer": "3D printer",
           "materials": "Materials",
-          "postprocessing": "Post -processing"
+          "postprocessing": "Post-processing"
         }
       },
       "HomeUserProgress": {
@@ -1779,8 +1779,8 @@
               "heading": "Create a new process ..."
             },
             "PostProcessing": {
-              "heading": "Available post -processing",
-              "selected": "Selected post -processing",
+              "heading": "Available post-processing",
+              "selected": "Selected post-processing",
               "error": {
                 "noPostProcessings": "No post-processing found"
               },
@@ -2105,9 +2105,9 @@
     },
     "PostProcessings": {
       "header": "Post-processing",
-      "own": "Own post -processing",
+      "own": "Own post-processing",
       "button": {
-        "createOwn": "Create post -processing"
+        "createOwn": "Create post-processing"
       }
     },
     "Printers": {

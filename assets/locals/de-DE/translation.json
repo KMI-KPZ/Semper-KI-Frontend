@@ -751,7 +751,7 @@
       },
       "NodeTable": {
         "subHeading": "Eigene {{name}}",
-        "button": { "createOwn": "Drucker Anlegen" }
+        "button": { "createOwn": "{{name}} Anlegen" }
       },
       "NodeView": {
         "context": "Beschreibung:",

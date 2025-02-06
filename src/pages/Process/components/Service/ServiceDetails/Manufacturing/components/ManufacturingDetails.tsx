@@ -67,12 +67,12 @@ const ServiceManufacturingDetails: React.FC<
         <Hint
           title={
             <Container width="full" direction="col" className="gap-0 p-2">
-              <Text>
+              <Text className="text-center">
                 {t(
                   "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription1"
                 )}
               </Text>
-              <Text>
+              <Text className="text-center">
                 {t(
                   "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription2"
                 )}

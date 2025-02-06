@@ -85,7 +85,7 @@ const ServiceManufacturingFreeText: React.FC<
       </Container>
       <Container className="gap-4 p-3" width="full" direction="col">
         <textarea
-          className="min-h-[100px] w-full rounded-md border-2 bg-gray-100 p-3 placeholder:text-black"
+          className="min-h-[100px] w-full rounded-md border-2 bg-gray-100 p-3 placeholder:text-gray-800"
           onChange={handleOnChange}
           onBlur={handleOnBlur}
           value={text}

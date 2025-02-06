@@ -81,16 +81,16 @@ const HomeOrgaProgress: React.FC<HomeOrgaAccountProgressProps> = (props) => {
   ];
 
   const allFinished = items.every((item) => item.finished);
-  const [showFlow, setShowMore] = React.useState(!allFinished);
+  const [showFlow, setShowFlow] = React.useState(!allFinished);
 
   useEffect(() => {
-    if (showFlow) {
-      setShowMore(false);
+    if (allFinished) {
+      setShowFlow(false);
     }
   }, [allFinished]);
 
   const handleOnButtonClickShow = () => {
-    setShowMore((prev) => !prev);
+    setShowFlow((prev) => !prev);
   };
 
   return (

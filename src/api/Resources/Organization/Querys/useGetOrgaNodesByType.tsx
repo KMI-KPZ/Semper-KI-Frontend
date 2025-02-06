@@ -95,11 +95,13 @@ export type OntoNodePropertyName =
   | "acquisitionCosts"
   | "treatmentCosts"
   | "flexibility";
+
 export interface OntoNodePropertyGeneral {
   name: string;
   value: any;
   unit: string;
   type: OntoNodePropertyType;
+  //key: string;
 }
 export interface OntoNodePropertyText extends OntoNodePropertyGeneral {
   type: "text";

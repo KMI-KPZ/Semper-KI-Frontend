@@ -69,7 +69,7 @@ const ServiceManufacturingFreeText: React.FC<
       width="full"
       className="gap-0 rounded-md border-2 bg-white"
       direction="col"
-      align="start"
+      items="start"
     >
       <Container
         width="fit"

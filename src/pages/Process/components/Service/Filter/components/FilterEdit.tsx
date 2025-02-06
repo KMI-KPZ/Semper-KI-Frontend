@@ -177,7 +177,7 @@ const FilterEdit: React.FC<FilterEditProps> = (props) => {
                 width="full"
                 justify="start"
                 direction="col"
-                align="center"
+                items="center"
                 wrap="wrap"
                 className="gap-3  rounded-md rounded-tl-none border-2 border-gray-400 p-5"
               >

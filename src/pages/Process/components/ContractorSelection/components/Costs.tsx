@@ -24,7 +24,7 @@ const ProcessContractorCosts: React.FC<ProcessContractorCostsProps> = (
         width="full"
         className="overflow-auto"
         justify="start"
-        align="start"
+        items="start"
       >
         <pre className="p-2">
           <code>{JSON.stringify(process.processDetails.prices, null, 2)}</code>

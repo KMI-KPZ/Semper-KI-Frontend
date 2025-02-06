@@ -30,7 +30,7 @@ const AdvantagesOrganization: React.FC<AdvantagesOrganizationProps> = (
         gap={5}
         width="fit"
         justify="start"
-        align="start"
+        items="start"
       >
         <Text>{t("Advantages.components.Organization.fact1")}</Text>
         <Text>{t("Advantages.components.Organization.fact2")}</Text>

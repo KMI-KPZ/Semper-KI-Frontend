@@ -14,6 +14,9 @@ const ProcessOutlet: React.FC<PropsWithChildren<ProcessOutletProps>> = (
   const process = useGetProcess();
   const filter = useGetFilters();
   const { projectID } = useParams();
+  const [loadGroupID, setLoadGroupID] = React.useState<number | undefined>(
+    undefined
+  );
 
   if (process.isLoading || filter.isLoading)
     return (
@@ -29,7 +32,12 @@ const ProcessOutlet: React.FC<PropsWithChildren<ProcessOutletProps>> = (
     filter.data !== undefined
   )
     return (
-      <ProcessContextProvider process={process.data} filters={filter.data}>
+      <ProcessContextProvider
+        process={process.data}
+        filters={filter.data}
+        loadGroupID={loadGroupID}
+        setLoadGroupID={setLoadGroupID}
+      >
         {children}
         <Outlet />
       </ProcessContextProvider>

@@ -63,9 +63,9 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
     >
       <Container width="full" direction="row">
         {process.dependenciesIn.length > 0 ? (
-          <Container className="rounded-md border-2 p-2 " align="start">
+          <Container className="rounded-md border-2 p-2 " items="start">
             <Text>{t("Home.Projects.Process.dependenciesInHeading")}</Text>
-            <Container direction="col" className="gap-2" align="start">
+            <Container direction="col" className="gap-2" items="start">
               {process.dependenciesIn.map((dep, index) => (
                 <Text key={index}>
                   •{" "}
@@ -176,7 +176,7 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
                                   width="full"
                                   direction="col"
                                   justify="start"
-                                  align="start"
+                                  items="start"
                                   className="gap-0"
                                 >
                                   {service.models.length > 0 &&
@@ -222,7 +222,7 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
                                   width="full"
                                   direction="col"
                                   justify="start"
-                                  align="start"
+                                  items="start"
                                   className="gap-0"
                                 >
                                   {service.material !== undefined ? (
@@ -263,7 +263,7 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
                                   width="full"
                                   direction="col"
                                   justify="start"
-                                  align="start"
+                                  items="start"
                                   className="gap-0"
                                 >
                                   {service.postProcessings.length === 0 ||
@@ -378,9 +378,9 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
       </Container>
       <Container width="full" direction="row">
         {process.dependenciesOut.length > 0 ? (
-          <Container className="rounded-md border-2 p-2 " align="start">
+          <Container className="rounded-md border-2 p-2 " items="start">
             <Text>{t("Home.Projects.Process.dependenciesOutHeading")}</Text>
-            <Container direction="col" className="gap-2" align="start">
+            <Container direction="col" className="gap-2" items="start">
               {process.dependenciesOut.map((dep, index) => (
                 <Text key={index}>
                   •{" "}

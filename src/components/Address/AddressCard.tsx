@@ -81,7 +81,7 @@ const AddressCard: React.FC<PropsWithChildren<AddressCardProps>> = (props) => {
         </>
       ) : null}
       <Container direction="row" width="full" justify="between" className="p-5">
-        <Container width="fit" align="start" direction="col" gap={3}>
+        <Container width="fit" items="start" direction="col" gap={3}>
           <Text>{t("components.Address.AddressCard.name")}</Text>
           <Text>{t("components.Address.AddressCard.company")}</Text>
           <Text>{t("components.Address.AddressCard.street")}</Text>
@@ -89,7 +89,7 @@ const AddressCard: React.FC<PropsWithChildren<AddressCardProps>> = (props) => {
           <Text>{t("components.Address.AddressCard.country")}</Text>
           <Text>{t("components.Address.AddressCard.standard")}</Text>
         </Container>
-        <Container width="fit" align="start" direction="col" gap={3}>
+        <Container width="fit" items="start" direction="col" gap={3}>
           <Text>{`${address.firstName} ${address.lastName}`}</Text>
           <Text>
             {address.company === undefined || address.company === ""
@@ -111,7 +111,7 @@ const AddressCard: React.FC<PropsWithChildren<AddressCardProps>> = (props) => {
         direction="col"
         width="full"
         className="gap-1 p-5"
-        align="start"
+        items="start"
       >
         <Container width="full" gap={3}>
           {children === undefined ? (

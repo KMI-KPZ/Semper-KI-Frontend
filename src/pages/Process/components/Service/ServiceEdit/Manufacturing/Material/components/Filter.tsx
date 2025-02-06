@@ -63,7 +63,7 @@ const ProcessMaterialFilter: React.FC<Props> = (props) => {
       width="full"
       justify="start"
       direction="col"
-      align="start"
+      items="start"
       wrap="wrap"
       className="gap-3 rounded-md border-2 p-3 px-5"
     >

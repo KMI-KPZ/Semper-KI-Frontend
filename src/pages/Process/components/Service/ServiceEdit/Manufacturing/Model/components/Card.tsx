@@ -25,15 +25,15 @@ export const ProcessModelCard: React.FC<PropsWithChildren<Props>> = (props) => {
       <Divider />
       <Container direction="col" className="p-5">
         <Heading variant="h3">{model.name}</Heading>
-        <Container direction="row" width="full" align="start">
-          <Container direction="col" justify="start" align="start">
+        <Container direction="row" width="full" items="start">
+          <Container direction="col" justify="start" items="start">
             <Text>
               {`${t(
                 `Process.components.Service.ServiceEdit.Manufacturing.Model.components.Card.license`
               )}`}
             </Text>
           </Container>
-          <Container direction="col" justify="start" align="start">
+          <Container direction="col" justify="start" items="start">
             <Text>{model.license}</Text>
           </Container>
         </Container>

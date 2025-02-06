@@ -36,7 +36,7 @@ const Admin: React.FC<AdminProps> = (props) => {
     <Container
       width="full"
       direction="row"
-      align="start"
+      items="start"
       justify="center"
       className=" "
     >

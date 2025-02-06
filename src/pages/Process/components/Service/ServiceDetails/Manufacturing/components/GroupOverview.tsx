@@ -107,14 +107,14 @@ const ServiceManufacturingGroupOverview: React.FC<
       width="full"
       direction="col"
       justify="start"
-      align="start"
+      items="start"
       className="gap-0 rounded-md border-2 bg-white"
     >
       <Container
         width="full"
         direction="col"
         justify="center"
-        align="start"
+        items="start"
         className="p-3"
       >
         <Heading variant="h3">
@@ -220,7 +220,7 @@ const ServiceManufacturingGroupOverview: React.FC<
                 endExclude
                 end={ProcessStatus.SERVICE_COMPLETED}
               >
-                <Container width="fit" justify="center" align="center">
+                <Container width="fit" justify="center" items="center">
                   <Button
                     size="sm"
                     variant="text"

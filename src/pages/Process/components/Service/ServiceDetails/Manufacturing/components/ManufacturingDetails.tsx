@@ -49,7 +49,7 @@ const ServiceManufacturingDetails: React.FC<
     <Container
       direction="col"
       justify="center"
-      align="start"
+      items="start"
       width="full"
       className="gap-0 rounded-md border-2 bg-white p-0"
     >

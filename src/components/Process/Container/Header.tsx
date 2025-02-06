@@ -7,9 +7,9 @@ interface ProcessHeaderProps {
   pageTitle: string;
 }
 
-const ProcessHeader: React.FC<PropsWithChildren<ProcessHeaderProps>> = (
-  props
-) => {
+const ProcessContainerHeader: React.FC<
+  PropsWithChildren<ProcessHeaderProps>
+> = (props) => {
   const { children, menuButtonTitle, pageTitle } = props;
 
   return (
@@ -28,4 +28,4 @@ const ProcessHeader: React.FC<PropsWithChildren<ProcessHeaderProps>> = (
   );
 };
 
-export default ProcessHeader;
+export default ProcessContainerHeader;

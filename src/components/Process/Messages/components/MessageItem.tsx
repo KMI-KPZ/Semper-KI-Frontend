@@ -17,13 +17,13 @@ const ProcessMessageItem: React.FC<ProcessMessageItemProps> = (props) => {
       direction="col"
       width="full"
       gap={3}
-      align={message.userID === user?.hashedID ? "end" : "start"}
+      items={message.userID === user?.hashedID ? "end" : "start"}
       className="min-w-[200px] "
     >
       <Container
         width="fit"
         direction="col"
-        align="end"
+        items="end"
         className=" rounded-md bg-white p-3"
       >
         {sameAuthor ? null : <span className="px-2">{message.userName}</span>}

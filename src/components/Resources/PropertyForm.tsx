@@ -128,7 +128,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
         width="full"
         className="overflow-auto"
         justify="start"
-        align="start"
+        items="start"
       >
         <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
           <thead className="">

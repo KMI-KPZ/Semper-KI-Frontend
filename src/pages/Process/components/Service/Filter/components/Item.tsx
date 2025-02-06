@@ -154,7 +154,7 @@ const ProcessFilterItem: React.FC<Props> = (props) => {
       direction="col"
       justify="start"
       width="full"
-      align="start"
+      items="start"
       gap={3}
     >
       <Container>

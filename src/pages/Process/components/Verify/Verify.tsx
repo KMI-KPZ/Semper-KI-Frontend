@@ -37,7 +37,7 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
         width="full"
         direction="row"
         className="flex-wrap md:flex-nowrap"
-        align="start"
+        items="start"
       >
         <ProcessVerifyCard status={getVerifyStatus()} type="PRINTABILITY" />
         <ProcessVerifyCard status={getVerifyStatus()} type="DRAFT" />

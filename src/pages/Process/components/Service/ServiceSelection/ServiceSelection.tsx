@@ -71,7 +71,7 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
     <Container
       width="full"
       direction="row"
-      align="start"
+      items="start"
       justify="center"
       wrap="wrap"
       id="Process-ServiceType"

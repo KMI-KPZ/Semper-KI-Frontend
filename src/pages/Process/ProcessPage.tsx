@@ -1,6 +1,5 @@
-import { Container, Heading } from "@component-library/index";
+import { Container } from "@component-library/index";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import useProcess from "@/hooks/Process/useProcess";
 import Service from "./components/Service/Service";
 import ProcessStatusWizard from "./components/StatusWizard/StatusWizard";
@@ -15,30 +14,18 @@ import ProcessCompleted from "./components/Completed/Completed";
 import ProcessProduction from "./components/Production/Production";
 import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
 import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
-import BackButtonContainer from "@/components/BackButtonContainer/BackButtonContainer";
-import ProcessInfo from "./components/Info/Info";
-import GrayContainer from "@component-library/Container/GrayContainer";
+import ProcessHaeder from "./components/Header/Haeder";
 
 interface ProcessPageProps {}
 
 const ProcessPage: React.FC<ProcessPageProps> = (props) => {
   const {} = props;
-  const { t } = useTranslation();
   const { process } = useProcess();
 
   return (
     <Container direction="col" width="full">
-      <GrayContainer
-        width="full"
-        headerChildren={
-          <BackButtonContainer>
-            <Heading variant="h1">{t("Process.heading")}</Heading>
-          </BackButtonContainer>
-        }
-      >
-        <ProcessInfo process={process} />
-      </GrayContainer>
-      <Container width="full" align="start" direction="row" justify="start">
+      <ProcessHaeder process={process} />
+      <Container width="full" items="start" direction="row" justify="start">
         <ProcessStatusWizard process={process} />
         <Container direction="col" width="full">
           <Service process={process} />

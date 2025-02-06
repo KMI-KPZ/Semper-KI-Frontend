@@ -52,17 +52,17 @@ const HomeServices: React.FC<HomeServicesProps> = (props) => {
   );
 
   return (
-    <Container width="full" className="" align="start" direction="col">
+    <Container width="full" className="" items="start" direction="col">
       <HomeHeader variant="h2" title={t("Home.Anonym.Services.heading")} />
       <Container width="full" direction="col">
         <Container
           width="full"
           justify="start"
           className="items-center justify-center gap-10 md:items-start md:justify-start "
-          align="start"
+          items="start"
         >
           <img src={currentItem.image} className="object-cover md:w-3/5 " />
-          <Container direction="col" align="start" className="md:w-2/5">
+          <Container direction="col" items="start" className="md:w-2/5">
             <Heading
               variant="h3"
               className="text-white transition-all duration-300 "

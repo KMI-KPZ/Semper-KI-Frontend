@@ -1,17 +1,17 @@
-import { Button, Container, Heading } from "@component-library/index";
+import { Button, Container } from "@component-library/index";
 import useStatusButtons, {
   StatusButtonProps,
 } from "@/hooks/Project/useStatusButtons";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import useProcess from "@/hooks/Process/useProcess";
 import { useEffect, useState } from "react";
-import ProcessConditionItem from "./components/ConditionItem";
 import { useTranslation } from "react-i18next";
 import ActionContainerWarpper, {
   isProcessFailed,
 } from "./components/FailedContainer";
 import ActionStatusCard from "../../ActionStatusCard";
 import logger from "@/hooks/useLogger";
+import ActionContainerTodos from "./components/Todos";
 
 interface ActionContainerProps {
   start: ProcessStatus;
@@ -67,28 +67,7 @@ const ActionContainer: React.FC<ActionContainerProps> = (props) => {
   if (showDependingOnProcessStatus)
     return (
       <ActionContainerWarpper failed={isProcessFailed(process)}>
-        {process.processErrors === undefined ||
-        process.processErrors.length === 0 ? null : (
-          <Container
-            align="center"
-            direction="col"
-            wrap="wrap"
-            className={`rouned-md gap-5  border-2 bg-gray-100 px-10 py-5 md:min-w-[500px] ${
-              error ? "border-red-500" : ""
-            }`}
-          >
-            <Heading variant="h2">
-              {t("components.Process.Container.ActionContainer.heading")}
-            </Heading>
-            {process.processErrors.map((error, index) => (
-              <ProcessConditionItem key={index} error={error} />
-            ))}
-          </Container>
-        )}
-        {process.actionStatus !== "ACTION_REQUIRED" &&
-        statusButtons.length > 0 ? (
-          <ActionStatusCard process={process} className="w-fit" />
-        ) : null}
+        <ActionContainerTodos process={process} error={error} />
         {statusButtons.length > 0 ? (
           <Container width="full" direction="row" wrap="wrap">
             {statusButtons.map((button, index) => (

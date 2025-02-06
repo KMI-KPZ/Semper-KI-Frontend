@@ -139,14 +139,14 @@ const ContractorSelectionAddressCard: React.FC<
           justify="center"
           className="p-5"
         >
-          <Container width="fit" align="start" direction="col" gap={3}>
+          <Container width="fit" items="start" direction="col" gap={3}>
             {address.company ? <Text>{t("general.company")}</Text> : null}
             <Text>{t("general.name")}</Text>
             <Text>{t("general.street")}</Text>
             <Text>{t("general.city")}</Text>
             <Text>{t("general.country")}</Text>
           </Container>
-          <Container width="fit" align="start" direction="col" gap={3}>
+          <Container width="fit" items="start" direction="col" gap={3}>
             {address.company ? <Text>{address.company}</Text> : null}
             <Text>{`${address.firstName} ${address.lastName}`}</Text>
             <Text>{`${address.street} ${address.houseNumber}`}</Text>
@@ -160,7 +160,7 @@ const ContractorSelectionAddressCard: React.FC<
         direction="col"
         width="full"
         className="gap-1 p-5"
-        align="center"
+        items="center"
       >
         <Container>
           <label

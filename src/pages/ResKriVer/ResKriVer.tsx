@@ -64,7 +64,7 @@ const ResKriVer: React.FC<ResKriVerProps> = (props) => {
                 <Container
                   direction="col"
                   width="fit"
-                  align="end"
+                  items="end"
                   justify="center"
                   className="gap-8"
                 >

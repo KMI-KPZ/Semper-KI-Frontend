@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 export type ContainerProps = {
   direction?: "row" | "col" | "auto";
   justify?: "start" | "end" | "center" | "between" | "around" | "evenly";
-  align?: "start" | "end" | "center" | "stretch" | "baseline";
+  items?: "start" | "end" | "center" | "stretch" | "baseline";
   wrap?: "nowrap" | "wrap" | "wrap-reverse";
   width?: "full" | "fit" | "auto" | "none";
   height?: "full" | "fit";
@@ -21,7 +21,7 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
 ) => {
   const {
     children,
-    align = "center",
+    items = "center",
     direction = "auto",
     justify = "center",
     wrap,
@@ -36,8 +36,8 @@ export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
   } = props;
 
   const getAlign = () => {
-    if (align === undefined) return "";
-    return `items-${align}`;
+    if (items === undefined) return "";
+    return `items-${items}`;
   };
 
   const getDirection = () => {

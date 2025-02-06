@@ -6,6 +6,7 @@ import React from "react";
 import ServiceManufacturingGroupOverview from "./components/GroupOverview";
 import ServiceManufacturingDetails from "./components/ManufacturingDetails";
 import ServiceManufacturingFreeText from "./components/FreeText";
+import useLoadGroupID from "@/hooks/useLoadGroupID";
 
 interface ServiceManufacturingViewProps {
   process: ManufactoringProcessProps;
@@ -33,9 +34,10 @@ const ServiceManufacturingView: React.FC<ServiceManufacturingViewProps> = (
 ) => {
   const { process } = props;
   const [activeGroup, setActiveGroup] = React.useState(0);
+  useLoadGroupID({ setActiveGroup });
 
   return (
-    <Container direction="col" justify="center" align="start" width="full">
+    <Container direction="col" justify="center" items="start" width="full">
       <ServiceManufacturingGroupOverview
         process={process}
         activeGroup={activeGroup}

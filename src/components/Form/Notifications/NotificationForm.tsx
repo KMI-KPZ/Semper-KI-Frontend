@@ -35,7 +35,7 @@ const NotificationForm: React.FC<NotificationFormProps> = (props) => {
           width="full"
           direction="col"
           justify="center"
-          align="start"
+          items="start"
           className="overflow-auto"
         >
           <table className="table-auto border-separate border-spacing-x-5 border-spacing-y-3 ">

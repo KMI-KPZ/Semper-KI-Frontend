@@ -249,7 +249,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                 width="full"
                 direction="row"
                 justify="end"
-                align="end"
+                items="end"
                 className="fixed bottom-5 z-10  w-fit self-center pr-5 md:sticky md:self-end"
               >
                 {errors !== undefined && getCompressedErrors().length > 0 ? (

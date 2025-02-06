@@ -81,13 +81,13 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
 
   return (
     <ProcessContainer
-      id="Contractor"
+      id="Process-Contractor"
       pageTitle={pageTitle}
       menuButtonTitle={menuButtonTitle}
       start={ProcessStatus.SERVICE_COMPLETED}
       end={ProcessStatus.SERVICE_COMPLETED}
     >
-      <Container width="full" justify="center" align="start" direction="auto">
+      <Container width="full" justify="center" items="start" direction="auto">
         <Container
           width="full"
           justify="start"

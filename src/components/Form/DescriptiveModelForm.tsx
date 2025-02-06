@@ -253,7 +253,7 @@ const DescriptiveModelForm: React.FC<DescriptiveModelFormProps> = (props) => {
                     width="full"
                     direction="row"
                     justify="start"
-                    align="center"
+                    items="center"
                   >
                     <input
                       type={entrie.type}

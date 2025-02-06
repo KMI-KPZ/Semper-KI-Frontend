@@ -152,7 +152,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
                   width="full"
                   wrap="wrap"
                   direction="row"
-                  align="start"
+                  items="start"
                 >
                   {materialsQuery.data
                     .filter((material) => filterDataBySearchInput(material))

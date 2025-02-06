@@ -19,7 +19,7 @@ const Flowchart: React.FC<FlowchartProps> = ({ items }) => {
       width="full"
       direction="col"
       justify="center"
-      align="center"
+      items="center"
       className="gap-0"
     >
       {items.map((item, index, all) => (

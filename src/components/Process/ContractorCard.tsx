@@ -94,7 +94,7 @@ const ContractorCard: React.FC<ContractorCardProps> = (props) => {
       <Container
         direction="col"
         justify="center"
-        align="center"
+        items="center"
         className="w-2/3"
       >
         <table className="w-full table-auto border-separate border-spacing-3">

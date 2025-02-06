@@ -379,6 +379,10 @@
     "client": "Auftraggeber",
     "manufacturer": "Hersteller",
     "you": "Sie",
+    "createdWhen": "Erstellt am",
+    "updatedWhen": "Aktualisiert am",
+    "createdBy": "Erstellt von",
+    "updatedBy": "Aktualisiert von",
     "button": {
       "clone": "Duplizieren",
       "select": "Auswählen",

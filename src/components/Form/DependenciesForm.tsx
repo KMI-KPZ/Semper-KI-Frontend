@@ -70,7 +70,7 @@ const DependenciesForm: React.FC<DependenciesFormProps> = (props) => {
   };
 
   return (
-    <Container width="full" direction="col" justify="start" align="center">
+    <Container width="full" direction="col" justify="start" items="center">
       <Heading variant="h1">
         {t("Home.Projects.Process.addDependencie")}
       </Heading>
@@ -79,7 +79,7 @@ const DependenciesForm: React.FC<DependenciesFormProps> = (props) => {
         width="full"
         direction="col"
         justify="start"
-        align="center"
+        items="center"
       >
         <Heading variant="h2">
           {t("Home.Projects.Process.dependenciesIn")}
@@ -150,7 +150,7 @@ const DependenciesForm: React.FC<DependenciesFormProps> = (props) => {
         width="full"
         direction="col"
         justify="start"
-        align="center"
+        items="center"
       >
         <Heading variant="h2">
           {t("Home.Projects.Process.dependenciesOut")}

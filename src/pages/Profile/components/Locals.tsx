@@ -48,7 +48,7 @@ const ProfileLocals: React.FC<ProfileLocalsProps> = (props) => {
     <Container width="full" direction="col" id="ProfileLocals">
       <Heading variant="h2">{t("Profile.Locals.header")}</Heading>
       <Divider />
-      <Container width="full" direction="row" align="center" justify="center">
+      <Container width="full" direction="row" items="center" justify="center">
         <Text className="break-all">{t("Profile.Locals.language")}</Text>
 
         {updateUser.isLoading ? (

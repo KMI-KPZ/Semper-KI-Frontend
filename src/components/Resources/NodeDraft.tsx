@@ -74,7 +74,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
               direction="col"
               className="mb-5 overflow-auto"
               justify="start"
-              align="start"
+              items="start"
             >
               <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
                 <thead>

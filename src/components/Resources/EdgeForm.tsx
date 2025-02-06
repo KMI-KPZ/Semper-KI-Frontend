@@ -115,7 +115,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
             direction="col"
             className="overflow-auto"
             justify="start"
-            align="start"
+            items="start"
           >
             <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
               <caption className=" pb-2 pl-5 text-left">
@@ -267,7 +267,7 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
             direction="col"
             className="overflow-auto"
             justify="start"
-            align="start"
+            items="start"
           >
             <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
               <caption className=" pb-2 pl-5 text-left">

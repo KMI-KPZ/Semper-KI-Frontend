@@ -24,7 +24,7 @@ const ServiceCard: React.FC<ServiceCardProps> = (props) => {
       onClick={handleOnClick}
       direction="col"
       gap={3}
-      className="max-w-[30%] justify-start self-stretch rounded-lg border-2 p-3 shadow-xl ring-0 ring-gray-200  duration-300 hover:cursor-pointer hover:bg-gray-50 hover:ring-2"
+      className="max-w-[30%] justify-start self-stretch rounded-lg border-2 bg-white p-3 shadow-xl ring-0 ring-gray-200  duration-300 hover:cursor-pointer hover:bg-gray-50 hover:ring-2"
     >
       <Heading variant="h3">
         {t(

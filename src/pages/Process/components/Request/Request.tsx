@@ -58,7 +58,7 @@ const ProcessRequest: React.FC<ProcessRequestProps> = (props) => {
       start={ProcessStatus.VERIFYING_COMPLETED}
       end={ProcessStatus.VERIFYING_COMPLETED}
     >
-      <Container width="fit" direction="col" className="card">
+      <Container width="fit" direction="col" className="card bg-white">
         {clientVerified ? (
           <CheckIcon style={{ height: 60, width: 60 }} />
         ) : null}

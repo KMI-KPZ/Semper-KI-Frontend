@@ -35,13 +35,7 @@ const ServiceManufacturingView: React.FC<ServiceManufacturingViewProps> = (
   const [activeGroup, setActiveGroup] = React.useState(0);
 
   return (
-    <Container
-      direction="col"
-      justify="center"
-      align="start"
-      width="full"
-      className=" p-0"
-    >
+    <Container direction="col" justify="center" align="start" width="full">
       <ServiceManufacturingGroupOverview
         process={process}
         activeGroup={activeGroup}

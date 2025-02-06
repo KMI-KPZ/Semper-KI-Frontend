@@ -51,7 +51,7 @@ const ServiceManufacturingDetails: React.FC<
       justify="center"
       align="start"
       width="full"
-      className="gap-0 rounded-md border-2 p-0"
+      className="gap-0 rounded-md border-2 bg-white p-0"
     >
       <Container
         width="fit"

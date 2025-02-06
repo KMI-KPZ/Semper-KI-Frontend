@@ -38,6 +38,7 @@ const Resources: React.FC<ResourcesProps> = (props) => {
       </PageHeader>
       <div className="flex w-full flex-col gap-5 md:flex-row">
         <ResourcesMenu />
+
         <Container
           direction="col"
           width="full"

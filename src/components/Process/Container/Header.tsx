@@ -17,7 +17,11 @@ const ProcessHeader: React.FC<PropsWithChildren<ProcessHeaderProps>> = (
       {children !== undefined ? (
         <ProcessMenu buttonTitle={menuButtonTitle}>{children}</ProcessMenu>
       ) : null}
-      <Container width="full" justify="start">
+      <Container
+        width="full"
+        justify="start"
+        className="rounded-md bg-white p-2 px-5"
+      >
         <Heading variant="h2">{pageTitle}</Heading>
       </Container>
     </>

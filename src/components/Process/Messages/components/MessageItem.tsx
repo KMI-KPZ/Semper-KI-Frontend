@@ -18,21 +18,28 @@ const ProcessMessageItem: React.FC<ProcessMessageItemProps> = (props) => {
       width="full"
       gap={3}
       align={message.userID === user?.hashedID ? "end" : "start"}
-      className="min-w-[200px]"
+      className="min-w-[200px] "
     >
-      {sameAuthor ? null : <span className="px-2">{message.userName}</span>}
       <Container
-        direction="row"
-        className={`
-         card  p-3
-         ${
-           message.userID === user?.hashedID ? "flex-row-reverse" : "flex-row"
-         }`}
+        width="fit"
+        direction="col"
+        align="end"
+        className=" rounded-md bg-white p-3"
       >
-        <span>{message.text}</span>
-        <span className="text-xs">
-          {new Date(message.date).toLocaleString()}
-        </span>
+        {sameAuthor ? null : <span className="px-2">{message.userName}</span>}
+        <Container
+          direction="row"
+          className={`
+          card  bg-white p-3
+          ${
+            message.userID === user?.hashedID ? "flex-row-reverse" : "flex-row"
+          }`}
+        >
+          <span>{message.text}</span>
+          <span className="text-xs">
+            {new Date(message.date).toLocaleString()}
+          </span>
+        </Container>
       </Container>
     </Container>
   );

@@ -73,7 +73,7 @@ const ActionContainer: React.FC<ActionContainerProps> = (props) => {
             align="center"
             direction="col"
             wrap="wrap"
-            className={`gap-5 rounded-md border-2 bg-gray-100 px-10 py-5 md:min-w-[500px] ${
+            className={`rouned-md gap-5  border-2 bg-gray-100 px-10 py-5 md:min-w-[500px] ${
               error ? "border-red-500" : ""
             }`}
           >

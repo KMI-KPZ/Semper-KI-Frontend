@@ -25,7 +25,7 @@ const ProcessVerifyCard: React.FC<ProcessVerifyCardProps> = (props) => {
   return (
     <Container
       direction="col"
-      className="card self-stretch"
+      className="card self-stretch bg-white"
       justify="start"
       width="full"
     >

@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
 
-interface ContainerProps {
+export type ContainerProps = {
   direction?: "row" | "col" | "auto";
   justify?: "start" | "end" | "center" | "between" | "around" | "evenly";
   align?: "start" | "end" | "center" | "stretch" | "baseline";
@@ -14,7 +14,7 @@ interface ContainerProps {
   tabIndex?: boolean;
   style?: React.CSSProperties;
   onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-}
+};
 
 export const Container: React.FC<PropsWithChildren<ContainerProps>> = (
   props

@@ -1,9 +1,9 @@
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ActionContainer from "@/components/Process/Container/ActionContainer/ActionContainer";
-import { Container } from "@component-library/index";
 import React, { PropsWithChildren, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 import ProcessHeader from "./Header";
+import GrayContainer from "@component-library/Container/GrayContainer";
 
 interface ProcessContainerProps {
   id: string;
@@ -32,17 +32,22 @@ const ProcessContainer: React.FC<PropsWithChildren<ProcessContainerProps>> = (
 
   return (
     <>
-      <Container
+      <GrayContainer
         direction="col"
         width="full"
-        className={twMerge("relative   bg-white p-3", className)}
+        className={twMerge("relative rounded-md  ", className)}
         id={id}
+        headerChildren={
+          <ProcessHeader
+            menuButtonTitle={menuButtonTitle}
+            pageTitle={pageTitle}
+          >
+            {menuChildren}
+          </ProcessHeader>
+        }
       >
-        <ProcessHeader menuButtonTitle={menuButtonTitle} pageTitle={pageTitle}>
-          {menuChildren}
-        </ProcessHeader>
         {children}
-      </Container>
+      </GrayContainer>
       <ActionContainer start={start} end={end} />
     </>
   );

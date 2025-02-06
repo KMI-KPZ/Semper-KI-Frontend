@@ -17,6 +17,7 @@ import AuthorizedUserOutlet from "@/outlets/AuthorizedUserOutlet";
 import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
 import BackButtonContainer from "@/components/BackButtonContainer/BackButtonContainer";
 import ProcessInfo from "./components/Info/Info";
+import GrayContainer from "@component-library/Container/GrayContainer";
 
 interface ProcessPageProps {}
 
@@ -27,11 +28,17 @@ const ProcessPage: React.FC<ProcessPageProps> = (props) => {
 
   return (
     <Container direction="col" width="full">
-      <BackButtonContainer>
-        <Heading variant="h1">{t("Process.heading")}</Heading>
-      </BackButtonContainer>
-      <ProcessInfo process={process} />
-      <Container width="full" align="start">
+      <GrayContainer
+        width="full"
+        headerChildren={
+          <BackButtonContainer>
+            <Heading variant="h1">{t("Process.heading")}</Heading>
+          </BackButtonContainer>
+        }
+      >
+        <ProcessInfo process={process} />
+      </GrayContainer>
+      <Container width="full" align="start" direction="row" justify="start">
         <ProcessStatusWizard process={process} />
         <Container direction="col" width="full">
           <Service process={process} />

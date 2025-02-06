@@ -108,7 +108,7 @@ const ServiceManufacturingGroupOverview: React.FC<
       direction="col"
       justify="start"
       align="start"
-      className="gap-0 rounded-md border-2"
+      className="gap-0 rounded-md border-2 bg-white"
     >
       <Container
         width="full"

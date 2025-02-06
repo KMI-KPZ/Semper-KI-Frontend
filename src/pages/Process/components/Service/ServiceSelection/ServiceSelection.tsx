@@ -74,7 +74,6 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = (props) => {
       align="start"
       justify="center"
       wrap="wrap"
-      className="pb-5"
       id="Process-ServiceType"
     >
       {services.data.map((service, index) => (

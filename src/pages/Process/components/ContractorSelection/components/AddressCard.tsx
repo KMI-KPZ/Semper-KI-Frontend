@@ -91,7 +91,8 @@ const ContractorSelectionAddressCard: React.FC<
     <Container
       width="full"
       direction="col"
-      className="card h-full gap-0 self-stretch"
+      className="card h-full gap-0 self-stretch bg-white"
+      justify="start"
       id={
         type === "billing"
           ? "types.ProcessError.Process-Address-Billing"

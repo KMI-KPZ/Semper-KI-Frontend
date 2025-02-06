@@ -25,7 +25,7 @@ const ProcessInfo: React.FC<ProcessInfoProps> = (props) => {
       id="processInfo"
       width="full"
       direction="col"
-      className="relative gap-2 bg-white p-5"
+      className="relative gap-2 rounded-md bg-white p-5"
     >
       <ProcessMenu
         buttonTitle={t("Project.components.Info.button.menu")}

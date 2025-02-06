@@ -1,5 +1,5 @@
 import { Process, ProcessOrigin } from "@/api/Process/Querys/useGetProcess";
-import { Container, Heading } from "@component-library/index";
+import { Heading } from "@component-library/index";
 import React, { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import FactoryIcon from "@mui/icons-material/Factory";
@@ -13,6 +13,7 @@ import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import StatusWizardCard from "./components/Card";
 import InfoIcon from "@mui/icons-material/Info";
 import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
+import GrayContainer from "@component-library/Container/GrayContainer";
 
 interface ProcessStatusWizardProps {
   process: Process;
@@ -132,20 +133,25 @@ const ProcessStatusWizard: React.FC<ProcessStatusWizardProps> = (props) => {
   useScrollIntoView(newestStatusID);
 
   return (
-    <Container
+    <GrayContainer
+      width="fit"
       direction="col"
-      justify="start"
-      className="top-5 max-h-60  overflow-y-auto bg-white p-5 md:sticky md:max-h-fit md:overflow-y-visible"
+      headerChildren={
+        <Heading
+          variant="h2"
+          className="w-full rounded-md  bg-white p-2 text-center"
+        >
+          {t("Process.components.StatusWizard.header")}
+        </Heading>
+      }
+      className="top-5 max-h-60 overflow-y-auto rounded-md  md:sticky md:max-h-fit md:overflow-y-visible"
     >
-      <Heading variant="h2">
-        {t("Process.components.StatusWizard.header")}
-      </Heading>
       {statusWizardItems.map((item) => {
         return (
           <StatusWizardCard key={item.text} item={item} process={process} />
         );
       })}
-    </Container>
+    </GrayContainer>
   );
 };
 

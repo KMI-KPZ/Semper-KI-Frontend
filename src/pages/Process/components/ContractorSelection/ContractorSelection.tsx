@@ -92,10 +92,12 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
           width="full"
           justify="start"
           direction="col"
-          className={`card ${!showDeliveryAddress ? "self-stretch" : ""}`}
+          className={`card bg-white ${
+            !showDeliveryAddress ? "self-stretch" : ""
+          }`}
           id="Contractor"
         >
-          <Container width="fit" className={`gap-2 p-0 `}>
+          <Container width="fit" className={`gap-2  p-0`}>
             <ProcessConditionIcon
               error={process.processDetails.provisionalContractor === undefined}
             />
@@ -153,7 +155,7 @@ const ProcessContractorSelection: React.FC<ProcessContractorSelectionProps> = (
           direction="col"
           width="full"
           justify="start"
-          className="self-stretch"
+          className="self-stretch rounded-md "
         >
           <ContractorSelectionAddressCard
             onChangeCheckBox={onChangeCheckBox}

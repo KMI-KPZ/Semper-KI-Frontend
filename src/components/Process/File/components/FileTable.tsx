@@ -82,12 +82,16 @@ const ProcessFileTable: React.FC<ProcessFileTableProps> = (props) => {
           .length === 0))
   )
     return (
-      <Container width="full" className="rounded-md border-2 p-5">
+      <Container width="full" className="rounded-md border-2 bg-white p-5">
         <Heading variant="h3">{noFilesMessage}</Heading>
       </Container>
     );
   return (
-    <Container width="full" direction="col" className="rounded-md border-2 p-5">
+    <Container
+      width="full"
+      direction="col"
+      className="rounded-md border-2 bg-white p-5"
+    >
       <Heading variant="h3">{heading}</Heading>
       <table className="w-full border-separate border-spacing-x-0 border-spacing-y-2 ">
         <thead>

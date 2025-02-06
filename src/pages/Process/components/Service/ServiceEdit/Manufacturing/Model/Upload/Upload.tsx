@@ -51,14 +51,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
         file: z.instanceof(File).optional(),
         tags: z.string().optional(),
         scalingFactor: z.number().min(1).max(100000).optional(),
-        licenses: z.string().min(
-          1,
-          t("zod.requiredName", {
-            name: t(
-              `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.license`
-            ),
-          })
-        ),
+        licenses: z.string().optional(),
         certificates: z.string().optional(),
         quantity: z
           .number()
@@ -161,43 +154,6 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   };
 
   const sendModels = (data: ProcessModelUploadFormProps) => {
-    // const updatedModels: ProcessModel[] = data.models
-    //   .filter(
-    //     (model) => model.file === undefined && model.modelID !== undefined
-    //   )
-    //   .map((model) => ({
-    //     item: model,
-    //     model: group.models?.find(
-    //       (existingModel) => existingModel.id === model.modelID
-    //     )!,
-    //   }))
-    //   .map(
-    //     (data): ProcessModel => ({
-    //       ...data.model,
-    //       certificates:
-    //         data.item.certificates === undefined
-    //           ? []
-    //           : data.item.certificates.split(",").map((item) => item.trim()),
-    //       licenses:
-    //         data.item.licenses === undefined
-    //           ? []
-    //           : data.item.licenses.split(",").map((item) => item.trim()),
-    //       tags:
-    //         data.item.tags === undefined
-    //           ? []
-    //           : data.item.tags.split(",").map((item) => item.trim()),
-    //       quantity: data.item.quantity !== undefined ? data.item.quantity : 1,
-    //       levelOfDetail:
-    //         data.item.levelOfDetail !== undefined
-    //           ? data.item.levelOfDetail
-    //           : ModelLevelOfDetail.MEDIUM,
-    //       scalingFactor:
-    //         data.item.scalingFactor !== undefined
-    //           ? data.item.scalingFactor
-    //           : 100,
-    //     })
-    //   );
-
     uploadModels.mutate(
       {
         processID: process.processID,

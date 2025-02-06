@@ -1828,7 +1828,7 @@
                     "certificate": "Eventuelle Zertifikate:",
                     "certificatePH": "Zertifikate1, Zertifikate2, ...",
                     "scalingFactor": "Skalierung",
-                    "license": "Lizenz der Datei *",
+                    "license": "Lizenz der Datei",
                     "licensePH": "Lizenz1, Lizenz2 ...",
                     "mandatory": "* Pflichtfeld",
                     "button": {

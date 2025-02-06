@@ -13,6 +13,7 @@ import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import { useNavigate } from "react-router-dom";
 import useUpdateModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUpdateModel";
 import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
+import useModal from "@/hooks/useModal";
 
 interface EditModelCardProps {
   model: ProcessModel;
@@ -24,19 +25,13 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
   const updateModel = useUpdateModel();
   const navigate = useNavigate();
   const { groupID } = useContext(ManufacturingGroupContext);
+  const { deleteModal } = useModal();
 
   const formSchema = z.object({
     modelID: z.string().optional(),
     tags: z.string().optional(),
     scalingFactor: z.number().min(1).max(100000).optional(),
-    licenses: z.string().min(
-      1,
-      t("zod.requiredName", {
-        name: t(
-          `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.license`
-        ),
-      })
-    ),
+    licenses: z.string().optional(),
     certificates: z.string().optional(),
     quantity: z
       .number()
@@ -102,6 +97,7 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
       {
         onSuccess: () => {
           navigate("../../../../..");
+          deleteModal("ModelEdit");
         },
       }
     );

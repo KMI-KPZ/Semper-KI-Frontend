@@ -172,7 +172,7 @@ export const isOntoNodePropertyName = (
   ].includes(name as OntoNodePropertyName);
 };
 
-const useGetOrgaNodesByType = (nodeType: OntoNodeType) => {
+const useGetOrgaNodesByType = (nodeType?: OntoNodeType) => {
   const { user } = useUser();
   const getOrgaNodesByType = async () =>
     authorizedCustomAxios
@@ -192,6 +192,7 @@ const useGetOrgaNodesByType = (nodeType: OntoNodeType) => {
   return useQuery<OntoNode[], Error>({
     queryKey: ["resources", "orga", "nodes", nodeType],
     queryFn: getOrgaNodesByType,
+    enabled: nodeType !== undefined,
   });
 };
 

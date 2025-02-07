@@ -35,6 +35,7 @@ export type ResourcesAction = "create" | "edit";
 
 export interface OptionalProps {
   technology?: string;
+  materialCategory?: string;
 }
 
 export interface ResourcesNodeFormEdges {
@@ -118,7 +119,12 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
 
   const node = useGetOrgaNode(nodeID);
   const allOrgaNodeNeighbors = useGetAllOrgaNodeNeighbors(nodeID);
-  const printerTechnologies = useGetOrgaNodesByType("technology");
+  const printerTechnologies = useGetOrgaNodesByType(
+    nodeType === "printer" ? "technology" : undefined
+  );
+  const materialCategories = useGetOrgaNodesByType(
+    nodeType === "material" ? "materialCategory" : undefined
+  );
 
   const edges = getEdges(organization, allOrgaNodeNeighbors.data);
 
@@ -298,6 +304,36 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
                 ) : (
                   <option value="">
                     {t("components.Resources.NodeForm.noTechnologies")}
+                  </option>
+                )}
+              </select>
+            </Container>
+          ) : null}
+          {nodeType === "material" ? (
+            <Container width="full" direction="row">
+              <Text>{t("components.Resources.NodeForm.materialCategory")}</Text>
+              <select
+                className=" rounded-md border border-gray-300 p-2"
+                {...register(`materialCategory`)}
+              >
+                {materialCategories.data !== undefined &&
+                materialCategories.data.length > 0 ? (
+                  <>
+                    <option value="" selected disabled>
+                      {t("components.Resources.NodeForm.noMaterialCategory")}
+                    </option>
+                    {materialCategories.data?.map((materialCategory) => (
+                      <option
+                        key={materialCategory.nodeID}
+                        value={materialCategory.nodeID}
+                      >
+                        {materialCategory.name}
+                      </option>
+                    ))}
+                  </>
+                ) : (
+                  <option value="">
+                    {t("components.Resources.NodeForm.noMaterialCategories")}
                   </option>
                 )}
               </select>

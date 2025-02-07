@@ -13,12 +13,12 @@ interface ProcessConditionItemProps {
 const ProcessConditionItem: React.FC<ProcessConditionItemProps> = (props) => {
   const { error } = props;
   const { t } = useTranslation();
-  const { setLoadGroupID } = useContext(ProcessContext);
+  const { setLoadGroup: setLoadGroupID } = useContext(ProcessContext);
   const navigate = useNavigate();
 
   const handleOnClickButton = () => {
     if (error.groupID !== undefined) {
-      setLoadGroupID(error.groupID);
+      setLoadGroupID({ groupID: error.groupID, navLink: "#" + error.key });
     } else {
       navigate("#" + error.key);
     }

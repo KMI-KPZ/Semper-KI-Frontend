@@ -101,7 +101,7 @@ export interface OntoNodePropertyGeneral {
   value: any;
   unit: string;
   type: OntoNodePropertyType;
-  //key: string;
+  key: string;
 }
 export interface OntoNodePropertyText extends OntoNodePropertyGeneral {
   type: "text";

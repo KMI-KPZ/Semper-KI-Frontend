@@ -61,6 +61,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
       type: "text",
       value: "",
       unit: "",
+      key: "",
     });
   };
 

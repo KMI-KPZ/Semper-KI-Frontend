@@ -1,5 +1,6 @@
 import { ProcessContext } from "@/contexts/ProcessContext";
 import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface useLoadGroupIDProps {
   setActiveGroup?: (groupID: number) => void;
@@ -7,14 +8,30 @@ interface useLoadGroupIDProps {
 
 const useLoadGroupID = (props: useLoadGroupIDProps) => {
   const { setActiveGroup } = props;
-  const { loadGroupID, setLoadGroupID } = useContext(ProcessContext);
+  const { loadGroup, setLoadGroup } = useContext(ProcessContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (setActiveGroup !== undefined && loadGroupID !== undefined) {
-      setActiveGroup(loadGroupID);
-      setLoadGroupID(undefined);
+    if (setActiveGroup !== undefined && loadGroup.groupID !== undefined) {
+      setActiveGroup(loadGroup.groupID);
+      setLoadGroup({
+        groupID: undefined,
+        navLink: loadGroup.navLink,
+        loadNav: loadGroup.navLink !== undefined,
+      });
     }
-  }, [loadGroupID, setActiveGroup]);
+  }, [loadGroup, setActiveGroup]);
+
+  useEffect(() => {
+    if (
+      loadGroup.navLink !== undefined &&
+      loadGroup.loadNav !== undefined &&
+      loadGroup.loadNav
+    ) {
+      navigate(loadGroup.navLink);
+      setLoadGroup({ groupID: undefined, navLink: undefined, loadNav: false });
+    }
+  }, [loadGroup]);
 };
 
 export default useLoadGroupID;

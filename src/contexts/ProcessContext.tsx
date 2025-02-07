@@ -5,8 +5,14 @@ import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 interface ProcessContextProviderProps {
   process: Process;
   filters: FilterItemProps[];
-  loadGroupID: number | undefined;
-  setLoadGroupID(groupID: number): void;
+  loadGroup: ProcessLoadGroup;
+  setLoadGroup(group: ProcessLoadGroup): void;
+}
+
+export interface ProcessLoadGroup {
+  groupID: number | undefined;
+  navLink: string | undefined;
+  loadNav?: boolean;
 }
 
 export interface ProcessContextProps {
@@ -16,8 +22,8 @@ export interface ProcessContextProps {
   editFilters: FilterItemProps[];
   setEditFilters: React.Dispatch<React.SetStateAction<FilterItemProps[]>>;
   loadedFilter: FilterItemProps[];
-  loadGroupID: number | undefined;
-  setLoadGroupID(groupID: number | undefined): void;
+  loadGroup: ProcessLoadGroup;
+  setLoadGroup: (group: ProcessLoadGroup) => void;
 }
 
 export const ProcessContext = React.createContext<ProcessContextProps>({
@@ -27,8 +33,8 @@ export const ProcessContext = React.createContext<ProcessContextProps>({
   editFilters: [],
   setEditFilters: () => {},
   loadedFilter: [],
-  loadGroupID: undefined,
-  setLoadGroupID: () => {},
+  loadGroup: {} as { groupID: number | undefined; navLink: string | undefined },
+  setLoadGroup: () => {},
 });
 
 const ProcessContextProvider: React.FC<
@@ -38,8 +44,8 @@ const ProcessContextProvider: React.FC<
     process,
     children,
     filters: loadedFilter,
-    loadGroupID,
-    setLoadGroupID,
+    loadGroup,
+    setLoadGroup,
   } = props;
 
   const [filters, setFilters] = useState<FilterItemProps[]>(loadedFilter);
@@ -49,8 +55,8 @@ const ProcessContextProvider: React.FC<
   return (
     <ProcessContext.Provider
       value={{
-        loadGroupID,
-        setLoadGroupID,
+        loadGroup,
+        setLoadGroup,
         process,
         filters,
         setFilters,

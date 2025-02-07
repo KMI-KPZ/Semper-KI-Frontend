@@ -94,11 +94,16 @@ const getEdges = (
       : nodes.filter((edgeNode) => edgeNode.nodeID !== organization.hashedID)
   );
 
-const getTechnology = (nodes?: OntoNode[]): string | undefined => {
-  return nodes?.find((node) => node.nodeType === "technology")?.nodeID;
+const getTechnology = (nodes?: OntoNode[]): string => {
+  return (
+    nodes?.find((node) => node.nodeType === "technology")?.nodeID || "none"
+  );
 };
-const getMaterialCatergory = (nodes?: OntoNode[]): string | undefined => {
-  return nodes?.find((node) => node.nodeType === "materialCategory")?.nodeID;
+const getMaterialCatergory = (nodes?: OntoNode[]): string => {
+  return (
+    nodes?.find((node) => node.nodeType === "materialCategory")?.nodeID ||
+    "none"
+  );
 };
 
 const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
@@ -133,7 +138,14 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
 
   const { register, handleSubmit, control, reset, watch } = useForm<FormData>({
     defaultValues:
-      nodeID === undefined ? { nodeType, edges } : { ...node.data, edges },
+      nodeID === undefined
+        ? { nodeType, edges }
+        : {
+            ...node.data,
+            technology: nodeType === "printer" ? "none" : undefined,
+            materialCategory: nodeType === "material" ? "none" : undefined,
+            edges,
+          },
   });
 
   const usePropertyArray = useFieldArray({
@@ -186,7 +198,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
       },
       {
         onSuccess() {
-          navigate("../..");
+          navigate(type === "edit" ? "../.." : "..");
         },
         onError() {
           console.error("Error on submitOrgaNodeForm");
@@ -291,24 +303,29 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
             labelText={t("components.Resources.NodeForm.nodeName")}
             register={register}
             type="text"
+            required
           />
           <GeneralInput
             label="context"
             labelText={t("components.Resources.NodeForm.context")}
             register={register}
             type="text"
+            required
           />
           {nodeType === "printer" ? (
             <Container width="full" direction="row">
               <Text>{t("components.Resources.NodeForm.technology")}</Text>
               <select
                 className=" rounded-md border border-gray-300 p-2"
-                {...register(`technology`)}
+                {...register(`technology`, {
+                  required: true,
+                  validate: (value) => value !== "none",
+                })}
               >
                 {printerTechnologies.data !== undefined &&
                 printerTechnologies.data.length > 0 ? (
                   <>
-                    <option value="" selected disabled>
+                    <option value="none" disabled>
                       {t("components.Resources.NodeForm.noTechnology")}
                     </option>
                     {printerTechnologies.data?.map((technology) => (
@@ -330,12 +347,15 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
               <Text>{t("components.Resources.NodeForm.materialCategory")}</Text>
               <select
                 className=" rounded-md border border-gray-300 p-2"
-                {...register(`materialCategory`)}
+                {...register(`materialCategory`, {
+                  required: true,
+                  validate: (value) => value !== "none",
+                })}
               >
                 {materialCategories.data !== undefined &&
                 materialCategories.data.length > 0 ? (
                   <>
-                    <option value="" selected disabled>
+                    <option value="none" disabled>
                       {t("components.Resources.NodeForm.noMaterialCategory")}
                     </option>
                     {materialCategories.data?.map((materialCategory) => (

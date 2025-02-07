@@ -14,8 +14,11 @@ const GrayContainer: React.FC<
   const gradientStyle = {
     background: `linear-gradient(
       to bottom right,
-      rgba(255, 255, 255, 0.4) 0%,   
-      rgba(255, 255, 255, 0.1) 100%, 
+      rgba(255, 255, 255, 0.4) 0%,   /* New stop from the second image */
+      rgba(255, 255, 255, 0.1) 100%, /* New stop from the second image */
+      rgba(38, 54, 82, 0.1) 30%,
+      rgba(38, 54, 82, 0.5) 75%,
+      rgba(38, 54, 82, 0.6) 100%
     )`,
   };
   const className = "gap-0 rounded-md p-0";

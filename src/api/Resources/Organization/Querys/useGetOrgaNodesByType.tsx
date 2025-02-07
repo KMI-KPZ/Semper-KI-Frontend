@@ -30,6 +30,8 @@ export const clientNodeTypes: OntoNodeType[] = [
   "printer",
   "material",
   "additionalRequirement",
+  "materialCategory",
+  "technology",
 ];
 export const adminNodeTypes: OntoNodeType[] = [
   "printer",
@@ -37,6 +39,8 @@ export const adminNodeTypes: OntoNodeType[] = [
   "material",
   "additionalRequirement",
   "color",
+  "materialCategory",
+  "technology",
 ];
 
 export interface OntoNodeNew {

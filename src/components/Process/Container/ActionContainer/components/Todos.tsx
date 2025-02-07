@@ -30,6 +30,7 @@ const ActionContainerTodos: React.FC<ActionContainerTodosProps> = (props) => {
           items="center"
           direction="col"
           wrap="wrap"
+          width="fit"
           className={twMerge(
             `rouned-md gap-5  rounded-md border-2 bg-gray-100 px-10 py-5 md:min-w-[500px] ${
               error ? "border-red-500" : ""

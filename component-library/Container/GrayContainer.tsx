@@ -11,8 +11,14 @@ const GrayContainer: React.FC<
 > = (props) => {
   const { className: _className = "", headerChildren, children } = props;
 
-  const className =
-    "gap-0 rounded-md bg-gradient-to-br from-white/50 to-ultramarinblau/20 p-0";
+  const gradientStyle = {
+    background: `linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.4) 0%,   
+      rgba(255, 255, 255, 0.1) 100%, 
+    )`,
+  };
+  const className = "gap-0 rounded-md p-0";
 
   if (headerChildren !== undefined)
     return (
@@ -20,6 +26,7 @@ const GrayContainer: React.FC<
         {...props}
         className={twMerge(className, _className)}
         direction="col"
+        style={gradientStyle}
       >
         {headerChildren}
         <Container {...props} className={twMerge("p-5", _className)}>
@@ -33,6 +40,7 @@ const GrayContainer: React.FC<
       {...props}
       className={twMerge(className, "p-5", _className)}
       direction="col"
+      style={gradientStyle}
     >
       {children}
     </Container>

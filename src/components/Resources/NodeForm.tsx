@@ -97,6 +97,9 @@ const getEdges = (
 const getTechnology = (nodes?: OntoNode[]): string | undefined => {
   return nodes?.find((node) => node.nodeType === "technology")?.nodeID;
 };
+const getMaterialCatergory = (nodes?: OntoNode[]): string | undefined => {
+  return nodes?.find((node) => node.nodeType === "materialCategory")?.nodeID;
+};
 
 const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   const { type } = props;
@@ -210,12 +213,15 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
 
   useEffect(() => {
     if (nodeID !== undefined && nodeID !== "") {
-      logger("UseEffect", nodeID);
       reset({
         ...node.data,
         technology:
           nodeType === "printer"
             ? getTechnology(allOrgaNodeNeighbors.data)
+            : undefined,
+        materialCategory:
+          nodeType === "material"
+            ? getMaterialCatergory(allOrgaNodeNeighbors.data)
             : undefined,
         edges: getEdges(organization, allOrgaNodeNeighbors.data),
       });
@@ -234,6 +240,10 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     printerTechnologies.isLoading && nodeType === "printer";
   const technologyIsError =
     printerTechnologies.isError && nodeType === "printer";
+  const materialCategoryIsLoading =
+    materialCategories.isLoading && nodeType === "material";
+  const materialCategoryIsError =
+    materialCategories.isError && nodeType === "material";
   const variantIsError =
     type === "create" &&
     variantNodeID !== "" &&
@@ -243,10 +253,16 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     editIsError ||
     variantIsError ||
     nodeType === undefined ||
-    technologyIsError
+    technologyIsError ||
+    materialCategoryIsError
   )
     return <Navigate to=".." />;
-  if (variantIsLoading || editIsLoading || technologyIsLoading)
+  if (
+    variantIsLoading ||
+    editIsLoading ||
+    technologyIsLoading ||
+    materialCategoryIsLoading
+  )
     return <LoadingAnimation />;
 
   return (

@@ -383,7 +383,12 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
         />
 
         {clientNodeTypes
-          .filter((_nodeType) => _nodeType !== nodeType)
+          .filter(
+            (_nodeType) =>
+              _nodeType !== nodeType &&
+              _nodeType !== "materialCategory" &&
+              _nodeType !== "technology"
+          )
           .map((edgeType, index) => (
             <ResourcesEdgeForm
               key={index}

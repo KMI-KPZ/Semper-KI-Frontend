@@ -92,7 +92,12 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
 
   const addFilesToForm = (files: File[]) => {
     files.forEach((file) => {
-      append({ file, quantity: 1, scalingFactor: 100 });
+      append({
+        file,
+        quantity: 1,
+        scalingFactor: 100,
+        levelOfDetail: ModelLevelOfDetail.MEDIUM,
+      });
     });
   };
 

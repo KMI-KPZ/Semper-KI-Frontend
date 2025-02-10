@@ -2161,6 +2161,8 @@
       "material": "Material",
       "verified": "Überprüfung",
       "actions": "Aktionen",
+      "noItems": "keine Verifizierungen/Drucker-Materialien Paare vorhanden",
+      "noItemsWithFilter": "keine  Verifizierungen/Drucker-Materialien Paare vorhanden mit den gewählten Filtern",
       "button": {
         "verify": "Verifizieren",
         "send": "Model abschicken",

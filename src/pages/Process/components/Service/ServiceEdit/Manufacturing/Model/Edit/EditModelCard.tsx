@@ -14,7 +14,6 @@ import { useNavigate } from "react-router-dom";
 import useUpdateModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUpdateModel";
 import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 import useModal from "@/hooks/useModal";
-
 interface EditModelCardProps {
   model: ProcessModel;
 }

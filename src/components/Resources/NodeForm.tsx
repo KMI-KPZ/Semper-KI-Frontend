@@ -134,7 +134,13 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     nodeType === "material" ? "materialCategory" : undefined
   );
 
-  const edges = getEdges(organization, allOrgaNodeNeighbors.data);
+  const edges = getEdges(
+    organization,
+    allOrgaNodeNeighbors.data?.filter(
+      (node) =>
+        node.nodeType !== "technology" && node.nodeType !== "materialCategory"
+    )
+  );
 
   const { register, handleSubmit, control, reset, watch } = useForm<FormData>({
     defaultValues:
@@ -186,14 +192,33 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
             .filter((edge) => edge.nodeType === "technology")
             .map((edge) => edge.nodeID)
         : [];
+    const newMaterialCategory: string[] =
+      data.materialCategory !== undefined &&
+      data.materialCategory !== "" &&
+      nodeType === "material"
+        ? [data.materialCategory]
+        : [];
+
+    const deleteMaterialCategory: string[] =
+      data.materialCategory !== undefined &&
+      data.materialCategory !== "" &&
+      nodeType === "material"
+        ? edges
+            .filter((edge) => edge.nodeType === "materialCategory")
+            .map((edge) => edge.nodeID)
+        : [];
 
     submitOrgaNodeForm.mutate(
       {
         node: { ...data, nodeType },
         type: type === "edit" ? "update" : "create",
         edges: {
-          create: [...newEdges, ...newTechnology],
-          delete: [...deleteEdges, ...deleteTechnology],
+          create: [...newEdges, ...newTechnology, ...newMaterialCategory],
+          delete: [
+            ...deleteEdges,
+            ...deleteTechnology,
+            ...deleteMaterialCategory,
+          ],
         },
       },
       {
@@ -235,7 +260,14 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
           nodeType === "material"
             ? getMaterialCatergory(allOrgaNodeNeighbors.data)
             : undefined,
-        edges: getEdges(organization, allOrgaNodeNeighbors.data),
+        edges: getEdges(
+          organization,
+          allOrgaNodeNeighbors.data?.filter(
+            (node) =>
+              node.nodeType !== "technology" &&
+              node.nodeType !== "materialCategory"
+          )
+        ),
       });
     }
   }, [node.data, allOrgaNodeNeighbors.data]);

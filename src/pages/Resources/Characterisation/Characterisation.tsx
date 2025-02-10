@@ -89,7 +89,7 @@ const ResourcesCharacterisation: React.FC<ResourcesCharacterisationProps> = (
               <tr>
                 <td className="text-center" colSpan={4}>
                   {t(
-                    `Resources.Costing.${
+                    `Resources.Characterisation.${
                       items.length >
                       items.filter((costingItem: CharacterisationItem) =>
                         filterDataBySearchInput(costingItem)

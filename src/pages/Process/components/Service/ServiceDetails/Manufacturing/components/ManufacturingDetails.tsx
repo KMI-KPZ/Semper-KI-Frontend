@@ -168,24 +168,22 @@ const ServiceManufacturingDetails: React.FC<
             groupID={activeGroup}
           />
         )}
-        <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
-          <Button
-            title={t(
-              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
-                material === undefined ? "addMaterial" : "addMore"
-              }`
-            )}
-            size={material === undefined ? "sm" : "xs"}
-            variant={material === undefined ? "primary" : "secondary"}
-            onClick={handleOnButtonClickMaterial}
-            startIcon={<AddIcon />}
-            children={t(
-              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
-                material === undefined ? "addMaterial" : "addMore"
-              }`
-            )}
-          />
-        </ProcessStatusGate>
+        {material === undefined ? (
+          <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
+            <Button
+              title={t(
+                `Process.components.Service.ServiceDetails.components.Manufacturing.button.addMaterial`
+              )}
+              size="sm"
+              variant="primary"
+              onClick={handleOnButtonClickMaterial}
+              startIcon={<AddIcon />}
+              children={t(
+                `Process.components.Service.ServiceDetails.components.Manufacturing.button.addMaterial`
+              )}
+            />
+          </ProcessStatusGate>
+        ) : null}
       </Container>
       <Divider />
       <Container

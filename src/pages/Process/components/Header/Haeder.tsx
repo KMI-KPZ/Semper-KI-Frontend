@@ -16,11 +16,15 @@ const ProcessHaeder: React.FC<ProcessHaederProps> = (props) => {
 
   return (
     <Container width="full" justify="start">
-      <GrayContainer width="fit" className="self-stretch">
+      <GrayContainer
+        width="full"
+        className="flex-row gap-5 self-stretch"
+        direction="row"
+      >
         <Container
           width="fit"
           direction="row"
-          className="grow  rounded-md bg-white"
+          className="grow self-stretch rounded-md bg-white"
           justify="start"
         >
           <Container width="fit" direction="col" items="end" className="py-3">
@@ -63,8 +67,6 @@ const ProcessHaeder: React.FC<ProcessHaederProps> = (props) => {
             <img src={LogoURL} alt="" />
           </Container>
         </Container>
-      </GrayContainer>
-      <GrayContainer width="full" direction="row" className="self-stretch">
         <ActionContainerTodos
           process={process}
           className="row w-full rounded-md bg-white"

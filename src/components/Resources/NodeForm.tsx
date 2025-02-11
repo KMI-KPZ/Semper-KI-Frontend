@@ -5,9 +5,8 @@ import {
   Container,
   Heading,
   LoadingAnimation,
-  Text,
 } from "@component-library/index";
-import useGetOrgaNodesByType, {
+import {
   OntoNode,
   OntoNodeNew,
   OntoNodeType,
@@ -27,6 +26,7 @@ import useGetOrgaNode from "@/api/Resources/Organization/Querys/useGetOrgaNode";
 import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetAllOrgaNodeNeighbors";
 import { Organization } from "@/api/Organization/Querys/useGetOrganization";
 import logger from "@/hooks/useLogger";
+import NodeCustomForm from "./NodeCustomForm";
 
 interface ResourcesNodePropsForm {
   type: ResourcesAction;
@@ -36,6 +36,7 @@ export type ResourcesAction = "create" | "edit";
 export interface OptionalProps {
   technology?: string;
   materialCategory?: string;
+  color?: string;
 }
 
 export interface ResourcesNodeFormEdges {
@@ -74,7 +75,7 @@ const getNodeID = (
   }
 };
 
-type FormData = (OntoNode | OntoNodeNew) &
+export type NodeFormData = (OntoNode | OntoNodeNew) &
   ResourcesNodeFormEdges &
   OptionalProps;
 
@@ -99,6 +100,7 @@ const getTechnology = (nodes?: OntoNode[]): string => {
     nodes?.find((node) => node.nodeType === "technology")?.nodeID || "none"
   );
 };
+
 const getMaterialCatergory = (nodes?: OntoNode[]): string => {
   return (
     nodes?.find((node) => node.nodeType === "materialCategory")?.nodeID ||
@@ -127,12 +129,6 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
 
   const node = useGetOrgaNode(nodeID);
   const allOrgaNodeNeighbors = useGetAllOrgaNodeNeighbors(nodeID);
-  const printerTechnologies = useGetOrgaNodesByType(
-    nodeType === "printer" ? "technology" : undefined
-  );
-  const materialCategories = useGetOrgaNodesByType(
-    nodeType === "material" ? "materialCategory" : undefined
-  );
 
   const edges = getEdges(
     organization,
@@ -142,17 +138,18 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     )
   );
 
-  const { register, handleSubmit, control, reset, watch } = useForm<FormData>({
-    defaultValues:
-      nodeID === undefined
-        ? { nodeType, edges }
-        : {
-            ...node.data,
-            technology: nodeType === "printer" ? "none" : undefined,
-            materialCategory: nodeType === "material" ? "none" : undefined,
-            edges,
-          },
-  });
+  const { register, handleSubmit, control, reset, watch } =
+    useForm<NodeFormData>({
+      defaultValues:
+        nodeID === undefined
+          ? { nodeType, edges }
+          : {
+              ...node.data,
+              technology: nodeType === "printer" ? "none" : undefined,
+              materialCategory: nodeType === "material" ? "none" : undefined,
+              edges,
+            },
+    });
 
   const usePropertyArray = useFieldArray({
     control,
@@ -163,7 +160,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     name: "edges",
   });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: NodeFormData) => {
     const newEdges: string[] =
       type === "create"
         ? data.edges.map((edge) => edge.nodeID)
@@ -280,34 +277,15 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     type === "create" &&
     variantNodeID !== "" &&
     (node.isLoading || allOrgaNodeNeighbors.isLoading);
-  const technologyIsLoading =
-    printerTechnologies.isLoading && nodeType === "printer";
-  const technologyIsError =
-    printerTechnologies.isError && nodeType === "printer";
-  const materialCategoryIsLoading =
-    materialCategories.isLoading && nodeType === "material";
-  const materialCategoryIsError =
-    materialCategories.isError && nodeType === "material";
+
   const variantIsError =
     type === "create" &&
     variantNodeID !== "" &&
     (node.isError || allOrgaNodeNeighbors.isError);
 
-  if (
-    editIsError ||
-    variantIsError ||
-    nodeType === undefined ||
-    technologyIsError ||
-    materialCategoryIsError
-  )
+  if (editIsError || variantIsError || nodeType === undefined)
     return <Navigate to=".." />;
-  if (
-    variantIsLoading ||
-    editIsLoading ||
-    technologyIsLoading ||
-    materialCategoryIsLoading
-  )
-    return <LoadingAnimation />;
+  if (variantIsLoading || editIsLoading) return <LoadingAnimation />;
 
   return (
     <Container width="full" direction="col">
@@ -344,69 +322,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
             type="text"
             required
           />
-          {nodeType === "printer" ? (
-            <Container width="full" direction="row">
-              <Text>{t("components.Resources.NodeForm.technology")}</Text>
-              <select
-                className=" rounded-md border border-gray-300 p-2"
-                {...register(`technology`, {
-                  required: true,
-                  validate: (value) => value !== "none",
-                })}
-              >
-                {printerTechnologies.data !== undefined &&
-                printerTechnologies.data.length > 0 ? (
-                  <>
-                    <option value="none" disabled>
-                      {t("components.Resources.NodeForm.noTechnology")}
-                    </option>
-                    {printerTechnologies.data?.map((technology) => (
-                      <option key={technology.nodeID} value={technology.nodeID}>
-                        {technology.name}
-                      </option>
-                    ))}
-                  </>
-                ) : (
-                  <option value="">
-                    {t("components.Resources.NodeForm.noTechnologies")}
-                  </option>
-                )}
-              </select>
-            </Container>
-          ) : null}
-          {nodeType === "material" ? (
-            <Container width="full" direction="row">
-              <Text>{t("components.Resources.NodeForm.materialCategory")}</Text>
-              <select
-                className=" rounded-md border border-gray-300 p-2"
-                {...register(`materialCategory`, {
-                  required: true,
-                  validate: (value) => value !== "none",
-                })}
-              >
-                {materialCategories.data !== undefined &&
-                materialCategories.data.length > 0 ? (
-                  <>
-                    <option value="none" disabled>
-                      {t("components.Resources.NodeForm.noMaterialCategory")}
-                    </option>
-                    {materialCategories.data?.map((materialCategory) => (
-                      <option
-                        key={materialCategory.nodeID}
-                        value={materialCategory.nodeID}
-                      >
-                        {materialCategory.name}
-                      </option>
-                    ))}
-                  </>
-                ) : (
-                  <option value="">
-                    {t("components.Resources.NodeForm.noMaterialCategories")}
-                  </option>
-                )}
-              </select>
-            </Container>
-          ) : null}
+          <NodeCustomForm nodeType={nodeType} register={register} />
         </Container>
         <ResourcesPropertyForm
           register={register}

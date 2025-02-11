@@ -47,6 +47,8 @@ import ManufacturingModelEdit from "../Process/components/Service/ServiceEdit/Ma
 import ManufacturingModelOutlet from "@/outlets/ManufacturingModelOutlet";
 import Demo from "../Demo/Demo";
 import HomeProjects from "../Home/Projects/Projects";
+import ToTopButton from "@component-library/ToTopButton/ToTopButton";
+import BottomFixedContainer from "@component-library/Container/BottomFixedContainer";
 // import Projects from "../Projects/Projects";
 // import ProjectPage from "../Project/ProjectPage";
 
@@ -231,10 +233,12 @@ const App: React.FC = () => {
         </main>
         <CookieBanner />
         <Menu />
-        {/* <ToTopButton /> */}
         <Footer />
       </div>
-      <Chatbot />
+      <BottomFixedContainer>
+        <ToTopButton />
+        <Chatbot />
+      </BottomFixedContainer>
       <ToastContainer
         position="top-right"
         autoClose={8000}

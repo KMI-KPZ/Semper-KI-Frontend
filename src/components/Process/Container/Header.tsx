@@ -20,7 +20,7 @@ const ProcessContainerHeader: React.FC<
       <Container
         width="full"
         justify="start"
-        className="rounded-md bg-white p-2 px-5"
+        className="rounded-md rounded-b-none bg-white p-2 px-5"
       >
         <Heading variant="h2">{pageTitle}</Heading>
       </Container>

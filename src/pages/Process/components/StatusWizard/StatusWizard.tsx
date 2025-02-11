@@ -11,7 +11,6 @@ import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import DescriptionIcon from "@mui/icons-material/Description";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import StatusWizardCard from "./components/Card";
-import InfoIcon from "@mui/icons-material/Info";
 import useScrollIntoView from "@/hooks/Process/useScrollIntoView";
 import GrayContainer from "@component-library/Container/GrayContainer";
 
@@ -41,11 +40,11 @@ export type StatusWizardItem = {
 };
 
 const statusWizardItems: StatusWizardItem[] = [
-  {
-    icon: <InfoIcon />,
-    text: "processInfo",
-    targetID: "header",
-  },
+  // {
+  //   icon: <InfoIcon />,
+  //   text: "processInfo",
+  //   targetID: "header",
+  // },
   {
     startStatus: ProcessStatus.DRAFT,
     endStatus: ProcessStatus.SERVICE_COMPLICATION,
@@ -139,7 +138,7 @@ const ProcessStatusWizard: React.FC<ProcessStatusWizardProps> = (props) => {
       headerChildren={
         <Heading
           variant="h2"
-          className="w-full rounded-md  bg-white p-2 text-center"
+          className="w-full rounded-md  rounded-b-none bg-white p-2 text-center"
         >
           {t("Process.components.StatusWizard.header")}
         </Heading>

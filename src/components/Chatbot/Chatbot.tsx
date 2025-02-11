@@ -300,7 +300,7 @@ const Chatbot: React.FC<ChatbotProps> = (props) => {
   }, [bounce]);
 
   return (
-    <Container width="fit" className="fixed bottom-4 right-4 z-50">
+    <Container width="fit" className="">
       <Button
         className={` rounded-full p-3 duration-300 md:hidden ${
           bounce && isChatbotEnabled && !botAlreadyLoaded.current

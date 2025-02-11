@@ -29,6 +29,10 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = (props) => {
       to: "/resources/material",
     },
     {
+      title: t("Resources.components.Menu.colors"),
+      to: "/resources/color",
+    },
+    {
       title: t("Resources.components.Menu.postProcessings"),
       to: "/resources/additionalRequirement",
     },

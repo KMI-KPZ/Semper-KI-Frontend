@@ -1,4 +1,3 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Search, Text } from "@component-library/index";
 import {
@@ -7,9 +6,7 @@ import {
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import useSearch from "@/hooks/useSearch";
 import useSort from "@/hooks/useSort";
-import useDeleteOrgaNode from "@/api/Resources/Organization/Mutations/useDeleteOrgaNode";
-import useUpdateOrgaNode from "@/api/Resources/Organization/Mutations/useUpdateOrgaNode";
-import logger from "@/hooks/useLogger";
+import ResourceTableRow from "./TableRow";
 
 interface ResourceTableProps {
   nodes: OntoNode[] | undefined;
@@ -20,43 +17,9 @@ const ResourceTable = (props: ResourceTableProps) => {
   const { nodes = [] } = props;
   const { t } = useTranslation();
 
-  const updateOrgaNode = useUpdateOrgaNode();
-  const deleteOrgaNode = useDeleteOrgaNode();
-
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<OntoNode>();
   const { getSortIcon, handleSort, sortItems } = useSort<OntoNode>();
-
-  const handleOnClickButtonDeleteNode = (node: OntoNode) => {
-    if (node.nodeID === undefined) return;
-    if (
-      window.confirm(
-        t("Resources.components.Table.confirmDelete", {
-          name: node.name,
-        })
-      )
-    ) {
-      deleteOrgaNode.mutate({
-        nodeID: node.nodeID,
-      });
-    }
-  };
-
-  const handleOnChangeInputActive = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    item: OntoNode
-  ) => {
-    if (item.nodeID === undefined) return;
-    logger(
-      "ResourceTable | handleOnChangeInputActive |",
-      item,
-      e.target.checked
-    );
-    updateOrgaNode.mutate({
-      nodeID: item.nodeID,
-      active: e.target.checked,
-    });
-  };
 
   return (
     <Container width="full" direction="col">
@@ -114,55 +77,7 @@ const ResourceTable = (props: ResourceTableProps) => {
                     .filter((node) => filterDataBySearchInput(node))
                     .sort(sortItems)
                     .map((node, index) => (
-                      <tr key={index}>
-                        <td
-                          className={`border-t-2 p-3 text-center ${
-                            index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                          }`}
-                        >
-                          {node.name}
-                        </td>
-                        <td
-                          className={`border-t-2 p-3 text-center ${
-                            index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                          }`}
-                        >
-                          <input
-                            type="checkbox"
-                            className="h-6 w-6"
-                            checked={node.active}
-                            onChange={(e) => handleOnChangeInputActive(e, node)}
-                          />
-                        </td>
-                        <td
-                          className={`border-t-2 p-3 text-center ${
-                            index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                          }`}
-                        >
-                          <Container width="full" direction="row">
-                            <Button
-                              variant="text"
-                              title={t("general.button.details")}
-                              to={`${node.nodeID}`}
-                              className="whitespace-nowrap"
-                            />
-                            <Button
-                              variant="text"
-                              title={t("general.button.edit")}
-                              to={`${node.nodeID}/edit`}
-                              className="whitespace-nowrap"
-                            />
-                            <Button
-                              variant="text"
-                              title={t("general.button.delete")}
-                              onClick={() =>
-                                handleOnClickButtonDeleteNode(node)
-                              }
-                              className="whitespace-nowrap"
-                            />
-                          </Container>
-                        </td>
-                      </tr>
+                      <ResourceTableRow key={index} index={index} node={node} />
                     ))
                 ) : (
                   <tr>

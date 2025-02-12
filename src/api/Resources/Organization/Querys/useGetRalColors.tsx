@@ -24,6 +24,7 @@ const useGetRalColors = (load: boolean) => {
   return useQuery<RalColor[], Error>({
     queryKey: ["RalColors"],
     queryFn: getRalColors,
+    staleTime: 1000 * 60, // 1 minute
     enabled: load,
   });
 };

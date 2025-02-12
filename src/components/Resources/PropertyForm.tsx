@@ -210,17 +210,24 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                                 handleOnChangePropertyType(e, index),
                             })}
                           >
-                            {nodeProperties.data.map((property) => (
-                              <option
-                                key={property.name}
-                                value={property.name}
-                                disabled={propertyNameAlreadyUsed(
-                                  property.name
-                                )}
-                              >
-                                {propertyNameTranslation(property.name)}
-                              </option>
-                            ))}
+                            {nodeProperties.data
+                              .filter(
+                                (prop) =>
+                                  nodeType === "color" &&
+                                  prop.key !== "colorHEX" &&
+                                  prop.key !== "colorRAL"
+                              )
+                              .map((property) => (
+                                <option
+                                  key={property.name}
+                                  value={property.name}
+                                  disabled={propertyNameAlreadyUsed(
+                                    property.name
+                                  )}
+                                >
+                                  {propertyNameTranslation(property.name)}
+                                </option>
+                              ))}
                           </select>
                         }
                       </Container>
@@ -236,7 +243,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                       {propertyNameTranslation(propField.name)}
                     </td>
                     <td
-                      className={`border-t-2 p-3 text-left ${
+                      className={`border-t-2 p-3  text-left ${
                         index % 2 === 1 ? "bg-gray-50" : "bg-white"
                       }`}
                     >

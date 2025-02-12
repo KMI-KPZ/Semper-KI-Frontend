@@ -194,3 +194,30 @@ export const objectToArray = <T,>(object: Object): T[] => {
   });
   return array;
 };
+
+export const getContrastColor = (hex: string): "black" | "white" => {
+  // Remove the '#' if it's there
+  if (hex.indexOf("#") === 0) {
+    hex = hex.slice(1);
+  }
+
+  // Convert 3-digit hex to 6-digit hex
+  if (hex.length === 3) {
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+  }
+
+  if (hex.length !== 6) {
+    throw new Error("Invalid HEX color.");
+  }
+
+  // Convert hex to RGB values
+  const r = parseInt(hex.slice(0, 2), 16);
+  const g = parseInt(hex.slice(2, 4), 16);
+  const b = parseInt(hex.slice(4, 6), 16);
+
+  // Calculate the relative luminance (formula from W3C)
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+  // If luminance is greater than 0.5, it's a light color, return 'black', otherwise 'white'
+  return luminance > 0.5 ? "black" : "white";
+};

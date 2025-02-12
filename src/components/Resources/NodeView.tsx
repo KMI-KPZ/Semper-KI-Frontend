@@ -16,6 +16,8 @@ import {
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import useGetOrgaNode from "@/api/Resources/Organization/Querys/useGetOrgaNode";
 import useGetAllOrgaNodeNeighbors from "@/api/Resources/Organization/Querys/useGetAllOrgaNodeNeighbors";
+import useGetRalColors from "@/api/Resources/Organization/Querys/useGetRalColors";
+import { getContrastColor } from "@/services/utils";
 
 interface ResourcesNodeViewProps {
   nodeID?: string;
@@ -31,6 +33,7 @@ const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
 
   const node = useGetOrgaNode(nodeID);
   const nodeNeighbors = useGetAllOrgaNodeNeighbors(nodeID);
+  const ralColors = useGetRalColors(node.data?.nodeType === "color");
 
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -131,9 +134,53 @@ const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
                     <td className={`border-t-2 p-3`}>
                       {propertyNameTranslation(property.name)}
                     </td>
-                    <td className={`border-t-2 p-3`}>
-                      {property.value.toString()} {property.unit}
-                    </td>
+                    {property.key === "colorHEX" ? (
+                      <td className={`border-t-2 p-3`}>
+                        <Container direction="row">
+                          <div
+                            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border-2"
+                            style={{
+                              background: `linear-gradient(to bottom, ${property.value})`,
+                            }}
+                          />
+                          <Text>
+                            {property.value.toString()} {property.unit}
+                          </Text>
+                        </Container>
+                      </td>
+                    ) : property.key === "colorRAL" ? (
+                      <td
+                        className={`border-t-2 p-3`}
+                        style={{
+                          background: ralColors.data?.find(
+                            (color) => color.RAL === property.value
+                          )?.Hex,
+                          color: getContrastColor(
+                            ralColors.data?.find(
+                              (color) => color.RAL === property.value
+                            )?.Hex ?? "#FFFFFF"
+                          ),
+                        }}
+                      >
+                        {property.value.toString()}{" "}
+                        {
+                          ralColors.data?.find(
+                            (color) => color.RAL === property.value
+                          )?.RALName
+                        }{" "}
+                        (
+                        {
+                          ralColors.data?.find(
+                            (color) => color.RAL === property.value
+                          )?.Hex
+                        }
+                        )
+                      </td>
+                    ) : (
+                      <td className={`border-t-2 p-3`}>
+                        {property.value.toString()} {property.unit}
+                      </td>
+                    )}
                   </tr>
                 ))
               )}

@@ -13,8 +13,7 @@ interface HomeServicesProps {}
 
 interface HomeServiceItem {
   id: number;
-  title: string;
-  text: string;
+  type: "questionnaire" | "matching" | "benchmarking" | "resilience";
   image: string;
 }
 
@@ -24,26 +23,22 @@ const HomeServices: React.FC<HomeServicesProps> = (props) => {
   const items: HomeServiceItem[] = [
     {
       id: 0,
-      title: t("Home.Anonym.Services.items.matching.heading"),
-      text: t("Home.Anonym.Services.items.matching.text"),
+      type: "matching",
       image: MatchingIMG,
     },
     {
       id: 1,
-      title: t("Home.Anonym.Services.items.questionnaire.heading"),
-      text: t("Home.Anonym.Services.items.questionnaire.text"),
+      type: "questionnaire",
       image: QuestionnaireIMG,
     },
     {
       id: 2,
-      title: t("Home.Anonym.Services.items.benchmarking.heading"),
-      text: t("Home.Anonym.Services.items.benchmarking.text"),
+      type: "benchmarking",
       image: BenchmarkingIMG,
     },
     {
       id: 3,
-      title: t("Home.Anonym.Services.items.resilience.heading"),
-      text: t("Home.Anonym.Services.items.resilience.text"),
+      type: "resilience",
       image: ResilienceIMG,
     },
   ];
@@ -67,9 +62,11 @@ const HomeServices: React.FC<HomeServicesProps> = (props) => {
               variant="h3"
               className="text-white transition-all duration-300 "
             >
-              {currentItem.title}
+              {t(`Home.Anonym.Services.items.${currentItem.type}.heading`)}
             </Heading>
-            <Text>{currentItem.text}</Text>
+            <Text>
+              {t(`Home.Anonym.Services.items.${currentItem.type}.text`)}
+            </Text>
           </Container>
         </Container>
         <Container width="full" direction="row">

@@ -63,9 +63,16 @@ export type OntoNodeProperty =
   | OntoNodePropertyText
   | OntoNodePropertyNumber
   | OntoNodePropertyDate
-  | OntoNodePropertyBoolean;
+  | OntoNodePropertyBoolean
+  | OntoNodePropertyArray;
 
-export type OntoNodePropertyType = "text" | "number" | "date" | "boolean";
+export type OntoNodePropertyType =
+  | "text"
+  | "number"
+  | "date"
+  | "boolean"
+  | "array";
+
 export type OntoNodePropertyName =
   | "imgPath"
   | "nozzleDiameter"
@@ -122,6 +129,10 @@ export interface OntoNodePropertyDate extends OntoNodePropertyGeneral {
 export interface OntoNodePropertyBoolean extends OntoNodePropertyGeneral {
   type: "boolean";
   value: boolean;
+}
+export interface OntoNodePropertyArray extends OntoNodePropertyGeneral {
+  type: "array";
+  value: string;
 }
 
 export const parseOntoNode = (node: any): OntoNode => {

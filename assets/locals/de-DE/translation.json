@@ -1776,7 +1776,10 @@
               },
               "components": {
                 "Card": {
-                  "props": "Eigenschaften"
+                  "props": "Eigenschaften",
+                  "colors": "Farben",
+                  "noColors": "keine Farben vorhanden",
+                  "noColorProps": "keine Eigenschaften vorhanden"
                 },
                 "Filter": {
                   "heading": "Filter / Vorgaben"

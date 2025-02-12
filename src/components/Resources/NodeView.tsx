@@ -11,7 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useOrganization from "@/hooks/useOrganization";
 import {
   OntoNodePropertyName,
-  clientNodeTypes,
+  getNodeTypes,
   isOntoNodePropertyName,
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import useGetOrgaNode from "@/api/Resources/Organization/Querys/useGetOrgaNode";
@@ -185,9 +185,9 @@ const ResourcesNodeView: React.FC<PropsWithChildren<ResourcesNodeViewProps>> = (
                 ))
               )}
 
-              {nodeNeighbors.data.length === 0
+              {getNodeTypes(node.data.nodeType).length === 0
                 ? null
-                : clientNodeTypes.map((nodeType, index) =>
+                : getNodeTypes(node.data.nodeType).map((nodeType, index) =>
                     nodeNeighbors.data.filter(
                       (node) => node.nodeType === nodeType
                     ).length > 0 ? (

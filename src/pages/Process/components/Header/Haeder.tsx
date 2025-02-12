@@ -44,7 +44,7 @@ const ProcessHaeder: React.FC<ProcessHaederProps> = (props) => {
             <Container
               width="full"
               direction="col"
-              className="gap-0 rounded-r-md bg-gradient-to-l from-teal-600 to-teal-400 p-2 text-white"
+              className=" gap-0 rounded-r-md bg-gradient-to-l from-teal-600 to-teal-400 p-2 text-white"
               items="end"
             >
               <Text variant="strong">
@@ -69,7 +69,7 @@ const ProcessHaeder: React.FC<ProcessHaederProps> = (props) => {
         </Container>
         <ActionContainerTodos
           process={process}
-          className="row w-full rounded-md bg-white"
+          className="row w-full grow self-stretch rounded-md bg-white"
         />
       </GrayContainer>
     </Container>

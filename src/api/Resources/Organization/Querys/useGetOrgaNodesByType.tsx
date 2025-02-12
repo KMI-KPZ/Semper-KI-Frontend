@@ -32,7 +32,30 @@ export const clientNodeTypes: OntoNodeType[] = [
   "additionalRequirement",
   "materialCategory",
   "technology",
+  "color",
 ];
+
+export const getNodeTypes = (nodeType: OntoNodeType): OntoNodeType[] => {
+  switch (nodeType) {
+    case "color":
+      return ["material", "additionalRequirement"];
+    case "material":
+      return ["printer", "color", "additionalRequirement"];
+    case "additionalRequirement":
+      return ["printer", "material", "color"];
+    case "printer":
+      return ["material", "additionalRequirement"];
+    case "materialCategory":
+      return [];
+    case "technology":
+      return [];
+    case "materialType":
+      return [];
+    case "organization":
+      return [];
+  }
+};
+
 export const adminNodeTypes: OntoNodeType[] = [
   "printer",
   "organization",

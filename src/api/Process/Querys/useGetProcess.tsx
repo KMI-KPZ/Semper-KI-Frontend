@@ -321,6 +321,11 @@ export const parseProcess = (process: any): Process => {
                 Object.keys(group.material).length === 0
                   ? undefined
                   : group.material,
+              color:
+                group.color === undefined ||
+                Object.keys(group.color).length === 0
+                  ? undefined
+                  : group.color,
             })),
           }
         : process.serviceDetails,

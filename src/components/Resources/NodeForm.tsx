@@ -11,7 +11,7 @@ import {
   OntoNodeNew,
   OntoNodeProperty,
   OntoNodeType,
-  clientNodeTypes,
+  getNodeTypes,
   isOntoNodeType,
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -413,7 +413,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
           nodeType={nodeType}
         />
 
-        {clientNodeTypes
+        {getNodeTypes(nodeType)
           .filter(
             (_nodeType) =>
               _nodeType !== nodeType &&

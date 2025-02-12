@@ -6,6 +6,7 @@ import { PostProcessingProps } from "../AdditiveManufacturing/PostProcessing/Que
 import { MaterialProps } from "../AdditiveManufacturing/Material/Querys/useGetMaterials";
 import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
 import { CheckModel } from "@/api/Process/Querys/useGetCheckModel";
+import { OntoNode } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 export interface ServiceItemProps {
   name: string;
@@ -54,6 +55,7 @@ export type ManufacturingServiceProps = {
   name?: string;
   models: ProcessModel[];
   material: MaterialProps | undefined;
+  color: OntoNode | undefined;
   postProcessings: PostProcessingProps[];
   manufacturerID?: string;
   context?: string;

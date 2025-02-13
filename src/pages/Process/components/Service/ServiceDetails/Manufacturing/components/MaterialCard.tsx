@@ -75,10 +75,11 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
               "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.properties"
             )}
           </Text>
+          {material.propList.length === 0 ? <Text>---</Text> : null}
         </Container>
-        <Container width="full" direction="col" className="gap-0 px-3">
-          {material.propList.length > 0 ? (
-            material.propList
+        {material.propList.length > 0 ? (
+          <Container width="full" direction="col" className="gap-0 px-3">
+            {material.propList
               .filter((item) => item.name !== "imgPath")
               .map((prop, index) => (
                 <Container key={index} justify="between" width="full">
@@ -96,11 +97,9 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
                     {prop.value.toString()} {prop.unit}
                   </Text>
                 </Container>
-              ))
-          ) : (
-            <Text>---</Text>
-          )}
-        </Container>
+              ))}
+          </Container>
+        ) : null}
         {color !== undefined ? (
           <Container
             width="full"

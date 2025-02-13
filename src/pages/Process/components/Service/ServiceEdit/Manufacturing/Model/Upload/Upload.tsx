@@ -38,6 +38,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const [dragActive, setDragActive] = useState(false);
   const { deleteModal } = useModal();
   const { group, groupID } = useContext(ManufacturingGroupContext);
+  const [check, setCheck] = useState(false);
 
   const { process } = useManufacturingProcess();
   const { project } = useProject();
@@ -218,6 +219,10 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     return Array.from(uniqueErrors);
   };
 
+  const handleOnChangeCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCheck(e.target.checked);
+  };
+
   return (
     <form className="flex h-full w-full flex-col items-center justify-start gap-5">
       <Container width="full" direction="row" justify="between">
@@ -255,8 +260,33 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                 direction="row"
                 justify="end"
                 items="end"
-                className="fixed bottom-5 z-10  w-fit self-center pr-5 md:sticky md:self-end"
+                className="fixed bottom-5 z-10 w-fit self-center pr-5 md:sticky md:self-end"
               >
+                <Container
+                  width="fit"
+                  direction="col"
+                  className="rounded-md border-2 bg-white p-3"
+                >
+                  <Text className="text-center text-sm">
+                    {t(
+                      "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.disclaimer2"
+                    )}
+                  </Text>
+                  <Container width="full" direction="row">
+                    <input
+                      type="checkbox"
+                      id="disclaimerCheckbox"
+                      checked={check}
+                      onChange={handleOnChangeCheck}
+                      className="h-6 w-6"
+                    />
+                    <label htmlFor="disclaimerCheckbox" className="text-sm">
+                      {t(
+                        "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.disclaimerCheckBox"
+                      )}
+                    </label>
+                  </Container>
+                </Container>
                 {errors !== undefined && getCompressedErrors().length > 0 ? (
                   <Container
                     className="rounded-md border-2 bg-white p-3"
@@ -273,6 +303,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                   width="fit"
                   loading={uploadModels.isLoading}
                   variant="primary"
+                  active={check}
                   title={t(
                     `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.button.upload`
                   )}
@@ -317,6 +348,31 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
           className="hidden"
           multiple
         />
+      </Container>
+      <Container direction="col" width="full" className="gap-1">
+        <Text className="text-center text-xs">
+          {t(
+            "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.disclaimer"
+          )}
+        </Text>
+        <Container width="full" className="gap-2">
+          <Button
+            className="text-sm"
+            variant="text"
+            title={t(
+              "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.termsOfService"
+            )}
+            size="xs"
+          />
+          <Button
+            className="text-sm"
+            size="xs"
+            variant="text"
+            title={t(
+              "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.privacyPolicy"
+            )}
+          />
+        </Container>
       </Container>
     </form>
   );

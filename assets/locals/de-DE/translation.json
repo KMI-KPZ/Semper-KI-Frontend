@@ -1821,6 +1821,11 @@
                 "loading": "Model wird hochgeladen",
                 "heading": "Eigene Modelle Hochladen",
                 "text": "per Drag & Drop oder Klick",
+                "disclaimer": "Mit dem Hochladen bestätigen Sie, dass Sie die Rechte zur Nutzung dieses Modells haben und erklären Sie sich mit unseren Nutzungsbedingungen und der Datenschutzrichtlinie einverstanden.",
+                "disclaimer2": "Indem Sie fortfahren, bestätigen Sie, dass Sie Eigentümer dieses 3D-Modells sind oder die Erlaubnis haben, es zu verwenden. Wir sind nicht haftbar für Urheberrechtsverletzungen. Außerdem behandeln wir Ihre Daten sicher und geben Ihre Dateien nicht weiter. Weitere Informationen finden Sie in unserer NDA-Richtlinie.",
+                "disclaimerCheckBox": "Ich bin mit den oben genannten Bedingungen einverstanden.",
+                "termsOfService": "Nutzungsbedingungen",
+                "privacyPolicy": "Datenschutzrichtlinie",
                 "error": {
                   "tags": "Error Tags",
                   "licenses": "keine Lizenz(en) angegeben",

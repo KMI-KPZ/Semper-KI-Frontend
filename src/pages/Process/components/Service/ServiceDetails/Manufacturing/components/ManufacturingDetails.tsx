@@ -31,7 +31,12 @@ const ServiceManufacturingDetails: React.FC<
   ServiceManufacturingDetailsProps
 > = (props) => {
   const { service, activeGroup } = props;
-  const { models = [], material = undefined, postProcessings = [] } = service;
+  const {
+    models = [],
+    material = undefined,
+    postProcessings = [],
+    color = undefined,
+  } = service;
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -166,6 +171,7 @@ const ServiceManufacturingDetails: React.FC<
           <ProcessServiceMaterialCard
             material={material}
             groupID={activeGroup}
+            color={color}
           />
         )}
         {material === undefined ? (

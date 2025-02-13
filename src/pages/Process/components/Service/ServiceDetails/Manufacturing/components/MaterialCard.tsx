@@ -11,19 +11,22 @@ import { MaterialProps } from "@/api/Service/AdditiveManufacturing/Material/Quer
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import ProcessStatusGate from "@/components/Process/StatusGate";
 import {
+  OntoNode,
   OntoNodePropertyName,
   isOntoNodePropertyName,
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
+import ColorView from "@/components/Resources/NodeCustomForm/components/ColorView";
 
 interface ProcessServiceMaterialCardProps {
   material: MaterialProps;
+  color?: OntoNode;
   groupID: number;
 }
 
 const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
   props
 ) => {
-  const { material, groupID } = props;
+  const { material, groupID, color } = props;
   const { t } = useTranslation();
   const { process } = useProcess();
   const { project } = useProject();
@@ -98,6 +101,50 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
             <Text>---</Text>
           )}
         </Container>
+        {color !== undefined ? (
+          <Container
+            width="full"
+            direction="col"
+            className="gap-0 rounded-md border-2 p-1"
+          >
+            <table className="w-full grow table-auto  border-separate border-spacing-x-3 border-spacing-y-0">
+              <tbody>
+                <tr>
+                  <th className="text-left">
+                    {t(
+                      "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.color"
+                    )}
+                  </th>
+                  <th>
+                    <Container direction="row" width="fit">
+                      <Text>{color.name}</Text>
+                      <ColorView colorNode={color} size="medium" />
+                    </Container>
+                  </th>
+                </tr>
+                {color.properties
+                  .filter((item) => item.name !== "imgPath")
+                  .map((prop, index: number) => (
+                    <tr key={index} className="model-view-tag">
+                      <td>
+                        {isOntoNodePropertyName(prop.name)
+                          ? t(
+                              `types.OntoNodePropertyName.${
+                                prop.name as OntoNodePropertyName
+                              }`
+                            )
+                          : prop.name}
+                        {": "}
+                      </td>
+                      <td>
+                        {prop.value.toString()} {prop.unit}
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </Container>
+        ) : null}
       </Container>
       <Container
         direction="col"

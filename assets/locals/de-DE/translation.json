@@ -1716,7 +1716,8 @@
                 "name": "Name:",
                 "type": "Typ:",
                 "cost": "Mittlere Anschaffungskosten:",
-                "properties": "Eigenschaften:"
+                "properties": "Eigenschaften:",
+                "color": "Farbe:"
               },
               "GroupOverview": {
                 "heading": "Gruppenübersicht",

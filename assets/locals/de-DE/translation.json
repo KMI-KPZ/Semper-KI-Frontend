@@ -1308,6 +1308,29 @@
       "src": "Quelle",
       "gender-fit": "[angepasst an gendergerechte Sprache]"
     },
+    "Nda": {
+      "heading": "NDA-Richtlinie (Geheimhaltungsvereinbarung)",
+      "1": {
+        "heading": "Vertraulichkeit der hochgeladenen Modelle",
+        "text": "Wir verpflichten uns, alle hochgeladenen 3D-Modelle und zugehörigen Informationen streng vertraulich zu behandeln."
+      },
+      "2": {
+        "heading": "Keine Weitergabe an Dritte",
+        "text": "Ihre Dateien werden nicht an Dritte weitergegeben, verkauft oder für andere Zwecke als die angegebenen genutzt."
+      },
+      "3": {
+        "heading": "Zugriffsbeschränkung",
+        "text": "Der Zugriff auf Ihre Daten ist nur autorisierten Mitarbeitern gestattet, die diese für die Erfüllung Ihrer Anfrage benötigen."
+      },
+      "4": {
+        "heading": "Speicherung und Löschung",
+        "text": "Hochgeladene Dateien werden nur so lange gespeichert, wie es für die Bearbeitung notwendig ist. Auf Wunsch können sie sofort nach Abschluss gelöscht werden."
+      },
+      "5": {
+        "heading": "Ausnahmen",
+        "text": "Diese Geheimhaltungsvereinbarung gilt nicht für Informationen, die bereits öffentlich bekannt sind oder uns auf legalem Wege von Dritten bereitgestellt wurden."
+      }
+    },
     "Privacy": {
       "privacy-policy": "Datenschutzerklärung",
       "data-processing-info": "Informationen zur Datenverarbeitung für die Webseite https://semper-ki.org und https://magazin.semper-ki.org",
@@ -1381,12 +1404,65 @@
       "google-web-fonts": "Google Web Fonts",
       "google-web-fonts-info": "Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten so genannte Web Fonts, die von Google bereitgestellt werden. Beim Aufruf einer Seite lädt Ihr Browser die benötigten Web Fonts in ihren Browsercache, um Texte und Schriftarten korrekt anzuzeigen. Zu diesem Zweck muss der von Ihnen verwendete Browser Verbindung zu den Servern von Google aufnehmen. Hierdurch erlangt Google Kenntnis darüber, dass über Ihre IP-Adresse unsere Website aufgerufen wurde. Die Nutzung von Google Web Fonts erfolgt im Interesse einer einheitlichen und ansprechenden Darstellung unserer Online-Angebote. Dies stellt ein berechtigtes Interesse im Sinne von Art. 6 Abs. 1 lit. f DSGVO dar. Wenn Ihr Browser Web Fonts nicht unterstützt, wird eine Standardschrift von Ihrem Computer genutzt. Weitere Informationen zu Google Web Fonts finden Sie unter https://developers.google.com/fonts/faq und in der Datenschutzerklärung von Google: https://www.google.com/policies/privacy/."
     },
+    "PrivacyPolicy": {
+      "heading": "Datenschutzrichtlinie",
+      "1": {
+        "heading": "Allgemeine Hinweise",
+        "text": "Diese Datenschutzrichtlinie erläutert, welche Daten wir erheben, wie wir sie verarbeiten und welche Rechte Sie haben."
+      },
+      "2": {
+        "heading": "Erhobene Daten",
+        "text1": "Hochgeladene 3D-Modelle",
+        "text2": "Nutzername, E-Mail-Adresse (falls erforderlich)",
+        "text3": "Nutzungsdaten unserer Website"
+      },
+      "3": {
+        "heading": "Verwendungszweck der Daten",
+        "text1": "Verarbeitung und Speicherung hochgeladener Modelle",
+        "text2": "Verbesserung unseres Services",
+        "text3": "Kommunikation mit Ihnen (falls notwendig)"
+      },
+      "4": {
+        "heading": "Datensicherheit",
+        "text": "Wir setzen technische und organisatorische Maßnahmen ein, um Ihre Daten vor unbefugtem Zugriff zu schützen."
+      },
+      "5": {
+        "heading": "Rechte der Nutzer",
+        "text": "Sie haben das Recht, Auskunft über Ihre gespeicherten Daten zu erhalten, diese korrigieren oder löschen zu lassen. Kontaktieren Sie uns hierzu unter info@semper-ki.org."
+      }
+    },
+    "TermsOfService": {
+      "heading": "Nutzungsbedingungen",
+      "1": {
+        "heading": "Allgemeine Bestimmungen",
+        "text": "Durch die Nutzung unserer Plattform erklären Sie sich mit diesen Nutzungsbedingungen einverstanden."
+      },
+      "2": {
+        "heading": "Nutzung der Plattform",
+        "text": "Sie dürfen nur 3D-Modelle hochladen, an denen Sie die erforderlichen Rechte besitzen. Sie tragen die alleinige Verantwortung für den Inhalt der hochgeladenen Dateien."
+      },
+      "3": {
+        "heading": "Urheberrecht und Haftungsausschluss",
+        "text": "Wir übernehmen keine Haftung für urheberrechtliche Verstöße durch Nutzer. Falls eine Urheberrechtsverletzung gemeldet wird, behalten wir uns das Recht vor, das betroffene Modell zu entfernen."
+      },
+      "4": {
+        "heading": "Speicherung und Löschung von Inhalten",
+        "text": "Wir behalten uns vor, hochgeladene Dateien nach einer gewissen Zeit automatisch zu löschen oder auf Anfrage zu entfernen."
+      },
+      "5": {
+        "heading": "Änderungen der Nutzungsbedingungen",
+        "text": "Diese Bedingungen können jederzeit geändert werden. Die aktuelle Version ist stets auf unserer Website verfügbar."
+      }
+    },
     "Legal": {
       "heading": "Gesetzliches",
       "button": {
         "imprint": "Impressum",
         "privacy": "Datenschutzerklärung",
-        "contact": "Kontakt"
+        "contact": "Kontakt",
+        "nda": "NDA-Richtlinie",
+        "privacyPolice": "Datenschutzrichtlinie",
+        "termsOfService": "Nutzungsbedingungen"
       }
     }
   },
@@ -1826,6 +1902,7 @@
                 "disclaimerCheckBox": "Ich bin mit den oben genannten Bedingungen einverstanden.",
                 "termsOfService": "Nutzungsbedingungen",
                 "privacyPolicy": "Datenschutzrichtlinie",
+                "nda": "NDA-Richtlinie",
                 "error": {
                   "tags": "Error Tags",
                   "licenses": "keine Lizenz(en) angegeben",

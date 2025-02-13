@@ -285,6 +285,15 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                         "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.disclaimerCheckBox"
                       )}
                     </label>
+                    <Button
+                      className="text-sm"
+                      variant="text"
+                      title={t(
+                        "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.nda"
+                      )}
+                      size="xs"
+                      to="/legal/nda"
+                    />
                   </Container>
                 </Container>
                 {errors !== undefined && getCompressedErrors().length > 0 ? (
@@ -363,11 +372,13 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
               "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.termsOfService"
             )}
             size="xs"
+            to="/legal/termsOfService"
           />
           <Button
             className="text-sm"
             size="xs"
             variant="text"
+            to="/legal/privacyPolicy"
             title={t(
               "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.privacyPolicy"
             )}

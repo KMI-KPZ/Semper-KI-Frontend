@@ -66,7 +66,7 @@ export const ManufacturingMaterials: React.FC<Props> = (props) => {
           materialID: material.id,
           color:
             material.colors !== undefined && material.colors.length !== 0
-              ? group.color !== undefined
+              ? group.color !== undefined && material.id === group.material?.id
                 ? group.color
                 : material.colors[0]
               : undefined,

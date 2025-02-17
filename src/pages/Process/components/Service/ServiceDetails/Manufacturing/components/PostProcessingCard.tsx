@@ -48,7 +48,7 @@ const ProcessSericePostProcessingCard: React.FC<
       <Container direction="col" width="full" className="gap-2">
         <Text variant="strong">{postProcessing.title}</Text>
         <img
-          src={TestImg}
+          src={postProcessing.imgPath ? postProcessing.imgPath : TestImg}
           alt={t(
             "Process.components.Service.ServiceDetails.components.Manufacturing.PostProcessingCard.img"
           )}

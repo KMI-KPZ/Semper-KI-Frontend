@@ -50,7 +50,7 @@ const ProcessServiceMaterialCard: React.FC<ProcessServiceMaterialCardProps> = (
       <Container direction="col" width="full" className="gap-2">
         <Text variant="strong">{material.title}</Text>
         <img
-          src={TestImg}
+          src={material.imgPath ? material.imgPath : TestImg}
           alt={t(
             "Process.components.Service.ServiceDetails.components.Manufacturing.MaterialCard.img"
           )}

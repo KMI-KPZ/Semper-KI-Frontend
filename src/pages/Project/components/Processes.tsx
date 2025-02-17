@@ -53,7 +53,7 @@ const ProjectProcesses: React.FC<ProjectProcessesProps> = (props) => {
 
   const keyList: (keyof FlatProcess)[] = [
     "title",
-    "flatProcessStatus",
+    "actionStatus",
     "serviceType",
     "createdWhen",
     "updatedWhen",

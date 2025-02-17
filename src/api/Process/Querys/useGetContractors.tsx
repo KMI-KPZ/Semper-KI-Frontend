@@ -7,8 +7,10 @@ import { OrganizationBranding } from "@/api/Organization/Querys/useGetOrganizati
 export interface ContractorProps {
   hashedID: string;
   name: string;
+  distance: number;
   branding: OrganizationBranding;
-  price: { priceQuantity: [number, number] };
+  prices: { groupCosts: [number, number][] };
+  contractorCoordinates: [number, number];
 }
 
 const useGetContractors = () => {
@@ -20,9 +22,8 @@ const useGetContractors = () => {
       )
       .then((response) => {
         const responseData = response.data;
-        const contractors: ContractorProps[] =
-          responseData === "fu" ? [] : responseData;
 
+        const contractors: ContractorProps[] = responseData;
         logger("useGetContractors | getContractors ✅ |", response);
         return contractors;
       });

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { Button } from "@component-library/index";
 import { useTranslation } from "react-i18next";
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import useProcess from "@/hooks/Process/useProcess";
 import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface Props {
   model: ProcessModel;
@@ -20,6 +21,7 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const { process } = useProcess();
   const updateProcess = useUpdateProcess();
+  const { prevGroups, nextGroups } = useContext(ManufacturingGroupContext);
   const getDate = (): string => {
     let date: Date = new Date(model.date);
     return date.toLocaleDateString("uk-Uk");
@@ -28,7 +30,13 @@ export const ProcessModelPreView: React.FC<Props> = (props) => {
     closeModelView();
     updateProcess.mutate({
       processIDs: [process.processID],
-      updates: { changes: { serviceDetails: { model: [model] } } },
+      updates: {
+        changes: {
+          serviceDetails: {
+            groups: [...prevGroups, { models: [model] }, ...nextGroups],
+          },
+        },
+      },
     });
     navigate("../material");
   };

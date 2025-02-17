@@ -1,5 +1,5 @@
-import { Button, Container, Heading } from "@component-library/index";
-import React from "react";
+import { Button, Container, Heading, Text } from "@component-library/index";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ModelLevelOfDetail,
@@ -9,10 +9,11 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ManufacturingModelUploadData } from "../Upload/Upload";
-import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
 import useManufacturingProcess from "@/hooks/Process/useManufacturingProcess";
 import { useNavigate } from "react-router-dom";
-
+import useUpdateModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUpdateModel";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
+import useModal from "@/hooks/useModal";
 interface EditModelCardProps {
   model: ProcessModel;
 }
@@ -20,20 +21,16 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
   const { model } = props;
   const { t } = useTranslation();
   const { process } = useManufacturingProcess();
-  const updateProcess = useUpdateProcess();
+  const updateModel = useUpdateModel();
   const navigate = useNavigate();
+  const { groupID } = useContext(ManufacturingGroupContext);
+  const { deleteModal } = useModal();
 
   const formSchema = z.object({
     modelID: z.string().optional(),
     tags: z.string().optional(),
-    licenses: z.string().min(
-      1,
-      t("zod.requiredName", {
-        name: t(
-          `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.license`
-        ),
-      })
-    ),
+    scalingFactor: z.number().min(1).max(100000).optional(),
+    licenses: z.string().optional(),
     certificates: z.string().optional(),
     quantity: z
       .number()
@@ -61,46 +58,45 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
       tags: model.tags.join(", "),
       licenses: model.licenses.join(", "),
       certificates: model.certificates.join(", "),
+      scalingFactor:
+        model.scalingFactor !== undefined ? model.scalingFactor : 100,
     },
   });
 
   const onSubmit = (data: ManufacturingModelUploadData) => {
-    updateProcess.mutate(
+    updateModel.mutate(
       {
-        processIDs: [process.processID],
-        updates: {
-          changes: {
-            serviceDetails: {
-              model: [
-                {
-                  ...model,
-                  ...data,
-                  certificates:
-                    data.certificates === undefined
-                      ? []
-                      : data.certificates.split(",").map((item) => item.trim()),
-                  licenses:
-                    data.licenses === undefined
-                      ? []
-                      : data.licenses.split(",").map((item) => item.trim()),
-                  tags:
-                    data.tags === undefined
-                      ? []
-                      : data.tags.split(",").map((item) => item.trim()),
-                  quantity: data.quantity !== undefined ? data.quantity : 1,
-                  levelOfDetail:
-                    data.levelOfDetail !== undefined
-                      ? data.levelOfDetail
-                      : ModelLevelOfDetail.MEDIUM,
-                },
-              ],
-            },
-          },
+        processID: process.processID,
+        projectID: process.project.projectID,
+        groupID: groupID.toString(),
+        model: {
+          ...model,
+          ...data,
+          certificates:
+            data.certificates === undefined
+              ? []
+              : data.certificates.split(",").map((item) => item.trim()),
+          licenses:
+            data.licenses === undefined
+              ? []
+              : data.licenses.split(",").map((item) => item.trim()),
+          tags:
+            data.tags === undefined
+              ? []
+              : data.tags.split(",").map((item) => item.trim()),
+          quantity: data.quantity !== undefined ? data.quantity : 1,
+          levelOfDetail:
+            data.levelOfDetail !== undefined
+              ? data.levelOfDetail
+              : ModelLevelOfDetail.MEDIUM,
+          scalingFactor:
+            data.scalingFactor !== undefined ? data.scalingFactor : 100,
         },
       },
       {
         onSuccess: () => {
           navigate("../../../../..");
+          deleteModal("ModelEdit");
         },
       }
     );
@@ -109,7 +105,7 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
   return (
     <form className="flex w-full flex-col items-center justify-start gap-0  bg-white">
       <img src={model.imgPath} className="h-40 w-full object-contain " />
-      <Container direction="col" width="full" className="p-5">
+      <Container direction="col" width="full" className="">
         <Container width="full" className="relative">
           <Heading variant="h3">{model.fileName}</Heading>
         </Container>
@@ -153,8 +149,9 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
                   className={`flex w-full rounded-md border-2 p-2 ${
                     errors.licenses ? "border-red-500 " : ""
                   }`}
+                  defaultValue=""
                 >
-                  <option value="" disabled selected>
+                  <option value="" disabled>
                     {t(
                       `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.selectLicense`
                     )}
@@ -225,6 +222,25 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
                     {t(`enum.ModelLevelOfDetail.HIGH`)}
                   </option>
                 </select>
+              </td>
+            </tr>
+            <tr>
+              <th className="text-left">{`${t(
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.scalingFactor`
+              )}`}</th>
+              <td>
+                <Container direction="row">
+                  <input
+                    className={`flex w-full rounded-md border-2 p-2
+                    ${
+                      errors.scalingFactor ? "border-red-500 bg-red-500" : ""
+                    }}`}
+                    {...register(`scalingFactor`, {
+                      valueAsNumber: true,
+                    })}
+                  />
+                  <Text>%</Text>
+                </Container>
               </td>
             </tr>
             <tr>

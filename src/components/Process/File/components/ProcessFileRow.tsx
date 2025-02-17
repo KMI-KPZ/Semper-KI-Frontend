@@ -36,7 +36,7 @@ const ProcessFileRow: React.FC<ProcessFileRowProps> = (props) => {
       <td>{file.fileName}</td>
       <td>{new Date(file.date).toLocaleDateString()}</td>
       <td>{file.createdBy}</td>
-      {/* <td>{file.}</td> */}
+      <td>{t(`types.ProcessOrigin.${file.origin}`)}</td>
       <td>
         <Container width="full">
           <Button

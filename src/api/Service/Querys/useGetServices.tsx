@@ -5,6 +5,8 @@ import { ModelingServiceProps } from "@/pages/Process/components/Service/Service
 import { PostProcessingProps } from "../AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 import { MaterialProps } from "../AdditiveManufacturing/Material/Querys/useGetMaterials";
 import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
+import { CheckModel } from "@/api/Process/Querys/useGetCheckModel";
+import { OntoNode } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
 
 export interface ServiceItemProps {
   name: string;
@@ -27,8 +29,8 @@ export enum ServiceType {
   "POST_PROCESSING",
   "PACKAGING",
   "QUALITY_CONTROL",
-  "ASSEMBLY",
   "AFTER_SALES",
+  "ASSEMBLY",
 }
 
 export type ServiceProps = DefinedServiceProps | undefined;
@@ -50,18 +52,25 @@ export interface UpdateServiceUndefinedProps {
 }
 
 export type ManufacturingServiceProps = {
-  models?: ProcessModel[];
-  materials?: MaterialProps[];
-  postProcessings?: PostProcessingProps[];
+  name?: string;
+  models: ProcessModel[];
+  material: MaterialProps | undefined;
+  color: OntoNode | undefined;
+  postProcessings: PostProcessingProps[];
   manufacturerID?: string;
+  context?: string;
+  calculations?: CheckModel[];
 };
 
 export type UpdateServiceManufacturingProps = {
-  title?: string;
-  model?: ProcessModel[];
-  material?: MaterialProps[];
-  postProcessings?: PostProcessingProps[];
-  manufacturerID?: string;
+  groups?: {
+    title?: string;
+    models?: ProcessModel[];
+    material?: MaterialProps | undefined;
+    postProcessings?: PostProcessingProps[];
+    manufacturerID?: string;
+    context?: string;
+  }[];
 };
 
 export interface ServiceManufacturingState {

@@ -16,12 +16,12 @@ const ProfileStatistics: React.FC<ProfileStatisticsProps> = (props) => {
       <Heading variant="h2">{t("Profile.Statistics.header")}</Heading>
       <Divider />
       <Container width="full" direction="auto">
-        <Container width="full" direction="row" align="start" justify="start">
+        <Container width="full" direction="row" items="start" justify="start">
           <Container
             direction="col"
             width="fit"
             justify="start"
-            align="start"
+            items="start"
             className="p-3"
             gap={3}
           >
@@ -35,7 +35,7 @@ const ProfileStatistics: React.FC<ProfileStatisticsProps> = (props) => {
             direction="col"
             width="fit"
             justify="start"
-            align="start"
+            items="start"
             className="p-3"
             gap={3}
           >
@@ -50,20 +50,17 @@ const ProfileStatistics: React.FC<ProfileStatisticsProps> = (props) => {
             </Text>
           </Container>
         </Container>
-        <Container width="full" direction="row" align="start" justify="start">
+        <Container width="full" direction="row" items="start" justify="start">
           <Container
             direction="col"
             width="fit"
             justify="start"
-            align="start"
+            items="start"
             className="p-3"
             gap={3}
           >
             <Text className="break-all">
               {t("Profile.Statistics.lastLogin")}
-            </Text>
-            <Text className="break-all">
-              {t("Profile.Statistics.lastLoginLocation")}
             </Text>
             <Text className="break-all">
               {t("Profile.Statistics.lastLoginNumber")}
@@ -73,7 +70,7 @@ const ProfileStatistics: React.FC<ProfileStatisticsProps> = (props) => {
             direction="col"
             width="fit"
             justify="start"
-            align="start"
+            items="start"
             className="p-3"
             gap={3}
           >
@@ -83,12 +80,7 @@ const ProfileStatistics: React.FC<ProfileStatisticsProps> = (props) => {
                 ? new Date(user.details.statistics?.lastLogin).toLocaleString()
                 : "---"}
             </Text>
-            <Text className="break-all">
-              {user.details.statistics !== undefined &&
-              user.details.statistics.locationOfLastLogin !== undefined
-                ? user.details.statistics.locationOfLastLogin
-                : "---"}
-            </Text>
+
             <Text className="break-all">
               {user.details.statistics !== undefined &&
               user.details.statistics.numberOfLoginsTotal !== undefined

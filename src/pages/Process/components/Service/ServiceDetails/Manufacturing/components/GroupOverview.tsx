@@ -1,13 +1,17 @@
 import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Divider, Heading } from "@component-library/index";
+import { Button, Container, Heading } from "@component-library/index";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { ManufacturingServiceProps } from "@/api/Service/Querys/useGetServices";
-import { ManufactoringProcessProps } from "@/api/Process/Querys/useGetProcess";
+import {
+  ManufactoringProcessProps,
+  ProcessStatus,
+} from "@/api/Process/Querys/useGetProcess";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import logger from "@/hooks/useLogger";
+import useUpdateProcess from "@/api/Process/Mutations/useUpdateProcess";
+import ProcessStatusGate from "@/components/Process/StatusGate";
 
 interface ServiceManufacturingGroupOverviewProps {
   process: ManufactoringProcessProps;
@@ -21,12 +25,13 @@ const ServiceManufacturingGroupOverview: React.FC<
   const { process, activeGroup, changeActiveGroup } = props;
   const { t } = useTranslation();
 
-  const groups: ManufacturingServiceProps[] = process.serviceDetails;
+  const groups: ManufacturingServiceProps[] = process.serviceDetails.groups;
   const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const updatedProcess = useUpdateProcess();
 
   useEffect(() => {
     const currentActiveGroup = buttonRefs.current[activeGroup];
-    if (currentActiveGroup !== null) {
+    if (currentActiveGroup !== null && buttonRefs.current.length > 0) {
       currentActiveGroup.scrollIntoView({
         behavior: "smooth",
         block: "center",
@@ -48,11 +53,53 @@ const ServiceManufacturingGroupOverview: React.FC<
   };
 
   const handleOnClickNewGroup = () => {
-    logger("create new group");
+    updatedProcess.mutate({
+      processIDs: [process.processID],
+      updates: {
+        changes: {
+          serviceDetails: {
+            groups: [...groups.map(() => ({})), {}],
+          },
+        },
+      },
+    });
   };
 
   const handleOnClickDelete = (index: number) => {
-    logger("delete group", index);
+    changeActiveGroup(0);
+    updatedProcess.mutate(
+      {
+        processIDs: [process.processID],
+        updates: {
+          deletions: {
+            serviceDetails: {
+              groups: [
+                ...groups.slice(0, index).map(() => ({})),
+                { delete: true },
+                ...groups.slice(index + 1).map(() => ({})),
+              ],
+            },
+          },
+        },
+      },
+      {
+        onSuccess() {
+          if (groups.length === 1) {
+            changeActiveGroup(0);
+            updatedProcess.mutate({
+              processIDs: [process.processID],
+              updates: {
+                changes: {
+                  serviceDetails: {
+                    groups: [{}],
+                  },
+                },
+              },
+            });
+          }
+        },
+      }
+    );
   };
 
   return (
@@ -60,15 +107,15 @@ const ServiceManufacturingGroupOverview: React.FC<
       width="full"
       direction="col"
       justify="start"
-      align="start"
-      className="rounded-md border-2 "
+      items="start"
+      className="gap-0 rounded-md border-2 bg-white"
     >
       <Container
         width="full"
         direction="col"
         justify="center"
-        align="start"
-        className="p-3 pb-0"
+        items="start"
+        className="p-3"
       >
         <Heading variant="h3">
           {t(
@@ -76,7 +123,6 @@ const ServiceManufacturingGroupOverview: React.FC<
           )}
         </Heading>
       </Container>
-      <Divider />
       <Container
         width="full"
         direction="row"
@@ -112,12 +158,17 @@ const ServiceManufacturingGroupOverview: React.FC<
               )}
               onClick={() => handleOnClickGroup(index)}
               key={index}
-              className={`flex flex-row items-center  rounded-md border-2 p-2 hover:cursor-pointer hover:bg-slate-50 ${
+              className={`flex flex-row items-center rounded-md border-2 bg-gray-100 p-2 hover:cursor-pointer hover:bg-slate-50 ${
                 activeGroup === index ? "border-blau-button " : ""
               }`}
             >
               <table className="w-fit table-auto border-separate border-spacing-1 border-spacing-x-2">
                 <tbody>
+                  <tr>
+                    <th className="text-center" colSpan={2}>
+                      {`${t("general.group")} ${index + 1}`}
+                    </th>
+                  </tr>
                   <tr>
                     <th className="text-left">
                       {t(
@@ -139,11 +190,8 @@ const ServiceManufacturingGroupOverview: React.FC<
                       )}
                     </th>
                     <td className="whitespace-nowrap">
-                      {group.materials !== undefined &&
-                      group.materials.length > 0
-                        ? group.materials
-                            .map((material) => material.title)
-                            .join(", ")
+                      {group.material !== undefined
+                        ? group.material.title
                         : t(
                             "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.noMaterial"
                           )}
@@ -168,27 +216,34 @@ const ServiceManufacturingGroupOverview: React.FC<
                   </tr>
                 </tbody>
               </table>
-              <Container width="fit" justify="center" align="center">
-                <Button
-                  size="sm"
-                  variant="text"
-                  title={t("general.button.delete")}
-                  onClick={() => handleOnClickDelete(index)}
-                >
-                  <DeleteIcon />
-                </Button>
-              </Container>
+              <ProcessStatusGate
+                endExclude
+                end={ProcessStatus.SERVICE_COMPLETED}
+              >
+                <Container width="fit" justify="center" items="center">
+                  <Button
+                    size="sm"
+                    variant="text"
+                    title={t("general.button.delete")}
+                    onClick={() => handleOnClickDelete(index)}
+                  >
+                    <DeleteIcon />
+                  </Button>
+                </Container>
+              </ProcessStatusGate>
             </div>
           ))}
-          <Button
-            title={t(
-              "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.newGroup"
-            )}
-            className=" border-2 p-2 hover:bg-slate-50"
-            onClick={handleOnClickNewGroup}
-          >
-            <AddIcon />
-          </Button>
+          <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
+            <Button
+              title={t(
+                "Process.components.Service.ServiceDetails.components.Manufacturing.GroupOverview.newGroup"
+              )}
+              className=" border-2 p-2 hover:bg-slate-50"
+              onClick={handleOnClickNewGroup}
+            >
+              <AddIcon />
+            </Button>
+          </ProcessStatusGate>
         </Container>
         <Button
           title={t(

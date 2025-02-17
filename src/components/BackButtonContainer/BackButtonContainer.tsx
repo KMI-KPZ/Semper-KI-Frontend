@@ -14,7 +14,7 @@ const BackButtonContainer: React.FC<
   const { t } = useTranslation();
 
   return (
-    <Container width="full" className="relative  bg-white">
+    <Container width="full" className="relative rounded-md bg-white p-2">
       <Button
         width="fit"
         to={path}

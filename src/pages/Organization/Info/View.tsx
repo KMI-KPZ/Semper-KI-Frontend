@@ -120,7 +120,9 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
                   },
                   hashedID: organization.hashedID,
                   name: organization.name,
-                  price: { priceQuantity: [333, 666] },
+                  prices: { groupCosts: [[333, 666]] },
+                  contractorCoordinates: [0, 0],
+                  distance: 0,
                 }}
               />
             </td>

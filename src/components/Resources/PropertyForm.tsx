@@ -61,6 +61,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
       type: "text",
       value: "",
       unit: "",
+      key: "",
     });
   };
 
@@ -110,7 +111,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
   if (nodeProperties.isError) return <Navigate to=".." />;
   if (nodeProperties.isLoading) return <LoadingAnimation />;
   return (
-    <Container width="full" direction="col" className="card">
+    <Container width="full" direction="col" className="card bg-white">
       <Container width="full">
         <Heading variant="h3">
           {t("components.Resources.PropertyForm.properties.header")}
@@ -128,7 +129,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
         width="full"
         className="overflow-auto"
         justify="start"
-        align="start"
+        items="start"
       >
         <table className="card-container w-full table-auto border-separate border-spacing-x-0 p-0">
           <thead className="">
@@ -209,17 +210,24 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                                 handleOnChangePropertyType(e, index),
                             })}
                           >
-                            {nodeProperties.data.map((property) => (
-                              <option
-                                key={property.name}
-                                value={property.name}
-                                disabled={propertyNameAlreadyUsed(
-                                  property.name
-                                )}
-                              >
-                                {propertyNameTranslation(property.name)}
-                              </option>
-                            ))}
+                            {nodeProperties.data
+                              .filter(
+                                (prop) =>
+                                  nodeType === "color" &&
+                                  prop.key !== "colorHEX" &&
+                                  prop.key !== "colorRAL"
+                              )
+                              .map((property) => (
+                                <option
+                                  key={property.name}
+                                  value={property.name}
+                                  disabled={propertyNameAlreadyUsed(
+                                    property.name
+                                  )}
+                                >
+                                  {propertyNameTranslation(property.name)}
+                                </option>
+                              ))}
                           </select>
                         }
                       </Container>
@@ -235,7 +243,7 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                       {propertyNameTranslation(propField.name)}
                     </td>
                     <td
-                      className={`border-t-2 p-3 text-left ${
+                      className={`border-t-2 p-3  text-left ${
                         index % 2 === 1 ? "bg-gray-50" : "bg-white"
                       }`}
                     >

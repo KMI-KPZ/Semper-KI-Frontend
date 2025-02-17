@@ -2,33 +2,38 @@ import logger from "@/hooks/useLogger";
 import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 import useUser, { UserType } from "@/hooks/useUser";
-import { FlatProject } from "@/api/Project/Querys/useGetFlatProjects";
+import { FlatDashboardProject } from "@/api/Project/Querys/useGetDashboardProjects";
 
-const useGetAdminFlatProjects = () => {
+const useGetAdminDashboardProject = () => {
   const { user } = useUser();
-  const getAdminFlatProjects = async () =>
+  const getAdminDashboardProject = async () =>
     authorizedCustomAxios
       .get(
         `${process.env.VITE_HTTP_API_URL}/public/admin/getAllProjectsFlatAsAdmin/`
       )
       .then((response) => {
         const responseData = response.data;
-        const data: FlatProject[] = responseData.map((project: any) => ({
-          ...project,
-          accessedWhen: new Date(project.accessedWhen),
-          createdWhen: new Date(project.createdWhen),
-          updatedWhen: new Date(project.updatedWhen),
-        }));
+        const data: FlatDashboardProject[] = responseData.map(
+          (project: any) => ({
+            ...project,
+            accessedWhen: new Date(project.accessedWhen),
+            createdWhen: new Date(project.createdWhen),
+            updatedWhen: new Date(project.updatedWhen),
+          })
+        );
 
-        logger("useGetAdminFlatProjects | getAdminFlatProjects ✅ |", response);
+        logger(
+          "useGetAdminDashboardProject | getAdminDashboardProject ✅ |",
+          response
+        );
         return data;
       });
 
-  return useQuery<FlatProject[], Error>({
-    queryKey: ["admin", "flatProjects"],
-    queryFn: getAdminFlatProjects,
+  return useQuery<FlatDashboardProject[], Error>({
+    queryKey: ["admin", "dashboardProject"],
+    queryFn: getAdminDashboardProject,
     enabled: user.usertype === UserType.ADMIN,
   });
 };
 
-export default useGetAdminFlatProjects;
+export default useGetAdminDashboardProject;

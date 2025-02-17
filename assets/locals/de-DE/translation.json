@@ -26,19 +26,19 @@
       "upload": "Modell hochladen",
       "material": "Material",
       "postprocessing": "Nachbearbeitung",
-      "cart": "Warenkorb",
+      "cart": "Warenkorb @needed?",
       "manufacturer": "Hersteller",
       "checkout": "Kasse",
-      "guide": "Wegweiser",
+      "guide": "Wegweiser @needed?",
       "order": "Auftragsdetails",
       "orders": "Meine Aufträge",
       "account": "Profil",
       "test": "Test",
       "service": "Service",
-      "use": "In Anspruch nehmen",
+      "use": "In Anspruch nehmen @needed?",
       "provide": "Service anbieten",
       "portfolio": "Portfolio",
-      "use-service": "Service in Anspruch nehmen",
+      "use-service": "Service in Anspruch nehmen @needed?",
       "provide-service": "Service bereitstellen",
       "continue": "Auftrag fortsetzen",
       "new-contract": "Neuer Auftrag",
@@ -47,7 +47,7 @@
       "user": "Benutzer",
       "procedure": "Verfahren",
       "printer": "Drucker",
-      "about-us": "Magazin",
+      "about-us": "Magazin @needed?",
       "login": "Anmelden",
       "register": "Registrieren",
       "logout": "Abmelden",
@@ -66,7 +66,13 @@
       "verifyEMail": "E-Mail verifizieren",
       "manufacturing": "Herstellen lassen",
       "projects": "Meine Projekte",
-      "project": "Projekt"
+      "project": "Projekt",
+      "dashboard": "Dashboard",
+      "additionalRequirement": "Zusätzliche Anforderungen",
+      "costing": "Kosten",
+      "characterisation": "Verifizierung",
+      "maturity": "Reifegrad",
+      "resilience": "Resilienz"
     }
   },
   "enum": {
@@ -113,8 +119,8 @@
     },
     "ServiceType": {
       "NONE": "Service auswahl",
-      "ADDITIVE_MANUFACTURING": "Modell 3D-drucken lassen",
-      "CREATE_MODEL": "Modell entwerfen lassen",
+      "ADDITIVE_MANUFACTURING": "Modell 3D-drucken",
+      "CREATE_MODEL": "Modell entwerfen",
       "DELIVERY": "Lieferung",
       "POST_PROCESSING": "Nachbearbeitung",
       "PACKAGING": "Verpackung",
@@ -169,6 +175,12 @@
       "MEDIUM": "Mittel",
       "MEDIUM_HIGH": "Mittel-Hoch",
       "HIGH": "Hoch"
+    },
+    "CharacterisationStatus": {
+      "UNVERIFIED": "Unverifiziert",
+      "REQUESTED": "Angefragt",
+      "SEND": "Gesendet",
+      "VERIFIED": "Überprüft"
     }
   },
   "types": {
@@ -196,13 +208,14 @@
       "messages": "Nachrichten",
       "files": "Dateien"
     },
-    "FlatProcessStatus": {
+    "ProcessActionStatus": {
       "ACTION_REQUIRED": "Aktion erforderlich",
       "WAITING_CONTRACTOR": "Warten auf Auftragnehmer",
       "WAITING_CLIENT": "Warten auf Kunde",
       "WAITING_PROCESS": "Warten auf Prozess",
       "IN_PROGRESS": "in Bearbeitung",
-      "COMPLETED": "Abgeschlossen"
+      "COMPLETED": "Abgeschlossen",
+      "FAILED": "Fehlgeschlagen"
     },
     "NotificationSettingsType": {
       "verification": "Verifizierung",
@@ -287,15 +300,23 @@
       "textarea": "Textfeld",
       "color": "Farbe",
       "number": "Zahl",
-      "multiselection": "Mehrfachauswahl"
+      "multiselection": "Mehrfachauswahl",
+      "tensileStrength": "Zugfestigkeit",
+      "density": "Dichte",
+      "elongationAtBreak": "Bruchdehnung",
+      "certificates": "Zertifikate"
     },
     "ProcessError": {
       "Service-ADDITIVE_MANUFACTURING-models": "Bitte ein Modell auswählen/hochladen",
-      "Service-ADDITIVE_MANUFACTURING-materials": "Bitte ein Material auswählen",
+      "Service-ADDITIVE_MANUFACTURING-material": "Bitte ein Material auswählen",
       "ServiceManufacturingPostProcessing": "Bitte eine Nachbearbeitung auswählen",
       "Process-Contractor": "Bitte einen Auftragnehmer auswählen",
       "Process-Address-Billing": "Bitte eine Rechnungsadresse auswählen",
-      "Process-Address-Deliver": "Bitte eine Lieferadresse auswählen"
+      "Process-Address-Deliver": "Bitte eine Lieferadresse auswählen",
+      "Process-ServiceType": "Bitte einen Service auswählen",
+      "Process-Dependency": "Prozess wartet auf andere Prozess(e)",
+      "Process-ContractFiles": "Bitte einen Vertrag hochladen",
+      "Process-Payment": "Bitte eine Rechnung hochladen"
     },
     "EventDataReason": {
       "messages": "Nachricht",
@@ -312,11 +333,26 @@
       "test": "Test",
       "roleChanged": "Rolle Geändert",
       "userDeleted": "Benutzer Gelöscht"
+    },
+    "ProcessOrigin": {
+      "Service": "Service",
+      "Contractor": "Auftragnehmer",
+      "Verification": "Überprüfung",
+      "Request": "Anfrage",
+      "Clarification": "Rückfragen",
+      "Contract": "Vertrag",
+      "ContractFiles": "Vertragsdateien",
+      "Confirmation": "Bestätigung",
+      "Production": "Produktion",
+      "Delivery": "Lieferung",
+      "PaymentFiles": "Rechnung",
+      "Completed": "Abgeschlossen"
     }
   },
   "general": {
     "email": "E-Mail",
     "name": "Name",
+    "fileName": "Dateiname",
     "company": "Firma",
     "street": "Straße",
     "houseNumber": "Hausnummer",
@@ -335,7 +371,20 @@
     "normal": "Normal",
     "complex": "Komplex",
     "modelID": "Modell ID",
+    "group": "Gruppe",
+    "total": "Gesamt",
+    "min": "Min",
+    "max": "Max",
+    "contractor": "Auftragnehmer",
+    "client": "Auftraggeber",
+    "manufacturer": "Hersteller",
+    "you": "Sie",
+    "createdWhen": "Erstellt am",
+    "updatedWhen": "Aktualisiert am",
+    "createdBy": "Erstellt von",
+    "updatedBy": "Aktualisiert von",
     "button": {
+      "clone": "Duplizieren",
       "select": "Auswählen",
       "deselect": "Abwählen",
       "selected": "Ausgewählt",
@@ -343,6 +392,8 @@
       "delete": "Löschen",
       "create": "Erstellen",
       "save": "Speichern",
+      "waiting": "Warten",
+      "saving": "Wird Gespeichert",
       "cancel": "Abbrechen",
       "apply": "Anwenden",
       "open": "Öffnen",
@@ -587,6 +638,21 @@
       "message": "Diese Funktion ist mit ihren Rechten nicht nutzbar"
     },
     "Process": {
+      "Container": {
+        "ActionContainer": {
+          "heading": "Todos",
+          "noButtonsClient": "Keine Todos vorhanden. Der Auftragnehmer bearbeitet ihre Anfrage. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
+          "noButtonsContractor": "Keine Todos vorhanden. Der Kunde ist am Zug. Wir benachrichten sie, wenn es Neuigkeiten gibt.",
+          "finished": "Prozess Abgeschlossen. Es gibt keine weiteren Todos.",
+          "deleteConfirm": "Möchten Sie den Prozess wirklich löschen?",
+          "components": {
+            "ActionContainerWarpper": {
+              "heading": "Ihr Prozess ist fehlgeschlagen",
+              "reason": "Grund"
+            }
+          }
+        }
+      },
       "File": {
         "components": {
           "FileTable": {
@@ -600,6 +666,7 @@
             "userFilesTitle": "Dateien zum Angebot",
             "uploadFilesTitle": "Dateien hochladen",
             "currentFilesTitle": "Aktuelle Dateien",
+            "origin": "Ursprung",
             "button": {
               "upload": "Dateien Hochladen",
               "downloadAll": "Alle Dateien Herunterladen"
@@ -624,7 +691,9 @@
         }
       },
       "ContractorCard": {
-        "priceRange": "Preisspanne"
+        "priceRange": "Preisspanne",
+        "distance": "Entfernung: {{distance}} km",
+        "noDistance": "nicht vorhanden"
       },
       "Menu": {
         "button": { "open": "Menu Öffnen", "close": "Menu Schließen" }
@@ -679,6 +748,15 @@
         "technology": "Technologie",
         "noTechnologies": "Keine Technologie gefunden",
         "noTechnology": "Keine Technologie ausgewählt",
+        "noMaterialCategory": "Keine Materialkategorie ausgewählt",
+        "materialCategory": "Materialkategorie",
+        "noMaterialCategories": "Keine Materialkategorie gefunden",
+        "ralColors": "RAL Farbcodes",
+        "or": "Oder",
+        "noRalColor": "Keine RAL Farbe ausgewählt",
+        "errorLoadingRalColors": "Fehler beim Laden der RAL Farben",
+        "hexColors": "Farben",
+        "noHexColors": "keine Farbe ausgewählt",
         "general": "Allgemeine Informationen",
         "nodeName": "Name",
         "context": "Beschreibung",
@@ -686,7 +764,7 @@
       },
       "NodeTable": {
         "subHeading": "Eigene {{name}}",
-        "button": { "createOwn": "Drucker Anlegen" }
+        "button": { "createOwn": "{{name}} Anlegen" }
       },
       "NodeView": {
         "context": "Beschreibung:",
@@ -772,6 +850,7 @@
       "FORWARD-TO-FAILED": "Prozess fehlgeschlagen",
       "FORWARD-TO-COMPLETED": "Prozess abschließen",
       "FORWARD-TO-DISPUTE": "Streitfall melden",
+      "CLONE": "Prozess klonen",
       "button": {
         "confirmAll": "Wollen Sie wirklich alle betroffene Prozesse {{title}}?"
       }
@@ -965,6 +1044,7 @@
       }
     }
   },
+  "Demo": { "heading": "Projekt und Prozess wird erstellt" },
   "EmailVerification": {
     "heading": "Email verifizieren",
     "text": "Bitte bestätigen Sie ihre Email Adresse, indem Sie auf den Link in der Email klicken, die Auth0 Ihnen gesendet hat.",
@@ -1096,16 +1176,6 @@
           "orga": "Organisation"
         }
       },
-      "Projects": {
-        "heading": "Projekte",
-        "noProjects": "Keine Projekte vorhanden",
-        "button": {
-          "demo": "Ausprobieren",
-          "new": "Neues Projekt",
-          "continue": "Projekt Fortsetzen",
-          "projects": "Meine Projekte"
-        }
-      },
       "Resources": {
         "heading": "Ressourcen",
         "button": {
@@ -1127,6 +1197,63 @@
         },
         "button": {
           "orga": "Profil"
+        }
+      }
+    },
+    "Projects": {
+      "heading": "Projektübersicht",
+      "receivedProjects": "Erhaltene Projekte",
+      "noProjects": "Keine Projekte vorhanden",
+      "noProjectsSearch": "Keine Projekte mit \"{{search}}\" gefunden",
+      "name": "Name",
+      "processCount": "Anzahl Prozesse",
+      "updated": "Aktualisiert am",
+      "status": "Status",
+      "quantity": "Anzahl",
+      "actions": "Aktionen",
+      "button": {
+        "demo": "Ausprobieren",
+        "new": "Neues Projekt anlegen",
+        "filter": "Filter",
+        "continue": "Projekt Fortsetzen",
+        "projects": "Meine Projekte",
+        "clone": "Projekt Duplizieren",
+        "createProcess": "neuen Prozess im Projekt {{name}} anlegen"
+      },
+      "Project": {
+        "noProcess": "Keine Prozesse vorhanden",
+        "button": { "new": "Neuen Prozess anlegen" }
+      },
+      "Process": {
+        "deleteConfirm": "Möchten Sie den Prozess wirklich löschen?",
+        "name": "Prozessname",
+        "type": "Servicetyp",
+        "updated": "Aktualisiert am",
+        "groups": "Gruppen",
+        "quantity": "Anzahl",
+        "models": "Modelle",
+        "contractor": "Auftragnehmer",
+        "noContractor": "Kein Auftragnehmer ausgewählt",
+        "material": "Material",
+        "postProcessings": "Nachbearbeitungen",
+        "groupName": "Gruppe {{count}}",
+        "processErrors": "Todos",
+        "noErrors": "Keine Interaktionen erforderlich",
+        "status": "Status",
+        "addDependencie": "Abhängigkeit hinzufügen",
+        "dependenciesIn": "Eingehene Abhängigkeiten",
+        "dependenciesOut": "Ausgehende Abhängigkeiten",
+        "dependenciesInHeading": "Vorherige Prozesse:",
+        "dependenciesOutHeading": "Nachfolgende Prozesse:",
+        "dependenciesTable": {
+          "name": "Prozessname",
+          "serviceType": "Servicetyp",
+          "processStatus": "Prozessstatus",
+          "selected": "Ausgewählt"
+        },
+        "button": {
+          "clone": "Prozess in neues Projekt duplizieren",
+          "addDependencie": "Abhängigkeit hinzufügen"
         }
       }
     }
@@ -1180,6 +1307,29 @@
       "special-terms": "Soweit besondere Bedingungen für einzelne Nutzungen dieser Website von den vorgenannten Paragraphen abweichen, wird an entsprechender Stelle ausdrücklich darauf hingewiesen. In diesem Falle gelten im jeweiligen Einzelfall die besonderen Nutzungsbedingungen.",
       "src": "Quelle",
       "gender-fit": "[angepasst an gendergerechte Sprache]"
+    },
+    "Nda": {
+      "heading": "NDA-Richtlinie (Geheimhaltungsvereinbarung)",
+      "1": {
+        "heading": "Vertraulichkeit der hochgeladenen Modelle",
+        "text": "Wir verpflichten uns, alle hochgeladenen 3D-Modelle und zugehörigen Informationen streng vertraulich zu behandeln."
+      },
+      "2": {
+        "heading": "Keine Weitergabe an Dritte",
+        "text": "Ihre Dateien werden nicht an Dritte weitergegeben, verkauft oder für andere Zwecke als die angegebenen genutzt."
+      },
+      "3": {
+        "heading": "Zugriffsbeschränkung",
+        "text": "Der Zugriff auf Ihre Daten ist nur autorisierten Mitarbeitern gestattet, die diese für die Erfüllung Ihrer Anfrage benötigen."
+      },
+      "4": {
+        "heading": "Speicherung und Löschung",
+        "text": "Hochgeladene Dateien werden nur so lange gespeichert, wie es für die Bearbeitung notwendig ist. Auf Wunsch können sie sofort nach Abschluss gelöscht werden."
+      },
+      "5": {
+        "heading": "Ausnahmen",
+        "text": "Diese Geheimhaltungsvereinbarung gilt nicht für Informationen, die bereits öffentlich bekannt sind oder uns auf legalem Wege von Dritten bereitgestellt wurden."
+      }
     },
     "Privacy": {
       "privacy-policy": "Datenschutzerklärung",
@@ -1254,12 +1404,65 @@
       "google-web-fonts": "Google Web Fonts",
       "google-web-fonts-info": "Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten so genannte Web Fonts, die von Google bereitgestellt werden. Beim Aufruf einer Seite lädt Ihr Browser die benötigten Web Fonts in ihren Browsercache, um Texte und Schriftarten korrekt anzuzeigen. Zu diesem Zweck muss der von Ihnen verwendete Browser Verbindung zu den Servern von Google aufnehmen. Hierdurch erlangt Google Kenntnis darüber, dass über Ihre IP-Adresse unsere Website aufgerufen wurde. Die Nutzung von Google Web Fonts erfolgt im Interesse einer einheitlichen und ansprechenden Darstellung unserer Online-Angebote. Dies stellt ein berechtigtes Interesse im Sinne von Art. 6 Abs. 1 lit. f DSGVO dar. Wenn Ihr Browser Web Fonts nicht unterstützt, wird eine Standardschrift von Ihrem Computer genutzt. Weitere Informationen zu Google Web Fonts finden Sie unter https://developers.google.com/fonts/faq und in der Datenschutzerklärung von Google: https://www.google.com/policies/privacy/."
     },
+    "PrivacyPolicy": {
+      "heading": "Datenschutzrichtlinie",
+      "1": {
+        "heading": "Allgemeine Hinweise",
+        "text": "Diese Datenschutzrichtlinie erläutert, welche Daten wir erheben, wie wir sie verarbeiten und welche Rechte Sie haben."
+      },
+      "2": {
+        "heading": "Erhobene Daten",
+        "text1": "Hochgeladene 3D-Modelle",
+        "text2": "Nutzername, E-Mail-Adresse (falls erforderlich)",
+        "text3": "Nutzungsdaten unserer Website"
+      },
+      "3": {
+        "heading": "Verwendungszweck der Daten",
+        "text1": "Verarbeitung und Speicherung hochgeladener Modelle",
+        "text2": "Verbesserung unseres Services",
+        "text3": "Kommunikation mit Ihnen (falls notwendig)"
+      },
+      "4": {
+        "heading": "Datensicherheit",
+        "text": "Wir setzen technische und organisatorische Maßnahmen ein, um Ihre Daten vor unbefugtem Zugriff zu schützen."
+      },
+      "5": {
+        "heading": "Rechte der Nutzer",
+        "text": "Sie haben das Recht, Auskunft über Ihre gespeicherten Daten zu erhalten, diese korrigieren oder löschen zu lassen. Kontaktieren Sie uns hierzu unter info@semper-ki.org."
+      }
+    },
+    "TermsOfService": {
+      "heading": "Nutzungsbedingungen",
+      "1": {
+        "heading": "Allgemeine Bestimmungen",
+        "text": "Durch die Nutzung unserer Plattform erklären Sie sich mit diesen Nutzungsbedingungen einverstanden."
+      },
+      "2": {
+        "heading": "Nutzung der Plattform",
+        "text": "Sie dürfen nur 3D-Modelle hochladen, an denen Sie die erforderlichen Rechte besitzen. Sie tragen die alleinige Verantwortung für den Inhalt der hochgeladenen Dateien."
+      },
+      "3": {
+        "heading": "Urheberrecht und Haftungsausschluss",
+        "text": "Wir übernehmen keine Haftung für urheberrechtliche Verstöße durch Nutzer. Falls eine Urheberrechtsverletzung gemeldet wird, behalten wir uns das Recht vor, das betroffene Modell zu entfernen."
+      },
+      "4": {
+        "heading": "Speicherung und Löschung von Inhalten",
+        "text": "Wir behalten uns vor, hochgeladene Dateien nach einer gewissen Zeit automatisch zu löschen oder auf Anfrage zu entfernen."
+      },
+      "5": {
+        "heading": "Änderungen der Nutzungsbedingungen",
+        "text": "Diese Bedingungen können jederzeit geändert werden. Die aktuelle Version ist stets auf unserer Website verfügbar."
+      }
+    },
     "Legal": {
       "heading": "Gesetzliches",
       "button": {
         "imprint": "Impressum",
         "privacy": "Datenschutzerklärung",
-        "contact": "Kontakt"
+        "contact": "Kontakt",
+        "nda": "NDA-Richtlinie",
+        "privacyPolice": "Datenschutzrichtlinie",
+        "termsOfService": "Nutzungsbedingungen"
       }
     }
   },
@@ -1448,6 +1651,14 @@
         "heading": "Angebot",
         "button": {
           "menu": "Angebotsmenu"
+        },
+        "ContractUpload": {
+          "heading": "Vertrag hochladen",
+          "uploadedContracts": "Hochladene Verträge",
+          "noUploadedContracts": "Keine Verträge hochgeladen",
+          "button": {
+            "upload": "Vertrag hochladen"
+          }
         }
       },
       "ContractorSelection": {
@@ -1461,7 +1672,8 @@
           "menu": "Hersteller Menu",
           "selectAddress": "Adresse auswählen",
           "select": "Auftragnehmer auswählen",
-          "edit": "Auftragnehmer bearbeiten"
+          "edit": "Auftragnehmer bearbeiten",
+          "costOverview": "Ihre Kostenaufstellung"
         },
         "components": {
           "AddressCard": {
@@ -1487,6 +1699,9 @@
             "heading": "Auftragnehmerauswahl",
             "contractors": "Auftragnehmer sortiert nach ihren Prioritäten",
             "noContractorFound": "Kein Auftragnehmer gefunden"
+          },
+          "Costs": {
+            "heading": "Kostenaufstellung"
           }
         }
       },
@@ -1494,6 +1709,14 @@
         "heading": "Lieferung",
         "button": {
           "menu": "Lieferungsmenu"
+        },
+        "DeliveryUpload": {
+          "heading": "Rechnung hochladen",
+          "uploadedRecipes": "Hochladene Rechnung",
+          "noUploadedRecipes": "Keine Rechnung hochgeladen",
+          "button": {
+            "upload": "Rechnung hochladen"
+          }
         }
       },
       "Production": {
@@ -1531,6 +1754,7 @@
           "pageDescription2": "Dies hilft ihnen die Auswahl zu vereinfachen und gibt den Herstellern mehr Informationen.",
           "filtersApplied": "Vorgaben angewendet",
           "noCategory": "keine Vorgabenkategorie geöffnet",
+          "FiterDetails": {},
           "components": {
             "Card": {
               "noFilters": "keine Vorgaben vorhanden",
@@ -1568,7 +1792,8 @@
                 "name": "Name:",
                 "type": "Typ:",
                 "cost": "Mittlere Anschaffungskosten:",
-                "properties": "Eigenschaften:"
+                "properties": "Eigenschaften:",
+                "color": "Farbe:"
               },
               "GroupOverview": {
                 "heading": "Gruppenübersicht",
@@ -1599,6 +1824,10 @@
                 "type": "Typ:",
                 "properties": "Eigenschaften:"
               },
+              "FreeText": {
+                "heading": "Kommentar/Freitext für zusätzliche Informationen",
+                "placeholder": "Hier können Sie zusätzliche Informationen für den Hersteller hinterlassen..."
+              },
               "button": {
                 "noModel": "Kein Modell? geben sie hier ihre Anforderungen ein",
                 "addMore": "Weitere hinzufügen",
@@ -1624,7 +1853,13 @@
               },
               "components": {
                 "Card": {
-                  "props": "Eigenschaften"
+                  "props": "Eigenschaften",
+                  "colors": "Farben",
+                  "noColors": "keine Farben vorhanden",
+                  "noColorProps": "keine Eigenschaften vorhanden"
+                },
+                "Filter": {
+                  "heading": "Filter / Vorgaben"
                 }
               }
             },
@@ -1662,6 +1897,12 @@
                 "loading": "Model wird hochgeladen",
                 "heading": "Eigene Modelle Hochladen",
                 "text": "per Drag & Drop oder Klick",
+                "disclaimer": "Mit dem Hochladen bestätigen Sie, dass Sie die Rechte zur Nutzung dieses Modells haben und erklären Sie sich mit unseren Nutzungsbedingungen und der Datenschutzrichtlinie einverstanden.",
+                "disclaimer2": "Indem Sie fortfahren, bestätigen Sie, dass Sie Eigentümer dieses 3D-Modells sind oder die Erlaubnis haben, es zu verwenden. Wir sind nicht haftbar für Urheberrechtsverletzungen. Außerdem behandeln wir Ihre Daten sicher und geben Ihre Dateien nicht weiter. Weitere Informationen finden Sie in unserer NDA-Richtlinie.",
+                "disclaimerCheckBox": "Ich bin mit den oben genannten Bedingungen einverstanden.",
+                "termsOfService": "Nutzungsbedingungen",
+                "privacyPolicy": "Datenschutzrichtlinie",
+                "nda": "NDA-Richtlinie",
                 "error": {
                   "tags": "Error Tags",
                   "licenses": "keine Lizenz(en) angegeben",
@@ -1685,7 +1926,8 @@
                     "selectLicense": "Lizenz auswählen",
                     "certificate": "Eventuelle Zertifikate:",
                     "certificatePH": "Zertifikate1, Zertifikate2, ...",
-                    "license": "Lizenz der Datei *",
+                    "scalingFactor": "Skalierung",
+                    "license": "Lizenz der Datei",
                     "licensePH": "Lizenz1, Lizenz2 ...",
                     "mandatory": "* Pflichtfeld",
                     "button": {
@@ -1725,8 +1967,8 @@
             "ServiceCard": {
               "heading": {
                 "NONE": "error",
-                "ADDITIVE_MANUFACTURING": "Modell 3D-drucken lassen",
-                "CREATE_MODEL": "Modell entwerfen lassen (Test)",
+                "ADDITIVE_MANUFACTURING": "Modell 3D-drucken",
+                "CREATE_MODEL": "Modell entwerfen (Test)",
                 "DELIVERY": "Lieferung (Test)",
                 "POST_PROCESSING": "Nachbearbeitung (Test)",
                 "PACKAGING": "Verpackung (Test)",
@@ -1807,18 +2049,15 @@
         "button": {
           "menu": "Informationen Menu",
           "editTitle": "Prozessname bearbeiten"
-        }
-      },
-      "StatusButtons": {
-        "heading": "Todos"
-      },
-      "TitleForm": {
-        "heading": "Prozessname",
-        "describtion": "Geben Sie ihrem Prozess einen Namen. Ein Prozess ist ein Auftrag für einen Hersteller/Auftragnehmer.",
-        "name": "Prozessname",
-        "error": "Bitte geben Sie einen Namen ein",
-        "button": {
-          "save": "Name Speichern"
+        },
+        "TitleForm": {
+          "heading": "Prozessname",
+          "describtion": "Geben Sie ihrem Prozess einen Namen. Ein Prozess ist ein Auftrag für einen Hersteller/Auftragnehmer.",
+          "name": "Prozessname",
+          "error": "Bitte geben Sie einen Namen ein",
+          "button": {
+            "save": "Name Speichern"
+          }
         }
       }
     }
@@ -1896,7 +2135,7 @@
           "serviceType": "Service",
           "updatedWhen": "Aktualisiert",
           "createdWhen": "Erstellt",
-          "flatProcessStatus": "Status",
+          "actionStatus": "Status",
           "amount": "Anzahl",
           "imgPath": "Bild",
           "order": "Reihenfolge",
@@ -1936,7 +2175,8 @@
         "actions": "Aktionen"
       },
       "TableRow": {
-        "deleteConfirm": "Möchten Sie das Projekt wirklich löschen?"
+        "deleteConfirm": "Möchten Sie das Projekt wirklich löschen?",
+        "cloneConfirm": "Möchten Sie das Projekt wirklich duplizieren?"
       },
       "TitleForm": {
         "heading": "Projekt anlegen",
@@ -1986,8 +2226,12 @@
         "overview": "Übersicht",
         "materials": "Materialien",
         "printers": "3D-Drucker",
+        "colors": "Farben",
         "postProcessings": "Nachbearbeitung",
         "costing": "Kosten",
+        "characterisation": "Verifizierung",
+        "maturity": "Reifegrad",
+        "resilience": "Resilienz",
         "request": "Datenerweiterung",
         "graph": "Graph",
         "privat-graph": "Private Graph"
@@ -2001,6 +2245,24 @@
         "button": {
           "variant": "Variante erstellen"
         }
+      }
+    },
+    "Characterisation": {
+      "header": "Verifizierung",
+      "describtion": "Hier können sie ihre Fähigkeiten verifizieren, indem sie ein Charakterisierungsbauteil drucken und zu unserem Partner (Fraunhofer IWU) schicken. Sie erhalten dann eine Rückmeldung über die Qualität ihres Druckes und es wird in der Auswahl des Kunden angezeigt das sie Verfiziert sind. Die Verifizierung bezieht sich auf ein Paar von Drucker und Material.",
+      "printer": "3D-Drucker",
+      "material": "Material",
+      "verified": "Überprüfung",
+      "actions": "Aktionen",
+      "noItems": "keine Verifizierungen/Drucker-Materialien Paare vorhanden",
+      "noItemsWithFilter": "keine  Verifizierungen/Drucker-Materialien Paare vorhanden mit den gewählten Filtern",
+      "button": {
+        "verify": "Verifizieren",
+        "send": "Model abschicken",
+        "reverified": "Re-Verifizieren",
+        "downloadModel": "Modell herunterladen",
+        "downloadInstructions": "Anleitung herunterladen",
+        "downloadDetails": "Details herunterladen"
       }
     },
     "Costing": {
@@ -2019,6 +2281,16 @@
       "own": "Eigene Materialien",
       "button": {
         "createOwn": "Material Anlegen"
+      }
+    },
+    "Maturity": {
+      "header": "Reifegrad",
+      "describtion": "Das Reifegrad-Modell dient dazu, den Reifegrad ihres Unternehmen einzuschätzen um sie bei der Digitalisierung zu unterstützen und mit Patneren zu verbinden die ein änhliches Level haben wie sie. Voreteile auf der Plattform: genauere Kundenzuordnung und höhere Sichtbarkeit des Unternehmens",
+      "level": "Reifegrad:",
+      "noLevel": "noch nicht ermittelt",
+      "button": {
+        "calculate": "Reifegrad ermitteln",
+        "recalculate": "Reifegrad erneut ermitteln"
       }
     },
     "Overview": {
@@ -2044,6 +2316,16 @@
       "header": "Anfragen zu Datenerweiterung",
       "noItems": "keine Anfragen vorhanden",
       "button": { "new": "neue Anfrage" }
+    },
+    "Resilience": {
+      "header": "Resilienz",
+      "describtion": "Der Resilienz-Wert gibt an wie gut ihr Unternehmen auf Krisen vorbereitet ist und wie schnell sie sich von Krisen erholen können.",
+      "level": "Resilienzwert:",
+      "noLevel": "noch nicht ermittelt",
+      "button": {
+        "calculate": "Resilienz ermitteln",
+        "recalculate": "Resilienz erneut ermitteln"
+      }
     }
   },
   "Test": {

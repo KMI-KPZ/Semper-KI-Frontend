@@ -36,7 +36,7 @@ const ProfileAddress: React.FC<ProfileAddressProps> = (props) => {
       <Divider />
       {user.details.addresses !== undefined &&
       user.details.addresses.length > 0 ? (
-        <Container width="full" justify="start" align="start" wrap="wrap">
+        <Container width="full" justify="start" items="start" wrap="wrap">
           {user.details.addresses.map((address, index) => (
             <AddressCard key={index} address={address} />
           ))}

@@ -168,7 +168,7 @@ const AdminResources: React.FC<AdminResourcesProps> = (props) => {
                     <Container
                       direction="col"
                       width="fit"
-                      align="start"
+                      items="start"
                       className="p-3"
                     >
                       {node.properties.map((prop, index) => (

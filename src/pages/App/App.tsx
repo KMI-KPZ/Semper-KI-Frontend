@@ -15,9 +15,7 @@ import Menu from "@/components/Menu/Menu";
 import Advantages from "../Advantages/Advantages";
 import Chatbot from "@/components/Chatbot/Chatbot";
 import Profile from "../Profile/Proflle";
-import Projects from "../Projects/Projects";
 import ProjectOutlet from "@/outlets/ProjectOutlet";
-import ProjectPage from "../Project/ProjectPage";
 import ProcessOutlet from "@/outlets/ProcessOutlet";
 import ProcessPage from "../Process/ProcessPage";
 import Admin from "../Admin/Admin";
@@ -32,7 +30,7 @@ import { Error } from "../Error/Error";
 import { Home } from "../Home/Home";
 import { Test } from "../Test/Test";
 import { ToastContainer } from "react-toastify";
-import { ContentBox } from "@component-library/index";
+import { Container, ContentBox } from "@component-library/index";
 import { Background, Breadcrumb } from "@/components/index";
 import { AdminOutlet } from "@/outlets/AdminOutlet";
 import { DefinedProcessOutlet } from "@/outlets/DefinedProcessOutlet";
@@ -47,6 +45,12 @@ import DescriptiveModelForm from "@/components/Form/DescriptiveModelForm";
 import ManufacturingGroupOutlet from "@/outlets/ManufacturingGroupOutlet";
 import ManufacturingModelEdit from "../Process/components/Service/ServiceEdit/Manufacturing/Model/Edit/ManufacturingModelEdit";
 import ManufacturingModelOutlet from "@/outlets/ManufacturingModelOutlet";
+import Demo from "../Demo/Demo";
+import HomeProjects from "../Home/Projects/Projects";
+import ToTopButton from "@component-library/ToTopButton/ToTopButton";
+import BottomFixedContainer from "@component-library/Container/BottomFixedContainer";
+// import Projects from "../Projects/Projects";
+// import ProjectPage from "../Project/ProjectPage";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -126,11 +130,24 @@ const App: React.FC = () => {
               <Route path="login/redirect" element={<RedirectLogin />} />
               <Route path="register" element={<Login />} />
               <Route path="legal/*" element={<Legal />} />
-              <Route path="demo/*" element={<Navigate to="/project/new" />} />
+              <Route path="demo/*" element={<Demo />} />
               <Route path="projects/*">
-                <Route index element={<Projects />} />
+                <Route
+                  index
+                  element={
+                    user.usertype === UserType.ANONYM ? (
+                      <Container width="full">
+                        <HomeProjects />
+                      </Container>
+                    ) : (
+                      <Navigate to="/" />
+                    )
+                  }
+                />
+                {/* <Route index element={<Projects />} /> */}
                 <Route path=":projectID/*" element={<ProjectOutlet />}>
-                  <Route index element={<ProjectPage />} />
+                  <Route index element={<Navigate to="/" />} />
+                  {/* <Route index element={<ProjectPage />} /> */}
                   <Route
                     path=":processID/*"
                     element={
@@ -216,10 +233,12 @@ const App: React.FC = () => {
         </main>
         <CookieBanner />
         <Menu />
-        {/* <ToTopButton /> */}
         <Footer />
       </div>
-      <Chatbot />
+      <BottomFixedContainer>
+        <ToTopButton />
+        <Chatbot />
+      </BottomFixedContainer>
       <ToastContainer
         position="top-right"
         autoClose={8000}

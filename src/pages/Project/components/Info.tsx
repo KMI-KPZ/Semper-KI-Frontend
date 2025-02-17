@@ -106,6 +106,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = (props) => {
         }}
       >
         <ProjectTitleForm
+          project={project}
           title={project.projectDetails.title}
           close={() => {
             setTitleEdit(false);

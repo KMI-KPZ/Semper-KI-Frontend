@@ -55,7 +55,13 @@ export type DataNaviagtionTranlationType =
   | "manufacturing"
   | "projects"
   | "project"
-  | "demonstrator";
+  | "dashboard"
+  | "demonstrator"
+  | "additionalRequirement"
+  | "costing"
+  | "characterisation"
+  | "maturity"
+  | "resilience";
 
 interface BreadcrumbItem {
   name: string;
@@ -115,7 +121,13 @@ export function isDataNaviagtionTranlationType(
     "manufacturing",
     "projects",
     "project",
+    "dashboard",
     "demonstrator",
+    "additionalRequirement",
+    "costing",
+    "characterisation",
+    "maturity",
+    "resilience",
   ].includes(input);
 }
 

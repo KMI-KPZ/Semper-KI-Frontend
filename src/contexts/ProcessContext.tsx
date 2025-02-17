@@ -5,6 +5,14 @@ import { FilterItemProps } from "@/api/Filter/Querys/useGetFilters";
 interface ProcessContextProviderProps {
   process: Process;
   filters: FilterItemProps[];
+  loadGroup: ProcessLoadGroup;
+  setLoadGroup(group: ProcessLoadGroup): void;
+}
+
+export interface ProcessLoadGroup {
+  groupID: number | undefined;
+  navLink: string | undefined;
+  loadNav?: boolean;
 }
 
 export interface ProcessContextProps {
@@ -14,40 +22,31 @@ export interface ProcessContextProps {
   editFilters: FilterItemProps[];
   setEditFilters: React.Dispatch<React.SetStateAction<FilterItemProps[]>>;
   loadedFilter: FilterItemProps[];
+  loadGroup: ProcessLoadGroup;
+  setLoadGroup: (group: ProcessLoadGroup) => void;
 }
 
 export const ProcessContext = React.createContext<ProcessContextProps>({
-  process: {
-    client: "",
-    contractor: {
-      hashedID: "",
-      name: "",
-    },
-    createdWhen: new Date(),
-    processDetails: { amount: 1, priorities: [] },
-    files: [],
-    messages: {},
-    processID: "",
-    serviceDetails: undefined,
-    serviceStatus: 0,
-    processStatus: 0,
-    updatedWhen: new Date(),
-    serviceType: 0,
-    accessedWhen: new Date(),
-    processStatusButtons: [],
-    processErrors: [],
-  },
+  process: {} as Process,
   filters: [],
   setFilters: () => {},
   editFilters: [],
   setEditFilters: () => {},
   loadedFilter: [],
+  loadGroup: {} as { groupID: number | undefined; navLink: string | undefined },
+  setLoadGroup: () => {},
 });
 
 const ProcessContextProvider: React.FC<
   PropsWithChildren<ProcessContextProviderProps>
 > = (props) => {
-  const { process, children, filters: loadedFilter } = props;
+  const {
+    process,
+    children,
+    filters: loadedFilter,
+    loadGroup,
+    setLoadGroup,
+  } = props;
 
   const [filters, setFilters] = useState<FilterItemProps[]>(loadedFilter);
   const [editFilters, setEditFilters] =
@@ -56,6 +55,8 @@ const ProcessContextProvider: React.FC<
   return (
     <ProcessContext.Provider
       value={{
+        loadGroup,
+        setLoadGroup,
         process,
         filters,
         setFilters,

@@ -6,14 +6,14 @@ import { LoadingSuspense } from "@component-library/index";
 import useUser, { UserType } from "@/hooks/useUser";
 import { Container } from "@component-library/index";
 import useSearch from "@/hooks/useSearch";
-import useGetAdminFlatProjects from "@/api/Admin/Querys/useGetAdminFlatProjects";
-import useGetFlatProjects, {
-  FlatProject,
-} from "@/api/Project/Querys/useGetFlatProjects";
+import useGetDashboardProjects, {
+  FlatDashboardProject,
+} from "@/api/Project/Querys/useGetDashboardProjects";
 import ProjectsTable from "./components/Table";
 import AddIcon from "@mui/icons-material/Add";
 import CreateProjectTitleForm from "./components/TitleForm";
 import { useTopics } from "@/contexts/ChatbotContextProvider";
+import useGetAdminDashboardProject from "@/api/Admin/Querys/useGetAdminFlatProjects";
 
 interface ProjectsProps {}
 
@@ -21,34 +21,36 @@ const Projects: React.FC<ProjectsProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const { user } = useUser();
-  const _flatProjects = useGetFlatProjects();
-  const adminFlatProjects = useGetAdminFlatProjects();
+  const _dashboardProject = useGetDashboardProjects();
+  const adminDashboardProject = useGetAdminDashboardProject();
   const [createProjectTitleFormOpen, setCreateProjectTitleFormOpen] =
     React.useState<boolean>(false);
-  const flatProjects =
-    user.usertype === UserType.ADMIN ? adminFlatProjects : _flatProjects;
+  const dashboardProject =
+    user.usertype === UserType.ADMIN
+      ? adminDashboardProject
+      : _dashboardProject;
 
   const { filterDataBySearchInput, handleSearchInputChange } =
-    useSearch<FlatProject>();
+    useSearch<FlatDashboardProject>();
 
   const onButtonClickCreateProject = () => {
     setCreateProjectTitleFormOpen(true);
   };
 
-  const ownProjects: FlatProject[] =
-    flatProjects.data === undefined
+  const ownProjects: FlatDashboardProject[] =
+    dashboardProject.data === undefined
       ? []
       : user.usertype !== UserType.ANONYM &&
         user.usertype === UserType.ORGANIZATION
-      ? flatProjects.data.filter(
+      ? dashboardProject.data.filter(
           (project) => user.organization === project.client
         )
-      : flatProjects.data;
-  const recievedProjects: FlatProject[] =
-    flatProjects.data === undefined
+      : dashboardProject.data;
+  const recievedProjects: FlatDashboardProject[] =
+    dashboardProject.data === undefined
       ? []
       : user.usertype === UserType.ORGANIZATION
-      ? flatProjects.data.filter(
+      ? dashboardProject.data.filter(
           (project) => user.organization !== project.client
         )
       : [];
@@ -95,13 +97,13 @@ const Projects: React.FC<ProjectsProps> = (props) => {
         </Container>
       </div>
       <Search handleSearchInputChange={handleSearchInputChange} />
-      <Container direction="col" justify="start" align="start" width="full">
+      <Container direction="col" justify="start" items="start" width="full">
         <Heading variant="h2">
           {user.usertype === UserType.ADMIN
             ? t("Projects.adminProjects")
             : t("Projects.ownProjects")}
         </Heading>
-        <LoadingSuspense query={flatProjects}>
+        <LoadingSuspense query={dashboardProject}>
           <ProjectsTable
             projects={ownProjects.filter((flatProject) =>
               filterDataBySearchInput(flatProject)
@@ -112,9 +114,9 @@ const Projects: React.FC<ProjectsProps> = (props) => {
       {user.usertype === UserType.ORGANIZATION ? (
         <>
           <Divider />
-          <Container direction="col" justify="start" align="start" width="full">
+          <Container direction="col" justify="start" items="start" width="full">
             <Heading variant="h2">{t("Projects.receivedProjects")}</Heading>
-            <LoadingSuspense query={flatProjects}>
+            <LoadingSuspense query={dashboardProject}>
               <ProjectsTable
                 projects={recievedProjects.filter((flatProject) =>
                   filterDataBySearchInput(flatProject)

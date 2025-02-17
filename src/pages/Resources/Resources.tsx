@@ -15,12 +15,21 @@ import ResourcesNodeForm from "@/components/Resources/NodeForm";
 import { useTranslation } from "react-i18next";
 import Costing from "./Costing/Costing";
 import CostingForm from "./Costing/Form";
+import useModal from "@/hooks/useModal";
+import ResourcesCharacterisation from "./Characterisation/Characterisation";
+import ResourcesMaturity from "./Maturity/Maturity";
+import ResourcesResilience from "./Resilience/Resilience";
 
 interface ResourcesProps {}
 
 const Resources: React.FC<ResourcesProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
+  const { deleteModal } = useModal();
+
+  const handleOnButtonClickEdit = () => {
+    deleteModal("nodeView");
+  };
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-5">
@@ -29,6 +38,7 @@ const Resources: React.FC<ResourcesProps> = (props) => {
       </PageHeader>
       <div className="flex w-full flex-col gap-5 md:flex-row">
         <ResourcesMenu />
+
         <Container
           direction="col"
           width="full"
@@ -56,6 +66,7 @@ const Resources: React.FC<ResourcesProps> = (props) => {
                         <Button
                           size="sm"
                           title={t("general.button.edit")}
+                          onClick={() => handleOnButtonClickEdit()}
                           to="edit"
                         />
                       </ResourcesNodeView>
@@ -67,6 +78,12 @@ const Resources: React.FC<ResourcesProps> = (props) => {
                   />
                 </Route>
               </Route>
+              <Route
+                path="characterisation"
+                element={<ResourcesCharacterisation />}
+              />
+              <Route path="maturity" element={<ResourcesMaturity />} />
+              <Route path="resilience" element={<ResourcesResilience />} />
               <Route path="costing">
                 <Route index element={<Costing />} />
                 <Route path=":serviceType" element={<CostingForm />} />

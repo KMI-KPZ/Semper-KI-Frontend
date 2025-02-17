@@ -93,6 +93,7 @@ export interface UpdateUserProps {
 
 export type UserAddressProps = {
   id: string;
+  coordinates: [number, number];
 } & NewUserAddressProps;
 
 export enum UserType {

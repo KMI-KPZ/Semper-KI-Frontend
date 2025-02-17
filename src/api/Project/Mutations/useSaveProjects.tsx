@@ -19,7 +19,7 @@ const useSaveProjects = () => {
     mutationFn: saveProjects,
     onSuccess: (_, projectID) => {
       queryClient.invalidateQueries(["project", projectID]);
-      queryClient.invalidateQueries(["flatProjects"]);
+      queryClient.invalidateQueries(["dashboardProject"]);
     },
   });
 };

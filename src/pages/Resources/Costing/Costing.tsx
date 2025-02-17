@@ -19,7 +19,7 @@ const Costing: React.FC<CostingProps> = (props) => {
         <Heading variant="h2">{t("Resources.Costing.heading")}</Heading>
       </Container>
       <Divider />
-      <Container width="full" direction="col" className="gap-10 pt-5">
+      <Container width="full" direction="col" className="gap-10 ">
         {organization.details.services !== undefined
           ? (
               Object.keys(organization.details.services) as Array<

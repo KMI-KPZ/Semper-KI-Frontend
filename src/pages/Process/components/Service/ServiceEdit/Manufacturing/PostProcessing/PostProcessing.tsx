@@ -32,7 +32,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
   const loadedPostProcessings = useGetPostProcessigns();
   const setPostProcessing = useSetPostProcessing();
   const navigate = useNavigate();
-  const { group } = useContext(ManufacturingGroupContext);
+  const { group, groupID } = useContext(ManufacturingGroupContext);
 
   const [selectedPostProcessing, setSelectedPostProcessing] = useState<
     PostProcessingProps[]
@@ -46,6 +46,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
   const handleOnClickButtonSave = () => {
     setPostProcessing.mutate(
       {
+        groupID: groupID,
         projectID: project.projectID,
         processID: process.processID,
         postProcessings: selectedPostProcessing,
@@ -122,7 +123,7 @@ export const ManufacturingPostProcessings: React.FC<Props> = (props) => {
                   width="full"
                   wrap="wrap"
                   direction="row"
-                  align="start"
+                  items="start"
                 >
                   {loadedPostProcessings.data
                     .filter(filterBySearch)

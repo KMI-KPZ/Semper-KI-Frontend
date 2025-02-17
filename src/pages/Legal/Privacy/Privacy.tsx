@@ -11,7 +11,7 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
   return (
     <article
       data-testid="privacy"
-      className="flex w-full flex-col items-center justify-center gap-5  p-5"
+      className="flex w-full flex-col items-center justify-start gap-5  p-5"
     >
       <Heading variant="h1" className="w-full bg-white p-5 text-center">
         {t("Legal.Privacy.privacy-policy")}

@@ -1,5 +1,11 @@
 import ModelPreview from "@/pages/Test/STLViewer";
-import { Button, Container, Divider, Heading } from "@component-library/index";
+import {
+  Button,
+  Container,
+  Divider,
+  Heading,
+  Text,
+} from "@component-library/index";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -251,11 +257,46 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
                   </option>
                 </select>
               </td>
+
               <td>
                 <Button
                   variant="tertiary"
                   size="xs"
                   onClick={() => handleOnClickButtonSaveAll("levelOfDetail")}
+                  title={t(
+                    "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.button.saveAll"
+                  )}
+                  children={<ContentCopyIcon />}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th className="text-left">{`${t(
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.scalingFactor`
+              )}`}</th>
+              <td>
+                <Container direction="row">
+                  <input
+                    className={`flex w-full rounded-md border-2 p-2
+                    ${
+                      modelErrors?.scalingFactor
+                        ? "border-red-500 bg-red-500"
+                        : ""
+                    }
+                    }`}
+                    type="number"
+                    {...register(`models.${index}.scalingFactor`, {
+                      valueAsNumber: true,
+                    })}
+                  />
+                  <Text>%</Text>
+                </Container>
+              </td>
+              <td>
+                <Button
+                  variant="tertiary"
+                  size="xs"
+                  onClick={() => handleOnClickButtonSaveAll("scalingFactor")}
                   title={t(
                     "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.button.saveAll"
                   )}

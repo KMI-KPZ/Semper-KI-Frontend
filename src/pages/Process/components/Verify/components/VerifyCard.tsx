@@ -25,7 +25,7 @@ const ProcessVerifyCard: React.FC<ProcessVerifyCardProps> = (props) => {
   return (
     <Container
       direction="col"
-      className="card self-stretch"
+      className="card self-stretch bg-white"
       justify="start"
       width="full"
     >
@@ -39,7 +39,7 @@ const ProcessVerifyCard: React.FC<ProcessVerifyCardProps> = (props) => {
         )}
       </Text>
       {status === VerifyStatus.FAILED && errorMsg !== undefined ? (
-        <Container justify="start" align="start" direction="col">
+        <Container justify="start" items="start" direction="col">
           <Heading variant="h4" className="text-red-500">
             {t("Process.components.Verify.components.VerifyCard.error")}
           </Heading>

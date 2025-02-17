@@ -1,12 +1,9 @@
 import { useContext, useMemo } from "react";
 import useOrgaEvent from "./hooks/useOrgaEvent";
-import { JSONIsParseable, JSONSafeParse } from "@/services/utils";
-import logger from "@/hooks/useLogger";
 import useProjectEvent from "./hooks/useProjectEvent";
 import { EventContext } from "@/contexts/EventContextProvider";
 import { Event, ProcessEvent, ProjectEvent } from "./EventTypes";
 import useProcessEvent from "./hooks/useProcessEvent";
-import { parseEvent } from "@/api/Events/Querys/useGetEvent";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
 import { useTranslation } from "react-i18next";
 
@@ -30,54 +27,12 @@ const useEvents = (): ReturnProps => {
 
   const {
     totalProjectEventCount,
-    handleNewProjectEvent,
+
     getProjectEvents,
     getTotalProjectEventCount,
   } = useProjectEvent(events);
-  const { getProcessEvents, handleNewProcessEvent, totalProcessEventCount } =
-    useProcessEvent(events);
-  const { handleNewOrgaEvent, totalOrgaEventCount } = useOrgaEvent(events);
-
-  if (socket !== null) {
-    socket.onmessage = (event) => {
-      onWebsocktEvent(event);
-    };
-  }
-
-  const onWebsocktEvent = (event: MessageEvent) => {
-    if (event.data !== undefined && JSONIsParseable(event.data)) {
-      const newEvent = JSONSafeParse<Event>(event.data);
-      logger(
-        "useEvents | onWebsocktEvent | ",
-        newEvent !== undefined
-          ? newEvent
-          : `JSONSafeParse failed | ${event.data}`
-      );
-      const parsedEvent = parseEvent(newEvent);
-      if (newEvent !== undefined && parsedEvent !== undefined) {
-        handleNewEvent(parsedEvent);
-      }
-    } else {
-      logger(
-        "useEvents | onWebsocktEvent | JSONIsParseable failed",
-        event.data
-      );
-    }
-  };
-
-  const handleNewEvent = (newEvent: Event) => {
-    switch (newEvent.eventType) {
-      case "projectEvent":
-        handleNewProjectEvent(newEvent);
-        break;
-      case "orgaEvent":
-        handleNewOrgaEvent(newEvent);
-        break;
-      case "processEvent":
-        handleNewProcessEvent(newEvent);
-        break;
-    }
-  };
+  const { getProcessEvents, totalProcessEventCount } = useProcessEvent(events);
+  const { totalOrgaEventCount } = useOrgaEvent(events);
 
   const totalEventCount = totalProjectEventCount + totalOrgaEventCount;
 

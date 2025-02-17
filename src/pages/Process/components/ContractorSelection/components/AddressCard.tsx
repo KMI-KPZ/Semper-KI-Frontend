@@ -16,7 +16,7 @@ import AddressSelection from "./AddressSelection";
 import useDefinedProcess from "@/hooks/Process/useDefinedProcess";
 import ProcessConditionIcon from "@/components/Process/ConditionIcon";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import ProcessStatusGate from "../../StatusGate";
+import ProcessStatusGate from "../../../../../components/Process/StatusGate";
 
 interface ContractorSelectionAddressCardProps {
   showDeliveryAddress: boolean;
@@ -91,7 +91,8 @@ const ContractorSelectionAddressCard: React.FC<
     <Container
       width="full"
       direction="col"
-      className="card h-full gap-0 self-stretch"
+      className="card h-full gap-0 self-stretch bg-white"
+      justify="start"
       id={
         type === "billing"
           ? "types.ProcessError.Process-Address-Billing"
@@ -138,14 +139,14 @@ const ContractorSelectionAddressCard: React.FC<
           justify="center"
           className="p-5"
         >
-          <Container width="fit" align="start" direction="col" gap={3}>
+          <Container width="fit" items="start" direction="col" gap={3}>
             {address.company ? <Text>{t("general.company")}</Text> : null}
             <Text>{t("general.name")}</Text>
             <Text>{t("general.street")}</Text>
             <Text>{t("general.city")}</Text>
             <Text>{t("general.country")}</Text>
           </Container>
-          <Container width="fit" align="start" direction="col" gap={3}>
+          <Container width="fit" items="start" direction="col" gap={3}>
             {address.company ? <Text>{address.company}</Text> : null}
             <Text>{`${address.firstName} ${address.lastName}`}</Text>
             <Text>{`${address.street} ${address.houseNumber}`}</Text>
@@ -159,7 +160,7 @@ const ContractorSelectionAddressCard: React.FC<
         direction="col"
         width="full"
         className="gap-1 p-5"
-        align="center"
+        items="center"
       >
         <Container>
           <label

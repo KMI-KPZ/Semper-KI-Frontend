@@ -34,7 +34,7 @@ describe("Container", () => {
   });
 
   it("applies align prop correctly", () => {
-    const { container } = render(<Container align="center" />);
+    const { container } = render(<Container items="center" />);
     expect(container.firstChild).toHaveClass("items-center");
   });
 

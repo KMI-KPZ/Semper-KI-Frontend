@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { Button } from "@component-library/index";
 import { Heading } from "@component-library/index";
@@ -11,6 +11,7 @@ import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
+import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface Props {
   material: MaterialProps;
@@ -23,11 +24,18 @@ export const ProcessMaterialPreView: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const { process } = useProcess();
   const updateProcess = useUpdateProcess();
+  const { prevGroups, nextGroups } = useContext(ManufacturingGroupContext);
 
   const handleOnClickButtonSelect = () => {
     updateProcess.mutate({
       processIDs: [process.processID],
-      updates: { changes: { serviceDetails: { material: [material] } } },
+      updates: {
+        changes: {
+          serviceDetails: {
+            groups: [...prevGroups, { material }, ...nextGroups],
+          },
+        },
+      },
     });
     navigate("../postprocessing");
   };

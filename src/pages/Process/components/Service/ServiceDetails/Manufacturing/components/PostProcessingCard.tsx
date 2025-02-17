@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import ServiceDetailsCard from "../../components/Card";
 import TestImg from "@images/Test2.png";
@@ -9,27 +9,26 @@ import { useProject } from "@/hooks/Project/useProject";
 import { PostProcessingProps } from "@/api/Service/AdditiveManufacturing/PostProcessing/Querys/useGetPostProcessigns";
 import useDeletePostProcessing from "@/api/Service/AdditiveManufacturing/PostProcessing/Mutations/useDeletePostProcessing";
 import { ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import ProcessStatusGate from "@/pages/Process/components/StatusGate";
+import ProcessStatusGate from "@/components/Process/StatusGate";
 import {
   OntoNodePropertyName,
   isOntoNodePropertyName,
 } from "@/api/Resources/Organization/Querys/useGetOrgaNodesByType";
-import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 
 interface ProcessSericePostProcessingCardProps {
   postProcessing: PostProcessingProps;
+  groupID: number;
 }
 
 const ProcessSericePostProcessingCard: React.FC<
   ProcessSericePostProcessingCardProps
 > = (props) => {
-  const { postProcessing } = props;
+  const { postProcessing, groupID } = props;
   const { t } = useTranslation();
   const { process } = useProcess();
   const { project } = useProject();
   const navigate = useNavigate();
   const deletePostProcessing = useDeletePostProcessing();
-  const { groupID } = useContext(ManufacturingGroupContext);
   const handleOnButtonClickPostProcessing = () => {
     navigate(`service/manufacturing/${groupID}/postprocessing`);
   };
@@ -40,6 +39,7 @@ const ProcessSericePostProcessingCard: React.FC<
       processID: process.processID,
       projectID: project.projectID,
       postProcessingID,
+      groupID,
     });
   };
 
@@ -48,7 +48,7 @@ const ProcessSericePostProcessingCard: React.FC<
       <Container direction="col" width="full" className="gap-2">
         <Text variant="strong">{postProcessing.title}</Text>
         <img
-          src={TestImg}
+          src={postProcessing.imgPath ? postProcessing.imgPath : TestImg}
           alt={t(
             "Process.components.Service.ServiceDetails.components.Manufacturing.PostProcessingCard.img"
           )}
@@ -101,7 +101,7 @@ const ProcessSericePostProcessingCard: React.FC<
         gap={3}
         className="flex-row p-5 md:flex-col"
       >
-        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+        <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
             title={t(
               "Process.components.Service.ServiceDetails.components.Manufacturing.button.editPostProcessing"

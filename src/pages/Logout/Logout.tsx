@@ -10,11 +10,11 @@ const Logout = () => {
   const logout = useLogout();
 
   useEffect(() => {
-    logout.mutate();
+    if (!logout.isLoading) logout.mutate();
   }, []);
 
   return (
-    <Container direction="col" width="full" align="center" justify="center">
+    <Container direction="col" width="full" items="center" justify="center">
       <LoadingAnimation />
       <Heading variant="h1">{t("Logout.redirect")}</Heading>
     </Container>

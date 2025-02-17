@@ -9,49 +9,54 @@ import {
   Heading,
   Text,
 } from "@component-library/index";
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import ProcessConditionIcon from "@/components/Process/ConditionIcon";
 import { ManufacturingServiceProps } from "@/api/Service/Querys/useGetServices";
 import ProcessServiceModelCard from "./ModelCard";
-import ProcessStatusGate from "@/pages/Process/components/StatusGate";
+import ProcessStatusGate from "@/components/Process/StatusGate";
 import ProcessServiceMaterialCard from "./MaterialCard";
 import ProcessSericePostProcessingCard from "./PostProcessingCard";
-import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
+import Hint from "@/components/Hint/Hint";
 
 interface ServiceManufacturingDetailsProps {
   process: ManufactoringProcessProps;
   service: ManufacturingServiceProps;
+  activeGroup: number;
 }
 
 const ServiceManufacturingDetails: React.FC<
   ServiceManufacturingDetailsProps
 > = (props) => {
-  const { service } = props;
-  const { models = [], materials = [], postProcessings = [] } = service;
+  const { service, activeGroup } = props;
+  const {
+    models = [],
+    material = undefined,
+    postProcessings = [],
+    color = undefined,
+  } = service;
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { groupID } = useContext(ManufacturingGroupContext);
 
   const handleOnButtonClickMaterial = () => {
-    navigate(`service/manufacturing/${groupID}/material`);
+    navigate(`service/manufacturing/${activeGroup}/material`);
   };
   const handleOnButtonClickPostProcessing = () => {
-    navigate(`service/manufacturing/${groupID}/postprocessing`);
+    navigate(`service/manufacturing/${activeGroup}/postprocessing`);
   };
   const handleOnButtonClickModel = () => {
-    navigate(`service/manufacturing/${groupID}/model`);
+    navigate(`service/manufacturing/${activeGroup}/model`);
   };
 
   return (
     <Container
       direction="col"
       justify="center"
-      align="start"
+      items="start"
       width="full"
-      className="gap-0 rounded-md border-2 p-0"
+      className="gap-0 rounded-md border-2 bg-white p-0"
     >
       <Container
         width="fit"
@@ -64,18 +69,22 @@ const ServiceManufacturingDetails: React.FC<
             "Process.components.Service.ServiceDetails.components.Manufacturing.heading.main"
           )}
         </Heading>
-      </Container>
-      <Container width="full" direction="col" className="gap-0 p-2">
-        <Text>
-          {t(
-            "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription1"
-          )}
-        </Text>
-        <Text>
-          {t(
-            "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription2"
-          )}
-        </Text>
+        <Hint
+          title={
+            <Container width="full" direction="col" className="gap-0 p-2">
+              <Text className="text-center">
+                {t(
+                  "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription1"
+                )}
+              </Text>
+              <Text className="text-center">
+                {t(
+                  "Process.components.Service.ServiceDetails.components.Manufacturing.pageDescription2"
+                )}
+              </Text>
+            </Container>
+          }
+        />
       </Container>
       <Divider />
       <Container
@@ -102,10 +111,14 @@ const ServiceManufacturingDetails: React.FC<
           </Text>
         ) : (
           models.map((model, index) => (
-            <ProcessServiceModelCard model={model} key={index} />
+            <ProcessServiceModelCard
+              model={model}
+              key={index}
+              groupID={activeGroup}
+            />
           ))
         )}
-        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+        <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
             title={t(
               `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
@@ -128,7 +141,7 @@ const ServiceManufacturingDetails: React.FC<
             title={t(
               "Process.components.Service.ServiceDetails.components.Manufacturing.button.noModel"
             )}
-            to={`service/manufacturing/${groupID}/model/descriptive`}
+            to={`service/manufacturing/${activeGroup}/model/descriptive`}
           />
         </ProcessStatusGate>
       </Container>
@@ -138,45 +151,45 @@ const ServiceManufacturingDetails: React.FC<
         width="full"
         direction="col"
         className="p-5"
-        id="Service-ADDITIVE_MANUFACTURING-materials"
+        id="Service-ADDITIVE_MANUFACTURING-material"
       >
         <Container width="fit" className={`gap-2 rounded-md  p-0 pt-2`}>
-          <ProcessConditionIcon error={materials.length === 0} />
+          <ProcessConditionIcon error={material === undefined} />
           <Heading variant="h4" className="text-xl">
             {t(
               "Process.components.Service.ServiceDetails.components.Manufacturing.heading.material"
             )}
           </Heading>
         </Container>
-        {materials.length === 0 ? (
+        {material === undefined ? (
           <Text className="">
             {t(
               "Process.components.Service.ServiceDetails.components.Manufacturing.noMaterials"
             )}
           </Text>
         ) : (
-          materials.map((material, index) => (
-            <ProcessServiceMaterialCard material={material} key={index} />
-          ))
-        )}
-        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
-          <Button
-            title={t(
-              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
-                materials.length === 0 ? "addMaterial" : "addMore"
-              }`
-            )}
-            size={materials.length === 0 ? "sm" : "xs"}
-            variant={materials.length === 0 ? "primary" : "secondary"}
-            onClick={handleOnButtonClickMaterial}
-            startIcon={<AddIcon />}
-            children={t(
-              `Process.components.Service.ServiceDetails.components.Manufacturing.button.${
-                materials.length === 0 ? "addMaterial" : "addMore"
-              }`
-            )}
+          <ProcessServiceMaterialCard
+            material={material}
+            groupID={activeGroup}
+            color={color}
           />
-        </ProcessStatusGate>
+        )}
+        {material === undefined ? (
+          <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
+            <Button
+              title={t(
+                `Process.components.Service.ServiceDetails.components.Manufacturing.button.addMaterial`
+              )}
+              size="sm"
+              variant="primary"
+              onClick={handleOnButtonClickMaterial}
+              startIcon={<AddIcon />}
+              children={t(
+                `Process.components.Service.ServiceDetails.components.Manufacturing.button.addMaterial`
+              )}
+            />
+          </ProcessStatusGate>
+        ) : null}
       </Container>
       <Divider />
       <Container
@@ -203,12 +216,13 @@ const ServiceManufacturingDetails: React.FC<
         ) : (
           postProcessings.map((postProcessing, index) => (
             <ProcessSericePostProcessingCard
+              groupID={activeGroup}
               postProcessing={postProcessing}
               key={index}
             />
           ))
         )}
-        <ProcessStatusGate end={ProcessStatus.SERVICE_COMPLETED}>
+        <ProcessStatusGate endExclude end={ProcessStatus.SERVICE_COMPLETED}>
           <Button
             title={t(
               `Process.components.Service.ServiceDetails.components.Manufacturing.button.${

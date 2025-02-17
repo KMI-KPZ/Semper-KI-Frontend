@@ -89,7 +89,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     name: "models",
   });
 
-  const dataTypes: string[] = [".STL"];
+  const dataTypes: string[] = [".STL", ".STP"];
 
   const addFilesToForm = (files: File[]) => {
     files.forEach((file) => {

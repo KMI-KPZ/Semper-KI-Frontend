@@ -68,9 +68,10 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
     >
       {url !== undefined ? (
         <ModelPreview
-          interactive={false}
+          interactive={true}
           file={url}
           className="h-40 w-fit rounded-b-none border-0"
+          modelName={model.file ? model.file.name : existingModel?.fileName}
         />
       ) : null}
       {existingModel !== undefined ? (
@@ -151,7 +152,7 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
                     modelErrors?.licenses ? "border-red-500 " : ""
                   }`}
                 >
-                  <option value="" disabled selected>
+                  <option value="" disabled>
                     {t(
                       `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.selectLicense`
                     )}
@@ -240,7 +241,7 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
                     modelErrors?.levelOfDetail ? "border-red-500 " : ""
                   }`}
                 >
-                  <option value="" disabled selected>
+                  <option value="" disabled>
                     {t(
                       `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.selectLevelOfDetail`
                     )}

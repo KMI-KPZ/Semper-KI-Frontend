@@ -10,16 +10,18 @@ import {
 } from "@component-library/index";
 import LaunchIcon from "@mui/icons-material/Launch";
 import useGetResilienceScore from "@/api/Resources/Organization/Querys/useGetResilienceScore";
+import useOrganization from "@/hooks/useOrganization";
 
 interface ResourcesResilienceProps {}
 
 const ResourcesResilience: React.FC<ResourcesResilienceProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
+  const { organization } = useOrganization();
 
   const getResilienceScore = useGetResilienceScore();
 
-  const url: string = "https://thispersondoesnotexist.com/";
+  const url: string = `${process.env.VITE_RESILIENCE}/assessment?orgaID=${organization.hashedID}`;
 
   return (
     <Container direction="col" width="full" justify="start">

@@ -10,7 +10,7 @@ const useGetResilienceScore = () => {
   const getResilienceScore = async () =>
     authorizedCustomAxios
       .get(
-        `${process.env.VITE_HTTP_API_URL}/public/questionnaire/resilienceScore/`
+        `${process.env.VITE_HTTP_API_URL}/public/questionnaire/resilienceScore/get/`
       )
       .then((response) => {
         const data: ResilienceScore = {

@@ -21,6 +21,7 @@ import HomeProjektRow from "./ProjektRow";
 import CreateProjectTitleForm from "@/pages/Projects/components/TitleForm";
 import logger from "@/hooks/useLogger";
 import { AuthorizedUser } from "@/hooks/useUser";
+import useModal from "@/hooks/useModal";
 
 interface HomeProjectsProps {
   recieved?: boolean;
@@ -31,6 +32,7 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
   const { recieved = false, user } = props;
   const { t } = useTranslation();
   const [openProjects, setOpenProjects] = React.useState<string[]>([]);
+  const { deleteModal } = useModal();
 
   const dashboardProject = useGetDashboardProjects();
   const { filterDataBySearchInput, handleSearchInputChange, searchInput } =
@@ -66,6 +68,11 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
 
   const filteredAndSortedProjects =
     filteredProjectsBySearchInput.sort(sortItems);
+
+  const closeModal = () => {
+    setCreateProjectTitleFormOpen(false);
+    deleteModal("CreateProjectTitleEdit");
+  };
 
   return (
     <HomeContainer className="">
@@ -177,15 +184,9 @@ const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
       <Modal
         modalKey="CreateProjectTitleEdit"
         open={createProjectTitleFormOpen}
-        closeModal={() => {
-          setCreateProjectTitleFormOpen(false);
-        }}
+        closeModal={closeModal}
       >
-        <CreateProjectTitleForm
-          close={() => {
-            setCreateProjectTitleFormOpen(false);
-          }}
-        />
+        <CreateProjectTitleForm close={closeModal} />
       </Modal>
     </HomeContainer>
   );

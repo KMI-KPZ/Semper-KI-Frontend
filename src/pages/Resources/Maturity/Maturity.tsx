@@ -10,6 +10,7 @@ import {
 } from "@component-library/index";
 import LaunchIcon from "@mui/icons-material/Launch";
 import useGetMaturityLevel from "@/api/Resources/Organization/Querys/useGetMaturityLevel";
+import useOrganization from "@/hooks/useOrganization";
 
 interface ResourcesMaturityProps {}
 
@@ -17,8 +18,9 @@ const ResourcesMaturity: React.FC<ResourcesMaturityProps> = (props) => {
   const {} = props;
   const { t } = useTranslation();
   const getMaturityLevel = useGetMaturityLevel();
+  const { organization } = useOrganization();
 
-  const url: string = "https://thispersondoesnotexist.com/";
+  const url: string = `${process.env.VITE_MATURITY}/assessment?orgaID=${organization.hashedID}`;
 
   return (
     <Container direction="col" width="full" justify="start">
@@ -38,10 +40,10 @@ const ResourcesMaturity: React.FC<ResourcesMaturityProps> = (props) => {
         <Container direction="row" className="rounded-md border-2 p-3">
           {getMaturityLevel.isFetched &&
           getMaturityLevel.data !== undefined &&
-          getMaturityLevel.data.level > 0 ? (
+          getMaturityLevel.data.maturityLevel > 0 ? (
             <>
               <Text>{t("Resources.Maturity.level")}</Text>
-              <Text>{getMaturityLevel.data.level}</Text>
+              <Text>{getMaturityLevel.data.maturityLevel}</Text>
               <Button
                 title={t("Resources.Maturity.button.calculate")}
                 size="sm"

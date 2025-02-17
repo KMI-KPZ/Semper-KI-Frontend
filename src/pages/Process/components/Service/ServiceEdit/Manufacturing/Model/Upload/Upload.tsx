@@ -17,6 +17,7 @@ import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext"
 interface Props {}
 
 export interface ProcessModelUploadFormProps {
+  check: boolean;
   models: ManufacturingModelUploadData[];
 }
 
@@ -38,7 +39,6 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   const [dragActive, setDragActive] = useState(false);
   const { deleteModal } = useModal();
   const { group, groupID } = useContext(ManufacturingGroupContext);
-  const [check, setCheck] = useState(false);
 
   const { process } = useManufacturingProcess();
   const { project } = useProject();
@@ -46,6 +46,9 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
   // const updateProcess = useUpdateProcess();
 
   const formSchema = z.object({
+    check: z.boolean().refine((val) => val === true, {
+      message: t("zod.required"),
+    }),
     models: z.array(
       z.object({
         modelID: z.string().optional(),
@@ -219,10 +222,6 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
     return Array.from(uniqueErrors);
   };
 
-  const handleOnChangeCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCheck(e.target.checked);
-  };
-
   return (
     <form className="flex h-full w-full flex-col items-center justify-start gap-5">
       <Container width="full" direction="row" justify="between">
@@ -276,8 +275,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                     <input
                       type="checkbox"
                       id="disclaimerCheckbox"
-                      checked={check}
-                      onChange={handleOnChangeCheck}
+                      {...register("check")}
                       className="h-6 w-6"
                     />
                     <label htmlFor="disclaimerCheckbox" className="text-sm">
@@ -312,7 +310,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                   width="fit"
                   loading={uploadModels.isLoading}
                   variant="primary"
-                  active={check}
+                  active={watch("check") === true}
                   title={t(
                     `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.button.upload`
                   )}

@@ -55,7 +55,7 @@ export const ProcessMaterialCard: React.FC<PropsWithChildren<Props>> = (
         <img
           src={material.imgPath}
           alt={material.title}
-          className="h-60 w-full object-cover"
+          className="h-60 w-full object-contain"
         />
         <Divider />
         <Container direction="col" className="grow p-5" width="full">

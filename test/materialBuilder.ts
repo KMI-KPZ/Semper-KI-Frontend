@@ -30,6 +30,7 @@ export class MaterialBuilder {
 
     build():MaterialProps {
         return {
+            colors:[],
             id: this.id,
             title: this.title,
             propList: this.propList,

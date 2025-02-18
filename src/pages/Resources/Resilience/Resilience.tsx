@@ -21,7 +21,7 @@ const ResourcesResilience: React.FC<ResourcesResilienceProps> = (props) => {
 
   const getResilienceScore = useGetResilienceScore();
 
-  const url: string = `${process.env.VITE_RESILIENCE}/assessment?orgaID=${organization.hashedID}`;
+  const url: string = `${process.env.VITE_RESILIENCE}/assessment?id=${organization.hashedID}`;
 
   return (
     <Container direction="col" width="full" justify="start">

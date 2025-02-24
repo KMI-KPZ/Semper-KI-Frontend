@@ -20,7 +20,7 @@ const ResourcesMaturity: React.FC<ResourcesMaturityProps> = (props) => {
   const getMaturityLevel = useGetMaturityLevel();
   const { organization } = useOrganization();
 
-  const url: string = `${process.env.VITE_MATURITY}/assessment?orgaID=${organization.hashedID}`;
+  const url: string = `${process.env.VITE_MATURITY}/assessment?id=${organization.hashedID}`;
 
   return (
     <Container direction="col" width="full" justify="start">

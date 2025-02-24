@@ -12,23 +12,6 @@ interface ProcessUploadCardProps {
   fileTypes?: string[];
 }
 
-const dataTypes: string[] = [
-  ".STEP",
-  ".STP",
-  ".SLDPRT",
-  ".STL",
-  ".SAT",
-  ".3DXML",
-  ".3MF",
-  ".PRT",
-  ".IPT",
-  ".CATPART",
-  ".X_T",
-  ".PTC",
-  ".X_B",
-  ".DXF",
-];
-
 const ProcessUploadCard: React.FC<ProcessUploadCardProps> = (props) => {
   const { t } = useTranslation();
   const {
@@ -37,7 +20,7 @@ const ProcessUploadCard: React.FC<ProcessUploadCardProps> = (props) => {
     subTitle = t("components.Process.File.components.UploadCard.subHeading"),
     icon = <UploadIcon className="h-20 w-20" />,
     showIcon = true,
-    fileTypes = dataTypes,
+    fileTypes = ["*"],
   } = props;
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);

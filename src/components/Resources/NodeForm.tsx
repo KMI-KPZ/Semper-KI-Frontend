@@ -120,6 +120,21 @@ const getHexColors = (props?: OntoNodeProperty[]): string[] => {
   return prop.value.split(",");
 };
 
+const useGetNodeProperties = (
+  nodeType: OntoNodeType,
+  properties?: OntoNodeProperty[]
+): OntoNodeProperty[] => {
+  if (properties === undefined) return [];
+  const props = properties.filter(
+    (prop) =>
+      (nodeType === "color" &&
+        prop.key !== "colorHEX" &&
+        prop.key !== "colorRAL") ||
+      nodeType !== "color"
+  );
+  return props;
+};
+
 const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
   const { type } = props;
   const { t } = useTranslation();
@@ -314,12 +329,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
     if (nodeID !== undefined && nodeID !== "") {
       reset({
         ...node.data,
-        properties: node.data?.properties.filter(
-          (prop) =>
-            nodeType === "color" &&
-            prop.key !== "colorHEX" &&
-            prop.key !== "colorRAL"
-        ),
+        properties: useGetNodeProperties(nodeType, node.data?.properties),
         technology:
           nodeType === "printer"
             ? getTechnology(allOrgaNodeNeighbors.data)

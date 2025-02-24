@@ -213,9 +213,10 @@ const ResourcesPropertyForm: React.FC<ResourcesPropertyFormProps> = (props) => {
                             {nodeProperties.data
                               .filter(
                                 (prop) =>
-                                  nodeType === "color" &&
-                                  prop.key !== "colorHEX" &&
-                                  prop.key !== "colorRAL"
+                                  (nodeType === "color" &&
+                                    prop.key !== "colorHEX" &&
+                                    prop.key !== "colorRAL") ||
+                                  nodeType !== "color"
                               )
                               .map((property) => (
                                 <option

@@ -174,52 +174,57 @@ const ResourcesEdgeForm: React.FC<ResourcesEdgeFormProps> = (props) => {
                   </tr>
                 ) : allEdges.length > 0 ? (
                   <>
-                    {allEdges.slice(0, paginationAll).map((node, index) => (
-                      <tr key={index}>
-                        <td
-                          className={`border-t-2 p-3 text-left ${
-                            index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                          }`}
-                        >
-                          {node.name}
-                        </td>
-                        <td
-                          className={`border-t-2 p-3 text-left ${
-                            index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                          }`}
-                        >
-                          {node.createdBy === organization.hashedID
-                            ? organization.name
-                            : "Semper-KI"}
-                        </td>
-                        <td
-                          className={`border-t-2 p-3 text-left ${
-                            index % 2 === 1 ? "bg-gray-50" : "bg-white"
-                          }`}
-                        >
-                          <Container
-                            width="full"
-                            direction="row"
-                            justify="start"
+                    {allEdges
+                      .filter(
+                        (node) => node.createdBy === organization.hashedID
+                      )
+                      .slice(0, paginationAll)
+                      .map((node, index) => (
+                        <tr key={index}>
+                          <td
+                            className={`border-t-2 p-3 text-left ${
+                              index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                            }`}
                           >
-                            <Button
-                              title={t("general.button.add")}
-                              onClick={() => {
-                                append({
-                                  nodeID: node.nodeID,
-                                  nodeType: nodeType,
-                                  nodeName: node.name,
-                                  createdBy: node.createdBy,
-                                });
-                              }}
-                              className="w-full"
-                              size="sm"
-                              variant="text"
-                            />
-                          </Container>
-                        </td>
-                      </tr>
-                    ))}
+                            {node.name}
+                          </td>
+                          <td
+                            className={`border-t-2 p-3 text-left ${
+                              index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                            }`}
+                          >
+                            {node.createdBy === organization.hashedID
+                              ? organization.name
+                              : "Semper-KI"}
+                          </td>
+                          <td
+                            className={`border-t-2 p-3 text-left ${
+                              index % 2 === 1 ? "bg-gray-50" : "bg-white"
+                            }`}
+                          >
+                            <Container
+                              width="full"
+                              direction="row"
+                              justify="start"
+                            >
+                              <Button
+                                title={t("general.button.add")}
+                                onClick={() => {
+                                  append({
+                                    nodeID: node.nodeID,
+                                    nodeType: nodeType,
+                                    nodeName: node.name,
+                                    createdBy: node.createdBy,
+                                  });
+                                }}
+                                className="w-full"
+                                size="sm"
+                                variant="text"
+                              />
+                            </Container>
+                          </td>
+                        </tr>
+                      ))}
                     {allEdges.length > paginationAll || allEdges.length > 0 ? (
                       <tr key="more">
                         <td colSpan={3} className="border-t-2 p-3">

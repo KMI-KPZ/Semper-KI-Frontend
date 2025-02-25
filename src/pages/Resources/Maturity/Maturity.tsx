@@ -36,39 +36,100 @@ const ResourcesMaturity: React.FC<ResourcesMaturityProps> = (props) => {
 
       {getMaturityLevel.isLoading ? (
         <LoadingAnimation />
+      ) : getMaturityLevel.data !== undefined &&
+        getMaturityLevel.data.maturityLevel.length > 0 ? (
+        <Container direction="col" className="rounded-md border-2 p-3">
+          <Container direction="row" className="">
+            <Text>{t("Resources.Maturity.level")}</Text>
+            <Text>{getMaturityLevel.data.maturityLevel.length}</Text>
+            <Button
+              title={t("Resources.Maturity.button.recalculate")}
+              size="sm"
+              variant="primary"
+              endIcon={<LaunchIcon />}
+              extern
+              target="_blank"
+              to={url}
+            />
+          </Container>
+          <Divider />
+          <Heading variant="h3">{t("Resources.Maturity.header2")}</Heading>
+          <table className="w-full table-auto border-collapse">
+            <thead>
+              <tr>
+                <th className="p-2 text-left">
+                  {t("Resources.Maturity.assessmentBlockId")}
+                </th>
+                <th className="p-2 text-left">
+                  {t("Resources.Maturity.value")}
+                </th>
+                <th className="p-2 text-left">
+                  {t("Resources.Maturity.blocks")}
+                </th>
+                <th className="p-2 text-left">
+                  {t("Resources.Maturity.blocksValue")}
+                </th>
+                <th className="p-2 text-left">
+                  {t("Resources.Maturity.recommendations")}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {getMaturityLevel.data.maturityLevel.map((item, index) => (
+                <tr key={index}>
+                  <td className="border-t-2 p-2 align-text-top">
+                    {item.assessment_block_id}
+                  </td>
+                  <td className="border-t-2 p-2 align-text-top">
+                    {item.value}
+                  </td>
+                  <td className="border-t-2 p-2 align-text-top">
+                    <Container direction="col" items="start" className="gap-0">
+                      {item.buildingBlocks.map((block, blockIndex) => (
+                        <Container direction="row" key={blockIndex}>
+                          <Text key={blockIndex}>{block.label}</Text>
+                        </Container>
+                      ))}
+                    </Container>
+                  </td>
+                  <td className="border-t-2 p-2 align-text-top">
+                    <Container
+                      direction="col"
+                      justify="start"
+                      className="gap-0"
+                    >
+                      {item.buildingBlocks.map((block, blockIndex) => (
+                        <Container direction="row" key={blockIndex}>
+                          <Text key={blockIndex}>{block.value}</Text>
+                        </Container>
+                      ))}
+                    </Container>
+                  </td>
+                  <td className="border-t-2 p-2 align-text-top">
+                    <Container direction="col" className="gap-0" items="start">
+                      {item.recommendations.map((recommendation, index) => (
+                        <Text key={index}>{recommendation.label}</Text>
+                      ))}
+                    </Container>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Container>
       ) : (
         <Container direction="row" className="rounded-md border-2 p-3">
-          {getMaturityLevel.isFetched &&
-          getMaturityLevel.data !== undefined &&
-          getMaturityLevel.data.maturityLevel > 0 ? (
-            <>
-              <Text>{t("Resources.Maturity.level")}</Text>
-              <Text>{getMaturityLevel.data.maturityLevel}</Text>
-              <Button
-                title={t("Resources.Maturity.button.calculate")}
-                size="sm"
-                variant="primary"
-                endIcon={<LaunchIcon />}
-                extern
-                target="_blank"
-                to={url}
-              />
-            </>
-          ) : (
-            <>
-              <Text>{t("Resources.Maturity.level")}</Text>
-              <Text>{t("Resources.Maturity.noLevel")}</Text>
-              <Button
-                title={t("Resources.Maturity.button.recalculate")}
-                size="sm"
-                variant="primary"
-                endIcon={<LaunchIcon />}
-                extern
-                target="_blank"
-                to={url}
-              />
-            </>
-          )}
+          <Text>{t("Resources.Maturity.level")}</Text>
+          <Text>{t("Resources.Maturity.noLevel")}</Text>
+          <Button
+            title={t("Resources.Maturity.button.calculate")}
+            size="sm"
+            variant="primary"
+            endIcon={<LaunchIcon />}
+            extern
+            target="_blank"
+            to={url}
+          />
         </Container>
       )}
     </Container>

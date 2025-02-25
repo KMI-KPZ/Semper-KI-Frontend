@@ -3,7 +3,29 @@ import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 
 interface MaturityLevel {
-  maturityLevel: number;
+  maturityLevel: MaturityLevelItem[];
+}
+
+interface MaturityLevelItem {
+  level: string;
+  value: number;
+  buildingBlocks: {
+    label: string;
+    level: string;
+    value: number;
+  }[];
+  recommendations: {
+    code: string;
+    item: string;
+    text: string;
+    label: string;
+    trigger: string;
+    code_type: string;
+  }[];
+  buildingBlocksDict: {
+    [key: string]: number;
+  };
+  assessment_block_id: string;
 }
 
 const useGetMaturityLevel = () => {

@@ -3,7 +3,20 @@ import { authorizedCustomAxios } from "@/api/customAxios";
 import { useQuery } from "@tanstack/react-query";
 
 interface ResilienceScore {
-  score: number;
+  resilienceScore: ResilienceScoreItem[];
+}
+
+interface ResilienceScoreItem {
+  value: number;
+  buildingBlocks: {
+    label: string;
+    value: number;
+  }[];
+  recommendations: any[];
+  buildingBlocksDict: {
+    [key: string]: number;
+  };
+  assessment_block_id: string;
 }
 
 const useGetResilienceScore = () => {
@@ -14,7 +27,7 @@ const useGetResilienceScore = () => {
       )
       .then((response) => {
         const data: ResilienceScore = {
-          score: response.data.resilienceScore,
+          resilienceScore: response.data,
         };
 
         logger("useGetResiliencescore | getResiliencescore ✅ |", response);

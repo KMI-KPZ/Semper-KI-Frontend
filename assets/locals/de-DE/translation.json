@@ -2288,6 +2288,13 @@
       "describtion": "Das Reifegrad-Modell dient dazu, den Reifegrad ihres Unternehmen einzuschätzen um sie bei der Digitalisierung zu unterstützen und mit Patneren zu verbinden die ein änhliches Level haben wie sie. Voreteile auf der Plattform: genauere Kundenzuordnung und höhere Sichtbarkeit des Unternehmens",
       "level": "Reifegrad:",
       "noLevel": "noch nicht ermittelt",
+      "assessmentBlockId": "Name",
+      "value": "Wert",
+      "blocks": "Zusatzinformationen",
+      "blocksValue": "Wert",
+      "recommendations": "Empfehlungen",
+      "noRecommendations": "keine Empfehlungen vorhanden",
+      "header2": "Auswertung",
       "button": {
         "calculate": "Reifegrad ermitteln",
         "recalculate": "Reifegrad erneut ermitteln"
@@ -2322,6 +2329,14 @@
       "describtion": "Der Resilienz-Wert gibt an wie gut ihr Unternehmen auf Krisen vorbereitet ist und wie schnell sie sich von Krisen erholen können.",
       "level": "Resilienzwert:",
       "noLevel": "noch nicht ermittelt",
+      "assessmentBlockId": "Name",
+      "value": "Wert",
+      "blocks": "Zusatzinformationen",
+      "blocksValue": "Wert",
+      "recommendations": "Empfehlungen",
+      "noRecommendations": "keine Empfehlungen vorhanden",
+      "header2": "Auswertung",
+
       "button": {
         "calculate": "Resilienz ermitteln",
         "recalculate": "Resilienz erneut ermitteln"

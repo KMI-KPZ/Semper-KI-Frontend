@@ -23,6 +23,7 @@ import {
   ModelLevelOfDetail,
   ProcessModel,
 } from "@/api/Process/Querys/useGetProcess";
+import { getFileSizeAsString } from "@/services/utils";
 
 interface UploadModelCardProps {
   model: FieldArrayWithId<ProcessModelUploadFormProps, "models", "id">;
@@ -102,7 +103,9 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
               )}`}</th>
               <td>
                 {existingModel !== undefined ? "xxx" : null}
-                {model.file !== undefined ? model.file.size : null}
+                {model.file !== undefined
+                  ? getFileSizeAsString(model.file.size)
+                  : null}
               </td>
               <td></td>
             </tr>

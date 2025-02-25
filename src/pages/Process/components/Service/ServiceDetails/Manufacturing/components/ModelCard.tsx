@@ -16,6 +16,7 @@ import ProcessStatusGate from "@/components/Process/StatusGate";
 import useProcess from "@/hooks/Process/useProcess";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import { CheckModel } from "@/api/Process/Querys/useGetCheckModel";
+import { getFileSizeAsString } from "@/services/utils";
 
 interface ProcessServiceModelCardProps {
   model: ProcessModel;
@@ -72,7 +73,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
           )}
         />
       </Container>
-      <Container direction="col" width="full" className="gap-1">
+      <Container direction="col" width="full" className="gap-0">
         <Container direction="row" justify="between" width="full">
           <Text>
             {t(
@@ -113,6 +114,16 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
                 }`
               )}
             </Text>
+          </Container>
+        ) : null}
+        {model.size !== undefined && model.isFile ? (
+          <Container direction="row" justify="between" width="full">
+            <Text>
+              {t(
+                "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.size"
+              )}
+            </Text>
+            <Text>{getFileSizeAsString(model.size)}</Text>
           </Container>
         ) : null}
         {calculation !== undefined ? (

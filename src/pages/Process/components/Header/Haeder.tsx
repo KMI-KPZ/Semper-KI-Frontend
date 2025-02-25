@@ -68,6 +68,7 @@ const ProcessHaeder: React.FC<ProcessHaederProps> = (props) => {
           </Container>
         </Container>
         <ActionContainerTodos
+          actionClassName=" rounded-md bg-white grow self-stretch "
           process={process}
           className="row w-full grow self-stretch rounded-md bg-white"
         />

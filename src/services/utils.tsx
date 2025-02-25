@@ -15,7 +15,7 @@ export const getFileSizeAsString = (size: number): string => {
     newSize = size >= 0 ? size : 0;
     unit = "B";
   }
-  return Math.round(newSize).toString() + unit;
+  return Math.round(newSize).toString() + " " + unit;
 };
 
 export const isNumber = (element: any): element is number => {
@@ -162,7 +162,13 @@ export const JSONSafeParse = <T,>(input: any): T | undefined => {
 };
 
 export const sortByKey = <T,>(item1: T, item2: T, key: keyof T): number => {
-  if (item1[key] === undefined || item2[key] === undefined) return 0;
+  if (
+    item1[key] === undefined ||
+    item1[key] === null ||
+    item2[key] === undefined ||
+    item2[key] === null
+  )
+    return 0;
   if (item1[key] > item2[key]) {
     return 1;
   }

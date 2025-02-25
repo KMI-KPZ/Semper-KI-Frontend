@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { ProcessModelCard } from "./components/Card";
-import { Button, Container, Search, Text } from "@component-library/index";
-import { useNavigate, useParams } from "react-router-dom";
+import { Container, Search, Text } from "@component-library/index";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ProcessModelPreView } from "./components/PreView";
 import { Heading } from "@component-library/index";
 import { Modal } from "@component-library/index";
 import { ProcessModelUpload } from "./Upload/Upload";
-import useGetModels, {
+import useGetRepositoryModels, {
   RepositoryModel,
-} from "@/api/Service/AdditiveManufacturing/Model/Querys/useGetModels";
+} from "@/api/Service/AdditiveManufacturing/Model/Querys/useGetRepositoryModels";
 import useSearch from "@/hooks/useSearch";
-import useDownloadFile from "@/api/Process/Files/Mutations/useDownloadFile";
 import { ProcessModel } from "@/api/Process/Querys/useGetProcess";
-// import useUploadModels from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUploadModels";
-// import useDownloadExternalFile from "@/api/Process/Files/Mutations/useDownloadExternalFile";
+import useProcess from "@/hooks/Process/useProcess";
+import { useProject } from "@/hooks/Project/useProject";
+import useModal from "@/hooks/useModal";
 
 interface Props {}
 
@@ -28,8 +28,8 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
   const {} = props;
   const navigate = useNavigate();
 
-  const modelsQuery = useGetModels();
-  // const uploadModel = useUploadModels();
+  const repositoryModels = useGetRepositoryModels();
+  const { deleteModal } = useModal();
   const [state, setState] = useState<State>({
     modalOpen: false,
     model: undefined,
@@ -38,13 +38,12 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<RepositoryModel>();
 
-  const downloadFile = useDownloadFile();
-  // const downloadExternalFile = useDownloadExternalFile();
-
-  const { projectID, processID } = useParams();
+  const { process } = useProcess();
+  const { project } = useProject();
 
   const closeModal = () => {
-    navigate(`/projects/${projectID}/${processID}`);
+    deleteModal("ServiceRoutesManufacturingModels");
+    navigate(`/projects/${project.projectID}/${process.processID}`);
   };
 
   const openModelView = (model: ProcessModel) => {
@@ -57,27 +56,6 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
       modalOpen: false,
       model: undefined,
     }));
-  };
-
-  const handleOnClickButtonSelect = (file: string) => {
-    downloadFile.mutate(
-      file
-      //{
-      // onSuccess(data) {
-      //   uploadModel.mutate({
-      //     projectID,
-      //     processID,
-      //     origin: "Service",
-      //     models: [
-      //       {
-      //         file: data,
-      //         details: { certificates: [], licenses: [], tags: [] },
-      //       },
-      //     ],
-      //   });
-      // },
-      // }
-    );
   };
 
   return (
@@ -104,24 +82,18 @@ export const ManufacturingModels: React.FC<Props> = (props) => {
             </Heading>
             <Search handleSearchInputChange={handleSearchInputChange} />
             <Container direction="row" wrap="wrap" width="full">
-              {modelsQuery.data !== undefined && modelsQuery.data.length > 0 ? (
+              {repositoryModels.data !== undefined &&
+              repositoryModels.data.length > 0 ? (
                 <>
-                  {modelsQuery.data
+                  {repositoryModels.data
                     .filter((model) => filterDataBySearchInput(model))
                     .map((model: RepositoryModel, index: number) => (
                       <ProcessModelCard
                         model={model}
                         key={index}
                         openModelView={openModelView}
-                      >
-                        <Button
-                          title={t("general.button.select")}
-                          variant="primary"
-                          active={true}
-                          size="sm"
-                          onClick={() => handleOnClickButtonSelect(model.file)}
-                        />
-                      </ProcessModelCard>
+                        closeModal={closeModal}
+                      />
                     ))}
                 </>
               ) : (

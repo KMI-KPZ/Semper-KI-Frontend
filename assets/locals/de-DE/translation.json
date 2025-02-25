@@ -1813,6 +1813,7 @@
                 "quantity": "Anzahl",
                 "levelOfDetail": "Detailgrad",
                 "name": "Name:",
+                "size": "Größe:",
                 "dimensions": "Maße",
                 "surface": "Oberfläche",
                 "volume": "Volumen",
@@ -1871,7 +1872,12 @@
               },
               "components": {
                 "Card": {
-                  "license": "Lizenz"
+                  "certificates": "Zertifikate",
+                  "complexity": "Komplexität",
+                  "levelOfDetail": "Detailgrad",
+                  "license": "Lizenz",
+                  "size": "Größe",
+                  "tags": "Tags"
                 },
                 "Item": {
                   "created": "Erstellt am",

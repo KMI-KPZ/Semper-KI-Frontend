@@ -11,10 +11,16 @@ interface ActionContainerTodosProps {
   process: Process;
   error?: boolean;
   className?: string;
+  actionClassName?: string;
 }
 
 const ActionContainerTodos: React.FC<ActionContainerTodosProps> = (props) => {
-  const { process, error = false, className = "" } = props;
+  const {
+    process,
+    error = false,
+    className = "",
+    actionClassName = "",
+  } = props;
   const { t } = useTranslation();
   const { getStatusButtons } = useStatusButtons();
   const statusButtons = getStatusButtons(
@@ -48,7 +54,10 @@ const ActionContainerTodos: React.FC<ActionContainerTodosProps> = (props) => {
       )}
       {process.actionStatus !== "ACTION_REQUIRED" &&
       statusButtons.length > 0 ? (
-        <ActionStatusCard process={process} className="w-fit" />
+        <ActionStatusCard
+          process={process}
+          className={twMerge("w-fit", actionClassName)}
+        />
       ) : null}
     </>
   );

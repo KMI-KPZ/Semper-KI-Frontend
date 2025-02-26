@@ -40,7 +40,13 @@ export const getNodeTypes = (nodeType: OntoNodeType): OntoNodeType[] => {
     case "color":
       return ["material", "additionalRequirement"];
     case "material":
-      return ["printer", "color", "additionalRequirement"];
+      return [
+        "materialCategory",
+        "materialType",
+        "printer",
+        "color",
+        "additionalRequirement",
+      ];
     case "additionalRequirement":
       return ["printer", "material", "color"];
     case "printer":

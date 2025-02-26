@@ -32,11 +32,13 @@ import NodeCustomForm from "./NodeCustomForm/NodeCustomForm";
 interface ResourcesNodePropsForm {
   type: ResourcesAction;
 }
+
 export type ResourcesAction = "create" | "edit";
 
 export interface OptionalProps {
   technology?: string;
   materialCategory?: string;
+  materialType?: string;
   ralColor?: string;
   hexColors?: string[];
 }
@@ -51,6 +53,9 @@ export interface ResourcesNodeFormEdge {
   nodeName: string;
   createdBy: string;
 }
+export type NodeFormData = (OntoNode | OntoNodeNew) &
+  ResourcesNodeFormEdges &
+  OptionalProps;
 
 export const parseOntoNodesToEdges = (
   nodes: OntoNode[]
@@ -64,7 +69,6 @@ export const parseOntoNodesToEdges = (
     })
   );
 };
-
 const getNodeID = (
   type: ResourcesAction,
   paramNodeID: string | undefined,
@@ -76,17 +80,11 @@ const getNodeID = (
     return variantNodeID;
   }
 };
-
-export type NodeFormData = (OntoNode | OntoNodeNew) &
-  ResourcesNodeFormEdges &
-  OptionalProps;
-
 const getNodeType = (unsafeNodeType: string | undefined) => {
   return unsafeNodeType !== undefined && isOntoNodeType(unsafeNodeType)
     ? unsafeNodeType
     : undefined;
 };
-
 const getEdges = (
   organization: Organization,
   nodes?: OntoNode[]
@@ -96,19 +94,10 @@ const getEdges = (
       ? []
       : nodes.filter((edgeNode) => edgeNode.nodeID !== organization.hashedID)
   );
-
-const getTechnology = (nodes?: OntoNode[]): string => {
-  return (
-    nodes?.find((node) => node.nodeType === "technology")?.nodeID || "none"
-  );
+const getNodeByType = (nodeType: OntoNodeType, nodes?: OntoNode[]): string => {
+  return nodes?.find((node) => node.nodeType === nodeType)?.nodeID || "none";
 };
 
-const getMaterialCatergory = (nodes?: OntoNode[]): string => {
-  return (
-    nodes?.find((node) => node.nodeType === "materialCategory")?.nodeID ||
-    "none"
-  );
-};
 const getRalColor = (props?: OntoNodeProperty[]): string => {
   return (
     props?.find((prop) => prop.key === "colorRAL")?.value.toString() || "none"
@@ -119,7 +108,6 @@ const getHexColors = (props?: OntoNodeProperty[]): string[] => {
   if (prop === undefined || prop.type !== "array") return [];
   return prop.value.split(",");
 };
-
 const useGetNodeProperties = (
   nodeType: OntoNodeType,
   properties?: OntoNodeProperty[]
@@ -174,6 +162,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
               edges,
               technology: nodeType === "printer" ? "none" : undefined,
               materialCategory: nodeType === "material" ? "none" : undefined,
+              materialType: nodeType === "material" ? "none" : undefined,
               ralColor: nodeType === "color" ? "none" : undefined,
               hexColors: nodeType === "color" ? ["#000000"] : undefined,
             }
@@ -181,11 +170,15 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
               ...node.data,
               technology:
                 nodeType === "printer"
-                  ? getTechnology(allOrgaNodeNeighbors.data)
+                  ? getNodeByType("technology", allOrgaNodeNeighbors.data)
                   : undefined,
               materialCategory:
                 nodeType === "material"
-                  ? getMaterialCatergory(allOrgaNodeNeighbors.data)
+                  ? getNodeByType("materialCategory", allOrgaNodeNeighbors.data)
+                  : undefined,
+              materialType:
+                nodeType === "material"
+                  ? getNodeByType("materialType", allOrgaNodeNeighbors.data)
                   : undefined,
               ralColor:
                 nodeType === "color"
@@ -215,7 +208,6 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
         : data.edges
             .filter((edge) => !edges?.some((e) => e.nodeID === edge.nodeID))
             .map((edge) => edge.nodeID);
-
     const deleteEdges: string[] =
       edges === undefined || type === "create"
         ? []
@@ -228,7 +220,6 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
       nodeType === "printer"
         ? [data.technology]
         : [];
-
     const deleteTechnology: string[] =
       data.technology !== undefined &&
       data.technology !== "" &&
@@ -250,6 +241,21 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
       nodeType === "material"
         ? edges
             .filter((edge) => edge.nodeType === "materialCategory")
+            .map((edge) => edge.nodeID)
+        : [];
+    const newMaterialType: string[] =
+      data.materialType !== undefined &&
+      data.materialType !== "" &&
+      nodeType === "material"
+        ? [data.materialType]
+        : [];
+
+    const deleteMaterialType: string[] =
+      data.materialType !== undefined &&
+      data.materialType !== "" &&
+      nodeType === "material"
+        ? edges
+            .filter((edge) => edge.nodeType === "materialType")
             .map((edge) => edge.nodeID)
         : [];
     const hexColors: OntoNodeProperty | undefined =
@@ -290,11 +296,17 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
         },
         type: type === "edit" ? "update" : "create",
         edges: {
-          create: [...newEdges, ...newTechnology, ...newMaterialCategory],
+          create: [
+            ...newEdges,
+            ...newTechnology,
+            ...newMaterialCategory,
+            ...newMaterialType,
+          ],
           delete: [
             ...deleteEdges,
             ...deleteTechnology,
             ...deleteMaterialCategory,
+            ...deleteMaterialType,
           ],
         },
       },
@@ -332,11 +344,15 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
         properties: useGetNodeProperties(nodeType, node.data?.properties),
         technology:
           nodeType === "printer"
-            ? getTechnology(allOrgaNodeNeighbors.data)
+            ? getNodeByType("technology", allOrgaNodeNeighbors.data)
             : undefined,
         materialCategory:
           nodeType === "material"
-            ? getMaterialCatergory(allOrgaNodeNeighbors.data)
+            ? getNodeByType("materialCategory", allOrgaNodeNeighbors.data)
+            : undefined,
+        materialType:
+          nodeType === "material"
+            ? getNodeByType("materialType", allOrgaNodeNeighbors.data)
             : undefined,
         ralColor:
           nodeType === "color" ? getRalColor(node.data?.properties) : undefined,
@@ -428,6 +444,7 @@ const ResourcesNodeForm: React.FC<ResourcesNodePropsForm> = (props) => {
             (_nodeType) =>
               _nodeType !== nodeType &&
               _nodeType !== "materialCategory" &&
+              _nodeType !== "materialType" &&
               _nodeType !== "technology"
           )
           .map((edgeType, index) => (

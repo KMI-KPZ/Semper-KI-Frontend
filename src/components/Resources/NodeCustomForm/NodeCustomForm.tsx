@@ -10,6 +10,8 @@ import { NodeFormData } from "../NodeForm";
 import NodeCustomFormTechnology from "./components/Technology";
 import NodeCustomFormMaterialCategory from "./components/MaterialCategory";
 import NodeCustomFormHexColors from "./components/HexColors";
+import { Container } from "@component-library/index";
+import NodeCustomFormMaterialType from "./components/MaterialType";
 
 interface NodeCustomFormProps {
   nodeType: OntoNodeType;
@@ -26,7 +28,12 @@ const NodeCustomForm: React.FC<NodeCustomFormProps> = (props) => {
     case "printer":
       return <NodeCustomFormTechnology register={register} />;
     case "material":
-      return <NodeCustomFormMaterialCategory register={register} />;
+      return (
+        <Container direction="col" width="full" justify="start">
+          <NodeCustomFormMaterialCategory register={register} />
+          <NodeCustomFormMaterialType register={register} />
+        </Container>
+      );
     case "color":
       return (
         <NodeCustomFormHexColors

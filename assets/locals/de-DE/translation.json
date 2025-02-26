@@ -348,6 +348,10 @@
       "Delivery": "Lieferung",
       "PaymentFiles": "Rechnung",
       "Completed": "Abgeschlossen"
+    },
+    "FemTestType": {
+      "elongation": "Dehnung",
+      "compression": "Kompression"
     }
   },
   "general": {
@@ -1823,7 +1827,9 @@
                 "dimensions": "Maße",
                 "surface": "Oberfläche",
                 "volume": "Volumen",
-                "complexity": "Komplexität"
+                "complexity": "Komplexität",
+                "fem": "FEM Analyse",
+                "femValue": "{{testType}} mit {{pressure}} MPa"
               },
               "PostProcessingCard": {
                 "name": "name",
@@ -1941,6 +1947,13 @@
                     "scalingFactor": "Skalierung",
                     "license": "Lizenz der Datei",
                     "licensePH": "Lizenz1, Lizenz2 ...",
+                    "fem": "FEM Analyse",
+                    "femHint": "Mit der FEM Analyse wird grob simuliert, ob das Bauteil bei gegenebem Druck bricht.",
+                    "femLabel": "Durchführen",
+                    "fem_testType": "Testtyp",
+                    "elongation": "Dehnung",
+                    "compression": "Kompression",
+                    "fem_pressure": "Druck",
                     "mandatory": "* Pflichtfeld",
                     "button": {
                       "saveAll": "Auf alle Modelle anwenden"

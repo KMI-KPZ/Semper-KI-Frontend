@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import useUpdateModel from "@/api/Service/AdditiveManufacturing/Model/Mutations/useUpdateModel";
 import { ManufacturingGroupContext } from "@/contexts/ManufacturingGroupContext";
 import useModal from "@/hooks/useModal";
+
 interface EditModelCardProps {
   model: ProcessModel;
 }
@@ -45,12 +46,16 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
         }),
       }),
     }),
+    femRequested: z.boolean().optional(),
+    testType: z.string().optional(),
+    pressure: z.number().min(0).optional(),
   });
 
   const {
     register,
     formState: { errors },
     handleSubmit,
+    watch,
   } = useForm<ManufacturingModelUploadData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -91,6 +96,10 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
               : ModelLevelOfDetail.MEDIUM,
           scalingFactor:
             data.scalingFactor !== undefined ? data.scalingFactor : 100,
+          femRequested:
+            data.femRequested !== undefined ? data.femRequested : false,
+          testType: data.testType,
+          pressure: data.pressure,
         },
       },
       {
@@ -243,6 +252,121 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
                 </Container>
               </td>
             </tr>
+
+            <tr>
+              <th className="text-left">{`${t(
+                `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.fem`
+              )}`}</th>
+              <td>
+                <Container direction="row">
+                  <input
+                    id={"femRequested"}
+                    className={`h-4 w-4 hover:cursor-pointer
+                    ${errors?.femRequested ? "border-red-500 bg-red-500" : ""}
+                    }`}
+                    type="checkbox"
+                    {...register(`femRequested`)}
+                  />
+                  <label
+                    htmlFor={"femRequested"}
+                    className="hover:cursor-pointer"
+                  >
+                    {t(
+                      `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.femLabel`
+                    )}
+                  </label>
+                </Container>
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={3}>
+                {t(
+                  "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.femHint"
+                )}
+              </td>
+            </tr>
+            {watch("femRequested") ? (
+              <>
+                <tr>
+                  <th className="text-left align-text-top">{`${t(
+                    `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.fem_testType`
+                  )}`}</th>
+                  <td>
+                    <Container direction="col" items="start" className="gap-2">
+                      <Container direction="row">
+                        <input
+                          id={"fem_testType_elongation"}
+                          className={`h-4 w-4 hover:cursor-pointer
+                                            ${
+                                              errors?.testType
+                                                ? "border-red-500 bg-red-500"
+                                                : ""
+                                            }
+                                      }`}
+                          type="radio"
+                          value={"elongation"}
+                          {...register(`testType`)}
+                        />
+                        <label
+                          htmlFor={"fem_testType_elongation"}
+                          className="hover:cursor-pointer"
+                        >
+                          {t(
+                            `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.elongation`
+                          )}
+                        </label>
+                      </Container>
+                      <Container direction="row">
+                        <input
+                          id={"fem_testType_compression"}
+                          className={`h-4 w-4 hover:cursor-pointer
+                                      ${
+                                        errors?.testType
+                                          ? "border-red-500 bg-red-500"
+                                          : ""
+                                      }
+                                      }`}
+                          type="radio"
+                          value={"compression"}
+                          {...register(`testType`)}
+                        />
+                        <label
+                          htmlFor={"fem_testType_compression"}
+                          className="hover:cursor-pointer"
+                        >
+                          {t(
+                            `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.compression`
+                          )}
+                        </label>
+                      </Container>
+                    </Container>
+                  </td>
+                </tr>
+                <tr>
+                  <th className="text-left align-text-top">{`${t(
+                    `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.fem_pressure`
+                  )}`}</th>
+                  <td>
+                    <Container direction="row">
+                      <input
+                        className={`flex w-full rounded-md border-2 p-2 text-center
+                                       ${
+                                         errors.pressure
+                                           ? "border-red-500 bg-red-500"
+                                           : ""
+                                       }
+                                       }`}
+                        type="number"
+                        {...register(`pressure`, {
+                          valueAsNumber: true,
+                        })}
+                      />
+                      <Text>MPa</Text>
+                    </Container>
+                  </td>
+                </tr>
+              </>
+            ) : null}
             <tr>
               <td colSpan={3} className="pt-2 ">
                 {t(
@@ -256,6 +380,7 @@ const EditModelCard: React.FC<EditModelCardProps> = (props) => {
           title={t("general.button.save")}
           variant="primary"
           size="sm"
+          loading={updateModel.isLoading}
           onClick={handleSubmit(onSubmit)}
         />
       </Container>

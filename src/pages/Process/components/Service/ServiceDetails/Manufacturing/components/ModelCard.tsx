@@ -169,6 +169,28 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
                 2
               )} mm³`}</Text>
             </Container>
+            {model.isFile ? (
+              <Container direction="row" justify="between" width="full">
+                <Text>
+                  {t(
+                    "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.fem"
+                  )}
+                </Text>
+                <Text>
+                  {model.femRequested === true &&
+                  model.testType !== undefined &&
+                  model.pressure !== undefined
+                    ? t(
+                        "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.femValue",
+                        {
+                          testType: t(`types.FemTestType.${model.testType}`),
+                          pressure: model.pressure,
+                        }
+                      )
+                    : "---"}
+                </Text>
+              </Container>
+            ) : null}
           </>
         ) : null}
       </Container>

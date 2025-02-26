@@ -30,6 +30,9 @@ export interface ManufacturingModelUploadData {
   quantity?: number;
   levelOfDetail?: ModelLevelOfDetail;
   scalingFactor?: number;
+  femRequested?: boolean;
+  testType?: "elongation" | "compression";
+  pressure?: number;
 }
 
 export const ProcessModelUpload: React.FC<Props> = (props) => {
@@ -70,6 +73,9 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
             }),
           }),
         }),
+        femRequested: z.boolean().optional(),
+        testType: z.string().optional(),
+        pressure: z.number().min(0).optional(),
       })
     ),
   });
@@ -101,6 +107,9 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
         quantity: 1,
         scalingFactor: 100,
         levelOfDetail: ModelLevelOfDetail.MEDIUM,
+        femRequested: false,
+        testType: "elongation",
+        pressure: 0,
       });
     });
   };
@@ -194,6 +203,10 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
                   : ModelLevelOfDetail.MEDIUM,
               scalingFactor:
                 item.scalingFactor !== undefined ? item.scalingFactor : 100,
+              femRequested:
+                item.femRequested !== undefined ? item.femRequested : false,
+              testType: item.testType,
+              pressure: item.pressure,
             },
           })),
       },
@@ -239,6 +252,7 @@ export const ProcessModelUpload: React.FC<Props> = (props) => {
               {fields.map((model, index) => {
                 return (
                   <UploadModelCard
+                    watch={watch}
                     errors={errors}
                     deleteModel={deleteModel}
                     saveForAll={saveForAll}

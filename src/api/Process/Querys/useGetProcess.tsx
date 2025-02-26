@@ -159,6 +159,9 @@ export type ProcessModel = {
   height?: number;
   scalingFactor?: number;
   complexity?: ModelComplexity;
+  femRequested?: boolean;
+  testType?: "elongation" | "compression";
+  pressure?: number;
 } & GenericProcessFile;
 
 export enum ModelLevelOfDetail {

@@ -16,6 +16,7 @@ import {
   FieldArrayWithId,
   FieldErrors,
   UseFormRegister,
+  UseFormWatch,
 } from "react-hook-form";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -33,6 +34,7 @@ interface UploadModelCardProps {
   saveForAll: (index: number, key: keyof ManufacturingModelUploadData) => void;
   errors: FieldErrors<ProcessModelUploadFormProps>;
   existingModel?: ProcessModel;
+  watch: UseFormWatch<ProcessModelUploadFormProps>;
 }
 
 const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
@@ -44,6 +46,7 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
     saveForAll,
     errors,
     existingModel,
+    watch,
   } = props;
   const { t } = useTranslation();
   const url =
@@ -211,7 +214,8 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
               )}`}</th>
               <td>
                 <input
-                  className={`flex w-full rounded-md border-2 p-2
+                  type="number"
+                  className={`flex w-full rounded-md border-2 p-2 text-center
             ${modelErrors?.quantity ? "border-red-500 bg-red-500" : ""}}`}
                   {...register(`models.${index}.quantity`, {
                     valueAsNumber: true,
@@ -279,7 +283,7 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
               <td>
                 <Container direction="row">
                   <input
-                    className={`flex w-full rounded-md border-2 p-2
+                    className={`flex w-full rounded-md border-2 p-2 text-center
                     ${
                       modelErrors?.scalingFactor
                         ? "border-red-500 bg-red-500"
@@ -306,6 +310,151 @@ const UploadModelCard: React.FC<UploadModelCardProps> = (props) => {
                 />
               </td>
             </tr>
+            <tr>
+              <th className="text-left">
+                {`${t(
+                  `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.fem`
+                )}`}
+              </th>
+              <td>
+                <Container direction="row">
+                  <input
+                    id={index + "femRequested"}
+                    className={`h-4 w-4 hover:cursor-pointer
+                    ${
+                      modelErrors?.femRequested
+                        ? "border-red-500 bg-red-500"
+                        : ""
+                    }
+                    }`}
+                    type="checkbox"
+                    {...register(`models.${index}.femRequested`)}
+                  />
+                  <label
+                    htmlFor={index + "femRequested"}
+                    className="hover:cursor-pointer"
+                  >
+                    {t(
+                      `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.femLabel`
+                    )}
+                  </label>
+                </Container>
+              </td>
+              <td>
+                <Button
+                  variant="tertiary"
+                  size="xs"
+                  onClick={() => handleOnClickButtonSaveAll("femRequested")}
+                  title={t(
+                    "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.button.saveAll"
+                  )}
+                  children={<ContentCopyIcon />}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={3}>
+                {t(
+                  "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.femHint"
+                )}
+              </td>
+            </tr>
+            {watch(`models.${index}.femRequested`) ? (
+              <>
+                <tr>
+                  <th className="text-left align-text-top">{`${t(
+                    `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.fem_testType`
+                  )}`}</th>
+                  <td>
+                    <Container direction="col" items="start" className="gap-2">
+                      <Container direction="row">
+                        <input
+                          id={index + "fem_testType_elongation"}
+                          className={`h-4 w-4 hover:cursor-pointer
+                          ${
+                            modelErrors?.testType
+                              ? "border-red-500 bg-red-500"
+                              : ""
+                          }
+                    }`}
+                          type="radio"
+                          value={"elongation"}
+                          {...register(`models.${index}.testType`)}
+                        />
+                        <label
+                          htmlFor={index + "fem_testType_elongation"}
+                          className="hover:cursor-pointer"
+                        >
+                          {t(
+                            `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.elongation`
+                          )}
+                        </label>
+                      </Container>
+                      <Container direction="row">
+                        <input
+                          id={index + "fem_testType_compression"}
+                          className={`h-4 w-4 hover:cursor-pointer
+                    ${modelErrors?.testType ? "border-red-500 bg-red-500" : ""}
+                    }`}
+                          type="radio"
+                          value={"compression"}
+                          {...register(`models.${index}.testType`)}
+                        />
+                        <label
+                          htmlFor={index + "fem_testType_compression"}
+                          className="hover:cursor-pointer"
+                        >
+                          {t(
+                            `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.compression`
+                          )}
+                        </label>
+                      </Container>
+                    </Container>
+                  </td>
+                  <td>
+                    <Button
+                      variant="tertiary"
+                      size="xs"
+                      onClick={() => handleOnClickButtonSaveAll("testType")}
+                      title={t(
+                        "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.button.saveAll"
+                      )}
+                      children={<ContentCopyIcon />}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <th className="text-left">{`${t(
+                    `Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.fem_pressure`
+                  )}`}</th>
+                  <td>
+                    <Container direction="row">
+                      <input
+                        className={`flex w-full rounded-md border-2 p-2 text-center
+                    ${modelErrors?.pressure ? "border-red-500 bg-red-500" : ""}
+                    }`}
+                        type="number"
+                        {...register(`models.${index}.pressure`, {
+                          valueAsNumber: true,
+                        })}
+                      />
+                      <Text>MPa</Text>
+                    </Container>
+                  </td>
+                  <td>
+                    <Button
+                      variant="tertiary"
+                      size="xs"
+                      onClick={() => handleOnClickButtonSaveAll("pressure")}
+                      title={t(
+                        "Process.components.Service.ServiceEdit.Manufacturing.Model.Upload.components.Card.button.saveAll"
+                      )}
+                      children={<ContentCopyIcon />}
+                    />
+                  </td>
+                </tr>
+              </>
+            ) : null}
             <tr>
               <td colSpan={3} className="pt-2 ">
                 {t(

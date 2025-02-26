@@ -36,7 +36,8 @@ const ResourcesMaturity: React.FC<ResourcesMaturityProps> = (props) => {
 
       {getMaturityLevel.isLoading ? (
         <LoadingAnimation />
-      ) : getMaturityLevel.data !== undefined &&
+      ) : getMaturityLevel.isFetched &&
+        getMaturityLevel.data !== undefined &&
         getMaturityLevel.data.maturityLevel.length > 0 ? (
         <Container direction="col" className="rounded-md border-2 p-3">
           <Container direction="row" className="">

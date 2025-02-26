@@ -37,7 +37,8 @@ const ResourcesResilience: React.FC<ResourcesResilienceProps> = (props) => {
 
       {getResilienceScore.isLoading ? (
         <LoadingAnimation />
-      ) : getResilienceScore.data !== undefined &&
+      ) : getResilienceScore.isFetched &&
+        getResilienceScore.data !== undefined &&
         getResilienceScore.data.resilienceScore.length > 0 ? (
         <Container direction="col" className="rounded-md border-2 p-3">
           <Container direction="row" className="">

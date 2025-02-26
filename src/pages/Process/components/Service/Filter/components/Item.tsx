@@ -22,7 +22,7 @@ type FilterTitleType =
   | "amount"
   | "categorys"
   | "boxSize"
-  | "materialcategory"
+  | "materialType"
   | "volume"
   | "materialCategory"
   | "proceeding"
@@ -125,7 +125,7 @@ const ProcessFilterItem: React.FC<Props> = (props) => {
       "amount",
       "categorys",
       "boxSize",
-      "materialcategory",
+      "materialType",
       "volume",
       "materialCategory",
       "proceeding",

@@ -22,18 +22,22 @@ const ServiceManufacturingFreeText: React.FC<
   const { t } = useTranslation();
   const groups: ManufacturingServiceProps[] = process.serviceDetails.groups;
   const [text, setText] = useState(
-    groups[activeGroup].context !== undefined ? groups[activeGroup].context : ""
+    groups[activeGroup] !== undefined &&
+      groups[activeGroup].context !== undefined
+      ? groups[activeGroup].context
+      : ""
   );
   const [showSavingHint, setShowSavingHint] = useState(false);
   const updatedProcess = useUpdateProcess();
 
   useEffect(() => {
     setText(
-      groups[activeGroup].context !== undefined
+      groups[activeGroup] !== undefined &&
+        groups[activeGroup].context !== undefined
         ? groups[activeGroup].context
         : ""
     );
-  }, [activeGroup]);
+  }, [activeGroup, process.serviceDetails.groups]);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);

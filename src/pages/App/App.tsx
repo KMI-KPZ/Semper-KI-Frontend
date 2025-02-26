@@ -46,11 +46,9 @@ import ManufacturingGroupOutlet from "@/outlets/ManufacturingGroupOutlet";
 import ManufacturingModelEdit from "../Process/components/Service/ServiceEdit/Manufacturing/Model/Edit/ManufacturingModelEdit";
 import ManufacturingModelOutlet from "@/outlets/ManufacturingModelOutlet";
 import Demo from "../Demo/Demo";
-import HomeProjects from "../Home/Projects/Projects";
 import ToTopButton from "@component-library/ToTopButton/ToTopButton";
 import BottomFixedContainer from "@component-library/Container/BottomFixedContainer";
-// import Projects from "../Projects/Projects";
-// import ProjectPage from "../Project/ProjectPage";
+import ProjectsOverview from "../Home/Projects/ProjectsOverview";
 
 export type AppState = {
   guideFilter: FilterItemProps[];
@@ -135,19 +133,20 @@ const App: React.FC = () => {
                 <Route
                   index
                   element={
-                    user.usertype === UserType.ANONYM ? (
-                      <Container width="full">
-                        <HomeProjects />
-                      </Container>
-                    ) : (
-                      <Navigate to="/" />
-                    )
+                    <Container width="full">
+                      <ProjectsOverview />
+                    </Container>
                   }
                 />
-                {/* <Route index element={<Projects />} /> */}
                 <Route path=":projectID/*" element={<ProjectOutlet />}>
-                  <Route index element={<Navigate to="/" />} />
-                  {/* <Route index element={<ProjectPage />} /> */}
+                  <Route
+                    index
+                    element={
+                      <Container width="full">
+                        <ProjectsOverview />
+                      </Container>
+                    }
+                  />
                   <Route
                     path=":processID/*"
                     element={

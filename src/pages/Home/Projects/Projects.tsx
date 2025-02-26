@@ -26,12 +26,15 @@ import useModal from "@/hooks/useModal";
 interface HomeProjectsProps {
   recieved?: boolean;
   user?: AuthorizedUser;
+  projectID?: string;
 }
 
 const HomeProjects: React.FC<HomeProjectsProps> = (props) => {
-  const { recieved = false, user } = props;
+  const { recieved = false, user, projectID } = props;
   const { t } = useTranslation();
-  const [openProjects, setOpenProjects] = React.useState<string[]>([]);
+  const [openProjects, setOpenProjects] = React.useState<string[]>(
+    projectID === undefined ? [] : [projectID]
+  );
   const { deleteModal } = useModal();
 
   const dashboardProject = useGetDashboardProjects();

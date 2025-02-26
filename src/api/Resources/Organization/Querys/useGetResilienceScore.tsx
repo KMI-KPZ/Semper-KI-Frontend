@@ -27,7 +27,7 @@ const useGetResilienceScore = () => {
       )
       .then((response) => {
         const data: ResilienceScore = {
-          resilienceScore: response.data,
+          resilienceScore: response.data.resilienceScore,
         };
 
         logger("useGetResiliencescore | getResiliencescore ✅ |", response);

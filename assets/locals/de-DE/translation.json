@@ -693,7 +693,8 @@
       "ContractorCard": {
         "priceRange": "Preisspanne",
         "distance": "Entfernung: {{distance}} km",
-        "noDistance": "nicht vorhanden"
+        "noDistance": "nicht vorhanden",
+        "verified": "Verifiziert"
       },
       "Menu": {
         "button": { "open": "Menu Öffnen", "close": "Menu Schließen" }
@@ -1701,7 +1702,8 @@
           "ContractorList": {
             "heading": "Auftragnehmerauswahl",
             "contractors": "Auftragnehmer sortiert nach ihren Prioritäten",
-            "noContractorFound": "Kein Auftragnehmer gefunden"
+            "noContractorFound": "Kein Auftragnehmer gefunden",
+            "onlyVerified": "Nur verifizierte Auftragnehmer anzeigen"
           },
           "Costs": {
             "heading": "Kostenaufstellung"

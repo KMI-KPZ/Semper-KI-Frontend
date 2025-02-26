@@ -245,6 +245,7 @@ export enum ProcessStatus {
   "CONTRACTOR_COMPLETED" = 300, //auftragnehmer ausgewählt
   "VERIFYING_IN_PROGRESS" = 400, //verifizierung in bearbeitung
   "VERIFYING_COMPLETED" = 401, //verifizierung abgeschlossen
+  "VERIFICATION_FAILED" = 402, //verifizierung fehlgeschlagen
   "REQUEST_COMPLETED" = 500, //auftrag raus
   "OFFER_COMPLETED" = 600, //angebot raus
   "OFFER_REJECTED" = 601, //angebot abgelehnt

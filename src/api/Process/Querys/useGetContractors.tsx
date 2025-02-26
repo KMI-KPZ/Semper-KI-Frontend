@@ -11,6 +11,8 @@ export interface ContractorProps {
   branding: OrganizationBranding;
   prices: { groupCosts: [number, number][] };
   contractorCoordinates: [number, number];
+  groups: number[];
+  verified: boolean;
 }
 
 const useGetContractors = () => {

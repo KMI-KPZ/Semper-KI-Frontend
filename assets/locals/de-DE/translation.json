@@ -2105,6 +2105,7 @@
       "subTitle": "Erstellen Sie einen neuen API Token für den Zugriff auf die Semper-KI API",
       "subTitle2": "Der Token wird nur einmal angezeigt und kann nicht wiederhergestellt werden.\n Sie können jedoch jederzeit einen neuen Token erstellen.",
       "button": {
+        "link": "Swagger Öffnen",
         "reCreate": "Neu erstellen"
       }
     },

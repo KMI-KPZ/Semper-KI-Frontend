@@ -30,6 +30,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
   const { nodeType, setFormToDraft } = props;
   const { t } = useTranslation();
   const nodes = useGetOrgaNodesByType(nodeType);
+  const [paginationAll, setPaginationAll] = React.useState<number>(5);
   const { organization } = useOrganization();
   const { filterDataBySearchInput, handleSearchInputChange } =
     useSearch<OntoNode>();
@@ -121,6 +122,7 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                 <tbody>
                   {nodes.data
                     .filter((node) => filterDataBySearchInput(node))
+                    .slice(0, paginationAll)
                     .sort(sortItems)
                     .map((node: OntoNode, index) => (
                       <tr key={node.nodeID}>
@@ -170,6 +172,35 @@ const ResourcesNodeDraft: React.FC<ResourcesNodeDraftProps> = (props) => {
                         </td>
                       </tr>
                     ))}
+                  {nodes.data.length > paginationAll ||
+                  nodes.data.length > 0 ? (
+                    <tr key="more">
+                      <td colSpan={3} className="border-t-2 p-3">
+                        <Container width="full">
+                          {nodes.data.length > paginationAll ? (
+                            <Button
+                              onClick={() =>
+                                setPaginationAll((prevState) => prevState + 5)
+                              }
+                              title={t("general.button.showMore")}
+                              size="sm"
+                              variant="text"
+                            />
+                          ) : null}
+                          {paginationAll > 0 ? (
+                            <Button
+                              onClick={() =>
+                                setPaginationAll((prevState) => prevState - 5)
+                              }
+                              title={t("general.button.showLess")}
+                              size="sm"
+                              variant="text"
+                            />
+                          ) : null}
+                        </Container>
+                      </td>
+                    </tr>
+                  ) : null}
                   <tr>
                     <td
                       colSpan={3}

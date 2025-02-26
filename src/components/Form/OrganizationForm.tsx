@@ -212,6 +212,8 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
               prices: { groupCosts: [[333, 666]] },
               contractorCoordinates: [0, 0],
               distance: 0,
+              verified: true,
+              groups: [],
             }}
           />
         </Container>

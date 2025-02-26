@@ -123,6 +123,8 @@ const OrganizationInfoPreView: React.FC<OrganizationInfoPreViewProps> = (
                   prices: { groupCosts: [[333, 666]] },
                   contractorCoordinates: [0, 0],
                   distance: 0,
+                  verified: true,
+                  groups: [],
                 }}
               />
             </td>

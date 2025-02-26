@@ -136,7 +136,7 @@ const FilterEdit: React.FC<FilterEditProps> = (props) => {
       </Container>
       <Divider />
 
-      <Collapsible initialOpen showButton logName="Filter" animation={false}>
+      <Collapsible initialOpen showButton logName="Filter">
         <Container width="full" direction="col" className="p-5">
           <Container width="full" direction="col">
             <Container width="full" direction="col" className="gap-0 p-0">

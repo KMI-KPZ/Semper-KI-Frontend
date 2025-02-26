@@ -92,6 +92,7 @@
       "CONTRACTOR_SELECTED": "Auftragnehmer ausgewählt",
       "VERIFYING": "Überprüfen lassen",
       "VERIFIED": "Überprüft",
+      "VERIFICATION_FAILED": "Überprüfung fehlgeschlagen",
       "REQUESTED": "Angefragt",
       "CLARIFICATION": "Rückfragen vom Auftragnehmer",
       "CONFIRMED_BY_CONTRACTOR": "Bestätigt durch Auftragnehmer",

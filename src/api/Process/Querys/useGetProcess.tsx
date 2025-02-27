@@ -109,7 +109,7 @@ export interface ProcessDetailsProps {
 }
 
 export interface ProcessVerificationResults {
-  process: ProcessVerificationResult;
+  serviceReady: ProcessVerificationResult;
   serviceSpecificTasks: { FEM?: ProcessVerificationResultFEM };
 }
 
@@ -156,7 +156,8 @@ export type ProcessErrorType =
   | "Process-Dependency"
   | "Process-ContractFiles"
   | "Process-Payment"
-  | "Process-VerificationFailed";
+  | "Process-VerificationFailed"
+  | "Service-VerificationFailed";
 
 export type FileProps = {
   createdBy: string;

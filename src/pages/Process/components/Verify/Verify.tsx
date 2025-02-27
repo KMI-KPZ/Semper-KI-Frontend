@@ -46,9 +46,9 @@ const ProcessVerify: React.FC<ProcessVerifyProps> = (props) => {
           type="PROCESS"
           errorMsg={
             _process.processDetails.verificationResults !== undefined &&
-            _process.processDetails.verificationResults.process.isSuccessful ===
-              false
-              ? _process.processDetails.verificationResults.process.reason
+            _process.processDetails.verificationResults.serviceReady
+              .isSuccessful === false
+              ? _process.processDetails.verificationResults.serviceReady.reason
               : undefined
           }
         />

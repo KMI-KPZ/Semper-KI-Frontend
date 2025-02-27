@@ -318,7 +318,8 @@
       "Process-Dependency": "Prozess wartet auf andere Prozess(e)",
       "Process-ContractFiles": "Bitte einen Vertrag hochladen",
       "Process-Payment": "Bitte eine Rechnung hochladen",
-      "Process-VerificationFailed": "Überprüfung fehlgeschlagen"
+      "Process-VerificationFailed": "Prozessüberprüfung fehlgeschlagen",
+      "Service-VerificationFailed": "Serviceüberprüfung fehlgeschlagen"
     },
     "EventDataReason": {
       "messages": "Nachricht",

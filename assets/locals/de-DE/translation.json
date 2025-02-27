@@ -398,6 +398,8 @@
     "updatedBy": "Aktualisiert von",
     "model": "Modell",
     "error": "Fehler",
+    "next": "Weiter",
+    "previous": "Zurück",
     "button": {
       "clone": "Duplizieren",
       "select": "Auswählen",

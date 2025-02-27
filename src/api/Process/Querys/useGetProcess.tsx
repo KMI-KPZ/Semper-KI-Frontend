@@ -80,8 +80,8 @@ export enum ProcessStatus {
   "SERVICE_COMPLETED" = 203, //Service abgeschlossen
   "CONTRACTOR_COMPLETED" = 300, //auftragnehmer ausgewählt
   "VERIFYING_IN_PROGRESS" = 400, //verifizierung in bearbeitung
-  "VERIFYING_COMPLETED" = 401, //verifizierung abgeschlossen
-  "VERIFICATION_FAILED" = 402, //verifizierung fehlgeschlagen
+  "VERIFICATION_FAILED" = 401, //verifizierung fehlgeschlagen
+  "VERIFYING_COMPLETED" = 402, //verifizierung abgeschlossen
   "REQUEST_COMPLETED" = 500, //auftrag raus
   "OFFER_COMPLETED" = 600, //angebot raus
   "OFFER_REJECTED" = 601, //angebot abgelehnt
@@ -106,6 +106,7 @@ export interface ProcessDetailsProps {
   priorities: OrganizationPriority[];
   prices?: ProcessPrices;
   verificationResults?: ProcessVerificationResults;
+  imagePath: string[];
 }
 
 export interface ProcessVerificationResults {
@@ -363,6 +364,7 @@ export const parseProcess = (process: any): Process => {
           }
         : process.serviceDetails,
     processDetails: {
+      imagePath: process.processDetails.imagePath,
       amount: process.processDetails.amount,
       provisionalContractor: process.processDetails.provisionalContractor,
       title: process.processDetails.title,

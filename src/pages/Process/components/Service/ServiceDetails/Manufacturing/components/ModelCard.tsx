@@ -67,7 +67,7 @@ const ProcessServiceModelCard: React.FC<ProcessServiceModelCardProps> = (
         <Text variant="strong">{model.fileName}</Text>
         <img
           src={model.imgPath ? model.imgPath : TestImg}
-          className="max-h-40 w-full object-contain md:w-fit"
+          className="aspect-square max-h-40 w-full rounded-md border-2 object-cover md:w-fit"
           alt={t(
             "Process.components.Service.ServiceDetails.components.Manufacturing.ModelCard.img"
           )}

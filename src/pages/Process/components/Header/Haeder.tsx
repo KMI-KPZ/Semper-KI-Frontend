@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Container, Text } from "@component-library/index";
 import GrayContainer from "@component-library/Container/GrayContainer";
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import LogoURL from "@images/logo192.png";
 import ActionContainerTodos from "@/components/Process/Container/ActionContainer/components/Todos";
+import ProcessImagePreview from "@/components/Process/ImagePreview";
 
 interface ProcessHaederProps {
   process: Process;
@@ -63,9 +63,7 @@ const ProcessHaeder: React.FC<ProcessHaederProps> = (props) => {
               </Text>
             </Container>
           </Container>
-          <Container width="fit" direction="col" className="p-3">
-            <img src={LogoURL} alt="" />
-          </Container>
+          <ProcessImagePreview process={process} />
         </Container>
         <ActionContainerTodos
           actionClassName=" rounded-md bg-white grow self-stretch "

@@ -2,7 +2,6 @@ import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Container, Modal, Text } from "@component-library/index";
 import { Process, ProcessStatus } from "@/api/Process/Querys/useGetProcess";
-import TestIMG from "@images/Test.png";
 import { ServiceType } from "@/api/Service/Querys/useGetServices";
 import useDeleteProcess from "@/api/Process/Mutations/useDeleteProcess";
 import { DashboardProject } from "@/api/Project/Querys/useGetDashboardProject";
@@ -11,6 +10,7 @@ import logger from "@/hooks/useLogger";
 import ActionStatusCard from "@/components/Process/ActionStatusCard";
 import DependenciesForm from "@/components/Form/DependenciesForm";
 import { tanslateProcessErrorTypeKey } from "@/components/Process/Container/ActionContainer/components/ConditionItem";
+import ProcessImagePreview from "@/components/Process/ImagePreview";
 
 interface HomeProcessProps {
   project: DashboardProject;
@@ -87,7 +87,7 @@ const HomeProcess: React.FC<HomeProcessProps> = (props) => {
         justify="between"
         className="m-0 px-5 py-2"
       >
-        <img className="aspect-square" src={TestIMG} />
+        <ProcessImagePreview process={process} size="md" />
         <table className="w-fit table-auto border-separate border-spacing-x-2">
           <tbody>
             <tr>
